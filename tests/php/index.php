@@ -2,9 +2,9 @@
 <!DOCTYPE html>
 <?php
 /**
- *  index.php: prompts users for 'training' / 'analysis' session, prompts users to provide an
- *             upload file / URL to XML dataset, and lastly provides attribute names to be used
- *             during SVM analysis.
+ *  index.php: defines 'training' / 'analysis' session, prompts users to provide an upload file /
+ *             URL to an XML (dataset), then defines which attributes within the dataset
+ *             previously defined to use for the SVM analysis.
  *
  *  @form:     sends form-data to 'logic_loader.py' using the 'post' method.
  *
