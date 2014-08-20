@@ -24,13 +24,15 @@
 
     <form action='../../python/logic_loader.py' method='post'>
 
-      <input list='session_type' name='svm_session'>
+      <input list='session_type' name='svm_session'><br>
       <datalist id='session_type'>
         <select name='session_type' required>
           <option value='training selected'>
           <option value='analysis'>
         </select>
       </datalist>
+      <input type='file' name='svm_dataset_file'><br>
+      <input type='url' name='svm_dataset_xml'><br>
       <input type='submit'>
 
     </form>
