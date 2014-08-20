@@ -9,12 +9,12 @@
  *
  *  @form:     sends form-data to 'logic_loader.py' using the 'post' method.
  *
+ *  @input:    uses the 'list' attribute to refer to the datalist element which contains
+ *             pre-defined options for the input element.
+ *
  *  @datalist: an HTML5 tag that specifies a list of pre-defined options for an input element.
  *             Since this is not supported in IE9-, or Safari, the 'select' element is nested
  *             inside the 'datalist'.  This allows for graceful degradation.
- *
- *  @input:    uses the 'list' attribute to refer to the datalist element which contains
- *             pre-defined options for the input element.
  */
 ?>
 <html>
