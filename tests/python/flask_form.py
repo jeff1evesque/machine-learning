@@ -12,3 +12,6 @@ def parse_request():
   temp = request.form['svm_session']
   print temp
   return temp
+
+if __name__ == '__main__':
+    app.run()
