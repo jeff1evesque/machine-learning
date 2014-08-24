@@ -5,6 +5,7 @@
 
 from flask import Flask
 app = Flask(__name__)
+app.debug = True
 
 # handles 'get', and 'post'
 @app.route('/machine-learning/tests/python/flask_form.py', methods=['GET', 'POST'])
