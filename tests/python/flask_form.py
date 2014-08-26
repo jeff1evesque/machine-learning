@@ -5,7 +5,10 @@
 
 from flask import Flask, request
 app = Flask(__name__)
+
+# debug options
 app.debug = True
+app.config['TRAP_HTTP_EXCEPTIONS'] = True
 
 # handles 'get', and 'post'
 @app.route('/machine-learning/tests/python/flask_form.py', methods=['GET', 'POST'])
