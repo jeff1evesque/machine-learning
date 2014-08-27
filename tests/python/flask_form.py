@@ -11,13 +11,13 @@ app.debug = True
 app.config['TRAP_HTTP_EXCEPTIONS'] = True
 
 # handles 'get', and 'post'
-@app.route('/machine-learning/tests/python/flask_form', methods=['GET', 'POST'])
+@app.route('/machine-learning/tests/python/flask_form.py', methods=['GET', 'POST'])
 def parse_request():
   if request.method == 'POST':
     temp = request.form['svm_session']
     return temp
   else:
-    return redirect(url_for('static', 'form.html'))
+    return redirect('form.html')
 
 if __name__ == '__main__':
     app.run()
