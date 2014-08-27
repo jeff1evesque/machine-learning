@@ -17,7 +17,7 @@ def parse_request():
     temp = request.form['svm_session']
     return temp
   else:
-    return redirect(url_for('/machine-learning/tests/python/form.html'));
+    return redirect(url_for('static', 'form.html'))
 
 if __name__ == '__main__':
     app.run()
