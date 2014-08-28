@@ -28,10 +28,10 @@
  *                 parameters to respective python scripts.
  */
  function logic_loader($form) {
-   if ($form == 'training') {
+   if ($form->session_type == 'training') {
      print 'Welcome to training';
    }
-   elseif ($form == 'analysis') {
+   elseif ($form->session_type == 'analysis') {
      print 'Welcome to analysis';
    }
    else {
