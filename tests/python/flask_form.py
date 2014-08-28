@@ -18,6 +18,7 @@ def parse_request():
     return temp
   else:
 #    print request.environ
+    raise Exception("I know python!")
     return redirect('/machine-learning/tests/python/form.html')
 
 if __name__ == '__main__':
