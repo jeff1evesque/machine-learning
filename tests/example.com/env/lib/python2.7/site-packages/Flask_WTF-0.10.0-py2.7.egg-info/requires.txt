@@ -1,3 +1,0 @@
-Flask
-Werkzeug
-WTForms>=1.0.5

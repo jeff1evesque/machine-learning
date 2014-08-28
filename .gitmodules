@@ -1,6 +1,3 @@
 [submodule "scikit-learn"]
 	path = scikit-learn
 	url = git://github.com/scikit-learn/scikit-learn.git
-[submodule "flask"]
-	path = flask
-	url = git://github.com/mitsuhiko/flask.git
