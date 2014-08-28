@@ -21,7 +21,7 @@
   </head>
   <body>
 
-    <form action='../../python/logic_loader.php' method='post'>
+    <form action='../../php/logic_loader.php' method='post'>
 
       <label>Session type</label><br>
       <input list='session_type' name='svm_session'><br>
