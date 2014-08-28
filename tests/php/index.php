@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <?php
 /**
@@ -22,7 +21,7 @@
   </head>
   <body>
 
-    <form action='../../python/logic_loader.py' method='post'>
+    <form action='../../python/logic_loader.php' method='post'>
 
       <label>Session type</label><br>
       <input list='session_type' name='svm_session'><br>
