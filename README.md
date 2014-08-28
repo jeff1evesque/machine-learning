@@ -9,6 +9,13 @@ Machine Learning
 
 ###Linux Packages
 
+The following packages need to be installed through terminal in Ubuntu:
+
+# General Packages:
+
+# scikit-learn Package:
+sudo apt-get install python-numpy 
+
 ##Configurations
 
 ###GIT
