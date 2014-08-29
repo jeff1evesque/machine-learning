@@ -23,26 +23,32 @@
 
     <form action='../../php/logic_loader.php' method='post'>
 
-      <label>Session type</label><br>
-      <input list='session_type' name='svm_session'><br>
-      <datalist id='session_type'>
-        <select name='session_type' required>
-          <option value='training'>
-          <option value='analysis'>
-        </select>
-      </datalist>
+      <fieldset>
+        <legend>Session type</legend><br>
+        <input list='session_type' name='svm_session'><br>
+        <datalist id='session_type'>
+          <select name='session_type' required>
+            <option value='training'>
+            <option value='analysis'>
+          </select>
+        </datalist>
+      </fieldset>
 
-      <label>Supply Dataset</label><br>
-      <input type='file' name='svm_dataset_file'><br>
-      <input type='url' name='svm_dataset_xml'><br>
+      <fieldset>
+        <legend>Data Input</legend>
+        <label>Supply Dataset</label><br>
+        <input type='file' name='svm_dataset_file'><br>
+        <input type='url' name='svm_dataset_xml'><br>
 
-      <label>Classification Parameters</label><br>
-      <input type='text' name='svm_clfn_dep'><br>
-      <input type='text' name='svm_clfn_indep'><br>
+        <label>Classification Parameters</label><br>
+        <input type='text' name='svm_clfn_dep'><br>
+        <input type='text' name='svm_clfn_indep'><br>
 
-      <label>Regression Parameters</label><br>
-      <input type='text' name='svm_rgrn_dep'><br>
-      <input type='text' name='svm_rgrn_indep'><br>
+        <label>Regression Parameters</label><br>
+        <input type='text' name='svm_rgrn_dep'><br>
+        <input type='text' name='svm_rgrn_indep'><br>
+      </fieldset><br>
+
       <input type='submit'>
 
     </form>
