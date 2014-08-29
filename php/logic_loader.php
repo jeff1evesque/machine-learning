@@ -51,7 +51,7 @@
 
  function python_code($cmd, $params = '') {
    $command = escapeshellcmd($cmd);
-   $parameters = escapeshellcmd($params);
+   $parameters = escapeshellarg($params);
    $output = shell_exec($command $parameters);
    print $output;
  }
