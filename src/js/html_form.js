@@ -10,15 +10,15 @@
 $(document).ready(function() {
 
 // delegation listener
-  $('form').on('click', '.add_element', delegator_callback(event));
+  $('form input').on('click', '.add_element', delegator_callback(event));
 
 /**
  * delegator_callback: callback used within 'delegator_form' listener.  It creates
  *                     additional form elements when the event listener is fired.
  */
 
-  function delegator_callback(e) {
-    alert( $(this).attr('class').split(' ')[1] );
+  function delegator_callback(event) {
+    console.log( $(this).attr('class').split(' ')[1] );
   }
 
 });
