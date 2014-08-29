@@ -33,13 +33,22 @@
  function logic_loader($form) {
    if ($form->session_type == 'training') {
      print 'Welcome to training';
+     python_code('../python/svm_training.py', json_encode($form));
    }
    elseif ($form->session_type == 'analysis') {
      print 'Welcome to analysis';
+     python_code('../python/svm_analysis.py', json_encode($form));
    }
    else {
      print 'Error: ' . basename(__FILE__) . ', logic_loader()';
    }
+ }
+
+ function python_code($cmd, $params = '') {
+   $command = escapeshellcmd($cmd);
+   $parameters = escapeshellcmd($params);
+   $output = shell_exec($command $parameters);
+   print $output;
  }
 
 ?>
