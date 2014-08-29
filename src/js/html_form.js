@@ -1,14 +1,24 @@
 /**
- *  html_form.js: creates event listeners responsible for adding additional
- *                form elements.
+ *  html_form.js: adds additional form elements to the DOM, when the user
+ *                clicks 'Add more'.
+ *
+ *                This script implements a 'delegation listener' which attaches
+ *                a single event listener to a parent element, and fires for all
+ *                descendants matching a selector.
  */
 
 $(document).ready(function() {
-// delegation listener
-  $(body).on('click', '.add_element', special_function());
 
-//
-  special_function() {
+// delegation listener
+  $(body).on('click', '.add_element', delegator_form(event));
+
+/**
+ * delegator_form: callback used within 'delegator_form' listener.  It creates
+ *                 additional form elements when the event listener is fired.
+ */
+
+  delegator_form(e) {
 
   }
+
 });
