@@ -4,5 +4,11 @@
  */
 
 $(document).ready(function() {
+// delegation listener
+  $(body).on('click', '.add_element', special_function());
 
+//
+  special_function() {
+
+  }
 });
