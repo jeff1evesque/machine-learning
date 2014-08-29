@@ -17,7 +17,7 @@ $(document).ready(function() {
  *                     additional form elements when the event listener is fired.
  */
 
-  delegator_callback(e) {
+  function delegator_callback(e) {
     alert($(this).attr('class').split(' ')[1]));
   }
 
