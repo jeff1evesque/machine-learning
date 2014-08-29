@@ -41,27 +41,27 @@
         <fieldset>
           <legend>Supply Dataset</legend>
           <input type='file' name='svm_dataset_file'>
-          <input type='button' value='Add more' id='svm_dataset_file_add'><br>
+          <input type='button' value='Add more' class='add_element svm_dataset_file_add'><br>
           <input type='url' name='svm_dataset_xml' placeholder='XML Dataset URL'>
-          <input type='button' value='Add more' id='svm_dataset_xml_add'><br>
+          <input type='button' value='Add more' class='add_element svm_dataset_xml_add'><br>
         </fieldset>
 
         <fieldset>
           <legend>Classification Parameters</legend>
           <input type='text' name='svm_clfn_dep' placeholder='Dependent Variable'>
-          <input type='button' value='Add more' id='svm_clfn_dep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_clfn_dep_add'><br>
           <hr>
           <input type='text' name='svm_clfn_indep' placeholder='Independent Variable'>
-          <input type='button' value='Add more' id='svm_clfn_indep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_clfn_indep_add'><br>
         </fieldset>
 
         <fieldset>
           <legend>Regression Parameters</legend>
           <input type='text' name='svm_rgrn_dep' placeholder='Dependent Variable'>
-          <input type='button' value='Add more' id='svm_rgrn_dep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_rgrn_dep_add'><br>
           <hr>
           <input type='text' name='svm_rgrn_indep' placeholder='Independent Variable'>
-          <input type='button' value='Add more' id='svm_rgrn_dep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_rgrn_dep_add'><br>
         </fieldset>
       </fieldset><br>
 
@@ -70,7 +70,7 @@
         <fieldset>
           <legend>Known factors</legend>
           <input type='text' name='svm_analysis_indep' placeholder='Independent Variable'>
-          <input type='button' value='Add more' id='svm_analysis_indep'><br>
+          <input type='button' value='Add more' class='add_element svm_analysis_indep'><br>
         </fieldset>
         <fieldset>
           <legend>Estimated Analysis</legend>
