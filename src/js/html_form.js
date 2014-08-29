@@ -10,7 +10,7 @@
 $(document).ready(function() {
 
 // delegation listener
-  $(body).on('click', '.add_element', delegator_callback(event));
+  $('form').on('click', '.add_element', delegator_callback(event));
 
 /**
  * delegator_callback: callback used within 'delegator_form' listener.  It creates
