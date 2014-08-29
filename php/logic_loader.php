@@ -1,7 +1,7 @@
 <?php
 
  /**
-  * logic_loader.php
+  * logic_loader.php: directs form POST data to respective python scripts.
   */
 
  /**
@@ -46,7 +46,7 @@
 
  /**
   * python_code(): executes python scripts using the passed in command with
-  *                optional parameters.
+  *                an optional object parameter.
   */
 
  function python_code($cmd, $params = '') {
