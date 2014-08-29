@@ -26,7 +26,7 @@
  }
 
  /**
-  * logic_loader(): receive the 'form_data' object and determine the allocation 
+  * logic_loader(): receive the 'form_data' object and determines the allocation 
   *                 of its properties as parameters to respective python scripts.
   */
 
