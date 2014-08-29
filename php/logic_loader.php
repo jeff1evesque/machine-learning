@@ -44,6 +44,11 @@
    }
  }
 
+ /**
+  * python_code(): executes python scripts using the passed in command with
+  *                optional parameters.
+  */
+
  function python_code($cmd, $params = '') {
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellcmd($params);
