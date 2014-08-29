@@ -18,7 +18,7 @@ $(document).ready(function() {
  */
 
   delegator_callback(e) {
-
+    alert($(this).attr('class').split(' ')[1]));
   }
 
 });
