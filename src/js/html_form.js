@@ -10,7 +10,7 @@
 $(document).ready(function() {
 
 // delegation listener
-  $('form input').on('click', '.add_element', delegator_callback(event));
+  $('form input').on('click', '.add_element', delegator_callback);
 
 /**
  * delegator_callback: callback used within 'delegator_form' listener.  It creates
@@ -18,7 +18,7 @@ $(document).ready(function() {
  */
 
   function delegator_callback(event) {
-    console.log( $(this).attr('class').split(' ')[1] );
+    console.log( $(this).prop('class') );
   }
 
 });
