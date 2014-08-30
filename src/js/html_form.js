@@ -39,7 +39,8 @@ $(document).ready(function() {
     element['input_placeholder'] = $('#'+element['input_id']).attr("placeholder");
     element['input_placeholder_string'] = "placeholder='"+element['input_placeholder']+"'";
 
-    $('.'+element['button_class']).after("<br><input "+ $.grep([element['input_type_string'], element['input_name_string'], element['input_placeholder_string']], Boolean).join(', ') +">");
+  // Append element after 'Remove' button
+    $('.'+element['input_id']+'_remove').after("<br><input "+ $.grep([element['input_type_string'], element['input_name_string'], element['input_placeholder_string']], Boolean).join(', ') +">");
   }
 
 });
