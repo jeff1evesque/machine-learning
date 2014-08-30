@@ -41,7 +41,7 @@
         <legend>Training Session</legend>
         <fieldset>
           <legend>Supply Dataset</legend>
-          <input type='file' name='svm_dataset_file[]'>
+          <input type='file' name='svm_dataset_file[]' id='svm_dataset_file'>
           <input type='button' value='Add more' class='add_element svm_dataset_file_add' id='svm_dataset_file'><br>
           <input type='url' name='svm_dataset_xml[]' placeholder='XML Dataset URL' id='svm_dataset_xml'>
           <input type='button' value='Add more' class='add_element svm_dataset_xml_add'><br>
