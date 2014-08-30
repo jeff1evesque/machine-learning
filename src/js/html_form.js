@@ -10,14 +10,18 @@
 $(document).ready(function() {
 
 // delegation listener
-  $('form input').on('click', '.add_element', delegator_callback);
+  $('form fieldset').on('click', '.add_element', delegator_callback);
 
 /**
  * delegator_callback: callback used within 'delegator_form' listener.  It creates
  *                     additional form elements when the event listener is fired.
+ *
+ * @event.preventDefault, when this method is called, the default action of the
+ *                     element will not be fired.
  */
 
   function delegator_callback(event) {
+    event.preventDefault();
     console.log( $(this).prop('class') );
   }
 
