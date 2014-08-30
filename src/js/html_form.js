@@ -10,7 +10,7 @@
 $(document).ready(function() {
 
 // delegation listener
-  $('form fieldset').on('click', '.add_element', delegator_callback);
+  $('form').on('click', '.add_element', delegator_callback);
 
 /**
  * delegator_callback: callback used within 'delegator_form' listener.  It creates

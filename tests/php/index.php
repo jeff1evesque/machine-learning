@@ -19,6 +19,7 @@
 <html>
   <head>
     <script src='../../src/js/jquery-1.8.3.js'></script>
+    <script src='../../src/js/html_form.js'></script>
   </head>
   <body>
 
@@ -40,28 +41,28 @@
         <legend>Training Session</legend>
         <fieldset>
           <legend>Supply Dataset</legend>
-          <input type='file' name='svm_dataset_file'>
-          <input type='button' value='Add more' class='add_element svm_dataset_file_add'><br>
-          <input type='url' name='svm_dataset_xml' placeholder='XML Dataset URL'>
+          <input type='file' name='svm_dataset_file[]'>
+          <input type='button' value='Add more' class='add_element svm_dataset_file_add' id='svm_dataset_file'><br>
+          <input type='url' name='svm_dataset_xml[]' placeholder='XML Dataset URL' id='svm_dataset_xml'>
           <input type='button' value='Add more' class='add_element svm_dataset_xml_add'><br>
         </fieldset>
 
         <fieldset>
           <legend>Classification Parameters</legend>
-          <input type='text' name='svm_clfn_dep' placeholder='Dependent Variable'>
+          <input type='text' name='svm_clfn_dep[]' placeholder='Dependent Variable' id='svm_clfn_dep'>
           <input type='button' value='Add more' class='add_element svm_clfn_dep_add'><br>
           <hr>
-          <input type='text' name='svm_clfn_indep' placeholder='Independent Variable'>
+          <input type='text' name='svm_clfn_indep[]' placeholder='Independent Variable' id='svm_clfn_indep'>
           <input type='button' value='Add more' class='add_element svm_clfn_indep_add'><br>
         </fieldset>
 
         <fieldset>
           <legend>Regression Parameters</legend>
-          <input type='text' name='svm_rgrn_dep' placeholder='Dependent Variable'>
+          <input type='text' name='svm_rgrn_dep[]' placeholder='Dependent Variable' id='svm_rgrn_dep'>
           <input type='button' value='Add more' class='add_element svm_rgrn_dep_add'><br>
           <hr>
-          <input type='text' name='svm_rgrn_indep' placeholder='Independent Variable'>
-          <input type='button' value='Add more' class='add_element svm_rgrn_dep_add'><br>
+          <input type='text' name='svm_rgrn_indep[]' placeholder='Independent Variable' id='svm_rgrn_indep'>
+          <input type='button' value='Add more' class='add_element svm_rgrn_indep_add'><br>
         </fieldset>
       </fieldset><br>
 
@@ -69,8 +70,8 @@
         <legend>Analysis Session</legend>
         <fieldset>
           <legend>Known factors</legend>
-          <input type='text' name='svm_analysis_indep' placeholder='Independent Variable'>
-          <input type='button' value='Add more' class='add_element svm_analysis_indep'><br>
+          <input type='text' name='svm_analysis_indep[]' placeholder='Independent Variable' id='svm_analysis_indep'>
+          <input type='button' value='Add more' class='add_element svm_analysis_indep_add'><br>
         </fieldset>
         <fieldset>
           <legend>Estimated Analysis</legend>
