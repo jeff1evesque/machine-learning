@@ -42,27 +42,33 @@
         <fieldset>
           <legend>Supply Dataset</legend>
           <input type='file' name='svm_dataset_file[]' id='svm_dataset_file'>
-          <input type='button' value='Add more' class='add_element svm_dataset_file_add' id='svm_dataset_file'><br>
+          <input type='button' value='Add more' class='add_element svm_dataset_file_add'>
+          <input type='button' value='Remove' class='remove_element svm_dataset_file_remove'><br>
           <input type='url' name='svm_dataset_xml[]' placeholder='XML Dataset URL' id='svm_dataset_xml'>
-          <input type='button' value='Add more' class='add_element svm_dataset_xml_add'><br>
+          <input type='button' value='Add more' class='add_element svm_dataset_xml_add'>
+          <input type='button' value='Remove' class='remove_element svm_dataset_xml_remove'><br>
         </fieldset>
 
         <fieldset>
           <legend>Classification Parameters</legend>
           <input type='text' name='svm_clfn_dep[]' placeholder='Dependent Variable' id='svm_clfn_dep'>
-          <input type='button' value='Add more' class='add_element svm_clfn_dep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_clfn_dep_add'>
+          <input type='button' value='Remove' class='remove_element svm_clfn_dep_remove'><br>
           <hr>
           <input type='text' name='svm_clfn_indep[]' placeholder='Independent Variable' id='svm_clfn_indep'>
-          <input type='button' value='Add more' class='add_element svm_clfn_indep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_clfn_indep_add'>
+          <input type='button' value='Remove' class='remove_element svm_clfn_indep_remove'><br>
         </fieldset>
 
         <fieldset>
           <legend>Regression Parameters</legend>
           <input type='text' name='svm_rgrn_dep[]' placeholder='Dependent Variable' id='svm_rgrn_dep'>
-          <input type='button' value='Add more' class='add_element svm_rgrn_dep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_rgrn_dep_add'>
+          <input type='button' value='Remove' class='remove_element svm_rgrn_dep_remove'><br>
           <hr>
           <input type='text' name='svm_rgrn_indep[]' placeholder='Independent Variable' id='svm_rgrn_indep'>
-          <input type='button' value='Add more' class='add_element svm_rgrn_indep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_rgrn_indep_add'>
+          <input type='button' value='Remove' class='remove_element svm_rgrn_indep_remove'><br>
         </fieldset>
       </fieldset><br>
 
@@ -71,7 +77,8 @@
         <fieldset>
           <legend>Known factors</legend>
           <input type='text' name='svm_analysis_indep[]' placeholder='Independent Variable' id='svm_analysis_indep'>
-          <input type='button' value='Add more' class='add_element svm_analysis_indep_add'><br>
+          <input type='button' value='Add more' class='add_element svm_analysis_indep_add'>
+          <input type='button' value='Remove' class='remove_element svm_analysis_indep_remove'><br>
         </fieldset>
         <fieldset>
           <legend>Estimated Analysis</legend>
