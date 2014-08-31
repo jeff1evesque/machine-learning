@@ -1,10 +1,11 @@
 /**
- *  html_form.js: adds and removes additional form elements to the DOM, when the
- *                user clicks either 'Add more', or 'Remove'.
+ *  html_form_delegator.js: adds and removes additional form elements to the DOM,
+ *                          when the user clicks either 'Add more', or 'Remove'.
  *
- *                This script implements a 'delegation listener' which attaches a
- *                single event listener to a parent element, and fires for all
- *                descendants matching a selector.
+ *                          This script implements the jquery 'event delegation'
+ *                          which attaches a single event listener to a parent
+ *                          element, and fires for all descendants matching a
+ *                          selector.
  */
 
 $(document).ready(function() {
