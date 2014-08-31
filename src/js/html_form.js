@@ -31,18 +31,18 @@ $(document).ready(function() {
   function add_callback(event) {
     event.preventDefault();
 
-    element['button_class'] = $(this).prop('class').trim().split(' ')[1];
-    element['input_id'] = element['button_class'].replace('_add', '');
+    element.button_class = $(this).prop('class').trim().split(' ')[1];
+    element.input_id = element.button_class.replace('_add', '');
 
-    element['input_type'] = $('#'+element['input_id']).attr('type');
-    element['input_type_string'] = "type='"+element['input_type']+"'";
-    element['input_name'] = $('#'+element['input_id']).attr('name');
-    element['input_name_string'] = "name='"+element['input_name']+"'";
-    element['input_placeholder'] = $('#'+element['input_id']).attr("placeholder");
-    element['input_placeholder_string'] = "placeholder='"+element['input_placeholder']+"'";
+    element.input_type = $('#'+element.input_id).attr('type');
+    element.input_type_string = "type='"+element.input_type+"'";
+    element.input_name = $('#'+element.input_id).attr('name');
+    element.input_name_string = "name='"+element.input_name+"'";
+    element.input_placeholder = $('#'+element.input_id).attr("placeholder");
+    element.input_placeholder_string = "placeholder='"+element.input_placeholder+"'";
 
   // Append element after 'Remove' button
-    $('.'+element['input_id']+'_remove').after("<br><input "+ $.grep([element['input_type_string'], element['input_name_string'], element['input_placeholder_string']], Boolean).join(', ') +">");
+    $('.'+element.input_id+'_remove').after("<br><input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
   }
 
 /**
@@ -57,14 +57,12 @@ $(document).ready(function() {
   function remove_callback(event) {
     event.preventDefault();
 
-    element['button_class'] = $(this).prop('class').trim().split(' ')[1];
-    element['input_id'] = element['button_class'].replace('_remove', '');
-    element['input_name'] = $('#'+element['input_id']).attr('name');
-
-    console.log('value="'+element['input_name']+'"');
+    element.button_class = $(this).prop('class').trim().split(' ')[1];
+    element.input_id = element.button_class.replace('_remove', '');
+    element.input_name = $('#'+element.input_id).attr('name');
 
   // Remove last form element
-    $('input[value="'+element['input_name']+'"').siblings(":last").remove();
+    $('input[name="'+element.input_name+'"').last().remove();
   }
 
 });
