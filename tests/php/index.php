@@ -26,7 +26,7 @@
     <form action='../../php/logic_loader.php' method='post'>
 
       <fieldset>
-        <legend>Session type</legend>
+        <legend>Session Type</legend>
         <p>Select whether the current session will be <i>training</i>, or <i>analysis</i>.</p>
         <input list='session_type' name='svm_session' placeholder='Session type'><br>
         <datalist id='session_type'>
@@ -39,6 +39,7 @@
 
       <fieldset>
         <legend>Training Session</legend>
+
         <fieldset>
           <legend>Supply Dataset</legend>
           <input type='file' name='svm_dataset_file[]' id='svm_dataset_file'>
@@ -47,6 +48,18 @@
           <input type='url' name='svm_dataset_xml[]' placeholder='XML Dataset URL' id='svm_dataset_xml'>
           <input type='button' value='Add more' class='add_element svm_dataset_xml_add'>
           <input type='button' value='Remove' class='remove_element svm_dataset_xml_remove'><br>
+        </fieldset>
+
+        <fieldset>
+          <legend>Training Type</legend>
+          <p>Select whether the current training session is <i>classification</i>, or <i>regression</i>.</p>
+          <input list='training_type' name='svm_training_type' placeholder='Training type'><br>
+          <datalist id='training_type'>
+            <select name='training_type' required>
+              <option value='Classification'>
+              <option value='Regression'>
+            </select>
+          </datalist>
         </fieldset>
 
         <fieldset>
