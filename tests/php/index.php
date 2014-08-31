@@ -102,7 +102,7 @@
 
         <fieldset>
           <legend>Select Model</legend>
-          <p>Select which analysis model to implement.</p>
+          <p>Select which previously stored analysis model to implement.</p>
           <input list='analysis_models' name='svm_analysis_models' placeholder='Analysis Model'><br>
           <datalist id='analysis_models'>
             <select name='analysis_models' required>
