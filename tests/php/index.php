@@ -41,6 +41,18 @@
         <legend>Training Session</legend>
 
         <fieldset>
+          <legend>Dataset Type</legend>
+          <p>Select whether the current training session will <i>upload a file</i>, or use an <i>XML file</i> for its dataset.</p>
+          <input list='dataset_type' name='svm_dataset_type' placeholder='Dataset Type'><br>
+          <datalist id='dataset_type'>
+            <select name='dataset_type' required>
+              <option value='Upload file'>
+              <option value='XML file'>
+            </select>
+          </datalist>
+        </fieldset>
+
+        <fieldset>
           <legend>Supply Dataset</legend>
           <input type='file' name='svm_dataset_file[]' id='svm_dataset_file'>
           <input type='button' value='Add more' class='add_element svm_dataset_file_add'>
@@ -53,7 +65,7 @@
         <fieldset>
           <legend>Training Type</legend>
           <p>Select whether the current training session is <i>classification</i>, or <i>regression</i>.</p>
-          <input list='training_type' name='svm_training_type' placeholder='Training type'><br>
+          <input list='training_type' name='svm_training_type' placeholder='Training Type'><br>
           <datalist id='training_type'>
             <select name='training_type' required>
               <option value='Classification'>
