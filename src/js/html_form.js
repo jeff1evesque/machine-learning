@@ -60,9 +60,12 @@ $(document).ready(function() {
     element.button_class = $(this).prop('class').trim().split(' ')[1];
     element.input_id = element.button_class.replace('_remove', '');
     element.input_name = $('#'+element.input_id).attr('name');
+    element.input_arraySize = $('[name="'+element.input_name+'"]').length;
 
   // Remove last form element
-    $('input[name="'+element.input_name+'"').last().remove();
+    if (element.input_arraySize > 1) {
+      $('input[name="'+element.input_name+'"').last().remove();
+    }
   }
 
 });
