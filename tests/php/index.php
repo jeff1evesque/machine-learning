@@ -28,7 +28,7 @@
       <fieldset>
         <legend>Session Type</legend>
         <p>Select whether the current session will be <i>training</i>, or <i>analysis</i>.</p>
-        <input list='session_type' name='svm_session' placeholder='Session type'><br>
+        <input list='session_type' name='svm_session' placeholder='Session Type'><br>
         <datalist id='session_type'>
           <select name='session_type' required>
             <option value='training'>
@@ -99,8 +99,21 @@
 
       <fieldset>
         <legend>Analysis Session</legend>
+
         <fieldset>
-          <legend>Known factors</legend>
+          <legend>Select Model</legend>
+          <p>Select which previously stored analysis model to implement.</p>
+          <input list='analysis_models' name='svm_analysis_models' placeholder='Analysis Model'><br>
+          <datalist id='analysis_models'>
+            <select name='analysis_models' required>
+              <option value='Classification'>
+              <option value='Regression'>
+            </select>
+          </datalist>
+        </fieldset>
+
+        <fieldset>
+          <legend>Known Factors</legend>
           <input type='text' name='svm_analysis_indep[]' placeholder='Independent Variable' id='svm_analysis_indep'>
           <input type='button' value='Add more' class='add_element svm_analysis_indep_add'>
           <input type='button' value='Remove' class='remove_element svm_analysis_indep_remove'><br>
