@@ -12,20 +12,20 @@ $(document).ready(function() {
     if( $(this).val().toLowerCase() == 'analysis' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_analysis">\
-          <legend>Analysis Session</legend>\
-          <fieldset class="fieldset_select_model">\
-            <legend>Select Model</legend>\
-            <p>Select which previously stored analysis model to implement.</p>\
-            <input list="analysis_models" name="svm_analysis_models" placeholder="Analysis Model"><br>\
-            <datalist id="analysis_models">\
-              <select name="analysis_models" required>\
-                <option value="Classification">\
-                <option value="Regression">\
-              </select>\
-            </datalist>\
-          </fieldset>\
-        </fieldset><br>\
-      ';
+            <legend>Analysis Session</legend>\
+            <fieldset class="fieldset_select_model">\
+              <legend>Select Model</legend>\
+              <p>Select which previously stored analysis model to implement.</p>\
+              <input list="analysis_models" name="svm_analysis_models" placeholder="Analysis Model"><br>\
+              <datalist id="analysis_models">\
+                <select name="analysis_models" required>\
+                  <option value="Classification">\
+                  <option value="Regression">\
+                </select>\
+              </datalist>\
+            </fieldset>\
+          </fieldset><br>\
+        ';
     }
     else {
       obj_form.session = '\
@@ -48,7 +48,7 @@ $(document).ready(function() {
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset']);
 
   // append 'Supply Dataset' fieldset
-    $('input[name="svm_dataset_type"]').on('input', function() { console.log('hi');
+    $('input[name="svm_dataset_type"]').on('input', function() {
       if( $(this).val().toLowerCase() == 'upload file' ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
@@ -57,7 +57,7 @@ $(document).ready(function() {
               <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
               <input type="button" value="Remove" class="remove_element svm_dataset_file_remove"><br>\
             </fieldset>\
-        ';
+          ';
       }
       else {
         obj_form.dataset = '\
@@ -67,10 +67,26 @@ $(document).ready(function() {
               <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
               <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove"><br>\
             </fieldset>\
-        ';
+          ';
       }
-      build_form('.fieldset_session_type', obj_form.dataset, ['.fieldset_supply_dataset']);
+
+      obj_form.training_type = '\
+          <fieldset class="fieldset_training_type">\
+            <legend>Training Type</legend>\
+            <p>Select whether the current training session is <i>classification</i>, or <i>regression</i>.</p>\
+            <input list="training_type" name="svm_training_type" placeholder="Training Type"><br>\
+            <datalist id="training_type">\
+              <select name="training_type" required>\
+                <option value="Classification">\
+                <option value="Regression">\
+              </select>\
+            </datalist>\
+          </fieldset>\
+        ';
+      build_form('.fieldset_supply_datasest', obj_form.training_type);
+      build_form('.fieldset_session_training', obj_form.dataset, ['.fieldset_supply_dataset']);
     });
+
   });
 
 /**
