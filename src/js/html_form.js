@@ -45,32 +45,32 @@ $(document).ready(function() {
           </fieldset>\
         ';
     }
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training']);
-  });
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset']);
 
-// append 'Supply Dataset' fieldset
-  $('input[name="svm_dataset_type"]').on('input', function() { console.log('hi');
-    if( $(this).val().toLowerCase() == 'Upload File' ) {
-      obj_form.dataset = '\
-          <fieldset class="fieldset_supply_dataset">\
-            <legend>Supply Dataset</legend>\
-            <input type="file" name="svm_dataset_file[]" id="svm_dataset_file">\
-            <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
-            <input type="button" value="Remove" class="remove_element svm_dataset_file_remove"><br>\
-          </fieldset>\
-      ';
-    }
-    else {
-      obj_form.dataset = '\
-          <fieldset class="fieldset_supply_dataset">\
-            <legend>Supply Dataset</legend>\
-            <input type="url" name="svm_dataset_xml[]" placeholder="XML Dataset URL" id="svm_dataset_xml">\
-            <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
-            <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove"><br>\
-          </fieldset>\
-      ';
-    }
-    build_form('.fieldset_session_type', obj_form.dataset, ['.fieldset_supply_dataset']);
+  // append 'Supply Dataset' fieldset
+    $('input[name="svm_dataset_type"]').on('input', function() { console.log('hi');
+      if( $(this).val().toLowerCase() == 'upload file' ) {
+        obj_form.dataset = '\
+            <fieldset class="fieldset_supply_dataset">\
+              <legend>Supply Dataset</legend>\
+              <input type="file" name="svm_dataset_file[]" id="svm_dataset_file">\
+              <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
+              <input type="button" value="Remove" class="remove_element svm_dataset_file_remove"><br>\
+            </fieldset>\
+        ';
+      }
+      else {
+        obj_form.dataset = '\
+            <fieldset class="fieldset_supply_dataset">\
+              <legend>Supply Dataset</legend>\
+              <input type="url" name="svm_dataset_xml[]" placeholder="XML Dataset URL" id="svm_dataset_xml">\
+              <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
+              <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove"><br>\
+            </fieldset>\
+        ';
+      }
+      build_form('.fieldset_session_type', obj_form.dataset, ['.fieldset_supply_dataset']);
+    });
   });
 
 /**
