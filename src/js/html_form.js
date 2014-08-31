@@ -31,7 +31,7 @@ $(document).ready(function() {
   function add_callback(event) {
     event.preventDefault();
 
-    element['button_class'] = $(this).prop('class').split(' ')[1];
+    element['button_class'] = $(this).prop('class').trim().split(' ')[1];
     element['input_id'] = element['button_class'].replace('_add', '');
 
     element['input_type'] = $('#'+element['input_id']).attr('type');
@@ -57,6 +57,14 @@ $(document).ready(function() {
   function remove_callback(event) {
     event.preventDefault();
 
+    element['button_class'] = $(this).prop('class').trim().split(' ')[1];
+    element['input_id'] = element['button_class'].replace('_remove', '');
+    element['input_name'] = $('#'+element['input_id']).attr('name');
+
+    console.log('value="'+element['input_name']+'"');
+
+  // Remove last form element
+    $('input[value="'+element['input_name']+'"').siblings(":last").remove();
   }
 
 });
