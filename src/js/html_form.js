@@ -69,6 +69,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
+      build_form('.fieldset_session_training', obj_form.dataset, ['.fieldset_supply_dataset']);
 
       obj_form.training_type = '\
           <fieldset class="fieldset_training_type">\
@@ -82,9 +83,8 @@ $(document).ready(function() {
               </select>\
             </datalist>\
           </fieldset>\
-        ';
-      build_form('.fieldset_supply_datasest', obj_form.training_type);
-      build_form('.fieldset_session_training', obj_form.dataset, ['.fieldset_supply_dataset']);
+        '; console.log(obj_form.training_type);
+      build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type']);
     });
 
   });
