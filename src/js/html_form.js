@@ -64,7 +64,7 @@ $(document).ready(function() {
 
   // Remove last form element
     if (element.input_arraySize > 1) {
-      $('input[name="'+element.input_name+'"]').siblings('br:last').remove();
+      $('input[name="'+element.input_name+'"]').prev('br:last').remove();
       $('input[name="'+element.input_name+'"]').last().remove();
     }
   }
