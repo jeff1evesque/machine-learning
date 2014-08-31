@@ -69,7 +69,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_supply_dataset']);
+      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_supply_dataset', '.fieldset_model_parameters']);
 
   // append 'Training Type' fieldset
       obj_form.training_type = '\
