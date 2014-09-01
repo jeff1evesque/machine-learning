@@ -88,41 +88,42 @@ $(document).ready(function() {
               </fieldset>\
             ';
           build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type']);
+
         }
-      });
 
    // append 'Model Parameter' fieldset
-      $('input[name="svm_training_type"]').on('input', function() {
-        if( $(this).val().toLowerCase() == 'classification' ) {
-          obj_form.model_parameters = '\
-              <fieldset class="fieldset_model_parameters">\
-                <legend>Classification Parameters</legend>\
-                <input type="text" name="svm_clfn_dep[]" placeholder="Dependent Variable" id="svm_clfn_dep">\
-                <input type="button" value="Add more" class="add_element svm_clfn_dep_add">\
-                <input type="button" value="Remove" class="remove_element svm_clfn_dep_remove"><br>\
-                <hr>\
-                <input type="text" name="svm_clfn_indep[]" placeholder="Independent Variable" id="svm_clfn_indep">\
-                <input type="button" value="Add more" class="add_element svm_clfn_indep_add">\
-                <input type="button" value="Remove" class="remove_element svm_clfn_indep_remove"><br>\
-              </fieldset>\
-            ';
-        }
-        else {
-          obj_form.model_parameters = '\
-              <fieldset class="fieldset_model_parameters">\
-                <legend>Regression Parameters</legend>\
-                <input type="text" name="svm_rgrn_dep[]" placeholder="Dependent Variable" id="svm_rgrn_dep">\
-                <input type="button" value="Add more" class="add_element svm_rgrn_dep_add">\
-                <input type="button" value="Remove" class="remove_element svm_rgrn_dep_remove"><br>\
-                <hr>\
-                <input type="text" name="svm_rgrn_indep[]" placeholder="Independent Variable" id="svm_rgrn_indep">\
-                <input type="button" value="Add more" class="add_element svm_rgrn_indep_add">\
-                <input type="button" value="Remove" class="remove_element svm_rgrn_indep_remove"><br>\
-              </fieldset>\
-            ';
-        }
-        build_form('.fieldset_training_type', obj_form.model_parameters, ['.fieldset_model_parameters']);
+        $('input[name="svm_training_type"]').on('input', function() {
+          if( $(this).val().toLowerCase() == 'classification' ) {
+            obj_form.model_parameters = '\
+                <fieldset class="fieldset_model_parameters">\
+                  <legend>Classification Parameters</legend>\
+                  <input type="text" name="svm_clfn_dep[]" placeholder="Dependent Variable" id="svm_clfn_dep">\
+                  <input type="button" value="Add more" class="add_element svm_clfn_dep_add">\
+                  <input type="button" value="Remove" class="remove_element svm_clfn_dep_remove"><br>\
+                  <hr>\
+                  <input type="text" name="svm_clfn_indep[]" placeholder="Independent Variable" id="svm_clfn_indep">\
+                  <input type="button" value="Add more" class="add_element svm_clfn_indep_add">\
+                  <input type="button" value="Remove" class="remove_element svm_clfn_indep_remove"><br>\
+                </fieldset>\
+              ';
+          }
+          else {
+            obj_form.model_parameters = '\
+                <fieldset class="fieldset_model_parameters">\
+                  <legend>Regression Parameters</legend>\
+                  <input type="text" name="svm_rgrn_dep[]" placeholder="Dependent Variable" id="svm_rgrn_dep">\
+                  <input type="button" value="Add more" class="add_element svm_rgrn_dep_add">\
+                  <input type="button" value="Remove" class="remove_element svm_rgrn_dep_remove"><br>\
+                  <hr>\
+                  <input type="text" name="svm_rgrn_indep[]" placeholder="Independent Variable" id="svm_rgrn_indep">\
+                  <input type="button" value="Add more" class="add_element svm_rgrn_indep_add">\
+                  <input type="button" value="Remove" class="remove_element svm_rgrn_indep_remove"><br>\
+                </fieldset>\
+              ';
+          }
+          build_form('.fieldset_training_type', obj_form.model_parameters, ['.fieldset_model_parameters']);
 
+        });
       });
     });
 
