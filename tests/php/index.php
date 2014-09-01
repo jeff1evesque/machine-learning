@@ -38,8 +38,6 @@
         </datalist>
       </fieldset><br>
 
-      <input type='submit'>
-
     </form>
 
   </body>
