@@ -5,7 +5,7 @@
 $(document).ready(function() {
 
 // local variables
-  var obj_form = {}
+  var obj_form = {};
 
 // append session fieldset
   $('input[name="svm_session"]').on('input', function() {
@@ -118,7 +118,25 @@ $(document).ready(function() {
             ';
         }
         build_form('.fieldset_training_type', obj_form.model_parameters, ['.fieldset_model_parameters']);
+
       });
+    });
+
+  // append 'Supply Dataset' fieldset
+    $('input[name="svm_analysis_models"]').on('input', function() {
+      obj_form.analysis = '\
+          <fieldset class="fieldset_known_factors">\
+            <legend>Known Factors</legend>\
+            <input type="text" name="svm_analysis_indep[]" placeholder="Independent Variable" id="svm_analysis_indep">\
+            <input type="button" value="Add more" class="add_element svm_analysis_indep_add">\
+            <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove"><br>\
+          </fieldset>\
+          <fieldset class="fieldset_estimated_analysis">\
+            <legend>Estimated Analysis</legend>\
+            <p class="svm_analysis_results">Submit form for analysis results...</p>\
+          </fieldset>\
+        ';
+      build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis']);
     });
   });
 
