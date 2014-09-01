@@ -91,24 +91,6 @@ $(document).ready(function() {
         }
       });
 
-  // append 'Training Type' fieldset (Upload File choice)
-      $('input[name="svm_dataset[]"]').on('change', function() {
-          obj_form.training_type = '\
-              <fieldset class="fieldset_training_type">\
-                <legend>Training Type</legend>\
-                <p>Select whether the current training session is <i>classification</i>, or <i>regression</i>.</p>\
-                <input list="training_type" name="svm_training_type" placeholder="Training Type"><br>\
-                <datalist id="training_type">\
-                  <select name="training_type" required>\
-                    <option value="Classification">\
-                    <option value="Regression">\
-                  </select>\
-                </datalist>\
-              </fieldset>\
-            ';
-          build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type']);
-      });
-
    // append 'Model Parameter' fieldset
       $('input[name="svm_training_type"]').on('input', function() {
         if( $(this).val().toLowerCase() == 'classification' ) {
