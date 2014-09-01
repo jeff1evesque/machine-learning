@@ -45,7 +45,7 @@ $(document).ready(function() {
           </fieldset>\
         ';
     }
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset']);
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_analysis_submit']);
 
   // append 'Supply Dataset' fieldset
     $('input[name="svm_dataset_type"]').on('input', function() {
@@ -69,9 +69,9 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_supply_dataset', '.fieldset_model_parameters', '.fieldset_training_type']);
+      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_supply_dataset', '.fieldset_training_parameters', '.fieldset_training_type']);
 
-  // append 'Training Type' fieldset (XML choice)
+  // append 'Training Type' fieldset
       $('input[name="svm_dataset[]"]').on('input change', function() {
         if( typeof $(this).val().toLowerCase() !== 'undefined' ) {
           obj_form.training_type = '\
@@ -91,37 +91,21 @@ $(document).ready(function() {
 
         }
 
-   // append 'Model Parameter' fieldset
+   // append 'Training Parameters' fieldset
         $('input[name="svm_training_type"]').on('input', function() {
-          if( $(this).val().toLowerCase() == 'classification' ) {
-            obj_form.model_parameters = '\
-                <fieldset class="fieldset_model_parameters">\
-                  <legend>Classification Parameters</legend>\
-                  <input type="text" name="svm_clfn_dep[]" placeholder="Dependent Variable" id="svm_clfn_dep">\
-                  <input type="button" value="Add more" class="add_element svm_clfn_dep_add">\
-                  <input type="button" value="Remove" class="remove_element svm_clfn_dep_remove"><br>\
-                  <hr>\
-                  <input type="text" name="svm_clfn_indep[]" placeholder="Independent Variable" id="svm_clfn_indep">\
-                  <input type="button" value="Add more" class="add_element svm_clfn_indep_add">\
-                  <input type="button" value="Remove" class="remove_element svm_clfn_indep_remove"><br>\
-                </fieldset>\
-              ';
-          }
-          else {
-            obj_form.model_parameters = '\
-                <fieldset class="fieldset_model_parameters">\
-                  <legend>Regression Parameters</legend>\
-                  <input type="text" name="svm_rgrn_dep[]" placeholder="Dependent Variable" id="svm_rgrn_dep">\
-                  <input type="button" value="Add more" class="add_element svm_rgrn_dep_add">\
-                  <input type="button" value="Remove" class="remove_element svm_rgrn_dep_remove"><br>\
-                  <hr>\
-                  <input type="text" name="svm_rgrn_indep[]" placeholder="Independent Variable" id="svm_rgrn_indep">\
-                  <input type="button" value="Add more" class="add_element svm_rgrn_indep_add">\
-                  <input type="button" value="Remove" class="remove_element svm_rgrn_indep_remove"><br>\
-                </fieldset>\
-              ';
-          }
-          build_form('.fieldset_training_type', obj_form.model_parameters, ['.fieldset_model_parameters']);
+          obj_form.training_parameters = '\
+              <fieldset class="fieldset_training_parameters">\
+                <legend>' + $(this).val()  + ' Parameters</legend>\
+                <input type="text" name="svm_training_dep[]" placeholder="Dependent Variable" id="svm_training_dep">\
+                <input type="button" value="Add more" class="add_element svm_training_dep_add">\
+                <input type="button" value="Remove" class="remove_element svm_training_dep_remove"><br>\
+                <hr>\
+                <input type="text" name="svm_training_indep[]" placeholder="Independent Variable" id="svm_training_indep">\
+                <input type="button" value="Add more" class="add_element svm_training_indep_add">\
+                <input type="button" value="Remove" class="remove_element svm_training_indep_remove"><br>\
+              </fieldset>\
+            ';
+          build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
 
         });
       });
@@ -137,17 +121,25 @@ $(document).ready(function() {
             <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove"><br>\
           </fieldset>\
         ';
-      build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis']);
+      build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_analysis_submit']);
 
   // append 'Estimated Analysis' fieldset
       $('input[name="svm_analysis_indep[]"]').on('input', function() {
-        obj_form.estimated_analysis = '\
-            <fieldset class="fieldset_estimated_analysis">\
-              <legend>Estimated Analysis</legend>\
-              <p class="svm_analysis_results">Submit form for analysis results...</p>\
-            </fieldset>\
-          ';
-        build_form('.fieldset_known_factors', obj_form.estimated_analysis, []);
+        if( $(this).val().length > 0 ) {
+          obj_form.estimated_analysis = '\
+              <fieldset class="fieldset_estimated_analysis">\
+                <legend>Estimated Analysis</legend>\
+                <p class="svm_analysis_results">Submit form for analysis results...</p>\
+              </fieldset>\
+            ';
+          obj_form.submit = '<input type="submit" class="svm_analysis_submit">';
+        }
+        else {
+          obj_form.estimated_analysis = null;
+          obj_form.submit = null;
+        }
+        build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
+        build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_analysis_submit']);
       });
     });
   });
