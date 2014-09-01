@@ -125,6 +125,9 @@ $(document).ready(function() {
 
   // append 'Estimated Analysis' fieldset
       $('input[name="svm_analysis_indep[]"]').on('input', function() {
+
+        var flag = field_determinant( $('input[name="svm_analysis_indep[]"]') );
+
         if( $(this).val().length > 0 ) {
           obj_form.estimated_analysis = '\
               <fieldset class="fieldset_estimated_analysis">\
@@ -138,8 +141,10 @@ $(document).ready(function() {
           obj_form.estimated_analysis = null;
           obj_form.submit = null;
         }
-        build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
-        build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_analysis_submit']);
+        if(flag) {
+          build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
+          build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_analysis_submit']);
+        }
       });
     });
   });
@@ -158,6 +163,22 @@ $(document).ready(function() {
 
   // append html
     $(selector).after(data);
+  }
+
+/**
+ * field_determinant: if any form array fields have a string length less than
+ *                    1, return false.
+ */
+
+  function field_determinant(element) {
+    var num_elements = element.length;
+    
+    for (var i = 0; i < num_elements; i++) {
+      if(element[i].value.length < 1)
+        return false;
+    }
+
+    return true;
   }
 
 });
