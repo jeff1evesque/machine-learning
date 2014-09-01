@@ -69,9 +69,9 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_supply_dataset', '.fieldset_model_parameters', '.fieldset_training_type']);
+      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_supply_dataset', '.fieldset_training_parameters', '.fieldset_training_type']);
 
-  // append 'Training Type' fieldset (XML choice)
+  // append 'Training Type' fieldset
       $('input[name="svm_dataset[]"]').on('input change', function() {
         if( typeof $(this).val().toLowerCase() !== 'undefined' ) {
           obj_form.training_type = '\
