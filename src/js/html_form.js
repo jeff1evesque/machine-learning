@@ -112,17 +112,17 @@ $(document).ready(function() {
             ';
           build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
 
-          $('input[name="svm_training_dep[]"], input[name="svm_training_indep[]"]').on('input', function() {
+          $('form').on('input', ['input[name="svm_training_dep[]"], input[name="svm_training_indep[]"]'], function() {
             var flag_field_dep = field_determinant( $('input[name="svm_training_dep[]"]') );
             var flag_field_indep = field_determinant( $('input[name="svm_training_indep[]"]') );
 
             if (flag_field_dep && flag_field_indep) {
               obj_form.submit = '<input type="submit" class="svm_analysis_submit">';
+              build_form('.fieldset_session_training', obj_form.submit, ['.svm_analysis_submit']);
             }
             else {
-              obj_form.submit = null;
+              $('.svm_analysis_submit').remove();
             }
-            build_form('.fieldset_session_training', obj_form.submit, ['.svm_analysis_submit']);
           });
         });
       });
