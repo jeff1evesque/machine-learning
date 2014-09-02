@@ -16,7 +16,7 @@ $(document).ready(function() {
             <fieldset class="fieldset_select_model">\
               <legend>Select Model</legend>\
               <p>Select which previously stored analysis model to implement.</p>\
-              <input list="analysis_models" name="svm_analysis_models" placeholder="Analysis Model"><br>\
+              <input list="analysis_models" name="svm_analysis_models" placeholder="Analysis Model">\
               <datalist id="analysis_models">\
                 <select name="analysis_models" required>\
                   <option value="Classification">\
@@ -34,7 +34,7 @@ $(document).ready(function() {
             <fieldset class="fieldset_dataset_type">\
               <legend>Dataset Type</legend>\
               <p>Select whether the current training session will <i>upload a file</i>, or use an <i>XML file</i> for its dataset.</p>\
-              <input list="dataset_type" name="svm_dataset_type" placeholder="Dataset Type"><br>\
+              <input list="dataset_type" name="svm_dataset_type" placeholder="Dataset Type">\
               <datalist id="dataset_type">\
                 <select name="dataset_type" required>\
                   <option value="Upload file">\
@@ -55,7 +55,7 @@ $(document).ready(function() {
               <legend>Supply Dataset</legend>\
               <input type="file" name="svm_dataset[]" id="svm_dataset_file">\
               <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
-              <input type="button" value="Remove" class="remove_element svm_dataset_file_remove"><br>\
+              <input type="button" value="Remove" class="remove_element svm_dataset_file_remove">\
             </fieldset>\
           ';
       }
@@ -65,7 +65,7 @@ $(document).ready(function() {
               <legend>Supply Dataset</legend>\
               <input type="url" name="svm_dataset[]" placeholder="XML Dataset URL" id="svm_dataset_xml">\
               <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
-              <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove"><br>\
+              <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove">\
             </fieldset>\
           ';
       }
@@ -81,7 +81,7 @@ $(document).ready(function() {
               <fieldset class="fieldset_training_type">\
                 <legend>Training Type</legend>\
                 <p>Select whether the current training session is <i>classification</i>, or <i>regression</i>.</p>\
-                <input list="training_type" name="svm_training_type" placeholder="Training Type"><br>\
+                <input list="training_type" name="svm_training_type" placeholder="Training Type">\
                 <datalist id="training_type">\
                   <select name="training_type" required>\
                     <option value="Classification">\
@@ -103,11 +103,11 @@ $(document).ready(function() {
                 <legend>' + $(this).val()  + ' Parameters</legend>\
                 <input type="text" name="svm_training_dep[]" placeholder="Dependent Variable" id="svm_training_dep">\
                 <input type="button" value="Add more" class="add_element svm_training_dep_add">\
-                <input type="button" value="Remove" class="remove_element svm_training_dep_remove"><br>\
+                <input type="button" value="Remove" class="remove_element svm_training_dep_remove">\
                 <hr>\
                 <input type="text" name="svm_training_indep[]" placeholder="Independent Variable" id="svm_training_indep">\
                 <input type="button" value="Add more" class="add_element svm_training_indep_add">\
-                <input type="button" value="Remove" class="remove_element svm_training_indep_remove"><br>\
+                <input type="button" value="Remove" class="remove_element svm_training_indep_remove">\
               </fieldset>\
             ';
           build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
@@ -135,7 +135,7 @@ $(document).ready(function() {
             <legend>Known Factors</legend>\
             <input type="text" name="svm_analysis_indep[]" placeholder="Independent Variable" id="svm_analysis_indep">\
             <input type="button" value="Add more" class="add_element svm_analysis_indep_add">\
-            <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove"><br>\
+            <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove">\
           </fieldset>\
         ';
       build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_analysis_submit']);
