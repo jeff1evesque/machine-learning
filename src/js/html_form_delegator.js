@@ -45,9 +45,9 @@ $(document).ready(function() {
 
   // Append element after 'Remove' button
     if (element.input_arraySize > 1) 
-      $("input["+element.input_name_string+"]").last().after("<br><input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
+      $("input["+element.input_name_string+"]").last().after("<input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
     else
-      $('.'+element.input_id+'_remove').after("<br><input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
+      $('.'+element.input_id+'_remove').after("<input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
   }
 
 /**
@@ -69,7 +69,6 @@ $(document).ready(function() {
 
   // Remove last form element
     if (element.input_arraySize > 1) {
-      $('input[name="'+element.input_name+'"]').prev('br:last').remove();
       $('input[name="'+element.input_name+'"]').last().remove();
     }
   }
