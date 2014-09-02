@@ -155,8 +155,8 @@ $(document).ready(function() {
           obj_form.submit = '<input type="submit" class="svm_analysis_submit">';
         }
         else {
-          obj_form.estimated_analysis = null;
-          obj_form.submit = null;
+          $('.fieldset_estimated_analysis').remove()
+          $('.svm_analysis_submit').remove();
         }
         if (flag_field) {
           build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
