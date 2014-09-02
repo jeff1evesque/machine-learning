@@ -22,7 +22,7 @@
     <script src='../../src/js/html_form.js'></script>
     <script src='../../src/js/html_form_delegator.js'></script>
 
-    <link rel='stylesheet' href=''../../src/css/form_svm.css'>
+    <link rel='stylesheet' href='../../src/css/form_svm.css'>
   </head>
   <body>
 
