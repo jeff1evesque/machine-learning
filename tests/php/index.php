@@ -21,6 +21,8 @@
     <script src='../../src/js/jquery-1.8.3.js'></script>
     <script src='../../src/js/html_form.js'></script>
     <script src='../../src/js/html_form_delegator.js'></script>
+
+    <link rel='stylesheet' href=''../../src/css/form_svm.css'>
   </head>
   <body>
 
