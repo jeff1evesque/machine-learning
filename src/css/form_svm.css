@@ -2,3 +2,7 @@
  * form_svm.css: contains the stylesheet definitions for the form used for 'Training', and
  *               'Analysis'.
  */
+
+input[name='svm_dataset[]']:not(:first-of-type) {
+  display:block;
+}
