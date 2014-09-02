@@ -3,6 +3,6 @@
  *               'Analysis'.
  */
 
-input[name='svm_dataset[]']:not(:first-of-type) {
+input[name='svm_dataset[]']:not(#svm_dataset_xml), input[name='svm_training_dep[]']:not(#svm_training_dep), input[name='svm_training_indep[]']:not(#svm_training_indep), input[name='svm_analysis_indep[]']:not(#svm_analysis_indep) {
   display:block;
 }
