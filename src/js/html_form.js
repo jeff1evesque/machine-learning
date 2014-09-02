@@ -73,7 +73,10 @@ $(document).ready(function() {
 
   // append 'Training Type' fieldset
       $('input[name="svm_dataset[]"]').on('input change', function() {
-        if( typeof $(this).val().toLowerCase() !== 'undefined' ) {
+
+        var flag_field = field_determinant( $('input[name="svm_dataset[]"]') );
+
+        if( $(this).val().length > 0 ) {
           obj_form.training_type = '\
               <fieldset class="fieldset_training_type">\
                 <legend>Training Type</legend>\
@@ -87,8 +90,13 @@ $(document).ready(function() {
                 </datalist>\
               </fieldset>\
             ';
+        }
+        else {
+          obj_form.training_type = null;
+          $('.fieldset_training_type').remove();
+        }
+        if(flag_field) {
           build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type']);
-
         }
 
    // append 'Training Parameters' fieldset
@@ -126,7 +134,7 @@ $(document).ready(function() {
   // append 'Estimated Analysis' fieldset
       $('input[name="svm_analysis_indep[]"]').on('input', function() {
 
-        var flag = field_determinant( $('input[name="svm_analysis_indep[]"]') );
+        var flag_field = field_determinant( $('input[name="svm_analysis_indep[]"]') );
 
         if( $(this).val().length > 0 ) {
           obj_form.estimated_analysis = '\
@@ -141,7 +149,7 @@ $(document).ready(function() {
           obj_form.estimated_analysis = null;
           obj_form.submit = null;
         }
-        if(flag) {
+        if(flag_field) {
           build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
           build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_analysis_submit']);
         }
