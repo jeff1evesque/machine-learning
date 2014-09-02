@@ -41,9 +41,13 @@ $(document).ready(function() {
     element.input_name_string = "name='"+element.input_name+"'";
     element.input_placeholder = $('#'+element.input_id).attr("placeholder");
     element.input_placeholder_string = "placeholder='"+element.input_placeholder+"'";
+    element.input_arraySize = $("input["+element.input_name_string+"]").length;
 
   // Append element after 'Remove' button
-    $('.'+element.input_id+'_remove').after("<br><input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
+    if (element.input_arraySize > 1) 
+      $("input["+element.input_name_string+"]").last().after("<br><input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
+    else
+      $('.'+element.input_id+'_remove').after("<br><input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
   }
 
 /**
