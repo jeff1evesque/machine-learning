@@ -112,6 +112,10 @@ $(document).ready(function() {
               ';
             build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
           }
+          else {
+            $(this).parent().nextAll().remove();
+            $(this).parent().parent().nextAll().remove();
+          }
 
           $('.fieldset_training_parameters').on('input', ['input[name="svm_training_dep[]"], input[name="svm_training_indep[]"]'], function(e) {
             var flag_field_dep = field_determinant( $('input[name="svm_training_dep[]"]') );
@@ -139,6 +143,10 @@ $(document).ready(function() {
             </fieldset>\
           ';
         build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_form_submit']);
+      }
+      else {
+        $(this).parent().nextAll().remove();
+        $(this).parent().parent().nextAll().remove();
       }
 
   // append 'Estimated Analysis' fieldset
