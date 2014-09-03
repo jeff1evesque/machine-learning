@@ -52,6 +52,8 @@ $(document).ready(function() {
   // Remove fieldset 'dependencies'
     $(this).parent().nextAll().remove();
 
+  // Remove 'submit' button
+    $('.svm_analysis_submit').remove();
   }
 
 /**
