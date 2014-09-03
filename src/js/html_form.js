@@ -8,7 +8,7 @@ $(document).ready(function() {
   var obj_form = {};
 
 // append session fieldset
-  $('form').on('input', 'input[name="svm_session"]', function() {
+  $('.fieldset_session_type').on('input', 'input[name="svm_session"]', function() {
     if( $(this).val().toLowerCase() == 'analysis' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_analysis">\
@@ -45,10 +45,10 @@ $(document).ready(function() {
           </fieldset>\
         ';
     }
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_analysis_submit']);
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // append 'Supply Dataset' fieldset
-    $('form').on('input', 'input[name="svm_dataset_type"]', function() {
+    $('.fieldset_dataset_type').on('input', 'input[name="svm_dataset_type"]', function() {
       if( $(this).val().toLowerCase() == 'upload file' ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
@@ -72,8 +72,7 @@ $(document).ready(function() {
       build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_training_parameters', '.fieldset_training_type', '.fieldset_supply_dataset']);
 
   // append 'Training Type' fieldset
-      $('form').on('input change', 'input[name="svm_dataset[]"]', function() {
-
+      $('.fieldset_supply_dataset').on('input change', 'input[name="svm_dataset[]"]', function() {
         var flag_field = field_determinant( $('input[name="svm_dataset[]"]') );
 
         if( flag_field ) {
@@ -97,7 +96,7 @@ $(document).ready(function() {
         build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type', '.fieldset_training_parameters', '.svm_form_submit']);
 
    // append 'Training Parameters' fieldset
-        $('form').on('input', 'input[name="svm_training_type"]', function() {
+        $('.fieldset_training_type').on('input', 'input[name="svm_training_type"]', function() {
           obj_form.training_parameters = '\
               <fieldset class="fieldset_training_parameters">\
                 <legend>' + $(this).val()  + ' Parameters</legend>\
@@ -112,7 +111,7 @@ $(document).ready(function() {
             ';
           build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
 
-          $('form').on('input', ['input[name="svm_training_dep[]"], input[name="svm_training_indep[]"]'], function() {
+          $('.fieldset_training_parameters').on('input', ['input[name="svm_training_dep[]"], input[name="svm_training_indep[]"]'], function(e) {
             var flag_field_dep = field_determinant( $('input[name="svm_training_dep[]"]') );
             var flag_field_indep = field_determinant( $('input[name="svm_training_indep[]"]') );
 
@@ -129,7 +128,7 @@ $(document).ready(function() {
     });
 
   // append 'Known Factors' fieldset
-    $('form').on('input', 'input[name="svm_analysis_models"]', function() {
+    $('.fieldset_select_model').on('input', 'input[name="svm_analysis_models"]', function() {
       obj_form.analysis = '\
           <fieldset class="fieldset_known_factors">\
             <legend>Known Factors</legend>\
@@ -141,8 +140,7 @@ $(document).ready(function() {
       build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_form_submit']);
 
   // append 'Estimated Analysis' fieldset
-      $('form').on('input change', 'input[name="svm_analysis_indep[]"]', function() {
-
+      $('.fieldset_known_factors').on('input change', 'input[name="svm_analysis_indep[]"]', function() {
         var flag_field = field_determinant( $('input[name="svm_analysis_indep[]"]') );
 
         if ( $(this).val().length > 0 ) {
@@ -162,6 +160,9 @@ $(document).ready(function() {
           build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
           build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_analysis_submit']);
         }
+        else {
+          $('.svm_form_submit').remove();
+        }
 
       });
     });
@@ -172,6 +173,10 @@ $(document).ready(function() {
  */
 
   function build_form(selector, data, arr_remove) {
+  // remove successive elements
+    $('form '+selector).parent().nextAll().remove();
+    $('form '+selector).parent().parent().nextAll().remove();
+
   // remove duplicate html
     if (typeof arr_remove !== 'undefined') {
       $.each(arr_remove, function(key, value) {
