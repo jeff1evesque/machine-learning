@@ -45,7 +45,7 @@ $(document).ready(function() {
           </fieldset>\
         ';
     }
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_analysis_submit']);
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // append 'Supply Dataset' fieldset
     $('form').on('input', 'input[name="svm_dataset_type"]', function() {
@@ -69,7 +69,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_training_parameters', '.fieldset_training_type', '.fieldset_supply_dataset']);
+      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_training_parameters', '.fieldset_training_type', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // append 'Training Type' fieldset
       $('form').on('input change', 'input[name="svm_dataset[]"]', function() {
@@ -94,7 +94,7 @@ $(document).ready(function() {
         else {
           obj_form.training_type = null;
         }
-        build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type', '.fieldset_training_parameters', '.svm_analysis_submit']);
+        build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type', '.fieldset_training_parameters', '.svm_form_submit']);
 
    // append 'Training Parameters' fieldset
         $('form').on('input', 'input[name="svm_training_type"]', function() {
@@ -110,18 +110,18 @@ $(document).ready(function() {
                 <input type="button" value="Remove" class="remove_element svm_training_indep_remove">\
               </fieldset>\
             ';
-          build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
+          build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters', '.svm_form_submit']);
 
           $('form').on('input', ['input[name="svm_training_dep[]"], input[name="svm_training_indep[]"]'], function() {
             var flag_field_dep = field_determinant( $('input[name="svm_training_dep[]"]') );
             var flag_field_indep = field_determinant( $('input[name="svm_training_indep[]"]') );
 
             if (flag_field_dep && flag_field_indep) {
-              obj_form.submit = '<input type="submit" class="svm_analysis_submit">';
-              build_form('.fieldset_session_training', obj_form.submit, ['.svm_analysis_submit']);
+              obj_form.submit = '<input type="submit" class="svm_form_submit">';
+              build_form('.fieldset_session_training', obj_form.submit, ['.svm_form_submit']);
             }
             else {
-              $('.svm_analysis_submit').remove();
+              $('.svm_form_submit').remove();
             }
           });
         });
@@ -138,7 +138,7 @@ $(document).ready(function() {
             <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove">\
           </fieldset>\
         ';
-      build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_analysis_submit']);
+      build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_form_submit']);
 
   // append 'Estimated Analysis' fieldset
       $('form').on('input change', 'input[name="svm_analysis_indep[]"]', function() {
@@ -152,15 +152,15 @@ $(document).ready(function() {
                 <p class="svm_analysis_results">Submit form for analysis results...</p>\
               </fieldset>\
             ';
-          obj_form.submit = '<input type="submit" class="svm_analysis_submit">';
+          obj_form.submit = '<input type="submit" class="svm_form_submit">';
         }
         else {
           $('.fieldset_estimated_analysis').remove();
           $('.svm_analysis_submit').remove();
         }
         if (flag_field) {
-          build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
-          build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_analysis_submit']);
+          build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis', '.svm_form_submit']);
+          build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit']);
         }
 
       });
