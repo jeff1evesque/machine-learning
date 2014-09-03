@@ -30,6 +30,11 @@ $(document).ready(function() {
         if ( $('.svm_analysis_results').text().length > 0 ) {
           $('.svm_analysis_results').html(svm_feedback);
         }
+      },
+      error: function() {
+        if ( $('.svm_analysis_results').text().length > 0 ) {
+          $('.svm_analysis_results').html('Error: cannot submit data');
+        }
       }
     });
   });
