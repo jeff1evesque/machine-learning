@@ -8,7 +8,7 @@
  */
 
 $(document).ready(function() {
-  $('.svm_form_submit').on('submit', function(event) {
+  $('form').on('submit', function(event) {
     event.preventDefault();
     var svm_feedback;
 
