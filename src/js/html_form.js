@@ -69,7 +69,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_supply_dataset', '.fieldset_training_parameters', '.fieldset_training_type']);
+      build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_training_parameters', '.fieldset_training_type', '.fieldset_supply_dataset']);
 
   // append 'Training Type' fieldset
       $('form').on('input change', 'input[name="svm_dataset[]"]', function() {
@@ -94,7 +94,7 @@ $(document).ready(function() {
         else {
           obj_form.training_type = null;
         }
-        build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type']);
+        build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type', '.fieldset_training_parameters', '.svm_analysis_submit']);
 
    // append 'Training Parameters' fieldset
         $('form').on('input', 'input[name="svm_training_type"]', function() {
