@@ -3,6 +3,10 @@
  *                    the 'action' page.  Instead, ajax is used to relay the forms
  *                    POST data to the 'action' script.
  *
+ *                    This script implements the jquery 'event delegation' which
+ *                    attaches a single event listener to a parent element, and
+ *                    fires for all descendants matching a selector.
+ *
  * @event.preventDefault, when this method is called, the default action of the
  *                    element will not be fired.
  */
