@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 // append session fieldset
   $('.fieldset_session_type').on('input', 'input[name="svm_session"]', function() {
-    if( $(this).val().toLowerCase() == 'analysis' ) {
+    if ( $(this).val().toLowerCase() == 'analysis' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_analysis">\
             <legend>Analysis Session</legend>\
@@ -27,7 +27,7 @@ $(document).ready(function() {
           </fieldset><br>\
         ';
     }
-    else {
+    else if ( $(this).val().toLowerCase() == 'training' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_training">\
             <legend>Training Session</legend>\
@@ -45,11 +45,12 @@ $(document).ready(function() {
           </fieldset>\
         ';
     }
+    else obj_form.session = null;
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // append 'Supply Dataset' fieldset
     $('.fieldset_dataset_type').on('input', 'input[name="svm_dataset_type"]', function() {
-      if( $(this).val().toLowerCase() == 'upload file' ) {
+      if ( $(this).val().toLowerCase() == 'upload file' ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
@@ -59,7 +60,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      else {
+      else if ( $(this).val().toLowerCase() == 'xml file'  ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
@@ -69,6 +70,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
+      else obj_form.dataset = null;
       build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_training_parameters', '.fieldset_training_type', '.fieldset_supply_dataset']);
 
   // append 'Training Type' fieldset
@@ -90,26 +92,26 @@ $(document).ready(function() {
               </fieldset>\
             ';
         }
-        else {
-          obj_form.training_type = null;
-        }
+        else obj_form.training_type = null;
         build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type', '.fieldset_training_parameters', '.svm_form_submit']);
 
    // append 'Training Parameters' fieldset
         $('.fieldset_training_type').on('input', 'input[name="svm_training_type"]', function() {
-          obj_form.training_parameters = '\
-              <fieldset class="fieldset_training_parameters">\
-                <legend>' + $(this).val()  + ' Parameters</legend>\
-                <input type="text" name="svm_training_dep[]" placeholder="Dependent Variable" id="svm_training_dep">\
-                <input type="button" value="Add more" class="add_element svm_training_dep_add">\
-                <input type="button" value="Remove" class="remove_element svm_training_dep_remove">\
-                <hr>\
-                <input type="text" name="svm_training_indep[]" placeholder="Independent Variable" id="svm_training_indep">\
-                <input type="button" value="Add more" class="add_element svm_training_indep_add">\
-                <input type="button" value="Remove" class="remove_element svm_training_indep_remove">\
-              </fieldset>\
-            ';
-          build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
+          if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
+            obj_form.training_parameters = '\
+                <fieldset class="fieldset_training_parameters">\
+                  <legend>' + $(this).val()  + ' Parameters</legend>\
+                  <input type="text" name="svm_training_dep[]" placeholder="Dependent Variable" id="svm_training_dep">\
+                  <input type="button" value="Add more" class="add_element svm_training_dep_add">\
+                  <input type="button" value="Remove" class="remove_element svm_training_dep_remove">\
+                  <hr>\
+                  <input type="text" name="svm_training_indep[]" placeholder="Independent Variable" id="svm_training_indep">\
+                  <input type="button" value="Add more" class="add_element svm_training_indep_add">\
+                  <input type="button" value="Remove" class="remove_element svm_training_indep_remove">\
+                </fieldset>\
+              ';
+            build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
+          }
 
           $('.fieldset_training_parameters').on('input', ['input[name="svm_training_dep[]"], input[name="svm_training_indep[]"]'], function(e) {
             var flag_field_dep = field_determinant( $('input[name="svm_training_dep[]"]') );
@@ -119,9 +121,7 @@ $(document).ready(function() {
               obj_form.submit = '<input type="submit" class="svm_form_submit">';
               build_form('.fieldset_session_training', obj_form.submit, ['.svm_form_submit']);
             }
-            else {
-              $('.svm_form_submit').remove();
-            }
+            else $('.svm_form_submit').remove();
           });
         });
       });
@@ -129,15 +129,17 @@ $(document).ready(function() {
 
   // append 'Known Factors' fieldset
     $('.fieldset_select_model').on('input', 'input[name="svm_analysis_models"]', function() {
-      obj_form.analysis = '\
-          <fieldset class="fieldset_known_factors">\
-            <legend>Known Factors</legend>\
-            <input type="text" name="svm_analysis_indep[]" placeholder="Independent Variable" id="svm_analysis_indep">\
-            <input type="button" value="Add more" class="add_element svm_analysis_indep_add">\
-            <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove">\
-          </fieldset>\
-        ';
-      build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_form_submit']);
+      if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
+        obj_form.analysis = '\
+            <fieldset class="fieldset_known_factors">\
+              <legend>Known Factors</legend>\
+              <input type="text" name="svm_analysis_indep[]" placeholder="Independent Variable" id="svm_analysis_indep">\
+              <input type="button" value="Add more" class="add_element svm_analysis_indep_add">\
+              <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove">\
+            </fieldset>\
+          ';
+        build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_form_submit']);
+      }
 
   // append 'Estimated Analysis' fieldset
       $('.fieldset_known_factors').on('input change', 'input[name="svm_analysis_indep[]"]', function() {
@@ -160,9 +162,7 @@ $(document).ready(function() {
           build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
           build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_analysis_submit']);
         }
-        else {
-          $('.svm_form_submit').remove();
-        }
+        else $('.svm_form_submit').remove();
 
       });
     });
