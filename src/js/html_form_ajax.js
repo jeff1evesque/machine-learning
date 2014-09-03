@@ -17,13 +17,13 @@ $(document).ready(function() {
       type: 'POST',
       data: $(this).serialize(),
       beforeSend: function() {
-        if ( $('.svm_analysis_results).text().length > 0 ) {
+        if ( $('.svm_analysis_results').text().length > 0 ) {
           var svm_feedback = $('.svm_analysis_results).text();
           $('.svm_analysis_results').html('sending...');
         }
       },
       success: function(data) {
-        if ( $('.svm_analysis_results).text().length > 0 ) {
+        if ( $('.svm_analysis_results').text().length > 0 ) {
           $('.svm_analysis_results').html(svm_feedback);
         }
       }
