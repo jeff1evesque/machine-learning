@@ -63,6 +63,15 @@ Now, commit and merge the submodule changes.
 
 ###File Permission
 
+Change the file permission for the entire project by issuing the command:
+
+```
+cd /var/www/html/
+sudo chown -R jeffrey:sudo machine-learning
+```
+
+**Note:** change 'jeffrey' to the user account YOU use.
+
 ##Testing / Execution
 
 ###Test Scripts
