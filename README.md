@@ -22,6 +22,20 @@ sudo apt-get install python-numpy
 
 ###GIT
 
+Fork this project in your GitHub account, then clone your repository:
+
+```
+cd /var/www/html/
+sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git machine-learning
+```
+
+Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
+
+```
+cd /var/www/html/machine-learning/
+git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
+```
+
 ####GIT Submodule
 
 We need to initialize our git *submodules*:
