@@ -24,8 +24,6 @@ sudo apt-get install python-numpy
 
 ####GIT Submodule
 
-####GIT Submodule
-
 We need to initialize our git *submodules*:
 
 ```
