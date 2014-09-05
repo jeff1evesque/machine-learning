@@ -24,6 +24,7 @@ $(document).ready(function() {
         if ( $('.svm_analysis_results').text().length > 0 ) {
           svm_feedback = $('.svm_analysis_results').text();
           $('.svm_analysis_results').html('sending...');
+          new ajaxLoader(this);
         }
       }
     }).done(function(data) {
