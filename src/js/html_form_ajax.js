@@ -42,9 +42,6 @@ $(document).ready(function() {
       $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Error Thrown: '+errorThrown);
-      console.log('Error Status: '+textStatus);
-
       $('form .fieldset_error').remove();
 
       var msg_error = '\
@@ -53,8 +50,10 @@ $(document).ready(function() {
             <p>Error: '+errorThrown+'</p>\
           </fieldset>\
         ';
+     $('form').prepend(msg_error);
 
-      $('form').prepend(msg_error);
+      console.log('Error Thrown: '+errorThrown);
+      console.log('Error Status: '+textStatus);
     });
 
   });
