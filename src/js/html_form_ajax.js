@@ -25,17 +25,16 @@ $(document).ready(function() {
           svm_feedback = $('.svm_analysis_results').text();
           $('.svm_analysis_results').html('sending...');
         }
-      },
-      success: function(data) {
-        if ( $('.svm_analysis_results').text().length > 0 ) {
-          $('.svm_analysis_results').html('Form data sent!');
-        }
-      },
-      error: function() {
-        if ( $('.svm_analysis_results').text().length > 0 ) {
-          $('.svm_analysis_results').html('Error: cannot submit data');
-        }
+      }
+    }).done(function(data) {
+      if ( $('.svm_analysis_results').text().length > 0 ) {
+        $('.svm_analysis_results').html('Form data sent!');
+      }
+    }).fail(function() {
+      if ( $('.svm_analysis_results').text().length > 0 ) {
+        $('.svm_analysis_results').html('Error: cannot submit data');
       }
     });
+
   });
 });
