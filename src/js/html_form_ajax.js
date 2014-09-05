@@ -9,27 +9,23 @@
  *
  * @event.preventDefault, when this method is called, the default action of the
  *                    element will not be fired.
+ *
+ * @ajaxLoader(), is defined within 'ajax_loader.js'.
  */
 
 $(document).ready(function() {
   $('form').on('submit', function(event) {
     event.preventDefault();
-    var svm_feedback;
 
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
       data: $(this).serialize(),
       beforeSend: function() {
-        if ( $('.svm_analysis_results').text().length > 0 ) {
-          svm_feedback = $('.svm_analysis_results').text();
-          $('.svm_analysis_results').html('sending...');
-        }
+        ajaxLoader( $(event.currentTarget) );
       }
     }).done(function(data) {
-      if ( $('.svm_analysis_results').text().length > 0 ) {
-        $('.svm_analysis_results').html('Form data sent!');
-      }
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function() {
       if ( $('.svm_analysis_results').text().length > 0 ) {
         $('.svm_analysis_results').html('Error: cannot submit data');
