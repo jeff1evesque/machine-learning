@@ -10,7 +10,22 @@
  * @event.preventDefault, when this method is called, the default action of the
  *                    element will not be fired.
  *
- * @ajaxLoader(), is defined within 'ajax_loader.js'.
+ * @$.ajax( url [, settings] ), performs an asynchronous HTTP (Ajax) request.
+ *   Required parameter -
+ *     @url (required), the URL where the request is sent.
+ *
+ *   All settings are optional -
+ *     @type, the type of request to make (default is 'GET').
+ *     @beforeSend, a callback executed before the request is sent.
+ *       @ajaxLoader(), is defined within 'ajax_loader.js'.
+ *
+ *   @deferred.done(function() {}), replaces the deprecated jqXHR.success() method. A
+ *                    function, or array of functions, that are called when 'deferred'
+ *                    is resolved.
+ *
+ *   @deffered.fail(function() {}), replaces the deprecated jqXHR.error() method. A
+ *                    function, or array of functions, that are called when 'deferred'
+ *                    is rejected.
  */
 
 $(document).ready(function() {
@@ -20,7 +35,6 @@ $(document).ready(function() {
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
-      data: $(this).serialize(),
       beforeSend: function() {
         ajaxLoader( $(event.currentTarget) );
       }
