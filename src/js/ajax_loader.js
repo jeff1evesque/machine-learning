@@ -11,7 +11,7 @@ function ajaxLoader (el) {
   var defaults = {
     bgColor      : '#fff',
     duration     : 800,
-    opacity      : 0.7,
+    opacity      : 0.4,
     classOveride : false
   }
 
