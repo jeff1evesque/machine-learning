@@ -7,7 +7,7 @@
  * ajaxLoader: primary function for this file
  */
 
-function ajaxLoader (el, options) {
+function ajaxLoader (el) {
   var defaults = {
     bgColor      : '#fff',
     duration     : 800,
@@ -15,8 +15,8 @@ function ajaxLoader (el, options) {
     classOveride : false
   }
 
-    this.options    = jQuery.extend(defaults, options);
-    this.container  = $(el);
+    this.options    = defaults;
+    this.container  = el;
 
     this.init = function() {
       var container = this.container;
@@ -36,11 +36,6 @@ function ajaxLoader (el, options) {
         'z-index':99999
       }).addClass('ajax_overlay');
 
-  // add an overiding class name to set new loader style
-    if (this.options.classOveride) {
-      overlay.addClass(this.options.classOveride);
-    }
-
   // insert overlay and loader into DOM
     container.append(
       overlay.append(
@@ -50,7 +45,7 @@ function ajaxLoader (el, options) {
   };
 
   this.remove = function() {
-    var overlay = this.container.children(".ajax_overlay");
+    var overlay = this.container.children('.ajax_overlay');
 
     if (overlay.length) {
       overlay.fadeOut(this.options.classOveride, function() {
@@ -61,5 +56,4 @@ function ajaxLoader (el, options) {
  
   this.init();
 
-}  
-
+}
