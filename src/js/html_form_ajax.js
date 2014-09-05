@@ -38,12 +38,22 @@ $(document).ready(function() {
       beforeSend: function() {
         ajaxLoader( $(event.currentTarget) );
       }
-    }).done(function(data) {
+    }).done(function() {
+      $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
-    }).fail(function() {
-      if ( $('.svm_analysis_results').text().length > 0 ) {
-        $('.svm_analysis_results').html('Error: cannot submit data');
-      }
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      $('form .fieldset_error').remove();
+
+      var msg_error = '\
+          <fieldset class="fieldset_error">\
+            <legend>Submission Error</legend>\
+            <p>Error: '+errorThrown+'</p>\
+          </fieldset>\
+        ';
+     $('form').prepend(msg_error);
+
+      console.log('Error Thrown: '+errorThrown);
+      console.log('Error Status: '+textStatus);
     });
 
   });
