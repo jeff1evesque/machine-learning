@@ -29,7 +29,7 @@ function ajaxLoader (el) {
         'background-color': this.options.bgColor,
         'opacity':this.options.opacity,
         'width':container.width(),
-        'height':container.height(),
+        'height':container.height()+45, // 45, overlay form submit button
         'position':'absolute',
         'top':'0px',
         'left':'0px',
