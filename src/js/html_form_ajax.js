@@ -9,6 +9,8 @@
  *
  * @event.preventDefault, when this method is called, the default action of the
  *                    element will not be fired.
+ *
+ * @ajaxLoader(), is defined within 'ajax_loader.js'.
  */
 
 $(document).ready(function() {
@@ -24,7 +26,7 @@ $(document).ready(function() {
         if ( $('.svm_analysis_results').text().length > 0 ) {
           svm_feedback = $('.svm_analysis_results').text();
           $('.svm_analysis_results').html('sending...');
-          new ajaxLoader(this);
+          ajaxLoader( $(event.currentTarget) );
         }
       }
     }).done(function(data) {
