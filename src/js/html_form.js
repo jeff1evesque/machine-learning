@@ -157,7 +157,7 @@ $(document).ready(function() {
           obj_form.estimated_analysis = '\
               <fieldset class="fieldset_estimated_analysis">\
                 <legend>Estimated Analysis</legend>\
-                <p class="svm_analysis_results">Submit form for analysis results...</p>\
+                <p class="svm_analysis_results">Waiting for results...</p>\
               </fieldset>\
             ';
           obj_form.submit = '<input type="submit" class="svm_form_submit">';
