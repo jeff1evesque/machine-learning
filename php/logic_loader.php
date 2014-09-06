@@ -55,7 +55,6 @@
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellarg($params);
    $output = shell_exec("$command" . $parameters);
-   print $output;
  }
 
 ?>
