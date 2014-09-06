@@ -21,9 +21,9 @@
  *       @serializeArray(), encode a set of form elements as an array of 'names', and
  *           'values'.
  *
- *     @dataType, the type of data that you're expecting back from the server. If
- *         none is specified, jQuery will try to infer it based on the MIME type of
- *         of the response.
+ *     @dataType, the type of data expected back from the server. If none is 
+ *         specified, jQuery will try to infer it based on the MIME type of the
+ *         response.
  *
  *     @beforeSend, a callback executed before the request is sent.
  *       @ajaxLoader(), is defined within 'ajax_loader.js'.
