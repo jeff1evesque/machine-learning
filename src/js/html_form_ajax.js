@@ -19,7 +19,11 @@
  *
  *     @data, data to be sent to the server.
  *       @serializeArray(), encode a set of form elements as an array of 'names', and
- *         'values'.
+ *           'values'.
+ *
+ *     @dataType, the type of data that you're expecting back from the server. If
+ *         none is specified, jQuery will try to infer it based on the MIME type of
+ *         of the response.
  *
  *     @beforeSend, a callback executed before the request is sent.
  *       @ajaxLoader(), is defined within 'ajax_loader.js'.
@@ -41,10 +45,11 @@ $(document).ready(function() {
       url: $(this).attr('action'),
       type: 'POST',
       data : $('form').serializeArray(),
+      dataType : 'json',
       beforeSend: function() {
         ajaxLoader( $(event.currentTarget) );
       }
-    }).done(function(data) {
+    }).done(function(data) { console.log( data.ajax_welcome );
       $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function(jqXHR, textStatus, errorThrown) {
