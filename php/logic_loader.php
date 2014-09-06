@@ -34,11 +34,11 @@
 
  function logic_loader($form) {
    if ($form->session_type == 'training') {
-     print json_encode(array('ajax_welcome' => 'Welcome to training'));
+     print json_encode(array('msg_welcome' => 'Welcome to training'));
      python_code('../python/svm_training.py', json_encode($form));
    }
    elseif ($form->session_type == 'analysis') {
-     print json_encode(array('ajax_welcome' => 'Welcome to analysis'));
+     print json_encode(array('msg_welcome' => 'Welcome to analysis'));
      python_code('../python/svm_analysis.py', json_encode($form));
    }
    else {
