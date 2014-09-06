@@ -2,6 +2,18 @@
 
  /**
   * logic_loader.php: directs form POST data to respective python scripts.
+  *
+  *   Note: either the 'print', or 'echo' statments are used to return values back
+  *         to ajax scripts.  For example, to send data to an ajax script we may
+  *         have the following lines in our php script:
+  *
+  *           print json_encode(array('key' => 'msg')); 
+  *
+  *         The data can be accessed from the ajax script as follows:
+  *
+  *           console.log( data.key ); 
+  *
+  *   @json_encode( value ), returns the JSON representation of 'value'. 
   */
 
  /**
@@ -32,11 +44,11 @@
 
  function logic_loader($form) {
    if ($form->session_type == 'training') {
-     print 'Welcome to training';
+     print json_encode(array('msg_welcome' => 'Welcome to training'));
      python_code('../python/svm_training.py', json_encode($form));
    }
    elseif ($form->session_type == 'analysis') {
-     print 'Welcome to analysis';
+     print json_encode(array('msg_welcome' => 'Welcome to analysis'));
      python_code('../python/svm_analysis.py', json_encode($form));
    }
    else {
@@ -53,7 +65,6 @@
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellarg($params);
    $output = shell_exec("$command" . $parameters);
-   print $output;
  }
 
 ?>
