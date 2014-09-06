@@ -16,6 +16,11 @@
  *
  *   All settings are optional -
  *     @type, the type of request to make (default is 'GET').
+ *
+ *     @data, data to be sent to the server.
+ *       @serializeArray(), encode a set of form elements as an array of 'names', and
+ *         'values'.
+ *
  *     @beforeSend, a callback executed before the request is sent.
  *       @ajaxLoader(), is defined within 'ajax_loader.js'.
  *
@@ -35,10 +40,11 @@ $(document).ready(function() {
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
+      data : $('form').serializeArray(),
       beforeSend: function() {
         ajaxLoader( $(event.currentTarget) );
       }
-    }).done(function() {
+    }).done(function(data) {
       $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function(jqXHR, textStatus, errorThrown) {
