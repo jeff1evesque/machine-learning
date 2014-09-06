@@ -17,6 +17,10 @@
  *   All settings are optional -
  *     @type, the type of request to make (default is 'GET').
  *
+ *     @data, data to be sent to the server.
+ *       @serializeArray(), encode a set of form elements as an array of 'names', and
+ *         'values'.
+ *
  *     @beforeSend, a callback executed before the request is sent.
  *       @ajaxLoader(), is defined within 'ajax_loader.js'.
  *
