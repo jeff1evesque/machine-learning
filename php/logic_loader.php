@@ -2,6 +2,8 @@
 
  /**
   * logic_loader.php: directs form POST data to respective python scripts.
+  *
+  *   @json_encode( value ), returns the JSON representation of 'value'. 
   */
 
  /**
@@ -32,11 +34,11 @@
 
  function logic_loader($form) {
    if ($form->session_type == 'training') {
-     print 'Welcome to training';
+     print json_encode(array('ajax_welcome' => 'Welcome to training'));
      python_code('../python/svm_training.py', json_encode($form));
    }
    elseif ($form->session_type == 'analysis') {
-     print 'Welcome to analysis';
+     print json_encode(array('ajax_welcome' => 'Welcome to analysis'));
      python_code('../python/svm_analysis.py', json_encode($form));
    }
    else {
