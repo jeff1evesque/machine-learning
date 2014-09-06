@@ -3,6 +3,16 @@
  /**
   * logic_loader.php: directs form POST data to respective python scripts.
   *
+  *   Note: either the 'print', or 'echo' statments are used to return values back
+  *         to ajax scripts.  For example, to send data to an ajax script we may
+  *         have the following lines in our php script:
+  *
+  *           print json_encode(array('key' => 'msg')); 
+  *
+  *         The data can be accessed from the ajax script as follows:
+  *
+  *           console.log( data.key ); 
+  *
   *   @json_encode( value ), returns the JSON representation of 'value'. 
   */
 
