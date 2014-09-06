@@ -49,7 +49,8 @@ $(document).ready(function() {
       beforeSend: function() {
         ajaxLoader( $(event.currentTarget) );
       }
-    }).done(function(data) { console.log( data.ajax_welcome );
+    }).done(function(data) {
+      console.log( data.ajax_welcome );
       $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function(jqXHR, textStatus, errorThrown) {
