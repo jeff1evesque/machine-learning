@@ -14,12 +14,11 @@
  *  @datalist: an HTML5 tag that specifies a list of pre-defined options for an input element.
  *             Since this is not supported in IE9-, or Safari, the 'select' element is nested
  *             inside the 'datalist'.  This allows for graceful degradation.  The input element
- *             that uses this 'datalist' uses the 'list' attribute to reference the 'id' attribute
- *             of the datalist.
+ *             uses a 'list' attribute to reference the 'id' attribute of the datalist.
  *
  *             In the case where datalist is not supported in the browser, the corresponding
- *             input element becomes orphanted.  This means, the corresponding ajax needs to
- *             reference the nested 'select' element, instead of the orphanted 'input' element.
+ *             input element becomes orphanted.  This means, any ajax scripts need to reference
+ *             the nested 'select' element, instead of the orphanted 'input' element.
  */
 ?>
 <html>
