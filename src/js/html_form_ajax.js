@@ -28,11 +28,23 @@
  *     @beforeSend, a callback executed before the request is sent.
  *       @ajaxLoader(), is defined within 'ajax_loader.js'.
  *
- *   @deferred.done(function() {}), replaces the deprecated jqXHR.success() method. A
- *                    function, or array of functions, that are called when 'deferred'
- *                    is resolved.
+ *   @deferred.done(function( done ) {}), replaces the deprecated jqXHR.success()
+ *                    method. A function, or array of functions, that are called when
+ *                    'deferred' is resolved.
+ *       @data, an optional parameter representing the response data from the server
+ *           side.  The server side (php) defines the data, 'msg' to return to this
+ *           ajax script using the following notation:
  *
- *   @deffered.fail(function() {}), replaces the deprecated jqXHR.error() method. A
+ *             print json_encode(array('key' => 'msg'));           
+ *
+ *           This ajax script accesses 'msg' using the following notation:
+ *
+ *             console.log( data.key );
+ *
+ *           Note: the returned data, 'data.key' can be further processed outside of
+ *                 the 'console.log()' scope.
+ *
+ *   @defered.fail(function() {}), replaces the deprecated jqXHR.error() method. A
  *                    function, or array of functions, that are called when 'deferred'
  *                    is rejected.
  */
