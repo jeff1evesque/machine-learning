@@ -2,6 +2,27 @@
 
  /**
   * logic_loader.php: directs form POST data to respective python scripts.
+  *
+  *   Note: either the 'print', or 'echo' statments are used to return values back
+  *         to ajax scripts.  For example, to send data to an ajax script we may
+  *         have the following lines in this php script:
+  *
+  *           print json_encode(array('key' => 'msg')); 
+  *
+  *         The data can be accessed from the ajax script as follows:
+  *
+  *           console.log( data.key ); 
+  *
+  *   Note: to debug, or view the entire POST data array, enter the following in
+  *         this php script:
+  *
+  *           print json_encode(array('post_array' => print_r($_POST,true)));
+  *
+  *         Again, the data can be accessed from the ajax script as follows:
+  *
+  *           console.log( data.post_array );
+  *
+  *   @json_encode( value ), returns the JSON representation of 'value'. 
   */
 
  /**
@@ -10,7 +31,6 @@
 
  $obj = new form_data($_POST);
  logic_loader($obj);
-
  /**
   * form_data: 'form_data' object with properties being POST data
   *
@@ -31,12 +51,14 @@
   */
 
  function logic_loader($form) {
-   if ($form->session_type == 'training') {
-     print 'Welcome to training';
+   $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
+
+   if ($session_type == 'training') {
+     print json_encode(array('msg_welcome' => 'Welcome to training'));
      python_code('../python/svm_training.py', json_encode($form));
    }
-   elseif ($form->session_type == 'analysis') {
-     print 'Welcome to analysis';
+   elseif ($session_type == 'analysis') {
+     print json_encode(array('msg_welcome' => 'Welcome to analysis'));
      python_code('../python/svm_analysis.py', json_encode($form));
    }
    else {
@@ -52,8 +74,7 @@
  function python_code($cmd, $params = '') {
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellarg($params);
-   $output = shell_exec($command $parameters);
-   print $output;
+   $output = shell_exec("$command" . $parameters);
  }
 
 ?>
