@@ -53,6 +53,10 @@ $(document).ready(function() {
   $('form').on('submit', function(event) {
     event.preventDefault();
 
+  // detect browser support for HTML5 'datalist' (IE9- / safari doesn't support it)
+    var datalist_support = !!(document.createElement('datalist') && window.HTMLDataListElement);
+
+  // ajax request
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
