@@ -9,7 +9,7 @@ Machine learning is a [subfield](http://en.wikipedia.org/wiki/Academic_disciplin
 
 In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning) models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification) and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis). 
 
--http://en.wikipedia.org/wiki/Support_vector_machine
+- http://en.wikipedia.org/wiki/Support_vector_machine
 
 ###Overview
 
