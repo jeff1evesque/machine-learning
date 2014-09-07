@@ -60,6 +60,7 @@ $(document).ready(function() {
       dataType : 'json',
       beforeSend: function() {
         ajaxLoader( $(event.currentTarget) );
+        console.log( $('input[name="svm_session"]').val() );
       }
     }).done(function(data) {
       console.log( data.msg_welcome );
