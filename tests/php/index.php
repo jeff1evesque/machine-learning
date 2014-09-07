@@ -17,8 +17,9 @@
  *             uses a 'list' attribute to reference the 'id' attribute of the datalist.
  *
  *             In the case where datalist is not supported in the browser, the corresponding
- *             input element becomes orphanted.  This means, any ajax scripts need to reference
- *             the nested 'select' element, instead of the orphanted 'input' element.
+ *             input element becomes orphanted.  This means, any ajax scripts (or form 'action'
+ *             script) need to reference the nested 'select' element, instead of the orphanted
+ *             'input' element.
  */
 ?>
 <html>
