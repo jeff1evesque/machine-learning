@@ -63,6 +63,7 @@ $(document).ready(function() {
         console.log( $('input[name="svm_session"]').val() );
       }
     }).done(function(data) {
+      console.log( 'POST data: '+data.post );
       console.log( data.msg_welcome );
       $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
