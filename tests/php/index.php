@@ -42,8 +42,8 @@
         <input list='session_type' name='svm_session' placeholder='Session Type'><br>
         <datalist id='session_type'>
           <select name='session_type' required>
-            <option value='training'>
-            <option value='analysis'>
+            <option value='training'>Training</option>
+            <option value='analysis'>Analysis</option>
           </select>
         </datalist>
       </fieldset><br>
