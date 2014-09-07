@@ -20,8 +20,6 @@
   * instantiate 'form_data' class
   */
 
- print json_encode(array('post' => print_r($_POST,true)); die; 
-
  $obj = new form_data($_POST);
  logic_loader($obj);
  /**
@@ -45,11 +43,11 @@
 
  function logic_loader($form) {
    if ($form->session_type == 'training') {
-     print json_encode(array('msg_welcome' => $form->session_type));
+     print json_encode(array('msg_welcome' => print_r($_POST,true)));
      python_code('../python/svm_training.py', json_encode($form));
    }
    elseif ($form->session_type == 'analysis') {
-     print json_encode(array('msg_welcome' => $form->session_type));
+     print json_encode(array('msg_welcome' => print_r($_POST,true)));
      python_code('../python/svm_analysis.py', json_encode($form));
    }
    else {
