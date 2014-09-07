@@ -53,13 +53,22 @@ $(document).ready(function() {
   $('form').on('submit', function(event) {
     event.preventDefault();
 
+  // detect browser support for HTML5 'datalist' (IE9- / safari doesn't support it)
+    var datalist_support = !!(document.createElement('datalist') && window.HTMLDataListElement);
+
+  // serialize data into array
+    var data_formatted = $('form').serializeArray();
+    data_formatted.push({ name: 'datalist_support', value: datalist_support });
+
+  // ajax request
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
-      data : $('form').serializeArray(),
+      data : data_formatted,
       dataType : 'json',
       beforeSend: function() {
         ajaxLoader( $(event.currentTarget) );
+        console.log( $('input[name="svm_session"]').val() );
       }
     }).done(function(data) {
       console.log( data.msg_welcome );
