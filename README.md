@@ -34,6 +34,7 @@ The following packages need to be installed through terminal in Ubuntu:
 
 ```
 # General Packages:
+sudo apt-get install lamp-server^ phpmyadmin
 
 # Scikit Package(s):
 sudo apt-get install python-numpy 
