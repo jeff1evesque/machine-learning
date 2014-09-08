@@ -10,3 +10,6 @@
 #      manipulate different parts of the Python runtime environment (i.e. argv).
 
 import sys
+
+# temporarily check if arguments are passed in
+print sys.argv[1:]
