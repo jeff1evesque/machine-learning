@@ -5,3 +5,8 @@
 #      parses the data, and sends respective portions of the POST data to
 #      'python/data_creator.py'. data_creator.py is responsible for saving
 #      the SVM dataset into the mySQL database.
+#
+#  @import sys, provides various functions, and variables that can be used to
+#      manipulate different parts of the Python runtime environment (i.e. argv).
+
+import sys
