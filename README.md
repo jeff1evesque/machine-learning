@@ -95,6 +95,14 @@ sudo chown -R jeffrey:sudo machine-learning
 
 **Note:** change 'jeffrey' to the user account YOU use.
 
+###Scikit-Learn
+
+```
+cd /var/www/html/machine-learning/scikit-learn/
+python setup.py build
+sudo python setup.py install
+```
+
 ##Testing / Execution
 
 ###Test Scripts
