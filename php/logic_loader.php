@@ -22,7 +22,15 @@
   *
   *           console.log( data.post_array );
   *
-  *   @json_encode( value ), returns the JSON representation of 'value'. 
+  *   Note: performing multiple 'print json_encode( ... )' statements yields an
+  *         illegal json syntax.  Specifically, it concatenates two, or more
+  *         json objects. The receiving javascript file will fail overall for
+  *         the ajax request, on the account of a 'Parse' error.  The receiving
+  *         javascript is only allowed to receive one json representation, which
+  *         may have nested json objects (not concatenated).  Therefore, only one
+  *         such 'print' statement is allowed.
+  *
+  *   @json_encode( value ), returns the JSON representation / object of 'value'. 
   */
 
  /**
