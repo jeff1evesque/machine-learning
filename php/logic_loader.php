@@ -32,7 +32,8 @@
  $obj = new form_data($_POST);
  $json = array();
 
- logic_loader($obj);
+ logic_loader($obj, $json);
+
  /**
   * form_data: 'form_data' object with properties being POST data
   *
@@ -52,7 +53,7 @@
   *                 of its properties as parameters to respective python scripts.
   */
 
- function logic_loader($form) {
+ function logic_loader($form, &$json) {
    $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
    if ($session_type == 'training') {
