@@ -69,12 +69,12 @@
    $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
    if ($session_type == 'training') {
-     $result = shell_command('../python/svm_training.py', json_encode($form));
+     $result = shell_command('python ../python/svm_training.py', json_encode($form));
      $arr_result = array('result' => $result);
      $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
    }
    elseif ($session_type == 'analysis') {
-     $result = shell_command('../python/svm_analysis.py', json_encode($form));
+     $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
      $arr_result = array('result' => $result);
      $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
    }
@@ -91,7 +91,7 @@
  function shell_command($cmd, $params = '') {
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellarg($params);
-   $output = shell_exec("$command" . $parameters); 
+   $output = shell_exec("$command" . $parameters);
    return $output;
  }
 
