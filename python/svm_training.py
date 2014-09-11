@@ -12,4 +12,4 @@
 import sys
 
 # temporarily check if arguments are passed in
-print sys.argv[1:]
+return sys.argv[1:]
