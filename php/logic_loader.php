@@ -33,6 +33,7 @@
  $json = array();
 
  logic_loader($obj, $json);
+ print json_encode($json);
 
  /**
   * form_data: 'form_data' object with properties being POST data
@@ -60,11 +61,11 @@
    $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
    if ($session_type == 'training') {
-     print json_encode(array('msg_welcome' => 'Welcome to training'));
+     array_push($json, array('msg_welcome' => 'Welcome to training'));
      python_code('../python/svm_training.py', json_encode($form));
    }
    elseif ($session_type == 'analysis') {
-     print json_encode(array('msg_welcome' => 'Welcome to analysis'));
+     array_push($json, array('msg_welcome' => 'Welcome to analysis'));
      python_code('../python/svm_analysis.py', json_encode($form));
    }
    else {
