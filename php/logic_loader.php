@@ -30,6 +30,8 @@
   */
 
  $obj = new form_data($_POST);
+ $json = array();
+
  logic_loader($obj);
  /**
   * form_data: 'form_data' object with properties being POST data
