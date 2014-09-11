@@ -51,6 +51,9 @@
  /**
   * logic_loader(): receive the 'form_data' object and determines the allocation 
   *                 of its properties as parameters to respective python scripts.
+  *
+  * @form: contains form data defined by 'form_data' class
+  * @json: 'reference' to the 'json' variable
   */
 
  function logic_loader($form, &$json) {
