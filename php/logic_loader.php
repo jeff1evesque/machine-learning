@@ -22,7 +22,15 @@
   *
   *           console.log( data.post_array );
   *
-  *   @json_encode( value ), returns the JSON representation of 'value'. 
+  *   Note: performing multiple 'print json_encode( ... )' statements yields an
+  *         illegal json syntax.  Specifically, it concatenates two, or more
+  *         json objects. The receiving javascript file will fail overall for
+  *         the ajax request, on the account of a 'Parse' error.  The receiving
+  *         javascript is only allowed to receive one json representation, which
+  *         may have nested json objects (not concatenated).  Therefore, only one
+  *         such 'print' statement is allowed.
+  *
+  *   @json_encode( value ), returns the JSON representation / object of 'value'. 
   */
 
  /**
@@ -30,7 +38,11 @@
   */
 
  $obj = new form_data($_POST);
- logic_loader($obj);
+ $json = array();
+
+ logic_loader($obj, $json);
+ print json_encode($json);
+
  /**
   * form_data: 'form_data' object with properties being POST data
   *
@@ -48,17 +60,20 @@
  /**
   * logic_loader(): receive the 'form_data' object and determines the allocation 
   *                 of its properties as parameters to respective python scripts.
+  *
+  * @form: contains form data defined by 'form_data' class
+  * @json: 'reference' to the 'json' variable
   */
 
- function logic_loader($form) {
+ function logic_loader($form, &$json) {
    $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
    if ($session_type == 'training') {
-     print json_encode(array('msg_welcome' => 'Welcome to training'));
+     $json = array_merge($json, array('msg_welcome' => 'Welcome to training'));
      python_code('../python/svm_training.py', json_encode($form));
    }
    elseif ($session_type == 'analysis') {
-     print json_encode(array('msg_welcome' => 'Welcome to analysis'));
+     $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'));
      python_code('../python/svm_analysis.py', json_encode($form));
    }
    else {
