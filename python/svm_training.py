@@ -11,8 +11,11 @@
 
 import sys
 from data_creator import Training
+from data_validator import Validator
 
-# escape data
+# validate, and escape data
+validator = Validator( sys.argv[1] )
+validator.form_validation()
 
 # instantiate 'Training' object
 data = Training( sys.argv[1] )
