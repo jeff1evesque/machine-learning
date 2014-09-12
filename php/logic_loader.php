@@ -84,8 +84,9 @@
  }
 
  /**
-  * python_code(): executes python scripts using the passed in command with
-  *                an optional object parameter.
+  * shell_command(): executes shell scripts defined by 'cmd' with optional
+  *                  parameter(s) 'param'. This function returns the result
+  *                  of the executed command. 
   */
 
  function shell_command($cmd, $params = '') {
