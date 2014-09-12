@@ -91,7 +91,8 @@
  function shell_command($cmd, $params = '') {
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellarg($params);
-   $output = shell_exec("$command" . $parameters);
+
+   $output = exec("$command $parameters");
    return $output;
  }
 
