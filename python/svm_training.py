@@ -8,12 +8,11 @@
 #
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
-
 import sys
 from data_creator import Training
 from data_validator import Validator
 
-# validate, and escape data
+# validate, and escape form data
 validator = Validator( sys.argv[1] )
 validator.form_validation()
 
