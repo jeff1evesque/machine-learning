@@ -10,6 +10,9 @@
 #      manipulate different parts of the Python runtime environment (i.e. argv).
 
 import sys
+from data_creator import Training
 
-# temporarily check if arguments are passed in
-print sys.argv[1:]
+# escape data
+
+# instantiate 'Training' object
+data = Training( sys.argv[1] )
