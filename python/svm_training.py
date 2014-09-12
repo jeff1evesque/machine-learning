@@ -12,4 +12,4 @@
 import sys
 
 # temporarily check if arguments are passed in
-print 'test string'#sys.argv[1:]
+print sys.argv[0:]
