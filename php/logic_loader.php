@@ -69,12 +69,14 @@
    $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
    if ($session_type == 'training') {
-     $json = array_merge($json, array('msg_welcome' => 'Welcome to training'));
-     python_code('../python/svm_training.py', json_encode($form));
+     $result = shell_command('python ../python/svm_training.py', json_encode($form));
+     $arr_result = array('result' => $result);
+     $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
    }
    elseif ($session_type == 'analysis') {
-     $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'));
-     python_code('../python/svm_analysis.py', json_encode($form));
+     $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
+     $arr_result = array('result' => $result);
+     $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
    }
    else {
      print 'Error: ' . basename(__FILE__) . ', logic_loader()';
@@ -86,10 +88,12 @@
   *                an optional object parameter.
   */
 
- function python_code($cmd, $params = '') {
+ function shell_command($cmd, $params = '') {
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellarg($params);
-   $output = shell_exec("$command" . $parameters);
+
+   $output = exec("$command $parameters");
+   return $output;
  }
 
 ?>
