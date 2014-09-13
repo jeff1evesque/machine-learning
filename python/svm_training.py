@@ -33,12 +33,12 @@ import sys
 from data_creator import Training
 from data_validator import Validator
 
-# validate form data
 if len(sys.argv) > 1:
+  # validate input data is json format
   validator = Validator( sys.argv[1], 'training' )
   validator.data_validation()
+
+  # instantiate 'Training' object
+  data = Training( sys.argv[1] )
 else:
   print 'Please provide a training dataset in json format'
-
-# instantiate 'Training' object
-data = Training( sys.argv[1] )
