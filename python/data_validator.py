@@ -12,5 +12,8 @@ class Validator:
   def __init__(self, form_data):
     self.form_data = form_data
 
-  ## form_validation(): 
+  ## form_sanitation(): sanitizes a subset of the passed-in form data
+  def form_sanitation(self):
+
+  ## form_validation():
   def form_validation(self):
