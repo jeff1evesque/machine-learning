@@ -34,7 +34,7 @@ from data_creator import Training
 from data_validator import Validator
 
 if len(sys.argv) > 1:
-  # validate form data
+  # validate svm input data
   validator = Validator( sys.argv[1], 'training' )
   validator.data_validation()
 
