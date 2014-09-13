@@ -10,13 +10,13 @@ import json
 class Validator:
 
   ## constructor: saves a subset of the passed-in form data
-  def __init__(self, form_data, session_type):
-    self.form_data = form_data
+  def __init__(self, svm_data, session_type):
+    self.svm_data = svm_data
     self.svm_session = session_type
 
   ## data_validation(): ensure passed in dataset is json formatted
   def data_validation(self):
     try:
-      json.loads(self.form_data)
+      json.loads(self.svm_data)
     except ValueError, e:
       print 'Error:'
