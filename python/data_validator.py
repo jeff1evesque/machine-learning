@@ -15,5 +15,5 @@ class Validator:
   ## form_sanitation(): sanitizes a subset of the passed-in form data
   def form_sanitation(self):
 
-  ## form_validation():
+  ## form_validation(): validates a subset of the passed-in form data
   def form_validation(self):
