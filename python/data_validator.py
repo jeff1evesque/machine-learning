@@ -4,7 +4,7 @@
 #  This script performs various data sanitation on the form data, and 
 #  validates the same data to ensure that the SVM algorithm will work
 #  on the given dataset.
-import json
+import json, sys
 
 ## Class: Validator
 class Validator:
@@ -27,3 +27,4 @@ class Validator:
         json.loads(self.svm_data)
       except ValueError, e:
         print 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
+        sys.exit()
