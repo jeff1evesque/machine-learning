@@ -13,5 +13,5 @@ class Validator:
   def __init__(self, form_data):
     self.form_data = form_data
 
-  ## form_validation(): validates a subset of the passed-in form data
-  def form_validation(self):
+  ## data_validation(): validates a subset of the passed-in form data
+  def data_validation(self):
