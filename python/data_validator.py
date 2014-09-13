@@ -13,5 +13,9 @@ class Validator:
   def __init__(self, form_data):
     self.form_data = form_data
 
-  ## data_validation(): validates a subset of the passed-in form data
+  ## data_validation(): ensure passed in dataset is json formatted
   def data_validation(self):
+    try:
+      json.loads(self.form_data)
+    except ValueError, e:
+      print 'Error:'
