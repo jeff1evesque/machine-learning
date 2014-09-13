@@ -34,11 +34,7 @@ from data_creator import Training
 from data_validator import Validator
 
 if len(sys.argv) > 1:
-  # validate input data is json format
-  validator = Validator( sys.argv[1], 'training' )
-  validator.data_validation()
-
-  # instantiate 'Training' object
-  data = Training( sys.argv[1] )
+  print 'this line is ignored'
+  print 'this line is displayed'
 else:
   print 'Please provide a training dataset in json format'
