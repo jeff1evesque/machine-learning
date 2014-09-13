@@ -16,13 +16,13 @@ class Validator:
   #  @session_type: represents the current session type
   def __init__(self, svm_data, session_type):
     self.svm_data = svm_data
-    self.svm_session = session_type
+    self.svm_session = session_type.lower()
 
   ## data_validation():
   def data_validation(self):
 
     # validates training session
-    if self.svm_session.lower() == 'training':
+    if self.svm_session == 'training':
       try:
         json.loads(self.svm_data)
       except ValueError, e:
