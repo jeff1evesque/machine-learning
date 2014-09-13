@@ -20,7 +20,8 @@ class Validator:
 
   ## data_validation(): ensure passed in dataset is json formatted
   def data_validation(self):
-    try:
-      json.loads(self.svm_data)
-    except ValueError, e:
-      print 'Error:'
+    if self.svm_session.lower() == 'training':
+      try:
+        json.loads(self.svm_data)
+      except ValueError, e:
+        print 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
