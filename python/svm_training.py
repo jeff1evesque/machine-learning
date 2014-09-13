@@ -35,7 +35,7 @@ from data_validator import Validator
 
 # validate form data
 validator = Validator( sys.argv[1] )
-validator.form_validation()
+validator.data_validation()
 
 # instantiate 'Training' object
 data = Training( sys.argv[1] )
