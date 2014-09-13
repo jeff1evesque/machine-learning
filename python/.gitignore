@@ -1,0 +1,4 @@
+# Ignore the following directories
+
+# Ignore the following files
+*.pyc
