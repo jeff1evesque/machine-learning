@@ -8,7 +8,7 @@
 ## Class: Validator
 class Validator:
 
-  ## constructor: 
+  ## constructor: saves a subset of the passed-in form data
   def __init__(self, form_data):
     self.form_data = form_data
 
