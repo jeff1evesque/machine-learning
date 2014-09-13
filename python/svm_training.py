@@ -35,6 +35,7 @@ from data_validator import Validator
 
 # validate, and escape form data
 validator = Validator( sys.argv[1] )
+validator.form_sanitation()
 validator.form_validation()
 
 # instantiate 'Training' object
