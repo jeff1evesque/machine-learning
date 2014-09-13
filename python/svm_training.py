@@ -34,7 +34,7 @@ from data_creator import Training
 from data_validator import Validator
 
 if len(sys.argv) > 1:
-  # validate svm input data
+  # validate input data is json format
   validator = Validator( sys.argv[1], 'training' )
   validator.data_validation()
 
