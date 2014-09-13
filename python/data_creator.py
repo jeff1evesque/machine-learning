@@ -7,4 +7,4 @@ class Training:
 
   ## constructor:
   def __init__(self):
-    # definition
+    print 'remove this temporary string, later'
