@@ -33,7 +33,7 @@ import sys
 from data_creator import Training
 from data_validator import Validator
 
-# validate form data
+# validate input data
 validator = Validator( sys.argv[1], 'training' )
 validator.data_validation()
 
