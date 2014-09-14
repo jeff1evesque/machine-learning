@@ -96,10 +96,11 @@
  }
 
  /**
-  * remove_quote(): takes an array, and removes outer quotes, from each array
-  *                 element.  This function handles both single quotes, and
-  *                 double quotes.  However, the use of both (i.e. "var') is
-  *                 incorrect syntax, and doesn't work.
+  * remove_quote(): takes an array, and removes the outer quotes the from
+  *                 each array element.  This function handles both single,
+  *                 and double quotes.  However, the use of both (i.e. "var')
+  *                 simulataneously, is incorrect syntax, and not recognized
+  *                 within this function.
   *
   * @arr: passed-in array reference
   */
