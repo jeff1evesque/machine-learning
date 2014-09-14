@@ -95,6 +95,15 @@
    }
  }
 
+ /**
+  * remove_quote(): takes an array, and removes outer quotes, from each array
+  *                 element.  This function handles both single quotes, and
+  *                 double quotes.  However, the use of both (i.e. "var') is
+  *                 incorrect syntax, and doesn't work.
+  *
+  * @arr: passed-in array reference
+  */
+
  function remove_quote(&$arr) {
    foreach ($arr as $key => $value) {
   // remove outer (single, or double) quote
