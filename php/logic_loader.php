@@ -47,13 +47,19 @@
   * obj_data: copies array elements to object properties
   *
   * @arr: the array containing the elements being copied
+  * @json_flag: a value of 'true' constructs a JSON friendly object, typically
+  *             a response from the server side (i.e. Python).  A value of
+  *             'false' constructs a simpler JSON friendly object (i.e form
+  *             POST data). 
   */
 
  class obj_data {
    public function __construct($arr, $json_flag = false) {
      if ($json_flag) {
        foreach ($arr as $key => $value) {
+       // removes additional quotes
          $temp = json_decode($value);
+       // use object key, and value, instead of parent values
          foreach ($temp as $k => $v) {
            $this->$k = $v;
          }
