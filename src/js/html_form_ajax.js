@@ -71,7 +71,7 @@ $(document).ready(function() {
       }
     }).done(function(data) {
       console.log( data.msg_welcome );
-      console.log( data.result );
+      if(JSON.parse( data.result )) console.log('hi');
       $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function(jqXHR, textStatus, errorThrown) {
