@@ -72,9 +72,10 @@ $(document).ready(function() {
     }).done(function(data) {
       console.log( data.msg_welcome );
 
-      result = $.parseJSON( data.result );
-      console.log( result );
-      console.log( result.remove );
+      console.log( 'test data: ' + data.result );
+      console.log( 'data.result.key1: ' + data.result.key1 );
+      obj = $.parseJSON( data.result );
+      console.log( 'parseJSON result: ' + obj.key1 );
 
       $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
