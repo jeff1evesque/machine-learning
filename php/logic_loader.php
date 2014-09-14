@@ -7,11 +7,11 @@
   *         to ajax scripts.  For example, to send data to an ajax script we may
   *         have the following lines in this php script:
   *
-  *           print json_encode(array('key' => 'msg')); 
+  *           print json_encode(array('key' => 'msg'));
   *
   *         The data can be accessed from the ajax script as follows:
   *
-  *           console.log( data.key ); 
+  *           console.log( data.key );
   *
   *   Note: to debug, or view the entire POST data array, enter the following in
   *         this php script:
@@ -30,14 +30,14 @@
   *         may have nested json objects (not concatenated).  Therefore, only one
   *         such 'print' statement is allowed.
   *
-  *   @json_encode( value ), returns the JSON representation / object of 'value'. 
+  *   @json_encode( value ), returns the JSON representation / object of 'value'.
   */
 
  /**
   * instantiate 'obj_data' class
   */
 
- $obj = new form_data($_POST);
+ $obj = new obj_data($_POST);
  $json = array();
 
  logic_loader($obj, $json);
