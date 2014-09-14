@@ -73,7 +73,6 @@ $(document).ready(function() {
       console.log( data.msg_welcome );
 
       console.log( 'test data: ' + data.result );
-      console.log( 'data.result.key1: ' + data.result.key1 );
       obj = $.parseJSON( data.result );
       console.log( 'parseJSON result: ' + obj.key1 );
 
