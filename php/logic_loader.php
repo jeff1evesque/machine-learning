@@ -71,7 +71,8 @@
    if ($session_type == 'training') {
      $result = shell_command('python ../python/svm_training.py', json_encode($form));
 //     $arr_result = array('result' => $result);
-     $arr_result = array('result' => preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $result[0]));
+     remove_quote( $result );
+     $arr_result = array('result' => $result[0]);
      $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
    }
    elseif ($session_type == 'analysis') {
@@ -81,6 +82,13 @@
    }
    else {
      print 'Error: ' . basename(__FILE__) . ', logic_loader()';
+   }
+ }
+
+ function remove_quote(&$arr) {
+   foreach ($arr as $key => $value) {
+     $new_value = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $arr[$key]);
+     $arr[$key] = $new_value;
    }
  }
 
