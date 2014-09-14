@@ -46,12 +46,12 @@
  /**
   * obj_data: copies array elements to object properties
   *
-  * @post: the post array
+  * @arr: the array containing the elements being copied
   */
 
  class obj_data {
-   public function __construct($post) {
-     foreach($post as $key => $value) {
+   public function __construct($arr) {
+     foreach($arr as $key => $value) {
        $this->$key = $value;
      }
    }
