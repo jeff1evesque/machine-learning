@@ -106,7 +106,6 @@
 
  function remove_quote(&$arr) {
    foreach ($arr as $key => $value) {
-  // remove outer (single, or double) quote
      $new_value = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $arr[$key]);
      $arr[$key] = $new_value;
    }
