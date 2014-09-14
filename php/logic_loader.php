@@ -70,7 +70,7 @@
 
    if ($session_type == 'training') {
      $result = shell_command('python ../python/svm_training.py', json_encode($form));
-     $arr_result = array('result' => $result);
+     $arr_result = array('result' => json_encode($result));
      $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
    }
    elseif ($session_type == 'analysis') {
