@@ -70,7 +70,6 @@
 
    if ($session_type == 'training') {
      $result = shell_command('python ../python/svm_training.py', json_encode($form));
-//     $arr_result = array('result' => $result);
      remove_quote( $result );
      $arr_result = array('result' => $result);
      $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
@@ -95,7 +94,7 @@
  /**
   * shell_command(): executes shell scripts defined by 'cmd' with optional
   *                  parameter(s) 'param'. This function returns the result
-  *                  of the executed command. 
+  *                  of the executed command.
   *
   * @exec(): executes a system command
   * @output: an array filled with every line of the output from exec()
