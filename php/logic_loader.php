@@ -50,15 +50,25 @@
   */
 
  class obj_data {
-   public function __construct($arr) {
-     foreach($arr as $key => $value) {
-       $this->$key = $value;
+   public function __construct($arr, $json_flag = false) {
+     if ($json_flag) {
+       foreach ($arr as $key => $value) {
+         $temp = json_decode($value);
+         foreach ($temp as $k => $v) {
+           $this->$k = $v;
+         }
+       }
+     }
+     else {
+       foreach($arr as $key => $value) {
+         $this->$key = $value;
+       }
      }
    }
  }
 
  /**
-  * logic_loader(): receive the 'form_data' object and determines the allocation 
+  * logic_loader(): receive the 'form_data' object and determines the allocation
   *                 of its properties as parameters to respective python scripts.
   *
   * @form: contains form data defined by 'form_data' class
@@ -71,7 +81,7 @@
    if ($session_type == 'training') {
      $result = shell_command('python ../python/svm_training.py', json_encode($form));
      remove_quote( $result );
-     $obj_result = new obj_data($result);
+     $obj_result = new obj_data($result, true);
      $arr_result = array('result' => $obj_result);
      $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
    }
@@ -87,6 +97,7 @@
 
  function remove_quote(&$arr) {
    foreach ($arr as $key => $value) {
+  // remove outer (single, or double) quote
      $new_value = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $arr[$key]);
      $arr[$key] = $new_value;
    }
