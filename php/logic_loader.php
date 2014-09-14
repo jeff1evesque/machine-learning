@@ -72,7 +72,7 @@
      $result = shell_command('python ../python/svm_training.py', json_encode($form));
 //     $arr_result = array('result' => $result);
      remove_quote( $result );
-     $arr_result = array('result' => $result[0]);
+     $arr_result = array('result' => $result);
      $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
    }
    elseif ($session_type == 'analysis') {
@@ -89,6 +89,7 @@
    foreach ($arr as $key => $value) {
      $new_value = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $arr[$key]);
      $arr[$key] = $new_value;
+     $arr[0] = array_merge
    }
  }
 
@@ -96,6 +97,9 @@
   * shell_command(): executes shell scripts defined by 'cmd' with optional
   *                  parameter(s) 'param'. This function returns the result
   *                  of the executed command. 
+  *
+  * @exec(): executes a system command
+  * @output: an array filled with every line of the output from exec()
   */
 
  function shell_command($cmd, $params = '') {
