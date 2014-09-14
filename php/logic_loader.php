@@ -93,7 +93,7 @@
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellarg($params);
 
-   $output = exec("$command $parameters");
+   exec("$command $parameters", $output);
    return $output;
  }
 
