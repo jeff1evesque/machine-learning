@@ -44,7 +44,7 @@
  print json_encode($json);
 
  /**
-  * form_data: 'form_data' object with properties being POST data
+  * obj_data: copies array elements to object properties
   *
   * @post: the post array
   */
