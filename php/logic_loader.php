@@ -34,7 +34,7 @@
   */
 
  /**
-  * instantiate 'form_data' class
+  * instantiate 'obj_data' class
   */
 
  $obj = new form_data($_POST);
@@ -49,7 +49,7 @@
   * @post: the post array
   */
 
- class form_data {
+ class obj_data {
    public function __construct($post) {
      foreach($post as $key => $value) {
        $this->$key = $value;
@@ -89,7 +89,6 @@
    foreach ($arr as $key => $value) {
      $new_value = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $arr[$key]);
      $arr[$key] = $new_value;
-     $arr[0] = array_merge
    }
  }
 
