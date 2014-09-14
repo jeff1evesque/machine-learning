@@ -71,11 +71,8 @@ $(document).ready(function() {
       }
     }).done(function(data) {
       console.log( data.msg_welcome );
-
-      console.log( 'data.result: ' + data.result );
-      console.log( 'data.result type: ' + typeof data.result );
       console.log( 'data.result.key1: ' + data.result.key1 );
-      console.log( 'JSON.strinify(): ' + JSON.stringify(data.result) );
+      console.log( 'JSON.strinify() result object: ' + JSON.stringify(data.result) );
 
       $('form .fieldset_error').remove();
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
