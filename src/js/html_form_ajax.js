@@ -73,7 +73,6 @@ $(document).ready(function() {
     }).done(function(data) {
   // console logs
       console.log( data.msg_welcome );
-      console.log( 'data.result.key1: ' + data.result.key1 );
       console.log( 'Overall JSON from Python: ' + JSON.stringify(data.result) );
 
   // server side error
