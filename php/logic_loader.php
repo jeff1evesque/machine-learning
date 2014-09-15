@@ -118,23 +118,23 @@
      }
    }
 
- }
+   /**
+    * shell_command(): executes shell scripts defined by 'cmd' with optional
+    *                  parameter(s) 'param'. This function returns the result
+    *                  of the executed command.
+    *
+    * @exec(): executes a system command
+    * @output: an array filled with every line of the output from exec()
+    */
 
- /**
-  * shell_command(): executes shell scripts defined by 'cmd' with optional
-  *                  parameter(s) 'param'. This function returns the result
-  *                  of the executed command.
-  *
-  * @exec(): executes a system command
-  * @output: an array filled with every line of the output from exec()
-  */
+   function shell_command($cmd, $params = '') {
+     $command = escapeshellcmd($cmd);
+     $parameters = escapeshellarg($params);
 
- function shell_command($cmd, $params = '') {
-   $command = escapeshellcmd($cmd);
-   $parameters = escapeshellarg($params);
+     exec("$command $parameters", $output);
+     return $output;
+   }
 
-   exec("$command $parameters", $output);
-   return $output;
  }
 
 ?>
