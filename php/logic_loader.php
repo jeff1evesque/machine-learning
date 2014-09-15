@@ -40,7 +40,7 @@
  $obj = new obj_data($_POST);
  $json = array();
 
- $obj->logic_loader($obj, $json);
+ $obj->logic_loader($json);
  print json_encode($json);
 
  /**
@@ -70,6 +70,7 @@
          $this->$key = $value;
        }
      }
+     $this->data = $arr;
    }
 
    /**
@@ -80,19 +81,19 @@
     * @json: 'reference' to the 'json' variable
     */
 
-   public function logic_loader($form, &$json) {
+   public function logic_loader(&$json) {
    // detect HTML5 'datalist' support
-     $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
+     $session_type = ($this->data->datalist_support) ? $this->data->svm_session : $this->data->session_type;
 
      if ($session_type == 'training') {
-       $result = $this->shell_command('python ../python/svm_training.py', json_encode($form));
+       $result = $this->shell_command('python ../python/svm_training.py', json_encode($this->data));
        $this->remove_quote( $result );
        $obj_result = new obj_data($result, true);
        $arr_result = array('result' => $obj_result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
      }
      elseif ($session_type == 'analysis') {
-       $result = $this->shell_command('python ../python/svm_analysis.py', json_encode($form));
+       $result = $this->shell_command('python ../python/svm_analysis.py', json_encode($this->data));
        $arr_result = array('result' => $result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
      }
