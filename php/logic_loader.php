@@ -70,7 +70,6 @@
          $this->$key = $value;
        }
      }
-     $this->data = $arr;
    }
 
    /**
@@ -83,17 +82,17 @@
 
    public function logic_loader(&$json) {
    // detect HTML5 'datalist' support
-     $session_type = ($this->data->datalist_support) ? $this->data->svm_session : $this->data->session_type;
+     $session_type = ($this->datalist_support) ? $this->svm_session : $this->session_type;
 
      if ($session_type == 'training') {
-       $result = $this->shell_command('python ../python/svm_training.py', json_encode($this->data));
+       $result = $this->shell_command('python ../python/svm_training.py', json_encode($this));
        $this->remove_quote( $result );
        $obj_result = new obj_data($result, true);
        $arr_result = array('result' => $obj_result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
      }
      elseif ($session_type == 'analysis') {
-       $result = $this->shell_command('python ../python/svm_analysis.py', json_encode($this->data));
+       $result = $this->shell_command('python ../python/svm_analysis.py', json_encode($this));
        $arr_result = array('result' => $result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
      }
