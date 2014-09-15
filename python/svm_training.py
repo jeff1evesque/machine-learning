@@ -42,4 +42,4 @@ if len(sys.argv) > 1:
   data = Training( sys.argv[1] )
 else:
   $msg = 'Please provide a training dataset in json format'
-  print json.dumps({'key1':$msg}, separators=(',', ': '))
+  print json.dumps({'error':$msg}, separators=(',', ': '))
