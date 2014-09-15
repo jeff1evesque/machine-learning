@@ -67,9 +67,11 @@ $(document).ready(function() {
       data : data_formatted,
       dataType : 'json',
       beforeSend: function() {
+  // ajax overlay
         ajaxLoader( $(event.currentTarget) );
       }
     }).done(function(data) {
+  // console logs
       console.log( data.msg_welcome );
       console.log( 'data.result.key1: ' + data.result.key1 );
       console.log( 'Overall JSON from Python: ' + JSON.stringify(data.result) );
@@ -86,6 +88,7 @@ $(document).ready(function() {
         $('form').prepend(msg_error);
       }
 
+  // remove ajax overlay
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function(jqXHR, textStatus, errorThrown) {
       $('form .fieldset_error').remove();
