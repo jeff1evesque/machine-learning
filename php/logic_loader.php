@@ -86,7 +86,7 @@
 
      if ($session_type == 'training') {
        $result = $this->shell_command('python ../python/svm_training.py', json_encode($form));
-       remove_quote( $result );
+       $this->remove_quote( $result );
        $obj_result = new obj_data($result, true);
        $arr_result = array('result' => $obj_result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
