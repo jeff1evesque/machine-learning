@@ -80,7 +80,7 @@
     * @json: 'reference' to the 'json' variable
     */
 
-   function logic_loader($form, &$json) {
+   public function logic_loader($form, &$json) {
    // detect HTML5 'datalist' support
      $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
@@ -111,7 +111,7 @@
     * @arr: passed-in array reference
     */
 
-   function remove_quote(&$arr) {
+   public function remove_quote(&$arr) {
      foreach ($arr as $key => $value) {
        $new_value = preg_replace('/^(\'(.*)\'|"(.*)")$/', '$2$3', $arr[$key]);
        $arr[$key] = $new_value;
@@ -127,7 +127,7 @@
     * @output: an array filled with every line of the output from exec()
     */
 
-   function shell_command($cmd, $params = '') {
+   public function shell_command($cmd, $params = '') {
      $command = escapeshellcmd($cmd);
      $parameters = escapeshellarg($params);
 
