@@ -40,7 +40,7 @@
  $obj = new obj_data($_POST);
  $json = array();
 
- logic_loader($obj, $json);
+ $obj->logic_loader($obj, $json);
  print json_encode($json);
 
  /**
