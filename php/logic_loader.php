@@ -71,35 +71,36 @@
        }
      }
    }
- }
 
- /**
-  * logic_loader(): receive the 'form_data' object, and determines the allocation
-  *                 of its properties as parameters to respective python scripts.
-  *
-  * @form: contains form data defined by 'form_data' class
-  * @json: 'reference' to the 'json' variable
-  */
+   /**
+    * logic_loader(): receive the 'form_data' object, and determines the allocation
+    *                 of its properties as parameters to respective python scripts.
+    *
+    * @form: contains form data defined by 'form_data' class
+    * @json: 'reference' to the 'json' variable
+    */
 
- function logic_loader($form, &$json) {
- // detect HTML5 'datalist' support
-   $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
+   function logic_loader($form, &$json) {
+   // detect HTML5 'datalist' support
+     $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
-   if ($session_type == 'training') {
-     $result = shell_command('python ../python/svm_training.py', json_encode($form));
-     remove_quote( $result );
-     $obj_result = new obj_data($result, true);
-     $arr_result = array('result' => $obj_result);
-     $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
+     if ($session_type == 'training') {
+       $result = shell_command('python ../python/svm_training.py', json_encode($form));
+       remove_quote( $result );
+       $obj_result = new obj_data($result, true);
+       $arr_result = array('result' => $obj_result);
+       $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
+     }
+     elseif ($session_type == 'analysis') {
+       $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
+       $arr_result = array('result' => $result);
+       $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
+     }
+     else {
+       print 'Error: ' . basename(__FILE__) . ', logic_loader()';
+     }
    }
-   elseif ($session_type == 'analysis') {
-     $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
-     $arr_result = array('result' => $result);
-     $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
-   }
-   else {
-     print 'Error: ' . basename(__FILE__) . ', logic_loader()';
-   }
+
  }
 
  /**
