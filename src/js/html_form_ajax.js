@@ -78,11 +78,11 @@ $(document).ready(function() {
 
   // server side error
       $('form .fieldset_error').remove();
-      if (typeof data.error !== 'undefined') {
+      if (typeof data.result.error !== 'undefined') {
         var msg_error = '\
             <fieldset class="fieldset_error">\
               <legend>Submission Error</legend>\
-              <p>Error: '+errorThrown+'</p>\
+              <p>Error: '+data.result.error+'</p>\
             </fieldset>\
           ';
         $('form').prepend(msg_error);
