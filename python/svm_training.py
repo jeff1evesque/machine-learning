@@ -41,4 +41,6 @@ if len(sys.argv) > 1:
   # instantiate 'Training' object
   data = Training( sys.argv[1] )
 else:
-  print 'Please provide a training dataset in json format'
+  $msg = 'Please provide a training dataset in json format'
+  print json.dumps({'error':$msg}, separators=(',', ': '))
+  sys.exit()
