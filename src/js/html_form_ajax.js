@@ -74,7 +74,18 @@ $(document).ready(function() {
       console.log( 'data.result.key1: ' + data.result.key1 );
       console.log( 'Overall JSON from Python: ' + JSON.stringify(data.result) );
 
+  // server side error
       $('form .fieldset_error').remove();
+      if (typeof data.error !== 'undefined') {
+        var msg_error = '\
+            <fieldset class="fieldset_error">\
+              <legend>Submission Error</legend>\
+              <p>Error: '+errorThrown+'</p>\
+            </fieldset>\
+          ';
+        $('form').prepend(msg_error);
+      }
+
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function(jqXHR, textStatus, errorThrown) {
       $('form .fieldset_error').remove();
