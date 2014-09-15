@@ -26,5 +26,6 @@ class Validator:
       try:
         json.loads(self.svm_data)
       except ValueError, e:
-        print 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
+        msg = 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
+        print json.dumps({'key1':msg}, separators=(',', ': '))
         sys.exit()
