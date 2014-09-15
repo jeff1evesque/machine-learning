@@ -85,14 +85,14 @@
      $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
      if ($session_type == 'training') {
-       $result = shell_command('python ../python/svm_training.py', json_encode($form));
+       $result = $this->shell_command('python ../python/svm_training.py', json_encode($form));
        remove_quote( $result );
        $obj_result = new obj_data($result, true);
        $arr_result = array('result' => $obj_result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
      }
      elseif ($session_type == 'analysis') {
-       $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
+       $result = $this->shell_command('python ../python/svm_analysis.py', json_encode($form));
        $arr_result = array('result' => $result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
      }
