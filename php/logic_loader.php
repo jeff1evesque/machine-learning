@@ -34,12 +34,16 @@
   */
 
  /**
+  * class properties
+  */
+
+ $json = array();
+
+ /**
   * instantiate 'obj_data' class
   */
 
  $obj = new obj_data($_POST);
- $json = array();
-
  $obj->logic_loader($json);
  print json_encode($json);
 
