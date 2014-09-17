@@ -50,13 +50,18 @@
   * @json_flag: a value of 'true' constructs a JSON friendly object, typically
   *             a response from the server side (i.e. Python).  A value of
   *             'false' constructs a simpler JSON friendly object (i.e form
-  *             POST data). 
+  *             POST data).
   */
 
  class obj_data {
-   public function __construct($arr, $json_flag = false) {
-     if ($json_flag) {
-       foreach ($arr as $key => $value) {
+   public function __construct($arr) {
+     $this->arr = $arr;
+   }
+
+   public function obj_creator($json_flag = false) {
+
+     if ( $json_flag !== false ) {
+       foreach ($this->arr as $key => $value) {
        // removes additional quotes
          $temp = json_decode($value);
        // use object key, and value, instead of parent values
@@ -66,7 +71,7 @@
        }
      }
      else {
-       foreach($arr as $key => $value) {
+       foreach($this->arr as $key => $value) {
          $this->$key = $value;
        }
      }
@@ -82,17 +87,18 @@
 
    public function logic_loader(&$json) {
    // detect HTML5 'datalist' support
-     $session_type = ($this->datalist_support) ? $this->svm_session : $this->session_type;
+     $form = $this->obj_creator();
+     $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
      if ($session_type == 'training') {
-       $result = $this->shell_command('python ../python/svm_training.py', json_encode($this));
-       $this->remove_quote( $result );
-       $obj_result = new obj_data($result, true);
-       $arr_result = array('result' => $obj_result);
+       $result = shell_command('python ../python/svm_training.py', json_encode($form));
+       $this->arr = $this->remove_quote( $result );
+       $obj_result = $this->obj_creator(true);
+       $arr_result = array('result' => $result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
      }
      elseif ($session_type == 'analysis') {
-       $result = $this->shell_command('python ../python/svm_analysis.py', json_encode($this));
+       $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
        $arr_result = array('result' => $result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
      }
