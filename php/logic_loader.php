@@ -44,7 +44,7 @@
   */
 
  $obj = new obj_data($_POST);
- logic_loader($obj, $json);
+ $obj->logic_loader($obj, $json);
  print json_encode($json);
 
  /**
@@ -80,7 +80,6 @@
        }
      }
    }
- }
 
  /**
   * logic_loader(): receive the 'form_data' object, and determines the allocation
@@ -90,26 +89,27 @@
   * @json: 'reference' to the 'json' variable
   */
 
- function logic_loader($form, &$json) {
- // detect HTML5 'datalist' support
-   $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
+   public function logic_loader($form, &$json) {
+   // detect HTML5 'datalist' support
+     $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
-   if ($session_type == 'training') {
-//     $result = shell_command('python ../python/svm_training.py', json_encode($form));
-//     remove_quote( $result );
+     if ($session_type == 'training') {
+//       $result = shell_command('python ../python/svm_training.py', json_encode($form));
+//       remove_quote( $result );
 
-//     $this->arr = $result;
-//     $obj_result = $this->obj_creator(true);
-//     $arr_result = array('result' => $obj_result);
-//     $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
-   }
-   elseif ($session_type == 'analysis') {
-     $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
-     $arr_result = array('result' => $result);
-     $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
-   }
-   else {
-     print 'Error: ' . basename(__FILE__) . ', logic_loader()';
+//       $this->arr = $result;
+//       $obj_result = $this->obj_creator(true);
+//       $arr_result = array('result' => $obj_result);
+//       $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
+     }
+     elseif ($session_type == 'analysis') {
+       $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
+       $arr_result = array('result' => $result);
+       $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
+     }
+     else {
+       print 'Error: ' . basename(__FILE__) . ', logic_loader()';
+     }
    }
  }
 
