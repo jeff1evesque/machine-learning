@@ -58,9 +58,14 @@
   */
 
  class obj_data {
-   public function __construct($arr, $json_flag = false) {
-     if ($json_flag) {
-       foreach ($arr as $key => $value) {
+   public function __construct($arr) {
+     $this->arr = $arr;
+     $this->obj_creator();
+   }
+
+   public function obj_creator($json_flag = false) {
+     if ($json_flag === true) {
+       foreach ($this->arr as $key => $value) {
        // removes additional quotes
          $temp = json_decode($value);
        // use object key, and value, instead of parent values
@@ -70,7 +75,7 @@
        }
      }
      else {
-       foreach($arr as $key => $value) {
+       foreach($this->arr as $key => $value) {
          $this->$key = $value;
        }
      }
@@ -90,11 +95,13 @@
    $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
 
    if ($session_type == 'training') {
-     $result = shell_command('python ../python/svm_training.py', json_encode($form));
-     remove_quote( $result );
-     $obj_result = new obj_data($result, true);
-     $arr_result = array('result' => $obj_result);
-     $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
+//     $result = shell_command('python ../python/svm_training.py', json_encode($form));
+//     remove_quote( $result );
+
+//     $this->arr = $result;
+//     $obj_result = $this->obj_creator(true);
+//     $arr_result = array('result' => $obj_result);
+//     $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
    }
    elseif ($session_type == 'analysis') {
      $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
