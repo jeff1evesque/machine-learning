@@ -34,26 +34,31 @@
   */
 
  /**
-  * instantiate 'obj_data' class
+  * global variables
   */
 
- $obj = new obj_data($_POST);
  $json = array();
 
- logic_loader($obj, $json);
+ /**
+  * instantiations
+  */
+
+ $obj_data = new Obj_Data($_POST);
+ $obj_loader = new Obj_Loader($obj_data);
+ $obj_loader->logic_loader($json);
  print json_encode($json);
 
  /**
-  * obj_data: copies array elements to object properties
+  * Class Obj_Data: copies array elements to object properties
   *
-  * @arr: the array containing the elements being copied
+  * @arr      : the array containing the elements being copied
   * @json_flag: a value of 'true' constructs a JSON friendly object, typically
   *             a response from the server side (i.e. Python).  A value of
   *             'false' constructs a simpler JSON friendly object (i.e form
-  *             POST data). 
+  *             POST data).
   */
 
- class obj_data {
+ class Obj_Data {
    public function __construct($arr, $json_flag = false) {
      if ($json_flag) {
        foreach ($arr as $key => $value) {
@@ -74,31 +79,45 @@
  }
 
  /**
-  * logic_loader(): receive the 'form_data' object, and determines the allocation
-  *                 of its properties as parameters to respective python scripts.
-  *
-  * @form: contains form data defined by 'form_data' class
-  * @json: 'reference' to the 'json' variable
+  * Class Obj_Loader: load proper SVM session
   */
 
- function logic_loader($form, &$json) {
- // detect HTML5 'datalist' support
-   $session_type = ($form->datalist_support) ? $form->svm_session : $form->session_type;
+ class Obj_Loader {
 
-   if ($session_type == 'training') {
-     $result = shell_command('python ../python/svm_training.py', json_encode($form));
-     remove_quote( $result );
-     $obj_result = new obj_data($result, true);
-     $arr_result = array('result' => $obj_result);
-     $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
+   /**
+    * constructor: stores form data
+    */
+
+   public function __construct($form) {
+     $this->form = $form;
    }
-   elseif ($session_type == 'analysis') {
-     $result = shell_command('python ../python/svm_analysis.py', json_encode($form));
-     $arr_result = array('result' => $result);
-     $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
-   }
-   else {
-     print 'Error: ' . basename(__FILE__) . ', logic_loader()';
+
+   /**
+    * logic_loader(): receive the 'form_data' object, and determines the allocation
+    *                 of its properties as parameters to respective python scripts.
+    *
+    * @json: 'reference' to the 'json' variable
+    */
+
+   public function logic_loader(&$json) {
+   // detect HTML5 'datalist' support
+     $session_type = ($this->form->datalist_support) ? $this->form->svm_session : $this->form->session_type;
+
+     if ($session_type == 'training') {
+       $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
+       remove_quote( $result );
+       $obj_result = new Obj_Data($result, true);
+       $arr_result = array('result' => $obj_result);
+       $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
+     }
+     elseif ($session_type == 'analysis') {
+       $result = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
+       $arr_result = array('result' => $result);
+       $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
+     }
+     else {
+       print 'Error: ' . basename(__FILE__) . ', logic_loader()';
+     }
    }
  }
 
