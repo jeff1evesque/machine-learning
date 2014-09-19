@@ -33,25 +33,18 @@
   *   @json_encode( value ), returns the JSON representation / object of 'value'.
   */
 
- /**
-  * import helper functions
-  */
-
+// helper functions
   include(dirname(__FILE__) . '/helper.php');
 
- /**
-  * global variables
-  */
-
+// global variables
  $json = array();
 
- /**
-  * instantiations
-  */
-
+// instantiate data / loader
  $obj_data = new Obj_Data($_POST);
  $obj_loader = new Obj_Loader($obj_data);
  $obj_loader->logic_loader($json);
+
+// return JSON array to AJAX
  print json_encode($json);
 
  /**
