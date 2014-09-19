@@ -99,7 +99,7 @@
     */
 
    public function logic_loader(&$json) {
-   // detect HTML5 'datalist' support
+   // session type corresponding on HTML5 'datalist' support
      $session_type = ($this->form->datalist_support) ? $this->form->svm_session : $this->form->session_type;
 
      if ($session_type == 'training') {
