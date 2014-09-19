@@ -34,6 +34,12 @@
   */
 
  /**
+  * import helper functions
+  */
+
+  include(dirname(__FILE__) . '/helper.php');
+
+ /**
   * global variables
   */
 
