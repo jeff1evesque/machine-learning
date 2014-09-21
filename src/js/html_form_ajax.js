@@ -71,9 +71,10 @@ $(document).ready(function() {
         ajaxLoader( $(event.currentTarget) );
       }
     }).done(function(data) {
-  // console logs
+  // JSON object from Server
+      json_server = ( !$.isEmptyObject( data.result ) ) ? JSON.stringify(data.result) : 'none';
       console.log( data.msg_welcome );
-      console.log( 'Overall JSON from Python: ' + JSON.stringify(data.result) );
+      console.log( 'JSON object from Server: ' + json_server );
 
   // server side error
       $('form .fieldset_error').remove();
