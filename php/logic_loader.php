@@ -111,7 +111,9 @@
      }
      elseif ($session_type == 'analysis') {
        $result = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
-       $arr_result = array('result' => $result);
+       remove_quote( $result );
+       $obj_result = new Obj_Data($result, true);
+       $arr_result = array('result' => $obj_result);
        $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
      }
      else {
