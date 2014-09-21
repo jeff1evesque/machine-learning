@@ -44,6 +44,13 @@
  *           Note: the returned data, 'data.key' can be further processed outside of
  *                 the 'console.log()' scope.
  *
+ *           @JSON.stringify( object, [, replacer [, space ]])
+ *               @object, the javascript object to convert into a JSON string
+ *               @replacer, an optional parameter (function, or array) that transforms
+ *                   the results.
+ *               @space, an optional parameter, which adds indentation, white space,
+ *                   and line break characters to the key-value JSON object.
+ *
  *   @defered.fail(function() {}), replaces the deprecated jqXHR.error() method. A
  *                    function, or array of functions, that are called when 'deferred'
  *                    is rejected.
