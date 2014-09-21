@@ -31,10 +31,11 @@
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
 import sys, json
+from data_validator import Validator
 
 if len(sys.argv) > 1:
   # validate input data is json format
-  validator = Validator( sys.argv[1], 'training' )
+  validator = Validator( sys.argv[1], 'analysis' )
   validator.data_validation()
 
 else:
