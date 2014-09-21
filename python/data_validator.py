@@ -1,9 +1,10 @@
 #!/usr/bin/python
 
 ## @data_validator.py
-#  This script performs various data sanitation on the form data, and 
+#  This script performs various data sanitation on input data, and 
 #  validates the same data to ensure that the SVM algorithm will work
-#  on the given dataset.
+#  on the given dataset.  This adds an extra layer of security,
+#  especially if the script later is used without a web interface.
 import json, sys
 
 ## Class: Validator
@@ -27,9 +28,3 @@ class Validator:
       msg = 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
       print json.dumps({'error':msg}, separators=(',', ': '))
       sys.exit()
-
-    # validate SVM session
-    if self.svm_session == 'training':
-      # training validation
-    elif self.svm_session == 'analysis':
-      # analysis validation
