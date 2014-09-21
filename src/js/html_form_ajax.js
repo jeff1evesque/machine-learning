@@ -44,6 +44,13 @@
  *           Note: the returned data, 'data.key' can be further processed outside of
  *                 the 'console.log()' scope.
  *
+ *           @JSON.stringify( object, [, replacer [, space ]])
+ *               @object, the javascript object to convert into a JSON string
+ *               @replacer, an optional parameter (function, or array) that transforms
+ *                   the results.
+ *               @space, an optional parameter, which adds indentation, white space,
+ *                   and line break characters to the key-value JSON object.
+ *
  *   @defered.fail(function() {}), replaces the deprecated jqXHR.error() method. A
  *                    function, or array of functions, that are called when 'deferred'
  *                    is rejected.
@@ -71,13 +78,14 @@ $(document).ready(function() {
         ajaxLoader( $(event.currentTarget) );
       }
     }).done(function(data) {
-  // console logs
+  // JSON object from Server
+      json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
       console.log( data.msg_welcome );
-      console.log( 'Overall JSON from Python: ' + JSON.stringify(data.result) );
+      console.log( 'JSON object from Server: ' + json_server );
 
   // server side error
       $('form .fieldset_error').remove();
-      if (typeof data.result.error !== 'undefined') {
+      if (data.hasOwnProperty('error')) {
         var msg_error = '\
             <fieldset class="fieldset_error">\
               <legend>Submission Error</legend>\
