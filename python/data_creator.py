@@ -3,7 +3,7 @@
 ## @data_creator.py
 import json
 
-## Class: Validator
+## Class: Training
 class Training:
 
   ## constructor:
