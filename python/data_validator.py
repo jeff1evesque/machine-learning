@@ -21,11 +21,15 @@ class Validator:
   ## data_validation():
   def data_validation(self):
 
-    # validates training session
+    try:
+      json.loads(self.svm_data)
+    except ValueError, e:
+      msg = 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
+      print json.dumps({'error':msg}, separators=(',', ': '))
+      sys.exit()
+
+    # validate SVM session
     if self.svm_session == 'training':
-      try:
-        json.loads(self.svm_data)
-      except ValueError, e:
-        msg = 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
-        print json.dumps({'error':msg}, separators=(',', ': '))
-        sys.exit()
+      # training validation
+    elif self.svm_session == 'analysis':
+      # analysis validation
