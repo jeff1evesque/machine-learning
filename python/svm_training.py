@@ -29,7 +29,7 @@
 #
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
-import sys
+import sys, json
 from data_creator import Training
 from data_validator import Validator
 
@@ -41,6 +41,6 @@ if len(sys.argv) > 1:
   # instantiate 'Training' object
   data = Training( sys.argv[1] )
 else:
-  $msg = 'Please provide a training dataset in json format'
-  print json.dumps({'error':$msg}, separators=(',', ': '))
+  msg = 'Please provide a training dataset in json format'
+  print json.dumps({'error':msg}, separators=(',', ': '))
   sys.exit()
