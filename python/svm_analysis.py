@@ -31,6 +31,7 @@
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
 import sys, json
+from data_creator import Analysis
 from data_validator import Validator
 
 if len(sys.argv) > 1:
