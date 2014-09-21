@@ -78,7 +78,7 @@ $(document).ready(function() {
 
   // server side error
       $('form .fieldset_error').remove();
-      if (typeof data.result.error !== 'undefined') {
+      if (data.hasOwnProperty('error')) {
         var msg_error = '\
             <fieldset class="fieldset_error">\
               <legend>Submission Error</legend>\
