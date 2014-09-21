@@ -71,8 +71,8 @@ $(document).ready(function() {
         ajaxLoader( $(event.currentTarget) );
       }
     }).done(function(data) {
-  // JSON object from Server
-      json_server = ( !$.isEmptyObject( data.result ) ) ? JSON.stringify(data.result) : 'none';
+  // JSON object from Server (Python)
+      json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data) : 'none';
       console.log( data.msg_welcome );
       console.log( 'JSON object from Server: ' + json_server );
 
