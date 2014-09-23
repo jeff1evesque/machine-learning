@@ -99,8 +99,14 @@
     */
 
    public function logic_loader(&$json) {
-   // session type corresponding on HTML5 'datalist' support
-     $session_type = ($this->form->datalist_support) ? $this->form->svm_session : $this->form->session_type;
+   // HTML5 'datalist' supported: use 'svm' value, remove counterpart
+     if ($this->form->datalist_support) {
+       $session_type = $this->form->svm_session;
+     }
+     else {
+   // HTML5 'datalist' not supported: use counterpart, remove 'svm value'
+       $session_type = $this->form->session_type;
+     }
 
      if ($session_type == 'training') {
        $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
