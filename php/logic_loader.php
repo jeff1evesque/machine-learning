@@ -110,11 +110,11 @@
      // Python returns JSON object
        if ( count((array)$obj_result) > 0 ) {
          $arr_result = array('result' => $obj_result);
-         $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
+         $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
        }
      // Python returns nothing
        else {
-         $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'));
+         $json = array_merge($json, array('msg_welcome' => 'Welcome to training'));
        }
      }
      elseif ($session_type == 'analysis') {
