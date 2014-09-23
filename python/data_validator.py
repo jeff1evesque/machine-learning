@@ -20,10 +20,12 @@ class Validator:
     self.svm_session = session_type.lower()
 
   ## data_validation():
+  #
+  #  @self.svm_data: decoded JSON object 
   def data_validation(self):
 
     try:
-      json.loads(self.svm_data)
+      self.svm_data = json.loads(self.svm_data)
     except ValueError, e:
       msg = 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
       print json.dumps({'error':msg}, separators=(',', ': '))
