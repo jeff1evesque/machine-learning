@@ -132,7 +132,7 @@
      }
      elseif ($session_type == 'analysis') {
      // Use HTML5 datalist fallback 'analysis_models'
-       $this->form->svm_analysis_models = $this->analysis_models;
+       $this->form->svm_analysis_models = $this->form->analysis_models;
        unset($this->form->analysis_models);
 
        $result = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
