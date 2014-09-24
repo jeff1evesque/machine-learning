@@ -99,24 +99,22 @@
     */
 
    public function logic_loader(&$json) {
-   // HTML5 'datalist' supported: remove counterpart
+   // HTML5 'datalist' supported: remove 'session_type'
      if ($this->form->datalist_support) {
        $session_type = $this->form->svm_session;
+       unset($this->form->session_type); 
      }
      else {
    // HTML5 'datalist' not supported: use counterpart, remove 'svm value'
        $session_type            = $this->form->session_type;
        $this->form->svm_session = $session_type;
-
-       if ($session_type == 'training') {
-         $this->form->svm_training_type   = $this->form->training_type;
-       }
-       else {
-         $this->form->svm_analysis_models = $this->analysis_models;
-       }
+       unset($this->form->session_type); 
      }
 
      if ($session_type == 'training') {
+       $this->form->svm_training_type   = $this->form->training_type;
+       unset($this->form->training_type);
+
        $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
        remove_quote( $result );
        $obj_result = new Obj_Data($result, true);
@@ -132,6 +130,9 @@
        }
      }
      elseif ($session_type == 'analysis') {
+       $this->form->svm_analysis_models = $this->analysis_models;
+       unset($this->form->analysis_models);
+
        $result = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
        remove_quote( $result );
        $obj_result = new Obj_Data($result, true);
