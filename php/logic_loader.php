@@ -113,6 +113,7 @@
 
      if ($session_type == 'training') {
      // Use HTML5 datalist fallback 'training_type'
+       $this->form->svm_training_type = $this->form->training_type;
        unset($this->form->training_type);
 
        $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
