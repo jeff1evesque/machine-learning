@@ -82,9 +82,9 @@ $(document).ready(function() {
               <fieldset class="fieldset_training_type">\
                 <legend>Training Type</legend>\
                 <p>Select whether the current training session is <i>classification</i>, or <i>regression</i>.</p>\
-                <input list="training_type" name="svm_model_type" placeholder="Training Type">\
-                <datalist id="training_type">\
-                  <select name="training_type" required>\
+                <input list="model_type" name="svm_model_type" placeholder="Training Type">\
+                <datalist id="model_type">\
+                  <select name="model_type" required>\
                     <option value="Classification">Classification</option>\
                     <option value="Regression">Regression</option>\
                   </select>\
