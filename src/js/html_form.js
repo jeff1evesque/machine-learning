@@ -16,7 +16,7 @@ $(document).ready(function() {
             <fieldset class="fieldset_select_model">\
               <legend>Select Model</legend>\
               <p>Select which previously stored analysis model to implement.</p>\
-              <input list="analysis_models" name="svm_analysis_models" placeholder="Analysis Model">\
+              <input list="analysis_models" name="svm_model_type" placeholder="Analysis Model">\
               <datalist id="analysis_models">\
                 <select name="analysis_models" required>\
                   <option value="Classification">Classification</option>\
@@ -82,7 +82,7 @@ $(document).ready(function() {
               <fieldset class="fieldset_training_type">\
                 <legend>Training Type</legend>\
                 <p>Select whether the current training session is <i>classification</i>, or <i>regression</i>.</p>\
-                <input list="training_type" name="svm_training_type" placeholder="Training Type">\
+                <input list="training_type" name="svm_model_type" placeholder="Training Type">\
                 <datalist id="training_type">\
                   <select name="training_type" required>\
                     <option value="Classification">Classification</option>\
@@ -96,7 +96,7 @@ $(document).ready(function() {
         build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type', '.fieldset_training_parameters', '.svm_form_submit']);
 
    // append 'Training Parameters' fieldset
-        $('.fieldset_training_type').on('input', 'input[name="svm_training_type"]', function() {
+        $('.fieldset_training_type').on('input', 'input[name="svm_model_type"]', function() {
           if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
             obj_form.training_parameters = '\
                 <fieldset class="fieldset_training_parameters">\
@@ -132,7 +132,7 @@ $(document).ready(function() {
     });
 
   // append 'Known Factors' fieldset
-    $('.fieldset_select_model').on('input', 'input[name="svm_analysis_models"]', function() {
+    $('.fieldset_select_model').on('input', 'input[name="svm_model_type"]', function() {
       if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
         obj_form.analysis = '\
             <fieldset class="fieldset_known_factors">\
