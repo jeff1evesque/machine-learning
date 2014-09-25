@@ -138,8 +138,8 @@ $(document).ready(function() {
             <fieldset class="fieldset_known_factors">\
               <legend>Known Factors</legend>\
               <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_indep_variable">\
-              <input type="button" value="Add more" class="add_element svm_analysis_indep_add">\
-              <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove">\
+              <input type="button" value="Add more" class="add_element svm_indep_variable_add">\
+              <input type="button" value="Remove" class="remove_element svm_indep_variable_remove">\
             </fieldset>\
           ';
         build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_form_submit']);
