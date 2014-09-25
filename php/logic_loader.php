@@ -133,6 +133,7 @@
      elseif ($session_type == 'analysis') {
      // Use HTML5 datalist fallback 'analysis_models'
        $this->form->svm_model_type = $this->form->model_type;
+       $this->form->svm_dataset_type = $this->form->dataset_type;
        unset($this->form->model_type);
        unset($this->form->dataset_type);
 
