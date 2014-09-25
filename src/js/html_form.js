@@ -16,9 +16,9 @@ $(document).ready(function() {
             <fieldset class="fieldset_select_model">\
               <legend>Select Model</legend>\
               <p>Select which previously stored analysis model to implement.</p>\
-              <input list="analysis_models" name="svm_model_type" placeholder="Analysis Model">\
-              <datalist id="analysis_models">\
-                <select name="analysis_models" required>\
+              <input list="model_type" name="svm_model_type" placeholder="Analysis Model">\
+              <datalist id="model_type">\
+                <select name="model_type" required>\
                   <option value="Classification">Classification</option>\
                   <option value="Regression">Regression</option>\
                 </select>\
