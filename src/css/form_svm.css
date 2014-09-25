@@ -3,7 +3,7 @@
  *               'Analysis'.
  */
 
-input[name='svm_dataset[]']:not(:first-of-type), input[name='svm_training_dep[]']:not(#svm_training_dep), input[name='svm_training_indep[]']:not(#svm_training_indep), input[name='svm_analysis_indep[]']:not(#svm_analysis_indep) {
+input[name='svm_dataset[]']:not(:first-of-type), input[name='svm_dep_variable[]']:not(#svm_dep_variable), input[name='svm_indep_variable[]']:not(#svm_indep_variable), input[name='svm_indep_variable[]']:not(#svm_indep_variable) {
   display:block;
 }
 
