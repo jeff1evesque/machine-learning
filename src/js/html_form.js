@@ -137,7 +137,7 @@ $(document).ready(function() {
         obj_form.analysis = '\
             <fieldset class="fieldset_known_factors">\
               <legend>Known Factors</legend>\
-              <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_analysis_indep">\
+              <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_indep_variable">\
               <input type="button" value="Add more" class="add_element svm_analysis_indep_add">\
               <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove">\
             </fieldset>\
