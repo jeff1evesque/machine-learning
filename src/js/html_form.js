@@ -105,7 +105,7 @@ $(document).ready(function() {
                   <input type="button" value="Add more" class="add_element svm_training_dep_add">\
                   <input type="button" value="Remove" class="remove_element svm_training_dep_remove">\
                   <hr>\
-                  <input type="text" name="svm_training_indep[]" placeholder="Independent Variable" id="svm_training_indep">\
+                  <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_training_indep">\
                   <input type="button" value="Add more" class="add_element svm_training_indep_add">\
                   <input type="button" value="Remove" class="remove_element svm_training_indep_remove">\
                 </fieldset>\
@@ -117,9 +117,9 @@ $(document).ready(function() {
             $(this).parent().parent().nextAll().remove();
           }
 
-          $('.fieldset_training_parameters').on('input', ['input[name="svm_dep_variable[]"], input[name="svm_training_indep[]"]'], function(e) {
+          $('.fieldset_training_parameters').on('input', ['input[name="svm_dep_variable[]"], input[name="svm_indep_variable[]"]'], function(e) {
             var flag_field_dep = field_determinant( $('input[name="svm_dep_variable[]"]') );
-            var flag_field_indep = field_determinant( $('input[name="svm_training_indep[]"]') );
+            var flag_field_indep = field_determinant( $('input[name="svm_indep_variable[]"]') );
 
             if (flag_field_dep && flag_field_indep) {
               obj_form.submit = '<input type="submit" class="svm_form_submit">';
