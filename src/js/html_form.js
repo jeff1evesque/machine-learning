@@ -137,7 +137,7 @@ $(document).ready(function() {
         obj_form.analysis = '\
             <fieldset class="fieldset_known_factors">\
               <legend>Known Factors</legend>\
-              <input type="text" name="svm_analysis_indep[]" placeholder="Independent Variable" id="svm_analysis_indep">\
+              <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_analysis_indep">\
               <input type="button" value="Add more" class="add_element svm_analysis_indep_add">\
               <input type="button" value="Remove" class="remove_element svm_analysis_indep_remove">\
             </fieldset>\
@@ -150,8 +150,8 @@ $(document).ready(function() {
       }
 
   // append 'Estimated Analysis' fieldset
-      $('.fieldset_known_factors').on('input change', 'input[name="svm_analysis_indep[]"]', function() {
-        var flag_field = field_determinant( $('input[name="svm_analysis_indep[]"]') );
+      $('.fieldset_known_factors').on('input change', 'input[name="svm_indep_variable[]"]', function() {
+        var flag_field = field_determinant( $('input[name="svm_indep_variable[]"]') );
 
         if ( $(this).val().length > 0 ) {
           obj_form.estimated_analysis = '\
