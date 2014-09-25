@@ -106,8 +106,8 @@ $(document).ready(function() {
                   <input type="button" value="Remove" class="remove_element svm_dep_variable_remove">\
                   <hr>\
                   <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_indep_variable">\
-                  <input type="button" value="Add more" class="add_element svm_training_indep_add">\
-                  <input type="button" value="Remove" class="remove_element svm_training_indep_remove">\
+                  <input type="button" value="Add more" class="add_element svm_indep_variable_add">\
+                  <input type="button" value="Remove" class="remove_element svm_indep_variable_remove">\
                 </fieldset>\
               ';
             build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
