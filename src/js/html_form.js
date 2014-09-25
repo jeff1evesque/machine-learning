@@ -101,7 +101,7 @@ $(document).ready(function() {
             obj_form.training_parameters = '\
                 <fieldset class="fieldset_training_parameters">\
                   <legend>' + $(this).val()  + ' Parameters</legend>\
-                  <input type="text" name="svm_dep_variable[]" placeholder="Dependent Variable" id="svm_training_dep">\
+                  <input type="text" name="svm_dep_variable[]" placeholder="Dependent Variable" id="svm_dep_variable">\
                   <input type="button" value="Add more" class="add_element svm_training_dep_add">\
                   <input type="button" value="Remove" class="remove_element svm_training_dep_remove">\
                   <hr>\
