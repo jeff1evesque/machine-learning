@@ -53,7 +53,7 @@ $(document).ready(function() {
     $(this).parent().nextAll().remove();
 
   // Remove 'submit' button
-    $('.svm_analysis_submit').remove();
+    $('.svm_form_submit').remove();
   }
 
 /**
