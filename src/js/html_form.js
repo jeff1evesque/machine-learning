@@ -102,8 +102,8 @@ $(document).ready(function() {
                 <fieldset class="fieldset_training_parameters">\
                   <legend>' + $(this).val()  + ' Parameters</legend>\
                   <input type="text" name="svm_dep_variable[]" placeholder="Dependent Variable" id="svm_dep_variable">\
-                  <input type="button" value="Add more" class="add_element svm_training_dep_add">\
-                  <input type="button" value="Remove" class="remove_element svm_training_dep_remove">\
+                  <input type="button" value="Add more" class="add_element svm_dep_variable_add">\
+                  <input type="button" value="Remove" class="remove_element svm_dep_variable_remove">\
                   <hr>\
                   <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_indep_variable">\
                   <input type="button" value="Add more" class="add_element svm_training_indep_add">\
