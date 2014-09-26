@@ -99,10 +99,25 @@
     */
 
    public function logic_loader(&$json) {
-   // session type corresponding on HTML5 'datalist' support
-     $session_type = ($this->form->datalist_support) ? $this->form->svm_session : $this->form->session_type;
+   // HTML5 datalist supported: remove 'session_type'
+     if ($this->form->datalist_support) {
+       $session_type = $this->form->svm_session;
+       unset($this->form->session_type); 
+     }
+     else {
+   // HTML5 datalist not supported: use counterpart, remove 'session_type'
+       $session_type            = $this->form->session_type;
+       $this->form->svm_session = $session_type;
+       unset($this->form->session_type); 
+     }
 
      if ($session_type == 'training') {
+     // Use HTML5 datalist fallback 'training_type'
+       $this->form->svm_model_type = $this->form->model_type;
+       $this->form->svm_dataset_type = $this->form->dataset_type;
+       unset($this->form->model_type);
+       unset($this->form->dataset_type);
+
        $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
        remove_quote( $result );
        $obj_result = new Obj_Data($result, true);
@@ -118,6 +133,10 @@
        }
      }
      elseif ($session_type == 'analysis') {
+     // Use HTML5 datalist fallback 'analysis_models'
+       $this->form->svm_model_type = $this->form->model_type;
+       unset($this->form->model_type);
+
        $result = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
        remove_quote( $result );
        $obj_result = new Obj_Data($result, true);
