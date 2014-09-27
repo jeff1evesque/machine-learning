@@ -32,8 +32,15 @@ class Validator:
       print json.dumps({'error':msg}, separators=(',', ': '))
       sys.exit()
 
+    # data validation on HTML5 'datalist' support
+    if self.svm_data['datalist_support'].lower() not in ['true', 'false']:
+      msg = '''Error: The submitted \'datalist_support\' value, \'''' + self.svm_data['datalist_support'] + '''\' must be a string value \'true\', or \'false\''''
+      print json.dumps({'error':msg}, separators=(',', ': '))
+
+    # data validation on 'svm_model_type'
+    if self.svm_data['svm_model_type'].lower() not in ['classification', 'regression']:
+      msg = '''Error: The submitted \'svm_model_type\' value, \'''' + self.svm_data['svm_model_type'] + '''\' must be a string value \'classification\', or \'regression\''''
+      print json.dumps({'error':msg}, separators=(',', ': '))
+
     # data validation on 'analysis' session
-    if self.svm_data['svm_session'] == 'analysis':
-      if self.svm_data['datalist_support'] not in ['true', 'false']:
-        msg = '''Error: The submitted \'datalist_support\' value, \'''' + self.svm_data['datalist_support'] + '''\' must be a string value \'true\', or \'false\''''
-        print json.dumps({'error':msg}, separators=(',', ': '))
+    if self.svm_data['svm_session'].lower() == 'analysis':
