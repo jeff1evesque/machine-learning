@@ -44,5 +44,8 @@ class Validator:
       print json.dumps({'error':msg}, separators=(',', ': '))
       sys.exit()
 
-    # data validation on 'analysis' session
-    if self.svm_data['svm_session'].lower() == 'analysis':
+    # data validation on 'svm_session'
+    if self.svm_data['svm_session'].lower() not in ['analysis', 'training']:
+      msg = '''Error: The submitted \'svm_session\' value, \'''' + self.svm_data['svm_session'] + '''\' must be a string value \'analysis\', or \'training\''''
+      print json.dumps({'error':msg}, separators=(',', ': '))
+      sys.exit()
