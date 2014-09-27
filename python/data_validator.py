@@ -5,7 +5,7 @@
 #  validates the same data to ensure that the SVM algorithm will work
 #  on the given dataset.  This adds an extra layer of security,
 #  especially if the script later is used without a web interface.
-import json, sys
+import json, sys, six
 
 ## Class: Validator
 class Validator:
@@ -52,8 +52,10 @@ class Validator:
 
     # data validation on 'svm_indep_variable'
     try:
-      if isinstance(self.svm_data['svm_indep_variable'], str):
-        print json.dumps({'error':'jeff'}, separators=(',', ': '))
-        sys.exit()
+        if not isinstance(self.svm_data['svm_indep_variable'][0], unicode):
+          msg = '''Error: The submitted \'svm_indep_variable\' value, \'''' + self.svm_data['svm_indep_variable'][0] + '''\' must be a unicode value'''
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          sys.exit()
     except:
-      print json.dumps({'error':'variable does not exist'}, separators=(',', ': '))
+      msg = '''Error: The required \'svm_indep_variable\' variable does not exist'''
+      print json.dumps({'error':msg}, separators=(',', ': '))
