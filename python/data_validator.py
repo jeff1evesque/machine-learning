@@ -24,9 +24,16 @@ class Validator:
   #  @self.svm_data: decoded JSON object 
   def data_validation(self):
 
+    # determine if input data is a JSON object
     try:
       self.svm_data = json.loads(self.svm_data)
     except ValueError, e:
-      msg = 'Error: The ' + self.svm_session + ' session requires a json formatted dataset as input'
+      msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
       print json.dumps({'error':msg}, separators=(',', ': '))
       sys.exit()
+
+    # data validation on 'analysis' session
+    if self.svm_data['svm_session'] == 'analysis':
+      if self.svm_data['datalist_support'] not in ['true', 'false']:
+        msg = '''Error: The submitted \'datalist_support\' value, \'''' + self.svm_data['datalist_support'] + '''\' must be a string value \'true\', or \'false\''''
+        print json.dumps({'error':msg}, separators=(',', ': '))
