@@ -45,7 +45,15 @@ class Validator:
       sys.exit()
 
     # data validation on 'svm_session'
-    if self.svm_data['svm_session'].lower() in ['analysis', 'training']:
+    if self.svm_data['svm_session'].lower() not in ['analysis', 'training']:
       msg = '''Error: The submitted \'svm_session\' value, \'''' + self.svm_data['svm_session'] + '''\' must be a string value \'analysis\', or \'training\''''
       print json.dumps({'error':msg}, separators=(',', ': '))
       sys.exit()
+
+    # data validation on 'svm_indep_variable'
+    try:
+      if isinstance(self.svm_data['svm_indep_variable'], str):
+        print json.dumps({'error':'jeff'}, separators=(',', ': '))
+        sys.exit()
+    except:
+      print json.dumps({'error':'variable does not exist'}, separators=(',', ': '))
