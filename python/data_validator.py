@@ -70,3 +70,6 @@ class Validator:
       except:
         msg = '''Error: The required \'svm_dep_variable\' variable does not exist'''
         print json.dumps({'error':msg}, separators=(',', ': '))
+
+    # data validation on 'svm_dataset_type'
+
