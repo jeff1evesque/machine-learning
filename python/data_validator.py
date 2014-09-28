@@ -52,7 +52,8 @@ class Validator:
 
     # data validation on 'svm_indep_variable'
     try:
-        if not isinstance(self.svm_data['svm_indep_variable'][0], unicode):
+      for idx, element in enumerate(self.svm_data['svm_indep_variable']):
+        if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
           msg = '''Error: The submitted \'svm_indep_variable\' value, \'''' + self.svm_data['svm_indep_variable'][0] + '''\' must be a unicode value'''
           print json.dumps({'error':msg}, separators=(',', ': '))
           sys.exit()
@@ -72,4 +73,4 @@ class Validator:
         print json.dumps({'error':msg}, separators=(',', ': '))
 
     # data validation on 'svm_dataset_type'
-
+    #print json.dumps({'error':self.svm_data['svm_dataset_type']}, separators=(',', ': '))
