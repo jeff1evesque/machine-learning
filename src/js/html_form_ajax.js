@@ -67,6 +67,16 @@ $(document).ready(function() {
     var data_formatted = $('form').serializeArray();
     data_formatted.push({ name: 'datalist_support', value: datalist_support });
 
+
+  // get 'svm_dataset[]' file upload
+    var dataset_array = new Array();
+
+    $('input[name="svm_dataset[]"]').each(function( index ) {
+      console.log(index);
+      dataset_array.push($('input[name="svm_dataset[]"]').eq(1).prop('files'));      
+    });
+    console.log(dataset_array);
+
   // ajax request
     $.ajax({
       url: $(this).attr('action'),
