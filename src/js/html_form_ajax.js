@@ -77,6 +77,7 @@ $(document).ready(function() {
       });
       console.log(dataset_array);
     }
+    data_formatted.push({ name: 'svm_dataset', value: dataset_array });
 
   // ajax request
     $.ajax({
