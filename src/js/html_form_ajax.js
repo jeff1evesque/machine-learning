@@ -69,13 +69,15 @@ $(document).ready(function() {
 
 
   // get 'svm_dataset[]' file upload
-    if ( $('input[name="svm_dataset[]"]').length > 0 ) {
+    var dataset = $('input[name="svm_dataset[]"]');
+    if ( dataset.length > 0 && dataset.type == 'file') {
       var dataset_array = new Array();
 
-      $('input[name="svm_dataset[]"]').each(function( index ) {
-        dataset_array.push($('input[name="svm_dataset[]"]').eq(index).prop('files'));      
+      $( dataset ).each(function( index ) {
+        dataset_array.push( dataset.eq(index).prop('files'));      
       });
       console.log(dataset_array);
+      console.log('jeff');
     }
 
   // ajax request
