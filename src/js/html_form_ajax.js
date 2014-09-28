@@ -72,7 +72,7 @@ $(document).ready(function() {
     var dataset_array = new Array();
 
     $('input[name="svm_dataset[]"]').each(function( index ) {
-      dataset_array.push($('input[name="svm_dataset[]"]').eq(1).prop('files'));      
+      dataset_array.push($('input[name="svm_dataset[]"]').eq(index).prop('files'));      
     });
     console.log(dataset_array);
 
