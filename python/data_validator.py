@@ -18,6 +18,7 @@ class Validator:
   def __init__(self, svm_data, session_type):
     self.svm_data = svm_data
     self.svm_session = session_type.lower()
+    self.flag_exit = False
 
   ## data_validation():
   #
@@ -56,9 +57,12 @@ class Validator:
         if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
           msg = '''Error: The submitted svm_indep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_indep_variable'][idx])
           print json.dumps({'error':msg}, separators=(',', ': '))
+          self.flag_exit = True
     except:
       msg = '''Error: The required \'svm_indep_variable\' value does not exist'''
       print json.dumps({'error':msg}, separators=(',', ': '))
+      sys.exit()
+    if self.flag_exit:
       sys.exit()
 
     # data validation on 'svm_dep_variable'
@@ -68,10 +72,13 @@ class Validator:
           if not isinstance(self.svm_data['svm_dep_variable'][idx], unicode):
             msg = '''Error: The submitted svm_dep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_dep_variable'][idx])
             print json.dumps({'error':msg}, separators=(',', ': '))
+            self.flag_exit = True
       except:
         msg = '''Error: The required \'svm_dep_variable\' value does not exist'''
         print json.dumps({'error':msg}, separators=(',', ': '))
         sys.exit()
+      if self.flag_exit:
+        sys.exit()
 
     # data validation on 'svm_dataset_type'
-    #print json.dumps({'error':self.svm_data['svm_dataset_type']}, separators=(',', ': '))
+    print json.dumps({'error':self.svm_data['svm_dataset_type']}, separators=(',', ': '))
