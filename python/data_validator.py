@@ -54,12 +54,15 @@ class Validator:
     try:
       for idx, element in enumerate(self.svm_data['svm_indep_variable']):
         if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
+          flag_exit = True
           msg = '''Error: The submitted \'svm_indep_variable\' value, \'''' + self.svm_data['svm_indep_variable'][0] + '''\' must be a unicode value'''
           print json.dumps({'error':msg}, separators=(',', ': '))
-          sys.exit()
     except:
       msg = '''Error: The required \'svm_indep_variable\' variable does not exist'''
       print json.dumps({'error':msg}, separators=(',', ': '))
+      flag_exit = True
+    if flag_exit == True:
+      sys.exit()
 
     # data validation on 'svm_dep_variable'
     if self.svm_data['svm_session'].lower() == 'training':
