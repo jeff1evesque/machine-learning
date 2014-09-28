@@ -64,7 +64,8 @@ class Validator:
     # data validation on 'svm_dep_variable'
     if self.svm_data['svm_session'].lower() == 'training':
       try:
-          if not isinstance(self.svm_data['svm_dep_variable'][0], unicode):
+        for idx, element in enumerate(self.svm_data['svm_dep_variable']):
+          if not isinstance(self.svm_data['svm_dep_variable'][idx], unicode):
             msg = '''Error: The submitted \'svm_dep_variable\' value, \'''' + self.svm_data['svm_dep_variable'][0] + '''\' must be a unicode value'''
             print json.dumps({'error':msg}, separators=(',', ': '))
             sys.exit()
