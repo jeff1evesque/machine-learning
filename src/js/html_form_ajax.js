@@ -72,7 +72,6 @@ $(document).ready(function() {
     var dataset_array = new Array();
 
     $('input[name="svm_dataset[]"]').each(function( index ) {
-      console.log(index);
       dataset_array.push($('input[name="svm_dataset[]"]').eq(1).prop('files'));      
     });
     console.log(dataset_array);
