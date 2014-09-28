@@ -70,7 +70,7 @@ $(document).ready(function() {
 
   // get 'svm_dataset[]' file upload
     var dataset = $('input[name="svm_dataset[]"]');
-    if ( dataset.length > 0 && dataset.type == 'file') {
+    if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
       var dataset_array = new Array();
 
       $( dataset ).each(function( index ) {
