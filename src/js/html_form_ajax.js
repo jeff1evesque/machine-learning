@@ -67,7 +67,6 @@ $(document).ready(function() {
     var data_formatted = $('form').serializeArray();
     data_formatted.push({ name: 'datalist_support', value: datalist_support });
 
-
   // get 'svm_dataset[]' file upload
     var dataset = $('input[name="svm_dataset[]"]');
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
