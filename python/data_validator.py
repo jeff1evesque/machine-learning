@@ -54,14 +54,11 @@ class Validator:
     try:
       for idx, element in enumerate(self.svm_data['svm_indep_variable']):
         if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
-          flag_exit = True
           msg = '''Error: The submitted svm_indep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_indep_variable'][idx])
           print json.dumps({'error':msg}, separators=(',', ': '))
     except:
-      flag_exit = True
       msg = '''Error: The required \'svm_indep_variable\' value does not exist'''
       print json.dumps({'error':msg}, separators=(',', ': '))
-    if flag_exit == True:
       sys.exit()
 
     # data validation on 'svm_dep_variable'
@@ -69,14 +66,11 @@ class Validator:
       try:
         for idx, element in enumerate(self.svm_data['svm_dep_variable']):
           if not isinstance(self.svm_data['svm_dep_variable'][idx], unicode):
-            flag_exit = True
             msg = '''Error: The submitted svm_dep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_dep_variable'][idx])
             print json.dumps({'error':msg}, separators=(',', ': '))
       except:
-        flag_exit = True
         msg = '''Error: The required \'svm_dep_variable\' value does not exist'''
         print json.dumps({'error':msg}, separators=(',', ': '))
-      if flag_exit == True:
         sys.exit()
 
     # data validation on 'svm_dataset_type'
