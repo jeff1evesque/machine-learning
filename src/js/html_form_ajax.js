@@ -77,7 +77,6 @@ $(document).ready(function() {
         dataset_array.push( dataset.eq(index).prop('files'));      
       });
       console.log(dataset_array);
-      console.log('jeff');
     }
 
   // ajax request
