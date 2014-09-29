@@ -28,7 +28,8 @@
     <script src='../../src/js/html_form.js'></script>
     <script src='../../src/js/html_form_delegator.js'></script>
     <script src='../../src/js/ajax_graphic.js'></script>
-    <script src='../../src/js/html_form_ajax.js'></script>
+    <script src='../../src/js/ajax_data.js'></script>
+    <script src='../../src/js/ajax_json.js'></script>
 
     <link rel='stylesheet' href='../../src/css/form_svm.css'>
   </head>
