@@ -67,7 +67,30 @@ $(document).ready(function() {
     var data_formatted = $('form').serializeArray();
     data_formatted.push({ name: 'datalist_support', value: datalist_support });
 
-  // ajax request
+  // store 'svm_dataset[]' file upload(s) into array
+    var dataset = $('input[name="svm_dataset[]"]');
+    if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
+      var dataset_array = new Array();
+
+      $( dataset ).each(function( index ) {
+        dataset_array.push( dataset.eq(index).prop('files'));      
+      });
+      console.log(dataset_array);
+    }
+    data_formatted.push({ name: 'svm_dataset', value: dataset_array });
+
+  // ajax request: 'svm_dataset[]' file upload field(s)
+    $.ajax({
+      url: '../../php/dataset.php',
+      type: 'POST',
+      data: dataset_array
+    }).done(function(data) {
+
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+
+    });
+
+  // ajax request: all other form fields
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
