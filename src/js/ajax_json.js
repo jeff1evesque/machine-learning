@@ -67,7 +67,7 @@ $(document).ready(function() {
     var data_formatted = $('form').serializeArray();
     data_formatted.push({ name: 'datalist_support', value: datalist_support });
 
-  // ajax request: all other form fields
+  // ajax request: form fields (except 'svm_dataset[]')
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
