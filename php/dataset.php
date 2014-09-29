@@ -5,6 +5,4 @@
  *              python scripts.
  */
 
- */
-
 ?>
