@@ -1,7 +1,6 @@
 /**
- * ajax_json.js: this script prevents the form to redirect upon submission to the
- *               'action' page.  Instead, ajax is used to relay the forms POST
- *               data to the 'action' script.
+ * ajax_json.js: this script utilizes ajax to relay the form POST data to a defined
+ *               'action' script.
  *
  *               This script implements the jquery 'event delegation' which attaches
  *               a single event listener to a parent element, and fires for all
