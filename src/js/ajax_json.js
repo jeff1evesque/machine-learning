@@ -1,14 +1,13 @@
 /**
- * html_form_ajax.js: this script prevents the form to redirect upon submission to
- *                    the 'action' page.  Instead, ajax is used to relay the forms
- *                    POST data to the 'action' script.
+ * ajax_json.js: this script utilizes ajax to relay the form POST data to a defined
+ *               'action' script, specifically using JSON strings.
  *
- *                    This script implements the jquery 'event delegation' which
- *                    attaches a single event listener to a parent element, and
- *                    fires for all descendants matching a selector.
+ *               This script implements the jquery 'event delegation' which attaches
+ *               a single event listener to a parent element, and fires for all
+ *               descendants matching a selector.
  *
  * @event.preventDefault, when this method is called, the default action of the
- *                    element will not be fired.
+ *               element will not be fired.
  *
  * @$.ajax( url [, settings] ), performs an asynchronous HTTP (Ajax) request.
  *   Required parameter -
@@ -67,30 +66,7 @@ $(document).ready(function() {
     var data_formatted = $('form').serializeArray();
     data_formatted.push({ name: 'datalist_support', value: datalist_support });
 
-  // store 'svm_dataset[]' file upload(s) into array
-    var dataset = $('input[name="svm_dataset[]"]');
-    if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
-      var dataset_array = new Array();
-
-      $( dataset ).each(function( index ) {
-        dataset_array.push( dataset.eq(index).prop('files'));      
-      });
-      console.log(dataset_array);
-    }
-    data_formatted.push({ name: 'svm_dataset', value: dataset_array });
-
-  // ajax request: 'svm_dataset[]' file upload field(s)
-    $.ajax({
-      url: '../../php/dataset.php',
-      type: 'POST',
-      data: dataset_array
-    }).done(function(data) {
-      console.log('Success: data upload');
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Fail: data upload');
-    });
-
-  // ajax request: all other form fields
+  // ajax request: form fields (except 'svm_dataset[]')
     $.ajax({
       url: $(this).attr('action'),
       type: 'POST',
