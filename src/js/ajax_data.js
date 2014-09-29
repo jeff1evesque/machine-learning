@@ -26,7 +26,7 @@ $(document).ready(function() {
     $.ajax({
       url: '../../php/dataset.php',
       type: 'POST',
-      data: dataset_array
+      data: arr_data,
     }).done(function(data) {
       console.log('Success: data upload');
     }).fail(function(jqXHR, textStatus, errorThrown) {
