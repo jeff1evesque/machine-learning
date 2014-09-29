@@ -1,6 +1,9 @@
 /**
  * ajax_data.js: this script utilizes ajax to relay the form POST data, specifically,
  *               'file uploads' to a defined 'action' script.
+ *
+ * Note: the implemented AJAX methods, and properties, are discussed more fully within
+ *       'ajax_json.js'
  */
 
 $(document).ready(function() {
