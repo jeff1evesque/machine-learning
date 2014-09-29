@@ -1,6 +1,6 @@
 /**
  * ajax_json.js: this script utilizes ajax to relay the form POST data to a defined
- *               'action' script.
+ *               'action' script, specifically using JSON strings.
  *
  *               This script implements the jquery 'event delegation' which attaches
  *               a single event listener to a parent element, and fires for all
