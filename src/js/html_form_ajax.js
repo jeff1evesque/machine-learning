@@ -85,9 +85,9 @@ $(document).ready(function() {
       type: 'POST',
       data: dataset_array
     }).done(function(data) {
-
+      console.log('Success: data upload');
     }).fail(function(jqXHR, textStatus, errorThrown) {
-
+      console.log('Fail: data upload');
     });
 
   // ajax request: all other form fields
