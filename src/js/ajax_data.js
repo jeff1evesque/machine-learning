@@ -7,7 +7,7 @@ $(document).ready(function() {
     event.preventDefault();
 
   // local variables
-    $arr_data = new Array();
+    var arr_data = new Array();
 
   // store 'file uploads' in array
     var dataset = $('input[name="svm_dataset[]"]');
