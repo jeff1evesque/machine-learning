@@ -18,7 +18,7 @@ $(document).ready(function() {
       console.log(arr_data);
     }
 
-  // ajax request: 'svm_dataset[]' file upload field(s)
+  // ajax request: 'svm_dataset[]' file upload(s)
     $.ajax({
       url: '../../php/dataset.php',
       type: 'POST',
