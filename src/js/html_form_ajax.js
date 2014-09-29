@@ -79,17 +79,6 @@ $(document).ready(function() {
     }
     data_formatted.push({ name: 'svm_dataset', value: dataset_array });
 
-  // ajax request: 'svm_dataset[]' file upload field(s)
-    $.ajax({
-      url: '../../php/dataset.php',
-      type: 'POST',
-      data: dataset_array
-    }).done(function(data) {
-      console.log('Success: data upload');
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Fail: data upload');
-    });
-
   // ajax request: all other form fields
     $.ajax({
       url: $(this).attr('action'),
