@@ -12,6 +12,7 @@ $(document).ready(function() {
 
   // local variables
     var arr_data = new Array();
+    var form_data = new FormData();
 
   // store 'file uploads' in array
     var dataset = $('input[name="svm_dataset[]"]');
