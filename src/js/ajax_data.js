@@ -17,7 +17,7 @@ $(document).ready(function() {
     var dataset = $('input[name="svm_dataset[]"]');
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
       $( dataset ).each(function( index ) {
-        arr_data.push( dataset.eq(index).prop('files'));
+        arr_data.push( dataset.eq(index).prop('files')[0]);
       });
       console.log(arr_data);
     }
