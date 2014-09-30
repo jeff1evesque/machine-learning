@@ -31,7 +31,7 @@ $(document).ready(function() {
       type: 'POST',
       data: arr_data,
     }).done(function(data) {
-      console.log('Success: data upload');
+      console.log('Success: data upload ' + data);
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Fail: data upload');
     });
