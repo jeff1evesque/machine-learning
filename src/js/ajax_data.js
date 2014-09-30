@@ -2,6 +2,10 @@
  * ajax_data.js: this script utilizes ajax to relay the form POST data, specifically,
  *               'file uploads' to a defined 'action' script.
  *
+ * @contentType, the content type used when sending data to the server. The Default is
+ *   'application/x-www-form-urlencoded'.  Setting this attribute to 'false', forces
+ *    jQuery not to add a 'Content-Type' header.
+ *
  * Note: the implemented AJAX methods, and properties, are discussed more fully within
  *       'ajax_json.js'
  */
