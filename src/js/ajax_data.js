@@ -29,7 +29,9 @@ $(document).ready(function() {
     $.ajax({
       url: '../../php/load_dataset.php',
       type: 'POST',
-      data: arr_data,
+      data: form_data,
+      contentType: false,
+      processData: false,
     }).done(function(data) {
       console.log('Success: data upload ' + data);
     }).fail(function(jqXHR, textStatus, errorThrown) {
