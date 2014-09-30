@@ -11,7 +11,6 @@ $(document).ready(function() {
     event.preventDefault();
 
   // local variables
-    var arr_data = new Array();
     var form_data = new FormData();
 
   // store 'file uploads' in array
