@@ -35,7 +35,7 @@
   </head>
   <body>
 
-    <form action='../../php/logic_loader.php' method='post'>
+    <form action='../../php/load_logic.php' method='post'>
 
       <fieldset class='fieldset_session_type'>
         <legend>Session Type</legend>
