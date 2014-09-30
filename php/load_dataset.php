@@ -5,4 +5,7 @@
  *              python scripts.
  */
 
+// global variables
+ $json = array();
+
 ?>
