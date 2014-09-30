@@ -12,12 +12,15 @@ $(document).ready(function() {
 
   // local variables
     var arr_data = new Array();
+    var form_data = new FormData();
+    var dataset = $('input[name="svm_dataset[]"]');
 
   // store 'file uploads' in array
-    var dataset = $('input[name="svm_dataset[]"]');
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
       $( dataset ).each(function( index ) {
-        arr_data.push( dataset.eq(index).prop('files'));
+        var file_data = dataset.eq(index).prop('files')[0];
+        form_data.append('file', file_data);
+        arr_data.push( form_data );
       });
       console.log(arr_data);
     }
@@ -28,7 +31,7 @@ $(document).ready(function() {
       type: 'POST',
       data: arr_data,
     }).done(function(data) {
-      console.log('Success: data upload');
+      console.log('Success: data upload ' + data);
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Fail: data upload');
     });
