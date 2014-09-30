@@ -6,6 +6,11 @@
  *   'application/x-www-form-urlencoded'.  Setting this attribute to 'false', forces
  *    jQuery not to add a 'Content-Type' header.
  *
+ * @processData, boolean value specifying whether or not data sent to server should be
+ *   transformed into a query string.  The default is 'true'.  Setting this value to
+ *   'false' tells jQuery not to convert the 'data' object into a serialized parameter
+ *   string, which would be done before sending the 'data' to the server.
+ *
  * Note: the implemented AJAX methods, and properties, are discussed more fully within
  *       'ajax_json.js'
  */
