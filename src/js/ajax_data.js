@@ -30,7 +30,7 @@ $(document).ready(function() {
         var file_data = dataset[index].files[0];
         form_data.append('file_data_' + index, file_data);
       });
-      console.log(arr_data);
+      console.log(form_data);
     }
 
   // ajax request: 'svm_dataset[]' file upload(s)
