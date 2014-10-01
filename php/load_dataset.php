@@ -10,5 +10,6 @@
 
 // return JSON array to AJAX
  print json_encode($json);
+ var_dump($_FILES);
 
 ?>
