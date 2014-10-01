@@ -21,7 +21,6 @@ $(document).ready(function() {
     event.preventDefault();
 
   // local variables
-    var arr_data = new Array();
     var form_data = new FormData();
     var dataset = $('input[name="svm_dataset[]"]');
 
@@ -30,7 +29,6 @@ $(document).ready(function() {
       $( dataset ).each(function( index ) {
         var file_data = dataset[index].files[0];
         form_data.append('file_data_' + index, file_data);
-        arr_data.push( form_data );
       });
       console.log(arr_data);
     }
