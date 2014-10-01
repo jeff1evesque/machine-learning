@@ -10,6 +10,8 @@
 
 // return JSON array to AJAX
  print json_encode($json);
+
+// return 'file upload(s)' to AJAX
  var_dump($_FILES);
 
 ?>
