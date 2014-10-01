@@ -39,7 +39,7 @@ $(document).ready(function() {
     $.ajax({
       url: '../../php/load_dataset.php',
       type: 'POST',
-      data: form_data,
+      data: arr_data,
       contentType: false,
       processData: false,
     }).done(function(data) {
