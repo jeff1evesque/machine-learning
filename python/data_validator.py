@@ -82,3 +82,7 @@ class Validator:
 
     # data validation on 'svm_dataset_type'
     print json.dumps({'error':self.svm_data['svm_dataset_type']}, separators=(',', ': '))
+
+  ## file_upload_validation():
+  def file_upload_validation(self):
+
