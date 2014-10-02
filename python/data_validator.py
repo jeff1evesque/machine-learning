@@ -15,7 +15,7 @@ class Validator:
   #  @svm_data    : is the input data, generally a form POST data, if
   #                 the 'session_type' is training.
   #  @session_type: represents the current session type
-  def __init__(self, svm_data, session_type):
+  def __init__(self, svm_data=None, session_type=None):
     self.svm_data = svm_data
     self.svm_session = session_type.lower()
     self.flag_exit = False
