@@ -5,12 +5,6 @@
  *              python scripts.
  */
 
-// global variables
-  $json = array();
-
-// return JSON array to AJAX
-  print json_encode($json);
-
 // debug: return 'file upload(s)' to AJAX
   var_dump($_FILES);
 
