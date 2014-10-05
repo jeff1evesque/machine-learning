@@ -6,14 +6,17 @@
  */
 
 // global variables
- $json = array();
+  $json = array();
 
 // return JSON array to AJAX
- print json_encode($json);
+  print json_encode($json);
 
 // debug: return 'file upload(s)' to AJAX
- var_dump($_FILES);
+  var_dump($_FILES);
 
-// send data to python
+// send 'file upload' to python
   $result = shell_command('python ../python/svm_training.py', $_FILES);
+
+// return Python Data to AJAX
+  print $result
 ?>
