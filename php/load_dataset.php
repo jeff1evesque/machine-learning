@@ -5,6 +5,9 @@
  *              python scripts.
  */
 
+// helper functions
+  include(dirname(__FILE__) . '/helper.php');
+
 // debug: return 'file upload(s)' to AJAX
   //var_dump($_FILES);
 
