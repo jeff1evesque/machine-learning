@@ -14,4 +14,6 @@
 // debug: return 'file upload(s)' to AJAX
  var_dump($_FILES);
 
+// send data to python
+  shell_command('python ../python/svm_training.py', $_FILES);
 ?>
