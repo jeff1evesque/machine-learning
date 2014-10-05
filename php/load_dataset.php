@@ -12,6 +12,6 @@
   $result = shell_command('python ../python/svm_training.py', $_FILES);
 
 // return Python Data to AJAX
-  print $result
+  print $result;
 
 ?>
