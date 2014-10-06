@@ -9,7 +9,7 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // debug: return 'file upload(s)' to AJAX
-  var_dump($_FILES);
+  //var_dump($_FILES);
 
 // local variables
   $file_name    = $_FILES['file_upload_0']['name'];
@@ -26,7 +26,7 @@
   ));
 
 // send 'file upload' to python
-  $result = shell_command('python ../python/svm_training.py', $json);
+  $result = shell_command('python ../python/svm_training.py');
 
 // return Python Data to AJAX
   print $result;
