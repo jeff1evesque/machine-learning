@@ -28,7 +28,7 @@ $(document).ready(function() {
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
       $( dataset ).each(function( index ) {
         var file_data = dataset[index].files[0];
-        form_data.append('file_data_' + index, file_data);
+        form_data.append('file_upload_' + index, file_data);
       });
       console.log(form_data);
     }
