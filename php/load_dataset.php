@@ -17,7 +17,13 @@
   $file_content = $_FILES['file_upload_0']['tmp_name'];
   $file_size    = $_FILES['file_upload_0']['size'];
 
-// create JSON encoded 'file upload'
+// JSON encoded 'file upload'
+  $json = json_encode(array(
+    'file_name'    => $file_name,
+    'file_type'    => $file_type,
+    'file_content' => $file_content,
+    'file_size'    => $file_size
+  ));
 
 // send 'file upload' to python
   $result = shell_command('python ../python/svm_training.py', $_FILES);
