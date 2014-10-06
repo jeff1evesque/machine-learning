@@ -11,11 +11,13 @@
 // debug: return 'file upload(s)' to AJAX
   var_dump($_FILES);
 
-// create JSON encoded 'file upload'
+// local variables
   $file_name    = $_FILES['file_upload_0']['name'];
   $file_type    = $_FILES['file_upload_0']['type'];
   $file_content = $_FILES['file_upload_0']['tmp_name'];
   $file_size    = $_FILES['file_upload_0']['size'];
+
+// create JSON encoded 'file upload'
 
 // send 'file upload' to python
   $result = shell_command('python ../python/svm_training.py', $_FILES);
