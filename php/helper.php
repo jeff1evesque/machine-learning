@@ -64,7 +64,7 @@
    $command = escapeshellcmd($cmd);
    $parameters = escapeshellarg($params);
 
-   exec("$command $parameters", $output);
+   exec("$command $parameters 2>&1", $output);
    return $output;
  }
 
