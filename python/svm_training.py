@@ -29,6 +29,6 @@
 #
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
-file = open("newfile.txt", "w")
-file.write(sys.argv[1])
-file.close()
+import sys
+
+print sys.argv[1]
