@@ -26,7 +26,7 @@
   ));
 
 // send 'file upload' to python
-  $result = shell_command('python ../python/svm_training.py', 'Hi, Jeff');
+  $result = shell_command('python ../python/svm_training.py', $_FILES);
 
 // return Python Data to AJAX
   print_r($result);
