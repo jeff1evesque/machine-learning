@@ -23,7 +23,7 @@
     'file_type'    => $file_type,
     'file_content' => $file_content,
     'file_size'    => $file_size,
-    'json_creator' => basename(__FILE__);
+    'json_creator' => basename(__FILE__),
   ));
 
 // send 'file upload' to python
