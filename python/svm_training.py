@@ -29,6 +29,18 @@
 #
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
-import sys
+import sys, json
+from data_creator import Training
+from data_validator import Validator
 
-print sys.argv[1]
+if len(sys.argv) > 1:
+  # validate input data is json format
+  validator = Validator( sys.argv[1], 'training' )
+  validator.data_validation()
+
+  # instantiate 'Training' object
+  data = Training( sys.argv[1] )
+else:
+  msg = 'Please provide a training dataset in json format'
+  print json.dumps({'error':msg}, separators=(',', ': '))
+  sys.exit()
