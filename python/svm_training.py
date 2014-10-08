@@ -36,10 +36,13 @@ from data_validator import Validator
 if len(sys.argv) > 1:
   # validate input data is json format
   validator = Validator( sys.argv[1], 'training' )
-  validator.data_validation()
 
-  # instantiate 'Training' object
-  data = Training( sys.argv[1] )
+  if ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
+    validator.file_upload_validation()
+  else:
+    # instantiate 'Training' object
+    validator.data_validation()
+    data = Training( sys.argv[1] )
 else:
   msg = 'Please provide a training dataset in json format'
   print json.dumps({'error':msg}, separators=(',', ': '))
