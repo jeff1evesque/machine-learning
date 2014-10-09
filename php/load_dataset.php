@@ -3,6 +3,9 @@
 /**
  * dataset.php: directs form POST data, specifically 'svm_dataset[]' to respective
  *              python scripts.
+ *
+ * @file_temp: is a temporary reference to the 'uploaded file'.  This reference exists
+ *   only for the duration of the current script, then it is automatically removed.
  */
 
 // helper functions
@@ -14,14 +17,14 @@
 // local variables
   $file_name    = $_FILES['file_upload_0']['name'];
   $file_type    = $_FILES['file_upload_0']['type'];
-  $file_content = $_FILES['file_upload_0']['tmp_name'];
+  $file_temp    = $_FILES['file_upload_0']['tmp_name'];
   $file_size    = $_FILES['file_upload_0']['size'];
 
 // JSON encoded 'file upload'
   $json = json_encode(array(
     'file_name'    => $file_name,
     'file_type'    => $file_type,
-    'file_content' => $file_content,
+    'file_temp'    => $file_temp,
     'file_size'    => $file_size,
     'json_creator' => basename(__FILE__),
   ));
