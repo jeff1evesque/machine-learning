@@ -14,14 +14,14 @@
 // local variables
   $file_name    = $_FILES['file_upload_0']['name'];
   $file_type    = $_FILES['file_upload_0']['type'];
-  $file_content = $_FILES['file_upload_0']['tmp_name'];
+  $file_pointer = $_FILES['file_upload_0']['tmp_name'];
   $file_size    = $_FILES['file_upload_0']['size'];
 
 // JSON encoded 'file upload'
   $json = json_encode(array(
     'file_name'    => $file_name,
     'file_type'    => $file_type,
-    'file_content' => $file_content,
+    'file_pointer' => $file_pointer,
     'file_size'    => $file_size,
     'json_creator' => basename(__FILE__),
   ));
