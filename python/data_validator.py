@@ -5,7 +5,7 @@
 #  validates the same data to ensure that the SVM algorithm will work
 #  on the given dataset.  This adds an extra layer of security,
 #  especially if the script later is used without a web interface.
-import json, sys, magic
+import json, sys
 
 ## Class: Validator
 class Validator:
