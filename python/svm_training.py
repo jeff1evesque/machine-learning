@@ -39,7 +39,7 @@ if len(sys.argv) > 1:
 
   # validate 'file upload'
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
-    validator.file_upload_validation()
+    validator.file_upload_validation( sys.argv[1] )
   # validate 'training' properties
   else:
     validator.data_validation()
