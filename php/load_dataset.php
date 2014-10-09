@@ -3,6 +3,9 @@
 /**
  * dataset.php: directs form POST data, specifically 'svm_dataset[]' to respective
  *              python scripts.
+ *
+ * @file_temp: is a temporary reference to the 'uploaded file'.  This reference exists
+ *   only for the duration of the current script, then it is automatically removed.
  */
 
 // helper functions
