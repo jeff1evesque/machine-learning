@@ -32,13 +32,6 @@
 // JSON encode 'arr_upload'
   $json = json_encode( $arr_upload );
 
-// JSON encoded 'file upload'
-  $json = json_encode(array(
-    'file_name'    => $file_name,
-    'file_temp'    => $file_temp,
-    'json_creator' => basename(__FILE__),
-  ));
-
 // send 'file upload' to python
   $result = shell_command('python ../python/svm_training.py', $json);
 
