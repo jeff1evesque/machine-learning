@@ -29,6 +29,9 @@
   }
   $arr_upload['json_creator'] = basename(__FILE__);
 
+// JSON encode 'arr_upload'
+  $json = json_encode( $arr_upload );
+
 // JSON encoded 'file upload'
   $json = json_encode(array(
     'file_name'    => $file_name,
