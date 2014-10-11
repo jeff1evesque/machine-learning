@@ -12,18 +12,26 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // debug: return 'file upload(s)' to AJAX
-  //var_dump($_FILES);
+  var_dump($_FILES);
 
 // local variables
-  $file_name    = $_FILES['file_upload_0']['name'];
-  $file_temp    = $_FILES['file_upload_0']['tmp_name'];
+  $arr_upload = Array();
 
-// JSON encoded 'file upload'
-  $json = json_encode(array(
-    'file_name'    => $file_name,
-    'file_temp'    => $file_temp,
-    'json_creator' => basename(__FILE__),
-  ));
+// add uploaded file properties to 'arr_upload'
+  $index = 0;
+  foreach ($_FILES as $val) {
+    $arr_upload['file_upload'][] = array(
+      'file_name' => $val['name'],
+      'file_temp' => $val['tmp_name'],
+    );
+    $index++;
+  }
+  $arr_upload['json_creator']    = basename(__FILE__);
+  $arr_upload['upload_quantity'] = count($_FILES);
+  unset($index);
+
+// JSON encode 'arr_upload'
+  $json = json_encode( $arr_upload );
 
 // send 'file upload' to python
   $result = shell_command('python ../python/svm_training.py', $json);
