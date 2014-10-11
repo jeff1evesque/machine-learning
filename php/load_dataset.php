@@ -21,7 +21,7 @@
   $index = 0;
   foreach ($_FILES as $val) {
     $arr_upload['file_upload'][] = array(
-      $_FILES['file_upload_' + $index]['name'] => $_FILES['file_upload_' + $index]['tmp_name'],
+      $val['name'] => $val['tmp_name'],
     );
     $index++;
   }
