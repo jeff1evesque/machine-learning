@@ -20,8 +20,8 @@
 // add uploaded file properties to 'arr_upload'
   $index = 0;
   foreach ($_FILES as $val) {
-    $arr_upload['file_upload'][] = array(
-      $_FILES['file_upload_' + index]['name'] => $_FILES['file_upload_' + index]['tmp_name'];
+    $arr_upload['file_upload'] = array(
+      $_FILES['file_upload_' + $index]['name'] => $_FILES['file_upload_' + $index]['tmp_name'];
     );
     $index++;
   }
