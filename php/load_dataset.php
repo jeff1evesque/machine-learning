@@ -28,7 +28,6 @@
   $arr_upload['json_creator']    = basename(__FILE__);
   $arr_upload['upload_quantity'] = count($_FILES);
   unset($index);
-  print_r($arr_upload);
 
 // JSON encode 'arr_upload'
   $json = json_encode( $arr_upload );
