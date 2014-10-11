@@ -23,10 +23,6 @@
     $index++;
   }
 
-// local variables
-  $file_name    = $_FILES['file_upload_0']['name'];
-  $file_temp    = $_FILES['file_upload_0']['tmp_name'];
-
 // JSON encoded 'file upload'
   $json = json_encode(array(
     'file_name'    => $file_name,
