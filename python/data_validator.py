@@ -5,7 +5,7 @@
 #  validates the same data to ensure that the SVM algorithm will work
 #  on the given dataset.  This adds an extra layer of security,
 #  especially if the script later is used without a web interface.
-import json, sys
+import json, sys, magic
 
 ## Class: Validator
 class Validator:
@@ -85,4 +85,5 @@ class Validator:
 
   ## file_upload_validation():
   def file_upload_validation(self, json_file_obj):
-    
+    print json.loads(json_file_obj)['file_temp']
+    print magic.from_file( json.loads(json_file_obj)['file_temp'] )
