@@ -13,7 +13,6 @@
 
 // debug: return 'file upload(s)' to AJAX
   var_dump($_FILES);
-  print count($_FILES);
 
 // local variables
   $arr_upload = Array();
