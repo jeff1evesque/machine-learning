@@ -25,8 +25,8 @@
     );
     $index++;
   }
-  $arr_upload['json_creator'] = basename(__FILE__);
-  $arr_upload['upload_quantity'] = $index;
+  $arr_upload['json_creator']    = basename(__FILE__);
+  $arr_upload['upload_quantity'] = count($_FILES);
   unset($index);
 
 // JSON encode 'arr_upload'
