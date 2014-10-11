@@ -90,3 +90,4 @@ class Validator:
       msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_name'] + '''\', must be one of the formats:'''
       msg += '\n       ' + ', '.join(acceptable_type)
       print msg
+      sys.exit()
