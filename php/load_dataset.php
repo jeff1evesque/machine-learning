@@ -12,7 +12,14 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // debug: return 'file upload(s)' to AJAX
-  //var_dump($_FILES);
+  var_dump($_FILES);
+  print count($_FILES);
+
+  $index = 0;
+  foreach ($_FILES as $val) {
+
+    $index++;
+  }
 
 // local variables
   $file_name    = $_FILES['file_upload_0']['name'];
