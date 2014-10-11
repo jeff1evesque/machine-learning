@@ -21,10 +21,9 @@
 // add uploaded file properties to 'arr_upload'
   $index = 0;
   foreach ($_FILES as $val) {
-    $file_name    = $_FILES['file_upload_' + index]['name'];
-    $file_temp    = $_FILES['file_upload_' + index]['tmp_name'];
-    $arr_upload[$file_name] = $file_temp;
-
+    $arr_upload['file_upload'][] = array(
+      $_FILES['file_upload_' + index]['name'] = $_FILES['file_upload_' + index]['tmp_name'];
+    );
     $index++;
   }
   $arr_upload['json_creator'] = basename(__FILE__);
