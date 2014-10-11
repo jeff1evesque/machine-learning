@@ -17,6 +17,8 @@
 
   $index = 0;
   foreach ($_FILES as $val) {
+    $file_name    = $_FILES['file_upload_' + index]['name'];
+    $file_temp    = $_FILES['file_upload_' + index]['tmp_name'];
 
     $index++;
   }
