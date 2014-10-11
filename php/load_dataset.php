@@ -23,6 +23,7 @@
   foreach ($_FILES as $val) {
     $file_name    = $_FILES['file_upload_' + index]['name'];
     $file_temp    = $_FILES['file_upload_' + index]['tmp_name'];
+    $arr_upload[$file_name] = $file_temp;
 
     $index++;
   }
