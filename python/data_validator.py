@@ -85,4 +85,4 @@ class Validator:
 
   ## file_upload_validation():
   def file_upload_validation(self, json_file_obj):
-    print magic.from_file( json.loads(json_file_obj)['file_temp'], mime=True )
+    acceptable_type = ['application/docx', 'application/doc', 'application/txt']
