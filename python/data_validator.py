@@ -89,3 +89,4 @@ class Validator:
     if ( magic.from_file( json.loads(json_file_obj)['file_temp'], mime=True ) not in acceptable_type ):
       msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_name'] + '''\', must be one of the formats:'''
       msg += '\n       ' + ', '.join(acceptable_type)
+      print msg
