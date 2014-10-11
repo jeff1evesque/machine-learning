@@ -15,6 +15,9 @@
   var_dump($_FILES);
   print count($_FILES);
 
+// local variables
+  $arr_upload = Array();
+
   $index = 0;
   foreach ($_FILES as $val) {
     $file_name    = $_FILES['file_upload_' + index]['name'];
