@@ -38,6 +38,9 @@ sudo apt-get install lamp-server^ phpmyadmin
 
 # Scikit Package(s):
 sudo apt-get install python-numpy
+
+# Python 'Magic':
+sudo pip install python-magic
 ```
 
 **Note:** This project assumes [Ubuntu Server 14.04](http://www.ubuntu.com/download/server) as the operating system.
