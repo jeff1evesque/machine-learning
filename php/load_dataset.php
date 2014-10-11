@@ -18,6 +18,7 @@
 // local variables
   $arr_upload = Array();
 
+// add uploaded file properties to 'arr_upload'
   $index = 0;
   foreach ($_FILES as $val) {
     $file_name    = $_FILES['file_upload_' + index]['name'];
