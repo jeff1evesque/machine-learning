@@ -87,3 +87,5 @@ class Validator:
   def file_upload_validation(self, json_file_obj):
     acceptable_type = ['application/docx', 'application/doc', 'application/txt']
     if ( magic.from_file( json.loads(json_file_obj)['file_temp'], mime=True ) not in acceptable_type ):
+      msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_name'] + '''\', must be one of the formats:'''
+      msg += '\n       ' + ', '.join(acceptable_type)
