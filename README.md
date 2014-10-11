@@ -39,7 +39,7 @@ sudo apt-get install lamp-server^ phpmyadmin
 # Scikit Package(s):
 sudo apt-get install python-numpy
 
-# Python 'Magic':
+# Python Magic:
 sudo pip install python-magic
 ```
 
