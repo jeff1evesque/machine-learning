@@ -88,8 +88,11 @@ class Validator:
     acceptable_type = ['application/txt', 'text/plain', 'text/csv']
 
     for index in range(len( json.loads(json_file_obj)['file_upload'] )):
-      if ( magic.from_file( json.loads(json_file_obj)['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
-        msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_upload'][index]['file_temp'] + '''\', must be one of the formats:'''
-        msg += '\n       ' + ', '.join(acceptable_type)
-        print msg
-        sys.exit()
+      try:
+        if ( magic.from_file( json.loads(json_file_obj)['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
+          msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_upload'][index]['file_temp'] + '''\', must be one of the formats:'''
+          msg += '\n       ' + ', '.join(acceptable_type)
+          print msg
+          sys.exit()
+      except:
+        msg = 'Error: We are experiencing problems with file upload #' + index + '. Please try to reupload the file'
