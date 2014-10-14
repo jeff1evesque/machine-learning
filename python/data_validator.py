@@ -86,7 +86,6 @@ class Validator:
   ## file_upload_validation():
   def file_upload_validation(self, json_file_obj):
     acceptable_type = ['application/txt', 'text/plain', 'text/csv']
-    file_quantity = len( json.loads(json_file_obj)['file_upload'] )
 
     for index in range(len( json.loads(json_file_obj)['file_upload'] )):
       if ( magic.from_file( json.loads(json_file_obj)['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
