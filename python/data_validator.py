@@ -89,8 +89,8 @@ class Validator:
     file_quantity = len( json.loads(json_file_obj)['file_upload'] )
 
     for index in range(len( json.loads(json_file_obj)['file_upload'] )):
-      if ( magic.from_file( json.loads(json_file_obj)['file_upload'][0]['file_temp'], mime=True ) not in acceptable_type ):
-        msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_upload'][0]['file_temp'] + '''\', must be one of the formats:'''
+      if ( magic.from_file( json.loads(json_file_obj)['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
+        msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_upload'][index]['file_temp'] + '''\', must be one of the formats:'''
         msg += '\n       ' + ', '.join(acceptable_type)
         print msg
         sys.exit()
