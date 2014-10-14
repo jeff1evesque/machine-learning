@@ -96,3 +96,5 @@ class Validator:
           sys.exit()
       except:
         msg = 'Error: We are experiencing problems with file upload #' + index + '. Please try to reupload the file'
+        print msg
+        sys.exit()
