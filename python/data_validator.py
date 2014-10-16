@@ -85,7 +85,8 @@ class Validator:
 
   ## file_upload_validation():
   def file_upload_validation(self, json_file_obj):
-    acceptable_type = ['application/txt', 'text/plain', 'text/csv']
+    acceptable_type   = ['application/txt', 'text/plain', 'text/csv']
+    list_file_uploads = []
 
     for index in range(len( json.loads(json_file_obj)['file_upload'] )):
       try:
@@ -95,7 +96,7 @@ class Validator:
           msg += '\n       ' + ', '.join(acceptable_type)
           print msg
           sys.exit()
-        # ensure unique file uploads
+        # add file reference to 'list'
       except:
         msg = 'Error: problem with file upload #' + index + '. Please re-upload the file.'
         print msg
