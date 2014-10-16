@@ -1,3 +1,6 @@
 [submodule "scikit-learn"]
 	path = scikit-learn
 	url = git://github.com/scikit-learn/scikit-learn.git
+[submodule "jquery-validation"]
+	path = jquery-validation
+	url = https://github.com/jzaefferer/jquery-validation
