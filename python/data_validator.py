@@ -101,3 +101,5 @@ class Validator:
         msg = 'Error: problem with file upload #' + index + '. Please re-upload the file.'
         print msg
         sys.exit()
+
+      # ensure unique file uploads
