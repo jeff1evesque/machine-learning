@@ -89,6 +89,7 @@ class Validator:
 
     for index in range(len( json.loads(json_file_obj)['file_upload'] )):
       try:
+        # validate file format
         if ( magic.from_file( json.loads(json_file_obj)['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
           msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_upload'][index]['file_temp'] + '''\', must be one of the formats:'''
           msg += '\n       ' + ', '.join(acceptable_type)
@@ -98,3 +99,4 @@ class Validator:
         msg = 'Error: problem with file upload #' + index + '. Please re-upload the file.'
         print msg
         sys.exit()
+v
