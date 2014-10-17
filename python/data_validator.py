@@ -99,7 +99,7 @@ class Validator:
         # add file reference to 'list'
         list_file_uploads[index] = json.loads(json_file_obj)['file_upload'][index]['file_temp']
       except:
-        msg = 'Error: problem with file upload #' + index + '. Please re-upload the file.'
+        msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
         print msg
         sys.exit()
 
