@@ -29,4 +29,6 @@ def duplicate_list_index(list_to_check):
   dict_elements = collections.defaultdict(list_to_check)
   for index, value in enumerate(list_to_check):
     dic_elements[value].append(index)
+
+  # remove non-duplicates from dictionary
   return duplicates
