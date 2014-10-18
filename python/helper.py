@@ -34,4 +34,4 @@ def duplicate_list_index(list_to_check):
   for key, value in dic_duplicates.iteritems():
     if ( len(value) <= 1 ):
       del dic_duplicates[key]
-  return duplicates
+  return dic_duplicates
