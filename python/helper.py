@@ -2,7 +2,7 @@
 
 ## @helper.py
 #  This file contains helper functions.
-import hashlib
+import hashlib, collections
 
 ## md5_for_file: Convert a file to a hash value, equivalent. Note,
 #                block size directly depends on the block size of
