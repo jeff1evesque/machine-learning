@@ -105,3 +105,4 @@ class Validator:
         sys.exit()
 
     # ensure unique file uploads
+    print list_file_uploads
