@@ -97,7 +97,7 @@ class Validator:
           msg += '\n       ' + ', '.join(acceptable_type)
           print msg
           sys.exit()
-        # add file reference to 'list'
+        # add 'hashed' value of file reference(s) to a list
         list_file_upload.insert( index, md5_for_file(json.loads(json_file_obj)['file_upload'][index]['file_temp']) )
       except:
         msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
