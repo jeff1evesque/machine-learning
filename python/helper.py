@@ -17,3 +17,7 @@ def md5_for_file(path, block_size=256*128, hr=False):
   return md5.digest()
 
 def duplicate_list_index(list_to_check):
+  duplicates = collections.defaultdict(list_to_check)
+  for index, value in enumerate(list_to_check):
+    duplicates[value].append(index)
+  return duplicates
