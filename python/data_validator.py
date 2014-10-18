@@ -6,6 +6,7 @@
 #  on the given dataset.  This adds an extra layer of security,
 #  especially if the script later is used without a web interface.
 import json, sys, magic
+from helper import md5_for_file
 
 ## Class: Validator
 class Validator:
