@@ -15,3 +15,5 @@ def md5_for_file(path, block_size=256*128, hr=False):
   if hr:
     return md5.hexdigest()
   return md5.digest()
+
+def duplicate_list_index(list_to_check):
