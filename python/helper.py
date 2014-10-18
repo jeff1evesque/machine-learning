@@ -4,9 +4,9 @@
 #  This file contains helper functions.
 import hashlib, collections
 
-## md5_for_file: Convert a file to a hash value, equivalent. Note,
-#                block size directly depends on the block size of
-#                the filesystem.
+## md5_for_file: Convert the contents of a given file to a hash value,
+#                equivalent. Note, block size directly depends on the
+#                block size of the filesystem.
 def md5_for_file(path, block_size=256*128, hr=False):
   md5 = hashlib.md5()
   with open(path,'rb') as f: 
