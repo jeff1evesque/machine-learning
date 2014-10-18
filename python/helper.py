@@ -26,12 +26,12 @@ def md5_for_file(path, block_size=256*128, hr=False):
 #    {'A': [0, 3, 5, 7], 'R': [2, 9], 'B': [1, 8], 'C': [4], 'D': [6]}
 def duplicate_list_index(list_to_check):
   # store each element instance into dictionary
-  dict_elements = collections.defaultdict(list_to_check)
+  dict_duplicates = collections.defaultdict(list_to_check)
   for index, value in enumerate(list_to_check):
-    dic_elements[value].append(index)
+    dic_duplicates[value].append(index)
 
   # remove non-duplicates from dictionary
-  for key, value in dic_elements.iteritems():
+  for key, value in dic_duplicates.iteritems():
     if ( len(value) <= 1 ):
-      del dic_elements[key]
+      del dic_duplicates[key]
   return duplicates
