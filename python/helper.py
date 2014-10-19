@@ -26,7 +26,7 @@ def md5_for_file(path, block_size=256*128, hr=False):
 #    {'A': [0, 3, 5, 7], 'R': [2, 9], 'B': [1, 8]}
 def duplicate_list_index(list_to_check):
   # store each element instance into dictionary
-  dict_duplicates = collections.defaultdict(list_to_check)
+  dict_duplicates = collections.defaultdict(list)
   for index, value in enumerate(list_to_check):
     dict_duplicates[value].append(index)
 
