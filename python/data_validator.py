@@ -7,6 +7,7 @@
 #  especially if the script later is used without a web interface.
 import json, sys, magic
 from helper import md5_for_file
+from helper import duplicate_list_index
 
 ## Class: Validator
 class Validator:
