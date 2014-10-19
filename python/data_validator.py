@@ -88,20 +88,20 @@ class Validator:
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
   #                            with duplicate 'file upload' references removed.
   def file_upload_validation(self, json_file_obj):
-    json_file_upload  = json.loads(json_file_obj)
+    json_data         = json.loads(json_file_obj)
     acceptable_type   = ['application/txt', 'text/plain', 'text/csv']
     list_file_upload  = []
 
-    for index in range(len( json.loads(json_file_obj)['file_upload'] )):
+    for index in range(len( json_data['file_upload'] )):
       try:
         # validate file format
-        if ( magic.from_file( json_file_upload['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
-          msg =  '''Error: Uploaded file, \'''' + json_file_upload['file_upload'][index]['file_temp'] + '''\', must be one of the formats:'''
+        if ( magic.from_file( json_data['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
+          msg =  '''Error: Uploaded file, \'''' + json_data['file_upload'][index]['file_temp'] + '''\', must be one of the formats:'''
           msg += '\n       ' + ', '.join(acceptable_type)
           print msg
           sys.exit()
         # add 'hashed' value of file reference(s) to a list
-        list_file_upload.insert( index, md5_for_file(json_file_upload['file_upload'][index]['file_temp']) )
+        list_file_upload.insert( index, md5_for_file(json_data['file_upload'][index]['file_temp']) )
       except:
         msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
         print msg
@@ -111,4 +111,4 @@ class Validator:
     duplicate_indexes = duplicate_list_index( list_file_upload )
     for hash_value, duplicate_index in duplicate_indexes.items():
       for key, index_remove in enumerate(duplicate_index):
-        del json_file_upload['file_upload'][index_remove]
+        del json_data['file_upload'][index_remove]
