@@ -110,4 +110,4 @@ class Validator:
     # remove duplicate file upload(s)
     duplicate_indexes = duplicate_list_index( list_file_upload )
     for key, index_remove in enumerate(duplicate_indexes):
-      del json_data['file_upload'][index_remove]
+      #del json_data['file_upload'][index_remove]
