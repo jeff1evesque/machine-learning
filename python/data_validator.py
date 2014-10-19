@@ -109,4 +109,4 @@ class Validator:
     duplicate_indexes = duplicate_list_index( list_file_upload )
     for hash_value, duplicate_index in duplicate_indexes.items():
       for key, index_remove in enumerate(duplicate_index):
-        del json.loads(json_file_obj)['file_upload'][index]
+        del json.loads(json_file_obj)['file_upload'][index_remove]
