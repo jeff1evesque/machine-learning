@@ -112,4 +112,6 @@ class Validator:
     for key, index_remove in duplicate_indexes.iteritems():
       for key, value in enumerate(index_remove):
         print value
-        del json_data['file_upload'][value]
+        #del json_data['file_upload'][value]
+
+    print json_data['file_upload'][3]
