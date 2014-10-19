@@ -90,6 +90,7 @@ class Validator:
   def file_upload_validation(self, json_file_obj):
     acceptable_type   = ['application/txt', 'text/plain', 'text/csv']
     list_file_upload  = []
+    obj_json = json.loads(json_file_obj)
 
     for index in range(len( json.loads(json_file_obj)['file_upload'] )):
       try:
