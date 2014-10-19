@@ -85,7 +85,8 @@ class Validator:
     # data validation on 'svm_dataset_type'
     print json.dumps({'error':self.svm_data['svm_dataset_type']}, separators=(',', ': '))
 
-  ## file_upload_validation():
+  ## file_upload_validation(): validate 'file upload' MIME type, and returns JSON object
+  #                            with duplicate 'file upload' references removed.
   def file_upload_validation(self, json_file_obj):
     acceptable_type   = ['application/txt', 'text/plain', 'text/csv']
     list_file_upload  = []
