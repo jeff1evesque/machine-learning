@@ -106,3 +106,4 @@ class Validator:
         sys.exit()
 
     # ensure unique file uploads
+    duplicate_indexes = duplicate_list_index( list_file_upload )
