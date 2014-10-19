@@ -28,7 +28,7 @@ def duplicate_list_index(list_to_check):
   # store each element instance into dictionary
   dict_duplicates = collections.defaultdict(list)
   for key, value in enumerate(list_to_check):
-    dict_duplicates[key].append(value)
+    dict_duplicates[value].append(key)
 
   # remove non-duplicates from dictionary
   for key, value in dict_duplicates.iteritems():
