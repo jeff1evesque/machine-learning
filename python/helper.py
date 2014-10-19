@@ -31,7 +31,7 @@ def duplicate_list_index(list_to_check):
     dict_duplicates[value].append(key)
 
   # remove non-duplicates from dictionary
-  for key, value in dict_duplicates.iteritems():
+  for key, value in dict_duplicates.items():
     if ( len(value) <= 1 ):
       del dict_duplicates[key]
   return dict_duplicates
