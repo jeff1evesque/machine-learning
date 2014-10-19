@@ -114,4 +114,4 @@ class Validator:
         print value
         #del json_data['file_upload'][value]
 
-    print json_data['file_upload'][3]
+    print json_data['file_upload']
