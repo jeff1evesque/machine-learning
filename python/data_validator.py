@@ -113,7 +113,7 @@ class Validator:
         print msg
         sys.exit()
 
-    # remove duplicate file upload(s)
+    # replace portion of JSON with unique 'file reference(s)'
     json_data['file_upload'][:] = json_keep
 
     print json_data['file_upload']
