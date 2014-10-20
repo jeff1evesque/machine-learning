@@ -95,13 +95,13 @@ class Validator:
     for index, filedata in enumerate( json_data['file_upload'] ):
       try:
         # validate file format
-        if ( magic.from_file( json_data['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
-          msg =  '''Error: Uploaded file, \'''' + json_data['file_upload'][index]['file_temp'] + '''\', must be one of the formats:'''
+        if ( magic.from_file( filedata['file_temp'], mime=True ) not in acceptable_type ):
+          msg =  '''Error: Uploaded file, \'''' + filedata[index]['file_temp'] + '''\', must be one of the formats:'''
           msg += '\n       ' + ', '.join(acceptable_type)
           print msg
           sys.exit()
         # add 'hashed' value of file reference(s) to a list
-        list_file_upload.insert( index, md5_for_file(json_data['file_upload'][index]['file_temp']) )
+        list_file_upload.insert( index, md5_for_file(filedata['file_temp']) )
       except:
         msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
         print msg
@@ -115,4 +115,3 @@ class Validator:
         #del json_data['file_upload'][value]
 
     print json_data['file_upload']
-v
