@@ -92,7 +92,7 @@ class Validator:
     acceptable_type   = ['application/txt', 'text/plain', 'text/csv']
     list_file_upload  = []
 
-    for index in range(len( json_data['file_upload'] )):
+    for index, filedata in enumerate( json_data['file_upload'] ):
       try:
         # validate file format
         if ( magic.from_file( json_data['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
@@ -115,3 +115,4 @@ class Validator:
         #del json_data['file_upload'][value]
 
     print json_data['file_upload']
+v
