@@ -6,6 +6,8 @@
 #  on the given dataset.  This adds an extra layer of security,
 #  especially if the script later is used without a web interface.
 import json, sys, magic
+from helper import md5_for_file
+from helper import duplicate_list_index
 
 ## Class: Validator
 class Validator:
@@ -83,18 +85,34 @@ class Validator:
     # data validation on 'svm_dataset_type'
     print json.dumps({'error':self.svm_data['svm_dataset_type']}, separators=(',', ': '))
 
-  ## file_upload_validation():
+  ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
+  #                            with duplicate 'file upload' references removed.
   def file_upload_validation(self, json_file_obj):
-    acceptable_type = ['application/txt', 'text/plain', 'text/csv']
+    json_data        = json.loads(json_file_obj)
+    acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
 
-    for index in range(len( json.loads(json_file_obj)['file_upload'] )):
+    set_unique_hash  = set()
+    json_keep        = []
+
+    for index, filedata in enumerate( json_data['file_upload'] ):
       try:
-        if ( magic.from_file( json.loads(json_file_obj)['file_upload'][index]['file_temp'], mime=True ) not in acceptable_type ):
-          msg =  '''Error: Uploaded file, \'''' + json.loads(json_file_obj)['file_upload'][index]['file_temp'] + '''\', must be one of the formats:'''
+        # validate file format
+        if ( magic.from_file( filedata['file_temp'], mime=True ) not in acceptable_type ):
+          msg =  '''Error: Uploaded file, \'''' + filedata[index]['file_temp'] + '''\', must be one of the formats:'''
           msg += '\n       ' + ', '.join(acceptable_type)
           print msg
           sys.exit()
+
+        filehash = md5_for_file(filedata['file_temp'])
+        # add 'hashed' value of file reference(s) to a list
+        if filehash not in set_unique_hash:
+          set_unique_hash.add(filehash)
+          json_keep.append(filedata)
       except:
-        msg = 'Error: problem with file upload #' + index + '. Please re-upload the file.'
+        msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
         print msg
         sys.exit()
+
+    # replace portion of JSON with unique 'file reference(s)'
+    json_data['file_upload'][:] = json_keep
+    return json_data
