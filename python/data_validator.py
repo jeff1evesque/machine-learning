@@ -100,6 +100,8 @@ class Validator:
           msg += '\n       ' + ', '.join(acceptable_type)
           print msg
           sys.exit()
+
+        filehash = md5_for_file(filedata['file_temp'])
         # add 'hashed' value of file reference(s) to a list
         list_file_upload.insert( index, md5_for_file(filedata['file_temp']) )
       except:
