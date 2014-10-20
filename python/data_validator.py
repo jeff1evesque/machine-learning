@@ -115,5 +115,4 @@ class Validator:
 
     # replace portion of JSON with unique 'file reference(s)'
     json_data['file_upload'][:] = json_keep
-
-    print json_data['file_upload']
+    return json_data
