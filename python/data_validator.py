@@ -90,7 +90,8 @@ class Validator:
   def file_upload_validation(self, json_file_obj):
     json_data         = json.loads(json_file_obj)
     acceptable_type   = ['application/txt', 'text/plain', 'text/csv']
-    list_file_upload  = []
+
+    set_unique_hash   = set()
 
     for index, filedata in enumerate( json_data['file_upload'] ):
       try:
@@ -103,7 +104,8 @@ class Validator:
 
         filehash = md5_for_file(filedata['file_temp'])
         # add 'hashed' value of file reference(s) to a list
-        list_file_upload.insert( index, md5_for_file(filedata['file_temp']) )
+        if filehash not in set_unique_hash:
+          set_unique_hash.insert( index, md5_for_file(filedata['file_temp']) )
       except:
         msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
         print msg
