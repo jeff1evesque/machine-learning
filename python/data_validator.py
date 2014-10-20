@@ -105,7 +105,7 @@ class Validator:
         filehash = md5_for_file(filedata['file_temp'])
         # add 'hashed' value of file reference(s) to a list
         if filehash not in set_unique_hash:
-          set_unique_hash.insert( index, md5_for_file(filedata['file_temp']) )
+          set_unique_hash.add(filehash)
       except:
         msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
         print msg
