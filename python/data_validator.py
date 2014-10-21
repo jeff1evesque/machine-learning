@@ -20,7 +20,6 @@ class Validator:
   def __init__(self, svm_data=None, session_type=None):
     self.svm_data = svm_data
     self.svm_session = session_type.lower()
-    self.flag_exit = False
 
   ## data_validation():
   #
