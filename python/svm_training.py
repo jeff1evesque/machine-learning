@@ -47,8 +47,8 @@ if len(sys.argv) > 1:
       sys.exit()
   # validate, and send 'training' properties to 'data_creator.py'
   else:
-    validator.data_validation()
-    Training( sys.argv[1] )
+    if (validator.data_validation() is False): sys.exit()
+    else: Training( sys.argv[1] )
 
 else:
   msg = 'Please provide a training dataset in json format'
