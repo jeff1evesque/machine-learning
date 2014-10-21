@@ -98,7 +98,7 @@ class Validator:
       try:
         # validate file format
         if ( magic.from_file( filedata['file_temp'], mime=True ) not in acceptable_type ):
-          msg =  '''Error: Uploaded file, \'''' + filedata[index]['file_temp'] + '''\', must be one of the formats:'''
+          msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'] + '''\', must be one of the formats:'''
           msg += '\n       ' + ', '.join(acceptable_type)
           print msg
           sys.exit()
