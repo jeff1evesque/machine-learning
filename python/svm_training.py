@@ -42,6 +42,7 @@ if len(sys.argv) > 1:
     json_file_upload = validator.file_upload_validation( sys.argv[1] )
     try:
       Training(json_file_upload)
+      print json_file_upload
     except:
       pass
   # validate, and send 'training' properties to 'data_creator.py'
