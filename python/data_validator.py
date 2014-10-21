@@ -32,25 +32,25 @@ class Validator:
     except ValueError, e:
       msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
       print json.dumps({'error':msg}, separators=(',', ': '))
-      sys.exit()
+      return False
 
     # data validation on HTML5 'datalist' support
     if self.svm_data['datalist_support'].lower() not in ['true', 'false']:
       msg = '''Error: The submitted \'datalist_support\' value, \'''' + self.svm_data['datalist_support'] + '''\' must be a string value \'true\', or \'false\''''
       print json.dumps({'error':msg}, separators=(',', ': '))
-      sys.exit()
+      return False
 
     # data validation on 'svm_model_type'
     if self.svm_data['svm_model_type'].lower() not in ['classification', 'regression']:
       msg = '''Error: The submitted \'svm_model_type\' value, \'''' + self.svm_data['svm_model_type'] + '''\' must be a string value \'classification\', or \'regression\''''
       print json.dumps({'error':msg}, separators=(',', ': '))
-      sys.exit()
+      return False
 
     # data validation on 'svm_session'
     if self.svm_data['svm_session'].lower() not in ['analysis', 'training']:
       msg = '''Error: The submitted \'svm_session\' value, \'''' + self.svm_data['svm_session'] + '''\' must be a string value \'analysis\', or \'training\''''
       print json.dumps({'error':msg}, separators=(',', ': '))
-      sys.exit()
+      return False
 
     # data validation on 'svm_indep_variable'
     try:
@@ -58,13 +58,11 @@ class Validator:
         if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
           msg = '''Error: The submitted svm_indep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_indep_variable'][idx])
           print json.dumps({'error':msg}, separators=(',', ': '))
-          self.flag_exit = True
+          return False
     except:
       msg = '''Error: The required \'svm_indep_variable\' value does not exist'''
       print json.dumps({'error':msg}, separators=(',', ': '))
-      sys.exit()
-    if self.flag_exit:
-      sys.exit()
+      return False
 
     # data validation on 'svm_dep_variable'
     if self.svm_data['svm_session'].lower() == 'training':
@@ -73,13 +71,11 @@ class Validator:
           if not isinstance(self.svm_data['svm_dep_variable'][idx], unicode):
             msg = '''Error: The submitted svm_dep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_dep_variable'][idx])
             print json.dumps({'error':msg}, separators=(',', ': '))
-            self.flag_exit = True
+            return False
       except:
         msg = '''Error: The required \'svm_dep_variable\' value does not exist'''
         print json.dumps({'error':msg}, separators=(',', ': '))
-        sys.exit()
-      if self.flag_exit:
-        sys.exit()
+        return False
 
     # data validation on 'svm_dataset_type'
     print json.dumps({'error':self.svm_data['svm_dataset_type']}, separators=(',', ': '))
@@ -100,7 +96,7 @@ class Validator:
           msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'] + '''\', must be one of the formats:'''
           msg += '\n       ' + ', '.join(acceptable_type)
           print msg
-          sys.exit()
+          return False
 
         filehash = md5_for_file(filedata['file_temp'])
         # add 'hashed' value of file reference(s) to a list
@@ -110,7 +106,7 @@ class Validator:
       except:
         msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
         print msg
-        sys.exit()
+        return False
 
     # replace portion of JSON with unique 'file reference(s)'
     json_data['file_upload'][:] = json_keep
