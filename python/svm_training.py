@@ -43,6 +43,7 @@ if len(sys.argv) > 1:
     try:
       Training(json_file_upload)
     except:
+      print '''Error: \'file upload(s)\' not correctly formatted, or does not exist''' 
       sys.exit()
   # validate, and send 'training' properties to 'data_creator.py'
   else:
