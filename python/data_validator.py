@@ -91,7 +91,7 @@ class Validator:
     json_data        = json.loads(json_file_obj)
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
 
-    set_unique_hash  = set()
+    unique_hash      = set()
     json_keep        = []
 
     for index, filedata in enumerate( json_data['file_upload'] ):
@@ -105,8 +105,8 @@ class Validator:
 
         filehash = md5_for_file(filedata['file_temp'])
         # add 'hashed' value of file reference(s) to a list
-        if filehash not in set_unique_hash:
-          set_unique_hash.add(filehash)
+        if filehash not in unique_hash:
+          unique_hash.add(filehash)
           json_keep.append(filedata)
       except:
         msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
