@@ -40,11 +40,13 @@ if len(sys.argv) > 1:
   # validate, and send 'file upload(s)' to 'data_creator.py'
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     json_file_upload = validator.file_upload_validation( sys.argv[1] )
-    try:
-      Training(json_file_upload)
-    except:
-      print '''Error: \'file upload(s)\' not correctly formatted, or not provided''' 
-      sys.exit()
+    if (json_file_upload is False): sys.exit()
+    else:
+      try:
+        Training(json_file_upload)
+      except:
+        print '''Error: \'file upload(s)\' not correctly formatted, or not provided''' 
+        sys.exit()
   # validate, and send 'training' properties to 'data_creator.py'
   else:
     if (validator.data_validation() is False): sys.exit()
