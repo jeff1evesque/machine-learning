@@ -44,7 +44,10 @@ if len(sys.argv) > 1:
     else: Training(json_file_upload)
   # validate, and send 'training' properties to 'data_creator.py'
   else:
-    if (validator.data_validation() is False): sys.exit()
+    #if (validator.data_validation() is False): sys.exit()
+    if (validator.data_validation() is False):
+      msg = 'temporary message'
+      print json.dumps({'error':msg}, separators=(',', ': '))
     else: Training( sys.argv[1] )
 
 else:
