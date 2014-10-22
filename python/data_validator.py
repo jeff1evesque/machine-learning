@@ -25,7 +25,7 @@ class Validator:
   #
   #  @self.svm_data: decoded JSON object 
   def data_validation(self):
-
+    return False
     # determine if input data is a JSON object
     try:
       self.svm_data = json.loads(self.svm_data)
