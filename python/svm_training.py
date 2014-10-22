@@ -47,12 +47,6 @@ if len(sys.argv) > 1:
     msg = 'parent temporary message'
     print json.dumps({'error':msg}, separators=(',', ': '))
 
-    #if (validator.data_validation() is False): sys.exit()
-    if (validator.data_validation() is False):
-      msg = 'temporary message'
-      print json.dumps({'error':msg}, separators=(',', ': '))
-    else: Training( sys.argv[1] )
-
 else:
   msg = 'Please provide a training dataset in json format'
   print json.dumps({'error':msg}, separators=(',', ': '))
