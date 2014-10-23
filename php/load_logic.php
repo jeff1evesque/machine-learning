@@ -37,15 +37,15 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // global variables
- $json = array();
+  $json = array();
 
 // instantiate data / loader
- $obj_data   = new Obj_Data($_POST);
- $obj_loader = new Obj_Loader($obj_data);
- $obj_loader->logic_loader($json);
+  $obj_data   = new Obj_Data($_POST);
+  $obj_loader = new Obj_Loader($obj_data);
+  $obj_loader->logic_loader($json);
 
 // return JSON array to AJAX
- print json_encode($json);
+  print json_encode($json);
 
  /**
   * Class Obj_Loader: load proper SVM session
