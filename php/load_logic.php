@@ -44,6 +44,9 @@
   $obj_loader = new Obj_Loader($obj_data);
   $obj_loader->logic_loader($json);
 
+  $json   = array('data' => $json);
+  $json[] = array('json_creator' => basename(__FILE__));
+
 // return JSON array to AJAX
   print json_encode($json);
 
