@@ -45,7 +45,7 @@
   $obj_loader->logic_loader($json);
 
 // redefine JSON, and return array to AJAX
-  $json                 = array('data' => $json);
+  $json = array('data' => $json);
   $json['json_creator'] = basename(__FILE__);
   print json_encode($json);
 
