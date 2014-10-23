@@ -40,7 +40,7 @@
  $json = array();
 
 // instantiate data / loader
- $obj_data = new Obj_Data($_POST);
+ $obj_data   = new Obj_Data($_POST);
  $obj_loader = new Obj_Loader($obj_data);
  $obj_loader->logic_loader($json);
 
