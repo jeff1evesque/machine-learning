@@ -50,16 +50,14 @@
  /**
   * Class Obj_Loader: load proper SVM session
   */
-
- class Obj_Loader {
+  class Obj_Loader {
 
    /**
     * constructor: stores form data
     */
-
-   public function __construct($form) {
-     $this->form = $form;
-   }
+    public function __construct($form) {
+      $this->form = $form;
+    }
 
    /**
     * logic_loader(): receive the 'form_data' object, and determines the allocation
@@ -67,64 +65,63 @@
     *
     * @json: 'reference' to the 'json' variable
     */
+    public function logic_loader(&$json) {
+    // HTML5 datalist supported: remove 'session_type'
+      if ($this->form->datalist_support) {
+        $session_type = $this->form->svm_session;
+        unset($this->form->session_type);
+      }
+      else {
+    // HTML5 datalist not supported: use counterpart, remove 'session_type'
+        $session_type            = $this->form->session_type;
+        $this->form->svm_session = $session_type;
+        unset($this->form->session_type);
+      }
 
-   public function logic_loader(&$json) {
-   // HTML5 datalist supported: remove 'session_type'
-     if ($this->form->datalist_support) {
-       $session_type = $this->form->svm_session;
-       unset($this->form->session_type);
-     }
-     else {
-   // HTML5 datalist not supported: use counterpart, remove 'session_type'
-       $session_type            = $this->form->session_type;
-       $this->form->svm_session = $session_type;
-       unset($this->form->session_type);
-     }
+      if ($session_type == 'training') {
+      // Use HTML5 datalist fallback 'training_type'
+        $this->form->svm_model_type = $this->form->model_type;
+        $this->form->svm_dataset_type = $this->form->dataset_type;
+        unset($this->form->model_type);
+        unset($this->form->dataset_type);
 
-     if ($session_type == 'training') {
-     // Use HTML5 datalist fallback 'training_type'
-       $this->form->svm_model_type = $this->form->model_type;
-       $this->form->svm_dataset_type = $this->form->dataset_type;
-       unset($this->form->model_type);
-       unset($this->form->dataset_type);
+        $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
+        remove_quote( $result );
+        $obj_result = new Obj_Data($result, true);
 
-       $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
-       remove_quote( $result );
-       $obj_result = new Obj_Data($result, true);
+      // Python returns JSON object
+        if ( count((array)$obj_result) > 0 ) {
+          $arr_result = array('result' => $obj_result);
+          $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
+        }
+      // Python returns nothing
+        else {
+          $json = array_merge($json, array('msg_welcome' => 'Welcome to training'));
+        }
+      }
+      elseif ($session_type == 'analysis') {
+      // Use HTML5 datalist fallback 'analysis_models'
+        $this->form->svm_model_type = $this->form->model_type;
+        unset($this->form->model_type);
 
-     // Python returns JSON object
-       if ( count((array)$obj_result) > 0 ) {
-         $arr_result = array('result' => $obj_result);
-         $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
-       }
-     // Python returns nothing
-       else {
-         $json = array_merge($json, array('msg_welcome' => 'Welcome to training'));
-       }
-     }
-     elseif ($session_type == 'analysis') {
-     // Use HTML5 datalist fallback 'analysis_models'
-       $this->form->svm_model_type = $this->form->model_type;
-       unset($this->form->model_type);
+        $result = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
+        remove_quote( $result );
+        $obj_result = new Obj_Data($result, true);
 
-       $result = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
-       remove_quote( $result );
-       $obj_result = new Obj_Data($result, true);
-
-     // Python returns JSON object
-       if ( count((array)$obj_result) > 0 ) {
-         $arr_result = array('result' => $obj_result);
-         $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
-       }
-     // Python returns nothing
-       else {
-         $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'));
-       }
-     }
-     else {
-       print 'Error: ' . basename(__FILE__) . ', logic_loader()';
-     }
-   }
- }
+      // Python returns JSON object
+        if ( count((array)$obj_result) > 0 ) {
+          $arr_result = array('result' => $obj_result);
+          $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
+        }
+      // Python returns nothing
+        else {
+          $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'));
+        }
+      }
+      else {
+        print 'Error: ' . basename(__FILE__) . ', logic_loader()';
+      }
+    }
+  }
 
 ?>
