@@ -80,19 +80,19 @@
 
       if ($session_type == 'training') {
       // Use HTML5 datalist fallback 'training_type'
-        $this->form->svm_model_type = $this->form->model_type;
+        $this->form->svm_model_type   = $this->form->model_type;
         $this->form->svm_dataset_type = $this->form->dataset_type;
         unset($this->form->model_type);
         unset($this->form->dataset_type);
 
-        $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
+        $result     = shell_command('python ../python/svm_training.py', json_encode($this->form));
         remove_quote( $result );
         $obj_result = new Obj_Data($result, true);
 
       // Python returns JSON object
         if ( count((array)$obj_result) > 0 ) {
           $arr_result = array('result' => $obj_result);
-          $json = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
+          $json       = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
         }
       // Python returns nothing
         else {
@@ -104,14 +104,14 @@
         $this->form->svm_model_type = $this->form->model_type;
         unset($this->form->model_type);
 
-        $result = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
+        $result     = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
         remove_quote( $result );
         $obj_result = new Obj_Data($result, true);
 
       // Python returns JSON object
         if ( count((array)$obj_result) > 0 ) {
           $arr_result = array('result' => $obj_result);
-          $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
+          $json       = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
         }
       // Python returns nothing
         else {
