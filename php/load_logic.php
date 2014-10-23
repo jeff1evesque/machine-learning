@@ -47,8 +47,6 @@
 // redefine JSON, and return array to AJAX
   $json   = array('data' => $json);
   $json[] = array('json_creator' => basename(__FILE__));
-
-// return JSON array to AJAX
   print json_encode($json);
 
  /**
