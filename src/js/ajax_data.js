@@ -38,6 +38,7 @@ $(document).ready(function() {
       url: '../../php/load_dataset.php',
       type: 'POST',
       data: form_data,
+      dataType: 'json',
       contentType: false,
       processData: false,
     }).done(function(data) {
