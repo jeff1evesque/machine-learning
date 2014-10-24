@@ -79,7 +79,6 @@ $(document).ready(function() {
     }).done(function(data) {
   // JSON object from Server
       json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
-      console.log( data.msg_welcome );
       console.log( 'JSON object from Server: ' + json_server );
 
   // server side error
