@@ -42,7 +42,9 @@ $(document).ready(function() {
       contentType: false,
       processData: false,
     }).done(function(data) {
-      console.log('Success: data upload ' + data);
+  // JSON object from Server
+      json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
+      console.log( 'JSON object from Server: ' + json_server );
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Fail: data upload');
     });
