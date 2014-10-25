@@ -37,7 +37,7 @@
   $result = shell_command('python ../python/svm_training.py', $json);
 
 // Python returns JSON object
-  if ( count((array)$result > 0 ) {
+  if ( count((array)$result > 0) ) {
     $arr_result = array('result' => $result);
     print json_encode($arr_result);
   }
