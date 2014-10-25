@@ -40,4 +40,5 @@
   if ( count((array)$result > 0 ) {
     $arr_result = array('result' => $result);
   }
+  print json_encode($arr_result);
 ?>
