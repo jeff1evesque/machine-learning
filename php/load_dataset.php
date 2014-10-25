@@ -26,7 +26,6 @@
     );
     $index++;
   }
-  $arr_upload['json_creator']    = basename(__FILE__);
   $arr_upload['upload_quantity'] = count($_FILES);
   unset($index);
 
@@ -43,6 +42,7 @@
   if ( count((array)$result > 0) ) {
     $arr_result = array('result' => $result);
     $arr_result = array('data' => $arr_result);
+    $arr_result['json_creator']    = basename(__FILE__);
     print json_encode($arr_result);
   }
 ?>
