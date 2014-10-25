@@ -36,7 +36,4 @@
 // send 'file upload' to python
   $result = shell_command('python ../python/svm_training.py', $json);
 
-// return Python Data to AJAX
-  print_r($result);
-
 ?>
