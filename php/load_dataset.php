@@ -40,7 +40,10 @@
  *      similar to 'load_logic.php'.
  */
   if ( count((array)$result > 0) ) {
-    $arr_result = array('result' => $result);
+    remove_quote( $result );
+    $obj_result = new Obj_Data($result, true);
+
+    $arr_result = array('result' => $obj_result);
     $arr_result = array('data' => $arr_result);
     $arr_result['json_creator'] = basename(__FILE__);
     print json_encode($arr_result);
