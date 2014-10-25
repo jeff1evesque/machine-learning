@@ -38,6 +38,6 @@
 
 // Python returns JSON object
   if ( count((array)$result > 0 ) {
-    $arr_result = array('result' => $result);;
+    $arr_result = array('result' => $result);
   }
 ?>
