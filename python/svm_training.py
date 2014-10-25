@@ -44,9 +44,8 @@ if len(sys.argv) > 1:
     else: Training(json_file_upload)
   # validate, and send 'training' properties to 'data_creator.py'
   else:
-    msg = 'parent temporary message'
-    print json.dumps({'error':msg}, separators=(',', ': '))
-
+    validator.data_validation()
+    Training( sys.argv[1] )
 else:
   msg = 'Please provide a training dataset in json format'
   print json.dumps({'error':msg}, separators=(',', ': '))
