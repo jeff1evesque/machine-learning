@@ -36,7 +36,10 @@
 // send 'file upload' to python
   $result = shell_command('python ../python/svm_training.py', $json);
 
-// Python returns JSON object
+/**
+ *  Python returns JSON object: the double nesting adheres to syntax
+ *      similar to 'load_logic.php'.
+ */
   if ( count((array)$result > 0) ) {
     $arr_result = array('data' => $arr_result);
     $arr_result = array('result' => $result);
