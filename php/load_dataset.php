@@ -42,7 +42,7 @@
   if ( count((array)$result > 0) ) {
     $arr_result = array('result' => $result);
     $arr_result = array('data' => $arr_result);
-    $arr_result['json_creator']    = basename(__FILE__);
+    $arr_result['json_creator'] = basename(__FILE__);
     print json_encode($arr_result);
   }
 ?>
