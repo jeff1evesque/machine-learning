@@ -26,6 +26,7 @@
     );
     $index++;
   }
+  $arr_upload['file_upload'] = new Obj_Data($arr_upload['file_upload']);
   $arr_upload['upload_quantity'] = count($_FILES);
   unset($index);
 
