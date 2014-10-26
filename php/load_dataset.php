@@ -39,8 +39,7 @@
   $json = array('data' => $json);
   $json = json_encode( $json );
 
-// send 'file upload' to python
+// return to AJAX python 'result'
   $result = shell_command('python ../python/svm_training.py', $json);
-
-  print json_encode($json);
+  print json_encode($result);
 ?>
