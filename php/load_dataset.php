@@ -29,23 +29,17 @@
   $arr_upload['upload_quantity'] = count($_FILES);
   unset($index);
 
-// JSON encode 'arr_upload'
-  $json = json_encode( $arr_upload );
-
-// send 'file upload' to python
-  $result = shell_command('python ../python/svm_training.py', $json);
-
 /**
- *  Python returns JSON object: the double nesting adheres to syntax
- *      similar to 'load_logic.php'.
+ * JSON array: inner key 'result', and outer key 'data' are used
+ *             to conform to a JSON standard we are also implementing
+ *             within 'load_logic.php'.
  */
-  if ( count((array)$result > 0) ) {
-    remove_quote( $result );
-    $obj_result = new Obj_Data($result, true);
+  $json = array('result' => $arr_upload);
+  $json['json_creator'] = basename(__FILE__);
+  $json = array('data' => $json);
+  $json = json_encode( $json );
 
-    $arr_result = array('result' => $obj_result);
-    $arr_result = array('data' => $arr_result);
-    $arr_result['json_creator'] = basename(__FILE__);
-    print json_encode($arr_result);
-  }
+// return to AJAX python 'result'
+  $result = shell_command('python ../python/svm_training.py', $json);
+  print json_encode($result);
 ?>
