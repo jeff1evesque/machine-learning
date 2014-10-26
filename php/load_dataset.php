@@ -30,22 +30,12 @@
   unset($index);
 
 // JSON encode 'arr_upload'
-  $json = json_encode( $arr_upload );
+  $json = array('result' => $arr_upload);
+  $json = array('data' => $json);
+  $json = json_encode( $json );
 
 // send 'file upload' to python
   $result = shell_command('python ../python/svm_training.py', $json);
 
-/**
- *  Python returns JSON object: the double nesting adheres to syntax
- *      similar to 'load_logic.php'.
- */
-  if ( count((array)$result > 0) ) {
-    remove_quote( $result );
-    $obj_result = new Obj_Data($result, true);
-
-    $arr_result = array('result' => $obj_result);
-    $arr_result = array('data' => $arr_result);
-    $arr_result['json_creator'] = basename(__FILE__);
-    print json_encode($arr_result);
-  }
+  print json_encode($result);
 ?>
