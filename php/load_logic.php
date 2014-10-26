@@ -87,13 +87,11 @@
         unset($this->form->model_type);
         unset($this->form->dataset_type);
 
-        $result     = shell_command('python ../python/svm_training.py', json_encode($this->form));
-        remove_quote( $result );
-        $obj_result = new Obj_Data($result, true);
+        $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
 
       // Python returns JSON object
-        if ( count((array)$obj_result) > 0 ) {
-          $arr_result = array('result' => $obj_result);
+        if ( count((array)$result) > 0 ) {
+          $arr_result = array('result' => $result);
           $json       = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
         }
       // Python returns nothing
@@ -107,12 +105,10 @@
         unset($this->form->model_type);
 
         $result     = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
-        remove_quote( $result );
-        $obj_result = new Obj_Data($result, true);
 
       // Python returns JSON object
-        if ( count((array)$obj_result) > 0 ) {
-          $arr_result = array('result' => $obj_result);
+        if ( count((array)result) > 0 ) {
+          $arr_result = array('result' => $result);
           $json       = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
         }
       // Python returns nothing
