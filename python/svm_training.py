@@ -38,7 +38,7 @@ if len(sys.argv) > 1:
   validator = Validator( sys.argv[1], 'training' )
 
   # validate, and send 'file upload(s)' to 'data_creator.py'
-  if ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
+  if ( json.loads(sys.argv[1])['data']['json_creator'] == 'load_dataset.php' ):
     json_file_upload = validator.file_upload_validation( sys.argv[1] )
     if (json_file_upload is False): sys.exit()
     else: Training(json_file_upload)
