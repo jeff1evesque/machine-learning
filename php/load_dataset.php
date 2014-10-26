@@ -29,9 +29,12 @@
   $arr_upload['upload_quantity'] = count($_FILES);
   unset($index);
 
-// JSON encode 'arr_upload'
+/**
+ * JSON array: inner key 'result', and outer key 'data' are used
+ *             to conform to a JSON standard we are also implementing
+ *             within 'load_logic.php'.
+ */
   $json = array('result' => $arr_upload);
-
   $json['json_creator'] = basename(__FILE__);
   $json = array('data' => $json);
   $json = json_encode( $json );
