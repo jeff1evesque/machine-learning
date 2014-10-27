@@ -46,7 +46,6 @@
 
 // redefine JSON, and return array to AJAX
   $json['json_creator'] = basename(__FILE__);
-  print json_encode($json);
 
  /**
   * Class Obj_Loader: load proper SVM session
