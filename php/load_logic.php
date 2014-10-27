@@ -82,6 +82,7 @@
         unset($this->form->model_type);
         unset($this->form->dataset_type);
 
+      // Build JSON array, and send to python script
         $arr_result = array('result' => $this->form);
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to training'), $arr_result);
         $arr_result = array('data' => $arr_result);
@@ -95,6 +96,7 @@
         $this->form->svm_model_type = $this->form->model_type;
         unset($this->form->model_type);
 
+      // Build JSON array, and send to python script
         $arr_result = array('result' => $this->form);
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
         $arr_result = array('data' => $arr_result);
