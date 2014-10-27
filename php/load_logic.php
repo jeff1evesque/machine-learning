@@ -109,6 +109,8 @@
         $arr_result = array('data' => $arr_result);
         $result     = shell_command('python ../python/svm_analysis.py', json_encode($arr_result));
 
+        print json_encode($result);
+
       // Python returns JSON object
         if ( count((array)result) > 0 ) {
           $json       = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
