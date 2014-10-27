@@ -91,14 +91,6 @@
         $result = shell_command('python ../python/svm_training.py', json_encode($arr_result));
 
         print json_encode($result);
-
-      // Python returns JSON object
-        if ( count((array)$result) > 0 ) {
-          $json       = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
-        }
-      // Python returns nothing
-        else {
-          $json = array_merge($json, array('msg_welcome' => 'Welcome to training'));
         }
       }
       elseif ($session_type == 'analysis') {
@@ -112,15 +104,6 @@
         $result     = shell_command('python ../python/svm_analysis.py', json_encode($arr_result));
 
         print json_encode($result);
-
-      // Python returns JSON object
-        if ( count((array)result) > 0 ) {
-          $json       = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
-        }
-      // Python returns nothing
-        else {
-          $json = array_merge($json, array('msg_welcome' => 'Welcome to analysis'));
-        }
       }
       else {
         print 'Error: ' . basename(__FILE__) . ', logic_loader()';
