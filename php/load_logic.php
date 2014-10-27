@@ -90,6 +90,7 @@
         unset($this->form->dataset_type);
 
         $arr_result = array('result' => json_encode($this->form));
+        $arr_result = array('data' => $arr_result);
         $result = shell_command('python ../python/svm_training.py', $arr_result);
 
       // Python returns JSON object
