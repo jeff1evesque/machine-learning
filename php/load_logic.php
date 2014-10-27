@@ -41,11 +41,13 @@
 
 // instantiate data / loader
   $obj_data   = new Obj_Data($_POST);
+
+  $json = array('data' => $json);
+
   $obj_loader = new Obj_Loader($obj_data);
   $obj_loader->logic_loader($json);
 
 // redefine JSON, and return array to AJAX
-  $json = array('data' => $json);
   $json['json_creator'] = basename(__FILE__);
   print json_encode($json);
 
