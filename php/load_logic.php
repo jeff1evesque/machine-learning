@@ -44,9 +44,6 @@
   $obj_loader = new Obj_Loader($obj_data);
   $obj_loader->logic_loader($json);
 
-// redefine JSON, and return array to AJAX
-  $json['json_creator'] = basename(__FILE__);
-
  /**
   * Class Obj_Loader: load proper SVM session
   */
