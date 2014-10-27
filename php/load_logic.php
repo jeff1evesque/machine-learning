@@ -104,11 +104,12 @@
         $this->form->svm_model_type = $this->form->model_type;
         unset($this->form->model_type);
 
-        $result     = shell_command('python ../python/svm_analysis.py', json_encode($this->form));
+        $arr_result = array('result' => json_encode($this->form));
+        $arr_result = array('data' => $arr_result);
+        $result     = shell_command('python ../python/svm_analysis.py', $arr_result);
 
       // Python returns JSON object
         if ( count((array)result) > 0 ) {
-          $arr_result = array('result' => $result);
           $json       = array_merge($json, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
         }
       // Python returns nothing
