@@ -87,11 +87,11 @@
         unset($this->form->model_type);
         unset($this->form->dataset_type);
 
-        $result = shell_command('python ../python/svm_training.py', json_encode($this->form));
+        $arr_result = array('result' => json_encode($this->form));
+        $result = shell_command('python ../python/svm_training.py', $arr_result);
 
       // Python returns JSON object
         if ( count((array)$result) > 0 ) {
-          $arr_result = array('result' => $result);
           $json       = array_merge($json, array('msg_welcome' => 'Welcome to training'), $arr_result);
         }
       // Python returns nothing
