@@ -105,7 +105,7 @@
         $this->form->svm_model_type = $this->form->model_type;
         unset($this->form->model_type);
 
-        $arr_result = array('result' => json_encode($this->form));
+        $arr_result = array('result' => $this->form);
         $arr_result = array('data' => $arr_result);
         $result     = shell_command('python ../python/svm_analysis.py', json_encode($arr_result));
 
