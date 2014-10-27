@@ -92,7 +92,6 @@
         $result = shell_command('python ../python/svm_training.py', json_encode($arr_result));
 
         print json_encode($result);
-        }
       }
       elseif ($session_type == 'analysis') {
       // Use HTML5 datalist fallback 'analysis_models'
