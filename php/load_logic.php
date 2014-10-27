@@ -107,6 +107,7 @@
         unset($this->form->model_type);
 
         $arr_result = array('result' => $this->form);
+        $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
         $arr_result = array('data' => $arr_result);
         $result     = shell_command('python ../python/svm_analysis.py', json_encode($arr_result));
 
