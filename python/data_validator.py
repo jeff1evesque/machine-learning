@@ -77,7 +77,10 @@ class Validator:
         return False
 
     # data validation on 'svm_dataset_type'
-    print json.dumps({'error':self.svm_data['svm_dataset_type']}, separators=(',', ': '))
+    if self.svm_data['svm_dataset_type'].lower() not in ['file upload', 'xml file']:
+      msg = '''Error: The submitted \'svm_dataset_type\' value, \'''' + self.svm_data['svm_dataset_type'] + '''\' must be a string value \'file upload\', or \'xml file\''''
+      print json.dumps({'error':msg}, separators=(',', ': '))
+      return False
 
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
   #                            with duplicate 'file upload' references removed.
