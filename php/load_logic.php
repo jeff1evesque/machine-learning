@@ -108,7 +108,7 @@
         print json_encode($result);
       }
       else {
-        print json_encode( array('Error' => basename(__FILE__) . ', logic_loader()' );
+        print json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') );
       }
     }
   }
