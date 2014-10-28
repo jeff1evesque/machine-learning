@@ -77,7 +77,7 @@ class Validator:
         return False
 
     # data validation on 'svm_dataset_type'
-    if self.svm_data['svm_dataset_type'].lower() not in ['file upload', 'xml file']:
+    if self.svm_data['svm_dataset_type'].lower() not in ['upload file', 'xml file']:
       msg = '''Error: The submitted \'svm_dataset_type\' value, \'''' + self.svm_data['svm_dataset_type'] + '''\' must be a string value \'file upload\', or \'xml file\''''
       print json.dumps({'error':msg}, separators=(',', ': '))
       return False
