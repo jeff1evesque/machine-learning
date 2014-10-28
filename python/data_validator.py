@@ -82,7 +82,7 @@ class Validator:
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
   #                            with duplicate 'file upload' references removed.
   def file_upload_validation(self, json_file_obj):
-    json_data        = json.loads(json_file_obj)
+    json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
 
     unique_hash      = set()
