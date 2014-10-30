@@ -91,7 +91,7 @@ class Validator:
     unique_hash      = set()
     json_keep        = []
 
-    if (json_data.get('file_upload', None) is not None):
+    if (json_data.get('file_upload', None)):
 
       for index, filedata in enumerate(json_data['file_upload']):
         try:
