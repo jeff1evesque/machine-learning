@@ -55,7 +55,8 @@ $(document).ready(function() {
         json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
         console.log( 'JSON object from Server: ' + json_server );
       }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.log('Fail: data upload');
+        console.log('Error Thrown: '+errorThrown);
+        console.log('Error Status: '+textStatus);
       });
     }
 
