@@ -23,6 +23,7 @@ $(document).ready(function() {
   // local variables
     var form_data = new FormData();
     var dataset = $('input[name="svm_dataset[]"]');
+    var flag_ajax = false;
 
   // store 'file uploads' in array
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
