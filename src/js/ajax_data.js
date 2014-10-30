@@ -42,6 +42,7 @@ $(document).ready(function() {
     });
 
   // ajax request: 'svm_dataset[]' file upload(s)
+    if ( flag_ajax ) {
     $.ajax({
       url: '../../php/load_dataset.php',
       type: 'POST',
@@ -56,6 +57,7 @@ $(document).ready(function() {
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Fail: data upload');
     });
+    }
 
   });
 });
