@@ -22,7 +22,8 @@ $(document).ready(function() {
 
   // local variables
     var form_data = new FormData();
-    var dataset = $('input[name="svm_dataset[]"]');
+    var dataset   = $('input[name="svm_dataset[]"]');
+    var flag_ajax = true;
 
   // store 'file uploads' in array
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
@@ -32,21 +33,32 @@ $(document).ready(function() {
       });
     }
 
-  // ajax request: 'svm_dataset[]' file upload(s)
-    $.ajax({
-      url: '../../php/load_dataset.php',
-      type: 'POST',
-      data: form_data,
-      dataType: 'json',
-      contentType: false,
-      processData: false,
-    }).done(function(data) {
-  // JSON object from Server
-      json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
-      console.log( 'JSON object from Server: ' + json_server );
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Fail: data upload');
+  // undefined 'file upload(s)' sets 'flag_ajax = false'
+    dataset.each(function() {
+      if ( typeof $(this).val() === 'undefined' ) {
+        flag_ajax = false;
+        return false
+      }
     });
+
+  // ajax request: 'svm_dataset[]' file upload(s)
+    if ( flag_ajax ) {
+      $.ajax({
+        url: '../../php/load_dataset.php',
+        type: 'POST',
+        data: form_data,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+      }).done(function(data) {
+  // JSON object from Server
+        json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
+        console.log( 'JSON object from Server: ' + json_server );
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.log('Error Thrown: '+errorThrown);
+        console.log('Error Status: '+textStatus);
+      });
+    }
 
   });
 });
