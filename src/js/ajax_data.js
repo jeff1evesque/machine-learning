@@ -43,20 +43,20 @@ $(document).ready(function() {
 
   // ajax request: 'svm_dataset[]' file upload(s)
     if ( flag_ajax ) {
-    $.ajax({
-      url: '../../php/load_dataset.php',
-      type: 'POST',
-      data: form_data,
-      dataType: 'json',
-      contentType: false,
-      processData: false,
-    }).done(function(data) {
+      $.ajax({
+        url: '../../php/load_dataset.php',
+        type: 'POST',
+        data: form_data,
+        dataType: 'json',
+        contentType: false,
+        processData: false,
+      }).done(function(data) {
   // JSON object from Server
-      json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
-      console.log( 'JSON object from Server: ' + json_server );
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Fail: data upload');
-    });
+        json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
+        console.log( 'JSON object from Server: ' + json_server );
+      }).fail(function(jqXHR, textStatus, errorThrown) {
+        console.log('Fail: data upload');
+      });
     }
 
   });
