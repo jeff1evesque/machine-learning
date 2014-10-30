@@ -23,7 +23,7 @@ $(document).ready(function() {
   // local variables
     var form_data = new FormData();
     var dataset   = $('input[name="svm_dataset[]"]');
-    var flag_ajax = false;
+    var flag_ajax = true;
 
   // store 'file uploads' in array
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
@@ -32,6 +32,13 @@ $(document).ready(function() {
         form_data.append('file_upload_' + index, file_data);
       });
     }
+
+    dataset.each(function() {
+      if ( typeof $(this).val() === 'undefined' ) {
+        flag_ajax = false;
+        return false
+      }
+    });
 
   // ajax request: 'svm_dataset[]' file upload(s)
     $.ajax({
