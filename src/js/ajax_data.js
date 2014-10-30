@@ -22,7 +22,7 @@ $(document).ready(function() {
 
   // local variables
     var form_data = new FormData();
-    var dataset = $('input[name="svm_dataset[]"]');
+    var dataset   = $('input[name="svm_dataset[]"]');
     var flag_ajax = false;
 
   // store 'file uploads' in array
