@@ -91,26 +91,28 @@ class Validator:
     unique_hash      = set()
     json_keep        = []
 
-    for index, filedata in enumerate(json_data.get('file_upload')):
-      try:
-        # validate file format
-        if ( magic.from_file( filedata['file_temp'], mime=True ) not in acceptable_type ):
-          msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'] + '''\', must be one of the formats:'''
-          msg += '\n       ' + ', '.join(acceptable_type)
+    if (json_data.get('file_upload', None) is not None):
+
+      for index, filedata in enumerate(json_data.get('file_upload')):
+        try:
+          # validate file format
+          if ( magic.from_file( filedata['file_temp'], mime=True ) not in acceptable_type ):
+            msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'] + '''\', must be one of the formats:'''
+            msg += '\n       ' + ', '.join(acceptable_type)
+            print json.dumps({'error':msg}, separators=(',', ': '))
+            return False
+
+          filehash = md5_for_file(filedata['file_temp'])
+          # add 'hashed' value of file reference(s) to a list
+          if filehash not in unique_hash:
+            unique_hash.add(filehash)
+            json_keep.append(filedata)
+        except:
+          msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
           print json.dumps({'error':msg}, separators=(',', ': '))
           return False
 
-        filehash = md5_for_file(filedata['file_temp'])
-        # add 'hashed' value of file reference(s) to a list
-        if filehash not in unique_hash:
-          unique_hash.add(filehash)
-          json_keep.append(filedata)
-      except:
-        msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
-        print json.dumps({'error':msg}, separators=(',', ': '))
-        return False
-
-    # replace portion of JSON with unique 'file reference(s)'
-    json_data['file_upload'][:] = json_keep
-    return json_data
+      # replace portion of JSON with unique 'file reference(s)'
+      json_data['file_upload'][:] = json_keep
+      return json_data
 
