@@ -85,13 +85,13 @@ class Validator:
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
   #                            with duplicate 'file upload' references removed.
   def file_upload_validation(self, json_file_obj):
-    json_data        = json.loads(json_file_obj)['data']['result']
+    json_data        = json.loads(json_file_obj).get('data').get('result')
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
 
     unique_hash      = set()
     json_keep        = []
 
-    for index, filedata in enumerate( json_data['file_upload'] ):
+    for index, filedata in enumerate(json_data.get('file_upload')):
       try:
         # validate file format
         if ( magic.from_file( filedata['file_temp'], mime=True ) not in acceptable_type ):
@@ -113,3 +113,4 @@ class Validator:
     # replace portion of JSON with unique 'file reference(s)'
     json_data['file_upload'][:] = json_keep
     return json_data
+
