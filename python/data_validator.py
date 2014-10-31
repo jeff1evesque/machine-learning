@@ -25,21 +25,21 @@ class Validator:
   #
   #  @self.svm_data: decoded JSON object 
   def data_validation(self):
+    # determine if input data is a JSON object
+    try:
+      self.svm_data = json.loads(self.svm_data)['data']['result']
+    except ValueError, e:
+      msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
+      print json.dumps({'error':msg}, separators=(',', ': '))
+      return False
+
+    # data validation on HTML5 'datalist' support
+    if self.svm_data['datalist_support'].lower() not in ['true', 'false']:
+      msg = '''Error: The submitted \'datalist_support\' value, \'''' + self.svm_data['datalist_support'] + '''\' must be a string value \'true\', or \'false\''''
+      print json.dumps({'error':msg}, separators=(',', ': '))
+      return False
+
     if self.svm_session == 'training':
-      # determine if input data is a JSON object
-      try:
-        self.svm_data = json.loads(self.svm_data)['data']['result']
-      except ValueError, e:
-        msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
-        print json.dumps({'error':msg}, separators=(',', ': '))
-        return False
-
-      # data validation on HTML5 'datalist' support
-      if self.svm_data['datalist_support'].lower() not in ['true', 'false']:
-        msg = '''Error: The submitted \'datalist_support\' value, \'''' + self.svm_data['datalist_support'] + '''\' must be a string value \'true\', or \'false\''''
-        print json.dumps({'error':msg}, separators=(',', ': '))
-        return False
-
       # data validation on 'svm_model_type'
       if self.svm_data['svm_model_type'].lower() not in ['classification', 'regression']:
         msg = '''Error: The submitted \'svm_model_type\' value, \'''' + self.svm_data['svm_model_type'] + '''\' must be a string value \'classification\', or \'regression\''''
