@@ -45,23 +45,23 @@ class Validator:
       print json.dumps({'error':msg}, separators=(',', ': '))
       return False
 
+    # data validation on 'svm_indep_variable'
+    try:
+      for idx, element in enumerate(self.svm_data['svm_indep_variable']):
+        if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
+          msg = '''Error: The submitted svm_indep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_indep_variable'][idx])
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          return False
+    except:
+      msg = '''Error: The required \'svm_indep_variable\' value does not exist'''
+      print json.dumps({'error':msg}, separators=(',', ': '))
+      return False
+
     # validation on 'training' session
     if self.svm_session == 'training':
       # data validation on 'svm_model_type'
       if self.svm_data['svm_model_type'].lower() not in ['classification', 'regression']:
         msg = '''Error: The submitted \'svm_model_type\' value, \'''' + self.svm_data['svm_model_type'] + '''\' must be a string value \'classification\', or \'regression\''''
-        print json.dumps({'error':msg}, separators=(',', ': '))
-        return False
-
-      # data validation on 'svm_indep_variable'
-      try:
-        for idx, element in enumerate(self.svm_data['svm_indep_variable']):
-          if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
-            msg = '''Error: The submitted svm_indep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_indep_variable'][idx])
-            print json.dumps({'error':msg}, separators=(',', ': '))
-            return False
-      except:
-        msg = '''Error: The required \'svm_indep_variable\' value does not exist'''
         print json.dumps({'error':msg}, separators=(',', ': '))
         return False
 
