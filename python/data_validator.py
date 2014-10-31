@@ -39,16 +39,16 @@ class Validator:
       print json.dumps({'error':msg}, separators=(',', ': '))
       return False
 
+    # data validation on 'svm_session'
+    if self.svm_data['svm_session'].lower() not in ['analysis', 'training']:
+      msg = '''Error: The submitted \'svm_session\' value, \'''' + self.svm_data['svm_session'] + '''\' must be a string value \'analysis\', or \'training\''''
+      print json.dumps({'error':msg}, separators=(',', ': '))
+      return False
+
     if self.svm_session == 'training':
       # data validation on 'svm_model_type'
       if self.svm_data['svm_model_type'].lower() not in ['classification', 'regression']:
         msg = '''Error: The submitted \'svm_model_type\' value, \'''' + self.svm_data['svm_model_type'] + '''\' must be a string value \'classification\', or \'regression\''''
-        print json.dumps({'error':msg}, separators=(',', ': '))
-        return False
-
-      # data validation on 'svm_session'
-      if self.svm_data['svm_session'].lower() not in ['analysis', 'training']:
-        msg = '''Error: The submitted \'svm_session\' value, \'''' + self.svm_data['svm_session'] + '''\' must be a string value \'analysis\', or \'training\''''
         print json.dumps({'error':msg}, separators=(',', ': '))
         return False
 
