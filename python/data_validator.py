@@ -25,62 +25,63 @@ class Validator:
   #
   #  @self.svm_data: decoded JSON object 
   def data_validation(self):
-    # determine if input data is a JSON object
-    try:
-      self.svm_data = json.loads(self.svm_data)['data']['result']
-    except ValueError, e:
-      msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
-      print json.dumps({'error':msg}, separators=(',', ': '))
-      return False
-
-    # data validation on HTML5 'datalist' support
-    if self.svm_data['datalist_support'].lower() not in ['true', 'false']:
-      msg = '''Error: The submitted \'datalist_support\' value, \'''' + self.svm_data['datalist_support'] + '''\' must be a string value \'true\', or \'false\''''
-      print json.dumps({'error':msg}, separators=(',', ': '))
-      return False
-
-    # data validation on 'svm_model_type'
-    if self.svm_data['svm_model_type'].lower() not in ['classification', 'regression']:
-      msg = '''Error: The submitted \'svm_model_type\' value, \'''' + self.svm_data['svm_model_type'] + '''\' must be a string value \'classification\', or \'regression\''''
-      print json.dumps({'error':msg}, separators=(',', ': '))
-      return False
-
-    # data validation on 'svm_session'
-    if self.svm_data['svm_session'].lower() not in ['analysis', 'training']:
-      msg = '''Error: The submitted \'svm_session\' value, \'''' + self.svm_data['svm_session'] + '''\' must be a string value \'analysis\', or \'training\''''
-      print json.dumps({'error':msg}, separators=(',', ': '))
-      return False
-
-    # data validation on 'svm_indep_variable'
-    try:
-      for idx, element in enumerate(self.svm_data['svm_indep_variable']):
-        if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
-          msg = '''Error: The submitted svm_indep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_indep_variable'][idx])
-          print json.dumps({'error':msg}, separators=(',', ': '))
-          return False
-    except:
-      msg = '''Error: The required \'svm_indep_variable\' value does not exist'''
-      print json.dumps({'error':msg}, separators=(',', ': '))
-      return False
-
-    # data validation on 'svm_dep_variable'
-    if self.svm_data['svm_session'].lower() == 'training':
+    if self.svm_session == 'training':
+      # determine if input data is a JSON object
       try:
-        for idx, element in enumerate(self.svm_data['svm_dep_variable']):
-          if not isinstance(self.svm_data['svm_dep_variable'][idx], unicode):
-            msg = '''Error: The submitted svm_dep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_dep_variable'][idx])
-            print json.dumps({'error':msg}, separators=(',', ': '))
-            return False
-      except:
-        msg = '''Error: The required \'svm_dep_variable\' value does not exist'''
+        self.svm_data = json.loads(self.svm_data)['data']['result']
+      except ValueError, e:
+        msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
         print json.dumps({'error':msg}, separators=(',', ': '))
         return False
 
-    # data validation on 'svm_dataset_type'
-    if self.svm_data['svm_dataset_type'].lower() not in ['upload file', 'xml file']:
-      msg = '''Error: The submitted \'svm_dataset_type\' value, \'''' + self.svm_data['svm_dataset_type'] + '''\' must be a string value \'file upload\', or \'xml file\''''
-      print json.dumps({'error':msg}, separators=(',', ': '))
-      return False
+      # data validation on HTML5 'datalist' support
+      if self.svm_data['datalist_support'].lower() not in ['true', 'false']:
+        msg = '''Error: The submitted \'datalist_support\' value, \'''' + self.svm_data['datalist_support'] + '''\' must be a string value \'true\', or \'false\''''
+        print json.dumps({'error':msg}, separators=(',', ': '))
+        return False
+
+      # data validation on 'svm_model_type'
+      if self.svm_data['svm_model_type'].lower() not in ['classification', 'regression']:
+        msg = '''Error: The submitted \'svm_model_type\' value, \'''' + self.svm_data['svm_model_type'] + '''\' must be a string value \'classification\', or \'regression\''''
+        print json.dumps({'error':msg}, separators=(',', ': '))
+        return False
+
+      # data validation on 'svm_session'
+      if self.svm_data['svm_session'].lower() not in ['analysis', 'training']:
+        msg = '''Error: The submitted \'svm_session\' value, \'''' + self.svm_data['svm_session'] + '''\' must be a string value \'analysis\', or \'training\''''
+        print json.dumps({'error':msg}, separators=(',', ': '))
+        return False
+
+      # data validation on 'svm_indep_variable'
+      try:
+        for idx, element in enumerate(self.svm_data['svm_indep_variable']):
+          if not isinstance(self.svm_data['svm_indep_variable'][idx], unicode):
+            msg = '''Error: The submitted svm_indep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_indep_variable'][idx])
+            print json.dumps({'error':msg}, separators=(',', ': '))
+            return False
+      except:
+        msg = '''Error: The required \'svm_indep_variable\' value does not exist'''
+        print json.dumps({'error':msg}, separators=(',', ': '))
+        return False
+
+      # data validation on 'svm_dep_variable'
+      if self.svm_data['svm_session'].lower() == 'training':
+        try:
+          for idx, element in enumerate(self.svm_data['svm_dep_variable']):
+            if not isinstance(self.svm_data['svm_dep_variable'][idx], unicode):
+              msg = '''Error: The submitted svm_dep_variable[\'%s\'] value, \'%s\' must be a unicode value''' % (idx, self.svm_data['svm_dep_variable'][idx])
+              print json.dumps({'error':msg}, separators=(',', ': '))
+              return False
+        except:
+          msg = '''Error: The required \'svm_dep_variable\' value does not exist'''
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          return False
+
+      # data validation on 'svm_dataset_type'
+      if self.svm_data['svm_dataset_type'].lower() not in ['upload file', 'xml file']:
+        msg = '''Error: The submitted \'svm_dataset_type\' value, \'''' + self.svm_data['svm_dataset_type'] + '''\' must be a string value \'file upload\', or \'xml file\''''
+        print json.dumps({'error':msg}, separators=(',', ': '))
+        return False
 
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
   #                            with duplicate 'file upload' references removed.
