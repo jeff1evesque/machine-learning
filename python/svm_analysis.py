@@ -40,8 +40,8 @@ if len(sys.argv) > 1:
 
   # validate, and set SVM properties to 'data_creator.py'
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
-    print json.loads(sys.argv[1])
-    validator.data_validation()
+    if ( json.loads(sys.argv[1])['data'].get('result', None) ):
+      validator.data_validation()
 
 else:
   msg = 'Please provide a training dataset in json format'
