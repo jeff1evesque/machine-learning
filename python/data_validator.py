@@ -84,6 +84,7 @@ class Validator:
         print json.dumps({'error':msg}, separators=(',', ': '))
         return False
 
+    # validation on 'analysis' session
     elif self.svm_session == 'analysis':
 
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
