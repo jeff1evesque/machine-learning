@@ -37,6 +37,8 @@ from data_validator import Validator
 if len(sys.argv) > 1:
   # validate input data is json format
   validator = Validator( sys.argv[1], 'analysis' )
+
+  # validate, and set SVM properties to 'data_creator.py'
   validator.data_validation()
 
 else:
