@@ -45,6 +45,7 @@ class Validator:
       print json.dumps({'error':msg}, separators=(',', ': '))
       return False
 
+    # validation on 'training' session
     if self.svm_session == 'training':
       # data validation on 'svm_model_type'
       if self.svm_data['svm_model_type'].lower() not in ['classification', 'regression']:
