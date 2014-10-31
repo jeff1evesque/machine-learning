@@ -21,7 +21,11 @@ class Validator:
     self.svm_data = svm_data
     self.svm_session = session_type.lower()
 
-  ## data_validation():
+  ## data_validation(): the first four validations is used for both 'training',
+  #                     and 'analysis' sessions. Since the 'analysis' session
+  #                     does not have unique validation(s), an 'ELIF' statement
+  #                     is not required for it, and already implied by the first
+  #                     four validations.
   #
   #  @self.svm_data: decoded JSON object 
   def data_validation(self):
