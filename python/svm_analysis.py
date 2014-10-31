@@ -37,7 +37,11 @@ from data_validator import Validator
 if len(sys.argv) > 1:
   # validate input data is json format
   validator = Validator( sys.argv[1], 'analysis' )
-  validator.data_validation()
+
+  # validate, and set SVM properties to 'data_creator.py'
+  if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
+    if ( json.loads(sys.argv[1])['data'].get('result', None) ):
+      validator.data_validation()
 
 else:
   msg = 'Please provide a training dataset in json format'
