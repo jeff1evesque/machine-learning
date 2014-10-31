@@ -116,4 +116,4 @@ class Validator:
       json_data['file_upload'][:] = json_keep
       return json_data
 
-    else: print json.dumps({'Notice':'No file(s) were uploaded'}, separators=(',', ': '))
+    else: print json.dumps({'Error':'No file(s) were uploaded'}, separators=(',', ': '))
