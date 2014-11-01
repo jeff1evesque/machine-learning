@@ -1,12 +1,12 @@
-[submodule "submodule/scikit-learn"]
-	path = submodule/scikit-learn
+[submodule "submodules/scikit-learn"]
+	path = submodules/scikit-learn
 	url = git://github.com/scikit-learn/scikit-learn.git
-[submodule "submodule/jquery-validation"]
-	path = submodule/jquery-validation
+[submodule "submodules/jquery-validation"]
+	path = submodules/jquery-validation
 	url = https://github.com/jzaefferer/jquery-validation
-[submodule "submodule/grunt"]
-	path = submodule/grunt
+[submodule "submodules/grunt"]
+	path = submodules/grunt
 	url = https://github.com/jeff1evesque/grunt
-[submodule "submodule/jsonschema"]
-	path = submodule/jsonschema
+[submodule "submodules/jsonschema"]
+	path = submodules/jsonschema
 	url = https://github.com/Julian/jsonschema
