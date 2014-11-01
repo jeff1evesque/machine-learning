@@ -73,8 +73,10 @@ $(document).ready(function() {
       data : data_formatted,
       dataType : 'json',
       beforeSend: function() {
+
     // ajax overlay
         ajaxLoader( $(event.currentTarget) );
+
       }
     }).done(function(data) {
   // JSON object from Server
