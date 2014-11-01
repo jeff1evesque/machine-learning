@@ -4,3 +4,6 @@
 [submodule "jquery-validation"]
 	path = jquery-validation
 	url = https://github.com/jzaefferer/jquery-validation
+[submodule "grunt"]
+	path = grunt
+	url = https://github.com/jeff1evesque/grunt
