@@ -16,8 +16,9 @@ def md5_for_file(path, block_size=256*128, hr=False):
     return md5.hexdigest()
   return md5.digest()
 
-## duplicate_list_index: returns a 'dictionary' of duplicate elements
-#                        from the given list, 'list_to_check'.
+## duplicate_list_index: given a list, return a dictionary, with the 'key' being the list
+#                        elements (unique, not duplicated), and the corresponding dictionary
+#                        'value' being a list containing the index location of each instance.
 #
 #  for example:
 #    list_to_check = list('ABRACADABR')
