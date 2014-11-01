@@ -18,8 +18,7 @@ def md5_for_file(path, block_size=256*128, hr=False):
 
 ## duplicate_list_index: given a list, return a dictionary, with the 'key' being the list
 #                        elements (unique, not duplicated), and the corresponding dictionary
-#                        'value' being a list containing the index location of each element
-#                        instance.
+#                        'value' being a list containing the index location of each instance.
 #
 #  for example:
 #    list_to_check = list('ABRACADABR')
