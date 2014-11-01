@@ -78,7 +78,11 @@ $(document).ready(function() {
         ajaxLoader( $(event.currentTarget) );
 
     // form validation
-
+        $("form").validate({
+          submitHandler: function(form) {
+            $(form).ajaxSubmit();
+          }
+        });
 
       }
     }).done(function(data) {
