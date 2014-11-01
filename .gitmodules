@@ -7,3 +7,6 @@
 [submodule "grunt"]
 	path = grunt
 	url = https://github.com/jeff1evesque/grunt
+[submodule "jsonschema"]
+	path = jsonschema
+	url = https://github.com/Julian/jsonschema
