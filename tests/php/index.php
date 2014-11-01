@@ -25,6 +25,7 @@
 <html>
   <head>
     <script src='../../src/js/jquery-1.8.3.js'></script>
+    <script src='../../src/js/jquery.validate.js'></script>
     <script src='../../src/js/html_form.js'></script>
     <script src='../../src/js/html_form_delegator.js'></script>
     <script src='../../src/js/ajax_graphic.js'></script>
