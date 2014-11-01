@@ -77,6 +77,9 @@ $(document).ready(function() {
     // ajax overlay
         ajaxLoader( $(event.currentTarget) );
 
+    // form validation
+
+
       }
     }).done(function(data) {
   // JSON object from Server
