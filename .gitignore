@@ -1,0 +1,4 @@
+# Ignore and don't commit the following directories
+assets/
+
+# Ignore and don't commit the following files
