@@ -101,6 +101,8 @@ sudo chown -R jeffrey:sudo machine-learning
 
 ###Scikit-Learn
 
+Scikit-Learn is an open source machine learning library written in the Python programming language.  The library provides the ability to solve classification, and regression problems.  Specifically, the support vector machine, and regression equations are some of the notable applications of the library.
+
 ```
 cd /var/www/html/machine-learning/scikit-learn/
 python setup.py build
