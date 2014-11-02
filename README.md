@@ -45,7 +45,7 @@ sudo pip install python-magic
 
 **Note:** This project assumes [Ubuntu Server 14.04](http://www.ubuntu.com/download/server) as the operating system.
 
-##Configurations
+##Configuration
 
 ###GIT
 
@@ -106,6 +106,12 @@ cd /var/www/html/machine-learning/scikit-learn/
 python setup.py build
 sudo python setup.py install
 ```
+
+###Grunt
+
+We will automate [Grunt's](https://gruntjs.com) task management, which will encompass tools such as [Sass](https://github.com/gruntjs/grunt-contrib-sass), [Uglify](https://github.com/gruntjs/grunt-contrib-uglify), [Imagemin](https://github.com/gruntjs/grunt-contrib-imagemin), and [Modernizr](https://github.com/Modernizr/grunt-modernizr).  It requires setup only once within each web-application utilizing its tools.
+
+More information regarding setting-up [Grunt](https://gruntjs.com), can be found within the [README.md](https://github.com/jeff1evesque/grunt/blob/master/README.md) file from the [Grunt](http://github.com/jeff1evesque/grunt) repository.
 
 ##Testing / Execution
 
