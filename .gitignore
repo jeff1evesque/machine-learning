@@ -2,3 +2,4 @@
 assets/
 
 # Ignore and don't commit the following files
+python/*.pyc
