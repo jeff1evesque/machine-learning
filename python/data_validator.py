@@ -31,7 +31,7 @@ class Validator:
   #  @self.svm_data: decoded JSON object 
   def data_validation(self):
     # local variables
-    flag_json = false
+    flag_json = False
 
     # determine if input data is a JSON object
     try:
