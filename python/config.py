@@ -13,3 +13,8 @@ def jsonschema_training():
 
 ## jsonschema_analysis: contains the jsonschema for the 'analysis' session.
 #                       This validation schema is used in data_validation.py.
+def jsonschema_analysis():
+  schema = {
+    
+  }
+  return schema
