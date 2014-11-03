@@ -64,7 +64,7 @@ def jsonschema_analysis():
               },
               'svm_model_type': {
                 'type': 'string',
-                'enum': ['analysis', 'training']
+                'enum': ['classification', 'regression']
               },
               'svm_indep_variable': {
                 'type': 'array',
