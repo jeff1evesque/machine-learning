@@ -25,7 +25,7 @@ def jsonschema_training():
               },
               'svm_model_type': {
                 'type': 'string',
-                'enum': ['analysis', 'training']
+                'enum': ['classification', 'regression']
               },
               'svm_dep_variable': {
                 'type': 'array',
