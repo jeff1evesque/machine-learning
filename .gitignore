@@ -1,5 +1,5 @@
 # Ignore and don't commit the following directories
-assets/
+/assets/
 
 # Ignore and don't commit the following files
-python/*.pyc
+/python/*.pyc
