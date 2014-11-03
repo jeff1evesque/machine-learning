@@ -43,11 +43,11 @@ class Validator:
       return False
 
     # validation on 'analysis' session
-    if self.svm_session == 'analysis':
+    if self.svm_session == 'analysis' and flag_json:
       validate(self.svm_data, jsonschema_analysis);
 
     # validation on 'training' session
-    if self.svm_session == 'training':
+    if self.svm_session == 'training' and flag_json:
       validate(self.svm_data, jsonschema_training);
 
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
