@@ -36,7 +36,7 @@ class Validator:
     # determine if input data is a JSON object
     try:
       self.svm_data = json.loads(self.svm_data)['data']['result']
-      flag_json = true
+      flag_json = True
     except ValueError, e:
       msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
       print json.dumps({'error':msg}, separators=(',', ': '))
