@@ -101,5 +101,10 @@ class Validator:
     json_keep        = []
 
     if (json_data.get('xml_file', None)):
-      for index, filedata in enumerate(json_data['xml_file']):
+      for index, xmldata in enumerate(json_data['xml_file']):
         try:
+          print 'test'
+        except:
+          msg = 'Error: problem with xml file #' + str(index) + '. Please re-submit the xml file.'
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          return False
