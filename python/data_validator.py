@@ -48,7 +48,7 @@ class Validator:
 
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
-      #validate(self.svm_data, jsonschema_analysis)
+      validate(self.svm_data, jsonschema_analysis)
 
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
   #                            with duplicate 'file upload' references removed.
