@@ -46,13 +46,17 @@ class Validator:
     if self.svm_session == 'training' and flag_json:
       try:
         validate(json.loads(self.svm_data), jsonschema_training())
-      except Exception, e: print str(e)
+      except Exception, e:
+        print str(e)
+        return False
 
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
       try:
         validate(self.svm_data, jsonschema_analysis())
-      except Exception, e: print str(e)
+      except Exception, e:
+        print str(e)
+        return False
 
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
   #                            with duplicate 'file upload' references removed.
