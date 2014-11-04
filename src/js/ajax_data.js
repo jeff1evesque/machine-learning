@@ -34,6 +34,12 @@ $(document).ready(function() {
     }
 
   // store 'xml file(s)' in array
+    else if ( dataset.length > 0 && dataset.attr('type') == 'url' ) {
+      $( dataset ).each(function( index ) {
+        var xml_data = dataset[index].url[0];
+        form_data.append('xml_file_' + index, xml_data);
+      });
+    }
 
   // undefined 'file upload(s)' sets 'flag_ajax = false'
     dataset.each(function() {
