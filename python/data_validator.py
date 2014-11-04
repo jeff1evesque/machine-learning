@@ -104,7 +104,9 @@ class Validator:
       for index, xmldata in enumerate(json_data['xml_file']):
         try:
           # validate file format
-          if ():
+          root = etree.XML( xmldata )
+          
+          if (root):
             msg =  '''Error: \'''' + filedata['xml_file'] + '''\', not an XML file!'''
             print json.dumps({'error':msg}, separators=(',', ': '))
             return False
