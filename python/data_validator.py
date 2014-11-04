@@ -47,13 +47,6 @@ class Validator:
       
       validate(json.loads(self.svm_data), jsonschema_analysis)
 
-      #print json.loads(self.svm_data)
-      #print '============='
-      #print schema
-
-
-     #validate(self.svm_data, jsonschema_analysis)
-
     # validation on 'training' session
     #if self.svm_session == 'analysis' and flag_json:
       #validate(self.svm_data, jsonschema_analysis)
