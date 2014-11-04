@@ -19,8 +19,8 @@ $(document).ready(function() {
               <input list="model_type" name="svm_model_type" placeholder="Analysis Model">\
               <datalist id="model_type">\
                 <select name="model_type" required>\
-                  <option value="Classification">Classification</option>\
-                  <option value="Regression">Regression</option>\
+                  <option value="classification">classification</option>\
+                  <option value="regression">regression</option>\
                 </select>\
               </datalist>\
             </fieldset>\
