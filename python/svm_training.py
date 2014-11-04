@@ -43,6 +43,10 @@ if len(sys.argv) > 1:
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if (json_file_upload is False): sys.exit()
       else: Training(json_file_upload)
+    elif ( json.loads(sys.argv[1])['data']['result'].get('xml_file', None) ):
+      json_xml_file = validator.xml_validation( sys.argv[1] )
+      if(json_xml_file is False): sys.exit()
+      else: Training(json_xml_file)
   # validate, and send 'training' properties to 'data_creator.py'
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
