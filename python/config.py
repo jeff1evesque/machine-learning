@@ -9,19 +9,24 @@ def jsonschema_training():
   schema = {
     'type': 'object',
     'properties': {
+      'json_creator': { 'type': 'string' },
       'data': {
         'type': 'object',
         'properties': {
           'result': {
             'type': 'object',
             'properties': {
-              'svm_session': { 
+              'datalist_support': {
                 'type': 'string',
-                'enum': ['training', 'analysis']
+                'enum': ['true', 'false']
               },
               'svm_dataset_type': { 
                 'type': 'string',
                 'enum': ['upload file', 'xml file']
+              },
+              'svm_session': { 
+                'type': 'string',
+                'enum': ['training', 'analysis']
               },
               'svm_model_type': {
                 'type': 'string',
@@ -38,8 +43,7 @@ def jsonschema_training():
                 'minItems': 1
               },
             }
-          },
-          'json_creator': { 'type': 'string' }
+          }
         }
       }
     }
@@ -52,12 +56,17 @@ def jsonschema_analysis():
   schema = {
     'type': 'object',
     'properties': {
+      'json_creator': { 'type': 'string' },
       'data': {
         'type': 'object',
         'properties': {
           'result': {
             'type': 'object',
             'properties': {
+              'datalist_support': {
+                'type': 'string',
+                'enum': ['true', 'false']
+              },
               'svm_session': { 
                 'type': 'string',
                 'enum': ['training', 'analysis']
@@ -72,10 +81,9 @@ def jsonschema_analysis():
                 'minItems': 1
               },
             }
-          },
-          'json_creator': { 'type': 'string' }
+          }
         }
       }
-    }    
+    }
   }
   return schema
