@@ -120,3 +120,7 @@ class Validator:
           msg = 'Error: problem with xml file #' + str(index) + '. Please re-submit the xml file.'
           print json.dumps({'error':msg}, separators=(',', ': '))
           return False
+
+      # replace portion of JSON with unique xml 'file reference(s)'
+      json_data['xml_file'][:] = json_keep
+      return json_data
