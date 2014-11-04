@@ -37,8 +37,8 @@ $(document).ready(function() {
               <input list="dataset_type" name="svm_dataset_type" placeholder="Dataset Type">\
               <datalist id="dataset_type">\
                 <select name="dataset_type" required>\
-                  <option value="Upload file">Upload file</option>\
-                  <option value="XML file">XML file</option>\
+                  <option value="upload file">upload file</option>\
+                  <option value="xml file">xml file</option>\
                 </select>\
               </datalist>\
             </fieldset>\
@@ -86,8 +86,8 @@ $(document).ready(function() {
                 <input list="model_type" name="svm_model_type" placeholder="Training Type">\
                 <datalist id="model_type">\
                   <select name="model_type" required>\
-                    <option value="Classification">Classification</option>\
-                    <option value="Regression">Regression</option>\
+                    <option value="classification">classification</option>\
+                    <option value="regression">regression</option>\
                   </select>\
                 </datalist>\
               </fieldset>\
