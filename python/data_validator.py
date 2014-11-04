@@ -58,11 +58,8 @@ class Validator:
         print str(e)
         return False
 
-  ## file_upload_validation(): this method does not validate the 'file upload(s)', or
-  #                            'xml file(s)', which is handled via 'data_validation' 
-  #                            method (see above). Rather, this method validates the 
-  #                            'file upload(s)', and determines if they are of proper 
-  #                            format.
+  ## file_upload_validation(): this method validates 'file upload(s)' file format, associated
+  #                            with its respective 'training' session.
   def file_upload_validation(self, json_file_obj):
     json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
