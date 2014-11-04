@@ -95,4 +95,10 @@ class Validator:
 
   ## xml_validation(): this method validates url references to xml files.
   def xml_validation(self, json_xml_obj):
-  
+    json_data        = json.loads(json_file_obj)['data']['result']
+    unique_hash      = set()
+    json_keep        = []
+
+    if (json_data.get('xml_file', None)):
+      for index, filedata in enumerate(json_data['file_upload']):
+        try:
