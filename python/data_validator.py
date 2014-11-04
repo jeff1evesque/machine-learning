@@ -104,6 +104,11 @@ class Validator:
       for index, xmldata in enumerate(json_data['xml_file']):
         try:
           # validate file format
+          if ():
+            msg =  '''Error: \'''' + filedata['xml_file'] + '''\', not an XML file!'''
+            print json.dumps({'error':msg}, separators=(',', ': '))
+            return False
+
           # add 'hashed' value of file reference(s) to a list
         except:
           msg = 'Error: problem with xml file #' + str(index) + '. Please re-submit the xml file.'
