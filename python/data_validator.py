@@ -23,12 +23,11 @@ class Validator:
     self.svm_session = session_type.lower()
 
   ## data_validation(): this method validates the SVM properties of either
-  #                     'training', or 'analysis' sessions. This method does
-  #                     not validate the associated 'file upload(s)', or 'xml
-  #                     file(s)'. The latter two components are validated via
-  #                     the 'file_upload_validation' method (see below).
+  #                     'training', or 'analysis' sessions.
   #
-  #  @self.svm_data: decoded JSON object 
+  #  Note: This method does not validate the associated 'file upload(s)', or 'xml file(s).
+  #        The latter two components are validated via the 'file_upload_validation', and
+  #        'xml_validation' methods (see below).
   def data_validation(self):
     # local variables
     flag_json = False
