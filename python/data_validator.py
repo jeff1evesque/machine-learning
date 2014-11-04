@@ -100,5 +100,5 @@ class Validator:
     json_keep        = []
 
     if (json_data.get('xml_file', None)):
-      for index, filedata in enumerate(json_data['file_upload']):
+      for index, filedata in enumerate(json_data['xml_file']):
         try:
