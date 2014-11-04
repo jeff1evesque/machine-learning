@@ -58,8 +58,11 @@ class Validator:
         print str(e)
         return False
 
-  ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
-  #                            with duplicate 'file upload' references removed.
+  ## file_upload_validation(): this method does not validate the 'file upload(s)', or
+  #                            'xml file(s)', which is handled via 'data_validation' 
+  #                            method (see above). Rather, this method validates the 
+  #                            'file upload(s)', and determines if they are of proper 
+  #                            format.
   def file_upload_validation(self, json_file_obj):
     json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
