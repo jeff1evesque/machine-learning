@@ -83,6 +83,7 @@ class Validator:
           if filehash not in unique_hash:
             unique_hash.add(filehash)
             json_keep.append(filedata)
+
         except:
           msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
           print json.dumps({'error':msg}, separators=(',', ': '))
@@ -116,6 +117,7 @@ class Validator:
           if filehash not in unique_hash:
             unique_hash.add(filehash)
             json_keep.append(filedata)
+
         except:
           msg = 'Error: problem with xml file #' + str(index) + '. Please re-submit the xml file.'
           print json.dumps({'error':msg}, separators=(',', ': '))
