@@ -25,7 +25,7 @@ $(document).ready(function() {
     var dataset   = $('input[name="svm_dataset[]"]');
     var flag_ajax = true;
 
-  // store 'file uploads' in array
+  // store 'file upload(s)' in array
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
       $( dataset ).each(function( index ) {
         var file_data = dataset[index].files[0];
