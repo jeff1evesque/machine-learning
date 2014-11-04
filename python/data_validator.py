@@ -44,7 +44,9 @@ class Validator:
 
     # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
-      validate(json.loads(self.svm_data), jsonschema_training())
+      try:
+        validate(json.loads(self.svm_data), jsonschema_training())
+      except Exception, e: print str(e)
 
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
