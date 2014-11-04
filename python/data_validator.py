@@ -57,8 +57,8 @@ class Validator:
         print str(e)
         return False
 
-  ## file_upload_validation(): this method validates 'file upload(s)' file format, associated
-  #                            with its respective 'training' session.
+  ## file_upload_validation(): this method validates 'file upload(s)', provided during
+  #                            'training' session.
   def file_upload_validation(self, json_file_obj):
     json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
