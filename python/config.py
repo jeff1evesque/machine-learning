@@ -22,7 +22,7 @@ def jsonschema_training():
               },
               'svm_dataset_type': { 
                 'type': 'string',
-                'enum': ['upload file', 'xml file']
+                'enum': ['supload file', 'sxml file']
               },
               'svm_session': { 
                 'type': 'string',
