@@ -35,7 +35,7 @@ class Validator:
 
     # determine if input data is a JSON object
     try:
-      self.svm_data = json.loads(self.svm_data)['data']['result']
+      json.loads(self.svm_data)['data']['result']
       flag_json = True
     except ValueError, e:
       msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
@@ -43,12 +43,65 @@ class Validator:
       return False
 
     # validation on 'analysis' session
-    if self.svm_session == 'analysis' and flag_json:
-      validate(self.svm_data, jsonschema_analysis)
+    if self.svm_session == 'training' and flag_json:
+      
+
+
+      schema = {
+        'type': 'object',
+        'properties': {
+          'json_creator': { 'type': 'string' },
+          'data': {
+            'type': 'object',
+            'properties': {
+              'result': {
+                'type': 'object',
+                'properties': {
+                  'datalist_support': {
+                    'type': 'string',
+                    'enum': ['true', 'false']
+                  },
+                  'svm_dataset_type': { 
+                    'type': 'string',
+                    'enum': ['upload file', 'xml file']
+                  },
+                  'svm_session': { 
+                    'type': 'string',
+                    'enum': ['training', 'analysis']
+                  },
+                  'svm_model_type': {
+                    'type': 'string',
+                    'enum': ['classification', 'regression']
+                  },
+                  'svm_dep_variable': {
+                    'type': 'array',
+                    'items': { 'type': 'string' },
+                    'minItems': 1
+                  },
+                  'svm_indep_variable': {
+                    'type': 'array',
+                    'items': { 'type': 'string' },
+                    'minItems': 1
+                  },
+                }
+              }
+            }
+          }
+        }
+      }
+
+      validate(json.loads(self.svm_data), schema)
+
+      #print json.loads(self.svm_data)
+      #print '============='
+      #print schema
+
+
+     #validate(self.svm_data, jsonschema_analysis)
 
     # validation on 'training' session
-    if self.svm_session == 'training' and flag_json:
-      validate(self.svm_data, jsonschema_training)
+    #if self.svm_session == 'analysis' and flag_json:
+      #validate(self.svm_data, jsonschema_analysis)
 
   ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
   #                            with duplicate 'file upload' references removed.
