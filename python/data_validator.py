@@ -42,10 +42,9 @@ class Validator:
       print json.dumps({'error':msg}, separators=(',', ': '))
       return False
 
-    # validation on 'analysis' session
+    # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
-      
-      validate(json.loads(self.svm_data), jsonschema_analysis)
+      validate(json.loads(self.svm_data), jsonschema_training)
 
     # validation on 'training' session
     #if self.svm_session == 'analysis' and flag_json:
