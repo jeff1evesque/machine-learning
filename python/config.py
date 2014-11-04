@@ -56,12 +56,17 @@ def jsonschema_analysis():
   schema = {
     'type': 'object',
     'properties': {
+      'json_creator': { 'type': 'string' },
       'data': {
         'type': 'object',
         'properties': {
           'result': {
             'type': 'object',
             'properties': {
+              'datalist_support': {
+                'type': 'string',
+                'enum': ['true', 'false']
+              },
               'svm_session': { 
                 'type': 'string',
                 'enum': ['training', 'analysis']
@@ -76,10 +81,9 @@ def jsonschema_analysis():
                 'minItems': 1
               },
             }
-          },
-          'json_creator': { 'type': 'string' }
+          }
         }
       }
-    }    
+    }
   }
   return schema
