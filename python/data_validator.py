@@ -9,6 +9,7 @@ import json, sys, magic
 from jsonschema import validate
 from helper import md5_for_file
 from config import jsonschema_training, jsonschema_analysis
+from lxml import etree
 
 ## Class: Validator
 class Validator:
@@ -23,12 +24,11 @@ class Validator:
     self.svm_session = session_type.lower()
 
   ## data_validation(): this method validates the SVM properties of either
-  #                     'training', or 'analysis' sessions. This method does
-  #                     not validate the associated 'file upload(s)', or 'xml
-  #                     file(s)'. The latter two components are validated via
-  #                     the 'file_upload_validation' method (see below).
+  #                     'training', or 'analysis' sessions.
   #
-  #  @self.svm_data: decoded JSON object 
+  #  Note: This method does not validate the associated 'file upload(s)', or 'xml file(s).
+  #        The latter two components are validated via the 'file_upload_validation', and
+  #        'xml_validation' methods (see below).
   def data_validation(self):
     # local variables
     flag_json = False
@@ -53,16 +53,13 @@ class Validator:
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
       try:
-        validate(self.svm_data, jsonschema_analysis())
+        validate(json.loads(self.svm_data), jsonschema_analysis())
       except Exception, e:
         print str(e)
         return False
 
-  ## file_upload_validation(): this method does not validate the 'file upload(s)', or
-  #                            'xml file(s)', which is handled via 'data_validation' 
-  #                            method (see above). Rather, this method validates the 
-  #                            'file upload(s)', and determines if they are of proper 
-  #                            format.
+  ## file_upload_validation(): this method validates 'file upload(s)', provided during
+  #                            'training' session.
   def file_upload_validation(self, json_file_obj):
     json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
@@ -86,6 +83,7 @@ class Validator:
           if filehash not in unique_hash:
             unique_hash.add(filehash)
             json_keep.append(filedata)
+
         except:
           msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
           print json.dumps({'error':msg}, separators=(',', ': '))
@@ -96,3 +94,37 @@ class Validator:
       return json_data
 
     else: print json.dumps({'Error':'No file(s) were uploaded'}, separators=(',', ': '))
+
+  ## xml_validation(): this method validates url references to xml files.
+  def xml_validation(self, json_xml_obj):
+    json_data        = json.loads(json_file_obj)['data']['result']
+    unique_hash      = set()
+    json_keep        = []
+
+    if (json_data.get('xml_file', None)):
+      for index, xmldata in enumerate(json_data['xml_file']):
+        try:
+          # validate file format
+          root = etree.XML( xmldata )
+          
+          if (root):
+            msg =  '''Error: \'''' + filedata['xml_file'] + '''\', not an XML file!'''
+            print json.dumps({'error':msg}, separators=(',', ': '))
+            return False
+
+          filehash = md5_for_file(filedata['xml_file'])
+          # add 'hashed' value of xml file(s) to a list
+          if filehash not in unique_hash:
+            unique_hash.add(filehash)
+            json_keep.append(filedata)
+
+        except:
+          msg = 'Error: problem with xml file #' + str(index) + '. Please re-submit the xml file.'
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          return False
+
+      # replace portion of JSON with unique xml 'file reference(s)'
+      json_data['xml_file'][:] = json_keep
+      return json_data
+
+    else: print json.dumps({'Error':'No xml file(s) were provided'}, separators=(',', ': '))
