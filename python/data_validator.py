@@ -22,11 +22,11 @@ class Validator:
     self.svm_data = svm_data
     self.svm_session = session_type.lower()
 
-  ## data_validation(): the first four validations is used for both 'training',
-  #                     and 'analysis' sessions. Since the 'analysis' session
-  #                     does not have unique validation(s), an 'ELIF' statement
-  #                     is not required for it, and already implied by the first
-  #                     four validations.
+  ## data_validation(): this method validates the SVM properties of either
+  #                     'training', or 'analysis' sessions. This method does
+  #                     not validate the associated 'file upload(s)', or 'xml
+  #                     file(s)'. The latter two components are validated via
+  #                     the 'file_upload_validation' method (see below).
   #
   #  @self.svm_data: decoded JSON object 
   def data_validation(self):
@@ -58,8 +58,11 @@ class Validator:
         print str(e)
         return False
 
-  ## file_upload_validation(): validate 'file upload' MIME type, and return JSON object
-  #                            with duplicate 'file upload' references removed.
+  ## file_upload_validation(): this method does not validate the 'file upload(s)', or
+  #                            'xml file(s)', which is handled via 'data_validation' 
+  #                            method (see above). Rather, this method validates the 
+  #                            'file upload(s)', and determines if they are of proper 
+  #                            format.
   def file_upload_validation(self, json_file_obj):
     json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
