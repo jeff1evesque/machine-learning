@@ -9,6 +9,7 @@ import json, sys, magic
 from jsonschema import validate
 from helper import md5_for_file
 from config import jsonschema_training, jsonschema_analysis
+from lxml import etree
 
 ## Class: Validator
 class Validator:
