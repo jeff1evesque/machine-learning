@@ -45,52 +45,7 @@ class Validator:
     # validation on 'analysis' session
     if self.svm_session == 'training' and flag_json:
       
-
-
-      schema = {
-        'type': 'object',
-        'properties': {
-          'json_creator': { 'type': 'string' },
-          'data': {
-            'type': 'object',
-            'properties': {
-              'result': {
-                'type': 'object',
-                'properties': {
-                  'datalist_support': {
-                    'type': 'string',
-                    'enum': ['true', 'false']
-                  },
-                  'svm_dataset_type': { 
-                    'type': 'string',
-                    'enum': ['upload file', 'xml file']
-                  },
-                  'svm_session': { 
-                    'type': 'string',
-                    'enum': ['training', 'analysis']
-                  },
-                  'svm_model_type': {
-                    'type': 'string',
-                    'enum': ['classification', 'regression']
-                  },
-                  'svm_dep_variable': {
-                    'type': 'array',
-                    'items': { 'type': 'string' },
-                    'minItems': 1
-                  },
-                  'svm_indep_variable': {
-                    'type': 'array',
-                    'items': { 'type': 'string' },
-                    'minItems': 1
-                  },
-                }
-              }
-            }
-          }
-        }
-      }
-
-      validate(json.loads(self.svm_data), schema)
+      validate(json.loads(self.svm_data), jsonschema_analysis)
 
       #print json.loads(self.svm_data)
       #print '============='
