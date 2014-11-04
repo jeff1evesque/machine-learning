@@ -98,3 +98,5 @@ class Validator:
     else: print json.dumps({'Error':'No file(s) were uploaded'}, separators=(',', ': '))
 
   ## xml_validation(): this method validates url references to xml files.
+  def xml_validation(self, json_xml_obj):
+  
