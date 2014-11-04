@@ -52,7 +52,7 @@ class Validator:
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
       try:
-        validate(self.svm_data, jsonschema_analysis())
+        validate(json.loads(self.svm_data), jsonschema_analysis())
       except Exception, e:
         print str(e)
         return False
