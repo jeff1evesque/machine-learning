@@ -33,6 +33,8 @@ $(document).ready(function() {
       });
     }
 
+  // store 'xml file(s)' in array
+
   // undefined 'file upload(s)' sets 'flag_ajax = false'
     dataset.each(function() {
       if ( typeof $(this).val() === 'undefined' ) {
