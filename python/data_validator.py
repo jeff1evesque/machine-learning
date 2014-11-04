@@ -111,7 +111,11 @@ class Validator:
             print json.dumps({'error':msg}, separators=(',', ': '))
             return False
 
-          # add 'hashed' value of file reference(s) to a list
+          filehash = md5_for_file(filedata['xml_file'])
+          # add 'hashed' value of xml file(s) to a list
+          if filehash not in unique_hash:
+            unique_hash.add(filehash)
+            json_keep.append(filedata)
         except:
           msg = 'Error: problem with xml file #' + str(index) + '. Please re-submit the xml file.'
           print json.dumps({'error':msg}, separators=(',', ': '))
