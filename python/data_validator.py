@@ -124,3 +124,5 @@ class Validator:
       # replace portion of JSON with unique xml 'file reference(s)'
       json_data['xml_file'][:] = json_keep
       return json_data
+
+    else: print json.dumps({'Error':'No xml file(s) were provided'}, separators=(',', ': '))
