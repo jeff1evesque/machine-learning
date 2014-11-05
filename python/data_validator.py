@@ -49,6 +49,7 @@ class Validator:
         print str(e)
         return False
 
+      # validation on 'xml file(s)'
       if ( json_data.get('svm_dataset_type', None) == 'upload file' and json_data.get('svm_dataset', None) ):
         for index, xmldata in enumerate(json_data['svm_dataset']):
           print xmldata
