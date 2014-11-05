@@ -35,9 +35,11 @@ $(document).ready(function() {
 
   // store 'xml file(s)' in array
     else if ( dataset.length > 0 && dataset.attr('type') == 'url' ) {
+
       $( dataset ).each(function( index ) {
-        var xml_data = dataset[index].url[0];
-        form_data.append('xml_file_' + index, xml_data);
+       var xml_data = $(this).val();
+       console.log( 'xml_data: ' + xml_data );
+       form_data.append('xml_file_' + index, xml_data);
       });
     }
 
