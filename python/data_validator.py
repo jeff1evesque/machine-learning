@@ -26,7 +26,7 @@ class Validator:
   #                     'training', or 'analysis' sessions.
   #
   #  Note: This method does not validate the associated 'file upload(s)'. The
-  #        latter component is validated via the 'file_upload_validation'.
+  #        latter component is validated via 'file_upload_validation' (see below).
   def data_validation(self):
     # local variables
     flag_json = False
