@@ -24,6 +24,11 @@ def jsonschema_training():
                 'type': 'string',
                 'enum': ['upload file', 'xml file']
               },
+              'svm_dataset': {
+                'type': 'array',
+                'items': { 'type': 'string' },
+                'minItems': 1
+              },
               'svm_session': { 
                 'type': 'string',
                 'enum': ['training', 'analysis']
