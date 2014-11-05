@@ -9,6 +9,7 @@ import json, sys, magic
 from jsonschema import validate
 from helper import md5_for_file
 from config import jsonschema_training, jsonschema_analysis
+from lxml import etree
 
 ## Class: Validator
 class Validator:
@@ -30,6 +31,7 @@ class Validator:
   def data_validation(self):
     # local variables
     flag_json = False
+    json_data = json.loads(self.svm_data)['data']['result']
 
     # determine if input data is a JSON object
     try:
@@ -47,6 +49,11 @@ class Validator:
       except Exception, e:
         print str(e)
         return False
+
+      # validation on 'xml file(s)'
+      if ( json_data.get('svm_dataset_type', None) == 'upload file' and json_data.get('svm_dataset', None) ):
+        for index, xmldata in enumerate(json_data['svm_dataset']):
+          print xmldata
 
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
