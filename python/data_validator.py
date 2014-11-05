@@ -49,6 +49,10 @@ class Validator:
         print str(e)
         return False
 
+      if ( json_data.get('svm_dataset_type', None) == 'upload file' and json_data.get('svm_dataset', None) ):
+        for index, xmldata in enumerate(json_data['svm_dataset']):
+          print xmldata
+
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
       try:
