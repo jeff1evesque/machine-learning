@@ -25,7 +25,7 @@ $(document).ready(function() {
     var dataset   = $('input[name="svm_dataset[]"]');
     var flag_ajax = true;
 
-  // store 'file uploads' in array
+  // store 'file upload(s)' in array
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
       $( dataset ).each(function( index ) {
         var file_data = dataset[index].files[0];
@@ -33,7 +33,15 @@ $(document).ready(function() {
       });
     }
 
-  // undefined 'file upload(s)' sets 'flag_ajax = false'
+  // store 'xml file(s)' in array
+    else if ( dataset.length > 0 && dataset.attr('type') == 'url' ) {
+      $( dataset ).each(function( index ) {
+        var xml_data = $(this).val();
+        form_data.append('xml_file_' + index, xml_data);
+      });
+    }
+
+  // undefined 'file upload(s)', or 'xml file(s)' sets 'flag_ajax = false'
     dataset.each(function() {
       if ( typeof $(this).val() === 'undefined' ) {
         flag_ajax = false;
