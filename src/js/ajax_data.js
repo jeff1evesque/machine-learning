@@ -41,7 +41,7 @@ $(document).ready(function() {
       });
     }
 
-  // undefined 'file upload(s)' sets 'flag_ajax = false'
+  // undefined 'file upload(s)', or 'xml file(s)' sets 'flag_ajax = false'
     dataset.each(function() {
       if ( typeof $(this).val() === 'undefined' ) {
         flag_ajax = false;
