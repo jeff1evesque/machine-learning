@@ -12,6 +12,8 @@
  *   'false' tells jQuery not to convert the 'data' object into a serialized parameter
  *   string, which would be done before sending the 'data' to the server.
  *
+ * Note: 'xml_upload(s)' is sent to python scripts via 'ajax_json.js'.
+ *
  * Note: the implemented AJAX methods, and properties, are discussed more fully within
  *       'ajax_json.js'
  */
@@ -33,15 +35,7 @@ $(document).ready(function() {
       });
     }
 
-  // store 'xml file(s)' in array
-    else if ( dataset.length > 0 && dataset.attr('type') == 'url' ) {
-      $( dataset ).each(function( index ) {
-        var xml_data = $(this).val();
-        form_data.append('xml_file_' + index, xml_data);
-      });
-    }
-
-  // undefined 'file upload(s)', or 'xml file(s)' sets 'flag_ajax = false'
+  // undefined 'file upload(s)' sets 'flag_ajax = false'
     dataset.each(function() {
       if ( typeof $(this).val() === 'undefined' ) {
         flag_ajax = false;
