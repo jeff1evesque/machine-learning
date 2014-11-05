@@ -12,6 +12,8 @@
  *   'false' tells jQuery not to convert the 'data' object into a serialized parameter
  *   string, which would be done before sending the 'data' to the server.
  *
+ * Note: 'xml_upload(s)' is sent to python scripts via 'ajax_json.js'.
+ *
  * Note: the implemented AJAX methods, and properties, are discussed more fully within
  *       'ajax_json.js'
  */
