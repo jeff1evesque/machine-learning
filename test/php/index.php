@@ -28,6 +28,7 @@
     <script src='../../src/js/jquery-validate.js'></script>
     <script src='../../src/js/html_form.js'></script>
     <script src='../../src/js/html_form_delegator.js'></script>
+    <script src='../../src/js/form_validator.js'></script>
     <script src='../../src/js/ajax_graphic.js'></script>
     <script src='../../src/js/ajax_data.js'></script>
     <script src='../../src/js/ajax_json.js'></script>
