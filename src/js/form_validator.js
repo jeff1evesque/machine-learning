@@ -4,3 +4,7 @@
  *
  *     https://github.com/jzaefferer/jquery-validation#including-it-on-your-page
  */
+
+$(document).ready(function() {
+
+});
