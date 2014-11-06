@@ -1,9 +1,3 @@
 [submodule "submodule/scikit-learn"]
 	path = submodule/scikit-learn
 	url = git://github.com/scikit-learn/scikit-learn.git
-[submodule "submodule/grunt"]
-	path = submodule/grunt
-	url = https://github.com/jeff1evesque/grunt
-[submodule "submodule/jsonschema"]
-	path = submodule/jsonschema
-	url = https://github.com/Julian/jsonschema
