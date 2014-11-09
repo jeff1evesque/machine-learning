@@ -6,7 +6,7 @@
 PATH="/usr/local/bin:$PATH"
 
 # track execution of script
-#set -x; exec > logs/log_bash_loader 2>&1
+set -x; exec > log/log_bash_web 2>&1
 
 # Minify Javascript
 for file in ../src/*.js; do
