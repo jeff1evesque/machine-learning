@@ -105,7 +105,7 @@ Now, commit and merge the submodule changes.
 This repository requires *Scikit-Learn*:
 
 ```
-cd /var/www/html/machine-learning/library/scikit-learn/
+cd /var/www/library/scikit-learn/
 python setup.py build
 sudo python setup.py install
 ```
