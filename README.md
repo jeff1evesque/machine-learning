@@ -56,9 +56,7 @@ cd /var/www/html/
 sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git machine-learning
 ```
 
-####File Permission
-
-Change the file permission for the entire project by issuing the command:
+Then, change the *file permissions* for the entire project by issuing the command:
 
 ```
 cd /var/www/html/
