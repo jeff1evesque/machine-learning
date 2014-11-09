@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # create 'logs' directory if doesn't exist
-mkdir -p logs
+mkdir -p log
 
 # trace last execution of 'bash_loader'
-set -x; exec > logs/log_bash_loader 2>&1
+set -x; exec > log/log_bash_loader 2>&1
 
 # allow @(var) syntax
 shopt -s extglob
@@ -16,6 +16,6 @@ haystack=(./@(build)/*)
 true "${haystack[@]}"
 
 # execute scripts in 'haystack'
-for file in "${haystack[@]}"; do  
+for file in "${haystack[@]}"; do
  ./"$file" &
 done
