@@ -116,6 +116,25 @@ We will automate [Grunt's](https://gruntjs.com) task management, which will enco
 
 More information regarding setting-up [Grunt](https://gruntjs.com), can be found within the [README.md](https://github.com/jeff1evesque/grunt/blob/master/README.md) file from the [Grunt](http://github.com/jeff1evesque/grunt) repository.
 
+###Bash Script
+
+Configuring `/etc/rc.local` allows bash-scripts to be run during [apache2](https://help.ubuntu.com/10.04/serverguide/httpd.html) boot. Since `bash_loader` loads all required bash-scripts, the following change to `/etc/rc.local` ensures `bash_loader` to be run at start-up:
+
+```
+...
+# run 'bash_loader' at start-up for '/var/www/html/leque/' application (edited by JL)
+cd /var/www/html/leque/bash/ && ./bash_loader > /dev/null 2>&1 &
+
+exit 0
+```
+
+The above configuration may require start [rc.local](http://www.linux.com/news/enterprise/systems-management/8116-an-introduction-to-services-runlevels-and-rcd-scripts):
+
+```
+sudo /etc/init.d/rc.local start
+```
+
+
 ##Testing / Execution
 
 ###Test Scripts
