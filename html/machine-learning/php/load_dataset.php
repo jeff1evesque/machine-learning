@@ -40,6 +40,6 @@
   $json = json_encode( $json );
 
 // return to AJAX python 'result'
-  $result = shell_command('python ../python/svm_training.py', $json);
+  $result = shell_command('python ../../../python/svm_training.py', $json);
   print json_encode($result);
 ?>
