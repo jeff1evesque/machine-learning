@@ -116,6 +116,36 @@ We will automate [Grunt's](https://gruntjs.com) task management, which will enco
 
 More information regarding setting-up [Grunt](https://gruntjs.com), can be found within the [README.md](https://github.com/jeff1evesque/grunt/blob/master/README.md) file from the [Grunt](http://github.com/jeff1evesque/grunt) repository.
 
+###Bash Script
+
+Generally, [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) is preferred over [python](http://en.wikipedia.org/wiki/Python_(programming_language)) for simple *file system* oriented tasks. In this repository, bash is used to [*shell script*](http://en.wikipedia.org/wiki/Shell_script) the execution of [sass](http://sass-lang.com/documentation/file.SASS_REFERENCE.html), [uglifyjs](https://www.npmjs.org/package/uglify-js#usage), and [imagemin](https://www.npmjs.org/package/imagemin#usage).
+
+The following command compiles and minifies [javascript](http://en.wikipedia.org/wiki/JavaScript), [css](http://en.wikipedia.org/wiki/Cascading_Style_Sheets), and various [image file formats](http://en.wikipedia.org/wiki/Image_file_formats):
+
+```
+cd /var/www/html/bash/
+./bash_loader
+```
+
+Alternatively, configuring `/etc/rc.local` allows bash-scripts to be run during [apache2](https://help.ubuntu.com/10.04/serverguide/httpd.html) boot:
+
+```
+...
+# run 'bash_loader' at start-up for 'machine-learning' application (edited by JL)
+cd /var/www/bash/ && ./bash_loader > /dev/null 2>&1 &
+
+exit 0
+```
+
+Since some [build](https://github.com/jeff1evesque/machine-learning/tree/master/bash/build/) scripts implement [*inotifywait*](http://linux.die.net/man/1/inotifywait), a linux subkernel that monitors file system changes, the above changes would allow each respective *build* script to be automated.
+
+**Note:** The above configuration may require [rc.local](http://www.linux.com/news/enterprise/systems-management/8116-an-introduction-to-services-runlevels-and-rcd-scripts) to be *(re)started*:
+
+```
+sudo /etc/init.d/rc.local start
+```
+
+
 ##Testing / Execution
 
 ###Test Scripts
