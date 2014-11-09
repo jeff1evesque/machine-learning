@@ -24,16 +24,16 @@
 ?>
 <html>
   <head>
-    <script src='../../src/js/jquery-1.8.3.js'></script>
-    <script src='../../src/js/jquery-validate.js'></script>
-    <script src='../../src/js/html_form.js'></script>
-    <script src='../../src/js/html_form_delegator.js'></script>
-    <script src='../../src/js/form_validator.js'></script>
-    <script src='../../src/js/ajax_graphic.js'></script>
-    <script src='../../src/js/ajax_data.js'></script>
-    <script src='../../src/js/ajax_json.js'></script>
+    <script src='../../asset/js/jquery-1.8.3.min.js'></script>
+    <script src='../../asset/js/jquery-validate.min.js'></script>
+    <script src='../../asset/js/html_form.min.js'></script>
+    <script src='../../asset/js/html_form_delegator.min.js'></script>
+    <script src='../../asset/js/form_validator.min.js'></script>
+    <script src='../../asset/js/ajax_graphic.min.js'></script>
+    <script src='../../asset/js/ajax_data.min.js'></script>
+    <script src='../../asset/js/ajax_json.min.js'></script>
 
-    <link rel='stylesheet' href='../../src/css/form_svm.css'>
+    <link rel='stylesheet' href='../../asset/css/form_svm.css'>
   </head>
   <body>
 
