@@ -56,6 +56,15 @@ cd /var/www/html/
 sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git machine-learning
 ```
 
+Then, change the *file permissions* for the entire project by issuing the command:
+
+```
+cd /var/www/html/
+sudo chown -R jeffrey:sudo machine-learning
+```
+
+**Note:** change 'jeffrey' to the user account YOU use.
+
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
 ```
@@ -87,17 +96,6 @@ git status
 ```
 
 Now, commit and merge the submodule changes.
-
-###File Permission
-
-Change the file permission for the entire project by issuing the command:
-
-```
-cd /var/www/html/
-sudo chown -R jeffrey:sudo machine-learning
-```
-
-**Note:** change 'jeffrey' to the user account YOU use.
 
 ###Scikit-Learn
 
