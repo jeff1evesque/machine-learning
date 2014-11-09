@@ -118,7 +118,9 @@ More information regarding setting-up [Grunt](https://gruntjs.com), can be found
 
 ###Bash Script
 
-Configuring `/etc/rc.local` allows bash-scripts to be run during [apache2](https://help.ubuntu.com/10.04/serverguide/httpd.html) boot. Since `bash_loader` loads all required bash-scripts, the following change to `/etc/rc.local` ensures `bash_loader` to be run at start-up:
+This repository implements [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) to [*shell script*](http://en.wikipedia.org/wiki/Shell_script) the execution of [Sass](http://sass-lang.com/documentation/file.SASS_REFERENCE.html), [uglifyjs](https://www.npmjs.org/package/uglify-js#usage), and [imagemin](https://www.npmjs.org/package/imagemin#usage). Generally, Bash is preferred over *python* for simple *filesystem* oriented tasks.
+
+Alternatively, configuring `/etc/rc.local` allows bash-scripts to be run during [apache2](https://help.ubuntu.com/10.04/serverguide/httpd.html) boot. Since `bash_loader` loads all required bash-scripts, the following change to `/etc/rc.local` ensures `bash_loader` to be run at start-up:
 
 ```
 ...
