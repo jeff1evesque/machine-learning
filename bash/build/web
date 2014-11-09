@@ -9,7 +9,7 @@ PATH="/usr/local/bin:$PATH"
 set -x; exec > log/log_bash_web 2>&1
 
 # Minify Javascript
-for file in ../src/*.js; do
+for file in ../src/js/*.js; do
   # filename (without extension)
   filename="${file##*/}"
 
