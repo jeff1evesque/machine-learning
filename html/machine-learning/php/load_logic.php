@@ -87,7 +87,7 @@
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to training'), $arr_result);
         $arr_result = array('data' => $arr_result);
         $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
-        $result = shell_command('python ../python/svm_training.py', json_encode($arr_result));
+        $result = shell_command('python ../../../python/svm_training.py', json_encode($arr_result));
 
       // Return JSON result(s) from python script
         print json_encode($result);
@@ -102,7 +102,7 @@
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
         $arr_result = array('data' => $arr_result);
         $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
-        $result     = shell_command('python ../python/svm_analysis.py', json_encode($arr_result));
+        $result     = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
 
       // Return JSON result(s) from python script
         print json_encode($result);
