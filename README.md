@@ -87,7 +87,7 @@ sudo git submodule update
 The above two commands will update submodules.  If they are already initialized, then the latter command will suffice. Then, we need to pull the code-base into the initialized submodule directory:
 
 ```
-cd /var/www/html/machine-learning/
+cd /var/www/
 git checkout -b NEW_BRANCH master
 cd [YOUR_SUBMODULE]/
 git checkout master
