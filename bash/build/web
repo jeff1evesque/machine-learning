@@ -4,3 +4,6 @@
 
 # Pre-Pathing: allow 'uglifyjs' command
 PATH="/usr/local/bin:$PATH"
+
+# track execution of script
+#set -x; exec > logs/log_bash_loader 2>&1
