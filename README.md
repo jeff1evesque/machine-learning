@@ -35,8 +35,14 @@ The following packages need to be installed through terminal in Ubuntu:
 ```
 # General Packages:
 sudo apt-get install lamp-server^ phpmyadmin
+sudo apt-get install nodejs
+sudo apt-get install npm
+sudo pip install jsonschema
+sudo gem install sass
+sudo npm install uglify-js
+sudo npm install imagemin
 
-# Scikit Package(s):
+# Scikit Package(s) Dependency:
 sudo apt-get install python-numpy
 
 # Python Magic:
