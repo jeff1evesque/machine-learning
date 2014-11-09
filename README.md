@@ -52,15 +52,16 @@ sudo pip install python-magic
 Fork this project in your GitHub account, then clone your repository:
 
 ```
-cd /var/www/html/
-sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git machine-learning
+cd /var/
+sudo mv www/ _www/
+sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git www
 ```
 
 Then, change the *file permissions* for the entire project by issuing the command:
 
 ```
-cd /var/www/html/
-sudo chown -R jeffrey:sudo machine-learning
+cd /var/
+sudo chown -R jeffrey:sudo www
 ```
 
 **Note:** change 'jeffrey' to the user account YOU use.
