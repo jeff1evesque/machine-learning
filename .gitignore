@@ -1,3 +1,7 @@
+# Ignore everything in 'html/', except one subdirectory
+/html/*
+!/html/machine-learning/
+
 # Ignore and don't commit the following directories
 /assets/
 /bash/log/
