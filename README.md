@@ -137,7 +137,7 @@ cd /var/www/bash/ && ./bash_loader > /dev/null 2>&1 &
 exit 0
 ```
 
-Since some [build](https://github.com/jeff1evesque/machine-learning/tree/master/bash/build/) scripts implement [*inotifywait*](http://linux.die.net/man/1/inotifywait), a linux subkernel that monitors file system changes, the above changes would allow *sass*, *uglifyjs*, and *imagemin* to be automated.
+Since some [build](https://github.com/jeff1evesque/machine-learning/tree/master/bash/build/) scripts implement [*inotifywait*](http://linux.die.net/man/1/inotifywait), a linux subkernel that monitors file system changes, the above changes would allow each respective *build* script to be automated.
 
 **Note:** The above configuration may require [rc.local](http://www.linux.com/news/enterprise/systems-management/8116-an-introduction-to-services-runlevels-and-rcd-scripts) to be *(re)started*:
 
