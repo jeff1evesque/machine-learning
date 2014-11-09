@@ -106,7 +106,7 @@ sudo chown -R jeffrey:sudo machine-learning
 This repository requires *Scikit-Learn*:
 
 ```
-cd /var/www/html/machine-learning/scikit-learn/
+cd /var/www/html/machine-learning/library/scikit-learn/
 python setup.py build
 sudo python setup.py install
 ```
