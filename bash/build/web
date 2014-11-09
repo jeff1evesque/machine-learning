@@ -7,3 +7,12 @@ PATH="/usr/local/bin:$PATH"
 
 # track execution of script
 #set -x; exec > logs/log_bash_loader 2>&1
+
+# Minify Javascript
+for file in ../src/*.js; do
+  # filename (without extension)
+  filename="${file##*/}"
+
+  # minifiy javascript
+  uglifyjs --output ../html/machine-learning/asset/js/$filename.min.js $file
+done
