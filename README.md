@@ -127,7 +127,7 @@ cd /var/www/html/bash/
 ./bash_loader
 ```
 
-Alternatively, configuring `/etc/rc.local` allows bash-scripts to be run during [apache2](https://help.ubuntu.com/10.04/serverguide/httpd.html) boot. Since `bash_loader` loads all required bash-scripts, the following change to `/etc/rc.local` ensures `bash_loader` to be run at start-up:
+Alternatively, configuring `/etc/rc.local` allows bash-scripts to be run during [apache2](https://help.ubuntu.com/10.04/serverguide/httpd.html) boot:
 
 ```
 ...
@@ -137,7 +137,9 @@ cd /var/www/bash/ && ./bash_loader > /dev/null 2>&1 &
 exit 0
 ```
 
-The above configuration may require start [rc.local](http://www.linux.com/news/enterprise/systems-management/8116-an-introduction-to-services-runlevels-and-rcd-scripts):
+This is useful since some [*build*](https://github.com/jeff1evesque/machine-learning/tree/master/bash/build/) scripts implement [*inotifywait*](http://linux.die.net/man/1/inotifywait), a linux subkernel that monitors file system changes.
+
+**Note:** The above configuration may require start [rc.local](http://www.linux.com/news/enterprise/systems-management/8116-an-introduction-to-services-runlevels-and-rcd-scripts):
 
 ```
 sudo /etc/init.d/rc.local start
