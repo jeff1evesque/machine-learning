@@ -1,4 +1,4 @@
-# Ignore everything in 'html/', except one subdirectory
+# Ignore everything in '/html/', except one subdirectory
 /html/*
 !/html/machine-learning/
 
