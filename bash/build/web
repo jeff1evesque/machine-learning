@@ -12,10 +12,11 @@ mkdir -p ../html/machine-learning/asset/js/
 set -x; exec > log/log_bash_web 2>&1
 
 # Minify Javascript
-for file in ../src/js/*.js; do
+for file_with_path in ../src/js/*.js; do
   # filename (without extension)
-  filename="${file##*/}"
+  file="${file_with_path##*/}"
+  filename="${file%.*}"
 
   # minifiy javascript
-  uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file
+  uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
 done
