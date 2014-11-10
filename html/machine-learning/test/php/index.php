@@ -24,14 +24,14 @@
 ?>
 <html>
   <head>
-    <script src='../../asset/js/jquery-1.8.3.min.js'></script>
-    <script src='../../asset/js/jquery-validate.min.js'></script>
-    <script src='../../asset/js/html_form.min.js'></script>
-    <script src='../../asset/js/html_form_delegator.min.js'></script>
-    <script src='../../asset/js/form_validator.min.js'></script>
-    <script src='../../asset/js/ajax_graphic.min.js'></script>
-    <script src='../../asset/js/ajax_data.min.js'></script>
-    <script src='../../asset/js/ajax_json.min.js'></script>
+    <script src='../../../asset/js/jquery-1.8.3.min.js'></script>
+    <script src='../../../asset/js/jquery-validate.min.js'></script>
+    <script src='../../../asset/js/html_form.min.js'></script>
+    <script src='../../../asset/js/html_form_delegator.min.js'></script>
+    <script src='../../../asset/js/form_validator.min.js'></script>
+    <script src='../../../asset/js/ajax_graphic.min.js'></script>
+    <script src='../../../asset/js/ajax_data.min.js'></script>
+    <script src='../../../asset/js/ajax_json.min.js'></script>
 
     <link rel='stylesheet' href='../../asset/css/form_svm.css'>
   </head>
