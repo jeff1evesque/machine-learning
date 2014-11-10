@@ -3,7 +3,7 @@
 !/html/machine-learning/
 
 # Ignore and don't commit the following directories
-/assets/
+/html/machine-learning/asset/
 /bash/log/
 
 # Ignore and don't commit the following files
