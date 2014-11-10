@@ -17,5 +17,5 @@ for file in ../src/js/*.js; do
   filename="${file##*/}"
 
   # minifiy javascript
-  uglifyjs --output ../html/machine-learning/asset/js/$filename.min.js $file
+  uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file
 done
