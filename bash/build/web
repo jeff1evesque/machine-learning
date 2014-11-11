@@ -20,3 +20,5 @@ for file_with_path in ../src/js/*.js; do
   # minifiy with 'uglifyjs'
   uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
 done
+
+# Compile CSS
