@@ -17,6 +17,6 @@ for file_with_path in ../src/js/*.js; do
   file="${file_with_path##*/}"
   filename="${file%.*}"
 
-  # minifiy javascript
+  # minifiy with 'uglifyjs'
   uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
 done
