@@ -23,4 +23,8 @@ done
 
 # Compile CSS
 for file_with_path in ../src/scss/*.scss; do
+  # filename (without extension)
+  file="${file_with_path##*/}"
+  filename="${file%.*}"
+
 done
