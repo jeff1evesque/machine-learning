@@ -27,4 +27,5 @@ for file_with_path in ../src/scss/*.scss; do
   file="${file_with_path##*/}"
   filename="${file%.*}"
 
+  # compile with 'sass'
 done
