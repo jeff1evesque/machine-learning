@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# create 'logs' directory if doesn't exist
+# create 'log' directory if doesn't exist
 mkdir -p log
 
 # trace last execution of 'bash_loader'
