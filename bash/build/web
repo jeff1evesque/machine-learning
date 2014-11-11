@@ -28,5 +28,5 @@ for file_with_path in ../src/scss/*.scss; do
   filename="${file%.*}"
 
   # compile with 'sass'
-  sass ../html/machine-learning/asset/css/$filename.min.css $file_with_path
+  sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css
 done
