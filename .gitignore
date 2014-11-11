@@ -5,6 +5,7 @@
 # Ignore and don't commit the following directories
 /html/machine-learning/asset/
 /bash/log/
+/bash/.sass-cache/
 
 # Ignore and don't commit the following files
 /python/*.pyc
