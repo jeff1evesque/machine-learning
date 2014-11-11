@@ -33,7 +33,7 @@
     <script src='../../asset/js/ajax_data.min.js'></script>
     <script src='../../asset/js/ajax_json.min.js'></script>
 
-    <link rel='stylesheet' href='../../asset/scss/style.css'>
+    <link rel='stylesheet' href='../../asset/css/style.min.css'>
   </head>
   <body>
 
