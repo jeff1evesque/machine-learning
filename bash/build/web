@@ -37,8 +37,7 @@ done
 for file_with_path in ../src/img/*; do
   # filename (without extension)
   file="${file_with_path##*/}"
-  filename="${file%.*}"
 
   # minify with 'imagemin'
-  imagemin $file_with_path ../html/machine-learning/asset/img/$file
+  imagemin $file_with_path > ../html/machine-learning/asset/img/$file
 done
