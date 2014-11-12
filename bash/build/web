@@ -13,8 +13,8 @@ mkdir -p ../html/machine-learning/asset/img/
 # track execution of script
 set -x; exec > log/log_bash_web 2>&1
 
+# watch directory
 inotifywait ../src/js/ -m -e close_write -e move -e create |
-
   # Minify Javascript
   for file_with_path in ../src/js/*.js; do
     # filename (without extension)
