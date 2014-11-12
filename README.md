@@ -51,7 +51,7 @@ sudo gem install sass
 sudo npm install uglify-js -g
 sudo npm install --global imagemin
 
-# Scikit Dependency:
+# Scikit-Learn Dependency:
 sudo apt-get install python-numpy
 ```
 
