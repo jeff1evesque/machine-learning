@@ -37,7 +37,7 @@ inotifywait ../src/scss/ -m -e close_write -e move -e create |
     sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css --style compressed
   done
 
-# watch directory
+# watch '../src/img/' subdirectory
 inotifywait ../src/img/ -m -e close_write -e move -e create |
   # Minify Images
   for file_with_path in ../src/img/*; do
