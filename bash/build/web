@@ -13,6 +13,7 @@ mkdir -p ../html/machine-learning/asset/img/
 # track execution of script
 set -x; exec > log/log_bash_web 2>&1
 
+
 # watch '../src/js/' subdirectory
 inotifywait ../src/js/ -m -e close_write -e move -e create |
   # Minify Javascript
@@ -25,6 +26,7 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
     uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
   done
 
+
 # watch '../src/scss/' subdirectory
 inotifywait ../src/scss/ -m -e close_write -e move -e create |
   # Compile CSS
@@ -36,6 +38,7 @@ inotifywait ../src/scss/ -m -e close_write -e move -e create |
     # compile with 'sass'
     sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css --style compressed
   done
+
 
 # watch '../src/img/' subdirectory
 inotifywait ../src/img/ -m -e close_write -e move -e create |
