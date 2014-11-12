@@ -37,11 +37,13 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
     sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css --style compressed
   done
 
-# Minify Images
-for file_with_path in ../src/img/*; do
-  # filename (without extension)
-  file="${file_with_path##*/}"
+# watch directory
+inotifywait ../src/img/ -m -e close_write -e move -e create |
+  # Minify Images
+  for file_with_path in ../src/img/*; do
+    # filename (without extension)
+    file="${file_with_path##*/}"
 
-  # minify with 'imagemin'
-  imagemin $file_with_path > ../html/machine-learning/asset/img/$file
-done
+    # minify with 'imagemin'
+    imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+  done
