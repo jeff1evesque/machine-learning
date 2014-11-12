@@ -26,7 +26,7 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
   done
 
 # watch directory
-inotifywait ../src/js/ -m -e close_write -e move -e create |
+inotifywait ../src/scss/ -m -e close_write -e move -e create |
   # Compile CSS
   for file_with_path in ../src/scss/*.scss; do
     # filename (without extension)
