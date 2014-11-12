@@ -39,14 +39,14 @@ sudo apt-get install inotify-tools
 sudo pip install jsonschema
 sudo pip install python-magic
 
-# PPA for latest version of nodejs
+# PPA for latest version of nodejs:
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 
-# nodejs / npm
+# nodejs / npm:
 sudo apt-get install nodejs
 sudo apt-get install npm
 
-# Compiler / Minifier
+# Compiler / Minifier:
 sudo gem install sass
 sudo npm install uglify-js -g
 sudo npm install --global imagemin
