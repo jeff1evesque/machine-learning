@@ -31,3 +31,5 @@ for file_with_path in ../src/scss/*.scss; do
   # compile with 'sass'
   sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css --style compressed
 done
+
+# Minify Images
