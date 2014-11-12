@@ -25,7 +25,7 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
     uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
   done
 
-# watch directory
+# watch '../src/scss/' subdirectory
 inotifywait ../src/scss/ -m -e close_write -e move -e create |
   # Compile CSS
   for file_with_path in ../src/scss/*.scss; do
