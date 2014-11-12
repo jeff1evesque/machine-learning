@@ -38,4 +38,5 @@ for file_with_path in ../src/img/*; do
   file="${file_with_path##*/}"
   filename="${file%.*}"
 
+  # minify with 'imagemin'
 done
