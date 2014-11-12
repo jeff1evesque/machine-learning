@@ -33,3 +33,5 @@ for file_with_path in ../src/scss/*.scss; do
 done
 
 # Minify Images
+for file_with_path in ../src/img/*; do
+done
