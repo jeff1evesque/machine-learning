@@ -2,7 +2,7 @@
 # note: this file is executed from 'bash_loader' , this is why the
 #       directory paths seem to be too short (i.e. missing extra '..')
 
-# Pre-Pathing: allow 'uglifyjs' command
+# Pre-Pathing: allow 'uglifyjs', 'sass', 'imagemin' command
 PATH="/usr/local/bin:$PATH"
 
 # create directory if doesn't exist
