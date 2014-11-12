@@ -13,15 +13,17 @@ mkdir -p ../html/machine-learning/asset/img/
 # track execution of script
 set -x; exec > log/log_bash_web 2>&1
 
-# Minify Javascript
-for file_with_path in ../src/js/*.js; do
-  # filename (without extension)
-  file="${file_with_path##*/}"
-  filename="${file%.*}"
+inotifywait ../src/js/ -m -e close_write -e move -e create |
 
-  # minifiy with 'uglifyjs'
-  uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
-done
+  # Minify Javascript
+  for file_with_path in ../src/js/*.js; do
+    # filename (without extension)
+    file="${file_with_path##*/}"
+    filename="${file%.*}"
+
+    # minifiy with 'uglifyjs'
+    uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
+  done
 
 # Compile CSS
 for file_with_path in ../src/scss/*.scss; do
