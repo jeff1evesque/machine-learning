@@ -39,14 +39,17 @@ sudo apt-get install inotify-tools
 sudo pip install jsonschema
 sudo pip install python-magic
 
+# PPA for latest version of nodejs
+curl -sL https://deb.nodesource.com/setup | sudo bash -
+
 # nodejs / npm
 sudo apt-get install nodejs
 sudo apt-get install npm
 
 # Compiler / Minifier
 sudo gem install sass
-sudo npm install uglify-js
-sudo npm install imagemin
+sudo npm install uglify-js -g
+sudo npm install --global imagemin
 
 # Scikit Package(s) Dependency:
 sudo apt-get install python-numpy
