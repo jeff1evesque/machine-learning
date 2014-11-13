@@ -24,7 +24,7 @@
 ?>
 <html>
   <head>
-    <script src='../../asset/js/jquery-1.8.3.min.js'></script>
+    <script src='../../asset/js/jquery-2.1.1.min.js'></script>
     <script src='../../asset/js/jquery-validate.min.js'></script>
     <script src='../../asset/js/html_form.min.js'></script>
     <script src='../../asset/js/html_form_delegator.min.js'></script>
