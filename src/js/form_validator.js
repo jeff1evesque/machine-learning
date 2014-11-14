@@ -12,13 +12,16 @@
 
 // Validation: use the above 'definition'
   $(document).ready(function() {
+  // Local Variable
+    var form_to_validate = $('form');
+
   // Validate
-    $("form").validate();
+    $(form_to_validate).validate();
 
   // Count number of invalid fields
-    $('form').submit(function () {
-      var validator = $('#testForm').validate();    
-      var valid = $('#testForm').valid();
+    $(form_to_validate).submit(function () {
+      var validator = $(form_to_validate).validate();    
+      var valid = $(form_to_validate).valid();
       var invalids = validator.numberOfInvalids();
     });
   });
