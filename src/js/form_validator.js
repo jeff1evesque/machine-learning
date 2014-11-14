@@ -5,12 +5,12 @@
  *     https://github.com/jzaefferer/jquery-validation#including-it-on-your-page
  */
 
-// Compound Class Rules
+// Definition: Compound Class Rules
   $.validator.addClassRules({
 
   });
 
-// Validate after DOM load
+// Validation: use the above 'definition'
   $(document).ready(function() {
   // Validate
     $("form").validate();
