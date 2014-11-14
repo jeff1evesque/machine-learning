@@ -10,7 +10,15 @@
 
   });
 
-// Validate HTML
-$(document).ready(function() {
-  $("form").validate();
-});
+// Validate after DOM load
+  $(document).ready(function() {
+  // Validate
+    $("form").validate();
+
+  // Count number of invalid fields
+    $('form').submit(function () {
+      var validator = $('#testForm').validate();    
+      var valid = $('#testForm').valid();
+      var invalids = validator.numberOfInvalids();
+    });
+  });
