@@ -10,6 +10,7 @@
 
   });
 
+// Validate HTML
 $(document).ready(function() {
   $("form").validate();
 });
