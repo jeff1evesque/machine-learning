@@ -33,6 +33,9 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 The following packages need to be installed through terminal in Ubuntu:
 
 ```
+# Gnome UI for Ubuntu:
+sudo apt-get install xorg gnome-core gnome-system-tools gnome-app-install
+
 # General Packages:
 sudo apt-get install lamp-server^ phpmyadmin
 sudo apt-get install inotify-tools
