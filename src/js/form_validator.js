@@ -5,6 +5,8 @@
  *     https://github.com/jzaefferer/jquery-validation#including-it-on-your-page
  */
 
+// Compound Class Rules
+
 $(document).ready(function() {
   $("form").validate();
 });
