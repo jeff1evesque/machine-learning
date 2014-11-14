@@ -20,7 +20,7 @@
 
   // Count number of invalid fields
     $(form_to_validate).submit(function () {
-      var validator = $(form_to_validate).validate();    
+      var validator = $(form_to_validate).validate(); 
       var valid = $(form_to_validate).valid();
       var invalids = validator.numberOfInvalids();
     });
