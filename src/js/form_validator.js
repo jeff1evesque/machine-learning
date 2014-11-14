@@ -6,6 +6,9 @@
  */
 
 // Compound Class Rules
+  $.validator.addClassRules({
+
+  });
 
 $(document).ready(function() {
   $("form").validate();
