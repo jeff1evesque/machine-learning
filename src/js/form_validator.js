@@ -32,7 +32,9 @@
       else return false;
   });
 
-// Validation: use the above 'definition'
+/**
+ * Validation: use the above 'Definition(s)'
+ */
   $(document).ready(function() {
 
     $('form').validate({
