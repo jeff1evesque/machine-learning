@@ -13,12 +13,11 @@
  *
  * @element the element being validated
  *
- * @parameter the value passed in from the instantiating schema. For example,
- *     `$('form').validate` (see below 'Validation:'), we have the key-value:
+ * @parameter additional parameters from the instantiating schema. For example,
+ *     the 'validate' method (see below 'Validation:'), provides an array as a
+ *     parameter to the added method 'equals':
  *
- *         `equals: ['training', analysis']`
- *
- *     which is passed as an argument 'parameter' in this definition.
+ *         `equals: ['training', 'analysis']`
  */
   jQuery.validator.addMethod(
     'equals',
