@@ -27,6 +27,14 @@
       }
       else return false;
     });
+  jQuery.validator.addMethod(
+    'textOnly',
+    function(value, element, parameter) {
+      if ( typeof(value) === 'string' ) {
+        return true;
+      }
+      else return false;
+  });
 
 // Validation: use the above 'definition'
   $(document).ready(function() {
@@ -42,6 +50,9 @@
         svm_model_type: {
           equals: ['classification', 'regression']
         },
+        svm_indep_variable[]: {
+          
+        }        
       },
       messages: {
         svm_session: 'Not acceptable value',
