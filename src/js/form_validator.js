@@ -10,7 +10,7 @@
   jQuery.validator.addMethod(
     'equals',
     function(value, element) {
-      var acceptable = ['value1', 'value2'];
+      var acceptable = ['training', 'analysis'];
       if ( $.inArray(value, acceptable) >= 0 ) {
         return true;
       }
