@@ -9,8 +9,12 @@
 /**
  * Definition: Compound Class Rules
  *
- * @parameter is the value passed in from the instantiating schema. For example,
- *     in `$('form').validate` (see below 'Validation:'), we have the key-value:
+ * @value the value submitted on the given form element
+ *
+ * @element the element being validated
+ *
+ * @parameter the value passed in from the instantiating schema. For example,
+ *     `$('form').validate` (see below 'Validation:'), we have the key-value:
  *
  *         `equals: ['training', analysis']`
  *
