@@ -1,14 +1,19 @@
 /**
- * @form_validator.js: this script calls the 'validate()' method as suggested on
- *                     the github documentation:
+ * @form_validator.js: calls the 'validate()' method as suggested on per the
+ *                     following documentation, and examples:
  *
  *     https://github.com/jzaefferer/jquery-validation#including-it-on-your-page
+ *     http://jqueryvalidation.org/category/validator/
  */
 
 // Definition: Compound Class Rules
-  $.validator.addClassRules({
-
-  });
+  jQuery.validator.addMethod(
+    'equals',
+    function(value, element, param) {
+      return this.optional(element) || $.inArray(value, param) > 0;
+    },
+    jQuery.format('')
+  );
 
 // Validation: use the above 'definition'
   $(document).ready(function() {
