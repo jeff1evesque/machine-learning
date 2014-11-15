@@ -11,7 +11,7 @@
     'equals',
     function(value, element) {
       var acceptable = ['value1', 'value2'];
-      if ( $.inArray(value, acceptable) > 0 ) {
+      if ( $.inArray(value, acceptable) >= 0 ) {
         return true;
       }
       else return false;
