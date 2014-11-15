@@ -35,10 +35,14 @@
       rules: {
         svm_session: {
           equals: ['training', 'analysis']
-        }
+        },
+        svm_dataset_type: {
+          equals: ['upload file', 'xml file']
+        },
       },
       messages: {
         svm_session: 'Not acceptable value',
+        svm_dataset_type: 'Not acceptable value',
       },
     });
   });
