@@ -23,7 +23,7 @@
         return true;
       }
       else return false;
-    }, '');
+    });
 
 // Validation: use the above 'definition'
   $(document).ready(function() {
