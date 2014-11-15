@@ -27,7 +27,7 @@
         }
       },
       messages: {
-        svm_session: "That's not correct",
+        svm_session: 'Not acceptable value',
       },
     });
   });
