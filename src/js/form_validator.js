@@ -39,10 +39,14 @@
         svm_dataset_type: {
           equals: ['upload file', 'xml file']
         },
+        svm_model_type: {
+          equals: ['classification', 'regression']
+        },
       },
       messages: {
         svm_session: 'Not acceptable value',
         svm_dataset_type: 'Not acceptable value',
+        svm_model_type: 'Note acceptable value',
       },
     });
   });
