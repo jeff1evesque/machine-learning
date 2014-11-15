@@ -9,9 +9,8 @@
 // Definition: Compound Class Rules
   jQuery.validator.addMethod(
     'equals',
-    function(value, element) {
-      var acceptable = ['training', 'analysis'];
-      if ( $.inArray(value, acceptable) >= 0 ) {
+    function(value, element, parameter) {
+      if ( $.inArray(value, parameter) >= 0 ) {
         return true;
       }
       else return false;
@@ -23,7 +22,7 @@
     $('form').validate({
       rules: {
         svm_session: {
-          equals: true
+          equals: ['training', 'analysis']
         }
       },
       messages: {
