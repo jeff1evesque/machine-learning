@@ -6,7 +6,16 @@
  *     http://jqueryvalidation.org/category/validator/
  */
 
-// Definition: Compound Class Rules
+/**
+ * Definition: Compound Class Rules
+ *
+ * @parameter is the value passed in from the instantiating schema. For example,
+ *     in `$('form').validate` (see below 'Validation:'), we have the key-value:
+ *
+ *         `equals: ['training', analysis']`
+ *
+ *     which is passed as an argument 'parameter' in this definition.
+ */
   jQuery.validator.addMethod(
     'equals',
     function(value, element, parameter) {
