@@ -28,8 +28,8 @@
   jQuery.validator.addMethod(
     'textOnly',
     function(value, element, parameter) {
-      if ( !isNaN(parseFloat(value)) && isFinite(n) ) return false;
-      else return true;
+      if ( typeof(value) === 'string' ) return true;
+      else return false;
   });
 
 // Validation: use the above 'definition'
@@ -46,14 +46,16 @@
         svm_model_type: {
           equals: ['classification', 'regression']
         },
-        svm_indep_variable[]: {
-          textOnly: true
+        'svm_indep_variable[]': {
+          textOnly: true,
+          minlength:1,
         }        
       },
       messages: {
         svm_session: 'Not acceptable value',
         svm_dataset_type: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
+        'svm_indep_variable[]': 'Must be type string',
       },
     });
   });
