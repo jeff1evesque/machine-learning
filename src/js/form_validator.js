@@ -9,24 +9,25 @@
 // Definition: Compound Class Rules
   jQuery.validator.addMethod(
     'equals',
-    function(value, element, param) {
-      return this.optional(element) || $.inArray(value, param) > 0;
-    },
-    jQuery.format('')
-  );
+    function(value, element) {
+      var acceptable = ['value1', 'value2'];
+      if ( $.inArray(value, acceptable) > 0 ) {
+        return true;
+      }
+      else return false;
+    }, '');
 
 // Validation: use the above 'definition'
   $(document).ready(function() {
-  // Local Variable
-    var form_to_validate = $('form');
 
-  // Validate
-    $(form_to_validate).validate();
-
-  // Count number of invalid fields
-    $(form_to_validate).submit(function () {
-      var validator = $(form_to_validate).validate(); 
-      var valid = $(form_to_validate).valid();
-      var invalids = validator.numberOfInvalids();
+    $('form').validate({
+      rules: {
+        svm_session: {
+          equals: true
+        }
+      },
+      messages: {
+        svm_session: "That's not correct",
+      },
     });
   });
