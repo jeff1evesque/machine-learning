@@ -22,17 +22,13 @@
   jQuery.validator.addMethod(
     'equals',
     function(value, element, parameter) {
-      if ( $.inArray(value, parameter) >= 0 ) {
-        return true;
-      }
+      if ( $.inArray(value, parameter) >= 0 ) return true;
       else return false;
     });
   jQuery.validator.addMethod(
     'textOnly',
     function(value, element, parameter) {
-      if ( typeof(value) === 'string' ) {
-        return true;
-      }
+      if ( typeof(value) === 'string' ) return true;
       else return false;
   });
 
