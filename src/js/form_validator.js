@@ -47,7 +47,7 @@
           equals: ['classification', 'regression']
         },
         svm_indep_variable[]: {
-          
+          textOnly: true
         }        
       },
       messages: {
