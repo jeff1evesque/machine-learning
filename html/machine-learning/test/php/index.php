@@ -42,7 +42,7 @@
       <fieldset class='fieldset_session_type'>
         <legend>Session Type</legend>
         <p>Select whether the current session will be <i>training</i>, or <i>analysis</i>.</p>
-        <input list='session_type' id='svm_session' name='svm_session' placeholder='Session Type'><br>
+        <input list='session_type' name='svm_session' placeholder='Session Type'><br>
         <datalist id='session_type'>
           <select name='session_type' required>
             <option value='training'>Training</option>
