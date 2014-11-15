@@ -22,14 +22,14 @@
   jQuery.validator.addMethod(
     'equals',
     function(value, element, parameter) {
-      if ( !isNaN(parseFloat(value)) && isFinite(n) ) return false;
-      else return true;
+      if ( $.inArray(value, parameter) >= 0 ) return true;
+      else return false;
     });
   jQuery.validator.addMethod(
     'textOnly',
     function(value, element, parameter) {
-      if ( typeof(value) === 'string' ) return true;
-      else return false;
+      if ( !isNaN(parseFloat(value)) && isFinite(n) ) return false;
+      else return true;
   });
 
 // Validation: use the above 'definition'
