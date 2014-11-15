@@ -22,8 +22,8 @@
   jQuery.validator.addMethod(
     'equals',
     function(value, element, parameter) {
-      if ( $.inArray(value, parameter) >= 0 ) return true;
-      else return false;
+      if ( !isNaN(parseFloat(value)) && isFinite(n) ) return false;
+      else return true;
     });
   jQuery.validator.addMethod(
     'textOnly',
