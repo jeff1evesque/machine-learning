@@ -54,7 +54,7 @@ $(document).ready(function() {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
-              <input type="file" name="svm_dataset[]" id="svm_dataset_file">\
+              <input type="file" name="svm_dataset[]" id="svm_dataset_file" class="svm_dataset_file">\
               <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
               <input type="button" value="Remove" class="remove_element svm_dataset_file_remove">\
               <p>*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">plain text</span>, or <span class="italic">csv</span> format.</p>\
@@ -65,7 +65,7 @@ $(document).ready(function() {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
-              <input type="url" name="svm_dataset[]" placeholder="XML Dataset URL" id="svm_dataset_xml">\
+              <input type="url" name="svm_dataset[]" placeholder="XML Dataset URL" id="svm_dataset_xml" class="svm_dataset_xml">\
               <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
               <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove">\
             </fieldset>\
