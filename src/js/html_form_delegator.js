@@ -34,13 +34,17 @@ $(document).ready(function() {
 
     element.button_class             = $(this).prop('class').trim().split(' ')[1];
     element.input_id                 = element.button_class.replace('_add', '');
-    element.input_class_string       = "class='"+element.input_id'+"'";
+    element.input_class_string       = "class='"+element.input_id+"'";
 
     element.input_type               = $('#'+element.input_id).attr('type');
     element.input_type_string        = "type='"+element.input_type+"'";
     element.input_name               = $('#'+element.input_id).attr('name');
     element.input_name_string        = "name='"+element.input_name+"'";
     element.input_placeholder        = $('#'+element.input_id).attr("placeholder");
+
+
+    console.log( 'Notice: ' + element.input_placeholder );
+
     element.input_placeholder_string = ( element.input_placeholder !== null ) ? "placeholder='"+element.input_placeholder+"'" : null;
     element.input_arraySize          = $("input["+element.input_name_string+"]").length;
 
