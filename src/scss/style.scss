@@ -12,9 +12,10 @@
   font-style: italic;
 }
 
-input[name='svm_dataset[]']:not(:first-of-type), input[name='svm_dep_variable[]']:not(#svm_dep_variable), input[name='svm_indep_variable[]']:not(#svm_indep_variable), input[name='svm_indep_variable[]']:not(#svm_indep_variable) {
+input[name='svm_dataset[]']:not(:first-of-type), input[name='svm_dep_variable[]']:not(:first-of-type), input[name='svm_indep_variable[]']:not(:first-of-type) {
   display:block;
 }
+
 
 .ajax_loader {
   background: url('../img/loading.gif') no-repeat center center transparent;
