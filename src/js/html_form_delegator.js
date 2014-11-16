@@ -36,10 +36,10 @@ $(document).ready(function() {
     element.input_id                 = element.button_class.replace('_add', '');
     element.input_class_string       = ( element.input_id ) ? "class='"+element.input_id+"'": null;
 
-    element.input_type               = ( element.input_id ) ? $('#'+element.input_id).attr('type'): null;
+    element.input_type               = ( element.input_id ) ? $('.'+element.input_id).attr('type'): null;
     element.input_type_string        = ( element.input_type ) ? "type='"+element.input_type+"'": null;
 
-    element.input_name               = ( element.input_id ) ? $('#'+element.input_id).attr('name'): null;
+    element.input_name               = ( element.input_id ) ? $('.'+element.input_id).attr('name'): null;
     element.input_name_string        = ( element.input_name !== undefined ) ? "name='"+element.input_name+"'": null;
 
     element.input_placeholder        = ( element.input_id !== undefined ) ? $('#'+element.input_id).attr("placeholder"): null;
@@ -74,7 +74,7 @@ $(document).ready(function() {
 
     element.button_class = $(this).prop('class').trim().split(' ')[1];
     element.input_id = element.button_class.replace('_remove', '');
-    element.input_name = $('#'+element.input_id).attr('name');
+    element.input_name = $('.'+element.input_id).attr('name');
     element.input_arraySize = $('[name="'+element.input_name+'"]').length;
 
   // Remove last form element
