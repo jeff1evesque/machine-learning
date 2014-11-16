@@ -42,7 +42,7 @@ $(document).ready(function() {
     element.input_name               = ( element.input_id !== undefined ) ? $('.'+element.input_id).attr('name'): null;
     element.input_name_string        = ( element.input_name !== undefined ) ? "name='"+element.input_name+"'": null;
 
-    element.input_placeholder        = ( element.input_id !== undefined ) ? $('#'+element.input_id).attr("placeholder"): null;
+    element.input_placeholder        = ( element.input_id !== undefined ) ? $('.'+element.input_id).attr("placeholder"): null;
     element.input_placeholder_string = ( element.input_placeholder !== undefined ) ? "placeholder='"+element.input_placeholder+"'": null;
 
     element.input_arraySize          = $("input["+element.input_name_string+"]").length;
