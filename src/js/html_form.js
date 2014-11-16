@@ -54,7 +54,7 @@ $(document).ready(function() {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
-              <input type="file" name="svm_dataset[]" id="svm_dataset_file" class="svm_dataset_file">\
+              <input type="file" name="svm_dataset[]" class="svm_dataset_file">\
               <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
               <input type="button" value="Remove" class="remove_element svm_dataset_file_remove">\
               <p>*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">plain text</span>, or <span class="italic">csv</span> format.</p>\
@@ -65,7 +65,7 @@ $(document).ready(function() {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
-              <input type="url" name="svm_dataset[]" placeholder="XML Dataset URL" id="svm_dataset_xml" class="svm_dataset_xml">\
+              <input type="url" name="svm_dataset[]" placeholder="XML Dataset URL" class="svm_dataset_xml">\
               <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
               <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove">\
             </fieldset>\
@@ -102,11 +102,11 @@ $(document).ready(function() {
             obj_form.training_parameters = '\
                 <fieldset class="fieldset_training_parameters">\
                   <legend>' + $(this).val()  + ' Parameters</legend>\
-                  <input type="text" name="svm_dep_variable[]" placeholder="Dependent Variable" id="svm_dep_variable">\
+                  <input type="text" name="svm_dep_variable[]" placeholder="Dependent Variable" class="svm_dep_variable">\
                   <input type="button" value="Add more" class="add_element svm_dep_variable_add">\
                   <input type="button" value="Remove" class="remove_element svm_dep_variable_remove">\
                   <hr>\
-                  <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_indep_variable">\
+                  <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" class="svm_indep_variable">\
                   <input type="button" value="Add more" class="add_element svm_indep_variable_add">\
                   <input type="button" value="Remove" class="remove_element svm_indep_variable_remove">\
                 </fieldset>\
@@ -138,7 +138,7 @@ $(document).ready(function() {
         obj_form.analysis = '\
             <fieldset class="fieldset_known_factors">\
               <legend>Known Factors</legend>\
-              <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" id="svm_indep_variable">\
+              <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" class="svm_indep_variable">\
               <input type="button" value="Add more" class="add_element svm_indep_variable_add">\
               <input type="button" value="Remove" class="remove_element svm_indep_variable_remove">\
             </fieldset>\
