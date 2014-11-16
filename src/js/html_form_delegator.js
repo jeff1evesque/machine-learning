@@ -72,9 +72,9 @@ $(document).ready(function() {
   function remove_callback(event) {
     event.preventDefault();
 
-    element.button_class = $(this).prop('class').trim().split(' ')[1];
-    element.input_id = element.button_class.replace('_remove', '');
-    element.input_name = $('.'+element.input_id).attr('name');
+    element.button_class    = $(this).prop('class').trim().split(' ')[1];
+    element.input_id        = element.button_class.replace('_remove', '');
+    element.input_name      = $('.'+element.input_id).attr('name');
     element.input_arraySize = $('[name="'+element.input_name+'"]').length;
 
   // Remove last form element
