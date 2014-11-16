@@ -32,22 +32,23 @@ $(document).ready(function() {
   function add_callback(event) {
     event.preventDefault();
 
-    element.button_class = $(this).prop('class').trim().split(' ')[1];
-    element.input_id = element.button_class.replace('_add', '');
+    element.button_class             = $(this).prop('class').trim().split(' ')[1];
+    element.input_id                 = element.button_class.replace('_add', '');
+    element.input_class_string       = "class='"+element.input_id'+"'";
 
-    element.input_type = $('#'+element.input_id).attr('type');
-    element.input_type_string = "type='"+element.input_type+"'";
-    element.input_name = $('#'+element.input_id).attr('name');
-    element.input_name_string = "name='"+element.input_name+"'";
-    element.input_placeholder = $('#'+element.input_id).attr("placeholder");
-    element.input_placeholder_string = "placeholder='"+element.input_placeholder+"'";
-    element.input_arraySize = $("input["+element.input_name_string+"]").length;
+    element.input_type               = $('#'+element.input_id).attr('type');
+    element.input_type_string        = "type='"+element.input_type+"'";
+    element.input_name               = $('#'+element.input_id).attr('name');
+    element.input_name_string        = "name='"+element.input_name+"'";
+    element.input_placeholder        = $('#'+element.input_id).attr("placeholder");
+    element.input_placeholder_string = ( element.input_placeholder !== null ) ? "placeholder='"+element.input_placeholder+"'" : null;
+    element.input_arraySize          = $("input["+element.input_name_string+"]").length;
 
   // Append element after 'Remove' button
     if (element.input_arraySize > 1) 
-      $("input["+element.input_name_string+"]").last().after("<input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
+      $("input["+element.input_name_string+"]").last().after("<input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string, element.input_class_string], Boolean).join(', ') +">");
     else
-      $('.'+element.input_id+'_remove').after("<input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string], Boolean).join(', ') +">");
+      $('.'+element.input_id+'_remove').after("<input "+ $.grep([element.input_type_string, element.input_name_string, element.input_class_string, element.input_placeholder_string], Boolean).join(', ') +">");
 
   // Remove fieldset 'dependencies'
     $(this).parent().nextAll().remove();
