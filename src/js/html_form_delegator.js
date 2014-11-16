@@ -45,7 +45,7 @@ $(document).ready(function() {
 
     console.log( 'Notice: ' + element.input_placeholder );
 
-    element.input_placeholder_string = ( element.input_placeholder !== null ) ? "placeholder='"+element.input_placeholder+"'" : null;
+    element.input_placeholder_string = ( element.input_placeholder !== undefined ) ? "placeholder='"+element.input_placeholder+"'" : null;
     element.input_arraySize          = $("input["+element.input_name_string+"]").length;
 
   // Append element after 'Remove' button
