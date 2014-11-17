@@ -38,7 +38,9 @@
     function( value, element, parameter ) {
       if ( $.inArray(element.files[0].type, parameter) >= 0 ) return true;
       else return false;
-    });
+    },
+    'Incorrect file format'
+  );
 
 /**
  * Definition: Compound Class Rules
