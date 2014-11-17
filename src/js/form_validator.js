@@ -8,7 +8,8 @@
  */
 
 /**
- * Definition: Compound Class Rules
+ * Custom Method: callback function(s) used with 'Compound Class Rules', and
+ *                the 'validate()' method.
  *
  * @value the value submitted on the given form element
  *
@@ -31,6 +32,29 @@
     function(value, element, parameter) {
       if ( typeof(value) === 'string' ) return true;
       else return false;
+  });
+  jQuery.validator.addMethod(
+    'checkMime',
+    function( value, element, parameter ) {
+      if ( $.inArray(element.files[0].type, parameter) >= 0 ) return true;
+      else return false;
+    },
+    'Incorrect file format'
+  );
+
+/**
+ * Compound Class Rules: Custom messages cannot be assigned to a rule within
+ *                       this method. Instead, the custom messages must be
+ *                       defined as the last parameter to the 'addMethod'
+ *                       definition (see above 'checkMime').
+ */
+  jQuery.validator.addClassRules({
+    svm_dataset_xml: {
+      url: true,
+    },
+    svm_dataset_file: {
+      checkMime: ['text/plain', 'text/csv'],
+    },
   });
 
 /**
