@@ -32,10 +32,9 @@
       if ( typeof(value) === 'string' ) return true;
       else return false;
   });
-  jQuery.validator.addClassRules(
+  jQuery.validator.addClassRules({
     svm_dataset_xml: {
-      textOnly: true,
-      minlength: 2,
+      url: true,
     },
   });
 
