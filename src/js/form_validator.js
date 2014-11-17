@@ -7,6 +7,10 @@
  *     http://stackoverflow.com/questions/10843399#answer-10843593
  */
 
+/**
+ * Custom Method: callback function(s) used with 'Compound Class Rules', and
+ *                the 'validate()' method.
+ */
   jQuery.validator.addMethod(
     'equals',
     function(value, element, parameter) {
