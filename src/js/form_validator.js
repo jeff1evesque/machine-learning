@@ -7,6 +7,19 @@
  *     http://stackoverflow.com/questions/10843399#answer-10843593
  */
 
+  jQuery.validator.addMethod(
+    'equals',
+    function(value, element, parameter) {
+      if ( $.inArray(value, parameter) >= 0 ) return true;
+      else return false;
+    });
+  jQuery.validator.addMethod(
+    'textOnly',
+    function(value, element, parameter) {
+      if ( typeof(value) === 'string' ) return true;
+      else return false;
+  });
+
 /**
  * Definition: Compound Class Rules
  *
@@ -20,18 +33,6 @@
  *
  *         `equals: ['training', 'analysis']`
  */
-  jQuery.validator.addMethod(
-    'equals',
-    function(value, element, parameter) {
-      if ( $.inArray(value, parameter) >= 0 ) return true;
-      else return false;
-    });
-  jQuery.validator.addMethod(
-    'textOnly',
-    function(value, element, parameter) {
-      if ( typeof(value) === 'string' ) return true;
-      else return false;
-  });
   jQuery.validator.addClassRules({
     svm_dataset_xml: {
       url: true,
