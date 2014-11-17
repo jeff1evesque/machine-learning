@@ -36,7 +36,7 @@
   jQuery.validator.addMethod(
     'checkMime',
     function( value, element, parameter ) {
-      if ( $.inArray(element.files[0].type, parameter) return true;
+      if ( $.inArray(element.files[0].type, parameter) >= 0 ) return true;
       else return false;
     });
 
