@@ -10,6 +10,16 @@
 /**
  * Custom Method: callback function(s) used with 'Compound Class Rules', and
  *                the 'validate()' method.
+ *
+ * @value the value submitted on the given form element
+ *
+ * @element the element being validated
+ *
+ * @parameter additional parameters from the instantiating schema. For example,
+ *     the 'validate' method (see below 'Validation:'), provides an array as a
+ *     parameter to the added method 'equals':
+ *
+ *         `equals: ['training', 'analysis']`
  */
   jQuery.validator.addMethod(
     'equals',
@@ -26,16 +36,6 @@
 
 /**
  * Definition: Compound Class Rules
- *
- * @value the value submitted on the given form element
- *
- * @element the element being validated
- *
- * @parameter additional parameters from the instantiating schema. For example,
- *     the 'validate' method (see below 'Validation:'), provides an array as a
- *     parameter to the added method 'equals':
- *
- *         `equals: ['training', 'analysis']`
  */
   jQuery.validator.addClassRules({
     svm_dataset_xml: {
