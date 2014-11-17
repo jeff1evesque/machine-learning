@@ -8,8 +8,8 @@
  */
 
 /**
- * Custom Method: callback function(s) used with 'Compound Class Rules', and
- *                the 'validate()' method.
+ * Custom Method: callback function(s) used from the 'Compound Class Rules',
+ *                and the 'Validation' sections (see below).
  *
  * @value the value submitted on the given form element
  *
@@ -43,10 +43,13 @@
   );
 
 /**
- * Compound Class Rules: Custom messages cannot be assigned to a rule within
- *                       this method. Instead, the custom messages must be
- *                       defined as the last parameter to the 'addMethod'
- *                       definition (see above 'checkMime').
+ * Compound Class Rules: validates form elements by respective classnames.
+ *                       This validation may implement the 'Definition(s)',
+ *                       defined from the '.addMethod' definition.
+ *
+ * Note: These rules cannot define custom messages. Instead, the custom messages
+ *       must be defined as the last parameter to the 'addMethod' definition (see
+ *       above 'checkMime').
  */
   jQuery.validator.addClassRules({
     svm_dataset_xml: {
@@ -58,7 +61,9 @@
   });
 
 /**
- * Validation: use the above 'Definition(s)'
+ * Validation: validates form elements by the 'name attribute. This validation
+ *             may implement the 'Definition(s)', defined from the 'addmethod'
+ *             definition.
  */
   $(document).ready(function() {
 
