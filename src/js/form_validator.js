@@ -33,6 +33,12 @@
       if ( typeof(value) === 'string' ) return true;
       else return false;
   });
+  jQuery.validator.addMethod(
+    'checkMime',
+    function( value, element, parameter ) {
+      if ( $.inArray(element.files[0].type, parameter) return true;
+      else return false;
+    });
 
 /**
  * Definition: Compound Class Rules
@@ -42,7 +48,7 @@
       url: true,
     },
     svm_dataset_file: {
-
+      checkMime: ['text/plain', 'text/csv'],
     },
   });
 
