@@ -43,7 +43,10 @@
   );
 
 /**
- * Definition: Compound Class Rules
+ * Compound Class Rules: Custom messages cannot be assigned to a rule within
+ *                       this method. Instead, the custom messages must be
+ *                       defined as the last parameter to the 'addMethod'
+ *                       definition (see above 'checkMime').
  */
   jQuery.validator.addClassRules({
     svm_dataset_xml: {
