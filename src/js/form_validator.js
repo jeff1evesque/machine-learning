@@ -41,6 +41,9 @@
     svm_dataset_xml: {
       url: true,
     },
+    svm_dataset_file: {
+
+    },
   });
 
 /**
