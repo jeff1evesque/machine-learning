@@ -12,7 +12,7 @@ mkdir -p ../html/machine-learning/asset/js/
 
 
 # track execution of script
-set -x; exec > log/log_bash_web 2>&1
+set -x; exec > log/bash_web_js 2>&1
 
 
 # watch '../src/js/' subdirectory
