@@ -1,5 +1,10 @@
 /**
  * style.scss: contains general stylesheet definitions.
+ *
+ * Note: the following syntax selects all classnames [CLASS],
+ *       except the first one:
+ *
+ *           .[CLASS] ~ .[CLASS] { }
  */
 
 @import 'variable.scss';
@@ -12,10 +17,9 @@
   font-style: italic;
 }
 
-input[name='svm_dataset[]']:not(:first-of-type), input[name='svm_dep_variable[]']:not(:first-of-type), input[name='svm_indep_variable[]']:not(:first-of-type) {
+input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_variable, .svm_indep_variable ~ .svm_indep_variable {
   display:block;
 }
-
 
 .ajax_loader {
   background: url('../img/loading.gif') no-repeat center center transparent;
