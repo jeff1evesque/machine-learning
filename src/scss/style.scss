@@ -1,5 +1,10 @@
 /**
  * style.scss: contains general stylesheet definitions.
+ *
+ * Note: the following syntax selects all classnames [CLASS],
+ *       except the first one:
+ *
+ *           .[CLASS] ~ .[CLASS] { }
  */
 
 @import 'variable.scss';
