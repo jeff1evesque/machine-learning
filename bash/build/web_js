@@ -3,14 +3,12 @@
 #       directory paths seem to be too short (i.e. missing extra '..')
 
 
-# Pre-Pathing: allow 'uglifyjs', 'sass', 'imagemin' command
+# Pre-Pathing: allow 'uglifyjs' command
 PATH="/usr/local/bin:$PATH"
 
 
 # create directory if doesn't exist
 mkdir -p ../html/machine-learning/asset/js/
-mkdir -p ../html/machine-learning/asset/css/
-mkdir -p ../html/machine-learning/asset/img/
 
 
 # track execution of script
@@ -27,29 +25,4 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
 
     # minifiy with 'uglifyjs'
     uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
-  done
-
-
-# watch '../src/scss/' subdirectory
-inotifywait ../src/scss/ -m -e close_write -e move -e create |
-  # Compile CSS
-  for file_with_path in ../src/scss/*.scss; do
-    # filename (without extension)
-    file="${file_with_path##*/}"
-    filename="${file%.*}"
-
-    # compile with 'sass'
-    sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css --style compressed
-  done
-
-
-# watch '../src/img/' subdirectory
-inotifywait ../src/img/ -m -e close_write -e move -e create |
-  # Minify Images
-  for file_with_path in ../src/img/*; do
-    # filename (without extension)
-    file="${file_with_path##*/}"
-
-    # minify with 'imagemin'
-    imagemin $file_with_path > ../html/machine-learning/asset/img/$file
   done
