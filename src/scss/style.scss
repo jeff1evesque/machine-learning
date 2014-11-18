@@ -25,9 +25,14 @@ input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_va
   float:left;
   clear:both;
 }
+
 .svm_dataset_xml_add, .svm_dataset_file_add, .svm_dep_variable_add, .svm_indep_variable_add, .svm_dataset_xml_remove, .svm_dataset_file_remove, .svm_dep_variable_remove, .svm_indep_variable_remove {
   float:left;
   clear:none;
+}
+
+label.error {
+  float:right;
 }
 
 .ajax_loader {
