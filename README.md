@@ -173,6 +173,11 @@ This project implements client-side validation within [`form_validator.js`](http
 
 JSON Schema provides an implementation to validate JSON data structures.  When a specific element within the JSON structure fails validation, an exception is raised indicating the specific *error message*.
 
+The following provides additional documentation on the *schema* validation:
+
+- http://spacetelescope.github.io/understanding-json-schema/
+- http://python-jsonschema.readthedocs.org/en/latest/
+
 ##Testing / Execution
 
 ###Test Scripts
