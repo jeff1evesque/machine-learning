@@ -1,6 +1,7 @@
 #!/bin/bash
-# note: this file is executed from 'bash_loader' , this is why the
-#       directory paths seem to be too short (i.e. missing extra '..')
+
+# @web_js: is executed from 'bash_loader', which is why the directory
+#          paths seem shorter in this file (i.e. missing extra '../').
 
 
 # Pre-Pathing: allow 'uglifyjs' command
