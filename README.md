@@ -156,7 +156,7 @@ sudo /etc/init.d/rc.local start
 
 ###jQuery Validation
 
-[jQuery Validation](http://jqueryvalidation.org/) is a plugin that allows client side validation on HTML form elements. When a specific field fails validation, a label element is created as the next successive DOM element, indicating an *error message*.
+[jQuery Validation](http://jqueryvalidation.org/) is a plugin that allows [client-side](http://en.wikipedia.org/wiki/Client-side) validation on [HTML form](http://www.w3.org/TR/html5/forms.html) elements. When a specific field fails validation, a label element is created as the next successive [DOM](http://en.wikipedia.org/wiki/Document_Object_Model) element, indicating an *error message*.
 
 The following provides additional documentation on the jQuery plugin:
 
@@ -165,9 +165,9 @@ The following provides additional documentation on the jQuery plugin:
 - http://jqueryvalidation.org/jQuery.validator.addMethod/
 - http://stackoverflow.com/questions/10843399#answer-10843593
 
-This project implements client-side validation within [`form_validator.js`](https://github.com/jeff1evesque/machine-learning/blob/master/src/js/form_validator.js). Specific *how-to* can be found within the comments of the javascript code.
+This project implements client-side validation within [`form_validator.js`](https://github.com/jeff1evesque/machine-learning/blob/master/src/js/form_validator.js). Specific *how-to* can be found within the comments of the javascript [code](https://github.com/jeff1evesque/machine-learning/blob/master/src/js/form_validator.js).
 
-**Note:** this project *may* implement concepts of *machine learning*, where data is not supplied via an HTML form. If data is not supplied by the user (HTML form), then backend validation becomes even more crucial.
+**Note:** this project *may* implement concepts of *machine learning*, where data is not supplied via an HTML form. If data is not supplied by the user (HTML form), then backend validation (see *JSON Schema* section) becomes even more crucial.
 
 ##Testing / Execution
 
