@@ -19,15 +19,15 @@ set -x; exec > log/bash_web_img 2>&1
 # watch '../src/img/' subdirectory
 inotifywait ../src/img/ -m -e close_write -e move -e create |
   # Minify Images
-  while file_with_path in ../src/img/*; do
+  while read path action file; do
     # filename (without extension)
-    file="${file_with_path##*/}"
+    filename="${file##*/}"
     file_extension="${file##*.}"
 
     # minify with 'imagemin'
-    if [ $file_extension = 'gif' ]; then
-      cp $file_with_path ../html/machine-learning/asset/img/$file
+    if [ "$file_extension" = 'gif' ]; then
+      cp "$file" ../html/machine-learning/asset/img/"$filename"
     else
-      imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+      imagemin "$file" > ../html/machine-learning/asset/img/"$filename"
     fi
   done
