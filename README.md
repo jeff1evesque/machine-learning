@@ -165,6 +165,8 @@ The following provides additional documentation on the jQuery plugin:
 - http://jqueryvalidation.org/jQuery.validator.addMethod/
 - http://stackoverflow.com/questions/10843399#answer-10843593
 
+This project implements client-side validation within [`form_validator.js`](https://github.com/jeff1evesque/machine-learning/blob/master/src/js/form_validator.js). Specific *how-to* can be found within the comments of the javascript code.
+
 ##Testing / Execution
 
 ###Test Scripts
