@@ -171,6 +171,8 @@ This project implements client-side validation within [`form_validator.js`](http
 
 ###JSON Schema
 
+JSON Schema provides an implementation to validate JSON data structures.
+
 ##Testing / Execution
 
 ###Test Scripts
