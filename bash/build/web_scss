@@ -1,6 +1,7 @@
 #!/bin/bash
-# note: this file is executed from 'bash_loader' , this is why the
-#       directory paths seem to be too short (i.e. missing extra '..')
+
+# @web_scss: is executed from 'bash_loader', which is why the directory
+#            paths seem shorter in this file (i.e. missing extra '../').
 
 
 # Pre-Pathing: allow 'sass' command
@@ -18,11 +19,11 @@ set -x; exec > log/bash_web_scss 2>&1
 # watch '../src/scss/' subdirectory
 inotifywait ../src/scss/ -m -e close_write -e move -e create |
   # Compile CSS
-  for file_with_path in ../src/scss/*.scss; do
+  while read path action file; do
     # filename (without extension)
-    file="${file_with_path##*/}"
-    filename="${file%.*}"
+    filename_full="${file##*/}"
+    filename="${filename_full##*/}"
 
     # compile with 'sass'
-    sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css --style compressed
+    sass ../src/scss/"$file" ../html/machine-learning/asset/css/"$filename".min.css --style compressed
   done

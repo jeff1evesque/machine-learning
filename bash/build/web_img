@@ -1,6 +1,7 @@
 #!/bin/bash
-# note: this file is executed from 'bash_loader' , this is why the
-#       directory paths seem to be too short (i.e. missing extra '..')
+
+# @web_img: is executed from 'bash_loader', which is why the directory
+#           paths seem shorter in this file (i.e. missing extra '../').
 
 
 # Pre-Pathing: allow 'imagemin' command
@@ -18,15 +19,15 @@ set -x; exec > log/bash_web_img 2>&1
 # watch '../src/img/' subdirectory
 inotifywait ../src/img/ -m -e close_write -e move -e create |
   # Minify Images
-  for file_with_path in ../src/img/*; do
+  while read path action file; do
     # filename (without extension)
-    file="${file_with_path##*/}"
+    filename="${file##*/}"
     file_extension="${file##*.}"
 
     # minify with 'imagemin'
-    if [ $file_extension = 'gif' ]; then
-      cp $file_with_path ../html/machine-learning/asset/img/$file
+    if [ "$file_extension" = 'gif' ]; then
+      cp ../src/img/"$file" ../html/machine-learning/asset/img/"$filename"
     else
-      imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+      imagemin ../src/img/"$file" > ../html/machine-learning/asset/img/"$filename"
     fi
   done
