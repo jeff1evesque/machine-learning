@@ -21,8 +21,7 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
   # Minify Javascript
   while read path action file; do
     # filename (without extension)
-    filename_full="${file##*/}"
-    filename="${filename_full##*/}"
+    filename="${file##*/}"
     "${path}"
 
     # minifiy with 'uglifyjs'
