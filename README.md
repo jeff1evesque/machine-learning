@@ -178,7 +178,7 @@ The following provides additional documentation on the *schema* validation:
 - http://spacetelescope.github.io/understanding-json-schema/
 - http://python-jsonschema.readthedocs.org/en/latest/
 
-This project implements *JSON Schema* validation, as a backend-validation tool. In this project, Specifically, `config.py` defines acceptable *schemas* to validate against, while `data_validator.py` implements the validation against pre-defined schemas.
+This project implements *JSON Schema* validation, as a backend-validation tool. Specifically, `config.py` defines acceptable *schemas* to validate against, while `data_validator.py` implements the validation against pre-defined schemas.
 
 ##Testing / Execution
 
