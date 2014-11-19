@@ -3,10 +3,6 @@
 #       directory paths seem to be too short (i.e. missing extra '..')
 
 
-# allow 'extglob'
-shopt -s extglob
-
-
 # Pre-Pathing: allow 'imagemin' command
 PATH="/usr/local/bin:$PATH"
 
@@ -17,6 +13,10 @@ mkdir -p ../html/machine-learning/asset/img/
 
 # track execution of script
 set -x; exec > log/bash_web_img 2>&1
+
+
+# allow 'extglob'
+shopt -s extglob
 
 
 # watch '../src/img/' subdirectory
