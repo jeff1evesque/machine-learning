@@ -169,6 +169,8 @@ This project implements client-side validation within [`form_validator.js`](http
 
 **Note:** this project *may* implement concepts of *machine learning*, where data is not supplied via an HTML form. If data is not supplied by the user (HTML form), then backend-validation (refer to [*JSON Schema*](https://github.com/jeff1evesque/machine-learning/blob/c5f6179870ed475c2cdac0aaae8f839b6f571840/README.md#json-schema)) becomes even more crucial.
 
+###JSON Schema
+
 ##Testing / Execution
 
 ###Test Scripts
