@@ -18,11 +18,11 @@ set -x; exec > log/bash_web_scss 2>&1
 # watch '../src/scss/' subdirectory
 inotifywait ../src/scss/ -m -e close_write -e move -e create |
   # Compile CSS
-  for file_with_path in ../src/scss/*.scss; do
+  while file_with_path in ../src/scss/*.scss; do
     # filename (without extension)
     file="${file_with_path##*/}"
     filename="${file%.*}"
 
     # compile with 'sass'
-    sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css --style compressed
+    sass "$file_with_path" ../html/machine-learning/asset/css/"$filename".min.css --style compressed
   done
