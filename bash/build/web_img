@@ -18,10 +18,10 @@ set -x; exec > log/bash_web_img 2>&1
 # watch '../src/img/' subdirectory
 inotifywait ../src/img/ -m -e close_write -e move -e create |
   # Minify Images
-  for file_with_path in ../src/img/*; do
+  while file_with_path in ../src/img/*; do
     # filename (without extension)
     file="${file_with_path##*/}"
 
     # minify with 'imagemin'
-    imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+    imagemin "$file_with_path" > ../html/machine-learning/asset/img/"$file"
   done
