@@ -22,7 +22,6 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
   while read path action file; do
     # filename (without extension)
     filename="${file##*/}"
-    "${path}"
 
     # minifiy with 'uglifyjs'
     uglifyjs -c --output ../html/machine-learning/asset/js/"$filename".min.js ../src/js/"$file"

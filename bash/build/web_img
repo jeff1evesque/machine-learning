@@ -2,6 +2,9 @@
 
 # @web_img: is executed from 'bash_loader', which is why the directory
 #           paths seem shorter in this file (i.e. missing extra '../').
+#
+# Note: minifid GIF files lose their animated quality. This script minifies
+#       all images except GIF (copied to the 'asset/').
 
 
 # Pre-Pathing: allow 'imagemin' command
