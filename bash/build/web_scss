@@ -21,8 +21,9 @@ inotifywait ../src/scss/ -m -e close_write -e move -e create |
   # Compile CSS
   while read path action file; do
     # filename (without extension)
-    filename="${file##*/}"
+    filename_full="${file##*/}"
+    filename="${filename_full##*/}"
 
     # compile with 'sass'
-    sass "$file" ../html/machine-learning/asset/css/"$filename".min.css --style compressed
+    sass ../src/scss/"$file" ../html/machine-learning/asset/css/"$filename".min.css --style compressed
   done
