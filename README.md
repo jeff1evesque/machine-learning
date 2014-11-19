@@ -171,7 +171,7 @@ This project implements client-side validation within [`form_validator.js`](http
 
 ###JSON Schema
 
-JSON Schema provides an implementation to validate JSON data structures.  When a specific element within the JSON structure fails validation, an exception is raised indicating the specific *error message*.
+JSON Schema provides an implementation to validate JSON data structures.  When a specific element within the JSON structure fails validation, an exception is raised indicating the corresponding *error message*.
 
 The following provides additional documentation on the *schema* validation:
 
