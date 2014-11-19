@@ -15,14 +15,10 @@ mkdir -p ../html/machine-learning/asset/img/
 set -x; exec > log/bash_web_img 2>&1
 
 
-# allow 'extglob'
-shopt -s extglob
-
-
 # watch '../src/img/' subdirectory
 inotifywait ../src/img/ -m -e close_write -e move -e create |
   # Minify Images
-  for file_with_path in ../src/img/"!(*.gif)"; do
+  for file_with_path in ../src/img/*; do
     # filename (without extension)
     file="${file_with_path##*/}"
     file_extension="${filename##*.}"
