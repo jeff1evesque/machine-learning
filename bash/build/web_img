@@ -22,10 +22,15 @@ shopt -s extglob
 # watch '../src/img/' subdirectory
 inotifywait ../src/img/ -m -e close_write -e move -e create |
   # Minify Images
-  for file_with_path in ../src/img/!(*.gif); do
+  for file_with_path in ../src/img/"!(*.gif)"; do
     # filename (without extension)
     file="${file_with_path##*/}"
+    file_extension="${filename##*.}"
 
     # minify with 'imagemin'
-    imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+    if [ file_extension = 'gif' ]; then
+      cp $file_with_path ../html/machine-learning/asset/img/$file
+    else
+      imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+    fi
   done
