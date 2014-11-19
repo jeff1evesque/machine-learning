@@ -21,7 +21,7 @@ inotifywait ../src/img/ -m -e close_write -e move -e create |
   for file_with_path in ../src/img/*; do
     # filename (without extension)
     file="${file_with_path##*/}"
-    file_extension="${filename##*.}"
+    file_extension="${file##*.}"
 
     # minify with 'imagemin'
     if [ file_extension = 'gif' ]; then
