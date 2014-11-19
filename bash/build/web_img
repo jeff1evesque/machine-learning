@@ -21,7 +21,12 @@ inotifywait ../src/img/ -m -e close_write -e move -e create |
   for file_with_path in ../src/img/*; do
     # filename (without extension)
     file="${file_with_path##*/}"
+    file_extension="${file##*.}"
 
     # minify with 'imagemin'
-    imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+    if [ $file_extension = 'gif' ]; then
+      cp $file_with_path ../html/machine-learning/asset/img/$file
+    else
+      imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+    fi
   done
