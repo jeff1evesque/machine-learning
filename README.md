@@ -167,6 +167,8 @@ The following provides additional documentation on the jQuery plugin:
 
 This project implements client-side validation within [`form_validator.js`](https://github.com/jeff1evesque/machine-learning/blob/master/src/js/form_validator.js). Specific *how-to* can be found within the comments of the javascript code.
 
+**Note:** this project *may* implement concepts of *machine learning*, such that data may not be supplied via an HTML form. If data, is not supplied by the user (HTML form), then backend validation becomes even more crucial.
+
 ##Testing / Execution
 
 ###Test Scripts
