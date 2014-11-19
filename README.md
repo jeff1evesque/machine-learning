@@ -154,6 +154,7 @@ Since some [build](https://github.com/jeff1evesque/machine-learning/tree/master/
 sudo /etc/init.d/rc.local start
 ```
 
+###jQuery Validation
 
 ##Testing / Execution
 
