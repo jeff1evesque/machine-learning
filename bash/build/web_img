@@ -26,8 +26,8 @@ inotifywait ../src/img/ -m -e close_write -e move -e create |
 
     # minify with 'imagemin'
     if [ "$file_extension" = 'gif' ]; then
-      cp "$file" ../html/machine-learning/asset/img/"$filename"
+      cp ../src/img/"$file" ../html/machine-learning/asset/img/"$filename"
     else
-      imagemin "$file" > ../html/machine-learning/asset/img/"$filename"
+      imagemin ../src/img/"$file" > ../html/machine-learning/asset/img/"$filename"
     fi
   done
