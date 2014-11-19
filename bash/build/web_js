@@ -25,5 +25,5 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
     filename="${file%.*}"
 
     # minifiy with 'uglifyjs'
-    uglifyjs -c --output ../html/machine-learning/asset/js/"$filename".min.js "$file_with_path"
+    uglifyjs -c --output ../html/machine-learning/asset/js/"$filename".min.js $file_with_path
   done
