@@ -21,8 +21,10 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
   # Minify Javascript
   while read path action file; do
     # filename (without extension)
-    filename="${file##*/}"
+    filename_full="${file##*/}"
+    filename="${filename_full##*/}"
+    "${path}"
 
     # minifiy with 'uglifyjs'
-    uglifyjs -c --output ../html/machine-learning/asset/js/"$filename".min.js "$file"
+    uglifyjs -c --output ../html/machine-learning/asset/js/"$filename".min.js ../src/js/"$file"
   done
