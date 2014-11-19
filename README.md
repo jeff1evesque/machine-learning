@@ -156,6 +156,8 @@ sudo /etc/init.d/rc.local start
 
 ###jQuery Validation
 
+[jQuery Validation](http://jqueryvalidation.org/) is a plugin that allows client side validation on HTML form elements. When a specific form fails validation, a label element is created as the next successive DOM element, indicating an *error message*.
+
 ##Testing / Execution
 
 ###Test Scripts
