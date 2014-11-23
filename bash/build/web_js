@@ -20,8 +20,8 @@ set -x; exec > log/bash_web_js 2>&1
 inotifywait ../src/js/ -m -e close_write -e move -e create |
   # Minify Javascript
   while read path action file; do
-    # filename (without extension)
-    filename="${file##*/}"
+    # filename (without 'last' extension)
+    filename="${file%.*}"
 
     # minifiy with 'uglifyjs'
     uglifyjs -c --output ../html/machine-learning/asset/js/"$filename".min.js ../src/js/"$file"
