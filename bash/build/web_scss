@@ -20,8 +20,8 @@ set -x; exec > log/bash_web_scss 2>&1
 inotifywait ../src/scss/ -m -e close_write -e move -e create |
   # Compile CSS
   while read path action file; do
-    # filename (without extension)
-    filename="${file##*/}"
+    # filename (without 'last' extension)
+    filename="${file%.*}"
 
     # compile with 'sass'
     sass ../src/scss/"$file" ../html/machine-learning/asset/css/"$filename".min.css --style compressed

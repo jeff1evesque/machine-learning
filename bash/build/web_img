@@ -23,7 +23,7 @@ set -x; exec > log/bash_web_img 2>&1
 inotifywait ../src/img/ -m -e close_write -e move -e create |
   # Minify Images
   while read path action file; do
-    # filename (without extension)
+    # filename (without directory path)
     filename="${file##*/}"
     file_extension="${file##*.}"
 
