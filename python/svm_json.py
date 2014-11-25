@@ -9,3 +9,9 @@ class JSON:
   ## constructor
   def __init__(self, svm_data):
   self.svm_data = svm_data
+
+  ## csv_to_json: convert csv file to JSON object
+  def csv_to_json(self):
+
+  ## xml_to_json: convert xml to JSON object
+  def xml_to_json(self):
