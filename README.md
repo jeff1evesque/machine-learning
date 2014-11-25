@@ -38,6 +38,7 @@ sudo apt-get install xorg gnome-core gnome-system-tools gnome-app-install
 
 # General Packages:
 sudo apt-get install inotify-tools
+sudo apt-get install python-pip
 sudo pip install jsonschema
 sudo pip install python-magic
 
@@ -50,9 +51,9 @@ sudo apt-get install phpmyadmin
 # Latest PPA for nodejs:
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 
-# nodejs / npm:
+# ruby / nodejs (includes npm from PPA):
+sudo apt-get install ruby
 sudo apt-get install nodejs
-sudo apt-get install npm
 
 # Compiler / Minifier:
 sudo gem install sass
