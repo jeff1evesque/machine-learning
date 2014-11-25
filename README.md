@@ -90,7 +90,7 @@ sudo chown -R jeffrey:sudo www
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
 ```
-cd /var/www/html/machine-learning/
+cd /var/www/
 git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
