@@ -17,6 +17,11 @@
   font-style: italic;
 }
 
+.error {
+  font-weight:700;
+  color:#800000;
+}
+
 input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_variable, .svm_indep_variable ~ .svm_indep_variable {
   display:block;
 }
