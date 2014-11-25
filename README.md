@@ -37,10 +37,15 @@ The following packages need to be installed through terminal in Ubuntu:
 sudo apt-get install xorg gnome-core gnome-system-tools gnome-app-install
 
 # General Packages:
-sudo apt-get install lamp-server^ phpmyadmin
 sudo apt-get install inotify-tools
 sudo pip install jsonschema
 sudo pip install python-magic
+
+# LAMP (with MariaDB, and phpmyadmin):
+sudo apt-get install apache2
+sudo apt-get install mariadb-server mariadb-client
+sudo apt-get install php5 libapache2-mod-php5
+sudo apt-get install phpmyadmin
 
 # Latest PPA for nodejs:
 curl -sL https://deb.nodesource.com/setup | sudo bash -
