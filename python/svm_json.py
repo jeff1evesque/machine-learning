@@ -18,3 +18,4 @@ class JSON:
 
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
+    print 'dummy code'
