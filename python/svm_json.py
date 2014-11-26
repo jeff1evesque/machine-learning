@@ -8,8 +8,8 @@ import json, csv
 class JSON:
 
   ## constructor
-  def __init__(self, svm_data):
-  self.svm_data = svm_data
+  def __init__(self, svm_file):
+  self.svm_file = svm_file
 
   ## csv_to_json: convert csv file to JSON object
   def csv_to_json(self):
