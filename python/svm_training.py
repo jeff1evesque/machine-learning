@@ -38,9 +38,6 @@ from data_validator import Validator
 from svm_json import JSON
 
 if len(sys.argv) > 1:
-  # convert dataset to its own JSON object
-  json_dataset  = JSON( sys.argv[1] )
-
   # validate input data is json format
   validator = Validator( sys.argv[1], 'training' )
 
@@ -50,6 +47,9 @@ if len(sys.argv) > 1:
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if (json_file_upload is False): sys.exit()
       else:
+        # convert dataset to its own JSON object
+        json_dataset  = JSON( sys.argv[1] )
+
         Training(json_file_upload)
   # validate, send 'training' properties (including 'xml file(s)') to 'data_creator.py'
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
