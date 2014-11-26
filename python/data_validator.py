@@ -62,8 +62,11 @@ class Validator:
         print str(e)
         return False
 
-  ## file_upload_validation(): this method validates 'file upload(s)', provided during
-  #                            'training' session.
+  ## file_upload_validation(): this method validates 'file upload(s)', provided during a
+  #                            'training' session. If any of the 'file upload(s)' fails
+  #                            validation, this method will return False. Otherwise, it
+  #                            will return a list of unique 'file upload(s)', discarding
+  #                            duplicates.
   def file_upload_validation(self, json_file_obj):
     json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
