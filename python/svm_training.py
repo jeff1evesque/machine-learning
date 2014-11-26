@@ -29,6 +29,9 @@
 #
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
+#
+#  Note: the term 'dataset' is used synonymously for 'file upload(s)', and XML
+#        references.
 import sys, json
 from data_creator import Training
 from data_validator import Validator
