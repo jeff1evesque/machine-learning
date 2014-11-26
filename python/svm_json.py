@@ -2,6 +2,7 @@
 
 ## @svm_json.py
 #  This file contains methods to convert svm data to a JSON object.
+import json
 
 ## Class: JSON
 class JSON:
