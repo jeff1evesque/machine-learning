@@ -26,7 +26,8 @@ class Validator:
   #                     'training', or 'analysis' sessions.
   #
   #  Note: This method does not validate the associated 'file upload(s)'. The
-  #        latter component is validated via 'file_upload_validation' (see below).
+  #        latter component is validated via 'file_upload_validation', and 
+  #        'dataset_validation' methods (see below).
   def data_validation(self):
     # local variables
     flag_json = False
@@ -62,11 +63,11 @@ class Validator:
         print str(e)
         return False
 
-  ## file_upload_validation(): this method validates 'file upload(s)', provided during a
-  #                            'training' session. If any of the 'file upload(s)' fails
-  #                            validation, this method will return False. Otherwise, it
-  #                            will return a list of unique 'file upload(s)', discarding
-  #                            duplicates.
+  ## file_upload_validation(): this method validates the MIME type of 'file upload(s)',
+  #                            provided during a 'training' session. If any of the 'file
+  #                            upload(s)' fails validation, this method will return False.
+  #                            Otherwise, the method will return a list of unique 'file
+  #                            upload(s)', discarding duplicates.
   def file_upload_validation(self, json_file_obj):
     json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['application/txt', 'text/plain', 'text/csv']
