@@ -36,7 +36,7 @@ from svm_json import JSON
 
 if len(sys.argv) > 1:
   # convert dataset to its own JSON object
-  
+  json_dataset  = JSON( sys.argv[1] )
 
   # validate input data is json format
   validator = Validator( sys.argv[1], 'training' )
