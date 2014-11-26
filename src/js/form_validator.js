@@ -56,7 +56,7 @@
       url: true,
     },
     svm_dataset_file: {
-      checkMime: ['text/plain', 'text/csv'],
+      checkMime: ['text/plain', 'text/csv', 'application/xml'],
     },
   });
 
