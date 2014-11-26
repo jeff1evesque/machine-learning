@@ -29,20 +29,29 @@
 #
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
+#
+#  Note: the term 'dataset' is used synonymously for 'file upload(s)', and XML
+#        references.
 import sys, json
 from data_creator import Training
 from data_validator import Validator
+from svm_json import JSON
 
 if len(sys.argv) > 1:
   # validate input data is json format
   validator = Validator( sys.argv[1], 'training' )
 
-  # validate, send 'file upload(s)' to 'data_creator.py'
+  # validate MIME type for each dataset
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
-      if (json_file_upload is False): sys.exit()
-      else: Training(json_file_upload)
+      if ( json_file_upload is False ): sys.exit()
+      elif ( json_file_upload['type'] == 'text/csv' ):
+        # convert dataset to its own JSON object
+        json_dataset  = JSON( json_file_upload ).csv_to_json()
+        # validate dataset
+        if ( json_dataset.dataset_validation() is False ): sys.exit()
+        else: Training( json_dataset )
   # validate, send 'training' properties (including 'xml file(s)') to 'data_creator.py'
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
