@@ -49,7 +49,7 @@ if len(sys.argv) > 1:
       else:
         # convert dataset to its own JSON object
         json_dataset  = JSON( json_file_upload )
-        if ( json_dataset is False): sys.exit()
+        if ( json_dataset is False ): sys.exit()
         else: Training( json_dataset )
   # validate, send 'training' properties (including 'xml file(s)') to 'data_creator.py'
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
