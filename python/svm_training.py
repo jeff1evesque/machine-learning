@@ -38,9 +38,9 @@ from data_validator import Validator
 from svm_json import JSON
 
 if len(sys.argv) > 1:
-  # validate input data (not dataset)
   validator = Validator( sys.argv[1], 'training' )
 
+  # validate input data (not dataset)
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
     Training( sys.argv[1] )
