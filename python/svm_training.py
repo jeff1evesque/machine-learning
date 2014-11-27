@@ -48,9 +48,9 @@ if len(sys.argv) > 1:
       if ( json_file_upload is False ): sys.exit()
       else:
         for index, val in enumerate( json_file_upload['file_upload'] ):
-          if ( val['type'] == 'text/plain' or val['type'] == 'text/csv' ):
+          if val['type'] in ('text/plain', 'text/csv'):
             json_dataset = JSON( val['filedata']['file_temp'].csv_to_json()
-          elif ( val['type'] == 'application/xml' or val['type'] == 'text/xml' ):
+          elif val['type'] in ('application/xml', 'text/xml' ):
             json_dataset = JSON( val['filedata']['file_temp'].xml_to_json()
 
   # validate, send 'training' properties (including 'xml file(s)') to 'data_creator.py'
