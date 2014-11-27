@@ -48,7 +48,8 @@ if len(sys.argv) > 1:
       if ( json_file_upload is False ): sys.exit()
       else:
         for index, val in enumerate( json_file_upload['file_upload'] ):
-          print val
+          if ( val['type'] == 'text/plain' or val['type'] == 'text/csv' ):
+            json_dataset = JSON( val['filedata']['file_temp'].csv_to_json()
 
   # validate, send 'training' properties (including 'xml file(s)') to 'data_creator.py'
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
