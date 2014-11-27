@@ -41,9 +41,10 @@ if len(sys.argv) > 1:
   # validate input data (not dataset)
   validator = Validator( sys.argv[1], 'training' )
 
+  # validate, and store dataset
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
-      # validate MIME for each 'file upload(s)'
+      # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
       # convert each 'file upload(s)' as JSON dataset, and store it
