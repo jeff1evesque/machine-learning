@@ -47,7 +47,7 @@ if len(sys.argv) > 1:
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
       else:
-        for index, val in enumerate( json_file_upload['file_upload'] ):
+        for val in json_file_upload['file_upload']:
           if val['type'] in ('text/plain', 'text/csv'):
             json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
           elif val['type'] in ('application/xml', 'text/xml' ):
