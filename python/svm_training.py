@@ -41,8 +41,12 @@ if len(sys.argv) > 1:
   # validate input data (not dataset)
   validator = Validator( sys.argv[1], 'training' )
 
+  if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
+    validator.data_validation()
+    Training( sys.argv[1] )
+
   # validate, and store dataset
-  if ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
+  elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
       # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
@@ -57,10 +61,6 @@ if len(sys.argv) > 1:
             json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
             Training( json_dataset )
 
-  # validate, send 'training' properties (including 'xml file(s)') to 'data_creator.py'
-  elif ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
-    validator.data_validation()
-    Training( sys.argv[1] )
 else:
   msg = 'Please provide a training dataset in json format'
   print json.dumps({'error':msg}, separators=(',', ': '))
