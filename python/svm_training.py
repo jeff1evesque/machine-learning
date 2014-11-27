@@ -46,14 +46,8 @@ if len(sys.argv) > 1:
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
-      elif ( json_file_upload['type'] == 'text/csv' ):
-        json_dataset  = JSON( json_file_upload ).csv_to_json()
-        if ( json_dataset.dataset_validation() is False ): sys.exit()
-        else: Training( json_dataset )
-      elif ( json_file_upload['type'] == 'application/xml' ):
-        json_dataset  = JSON( json_file_upload ).xml_to_json()
-        if ( json_dataset.dataset_validation() is False ): sys.exit()
-        else: Training( json_dataset )
+      else:
+        print json_file_upload
   # validate, send 'training' properties (including 'xml file(s)') to 'data_creator.py'
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
