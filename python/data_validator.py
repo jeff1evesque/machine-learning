@@ -79,9 +79,9 @@ class Validator:
 
       for index, filedata in enumerate(json_data['file_upload']):
         try:
-          mime_type = magic.from_file( filedata['file_temp'], mime=True )
+          mimetype = magic.from_file( filedata['file_temp'], mime=True )
           # validate file format
-          if ( mime_type not in acceptable_type ):
+          if ( mimetype not in acceptable_type ):
             msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'] + '''\', must be one of the formats:'''
             msg += '\n       ' + ', '.join(acceptable_type)
             print json.dumps({'error':msg}, separators=(',', ': '))
