@@ -91,7 +91,7 @@ class Validator:
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
-            json_keep.append(filedata)
+            json_keep.append({mimetype: filedata})
 
         except:
           msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
