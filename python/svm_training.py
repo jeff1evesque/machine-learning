@@ -47,7 +47,7 @@ if len(sys.argv) > 1:
       # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
-      # convert each 'file upload(s)' as JSON dataset, and store it
+      # convert each 'file upload(s)' as single JSON dataset, and store it
       else:
         for val in json_file_upload['file_upload']:
           if val['type'] in ('text/plain', 'text/csv'):
