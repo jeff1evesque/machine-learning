@@ -79,8 +79,9 @@ class Validator:
 
       for index, filedata in enumerate(json_data['file_upload']):
         try:
+          mimetype = magic.from_file( filedata['file_temp'], mime=True )
           # validate file format
-          if ( magic.from_file( filedata['file_temp'], mime=True ) not in acceptable_type ):
+          if ( mimetype not in acceptable_type ):
             msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'] + '''\', must be one of the formats:'''
             msg += '\n       ' + ', '.join(acceptable_type)
             print json.dumps({'error':msg}, separators=(',', ': '))
@@ -90,7 +91,7 @@ class Validator:
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
-            json_keep.append(filedata)
+            json_keep.append( {'type': mimetype, 'filedata': filedata} )
 
         except:
           msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
