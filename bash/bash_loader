@@ -4,7 +4,7 @@
 mkdir -p ../log
 
 # trace last execution of 'bash_loader'
-set -x; exec > ../log/log_bash_loader 2>&1
+set -x; exec > ../log/bash_loader 2>&1
 
 # allow @(var) syntax
 shopt -s extglob
