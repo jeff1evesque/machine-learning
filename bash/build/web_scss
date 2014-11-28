@@ -10,10 +10,10 @@ PATH="/usr/local/bin:$PATH"
 
 # create directory if doesn't exist
 mkdir -p ../html/machine-learning/asset/css/
-
+mkdir -p ../log/build/
 
 # track execution of script
-set -x; exec > log/bash_web_scss 2>&1
+set -x; exec > ../log/build/bash_web_scss 2>&1
 
 
 # watch '../src/scss/' subdirectory
