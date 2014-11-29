@@ -14,6 +14,7 @@ class JSON:
   ## csv_to_json: convert csv file to JSON object
   def csv_to_json(self):
     file_csv  = open( self.svm_file, 'r' )
+    reader = csv.DictReader( file_csv )
 
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
