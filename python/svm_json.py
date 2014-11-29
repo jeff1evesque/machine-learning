@@ -13,7 +13,7 @@ class JSON:
 
   ## csv_to_json: convert csv file to JSON object
   def csv_to_json(self):
-    file_csv      = open( self.svm_file, 'r' )
+    file_csv      = open( self.svm_file, 'rU' )
     reader        = csv.DictReader( file_csv )
 
     for row in reader:
