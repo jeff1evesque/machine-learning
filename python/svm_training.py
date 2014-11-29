@@ -38,26 +38,29 @@ from data_validator import Validator
 from svm_json import JSON
 
 if len(sys.argv) > 1:
-  # validate input data is json format
   validator = Validator( sys.argv[1], 'training' )
 
-  # validate MIME type for each dataset, validate dataset, store dataset
-  if ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
-    if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
-      json_file_upload = validator.file_upload_validation( sys.argv[1] )
-      if ( json_file_upload is False ): sys.exit()
-      elif ( json_file_upload['type'] == 'text/csv' ):
-        json_dataset  = JSON( json_file_upload ).csv_to_json()
-        if ( json_dataset.dataset_validation() is False ): sys.exit()
-        else: Training( json_dataset )
-      elif ( json_file_upload['type'] == 'application/xml' ):
-        json_dataset  = JSON( json_file_upload ).xml_to_json()
-        if ( json_dataset.dataset_validation() is False ): sys.exit()
-        else: Training( json_dataset )
-  # validate, send 'training' properties (including 'xml file(s)') to 'data_creator.py'
-  elif ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
+  # validate input data (not dataset)
+  if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
     Training( sys.argv[1] )
+
+  # validate, and store dataset
+  elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
+    if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
+      # validate MIME type for each 'file upload(s)'
+      json_file_upload = validator.file_upload_validation( sys.argv[1] )
+      if ( json_file_upload is False ): sys.exit()
+      # convert each 'file upload(s)' as single JSON dataset, and store it
+      else:
+        for val in json_file_upload['file_upload']:
+          if val['type'] in ('text/plain', 'text/csv'):
+            json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
+            Training( json_dataset )
+          elif val['type'] in ('application/xml', 'text/xml' ):
+            json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
+            Training( json_dataset )
+
 else:
   msg = 'Please provide a training dataset in json format'
   print json.dumps({'error':msg}, separators=(',', ': '))
