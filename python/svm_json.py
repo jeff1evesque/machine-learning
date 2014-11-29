@@ -25,7 +25,7 @@ class JSON:
     for row in reader:
       obj_json.append( row )
 
-    print json.dumps(obj_json)
+    return json.dumps(obj_json)
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
     print 'dummy code'
