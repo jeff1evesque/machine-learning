@@ -14,6 +14,7 @@ def jsonmerge_dataset():
       }
     }
   }
+  return schema
 
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
