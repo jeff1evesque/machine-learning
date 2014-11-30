@@ -33,7 +33,7 @@
 #  Note: the term 'dataset' is used synonymously for 'file upload(s)', and XML
 #        references.
 import sys, json
-from jsonmerge import merger
+from jsonmerge import Merger
 from data_creator import Training
 from data_validator import Validator
 from svm_json import JSON
