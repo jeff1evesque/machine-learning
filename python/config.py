@@ -3,6 +3,9 @@
 ## @config.py
 #  This file contains python configuration settings.
 
+## jsonmerge_dataset(): contains the schema used for 'jsonmerge'. This schema
+#                       is used in svm_training.py.
+
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
 def jsonschema_training():
