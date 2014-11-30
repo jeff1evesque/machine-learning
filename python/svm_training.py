@@ -40,7 +40,7 @@ from svm_json import JSON
 
 # local variables
 json_dataset = {}
-merger = Merger(schema)
+merger = Merger( jsonschema_dataset )
 
 if len(sys.argv) > 1:
   validator = Validator( sys.argv[1], 'training' )
