@@ -63,6 +63,7 @@ if len(sys.argv) > 1:
 
             validator_json = Validator( json_dataset )
             Training( json_dataset )
+
           elif val['type'] in ('application/xml', 'text/xml' ):
             try:
               json_dataset = merge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
