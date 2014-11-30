@@ -56,9 +56,11 @@ if len(sys.argv) > 1:
         for val in json_file_upload['file_upload']:
           if val['type'] in ('text/plain', 'text/csv'):
             json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
+            validator_json = Validator( json_dataset )
             Training( json_dataset )
           elif val['type'] in ('application/xml', 'text/xml' ):
             json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
+            validator_json = Validator( json_dataset )
             Training( json_dataset )
 
 else:
