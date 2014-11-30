@@ -63,7 +63,7 @@ if len(sys.argv) > 1:
           if val['type'] in ('text/plain', 'text/csv'):
             # merge to single JSON object
             try:
-              json_dataset = merge( json_dataset, JSON( val['filedata']['file_temp']).csv_to_json() )
+              json_dataset = merger.merge( json_dataset, JSON( val['filedata']['file_temp']).csv_to_json() )
             except:
               json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
 
@@ -74,7 +74,7 @@ if len(sys.argv) > 1:
           elif val['type'] in ('application/xml', 'text/xml' ):
             # merge to single JSON object
             try:
-              json_dataset = merge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
+              json_dataset = merger.merge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
             except:
               json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
 
