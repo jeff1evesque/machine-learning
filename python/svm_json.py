@@ -27,7 +27,7 @@ class JSON:
       for row in reader:
         # iterate through each column 'name', and 'value'
         for (k,v) in row.items():
-          # append 'value' into appropriate list based on column name 'k'
+          # append value into appropriate list based on column name 'k'
           columns[k].append(v)
 
     return json.dumps(columns)
