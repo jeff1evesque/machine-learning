@@ -22,12 +22,11 @@ class Validator:
     self.svm_data = svm_data
     self.svm_session = session_type.lower()
 
-  ## prelearning_data_validation: this method validates the SVM dataset,
-  #                               using a predefined 'jsonschema' located
-  #                               in 'config.py'.
+  ## dataset_validation: this method validates the SVM dataset, using a
+  #                      predefined 'jsonschema' located in 'config.py'.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
-  def prelearning_data_validation(self):
+  def dataset_validation(self):
     try:
       validate(json.loads(self.svm_data), jsonschema_dataset)
     except Exception, e:
