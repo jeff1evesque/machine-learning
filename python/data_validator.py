@@ -27,6 +27,8 @@ class Validator:
   #                               in 'config.py'.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
+  def prelearning_data_validation(self):
+    
 
   ## data_validation: this method validates the SVM properties of either
   #                   'training', or 'analysis' sessions.
