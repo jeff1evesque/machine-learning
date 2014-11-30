@@ -4,3 +4,4 @@
 [submodule "library/jsonmerge"]
 	path = library/jsonmerge
 	url = https://github.com/avian2/jsonmerge
+        dirty = ignore
