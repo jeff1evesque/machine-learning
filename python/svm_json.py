@@ -30,7 +30,7 @@ class JSON:
           # append 'value' into appropriate list based on column name 'k'
           columns[k].append(v)
 
-    print json.dumps(columns)
+    return json.dumps(columns)
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
     print 'dummy code'
