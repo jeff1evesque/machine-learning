@@ -22,6 +22,12 @@ class Validator:
     self.svm_data = svm_data
     self.svm_session = session_type.lower()
 
+  ## prelearning_data_validation: this method validates the SVM dataset,
+  #                               using a predefined 'jsonschema' located
+  #                               in 'config.py'.
+  #
+  #  Note: the SVM dataset is synonymous for the 'file upload(s)'
+
   ## data_validation: this method validates the SVM properties of either
   #                   'training', or 'analysis' sessions.
   #
