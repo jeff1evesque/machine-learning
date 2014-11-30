@@ -22,8 +22,20 @@ class Validator:
     self.svm_data = svm_data
     self.svm_session = session_type.lower()
 
-  ## data_validation(): this method validates the SVM properties of either
-  #                     'training', or 'analysis' sessions.
+  ## prelearning_data_validation: this method validates the SVM dataset,
+  #                               using a predefined 'jsonschema' located
+  #                               in 'config.py'.
+  #
+  #  Note: the SVM dataset is synonymous for the 'file upload(s)'
+  def prelearning_data_validation(self):
+    try:
+      validate(json.loads(self.svm_data), jsonschema_dataset)
+    except Exception, e:
+      print str(e)
+      return False
+
+  ## data_validation: this method validates the SVM properties of either
+  #                   'training', or 'analysis' sessions.
   #
   #  Note: This method does not validate the associated 'file upload(s)'. The
   #        latter component is validated via 'file_upload_validation', and 
@@ -45,7 +57,7 @@ class Validator:
     # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
       try:
-        validate(json.loads(self.svm_data), jsonschema_training())
+        validate(json.loads(self.svm_data), jsonschema_training)
       except Exception, e:
         print str(e)
         return False
@@ -58,16 +70,16 @@ class Validator:
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
       try:
-        validate(json.loads(self.svm_data), jsonschema_analysis())
+        validate(json.loads(self.svm_data), jsonschema_analysis)
       except Exception, e:
         print str(e)
         return False
 
-  ## file_upload_validation(): this method validates the MIME type of 'file upload(s)',
-  #                            provided during a 'training' session. If any of the 'file
-  #                            upload(s)' fails validation, this method will return False.
-  #                            Otherwise, the method will return a list of unique 'file
-  #                            upload(s)', discarding duplicates.
+  ## file_upload_validation: this method validates the MIME type of 'file upload(s)',
+  #                          provided during a 'training' session. If any of the 'file
+  #                          upload(s)' fails validation, this method will return False.
+  #                          Otherwise, the method will return a list of unique 'file
+  #                          upload(s)', discarding duplicates.
   def file_upload_validation(self, json_file_obj):
     json_data        = json.loads(json_file_obj)['data']['result']
     acceptable_type  = ['text/plain', 'text/csv', 'application/xml']
