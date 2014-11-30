@@ -3,9 +3,9 @@
 ## @config.py
 #  This file contains python configuration settings.
 
-## jsonschema_training: contains the jsonschema for the 'training' session.
-#                       This validation schema is used in data_validator.py.
-def jsonschema_training:
+## jsonschema_training(): contains the jsonschema for the 'training' session.
+#                         This validation schema is used in data_validator.py.
+def jsonschema_training():
   schema = {
     'type': 'object',
     'properties': {
@@ -55,9 +55,9 @@ def jsonschema_training:
   }
   return schema
 
-## jsonschema_analysis: contains the jsonschema for the 'analysis' session.
-#                       This validation schema is used in data_validator.py.
-def jsonschema_analysis:
+## jsonschema_analysis(): contains the jsonschema for the 'analysis' session.
+#                         This validation schema is used in data_validator.py.
+def jsonschema_analysis():
   schema = {
     'type': 'object',
     'properties': {
