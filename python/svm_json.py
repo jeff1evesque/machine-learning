@@ -22,9 +22,12 @@ class JSON:
     columns = defaultdict( list )
 
     with open( self.svm_file, 'rU' ) as f:
+      # read rows into 'dictionary' format
       reader = csv.DictReader(f)
       for row in reader:
+        # iterate through each column 'name', and 'value'
         for (k,v) in row.items():
+          # append 'value' into appropriate list based on column name 'k'
           columns[k].append(v)
 
     print json.dumps(columns)
