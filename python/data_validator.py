@@ -28,7 +28,7 @@ class Validator:
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
-      validate(json.loads(self.svm_data), jsonschema_dataset)
+      validate(json.loads(self.svm_data), jsonschema_dataset())
     except Exception, e:
       print str(e)
       return False
@@ -56,7 +56,7 @@ class Validator:
     # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
       try:
-        validate(json.loads(self.svm_data), jsonschema_training)
+        validate(json.loads(self.svm_data), jsonschema_training())
       except Exception, e:
         print str(e)
         return False
@@ -69,7 +69,7 @@ class Validator:
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
       try:
-        validate(json.loads(self.svm_data), jsonschema_analysis)
+        validate(json.loads(self.svm_data), jsonschema_analysis())
       except Exception, e:
         print str(e)
         return False
