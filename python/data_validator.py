@@ -20,7 +20,8 @@ class Validator:
   #  @session_type: represents the current session type
   def __init__(self, svm_data=None, session_type=None):
     self.svm_data = svm_data
-    self.svm_session = session_type.lower()
+    if ( session_type != None ):
+      self.svm_session = session_type.lower()
 
   ## dataset_validation: this method validates the SVM dataset, using a
   #                      predefined 'jsonschema' located in 'config.py'.
