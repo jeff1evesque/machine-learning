@@ -37,6 +37,7 @@ from jsonmerge import Merger
 from data_creator import Training
 from data_validator import Validator
 from svm_json import JSON
+from config import jsonmerge_dataset
 
 # local variables
 json_dataset = {}
