@@ -5,10 +5,11 @@
 
 ## jsonmerge_dataset(): contains the schema used for 'jsonmerge'. This schema
 #                       is used in svm_training.py.
+#
 def jsonmerge_dataset():
   schema = {
     'properties': {
-      'json_dataset': {
+      '*': {
         'mergeStrategy': 'append'
       }
     }
