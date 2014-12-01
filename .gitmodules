@@ -2,7 +2,3 @@
         path   = library/scikit-learn
         url    = https://github.com/scikit-learn/scikit-learn.git
         ignore = dirty
-[submodule "library/jsonmerge"]
-        path   = library/jsonmerge
-        url    = https://github.com/avian2/jsonmerge
-        ignore = dirty
