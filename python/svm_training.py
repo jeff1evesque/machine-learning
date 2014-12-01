@@ -33,15 +33,10 @@
 #  Note: the term 'dataset' is used synonymously for 'file upload(s)', and XML
 #        references.
 import sys, json
-from jsonmerge import Merger
 from data_creator import Training
 from data_validator import Validator
 from svm_json import JSON
 from config import jsonmerge_dataset
-
-# local variables
-json_dataset = {}
-merger = Merger( jsonmerge_dataset() )
 
 if len(sys.argv) > 1:
   validator = Validator( sys.argv[1], 'training' )
@@ -65,7 +60,9 @@ if len(sys.argv) > 1:
             # merge to single JSON object
             try:
               json_dataset = merger.merge( json_dataset, JSON( val['filedata']['file_temp']).csv_to_json() )
-            except:
+              print json_dataset
+            except Exception as e:
+              print e
               json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
 
             # validate, and store JSON object
@@ -83,7 +80,6 @@ if len(sys.argv) > 1:
             validator_json = Validator( json_dataset )
             Training( json_dataset )
 
-        print json_dataset
 else:
   msg = 'Please provide a training dataset in json format'
   print json.dumps({'error':msg}, separators=(',', ': '))
