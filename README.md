@@ -48,6 +48,9 @@ sudo apt-get install mariadb-server mariadb-client
 sudo apt-get install php5 libapache2-mod-php5
 sudo apt-get install phpmyadmin
 
+# Python to MariaDB / MySQL Connector:
+sudo apt-get install python-mysqldb
+
 # Latest PPA for nodejs:
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 
