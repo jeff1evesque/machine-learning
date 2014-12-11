@@ -36,6 +36,8 @@ import sys, json
 from data_creator import Training
 from data_validator import Validator
 from svm_json import JSON
+from config import jsonmerge_dataset
+from helper import jsonmerge
 
 if len(sys.argv) > 1:
   validator = Validator( sys.argv[1], 'training' )
@@ -51,15 +53,31 @@ if len(sys.argv) > 1:
       # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
-      # convert each 'file upload(s)' as single JSON dataset, and store it
+      # convert each 'file upload(s)' as single JSON object, and store it
       else:
+        json_dataset = {}
         for val in json_file_upload['file_upload']:
           if val['type'] in ('text/plain', 'text/csv'):
-            json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
+            # merge to single JSON object
+            try:
+              json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).csv_to_json() )
+              print json_dataset
+            except Exception as e:
+              print e
+              json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
+
+            # validate, and store JSON object
             validator_json = Validator( json_dataset )
             Training( json_dataset )
+
           elif val['type'] in ('application/xml', 'text/xml' ):
-            json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
+            # merge to single JSON object
+            try:
+              json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
+            except:
+              json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
+
+            # validate, and store JSON object
             validator_json = Validator( json_dataset )
             Training( json_dataset )
 
