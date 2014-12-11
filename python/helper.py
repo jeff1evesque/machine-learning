@@ -4,6 +4,9 @@
 #  This file contains helper functions.
 import hashlib, collections
 
+## jsonmerge: this method takes two json objects, and merges them into one.
+def jsonmerge():
+
 ## md5_for_file: Convert the contents of a given file to a hash value,
 #                equivalent. Note, block size directly depends on the
 #                block size of the filesystem.
