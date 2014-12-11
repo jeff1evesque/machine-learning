@@ -36,7 +36,6 @@ import sys, json
 from data_creator import Training
 from data_validator import Validator
 from svm_json import JSON
-from config import jsonmerge_dataset
 from helper import jsonmerge
 
 if len(sys.argv) > 1:
@@ -62,6 +61,8 @@ if len(sys.argv) > 1:
             try:
               json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).csv_to_json() )
               print json_dataset
+              dataset = Validator( json_dataset  )
+              dataset.dataset_validation()
             except Exception as e:
               print e
               json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
