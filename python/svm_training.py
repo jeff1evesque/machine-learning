@@ -37,6 +37,7 @@ from data_creator import Training
 from data_validator import Validator
 from svm_json import JSON
 from config import jsonmerge_dataset
+from helper import jsonmerge
 
 if len(sys.argv) > 1:
   validator = Validator( sys.argv[1], 'training' )
