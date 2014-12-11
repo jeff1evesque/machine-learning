@@ -6,6 +6,12 @@ import hashlib, collections
 
 ## jsonmerge: this method takes two json objects, and merges them into one.
 def jsonmerge( json1, json2 ):
+  if bool( json1 ) == True and bool( json2 ) == True:
+    return json1, json2
+  elif bool( json1 ) == True and bool( json2 ) == False:
+    return json1
+  elif bool( json1 ) == False and bool( json2 ) == True:
+    return json2
 
 ## md5_for_file: Convert the contents of a given file to a hash value,
 #                equivalent. Note, block size directly depends on the
