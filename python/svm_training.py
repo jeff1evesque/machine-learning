@@ -50,9 +50,11 @@ if len(sys.argv) > 1:
   # validate, and store dataset
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
+
       # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
+
       # convert each 'file upload(s)' as single JSON object, and store it
       else:
         json_dataset = {}
