@@ -58,7 +58,7 @@ if len(sys.argv) > 1:
         json_dataset = {}
         for val in json_file_upload['file_upload']:
           if val['type'] in ('text/plain', 'text/csv'):
-            # merge to single JSON object
+            # merge JSON datasets
             try:
               json_dataset = jsonmerge( json_dataset, json.loads(JSON( val['filedata']['file_temp']).csv_to_json()) )
               print json_dataset
