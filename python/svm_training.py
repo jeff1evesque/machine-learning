@@ -71,7 +71,7 @@ if len(sys.argv) > 1:
             Training( json_validated )
 
           elif val['type'] in ('application/xml', 'text/xml' ):
-            # merge to single JSON object
+            # merge JSON datasets
             try:
               json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
             except Exception as e:
