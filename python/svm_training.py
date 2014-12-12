@@ -73,8 +73,8 @@ if len(sys.argv) > 1:
             # merge to single JSON object
             try:
               json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
-            except:
-              json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
+            except Exception as e:
+              print e
 
             # validate, and store JSON object
             validator_json = Validator( json_dataset )
