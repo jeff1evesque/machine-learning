@@ -61,7 +61,6 @@ if len(sys.argv) > 1:
             # merge JSON datasets
             try:
               json_dataset = jsonmerge( json_dataset, json.loads(JSON( val['filedata']['file_temp']).csv_to_json()) )
-              print json_dataset
             except Exception as e:
               print e
 
