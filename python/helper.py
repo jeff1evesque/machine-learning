@@ -7,6 +7,7 @@ from collections import defaultdict
 
 ## jsonmerge: this method takes two json objects, and merges them into one.
 def jsonmerge( json1, json2 ):
+  # create dictionary like object
   dd = defaultdict(list)
 
   # iterate dictionary tuple
