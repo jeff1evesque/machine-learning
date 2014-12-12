@@ -9,6 +9,7 @@ from collections import defaultdict
 def jsonmerge( json1, json2 ):
   dd = defaultdict(list)
 
+  # iterate dictionary tuple
   for d in ( json1, json2 ):
     # concatenate list items
     for key, value in d.iteritems():
