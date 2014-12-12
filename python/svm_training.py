@@ -50,37 +50,39 @@ if len(sys.argv) > 1:
   # validate, and store dataset
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
+
       # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
+
       # convert each 'file upload(s)' as single JSON object, and store it
       else:
         json_dataset = {}
         for val in json_file_upload['file_upload']:
           if val['type'] in ('text/plain', 'text/csv'):
-            # merge to single JSON object
+            # merge JSON datasets
             try:
-              json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).csv_to_json() )
-              print json_dataset
-              dataset = Validator( json_dataset  )
-              dataset.dataset_validation()
+              json_dataset = jsonmerge( json_dataset, json.loads(JSON( val['filedata']['file_temp']).csv_to_json()) )
             except Exception as e:
               print e
-              json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
+              sys.exit()
 
             # validate, and store JSON object
-            validator_json = Validator( json_dataset )
-            Training( json_dataset )
+            json_validated = Validator( json_dataset )
+            json_validated.dataset_validation()
+            Training( json_validated )
 
           elif val['type'] in ('application/xml', 'text/xml' ):
-            # merge to single JSON object
+            # merge JSON datasets
             try:
               json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
-            except:
-              json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
+            except Exception as e:
+              print e
+              sys.exit()
 
             # validate, and store JSON object
-            validator_json = Validator( json_dataset )
+            json_validated = Validator( json_dataset )
+            json_validated.dataset_validation()
             Training( json_dataset )
 
 else:
