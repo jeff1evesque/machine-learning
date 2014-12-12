@@ -60,17 +60,15 @@ if len(sys.argv) > 1:
           if val['type'] in ('text/plain', 'text/csv'):
             # merge to single JSON object
             try:
-              json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).csv_to_json() )
+              json_dataset = jsonmerge( json_dataset, json.loads(JSON( val['filedata']['file_temp']).csv_to_json()) )
               print json_dataset
-              dataset = Validator( json_dataset  )
-              dataset.dataset_validation()
             except Exception as e:
               print e
-              json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
 
             # validate, and store JSON object
-            validator_json = Validator( json_dataset )
-            Training( json_dataset )
+            json_validated = Validator( json_dataset )
+            json_validated.dataset_validation()
+            Training( json_validated )
 
           elif val['type'] in ('application/xml', 'text/xml' ):
             # merge to single JSON object
