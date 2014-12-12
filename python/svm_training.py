@@ -63,6 +63,7 @@ if len(sys.argv) > 1:
               json_dataset = jsonmerge( json_dataset, json.loads(JSON( val['filedata']['file_temp']).csv_to_json()) )
             except Exception as e:
               print e
+              sys.exit()
 
             # validate, and store JSON object
             json_validated = Validator( json_dataset )
@@ -75,6 +76,7 @@ if len(sys.argv) > 1:
               json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
             except Exception as e:
               print e
+              sys.exit()
 
             # validate, and store JSON object
             validator_json = Validator( json_dataset )
