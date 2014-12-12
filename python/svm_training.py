@@ -79,7 +79,8 @@ if len(sys.argv) > 1:
               sys.exit()
 
             # validate, and store JSON object
-            validator_json = Validator( json_dataset )
+            json_validated = Validator( json_dataset )
+            json_validated.dataset_validation()
             Training( json_dataset )
 
 else:
