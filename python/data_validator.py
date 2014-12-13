@@ -8,7 +8,7 @@
 import json, sys, magic
 from jsonschema import validate
 from helper import md5_for_file
-from config import jsonschema_training, jsonschema_analysis
+from config import jsonschema_training, jsonschema_analysis, jsonschema_dataset
 
 ## Class: Validator
 class Validator:
