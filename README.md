@@ -191,6 +191,8 @@ The following provides additional documentation on the *schema* validation:
 
 This project implements *JSON Schema* validation, as a backend-validation tool. Specifically, [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py) defines acceptable *schemas* to validate against, while [`data_validator.py`](https://github.com/jeff1evesque/machine-learning/blob/52157d2f7c7255f999e822dd13ce65911d678918/python/data_validator.py#L48) implements the validation schema(s).
 
+**Note:** The concatenated dataset, via custom [`jsonmerge`](https://github.com/jeff1evesque/machine-learning/blob/c1d555be456fc7e2d0d179eaab8d43fdeb9574e6/python/helper.py#L9) method, and the collective properties defining an SVM session (training, or analysis), each has its own corresponding jsonschema definition within `config.py`.
+
 ##Testing / Execution
 
 ###Test Scripts
