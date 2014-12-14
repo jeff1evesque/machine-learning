@@ -23,13 +23,31 @@ class Validator:
     if ( session_type != None ):
       self.svm_session = session_type.lower()
 
-  ## dataset_validation: this method validates the SVM dataset, using a
-  #                      predefined 'jsonschema' located in 'config.py'.
+  ## dataset_validation: all supplied SVM datasets are merged into one collective
+  #                      dataset via the 'jsonmerge' method in 'helper.py'. Then,
+  #                      each data element within the merged dataset, is validated
+  #                      for proper syntax.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
-      validate(json.loads(self.svm_data), jsonschema_dataset())
+      # iterate SVM dependent, and correspond list of independent variables
+      for dependent, indep_list in self.svm_data.items():
+        # validate SVM dependent variables
+        try:
+          unicode( dependent )
+        except:
+          print 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
+          return False
+
+        # validate SVM independent variables
+        for independent in indep_list:
+          try:
+            float( independent )
+          except:
+            print 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
+            return False
+
     except Exception, e:
       print str(e)
       return False
