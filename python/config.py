@@ -28,6 +28,10 @@ class Database:
   def set_db_host(self, host):
     self.db_host = host
 
+  ## set_db_username:
+  def set_db_username:
+    self.db_username = username
+
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
 def jsonschema_training():
