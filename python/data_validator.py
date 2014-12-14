@@ -37,7 +37,8 @@ class Validator:
         try:
           unicode( dependent )
         except:
-          print 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
+          msg = 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
+          print json.dumps({'error':msg}, separators=(',', ': '))
           return False
 
         # validate SVM independent variables
@@ -45,7 +46,8 @@ class Validator:
           try:
             float( independent )
           except:
-            print 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
+            msg = 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
+            print json.dumps({'error':msg}, separators=(',', ': '))
             return False
 
     except Exception, e:
