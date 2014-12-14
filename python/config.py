@@ -16,6 +16,10 @@ class Database:
   def get_db_host(self):
     return self.db_host
 
+  ## get_db_username:
+  def get_db_username(self):
+    return self.db_username
+
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
 def jsonschema_training():
