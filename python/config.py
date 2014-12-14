@@ -32,6 +32,10 @@ class Database:
   def set_db_username:
     self.db_username = username
 
+  ## set_db_password:
+  def set_db_password:
+    self.db_password = password
+
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
 def jsonschema_training():
