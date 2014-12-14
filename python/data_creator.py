@@ -2,6 +2,7 @@
 
 ## @data_creator.py
 import json
+import MySQLdb as DB
 
 ## Class: Training
 class Training:
