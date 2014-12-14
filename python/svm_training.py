@@ -55,12 +55,12 @@ if len(sys.argv) > 1:
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
 
-      # convert each 'file upload(s)' as single JSON object, and store it
+      # merge datasets as one JSON object
       else:
         json_dataset = {}
         for val in json_file_upload['file_upload']:
           if val['type'] in ('text/plain', 'text/csv'):
-            # merge JSON datasets
+            # convert csv to json, and merge
             try:
               json_dataset = jsonmerge( json_dataset, json.loads(JSON( val['filedata']['file_temp']).csv_to_json()) )
             except Exception as e:
@@ -68,14 +68,14 @@ if len(sys.argv) > 1:
               sys.exit()
 
           elif val['type'] in ('application/xml', 'text/xml' ):
-            # merge JSON datasets
+            # convert xml to json, and merge
             try:
               json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
             except Exception as e:
               print e
               sys.exit()
 
-        # validate, and store JSON object
+        # validate, and store merged JSON object
         json_validated = Validator( json_dataset )
         json_validated.dataset_validation()
         Training( json_dataset )
