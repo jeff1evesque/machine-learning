@@ -32,6 +32,12 @@ class Validator:
       # iterate SVM dependent, and correspond list of independent variables
       for dependent, indep_list in self.svm_data.items():
         # validate SVM dependent variables
+        try:
+          unicode( dependent )
+        except:
+          print 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'  
+
+        print type( dependent )
 
         # validate SVM independent variables
         for independent in indep_list:
