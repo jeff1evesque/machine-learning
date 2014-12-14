@@ -12,6 +12,10 @@ class Database:
     self.db_username = 'authenticated'
     self.db_passowrd = 'passoword'
 
+  ## get_db_host:
+  def get_db_host(self):
+    return self.db_host
+
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
 def jsonschema_training():
