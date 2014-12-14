@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 ## @config.py
-#  This file contains python configuration settings.
+#  This file contains various python configuration settings.
 
 ## Class: Database
 class Database:
