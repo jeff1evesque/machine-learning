@@ -35,7 +35,10 @@ class Validator:
 
         # validate SVM independent variables
         for independent in indep_list:
-          print independent
+          try:
+            float( independent )
+          except:
+            print 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
     except Exception, e:
       print str(e)
       return False
