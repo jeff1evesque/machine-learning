@@ -35,7 +35,8 @@ class Validator:
         try:
           unicode( dependent )
         except:
-          print 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'  
+          print 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
+          return False
 
         # validate SVM independent variables
         for independent in indep_list:
@@ -43,6 +44,7 @@ class Validator:
             float( independent )
           except:
             print 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
+            return False
 
     except Exception, e:
       print str(e)
