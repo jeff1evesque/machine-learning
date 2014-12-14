@@ -4,6 +4,13 @@
 #  This file contains python configuration settings.
 
 ## Class: Database
+class Database:
+
+  ## constructor:
+  def __init__(self):
+    self.db_host     = 'localhost'
+    self.db_username = 'authenticated'
+    self.db_passowrd = 'passoword'
 
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
