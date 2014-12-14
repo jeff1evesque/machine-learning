@@ -29,7 +29,7 @@ class Validator:
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
-      validate(json.loads(self.svm_data), jsonschema_dataset())
+      print self.svm_data
     except Exception, e:
       print str(e)
       return False
