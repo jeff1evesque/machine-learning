@@ -23,8 +23,10 @@ class Validator:
     if ( session_type != None ):
       self.svm_session = session_type.lower()
 
-  ## dataset_validation: this method validates the SVM dataset, using a
-  #                      predefined 'jsonschema' located in 'config.py'.
+  ## dataset_validation: all supplied SVM datasets are merged into one collective
+  #                      dataset via the 'jsonmerge' method in 'helper.py'. Then,
+  #                      each data element within the merged dataset, is validated
+  #                      for proper syntax.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
