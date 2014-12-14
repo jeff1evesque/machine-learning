@@ -29,7 +29,9 @@ class Validator:
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
-      print self.svm_data
+      # iterate SVM dependent, and correspond list of independent variables
+      for k, v in self.svm_data.items():
+        print k, v
     except Exception, e:
       print str(e)
       return False
