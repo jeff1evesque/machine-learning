@@ -23,37 +23,6 @@ class Validator:
     if ( session_type != None ):
       self.svm_session = session_type.lower()
 
-  ## dataset_validation: all supplied SVM datasets are merged into one collective
-  #                      dataset via the 'jsonmerge' method in 'helper.py'. Then,
-  #                      each data element within the merged dataset, is validated
-  #                      for proper syntax.
-  #
-  #  Note: the SVM dataset is synonymous for the 'file upload(s)'
-  def dataset_validation(self):
-    try:
-      # iterate SVM dependent, and correspond list of independent variables
-      for dependent, indep_list in self.svm_data.items():
-        # validate SVM dependent variables
-        try:
-          unicode( dependent )
-        except:
-          msg = 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
-          print json.dumps({'error':msg}, separators=(',', ': '))
-          return False
-
-        # validate SVM independent variables
-        for independent in indep_list:
-          try:
-            float( independent )
-          except:
-            msg = 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
-            print json.dumps({'error':msg}, separators=(',', ': '))
-            return False
-
-    except Exception, e:
-      print str(e)
-      return False
-
   ## data_validation: this method validates the SVM properties of either
   #                   'training', or 'analysis' sessions.
   #
@@ -94,6 +63,37 @@ class Validator:
       except Exception, e:
         print str(e)
         return False
+
+  ## dataset_validation: all supplied SVM datasets are merged into one collective
+  #                      dataset via the 'jsonmerge' method in 'helper.py'. Then,
+  #                      each data element within the merged dataset, is validated
+  #                      for proper syntax.
+  #
+  #  Note: the SVM dataset is synonymous for the 'file upload(s)'
+  def dataset_validation(self):
+    try:
+      # iterate SVM dependent, and correspond list of independent variables
+      for dependent, indep_list in self.svm_data.items():
+        # validate SVM dependent variables
+        try:
+          unicode( dependent )
+        except:
+          msg = 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          return False
+
+        # validate SVM independent variables
+        for independent in indep_list:
+          try:
+            float( independent )
+          except:
+            msg = 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
+            print json.dumps({'error':msg}, separators=(',', ': '))
+            return False
+
+    except Exception, e:
+      print str(e)
+      return False
 
   ## file_upload_validation: this method validates the MIME type of 'file upload(s)',
   #                          provided during a 'training' session. If any of the 'file
