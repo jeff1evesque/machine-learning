@@ -78,7 +78,9 @@ if len(sys.argv) > 1:
         # validate, and store merged JSON object
         json_validated = Validator( json_dataset )
         json_validated.dataset_validation()
-        Training( json_dataset )
+
+        db_save        = Training( json_dataset )
+        db_save.db_save_dataset()
 
 else:
   msg = 'Please provide a training dataset in json format'
