@@ -67,11 +67,6 @@ if len(sys.argv) > 1:
               print e
               sys.exit()
 
-            # validate, and store JSON object
-            json_validated = Validator( json_dataset )
-            json_validated.dataset_validation()
-            Training( json_validated )
-
           elif val['type'] in ('application/xml', 'text/xml' ):
             # merge JSON datasets
             try:
@@ -80,10 +75,10 @@ if len(sys.argv) > 1:
               print e
               sys.exit()
 
-            # validate, and store JSON object
-            json_validated = Validator( json_dataset )
-            json_validated.dataset_validation()
-            Training( json_dataset )
+        # validate, and store JSON object
+        json_validated = Validator( json_dataset )
+        json_validated.dataset_validation()
+        Training( json_dataset )
 
 else:
   msg = 'Please provide a training dataset in json format'
