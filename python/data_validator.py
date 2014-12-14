@@ -31,6 +31,7 @@ class Validator:
     try:
       # iterate SVM dependent, and correspond list of independent variables
       for k, v in self.svm_data.items():
+        # validate SVM independent variables
         for indep in v:
           print indep
     except Exception, e:
