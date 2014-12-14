@@ -6,11 +6,11 @@ import json
 ## Class: Training
 class Training:
 
-  ## constructor:
+  ## constructor
   def __init__(self, svm_data):
     self.svm_data = svm_data
 
-  ## db_save
+  ## db_save_dataset
   def db_save_dataset(self):
     print self.svm_data
 
