@@ -3,6 +3,7 @@
 ## @data_creator.py
 import json
 import MySQLdb as DB
+from config import Database
 
 ## Class: Training
 class Training:
