@@ -55,8 +55,11 @@ class Training:
       con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = con.cursor()
 
-      for dep_variable, indep_variables in self.svm_data.iteritems()
-
+      for dep_variable, indep_variables in self.svm_data.iteritems():
+        sql  = '''
+               INSERT INTO tbl_dataset ( dep_variable, indep_variable ) VALUES ( %s, %s );
+               '''
+        cur.execute( sql % ( dep_variable, indep_variables )
     except DB.Error, e:
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
