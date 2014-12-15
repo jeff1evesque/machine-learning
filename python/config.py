@@ -9,7 +9,7 @@
 #
 #                $ mysql -u root -p
 #                MariaDB> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY
-#                    ->'passoword';
+#                    ->'password';
 #                MariaDB> GRANT, CREATE, DELETE, DROP, EXECUTE, SELECT, SHOW
 #                    -> DATABASES ON *.* TO 'authenticated'@'localhost';
 #                MariaDB> FLUSH PRIVILEGES;
