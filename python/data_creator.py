@@ -51,6 +51,8 @@ class Training:
         con.close()
 
     # insert dataset values in 'tbl_dataset'
+    for key, val in self.svm_data.iteritems()
+
 
 ## Class: Analysis
 class Analysis:
