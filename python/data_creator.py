@@ -23,7 +23,6 @@ class Training:
       cursor = con.cursor()
       sql    = 'CREATE DATABASE IF NOT EXISTS db_machine_learning'
       cursor.execute( sql )
-      con.close()
     except DB.Error, e:
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
