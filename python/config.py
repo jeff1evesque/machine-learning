@@ -19,7 +19,7 @@ class Database:
   def __init__(self):
     self.db_host     = 'localhost'
     self.db_username = 'authenticated'
-    self.db_passowrd = 'password'
+    self.db_password = 'password'
 
   ## get_db_host: get the database host
   def get_db_host(self):
