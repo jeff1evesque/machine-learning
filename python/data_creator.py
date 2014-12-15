@@ -32,7 +32,7 @@ class Training:
 
     # create 'tbl_dataset' table if doesn't exist
     try:
-      con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
+      con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = con.cursor()
       sql    = '''
                CREATE TABLE IF NOT EXISTS tbl_dataset (
