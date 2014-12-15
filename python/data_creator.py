@@ -21,7 +21,7 @@ class Training:
     try:
       con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
       cursor = con.cursor()
-      sql    = 'CREATE DATABASE IF NOT EXISTS db_machine_learning'
+      sql    = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
       cursor.execute( sql )
     except DB.Error, e:
       print "Error %d: %s" % (e.args[0], e.args[1])
