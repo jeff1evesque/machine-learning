@@ -30,6 +30,26 @@ class Training:
       if con:
         con.close()
 
+    # create table if doesn't exist
+    try:
+      con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
+      cursor = con.cursor()
+      sql    = '''
+               CREATE TABLE IF NOT EXISTS tbl_dataset (
+                 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                 uid TEXT,
+                 dep_variable TEXT,
+                 indep_variables TEXT
+               );
+               '''
+      cursor.execute( sql )
+    except DB.Error, e:
+      print "Error %d: %s" % (e.args[0], e.args[1])
+      return False
+    finally:
+      if con:
+        con.close()
+
 ## Class: Analysis
 class Analysis:
 
