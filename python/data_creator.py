@@ -19,7 +19,7 @@ class Training:
 
     # create database if doesn't exist
     try:
-      con    = DB.connect( host=db_settings.get_db_host, user=db_settings.get_db_username, passwd=db_settings.get_db_password )
+      con    = DB.connect( host=self.db_settings.get_db_host, user=self.db_settings.get_db_username, passwd=self.db_settings.get_db_password )
       cursor = con.cursor()
       sql    = 'CREATE DATABASE IF NOT EXISTS db_machine_learning'
       cursor.execute( sql )
