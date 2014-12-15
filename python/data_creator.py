@@ -51,7 +51,18 @@ class Training:
         con.close()
 
     # insert dataset values in 'tbl_dataset'
-    for key, val in self.svm_data.iteritems()
+    try:
+      con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
+      cursor = con.cursor()
+
+      for key, val in self.svm_data.iteritems()
+
+    except DB.Error, e:
+      print "Error %d: %s" % (e.args[0], e.args[1])
+      return False
+    finally:
+      if con:
+        con.close()
 
 
 ## Class: Analysis
