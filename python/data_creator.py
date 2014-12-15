@@ -17,7 +17,7 @@ class Training:
   def db_save_dataset(self):
     print self.svm_data
 
-    # create database if doesn't exist
+    # create 'db_machine_learning' database if doesn't exist
     try:
       con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
       cursor = con.cursor()
@@ -30,7 +30,7 @@ class Training:
       if con:
         con.close()
 
-    # create table if doesn't exist
+    # create 'tbl_dataset' table if doesn't exist
     try:
       con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
       cursor = con.cursor()
