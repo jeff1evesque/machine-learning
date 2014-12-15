@@ -11,6 +11,7 @@ class Training:
   ## constructor
   def __init__(self, svm_data):
     self.svm_data = svm_data
+    db_settings   = Database()
 
   ## db_save_dataset
   def db_save_dataset(self):
