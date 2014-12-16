@@ -34,7 +34,7 @@ class Training:
     try:
       con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = con.cursor()
-      sql    = '''
+      sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset (
                  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                  uid TEXT,
@@ -56,10 +56,9 @@ class Training:
       cursor = con.cursor()
 
       for dep_variable, indep_variables in self.svm_data.iteritems():
-        sql  = '''
-               INSERT INTO tbl_dataset ( dep_variable, indep_variables ) VALUES ( %s, %s );
-               '''
-        cursor.execute( sql % ( dep_variable, indep_variables ) )
+        sql  = 'INSERT INTO tbl_dataset ( dep_variable, indep_variables ) VALUES ( %s, %s );'
+        cursor.execute( sql % ( dep_variable, json.dumps(indep_variables) ) )
+        #cursor.execute( sql % ( dep_variable, dep_variable ) )
     except DB.Error, e:
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
