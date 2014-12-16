@@ -19,21 +19,21 @@ class Training:
 
     # create 'db_machine_learning' database if doesn't exist
     try:
-      con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
-      cursor = con.cursor()
+      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
+      cursor = conn.cursor()
       sql    = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
       cursor.execute( sql )
     except DB.Error, e:
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
     finally:
-      if con:
-        con.close()
+      if conn:
+        conn.close()
 
     # create 'tbl_dataset' table if doesn't exist
     try:
-      con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
-      cursor = con.cursor()
+      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
+      cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset (
                  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -47,25 +47,25 @@ class Training:
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
     finally:
-      if con:
-        con.close()
+      if conn:
+        conn.close()
 
     # insert dataset values in 'tbl_dataset'
     try:
-      con    = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
-      cursor = con.cursor()
+      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
+      cursor = conn.cursor()
 
       for dep_variable, indep_variables in self.svm_data.iteritems():
         sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables) VALUES( '%s', '%s' );"
         cursor.execute( sql % ( dep_variable, ','.join(indep_variables) ) )
-        con.commit()
+        conn.commit()
     except DB.Error, e:
-      con.rollback()
+      conn.rollback()
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
     finally:
-      if con:
-        con.close()
+      if conn:
+        conn.close()
 
 ## Class: Analysis
 class Analysis:
