@@ -60,6 +60,7 @@ class Training:
         cursor.execute( sql % ( dep_variable, ','.join(indep_variables) ) )
         con.commit()
     except DB.Error, e:
+      con.rollback()
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
     finally:
