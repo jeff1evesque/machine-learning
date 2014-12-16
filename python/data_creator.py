@@ -56,16 +56,14 @@ class Training:
       cursor = con.cursor()
 
       for dep_variable, indep_variables in self.svm_data.iteritems():
-        sql  = 'INSERT INTO tbl_dataset ( dep_variable, indep_variables ) VALUES ( %s, %s );'
-        cursor.execute( sql % ( dep_variable, json.dumps(indep_variables) ) )
-        #cursor.execute( sql % ( dep_variable, dep_variable ) )
+        sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables) VALUES( '%s', '%s' );"
+        cursor.execute( sql % ( dep_variable, ','.join(indep_variables) ) )
     except DB.Error, e:
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
     finally:
       if con:
         con.close()
-
 
 ## Class: Analysis
 class Analysis:
