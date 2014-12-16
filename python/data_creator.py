@@ -58,6 +58,7 @@ class Training:
       for dep_variable, indep_variables in self.svm_data.iteritems():
         sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables) VALUES( '%s', '%s' );"
         cursor.execute( sql % ( dep_variable, ','.join(indep_variables) ) )
+        con.commit()
     except DB.Error, e:
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
