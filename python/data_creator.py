@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
 ## @data_creator.py
-import json, time
+import json
+from datetime import datetime
 import MySQLdb as DB
 from config import Database
 
