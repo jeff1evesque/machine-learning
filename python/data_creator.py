@@ -39,7 +39,8 @@ class Training:
                  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                  uid TEXT,
                  dep_variable TEXT,
-                 indep_variables TEXT
+                 indep_variables TEXT,
+                 timestamp FLOAT
                );
                '''
       cursor.execute( sql )
