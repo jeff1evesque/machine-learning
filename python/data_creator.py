@@ -2,6 +2,7 @@
 
 ## @data_creator.py
 import json
+from datetime import datetime
 import MySQLdb as DB
 from config import Database
 
@@ -39,7 +40,8 @@ class Training:
                  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                  uid TEXT,
                  dep_variable TEXT,
-                 indep_variables TEXT
+                 indep_variables TEXT,
+                 datetime_saved TEXT
                );
                '''
       cursor.execute( sql )
@@ -56,8 +58,8 @@ class Training:
       cursor = conn.cursor()
 
       for dep_variable, indep_variables in self.svm_data.iteritems():
-        sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables) VALUES( '%s', '%s' );"
-        cursor.execute( sql % ( dep_variable, ','.join(indep_variables) ) )
+        sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables, datetime_saved) VALUES( '%s', '%s', '%s' );"
+        cursor.execute( sql % ( dep_variable, ','.join(indep_variables), datetime.now() ) )
         conn.commit()
     except DB.Error, e:
       conn.rollback()
