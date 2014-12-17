@@ -40,7 +40,7 @@ class Training:
                  uid TEXT,
                  dep_variable TEXT,
                  indep_variables TEXT,
-                 timestamp FLOAT
+                 datetime TEXT
                );
                '''
       cursor.execute( sql )
@@ -57,8 +57,8 @@ class Training:
       cursor = conn.cursor()
 
       for dep_variable, indep_variables in self.svm_data.iteritems():
-        sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables, timestamp) VALUES( '%s', '%s', '%f' );"
-        cursor.execute( sql % ( dep_variable, ','.join(indep_variables), time.time() ) )
+        sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables, datetime) VALUES( '%s', '%s', '%s' );"
+        cursor.execute( sql % ( dep_variable, ','.join(indep_variables), string(datetime.datetime.now()) ) )
         conn.commit()
     except DB.Error, e:
       conn.rollback()
