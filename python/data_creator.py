@@ -58,7 +58,7 @@ class Training:
 
       for dep_variable, indep_variables in self.svm_data.iteritems():
         sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables) VALUES( '%s', '%s' );"
-        cursor.execute( sql % ( dep_variable, ','.join(indep_variables) ) )
+        cursor.execute( sql % ( dep_variable, ','.join(indep_variables), time.time() ) )
         conn.commit()
     except DB.Error, e:
       conn.rollback()
