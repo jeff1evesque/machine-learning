@@ -69,7 +69,7 @@ sudo apt-get install python-numpy
 
 **Note:** This project assumes [Ubuntu Server 14.04](http://www.ubuntu.com/download/server) as the operating system.
 
-**Note:** All MySQL connectors (PHP, Perl, Python, Java, .NET, C, Ruby, etc.) work [unchanged](https://mariadb.com/kb/en/mariadb/faq/mariadb-vs-mysql-compatibility/) with MySQL.
+**Note:** All MySQL connectors (PHP, Perl, Python, Java, .NET, C, Ruby, etc.) work [unchanged](https://mariadb.com/kb/en/mariadb/faq/mariadb-vs-mysql-compatibility/) with MariaDB.
 
 ##Configuration
 
