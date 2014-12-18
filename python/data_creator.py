@@ -41,7 +41,7 @@ class Training:
                  uid TEXT,
                  dep_variable TEXT,
                  indep_variables TEXT,
-                 datetime_saved TEXT
+                 datetime_saved DATETIME
                );
                '''
       cursor.execute( sql )
