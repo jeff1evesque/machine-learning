@@ -58,9 +58,9 @@ class Training:
       cursor = conn.cursor()
 
       for dep_variable, indep_variables in self.svm_data.iteritems():
-        sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables, datetime_saved) VALUES( %s, %s, %s )"
+        sql  = "INSERT INTO tbl_dataset (dep_variable, indep_variables, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )"
         # 'datetime.utcnow()' returns the universal UTC time
-        cursor.execute( sql, ( dep_variable, ','.join(indep_variables), datetime.utcnow() ) )
+        cursor.execute( sql, ( dep_variable, ','.join(indep_variables) ) )
         conn.commit()
     except DB.Error, e:
       conn.rollback()
