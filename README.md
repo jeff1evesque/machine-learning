@@ -143,7 +143,7 @@ Generally, [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) is preferred o
 The following command compiles and minifies [javascript](http://en.wikipedia.org/wiki/JavaScript), [css](http://en.wikipedia.org/wiki/Cascading_Style_Sheets), and various [image file formats](http://en.wikipedia.org/wiki/Image_file_formats):
 
 ```
-cd /var/www/html/bash/
+cd /var/www/bash/
 ./bash_loader
 ```
 
