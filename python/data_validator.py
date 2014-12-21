@@ -72,6 +72,8 @@ class Validator:
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
+      # iterate first column of merged dataset
+
       # iterate dependent, and list of independent variables (except first column)
       for dependent, indep_list in self.svm_data.items()[:-1]:
         # validate SVM dependent variables
