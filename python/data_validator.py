@@ -73,6 +73,14 @@ class Validator:
   def dataset_validation(self):
     try:
       # iterate first column of merged dataset
+      for col_title, indep_list in self.svm_data.items()[-1:]:
+        # validate first record of first column
+        try:
+          unicode( col_title )
+        except:
+          msg = 'Error: the supplied dataset value (first record of first column), ' + col_title + ' must be a unicode string'
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          return False
 
       # iterate dependent, and list of independent variables (except first column)
       for dependent, indep_list in self.svm_data.items()[:-1]:
