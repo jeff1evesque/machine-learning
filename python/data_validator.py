@@ -72,8 +72,27 @@ class Validator:
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
-      # iterate SVM dependent, and correspond list of independent variables
-      for dependent, indep_list in self.svm_data.items():
+      # iterate first column of merged dataset
+      for col_title, dep_list_label in self.svm_data.items()[-1:]:
+        # validate first record of first column
+        try:
+          unicode( col_title )
+        except:
+          msg = 'Error: the dataset value, ' + col_title + ' (row 1, column 1) must be a unicode string'
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          return False
+
+        # validate remaining records of first column
+        for label in dep_list_label:
+          try:
+            unicode( dep_list_label )
+          except:
+            msg = 'Error: the element, (' + col_title + ': ' + label  + ') within the supplied dataset, must be a unicode string'
+            print json.dumps({'error':msg}, separators=(',', ': '))
+            return False
+
+      # iterate dependent, and list of independent variables (except first column)
+      for dependent, indep_list in self.svm_data.items()[:-1]:
         # validate SVM dependent variables
         try:
           unicode( dependent )
