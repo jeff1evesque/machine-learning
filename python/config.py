@@ -79,11 +79,6 @@ def jsonschema_training():
                 'type': 'string',
                 'enum': ['classification', 'regression']
               },
-              'svm_dep_variable': {
-                'type': 'array',
-                'items': { 'type': 'string' },
-                'minItems': 1
-              },
               'svm_indep_variable': {
                 'type': 'array',
                 'items': { 'type': 'string' },
