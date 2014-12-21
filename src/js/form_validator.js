@@ -82,17 +82,12 @@
           textOnly: true,
           minlength:1,
         },
-        'svm_dep_variable[]': {
-          textOnly: true,
-          minlength:1,
-        },
       },
       messages: {
         svm_session: 'Not acceptable value',
         svm_dataset_type: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
         'svm_indep_variable[]': 'Must be type string',
-        'svm_dep_variable[]': 'Must be type string',
       },
     });
   });
