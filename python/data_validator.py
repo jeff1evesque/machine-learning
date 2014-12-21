@@ -74,23 +74,22 @@ class Validator:
     try:
       # iterate SVM dependent, and correspond list of independent variables
       for dependent, indep_list in self.svm_data.items()[:-1]:
-        print dependent
         # validate SVM dependent variables
-        #try:
-        #  unicode( dependent )
-        #except:
-        #  msg = 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
-        #  print json.dumps({'error':msg}, separators=(',', ': '))
-        #  return False
+        try:
+          unicode( dependent )
+        except:
+          msg = 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
+          print json.dumps({'error':msg}, separators=(',', ': '))
+          return False
 
         # validate SVM independent variables
-        #for independent in indep_list:
-        #  try:
-        #    float( independent )
-        #  except:
-        #    msg = 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
-        #    print json.dumps({'error':msg}, separators=(',', ': '))
-        #    return False
+        for independent in indep_list:
+          try:
+            float( independent )
+          except:
+            msg = 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
+            print json.dumps({'error':msg}, separators=(',', ': '))
+            return False
 
     except Exception, e:
       print str(e)
