@@ -87,7 +87,7 @@ class Validator:
           try:
             unicode( dep_list_label )
           except:
-            msg = 'Error: the element, (' + col_title + ': ' + label  + ') within the supplied dataset, must be type float, or int'  
+            msg = 'Error: the element, (' + col_title + ': ' + label  + ') within the supplied dataset, must be a unicode string'
             print json.dumps({'error':msg}, separators=(',', ': '))
             return False
 
