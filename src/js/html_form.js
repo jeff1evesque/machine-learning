@@ -101,7 +101,7 @@ $(document).ready(function() {
           if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
             obj_form.training_parameters = '\
                 <fieldset class="fieldset_training_parameters">\
-                  <legend>' + $(this).val()  + ' Parameters</legend>\
+                  <legend>' + $(this).val()[0].toUpperCase() + $(this).val().slice(1) + ' Parameters</legend>\
                   <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" class="svm_indep_variable">\
                   <input type="button" value="Add more" class="add_element svm_indep_variable_add">\
                   <input type="button" value="Remove" class="remove_element svm_indep_variable_remove">\
