@@ -73,7 +73,7 @@ class Validator:
   def dataset_validation(self):
     try:
       # iterate first column of merged dataset
-      for col_title, indep_list in self.svm_data.items()[-1:]:
+      for col_title, dep_list_label in self.svm_data.items()[-1:]:
         # validate first record of first column
         try:
           unicode( col_title )
