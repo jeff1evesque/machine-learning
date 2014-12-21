@@ -98,33 +98,11 @@ $(document).ready(function() {
 
    // append 'Training Parameters' fieldset
         $('.fieldset_training_type').on('input', 'input[name="svm_model_type"]', function() {
-          if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
-            obj_form.training_parameters = '\
-                <fieldset class="fieldset_training_parameters">\
-                  <legend>' + $(this).val()[0].toUpperCase() + $(this).val().slice(1) + ' Parameters</legend>\
-                  <p>Provide labels for each independent variable, in corresponding order of the provided dataset.</p>
-                  <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" class="svm_indep_variable">\
-                  <input type="button" value="Add more" class="add_element svm_indep_variable_add">\
-                  <input type="button" value="Remove" class="remove_element svm_indep_variable_remove">\
-                </fieldset>\
-              ';
-            build_form('.fieldset_training_type', obj_form.training_parameters, ['.fieldset_training_parameters']);
+          if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression'] ) !== -1 ) {
+            obj_form.submit = '<input type="submit" class="svm_form_submit">';
+            build_form('.fieldset_session_training', obj_form.submit, ['.svm_form_submit']);
           }
-          else {
-            $(this).parent().nextAll().remove();
-            $(this).parent().parent().nextAll().remove();
-          }
-
-          $('.fieldset_training_parameters').on('input', ['input[name="svm_dep_variable[]"], input[name="svm_indep_variable[]"]'], function(e) {
-            var flag_field_dep = field_determinant( $('input[name="svm_dep_variable[]"]') );
-            var flag_field_indep = field_determinant( $('input[name="svm_indep_variable[]"]') );
-
-            if (flag_field_dep && flag_field_indep) {
-              obj_form.submit = '<input type="submit" class="svm_form_submit">';
-              build_form('.fieldset_session_training', obj_form.submit, ['.svm_form_submit']);
-            }
-            else $('.svm_form_submit').remove();
-          });
+          else $('.svm_form_submit').remove();
         });
       });
     });
