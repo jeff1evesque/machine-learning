@@ -83,6 +83,13 @@ class Validator:
           return False
 
         # validate remaining records of first column
+        for label in dep_list_label:
+          try:
+            unicode( dep_list_label )
+          except:
+            msg = 'Error: the element, (' + col_title + ': ' + label  + ') within the supplied dataset, must be type float, or int'  
+            print json.dumps({'error':msg}, separators=(',', ': '))
+            return False
 
       # iterate dependent, and list of independent variables (except first column)
       for dependent, indep_list in self.svm_data.items()[:-1]:
