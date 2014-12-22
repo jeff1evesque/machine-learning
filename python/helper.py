@@ -13,7 +13,7 @@ def jsonmerge( json1, json2 ):
   # iterate dictionary tuple
   for d in ( json1, json2 ):
     # concatenate list items
-    for key, value in d.items():
+    for key, value in d.items()[:-1]:
       dd[key] += value
 
   return dd
