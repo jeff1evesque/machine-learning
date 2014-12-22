@@ -80,7 +80,7 @@ if len(sys.argv) > 1:
         json_validated.dataset_validation()
 
         # store merged JSON dataset
-        db_save = Training( json_dataset )
+        db_save = Training( json_dataset.items()[:-1] )
         db_save.db_save_dataset()
 
 else:
