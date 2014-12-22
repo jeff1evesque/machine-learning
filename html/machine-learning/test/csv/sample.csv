@@ -1,4 +1,4 @@
-dep-variable-label,indep-variable-1,indep-variable-2,indep-variable-3,indep-variable-4,indep-variable-5
-dep-variable-1,23.45,98.01,0.432,325,54.64
-dep-variable-2,24.32,92.22,0.356,235,64.45
-dep-variable-3,22.67,101.21,0.832,427,75.45
+dep-variable-label,indep-variable-1,indep-variable-2,indep-variable-3,indep-variable-4,indep-variable-5,indep-variable-6,indep-variable-6
+dep-variable-1,23.45,98.01,0.432,325,54.64,0.002,25
+dep-variable-2,24.32,92.22,0.356,235,64.45,0.001,31
+dep-variable-3,22.67,101.21,0.832,427,75.45,0.002,24
