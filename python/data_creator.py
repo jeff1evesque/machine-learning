@@ -16,7 +16,6 @@ class Training:
 
   ## db_save_dataset
   def db_save_dataset(self):
-    print self.svm_data
 
     # create 'db_machine_learning' database if doesn't exist
     try:
