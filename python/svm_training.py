@@ -79,7 +79,7 @@ if len(sys.argv) > 1:
         json_validated = Validator( json_dataset )
         json_validated.dataset_validation()
 
-        # store merged JSON dataset
+        # store merged JSON dataset (not dependent variable labels)
         db_save = Training( json_dataset.items()[:-1] )
         db_save.db_save_dataset()
 
