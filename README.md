@@ -108,9 +108,9 @@ sudo git submodule init
 sudo git submodule update
 ```
 
-**Note:** We have to use the *sudo* prefix, since we haven't taken care of file permissions yet.
+The above two commands will update submodules within the cloned repository according to the versioned master branch. If they are already initialized in the cloned repository, then the latter command will suffice.
 
-The above two commands will update submodules.  If they are already initialized, then the latter command will suffice. Then, we need to pull the code-base into the initialized submodule directory:
+The following updates submodule(s) to the latest code-base:
 
 ```
 cd /var/www/
