@@ -19,6 +19,12 @@ class JSON:
   #        when opening 'self.svm_file'. This allows newlines to be
   #        understood regardless, if the newline character was created in
   #        osx, windows, or linux.
+  #
+  #  Note: since 'row' is a list, with one comma-delimited string element,
+  #        the following line is required in this method:
+  #
+  #            row = row[0].split(',')
+  #
   def csv_to_json(self):
     list_dataset       = []
     list_dataset_label = []
