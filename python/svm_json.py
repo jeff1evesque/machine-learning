@@ -27,19 +27,17 @@ class JSON:
     with open( self.svm_file, 'rU' ) as csvfile:
       stuff = csv.reader( csvfile, delimiter=' ', quotechar='|' )
 
-      # iterate only first row of csvfile
+      # iterate all rows of csvfile (except first)
       for row in islice( stuff, 1, None ):
 
         # row is a list with one comma-delimited string element
         row = row[0].split(',')
+
+        # iterate first element of each row (except first)
         for value in row[:1]:
           list_dataset_label.append( value )
 
-      # iterate all other rows of csvfile (except first)
-      for row in islice( stuff, 1, None ):
-
-        # row is a list with one comma-delimited string element
-        row = row[0].split(',')
+        # iterate each row
         for index, value in enumerate( row ):
           list_dataset.append( { list_dataset_label[index]: {value} } )
 
