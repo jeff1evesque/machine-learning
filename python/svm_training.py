@@ -36,7 +36,6 @@ import sys, json
 from data_creator import Training
 from data_validator import Validator
 from svm_json import JSON
-from helper import jsonmerge
 
 if len(sys.argv) > 1:
 
