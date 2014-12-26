@@ -30,7 +30,7 @@ class JSON:
       # iterate only first row of csvfile
       for row in islice( stuff, 0, 1 ):
 
-        # row is one string item needing to be split
+        # row is a list with one comma-delimited string element
         row = row[0].split(',')
         for value in row:
           dict_dataset_label.append( value )
@@ -38,7 +38,7 @@ class JSON:
       # iterate all other rows of csvfile (except first)
       for row in islice( stuff, 1, None ):
 
-        # row is one string item needing to be split
+        # row is a list with one comma-delimited string element
         row = row[0].split(',')
         for index, value in enumerate( row ):
 
