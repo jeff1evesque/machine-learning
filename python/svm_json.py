@@ -28,11 +28,11 @@ class JSON:
       stuff = csv.reader( csvfile, delimiter=' ', quotechar='|' )
 
       # iterate only first row of csvfile
-      for row in islice( stuff, 0, 1 ):
+      for row in islice( stuff, 1, None ):
 
         # row is a list with one comma-delimited string element
         row = row[0].split(',')
-        for value in row:
+        for value in row[:1]:
           list_dataset_label.append( value )
 
       # iterate all other rows of csvfile (except first)
@@ -41,10 +41,10 @@ class JSON:
         # row is a list with one comma-delimited string element
         row = row[0].split(',')
         for index, value in enumerate( row ):
-          list_dataset.append( {dict_dataset_label[index]: value} )
+          list_dataset.append( { list_dataset_label[index]: {value} } )
 
     #return json.dumps(columns)
-    print list_dataset
+    print list_dataset_label
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
     print 'dummy code'
