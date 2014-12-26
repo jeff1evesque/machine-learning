@@ -37,14 +37,14 @@ class JSON:
       for row in islice( stuff, 1, None ):
 
         # iterate first element of each row (except first)
-        row = row[0].split(',')
-        for value in row[:1]:
+        dep_variable_label = row[0].split(',')
+        for value in dep_variable_label[:1]:
           list_dataset_label.append( value )
 
         # iterate each row
-        row = row[0].split(',')
-        for index, value in enumerate( row ):
-          list_dataset.append( { list_dataset_label[index]: {value} } )
+        indep_variable = row[0].split(',')
+        for index, value in enumerate( islice( indep_variable, 1, None) ):
+          print value
 
     #return json.dumps(columns)
     print list_dataset
