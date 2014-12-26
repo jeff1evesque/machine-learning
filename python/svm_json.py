@@ -27,6 +27,9 @@ class JSON:
     with open( self.svm_file, 'rU' ) as csvfile:
       stuff = csv.reader( csvfile, delimiter=' ', quotechar='|' )
 
+      for row in islice( stuff, 0, 1 ):
+        print row
+
       # iterate each csv row, except the first
       for row in islice( stuff, 1, None ):
 
@@ -35,7 +38,6 @@ class JSON:
 
         # iterate 'row' list
         for index, value in enumerate( row ):
-          
 
     #return json.dumps(columns)
   ## xml_to_json: convert xml to JSON object
