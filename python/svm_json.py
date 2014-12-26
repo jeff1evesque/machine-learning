@@ -21,7 +21,7 @@ class JSON:
   #        osx, windows, or linux.
   def csv_to_json(self):
     list_dataset       = []
-    dict_dataset_label = []
+    list_dataset_label = []
 
     # open temporary 'csvfile'
     with open( self.svm_file, 'rU' ) as csvfile:
@@ -33,7 +33,7 @@ class JSON:
         # row is a list with one comma-delimited string element
         row = row[0].split(',')
         for value in row:
-          dict_dataset_label.append( value )
+          list_dataset_label.append( value )
 
       # iterate all other rows of csvfile (except first)
       for row in islice( stuff, 1, None ):
