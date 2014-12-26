@@ -26,6 +26,7 @@ class JSON:
     with open( self.svm_file, 'rU' ) as file:
       stuff = csv.reader( file, delimiter=' ', quotechar='|')
 
+      # iterate each csv row, except the first
       for row in islice( stuff, 1, None):
         print row
 
