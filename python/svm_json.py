@@ -34,6 +34,13 @@ class JSON:
     with open( self.svm_file, 'rU' ) as csvfile:
       stuff = csv.reader( csvfile, delimiter=' ', quotechar='|' )
 
+      # iterate first row of csvfile
+      for row in islice( stuff, 0, 1 ):
+
+        row_indep_label = row[0].split(',')
+        for value in row_indep_label:
+          indep_variable_label.append( value )
+
       # iterate all rows of csvfile (except first)
       for dep_index, row in enumerate( islice( stuff, 1, None ) ):
 
