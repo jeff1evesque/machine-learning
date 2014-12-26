@@ -28,7 +28,9 @@ class JSON:
 
       # iterate each csv row, except the first
       for row in islice( stuff, 1, None ):
-        print row
+
+        # split comma-delimited string
+        row = row[0].split(',')
 
     #return json.dumps(columns)
   ## xml_to_json: convert xml to JSON object
