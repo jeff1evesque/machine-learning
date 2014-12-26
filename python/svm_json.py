@@ -27,7 +27,7 @@ class JSON:
   #
   def csv_to_json(self):
     list_dataset       = []
-    list_dataset_label = []
+    dep_variable_label = []
 
     # open temporary 'csvfile'
     with open( self.svm_file, 'rU' ) as csvfile:
@@ -39,12 +39,12 @@ class JSON:
         # iterate first element of each row (except first)
         dep_variable_label = row[0].split(',')
         for value in dep_variable_label[:1]:
-          list_dataset_label.append( value )
+          dep_variable_label.append( value )
 
         # iterate each row
         indep_variable = row[0].split(',')
         for indep_index, value in enumerate( islice( indep_variable, 1, None) ):
-          list_dataset.append( { list_dataset_label[dep_index]: value } )
+          list_dataset.append( { dep_variable_label[dep_index]: value } )
 
     #return json.dumps(columns)
     print list_dataset
