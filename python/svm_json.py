@@ -41,8 +41,10 @@ class JSON:
         # row is a list with one comma-delimited string element
         row = row[0].split(',')
         for index, value in enumerate( row ):
+          list_dataset.append( {dict_dataset_label[index]: value} )
 
     #return json.dumps(columns)
+    print list_dataset
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
     print 'dummy code'
