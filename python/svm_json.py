@@ -37,6 +37,7 @@ class JSON:
       # iterate first row of csvfile
       for row in islice( stuff, 0, 1 ):
 
+        # iterate each column in a given row
         row_indep_label = row[0].split(',')
         for value in row_indep_label:
           indep_variable_label.append( value )
