@@ -20,7 +20,7 @@ class JSON:
   #        understood regardless, if the newline character was created in
   #        osx, windows, or linux.
   def csv_to_json(self):
-    list_dataset = []
+    list_dataset       = []
     dict_dataset_label = {}
 
     # open temporary 'csvfile'
