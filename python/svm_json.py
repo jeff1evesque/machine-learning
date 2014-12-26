@@ -43,7 +43,7 @@ class JSON:
           indep_variable_label.append( value )
 
       # iterate all rows of csvfile (except first)
-      for dep_index, row in enumerate( islice( dataset_reader, 1, None ) ):
+      for dep_index, row in enumerate( islice( dataset_reader, 0, None ) ):
 
         # iterate first column of each row (except first)
         row_dep_label = row[0].split(',')
@@ -55,7 +55,7 @@ class JSON:
         for indep_index, value in enumerate( islice( row_indep_variable, 1, None) ):
           list_dataset.append( { dep_variable_label[dep_index]: {indep_variable_label[indep_index]: value} } )
 
-    return json.dumps( list_dataset )
+    print json.dumps( list_dataset )
 
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
