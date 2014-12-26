@@ -28,6 +28,7 @@ class JSON:
   def csv_to_json(self):
     list_dataset       = []
     dep_variable_label = []
+    indep_variable_label = []
 
     # open temporary 'csvfile'
     with open( self.svm_file, 'rU' ) as csvfile:
