@@ -36,7 +36,6 @@ import sys, json
 from data_creator import Training
 from data_validator import Validator
 from svm_json import JSON
-from helper import jsonmerge
 
 if len(sys.argv) > 1:
 
@@ -62,7 +61,13 @@ if len(sys.argv) > 1:
           if val['type'] in ('text/plain', 'text/csv'):
             # convert csv to json, and merge
             try:
-              json_dataset = jsonmerge( json_dataset, json.loads(JSON( val['filedata']['file_temp']).csv_to_json()) )
+              json_dataset = json.loads( JSON( val['filedata']['file_temp']).csv_to_json() )
+
+              json_validated = Validator( json_dataset )
+              json_validated.dataset_validation()
+
+              db_save = Training( json_dataset.items() )
+              db_save.db_save_dataset()
             except Exception as e:
               print e
               sys.exit()
@@ -70,18 +75,16 @@ if len(sys.argv) > 1:
           elif val['type'] in ('application/xml', 'text/xml' ):
             # convert xml to json, and merge
             try:
-              json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
+              json_dataset = json.loads( JSON( val['filedata']['file_temp']).xml_to_json() )
+
+              json_validated = Validator( json_dataset )
+              json_validated.dataset_validation()
+
+              db_save = Training( json_dataset.items() )
+              db_save.db_save_dataset()
             except Exception as e:
               print e
               sys.exit()
-
-        # validate merged JSON dataset
-        json_validated = Validator( json_dataset )
-        json_validated.dataset_validation()
-
-        # store merged JSON dataset (not dependent variable labels)
-        db_save = Training( json_dataset.items()[:-1] )
-        db_save.db_save_dataset()
 
 else:
   msg = 'Please provide a training dataset in json format'
