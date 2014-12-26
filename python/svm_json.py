@@ -4,6 +4,7 @@
 #  This file contains methods to convert svm data to a JSON object.
 import json, csv
 from collections import defaultdict
+from itertools import islice
 
 ## Class: JSON
 class JSON:
@@ -24,7 +25,8 @@ class JSON:
 
     with open( self.svm_file, 'rU' ) as file:
       stuff = csv.reader( file, delimiter=' ', quotechar='|')
-      for row in stuff:
+
+      for row in islice( stuff, 1, None):
         print row
 
     #return json.dumps(columns)
