@@ -23,6 +23,7 @@ class JSON:
     columns = defaultdict( list )
     dep_variable = {}
 
+    # open temporary 'csvfile'
     with open( self.svm_file, 'rU' ) as file:
       stuff = csv.reader( file, delimiter=' ', quotechar='|' )
 
