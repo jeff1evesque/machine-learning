@@ -28,7 +28,10 @@ class JSON:
       stuff = csv.reader( csvfile, delimiter=' ', quotechar='|' )
 
       for row in islice( stuff, 0, 1 ):
-        print row
+
+        row = row[0].split(',')
+        for value in row:
+          dict_dataset_label.append( value )
 
       # iterate each csv row, except the first
       for row in islice( stuff, 1, None ):
