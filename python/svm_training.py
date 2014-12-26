@@ -62,6 +62,12 @@ if len(sys.argv) > 1:
             # convert csv to json, and merge
             try:
               json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
+
+              json_validated = Validator( json_dataset )
+              json_validated.dataset_validation()
+
+              db_save = Training( json_dataset.items() )
+              db_save.db_save_dataset()
             except Exception as e:
               print e
               sys.exit()
@@ -70,6 +76,12 @@ if len(sys.argv) > 1:
             # convert xml to json, and merge
             try:
               json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
+
+              json_validated = Validator( json_dataset )
+              json_validated.dataset_validation()
+
+              db_save = Training( json_dataset.items() )
+              db_save.db_save_dataset()
             except Exception as e:
               print e
               sys.exit()
