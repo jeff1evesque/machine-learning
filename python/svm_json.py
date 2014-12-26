@@ -53,7 +53,7 @@ class JSON:
         # iterate each column in a given row
         row_indep_variable = row[0].split(',')
         for indep_index, value in enumerate( islice( row_indep_variable, 1, None) ):
-          list_dataset.append( { dep_variable_label[dep_index]: value } )
+          list_dataset.append( { dep_variable_label[dep_index]: {indep_variable_label[indep_index]: value} } )
 
     #return json.dumps(columns)
     print list_dataset
