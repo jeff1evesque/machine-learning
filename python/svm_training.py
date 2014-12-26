@@ -61,7 +61,7 @@ if len(sys.argv) > 1:
           if val['type'] in ('text/plain', 'text/csv'):
             # convert csv to json, and merge
             try:
-              json_dataset = jsonmerge( json_dataset, json.loads(JSON( val['filedata']['file_temp']).csv_to_json()) )
+              json_dataset = JSON( val['filedata']['file_temp']).csv_to_json()
             except Exception as e:
               print e
               sys.exit()
@@ -69,7 +69,7 @@ if len(sys.argv) > 1:
           elif val['type'] in ('application/xml', 'text/xml' ):
             # convert xml to json, and merge
             try:
-              json_dataset = jsonmerge( json_dataset, JSON( val['filedata']['file_temp']).xml_to_json() )
+              json_dataset = JSON( val['filedata']['file_temp']).xml_to_json()
             except Exception as e:
               print e
               sys.exit()
