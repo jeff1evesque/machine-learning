@@ -34,15 +34,17 @@ class JSON:
         row = row[0].split(',')
 
         # iterate first element of each row (except first)
+        row = row[0].split(',')
         for value in row[:1]:
           list_dataset_label.append( value )
 
         # iterate each row
+        row = row[0].split(',')
         for index, value in enumerate( row ):
           list_dataset.append( { list_dataset_label[index]: {value} } )
 
     #return json.dumps(columns)
-    print list_dataset_label
+    print list_dataset
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
     print 'dummy code'
