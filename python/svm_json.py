@@ -36,9 +36,6 @@ class JSON:
       # iterate all rows of csvfile (except first)
       for row in islice( stuff, 1, None ):
 
-        # row is a list with one comma-delimited string element
-        row = row[0].split(',')
-
         # iterate first element of each row (except first)
         row = row[0].split(',')
         for value in row[:1]:
