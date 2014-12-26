@@ -32,10 +32,10 @@ class JSON:
 
     # open temporary 'csvfile'
     with open( self.svm_file, 'rU' ) as csvfile:
-      stuff = csv.reader( csvfile, delimiter=' ', quotechar='|' )
+      dataset_reader = csv.reader( csvfile, delimiter=' ', quotechar='|' )
 
       # iterate first row of csvfile
-      for row in islice( stuff, 0, 1 ):
+      for row in islice( dataset_reader, 0, 1 ):
 
         # iterate each column in a given row
         row_indep_label = row[0].split(',')
@@ -43,7 +43,7 @@ class JSON:
           indep_variable_label.append( value )
 
       # iterate all rows of csvfile (except first)
-      for dep_index, row in enumerate( islice( stuff, 1, None ) ):
+      for dep_index, row in enumerate( islice( dataset_reader, 1, None ) ):
 
         # iterate first element of each row (except first)
         row_dep_label = row[0].split(',')
