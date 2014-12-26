@@ -34,7 +34,7 @@ class JSON:
       stuff = csv.reader( csvfile, delimiter=' ', quotechar='|' )
 
       # iterate all rows of csvfile (except first)
-      for row in islice( stuff, 1, None ):
+      for dep_index, row in enumerate( islice( stuff, 1, None ) ):
 
         # iterate first element of each row (except first)
         dep_variable_label = row[0].split(',')
@@ -43,8 +43,8 @@ class JSON:
 
         # iterate each row
         indep_variable = row[0].split(',')
-        for index, value in enumerate( islice( indep_variable, 1, None) ):
-          print value
+        for indep_index, value in enumerate( islice( indep_variable, 1, None) ):
+          list_dataset.append( { list_dataset_label[dep_index]: value } )
 
     #return json.dumps(columns)
     print list_dataset
