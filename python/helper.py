@@ -5,19 +5,6 @@
 import hashlib, collections
 from collections import defaultdict
 
-## jsonmerge: this method takes two json objects, and merges them into one.
-def jsonmerge( json1, json2 ):
-  # create dictionary like object
-  dd = defaultdict(list)
-
-  # iterate dictionary tuple
-  for d in ( json1, json2 ):
-    # concatenate list items
-    for key, value in d.items():
-      dd[key] += value
-
-  return dd
-
 ## md5_for_file: Convert the contents of a given file to a hash value,
 #                equivalent. Note, block size directly depends on the
 #                block size of the filesystem.
