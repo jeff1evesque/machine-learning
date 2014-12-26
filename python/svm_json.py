@@ -27,19 +27,19 @@ class JSON:
     with open( self.svm_file, 'rU' ) as csvfile:
       stuff = csv.reader( csvfile, delimiter=' ', quotechar='|' )
 
+      # iterate only first row of csvfile
       for row in islice( stuff, 0, 1 ):
 
+        # row is one string item needing to be split
         row = row[0].split(',')
         for value in row:
           dict_dataset_label.append( value )
 
-      # iterate each csv row, except the first
+      # iterate all other rows of csvfile (except first)
       for row in islice( stuff, 1, None ):
 
-        # split comma-delimited string
+        # row is one string item needing to be split
         row = row[0].split(',')
-
-        # iterate 'row' list
         for index, value in enumerate( row ):
 
     #return json.dumps(columns)
