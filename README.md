@@ -122,7 +122,7 @@ cd ../
 git status
 ```
 
-to the latest code-base, on the given branch name `NEW_BRANCH`.
+to the latest code-base, within the cloned repository branch, `NEW_BRANCH`.
 
 ###Scikit-Learn
 
