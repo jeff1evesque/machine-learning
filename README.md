@@ -108,9 +108,9 @@ sudo git submodule init
 sudo git submodule update
 ```
 
-The above two commands will update submodules within the cloned repository according to the versioned master branch. If they are already initialized in the cloned repository, then the latter command will suffice.
+The above two commands will update submodules within the cloned repository, according to the versioned master branch. If they are already initialized in the cloned repository, then the latter command will suffice.
 
-The following updates submodule(s) to the latest code-base:
+The following updates submodule(s):
 
 ```
 cd /var/www/
@@ -122,7 +122,7 @@ cd ../
 git status
 ```
 
-Now, commit and merge the submodule changes.
+to the latest code-base, on the given branch name `NEW_BRANCH`.
 
 ###Scikit-Learn
 
