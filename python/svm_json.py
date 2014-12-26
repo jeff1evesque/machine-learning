@@ -20,17 +20,14 @@ class JSON:
   #        osx, windows, or linux.
   def csv_to_json(self):
     columns = defaultdict( list )
+    dep_variable = {}
 
-    with open( self.svm_file, 'rU' ) as f:
-      # read rows into 'dictionary' format
-      reader = csv.DictReader(f)
-      for row in reader:
-        # iterate through each column 'name', and 'value'
-        for (k,v) in row.items():
-          # append value into appropriate list based on column name 'k'
-          columns[k].append(v)
+    with open( self.svm_file, 'rU' ) as file:
+      stuff = csv.reader( file, delimiter=' ', quotechar='|')
+      for row in stuff:
+        print row
 
-    return json.dumps(columns)
+    #return json.dumps(columns)
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
     print 'dummy code'
