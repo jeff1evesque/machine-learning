@@ -55,7 +55,7 @@ class JSON:
         for indep_index, value in enumerate( islice( row_indep_variable, 1, None) ):
           list_dataset.append( { dep_variable_label[dep_index]: {indep_variable_label[indep_index]: value} } )
 
-    print json.dumps( list_dataset )
+    return json.dumps( list_dataset )
 
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
