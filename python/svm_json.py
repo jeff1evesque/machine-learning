@@ -33,6 +33,10 @@ class JSON:
         # split comma-delimited string
         row = row[0].split(',')
 
+        # iterate 'row' list
+        for index, value in enumerate( row ):
+          
+
     #return json.dumps(columns)
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
