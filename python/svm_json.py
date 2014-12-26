@@ -42,7 +42,7 @@ class JSON:
         for value in islice( row_indep_label, 1, None ):
           indep_variable_label.append( value )
 
-      # iterate all rows of csvfile (except first)
+      # iterate all rows of csvfile
       for dep_index, row in enumerate( islice( dataset_reader, 0, None ) ):
 
         # iterate first column of each row (except first)
