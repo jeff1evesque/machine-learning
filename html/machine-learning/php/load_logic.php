@@ -87,8 +87,10 @@
           $this->form->svm_session = $session_type;
           unset($this->form->session_type);
         }
-        print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
-        else $flag_validator = false;
+        else {
+          print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
+          $flag_validator = false;
+        }
       }
       else {
         print json_encode('Error: \'datalist_support\' must be a \'UTF-8\' string value');
