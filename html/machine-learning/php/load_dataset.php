@@ -27,6 +27,10 @@
       );
       $index++;
     }
+    else {
+      $flag_syntax = false;
+      break;
+    }
   }
   $arr_upload['upload_quantity'] = count($_FILES);
   unset($index);
