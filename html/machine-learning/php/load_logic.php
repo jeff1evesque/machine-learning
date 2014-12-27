@@ -100,7 +100,7 @@
           print json_encode($result);
         }
         else {
-          print json_encode('Error: 'model_type', and 'dataset_type' must be formatted as \'UTF-8\'');
+          print json_encode('Error: \'model_type\', and \'dataset_type\' must be formatted as \'UTF-8\'');
         }
       }
       elseif ($session_type == 'analysis') {
