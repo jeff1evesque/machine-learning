@@ -75,6 +75,7 @@
           $session_type = $this->form->svm_session;
           unset($this->form->session_type);
         }
+        print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
         else $flag_validator = false;
       }
     // HTML5 datalist not supported: use counterpart, remove 'session_type'
@@ -84,9 +85,11 @@
           $this->form->svm_session = $session_type;
           unset($this->form->session_type);
         }
+        print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
         else $flag_validator = false;
       }
       else {
+        print json_encode('Error: \'datalist_support\' must be a \'UTF-8\' string value');
         $flag_validator = false;
       }
 
@@ -109,7 +112,7 @@
           print json_encode($result);
         }
         else {
-          print json_encode('Error: \'model_type\', and \'dataset_type\' must be formatted as \'UTF-8\'');
+          print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\', and \'dataset_type\' must be a string value of \'upload file\', or \'xml file\'');
           $flag_validator = false;
         }
       }
