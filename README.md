@@ -193,7 +193,7 @@ This project implements *JSON Schema* validation, as a backend-validation tool. 
 
 ###MariaDB Database
 
-
+MariaDB is considered an upgrade alternative to MySQL, with added features, and performance enhancements. In general, it is a drop-in replacement for MySQL, even the corresponding SQL commands.
 
 ##Testing / Execution
 
