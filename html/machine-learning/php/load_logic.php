@@ -105,15 +105,17 @@
           unset($this->form->model_type);
           unset($this->form->dataset_type);
 
-      // Build JSON array, and send to python script
-          $arr_result = array('result' => $this->form);
-          $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to training'), $arr_result);
-          $arr_result = array('data' => $arr_result);
-          $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
-          if ($flag_validator) $result = shell_command('python ../../../python/svm_training.py', json_encode($arr_result));
+        // Build JSON array, and send to python script
+          if ($flag_validator) {
+            $arr_result = array('result' => $this->form);
+            $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to training'), $arr_result);
+            $arr_result = array('data' => $arr_result);
+            $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
+            $result = shell_command('python ../../../python/svm_training.py', json_encode($arr_result));
 
-      // Return JSON result(s) from python script
-          print json_encode($result);
+          // Return JSON result(s) from python script
+            print json_encode($result);
+          }
         }
         else {
           print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\', and \'dataset_type\' must be a string value of \'upload file\', or \'xml file\'');
@@ -126,15 +128,17 @@
           $this->form->svm_model_type = $this->form->model_type;
           unset($this->form->model_type);
 
-      // Build JSON array, and send to python script
-          $arr_result = array('result' => $this->form);
-          $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
-          $arr_result = array('data' => $arr_result);
-          $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
-          if ($flag_validator) $result     = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
+        // Build JSON array, and send to python script
+          if ($flag_validator) {
+            $arr_result = array('result' => $this->form);
+            $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
+            $arr_result = array('data' => $arr_result);
+            $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
+            $result     = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
 
-      // Return JSON result(s) from python script
-          print json_encode($result);
+          // Return JSON result(s) from python script
+            print json_encode($result);
+          }
         }
         else {
           print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\', and \'dataset_type\' must be a string value of \'upload file\', or \'xml file\'');
