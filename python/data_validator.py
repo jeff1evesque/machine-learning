@@ -73,7 +73,7 @@ class Validator:
     try:
       # iterate list for dict elements
       for value in self.svm_data:
-        validate( value, jsonschema_dataset())
+        validate( value, jsonschema_dataset() )
     except Exception, e:
       print str(e)
       return False
