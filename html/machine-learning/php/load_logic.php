@@ -136,7 +136,6 @@
         }
         else {
           print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\', and \'dataset_type\' must be a string value of \'upload file\', or \'xml file\'');
-          $flag_validator = false;
         }
       }
       else {
