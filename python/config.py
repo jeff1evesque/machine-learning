@@ -45,8 +45,11 @@ class Database:
   def set_db_password(self, pwd):
     self.db_password = pwd
 
-## jsonschema_dataset(): contains the jsonschema for the SVM dataset. This
-#                        validation schema is used in data_validator.py.
+## jsonschema_dataset(): contains the jsonschema for the SVM dataset. Therefore
+#                        this schema validates only the SVM dataset, not the
+#                        properties describing the (training, or analysis) session.
+#
+#  Note: This validation schema is used in data_validator.py.
 def jsonschema_dataset():
   schema = {
     'type': 'object',
@@ -59,7 +62,10 @@ def jsonschema_dataset():
   return schema
 
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
-#                         This validation schema is used in data_validator.py.
+#                         Therefore, this schema validates the properties
+#                         describing the session, not the dataset itself.
+#
+#  Note: This validation schema is used in data_validator.py.
 def jsonschema_training():
   schema = {
     'type': 'object',
@@ -101,7 +107,10 @@ def jsonschema_training():
   return schema
 
 ## jsonschema_analysis(): contains the jsonschema for the 'analysis' session.
-#                         This validation schema is used in data_validator.py.
+#                         Therefore, this schema validates the properties
+#                         describing the session, not the dataset itself.
+#
+#  Note: This validation schema is used in data_validator.py.
 def jsonschema_analysis():
   schema = {
     'type': 'object',
