@@ -41,7 +41,7 @@
  *             to conform to a JSON standard we are also implementing
  *             within 'load_logic.php'.
  */
-  if (mb_check_encoding($val['name'],'UTF-8') && mb_check_encoding($val['tmp_name'],'UTF-8')) {
+  if ( $flag_utf8 ) {
     $json = array('result' => $arr_upload);
     $json = array('data' => $json);
     $json['json_creator'] = basename(__FILE__);
