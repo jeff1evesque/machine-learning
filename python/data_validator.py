@@ -72,7 +72,9 @@ class Validator:
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
-
+      # iterate list for dict elements
+      for value in self.svm_data:
+        print value
     except Exception, e:
       print str(e)
       return False
