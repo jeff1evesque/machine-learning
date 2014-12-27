@@ -118,7 +118,7 @@
       }
       elseif ($session_type == 'analysis' && in_array(strtolower($this->form->svm_session), $arr_session_type)) {
       // Use HTML5 datalist fallback 'analysis_models'
-        if (in_array(strtolower($this->form->model_type), $arr_model_type) && in_array(strtolower($this->form->dataset_type), $arr_dataset_type)) {
+        if (in_array(strtolower($this->form->model_type), $arr_model_type)) {
           $this->form->svm_model_type = $this->form->model_type;
           unset($this->form->model_type);
 
