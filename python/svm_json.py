@@ -54,7 +54,7 @@ class JSON:
         row_indep_variable = row[0].split(',')
         for indep_index, value in enumerate( islice( row_indep_variable, 1, None) ):
           try:
-
+            value = float( value )
           except Exception as e:
             print e
             return False
