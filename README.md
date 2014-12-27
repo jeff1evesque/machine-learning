@@ -200,7 +200,9 @@ Some interesting features of MariaDB:
 - Supports php, therefore, common content management systems (i.e. Drupal, Wordpress)
 - Can be implemented on the Raspberry Pi
 
-This project defines default MariaDB database configurations (i.e. host, username, password) in `config.py`. However, the corresponding `Database` class in `config.py`, contains methods that will allow for further customization. Since, by default the username is `authenticated`, and the corresponding default password is `password`, the SQL user will need to be created with sufficient privileges:
+This project defines default MariaDB database configurations (i.e. host, username, password) in `config.py`. However, the corresponding `Database` class in `config.py`, contains methods that will allow for further customization.
+
+By default, the username `authenticated`, and corresponding password `password` is used. Therefore, remember to create the corresponding SQL user with sufficient privileges:
 
 ```sql
 $ mysql -u root -p
