@@ -46,4 +46,7 @@
     $result = shell_command('python ../../../python/svm_training.py', $json);
     print json_encode($result);
   }
+  else {
+    print json_encode('Error: filenames must be formatted as \'UTF-8\'');
+  }
 ?>
