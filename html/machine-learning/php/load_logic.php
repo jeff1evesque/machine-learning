@@ -67,15 +67,18 @@
       $flag_utf8 = true;
 
     // HTML5 datalist supported: remove 'session_type'
-      if ($this->form->datalist_support) {
+      if ($this->form->datalist_support && mb_check_encoding($this->form->datalist_support, 'UTF-8')) {
         $session_type = $this->form->svm_session;
         unset($this->form->session_type);
       }
-      else {
+      elseif (mb_check_encoding($this->form->datalist_support, 'UTF-8')) {
     // HTML5 datalist not supported: use counterpart, remove 'session_type'
         $session_type            = $this->form->session_type;
         $this->form->svm_session = $session_type;
         unset($this->form->session_type);
+      }
+      else {
+        $flag_utf8 = false;
       }
 
       if ($session_type == 'training') {
