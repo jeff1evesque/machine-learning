@@ -63,6 +63,9 @@
     * @json: 'reference' to the 'json' variable
     */
     public function logic_loader(&$json) {
+    // local variables
+      $flag_utf8 = true;
+
     // HTML5 datalist supported: remove 'session_type'
       if ($this->form->datalist_support) {
         $session_type = $this->form->svm_session;
