@@ -81,7 +81,7 @@
         }
       }
     // HTML5 datalist not supported: use counterpart, remove 'session_type'
-      elseif (mb_check_encoding($this->form->datalist_support, 'UTF-8')) {
+      elseif (!this->form->datalist_support && mb_check_encoding($this->form->datalist_support, 'UTF-8')) {
         if (in_array(strtolower($this->form->svm_session), $arr_session_type)) {
           $session_type            = $this->form->session_type;
           $this->form->svm_session = $session_type;
