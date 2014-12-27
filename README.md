@@ -211,7 +211,7 @@ MariaDB [(none)]> GRANT CREATE, INSERT, DELETE, DROP, EXECUTE, SELECT, SHOW DATA
 MariaDB [(none)]> FLUSH PRIVILEGES;
 ```
 
-**Note:** different executions of this program may involve different *dependent*, and *independent* variables. Therefore, the database schema is not known ahead of time. For this reason, the EAV data model is used for storing SVM datasets.
+**Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the EAV data model is used for storing and retrieving SVM datasets.
 
 ##Testing / Execution
 
