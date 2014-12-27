@@ -16,6 +16,7 @@
 
 // local variables
   $arr_upload = Array();
+  $flag_utf8  = true;
 
 // add uploaded file properties to 'arr_upload'
   $index = 0;
