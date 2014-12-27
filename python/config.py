@@ -49,7 +49,12 @@ class Database:
 #                        validation schema is used in data_validator.py.
 def jsonschema_dataset():
   schema = {
-
+    'type': 'object',
+    'properties': {
+      'dep_variable_label': { 'type': 'string' },
+      'indep_variable_label': { 'type': 'string' },
+      'indep_variable_value': { 'type': 'number' },
+    }
   }
   return schema
 
