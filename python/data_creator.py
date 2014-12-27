@@ -16,7 +16,6 @@ class Training:
 
   ## db_save_dataset
   def db_save_dataset(self):
-    print self.svm_data
 
     # create 'db_machine_learning' database if doesn't exist
     try:
@@ -57,7 +56,7 @@ class Training:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = conn.cursor()
 
-      for dep_variable, indep_variables in self.svm_data.iteritems():
+      for dep_variable, indep_variables in self.svm_data:
         # 'UTC_TIMESTAMP' returns the universal UTC datetime
         sql  = 'INSERT INTO tbl_dataset (dep_variable, indep_variables, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, ( dep_variable, ','.join(indep_variables) ) )
