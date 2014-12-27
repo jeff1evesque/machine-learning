@@ -20,11 +20,13 @@
 // add uploaded file properties to 'arr_upload'
   $index = 0;
   foreach ($_FILES as $val) {
-    $arr_upload['file_upload'][] = array(
-      'file_name' => $val['name'],
-      'file_temp' => $val['tmp_name'],
-    );
-    $index++;
+    if (mb_check_encoding($val['name'],'UTF-8') && mb_check_encoding($val['tmp_name'],'UTF-8')) {
+      $arr_upload['file_upload'][] = array(
+        'file_name' => $val['name'],
+        'file_temp' => $val['tmp_name'],
+      );
+      $index++;
+    }
   }
   $arr_upload['upload_quantity'] = count($_FILES);
   unset($index);
@@ -34,12 +36,14 @@
  *             to conform to a JSON standard we are also implementing
  *             within 'load_logic.php'.
  */
-  $json = array('result' => $arr_upload);
-  $json = array('data' => $json);
-  $json['json_creator'] = basename(__FILE__);
-  $json = json_encode( $json );
+  if (mb_check_encoding($val['name'],'UTF-8') && mb_check_encoding($val['tmp_name'],'UTF-8')) {
+    $json = array('result' => $arr_upload);
+    $json = array('data' => $json);
+    $json['json_creator'] = basename(__FILE__);
+    $json = json_encode( $json );
 
-// return to AJAX python 'result'
-  $result = shell_command('python ../../../python/svm_training.py', $json);
-  print json_encode($result);
+  // return to AJAX python 'result'
+    $result = shell_command('python ../../../python/svm_training.py', $json);
+    print json_encode($result);
+  }
 ?>
