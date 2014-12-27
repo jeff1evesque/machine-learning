@@ -64,7 +64,7 @@
     */
     public function logic_loader(&$json) {
     // local variables
-      $flag_utf8        = true;
+      $flag_validator   = true;
       $svm_model_type   = Array('classification', 'regression');
       $svm_dataset_type = Array('upload file', 'xml file');
       $svm_session_type = Array('training', 'analysis');
@@ -81,7 +81,7 @@
         unset($this->form->session_type);
       }
       else {
-        $flag_utf8 = false;
+        $flag_validator = false;
       }
 
       if ($session_type == 'training' && mb_check_encoding($session_type, 'UTF-8')) {
