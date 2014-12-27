@@ -54,12 +54,12 @@ if len(sys.argv) > 1:
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
 
-      # merge datasets as one JSON object
+      # convert each dataset as json, validate, and store in database
       else:
         json_dataset = {}
         for val in json_file_upload['file_upload']:
+          # csv to json
           if val['type'] in ('text/plain', 'text/csv'):
-            # convert csv to json, and merge
             try:
               json_dataset = json.loads( JSON( val['filedata']['file_temp']).csv_to_json() )
 
@@ -72,8 +72,8 @@ if len(sys.argv) > 1:
               print e
               sys.exit()
 
+          # xml to json
           elif val['type'] in ('application/xml', 'text/xml' ):
-            # convert xml to json, and merge
             try:
               json_dataset = json.loads( JSON( val['filedata']['file_temp']).xml_to_json() )
 
