@@ -116,9 +116,9 @@
           $flag_validator = false;
         }
       }
-      elseif ($session_type == 'analysis' && mb_check_encoding($session_type, 'UTF-8')) {
+      elseif ($session_type == 'analysis' && in_array(strtolower($this->form->svm_session), $arr_session_type)) {
       // Use HTML5 datalist fallback 'analysis_models'
-        if (mb_check_encoding($this->form->model_type, 'UTF-8')) {
+        if (in_array(strtolower($this->form->model_type), $arr_model_type) && in_array(strtolower($this->form->dataset_type), $arr_dataset_type)) {
           $this->form->svm_model_type = $this->form->model_type;
           unset($this->form->model_type);
 
@@ -133,7 +133,8 @@
           print json_encode($result);
         }
         else {
-          print json_encode('Error: \'model_type\' must be formatted as \'UTF-8\'');
+          print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\', and \'dataset_type\' must be a string value of \'upload file\', or \'xml file\'');
+          $flag_validator = false;
         }
       }
       else {
