@@ -103,20 +103,25 @@
           print json_encode('Error: \'model_type\', and \'dataset_type\' must be formatted as \'UTF-8\'');
         }
       }
-      elseif ($session_type == 'analysis') {
+      elseif ($session_type == 'analysis' && mb_check_encoding($session_type, 'UTF-8')) {
       // Use HTML5 datalist fallback 'analysis_models'
-        $this->form->svm_model_type = $this->form->model_type;
-        unset($this->form->model_type);
+        if (mb_check_encoding($this->form->model_type, 'UTF-8')) {
+          $this->form->svm_model_type = $this->form->model_type;
+          unset($this->form->model_type);
 
       // Build JSON array, and send to python script
-        $arr_result = array('result' => $this->form);
-        $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
-        $arr_result = array('data' => $arr_result);
-        $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
-        $result     = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
+          $arr_result = array('result' => $this->form);
+          $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
+          $arr_result = array('data' => $arr_result);
+          $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
+          $result     = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
 
       // Return JSON result(s) from python script
-        print json_encode($result);
+          print json_encode($result);
+        }
+        else {
+          print json_encode('Error: \'model_type\' must be formatted as \'UTF-8\'');
+        }
       }
       else {
         print json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') );
