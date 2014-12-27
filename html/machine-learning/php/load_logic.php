@@ -83,7 +83,7 @@
 
       if ($session_type == 'training' && mb_check_encoding($session_type, 'UTF-8')) {
       // Use HTML5 datalist fallback 'training_type'
-        if (mb_check_encoding($this->form->model_type, 'UTF-8')) {
+        if (mb_check_encoding($this->form->model_type, 'UTF-8') && mb_check_encoding($this->form->dataset_type)) {
           $this->form->svm_model_type   = $this->form->model_type;
           $this->form->svm_dataset_type = $this->form->dataset_type;
           unset($this->form->model_type);
