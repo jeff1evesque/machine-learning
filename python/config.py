@@ -45,6 +45,9 @@ class Database:
   def set_db_password(self, pwd):
     self.db_password = pwd
 
+## jsonschema_dataset(): contains the jsonschema for the SVM dataset. This
+#                        validation schema is used in data_validator.py.
+
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
 def jsonschema_training():
