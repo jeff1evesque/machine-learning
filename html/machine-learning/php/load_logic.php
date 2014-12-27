@@ -65,9 +65,9 @@
     public function logic_loader(&$json) {
     // local variables
       $flag_validator   = true;
-      $svm_model_type   = Array('classification', 'regression');
-      $svm_dataset_type = Array('upload file', 'xml file');
-      $svm_session_type = Array('training', 'analysis');
+      $arr_model_type   = Array('classification', 'regression');
+      $arr_dataset_type = Array('upload file', 'xml file');
+      $arr_session_type = Array('training', 'analysis');
 
     // HTML5 datalist supported: remove 'session_type'
       if ($this->form->datalist_support && mb_check_encoding($this->form->datalist_support, 'UTF-8')) {
