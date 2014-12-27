@@ -56,7 +56,9 @@ class JSON:
           try:
 
           except Exception as e:
-            
+            print e
+            return False
+
           list_dataset.append( { 'dep_variable_label': dep_variable_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
 
     return json.dumps( list_dataset )
