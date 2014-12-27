@@ -202,7 +202,7 @@ Some interesting features of MariaDB:
 
 This project defines default MariaDB database configurations (i.e. host, username, password) in `config.py`. However, the corresponding `Database` class in `config.py`, contains methods that will allow for further customization. Since, by default the username is `authenticated`, and the corresponding default password is `password`, the SQL user will need to be created with sufficient privileges:
 
-```mysql
+```sql
 $ mysql -u root -p
 MariaDB [(none)]> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY '[USER_PASSWORD]';
 MariaDB [(none)]> GRANT CREATE, INSERT, DELETE, DROP, EXECUTE, SELECT, SHOW DATABASES ON *.* TO 'authenticated'@'localhost';
