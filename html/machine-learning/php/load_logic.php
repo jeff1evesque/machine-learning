@@ -76,7 +76,7 @@
           unset($this->form->session_type);
         }
         else {
-          print json_encode('Error: '\'session_type\' must be string value of \'training\', or \'analysis\'');
+          print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
           $flag_validator = false;
         }
       }
