@@ -64,10 +64,9 @@ class Validator:
         print str(e)
         return False
 
-  ## dataset_validation: all supplied SVM datasets are merged into one collective
-  #                      dataset via the 'jsonmerge' method in 'helper.py'. Then,
-  #                      each data element within the merged dataset, is validated
-  #                      for proper syntax.
+  ## dataset_validation: each supplied SVM dataset is correctly formatted via corresponding
+  #                      methods in 'svm_json.py'. After being formatted, each dataset is
+  #                      validated in this method.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
