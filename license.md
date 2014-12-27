@@ -1,4 +1,4 @@
-New BSD License
+BSD License
 ====================
 
 _Copyright © 2014-2015, Jeffrey Levesque_  
