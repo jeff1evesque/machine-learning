@@ -8,7 +8,7 @@
 import json, sys, magic
 from jsonschema import validate
 from helper import md5_for_file
-from config import jsonschema_training, jsonschema_analysis
+from config import jsonschema_training, jsonschema_analysis, jsonschema_dataset
 
 ## Class: Validator
 class Validator:
@@ -64,52 +64,16 @@ class Validator:
         print str(e)
         return False
 
-  ## dataset_validation: all supplied SVM datasets are merged into one collective
-  #                      dataset via the 'jsonmerge' method in 'helper.py'. Then,
-  #                      each data element within the merged dataset, is validated
-  #                      for proper syntax.
+  ## dataset_validation: each supplied SVM dataset is correctly formatted via corresponding
+  #                      methods in 'svm_json.py'. After being formatted, each dataset is
+  #                      validated in this method.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
-      # iterate first column of merged dataset
-      for col_title, dep_list_label in self.svm_data.items()[-1:]:
-        # validate first record of first column
-        try:
-          unicode( col_title )
-        except:
-          msg = 'Error: the dataset value, ' + col_title + ' (row 1, column 1) must be a unicode string'
-          print json.dumps({'error':msg}, separators=(',', ': '))
-          return False
-
-        # validate remaining records of first column
-        for label in dep_list_label:
-          try:
-            unicode( dep_list_label )
-          except:
-            msg = 'Error: the element, (' + col_title + ': ' + label  + ') within the supplied dataset, must be a unicode string'
-            print json.dumps({'error':msg}, separators=(',', ': '))
-            return False
-
-      # iterate dependent, and list of independent variables (except first column)
-      for dependent, indep_list in self.svm_data.items()[:-1]:
-        # validate SVM dependent variables
-        try:
-          unicode( dependent )
-        except:
-          msg = 'Error: the supplied dependent variable, ' + dependent + ' must be a unicode string'
-          print json.dumps({'error':msg}, separators=(',', ': '))
-          return False
-
-        # validate SVM independent variables
-        for independent in indep_list:
-          try:
-            float( independent )
-          except:
-            msg = 'Error: the element, (' + dependent + ': ' + independent  + ') within the supplied dataset, must be type float, or int'  
-            print json.dumps({'error':msg}, separators=(',', ': '))
-            return False
-
+      # iterate list for dict elements
+      for value in self.svm_data:
+        validate( value, jsonschema_dataset() )
     except Exception, e:
       print str(e)
       return False
