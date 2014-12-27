@@ -197,7 +197,7 @@ MariaDB is considered an upgrade alternative to MySQL, with added features, and 
 
 Some interesting features of MariaDB:
 
-- Supports php, therefore, common content management systems (i.e. Drupal, Wordpress)
+- Supports common content management systems (i.e. Drupal, Wordpress)
 - Can be implemented on the Raspberry Pi
 
 This project defines default MariaDB database configurations (i.e. host, username, password) in `config.py`. However, the corresponding `Database` class in `config.py`, contains methods that will allow for further customization.
