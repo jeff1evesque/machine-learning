@@ -64,8 +64,8 @@
     */
     public function logic_loader(&$json) {
     // local variables
-      $flag_utf8 = true;
-      $svm_model_type = Array('classification', 'regression');
+      $flag_utf8        = true;
+      $svm_model_type   = Array('classification', 'regression');
       $svm_dataset_type = Array('upload file', 'xml file');
       $svm_session_type = Array('training', 'analysis');
 
