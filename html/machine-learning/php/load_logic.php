@@ -75,8 +75,10 @@
           $session_type = $this->form->svm_session;
           unset($this->form->session_type);
         }
-        print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
-        else $flag_validator = false;
+        else {
+          print json_encode('Error: '\'session_type\' must be string value of \'training\', or \'analysis\'');
+          $flag_validator = false;
+        }
       }
     // HTML5 datalist not supported: use counterpart, remove 'session_type'
       elseif (mb_check_encoding($this->form->datalist_support, 'UTF-8')) {
