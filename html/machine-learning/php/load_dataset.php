@@ -29,7 +29,7 @@
       $index++;
     }
     else {
-      $flag_syntax = false;
+      $flag_utf8 = false;
       break;
     }
   }
