@@ -47,6 +47,11 @@ class Database:
 
 ## jsonschema_dataset(): contains the jsonschema for the SVM dataset. This
 #                        validation schema is used in data_validator.py.
+def jsonschema_dataset():
+  schema = {
+
+  }
+  return schema
 
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         This validation schema is used in data_validator.py.
