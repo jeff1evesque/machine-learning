@@ -90,9 +90,9 @@
         $flag_validator = false;
       }
 
-      if ($session_type == 'training' && mb_check_encoding($session_type, 'UTF-8')) {
+      if ($session_type == 'training' && in_array(strtolower($this->form->svm_session), $arr_session_type)) {
       // Use HTML5 datalist fallback 'training_type'
-        if (mb_check_encoding($this->form->model_type, 'UTF-8') && mb_check_encoding($this->form->dataset_type)) {
+        if (in_array(strtolower($this->form->model_type), $arr_model_type) && in_array(strtolower($this->form->dataset_type), $arr_dataset_type)) {
           $this->form->svm_model_type   = $this->form->model_type;
           $this->form->svm_dataset_type = $this->form->dataset_type;
           unset($this->form->model_type);
@@ -110,6 +110,7 @@
         }
         else {
           print json_encode('Error: \'model_type\', and \'dataset_type\' must be formatted as \'UTF-8\'');
+          $flag_validator = false;
         }
       }
       elseif ($session_type == 'analysis' && mb_check_encoding($session_type, 'UTF-8')) {
