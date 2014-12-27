@@ -195,6 +195,11 @@ This project implements *JSON Schema* validation, as a backend-validation tool. 
 
 MariaDB is considered an upgrade alternative to MySQL, with added features, and performance enhancements. In general, it is a drop-in replacement for MySQL. Therefore, MariaDB shares identical SQL command syntax, and support for phpMyAdmin.
 
+Some interesting features of MariaDB:
+
+- Supports php, therefore, common content management systems (i.e. Drupal, Wordpress)
+- Can be implemented on the Raspberry Pi
+
 ##Testing / Execution
 
 ###Test Scripts
