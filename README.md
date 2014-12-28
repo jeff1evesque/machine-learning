@@ -193,14 +193,14 @@ This project implements *JSON Schema* validation, as a backend-validation tool. 
 
 ###MariaDB Database
 
-MariaDB is considered an upgrade alternative to MySQL, with added features, and performance enhancements. In general, it is a drop-in replacement for MySQL. Therefore, MariaDB shares identical SQL command syntax, and support for phpMyAdmin.
+[MariaDB](https://mariadb.org/) is considered an upgrade alternative to [MySQL](http://www.mysql.com/), with [added features](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-features/#extensions-entityampentity-new-features), and [performance enhancements](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-features/#speed-improvements). In general, it is a [drop-in](https://mariadb.com/kb/en/mariadb/faq/mariadb-vs-mysql-compatibility/#mariadb-is-a-binary-drop-in-replacement-for-mysql) replacement for MySQL. Therefore, MariaDB shares identical SQL command syntax, and support for [phpMyAdmin](http://www.phpmyadmin.net/home_page/index.php).
 
 Some interesting features of MariaDB:
 
-- Supports common content management systems (i.e. Drupal, Wordpress)
-- Can be implemented on the Raspberry Pi
+- Supports common content management systems (i.e. [Drupal](https://www.drupal.org/), [Wordpress](https://wordpress.com/))
+- Can be [implemented](http://www.raspberrypi.org/forums/viewtopic.php?t=12859&p=288820) on the [Raspberry Pi](https://github.com/jeff1evesque/raspberry-pi#definition)
 
-This project defines default MariaDB database configurations (i.e. host, username, password) in `config.py`. However, the corresponding `Database` class in `config.py`, contains methods that will allow for further customization.
+This project defines default MariaDB database configurations (i.e. host, username, password) in [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py). However, the corresponding `Database` class in `config.py`, contains methods that will allow for further customization.
 
 By default, the username `authenticated`, and corresponding password `password` is used. Therefore, remember to create the corresponding SQL user with sufficient privileges:
 
@@ -211,9 +211,9 @@ MariaDB [(none)]> GRANT CREATE, INSERT, DELETE, DROP, EXECUTE, SELECT, SHOW DATA
 MariaDB [(none)]> FLUSH PRIVILEGES;
 ```
 
-**Note:** more information regarding the MariaDB SQL syntax can be found within the Database wiki.
+**Note:** more information regarding the MariaDB SQL syntax can be found within the [Database](https://github.com/jeff1evesque/machine-learning/wiki/Database) wiki.
 
-**Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the EAV data model is used for storing and retrieving SVM datasets.
+**Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the [EAV data model](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model#Physical_representation_of_EAV_data) is used for storing and retrieving SVM datasets.
 
 ##Testing / Execution
 
