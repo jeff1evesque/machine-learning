@@ -14,7 +14,8 @@ class Training:
     self.svm_data    = svm_data
     self.db_settings = Database()
 
-  ## db_save_dataset: stores an SVM dataset into the database table,'tbl_dataset'.
+  ## db_save_dataset: stores an SVM dataset into corresponding 'EAV data model'
+  #                   database tables.
   def db_save_dataset(self):
 
     # create 'db_machine_learning' database if doesn't exist
