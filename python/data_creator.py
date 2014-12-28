@@ -41,16 +41,14 @@ class Training:
       if conn:
         conn.close()
 
-    # create 'tbl_dataset' table if doesn't exist
+    # create 'tbl_dataset_client' table if doesn't exist
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset (
-                 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                 uid TEXT,
-                 dep_variable TEXT,
-                 indep_variables TEXT,
+                 id INT NOT NULL AUTO_INCREMENT,
+                 uid TEXT NOT NULL PRIMARY KEY,
                  datetime_saved DATETIME
                );
                '''
