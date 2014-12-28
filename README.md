@@ -200,7 +200,7 @@ Some interesting features of MariaDB:
 - Supports common content management systems (i.e. [Drupal](https://www.drupal.org/), [Wordpress](https://wordpress.com/))
 - Can be [implemented](http://www.raspberrypi.org/forums/viewtopic.php?t=12859&p=288820) on the [Raspberry Pi](https://github.com/jeff1evesque/raspberry-pi#definition)
 
-This project defines default MariaDB database configurations (i.e. host, username, password) in [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py). However, the corresponding `Database` class in `config.py`, contains methods that will allow for further customization.
+In this project, default MariaDB database configurations (i.e. host, username, password) can be found in [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py). The corresponding `Database` class in `config.py`, contains methods that will allow for further customization.
 
 By default, the username `authenticated`, and corresponding password `password` is used. Therefore, remember to create the corresponding SQL user with sufficient privileges:
 
