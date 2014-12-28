@@ -60,6 +60,26 @@ class Training:
       if conn:
         conn.close()
 
+    # create 'tbl_dataset_clientAttribute' table if doesn't exist
+    try:
+      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
+      cursor = conn.cursor()
+      sql    = '''\
+               CREATE TABLE IF NOT EXISTS tbl_dataset_clientAttribute (
+                 uid TEXT NOT NULL,
+                 attribute TEXT NOT NULL,
+                 CONSTRAINT PK_clientAttribute PRIMARY KEY (uid, attribute),
+                 CONSTRAINT FK_clientAttribute FOREIGN KEY (uid) REFERENCES tbl_dataset_client (uid)
+               );
+               '''
+      cursor.execute( sql )
+    except DB.Error, e:
+      print "Error %d: %s" % (e.args[0], e.args[1])
+      return False
+    finally:
+      if conn:
+        conn.close()
+
     # insert dataset values in 'tbl_dataset'
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
