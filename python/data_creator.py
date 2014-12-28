@@ -56,8 +56,8 @@ class Training:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       #cursor = conn.cursor()
 
-      for value in self.svm_data:
-        print value
+      for data_instance in self.svm_data:
+        print data_instance
         #  # 'UTC_TIMESTAMP' returns the universal UTC datetime
         #  sql  = 'INSERT INTO tbl_dataset (dep_variable, indep_variables, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         #  cursor.execute( sql, ( dep_variable, ','.join(indep_variables) ) )
