@@ -66,7 +66,7 @@ if len(sys.argv) > 1:
               json_validated = Validator( json_dataset )
               json_validated.dataset_validation()
 
-              db_save = Training( json_dataset.items() )
+              db_save = Training( json_dataset )
               db_save.db_save_dataset()
             except Exception as e:
               print e
