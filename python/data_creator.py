@@ -46,7 +46,7 @@ class Training:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = conn.cursor()
       sql    = '''\
-               CREATE TABLE IF NOT EXISTS tbl_dataset (
+               CREATE TABLE IF NOT EXISTS tbl_dataset_client (
                  id INT NOT NULL AUTO_INCREMENT,
                  uid TEXT NOT NULL PRIMARY KEY,
                  datetime_saved DATETIME
