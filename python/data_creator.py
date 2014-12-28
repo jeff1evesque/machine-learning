@@ -54,13 +54,14 @@ class Training:
     # insert dataset values in 'tbl_dataset'
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
-      cursor = conn.cursor()
+      #cursor = conn.cursor()
 
-      for dep_variable, indep_variables in self.svm_data:
-        # 'UTC_TIMESTAMP' returns the universal UTC datetime
-        sql  = 'INSERT INTO tbl_dataset (dep_variable, indep_variables, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
-        cursor.execute( sql, ( dep_variable, ','.join(indep_variables) ) )
-        conn.commit()
+      for value in self.svm_data:
+        print value
+        #  # 'UTC_TIMESTAMP' returns the universal UTC datetime
+        #  sql  = 'INSERT INTO tbl_dataset (dep_variable, indep_variables, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
+        #  cursor.execute( sql, ( dep_variable, ','.join(indep_variables) ) )
+        #  conn.commit()
     except DB.Error, e:
       conn.rollback()
       print "Error %d: %s" % (e.args[0], e.args[1])
