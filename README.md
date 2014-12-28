@@ -211,9 +211,9 @@ MariaDB [(none)]> GRANT CREATE, INSERT, DELETE, DROP, EXECUTE, SELECT, SHOW DATA
 MariaDB [(none)]> FLUSH PRIVILEGES;
 ```
 
-**Note:** more information regarding the MariaDB syntax can be found within the [*Database*](https://github.com/jeff1evesque/machine-learning/wiki/Database) wiki.
+**Note:** more information regarding the MariaDB syntax can be found within the [Database](https://github.com/jeff1evesque/machine-learning/wiki/Database) wiki.
 
-**Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the [EAV data model](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model#Physical_representation_of_EAV_data) is used for storing and retrieving SVM datasets.
+**Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the [EAV data model](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model#Physical_representation_of_EAV_data) is used for storing and retrieving SVM dataset(s).
 
 ##Testing / Execution
 
