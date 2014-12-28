@@ -13,7 +13,7 @@ class Training:
   #               into their own corresponding class variable.
   # 
   #  Note: the SVM dataset, 'self.svm_data' is list of dictionary elements. One
-  #        dict element in the list, is of the following form:
+  #        dictionary element, is represented as follows:
   #
   #            {u'dep_variable_label': u'xxx',
   #             u'indep_variable_label': u'xxx',
