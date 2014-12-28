@@ -66,7 +66,7 @@ class Training:
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_clientAttribute (
                  uid INT NOT NULL,
-                 attribute TEXT NOT NULL,
+                 attribute VARCHAR (50) NOT NULL,
                  CONSTRAINT PK_clientAttribute PRIMARY KEY (uid, attribute),
                  CONSTRAINT FK_clientAttribute FOREIGN KEY (uid) REFERENCES tbl_dataset_client (uid)
                );
@@ -85,7 +85,7 @@ class Training:
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_attribute (
-                 attribute TEXT NOT NULL PRIMARY KEY,
+                 attribute VARCHAR (50) NOT NULL PRIMARY KEY,
                  value sql_variant NULL,
                );
                '''
