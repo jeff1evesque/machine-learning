@@ -86,7 +86,7 @@ class Training:
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_attribute (
                  attribute VARCHAR (50) NOT NULL PRIMARY KEY,
-                 value sql_variant NULL,
+                 value FLOAT NULL,
                );
                '''
       cursor.execute( sql )
