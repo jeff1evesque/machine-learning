@@ -202,7 +202,7 @@ Some interesting features of MariaDB:
 
 In this project, the default MariaDB database configurations (i.e. host, username, password) can be found in [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py). Specifically, the `Database` class in `config.py`, contains methods that allow further customization.
 
-By default, the username `authenticated`, and corresponding password `password` is used to access SVM related data in the MariaDB database. Therefore, remember to create the corresponding SQL user with sufficient privileges:
+By default, the username `authenticated`, and corresponding password `password` is used to access the SVM database. Therefore, remember to create the corresponding SQL user with sufficient privileges:
 
 ```sql
 $ mysql -u root -p
@@ -211,7 +211,7 @@ MariaDB [(none)]> GRANT CREATE, INSERT, DELETE, DROP, EXECUTE, SELECT, SHOW DATA
 MariaDB [(none)]> FLUSH PRIVILEGES;
 ```
 
-**Note:** more information regarding the MariaDB SQL syntax can be found within the [Database](https://github.com/jeff1evesque/machine-learning/wiki/Database) wiki.
+**Note:** more information regarding the MariaDB syntax can be found within the [*Database*](https://github.com/jeff1evesque/machine-learning/wiki/Database) wiki.
 
 **Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the [EAV data model](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model#Physical_representation_of_EAV_data) is used for storing and retrieving SVM datasets.
 
