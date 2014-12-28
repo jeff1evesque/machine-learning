@@ -47,7 +47,6 @@ class Training:
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_client (
-                 id INT NOT NULL AUTO_INCREMENT,
                  uid INT NOT NULL PRIMARY KEY,
                  datetime_saved DATETIME
                );
