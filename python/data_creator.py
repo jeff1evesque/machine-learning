@@ -9,7 +9,17 @@ from config import Database
 ## Class: Training
 class Training:
 
-  ## constructor
+  ## constructor: stores an SVM dataset (json object), database configurations
+  #               into their own corresponding class variable.
+  # 
+  #  Note: the SVM dataset, 'self.svm_data' is list of dictionary elements. One
+  #        dict element in the list, is of the following form:
+  #
+  #            {u'dep_variable_label': u'xxx',
+  #             u'indep_variable_label': u'xxx',
+  #             u'independent_variable_value': yy.yy}
+  #
+  #        where 'xxx' denotes a unicode string, and 'yy' denotes a float value.
   def __init__(self, svm_data):
     self.svm_data    = svm_data
     self.db_settings = Database()
