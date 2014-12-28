@@ -48,7 +48,7 @@ class Training:
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_client (
                  id INT NOT NULL AUTO_INCREMENT,
-                 uid TEXT NOT NULL PRIMARY KEY,
+                 uid INT NOT NULL PRIMARY KEY,
                  datetime_saved DATETIME
                );
                '''
@@ -66,7 +66,7 @@ class Training:
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_clientAttribute (
-                 uid TEXT NOT NULL,
+                 uid INT NOT NULL,
                  attribute TEXT NOT NULL,
                  CONSTRAINT PK_clientAttribute PRIMARY KEY (uid, attribute),
                  CONSTRAINT FK_clientAttribute FOREIGN KEY (uid) REFERENCES tbl_dataset_client (uid)
