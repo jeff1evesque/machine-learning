@@ -41,34 +41,14 @@ class Training:
       if conn:
         conn.close()
 
-    # create 'tbl_dataset_client' table if doesn't exist
+    # create 'tbl_dataset_entity' table if doesn't exist
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = conn.cursor()
       sql    = '''\
-               CREATE TABLE IF NOT EXISTS tbl_dataset_client (
+               CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
                  uid INT NOT NULL PRIMARY KEY,
                  datetime_saved DATETIME
-               );
-               '''
-      cursor.execute( sql )
-    except DB.Error, e:
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
-    finally:
-      if conn:
-        conn.close()
-
-    # create 'tbl_dataset_clientAttribute' table if doesn't exist
-    try:
-      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
-      cursor = conn.cursor()
-      sql    = '''\
-               CREATE TABLE IF NOT EXISTS tbl_dataset_clientAttribute (
-                 uid INT NOT NULL,
-                 attribute VARCHAR (50) NOT NULL,
-                 CONSTRAINT PK_clientAttribute PRIMARY KEY (uid, attribute),
-                 CONSTRAINT FK_clientAttribute FOREIGN KEY (uid) REFERENCES tbl_dataset_client (uid)
                );
                '''
       cursor.execute( sql )
@@ -85,6 +65,26 @@ class Training:
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_attribute (
+                 uid INT NOT NULL,
+                 attribute VARCHAR (50) NOT NULL,
+                 CONSTRAINT PK_attribute PRIMARY KEY (uid, attribute),
+                 CONSTRAINT FK_attribute FOREIGN KEY (uid) REFERENCES tbl_dataset_entity (uid)
+               );
+               '''
+      cursor.execute( sql )
+    except DB.Error, e:
+      print "Error %d: %s" % (e.args[0], e.args[1])
+      return False
+    finally:
+      if conn:
+        conn.close()
+
+    # create 'tbl_dataset_value' table if doesn't exist
+    try:
+      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
+      cursor = conn.cursor()
+      sql    = '''\
+               CREATE TABLE IF NOT EXISTS tbl_dataset_value (
                  attribute VARCHAR (50) NOT NULL PRIMARY KEY,
                  value FLOAT NULL
                );
