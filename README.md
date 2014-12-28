@@ -191,6 +191,30 @@ The following provides additional documentation on the *schema* validation:
 
 This project implements *JSON Schema* validation, as a backend-validation tool. Specifically, [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py) defines acceptable *schemas* to validate against, while [`data_validator.py`](https://github.com/jeff1evesque/machine-learning/blob/52157d2f7c7255f999e822dd13ce65911d678918/python/data_validator.py#L48) implements the validation schema(s).
 
+###MariaDB Database
+
+[MariaDB](https://mariadb.org/) is considered an upgrade alternative to [MySQL](http://www.mysql.com/), with [added features](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-features/#extensions-entityampentity-new-features), and [performance enhancements](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-features/#speed-improvements). In general, it is a [drop-in](https://mariadb.com/kb/en/mariadb/faq/mariadb-vs-mysql-compatibility/#mariadb-is-a-binary-drop-in-replacement-for-mysql) replacement for MySQL. Therefore, MariaDB shares identical SQL command syntax, and support for [phpMyAdmin](http://www.phpmyadmin.net/home_page/index.php).
+
+Some interesting features of MariaDB:
+
+- Supports common content management systems (i.e. [Drupal](https://www.drupal.org/), [Wordpress](https://wordpress.com/))
+- Can be [implemented](http://www.raspberrypi.org/forums/viewtopic.php?t=12859&p=288820) on the [Raspberry Pi](https://github.com/jeff1evesque/raspberry-pi#definition)
+
+In this project, the default MariaDB database configurations (i.e. host, username, password) can be found in [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py). Specifically, the `Database` class in `config.py`, contains methods that allow further customization.
+
+By default, the username `authenticated`, and corresponding password `password` is used to access the SVM database. Therefore, remember to create the corresponding SQL user with sufficient privileges:
+
+```sql
+$ mysql -u root -p
+MariaDB [(none)]> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY 'password';
+MariaDB [(none)]> GRANT CREATE, INSERT, DELETE, DROP, EXECUTE, SELECT, SHOW DATABASES ON *.* TO 'authenticated'@'localhost';
+MariaDB [(none)]> FLUSH PRIVILEGES;
+```
+
+**Note:** more information regarding the MariaDB syntax can be found within the [Database](https://github.com/jeff1evesque/machine-learning/wiki/Database) wiki.
+
+**Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the [EAV data model](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model#Physical_representation_of_EAV_data) is used for storing and retrieving SVM dataset(s).
+
 ##Testing / Execution
 
 ###Test Scripts
