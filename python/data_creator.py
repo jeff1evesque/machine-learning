@@ -64,26 +64,6 @@ class Training:
       if conn:
         conn.close()
 
-    # create 'tbl_dataset_attribute' table if doesn't exist
-    try:
-      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
-      cursor = conn.cursor()
-      sql    = '''\
-               CREATE TABLE IF NOT EXISTS tbl_dataset_attribute (
-                 id_entity INT NOT NULL,
-                 attribute VARCHAR (50) NOT NULL,
-                 CONSTRAINT PK_attribute PRIMARY KEY (id_entity, attribute),
-                 CONSTRAINT FK_attribute_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
-               );
-               '''
-      cursor.execute( sql )
-    except DB.Error, e:
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
-    finally:
-      if conn:
-        conn.close()
-
     # create 'tbl_dataset_value' table if doesn't exist
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
@@ -112,9 +92,6 @@ class Training:
       for data_instance in self.svm_data:
         sql  = 'INSERT INTO tbl_dataset_entity (uid, entity, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (self.uid, data_instance['dep_variable_label']) )
-
-        sql = 'INSERT INTO tbl_dataset_attribute (id_entity, attribute) VALUES( LAST_INSERT_ID(), %s )'
-        cursor.execute( sql, (data_instance['indep_variable_label']) )
 
         sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
         cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
