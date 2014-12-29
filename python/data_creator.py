@@ -66,10 +66,10 @@ class Training:
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_attribute (
-                 uid INT NOT NULL,
+                 id INT NOT NULL,
                  attribute VARCHAR (50) NOT NULL,
-                 CONSTRAINT PK_attribute PRIMARY KEY (uid, attribute),
-                 CONSTRAINT FK_attribute_entity FOREIGN KEY (uid) REFERENCES tbl_dataset_entity (uid)
+                 CONSTRAINT PK_attribute PRIMARY KEY (id, attribute),
+                 CONSTRAINT FK_attribute_entity FOREIGN KEY (id) REFERENCES tbl_dataset_entity (id)
                );
                '''
       cursor.execute( sql )
