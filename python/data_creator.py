@@ -27,6 +27,8 @@ class Training:
 
   ## db_save_dataset: stores an SVM dataset into corresponding 'EAV data model'
   #                   database tables.
+  #
+  #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
   def db_save_dataset(self):
 
     # create 'db_machine_learning' database if doesn't exist
@@ -106,7 +108,6 @@ class Training:
       cursor = conn.cursor()
 
       for data_instance in self.svm_data:
-        # 'UTC_TIMESTAMP' returns the universal UTC datetime
         sql  = 'INSERT INTO tbl_dataset_entity (uid, entity, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (self.uid, data_instance['dep_variable_label']) )
 
