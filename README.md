@@ -221,6 +221,6 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 The web-interface only supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object, validated on the server-side (python), then stored into corresponding EAV database tables.
 
-When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Otherwise, corresponding python scripts will fail to create the json object representation, and subsequently fail storing the dataset(s) into corresponding database tables.
+When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Otherwise, corresponding python scripts will fail to create the json object representation, and subsequently fail to store the dataset(s) into corresponding database tables.
 
 ###Test Scripts
