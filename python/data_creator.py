@@ -105,17 +105,18 @@ class Training:
       #cursor = conn.cursor()
 
       for data_instance in self.svm_data:
-          # 'UTC_TIMESTAMP' returns the universal UTC datetime
-          sql  = 'INSERT INTO tbl_dataset_entity (uid, entity, datetime_saved) VALUES( %d, %s, UTC_TIMESTAMP() )'
-          cursor.execute( sql, data_instance['dep_variable_label'], (self.uid) )
 
-          sql = 'INSERT INTO tbl_dataset_attribute (uid, attribute) VALUES( %d, %s )'
-          cursor.execute( sql, (self.uid, data_instance['indep_variable_label']) )
+        # 'UTC_TIMESTAMP' returns the universal UTC datetime
+        sql  = 'INSERT INTO tbl_dataset_entity (uid, entity, datetime_saved) VALUES( %d, %s, UTC_TIMESTAMP() )'
+        cursor.execute( sql, data_instance['dep_variable_label'], (self.uid) )
 
-          sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %f )'
-          cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
+        sql = 'INSERT INTO tbl_dataset_attribute (uid, attribute) VALUES( %d, %s )'
+        cursor.execute( sql, (self.uid, data_instance['indep_variable_label']) )
 
-          conn.commit()
+        sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %f )'
+        cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
+
+        conn.commit()
     except DB.Error, e:
       conn.rollback()
       print "Error %d: %s" % (e.args[0], e.args[1])
