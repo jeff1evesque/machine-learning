@@ -225,7 +225,7 @@ When using the web-interface, it is important to ensure the csv, or xml file(s) 
 
 The following provide examples of acceptable syntax:
 
-- [csv datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
-- [xml dataset](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
+- [csv sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
+- [xml sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
 
 ###Test Scripts
