@@ -219,4 +219,6 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 ###SVM Dataset
 
+Using the web-interface, this project supports SVM dataset(s) in csv, or xml format. Dataset(s) in the acceptable format, is converted to a json object, validated, and stored into corresponding database tables.
+
 ###Test Scripts
