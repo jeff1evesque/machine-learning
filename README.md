@@ -222,7 +222,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 The *web-interface* only supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object, validated on the server-side (python), then stored into corresponding EAV database tables.
 
-When using the *web-interface*, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will cause corresponding python scripts to fail in creating respective json dataset representation(s). Subsequently, dataset(s) will not succeed being stored in their correponding database tables.
+When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will cause corresponding python scripts to fail in creating respective json dataset representation(s). Subsequently, dataset(s) will not succeed being stored in their correponding database tables.
 
 The following provide examples of acceptable syntax:
 
@@ -231,7 +231,7 @@ The following provide examples of acceptable syntax:
 
 ###Programmatic-Interface
 
-When creating (sub)projects of this repository, it is important to leverage existing logic when possible.
+When creating (sub)projects of this repository *programmatically*, it is important to leverage existing logic when possible.
 
 - [Dataset Validation](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_validator.py)
 - [Database methods](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py)
