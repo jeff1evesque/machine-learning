@@ -242,6 +242,6 @@ The same syntax requirement for csv, or xml file(s) to json conversion is requir
 [{'dep_variable_label': 'xxx', 'indep_variable_label': 'xxx', 'indep_variable_value': yy.yy}]
 ```
 
-is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_creator.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py). Also, be sure to validate the dataset as needed.
+is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_creator.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py). Be sure to validate the dataset as needed before storing the dataset in the database.
 
 ###Test Scripts
