@@ -217,9 +217,8 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 ##Testing / Execution
 
-###SVM Dataset
 
-####Web-Interface
+###Web-Interface
 
 The web-interface only supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object, validated on the server-side (python), then stored into corresponding EAV database tables.
 
@@ -230,7 +229,7 @@ The following provide examples of acceptable syntax:
 - [csv sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
 - [xml sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
 
-####Programmatic-Interface
+###Programmatic-Interface
 
 When creating (sub)projects of this repository, it is important to leverage existing logic when possible.
 
