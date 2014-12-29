@@ -220,7 +220,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 ###Web Interface
 
-This project provides a sample [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/html/machine-learning/test/php/index.php) which supports SVM dataset(s) in csv, or xml format:
+This project provides a sample [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/html/machine-learning/test/php/index.php), which supports SVM dataset(s) in csv, or xml format:
 
 - http://localhost/machine-learning/test/php/
 
