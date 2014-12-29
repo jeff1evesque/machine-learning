@@ -90,7 +90,7 @@ class Training:
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_value (
-                 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                 id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                  attribute VARCHAR (50) NOT NULL,
                  value FLOAT NULL
                );
