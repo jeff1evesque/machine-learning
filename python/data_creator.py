@@ -107,6 +107,7 @@ class Training:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = conn.cursor()
 
+      # sql query requires string format, hence '%s' used for all column types
       for data_instance in self.svm_data:
         sql  = 'INSERT INTO tbl_dataset_entity (uid, entity, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (self.uid, data_instance['dep_variable_label']) )
