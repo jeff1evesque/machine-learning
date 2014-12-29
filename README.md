@@ -220,11 +220,11 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 ###Web Interface
 
-This project provides a sample *web-interface*, [`index.php`](https://github.com/jeff1evesque/machine-learning/blob/master/html/machine-learning/test/php/index.php):
+This project provides a sample [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/html/machine-learning/test/php/index.php):
 
 - http://localhost/machine-learning/test/php/
 
-which only supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object, validated on the server-side (python), then stored into corresponding EAV database tables.
+which supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object, validated on the server-side (python), then stored into corresponding EAV database tables.
 
 When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will cause corresponding python scripts to fail in creating respective json dataset representation(s). Subsequently, dataset(s) will not succeed being stored in their correponding database tables.
 
