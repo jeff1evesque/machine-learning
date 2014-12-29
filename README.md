@@ -224,7 +224,7 @@ This project provides a sample [web-interface](https://github.com/jeff1evesque/m
 
 - http://localhost/machine-learning/test/php/
 
-which supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object, validated on the server-side (python), then stored into corresponding EAV database tables.
+which supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object (python), validated on the server-side (python), then stored into corresponding EAV database tables (python, MariaDB).
 
 When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will fail when creating respective json dataset representation(s). Subsequently, dataset(s) will not succeed being stored in their correponding database tables.
 
