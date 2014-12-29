@@ -223,9 +223,9 @@ The web-interface only supports SVM dataset(s) in csv, or xml format. Upon datas
 
 When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Otherwise, corresponding python scripts will fail to create the json object representation, and subsequently fail to store the dataset(s) into corresponding database tables.
 
-The following provide sample datasets of acceptable syntax for csv, and xml dataset(s):
+The following provide examples of acceptable syntax:
 
-- [csv](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
-- [xml](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
+- [csv datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
+- [xml dataset](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
 
 ###Test Scripts
