@@ -107,6 +107,10 @@ class Training:
           # 'UTC_TIMESTAMP' returns the universal UTC datetime
           sql  = 'INSERT INTO tbl_dataset_entity (uid, datetime_saved) VALUES( %d, UTC_TIMESTAMP() )'
           cursor.execute( sql, (self.uid) )
+
+          sql = 'INSERT INTO tbl_dataset_attribute (uid, attribute) VALUES( %d, %s )'
+          cursor.execute( sql, (self.uid, data_instance['indep_variable_label']) )
+
           conn.commit()
     except DB.Error, e:
       conn.rollback()
