@@ -15,9 +15,9 @@ class Training:
   #  Note: the SVM dataset, 'self.svm_data' is list of dictionary elements. One
   #        dictionary element, is represented as follows:
   #
-  #            {u'dep_variable_label': u'xxx',
-  #             u'indep_variable_label': u'xxx',
-  #             u'indep_variable_value': yy.yy}
+  #            {'dep_variable_label': u'xxx',
+  #             'indep_variable_label': u'xxx',
+  #             'indep_variable_value': yy.yy}
   #
   #        where 'xxx' denotes a unicode string, and 'yy' denotes a float value.
   def __init__(self, svm_data):
