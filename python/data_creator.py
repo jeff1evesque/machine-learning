@@ -23,6 +23,7 @@ class Training:
   def __init__(self, svm_data):
     self.svm_data    = svm_data
     self.db_settings = Database()
+    self.uid         = 1
 
   ## db_save_dataset: stores an SVM dataset into corresponding 'EAV data model'
   #                   database tables.
