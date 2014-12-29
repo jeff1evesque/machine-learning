@@ -217,4 +217,31 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 ##Testing / Execution
 
+
+###Web Interface
+
+The *web-interface* only supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object, validated on the server-side (python), then stored into corresponding EAV database tables.
+
+When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will cause corresponding python scripts to fail in creating respective json dataset representation(s). Subsequently, dataset(s) will not succeed being stored in their correponding database tables.
+
+The following provide examples of acceptable syntax:
+
+- [csv sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
+- [xml sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
+
+###Programmatic Interface
+
+When creating (sub)projects of this repository *programmatically*, it is important to leverage existing logic when possible:
+
+- [Dataset Validation](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_validator.py)
+- [Database methods](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py)
+
+The same syntax requirement for csv, or xml file(s) to json conversion is required. This means logic contained within [`svm_json.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/svm_json.py) must be implemented if such files are used. However, if using a json object (dataset representation) directly is preferred, then no conversion logic is required. Simply ensure a list of dictionary elements:
+
+```python
+[{'dep_variable_label': 'xxx', 'indep_variable_label': 'xxx', 'indep_variable_value': yy.yy}]
+```
+
+is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_creator.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py). Be sure to validate the dataset(s) as needed before storing the dataset(s) in the database.
+
 ###Test Scripts
