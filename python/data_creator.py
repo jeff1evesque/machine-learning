@@ -92,7 +92,7 @@ class Training:
       # sql format string is not a python string, hence '%s' used for all columns
       for data_instance in self.svm_data:
         sql  = 'INSERT INTO tbl_dataset_entity (entity, uid, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
-        cursor.execute( sql, (self.uid, data_instance['dep_variable_label']) )
+        cursor.execute( sql, (data_instance['dep_variable_label'], self.uid) )
 
         sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
         cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
