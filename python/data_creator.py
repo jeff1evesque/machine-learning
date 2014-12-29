@@ -111,6 +111,9 @@ class Training:
           sql = 'INSERT INTO tbl_dataset_attribute (uid, attribute) VALUES( %d, %s )'
           cursor.execute( sql, (self.uid, data_instance['indep_variable_label']) )
 
+          sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %f )'
+          cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
+
           conn.commit()
     except DB.Error, e:
       conn.rollback()
