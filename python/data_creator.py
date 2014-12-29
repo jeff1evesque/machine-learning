@@ -48,7 +48,7 @@ class Training:
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
-                 id INT NOT NULL AUTOINCREMENT PRIMARY KEY,
+                 id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                  uid INT NOT NULL,
                  entity VARCHAR (50) NOT NULL,
                  datetime_saved DATETIME
