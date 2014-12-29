@@ -68,7 +68,7 @@ class Training:
                  uid INT NOT NULL,
                  attribute VARCHAR (50) NOT NULL,
                  CONSTRAINT PK_attribute PRIMARY KEY (uid, attribute),
-                 CONSTRAINT FK_attribute FOREIGN KEY (uid) REFERENCES tbl_dataset_entity (uid)
+                 CONSTRAINT FK_attribute_entity FOREIGN KEY (uid) REFERENCES tbl_dataset_entity (uid)
                );
                '''
       cursor.execute( sql )
