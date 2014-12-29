@@ -231,7 +231,7 @@ The following provide examples of acceptable syntax:
 
 ###Programmatic Interface
 
-When creating (sub)projects of this repository *programmatically*, it is important to leverage existing logic when possible.
+When creating (sub)projects of this repository *programmatically*, it is important to leverage existing logic when possible:
 
 - [Dataset Validation](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_validator.py)
 - [Database methods](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py)
