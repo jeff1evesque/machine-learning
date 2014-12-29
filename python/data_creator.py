@@ -113,7 +113,7 @@ class Training:
         cursor.execute( sql, (self.uid, data_instance['dep_variable_label']) )
 
         sql = 'INSERT INTO tbl_dataset_attribute (id, attribute) VALUES( %s, %s )'
-        cursor.execute( sql, (auto_id, data_instance['indep_variable_label']) )
+        cursor.execute( sql, (LAST_INSERT_ID(), data_instance['indep_variable_label']) )
 
         sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
         cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
