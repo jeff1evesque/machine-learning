@@ -70,7 +70,7 @@ class Training:
       cursor = conn.cursor()
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_attribute (
-                 id_entity INT NOT NULL,
+                 id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                  attribute VARCHAR (50) NOT NULL,
                  CONSTRAINT PK_attribute PRIMARY KEY (id_entity, attribute),
                  CONSTRAINT FK_attribute_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
@@ -113,7 +113,7 @@ class Training:
         sql  = 'INSERT INTO tbl_dataset_entity (uid, entity, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (self.uid, data_instance['dep_variable_label']) )
 
-        sql = 'INSERT INTO tbl_dataset_attribute (id_entity, attribute) VALUES( LAST_INSERT_ID(), %s )'
+        sql = 'INSERT INTO tbl_dataset_attribute (attribute) VALUES( %s )'
         cursor.execute( sql, (data_instance['indep_variable_label']) )
 
         sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
