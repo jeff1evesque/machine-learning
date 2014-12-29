@@ -105,8 +105,8 @@ class Training:
       for data_instance in self.svm_data:
         print data_instance
           # 'UTC_TIMESTAMP' returns the universal UTC datetime
-          sql  = 'INSERT INTO tbl_dataset_entity (uid, datetime_saved) VALUES( self.uid, UTC_TIMESTAMP() )'
-          cursor.execute( sql )
+          sql  = 'INSERT INTO tbl_dataset_entity (uid, datetime_saved) VALUES( %d, UTC_TIMESTAMP() )'
+          cursor.execute( sql, (self.uid) )
           conn.commit()
     except DB.Error, e:
       conn.rollback()
