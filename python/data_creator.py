@@ -17,7 +17,7 @@ class Training:
   #
   #            {u'dep_variable_label': u'xxx',
   #             u'indep_variable_label': u'xxx',
-  #             u'independent_variable_value': yy.yy}
+  #             u'indep_variable_value': yy.yy}
   #
   #        where 'xxx' denotes a unicode string, and 'yy' denotes a float value.
   def __init__(self, svm_data):
