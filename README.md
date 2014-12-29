@@ -218,7 +218,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 ##Testing / Execution
 
 
-###Web-Interface
+###Web Interface
 
 The *web-interface* only supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object, validated on the server-side (python), then stored into corresponding EAV database tables.
 
@@ -229,7 +229,7 @@ The following provide examples of acceptable syntax:
 - [csv sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
 - [xml sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
 
-###Programmatic-Interface
+###Programmatic Interface
 
 When creating (sub)projects of this repository *programmatically*, it is important to leverage existing logic when possible.
 
@@ -242,6 +242,6 @@ The same syntax requirement for csv, or xml file(s) to json conversion is requir
 [{'dep_variable_label': 'xxx', 'indep_variable_label': 'xxx', 'indep_variable_value': yy.yy}]
 ```
 
-is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_creator.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py). Be sure to validate the dataset as needed before storing the dataset in the database.
+is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_creator.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py). Be sure to validate the dataset(s) as needed before storing the dataset(s) in the database.
 
 ###Test Scripts
