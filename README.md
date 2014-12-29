@@ -229,7 +229,7 @@ The following provide examples of acceptable syntax:
 - [csv sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
 - [xml sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
 
-**Note:** a sample *web-interface* page has been provided within this project:
+**Note:** a sample *web-interface* (i.e. [`index.php`](https://github.com/jeff1evesque/machine-learning/blob/master/html/machine-learning/test/php/index.php)) has been provided within this project:
 
 - http://localhost/machine-learning/test/php/
 
