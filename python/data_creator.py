@@ -72,7 +72,7 @@ class Training:
                CREATE TABLE IF NOT EXISTS tbl_dataset_attribute (
                  id_entity INT NOT NULL,
                  attribute VARCHAR (50) NOT NULL,
-                 CONSTRAINT PK_attribute PRIMARY KEY (id, attribute),
+                 CONSTRAINT PK_attribute PRIMARY KEY (id_entity, attribute),
                  CONSTRAINT FK_attribute_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
                );
                '''
