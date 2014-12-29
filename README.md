@@ -237,7 +237,7 @@ When creating (sub)projects of this repository, it is important to leverage exis
 - [Dataset Validation](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_validator.py)
 - [Database methods](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py)
 
-The same syntax requirement for csv, or xml file(s) to json conversion is required. This means logic contained within [`svm_json.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/svm_json.py) must be implemented if such files are used. However, if using a json object directly is preferred, then no conversion logic is required. Simply ensure a list of dictionary elements:
+The same syntax requirement for csv, or xml file(s) to json conversion is required. This means logic contained within [`svm_json.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/svm_json.py) must be implemented if such files are used. However, if using a json object (dataset representation) directly is preferred, then no conversion logic is required. Simply ensure a list of dictionary elements:
 
 ```python
 [{'dep_variable_label': 'xxx', 'indep_variable_label': 'xxx', 'indep_variable_value': yy.yy}]
