@@ -228,7 +228,7 @@ which supports SVM dataset(s) in csv, or xml format. Upon dataset submission (i.
 
 When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored in their correponding database tables.
 
-The following provide examples of acceptable syntax:
+The following are acceptable syntax:
 
 - [csv sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/csv)
 - [xml sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/test/xml)
