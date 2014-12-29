@@ -112,8 +112,8 @@ class Training:
         sql  = 'INSERT INTO tbl_dataset_entity (uid, entity, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (self.uid, data_instance['dep_variable_label']) )
 
-        sql = 'INSERT INTO tbl_dataset_attribute (uid, attribute) VALUES( %s, %s )'
-        cursor.execute( sql, (self.uid, data_instance['indep_variable_label']) )
+        sql = 'INSERT INTO tbl_dataset_attribute (id, attribute) VALUES( %s, %s )'
+        cursor.execute( sql, (auto_id, data_instance['indep_variable_label']) )
 
         sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
         cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
