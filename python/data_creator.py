@@ -103,7 +103,7 @@ class Training:
     # insert dataset values
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
-      #cursor = conn.cursor()
+      cursor = conn.cursor()
 
       for data_instance in self.svm_data:
         # 'UTC_TIMESTAMP' returns the universal UTC datetime
