@@ -224,7 +224,7 @@ This project provides a sample [web-interface](https://github.com/jeff1evesque/m
 
 - http://localhost/machine-learning/test/php/
 
-Upon dataset submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object (python), validated on the server-side (python), then stored into corresponding EAV database tables (python, mariadb).
+Specifically, the sample web-interface consists of an HTML form, where users supply necessary training, or analysis properties. During training session, users provide a csv, or xml file(s) representing the dataset(s). Upon form submission (i.e. training), the data is validated on the client-side (i.e. javascript, php), converted to a json object (python), validated on the server-side (python), then stored into corresponding EAV database tables (python, mariadb).
 
 When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored in their correponding database tables.
 
