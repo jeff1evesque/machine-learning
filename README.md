@@ -184,7 +184,7 @@ This project implements client-side validation within [`form_validator.js`](http
 
 [JSON Schema](https://pypi.python.org/pypi/jsonschema) provides an implementation to validate [JSON](http://en.wikipedia.org/wiki/JSON) data structures. When a specific element within the JSON structure fails validation, an [exception](https://wiki.python.org/moin/HandlingExceptions) is raised indicating the corresponding *error message*.
 
-The following provides additional documentation on the *schema* validation:
+Additional documentation:
 
 - http://spacetelescope.github.io/understanding-json-schema/
 - http://python-jsonschema.readthedocs.org/en/latest/
