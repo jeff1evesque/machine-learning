@@ -186,8 +186,8 @@ This project implements client-side validation within [`form_validator.js`](http
 
 Additional documentation:
 
-- http://spacetelescope.github.io/understanding-json-schema/
-- http://python-jsonschema.readthedocs.org/en/latest/
+- [Understanding JSON Schema](http://spacetelescope.github.io/understanding-json-schema/)
+- [jsonschema](http://python-jsonschema.readthedocs.org/en/latest/)
 
 This project implements *JSON Schema* validation, as a backend-validation tool. Specifically, [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py) defines acceptable *schemas* to validate against, while [`data_validator.py`](https://github.com/jeff1evesque/machine-learning/blob/52157d2f7c7255f999e822dd13ce65911d678918/python/data_validator.py#L48) implements the validation schema(s).
 
