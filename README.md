@@ -128,7 +128,7 @@ to the latest code-base, within the cloned repository branch, `NEW_BRANCH`.
 
 [Scikit-Learn](http://scikit-learn.org/stable/) is an open source [machine learning](http://en.wikipedia.org/wiki/Machine_learning) library written in the [Python](http://en.wikipedia.org/wiki/Python_(programming_language)) programming language.  Within this project, *scikit-learn* provides the ability to solve [classification](http://scikit-learn.org/stable/modules/svm.html#classification), and [regression](http://scikit-learn.org/stable/modules/svm.html#regression) problems.
 
-This repository requires *Scikit-Learn*:
+To install the required library:
 
 ```
 cd /var/www/library/scikit-learn/
@@ -240,7 +240,7 @@ When creating (sub)projects of this repository *programmatically*, it is importa
 - [Dataset validation](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_validator.py)
 - [Database methods](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py)
 
-The same syntax [requirement](https://github.com/jeff1evesque/machine-learning#web-interface) for csv, or xml file(s) to json conversion is required. This means logic contained within [`svm_json.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/svm_json.py) must be implemented if such files are used. However, if using a json object (dataset representation) directly is preferred, then no conversion logic is required. Simply ensure a list of dictionary elements:
+The same syntax [requirement](https://github.com/jeff1evesque/machine-learning#web-interface for csv, or xml file(s) to json conversion is required. This means logic contained within [`svm_json.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/svm_json.py) must be implemented if such files are used. However, if using a json object (dataset representation) directly is preferred, then no conversion logic is required. Simply ensure a list of dictionary elements:
 
 ```python
 [{'dep_variable_label': 'xxx', 'indep_variable_label': 'xxx', 'indep_variable_value': yy.yy}]
