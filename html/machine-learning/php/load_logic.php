@@ -79,8 +79,8 @@
           $flag_validator = false;
       }
 
-      if (!in_array(strtolower($this->form->svm_session_type), $arr_session_type)) {
-          print json_encode('Error: \'session_type\' must be a string value of \'training\', or \'analysis\'');
+      if (!in_array(strtolower($this->form->svm_session), $arr_session_type)) {
+          print json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\'');
           $flag_validator = false;
       }
 
@@ -91,7 +91,7 @@
         $arr_result = array('data' => $arr_result);
         $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
 
-        if ($this->form->svm_session_type == 'training') {
+        if ($this->form->svm_session == 'training') {
           $result = shell_command('python ../../../python/svm_training.py', json_encode($arr_result));
         }
         else {
