@@ -25,12 +25,6 @@ class Training:
     self.db_settings = Database()
     self.uid         = 1
 
-  ## db_save_dataset_entity: stores an SVM dataset into corresponding 'EAV data model'
-  #                          database table.
-  #
-  #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
-  def db_save_dataset_entity(self):
-
     # create 'db_machine_learning' database if doesn't exist
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
@@ -43,6 +37,12 @@ class Training:
     finally:
       if conn:
         conn.close()
+
+  ## db_save_dataset_entity: stores an SVM dataset into corresponding 'EAV data model'
+  #                          database table.
+  #
+  #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
+  def db_save_dataset_entity(self):
 
     # create 'tbl_dataset_entity' table if doesn't exist
     try:
