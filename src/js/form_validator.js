@@ -72,6 +72,10 @@
         svm_session: {
           equals: ['training', 'analysis']
         },
+        svm_title: {
+          textOnly: true,
+          minlength:1,
+        },
         svm_dataset_type: {
           equals: ['upload file', 'xml file']
         },
@@ -85,6 +89,7 @@
       },
       messages: {
         svm_session: 'Not acceptable value',
+        svm_title: 'Not acceptable value',
         svm_dataset_type: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
         'svm_indep_variable[]': 'Must be type string',
