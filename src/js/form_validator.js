@@ -73,8 +73,8 @@
           equals: ['training', 'analysis']
         },
         svm_title: {
-          textOnly: true,
-          minlength:1,
+          required: true,
+          textOnly: true          
         },
         svm_dataset_type: {
           equals: ['upload file', 'xml file']
@@ -83,16 +83,16 @@
           equals: ['classification', 'regression']
         },
         'svm_indep_variable[]': {
-          textOnly: true,
-          minlength:1,
+          required: true,
+          textOnly: true
         },
       },
       messages: {
         svm_session: 'Not acceptable value',
-        svm_title: 'Not acceptable value',
+        svm_title: 'Must be nonempty string',
         svm_dataset_type: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
-        'svm_indep_variable[]': 'Must be type string',
+        'svm_indep_variable[]': 'Must be nonempty string',
       },
     });
   });
