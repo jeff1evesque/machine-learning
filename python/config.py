@@ -79,7 +79,7 @@ def jsonschema_training():
             'properties': {
               'svm_title': {
                 'type': 'string',
-                'minLength': 10
+                'minLength': 1
               },
               'svm_dataset_type': { 
                 'type': 'string',
