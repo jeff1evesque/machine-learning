@@ -31,7 +31,7 @@
           <option value='training'>Training</option>
           <option value='analysis'>Analysis</option>
         </select>
-      </fieldset><br>
+      </fieldset>
 
     </form>
 
