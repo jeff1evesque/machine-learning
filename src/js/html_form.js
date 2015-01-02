@@ -60,7 +60,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      else if ( $(this).val().toLowerCase() == 'xml file'  ) {
+      else if ( $.inArray( $('select[name="svm_model_type"] option:selected').text().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"] option:selected').text().toLowerCase() == 'xml file' && $('input[name="svm_title"]').val().length !== 0 ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
