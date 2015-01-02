@@ -17,6 +17,7 @@ $(document).ready(function() {
               <legend>Select Model</legend>\
               <p>Select which previously stored analysis model to implement.</p>\
               <select name="svm_model_type">\
+                <option value="none" selected="selected">--Select--</option>\
                 <option value="classification">classification</option>\
                 <option value="regression">regression</option>\
               </select>\
@@ -33,10 +34,12 @@ $(document).ready(function() {
               <p>Please save the <i>Session Name</i>, then provide the <i>Training Type</i>, followed by the <i>Dataset Type</i></p>\
               <input type="text" name="svm_title" placeholder="Session Name">\
               <select name="svm_model_type">\
+                <option value="none" selected="selected">--Select--</option>\
                 <option value="classification">classification</option>\
                 <option value="regression">regression</option>\
               </select>\
               <select name="svm_dataset_type">\
+                <option value="none" selected="selected">--Select--</option>\
                 <option value="upload file">upload file</option>\
                 <option value="xml file">xml file</option>\
               </select>\
