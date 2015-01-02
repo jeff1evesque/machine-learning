@@ -86,8 +86,8 @@ $(document).ready(function() {
     });
 
   // append 'Known Factors' fieldset
-    $('.fieldset_select_model').on('input', 'input[name="svm_model_type"]', function() {
-      if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
+    $('.fieldset_select_model').on('change', 'select[name="svm_model_type"]', function() {
+      if ( $.inArray( $(this option:selected).text().toLowerCase(), ['classification', 'regression']) !== -1 ) {
         obj_form.analysis = '\
             <fieldset class="fieldset_known_factors">\
               <legend>Known Factors</legend>\
