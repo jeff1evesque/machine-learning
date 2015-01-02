@@ -74,7 +74,7 @@ class Training:
                  id_entity INT NOT NULL,
                  dep_variable VARCHAR (50) NOT NULL,
                  indep_variable VARCHAR (50) NOT NULL,
-                 value FLOAT NULL,
+                 value FLOAT NOT NULL,
                  CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
                );
                '''
