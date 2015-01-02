@@ -69,6 +69,7 @@
       $arr_dataset_type = Array('upload file', 'xml file');
       $arr_session_type = Array('training', 'analysis');
 
+    // form validation
       if (!in_array(strtolower($this->form->svm_model_type), $arr_model_type)) {
           print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\'');
           $flag_validator = false;
@@ -101,6 +102,7 @@
     // Return JSON result(s) from python script
         print json_encode($result);
       }
+
       else {
         print json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') );
       }
