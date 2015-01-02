@@ -71,6 +71,7 @@ class Training:
       sql    = '''\
                CREATE TABLE IF NOT EXISTS tbl_dataset_value (
                  id_attribute INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                 id_entity INT NOT NULL,
                  attribute VARCHAR (50) NOT NULL,
                  value FLOAT NULL,
                  CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
