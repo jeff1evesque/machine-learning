@@ -64,28 +64,6 @@ class Training:
       if conn:
         conn.close()
 
-    # create 'tbl_dataset_value' table if doesn't exist
-    try:
-      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
-      cursor = conn.cursor()
-      sql    = '''\
-               CREATE TABLE IF NOT EXISTS tbl_dataset_value (
-                 id_attribute INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                 id_entity INT NOT NULL,
-                 dep_variable_label VARCHAR (50) NOT NULL,
-                 indep_variable_label VARCHAR (50) NOT NULL,
-                 indep_variable_value FLOAT NOT NULL,
-                 CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
-               );
-               '''
-      cursor.execute( sql )
-    except DB.Error, e:
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
-    finally:
-      if conn:
-        conn.close()
-
     # insert dataset values
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
@@ -111,6 +89,28 @@ class Training:
   ## db_save_dataset_value: stores an SVM dataset into corresponding 'EAV data model'
   #                         database table.
   def db_save_dataset_value(self):
+
+    # create 'tbl_dataset_value' table if doesn't exist
+    try:
+      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
+      cursor = conn.cursor()
+      sql    = '''\
+               CREATE TABLE IF NOT EXISTS tbl_dataset_value (
+                 id_attribute INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                 id_entity INT NOT NULL,
+                 dep_variable_label VARCHAR (50) NOT NULL,
+                 indep_variable_label VARCHAR (50) NOT NULL,
+                 indep_variable_value FLOAT NOT NULL,
+                 CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
+               );
+               '''
+      cursor.execute( sql )
+    except DB.Error, e:
+      print "Error %d: %s" % (e.args[0], e.args[1])
+      return False
+    finally:
+      if conn:
+        conn.close()
 
 ## Class: Analysis
 class Analysis:
