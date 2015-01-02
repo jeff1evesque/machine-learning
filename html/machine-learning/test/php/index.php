@@ -23,7 +23,6 @@
   <body>
 
     <form action='../../php/load_logic.php' method='post'>
-
       <fieldset class='fieldset_session_type'>
         <legend>Session Type</legend>
         <p>Select whether the current session will be <i>training</i>, or <i>analysis</i>.</p>
@@ -32,7 +31,6 @@
           <option value='analysis'>Analysis</option>
         </select>
       </fieldset>
-
     </form>
 
   </body>
