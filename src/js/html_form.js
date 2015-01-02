@@ -52,7 +52,6 @@ $(document).ready(function() {
 
   // append 'Supply Dataset' fieldset
     $('.fieldset_dataset_type').on('input change', 'select[name="svm_dataset_type"], input[name="svm_title"], select[name="svm_model_type"]', function() {
-      console.log('yes');
       if ( $.inArray( $('select[name="svm_model_type"] option:selected').text().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"] option:selected').text().toLowerCase() == 'upload file' && $('input[name="svm_title"]').val().length !== 0 ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
