@@ -8,7 +8,7 @@ $(document).ready(function() {
   var obj_form = {};
 
 // append session fieldset
-  $('.fieldset_session_type').on('input', 'input[name="svm_session"]', function() {
+  $('.fieldset_session_type').on('change', 'select[name="svm_session"]', function() {
     if ( $(this).val().toLowerCase() == 'analysis' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_analysis">\
