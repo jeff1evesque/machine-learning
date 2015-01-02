@@ -69,81 +69,32 @@
       $arr_dataset_type = Array('upload file', 'xml file');
       $arr_session_type = Array('training', 'analysis');
 
-    // HTML5 datalist supported: remove 'session_type'
-      if ($this->form->datalist_support && mb_check_encoding($this->form->datalist_support, 'UTF-8')) {
-        if (in_array(strtolower($this->form->svm_session), $arr_session_type)) {
-          $session_type = $this->form->svm_session;
-          unset($this->form->session_type);
+    // form validation
+      if (isset($this->form->svm_session)) {
+        if (!in_array(strtolower($this->form->svm_session), $arr_session_type)) {
+            print json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\'');
+            $flag_validator = false;
+        }
+      }
+
+    // Build JSON array, and send to python script
+      if ($flag_validator) {
+        $arr_result = array('result' => $this->form);
+        $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->form->svm_session_type), $arr_result);
+        $arr_result = array('data' => $arr_result);
+        $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
+
+        if ($this->form->svm_session == 'training') {
+          $result = shell_command('python ../../../python/svm_training.py', json_encode($arr_result));
         }
         else {
-          print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
-          $flag_validator = false;
+          $result = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
         }
-      }
-    // HTML5 datalist not supported: use counterpart, remove 'session_type'
-      elseif (!$this->form->datalist_support && mb_check_encoding($this->form->datalist_support, 'UTF-8')) {
-        if (in_array(strtolower($this->form->svm_session), $arr_session_type)) {
-          $session_type            = $this->form->session_type;
-          $this->form->svm_session = $session_type;
-          unset($this->form->session_type);
-        }
-        else {
-          print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
-          $flag_validator = false;
-        }
-      }
-      else {
-        print json_encode('Error: \'datalist_support\' must be a \'UTF-8\' string value');
-        $flag_validator = false;
+
+    // Return JSON result(s) from python script
+        print json_encode($result);
       }
 
-      if ($session_type == 'training' && in_array(strtolower($this->form->svm_session), $arr_session_type)) {
-      // Use HTML5 datalist fallback 'training_type'
-        if (in_array(strtolower($this->form->model_type), $arr_model_type) && in_array(strtolower($this->form->dataset_type), $arr_dataset_type)) {
-          $this->form->svm_model_type   = $this->form->model_type;
-          $this->form->svm_dataset_type = $this->form->dataset_type;
-          unset($this->form->model_type);
-          unset($this->form->dataset_type);
-
-        // Build JSON array, and send to python script
-          if ($flag_validator) {
-            $arr_result = array('result' => $this->form);
-            $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to training'), $arr_result);
-            $arr_result = array('data' => $arr_result);
-            $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
-            $result = shell_command('python ../../../python/svm_training.py', json_encode($arr_result));
-
-          // Return JSON result(s) from python script
-            print json_encode($result);
-          }
-        }
-        else {
-          print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\', and \'dataset_type\' must be a string value of \'upload file\', or \'xml file\'');
-          $flag_validator = false;
-        }
-      }
-      elseif ($session_type == 'analysis' && in_array(strtolower($this->form->svm_session), $arr_session_type)) {
-      // Use HTML5 datalist fallback 'analysis_models'
-        if (in_array(strtolower($this->form->model_type), $arr_model_type)) {
-          $this->form->svm_model_type = $this->form->model_type;
-          unset($this->form->model_type);
-
-        // Build JSON array, and send to python script
-          if ($flag_validator) {
-            $arr_result = array('result' => $this->form);
-            $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to analysis'), $arr_result);
-            $arr_result = array('data' => $arr_result);
-            $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
-            $result     = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
-
-          // Return JSON result(s) from python script
-            print json_encode($result);
-          }
-        }
-        else {
-          print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\', and \'dataset_type\' must be a string value of \'upload file\', or \'xml file\'');
-        }
-      }
       else {
         print json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') );
       }
