@@ -70,19 +70,11 @@
       $arr_session_type = Array('training', 'analysis');
 
     // form validation
-      if (!in_array(strtolower($this->form->svm_model_type), $arr_model_type)) {
-          print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\'');
-          $flag_validator = false;
-      }
-
-      if (!in_array(strtolower($this->form->svm_dataset_type), $arr_dataset_type)) {
-          print json_encode('Error: \'dataset_type\' must be a string value of \'upload file\', or \'xml file\'');
-          $flag_validator = false;
-      }
-
-      if (!in_array(strtolower($this->form->svm_session), $arr_session_type)) {
-          print json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\'');
-          $flag_validator = false;
+      if (isset($this->form->svm_session)) {
+        if (!in_array(strtolower($this->form->svm_session), $arr_session_type)) {
+            print json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\'');
+            $flag_validator = false;
+        }
       }
 
     // Build JSON array, and send to python script
