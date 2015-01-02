@@ -32,7 +32,7 @@ $(document).ready(function() {
           <fieldset class="fieldset_session_training">\
             <legend>Training Session</legend>\
             <fieldset class="fieldset_dataset_type">\
-              <legend>Dataset Type</legend>\
+              <legend>Configurations</legend>\
               <p>Select whether the current training session will <i>upload a file</i>, or use an <i>XML file</i> for its dataset.</p>\
               <input type="text" name="svm_title" placeholder="Session Name">\
               <input list="model_type" name="svm_model_type" placeholder="Training Type">\
