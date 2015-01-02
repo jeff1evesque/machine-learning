@@ -8,7 +8,7 @@ $(document).ready(function() {
   var obj_form = {};
 
 // append session fieldset
-  $('.fieldset_session_type').on('input', 'input[name="svm_session"]', function() {
+  $('.fieldset_session_type').on('change', 'select[name="svm_session"]', function() {
     if ( $(this).val().toLowerCase() == 'analysis' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_analysis">\
@@ -16,13 +16,11 @@ $(document).ready(function() {
             <fieldset class="fieldset_select_model">\
               <legend>Select Model</legend>\
               <p>Select which previously stored analysis model to implement.</p>\
-              <input list="model_type" name="svm_model_type" placeholder="Analysis Model">\
-              <datalist id="model_type">\
-                <select name="model_type" required>\
-                  <option value="classification">classification</option>\
-                  <option value="regression">regression</option>\
-                </select>\
-              </datalist>\
+              <select name="svm_model_type">\
+                <option value="none" selected="selected">--Select--</option>\
+                <option value="classification">Classification</option>\
+                <option value="regression">Regression</option>\
+              </select>\
             </fieldset>\
           </fieldset><br>\
         ';
@@ -35,20 +33,16 @@ $(document).ready(function() {
               <legend>Configurations</legend>\
               <p>Please save the <i>Session Name</i>, then provide the <i>Training Type</i>, followed by the <i>Dataset Type</i></p>\
               <input type="text" name="svm_title" placeholder="Session Name">\
-              <input list="model_type" name="svm_model_type" placeholder="Training Type">\
-              <datalist id="model_type">\
-                <select name="model_type" required>\
-                  <option value="classification">classification</option>\
-                  <option value="regression">regression</option>\
-                </select>\
-              </datalist>\
-              <input list="dataset_type" name="svm_dataset_type" placeholder="Dataset Type">\
-              <datalist id="dataset_type">\
-                <select name="dataset_type" required>\
-                  <option value="upload file">upload file</option>\
-                  <option value="xml file">xml file</option>\
-                </select>\
-              </datalist>\
+              <select name="svm_model_type">\
+                <option value="none" selected="selected">--Select--</option>\
+                <option value="classification">Classification</option>\
+                <option value="regression">Regression</option>\
+              </select>\
+              <select name="svm_dataset_type">\
+                <option value="none" selected="selected">--Select--</option>\
+                <option value="upload file">Upload file</option>\
+                <option value="xml file">XML url</option>\
+              </select>\
             </fieldset>\
           </fieldset>\
         ';
@@ -57,8 +51,8 @@ $(document).ready(function() {
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // append 'Supply Dataset' fieldset
-    $('.fieldset_dataset_type').on('input', 'input[name="svm_dataset_type"], input[name="svm_title"], input[name="svm_model_type"]', function() {
-      if ( $('input[name="svm_dataset_type"]').val().toLowerCase() == 'upload file' && $('input[name="svm_title"]').val().length !== 0 && $.inArray( $('input[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 ) {
+    $('.fieldset_dataset_type').on('input change', 'select[name="svm_dataset_type"], input[name="svm_title"], select[name="svm_model_type"]', function() {
+      if ( $.inArray( $('select[name="svm_model_type"] option:selected').text().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"] option:selected').text().toLowerCase() == 'upload file' && $('input[name="svm_title"]').val().length !== 0 ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
@@ -69,7 +63,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      else if ( $(this).val().toLowerCase() == 'xml file'  ) {
+      else if ( $.inArray( $('select[name="svm_model_type"] option:selected').text().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"] option:selected').text().toLowerCase() == 'xml file' && $('input[name="svm_title"]').val().length !== 0 ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
@@ -95,8 +89,8 @@ $(document).ready(function() {
     });
 
   // append 'Known Factors' fieldset
-    $('.fieldset_select_model').on('input', 'input[name="svm_model_type"]', function() {
-      if ( $.inArray( $(this).val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
+    $('.fieldset_select_model').on('change', 'select[name="svm_model_type"]', function() {
+      if ( $.inArray( $('select[name="svm_model_type"] option:selected').text().toLowerCase(), ['classification', 'regression']) !== -1 ) {
         obj_form.analysis = '\
             <fieldset class="fieldset_known_factors">\
               <legend>Known Factors</legend>\
