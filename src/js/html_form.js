@@ -99,7 +99,7 @@ $(document).ready(function() {
 
    // append 'Training Parameters' fieldset
         $('.fieldset_training_type').on('input', 'input[name="svm_model_type"], input[name="svm_title"]', function() {
-          if ( $.inArray( $('input[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 ) {
+          if ( $('input[name="svm_title"]').val().length !== 0 && $.inArray( $('input[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 ) {
             obj_form.submit = '<input type="submit" class="svm_form_submit">';
             build_form('.fieldset_session_training', obj_form.submit, ['.svm_form_submit']);
           }
