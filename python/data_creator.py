@@ -25,11 +25,11 @@ class Training:
     self.db_settings = Database()
     self.uid         = 1
 
-  ## db_save_dataset: stores an SVM dataset into corresponding 'EAV data model'
-  #                   database tables.
+  ## db_save_dataset_entity: stores an SVM dataset into corresponding 'EAV data model'
+  #                          database table.
   #
   #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
-  def db_save_dataset(self):
+  def db_save_dataset_entity(self):
 
     # create 'db_machine_learning' database if doesn't exist
     try:
@@ -72,9 +72,9 @@ class Training:
                CREATE TABLE IF NOT EXISTS tbl_dataset_value (
                  id_attribute INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                  id_entity INT NOT NULL,
-                 dep_variable VARCHAR (50) NOT NULL,
-                 indep_variable VARCHAR (50) NOT NULL,
-                 value FLOAT NOT NULL,
+                 dep_variable_label VARCHAR (50) NOT NULL,
+                 indep_variable_label VARCHAR (50) NOT NULL,
+                 indep_variable_value FLOAT NOT NULL,
                  CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
                );
                '''
@@ -93,7 +93,7 @@ class Training:
 
       # sql format string is not a python string, hence '%s' used for all columns
       for data_instance in self.svm_data:
-        sql  = 'INSERT INTO tbl_dataset_entity (entity, uid, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
+        sql  = 'INSERT INTO tbl_dataset_entity (title, uid, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (data_instance['dep_variable_label'], self.uid) )
 
         sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
