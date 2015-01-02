@@ -77,9 +77,9 @@ def jsonschema_training():
           'result': {
             'type': 'object',
             'properties': {
-              'datalist_support': {
+              'svm_title': {
                 'type': 'string',
-                'enum': ['true', 'false']
+                'minLength': 1
               },
               'svm_dataset_type': { 
                 'type': 'string',
