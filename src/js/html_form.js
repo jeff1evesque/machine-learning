@@ -61,7 +61,7 @@ $(document).ready(function() {
       if ( $('input[name="svm_dataset_type"]').val().toLowerCase() == 'upload file' && $('input[name="svm_title"]').val().length !== 0 && $.inArray( $('input[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
-              <legend>Dataset</legend>\
+              <legend>Supply Dataset</legend>\
               <input type="file" name="svm_dataset[]" class="svm_dataset_file">\
               <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
               <input type="button" value="Remove" class="remove_element svm_dataset_file_remove">\
@@ -72,7 +72,7 @@ $(document).ready(function() {
       else if ( $(this).val().toLowerCase() == 'xml file'  ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
-              <legend>Dataset</legend>\
+              <legend>Supply Dataset</legend>\
               <input type="url" name="svm_dataset[]" placeholder="XML Dataset URL" class="svm_dataset_xml">\
               <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
               <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove">\
