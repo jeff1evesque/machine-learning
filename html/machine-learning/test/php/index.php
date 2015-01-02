@@ -27,6 +27,7 @@
         <legend>Session Type</legend>
         <p>Select whether the current session will be <i>training</i>, or <i>analysis</i>.</p>
         <select name='svm_session'>
+          <option value='none' selected='selected'>--Select--</option>
           <option value='training'>Training</option>
           <option value='analysis'>Analysis</option>
         </select>
