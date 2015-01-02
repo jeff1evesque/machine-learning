@@ -52,7 +52,6 @@ class Training:
                CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
                  id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                  title VARCHAR (50) NOT NULL,
-                 entity VARCHAR (50) NOT NULL,
                  uid INT NOT NULL,
                  datetime_saved DATETIME
                );
