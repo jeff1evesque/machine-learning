@@ -57,8 +57,8 @@ $(document).ready(function() {
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // append 'Supply Dataset' fieldset
-    $('.fieldset_dataset_type').on('input', 'input[name="svm_dataset_type"]', function() {
-      if ( $(this).val().toLowerCase() == 'upload file' ) {
+    $('.fieldset_dataset_type').on('input', 'input[name="svm_dataset_type"], input[name="svm_title"], input[name="svm_model_type"]', function() {
+      if ( $('input[name="svm_dataset_type"]').val().toLowerCase() == 'upload file' && $('input[name="svm_title"]').val().length !== 0 && $.inArray( $('input[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
@@ -87,24 +87,10 @@ $(document).ready(function() {
         var flag_field = field_determinant( $('input[name="svm_dataset[]"]') );
 
         if( flag_field ) {
-          obj_form.training_type = '\
-              <fieldset class="fieldset_training_type">\
-                <legend>Training Type</legend>\
-                <p>Provide the session name, and select the training type.</p>\
-              </fieldset>\
-            ';
+          obj_form.submit = '<input type="submit" class="svm_form_submit">';
+          build_form('.fieldset_session_training', obj_form.submit, ['.svm_form_submit']);
         }
-        else obj_form.training_type = null;
-        build_form('.fieldset_supply_dataset', obj_form.training_type, ['.fieldset_training_type', '.fieldset_training_parameters', '.svm_form_submit']);
-
-   // append 'Training Parameters' fieldset
-        $('.fieldset_training_type').on('input', 'input[name="svm_model_type"], input[name="svm_title"]', function() {
-          if ( $('input[name="svm_title"]').val().length !== 0 && $.inArray( $('input[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 ) {
-            obj_form.submit = '<input type="submit" class="svm_form_submit">';
-            build_form('.fieldset_session_training', obj_form.submit, ['.svm_form_submit']);
-          }
-          else $('.svm_form_submit').remove();
-        });
+        else $('.svm_form_submit').remove();
       });
     });
 
