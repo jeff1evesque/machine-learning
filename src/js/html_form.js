@@ -82,6 +82,7 @@ $(document).ready(function() {
           obj_form.training_type = '\
               <fieldset class="fieldset_training_type">\
                 <legend>Training Type</legend>\
+                <input type="text" name="svm_title">\
                 <p>Select whether the current training session is <i>classification</i>, or <i>regression</i>.</p>\
                 <input list="model_type" name="svm_model_type" placeholder="Training Type">\
                 <datalist id="model_type">\
