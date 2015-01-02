@@ -36,7 +36,7 @@ $(document).ready(function() {
                 <option value="classification">classification</option>\
                 <option value="regression">regression</option>\
               </select>\
-              <select name="svm_dataset_type" required>\
+              <select name="svm_dataset_type">\
                 <option value="upload file">upload file</option>\
                 <option value="xml file">xml file</option>\
               </select>\
