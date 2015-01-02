@@ -69,11 +69,6 @@
       $arr_dataset_type = Array('upload file', 'xml file');
       $arr_session_type = Array('training', 'analysis');
 
-      if (!in_array(strtolower($this->form->svm_session), $arr_session_type)) {
-        print json_encode('Error: \'session_type\' must be string value of \'training\', or \'analysis\'');
-        $flag_validator = false;
-      }
-
       if (!in_array(strtolower($this->form->svm_model_type), $arr_model_type)) {
           print json_encode('Error: \'model_type\' must be string value of \'classification\', or \'regression\'');
           $flag_validator = false;
