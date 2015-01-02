@@ -34,6 +34,14 @@ $(document).ready(function() {
             <fieldset class="fieldset_dataset_type">\
               <legend>Dataset Type</legend>\
               <p>Select whether the current training session will <i>upload a file</i>, or use an <i>XML file</i> for its dataset.</p>\
+              <input type="text" name="svm_title" placeholder="Session Name">\
+              <input list="model_type" name="svm_model_type" placeholder="Training Type">\
+              <datalist id="model_type">\
+                <select name="model_type" required>\
+                  <option value="classification">classification</option>\
+                  <option value="regression">regression</option>\
+                </select>\
+              </datalist>\
               <input list="dataset_type" name="svm_dataset_type" placeholder="Dataset Type">\
               <datalist id="dataset_type">\
                 <select name="dataset_type" required>\
@@ -83,14 +91,6 @@ $(document).ready(function() {
               <fieldset class="fieldset_training_type">\
                 <legend>Training Type</legend>\
                 <p>Provide the session name, and select the training type.</p>\
-                <input type="text" name="svm_title" placeholder="Session Name">\
-                <input list="model_type" name="svm_model_type" placeholder="Training Type">\
-                <datalist id="model_type">\
-                  <select name="model_type" required>\
-                    <option value="classification">classification</option>\
-                    <option value="regression">regression</option>\
-                  </select>\
-                </datalist>\
               </fieldset>\
             ';
         }
