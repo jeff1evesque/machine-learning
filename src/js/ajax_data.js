@@ -40,6 +40,19 @@ $(document).ready(function() {
         dataType: 'json',
         contentType: false,
         processData: false,
+        beforeSend: function() {
+
+        // ajax overlay
+          ajaxLoader( $(event.currentTarget) );
+
+        // form validation
+          $("form").validate({
+            submitHandler: function(form) {
+              $(form).ajaxSubmit();
+            }
+          });
+
+        }
       }).done(function(data) {
   // JSON object from Server
         json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
@@ -63,19 +76,6 @@ $(document).ready(function() {
       type: 'POST',
       data : data_formatted,
       dataType : 'json',
-      beforeSend: function() {
-
-    // ajax overlay
-        ajaxLoader( $(event.currentTarget) );
-
-    // form validation
-        $("form").validate({
-          submitHandler: function(form) {
-            $(form).ajaxSubmit();
-          }
-        });
-
-      }
     }).done(function(data) {
   // JSON object from Server
       json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
