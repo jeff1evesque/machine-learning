@@ -56,6 +56,8 @@ if len(sys.argv) > 1:
       # convert each dataset as json, validate, and store in database
       else:
         json_dataset = {}
+        svm_property = sys.argv[1]
+        print svm_property
 
         for val in json_file_upload['file_upload']:
           # csv to json
