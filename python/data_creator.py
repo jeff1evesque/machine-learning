@@ -74,9 +74,6 @@ class Training:
         sql  = 'INSERT INTO tbl_dataset_entity (title, uid, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (data_instance['dep_variable_label'], self.uid) )
 
-        sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
-        cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
-
         conn.commit()
     except DB.Error, e:
       conn.rollback()
@@ -106,6 +103,25 @@ class Training:
                '''
       cursor.execute( sql )
     except DB.Error, e:
+      print "Error %d: %s" % (e.args[0], e.args[1])
+      return False
+    finally:
+      if conn:
+        conn.close()
+
+    # insert dataset values
+    try:
+      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
+      cursor = conn.cursor()
+
+      # sql format string is not a python string, hence '%s' used for all columns
+      for data_instance in self.svm_data:
+        sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
+        cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
+
+        conn.commit()
+    except DB.Error, e:
+      conn.rollback()
       print "Error %d: %s" % (e.args[0], e.args[1])
       return False
     finally:
