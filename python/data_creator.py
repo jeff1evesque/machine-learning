@@ -71,7 +71,7 @@ class Training:
 
       # sql format string is not a python string, hence '%s' used for all columns
       sql  = 'INSERT INTO tbl_dataset_entity (title, uid, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
-      cursor.execute( sql, (data_instance['dep_variable_label'], self.uid) )
+      cursor.execute( sql, (self.svm_data['title'], self.svm_data['uid']) )
 
       conn.commit()
     except DB.Error, e:
