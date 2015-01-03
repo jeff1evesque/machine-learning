@@ -45,7 +45,7 @@ class Training:
   #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
   def db_save_training(self):
 
-    # create 'tbl_dataset_entity' table if doesn't exist
+    # create 'type' table if doesn't exist
     try:
       conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
       cursor = conn.cursor()
