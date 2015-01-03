@@ -15,7 +15,7 @@ $(document).ready(function() {
   // serialize data into array (not file-uploads)
     var data_formatted = $('form').serializeArray();
 
-  // store 'file upload(s)' in array
+  // store 'file upload(s)' into array
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
       $( dataset ).each(function( index ) {
         var file_data = dataset[index].files[0];
