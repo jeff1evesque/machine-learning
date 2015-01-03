@@ -20,9 +20,9 @@ class Training:
   #             'indep_variable_value': yy.yy}
   #
   #        where 'xxx' denotes a unicode string, and 'yy' denotes a float value.
-  def __init__(self, svm_data, command):
+  def __init__(self, svm_data, cmd=None):
     self.svm_data    = svm_data
-    self.svm_cmd     = command
+    self.svm_cmd     = cmd
     self.db_settings = Database()
     self.uid         = 1
 
