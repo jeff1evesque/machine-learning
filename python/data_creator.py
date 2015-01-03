@@ -115,8 +115,8 @@ class Training:
 
       # sql format string is not a python string, hence '%s' used for all columns
       for data_instance in self.svm_data:
-        sql = 'INSERT INTO tbl_dataset_value (attribute, value) VALUES( %s, %s )'
-        cursor.execute( sql, (data_instance['indep_variable_label'], data_instance['indep_variable_value']) )
+        sql = 'INSERT INTO tbl_dataset_value (entity_id, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
+        cursor.execute( sql, (data_instance['svm_property']['entity_id'], data_instance['svm_dataset']['dep_variable_label'], data_instance['svm_dataset']['indep_variable_label'], data_instance['svm_dataset']['indep_variable_value']) )
 
         conn.commit()
     except DB.Error, e:
