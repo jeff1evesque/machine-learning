@@ -100,7 +100,9 @@ class Training:
       return False
     finally:
       if conn:
+        rowid = cursor.lastrowid
         conn.close()
+        return rowid
 
 ## Class: Analysis
 class Analysis:
