@@ -1,6 +1,6 @@
 /**
- * ajax_data.js: this script utilizes ajax to relay the form POST data, specifically,
- *               'file uploads' to a defined 'action' script.
+ * ajax_data.js: this script utilizes ajax to relay the form POST data, to a defined
+ *               'action' script.
  *
  * @contentType, the content type, some refer to as the 'MIME', is used when sending
  *    data to the server. The Default is 'application/x-www-form-urlencoded'. Setting
