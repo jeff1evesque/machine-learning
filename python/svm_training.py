@@ -41,7 +41,7 @@ if len(sys.argv) > 1:
 
   validator = Validator( sys.argv[1], 'training' )
 
-  # validate input data (not dataset)
+  # validate input data (not dataset), and store in database
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
     Training( sys.argv[1] )
