@@ -54,9 +54,14 @@ $(document).ready(function() {
 
         }
       }).done(function(data) {
-  // JSON object from Server
+
+      // JSON object from Server
         json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
         console.log( 'JSON object from Server: ' + json_server );
+
+      // remove ajax overlay
+        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+
       }).fail(function(jqXHR, textStatus, errorThrown) {
         console.log('Error Thrown: '+errorThrown);
         console.log('Error Status: '+textStatus);
@@ -107,8 +112,6 @@ $(document).ready(function() {
         $('form').prepend(msg_error);
       }
 
-  // remove ajax overlay
-      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     }).fail(function(jqXHR, textStatus, errorThrown) {
       $('form .fieldset_error').remove();
 
