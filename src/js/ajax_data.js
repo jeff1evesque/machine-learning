@@ -37,7 +37,7 @@ $(document).ready(function() {
   // AJAX Process
     if ( flag_ajax ) {
       $.ajax({
-        url: '../../php/load_dataset.php',
+        url: $(this).attr('action'),
         type: 'POST',
         data: ajax_data,
         dataType: 'json',
