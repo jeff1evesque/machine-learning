@@ -44,9 +44,8 @@ if len(sys.argv) > 1:
   # validate input data (not dataset), and store in database
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
-    Training( sys.argv[1] )
-
     svm_entity = {'title': json.loads(sys.argv[1])['data']['result'].get('svm_title', None), 'uid': 1}
+    Training( svm_entity, 'save_entity' )
 
   # validate, and store dataset
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
