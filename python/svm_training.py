@@ -57,6 +57,7 @@ if len(sys.argv) > 1:
       # convert each dataset as json, validate, and store in database
       else:
         json_dataset = {}
+
         for val in json_file_upload['file_upload']:
           # csv to json
           if val['type'] in ('text/plain', 'text/csv'):
@@ -67,7 +68,7 @@ if len(sys.argv) > 1:
               json_validated.dataset_validation()
 
               db_save = Training( json_dataset )
-              db_save.db_save_dataset()
+              db_save.db_save_training()
             except Exception as e:
               print e
               sys.exit()
@@ -81,7 +82,7 @@ if len(sys.argv) > 1:
               json_validated.dataset_validation()
 
               db_save = Training( json_dataset )
-              db_save.db_save_dataset()
+              db_save.db_save_training()
             except Exception as e:
               print e
               sys.exit()
