@@ -31,6 +31,8 @@ $(document).ready(function() {
       }
     });
 
+  // Combine 'form_data' (file-uploads) with 'data_formatted' (form data)
+
   // AJAX Process
     if ( flag_ajax ) {
       $.ajax({
