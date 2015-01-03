@@ -91,7 +91,7 @@ class Training:
 
       elif self.svm_cmd == 'save_value':
         sql = 'INSERT INTO tbl_dataset_value (entity_id, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
-        cursor.execute( sql, (data_instance['svm_property']['entity_id'], data_instance['svm_dataset']['dep_variable_label'], data_instance['svm_dataset']['indep_variable_label'], data_instance['svm_dataset']['indep_variable_value']) )
+        cursor.execute( sql, (self.svm_data['entity_id'], self.svm_data['svm_dataset']['dep_variable_label'], self.svm_data['svm_dataset']['indep_variable_label'], self.svm_data['svm_dataset']['indep_variable_value']) )
 
       conn.commit()
     except DB.Error, e:
@@ -100,7 +100,9 @@ class Training:
       return False
     finally:
       if conn:
+        rowid = cursor.lastrowid
         conn.close()
+        return rowid
 
 ## Class: Analysis
 class Analysis:
