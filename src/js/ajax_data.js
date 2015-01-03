@@ -12,6 +12,9 @@ $(document).ready(function() {
     var dataset   = $('input[name="svm_dataset[]"]');
     var flag_ajax = true;
 
+  // serialize data into array (not file-uploads)
+    var data_formatted = $('form').serializeArray();
+
   // store 'file upload(s)' in array
     if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
       $( dataset ).each(function( index ) {
@@ -53,9 +56,6 @@ $(document).ready(function() {
 $(document).ready(function() {
   $('form').on('submit', function(event) {
     event.preventDefault();
-
-  // serialize data into array
-    var data_formatted = $('form').serializeArray();
 
   // ajax request: form fields (except 'svm_dataset[]')
     $.ajax({
