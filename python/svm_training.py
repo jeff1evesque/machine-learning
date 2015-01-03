@@ -60,8 +60,6 @@ if len(sys.argv) > 1:
         for val in json_file_upload['file_upload']:
           # csv to json
           if val['type'] in ('text/plain', 'text/csv'):
-            svm_property = JSON( val['filedata']['file_temp'] ).csv_to_json
-
             try:
               json_dataset = json.loads( {'svm_property': svm_property['entity_id'], 'svm_dataset': JSON( val['filedata']['file_temp']).csv_to_json() )
 
