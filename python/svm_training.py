@@ -46,6 +46,8 @@ if len(sys.argv) > 1:
     validator.data_validation()
     Training( sys.argv[1] )
 
+    svm_title = json.loads(sys.argv[1])['data']['result'].get('svm_title', None)
+
   # validate, and store dataset
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
