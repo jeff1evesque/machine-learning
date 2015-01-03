@@ -49,7 +49,6 @@ if len(sys.argv) > 1:
   # validate, and store dataset
   elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
-
       # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
@@ -61,8 +60,10 @@ if len(sys.argv) > 1:
         for val in json_file_upload['file_upload']:
           # csv to json
           if val['type'] in ('text/plain', 'text/csv'):
+            svm_property = JSON( val['filedata']['file_temp'] ).csv_to_json
+
             try:
-              json_dataset = json.loads( JSON( val['filedata']['file_temp']).csv_to_json() )
+              json_dataset = json.loads( {'svm_property': svm_property['entity_id'], 'svm_dataset': JSON( val['filedata']['file_temp']).csv_to_json() )
 
               json_validated = Validator( json_dataset )
               json_validated.dataset_validation()
@@ -76,7 +77,7 @@ if len(sys.argv) > 1:
           # xml to json
           elif val['type'] in ('application/xml', 'text/xml' ):
             try:
-              json_dataset = json.loads( JSON( val['filedata']['file_temp']).xml_to_json() )
+              json_dataset = json.loads( {'svm_property': svm_property['entity_id'], 'svm_dataset': JSON( val['filedata']['file_temp']).csv_to_json() )
 
               json_validated = Validator( json_dataset )
               json_validated.dataset_validation()
