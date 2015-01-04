@@ -70,7 +70,6 @@ def jsonschema_training():
   schema = {
     'type': 'object',
     'properties': {
-      'json_creator': { 'type': 'string' },
       'data': {
         'type': 'object',
         'properties': {
