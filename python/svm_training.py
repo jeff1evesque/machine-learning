@@ -30,7 +30,8 @@
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
 #
-#  Note: the term 'dataset' is used synonymously for 'file upload(s)', and XML
+#  Note: the term 'dataset' used throughout various comments in this file,
+#        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys, json
 from data_creator import Training
