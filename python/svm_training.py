@@ -41,15 +41,13 @@ if len(sys.argv) > 1:
 
   validator = Validator( sys.argv[1], 'training' )
 
-  # validate input data (not dataset), and store in database
+  # validate, and store dataset
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
     svm_entity = {'title': json.loads(sys.argv[1])['data']['result'].get('svm_title', None), 'uid': 1}
     db_save = Training( svm_entity, 'save_entity' )
     db_save.db_save_training()
 
-  # validate, and store dataset
-  elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
     if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
       # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
