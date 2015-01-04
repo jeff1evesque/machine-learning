@@ -19,16 +19,12 @@ $(document).ready(function() {
       }
     });
 
-  // Combine 'form_data' (file-uploads) with 'data_formatted' (form data)
-    var ajax_data = {properties: data_formatted, file_uploads: form_data};
-
   // AJAX Process
     if ( flag_ajax ) {
       $.ajax({
         url: $(this).attr('action'),
         type: 'POST',
         data: new FormData( this ),
-//        data: ajax_data,
 //        dataType: 'json',
         contentType: false,
         processData: false,
