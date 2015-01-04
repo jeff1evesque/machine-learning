@@ -64,7 +64,7 @@
     * constructor: stores form data
     */
     public function __construct($settings, $dataset) {
-      $this->property = $settings;
+      $this->settings = $settings;
       $this->dataset  = $dataset;
     }
 
