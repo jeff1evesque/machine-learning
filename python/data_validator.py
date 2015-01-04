@@ -70,9 +70,15 @@ class Validator:
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
     try:
-      # iterate list for dict elements
-      for key, value in self.svm_data.iteritems():
-        validate( json.loads(value), jsonschema_dataset() )
+      # iterate outer dict
+      for key, list in self.svm_data.iteritems():
+        if key == 'svm_dataset':
+          for dict in list:
+            print dict
+            #validate( value, jsonschema_dataset() )
+        elif key == 'id_entity':
+          continue
+
     except Exception, e:
       print str(e)
       return False
