@@ -8,17 +8,8 @@ $(document).ready(function() {
     event.preventDefault();
 
   // Local Variables
-    var form_data = new FormData();
     var dataset   = $('input[name="svm_dataset[]"]');
     var flag_ajax = true;
-
-  // Store 'file upload(s)' into Array
-    if ( dataset.length > 0 && dataset.attr('type') == 'file' ) {
-      $( dataset ).each(function( index ) {
-        var file_data = dataset[index].files[0];
-        form_data.append('file_upload_' + index, file_data);
-      });
-    }
 
   // Undefined 'file upload(s)' sets 'flag_ajax = false'
     dataset.each(function() {
