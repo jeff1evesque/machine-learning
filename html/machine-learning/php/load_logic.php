@@ -51,7 +51,7 @@
 // instantiate data / loader
   $obj_data   = new Obj_Data($_POST);
   $obj_loader = new Obj_Loader($obj_data, $_FILES);
-  $obj_loader->logic_loader($json);
+  $messages   = $obj_loader->logic_loader($json);
 
 // Return feedback to AJAX
   if ( sizeof($arr_error) > 0 ) print json_encode( $arr_error );
