@@ -128,11 +128,11 @@
       else {
         array_push( $arr_error, json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') ) );
       }
+
+    // Return Errors, and Responses
+      return ('error' => $arr_error, 'response' => $arr_response);
+
     }
-
-  // Return Errors, and Responses
-    return ('error' => $arr_error, 'response' => $arr_response);
-
   }
 
 ?>
