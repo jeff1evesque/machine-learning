@@ -38,7 +38,7 @@ class Validator:
       json_data = json.loads(self.svm_data)['data']['settings']
       flag_json = True
     except ValueError, e:
-      msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
+      msg = 'Error: The SVM settings have not been properly configured'
       print json.dumps({'error':msg}, separators=(',', ': '))
       return False
 
