@@ -77,7 +77,7 @@ if len(sys.argv) > 1:
           # xml to json
           elif val['type'] in ('application/xml', 'text/xml' ):
             try:
-              json_dataset = json.loads( {'svm_property': svm_property['entity_id'], 'svm_dataset': JSON( val['filedata']['file_temp']).csv_to_json() )
+              json_dataset = json.loads( {'id_entity': id_entity, 'svm_dataset': JSON( val['filedata']['file_temp']).xml_to_json() )
 
               json_validated = Validator( json_dataset )
               json_validated.dataset_validation()
