@@ -31,6 +31,10 @@
   *         such 'print' statement is allowed.
   *
   *   @json_encode( value ), returns the JSON representation / object of 'value'.
+  *
+  *   @file_temp: is a temporary reference to the 'uploaded file'.  This reference exists
+  *               only for the duration of the current script, then it is automatically
+  *               removed.
   */
 
 // helper functions
