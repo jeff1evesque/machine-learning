@@ -41,7 +41,7 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // global variables
-  $json         = array();
+  $json       = array();
 
 // debug: return 'file upload(s)' to AJAX
 //  print json_encode($_FILES);
