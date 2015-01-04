@@ -63,7 +63,7 @@ if len(sys.argv) > 1:
           # csv to json
           if val['type'] in ('text/plain', 'text/csv'):
             try:
-              json_dataset = json.loads( {'svm_property': id_entity, 'svm_dataset': JSON( val['filedata']['file_temp']).csv_to_json() )
+              json_dataset = json.loads( {'id_entity': id_entity, 'svm_dataset': JSON( val['filedata']['file_temp']).csv_to_json() )
 
               json_validated = Validator( json_dataset )
               json_validated.dataset_validation()
