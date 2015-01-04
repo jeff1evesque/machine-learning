@@ -103,6 +103,7 @@
         $index++;
       }
       else {
+        array_push($arr_error, json_encode('Error: dataset filenames need to be \'UTF-8\' type string'));
         $flag_validator = false;
         break;
       }
