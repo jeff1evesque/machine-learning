@@ -38,7 +38,7 @@
   */
 
 // helper functions
-//  include(dirname(__FILE__) . '/helper.php');
+  include(dirname(__FILE__) . '/helper.php');
 
 // global variables
   $json         = Array();
