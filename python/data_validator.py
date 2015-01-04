@@ -76,7 +76,7 @@ class Validator:
           for dict in value:
             validate( dict, jsonschema_dataset() )
         elif key == 'id_entity':
-          print type(value)
+          validate( value, jsonschema_dataset_id() )
 
     except Exception, e:
       print str(e)
