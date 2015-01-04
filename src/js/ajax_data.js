@@ -39,7 +39,8 @@ $(document).ready(function() {
       $.ajax({
         url: $(this).attr('action'),
         type: 'POST',
-        data: ajax_data,
+        data: new FormData( this ),
+//        data: ajax_data,
 //        dataType: 'json',
         contentType: false,
         processData: false,
