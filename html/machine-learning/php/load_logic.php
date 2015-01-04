@@ -54,8 +54,8 @@
   $messages   = $obj_loader->logic_loader($json);
 
 // Return feedback to AJAX
-  if ( sizeof($messages['arr_error']) > 0 ) print json_encode( $messages['arr_error'] );
-  elseif ( sizeof($messages['arr_response']) > 0 ) print json_encode( $messages['arr_response'] );
+  if ( sizeof($messages['error']) > 0 ) print json_encode( $messages['error'] );
+  elseif ( sizeof($messages['response']) > 0 ) print json_encode( $messages['response'] );
 
  /**
   * Class Obj_Loader: load proper SVM session
@@ -131,7 +131,7 @@
     }
 
   // Return Errors, and Responses
-    return ($arr_error, $arr_response);
+    return ('error' => $arr_error, 'response' => $arr_response);
 
   }
 
