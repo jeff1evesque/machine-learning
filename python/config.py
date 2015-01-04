@@ -67,7 +67,10 @@ def jsonschema_dataset():
 #  Note: This validation schema is used in data_validator.py.
 def jsonschema_dataset_id():
   schema = {
-
+    'type': 'object',
+    'properties': {
+      'id_entity': { 'type': 'integer' },
+    }
   }
   return schema
 
