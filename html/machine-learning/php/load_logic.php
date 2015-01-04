@@ -68,6 +68,7 @@
  *             to conform to a JSON standard we are also implementing
  *             within 'load_logic.php'.
  */
+
   if ( $flag_utf8 ) {
     $json = array('result' => $arr_upload);
     $json = array('data' => $json);
@@ -76,11 +77,11 @@
 
   // return to AJAX python 'result'
     $result = shell_command('python ../../../python/svm_training.py', $json);
-    print json_encode($result);
   }
   else {
     print json_encode('Error: filenames must be formatted as \'UTF-8\'');
   }
+
 
 // instantiate data / loader
   $obj_data   = new Obj_Data($_POST);
