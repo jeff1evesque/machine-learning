@@ -32,21 +32,20 @@ class Validator:
   def data_validation(self):
     # local variables
     flag_json = False
-    json_data = json.loads(self.svm_data)['data']['result']
 
     # determine if input data is a JSON object
     try:
-      json.loads(self.svm_data)['data']['result']
+      json_data = json.loads(self.svm_data)['data']['settings']
       flag_json = True
     except ValueError, e:
-      msg = 'Error: The ' + self.svm_data.svm_session + ' session requires a json formatted dataset as input'
+      msg = 'Error: The SVM settings have not been properly configured'
       print json.dumps({'error':msg}, separators=(',', ': '))
       return False
 
     # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
       try:
-        validate(json.loads(self.svm_data), jsonschema_training())
+        validate(json.loads(self.svm_data)['data']['settings'], jsonschema_training())
       except Exception, e:
         print str(e)
         return False
@@ -59,7 +58,7 @@ class Validator:
     # validation on 'analysis' session
     if self.svm_session == 'analysis' and flag_json:
       try:
-        validate(json.loads(self.svm_data), jsonschema_analysis())
+        validate(json.loads(self.svm_data)['data']['settings'], jsonschema_analysis())
       except Exception, e:
         print str(e)
         return False
@@ -84,7 +83,7 @@ class Validator:
   #                          Otherwise, the method will return a list of unique 'file
   #                          upload(s)', discarding duplicates.
   def file_upload_validation(self, json_file_obj):
-    json_data        = json.loads(json_file_obj)['data']['result']
+    json_data        = json.loads(json_file_obj)['data']['dataset']
     acceptable_type  = ['text/plain', 'text/csv', 'application/xml']
 
     unique_hash      = set()
@@ -94,15 +93,15 @@ class Validator:
 
       for index, filedata in enumerate(json_data['file_upload']):
         try:
-          mimetype = magic.from_file( filedata['file_temp'], mime=True )
+          mimetype = magic.from_file( filedata['file_temp'][0], mime=True )
           # validate file format
           if ( mimetype not in acceptable_type ):
-            msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'] + '''\', must be one of the formats:'''
+            msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
             msg += '\n       ' + ', '.join(acceptable_type)
             print json.dumps({'error':msg}, separators=(',', ': '))
             return False
 
-          filehash = md5_for_file(filedata['file_temp'])
+          filehash = md5_for_file(filedata['file_temp'][0])
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
