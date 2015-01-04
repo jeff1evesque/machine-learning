@@ -44,49 +44,48 @@ if len(sys.argv) > 1:
   validator.data_validation()
 
   # validate dataset, and store dataset
-  if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
-    svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
-    db_save    = Training( svm_entity, 'save_entity' )
-    id_entity  = db_save.db_save_training()
+  svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
+  db_save    = Training( svm_entity, 'save_entity' )
+  id_entity  = db_save.db_save_training()
 
-    if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
-      # validate MIME type for each 'file upload(s)'
-      json_file_upload = validator.file_upload_validation( sys.argv[1] )
-      if ( json_file_upload is False ): sys.exit()
+  if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
+    # validate MIME type for each 'file upload(s)'
+    json_file_upload = validator.file_upload_validation( sys.argv[1] )
+    if ( json_file_upload is False ): sys.exit()
 
-      # convert each dataset as json, validate, and store in database
-      else:
-        json_dataset = {}
-        svm_property = sys.argv[1]
+    # convert each dataset as json, validate, and store in database
+    else:
+      json_dataset = {}
+      svm_property = sys.argv[1]
 
-        for val in json_file_upload['file_upload']:
-          # csv to json
-          if val['type'] in ('text/plain', 'text/csv'):
-            try:
-              json_dataset = {'id_entity': id_entity, 'svm_dataset': JSON( val['data']['dataset']['file_upload']['file_temp']).csv_to_json()}
+      for val in json_file_upload['file_upload']:
+        # csv to json
+        if val['type'] in ('text/plain', 'text/csv'):
+          try:
+            json_dataset = {'id_entity': id_entity, 'svm_dataset': JSON( val['data']['dataset']['file_upload']['file_temp']).csv_to_json()}
 
-              json_validated = Validator( json_dataset )
-              json_validated.dataset_validation()
+            json_validated = Validator( json_dataset )
+            json_validated.dataset_validation()
 
-              db_save = Training( json_dataset, 'save_value' )
-              db_save.db_save_training()
-            except Exception as e:
-              print e
-              sys.exit()
+            db_save = Training( json_dataset, 'save_value' )
+            db_save.db_save_training()
+          except Exception as e:
+            print e
+            sys.exit()
 
-          # xml to json
-          elif val['type'] in ('application/xml', 'text/xml' ):
-            try:
-              json_dataset = {'id_entity': id_entity, 'svm_dataset': JSON( val['data']['dataset']['file_upload']['file_temp']).xml_to_json()}
+        # xml to json
+        elif val['type'] in ('application/xml', 'text/xml' ):
+          try:
+            json_dataset = {'id_entity': id_entity, 'svm_dataset': JSON( val['data']['dataset']['file_upload']['file_temp']).xml_to_json()}
 
-              json_validated = Validator( json_dataset )
-              json_validated.dataset_validation()
+            json_validated = Validator( json_dataset )
+            json_validated.dataset_validation()
 
-              db_save = Training( json_dataset, 'save_value' )
-              db_save.db_save_training()
-            except Exception as e:
-              print e
-              sys.exit()
+            db_save = Training( json_dataset, 'save_value' )
+            db_save.db_save_training()
+          except Exception as e:
+            print e
+            sys.exit()
 
 else:
   msg = 'Please provide a training dataset in json format'
