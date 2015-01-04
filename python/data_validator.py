@@ -71,12 +71,12 @@ class Validator:
   def dataset_validation(self):
     try:
       # iterate outer dict
-      for key, list in self.svm_data.iteritems():
+      for key, value in self.svm_data.iteritems():
         if key == 'svm_dataset':
-          for dict in list:
+          for dict in value:
             validate( dict, jsonschema_dataset() )
         elif key == 'id_entity':
-          continue
+          print type(value)
 
     except Exception, e:
       print str(e)
