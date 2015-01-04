@@ -30,7 +30,8 @@
 #  @import sys, provides various functions, and variables that can be used to
 #      manipulate different parts of the Python runtime environment (i.e. argv).
 #
-#  Note: the term 'dataset' is used synonymously for 'file upload(s)', and XML
+#  Note: the term 'dataset' used throughout various comments in this file,
+#        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys, json
 from data_creator import Training
@@ -39,52 +40,53 @@ from svm_json import JSON
 
 if len(sys.argv) > 1:
 
+  # validate SVM settings
   validator = Validator( sys.argv[1], 'training' )
+  validator.data_validation()
 
-  # validate input data (not dataset)
-  if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
-    validator.data_validation()
-    Training( sys.argv[1] )
+  # validate dataset, and store dataset
+  svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
+  db_save    = Training( svm_entity, 'save_entity' )
+  id_entity  = db_save.db_save_training()
 
-  # validate, and store dataset
-  elif ( json.loads(sys.argv[1])['json_creator'] == 'load_dataset.php' ):
-    if ( json.loads(sys.argv[1])['data']['result'].get('file_upload', None) ):
+  if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
+    # validate MIME type for each dataset
+    json_file_upload = validator.file_upload_validation( sys.argv[1] )
+    if ( json_file_upload is False ): sys.exit()
 
-      # validate MIME type for each 'file upload(s)'
-      json_file_upload = validator.file_upload_validation( sys.argv[1] )
-      if ( json_file_upload is False ): sys.exit()
+    # convert each dataset as json, validate, and store in database
+    else:
+      json_dataset = {}
+      svm_property = sys.argv[1]
 
-      # convert each dataset as json, validate, and store in database
-      else:
-        json_dataset = {}
-        for val in json_file_upload['file_upload']:
-          # csv to json
-          if val['type'] in ('text/plain', 'text/csv'):
-            try:
-              json_dataset = json.loads( JSON( val['filedata']['file_temp']).csv_to_json() )
+      for val in json_file_upload['file_upload']:
+        # csv to json
+        if val['type'] in ('text/plain', 'text/csv'):
+          try:
+            json_dataset = {'id_entity': id_entity, 'svm_dataset': JSON( val['data']['dataset']['file_upload']['file_temp']).csv_to_json()}
 
-              json_validated = Validator( json_dataset )
-              json_validated.dataset_validation()
+            json_validated = Validator( json_dataset )
+            json_validated.dataset_validation()
 
-              db_save = Training( json_dataset )
-              db_save.db_save_dataset()
-            except Exception as e:
-              print e
-              sys.exit()
+            db_save = Training( json_dataset, 'save_value' )
+            db_save.db_save_training()
+          except Exception as e:
+            print e
+            sys.exit()
 
-          # xml to json
-          elif val['type'] in ('application/xml', 'text/xml' ):
-            try:
-              json_dataset = json.loads( JSON( val['filedata']['file_temp']).xml_to_json() )
+        # xml to json
+        elif val['type'] in ('application/xml', 'text/xml' ):
+          try:
+            json_dataset = {'id_entity': id_entity, 'svm_dataset': JSON( val['data']['dataset']['file_upload']['file_temp']).xml_to_json()}
 
-              json_validated = Validator( json_dataset )
-              json_validated.dataset_validation()
+            json_validated = Validator( json_dataset )
+            json_validated.dataset_validation()
 
-              db_save = Training( json_dataset )
-              db_save.db_save_dataset()
-            except Exception as e:
-              print e
-              sys.exit()
+            db_save = Training( json_dataset, 'save_value' )
+            db_save.db_save_training()
+          except Exception as e:
+            print e
+            sys.exit()
 
 else:
   msg = 'Please provide a training dataset in json format'
