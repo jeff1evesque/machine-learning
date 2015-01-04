@@ -44,7 +44,7 @@ if len(sys.argv) > 1:
   # validate, and store dataset
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     validator.data_validation()
-    svm_entity = {'title': json.loads(sys.argv[1])['data']['result'].get('svm_title', None), 'uid': 1}
+    svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
     db_save = Training( svm_entity, 'save_entity' )
     db_save.db_save_training()
 
