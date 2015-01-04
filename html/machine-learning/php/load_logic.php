@@ -37,7 +37,9 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // global variables
-  $json = array();
+  $json       = Array();
+  $arr_upload = Array();
+  $flag_utf8  = true;
 
 // instantiate data / loader
   $obj_data   = new Obj_Data($_POST);
