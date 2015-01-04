@@ -40,7 +40,7 @@ $(document).ready(function() {
         url: $(this).attr('action'),
         type: 'POST',
         data: ajax_data,
-        dataType: 'json',
+//        dataType: 'json',
         contentType: false,
         processData: false,
         beforeSend: function() {
@@ -59,8 +59,9 @@ $(document).ready(function() {
       }).done(function(data) {
 
       // JSON Object from Server
-        json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
-        console.log( 'JSON object from Server: ' + json_server );
+//        json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
+//        console.log( 'JSON object from Server: ' + json_server );
+        console.log( 'JSON object from Server: ' + data );
 
       // Remove AJAX Overlay
         $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
