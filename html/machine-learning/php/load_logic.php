@@ -79,10 +79,10 @@
 
   // return to AJAX python 'result'
     $result = shell_command('python ../../../python/svm_training.py', $json);
-    array_push($arr_response, json_encode($result);
+    array_push($arr_response, json_encode($result));
   }
   else {
-    array_push($arr_error, json_encode('Error: filenames must be formatted as \'UTF-8\'');
+    array_push($arr_error, json_encode('Error: filenames must be formatted as \'UTF-8\''));
   }
 
 
@@ -122,7 +122,7 @@
     // form validation
       if (isset($this->form->svm_session)) {
         if (!in_array(strtolower($this->form->svm_session), $arr_session_type)) {
-            array_push($arr_error, json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\'');
+            array_push($arr_error, json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\''));
             $flag_validator = false;
         }
       }
@@ -142,11 +142,11 @@
         }
 
     // Return JSON result(s) from python script
-        array_push($arr_response, json_encode($result);
+        array_push($arr_response, json_encode($result));
       }
 
       else {
-        array_push($arr_error, json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') );
+        array_push( $arr_error, json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') ) );
       }
     }
   }
