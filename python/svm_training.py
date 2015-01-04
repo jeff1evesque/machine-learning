@@ -39,10 +39,11 @@ from svm_json import JSON
 
 if len(sys.argv) > 1:
 
+  # validate SVM settings
   validator = Validator( sys.argv[1], 'training' )
   validator.data_validation()
 
-  # validate, and store dataset
+  # validate dataset, and store dataset
   if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
     svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
     db_save    = Training( svm_entity, 'save_entity' )
