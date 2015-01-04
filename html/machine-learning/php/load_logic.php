@@ -41,9 +41,9 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // global variables
-  $json         = Array();
-  $arr_error    = Array();
-  $arr_response = Array();
+  $json         = array();
+  $arr_error    = array();
+  $arr_response = array();
 
 // debug: return 'file upload(s)' to AJAX
 //  print json_encode($_FILES);
@@ -79,10 +79,10 @@
     public function logic_loader(&$json) {
     // local variables
       $flag_validator   = true;
-      $arr_model_type   = Array('classification', 'regression');
-      $arr_dataset_type = Array('upload file', 'xml file');
-      $arr_session_type = Array('training', 'analysis');
-      $arr_upload   = Array();
+      $arr_model_type   = array('classification', 'regression');
+      $arr_dataset_type = array('upload file', 'xml file');
+      $arr_session_type = array('training', 'analysis');
+      $arr_upload       = array();
 
     // form validation
       if (isset($this->settings->svm_session)) {
