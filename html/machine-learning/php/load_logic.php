@@ -50,7 +50,7 @@
 // add uploaded file properties to 'arr_upload'
   $index = 0;
   foreach ($_FILES as $val) {
-    if (mb_check_encoding($val['name'],'UTF-8') && mb_check_encoding($val['tmp_name'],'UTF-8')) {
+    if (mb_check_encoding(json_encode($val['name']),'UTF-8') && mb_check_encoding(json_encode($val['tmp_name']),'UTF-8')) {
       $arr_upload['file_upload'][] = array(
         'file_name' => $val['name'],
         'file_temp' => $val['tmp_name'],
