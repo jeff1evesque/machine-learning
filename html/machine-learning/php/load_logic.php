@@ -41,11 +41,11 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // global variables
-  $json       = Array();
-  $arr_upload = Array();
-  $arr_error  = Array();
-  $arr_result = Array();
-  $flag_utf8  = true;
+  $json         = Array();
+  $arr_upload   = Array();
+  $arr_error    = Array();
+  $arr_response = Array();
+  $flag_utf8    = true;
 
 // add uploaded file properties to 'arr_upload'
   $index = 0;
