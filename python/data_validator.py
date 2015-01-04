@@ -83,7 +83,7 @@ class Validator:
   #                          Otherwise, the method will return a list of unique 'file
   #                          upload(s)', discarding duplicates.
   def file_upload_validation(self, json_file_obj):
-    json_data        = json.loads(json_file_obj)['data']['result']
+    json_data        = json.loads(json_file_obj)['data']['dataset']
     acceptable_type  = ['text/plain', 'text/csv', 'application/xml']
 
     unique_hash      = set()
