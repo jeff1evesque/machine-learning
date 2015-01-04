@@ -25,7 +25,7 @@ $(document).ready(function() {
         url: $(this).attr('action'),
         type: 'POST',
         data: new FormData( this ),
-//        dataType: 'json',
+        dataType: 'json',
         contentType: false,
         processData: false,
         beforeSend: function() {
