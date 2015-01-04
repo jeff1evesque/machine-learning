@@ -46,18 +46,17 @@
   $arr_error    = Array();
   $arr_response = Array();
 
-// Return feedback to AJAX
-  if ( sizeof($arr_error) > 0 ) print json_encode( $arr_error );
-  elseif ( sizeof($arr_response) > 0 ) print json_encode( $arr_response );
-
+// debug: return 'file upload(s)' to AJAX
+//  print json_encode($_FILES);
 
 // instantiate data / loader
   $obj_data   = new Obj_Data($_POST);
   $obj_loader = new Obj_Loader($obj_data);
   $obj_loader->logic_loader($json);
 
-// debug: return 'file upload(s)' to AJAX
-  //print json_encode($_FILES);
+// Return feedback to AJAX
+  if ( sizeof($arr_error) > 0 ) print json_encode( $arr_error );
+  elseif ( sizeof($arr_response) > 0 ) print json_encode( $arr_response );
 
  /**
   * Class Obj_Loader: load proper SVM session
