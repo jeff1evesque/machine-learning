@@ -47,23 +47,6 @@
   $arr_response = Array();
   $flag_utf8    = true;
 
-// add uploaded file properties to 'arr_upload'
-  $index = 0;
-  foreach ($_FILES as $val) {
-    if (mb_check_encoding(json_encode($val['name']),'UTF-8') && mb_check_encoding(json_encode($val['tmp_name']),'UTF-8')) {
-      $arr_upload['file_upload'][] = array(
-        'file_name' => $val['name'],
-        'file_temp' => $val['tmp_name'],
-      );
-      $index++;
-    }
-    else {
-      $flag_utf8 = false;
-      break;
-    }
-  }
-  $arr_upload['upload_quantity'] = count($_FILES);
-  unset($index);
 
 /**
  * JSON array: inner key 'result', and outer key 'data' are used
@@ -130,9 +113,27 @@
         }
       }
 
+    // add uploaded file properties to 'arr_upload'
+      $index = 0;
+      foreach ($_FILES as $val) {
+        if (mb_check_encoding(json_encode($val['name']),'UTF-8') && mb_check_encoding(json_encode($val['tmp_name']),'UTF-8')) {
+          $arr_upload['file_upload'][] = array(
+          'file_name' => $val['name'],
+          'file_temp' => $val['tmp_name'],
+        );
+        $index++;
+      }
+      else {
+        $flag_validator = false;
+        break;
+      }
+    }
+    $arr_upload['upload_quantity'] = count($_FILES);
+    unset($index);
+
     // Build JSON array, and send to python script
       if ($flag_validator) {
-        $arr_result = array('result' => $this->form);
+        $arr_result = array('properties' => $this->form, 'dataset' => $arr_upload);
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->form->svm_session_type), $arr_result);
         $arr_result = array('data' => $arr_result);
         $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
@@ -145,7 +146,6 @@
         }
         array_push($arr_response, json_encode($result));
       }
-
       else {
         array_push( $arr_error, json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') ) );
       }
