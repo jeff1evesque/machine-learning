@@ -41,6 +41,43 @@
   $arr_upload = Array();
   $flag_utf8  = true;
 
+// add uploaded file properties to 'arr_upload'
+  $index = 0;
+  foreach ($_FILES as $val) {
+    if (mb_check_encoding($val['name'],'UTF-8') && mb_check_encoding($val['tmp_name'],'UTF-8')) {
+      $arr_upload['file_upload'][] = array(
+        'file_name' => $val['name'],
+        'file_temp' => $val['tmp_name'],
+      );
+      $index++;
+    }
+    else {
+      $flag_utf8 = false;
+      break;
+    }
+  }
+  $arr_upload['upload_quantity'] = count($_FILES);
+  unset($index);
+
+/**
+ * JSON array: inner key 'result', and outer key 'data' are used
+ *             to conform to a JSON standard we are also implementing
+ *             within 'load_logic.php'.
+ */
+  if ( $flag_utf8 ) {
+    $json = array('result' => $arr_upload);
+    $json = array('data' => $json);
+    $json['json_creator'] = basename(__FILE__);
+    $json = json_encode( $json );
+
+  // return to AJAX python 'result'
+    $result = shell_command('python ../../../python/svm_training.py', $json);
+    print json_encode($result);
+  }
+  else {
+    print json_encode('Error: filenames must be formatted as \'UTF-8\'');
+  }
+
 // instantiate data / loader
   $obj_data   = new Obj_Data($_POST);
 //  $obj_loader = new Obj_Loader($obj_data);
