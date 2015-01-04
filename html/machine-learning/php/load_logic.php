@@ -46,25 +46,6 @@
   $arr_error    = Array();
   $arr_response = Array();
 
-/**
- * JSON array: inner key 'result', and outer key 'data' are used
- *             to conform to a JSON standard we are also implementing
- *             within 'load_logic.php'.
- */
-
-  if ( $flag_utf8 ) {
-    $json = array('result' => $arr_upload);
-    $json = array('data' => $json);
-    $json['json_creator'] = basename(__FILE__);
-    $json = json_encode( $json );
-
-    $result = shell_command('python ../../../python/svm_training.py', $json);
-    array_push($arr_response, json_encode($result));
-  }
-  else {
-    array_push($arr_error, json_encode('Error: filenames must be formatted as \'UTF-8\''));
-  }
-
 // Return feedback to AJAX
   if ( sizeof($arr_error) > 0 ) print json_encode( $arr_error );
   elseif ( sizeof($arr_response) > 0 ) print json_encode( $arr_response );
