@@ -42,8 +42,6 @@
 
 // global variables
   $json         = array();
-  $arr_error    = array();
-  $arr_response = array();
 
 // debug: return 'file upload(s)' to AJAX
 //  print json_encode($_FILES);
@@ -83,6 +81,8 @@
       $arr_dataset_type = array('upload file', 'xml file');
       $arr_session_type = array('training', 'analysis');
       $arr_upload       = array();
+      $arr_error        = array();
+      $arr_response     = array();
 
     // form validation
       if (isset($this->settings->svm_session)) {
