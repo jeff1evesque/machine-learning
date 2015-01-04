@@ -42,7 +42,6 @@
 
 // global variables
   $json         = Array();
-  $arr_upload   = Array();
   $arr_error    = Array();
   $arr_response = Array();
 
@@ -82,6 +81,7 @@
       $arr_model_type   = Array('classification', 'regression');
       $arr_dataset_type = Array('upload file', 'xml file');
       $arr_session_type = Array('training', 'analysis');
+      $arr_upload   = Array();
 
     // form validation
       if (isset($this->form->svm_session)) {
