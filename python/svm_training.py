@@ -46,7 +46,7 @@ if len(sys.argv) > 1:
     validator.data_validation()
     svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
     db_save    = Training( svm_entity, 'save_entity' )
-    entity_id  = db_save.db_save_training()
+    id_entity  = db_save.db_save_training()
 
     if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
       # validate MIME type for each 'file upload(s)'
