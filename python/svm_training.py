@@ -48,7 +48,7 @@ if len(sys.argv) > 1:
     db_save = Training( svm_entity, 'save_entity' )
     db_save.db_save_training()
 
-    if ( json.loads(sys.argv[1])['data']['dataset']['result'].get('file_upload', None) ):
+    if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
       # validate MIME type for each 'file upload(s)'
       json_file_upload = validator.file_upload_validation( sys.argv[1] )
       if ( json_file_upload is False ): sys.exit()
