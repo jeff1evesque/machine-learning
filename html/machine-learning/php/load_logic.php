@@ -130,7 +130,7 @@
       }
 
     // Return Errors, and Responses
-      return ('error' => $arr_error, 'response' => $arr_response);
+      return array('error' => $arr_error, 'response' => $arr_response);
 
     }
   }
