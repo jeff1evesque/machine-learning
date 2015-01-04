@@ -113,7 +113,7 @@
 
     // Build JSON array, and send to python script
       if ($flag_validator) {
-        $arr_result = array('properties' => $this->settings, 'dataset' => $arr_upload);
+        $arr_result = array('settings' => $this->settings, 'dataset' => $arr_upload);
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->settings->svm_session_type), $arr_result);
         $arr_result = array('data' => $arr_result);
         $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
