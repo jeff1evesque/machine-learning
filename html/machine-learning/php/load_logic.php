@@ -38,7 +38,7 @@
   */
 
 // helper functions
-  include(dirname(__FILE__) . '/helper.php');
+//  include(dirname(__FILE__) . '/helper.php');
 
 // global variables
   $json         = Array();
@@ -49,7 +49,7 @@
 //  print json_encode($_FILES);
 
 // instantiate data / loader
-  $obj_data   = new Obj_Data($_POST);
+  $obj_data   = new Obj_Data($_POST, $_FILES);
   $obj_loader = new Obj_Loader($obj_data);
   $obj_loader->logic_loader($json);
 
@@ -65,8 +65,9 @@
    /**
     * constructor: stores form data
     */
-    public function __construct($form) {
-      $this->form = $form;
+    public function __construct($settings, $dataset) {
+      $this->property = $settings;
+      $this->dataset  = $dataset;
     }
 
    /**
@@ -84,8 +85,8 @@
       $arr_upload   = Array();
 
     // form validation
-      if (isset($this->form->svm_session)) {
-        if (!in_array(strtolower($this->form->svm_session), $arr_session_type)) {
+      if (isset($this->settings->svm_session)) {
+        if (!in_array(strtolower($this->settings->svm_session), $arr_session_type)) {
             array_push($arr_error, json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\''));
             $flag_validator = false;
         }
@@ -93,7 +94,7 @@
 
     // add uploaded file properties to 'arr_upload'
       $index = 0;
-      foreach ($_FILES as $val) {
+      foreach ($this->dataset as $val) {
         if (mb_check_encoding(json_encode($val['name']),'UTF-8') && mb_check_encoding(json_encode($val['tmp_name']),'UTF-8')) {
           $arr_upload['file_upload'][] = array(
           'file_name' => $val['name'],
@@ -106,13 +107,13 @@
         break;
       }
     }
-    $arr_upload['upload_quantity'] = count($_FILES);
+    $arr_upload['upload_quantity'] = count($this->dataset);
     unset($index);
 
     // Build JSON array, and send to python script
       if ($flag_validator) {
-        $arr_result = array('properties' => $this->form, 'dataset' => $arr_upload);
-        $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->form->svm_session_type), $arr_result);
+        $arr_result = array('properties' => $this->settings, 'dataset' => $arr_upload);
+        $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->settings->svm_session_type), $arr_result);
         $arr_result = array('data' => $arr_result);
         $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
 
@@ -128,6 +129,7 @@
         array_push( $arr_error, json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') ) );
       }
     }
+
   }
 
 ?>
