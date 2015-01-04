@@ -61,6 +61,19 @@ def jsonschema_dataset():
   }
   return schema
 
+## jsonschema_dataset_id(): contains the jsonschema for the SVM dataset. Specifically,
+#                           this schema complements 'jsonschema_dataset()'.
+#
+#  Note: This validation schema is used in data_validator.py.
+def jsonschema_dataset_id():
+  schema = {
+    'type': 'object',
+    'properties': {
+      'id_entity': { 'type': 'integer' },
+    }
+  }
+  return schema
+
 ## jsonschema_training(): contains the jsonschema for the 'training' session.
 #                         Therefore, this schema validates the properties
 #                         describing the session, not the dataset itself.
