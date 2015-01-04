@@ -80,7 +80,7 @@
     $result = shell_command('python ../../../python/svm_training.py', $json);
   }
   else {
-    print json_encode('Error: filenames must be formatted as \'UTF-8\'');
+    array_push($arr_error, json_encode('Error: filenames must be formatted as \'UTF-8\'');
   }
 
 
@@ -120,7 +120,7 @@
     // form validation
       if (isset($this->form->svm_session)) {
         if (!in_array(strtolower($this->form->svm_session), $arr_session_type)) {
-            print json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\'');
+            array_push($arr_error, json_encode('Error: \'svm_session\' must be a string value of \'training\', or \'analysis\'');
             $flag_validator = false;
         }
       }
@@ -144,7 +144,7 @@
       }
 
       else {
-        print json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') );
+        array_push($arr_error, json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') );
       }
     }
   }
