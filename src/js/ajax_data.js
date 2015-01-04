@@ -44,9 +44,8 @@ $(document).ready(function() {
       }).done(function(data) {
 
       // JSON Object from Server
-//        json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
-//        console.log( 'JSON object from Server: ' + json_server );
-        console.log( 'JSON object from Server: ' + data );
+        json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
+        console.log( 'JSON object from Server: ' + json_server );
 
       // Remove AJAX Overlay
         $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
