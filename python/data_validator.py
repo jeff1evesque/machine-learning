@@ -74,8 +74,7 @@ class Validator:
       for key, list in self.svm_data.iteritems():
         if key == 'svm_dataset':
           for dict in list:
-            print dict
-            #validate( value, jsonschema_dataset() )
+            validate( dict, jsonschema_dataset() )
         elif key == 'id_entity':
           continue
 
