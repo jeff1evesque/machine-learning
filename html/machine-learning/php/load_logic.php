@@ -77,13 +77,16 @@
     $json['json_creator'] = basename(__FILE__);
     $json = json_encode( $json );
 
-  // return to AJAX python 'result'
     $result = shell_command('python ../../../python/svm_training.py', $json);
     array_push($arr_response, json_encode($result));
   }
   else {
     array_push($arr_error, json_encode('Error: filenames must be formatted as \'UTF-8\''));
   }
+
+// Return feedback to AJAX
+  if ( sizeof($arr_error) > 0 ) print json_encode( $arr_error );
+  elseif ( sizeof($arr_response) > 0 ) print json_encode( $arr_response );
 
 
 // instantiate data / loader
@@ -140,8 +143,6 @@
         else {
           $result = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
         }
-
-    // Return JSON result(s) from python script
         array_push($arr_response, json_encode($result));
       }
 
