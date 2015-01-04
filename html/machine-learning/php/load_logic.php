@@ -130,6 +130,9 @@
       }
     }
 
+  // Return Errors, and Responses
+    return ($arr_error, $arr_response);
+
   }
 
 ?>
