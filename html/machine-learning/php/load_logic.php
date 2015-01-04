@@ -41,7 +41,7 @@
   include(dirname(__FILE__) . '/helper.php');
 
 // global variables
-  $json         = array();
+  $json       = array();
 
 // debug: return 'file upload(s)' to AJAX
 //  print json_encode($_FILES);
@@ -116,7 +116,6 @@
         $arr_result = array('settings' => $this->settings, 'dataset' => $arr_upload);
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->settings->svm_session_type), $arr_result);
         $arr_result = array('data' => $arr_result);
-        $arr_result = array_merge($arr_result, array('json_creator' => basename(__FILE__)), $arr_result);
 
         if ($this->settings->svm_session == 'training') {
           $result = shell_command('python ../../../python/svm_training.py', json_encode($arr_result));
