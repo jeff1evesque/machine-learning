@@ -45,8 +45,6 @@
   $arr_upload   = Array();
   $arr_error    = Array();
   $arr_response = Array();
-  $flag_utf8    = true;
-
 
 /**
  * JSON array: inner key 'result', and outer key 'data' are used
