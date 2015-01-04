@@ -32,7 +32,6 @@ class Validator:
   def data_validation(self):
     # local variables
     flag_json = False
-    json_data = json.loads(self.svm_data)['data']['result']
 
     # determine if input data is a JSON object
     try:
