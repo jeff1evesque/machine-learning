@@ -67,7 +67,7 @@ if len(sys.argv) > 1:
         if val['type'] in ('text/plain', 'text/csv'):
           try:
             for dataset in val['filedata']['file_temp']:
-              json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON( val['filedata']['file_temp'][0]).csv_to_json())}
+              json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())}
               json_validated = Validator( json_dataset )
               response_dataset_validation.append(json_validated.dataset_validation())
 
@@ -80,7 +80,7 @@ if len(sys.argv) > 1:
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON( val['filedata']['file_temp'][0]).xml_to_json())}
+            json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())}
             json_validated = Validator( json_dataset )
             response_dataset_validation.append(json_validated.dataset_validation())
 
