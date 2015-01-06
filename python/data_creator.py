@@ -21,10 +21,19 @@ class Training:
   #
   #        where 'xxx' denotes a unicode string, and 'yy' denotes a float value.
   def __init__(self, svm_data, cmd=None):
+    # class variables
     self.svm_data    = svm_data
     self.svm_cmd     = cmd
     self.db_settings = Database()
     self.uid         = 1
+
+  ## db_save_training: stores an SVM dataset into corresponding 'EAV data model'
+  #                    database table.
+  #
+  #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
+  def db_save_training(self):
+    # local variables
+    list_error = []
 
     # create 'db_machine_learning' database if doesn't exist
     try:
@@ -32,18 +41,11 @@ class Training:
       cursor = conn.cursor()
       sql    = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
       cursor.execute( sql )
-    except DB.Error, e:
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
+    except DB.Error, error:
+      list_error.append(error)
     finally:
       if conn:
         conn.close()
-
-  ## db_save_training: stores an SVM dataset into corresponding 'EAV data model'
-  #                    database table.
-  #
-  #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
-  def db_save_training(self):
 
     # create 'type' table if doesn't exist
     try:
@@ -72,9 +74,9 @@ class Training:
                  );
                  '''
       cursor.execute( sql )
-    except DB.Error, e:
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
+
+    except DB.Error, error:
+      list_error.append(error)
     finally:
       if conn:
         conn.close()
@@ -95,15 +97,20 @@ class Training:
           cursor.execute( sql, (self.svm_data['id_entity'], val['dep_variable_label'], val['indep_variable_label'], val['indep_variable_value']) )
 
       conn.commit()
-    except DB.Error, e:
+    except DB.Error, error:
       conn.rollback()
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
+      list_error.append(error)
     finally:
       if conn:
         rowid = cursor.lastrowid
         conn.close()
         return rowid
+
+    # return error
+    if len(list_error) > 0:
+      return { 'status': False, 'error': list_error }
+    else:
+      return { 'status': True, 'error': None }
 
 ## Class: Analysis
 class Analysis:
