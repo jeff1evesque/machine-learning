@@ -119,8 +119,7 @@ class Validator:
           if ( mimetype not in acceptable_type ):
             msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
             msg += '\n       ' + ', '.join(acceptable_type)
-            print json.dumps({'error':msg}, separators=(',', ': '))
-            return False
+            list_error.append(msg)
 
           filehash = md5_for_file(filedata['file_temp'][0])
           # add 'hashed' value of file reference(s) to a list
@@ -130,11 +129,18 @@ class Validator:
 
         except:
           msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
-          print json.dumps({'error':msg}, separators=(',', ': '))
-          return False
+          list_error.append(msg)
 
       # replace portion of JSON with unique 'file reference(s)'
       json_data['file_upload'][:] = json_keep
       return json_data
 
-    else: print json.dumps({'Error':'No file(s) were uploaded'}, separators=(',', ': '))
+    else:
+      msg = 'No file(s) were uploaded'
+      list_error.append(msg)
+
+    # return error
+    if len(list_error) > 0:
+      return { 'status': False, 'error': list_error, 'json_data': None }
+    else:
+      return { 'status': True, 'error': None, 'json_data' }
