@@ -41,6 +41,7 @@ class Validator:
     except ValueError, e:
       error     = 'The SVM settings have not been properly configured'
       list_error.append(error)
+      flag_json = False
 
     # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
