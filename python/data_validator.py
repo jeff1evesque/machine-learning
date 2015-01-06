@@ -31,24 +31,24 @@ class Validator:
   #        'dataset_validation' methods (see below).
   def data_validation(self):
     # local variables
-    flag_json = False
+    flag_json  = False
+    list_error = []
 
     # determine if input data is a JSON object
     try:
       json_data = json.loads(self.svm_data)['data']['settings']
       flag_json = True
     except ValueError, e:
-      msg = 'Error: The SVM settings have not been properly configured'
-      print json.dumps({'error':msg}, separators=(',', ': '))
-      return False
+      error     = 'The SVM settings have not been properly configured'
+      list_error.append(error)
+      flag_json = False
 
     # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_training())
-      except Exception, e:
-        print str(e)
-        return False
+      except Exception, error:
+        list_error.append(str(error))
 
       # validation on 'xml file(s)'
       if ( json_data.get('svm_dataset_type', None) == 'upload file' and json_data.get('svm_dataset', None) ):
@@ -59,9 +59,14 @@ class Validator:
     if self.svm_session == 'analysis' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_analysis())
-      except Exception, e:
-        print str(e)
-        return False
+      except Exception, error:
+        list_error.append(str(error))
+
+    # return error
+    if len(list_error) > 0:
+      return { 'status': False, 'error': list_error }
+    else:
+      return { 'status': True, 'error': None }
 
   ## dataset_validation: each supplied SVM dataset is correctly formatted via corresponding
   #                      methods in 'svm_json.py'. After being formatted, each dataset is
@@ -69,6 +74,9 @@ class Validator:
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
+    # local variables
+    list_error = []
+
     try:
       # iterate outer dict
       for key, value in self.svm_data.iteritems():
@@ -78,9 +86,14 @@ class Validator:
         elif key == 'id_entity':
           validate( {key: value}, jsonschema_dataset_id() )
 
-    except Exception, e:
-      print str(e)
-      return False
+    except Exception, error:
+      list_error.append(str(error))
+
+    # return error
+    if len(list_error) > 0:
+      return { 'status': False, 'error': list_error }
+    else:
+      return { 'status': True, 'error': None }
 
   ## file_upload_validation: this method validates the MIME type of 'file upload(s)',
   #                          provided during a 'training' session. If any of the 'file
@@ -88,6 +101,9 @@ class Validator:
   #                          Otherwise, the method will return a list of unique 'file
   #                          upload(s)', discarding duplicates.
   def file_upload_validation(self, json_file_obj):
+    # local variables
+    list_error       = []
+
     json_data        = json.loads(json_file_obj)['data']['dataset']
     acceptable_type  = ['text/plain', 'text/csv', 'application/xml']
 
@@ -101,10 +117,9 @@ class Validator:
           mimetype = magic.from_file( filedata['file_temp'][0], mime=True )
           # validate file format
           if ( mimetype not in acceptable_type ):
-            msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
+            msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
             msg += '\n       ' + ', '.join(acceptable_type)
-            print json.dumps({'error':msg}, separators=(',', ': '))
-            return False
+            list_error.append(msg)
 
           filehash = md5_for_file(filedata['file_temp'][0])
           # add 'hashed' value of file reference(s) to a list
@@ -113,12 +128,18 @@ class Validator:
             json_keep.append( {'type': mimetype, 'filedata': filedata} )
 
         except:
-          msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
-          print json.dumps({'error':msg}, separators=(',', ': '))
-          return False
+          msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
+          list_error.append(msg)
 
       # replace portion of JSON with unique 'file reference(s)'
       json_data['file_upload'][:] = json_keep
-      return json_data
 
-    else: print json.dumps({'Error':'No file(s) were uploaded'}, separators=(',', ': '))
+    else:
+      msg = 'No file(s) were uploaded'
+      list_error.append(msg)
+
+    # return error
+    if len(list_error) > 0:
+      return { 'status': False, 'error': list_error, 'json_data': None }
+    else:
+      return { 'status': True, 'error': None, 'json_data': json_data }
