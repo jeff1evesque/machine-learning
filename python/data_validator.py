@@ -74,6 +74,9 @@ class Validator:
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
+    # local variables
+    list_error = []
+
     try:
       # iterate outer dict
       for key, value in self.svm_data.iteritems():
@@ -83,9 +86,14 @@ class Validator:
         elif key == 'id_entity':
           validate( {key: value}, jsonschema_dataset_id() )
 
-    except Exception, e:
-      print str(e)
-      return False
+    except Exception, error:
+      list_error.append(str(error))
+
+    # return error
+    if len(list_error) > 0:
+      return { 'status': False, 'error': list_error }
+    else:
+      return { 'status': True, 'error': None }
 
   ## file_upload_validation: this method validates the MIME type of 'file upload(s)',
   #                          provided during a 'training' session. If any of the 'file
