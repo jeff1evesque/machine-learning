@@ -101,6 +101,9 @@ class Validator:
   #                          Otherwise, the method will return a list of unique 'file
   #                          upload(s)', discarding duplicates.
   def file_upload_validation(self, json_file_obj):
+    # local variables
+    list_error       = []
+
     json_data        = json.loads(json_file_obj)['data']['dataset']
     acceptable_type  = ['text/plain', 'text/csv', 'application/xml']
 
