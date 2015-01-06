@@ -61,6 +61,8 @@ class Validator:
       except Exception, error:
         list_error.append(str(error))
 
+    # return error
+
   ## dataset_validation: each supplied SVM dataset is correctly formatted via corresponding
   #                      methods in 'svm_json.py'. After being formatted, each dataset is
   #                      validated in this method.
