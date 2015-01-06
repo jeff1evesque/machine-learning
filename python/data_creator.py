@@ -76,7 +76,7 @@ class Training:
                  '''
       cursor.execute( sql )
 
-    except DB.Error, e:
+    except DB.Error, error:
       list_error.append(error)
     finally:
       if conn:
@@ -98,7 +98,7 @@ class Training:
           cursor.execute( sql, (self.svm_data['id_entity'], val['dep_variable_label'], val['indep_variable_label'], val['indep_variable_value']) )
 
       conn.commit()
-    except DB.Error, e:
+    except DB.Error, error:
       conn.rollback()
       list_error.append(error)
     finally:
