@@ -87,15 +87,15 @@ def jsonschema_training():
       'svm_model_type': {
         'type': 'string',
         'enum': ['classification', 'regression']
-      }
+      },
       'svm_dataset_type': {
         'type': 'string',
         'enum': ['upload file', 'xml file']
-      }
+      },
       'svm_session': {
         'type': 'string',
         'enum': ['training', 'analysis']
-      }
+      },
     }
   }
   return schema
@@ -113,16 +113,16 @@ def jsonschema_analysis():
       'svm_model_type': {
         'type': 'string',
         'enum': ['classification', 'regression']
-      }
+      },
       'svm_session': {
         'type': 'string',
         'enum': ['training', 'analysis']
-      }
+      },
       'svm_indep_variable': {
         'type': 'array',
         'items': { 'type': 'string' },
         'minItems': 1
-      }
+      },
     }
   }
   return schema
