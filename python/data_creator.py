@@ -21,9 +21,6 @@ class Training:
   #
   #        where 'xxx' denotes a unicode string, and 'yy' denotes a float value.
   def __init__(self, svm_data, cmd=None):
-    # local variables
-    list_error = []
-
     # class variables
     self.svm_data    = svm_data
     self.svm_cmd     = cmd
