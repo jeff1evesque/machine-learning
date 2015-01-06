@@ -88,6 +88,10 @@ if len(sys.argv) > 1:
             print e
             sys.exit()
 
+  # check validation return values
+  if (response_mime_validation['status'] = False):
+    sys.exit()
+
 else:
   msg = 'Please provide a training dataset in json format'
   print json.dumps({'error':msg}, separators=(',', ': '))
