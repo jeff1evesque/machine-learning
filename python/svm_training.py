@@ -61,7 +61,7 @@ if len(sys.argv) > 1:
       json_dataset = {}
       svm_property = sys.argv[1]
 
-      for val in json_file_upload['file_upload']:
+      for val in response_mime_validation['json_data']['file_upload']:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
