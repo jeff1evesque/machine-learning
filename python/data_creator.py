@@ -44,6 +44,8 @@ class Training:
   #
   #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
   def db_save_training(self):
+    # local variables
+    list_error = []
 
     # create 'type' table if doesn't exist
     try:
