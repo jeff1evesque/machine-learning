@@ -92,6 +92,14 @@ if len(sys.argv) > 1:
   if (response_mime_validation['status'] == False):
     sys.exit()
 
+  for value in response_dataset_validation:
+    if value['status'] == False:
+      print value['error']
+      flag_quit = True
+
+  if flag_quit == True:
+    sys.exit()
+
 else:
   msg = 'Please provide a training dataset in json format'
   print json.dumps({'error':msg}, separators=(',', ': '))
