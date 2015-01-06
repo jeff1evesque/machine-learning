@@ -33,12 +33,17 @@ class Training:
       cursor = conn.cursor()
       sql    = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
       cursor.execute( sql )
-    except DB.Error, e:
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
+    except DB.Error, error:
+      list_error.append(error)
     finally:
       if conn:
         conn.close()
+
+    # return error
+    if len(list_error) > 0:
+      return { 'status': False, 'error': list_error }
+    else:
+      return { 'status': True, 'error': None }
 
   ## db_save_training: stores an SVM dataset into corresponding 'EAV data model'
   #                    database table.
