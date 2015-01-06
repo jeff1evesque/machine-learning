@@ -91,7 +91,7 @@ if len(sys.argv) > 1:
 
   # check validation return values
   if (response_mime_validation['status'] == False):
-    sys.exit()
+    flag_quit = True
 
   for value in response_dataset_validation:
     if value['status'] == False:
