@@ -83,36 +83,18 @@ def jsonschema_training():
   schema = {
     'type': 'object',
     'properties': {
-      'data': {
-        'type': 'object',
-        'properties': {
-          'result': {
-            'type': 'object',
-            'properties': {
-              'svm_title': {
-                'type': 'string',
-                'minLength': 1
-              },
-              'svm_dataset_type': { 
-                'type': 'string',
-                'enum': ['upload file', 'xml file']
-              },
-              'svm_dataset': {
-                'type': 'array',
-                'items': { 'type': 'string' },
-                'minItems': 1
-              },
-              'svm_session': { 
-                'type': 'string',
-                'enum': ['training', 'analysis']
-              },
-              'svm_model_type': {
-                'type': 'string',
-                'enum': ['classification', 'regression']
-              },
-            }
-          }
-        }
+      'svm_title': { 'type': 'string' },
+      'svm_model_type': {
+        'type': 'string',
+        'enum': ['classification', 'regression']
+      }
+      'svm_dataset_type': {
+        'type': 'string',
+        'enum': ['upload file', 'xml file']
+      }
+      'svm_session': {
+        'type': 'string',
+        'enum': ['training', 'analysis']
       }
     }
   }
@@ -127,33 +109,19 @@ def jsonschema_analysis():
   schema = {
     'type': 'object',
     'properties': {
-      'json_creator': { 'type': 'string' },
-      'data': {
-        'type': 'object',
-        'properties': {
-          'result': {
-            'type': 'object',
-            'properties': {
-              'datalist_support': {
-                'type': 'string',
-                'enum': ['true', 'false']
-              },
-              'svm_session': { 
-                'type': 'string',
-                'enum': ['training', 'analysis']
-              },
-              'svm_model_type': {
-                'type': 'string',
-                'enum': ['classification', 'regression']
-              },
-              'svm_indep_variable': {
-                'type': 'array',
-                'items': { 'type': 'string' },
-                'minItems': 1
-              },
-            }
-          }
-        }
+      'svm_title': { 'type': 'string' },
+      'svm_model_type': {
+        'type': 'string',
+        'enum': ['classification', 'regression']
+      }
+      'svm_session': {
+        'type': 'string',
+        'enum': ['training', 'analysis']
+      }
+      'svm_indep_variable': {
+        'type': 'array',
+        'items': { 'type': 'string' },
+        'minItems': 1
       }
     }
   }
