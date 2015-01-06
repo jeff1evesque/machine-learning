@@ -62,6 +62,10 @@ class Validator:
         list_error.append(str(error))
 
     # return error
+    if len(list_error) > 0:
+      return { status: False, 'error': list_error }
+    else:
+      return { status: True, 'error': None }
 
   ## dataset_validation: each supplied SVM dataset is correctly formatted via corresponding
   #                      methods in 'svm_json.py'. After being formatted, each dataset is
