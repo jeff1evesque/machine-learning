@@ -66,12 +66,13 @@ if len(sys.argv) > 1:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
-            json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON( val['filedata']['file_temp'][0]).csv_to_json())}
-            json_validated = Validator( json_dataset )
-            response_dataset_validation.append(json_validated.dataset_validation())
+            for dataset in val['filedata']['file_temp']:
+              json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())}
+              json_validated = Validator( json_dataset )
+              response_dataset_validation.append(json_validated.dataset_validation())
 
-            db_save = Training( json_dataset, 'save_value' )
-            db_save.db_save_training()
+              db_save = Training( json_dataset, 'save_value' )
+              db_save.db_save_training()
           except Exception as e:
             print e
             sys.exit()
@@ -79,7 +80,7 @@ if len(sys.argv) > 1:
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON( val['filedata']['file_temp'][0]).xml_to_json())}
+            json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())}
             json_validated = Validator( json_dataset )
             response_dataset_validation.append(json_validated.dataset_validation())
 
