@@ -89,7 +89,7 @@ if len(sys.argv) > 1:
             sys.exit()
 
   # check validation return values
-  if (response_mime_validation['status'] = False):
+  if (response_mime_validation['status'] == False):
     sys.exit()
 
 else:
