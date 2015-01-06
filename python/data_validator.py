@@ -133,7 +133,6 @@ class Validator:
 
       # replace portion of JSON with unique 'file reference(s)'
       json_data['file_upload'][:] = json_keep
-      return json_data
 
     else:
       msg = 'No file(s) were uploaded'
@@ -143,4 +142,4 @@ class Validator:
     if len(list_error) > 0:
       return { 'status': False, 'error': list_error, 'json_data': None }
     else:
-      return { 'status': True, 'error': None, 'json_data' }
+      return { 'status': True, 'error': None, 'json_data': json_data }
