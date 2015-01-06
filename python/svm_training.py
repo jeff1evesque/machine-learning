@@ -1,34 +1,34 @@
 #!/usr/bin/python
 
 ## @svm_training.py
-#  This file properly escapes POST data received from 'php/logic_loader.php',
-#      parses the data, and sends respective portions of the POST data to
-#      'python/data_creator.py'. data_creator.py is responsible for saving
-#      the SVM dataset into the mySQL database.
+#  This file receives data (i.e. training settings, dataset) pertaining to a
+#      submitted SVM training session. The data is properly allocated to other
+#      python scripts, in order to be validated, and properly stored into
+#      corresponding EAV data model, database tables. 
 #
-#  Note: This script is executed from 'logic_loader.php' using the 'exec( ... )'
-#        method. To return data to php, use a simple 'print' statement. For
-#        example the following will return the arguments passed to this script:
+#  Note: this script is executed from 'load_logic.php', using the 'exec( ... )'
+#        equivalent method when implemented via the web-interface. Since the
+#        web-interface is an AJAX process, the shelled into python script requires
+#        print statements, when data is returned to the client-end (browser).
+#
+#        The following will return the arguments passed into the python script:
 #
 #            print sys.argv[1]
 #
-#        Then, in php, we can capture this data by:
+#        Then, in php, we can capture the returned data:
 #
-#            $output = exec("$command $parameters");
+#            $output = shell_command("$command $parameters");
 #            $arr_result = array('result' => $output);
 #            $json = array_merge($json, $arr_result);
 #
-#        Which will allow us to return it via ajax, as follows:
+#        Which will allow us to return it javascript:
 #
 #            print json_encode($json);
 #
 #        Note: we can only call `print json_encode($json)` once. The receiving
-#              receiving javascript can interpret the data as follows:
+#              javascript will interpret the data as follows:
 #
 #            console.log( data.result );
-#
-#  @import sys, provides various functions, and variables that can be used to
-#      manipulate different parts of the Python runtime environment (i.e. argv).
 #
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
