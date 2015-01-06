@@ -77,17 +77,22 @@ class Validator:
     # local variables
     list_error = []
 
-    try:
-      # iterate outer dict
-      for key, value in self.svm_data.iteritems():
+    # iterate outer dict
+    for key, value in self.svm_data.iteritems():
+      try:
         if key == 'svm_dataset':
           for dict in value:
-            validate( dict, jsonschema_dataset() )
+            try:
+              validate( dict, jsonschema_dataset() )
+            except Exception, error:
+              list_error.append(str(error))
         elif key == 'id_entity':
-          validate( {key: value}, jsonschema_dataset_id() )
-
-    except Exception, error:
-      list_error.append(str(error))
+          try:
+            validate( {key: value}, jsonschema_dataset_id() )
+          except Exception, error:
+            list_error.append(str(error))
+      except Exception, error:
+        list_error.append(str(error))
 
     # return error
     if len(list_error) > 0:
