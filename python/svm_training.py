@@ -65,7 +65,7 @@ if len(sys.argv) > 1:
           try:
             json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON( val['filedata']['file_temp'][0]).csv_to_json())}
             json_validated = Validator( json_dataset )
-            json_validated.dataset_validation()
+            response_dataset_validation = json_validated.dataset_validation()
 
             db_save = Training( json_dataset, 'save_value' )
             db_save.db_save_training()
