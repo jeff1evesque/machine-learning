@@ -21,14 +21,19 @@ class Training:
   #
   #        where 'xxx' denotes a unicode string, and 'yy' denotes a float value.
   def __init__(self, svm_data, cmd=None):
-    # local variable
-    list_error = []
-
     # class variables
     self.svm_data    = svm_data
     self.svm_cmd     = cmd
     self.db_settings = Database()
     self.uid         = 1
+
+  ## db_save_training: stores an SVM dataset into corresponding 'EAV data model'
+  #                    database table.
+  #
+  #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
+  def db_save_training(self):
+    # local variables
+    list_error = []
 
     # create 'db_machine_learning' database if doesn't exist
     try:
@@ -41,20 +46,6 @@ class Training:
     finally:
       if conn:
         conn.close()
-
-    # return error
-    if len(list_error) > 0:
-      return { 'status': False, 'error': list_error }
-    else:
-      return { 'status': True, 'error': None }
-
-  ## db_save_training: stores an SVM dataset into corresponding 'EAV data model'
-  #                    database table.
-  #
-  #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
-  def db_save_training(self):
-    # local variables
-    list_error = []
 
     # create 'type' table if doesn't exist
     try:
