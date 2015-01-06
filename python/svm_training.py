@@ -39,6 +39,9 @@ from data_validator import Validator
 from svm_json import JSON
 
 if len(sys.argv) > 1:
+  # local variables
+  response_dataset_validation = []
+  flag_quit = False
 
   # validate SVM settings
   validator = Validator( sys.argv[1], 'training' )
@@ -51,21 +54,21 @@ if len(sys.argv) > 1:
 
   if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
     # validate MIME type for each dataset
-    json_file_upload = validator.file_upload_validation( sys.argv[1] )
-    if ( json_file_upload is False ): sys.exit()
+    response_mime_validation = validator.file_upload_validation( sys.argv[1] )
+    if ( response_mime_validation['json_data'] is False ): sys.exit()
 
     # convert each dataset as json, validate, and store in database
     else:
       json_dataset = {}
       svm_property = sys.argv[1]
 
-      for val in json_file_upload['file_upload']:
+      for val in response_mime_validation['json_data']['file_upload']:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
             json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON( val['filedata']['file_temp'][0]).csv_to_json())}
             json_validated = Validator( json_dataset )
-            json_validated.dataset_validation()
+            response_dataset_validation.append(json_validated.dataset_validation())
 
             db_save = Training( json_dataset, 'save_value' )
             db_save.db_save_training()
@@ -78,13 +81,25 @@ if len(sys.argv) > 1:
           try:
             json_dataset = {'id_entity': id_entity, 'svm_dataset': json.loads(JSON( val['filedata']['file_temp'][0]).xml_to_json())}
             json_validated = Validator( json_dataset )
-            json_validated.dataset_validation()
+            response_dataset_validation.append(json_validated.dataset_validation())
 
             db_save = Training( json_dataset, 'save_value' )
             db_save.db_save_training()
           except Exception as e:
             print e
             sys.exit()
+
+  # check validation return values
+  if (response_mime_validation['status'] == False):
+    flag_quit = True
+
+  for value in response_dataset_validation:
+    if value['status'] == False:
+      print value['error']
+      flag_quit = True
+
+  if flag_quit == True:
+    sys.exit()
 
 else:
   msg = 'Please provide a training dataset in json format'
