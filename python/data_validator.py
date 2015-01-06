@@ -39,16 +39,15 @@ class Validator:
       json_data = json.loads(self.svm_data)['data']['settings']
       flag_json = True
     except ValueError, e:
-      msg = 'Error: The SVM settings have not been properly configured'
-      list_error.append(msg)
+      error     = 'The SVM settings have not been properly configured'
+      list_error.append(error)
 
     # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_training())
-      except Exception, e:
-        print str(e)
-        return False
+      except Exception, error:
+        list_error.append(str(error))
 
       # validation on 'xml file(s)'
       if ( json_data.get('svm_dataset_type', None) == 'upload file' and json_data.get('svm_dataset', None) ):
@@ -59,9 +58,8 @@ class Validator:
     if self.svm_session == 'analysis' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_analysis())
-      except Exception, e:
-        print str(e)
-        return False
+      except Exception, error:
+        list_error.append(str(error))
 
   ## dataset_validation: each supplied SVM dataset is correctly formatted via corresponding
   #                      methods in 'svm_json.py'. After being formatted, each dataset is
