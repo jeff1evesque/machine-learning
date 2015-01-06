@@ -39,6 +39,8 @@ from data_validator import Validator
 from svm_json import JSON
 
 if len(sys.argv) > 1:
+  # local variables
+  response_dataset_validation = []
 
   # validate SVM settings
   validator = Validator( sys.argv[1], 'training' )
