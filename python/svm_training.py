@@ -51,8 +51,8 @@ if len(sys.argv) > 1:
 
   if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
     # validate MIME type for each dataset
-    json_file_upload = validator.file_upload_validation( sys.argv[1] )
-    if ( json_file_upload is False ): sys.exit()
+    response = validator.file_upload_validation( sys.argv[1] )
+    if ( response['json_data'] is False ): sys.exit()
 
     # convert each dataset as json, validate, and store in database
     else:
