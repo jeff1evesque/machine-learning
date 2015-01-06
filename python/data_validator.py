@@ -117,7 +117,7 @@ class Validator:
           mimetype = magic.from_file( filedata['file_temp'][0], mime=True )
           # validate file format
           if ( mimetype not in acceptable_type ):
-            msg =  '''Error: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
+            msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
             msg += '\n       ' + ', '.join(acceptable_type)
             list_error.append(msg)
 
@@ -128,7 +128,7 @@ class Validator:
             json_keep.append( {'type': mimetype, 'filedata': filedata} )
 
         except:
-          msg = 'Error: problem with file upload #' + str(index) + '. Please re-upload the file.'
+          msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
           list_error.append(msg)
 
       # replace portion of JSON with unique 'file reference(s)'
