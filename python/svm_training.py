@@ -11,7 +11,8 @@
 #        web-interface is an AJAX process, the shelled into python script requires
 #        print statements, when data is needed to be returned to the client-end.
 #
-#        The following will return the arguments passed into the python script:
+#        The following will return the arguments passed into this AJAX shelled
+#        into python script:
 #
 #            print sys.argv[1]
 #
@@ -21,7 +22,7 @@
 #            $arr_result = array('result' => $output);
 #            $json = array_merge($json, $arr_result);
 #
-#        Which will allow us to return it javascript:
+#        Which will allow us to return it to the client-end:
 #
 #            print json_encode($json);
 #
