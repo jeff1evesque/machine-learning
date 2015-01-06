@@ -74,9 +74,9 @@ class Training:
                  );
                  '''
       cursor.execute( sql )
+
     except DB.Error, e:
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
+      list_error.append(error)
     finally:
       if conn:
         conn.close()
@@ -99,13 +99,18 @@ class Training:
       conn.commit()
     except DB.Error, e:
       conn.rollback()
-      print "Error %d: %s" % (e.args[0], e.args[1])
-      return False
+      list_error.append(error)
     finally:
       if conn:
         rowid = cursor.lastrowid
         conn.close()
         return rowid
+
+    # return error
+    if len(list_error) > 0:
+      return { 'status': False, 'error': list_error }
+    else:
+      return { 'status': True, 'error': None }
 
 ## Class: Analysis
 class Analysis:
