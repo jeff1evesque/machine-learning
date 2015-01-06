@@ -3,13 +3,13 @@
 ## @svm_training.py
 #  This file receives data (i.e. training settings, dataset) pertaining to a
 #      submitted SVM training session. The data is properly allocated to other
-#      python scripts, in order to be validated, and properly stored into
-#      corresponding EAV data model, database tables. 
+#      python scripts, to be validated, and properly stored into corresponding
+#      EAV data model, database tables. 
 #
 #  Note: this script is executed from 'load_logic.php', using the 'exec( ... )'
 #        equivalent method when implemented via the web-interface. Since the
 #        web-interface is an AJAX process, the shelled into python script requires
-#        print statements, when data is returned to the client-end (browser).
+#        print statements, when data is needed to be returned to the client-end.
 #
 #        The following will return the arguments passed into the python script:
 #
