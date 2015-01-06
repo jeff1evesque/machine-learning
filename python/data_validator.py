@@ -40,9 +40,7 @@ class Validator:
       flag_json = True
     except ValueError, e:
       msg = 'Error: The SVM settings have not been properly configured'
-      responses
-      print json.dumps({'error':msg}, separators=(',', ': '))
-      return False
+      list_error.append(msg)
 
     # validation on 'training' session
     if self.svm_session == 'training' and flag_json:
