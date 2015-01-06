@@ -31,8 +31,8 @@ class Validator:
   #        'dataset_validation' methods (see below).
   def data_validation(self):
     # local variables
-    flag_json = False
-    response  = {}
+    flag_json  = False
+    list_error = []
 
     # determine if input data is a JSON object
     try:
@@ -40,6 +40,7 @@ class Validator:
       flag_json = True
     except ValueError, e:
       msg = 'Error: The SVM settings have not been properly configured'
+      responses
       print json.dumps({'error':msg}, separators=(',', ': '))
       return False
 
