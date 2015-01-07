@@ -27,7 +27,8 @@
         <p>Select whether the current session will be <i>training</i>, or <i>analysis</i>.</p>
         <select name='svm_session'>
           <option value='none' selected='selected'>--Select--</option>
-          <option value='training'>Training</option>
+          <option value='data_new'>New Data</option>
+          <option value='data_append'>Append Data</option>
           <option value='analysis'>Analysis</option>
         </select>
       </fieldset>
