@@ -62,7 +62,8 @@ class Training:
                    title VARCHAR (50) NOT NULL,
                    uid_created INT NOT NULL,
                    datetime_created DATETIME,
-                   uid_modified INT NULL
+                   uid_modified INT NULL,
+                   datetime_modified INT NULL
                  );
                  '''
 
