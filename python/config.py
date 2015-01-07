@@ -84,6 +84,7 @@ def jsonschema_training():
     'type': 'object',
     'properties': {
       'svm_title': { 'type': 'string' },
+      'svm_session_id' : { 'type': 'string' },
       'svm_model_type': {
         'type': 'string',
         'enum': ['classification', 'regression']
