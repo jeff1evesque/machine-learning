@@ -76,6 +76,10 @@
           required: true,
           textOnly: true          
         },
+        svm_session_id: {
+          required: true,
+          textOnly: true
+        }
         svm_dataset_type: {
           equals: ['upload file', 'xml file']
         },
