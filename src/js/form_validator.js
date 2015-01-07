@@ -70,7 +70,7 @@
     $('form').validate({
       rules: {
         svm_session: {
-          equals: ['training', 'analysis']
+          equals: ['data_new', 'data_append', 'analysis']
         },
         svm_title: {
           required: true,
@@ -88,7 +88,7 @@
         },
       },
       messages: {
-        svm_session: 'Not acceptable value',
+        svm_session: 'Not acceptable values',
         svm_title: 'Must be nonempty string',
         svm_dataset_type: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
