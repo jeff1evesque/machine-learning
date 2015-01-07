@@ -35,7 +35,7 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys, json
-from data_creator import Training
+from data_saver import Training
 from data_validator import Validator
 from svm_json import JSON
 
