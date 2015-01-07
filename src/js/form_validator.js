@@ -98,6 +98,7 @@
         svm_session: 'Not acceptable values',
         svm_title: 'Must be nonempty string',
         svm_dataset_type: 'Not acceptable value',
+        svm_session_id: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
         'svm_indep_variable[]': 'Must be nonempty string',
       },
