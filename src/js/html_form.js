@@ -27,7 +27,7 @@ $(document).ready(function() {
     }
     else if ( $(this).val().toLowerCase() == 'data_new' ) {
       obj_form.session = '\
-          <fieldset class="fieldset_session_training">\
+          <fieldset class="fieldset_session_data_upload">\
             <legend>Data Upload</legend>\
             <fieldset class="fieldset_dataset_type">\
               <legend>Configurations</legend>\
@@ -48,7 +48,7 @@ $(document).ready(function() {
         ';
     }
     else obj_form.session = null;
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_training', '.fieldset_supply_dataset', '.svm_form_submit']);
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // append 'Supply Dataset' fieldset
     $('.fieldset_dataset_type').on('input change', 'select[name="svm_dataset_type"], input[name="svm_title"], select[name="svm_model_type"]', function() {
