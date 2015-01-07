@@ -70,6 +70,7 @@
     $('form').validate({
       rules: {
         svm_session: {
+          required: true,
           equals: ['data_new', 'data_append', 'analysis']
         },
         svm_title: {
@@ -81,9 +82,11 @@
           textOnly: true
         }
         svm_dataset_type: {
+          required: true,
           equals: ['upload file', 'xml file']
         },
         svm_model_type: {
+          required: true,
           equals: ['classification', 'regression']
         },
         'svm_indep_variable[]': {
