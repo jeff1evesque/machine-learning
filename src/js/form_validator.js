@@ -70,16 +70,23 @@
     $('form').validate({
       rules: {
         svm_session: {
+          required: true,
           equals: ['data_new', 'data_append', 'analysis']
         },
         svm_title: {
           required: true,
           textOnly: true          
         },
+        svm_session_id: {
+          required: true,
+          textOnly: true
+        }
         svm_dataset_type: {
+          required: true,
           equals: ['upload file', 'xml file']
         },
         svm_model_type: {
+          required: true,
           equals: ['classification', 'regression']
         },
         'svm_indep_variable[]': {
@@ -91,6 +98,7 @@
         svm_session: 'Not acceptable values',
         svm_title: 'Must be nonempty string',
         svm_dataset_type: 'Not acceptable value',
+        svm_session_id: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
         'svm_indep_variable[]': 'Must be nonempty string',
       },
