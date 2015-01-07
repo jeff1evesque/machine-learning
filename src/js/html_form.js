@@ -28,7 +28,7 @@ $(document).ready(function() {
     else if ( $(this).val().toLowerCase() == 'data_new' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_training">\
-            <legend>Training Session</legend>\
+            <legend>Data Upload</legend>\
             <fieldset class="fieldset_dataset_type">\
               <legend>Configurations</legend>\
               <p>Please save the <i>Session Name</i>, then provide the <i>Training Type</i>, followed by the <i>Dataset Type</i></p>\
