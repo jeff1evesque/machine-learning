@@ -117,8 +117,8 @@
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->settings->svm_session), $arr_result);
         $arr_result = array('data' => $arr_result);
 
-        if ($this->settings->svm_session == 'training') {
-          $result = shell_command('python ../../../python/svm_training.py', json_encode($arr_result));
+        if ( in_array($this->settings->svm_session, array('data_new', 'data_append')) ) {
+          $result = shell_command('python ../../../python/data_upload.py', json_encode($arr_result));
         }
         else {
           $result = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
