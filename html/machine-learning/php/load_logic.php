@@ -121,7 +121,7 @@
           $result = shell_command('python ../../../python/data_uploader.py', json_encode($arr_result));
         }
         else {
-          $result = shell_command('python ../../../python/svm_analysis.py', json_encode($arr_result));
+          $result = shell_command('python ../../../python/data_analyzer.py', json_encode($arr_result));
         }
         array_push($arr_response, json_encode($result));
       }
