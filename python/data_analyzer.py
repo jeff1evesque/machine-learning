@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @svm_analysis.py
+## @data_analyzer.py
 #  This file properly escapes POST data received from 'php/logic_loader.php',
 #      parses the data, and sends respective portions of the POST data to
 #      'python/svm_model.py'. svm_model.py is responsible for loading the
