@@ -24,10 +24,11 @@
     <form action='../../php/load_logic.php' method='post'>
       <fieldset class='fieldset_session_type'>
         <legend>Session Type</legend>
-        <p>Select whether the current session will be <i>training</i>, or <i>analysis</i>.</p>
+        <p>Select data upload, or analysis session</p>
         <select name='svm_session'>
           <option value='none' selected='selected'>--Select--</option>
-          <option value='training'>Training</option>
+          <option value='data_new'>New Data</option>
+          <option value='data_append'>Append Data</option>
           <option value='analysis'>Analysis</option>
         </select>
       </fieldset>
