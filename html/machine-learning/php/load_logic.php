@@ -79,7 +79,7 @@
       $flag_validator   = true;
       $arr_model_type   = array('classification', 'regression');
       $arr_dataset_type = array('file_upload', 'xml_url');
-      $arr_session_type = array('training', 'analysis');
+      $arr_session_type = array('data_new', 'data_append', 'analysis');
       $arr_upload       = array();
       $arr_error        = array();
       $arr_response     = array();
