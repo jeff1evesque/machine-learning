@@ -40,8 +40,8 @@ $(document).ready(function() {
               </select>\
               <select name="svm_dataset_type">\
                 <option value="none" selected="selected">--Select--</option>\
-                <option value="upload file">Upload file</option>\
-                <option value="xml file">XML url</option>\
+                <option value="file_upload">Upload file</option>\
+                <option value="xml_url">XML URL</option>\
               </select>\
             </fieldset>\
           </fieldset>\
