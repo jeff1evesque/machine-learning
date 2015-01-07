@@ -95,7 +95,7 @@ def jsonschema_training():
       },
       'svm_session': {
         'type': 'string',
-        'enum': ['training', 'analysis']
+        'enum': ['data_new', 'data_append', 'analysis']
       },
     }
   }
