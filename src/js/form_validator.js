@@ -80,7 +80,7 @@
         svm_session_id: {
           required: true,
           textOnly: true
-        }
+        },
         svm_dataset_type: {
           required: true,
           equals: ['file_upload', 'xml_url']
