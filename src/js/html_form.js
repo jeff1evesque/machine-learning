@@ -25,7 +25,7 @@ $(document).ready(function() {
           </fieldset><br>\
         ';
     }
-    else if ( $(this).val().toLowerCase() == 'training' ) {
+    else if ( $(this).val().toLowerCase().substring(0, 4) == 'data' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_training">\
             <legend>Training Session</legend>\
