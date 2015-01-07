@@ -78,7 +78,7 @@
     // local variables
       $flag_validator   = true;
       $arr_model_type   = array('classification', 'regression');
-      $arr_dataset_type = array('upload file', 'xml file');
+      $arr_dataset_type = array('file_upload', 'xml_url');
       $arr_session_type = array('training', 'analysis');
       $arr_upload       = array();
       $arr_error        = array();
