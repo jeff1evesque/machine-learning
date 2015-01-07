@@ -246,6 +246,6 @@ The same syntax [requirement](https://github.com/jeff1evesque/machine-learning#w
 { {'uid': xx, 'title': 'yyy'}, {'svm_dataset': [{'dep_variable_label': 'yyy', 'indep_variable_label': 'yyy', 'indep_variable_value': zz.zz}]}, {'id_entity': xx} }
 ```
 
-is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_creator.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_saver.py). Be sure to validate the dataset(s) as needed before storing the dataset(s) in the database.
+is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_saver.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_saver.py). Be sure to validate the dataset(s) as needed before storing the dataset(s) in the database.
 
 ###Test Scripts
