@@ -238,7 +238,7 @@ The following are acceptable syntax:
 When creating (sub)projects of this repository *programmatically*, it is important to leverage existing logic when possible:
 
 - [Dataset validation](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_validator.py)
-- [Database methods](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py)
+- [Database methods](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_saver.py)
 
 The same syntax [requirement](https://github.com/jeff1evesque/machine-learning#web-interface) for csv, or xml file(s) to json conversion is required. This means logic contained within [`svm_json.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/svm_json.py) must be implemented if such files are used. However, if using a json object (dataset representation) directly is preferred, then no conversion logic is required. Simply ensure a list of dictionary elements:
 
@@ -246,6 +246,6 @@ The same syntax [requirement](https://github.com/jeff1evesque/machine-learning#w
 { {'uid': xx, 'title': 'yyy'}, {'svm_dataset': [{'dep_variable_label': 'yyy', 'indep_variable_label': 'yyy', 'indep_variable_value': zz.zz}]}, {'id_entity': xx} }
 ```
 
-is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_creator.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_creator.py). Be sure to validate the dataset(s) as needed before storing the dataset(s) in the database.
+is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_saver.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_saver.py). Be sure to validate the dataset(s) as needed before storing the dataset(s) in the database.
 
 ###Test Scripts
