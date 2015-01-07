@@ -47,6 +47,20 @@ $(document).ready(function() {
           </fieldset>\
         ';
     }
+    else if ( $(this).val().toLowerCase() == 'data_append' ) {
+      obj_form.session = '\
+          <fieldset class="fieldset_session_data_upload">\
+            <legend>Data Upload</legend>\
+            <fieldset class="fieldset_dataset_type">\
+              <legend>Configurations</legend>\
+              <p>Select previous Data Upload session</p>\
+              <select name="svm_session_id">\
+                <option value="none" selected="selected">--Select--</option>\
+              </select>\
+            </fieldset>\
+          </fieldset>\
+        ';
+    }
     else obj_form.session = null;
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
 
