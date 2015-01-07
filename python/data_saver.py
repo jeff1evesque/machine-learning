@@ -61,7 +61,7 @@ class Training:
                    id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                    title VARCHAR (50) NOT NULL,
                    uid_created INT NOT NULL,
-                   datetime_saved DATETIME
+                   datetime_created DATETIME
                  );
                  '''
 
@@ -91,7 +91,7 @@ class Training:
 
       # sql format string is not a python string, hence '%s' used for all columns
       if self.svm_cmd == 'save_entity':
-        sql  = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_saved) VALUES( %s, %s, UTC_TIMESTAMP() )'
+        sql  = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (self.svm_data['title'], self.svm_data['uid']) )
 
       elif self.svm_cmd == 'save_value':
