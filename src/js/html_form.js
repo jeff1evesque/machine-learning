@@ -96,7 +96,7 @@ $(document).ready(function() {
 
         if( flag_field ) {
           obj_form.submit = '<input type="submit" class="svm_form_submit">';
-          build_form('.fieldset_session_training', obj_form.submit, ['.svm_form_submit']);
+          build_form('.fieldset_session_data_upload', obj_form.submit, ['.svm_form_submit']);
         }
         else $('.svm_form_submit').remove();
       });
