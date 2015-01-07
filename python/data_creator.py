@@ -15,11 +15,14 @@ class Training:
   #  Note: the SVM dataset, 'self.svm_data' is list of dictionary elements. One
   #        dictionary element, is represented as follows:
   #
-  #            {'dep_variable_label': u'xxx',
-  #             'indep_variable_label': u'xxx',
-  #             'indep_variable_value': yy.yy}
+  #            { {'uid': xx, 'title': 'yyy'},
+  #              {'svm_dataset': [{'dep_variable_label': 'yyy',
+  #                                'indep_variable_label': 'yyy',
+  #                                'indep_variable_value': zz.zz}]},
+  #              {'id_entity': xx} }
   #
-  #        where 'xxx' denotes a unicode string, and 'yy' denotes a float value.
+  #        where 'xx' denotes an integer value, 'yyy' a unicode string, and 'zz'
+  #        representing a float value.
   def __init__(self, svm_data, cmd=None):
     # class variables
     self.svm_data    = svm_data
