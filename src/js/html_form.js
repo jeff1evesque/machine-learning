@@ -1,7 +1,7 @@
 /**
  * html_form.js: creates additional form fieldsets based on various datalist choices.
  *
- * Note: the 'session_id()' is from another javascript file.
+ * Note: session_id() is defined within 'ajax_session.js'.
  */
 
 $(document).ready(function() {
