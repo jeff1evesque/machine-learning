@@ -20,8 +20,12 @@ $(document).ready(function() {
       if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
 
         for (var i=0; i < mutation.addedNodes.length; ++i) {
-          console.log("Recording mutation:", mutation.target);
+          layer_outer = mutation.addedNodes[i];
+          if ( mutation.addedNodes[i].nodeName !== '#text' ) {
+            console.log("Recording mutation:", layer_outer.nodeName);
+          }
         }
+
       }
 
     });
