@@ -50,37 +50,38 @@ $(document).ready(function() {
 // Mutation Observation: pass target, and configuration to observer
   observer.observe(target, config);
 
+  if ( $('.fieldset_session_data_upload').length > 0 && $('select[name="svm_session_id"]').length > 0 ) {
 
-    if ( $('.fieldset_session_data_upload').length > 0 && $('select[name="svm_session_id"]').length > 0 ) {
-    // AJAX Process
-      $.ajax({
-        type: 'POST',
-        url: '../../php/retriever_sesion.php',
-        dataType: 'json',
-        beforeSend: function() {
-          ajaxLoader( $(event.currentTarget) );
-        }
-      }).done(function(data) {
+  // AJAX Process
+    $.ajax({
+      type: 'POST',
+      url: '../../php/retriever_sesion.php',
+      dataType: 'json',
+      beforeSend: function() {
+        ajaxLoader( $(event.currentTarget) );
+      }
+    }).done(function(data) {
 
-      // Append to DOM
-        $.each( data['return'], function( index, value ) {
-          var value_id    = value['value_id'];
-          var value_title = value['value_title'];
-          var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
+    // Append to DOM
+      $.each( data['return'], function( index, value ) {
+        var value_id    = value['value_id'];
+        var value_title = value['value_title'];
+        var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
 
-          $('select[name="svm_session_id"]').append( element );
-
-        // Remove AJAX Overlay
-          $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
-        })
-
-      }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.log('Error Thrown: '+errorThrown);
-        console.log('Error Status: '+textStatus);
+        $('select[name="svm_session_id"]').append( element );
 
       // Remove AJAX Overlay
         $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
-      });
-    }
+      })
+
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log('Error Thrown: '+errorThrown);
+      console.log('Error Status: '+textStatus);
+
+    // Remove AJAX Overlay
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+    });
+
+  }
 
 });
