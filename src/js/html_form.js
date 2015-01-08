@@ -53,7 +53,7 @@ $(document).ready(function() {
             <legend>Data Upload</legend>\
             <fieldset class="fieldset_dataset_type">\
               <legend>Configurations</legend>\
-              <p>Select previous Data Upload session</p>\
+              <p>Select past session, and upload type</p>\
               <select name="svm_session_id">\
                 <option value="none" selected="selected">--Select--</option>\
               </select>\
