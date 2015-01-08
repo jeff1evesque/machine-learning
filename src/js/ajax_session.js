@@ -17,7 +17,8 @@ var observer         = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
 
       if ( mutation.type == 'childList' && typeof mutation.addNodes == 'Object' && mutation.addNodes.length > 0 ) {
-        console.log("Recording mutation:", mutation.target);
+//        console.log("Recording mutation:", mutation.target);
+        console.log("Recording mutation:");
       }
 
     });
@@ -34,7 +35,7 @@ observer.observe(container, {
 
 
 
-    if ( $('.fieldset_session_data_upload').length > 0 && $('select['name="svm_session_id"]').length > 0 ) {
+    if ( $('.fieldset_session_data_upload').length > 0 && $('select[name="svm_session_id"]').length > 0 ) {
     // AJAX Process
       $.ajax({
         type: 'POST',
