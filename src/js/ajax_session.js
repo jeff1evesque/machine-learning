@@ -53,7 +53,7 @@ $(document).ready(function() {
         url: '../../php/retriever_sesion.php',
         dataType: 'json',
         beforeSend: function() {
-          ajaxLoader( $(event.currentTarget) );
+          ajaxLoader( $(target) );
         }
       }).done(function(data) {
 
