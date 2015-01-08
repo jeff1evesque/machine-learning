@@ -11,7 +11,14 @@ $(document).ready(function() {
 
   // AJAX Process
     $.ajax({
+      type: 'POST',
+      url: '../../php/retriever_sesion.php',
+      dataType: 'json',
+    }).done(function(data) {
 
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log('Error Thrown: '+errorThrown);
+      console.log('Error Status: '+textStatus);
     });
   });
 });
