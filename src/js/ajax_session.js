@@ -9,7 +9,7 @@
   function session_id() {
     $.ajax({
       type: 'POST',
-      url: '../../php/retriever_sesion.php',
+      url: '../../php/retriever_session.php',
       dataType: 'json',
       beforeSend: function() {
         ajaxLoader( $('form') );
