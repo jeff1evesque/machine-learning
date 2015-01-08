@@ -28,9 +28,11 @@ $(document).ready(function() {
                   var configuration_elements = data_upload_elements.childNodes[k];
 
                   if ( configuration_elements.nodeName.toLowerCase() === 'select' ) {
-                    console.log("Recording mutation:", configuration_elements);
+                    var attr_name = configuration_elements.name;
+                    if ( attr_name === 'svm_session_id' ) {
+                      console.log("Found attribute: ", attr_name);
+                    }
                   }
-
                 }
               }
             }
