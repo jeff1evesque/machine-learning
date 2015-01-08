@@ -29,6 +29,7 @@
           <option value='none' selected='selected'>--Select--</option>
           <option value='data_new'>New Data</option>
           <option value='data_append'>Append Data</option>
+          <option value='model_generate'>Generate Model</option>
           <option value='model_use'>Use Model</option>
         </select>
       </fieldset>
