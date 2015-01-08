@@ -11,7 +11,7 @@ $(document).ready(function() {
 
 
 
-
+var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
 var container = document.querySelector('form');
 var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
