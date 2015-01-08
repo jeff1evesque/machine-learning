@@ -24,7 +24,14 @@ $(document).ready(function() {
               var data_upload_elements = data_upload_container.childNodes[j];
 
               if ( data_upload_elements.nodeName !== '#text' ) {
-                console.log("Recording mutation:", data_upload_elements);
+                for (var k=0; k < data_upload_elements.childNodes.length; ++k) {
+                  var configuration_elements = data_upload_elements.childNodes[k];
+
+                  if ( configuration_elements.nodeName.toLowerCase() === 'select' ) {
+                    console.log("Recording mutation:", configuration_elements);
+                  }
+
+                }
               }
             }
           }
