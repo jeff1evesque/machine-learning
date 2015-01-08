@@ -28,10 +28,10 @@ $(document).ready(function() {
     });
   });
 
-// Mutation Observation: configuration for 'observer'
+// Mutation Observation: configuration for observer
   var config = { attributes: true, childList: true, subtree: true };
 
-// Mutation Observation: pass target, and configurations
+// Mutation Observation: pass target, and configuration to observer
   observer.observe(target, config);
 
 
