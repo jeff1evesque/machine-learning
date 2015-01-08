@@ -12,6 +12,7 @@ $(document).ready(function() {
   var container        = document.querySelector('form');
   var observer         = new MutationObserver(function(mutations) {
 
+// MutationObservation
   mutations.forEach(function(mutation) {
 
     if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
