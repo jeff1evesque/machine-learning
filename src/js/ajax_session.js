@@ -12,12 +12,10 @@ $(document).ready(function() {
   var container        = document.querySelector('form');
 
 // MutationObservation
-
   var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
 
       if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
-
         for (var i=0; i < mutation.addedNodes.length; ++i) {
           var fieldset = mutation.addedNodes[i];
 
@@ -25,7 +23,6 @@ $(document).ready(function() {
             console.log("Recording mutation:", fieldset);
           }
         }
-
       }
 
     });
