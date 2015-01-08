@@ -20,9 +20,10 @@ $(document).ready(function() {
       if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
 
         for (var i=0; i < mutation.addedNodes.length; ++i) {
-          layer_outer = mutation.addedNodes[i];
-          if ( mutation.addedNodes[i].nodeName !== '#text' ) {
-            console.log("Recording mutation:", layer_outer.nodeName);
+          fieldset = mutation.addedNodes[i];
+
+          if ( fieldset.nodeName !== '#text' ) {
+            console.log("Recording mutation:", fieldset);
           }
         }
 
