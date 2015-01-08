@@ -8,6 +8,7 @@
 $(document).ready(function() {
 
 // local variables
+  var flag_ajax        = true;
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
   var target           = document.querySelector('form');
 
