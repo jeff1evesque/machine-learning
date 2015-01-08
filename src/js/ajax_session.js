@@ -34,10 +34,13 @@ $(document).ready(function() {
                       flag_ajax = true;
                     }
                   }
+
                 }
               }
+
             }
           }
+
         }
       }
 
