@@ -17,7 +17,7 @@ $(document).ready(function() {
 
     mutations.forEach(function(mutation) {
 
-      if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length ) {
+      if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
 
         for (var i=0; i < mutation.addedNodes.length; ++i) {
           console.log("Recording mutation:", mutation.target);
