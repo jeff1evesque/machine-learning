@@ -16,6 +16,15 @@ $(document).ready(function() {
       dataType: 'json',
     }).done(function(data) {
 
+    // Append to DOM
+      $.each( data['return'], function( index, value ) {
+        var value_id    = value['value_id'];
+        var value_title = value['value_title'];
+        var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
+
+        $('select[name="svm_session_id"]').append( element );
+      })
+
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: '+errorThrown);
       console.log('Error Status: '+textStatus);
