@@ -14,6 +14,9 @@ $(document).ready(function() {
       type: 'POST',
       url: '../../php/retriever_sesion.php',
       dataType: 'json',
+      beforeSend: function() {
+        ajaxLoader( $(event.currentTarget) );
+      }
     }).done(function(data) {
 
     // Append to DOM
@@ -23,11 +26,17 @@ $(document).ready(function() {
         var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
 
         $('select[name="svm_session_id"]').append( element );
+
+      // Remove AJAX Overlay
+        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
       })
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: '+errorThrown);
       console.log('Error Status: '+textStatus);
+
+    // Remove AJAX Overlay
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
     });
   });
 });
