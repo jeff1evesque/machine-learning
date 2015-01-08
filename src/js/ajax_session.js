@@ -16,7 +16,7 @@ var container        = document.querySelector('form');
 var observer         = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
 
-      if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'Object' && mutation.addedNodes.length > 0 ) {
+      if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length ) {
         console.log("Recording mutation:", mutation.target);
       }
 
