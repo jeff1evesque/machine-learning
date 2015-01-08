@@ -6,32 +6,33 @@
  */
 
 // AJAX Process
-  var ajax_session = $.ajax({
-    type: 'POST',
-    url: '../../php/retriever_sesion.php',
-    dataType: 'json',
-    beforeSend: function() {
-      ajaxLoader( $(event.currentTarget) );
-    }
-  }).done(function(data) {
+  function session_id() {
+    $.ajax({
+      type: 'POST',
+      url: '../../php/retriever_sesion.php',
+      dataType: 'json',
+      beforeSend: function() {
+        ajaxLoader( $('form') );
+      }
+    }).done(function(data) {
 
-  // Append to DOM
-    $.each( data['return'], function( index, value ) {
-      var value_id    = value['value_id'];
-      var value_title = value['value_title'];
-      var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
+    // Append to DOM
+      $.each( data['return'], function( index, value ) {
+        var value_id    = value['value_id'];
+        var value_title = value['value_title'];
+        var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
 
-      $('select[name="svm_session_id"]').append( element );
+        $('select[name="svm_session_id"]').append( element );
+
+      // Remove AJAX Overlay
+        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+      })
+
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log('Error Thrown: '+errorThrown);
+      console.log('Error Status: '+textStatus);
 
     // Remove AJAX Overlay
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
-    })
-
-  }).fail(function(jqXHR, textStatus, errorThrown) {
-    console.log('Error Thrown: '+errorThrown);
-    console.log('Error Status: '+textStatus);
-
-  // Remove AJAX Overlay
-    $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
-  });
-
+    });
+  }
