@@ -29,7 +29,7 @@ $(document).ready(function() {
   });
 
 // Mutation Observation: configuration for 'observer'
-  var config = { attributes: true, childList: true: subtree: true };
+  var config = { attributes: true, childList: true, subtree: true };
 
 // Mutation Observation: pass target, and configurations
   observer.observe(target, config);
