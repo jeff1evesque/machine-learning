@@ -11,9 +11,10 @@ $(document).ready(function() {
 
 
 
-var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-var container        = document.querySelector('form');
-var observer         = new MutationObserver(function(mutations) {
+    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+    var container        = document.querySelector('form');
+    var observer         = new MutationObserver(function(mutations) {
+
     mutations.forEach(function(mutation) {
 
       if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length ) {
