@@ -8,7 +8,7 @@
 $(document).ready(function() {
 
 // local variables
-  var flag_ajax        = true;
+  var flag_ajax        = false;
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
   var target           = document.querySelector('form');
 
@@ -31,7 +31,7 @@ $(document).ready(function() {
                   if ( configuration_elements.nodeName.toLowerCase() === 'select' ) {
                     var attr_name = configuration_elements.name;
                     if ( attr_name === 'svm_session_id' ) {
-                      console.log("Found attribute: ", attr_name);
+                      flag_ajax = true;
                     }
                   }
                 }
