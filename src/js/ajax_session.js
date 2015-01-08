@@ -9,6 +9,26 @@ $(document).ready(function() {
   $('select[name="svm_session"]').on('change', function(event) {
     event.preventDefault();
 
+
+
+
+var container = document.querySelector('form');
+var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
+      console.log("Recording mutation:", mutation.attributeName);
+    });
+  });
+
+observer.observe(container, {
+    attributes: true,
+    attributeFilter: ['name'],
+    childList: true,
+    subtree: true,
+});
+
+
+
+
     if ( $('.fieldset_session_data_upload').length > 0 && $('select['name="svm_session_id"]').length > 0 ) {
     // AJAX Process
       $.ajax({
