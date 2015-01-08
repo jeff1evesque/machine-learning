@@ -51,16 +51,6 @@ $(document).ready(function() {
   observer.observe(target, config);
 
 
-
-  $('select[name="svm_session"]').on('change', function(event) {
-    event.preventDefault();
-
-
-
-
-
-
-
     if ( $('.fieldset_session_data_upload').length > 0 && $('select[name="svm_session_id"]').length > 0 ) {
     // AJAX Process
       $.ajax({
@@ -93,5 +83,4 @@ $(document).ready(function() {
       });
     }
 
-  });
 });
