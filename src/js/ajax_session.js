@@ -20,7 +20,7 @@ $(document).ready(function() {
       if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
 
         for (var i=0; i < mutation.addedNodes.length; ++i) {
-          fieldset = mutation.addedNodes[i];
+          var fieldset = mutation.addedNodes[i];
 
           if ( fieldset.nodeName !== '#text' ) {
             console.log("Recording mutation:", fieldset);
