@@ -68,6 +68,8 @@ $(document).ready(function() {
     }
     else obj_form.session = null;
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
+  // Add option values to 'svm_session_id'
+    if ($(this).val().toLowerCase() == 'data_append') session_id();
 
   // append 'Supply Dataset' fieldset
     $('.fieldset_dataset_type').on('input change', 'select[name="svm_dataset_type"], input[name="svm_title"], select[name="svm_model_type"]', function() {
