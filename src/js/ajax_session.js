@@ -15,7 +15,11 @@ $(document).ready(function() {
 var container = document.querySelector('form');
 var observer = new MutationObserver(function(mutations) {
     mutations.forEach(function(mutation) {
-      console.log("Recording mutation:", mutation.attributeName);
+
+      if ( mutation.type == 'childList' && typeof mutation.addNodes == 'Object' && mutation.addNodes.length > 0 ) {
+        console.log("Recording mutation:", mutation.attributeName);
+      }
+
     });
   });
 
