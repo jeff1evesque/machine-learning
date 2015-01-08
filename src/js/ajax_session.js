@@ -10,25 +10,26 @@ $(document).ready(function() {
 // local variables
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
   var container        = document.querySelector('form');
-  var observer         = new MutationObserver(function(mutations) {
 
 // MutationObservation
-  mutations.forEach(function(mutation) {
 
-    if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
+  var observer = new MutationObserver(function(mutations) {
+    mutations.forEach(function(mutation) {
 
-      for (var i=0; i < mutation.addedNodes.length; ++i) {
-        var fieldset = mutation.addedNodes[i];
+      if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
 
-        if ( fieldset.nodeName !== '#text' ) {
-          console.log("Recording mutation:", fieldset);
+        for (var i=0; i < mutation.addedNodes.length; ++i) {
+          var fieldset = mutation.addedNodes[i];
+
+          if ( fieldset.nodeName !== '#text' ) {
+            console.log("Recording mutation:", fieldset);
+          }
         }
+
       }
 
-    }
-
+    });
   });
-});
 
 observer.observe(container, {
     attributes: true,
