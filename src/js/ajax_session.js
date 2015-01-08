@@ -50,7 +50,7 @@ $(document).ready(function() {
 // Mutation Observation: pass target, and configuration to observer
   observer.observe(target, config);
 
-  if ( $('.fieldset_session_data_upload').length > 0 && $('select[name="svm_session_id"]').length > 0 ) {
+  if ( $('.fieldset_session_data_upload').length > 0 && flag_ajax ) {
 
   // AJAX Process
     $.ajax({
