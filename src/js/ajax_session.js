@@ -6,4 +6,8 @@
  */
 
 $(document).ready(function() {
+  $('select[name="svm_session"]').on('change', function(event) {
+    event.preventDefault();
+
+  // Local Variables
 });
