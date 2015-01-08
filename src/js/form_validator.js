@@ -28,6 +28,12 @@
       else return false;
     });
   jQuery.validator.addMethod(
+    'integerOnly',
+    function(value, element, parameter) {
+      if ( Math.round(value) === value ) return true;
+      else return false;
+  });
+  jQuery.validator.addMethod(
     'textOnly',
     function(value, element, parameter) {
       if ( typeof(value) === 'string' ) return true;
@@ -79,7 +85,7 @@
         },
         svm_session_id: {
           required: true,
-          textOnly: true
+          integerOnly: true
         },
         svm_dataset_type: {
           required: true,
