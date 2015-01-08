@@ -9,7 +9,7 @@ $(document).ready(function() {
 
 // local variables
   var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-  var container        = document.querySelector('form');
+  var target           = document.querySelector('form');
 
 // Mutation Observation: create observer instance
   var observer = new MutationObserver(function(mutations) {
@@ -28,14 +28,11 @@ $(document).ready(function() {
     });
   });
 
-// Mutation Observation:
-  observer.observe(container, {
-    attributes: true,
-    attributeFilter: ['name'],
-    childList: true,
-    subtree: true,
-    characterData: true
-  });
+// Mutation Observation: configuration for 'observer'
+  var config = { attributes: true, childList: true: subtree: true };
+
+// Mutation Observation: pass target, and configurations
+  observer.observe(target, config);
 
 
 
