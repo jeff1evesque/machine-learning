@@ -53,9 +53,14 @@ $(document).ready(function() {
             <legend>Data Upload</legend>\
             <fieldset class="fieldset_dataset_type">\
               <legend>Configurations</legend>\
-              <p>Select previous Data Upload session</p>\
+              <p>Select past session, and upload type</p>\
               <select name="svm_session_id">\
                 <option value="none" selected="selected">--Select--</option>\
+              </select>\
+              <select name="svm_dataset_type">\
+                <option value="none" selected="selected">--Select--</option>\
+                <option value="file_upload">Upload file</option>\
+                <option value="xml_url">XML URL</option>\
               </select>\
             </fieldset>\
           </fieldset>\
