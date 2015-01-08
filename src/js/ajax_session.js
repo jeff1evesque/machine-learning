@@ -28,13 +28,13 @@ $(document).ready(function() {
     });
   });
 
-observer.observe(container, {
+  observer.observe(container, {
     attributes: true,
     attributeFilter: ['name'],
     childList: true,
     subtree: true,
     characterData: true
-});
+  });
 
 
 
