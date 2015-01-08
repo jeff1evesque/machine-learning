@@ -17,10 +17,16 @@ $(document).ready(function() {
 
       if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
         for (var i=0; i < mutation.addedNodes.length; ++i) {
-          var fieldset = mutation.addedNodes[i];
+          var data_upload_container = mutation.addedNodes[i];
 
-          if ( fieldset.nodeName !== '#text' ) {
-            console.log("Recording mutation:", fieldset);
+          if ( data_upload_container.nodeName !== '#text' ) {
+            for (var j=0; j < data_upload_container.childNodes.length; ++j) {
+              var data_upload_elements = data_upload_container.childNodes[j];
+
+              if ( data_upload_elements.nodeName !== '#text' ) {
+                console.log("Recording mutation:", data_upload_elements);
+              }
+            }
           }
         }
       }
