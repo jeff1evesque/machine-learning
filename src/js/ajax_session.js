@@ -6,31 +6,28 @@
  */
 
 $(document).ready(function() {
-  $('select[name="svm_session"]').on('change', function(event) {
-    event.preventDefault();
 
+// local variables
+  var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+  var container        = document.querySelector('form');
+  var observer         = new MutationObserver(function(mutations) {
 
+  mutations.forEach(function(mutation) {
 
-    var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
-    var container        = document.querySelector('form');
-    var observer         = new MutationObserver(function(mutations) {
+    if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
 
-    mutations.forEach(function(mutation) {
+      for (var i=0; i < mutation.addedNodes.length; ++i) {
+        var fieldset = mutation.addedNodes[i];
 
-      if ( mutation.type == 'childList' && typeof mutation.addedNodes == 'object' && mutation.addedNodes.length > 0 ) {
-
-        for (var i=0; i < mutation.addedNodes.length; ++i) {
-          var fieldset = mutation.addedNodes[i];
-
-          if ( fieldset.nodeName !== '#text' ) {
-            console.log("Recording mutation:", fieldset);
-          }
+        if ( fieldset.nodeName !== '#text' ) {
+          console.log("Recording mutation:", fieldset);
         }
-
       }
 
-    });
+    }
+
   });
+});
 
 observer.observe(container, {
     attributes: true,
@@ -39,6 +36,14 @@ observer.observe(container, {
     subtree: true,
     characterData: true
 });
+
+
+
+  $('select[name="svm_session"]').on('change', function(event) {
+    event.preventDefault();
+
+
+
 
 
 
