@@ -1,7 +1,5 @@
 /**
  * html_form.js: creates additional form fieldsets based on various datalist choices.
- *
- * Note: the 'session_id()' is from another javascript file.
  */
 
 $(document).ready(function() {
@@ -70,7 +68,8 @@ $(document).ready(function() {
     }
     else obj_form.session = null;
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
-  // Add option values to 'svm_session_id'
+
+  // Add option values to 'svm_session_id' (ajax_session.js)
     if ($(this).val().toLowerCase() == 'data_append') session_id();
 
   // append 'Supply Dataset' fieldset
