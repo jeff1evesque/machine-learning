@@ -6,7 +6,7 @@
  */
 
 // AJAX Process
-  $.ajax({
+  var ajax_session = $.ajax({
     type: 'POST',
     url: '../../php/retriever_sesion.php',
     dataType: 'json',
