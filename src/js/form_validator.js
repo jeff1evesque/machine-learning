@@ -28,6 +28,12 @@
       else return false;
     });
   jQuery.validator.addMethod(
+    'intOnly',
+    function(value, element, parameter) {
+      if ( Math.round(value) === value ) return true;
+      else return false;
+  });
+  jQuery.validator.addMethod(
     'textOnly',
     function(value, element, parameter) {
       if ( typeof(value) === 'string' ) return true;
