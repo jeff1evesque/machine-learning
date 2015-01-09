@@ -29,4 +29,7 @@
       print 'id: ' . $row['id_entity']. ' title:  . $row['title'];
     }
   }
+
+// Close Connection
+  $conn->close();
 ?>
