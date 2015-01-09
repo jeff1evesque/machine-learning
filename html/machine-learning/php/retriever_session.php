@@ -9,6 +9,7 @@
 // Debug: prints errors pertaining to this script
  //error_reporting(-1); ini_set('display_errors', 1);
 
+// Additional Scripts
   require(dirname(__FILE__) . '/settings.php');
 
 // Local Variables
