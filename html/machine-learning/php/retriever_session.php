@@ -24,11 +24,9 @@
   $sql = 'SELECT id_entity, title FROM tbl_dataset_entity';
   $result = $conn->query( $sql );
 
-  if ($result->num_rows > 0) {
     while($row = $result->fetch_assoc()) {
-      print 'id: ' . $row['id_entity']. ' title:  . $row['title'];
+      print 'id: ' . $row['id_entity']. ' title: ' . $row['title'];
     }
-  }
 
 // Close Connection
   $conn->close();
