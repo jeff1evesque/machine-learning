@@ -23,11 +23,14 @@
 
 // Query Database: output data of each row
   $sql = 'SELECT id_entity, title FROM tbl_dataset_entity';
-  $result = $conn->query( $sql );
 
-    while($row = $result->fetch_assoc()) {
+  if ( $result = $conn->query($sql) ) {
+    while($row = $result->fetch_row()) {
       print 'id: ' . $row['id_entity']. ' title: ' . $row['title'];
     }
+
+    $result->close();
+  }
 
 // Close Connection
   $conn->close();
