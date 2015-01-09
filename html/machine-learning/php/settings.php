@@ -39,4 +39,25 @@
       return $this->db_password;
     }
 
+  /**
+   * set_db_host
+   */
+    public function set_db_host($host) {
+      $this->db_host = $host;
+    }
+
+  /**
+   * set_db_username
+   */
+    public function set_db_username($user) {
+      $this->db_username = $user;
+    }
+
+  /**
+   * set_db_password
+   */
+    public function set_db_password($pwd) {
+      $this->db_password = $pwd;
+    }
+
  }
