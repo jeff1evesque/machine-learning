@@ -5,7 +5,16 @@
   */
 
  /**
-  * Databas
+  * Database: when instantiating this class, or defining any of the class variables,
+  *           make sure they are defined within the DBMS. This can be achieved via
+  *           the terminal console (or phpMyAdmin):
+  *
+  *               $ mysql -u root -p
+  *               MariaDB> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY
+  *                   ->'password';
+  *               MariaDB> GRANT, CREATE, DELETE, DROP, EXECUTE, SELECT, SHOW
+  *                   -> DATABASES ON *.* TO 'authenticated'@'localhost';
+  *               MariaDB> FLUSH PRIVILEGES;
   */
   class Database {
 
