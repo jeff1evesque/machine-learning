@@ -1,5 +1,3 @@
-<?php error_reporting(-1); ini_set('display_errors', 1); ?>
-
 <?php
 
  /**
@@ -7,6 +5,9 @@
   *                        Then, return the two corresponding values via AJAX to
   *                        'ajax_session.js'
   */
+
+// Debug: prints errors pertaining to this script
+ //error_reporting(-1); ini_set('display_errors', 1);
 
   require(dirname(__FILE__) . '/settings.php');
 
