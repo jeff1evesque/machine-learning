@@ -15,7 +15,7 @@
 // Create Connection
   $conn = new mysqli( $db_settings->db_host, $db_settings->db->username, $db_settings->password, $db_name );
 
-  if ($conn->connect_error) {
+  if (mysqli_connect_error()) {
     $msg = array('error' => 'Connection Failed, ' . $conn->connect_error);
     print($msg);
     exit();
