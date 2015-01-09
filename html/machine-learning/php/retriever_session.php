@@ -14,7 +14,7 @@
   $arr_return  = array();
 
 // Create Connection
-  $conn = new mysqli( $db_settings->db_host, $db_settings->db->username, $db_settings->password, $db_name );
+  $conn = new mysqli( $db_settings->db_host, $db_settings->db_username, $db_settings->password, $db_name );
 
   if (mysqli_connect_error()) {
     $msg = array('error' => 'Connection Failed, ' . $conn->connect_error);
