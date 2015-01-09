@@ -16,8 +16,8 @@
   $conn = new mysqli( $db_settings->db_host, $db_settings->db->username, $db_settings->password, $db_name );
 
   if ($conn->connect_error) {
-    print json_encode('error: 'Connection Failed, ' $conn->connect_error);
-    die('Connection failed: ' . $conn->connect_error);
+    $msg = array('error' => 'Connection Failed, ' . $conn->connect_error);
+    die($msg);
   }
 
 // Query Database: output data of each row
