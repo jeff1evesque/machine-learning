@@ -17,7 +17,8 @@
 
   if ($conn->connect_error) {
     $msg = array('error' => 'Connection Failed, ' . $conn->connect_error);
-    die($msg);
+    print($msg);
+    exit();
   }
 
 // Query Database: output data of each row
