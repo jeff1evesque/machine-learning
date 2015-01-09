@@ -29,7 +29,7 @@
 
   if ( $result = $conn->query($sql) ) {
     while($row = $result->fetch_row()) {
-      print 'id: ' . $row[0]. ' title: ' . $row[1];
+      array_push($arr_return, array('id' => $row[0], 'title' => $row[1]));
     }
 
     $result->close();
