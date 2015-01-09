@@ -35,6 +35,9 @@
     $result->close();
   }
 
+// Return Query to Javascript
+  print json_encode($arr_return);
+
 // Close Connection
   $conn->close();
 ?>
