@@ -1,11 +1,11 @@
 <?php
 
  /**
-  * settings.php
+  * settings.php: contains various php configuration settings.
   */
 
  /**
-  * Class Database
+  * Databas
   */
   class Database {
 
