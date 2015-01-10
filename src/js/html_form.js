@@ -9,13 +9,13 @@ $(document).ready(function() {
 
 // append session fieldset
   $('.fieldset_session_type').on('change', 'select[name="svm_session"]', function() {
-    if ( $(this).val().toLowerCase() == 'analysis' ) {
+    if ( $(this).val().toLowerCase() == 'model_generate' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_analysis">\
-            <legend>Analysis Session</legend>\
+            <legend>Generate Model</legend>\
             <fieldset class="fieldset_select_model">\
-              <legend>Select Model</legend>\
-              <p>Select which previously stored analysis model to implement.</p>\
+              <legend>Configurations</legend>\
+              <p>Select model type</p>\
               <select name="svm_model_type">\
                 <option value="" selected="selected">--Select--</option>\
                 <option value="classification">Classification</option>\
@@ -139,49 +139,6 @@ $(document).ready(function() {
       });
     });
 
-  // append 'Known Factors' fieldset
-    $('.fieldset_select_model').on('change', 'select[name="svm_model_type"]', function() {
-      if ( $.inArray( $('select[name="svm_model_type"] option:selected').val().toLowerCase(), ['classification', 'regression']) !== -1 ) {
-        obj_form.analysis = '\
-            <fieldset class="fieldset_known_factors">\
-              <legend>Known Factors</legend>\
-              <input type="text" name="svm_indep_variable[]" placeholder="Independent Variable" class="svm_indep_variable">\
-              <input type="button" value="Add more" class="add_element svm_indep_variable_add">\
-              <input type="button" value="Remove" class="remove_element svm_indep_variable_remove">\
-            </fieldset>\
-          ';
-        build_form('.fieldset_select_model', obj_form.analysis, ['.fieldset_known_factors', '.fieldset_estimated_analysis', '.svm_form_submit']);
-      }
-      else {
-        $(this).parent().nextAll().remove();
-        $(this).parent().parent().nextAll().remove();
-      }
-
-  // append 'Estimated Analysis' fieldset
-      $('.fieldset_known_factors').on('input change', 'input[name="svm_indep_variable[]"]', function() {
-        var flag_field = field_determinant( $('input[name="svm_indep_variable[]"]') );
-
-        if ( $(this).val().length > 0 ) {
-          obj_form.estimated_analysis = '\
-              <fieldset class="fieldset_estimated_analysis">\
-                <legend>Estimated Analysis</legend>\
-                <p class="svm_analysis_results">Waiting for results...</p>\
-              </fieldset>\
-            ';
-          obj_form.submit = '<input type="submit" class="svm_form_submit">';
-        }
-        else {
-          $('.fieldset_estimated_analysis').remove();
-          $('.svm_analysis_submit').remove();
-        }
-        if (flag_field) {
-          build_form('.fieldset_known_factors', obj_form.estimated_analysis, ['.fieldset_estimated_analysis']);
-          build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_analysis_submit']);
-        }
-        else $('.svm_form_submit').remove();
-
-      });
-    });
   });
 
 /**
