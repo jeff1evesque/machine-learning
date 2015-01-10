@@ -11,7 +11,7 @@ $(document).ready(function() {
   $('.fieldset_session_type').on('change', 'select[name="svm_session"]', function() {
     if ( $(this).val().toLowerCase() == 'model_generate' ) {
       obj_form.session = '\
-          <fieldset class="fieldset_session_analysis">\
+          <fieldset class="fieldset_session_generate">\
             <legend>Generate Model</legend>\
             <fieldset class="fieldset_select_model">\
               <legend>Configurations</legend>\
@@ -70,10 +70,18 @@ $(document).ready(function() {
         ';
     }
     else obj_form.session = null;
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_generate', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // Add option values to 'svm_session_id' (ajax_session.js)
     if ( $.inArray($(this).val().toLowerCase(), ['data_append', 'generate_model']) ) session_id();
+
+    $('.fieldset_session_generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
+      if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val() ) {
+        obj_form.submit = '<input type="submit" class="svm_form_submit">';
+        build_form('.fieldset_session_generate', obj_form.submit, ['.svm_form_submit']);
+      }
+      else $('.svm_form_submit').remove();
+    });
 
   // append 'Supply Dataset' fieldset (Session: Data Append)
     $('.fieldset_session_data_upload').on('input change', 'select[name="svm_dataset_type"], select[name="svm_session_id"], input[name="svm_title"], select[name="svm_model_type"]', function() {
