@@ -97,6 +97,16 @@ $(document).ready(function() {
       }
       else obj_form.dataset = null;
       build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_training_parameters', '.fieldset_training_type', '.fieldset_supply_dataset']);
+
+      $('.fieldset_supply_dataset').on('change', 'input[name="svm_dataset[]"]', function() {
+        var flag_field = field_determinant( $('input[name="svm_dataset[]"]') );
+
+        if( flag_field ) {
+          obj_form.submit = '<input type="submit" class="svm_form_submit">';
+          build_form('.fieldset_session_data_upload', obj_form.submit, ['.svm_form_submit']);
+        }
+        else $('.svm_form_submit').remove();
+      });
     });
 
   // append 'Supply Dataset' fieldset (Session: Data New)
