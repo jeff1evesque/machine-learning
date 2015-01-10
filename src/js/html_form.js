@@ -17,7 +17,7 @@ $(document).ready(function() {
               <legend>Select Model</legend>\
               <p>Select which previously stored analysis model to implement.</p>\
               <select name="svm_model_type">\
-                <option value="none" selected="selected">--Select--</option>\
+                <option value="" selected="selected">--Select--</option>\
                 <option value="classification">Classification</option>\
                 <option value="regression">Regression</option>\
               </select>\
@@ -34,12 +34,12 @@ $(document).ready(function() {
               <p>Please save the <i>Session Name</i>, then provide the <i>Training Type</i>, followed by the <i>Dataset Type</i></p>\
               <input type="text" name="svm_title" placeholder="Session Name">\
               <select name="svm_model_type">\
-                <option value="none" selected="selected">--Select--</option>\
+                <option value="" selected="selected">--Select--</option>\
                 <option value="classification">Classification</option>\
                 <option value="regression">Regression</option>\
               </select>\
               <select name="svm_dataset_type">\
-                <option value="none" selected="selected">--Select--</option>\
+                <option value="" selected="selected">--Select--</option>\
                 <option value="file_upload">Upload file</option>\
                 <option value="xml_url">XML URL</option>\
               </select>\
@@ -55,10 +55,10 @@ $(document).ready(function() {
               <legend>Configurations</legend>\
               <p>Select past session, and upload type</p>\
               <select name="svm_session_id">\
-                <option value="none" selected="selected">--Select--</option>\
+                <option value="" selected="selected">--Select--</option>\
               </select>\
               <select name="svm_dataset_type">\
-                <option value="none" selected="selected">--Select--</option>\
+                <option value="" selected="selected">--Select--</option>\
                 <option value="file_upload">Upload file</option>\
                 <option value="xml_url">XML URL</option>\
               </select>\
@@ -74,7 +74,7 @@ $(document).ready(function() {
 
   // append 'Supply Dataset' fieldset (Session: Data Append)
     $('.fieldset_session_data_upload').on('change', 'select[name="svm_session_id"], select[name="svm_dataset_type"]', function() {
-      if ( $('select[name="svm_session_id"] option').filter(':selected').val().toLowerCase() !== 'none' && $('select[name="svm_dataset_type"] option:selected').val().toLowerCase() == 'file_upload' ) {
+      if ( $('select[name="svm_session_id"] option').filter(':selected').val().toLowerCase() !== null && $('select[name="svm_dataset_type"] option:selected').val().toLowerCase() == 'file_upload' ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
@@ -85,7 +85,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      else if ( $('select[name="svm_session_id"] option').filter(':selected').val().toLowerCase() !== 'none' && $('select[name="svm_dataset_type"] option:selected').val().toLowerCase() == 'xml_url' ) {
+      else if ( $('select[name="svm_session_id"] option').filter(':selected').val().toLowerCase() !== null && $('select[name="svm_dataset_type"] option:selected').val().toLowerCase() == 'xml_url' ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
