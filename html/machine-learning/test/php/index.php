@@ -17,6 +17,7 @@
     <script src='../../asset/js/ajax_graphic.min.js'></script>
     <script src='../../asset/js/ajax_data.min.js'></script>
     <script src='../../asset/js/ajax_session.min.js'></script>
+    <script src='../../asset/js/ajax_model.min.js'></script>
 
     <link rel='stylesheet' href='../../asset/css/style.min.css'>
   </head>
