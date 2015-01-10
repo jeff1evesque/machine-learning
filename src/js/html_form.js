@@ -78,7 +78,6 @@ $(document).ready(function() {
     // append 'Supply Dataset' fieldset (Session: Append Data)
       if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_dataset_type"]').val() ) {
         if ( $('select[name="svm_session_id"]').val().length > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' ) {
-console.log('yes');
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
