@@ -73,7 +73,7 @@ $(document).ready(function() {
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_generate', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
 
   // Add option values to 'svm_session_id' (ajax_session.js)
-    if ( $.inArray($(this).val().toLowerCase(), ['data_append', 'generate_model']) ) session_id();
+    if ( $.inArray($('select[name="svm_session_id"]').val().toLowerCase(), ['data_append', 'generate_model']) ) session_id();
 
     $('.fieldset_session_generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
       if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val() ) {
