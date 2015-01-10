@@ -87,6 +87,10 @@
           required: true,
           selectValueInt: true
         },
+        svm_model_id: {
+          required: true,
+          selectValueInt: true
+        },
         svm_dataset_type: {
           required: true,
           equals: ['file_upload', 'xml_url']
