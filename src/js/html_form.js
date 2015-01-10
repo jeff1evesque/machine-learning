@@ -15,7 +15,10 @@ $(document).ready(function() {
             <legend>Generate Model</legend>\
             <fieldset class="fieldset_select_model">\
               <legend>Configurations</legend>\
-              <p>Select model type</p>\
+              <p>Select past session, and model type</p>\
+              <select name="svm_model_id">\
+                <option value="" selected="selected">--Select--</option>\
+              </select>\
               <select name="svm_model_type">\
                 <option value="" selected="selected">--Select--</option>\
                 <option value="classification">Classification</option>\
