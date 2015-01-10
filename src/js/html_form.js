@@ -102,8 +102,8 @@ console.log('yes');
       }
 
     // append 'Supply Dataset' fieldset (Session: New Data)
-      else if ( $('select[name="svm_model_type"]').val() && $('select[name="svm_title"]').val() && $('input[name="svm_title"]').val() ) {
-        if ( $.inArray( $('select[name="svm_model_type"] option').val().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"] option').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0 ) {
+      else if ( $('select[name="svm_model_type"]').val() && $('select[name="svm_dataset_type"]').val() && $('input[name="svm_title"]').val() ) {
+        if ( $.inArray( $('select[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0 ) {
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
@@ -114,7 +114,7 @@ console.log('yes');
               </fieldset>\
             ';
         }
-        else if ( $.inArray( $('select[name="svm_model_type"] option').val().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"] option').val().toLowerCase() == 'xml_url' && $('input[name="svm_title"]').val().length !== 0 ) {
+        else if ( $.inArray( $('select[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'xml_url' && $('input[name="svm_title"]').val().length !== 0 ) {
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
