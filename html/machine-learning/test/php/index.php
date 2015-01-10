@@ -3,7 +3,7 @@
 /**
  *  index.php: defines 'training' or 'analysis' session, prompts users to provide an upload file
  *             or URL to an XML (dataset), then defines which attributes within the dataset
- *             previously defined, to use for the SVM analysis.  After the configurations and 
+ *             previously defined, to use for the SVM analysis.  After the configurations and
  *             attributes have been defined, it is sent to 'logic_loader.py' for further analysis.
  */
 ?>
@@ -27,7 +27,7 @@
         <legend>Session Type</legend>
         <p>Select data upload, or analysis session</p>
         <select name='svm_session'>
-          <option value='none' selected='selected'>--Select--</option>
+          <option value='' selected='selected'>--Select--</option>
           <option value='data_new'>New Data</option>
           <option value='data_append'>Append Data</option>
           <option value='model_generate'>Generate Model</option>
