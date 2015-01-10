@@ -74,7 +74,7 @@ $(document).ready(function() {
 
   // append 'Supply Dataset' fieldset (Session: Data Append)
     $('.fieldset_session_data_upload').on('change', 'select[name="svm_session_id"], select[name="svm_dataset_type"]', function() {
-      if ( typeof $('select[name="svm_session_id"] option').filter(':selected').val().toLowerCase() !== 'undefined' && $('select[name="svm_dataset_type"] option:selected').val().toLowerCase() == 'file_upload' ) {
+      if ( typeof $('select[name="svm_session_id"] option:selected').val().toLowerCase() !== 'undefined' && $('select[name="svm_dataset_type"] option:selected').val().toLowerCase() == 'file_upload' ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
@@ -85,7 +85,7 @@ $(document).ready(function() {
             </fieldset>\
           ';
       }
-      else if ( typeof $('select[name="svm_session_id"] option').filter(':selected').val().toLowerCase() !== 'undefined' && $('select[name="svm_dataset_type"] option:selected').val().toLowerCase() == 'xml_url' ) {
+      else if ( typeof $('select[name="svm_session_id"] option:selected').val().toLowerCase() !== 'undefined' && $('select[name="svm_dataset_type"] option:selected').val().toLowerCase() == 'xml_url' ) {
         obj_form.dataset = '\
             <fieldset class="fieldset_supply_dataset">\
               <legend>Supply Dataset</legend>\
