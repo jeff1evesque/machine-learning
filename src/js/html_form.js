@@ -16,7 +16,7 @@ $(document).ready(function() {
             <fieldset class="fieldset_select_model">\
               <legend>Configurations</legend>\
               <p>Select past session, and model type</p>\
-              <select name="svm_model_id">\
+              <select name="svm_session_id">\
                 <option value="" selected="selected">--Select--</option>\
               </select>\
               <select name="svm_model_type">\
