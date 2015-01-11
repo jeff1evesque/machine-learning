@@ -38,6 +38,11 @@ $(document).ready(function() {
               <select name="svm_model_id">\
                 <option value="" selected="selected">--Select--</option>\
               </select>\
+              <select name="svm_model_type">\
+                <option value="" selected="selected">--Select--</option>\
+                <option value="classification">Classification</option>\
+                <option value="regression">Regression</option>\
+              </select>\
             </fieldset>\
           </fieldset>\
         ';
