@@ -84,7 +84,7 @@ $(document).ready(function() {
         ';
     }
     else obj_form.session = null;
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_generate', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_generate', '.fieldset_session_data_upload', '.svm_form_submit']);
 
   // Add option values to 'svm_session_id' (ajax_session.js)
     if ( $.inArray( $(this).val(), ['data_append', 'model_generate'] ) !== -1 ) {
