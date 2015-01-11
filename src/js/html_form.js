@@ -28,6 +28,20 @@ $(document).ready(function() {
           </fieldset><br>\
         ';
     }
+    else if ( $(this).val().toLowerCase() == 'model_use' ) {
+      obj_form.session = '\
+          <fieldset class="fieldset_session_analysis">\
+            <legend>Analysis</legend>\
+            <fieldset class="fieldset_dataset_type">\
+              <legend>Configurations</legend>\
+              <p>Select a previous model to analyze</p>\
+              <select name="svm_model_id">\
+                <option value="" selected="selected">--Select--</option>\
+              </select>\
+            </fieldset>\
+          </fieldset>\
+        ';
+    }
     else if ( $(this).val().toLowerCase() == 'data_new' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_data_upload">\
