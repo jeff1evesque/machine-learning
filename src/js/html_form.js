@@ -1,13 +1,13 @@
 /**
- * html_form.js: conditionally create form fieldsets, and elements.
+ * html_form.js: conditionally create form fieldsets, and form elements.
  */
 
 $(document).ready(function() {
 
-// local variables
+// Local Variables
   var obj_form = {};
 
-// append session fieldset
+// Append 'Session Type' Fieldset
   $('.fieldset_session_type').on('change', 'select[name="svm_session"]', function() {
     if ( $(this).val().toLowerCase() == 'model_generate' ) {
       obj_form.session = '\
@@ -86,7 +86,7 @@ $(document).ready(function() {
     else obj_form.session = null;
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_generate', '.fieldset_session_data_upload', '.svm_form_submit']);
 
-  // Options 'svm_session_id' (defined in ajax_session.js)
+  // Session Titles: for 'svm_session_id' (defined in ajax_session.js)
     if ( $.inArray( $(this).val(), ['data_append', 'model_generate'] ) !== -1 ) {
       session_id();
     }
