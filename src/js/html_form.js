@@ -99,7 +99,6 @@ $(document).ready(function() {
       else $('.svm_form_submit').remove();
     });
 
-  // append 'Supply Dataset' fieldset (Session: Data Append)
     $('.fieldset_session_data_upload').on('input change', 'select[name="svm_dataset_type"], select[name="svm_session_id"], input[name="svm_title"], select[name="svm_model_type"]', function() {
 
     // append 'Supply Dataset' fieldset (Session: Append Data)
