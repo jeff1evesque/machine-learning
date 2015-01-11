@@ -5,7 +5,7 @@
   */
 
 // helper functions
-  include(dirname(__FILE__) . '/helper.php');
+  require(dirname(__FILE__) . '/connector_python.php');
 
 // global variables
   $json       = array();
