@@ -53,13 +53,8 @@ $(document).ready(function() {
             <legend>Data Upload</legend>\
             <fieldset class="fieldset_dataset_type">\
               <legend>Configurations</legend>\
-              <p>Please save the <i>Session Name</i>, then provide the <i>Training Type</i>, followed by the <i>Dataset Type</i></p>\
+              <p>Please save the <i>Session Name</i>, then provide dataset type</p>\
               <input type="text" name="svm_title" placeholder="Session Name">\
-              <select name="svm_model_type">\
-                <option value="" selected="selected">--Select--</option>\
-                <option value="classification">Classification</option>\
-                <option value="regression">Regression</option>\
-              </select>\
               <select name="svm_dataset_type">\
                 <option value="" selected="selected">--Select--</option>\
                 <option value="file_upload">Upload file</option>\
