@@ -1,40 +1,7 @@
 <?php
 
  /**
-  * logic_loader.php: directs form POST data to respective python scripts.
-  *
-  *   Note: either the 'print', or 'echo' statments are used to return values back
-  *         to ajax scripts.  For example, to send data to an ajax script we may
-  *         have the following lines in this php script:
-  *
-  *           print json_encode(array('key' => 'msg'));
-  *
-  *         The data can be accessed from the ajax script as follows:
-  *
-  *           console.log( data.key );
-  *
-  *   Note: to debug, or view the entire POST data array, enter the following in
-  *         this php script:
-  *
-  *           print json_encode(array('post_array' => print_r($_POST,true)));
-  *
-  *         Again, the data can be accessed from the ajax script as follows:
-  *
-  *           console.log( data.post_array );
-  *
-  *   Note: performing multiple 'print json_encode( ... )' statements yields an
-  *         illegal json syntax.  Specifically, it concatenates two, or more
-  *         json objects. The receiving javascript file will fail overall for
-  *         the ajax request, on the account of a 'Parse' error.  The receiving
-  *         javascript is only allowed to receive one json representation, which
-  *         may have nested json objects (not concatenated).  Therefore, only one
-  *         such 'print' statement is allowed.
-  *
-  *   @json_encode( value ), returns the JSON representation / object of 'value'.
-  *
-  *   @file_temp: is a temporary reference to the 'uploaded file'.  This reference exists
-  *               only for the duration of the current script, then it is automatically
-  *               removed.
+  * logic_loader.php: load associated logic required to pass data to python scripts.
   */
 
 // helper functions
