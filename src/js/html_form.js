@@ -25,7 +25,7 @@ $(document).ready(function() {
                 <option value="regression">Regression</option>\
               </select>\
             </fieldset>\
-          </fieldset><br>\
+          </fieldset>\
         ';
     }
     else if ( $(this).val().toLowerCase() == 'model_use' ) {
