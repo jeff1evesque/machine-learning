@@ -101,7 +101,7 @@ $(document).ready(function() {
 
     $('.fieldset_session_data_upload').on('input change', 'select[name="svm_dataset_type"], select[name="svm_session_id"], input[name="svm_title"], select[name="svm_model_type"]', function() {
 
-    // append 'Supply Dataset' fieldset (Session: Append Data)
+  // append 'Supply Dataset' fieldset (Session: Append Data)
       if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_dataset_type"]').val() ) {
         if ( $('select[name="svm_session_id"]').val().length > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' ) {
           obj_form.dataset = '\
@@ -126,9 +126,9 @@ $(document).ready(function() {
         }
       }
 
-    // append 'Supply Dataset' fieldset (Session: New Data)
+  // append 'Supply Dataset' fieldset (Session: New Data)
       else if ( $('select[name="svm_model_type"]').val() && $('select[name="svm_dataset_type"]').val() && $('input[name="svm_title"]').val() ) {
-        if ( $.inArray( $('select[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0 ) {
+        if ( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0 ) {
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
@@ -139,7 +139,7 @@ $(document).ready(function() {
               </fieldset>\
             ';
         }
-        else if ( $.inArray( $('select[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'xml_url' && $('input[name="svm_title"]').val().length !== 0 ) {
+        else if ( $.inArray( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'xml_url' && $('input[name="svm_title"]').val().length !== 0 ) {
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
