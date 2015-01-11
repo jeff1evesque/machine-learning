@@ -1,8 +1,8 @@
 <?php
 
- /**
-  * logic_loader.php: load associated logic required to pass data to python scripts.
-  */
+/**
+ * logic_loader.php: load logic required to pass data between python scripts.
+ */
 
 // helper functions
   require(dirname(__FILE__) . '/connector_python.php');
