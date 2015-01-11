@@ -1,5 +1,5 @@
 /**
- * html_form.js: creates additional form fieldsets based on various datalist choices.
+ * html_form.js: conditionally create form fieldsets, and elements.
  */
 
 $(document).ready(function() {
@@ -86,11 +86,12 @@ $(document).ready(function() {
     else obj_form.session = null;
     build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_generate', '.fieldset_session_data_upload', '.svm_form_submit']);
 
-  // Add option values to 'svm_session_id' (ajax_session.js)
+  // Options 'svm_session_id' (defined in ajax_session.js)
     if ( $.inArray( $(this).val(), ['data_append', 'model_generate'] ) !== -1 ) {
       session_id();
     }
 
+  // Submit Button
     $('.fieldset_session_generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
       if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val() ) {
         obj_form.submit = '<input type="submit" class="svm_form_submit">';
@@ -99,9 +100,9 @@ $(document).ready(function() {
       else $('.svm_form_submit').remove();
     });
 
+  // Append 'Supply Dataset' Fieldset
     $('.fieldset_session_data_upload').on('input change', 'select[name="svm_dataset_type"], select[name="svm_session_id"], input[name="svm_title"], select[name="svm_model_type"]', function() {
-
-  // append 'Supply Dataset' fieldset (Session: Append Data)
+    // Session: Append Data
       if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_dataset_type"]').val() ) {
         if ( $('select[name="svm_session_id"]').val().length > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' ) {
           obj_form.dataset = '\
@@ -126,7 +127,7 @@ $(document).ready(function() {
         }
       }
 
-  // append 'Supply Dataset' fieldset (Session: New Data)
+    // Session: New Data
       else if ( $('select[name="svm_dataset_type"]').val() && $('input[name="svm_title"]').val() ) {
         if ( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0 ) {
           obj_form.dataset = '\
@@ -153,6 +154,7 @@ $(document).ready(function() {
 
       else obj_form.dataset = null;
 
+    // Submit Button
       build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_training_parameters', '.fieldset_training_type', '.fieldset_supply_dataset']);
       $('.fieldset_supply_dataset').on('change', 'input[name="svm_dataset[]"]', function() {
         var flag_field = field_determinant( $('input[name="svm_dataset[]"]') );
