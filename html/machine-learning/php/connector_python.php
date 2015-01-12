@@ -103,7 +103,7 @@
         $arr_result = array('data' => $arr_result);
 
         if ( isset($this->settings->svm_session) && in_array($this->settings->svm_session, $arr_session_type) ) {
-          $result = shell_command('python ../../../python/data_uploader.py', json_encode($arr_result));
+          $result = shell_command('python ../../../python/load_logic.py', json_encode($arr_result));
           array_push($arr_response, json_encode($result));
         }
         else {
