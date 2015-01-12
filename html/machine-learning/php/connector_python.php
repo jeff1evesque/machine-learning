@@ -102,11 +102,8 @@
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->settings->svm_session), $arr_result);
         $arr_result = array('data' => $arr_result);
 
-        if ( in_array($this->settings->svm_session, array('data_new', 'data_append')) ) {
+        if ( isset($this->settings->svm_session) && in_array($this->settings->svm_session, $arr_session_type) ) {
           $result = shell_command('python ../../../python/data_uploader.py', json_encode($arr_result));
-        }
-        else {
-          $result = shell_command('python ../../../python/data_analyzer.py', json_encode($arr_result));
         }
         array_push($arr_response, json_encode($result));
       }
