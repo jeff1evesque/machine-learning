@@ -104,11 +104,11 @@
 
         if ( isset($this->settings->svm_session) && in_array($this->settings->svm_session, $arr_session_type) ) {
           $result = shell_command('python ../../../python/data_uploader.py', json_encode($arr_result));
+          array_push($arr_response, json_encode($result));
         }
         else {
           array_push($arr_error, json_encode('Error: session type must be one of the following: ' . implode(', ', $arr_session_type)));\
         }
-        array_push($arr_response, json_encode($result));
       }
       else {
         array_push( $arr_error, json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') ) );
