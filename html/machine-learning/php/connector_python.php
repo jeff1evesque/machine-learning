@@ -92,9 +92,9 @@
         $flag_validator = false;
         break;
       }
-    }
-    $arr_upload['upload_quantity'] = count($this->dataset);
-    unset($index);
+
+      $arr_upload['upload_quantity'] = count($this->dataset);
+      unset($index);
 
     // Build JSON array, and send to python script
       if ($flag_validator) {
