@@ -108,7 +108,7 @@
           array_push($arr_response, json_encode($result));
         }
         else {
-          array_push($arr_error, json_encode('Error: session type must be one of the following: ' . implode(', ', $arr_session_type)));\
+          array_push($arr_error, json_encode('Error: session type must be one of the following: ' . implode(', ', $arr_session_type)));
         }
       }
       else {
