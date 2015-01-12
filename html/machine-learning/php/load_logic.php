@@ -11,7 +11,7 @@
   $json       = array();
 
 // debug: return 'file upload(s)' to AJAX
-  print json_encode($_FILES);
+//  print json_encode($_FILES);
 
 // instantiate data / loader
   $obj_data   = new Obj_Data($_POST);
