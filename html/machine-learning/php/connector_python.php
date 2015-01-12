@@ -64,7 +64,7 @@
       $flag_validator   = true;
       $arr_model_type   = array('classification', 'regression');
       $arr_dataset_type = array('file_upload', 'xml_url');
-      $arr_session_type = array('data_new', 'data_append', 'analysis');
+      $arr_session_type = array('data_new', 'data_append', 'model_generate', 'model_use');
       $arr_upload       = array();
       $arr_error        = array();
       $arr_response     = array();
@@ -102,13 +102,13 @@
         $arr_result = array_merge($arr_result, array('msg_welcome' => 'Welcome to' . $this->settings->svm_session), $arr_result);
         $arr_result = array('data' => $arr_result);
 
-        if ( in_array($this->settings->svm_session, array('data_new', 'data_append')) ) {
+        if ( isset($this->settings->svm_session) && in_array($this->settings->svm_session, $arr_session_type) ) {
           $result = shell_command('python ../../../python/data_uploader.py', json_encode($arr_result));
+          array_push($arr_response, json_encode($result));
         }
         else {
-          $result = shell_command('python ../../../python/data_analyzer.py', json_encode($arr_result));
+          array_push($arr_error, json_encode('Error: session type must be one of the following: ' . implode(', ', $arr_session_type)));\
         }
-        array_push($arr_response, json_encode($result));
       }
       else {
         array_push( $arr_error, json_encode( array('Error' => basename(__FILE__) . ', logic_loader()') ) );
