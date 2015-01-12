@@ -3,8 +3,8 @@
 ## @session_model_use.py
 #  This file receives data (i.e. settings) required to query from the database,
 #      a previously stored SVM model, generated from 'session_model_generate.py'.
-#      The SVM model is then used for analysis based on the input data provided
-#      during the current session.
+#      The determined SVM Model is then used for analysis based on the input data
+#      provided during the current session.
 #
 #  Note: This script is executed from 'logic_loader.php' using the 'exec( ... )'
 #        equivalent method when implemented via the web-interface. Since the
