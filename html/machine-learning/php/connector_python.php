@@ -82,15 +82,16 @@
       foreach ($this->dataset as $val) {
         if (mb_check_encoding(json_encode($val['name']),'UTF-8') && mb_check_encoding(json_encode($val['tmp_name']),'UTF-8')) {
           $arr_upload['file_upload'][] = array(
-          'file_name' => $val['name'],
-          'file_temp' => $val['tmp_name'],
-        );
-        $index++;
-      }
-      else {
-        array_push($arr_error, json_encode('Error: dataset filenames need to be \'UTF-8\' type string'));
-        $flag_validator = false;
-        break;
+            'file_name' => $val['name'],
+            'file_temp' => $val['tmp_name'],
+          );
+          $index++;
+        }
+        else {
+          array_push($arr_error, json_encode('Error: dataset filenames need to be \'UTF-8\' type string'));
+          $flag_validator = false;
+          break;
+        }
       }
 
       $arr_upload['upload_quantity'] = count($this->dataset);
