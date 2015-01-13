@@ -29,3 +29,11 @@
 #
 #      console.log( data.result );
 import sys
+
+if len(sys.argv) > 1:
+  try:
+    session_type = sys.argv[1]
+    print session_type
+  except Exception as e:
+    print e
+    sys.exit()
