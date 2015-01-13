@@ -68,3 +68,7 @@ if len(sys.argv) > 1:
     print json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
   elif len(list_error) == 0 and session_creator == 'web_interface':
     print json.dumps({ 'status': True, 'error': None })
+  elif len(list_error) > 0 and session_creator == 'programmatic_interface':
+    return json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
+  elif len(list_error) == 0 and session_creator == 'programmatic_interface':
+    return json.dumps({ 'status': True, 'error': None })
