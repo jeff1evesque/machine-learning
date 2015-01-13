@@ -42,12 +42,12 @@ if len(sys.argv) > 1:
   try:
     session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
   except Exception as e:
-    error = 'Error: the provided \'svm_session\' is not json decodable.'
+    error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
     list_error.append(error)
   try:
     session_creator = json.loads(sys.argv[1])['data']['settings']['svm_creator']
   except Exception as e:
-    error = 'Error: the provided \'svm_creator\' is not json decodable.'
+    error = 'Error: the provided \'svm_creator\' is not json decodable, or not defined.'
     list_error.append(error)
 
   # redirect input to respective 'session_xxx_xxx.py' scripts
@@ -60,7 +60,7 @@ if len(sys.argv) > 1:
   elif session_type == 'model_use':
     Model_Use( sys.argv[1] )
   else:
-    error = 'Error: the provided \'svm_session\' is not valid.'
+    error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
     list_error.append(error)
 
   # return data
