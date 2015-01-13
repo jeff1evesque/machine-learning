@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @data_upload.py
+## @session_data_new.py
 #  This file receives data (i.e. training settings, dataset) pertaining to a
 #      submitted SVM training session. The data is properly allocated to other
 #      python scripts, to be validated, and properly stored into corresponding
