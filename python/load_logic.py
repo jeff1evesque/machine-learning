@@ -42,7 +42,7 @@ if len(sys.argv) > 1:
   try:
     session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
   except Exception as e:
-    error = 'Error: the provided \'svm_session\' is not valid.'
+    error = 'Error: the provided \'svm_session\' is not json decodable.'
     list_error.append(error)
 
   # redirect input to respective 'session_xxx_xxx.py' scripts
