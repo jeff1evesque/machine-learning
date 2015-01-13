@@ -40,7 +40,7 @@ list_error = []
 if len(sys.argv) > 1:
   # determine if input is json decodable
   try:
-    session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
+    session_type    = json.loads(sys.argv[1])['data']['settings']['svm_session']
     session_creator = json.loads(sys.argv[1])['data']['settings']['svm_creator']
   except Exception as e:
     error = 'Error: the provided \'svm_session\' is not json decodable.'
