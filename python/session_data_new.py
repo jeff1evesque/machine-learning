@@ -11,26 +11,6 @@
 #        web-interface is an AJAX process, the shelled into python script requires
 #        print statements, when data is needed to be returned to the client-end.
 #
-#        The following will return the arguments passed into this AJAX shelled
-#        into python script:
-#
-#            print sys.argv[1]
-#
-#        Then, in php, we can capture the returned data:
-#
-#            $output = shell_command("$command $parameters");
-#            $arr_result = array('result' => $output);
-#            $json = array_merge($json, $arr_result);
-#
-#        Which will allow us to return it to the client-end:
-#
-#            print json_encode($json);
-#
-#        Note: we can only call `print json_encode($json)` once. The receiving
-#              javascript will interpret the data as follows:
-#
-#            console.log( data.result );
-#
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
