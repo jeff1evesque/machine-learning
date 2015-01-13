@@ -44,11 +44,6 @@ if len(sys.argv) > 1:
   except Exception as e:
     error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
     list_error.append(error)
-  try:
-    session_creator = json.loads(sys.argv[1])['data']['settings']['svm_creator']
-  except Exception as e:
-    error = 'Error: the provided \'svm_creator\' is not json decodable, or not defined.'
-    list_error.append(error)
 
   # redirect input to respective 'session_xxx_xxx.py' scripts
   if session_type == 'data_new':
@@ -63,12 +58,8 @@ if len(sys.argv) > 1:
     error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
     list_error.append(error)
 
-  # return data: for web-interface, and programmatic-interface
-  if len(list_error) > 0 and session_creator == 'interface_web':
+  # return data
+  if len(list_error) > 0:
     print json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
-  elif len(list_error) == 0 and session_creator == 'interface_web':
+  elif len(list_error) == 0:
     print json.dumps({ 'status': True, 'error': None })
-  elif len(list_error) > 0 and session_creator == 'interface_programmatic':
-    return json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
-  elif len(list_error) == 0 and session_creator == 'interface_programmatic':
-    return json.dumps({ 'status': True, 'error': None })
