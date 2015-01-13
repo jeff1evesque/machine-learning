@@ -46,3 +46,9 @@ if len(sys.argv) > 1:
   elif session_type == 'data_append':
   elif session_type == 'model_generate':
   elif session_type == 'model_use':
+
+  # return data
+  if len(list_error) > 0:
+    print json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
+  else:
+    print json.dumps({ 'status': True, 'error': None })
