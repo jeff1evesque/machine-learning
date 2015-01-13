@@ -30,10 +30,12 @@
 #      console.log( data.result );
 import sys, json
 
+# Local Variables
+list_error = []
+
 if len(sys.argv) > 1:
   try:
     session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
-    print session_type
   except Exception as e:
-    print e
-    sys.exit()
+    error = 'Error: the provide \'svm_session\' is not valid.'
+    list_error.append(error)
