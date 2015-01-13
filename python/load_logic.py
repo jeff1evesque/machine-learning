@@ -64,8 +64,7 @@ if len(sys.argv) > 1:
     list_error.append(error)
 
   # return data
-  if len(list_error) > 0:
-    if session_creator = 'web_interface':
-      print json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
-    else:
-      print json.dumps({ 'status': True, 'error': None })
+  if len(list_error) > 0 and session_creator == 'web_interface':
+    print json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
+  elif len(list_error) == 0 and session_creator == 'web_interface':
+    print json.dumps({ 'status': True, 'error': None })
