@@ -34,7 +34,7 @@ from session_data_append import Data_Append
 from session_model_generate import Model_Generate
 from session_model_use import Model_Use
 
-# Local Variables
+# local variables
 list_error = []
 
 if len(sys.argv) > 1:
