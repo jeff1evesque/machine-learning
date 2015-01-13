@@ -64,11 +64,11 @@ if len(sys.argv) > 1:
     list_error.append(error)
 
   # return data
-  if len(list_error) > 0 and session_creator == 'web_interface':
+  if len(list_error) > 0 and session_creator == 'interface_web':
     print json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
-  elif len(list_error) == 0 and session_creator == 'web_interface':
+  elif len(list_error) == 0 and session_creator == 'interface_web':
     print json.dumps({ 'status': True, 'error': None })
-  elif len(list_error) > 0 and session_creator == 'programmatic_interface':
+  elif len(list_error) > 0 and session_creator == 'interface_programmatic':
     return json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
-  elif len(list_error) == 0 and session_creator == 'programmatic_interface':
+  elif len(list_error) == 0 and session_creator == 'interface_programmatic':
     return json.dumps({ 'status': True, 'error': None })
