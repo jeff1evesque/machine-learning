@@ -63,7 +63,7 @@ if len(sys.argv) > 1:
     error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
     list_error.append(error)
 
-  # return data
+  # return data: for web-interface, and programmatic-interface
   if len(list_error) > 0 and session_creator == 'interface_web':
     print json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
   elif len(list_error) == 0 and session_creator == 'interface_web':
