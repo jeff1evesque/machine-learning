@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-## @data_upload.py
-#  This file receives data (i.e. training settings, dataset) pertaining to a
-#      submitted SVM training session. The data is properly allocated to other
-#      python scripts, to be validated, and properly stored into corresponding
-#      EAV data model, database tables. 
+## @session_data_new.py
+#  This file receives data (i.e. settings), including one or more dataset(s)
+#      provided during the current session, and stores them into corresponding
+#      database tables. The stored dataset(s) can later be retrieved from
+#      'session_data_append.py', or 'session_generate_model.py'.
 #
 #  Note: this script is executed from 'load_logic.php', using the 'exec( ... )'
 #        equivalent method when implemented via the web-interface. Since the
