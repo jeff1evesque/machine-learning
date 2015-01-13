@@ -39,3 +39,8 @@ if len(sys.argv) > 1:
   except Exception as e:
     error = 'Error: the provided \'svm_session\' is not valid.'
     list_error.append(error)
+
+  if session_type == 'data_new':
+  elif session_type == 'data_append':
+  elif session_type == 'model_generate':
+  elif session_type == 'model_use':
