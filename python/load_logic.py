@@ -54,6 +54,9 @@ if len(sys.argv) > 1:
     Model_Generate( sys.argv[1] )
   elif session_type == 'model_use':
     Model_Use( sys.argv[1] )
+  else:
+    error = 'Error: the provided \'svm_session\' is not valid.'
+    list_error.append(error)
 
   # return data
   if len(list_error) > 0:
