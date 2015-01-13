@@ -82,19 +82,20 @@
       foreach ($this->dataset as $val) {
         if (mb_check_encoding(json_encode($val['name']),'UTF-8') && mb_check_encoding(json_encode($val['tmp_name']),'UTF-8')) {
           $arr_upload['file_upload'][] = array(
-          'file_name' => $val['name'],
-          'file_temp' => $val['tmp_name'],
-        );
-        $index++;
+            'file_name' => $val['name'],
+            'file_temp' => $val['tmp_name'],
+          );
+          $index++;
+        }
+        else {
+          array_push($arr_error, json_encode('Error: dataset filenames need to be \'UTF-8\' type string'));
+          $flag_validator = false;
+          break;
+        }
       }
-      else {
-        array_push($arr_error, json_encode('Error: dataset filenames need to be \'UTF-8\' type string'));
-        $flag_validator = false;
-        break;
-      }
-    }
-    $arr_upload['upload_quantity'] = count($this->dataset);
-    unset($index);
+
+      $arr_upload['upload_quantity'] = count($this->dataset);
+      unset($index);
 
     // Build JSON array, and send to python script
       if ($flag_validator) {
@@ -103,11 +104,11 @@
         $arr_result = array('data' => $arr_result);
 
         if ( isset($this->settings->svm_session) && in_array($this->settings->svm_session, $arr_session_type) ) {
-          $result = shell_command('python ../../../python/data_uploader.py', json_encode($arr_result));
+          $result = shell_command('python ../../../python/load_logic.py', json_encode($arr_result));
           array_push($arr_response, json_encode($result));
         }
         else {
-          array_push($arr_error, json_encode('Error: session type must be one of the following: ' . implode(', ', $arr_session_type)));\
+          array_push($arr_error, json_encode('Error: session type must be one of the following: ' . implode(', ', $arr_session_type)));
         }
       }
       else {
