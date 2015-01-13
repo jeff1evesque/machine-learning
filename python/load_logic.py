@@ -32,7 +32,7 @@ import sys, json
 
 if len(sys.argv) > 1:
   try:
-    session_type = sys.argv[1]
+    session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
     print session_type
   except Exception as e:
     print e
