@@ -70,6 +70,10 @@ class Data_New:
 
   ## validate_dataset_json:
   def validate_dataset_json(self):
+    for val in self.json_dataset:
+      json_validated = Validator( val )
+      json_validated.dataset_validation()
+
 
 
 
