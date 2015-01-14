@@ -38,7 +38,7 @@ class Data_New:
     validator = Validator( sys.argv[1], 'training' )
     validator.data_validation()
 
-  # save_dataset_entity
+  ## save_dataset_entity
   def save_dataset_entity(self):
     self.svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
     self.db_save    = Training( svm_entity, 'save_entity' )
