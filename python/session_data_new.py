@@ -33,14 +33,16 @@ class Data_New:
     if len(sys.argv) > 1:
       self.flag_quit = False
 
-  # validate SVM settings
-  validator = Validator( sys.argv[1], 'training' )
-  validator.data_validation()
+  ## validate_svm_settings:
+  def validate_svm_settings(self):
+    validator = Validator( sys.argv[1], 'training' )
+    validator.data_validation()
 
-  # validate dataset, and store dataset
-  svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
-  db_save    = Training( svm_entity, 'save_entity' )
-  id_entity  = db_save.db_save_training()
+  # save_dataset_entity
+  def save_dataset_entity(self):
+    self.svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
+    self.db_save    = Training( svm_entity, 'save_entity' )
+    self.id_entity  = db_save.db_save_training()
 
   if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
     # validate MIME type for each dataset
