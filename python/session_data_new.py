@@ -74,6 +74,14 @@ class Data_New:
       json_validated = Validator( val )
       json_validated.dataset_validation()
 
+  ## save_svm_dataset:
+  def save_svm_dataset(self):
+    for val in self.json_dataset:
+      db_save = Training( val, 'save_value' )
+      db_save.db_save_training()
+
+
+
 
 
 
