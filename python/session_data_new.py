@@ -80,6 +80,18 @@ class Data_New:
       db_save = Training( val, 'save_value' )
       db_save.db_save_training()
 
+  ## validation_check_return:
+  def validation_check_return(self):
+    if (response_mime_validation['status'] == False):
+      flag_quit = True
+
+    for value in response_dataset_validation:
+      if value['status'] == False:
+        print value['error']
+        flag_quit = True
+
+    if flag_quit == True:
+      sys.exit()
 
 
 
