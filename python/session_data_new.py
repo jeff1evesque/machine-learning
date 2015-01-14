@@ -24,13 +24,14 @@ class Data_New:
 
   ## constructor:
   def __init__(self, svm_data):
-    self.svm_data = svm_data
+    self.svm_data  = svm_data
+    self.flag_quit = True
 
   ## check_arg_length:
   def check_arg_length(self):
     if len(sys.argv) > 1:
       self.response_dataset_validation = []
-      flag_quit = True
+      self.flag_quit = False
 
   # validate SVM settings
   validator = Validator( sys.argv[1], 'training' )
