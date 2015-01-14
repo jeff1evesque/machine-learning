@@ -40,8 +40,8 @@ class Data_New:
 
   ## save_svm_entity:
   def save_svm_entity(self):
-    self.svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
-    self.db_save    = Training( svm_entity, 'save_entity' )
+    svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
+    db_save    = Training( svm_entity, 'save_entity' )
     self.id_entity  = db_save.db_save_training()
 
   ## dataset_to_json:
