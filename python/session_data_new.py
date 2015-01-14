@@ -19,6 +19,13 @@ from data_saver import Training
 from data_validator import Validator
 from svm_json import JSON
 
+## Class: Data_New
+class Data_New:
+
+  ## constructor:
+  def __init__(self, svm_data):
+  self.svm_data = svm_data
+
 if len(sys.argv) > 1:
   # local variables
   response_dataset_validation = []
