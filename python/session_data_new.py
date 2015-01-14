@@ -26,11 +26,11 @@ class Data_New:
   def __init__(self, svm_data):
     self.svm_data  = svm_data
     self.flag_quit = True
+    self.response_dataset_validation = []
 
   ## check_arg_length:
   def check_arg_length(self):
     if len(sys.argv) > 1:
-      self.response_dataset_validation = []
       self.flag_quit = False
 
   # validate SVM settings
