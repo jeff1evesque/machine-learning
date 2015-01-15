@@ -47,7 +47,8 @@ if len(sys.argv) > 1:
 
   # redirect input to respective 'session_xxx_xxx.py' scripts
   if session_type == 'data_new':
-    Data_New( sys.argv[1] )
+    session = Data_New( sys.argv[1] )
+    session.check_arg_length()
   elif session_type == 'data_append':
     Data_Append( sys.argv[1] )
   elif session_type == 'model_generate':
