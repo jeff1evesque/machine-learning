@@ -45,6 +45,7 @@ if len(sys.argv) > 1:
     error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
     list_error.append(error)
 
+  print session_type
   # redirect input to respective 'session_xxx_xxx.py' scripts
   if session_type == 'data_new':
 
@@ -52,7 +53,7 @@ if len(sys.argv) > 1:
     session = Data_New( sys.argv[1] )
 
     # implement class methods
-    if not session.check_arg_length():
+    if not session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
       session.save_svm_entity()
