@@ -38,8 +38,8 @@ import sys, json
 from data_saver import Analysis
 from data_validator import Validator
 
-## Class: Data_Append
-class Data_Append:
+## Class: Data_Use
+class Data_Use:
 
   ## constructor:
   def __init__(self, svm_data):
