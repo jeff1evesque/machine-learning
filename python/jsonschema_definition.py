@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @jsonschema.py
+## @jsonschema_definition.py
 #  This file contains various jsonschema definitions.
 
 ## jsonschema_dataset(): contains the jsonschema for the SVM dataset. Therefore
