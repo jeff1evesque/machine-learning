@@ -36,7 +36,7 @@ class Data_New:
 
   ## validate_svm_settings:
   def validate_svm_settings(self):
-    validator = Validator( sys.argv[1], 'training' )
+    validator = Validator( self.svm_data, 'training' )
     validator.data_validation()
 
   ## validate_mime_type:
@@ -60,7 +60,7 @@ class Data_New:
 
     if ( json.loads( self.svm_data )['data']['dataset'].get('file_upload', None) ):
       self.json_dataset = []
-      svm_property      = sys.argv[1]
+      svm_property      = self.svm_data
 
       for val in response_mime_validation['json_data']['file_upload']:
         # csv to json
