@@ -49,7 +49,7 @@ if len(sys.argv) > 1:
   if session_type == 'data_new':
     session = Data_New( sys.argv[1] )
 
-    if session.check_arg_length():
+    if not session.check_arg_length():
       session.validate_svm_settings()
       session.save_svm_entity()
 
