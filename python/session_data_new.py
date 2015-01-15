@@ -24,9 +24,9 @@ class Data_New:
 
   ## constructor:
   def __init__(self, svm_data=None):
-    self.svm_data  = svm_data
-    self.flag_ = True
-    self.response_dataset_validation = []
+    self.svm_data       = svm_data
+    self.flag_quit      = True
+    self.response_validation = []
 
   ## validate_arg_none: check if class variable 'svm_data' is defined, and
   #                     define 'self.flag_quit', respectively.
@@ -104,7 +104,7 @@ class Data_New:
     if (self.response_mime_validation['status'] == False):
       flag_quit = True
 
-    for value in self.response_dataset_validation:
+    for value in self.response_validation:
       if value['status'] == False:
         print value['error']
         flag_quit = True
