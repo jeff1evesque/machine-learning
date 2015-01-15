@@ -30,9 +30,9 @@
 #      console.log( data.result );
 import sys, json
 from session_data_new import Data_New
-from session_data_append import Data_Append
-from session_model_generate import Model_Generate
-from session_model_use import Model_Use
+#from session_data_append import Data_Append
+#from session_model_generate import Model_Generate
+#from session_model_use import Model_Use
 
 # local variables
 list_error = []
@@ -47,7 +47,7 @@ if len(sys.argv) > 1:
 
   # redirect input to respective 'session_xxx_xxx.py' scripts
   if session_type == 'data_new':
-    Data_new( sys.argv[1] )
+    Data_New( sys.argv[1] )
   elif session_type == 'data_append':
     Data_Append( sys.argv[1] )
   elif session_type == 'model_generate':
