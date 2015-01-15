@@ -47,13 +47,41 @@ if len(sys.argv) > 1:
 
   # redirect input to respective 'session_xxx_xxx.py' scripts
   if session_type == 'data_new':
-    Data_new( sys.argv[1] )
+
+    # instantiate class
+    session = Data_New( sys.argv[1] )
+
+    # implement class methods
+    if not session.check_arg_length():
+      session.validate_svm_settings()
+      session.validate_mime_type()
+      session.save_svm_entity()
+      session.dataset_to_json()
+      session.validate_dataset_json()
+      session.save_svm_dataset()
+      session.validation_check_return()
+
   elif session_type == 'data_append':
-    Data_Append( sys.argv[1] )
+
+    # instantiate class
+    session = Data_Append( sys.argv[1] )
+
+    # implement class methods
+
   elif session_type == 'model_generate':
-    Model_Generate( sys.argv[1] )
+
+    # instantiate class
+    session = Model_Generate( sys.argv[1] )
+
+    # implement class methods
+
   elif session_type == 'model_use':
-    Model_Use( sys.argv[1] )
+
+    # instantiate class
+    session = Model_Use( sys.argv[1] )
+
+    # implement class methods
+
   else:
     error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
     list_error.append(error)
