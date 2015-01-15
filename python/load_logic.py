@@ -51,6 +51,7 @@ if len(sys.argv) > 1:
 
     if session.check_arg_length():
       session.validate_svm_settings()
+      session.save_svm_entity()
 
   elif session_type == 'data_append':
     Data_Append( sys.argv[1] )
