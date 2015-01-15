@@ -30,8 +30,9 @@ class Data_New:
 
   ## check_arg_length:
   def check_arg_length(self):
-    if len(sys.argv) > 1:
-      self.flag_quit = False
+    if len(sys.argv) > 1: self.flag_quit = False
+    else: self.flag_quit = True
+    return self.flag_quit
 
   ## validate_svm_settings:
   def validate_svm_settings(self):
