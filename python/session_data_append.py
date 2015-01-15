@@ -7,3 +7,10 @@
 #      new superset of appended dataset(s), is stored into respective database
 #      table(s), which later can be retrieved in another instance of this script,
 #      or within 'session_model_generate.py'.
+
+## Class: Data_Append
+class Data_Append:
+
+  ## constructor:
+  def __init__(self, svm_data):
+    self.svm_data = svm_data
