@@ -30,9 +30,9 @@
 #      console.log( data.result );
 import sys, json
 from session_data_new import Data_New
-#from session_data_append import Data_Append
-#from session_model_generate import Model_Generate
-#from session_model_use import Model_Use
+from session_data_append import Data_Append
+from session_model_generate import Model_Generate
+from session_model_use import Model_Use
 
 # local variables
 list_error = []
