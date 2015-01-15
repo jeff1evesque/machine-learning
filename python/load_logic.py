@@ -64,21 +64,21 @@ if len(sys.argv) > 1:
   elif session_type == 'data_append':
 
     # instantiate class
-    Data_Append( sys.argv[1] )
+    session = Data_Append( sys.argv[1] )
 
     # implement class methods
 
   elif session_type == 'model_generate':
 
     # instantiate class
-    Model_Generate( sys.argv[1] )
+    session = Model_Generate( sys.argv[1] )
 
     # implement class methods
 
   elif session_type == 'model_use':
 
     # instantiate class
-    Model_Use( sys.argv[1] )
+    session = Model_Use( sys.argv[1] )
 
     # implement class methods
 
