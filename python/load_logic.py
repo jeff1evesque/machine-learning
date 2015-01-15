@@ -51,6 +51,7 @@ if len(sys.argv) > 1:
     # instantiate class
     session = Data_New( sys.argv[1] )
 
+    # implement class methods
     if not session.check_arg_length():
       session.validate_svm_settings()
       session.validate_mime_type()
@@ -65,15 +66,21 @@ if len(sys.argv) > 1:
     # instantiate class
     Data_Append( sys.argv[1] )
 
+    # implement class methods
+
   elif session_type == 'model_generate':
 
     # instantiate class
     Model_Generate( sys.argv[1] )
 
+    # implement class methods
+
   elif session_type == 'model_use':
 
     # instantiate class
     Model_Use( sys.argv[1] )
+
+    # implement class methods
 
   else:
     error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
