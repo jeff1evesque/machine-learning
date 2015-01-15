@@ -97,10 +97,10 @@ class Data_New:
 
   ## validation_check_return:
   def validation_check_return(self):
-    if (response_mime_validation['status'] == False):
+    if (self.response_mime_validation['status'] == False):
       flag_quit = True
 
-    for value in response_dataset_validation:
+    for value in self.response_dataset_validation:
       if value['status'] == False:
         print value['error']
         flag_quit = True
