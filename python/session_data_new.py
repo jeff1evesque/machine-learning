@@ -23,14 +23,14 @@ from converter_json import JSON
 class Data_New:
 
   ## constructor:
-  def __init__(self, svm_data):
+  def __init__(self, svm_data=None):
     self.svm_data  = svm_data
     self.flag_quit = True
     self.response_dataset_validation = []
 
-  ## check_arg_length:
-  def check_arg_length(self):
-    if len(sys.argv) > 1: self.flag_quit = False
+  ## check_argument:
+  def check_argument(self):
+    if self.svm_data != None: self.flag_quit = False
     else: self.flag_quit = True
     return self.flag_quit
 
