@@ -28,29 +28,31 @@ class Data_New:
     self.flag_ = True
     self.response_dataset_validation = []
 
-  ## validate_arg_none:
+  ## validate_arg_none: check if class variable 'svm_data' is defined, and
+  #                     define 'self.flag_quit', respectively.
   def validate_arg_none(self):
     if self.svm_data != None: self.flag_quit = False
     else: self.flag_quit = True
     return self.flag_quit
 
-  ## validate_svm_settings:
+  ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
     validator = Validator( self.svm_data, 'training' )
     validator.data_validation()
 
-  ## validate_mime_type:
+  ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validator( self.svm_data, 'training' )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
 
-  ## save_svm_entity:
+  ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self):
     svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1}
     db_save    = Training( svm_entity, 'save_entity' )
     self.id_entity  = db_save.db_save_training()
 
-  ## dataset_to_json:
+  ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
+  #                   json object.
   def dataset_to_json(self):
     flag_convert = False
 
@@ -83,19 +85,19 @@ class Data_New:
             print e
             sys.exit()
 
-  ## validate_dataset_json:
+  ## validate_dataset_json: validate each dataset element.
   def validate_dataset_json(self):
     for val in self.json_dataset:
       json_validated = Validator( val )
       json_validated.dataset_validation()
 
-  ## save_svm_dataset:
+  ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
     for val in self.json_dataset:
       db_save = Training( val, 'save_value' )
       db_save.db_save_training()
 
-  ## validation_check_return:
+  ## validation_check_return: check if any validation failed.
   def validation_check_return(self):
     flag_quit = False
 
