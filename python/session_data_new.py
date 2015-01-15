@@ -52,8 +52,11 @@ class Data_New:
 
   ## dataset_to_json:
   def dataset_to_json(self):
+    flag_convert = False
+
     try:
-      print self.response_mime_validation['json_data']
+      self.response_mime_validation['json_data']
+      flag_convert = True
     except Exception as e:
       print e
       sys.exit()   
