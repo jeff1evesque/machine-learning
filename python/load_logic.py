@@ -51,6 +51,7 @@ if len(sys.argv) > 1:
 
     if not session.check_arg_length():
       session.validate_svm_settings()
+      session.validate_mime_type()
       session.save_svm_entity()
       session.dataset_to_json()
 
