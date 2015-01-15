@@ -38,12 +38,13 @@ class Data_New:
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
     validator = Validator( self.svm_data, 'training' )
-    validator.data_validation()
+    self.response_validation.append( validator.data_validation() )
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validator( self.svm_data, 'training' )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
+    self.response_validation.append( self.response_mime_validation )
 
   ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self):
@@ -89,7 +90,7 @@ class Data_New:
   def validate_dataset_json(self):
     for val in self.json_dataset:
       json_validated = Validator( val )
-      json_validated.dataset_validation()
+      self.response_validation.append( json_validated.dataset_validation() )
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
