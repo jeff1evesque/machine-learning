@@ -35,19 +35,28 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys, json
-from data_creator import Analysis
+from data_saver import Analysis
 from data_validator import Validator
 
-if len(sys.argv) > 1:
-  # validate input data is json format
-  validator = Validator( sys.argv[1], 'analysis' )
+## Class: Model_Use
+class Model_Use:
 
-  # validate, and set SVM properties to 'data_creator.py'
-  if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
-    if ( json.loads(sys.argv[1])['data'].get('result', None) ):
-      validator.data_validation()
+  ## constructor:
+  def __init__(self, svm_data):
+    self.svm_data = svm_data
 
-else:
-  msg = 'Please provide a training dataset in json format'
-  print json.dumps({'error':msg}, separators=(',', ': '))
-  sys.exit()
+  ## CHANGE_METHOD: we will adjust the logic below
+  def CHANGE_METHOD(self):
+    if len(sys.argv) > 1:
+      # validate input data is json format
+      validator = Validator( sys.argv[1], 'analysis' )
+
+      # validate, and set SVM properties to 'data_creator.py'
+      if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
+        if ( json.loads(sys.argv[1])['data'].get('result', None) ):
+          validator.data_validation()
+
+    else:
+      msg = 'Please provide a training dataset in json format'
+      print json.dumps({'error':msg}, separators=(',', ': '))
+      sys.exit()
