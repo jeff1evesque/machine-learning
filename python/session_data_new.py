@@ -52,22 +52,25 @@ class Data_New:
 
   ## dataset_to_json:
   def dataset_to_json(self):
+    flag_convert = False
+
     try:
-      print self.response_mime_validation['json_data']
+      self.response_mime_validation['json_data']['file_upload']
+      flag_convert = True
     except Exception as e:
       print e
       sys.exit()   
 
-    if ( json.loads( self.svm_data )['data']['dataset'].get('file_upload', None) ):
+    if ( flag_convert ):
       self.json_dataset = []
       svm_property      = self.svm_data
 
-      for val in response_mime_validation['json_data']['file_upload']:
+      for val in self.response_mime_validation['json_data']['file_upload']:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
             for dataset in val['filedata']['file_temp']:
-              self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())})
+              self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())})
           except Exception as e:
             print e
             sys.exit()
@@ -75,7 +78,7 @@ class Data_New:
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
+            self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
           except Exception as e:
             print e
             sys.exit()
