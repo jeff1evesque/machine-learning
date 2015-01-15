@@ -61,7 +61,7 @@ class Data_New:
       flag_convert = True
     except Exception as e:
       print e
-      sys.exit()   
+      sys.exit()
 
     if ( flag_convert ):
       self.json_dataset = []
