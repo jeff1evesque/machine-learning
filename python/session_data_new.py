@@ -37,18 +37,18 @@ class Data_New:
   def validate_svm_settings(self):
     validator = Validator( sys.argv[1], 'training' )
     validator.data_validation()
-    self.response_mime_validation = validator.file_upload_validation( sys.argv[1] )
+    self.response_mime_validation = validator.file_upload_validation( self.svm_data )
 
   ## save_svm_entity:
   def save_svm_entity(self):
-    svm_entity = {'title': json.loads(sys.argv[1])['data']['settings'].get('svm_title', None), 'uid': 1}
+    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1}
     db_save    = Training( svm_entity, 'save_entity' )
     self.id_entity  = db_save.db_save_training()
 
   ## dataset_to_json:
   def dataset_to_json(self):
     if ( self.response_mime_validation['json_data'] is True ):
-      if ( json.loads(sys.argv[1])['data']['dataset'].get('file_upload', None) ):
+      if ( json.loads( self.svm_data )['data']['dataset'].get('file_upload', None) ):
         self.json_dataset = []
         svm_property      = sys.argv[1]
 
