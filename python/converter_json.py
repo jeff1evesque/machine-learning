@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @svm_json.py
+## @converter_json.py
 #  This file contains methods to convert svm data to a JSON object.
 import json, csv
 from collections import defaultdict
