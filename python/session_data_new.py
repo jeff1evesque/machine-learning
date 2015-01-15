@@ -97,6 +97,8 @@ class Data_New:
 
   ## validation_check_return:
   def validation_check_return(self):
+    flag_quit = False
+
     if (self.response_mime_validation['status'] == False):
       flag_quit = True
 
