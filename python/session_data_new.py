@@ -40,7 +40,7 @@ class Data_New:
     validator.data_validation()
 
   ## validate_mime_type:
-  def validate_mime_type:
+  def validate_mime_type(self):
     validator = Validator( self.svm_data, 'training' )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
 
