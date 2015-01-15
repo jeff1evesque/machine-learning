@@ -56,6 +56,7 @@ if len(sys.argv) > 1:
       session.dataset_to_json()
       session.validate_dataset_json()
       session.save_svm_dataset()
+      session.validation_check_return()
 
   elif session_type == 'data_append':
     Data_Append( sys.argv[1] )
