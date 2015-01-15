@@ -17,7 +17,7 @@
 import sys, json
 from data_saver import Training
 from data_validator import Validator
-from svm_json import JSON
+from converter_json import JSON
 
 ## Class: Data_New
 class Data_New:
