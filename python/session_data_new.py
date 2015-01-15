@@ -56,7 +56,6 @@ class Data_New:
 
     try:
       self.response_mime_validation['json_data']['file_upload']
-      self.response_mime_validation['json_data']['file_upload']['filedata']['file_temp']
       flag_convert = True
     except Exception as e:
       print e
@@ -66,7 +65,7 @@ class Data_New:
       self.json_dataset = []
       svm_property      = self.svm_data
 
-      for val in response_mime_validation['json_data']['file_upload']:
+      for val in self.response_mime_validation['json_data']['file_upload']:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
