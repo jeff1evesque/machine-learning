@@ -28,8 +28,8 @@ class Data_New:
     self.flag_quit = True
     self.response_dataset_validation = []
 
-  ## check_argument:
-  def check_argument(self):
+  ## validate_arg_null:
+  def validate_arg_null(self):
     if self.svm_data != None: self.flag_quit = False
     else: self.flag_quit = True
     return self.flag_quit
