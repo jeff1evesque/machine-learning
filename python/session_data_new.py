@@ -37,6 +37,7 @@ class Data_New:
   def validate_svm_settings(self):
     validator = Validator( sys.argv[1], 'training' )
     validator.data_validation()
+    self.response_mime_validation = validator.file_upload_validation( sys.argv[1] )
 
   ## save_svm_entity:
   def save_svm_entity(self):
