@@ -55,7 +55,8 @@ class Data_New:
     flag_convert = False
 
     try:
-      self.response_mime_validation['json_data']
+      self.response_mime_validation['json_data']['file_upload']
+      self.response_mime_validation['json_data']['file_upload']['filedata']['file_temp']
       flag_convert = True
     except Exception as e:
       print e
