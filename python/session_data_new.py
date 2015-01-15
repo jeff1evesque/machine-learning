@@ -24,9 +24,9 @@ class Data_New:
 
   ## constructor:
   def __init__(self, svm_data=None):
-    self.svm_data  = svm_data
-    self.flag_ = True
-    self.response_dataset_validation = []
+    self.svm_data       = svm_data
+    self.flag_quit      = True
+    self.response_validation = []
 
   ## validate_arg_none: check if class variable 'svm_data' is defined, and
   #                     define 'self.flag_quit', respectively.
@@ -38,12 +38,13 @@ class Data_New:
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
     validator = Validator( self.svm_data, 'training' )
-    validator.data_validation()
+    self.response_validation.append( validator.data_validation() )
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validator( self.svm_data, 'training' )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
+    self.response_validation.append( self.response_mime_validation )
 
   ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self):
@@ -61,7 +62,7 @@ class Data_New:
       flag_convert = True
     except Exception as e:
       print e
-      sys.exit()   
+      sys.exit()
 
     if ( flag_convert ):
       self.json_dataset = []
@@ -89,7 +90,7 @@ class Data_New:
   def validate_dataset_json(self):
     for val in self.json_dataset:
       json_validated = Validator( val )
-      json_validated.dataset_validation()
+      self.response_validation.append( json_validated.dataset_validation() )
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
@@ -104,7 +105,7 @@ class Data_New:
     if (self.response_mime_validation['status'] == False):
       flag_quit = True
 
-    for value in self.response_dataset_validation:
+    for value in self.response_validation:
       if value['status'] == False:
         print value['error']
         flag_quit = True
