@@ -25,11 +25,11 @@ class Data_New:
   ## constructor:
   def __init__(self, svm_data=None):
     self.svm_data  = svm_data
-    self.flag_quit = True
+    self.flag_ = True
     self.response_dataset_validation = []
 
-  ## validate_arg_null:
-  def validate_arg_null(self):
+  ## validate_arg_none:
+  def validate_arg_none(self):
     if self.svm_data != None: self.flag_quit = False
     else: self.flag_quit = True
     return self.flag_quit
