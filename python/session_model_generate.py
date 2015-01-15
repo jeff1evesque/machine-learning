@@ -7,3 +7,9 @@
 #      into respective database table(s), which later can be retrieved within
 #      'session_model_use.py'.
 
+## Class: Model_Generate
+class Model_Generate:
+
+  ## constructor:
+  def __init__(self, svm_data):
+    self.svm_data = svm_data
