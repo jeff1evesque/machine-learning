@@ -62,7 +62,7 @@ class Data_New:
       print e
       sys.exit()   
 
-    if ( json.loads( self.svm_data )['data']['dataset'].get('file_upload', None) ):
+    if ( flag_convert ):
       self.json_dataset = []
       svm_property      = self.svm_data
 
