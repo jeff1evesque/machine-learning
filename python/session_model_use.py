@@ -45,7 +45,6 @@ class Data_Append:
   def __init__(self, svm_data):
     self.svm_data = svm_data
 
-
 if len(sys.argv) > 1:
   # validate input data is json format
   validator = Validator( sys.argv[1], 'analysis' )
