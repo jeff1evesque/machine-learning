@@ -38,6 +38,14 @@ import sys, json
 from data_creator import Analysis
 from data_validator import Validator
 
+## Class: Data_Append
+class Data_Append:
+
+  ## constructor:
+  def __init__(self, svm_data):
+    self.svm_data = svm_data
+
+
 if len(sys.argv) > 1:
   # validate input data is json format
   validator = Validator( sys.argv[1], 'analysis' )
