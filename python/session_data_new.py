@@ -38,6 +38,7 @@ class Data_New:
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
     validator = Validator( self.svm_data, 'training' )
+
     if validator.data_validation()['error'] != None:
       self.response_validation.append( validator.data_validation()['error'] )
 
@@ -45,6 +46,7 @@ class Data_New:
   def validate_mime_type(self):
     validator = Validator( self.svm_data, 'training' )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
+
     if self.response_mime_validation['error']:
       self.response_validation.append( self.response_mime_validation['error'] )
 
@@ -62,9 +64,9 @@ class Data_New:
     try:
       self.response_mime_validation['json_data']['file_upload']
       flag_convert = True
-    except Exception as e:
-      print e
-      sys.exit()
+    except Exception as error:
+      self.response_validation.append( error )
+      return False
 
     if ( flag_convert ):
       self.json_dataset = []
@@ -76,17 +78,17 @@ class Data_New:
           try:
             for dataset in val['filedata']['file_temp']:
               self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())})
-          except Exception as e:
-            print e
-            sys.exit()
+          except Exception as error:
+            self.response_validation.append( error )
+            return False
 
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
             self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
-          except Exception as e:
-            print e
-            sys.exit()
+          except Exception as error:
+            self.response_validation.append( error )
+            return False
 
   ## validate_dataset_json: validate each dataset element.
   def validate_dataset_json(self):
