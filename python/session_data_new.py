@@ -26,6 +26,8 @@ class Data_New:
   def __init__(self, svm_data=None):
     self.svm_data       = svm_data
     self.flag_quit      = True
+    self.flag_validate  = False
+    self.flag_validate_mime  = False
     self.response_validation = []
 
   ## validate_arg_none: check if class variable 'svm_data' is defined, and
@@ -38,13 +40,19 @@ class Data_New:
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
     validator = Validator( self.svm_data, 'training' )
-    self.response_validation.append( validator.data_validation() )
+
+    if validator.data_validation()['error'] != None:
+      self.response_validation.append( validator.data_validation()['error'] )
+    else: self.flag_validate = True
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validator( self.svm_data, 'training' )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
-    self.response_validation.append( self.response_mime_validation )
+
+    if self.response_mime_validation['error']:
+      self.response_validation.append( self.response_mime_validation['error'] )
+    else: self.flag_validate_mime = True
 
   ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self):
@@ -60,9 +68,9 @@ class Data_New:
     try:
       self.response_mime_validation['json_data']['file_upload']
       flag_convert = True
-    except Exception as e:
-      print e
-      sys.exit()
+    except Exception as error:
+      self.response_validation.append( error )
+      return False
 
     if ( flag_convert ):
       self.json_dataset = []
@@ -74,23 +82,27 @@ class Data_New:
           try:
             for dataset in val['filedata']['file_temp']:
               self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())})
-          except Exception as e:
-            print e
-            sys.exit()
+          except Exception as error:
+            self.response_validation.append( error )
+            return False
 
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
             self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
-          except Exception as e:
-            print e
-            sys.exit()
+          except Exception as error:
+            self.response_validation.append( error )
+            return False
 
   ## validate_dataset_json: validate each dataset element.
   def validate_dataset_json(self):
     for val in self.json_dataset:
       json_validated = Validator( val )
-      self.response_validation.append( json_validated.dataset_validation() )
+
+      if json_validated.dataset_validation()['error'] != None:
+        self.response_validation.append( json_validated.dataset_validation()['error'] )
+        self.flag_validate = False
+      else: self.flag_validate = True
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
@@ -100,15 +112,16 @@ class Data_New:
 
   ## validation_check_return: check if any validation failed.
   def validation_check_return(self):
-    flag_quit = False
+    flag_quit      = False
 
-    if (self.response_mime_validation['status'] == False):
-      flag_quit = True
-
-    for value in self.response_validation:
-      if value['status'] == False:
-        print value['error']
+    if self.flag_validate_mime == True:
+      if (self.response_mime_validation['status'] == False):
         flag_quit = True
 
+    if self.flag_validate == True:
+      for value in self.response_validation:
+        if value['status'] == False:
+          flag_quit = True
+
     if flag_quit == True:
-      sys.exit()
+      return self.response_validation
