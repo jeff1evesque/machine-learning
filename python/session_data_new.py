@@ -113,7 +113,6 @@ class Data_New:
   ## validation_check_return: check if any validation failed.
   def validation_check_return(self):
     flag_quit      = False
-    response_error = []
 
     if self.flag_validate_mime == True:
       if (self.response_mime_validation['status'] == False):
