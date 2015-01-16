@@ -109,6 +109,6 @@ class Data_New:
       db_save = Training( val, 'save_value' )
       db_save.db_save_training()
 
-  ## validation_check_return: check if any validation failed.
-  def validation_check_return(self):
+  ## return_error: return appended error messages.
+  def return_error(self):
     return self.response_error
