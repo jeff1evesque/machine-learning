@@ -26,8 +26,8 @@ class Data_New:
   def __init__(self, svm_data=None):
     self.svm_data       = svm_data
     self.flag_quit      = True
+    self.response_error = []
     self.flag_validate_mime  = False
-    self.response_validation = []
 
   ## validate_arg_none: check if class variable 'svm_data' is defined, and
   #                     define 'self.flag_quit', respectively.
@@ -41,7 +41,7 @@ class Data_New:
     validator = Validator( self.svm_data, 'training' )
 
     if validator.data_validation()['error'] != None:
-      self.response_validation.append( validator.data_validation()['error'] )
+      self.response_error.append( validator.data_validation()['error'] )
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
@@ -49,7 +49,7 @@ class Data_New:
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
 
     if self.response_mime_validation['error'] != None:
-      self.response_validation.append( self.response_mime_validation['error'] )
+      self.response_error.append( self.response_mime_validation['error'] )
       self.flag_validate_mime = True
 
   ## save_svm_entity: save entity information pertaining to new session.
@@ -68,7 +68,7 @@ class Data_New:
       self.response_mime_validation['json_data']['file_upload']
       flag_convert = True
     except Exception as error:
-      self.response_validation.append( error )
+      self.response_error.append( error )
       return False
 
     if ( flag_convert ):
@@ -82,7 +82,7 @@ class Data_New:
             for dataset in val['filedata']['file_temp']:
               self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())})
           except Exception as error:
-            self.response_validation.append( error )
+            self.response_error.append( error )
             flag_append = False
 
         # xml to json
@@ -90,7 +90,7 @@ class Data_New:
           try:
             self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
           except Exception as error:
-            self.response_validation.append( error )
+            self.response_error.append( error )
             flag_append = False
 
       if ( flag_append == False ): return False
@@ -101,7 +101,7 @@ class Data_New:
       json_validated = Validator( val )
 
       if json_validated.dataset_validation()['error'] != None:
-        self.response_validation.append( json_validated.dataset_validation()['error'] )
+        self.response_error.append( json_validated.dataset_validation()['error'] )
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
@@ -111,4 +111,4 @@ class Data_New:
 
   ## validation_check_return: check if any validation failed.
   def validation_check_return(self):
-    return self.response_validation
+    return self.response_error
