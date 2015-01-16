@@ -26,6 +26,7 @@ class Data_New:
   def __init__(self, svm_data=None):
     self.svm_data       = svm_data
     self.flag_quit      = True
+    self.flag_mime      = False
     self.response_validation = []
 
   ## validate_arg_none: check if class variable 'svm_data' is defined, and
@@ -49,6 +50,7 @@ class Data_New:
 
     if self.response_mime_validation['error']:
       self.response_validation.append( self.response_mime_validation['error'] )
+    else: self.flag_mime = True
 
   ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self):
@@ -108,8 +110,9 @@ class Data_New:
   def validation_check_return(self):
     flag_quit = False
 
-    if (self.response_mime_validation['status'] == False):
-      flag_quit = True
+    if self.flag_mime == True:
+      if (self.response_mime_validation['status'] == False):
+        flag_quit = True
 
     for value in self.response_validation:
       if value['status'] == False:
