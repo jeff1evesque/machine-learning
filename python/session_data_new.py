@@ -26,7 +26,6 @@ class Data_New:
   def __init__(self, svm_data=None):
     self.svm_data       = svm_data
     self.flag_quit      = True
-    self.flag_validate  = False
     self.flag_validate_mime  = False
     self.response_validation = []
 
@@ -43,16 +42,15 @@ class Data_New:
 
     if validator.data_validation()['error'] != None:
       self.response_validation.append( validator.data_validation()['error'] )
-    else: self.flag_validate = True
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validator( self.svm_data, 'training' )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
 
-    if self.response_mime_validation['error']:
+    if self.response_mime_validation['error'] != None:
       self.response_validation.append( self.response_mime_validation['error'] )
-    else: self.flag_validate_mime = True
+      self.flag_validate_mime = True
 
   ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self):
@@ -104,8 +102,6 @@ class Data_New:
 
       if json_validated.dataset_validation()['error'] != None:
         self.response_validation.append( json_validated.dataset_validation()['error'] )
-        self.flag_validate = False
-      else: self.flag_validate = True
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
@@ -115,16 +111,4 @@ class Data_New:
 
   ## validation_check_return: check if any validation failed.
   def validation_check_return(self):
-    flag_quit      = False
-
-    if self.flag_validate_mime == True:
-      if (self.response_mime_validation['status'] == False):
-        flag_quit = True
-
-    if self.flag_validate == True:
-      for value in self.response_validation:
-        if value['status'] == False:
-          flag_quit = True
-
-    if flag_quit == True:
-      return self.response_validation
+    return self.response_validation
