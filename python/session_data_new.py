@@ -26,6 +26,7 @@ class Data_New:
   def __init__(self, svm_data=None):
     self.svm_data       = svm_data
     self.flag_quit      = True
+    self.flag_validate  = False
     self.flag_validate_mime  = False
     self.response_validation = []
 
@@ -42,6 +43,7 @@ class Data_New:
 
     if validator.data_validation()['error'] != None:
       self.response_validation.append( validator.data_validation()['error'] )
+    else: self.flag_validate = True
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
@@ -99,6 +101,8 @@ class Data_New:
 
       if json_validated.dataset_validation()['error'] != None:
         self.response_validation.append( json_validated.dataset_validation()['error'] )
+        self.flag_validate = False
+      else: self.flag_validate = True
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
@@ -115,9 +119,10 @@ class Data_New:
       if (self.response_mime_validation['status'] == False):
         flag_quit = True
 
-    for value in self.response_validation:
-      if value['status'] == False:
-        flag_quit = True
+    if self.flag_validate == True:
+      for value in self.response_validation:
+        if value['status'] == False:
+          flag_quit = True
 
     if flag_quit == True:
       return self.response_validation
