@@ -64,6 +64,7 @@ class Data_New:
   #                   json object.
   def dataset_to_json(self):
     flag_convert = False
+    flag_append  = True
 
     try:
       self.response_mime_validation['json_data']['file_upload']
@@ -84,7 +85,7 @@ class Data_New:
               self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())})
           except Exception as error:
             self.response_validation.append( error )
-            return False
+            flag_append = False
 
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
@@ -92,7 +93,9 @@ class Data_New:
             self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
           except Exception as error:
             self.response_validation.append( error )
-            return False
+            flag_append = False
+
+      if ( flag_append == False ): return False
 
   ## validate_dataset_json: validate each dataset element.
   def validate_dataset_json(self):
