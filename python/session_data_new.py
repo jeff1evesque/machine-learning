@@ -25,9 +25,11 @@ class Data_New:
   ## constructor:
   def __init__(self, svm_data=None):
     self.svm_data       = svm_data
+    self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
     self.flag_quit      = True
     self.response_error = []
     self.flag_validate_mime  = False
+
 
   ## validate_arg_none: check if class variable 'svm_data' is defined, and
   #                     define 'self.flag_quit', respectively.
@@ -98,17 +100,19 @@ class Data_New:
 
   ## validate_dataset_json: validate each dataset element.
   def validate_dataset_json(self):
-    for val in self.json_dataset:
-      json_validated = Validator( val )
+    for list in self.json_dataset:
+      for val in list['svm_dataset']:
+        json_validated = Validator( val, self.svm_session )
 
-      if json_validated.dataset_validation()['error'] != None:
-        self.response_error.append( json_validated.dataset_validation()['error'] )
+        if json_validated.dataset_validation()['error'] != None:
+          self.response_error.append( json_validated.dataset_validation()['error'] )
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
-    for val in self.json_dataset:
-      db_save = Training( val )
-      db_save.db_save_training()
+    for list in self.json_dataset:
+      for val in list['svm_dataset']:
+        db_save = Training( val )
+        db_save.db_save_training()
 
   ## return_error: return appended error messages.
   def return_error(self):
