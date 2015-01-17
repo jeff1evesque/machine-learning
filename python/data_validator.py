@@ -43,7 +43,7 @@ class Validator:
       list_error.append(error)
       flag_json = False
 
-    # validation on 'training' session
+    # validation on 'data_new' session
     if self.svm_session == 'training' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_training())
@@ -55,7 +55,7 @@ class Validator:
         for index, xmldata in enumerate(json_data['svm_dataset']):
           print xmldata
 
-    # validation on 'analysis' session
+    # validation on 'model_use' session
     if self.svm_session == 'analysis' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_analysis())
