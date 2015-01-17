@@ -43,13 +43,14 @@ class Model_Use:
 
   ## constructor:
   def __init__(self, svm_data):
-    self.svm_data = svm_data
+    self.svm_data    = svm_data
+    self.svm_session = json.loads(self.svm_data)['data']['settings']['svm_session']
 
   ## CHANGE_METHOD: we will adjust the logic below
   def CHANGE_METHOD(self):
     if len(sys.argv) > 1:
       # validate input data is json format
-      validator = Validator( sys.argv[1] )
+      validator = Validator( sys.argv[1], self.svm_session )
 
       # validate, and set SVM properties to 'data_creator.py'
       if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
