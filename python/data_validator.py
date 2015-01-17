@@ -17,9 +17,9 @@ class Validator:
   #
   #  @svm_data    : is the input data, generally a form POST data, if
   #                 the 'session_type' is training.
-  def __init__(self, svm_data=None):
+  def __init__(self, svm_data, svm_session=None):
     self.svm_data    = svm_data
-    self.svm_session = json.loads(self.svm_data)['data']['settings']['svm_session'].lower()
+    self.svm_session = svm_session
 
   ## data_validation: this method validates the SVM properties of either
   #                   'training', or 'analysis' sessions.
