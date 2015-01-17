@@ -44,7 +44,7 @@ class Validator:
       flag_json = False
 
     # validation on 'data_new' session
-    if self.svm_session == 'training' and flag_json:
+    if self.svm_session == 'data_new' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_training())
       except Exception, error:
@@ -56,7 +56,7 @@ class Validator:
           print xmldata
 
     # validation on 'model_use' session
-    if self.svm_session == 'analysis' and flag_json:
+    if self.svm_session == 'model_use' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_analysis())
       except Exception, error:
