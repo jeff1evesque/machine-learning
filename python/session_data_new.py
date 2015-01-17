@@ -38,14 +38,15 @@ class Data_New:
 
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
-    validator = Validator( self.svm_data, 'training' )
+    validator = Validator( self.svm_data )
+    validator.data_validation()
 
     if validator.data_validation()['error'] != None:
       self.response_error.append( validator.data_validation()['error'] )
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
-    validator = Validator( self.svm_data, 'training' )
+    validator = Validator( self.svm_data )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
 
     if self.response_mime_validation['error'] != None:
@@ -55,7 +56,7 @@ class Data_New:
   ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self):
     svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1}
-    db_save    = Training( svm_entity, 'save_entity' )
+    db_save    = Training( svm_entity )
     self.id_entity  = db_save.db_save_training()
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
@@ -106,7 +107,7 @@ class Data_New:
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
     for val in self.json_dataset:
-      db_save = Training( val, 'save_value' )
+      db_save = Training( val )
       db_save.db_save_training()
 
   ## return_error: return appended error messages.
