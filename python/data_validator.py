@@ -56,7 +56,7 @@ class Validator:
           print xmldata
 
     # validation on 'model_use' session
-    if self.svm_session == 'model_use' and flag_json:
+    elif self.svm_session == 'model_use' and flag_json:
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_analysis())
       except Exception, error:
