@@ -46,7 +46,7 @@ class Data_New:
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
-    validator = Validator( self.svm_data, 'training' )
+    validator = Validator( self.svm_data )
     self.response_mime_validation = validator.file_upload_validation( self.svm_data )
 
     if self.response_mime_validation['error'] != None:
