@@ -49,7 +49,7 @@ class Model_Use:
   def CHANGE_METHOD(self):
     if len(sys.argv) > 1:
       # validate input data is json format
-      validator = Validator( sys.argv[1], 'analysis' )
+      validator = Validator( sys.argv[1] )
 
       # validate, and set SVM properties to 'data_creator.py'
       if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
