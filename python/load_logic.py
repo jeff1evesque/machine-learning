@@ -45,7 +45,6 @@ if len(sys.argv) > 1:
     error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
     list_error.append(error)
 
-  print session_type
   # redirect input to respective 'session_xxx_xxx.py' scripts
   if session_type == 'data_new':
 
