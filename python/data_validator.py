@@ -55,6 +55,10 @@ class Validator:
         for index, xmldata in enumerate(json_data['svm_dataset']):
           print xmldata
 
+    # validation on 'data_append' session
+
+    # validation on 'model_generate' session
+
     # validation on 'model_use' session
     elif self.svm_session == 'model_use' and flag_json:
       try:
