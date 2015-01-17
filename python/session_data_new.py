@@ -40,7 +40,7 @@ class Data_New:
 
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
-    validator = Validator( self.svm_data )
+    validator = Validator( self.svm_data, self.svm_session )
     validator.data_validation()
 
     if validator.data_validation()['error'] != None:
@@ -49,7 +49,7 @@ class Data_New:
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validator( self.svm_data )
-    self.response_mime_validation = validator.file_upload_validation( self.svm_data )
+    self.response_mime_validation = validator.file_upload_validation( self.svm_data, self.svm_session )
 
     if self.response_mime_validation['error'] != None:
       self.response_error.append( self.response_mime_validation['error'] )
