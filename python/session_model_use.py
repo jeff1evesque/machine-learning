@@ -36,7 +36,7 @@
 #        references.
 import sys, json
 from data_saver import Analysis
-from data_validator import Validator
+from validator_settings import Validate_Settings
 
 ## Class: Model_Use
 class Model_Use:
@@ -50,7 +50,7 @@ class Model_Use:
   def CHANGE_METHOD(self):
     if len(sys.argv) > 1:
       # validate input data is json format
-      validator = Validator( sys.argv[1], self.svm_session )
+      validator = Validate_Settings( sys.argv[1], self.svm_session )
 
       # validate, and set SVM properties to 'data_creator.py'
       if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
