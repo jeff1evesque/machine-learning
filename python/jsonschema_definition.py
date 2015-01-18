@@ -20,7 +20,8 @@ def jsonschema_dataset():
   return schema
 
 ## jsonschema_dataset_id(): contains the jsonschema for the SVM dataset. Specifically,
-#                           this schema complements 'jsonschema_dataset()'.
+#                           this schema complements the 'jsonschema_data_new()', and
+#                           'jsonschema_data_append()' schemas, respectively.
 #
 #  Note: This validation schema is used in the corresponding validator_xxx.py.
 def jsonschema_dataset_id():
