@@ -34,6 +34,8 @@ def jsonschema_dataset_id():
   return schema
 
 ## jsonschema_data_new(): contains the jsonschema for the 'data_new' session.
+#                         Therefore, this schema validates the properties
+#                         describing the session, not the dataset itself.
 #
 #  Note: This validation schema is used in corresponding validator_xxx.py.
 def jsonschema_data_new():
