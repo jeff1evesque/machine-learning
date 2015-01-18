@@ -113,7 +113,7 @@ class Data_New:
   def save_svm_dataset(self):
     for list in self.json_dataset:
       for val in list['svm_dataset']:
-        db_save = Training( val, 'save_value' )
+        db_save = Training( {'svm_dataset': val, 'id_entity': list['id_entity']}, 'save_value' )
         db_save.db_save_training()
 
   ## return_error: return appended error messages.
