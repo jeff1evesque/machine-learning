@@ -60,7 +60,7 @@ class Data_New:
   ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self):
     svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1}
-    db_save    = Training( svm_entity )
+    db_save    = Training( svm_entity, 'save_entity' )
     self.id_entity  = db_save.db_save_training()
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
@@ -113,7 +113,7 @@ class Data_New:
   def save_svm_dataset(self):
     for list in self.json_dataset:
       for val in list['svm_dataset']:
-        db_save = Training( val )
+        db_save = Training( {'svm_dataset': val, 'id_entity': list['id_entity']}, 'save_value' )
         db_save.db_save_training()
 
   ## return_error: return appended error messages.
