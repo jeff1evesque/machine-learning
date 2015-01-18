@@ -54,6 +54,20 @@ def jsonschema_data_new():
   }
   return schema
 
+## jsonschema_model_generate(): contains the jsonschema for the 'model_generate'
+#                               session. Therefore, this schema validates the
+#                               properties describing the session, not the dataset
+#                               itself.
+#
+#  Note: This validation schema is used in the corresponding validator_xxx.py.
+def jsonschema_model_generate():
+  schema = {
+    'type': 'object',
+    'properties': {
+    }
+  }
+  return schema
+
 ## jsonschema_model_use(): contains the jsonschema for the 'model_use' session.
 #                          Therefore, this schema validates the properties
 #                          describing the session, not the dataset itself.
