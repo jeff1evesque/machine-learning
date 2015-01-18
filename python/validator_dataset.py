@@ -1,22 +1,15 @@
 #!/usr/bin/python
 
-## @data_validator.py
-#  This script performs various data sanitation on input data, and 
-#  validates the same data to ensure that the SVM algorithm will work
-#  on the given dataset.  This adds an extra layer of security,
-#  especially if the script later is used without a web interface.
-import json, sys, magic
+## @validator_dataset.py
+#  This script performs validation on the svm data.
+import json, sys
 from jsonschema import validate
-from helper import md5_for_file
-from jsonschema_definition import jsonschema_training, jsonschema_analysis, jsonschema_dataset, jsonschema_dataset_id
+from jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
 
-## Class: Validator
-class Validator:
+## Class: Validate_Dataset
+class Validate_Dataset:
 
   ## constructor: saves a subset of the passed-in form data
-  #
-  #  @svm_data    : is the input data, generally a form POST data, if
-  #                 the 'session_type' is training.
   def __init__(self, svm_data, svm_session=None):
     self.svm_data    = svm_data
     self.svm_session = svm_session
