@@ -32,12 +32,12 @@ def jsonschema_data_new():
   }
   return schema
 
-## jsonschema_training(): contains the jsonschema for the 'training' session.
-#                         Therefore, this schema validates the properties
-#                         describing the session, not the dataset itself.
+## jsonschema_model_use(): contains the jsonschema for the 'training' session.
+#                          Therefore, this schema validates the properties
+#                          describing the session, not the dataset itself.
 #
-#  Note: This validation schema is used in data_validator.py.
-def jsonschema_training():
+#  Note: This validation schema is used in corresponding validator_xxx.py.
+def jsonschema_model_use():
   schema = {
     'type': 'object',
     'properties': {
