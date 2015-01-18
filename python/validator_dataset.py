@@ -6,8 +6,8 @@ import json, sys
 from jsonschema import validate
 from jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
 
-## Class: Validate_Data
-class Validate_Data:
+## Class: Validate_Dataset
+class Validate_Dataset:
 
   ## constructor: saves a subset of the passed-in form data
   def __init__(self, svm_data, svm_session=None):
