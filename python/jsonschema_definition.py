@@ -43,10 +43,6 @@ def jsonschema_training():
     'properties': {
       'svm_title': { 'type': 'string' },
       'svm_session_id' : { 'type': 'string' },
-      'svm_model_type': {
-        'type': 'string',
-        'enum': ['classification', 'regression']
-      },
       'svm_dataset_type': {
         'type': 'string',
         'enum': ['file_upload', 'xml_url']
