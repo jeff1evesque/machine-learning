@@ -4,7 +4,7 @@
 #  This script performs validation on session settings. 
 import json, sys
 from jsonschema import validate
-from jsonschema_definition import jsonschema_training, jsonschema_analysis, jsonschema_dataset, jsonschema_dataset_id
+from jsonschema_definition import jsonschema_training, jsonschema_analysis
 
 ## Class: Validate_Settings
 class Validate_Settings:
