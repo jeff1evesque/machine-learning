@@ -111,9 +111,9 @@ class Data_New:
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self):
-    for list in self.json_dataset:
-      for val in list['svm_dataset']:
-        db_save = Training( {'svm_dataset': val, 'id_entity': list['id_entity']}, 'save_value' )
+    for data in self.json_dataset:
+      for dataset in data['svm_dataset']:
+        db_save = Training( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value' )
         db_save.db_save_training()
 
   ## return_error: return appended error messages.
