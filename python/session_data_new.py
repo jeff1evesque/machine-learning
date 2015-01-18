@@ -16,7 +16,9 @@
 #        references.
 import sys, json
 from data_saver import Training
-from data_validator import Validator
+from validator_dataset import Validate_Dataset
+from validator_mime import Validate_Mime
+from validator_settings import Validate_Settings
 from converter_json import JSON
 
 ## Class: Data_New
