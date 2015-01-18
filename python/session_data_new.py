@@ -23,7 +23,7 @@ from converter_json import JSON
 class Data_New:
 
   ## constructor:
-  def __init__(self, svm_data=None):
+  def __init__(self, svm_data):
     self.svm_data       = svm_data
     self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
     self.flag_quit      = True
