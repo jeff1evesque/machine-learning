@@ -7,7 +7,7 @@
 #                        this schema validates only the SVM dataset, not the
 #                        properties describing the (training, or analysis) session.
 #
-#  Note: This validation schema is used in data_validator.py.
+#  Note: This validation schema is used in the corresponding validator_xxx.py.
 def jsonschema_dataset():
   schema = {
     'type': 'object',
@@ -20,9 +20,10 @@ def jsonschema_dataset():
   return schema
 
 ## jsonschema_dataset_id(): contains the jsonschema for the SVM dataset. Specifically,
-#                           this schema complements 'jsonschema_dataset()'.
+#                           this schema complements the 'jsonschema_data_new()', and
+#                           'jsonschema_data_append()' schemas, respectively.
 #
-#  Note: This validation schema is used in data_validator.py.
+#  Note: This validation schema is used in the corresponding validator_xxx.py.
 def jsonschema_dataset_id():
   schema = {
     'type': 'object',
@@ -32,12 +33,10 @@ def jsonschema_dataset_id():
   }
   return schema
 
-## jsonschema_training(): contains the jsonschema for the 'training' session.
-#                         Therefore, this schema validates the properties
-#                         describing the session, not the dataset itself.
+## jsonschema_data_new(): contains the jsonschema for the 'data_new' session.
 #
-#  Note: This validation schema is used in data_validator.py.
-def jsonschema_training():
+#  Note: This validation schema is used in corresponding validator_xxx.py.
+def jsonschema_data_new():
   schema = {
     'type': 'object',
     'properties': {
@@ -55,12 +54,12 @@ def jsonschema_training():
   }
   return schema
 
-## jsonschema_analysis(): contains the jsonschema for the 'analysis' session.
-#                         Therefore, this schema validates the properties
-#                         describing the session, not the dataset itself.
+## jsonschema_model_use(): contains the jsonschema for the 'model_use' session.
+#                          Therefore, this schema validates the properties
+#                          describing the session, not the dataset itself.
 #
-#  Note: This validation schema is used in data_validator.py.
-def jsonschema_analysis():
+#  Note: This validation schema is used in the corresponding validator_xxx.py.
+def jsonschema_model_use():
   schema = {
     'type': 'object',
     'properties': {
