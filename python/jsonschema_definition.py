@@ -32,10 +32,10 @@ def jsonschema_dataset_id():
   }
   return schema
 
-## jsonschema_model_use(): contains the jsonschema for the 'model_use' session.
+## jsonschema_data_new(): contains the jsonschema for the 'data_new' session.
 #
 #  Note: This validation schema is used in corresponding validator_xxx.py.
-def jsonschema_model_use():
+def jsonschema_data_new():
   schema = {
     'type': 'object',
     'properties': {
