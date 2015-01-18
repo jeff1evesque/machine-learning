@@ -1,10 +1,7 @@
 #!/usr/bin/python
 
-## @data_validator.py
-#  This script performs various data sanitation on input data, and 
-#  validates the same data to ensure that the SVM algorithm will work
-#  on the given dataset.  This adds an extra layer of security,
-#  especially if the script later is used without a web interface.
+## @validator_dataset.py
+#  This script performs validation on the svm data.
 import json, sys, magic
 from jsonschema import validate
 from helper import md5_for_file
