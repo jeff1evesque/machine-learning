@@ -7,13 +7,10 @@ from jsonschema import validate
 from helper import md5_for_file
 from jsonschema_definition import jsonschema_training, jsonschema_analysis, jsonschema_dataset, jsonschema_dataset_id
 
-## Class: Validator
-class Validator:
+## Class: Validate_Data
+class Validate_Data:
 
   ## constructor: saves a subset of the passed-in form data
-  #
-  #  @svm_data    : is the input data, generally a form POST data, if
-  #                 the 'session_type' is training.
   def __init__(self, svm_data, svm_session=None):
     self.svm_data    = svm_data
     self.svm_session = svm_session
