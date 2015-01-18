@@ -36,7 +36,7 @@
 #        references.
 import sys, json
 from data_saver import Analysis
-from data_validator import Validator
+from validator_settings import Validate_Settings
 
 ## Class: Model_Use
 class Model_Use:
