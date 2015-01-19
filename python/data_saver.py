@@ -97,9 +97,9 @@ class Training:
         cursor.execute( sql, (self.svm_data['title'], self.svm_data['uid']) )
 
       elif self.svm_cmd == 'save_value':
-        sql = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
-        for val in self.svm_data['svm_dataset']:
-          cursor.execute( sql, (self.svm_data['id_entity'], val['dep_variable_label'], val['indep_variable_label'], val['indep_variable_value']) )
+        sql     = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
+        dataset = self.svm_data['svm_dataset']
+        cursor.execute( sql, (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value']) )
 
       conn.commit()
     except DB.Error, error:
