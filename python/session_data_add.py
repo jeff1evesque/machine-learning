@@ -114,8 +114,12 @@ class Data_Add:
   def save_svm_dataset(self):
     for data in self.json_dataset:
       for dataset in data['svm_dataset']:
-        db_save = Training( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value' )
-        db_save.db_save_training()
+        db_save   = Training( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value' )
+
+        # save dataset element, append error(s)
+        db_return = db_save.db_save_training()
+        if not db_return['status']:
+          self.response_error.append( db_return['error'] )
 
   ## return_error: return appended error messages.
   def return_error(self):
