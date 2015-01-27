@@ -29,8 +29,7 @@
 #
 #      console.log( data.result );
 import sys, json
-from session_data_new import Data_New
-from session_data_append import Data_Append
+from session_data_add import Data_Add
 from session_model_generate import Model_Generate
 from session_model_use import Model_Use
 
@@ -49,7 +48,7 @@ if len(sys.argv) > 1:
   if session_type == 'data_new':
 
     # instantiate class
-    session = Data_New( sys.argv[1] )
+    session = Data_Add( sys.argv[1] )
 
     # implement class methods
     if not session.validate_arg_none():
@@ -72,7 +71,7 @@ if len(sys.argv) > 1:
   elif session_type == 'data_append':
 
     # instantiate class
-    session = Data_Append( sys.argv[1] )
+    session = Data_Add( sys.argv[1] )
 
     # implement class methods
 
