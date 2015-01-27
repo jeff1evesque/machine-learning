@@ -29,9 +29,9 @@
 #
 #      console.log( data.result );
 import sys, json
-from session_data_add import Data_Add
-from session_model_generate import Model_Generate
-from session_model_use import Model_Use
+from session.session_data_add import Data_Add
+from session.session_model_generate import Model_Generate
+from session.session_model_use import Model_Use
 
 # local variables
 list_error = []
