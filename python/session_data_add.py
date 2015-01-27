@@ -28,17 +28,14 @@ class Data_Add:
   def __init__(self, svm_data):
     self.svm_data       = svm_data
     self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
-    self.flag_quit      = True
     self.response_error = []
     self.flag_validate_mime  = False
 
 
-  ## validate_arg_none: check if class variable 'svm_data' is defined, and
-  #                     define 'self.flag_quit', respectively.
+  ## validate_arg_none: check if class variable 'svm_data' is defined.
   def validate_arg_none(self):
-    if self.svm_data == None: self.flag_quit = False
-    else: self.flag_quit = True
-    return self.flag_quit
+    if self.svm_data == None: return True
+    else: return False
 
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
