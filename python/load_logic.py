@@ -80,7 +80,6 @@ if len(sys.argv) > 1:
     if session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
-      session.save_svm_entity()
       session.set_entity_id( session_id )
       if len(session.return_error()) > 0:
         for val in session.return_error():
