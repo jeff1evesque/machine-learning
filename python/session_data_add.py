@@ -62,7 +62,7 @@ class Data_Add:
     # save dataset element, append error(s)
     db_return = db_save.db_save_training()
     if not db_return['status']: self.response_error.append( db_return['error'] )
-    else: self.id_entity = db_save.db_save_training()['id']
+    else: self.id_entity = db_return['id']
 
   ## set_entity_id: defines the class variable for session id.
   def set_entity_id(self, session_id):
