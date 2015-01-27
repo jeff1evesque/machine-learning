@@ -109,7 +109,7 @@ class Training:
       if conn:
         rowid = cursor.lastrowid
         conn.close()
-        return rowid
+        return { 'status': True, 'error': None, 'id': rowid }
 
     # return error
     if len(list_error) > 0:
