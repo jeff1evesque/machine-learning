@@ -58,7 +58,11 @@ class Data_Add:
   def save_svm_entity(self):
     svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1}
     db_save    = Training( svm_entity, 'save_entity' )
-    self.id_entity = db_save.db_save_training()
+
+    # save dataset element, append error(s)
+    db_return = db_save.db_save_training()
+    if not db_return['status']: self.response_error.append( db_return['error'] )
+    else: self.id_entity = db_return['id']
 
   ## set_entity_id: defines the class variable for session id.
   def set_entity_id(self, session_id):
@@ -114,9 +118,21 @@ class Data_Add:
   def save_svm_dataset(self):
     for data in self.json_dataset:
       for dataset in data['svm_dataset']:
-        db_save = Training( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value' )
-        db_save.db_save_training()
+        db_save   = Training( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value' )
+
+        # save dataset element, append error(s)
+        db_return = db_save.db_save_training()
+        if not db_return['status']: self.response_error.append( db_return['error'] )
 
   ## return_error: return appended error messages.
   def return_error(self):
     return self.response_error
+
+  ## check: check if the class instance contains any errors appended to the list
+  #         'self.response_error'. If any error(s) exists, it is printed, and the
+  #         program exits.
+  def check(self):
+    if len(self.response_error) > 0:
+      for error in self.response_error:
+        print error
+      sys.exit()
