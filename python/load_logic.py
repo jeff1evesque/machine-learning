@@ -51,7 +51,7 @@ if len(sys.argv) > 1:
     session = Data_Add( sys.argv[1] )
 
     # implement class methods
-    if session.validate_arg_none():
+    if not session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
       session.check()
@@ -75,7 +75,7 @@ if len(sys.argv) > 1:
     session_id = json.loads(sys.argv[1])['data']['settings']['svm_session_id']
 
     # implement class methods
-    if session.validate_arg_none():
+    if not session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
       session.check()
