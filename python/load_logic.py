@@ -73,7 +73,26 @@ if len(sys.argv) > 1:
     # instantiate class
     session = Data_Add( sys.argv[1] )
 
+    # define current session id
+    session_id = json.loads(sys.argv[1])['data']['settings']['svm_session_id']
+
     # implement class methods
+    if session.validate_arg_none():
+      session.validate_svm_settings()
+      session.validate_mime_type()
+      session.set_entity_id( session_id )
+      if len(session.return_error()) > 0:
+        for val in session.return_error():
+          print val
+        sys.exit()
+
+      session.dataset_to_json()
+      session.validate_dataset_json()
+      session.save_svm_dataset()
+      if len(session.return_error()) > 0:
+        for val in session.return_error():
+          print val
+        sys.exit()
 
   elif session_type == 'model_generate':
 
