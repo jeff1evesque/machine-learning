@@ -63,6 +63,10 @@ class Data_Add:
     db_save    = Training( svm_entity, 'save_entity' )
     self.id_entity  = db_save.db_save_training()
 
+  ## set_entity_id: defines the class variable for session id.
+  def set_entity_id(self, session_id):
+    self.id_entity = session_id
+
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
   def dataset_to_json(self):
