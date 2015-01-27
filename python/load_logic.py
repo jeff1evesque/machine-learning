@@ -73,8 +73,11 @@ if len(sys.argv) > 1:
     # instantiate class
     session = Data_Add( sys.argv[1] )
 
+    # define current session id
+    session_id = json.loads(sys.argv[1])['data']['settings']['svm_session_id']
+
     # implement class methods
-    if not session.validate_arg_none():
+    if session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
       session.save_svm_entity()
