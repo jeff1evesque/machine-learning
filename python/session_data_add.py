@@ -21,8 +21,8 @@ from validator_mime import Validate_Mime
 from validator_settings import Validate_Settings
 from converter_json import JSON
 
-## Class: Data_New
-class Data_New:
+## Class: Data_Add
+class Data_Add:
 
   ## constructor:
   def __init__(self, svm_data):
