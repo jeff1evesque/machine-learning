@@ -51,7 +51,7 @@ if len(sys.argv) > 1:
     session = Data_Add( sys.argv[1] )
 
     # implement class methods
-    if not session.validate_arg_none():
+    if session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
       session.check()
