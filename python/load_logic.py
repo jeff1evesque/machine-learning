@@ -48,7 +48,7 @@ if len(sys.argv) > 1:
   if session_type == 'data_new':
 
     # instantiate class
-    session = Data_New( sys.argv[1] )
+    session = Data_Add( sys.argv[1] )
 
     # implement class methods
     if not session.validate_arg_none():
@@ -71,7 +71,7 @@ if len(sys.argv) > 1:
   elif session_type == 'data_append':
 
     # instantiate class
-    session = Data_Append( sys.argv[1] )
+    session = Data_Add( sys.argv[1] )
 
     # implement class methods
 
