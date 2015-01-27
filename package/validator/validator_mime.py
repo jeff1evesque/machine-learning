@@ -3,7 +3,7 @@
 ## @validator_mime.py
 #  This script performs validation on the 'mime' type for file upload(s).
 import json, sys, magic
-from helper import md5_for_file
+from converter.helper import md5_for_file
 
 ## Class: Validate_Mime
 class Validate_Mime:
