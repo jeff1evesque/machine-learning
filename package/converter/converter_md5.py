@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @helper.py
+## @converter_md5.py
 #  This file contains helper functions.
 import hashlib, collections
 from collections import defaultdict
