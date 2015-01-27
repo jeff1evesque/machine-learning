@@ -80,19 +80,19 @@ if len(sys.argv) > 1:
     if session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
-      session.set_entity_id( session_id )
       if len(session.return_error()) > 0:
         for val in session.return_error():
           print val
         sys.exit()
+      session.set_entity_id( session_id )
 
       session.dataset_to_json()
       session.validate_dataset_json()
-      session.save_svm_dataset()
       if len(session.return_error()) > 0:
         for val in session.return_error():
           print val
         sys.exit()
+      session.save_svm_dataset()
 
   elif session_type == 'model_generate':
 
