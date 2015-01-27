@@ -15,11 +15,11 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys, json
-from data_saver import Training
-from validator_dataset import Validate_Dataset
-from validator_mime import Validate_Mime
-from validator_settings import Validate_Settings
-from converter_json import JSON
+from database.data_saver import Training
+from validator.validator_dataset import Validate_Dataset
+from validator.validator_mime import Validate_Mime
+from validator.validator_settings import Validate_Settings
+from converter.converter_json import JSON
 
 ## Class: Data_Add
 class Data_Add:

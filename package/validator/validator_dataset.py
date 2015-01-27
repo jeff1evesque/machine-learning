@@ -4,7 +4,7 @@
 #  This script performs validation on the svm data.
 import json, sys
 from jsonschema import validate
-from jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
+from schema.jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
 
 ## Class: Validate_Dataset
 class Validate_Dataset:
