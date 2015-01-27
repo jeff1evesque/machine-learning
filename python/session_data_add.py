@@ -122,8 +122,7 @@ class Data_Add:
 
         # save dataset element, append error(s)
         db_return = db_save.db_save_training()
-        if not db_return['status']:
-          self.response_error.append( db_return['error'] )
+        if not db_return['status']: self.response_error.append( db_return['error'] )
 
   ## return_error: return appended error messages.
   def return_error(self):
