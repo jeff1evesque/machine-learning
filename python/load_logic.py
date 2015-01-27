@@ -54,19 +54,17 @@ if len(sys.argv) > 1:
     if not session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
-      if len(session.return_error()) > 0:
-        for val in session.return_error():
-          print val
-        sys.exit()
+      session.check()
+
       session.save_svm_entity()
+      session.check()
 
       session.dataset_to_json()
       session.validate_dataset_json()
-      if len(session.return_error()) > 0:
-        for val in session.return_error():
-          print val
-        sys.exit()
+      session.check()
+
       session.save_svm_dataset()
+      session.check()
 
   elif session_type == 'data_append':
 
@@ -80,19 +78,16 @@ if len(sys.argv) > 1:
     if session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
-      if len(session.return_error()) > 0:
-        for val in session.return_error():
-          print val
-        sys.exit()
+      session.check()
+
       session.set_entity_id( session_id )
 
       session.dataset_to_json()
       session.validate_dataset_json()
-      if len(session.return_error()) > 0:
-        for val in session.return_error():
-          print val
-        sys.exit()
+      session.check()
+
       session.save_svm_dataset()
+      session.check()
 
   elif session_type == 'model_generate':
 
