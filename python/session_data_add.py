@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @session_data_new.py
+## @session_data_add.py
 #  This file receives data (i.e. settings), including one or more dataset(s)
 #      provided during the current session, and stores them into corresponding
 #      database tables. The stored dataset(s) can later be retrieved from
@@ -21,8 +21,8 @@ from validator_mime import Validate_Mime
 from validator_settings import Validate_Settings
 from converter_json import JSON
 
-## Class: Data_New
-class Data_New:
+## Class: Data_Add
+class Data_Add:
 
   ## constructor:
   def __init__(self, svm_data):
