@@ -54,19 +54,19 @@ if len(sys.argv) > 1:
     if not session.validate_arg_none():
       session.validate_svm_settings()
       session.validate_mime_type()
-      session.save_svm_entity()
       if len(session.return_error()) > 0:
         for val in session.return_error():
           print val
         sys.exit()
+      session.save_svm_entity()
 
       session.dataset_to_json()
       session.validate_dataset_json()
-      session.save_svm_dataset()
       if len(session.return_error()) > 0:
         for val in session.return_error():
           print val
         sys.exit()
+      session.save_svm_dataset()
 
   elif session_type == 'data_append':
 
