@@ -36,7 +36,7 @@ class Data_Add:
   ## validate_arg_none: check if class variable 'svm_data' is defined, and
   #                     define 'self.flag_quit', respectively.
   def validate_arg_none(self):
-    if self.svm_data != None: self.flag_quit = False
+    if self.svm_data == None: self.flag_quit = False
     else: self.flag_quit = True
     return self.flag_quit
 
