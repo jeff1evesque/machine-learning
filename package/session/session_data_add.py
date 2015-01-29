@@ -116,7 +116,7 @@ class Data_Add:
           self.response_error.append( json_validated.dataset_validation()['error'] )
 
   ## save_svm_dataset: save each dataset element into a database table.
-  def save_svm_dataset(self):
+  def save_svm_dataset(self, session_type):
     for data in self.json_dataset:
       for dataset in data['svm_dataset']:
         db_save   = Training( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value' )
