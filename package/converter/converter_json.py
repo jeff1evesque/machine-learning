@@ -5,7 +5,7 @@
 import json, csv
 from collections import defaultdict
 from itertools import islice
-from lxml import etre
+from lxml import etree
 
 ## Class: JSON
 class JSON:
