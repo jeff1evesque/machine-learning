@@ -69,6 +69,8 @@ class JSON:
     dep_variable_label   = []
     indep_variable_label = []
 
-    # convert file to python 'dict'
+    # convert xml file to python 'dict'
     with open( self.svm_file, 'rU' ) as xmlfile:
       dataset = xmltodict.parse(xmlfile.read())
+
+    return json.dumps( dataset )
