@@ -95,7 +95,8 @@ class Training:
       # sql format string is not a python string, hence '%s' used for all columns
       if self.svm_cmd == 'save_entity':
         if self.session_type == 'data_append':
-          sql  = 'UPDATE tbl_dataset_entity SET (uid_modified, datetime_modified) VALUES( %s, UTC_TIMESTAMP() ) WHERE id_entity=' + self.session_id
+          #sql  = 'UPDATE tbl_dataset_entity SET (uid_modified, datetime_modified) VALUES( %s, UTC_TIMESTAMP() ) WHERE id_entity=' + self.session_id
+          sql  = 'UPDATE tbl_dataset_entity SET (uid_modified, datetime_modified) VALUES( %s, UTC_TIMESTAMP() ) WHERE id_entity=1'
           cursor.execute( sql, (self.svm_data['uid']) )
         elif self.session_type == 'data_new':
           sql  = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
