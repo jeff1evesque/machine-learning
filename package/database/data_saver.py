@@ -94,11 +94,14 @@ class Training:
 
       # sql format string is not a python string, hence '%s' used for all columns
       if self.svm_cmd == 'save_entity':
-        sql  = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
+        if self.session_type == 'data_append':
+          sql  = 'INSERT INTO tbl_dataset_entity (title, uid_modified, datetime_modified) VALUES( %s, %s, UTC_TIMESTAMP() )'
+        elif self.session_type == 'data_add':
+          sql  = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (self.svm_data['title'], self.svm_data['uid']) )
 
       elif self.svm_cmd == 'save_value':
-        sql     = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
+        sql = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
         dataset = self.svm_data['svm_dataset']
         cursor.execute( sql, (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value']) )
 
