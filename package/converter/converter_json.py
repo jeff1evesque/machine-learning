@@ -73,4 +73,14 @@ class JSON:
     with open( self.svm_file, 'rU' ) as xmlfile:
       dataset = xmltodict.parse(xmlfile.read())
 
+    # build 'list_dataset'
+    for dep_variable in dataset['dataset']['entity']:
+      dep_variable_label = dep_variable['dependent-variable']
+
+      for indep_variable in dep_variable:
+        indep_variable_label = indep_variable['label']
+        indep_variable_value = indep_variable['value']
+
+        list_dataset.append( { 'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value} )
+
     return json.dumps( list_dataset )
