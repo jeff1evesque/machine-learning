@@ -67,4 +67,8 @@ class JSON:
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
     doc = etree.parse( self.svm_file )
+    list_dataset         = []
+    dep_variable_label   = []
+    indep_variable_label = []
+
     return json.dumps( doc )
