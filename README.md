@@ -41,6 +41,7 @@ sudo apt-get install inotify-tools
 sudo apt-get install python-pip
 sudo pip install jsonschema
 sudo pip install python-magic
+sudo pip install xmltodict
 
 # LAMP (with MariaDB, and phpmyadmin):
 sudo apt-get install apache2
