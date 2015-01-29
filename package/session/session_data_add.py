@@ -55,9 +55,9 @@ class Data_Add:
       self.flag_validate_mime = True
 
   ## save_svm_entity: save entity information pertaining to new session.
-  def save_svm_entity(self):
+  def save_svm_entity(self, session_type):
     svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1}
-    db_save    = Training( svm_entity, 'save_entity' )
+    db_save    = Training( svm_entity, 'save_entity', session_type )
 
     # save dataset element, append error(s)
     db_return = db_save.db_save_training()
