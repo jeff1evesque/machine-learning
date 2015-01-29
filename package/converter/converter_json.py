@@ -2,7 +2,7 @@
 
 ## @converter_json.py
 #  This file contains methods to convert svm data to a JSON object.
-import json, csv
+import json, csv, xmltodict
 from collections import defaultdict
 from itertools import islice
 
