@@ -75,7 +75,7 @@ class JSON:
     for dep_variable in dataset['dataset']['entity']:
       dep_variable_label = dep_variable['dependent-variable']
 
-      for indep_variable in dep_variable:
+      for indep_variable in dep_variable['independent-variable']:
         indep_variable_label = indep_variable['label']
         indep_variable_value = indep_variable['value']
 
