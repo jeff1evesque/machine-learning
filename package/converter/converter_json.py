@@ -73,4 +73,4 @@ class JSON:
     with open( self.svm_file, 'rU' ) as xmlfile:
       dataset = xmltodict.parse(xmlfile.read())
 
-    return json.dumps( dataset )
+    return json.dumps( list_dataset )
