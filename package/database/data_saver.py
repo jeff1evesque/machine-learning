@@ -96,7 +96,7 @@ class Training:
       if self.svm_cmd == 'save_entity':
         if self.session_type == 'data_append':
           sql  = 'INSERT INTO tbl_dataset_entity (title, uid_modified, datetime_modified) VALUES( %s, %s, UTC_TIMESTAMP() )'
-        elif self.session_type == 'data_add':
+        elif self.session_type == 'data_new':
           sql  = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
         cursor.execute( sql, (self.svm_data['title'], self.svm_data['uid']) )
 
