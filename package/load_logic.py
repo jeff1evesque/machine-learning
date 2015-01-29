@@ -63,7 +63,7 @@ if len(sys.argv) > 1:
       session.validate_dataset_json()
       session.check()
 
-      session.save_svm_dataset()
+      session.save_svm_dataset(session_type)
       session.check()
 
   elif session_type == 'data_append':
@@ -86,7 +86,7 @@ if len(sys.argv) > 1:
       session.validate_dataset_json()
       session.check()
 
-      session.save_svm_dataset()
+      session.save_svm_dataset(session_type)
       session.check()
 
   elif session_type == 'model_generate':
