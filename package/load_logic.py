@@ -56,7 +56,7 @@ if len(sys.argv) > 1:
       session.validate_mime_type()
       session.check()
 
-      session.save_svm_entity()
+      session.save_svm_entity(session_type)
       session.check()
 
       session.dataset_to_json()
@@ -80,7 +80,7 @@ if len(sys.argv) > 1:
       session.validate_mime_type()
       session.check()
 
-      session.set_entity_id( session_id )
+      session.set_entity_id(session_id)
 
       session.dataset_to_json()
       session.validate_dataset_json()
