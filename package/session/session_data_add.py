@@ -98,7 +98,8 @@ class Data_Add:
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
+            for dataset in val['filedata']['file_temp']:
+              self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
