@@ -66,8 +66,6 @@ class JSON:
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
     list_dataset         = []
-    dep_variable_label   = []
-    indep_variable_label = []
 
     # convert xml file to python 'dict'
     with open( self.svm_file, 'rU' ) as xmlfile:
