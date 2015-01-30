@@ -29,7 +29,6 @@ class Training:
     self.svm_cmd      = cmd
     self.session_type = session_type
     self.db_settings  = Database()
-    self.uid          = 1
 
   ## db_save_training: stores an SVM dataset into corresponding 'EAV data model'
   #                    database table.
