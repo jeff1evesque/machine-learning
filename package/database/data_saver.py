@@ -62,9 +62,9 @@ class Training:
                    id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                    title VARCHAR (50) NOT NULL,
                    uid_created INT NOT NULL,
-                   datetime_created DATETIME,
+                   datetime_created DATETIME NOT NULL,
                    uid_modified INT NULL,
-                   datetime_modified INT NULL
+                   datetime_modified DATETIME NULL
                  );
                  '''
 
