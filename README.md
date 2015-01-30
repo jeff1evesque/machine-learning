@@ -208,7 +208,7 @@ By default, the username `authenticated`, and corresponding password `password` 
 ```sql
 $ mysql -u root -p
 MariaDB [(none)]> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY 'password';
-MariaDB [(none)]> GRANT CREATE, INSERT, DELETE, DROP, EXECUTE, SELECT, SHOW DATABASES ON *.* TO 'authenticated'@'localhost';
+MariaDB [(none)]> GRANT CREATE, INSERT, DELETE, UPDATE, DROP, EXECUTE, SELECT, SHOW DATABASES ON *.* TO 'authenticated'@'localhost';
 MariaDB [(none)]> FLUSH PRIVILEGES;
 ```
 
