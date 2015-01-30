@@ -62,6 +62,8 @@ class Data_Add:
     # save dataset element, append error(s)
     db_return = db_save.db_save_training()
     if not db_return['status']: self.response_error.append( db_return['error'] )
+
+    # define for 'save_svm_dataset' invocation within 'data_new' session
     elif db_return['status'] and session_type == 'data_new': self.id_entity = db_return['id']
 
   ## set_entity_id: defines the class variable for session id.
