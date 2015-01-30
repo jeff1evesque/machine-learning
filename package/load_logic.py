@@ -81,6 +81,7 @@ if len(sys.argv) > 1:
       session.check()
 
       session.set_entity_id(session_id)
+      session.save_svm_entity(session_type)
 
       session.dataset_to_json()
       session.validate_dataset_json()
