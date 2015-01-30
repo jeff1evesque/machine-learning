@@ -62,9 +62,9 @@ class Training:
                    id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                    title VARCHAR (50) NOT NULL,
                    uid_created INT NOT NULL,
-                   datetime_created DATETIME,
+                   datetime_created DATETIME NOT NULL,
                    uid_modified INT NULL,
-                   datetime_modified INT NULL
+                   datetime_modified DATETIME NULL
                  );
                  '''
 
@@ -94,11 +94,10 @@ class Training:
 
       # sql format string is not a python string, hence '%s' used for all columns
       if self.svm_cmd == 'save_entity':
-        print self.session_type
         if self.session_type == 'data_append':
-          sql  = 'UPDATE tbl_dataset_entity SET (uid_modified, datetime_modified) VALUES( %s, UTC_TIMESTAMP() ) WHERE id_entity=' + self.session_id
-          #sql  = 'UPDATE tbl_dataset_entity SET (uid_modified, datetime_modified) VALUES( %s, UTC_TIMESTAMP() ) WHERE id_entity=1'
-          cursor.execute( sql, (self.svm_data['uid']) )
+          sql  = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
+          cursor.execute( sql, (self.svm_data['uid'], self.svm_data['uid']) )
+
         elif self.session_type == 'data_new':
           sql  = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
           cursor.execute( sql, (self.svm_data['title'], self.svm_data['uid']) )
