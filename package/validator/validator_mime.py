@@ -1,7 +1,9 @@
 #!/usr/bin/python
 
 ## @validator_mime.py
-#  This script performs validation on the 'mime' type for file upload(s).
+#  This script performs validation on the 'mime' type for file upload(s), and returns the
+#      validated temporary file-upload file(s), along with the corresponding mimetype for
+#      each file.
 import json, sys, magic
 from converter.converter_md5 import md5_for_file
 
@@ -32,18 +34,23 @@ class Validate_Mime:
 
       for index, filedata in enumerate(json_data['file_upload']):
         try:
-          mimetype = magic.from_file( filedata['file_temp'][0], mime=True )
-          # validate file format
-          if ( mimetype not in acceptable_type ):
-            msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
-            msg += '\n       ' + ', '.join(acceptable_type)
-            list_error.append(msg)
-
           filehash = md5_for_file(filedata['file_temp'][0])
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
-            json_keep.append( {'type': mimetype, 'filedata': filedata} )
+            for idx, file in enumerate(filedata['file_temp']):
+              mimetype = magic.from_file( file, mime=True )
+
+              # validate mimetype
+              if ( mimetype not in acceptable_type ):
+                msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
+                msg += '\n       ' + ', '.join(acceptable_type)
+                list_error.append(msg)
+
+              # keep non-duplicated file uploads
+              else:
+                data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
+                json_keep.append( {'type': mimetype, 'filedata': data} )
 
         except:
           msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
