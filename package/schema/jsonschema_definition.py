@@ -12,10 +12,16 @@ def jsonschema_dataset():
   schema = {
     'type': 'object',
     'properties': {
-      'dep_variable_label': { 'type': 'string' },
-      'indep_variable_label': { 'type': 'string' },
+      'dep_variable_label': {
+        'type': 'string',
+        'minLength': 1
+      },
+      'indep_variable_label': {
+        'type': 'string',
+        'minLength': 1
+      },
       'indep_variable_value': { 'type': 'number' },
-    }
+    },
   }
   return schema
 
@@ -24,12 +30,18 @@ def jsonschema_dataset():
 #                           'jsonschema_data_append()' schemas, respectively.
 #
 #  Note: This validation schema is used in the corresponding validator_xxx.py.
+#
+#  @exclusiveMinimum, ensures that the minimum is included with the minimum range.
 def jsonschema_dataset_id():
   schema = {
     'type': 'object',
     'properties': {
-      'id_entity': { 'type': 'integer' },
-    }
+      'id_entity': {
+        'type': 'integer',
+        'minimum': 0,
+        'exclusiveMinimum', true
+      },
+    },
   }
   return schema
 
@@ -42,8 +54,14 @@ def jsonschema_data_new():
   schema = {
     'type': 'object',
     'properties': {
-      'svm_title': { 'type': 'string' },
-      'svm_session_id' : { 'type': 'string' },
+      'svm_title': {
+        'type': 'string',
+        'minLength': 1
+      },
+      'svm_session_id' : {
+        'type': 'string',
+        'minLength': 1
+      },
       'svm_dataset_type': {
         'type': 'string',
         'enum': ['file_upload', 'xml_url']
@@ -52,7 +70,7 @@ def jsonschema_data_new():
         'type': 'string',
         'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
       },
-    }
+    },
   }
   return schema
 
@@ -106,6 +124,6 @@ def jsonschema_model_use():
         'items': { 'type': 'string' },
         'minItems': 1
       },
-    }
+    },
   }
   return schema
