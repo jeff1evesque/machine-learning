@@ -14,3 +14,9 @@ class Model_Generate:
   def __init__(self, svm_data):
     self.svm_data       = svm_data
     self.response_error = []
+
+  ## validate_arg_none: check if class variable 'svm_data' is defined.
+  def validate_arg_none(self):
+    if self.svm_data == None: return True
+    else: return False
+
