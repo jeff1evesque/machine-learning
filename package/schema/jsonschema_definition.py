@@ -28,7 +28,11 @@ def jsonschema_dataset_id():
   schema = {
     'type': 'object',
     'properties': {
-      'id_entity': { 'type': 'integer' },
+      'id_entity': {
+        'type': 'integer',
+        'minimum': 0,
+        'exclusiveMinimum', true,
+      },
     }
   }
   return schema
