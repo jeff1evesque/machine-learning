@@ -32,21 +32,19 @@ class Validate_Mime:
 
       for index, filedata in enumerate(json_data['file_upload']):
         try:
-          mimetype = magic.from_file( filedata['file_temp'][0], mime=True )
-          # validate file format
-          if ( mimetype not in acceptable_type ):
-            msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
-            msg += '\n       ' + ', '.join(acceptable_type)
-            list_error.append(msg)
-
           filehash = md5_for_file(filedata['file_temp'][0])
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
             for idx, file in enumerate(filedata['file_temp']):
-              print magic.from_file( file, mime=True )
-              data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
-              json_keep.append( {'type': mimetype, 'filedata': data} )
+              mimetype = magic.from_file( file, mime=True )
+              if ( mimetype not in acceptable_type ):
+                msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
+                msg += '\n       ' + ', '.join(acceptable_type)
+                list_error.append(msg)
+              else:
+                data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
+                json_keep.append( {'type': mimetype, 'filedata': data} )
 
         except:
           msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
