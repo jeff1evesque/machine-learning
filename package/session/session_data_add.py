@@ -6,11 +6,6 @@
 #      database tables. The stored dataset(s) can later be retrieved from
 #      'session_data_append.py', or 'session_generate_model.py'.
 #
-#  Note: this script is executed from 'load_logic.php', using the 'exec( ... )'
-#        equivalent method when implemented via the web-interface. Since the
-#        web-interface is an AJAX process, the shelled into python script requires
-#        print statements, when data is needed to be returned to the client-end.
-#
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
