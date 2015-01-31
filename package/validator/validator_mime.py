@@ -38,10 +38,13 @@ class Validate_Mime:
             unique_hash.add(filehash)
             for idx, file in enumerate(filedata['file_temp']):
               mimetype = magic.from_file( file, mime=True )
+
+              # validate mimetype
               if ( mimetype not in acceptable_type ):
                 msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
                 msg += '\n       ' + ', '.join(acceptable_type)
                 list_error.append(msg)
+              # keep non-duplicated file uploads
               else:
                 data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
                 json_keep.append( {'type': mimetype, 'filedata': data} )
