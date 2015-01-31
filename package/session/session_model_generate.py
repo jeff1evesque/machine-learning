@@ -27,3 +27,7 @@ class Model_Generate:
 
     if validator.data_validation()['error'] != None:
       self.response_error.append( validator.data_validation()['error'] )
+
+  ## return_error: return appended error messages.
+  def return_error(self):
+    return self.response_error
