@@ -24,6 +24,8 @@ def jsonschema_dataset():
 #                           'jsonschema_data_append()' schemas, respectively.
 #
 #  Note: This validation schema is used in the corresponding validator_xxx.py.
+#
+#  @exclusiveMinimum, ensures that the minimum is included with the minimum range.
 def jsonschema_dataset_id():
   schema = {
     'type': 'object',
