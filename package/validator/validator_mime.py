@@ -2,8 +2,8 @@
 
 ## @validator_mime.py
 #  This script performs validation on the 'mime' type for file upload(s), and returns the
-#      validated temporary file-upload file(s), along with the corresponding mimetype for
-#      each file.
+#      validated temporary file references(s), along with the corresponding mimetype for
+#      each file upload(s).
 import json, sys, magic
 from converter.converter_md5 import md5_for_file
 
