@@ -6,6 +6,10 @@
 #      and generates an SVM model, respectively. The new SVM model, is stored
 #      into respective database table(s), which later can be retrieved within
 #      'session_model_use.py'.
+#
+#  Note: the term 'dataset' used throughout various comments in this file,
+#        synonymously implies the user supplied 'file upload(s)', and XML url
+#        references.
 
 ## Class: Model_Generate
 class Model_Generate:
