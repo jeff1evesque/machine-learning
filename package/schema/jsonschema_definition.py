@@ -12,8 +12,14 @@ def jsonschema_dataset():
   schema = {
     'type': 'object',
     'properties': {
-      'dep_variable_label': { 'type': 'string' },
-      'indep_variable_label': { 'type': 'string' },
+      'dep_variable_label': {
+        'type': 'string',
+        'minLength': 1
+      },
+      'indep_variable_label': {
+        'type': 'string',
+        'minLength': 1
+      },
       'indep_variable_value': { 'type': 'number' },
     }
   }
@@ -33,9 +39,9 @@ def jsonschema_dataset_id():
       'id_entity': {
         'type': 'integer',
         'minimum': 0,
-        'exclusiveMinimum', true,
+        'exclusiveMinimum', true
       },
-    }
+    },
   }
   return schema
 
@@ -48,8 +54,14 @@ def jsonschema_data_new():
   schema = {
     'type': 'object',
     'properties': {
-      'svm_title': { 'type': 'string' },
-      'svm_session_id' : { 'type': 'string' },
+      'svm_title': {
+        'type': 'string',
+        'minLength': 1
+      },
+      'svm_session_id' : {
+        'type': 'string',
+        'minLength': 1
+      },
       'svm_dataset_type': {
         'type': 'string',
         'enum': ['file_upload', 'xml_url']
