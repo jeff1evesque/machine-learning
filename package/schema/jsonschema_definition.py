@@ -39,7 +39,7 @@ def jsonschema_dataset_id():
       'id_entity': {
         'type': 'integer',
         'minimum': 0,
-        'exclusiveMinimum', true
+        'exclusiveMinimum': true
       },
     },
   }
