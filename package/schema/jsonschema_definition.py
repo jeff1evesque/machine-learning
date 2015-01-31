@@ -21,7 +21,7 @@ def jsonschema_dataset():
         'minLength': 1
       },
       'indep_variable_value': { 'type': 'number' },
-    }
+    },
   }
   return schema
 
@@ -70,7 +70,7 @@ def jsonschema_data_new():
         'type': 'string',
         'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
       },
-    }
+    },
   }
   return schema
 
@@ -124,6 +124,6 @@ def jsonschema_model_use():
         'items': { 'type': 'string' },
         'minItems': 1
       },
-    }
+    },
   }
   return schema
