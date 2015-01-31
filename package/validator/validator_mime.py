@@ -44,6 +44,7 @@ class Validate_Mime:
                 msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
                 msg += '\n       ' + ', '.join(acceptable_type)
                 list_error.append(msg)
+
               # keep non-duplicated file uploads
               else:
                 data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
