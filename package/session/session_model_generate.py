@@ -10,6 +10,8 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
+import sys
+from validator.validator_settings import Validate_Settings
 
 ## Class: Model_Generate
 class Model_Generate:
