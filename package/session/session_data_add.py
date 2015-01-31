@@ -91,8 +91,7 @@ class Data_Add:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
-            for dataset in val['filedata']['file_temp']:
-              self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).csv_to_json())})
+            self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).csv_to_json())})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
@@ -100,11 +99,11 @@ class Data_Add:
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            for dataset in val['filedata']['file_temp']:
-              self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(dataset).xml_to_json())})
+            self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).xml_to_json())})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
+
 
       if ( flag_append == False ): return False
 
