@@ -43,7 +43,10 @@ class Validate_Mime:
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
-            json_keep.append( {'type': mimetype, 'filedata': filedata} )
+            for idx, file in enumerate(filedata['file_temp']):
+              print magic.from_file( file, mime=True )
+              data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
+              json_keep.append( {'type': mimetype, 'filedata': data} )
 
         except:
           msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
