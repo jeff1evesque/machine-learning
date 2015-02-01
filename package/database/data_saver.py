@@ -4,7 +4,7 @@
 import json
 from datetime import datetime
 import MySQLdb as DB
-from database.config import Database
+from database.db_settings import Database
 
 ## Class: Training
 class Training:
