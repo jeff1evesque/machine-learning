@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @config.py
+## @db_settings.py
 #  This file contains various python configuration settings.
 
 ## Database: when instantiating this class, or defining any of the class variables,
