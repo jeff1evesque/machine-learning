@@ -4,7 +4,6 @@
 import json
 from datetime import datetime
 import MySQLdb as DB
-from database.db_settings import Database
 from database.db_query import SQL
 
 ## Class: Training
@@ -29,7 +28,6 @@ class Training:
     self.svm_data     = svm_data
     self.svm_cmd      = cmd
     self.session_type = session_type
-    self.db_settings  = Database()
 
   ## db_save_training: stores an SVM dataset into corresponding 'EAV data model'
   #                    database table.
@@ -51,29 +49,30 @@ class Training:
 
     if self.svm_cmd == 'save_entity':
       sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
-                          id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                          title VARCHAR (50) NOT NULL,
-                          uid_created INT NOT NULL,
-                          datetime_created DATETIME NOT NULL,
-                          uid_modified INT NULL,
-                          datetime_modified DATETIME NULL
-                         );
+                      CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
+                        id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        title VARCHAR (50) NOT NULL,
+                        uid_created INT NOT NULL,
+                        datetime_created DATETIME NOT NULL,
+                        uid_modified INT NULL,
+                        datetime_modified DATETIME NULL
+                      );
                       '''
+      sql.sql_command( sql_statement, 'create')
 
     elif self.svm_cmd == 'save_value':
       sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_dataset_value (
-                          id_attribute INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                          id_entity INT NOT NULL,
-                          dep_variable_label VARCHAR (50) NOT NULL,
-                          indep_variable_label VARCHAR (50) NOT NULL,
-                          indep_variable_value FLOAT NOT NULL,
-                          CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
-                        );
+                      CREATE TABLE IF NOT EXISTS tbl_dataset_value (
+                        id_attribute INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_entity INT NOT NULL,
+                        dep_variable_label VARCHAR (50) NOT NULL,
+                        indep_variable_label VARCHAR (50) NOT NULL,
+                        indep_variable_value FLOAT NOT NULL,
+                        CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
+                      );
                       '''
+      sql.sql_command( sql_statement, 'create')
 
-    sql.sql_command( sql_statement, 'create')
     sql.sql_disconnect()
 
     # insert dataset values
