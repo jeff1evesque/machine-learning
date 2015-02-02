@@ -71,7 +71,7 @@ class Training:
                       );
                       '''
       sql.sql_disconnect()
-      return { 'status': True, 'error', None, 'id': None }
+      return { 'status': True, 'error': None, 'id': None }
 
     # insert dataset values
     sql.sql_connect('db_machine_learning')
