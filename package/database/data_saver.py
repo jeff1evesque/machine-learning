@@ -58,7 +58,6 @@ class Training:
       sql.sql_connect('db_machine_learning')
       sql.sql_command( sql_statement, 'create' )
       sql.sql_disconnect()
-      return { 'status': True, 'error': None, 'id': None }
 
     elif self.svm_cmd == 'save_value':
       sql_statement = '''\
@@ -74,7 +73,6 @@ class Training:
       sql.sql_connect('db_machine_learning')
       sql.sql_command( sql_statement, 'create' )
       sql.sql_disconnect()
-      return { 'status': True, 'error': None, 'id': None }
 
     # insert dataset values
     sql.sql_connect('db_machine_learning')
@@ -83,10 +81,12 @@ class Training:
     if self.svm_cmd == 'save_entity':
       if self.session_type == 'data_append':
         sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
-        response = sql.sql_command( sql_statement, 'update')
+        args = (self.svm_data['uid'], self.svm_data['id_entity'])
+        response = sql.sql_command( sql_statement, 'update', args)
 
       elif self.session_type == 'data_new':
         sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
+        args = (self.svm_data['title'], self.svm_data['uid'])
         response = sql.sql_command( sql_statement, 'insert', args)
 
       sql.sql_disconnect()
