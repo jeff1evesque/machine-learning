@@ -87,7 +87,7 @@ class Training:
 
       elif self.session_type == 'data_new':
         sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
-        response = sql.sql_command( sql_statement, 'insert')
+        response = sql.sql_command( sql_statement, 'insert', args)
 
       sql.sql_disconnect()
       return { 'status': True, 'error': None, 'id': response['id'] }
