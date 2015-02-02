@@ -40,11 +40,10 @@ class Training:
     # create 'db_machine_learning' database if doesn't exist
     sql.sql_connect()
     sql_statement = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
-    sql.sql_command( sql_statement, 'create')
+    sql.sql_command( sql_statement, 'create' )
     sql.sql_disconnect()
 
     # create 'db_machine_learning' database tables if doesn't exist
-    sql.sql_connect('db_machine_learning')
     if self.svm_cmd == 'save_entity':
       sql_statement = '''\
                       CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
@@ -56,6 +55,8 @@ class Training:
                         datetime_modified DATETIME NULL
                       );
                       '''
+      sql.sql_connect()
+      sql.sql_command( sql_statement, 'create' )
       sql.sql_disconnect()
       return { 'status': True, 'error': None, 'id': None }
 
@@ -70,6 +71,8 @@ class Training:
                         CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
                       );
                       '''
+      sql.sql_connect()
+      sql.sql_command( sql_statement, 'create' )
       sql.sql_disconnect()
       return { 'status': True, 'error': None, 'id': None }
 
