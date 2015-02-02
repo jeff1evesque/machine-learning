@@ -10,7 +10,7 @@ class SQL:
 
   ## constructor:
   def __init__(self):
-    self.db_setting = Database()
+    self.db_settings = Database()
 
   ## sql_connect: create connection to MySQL / MariaDB
   def sql_connect(self):
