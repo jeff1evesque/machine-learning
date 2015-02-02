@@ -43,7 +43,7 @@ class Training:
     sql.sql_command( sql_statement, 'create')
     sql.sql_disconnect()
 
-    # create 'db_machine_learning' database tables it doesn't exist
+    # create 'db_machine_learning' database tables if doesn't exist
     sql.sql_connect('db_machine_learning')
     if self.svm_cmd == 'save_entity':
       sql_statement = '''\
