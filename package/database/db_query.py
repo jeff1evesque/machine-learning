@@ -45,3 +45,7 @@ class SQL:
     except DB.error, error:
       self.list_error.append(error)
       return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
+
+  ## return_error: return appended error message(s)
+  def return_error(self):
+    return self.list_error
