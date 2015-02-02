@@ -14,9 +14,12 @@ class SQL:
     self.list_error  = []
 
   ## sql_connect: create connection to MySQL / MariaDB
-  def sql_connect(self):
+  def sql_connect(self, database=None):
     try:
-      self.conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
+      if database == None:
+        self.conn = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
+      else:
+        self.conn = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), database )
       self.cursor = self.conn.cursor()
       return { 'status': True, 'error': None, 'id': None }
     except DB.Error, error:
