@@ -82,9 +82,9 @@ class Training:
         sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
         response = sql.sql_command( sql_statement, 'update')
 
-        elif self.session_type == 'data_new':
-          sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
-          response = sql.sql_command( sql_statement, 'insert')
+      elif self.session_type == 'data_new':
+        sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
+        response = sql.sql_command( sql_statement, 'insert')
 
       sql.sql_disconnect()
       return { 'status': True, 'error': None, 'id': response['id'] }
