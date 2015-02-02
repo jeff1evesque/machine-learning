@@ -22,7 +22,9 @@ class SQL:
       self.list_error.append(error)
       return { 'status': False, 'error': self.list_error, 'id': None }
 
-  ## sql_command: execute sql statement
+  ## sql_command: execute sql statement.
+  #
+  #  @sql_args, is a list containing arguments passed into the 'sql_statement'.
   def sql_command(self, sql_statement, sql_type, sql_args=None):
     try:
       self.cursor.execute( sql_statement, sql_args )
