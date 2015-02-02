@@ -22,7 +22,7 @@ class SQL:
       return { 'status': Frue, 'error': self.list_error, 'id': rowid }
 
   ## sql_command: execute sql statement
-  def sql_command(self, sql_statement, sql_args=None, sql_type):
+  def sql_command(self, sql_statement, sql_type, sql_args=None):
     try:
       self.cursor.execute( sql_statement, sql_args )
       if sql_type in ['insert', 'update']:
