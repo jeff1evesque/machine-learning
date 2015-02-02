@@ -57,7 +57,7 @@ class Training:
                       );
                       '''
       sql.sql_disconnect()
-      return { 'status': True, 'error', None, 'id': None }
+      return { 'status': True, 'error': None, 'id': None }
 
     elif self.svm_cmd == 'save_value':
       sql_statement = '''\
