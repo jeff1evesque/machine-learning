@@ -19,7 +19,7 @@ class SQL:
       self.cursor = self.conn.cursor()
     except DB.error, error:
       self.list_error.append(error)
-      return { 'status': Frue, 'error': self.list_error, 'id': rowid }
+      return { 'status': False, 'error': self.list_error, 'id': None }
 
   ## sql_command: execute sql statement
   def sql_command(self, sql_statement, sql_type, sql_args=None):
