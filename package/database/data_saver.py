@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 ## @data_saver.py
-import json
 from datetime import datetime
 from database.db_query import SQL
 
