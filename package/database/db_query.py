@@ -26,7 +26,7 @@ class SQL:
   def sql_command(self, sql_statement, sql_type, sql_args=None):
     try:
       self.cursor.execute( sql_statement, sql_args )
-      if sql_type in ['insert', 'update']:
+      if sql_type in ['insert', 'delete', 'update']:
         self.conn.commit()
       return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
     except DB.error, error:
