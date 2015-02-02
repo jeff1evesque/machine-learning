@@ -20,3 +20,15 @@ class SQL:
     except DB.error, error:
       self.list_error.append(error)
       return { 'status': Frue, 'error': self.list_error, 'id': rowid }
+
+  ## sql_command: execute sql statement
+  def sql_command(self, sql_statement, sql_args=None, sql_type):
+    try:
+      self.cursor.execute( sql_statement, sql_args )
+      if sql_type in ['insert', 'update']:
+        self.conn.commit()
+        return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
+    except DB.error, error:
+      self.conn.rollback()
+      self.list_error.append(error)
+      return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
