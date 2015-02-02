@@ -28,7 +28,7 @@ class SQL:
       self.cursor.execute( sql_statement, sql_args )
       if sql_type in ['insert', 'update']:
         self.conn.commit()
-        return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
+      return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
     except DB.error, error:
       self.conn.rollback()
       self.list_error.append(error)
