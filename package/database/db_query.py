@@ -11,6 +11,7 @@ class SQL:
   ## constructor:
   def __init__(self):
     self.db_settings = Database()
+    self.list_error  = []
 
   ## sql_connect: create connection to MySQL / MariaDB
   def sql_connect(self):
