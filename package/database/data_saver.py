@@ -74,34 +74,29 @@ class Training:
       return { 'status': True, 'error', None, 'id': None }
 
     # insert dataset values
-    try:
-      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db='db_machine_learning' )
-      cursor = conn.cursor()
+    sql.sql_connect('db_machine_learning')
 
-      # sql format string is not a python string, hence '%s' used for all columns
-      if self.svm_cmd == 'save_entity':
-        if self.session_type == 'data_append':
-          sql  = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
-          cursor.execute( sql, (self.svm_data['uid'], self.svm_data['id_entity']) )
+    # sql format string is not a python string, hence '%s' used for all columns
+    if self.svm_cmd == 'save_entity':
+      if self.session_type == 'data_append':
+        sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
+        response = sql.sql_command( sql_statement, 'update')
 
         elif self.session_type == 'data_new':
-          sql  = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
-          cursor.execute( sql, (self.svm_data['title'], self.svm_data['uid']) )
+          sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
+          response = sql.sql_command( sql_statement, 'insert')
 
-      elif self.svm_cmd == 'save_value':
-        sql = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
-        dataset = self.svm_data['svm_dataset']
-        cursor.execute( sql, (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value']) )
+      sql.sql_disconnect()
+      return { 'status': True, 'error': None, 'id': response['id'] }
 
-      conn.commit()
-    except DB.Error, error:
-      conn.rollback()
-      list_error.append(error)
-    finally:
-      if conn:
-        rowid = cursor.lastrowid
-        conn.close()
-        return { 'status': True, 'error': None, 'id': rowid }
+    elif self.svm_cmd == 'save_value':
+      sql_statement = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
+      dataset = self.svm_data['svm_dataset']
+      args = (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value'])
+      response = sql.sql_command( sql_statement, 'insert', args)
+
+      sql.sql_disconnect()
+      return { 'status': True, 'error': None, 'id': response['id'] }
 
     # return error
     if len(list_error) > 0:
