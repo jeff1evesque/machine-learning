@@ -27,7 +27,6 @@ class Training:
   def __init__(self, svm_data, cmd, session_type):
     # class variables
     self.svm_data     = svm_data
-    print self.svm_data
     self.svm_cmd      = cmd
     self.session_type = session_type
 
