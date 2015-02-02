@@ -55,7 +55,7 @@ class Training:
                         datetime_modified DATETIME NULL
                       );
                       '''
-      sql.sql_connect()
+      sql.sql_connect('db_machine_learning')
       sql.sql_command( sql_statement, 'create' )
       sql.sql_disconnect()
       return { 'status': True, 'error': None, 'id': None }
@@ -71,7 +71,7 @@ class Training:
                         CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
                       );
                       '''
-      sql.sql_connect()
+      sql.sql_connect('db_machine_learning')
       sql.sql_command( sql_statement, 'create' )
       sql.sql_disconnect()
       return { 'status': True, 'error': None, 'id': None }
