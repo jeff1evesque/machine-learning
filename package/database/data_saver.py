@@ -37,19 +37,14 @@ class Training:
   #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
   def db_save_training(self):
     # local variables
+    sql        = SQL()
     list_error = []
 
     # create 'db_machine_learning' database if doesn't exist
-    try:
-      conn   = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
-      cursor = conn.cursor()
-      sql    = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
-      cursor.execute( sql )
-    except DB.Error, error:
-      list_error.append(error)
-    finally:
-      if conn:
-        conn.close()
+    sql.sql_connect()
+    sql_statement = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
+    sql.sql_command( sql_statement, 'create')
+    sql.sql_disconnect()
 
     # create 'type' table if doesn't exist
     try:
