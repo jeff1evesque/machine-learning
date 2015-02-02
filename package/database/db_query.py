@@ -35,3 +35,13 @@ class SQL:
       self.conn.rollback()
       self.list_error.append(error)
       return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
+
+  ## sql_disconnect: close connection to MySQL / MariaDB
+  def sql_disconnect(self):
+    try:
+      if self.conn:
+        self.conn.close()
+        return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
+    except DB.error, error:
+      self.list_error.append(error)
+      return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
