@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 ## @db_query.py
-#  This file contains various generic SQL methods.
+#  This file contains various generic SQL-related methods.
 import MySQLdb as DB
 from database.db_settings import Database
 
