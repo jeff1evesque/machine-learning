@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 ## @data_saver.py
-import json
 from datetime import datetime
 from database.db_query import SQL
 
@@ -11,14 +10,17 @@ class Training:
   ## constructor: stores an SVM dataset (json object), database configurations
   #               into their own corresponding class variable.
   # 
-  #  Note: the SVM dataset, 'self.svm_data' is list of dictionary elements. One
-  #        dictionary element, is represented as follows:
+  #  Note: during the SVM dataset instance, 'self.svm_data' is a list of dictionary
+  #        elements. One dictionary element, is represented as follows:
   #
-  #            { {'uid': xx, 'title': 'yyy'},
-  #              {'svm_dataset': [{'dep_variable_label': 'yyy',
-  #                                'indep_variable_label': 'yyy',
-  #                                'indep_variable_value': zz.zz}]},
-  #              {'id_entity': xx} }
+  #            {'svm_dataset': {'dep_variable_label': 'yyy',
+  #                               'indep_variable_label': 'yyy',
+  #                               'indep_variable_value': zz.zz}},
+  #
+  #  Note: during the SVM entity instance, 'self.svm_data' is a dictionary with the
+  #        following elements:
+  #
+  #            {'uid': xx, 'id_entity': xx, 'title': yyy}
   #
   #        where 'xx' denotes an integer value, 'yyy' a unicode string, and 'zz'
   #        representing a float value.
