@@ -16,3 +16,4 @@ class Session_Base:
   def __init__(self, svm_data):
     self.svm_data       = svm_data
     self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
+    self.response_error = []
