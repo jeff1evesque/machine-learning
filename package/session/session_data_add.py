@@ -22,9 +22,7 @@ class Data_Add(Session_Base):
 
   ## constructor:
   def __init__(self, svm_data):
-    self.svm_data       = svm_data
-    self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
-    self.response_error = []
+    super(Data_Add, self).__init__()
     self.flag_validate_mime  = False
 
   ## validate_mime_type: validate mime type for each dataset.
