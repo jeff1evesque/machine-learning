@@ -15,9 +15,10 @@ from validator.validator_dataset import Validate_Dataset
 from validator.validator_mime import Validate_Mime
 from validator.validator_settings import Validate_Settings
 from converter.converter_json import JSON
+from session.session_base import Session_Base
 
-## Class: Data_Add
-class Data_Add:
+## Class: Data_Add, inherit base methods from superclass 'Session_Base'
+class Data_Add(Session_Base):
 
   ## constructor:
   def __init__(self, svm_data):
@@ -25,20 +26,6 @@ class Data_Add:
     self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
     self.response_error = []
     self.flag_validate_mime  = False
-
-
-  ## validate_arg_none: check if class variable 'svm_data' is defined.
-  def validate_arg_none(self):
-    if self.svm_data == None: return True
-    else: return False
-
-  ## validate_svm_settings: validate svm session settings (not dataset).
-  def validate_svm_settings(self):
-    validator = Validate_Settings( self.svm_data, self.svm_session )
-    validator.data_validation()
-
-    if validator.data_validation()['error'] != None:
-      self.response_error.append( validator.data_validation()['error'] )
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
@@ -120,16 +107,3 @@ class Data_Add:
         # save dataset element, append error(s)
         db_return = db_save.db_save_training()
         if not db_return['status']: self.response_error.append( db_return['error'] )
-
-  ## return_error: return appended error messages.
-  def return_error(self):
-    return self.response_error
-
-  ## check: check if the class instance contains any errors appended to the list
-  #         'self.response_error'. If any error(s) exists, it is printed, and the
-  #         program exits.
-  def check(self):
-    if len(self.response_error) > 0:
-      for error in self.response_error:
-        print error
-      sys.exit()
