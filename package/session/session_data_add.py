@@ -27,20 +27,6 @@ class Data_Add(Session_Base):
     self.response_error = []
     self.flag_validate_mime  = False
 
-
-  ## validate_arg_none: check if class variable 'svm_data' is defined.
-  def validate_arg_none(self):
-    if self.svm_data == None: return True
-    else: return False
-
-  ## validate_svm_settings: validate svm session settings (not dataset).
-  def validate_svm_settings(self):
-    validator = Validate_Settings( self.svm_data, self.svm_session )
-    validator.data_validation()
-
-    if validator.data_validation()['error'] != None:
-      self.response_error.append( validator.data_validation()['error'] )
-
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validate_Mime( self.svm_data, self.svm_session )
@@ -121,16 +107,3 @@ class Data_Add(Session_Base):
         # save dataset element, append error(s)
         db_return = db_save.db_save_training()
         if not db_return['status']: self.response_error.append( db_return['error'] )
-
-  ## return_error: return appended error messages.
-  def return_error(self):
-    return self.response_error
-
-  ## check: check if the class instance contains any errors appended to the list
-  #         'self.response_error'. If any error(s) exists, it is printed, and the
-  #         program exits.
-  def check(self):
-    if len(self.response_error) > 0:
-      for error in self.response_error:
-        print error
-      sys.exit()
