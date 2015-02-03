@@ -4,8 +4,8 @@
 from datetime import datetime
 from database.db_query import SQL
 
-## Class: Training
-class Training:
+## Class: Training, explicitly inherit 'new-style' class
+class Training(object):
 
   ## constructor: stores an SVM dataset (json object), database configurations
   #               into their own corresponding class variable.
