@@ -10,7 +10,7 @@ import sys, json
 from validator.validator_settings import Validate_Settings
 
 ## Class: Session_Base
-class Session_Base:
+class Session_Base(object):
 
   ## constructor:
   def __init__(self, svm_data):
