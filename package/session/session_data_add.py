@@ -18,7 +18,7 @@ from converter.converter_json import JSON
 from session.session_base import Session_Base
 
 ## Class: Data_Add
-class Data_Add:
+class Data_Add(Session_Base):
 
   ## constructor:
   def __init__(self, svm_data):
