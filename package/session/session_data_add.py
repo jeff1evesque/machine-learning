@@ -17,8 +17,8 @@ from validator.validator_settings import Validate_Settings
 from converter.converter_json import JSON
 from session.session_base import Session_Base
 
-## Class: Data_Add, explicitly inherit 'new-style' class, and superclass 'Session_Base'
-class Data_Add(Object, Session_Base):
+## Class: Data_Add, inherit base methods from superclass 'Session_Base'
+class Data_Add(Session_Base):
 
   ## constructor:
   def __init__(self, svm_data):
