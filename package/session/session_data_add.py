@@ -26,7 +26,7 @@ class Data_Add(Session_Base):
   #  @super(), implement 'Session_Base' superclass constructor within this
   #      child class.
   def __init__(self, svm_data):
-    super(Data_Add, self).__init__()
+    super(Data_Add, self).__init__(svm_data)
     self.flag_validate_mime  = False
 
   ## validate_mime_type: validate mime type for each dataset.
