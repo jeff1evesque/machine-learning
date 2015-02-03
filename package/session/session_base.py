@@ -22,3 +22,11 @@ class Session_Base:
   def validate_arg_none(self):
     if self.svm_data == None: return True
     else: return False
+
+  ## validate_svm_settings: validate svm session settings (not dataset).
+  def validate_svm_settings(self):
+    validator = Validate_Settings( self.svm_data, self.svm_session )
+    validator.data_validation()
+
+    if validator.data_validation()['error'] != None:
+      self.response_error.append( validator.data_validation()['error'] )
