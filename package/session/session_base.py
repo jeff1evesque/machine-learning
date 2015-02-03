@@ -34,3 +34,13 @@ class Session_Base:
   ## return_error: return appended error messages.
   def return_error(self):
     return self.response_error
+
+  ## check: check if the class instance contains any errors appended to the list
+  #         'self.response_error'. If any error(s) exists, it is printed, and the
+  #         program exits.
+  def check(self):
+    if len(self.response_error) > 0:
+      for error in self.response_error:
+        print error
+      sys.exit()
+
