@@ -20,7 +20,11 @@ from session.session_base import Session_Base
 ## Class: Data_Add, inherit base methods from superclass 'Session_Base'
 class Data_Add(Session_Base):
 
-  ## constructor:
+  ## constructor: define class properties using the superclass 'Session_Base'
+  #               constructor, along with the constructor in this subclass.
+  #
+  #  @super(), implement 'Session_Base' superclass constructor within this
+  #      child class.
   def __init__(self, svm_data):
     super(Data_Add, self).__init__()
     self.flag_validate_mime  = False
