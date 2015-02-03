@@ -43,4 +43,3 @@ class Session_Base:
       for error in self.response_error:
         print error
       sys.exit()
-
