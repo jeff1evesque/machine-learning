@@ -6,8 +6,8 @@ import json, sys
 from jsonschema import validate
 from schema.jsonschema_definition import jsonschema_data_new, jsonschema_data_append, jsonschema_model_generate, jsonschema_model_use
 
-## Class: Validate_Settings
-class Validate_Settings:
+## Class: Validate_Settings, explicitly inherit 'new-style' class
+class Validate_Settings(object):
 
   ## constructor: saves a subset of the passed-in form data
   def __init__(self, svm_data, svm_session=None):
