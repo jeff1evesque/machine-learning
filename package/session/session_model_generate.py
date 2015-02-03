@@ -13,8 +13,8 @@
 import sys, json
 from validator.validator_settings import Validate_Settings
 
-## Class: Model_Generate
-class Model_Generate:
+## Class: Model_Generate, explicitly inherit 'new-style' class
+class Model_Generate(object):
 
   ## constructor:
   def __init__(self, svm_data):
