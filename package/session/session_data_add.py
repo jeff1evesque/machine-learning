@@ -24,7 +24,7 @@ class Data_Add(Session_Base):
   #               constructor, along with the constructor in this subclass.
   #
   #  @super(), implement 'Session_Base' superclass constructor within this
-  #      child class.
+  #      child class constructor.
   #
   #  Note: the superclass constructor expects the same 'svm_data' argument.
   def __init__(self, svm_data):
