@@ -5,8 +5,8 @@
 import MySQLdb as DB
 from database.db_settings import Database
 
-## Class: SQL
-class SQL:
+## Class: SQL, explicitly inherit 'new-style' class
+class SQL(object):
 
   ## constructor:
   def __init__(self):
