@@ -20,11 +20,13 @@ from session.session_base import Session_Base
 ## Class: Data_Add, inherit base methods from superclass 'Session_Base'
 class Data_Add(Session_Base):
 
-  ## constructor:
+  ## constructor: define class properties using the superclass 'Session_Base'
+  #               constructor, along with the constructor in this subclass.
+  #
+  #  @super(), implement 'Session_Base' superclass constructor within this
+  #      child class.
   def __init__(self, svm_data):
-    self.svm_data       = svm_data
-    self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
-    self.response_error = []
+    super(Data_Add, self).__init__()
     self.flag_validate_mime  = False
 
   ## validate_mime_type: validate mime type for each dataset.
