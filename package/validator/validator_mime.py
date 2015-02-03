@@ -7,8 +7,8 @@
 import json, sys, magic
 from converter.converter_md5 import md5_for_file
 
-## Class: Validate_Mime
-class Validate_Mime:
+## Class: Validate_Mime, explicitly inherit 'new-style' class
+class Validate_Mime(object):
 
   ## constructor: saves a subset of the passed-in form data
   def __init__(self, svm_data, svm_session=None):
