@@ -8,3 +8,11 @@
 #        references.
 import sys, json
 from validator.validator_settings import Validate_Settings
+
+## Class: Session_Base
+class Session_Base:
+
+  ## constructor:
+  def __init__(self, svm_data):
+    self.svm_data       = svm_data
+    self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
