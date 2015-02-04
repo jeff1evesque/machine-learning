@@ -48,6 +48,11 @@ class Validate_Settings(object):
           print xmldata
 
     # validation on 'data_append' session
+    if self.svm_session == 'data_append' and flag_json:
+      try:
+        validate(json.loads(self.svm_data)['data']['settings'], jsonschema_data_append())
+      except Exception, error:
+        list_error.append(str(error))
 
     # validation on 'model_generate' session
 
