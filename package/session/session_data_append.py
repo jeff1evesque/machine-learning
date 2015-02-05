@@ -42,7 +42,7 @@ class Data_Add(Session_Base):
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
-  def dataset_to_json(self):
+  def dataset_to_json(self, id_entity):
     flag_convert = False
     flag_append  = True
 
@@ -61,7 +61,7 @@ class Data_Add(Session_Base):
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
-            self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).csv_to_json())})
+            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).csv_to_json())})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
@@ -69,7 +69,7 @@ class Data_Add(Session_Base):
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).xml_to_json())})
+            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).xml_to_json())})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
