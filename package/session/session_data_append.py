@@ -26,8 +26,9 @@ class Data_Append(Data_New):
   def __init__(self, svm_data):
     super(Data_New, self).__init__(svm_data)
 
-  ## save_svm_entity: update existing entity within corresponding database
-  #                   table, 'tbl_dataset_entity'.
+  ## save_svm_entity: override an identical method from inheritted superclass,
+  #                   'Data_New'. This method, updates an existing entity within
+  #                   the corresponding database table, 'tbl_dataset_entity'.
   #
   #  @session_id, is synonymous to 'entity_id', and provides context to update
   #      'modified_xx' columns within the 'tbl_dataset_entity' database table.
