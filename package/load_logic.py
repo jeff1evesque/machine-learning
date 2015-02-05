@@ -83,7 +83,8 @@ if len(sys.argv) > 1:
       session.validate_mime_type()
       session.check()
 
-      if session.save_svm_entity(session_type)['status']:
+      session_entity = session.save_svm_entity(session_type)
+      if session_entity['status']:
         session.set_entity_id(session_id)
         session.save_svm_entity(session_type, session_id)
         session.check()
