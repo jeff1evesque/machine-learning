@@ -10,6 +10,7 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 from session.session_data_new import Data_New
+import json
 
 ## Class: Data_Append, inherit base methods from superclass 'Data_New'
 class Data_Append(Data_New):
