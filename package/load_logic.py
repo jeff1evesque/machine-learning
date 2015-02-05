@@ -82,15 +82,17 @@ if len(sys.argv) > 1:
       session.validate_mime_type()
       session.check()
 
-      session.set_entity_id(session_id)
-      session.save_svm_entity(session_type, session_id)
+      if session.save_svm_entity(session_type)['status']:
+        session.set_entity_id(session_id)
+        session.save_svm_entity(session_type, session_id)
+        session.check()
 
-      session.dataset_to_json(session_id)
-      session.validate_dataset_json()
-      session.check()
+        session.dataset_to_json(session_id)
+        session.validate_dataset_json()
+        session.check()
 
-      session.save_svm_dataset(session_type)
-      session.check()
+        session.save_svm_dataset(session_type)
+        session.check()
 
   elif session_type == 'model_generate':
 
