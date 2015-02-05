@@ -9,8 +9,9 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-from session.session_data_new import Data_New
 import json
+from session.session_data_new import Data_New
+from database.data_saver import Training
 
 ## Class: Data_Append, inherit base methods from superclass 'Data_New'
 class Data_Append(Data_New):
