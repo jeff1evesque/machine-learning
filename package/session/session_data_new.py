@@ -16,7 +16,7 @@ class Data_New(Data_Append):
 
   ## constructor: instantiate superclass constructor from 'Data_Append'
   #
-  #  @super(), implement 'Session_Base' superclass constructor within this
+  #  @super(), implement 'Data_Append' superclass constructor within this
   #      child class constructor.
   #
   #  Note: the superclass constructor expects the same 'svm_data' argument.
