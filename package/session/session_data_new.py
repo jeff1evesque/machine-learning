@@ -37,8 +37,8 @@ class Data_New(Data_Append):
     # return error(s)
     if not db_return['status']:
       self.response_error.append( db_return['error'] )
-      return { 'id': None, 'error': self.response_error }
+      return { 'status' False, 'id': None, 'error': self.response_error }
 
     # return session id
     elif db_return['status'] and session_type == 'data_new':
-      return { 'id': db_return['id'], 'error': None }
+      return { 'status' True, 'id': db_return['id'], 'error': None }
