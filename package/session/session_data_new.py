@@ -30,7 +30,11 @@ class Data_New(Data_Append):
 
     # save dataset element, append error(s)
     db_return = db_save.db_save_training()
-    if not db_return['status']: self.response_error.append( db_return['error'] )
+    if not db_return['status']:
+      response = { 'id': None, 'error': self.response_error.append(db_return['error']) }
+      return response
 
     # define for 'save_svm_dataset' invocation within 'data_new' session
-    elif db_return['status'] and session_type == 'data_new': self.id_entity = db_return['id']
+    elif db_return['status'] and session_type == 'data_new':
+      response = { 'id': db_return['id'], 'error': None }
+      return response
