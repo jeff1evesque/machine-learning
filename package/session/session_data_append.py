@@ -40,22 +40,6 @@ class Data_Add(Session_Base):
       self.response_error.append( self.response_mime_validation['error'] )
       self.flag_validate_mime = True
 
-  ## save_svm_entity: save entity information pertaining to new session.
-  def save_svm_entity(self, session_type, session_id=None):
-    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
-    db_save    = Training( svm_entity, 'save_entity', session_type )
-
-    # save dataset element, append error(s)
-    db_return = db_save.db_save_training()
-    if not db_return['status']: self.response_error.append( db_return['error'] )
-
-    # define for 'save_svm_dataset' invocation within 'data_new' session
-    elif db_return['status'] and session_type == 'data_new': self.id_entity = db_return['id']
-
-  ## set_entity_id: defines the class variable for session id.
-  def set_entity_id(self, session_id):
-    self.id_entity = session_id
-
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
   def dataset_to_json(self):
@@ -89,7 +73,6 @@ class Data_Add(Session_Base):
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
-
 
       if ( flag_append == False ): return False
 
