@@ -25,8 +25,8 @@ class Data_New(Data_Append):
     super(Data_New, self).__init__(svm_data)
 
   ## save_svm_entity: save entity information pertaining to new session.
-  def save_svm_entity(self, session_type):
-    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1}
+  def save_svm_entity(self, session_type, session_id=None):
+    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
     db_save    = Training( svm_entity, 'save_entity', session_type )
 
     # save dataset element
