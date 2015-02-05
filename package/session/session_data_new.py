@@ -14,7 +14,8 @@ from session.session_data_append import Data_Append
 ## Class: Data_New, inherit base methods from superclass 'Data_Append'
 class Data_New(Data_Append):
 
-  ## constructor: instantiate superclass constructor from 'Data_Append'
+  ## constructor: define class properties using the superclass 'Data_Append'
+  #               constructor, along with the constructor in this subclass.
   #
   #  @super(), implement 'Data_Append' superclass constructor within this
   #      child class constructor.
