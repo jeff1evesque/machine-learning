@@ -27,7 +27,7 @@ class Data_Append(Session_Base):
   ## save_svm_entity: update existing entity within corresponding database
   #                   table, 'tbl_dataset_entity'.
   #
-  #  @session_id, synonymous to 'entity_id', and provides context to update
+  #  @session_id, is synonymous to 'entity_id', and provides context to update
   #      'modified_xx' columns within the 'tbl_dataset_entity' database table.
   def save_svm_entity(self, session_type, session_id):
     svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
