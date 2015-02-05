@@ -57,15 +57,16 @@ if len(sys.argv) > 1:
       session.validate_mime_type()
       session.check()
 
-      session.save_svm_entity(session_type)
-      session.check()
+      if session.save_svm_entity(session_type)['status']:
+        session_id = session.save_svm_entity(session_type)['id']
+        session.check()
 
-      session.dataset_to_json()
-      session.validate_dataset_json()
-      session.check()
+        session.dataset_to_json(session_id)
+        session.validate_dataset_json()
+        session.check()
 
-      session.save_svm_dataset(session_type)
-      session.check()
+        session.save_svm_dataset(session_type)
+        session.check()
 
   elif session_type == 'data_append':
 
