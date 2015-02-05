@@ -22,7 +22,7 @@ class Data_New(Data_Append):
   #
   #  Note: the superclass constructor expects the same 'svm_data' argument.
   def __init__(self, svm_data):
-    super(Data_Add, self).__init__(svm_data)
+    super(Data_New, self).__init__(svm_data)
 
   ## save_svm_entity: save entity information pertaining to new session.
   def save_svm_entity(self, session_type, session_id=None):
