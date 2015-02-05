@@ -85,7 +85,6 @@ if len(sys.argv) > 1:
 
       session_entity = session.save_svm_entity(session_type, session_id)
       if session_entity['status']:
-        session.set_entity_id(session_id)
         session.check()
 
         session.dataset_to_json(session_id)
