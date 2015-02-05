@@ -22,3 +22,15 @@ class Data_New(Data_Append):
   #  Note: the superclass constructor expects the same 'svm_data' argument.
   def __init__(self, svm_data):
     super(Data_Add, self).__init__(svm_data)
+
+  ## save_svm_entity: save entity information pertaining to new session.
+  def save_svm_entity(self, session_type, session_id=None):
+    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
+    db_save    = Training( svm_entity, 'save_entity', session_type )
+
+    # save dataset element, append error(s)
+    db_return = db_save.db_save_training()
+    if not db_return['status']: self.response_error.append( db_return['error'] )
+
+    # define for 'save_svm_dataset' invocation within 'data_new' session
+    elif db_return['status'] and session_type == 'data_new': self.id_entity = db_return['id']
