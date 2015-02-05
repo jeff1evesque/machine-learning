@@ -28,13 +28,15 @@ class Data_New(Data_Append):
     svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
     db_save    = Training( svm_entity, 'save_entity', session_type )
 
-    # save dataset element, append error(s)
+    # save dataset element
     db_return = db_save.db_save_training()
+
+    # return error(s)
     if not db_return['status']:
       response = { 'id': None, 'error': self.response_error.append(db_return['error']) }
       return response
 
-    # define for 'save_svm_dataset' invocation within 'data_new' session
+    # return session id
     elif db_return['status'] and session_type == 'data_new':
       response = { 'id': db_return['id'], 'error': None }
       return response
