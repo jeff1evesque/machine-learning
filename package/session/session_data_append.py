@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @session_data_add.py
+## @session_data_append.py
 #  This file receives data (i.e. settings), including one or more dataset(s)
 #      provided during the current session, and stores them into corresponding
 #      database tables. The stored dataset(s) can later be retrieved from
