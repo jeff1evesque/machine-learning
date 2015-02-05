@@ -52,11 +52,11 @@ class Data_New(Session_Base):
     # return error(s)
     if not db_return['status']:
       self.response_error.append( db_return['error'] )
-      return { 'status' False, 'id': None, 'error': self.response_error }
+      return { 'status': False, 'id': None, 'error': self.response_error }
 
     # return session id
     elif db_return['status'] and session_type == 'data_new':
-      return { 'status' True, 'id': db_return['id'], 'error': None }
+      return { 'status': True, 'id': db_return['id'], 'error': None }
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
