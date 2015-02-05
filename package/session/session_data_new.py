@@ -10,3 +10,15 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 from session.session_data_append import Data_Append
+
+## Class: Data_New, inherit base methods from superclass 'Data_Append'
+class Data_New(Data_Append):
+
+  ## constructor: instantiate superclass constructor from 'Data_Append'
+  #
+  #  @super(), implement 'Session_Base' superclass constructor within this
+  #      child class constructor.
+  #
+  #  Note: the superclass constructor expects the same 'svm_data' argument.
+  def __init__(self, svm_data):
+    super(Data_Add, self).__init__(svm_data)
