@@ -30,7 +30,6 @@ class Data_Append(Session_Base):
   def __init__(self, svm_data):
     super(Data_Add, self).__init__(svm_data)
     self.flag_validate_mime  = False
-    self.svm_data = svm_data
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
