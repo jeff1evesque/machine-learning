@@ -29,7 +29,8 @@
 #
 #      console.log( data.result );
 import sys, json
-from session.session_data_add import Data_Add
+from session.session_data_append import Data_Append
+from session.session_data_new import Data_New
 from session.session_model_generate import Model_Generate
 from session.session_model_use import Model_Use
 
