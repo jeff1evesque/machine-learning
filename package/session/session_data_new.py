@@ -24,9 +24,11 @@ class Data_New(Data_Append):
   def __init__(self, svm_data):
     super(Data_New, self).__init__(svm_data)
 
-  ## save_svm_entity: save entity information pertaining to new session.
+  ## save_svm_entity: override the identical superclass method, save the
+  #                   current entity into the database, then return the
+  #                   corresponding entity id.
   def save_svm_entity(self, session_type):
-    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1}
+    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': None}
     db_save    = Training( svm_entity, 'save_entity', session_type )
 
     # save dataset element
@@ -35,8 +37,8 @@ class Data_New(Data_Append):
     # return error(s)
     if not db_return['status']:
       self.response_error.append( db_return['error'] )
-      return { 'id': None, 'error': self.response_error }
+      return { 'status' False, 'id': None, 'error': self.response_error }
 
     # return session id
     elif db_return['status'] and session_type == 'data_new':
-      return { 'id': db_return['id'], 'error': None }
+      return { 'status' True, 'id': db_return['id'], 'error': None }
