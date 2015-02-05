@@ -18,7 +18,7 @@ from converter.converter_json import JSON
 from session.session_base import Session_Base
 
 ## Class: Data_Add, inherit base methods from superclass 'Session_Base'
-class Data_Add(Session_Base):
+class Data_Append(Session_Base):
 
   ## constructor: define class properties using the superclass 'Session_Base'
   #               constructor, along with the constructor in this subclass.
