@@ -40,6 +40,27 @@ class Data_Append(Session_Base):
       self.response_error.append( self.response_mime_validation['error'] )
       self.flag_validate_mime = True
 
+  ## save_svm_entity: update existing entity within corresponding database
+  #                   table, 'tbl_dataset_entity'.
+  #
+  #  @session_id, synonymous to 'entity_id', and provides context to update
+  #      'modified_xx' columns within the 'tbl_dataset_entity' database table.
+  def save_svm_entity(self, session_type, session_id):
+    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
+    db_save    = Training( svm_entity, 'save_entity', session_type )
+
+    # save dataset element
+    db_return = db_save.db_save_training()
+
+    # return error(s)
+    if not db_return['status']:
+      self.response_error.append( db_return['error'] )
+      return { 'id': None, 'error': self.response_error }
+
+    # return session id
+    elif db_return['status'] and session_type == 'data_new':
+      return { 'id': db_return['id'], 'error': None }
+
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
   def dataset_to_json(self, id_entity):
