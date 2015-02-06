@@ -10,7 +10,6 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys, json
-from database.data_saver import Analysis
 from validator.validator_settings import Validate_Settings
 
 ## Class: Model_Use, explicitly inherit 'new-style' class
