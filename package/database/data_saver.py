@@ -30,8 +30,8 @@ class Data_Save(object):
     self.svm_cmd      = cmd
     self.session_type = session_type
 
-  ## db_data_save: stores an SVM dataset into corresponding 'EAV data model'
-  #                database table.
+  ## db_data_save: store, or update SVM dataset(s) into corresponding 'EAV data
+  #                model' database table(s).
   #
   #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
   def db_data_save(self):
