@@ -12,7 +12,10 @@ class Data_Retrieve(object):
     self.svm_data     = svm_data
     self.svm_cmd      = cmd
     self.session_type = session_type
+    self.list_error   = []
 
   ## db_data_retrieve: retrieve an SVM dataset from corresponding 'EAV data model'
   #                    database table(s).
   def db_data_retrieve(self):
+    # local variables
+    sql = SQL()
