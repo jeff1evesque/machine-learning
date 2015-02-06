@@ -3,8 +3,8 @@
 ## @data_retriever.py
 from database.db_query import SQL
 
-## Class: Retriever, explicitly inherit 'new-style' class
-class Retriever(object):
+## Class: Data_Retrieve, explicitly inherit 'new-style' class
+class Data_Retrieve(object):
 
   ## constructor:
   def __init__(self, svm_data, cmd, session_type):
