@@ -37,7 +37,7 @@ class Data_Append(Data_New):
     db_save    = Data_Save( svm_entity, 'save_entity', session_type )
 
     # save dataset element
-    db_return = db_save.db_save_data()
+    db_return = db_save.db_data_save()
 
     # return error(s)
     if not db_return['status']:
