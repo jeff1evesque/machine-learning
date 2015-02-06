@@ -108,10 +108,3 @@ class Training(object):
       return { 'status': False, 'error': list_error }
     else:
       return { 'status': True, 'error': None }
-
-## Class: Analysis
-class Analysis:
-
-  ## constructor:
-  def __init__(self, svm_data):
-    self.svm_data = svm_data
