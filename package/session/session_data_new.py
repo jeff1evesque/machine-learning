@@ -47,7 +47,7 @@ class Data_New(Session_Base):
     db_save    = Data_Save( svm_entity, 'save_entity', session_type )
 
     # save dataset element
-    db_return  = db_save.db_save_data()
+    db_return  = db_save.db_data_save()
 
     # return error(s)
     if not db_return['status']:
@@ -110,5 +110,5 @@ class Data_New(Session_Base):
         db_save = Data_Save( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value', session_type )
 
         # save dataset element, append error(s)
-        db_return = db_save.db_save_data()
+        db_return = db_save.db_data_save()
         if not db_return['status']: self.response_error.append( db_return['error'] )
