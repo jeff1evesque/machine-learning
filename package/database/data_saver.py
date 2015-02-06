@@ -102,7 +102,7 @@ class Data_Save(object):
       elif self.session_type == 'data_new':
         sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
         args          = (self.svm_data['title'], self.svm_data['uid'])
-        response      =     sql.sql_command( sql_statement, 'insert', args)
+        response      = sql.sql_command( sql_statement, 'insert', args)
 
       # retrieve any error(s), disconnect from database
       response_error = sql.return_error()
