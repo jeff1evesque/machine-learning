@@ -39,7 +39,7 @@ class SQL(object):
         return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
       # fetch all the rows, return as list of lists.
       elif sql_type == 'select':
-        result = cursor.fetchall()
+        result = self.cursor.fetchall()
         return { 'status': True, 'error': None, 'result': result }
     except DB.Error, error:
       self.conn.rollback()
