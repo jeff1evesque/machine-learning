@@ -83,7 +83,19 @@ def jsonschema_data_append():
   schema = {
     'type': 'object',
     'properties': {
-    }
+      'svm_session_id': {
+        'type': 'string',
+        'minLength': 1
+      },
+      'svm_dataset_type': {
+        'type': 'string',
+        'enum': ['file_upload', 'xml_url']
+      },
+      'svm_session': {
+        'type': 'string',
+        'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
+      },
+    },
   }
   return schema
 

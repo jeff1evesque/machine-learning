@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @session_data_add.py
+## @session_data_new.py
 #  This file receives data (i.e. settings), including one or more dataset(s)
 #      provided during the current session, and stores them into corresponding
 #      database tables. The stored dataset(s) can later be retrieved from
@@ -10,21 +10,25 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys, json
-from database.data_saver import Training
+from database.data_saver import Data_Save
 from validator.validator_dataset import Validate_Dataset
 from validator.validator_mime import Validate_Mime
 from validator.validator_settings import Validate_Settings
 from converter.converter_json import JSON
 from session.session_base import Session_Base
 
-## Class: Data_Add, inherit base methods from superclass 'Session_Base'
-class Data_Add(Session_Base):
+## Class: Data_New, inherit base methods from superclass 'Data_Append'
+class Data_New(Session_Base):
 
-  ## constructor:
+  ## constructor: define class properties using the superclass 'Session_Base'
+  #               constructor, along with the constructor in this subclass.
+  #
+  #  @super(), implement 'Session_Base' superclass constructor within this
+  #      child class constructor.
+  #
+  #  Note: the superclass constructor expects the same 'svm_data' argument.
   def __init__(self, svm_data):
-    self.svm_data       = svm_data
-    self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
-    self.response_error = []
+    super(Data_New, self).__init__(svm_data)
     self.flag_validate_mime  = False
 
   ## validate_mime_type: validate mime type for each dataset.
@@ -36,25 +40,27 @@ class Data_Add(Session_Base):
       self.response_error.append( self.response_mime_validation['error'] )
       self.flag_validate_mime = True
 
-  ## save_svm_entity: save entity information pertaining to new session.
-  def save_svm_entity(self, session_type, session_id=None):
-    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
-    db_save    = Training( svm_entity, 'save_entity', session_type )
+  ## save_svm_entity: save the current entity into the database, then return
+  #                   the corresponding entity id.
+  def save_svm_entity(self, session_type):
+    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': None}
+    db_save    = Data_Save( svm_entity, 'save_entity', session_type )
 
-    # save dataset element, append error(s)
-    db_return = db_save.db_save_training()
-    if not db_return['status']: self.response_error.append( db_return['error'] )
+    # save dataset element
+    db_return  = db_save.db_data_save()
 
-    # define for 'save_svm_dataset' invocation within 'data_new' session
-    elif db_return['status'] and session_type == 'data_new': self.id_entity = db_return['id']
+    # return error(s)
+    if not db_return['status']:
+      self.response_error.append( db_return['error'] )
+      return { 'status': False, 'id': None, 'error': self.response_error }
 
-  ## set_entity_id: defines the class variable for session id.
-  def set_entity_id(self, session_id):
-    self.id_entity = session_id
+    # return session id
+    elif db_return['status'] and session_type == 'data_new':
+      return { 'status': True, 'id': db_return['id'], 'error': None }
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
-  def dataset_to_json(self):
+  def dataset_to_json(self, id_entity):
     flag_convert = False
     flag_append  = True
 
@@ -73,7 +79,7 @@ class Data_Add(Session_Base):
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
-            self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).csv_to_json())})
+            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).csv_to_json())})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
@@ -81,11 +87,10 @@ class Data_Add(Session_Base):
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            self.json_dataset.append({'id_entity': self.id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).xml_to_json())})
+            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).xml_to_json())})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
-
 
       if ( flag_append == False ): return False
 
@@ -102,8 +107,8 @@ class Data_Add(Session_Base):
   def save_svm_dataset(self, session_type):
     for data in self.json_dataset:
       for dataset in data['svm_dataset']:
-        db_save = Training( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value', session_type )
+        db_save = Data_Save( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value', session_type )
 
         # save dataset element, append error(s)
-        db_return = db_save.db_save_training()
+        db_return = db_save.db_data_save()
         if not db_return['status']: self.response_error.append( db_return['error'] )

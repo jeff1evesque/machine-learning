@@ -3,17 +3,20 @@
 ## @db_settings.py
 #  This file contains various python configuration settings.
 
-## Database: when instantiating this class, or defining any of the class variables,
-#            make sure they are defined within the DBMS. This can be achieved via
-#            the terminal console (or phpMyAdmin):
+## Class: Database, explicitly inherit the 'new-style' class.
 #
-#                $ mysql -u root -p
-#                MariaDB> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY
-#                    ->'password';
-#                MariaDB> GRANT, CREATE, DELETE, DROP, EXECUTE, SELECT, SHOW
-#                    -> DATABASES ON *.* TO 'authenticated'@'localhost';
-#                MariaDB> FLUSH PRIVILEGES;
-class Database:
+#         When instantiating this class, or defining any of the class variables,
+#         make sure the respective sql user is defined within the DBMS, and has
+#         adequate permissions. This can be done via the terminal console (or
+#         phpMyAdmin):
+#
+#             $ mysql -u root -p
+#             MariaDB> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY
+#                 ->'password';
+#             MariaDB> GRANT, CREATE, DELETE, DROP, EXECUTE, SELECT, SHOW
+#                 -> DATABASES ON *.* TO 'authenticated'@'localhost';
+#             MariaDB> FLUSH PRIVILEGES;
+class Database(object):
 
   ## constructor:
   def __init__(self):

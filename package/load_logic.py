@@ -29,7 +29,8 @@
 #
 #      console.log( data.result );
 import sys, json
-from session.session_data_add import Data_Add
+from session.session_data_append import Data_Append
+from session.session_data_new import Data_New
 from session.session_model_generate import Model_Generate
 from session.session_model_use import Model_Use
 
@@ -48,7 +49,7 @@ if len(sys.argv) > 1:
   if session_type == 'data_new':
 
     # instantiate class
-    session = Data_Add( sys.argv[1] )
+    session = Data_New( sys.argv[1] )
 
     # implement class methods
     if not session.validate_arg_none():
@@ -56,20 +57,22 @@ if len(sys.argv) > 1:
       session.validate_mime_type()
       session.check()
 
-      session.save_svm_entity(session_type)
-      session.check()
+      session_entity = session.save_svm_entity(session_type)
+      if session_entity['status']:
+        session_id = session_entity['id']
+        session.check()
 
-      session.dataset_to_json()
-      session.validate_dataset_json()
-      session.check()
+        session.dataset_to_json(session_id)
+        session.validate_dataset_json()
+        session.check()
 
-      session.save_svm_dataset(session_type)
-      session.check()
+        session.save_svm_dataset(session_type)
+        session.check()
 
   elif session_type == 'data_append':
 
     # instantiate class
-    session = Data_Add( sys.argv[1] )
+    session = Data_Append( sys.argv[1] )
 
     # define current session id
     session_id = json.loads(sys.argv[1])['data']['settings']['svm_session_id']
@@ -80,15 +83,16 @@ if len(sys.argv) > 1:
       session.validate_mime_type()
       session.check()
 
-      session.set_entity_id(session_id)
-      session.save_svm_entity(session_type, session_id)
+      session_entity = session.save_svm_entity(session_type, session_id)
+      if session_entity['status']:
+        session.check()
 
-      session.dataset_to_json()
-      session.validate_dataset_json()
-      session.check()
+        session.dataset_to_json(session_id)
+        session.validate_dataset_json()
+        session.check()
 
-      session.save_svm_dataset(session_type)
-      session.check()
+        session.save_svm_dataset(session_type)
+        session.check()
 
   elif session_type == 'model_generate':
 
