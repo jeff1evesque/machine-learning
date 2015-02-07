@@ -22,6 +22,11 @@ from collections import defaultdict
 #      checksum update operation. Therefore, it is best practice to break the
 #      operation into smaller chunks.
 #
+#  @block_size, the block size to break the supplied file (from given path).
+#
+#  @hr, determines whether to use the default 'digest' method, or to use the
+#      'hexdigest' algorithm.
+#
 #  Note: block size directly depends on the block size of the filesystem.
 def md5_for_file(path, block_size=256*128, hr=False):
   md5 = hashlib.md5()
