@@ -28,7 +28,8 @@ class SQL(object):
 
   ## sql_command: execute sql statement.
   #
-  #  @sql_args, is a list containing arguments passed into the 'sql_statement'.
+  #  @sql_args, is a tuple used for argument substitution with the supplied
+  #      'sql_statement'.
   def sql_command(self, sql_statement, sql_type, sql_args=None):
     try:
       self.cursor.execute( sql_statement, sql_args )
