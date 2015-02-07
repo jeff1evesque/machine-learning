@@ -34,6 +34,9 @@ class Data_Save(object):
   ## db_data_save: store, or update SVM dataset(s) into corresponding 'EAV data
   #                model' database table(s).
   #
+  #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
+  #      is used for argument substitution.
+  #
   #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
   def db_data_save(self):
     # local variables
@@ -89,11 +92,9 @@ class Data_Save(object):
       if len( self.list_error ) > 0:
         return { 'status': False, 'error': self.list_error, 'id': None }
 
-    # insert dataset values
-    sql.sql_connect('db_machine_learning')
-
-    # sql format string is not a python string, hence '%s' used for all columns
+    # insert / update dataset entity value
     if self.svm_cmd == 'save_entity':
+      sql.sql_connect('db_machine_learning')
       if self.session_type == 'data_append':
         sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
         args          = (self.svm_data['uid'], self.svm_data['id_entity'])
@@ -112,7 +113,9 @@ class Data_Save(object):
       if response_error: return { 'status': False, 'error': response_error, 'id': response['id'] }
       else: return { 'status': True, 'error': None, 'id': response['id'] }
 
+    # insert / update dataset value(s)
     elif self.svm_cmd == 'save_value':
+      sql.sql_connect('db_machine_learning')
       sql_statement = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
       dataset       = self.svm_data['svm_dataset']
       args          = (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value'])
