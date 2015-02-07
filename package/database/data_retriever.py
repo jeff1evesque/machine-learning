@@ -16,6 +16,9 @@ class Data_Retrieve(object):
 
   ## db_data_retrieve: retrieve an SVM dataset from corresponding 'EAV data model'
   #                    database table(s).
+  #
+  #  @id_entity, this supplied argument corresponds to the 'id_entity' column from the
+  #      'tbl_dataset_value' database table.
   def db_data_retrieve(self, id_entity):
     # local variables
     sql = SQL()
