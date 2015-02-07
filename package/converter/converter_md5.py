@@ -30,10 +30,11 @@ from collections import defaultdict
 #  Note: block size directly depends on the block size of the filesystem.
 def md5_for_file(path, block_size=256*128, hr=False):
   md5 = hashlib.md5()
-  with open(path,'rb') as f: 
-    # generate md5 checksum fingerprint
+  with open(path,'rb') as f:
+    # use lambda anonymous function to iterate given file
     for chunk in iter(lambda: f.read(block_size), b''): 
       md5.update(chunk)
+  # return the digest of strings passed into 'update'
   if hr:
     return md5.hexdigest()
   return md5.digest()
