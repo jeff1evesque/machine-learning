@@ -26,5 +26,5 @@ class Model_Generate(Session_Base):
 
   ## get_dataset:
   def get_dataset(self, session_id):
-    dataset           = Data_Retrieve( self.svm_data, 'select', self.svm_session )
-    dataset_retrieved = database.db_data_retrieve(session_id)
+    db_select = Data_Retrieve( self.svm_data, 'select', self.svm_session )
+    db_return = db_select.db_data_retrieve(session_id)
