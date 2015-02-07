@@ -44,7 +44,9 @@ class SQL(object):
     except DB.Error, error:
       self.conn.rollback()
       self.list_error.append(error)
-      return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
+
+      if sql_type in ['insert', 'delete', 'update']: return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
+      elif sql_type == 'select': return { 'status': False, 'error': self.list_error }
 
   ## sql_disconnect: close connection to MySQL / MariaDB
   def sql_disconnect(self):
