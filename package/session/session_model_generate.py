@@ -22,3 +22,8 @@ class Model_Generate(Session_Base):
     self.svm_data       = svm_data
     self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
     self.response_error = []
+
+  ## get_dataset:
+  def get_dataset(self):
+    dataset           = Data_Retrieve( self.svm_data, 'select', self.svm_session )
+    dataset_retrieved = database.db_data_retrieve()
