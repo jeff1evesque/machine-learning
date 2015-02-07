@@ -92,7 +92,7 @@ class Data_Save(object):
       if len( self.list_error ) > 0:
         return { 'status': False, 'error': self.list_error, 'id': None }
 
-    # insert / update dataset-entity value
+    # insert / update dataset entity value
     if self.svm_cmd == 'save_entity':
       sql.sql_connect('db_machine_learning')
       if self.session_type == 'data_append':
