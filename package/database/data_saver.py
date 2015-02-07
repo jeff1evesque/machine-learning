@@ -34,6 +34,9 @@ class Data_Save(object):
   ## db_data_save: store, or update SVM dataset(s) into corresponding 'EAV data
   #                model' database table(s).
   #
+  #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
+  #      is used for argument substitution.
+  #
   #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
   def db_data_save(self):
     # local variables
@@ -92,7 +95,6 @@ class Data_Save(object):
     # insert dataset values
     sql.sql_connect('db_machine_learning')
 
-    # sql format string is not a python string, hence '%s' used for all columns
     if self.svm_cmd == 'save_entity':
       if self.session_type == 'data_append':
         sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
