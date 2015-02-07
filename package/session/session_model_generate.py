@@ -12,9 +12,10 @@
 #        references.
 import sys, json
 from validator.validator_settings import Validate_Settings
+from session.session_base import Session_Base
 
-## Class: Model_Generate, explicitly inherit 'new-style' class
-class Model_Generate(object):
+## Class: Model_Generate, inherit base methods from superclass 'Session_Base'
+class Model_Generate(Session_Base):
 
   ## constructor:
   def __init__(self, svm_data):
