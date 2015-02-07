@@ -16,14 +16,15 @@ class Data_Retrieve(object):
 
   ## db_data_retrieve: retrieve an SVM dataset from corresponding 'EAV data model'
   #                    database table(s).
-  def db_data_retrieve(self):
+  def db_data_retrieve(self, id_entity):
     # local variables
     sql = SQL()
 
     # select dataset
     sql.sql_connect('db_machine_learning')
     sql_statement = 'SELECT dep_variable_label, indep_variable_label, indep_variable_value FROM tbl_dataset_value where id_entity=%s'
-    response      = sql.sql_command( sql_statement, 'select' )
+    args          = ( id_entity )
+    response      = sql.sql_command( sql_statement, 'select', args )
 
     # retrieve any error(s), disconnect from database
     response_error = sql.return_error()
