@@ -20,7 +20,8 @@ class Data_Retrieve(object):
   #  @id_entity, this supplied argument corresponds to the 'id_entity' column from the
   #      'tbl_dataset_value' database table.
   #
-  #  @sql_statement, is not a python string, hence '%s' used for argument substitution.
+  #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s' 
+  #      is used for argument substitution.
   def db_data_retrieve(self, id_entity):
     # local variables
     sql = SQL()
