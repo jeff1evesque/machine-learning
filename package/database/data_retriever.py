@@ -19,3 +19,16 @@ class Data_Retrieve(object):
   def db_data_retrieve(self):
     # local variables
     sql = SQL()
+
+    # select dataset
+    sql.sql_connect('db_machine_learning')
+    sql_statement = 'SELECT dep_variable_label, indep_variable_label, indep_variable_value FROM tbl_dataset_value where id_entity=%s'
+    response      = sql.sql_command( sql_statement, 'select' )
+
+    # retrieve any error(s), disconnect from database
+    response_error = sql.return_error()
+    sql.sql_disconnect()
+
+    # return result
+    if response_error: return { 'status': False, 'error': response_error, 'id': response['id'] }
+    else: return { 'status': True, 'error': None, 'id': response['id'] }
