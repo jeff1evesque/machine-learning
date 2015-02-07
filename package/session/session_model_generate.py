@@ -13,6 +13,7 @@
 import sys, json
 from validator.validator_settings import Validate_Settings
 from session.session_base import Session_Base
+from database.data_retriever import Data_Retrieve
 
 ## Class: Model_Generate, inherit base methods from superclass 'Session_Base'
 class Model_Generate(Session_Base):
@@ -24,6 +25,6 @@ class Model_Generate(Session_Base):
     self.response_error = []
 
   ## get_dataset:
-  def get_dataset(self):
+  def get_dataset(self, session_id):
     dataset           = Data_Retrieve( self.svm_data, 'select', self.svm_session )
-    dataset_retrieved = database.db_data_retrieve()
+    dataset_retrieved = database.db_data_retrieve(session_id)
