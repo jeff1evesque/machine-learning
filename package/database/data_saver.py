@@ -1,6 +1,8 @@
 #!/usr/bin/python
 
 ## @data_saver.py
+#  This file saves SVM related data into corresponding 'EAV data model' database
+#      table(s), from the 'db_machine_learning' database.
 from datetime import datetime
 from database.db_query import SQL
 
