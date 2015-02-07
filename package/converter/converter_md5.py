@@ -2,7 +2,7 @@
 
 ## @converter_md5.py
 #  This file contains helper functions.
-import hashlib, collections
+import hashlib
 from collections import defaultdict
 
 ## md5_for_file: Convert the contents of a given file to a hash value,
