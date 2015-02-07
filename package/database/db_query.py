@@ -33,13 +33,20 @@ class SQL(object):
   def sql_command(self, sql_statement, sql_type, sql_args=None):
     try:
       self.cursor.execute( sql_statement, sql_args )
+      # commit change(s), return lastrowid
       if sql_type in ['insert', 'delete', 'update']:
         self.conn.commit()
-      return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
+        return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
+      # fetch all the rows, return as list of lists.
+      elif sql_type == 'select':
+        result = cursor.fetchall()
+        return { 'status': True, 'error': None, 'result': result }
     except DB.Error, error:
       self.conn.rollback()
       self.list_error.append(error)
-      return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
+
+      if sql_type in ['insert', 'delete', 'update']: return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
+      elif sql_type == 'select': return { 'status': False, 'error': self.list_error }
 
   ## sql_disconnect: close connection to MySQL / MariaDB
   def sql_disconnect(self):
