@@ -2,7 +2,7 @@
 
 ## @data_retriever.py
 #  This file retrieves SVM related data from corresponding 'EAV data model' database
-#      table(s) from the 'db_machine_learning' database.
+#      table(s), from the 'db_machine_learning' database.
 from database.db_query import SQL
 
 ## Class: Data_Retrieve, explicitly inherit 'new-style' class
