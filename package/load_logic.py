@@ -99,7 +99,11 @@ if len(sys.argv) > 1:
     # instantiate class
     session = Model_Generate( sys.argv[1] )
 
+    # define current session id
+    session_id = json.loads(sys.argv[1])['data']['settings']['svm_session_id']
+
     # implement class methods
+    session.get_dataset(session_id)
 
   elif session_type == 'model_use':
 

@@ -39,5 +39,5 @@ class Data_Retrieve(object):
     sql.sql_disconnect()
 
     # return result
-    if response_error: return { 'status': False, 'error': response_error, 'result': response['result'] }
-    else: return { 'status': True, 'error': None, 'result': None }
+    if response_error: return { 'status': False, 'error': response_error, 'result': None }
+    else: return { 'status': True, 'error': None, 'result': response['result'] }
