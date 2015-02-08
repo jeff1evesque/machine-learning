@@ -35,7 +35,7 @@ class Model_Generate(Session_Base):
     # define class property
     self.dataset = db_return['result']
 
-  ## format_dataset: reformat the supplied dataset.
+  ## format_dataset: reformat 'self.dataset', as 'self.dataset_formatted'.
   #
   #  For example, given:
   #
@@ -51,7 +51,7 @@ class Model_Generate(Session_Base):
   #       ('dep-variable-3', 'indep-variable-5', 75.45), ('dep-variable-3', 'indep-variable-6', 0.002),
   #       ('dep-variable-3', 'indep-variable-7', 24.0))
   #
-  #  This method returns:
+  #  reformats as follows:
   #
   #      { {'dep_variable_label': 'dep-variable-1', 'indep_variables': {'indep-variable-1': 23.45,
   #         'indep-variable-2': 98.01, 'indep-variable-3': 0.432, 'indep-variable-4': 325,
