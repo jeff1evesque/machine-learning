@@ -61,4 +61,4 @@ class Model_Generate(Session_Base):
   #         {'dep_variable_label': 'dep-variable-3', 'indep_variables': {'indep-variable-1': 22.67,
   #         'indep-variable-2': 101.21, 'indep-variable-3': 0.832, 'indep-variable-4': 427.0,
   #         'indep-variable-5': 75.45, 'indep-variable-6': 0.002, 'indep-variable-7': 24.0}} }
-  def format_dataset(self, dataset):
+  def format_dataset(self):
