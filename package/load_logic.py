@@ -104,6 +104,7 @@ if len(sys.argv) > 1:
 
     # implement class methods
     session.select_dataset(session_id)
+    session.format_dataset()
 
   elif session_type == 'model_use':
 
