@@ -33,3 +33,32 @@ class Model_Generate(Session_Base):
     db_return = db_select.db_data_retrieve(session_id)
 
     return db_return['result']
+
+  ## format_dataset: reformat the supplied dataset.
+  #
+  #  For example, given:
+  #
+  #      (('dep-variable-1', 'indep-variable-1', 23.45), ('dep-variable-1', 'indep-variable-2', 98.01),
+  #       ('dep-variable-1', 'indep-variable-3', 0.432), ('dep-variable-1', 'indep-variable-4', 325.0),
+  #       ('dep-variable-1', 'indep-variable-5', 54.64), ('dep-variable-1', 'indep-variable-6', 0.002),
+  #       ('dep-variable-1', 'indep-variable-7', 25.0), ('dep-variable-2', 'indep-variable-1', 24.32),
+  #       ('dep-variable-2', 'indep-variable-2', 92.22), ('dep-variable-2', 'indep-variable-3', 0.356),
+  #       ('dep-variable-2', 'indep-variable-4', 235.0), ('dep-variable-2', 'indep-variable-5', 64.45),
+  #       ('dep-variable-2', 'indep-variable-6', 0.001), ('dep-variable-2', 'indep-variable-7', 31.0),
+  #       ('dep-variable-3', 'indep-variable-1', 22.67), ('dep-variable-3', 'indep-variable-2', 101.21),
+  #       ('dep-variable-3', 'indep-variable-3', 0.832), ('dep-variable-3', 'indep-variable-4', 427.0),
+  #       ('dep-variable-3', 'indep-variable-5', 75.45), ('dep-variable-3', 'indep-variable-6', 0.002),
+  #       ('dep-variable-3', 'indep-variable-7', 24.0))
+  #
+  #  This method returns:
+  #
+  #      { {'dep_variable_label': 'dep-variable-1', 'indep_variables': {'indep-variable-1': 23.45,
+  #         'indep-variable-2': 98.01, 'indep-variable-3': 0.432, 'indep-variable-4': 325,
+  #         'indep-variable-5': 54.64, 'indep-variable-6': 0.002, 'indep-variable-7: 25.0}},
+  #         {'dep_variable_label': 'dep-variable-2', 'indep_varieables': {indep-variable-1': 24.32,
+  #         'indep-variable-2': 92.22, 'indep-variable-3': 0.356, 'indep-variable-4': 235.0,
+  #         'indep-variable-5': 64.45, 'indep-variable-6': 0.001, 'indep-variable-7': 31.0}},
+  #         {'dep_variable_label': 'dep-variable-3', 'indep_variables': {'indep-variable-1': 22.67,
+  #         'indep-variable-2': 101.21, 'indep-variable-3': 0.832, 'indep-variable-4': 427.0,
+  #         'indep-variable-5': 75.45, 'indep-variable-6': 0.002, 'indep-variable-7': 24.0}} }
+  def format_dataset(self, dataset):
