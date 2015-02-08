@@ -24,7 +24,7 @@ class Model_Generate(Session_Base):
     self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
     self.response_error = []
 
-  ## select_dataset: return dataset associated with supplied 'session_id'
+  ## select_dataset: define dataset associated with supplied 'session_id'
   #
   #  @session_id, corresponds to the 'id_entity' column from the
   #      'tbl_dataset_value' database table.
@@ -32,7 +32,8 @@ class Model_Generate(Session_Base):
     db_select = Data_Retrieve( self.svm_data, 'select', self.svm_session )
     db_return = db_select.db_data_retrieve(session_id)
 
-    return db_return['result']
+    # define class property
+    self.dataset = db_return['result']
 
   ## format_dataset: reformat the supplied dataset.
   #
