@@ -115,12 +115,12 @@ class Data_Save(object):
       if self.session_type == 'data_append':
         sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
         args          = (self.svm_data['uid'], self.svm_data['id_entity'])
-        response      = sql.sql_command( sql_statement, 'update', args)
+        response      = sql.sql_command( sql_statement, 'update', args )
 
       elif self.session_type == 'data_new':
         sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
         args          = (self.svm_data['title'], self.svm_data['uid'])
-        response      = sql.sql_command( sql_statement, 'insert', args)
+        response      = sql.sql_command( sql_statement, 'insert', args )
 
       # retrieve any error(s), disconnect from database
       response_error = sql.return_error()
@@ -139,7 +139,7 @@ class Data_Save(object):
         response_removed = sql.sql_command( sql_statement, 'insert', args )
 
       sql_statement  = 'INSERT INTO tbl_feature_label (id_entity, indep_variable_label) VALUES( %s, %s )'
-      args           = (self.svm_data['id_entity'], self.svm_data['svm_dataset']['indep_variable_label']
+      args           = (self.svm_data['id_entity'], self.svm_data['svm_dataset']['indep_variable_label'])
       response_added = sql.sql_command( sql_statement, 'insert', args )
 
       # retrieve any error(s), disconnect from database
@@ -156,7 +156,7 @@ class Data_Save(object):
       sql_statement = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
       dataset       = self.svm_data['svm_dataset']
       args          = (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value'])
-      response      = sql.sql_command( sql_statement, 'insert', args)
+      response      = sql.sql_command( sql_statement, 'insert', args )
 
       # retrieve any error(s), disconnect from database
       response_error = sql.return_error()
