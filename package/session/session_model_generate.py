@@ -29,7 +29,7 @@ class Model_Generate(Session_Base):
   #  @session_id, corresponds to the 'id_entity' column from the
   #      'tbl_dataset_value' database table.
   def select_dataset(self, session_id):
-    db_select = Data_Retrieve( self.svm_data, 'select', self.svm_session )
+    db_select = Data_Retrieve( self.svm_data )
     db_return = db_select.db_data_retrieve(session_id)
 
     # return result
