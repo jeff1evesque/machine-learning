@@ -133,11 +133,13 @@ class Data_Save(object):
     # insert / update feature label(s)
     elif self.svm_cmd == 'save_label'
       sql.sql_connect('db_machine_learning')
+      # delete labels (append)
       if self.session_type == 'data_append':
         sql_statement    = 'DELETE FROM tbl_feature_label WHERE id_entity=%s'
         args             = (self.svm_data['id_entity'])
         response_removed = sql.sql_command( sql_statement, 'insert', args )
 
+      # add labels (new, append)
       sql_statement  = 'INSERT INTO tbl_feature_label (id_entity, indep_variable_label) VALUES( %s, %s )'
       args           = (self.svm_data['id_entity'], self.svm_data['svm_dataset']['indep_variable_label'])
       response_added = sql.sql_command( sql_statement, 'insert', args )
