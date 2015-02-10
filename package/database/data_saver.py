@@ -72,6 +72,21 @@ class Data_Save(object):
       if sql.return_error(): self.list_error.append( sql.return_error() )
       sql.sql_disconnect()
 
+    elif self.svm_cmd == 'save_label':
+      sql_statement = '''\
+                      CREATE TABLE IF NOT EXISTS tbl_feature_label (
+                        id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_entity INT NOT NULL,
+                        indep_variable_label VARCHAR(75) NOT NULL
+                      );
+                      '''
+      sql.sql_connect('db_machine_learning')
+      sql.sql_command( sql_statement, 'create' )
+
+      # retrieve any error(s), disconnect from database
+      if sql.return_error(): self.list_error.append( sql.return_error() )
+      sql.sql_disconnect()
+
     elif self.svm_cmd == 'save_value':
       sql_statement = '''\
                       CREATE TABLE IF NOT EXISTS tbl_dataset_value (
