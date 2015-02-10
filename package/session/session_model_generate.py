@@ -43,7 +43,7 @@ class Model_Generate(Session_Base):
       if not instance[0] in dataset_formatted:
         dataset_formatted[instance[0]] = []
 
-      dataset_formatted[instance[0]].append( (instance[1], instance[2] )
+      dataset_formatted[instance[0]].append( (instance[1], instance[2]) )
 
     return dataset_formatted
 
