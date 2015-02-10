@@ -131,7 +131,7 @@ class Data_Save(object):
       else: return { 'status': True, 'error': None, 'id': response['id'] }
 
     # insert / update feature label(s)
-    elif self.svm_cmd == 'save_label'
+    elif self.svm_cmd == 'save_label':
       sql.sql_connect('db_machine_learning')
       # delete labels (append)
       if self.session_type == 'data_append':
