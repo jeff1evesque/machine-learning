@@ -72,6 +72,21 @@ class Data_Save(object):
       if sql.return_error(): self.list_error.append( sql.return_error() )
       sql.sql_disconnect()
 
+    elif self.svm_cmd == 'save_label':
+      sql_statement = '''\
+                      CREATE TABLE IF NOT EXISTS tbl_feature_label (
+                        id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_entity INT NOT NULL,
+                        indep_variable_label VARCHAR(75) NOT NULL
+                      );
+                      '''
+      sql.sql_connect('db_machine_learning')
+      sql.sql_command( sql_statement, 'create' )
+
+      # retrieve any error(s), disconnect from database
+      if sql.return_error(): self.list_error.append( sql.return_error() )
+      sql.sql_disconnect()
+
     elif self.svm_cmd == 'save_value':
       sql_statement = '''\
                       CREATE TABLE IF NOT EXISTS tbl_dataset_value (
@@ -100,12 +115,34 @@ class Data_Save(object):
       if self.session_type == 'data_append':
         sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
         args          = (self.svm_data['uid'], self.svm_data['id_entity'])
-        response      = sql.sql_command( sql_statement, 'update', args)
+        response      = sql.sql_command( sql_statement, 'update', args )
 
       elif self.session_type == 'data_new':
         sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
         args          = (self.svm_data['title'], self.svm_data['uid'])
-        response      = sql.sql_command( sql_statement, 'insert', args)
+        response      = sql.sql_command( sql_statement, 'insert', args )
+
+      # retrieve any error(s), disconnect from database
+      response_error = sql.return_error()
+      sql.sql_disconnect()
+
+      # return result
+      if response_error: return { 'status': False, 'error': response_error, 'id': response['id'] }
+      else: return { 'status': True, 'error': None, 'id': response['id'] }
+
+    # insert / update feature label(s)
+    elif self.svm_cmd == 'save_label'
+      sql.sql_connect('db_machine_learning')
+      # delete labels (append)
+      if self.session_type == 'data_append':
+        sql_statement    = 'DELETE FROM tbl_feature_label WHERE id_entity=%s'
+        args             = (self.svm_data['id_entity'])
+        response_removed = sql.sql_command( sql_statement, 'insert', args )
+
+      # add labels (new, append)
+      sql_statement  = 'INSERT INTO tbl_feature_label (id_entity, indep_variable_label) VALUES( %s, %s )'
+      args           = (self.svm_data['id_entity'], self.svm_data['svm_dataset']['indep_variable_label'])
+      response_added = sql.sql_command( sql_statement, 'insert', args )
 
       # retrieve any error(s), disconnect from database
       response_error = sql.return_error()
@@ -121,7 +158,7 @@ class Data_Save(object):
       sql_statement = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
       dataset       = self.svm_data['svm_dataset']
       args          = (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value'])
-      response      = sql.sql_command( sql_statement, 'insert', args)
+      response      = sql.sql_command( sql_statement, 'insert', args )
 
       # retrieve any error(s), disconnect from database
       response_error = sql.return_error()
