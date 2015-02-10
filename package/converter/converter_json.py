@@ -11,8 +11,8 @@ class JSON(object):
 
   ## constructor
   def __init__(self, svm_file):
-    self.svm_file = svm_file
-    self.feature_label = None
+    self.svm_file       = svm_file
+    self.feature_labels = None
 
   ## csv_to_json: convert csv file to JSON object
   #
