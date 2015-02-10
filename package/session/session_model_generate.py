@@ -37,6 +37,15 @@ class Model_Generate(Session_Base):
 
   ## format_dataset:
   def format_dataset(self):
+    dataset_formatted = {}
+
+    for instance in self.dataset:
+      if not instance[0] in dataset_formatted:
+        dataset_formatted[instance[0]] = []
+
+      dataset_formatted[instance[0]].append( (instance[1], instance[2] )
+
+    return dataset_formatted
 
   ## get_observation_labels: return a list of dependent variable labels.
   def get_observation_labels(self):
