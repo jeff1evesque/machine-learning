@@ -35,6 +35,9 @@ class Model_Generate(Session_Base):
     # define class property
     self.dataset = db_return['result']
 
+  ## format_dataset:
+  def format_dataset(self):
+
   ## get_observation_labels: return a list of dependent variable labels.
   def get_observation_labels(self):
 
