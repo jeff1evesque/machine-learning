@@ -32,8 +32,8 @@ class Model_Generate(Session_Base):
     db_select = Data_Retrieve( self.svm_data, 'select', self.svm_session )
     db_return = db_select.db_data_retrieve(session_id)
 
-    # define class property
-    self.dataset = db_return['result']
+    # return result
+    return db_return['result']
 
   ## format_dataset:
   #
