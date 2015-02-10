@@ -42,6 +42,7 @@ sudo apt-get install python-pip
 sudo pip install jsonschema
 sudo pip install python-magic
 sudo pip install xmltodict
+sudo pip install matplotlib
 
 # LAMP (with MariaDB, and phpmyadmin):
 sudo apt-get install apache2
