@@ -62,6 +62,7 @@ class JSON(object):
 
           list_dataset.append( { 'dep_variable_label': dep_variable_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
 
+    self.feature_labels = indep_variable_label
     return json.dumps( list_dataset )
 
   ## xml_to_json: convert xml to JSON object
