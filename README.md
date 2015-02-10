@@ -65,7 +65,7 @@ sudo npm install uglify-js -g
 sudo npm install --global imagemin
 
 # Scikit-Learn Dependency:
-sudo apt-get install python-numpy
+sudo apt-get build-dep scikit-learn
 ```
 
 **Note:** This project assumes [Ubuntu Server 14.04](http://www.ubuntu.com/download/server) as the operating system.
