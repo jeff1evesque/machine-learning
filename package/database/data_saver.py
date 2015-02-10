@@ -130,6 +130,13 @@ class Data_Save(object):
       if response_error: return { 'status': False, 'error': response_error, 'id': response['id'] }
       else: return { 'status': True, 'error': None, 'id': response['id'] }
 
+    # insert / update feature label(s)
+    elif self.svm_cmd == 'save_label'
+      sql.sql_connect('db_machine_learning')
+      sql_statement = 'INSERT INTO tbl_feature_label (id_entity, indep_variable_label) VALUES( %s, %s )'
+      args          = (self.svm_data['id_entity'], self.svm_data['svm_dataset']['indep_variable_label']
+      response      = sql.sql_command( sql_statement, 'insert', args )
+
     # insert / update dataset value(s)
     elif self.svm_cmd == 'save_value':
       sql.sql_connect('db_machine_learning')
