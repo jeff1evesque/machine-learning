@@ -34,3 +34,6 @@ class Model_Generate(Session_Base):
 
     # define class property
     self.dataset = db_return['result']
+
+  ## model_svm: generate an SVM model
+  def model_svm(self):
