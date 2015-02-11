@@ -101,9 +101,9 @@ class Data_New(Session_Base):
             dataset_converter = JSON(val['filedata']['file_temp'])
             dataset_converted = json.loads(dataset_converter.csv_to_json())
 
-            # check label consistency, append label(s) to 'feature_labels'
-            if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
-            self.feature_labels = sorted(dataset_converter.get_feature_labels())
+            # check label consistency, append label(s) to 'self.observation_labels'
+            if sorted(dataset_converter.get_observation_labels()) == self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+            self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
             self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
@@ -118,9 +118,9 @@ class Data_New(Session_Base):
             dataset_converter = JSON(val['filedata']['file_temp'])
             dataset_converted = json.loads(dataset_converter.xml_to_json())
 
-            # check label consistency, append label(s) to 'feature_labels'
-            if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
-            self.feature_labels = sorted(dataset_converter.get_feature_labels())
+            # check label consistency, append label(s) to 'self.observation_labels'
+            if sorted(dataset_converter.get_observation_labels()) == self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+            self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
             self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
