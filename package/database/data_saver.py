@@ -137,7 +137,7 @@ class Data_Save(object):
       if self.session_type == 'data_append':
         sql_statement    = 'DELETE FROM tbl_feature_label WHERE id_entity=%s'
         args             = (self.svm_data['id_entity'])
-        response_removed = sql.sql_command( sql_statement, 'insert', args )
+        response_removed = sql.sql_command( sql_statement, 'delete', args )
 
       # add labels (new, append)
       sql_statement  = 'INSERT INTO tbl_feature_label (id_entity, indep_variable_label) VALUES( %s, %s )'
