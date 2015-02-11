@@ -27,8 +27,8 @@ class JSON(object):
   #            row = row[0].split(',')
   #
   def csv_to_json(self):
-    list_dataset       = []
-    dep_variable_label = []
+    list_dataset      = []
+    observation_label = []
 
     # open temporary 'csvfile' reader object
     with open( self.svm_file, 'rU' ) as csvfile:
@@ -48,7 +48,7 @@ class JSON(object):
         # iterate first column of each row (except first)
         row_dep_label = row[0].split(',')
         for value in row_dep_label[:1]:
-          dep_variable_label.append( value )
+          observation_label.append( value )
 
         # iterate each column in a given row
         row_indep_variable = row[0].split(',')
@@ -59,9 +59,9 @@ class JSON(object):
             print e
             return False
 
-          list_dataset.append( { 'dep_variable_label': dep_variable_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
+          list_dataset.append( { 'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
 
-    self.observation_labels = dep_variable_label
+    self.observation_labels = observation_label
     return json.dumps( list_dataset )
 
   ## xml_to_json: convert xml to JSON object
