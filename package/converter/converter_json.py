@@ -11,7 +11,8 @@ class JSON(object):
 
   ## constructor
   def __init__(self, svm_file):
-    self.svm_file = svm_file
+    self.svm_file       = svm_file
+    self.feature_labels = None
 
   ## csv_to_json: convert csv file to JSON object
   #
@@ -61,11 +62,13 @@ class JSON(object):
 
           list_dataset.append( { 'dep_variable_label': dep_variable_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
 
+    self.feature_labels = indep_variable_label
     return json.dumps( list_dataset )
 
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
-    list_dataset = []
+    list_dataset         = []
+    indep_variable_label = []
 
     # convert xml file to python 'dict'
     with open( self.svm_file, 'rU' ) as xmlfile:
@@ -79,6 +82,15 @@ class JSON(object):
         indep_variable_label = indep_variable['label']
         indep_variable_value = indep_variable['value']
 
+        indep_variable_label.append( indep_variable_value )
         list_dataset.append( { 'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value} )
 
+    self.feature_labels = indep_variable_label
     return json.dumps( list_dataset )
+
+  ## get_feature_labels: returns a list of independent variable labels. Since
+  #                      both 'csv_to_json', and 'xml_to_json' defines the
+  #                      class variable this method returns, either method
+  #                      needs to be called before this one.
+  def get_feature_labels(self):
+    return self.feature_labels
