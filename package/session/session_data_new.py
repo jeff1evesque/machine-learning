@@ -30,6 +30,7 @@ class Data_New(Session_Base):
   def __init__(self, svm_data):
     super(Data_New, self).__init__(svm_data)
     self.flag_validate_mime  = False
+    self.feature_labels      = []
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
@@ -58,11 +59,28 @@ class Data_New(Session_Base):
     elif db_return['status'] and session_type == 'data_new':
       return { 'status': True, 'id': db_return['id'], 'error': None }
 
+  ## save_feature_label: save the list of unique independent variable labels
+  #                      from a supplied session (entity id) into the database.
+  #
+  #  @self.feature_labels, list of features (independent variables), defined
+  #      after invoking the 'dataset_to_json' method.
+  #
+  #  @session_id, the corresponding returned session id from invoking the
+  #      'save_svm_entity' method.
+  def save_feature_label(self, session_type, session_id):
+    if len(self.feature_labels) > 0:
+      for label in self.feature_labels:
+        db_save = Data_Save( {'label': label, 'id_entity': session_id}, 'save_label', session_type )
+
+        # save dataset element, append error(s)
+        db_return = db_save.db_data_save()
+        if not db_return['status']: self.response_error.append( db_return['error'] )
+
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
   def dataset_to_json(self, id_entity):
-    flag_convert = False
-    flag_append  = True
+    flag_convert   = False
+    flag_append    = True
 
     try:
       self.response_mime_validation['json_data']['file_upload']
@@ -79,7 +97,16 @@ class Data_New(Session_Base):
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).csv_to_json())})
+            # conversion
+            dataset_converter = JSON(val['filedata']['file_temp'])
+            dataset_converted = json.loads(dataset_converter.csv_to_json())
+
+            # check label consistency, append label(s) to 'feature_labels'
+            if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied features (independent variables) are inconsistent')
+            self.feature_labels = sorted(dataset_converter.get_feature_labels())
+
+             # build new (relevant) dataset
+            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
@@ -87,7 +114,16 @@ class Data_New(Session_Base):
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).xml_to_json())})
+            # conversion
+            dataset_converter = JSON(val['filedata']['file_temp'])
+            dataset_converted = json.loads(dataset_converter.xml_to_json())
+
+            # check label consistency, append label(s) to 'feature_labels'
+            if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied features (independent variables) are inconsistent')
+            self.feature_labels = sorted(dataset_converter.get_feature_labels())
+
+             # build new (relevant) dataset
+            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
