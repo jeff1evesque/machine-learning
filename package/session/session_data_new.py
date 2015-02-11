@@ -61,8 +61,9 @@ class Data_New(Session_Base):
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
   def dataset_to_json(self, id_entity):
-    flag_convert = False
-    flag_append  = True
+    flag_convert   = False
+    flag_append    = True
+    feature_labels = []
 
     try:
       self.response_mime_validation['json_data']['file_upload']
@@ -79,7 +80,16 @@ class Data_New(Session_Base):
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).csv_to_json())})
+            # conversion
+            dataset_converter = JSON(val['filedata']['file_temp'])
+            dataset_converted = dataset_converter.csv_to_json()
+
+            # check label consistency, append label to 'feature_labels'
+            if not sort(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent'))
+            feature_labels.append( sorted(dataset_converter.get_feature_labels()) )
+
+             # build new (relevant) dataset
+            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
