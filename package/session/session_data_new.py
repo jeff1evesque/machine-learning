@@ -97,7 +97,16 @@ class Data_New(Session_Base):
         # xml to json
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': json.loads(JSON(val['filedata']['file_temp']).xml_to_json())})
+            # conversion
+            dataset_converter = JSON(val['filedata']['file_temp'])
+            dataset_converted = dataset_converter.xml_to_json()
+
+            # check label consistency, append label to 'feature_labels'
+            if not sort(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent'))
+            feature_labels.append( sort(dataset_converter.get_feature_labels()) )
+
+             # build new (relevant) dataset
+            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
