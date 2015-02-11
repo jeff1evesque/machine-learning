@@ -94,6 +94,9 @@ if len(sys.argv) > 1:
         session.validate_dataset_json()
         session.check()
 
+        session.save_observation_label(session_type, session_id)
+        session.check()
+
         session.save_svm_dataset(session_type)
         session.check()
 
