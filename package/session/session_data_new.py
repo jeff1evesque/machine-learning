@@ -59,6 +59,13 @@ class Data_New(Session_Base):
     elif db_return['status'] and session_type == 'data_new':
       return { 'status': True, 'id': db_return['id'], 'error': None }
 
+  ## save_feature_label: save the associated independent variable labels to
+  #                      a supplied session (entity id).
+  #
+  #  @self.feature_labels, list of features (independent variables), defined
+  #      after invoking the 'dataset_to_json' method.
+  def save_feature_label(self, session_type):
+
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
   def dataset_to_json(self, id_entity):
