@@ -11,10 +11,12 @@ class JSON(object):
 
   ## constructor
   def __init__(self, svm_file):
-    self.svm_file       = svm_file
-    self.feature_labels = None
+    self.svm_file           = svm_file
+    self.observation_labels = None
 
   ## csv_to_json: convert csv file to JSON object
+  #
+  #  @observation_label, is a list containing dependent variable labels.
   #
   #  Note: we use the 'Universal Newline Support' with the 'U" parameter
   #        when opening 'self.svm_file'. This allows newlines to be
@@ -25,11 +27,9 @@ class JSON(object):
   #        the following line is required in this method:
   #
   #            row = row[0].split(',')
-  #
   def csv_to_json(self):
-    list_dataset         = []
-    dep_variable_label   = []
-    indep_variable_label = []
+    list_dataset      = []
+    observation_label = []
 
     # open temporary 'csvfile' reader object
     with open( self.svm_file, 'rU' ) as csvfile:
@@ -49,7 +49,7 @@ class JSON(object):
         # iterate first column of each row (except first)
         row_dep_label = row[0].split(',')
         for value in row_dep_label[:1]:
-          dep_variable_label.append( value )
+          observation_label.append( value )
 
         # iterate each column in a given row
         row_indep_variable = row[0].split(',')
@@ -60,15 +60,17 @@ class JSON(object):
             print e
             return False
 
-          list_dataset.append( { 'dep_variable_label': dep_variable_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
+          list_dataset.append( { 'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
 
-    self.feature_labels = indep_variable_label
+    self.observation_labels = observation_label
     return json.dumps( list_dataset )
 
   ## xml_to_json: convert xml to JSON object
+  #
+  #  @observation_label, is a list containing dependent variable labels.
   def xml_to_json(self):
-    list_dataset         = []
-    indep_variable_label = []
+    list_dataset      = []
+    observation_label = []
 
     # convert xml file to python 'dict'
     with open( self.svm_file, 'rU' ) as xmlfile:
@@ -77,6 +79,7 @@ class JSON(object):
     # build 'list_dataset'
     for dep_variable in dataset['dataset']['entity']:
       dep_variable_label = dep_variable['dependent-variable']
+      observation_label.append( dep_variable_label )
 
       for indep_variable in dep_variable['independent-variable']:
         indep_variable_label = indep_variable['label']
@@ -85,12 +88,12 @@ class JSON(object):
         indep_variable_label.append( indep_variable_value )
         list_dataset.append( { 'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value} )
 
-    self.feature_labels = indep_variable_label
+    self.observation_labels = observation_label
     return json.dumps( list_dataset )
 
-  ## get_feature_labels: returns a list of independent variable labels. Since
-  #                      both 'csv_to_json', and 'xml_to_json' defines the
-  #                      class variable this method returns, either method
-  #                      needs to be called before this one.
-  def get_feature_labels(self):
-    return self.feature_labels
+  ## get_observation_labels: returns a list of independent variable labels. Since
+  #                          both 'csv_to_json', and 'xml_to_json' defines the
+  #                          class variable this method returns, either method
+  #                          needs to be called before this one.
+  def get_observation_labels(self):
+    return self.observation_labels
