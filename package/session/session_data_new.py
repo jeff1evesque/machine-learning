@@ -101,7 +101,7 @@ class Data_New(Session_Base):
             dataset_converter = JSON(val['filedata']['file_temp'])
             dataset_converted = json.loads(dataset_converter.csv_to_json())
 
-            # check label consistency, append label(s) to 'self.observation_labels'
+            # check label consistency, assign labels
             if sorted(dataset_converter.get_observation_labels()) == self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
             self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
@@ -118,7 +118,7 @@ class Data_New(Session_Base):
             dataset_converter = JSON(val['filedata']['file_temp'])
             dataset_converted = json.loads(dataset_converter.xml_to_json())
 
-            # check label consistency, append label(s) to 'self.observation_labels'
+            # check label consistency, assign labels
             if sorted(dataset_converter.get_observation_labels()) == self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
             self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
