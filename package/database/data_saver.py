@@ -74,10 +74,10 @@ class Data_Save(object):
 
     elif self.svm_cmd == 'save_label':
       sql_statement = '''\
-                      CREATE TABLE IF NOT EXISTS tbl_feature_label (
+                      CREATE TABLE IF NOT EXISTS tbl_observation_label (
                         id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         id_entity INT NOT NULL,
-                        indep_variable_label VARCHAR(75) NOT NULL
+                        dep_variable_label VARCHAR(75) NOT NULL
                       );
                       '''
       sql.sql_connect('db_machine_learning')
@@ -135,12 +135,12 @@ class Data_Save(object):
       sql.sql_connect('db_machine_learning')
       # delete labels (append case)
       if self.session_type == 'data_append':
-        sql_statement    = 'DELETE FROM tbl_feature_label WHERE id_entity=%s'
+        sql_statement    = 'DELETE FROM tbl_observation_label WHERE id_entity=%s'
         args             = (self.svm_data['id_entity'])
         response_removed = sql.sql_command( sql_statement, 'delete', args )
 
       # add labels (new, and append case)
-      sql_statement  = 'INSERT INTO tbl_feature_label (id_entity, indep_variable_label) VALUES( %s, %s )'
+      sql_statement  = 'INSERT INTO tbl_observation_label (id_entity, dep_variable_label) VALUES( %s, %s )'
       args           = (self.svm_data['id_entity'], self.svm_data['label'])
       response_added = sql.sql_command( sql_statement, 'insert', args )
 
