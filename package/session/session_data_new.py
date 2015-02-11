@@ -64,6 +64,9 @@ class Data_New(Session_Base):
   #
   #  @self.feature_labels, list of features (independent variables), defined
   #      after invoking the 'dataset_to_json' method.
+  #
+  #  @session_id, the corresponding returned session id from invoking the
+  #      'save_svm_entity' method.
   def save_feature_label(self, session_type, session_id):
     if len(self.feature_labels) > 0:
       for label in self.feature_labels:
