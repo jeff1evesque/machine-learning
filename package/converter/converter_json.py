@@ -16,6 +16,8 @@ class JSON(object):
 
   ## csv_to_json: convert csv file to JSON object
   #
+  #  @observation_label, is a list containing dependent variable labels.
+  #
   #  Note: we use the 'Universal Newline Support' with the 'U" parameter
   #        when opening 'self.svm_file'. This allows newlines to be
   #        understood regardless, if the newline character was created in
@@ -25,7 +27,6 @@ class JSON(object):
   #        the following line is required in this method:
   #
   #            row = row[0].split(',')
-  #
   def csv_to_json(self):
     list_dataset      = []
     observation_label = []
@@ -65,6 +66,8 @@ class JSON(object):
     return json.dumps( list_dataset )
 
   ## xml_to_json: convert xml to JSON object
+  #
+  #  @observation_label, is a list containing dependent variable labels.
   def xml_to_json(self):
     list_dataset      = []
     observation_label = []
