@@ -74,10 +74,10 @@ class Data_Save(object):
 
     elif self.svm_cmd == 'save_label':
       sql_statement = '''\
-                      CREATE TABLE IF NOT EXISTS tbl_feature_label (
+                      CREATE TABLE IF NOT EXISTS tbl_observation_label (
                         id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         id_entity INT NOT NULL,
-                        indep_variable_label VARCHAR(75) NOT NULL
+                        dep_variable_label VARCHAR(75) NOT NULL
                       );
                       '''
       sql.sql_connect('db_machine_learning')
