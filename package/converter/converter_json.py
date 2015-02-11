@@ -66,8 +66,8 @@ class JSON(object):
 
   ## xml_to_json: convert xml to JSON object
   def xml_to_json(self):
-    list_dataset         = []
-    indep_variable_label = []
+    list_dataset      = []
+    observation_label = []
 
     # convert xml file to python 'dict'
     with open( self.svm_file, 'rU' ) as xmlfile:
@@ -76,6 +76,7 @@ class JSON(object):
     # build 'list_dataset'
     for dep_variable in dataset['dataset']['entity']:
       dep_variable_label = dep_variable['dependent-variable']
+      observation_label.append( dep_variable_label )
 
       for indep_variable in dep_variable['independent-variable']:
         indep_variable_label = indep_variable['label']
@@ -84,7 +85,7 @@ class JSON(object):
         indep_variable_label.append( indep_variable_value )
         list_dataset.append( { 'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value} )
 
-    self.feature_labels = indep_variable_label
+    self.observation_labels = observation_label
     return json.dumps( list_dataset )
 
   ## get_feature_labels: returns a list of independent variable labels. Since
