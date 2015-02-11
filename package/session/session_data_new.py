@@ -79,6 +79,13 @@ class Data_New(Session_Base):
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
   #
+  #  @flag_convert, when true, indicates the file-upload mime type passed
+  #      validation, and returned unique file(s) (redundancies removed).
+  #
+  #  @flag_append, when false, indicates the neccessary 'self.json_dataset'
+  #      was not properly defined, causing this method to 'return', which
+  #      essentially stops the execution of the current session.
+  #
   #  @index_count, used to 'check label consistent'.
   def dataset_to_json(self, id_entity):
     flag_convert   = False
