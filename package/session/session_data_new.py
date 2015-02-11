@@ -93,7 +93,7 @@ class Data_New(Session_Base):
             dataset_converted = dataset_converter.csv_to_json()
 
             # check label consistency, append label(s) to 'feature_labels'
-            if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent')
+            if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied features (independent variables) are inconsistent')
             self.feature_labels = sorted(dataset_converter.get_feature_labels())
 
              # build new (relevant) dataset
@@ -110,7 +110,7 @@ class Data_New(Session_Base):
             dataset_converted = dataset_converter.xml_to_json()
 
             # check label consistency, append label(s) to 'feature_labels'
-            if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent')
+            if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied features (independent variables) are inconsistent')
             self.feature_labels = sorted(dataset_converter.get_feature_labels())
 
              # build new (relevant) dataset
