@@ -87,3 +87,10 @@ class JSON(object):
 
     self.feature_labels = indep_variable_label
     return json.dumps( list_dataset )
+
+  ## get_feature_labels: returns a list of independent variable labels. Since
+  #                      both 'csv_to_json', and 'xml_to_json' defines the
+  #                      class variable this method returns, either method
+  #                      needs to be called before this one.
+  def get_feature_labels(self):
+    return self.feature_labels
