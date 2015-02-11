@@ -141,7 +141,7 @@ class Data_Save(object):
 
       # add labels (new, and append case)
       sql_statement  = 'INSERT INTO tbl_feature_label (id_entity, indep_variable_label) VALUES( %s, %s )'
-      args           = (self.svm_data['id_entity'], self.svm_data['svm_dataset']['indep_variable_label'])
+      args           = (self.svm_data['id_entity'], self.svm_data['label'])
       response_added = sql.sql_command( sql_statement, 'insert', args )
 
       # retrieve any error(s), disconnect from database
