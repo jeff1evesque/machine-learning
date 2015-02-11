@@ -28,8 +28,9 @@ class JSON(object):
   #
   #            row = row[0].split(',')
   def csv_to_json(self):
-    list_dataset      = []
-    observation_label = []
+    list_dataset         = []
+    observation_label    = []
+    indep_variable_label = []
 
     # open temporary 'csvfile' reader object
     with open( self.svm_file, 'rU' ) as csvfile:
