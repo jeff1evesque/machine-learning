@@ -65,6 +65,7 @@ class Data_New(Session_Base):
   #  @self.feature_labels, list of features (independent variables), defined
   #      after invoking the 'dataset_to_json' method.
   def save_feature_label(self, session_type):
+    print self.feature_labels
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
@@ -92,7 +93,7 @@ class Data_New(Session_Base):
             dataset_converted = dataset_converter.csv_to_json()
 
             # check label consistency, append label(s) to 'feature_labels'
-            if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent'))
+            if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent')
             self.feature_labels = sorted(dataset_converter.get_feature_labels())
 
              # build new (relevant) dataset
@@ -109,7 +110,7 @@ class Data_New(Session_Base):
             dataset_converted = dataset_converter.xml_to_json()
 
             # check label consistency, append label(s) to 'feature_labels'
-            if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent'))
+            if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent')
             self.feature_labels = sorted(dataset_converter.get_feature_labels())
 
              # build new (relevant) dataset
