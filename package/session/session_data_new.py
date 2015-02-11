@@ -30,7 +30,7 @@ class Data_New(Session_Base):
   def __init__(self, svm_data):
     super(Data_New, self).__init__(svm_data)
     self.flag_validate_mime  = False
-    self.feature_labels      = []
+    self.observation_labels  = []
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
@@ -59,17 +59,17 @@ class Data_New(Session_Base):
     elif db_return['status'] and session_type == 'data_new':
       return { 'status': True, 'id': db_return['id'], 'error': None }
 
-  ## save_feature_label: save the list of unique independent variable labels
-  #                      from a supplied session (entity id) into the database.
+  ## save_observation_label: save the list of unique independent variable labels
+  #                          from a supplied session (entity id) into the database.
   #
-  #  @self.feature_labels, list of features (independent variables), defined
+  #  @self.observation_labels, list of features (independent variables), defined
   #      after invoking the 'dataset_to_json' method.
   #
   #  @session_id, the corresponding returned session id from invoking the
   #      'save_svm_entity' method.
-  def save_feature_label(self, session_type, session_id):
-    if len(self.feature_labels) > 0:
-      for label in self.feature_labels:
+  def save_observation_label(self, session_type, session_id):
+    if len(self.observation_labels) > 0:
+      for label in self.observation_labels:
         db_save = Data_Save( {'label': label, 'id_entity': session_id}, 'save_label', session_type )
 
         # save dataset element, append error(s)
@@ -78,9 +78,19 @@ class Data_New(Session_Base):
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
+  #
+  #  @flag_convert, when true, indicates the file-upload mime type passed
+  #      validation, and returned unique file(s) (redundancies removed).
+  #
+  #  @flag_append, when false, indicates the neccessary 'self.json_dataset'
+  #      was not properly defined, causing this method to 'return', which
+  #      essentially stops the execution of the current session.
+  #
+  #  @index_count, used to 'check label consistent'.
   def dataset_to_json(self, id_entity):
     flag_convert   = False
     flag_append    = True
+    index_count    = 0
 
     try:
       self.response_mime_validation['json_data']['file_upload']
@@ -101,9 +111,9 @@ class Data_New(Session_Base):
             dataset_converter = JSON(val['filedata']['file_temp'])
             dataset_converted = json.loads(dataset_converter.csv_to_json())
 
-            # check label consistency, append label(s) to 'feature_labels'
-            if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied features (independent variables) are inconsistent')
-            self.feature_labels = sorted(dataset_converter.get_feature_labels())
+            # check label consistency, assign labels
+            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+            self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
             self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
@@ -118,9 +128,9 @@ class Data_New(Session_Base):
             dataset_converter = JSON(val['filedata']['file_temp'])
             dataset_converted = json.loads(dataset_converter.xml_to_json())
 
-            # check label consistency, append label(s) to 'feature_labels'
-            if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied features (independent variables) are inconsistent')
-            self.feature_labels = sorted(dataset_converter.get_feature_labels())
+            # check label consistency, assign labels
+            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+            self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
             self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
@@ -128,6 +138,7 @@ class Data_New(Session_Base):
             self.response_error.append( error )
             flag_append = False
 
+      index_count += 1
       if ( flag_append == False ): return False
 
   ## validate_dataset_json: validate each dataset element.
