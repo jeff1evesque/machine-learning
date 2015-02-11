@@ -59,17 +59,17 @@ class Data_New(Session_Base):
     elif db_return['status'] and session_type == 'data_new':
       return { 'status': True, 'id': db_return['id'], 'error': None }
 
-  ## save_feature_label: save the list of unique independent variable labels
-  #                      from a supplied session (entity id) into the database.
+  ## save_observation_label: save the list of unique independent variable labels
+  #                          from a supplied session (entity id) into the database.
   #
-  #  @self.feature_labels, list of features (independent variables), defined
+  #  @self.observation_labels, list of features (independent variables), defined
   #      after invoking the 'dataset_to_json' method.
   #
   #  @session_id, the corresponding returned session id from invoking the
   #      'save_svm_entity' method.
-  def save_feature_label(self, session_type, session_id):
-    if len(self.feature_labels) > 0:
-      for label in self.feature_labels:
+  def save_observation_label(self, session_type, session_id):
+    if len(self.observation_labels) > 0:
+      for label in self.observation_labels:
         db_save = Data_Save( {'label': label, 'id_entity': session_id}, 'save_label', session_type )
 
         # save dataset element, append error(s)
