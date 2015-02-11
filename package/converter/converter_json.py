@@ -11,8 +11,8 @@ class JSON(object):
 
   ## constructor
   def __init__(self, svm_file):
-    self.svm_file       = svm_file
-    self.feature_labels = None
+    self.svm_file           = svm_file
+    self.observation_labels = None
 
   ## csv_to_json: convert csv file to JSON object
   #
@@ -27,9 +27,8 @@ class JSON(object):
   #            row = row[0].split(',')
   #
   def csv_to_json(self):
-    list_dataset         = []
-    dep_variable_label   = []
-    indep_variable_label = []
+    list_dataset       = []
+    dep_variable_label = []
 
     # open temporary 'csvfile' reader object
     with open( self.svm_file, 'rU' ) as csvfile:
@@ -62,7 +61,7 @@ class JSON(object):
 
           list_dataset.append( { 'dep_variable_label': dep_variable_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
 
-    self.feature_labels = indep_variable_label
+    self.observation_labels = dep_variable_label
     return json.dumps( list_dataset )
 
   ## xml_to_json: convert xml to JSON object
