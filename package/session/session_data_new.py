@@ -70,7 +70,6 @@ class Data_New(Session_Base):
   def save_feature_label(self, session_type, session_id):
     if len(self.feature_labels) > 0:
       for label in self.feature_labels:
-
         db_save = Data_Save( {'label': label, 'id_entity': session_id}, 'save_label', session_type )
 
         # save dataset element, append error(s)
