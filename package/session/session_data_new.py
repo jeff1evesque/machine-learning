@@ -30,6 +30,7 @@ class Data_New(Session_Base):
   def __init__(self, svm_data):
     super(Data_New, self).__init__(svm_data)
     self.flag_validate_mime  = False
+    self.feature_labels      = []
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
@@ -63,7 +64,6 @@ class Data_New(Session_Base):
   def dataset_to_json(self, id_entity):
     flag_convert   = False
     flag_append    = True
-    feature_labels = []
 
     try:
       self.response_mime_validation['json_data']['file_upload']
@@ -86,7 +86,7 @@ class Data_New(Session_Base):
 
             # check label consistency, append label(s) to 'feature_labels'
             if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent'))
-            feature_labels = sorted(dataset_converter.get_feature_labels())
+            self.feature_labels = sorted(dataset_converter.get_feature_labels())
 
              # build new (relevant) dataset
             self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
@@ -103,7 +103,7 @@ class Data_New(Session_Base):
 
             # check label consistency, append label(s) to 'feature_labels'
             if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent'))
-            feature_labels = sorted(dataset_converter.get_feature_labels())
+            self.feature_labels = sorted(dataset_converter.get_feature_labels())
 
              # build new (relevant) dataset
             self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
