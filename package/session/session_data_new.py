@@ -65,7 +65,14 @@ class Data_New(Session_Base):
   #  @self.feature_labels, list of features (independent variables), defined
   #      after invoking the 'dataset_to_json' method.
   def save_feature_label(self, session_type):
-    print self.feature_labels
+    if len(self.feature_labels) > 0:
+      for label in self.feature_labels:
+
+        db_save = Data_Save( {'label': label, 'id_entity': session_id}, 'save_label', session_type )
+
+        # save dataset element, append error(s)
+        db_return = db_save.db_data_save()
+        if not db_return['status']: self.response_error.append( db_return['error'] )
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
