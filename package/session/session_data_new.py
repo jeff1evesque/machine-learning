@@ -30,7 +30,7 @@ class Data_New(Session_Base):
   def __init__(self, svm_data):
     super(Data_New, self).__init__(svm_data)
     self.flag_validate_mime  = False
-    self.feature_labels      = []
+    self.observation_labels  = []
 
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
