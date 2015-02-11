@@ -78,9 +78,12 @@ class Data_New(Session_Base):
 
   ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
   #                   json object.
+  #
+  #  @index_count, used to 'check label consistent'.
   def dataset_to_json(self, id_entity):
     flag_convert   = False
     flag_append    = True
+    index_count    = 0
 
     try:
       self.response_mime_validation['json_data']['file_upload']
@@ -102,7 +105,7 @@ class Data_New(Session_Base):
             dataset_converted = json.loads(dataset_converter.csv_to_json())
 
             # check label consistency, assign labels
-            if sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
             self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
@@ -119,7 +122,7 @@ class Data_New(Session_Base):
             dataset_converted = json.loads(dataset_converter.xml_to_json())
 
             # check label consistency, assign labels
-            if sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
             self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
@@ -128,6 +131,7 @@ class Data_New(Session_Base):
             self.response_error.append( error )
             flag_append = False
 
+      index_count += 1
       if ( flag_append == False ): return False
 
   ## validate_dataset_json: validate each dataset element.
