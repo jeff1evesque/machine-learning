@@ -103,7 +103,7 @@ class Data_New(Session_Base):
 
             # check label consistency, append label(s) to 'feature_labels'
             if not sorted(dataset_converter.get_feature_labels()) == feature_labels): self.response_error.append('The supplied features (independent variables) are inconsistent'))
-            feature_labels.append( sorted(dataset_converter.get_feature_labels()) )
+            feature_labels = sorted(dataset_converter.get_feature_labels())
 
              # build new (relevant) dataset
             self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
