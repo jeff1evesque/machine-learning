@@ -90,7 +90,7 @@ class Data_New(Session_Base):
           try:
             # conversion
             dataset_converter = JSON(val['filedata']['file_temp'])
-            dataset_converted = dataset_converter.csv_to_json()
+            dataset_converted = json.loads(dataset_converter.csv_to_json())
 
             # check label consistency, append label(s) to 'feature_labels'
             if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied features (independent variables) are inconsistent')
@@ -107,7 +107,7 @@ class Data_New(Session_Base):
           try:
             # conversion
             dataset_converter = JSON(val['filedata']['file_temp'])
-            dataset_converted = dataset_converter.xml_to_json()
+            dataset_converted = json.loads(dataset_converter.xml_to_json())
 
             # check label consistency, append label(s) to 'feature_labels'
             if sorted(dataset_converter.get_feature_labels()) == self.feature_labels: self.response_error.append('The supplied features (independent variables) are inconsistent')
