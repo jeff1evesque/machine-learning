@@ -12,6 +12,7 @@ class SQL(object):
   def __init__(self):
     self.db_settings = Database()
     self.list_error  = []
+    self.proceed     = True
 
   ## sql_connect: create connection to MySQL / MariaDB
   def sql_connect(self, database=None):
@@ -23,6 +24,7 @@ class SQL(object):
       self.cursor = self.conn.cursor()
       return { 'status': True, 'error': None, 'id': None }
     except DB.Error, error:
+      self.proceed = False
       self.list_error.append(error)
       return { 'status': False, 'error': self.list_error, 'id': None }
 
@@ -31,32 +33,33 @@ class SQL(object):
   #  @sql_args, is a tuple used for argument substitution with the supplied
   #      'sql_statement'.
   def sql_command(self, sql_statement, sql_type, sql_args=None):
-    try:
-      self.cursor.execute( sql_statement, sql_args )
-      # commit change(s), return lastrowid
-      if sql_type in ['insert', 'delete', 'update']:
-        self.conn.commit()
-        return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
-      # fetch all the rows, return as list of lists.
-      elif sql_type == 'select':
-        result = self.cursor.fetchall()
-        return { 'status': True, 'error': None, 'result': result }
-    except DB.Error, error:
-      self.conn.rollback()
-      self.list_error.append(error)
+    if self.proceed:
+      try:
+        self.cursor.execute( sql_statement, sql_args )
+        # commit change(s), return lastrowid
+        if sql_type in ['insert', 'delete', 'update']:
+          self.conn.commit()
+        # fetch all the rows, return as list of lists.
+        elif sql_type == 'select':
+          result = self.cursor.fetchall()
+      except DB.Error, error:
+        self.conn.rollback()
+        self.list_error.append(error)
+        return { 'status': False, 'error': self.list_error, 'result': None }
 
       if sql_type in ['insert', 'delete', 'update']: return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
-      elif sql_type == 'select': return { 'status': False, 'error': self.list_error }
+      elif sql_type == 'select': return { 'status': False, 'error': self.list_error, 'result': result }
 
   ## sql_disconnect: close connection to MySQL / MariaDB
   def sql_disconnect(self):
-    try:
-      if self.conn:
-        self.conn.close()
-        return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
-    except DB.Error, error:
-      self.list_error.append(error)
-      return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
+    if self.proceed:
+      try:
+        if self.conn:
+          self.conn.close()
+          return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
+      except DB.Error, error:
+        self.list_error.append(error)
+        return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
 
   ## return_error: return appended error message(s)
   def return_error(self):
