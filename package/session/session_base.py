@@ -9,8 +9,8 @@
 import sys, json
 from validator.validator_settings import Validate_Settings
 
-## Class: Session_Base, explicitly inherit 'new-style' class
-class Session_Base(object):
+## Class: Base, explicitly inherit 'new-style' class
+class Base(object):
 
   ## constructor:
   def __init__(self, svm_data):

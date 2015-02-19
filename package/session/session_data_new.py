@@ -15,10 +15,10 @@ from validator.validator_dataset import Validate_Dataset
 from validator.validator_mime import Validate_Mime
 from validator.validator_settings import Validate_Settings
 from converter.converter_json import JSON
-from session.session_base import Session_Base
+from session.session_base import Base
 
-## Class: Data_New, inherit base methods from superclass 'Data_Append'
-class Data_New(Session_Base):
+## Class: Data_New, inherit base methods from superclass 'Base'
+class Data_New(Base):
 
   ## constructor: define class properties using the superclass 'Session_Base'
   #               constructor, along with the constructor in this subclass.
