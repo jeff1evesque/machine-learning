@@ -9,11 +9,9 @@ from database.db_query import SQL
 class Data_Retrieve(object):
 
   ## constructor:
-  def __init__(self, svm_data, cmd, session_type):
+  def __init__(self, svm_data):
     # class variables
     self.svm_data     = svm_data
-    self.svm_cmd      = cmd
-    self.session_type = session_type
     self.list_error   = []
 
   ## db_data_retrieve: retrieve an SVM dataset from corresponding 'EAV data model'
