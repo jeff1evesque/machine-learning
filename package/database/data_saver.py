@@ -138,8 +138,8 @@ class Data_Save(object):
       if self.session_type in ['data_append', 'data_add']:
 
         # check if observation label exists in database
-        sql_statement = 'SELECT dep_variable_label WHERE id_entity=%s'
-        args          = (self.svm_data['id_entity'])
+        sql_statement = 'SELECT %s WHERE id_entity=%s'
+        args          = (self.svm_data['label'], self.svm_data['id_entity'])
         response      = sql.sql_command( sql_statement, 'select', args )
 
         # add labels (new, and append case)
