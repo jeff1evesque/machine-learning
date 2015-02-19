@@ -13,9 +13,10 @@ import json
 from database.data_saver import Data_Save
 from converter.converter_json import JSON
 from session.session_base import Base
+from session.session_base_data import Base_Data
 
 ## Class: Data_New, inherit base methods from superclass 'Base'
-class Data_New(Base):
+class Data_New(Base, Base_Data):
 
   ## constructor: define class properties using the superclass 'Session_Base'
   #               constructor, along with the constructor in this subclass.
