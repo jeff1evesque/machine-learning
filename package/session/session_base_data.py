@@ -11,8 +11,8 @@ from database.data_saver import Data_Save
 from validator.validator_dataset import Validate_Dataset
 from validator.validator_mime import Validate_Mime
 
-## Class: Data_New, explicitly inherit 'new-style' class
-class Data_New(object):
+## Class: Base_Data, explicitly inherit 'new-style' class
+class Base_Data(object):
 
   ## constructor: define class properties using the superclass 'Session_Base'
   #               constructor, along with the constructor in this subclass.
