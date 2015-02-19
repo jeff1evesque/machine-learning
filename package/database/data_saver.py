@@ -135,7 +135,7 @@ class Data_Save(object):
       sql.sql_connect('db_machine_learning')
 
       # add labels (append case)
-      if self.session_type in ['data_append', 'data_add']:
+      if self.session_type in ['data_append', 'data_new']:
 
         # check if observation label exists in database
         sql_statement = 'SELECT %s FROM tbl_observation_label WHERE id_entity=%s'
