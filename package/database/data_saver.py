@@ -90,7 +90,7 @@ class Data_Save(object):
     elif self.svm_cmd == 'save_value':
       sql_statement = '''\
                       CREATE TABLE IF NOT EXISTS tbl_dataset_value (
-                        id_attribute INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         id_entity INT NOT NULL,
                         dep_variable_label VARCHAR (50) NOT NULL,
                         indep_variable_label VARCHAR (50) NOT NULL,
