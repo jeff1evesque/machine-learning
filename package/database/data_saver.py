@@ -138,7 +138,7 @@ class Data_Save(object):
       if self.session_type in ['data_append', 'data_new']:
 
         # check if observation label exists in database
-        sql_statement = 'SELECT %s FROM tbl_observation_label WHERE id_entity=%s'
+        sql_statement = 'SELECT * FROM tbl_observation_label WHERE dep_variable_label=%s AND id_entity=%s'
         args          = (self.svm_data['label'], self.svm_data['id_entity'])
         response      = sql.sql_command( sql_statement, 'select', args )
 
@@ -154,7 +154,8 @@ class Data_Save(object):
 
       # return result
       if response_error: return { 'status': False, 'error': response_error, 'id': response_added['id'] }
-      else: return { 'status': True, 'error': None, 'id': response_added['id'] }
+      #else: return { 'status': True, 'error': None, 'id': response_added['id'] }
+      else: return { 'status': True, 'error': None, 'id': 'yes' }
 
     # insert / update dataset value(s)
     elif self.svm_cmd == 'save_value':
