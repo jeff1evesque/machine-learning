@@ -142,8 +142,8 @@ class Data_Save(object):
         args          = (self.svm_data['label'], self.svm_data['id_entity'])
         response      = sql.sql_command( sql_statement, 'select', args )
 
-        # add labels (new, and append case)
-        if response['result']:
+        # add labels if not exist
+        if not response['result']:
           sql_statement  = 'INSERT INTO tbl_observation_label (id_entity, dep_variable_label) VALUES( %s, %s )'
           args           = (self.svm_data['id_entity'], self.svm_data['label'])
           response_added = sql.sql_command( sql_statement, 'insert', args )
