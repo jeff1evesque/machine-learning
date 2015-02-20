@@ -133,16 +133,20 @@ class Data_Save(object):
     # insert / update feature label(s)
     elif self.svm_cmd == 'save_label':
       sql.sql_connect('db_machine_learning')
-      # delete labels (append case)
-      if self.session_type == 'data_append':
-        sql_statement    = 'DELETE FROM tbl_observation_label WHERE id_entity=%s'
-        args             = (self.svm_data['id_entity'])
-        response_removed = sql.sql_command( sql_statement, 'delete', args )
 
-      # add labels (new, and append case)
-      sql_statement  = 'INSERT INTO tbl_observation_label (id_entity, dep_variable_label) VALUES( %s, %s )'
-      args           = (self.svm_data['id_entity'], self.svm_data['label'])
-      response_added = sql.sql_command( sql_statement, 'insert', args )
+      # add labels (append case)
+      if self.session_type in ['data_append', 'data_new']:
+
+        # check if observation label exists in database
+        sql_statement = 'SELECT * FROM tbl_observation_label WHERE dep_variable_label=%s AND id_entity=%s'
+        args          = (self.svm_data['label'], self.svm_data['id_entity'])
+        response      = sql.sql_command( sql_statement, 'select', args )
+
+        # add labels if not exist
+        if not response['result']:
+          sql_statement  = 'INSERT INTO tbl_observation_label (id_entity, dep_variable_label) VALUES( %s, %s )'
+          args           = (self.svm_data['id_entity'], self.svm_data['label'])
+          response_added = sql.sql_command( sql_statement, 'insert', args )
 
       # retrieve any error(s), disconnect from database
       response_error = sql.return_error()
@@ -150,7 +154,8 @@ class Data_Save(object):
 
       # return result
       if response_error: return { 'status': False, 'error': response_error, 'id': response_added['id'] }
-      else: return { 'status': True, 'error': None, 'id': response_added['id'] }
+      #else: return { 'status': True, 'error': None, 'id': response_added['id'] }
+      else: return { 'status': True, 'error': None, 'id': 'yes' }
 
     # insert / update dataset value(s)
     elif self.svm_cmd == 'save_value':
