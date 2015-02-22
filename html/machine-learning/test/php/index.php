@@ -27,7 +27,7 @@
       <fieldset class='fieldset_session_type'>
         <legend>Session Type</legend>
         <p>Select data upload, or analysis session</p>
-        <select name='svm_session'>
+        <select name='svm_session' autocomplete='off'>
           <option value='' selected='selected'>--Select--</option>
           <option value='data_new'>New Data</option>
           <option value='data_append'>Append Data</option>
