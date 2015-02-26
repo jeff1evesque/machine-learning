@@ -8,6 +8,9 @@
 /build/.sass-cache/
 
 # Ignore and don't commit the following files
+/build/*.pyc
+/build/database/*.pyc
+
 /package/*.pyc
 /package/converter/*.pyc
 /package/database/*.pyc
