@@ -125,6 +125,21 @@ git status
 
 to the latest code-base, within the cloned repository branch, `NEW_BRANCH`.
 
+###Flask
+
+Python's [Flask](http://flask.pocoo.org/), is a microframework based on [Werkzeug](http://werkzeug.pocoo.org/).  Specifically, it is a [web framework](http://en.wikipedia.org/wiki/Web_application_framework), which includes, a development server, integrated support for [unit testing](http://en.wikipedia.org/wiki/Unit_testing), [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer) API, and [Jinja2](http://jinja.pocoo.org/) templating.
+
+This project implements flask, by requiring [`app.py`](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/app.py) to be running:
+
+```
+cd /var/www/html/machine-learning/
+python app.py
+```
+
+**Note:** the [`run()`](http://flask.pocoo.org/docs/0.10/api/#flask.Flask.run) method within `app.py`, runs the local developement server, and has the ability of defining the host, port, debug feature, and several other options. If none of these attributes are passed into the method, the server will default to running `localhost` on port `5000`, with no [`debug`](http://flask.pocoo.org/docs/0.10/quickstart/#debug-mode) features enabled.
+
+**Note:** when running the above `app.py`, ensure that the terminal window is not used for any other processes, while the web application is available to others.
+
 ###Scikit-Learn
 
 [Scikit-Learn](http://scikit-learn.org/stable/) is an open source [machine learning](http://en.wikipedia.org/wiki/Machine_learning) library written in the [Python](http://en.wikipedia.org/wiki/Python_(programming_language)) programming language.  Within this project, *scikit-learn* provides the ability to solve [classification](http://scikit-learn.org/stable/modules/svm.html#classification), and [regression](http://scikit-learn.org/stable/modules/svm.html#regression) problems.
