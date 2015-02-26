@@ -3,7 +3,9 @@
 !/html/machine-learning/
 
 # Ignore and don't commit the following directories
-/html/machine-learning/asset/
+/html/machine-learning/static/js/
+/html/machine-learning/static/css/
+/html/machine-learning/static/img/
 /log/
 /build/.sass-cache/
 
