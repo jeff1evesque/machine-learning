@@ -159,13 +159,13 @@ Generally, [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) is preferred o
 The following command compiles and minifies [javascript](http://en.wikipedia.org/wiki/JavaScript), [css](http://en.wikipedia.org/wiki/Cascading_Style_Sheets), and various [image file formats](http://en.wikipedia.org/wiki/Image_file_formats):
 
 ```
-cd /var/www/bash/
+cd /var/www/build/
 ./bash_loader
 ```
 
 However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/app.py) implements the bash script `bash_loader` via the [`subprocess`](https://docs.python.org/2/library/subprocess.html) module. Specifically, any commands determined by `bash_loader`, is automated by the intrinsic RESTful nature of python flask.
 
-**Note:** some of the used [build](https://github.com/jeff1evesque/machine-learning/tree/master/bash/build/) scripts, implement [inotifywait](http://linux.die.net/man/1/inotifywait), a linux subkernel responsible for monitoring file system changes.
+**Note:** some of the used [build](https://github.com/jeff1evesque/machine-learning/tree/master/build/web/) scripts, implement [inotifywait](http://linux.die.net/man/1/inotifywait), a linux subkernel responsible for monitoring file system changes.
 
 ###jQuery Validation
 
