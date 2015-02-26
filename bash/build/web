@@ -26,7 +26,7 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
     filename="${file%.*}"
 
     # minifiy with 'uglifyjs'
-    uglifyjs -c --output ../html/machine-learning/asset/js/$filename.min.js $file_with_path
+    uglifyjs -c --output ../html/machine-learning/static/js/$filename.min.js $file_with_path
   done
 
 
@@ -39,7 +39,7 @@ inotifywait ../src/scss/ -m -e close_write -e move -e create |
     filename="${file%.*}"
 
     # compile with 'sass'
-    sass $file_with_path ../html/machine-learning/asset/css/$filename.min.css --style compressed
+    sass $file_with_path ../html/machine-learning/static/css/$filename.min.css --style compressed
   done
 
 
@@ -51,5 +51,5 @@ inotifywait ../src/img/ -m -e close_write -e move -e create |
     file="${file_with_path##*/}"
 
     # minify with 'imagemin'
-    imagemin $file_with_path > ../html/machine-learning/asset/img/$file
+    imagemin $file_with_path > ../html/machine-learning/static/img/$file
   done
