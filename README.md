@@ -145,23 +145,9 @@ cd /var/www/bash/
 ./bash_loader
 ```
 
-Alternatively, configuring `/etc/rc.local` allows bash-scripts to be run during [apache2](https://help.ubuntu.com/10.04/serverguide/httpd.html) boot:
+However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learning/blob/master/app.py) implements the bash script `bash_loader` via the [`subprocess`](https://docs.python.org/2/library/subprocess.html) module. Specifically, any commands determined by `bash_loader`, is automated by the intrinsic RESTful nature of python flask.
 
-```
-...
-# run 'bash_loader' at start-up for 'machine-learning' application (edited by JL)
-cd /var/www/bash/ && ./bash_loader > /dev/null 2>&1 &
-
-exit 0
-```
-
-Since some [build](https://github.com/jeff1evesque/machine-learning/tree/master/bash/build/) scripts implement [*inotifywait*](http://linux.die.net/man/1/inotifywait), a linux subkernel that monitors file system changes, the above changes would allow each respective *build* script to be automated.
-
-**Note:** The above configuration may require [rc.local](http://www.linux.com/news/enterprise/systems-management/8116-an-introduction-to-services-runlevels-and-rcd-scripts) to be *(re)started*:
-
-```
-sudo /etc/init.d/rc.local start
-```
+**Note:** some of the used [build](https://github.com/jeff1evesque/machine-learning/tree/master/bash/build/) scripts, implement [inotifywait](http://linux.die.net/man/1/inotifywait), a linux subkernel responsible for monitoring file system changes.
 
 ###jQuery Validation
 
