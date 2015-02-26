@@ -43,6 +43,9 @@ sudo pip install jsonschema
 sudo pip install python-magic
 sudo pip install xmltodict
 sudo pip install matplotlib
+
+# Flask with Requests
+sudo pip install Flask
 sudo pip install requests
 
 # MariaDB with Python Connector:
