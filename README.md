@@ -222,9 +222,9 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 ###Web Interface
 
-This project provides a sample [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/html/machine-learning/test/php/index.php), which supports SVM dataset(s) in csv, or xml format:
+This project provides a sample [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), which supports SVM dataset(s) in csv, or xml format:
 
-- http://localhost/machine-learning/test/php/
+- http://localhost:5000/
 
 Specifically, the sample web-interface consists of an HTML5 form, where users supply necessary training, or analysis information. During the training session, users provide csv, or xml file(s) representing the dataset(s). Upon form submission, user supplied form data is validated on the client-side (i.e. javascript, php), converted to a json object (python), validated on the server-side (python), then stored into corresponding EAV database tables (python, mariadb) when necessary.
 
