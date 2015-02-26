@@ -1,3 +1,4 @@
 [submodule "library/scikit-learn"]
-	path = library/scikit-learn
-	url = https://github.com/scikit-learn/scikit-learn.git
+        path   = library/scikit-learn
+        url    = https://github.com/scikit-learn/scikit-learn.git
+        ignore = dirty

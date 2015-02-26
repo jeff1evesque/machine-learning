@@ -1,5 +1,10 @@
 /**
  * style.scss: contains general stylesheet definitions.
+ *
+ * Note: the following syntax selects all classnames [CLASS],
+ *       except the first one:
+ *
+ *           .[CLASS] ~ .[CLASS] { }
  */
 
 @import 'variable.scss';
@@ -12,13 +17,32 @@
   font-style: italic;
 }
 
-input[name='svm_dataset[]']:not(:first-of-type), input[name='svm_dep_variable[]']:not(#svm_dep_variable), input[name='svm_indep_variable[]']:not(#svm_indep_variable), input[name='svm_indep_variable[]']:not(#svm_indep_variable) {
+.error {
+  font-weight:700;
+  color:#800000;
+}
+
+input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_variable, .svm_indep_variable ~ .svm_indep_variable {
   display:block;
 }
 
+.svm_dataset_xml_add:first-of-type, .svm_dataset_file_add:first-of-type, .svm_dep_variable_add:first-of-type, .svm_indep_variable_add:first-of-type {
+  float:left;
+  clear:none;
+}
+
+label.error {
+  float:right;
+}
+
+.form_note {
+  clear:both;
+  padding-top:20px;
+  margin-bottom:10px;
+}
+
 .ajax_loader {
-  background: url('../img/loading.gif') no-repeat center center transparent;
+  background: url('../../asset/img/loading.gif') no-repeat center center transparent;
   background-size:90px 90px;
   width:100%; height:100%;
 }
-
