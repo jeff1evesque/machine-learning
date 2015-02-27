@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @load_logic.py
+## @load_data.py
 #  This file allocates provided input to respective 'session_xxx_xxx.py' script,
 #      and generates a return object as required.
 import sys, json
