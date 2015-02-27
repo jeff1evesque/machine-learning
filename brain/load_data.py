@@ -80,7 +80,7 @@ class Load_Data(object):
         session.check()
 
   ## load_data_append: redirect input to 'session_data_append.py'
-  def load_data_new(self):
+  def load_data_append(self):
 
     # instantiate class
     session = Data_Append( sys.argv[1] )
