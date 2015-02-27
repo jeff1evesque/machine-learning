@@ -1,3 +1,0 @@
-[submodule "brain/build/scikit-learn"]
-	path = brain/build/scikit-learn
-	url = https://github.com/scikit-learn/scikit-learn/
