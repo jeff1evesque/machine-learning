@@ -1,3 +1,3 @@
-[submodule "machine-learning/build/scikit-learn"]
-	path = machine-learning/build/scikit-learn
-	url = https://github.com/scikit-learn/scikit-learn/
+[submodule "mlearning/build/scikit-learn"]
+	path = mlearning/build/scikit-learn
+	url = https://github.com/scikit-learn/scikit-learn
