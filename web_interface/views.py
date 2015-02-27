@@ -23,5 +23,5 @@ def load_data():
     settings = request.form
 
     # send data, and get response
-    response = Load_Data(settings, files)
+    response = Load_Data(data_formatted)
     return response
