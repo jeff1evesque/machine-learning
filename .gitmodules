@@ -1,0 +1,3 @@
+[submodule "machine-learning/library"]
+	path = machine-learning/library
+	url = https://github.com/scikit-learn/scikit-learn
