@@ -79,7 +79,8 @@ class Load_Data(object):
         session.save_svm_dataset(session_type)
         session.check()
 
-  elif session_type == 'data_append':
+  ## load_data_append: redirect input to 'session_data_append.py'
+  def load_data_new(self):
 
     # instantiate class
     session = Data_Append( sys.argv[1] )
