@@ -9,7 +9,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # create directory if doesn't exist
-mkdir -p ../html/machine-learning/static/js/
+mkdir -p ../web_interface/static/js/
 mkdir -p ../log/build/
 
 # track execution of script
@@ -24,5 +24,5 @@ inotifywait ../src/js/ -m -e close_write -e move -e create |
     filename="${file%.*}"
 
     # minifiy with 'uglifyjs'
-    uglifyjs -c --output ../html/machine-learning/static/js/"$filename".min.js ../src/js/"$file"
+    uglifyjs -c --output ../web_interface/static/js/"$filename".min.js ../src/js/"$file"
   done
