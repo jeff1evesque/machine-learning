@@ -52,8 +52,8 @@ class Load_Data(object):
       error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
       self.list_error.append(error)
 
-  # redirect input to respective 'session_xxx_xxx.py' scripts
-  if session_type == 'data_new':
+  ## load_data_new: redirect input to 'session_data_new.py'
+  def load_data_new(self):
 
     # instantiate class
     session = Data_New( sys.argv[1] )
