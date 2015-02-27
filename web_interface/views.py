@@ -1,7 +1,7 @@
 ## @views.py
 #   This file loads corresponding logic for defined route addresses.
 #       allows the presentation of (asynchronous) content.
-from machine-learning import app
+import app
 
 # Define Route: assign corresponding template, or logic to given path
 @app.route('/')
