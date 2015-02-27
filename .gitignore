@@ -1,6 +1,6 @@
 # Ignore everything in '/', except '/machine-learning/' and few files
 /*
-!/machine-learning/
+!/mlearning/
 !.gitigore
 !.gitmodules
 !README.md
@@ -9,20 +9,20 @@
 !license.md
 
 # Ignore and don't commit the following directories
-/machine-learning/static/js/
-/machine-learning/static/css/
-/machine-learning/static/img/
-/machine-learning/log/
-/machine-learning/build/.sass-cache/
+/mlearning/static/js/
+/mlearning/static/css/
+/mlearning/static/img/
+/mlearning/log/
+/mlearning/build/.sass-cache/
 
 # Ignore and don't commit the following files
 /*.pyc
-/machine-learning/*.pyc
-/machine-learning/build/*.pyc
-/machine-learning/build/database/*.pyc
+/mlearning/*.pyc
+/mlearning/build/*.pyc
+/mlearning/build/database/*.pyc
 
-/machine-learning/converter/*.pyc
-/machine-learning/database/*.pyc
-/machine-learning/schema/*.pyc
-/machine-learning/session/*.pyc
-/machine-learning/validator/*.pyc
+/mlearning/converter/*.pyc
+/mlearning/database/*.pyc
+/mlearning/schema/*.pyc
+/mlearning/session/*.pyc
+/mlearning/validator/*.pyc
