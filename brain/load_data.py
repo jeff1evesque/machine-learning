@@ -108,7 +108,8 @@ class Load_Data(object):
         session.save_svm_dataset(session_type)
         session.check()
 
-  elif session_type == 'model_generate':
+  ## load_model_generate: redirect input to 'session_data_append.py'
+  def load_model_generate(self):
 
     # instantiate class
     session = Model_Generate( sys.argv[1] )
