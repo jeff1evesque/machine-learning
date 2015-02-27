@@ -38,15 +38,14 @@ from session.session_model_use import Model_Use
 class Load_Data(object):
 
   ## constructor:
-  def __init__(self, settings, files=None):
-    self.settings = settings
-    self.files    = files
-    list_error    = []
+  def __init__(self, data):
+    self.data = data
+    list_error = []
 
   ## check_json: determine if input is json decodable
-  def check_json(self, structure):
+  def check_json(self):
     try:
-      session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
+      session_type = json.loads(self.data)['data']['settings']['svm_session']
       return session_type
     except Exception as e:
       error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
@@ -56,7 +55,7 @@ class Load_Data(object):
   def load_data_new(self):
 
     # instantiate class
-    session = Data_New( sys.argv[1] )
+    session = Data_New( self.data )
 
     # implement class methods
     if not session.validate_arg_none():
@@ -64,7 +63,7 @@ class Load_Data(object):
       session.validate_mime_type()
       session.check()
 
-      session_entity = session.save_svm_entity(session_type)
+      session_entity = session.save_svm_entity('data_new')
       if session_entity['status']:
         session_id = session_entity['id']
         session.check()
@@ -73,20 +72,20 @@ class Load_Data(object):
         session.validate_dataset_json()
         session.check()
 
-        session.save_observation_label(session_type, session_id)
+        session.save_observation_label('data_new', session_id)
         session.check()
 
-        session.save_svm_dataset(session_type)
+        session.save_svm_dataset('data_new')
         session.check()
 
   ## load_data_append: redirect input to 'session_data_append.py'
   def load_data_append(self):
 
     # instantiate class
-    session = Data_Append( sys.argv[1] )
+    session = Data_Append( self.data )
 
     # define current session id
-    session_id = json.loads(sys.argv[1])['data']['settings']['svm_session_id']
+    session_id = json.loads(self.data)['data']['settings']['svm_session_id']
 
     # implement class methods
     if not session.validate_arg_none():
@@ -94,7 +93,7 @@ class Load_Data(object):
       session.validate_mime_type()
       session.check()
 
-      session_entity = session.save_svm_entity(session_type, session_id)
+      session_entity = session.save_svm_entity('data_append', session_id)
       if session_entity['status']:
         session.check()
 
@@ -102,20 +101,20 @@ class Load_Data(object):
         session.validate_dataset_json()
         session.check()
 
-        session.save_observation_label(session_type, session_id)
+        session.save_observation_label('data_append', session_id)
         session.check()
 
-        session.save_svm_dataset(session_type)
+        session.save_svm_dataset('data_append')
         session.check()
 
   ## load_model_generate: redirect input to 'session_model_generate.py'
   def load_model_generate(self):
 
     # instantiate class
-    session = Model_Generate( sys.argv[1] )
+    session = Model_Generate( self.data )
 
     # define current session id
-    session_id = json.loads(sys.argv[1])['data']['settings']['svm_session_id']
+    session_id = json.loads(self.data)['data']['settings']['svm_session_id']
 
     # implement class methods
     session.select_dataset(session_id)
@@ -125,16 +124,16 @@ class Load_Data(object):
   def load_model_use(self):
 
     # instantiate class
-    session = Model_Use( sys.argv[1] )
+    session = Model_Use( self.data )
 
     # implement class methods
 
   else:
     error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
-    list_error.append(error)
+    self.list_error.append(error)
 
   # return data
   if len(list_error) > 0:
-    print json.dumps({ 'status': False, 'error': list_error }, sort_keys=True, indent=2, separators=(',', ': '))
+    print json.dumps({ 'status': False, 'error': self.list_error }, sort_keys=True, indent=2, separators=(',', ': '))
   elif len(list_error) == 0:
     print json.dumps({ 'status': True, 'error': None })
