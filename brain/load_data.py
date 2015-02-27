@@ -34,16 +34,23 @@ from session.session_data_new import Data_New
 from session.session_model_generate import Model_Generate
 from session.session_model_use import Model_Use
 
-# local variables
-list_error = []
+## Class: Load_Data, explicitly inherit 'new-style' class
+class Load_Data(object):
 
-if len(sys.argv) > 1:
-  # determine if input is json decodable
-  try:
-    session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
-  except Exception as e:
-    error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
-    list_error.append(error)
+  ## constructor:
+  def __init__(self, settings, files=None):
+    self.settings = settings
+    self.files    = files
+    list_error    = []
+
+  ## checkj_json: determine if input is json decodable
+  def check_json(self, structure):
+    try:
+      session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
+      return session_type
+    except Exception as e:
+      error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
+      self.list_error.append(error)
 
   # redirect input to respective 'session_xxx_xxx.py' scripts
   if session_type == 'data_new':
