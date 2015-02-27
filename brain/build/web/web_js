@@ -1,0 +1,28 @@
+#!/bin/bash
+
+# @web_js: is executed from 'bash_loader', which is why the directory
+#          paths seem shorter in this file (i.e. missing extra '../').
+
+
+# Pre-Pathing: allow 'uglifyjs' command
+PATH="/usr/local/bin:$PATH"
+
+
+# create directory if doesn't exist
+mkdir -p ../html/machine-learning/static/js/
+mkdir -p ../log/build/
+
+# track execution of script
+set -x; exec > ../log/build/bash_web_js 2>&1
+
+
+# watch '../src/js/' subdirectory
+inotifywait ../src/js/ -m -e close_write -e move -e create |
+  # Minify Javascript
+  while read path action file; do
+    # filename (without 'last' extension)
+    filename="${file%.*}"
+
+    # minifiy with 'uglifyjs'
+    uglifyjs -c --output ../html/machine-learning/static/js/"$filename".min.js ../src/js/"$file"
+  done
