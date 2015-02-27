@@ -3,6 +3,7 @@
 !/web_interface/
 !/brain/
 !/build/
+!/src/
 !.gitigore
 !.gitmodules
 !README.md
