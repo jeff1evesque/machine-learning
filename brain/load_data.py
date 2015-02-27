@@ -43,7 +43,7 @@ class Load_Data(object):
     self.files    = files
     list_error    = []
 
-  ## checkj_json: determine if input is json decodable
+  ## check_json: determine if input is json decodable
   def check_json(self, structure):
     try:
       session_type = json.loads(sys.argv[1])['data']['settings']['svm_session']
