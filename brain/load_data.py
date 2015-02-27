@@ -121,7 +121,8 @@ class Load_Data(object):
     session.select_dataset(session_id)
     session.format_dataset()
 
-  elif session_type == 'model_use':
+  ## load_model_use: redirect input to 'session_model_use.py'
+  def load_model_use(self):
 
     # instantiate class
     session = Model_Use( sys.argv[1] )
