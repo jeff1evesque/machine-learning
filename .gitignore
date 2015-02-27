@@ -1,21 +1,28 @@
-# Ignore everything in '/html/', except one subdirectory
-/html/*
-!/html/machine-learning/
+# Ignore everything in '/', except '/machine-learning/' and few files
+/*
+!/machine-learning/
+!.gitigore
+!.gitmodules
+!README.md
+!__init__.py
+!app.py
+!license.md
 
 # Ignore and don't commit the following directories
-/html/machine-learning/static/js/
-/html/machine-learning/static/css/
-/html/machine-learning/static/img/
-/log/
-/build/.sass-cache/
+/machine-learning/static/js/
+/machine-learning/static/css/
+/machine-learning/static/img/
+/machine-learning/log/
+/machine-learning/build/.sass-cache/
 
 # Ignore and don't commit the following files
-/build/*.pyc
-/build/database/*.pyc
+/*.pyc
+/machine-learning/*.pyc
+/machine-learning/build/*.pyc
+/machine-learning/build/database/*.pyc
 
-/package/*.pyc
-/package/converter/*.pyc
-/package/database/*.pyc
-/package/schema/*.pyc
-/package/session/*.pyc
-/package/validator/*.pyc
+/machine-learning/converter/*.pyc
+/machine-learning/database/*.pyc
+/machine-learning/schema/*.pyc
+/machine-learning/session/*.pyc
+/machine-learning/validator/*.pyc
