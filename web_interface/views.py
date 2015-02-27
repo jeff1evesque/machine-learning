@@ -1,7 +1,9 @@
 ## @views.py
-#   This file loads corresponding logic for defined route addresses.
-#       allows the presentation of (asynchronous) content.
-import app
+#   This file contains the corresponding views logic. Specifically, the
+#       the route decorators are defined, which flask to execute triggers
+#       for specific URL's.
+from web_interface import app
+from flask import render_template, request
 
 # Define Route: assign corresponding template, or logic to given path
 @app.route('/')
