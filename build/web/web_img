@@ -12,7 +12,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # create directory if doesn't exist
-mkdir -p ../html/machine-learning/static/img/
+mkdir -p ../web_interface/static/img/
 mkdir -p ../log/build/
 
 # track execution of script
@@ -29,8 +29,8 @@ inotifywait ../src/img/ -m -e close_write -e move -e create |
 
     # minify with 'imagemin'
     if [ "$file_extension" = 'gif' ]; then
-      cp ../src/img/"$file" ../html/machine-learning/static/img/"$filename"
+      cp ../src/img/"$file" ../web_interface/static/img/"$filename"
     else
-      imagemin ../src/img/"$file" > ../html/machine-learning/static/img/"$filename"
+      imagemin ../src/img/"$file" > ../web_interface/static/img/"$filename"
     fi
   done
