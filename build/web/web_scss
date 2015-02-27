@@ -9,7 +9,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # create directory if doesn't exist
-mkdir -p ../html/machine-learning/static/css/
+mkdir -p ../web_interface/static/css/
 mkdir -p ../log/build/
 
 # track execution of script
@@ -24,5 +24,5 @@ inotifywait ../src/scss/ -m -e close_write -e move -e create |
     filename="${file%.*}"
 
     # compile with 'sass'
-    sass ../src/scss/"$file" ../html/machine-learning/static/css/"$filename".min.css --style compressed
+    sass ../src/scss/"$file" ../web_interface/static/css/"$filename".min.css --style compressed
   done
