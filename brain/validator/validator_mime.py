@@ -5,7 +5,7 @@
 #      validated temporary file references(s), along with the corresponding mimetype for
 #      each file upload(s).
 import json, sys, magic
-from converter.converter_md5 import md5_for_file
+from brain.converter.converter_md5 import md5_for_file
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
 class Validate_Mime(object):
