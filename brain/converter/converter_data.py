@@ -7,5 +7,7 @@
 class Convert_Data(object):
 
   ## constructor
-  def __init__(self):
+  def __init__(self, settings, files=None):
     self.list_error = []
+    self.settings   = settings
+    self.files      = files
