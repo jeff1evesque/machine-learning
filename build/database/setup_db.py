@@ -11,9 +11,9 @@ sql = SQL()
 ## CREATE DATABASE
 #
 #  @db_machine_learning
+sql.sql_connect()
 
 ## create 'db_machine_learning
-sql.sql_connect()
 sql_statement = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
 sql.sql_command( sql_statement, 'create' )
 
