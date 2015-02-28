@@ -113,8 +113,9 @@ class Load_Data(object):
       self.list_error.append(error)
       return {'session_type': None, 'error': error}
 
-  # return data
-  if len(list_error) > 0:
-    print json.dumps({ 'status': False, 'error': self.list_error }, sort_keys=True, indent=2, separators=(',', ': '))
-  elif len(list_error) == 0:
-    print json.dumps({ 'status': True, 'error': None })
+  # get_errors: returns a list of current errors associated with class instance
+  def get_errors(self):
+    if len(self.list_error) > 0:
+      return { 'error': self.list_error }
+    else:
+      return { 'error': None }
