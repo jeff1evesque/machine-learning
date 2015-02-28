@@ -3,7 +3,7 @@
 ## @db_query.py
 #  This file contains various generic SQL-related methods.
 import MySQLdb as DB
-from database.db_settings import Database
+from brain.database.db_settings import Database
 
 ## Class: SQL, explicitly inherit 'new-style' class
 class SQL(object):
