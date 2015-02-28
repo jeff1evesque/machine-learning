@@ -49,10 +49,10 @@ class Convert_Data(object):
     else: dataset = None
 
     # build JSON structure
-    structure = {'data': {'settings': formatted_settings, 'dataset': dataset}}
+    data = {'settings': formatted_settings, 'dataset': dataset}
 
     # return new structured data
-    return structure
+    return {'data': data, 'error': None}
 
   ## get_errors: returns all errors corresponding to this class instance
   def get_errors(self):
