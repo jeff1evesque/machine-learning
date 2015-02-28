@@ -22,10 +22,11 @@ class Load_Data(object):
   def check_json(self):
     try:
       session_type = json.loads(self.data)['data']['settings']['svm_session']
-      return session_type
+      return True
     except Exception as e:
       error = 'Error: the provided \'svm_session\' is not json decodable, or not defined.'
       self.list_error.append(error)
+      return False
 
   ## load_data_new: redirect input to 'session_data_new.py'
   def load_data_new(self):
