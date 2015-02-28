@@ -41,6 +41,7 @@ class Convert_Data(object):
     else: dataset = None
 
     # build JSON structure
+    structure = {'data': {'settings': formatted_settings, 'dataset': dataset}}
 
     # return new structured data
 
