@@ -4,10 +4,10 @@
 #  This file allocates provided input to respective 'session_xxx_xxx.py' script,
 #      and generates a return object as required.
 import sys, json
-from session.session_data_append import Data_Append
-from session.session_data_new import Data_New
-from session.session_model_generate import Model_Generate
-from session.session_model_use import Model_Use
+from brain.session.session_data_append import Data_Append
+from brain.session.session_data_new import Data_New
+from brain.session.session_model_generate import Model_Generate
+from brain.session.session_model_use import Model_Use
 
 ## Class: Load_Data, explicitly inherit 'new-style' class
 class Load_Data(object):

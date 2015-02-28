@@ -7,9 +7,9 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import json
-from database.data_saver import Data_Save
-from validator.validator_dataset import Validate_Dataset
-from validator.validator_mime import Validate_Mime
+from brain.database.data_saver import Data_Save
+from brain.validator.validator_dataset import Validate_Dataset
+from brain.validator.validator_mime import Validate_Mime
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 class Base_Data(object):

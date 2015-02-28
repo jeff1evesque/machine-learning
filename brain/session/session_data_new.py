@@ -10,10 +10,10 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references
 import json
-from database.data_saver import Data_Save
-from converter.converter_json import JSON
-from session.session_base import Base
-from session.session_base_data import Base_Data
+from brain.database.data_saver import Data_Save
+from brain.converter.converter_json import JSON
+from brain.session.session_base import Base
+from brain.session.session_base_data import Base_Data
 
 ## Class: Data_New, inherit base methods from superclass 'Base', 'Base_Data'
 class Data_New(Base, Base_Data):

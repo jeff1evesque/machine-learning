@@ -4,7 +4,7 @@
 #  This file saves SVM related data into corresponding 'EAV data model' database
 #      table(s), from the 'db_machine_learning' database.
 from datetime import datetime
-from database.db_query import SQL
+from brain.database.db_query import SQL
 
 ## Class: Data_Save, explicitly inherit 'new-style' class
 class Data_Save(object):
