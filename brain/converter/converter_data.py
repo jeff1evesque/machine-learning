@@ -23,7 +23,14 @@ class Convert_Data(object):
 
   ## format: restructure input data
   def format(self):
+
+    # local variables
+    formatted_data = {}
+
     # restructure settings
+    for key, value in self.settings.items():
+      formatted_data[key] = value
+    return 'print'
 
     # restructure files
 
