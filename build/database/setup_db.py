@@ -18,8 +18,8 @@ sql_statement = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET
 sql.sql_command( sql_statement, 'create' )
 
 # retrieve any error(s), disconnect from database
-if self.sql.return_error(): print self.sql.return_error()
-self.sql.sql_disconnect()
+if sql.return_error(): print sql.return_error()
+sql.sql_disconnect()
 
 ## CREATE DATABASE TABLES
 #
@@ -62,8 +62,8 @@ sql_statement = '''\
                   CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
                 );
                 '''
-sql.sql_command( self.sql_statement, 'create' )
+sql.sql_command( sql_statement, 'create' )
 
 # retrieve any error(s), disconnect from database
-if self.sql.return_error(): print self.sql.return_error()
-self.sql.sql_disconnect()
+if sql.return_error(): print sql.return_error()
+sql.sql_disconnect()
