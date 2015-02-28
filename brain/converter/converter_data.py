@@ -26,12 +26,15 @@ class Convert_Data(object):
 
     # local variables
     formatted_settings = {}
+    formatted_files    = {}
 
     # restructure settings
     for key, value in self.settings.items():
       formatted_settings[key] = value
 
     # restructure files
+    for file in self.files.getlist('svm_dataset[]'):
+      formatted_files[file.filename] = file
 
     # return new structured data
 
