@@ -114,7 +114,7 @@ class Load_Data(object):
       return {'session_type': None, 'error': error}
 
   # get_errors: returns a list of current errors associated with class instance
-  def get_errors(self)
+  def get_errors(self):
     if len(self.list_error) > 0:
       return { 'error': self.list_error }
     else:
