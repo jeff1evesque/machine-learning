@@ -38,6 +38,8 @@ def load_data():
       elif session_type == 'model_use': response = loader.load_model_use()
       else: response = loader.get_errors()
 
+    else: response = loader.get_errors()
+
     # return response
     return response
 
