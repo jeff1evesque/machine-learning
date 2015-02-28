@@ -152,8 +152,7 @@ class Data_Save(object):
 
       # return result
       if response_error: return { 'status': False, 'error': response_error, 'id': response_added['id'] }
-      #else: return { 'status': True, 'error': None, 'id': response_added['id'] }
-      else: return { 'status': True, 'error': None, 'id': 'yes' }
+      else: return { 'status': True, 'error': None, 'id': response_added['id'] }
 
     # insert / update dataset value(s)
     elif self.svm_cmd == 'save_value':
