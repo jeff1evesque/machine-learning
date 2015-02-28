@@ -11,8 +11,9 @@ class Data_Retrieve(object):
   ## constructor:
   def __init__(self, svm_data):
     # class variables
-    self.svm_data     = svm_data
-    self.list_error   = []
+    self.svm_data   = svm_data
+    self.list_error = []
+    self.sql        = SQL()
 
   ## db_data_retrieve: retrieve an SVM dataset from corresponding 'EAV data model'
   #                    database table(s).
@@ -23,18 +24,15 @@ class Data_Retrieve(object):
   #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s' 
   #      is used for argument substitution.
   def db_data_retrieve(self, id_entity):
-    # local variables
-    sql = SQL()
-
     # select dataset
-    sql.sql_connect('db_machine_learning')
+    self.sql.sql_connect('db_machine_learning')
     sql_statement = 'SELECT dep_variable_label, indep_variable_label, indep_variable_value FROM tbl_dataset_value where id_entity=%s'
     args          = ( id_entity )
-    response      = sql.sql_command( sql_statement, 'select', args )
+    response      = self.sql.sql_command( sql_statement, 'select', args )
 
     # retrieve any error(s), disconnect from database
     response_error = sql.return_error()
-    sql.sql_disconnect()
+    self.sql.sql_disconnect()
 
     # return result
     if response_error: return { 'status': False, 'error': response_error, 'result': None }
