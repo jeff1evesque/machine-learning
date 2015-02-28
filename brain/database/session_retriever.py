@@ -15,13 +15,13 @@ class Retrieve_Session(object):
 
   ## get_all_sessions: get all sessions from 'tbl_dataset_entity'
   def get_all_sessions(self):
-    sql.sql_connect('db_machine_learning')
-    sql_statement  = ' $sql = 'SELECT id_entity, title FROM tbl_dataset_entity'
-    response       = sql.sql_command( sql_statement, 'select' )
+    self.sql.sql_connect('db_machine_learning')
+    sql_statement  = 'SELECT id_entity, title FROM tbl_dataset_entity'
+    response       = self.sql.sql_command( sql_statement, 'select' )
 
     # retrieve any error(s), disconnect from database
-    response_error = sql.return_error()
-    sql.sql_disconnect()
+    response_error = self.sql.return_error()
+    self.sql.sql_disconnect()
 
     # return result
     if response_error: return { 'result': None, 'error': response_error }
