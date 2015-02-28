@@ -30,7 +30,6 @@ class Convert_Data(object):
     # restructure settings
     for key, value in self.settings.items():
       formatted_settings[key] = value
-    return 'print'
 
     # restructure files
 
