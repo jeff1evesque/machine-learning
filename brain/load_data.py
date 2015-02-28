@@ -14,8 +14,9 @@ class Load_Data(object):
 
   ## constructor:
   def __init__(self, data):
-    self.data = data
-    list_error = []
+    self.data         = data
+    self.session_list = ['data_new', 'data_append', 'model_generate', 'model_use']
+    self.list_error   = []
 
   ## check_json: determine if input is json decodable
   def check_json(self):
@@ -103,12 +104,18 @@ class Load_Data(object):
 
     # implement class methods
 
-  else:
-    error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
-    self.list_error.append(error)
+  ## get_session_type: returns the current session type.
+  def get_session_type(self):
+    session_type = json.loads( self.data )['data']['settings']['svm_session']
+    if session_type in session_list: return {'session_type': session_type, 'error': None}
+    else:
+      error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
+      self.list_error.append(error)
+      return {'session_type': None, 'error': error}
 
-  # return data
-  if len(list_error) > 0:
-    print json.dumps({ 'status': False, 'error': self.list_error }, sort_keys=True, indent=2, separators=(',', ': '))
-  elif len(list_error) == 0:
-    print json.dumps({ 'status': True, 'error': None })
+  # get_errors: returns a list of current errors associated with class instance
+  def get_errors(self):
+    if len(self.list_error) > 0:
+      return { 'error': self.list_error }
+    else:
+      return { 'error': None }
