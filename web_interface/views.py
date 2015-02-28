@@ -27,7 +27,7 @@ def load_data():
     sender         = Convert_Data(settings, files)
     data_formatted = sender.format()
 
-    # send data, and get response
+    # send data to brain
     loader = Load_Data(data_formatted)
     if loader.check_json():
       session_type = loader.get_session_type()
@@ -38,6 +38,7 @@ def load_data():
       elif session_type == 'model_use': response = loader.load_model_use()
       else: response = loader.get_errors()
 
+    # return response
     return response
 
 @app.route('/retrieve-session/', methods=['POST', 'GET'])
