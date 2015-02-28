@@ -5,7 +5,7 @@
 #      the overall application.
 from brain.database.db_query import SQL
 
-# local variables
+## local variables
 sql = SQL()
 
 ## CREATE DATABASE
