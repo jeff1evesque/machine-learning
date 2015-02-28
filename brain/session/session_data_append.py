@@ -10,8 +10,8 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import json
-from session.session_data_new import Data_New
-from database.data_saver import Data_Save
+from brain.session.session_data_new import Data_New
+from brain.database.data_saver import Data_Save
 
 ## Class: Data_Append, inherit base methods from superclass 'Data_New'
 class Data_Append(Data_New):
