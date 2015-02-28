@@ -44,6 +44,7 @@ class Convert_Data(object):
     structure = {'data': {'settings': formatted_settings, 'dataset': dataset}}
 
     # return new structured data
+    return structure
 
   ## get_errors: returns all errors corresponding to this class instance
   def get_errors(self):
