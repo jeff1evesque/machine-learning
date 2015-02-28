@@ -1,16 +1,33 @@
-# Ignore everything in '/html/', except one subdirectory
-/html/*
-!/html/machine-learning/
+# Ignore project root (except exclamated files, and directories)
+/*
+!/web_interface/
+!/brain/
+!/build/
+!/src/
+!.gitigore
+!.gitmodules
+!README.md
+!__init__.py
+!app.py
+!license.md
 
 # Ignore and don't commit the following directories
-/html/machine-learning/asset/
-/log/
-/bash/.sass-cache/
+/web_interface/static/js/
+/web_interface/static/css/
+/web_interface/static/img/
 
 # Ignore and don't commit the following files
-/package/*.pyc
-/package/converter/*.pyc
-/package/database/*.pyc
-/package/schema/*.pyc
-/package/session/*.pyc
-/package/validator/*.pyc
+/*.pyc
+
+/build/*.pyc
+/build/database/*.pyc
+/build/.sass-cache/
+
+/brain/*.pyc
+/brain/converter/*.pyc
+/brain/database/*.pyc
+/brain/schema/*.pyc
+/brain/session/*.pyc
+/brain/validator/*.pyc
+
+/web_interface/*.pyc

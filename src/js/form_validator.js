@@ -103,10 +103,6 @@
           required: true,
           textOnly: true
         },
-        svm_dataset {
-          required: true,
-          checkMime: true,
-        },
       },
       messages: {
         svm_session: 'Not acceptable values',
@@ -115,7 +111,6 @@
         svm_session_id: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
         'svm_indep_variable[]': 'Must be nonempty string',
-        svm_dataset: 'Not acceptable file type',
       },
     });
   });
