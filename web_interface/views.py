@@ -30,3 +30,14 @@ def load_data():
     # send data, and get response
     response = Load_Data(data_formatted)
     return response
+
+@app.route('/retrieve-session/', methods=['POST', 'GET'])
+def retrieve_session():
+  if request.method == 'POST':
+    # get all sessions
+    session      = Retrieve_Session()
+    session_list = session.get_all_sessions()
+
+    # return all sessions
+    if session_list['result']: return session_list['result']
+    else: return session_list['error']
