@@ -37,6 +37,9 @@ class Convert_Data(object):
       for file in self.files.getlist('svm_dataset[]'):
         formatted_files[file.filename] = file
 
+      dataset = {'upload_quantity': len(self.files.getlist('svm_dataset[]')), 'file_upload': formatted_files}
+    else: dataset = None
+
     # build JSON structure
 
     # return new structured data
