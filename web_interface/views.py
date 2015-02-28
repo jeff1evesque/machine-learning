@@ -5,6 +5,7 @@
 from web_interface import app
 from flask import render_template, request
 from brain.load_data import Load_Data
+from web_interface.logic.converter_data import Convert_Data
 
 # Define Route: assign corresponding template, or logic to given path
 @app.route('/')
@@ -22,6 +23,10 @@ def load_data():
       files = request.files
     settings = request.form
 
+    # format post data
+    sender         = Convert_Data(settings, files)
+    data_formatted = sender.format()
+
     # send data, and get response
-    response = Load_Data(settings, files)
+    response = Load_Data(data_formatted)
     return response
