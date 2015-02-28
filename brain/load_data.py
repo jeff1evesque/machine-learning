@@ -16,7 +16,7 @@ class Load_Data(object):
   def __init__(self, data):
     self.data         = data
     self.session_list = ['data_new', 'data_append', 'model_generate', 'model_use']
-    list_error        = []
+    self.list_error   = []
 
   ## check_json: determine if input is json decodable
   def check_json(self):
