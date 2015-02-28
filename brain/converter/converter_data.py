@@ -37,6 +37,8 @@ class Convert_Data(object):
       for file in self.files.getlist('svm_dataset[]'):
         formatted_files[file.filename] = file
 
+    # build JSON structure
+
     # return new structured data
 
   ## get_errors: returns all errors corresponding to this class instance
