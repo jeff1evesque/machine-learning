@@ -23,6 +23,11 @@ class Convert_Data(object):
 
   ## format: restructure input data
   def format(self):
+    # restructure settings
+
+    # restructure files
+
+    # return new structured data
 
   ## get_errors: returns all errors corresponding to this class instance
   def get_errors(self):
