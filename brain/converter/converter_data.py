@@ -32,9 +32,10 @@ class Convert_Data(object):
     for key, value in self.settings.items():
       formatted_settings[key] = value
 
-    # restructure files
-    for file in self.files.getlist('svm_dataset[]'):
-      formatted_files[file.filename] = file
+    # restructure files: not all sessions involve files
+    if self.files:
+      for file in self.files.getlist('svm_dataset[]'):
+        formatted_files[file.filename] = file
 
     # return new structured data
 
