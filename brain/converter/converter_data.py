@@ -35,8 +35,8 @@ class Convert_Data(object):
 
         dataset = {'upload_quantity': len(self.files.getlist('svm_dataset[]')), 'file_upload': formatted_files}
       except Exception as error:
-      self.list_error.append( error )
-      return {'data': None, 'error': self.list_error}
+        self.list_error.append( error )
+        return {'data': None, 'error': self.list_error}
     else: dataset = None
 
     # build JSON structure
