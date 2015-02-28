@@ -25,11 +25,11 @@ class Convert_Data(object):
   def format(self):
 
     # local variables
-    formatted_data = {}
+    formatted_settings = {}
 
     # restructure settings
     for key, value in self.settings.items():
-      formatted_data[key] = value
+      formatted_settings[key] = value
     return 'print'
 
     # restructure files
