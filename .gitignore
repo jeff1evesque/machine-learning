@@ -1,4 +1,4 @@
-# Ignore everything in '/', except '/machine-learning/' and few files
+# Ignore project root (except exclamated files, and directories)
 /*
 !/web_interface/
 !/brain/
