@@ -3,7 +3,7 @@
 ## @validator_dataset.py
 #  This script performs validation on the svm data.
 import json, sys
-from brain.jsonschema import validate
+from jsonschema import validate
 from brain.schema.jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
 
 ## Class: Validate_Dataset, explicitly inherit 'new-style' class
