@@ -10,16 +10,7 @@ class Convert_Data(object):
   def __init__(self, settings, files=None):
     self.settings   = settings
     self.files      = files
-
-    self.flag_validator = True
-    self.list_error     = []
-
-    self.list_model_type   = ['classification', 'regression']
-    self.list_dataset_type = ['file_upload', 'xml_url']
-    self.list_session_type = ['data_new', 'data_append', 'model_generate', 'model_use']
-
-    self.list_upload   = []
-    self.list_response = []
+    self.list_error = []
 
   ## format: restructure input data
   def format(self):
