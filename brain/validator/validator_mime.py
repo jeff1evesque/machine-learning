@@ -5,7 +5,7 @@
 #      validated temporary file references(s), along with the corresponding mimetype for
 #      each file upload(s).
 import sys, magic
-from brain.converter.converter_md5 import md5_for_file
+from brain.converter.converter_md5 import md5_for_object
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
 class Validate_Mime(object):
@@ -35,22 +35,6 @@ class Validate_Mime(object):
       for index, filedata in enumerate(dataset['file_upload']):
         try:
           filehash = md5_for_object(filedata['file'])
-          # add 'hashed' value of file reference(s) to a list
-          if filehash not in unique_hash:
-            unique_hash.add(filehash)
-            for idx, file in enumerate(filedata['file']):
-              mimetype = magic.from_file( file, mime=True )
-
-              # validate mimetype
-              if ( mimetype not in acceptable_type ):
-                msg =  '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
-                msg += '\n       ' + ', '.join(acceptable_type)
-                list_error.append(msg)
-
-              # keep non-duplicated file uploads
-              else:
-                data = {'file_name': filedata['filename'][idx], 'file': filedata['file'][idx]}
-                dataset_keep.append( {'type': mimetype, 'filedata': data} )
 
         except:
           msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
