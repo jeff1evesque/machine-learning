@@ -32,7 +32,7 @@ class Validate_Mime(object):
 
     if (dataset.get('file_upload', None)):
 
-      for index, filedata in enumerate(json_data['file_upload']):
+      for index, filedata in enumerate(dataset['file_upload']):
         try:
           filehash = md5_for_file(filedata['file_temp'][0])
           # add 'hashed' value of file reference(s) to a list
@@ -67,4 +67,4 @@ class Validate_Mime(object):
     if len(list_error) > 0:
       return { 'status': False, 'error': list_error, 'dataset': None }
     else:
-      return { 'status': True, 'error': None, 'dataset': json_data }
+      return { 'status': True, 'error': None, 'dataset': dataset }
