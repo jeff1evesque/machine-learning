@@ -24,6 +24,7 @@ class Validate_Settings(object):
   def data_validation(self):
     # local variables
     list_error = []
+    svm_settings = self.svm_data['data']['settings']
 
     # validation on 'data_new' session
     if self.svm_session == 'data_new':
@@ -33,8 +34,8 @@ class Validate_Settings(object):
         list_error.append(str(error))
 
       # validation on 'xml file(s)'
-      if ( json_data.get('svm_dataset_type', None) == 'upload file' and json_data.get('svm_dataset', None) ):
-        for index, xmldata in enumerate(json_data['svm_dataset']):
+      if ( svm_settings.get('svm_dataset_type', None) == 'upload file' and svm_settings.get('svm_dataset', None) ):
+        for index, xmldata in enumerate(svm_settings['svm_dataset']):
           print xmldata
 
     # validation on 'data_append' session
