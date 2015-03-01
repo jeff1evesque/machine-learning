@@ -31,7 +31,7 @@ class Convert_Data(object):
     if self.files:
       try:
         for file in self.files.getlist('svm_dataset[]'):
-          formatted_files.append( {file.filename: file} )
+          formatted_files.append( {'filename': file.filename, 'file': file} )
 
         dataset = {'upload_quantity': len(self.files.getlist('svm_dataset[]')), 'file_upload': formatted_files}
       except Exception as error:
