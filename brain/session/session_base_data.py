@@ -6,7 +6,6 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-import json
 from brain.database.data_saver import Data_Save
 from brain.validator.validator_dataset import Validate_Dataset
 from brain.validator.validator_mime import Validate_Mime
@@ -37,7 +36,7 @@ class Base_Data(object):
   ## save_svm_entity: save the current entity into the database, then return
   #                   the corresponding entity id.
   def save_svm_entity(self, session_type):
-    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': None}
+    svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': None}
     db_save    = Data_Save( svm_entity, 'save_entity', session_type )
 
     # save dataset element
