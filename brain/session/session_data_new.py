@@ -63,7 +63,7 @@ class Data_New(Base, Base_Data):
     index_count    = 0
 
     try:
-      self.response_mime_validation['json_data']['file_upload']
+      self.response_mime_validation['dataset']['file_upload']
       flag_convert = True
     except Exception as error:
       self.response_error.append( error )
@@ -73,7 +73,7 @@ class Data_New(Base, Base_Data):
       self.json_dataset = []
       svm_property      = self.svm_data
 
-      for val in self.response_mime_validation['json_data']['file_upload']:
+      for val in self.response_mime_validation['dataset']['file_upload']:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
