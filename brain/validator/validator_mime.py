@@ -65,6 +65,6 @@ class Validate_Mime(object):
 
     # return error
     if len(list_error) > 0:
-      return { 'status': False, 'error': list_error, 'dataset': None }
+      return { 'error': list_error, 'dataset': None }
     else:
-      return { 'status': True, 'error': None, 'dataset': dataset }
+      return { 'error': None, 'dataset': dataset }
