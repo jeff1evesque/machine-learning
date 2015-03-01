@@ -32,7 +32,6 @@ class Validate_Mime(object):
 
     if (dataset.get('file_upload', None)):
 
-      print dataset
       for index, filedata in enumerate(dataset['file_upload']):
         try:
           filehash = md5_for_object(filedata['file'])
@@ -43,7 +42,7 @@ class Validate_Mime(object):
 
             # validate mimetype
             if ( mimetype not in acceptable_type ):
-              msg = '''Problem: Uploaded file, \'''' + filedata['file_temp'][0] + '''\', must be one of the formats:'''
+              msg = '''Problem: Uploaded file, \'''' + filedata['filename'] + '''\', must be one of the formats:'''
               msg += '\n ' + ', '.join(acceptable_type)
               list_error.append(msg)
 
