@@ -9,7 +9,6 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references
-import json
 from brain.database.data_saver import Data_Save
 from brain.converter.converter_json import JSON
 from brain.session.session_base import Base
@@ -80,7 +79,7 @@ class Data_New(Base, Base_Data):
           try:
             # conversion
             dataset_converter = JSON(val['file'])
-            dataset_converted = json.loads(dataset_converter.csv_to_json())
+            dataset_converted = dataset_converter.csv_to_json()
 
             # check label consistency, assign labels
             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
@@ -97,7 +96,7 @@ class Data_New(Base, Base_Data):
           try:
             # conversion
             dataset_converter = JSON(val['file'])
-            dataset_converted = json.loads(dataset_converter.xml_to_json())
+            dataset_converted = dataset_converter.xml_to_json()
 
             # check label consistency, assign labels
             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
