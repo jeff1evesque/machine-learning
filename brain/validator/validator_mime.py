@@ -24,7 +24,7 @@ class Validate_Mime(object):
     # local variables
     list_error       = []
 
-    json_data        = json.loads(json_file_obj)['data']['dataset']
+    json_data        = json_file_obj['data']['dataset']
     acceptable_type  = ['text/plain', 'text/csv', 'text/xml', 'application/xml']
 
     unique_hash      = set()
