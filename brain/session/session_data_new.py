@@ -9,7 +9,6 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references
-import json
 from brain.database.data_saver import Data_Save
 from brain.converter.converter_json import JSON
 from brain.session.session_base import Base
@@ -63,23 +62,24 @@ class Data_New(Base, Base_Data):
     index_count    = 0
 
     try:
-      self.response_mime_validation['json_data']['file_upload']
+      self.response_mime_validation['dataset']['file_upload']
       flag_convert = True
     except Exception as error:
       self.response_error.append( error )
+      print error
       return False
 
     if ( flag_convert ):
       self.json_dataset = []
       svm_property      = self.svm_data
 
-      for val in self.response_mime_validation['json_data']['file_upload']:
+      for val in self.response_mime_validation['dataset']['file_upload']:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
           try:
             # conversion
-            dataset_converter = JSON(val['filedata']['file_temp'])
-            dataset_converted = json.loads(dataset_converter.csv_to_json())
+            dataset_converter = JSON(val['file'])
+            dataset_converted = dataset_converter.csv_to_json()
 
             # check label consistency, assign labels
             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
@@ -95,8 +95,8 @@ class Data_New(Base, Base_Data):
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
             # conversion
-            dataset_converter = JSON(val['filedata']['file_temp'])
-            dataset_converted = json.loads(dataset_converter.xml_to_json())
+            dataset_converter = JSON(val['file'])
+            dataset_converted = dataset_converter.xml_to_json()
 
             # check label consistency, assign labels
             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
