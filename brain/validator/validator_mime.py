@@ -34,11 +34,11 @@ class Validate_Mime(object):
 
       for index, filedata in enumerate(dataset['file_upload']):
         try:
-          filehash = md5_for_file(filedata['file_temp'][0])
+          filehash = md5_for_file(filedata['file'].read())
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
-            for idx, file in enumerate(filedata['file_temp']):
+            for idx, file in enumerate(filedata['file']):
               mimetype = magic.from_file( file, mime=True )
 
               # validate mimetype
@@ -49,7 +49,7 @@ class Validate_Mime(object):
 
               # keep non-duplicated file uploads
               else:
-                data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
+                data = {'file_name': filedata['filename'][idx], 'file': filedata['file'][idx]}
                 dataset_keep.append( {'type': mimetype, 'filedata': data} )
 
         except:
