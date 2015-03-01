@@ -17,7 +17,7 @@ class Convert_Data(object):
 
     # local variables
     formatted_settings = {}
-    formatted_files    = {}
+    formatted_files    = []
 
     # restructure settings
     try:
@@ -31,7 +31,7 @@ class Convert_Data(object):
     if self.files:
       try:
         for file in self.files.getlist('svm_dataset[]'):
-          formatted_files[file.filename] = file
+          formatted_files.append( {file.filename: file} )
 
         dataset = {'upload_quantity': len(self.files.getlist('svm_dataset[]')), 'file_upload': formatted_files}
       except Exception as error:
