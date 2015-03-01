@@ -52,7 +52,7 @@ class Load_Data(object):
     session = Data_Append( self.data )
 
     # define current session id
-    session_id = json.loads(self.data)['data']['settings']['svm_session_id']
+    session_id = self.data['data']['settings']['svm_session_id']
 
     # implement class methods
     if not session.validate_arg_none():
@@ -81,7 +81,7 @@ class Load_Data(object):
     session = Model_Generate( self.data )
 
     # define current session id
-    session_id = json.loads(self.data)['data']['settings']['svm_session_id']
+    session_id = self.data['data']['settings']['svm_session_id']
 
     # implement class methods
     session.select_dataset(session_id)
@@ -97,7 +97,7 @@ class Load_Data(object):
 
   ## get_session_type: returns the current session type.
   def get_session_type(self):
-    session_type = json.loads( self.data )['data']['settings']['svm_session']
+    session_type = self.data['data']['settings']['svm_session']
     if session_type in session_list: return {'session_type': session_type, 'error': None}
     else:
       error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
