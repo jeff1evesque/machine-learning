@@ -6,7 +6,7 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-import sys, json
+import sys
 from brain.validator.validator_settings import Validate_Settings
 
 ## Class: Base, explicitly inherit 'new-style' class
@@ -15,7 +15,7 @@ class Base(object):
   ## constructor:
   def __init__(self, svm_data):
     self.svm_data       = svm_data
-    self.svm_session    = json.loads(self.svm_data)['data']['settings']['svm_session']
+    self.svm_session    = self.svm_data['data']['settings']['svm_session']
     self.response_error = []
 
   ## validate_arg_none: check if class variable 'svm_data' is defined.
