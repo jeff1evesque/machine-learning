@@ -48,8 +48,7 @@ class Validate_Mime(object):
 
             # keep non-duplicated file uploads
             else:
-              data = {'file_name': filedata['filename'][idx], 'file': filedata['file'][idx]}
-              dataset_keep.append( {'type': mimetype, 'filedata': data} )
+              dataset_keep.append( {'type': mimetype, 'file': filedata['file'], 'filename': filedata['filename']} )
         except:
           msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
           list_error.append(msg)
