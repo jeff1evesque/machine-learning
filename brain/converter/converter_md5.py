@@ -28,7 +28,7 @@ from collections import defaultdict
 #      'hexdigest' algorithm.
 #
 #  Note: block size directly depends on the block size of the filesystem.
-def md5_for_file(item, block_size=256*128, hr=False):
+def md5_for_object(item, block_size=256*128, hr=False):
   md5 = hashlib.md5()
   # use lambda anonymous function to iterate given file
   for chunk in iter(lambda: item.read(block_size), b''):
