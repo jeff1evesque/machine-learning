@@ -79,7 +79,7 @@ class Data_New(Base, Base_Data):
         if val['type'] in ('text/plain', 'text/csv'):
           try:
             # conversion
-            dataset_converter = JSON(val['filedata']['file_temp'])
+            dataset_converter = JSON(val['file'])
             dataset_converted = json.loads(dataset_converter.csv_to_json())
 
             # check label consistency, assign labels
@@ -96,7 +96,7 @@ class Data_New(Base, Base_Data):
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
             # conversion
-            dataset_converter = JSON(val['filedata']['file_temp'])
+            dataset_converter = JSON(val['file'])
             dataset_converted = json.loads(dataset_converter.xml_to_json())
 
             # check label consistency, assign labels
