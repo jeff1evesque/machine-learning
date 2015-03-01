@@ -34,7 +34,7 @@ class Validate_Mime(object):
 
       for index, filedata in enumerate(dataset['file_upload']):
         try:
-          filehash = md5_for_file(filedata['file'])
+          filehash = md5_for_file(filedata['file'].read())
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
