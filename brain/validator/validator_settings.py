@@ -2,7 +2,7 @@
 
 ## @validator_settings.py
 #  This script performs validation on session settings. 
-import json, sys
+import sys
 from jsonschema import validate
 from brain.schema.jsonschema_definition import jsonschema_data_new, jsonschema_data_append, jsonschema_model_generate, jsonschema_model_use
 
