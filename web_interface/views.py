@@ -30,7 +30,7 @@ def load_data():
 
     # send data to brain
     loader = Load_Data(data_formatted)
-    if loader.check_json():
+    if loader.get_session_type:
       session_type = loader.get_session_type()
 
       if session_type == 'data_new': response = loader.load_data_new()
