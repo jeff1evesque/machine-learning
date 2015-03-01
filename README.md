@@ -40,7 +40,6 @@ sudo apt-get install xorg gnome-core gnome-system-tools gnome-app-install
 sudo apt-get install inotify-tools
 sudo apt-get install python-pip
 sudo pip install jsonschema
-sudo pip install python-magic
 sudo pip install xmltodict
 sudo pip install matplotlib
 
