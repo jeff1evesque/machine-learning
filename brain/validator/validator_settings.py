@@ -23,20 +23,10 @@ class Validate_Settings(object):
   #        'validator_dataset.py'.
   def data_validation(self):
     # local variables
-    flag_json  = False
     list_error = []
 
-    # determine if input data is a JSON object
-    try:
-      json_data = json.loads(self.svm_data)['data']['settings']
-      flag_json = True
-    except ValueError, e:
-      error     = 'The SVM settings have not been properly configured'
-      list_error.append(error)
-      flag_json = False
-
     # validation on 'data_new' session
-    if self.svm_session == 'data_new' and flag_json:
+    if self.svm_session == 'data_new':
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_data_new())
       except Exception, error:
@@ -48,7 +38,7 @@ class Validate_Settings(object):
           print xmldata
 
     # validation on 'data_append' session
-    if self.svm_session == 'data_append' and flag_json:
+    if self.svm_session == 'data_append':
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_data_append())
       except Exception, error:
@@ -57,7 +47,7 @@ class Validate_Settings(object):
     # validation on 'model_generate' session
 
     # validation on 'model_use' session
-    elif self.svm_session == 'model_use' and flag_json:
+    elif self.svm_session == 'model_use':
       try:
         validate(json.loads(self.svm_data)['data']['settings'], jsonschema_model_use())
       except Exception, error:
