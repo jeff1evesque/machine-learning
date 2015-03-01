@@ -30,8 +30,8 @@ def load_data():
 
     # send data to brain
     loader = Load_Data(data_formatted)
-    if loader.get_session_type:
-      session_type = loader.get_session_type()
+    if loader.get_session_type()['session_type']:
+      session_type = loader.get_session_type()['session_type']
 
       if session_type == 'data_new': response = loader.load_data_new()
       elif session_type == 'data_append': response = loader.load_data_append()
