@@ -107,6 +107,6 @@ class Load_Data(object):
   # get_errors: returns a list of current errors associated with class instance
   def get_errors(self):
     if len(self.list_error) > 0:
-      return { 'error': self.list_error }
+      return self.list_error
     else:
-      return { 'error': None }
+      return None
