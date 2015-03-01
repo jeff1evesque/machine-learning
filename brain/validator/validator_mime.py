@@ -28,7 +28,7 @@ class Validate_Mime(object):
     acceptable_type  = ['text/plain', 'text/csv', 'text/xml', 'application/xml']
 
     unique_hash      = set()
-    json_keep        = []
+    dataset_keep     = []
 
     if (dataset.get('file_upload', None)):
 
@@ -50,14 +50,14 @@ class Validate_Mime(object):
               # keep non-duplicated file uploads
               else:
                 data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
-                json_keep.append( {'type': mimetype, 'filedata': data} )
+                dataset_keep.append( {'type': mimetype, 'filedata': data} )
 
         except:
           msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
           list_error.append(msg)
 
-      # replace portion of JSON with unique 'file reference(s)'
-      dataset['file_upload'][:] = json_keep
+      # replace portion of dataset with unique 'file reference(s)'
+      dataset['file_upload'][:] = dataset_keep
 
     else:
       msg = 'No file(s) were uploaded'
