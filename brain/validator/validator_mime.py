@@ -24,13 +24,13 @@ class Validate_Mime(object):
     # local variables
     list_error       = []
 
-    json_data        = self.svm_data['data']['dataset']
+    dataset          = self.svm_data['data']['dataset']
     acceptable_type  = ['text/plain', 'text/csv', 'text/xml', 'application/xml']
 
     unique_hash      = set()
     json_keep        = []
 
-    if (json_data.get('file_upload', None)):
+    if (dataset.get('file_upload', None)):
 
       for index, filedata in enumerate(json_data['file_upload']):
         try:
@@ -57,7 +57,7 @@ class Validate_Mime(object):
           list_error.append(msg)
 
       # replace portion of JSON with unique 'file reference(s)'
-      json_data['file_upload'][:] = json_keep
+      dataset['file_upload'][:] = json_keep
 
     else:
       msg = 'No file(s) were uploaded'
@@ -65,6 +65,6 @@ class Validate_Mime(object):
 
     # return error
     if len(list_error) > 0:
-      return { 'status': False, 'error': list_error, 'json_data': None }
+      return { 'status': False, 'error': list_error, 'dataset': None }
     else:
-      return { 'status': True, 'error': None, 'json_data': json_data }
+      return { 'status': True, 'error': None, 'dataset': json_data }
