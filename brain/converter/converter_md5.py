@@ -5,8 +5,8 @@
 import hashlib
 from collections import defaultdict
 
-## md5_for_file: Convert the contents of a given file, from a supplied path,
-#                to a hash value equivalent.
+## md5_for_object: Convert the contents of a given file, from a supplied path,
+#                  to a hash value equivalent.
 #
 #  @md5.update, generate an md5 checksum fingerprint, of the given file. Calling
 #      this method repeatedly, is equivalent to a single call with the concatenation
