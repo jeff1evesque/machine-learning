@@ -28,7 +28,7 @@ class Validate_Settings(object):
     # validation on 'data_new' session
     if self.svm_session == 'data_new':
       try:
-        validate(json.loads(self.svm_data)['data']['settings'], jsonschema_data_new())
+        validate(self.svm_data['data']['settings'], jsonschema_data_new())
       except Exception, error:
         list_error.append(str(error))
 
@@ -40,7 +40,7 @@ class Validate_Settings(object):
     # validation on 'data_append' session
     if self.svm_session == 'data_append':
       try:
-        validate(json.loads(self.svm_data)['data']['settings'], jsonschema_data_append())
+        validate(self.svm_data['data']['settings'], jsonschema_data_append())
       except Exception, error:
         list_error.append(str(error))
 
@@ -49,7 +49,7 @@ class Validate_Settings(object):
     # validation on 'model_use' session
     elif self.svm_session == 'model_use':
       try:
-        validate(json.loads(self.svm_data)['data']['settings'], jsonschema_model_use())
+        validate(self.svm_data['data']['settings'], jsonschema_model_use())
       except Exception, error:
         list_error.append(str(error))
 
