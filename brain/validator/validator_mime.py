@@ -4,7 +4,7 @@
 #  This script performs validation on the 'mime' type for file upload(s), and returns the
 #      validated temporary file references(s), along with the corresponding mimetype for
 #      each file upload(s).
-import json, sys, magic
+import sys, magic
 from brain.converter.converter_md5 import md5_for_file
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
