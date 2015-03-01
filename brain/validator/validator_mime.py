@@ -20,11 +20,11 @@ class Validate_Mime(object):
   #                          upload(s)' fails validation, this method will return False.
   #                          Otherwise, the method will return a list of unique 'file
   #                          upload(s)', discarding duplicates.
-  def file_upload_validation(self, json_file_obj):
+  def file_upload_validation(self):
     # local variables
     list_error       = []
 
-    json_data        = json_file_obj['data']['dataset']
+    json_data        = self.svm_data['data']['dataset']
     acceptable_type  = ['text/plain', 'text/csv', 'text/xml', 'application/xml']
 
     unique_hash      = set()
