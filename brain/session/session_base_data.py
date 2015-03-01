@@ -28,7 +28,7 @@ class Base_Data(object):
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validate_Mime( self.svm_data, self.svm_session )
-    self.response_mime_validation = validator.file_upload_validation( self.svm_data)
+    self.response_mime_validation = validator.file_upload_validation()
 
     if self.response_mime_validation['error'] != None:
       self.response_error.append( self.response_mime_validation['error'] )
