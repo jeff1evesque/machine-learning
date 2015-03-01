@@ -4,7 +4,7 @@
 #  This script performs validation on the 'mime' type for file upload(s), and returns the
 #      validated temporary file references(s), along with the corresponding mimetype for
 #      each file upload(s).
-import json, sys, magic
+import sys, magic
 from brain.converter.converter_md5 import md5_for_file
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
@@ -20,19 +20,19 @@ class Validate_Mime(object):
   #                          upload(s)' fails validation, this method will return False.
   #                          Otherwise, the method will return a list of unique 'file
   #                          upload(s)', discarding duplicates.
-  def file_upload_validation(self, json_file_obj):
+  def file_upload_validation(self):
     # local variables
     list_error       = []
 
-    json_data        = json.loads(json_file_obj)['data']['dataset']
+    dataset          = self.svm_data['data']['dataset']
     acceptable_type  = ['text/plain', 'text/csv', 'text/xml', 'application/xml']
 
     unique_hash      = set()
-    json_keep        = []
+    dataset_keep     = []
 
-    if (json_data.get('file_upload', None)):
+    if (dataset.get('file_upload', None)):
 
-      for index, filedata in enumerate(json_data['file_upload']):
+      for index, filedata in enumerate(dataset['file_upload']):
         try:
           filehash = md5_for_file(filedata['file_temp'][0])
           # add 'hashed' value of file reference(s) to a list
@@ -50,14 +50,14 @@ class Validate_Mime(object):
               # keep non-duplicated file uploads
               else:
                 data = {'file_name': filedata['file_name'][idx], 'file_temp': filedata['file_temp'][idx]}
-                json_keep.append( {'type': mimetype, 'filedata': data} )
+                dataset_keep.append( {'type': mimetype, 'filedata': data} )
 
         except:
           msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
           list_error.append(msg)
 
-      # replace portion of JSON with unique 'file reference(s)'
-      json_data['file_upload'][:] = json_keep
+      # replace portion of dataset with unique 'file reference(s)'
+      dataset['file_upload'][:] = dataset_keep
 
     else:
       msg = 'No file(s) were uploaded'
@@ -65,6 +65,6 @@ class Validate_Mime(object):
 
     # return error
     if len(list_error) > 0:
-      return { 'status': False, 'error': list_error, 'json_data': None }
+      return { 'status': False, 'error': list_error, 'dataset': None }
     else:
-      return { 'status': True, 'error': None, 'json_data': json_data }
+      return { 'status': True, 'error': None, 'dataset': dataset }
