@@ -4,7 +4,7 @@
 #  This script performs validation on the 'mime' type for file upload(s), and returns the
 #      validated temporary file references(s), along with the corresponding mimetype for
 #      each file upload(s).
-import sys, magic
+import sys
 from brain.converter.converter_md5 import md5_for_object
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
@@ -39,7 +39,7 @@ class Validate_Mime(object):
           if filehash not in unique_hash:
             unique_hash.add(filehash)
             for idx, file in enumerate(filedata['file']):
-              mimetype = magic.from_file( file, mime=True )
+              mimetype = filedata['file'].content_type
 
               # validate mimetype
               if ( mimetype not in acceptable_type ):
