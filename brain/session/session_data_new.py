@@ -67,6 +67,7 @@ class Data_New(Base, Base_Data):
       flag_convert = True
     except Exception as error:
       self.response_error.append( error )
+      print error
       return False
 
     if ( flag_convert ):
