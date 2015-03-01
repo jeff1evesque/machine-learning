@@ -24,6 +24,7 @@ class Validate_Settings(object):
   def data_validation(self):
     # local variables
     list_error = []
+    json_data = self.svm_data['data']['settings']
 
     # validation on 'data_new' session
     if self.svm_session == 'data_new':
