@@ -57,8 +57,8 @@ class Base_Data(object):
       for val in list['svm_dataset']:
         json_validated = Validate_Dataset( val, self.svm_session )
 
-        if json_validated.dataset_validation['error'] != None:
-          self.response_error.append( json_validated.dataset_validation['error'] )
+        if json_validated.dataset_validation()['error'] != None:
+          self.response_error.append( json_validated.dataset_validation()['error'] )
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self, session_type):
