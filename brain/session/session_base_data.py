@@ -21,7 +21,7 @@ class Base_Data(object):
   #
   #  Note: the superclass constructor expects the same 'svm_data' argument.
   def __init__(self, svm_data):
-    super(Data_New, self).__init__(svm_data)
+    super(Base_Data, self).__init__(svm_data)
     self.flag_validate_mime  = False
 
   ## validate_mime_type: validate mime type for each dataset.
