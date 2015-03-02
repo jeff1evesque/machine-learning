@@ -42,7 +42,7 @@ def load_data():
     else: response = loader.get_errors()
 
     # return response
-    return response
+    return json.dumps(response)
 
 @app.route('/retrieve-session/', methods=['POST', 'GET'])
 def retrieve_session():
