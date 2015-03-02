@@ -73,6 +73,9 @@ class Data_New(Base, Base_Data):
       self.json_dataset = []
       svm_property      = self.svm_data
 
+      # reset file-pointer
+      val['file'].seek(0)
+
       for val in self.response_mime_validation['dataset']['file_upload']:
         # csv to json
         if val['type'] in ('text/plain', 'text/csv'):
