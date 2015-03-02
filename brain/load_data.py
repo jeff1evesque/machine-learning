@@ -78,6 +78,10 @@ class Load_Data(object):
         session.save_svm_dataset('data_append')
         session.check()
 
+      # return
+      if session.return_error: return False
+      else: return 'Dataset(s) properly appended into database'
+
   ## load_model_generate: redirect input to 'session_model_generate.py'
   def load_model_generate(self):
 
@@ -90,6 +94,10 @@ class Load_Data(object):
     # implement class methods
     session.select_dataset(session_id)
     session.format_dataset()
+
+    # return
+    if session.return_error: return False
+    else: return 'Model properly generated'
 
   ## load_model_use: redirect input to 'session_model_use.py'
   def load_model_use(self):
@@ -107,6 +115,10 @@ class Load_Data(object):
       error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
       self.list_error.append(error)
       return {'session_type': None, 'error': error}
+
+    # return
+    if session.return_error: return False
+    else: return 'Model properly generated'
 
   # get_errors: returns a list of current errors associated with class instance
   def get_errors(self):
