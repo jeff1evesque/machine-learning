@@ -68,4 +68,4 @@ class Base_Data(object):
 
         # save dataset element, append error(s)
         db_return = db_save.db_data_save()
-        if not db_return['status']: self.response_error.append( db_return['error'] )
+        if db_return['error']: self.response_error.append( db_return['error'] )
