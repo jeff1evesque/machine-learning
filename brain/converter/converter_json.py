@@ -2,7 +2,7 @@
 
 ## @converter_json.py
 #  This file contains methods to convert svm data to a JSON object.
-import json, csv, xmltodict
+import csv, xmltodict
 from collections import defaultdict
 from itertools import islice
 
@@ -64,7 +64,7 @@ class JSON(object):
           list_dataset.append( { 'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
 
     self.observation_labels = observation_label
-    return json.dumps( list_dataset )
+    return list_dataset
 
   ## xml_to_json: convert xml to JSON object
   #
@@ -87,7 +87,7 @@ class JSON(object):
         list_dataset.append( { 'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value} )
 
     self.observation_labels = observation_label
-    return json.dumps( list_dataset )
+    return list_dataset
 
   ## get_observation_labels: returns a list of independent variable labels. Since
   #                          both 'csv_to_json', and 'xml_to_json' defines the
