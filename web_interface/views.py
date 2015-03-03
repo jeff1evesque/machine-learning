@@ -53,5 +53,5 @@ def retrieve_session():
     session_list = session.get_all_sessions()
 
     # return all sessions
-    if session_list['result']: return session_list['result']
-    else: return session_list['error']
+    if session_list['result']: return json.dumps(session_list['result'])
+    else: return json.dumps(session_list['error'])
