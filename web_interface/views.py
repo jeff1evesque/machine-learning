@@ -7,6 +7,7 @@ from web_interface import app
 from flask import render_template, request
 from brain.load_data import Load_Data
 from brain.converter.converter_data import Convert_Data
+from brain.database.session_retriever import Retrieve_Session
 
 # Define Route: assign corresponding template, or logic to given path
 @app.route('/')
@@ -52,5 +53,5 @@ def retrieve_session():
     session_list = session.get_all_sessions()
 
     # return all sessions
-    if session_list['result']: return session_list['result']
-    else: return session_list['error']
+    if session_list['result']: return json.dumps(session_list['result'])
+    else: return json.dumps(session_list['error'])
