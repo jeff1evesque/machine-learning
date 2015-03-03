@@ -9,7 +9,6 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-import json
 from brain.session.session_data_new import Data_New
 from brain.database.data_saver import Data_Save
 
@@ -33,7 +32,7 @@ class Data_Append(Data_New):
   #  @session_id, is synonymous to 'entity_id', and provides context to update
   #      'modified_xx' columns within the 'tbl_dataset_entity' database table.
   def save_svm_entity(self, session_type, session_id):
-    svm_entity = {'title': json.loads( self.svm_data )['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
+    svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
     db_save    = Data_Save( svm_entity, 'save_entity', session_type )
 
     # save dataset element
