@@ -7,6 +7,7 @@ from web_interface import app
 from flask import render_template, request
 from brain.load_data import Load_Data
 from brain.converter.converter_data import Convert_Data
+from brain.database.session_retriever import Retrieve_Session
 
 # Define Route: assign corresponding template, or logic to given path
 @app.route('/')
