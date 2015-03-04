@@ -63,6 +63,9 @@ class JSON(object):
         list_dataset.append( { 'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value} )
 
     self.observation_labels = observation_label
+
+    # close file, and return
+    self.svm_file.close()
     return list_dataset
 
   ## xml_to_json: convert xml to JSON object
@@ -86,6 +89,9 @@ class JSON(object):
         list_dataset.append( { 'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value} )
 
     self.observation_labels = observation_label
+
+    # close file, and return
+    self.svm_file.close()
     return list_dataset
 
   ## get_observation_labels: returns a list of independent variable labels. Since
