@@ -17,7 +17,7 @@ class Convert_Upload(object):
     self.svm_file           = svm_file
     self.observation_labels = None
 
-  ## csv_to_json: convert csv file to JSON object
+  ## csv_to_dict: convert csv file to a python dictionary structure.
   #
   #  @observation_label, is a list containing dependent variable labels.
   #
@@ -30,7 +30,7 @@ class Convert_Upload(object):
   #        the following line is required in this method:
   #
   #            row = row[0].split(',')
-  def csv_to_json(self):
+  def csv_to_dict(self):
     list_dataset         = []
     observation_label    = []
     indep_variable_label = []
