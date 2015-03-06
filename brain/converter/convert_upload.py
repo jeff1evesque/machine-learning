@@ -7,8 +7,8 @@ import csv, xmltodict
 from collections import defaultdict
 from itertools import islice
 
-## Class: JSON, explicitly inherit 'new-style' class
-class JSON(object):
+## Class: Convert_Upload, explicitly inherit 'new-style' class
+class Convert_Upload(object):
 
   ## constructor
   def __init__(self, svm_file):
