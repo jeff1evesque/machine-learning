@@ -71,7 +71,7 @@ class Convert_Upload(object):
     self.svm_file.close()
     return list_dataset
 
-  ## xml_to_json: convert xml to JSON object
+  ## xml_to_dict: convert xml file-object to a python dictionary.
   #
   #  @observation_label, is a list containing dependent variable labels.
   def xml_to_json(self):
