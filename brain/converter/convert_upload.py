@@ -17,7 +17,7 @@ class Convert_Upload(object):
     self.svm_file           = svm_file
     self.observation_labels = None
 
-  ## csv_to_dict: convert csv file to a python dictionary structure.
+  ## csv_to_dict: convert csv file-object to a python dictionary.
   #
   #  @observation_label, is a list containing dependent variable labels.
   #
