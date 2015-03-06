@@ -1,7 +1,8 @@
 #!/usr/bin/python
 
-## @converter_json.py
-#  This file contains methods to convert svm data to a JSON object.
+## @convert_upload.py
+#  This file contains methods required to convert an svm dataset, into a
+#      python dictionary.
 import csv, xmltodict
 from collections import defaultdict
 from itertools import islice
