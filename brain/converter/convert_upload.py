@@ -7,7 +7,9 @@ import csv, xmltodict
 from collections import defaultdict
 from itertools import islice
 
-## Class: Convert_Upload, explicitly inherit 'new-style' class
+## Class: Convert_Upload, explicitly inherit 'new-style' class.
+#
+#  Note: this class is invoked within 'views.py'
 class Convert_Upload(object):
 
   ## constructor
