@@ -15,12 +15,11 @@ class Validate_Mime(object):
     self.svm_data    = svm_data
     self.svm_session = svm_session
 
-  ## file_upload_validation: this method validates the MIME type of 'file upload(s)',
-  #                          provided during a 'training' session. If any of the 'file
-  #                          upload(s)' fails validation, this method will return False.
-  #                          Otherwise, the method will return a list of unique 'file
-  #                          upload(s)', discarding duplicates.
-  def file_upload_validation(self):
+  ## validate: this method validates the MIME type of 'file upload(s)', provided during
+  #            a 'training' session. If any of the 'file upload(s)' fails validation,
+  #            this method will return False. Otherwise, the method will return a list
+  #            of unique 'file upload(s)', discarding duplicates.
+  def validate(self):
     # local variables
     list_error       = []
 
