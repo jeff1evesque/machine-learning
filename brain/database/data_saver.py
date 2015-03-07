@@ -6,6 +6,8 @@
 from brain.database.db_query import SQL
 
 ## Class: Data_Save, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'data_new.py'
 class Data_Save(object):
 
   ## constructor: stores an SVM dataset (json object), database configurations
