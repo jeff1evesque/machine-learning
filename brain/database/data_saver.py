@@ -50,20 +50,20 @@ class Data_Save(object):
             if self.session_type == 'data_append':
                 sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
                 args          = (self.svm_data['uid'], self.svm_data['id_entity'])
-                response      = self.sql.sql_command( sql_statement, 'update', args )
+                response      = self.sql.sql_command(sql_statement, 'update', args)
 
             elif self.session_type == 'data_new':
-                sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES( %s, %s, UTC_TIMESTAMP() )'
+                sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES(%s, %s, UTC_TIMESTAMP())'
                 args          = (self.svm_data['title'], self.svm_data['uid'])
-                response      = self.sql.sql_command( sql_statement, 'insert', args )
+                response      = self.sql.sql_command(sql_statement, 'insert', args)
 
             # retrieve any error(s), disconnect from database
             response_error = self.sql.return_error()
             self.sql.sql_disconnect()
 
             # return result
-            if response_error: return { 'status': False, 'error': response_error, 'id': response['id'] }
-            else: return { 'status': True, 'error': None, 'id': response['id'] }
+            if response_error: return {'status': False, 'error': response_error, 'id': response['id']}
+            else: return {'status': True, 'error': None, 'id': response['id']}
 
         # insert / update feature label(s)
         elif self.svm_cmd == 'save_label':
@@ -75,34 +75,34 @@ class Data_Save(object):
                 # check if observation label exists in database
                 sql_statement = 'SELECT * FROM tbl_observation_label WHERE dep_variable_label=%s AND id_entity=%s'
                 args          = (self.svm_data['label'], self.svm_data['id_entity'])
-                response      = self.sql.sql_command( sql_statement, 'select', args )
+                response      = self.sql.sql_command(sql_statement, 'select', args)
 
                 # add labels if not exist
                 if not response['result']:
-                    sql_statement  = 'INSERT INTO tbl_observation_label (id_entity, dep_variable_label) VALUES( %s, %s )'
+                    sql_statement  = 'INSERT INTO tbl_observation_label (id_entity, dep_variable_label) VALUES(%s, %s)'
                     args           = (self.svm_data['id_entity'], self.svm_data['label'])
-                    response_added = self.sql.sql_command( sql_statement, 'insert', args )
+                    response_added = self.sql.sql_command(sql_statement, 'insert', args)
 
             # retrieve any error(s), disconnect from database
             response_error = self.sql.return_error()
             self.sql.sql_disconnect()
 
             # return result
-            if response_error: return { 'status': False, 'error': response_error }
-            else: return { 'status': True, 'error': None }
+            if response_error: return {'status': False, 'error': response_error}
+            else: return {'status': True, 'error': None}
 
       # insert / update dataset value(s)
       elif self.svm_cmd == 'save_value':
           self.sql.sql_connect('db_machine_learning')
-          sql_statement = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES( %s, %s, %s, %s )'
+          sql_statement = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES(%s, %s, %s, %s)'
           dataset       = self.svm_data['svm_dataset']
           args          = (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value'])
-          response      = self.sql.sql_command( sql_statement, 'insert', args )
+          response      = self.sql.sql_command(sql_statement, 'insert', args)
 
           # retrieve any error(s), disconnect from database
           response_error = self.sql.return_error()
           self.sql.sql_disconnect()
 
           # return result
-          if response: return { 'status': False, 'error': response_error, 'id': response['id'] }
-          else: return { 'status': True, 'error': None, 'id': response['id'] }
+          if response: return {'status': False, 'error': response_error, 'id': response['id']}
+          else: return {'status': True, 'error': None, 'id': response['id']}
