@@ -41,11 +41,11 @@ class Data_New(Base, Base_Data):
     def save_observation_label(self, session_type, session_id):
         if len(self.observation_labels) > 0:
             for label in self.observation_labels:
-                db_save = Data_Save( {'label': label, 'id_entity': session_id}, 'save_label', session_type )
+                db_save = Data_Save({'label': label, 'id_entity': session_id}, 'save_label', session_type)
 
                 # save dataset element, append error(s)
                 db_return = db_save.db_data_save()
-                if not db_return['status']: self.response_error.append( db_return['error'] )
+                if not db_return['status']: self.response_error.append(db_return['error'])
 
     ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
     #                   dict object.
@@ -67,11 +67,11 @@ class Data_New(Base, Base_Data):
             self.response_mime_validation['dataset']['file_upload']
             flag_convert = True
         except Exception as error:
-            self.response_error.append( error )
+            self.response_error.append(error)
             print error
             return False
 
-        if ( flag_convert ):
+        if (flag_convert):
             self.dataset = []
             svm_property = self.svm_data
 
@@ -93,7 +93,7 @@ class Data_New(Base, Base_Data):
                         # build new (relevant) dataset
                         self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
                     except Exception as error:
-                        self.response_error.append( error )
+                        self.response_error.append(error)
                         flag_append = False
 
                 # xml to dict
@@ -110,8 +110,8 @@ class Data_New(Base, Base_Data):
                         # build new (relevant) dataset
                         self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
                     except Exception as error:
-                        self.response_error.append( error )
+                        self.response_error.append(error)
                         flag_append = False
 
             index_count += 1
-            if ( flag_append == False ): return False
+            if not flag_append: return False
