@@ -94,9 +94,9 @@ class Convert_Upload(object):
 
         self.observation_labels = observation_label
 
-      # close file, and return
-      self.svm_file.close()
-      return list_dataset
+        # close file, and return
+        self.svm_file.close()
+        return list_dataset
 
     ## get_observation_labels: returns a list of independent variable labels. Since
     #                          both 'csv_to_dict', and 'xml_to_dict' defines the
