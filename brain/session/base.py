@@ -7,7 +7,7 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys
-from brain.validator.validator_settings import Validate_Settings
+from brain.validator.validate_settings import Validate_Settings
 
 ## Class: Base, explicitly inherit 'new-style' class
 class Base(object):
@@ -26,10 +26,10 @@ class Base(object):
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
     validator = Validate_Settings( self.svm_data, self.svm_session )
-    validator.data_validation()
+    validator.validate()
 
-    if validator.data_validation()['error'] != None:
-      self.response_error.append( validator.data_validation()['error'] )
+    if validator.validate()['error'] != None:
+      self.response_error.append( validator.validate()['error'] )
 
   ## return_error: return appended error messages.
   def return_error(self):
