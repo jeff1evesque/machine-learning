@@ -15,6 +15,8 @@ from brain.session.base import Base
 from brain.session.base_data import Base_Data
 
 ## Class: Data_New, inherit base methods from superclass 'Base', 'Base_Data'
+#
+#  Note: this class is invoked within 'load_data.py'
 class Data_New(Base, Base_Data):
 
   ## constructor: define class properties using the superclass 'Session_Base'
