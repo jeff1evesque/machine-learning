@@ -53,7 +53,7 @@ class Base_Data(object):
 
   ## validate_dataset: validate each dataset element.
   def validate_dataset(self):
-    for list in self.json_dataset:
+    for list in self.dataset:
       for val in list['svm_dataset']:
         validated_dataset = Validate_Dataset( val, self.svm_session )
 
@@ -62,7 +62,7 @@ class Base_Data(object):
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self, session_type):
-    for data in self.json_dataset:
+    for data in self.dataset:
       for dataset in data['svm_dataset']:
         db_save = Data_Save( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value', session_type )
 
