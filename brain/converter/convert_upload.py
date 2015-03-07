@@ -3,7 +3,8 @@
 ## @convert_upload.py
 #  This file contains methods required to convert an svm dataset, into a
 #      python dictionary.
-import csv, xmltodict
+import csv
+import xmltodict
 from collections import defaultdict
 from itertools import islice
 
