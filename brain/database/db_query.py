@@ -21,16 +21,16 @@ class SQL(object):
     def sql_connect(self, database=None):
         try:
             if database == None:
-                self.conn = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password() )
+                self.conn = DB.connect(host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password())
             else:
-                self.conn = DB.connect( host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db=database )
+                self.conn = DB.connect(host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db=database)
             self.cursor = self.conn.cursor()
-            return { 'status': True, 'error': None, 'id': None }
+            return {'status': True, 'error': None, 'id': None}
 
         except DB.Error, error:
             self.proceed = False
             self.list_error.append(error)
-            return { 'status': False, 'error': self.list_error, 'id': None }
+            return {'status': False, 'error': self.list_error, 'id': None}
 
     ## sql_command: execute sql statement.
     #
@@ -39,7 +39,7 @@ class SQL(object):
     def sql_command(self, sql_statement, sql_type, sql_args=None):
         if self.proceed:
             try:
-                self.cursor.execute( sql_statement, sql_args )
+                self.cursor.execute(sql_statement, sql_args)
 
                 # commit change(s), return lastrowid
                 if sql_type in ['insert', 'delete', 'update']:
@@ -51,10 +51,10 @@ class SQL(object):
         except DB.Error, error:
             self.conn.rollback()
             self.list_error.append(error)
-            return { 'status': False, 'error': self.list_error, 'result': None }
+            return {'status': False, 'error': self.list_error, 'result': None}
 
-        if sql_type in ['insert', 'delete', 'update']: return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
-        elif sql_type == 'select': return { 'status': False, 'error': self.list_error, 'result': result }
+        if sql_type in ['insert', 'delete', 'update']: return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
+        elif sql_type == 'select': return {'status': False, 'error': self.list_error, 'result': result}
 
     ## sql_disconnect: close connection to MySQL / MariaDB
     def sql_disconnect(self):
@@ -62,10 +62,10 @@ class SQL(object):
             try:
                 if self.conn:
                     self.conn.close()
-                    return { 'status': True, 'error': None, 'id': self.cursor.lastrowid }
+                    return {'status': True, 'error': None, 'id': self.cursor.lastrowid}
             except DB.Error, error:
                 self.list_error.append(error)
-                return { 'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid }
+                return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
 
     ## return_error: return appended error message(s)
     def return_error(self):
