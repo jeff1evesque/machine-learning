@@ -11,6 +11,8 @@ from brain.validator.validate_dataset import Validate_Dataset
 from brain.validator.validate_mime import Validate_Mime
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'data_new.py'
 class Base_Data(object):
 
   ## constructor: define class properties using the superclass 'Base'
