@@ -10,7 +10,7 @@ from brain.database.db_query import SQL
 #  Note: this class is invoked within 'data_new.py'
 class Data_Save(object):
 
-  ## constructor: stores an SVM dataset (json object), database configurations
+  ## constructor: stores an SVM dataset (python dict), database configurations
   #               into their own corresponding class variable.
   # 
   #  Note: during the SVM dataset instance, 'self.svm_data' is a list of dictionary
