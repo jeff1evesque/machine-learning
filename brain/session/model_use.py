@@ -17,22 +17,22 @@ from brain.validator.validate_settings import Validate_Settings
 #  Note: this class is invoked within 'load_data.py'
 class Model_Use(object):
 
-  ## constructor:
-  def __init__(self, svm_data):
-    self.svm_data    = svm_data
-    self.svm_session = self.svm_data['data']['settings']['svm_session']
+    ## constructor:
+    def __init__(self, svm_data):
+        self.svm_data    = svm_data
+        self.svm_session = self.svm_data['data']['settings']['svm_session']
 
-  ## CHANGE_METHOD: we will adjust the logic below
-  def CHANGE_METHOD(self):
-    # validate input data is json format
-    validator = Validate_Settings( sys.svm_data, self.svm_session )
+    ## CHANGE_METHOD: we will adjust the logic below
+    def CHANGE_METHOD(self):
+        # validate input data is json format
+        validator = Validate_Settings( sys.svm_data, self.svm_session )
 
-    # validate, and set SVM properties to 'data_creator.py'
-    if ( sys.svm_data['json_creator'] == 'load_logic.php' ):
-      if ( sys.svm_data['data'].get('result', None) ):
-        validator.data_validation()
+        # validate, and set SVM properties to 'data_creator.py'
+        if ( sys.svm_data['json_creator'] == 'load_logic.php' ):
+            if ( sys.svm_data['data'].get('result', None) ):
+                validator.data_validation()
 
-    else:
-      msg = 'Please provide a training dataset in json format'
-      print {'error':msg}
-      sys.exit()
+        else:
+            msg = 'Please provide a training dataset in json format'
+            print {'error':msg}
+            sys.exit()
