@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @data_retriever.py
+## @retrieve_dataset.py
 #  This file retrieves SVM related data from corresponding 'EAV data model' database
 #      table(s), from the 'db_machine_learning' database.
 from brain.database.db_query import SQL
