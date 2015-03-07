@@ -75,7 +75,7 @@ class Convert_Upload(object):
     ## xml_to_dict: convert xml file-object to a python dictionary.
     #
     #  @observation_label, is a list containing dependent variable labels.
-    def xml_to_json(self):
+    def xml_to_dict(self):
         list_dataset      = []
         observation_label = []
 
