@@ -5,7 +5,7 @@
 #      validated temporary file references(s), along with the corresponding mimetype for
 #      each file upload(s).
 import sys
-from brain.converter.converter_md5 import md5_for_object
+from brain.converter.calculate_md5 import calculate_md5
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
 class Validate_Mime(object):
@@ -34,7 +34,7 @@ class Validate_Mime(object):
 
       for index, filedata in enumerate(dataset['file_upload']):
         try:
-          filehash = md5_for_object(filedata['file'])
+          filehash = calculate_md5(filedata['file'])
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
