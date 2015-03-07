@@ -9,7 +9,7 @@ from brain.converter.calculate_md5 import calculate_md5
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
 #
-#  Note:: this class is invoked within 'base_data.py'
+#  Note: this class is invoked within 'base_data.py'
 class Validate_Mime(object):
 
   ## constructor: saves a subset of the passed-in form data
