@@ -16,14 +16,12 @@ class Validate_Settings(object):
     self.svm_data    = svm_data
     self.svm_session = svm_session
 
-  ## data_validation: this method validates the SVM settings for the
-  #                   'data_new', 'data_append', 'model_generate', or
-  #                   'model_use' sessions.
+  ## validate: this method validates the SVM settings for the 'data_new',
+  #            'data_append', 'model_generate', or 'model_use' sessions.
   #
   #  Note: This method does not validate the associated 'file upload(s)'. The
-  #        latter component is validated via 'validator_mime.py', and 
-  #        'validator_dataset.py'.
-  def data_validation(self):
+  #        latter is validated via 'validate_mime.py', and 'validate_dataset.py'.
+  def validate(self):
     # local variables
     list_error = []
     svm_settings = self.svm_data['data']['settings']
