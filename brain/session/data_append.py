@@ -13,6 +13,8 @@ from brain.session.session_data_new import Data_New
 from brain.database.data_saver import Data_Save
 
 ## Class: Data_Append, inherit base methods from superclass 'Data_New'
+#
+#  Note: this class is invoked within 'load_data.py'
 class Data_Append(Data_New):
 
   ## constructor: define class properties using the superclass 'Data_New'
