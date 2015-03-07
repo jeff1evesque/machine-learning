@@ -27,7 +27,7 @@ def load_data():
 
     # format post data
     sender         = Restructure_Data(settings, files)
-    data_formatted = sender.format()
+    data_formatted = sender.restructure()
 
     # send data to brain
     loader = Load_Data(data_formatted)
