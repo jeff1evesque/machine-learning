@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @validator_mime.py
+## @validate_mime.py
 #  This script performs validation on the 'mime' type for file upload(s), and returns the
 #      validated temporary file references(s), along with the corresponding mimetype for
 #      each file upload(s).
