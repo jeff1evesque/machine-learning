@@ -12,6 +12,6 @@
 #  Note: this class is invoked within 'load_data.py'
 class Model_Generate:
 
-  ## constructor:
-  def __init__(self, svm_data):
-    self.svm_data = svm_data
+    ## constructor:
+    def __init__(self, svm_data):
+        self.svm_data = svm_data
