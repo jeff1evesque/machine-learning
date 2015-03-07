@@ -16,6 +16,8 @@
 #             MariaDB> GRANT, CREATE, DELETE, DROP, EXECUTE, SELECT, SHOW
 #                 -> DATABASES ON *.* TO 'authenticated'@'localhost';
 #             MariaDB> FLUSH PRIVILEGES;
+#
+#  Note: this class is invoked within 'db_query.py'
 class Database(object):
 
   ## constructor:
