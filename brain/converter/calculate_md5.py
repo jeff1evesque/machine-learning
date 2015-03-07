@@ -29,11 +29,13 @@ from collections import defaultdict
 #
 #  Note: block size directly depends on the block size of the filesystem.
 def calculate_md5(item, block_size=256*128, hr=False):
-  md5 = hashlib.md5()
-  # use lambda anonymous function to iterate given object
-  for chunk in iter(lambda: item.read(block_size), b''):
-    md5.update(chunk)
-  # return the digest of strings passed into 'update'
-  if hr:
-    return md5.hexdigest()
-  return md5.digest()
+    md5 = hashlib.md5()
+
+    # use lambda anonymous function to iterate given object
+    for chunk in iter(lambda: item.read(block_size), b''):
+        md5.update(chunk)
+
+    # return the digest of strings passed into 'update'
+    if hr:
+        return md5.hexdigest()
+    return md5.digest()
