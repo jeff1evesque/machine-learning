@@ -54,21 +54,22 @@ def jsonschema_data_new():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_title': {
-            'type': 'string',
-            'minLength': 1
-        },
-        'svm_session_id' : {
-            'type': 'string',
-            'minLength': 1
-        },
-        'svm_dataset_type': {
-            'type': 'string',
-            'enum': ['file_upload', 'xml_url']
-        },
-        'svm_session': {
-            'type': 'string',
-             'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
+                'svm_title': {
+                'type': 'string',
+                'minLength': 1
+            },
+            'svm_session_id' : {
+                'type': 'string',
+                'minLength': 1
+            },
+            'svm_dataset_type': {
+                'type': 'string',
+                'enum': ['file_upload', 'xml_url']
+            },
+            'svm_session': {
+                'type': 'string',
+                'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
+            },
         },
     }
     return schema
@@ -83,16 +84,17 @@ def jsonschema_data_append():
         'type': 'object',
         'properties': {
             'svm_session_id': {
-            'type': 'string',
-            'minLength': 1
-        },
-        'svm_dataset_type': {
-            'type': 'string',
-            'enum': ['file_upload', 'xml_url']
-        },
-        'svm_session': {
-            'type': 'string',
-            'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
+                'type': 'string',
+                'minLength': 1
+            },
+            'svm_dataset_type': {
+                'type': 'string',
+                'enum': ['file_upload', 'xml_url']
+            },
+            'svm_session': {
+                'type': 'string',
+                'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
+            },
         },
     }
     return schema
@@ -107,7 +109,7 @@ def jsonschema_model_generate():
     schema = {
         'type': 'object',
         'properties': {
-        }
+        },
     }
     return schema
 
@@ -124,15 +126,16 @@ def jsonschema_model_use():
             'svm_model_type': {
                 'type': 'string',
                 'enum': ['classification', 'regression']
-        },
-        'svm_session': {
-            'type': 'string',
-            'enum': ['training', 'analysis']
-        },
-        'svm_indep_variable': {
-            'type': 'array',
-            'items': { 'type': 'string' },
-            'minItems': 1
+            },
+            'svm_session': {
+                'type': 'string',
+                'enum': ['training', 'analysis']
+            },
+            'svm_indep_variable': {
+                'type': 'array',
+                'items': { 'type': 'string' },
+                'minItems': 1
+            },
         },
     }
     return schema
