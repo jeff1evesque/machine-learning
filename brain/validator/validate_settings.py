@@ -34,7 +34,7 @@ class Validate_Settings(object):
                 list_error.append(str(error))
 
             # validation on 'xml file(s)'
-            if ( svm_settings.get('svm_dataset_type', None) == 'upload file' and svm_settings.get('svm_dataset', None) ):
+            if (svm_settings.get('svm_dataset_type', None) == 'upload file' and svm_settings.get('svm_dataset', None)):
                 for index, xmldata in enumerate(svm_settings['svm_dataset']):
                     print xmldata
 
@@ -56,6 +56,6 @@ class Validate_Settings(object):
 
         # return error
         if len(list_error) > 0:
-            return { 'status': False, 'error': list_error }
+            return {'status': False, 'error': list_error}
         else:
-            return { 'status': True, 'error': None }
+            return {'status': True, 'error': None}
