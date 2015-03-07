@@ -42,7 +42,7 @@ class Restructure_Data(object):
 
         else: dataset = None
 
-        # build JSON structure
+        # build input structure
         data = {'settings': formatted_settings, 'dataset': dataset}
  
         # return new structured data
