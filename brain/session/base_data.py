@@ -1,19 +1,21 @@
 #!/usr/bin/python
 
-## @session_base.py
-#  This file serves as the superclass for 'session_data_xx.py' files.
+## @base_data.py
+#  This file serves as the superclass for 'data_xx.py' files.
 #
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 from brain.database.data_saver import Data_Save
-from brain.validator.validator_dataset import Validate_Dataset
-from brain.validator.validator_mime import Validate_Mime
+from brain.validator.validate_dataset import Validate_Dataset
+from brain.validator.validate_mime import Validate_Mime
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'data_new.py'
 class Base_Data(object):
 
-  ## constructor: define class properties using the superclass 'Session_Base'
+  ## constructor: define class properties using the superclass 'Base'
   #               constructor, along with the constructor in this subclass.
   #
   #  @super(), implement 'Session_Base' superclass constructor within this
@@ -27,7 +29,7 @@ class Base_Data(object):
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validate_Mime( self.svm_data, self.svm_session )
-    self.response_mime_validation = validator.file_upload_validation()
+    self.response_mime_validation = validator.validate()
 
     if self.response_mime_validation['error'] != None:
       self.response_error.append( self.response_mime_validation['error'] )
@@ -51,18 +53,18 @@ class Base_Data(object):
     elif db_return['status'] and session_type == 'data_new':
       return { 'status': True, 'id': db_return['id'], 'error': None }
 
-  ## validate_dataset_json: validate each dataset element.
-  def validate_dataset_json(self):
-    for list in self.json_dataset:
+  ## validate_dataset: validate each dataset element.
+  def validate_dataset(self):
+    for list in self.dataset:
       for val in list['svm_dataset']:
-        json_validated = Validate_Dataset( val, self.svm_session )
+        validated_dataset = Validate_Dataset( val, self.svm_session )
 
-        if json_validated.dataset_validation()['error']:
-          self.response_error.append( json_validated.dataset_validation()['error'] )
+        if validated_dataset.validate()['error']:
+          self.response_error.append( validated_dataset.validate()['error'] )
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self, session_type):
-    for data in self.json_dataset:
+    for data in self.dataset:
       for dataset in data['svm_dataset']:
         db_save = Data_Save( {'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value', session_type )
 

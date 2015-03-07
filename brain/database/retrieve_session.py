@@ -1,12 +1,13 @@
 #!/usr/bin/python
 
-## @session_retriever.py
+## @retrieve_session.py
 #  This file queries, and returns 'svm_title', and 'id_entity from the
 #      'tbl_dataset_entity' database table of 'db_machine_learning'.
 from brain.database.db_query import SQL
-import json
 
 ## Class: Retrieve_Session, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'views.py'
 class Retrieve_Session(object):
 
   ## constructor:

@@ -1,15 +1,17 @@
 #!/usr/bin/python
 
-## @session_base.py
-#  This file serves as the superclass for 'session_xx_xx.py' files.
+## @base.py
+#  This file serves as the superclass for 'data_xx.py', and 'model_xx.py' files.
 #
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 import sys
-from brain.validator.validator_settings import Validate_Settings
+from brain.validator.validate_settings import Validate_Settings
 
 ## Class: Base, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'data_new.py', 'model_xx.py'
 class Base(object):
 
   ## constructor:
@@ -26,10 +28,10 @@ class Base(object):
   ## validate_svm_settings: validate svm session settings (not dataset).
   def validate_svm_settings(self):
     validator = Validate_Settings( self.svm_data, self.svm_session )
-    validator.data_validation()
+    validator.validate()
 
-    if validator.data_validation()['error'] != None:
-      self.response_error.append( validator.data_validation()['error'] )
+    if validator.validate()['error'] != None:
+      self.response_error.append( validator.validate()['error'] )
 
   ## return_error: return appended error messages.
   def return_error(self):

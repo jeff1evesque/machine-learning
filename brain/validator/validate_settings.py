@@ -1,12 +1,14 @@
 #!/usr/bin/python
 
-## @validator_settings.py
+## @validate_settings.py
 #  This script performs validation on session settings. 
 import sys
 from jsonschema import validate
 from brain.schema.jsonschema_definition import jsonschema_data_new, jsonschema_data_append, jsonschema_model_generate, jsonschema_model_use
 
 ## Class: Validate_Settings, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'base.py'
 class Validate_Settings(object):
 
   ## constructor: saves a subset of the passed-in form data
@@ -14,14 +16,12 @@ class Validate_Settings(object):
     self.svm_data    = svm_data
     self.svm_session = svm_session
 
-  ## data_validation: this method validates the SVM settings for the
-  #                   'data_new', 'data_append', 'model_generate', or
-  #                   'model_use' sessions.
+  ## validate: this method validates the SVM settings for the 'data_new',
+  #            'data_append', 'model_generate', or 'model_use' sessions.
   #
   #  Note: This method does not validate the associated 'file upload(s)'. The
-  #        latter component is validated via 'validator_mime.py', and 
-  #        'validator_dataset.py'.
-  def data_validation(self):
+  #        latter is validated via 'validate_mime.py', and 'validate_dataset.py'.
+  def validate(self):
     # local variables
     list_error = []
     svm_settings = self.svm_data['data']['settings']

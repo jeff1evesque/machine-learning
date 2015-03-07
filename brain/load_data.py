@@ -4,10 +4,10 @@
 #  This file allocates provided input to respective 'session_xxx_xxx.py' script,
 #      and generates a return object as required.
 import sys
-from brain.session.session_data_append import Data_Append
-from brain.session.session_data_new import Data_New
-from brain.session.session_model_generate import Model_Generate
-from brain.session.session_model_use import Model_Use
+from brain.session.data_append import Data_Append
+from brain.session.data_new import Data_New
+from brain.session.model_generate import Model_Generate
+from brain.session.model_use import Model_Use
 
 ## Class: Load_Data, explicitly inherit 'new-style' class
 class Load_Data(object):
@@ -36,7 +36,7 @@ class Load_Data(object):
         session.check()
 
         session.dataset_to_json(session_id)
-        session.validate_dataset_json()
+        session.validate_dataset()
         session.check()
 
         session.save_observation_label('data_new', session_id)

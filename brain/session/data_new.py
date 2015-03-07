@@ -1,20 +1,22 @@
 #!/usr/bin/python
 
-## @session_data_new.py
+## @data_new.py
 #  This file receives data (i.e. settings), including one or more dataset(s)
 #      provided during the current session, and stores them into corresponding
 #      database tables. The stored dataset(s) can later be retrieved from
-#      'session_data_append.py', or 'session_generate_model.py'.
+#      'data_append.py', or 'generate_model.py'.
 #
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references
 from brain.database.data_saver import Data_Save
-from brain.converter.converter_json import JSON
-from brain.session.session_base import Base
-from brain.session.session_base_data import Base_Data
+from brain.converter.convert_upload import Convert_Upload
+from brain.session.base import Base
+from brain.session.base_data import Base_Data
 
 ## Class: Data_New, inherit base methods from superclass 'Base', 'Base_Data'
+#
+#  Note: this class is invoked within 'load_data.py'
 class Data_New(Base, Base_Data):
 
   ## constructor: define class properties using the superclass 'Session_Base'
@@ -32,7 +34,7 @@ class Data_New(Base, Base_Data):
   #                          from a supplied session (entity id) into the database.
   #
   #  @self.observation_labels, list of features (independent variables), defined
-  #      after invoking the 'dataset_to_json' method.
+  #      after invoking the 'dataset_to_dict' method.
   #
   #  @session_id, the corresponding returned session id from invoking the
   #      'save_svm_entity' method.
@@ -45,21 +47,21 @@ class Data_New(Base, Base_Data):
         db_return = db_save.db_data_save()
         if not db_return['status']: self.response_error.append( db_return['error'] )
 
-  ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
-  #                   json object.
+  ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
+  #                   dict object.
   #
   #  @flag_convert, when true, indicates the file-upload mime type passed
   #      validation, and returned unique file(s) (redundancies removed).
   #
-  #  @flag_append, when false, indicates the neccessary 'self.json_dataset'
-  #      was not properly defined, causing this method to 'return', which
+  #  @flag_append, when false, indicates the neccessary 'self.dataset' was
+  #      not properly defined, causing this method to 'return', which
   #      essentially stops the execution of the current session.
   #
   #  @index_count, used to 'check label consistent'.
-  def dataset_to_json(self, id_entity):
-    flag_convert   = False
-    flag_append    = True
-    index_count    = 0
+  def dataset_to_dict(self, id_entity):
+    flag_convert = False
+    flag_append  = True
+    index_count  = 0
 
     try:
       self.response_mime_validation['dataset']['file_upload']
@@ -70,43 +72,43 @@ class Data_New(Base, Base_Data):
       return False
 
     if ( flag_convert ):
-      self.json_dataset = []
-      svm_property      = self.svm_data
+      self.dataset = []
+      svm_property = self.svm_data
 
       for val in self.response_mime_validation['dataset']['file_upload']:
         # reset file-pointer
         val['file'].seek(0)
 
-        # csv to json
+        # csv to dict
         if val['type'] in ('text/plain', 'text/csv'):
           try:
             # conversion
-            dataset_converter = JSON(val['file'])
-            dataset_converted = dataset_converter.csv_to_json()
+            dataset_converter = Convert_Upload(val['file'])
+            dataset_converted = dataset_converter.csv_to_dict()
 
             # check label consistency, assign labels
             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
             self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
+            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
 
-        # xml to json
+        # xml to dict
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
             # conversion
-            dataset_converter = JSON(val['file'])
-            dataset_converted = dataset_converter.xml_to_json()
+            dataset_converter = Convert_Upload(val['file'])
+            dataset_converted = dataset_converter.xml_to_dict()
 
             # check label consistency, assign labels
             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
             self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
+            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False

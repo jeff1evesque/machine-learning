@@ -1,12 +1,14 @@
 #!/usr/bin/python
 
-## @validator_dataset.py
+## @validate_dataset.py
 #  This script performs validation on the svm data.
 import json, sys
 from jsonschema import validate
 from brain.schema.jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
 
 ## Class: Validate_Dataset, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'base_data.py'
 class Validate_Dataset(object):
 
   ## constructor: saves a subset of the passed-in form data
@@ -14,12 +16,11 @@ class Validate_Dataset(object):
     self.svm_data    = svm_data
     self.svm_session = svm_session
 
-  ## dataset_validation: each supplied SVM dataset is correctly formatted via corresponding
-  #                      methods in 'svm_json.py'. After being formatted, each dataset is
-  #                      validated in this method.
+  ## dataset_validation: each supplied SVM dataset is correctly formatted into a dict,
+  #                      then validated in this method.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
-  def dataset_validation(self):
+  def validate(self):
     # local variables
     list_error = []
 

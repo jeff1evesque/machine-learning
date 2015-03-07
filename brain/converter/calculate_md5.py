@@ -1,12 +1,12 @@
 #!/usr/bin/python
 
-## @converter_md5.py
+## @calculate_md5.py
 #  This file converts a given object to a hash value equivalent.
 import hashlib
 from collections import defaultdict
 
-## md5_for_object: Convert the contents of a given object, to a hash value
-#                  equivalent.
+## calculate_md5: Convert the contents of a given object, to a hash value
+#                 equivalent.
 #
 #  @md5.update, generate an md5 checksum fingerprint, of the given file. Calling
 #      this method repeatedly, is equivalent to a single call with the concatenation
@@ -28,12 +28,14 @@ from collections import defaultdict
 #      'hexdigest' algorithm.
 #
 #  Note: block size directly depends on the block size of the filesystem.
-def md5_for_object(item, block_size=256*128, hr=False):
-  md5 = hashlib.md5()
-  # use lambda anonymous function to iterate given object
-  for chunk in iter(lambda: item.read(block_size), b''):
-    md5.update(chunk)
-  # return the digest of strings passed into 'update'
-  if hr:
-    return md5.hexdigest()
-  return md5.digest()
+def calculate_md5(item, block_size=256*128, hr=False):
+    md5 = hashlib.md5()
+
+    # use lambda anonymous function to iterate given object
+    for chunk in iter(lambda: item.read(block_size), b''):
+        md5.update(chunk)
+
+    # return the digest of strings passed into 'update'
+    if hr:
+        return md5.hexdigest()
+    return md5.digest()

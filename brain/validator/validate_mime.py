@@ -1,13 +1,15 @@
 #!/usr/bin/python
 
-## @validator_mime.py
+## @validate_mime.py
 #  This script performs validation on the 'mime' type for file upload(s), and returns the
 #      validated temporary file references(s), along with the corresponding mimetype for
 #      each file upload(s).
 import sys
-from brain.converter.converter_md5 import md5_for_object
+from brain.converter.calculate_md5 import calculate_md5
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'base_data.py'
 class Validate_Mime(object):
 
   ## constructor: saves a subset of the passed-in form data
@@ -15,12 +17,11 @@ class Validate_Mime(object):
     self.svm_data    = svm_data
     self.svm_session = svm_session
 
-  ## file_upload_validation: this method validates the MIME type of 'file upload(s)',
-  #                          provided during a 'training' session. If any of the 'file
-  #                          upload(s)' fails validation, this method will return False.
-  #                          Otherwise, the method will return a list of unique 'file
-  #                          upload(s)', discarding duplicates.
-  def file_upload_validation(self):
+  ## validate: this method validates the MIME type of 'file upload(s)', provided during
+  #            a 'training' session. If any of the 'file upload(s)' fails validation,
+  #            this method will return False. Otherwise, the method will return a list
+  #            of unique 'file upload(s)', discarding duplicates.
+  def validate(self):
     # local variables
     list_error       = []
 
@@ -34,7 +35,7 @@ class Validate_Mime(object):
 
       for index, filedata in enumerate(dataset['file_upload']):
         try:
-          filehash = md5_for_object(filedata['file'])
+          filehash = calculate_md5(filedata['file'])
           # add 'hashed' value of file reference(s) to a list
           if filehash not in unique_hash:
             unique_hash.add(filehash)
