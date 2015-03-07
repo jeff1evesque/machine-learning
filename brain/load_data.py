@@ -22,7 +22,7 @@ class Load_Data(object):
     def load_data_new(self):
 
         # instantiate class
-        session = Data_New( self.data )
+        session = Data_New(self.data)
 
         # implement class methods
         if not session.validate_arg_none():
@@ -53,7 +53,7 @@ class Load_Data(object):
     def load_data_append(self):
 
         # instantiate class
-        session = Data_Append( self.data )
+        session = Data_Append(self.data)
 
         # define current session id
         session_id = self.data['data']['settings']['svm_session_id']
@@ -86,7 +86,7 @@ class Load_Data(object):
     def load_model_generate(self):
 
         # instantiate class
-        session = Model_Generate( self.data )
+        session = Model_Generate(self.data)
 
         # define current session id
         session_id = self.data['data']['settings']['svm_session_id']
