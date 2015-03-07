@@ -42,14 +42,14 @@ class Validate_Mime(object):
                         mimetype = filedata['file'].content_type
 
                         # validate mimetype
-                        if ( mimetype not in acceptable_type ):
+                        if (mimetype not in acceptable_type):
                             msg = '''Problem: Uploaded file, \'''' + filedata['filename'] + '''\', must be one of the formats:'''
                             msg += '\n ' + ', '.join(acceptable_type)
                             list_error.append(msg)
 
                     # keep non-duplicated file uploads
                     else:
-                        dataset_keep.append( {'type': mimetype, 'file': filedata['file'], 'filename': filedata['filename']} )
+                        dataset_keep.append({'type': mimetype, 'file': filedata['file'], 'filename': filedata['filename']})
                 except:
                     msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
                     list_error.append(msg)
@@ -63,6 +63,6 @@ class Validate_Mime(object):
 
         # return error
         if len(list_error) > 0:
-            return { 'error': list_error, 'dataset': None }
+            return {'error': list_error, 'dataset': None}
         else:
-            return { 'error': None, 'dataset': dataset }
+            return {'error': None, 'dataset': dataset}
