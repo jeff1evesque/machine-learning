@@ -13,7 +13,7 @@ from brain.validator.validator_mime import Validate_Mime
 ## Class: Base_Data, explicitly inherit 'new-style' class
 class Base_Data(object):
 
-  ## constructor: define class properties using the superclass 'Session_Base'
+  ## constructor: define class properties using the superclass 'Base'
   #               constructor, along with the constructor in this subclass.
   #
   #  @super(), implement 'Session_Base' superclass constructor within this
