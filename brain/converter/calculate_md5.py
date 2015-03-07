@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @converter_md5.py
+## @calculate_md5.py
 #  This file converts a given object to a hash value equivalent.
 import hashlib
 from collections import defaultdict
