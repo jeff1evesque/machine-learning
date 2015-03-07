@@ -20,7 +20,7 @@ class Validate_Dataset(object):
   #                      then validated in this method.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
-  def dataset_validation(self):
+  def validate(self):
     # local variables
     list_error = []
 
