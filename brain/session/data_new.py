@@ -57,9 +57,9 @@ class Data_New(Base, Base_Data):
   #
   #  @index_count, used to 'check label consistent'.
   def dataset_to_dict(self, id_entity):
-    flag_convert   = False
-    flag_append    = True
-    index_count    = 0
+    flag_convert = False
+    flag_append  = True
+    index_count  = 0
 
     try:
       self.response_mime_validation['dataset']['file_upload']
