@@ -51,8 +51,8 @@ class Base_Data(object):
     elif db_return['status'] and session_type == 'data_new':
       return { 'status': True, 'id': db_return['id'], 'error': None }
 
-  ## validate_dataset_json: validate each dataset element.
-  def validate_dataset_json(self):
+  ## validate_dataset: validate each dataset element.
+  def validate_dataset(self):
     for list in self.json_dataset:
       for val in list['svm_dataset']:
         json_validated = Validate_Dataset( val, self.svm_session )
