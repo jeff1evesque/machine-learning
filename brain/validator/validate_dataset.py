@@ -16,9 +16,8 @@ class Validate_Dataset(object):
     self.svm_data    = svm_data
     self.svm_session = svm_session
 
-  ## dataset_validation: each supplied SVM dataset is correctly formatted via corresponding
-  #                      methods in 'svm_json.py'. After being formatted, each dataset is
-  #                      validated in this method.
+  ## dataset_validation: each supplied SVM dataset is correctly formatted into a dict,
+  #                      then validated in this method.
   #
   #  Note: the SVM dataset is synonymous for the 'file upload(s)'
   def dataset_validation(self):
