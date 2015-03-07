@@ -9,7 +9,7 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-from brain.session.session_data_new import Data_New
+from brain.session.data_new import Data_New
 from brain.database.data_saver import Data_Save
 
 ## Class: Data_Append, inherit base methods from superclass 'Data_New'
