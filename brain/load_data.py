@@ -35,7 +35,7 @@ class Load_Data(object):
                 session_id = session_entity['id']
                 session.check()
 
-                session.dataset_to_json(session_id)
+                session.dataset_to_dict(session_id)
                 session.validate_dataset()
                 session.check()
 
@@ -68,8 +68,8 @@ class Load_Data(object):
             if session_entity['status']:
                 session.check()
 
-                session.dataset_to_json(session_id)
-                session.validate_dataset_json()
+                session.dataset_to_dict(session_id)
+                session.validate_dataset()
                 session.check()
 
                 session.save_observation_label('data_append', session_id)
