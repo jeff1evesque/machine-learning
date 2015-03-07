@@ -13,6 +13,8 @@ import sys
 from brain.validator.validator_settings import Validate_Settings
 
 ## Class: Model_Use, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'load_data.py'
 class Model_Use(object):
 
   ## constructor:
