@@ -14,8 +14,8 @@ class Restructure_Data(object):
         self.files      = files
         self.list_error = []
 
-    ## format: restructure input data
-    def format(self):
+    ## restructure: restructure input data
+    def restructure(self):
 
         # local variables
         formatted_settings = {}
