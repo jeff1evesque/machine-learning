@@ -5,8 +5,8 @@
 #      table(s), from the 'db_machine_learning' database.
 from brain.database.db_query import SQL
 
-## Class: Data_Retrieve, explicitly inherit 'new-style' class
-class Data_Retrieve(object):
+## Class: Retrieve_Dataset, explicitly inherit 'new-style' class
+class Retrieve_Dataset(object):
 
   ## constructor:
   def __init__(self, svm_data):
