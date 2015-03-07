@@ -20,7 +20,7 @@ def jsonschema_dataset():
                 'type': 'string',
                 'minLength': 1
             },
-            'indep_variable_value': { 'type': 'number' },
+            'indep_variable_value': {'type': 'number'},
         },
     }
     return schema
@@ -120,7 +120,7 @@ def jsonschema_model_use():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_title': { 'type': 'string' },
+            'svm_title': {'type': 'string'},
             'svm_model_type': {
                 'type': 'string',
                 'enum': ['classification', 'regression']
