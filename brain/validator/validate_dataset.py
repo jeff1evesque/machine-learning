@@ -2,7 +2,8 @@
 
 ## @validate_dataset.py
 #  This script performs validation on the svm data.
-import json, sys
+import json
+import sys
 from jsonschema import validate
 from brain.schema.jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
 
