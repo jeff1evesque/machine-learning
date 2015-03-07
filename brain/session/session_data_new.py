@@ -11,7 +11,7 @@
 #        references
 from brain.database.data_saver import Data_Save
 from brain.converter.convert_upload import Convert_Upload
-from brain.session.session_base import Base
+from brain.session.base import Base
 from brain.session.base_data import Base_Data
 
 ## Class: Data_New, inherit base methods from superclass 'Base', 'Base_Data'
