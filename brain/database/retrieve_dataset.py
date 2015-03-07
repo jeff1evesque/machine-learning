@@ -7,7 +7,7 @@ from brain.database.db_query import SQL
 
 ## Class: Retrieve_Dataset, explicitly inherit 'new-style' class
 #
-#  Note: this class is invoked within 'views.py'
+#  Note: this class is invoked within 'model_generate.py'
 class Retrieve_Dataset(object):
 
   ## constructor:
