@@ -98,7 +98,7 @@ class Convert_Upload(object):
     return list_dataset
 
   ## get_observation_labels: returns a list of independent variable labels. Since
-  #                          both 'csv_to_json', and 'xml_to_json' defines the
+  #                          both 'csv_to_dict', and 'xml_to_dict' defines the
   #                          class variable this method returns, either method
   #                          needs to be called before this one.
   def get_observation_labels(self):
