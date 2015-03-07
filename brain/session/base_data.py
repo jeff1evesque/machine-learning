@@ -7,7 +7,7 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 from brain.database.data_saver import Data_Save
-from brain.validator.validator_dataset import Validate_Dataset
+from brain.validator.validate_dataset import Validate_Dataset
 from brain.validator.validator_mime import Validate_Mime
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
@@ -57,8 +57,8 @@ class Base_Data(object):
       for val in list['svm_dataset']:
         validated_dataset = Validate_Dataset( val, self.svm_session )
 
-        if validated_dataset.dataset_validation()['error']:
-          self.response_error.append( validated_dataset.dataset_validation()['error'] )
+        if validated_dataset.validate()['error']:
+          self.response_error.append( validated_dataset.validate()['error'] )
 
   ## save_svm_dataset: save each dataset element into a database table.
   def save_svm_dataset(self, session_type):
