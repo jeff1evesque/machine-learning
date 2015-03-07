@@ -24,18 +24,18 @@ class Convert_Data(object):
       for key, value in self.settings.items():
         formatted_settings[key.lower()] = value.lower()
     except Exception as error:
-      self.list_error.append( error )
+      self.list_error.append(error)
       return {'data': None, 'error': self.list_error}
 
     # restructure files: not all sessions involve files
     if self.files:
       try:
         for file in self.files.getlist('svm_dataset[]'):
-          formatted_files.append( {'filename': file.filename, 'file': file} )
+          formatted_files.append({'filename': file.filename, 'file': file})
 
         dataset = {'upload_quantity': len(self.files.getlist('svm_dataset[]')), 'file_upload': formatted_files}
       except Exception as error:
-        self.list_error.append( error )
+        self.list_error.append(error)
         return {'data': None, 'error': self.list_error}
     else: dataset = None
 
@@ -47,5 +47,5 @@ class Convert_Data(object):
 
   ## get_errors: returns all errors corresponding to this class instance
   def get_errors(self):
-    if len(self.list_error) > 0: return { 'error': self.list_error }
-    else: return { 'error': None }
+    if len(self.list_error) > 0: return {'error': self.list_error}
+    else: return {'error': None}
