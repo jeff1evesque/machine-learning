@@ -6,6 +6,8 @@
 from brain.database.db_query import SQL
 
 ## Class: Retrieve_Session, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'views.py'
 class Retrieve_Session(object):
 
   ## constructor:
