@@ -8,6 +8,8 @@
 #      'model_use.py'.
 
 ## Class: Model_Generate
+#
+#  Note: this class is invoked within 'load_data.py'
 class Model_Generate:
 
   ## constructor:
