@@ -8,7 +8,7 @@
 #        references.
 from brain.database.data_saver import Data_Save
 from brain.validator.validate_dataset import Validate_Dataset
-from brain.validator.validator_mime import Validate_Mime
+from brain.validator.validate_mime import Validate_Mime
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 class Base_Data(object):
@@ -27,7 +27,7 @@ class Base_Data(object):
   ## validate_mime_type: validate mime type for each dataset.
   def validate_mime_type(self):
     validator = Validate_Mime( self.svm_data, self.svm_session )
-    self.response_mime_validation = validator.file_upload_validation()
+    self.response_mime_validation = validator.validate()
 
     if self.response_mime_validation['error'] != None:
       self.response_error.append( self.response_mime_validation['error'] )
