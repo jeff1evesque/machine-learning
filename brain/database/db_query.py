@@ -7,8 +7,8 @@ from brain.database.db_settings import Database
 
 ## Class: SQL, explicitly inherit 'new-style' class
 #
-#  Note: this class is invoked within 'save_dataset.py', 'save_entity.py',
-#        'save_label.py', 'retrieve_dataset.py', and 'retrieve_session.py'.
+#  Note: this class is invoked within 'save_xx.py', and 'retrieve_xx.py'
+#        files.
 class SQL(object):
 
   ## constructor:
