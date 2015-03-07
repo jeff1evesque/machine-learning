@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-## @session_model_use.py
+## @model_use.py
 #  This file receives data (i.e. settings) required to query from the database,
-#      a previously stored SVM model, generated from 'session_model_generate.py'.
-#      The determined SVM Model is then used for analysis based on the input data
+#      a previously stored SVM model, generated from 'model_generate.py'. The
+#      determined SVM Model is then used for analysis based on the input data
 #      provided during the current session.
 #
 #  Note: the term 'dataset' used throughout various comments in this file,
