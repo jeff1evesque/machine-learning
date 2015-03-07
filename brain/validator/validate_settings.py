@@ -7,6 +7,8 @@ from jsonschema import validate
 from brain.schema.jsonschema_definition import jsonschema_data_new, jsonschema_data_append, jsonschema_model_generate, jsonschema_model_use
 
 ## Class: Validate_Settings, explicitly inherit 'new-style' class
+#
+#  Note: this class is invoked within 'base.py'
 class Validate_Settings(object):
 
   ## constructor: saves a subset of the passed-in form data
