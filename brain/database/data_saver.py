@@ -91,18 +91,18 @@ class Data_Save(object):
             if response_error: return {'status': False, 'error': response_error}
             else: return {'status': True, 'error': None}
 
-      # insert / update dataset value(s)
-      elif self.svm_cmd == 'save_value':
-          self.sql.sql_connect('db_machine_learning')
-          sql_statement = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES(%s, %s, %s, %s)'
-          dataset       = self.svm_data['svm_dataset']
-          args          = (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value'])
-          response      = self.sql.sql_command(sql_statement, 'insert', args)
+        # insert / update dataset value(s)
+        elif self.svm_cmd == 'save_value':
+            self.sql.sql_connect('db_machine_learning')
+            sql_statement = 'INSERT INTO tbl_dataset_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES(%s, %s, %s, %s)'
+            dataset       = self.svm_data['svm_dataset']
+            args          = (self.svm_data['id_entity'], dataset['dep_variable_label'], dataset['indep_variable_label'], dataset['indep_variable_value'])
+            response      = self.sql.sql_command(sql_statement, 'insert', args)
 
-          # retrieve any error(s), disconnect from database
-          response_error = self.sql.return_error()
-          self.sql.sql_disconnect()
+            # retrieve any error(s), disconnect from database
+            response_error = self.sql.return_error()
+            self.sql.sql_disconnect()
 
-          # return result
-          if response: return {'status': False, 'error': response_error, 'id': response['id']}
-          else: return {'status': True, 'error': None, 'id': response['id']}
+            # return result
+            if response: return {'status': False, 'error': response_error, 'id': response['id']}
+            else: return {'status': True, 'error': None, 'id': response['id']}
