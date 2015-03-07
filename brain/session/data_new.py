@@ -32,7 +32,7 @@ class Data_New(Base, Base_Data):
   #                          from a supplied session (entity id) into the database.
   #
   #  @self.observation_labels, list of features (independent variables), defined
-  #      after invoking the 'dataset_to_json' method.
+  #      after invoking the 'dataset_to_dict' method.
   #
   #  @session_id, the corresponding returned session id from invoking the
   #      'save_svm_entity' method.
@@ -45,8 +45,8 @@ class Data_New(Base, Base_Data):
         db_return = db_save.db_data_save()
         if not db_return['status']: self.response_error.append( db_return['error'] )
 
-  ## dataset_to_json: convert either csv, or xml dataset(s) to a uniform
-  #                   json object.
+  ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
+  #                   dict object.
   #
   #  @flag_convert, when true, indicates the file-upload mime type passed
   #      validation, and returned unique file(s) (redundancies removed).
@@ -56,7 +56,7 @@ class Data_New(Base, Base_Data):
   #      essentially stops the execution of the current session.
   #
   #  @index_count, used to 'check label consistent'.
-  def dataset_to_json(self, id_entity):
+  def dataset_to_dict(self, id_entity):
     flag_convert   = False
     flag_append    = True
     index_count    = 0
@@ -77,7 +77,7 @@ class Data_New(Base, Base_Data):
         # reset file-pointer
         val['file'].seek(0)
 
-        # csv to json
+        # csv to dict
         if val['type'] in ('text/plain', 'text/csv'):
           try:
             # conversion
@@ -94,7 +94,7 @@ class Data_New(Base, Base_Data):
             self.response_error.append( error )
             flag_append = False
 
-        # xml to json
+        # xml to dict
         elif val['type'] in ('application/xml', 'text/xml' ):
           try:
             # conversion
