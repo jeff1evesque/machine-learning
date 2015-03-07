@@ -36,7 +36,7 @@ class Load_Data(object):
         session.check()
 
         session.dataset_to_json(session_id)
-        session.validate_dataset_json()
+        session.validate_dataset()
         session.check()
 
         session.save_observation_label('data_new', session_id)
