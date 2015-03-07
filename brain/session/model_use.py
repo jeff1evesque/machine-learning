@@ -32,5 +32,5 @@ class Model_Use(object):
 
     else:
       msg = 'Please provide a training dataset in json format'
-      print json.dumps({'error':msg}, separators=(',', ': '))
+      print {'error':msg}
       sys.exit()
