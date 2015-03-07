@@ -25,11 +25,11 @@ class Model_Use(object):
     ## CHANGE_METHOD: we will adjust the logic below
     def CHANGE_METHOD(self):
         # validate input data is json format
-        validator = Validate_Settings( sys.svm_data, self.svm_session )
+        validator = Validate_Settings(sys.svm_data, self.svm_session)
 
         # validate, and set SVM properties to 'data_creator.py'
-        if ( sys.svm_data['json_creator'] == 'load_logic.php' ):
-            if ( sys.svm_data['data'].get('result', None) ):
+        if (sys.svm_data['json_creator'] == 'load_logic.php'):
+            if (sys.svm_data['data'].get('result', None)):
                 validator.data_validation()
 
         else:
