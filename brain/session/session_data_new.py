@@ -51,8 +51,8 @@ class Data_New(Base, Base_Data):
   #  @flag_convert, when true, indicates the file-upload mime type passed
   #      validation, and returned unique file(s) (redundancies removed).
   #
-  #  @flag_append, when false, indicates the neccessary 'self.json_dataset'
-  #      was not properly defined, causing this method to 'return', which
+  #  @flag_append, when false, indicates the neccessary 'self.dataset' was
+  #      not properly defined, causing this method to 'return', which
   #      essentially stops the execution of the current session.
   #
   #  @index_count, used to 'check label consistent'.
@@ -70,8 +70,8 @@ class Data_New(Base, Base_Data):
       return False
 
     if ( flag_convert ):
-      self.json_dataset = []
-      svm_property      = self.svm_data
+      self.dataset = []
+      svm_property = self.svm_data
 
       for val in self.response_mime_validation['dataset']['file_upload']:
         # reset file-pointer
@@ -89,7 +89,7 @@ class Data_New(Base, Base_Data):
             self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
+            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
@@ -106,7 +106,7 @@ class Data_New(Base, Base_Data):
             self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
              # build new (relevant) dataset
-            self.json_dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
+            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
           except Exception as error:
             self.response_error.append( error )
             flag_append = False
