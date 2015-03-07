@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @validator_dataset.py
+## @validate_dataset.py
 #  This script performs validation on the svm data.
 import json, sys
 from jsonschema import validate
