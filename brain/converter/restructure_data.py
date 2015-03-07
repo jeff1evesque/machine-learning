@@ -3,8 +3,8 @@
 ## @restructure_data.py
 #  This file contains methods needed to correctly reformat input data.
 
-## Class: Convert_Data, explicitly inherit 'new-style class
-class Convert_Data(object):
+## Class: Restructure_Data, explicitly inherit 'new-style class
+class Restructure_Data(object):
 
     ## constructor
     def __init__(self, settings, files=None):
