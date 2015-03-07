@@ -4,6 +4,8 @@
 #  This file contains methods needed to correctly reformat input data.
 
 ## Class: Restructure_Data, explicitly inherit 'new-style class
+#
+#  Note: this class is invoked within 'views.py'
 class Restructure_Data(object):
 
     ## constructor
