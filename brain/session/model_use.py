@@ -9,7 +9,7 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-import sys, json
+import sys
 from brain.validator.validator_settings import Validate_Settings
 
 ## Class: Model_Use, explicitly inherit 'new-style' class
@@ -18,18 +18,17 @@ class Model_Use(object):
   ## constructor:
   def __init__(self, svm_data):
     self.svm_data    = svm_data
-    self.svm_session = json.loads(self.svm_data)['data']['settings']['svm_session']
+    self.svm_session = self.svm_data['data']['settings']['svm_session']
 
   ## CHANGE_METHOD: we will adjust the logic below
   def CHANGE_METHOD(self):
-    if len(sys.argv) > 1:
-      # validate input data is json format
-      validator = Validate_Settings( sys.argv[1], self.svm_session )
+    # validate input data is json format
+    validator = Validate_Settings( sys.svm_data, self.svm_session )
 
-      # validate, and set SVM properties to 'data_creator.py'
-      if ( json.loads(sys.argv[1])['json_creator'] == 'load_logic.php' ):
-        if ( json.loads(sys.argv[1])['data'].get('result', None) ):
-          validator.data_validation()
+    # validate, and set SVM properties to 'data_creator.py'
+    if ( sys.svm_data['json_creator'] == 'load_logic.php' ):
+      if ( sys.svm_data['data'].get('result', None) ):
+        validator.data_validation()
 
     else:
       msg = 'Please provide a training dataset in json format'
