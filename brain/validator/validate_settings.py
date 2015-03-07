@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @validator_settings.py
+## @validate_settings.py
 #  This script performs validation on session settings. 
 import sys
 from jsonschema import validate
