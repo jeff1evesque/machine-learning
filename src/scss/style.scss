@@ -31,6 +31,14 @@ input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_va
   clear:none;
 }
 
+form > fieldset {
+  margin-top:1.25rem;
+
+  > fieldset {
+    margin-top:0.50rem;
+  }
+}
+
 label.error {
   float:right;
 }
