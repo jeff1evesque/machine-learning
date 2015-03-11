@@ -1,17 +1,17 @@
 /**
- * html_form.js: creates additional form fieldsets based on various datalist choices.
+ * html_form.js: conditionally create form fieldsets, and form elements.
  */
 
 $(document).ready(function() {
 
-// local variables
+// Local Variables
   var obj_form = {};
 
-// append session fieldset
+// Append 'Session Type' Fieldset
   $('.fieldset_session_type').on('change', 'select[name="svm_session"]', function() {
     if ( $(this).val().toLowerCase() == 'model_generate' ) {
       obj_form.session = '\
-          <fieldset class="fieldset_session_analysis">\
+          <fieldset class="fieldset_session_generate">\
             <legend>Generate Model</legend>\
             <fieldset class="fieldset_select_model">\
               <legend>Configurations</legend>\
@@ -25,7 +25,26 @@ $(document).ready(function() {
                 <option value="regression">Regression</option>\
               </select>\
             </fieldset>\
-          </fieldset><br>\
+          </fieldset>\
+        ';
+    }
+    else if ( $(this).val().toLowerCase() == 'model_use' ) {
+      obj_form.session = '\
+          <fieldset class="fieldset_session_analysis">\
+            <legend>Analysis</legend>\
+            <fieldset class="fieldset_dataset_type">\
+              <legend>Configurations</legend>\
+              <p>Select a previous model to analyze</p>\
+              <select name="svm_model_id">\
+                <option value="" selected="selected">--Select--</option>\
+              </select>\
+              <select name="svm_model_type">\
+                <option value="" selected="selected">--Select--</option>\
+                <option value="classification">Classification</option>\
+                <option value="regression">Regression</option>\
+              </select>\
+            </fieldset>\
+          </fieldset>\
         ';
     }
     else if ( $(this).val().toLowerCase() == 'data_new' ) {
@@ -34,13 +53,8 @@ $(document).ready(function() {
             <legend>Data Upload</legend>\
             <fieldset class="fieldset_dataset_type">\
               <legend>Configurations</legend>\
-              <p>Please save the <i>Session Name</i>, then provide the <i>Training Type</i>, followed by the <i>Dataset Type</i></p>\
+              <p>Please save the <i>Session Name</i>, then provide dataset type</p>\
               <input type="text" name="svm_title" placeholder="Session Name">\
-              <select name="svm_model_type">\
-                <option value="" selected="selected">--Select--</option>\
-                <option value="classification">Classification</option>\
-                <option value="regression">Regression</option>\
-              </select>\
               <select name="svm_dataset_type">\
                 <option value="" selected="selected">--Select--</option>\
                 <option value="file_upload">Upload file</option>\
@@ -70,15 +84,25 @@ $(document).ready(function() {
         ';
     }
     else obj_form.session = null;
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_data_upload', '.fieldset_supply_dataset', '.svm_form_submit']);
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_generate', '.fieldset_session_data_upload', '.svm_form_submit']);
 
-  // Add option values to 'svm_session_id' (ajax_session.js)
-    if ($(this).val().toLowerCase() == 'data_append') session_id();
+  // Session Titles: for 'svm_session_id' (defined in ajax_session.js)
+    if ( $.inArray( $(this).val(), ['data_append', 'model_generate'] ) !== -1 ) {
+      session_id();
+    }
 
-  // append 'Supply Dataset' fieldset (Session: Data Append)
+  // Submit Button
+    $('.fieldset_session_generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
+      if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val() ) {
+        obj_form.submit = '<input type="submit" class="svm_form_submit">';
+        build_form('.fieldset_session_generate', obj_form.submit, ['.svm_form_submit']);
+      }
+      else $('.svm_form_submit').remove();
+    });
+
+  // Append 'Supply Dataset' Fieldset
     $('.fieldset_session_data_upload').on('input change', 'select[name="svm_dataset_type"], select[name="svm_session_id"], input[name="svm_title"], select[name="svm_model_type"]', function() {
-
-    // append 'Supply Dataset' fieldset (Session: Append Data)
+    // Session: Append Data
       if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_dataset_type"]').val() ) {
         if ( $('select[name="svm_session_id"]').val().length > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' ) {
           obj_form.dataset = '\
@@ -103,9 +127,9 @@ $(document).ready(function() {
         }
       }
 
-    // append 'Supply Dataset' fieldset (Session: New Data)
-      else if ( $('select[name="svm_model_type"]').val() && $('select[name="svm_dataset_type"]').val() && $('input[name="svm_title"]').val() ) {
-        if ( $.inArray( $('select[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0 ) {
+    // Session: New Data
+      else if ( $('select[name="svm_dataset_type"]').val() && $('input[name="svm_title"]').val() ) {
+        if ( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0 ) {
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
@@ -116,7 +140,7 @@ $(document).ready(function() {
               </fieldset>\
             ';
         }
-        else if ( $.inArray( $('select[name="svm_model_type"]').val().toLowerCase(), ['classification', 'regression'] ) !== -1 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'xml_url' && $('input[name="svm_title"]').val().length !== 0 ) {
+        else if ( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'xml_url' && $('input[name="svm_title"]').val().length !== 0 ) {
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
@@ -130,6 +154,7 @@ $(document).ready(function() {
 
       else obj_form.dataset = null;
 
+    // Submit Button
       build_form('.fieldset_dataset_type', obj_form.dataset, ['.fieldset_training_parameters', '.fieldset_training_type', '.fieldset_supply_dataset']);
       $('.fieldset_supply_dataset').on('change', 'input[name="svm_dataset[]"]', function() {
         var flag_field = field_determinant( $('input[name="svm_dataset[]"]') );

@@ -1,6 +1,6 @@
 /**
  * ajax_session.js: this script utilizes ajax to retrieve data from
- *                  'retriever_session.php'. Specifically, the 'svm_title', and
+ *                  'retriever_session.py'. Specifically, the 'svm_title', and
  *                  'id_entity' values are taken from EAV data model, database
  *                  tables, and inserted into the DOM element 'svm_session_id'.
  */
@@ -9,7 +9,7 @@
   function session_id() {
     $.ajax({
       type: 'POST',
-      url: '../../php/retriever_session.php',
+      url: '/retrieve-session/',
       dataType: 'json',
       beforeSend: function() {
         ajaxLoader( $('form') );
