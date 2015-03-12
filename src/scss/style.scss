@@ -33,15 +33,15 @@ input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_va
 
 form {
   > fieldset {
-    margin-top:1rem;
+    margin-top:$form-margin;
 
     > fieldset {
-      margin-top:0.50rem;
+      margin-top:$form-margin / 2;
     }
   }
 
   input.svm_form_submit {
-    margin-top:1rem;
+    margin-top:$form-margin;
   }
 }
 
