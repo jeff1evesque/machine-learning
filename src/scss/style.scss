@@ -31,11 +31,17 @@ input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_va
   clear:none;
 }
 
-form > fieldset {
-  margin-top:1.25rem;
-
+form {
   > fieldset {
-    margin-top:0.50rem;
+    margin-top:1rem;
+
+    > fieldset {
+      margin-top:0.50rem;
+    }
+  }
+
+  input.svm_form_submit {
+    margin-top:1rem;
   }
 }
 
