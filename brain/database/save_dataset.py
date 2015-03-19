@@ -35,14 +35,14 @@ class Data_Save(object):
         self.list_error   = []
         self.sql          = SQL()
 
-    ## db_data_save: store, or update SVM dataset(s) into corresponding 'EAV data
-    #                model' database table(s).
+    ## save: store, or update SVM dataset(s) into corresponding 'EAV data model'
+    #        database table(s).
     #
     #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
     #      is used for argument substitution.
     #
     #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
-    def db_data_save(self):
+    def save(self):
         # insert / update dataset entity value
         if self.svm_cmd == 'save_entity':
             self.sql.sql_connect('db_machine_learning')
