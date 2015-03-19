@@ -5,10 +5,10 @@
 #      table(s), from the 'db_machine_learning' database.
 from brain.database.db_query import SQL
 
-## Class: Data_Save, explicitly inherit 'new-style' class
+## Class: Save_Dataset, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'data_new.py'
-class Data_Save(object):
+class Save_Dataset(object):
 
     ## constructor: stores an SVM dataset (python dict), database configurations
     #               into their own corresponding class variable.
