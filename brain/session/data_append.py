@@ -1,10 +1,8 @@
 #!/usr/bin/python
 
 ## @data_append.py
-#  This file receives data (i.e. settings), including one or more dataset(s)
-#      provided during the current session, and stores them into corresponding
-#      database tables. The stored dataset(s) can later be retrieved from
-#      'data_append.py', or 'generate_model.py'.
+#  This file allows methods defined from the Base, or Base_Data superclass to be
+#      overridden, if needed.
 #
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
