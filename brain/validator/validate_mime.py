@@ -38,6 +38,7 @@ class Validate_Mime(object):
                     filehash = calculate_md5(filedata['file'])
                     # add 'hashed' value of file reference(s) to a list
                     if filehash not in unique_hash:
+                        print 'yes'
                         unique_hash.add(filehash)
                         mimetype = filedata['file'].content_type
 
@@ -47,9 +48,9 @@ class Validate_Mime(object):
                             msg += '\n ' + ', '.join(acceptable_type)
                             list_error.append(msg)
 
-                    # keep non-duplicated file uploads
-                    else:
-                        dataset_keep.append({'type': mimetype, 'file': filedata['file'], 'filename': filedata['filename']})
+                        # keep non-duplicated file uploads
+                        else:
+                            dataset_keep.append({'type': mimetype, 'file': filedata['file'], 'filename': filedata['filename']})
                 except:
                     msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
                     list_error.append(msg)
