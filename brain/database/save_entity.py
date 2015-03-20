@@ -8,7 +8,7 @@ from brain.database.db_query import SQL
 ## Class: Save_Entity, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'data_new.py'
-class Save_Dataset(object):
+class Save_Entity(object):
 
     ## constructor:
     def __init__(self, svm_data, session_type):
