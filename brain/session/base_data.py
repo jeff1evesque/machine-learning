@@ -67,7 +67,7 @@ class Base_Data(object):
     def save_svm_dataset(self, session_type):
         for data in self.dataset:
             for dataset in data['svm_dataset']:
-                db_save = Save_Dataset({'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value', session_type)
+                db_save = Save_Dataset({'svm_dataset': dataset, 'id_entity': data['id_entity']}, session_type)
 
                 # save dataset element, append error(s)
                 db_return = db_save.save()
