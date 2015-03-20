@@ -38,7 +38,6 @@ class Validate_Mime(object):
                     filehash = calculate_md5(filedata['file'])
                     # add 'hashed' value of file reference(s) to a list
                     if filehash not in unique_hash:
-                        print 'yes'
                         unique_hash.add(filehash)
                         mimetype = filedata['file'].content_type
 
