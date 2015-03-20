@@ -9,13 +9,14 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-from brain.session.data_new import Data_New
+from brain.session.base import Base
+from brain.session.base_data import Base_Data
 from brain.database.save_entity import Save_Entity
 
-## Class: Data_Append, inherit base methods from superclass 'Data_New'
+## Class: Data_Append, inherit base methods from superclass 'Base', 'Base_Data'
 #
 #  Note: this class is invoked within 'load_data.py'
-class Data_Append(Data_New):
+class Data_Append(Base, Base_Data):
 
     ## constructor: define class properties using the superclass 'Data_New'
     #               constructor, along with the constructor in this subclass.
