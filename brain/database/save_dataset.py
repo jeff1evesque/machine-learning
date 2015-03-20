@@ -43,30 +43,8 @@ class Save_Dataset(object):
     #
     #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
     def save(self):
-        # insert / update dataset entity value
-        if self.svm_cmd == 'save_entity':
-            self.sql.sql_connect('db_machine_learning')
-
-            if self.session_type == 'data_append':
-                sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
-                args          = (self.svm_data['uid'], self.svm_data['id_entity'])
-                response      = self.sql.sql_command(sql_statement, 'update', args)
-
-            elif self.session_type == 'data_new':
-                sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES(%s, %s, UTC_TIMESTAMP())'
-                args          = (self.svm_data['title'], self.svm_data['uid'])
-                response      = self.sql.sql_command(sql_statement, 'insert', args)
-
-            # retrieve any error(s), disconnect from database
-            response_error = self.sql.return_error()
-            self.sql.sql_disconnect()
-
-            # return result
-            if response_error: return {'status': False, 'error': response_error, 'id': response['id']}
-            else: return {'status': True, 'error': None, 'id': response['id']}
-
         # insert / update feature label(s)
-        elif self.svm_cmd == 'save_label':
+        if self.svm_cmd == 'save_label':
             self.sql.sql_connect('db_machine_learning')
 
             # add labels (append case)
