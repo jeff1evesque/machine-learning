@@ -18,8 +18,8 @@ class Save_Entity(object):
         self.list_error   = []
         self.sql          = SQL()
 
-    ## save: store, or update SVM dataset(s) into corresponding 'EAV data model'
-    #        database table(s).
+    ## save: store, or update SVM entity into corresponding 'EAV data model'
+    #        database table.
     #
     #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
     #      is used for argument substitution.
