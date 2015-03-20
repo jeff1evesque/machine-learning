@@ -7,7 +7,7 @@ from brain.database.db_query import SQL
 
 ## Class: Save_Entity, explicitly inherit 'new-style' class
 #
-#  Note: this class is invoked within 'base_data.py', and 'data_append.py'
+#  Note: this class is invoked within 'base_data.py'
 class Save_Entity(object):
 
     ## constructor: stores an SVM entity (python dict), database configurations
