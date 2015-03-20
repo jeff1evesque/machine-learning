@@ -9,7 +9,6 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references
-from brain.database.save_label import Save_Label
 from brain.session.base import Base
 from brain.session.base_data import Base_Data
 
