@@ -6,7 +6,7 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-from brain.database.data_saver import Data_Save
+from brain.database.save_dataset import Save_Dataset
 from brain.validator.validate_dataset import Validate_Dataset
 from brain.validator.validate_mime import Validate_Mime
 
@@ -39,10 +39,10 @@ class Base_Data(object):
     #                   the corresponding entity id.
     def save_svm_entity(self, session_type):
         svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': None}
-        db_save    = Data_Save(svm_entity, 'save_entity', session_type)
+        db_save    = Save_Dataset(svm_entity, 'save_entity', session_type)
 
         # save dataset element
-        db_return  = db_save.db_data_save()
+        db_return  = db_save.save()
 
         # return error(s)
         if not db_return['status']:
@@ -66,8 +66,8 @@ class Base_Data(object):
     def save_svm_dataset(self, session_type):
         for data in self.dataset:
             for dataset in data['svm_dataset']:
-                db_save = Data_Save({'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value', session_type)
+                db_save = Save_Dataset({'svm_dataset': dataset, 'id_entity': data['id_entity']}, 'save_value', session_type)
 
                 # save dataset element, append error(s)
-                db_return = db_save.db_data_save()
+                db_return = db_save.save()
                 if db_return['error']: self.response_error.append(db_return['error'])

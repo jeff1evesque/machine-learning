@@ -9,7 +9,7 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references
-from brain.database.data_saver import Data_Save
+from brain.database.save_dataset import Save_Dataset
 from brain.converter.convert_upload import Convert_Upload
 from brain.session.base import Base
 from brain.session.base_data import Base_Data
@@ -41,10 +41,10 @@ class Data_New(Base, Base_Data):
     def save_observation_label(self, session_type, session_id):
         if len(self.observation_labels) > 0:
             for label in self.observation_labels:
-                db_save = Data_Save({'label': label, 'id_entity': session_id}, 'save_label', session_type)
+                db_save = Save_Dataset({'label': label, 'id_entity': session_id}, 'save_label', session_type)
 
                 # save dataset element, append error(s)
-                db_return = db_save.db_data_save()
+                db_return = db_save.save()
                 if not db_return['status']: self.response_error.append(db_return['error'])
 
     ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
