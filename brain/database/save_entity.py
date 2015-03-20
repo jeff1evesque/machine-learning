@@ -10,7 +10,16 @@ from brain.database.db_query import SQL
 #  Note: this class is invoked within 'data_new.py'
 class Save_Entity(object):
 
-    ## constructor:
+    ## constructor: stores an SVM entity (python dict), database configurations
+    #               into their own corresponding class variable.
+    #
+    #  Note: during the SVM entity instance, 'self.svm_data' is a dictionary with the
+    #        following elements:
+    #
+    #            {'uid': xx, 'id_entity': xx, 'title': yyy}
+    #
+    #        where 'xx' denotes an integer value, 'yyy' a unicode string, and 'zz'
+    #        representing a float value.
     def __init__(self, svm_data, session_type):
         # class variables
         self.svm_data     = svm_data
