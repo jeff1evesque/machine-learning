@@ -10,6 +10,8 @@ from brain.database.save_entity import Save_Entity
 from brain.database.save_dataset import Save_Dataset
 from brain.validator.validate_dataset import Validate_Dataset
 from brain.validator.validate_mime import Validate_Mime
+from brain.converter.convert_upload import Convert_Upload
+from brain.database.save_label import Save_Label
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 #
@@ -90,4 +92,73 @@ class Base_Data(object):
                 # save dataset element, append error(s)
                 db_return = db_save.save()
                 if not db_return['status']: self.response_error.append(db_return['error'])
+
+    ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
+    #                   dict object.
+    #
+    #  @flag_convert, when true, indicates the file-upload mime type passed
+    #      validation, and returned unique file(s) (redundancies removed).
+    #
+    #  @flag_append, when false, indicates the neccessary 'self.dataset' was
+    #      not properly defined, causing this method to 'return', which
+    #      essentially stops the execution of the current session.
+    #
+    #  @index_count, used to 'check label consistent'.
+    def dataset_to_dict(self, id_entity):
+        flag_convert = False
+        flag_append  = True
+        index_count  = 0
+
+        try:
+            self.response_mime_validation['dataset']['file_upload']
+            flag_convert = True
+        except Exception as error:
+            self.response_error.append(error)
+            print error
+            return False
+
+        if (flag_convert):
+            self.dataset = []
+            svm_property = self.svm_data
+
+            for val in self.response_mime_validation['dataset']['file_upload']:
+                # reset file-pointer
+                val['file'].seek(0)
+
+                # csv to dict
+                if val['type'] in ('text/plain', 'text/csv'):
+                    try:
+                        # conversion
+                        dataset_converter = Convert_Upload(val['file'])
+                        dataset_converted = dataset_converter.csv_to_dict()
+
+                        # check label consistency, assign labels
+                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                        self.observation_labels = sorted(dataset_converter.get_observation_labels())
+
+                        # build new (relevant) dataset
+                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
+                    except Exception as error:
+                        self.response_error.append(error)
+                        flag_append = False
+
+                # xml to dict
+                elif val['type'] in ('application/xml', 'text/xml' ):
+                    try:
+                        # conversion
+                        dataset_converter = Convert_Upload(val['file'])
+                        dataset_converted = dataset_converter.xml_to_dict()
+
+                        # check label consistency, assign labels
+                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                        self.observation_labels = sorted(dataset_converter.get_observation_labels())
+
+                        # build new (relevant) dataset
+                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
+                    except Exception as error:
+                        self.response_error.append(error)
+                        flag_append = False
+
+            index_count += 1
+            if not flag_append: return False
 
