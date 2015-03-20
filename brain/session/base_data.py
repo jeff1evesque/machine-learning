@@ -11,6 +11,7 @@ from brain.database.save_dataset import Save_Dataset
 from brain.validator.validate_dataset import Validate_Dataset
 from brain.validator.validate_mime import Validate_Mime
 from brain.converter.convert_upload import Convert_Upload
+from brain.database.save_label import Save_Label
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 #
