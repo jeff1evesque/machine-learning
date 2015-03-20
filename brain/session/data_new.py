@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 ## @data_new.py
-#  This file allows methods defined from the Base, or Base_Data class to be
+#  This file allows methods defined from the Base, or Base_Data superclass to be
 #      overridden, if needed.
 #
 #  Note: the term 'dataset' used throughout various comments in this file,
