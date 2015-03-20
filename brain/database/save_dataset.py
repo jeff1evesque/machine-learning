@@ -19,14 +19,6 @@ class Save_Dataset(object):
     #            {'svm_dataset': {'dep_variable_label': 'yyy',
     #                               'indep_variable_label': 'yyy',
     #                               'indep_variable_value': zz.zz}},
-    #
-    #  Note: during the SVM entity instance, 'self.svm_data' is a dictionary with the
-    #        following elements:
-    #
-    #            {'uid': xx, 'id_entity': xx, 'title': yyy}
-    #
-    #        where 'xx' denotes an integer value, 'yyy' a unicode string, and 'zz'
-    #        representing a float value.
     def __init__(self, svm_data, cmd, session_type):
         # class variables
         self.svm_data     = svm_data
