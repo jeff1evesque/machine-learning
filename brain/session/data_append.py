@@ -28,7 +28,7 @@ class Data_Append(Data_New):
         super(Data_New, self).__init__(svm_data)
 
     ## save_svm_entity: override an identical method from inheritted superclass,
-    #                   'Data_New'. This method, updates an existing entity within
+    #                   'Base_Data'. This method, updates an existing entity within
     #                   the corresponding database table, 'tbl_dataset_entity'.
     #
     #  @session_id, is synonymous to 'entity_id', and provides context to update
