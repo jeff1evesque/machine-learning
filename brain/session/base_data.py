@@ -25,7 +25,8 @@ class Base_Data(object):
     #  Note: the superclass constructor expects the same 'svm_data' argument.
     def __init__(self, svm_data):
         super(Base_Data, self).__init__(svm_data)
-        self.flag_validate_mime  = False
+        self.flag_validate_mime = False
+        self.observation_labels = []
 
     ## validate_mime_type: validate mime type for each dataset.
     def validate_mime_type(self):
@@ -72,3 +73,21 @@ class Base_Data(object):
                 # save dataset element, append error(s)
                 db_return = db_save.save()
                 if db_return['error']: self.response_error.append(db_return['error'])
+
+    ## save_observation_label: save the list of unique independent variable labels
+    #                          from a supplied session (entity id) into the database.
+    #
+    #  @self.observation_labels, list of features (independent variables), defined
+    #      after invoking the 'dataset_to_dict' method.
+    #
+    #  @session_id, the corresponding returned session id from invoking the
+    #      'save_svm_entity' method.
+    def save_observation_label(self, session_type, session_id):
+        if len(self.observation_labels) > 0:
+            for label in self.observation_labels:
+                db_save = Save_Label({'label': label, 'id_entity': session_id}, session_type)
+
+                # save dataset element, append error(s)
+                db_return = db_save.save()
+                if not db_return['status']: self.response_error.append(db_return['error'])
+
