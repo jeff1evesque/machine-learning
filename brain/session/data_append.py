@@ -35,7 +35,7 @@ class Data_Append(Data_New):
     #      'modified_xx' columns within the 'tbl_dataset_entity' database table.
     def save_svm_entity(self, session_type, session_id):
         svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': session_id}
-        db_save    = Save_Dataset(svm_entity, 'save_entity', session_type)
+        db_save    = Save_Dataset(svm_entity, session_type)
 
         # save dataset element
         db_return = db_save.save()
