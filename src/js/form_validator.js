@@ -93,7 +93,7 @@
         },
         svm_dataset_type: {
           required: true,
-          equals: ['file_upload', 'xml_url']
+          equals: ['file_upload', 'dataset_url']
         },
         svm_model_type: {
           required: true,
