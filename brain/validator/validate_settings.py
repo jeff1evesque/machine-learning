@@ -33,11 +33,6 @@ class Validate_Settings(object):
             except Exception, error:
                 list_error.append(str(error))
 
-            # validation on 'xml file(s)'
-            if (self.svm_settings.get('svm_dataset_type', None) == 'upload file' and self.svm_settings.get('svm_dataset', None)):
-                for index, xmldata in enumerate(self.svm_settings['svm_dataset']):
-                    print xmldata
-
         # validation on 'data_append' session
         if self.svm_session == 'data_append':
             try:
