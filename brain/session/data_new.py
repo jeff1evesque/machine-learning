@@ -15,11 +15,12 @@ from brain.session.base_data import Base_Data
 #  Note: this class is invoked within 'load_data.py'
 class Data_New(Base, Base_Data):
 
-    ## constructor: define class properties using the superclass 'Session_Base'
-    #               constructor, along with the constructor in this subclass.
+    ## constructor: define class properties using the superclass 'Base', and
+    #               'Base_Data' constructor, along with the constructor in this
+    #               subclass.
     #
-    #  @super(), implement 'Session_Base' superclass constructor within this
-    #      child class constructor.
+    #  @super(), implement 'Base', and 'Base_Data' superclass constructor within
+    #      this child class constructor.
     #
     #  Note: the superclass constructor expects the same 'svm_data' argument.
     def __init__(self, svm_data):
