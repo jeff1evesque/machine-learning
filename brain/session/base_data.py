@@ -18,13 +18,7 @@ from brain.database.save_label import Save_Label
 #  Note: this class is invoked within 'data_xx.py'
 class Base_Data(object):
 
-    ## constructor: define class properties using the superclass 'Base'
-    #               constructor, along with the constructor in this subclass.
-    #
-    #  @super(), implement 'Session_Base' superclass constructor within this
-    #      child class constructor.
-    #
-    #  Note: the superclass constructor expects the same 'svm_data' argument.
+    ## constructor:
     def __init__(self, svm_data):
         self.flag_validate_mime = False
         self.observation_labels = []
