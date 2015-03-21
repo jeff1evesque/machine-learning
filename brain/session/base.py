@@ -11,7 +11,7 @@ from brain.validator.validate_settings import Validate_Settings
 
 ## Class: Base, explicitly inherit 'new-style' class
 #
-#  Note: this class is invoked within 'data_new.py', 'model_xx.py'
+#  Note: this class is invoked within 'data_xx.py', 'model_xx.py'
 class Base(object):
 
     ## constructor:
