@@ -15,7 +15,7 @@ from brain.database.save_label import Save_Label
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 #
-#  Note: this class is invoked within 'data_new.py'
+#  Note: this class is invoked within 'data_xx.py'
 class Base_Data(object):
 
     ## constructor: define class properties using the superclass 'Base'
