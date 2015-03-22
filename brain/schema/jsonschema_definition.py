@@ -64,7 +64,7 @@ def jsonschema_data_new():
             },
             'svm_dataset_type': {
                 'type': 'string',
-                'enum': ['file_upload', 'xml_url']
+                'enum': ['file_upload', 'dataset_url']
             },
             'svm_session': {
                 'type': 'string',
@@ -89,7 +89,7 @@ def jsonschema_data_append():
             },
             'svm_dataset_type': {
                 'type': 'string',
-                'enum': ['file_upload', 'xml_url']
+                'enum': ['file_upload', 'dataset_url']
             },
             'svm_session': {
                 'type': 'string',
