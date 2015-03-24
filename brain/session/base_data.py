@@ -8,7 +8,6 @@
 #        references.
 from brain.database.save_entity import Save_Entity
 from brain.database.save_dataset import Save_Dataset
-from brain.validator.validate_dataset import Validate_Dataset
 from brain.validator.validate_mime import Validate_Mime
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_label import Save_Label
@@ -49,15 +48,6 @@ class Base_Data(object):
         # return session id
         elif db_return['status'] and session_type == 'data_new':
             return {'status': True, 'id': db_return['id'], 'error': None}
-
-    ## validate_dataset: validate each dataset element.
-    def validate_dataset(self):
-        for list in self.dataset:
-            for val in list['svm_dataset']:
-                validated_dataset = Validate_Dataset(val, self.svm_session)
-
-            if validated_dataset.validate()['error']:
-                self.response_error.append(validated_dataset.validate()['error'])
 
     ## save_svm_dataset: save each dataset element into a database table.
     def save_svm_dataset(self, session_type):
