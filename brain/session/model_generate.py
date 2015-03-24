@@ -26,6 +26,9 @@ class Model_Generate:
         self.selected_dataset = requester.get_dataset(self.session_id)
 
     ## generate_model: generate svm model
+    #
+    #  @X, observations
+    #  @y, feature labels (independent variable labels)
     def generate_model(self):
         dataset = self.selected_dataset['result']
         X = dataset[:, 1:]
