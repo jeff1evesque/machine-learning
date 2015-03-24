@@ -31,12 +31,12 @@ class Validate_Dataset(object):
                 if key == 'svm_dataset':
                     for dict in value:
                         try:
-                            validate(dict, jsonschema_dataset())
+                            Draft4Validator(jsonschema_dataset()).validate(dict)
                         except Exception, error:
                             list_error.append(str(error))
                 elif key == 'id_entity':
                     try:
-                        validate({key: value}, jsonschema_dataset_id())
+                        Draft4Validator(jsonschema_id()).validate({key: value})
                     except Exception, error:
                         list_error.append(str(error))
             except Exception, error:
