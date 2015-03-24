@@ -31,10 +31,14 @@ class Model_Generate:
     #  @X, observations
     #  @y, feature labels (independent variable labels)
     def generate_model(self):
-        dataset = numpy.asarray(self.selected_dataset['result'])
-        X = dataset[:, 1:]
-        y = dataset[:, 0]
+        # local variables
+        dataset       = numpy.asarray(self.selected_dataset['result'])
+        label_encoder = preprocessing.LabelEncoder()
 
+        X = dataset[:, 1:]
+        y = label_encoder.transform(dataset[:, 0])
+
+        # create svm model
         clf = svm.SVC()
         clf.fit(X, y)
 
