@@ -4,7 +4,7 @@
 #  This script performs validation on the svm data.
 import json
 import sys
-from jsonschema import validate
+from jsonschema.validators import Draft4Validator
 from brain.schema.jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
 
 ## Class: Validate_Dataset, explicitly inherit 'new-style' class
