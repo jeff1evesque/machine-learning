@@ -14,4 +14,9 @@ class Model_Generate:
 
     ## constructor:
     def __init__(self, svm_data):
-        self.svm_data = svm_data
+        self.svm_data   = svm_data
+        self.list_error = []
+
+    ## return_error: returns current error(s)
+    def return_error(self):
+        return self.list_error
