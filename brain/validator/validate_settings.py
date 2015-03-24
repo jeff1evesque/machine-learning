@@ -29,14 +29,14 @@ class Validate_Settings(object):
         # validation on 'data_new' session
         if self.svm_session == 'data_new':
             try:
-                validate(self.svm_settings, jsonschema_data_new())
+                Draft4Validator(jsonschema_data_new()).validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'data_append' session
         if self.svm_session == 'data_append':
             try:
-                validate(self.svm_settings, jsonschema_data_append())
+                Draft4Validator(jsonschema_data_append()).validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
@@ -45,7 +45,7 @@ class Validate_Settings(object):
         # validation on 'model_use' session
         elif self.svm_session == 'model_use':
             try:
-                validate(self.svm_settings, jsonschema_model_use())
+                Draft4Validator(jsonschema_model_use()).validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
