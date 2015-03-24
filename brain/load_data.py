@@ -90,7 +90,7 @@ class Load_Data(object):
 
         # implement class methods
         session.select_dataset()
-        session.format_dataset()
+        session.generate_model()
 
         # return
         if session.return_error: return False
