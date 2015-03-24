@@ -88,11 +88,8 @@ class Load_Data(object):
         # instantiate class
         session = Model_Generate(self.data)
 
-        # define current session id
-        session_id = self.data['data']['settings']['svm_session_id']
-
         # implement class methods
-        session.select_dataset(session_id)
+        session.select_dataset()
         session.format_dataset()
 
         # return
