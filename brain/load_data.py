@@ -36,7 +36,6 @@ class Load_Data(object):
                 session.check()
 
                 session.dataset_to_dict(session_id)
-                session.validate_dataset()
                 session.check()
 
                 session.save_observation_label('data_new', session_id)
@@ -69,7 +68,6 @@ class Load_Data(object):
                 session.check()
 
                 session.dataset_to_dict(session_id)
-                session.validate_dataset()
                 session.check()
 
                 session.save_observation_label('data_append', session_id)
