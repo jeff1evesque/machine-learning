@@ -7,7 +7,7 @@
 #      into respective database table(s), which later can be retrieved within
 #      'model_use.py'.
 from brain.database.retrieve_dataset import Retrieve_Dataset
-from sklearn import svm
+from sklearn import svm, preprocessing
 import numpy
 
 ## Class: Model_Generate
