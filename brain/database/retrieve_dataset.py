@@ -11,9 +11,8 @@ from brain.database.db_query import SQL
 class Retrieve_Dataset(object):
 
     ## constructor:
-    def __init__(self, svm_data):
+    def __init__(self):
         # class variables
-        self.svm_data   = svm_data
         self.list_error = []
         self.sql        = SQL()
 
