@@ -30,7 +30,7 @@ class Model_Generate:
     #  @X, observations
     #  @y, feature labels (independent variable labels)
     def generate_model(self):
-        dataset = self.selected_dataset['result']
+        dataset = numpy.asarray(self.selected_dataset['result'])
         X = dataset[:, 1:]
         y = dataset[:, 0]
 
