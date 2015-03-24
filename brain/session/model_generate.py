@@ -25,6 +25,15 @@ class Model_Generate:
         requester             = Retrieve_Dataset()
         self.selected_dataset = requester.get_dataset(self.session_id)
 
+    ## generate_model: generate svm model
+    def generate_model(self):
+        dataset = self.selected_dataset['result']
+        X = dataset[:, 1:]
+        y = dataset[:, 0]
+
+        clf = svm.SVC()
+        clf.fit(X, y)
+
     ## return_error: returns current error(s)
     def return_error(self):
         return self.list_error
