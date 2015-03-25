@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+{#
+   index.html: defines 'training' or 'analysis' session, prompts users to provide an upload file
+               or URL to an XML (dataset), then defines which attributes within the dataset
+               previously defined, to use for the SVM analysis.  After the configurations and
+               attributes have been defined, it is sent to 'logic_loader.py' for further analysis.
+#}
+<html>
+  <head>
+    <script src='static/js/jquery-2.1.1.min.js'></script>
+    <script src='static/js/jquery-validate.min.js'></script>
+    <script src='static/js/html_form.min.js'></script>
+    <script src='static/js/html_form_delegator.min.js'></script>
+    <script src='static/js/form_validator.min.js'></script>
+    <script src='static/js/ajax_graphic.min.js'></script>
+    <script src='static/js/ajax_data.min.js'></script>
+    <script src='static/js/ajax_session.min.js'></script>
+    <script src='static/js/ajax_model.min.js'></script>
+
+    <link rel='stylesheet' href='static/css/style.min.css'>
+  </head>
+  <body>
+
+    <form action='/load-data/' method='post'>
+      <fieldset class='fieldset_session_type'>
+        <legend>Session Type</legend>
+        <p>Select data upload, or analysis session</p>
+        <select name='svm_session' autocomplete='off'>
+          <option value='' selected='selected'>--Select--</option>
+          <option value='data_new'>New Data</option>
+          <option value='data_append'>Append Data</option>
+          <option value='model_generate'>Generate Model</option>
+          <option value='model_use'>Use Model</option>
+        </select>
+      </fieldset>
+    </form>
+
+  </body>
+</html>

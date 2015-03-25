@@ -58,7 +58,7 @@ $(document).ready(function() {
               <select name="svm_dataset_type">\
                 <option value="" selected="selected">--Select--</option>\
                 <option value="file_upload">Upload file</option>\
-                <option value="xml_url">XML URL</option>\
+                <option value="dataset_url">Dataset URL</option>\
               </select>\
             </fieldset>\
           </fieldset>\
@@ -77,7 +77,7 @@ $(document).ready(function() {
               <select name="svm_dataset_type">\
                 <option value="" selected="selected">--Select--</option>\
                 <option value="file_upload">Upload file</option>\
-                <option value="xml_url">XML URL</option>\
+                <option value="dataset_url">Dataset URL</option>\
               </select>\
             </fieldset>\
           </fieldset>\
@@ -115,11 +115,11 @@ $(document).ready(function() {
               </fieldset>\
             ';
         }
-        else if ( $('select[name="svm_session_id"]').val() > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'xml_url' ) {
+        else if ( $('select[name="svm_session_id"]').val() > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'dataset_url' ) {
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
-                <input type="url" name="svm_dataset[]" placeholder="XML Dataset URL" class="svm_dataset_xml">\
+                <input type="url" name="svm_dataset[]" placeholder="Dataset URL" class="svm_dataset_xml">\
                 <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
                 <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove">\
               </fieldset>\
@@ -140,11 +140,11 @@ $(document).ready(function() {
               </fieldset>\
             ';
         }
-        else if ( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'xml_url' && $('input[name="svm_title"]').val().length !== 0 ) {
+        else if ( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'dataset_url' && $('input[name="svm_title"]').val().length !== 0 ) {
           obj_form.dataset = '\
               <fieldset class="fieldset_supply_dataset">\
                 <legend>Supply Dataset</legend>\
-                <input type="url" name="svm_dataset[]" placeholder="XML Dataset URL" class="svm_dataset_xml">\
+                <input type="url" name="svm_dataset[]" placeholder="Dataset URL" class="svm_dataset_xml">\
                 <input type="button" value="Add more" class="add_element svm_dataset_xml_add">\
                 <input type="button" value="Remove" class="remove_element svm_dataset_xml_remove">\
               </fieldset>\
