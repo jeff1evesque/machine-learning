@@ -13,7 +13,7 @@ import numpy
 ## Class: Model_Generate
 #
 #  Note: this class is invoked within 'load_data.py'
-class Model_Generate:
+class Model_Generate():
 
     ## constructor:
     def __init__(self, svm_data):
