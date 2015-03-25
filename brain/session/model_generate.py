@@ -7,11 +7,11 @@
 #      into respective database table(s), which later can be retrieved within
 #      'model_use.py'.
 
-## Class: Model_Generate, inherit base methods from superclass 'Session_Base'
+## Class: Model_Generate
 #
 #  Note: this class is invoked within 'load_data.py'
 class Model_Generate(Session_Base):
 
     ## constructor:
     def __init__(self, svm_data):
-        self.svm_data       = svm_data
+        self.svm_data = svm_data
