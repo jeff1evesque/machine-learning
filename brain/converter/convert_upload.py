@@ -57,7 +57,8 @@ class Convert_Upload(object):
 
             # generalized feature count in an observation
             row_indep_variable = row[0].split(',')
-            self.count_features = len(row_indep_variable) - 1
+            if not self.count_features:
+                self.count_features = len(row_indep_variable) - 1
 
             # iterate each column in a given row
             for indep_index, value in enumerate(islice(row_indep_variable, 1, None)):
