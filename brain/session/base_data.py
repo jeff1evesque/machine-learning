@@ -22,6 +22,7 @@ class Base_Data(object):
     def __init__(self, svm_data):
         self.flag_validate_mime = False
         self.observation_labels = []
+        self.list_error         = []
 
     ## save_svm_info: save the number of features that can be expected in a given
     #                 observation with respect to 'id_entity'.
@@ -40,7 +41,7 @@ class Base_Data(object):
 
         # save dataset element, append error(s)
         db_return = db_save.save()
-        if db_return['error']: self.response_error.append(db_return['error'])
+        if db_return['error']: self.list_error.append(db_return['error'])
 
     ## validate_mime_type: validate mime type for each dataset.
     def validate_mime_type(self):
@@ -48,7 +49,7 @@ class Base_Data(object):
         self.response_mime_validation = validator.validate()
 
         if self.response_mime_validation['error'] != None:
-            self.response_error.append(self.response_mime_validation['error'])
+            self.list_error.append(self.response_mime_validation['error'])
             self.flag_validate_mime = True
 
     ## validate_id: validate session id as positive integer.
@@ -70,8 +71,8 @@ class Base_Data(object):
 
         # return error(s)
         if not db_return['status']:
-            self.response_error.append(db_return['error'])
-            return {'status': False, 'id': None, 'error': self.response_error}
+            self.list_error.append(db_return['error'])
+            return {'status': False, 'id': None, 'error': self.list_error}
 
         # return session id
         elif db_return['status'] and session_type == 'data_new':
@@ -85,7 +86,7 @@ class Base_Data(object):
 
                 # save dataset element, append error(s)
                 db_return = db_save.save()
-                if db_return['error']: self.response_error.append(db_return['error'])
+                if db_return['error']: self.list_error.append(db_return['error'])
 
     ## save_observation_label: save the list of unique independent variable labels
     #                          from a supplied session (entity id) into the database.
@@ -102,7 +103,7 @@ class Base_Data(object):
 
                 # save dataset element, append error(s)
                 db_return = db_save.save()
-                if not db_return['status']: self.response_error.append(db_return['error'])
+                if not db_return['status']: self.list_error.append(db_return['error'])
 
     ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
     #                   dict object.
@@ -124,7 +125,7 @@ class Base_Data(object):
             self.response_mime_validation['dataset']['file_upload']
             flag_convert = True
         except Exception as error:
-            self.response_error.append(error)
+            self.list_error.append(error)
             print error
             return False
 
@@ -145,13 +146,13 @@ class Base_Data(object):
                         count_features    = dataset_converter.get_feature_count()
 
                         # check label consistency, assign labels
-                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
                         self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
                         # build new (relevant) dataset
                         self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
                     except Exception as error:
-                        self.response_error.append(error)
+                        self.list_error.append(error)
                         flag_append = False
 
                 # xml to dict
@@ -163,13 +164,13 @@ class Base_Data(object):
                         count_features    = dataset_converter.get_feature_count()
 
                         # check label consistency, assign labels
-                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
                         self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
                         # build new (relevant) dataset
                         self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
                     except Exception as error:
-                        self.response_error.append(error)
+                        self.list_error.append(error)
                         flag_append = False
 
             index_count += 1
