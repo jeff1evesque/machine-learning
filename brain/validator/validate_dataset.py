@@ -25,3 +25,10 @@ class Validate_Dataset(object):
             Draft4Validator(jsonschema_string()).validate(self.data)
         except Exception, error:
             self.list_error.append(str(error))
+
+    ## validate_value: validate the independent variable (feature) value.
+    def validate_value(self):
+        try:
+            Draft4Validator(jsonschema_int()).validate({key: value})
+        except Exception, error:
+            list_error.append(str(error))
