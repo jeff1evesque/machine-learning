@@ -16,23 +16,6 @@ def jsonschema_string():
     }
     return schema
 
-## jsonschema_posint(): ensures nonempty positive integer validation.
-#
-#  @exclusiveMinimum, ensures that the minimum is included with the minimum range.
-def jsonschema_posint():
-    schema = {
-        'type': 'object',
-        'properties': {
-            'value': {
-                'type': 'integer',
-                'minimum': 0,
-                'exclusiveMinimum': True,
-                'minLength': 1
-            },
-        },
-    }
-    return schema
-
 ## jsonschema_data_new(): contains the jsonschema for the 'data_new' session.
 #                         Therefore, this schema validates the properties
 #                         describing the session, not the dataset itself.
