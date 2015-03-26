@@ -95,6 +95,10 @@ class Convert_Upload(object):
                 indep_variable_value = indep_variable['value']
                 list_dataset.append({'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
 
+            # generalized feature count in an observation
+            if not self.count_features:
+                self.count_features = len(dep_variable['independent-variable'])
+
         self.observation_labels = observation_label
 
         # close file, and return
