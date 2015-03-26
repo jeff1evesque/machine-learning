@@ -21,6 +21,7 @@ class Model_Use(object):
     def __init__(self, svm_data):
         self.svm_data    = svm_data
         self.svm_session = self.svm_data['data']['settings']['svm_session']
+        self.list_error  = []
 
     ## CHANGE_METHOD: we will adjust the logic below
     def CHANGE_METHOD(self):
