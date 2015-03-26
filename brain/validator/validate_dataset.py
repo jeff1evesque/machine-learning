@@ -31,4 +31,4 @@ class Validate_Dataset(object):
         try:
             Draft4Validator(jsonschema_int()).validate({key: value})
         except Exception, error:
-            list_error.append(str(error))
+            self.list_error.append(str(error))
