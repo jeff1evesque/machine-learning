@@ -55,7 +55,7 @@ class Base_Data(object):
     def validate_id(self, session_id):
         try:
             if not int(session_id) > 0:
-              self.list_error.append('supplied \'session_id\' ' + session_id ' is not a positive integer')
+              self.list_error.append('supplied \'session_id\' ' + session_id + ' is not a positive integer')
         except Exception, error:
             self.list_error.append(str(error))
 
