@@ -53,5 +53,5 @@ class Save_Entity(object):
         self.sql.sql_disconnect()
 
         # return result
-        if response_error: return {'status': False, 'error': response_error, 'id': response['id']}
+        if response_error: return {'status': False, 'error': response_error}
         else: return {'status': True, 'error': None, 'id': response['id']}
