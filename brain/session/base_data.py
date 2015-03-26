@@ -56,7 +56,7 @@ class Base_Data(object):
     ## validate_id: validate session id as positive integer.
     def validate_id(self, session_id):
         try:
-            Draft4Validator(jsonschema_posint()).validate({'value': self.data})
+            Draft4Validator(jsonschema_posint()).validate({'value': session_id})
         except Exception, error:
             self.list_error.append(str(error))
 
