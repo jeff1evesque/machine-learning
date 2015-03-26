@@ -55,8 +55,12 @@ class Convert_Upload(object):
             for value in row_dep_label[:1]:
                 observation_label.append(value)
 
-            # iterate each column in a given row
+            # generalized feature count in an observation
             row_indep_variable = row[0].split(',')
+            if not self.count_features:
+                self.count_features = len(row_indep_variable) - 1
+
+            # iterate each column in a given row
             for indep_index, value in enumerate(islice(row_indep_variable, 1, None)):
                 try:
                     value = float(value)
@@ -85,12 +89,16 @@ class Convert_Upload(object):
         # build 'list_dataset'
         for dep_variable in dataset['dataset']['entity']:
             dep_variable_label = dep_variable['dependent-variable']
-            observation_label.append( dep_variable_label )
+            observation_label.append(dep_variable_label)
 
             for indep_variable in dep_variable['independent-variable']:
                 indep_variable_label = indep_variable['label']
                 indep_variable_value = indep_variable['value']
                 list_dataset.append({'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+
+            # generalized feature count in an observation
+            if not self.count_features:
+                self.count_features = len(dep_variable['independent-variable'])
 
         self.observation_labels = observation_label
 
@@ -104,3 +112,7 @@ class Convert_Upload(object):
     #                          needs to be called before this one.
     def get_observation_labels(self):
         return self.observation_labels
+
+    ## get_feature_count: return the generalied feature count for an observation
+    def get_feature_count(self):
+        return self.count_features
