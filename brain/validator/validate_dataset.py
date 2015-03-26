@@ -32,3 +32,10 @@ class Validate_Dataset(object):
             Draft4Validator(jsonschema_int()).validate({key: value})
         except Exception, error:
             self.list_error.append(str(error))
+
+    # get_errors: get all current errors.
+    def get_errors():
+        if len(self.list_error) > 0:
+            return self.list_error
+        else:
+            return None
