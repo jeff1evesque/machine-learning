@@ -82,7 +82,7 @@ class Convert_Upload(object):
             for indep_index, value in enumerate(islice(row_indep_variable, 1, None)):
                 try:
                     validate = Validate_Dataset(value)
-                    validate.validate_int()
+                    validate.validate_value()
 
                     list_error = validate.get_error()
                     if list_error:
@@ -131,16 +131,16 @@ class Convert_Upload(object):
                 indep_variable_value = indep_variable['value']
 
                 validate_label = Validate_Dataset(indep_variable_label)
-                validate_int   = Validate_Dataset(indep_variable_value)
+                validate_value = Validate_Dataset(indep_variable_value)
 
                 validate_label.validate_label()
-                validate_int.validate_int()
+                validate_value.validate_value()
 
                 list_error_label = validate.get_error()
-                list_error_int   = validate.get_error()
-                if list_error_label or list_error_int:
+                list_error_value = validate.get_error()
+                if list_error_label or list_error_value:
                     print list_error_label
-                    print list_error_int
+                    print list_error_value
                     return None
                 else:
                     list_dataset.append({'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
