@@ -47,7 +47,15 @@ class Convert_Upload(object):
             # iterate each column in a given row
             row_indep_label = row[0].split(',')
             for value in islice(row_indep_label, 1, None):
-                indep_variable_label.append(value)
+                validate = Validate_Dataset(value)
+                validate.validate_label()
+
+                list_error = validate.get_error()
+                if list_error:
+                    print list_error
+                    return None
+                else:
+                    indep_variable_label.append(value)
 
         # iterate all rows of csvfile
         for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
@@ -55,7 +63,15 @@ class Convert_Upload(object):
             # iterate first column of each row (except first)
             row_dep_label = row[0].split(',')
             for value in row_dep_label[:1]:
-                observation_label.append(value)
+                validate = Validate_Dataset(value)
+                validate.validate_label()
+
+                list_error = validate.get_error()
+                if list_error:
+                    print list_error
+                    return None
+                else:
+                    observation_label.append(value)
 
             # generalized feature count in an observation
             row_indep_variable = row[0].split(',')
@@ -65,7 +81,15 @@ class Convert_Upload(object):
             # iterate each column in a given row
             for indep_index, value in enumerate(islice(row_indep_variable, 1, None)):
                 try:
-                    value = float(value)
+                    validate = Validate_Dataset(value)
+                    validate.validate_int()
+
+                    list_error = validate.get_error()
+                    if list_error:
+                        print list_error
+                        return None
+                    else:
+                        value = float(value)
                 except Exception as error:
                     print e
                     return False
