@@ -39,7 +39,7 @@ def jsonschema_posint():
             'value': {
                 'type': 'integer',
                 'minimum': 0,
-                'exclusiveMinimum': true,
+                'exclusiveMinimum': True,
                 'minLength': 1
             },
         },
