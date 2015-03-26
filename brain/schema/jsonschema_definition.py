@@ -25,21 +25,18 @@ def jsonschema_string():
     }
     return schema
 
-## jsonschema_dataset_id(): contains the jsonschema for the SVM dataset. Specifically,
-#                           this schema complements the 'jsonschema_data_new()', and
-#                           'jsonschema_data_append()' schemas, respectively.
-#
-#  Note: This validation schema is used in the corresponding validator_xxx.py.
+## jsonschema_posint(): ensures nonempty positive integer validation.
 #
 #  @exclusiveMinimum, ensures that the minimum is included with the minimum range.
-def jsonschema_dataset_id():
+def jsonschema_posint():
     schema = {
         'type': 'object',
         'properties': {
             'id_entity': {
                 'type': 'integer',
                 'minimum': 0,
-                'exclusiveMinimum': true
+                'exclusiveMinimum': true,
+                'minLength': 1
             },
         },
     }
