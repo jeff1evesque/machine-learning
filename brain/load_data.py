@@ -86,9 +86,6 @@ class Load_Data(object):
         # instantiate class
         session = Model_Generate(self.data)
 
-        # define current session id
-        session_id = self.data['data']['settings']['svm_session_id']
-
         # save dataset properties (i.e. feature count)
         session.save_svm_info()
 
