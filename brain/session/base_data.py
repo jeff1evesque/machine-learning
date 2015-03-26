@@ -26,6 +26,10 @@ class Base_Data(object):
     ## save_svm_info: save the number of features that can be expected in a given
     #                 observation with respect to 'id_entity'.
     #
+    #  @self.dataset[0], we assume that validation has occurred, and safe to assume
+    #      the data associated with the first dataset instance is identical to any
+    #      instance n within the overall collection of dataset(s).
+    #
     #  @self.dataset['count_features'], is defined within the 'dataset_to_dict'
     #      method.
     #
