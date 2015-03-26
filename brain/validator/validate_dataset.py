@@ -16,15 +16,13 @@ class Validate_Dataset(object):
     def __init__(self, svm_data, svm_session=None):
         self.svm_data    = svm_data
         self.svm_session = svm_session
+        self.list_error  = []
 
     ## dataset_validation: each supplied SVM dataset is correctly formatted into a dict,
     #                      then validated in this method.
     #
     #  Note: the SVM dataset is synonymous for the 'file upload(s)'
     def validate(self):
-        # local variables
-        list_error = []
-
         # iterate outer dict
         for key, value in self.svm_data.iteritems():
             try:
