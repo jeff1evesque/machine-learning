@@ -7,6 +7,7 @@ import csv
 import xmltodict
 from collections import defaultdict
 from itertools import islice
+from brain.validator.validate_dataset import Validate_Dataset
 
 ## Class: Convert_Upload, explicitly inherit 'new-style' class.
 #
