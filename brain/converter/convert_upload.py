@@ -91,7 +91,7 @@ class Convert_Upload(object):
                     else:
                         value = float(value)
                 except Exception as error:
-                    print e
+                    print error
                     return False
 
                 list_dataset.append({'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value})
