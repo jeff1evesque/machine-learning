@@ -16,9 +16,9 @@ class Base(object):
 
     ## constructor:
     def __init__(self, svm_data):
-        self.svm_data       = svm_data
-        self.svm_session    = self.svm_data['data']['settings']['svm_session']
-        self.response_error = []
+        self.svm_data    = svm_data
+        self.svm_session = self.svm_data['data']['settings']['svm_session']
+        self.list_error  = []
 
     ## validate_arg_none: check if class variable 'svm_data' is defined.
     def validate_arg_none(self):
@@ -31,17 +31,17 @@ class Base(object):
         validator.validate()
 
         if validator.validate()['error'] != None:
-            self.response_error.append(validator.validate()['error'])
+            self.list_error.append(validator.validate()['error'])
 
     ## return_error: return appended error messages.
     def return_error(self):
-        return self.response_error
+        return self.list_error
 
     ## check: check if the class instance contains any errors appended to the list
-    #         'self.response_error'. If any error(s) exists, it is printed, and the
+    #         'self.list_error'. If any error(s) exists, it is printed, and the
     #         program exits.
     def check(self):
-        if len(self.response_error) > 0:
-            for error in self.response_error:
+        if len(self.list_error) > 0:
+            for error in self.list_error:
                 print error
             sys.exit()
