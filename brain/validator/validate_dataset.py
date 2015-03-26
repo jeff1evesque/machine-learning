@@ -18,30 +18,10 @@ class Validate_Dataset(object):
         self.svm_session = svm_session
         self.list_error  = []
 
-    ## dataset_validation: each supplied SVM dataset is correctly formatted into a dict,
-    #                      then validated in this method.
-    #
-    #  Note: the SVM dataset is synonymous for the 'file upload(s)'
-    def validate(self):
-        # iterate outer dict
-        for key, value in self.svm_data.iteritems():
-            try:
-                if key == 'svm_dataset':
-                    for dict in value:
-                        try:
-                            Draft4Validator(jsonschema_dataset()).validate(dict)
-                        except Exception, error:
-                            list_error.append(str(error))
-                elif key == 'id_entity':
-                    try:
-                        Draft4Validator(jsonschema_id()).validate({key: value})
-                    except Exception, error:
-                        list_error.append(str(error))
-            except Exception, error:
-                list_error.append(str(error))
-
-        # return error
-        if len(list_error) > 0:
-            return {'status': False, 'error': list_error}
-        else:
-            return {'status': True, 'error': None}
+    ## validate_label: validate either the dependent variable (observation) label,
+    #                  or the independent variable (feature) label.
+    def validate_label(self):
+        try:
+            Draft4Validator(jsonschema_string()).validate(self.data)
+        except Exception, error:
+            self.list_error.append(str(error))
