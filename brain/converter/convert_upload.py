@@ -88,7 +88,7 @@ class Convert_Upload(object):
         # build 'list_dataset'
         for dep_variable in dataset['dataset']['entity']:
             dep_variable_label = dep_variable['dependent-variable']
-            observation_label.append( dep_variable_label )
+            observation_label.append(dep_variable_label)
 
             for indep_variable in dep_variable['independent-variable']:
                 indep_variable_label = indep_variable['label']
