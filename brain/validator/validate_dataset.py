@@ -34,7 +34,7 @@ class Validate_Dataset(object):
             self.list_error.append(str(error))
 
     # get_errors: get all current errors.
-    def get_errors():
+    def get_errors(self):
         if len(self.list_error) > 0:
             return self.list_error
         else:
