@@ -8,8 +8,10 @@ def jsonschema_int():
     schema = {
         'type': 'object',
         'properties': {
-            'value': 'integer',
-            'minLength': 1
+            'value': {
+                'type': 'integer',
+                'minLength': 1
+            },
         },
     }
     return schema
@@ -19,8 +21,10 @@ def jsonschema_string():
     schema = {
         'type': 'object',
         'properties': {
-            'value': 'string',
-            'minLength': 1
+            'value': {
+                'type': 'string',
+                'minLength': 1
+            },
         },
     }
     return schema
@@ -32,7 +36,7 @@ def jsonschema_posint():
     schema = {
         'type': 'object',
         'properties': {
-            'id_entity': {
+            'value': {
                 'type': 'integer',
                 'minimum': 0,
                 'exclusiveMinimum': true,
