@@ -13,8 +13,8 @@ from brain.schema.jsonschema_definition import jsonschema_int, jsonschema_string
 class Validate_Dataset(object):
 
     ## constructor: saves a subset of the passed-in form data
-    def __init__(self, svm_data, svm_session=None):
-        self.svm_data    = svm_data
+    def __init__(self, data, svm_session=None):
+        self.data        = data
         self.svm_session = svm_session
         self.list_error  = []
 
@@ -22,14 +22,14 @@ class Validate_Dataset(object):
     #                  or the independent variable (feature) label.
     def validate_label(self):
         try:
-            Draft4Validator(jsonschema_string()).validate(self.data)
+            Draft4Validator(jsonschema_string()).validate({'value': self.data})
         except Exception, error:
             self.list_error.append(str(error))
 
     ## validate_value: validate the independent variable (feature) value.
     def validate_value(self):
         try:
-            Draft4Validator(jsonschema_int()).validate(self.data)
+            Draft4Validator(jsonschema_int()).validate({'value': self.data})
         except Exception, error:
             self.list_error.append(str(error))
 
