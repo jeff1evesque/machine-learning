@@ -12,8 +12,6 @@ from brain.database.save_size import Save_Size
 from brain.validator.validate_mime import Validate_Mime
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_label import Save_Label
-from jsonschema.validators import Draft4Validator
-from brain.schema.jsonschema_definition import jsonschema_posint
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 #
@@ -56,7 +54,8 @@ class Base_Data(object):
     ## validate_id: validate session id as positive integer.
     def validate_id(self, session_id):
         try:
-            Draft4Validator(jsonschema_posint()).validate({'value': session_id})
+            if not int(session_id) > 0:
+              self.list_error.append('supplied \'session_id\' ' + session_id ' is not a positive integer')
         except Exception, error:
             self.list_error.append(str(error))
 
