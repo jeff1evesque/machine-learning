@@ -3,13 +3,13 @@
 ## @jsonschema_definition.py
 #  This file contains various jsonschema definitions.
 
-## jsonschema_int(): ensures integer validation.
-def jsonschema_int():
+## jsonschema_number(): ensures integer validation.
+def jsonschema_number():
     schema = {
         'type': 'object',
         'properties': {
             'value': {
-                'type': 'integer',
+                'type': 'number',
                 'minLength': 1
             },
         },
