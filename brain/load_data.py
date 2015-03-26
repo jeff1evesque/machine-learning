@@ -86,7 +86,10 @@ class Load_Data(object):
         # instantiate class
         session = Model_Generate(self.data)
 
-        # implement class methods
+        # save dataset properties (i.e. feature count)
+        session.save_svm_info()
+
+        # select, and generate model
         session.select_dataset()
         session.generate_model()
 
