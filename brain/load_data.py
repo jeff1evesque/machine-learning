@@ -36,7 +36,6 @@ class Load_Data(object):
                 session.check()
 
                 session.dataset_to_dict(session_id)
-                session.validate_dataset()
                 session.check()
 
                 session.save_observation_label('data_new', session_id)
@@ -69,7 +68,6 @@ class Load_Data(object):
                 session.check()
 
                 session.dataset_to_dict(session_id)
-                session.validate_dataset()
                 session.check()
 
                 session.save_observation_label('data_append', session_id)
@@ -88,7 +86,10 @@ class Load_Data(object):
         # instantiate class
         session = Model_Generate(self.data)
 
-        # implement class methods
+        # save dataset properties (i.e. feature count)
+        session.save_svm_info()
+
+        # select, and generate model
         session.select_dataset()
         session.generate_model()
 
