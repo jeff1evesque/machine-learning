@@ -28,7 +28,7 @@ class Base_Data(object):
     def save_svm_info(self):
         for data in self.dataset:
             for dataset in data['svm_dataset']:
-                db_save = Save_Size({'id_entity': data['id_entity'], 'count_features': data[$
+                db_save = Save_Size({'id_entity': data['id_entity'], 'count_features': data['count_features']})
 
                 # save dataset element, append error(s)
                 db_return = db_save.save()
