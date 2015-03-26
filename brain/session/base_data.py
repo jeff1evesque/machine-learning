@@ -174,3 +174,10 @@ class Base_Data(object):
 
             index_count += 1
             if not flag_append: return False
+
+    # get_errors: get all current errors.
+    def get_errors():
+        if len(self.list_error) > 0:
+            return self.list_error
+        else:
+            return None
