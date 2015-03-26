@@ -15,14 +15,3 @@ class Model_Generate():
     ## constructor:
     def __init__(self, svm_data):
         self.svm_data = svm_data
-
-    ## save_svm_info: save the number of features that can be expected in a given
-    #                 observation with respect to 'id_entity'.
-    def save_svm_info(self):
-        for data in self.dataset:
-            for dataset in data['svm_dataset']:
-                db_save = Save_Size({'id_entity': data['id_entity'], 'count_features': data['count_features']})
-
-                # save dataset element, append error(s)
-                db_return = db_save.save()
-                if db_return['error']: self.response_error.append(db_return['error'])
