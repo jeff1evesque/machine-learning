@@ -10,7 +10,7 @@ from itertools import islice
 
 ## Class: Convert_Upload, explicitly inherit 'new-style' class.
 #
-#  Note: this class is invoked within 'data_new.py'
+#  Note: this class is invoked within 'base_data.py'
 class Convert_Upload(object):
 
     ## constructor
