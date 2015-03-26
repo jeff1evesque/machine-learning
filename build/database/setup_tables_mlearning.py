@@ -21,7 +21,7 @@ sql_statement = '''\
                 CREATE TABLE IF NOT EXISTS tbl_dataset_size (
                     id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     id_entity INT NOT NULL,
-                    num_features INT NOT NULL
+                    count_features INT NOT NULL
                 );
                 '''
 sql.sql_command(sql_statement, 'create')
