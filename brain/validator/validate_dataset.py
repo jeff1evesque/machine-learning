@@ -5,7 +5,7 @@
 import json
 import sys
 from jsonschema.validators import Draft4Validator
-from brain.schema.jsonschema_definition import jsonschema_number, jsonschema_string
+from brain.schema.jsonschema_definition import jsonschema_string
 
 ## Class: Validate_Dataset, explicitly inherit 'new-style' class
 #
@@ -29,7 +29,7 @@ class Validate_Dataset(object):
     ## validate_value: validate the independent variable (feature) value.
     def validate_value(self):
         try:
-            Draft4Validator(jsonschema_number()).validate({'value': self.data})
+            float(self.data)
         except Exception, error:
             self.list_error.append(str(error))
 
