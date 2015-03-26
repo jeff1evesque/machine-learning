@@ -18,7 +18,7 @@ sql.sql_connect('db_machine_learning')
 
 ## create 'tbl_dataset_size'
 sql_statement = '''\
-                CREATE TABLE IF NOT EXISTS tbl_dataset_size (
+                CREATE TABLE IF NOT EXISTS tbl_feature_count (
                     id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     id_entity INT NOT NULL,
                     count_features INT NOT NULL
