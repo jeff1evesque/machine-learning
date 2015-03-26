@@ -12,6 +12,7 @@ from brain.database.save_size import Save_Size
 from brain.validator.validate_mime import Validate_Mime
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_label import Save_Label
+from brain.schema.jsonschema_definition import jsonschema_posint
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 #
@@ -50,6 +51,13 @@ class Base_Data(object):
         if self.response_mime_validation['error'] != None:
             self.response_error.append(self.response_mime_validation['error'])
             self.flag_validate_mime = True
+
+    ## validate_id: validate session id as positive integer.
+    def validate_id(self, session_id):
+        try:
+            Draft4Validator(jsonschema_posint()).validate({'value': self.data})
+        except Exception, error:
+            self.list_error.append(str(error))
 
     ## save_svm_entity: save the current entity into the database, then return
     #                   the corresponding entity id.
