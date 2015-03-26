@@ -23,6 +23,17 @@ class Base_Data(object):
         self.flag_validate_mime = False
         self.observation_labels = []
 
+    ## save_svm_info: save the number of features that can be expected in a given
+    #                 observation with respect to 'id_entity'.
+    def save_svm_info(self):
+        for data in self.dataset:
+            for dataset in data['svm_dataset']:
+                db_save = Save_Size({'id_entity': data['id_entity'], 'count_features': data[$
+
+                # save dataset element, append error(s)
+                db_return = db_save.save()
+                if db_return['error']: self.response_error.append(db_return['error'])
+
     ## validate_mime_type: validate mime type for each dataset.
     def validate_mime_type(self):
         validator = Validate_Mime(self.svm_data, self.svm_session)
