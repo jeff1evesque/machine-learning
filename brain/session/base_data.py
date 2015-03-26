@@ -126,13 +126,14 @@ class Base_Data(object):
                         # conversion
                         dataset_converter = Convert_Upload(val['file'])
                         dataset_converted = dataset_converter.csv_to_dict()
+                        count_features    = dataset_converter.get_feature_count()
 
                         # check label consistency, assign labels
                         if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
                         self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
                         # build new (relevant) dataset
-                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
+                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
                     except Exception as error:
                         self.response_error.append(error)
                         flag_append = False
@@ -143,13 +144,14 @@ class Base_Data(object):
                         # conversion
                         dataset_converter = Convert_Upload(val['file'])
                         dataset_converted = dataset_converter.xml_to_dict()
+                        count_features    = dataset_converter.get_feature_count()
 
                         # check label consistency, assign labels
                         if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.response_error.append('The supplied observation labels (dependent variables), are inconsistent')
                         self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
                         # build new (relevant) dataset
-                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted})
+                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
                     except Exception as error:
                         self.response_error.append(error)
                         flag_append = False
