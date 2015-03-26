@@ -115,12 +115,35 @@ class Convert_Upload(object):
         # build 'list_dataset'
         for dep_variable in dataset['dataset']['entity']:
             dep_variable_label = dep_variable['dependent-variable']
-            observation_label.append(dep_variable_label)
+
+            validate = Validate_Dataset(dep_variable_label)
+            validate.validate_label()
+
+            list_error = validate.get_error()
+            if list_error:
+                print list_error
+                return None
+            else:
+                observation_label.append(dep_variable_label)
 
             for indep_variable in dep_variable['independent-variable']:
                 indep_variable_label = indep_variable['label']
                 indep_variable_value = indep_variable['value']
-                list_dataset.append({'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+
+                validate_label = Validate_Dataset(indep_variable_label)
+                validate_int   = Validate_Dataset(indep_variable_value)
+
+                validate_label.validate_label()
+                validate_int.validate_int()
+
+                list_error_label = validate.get_error()
+                list_error_int   = validate.get_error()
+                if list_error_label or list_error_int:
+                    print list_error_label
+                    print list_error_int
+                    return None
+                else:
+                    list_dataset.append({'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
 
             # generalized feature count in an observation
             if not self.count_features:
