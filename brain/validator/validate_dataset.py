@@ -5,7 +5,7 @@
 import json
 import sys
 from jsonschema.validators import Draft4Validator
-from brain.schema.jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
+from brain.schema.jsonschema_definition import jsonschema_int, jsonschema_string
 
 ## Class: Validate_Dataset, explicitly inherit 'new-style' class
 #
