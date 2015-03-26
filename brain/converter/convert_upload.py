@@ -55,8 +55,11 @@ class Convert_Upload(object):
             for value in row_dep_label[:1]:
                 observation_label.append(value)
 
-            # iterate each column in a given row
+            # generalized feature count in an observation
             row_indep_variable = row[0].split(',')
+            self.count_features = len(row_indep_variable) - 1
+
+            # iterate each column in a given row
             for indep_index, value in enumerate(islice(row_indep_variable, 1, None)):
                 try:
                     value = float(value)
