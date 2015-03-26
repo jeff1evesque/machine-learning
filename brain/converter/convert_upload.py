@@ -50,7 +50,7 @@ class Convert_Upload(object):
                 validate = Validate_Dataset(value)
                 validate.validate_label()
 
-                list_error = validate.get_error()
+                list_error = validate.get_errors()
                 if list_error:
                     print list_error
                     return None
@@ -66,7 +66,7 @@ class Convert_Upload(object):
                 validate = Validate_Dataset(value)
                 validate.validate_label()
 
-                list_error = validate.get_error()
+                list_error = validate.get_errors()
                 if list_error:
                     print list_error
                     return None
@@ -84,7 +84,7 @@ class Convert_Upload(object):
                     validate = Validate_Dataset(value)
                     validate.validate_value()
 
-                    list_error = validate.get_error()
+                    list_error = validate.get_errors()
                     if list_error:
                         print list_error
                         return None
@@ -119,7 +119,7 @@ class Convert_Upload(object):
             validate = Validate_Dataset(dep_variable_label)
             validate.validate_label()
 
-            list_error = validate.get_error()
+            list_error = validate.get_errors()
             if list_error:
                 print list_error
                 return None
@@ -136,8 +136,8 @@ class Convert_Upload(object):
                 validate_label.validate_label()
                 validate_value.validate_value()
 
-                list_error_label = validate.get_error()
-                list_error_value = validate.get_error()
+                list_error_label = validate.get_errors()
+                list_error_value = validate.get_errors()
                 if list_error_label or list_error_value:
                     print list_error_label
                     print list_error_value
