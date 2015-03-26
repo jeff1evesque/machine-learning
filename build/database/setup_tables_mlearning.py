@@ -37,7 +37,7 @@ sql_statement = '''\
                     datetime_modified DATETIME NULL
                 );
                 '''
-sql.sql_command( sql_statement, 'create' )
+sql.sql_command(sql_statement, 'create')
 
 ## create 'tbl_observation_label'
 sql_statement = '''\
@@ -47,7 +47,7 @@ sql_statement = '''\
                     dep_variable_label VARCHAR(75) NOT NULL
                 );
                 '''
-sql.sql_command( sql_statement, 'create' )
+sql.sql_command(sql_statement, 'create')
 
 ## create 'tble_dataset_value'
 sql_statement = '''\
@@ -60,7 +60,7 @@ sql_statement = '''\
                     CONSTRAINT FK_dataset_entity FOREIGN KEY (id_entity) REFERENCES tbl_dataset_entity (id_entity)
                 );
                 '''
-sql.sql_command( sql_statement, 'create' )
+sql.sql_command(sql_statement, 'create')
 
 # retrieve any error(s), disconnect from database
 if sql.return_error(): print sql.return_error()
