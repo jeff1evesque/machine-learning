@@ -17,6 +17,7 @@ class Convert_Upload(object):
     def __init__(self, svm_file):
         self.svm_file           = svm_file
         self.observation_labels = None
+        self.count_features     = None
 
     ## csv_to_dict: convert csv file-object to a python dictionary.
     #
