@@ -13,9 +13,9 @@ class Save_Size(object):
     ## constructor:
     def __init__(self, svm_data):
         # class variables
-        self.svm_data     = svm_data
-        self.list_error   = []
-        self.sql          = SQL()
+        self.svm_data   = svm_data
+        self.list_error = []
+        self.sql        = SQL()
 
     ## save: store the number of features that can be expected in a given observation
     #
