@@ -38,6 +38,9 @@ class Load_Data(object):
                 session.dataset_to_dict(session_id)
                 session.check()
 
+                session.save_svm_info()
+                session.check()
+
                 session.save_observation_label('data_new', session_id)
                 session.check()
 
@@ -85,9 +88,6 @@ class Load_Data(object):
 
         # instantiate class
         session = Model_Generate(self.data)
-
-        # save dataset properties (i.e. feature count)
-        session.save_svm_info()
 
         # select, and generate model
         session.select_dataset()
