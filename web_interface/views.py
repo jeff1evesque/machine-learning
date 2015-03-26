@@ -23,7 +23,7 @@ def load_data():
         # get post data
         if request.files:
             files = request.files
-            settings = request.form
+        settings = request.form
 
         # format post data
         sender         = Restructure_Data(settings, files)
