@@ -43,8 +43,8 @@ class Data_Append(Base, Base_Data):
 
         # return error(s)
         if not db_return['status']:
-            self.response_error.append(db_return['error'])
-            return {'status': False, 'error': self.response_error}
+            self.list_error.append(db_return['error'])
+            return {'status': False, 'error': self.list_error}
 
         # return status
         elif db_return['status'] and session_type == 'data_append':
