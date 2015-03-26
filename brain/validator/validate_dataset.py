@@ -29,7 +29,7 @@ class Validate_Dataset(object):
     ## validate_value: validate the independent variable (feature) value.
     def validate_value(self):
         try:
-            Draft4Validator(jsonschema_int()).validate({key: value})
+            Draft4Validator(jsonschema_int()).validate(self.data)
         except Exception, error:
             self.list_error.append(str(error))
 
