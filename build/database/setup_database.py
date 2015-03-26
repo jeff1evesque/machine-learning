@@ -14,7 +14,7 @@ sql.sql_connect()
 
 ## create 'db_machine_learning
 sql_statement = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET utf8 COLLATE utf8_general_ci'
-sql.sql_command( sql_statement, 'create' )
+sql.sql_command(sql_statement, 'create')
 
 # retrieve any error(s), disconnect from database
 if sql.return_error(): print sql.return_error()
