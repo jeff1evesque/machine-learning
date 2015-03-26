@@ -25,3 +25,4 @@ class Data_New(Base, Base_Data):
     #  Note: the superclass constructor expects the same 'svm_data' argument.
     def __init__(self, svm_data):
         super(Data_New, self).__init__(svm_data)
+        self.list_error = []

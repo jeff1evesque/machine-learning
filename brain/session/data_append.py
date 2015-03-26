@@ -26,6 +26,7 @@ class Data_Append(Base, Base_Data):
     #  Note: the superclass constructor expects the same 'svm_data' argument.
     def __init__(self, svm_data):
         super(Data_Append, self).__init__(svm_data)
+        self.list_error = []
 
     ## save_svm_entity: override an identical method from inheritted superclass,
     #                   'Base_Data'. This method, updates an existing entity within

@@ -5,7 +5,7 @@
 import json
 import sys
 from jsonschema.validators import Draft4Validator
-from brain.schema.jsonschema_definition import jsonschema_dataset, jsonschema_dataset_id
+from brain.schema.jsonschema_definition import jsonschema_string
 
 ## Class: Validate_Dataset, explicitly inherit 'new-style' class
 #
@@ -13,37 +13,29 @@ from brain.schema.jsonschema_definition import jsonschema_dataset, jsonschema_da
 class Validate_Dataset(object):
 
     ## constructor: saves a subset of the passed-in form data
-    def __init__(self, svm_data, svm_session=None):
-        self.svm_data    = svm_data
+    def __init__(self, data, svm_session=None):
+        self.data        = data
         self.svm_session = svm_session
+        self.list_error  = []
 
-    ## dataset_validation: each supplied SVM dataset is correctly formatted into a dict,
-    #                      then validated in this method.
-    #
-    #  Note: the SVM dataset is synonymous for the 'file upload(s)'
-    def validate(self):
-        # local variables
-        list_error = []
+    ## validate_label: validate either the dependent variable (observation) label,
+    #                  or the independent variable (feature) label.
+    def validate_label(self):
+        try:
+            Draft4Validator(jsonschema_string()).validate({'value': self.data})
+        except Exception, error:
+            self.list_error.append(str(error))
 
-        # iterate outer dict
-        for key, value in self.svm_data.iteritems():
-            try:
-                if key == 'svm_dataset':
-                    for dict in value:
-                        try:
-                            Draft4Validator(jsonschema_dataset()).validate(dict)
-                        except Exception, error:
-                            list_error.append(str(error))
-                elif key == 'id_entity':
-                    try:
-                        Draft4Validator(jsonschema_id()).validate({key: value})
-                    except Exception, error:
-                        list_error.append(str(error))
-            except Exception, error:
-                list_error.append(str(error))
+    ## validate_value: validate the independent variable (feature) value.
+    def validate_value(self):
+        try:
+            float(self.data)
+        except Exception, error:
+            self.list_error.append(str(error))
 
-        # return error
-        if len(list_error) > 0:
-            return {'status': False, 'error': list_error}
+    # get_errors: get all current errors.
+    def get_errors(self):
+        if len(self.list_error) > 0:
+            return self.list_error
         else:
-            return {'status': True, 'error': None}
+            return None

@@ -51,6 +51,14 @@ class Base_Data(object):
             self.response_error.append(self.response_mime_validation['error'])
             self.flag_validate_mime = True
 
+    ## validate_id: validate session id as positive integer.
+    def validate_id(self, session_id):
+        try:
+            if not int(session_id) > 0:
+              self.list_error.append('supplied \'session_id\' ' + session_id + ' is not a positive integer')
+        except Exception, error:
+            self.list_error.append(str(error))
+
     ## save_svm_entity: save the current entity into the database, then return
     #                   the corresponding entity id.
     def save_svm_entity(self, session_type):
@@ -166,3 +174,10 @@ class Base_Data(object):
 
             index_count += 1
             if not flag_append: return False
+
+    # get_errors: get all current errors.
+    def get_errors(self):
+        if len(self.list_error) > 0:
+            return self.list_error
+        else:
+            return None

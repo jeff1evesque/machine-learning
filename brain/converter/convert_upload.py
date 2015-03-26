@@ -7,6 +7,7 @@ import csv
 import xmltodict
 from collections import defaultdict
 from itertools import islice
+from brain.validator.validate_dataset import Validate_Dataset
 
 ## Class: Convert_Upload, explicitly inherit 'new-style' class.
 #
@@ -46,7 +47,15 @@ class Convert_Upload(object):
             # iterate each column in a given row
             row_indep_label = row[0].split(',')
             for value in islice(row_indep_label, 1, None):
-                indep_variable_label.append(value)
+                validate = Validate_Dataset(value)
+                validate.validate_label()
+
+                list_error = validate.get_errors()
+                if list_error:
+                    print list_error
+                    return None
+                else:
+                    indep_variable_label.append(value)
 
         # iterate all rows of csvfile
         for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
@@ -54,7 +63,15 @@ class Convert_Upload(object):
             # iterate first column of each row (except first)
             row_dep_label = row[0].split(',')
             for value in row_dep_label[:1]:
-                observation_label.append(value)
+                validate = Validate_Dataset(value)
+                validate.validate_label()
+
+                list_error = validate.get_errors()
+                if list_error:
+                    print list_error
+                    return None
+                else:
+                    observation_label.append(value)
 
             # generalized feature count in an observation
             row_indep_variable = row[0].split(',')
@@ -64,9 +81,17 @@ class Convert_Upload(object):
             # iterate each column in a given row
             for indep_index, value in enumerate(islice(row_indep_variable, 1, None)):
                 try:
-                    value = float(value)
+                    validate = Validate_Dataset(value)
+                    validate.validate_value()
+
+                    list_error = validate.get_errors()
+                    if list_error:
+                        print list_error
+                        return None
+                    else:
+                        value = float(value)
                 except Exception as error:
-                    print e
+                    print error
                     return False
 
                 list_dataset.append({'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value})
@@ -90,12 +115,35 @@ class Convert_Upload(object):
         # build 'list_dataset'
         for dep_variable in dataset['dataset']['entity']:
             dep_variable_label = dep_variable['dependent-variable']
-            observation_label.append(dep_variable_label)
+
+            validate = Validate_Dataset(dep_variable_label)
+            validate.validate_label()
+
+            list_error = validate.get_errors()
+            if list_error:
+                print list_error
+                return None
+            else:
+                observation_label.append(dep_variable_label)
 
             for indep_variable in dep_variable['independent-variable']:
                 indep_variable_label = indep_variable['label']
                 indep_variable_value = indep_variable['value']
-                list_dataset.append({'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+
+                validate_label = Validate_Dataset(indep_variable_label)
+                validate_value = Validate_Dataset(indep_variable_value)
+
+                validate_label.validate_label()
+                validate_value.validate_value()
+
+                list_error_label = validate.get_errors()
+                list_error_value = validate.get_errors()
+                if list_error_label or list_error_value:
+                    print list_error_label
+                    print list_error_value
+                    return None
+                else:
+                    list_dataset.append({'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
 
             # generalized feature count in an observation
             if not self.count_features:
