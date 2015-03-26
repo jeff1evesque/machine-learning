@@ -25,10 +25,15 @@ class Base_Data(object):
 
     ## save_svm_info: save the number of features that can be expected in a given
     #                 observation with respect to 'id_entity'.
+    #
+    #  @self.dataset['count_features'], is defined within the 'dataset_to_dict'
+    #      method.
+    #
+    #  Note: this method needs to execute after 'dataset_to_dict'
     def save_svm_info(self):
         for data in self.dataset:
             for dataset in data['svm_dataset']:
-                db_save = Save_Size({'id_entity': data['id_entity'], 'count_features': data['count_features']})
+                db_save = Save_Size({'id_entity': data['id_entity'], 'count_features': self.dataset['count_features']})
 
                 # save dataset element, append error(s)
                 db_return = db_save.save()
