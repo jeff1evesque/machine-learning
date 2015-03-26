@@ -112,3 +112,7 @@ class Convert_Upload(object):
     #                          needs to be called before this one.
     def get_observation_labels(self):
         return self.observation_labels
+
+    ## get_feature_count: return the generalied feature count for an observation
+    def get_feature_count(self):
+        return self.count_features
