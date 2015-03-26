@@ -11,9 +11,8 @@ from brain.database.db_query import SQL
 class Retrieve_Dataset(object):
 
     ## constructor:
-    def __init__(self, svm_data):
+    def __init__(self):
         # class variables
-        self.svm_data   = svm_data
         self.list_error = []
         self.sql        = SQL()
 
@@ -33,7 +32,7 @@ class Retrieve_Dataset(object):
         response      = self.sql.sql_command(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
-        response_error = sql.return_error()
+        response_error = self.sql.return_error()
         self.sql.sql_disconnect()
 
         # return result
