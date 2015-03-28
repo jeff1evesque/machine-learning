@@ -16,7 +16,7 @@ sql = SQL()
 #  @tbl_observation_label
 sql.sql_connect('db_machine_learning')
 
-## create 'tbl_dataset_size'
+## create 'tbl_feature_count'
 sql_statement = '''\
                 CREATE TABLE IF NOT EXISTS tbl_feature_count (
                     id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
