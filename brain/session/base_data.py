@@ -81,10 +81,10 @@ class Base_Data(object):
             return {'status': True, 'id': db_return['id'], 'error': None}
 
     ## save_svm_dataset: save each dataset element into a database table.
-    def save_svm_dataset(self, session_type):
+    def save_svm_dataset(self):
         for data in self.dataset:
             for dataset in data['svm_dataset']:
-                db_save = Save_Feature({'svm_dataset': dataset, 'id_entity': data['id_entity']}, session_type)
+                db_save = Save_Feature({'svm_dataset': dataset, 'id_entity': data['id_entity']})
 
                 # save dataset element, append error(s)
                 db_return = db_save.save_feature()
