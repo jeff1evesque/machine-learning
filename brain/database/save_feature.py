@@ -17,11 +17,12 @@ class Save_Feature(object):
         self.list_error = []
         self.sql        = SQL()
 
-    ## save: store the number of features that can be expected in a given observation
+    ## save_count: store the number of features that can be expected in a given
+    #              observation.
     #
     #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
     #      is used for argument substitution.
-    def save(self):
+    def save_count(self):
         # insert / update dataset value(s)
         self.sql.sql_connect('db_machine_learning')
         sql_statement = 'INSERT INTO tbl_feature_count (id_entity, count_features) VALUES(%s, %s)'
