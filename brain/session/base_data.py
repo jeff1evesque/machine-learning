@@ -66,7 +66,7 @@ class Base_Data(object):
     ## save_svm_entity: save the current entity into the database, then return
     #                   the corresponding entity id.
     def save_svm_entity(self, session_type):
-        svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': None}
+        svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': self.uid, 'id_entity': None}
         db_save    = Save_Entity(svm_entity, session_type)
 
         # save dataset element
