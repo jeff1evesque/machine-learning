@@ -40,10 +40,10 @@ class Base_Data(object):
     #  Note: this method needs to execute after 'dataset_to_dict'
     def save_svm_info(self):
         svm_data = self.dataset[0]
-        db_save  = Save_Size({'id_entity': svm_data['id_entity'], 'count_features': svm_data['count_features']})
+        db_save  = Save_Feature({'id_entity': svm_data['id_entity'], 'count_features': svm_data['count_features']})
 
         # save dataset element, append error(s)
-        db_return = db_save.save()
+        db_return = db_save.save_count()
         if db_return['error']: self.list_error.append(db_return['error'])
 
     ## validate_mime_type: validate mime type for each dataset.
