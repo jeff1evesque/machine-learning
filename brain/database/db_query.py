@@ -67,6 +67,6 @@ class SQL(object):
                 self.list_error.append(error)
                 return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
 
-    ## return_error: return appended error message(s)
-    def return_error(self):
+    ## get_errors: return appended error message(s)
+    def get_errors(self):
         return self.list_error

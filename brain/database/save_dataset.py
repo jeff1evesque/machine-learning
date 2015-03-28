@@ -42,7 +42,7 @@ class Save_Dataset(object):
         response      = self.sql.sql_command(sql_statement, 'insert', args)
 
         # retrieve any error(s), disconnect from database
-        response_error = self.sql.return_error()
+        response_error = self.sql.get_errors()
         self.sql.sql_disconnect()
 
         # return result

@@ -24,12 +24,12 @@ class Save_Size(object):
     def save(self):
         # insert / update dataset value(s)
         self.sql.sql_connect('db_machine_learning')
-        sql_statement  = 'INSERT INTO tbl_feature_count (id_entity, count_features) VALUES(%s, %s)'
+        sql_statement = 'INSERT INTO tbl_feature_count (id_entity, count_features) VALUES(%s, %s)'
         args          = (self.svm_data['id_entity'], self.svm_data['count_features'])
         response      = self.sql.sql_command(sql_statement, 'insert', args)
 
         # retrieve any error(s), disconnect from database
-        response_error = self.sql.return_error()
+        response_error = self.sql.get_errors()
         self.sql.sql_disconnect()
 
         # return result

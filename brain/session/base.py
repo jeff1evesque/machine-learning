@@ -33,8 +33,8 @@ class Base(object):
         if validator.validate()['error'] != None:
             self.list_error.append(validator.validate()['error'])
 
-    ## return_error: return appended error messages.
-    def return_error(self):
+    ## get_errors: return appended error messages.
+    def get_errors(self):
         return self.list_error
 
     ## check: check if the class instance contains any errors appended to the list
