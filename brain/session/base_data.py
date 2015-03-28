@@ -15,6 +15,8 @@ from brain.database.save_label import Save_Label
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 #
+#  @self.uid, the logged-in user (i.e. userid).
+#
 #  Note: this class is invoked within 'data_xx.py'
 class Base_Data(object):
 
@@ -23,6 +25,7 @@ class Base_Data(object):
         self.flag_validate_mime = False
         self.observation_labels = []
         self.list_error         = []
+        self.uid                = 1
 
     ## save_svm_info: save the number of features that can be expected in a given
     #                 observation with respect to 'id_entity'.
