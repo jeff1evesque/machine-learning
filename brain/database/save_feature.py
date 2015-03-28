@@ -8,7 +8,7 @@ from brain.database.db_query import SQL
 ## Class: Save_Feature, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'base_data.py'
-class Save_Size(object):
+class Save_Feature(object):
 
     ## constructor:
     def __init__(self, svm_data):
