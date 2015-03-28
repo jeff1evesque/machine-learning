@@ -17,5 +17,5 @@ sql_statement = 'CREATE DATABASE IF NOT EXISTS db_machine_learning CHARACTER SET
 sql.sql_command(sql_statement, 'create')
 
 # retrieve any error(s), disconnect from database
-if sql.return_error(): print sql.return_error()
+if sql.get_errors(): print sql.return_error()
 sql.sql_disconnect()

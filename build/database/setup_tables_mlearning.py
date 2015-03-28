@@ -63,5 +63,5 @@ sql_statement = '''\
 sql.sql_command(sql_statement, 'create')
 
 # retrieve any error(s), disconnect from database
-if sql.return_error(): print sql.return_error()
+if sql.get_errors(): print sql.return_error()
 sql.sql_disconnect()
