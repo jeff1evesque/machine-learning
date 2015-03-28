@@ -10,13 +10,13 @@ sql = SQL()
 
 ## CREATE DATABASE TABLES
 #
-#  @tbl_dataset_size
 #  @tbl_dataset_entity
+#  @tbl_feature_count
+#  @tbl_feature_value
 #  @tbl_observation_label
-#  @tbl_dataset_value
 sql.sql_connect('db_machine_learning')
 
-## create 'tbl_dataset_size'
+## create 'tbl_feature_count'
 sql_statement = '''\
                 CREATE TABLE IF NOT EXISTS tbl_feature_count (
                     id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -49,9 +49,9 @@ sql_statement = '''\
                 '''
 sql.sql_command(sql_statement, 'create')
 
-## create 'tble_dataset_value'
+## create 'tbl_feature_value'
 sql_statement = '''\
-                CREATE TABLE IF NOT EXISTS tbl_dataset_value (
+                CREATE TABLE IF NOT EXISTS tbl_feature_value (
                     id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     id_entity INT NOT NULL,
                     dep_variable_label VARCHAR (50) NOT NULL,
