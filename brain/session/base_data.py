@@ -10,7 +10,7 @@ from brain.database.save_entity import Save_Entity
 from brain.database.save_feature import Save_Feature
 from brain.validator.validate_mime import Validate_Mime
 from brain.converter.convert_upload import Convert_Upload
-from brain.database.save_label import Save_Label
+from brain.database.save_observation import Save_Observation
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 #
