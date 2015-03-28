@@ -22,7 +22,10 @@ class Data_New(Base, Base_Data):
     #  @super(), implement 'Base', and 'Base_Data' superclass constructor within
     #      this child class constructor.
     #
+    #  @self.uid, the logged-in user (i.e. userid).
+    #
     #  Note: the superclass constructor expects the same 'svm_data' argument.
     def __init__(self, svm_data):
         super(Data_New, self).__init__(svm_data)
         self.list_error = []
+        self.uid        = 1
