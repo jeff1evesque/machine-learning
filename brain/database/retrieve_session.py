@@ -30,7 +30,7 @@ class Retrieve_Session(object):
             list_session.append({'id': item[0], 'title': item[1]})
 
         # retrieve any error(s), disconnect from database
-        response_error = self.sql.return_error()
+        response_error = self.sql.get_errors()
         self.sql.sql_disconnect()
 
         # return result
