@@ -5,10 +5,10 @@
 #      table(s), from the 'db_machine_learning' database.
 from brain.database.db_query import SQL
 
-## Class: Save_Label, explicitly inherit 'new-style' class
+## Class: Save_Observation, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'data_new.py'
-class Save_Label(object):
+class Save_Observation(object):
 
     ## constructor: stores an SVM label (python dict), database configurations
     #               into their own corresponding class variable.
