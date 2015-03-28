@@ -19,14 +19,14 @@ class Save_Observation(object):
         self.list_error   = []
         self.sql          = SQL()
 
-    ## save: store, or update SVM dataset(s) into corresponding 'EAV data model'
-    #        database table(s).
+    ## save_label: store, or update SVM dataset(s) into corresponding 'EAV data model'
+    #              database table(s).
     #
     #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
     #      is used for argument substitution.
     #
     #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
-    def save(self):
+    def save_label(self):
         # insert / update feature label(s)
         self.sql.sql_connect('db_machine_learning')
 
