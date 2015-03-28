@@ -15,6 +15,8 @@ from brain.database.save_label import Save_Label
 
 ## Class: Base_Data, explicitly inherit 'new-style' class
 #
+#  @self.uid, the logged-in user (i.e. userid).
+#
 #  Note: this class is invoked within 'data_xx.py'
 class Base_Data(object):
 
@@ -23,6 +25,7 @@ class Base_Data(object):
         self.flag_validate_mime = False
         self.observation_labels = []
         self.list_error         = []
+        self.uid                = 1
 
     ## save_svm_info: save the number of features that can be expected in a given
     #                 observation with respect to 'id_entity'.
@@ -63,7 +66,7 @@ class Base_Data(object):
     ## save_svm_entity: save the current entity into the database, then return
     #                   the corresponding entity id.
     def save_svm_entity(self, session_type):
-        svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': 1, 'id_entity': None}
+        svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': self.uid, 'id_entity': None}
         db_save    = Save_Entity(svm_entity, session_type)
 
         # save dataset element
