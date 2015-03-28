@@ -8,7 +8,7 @@
 #        references.
 from brain.database.save_entity import Save_Entity
 from brain.database.save_dataset import Save_Dataset
-from brain.database.save_size import Save_Size
+from brain.database.save_feature import Save_Feature
 from brain.validator.validate_mime import Validate_Mime
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_label import Save_Label
