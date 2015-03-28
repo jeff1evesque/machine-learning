@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 ## @save_feature.py
-#  This file saves the number of features that can be expected in a given
-#      observation with respect to 'id_entity'.
+#  This file saves the feature count, as well as the feature instances within
+#      corresponding database tables.
 from brain.database.db_query import SQL
 
 ## Class: Save_Feature, explicitly inherit 'new-style' class
