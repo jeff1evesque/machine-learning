@@ -1,14 +1,14 @@
 #!/usr/bin/python
 
-## @save_label.py
+## @save_observation.py
 #  This file saves SVM related data into corresponding 'EAV data model' database
 #      table(s), from the 'db_machine_learning' database.
 from brain.database.db_query import SQL
 
-## Class: Save_Label, explicitly inherit 'new-style' class
+## Class: Save_Observation, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'data_new.py'
-class Save_Label(object):
+class Save_Observation(object):
 
     ## constructor: stores an SVM label (python dict), database configurations
     #               into their own corresponding class variable.
@@ -19,14 +19,14 @@ class Save_Label(object):
         self.list_error   = []
         self.sql          = SQL()
 
-    ## save: store, or update SVM dataset(s) into corresponding 'EAV data model'
-    #        database table(s).
+    ## save_label: store, or update SVM dataset(s) into corresponding 'EAV data model'
+    #              database table(s).
     #
     #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
     #      is used for argument substitution.
     #
     #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
-    def save(self):
+    def save_label(self):
         # insert / update feature label(s)
         self.sql.sql_connect('db_machine_learning')
 
