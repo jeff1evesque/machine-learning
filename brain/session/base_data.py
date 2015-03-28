@@ -7,7 +7,6 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 from brain.database.save_entity import Save_Entity
-from brain.database.save_dataset import Save_Dataset
 from brain.database.save_feature import Save_Feature
 from brain.validator.validate_mime import Validate_Mime
 from brain.converter.convert_upload import Convert_Upload
@@ -85,10 +84,10 @@ class Base_Data(object):
     def save_svm_dataset(self, session_type):
         for data in self.dataset:
             for dataset in data['svm_dataset']:
-                db_save = Save_Dataset({'svm_dataset': dataset, 'id_entity': data['id_entity']}, session_type)
+                db_save = Save_Feature({'svm_dataset': dataset, 'id_entity': data['id_entity']}, session_type)
 
                 # save dataset element, append error(s)
-                db_return = db_save.save()
+                db_return = db_save.save_feature()
                 if db_return['error']: self.list_error.append(db_return['error'])
 
     ## save_observation_label: save the list of unique independent variable labels
