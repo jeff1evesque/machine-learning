@@ -1,11 +1,11 @@
 #!/usr/bin/python
 
-## @save_size.py
+## @save_feature.py
 #  This file saves the number of features that can be expected in a given
 #      observation with respect to 'id_entity'.
 from brain.database.db_query import SQL
 
-## Class: Save_Size, explicitly inherit 'new-style' class
+## Class: Save_Feature, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'base_data.py'
 class Save_Size(object):
