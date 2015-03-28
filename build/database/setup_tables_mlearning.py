@@ -10,10 +10,10 @@ sql = SQL()
 
 ## CREATE DATABASE TABLES
 #
-#  @tbl_dataset_size
 #  @tbl_dataset_entity
+#  @tbl_feature_count
+#  @tbl_feature_value
 #  @tbl_observation_label
-#  @tbl_dataset_value
 sql.sql_connect('db_machine_learning')
 
 ## create 'tbl_dataset_size'
