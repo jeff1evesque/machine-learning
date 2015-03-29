@@ -235,7 +235,7 @@ The following are acceptable syntax:
 - [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/xml/)
 - [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/json/)
 
-**Note:** for the JSON datasets, each dependent variable value is an array (square brackets), since each dependent variable may have multiple observations. 
+**Note:** each dependent variable value (for JSON datasets), is an array (square brackets), since each dependent variable may have multiple observations. 
 
 ###Programmatic Interface
 
