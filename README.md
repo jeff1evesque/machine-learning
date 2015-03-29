@@ -235,6 +235,8 @@ The following are acceptable syntax:
 - [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/xml/)
 - [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/json/)
 
+**Note:** for the JSON datasets, each dependent variable value is an array (square brackets), since each dependent variable may have multiple observations. 
+
 ###Programmatic Interface
 
 When creating (sub)projects of this repository *programmatically*, it is important to leverage existing logic when possible:
