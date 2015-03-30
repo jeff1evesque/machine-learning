@@ -149,7 +149,8 @@ class Base_Data(object):
 
                         # check label consistency, assign labels
                         if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                        self.observation_labels = sorted(dataset_converter.get_observation_labels())
+                        labels = dataset_converter.get_observation_labels()
+                        self.observation_labels.append(labels)
 
                         # build new (relevant) dataset
                         self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
@@ -167,7 +168,8 @@ class Base_Data(object):
 
                         # check label consistency, assign labels
                         if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                        self.observation_labels = sorted(dataset_converter.get_observation_labels())
+                        labels = dataset_converter.get_observation_labels()
+                        self.observation_labels.append(labels)
 
                         # build new (relevant) dataset
                         self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
@@ -185,7 +187,8 @@ class Base_Data(object):
 
                         # check label consistency, assign labels
                         if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                        self.observation_labels = sorted(dataset_converter.get_observation_labels())
+                        labels = dataset_converter.get_observation_labels()
+                        self.observation_labels.append(labels)
 
                         # build new (relevant) dataset
                         self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
