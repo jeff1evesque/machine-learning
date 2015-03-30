@@ -110,10 +110,12 @@ class Convert_Upload(object):
         dataset           = json.load(self.svm_file)
 
         for dep_variable in dataset:
-            if len(dataset[dep_variable]) > 1:
-                print dep_variable
-            else:
-                for indep_variable_label, indep_variable_value in dataset[dep_variable][0].items():
+            if type(dataset[dep_variable]) == list:
+                for observation in dataset[dep_variable]:
+                    for indep_variable_label, indep_variable_value in observation.items():
+                        list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+            elif type(dataset[dep_variable]) == dict:
+                for indep_variable_label, indep_variable_value in dataset[dep_variable].items():
                     list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
 
             # list of observation label
