@@ -157,6 +157,14 @@ class Base_Data(object):
                         self.list_error.append(error)
                         flag_append = False
 
+                # json to dict
+                elif val['type'] in ('application/json'):
+                    try:
+                        # conversion
+
+                        # check label consistency, assign labels
+
+                        # build new (relevant) dataset
                 # xml to dict
                 elif val['type'] in ('application/xml', 'text/xml' ):
                     try:
