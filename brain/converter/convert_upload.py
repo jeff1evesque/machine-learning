@@ -4,6 +4,7 @@
 #  This file contains methods required to convert an svm dataset, into a
 #      python dictionary.
 import csv
+import json
 import xmltodict
 from collections import defaultdict
 from itertools import islice
@@ -96,10 +97,40 @@ class Convert_Upload(object):
 
                 list_dataset.append({'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value})
 
-        self.observation_labels = observation_label
-
-        # close file, and return
+        # close file, save observation labels, and return
         self.svm_file.close()
+        self.observation_labels = observation_label
+        return list_dataset
+
+    ## json_to_dict: convert json file-object to a python dictionary.
+    #
+    #  @observation_label, is a list containing dependent variable labels.
+    def json_to_dict(self):
+        list_dataset      = []
+        observation_label = []
+        dataset           = json.load(self.svm_file)
+
+        for dep_variable in dataset:
+            # dependent variable with single observation
+            if type(dataset[dep_variable]) == list:
+                for observation in dataset[dep_variable]:
+                    for indep_variable_label, indep_variable_value in observation.items():
+                        list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+            # dependent variable with multiple observations
+            elif type(dataset[dep_variable]) == dict:
+                for indep_variable_label, indep_variable_value in dataset[dep_variable].items():
+                    list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+
+            # list of observation label
+            observation_label.append(dep_variable)
+
+            # generalized feature count in an observation
+            if not self.count_features:
+                self.count_features = len(dataset[dep_variable])
+
+        # close file, save observation labels, and return
+        self.svm_file.close()
+        self.observation_labels = observation_label
         return list_dataset
 
     ## xml_to_dict: convert xml file-object to a python dictionary.
@@ -149,10 +180,9 @@ class Convert_Upload(object):
             if not self.count_features:
                 self.count_features = len(dep_variable['independent-variable'])
 
-        self.observation_labels = observation_label
-
-        # close file, and return
+        # close file, save observation labels, and return
         self.svm_file.close()
+        self.observation_labels = observation_label
         return list_dataset
 
     ## get_observation_labels: returns a list of independent variable labels. Since

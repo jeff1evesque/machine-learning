@@ -111,7 +111,7 @@ $(document).ready(function() {
                 <input type="file" name="svm_dataset[]" class="svm_dataset_file">\
                 <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
                 <input type="button" value="Remove" class="remove_element svm_dataset_file_remove">\
-                <p class="form_note">*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">csv</span>, or <span class="italic">xml</span> format.</p>\
+                <p class="form_note">*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">csv</span>, <span class="italic">json</span>, or <span class="italic">xml</span> format.</p>\
               </fieldset>\
             ';
         }
@@ -136,7 +136,7 @@ $(document).ready(function() {
                 <input type="file" name="svm_dataset[]" class="svm_dataset_file">\
                 <input type="button" value="Add more" class="add_element svm_dataset_file_add">\
                 <input type="button" value="Remove" class="remove_element svm_dataset_file_remove">\
-                <p class="form_note">*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">csv</span>, or <span class="italic">xml</span> format.</p>\
+                <p class="form_note">*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">csv</span>, <span class="italic">json</span>, or <span class="italic">xml</span> format.</p>\
               </fieldset>\
             ';
         }
