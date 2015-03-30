@@ -116,17 +116,22 @@ class Convert_Upload(object):
                 for observation in dataset[dep_variable]:
                     for indep_variable_label, indep_variable_value in observation.items():
                         list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+
+                    # generalized feature count in an observation
+                    if not self.count_features:
+                        self.count_features = len(observation)
+
             # dependent variable with multiple observations
             elif type(dataset[dep_variable]) == dict:
                 for indep_variable_label, indep_variable_value in dataset[dep_variable].items():
                     list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
 
+                # generalized feature count in an observation
+                if not self.count_features:
+                    self.count_features = len(dataset[dep_variable])
+
             # list of observation label
             observation_label.append(dep_variable)
-
-            # generalized feature count in an observation
-            if not self.count_features:
-                self.count_features = len(dataset[dep_variable])
 
         # close file, save observation labels, and return
         self.svm_file.close()
