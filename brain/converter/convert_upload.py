@@ -4,6 +4,7 @@
 #  This file contains methods required to convert an svm dataset, into a
 #      python dictionary.
 import csv
+import json
 import xmltodict
 from collections import defaultdict
 from itertools import islice
