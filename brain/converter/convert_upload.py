@@ -97,10 +97,9 @@ class Convert_Upload(object):
 
                 list_dataset.append({'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value})
 
-        self.observation_labels = observation_label
-
-        # close file, and return
+        # close file, save observation labels, and return
         self.svm_file.close()
+        self.observation_labels = observation_label
         return list_dataset
 
     ## json_to_dict: convert json file-object to a python dictionary.
@@ -127,8 +126,7 @@ class Convert_Upload(object):
             if not self.count_features:
                 self.count_features = len(dataset[dep_variable])
 
-
-        # close file, save obsevation labels, and return
+        # close file, save observation labels, and return
         self.svm_file.close()
         self.observation_labels = observation_label
         return list_dataset
@@ -180,10 +178,9 @@ class Convert_Upload(object):
             if not self.count_features:
                 self.count_features = len(dep_variable['independent-variable'])
 
-        self.observation_labels = observation_label
-
-        # close file, and return
+        # close file, save observation labels, and return
         self.svm_file.close()
+        self.observation_labels = observation_label
         return list_dataset
 
     ## get_observation_labels: returns a list of independent variable labels. Since
