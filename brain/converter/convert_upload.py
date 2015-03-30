@@ -110,10 +110,12 @@ class Convert_Upload(object):
         dataset           = json.load(self.svm_file)
 
         for dep_variable in dataset:
+            # dependent variable with single observation
             if type(dataset[dep_variable]) == list:
                 for observation in dataset[dep_variable]:
                     for indep_variable_label, indep_variable_value in observation.items():
                         list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+            # dependent variable with multiple observations
             elif type(dataset[dep_variable]) == dict:
                 for indep_variable_label, indep_variable_value in dataset[dep_variable].items():
                     list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
