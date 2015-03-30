@@ -126,7 +126,7 @@ class Convert_Upload(object):
         self.svm_file.close()
         self.observation_labels = observation_label
 
-        return dataset
+        return list_dataset
 
     ## xml_to_dict: convert xml file-object to a python dictionary.
     #
