@@ -127,9 +127,10 @@ class Convert_Upload(object):
             if not self.count_features:
                 self.count_features = len(dataset[dep_variable])
 
+
+        # close file, save obsevation labels, and return
         self.svm_file.close()
         self.observation_labels = observation_label
-
         return list_dataset
 
     ## xml_to_dict: convert xml file-object to a python dictionary.
