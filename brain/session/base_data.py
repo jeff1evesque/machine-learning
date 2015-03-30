@@ -161,10 +161,20 @@ class Base_Data(object):
                 elif val['type'] in ('application/json'):
                     try:
                         # conversion
+                        dataset_converter = Convert_Upload(val['file'])
+                        dataset_converted = dataset_converter.json_to_dict()
+                        count_features    = dataset_converter.get_feature_count()
 
                         # check label consistency, assign labels
+                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                        self.observation_labels = sorted(dataset_converter.get_observation_labels())
 
                         # build new (relevant) dataset
+                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                    except Exception as error:
+                        self.list_error.append(error)
+                        flag_append = False
+
                 # xml to dict
                 elif val['type'] in ('application/xml', 'text/xml' ):
                     try:
