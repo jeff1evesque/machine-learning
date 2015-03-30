@@ -104,6 +104,9 @@ class Convert_Upload(object):
 
     ## json_to_dict: convert json file-object to a python dictionary.
     def json_to_dict(self):
+        dataset = json.loads(self.svm_file)
+        self.svm_file.close()
+        return dataset
 
     ## xml_to_dict: convert xml file-object to a python dictionary.
     #
