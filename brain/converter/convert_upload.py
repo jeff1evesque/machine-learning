@@ -105,8 +105,27 @@ class Convert_Upload(object):
 
     ## json_to_dict: convert json file-object to a python dictionary.
     def json_to_dict(self):
-        dataset = json.load(self.svm_file)
+        list_dataset      = []
+        observation_label = []
+        dataset           = json.load(self.svm_file)
+
+        for dep_variable in dataset:
+            if len(dataset[dep_variable]) > 1:
+                print dep_variable
+            else:
+                for indep_variable_label, indep_variable_value in dataset[dep_variable][0].items():
+                    list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+
+            # list of observation label
+            observation_label.append(dep_variable)
+
+            # generalized feature count in an observation
+            if not self.count_features:
+                self.count_features = len(dataset[dep_variable])
+
         self.svm_file.close()
+        self.observation_labels = observation_label
+
         return dataset
 
     ## xml_to_dict: convert xml file-object to a python dictionary.
