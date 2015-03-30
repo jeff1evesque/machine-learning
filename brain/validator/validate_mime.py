@@ -26,7 +26,7 @@ class Validate_Mime(object):
         list_error      = []
 
         dataset         = self.svm_data['data']['dataset']
-        acceptable_type = ['text/plain', 'text/csv', 'text/xml', 'application/xml', 'application/json']
+        acceptable_type = ['text/plain', 'text/csv', 'text/xml', 'text/json', 'application/xml', 'application/json']
 
         unique_hash     = set()
         dataset_keep    = []
