@@ -16,17 +16,23 @@
       }
     }).done(function(data) {
 
+    // Remove AJAX Overlay
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+
     // Append to DOM
-      $.each( data, function( index, value ) {
-        var value_id    = value['id'];
-        var value_title = value['title'];
-        var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
+      if (data.error) {
+        $('.fieldset_dataset_type').append('<div class="error">' + data.error + '</div>');
+        $('.fieldset_select_model').append('<div class="error">' + data.error + '</div>');
+      }
+      else {
+        $.each( data, function( index, value ) {
+          var value_id    = value['id'];
+          var value_title = value['title'];
+          var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
 
-        $('select[name="svm_session_id"]').append( element );
-
-      // Remove AJAX Overlay
-        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
-      })
+          $('select[name="svm_session_id"]').append( element );
+        });
+      }
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: '+errorThrown);
