@@ -9,7 +9,6 @@ from brain.load_data import Load_Data
 from brain.converter.restructure_data import Restructure_Data
 from brain.database.retrieve_session import Retrieve_Session
 
-# Define Route: assign corresponding template, or logic to given path
 @app.route('/')
 def index():
     return render_template('index.html')
