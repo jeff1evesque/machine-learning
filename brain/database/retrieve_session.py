@@ -31,7 +31,7 @@ class Retrieve_Session(object):
                 list_session.append({'id': item[0], 'title': item[1]})
             response_error = self.sql.get_errors()
         else:
-            response_error = 'previous session in database'
+            response_error = 'no previous session found in database'
 
         # disconnect from database
         self.sql.sql_disconnect()
