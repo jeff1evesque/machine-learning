@@ -9,11 +9,12 @@ from brain.load_data import Load_Data
 from brain.converter.restructure_data import Restructure_Data
 from brain.database.retrieve_session import Retrieve_Session
 
-# Define Route: assign corresponding template, or logic to given path
+## index: render 'index.html'
 @app.route('/')
 def index():
     return render_template('index.html')
 
+## load_data: return computed data
 @app.route('/load-data/', methods=['POST', 'GET'])
 def load_data():
     if request.method == 'POST':
@@ -45,6 +46,7 @@ def load_data():
         # return response
         return json.dumps(response)
 
+## retrieve_session: retrieve all sessions stored in the database
 @app.route('/retrieve-session/', methods=['POST', 'GET'])
 def retrieve_session():
     if request.method == 'POST':
