@@ -22,8 +22,8 @@ class Retrieve_Session(object):
 
         # sql query
         self.sql.sql_connect('db_machine_learning')
-        sql_statement  = 'SELECT id_entity, title FROM tbl_dataset_entity'
-        response       = self.sql.sql_command(sql_statement, 'select')
+        sql_statement = 'SELECT id_entity, title FROM tbl_dataset_entity'
+        response      = self.sql.sql_command(sql_statement, 'select')
 
         # rebuild session list
         for item in response['result']:
