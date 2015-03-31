@@ -54,4 +54,4 @@ def retrieve_session():
 
         # return all sessions
         if session_list['result']: return json.dumps(session_list['result'])
-        else: return json.dumps(session_list['error'])
+        else: return json.dumps({'error': session_list['error']})
