@@ -22,6 +22,7 @@
     // Append to DOM
       if (data.error) {
         $('.fieldset_dataset_type').append('<div class="error">' + data.error + '</div>');
+        $('.fieldset_select_model').append('<div class="error">' + data.error + '</div>');
       }
       else {
         $.each( data, function( index, value ) {
