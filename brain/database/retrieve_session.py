@@ -26,8 +26,9 @@ class Retrieve_Session(object):
         response      = self.sql.sql_command(sql_statement, 'select')
 
         # rebuild session list
-        for item in response['result']:
-            list_session.append({'id': item[0], 'title': item[1]})
+        if response['result']:
+            for item in response['result']:
+                list_session.append({'id': item[0], 'title': item[1]})
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
