@@ -100,12 +100,13 @@ class Base_Data(object):
     #      'save_svm_entity' method.
     def save_observation_label(self, session_type, session_id):
         if len(self.observation_labels) > 0:
-            for label in self.observation_labels:
-                db_save = Save_Observation({'label': label, 'id_entity': session_id}, session_type)
+            for label_list in self.observation_labels:
+                for label in label_list:
+                    db_save = Save_Observation({'label': label, 'id_entity': session_id}, session_type)
 
-                # save dataset element, append error(s)
-                db_return = db_save.save_label()
-                if not db_return['status']: self.list_error.append(db_return['error'])
+                    # save dataset element, append error(s)
+                    db_return = db_save.save_label()
+                    if not db_return['status']: self.list_error.append(db_return['error'])
 
     ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
     #                   dict object.
