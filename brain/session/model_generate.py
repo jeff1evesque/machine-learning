@@ -68,7 +68,7 @@ class Model_Generate():
                     observation_labels.append(feature[0][0])
                     current_features = []
 
-            # get observation labels
+            # convert observation labels to integers
             y = label_encoder.transform(dataset[:, 0])
 
             # create svm model
