@@ -63,7 +63,7 @@ class Model_Generate():
                     current_features.append(feature[0])
                 else:
                     current_features.append(feature[0])
-                    grouped_features.append(list_feature)
+                    grouped_features.append(current_features)
                     current_features = []
 
             # get observation labels
