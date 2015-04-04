@@ -27,12 +27,12 @@ class Retrieve_Dataset(object):
     def get_dataset(self, id_entity):
         # select dataset
         self.sql.sql_connect('db_machine_learning')
-        sql_statement = 'SELECT dep_variable_label, indep_variable_label, indep_variable_value FROM tbl_dataset_value where id_entity=%s'
+        sql_statement = 'SELECT dep_variable_label, indep_variable_label, indep_variable_value FROM tbl_feature_value where id_entity=%s'
         args          = (id_entity)
         response      = self.sql.sql_command(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
-        response_error = self.sql.return_error()
+        response_error = self.sql.get_errors()
         self.sql.sql_disconnect()
 
         # return result

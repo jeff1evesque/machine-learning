@@ -3,43 +3,14 @@
 ## @jsonschema_definition.py
 #  This file contains various jsonschema definitions.
 
-## jsonschema_dataset(): contains the jsonschema for the SVM dataset. Therefore
-#                        this schema validates only the SVM dataset, not the
-#                        properties describing the (training, or analysis) session.
-#
-#  Note: This validation schema is used in the corresponding validator_xxx.py.
-def jsonschema_dataset():
+## jsonschema_string(): ensures nonempty string validation.
+def jsonschema_string():
     schema = {
         'type': 'object',
         'properties': {
-            'dep_variable_label': {
+            'value': {
                 'type': 'string',
                 'minLength': 1
-            },
-            'indep_variable_label': {
-                'type': 'string',
-                'minLength': 1
-            },
-            'indep_variable_value': {'type': 'number'},
-        },
-    }
-    return schema
-
-## jsonschema_dataset_id(): contains the jsonschema for the SVM dataset. Specifically,
-#                           this schema complements the 'jsonschema_data_new()', and
-#                           'jsonschema_data_append()' schemas, respectively.
-#
-#  Note: This validation schema is used in the corresponding validator_xxx.py.
-#
-#  @exclusiveMinimum, ensures that the minimum is included with the minimum range.
-def jsonschema_dataset_id():
-    schema = {
-        'type': 'object',
-        'properties': {
-            'id_entity': {
-                'type': 'integer',
-                'minimum': 0,
-                'exclusiveMinimum': true
             },
         },
     }

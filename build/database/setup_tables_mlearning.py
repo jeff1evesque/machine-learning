@@ -1,24 +1,31 @@
 #!/usr/bin/python
 
 ## @setup_db.py
-#  This file initializes database tables related to the 'db_machine_learning'
-#      database.
+#  This file initializes the following database tables within the 'db_machine_learning'
+#      database:
+#
+#  @tbl_dataset_entity, record the dataset instance, and the corresponding userid
+#      who created, or modified the information.
+#
+#  @tbl_feature_count, record the number of features expected within an observation,
+#      with respect to a given 'id_entity'.
+#
+#  @tbl_feature_value, record each feature value with its corresponding feature label,
+#      and observation label.
+#
+#  @tbl_observation_label, record every unique observation label, with respect to a
+#      given 'id_entity'.
 from brain.database.db_query import SQL
 
 ## local variables
 sql = SQL()
 
-## CREATE DATABASE TABLES
-#
-#  @tbl_dataset_size
-#  @tbl_dataset_entity
-#  @tbl_observation_label
-#  @tbl_dataset_value
+## connect to database
 sql.sql_connect('db_machine_learning')
 
-## create 'tbl_dataset_size'
+## create 'tbl_feature_count'
 sql_statement = '''\
-                CREATE TABLE IF NOT EXISTS tbl_dataset_size (
+                CREATE TABLE IF NOT EXISTS tbl_feature_count (
                     id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     id_entity INT NOT NULL,
                     count_features INT NOT NULL
@@ -49,9 +56,9 @@ sql_statement = '''\
                 '''
 sql.sql_command(sql_statement, 'create')
 
-## create 'tble_dataset_value'
+## create 'tbl_feature_value'
 sql_statement = '''\
-                CREATE TABLE IF NOT EXISTS tbl_dataset_value (
+                CREATE TABLE IF NOT EXISTS tbl_feature_value (
                     id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     id_entity INT NOT NULL,
                     dep_variable_label VARCHAR (50) NOT NULL,
@@ -63,5 +70,5 @@ sql_statement = '''\
 sql.sql_command(sql_statement, 'create')
 
 # retrieve any error(s), disconnect from database
-if sql.return_error(): print sql.return_error()
+if sql.get_errors(): print sql.return_error()
 sql.sql_disconnect()

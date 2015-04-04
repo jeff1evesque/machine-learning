@@ -33,23 +33,24 @@ class Load_Data(object):
             session_entity = session.save_svm_entity('data_new')
             if session_entity['status']:
                 session_id = session_entity['id']
+                session.validate_id(session_id)
                 session.check()
 
                 session.dataset_to_dict(session_id)
                 session.check()
-
                 session.save_svm_info()
                 session.check()
 
                 session.save_observation_label('data_new', session_id)
                 session.check()
 
-                session.save_svm_dataset('data_new')
+                session.save_svm_dataset()
                 session.check()
 
-        # return
-        if session.return_error or session.validate_arg_none(): return False
-        else: return 'Dataset(s) properly uploaded into database'
+            return 'Dataset(s) properly uploaded into database'
+        else:
+            print session.get_errors()
+            return None
 
     ## load_data_append: redirect input to 'session_data_append.py'
     def load_data_append(self):
@@ -59,9 +60,10 @@ class Load_Data(object):
 
         # define current session id
         session_id = self.data['data']['settings']['svm_session_id']
+        session.validate_id(session_id)
 
         # implement class methods
-        if not session.validate_arg_none():
+        if not session.validate_arg_none() and not session.get_errors():
             session.validate_svm_settings()
             session.validate_mime_type()
             session.check()
@@ -76,12 +78,13 @@ class Load_Data(object):
                 session.save_observation_label('data_append', session_id)
                 session.check()
 
-                session.save_svm_dataset('data_append')
+                session.save_svm_dataset()
                 session.check()
 
-        # return
-        if session.return_error or session.validate_arg_none(): return False
-        else: return 'Dataset(s) properly appended into database'
+            return 'Dataset(s) properly appended into database'
+        else:
+            print session.get_errors()
+            return None
 
     ## load_model_generate: redirect input to 'session_model_generate.py'
     def load_model_generate(self):
