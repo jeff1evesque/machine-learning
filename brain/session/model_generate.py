@@ -33,8 +33,8 @@ class Model_Generate():
         label_encoder    = preprocessing.LabelEncoder()
         feature_count    = self.feature_request.get_count(self.session_id)
 
-        X = dataset[:, 1:]
-        y = label_encoder.transform(dataset[:, 0])
+        X = dataset_arr[:, 1:]
+        y = label_encoder.transform(dataset_arr[:, 0])
 
         # create svm model
         clf = svm.SVC()
