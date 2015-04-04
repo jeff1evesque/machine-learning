@@ -38,3 +38,18 @@ class Retrieve_Feature(object):
         # return result
         if response_error: return {'status': False, 'error': response_error, 'result': None}
         else: return {'status': True, 'error': None, 'result': response['result']}
+
+    ## get_count
+    def get_count(self, id_entity):
+        self.sql.sql_connect('db_machine_learning')
+        sql_statement = 'SELECT count_features FROM tbl_feature_count where id_entity=%s'
+        args          = (id_entity)
+        response      = self.sql.sql_command(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.sql_disconnect()
+
+        # return result
+        if response_error: return {'status': False, 'error': response_error, 'result': None}
+        else: return {'status': True, 'error': None, 'result': response['result']}
