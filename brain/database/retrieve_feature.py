@@ -16,8 +16,8 @@ class Retrieve_Feature(object):
         self.list_error = []
         self.sql        = SQL()
 
-    ## get_dataset: retrieve an SVM feature from corresponding 'EAV data model'
-    #               database table(s).
+    ## get_dataset: retrieve an SVM dataset from corresponding 'EAV data model'
+    #               database table(s), using a fixed 'id_entity'.
     #
     #  @id_entity, this supplied argument corresponds to the 'id_entity' column from the
     #      'tbl_dataset_value' database table.
