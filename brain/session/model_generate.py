@@ -56,14 +56,16 @@ class Model_Generate():
             features_list      = dataset[:, [[0],[2]]]
             current_features   = []
             grouped_features   = []
+            observation_labels = []
 
             # group features into observation instances
             for index, feature in enumerate(features_list):
                 if not (index+1) % feature_count == 0:
-                    current_features.append(feature[0][0])
+                    current_features.append(feature[1][0])
                 else:
-                    current_features.append(feature[0][0])
+                    current_features.append(feature[1][0])
                     grouped_features.append(current_features)
+                    observation_labels.append(feature[0][0])
                     current_features = []
 
             # get observation labels
