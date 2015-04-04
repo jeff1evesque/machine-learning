@@ -63,6 +63,7 @@ class Model_Generate():
                     grouped_features.append(list_feature)
                     current_features = []
 
+            # get observation labels
             y = label_encoder.transform(dataset[:, 0])
 
             # create svm model
