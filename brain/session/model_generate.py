@@ -35,6 +35,7 @@ class Model_Generate():
         # get dataset
         if dataset['error']:
             print dataset['error']
+            self.list_error.append(dataset['error'])
             dataset = None
         else:
             dataset = numpy.asarray(dataset)['result']
@@ -42,6 +43,7 @@ class Model_Generate():
         # get feature count
         if feature_count['error']:
             print feature_count['error']
+            self.list_error.append(feature_count['error'])
             feature_count = None
         else:
             feature_count = feature_count['result']
