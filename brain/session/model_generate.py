@@ -46,10 +46,10 @@ class Model_Generate():
             self.list_error.append(feature_count['error'])
             feature_count = None
         else:
-            feature_count = feature_count['result']
+            feature_count = feature_count['result'][0][0]
 
         # check dataset integrity
-        if len(dataset) % feature_count:
+        if len(dataset) % feature_count == 0:
             X = dataset[:, 1:]
             y = label_encoder.transform(dataset[:, 0])
 
