@@ -17,14 +17,10 @@ class Model_Generate():
 
     ## constructor:
     def __init__(self, svm_data):
-        self.svm_data   = svm_data
-        self.session_id = self.svm_data['data']['settings']['svm_session_id']
-        self.list_error = []
-
-    ## select_dataset: select a dataset from the database
-    def select_dataset(self):
-        requester             = Retrieve_Feature()
-        self.selected_dataset = requester.get_feature(self.session_id)
+        self.svm_data        = svm_data
+        self.session_id      = self.svm_data['data']['settings']['svm_session_id']
+        self.feature_request = Retrieve_Feature()
+        self.list_error      = []
 
     ## generate_model: generate svm model
     #
@@ -32,8 +28,10 @@ class Model_Generate():
     #  @y, feature labels (independent variable labels)
     def generate_model(self):
         # local variables
-        dataset       = numpy.asarray(self.selected_dataset['result'])
-        label_encoder = preprocessing.LabelEncoder()
+        dataset_selected = self.feature_request.get_feature(self.session_id)['result']
+        dataset_arr      = numpy.asarray(dataset_selected)
+        label_encoder    = preprocessing.LabelEncoder()
+        feature_count    = self.feature_request.get_count(self.session_id)
 
         X = dataset[:, 1:]
         y = label_encoder.transform(dataset[:, 0])
