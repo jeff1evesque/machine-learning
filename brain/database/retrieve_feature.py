@@ -5,10 +5,10 @@
 #      table(s), from the 'db_machine_learning' database.
 from brain.database.db_query import SQL
 
-## Class: Retrieve_Dataset, explicitly inherit 'new-style' class
+## Class: Retrieve_Feature, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'model_generate.py'
-class Retrieve_Dataset(object):
+class Retrieve_Feature(object):
 
     ## constructor:
     def __init__(self):
