@@ -50,24 +50,24 @@ class Model_Generate():
 
         # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
-            features_list   = dataset[:, [2]]
-            list_feature    = []
-            grouped_feature = []
+            features_list    = dataset[:, [2]]
+            current_features = []
+            grouped_features = []
 
             # group features into observation instances
             for index, feature in enumerate(features_list):
                 if not (index+1) % feature_count == 0:
-                    list_feature.append(feature[0])
+                    current_features.append(feature[0])
                 else:
-                    list_feature.append(feature[0])
-                    grouped_feature.append(list_feature)
-                    list_feature = []
+                    current_features.append(feature[0])
+                    grouped_features.append(list_feature)
+                    current_features = []
 
             y = label_encoder.transform(dataset[:, 0])
 
             # create svm model
             clf = svm.SVC()
-            clf.fit(grouped_feature, y)
+            clf.fit(grouped_features, y)
 
     ## return_error: returns current error(s)
     def return_error(self):
