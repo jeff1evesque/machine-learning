@@ -53,16 +53,16 @@ class Model_Generate():
 
         # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
-            features_list    = dataset[:, [2]]
-            current_features = []
-            grouped_features = []
+            features_list      = dataset[:, [[0],[2]]]
+            current_features   = []
+            grouped_features   = []
 
             # group features into observation instances
             for index, feature in enumerate(features_list):
                 if not (index+1) % feature_count == 0:
-                    current_features.append(feature[0])
+                    current_features.append(feature[0][0])
                 else:
-                    current_features.append(feature[0])
+                    current_features.append(feature[0][0])
                     grouped_features.append(current_features)
                     current_features = []
 
