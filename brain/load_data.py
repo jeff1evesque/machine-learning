@@ -92,8 +92,7 @@ class Load_Data(object):
         # instantiate class
         session = Model_Generate(self.data)
 
-        # select, and generate model
-        session.select_dataset()
+        # generate model
         session.generate_model()
 
         # return
