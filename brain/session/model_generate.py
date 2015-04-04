@@ -23,8 +23,8 @@ class Model_Generate():
 
     ## select_dataset: select a dataset from the database
     def select_dataset(self):
-        requester             = Retrieve_Dataset()
-        self.selected_dataset = requester.get_dataset(self.session_id)
+        requester             = Retrieve_Feature()
+        self.selected_dataset = requester.get_feature(self.session_id)
 
     ## generate_model: generate svm model
     #
