@@ -50,6 +50,19 @@ class Model_Generate():
 
         # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
+            features_list   = dataset[:, [2]]
+            list_feature    = []
+            grouped_feature = []
+
+            # grouped features
+            for index, feature in enumerate(features_list):
+                if not (index+1) % feature_count == 0:
+                    list_feature.append(feature[0])
+                else:
+                    list_feature.append(feature[0])
+                    grouped_feature.append(list_feature)
+                    list_feature = []
+
             X = dataset[:, 1:]
             y = label_encoder.transform(dataset[:, 0])
 
