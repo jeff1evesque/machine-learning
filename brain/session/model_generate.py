@@ -48,14 +48,14 @@ class Model_Generate():
         else:
             feature_count = feature_count['result']
 
-        print feature_count
+        # check dataset integrity
+        if len(dataset) % feature_count:
+            X = dataset[:, 1:]
+            y = label_encoder.transform(dataset[:, 0])
 
-#        X = dataset[:, 1:]
-#        y = label_encoder.transform(dataset[:, 0])
-
-        # create svm model
-#        clf = svm.SVC()
-#        clf.fit(X, y)
+            # create svm model
+            clf = svm.SVC()
+            clf.fit(X, y)
 
     ## return_error: returns current error(s)
     def return_error(self):
