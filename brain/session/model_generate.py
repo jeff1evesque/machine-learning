@@ -48,7 +48,7 @@ class Model_Generate():
         else:
             feature_count = feature_count['result'][0][0]
 
-        # check dataset integrity
+        # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
             X = dataset[:, 1:]
             y = label_encoder.transform(dataset[:, 0])
