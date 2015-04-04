@@ -39,7 +39,14 @@ class Retrieve_Feature(object):
         if response_error: return {'status': False, 'error': response_error, 'result': None}
         else: return {'status': True, 'error': None, 'result': response['result']}
 
-    ## get_count
+    ## get_count: retrieve the number of features that can be expected in any given observation,
+    #             from a particular dataset instance (id_entity).
+    #
+    #  @id_entity, this supplied argument corresponds to the 'id_entity' column from the
+    #      'tbl_dataset_value' database table.
+    #
+    #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
+    #      is used for argument substitution.
     def get_count(self, id_entity):
         self.sql.sql_connect('db_machine_learning')
         sql_statement = 'SELECT count_features FROM tbl_feature_count where id_entity=%s'
