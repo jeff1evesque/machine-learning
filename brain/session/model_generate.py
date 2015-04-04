@@ -63,12 +63,11 @@ class Model_Generate():
                     grouped_feature.append(list_feature)
                     list_feature = []
 
-            X = dataset[:, 1:]
             y = label_encoder.transform(dataset[:, 0])
 
             # create svm model
             clf = svm.SVC()
-            clf.fit(X, y)
+            clf.fit(grouped_feature, y)
 
     ## return_error: returns current error(s)
     def return_error(self):
