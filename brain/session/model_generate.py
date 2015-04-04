@@ -24,7 +24,10 @@ class Model_Generate():
 
     ## generate_model: generate svm model
     #
-    #  @X, observations
+    #  @grouped_features, a matrix of observations, where each nested vector,
+    #      or python list, is a collection of features within the containing
+    #      observation.
+    #
     #  @y, feature labels (independent variable labels)
     def generate_model(self):
         # local variables
@@ -54,7 +57,7 @@ class Model_Generate():
             current_features = []
             grouped_features = []
 
-            # group features into observation instances (i.e. observations)
+            # group features into observation instances
             for index, feature in enumerate(features_list):
                 if not (index+1) % feature_count == 0:
                     current_features.append(feature[0])
