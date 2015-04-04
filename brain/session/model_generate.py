@@ -54,7 +54,7 @@ class Model_Generate():
             list_feature    = []
             grouped_feature = []
 
-            # grouped features
+            # group features into observation instances
             for index, feature in enumerate(features_list):
                 if not (index+1) % feature_count == 0:
                     list_feature.append(feature[0])
