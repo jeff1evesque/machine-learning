@@ -28,7 +28,7 @@ class Model_Generate():
     #  @y, feature labels (independent variable labels)
     def generate_model(self):
         # local variables
-        dataset_selected = self.feature_request.get_feature(self.session_id)['result']
+        dataset_selected = self.feature_request.get_dataset(self.session_id)['result']
         dataset_arr      = numpy.asarray(dataset_selected)
         label_encoder    = preprocessing.LabelEncoder()
         feature_count    = self.feature_request.get_count(self.session_id)
