@@ -28,13 +28,26 @@ class Model_Generate():
     #  @y, feature labels (independent variable labels)
     def generate_model(self):
         # local variables
-        dataset_selected = self.feature_request.get_dataset(self.session_id)['result']
-        dataset_arr      = numpy.asarray(dataset_selected)
-        label_encoder    = preprocessing.LabelEncoder()
-        feature_count    = self.feature_request.get_count(self.session_id)
+        dataset       = self.feature_request.get_dataset(self.session_id)
+        feature_count = self.feature_request.get_count(self.session_id)
+        label_encoder = preprocessing.LabelEncoder()
 
-        X = dataset_arr[:, 1:]
-        y = label_encoder.transform(dataset_arr[:, 0])
+        # get dataset
+        if dataset['error']:
+            print dataset['error']
+            dataset = None
+        else:
+            dataset = numpy.asarray(dataset)['result']
+
+        # get feature count
+        if feature_count['error']:
+            print feature_count['error']
+            feature_count = None
+        else:
+            feature_count = feature_count['result']
+
+        X = dataset[:, 1:]
+        y = label_encoder.transform(dataset[:, 0])
 
         # create svm model
         clf = svm.SVC()
