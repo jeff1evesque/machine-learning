@@ -38,7 +38,7 @@ class Model_Generate():
             self.list_error.append(dataset['error'])
             dataset = None
         else:
-            dataset = numpy.asarray(dataset)['result']
+            dataset = numpy.asarray(dataset['result'])
 
         # get feature count
         if feature_count['error']:
@@ -48,12 +48,14 @@ class Model_Generate():
         else:
             feature_count = feature_count['result']
 
-        X = dataset[:, 1:]
-        y = label_encoder.transform(dataset[:, 0])
+        print feature_count
+
+#        X = dataset[:, 1:]
+#        y = label_encoder.transform(dataset[:, 0])
 
         # create svm model
-        clf = svm.SVC()
-        clf.fit(X, y)
+#        clf = svm.SVC()
+#        clf.fit(X, y)
 
     ## return_error: returns current error(s)
     def return_error(self):
