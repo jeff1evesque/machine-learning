@@ -69,7 +69,7 @@ class Model_Generate():
                     observation_labels.append(feature[0][0])
                     current_features = []
 
-            # convert observation labels to integers
+            # convert observation labels to a unique integer representation
             label_encoder = preprocessing.LabelEncoder()
             label_encoder.fit(dataset[:,0])
             labels = list(label_encoder.classes_)
