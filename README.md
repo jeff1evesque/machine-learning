@@ -149,7 +149,7 @@ python app.py
 To install the *required* library:
 
 ```
-cd /var/www/library/scikit-learn/
+cd /var/www/build/scikit-learn/
 python setup.py build
 sudo python setup.py install
 ```
