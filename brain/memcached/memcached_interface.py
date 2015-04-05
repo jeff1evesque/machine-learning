@@ -4,7 +4,7 @@
 #  This file contains the required class to set, get, and delete various
 #      memcached objects.
 import memcache
-from brain.memcached_settings import Memcached_Settings
+from brain.memcached.memcached_settings import Memcached_Settings
 
 ## Class: Memcached, explicitly inherit 'new-style' class.
 class Memcached(object):
