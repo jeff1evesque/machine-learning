@@ -125,6 +125,8 @@ git status
 
 to the latest code-base, within the cloned repository branch, `NEW_BRANCH`.
 
+**Note:** the [scikit-learn](https://github.com/scikit-learn/scikit-learn/) submodule can be found in the [`/build/`](https://github.com/jeff1evesque/machine-learning/tree/master/build/) directory.
+
 ###Flask
 
 Python's [Flask](http://flask.pocoo.org/), is a microframework based on [Werkzeug](http://werkzeug.pocoo.org/).  Specifically, it is a [web framework](http://en.wikipedia.org/wiki/Web_application_framework), which includes, a development server, integrated support for [unit testing](http://en.wikipedia.org/wiki/Unit_testing), [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer) API, and [Jinja2](http://jinja.pocoo.org/) templating.
