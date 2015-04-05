@@ -28,7 +28,8 @@ class Model_Generate():
     #      or python list, is a collection of features within the containing
     #      observation.
     #
-    #  @y, feature labels (independent variable labels)
+    #  @encoded_labels, observation labels (dependent variable labels), encoded
+    #      into a unique integer representation.
     def generate_model(self):
         # local variables
         dataset       = self.feature_request.get_dataset(self.session_id)
@@ -58,7 +59,7 @@ class Model_Generate():
             grouped_features   = []
             observation_labels = []
 
-            # group features into observation instances
+            # group features into observation instances, record observation labels
             for index, feature in enumerate(features_list):
                 if not (index+1) % feature_count == 0:
                     current_features.append(feature[1][0])
@@ -68,7 +69,7 @@ class Model_Generate():
                     observation_labels.append(feature[0][0])
                     current_features = []
 
-            # convert observation labels to integers
+            # convert observation labels to a unique integer representation
             label_encoder = preprocessing.LabelEncoder()
             label_encoder.fit(dataset[:,0])
             labels = list(label_encoder.classes_)
