@@ -5,6 +5,7 @@
 !/build/
 !/src/
 !.gitigore
+!settings.py
 !setup.py
 !.gitmodules
 !README.md
