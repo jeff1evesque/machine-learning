@@ -39,6 +39,7 @@ sudo apt-get install xorg gnome-core gnome-system-tools gnome-app-install
 # General Packages:
 sudo apt-get install inotify-tools
 sudo apt-get install python-pip
+sudo pip install python-memcached
 sudo pip install jsonschema
 sudo pip install xmltodict
 sudo pip install matplotlib
