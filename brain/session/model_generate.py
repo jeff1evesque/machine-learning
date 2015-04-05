@@ -72,7 +72,7 @@ class Model_Generate():
             label_encoder = preprocessing.LabelEncoder()
             label_encoder.fit(dataset[:,0])
             labels = list(label_encoder.classes_)
-            encoded_labels = label_encoder.transform(labels)
+            encoded_labels = label_encoder.transform(observation_labels)
 
             # create svm model
             clf = svm.SVC()
