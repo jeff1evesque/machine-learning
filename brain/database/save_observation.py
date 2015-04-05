@@ -7,7 +7,7 @@ from brain.database.db_query import SQL
 
 ## Class: Save_Observation, explicitly inherit 'new-style' class
 #
-#  Note: this class is invoked within 'data_new.py'
+#  Note: this class is invoked within 'base_data.py'
 class Save_Observation(object):
 
     ## constructor: stores an SVM label (python dict), database configurations
