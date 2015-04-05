@@ -69,11 +69,14 @@ class Model_Generate():
                     current_features = []
 
             # convert observation labels to integers
-            y = label_encoder.transform(dataset[:, 0])
+            label_encoder = preprocessing.LabelEncoder()
+            label_encoder.fit(dataset[:,0])
+            labels = list(label_encoder.classes_)
+            encoded_labels = label_encoder.transform(labels)
 
             # create svm model
             clf = svm.SVC()
-            clf.fit(grouped_features, y)
+            clf.fit(grouped_features, encoded_labels)
 
     ## return_error: returns current error(s)
     def return_error(self):
