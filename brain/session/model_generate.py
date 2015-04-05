@@ -28,7 +28,7 @@ class Model_Generate():
     #      or python list, is a collection of features within the containing
     #      observation.
     #
-    #  @y, feature labels (independent variable labels)
+    #  @encoded_labels, observation labels (dependent variable labels)
     def generate_model(self):
         # local variables
         dataset       = self.feature_request.get_dataset(self.session_id)
