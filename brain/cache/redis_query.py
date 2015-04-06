@@ -30,6 +30,10 @@ class Memcached(object):
     def setex(self, key, value, time):
         self.server.set(key, value, time)
 
+    ## set_expire: set an expire time (in seconds) for existing cached value.
+    def set_expire(self, key, time):
+        self.server.expire(key, time)
+
     ## get: retrieve value from redis server.
     def get(self, key):
         return self.server.get(key)
