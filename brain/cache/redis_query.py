@@ -12,11 +12,12 @@ class Memcached(object):
     ## constructor: defines class variables.
     #
     # @db, the redis database number to store jobs into (there are 0-15).
-    def __init__(self):
+    def __init__(self, db_num=0):
         self.host   = Redis_Settings().get_host()
         self.port   = Redis_Settings().get_port()
-        self.server = redis.StrictRedis(host=self.host, port=self.port, db=0)
- 
+        self.db_num = db_num
+        self.server = redis.StrictRedis(host=self.host, port=self.port, db=db_num)
+
     ## set: set value into redis server.
     #
     #  Note: by default, redis keys are created without an associated time
