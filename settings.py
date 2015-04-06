@@ -6,3 +6,6 @@
 
 HOST = 'localhost'
 PORT = 5000
+
+DB_USERNAME = 'authenticated'
+DB_PASSWORD = 'password'
