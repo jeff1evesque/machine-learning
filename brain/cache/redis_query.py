@@ -26,7 +26,7 @@ class Memcached(object):
     def set(self, key, value):
         self.server.set(key, value)
  
-    ## set: set value into redis server, with an expire time.
+    ## setex: set value into redis server, with an expire time.
     def setex(self, key, value, time):
         self.server.set(key, value, time)
 
