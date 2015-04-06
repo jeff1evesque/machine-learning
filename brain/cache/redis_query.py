@@ -46,6 +46,10 @@ class Memcached(object):
     def lset(self, name, index, value):
         self.server.lset(name, index, value)
 
+    ## lindex: return the element as defined redis list index.
+    def lindex(self, name, index):
+        return self.server.lindex(name, index)
+
     ## lrem: remove the first count occurences of elements equal to value
     #        within the redist list.
     def lrem(self, name, count, value)
@@ -61,11 +65,11 @@ class Memcached(object):
 
     ## lpop: remove, and return the first item of the redis list.
     def lpop(self, name):
-        self.server.lpop(name)
+        return self.server.lpop(name)
 
     ## rpop: remove, and return the last item of the redis list.
     def rpop(self, name):
-        self.server.rpop(name)
+        return self.server.rpop(name)
 
     ## ltrim: trim the redis list, removing all elements not within the
     #         slice bounds.
@@ -74,4 +78,4 @@ class Memcached(object):
 
     ## lrange: return a slice of the redis list between the slice bounds.
     def lrange(self, name, start, end):
-        self.server.lrange(name, start, end)
+        return self.server.lrange(name, start, end)
