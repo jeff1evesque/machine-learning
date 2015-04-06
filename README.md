@@ -204,7 +204,7 @@ Some interesting features of MariaDB:
 - Supports common content management systems (i.e. [Drupal](https://www.drupal.org/), [Wordpress](https://wordpress.com/))
 - Can be [implemented](http://www.raspberrypi.org/forums/viewtopic.php?t=12859&p=288820) on the [Raspberry Pi](https://github.com/jeff1evesque/raspberry-pi#definition)
 
-In this project, the default MariaDB database configurations (i.e. host, username, password) can be found in [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py). Specifically, the `Database` class in `config.py`, contains methods that allow further customization.
+In this project, the default MariaDB database configurations (i.e. host, username, password) can be found in [`db_settings.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/database/db_settings.py). Specifically, the `Database` class in `db_settings`, contains methods that allow further customization.
 
 By default, the username `authenticated`, and corresponding password `password` is used to access the SVM database. Therefore, remember to create the corresponding SQL user with sufficient privileges:
 
