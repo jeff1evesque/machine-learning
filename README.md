@@ -165,11 +165,11 @@ cd /var/www/build/
 ./bash_loader
 ```
 
-However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learning/blob/master/app.py) implements the bash script [`bash_loader`](https://github.com/jeff1evesque/machine-learning/blob/master/build/bash_loader) via the [`subprocess`](https://docs.python.org/2/library/subprocess.html) module. Specifically, any commands determined by `bash_loader`, is automated by the intrinsic RESTful nature of python flask.
+However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learning/blob/master/app.py) implements the bash script [`bash_loader`](https://github.com/jeff1evesque/machine-learning/blob/master/build/bash_loader) via the [`subprocess`](https://docs.python.org/2/library/subprocess.html) module. Specifically, any commands determined by [`bash_loader`](https://github.com/jeff1evesque/machine-learning/blob/master/build/bash_loader), is automated by the intrinsic RESTful nature of python flask.
 
 **Note:** some of the used [build](https://github.com/jeff1evesque/machine-learning/tree/master/build/web/) scripts, implement [inotifywait](http://linux.die.net/man/1/inotifywait), a linux subkernel responsible for monitoring file system changes.
 
-**Note:** after running `./bash_loader` for the first time, it is important to open, and save each file within the [`/src/`](https://github.com/jeff1evesque/machine-learning/tree/master/src) directory.  Otherwise, inotifywait will never detect changes within the respective [`/src/`](https://github.com/jeff1evesque/machine-learning/tree/master/src) files, and never compile the respective files into the [`/web_interface/static/`](https://github.com/jeff1evesque/machine-learning/tree/master/web_interface/static) directory.
+**Note:** after running [`./bash_loader`](https://github.com/jeff1evesque/machine-learning/blob/master/build/bash_loader) for the first time, it is important to open, and save each file within the [`/src/`](https://github.com/jeff1evesque/machine-learning/tree/master/src) directory.  Otherwise, inotifywait will never detect changes within the respective [`/src/`](https://github.com/jeff1evesque/machine-learning/tree/master/src) files, and never compile the respective files into the [`/web_interface/static/`](https://github.com/jeff1evesque/machine-learning/tree/master/web_interface/static) directory.
 
 ###jQuery Validation
 
