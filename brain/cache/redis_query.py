@@ -3,8 +3,8 @@
 ## @redis_query.py
 #  This file contains the required class to set, get, and delete various
 #      redis-cached objects.
-import memcache
-from brain.memcached.memcached_settings import Memcached_Settings
+import redis
+from brain.cache.redis_settings import Redis_Settings
 
 ## Class: Memcached, explicitly inherit 'new-style' class.
 class Memcached(object):
