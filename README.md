@@ -193,7 +193,7 @@ Additional documentation:
 - [Understanding JSON Schema](http://spacetelescope.github.io/understanding-json-schema/)
 - [jsonschema](http://python-jsonschema.readthedocs.org/en/latest/)
 
-This project implements *JSON Schema* validation, as a backend-validation tool. Specifically, [`config.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/config.py) defines acceptable *schemas* to validate against, while [`data_validator.py`](https://github.com/jeff1evesque/machine-learning/blob/52157d2f7c7255f999e822dd13ce65911d678918/python/data_validator.py#L48) implements the validation schema(s).
+This project implements *JSON Schema* validation, as a backend-validation tool. Specifically, modules within the [`/brain/schema/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/schema) directory define the schemas, while validation modules in the [`/brain/validator/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/validator) directory, may implement the respective validation schema(s).
 
 ###MariaDB Database
 
