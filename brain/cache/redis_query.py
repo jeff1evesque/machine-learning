@@ -9,11 +9,13 @@ from brain.cache.redis_settings import Redis_Settings
 ## Class: Memcached, explicitly inherit 'new-style' class.
 class Memcached(object):
 
-    ## constructor:
+    ## constructor: defines class variables.
+    #
+    # @db, the redis database number to store jobs into (there are 0-15).
     def __init__(self):
-        self.host   = Memcached_Settings().get_host()
-        self.port   = Memcached_Settings().get_port()
-        self.server = memcache.Client([(self.host, self.port)])
+        self.host   = Redis_Settings().get_host()
+        self.port   = Redis_Settings().get_port()
+        self.server = redis.StrictRedis(host=self.host, port=self.port, db=0)
  
     ## set: set value in memcached server.
     def set(self, key, value, expiry=900):
