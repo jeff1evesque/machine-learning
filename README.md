@@ -165,7 +165,7 @@ cd /var/www/build/
 ./bash_loader
 ```
 
-However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/app.py) implements the bash script `bash_loader` via the [`subprocess`](https://docs.python.org/2/library/subprocess.html) module. Specifically, any commands determined by `bash_loader`, is automated by the intrinsic RESTful nature of python flask.
+However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learning/blob/master/app.py) implements the bash script `bash_loader` via the [`subprocess`](https://docs.python.org/2/library/subprocess.html) module. Specifically, any commands determined by `bash_loader`, is automated by the intrinsic RESTful nature of python flask.
 
 **Note:** some of the used [build](https://github.com/jeff1evesque/machine-learning/tree/master/build/web/) scripts, implement [inotifywait](http://linux.die.net/man/1/inotifywait), a linux subkernel responsible for monitoring file system changes.
 
