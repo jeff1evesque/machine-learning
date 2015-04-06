@@ -169,6 +169,8 @@ However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learnin
 
 **Note:** some of the used [build](https://github.com/jeff1evesque/machine-learning/tree/master/build/web/) scripts, implement [inotifywait](http://linux.die.net/man/1/inotifywait), a linux subkernel responsible for monitoring file system changes.
 
+**Note:** after running `./bash_loader` for the first time, it is important to open, and save each file within the `/src/` directory.  Otherwise, inotifywait will never detect changes within the respective `/src/` files, and never compile the respective files into the `/web_interface/static/` directory.
+
 ###jQuery Validation
 
 [jQuery Validation](http://jqueryvalidation.org/) is a plugin that allows [client-side](http://en.wikipedia.org/wiki/Client-side) validation on [HTML form](http://www.w3.org/TR/html5/forms.html) elements. When a specific field fails validation, a label element is created as the next successive [DOM](http://en.wikipedia.org/wiki/Document_Object_Model) element, indicating the corresponding *error message*.
