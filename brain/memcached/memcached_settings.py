@@ -1,51 +1,29 @@
 #!/usr/bin/python
 
-## @db_settings.py
-#  This file contains various python configuration settings.
+## @memcached_settings.py
+#  This file contains the required class methods required to set, and
+#      get the memcache host, or memcache port.
 
-## Class: Database, explicitly inherit the 'new-style' class.
-#
-#         When instantiating this class, or defining any of the class variables,
-#         make sure the respective sql user is defined within the DBMS, and has
-#         adequate permissions. This can be done via the terminal console (or
-#         phpMyAdmin):
-#
-#             $ mysql -u root -p
-#             MariaDB> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY
-#                 ->'password';
-#             MariaDB> GRANT, CREATE, DELETE, DROP, EXECUTE, SELECT, SHOW
-#                 -> DATABASES ON *.* TO 'authenticated'@'localhost';
-#             MariaDB> FLUSH PRIVILEGES;
-#
-#  Note: this class is invoked within 'db_query.py'
-class Database(object):
+## Class: Memcached_Settings, explicitly inherit 'new-style' class.
+class Memcached_Settings(object):
 
-    ## constructor:
+    ## constructor: define default memcached host, and port.
     def __init__(self):
-        self.db_host     = 'localhost'
-        self.db_username = 'authenticated'
-        self.db_password = 'password'
+        self.host = 'localhost'
+        self.port = 5000
 
-    ## get_db_host: get the database host
-    def get_db_host(self):
-        return self.db_host
+    ## get_host: return the memcached host.
+    def get_host(self):
+        return self.host
 
-    ## get_db_username: get the database username
-    def get_db_username(self):
-        return self.db_username
+    ## get_port: return the memcached port.
+    def get_port(self):
+        return self.port
 
-    ## get_db_password: get the database user password
-    def get_db_password(self):
-        return self.db_password
+    ## set_host: set the memcached host.
+    def set_host(self, host):
+        self.host = host
 
-    ## set_db_host: define the database host
-    def set_db_host(self, host):
-        self.db_host = host
-
-    ## set_db_username: define the database user
-    def set_db_username(self, user):
-        self.db_username = user
-
-    ## set_db_password: define the database user password
-    def set_db_password(self, pwd):
-        self.db_password = pwd
+    ## set_port: set the memcached port.
+    def set_port(self, port):
+        self.port = port
