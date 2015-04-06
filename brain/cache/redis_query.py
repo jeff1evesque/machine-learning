@@ -20,8 +20,8 @@ class Memcached(object):
     ## set: set value into redis server.
     #
     #  Note: by default, redis keys are created without an associated time
-    #        to live.  Therefore, the key will live until it is removed
-    #        explicitly.
+    #        to live.  Therefore, the key will live until it is explicityl
+    #        removed.
     def set(self, key, value):
         self.server.set(key, value)
  
