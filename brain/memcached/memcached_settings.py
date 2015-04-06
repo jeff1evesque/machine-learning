@@ -3,14 +3,15 @@
 ## @memcached_settings.py
 #  This file contains the required class methods required to set, and
 #      get the memcache host, or memcache port.
+from settings import HOST, PORT
 
 ## Class: Memcached_Settings, explicitly inherit 'new-style' class.
 class Memcached_Settings(object):
 
     ## constructor: define default memcached host, and port.
     def __init__(self):
-        self.host = 'localhost'
-        self.port = 5000
+        self.host = HOST
+        self.port = PORT
 
     ## get_host: return the memcached host.
     def get_host(self):
