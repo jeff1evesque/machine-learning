@@ -55,6 +55,14 @@ sudo apt-get install python-mysqldb
 # Latest PPA for nodejs:
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 
+# Allow (PPA) repositories to be added
+sudo apt-get install python-software-properties
+
+# Add Redis Server
+sudo add-apt-repository ppa:rwky/redis
+sudo apt-get update
+sudo apt-get install redis-server
+
 # ruby / nodejs (includes npm from PPA):
 sudo apt-get install ruby
 sudo apt-get install nodejs
