@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-## @cache_interface.py
+## @redis_query.py
 #  This file contains the required class to set, get, and delete various
-#      memcached objects.
+#      redis-cached objects.
 import memcache
 from brain.memcached.memcached_settings import Memcached_Settings
 
