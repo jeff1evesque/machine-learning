@@ -79,3 +79,7 @@ class Memcached(object):
     ## lrange: return a slice of the redis list between the slice bounds.
     def lrange(self, name, start, end):
         return self.server.lrange(name, start, end)
+
+    ## llen: return the length of the redis list.
+    def llen(self, name):
+        return self.server.llen(name)
