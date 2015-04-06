@@ -59,7 +59,7 @@ curl -sL https://deb.nodesource.com/setup | sudo bash -
 sudo apt-get install python-software-properties
 
 # Add Redis Server
-sudo add-apt-repository -y ppa:rwky/redis
+sudo add-apt-repository ppa:rwky/redis
 sudo apt-get update
 sudo apt-get install redis-server
 
