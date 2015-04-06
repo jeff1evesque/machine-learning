@@ -2,6 +2,7 @@
 
 ## @db_settings.py
 #  This file contains various python configuration settings.
+from settings import HOST, DB_USERNAME, DB_PASSWORD
 
 ## Class: Database, explicitly inherit the 'new-style' class.
 #
@@ -22,9 +23,9 @@ class Database(object):
 
     ## constructor:
     def __init__(self):
-        self.db_host     = 'localhost'
-        self.db_username = 'authenticated'
-        self.db_password = 'password'
+        self.db_host     = HOST
+        self.db_username = DB_USERNAME
+        self.db_password = DB_PASSWORD
 
     ## get_db_host: get the database host
     def get_db_host(self):
