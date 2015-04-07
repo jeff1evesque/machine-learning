@@ -231,9 +231,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 ###Redis
 
-[Redis](http://redis.io/) is an open source, key-value cache, and store system.  Often classified as [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred as, a data structure server.  Though, redis is similar to [memcached](http://memcached.org/), in general, it has more features, and greater flexibility.
-
-Performance between [Redis](http://redis.io/), and [Memcached](http://memcached.org/) are comparable.  Though, many have shown better performance results with redis.  Some of the more notable advantages of implementing Redis include:
+[Redis](http://redis.io/) is an open source, key-value cache, and store system.  Often classified as [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred as, a data structure server.  Though, redis is similar to [Memcached](http://memcached.org/) (some argue faster), in general, it has more features, and greater flexibility.  Some of the more notable advantages of [Redis](http://redis.io/) include:
 
 - Multiple datatypes vs. memcached simple key-value:
   - [strings](http://redis.io/topics/data-types#strings)
@@ -266,7 +264,7 @@ The first line implies, save the dataset into disk, as `dump.rdb`, after 900 sec
 
 **Note:** the term *dataset* refers to the full redis data stored in memory.
 
-This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with [redis-py](https://redis-py.readthedocs.org/en/latest/) as the corresponding client.  Specifically, redis is implemented within the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).
+This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with the [redis-py](https://redis-py.readthedocs.org/en/latest/) client.  Specifically, this project has various python modules in the [`/brain/cache/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/cache) directory, which implements the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).
 
 ##Testing / Execution
 
