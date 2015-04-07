@@ -229,6 +229,10 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 **Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the [EAV data model](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model#Physical_representation_of_EAV_data) is used for storing and retrieving SVM dataset(s).
 
+###Redis
+
+[Redis](http://redis.io/) is an open source, key-value cache, and store system.  Though, some would classify redis within the family of [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred as a data structure server.  Though similar to [memcached](http://memcached.org/), its greater flexibility is often see more advantageous.
+
 ##Testing / Execution
 
 
