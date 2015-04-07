@@ -16,7 +16,7 @@ from brain.cache.redis_settings import Redis_Settings
 #      - hashes
 #
 #  Note: 'sorted sets' methods were not included, since it is similar in
-#        concept to 'lists'. Also, the above included redis data structures
+#        concept to 'lists'. Also, the above included redis data structures,
 #        provides enough flexibility to accomplish most requirements.
 class Redis_Query(object):
 
