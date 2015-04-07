@@ -42,6 +42,10 @@ class Memcached(object):
     def rename(self, src, dst):
         self.server.rename(src, dst)
 
+    ## type: return the type of a redis object.
+    def type(self, name):
+        return self.server.type(name)
+
     ## get: retrieve value from redis server.
     def get(self, key):
         return self.server.get(key)
