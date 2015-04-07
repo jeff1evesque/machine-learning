@@ -83,3 +83,19 @@ class Memcached(object):
     ## llen: return the length of the redis list.
     def llen(self, name):
         return self.server.llen(name)
+
+    ## hdel: delete value from redis hash.
+    def hdel(self, name, *keys):
+        self.server.hdel(name, *keys)
+
+    ## hexists: returns a boolean of a key exists within a redis hash.
+    def hexists(self, name, key):
+        return self.server.hexists(name, key)
+
+    ## hget: returns a value from a redis hash.
+    def hget(self, name, key):
+        return self.server.hget(name, key)
+
+    ## hset: set value into a redis hash.
+    def hset(self, name, key, value):
+        return self.server.hset(name, key, value)
