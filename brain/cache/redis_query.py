@@ -40,7 +40,7 @@ class Memcached(object):
 
     ## rename: renames a redis object.
     def rename(self, src, dst):
-        self.rename(src, dst)
+        self.server.rename(src, dst)
 
     ## get: retrieve value from redis server.
     def get(self, key):
@@ -61,7 +61,7 @@ class Memcached(object):
     ## lrem: remove the first count occurences of elements equal to value
     #        within the redist list.
     def lrem(self, name, count, value)
-        self.lrem(name, count, value)
+        self.server.lrem(name, count, value)
 
     ## lpush: push values onto the beginning of a redis list.
     def lpush(self, name, *values):
