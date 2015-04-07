@@ -247,6 +247,8 @@ Performance between Redis and Memcached are comparable.  Though, many have shown
   - [Snapshotting](http://redis.io/topics/persistence#snapshotting)
   - [Append Only File](http://redis.io/topics/persistence#append-only-file)
 
+This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with a [redis-py](https://redis-py.readthedocs.org/en/latest/) as the corresponding client.  Specifically, redis is implemented within the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py).
+
 ##Testing / Execution
 
 
