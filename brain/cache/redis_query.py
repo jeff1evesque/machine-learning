@@ -36,10 +36,13 @@ class Redis_Query(object):
         if port:
             my_redius.set_port(port)
 
-        # get redis parameters, implement redis instance
+        # get redis parameters
         self.host   = my_redis.get_host()
         self.port   = my_redis.get_port()
         self.db_num = db_num
+
+    ## start_redis: establish redis instance.
+    def start_redis(self):
         self.server = redis.StrictRedis(host=self.host, port=self.port, db=db_num)
 
     ## set: set value into redis server.
