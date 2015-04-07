@@ -250,9 +250,9 @@ Performance between Redis and Memcached are comparable.  Though, many have shown
 - Larger Data Store:
   - memcache limits keys to `250 bytes`, values to `1MB`, while redis allows `512MB` for each
 
-- Redis allows more granular control over [eviction policies](http://redis.io/topics/lru-cache#eviction-policies)
+- Granular [eviction policies](http://redis.io/topics/lru-cache#eviction-policies)
 
-By default, redis implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset.  Specifically, the following can be expected within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170):
+By default, redis implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170):
 
 ```bash
 ...
