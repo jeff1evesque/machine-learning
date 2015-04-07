@@ -259,6 +259,8 @@ save 60 10000
 
 The logic in the first line implies, save the dataset (as `dump.rdb`) after 900 seconds (15 minutes), if there is at least 1 change to the dataset.  This allows `dump.rdb` to be loaded into memory, at each redis start-up.
 
+**Note:** the term *dataset* refers to the full redis data stored in memory.
+
 This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with a [redis-py](https://redis-py.readthedocs.org/en/latest/) as the corresponding client.  Specifically, redis is implemented within the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py).
 
 ##Testing / Execution
