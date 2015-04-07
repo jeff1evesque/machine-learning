@@ -8,8 +8,16 @@ from brain.cache.redis_settings import Redis_Settings
 
 ## Class: Redis_Query, explicitly inherit 'new-style' class.
 #
+#  Note: we have included methods for the following redis data structures:
+#
+#      - strings
+#      - lists
+#      - sets
+#      - hashes
+#
 #  Note: 'sorted sets' methods were not included, since it is similar in
-#        concept to 'lists'.
+#        concept to 'lists'. Also, the above included redis data structures
+#        provides enough flexibility to accomplish most requirements.
 class Redis_Query(object):
 
     ## constructor: defines class variables.
