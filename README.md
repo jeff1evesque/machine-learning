@@ -235,7 +235,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 Performance between Redis and Memcached are comparable.  Though, many have shown better performance results with redis.  Some of the notable advantages of implementing Redis include:
 
-- Multiple datatypes, compared to the memcached key-value type:
+- Multiple datatypes vs. memcached simple key-value:
   - [strings](http://redis.io/topics/data-types#strings)
   - [lists](http://redis.io/topics/data-types#lists)
   - [sets](http://redis.io/topics/data-types#sets)
