@@ -233,7 +233,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 [Redis](http://redis.io/) is an open source, key-value cache, and store system.  Often classified as [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred as, a data structure server.  Though, redis is similar to [memcached](http://memcached.org/), in general, it has more features, and greater flexibility.
 
-Performance between Redis and Memcached are comparable.  Though, many have shown better performance results with redis.  Some of the more notable advantages of implementing Redis include:
+Performance between [Redis](http://redis.io/), and [Memcached](http://memcached.org/) are comparable.  Though, many have shown better performance results with redis.  Some of the more notable advantages of implementing Redis include:
 
 - Multiple datatypes vs. memcached simple key-value:
   - [strings](http://redis.io/topics/data-types#strings)
@@ -262,7 +262,7 @@ save 60 10000
 ...
 ```
 
-The first line implies, save the dataset (as `dump.rdb`) after 900 seconds (15 minutes), if there is at least 1 change to the dataset.  This allows `dump.rdb` to be loaded into memory, at each redis server start-up.
+The first line implies, save the dataset into disk, as `dump.rdb`, after 900 seconds (15 minutes), if there is at least 1 change to the dataset.  This allows `dump.rdb` to be loaded into memory, at each redis server start-up.
 
 **Note:** the term *dataset* refers to the full redis data stored in memory.
 
