@@ -8,6 +8,9 @@ from brain.cache.redis_settings import Redis_Settings
 
 ## Class: Redis_Query, explicitly inherit 'new-style' class.
 #
+#  Note: this class requires the implementation of the 'start_redis' method,
+#        in order to execute the below redis methods.
+#
 #  Note: for persistence, it may be a good idea to create an instance of
 #        this class in the global scope.
 #
