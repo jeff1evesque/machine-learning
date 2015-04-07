@@ -56,6 +56,14 @@ class Redis_Query(object):
         if self.server and type(self.server) == redis.client.StrictRedis:
             self.server.shutdown()
 
+    ## save: save current redis data to disk, blocking until the save
+    #        operation completes.
+    #
+    #  Note: the corresponding dump file can be found in the 'redis.conf' file,
+    #        associated with 'dbfilename'. By default, it is called 'dump.rdb'.
+    def save(self):
+        self.server.save()
+
     ## set: set value into redis server.
     #
     #  Note: by default, redis keys are created without an associated time
