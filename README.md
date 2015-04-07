@@ -247,6 +247,9 @@ Performance between Redis and Memcached are comparable.  Though, many have shown
   - [Snapshotting](http://redis.io/topics/persistence#snapshotting)
   - [Append Only File](http://redis.io/topics/persistence#append-only-file)
 
+- Larger Store
+  - Memcache limits keys to `250 bytes`, and values to `1MB`, while redis allows `512MB` for each
+
 The snapshotting technique is implemented within redis, by default.  Specifically, within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170), the following lines can be expected:
 
 ```bash
