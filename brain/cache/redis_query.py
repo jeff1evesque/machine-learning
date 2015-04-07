@@ -36,7 +36,7 @@ class Redis_Query(object):
         if port:
             my_redius.set_port(port)
 
-        # invoke 'StrictRedis', not the subclass 'Redis' (backward compatible)
+        # invoke 'StrictRedis', not the older backwards compatible 'Redis'
         self.host   = my_redis.get_host()
         self.port   = my_redis.get_port()
         self.db_num = db_num
