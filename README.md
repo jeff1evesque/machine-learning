@@ -250,6 +250,9 @@ Performance between Redis and Memcached are comparable.  Though, many have shown
 - Larger Store
   - Memcache limits keys to `250 bytes`, and values to `1MB`, while redis allows `512MB` for each
 
+- Sophisticated Eviction System
+  - redis employs an LRU algorithm approximation, via the available [eviction policies](http://redis.io/topics/lru-cache#eviction-policies)
+
 The snapshotting technique is implemented within redis, by default.  Specifically, within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170), the following lines can be expected:
 
 ```bash
