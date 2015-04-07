@@ -8,6 +8,12 @@ from brain.cache.redis_settings import Redis_Settings
 
 ## Class: Redis_Query, explicitly inherit 'new-style' class.
 #
+#  Note: this class requires the implementation of the 'start_redis' method,
+#        in order to execute the below redis methods.
+#
+#  Note: for persistence, it may be a good idea to create an instance of
+#        this class in the global scope.
+#
 #  Note: we have included methods for the following redis data structures:
 #
 #      - strings
@@ -36,11 +42,19 @@ class Redis_Query(object):
         if port:
             my_redius.set_port(port)
 
-        # get redis parameters, implement redis instance
+        # get redis parameters
         self.host   = my_redis.get_host()
         self.port   = my_redis.get_port()
         self.db_num = db_num
+
+    ## start_redis: establish redis instance.
+    def start_redis(self):
         self.server = redis.StrictRedis(host=self.host, port=self.port, db=db_num)
+
+    ## shutdown: shutdown the established redis instance.
+    def shutdown(self):
+        if self.server and type(self.server) == redis.client.StrictRedis:
+            self.server.shutdown()
 
     ## set: set value into redis server.
     #
