@@ -99,3 +99,15 @@ class Memcached(object):
     ## hset: set value into a redis hash.
     def hset(self, name, key, value):
         return self.server.hset(name, key, value)
+
+    ## hvals: return the list of values within the redis hash.
+    def hvals(self, name):
+        return self.server.hvals(name)
+
+    ## hlen: return the number of elements within the redis hash.
+    def hlen(self, name):
+        return self.server.hlen(name):
+
+    ## hkeys: return the list of keys within the redis hash
+    def hkeys(self, name):
+        return self.server.hkeys(name)
