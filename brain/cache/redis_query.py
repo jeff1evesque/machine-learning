@@ -24,7 +24,7 @@ class Redis_Query(object):
     #
     #  @db, the redis database number to store jobs into (there are 0-15).
     #
-    #  Note: we implement the 'StrictRedis' class, and not its subclass 'Redis',
+    #  Note: we implement the 'StrictRedis' class, not its subclass 'Redis',
     #        which provides backwards compatibility with older versions of redis.
     def __init__(self, db_num=0, host=None, port=None):
         # get redis settings
