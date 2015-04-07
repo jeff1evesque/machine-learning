@@ -23,7 +23,11 @@ class Redis_Query(object):
     ## constructor: defines class variables.
     #
     # @db, the redis database number to store jobs into (there are 0-15).
-    def __init__(self, db_num=0):
+    def __init__(self, db_num=0, host=None, port=None):
+        if host:
+            Redis_Settings().set_host(host)
+        if port:
+            Redis_Settings().set_port(port)
         self.host   = Redis_Settings().get_host()
         self.port   = Redis_Settings().get_port()
         self.db_num = db_num
