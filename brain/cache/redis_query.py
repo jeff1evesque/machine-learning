@@ -24,12 +24,18 @@ class Redis_Query(object):
     #
     # @db, the redis database number to store jobs into (there are 0-15).
     def __init__(self, db_num=0, host=None, port=None):
+        # get redis settings
+        my_redis = Redis_Settings()
+
+        # define host, and port, if provided
         if host:
-            Redis_Settings().set_host(host)
+            my_redis.set_host(host)
         if port:
-            Redis_Settings().set_port(port)
-        self.host   = Redis_Settings().get_host()
-        self.port   = Redis_Settings().get_port()
+            my_redius.set_port(port)
+
+        # invoke 'StrictRedis', not the subclass 'Redis' (backward compatible)
+        self.host   = my_redis.get_host()
+        self.port   = my_redis.get_port()
         self.db_num = db_num
         self.server = redis.StrictRedis(host=self.host, port=self.port, db=db_num)
 
