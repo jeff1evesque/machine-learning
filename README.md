@@ -231,9 +231,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 ###Redis
 
-[Redis](http://redis.io/) is an open source, key-value cache, and store system.  Often classified as [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred as, a data structure server.  Though, redis is similar to [memcached](http://memcached.org/) (some argue faster), in general, it has more features, and greater flexibility.
-
-Some of the more notable advantages of [Redis](http://redis.io/) include:
+[Redis](http://redis.io/) is an open source, key-value cache, and store system.  Often classified as [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred as, a data structure server.  Though, redis is similar to [Memcached](http://memcached.org/) (some argue faster), in general, it has more features, and greater flexibility.  Some of the more notable advantages of [Redis](http://redis.io/) include:
 
 - Multiple datatypes vs. memcached simple key-value:
   - [strings](http://redis.io/topics/data-types#strings)
