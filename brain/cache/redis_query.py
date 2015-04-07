@@ -119,3 +119,35 @@ class Memcached(object):
     ## hkeys: return the list of keys within the redis hash
     def hkeys(self, name):
         return self.server.hkeys(name)
+
+    ## sadd: add values to redis set.
+    def sadd(self, name, *values):
+        self.server.sadd(name, *values)
+
+    ## scard: return the number of elements in a redis set.
+    def scard(self, name):
+        return self.server.scard(name)
+
+    ## sinter: return the intersection of redis sets.
+    def sinter(self, keys, *args):
+        return self.server.sinter(keys, *args)
+
+    ## sismember: returns a boolean if define value is in redis set.
+    def sismember(self, name, value):
+        return self.server.sismember(name, value)
+
+    ## smembers: return all members in a redis set.
+    def smembers(self, name):
+        return self.server.smembers(name)
+
+    ## srem: remove values from redis set.
+    def srem(self, name, *values):
+        return self.server.srem(name, *values)
+
+    ## sunion: return the union of redis sets.
+    def sunion(self, keys, *args):
+        return self.server.sunion(keys, *args)
+
+    ## sunionstore: store the union of redis sets into a new redis set.
+    def sunionstore(self, keys, *args):
+        return self.server.sunionstore(keys, *args)
