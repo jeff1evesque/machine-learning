@@ -8,6 +8,9 @@ from brain.cache.redis_settings import Redis_Settings
 
 ## Class: Redis_Query, explicitly inherit 'new-style' class.
 #
+#  Note: for persistence, it may be a good idea to create an instance of
+#        this class in the global scope.
+#
 #  Note: we have included methods for the following redis data structures:
 #
 #      - strings
