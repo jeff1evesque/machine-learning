@@ -109,7 +109,7 @@ class Redis_Query(object):
 
     ## lrem: remove the first count occurences of elements equal to value
     #        within the redist list.
-    def lrem(self, name, count, value)
+    def lrem(self, name, count, value):
         self.server.lrem(name, count, value)
 
     ## lpush: push values onto the beginning of a redis list.
