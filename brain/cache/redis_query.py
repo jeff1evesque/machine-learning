@@ -27,7 +27,7 @@ class Redis_Query(object):
     #  Note: we implement the 'StrictRedis' class, which adheres to the strict
     #        redis syntax, not the backwards compatibile subclass, 'Redis'.
     def __init__(self, db_num=0, host=None, port=None):
-        # get redis settings
+        # redis settings
         my_redis = Redis_Settings()
 
         # define host, and port, if provided
@@ -36,7 +36,7 @@ class Redis_Query(object):
         if port:
             my_redius.set_port(port)
 
-        # implement redis
+        # get redis parameters, implement redis instance
         self.host   = my_redis.get_host()
         self.port   = my_redis.get_port()
         self.db_num = db_num
