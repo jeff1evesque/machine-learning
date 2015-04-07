@@ -5,8 +5,8 @@
 #      get the redis host, or memcache port.
 from settings import HOST, PORT
 
-## Class: Memcached_Settings, explicitly inherit 'new-style' class.
-class Memcached_Settings(object):
+## Class: Redis_Settings, explicitly inherit 'new-style' class.
+class Redis_Settings(object):
 
     ## constructor: define default memcached host, and port.
     def __init__(self):
