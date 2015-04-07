@@ -6,7 +6,10 @@
 import redis
 from brain.cache.redis_settings import Redis_Settings
 
-## Class: Memcached, explicitly inherit 'new-style' class.
+## Class: Redis_Query, explicitly inherit 'new-style' class.
+#
+#  Note: 'sorted sets' methods were not included, since it is similar in
+#        concept to 'lists'.
 class Memcached(object):
 
     ## constructor: defines class variables.
