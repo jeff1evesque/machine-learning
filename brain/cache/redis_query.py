@@ -34,8 +34,13 @@ class Memcached(object):
     def expire(self, key, time):
         self.server.expire(key, time)
 
-    ## persist: removes an expire time for an existing redis object
+    ## persist: removes an expire time for an existing redis object.
     def persist(self, name):
+      self.server.persist(name)
+
+    ## rename: renames a redis object.
+    def rename(self, src, dst):
+        self.rename(src, dst)
 
     ## get: retrieve value from redis server.
     def get(self, key):
