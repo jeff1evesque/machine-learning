@@ -45,6 +45,10 @@ class Redis_Query(object):
     def start_redis(self):
         self.server = redis.StrictRedis(host=self.host, port=self.port, db=db_num)
 
+    ## stop_redis: shutdown the established redis instance.
+    def stop_redis(self):
+        self.server.shutdown()
+
     ## set: set value into redis server.
     #
     #  Note: by default, redis keys are created without an associated time
