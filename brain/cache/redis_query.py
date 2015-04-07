@@ -30,8 +30,8 @@ class Memcached(object):
     def setex(self, key, value, time):
         self.server.set(key, value, time)
 
-    ## set_expire: set an expire time (in seconds) for existing cached value.
-    def set_expire(self, key, time):
+    ## expire: set an expire time (in seconds) for existing redis object.
+    def expire(self, key, time):
         self.server.expire(key, time)
 
     ## persist: removes an expire time for an existing redis object
