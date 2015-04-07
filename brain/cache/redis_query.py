@@ -10,7 +10,7 @@ from brain.cache.redis_settings import Redis_Settings
 #
 #  Note: 'sorted sets' methods were not included, since it is similar in
 #        concept to 'lists'.
-class Memcached(object):
+class Redis_Query(object):
 
     ## constructor: defines class variables.
     #
