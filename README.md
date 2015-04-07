@@ -257,7 +257,7 @@ save 60 10000
 ...
 ```
 
-The logic in the first line implies, save the dataset (as `dump.rdb`) after 900 seconds (15 minutes), if there is at least 1 change to the dataset.  This allows `dump.rdb` to be loaded into memory, at each redis start-up.
+The logic in the first line implies, save the dataset (as `dump.rdb`) after 900 seconds (15 minutes), if there is at least 1 change to the dataset.  This allows `dump.rdb` to be loaded into memory, at each redis server start-up.
 
 **Note:** the term *dataset* refers to the full redis data stored in memory.
 
