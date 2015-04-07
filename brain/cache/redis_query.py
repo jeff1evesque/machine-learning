@@ -47,7 +47,8 @@ class Redis_Query(object):
 
     ## stop_redis: shutdown the established redis instance.
     def stop_redis(self):
-        self.server.shutdown()
+        if self.server and type(self.server) == redis.client.StrictRedis:
+            self.server.shutdown()
 
     ## set: set value into redis server.
     #
