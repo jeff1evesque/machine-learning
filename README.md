@@ -229,6 +229,45 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 **Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the [EAV data model](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model#Physical_representation_of_EAV_data) is used for storing and retrieving SVM dataset(s).
 
+###Redis
+
+[Redis](http://redis.io/) is an open source, key-value cache, and store system.  Often classified as [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred as, a data structure server.  Though, redis is similar to [memcached](http://memcached.org/), in general, it has more features, and greater flexibility.
+
+Performance between Redis and Memcached are comparable.  Though, many have shown better performance results with redis.  Some of the more notable advantages of implementing Redis include:
+
+- Multiple datatypes vs. memcached simple key-value:
+  - [strings](http://redis.io/topics/data-types#strings)
+  - [lists](http://redis.io/topics/data-types#lists)
+  - [sets](http://redis.io/topics/data-types#sets)
+  - [hashes](http://redis.io/topics/data-types#hashes)
+  - [sorted sets](http://redis.io/topics/data-types#sorted-sets)
+  - [bitmaps and hyperloglogs](http://redis.io/topics/data-types#bitmaps-and-hyperloglogs)
+
+- Dataset Persistence
+  - [Snapshotting](http://redis.io/topics/persistence#snapshotting)
+  - [Append Only File](http://redis.io/topics/persistence#append-only-file)
+
+- Larger Data Store:
+  - memcache limits keys to `250 bytes`, values to `1MB`, while redis allows `512MB` for each
+
+- Redis allows more granular control over [eviction policies](http://redis.io/topics/lru-cache#eviction-policies)
+
+By default, redis implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset.  Specifically, the following can be expected within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170):
+
+```bash
+...
+save 900 1
+save 300 10
+save 60 10000
+...
+```
+
+The first line implies, save the dataset (as `dump.rdb`) after 900 seconds (15 minutes), if there is at least 1 change to the dataset.  This allows `dump.rdb` to be loaded into memory, at each redis server start-up.
+
+**Note:** the term *dataset* refers to the full redis data stored in memory.
+
+This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with [redis-py](https://redis-py.readthedocs.org/en/latest/) as the corresponding client.  Specifically, redis is implemented within the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).
+
 ##Testing / Execution
 
 
