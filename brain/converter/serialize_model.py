@@ -6,8 +6,7 @@ from six.moves import cPickle as pickle
 
     ## Class: Serialize_Model, explicitly inherit 'new-style class.
     #
-    #  Note: this class is invoked within 'model_generate.py', and
-    #        'model_use.py'.
+    #  Note: this class is invoked within 'cache_model.py'.
     class Serialize_Model(object):
 
         ## constructor
