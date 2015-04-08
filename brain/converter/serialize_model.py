@@ -4,16 +4,22 @@
 #  This file serializes, and deserializes an SVM object in memory.
 from six.moves import cPickle as pickle
 
-    ## constructor
-    def __init__(self, obj):
-        self.obj = obj
-        self.acceptable = [svm.classes.SVC]
+    ## Class: Serialize_Model, explicitly inherit 'new-style class.
+    #
+    #  Note: this class is invoked within 'model_generate.py', and
+    #        'model_use.py'.
+    class Serialize_Model(object):
 
-    ## serialize: serializes the provided object.
-    def serialize(self, obj):
-        if type(obj) in self.acceptable:
-            return pickle.dumps(obj)
+        ## constructor
+        def __init__(self, obj):
+            self.obj = obj
+            self.acceptable = [svm.classes.SVC]
 
-    ## deserialize: deserializes the provided object.
-    def deserialize(self, obj):
-        return pickle.loads(obj)
+        ## serialize: serializes the provided object.
+        def serialize(self, obj):
+            if type(obj) in self.acceptable:
+                return pickle.dumps(obj)
+
+        ## deserialize: deserializes the provided object.
+        def deserialize(self, obj):
+            return pickle.loads(obj)
