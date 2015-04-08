@@ -79,6 +79,8 @@ class Model_Generate():
             clf = svm.SVC()
             clf.fit(grouped_features, encoded_labels)
 
+            # cache svm model
+
     ## return_error: returns current error(s)
     def return_error(self):
         return self.list_error
