@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 ## @serialize_model.py
-#  This file serializes a python object in memory.
+#  This file serializes, and deserializes a python object in memory.
 from six.moves import cPickle as pickle
 
     ## constructor
