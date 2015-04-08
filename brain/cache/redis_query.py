@@ -48,8 +48,17 @@ class Redis_Query(object):
         self.db_num = db_num
 
     ## start_redis: establish redis instance.
+    #
+    #  @pool, we define a reusable connection pool, based on the supplied host,
+    #      port, and db_num.
+    #
+    #  Note: for more information regarding redis concurrent client connections,
+    #        review the following:
+    #
+    #        https://github.com/jeff1evesque/machine-learning/issues/1761
     def start_redis(self):
-        self.server = redis.StrictRedis(host=self.host, port=self.port, db=db_num)
+        pool        = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_num)
+        self.server = redis.StrictRedis(connection_pool=pool)
 
     ## shutdown: shutdown the established redis instance.
     def shutdown(self):
