@@ -51,6 +51,11 @@ class Redis_Query(object):
     #
     #  @pool, we define a reusable connection pool, based on the supplied host,
     #      port, and db_num.
+    #
+    #  Note: for more information regarding redis concurrent client connections,
+    #        review the following:
+    #
+    #        https://github.com/jeff1evesque/machine-learning/issues/1761
     def start_redis(self):
         pool        = redis.ConnectionPool(host=self.host, port=self.port, db=db_num)
         self.server = redis.StrictRedis(connection_pool=pool)
