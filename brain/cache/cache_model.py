@@ -16,9 +16,9 @@ from brain.converter.serialize_model import Serialize_Model
 
         ## cache: serialize the provided svm model, then store into the
         #         redis cache.
-        def cache(self, key):
+        def cache(self, hash_name, key):
             serialized = Serialize_Model().serialize(self.model)
             myRedis    = Redis_Query()
 
             myRedis.start_redis()
-            myRedis.hset('svm_models', key, serialized)
+            myRedis.hset(hash_name, key, serialized)
