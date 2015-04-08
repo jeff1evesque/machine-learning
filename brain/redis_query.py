@@ -57,7 +57,7 @@ class Redis_Query(object):
     #
     #        https://github.com/jeff1evesque/machine-learning/issues/1761
     def start_redis(self):
-        pool        = redis.ConnectionPool(host=self.host, port=self.port, db=db_num)
+        pool        = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_num)
         self.server = redis.StrictRedis(connection_pool=pool)
 
     ## shutdown: shutdown the established redis instance.
