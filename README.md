@@ -42,6 +42,7 @@ sudo apt-get install python-pip
 sudo pip install redis
 sudo pip install jsonschema
 sudo pip install xmltodict
+sudo pip install six
 sudo pip install matplotlib
 
 # Flask with Requests
