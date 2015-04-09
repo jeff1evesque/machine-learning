@@ -235,53 +235,21 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 [Redis](http://redis.io/) is an open source, key-value cache, and store system.  Often classified as [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred as, a data structure server.  Though, redis is similar to [Memcached](http://memcached.org/) (some argue faster), in general, it has more features, and greater flexibility.  Some of the more notable advantages of [Redis](http://redis.io/) include:
 
 - Multiple datatypes vs. memcached simple key-value:
-  - [strings](http://redis.io/topics/data-types#strings)
-  - [lists](http://redis.io/topics/data-types#lists)
-  - [sets](http://redis.io/topics/data-types#sets)
-  - [hashes](http://redis.io/topics/data-types#hashes)
-  - [sorted sets](http://redis.io/topics/data-types#sorted-sets)
-  - [bitmaps and hyperloglogs](http://redis.io/topics/data-types#bitmaps-and-hyperloglogs)
-
 - Dataset Persistence
-  - [Snapshotting](http://redis.io/topics/persistence#snapshotting)
-  - [Append Only File](http://redis.io/topics/persistence#append-only-file)
-
 - Larger Data Store:
-  - memcache limits keys to `250 bytes`, values to `1MB`, while redis allows `512MB` for each
-
 - Granular [eviction policies](http://redis.io/topics/lru-cache#eviction-policies)
 
-By default, redis implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170):
-
-```bash
-...
-save 900 1
-save 300 10
-save 60 10000
-...
-```
-
-The first line implies, save the dataset into disk, as `dump.rdb`, after 900 seconds (15 minutes), if there is at least 1 change to the dataset.  This allows `dump.rdb` to be loaded into memory, at each redis server start-up.
+**Note:** by default, redis autostarts via Ubuntu's [upstart](http://upstart.ubuntu.com/), and implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).
 
 **Note:** the term *dataset* refers to the full redis data stored in memory.
 
-The installed redis-server autostarts via the `redis-server.conf` file, located in the `/etc/init/` directory.  To disable the autostart, simply comment out the contents of `redis-server.conf`, specifically, the `exec` command:
-
-```bash
-#exec start-stop-daemon --start --chuid redis:redis --pidfile /var/run/redis/redis.pid --umask 007 --exec /usr/bin/redis-server -- /etc/redis/redis.conf
-```
-
-Regardless if the redis-server autostarts, the following commands, starts, restarts, and stops the redis-server:
+The following commands, starts, restarts, and stops the redis-server:
 
 ```bash
 sudo start redis-server
 sudo restart redis-server
 sudo stop redis-server
 ```
-
-**Note:** the `/etc/init/` directory essentially contains configuration files used by [Upstart](http://upstart.ubuntu.com/).  The contained files tells Upstart how and when to start, stop, reload the configuration, or query the status of a service.
-
-**Note:** Older versions of Ubuntu loaded startup scripts from `/etc/init.d/` via sysvinit.  More recent versions of Ubuntu have phased our sysvinit with upstart.  However, Ubuntu 15.04 will [replace](https://wiki.ubuntu.com/systemd#Warning.21_Experimental_code) upstart with `systemd`.
 
 This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with the [redis-py](https://redis-py.readthedocs.org/en/latest/) client.  Specifically, this project has various python modules in the [`/brain/cache/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/cache) directory, which implements the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).  Also, the `start_redis` method from `redis_query.py` implements a connection pool, which allows previous client connections (perhaps idle), to be reused for succesive connections:
 
