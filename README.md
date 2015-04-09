@@ -239,13 +239,19 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 - Larger Data Store
 - Granular eviction policies
 
-**Note:** by default, redis autostarts via Ubuntu's [upstart](http://upstart.ubuntu.com/), and implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).
+By default, the redis-server autostarts via Ubuntu's [upstart](http://upstart.ubuntu.com/) daemon, and implements dataset [snapshotting](http://redis.io/topics/persistence#snapshotting), as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).  If needed, the following commands will start, restart, and stop the redis-server:
+
+```bash
+sudo start redis-server
+sudo restart redis-server
+sudo stop redis-server
+```
 
 **Note:** the term *dataset* refers to the full redis data stored in memory.
 
 This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with the [redis-py](https://redis-py.readthedocs.org/en/latest/) client.  Specifically, various python modules in the [`/brain/cache/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/cache) directory, implements the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).
 
-Also, the `start_redis` method, from `redis_query.py` implements a [connection pool](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connection-pools), which allows previous client [connections](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connections) (perhaps idle), to be reused for succesive connections:
+Also, the `start_redis` method, from `redis_query.py` implements a [connection pool](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connection-pools), which allows previous client [connections](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connections) (i.e. idle), to be reused for succesive connections:
 
 ```python
 pool        = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_num)
@@ -253,14 +259,6 @@ self.server = redis.StrictRedis(connection_pool=pool)
 ```
 
 **Note:** a [connection pool](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connection-pools) manages a set of [connection](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connections) instances. By default, the maximum limit is 10,000 concurrent connections, and can be adjusted within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf) ([`maxmemory`](https://github.com/antirez/redis/blob/unstable/redis.conf#L478-L499) directive).
-
-If needed, the following commands, starts, restarts, and stops the redis-server:
-
-```bash
-sudo start redis-server
-sudo restart redis-server
-sudo stop redis-server
-```
 
 **Note:** more information regarding Redis, can be found within the Redis [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Redis).
 
