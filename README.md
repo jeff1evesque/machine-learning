@@ -260,7 +260,7 @@ pool        = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_nu
 self.server = redis.StrictRedis(connection_pool=pool)
 ```
 
-**Note:** a [connection pool](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connection-pools) manages a set of connection instances. By default, the maximum limit is 10,000 concurrent connections, and can be adjusted within `redis.conf` (maxmemory directive).
+**Note:** a [connection pool](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connection-pools) manages a set of [connection](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connections) instances. By default, the maximum limit is 10,000 concurrent connections, and can be adjusted within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf) ([`maxmemory`](https://github.com/antirez/redis/blob/unstable/redis.conf#L478-L499) directive).
 
 ##Testing / Execution
 
