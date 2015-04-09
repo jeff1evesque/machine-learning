@@ -262,6 +262,8 @@ sudo restart redis-server
 sudo stop redis-server
 ```
 
+**Note:** more information regarding Redis, can be found within the [Redis](https://github.com/jeff1evesque/machine-learning/wiki/Redis) wiki page.
+
 ##Testing / Execution
 
 
