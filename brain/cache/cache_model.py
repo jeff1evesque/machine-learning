@@ -23,7 +23,7 @@ class Cache_Model(object):
     ## cache: serialize the provided svm model, then store into the
     #         redis hash cache.
     def cache(self, hash_name, key):
-        serialized = Serialize_Model().serialize(self.model)
+        serialized = Serialize_Model(self.model).serialize()
         self.myRedis.hset(hash_name, key, serialized)
 
     ## uncache: uncache an svm model from the redis hash cache.
