@@ -5,27 +5,27 @@
 from brain.cache.redis_query import Redis_Query
 from brain.converter.serialize_model import Serialize_Model
 
-    ## Class: Cache_Model, explicitly inherit 'new-style class.
-    #
-    #  Note: this class is invoked within 'model_generate.py', and
-    #        'model_use.py'
-    class Cache_Model(object):
+## Class: Cache_Model, explicitly inherit 'new-style class.
+#
+#  Note: this class is invoked within 'model_generate.py', and
+#        'model_use.py'
+class Cache_Model(object):
 
-        ## constructor
-        def __init__(self, model):
-            # define class variables
-            self.model   = model
-            self.myRedis = Redis_Query()
+    ## constructor
+    def __init__(self, model):
+        # define class variables
+        self.model   = model
+        self.myRedis = Redis_Query()
 
-            # start redis client
-            self.myRedis.start_redis()
+        # start redis client
+        self.myRedis.start_redis()
 
-        ## cache: serialize the provided svm model, then store into the
-        #         redis hash cache.
-        def cache(self, hash_name, key):
-            serialized = Serialize_Model().serialize(self.model)
-            self.myRedis.hset(hash_name, key, serialized)
+    ## cache: serialize the provided svm model, then store into the
+    #         redis hash cache.
+    def cache(self, hash_name, key):
+        serialized = Serialize_Model().serialize(self.model)
+        self.myRedis.hset(hash_name, key, serialized)
 
-        ## uncache: uncache an svm model from the redis hash cache.
-        def uncache(self, hash_name, key):
-            return self.myRedis.hget(hasn_name, key)
+    ## uncache: uncache an svm model from the redis hash cache.
+    def uncache(self, hash_name, key):
+        return self.myRedis.hget(hasn_name, key)
