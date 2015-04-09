@@ -178,7 +178,7 @@ class Redis_Query(object):
 
     ## hlen: return the number of elements within the redis hash.
     def hlen(self, name):
-        return self.server.hlen(name):
+        return self.server.hlen(name)
 
     ## hkeys: return the list of keys within the redis hash
     def hkeys(self, name):
