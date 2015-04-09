@@ -251,7 +251,7 @@ sudo restart redis-server
 sudo stop redis-server
 ```
 
-This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with the [redis-py](https://redis-py.readthedocs.org/en/latest/) client.  Specifically, this project has various python modules in the [`/brain/cache/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/cache) directory, which implements the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).  Also, the `start_redis` method from `redis_query.py` implements a connection pool, which allows previous client connections (perhaps idle), to be reused for succesive connections:
+This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with the [redis-py](https://redis-py.readthedocs.org/en/latest/) client.  Specifically, various python modules in the [`/brain/cache/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/cache) directory, implements the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).  Also, the `start_redis` method from `redis_query.py` implements a connection pool, which allows previous client connections (perhaps idle), to be reused for succesive connections:
 
 ```python
 pool        = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_num)
