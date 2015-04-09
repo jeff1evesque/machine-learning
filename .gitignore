@@ -26,6 +26,7 @@
 /build/.sass-cache/
 
 /brain/*.pyc
+/brain/cache/*.pyc
 /brain/converter/*.pyc
 /brain/database/*.pyc
 /brain/schema/*.pyc
