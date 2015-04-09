@@ -234,10 +234,10 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 [Redis](http://redis.io/) is an open source, key-value cache, and store system.  Often classified as [NoSQL](http://en.wikipedia.org/wiki/NoSQL), it is more accurately referred to as, a data structure server.  Though, redis is similar to [Memcached](http://memcached.org/) (some argue faster), in general, it has more features, and greater flexibility.  Some of the more notable advantages of [Redis](http://redis.io/) include:
 
-- Multiple datatypes vs. memcached simple key-value:
+- Multiple datatypes vs. memcached simple key-value
 - Dataset Persistence
-- Larger Data Store:
-- Granular [eviction policies](http://redis.io/topics/lru-cache#eviction-policies)
+- Larger Data Store
+- Granular eviction policies
 
 **Note:** by default, redis autostarts via Ubuntu's [upstart](http://upstart.ubuntu.com/), and implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).
 
