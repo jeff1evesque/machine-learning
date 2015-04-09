@@ -290,7 +290,7 @@ pool        = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_nu
 self.server = redis.StrictRedis(connection_pool=pool)
 ```
 
-**Note:** a connection pool manages a set of connection instances. By default, the maximum limit is 10,000 concurrent connections, and can be adjusted within 'redis.conf' (maxmemory directive).
+**Note:** a connection pool manages a set of connection instances. By default, the maximum limit is 10,000 concurrent connections, and can be adjusted within `redis.conf` (maxmemory directive).
 
 ##Testing / Execution
 
