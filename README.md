@@ -265,7 +265,32 @@ The first line implies, save the dataset into disk, as `dump.rdb`, after 900 sec
 
 **Note:** the term *dataset* refers to the full redis data stored in memory.
 
-This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with the [redis-py](https://redis-py.readthedocs.org/en/latest/) client.  Specifically, this project has various python modules in the [`/brain/cache/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/cache) directory, which implements the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).
+The installed redis-server autostarts via the `redis-server.conf` file, located in the `/etc/init/` directory.  To disable the autostart, simply comment out the contents of `redis-server.conf`, specifically, the `exec` command:
+
+```bash
+#exec start-stop-daemon --start --chuid redis:redis --pidfile /var/run/redis/redis.pid --umask 007 --exec /usr/bin/redis-server -- /etc/redis/redis.conf
+```
+
+Regardless if the redis-server autostarts, the following commands, starts, restarts, and stops the redis-server:
+
+```bash
+sudo start redis-server
+sudo restart redis-server
+sudo stop redis-server
+```
+
+**Note:** the `/etc/init/` directory essentially contains configuration files used by [Upstart](http://upstart.ubuntu.com/).  The contained files tells Upstart how and when to start, stop, reload the configuration, or query the status of a service.
+
+**Note:** Older versions of Ubuntu loaded startup scripts from `/etc/init.d/` via sysvinit.  More recent versions of Ubuntu have phased our sysvinit with upstart.  However, Ubuntu 15.04 will [replace](https://wiki.ubuntu.com/systemd#Warning.21_Experimental_code) upstart with `systemd`.
+
+This project implements redis, by implementing the [redis-server](https://github.com/antirez/redis), with the [redis-py](https://redis-py.readthedocs.org/en/latest/) client.  Specifically, this project has various python modules in the [`/brain/cache/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/cache) directory, which implements the `Redis_Query` class from [`redis_query.py`](https://github.com/jeff1evesque/machine-learning/blob/master/brain/cache/redis_query.py), using the [redis-py API](https://redis-py.readthedocs.org/en/latest/).  Also, the `start_redis` method from `redis_query.py` implements a connection pool, which allows previous client connections (perhaps idle), to be reused for succesive connections:
+
+```python
+pool        = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_num)
+self.server = redis.StrictRedis(connection_pool=pool)
+```
+
+**Note:** a connection pool manages a set of connection instances. By default, the maximum limit is 10,000 concurrent connections, and can be adjusted within `redis.conf` (maxmemory directive).
 
 ##Testing / Execution
 
