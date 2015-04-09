@@ -239,7 +239,13 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 - Larger Data Store
 - Granular eviction policies
 
-**Note:** by default, redis autostarts via Ubuntu's [upstart](http://upstart.ubuntu.com/), and implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).
+By default, redis autostarts via Ubuntu's [upstart](http://upstart.ubuntu.com/), and implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).  If needed, the following commands will start, restart, and stop the redis-server:
+
+```bash
+sudo start redis-server
+sudo restart redis-server
+sudo stop redis-server
+```
 
 **Note:** the term *dataset* refers to the full redis data stored in memory.
 
@@ -253,14 +259,6 @@ self.server = redis.StrictRedis(connection_pool=pool)
 ```
 
 **Note:** a [connection pool](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connection-pools) manages a set of [connection](https://pypi.a.ssl.fastly.net/pypi/redis/2.9.1#connections) instances. By default, the maximum limit is 10,000 concurrent connections, and can be adjusted within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf) ([`maxmemory`](https://github.com/antirez/redis/blob/unstable/redis.conf#L478-L499) directive).
-
-If needed, the following commands, starts, restarts, and stops the redis-server:
-
-```bash
-sudo start redis-server
-sudo restart redis-server
-sudo stop redis-server
-```
 
 **Note:** more information regarding Redis, can be found within the Redis [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Redis).
 
