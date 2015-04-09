@@ -10,15 +10,15 @@ from six.moves import cPickle as pickle
 class Serialize_Model(object):
 
     ## constructor
-    def __init__(self, obj):
-        self.obj = obj
+    def __init__(self, model):
+        self.model = model
         self.acceptable = [svm.classes.SVC]
 
     ## serialize: serializes the provided object.
-    def serialize(self, obj):
-        if type(obj) in self.acceptable:
-            return pickle.dumps(obj)
+    def serialize(self):
+        if type(self.model) in self.acceptable:
+            return pickle.dumps(self.model)
 
     ## deserialize: deserializes the provided object.
-    def deserialize(self, obj):
-        return pickle.loads(obj)
+    def deserialize(self):
+        return pickle.loads(self.model)
