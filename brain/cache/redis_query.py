@@ -50,7 +50,13 @@ class Redis_Query(object):
     ## start_redis: establish redis instance.
     #
     #  @pool, we define a reusable connection pool, based on the supplied host,
-    #      port, and db_num.
+    #      port, and db_num. This allows the redis client (StrictRedis) to reuse
+    #      a previous connection within the pool, which may be idle from previous
+    #      use.
+    #
+    #  Note: a connection pool manages a set of connection instances. By default,
+    #        the maximum limit is 10,000 concurrent connections, and can be adjusted
+    #        within 'redis.conf' (maxmemory directive).
     #
     #  Note: for more information regarding redis concurrent client connections,
     #        review the following:
