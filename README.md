@@ -228,7 +228,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 
 **Note:** one execution of this program may involve different *dependent*, and *independent* variables then the next execution. Therefore, the database schema is not known ahead of time. For this reason, the [EAV data model](http://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model#Physical_representation_of_EAV_data) is used for storing and retrieving SVM dataset(s).
 
-**Note:** more information regarding the MariaDB syntax, can be found within the *Database* [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Database).
+**Note:** more information regarding the MariaDB syntax, can be found within the Database [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Database).
 
 ###Redis
 
@@ -262,7 +262,7 @@ sudo restart redis-server
 sudo stop redis-server
 ```
 
-**Note:** more information regarding Redis, can be found within the *Redis* [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Redis).
+**Note:** more information regarding Redis, can be found within the Redis [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Redis).
 
 ##Testing / Execution
 
