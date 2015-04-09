@@ -239,7 +239,7 @@ MariaDB [(none)]> FLUSH PRIVILEGES;
 - Larger Data Store
 - Granular eviction policies
 
-By default, redis autostarts via Ubuntu's [upstart](http://upstart.ubuntu.com/), and implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).  If needed, the following commands will start, restart, and stop the redis-server:
+By default, redis autostarts via Ubuntu's [upstart](http://upstart.ubuntu.com/) daemon, and implements [snapshotting](http://redis.io/topics/persistence#snapshotting) the dataset, as defined in [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).  If needed, the following commands will start, restart, and stop the redis-server:
 
 ```bash
 sudo start redis-server
