@@ -170,7 +170,7 @@ class Redis_Query(object):
 
     ## hset: set value into a redis hash.
     def hset(self, name, key, value):
-        return self.server.hset(name, key, value)
+        self.server.hset(name, key, value)
 
     ## hvals: return the list of values within the redis hash.
     def hvals(self, name):
