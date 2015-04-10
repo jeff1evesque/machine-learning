@@ -81,7 +81,7 @@ class Model_Generate():
             clf.fit(grouped_features, encoded_labels)
 
             # cache svm model
-            Cache_Model(clf).cache('svm_model', self.session_id)
+            Cache_Model(clf).cache('svm_model', 'model_' + str(self.session_id))
 
     ## return_error: returns current error(s)
     def return_error(self):
