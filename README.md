@@ -245,7 +245,9 @@ By default, the redis-server autostarts via Ubuntu's [upstart](http://upstart.ub
 #manual
 ```
 
-Otherwise, the autostart feature will be overridden, and will require manual start.  Once started, the redis-server will intrinsically implement dataset [snapshotting](http://redis.io/topics/persistence#snapshotting), as defined within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).  If needed, the following commands will start, restart, and stop the redis-server:
+Otherwise, the autostart feature will be overridden, and will require manual start.  Once started, the redis-server will intrinsically implement dataset [snapshotting](http://redis.io/topics/persistence#snapshotting), as defined within [`redis.conf`](https://github.com/antirez/redis/blob/unstable/redis.conf#L170).
+
+**Note:** if needed, the following are basic redis-server commands:
 
 ```bash
 sudo start redis-server
