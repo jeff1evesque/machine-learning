@@ -63,7 +63,7 @@ def retrieve_session():
 def retrieve_model():
     if request.method == 'POST':
         # get all models
-        model_list = Uncache_Model().get_all_titles()
+        model_list = Uncache_Model().get_all_titles('svm_model')
 
         # return all models
         if model_list['result']: return json.dumps(model_list['result'])
