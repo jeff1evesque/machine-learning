@@ -25,8 +25,15 @@ class Uncache_Model(object):
     #                  cache.
     def get_all_titles(self, name):
         try:
+            # get model(s)
             hkeys = self.myRedis.hkeys(name)
-            return {'result': hkeys, 'error': None}
+
+            # parse id, and title
+            id    = [x[:x.find('_')] for x in hkeys]
+            title = [x[x.find('_')+1:] for x in hkeys]
+
+            # return
+            return {'result': {'id': id, 'title': title}, 'error': None}
         except Exception, error:
             self.list_error.append(str(error))
             return {'result': None, 'error': self.list_error}
