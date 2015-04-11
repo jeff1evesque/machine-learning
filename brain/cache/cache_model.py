@@ -13,14 +13,22 @@ class Cache_Model(object):
     ## constructor
     def __init__(self, model):
         # class variables
-        self.model   = model
-        self.myRedis = Redis_Query()
+        self.model      = model
+        self.list_error = []
+        self.myRedis    = Redis_Query()
 
         # start redis client
-        self.myRedis.start_redis()
+        try:
+            self.myRedis.start_redis()
+        except Exception, error:
+            self.list_error.append(str(error))
 
     ## cache: serialize the provided svm model, then store into the
     #         redis hash cache.
     def cache(self, hash_name, key):
-        serialized = Serialize_Model(self.model).serialize()
-        self.myRedis.hset(hash_name, key, serialized)
+        try:
+            serialized = Serialize_Model(self.model).serialize()
+            self.myRedis.hset(hash_name, key, serialized)
+        except Exception, error:
+            self.list_error.append(str(error))
+            print self.list_error
