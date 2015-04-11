@@ -59,7 +59,7 @@ def retrieve_session():
         else: return json.dumps({'error': session_list['error']})
 
 ## retrieve_model: retrieve all models stored in the hashed redis cache
-@app.route('/retrieve_model/', methods=['POST', 'GET'])
+@app.route('/retrieve-model/', methods=['POST', 'GET'])
 def retrieve_model():
     if request.method == 'POST':
         # get all models
