@@ -52,8 +52,7 @@ def load_data():
 def retrieve_session():
     if request.method == 'POST':
         # get all sessions
-        session      = Retrieve_Session()
-        session_list = session.get_all_sessions()
+        session_list = Retrieve_Session().get_all_sessions()
 
         # return all sessions
         if session_list['result']: return json.dumps(session_list['result'])
