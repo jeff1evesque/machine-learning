@@ -38,11 +38,6 @@ $(document).ready(function() {
               <select name="svm_model_id">\
                 <option value="" selected="selected">--Select--</option>\
               </select>\
-              <select name="svm_model_type">\
-                <option value="" selected="selected">--Select--</option>\
-                <option value="classification">Classification</option>\
-                <option value="regression">Regression</option>\
-              </select>\
             </fieldset>\
           </fieldset>\
         ';
@@ -96,11 +91,21 @@ $(document).ready(function() {
       model_id();
     }
 
-  // Submit Button
+  // Submit Button: 'model_generate' case
     $('.fieldset_session_generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
       if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val() ) {
         obj_form.submit = '<input type="submit" class="svm_form_submit">';
         build_form('.fieldset_session_generate', obj_form.submit, ['.svm_form_submit']);
+      }
+      else $('.svm_form_submit').remove();
+    });
+
+  // Submit Button: 'model_use' case
+    $('.fieldset_session_analysis').on('change', 'select[name="svm_model_id"]', function() {
+      if ( $('select[name="svm_model_id"]').val() ) {
+        console.log('yes');
+        obj_form.submit = '<input type="submit" class="svm_form_submit">';
+        build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit']);
       }
       else $('.svm_form_submit').remove();
     });
