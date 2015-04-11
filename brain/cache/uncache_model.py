@@ -9,3 +9,10 @@ from brain.cache.redis_query import Redis_Query
 #  Note: this class is invoked within 'views.py'.
 class Uncache_Model(object):
 
+    ## constructor
+    def __init__(self):
+        # class variables
+        self.myRedis = Redis_Query()
+
+        # start redis client
+        self.myRedis.start_redis()
