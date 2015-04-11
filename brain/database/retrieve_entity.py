@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 ## @retrieve_entity.py
-#  This file retrieves SVM related enity from corresponding 'EAV data model' database
-#      table(s), from the 'db_machine_learning' database.
+#  This file retrieves dataset entity related properties, from corresponding 'EAV data
+#      model' database tables(s), from the 'db_machine_learning' database.
 from brain.database.db_query import SQL
 
 ## Class: Retrieve_Entity, explicitly inherit 'new-style' class
