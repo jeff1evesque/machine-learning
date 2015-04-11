@@ -92,6 +92,9 @@ $(document).ready(function() {
     }
 
   // Model IDs: for 'svm_model_id' (defined in ajax_model.js)
+    if ( $.inArray( $(this).val(), ['model_use'] ) !== -1 ) {
+      model_id();
+    }
 
   // Submit Button
     $('.fieldset_session_generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
