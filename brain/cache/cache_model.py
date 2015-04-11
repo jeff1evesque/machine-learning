@@ -12,7 +12,7 @@ class Cache_Model(object):
 
     ## constructor
     def __init__(self, model):
-        # define class variables
+        # class variables
         self.model   = model
         self.myRedis = Redis_Query()
 
