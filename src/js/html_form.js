@@ -91,7 +91,7 @@ $(document).ready(function() {
       model_id();
     }
 
-  // Submit Button
+  // Submit Button: 'model_generate' case
     $('.fieldset_session_generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
       if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val() ) {
         obj_form.submit = '<input type="submit" class="svm_form_submit">';
