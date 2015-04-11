@@ -16,3 +16,8 @@ class Uncache_Model(object):
 
         # start redis client
         self.myRedis.start_redis()
+
+    ## get_all_titles: query for the stored 'svm_models' in the redis hashed
+    #                  cache.
+    def get_all_titles(self, name):
+        return self.myRedis.hkeys(name)
