@@ -8,6 +8,7 @@ from flask import render_template, request
 from brain.load_data import Load_Data
 from brain.converter.restructure_data import Restructure_Data
 from brain.database.retrieve_session import Retrieve_Session
+from brain.cache.retrieve_model import Retrieve_Model
 
 ## index: render 'index.html'
 @app.route('/')
