@@ -100,6 +100,16 @@ $(document).ready(function() {
       else $('.svm_form_submit').remove();
     });
 
+  // Submit Button: 'model_use' case
+    $('.fieldset_session_analysis').on('change', 'select[name="svm_model_id"]', function() {
+      if ( $('select[name="svm_model_id"]').val() ) {
+        console.log('yes');
+        obj_form.submit = '<input type="submit" class="svm_form_submit">';
+        build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit']);
+      }
+      else $('.svm_form_submit').remove();
+    });
+
   // Append 'Supply Dataset' Fieldset
     $('.fieldset_session_data_upload').on('input change', 'select[name="svm_dataset_type"], select[name="svm_session_id"], input[name="svm_title"], select[name="svm_model_type"]', function() {
     // Session: Append Data
