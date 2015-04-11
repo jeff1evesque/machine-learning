@@ -57,3 +57,5 @@ def retrieve_session():
         # return all sessions
         if session_list['result']: return json.dumps(session_list['result'])
         else: return json.dumps({'error': session_list['error']})
+
+## retrieve_model: retrieve all models stored in the hashed redis cache
