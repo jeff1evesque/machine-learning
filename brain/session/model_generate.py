@@ -7,6 +7,8 @@
 #      into respective database table(s), which later can be retrieved within
 #      'model_use.py'.
 from brain.database.retrieve_feature import Retrieve_Feature
+from brain.database.retrieve_entity import Retrieve_Entity
+from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 from sklearn import svm, preprocessing
 import numpy
@@ -80,8 +82,9 @@ class Model_Generate():
             clf = svm.SVC()
             clf.fit(grouped_features, encoded_labels)
 
-            # cache svm model
-            Cache_Model(clf).cache('svm_model', 'model_' + str(self.session_id))
+            # get svm title, and cache svm model
+            title = Retrieve_Entity().get_title(self.session_id)
+            Cache_Model(clf).cache('svm_model', str(self.session_id) + key)
 
     ## return_error: returns current error(s)
     def return_error(self):
