@@ -8,7 +8,7 @@ from flask import render_template, request
 from brain.load_data import Load_Data
 from brain.converter.restructure_data import Restructure_Data
 from brain.database.retrieve_session import Retrieve_Session
-from brain.cache.uncache_model import Uncache_Model
+from brain.cache.cache_model import Cache_Model
 
 ## index: render 'index.html'
 @app.route('/')
@@ -63,7 +63,7 @@ def retrieve_session():
 def retrieve_model():
     if request.method == 'POST':
         # get all models
-        model_list = Uncache_Model().get_all_titles('svm_model')
+        model_list = Cache_Model().get_all_titles('svm_model')
 
         # return all models
         if model_list['result']: return json.dumps(model_list['result'])
