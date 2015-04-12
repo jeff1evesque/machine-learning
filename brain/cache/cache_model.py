@@ -11,7 +11,7 @@ from brain.converter.serialize_model import Serialize_Model
 class Cache_Model(object):
 
     ## constructor
-    def __init__(self, model):
+    def __init__(self, model=None):
         # class variables
         self.model      = model
         self.list_error = []
