@@ -7,7 +7,8 @@ from brain.converter.serialize_model import Serialize_Model
 
 ## Class: Cache_Model, explicitly inherit 'new-style class.
 #
-#  Note: this class is invoked within 'model_generate.py'.
+#  Note: this class is invoked within 'model_generate.py', and
+#        'views.py'.
 class Cache_Model(object):
 
     ## constructor
