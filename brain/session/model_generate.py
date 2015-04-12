@@ -7,6 +7,7 @@
 #      into respective database table(s), which later can be retrieved within
 #      'model_use.py'.
 from brain.database.retrieve_feature import Retrieve_Feature
+from brain.database.retrieve_entity import Retrieve_Entity
 from brain.cache.cache_model import Cache_Model
 from sklearn import svm, preprocessing
 import numpy
