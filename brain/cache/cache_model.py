@@ -32,3 +32,24 @@ class Cache_Model(object):
         except Exception, error:
             self.list_error.append(str(error))
             print self.list_error
+
+    ## get_all_titles: query for the stored 'svm_models' in the redis hashed
+    #                  cache.
+    def get_all_titles(self, name):
+        try:
+            # get model(s)
+            hkeys      = self.myRedis.hkeys(name)
+            list_title = []
+
+            # build result
+            id    = [x[:x.find('_')] for x in hkeys]
+            title = [x[x.find('_')+1:] for x in hkeys]
+
+            for i in range(len(hkeys)):
+                list_title.append({'id': id[i], 'title': title[i]})
+
+            # return result
+            return {'result': list_title, 'error': None}
+        except Exception, error:
+            self.list_error.append(str(error))
+            return {'result': None, 'error': self.list_error}
