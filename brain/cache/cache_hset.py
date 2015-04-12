@@ -29,3 +29,11 @@ class Cache_Model(object):
         except Exception, error:
             self.list_error.append(str(error))
             print self.list_error
+
+    ## uncache: uncache the provided key from a redis hash cache.
+    def cache(self, hash_name, key):
+        try:
+            self.myRedis.hget(hash_name, key)
+        except Exception, error:
+            self.list_error.append(str(error))
+            print self.list_error
