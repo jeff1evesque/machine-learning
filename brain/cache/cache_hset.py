@@ -8,7 +8,7 @@ from brain.cache.redis_query import Redis_Query
 ## Class: Cache_Hset, explicitly inherit 'new-style class.
 #
 #  Note: this class is invoked within 'cache_model.py'.
-class Cache_Model(object):
+class Cache_Hset(object):
 
     ## constructor
     def __init__(self):
