@@ -84,7 +84,7 @@ class Model_Generate():
 
             # get svm title, and cache svm model
             title = Retrieve_Entity().get_title(self.session_id)['result'][0][0]
-            Cache_Model(clf).cache('svm_model', str(self.session_id) + title)
+            Cache_Model(clf).cache('svm_model', str(self.session_id) + '_' + title)
 
     ## return_error: returns current error(s)
     def return_error(self):
