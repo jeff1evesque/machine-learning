@@ -15,7 +15,6 @@
       }
     }).done(function(data) {
 
-
     // Remove AJAX Overlay
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
 
@@ -27,7 +26,7 @@
         $.each( data, function( index, value ) {
           var value_id    = value['id'];
           var value_title = value['title'];
-          var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
+          var element     = '<option ' + 'value="' + value_id + '">' + value_id + ': ' + value_title + '</option>';
 
           $('select[name="svm_model_id"]').append( element );
         });
