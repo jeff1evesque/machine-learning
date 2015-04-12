@@ -82,8 +82,9 @@ class Model_Generate():
             clf = svm.SVC()
             clf.fit(grouped_features, encoded_labels)
 
-            # cache svm model
-            Cache_Model(clf).cache('svm_model', str(self.session_id) + '_model')
+            # get svm title, and cache svm model
+            title = Retrieve_Entity().get_title(self.session_id)
+            Cache_Model(clf).cache('svm_model', str(self.session_id) + key)
 
     ## return_error: returns current error(s)
     def return_error(self):
