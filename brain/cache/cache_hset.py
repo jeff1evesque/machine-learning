@@ -21,3 +21,11 @@ class Cache_Model(object):
             self.myRedis.start_redis()
         except Exception, error:
             self.list_error.append(str(error))
+
+    ## cache: cache the provided data into a redis hash cache.
+    def cache(self, hash_name, key, value):
+        try:
+            self.myRedis.hset(hash_name, key, value)
+        except Exception, error:
+            self.list_error.append(str(error))
+            print self.list_error
