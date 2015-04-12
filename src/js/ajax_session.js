@@ -28,7 +28,7 @@
         $.each( data, function( index, value ) {
           var value_id    = value['id'];
           var value_title = value['title'];
-          var element     = '<option ' + 'value="' + value_id + '">' + value_title + '</option>';
+          var element     = '<option ' + 'value="' + value_id + '">' + value_id + ': ' + value_title + '</option>';
 
           $('select[name="svm_session_id"]').append( element );
         });
