@@ -73,6 +73,9 @@ def retrieve_model():
 ## retrieve_feature_properties: retrieve generalized features properties
 #                               that can be expected for any given observation
 #                               within the supplied dataset.
+#
+#  @label_list, this value will be a json object, since it was originally cached
+#      into redis using 'json.dumps'.
 @app.route('/retrieve-feature-properties/', methods=['POST', 'GET'])
 def retrieve_feature_properties():
     if request.method == 'POST':
