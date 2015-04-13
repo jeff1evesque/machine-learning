@@ -12,6 +12,7 @@ from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 from sklearn import svm, preprocessing
 import numpy
+import json
 
 ## Class: Model_Generate
 #
@@ -57,7 +58,7 @@ class Model_Generate():
 
         # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
-            features_list      = dataset[:, [[0],[2]]]
+            features_list      = dataset[:, [[0],[2],[1]]]
             current_features   = []
             grouped_features   = []
             observation_labels = []
@@ -67,6 +68,10 @@ class Model_Generate():
                 if not (index+1) % feature_count == 0:
                     current_features.append(feature[1][0])
                 else:
+                    # general features in every observation
+                    if (index+1) == feature_count:
+                        general_features = current_features
+
                     current_features.append(feature[1][0])
                     grouped_features.append(current_features)
                     observation_labels.append(feature[0][0])
@@ -85,6 +90,9 @@ class Model_Generate():
             # get svm title, and cache svm model
             title = Retrieve_Entity().get_title(self.session_id)['result'][0][0]
             Cache_Model(clf).cache('svm_model', str(self.session_id) + '_' + title)
+
+            # cache svm feature labels, with respect to given session id
+            Cache_Hset().cache('svm_feature_labels', str(self.session_id), json.dumps(general_features))
 
     ## return_error: returns current error(s)
     def return_error(self):
