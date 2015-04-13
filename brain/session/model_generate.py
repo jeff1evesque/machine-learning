@@ -57,7 +57,7 @@ class Model_Generate():
 
         # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
-            features_list      = dataset[:, [[0],[2]]]
+            features_list      = dataset[:, [[0],[2],[1]]]
             current_features   = []
             grouped_features   = []
             observation_labels = []
