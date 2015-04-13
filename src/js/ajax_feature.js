@@ -5,3 +5,34 @@
  *                  expected within an observation, is inserted to respective
  *                  DOM elements.
  */
+
+// AJAX Process
+  function feature_properties() {
+    $.ajax({
+      type: 'POST',
+      url: '/retrieve-feature-properties/',
+      dataType: 'json',
+      beforeSend: function() {
+        ajaxLoader( $('form') );
+      }
+    }).done(function(data) {
+
+    // Remove AJAX Overlay
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+
+    // Append to DOM
+      if (data.error) {
+        $('.fieldset_session_analysis').append('<div class="error">' + data.error + '</div>');
+      }
+      else {
+        return data.features;
+      }
+
+    }).fail(function(jqXHR, textStatus, errorThrown) {
+      console.log('Error Thrown: '+errorThrown);
+      console.log('Error Status: '+textStatus);
+
+    // Remove AJAX Overlay
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+    });
+  }
