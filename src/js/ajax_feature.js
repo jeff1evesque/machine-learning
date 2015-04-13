@@ -8,12 +8,12 @@
 
 // AJAX Process
   function feature_properties() {
-    var session_id = $('select[name="svm_model_id"]').val();
+    var data = {'session_id': $('select[name="svm_model_id"]').val()};
 
     $.ajax({
       type: 'POST',
       url: '/retrieve-feature-properties/',
-      data: JSON.stringify({'session_id': session_id}),
+      data: data,
       dataType: 'json',
       beforeSend: function() {
         ajaxLoader( $('form') );
