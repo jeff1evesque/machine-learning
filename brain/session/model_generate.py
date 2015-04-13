@@ -92,8 +92,7 @@ class Model_Generate():
             Cache_Model(clf).cache('svm_model', str(self.session_id) + '_' + title)
 
             # cache svm feature labels, with respect to given session id
-            redis_hset = Cache_Hset()
-            redis_hset.cache('svm_feature_labels', str(self.session_id), json.dumps(general_features))
+            Cache_Hset().cache('svm_feature_labels', str(self.session_id), json.dumps(general_features))
 
     ## return_error: returns current error(s)
     def return_error(self):
