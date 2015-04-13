@@ -13,7 +13,7 @@
     $.ajax({
       type: 'POST',
       url: '/retrieve-feature-properties/',
-      data: JSON.stringify({'session_id': session_id});
+      data: JSON.stringify({'session_id': session_id}),
       dataType: 'json',
       beforeSend: function() {
         ajaxLoader( $('form') );
