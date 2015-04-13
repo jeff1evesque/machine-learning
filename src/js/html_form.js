@@ -103,6 +103,7 @@ $(document).ready(function() {
   // Submit Button: 'model_use' case
     $('.fieldset_session_analysis').on('change', 'select[name="svm_model_id"]', function() {
       if ( $('select[name="svm_model_id"]').val() ) {
+        feature_properties();
         obj_form.submit = '<input type="submit" class="svm_form_submit">';
         build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit']);
       }
