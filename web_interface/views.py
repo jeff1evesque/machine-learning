@@ -9,6 +9,7 @@ from brain.load_data import Load_Data
 from brain.converter.restructure_data import Restructure_Data
 from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
+from brain.cache.cache_hset import Cache_Hset
 
 ## index: render 'index.html'
 @app.route('/')
