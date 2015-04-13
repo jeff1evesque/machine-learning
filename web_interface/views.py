@@ -68,3 +68,12 @@ def retrieve_model():
         # return all models
         if model_list['result']: return json.dumps(model_list['result'])
         else: return json.dumps({'error': model_list['error']})
+
+## retrieve_feature_properties: retrieve generalized features properties
+#                               that can be expected for any given observation
+#                               within the supplied dataset.
+@app.route('/retrieve-feature-properties/', methods=['POST', 'GET'])
+def retrieve_feature_properties():
+    if request.method == 'POST':
+        label_list = Cache_Hset().uncache('svm_feature_labels', str(request.json['session_id']))
+        return json.loads(label_list)
