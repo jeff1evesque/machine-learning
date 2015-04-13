@@ -75,5 +75,5 @@ def retrieve_model():
 @app.route('/retrieve-feature-properties/', methods=['POST', 'GET'])
 def retrieve_feature_properties():
     if request.method == 'POST':
-        label_list = Cache_Hset().uncache('svm_feature_labels', str(settings.form.session_id))
+        label_list = Cache_Hset().uncache('svm_feature_labels', str(request.json['session_id']))
         return json.loads(label_list)
