@@ -28,8 +28,19 @@
         $('.fieldset_session_analysis').append('<div class="error">' + data.error + '</div>');
       }
       else {
-        return data.features;
+          var obj_form = '\
+              <fieldset class="fieldset_supply_dataset">\
+              <legend>Prediction Values</legend>\
+            ';
+
+            $.each($.parseJSON(data), function(index, value) {
+                obj_form += '<input type="text" name="indep_variable[]" placeholder="' + value + '">';
+            });
+
+          obj_form += '</fieldset>';
       }
+
+      $('.fieldset_session_analysis').append(obj_form);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: '+errorThrown);
