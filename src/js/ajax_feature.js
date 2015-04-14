@@ -30,7 +30,7 @@
       else {
           var obj_form = '\
               <fieldset class="fieldset_prediction_input">\
-              <legend>Prediction Values</legend>\
+              <legend>Prediction Input</legend>\
             ';
 
             $.each($.parseJSON(data), function(index, value) {
