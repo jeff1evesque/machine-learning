@@ -62,16 +62,17 @@ class Model_Generate():
             current_features   = []
             grouped_features   = []
             observation_labels = []
+            feature_labels     = []
 
             # group features into observation instances, record observation labels
             for index, feature in enumerate(features_list):
                 if not (index+1) % feature_count == 0:
                     current_features.append(feature[1][0])
-                else:
-                    # general features in every observation
-                    if (index+1) == feature_count:
-                        general_features = current_features
 
+                    # general features in every observation
+                    if not len(feature_labels) == feature_count:
+                        feature_labels.append(feature[2][0])
+                else:
                     current_features.append(feature[1][0])
                     grouped_features.append(current_features)
                     observation_labels.append(feature[0][0])
@@ -92,7 +93,7 @@ class Model_Generate():
             Cache_Model(clf).cache('svm_model', str(self.session_id) + '_' + title)
 
             # cache svm feature labels, with respect to given session id
-            Cache_Hset().cache('svm_feature_labels', str(self.session_id), json.dumps(general_features))
+            Cache_Hset().cache('svm_feature_labels', str(self.session_id), json.dumps(feature_labels))
 
     ## return_error: returns current error(s)
     def return_error(self):
