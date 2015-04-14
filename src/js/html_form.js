@@ -104,10 +104,18 @@ $(document).ready(function() {
     $('.fieldset_session_analysis').on('change', 'select[name="svm_model_id"]', function() {
       if ( $('select[name="svm_model_id"]').val() ) {
         feature_properties();
-        obj_form.submit = '<input type="submit" class="svm_form_submit">';
+
+        $('.fieldset_session_analysis').on('change', 'input[name="indep_variable[]"]', function() {
+          var flag_field = field_determinant( $('input[name="indep_variable[]"]') );
+
+          if( flag_field ) {
+            obj_form.submit = '<input type="submit" class="svm_form_submit">';
+            build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit']);
+          }
+          else $('.svm_form_submit').remove();
+        });
+
       }
-      else $('.svm_form_submit').remove();
-      build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit', '.fieldset_prediction_input']);
     });
 
   // Append 'Supply Dataset' Fieldset
