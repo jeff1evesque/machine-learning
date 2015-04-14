@@ -33,7 +33,7 @@ class Cache_Hset(object):
     ## uncache: uncache the provided key from a redis hash cache.
     def uncache(self, hash_name, key):
         try:
-            self.myRedis.hget(hash_name, key)
+            return self.myRedis.hget(hash_name, key)
         except Exception, error:
             self.list_error.append(str(error))
             print self.list_error
