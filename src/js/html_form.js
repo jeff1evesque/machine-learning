@@ -105,7 +105,7 @@ $(document).ready(function() {
       if ( $('select[name="svm_model_id"]').val() ) {
         feature_properties();
         obj_form.submit = '<input type="submit" class="svm_form_submit">';
-        build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit']);
+        build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit', '.fieldset_prediction_input']);
       }
       else $('.svm_form_submit').remove();
     });
