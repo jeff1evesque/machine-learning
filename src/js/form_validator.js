@@ -34,6 +34,12 @@
       else return false;
   });
   jQuery.validator.addMethod(
+    'floatOnly',
+    function(value, element, parameter) {
+      if ( $.isNumeric(float(value)) ) return true;
+      else return false;
+  });
+  jQuery.validator.addMethod(
     'textOnly',
     function(value, element, parameter) {
       if ( typeof(value) === 'string' ) return true;
