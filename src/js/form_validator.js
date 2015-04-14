@@ -34,7 +34,7 @@
       else return false;
   });
   jQuery.validator.addMethod(
-    'floatOnly',
+    'numericOnly',
     function(value, element, parameter) {
       if ( $.isNumeric(float(value)) ) return true;
       else return false;
@@ -111,7 +111,7 @@
         },
         'indep_variable[]': {
           required: true,
-          floatOnly: true
+          numericOnly: true
         },
       },
       messages: {
