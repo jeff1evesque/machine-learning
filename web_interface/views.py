@@ -73,8 +73,14 @@ def retrieve_model():
 ## retrieve_feature_properties: retrieve generalized features properties
 #                               that can be expected for any given observation
 #                               within the supplied dataset.
+#
+#  @label_list, this value will be a json object, since it was originally cached
+#      into redis using 'json.dumps'.
 @app.route('/retrieve-feature-properties/', methods=['POST', 'GET'])
 def retrieve_feature_properties():
     if request.method == 'POST':
-        label_list = Cache_Hset().uncache('svm_feature_labels', str(request.json['session_id']))
-        return json.loads(label_list)
+        label_list = Cache_Hset().uncache('svm_feature_labels', request.form['session_id'])
+
+        # return all models
+        if model_list['result']: return json.dumps(label_list['result'])
+        else: return json.dumps({'error': label_list['error']})
