@@ -103,6 +103,10 @@
           required: true,
           textOnly: true
         },
+        'indep_variable[]': {
+          required: true,
+          floatOnly: true
+        },
       },
       messages: {
         svm_session: 'Not acceptable values',
@@ -111,6 +115,7 @@
         svm_session_id: 'Not acceptable value',
         svm_model_type: 'Note acceptable value',
         'svm_indep_variable[]': 'Must be nonempty string',
+        'indep_variable[]': 'Must be nonempty decimal',
       },
     });
   });
