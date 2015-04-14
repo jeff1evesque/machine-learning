@@ -29,7 +29,7 @@
       }
       else {
           var obj_form = '\
-              <fieldset class="fieldset_supply_dataset">\
+              <fieldset class="fieldset_prediction_input">\
               <legend>Prediction Values</legend>\
             ';
 
