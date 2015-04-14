@@ -64,12 +64,13 @@ class Model_Generate():
             observation_labels = []
             feature_labels     = []
 
-            # group features into observation instances, record observation labels
+            # group features into observation instances, record labels
             for index, feature in enumerate(features_list):
                 if not (index+1) % feature_count == 0:
+                    # observation labels
                     current_features.append(feature[1][0])
 
-                    # general features in every observation
+                    # general feature labels in every observation
                     if not len(feature_labels) == feature_count:
                         feature_labels.append(feature[2][0])
                 else:
