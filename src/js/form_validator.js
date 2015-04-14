@@ -28,7 +28,7 @@
       else return false;
     });
   jQuery.validator.addMethod(
-    'selectValueInt',
+    'integerOnly',
     function(value, element, parameter) {
       if ( Math.round(parseInt(value)) === parseInt(value) ) return true;
       else return false;
@@ -91,11 +91,11 @@
         },
         svm_session_id: {
           required: true,
-          selectValueInt: true
+          integerOnly: true
         },
         svm_model_id: {
           required: true,
-          selectValueInt: true
+          integerOnly: true
         },
         svm_dataset_type: {
           required: true,
