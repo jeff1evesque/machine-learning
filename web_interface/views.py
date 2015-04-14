@@ -81,6 +81,6 @@ def retrieve_feature_properties():
     if request.method == 'POST':
         label_list = Cache_Hset().uncache('svm_feature_labels', request.form['session_id'])
 
-        # return all models
-        if model_list['result']: return json.dumps(label_list['result'])
+        # return all feature labels
+        if label_list['result']: return json.dumps(label_list['result'])
         else: return json.dumps({'error': label_list['error']})
