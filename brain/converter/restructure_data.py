@@ -25,10 +25,11 @@ class Restructure_Data(object):
         try:
             for key, value in self.settings.items():
                 for lvalue in self.settings.getlist(key):
-                    if key.lower() in formatted_settings:
-                        # base case
+                    # base case
+                    if key.lower() not in formatted_settings:
                         if key.lower() not in formatted_settings:
                             formatted_settings[key.lower()] = lvalue.lower()
+                    else:
                         # step case 1
                         elif type(formatted_settings[key.lower()]) == unicode:
                             formatted_settings[key.lower()] = [formatted_settings[key.lower()]]
