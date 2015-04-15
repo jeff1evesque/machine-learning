@@ -34,6 +34,12 @@ class Cache_Model(object):
             self.list_error.append(str(error))
             print self.list_error
 
+    ## uncache: unserialize an svm model from the redis hash cache, with respect
+    #           to the supplied key.
+    def uncache(self, hash_name, key):
+        uncached = self.myRedis.hget(hash_name, key)
+        return Serialize_Model(uncached).deserialize()
+
     ## get_all_titles: query for the stored 'svm_models' in the redis hashed
     #                  cache.
     def get_all_titles(self, name):
