@@ -23,8 +23,9 @@ class Model_Use(object):
         self.svm_session = self.svm_data['data']['settings']['svm_session']
         self.list_error  = []
 
-    ## CHANGE_METHOD: we will adjust the logic below
-    def CHANGE_METHOD(self):
+    ## svm_prediction: perform svm prediction with given model, and supplied
+    #                  arguments.
+    def svm_prediction(self):
         # validate input data is json format
         validator = Validate_Settings(sys.svm_data, self.svm_session)
 
