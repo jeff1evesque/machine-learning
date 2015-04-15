@@ -36,10 +36,13 @@
   jQuery.validator.addMethod(
     'numericOnly',
     function(value, element, parameter) {
+    // validate integers
       if (value.match(/^\d+$/)) {
         return true;
+    // validate floats
       } else if(value.match(/^\d*\.\d+$/)) {
         return true;
+    // invalid condition
       } else {
         return false;
       }
