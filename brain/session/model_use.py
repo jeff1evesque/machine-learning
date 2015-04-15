@@ -9,7 +9,6 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
-import sys
 from brain.validator.validate_settings import Validate_Settings
 
 ## Class: Model_Use, explicitly inherit 'new-style' class
@@ -29,6 +28,8 @@ class Model_Use(object):
     #  @prediction_input, a list of arguments (floats) required to make an SVM
     #      prediction, against the respective svm model.
     def svm_prediction(self):
+        print self.svm_data
+
         # get necessary model
         svm_title = Cache_Hset.uncache('svm_title', self.model_id)
         clf = Cache_Model().uncache('svm_model', self.model_id + '_' + svm_title)
