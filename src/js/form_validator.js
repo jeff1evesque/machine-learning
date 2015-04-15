@@ -38,9 +38,13 @@
     function(value, element, parameter) {
     // validate integers
       if (value.match(/^\d+$/)) {
+      // cannot start with 0 (except trivial 0)
+        if (value.match(/^[+-]?(0|[1-9][0-9]*)$/)) {
+          return false;
+        }
         return true;
     // validate floats
-      } else if(value.match(/^\d*\.\d+$/)) {
+      } else if (value.match(/^\d*\.\d+$/)) {
         return true;
     // invalid condition
       } else {
