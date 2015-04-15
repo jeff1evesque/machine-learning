@@ -39,8 +39,8 @@
     // validate integers: cannot start with 0 (except trivial 0)
       if (value.match(/^(0|[1-9][0-9]*)$/)) {
         return true;
-    // validate floats
-      } else if (value.match(/^\d*\.\d+$/)) {
+    // validate floats: cannot start with 0 (except trivial 0.x)
+      } else if (value.match(/^(0|[1-9][0-9]*).\d+$/)) {
         return true;
     // invalid condition
       } else {
