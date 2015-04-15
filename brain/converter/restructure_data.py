@@ -24,7 +24,13 @@ class Restructure_Data(object):
         # restructure settings
         try:
             for key, value in self.settings.items():
-                formatted_settings[key.lower()] = value.lower()
+                for lvalue in self.settings.getlist(key):
+                    if key.lower() in formatted_settings:
+                        # base case
+                        if type(formatted_settings[key.lower()]) == unicode:
+                            formatted_settings[key.lower()] = [formatted_settings[key.lower()]]
+                            formatted_settings[key.lower()].append(lvalue)
+                    formatted_settings[key.lower()] = lvalue.lower()
         except Exception as error:
             self.list_error.append(error)
             return {'data': None, 'error': self.list_error}
