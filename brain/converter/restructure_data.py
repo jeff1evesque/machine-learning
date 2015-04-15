@@ -30,6 +30,9 @@ class Restructure_Data(object):
                         if type(formatted_settings[key.lower()]) == unicode:
                             formatted_settings[key.lower()] = [formatted_settings[key.lower()]]
                             formatted_settings[key.lower()].append(lvalue)
+                        # step case
+                        elif type(formatted_settings[key.lower()]) == list:
+                            formatted_settings[key.lower()].append(lvalue)
                     formatted_settings[key.lower()] = lvalue.lower()
         except Exception as error:
             self.list_error.append(error)
