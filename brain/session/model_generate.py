@@ -74,6 +74,10 @@ class Model_Generate():
                     if not len(feature_labels) == feature_count:
                         feature_labels.append(feature[2][0])
                 else:
+                    # general feature labels in every observation
+                    if not len(feature_labels) == feature_count:
+                        feature_labels.append(feature[2][0])
+
                     current_features.append(feature[1][0])
                     grouped_features.append(current_features)
                     observation_labels.append(feature[0][0])
