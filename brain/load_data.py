@@ -106,6 +106,8 @@ class Load_Data(object):
         session = Model_Use(self.data)
 
         # implement class methods
+        my_prediction = session.svm_prediction()
+        return {'result': my_prediction, 'error': None}
 
     ## get_session_type: returns the current session type.
     def get_session_type(self):
