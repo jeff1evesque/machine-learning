@@ -19,9 +19,9 @@ class Model_Use(object):
 
     ## constructor:
     def __init__(self, svm_data):
-        self.svm_data    = svm_data
-        self.svm_session = self.svm_data['data']['settings']['svm_session']
-        self.list_error  = []
+        self.svm_data   = svm_data
+        self.model_id   = self.svm_data['data']['settings']['svm_model_id']
+        self.list_error = []
 
     ## svm_prediction: perform svm prediction with given model, and supplied
     #                  arguments.
@@ -29,12 +29,4 @@ class Model_Use(object):
         # validate input data is json format
         validator = Validate_Settings(sys.svm_data, self.svm_session)
 
-        # validate, and set SVM properties to 'data_creator.py'
-        if (sys.svm_data['json_creator'] == 'load_logic.php'):
-            if (sys.svm_data['data'].get('result', None)):
-                validator.data_validation()
-
-        else:
-            msg = 'Please provide a training dataset in json format'
-            print {'error':msg}
-            sys.exit()
+        Cache_Model().uncache('svm_model', self.model_id)
