@@ -23,8 +23,8 @@ class Model_Use(object):
         self.model_id   = self.svm_data['data']['settings']['svm_model_id']
         self.list_error = []
 
-    ## svm_prediction: perform svm prediction with given model, and supplied
-    #                  arguments.
+    ## svm_prediction: using supplied arguments, return an svm prediction from a
+    #                  determined model.
     #
     #  @prediction_input, a list of arguments required to make an SVM prediction,
     #      against the respective svm model.
