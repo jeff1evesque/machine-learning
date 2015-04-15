@@ -27,13 +27,16 @@ class Restructure_Data(object):
                 for lvalue in self.settings.getlist(key):
                     if key.lower() in formatted_settings:
                         # base case
-                        if type(formatted_settings[key.lower()]) == unicode:
+                        if key.lower() in formatted_settings:
+                            formatted_settings[key.lower()] = lvalue.lower()
+                        # step case 1
+                        elif type(formatted_settings[key.lower()]) == unicode:
                             formatted_settings[key.lower()] = [formatted_settings[key.lower()]]
                             formatted_settings[key.lower()].append(lvalue)
-                        # step case
+                        # step case 2
                         elif type(formatted_settings[key.lower()]) == list:
                             formatted_settings[key.lower()].append(lvalue)
-                    formatted_settings[key.lower()] = lvalue.lower()
+
         except Exception as error:
             self.list_error.append(error)
             return {'data': None, 'error': self.list_error}
