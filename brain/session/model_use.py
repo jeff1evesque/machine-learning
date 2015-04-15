@@ -19,21 +19,27 @@ class Model_Use(object):
 
     ## constructor:
     def __init__(self, svm_data):
-        self.svm_data    = svm_data
-        self.svm_session = self.svm_data['data']['settings']['svm_session']
-        self.list_error  = []
+        self.svm_data   = svm_data
+        self.model_id   = self.svm_data['data']['settings']['svm_model_id']
+        self.list_error = []
 
-    ## CHANGE_METHOD: we will adjust the logic below
-    def CHANGE_METHOD(self):
+    ## svm_prediction: using supplied arguments, return an svm prediction from a
+    #                  determined model.
+    #
+    #  @prediction_input, a list of arguments (floats) required to make an SVM
+    #      prediction, against the respective svm model.
+    def svm_prediction(self, prediction_input):
         # validate input data is json format
         validator = Validate_Settings(sys.svm_data, self.svm_session)
 
-        # validate, and set SVM properties to 'data_creator.py'
-        if (sys.svm_data['json_creator'] == 'load_logic.php'):
-            if (sys.svm_data['data'].get('result', None)):
-                validator.data_validation()
+        # get necessary model
+        svm_title = Cache_Hset.uncache('svm_title', self.model_id)
+        clf = Cache_Model().uncache('svm_model', self.model_id + '_' + svm_title)
 
-        else:
-            msg = 'Please provide a training dataset in json format'
-            print {'error':msg}
-            sys.exit()
+        # get encoded labels
+        encoded_labels = Cache_Model().uncache('svm_labels', self.model_id)
+
+        # perform prediction, and return the result
+        numeric_label = (clf.predict([prediction_input])
+        textual_label = list(encoded_labels.inverse_transform([numeric_label]))
+        return textual_label
