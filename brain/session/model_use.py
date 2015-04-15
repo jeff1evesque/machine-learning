@@ -26,8 +26,8 @@ class Model_Use(object):
     ## svm_prediction: using supplied arguments, return an svm prediction from a
     #                  determined model.
     #
-    #  @prediction_input, a list of arguments required to make an SVM prediction,
-    #      against the respective svm model.
+    #  @prediction_input, a list of arguments (floats) required to make an SVM
+    #      prediction, against the respective svm model.
     def svm_prediction(self, prediction_input):
         # validate input data is json format
         validator = Validate_Settings(sys.svm_data, self.svm_session)
