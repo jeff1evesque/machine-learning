@@ -96,6 +96,7 @@ class Model_Generate():
             # get svm title, and cache svm model
             title = Retrieve_Entity().get_title(self.session_id)['result'][0][0]
             Cache_Model(clf).cache('svm_model', str(self.session_id) + '_' + title)
+            Cache_Hset().cache('svm_title', self.session_id, title)
 
             # cache svm feature labels, with respect to given session id
             Cache_Hset().cache('svm_feature_labels', str(self.session_id), json.dumps(feature_labels))
