@@ -17,13 +17,13 @@ $(document).ready(function() {
     dataset.each(function() {
       if ( typeof $(this).val() === 'undefined' ) {
         flag_dataset = false;
-        return false
+        return false;
       }
     });
-    pInput.each(function() {
+    pInput.each(function() { console.log($(this).val());
       if ( typeof $(this).val() === 'undefined' ) {
         flag_pInput = false;
-        return false
+        return false;
       }
     });
 
