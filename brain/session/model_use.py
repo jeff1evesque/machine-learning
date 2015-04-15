@@ -40,6 +40,6 @@ class Model_Use(object):
         encoded_labels = Cache_Model().uncache('svm_labels', self.model_id)
 
         # perform prediction, and return the result
-        numeric_label = (clf.predict([prediction_input])
+        numeric_label = (clf.predict([prediction_input]))
         textual_label = list(encoded_labels.inverse_transform([numeric_label]))
         return textual_label
