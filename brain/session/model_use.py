@@ -10,6 +10,8 @@
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
 from brain.validator.validate_settings import Validate_Settings
+from brain.cache.cache_hset import Cache_Hset
+from brain.cache.cache_model import Cache_Model
 
 ## Class: Model_Use, explicitly inherit 'new-style' class
 #
