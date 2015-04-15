@@ -123,13 +123,13 @@
         },
       },
       messages: {
-        svm_session: 'Not acceptable values',
+        svm_session: 'Not valid value',
         svm_title: 'Must be nonempty string',
-        svm_dataset_type: 'Not acceptable value',
-        svm_session_id: 'Not acceptable value',
-        svm_model_type: 'Note acceptable value',
-        'svm_indep_variable[]': 'Must be nonempty string',
-        'indep_variable[]': 'Must be nonempty decimal',
+        svm_dataset_type: 'Not valid value',
+        svm_session_id: 'Not valid value',
+        svm_model_type: 'Not valid value',
+        'svm_indep_variable[]': 'Must be valid nonempty string',
+        'indep_variable[]': 'Must be valid nonempty decimal',
       },
     });
   });
