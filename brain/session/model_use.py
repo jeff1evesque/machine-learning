@@ -34,3 +34,6 @@ class Model_Use(object):
         clf = Cache_Model().uncache('svm_model', self.model_id + '_' + svm_title)
 
         # perform prediction, and return the result
+        numeric_label = (clf.predict([prediction_input])
+        textual_label = list(le.inverse_transform([numeric_label]))
+        return textual_label
