@@ -29,5 +29,8 @@ class Model_Use(object):
         # validate input data is json format
         validator = Validate_Settings(sys.svm_data, self.svm_session)
 
+        # get necessary model
         svm_title = Cache_Hset.uncache('svm_title', self.model_id)
         clf = Cache_Model().uncache('svm_model', self.model_id + '_' + svm_title)
+
+        # perform prediction, and return the result
