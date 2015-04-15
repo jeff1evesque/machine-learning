@@ -28,10 +28,7 @@ class Model_Use(object):
     #
     #  @prediction_input, a list of arguments (floats) required to make an SVM
     #      prediction, against the respective svm model.
-    def svm_prediction(self, prediction_input):
-        # validate input data is json format
-        validator = Validate_Settings(sys.svm_data, self.svm_session)
-
+    def svm_prediction(self):
         # get necessary model
         svm_title = Cache_Hset.uncache('svm_title', self.model_id)
         clf = Cache_Model().uncache('svm_model', self.model_id + '_' + svm_title)
