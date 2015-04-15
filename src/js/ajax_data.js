@@ -8,19 +8,27 @@ $(document).ready(function() {
     event.preventDefault();
 
   // Local Variables
-    var dataset   = $('input[name="svm_dataset[]"]');
-    var flag_ajax = true;
+    var dataset      = $('input[name="svm_dataset[]"]');
+    var pInput       = $('input[name="indep_variable[]"]');
+    var flag_dataset = true;
+    var flag_pInput  = true;
 
-  // Undefined 'file upload(s)' sets 'flag_ajax = false'
+  // Check if data supplied
     dataset.each(function() {
       if ( typeof $(this).val() === 'undefined' ) {
-        flag_ajax = false;
-        return false
+        flag_dataset = false;
+        return false;
+      }
+    });
+    pInput.each(function() { console.log($(this).val());
+      if ( typeof $(this).val() === 'undefined' ) {
+        flag_pInput = false;
+        return false;
       }
     });
 
   // AJAX Process
-    if ( flag_ajax ) {
+    if ( flag_dataset || flag_pInput ) {
       $.ajax({
         url: $(this).attr('action'),
         type: 'POST',
