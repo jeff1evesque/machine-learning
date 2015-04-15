@@ -36,7 +36,10 @@ class Model_Use(object):
         svm_title = Cache_Hset.uncache('svm_title', self.model_id)
         clf = Cache_Model().uncache('svm_model', self.model_id + '_' + svm_title)
 
+        # get encoded labels
+        encoded_labels = Cache_Model().uncache('svm_labels', self.model_id)
+
         # perform prediction, and return the result
         numeric_label = (clf.predict([prediction_input])
-        textual_label = list(le.inverse_transform([numeric_label]))
+        textual_label = list(encoded_labels.inverse_transform([numeric_label]))
         return textual_label
