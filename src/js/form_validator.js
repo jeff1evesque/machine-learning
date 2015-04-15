@@ -28,10 +28,24 @@
       else return false;
     });
   jQuery.validator.addMethod(
-    'selectValueInt',
+    'integerOnly',
     function(value, element, parameter) {
       if ( Math.round(parseInt(value)) === parseInt(value) ) return true;
       else return false;
+  });
+  jQuery.validator.addMethod(
+    'numericOnly',
+    function(value, element, parameter) {
+    // validate integers: cannot start with 0 (except trivial 0)
+      if (value.match(/^(0|[1-9][0-9]*)$/)) {
+        return true;
+    // validate floats: cannot start with 0 (except trivial 0.x)
+      } else if (value.match(/^(0|[1-9][0-9]*).\d+$/)) {
+        return true;
+    // invalid condition
+      } else {
+        return false;
+      }
   });
   jQuery.validator.addMethod(
     'textOnly',
@@ -85,11 +99,11 @@
         },
         svm_session_id: {
           required: true,
-          selectValueInt: true
+          integerOnly: true
         },
         svm_model_id: {
           required: true,
-          selectValueInt: true
+          integerOnly: true
         },
         svm_dataset_type: {
           required: true,
@@ -103,14 +117,19 @@
           required: true,
           textOnly: true
         },
+        'indep_variable[]': {
+          required: true,
+          numericOnly: true
+        },
       },
       messages: {
-        svm_session: 'Not acceptable values',
+        svm_session: 'Not valid value',
         svm_title: 'Must be nonempty string',
-        svm_dataset_type: 'Not acceptable value',
-        svm_session_id: 'Not acceptable value',
-        svm_model_type: 'Note acceptable value',
-        'svm_indep_variable[]': 'Must be nonempty string',
+        svm_dataset_type: 'Not valid value',
+        svm_session_id: 'Not valid value',
+        svm_model_type: 'Not valid value',
+        'svm_indep_variable[]': 'Must be valid nonempty string',
+        'indep_variable[]': 'Must be valid nonempty decimal',
       },
     });
   });
