@@ -26,7 +26,7 @@ class Model_Use(object):
     ## svm_prediction: perform svm prediction with given model, and supplied
     #                  arguments.
     #
-    #  @prediction_input, a list of arguments required to make an SVM prediction
+    #  @prediction_input, a list of arguments required to make an SVM prediction,
     #      against the respective svm model.
     def svm_prediction(self, prediction_input):
         # validate input data is json format
