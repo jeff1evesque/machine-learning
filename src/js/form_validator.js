@@ -36,8 +36,13 @@
   jQuery.validator.addMethod(
     'numericOnly',
     function(value, element, parameter) {
-      if ( $.isNumeric(float(value)) ) return true;
-      else return false;
+      if (value.match(/^\d+$/)) {
+        return true;
+      } else if(value.match(/^\d*\.\d+$/)) {
+        return true;
+      } else {
+        return false;
+      }
   });
   jQuery.validator.addMethod(
     'textOnly',
