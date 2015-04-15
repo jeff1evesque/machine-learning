@@ -103,7 +103,7 @@ class Load_Data(object):
     def load_model_use(self):
 
         # instantiate class
-        session = Model_Use( self.data )
+        session = Model_Use(self.data)
 
         # implement class methods
 
