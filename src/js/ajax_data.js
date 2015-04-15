@@ -29,7 +29,6 @@ $(document).ready(function() {
 
   // AJAX Process
     if ( flag_dataset || flag_pInput ) {
-      console.log(pInput);
       $.ajax({
         url: $(this).attr('action'),
         type: 'POST',
