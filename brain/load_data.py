@@ -103,9 +103,12 @@ class Load_Data(object):
     def load_model_use(self):
 
         # instantiate class
-        session = Model_Use( self.data )
+        session = Model_Use(self.data)
 
         # implement class methods
+        my_prediction = session.svm_prediction()
+        if my_prediction['error']: return {'result': None, 'error': my_prediction['error']}
+        else: return {'result': my_prediction, 'error': None}
 
     ## get_session_type: returns the current session type.
     def get_session_type(self):
