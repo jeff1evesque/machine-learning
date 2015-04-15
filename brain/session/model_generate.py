@@ -93,7 +93,7 @@ class Model_Generate():
             clf = svm.SVC()
             clf.fit(grouped_features, encoded_labels)
 
-            # get svm title, and cache svm model
+            # get svm title, and cache (model, title)
             title = Retrieve_Entity().get_title(self.session_id)['result'][0][0]
             Cache_Model(clf).cache('svm_model', str(self.session_id) + '_' + title)
             Cache_Hset().cache('svm_title', self.session_id, title)
