@@ -25,7 +25,7 @@
 
     // Append to DOM
       if (data.error) {
-        $('.fieldset_session_analysis').append('<div class="error">' + data.error + '</div>');
+        $('.fieldset_session_predict').append('<div class="error">' + data.error + '</div>');
       }
       else {
           var obj_form = '\
@@ -40,7 +40,7 @@
           obj_form += '</fieldset>';
       }
 
-      $('.fieldset_session_analysis').append(obj_form);
+      $('.fieldset_session_predict').append(obj_form);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: '+errorThrown);
