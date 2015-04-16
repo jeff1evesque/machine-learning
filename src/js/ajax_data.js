@@ -20,7 +20,7 @@ $(document).ready(function() {
         return false;
       }
     });
-    pInput.each(function() { console.log($(this).val());
+    pInput.each(function() {
       if ( typeof $(this).val() === 'undefined' ) {
         flag_pInput = false;
         return false;
