@@ -14,10 +14,10 @@ from brain.validator.validate_settings import Validate_Settings
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 
-## Class: Model_Predict, explicitly inherit 'new-style' class
+## Class: Model_Predict, inherit base methods from superclass 'Base'
 #
 #  Note: this class is invoked within 'load_data.py'
-class Model_Predict(object):
+class Model_Predict(Base):
 
     ## constructor:
     def __init__(self, svm_data):
