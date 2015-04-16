@@ -40,6 +40,8 @@
           obj_form += '</fieldset>';
       }
 
+    // Remove previous input, add new instance
+      $('.fieldset_prediction_input').remove();
       $('.fieldset_session_predict').append(obj_form);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
