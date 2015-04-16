@@ -102,11 +102,6 @@ def jsonschema_model_use():
                 'type': 'string',
                 'enum': ['training', 'analysis']
             },
-            'svm_indep_variable': {
-                'type': 'array',
-                'items': { 'type': 'string' },
-                'minItems': 1
-            },
         },
     }
     return schema

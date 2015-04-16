@@ -113,10 +113,6 @@
           required: true,
           equals: ['classification', 'regression']
         },
-        'svm_indep_variable[]': {
-          required: true,
-          textOnly: true
-        },
         'prediction_input[]': {
           required: true,
           numericOnly: true
@@ -128,7 +124,6 @@
         svm_dataset_type: 'Not valid value',
         svm_session_id: 'Not valid value',
         svm_model_type: 'Not valid value',
-        'svm_indep_variable[]': 'Must be valid nonempty string',
         'prediction_input[]': 'Must be valid nonempty decimal',
       },
     });
