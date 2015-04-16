@@ -7,7 +7,7 @@ import sys
 from brain.session.data_append import Data_Append
 from brain.session.data_new import Data_New
 from brain.session.model_generate import Model_Generate
-from brain.session.model_use import Model_Use
+from brain.session.model_predict import Model_Predict
 
 ## Class: Load_Data, explicitly inherit 'new-style' class
 class Load_Data(object):
@@ -15,7 +15,7 @@ class Load_Data(object):
     ## constructor:
     def __init__(self, data):
         self.data         = data
-        self.session_list = ['data_new', 'data_append', 'model_generate', 'model_use']
+        self.session_list = ['data_new', 'data_append', 'model_generate', 'model_predict']
         self.list_error   = []
 
     ## load_data_new: redirect input to 'session_data_new.py'
@@ -99,11 +99,11 @@ class Load_Data(object):
         if session.return_error: return False
         else: return 'Model properly generated'
 
-    ## load_model_use: redirect input to 'session_model_use.py'
-    def load_model_use(self):
+    ## load_model_predict: redirect input to 'session_model_predict.py'
+    def load_model_predict(self):
 
         # instantiate class
-        session = Model_Use(self.data)
+        session = Model_Predict(self.data)
 
         # implement class methods
         my_prediction = session.svm_prediction()
@@ -115,7 +115,7 @@ class Load_Data(object):
         session_type = self.data['data']['settings']['svm_session']
         if session_type in self.session_list: return {'session_type': session_type, 'error': None}
         else:
-            error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_use\'.'
+            error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_predict\'.'
             self.list_error.append(error)
             return {'session_type': None, 'error': error}
 
