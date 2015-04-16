@@ -31,7 +31,7 @@ class Model_Use(object):
     #      prediction, against the respective svm model.
     def svm_prediction(self):
         # local variables
-        prediction_input = self.svm_data['data']['settings']['indep_variable[]']
+        prediction_input = self.svm_data['data']['settings']['prediction_input[]']
 
         # get necessary model
         svm_title = Cache_Hset().uncache('svm_title', self.model_id)['result']
