@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-## @model_use.py
+## @model_predict.py
 #  This file receives data (i.e. settings) required to query from the database,
 #      a previously stored SVM model, generated from 'model_generate.py'. The
 #      determined SVM Model is then used for analysis based on the input data
@@ -13,10 +13,10 @@ from brain.validator.validate_settings import Validate_Settings
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 
-## Class: Model_Use, explicitly inherit 'new-style' class
+## Class: Model_Predict, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'load_data.py'
-class Model_Use(object):
+class Model_Predict(object):
 
     ## constructor:
     def __init__(self, svm_data):
