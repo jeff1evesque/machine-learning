@@ -100,7 +100,7 @@ $(document).ready(function() {
       else $('.svm_form_submit').remove();
     });
 
-  // Append 'Prediction Input' Fieldset
+  // Append 'Prediction Input' Fieldset (partially define in ajax_feature.js)
     $('.fieldset_session_predict').on('change', 'select[name="svm_model_id"]', function() {
       if ( $('select[name="svm_model_id"]').val() ) {
         feature_properties();
