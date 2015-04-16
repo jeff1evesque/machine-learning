@@ -34,7 +34,7 @@
             ';
 
             $.each($.parseJSON(data), function(index, value) {
-                obj_form += '<input type="text" name="indep_variable[]" placeholder="' + value + '">';
+                obj_form += '<input type="text" name="prediction_input[]" placeholder="' + value + '">';
             });
 
           obj_form += '</fieldset>';
