@@ -18,7 +18,7 @@ class Load_Data(object):
         self.session_list = ['data_new', 'data_append', 'model_generate', 'model_predict']
         self.list_error   = []
 
-    ## load_data_new: redirect input to 'session_data_new.py'
+    ## load_data_new: redirect input to 'data_new.py'
     def load_data_new(self):
 
         # instantiate class
@@ -52,7 +52,7 @@ class Load_Data(object):
             print session.get_errors()
             return None
 
-    ## load_data_append: redirect input to 'session_data_append.py'
+    ## load_data_append: redirect input to 'data_append.py'
     def load_data_append(self):
 
         # instantiate class
@@ -86,7 +86,7 @@ class Load_Data(object):
             print session.get_errors()
             return None
 
-    ## load_model_generate: redirect input to 'session_model_generate.py'
+    ## load_model_generate: redirect input to 'model_generate.py'
     def load_model_generate(self):
 
         # instantiate class
@@ -99,7 +99,7 @@ class Load_Data(object):
         if session.return_error: return False
         else: return 'Model properly generated'
 
-    ## load_model_predict: redirect input to 'session_model_predict.py'
+    ## load_model_predict: redirect input to 'model_predict.py'
     def load_model_predict(self):
 
         # instantiate class
