@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 ## @load_data.py
-#  This file allocates provided input to respective 'session_xxx_xxx.py' script,
-#      and generates a return object as required.
+#  This file allocates input to respective 'data_xxx.py', 'model_xx.py',
+#      and generates a return object, when required.
 import sys
 from brain.session.data_append import Data_Append
 from brain.session.data_new import Data_New
