@@ -4,7 +4,7 @@
 #  This script performs validation on session settings. 
 import sys
 from jsonschema.validators import Draft4Validator
-from brain.schema.jsonschema_definition import jsonschema_data_new, jsonschema_data_append, jsonschema_model_generate, jsonschema_model_use
+from brain.schema.jsonschema_definition import jsonschema_data_new, jsonschema_data_append, jsonschema_model_generate, jsonschema_model_predict
 
 ## Class: Validate_Settings, explicitly inherit 'new-style' class
 #
@@ -18,7 +18,7 @@ class Validate_Settings(object):
         self.svm_session  = svm_session
 
     ## validate: this method validates the SVM settings for the 'data_new',
-    #            'data_append', 'model_generate', or 'model_use' sessions.
+    #            'data_append', 'model_generate', or 'model_predict' sessions.
     #
     #  Note: This method does not validate the associated 'file upload(s)'. The
     #        latter is validated via 'validate_mime.py', and 'validate_dataset.py'.
@@ -42,7 +42,7 @@ class Validate_Settings(object):
 
         # validation on 'model_generate' session
 
-        # validation on 'model_use' session
+        # validation on 'model_predict' session
         elif self.svm_session == 'model_use':
             try:
                 Draft4Validator(jsonschema_model_use()).validate(self.svm_settings)

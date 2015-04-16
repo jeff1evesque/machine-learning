@@ -5,7 +5,7 @@
 #      a previously stored session, involving one or more stored dataset uploads,
 #      and generates an SVM model, respectively. The new SVM model, is stored
 #      into respective database table(s), which later can be retrieved within
-#      'model_use.py'.
+#      'model_predict.py'.
 from brain.database.retrieve_feature import Retrieve_Feature
 from brain.database.retrieve_entity import Retrieve_Entity
 from brain.cache.cache_hset import Cache_Hset

@@ -28,7 +28,7 @@ $(document).ready(function() {
           </fieldset>\
         ';
     }
-    else if ( $(this).val().toLowerCase() == 'model_use' ) {
+    else if ( $(this).val().toLowerCase() == 'model_predict' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_predict">\
             <legend>Analysis</legend>\
@@ -87,7 +87,7 @@ $(document).ready(function() {
     }
 
   // Model IDs: for 'svm_model_id' (defined in ajax_model.js)
-    if ( $.inArray( $(this).val(), ['model_use'] ) !== -1 ) {
+    if ( $.inArray( $(this).val(), ['model_predict'] ) !== -1 ) {
       model_id();
     }
 
@@ -105,8 +105,8 @@ $(document).ready(function() {
       if ( $('select[name="svm_model_id"]').val() ) {
         feature_properties();
 
-        $('.fieldset_session_predict').on('change', 'input[name="indep_variable[]"]', function() {
-          var flag_field = field_determinant( $('input[name="indep_variable[]"]') );
+        $('.fieldset_session_predict').on('change', 'input[name="prediction_input[]"]', function() {
+          var flag_field = field_determinant( $('input[name="prediction_input[]"]') );
 
           if( flag_field ) {
             obj_form.submit = '<input type="submit" class="svm_form_submit">';

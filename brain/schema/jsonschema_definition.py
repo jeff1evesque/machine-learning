@@ -39,7 +39,7 @@ def jsonschema_data_new():
             },
             'svm_session': {
                 'type': 'string',
-                'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
+                'enum': ['data_new', 'data_append', 'model_generate', 'model_predict']
             },
         },
     }
@@ -64,7 +64,7 @@ def jsonschema_data_append():
             },
             'svm_session': {
                 'type': 'string',
-                'enum': ['data_new', 'data_append', 'model_generate', 'model_use']
+                'enum': ['data_new', 'data_append', 'model_generate', 'model_predict']
             },
         },
     }
@@ -84,12 +84,13 @@ def jsonschema_model_generate():
     }
     return schema
 
-## jsonschema_model_use(): contains the jsonschema for the 'model_use' session.
-#                          Therefore, this schema validates the properties
-#                          describing the session, not the dataset itself.
+## jsonschema_model_predict(): contains the jsonschema for the 'model_predict'
+#                              session. Therefore, this schema validates the
+#                              properties describing the session, not the dataset
+#                              itself.
 #
 #  Note: This validation schema is used in the corresponding validator_xxx.py.
-def jsonschema_model_use():
+def jsonschema_model_predict():
     schema = {
         'type': 'object',
         'properties': {

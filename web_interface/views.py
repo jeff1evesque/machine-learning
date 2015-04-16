@@ -40,7 +40,7 @@ def load_data():
             if session_type == 'data_new': response = loader.load_data_new()
             elif session_type == 'data_append': response = loader.load_data_append()
             elif session_type == 'model_generate': response = loader.load_model_generate()
-            elif session_type == 'model_use': response = loader.load_model_use()
+            elif session_type == 'model_predict': response = loader.load_model_predict()
             else: response = loader.get_errors()
 
         else: response = loader.get_errors()
