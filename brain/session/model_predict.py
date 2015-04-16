@@ -9,6 +9,7 @@
 #  Note: the term 'dataset' used throughout various comments in this file,
 #        synonymously implies the user supplied 'file upload(s)', and XML url
 #        references.
+from brain.session.base import Base
 from brain.validator.validate_settings import Validate_Settings
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
