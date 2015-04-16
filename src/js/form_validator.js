@@ -117,7 +117,7 @@
           required: true,
           textOnly: true
         },
-        'indep_variable[]': {
+        'prediction_input[]': {
           required: true,
           numericOnly: true
         },
@@ -129,7 +129,7 @@
         svm_session_id: 'Not valid value',
         svm_model_type: 'Not valid value',
         'svm_indep_variable[]': 'Must be valid nonempty string',
-        'indep_variable[]': 'Must be valid nonempty decimal',
+        'prediction_input[]': 'Must be valid nonempty decimal',
       },
     });
   });
