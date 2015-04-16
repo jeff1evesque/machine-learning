@@ -9,7 +9,7 @@ $(document).ready(function() {
 
   // Local Variables
     var dataset      = $('input[name="svm_dataset[]"]');
-    var pInput       = $('input[name="indep_variable[]"]');
+    var pInput       = $('input[name="prediction_input[]"]');
     var flag_dataset = true;
     var flag_pInput  = true;
 
