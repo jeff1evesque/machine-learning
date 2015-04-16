@@ -91,7 +91,7 @@
       rules: {
         svm_session: {
           required: true,
-          equals: ['data_new', 'data_append', 'model_use', 'model_generate']
+          equals: ['data_new', 'data_append', 'model_predict', 'model_generate']
         },
         svm_title: {
           required: true,
