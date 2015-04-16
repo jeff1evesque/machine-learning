@@ -105,8 +105,8 @@ $(document).ready(function() {
       if ( $('select[name="svm_model_id"]').val() ) {
         feature_properties();
 
-        $('.fieldset_session_predict').on('change', 'input[name="indep_variable[]"]', function() {
-          var flag_field = field_determinant( $('input[name="indep_variable[]"]') );
+        $('.fieldset_session_predict').on('change', 'input[name="prediction_input[]"]', function() {
+          var flag_field = field_determinant( $('input[name="prediction_input[]"]') );
 
           if( flag_field ) {
             obj_form.submit = '<input type="submit" class="svm_form_submit">';
