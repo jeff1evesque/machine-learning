@@ -15,10 +15,10 @@ from sklearn import svm, preprocessing
 import numpy
 import json
 
-## Class: Model_Generate
+## Class: Model_Generate, inherit base methods from superclass 'Base'
 #
 #  Note: this class is invoked within 'load_data.py'
-class Model_Generate():
+class Model_Generate(Base):
 
     ## constructor:
     def __init__(self, svm_data):
