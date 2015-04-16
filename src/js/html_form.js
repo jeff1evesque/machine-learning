@@ -28,7 +28,7 @@ $(document).ready(function() {
           </fieldset>\
         ';
     }
-    else if ( $(this).val().toLowerCase() == 'model_use' ) {
+    else if ( $(this).val().toLowerCase() == 'model_predict' ) {
       obj_form.session = '\
           <fieldset class="fieldset_session_predict">\
             <legend>Analysis</legend>\
@@ -87,7 +87,7 @@ $(document).ready(function() {
     }
 
   // Model IDs: for 'svm_model_id' (defined in ajax_model.js)
-    if ( $.inArray( $(this).val(), ['model_use'] ) !== -1 ) {
+    if ( $.inArray( $(this).val(), ['model_predict'] ) !== -1 ) {
       model_id();
     }
 
