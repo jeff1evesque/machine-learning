@@ -30,7 +30,7 @@ $(document).ready(function() {
     }
     else if ( $(this).val().toLowerCase() == 'model_use' ) {
       obj_form.session = '\
-          <fieldset class="fieldset_session_analysis">\
+          <fieldset class="fieldset_session_predict">\
             <legend>Analysis</legend>\
             <fieldset class="fieldset_dataset_type">\
               <legend>Configurations</legend>\
@@ -79,7 +79,7 @@ $(document).ready(function() {
         ';
     }
     else obj_form.session = null;
-    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_analysis', '.fieldset_session_generate', '.fieldset_session_data_upload', '.svm_form_submit']);
+    build_form('.fieldset_session_type', obj_form.session, ['.fieldset_session_predict', '.fieldset_session_generate', '.fieldset_session_data_upload', '.svm_form_submit']);
 
   // Session Titles: for 'svm_session_id' (defined in ajax_session.js)
     if ( $.inArray( $(this).val(), ['data_append', 'model_generate'] ) !== -1 ) {
@@ -101,16 +101,16 @@ $(document).ready(function() {
     });
 
   // Append 'Prediction Input' Fieldset
-    $('.fieldset_session_analysis').on('change', 'select[name="svm_model_id"]', function() {
+    $('.fieldset_session_predict').on('change', 'select[name="svm_model_id"]', function() {
       if ( $('select[name="svm_model_id"]').val() ) {
         feature_properties();
 
-        $('.fieldset_session_analysis').on('change', 'input[name="indep_variable[]"]', function() {
+        $('.fieldset_session_predict').on('change', 'input[name="indep_variable[]"]', function() {
           var flag_field = field_determinant( $('input[name="indep_variable[]"]') );
 
           if( flag_field ) {
             obj_form.submit = '<input type="submit" class="svm_form_submit">';
-            build_form('.fieldset_session_analysis', obj_form.submit, ['.svm_form_submit']);
+            build_form('.fieldset_session_predict', obj_form.submit, ['.svm_form_submit']);
           }
           else $('.svm_form_submit').remove();
         });
