@@ -4,6 +4,7 @@
 #  This file serializes, and deserializes an SVM object in memory.
 from six.moves import cPickle as pickle
 from sklearn import svm
+import numpy
 
 ## Class: Serialize_Model, explicitly inherit 'new-style class.
 #
