@@ -22,8 +22,8 @@ class Model_Predict(Base):
     ## constructor: define class properties using the superclass 'Base'
     #               constructor, along with the constructor in this subclass.
     #
-    #  @super(), implement 'Base', and 'Base_Data' superclass constructor within
-    #      this child class constructor.
+    #  @super(), implement 'Base' superclass constructor within this child class
+    #      constructor.
     #
     #  Note: the superclass constructor expects the same 'svm_data' argument.
     def __init__(self, svm_data):
