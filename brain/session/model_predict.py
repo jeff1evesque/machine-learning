@@ -21,6 +21,7 @@ class Model_Predict(Base):
 
     ## constructor:
     def __init__(self, svm_data):
+        super(Model_Predict, self).__init__(svm_data)
         self.svm_data   = svm_data
         self.model_id   = self.svm_data['data']['settings']['svm_model_id']
         self.list_error = []
