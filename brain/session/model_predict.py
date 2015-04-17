@@ -51,4 +51,4 @@ class Model_Predict(Base):
         # perform prediction, and return the result
         numeric_label = (clf.predict([prediction_input]))
         textual_label = list(encoded_labels.inverse_transform([numeric_label]))
-        return {'result': str(textual_label[0]), 'error': None}
+        return {'result': textual_label[0][0], 'error': None}
