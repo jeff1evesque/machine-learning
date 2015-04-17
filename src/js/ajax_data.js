@@ -64,6 +64,7 @@ $(document).ready(function() {
             $('.fieldset_session_predict').append(obj_result);
             $('.result').append(data.result.error);
           }
+
           else if (data.result.result) {
             $('.fieldset_prediction_result').remove();
             $('.fieldset_session_predict').append(obj_result);
