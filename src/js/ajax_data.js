@@ -52,23 +52,22 @@ $(document).ready(function() {
 
       // JSON Object from Server
         if (data.result) {
+          var = obj_result = '\
+                  <fieldset class="fieldset_prediction_result">\
+                    <legend>Prediction Result</legend>\
+                    <p class="result"></p>\
+                  </fieldset>\
+                ';
+
           if (data.result.error) {
-            obj_result = '\
-                <fieldset class="fieldset_prediction_result">\
-                  <legend>Prediction Result</legend>\
-                  <p class="result">data.result.error</p>\
-                </fieldset>\
-              ';
+            $('.fieldset_prediction_result').remove();
             $('.fieldset_session_predict').append(obj_result);
+            $('.result').append(data.result.error);
           }
           else if (data.result.result) {
-            obj_result = '\
-                <fieldset class="fieldset_prediction_result">\
-                  <legend>Prediction Result</legend>\
-                  <p class="result">data.result.result</p>\
-                </fieldset>\
-              ';
+            $('.fieldset_prediction_result').remove();
             $('.fieldset_session_predict').append(obj_result);
+            $('.result').append(data.result.result);
           }
         }
         else {
