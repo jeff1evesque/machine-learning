@@ -41,7 +41,7 @@ class Validate_Settings(object):
                 list_error.append(str(error))
 
         # validation on 'model_generate' session
-        if self.svm_session = 'model_generate':
+        if self.svm_session == 'model_generate':
             try:
                 Draft4Validator(jsonschema_model_generate()).validate(self.svm_settings)
             except Exception, error:
