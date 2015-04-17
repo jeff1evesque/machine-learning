@@ -93,7 +93,10 @@ class Load_Data(object):
         session = Model_Generate(self.data)
 
         # generate model
-        session.generate_model()
+        if not session.validate_arg_none():
+            session.validate_svm_settings()
+            session.check()
+            session.generate_model()
 
         # return
         if session.return_error: return False
@@ -106,9 +109,13 @@ class Load_Data(object):
         session = Model_Predict(self.data)
 
         # implement class methods
-        my_prediction = session.svm_prediction()
-        if my_prediction['error']: return {'result': None, 'error': my_prediction['error']}
-        else: return {'result': my_prediction, 'error': None}
+        if not session.validate_arg_none():
+            session.validate_svm_settings()
+            session.check()
+
+            my_prediction = session.svm_prediction()
+            if my_prediction['error']: return {'result': None, 'error': my_prediction['error']}
+            else: return {'result': my_prediction, 'error': None}
 
     ## get_session_type: returns the current session type.
     def get_session_type(self):
