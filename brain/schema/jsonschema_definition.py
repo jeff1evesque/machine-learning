@@ -39,7 +39,7 @@ def jsonschema_data_new():
             },
             'svm_session': {
                 'type': 'string',
-                'enum': ['data_new', 'data_append', 'model_generate', 'model_predict']
+                'enum': ['data_new']
             },
         },
     }
@@ -64,7 +64,7 @@ def jsonschema_data_append():
             },
             'svm_session': {
                 'type': 'string',
-                'enum': ['data_new', 'data_append', 'model_generate', 'model_predict']
+                'enum': ['data_append']
             },
         },
     }
@@ -106,14 +106,9 @@ def jsonschema_model_predict():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_title': {'type': 'string'},
-            'svm_model_type': {
-                'type': 'string',
-                'enum': ['classification', 'regression']
-            },
             'svm_session': {
                 'type': 'string',
-                'enum': ['training', 'analysis']
+                'enum': ['model_predict']
             },
         },
     }
