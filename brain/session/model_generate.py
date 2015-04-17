@@ -22,6 +22,7 @@ class Model_Generate(Base):
 
     ## constructor:
     def __init__(self, svm_data):
+        super(Model_Generate, self).__init__(svm_data)
         self.svm_data        = svm_data
         self.session_id      = self.svm_data['data']['settings']['svm_session_id']
         self.feature_request = Retrieve_Feature()
