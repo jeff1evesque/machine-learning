@@ -37,7 +37,7 @@
     'numericOnly',
     function(value, element, parameter) {
     // validate floats: cannot start with 0 (except trivial 0.x, or 0)
-      if (value.match(/^-?(0|[1-9][0-9]*)?.?\d+$/)) {
+      if (value.match(/^(0|[1-9][0-9]*)?.?\d+$/)) {
         return true;
     // invalid condition
       } else {
