@@ -80,6 +80,18 @@ def jsonschema_model_generate():
     schema = {
         'type': 'object',
         'properties': {
+            'svm_session_id': {
+                'type': 'string',
+                'minLength': 1
+            },
+            'svm_model_type': {
+                'type': 'string',
+                'enum': ['classification', 'regression']
+            },
+            'svm_session': {
+                'type': 'string',
+                'enum': ['model_generate']
+            },
         },
     }
     return schema
