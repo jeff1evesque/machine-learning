@@ -95,6 +95,7 @@ class Load_Data(object):
         # generate model
         if not session.validate_arg_none():
             session.validate_svm_settings()
+            session.check()
             session.generate_model()
 
         # return
@@ -110,6 +111,8 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none():
             session.validate_svm_settings()
+            session.check()
+
             my_prediction = session.svm_prediction()
             if my_prediction['error']: return {'result': None, 'error': my_prediction['error']}
             else: return {'result': my_prediction, 'error': None}
