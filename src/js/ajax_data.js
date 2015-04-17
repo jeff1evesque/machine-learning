@@ -51,8 +51,30 @@ $(document).ready(function() {
       }).done(function(data) {
 
       // JSON Object from Server
-        json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
-        console.log( 'JSON object from Server: ' + json_server );
+        if (data.result) {
+          if (data.result.error) {
+            obj_result = '\
+                <fieldset class="fieldset_prediction_result">\
+                  <legend>Prediction Result</legend>\
+                  <p class="result">data.result.error</p>\
+                </fieldset>\
+              ';
+            $('.fieldset_session_predict').append(obj_result);
+          }
+          else if (data.result.result) {
+            obj_result = '\
+                <fieldset class="fieldset_prediction_result">\
+                  <legend>Prediction Result</legend>\
+                  <p class="result">data.result.result</p>\
+                </fieldset>\
+              ';
+            $('.fieldset_session_predict').append(obj_result);
+          }
+        }
+        else {
+          json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
+          console.log( 'JSON object from Server: ' + json_server );
+        }
 
       // Remove AJAX Overlay
         $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
