@@ -48,9 +48,9 @@ class Validate_Settings(object):
                 list_error.append(str(error))
 
         # validation on 'model_predict' session
-        elif self.svm_session == 'model_use':
+        elif self.svm_session == 'model_predict':
             try:
-                Draft4Validator(jsonschema_model_use()).validate(self.svm_settings)
+                Draft4Validator(jsonschema_model_predict()).validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
