@@ -19,8 +19,15 @@ from brain.cache.cache_model import Cache_Model
 #  Note: this class is invoked within 'load_data.py'
 class Model_Predict(Base):
 
-    ## constructor:
+    ## constructor: define class properties using the superclass 'Base'
+    #               constructor, along with the constructor in this subclass.
+    #
+    #  @super(), implement 'Base' superclass constructor within this child class
+    #      constructor.
+    #
+    #  Note: the superclass constructor expects the same 'svm_data' argument.
     def __init__(self, svm_data):
+        super(Model_Predict, self).__init__(svm_data)
         self.svm_data   = svm_data
         self.model_id   = self.svm_data['data']['settings']['svm_model_id']
         self.list_error = []
