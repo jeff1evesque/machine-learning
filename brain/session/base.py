@@ -27,10 +27,9 @@ class Base(object):
 
     ## validate_svm_settings: validate svm session settings (not dataset).
     def validate_svm_settings(self):
-        validator = Validate_Settings(self.svm_data, self.svm_session)
-        validator.validate()
+        my_validator = Validate_Settings(self.svm_data, self.svm_session).validate()
 
-        if validator.validate()['error'] != None:
+        if my_validator['error'] != None:
             self.list_error.append(validator.validate()['error'])
 
     ## get_errors: return appended error messages.
