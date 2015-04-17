@@ -14,7 +14,7 @@ class Serialize_Model(object):
     ## constructor
     def __init__(self, model):
         self.model = model
-        self.acceptable = [svm.classes.SVC, numpy.ndarray]
+        self.acceptable = [svm.classes.SVC, preprocessing.label.LabelEncoder]
 
     ## serialize: serializes the provided object.
     def serialize(self):
