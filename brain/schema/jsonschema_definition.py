@@ -106,11 +106,6 @@ def jsonschema_model_predict():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_title': {'type': 'string'},
-            'svm_model_type': {
-                'type': 'string',
-                'enum': ['classification', 'regression']
-            },
             'svm_session': {
                 'type': 'string',
                 'enum': ['model_predict']
