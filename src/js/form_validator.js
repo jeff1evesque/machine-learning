@@ -44,7 +44,7 @@
       else if (value.match(/^-?(0|[1-9][0-9]*)$/)) {
         return true;
     // validate floats: cannot start with 0 (except trivial 0.x)
-      } else if (value.match(/^-?(0|[1-9][0-9]*).\d+$/)) {
+      } else if (value.match(/^-?(0|[1-9][0-9]*)?\.\d+$/)) {
         return true;
     // invalid condition: general
       } else {
