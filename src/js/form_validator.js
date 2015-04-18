@@ -37,7 +37,7 @@
     'numericOnly',
     function(value, element, parameter) {
     // invalid condition: -0, and -0.0
-      if (value.match(/^-?(0)?.?(0)/)) {
+      if (value.match(/^-0*.0*$/)) {
         return false;
       }
     // validate integers: cannot start with 0 (except trivial 0)
