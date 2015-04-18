@@ -46,7 +46,7 @@
     // validate floats: cannot start with 0 (except trivial 0.x)
       } else if (value.match(/^-?(0|[1-9][0-9]*).\d+$/)) {
         return true;
-    // invalid condition
+    // invalid condition: general
       } else {
         return false;
       }
