@@ -36,8 +36,11 @@
   jQuery.validator.addMethod(
     'numericOnly',
     function(value, element, parameter) {
-    // validate floats: cannot start with 0 (except trivial 0.x, or 0)
-      if (value.match(/^(0|[1-9][0-9]*)?.?\d+$/)) {
+    // validate integers: cannot start with 0 (except trivial 0)
+      if (value.match(/^-?(0|[1-9][0-9]*)$/)) {
+        return true;
+    // validate floats: cannot start with 0 (except trivial 0.x)
+      } else if (value.match(/^-?(0|[1-9][0-9]*).\d+$/)) {
         return true;
     // invalid condition
       } else {
