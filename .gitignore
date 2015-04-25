@@ -12,6 +12,8 @@
 !__init__.py
 !app.py
 !license.md
+!Vagrantfile
+!/manifests/
 
 # Ignore and don't commit the following directories
 /web_interface/static/js/
