@@ -149,7 +149,7 @@ class Convert_Upload(object):
         dataset = xmltodict.parse(self.svm_file)
 
         # build 'list_dataset'
-        for dep_variable in dataset['dataset']['entity']:
+        for dep_variable in dataset['dataset']['observation']:
             dep_variable_label = dep_variable['dependent-variable']
 
             validate = Validate_Dataset(dep_variable_label)

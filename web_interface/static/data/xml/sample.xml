@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 
 <dataset>
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-1</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -31,9 +31,9 @@
       <label>indep-variable-7</label>
       <value>25</value>
     </independent-variable>
-  </entity>
+  </observation>
 
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-2</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -63,9 +63,9 @@
       <label>indep-variable-7</label>
       <value>31</value>
     </independent-variable>
-  </entity>
+  </observation>
 
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-3</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -95,5 +95,5 @@
       <label>indep-variable-7</label>
       <value>24</value>
     </independent-variable>
-  </entity>
+  </observation>
 </dataset>
