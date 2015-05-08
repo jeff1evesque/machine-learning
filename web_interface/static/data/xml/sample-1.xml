@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 
 <dataset>
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-1</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -31,9 +31,9 @@
       <label>indep-variable-3</label>
       <value>0.432</value>
     </independent-variable>
-  </entity>
+  </observation>
 
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-4</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -63,9 +63,9 @@
       <label>indep-variable-3</label>
       <value>0.743</value>
     </independent-variable>
-  </entity>
+  </observation>
 
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-5</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -95,9 +95,9 @@
       <label>indep-variable-3</label>
       <value>0.488</value>
     </independent-variable>
-  </entity>
+  </observation>
 
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-3</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -127,9 +127,9 @@
       <label>indep-variable-3</label>
       <value>0.832</value>
     </independent-variable>
-  </entity>
+  </observation>
 
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-5</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -159,9 +159,9 @@
       <label>indep-variable-3</label>
       <value>0.638</value>
     </independent-variable>
-  </entity>
+  </observation>
 
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-1</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -191,9 +191,9 @@
       <label>indep-variable-3</label>
       <value>0.488</value>
     </independent-variable>
-  </entity>
+  </observation>
 
-  <entity>
+  <observation>
     <dependent-variable>dep-variable-1</dependent-variable>
     <independent-variable>
       <label>indep-variable-1</label>
@@ -223,5 +223,5 @@
       <label>indep-variable-3</label>
       <value>0.648</value>
     </independent-variable>
-  </entity>
+  </observation>
 </dataset>
