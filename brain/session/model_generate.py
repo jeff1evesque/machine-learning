@@ -103,12 +103,12 @@ class Model_Generate(Base):
 
             # get svm title, and cache (model, encoded labels, title)
             title = Retrieve_Entity().get_title(self.session_id)['result'][0][0]
-            Cache_Model(clf).cache('svm_model', str(self.session_id) + '_' + title)
-            Cache_Model(label_encoder).cache('svm_labels', self.session_id)
-            Cache_Hset().cache('svm_title', self.session_id, title)
+            Cache_Model(clf).cache('svm_rbf_model', str(self.session_id) + '_' + title)
+            Cache_Model(label_encoder).cache('svm_rbf_labels', self.session_id)
+            Cache_Hset().cache('svm_rbf_title', self.session_id, title)
 
             # cache svm feature labels, with respect to given session id
-            Cache_Hset().cache('svm_feature_labels', str(self.session_id), json.dumps(feature_labels))
+            Cache_Hset().cache('svm_rbf_feature_labels', str(self.session_id), json.dumps(feature_labels))
 
     ## return_error: returns current error(s)
     def return_error(self):
