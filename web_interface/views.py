@@ -64,7 +64,7 @@ def retrieve_session():
 def retrieve_model():
     if request.method == 'POST':
         # get all models
-        model_list = Cache_Model().get_all_titles('svm_model')
+        model_list = Cache_Model().get_all_titles('svm_rbf_model')
 
         # return all models
         if model_list['result']: return json.dumps(model_list['result'])
@@ -79,7 +79,7 @@ def retrieve_model():
 @app.route('/retrieve-feature-properties/', methods=['POST', 'GET'])
 def retrieve_feature_properties():
     if request.method == 'POST':
-        label_list = Cache_Hset().uncache('svm_feature_labels', request.form['session_id'])
+        label_list = Cache_Hset().uncache('svm_rbf_feature_labels', request.form['session_id'])
 
         # return all feature labels
         if label_list['result']: return json.dumps(label_list['result'])
