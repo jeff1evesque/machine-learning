@@ -116,15 +116,15 @@ The following updates submodule(s):
 
 ```
 cd /[PROJECT-DIRECTORY]
-git checkout -b NEW_BRANCH master
-cd [YOUR_SUBMODULE]/
+git checkout -b [NEW-BRANCH] master
+cd [YOUR-SUBMODULE]/
 git checkout master
 git pull
 cd ../
 git status
 ```
 
-to the latest code-base, within the cloned repository branch, `NEW_BRANCH`.
+to the latest code-base, within the cloned repository branch, `[NEW-BRANCH]`.
 
 **Note:** the [scikit-learn](https://github.com/scikit-learn/scikit-learn/) submodule can be found in the [`/build/`](https://github.com/jeff1evesque/machine-learning/tree/master/build/) directory.
 
