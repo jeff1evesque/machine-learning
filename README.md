@@ -88,16 +88,8 @@ sudo apt-get build-dep scikit-learn
 Fork this project in your GitHub account, then clone your repository:
 
 ```
-cd /var/
-sudo mv www/ _www/
-sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git www
-```
-
-Then, change the *file permissions* for the entire project by issuing the command:
-
-```
-cd /var/
-sudo chown -R jeffrey:sudo www
+cd /[project-directory]
+sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
 **Note:** change 'jeffrey' to the user account YOU use.
@@ -105,7 +97,7 @@ sudo chown -R jeffrey:sudo www
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
 ```
-cd /var/www/
+cd /[project-directory]
 git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
@@ -123,7 +115,7 @@ The above two commands will update submodules within the cloned repository, acco
 The following updates submodule(s):
 
 ```
-cd /var/www/
+cd /[project-directory]
 git checkout -b NEW_BRANCH master
 cd [YOUR_SUBMODULE]/
 git checkout master
@@ -143,7 +135,7 @@ Python's [Flask](http://flask.pocoo.org/), is a microframework based on [Werkzeu
 This project implements flask, by requiring [`app.py`](https://github.com/jeff1evesque/machine-learning/blob/master/app.py) to be running:
 
 ```
-cd /var/www/html/machine-learning/
+cd /[project-directory]/machine-learning/
 python app.py
 ```
 
@@ -158,7 +150,7 @@ python app.py
 To install the *required* library:
 
 ```
-cd /var/www/build/scikit-learn/
+cd /[project-directory]/build/scikit-learn/
 python setup.py build
 sudo python setup.py install
 ```
@@ -170,7 +162,7 @@ Generally, [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) is preferred o
 The following command compiles and minifies [javascript](http://en.wikipedia.org/wiki/JavaScript), [css](http://en.wikipedia.org/wiki/Cascading_Style_Sheets), and various [image file formats](http://en.wikipedia.org/wiki/Image_file_formats):
 
 ```
-cd /var/www/build/
+cd /[project-directory]/build/
 ./bash_loader
 ```
 
