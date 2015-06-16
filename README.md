@@ -88,16 +88,16 @@ sudo apt-get build-dep scikit-learn
 Fork this project in your GitHub account, then clone your repository:
 
 ```
-cd /[project-directory]
-sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
+cd /[PROJECT-DIRECTORY]
+sudo git clone https://[YOUR-USERNAME]@github.com/[PROJECT-DIRECTORY]/machine-learning.git
 ```
 
-**Note:** change 'jeffrey' to the user account YOU use.
+**Note:** change `[PROJECT-DIRECTORY]` to a desired directory path, and `[YOUR-USERNAME]` to your corresponding git username.
 
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
 ```
-cd /[project-directory]
+cd /[PROJECT-DIRECTORY]
 git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
@@ -115,7 +115,7 @@ The above two commands will update submodules within the cloned repository, acco
 The following updates submodule(s):
 
 ```
-cd /[project-directory]
+cd /[PROJECT-DIRECTORY]
 git checkout -b NEW_BRANCH master
 cd [YOUR_SUBMODULE]/
 git checkout master
@@ -135,7 +135,7 @@ Python's [Flask](http://flask.pocoo.org/), is a microframework based on [Werkzeu
 This project implements flask, by requiring [`app.py`](https://github.com/jeff1evesque/machine-learning/blob/master/app.py) to be running:
 
 ```
-cd /[project-directory]/machine-learning/
+cd /[PROJECT-DIRECTORY]/machine-learning/
 python app.py
 ```
 
@@ -150,7 +150,7 @@ python app.py
 To install the *required* library:
 
 ```
-cd /[project-directory]/build/scikit-learn/
+cd /[PROJECT-DIRECTORY]/build/scikit-learn/
 python setup.py build
 sudo python setup.py install
 ```
@@ -162,7 +162,7 @@ Generally, [bash](http://en.wikipedia.org/wiki/Bash_(Unix_shell)) is preferred o
 The following command compiles and minifies [javascript](http://en.wikipedia.org/wiki/JavaScript), [css](http://en.wikipedia.org/wiki/Cascading_Style_Sheets), and various [image file formats](http://en.wikipedia.org/wiki/Image_file_formats):
 
 ```
-cd /[project-directory]/build/
+cd /[PROJECT-DIRECTORY]/build/
 ./bash_loader
 ```
 
