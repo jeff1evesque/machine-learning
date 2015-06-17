@@ -89,7 +89,7 @@ Fork this project in your GitHub account, then clone your repository:
 
 ```
 cd /[PROJECT-DIRECTORY]
-sudo git clone https://[YOUR-USERNAME]@github.com/[PROJECT-DIRECTORY]/machine-learning.git
+sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
 **Note:** change `[PROJECT-DIRECTORY]` to a desired directory path, and `[YOUR-USERNAME]` to your corresponding git username.
