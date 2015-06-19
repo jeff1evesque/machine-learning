@@ -17,14 +17,14 @@ package {$packages_general_apt:
 package {$packages_general_pip:
     ensure => present,
     provider => 'pip',
-    before => Package[$packages_nodejs_apt],
+    before => Package['nodejs'],
 }
 
 ## packages: install flask via 'pip'
 package {$packages_flask_pip:
     ensure => present,
     provider => 'pip',
-    before => Package[$packages_nodejs_apt],
+    before => Package['nodejs'],
 }
 
 ## packages: install mariadb
@@ -44,13 +44,14 @@ package {'nodejs':
 exec {'install-nodejs-ppa':
     command => 'curl -sL https://deb.nodesource.com/setup | sudo bash -',
     refreshonly => true,
-    before => Package['install-add-apt-repository'],
+    before => Package['python-software-properties'],
 }
 
 ## package: install add-apt-repository
-package {'install-add-apt-repository':
+package {'python-software-properties':
     ensure => present,
-    notify => Exec['install-redis-ppa'],
+    notify => Exec['update-apt-get'],
+    before => Exec['update-apt-get'],
 }
 
 ## update apt-get
