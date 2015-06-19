@@ -76,24 +76,22 @@ package {$packages_nodejs_apt:
 package {'sass':
     ensure => present,
     provider => 'gem',
-    before => Package['uglify-js'],
+    notify => Exec['install-uglify-js'],
+    before => Exec['install-uglify-js'],
 }
 
 ## package: install uglify-js
-package {'uglify-js':
-    ensure => present,
-    provider => 'npm',
-    install_options => '-g',
-    before => Package['imagemin'],
+exec {'install-uglify-js':
+    command => 'npm install uglify-js -g',
+    refreshonly => true,
+    notify => Exec['install-imagemin'],
 }
 
 ## package: install uglify-js
-package {'imagemin':
-    ensure => present,
-    provider => 'npm',
-    install_options => '--global',
+exec {'install-imagemin':
+    command => 'npm install --global imagemin',
+    refreshonly => true,
     notify => Exec['install-scikit-learn'],
-    before => Exec['install-scikit-learn'],
 }
 
 ## package: install scikit-learn (and dependencies)
