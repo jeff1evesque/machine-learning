@@ -4,6 +4,9 @@ $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib'
 $packages_flask_pip   = ['flask', 'requests']
 $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
 
+## define $PATH for all execs
+Exec{path => ['/usr/bin/']}
+
 ## packages: install general packages
 package {$packages_general_apt:
     ensure => present,
