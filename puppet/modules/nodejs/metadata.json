@@ -1,0 +1,71 @@
+{
+  "name": "puppetlabs-nodejs",
+  "version": "0.8.0",
+  "author": "puppetlabs",
+  "summary": "Install Node.js package and npm package provider.",
+  "license": "Apache-2.0",
+  "source": "https://github.com/puppetlabs/puppetlabs-nodejs",
+  "project_page": "https://github.com/puppetlabs/puppetlabs-nodejs",
+  "issues_url": "https://tickets.puppetlabs.com/browse/MODULES",
+  "operatingsystem_support": [
+    {
+      "operatingsystem": "RedHat",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "CentOS",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "OracleLinux",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Scientific",
+      "operatingsystemrelease": [
+        "5",
+        "6",
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Debian",
+      "operatingsystemrelease": [
+        "7"
+      ]
+    },
+    {
+      "operatingsystem": "Ubuntu",
+      "operatingsystemrelease": [
+        "10.04",
+        "12.04",
+        "14.04"
+      ]
+    }
+  ],
+  "requirements": [
+    {
+      "name": "pe",
+      "version_requirement": "3.x"
+    },
+    {
+      "name": "puppet",
+      "version_requirement": ">=3.0.0 < 4.0.0"
+    }
+  ],
+  "dependencies": [
+    {"name":"puppetlabs/stdlib","version_requirement":">=2.2.1 <5.0.0"}
+  ]
+}
