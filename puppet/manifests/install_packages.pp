@@ -9,33 +9,33 @@ Exec{path => ['/usr/bin/']}
 
 ## packages: install general packages
 package {$packages_general_apt:
-    ensure => present,
+    ensure => 'installed',
     before => Package[$packages_general_pip],
 }
 
 ## packages: install general packages
 package {$packages_general_pip:
-    ensure => present,
+    ensure => 'installed',
     provider => 'pip',
     before => Package['nodejs'],
 }
 
 ## packages: install flask via 'pip'
 package {$packages_flask_pip:
-    ensure => present,
+    ensure => 'installed',
     provider => 'pip',
     before => Package['nodejs'],
 }
 
 ## packages: install mariadb
 package {$packages_mariadb_apt:
-    ensure => present,
+    ensure => 'installed',
     before => Package['nodejs'],
 }
 
 ## packages: install nodejs
 package {'nodejs':
-    ensure => present,
+    ensure => 'installed',
     notify => Exec['install-nodejs-ppa'],
     before => Exec['install-nodejs-ppa'],
 }
@@ -49,7 +49,7 @@ exec {'install-nodejs-ppa':
 
 ## package: install add-apt-repository
 package {'python-software-properties':
-    ensure => present,
+    ensure => 'installed',
     notify => Exec['update-apt-get'],
     before => Exec['update-apt-get'],
 }
@@ -63,19 +63,19 @@ exec {'update-apt-get':
 
 ## package: install redis-server
 package {'redis-server':
-    ensure => present,
+    ensure => 'installed',
     before => Package[$packages_nodejs_apt],
 }
 
 ## package: install ruby, and nodejs
 package {$packages_nodejs_apt:
-    ensure => present,
+    ensure => 'installed',
     before => Package['sass'],
 }
 
 ## package: install sass
 package {'sass':
-    ensure => present,
+    ensure => 'installed',
     provider => 'gem',
     notify => Exec['install-uglify-js'],
     before => Exec['install-uglify-js'],
