@@ -17,58 +17,24 @@ package {$packages_general_apt:
 package {$packages_general_pip:
     ensure => 'installed',
     provider => 'pip',
-    before => Package['nodejs'],
+    before => Package[$packages_flask_pip],
 }
 
 ## packages: install flask via 'pip'
 package {$packages_flask_pip:
     ensure => 'installed',
     provider => 'pip',
-    before => Package['nodejs'],
+    before => Package[$packages_mariadb_apt],
 }
 
 ## packages: install mariadb
 package {$packages_mariadb_apt:
     ensure => 'installed',
-    before => Package['nodejs'],
-}
-
-## packages: install nodejs
-package {'nodejs':
-    ensure => 'installed',
-    notify => Exec['install-nodejs-ppa'],
-    before => Exec['install-nodejs-ppa'],
-}
-
-## install nodejs PPA
-exec {'install-nodejs-ppa':
-    command => 'curl -sL https://deb.nodesource.com/setup | sudo bash -',
-    refreshonly => true,
-    before => Package['python-software-properties'],
-}
-
-## package: install add-apt-repository
-package {'python-software-properties':
-    ensure => 'installed',
-    notify => Exec['update-apt-get'],
-    before => Exec['update-apt-get'],
-}
-
-## update apt-get
-exec {'update-apt-get':
-    command => 'apt-get update',
-    refreshonly => true,
     before => Package['redis-server'],
 }
 
 ## package: install redis-server
 package {'redis-server':
-    ensure => 'installed',
-    before => Package[$packages_nodejs_apt],
-}
-
-## package: install ruby, and nodejs
-package {$packages_nodejs_apt:
     ensure => 'installed',
     before => Package['sass'],
 }
