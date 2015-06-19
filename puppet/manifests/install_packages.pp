@@ -15,20 +15,20 @@ package {$packages_general_apt:
 package {$packages_general_pip:
     ensure => present,
     provider => 'pip',
-    before => Package[$packages_nodejs-apt],
+    before => Package[$packages_nodejs_apt],
 }
 
 ## packages: install flask via 'pip'
 package {$packages_flask_pip:
     ensure => present,
     provider => 'pip',
-    before => Package[$packages_nodejs-apt],
+    before => Package[$packages_nodejs_apt],
 }
 
 ## packages: install mariadb
 package {$packages_mariadb_apt:
     ensure => present,
-    before => Package[$packages_nodejs-apt],
+    before => Package[$packages_nodejs_apt],
 }
 
 ## packages: install nodejs with ruby
