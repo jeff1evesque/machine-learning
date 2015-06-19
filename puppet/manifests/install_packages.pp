@@ -3,7 +3,6 @@ $packages_general_apt = ['inotify-tools', 'python-pip']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
 $packages_flask_pip   = ['flask', 'requests']
 $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
-$packages_nodejs_apt  = ['ruby', 'nodejs']
 
 ## packages: install general packages
 package {$packages_general_apt:
@@ -28,11 +27,11 @@ package {$packages_flask_pip:
 ## packages: install mariadb
 package {$packages_mariadb_apt:
     ensure => present,
-    before => Package[$packages_nodejs_apt],
+    before => Package['nodejs'],
 }
 
-## packages: install nodejs with ruby
-package {$packages_nodejs_apt:
+## packages: install nodejs
+package {'nodejs':
     ensure => present,
     notify => Exec['install-nodejs-ppa'],
     before => Exec['install-nodejs-ppa'],
