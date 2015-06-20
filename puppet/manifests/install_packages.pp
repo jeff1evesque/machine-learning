@@ -6,9 +6,16 @@ $packages_general_apt = ['inotify-tools', 'python-pip']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
 $packages_flask_pip   = ['flask', 'requests']
 $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
+$packages_build_dep   = ['matplotlib']
 
 ## define $PATH for all execs
 Exec{path => ['/usr/bin/']}
+
+## install package dependent packages
+exec {'install-package-dependencies':
+    command => 'apt-get build-dep matplotlib',
+    before => Package[$packages_general_apt],
+}
 
 ## packages: install general packages
 package {$packages_general_apt:
