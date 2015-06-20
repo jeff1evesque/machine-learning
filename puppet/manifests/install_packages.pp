@@ -14,15 +14,13 @@ Exec {path => ['/usr/bin/', '/bin/']}
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
     command => 'sed -i "s/# deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
-    notify => Exec[$build-package-dependencies],
-    before => Exec[$build-package-dependencies],
+    notify => Exec['build-package-dependencies'],
 }
 
 ## enable 'multiverse' repository (part 2, replace line)
-exec {'enable-multiverse-repository':
+exec {'enable-multiverse-repository-2':
     command => 'sed -i "s/# deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
-    notify => Exec[$build-package-dependencies],
-    before => Exec[$build-package-dependencies],
+    notify => Exec['build-package-dependencies'],
 }
 
 ## build package dependencies
