@@ -25,7 +25,7 @@ exec {'enable-multiverse-repository-2':
 
 ## build package dependencies
 exec {'build-package-dependencies':
-    command => "apt-get build-dep ${packages_build_dep}",
+    command => "apt-get build-dep ${packages_build_dep} -y",
     before => Package[$packages_general_apt],
     refreshonly => true,
 }
