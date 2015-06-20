@@ -10,7 +10,7 @@ $packages_build_dep   = ['matplotlib', 'scikit-learn']
 $packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs
-Exec {path => ['/usr/bin/', '/bin/', '/usr/local', '/sbin/']}
+Exec {path => ['/usr/bin/', '/bin/', '/usr/local', '/usr/sbin/', '/sbin/']}
 
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
