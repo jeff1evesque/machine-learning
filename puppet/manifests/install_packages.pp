@@ -24,9 +24,9 @@ exec {'enable-multiverse-repository-2':
 }
 
 ## build package dependencies
-$packages_build_dep.each |Integer $index, String $package_dependency| {
+$packages_build_dep.each |Integer $index, String $package| {
     exec {"build-package-dependencies-$index":
-        command => "apt-get build-dep $package_dependency -y",
+        command => "apt-get build-dep $package -y",
         before => Package[$packages_general_apt],
         refreshonly => true,
     }
