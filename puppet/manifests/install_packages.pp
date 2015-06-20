@@ -7,10 +7,10 @@ $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib'
 $packages_flask_pip   = ['flask', 'requests']
 $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
 $packages_build_dep   = ['matplotlib', 'scikit-learn']
-$packages_build_size  = size($packages_build_dep)
+$packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs
-Exec {path => ['/usr/bin/', '/bin/']}
+Exec {path => ['/usr/bin/', '/bin/', '/usr/local', '/sbin/']}
 
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
