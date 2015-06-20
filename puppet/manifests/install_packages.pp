@@ -7,6 +7,7 @@ $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib'
 $packages_flask_pip   = ['flask', 'requests']
 $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
 $packages_build_dep   = ['matplotlib', 'scikit-learn']
+$packages_build_size  = size($packages_build_dep)
 
 ## define $PATH for all execs
 Exec {path => ['/usr/bin/', '/bin/']}
@@ -14,18 +15,18 @@ Exec {path => ['/usr/bin/', '/bin/']}
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
     command => 'sed -i "s/# deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
-    notify => Exec['build-package-dependencies'],
+    notify => Exec["build-package-dependencies-${packages_build_size}"],
 }
 
 ## enable 'multiverse' repository (part 2, replace line)
 exec {'enable-multiverse-repository-2':
     command => 'sed -i "s/# deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
-    notify => Exec['build-package-dependencies'],
+    notify => Exec["build-package-dependencies-${packages_build_size}"],
 }
 
 ## build package dependencies
-each($packages_build_dep) |$package| {
-    exec {"build-package-dependencies":
+each($packages_build_dep) |$index, $package| {
+    exec {"build-package-dependencies-${index}":
         command => "apt-get build-dep $package -y",
         before => Package[$packages_general_apt],
         refreshonly => true,
