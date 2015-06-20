@@ -9,7 +9,7 @@ $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
 $packages_build_dep   = ['matplotlib']
 
 ## define $PATH for all execs
-Exec {path => ['/usr/bin/']}
+Exec {path => ['/usr/bin/', '/bin/']}
 
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
