@@ -14,22 +14,31 @@ Exec {path => ['/usr/bin/', '/bin/']}
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
     command => 'sed -i "s/# deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
-	before => Package[$packages_general_apt],
+    notify => Exec[$build-package-dependencies],
+    before => Exec[$build-package-dependencies],
 }
 
 ## enable 'multiverse' repository (part 2, replace line)
 exec {'enable-multiverse-repository':
     command => 'sed -i "s/# deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
-	before => Package[$packages_general_apt],
+    notify => Exec[$build-package-dependencies],
+    before => Exec[$build-package-dependencies],
 }
 
-## packages: install general packages
+## build package dependencies
+exec {'build-package-dependencies':
+    command => "apt-get build-dep ${packages_build_dep}",
+    before => Package[$packages_general_apt],
+    refreshonly => true,
+}
+
+## packages: install general packages (apt)
 package {$packages_general_apt:
     ensure => 'installed',
     before => Package[$packages_general_pip],
 }
 
-## packages: install general packages
+## packages: install general packages (pip)
 package {$packages_general_pip:
     ensure => 'installed',
     provider => 'pip',
