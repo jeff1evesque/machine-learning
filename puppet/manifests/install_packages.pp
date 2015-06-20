@@ -11,9 +11,11 @@ $packages_build_dep   = ['matplotlib']
 ## define $PATH for all execs
 Exec {path => ['/usr/bin/']}
 
+
+
 ## install package dependent packages
 exec {'install-package-dependencies':
-    command => 'apt-get build-dep matplotlib',
+    command => 'apt-get build-dep matplotlib -y',
     before => Package[$packages_general_apt],
 }
 
