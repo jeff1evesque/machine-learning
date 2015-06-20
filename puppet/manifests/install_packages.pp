@@ -11,12 +11,16 @@ $packages_build_dep   = ['matplotlib']
 ## define $PATH for all execs
 Exec {path => ['/usr/bin/']}
 
+## enable 'multiverse' repository (part 1, replace line)
+exec {'enable-multiverse-repository-1':
+    command => 'sed -i "s/# deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
+	before => Package[$packages_general_apt],
+}
 
-
-## install package dependent packages
-exec {'install-package-dependencies':
-    command => 'apt-get build-dep matplotlib -y',
-    before => Package[$packages_general_apt],
+## enable 'multiverse' repository (part 2, replace line)
+exec {'enable-multiverse-repository':
+    command => 'sed -i "s/# deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
+	before => Package[$packages_general_apt],
 }
 
 ## packages: install general packages
