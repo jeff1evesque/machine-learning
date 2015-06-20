@@ -6,7 +6,7 @@ $packages_general_apt = ['inotify-tools', 'python-pip']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
 $packages_flask_pip   = ['flask', 'requests']
 $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
-$packages_build_dep   = ['matplotlib']
+$packages_build_dep   = ['matplotlib', 'scikit-learn']
 
 ## define $PATH for all execs
 Exec {path => ['/usr/bin/', '/bin/']}
@@ -82,12 +82,5 @@ exec {'install-uglify-js':
 ## package: install uglify-js
 exec {'install-imagemin':
     command => 'npm install --global imagemin',
-    refreshonly => true,
-    notify => Exec['install-scikit-learn'],
-}
-
-## package: install scikit-learn (and dependencies)
-exec {'install-scikit-learn':
-    command => 'apt-get build-dep scikit-learn',
     refreshonly => true,
 }
