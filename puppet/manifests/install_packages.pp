@@ -1,3 +1,6 @@
+## include puppet modules: this (also) runs 'apt-get update'
+include apt
+
 ## variables
 $packages_general_apt = ['inotify-tools', 'python-pip']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
