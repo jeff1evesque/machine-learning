@@ -19,6 +19,7 @@ Vagrant.configure(2) do |config|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "install_packages.pp"
     puppet.module_path    = "puppet/modules"
+    puppet.options        = ["--parser", "future"]
   end
 
   # Disable automatic box update checking. If you disable this, then
