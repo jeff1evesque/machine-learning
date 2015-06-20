@@ -1,5 +1,6 @@
 ## include puppet modules: this (also) runs 'apt-get update'
 include apt
+include nodejs
 
 ## variables
 $packages_general_apt = ['inotify-tools', 'python-pip']
@@ -69,19 +70,18 @@ package {'redis-server':
 package {'sass':
     ensure => 'installed',
     provider => 'gem',
-    notify => Exec['install-uglify-js'],
-    before => Exec['install-uglify-js'],
+    before => Package['uglify-js'],
 }
 
-## package: install uglify-js
-exec {'install-uglify-js':
-    command => 'npm install uglify-js -g',
-    refreshonly => true,
-    notify => Exec['install-imagemin'],
+## package: install uglify-js (-g)
+package {'uglify-js':
+    ensure => 'installed',
+    provider => 'npm',
+    before => Package['imagemin'],
 }
 
-## package: install uglify-js
-exec {'install-imagemin':
-    command => 'npm install --global imagemin',
-    refreshonly => true,
+## package: install imagemin (--global)
+package {'imagemin':
+    ensure => 'installed',
+    provider => 'npm',
 }
