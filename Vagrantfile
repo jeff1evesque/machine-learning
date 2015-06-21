@@ -14,6 +14,17 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/trusty64"
 
+  # Update latest version of puppet
+  config.vm.provision :shell, :path => "puppet/bash/puppet_updater.sh"
+  
+  # Custom Manifest: install needed packages
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "install_packages.pp"
+    puppet.module_path    = "puppet/modules"
+    puppet.options        = ["--parser", "future"]
+  end
+  
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
