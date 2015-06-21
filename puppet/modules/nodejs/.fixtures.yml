@@ -1,0 +1,10 @@
+fixtures:
+  repositories:
+    "stdlib": "git://github.com/puppetlabs/puppetlabs-stdlib.git"
+    "apt": "git://github.com/puppetlabs/puppetlabs-apt.git"
+    "portage": "git://github.com/gentoo/puppet-portage.git"
+    "chocolatey": "git://github.com/chocolatey/puppet-chocolatey.git"
+    "epel": "git://github.com/stahnma/puppet-module-epel.git"
+    "gpg_key": "git://github.com/treydock/puppet-gpg_key.git"
+  symlinks:
+    "nodejs": "#{source_dir}"
