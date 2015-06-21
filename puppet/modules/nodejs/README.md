@@ -1,6 +1,6 @@
 # puppet-nodejs module
 
-[![Build Status](https://travis-ci.org/puppetlabs/puppetlabs-nodejs.png)](http://travis-ci.org/puppetlabs/puppetlabs-nodejs)
+[![Build Status](https://travis-ci.org/puppet-community/puppet-nodejs.png)](http://travis-ci.org/puppet-community/puppet-nodejs)
 
 #### Table of Contents
 
@@ -447,7 +447,7 @@ it is installed.
 
 This modules uses `puppetlabs-apt` for the management of the NodeSource
 repository. If using an operating system of the Debian-based family, you will
-need to ensure that `puppetlabs-apt` version 1.x is installed.
+need to ensure that `puppetlabs-apt` version 2.x is installed.
 
 If using CentoOS/RHEL 5, you will need to ensure that the `stahnma-epel`
 module is installed.
