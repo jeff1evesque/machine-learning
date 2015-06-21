@@ -78,10 +78,12 @@ package {'uglify-js':
     ensure => 'present',
     provider => 'npm',
     before => Package['imagemin'],
+    require => Package['npm'],
 }
 
 ## package: install imagemin (--global)
 package {'imagemin':
     ensure => 'present',
     provider => 'npm',
+    require => Package['npm'],
 }
