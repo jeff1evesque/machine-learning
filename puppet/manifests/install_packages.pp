@@ -1,9 +1,11 @@
+include nodejs
+
 ## variables
 case $::osfamily {
     'redhat': {
         $packages_general_apt = ['inotify-tools', 'python-pip', 'ruby-devel']
     }
-    'debain': {
+    'debian': {
         $packages_general_apt = ['inotify-tools', 'python-pip', 'ruby-dev']
     }
     default: {
