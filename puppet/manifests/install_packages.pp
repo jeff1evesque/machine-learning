@@ -73,7 +73,7 @@ package {'sass':
     before => Package['uglify-js'],
 }
 
-## package: install uglify-js (-g)
+## package: install uglify-js
 package {'uglify-js':
     ensure => 'present',
     provider => 'npm',
@@ -81,7 +81,7 @@ package {'uglify-js':
     require => Package['npm'],
 }
 
-## package: install imagemin (--global)
+## package: install imagemin
 package {'imagemin':
     ensure => 'present',
     provider => 'npm',
