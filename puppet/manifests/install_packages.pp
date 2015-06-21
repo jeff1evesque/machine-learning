@@ -75,13 +75,13 @@ package {'sass':
 
 ## package: install uglify-js (-g)
 package {'uglify-js':
-    ensure => 'installed',
+    ensure => 'present',
     provider => 'npm',
     before => Package['imagemin'],
 }
 
 ## package: install imagemin (--global)
 package {'imagemin':
-    ensure => 'installed',
+    ensure => 'present',
     provider => 'npm',
 }
