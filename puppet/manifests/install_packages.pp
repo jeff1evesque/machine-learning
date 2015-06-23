@@ -11,6 +11,8 @@ case $::osfamily {
     default: {
         $packages_general_apt = ['inotify-tools', 'python-pip']
         $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
+        $packages_general_gem = ['librarian-puppet', 'sass']
+        $packages_general_npm = ['uglify-js', 'imagemin']
         $packages_flask_pip   = ['flask', 'requests']
         $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
         $packages_build_dep   = ['matplotlib', 'scikit-learn']
@@ -48,17 +50,25 @@ package {$packages_general_apt:
     before => Package[$packages_general_pip],
 }
 
-## packages: install general packages (gem)
-package {$packages_general_gem:
-    ensure => 'installed',
-    before => Package[$packages_general_pip],
-}
-
 ## packages: install general packages (pip)
 package {$packages_general_pip:
     ensure => 'installed',
     provider => 'pip',
+    before => Package[$packages_general_gem],
+}
+
+## packages: install general packages (gem)
+package {$packages_general_gem:
+    ensure => 'installed',
+    before => Package[$packages_general_npm],
+}
+
+## package: install general packages (npm)
+package {$packages_general_npm:
+    ensure => 'present',
+    provider => 'npm',
     before => Package[$packages_flask_pip],
+    require => Package['npm'],
 }
 
 ## packages: install flask via 'pip'
@@ -77,27 +87,4 @@ package {$packages_mariadb_apt:
 ## package: install redis-server
 package {'redis-server':
     ensure => 'installed',
-    before => Package['sass'],
-}
-
-## package: install sass
-package {'sass':
-    ensure => 'installed',
-    provider => 'gem',
-    before => Package['uglify-js'],
-}
-
-## package: install uglify-js
-package {'uglify-js':
-    ensure => 'present',
-    provider => 'npm',
-    before => Package['imagemin'],
-    require => Package['npm'],
-}
-
-## package: install imagemin
-package {'imagemin':
-    ensure => 'present',
-    provider => 'npm',
-    require => Package['npm'],
 }
