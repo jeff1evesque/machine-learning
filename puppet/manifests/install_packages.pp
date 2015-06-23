@@ -1,17 +1,3 @@
-<<<<<<< HEAD
-include nodejs
-
-## variables
-case $::osfamily {
-    'redhat': {
-        $packages_general_apt = ['inotify-tools', 'python-pip', 'ruby-devel']
-    }
-    'debian': {
-        $packages_general_apt = ['inotify-tools', 'python-pip', 'ruby-dev']
-    }
-    default: {
-        $packages_general_gem = ['librarian-puppet']
-=======
 ## include puppet modules: this (also) runs 'apt-get update'
 include apt
 include nodejs
@@ -45,20 +31,18 @@ each($packages_build_dep) |$index, $package| {
         command => "apt-get build-dep $package -y",
         before => Package[$packages_general_apt],
         refreshonly => true,
->>>>>>> master
     }
 }
 
 ## packages: install general packages (apt)
 package {$packages_general_apt:
     ensure => 'installed',
-<<<<<<< HEAD
+    before => Package[$packages_general_pip],
 }
 
 ## packages: install general packages (gem)
 package {$packages_general_gem:
     ensure => 'installed',
-=======
     before => Package[$packages_general_pip],
 }
 
@@ -108,5 +92,4 @@ package {'imagemin':
     ensure => 'present',
     provider => 'npm',
     require => Package['npm'],
->>>>>>> master
 }
