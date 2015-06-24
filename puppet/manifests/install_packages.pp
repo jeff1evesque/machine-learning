@@ -15,14 +15,14 @@ case $::osfamily {
 }
 
 $packages_build_dep   = ['matplotlib', 'scikit-learn']
-$packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
 $packages_general_gem = ['sass', 'librarian-puppet']
 $packages_general_npm = ['uglify-js', 'imagemin']
 $packages_flask_pip   = ['flask', 'requests']
+$packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
 $packages_build_size  = size($packages_build_dep) - 1
 
-## define $PATH for all execs
+## define $PATH for all exec, and packages
 Exec {path => ['/usr/bin/', '/bin/', '/usr/local', '/usr/sbin/', '/sbin/']}
 
 ## enable 'multiverse' repository (part 1, replace line)
