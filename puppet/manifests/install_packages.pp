@@ -3,22 +3,14 @@ include apt
 include nodejs
 
 ## variables
-case $::osfamily {
-    'redhat': {
-    }
-    'debian': {
-    }
-    default: {
-        $packages_build_dep   = ['matplotlib', 'scikit-learn', 'librarian-puppet']
-        $packages_general_apt = ['inotify-tools', 'python-pip']
-        $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
-        $packages_general_gem = ['librarian-puppet', 'sass']
-        $packages_general_npm = ['uglify-js', 'imagemin']
-        $packages_flask_pip   = ['flask', 'requests']
-        $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
-        $packages_build_size  = size($packages_build_dep) - 1
-    }
-}
+$packages_build_dep   = ['matplotlib', 'scikit-learn', 'librarian-puppet']
+$packages_general_apt = ['inotify-tools', 'python-pip']
+$packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
+$packages_general_gem = ['librarian-puppet', 'sass']
+$packages_general_npm = ['uglify-js', 'imagemin']
+$packages_flask_pip   = ['flask', 'requests']
+$packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
+$packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs, paths
 Exec {path => ['/usr/bin/', '/bin/', '/usr/local', '/usr/sbin/', '/sbin/']}
