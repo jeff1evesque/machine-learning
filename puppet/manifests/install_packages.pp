@@ -3,16 +3,26 @@ include apt
 include nodejs
 
 ## variables
-$packages_build_dep   = ['matplotlib', 'scikit-learn', 'librarian-puppet']
-$packages_general_apt = ['inotify-tools', 'python-pip']
+case $::osfamily {
+    'redhat': {
+        $packages_general_apt = ['inotify-tools', 'python-pip', 'ruby-devel']
+    }
+    'debian': {
+        $packages_general_apt = ['inotify-tools', 'python-pip', 'ruby-dev']
+    }
+    default: {
+    }
+}
+
+$packages_build_dep   = ['matplotlib', 'scikit-learn']
+$packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
-$packages_general_gem = ['librarian-puppet', 'sass']
+$packages_general_gem = ['sass', 'librarian-puppet']
 $packages_general_npm = ['uglify-js', 'imagemin']
 $packages_flask_pip   = ['flask', 'requests']
-$packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
 $packages_build_size  = size($packages_build_dep) - 1
 
-## define $PATH for all execs, paths
+## define $PATH for all execs
 Exec {path => ['/usr/bin/', '/bin/', '/usr/local', '/usr/sbin/', '/sbin/']}
 
 ## enable 'multiverse' repository (part 1, replace line)
@@ -56,7 +66,7 @@ package {$packages_general_gem:
     before => Package[$packages_general_npm],
 }
 
-## package: install general packages (npm)
+## packages: install general packages (npm)
 package {$packages_general_npm:
     ensure => 'present',
     provider => 'npm',
