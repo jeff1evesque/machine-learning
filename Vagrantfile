@@ -26,11 +26,15 @@ Vagrant.configure(2) do |config|
   
   # Update latest version of puppet
   config.vm.provision :shell, :path => "puppet/bash/puppet_updater.sh"
+
+  # Run puppet-librarian
+  config.librarian_puppet.puppetfile_dir = "puppet"
   
   # Custom Manifest: install needed packages
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "install_packages.pp"
+	puppet.modules_path   = "puppet/modules"
     puppet.options        = ["--parser", "future"]
   end
   
