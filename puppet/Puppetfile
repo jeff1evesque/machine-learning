@@ -3,15 +3,16 @@
 
 forge "https://forge.puppetlabs.com"
 
-# A module from the Puppet Forge
-# mod 'puppetlabs-stdlib'
+# STDLIB
+mod 'puppetlabs-stdlib',
+  :git => "https://github.com/puppetlabs/puppetlabs-stdlib.git",
+  :ref => "4.6.0"
 
-# APT
+# APT (from master)
 mod 'puppetlabs-apt',
-  :git => "git://github.com/puppetlabs/puppetlabs-apt.git"
-  :ref => "2.1.0"
+  :git => "https://github.com/puppetlabs/puppetlabs-apt.git"
 
 # NODEJS
-mod 'puppetlabs-nodejs',
-  :git => "git://github.com/puppetlabs/puppetlabs-nodejs.git"
+mod 'puppet-nodejs',
+  :git => "https://github.com/puppet-community/puppet-nodejs.git",
   :ref => "1.1.0"
