@@ -29,12 +29,12 @@ Vagrant.configure(2) do |config|
 
   # Run puppet-librarian
   config.librarian_puppet.puppetfile_dir = "puppet"
+  config.librarian_puppet.placeholder_filename = "puppet/modules/.placeholder"
   
   # Custom Manifest: install needed packages
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "install_packages.pp"
-    puppet.module_path    = "puppet/modules"
     puppet.options        = ["--parser", "future"]
   end
   
