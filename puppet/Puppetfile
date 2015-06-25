@@ -17,8 +17,3 @@ mod 'puppetlabs-apt',
 mod 'puppet-nodejs',
   :git => "https://github.com/puppet-community/puppet-nodejs.git",
   :ref => "1.1.0"
-
-## Install Module: scikit-learn
-mod 'puppet-scikit-learn',
-  :git => "https://github.com/scikit-learn/scikit-learn",
-  :ref => "0.16.1"
