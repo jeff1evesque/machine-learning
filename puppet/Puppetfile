@@ -1,19 +1,19 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-# Declare puppet module repository
+## Declare puppet module repository
 forge "https://forge.puppetlabs.com"
 
-# Install Module: stdlib (apt dependency)
+## Install Module: stdlib (apt dependency)
 mod 'puppetlabs-stdlib',
   :git => "https://github.com/puppetlabs/puppetlabs-stdlib.git",
   :ref => "4.6.0"
 
-# Install Module: apt (from master)
+## Install Module: apt (from master)
 mod 'puppetlabs-apt',
   :git => "https://github.com/puppetlabs/puppetlabs-apt.git"
 
-# Install Module: nodejs
+## Install Module: nodejs
 mod 'puppet-nodejs',
   :git => "https://github.com/puppet-community/puppet-nodejs.git",
   :ref => "1.1.0"
