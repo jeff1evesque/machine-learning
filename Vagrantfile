@@ -16,7 +16,6 @@ Vagrant.configure(2) do |config|
   # Install Vagrant Plugins
   required_plugins.each do |plugin|
     unless Vagrant.has_plugin? plugin
-	  puts "#{plugin} will be installed"
 	  system "vagrant plugin install #{plugin}"
 	end
   end
