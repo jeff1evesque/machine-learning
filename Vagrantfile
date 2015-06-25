@@ -10,12 +10,33 @@ Vagrant.configure(2) do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
+  # Variables (ruby syntax)
+  required_plugins = %w(vagrant-librarian-puppet)
+  plugin_installed = false
+
+  # Install Vagrant Plugins
+  required_plugins.each do |plugin|
+    unless Vagrant.has_plugin? plugin
+      system "vagrant plugin install #{plugin}"
+      plugin_installed = true
+    end
+  end
+
+  # Restart Vagrant: if new plugin installed
+  if plugin_installed == true
+    exec "vagrant #{ARGV.join(' ')}"
+  end
+
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/trusty64"
-
+  
   # Update latest version of puppet
   config.vm.provision :shell, :path => "puppet/bash/puppet_updater.sh"
+
+  # Run puppet-librarian
+  config.librarian_puppet.puppetfile_dir = "puppet"
+  config.librarian_puppet.placeholder_filename = "puppet/modules/.placeholder"
   
   # Custom Manifest: install needed packages
   config.vm.provision "puppet" do |puppet|
