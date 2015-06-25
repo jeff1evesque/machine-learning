@@ -1,25 +1,17 @@
 #!/usr/bin/env ruby
 #^syntax detection
 
-forge "https://forgeapi.puppetlabs.com"
-
-# use dependencies defined in metadata.json
-# metadata
-
-# use dependencies defined in Modulefile
-# modulefile
+forge "https://forge.puppetlabs.com"
 
 # A module from the Puppet Forge
-mod 'puppetlabs-git'
+# mod 'puppetlabs-stdlib'
 
-# A module from git
-# mod 'puppetlabs-ntp',
-#   :git => 'git://github.com/puppetlabs/puppetlabs-ntp.git'
-
-# A module from a git branch/tag
+# APT
 mod 'puppetlabs-apt',
-  :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
-  :ref => '1.4.x'
+  :git => "git://github.com/puppetlabs/puppetlabs-apt.git"
+  :ref => "2.1.0"
 
-# A module from Github pre-packaged tarball
-# mod 'puppetlabs-apache', '0.6.0', :github_tarball => 'puppetlabs/puppetlabs-apache'
+# NODEJS
+mod 'puppetlabs-nodejs',
+  :git => "git://github.com/puppetlabs/puppetlabs-nodejs.git"
+  :ref => "1.1.0"
