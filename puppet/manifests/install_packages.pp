@@ -5,10 +5,10 @@ include nodejs
 ## variables
 case $::osfamily {
     'redhat': {
-        $packages_general_apt = ['inotify-tools', 'python-pip', 'ruby-devel']
+        $packages_general = ['inotify-tools', 'python-pip', 'git', 'ruby-devel']
     }
     'debian': {
-        $packages_general_apt = ['inotify-tools', 'python-pip', 'ruby-dev']
+        $packages_general = ['inotify-tools', 'python-pip', 'git', 'ruby-dev']
     }
     default: {
     }
@@ -41,13 +41,13 @@ exec {'enable-multiverse-repository-2':
 each($packages_build_dep) |$index, $package| {
     exec {"build-package-dependencies-${index}":
         command => "apt-get build-dep $package -y",
-        before => Package[$packages_general_apt],
+        before => Package[$packages_general],
         refreshonly => true,
     }
 }
 
-## packages: install general packages (apt)
-package {$packages_general_apt:
+## packages: install general packages (apt, yum)
+package {$packages_general:
     ensure => 'installed',
     before => Package[$packages_general_pip],
 }
