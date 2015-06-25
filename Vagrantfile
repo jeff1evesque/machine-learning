@@ -23,7 +23,7 @@ Vagrant.configure(2) do |config|
   end
 
   # Restart Vagrant: if new plugin installed
-  if plugin_installed = true
+  if plugin_installed == true
     exec "vagrant #{ARGV.join(' ')}"
   end
 
