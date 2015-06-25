@@ -5,10 +5,10 @@ include nodejs
 ## variables
 case $::osfamily {
     'redhat': {
-        $packages_general = ['inotify-tools', 'python-pip', 'git', 'ruby-devel']
+        $packages_general = ['inotify-tools', 'python-pip', 'ruby-devel']
     }
     'debian': {
-        $packages_general = ['inotify-tools', 'python-pip', 'git', 'ruby-dev']
+        $packages_general = ['inotify-tools', 'python-pip', 'ruby-dev']
     }
     default: {
     }
