@@ -17,3 +17,8 @@ mod 'puppetlabs-apt',
 mod 'puppet-nodejs',
   :git => "https://github.com/puppet-community/puppet-nodejs.git",
   :ref => "1.1.0"
+
+## Install Module: vcsrepo
+mod 'puppetlabs-vcsrepo',
+  :git => "https://github.com/puppetlabs/puppetlabs-vcsrepo.git",
+  :ref => "1.3.0"
