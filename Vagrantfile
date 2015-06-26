@@ -36,7 +36,7 @@ Vagrant.configure(2) do |config|
 
   # Create 'puppet/modules' directory for puppet provisioner(s)
   config.trigger.before :ALL do
-      run "mkdir modules"
+    run "mkdir modules"
   end
 
   # Run puppet-librarian
