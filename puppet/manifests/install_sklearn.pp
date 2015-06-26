@@ -1,3 +1,6 @@
+## define $PATH for all execs
+Exec {path => ['/usr/bin/']}
+
 ## create '/vagrant/build/' directory
 file {'/vagrant/build/':
     ensure => 'directory',
