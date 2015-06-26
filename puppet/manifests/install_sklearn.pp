@@ -4,6 +4,12 @@ include git
 ## define $PATH for all execs
 Exec {path => ['/usr/bin/']}
 
+## create '/vagrant/build/' directory
+file {'/vagrant/build/':
+    ensure => 'directory',
+    before => Vcsrepo['/vagrant/build/scikit-learn'],
+}
+
 ## install scikit-learn
 vcsrepo {'/vagrant/build/scikit-learn':
     ensure => present,
