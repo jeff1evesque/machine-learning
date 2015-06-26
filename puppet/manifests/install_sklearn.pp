@@ -1,3 +1,6 @@
+## include puppet modules: this (also) runs 'apt-get update'
+include git
+
 ## define $PATH for all execs
 Exec {path => ['/usr/bin/']}
 
