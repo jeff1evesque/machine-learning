@@ -45,6 +45,13 @@ Vagrant.configure(2) do |config|
     puppet.module_path    = "puppet/modules"
     puppet.options        = ["--parser", "future"]
   end
+
+  # Custom Manifest: build scikit-learn
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "install_sklearn.pp"
+    puppet.module_path    = "puppet/modules"
+  end
   
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
