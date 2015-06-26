@@ -24,5 +24,13 @@ vcsrepo {'/vagrant/build/scikit-learn':
 exec {'build-sklearn':
     command => 'python setup.py build',
     cwd => '/vagrant/build/scikit-learn/',
+    notify => Exec['install-sklearn'],
+    refreshonly => true,
+}
+
+## install scikit-learn
+exec {'install-sklearn':
+    command => 'python setup.py install',
+    cwd => '/vagrant/build/scikit-learn/',
     refreshonly => true,
 }
