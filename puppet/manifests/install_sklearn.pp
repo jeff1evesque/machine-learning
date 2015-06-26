@@ -10,7 +10,7 @@ file {'/vagrant/build/':
     before => Vcsrepo['/vagrant/build/scikit-learn'],
 }
 
-## install scikit-learn
+## download scikit-learn
 vcsrepo {'/vagrant/build/scikit-learn':
     ensure => present,
     provider => git,
