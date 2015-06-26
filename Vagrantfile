@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   # Variables (ruby syntax)
-  required_plugins = %w(vagrant-librarian-puppet)
+  required_plugins = %w(vagrant-librarian-puppet vagrant-triggers)
   plugin_installed = false
 
   # Install Vagrant Plugins
@@ -33,6 +33,11 @@ Vagrant.configure(2) do |config|
   
   # Update latest version of puppet
   config.vm.provision :shell, :path => "puppet/bash/puppet_updater.sh"
+
+  # Create 'puppet/modules' directory for puppet provisioner(s)
+  config.trigger.before :ALL do
+      run "mkdir modules"
+  end
 
   # Run puppet-librarian
   config.librarian_puppet.puppetfile_dir = "puppet"
