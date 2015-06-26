@@ -7,11 +7,11 @@ Exec {path => ['/usr/bin/']}
 ## create '/vagrant/build/' directory
 file {'/vagrant/build/':
     ensure => 'directory',
-    before => Vcsrepo['/vagrant/build/'],
+    before => Vcsrepo['/vagrant/build/scikit-learn'],
 }
 
 ## install scikit-learn
-vcsrepo {'/vagrant/build/':
+vcsrepo {'/vagrant/build/scikit-learn':
     ensure => present,
     provider => git,
     source => 'https://github.com/scikit-learn/scikit-learn',
