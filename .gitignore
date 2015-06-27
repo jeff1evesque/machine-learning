@@ -2,7 +2,6 @@
 /*
 !/web_interface/
 !/brain/
-!/build/
 !/src/
 !.gitigore
 !settings.py
@@ -22,10 +21,6 @@
 
 # Ignore and don't commit the following files
 /*.pyc
-
-/build/*.pyc
-/build/database/*.pyc
-/build/.sass-cache/
 
 /brain/*.pyc
 /brain/cache/*.pyc
