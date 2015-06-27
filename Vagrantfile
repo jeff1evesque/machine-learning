@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
   #
   #  :ALL, denotes the successive commands will be applied to all vagrant
   #       commands.
-  #  -p, creates directory regardless if subdirectory exist
+  #  -p, create directory, and parent directories if needed
   config.trigger.before :ALL do
     run "mkdir -p puppet/modules"
   end
