@@ -16,7 +16,7 @@ case $::osfamily {
 
 $packages_build_dep   = ['matplotlib', 'scikit-learn']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
-$packages_general_gem = ['sass', 'librarian-puppet']
+$packages_general_gem = ['sass']
 $packages_general_npm = ['uglify-js', 'imagemin']
 $packages_flask_pip   = ['flask', 'requests']
 $packages_mariadb_apt = ['mariadb-server', 'mariadb-client', 'python-mysqldb']
