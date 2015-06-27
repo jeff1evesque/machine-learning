@@ -63,6 +63,13 @@ Vagrant.configure(2) do |config|
     puppet.manifest_file  = "install_sklearn.pp"
     puppet.module_path    = "puppet/modules"
   end
+
+  ## Custom Manifest: install, and configure SQL database
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "setup_database.pp"
+    puppet.module_path    = "puppet/modules"
+  end
   
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
