@@ -42,6 +42,12 @@ Vagrant.configure(2) do |config|
   config.trigger.before :ALL do
     run "mkdir -p puppet/modules"
   end
+
+  ## Custom Manifest: install puppet-librarian
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "install_puppet_librarian.pp"
+  end
   
   ## Custom Manifest: install needed packages
   #
