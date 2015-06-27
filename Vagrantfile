@@ -10,11 +10,11 @@ Vagrant.configure(2) do |config|
   # For a complete reference, please see the online documentation at
   # https://docs.vagrantup.com.
 
-  # Variables (ruby syntax)
+  ## Variables (ruby syntax)
   required_plugins = %w(vagrant-librarian-puppet vagrant-triggers)
   plugin_installed = false
 
-  # Install Vagrant Plugins
+  ## Install Vagrant Plugins
   required_plugins.each do |plugin|
     unless Vagrant.has_plugin? plugin
       system "vagrant plugin install #{plugin}"
@@ -22,28 +22,34 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  # Restart Vagrant: if new plugin installed
+  ## Restart Vagrant: if new plugin installed
   if plugin_installed == true
     exec "vagrant #{ARGV.join(' ')}"
   end
 
-  # Every Vagrant development environment requires a box. You can search for
-  # boxes at https://atlas.hashicorp.com/search.
+  ## Every Vagrant development environment requires a box. You can search for
+  #  boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/trusty64"
   
-  # Update latest version of puppet
+  ## Update latest version of puppet
   config.vm.provision :shell, :path => "puppet/bash/puppet_updater.sh"
 
-  # Create 'puppet/modules' directory for puppet provisioner(s)
+  ## Create 'puppet/modules' directory for puppet provisioner(s)
+  #
+  #  :ALL, denotes the successive commands will be applied to all vagrant
+  #       commands.
+  #  -p, creates directory regardless if subdirectory exist
   config.trigger.before :ALL do
     run "mkdir -p puppet/modules"
   end
 
-  # Run puppet-librarian
+  ## Run puppet-librarian
   config.librarian_puppet.puppetfile_dir = "puppet"
   config.librarian_puppet.placeholder_filename = "puppet/modules/.placeholder"
   
-  # Custom Manifest: install needed packages
+  ## Custom Manifest: install needed packages
+  #
+  #  Note: future parser allow array iteration in the puppet manifest
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "install_packages.pp"
@@ -51,7 +57,7 @@ Vagrant.configure(2) do |config|
     puppet.options        = ["--parser", "future"]
   end
 
-  # Custom Manifest: build scikit-learn
+  ## Custom Manifest: build scikit-learn
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "install_sklearn.pp"
@@ -63,9 +69,9 @@ Vagrant.configure(2) do |config|
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
 
-  # Create a forwarded port mapping which allows access to a specific port
-  # within the machine from a port on the host machine. In the example below,
-  # accessing "localhost:8080" will access port 80 on the guest machine.
+  ## Create a forwarded port mapping which allows access to a specific port
+  #  within the machine from a port on the host machine. In the example below,
+  #  accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network "forwarded_port", guest: 5000, host: 8080
   config.vm.network "forwarded_port", guest: 443, host: 8585
 
