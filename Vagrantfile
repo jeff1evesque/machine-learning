@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins = %w(vagrant-librarian-puppet vagrant-triggers)
+  required_plugins = %w(vagrant-triggers)
   plugin_installed = false
 
   ## Install Vagrant Plugins
@@ -43,9 +43,11 @@ Vagrant.configure(2) do |config|
     run "mkdir -p puppet/modules"
   end
 
-  ## Run puppet-librarian
-  config.librarian_puppet.puppetfile_dir = "puppet"
-  config.librarian_puppet.placeholder_filename = "puppet/modules/.placeholder"
+  ## Custom Manifest: install puppet-librarian
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "install_puppet_librarian.pp"
+  end
   
   ## Custom Manifest: install needed packages
   #
