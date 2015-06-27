@@ -4,6 +4,9 @@ class {'::mysql::server':
     root_password => 'password',
 }
 
+## install mysql bindings for python
+class {'mysql::python':}
+
 mysql::db {'db_machine_learning':
     user     => 'authenticated',
     password => 'password',
