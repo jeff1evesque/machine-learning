@@ -35,4 +35,6 @@ class {'::mysql::client':
 }
 
 ## install python-mariadb bindings
-#class {'::mysql::bindings::python'}
+class {'::mysql::bindings':
+    python_enable => 'true',
+}
