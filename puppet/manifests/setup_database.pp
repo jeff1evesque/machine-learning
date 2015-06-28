@@ -14,5 +14,12 @@ mysql::db {'db_machine_learning':
     user     => 'authenticated',
     password => 'password',
     host     => 'localhost',
-    grant    => ['CREATE', 'INSERT', 'DELETE', 'UPDATE', 'DROP', 'EXECUTE', 'SELECT', 'SHOW DATABASES'],
+}
+
+mysql_grant {'authenticated@localhost/*.*',
+    ensure => 'present',
+    options => ['GRANT'],
+    privileges => ['CREATE', 'INSERT', 'DELETE', 'UPDATE', 'DROP', 'EXECUTE', 'SELECT'],
+    table => '*.*',
+    user => 'authenticated@localhost',
 }
