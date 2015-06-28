@@ -16,6 +16,7 @@ mysql::db {'db_machine_learning':
     host     => 'localhost',
 }
 
+## grant database permission(s)
 mysql_grant {'authenticated@localhost/*.*',
     ensure => 'present',
     options => ['GRANT'],
