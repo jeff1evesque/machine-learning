@@ -9,6 +9,7 @@ class {'::mysql::client':
     package_name => 'mariadb-client',
 }
 
+## define database
 mysql::db {'db_machine_learning':
     user     => 'authenticated',
     password => 'password',
