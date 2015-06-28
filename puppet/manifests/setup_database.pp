@@ -1,4 +1,8 @@
-## install, and configure mariadb-server
+## mysql::server: install, and configure mariadb-server
+#
+#  @password_hash, must be a 41 character hexadecimal value, preceded by '*'
+#  @max_connections_per_hour, @max_queries_per_hour, @max_updates_per_hour,
+#      @max_user_connections, a zero value indicates no limit
 class {'::mysql::server':
     package_name => 'mariadb-server',
     root_password => 'password',
@@ -29,12 +33,12 @@ class {'::mysql::server':
     }
 }
 
-## install, and configure mariadb-client
+## mysql::client: install, and configure mariadb-client
 class {'::mysql::client':
     package_name => 'mariadb-client',
 }
 
-## install python-mariadb bindings
+## mysql::bindings: install python-mariadb bindings
 class {'::mysql::bindings':
     python_enable => 'true',
 }
