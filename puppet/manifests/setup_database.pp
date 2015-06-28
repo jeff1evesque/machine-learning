@@ -1,3 +1,6 @@
+## define $PATH for all execs, and packages
+Exec {path => ['/usr/bin/']}
+
 ## mysql::server: install, and configure mariadb-server
 #
 #  @password_hash, must be a 41 character hexadecimal value, preceded by '*'
