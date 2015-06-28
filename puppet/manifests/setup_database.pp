@@ -4,8 +4,10 @@ class {'::mysql::server':
     root_password => 'password',
 }
 
-## install mysql bindings for python
-class {'mysql::python':}
+## install, and configure mariadb-client
+class {'::mysql::client':
+    package_name => 'mariadb-client',
+}
 
 mysql::db {'db_machine_learning':
     user     => 'authenticated',
