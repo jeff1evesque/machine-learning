@@ -2,6 +2,31 @@
 class {'::mysql::server':
     package_name => 'mariadb-server',
     root_password => 'password',
+    users => {
+        'authenticated@localhost' => {
+            ensure => 'present',
+            max_connections_per_hour => '0',
+            max_queries_per_hour => '0',
+            max_updates_per_hour => '0',
+            max_user_connections => '0',
+            password_hash        => '*FDAF67529387342EF786FE',
+        },
+	},
+    grants => {
+        'authenticated@localhost/*.*' => {
+            ensure => 'present',
+            options => ['GRANT'],
+            privileges => ['CREATE', 'INSERT', 'DELETE', 'UPDATE', 'DROP', 'EXECUTE', 'SELECT'],
+            table => '*.*',
+            user => 'authenticated@localhost',
+        },
+    },
+    databases => {
+        'db_machine_learning' => {
+            ensure => 'present',
+            charset => 'utf8',
+        },
+    }
 }
 
 ## install, and configure mariadb-client
@@ -11,28 +36,3 @@ class {'::mysql::client':
 
 ## install python-mariadb bindings
 class {'::mysql::bindings::python'}
-
-## create database
-mysql::db {'db_machine_learning':
-    host => 'localhost',
-}
-
-## create database user
-#
-#  Note: '0' specifices no limit.
-mysql_user {'authenticated@localhost':
-    ensure => 'present',
-    max_connections_per_hour => '0',
-    max_queries_per_hour => '0',
-    max_updates_per_hour => '0',
-    max_user_connections => '0',
-}
-
-## grant database permission(s)
-mysql_grant {'authenticated@localhost/*.*':
-    ensure => 'present',
-    options => ['GRANT'],
-    privileges => ['CREATE', 'INSERT', 'DELETE', 'UPDATE', 'DROP', 'EXECUTE', 'SELECT'],
-    table => '*.*',
-    user => 'authenticated@localhost',
-}
