@@ -46,8 +46,9 @@ class {'::mysql::bindings':
     python_enable => 'true',
 }
 
-## define database tables in 'db_machine_learning'
+## define database tables
 exec {'create-database-tables':
     command => 'python setup_tables.py',
     cwd => '/vagrant/puppet/scripts/',
+    require => Class['::mysql::server'],
 }
