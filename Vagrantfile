@@ -32,7 +32,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   
   ## Update latest version of puppet
-  config.vm.provision :shell, :path => "puppet/bash/puppet_updater.sh"
+  config.vm.provision :shell, :path => "puppet/scripts/puppet_updater.sh"
 
   ## Create 'puppet/modules' directory for puppet provisioner(s)
   #
