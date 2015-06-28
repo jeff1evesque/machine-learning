@@ -12,7 +12,7 @@ class {'::mysql::client':
 ## install python-mariadb bindings
 mysql::bindings::python
 
-## define database
+## create database
 mysql::db {'db_machine_learning':
     host => 'localhost',
 }
