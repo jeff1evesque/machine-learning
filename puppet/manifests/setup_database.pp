@@ -10,7 +10,7 @@ class {'::mysql::client':
 }
 
 ## install python-mariadb bindings
-mysql::bindings::python
+class['::mysql::bindings::python']
 
 ## create database
 mysql::db {'db_machine_learning':
