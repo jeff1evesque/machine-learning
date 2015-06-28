@@ -9,11 +9,12 @@ class {'::mysql::client':
     package_name => 'mariadb-client',
 }
 
+## install python-mariadb bindings
+mysql::bindings::python
+
 ## define database
 mysql::db {'db_machine_learning':
-    user     => 'authenticated',
-    password => 'password',
-    host     => 'localhost',
+    host => 'localhost',
 }
 
 ## create database user
