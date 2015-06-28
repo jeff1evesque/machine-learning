@@ -28,7 +28,7 @@ mysql_user {'authenticated@localhost':
 }
 
 ## grant database permission(s)
-mysql_grant {'authenticated@localhost/*.*',
+mysql_grant {'authenticated@localhost/*.*':
     ensure => 'present',
     options => ['GRANT'],
     privileges => ['CREATE', 'INSERT', 'DELETE', 'UPDATE', 'DROP', 'EXECUTE', 'SELECT'],
