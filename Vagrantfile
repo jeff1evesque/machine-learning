@@ -32,7 +32,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   
   ## Update latest version of puppet
-  config.vm.provision :shell, :path => "puppet/bash/puppet_updater.sh"
+  config.vm.provision :shell, :path => "puppet/scripts/puppet_updater.sh"
 
   ## Create 'puppet/modules' directory for puppet provisioner(s)
   #
@@ -63,6 +63,13 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "install_sklearn.pp"
+    puppet.module_path    = "puppet/modules"
+  end
+
+  ## Custom Manifest: install, and configure SQL database
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "setup_database.pp"
     puppet.module_path    = "puppet/modules"
   end
   
