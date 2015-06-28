@@ -16,7 +16,7 @@ class {'::mysql::server':
         'authenticated@localhost/*.*' => {
             ensure => 'present',
             options => ['GRANT'],
-            privileges => ['CREATE', 'INSERT', 'DELETE', 'UPDATE', 'DROP', 'EXECUTE', 'SELECT'],
+            privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
             table => '*.*',
             user => 'authenticated@localhost',
         },
