@@ -57,5 +57,5 @@ class {'::mysql::bindings':
 exec {'create-database-tables':
     command => 'python ../../app.py && python setup_tables.py',
     cwd => '/vagrant/puppet/scripts/',
-    require => Class["::mysql::bindings::python"],
+    require => Class['::mysql::bindings::python'],
 }
