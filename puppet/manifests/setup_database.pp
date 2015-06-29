@@ -44,11 +44,12 @@ class {'::mysql::client':
 ## mysql::bindings: install python-mariadb bindings
 class {'::mysql::bindings':
     python_enable => 'true',
+    notify => Exec['create-database-tables'],
 }
 
 ## define database tables
 exec {'create-database-tables':
     command => 'python ../../app.py && python setup_tables.py',
     cwd => '/vagrant/puppet/scripts/',
-    require => Class['::mysql::server'],
+    refreshonly => true,
 }
