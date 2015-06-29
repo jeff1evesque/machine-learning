@@ -39,20 +39,23 @@ class {'::mysql::server':
 ## mysql::client: install, and configure mariadb-client
 class {'::mysql::client':
     package_name => 'mariadb-client',
+    require => Class['::mysql::server'],
 }
 
 ## mysql::bindings: install python-mariadb bindings
 class {'::mysql::bindings':
     python_enable => 'true',
-    notify => Exec['create-database-tables'],
+    require => [Class['::mysql::client'], Class['::mysql::server']],
 }
 
 ## define database tables
 #
 #  @app.py, the flask application server, when executed, allows
 #      'import' statements to be made, relative to the server.
+#  @require, syntax involves 'Class Containment'. For more information,
+#      https://puppetlabs.com/blog/class-containment-puppet
 exec {'create-database-tables':
     command => 'python ../../app.py && python setup_tables.py',
     cwd => '/vagrant/puppet/scripts/',
-    refreshonly => true,
+    require => Class["::mysql::bindings::python"],
 }
