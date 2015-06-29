@@ -48,6 +48,9 @@ class {'::mysql::bindings':
 }
 
 ## define database tables
+#
+#  @app.py, the flask application server, when executed, allows
+#      'import' statements to be made, relative to the server.
 exec {'create-database-tables':
     command => 'python ../../app.py && python setup_tables.py',
     cwd => '/vagrant/puppet/scripts/',
