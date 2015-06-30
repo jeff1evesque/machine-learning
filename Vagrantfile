@@ -22,10 +22,6 @@ Vagrant.configure(2) do |config|
     end
   end
 
-  ## Run r10k
-  config.r10k.puppet_dir = 'puppet'
-  config.r10k.puppetfile_path = 'puppet/Puppetfile'
-
   ## Restart Vagrant: if new plugin installed
   if plugin_installed == true
     exec "vagrant #{ARGV.join(' ')}"
@@ -37,6 +33,10 @@ Vagrant.configure(2) do |config|
   
   ## Update latest version of puppet
   config.vm.provision :shell, :path => "puppet/scripts/puppet_updater.sh"
+
+  ## Run r10k
+  config.r10k.puppet_dir = 'puppet'
+  config.r10k.puppetfile_path = 'puppet/Puppetfile'
 
   ## Create 'puppet/modules' directory for puppet provisioner(s)
   #
