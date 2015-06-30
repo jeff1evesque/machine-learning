@@ -22,6 +22,10 @@ Vagrant.configure(2) do |config|
     end
   end
 
+  ## Run r10k
+  config.r10k.puppet_dir = 'puppet'
+  config.r10k.puppetfile_path = 'puppet/Puppetfile'
+
   ## Restart Vagrant: if new plugin installed
   if plugin_installed == true
     exec "vagrant #{ARGV.join(' ')}"
