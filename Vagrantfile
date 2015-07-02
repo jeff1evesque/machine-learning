@@ -48,6 +48,13 @@ Vagrant.configure(2) do |config|
     puppet.options        = ["--parser", "future"]
   end
 
+  ## Custom Manifest: start webserver
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "start_webserver.pp"
+    puppet.module_path    = "puppet/modules"
+  end
+
   ## Custom Manifest: build scikit-learn
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
