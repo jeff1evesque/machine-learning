@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins = %w(vagrant-triggers vagrant-r10k)
+  required_plugins = %w(vagrant-r10k)
   plugin_installed = false
 
   ## Install Vagrant Plugins
@@ -37,15 +37,6 @@ Vagrant.configure(2) do |config|
   ## Run r10k
   config.r10k.puppet_dir = 'puppet'
   config.r10k.puppetfile_path = 'puppet/Puppetfile'
-
-  ## Create 'puppet/modules' directory for puppet provisioner(s)
-  #
-  #  :ALL, denotes the successive commands will be applied to all vagrant
-  #       commands.
-  #  -p, create directory, and parent directories if needed
-  config.trigger.before :ALL do
-    run "mkdir -p puppet/modules"
-  end
   
   ## Custom Manifest: install needed packages
   #
