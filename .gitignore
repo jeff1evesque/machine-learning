@@ -18,6 +18,7 @@
 /web_interface/static/js/
 /web_interface/static/css/
 /web_interface/static/img/
+/puppet/modules/
 
 # Ignore and don't commit the following files
 /*.pyc
