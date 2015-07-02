@@ -32,3 +32,8 @@ mod 'vcsrepo',
 mod 'mysql',
   :git => "https://github.com/puppetlabs/puppetlabs-mysql.git",
   :ref => "3.4.0"
+
+## Install Module: python (from master), which includes pip, devel,
+#                  flask, requests, pipx (enhanced pip).
+mod 'python',
+  :git => "https://github.com/counsyl/puppet-python.git",
