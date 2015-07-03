@@ -36,4 +36,4 @@ mod 'mysql',
 ## Install Module: python (from master), which includes pip, devel,
 #                  flask, requests, pipx (enhanced pip).
 mod 'python',
-  :git => "https://github.com/counsyl/puppet-python.git",
+  :git => "https://github.com/counsyl/puppet-python.git"
