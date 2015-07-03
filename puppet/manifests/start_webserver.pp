@@ -9,7 +9,7 @@ case $::osfamily {
     'redhat': {
     }
     'debian': {
-        ## define startup script using heredoc syntax
+        ## define startup script (heredoc syntax)
         file {'/etc/init/start_flask.conf':
             ensure => present,
             source => @(EOT)
