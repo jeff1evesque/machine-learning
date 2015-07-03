@@ -7,6 +7,10 @@ case $::osfamily {
     'redhat': {
     }
     'debian': {
+        ## initialize empty startup script
+        file {'/etc/init/start_flask.conf':
+            ensure => present,
+        }
     }
     default: {
     }
