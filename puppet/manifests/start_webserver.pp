@@ -2,8 +2,6 @@ include python
 include python::flask
 include python::requests
 
-$debian_startup_description = "description 'start flask sever'"
-
 ## startup script for flask
 case $::osfamily {
     'redhat': {
