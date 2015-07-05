@@ -2,12 +2,12 @@ include python
 include python::flask
 include python::requests
 
-## detect os family, start flask server
+## detect os family: create startup script, start flask server
 case $::osfamily {
     'redhat': {
     }
     'debian': {
-        ## define startup script (heredoc syntax)
+        ## create startup script (heredoc syntax)
         file {'/etc/init/start_flask.conf':
             ensure => present,
             source => @(EOT)
