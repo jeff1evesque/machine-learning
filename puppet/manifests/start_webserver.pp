@@ -43,7 +43,11 @@ case $::osfamily {
                           echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
                       | EOT,
         }
-		
+
+        ## start webserver
+        exec {'start-webserver':
+            command => 'service start_flask start',
+		}
     }
     default: {
     }
