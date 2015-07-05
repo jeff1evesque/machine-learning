@@ -2,6 +2,9 @@ include python
 include python::flask
 include python::requests
 
+## define $PATH for all execs, and packages
+Exec {path => ['/usr/bin/']
+
 ## detect os family: create startup script, start flask server
 case $::osfamily {
     'redhat': {
@@ -42,12 +45,13 @@ case $::osfamily {
                           rm /vagrant/flask_server.pid
                           echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
                       | EOT
+            notify  => Exec['start-webserver'],
         }
 
         ## start webserver
         exec {'start-webserver':
             command => 'service start_flask start',
-            require => File['/etc/init/start_flask.conf'],
+            refreshonly => true,
 		}
     }
     default: {
