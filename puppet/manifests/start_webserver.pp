@@ -3,7 +3,7 @@ include python::flask
 include python::requests
 
 ## define $PATH for all execs, and packages
-Exec {path => ['/usr/bin/']
+Exec {path => ['/usr/bin/']}
 
 ## detect os family: create startup script, start flask server
 case $::osfamily {
