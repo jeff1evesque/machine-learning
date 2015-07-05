@@ -69,7 +69,7 @@ package {$packages_general_npm:
     ensure => 'present',
     provider => 'npm',
     before => Package[$packages_flask_pip],
-    require => Package['redis-server'],
+    require => Package['npm'],
 }
 
 ## package: install redis-server
