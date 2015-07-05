@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins = %w(vagrant-r10k)
+  required_plugins = %w(vagrant-r10k vagrant-puppet-install)
   plugin_installed = false
 
   ## Install Vagrant Plugins
@@ -31,8 +31,8 @@ Vagrant.configure(2) do |config|
   #  boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/trusty64"
   
-  ## Update latest version of puppet
-  config.vm.provision :shell, :path => "puppet/scripts/puppet_updater.sh"
+  ## Update puppet
+  config.puppet_install.puppet_version = '4.1.0'
 
   ## Run r10k
   config.r10k.puppet_dir = 'puppet'
