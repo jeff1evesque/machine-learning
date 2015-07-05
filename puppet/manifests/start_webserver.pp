@@ -9,8 +9,8 @@ case $::osfamily {
     'debian': {
         ## create startup script (heredoc syntax)
         file {'/etc/init/start_flask.conf':
-            ensure => present,
-            source => @(EOT)
+            ensure  => present,
+            content => @(EOT),
                       #!upstart
                       description 'start flask server'
 
@@ -26,7 +26,7 @@ case $::osfamily {
 
                       ## start flask server (via bash shell)
                       #
-                      #  $$, the pid of the current script
+                      #  $$, the process id (pid) of the current script
                       script
                           echo $$ > /vagrant/log/flask_server.pid
                           exec python /vagrant/app.py
@@ -41,7 +41,7 @@ case $::osfamily {
 					  pre-stop script
                           rm /vagrant/flask_server.pid
                           echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
-                      EOT,
+                      | EOT
         }
 
         ## start webserver
