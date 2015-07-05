@@ -2,7 +2,7 @@ include python
 include python::flask
 include python::requests
 
-## startup script for flask
+## detect os family, start flask server
 case $::osfamily {
     'redhat': {
     }
