@@ -47,6 +47,7 @@ case $::osfamily {
         ## start webserver
         exec {'start-webserver':
             command => 'service start_flask start',
+            require => File['/etc/init/start_flask.conf'],
 		}
     }
     default: {
