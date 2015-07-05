@@ -25,7 +25,22 @@ case $::osfamily {
                       stop on shutdown
 
                       ## start flask server (via bash shell)
-                      exec python /vagrant/app.py
+                      #
+                      #  $$, the pid of the current script
+                      script
+                          echo $$ > /vagrant/log/flask_server.pid
+                          exec python /vagrant/app.py
+                      end script
+
+                      ## log start-up date
+                      pre-start script
+                          echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log
+                      end script
+
+                      ## log shut-down date, and remove file containing process id
+					  pre-stop script
+                          rm /vagrant/flask_server.pid
+                          echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
                       | EOT,
         }
 		
