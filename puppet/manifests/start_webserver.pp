@@ -44,6 +44,7 @@ case $::osfamily {
 					  pre-stop script
                           rm /vagrant/flask_server.pid
                           echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
+                      end script
                       | EOT
             notify  => Exec['start-webserver'],
         }
