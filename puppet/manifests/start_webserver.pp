@@ -5,14 +5,21 @@ include python::requests
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/']}
 
+## create log directory
+file {'/vagrant/log/':
+    ensure => 'directory',
+    before => File['server-startup-script'],
+}
+
 ## detect os family: create startup script, start flask server
 case $::osfamily {
     'redhat': {
     }
     'debian': {
         ## create startup script (heredoc syntax)
-        file {'/etc/init/start_flask.conf':
-            ensure  => present,
+        file {'server-startup-script':
+            path    => '/etc/init/start_flask.conf',
+            ensure  => 'present',
             content => @(EOT),
                       #!upstart
                       description 'start flask server'
