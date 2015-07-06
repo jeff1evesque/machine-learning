@@ -55,14 +55,14 @@ case $::osfamily {
                            exec echo > /vagrant/flask_server.pid ''
                        end script
                        | EOT
-            notify  => Exec['start-webserver'],
+            notify  => Service['start_flask'],
         }
 
         ## start webserver
-        exec {'start-webserver':
-            command => 'service start_flask start',
-            refreshonly => true,
-		}
+        service {'start_flask':
+            ensure => 'running',
+            enable => 'true',
+        }
     }
     default: {
     }
