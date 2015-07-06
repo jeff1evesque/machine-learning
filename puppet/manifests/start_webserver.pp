@@ -17,6 +17,10 @@ case $::osfamily {
     }
     'debian': {
         ## create startup script (heredoc syntax)
+        #
+        #  @notify, after the upstart script is created, ensure the service is (re)started. This is not the same
+        #      as an exec statement, where the 'refereshonly => true' would be implemented on the corresponding
+        #      listening end point.
         file {'server-startup-script':
             path    => '/etc/init/start_flask.conf',
             ensure  => 'present',
