@@ -36,7 +36,7 @@ case $::osfamily {
 
                        ## start flask server (via bash shell)
                        #
-                       #  $$, the process id (pid) of the current script
+                       #  @$$, the process id (pid) of the current script
                        script
                            exec echo > /vagrant/log/flask_server.pid $$
                            python /vagrant/app.py
@@ -47,10 +47,12 @@ case $::osfamily {
                            exec echo >> /vagrant/log/flask_server.log "[`date`] flask server starting"
                        end script
 
-                       ## log shut-down date, and remove process id log
+                       ## log shut-down date, remove process id from log
+                       #
+                       #  @[`date`], current date script executed
                        pre-stop script
-                           exec echo > /vagrant/flask_server.pid ''
                            exec echo >> /vagrant/log/flask_server.log "[`date`] flask server stopping"
+                           exec echo > /vagrant/flask_server.pid ''
                        end script
                        | EOT
             notify  => Exec['start-webserver'],
