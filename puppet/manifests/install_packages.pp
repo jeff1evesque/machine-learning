@@ -18,7 +18,6 @@ $packages_build_dep   = ['matplotlib', 'scikit-learn']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
 $packages_general_gem = ['sass']
 $packages_general_npm = ['uglify-js', 'imagemin']
-$packages_flask_pip   = ['flask', 'requests']
 $packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs, and packages
@@ -71,13 +70,6 @@ package {$packages_general_npm:
     provider => 'npm',
     before => Package[$packages_flask_pip],
     require => Package['npm'],
-}
-
-## packages: install flask via 'pip'
-package {$packages_flask_pip:
-    ensure => 'installed',
-    provider => 'pip',
-    before => Package['redis-server'],
 }
 
 ## package: install redis-server
