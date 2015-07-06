@@ -21,38 +21,38 @@ case $::osfamily {
             path    => '/etc/init/start_flask.conf',
             ensure  => 'present',
             content => @(EOT),
-                      #!upstart
-                      description 'start flask server'
+                       #!upstart
+                       description 'start flask server'
 
-                      ## start job defined in this file after system services, and processes have already loaded
-                      #       (to prevent conflict).
-                      #
-                      #  @filesystem, ensure job in this file executes after filesystems have been mounted
-                      #  @[2345], represents all configuration states with general linux, and networking access
-                      start on filesystem or runlevel [2345]
+                       ## start job defined in this file after system services, and processes have already loaded
+                       #       (to prevent conflict).
+                       #
+                       #  @filesystem, ensure job in this file executes after filesystems have been mounted
+                       #  @[2345], represents all configuration states with general linux, and networking access
+                       start on filesystem or runlevel [2345]
 
-                      ## stop flask server when machine gracefully shuts down
-                      stop on shutdown
+                       ## stop flask server when machine gracefully shuts down
+                       stop on shutdown
 
-                      ## start flask server (via bash shell)
-                      #
-                      #  $$, the process id (pid) of the current script
-                      script
-                          echo $$ > /vagrant/log/flask_server.pid
-                          exec python /vagrant/app.py
-                      end script
+                       ## start flask server (via bash shell)
+                       #
+                       #  $$, the process id (pid) of the current script
+                       script
+                           echo $$ > /vagrant/log/flask_server.pid
+                           exec python /vagrant/app.py
+                       end script
 
-                      ## log start-up date
-                      pre-start script
-                          echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log
-                      end script
+                       ## log start-up date
+                       pre-start script
+                           echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log
+                       end script
 
-                      ## log shut-down date, and remove file containing process id
-                      pre-stop script
-                          rm /vagrant/flask_server.pid
-                          echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
-                      end script
-                      | EOT
+                       ## log shut-down date, and remove file containing process id
+                       pre-stop script
+                           rm /vagrant/flask_server.pid
+                           echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
+                       end script
+                       | EOT
             notify  => Exec['start-webserver'],
         }
 
