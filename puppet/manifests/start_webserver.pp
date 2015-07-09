@@ -22,7 +22,7 @@ case $::osfamily {
         #      an exec statement, where the 'refreshonly => true' would be implemented on the corresponding
         #      listening end point. But, the 'service' end point does not require the 'refreshonly' attribute.
         file {'server-startup-script':
-            path    => '/etc/init/start_flask.conf',
+            path    => '/etc/init/flask.conf',
             ensure  => 'present',
             content => @(EOT),
                        #!upstart
