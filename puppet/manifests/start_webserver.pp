@@ -5,12 +5,6 @@ include python::requests
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/']}
 
-## create log directory
-file {'/vagrant/log/':
-    ensure => 'directory',
-    before => File['server-startup-script'],
-}
-
 ## detect os family: create startup script, start flask server
 case $::osfamily {
     'redhat': {
@@ -48,6 +42,7 @@ case $::osfamily {
 
                        ## log start-up date
                        pre-start script
+                           mkdir -p /vagrant/log/
                            exec echo >> /vagrant/log/flask_server.log "[`date`] flask server starting"
                        end script
 
@@ -59,11 +54,11 @@ case $::osfamily {
                            exec echo > /vagrant/flask_server.pid ''
                        end script
                        | EOT
-            notify  => Service['start_flask'],
+            notify  => Service['flask'],
         }
 
         ## start webserver
-        service {'start_flask':
+        service {'flask':
             ensure => 'running',
             enable => 'true',
         }
