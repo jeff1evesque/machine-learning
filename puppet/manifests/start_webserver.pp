@@ -33,7 +33,7 @@ case $::osfamily {
                        #
                        #  @filesystem, ensure job in this file executes after filesystems have been mounted
                        #  @[2345], represents all configuration states with general linux, and networking access
-                       start on filesystem or runlevel [2345]
+                       start on vagrant-mounted and runlevel [2345]
 
                        ## stop flask server when machine gracefully shuts down
                        stop on shutdown
