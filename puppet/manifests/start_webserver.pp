@@ -36,27 +36,27 @@ case $::osfamily {
                        start on vagrant-mounted and runlevel [2345]
 
                        ## stop flask server when machine gracefully shuts down
-                       stop on shutdown
+                       stop on runlevel [!2345]
 
                        ## start flask server (via bash shell)
                        #
                        #  @$$, the process id (pid) of the current script
                        script
-                           exec echo > /vagrant/log/flask_server.pid $$
-                           python /vagrant/app.py
+                           echo $$ > /vagrant/log/flask_server.pid
+                           exec python /vagrant/app.py
                        end script
 
                        ## log start-up date
                        pre-start script
-                           exec echo >> /vagrant/log/flask_server.log "[`date`] flask server starting"
+                           exec echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log 
                        end script
 
                        ## log shut-down date, remove process id from log
                        #
                        #  @[`date`], current date script executed
                        pre-stop script
-                           exec echo >> /vagrant/log/flask_server.log "[`date`] flask server stopping"
-                           rm /vagrant/flask_server.pid
+                           exec echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
+                           exec rm /vagrant/flask_server.pid
                        end script
                        | EOT
             notify  => Service['flask'],
