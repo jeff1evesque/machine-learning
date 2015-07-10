@@ -48,15 +48,15 @@ case $::osfamily {
 
                        ## log start-up date
                        pre-start script
-                           exec echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log 
+                           echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log 
                        end script
 
                        ## log shut-down date, remove process id from log
                        #
                        #  @[`date`], current date script executed
                        pre-stop script
-                           exec echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
-                           exec rm /vagrant/flask_server.pid
+                           echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
+                           rm /vagrant/flask_server.pid
                        end script
                        | EOT
             notify  => Service['flask'],
