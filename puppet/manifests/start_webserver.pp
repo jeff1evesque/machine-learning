@@ -33,7 +33,7 @@ case $::osfamily {
                        #
                        #  @vagrant-mounted, an event that executes after the shared folder is mounted
                        #  @[2345], represents all configuration states with general linux, and networking access
-                       start on vagrant-mounted and runlevel [2345]
+                       start on (vagrant-mounted and runlevel [2345])
 
                        ## stop flask server when machine gracefully shuts down
                        stop on runlevel [!2345]
@@ -42,7 +42,7 @@ case $::osfamily {
                        #
                        #  @$$, the process id (pid) of the current script
                        script
-                           echo $$ > /vagrant/log/flask_server.pid
+                           echo > /vagrant/log/flask_server.pid $$
                            exec python /vagrant/app.py
                        end script
 
