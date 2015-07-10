@@ -31,7 +31,7 @@ case $::osfamily {
                        ## start job defined in this file after system services, and processes have already loaded
                        #       (to prevent conflict).
                        #
-                       #  @filesystem, ensure job in this file executes after filesystems have been mounted
+                       #  @vagrant-mounted, an event that executes after the shared folder is mounted
                        #  @[2345], represents all configuration states with general linux, and networking access
                        start on vagrant-mounted and runlevel [2345]
 
@@ -56,7 +56,7 @@ case $::osfamily {
                        #  @[`date`], current date script executed
                        pre-stop script
                            exec echo >> /vagrant/log/flask_server.log "[`date`] flask server stopping"
-                           exec echo > /vagrant/flask_server.pid ''
+                           rm /vagrant/flask_server.pid
                        end script
                        | EOT
             notify  => Service['flask'],
