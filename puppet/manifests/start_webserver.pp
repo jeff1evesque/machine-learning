@@ -54,9 +54,9 @@ case $::osfamily {
                        ## log shut-down date, remove process id from log
                        #
                        #  @[`date`], current date script executed
-                       pre-stop script
+                       post-stop script
                            echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
-                           rm /vagrant/flask_server.pid
+                           rm -f /vagrant/flask_server.pid
                        end script
                        | EOT
             notify  => Service['flask'],
