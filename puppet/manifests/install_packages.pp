@@ -1,14 +1,15 @@
 ## include puppet modules: this (also) runs 'apt-get update'
+include python
 include apt
 include nodejs
 
 ## variables
 case $::osfamily {
     'redhat': {
-        $packages_general = ['dos2unix', 'inotify-tools', 'python-pip', 'ruby-devel']
+        $packages_general = ['dos2unix', 'inotify-tools', 'ruby-devel']
     }
     'debian': {
-        $packages_general = ['dos2unix', 'inotify-tools', 'python-pip', 'ruby-dev']
+        $packages_general = ['dos2unix', 'inotify-tools', 'ruby-dev']
     }
     default: {
     }
