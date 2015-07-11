@@ -78,7 +78,7 @@ case $::osfamily {
         }
 
         ## convert windows to linux line endings
-        exec {
+        exec {'dos2unix-line-endings':
             command => 'dos2unix /etc/init/flask.conf',
             refreshonly => true,
         }
