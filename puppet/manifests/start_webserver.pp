@@ -57,7 +57,6 @@ case $::osfamily {
                        #  @[`date`], current date script executed
                        post-stop script
                            echo "[`date`] flask server stopped" >> /vagrant/log/flask_server.log
-                           rm -f /vagrant/flask_server.pid
                        end script
                        | EOT
             notify  => Service['flask'],
