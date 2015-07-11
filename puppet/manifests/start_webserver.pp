@@ -67,7 +67,14 @@ case $::osfamily {
                            fi
                        end script
                        | EOT
-            notify  => Service['flask'],
+            notify  => Exec['dos2unix-line-endings'],
+        }
+
+        ## convert windows to linux line endings
+        exec {'dos2unix-line-endings':
+            command => 'dos2unix /etc/init/flask.conf',
+            refreshonly => true,
+            notify => Service['flask'],
         }
 
         ## start webserver
@@ -75,12 +82,6 @@ case $::osfamily {
             ensure => 'running',
             enable => 'true',
             notify => Exec['dos2unix-line-endings'],
-        }
-
-        ## convert windows to linux line endings
-        exec {'dos2unix-line-endings':
-            command => 'dos2unix /etc/init/flask.conf',
-            refreshonly => true,
         }
     }
     default: {
