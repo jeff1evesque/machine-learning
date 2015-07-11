@@ -35,11 +35,14 @@ case $::osfamily {
                        #  @[2345], represents all configuration states with general linux, and networking access
                        start on (vagrant-mounted and runlevel [2345])
 
-                       ## stop flask server when machine gracefully shuts down
+                       ## stop flask server
                        stop on runlevel [!2345]
 
-                       ## ensure job is restarted if stopped
+                       ## restart upstart job continuously
                        respawn
+
+                       ## run upstart as a background process
+                       expect fork
 
                        ## start flask server
                        exec python /vagrant/app.py
