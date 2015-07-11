@@ -41,6 +41,7 @@ case $::osfamily {
                        ## restart upstart job continuously
                        respawn
 
+                       # required for permission to write to '/vagrant/' files (pre-stop stanza)
                        setuid vagrant
                        setgid vagrant
 
