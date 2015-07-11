@@ -42,8 +42,8 @@ case $::osfamily {
                        #
                        #  @$$, the process id (pid) of the current script
                        script
-                           echo > /vagrant/log/flask_server.pid $$
-                           exec python /vagrant/app.py
+                           exec python /vagrant/app.py start
+                           echo $$ > /vagrant/log/flask_server.pid
                        end script
 
                        ## log start-up date
@@ -63,9 +63,12 @@ case $::osfamily {
         }
 
         ## start webserver
+		#
+		#  @provider, causes puppet to look explicitly for an upstart script
         service {'flask':
-            ensure => 'running',
-            enable => 'true',
+            ensure   => 'running',
+            enable   => 'true',
+            provider => 'upstart',
         }
     }
     default: {
