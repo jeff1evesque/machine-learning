@@ -18,9 +18,10 @@ case $::osfamily {
     'debian': {
         ## create startup script (heredoc syntax)
         #
-        #  @notify, after the upstart script is created, ensure the service is (re)started. This is similar to
+        #  @notify, after the upstart script is created, ensure the service is started. This is similar to
         #      an exec statement, where the 'refreshonly => true' would be implemented on the corresponding
         #      listening end point. But, the 'service' end point does not require the 'refreshonly' attribute.
+        #      This statement also ensures if the upstart script changes, the corresponding service restarts.
         file {'server-startup-script':
             path    => '/etc/init/flask.conf',
             ensure  => 'present',
@@ -67,7 +68,7 @@ case $::osfamily {
                            fi
                        end script
                        | EOT
-            notify  => Exec['dos2unix-line-endings'],
+            notify  => [Exec['dos2unix-line-endings'], Service['flask']],
         }
 
         ## convert windows to linux line endings
