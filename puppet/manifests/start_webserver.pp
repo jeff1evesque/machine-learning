@@ -58,7 +58,7 @@ case $::osfamily {
                        #
                        #  @[`date`], current date script executed
                        pre-stop script
-                           if [ "$MOUNTPOINT" == "/vagrant" ]; then
+                           if $MOUNTPOINT = "/vagrant" ]; then
                                echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
                            fi
                        end script
