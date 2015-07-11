@@ -41,7 +41,7 @@ case $::osfamily {
                        ## restart upstart job continuously
                        respawn
 
-                       ## run upstart as a background process
+                       ## run upstart job as a background process
                        expect fork
 
                        ## start flask server
