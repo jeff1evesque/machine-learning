@@ -38,13 +38,8 @@ case $::osfamily {
                        ## stop flask server when machine gracefully shuts down
                        stop on runlevel [!2345]
 
-                       ## start flask server (via bash shell)
-                       #
-                       #  @$$, the process id (pid) of the current script
-                       script
-                           exec python /vagrant/app.py start
-                           echo $$ > /vagrant/log/flask_server.pid
-                       end script
+                       ## start flask server
+                       exec python /vagrant/app.py
 
                        ## log start-up date
                        pre-start script
