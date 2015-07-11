@@ -38,6 +38,9 @@ case $::osfamily {
                        ## stop flask server when machine gracefully shuts down
                        stop on runlevel [!2345]
 
+                       ## ensure job is restarted if stopped
+                       respawn
+
                        ## start flask server
                        exec python /vagrant/app.py
 
