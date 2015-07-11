@@ -63,8 +63,6 @@ case $::osfamily {
         }
 
         ## start webserver
-		#
-		#  @provider, causes puppet to look explicitly for an upstart script
         service {'flask':
             ensure   => 'running',
             enable   => 'true',
