@@ -48,15 +48,19 @@ case $::osfamily {
                        exec python /vagrant/app.py
 
                        ## log start-up date
+                       #
+                       #  @[`date`], current date script executed
                        pre-start script
                            echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log 
                        end script
 
-                       ## log shut-down date, remove process id from log
+                       ## log shut-down date, remove process id from log before '/vagrant' is unmounted
                        #
                        #  @[`date`], current date script executed
-                       post-stop script
-                           echo "[`date`] flask server stopped" >> /vagrant/log/flask_server.log
+                       pre-stop script
+                           if [ "$MOUNTPOINT" == "/vagrant" ]; then
+                               echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
+                           fi
                        end script
                        | EOT
             notify  => Service['flask'],
