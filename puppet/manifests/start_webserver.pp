@@ -68,7 +68,6 @@ case $::osfamily {
         service {'flask':
             ensure   => 'running',
             enable   => 'true',
-            provider => 'upstart',
         }
     }
     default: {
