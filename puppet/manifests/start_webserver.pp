@@ -81,7 +81,6 @@ case $::osfamily {
         service {'flask':
             ensure => 'running',
             enable => 'true',
-            notify => Exec['dos2unix-line-endings'],
         }
     }
     default: {
