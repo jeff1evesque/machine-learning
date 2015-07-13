@@ -17,11 +17,6 @@ case $::osfamily {
     }
     'debian': {
         ## create startup script (heredoc syntax)
-        #
-        #  @notify, after the upstart script is created, ensure the service is started. This is similar to
-        #      an exec statement, where the 'refreshonly => true' would be implemented on the corresponding
-        #      listening end point. But, the 'service' end point does not require the 'refreshonly' attribute.
-        #      This statement also ensures if the upstart script changes, the corresponding service restarts.
         file {'server-startup-script':
             path    => '/etc/init/flask.conf',
             ensure  => 'present',
@@ -63,15 +58,13 @@ case $::osfamily {
                        #
                        #  @[`date`], current date script executed
                        pre-stop script
-                           if [ $MOUNTPOINT = "/vagrant" ]; then
-                               echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
-                           fi
+                            echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
                        end script
                        | EOT
-            notify  => [Exec['dos2unix-line-endings'], Service['flask']],
+            notify  => Exec['dos2unix-line-endings'],
         }
 
-        ## convert windows to linux line endings
+        ## convert clrf (windows to linux) in case host machine is windows.
         exec {'dos2unix-line-endings':
             command => 'dos2unix /etc/init/flask.conf',
             refreshonly => true,
