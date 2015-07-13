@@ -65,6 +65,10 @@ case $::osfamily {
         }
 
         ## convert clrf (windows to linux) in case host machine is windows.
+        #
+        #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
+        #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
+        #      'service' end point does not require the 'refreshonly' attribute.
         exec {'dos2unix-line-endings':
             command => 'dos2unix /etc/init/flask.conf',
             refreshonly => true,
