@@ -1,5 +1,5 @@
 {
-    "name": "webcompiler",
+    "name": "webcompiler(s)",
     "version": "1.0.0",
     "description": "webcompiler(s) for machine-learning web-interface",
     "devDependencies": {
