@@ -1,18 +1,19 @@
 {
-"name": "webcompiler",
-"devDependencies": {
-    "node-sass": "^2.1.1",
-    "uglifyjs": "^2.4.10",
-    "imagemin": "^3.2.0",
-},
-"watch": {
-    "uglifyjs": "/src/js/*.js",
-    "sass": "/src/scss/*.scss",
-    "imagemin": "/src/img/*.{jpg,png,gif}",
-},
-"scripts": {
-    "uglifyjs": "uglifyjs -c --output /web-interface/static/**.min.js /src/js/*.js",
-    "sass": "node-sass -wr /src/scss/*.scss /web-interface/static/css/**.min.css",
-    "imagemin": "imagemin /src/img/*.{jpg,png,gif} > /web_interface/static/img/**.{jpg,png,gif}",
-    "watch": "npm-watch"
+    "name": "webcompiler",
+    "devDependencies": {
+        "node-sass": "^2.1.1",
+        "uglifyjs": "^2.4.10",
+        "imagemin": "^3.2.0",
+    },
+    "watch": {
+        "uglifyjs": "/src/js/*.js",
+        "sass": "/src/scss/*.scss",
+        "imagemin": "/src/img/*.{jpg,png,gif}",
+    },
+    "scripts": {
+        "uglifyjs": "uglifyjs -c --output /web-interface/static/**.min.js /src/js/*.js",
+        "sass": "node-sass -wr /src/scss/*.scss /web-interface/static/css/**.min.css",
+        "imagemin": "imagemin /src/img/*.{jpg,png,gif} > /web_interface/static/img/**.{jpg,png,gif}",
+        "watch": "npm-watch"
+    }
 }
