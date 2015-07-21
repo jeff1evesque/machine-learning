@@ -3,9 +3,16 @@ Exec {path => ['/usr/bin/']}
 
 ## variables
 $compilers = ['uglifyjs', 'sass', 'imagemin']
+$directory = ['css', 'js', 'img']
 
 ## dynamically create compilers
 $compilers.each |String $compiler| {
+    ## create asset directories
+    file {"/vagrant/web_interface/static/${directory}/":
+        ensure => 'directory',
+        before => File["${compiler}-startup-script"],
+    }
+
     ## create startup script (heredoc syntax)
     #
     #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
