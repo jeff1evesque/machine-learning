@@ -55,7 +55,7 @@ $compilers.each |String $compiler| {
                        echo "[`date`] flask server stopping" >> /vagrant/log/${compiler}.log
                    end script
                    | EOT
-               notify  => Exec['dos2unix-line-endings'],
+               notify  => Exec['dos2unix-webcompilers'],
         }
 
     ## convert clrf (windows to linux) in case host machine is windows.
@@ -63,7 +63,7 @@ $compilers.each |String $compiler| {
     #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
     #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
     #      'service' end point does not require the 'refreshonly' attribute.
-    exec {'dos2unix-line-endings':
+    exec {'dos2unix-webcompilers':
         command => 'dos2unix /etc/init/${compiler}.conf',
         refreshonly => true,
         notify => Service['${compiler}'],
