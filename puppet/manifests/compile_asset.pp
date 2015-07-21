@@ -70,7 +70,7 @@ $compilers.each |String $compiler| {
     }
 
     ## start ${compiler} service
-    service {'${compiler}':
+    service {"${compiler}":
         ensure => 'running',
         enable => 'true',
     }
