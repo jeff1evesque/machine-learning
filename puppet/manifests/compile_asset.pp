@@ -12,7 +12,7 @@ $compilers.each |String $compiler| {
     #
     #  Note: the '/vagrant/log/' directory is created in 'start_webserver.pp'.
     file {"${compiler}-startup-script":
-        path    => "/etc/init/${compiler}",
+        path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
         content => @("EOT"),
                    #!upstart
