@@ -6,9 +6,9 @@ $compilers = ['uglifyjs', 'sass', 'imagemin']
 $directory = ['css', 'js', 'img']
 
 ## dynamically create compilers
-$compilers.each |String $compiler| {
+$compilers.each |Integer $index, String $compiler| {
     ## create asset directories
-    file {"/vagrant/web_interface/static/${directory}/":
+    file {"/vagrant/web_interface/static/${directory[$index]}/":
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
     }
@@ -24,9 +24,6 @@ $compilers.each |String $compiler| {
         content => @("EOT"),
                    #!upstart
                    description 'start ${compiler}'
-
-                   # Pre-Pathing: allow '${compiler}' command
-                   PATH="/usr/local/bin:$PATH"
 
                    ## start job defined in this file after system services, and processes have already loaded
                    #       (to prevent conflict).
@@ -49,6 +46,9 @@ $compilers.each |String $compiler| {
                    expect fork
 
                    ## start upstart job: defined within 'package.json'
+                   #
+                   #  @chdir, set the root directory (required) for the ${compiler} job process
+                   chdir /vagrant/
                    exec npm run ${compiler}
 
                    ## log start-up date
