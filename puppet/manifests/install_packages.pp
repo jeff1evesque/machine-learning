@@ -61,7 +61,6 @@ package {$packages_general_pip:
 package {$packages_general_npm:
     ensure => 'present',
     provider => 'npm',
-    before => Package[$packages_flask_pip],
     require => Package['npm'],
 }
 
