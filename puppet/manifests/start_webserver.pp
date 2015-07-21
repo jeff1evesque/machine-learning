@@ -31,7 +31,7 @@ case $::osfamily {
                        #  @[2345], represents all configuration states with general linux, and networking access
                        start on (vagrant-mounted and runlevel [2345])
 
-                       ## stop flask server
+                       ## stop upstart job
                        stop on runlevel [!2345]
 
                        ## restart upstart job continuously
@@ -44,7 +44,7 @@ case $::osfamily {
                        ## run upstart job as a background process
                        expect fork
 
-                       ## start flask server
+                       ## start upstart job
                        exec python /vagrant/app.py
 
                        ## log start-up date
@@ -61,7 +61,7 @@ case $::osfamily {
                             echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
                        end script
                        | EOT
-            notify  => Exec['dos2unix-line-endings'],
+            notify  => Exec['dos2unix-flask'],
         }
 
         ## convert clrf (windows to linux) in case host machine is windows.
@@ -69,7 +69,7 @@ case $::osfamily {
         #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
         #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
         #      'service' end point does not require the 'refreshonly' attribute.
-        exec {'dos2unix-line-endings':
+        exec {'dos2unix-flask':
             command => 'dos2unix /etc/init/flask.conf',
             refreshonly => true,
             notify => Service['flask'],
