@@ -6,15 +6,11 @@ $compilers = ['uglifyjs', 'sass', 'imagemin']
 
 ## dynamically create compilers
 $compilers.each |String $compiler| {
-    ## create log directory
-    file {'/vagrant/log/':
-        ensure => 'directory',
-        before => File['${compiler}-startup-script'],
-    }
-
     ## create startup script (heredoc syntax)
     #
     #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
+    #
+    #  Note: the '/vagrant/log/' directory is created in 'start_webserver.pp'.
     file {'${compiler}-startup-script':
         path    => "/etc/init/${compiler}",
         ensure  => 'present',
