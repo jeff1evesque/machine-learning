@@ -45,14 +45,14 @@ $compilers.each |String $compiler| {
                    #
                    #  @[`date`], current date script executed
                    pre-start script
-                       echo "[`date`] flask server starting" >> /vagrant/log/${compiler}.log 
+                       echo "[`date`] ${compiler} server starting" >> /vagrant/log/${compiler}.log 
                    end script
 
                    ## log shut-down date, remove process id from log before '/vagrant' is unmounted
                    #
                    #  @[`date`], current date script executed
                    pre-stop script
-                       echo "[`date`] flask server stopping" >> /vagrant/log/${compiler}.log
+                       echo "[`date`] ${compiler} server stopping" >> /vagrant/log/${compiler}.log
                    end script
                    | EOT
                notify  => Exec["dos2unix-${compiler}"],
