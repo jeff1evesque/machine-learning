@@ -25,6 +25,9 @@ $compilers.each |String $compiler| {
                    #!upstart
                    description 'start ${compiler}'
 
+                   # Pre-Pathing: allow '${compiler}' command
+                   PATH="/usr/local/bin:$PATH"
+
                    ## start job defined in this file after system services, and processes have already loaded
                    #       (to prevent conflict).
                    #
