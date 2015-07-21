@@ -11,7 +11,7 @@ $compilers.each |String $compiler| {
     #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
     #
     #  Note: the '/vagrant/log/' directory is created in 'start_webserver.pp'.
-    file {'${compiler}-startup-script':
+    file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}",
         ensure  => 'present',
         content => @("EOT"),
