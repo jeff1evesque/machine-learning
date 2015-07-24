@@ -3,9 +3,9 @@
     "version": "1.0.0",
     "description": "webcompiler(s) for machine-learning web-interface",
     "scripts": {
-        "uglifyjs": "uglifyjs -c --output /web-interface/static/**.min.js /src/js/*.js",
-        "sass": "node-sass -wr /src/scss/*.scss /web-interface/static/css/**.min.css",
-        "imagemin": "imagemin /src/img/*.{jpg,png,gif} > /web_interface/static/img/**.{jpg,png,gif}",
+        "uglifyjs": "uglifyjs -c --output web-interface/static/**.min.js src/js/*.js",
+        "sass": "node-sass -wr src/scss/*.scss web-interface/static/css/**.min.css",
+        "imagemin": "imagemin src/img/*.{jpg,png,gif} > web_interface/static/img/**.{jpg,png,gif}",
         "watch": "npm-watch"
     },
     "repository": {
