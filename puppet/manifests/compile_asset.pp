@@ -47,7 +47,8 @@ $compilers.each |Integer $index, String $compiler| {
 
                    ## start upstart job: defined within 'package.json'
                    #
-                   #  @chdir, set the root directory (required) for the ${compiler} job process
+                   #  @chdir, set the root directory for the ${compiler} job process, since 'package.json'
+                   #      is mounted in the '/vagrant/' directory.
                    chdir /vagrant/
                    exec npm run ${compiler}
 
