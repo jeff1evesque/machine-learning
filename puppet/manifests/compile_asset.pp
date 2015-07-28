@@ -49,8 +49,23 @@ $compilers.each |Integer $index, String $compiler| {
                    #
                    #  @chdir, set the root directory for the ${compiler} job process, since 'package.json'
                    #      is mounted in the '/vagrant/' directory.
-                   chdir /vagrant/
-                   exec npm run ${compiler}
+                   script
+                   /bin/bash <<EOT
+                   # track execution of script
+                   set -x; exec > /log/${compiler}_execution.log 2>&1
+
+                   # watch '/web-interface/static/${directory[$index]}' subdirectory
+                   inotifywait /web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
+                       # Compile ${directory[$index]}
+                       while read path action file; do
+                           # get filename (without 'last' extension)
+                           filename="${file%.*}"
+
+                           # compile with ${compiler}
+                           uglifyjs -c --output ../web_interface/static/js/"$filename".min.js ../src/js/"$file"
+                       done
+                   EOT
+				   end script
 
                    ## log start-up date
                    #
