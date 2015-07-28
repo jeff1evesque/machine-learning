@@ -63,13 +63,13 @@ $compilers.each |Integer $index, String $compiler| {
                                filename="${file%.*}"
 
                                # compile with ${compiler}
-                               uglifyjs -c --output ../web_interface/static/js/"$filename".min.js ../src/js/"$file"
+                               uglifyjs -c --output /web_interface/static/js/"$filename".min.js /src/js/"$file"
                            elif [ "${compiler}" = 'sass']; then
                                # filename (without 'last' extension)
                                filename="${file%.*}"
 
                                # compile with 'sass'
-                               sass ../src/scss/"$file" ../web_interface/static/css/"$filename".min.css --style compressed
+                               sass /src/scss/"$file" /web_interface/static/css/"$filename".min.css --style compressed
                            elif [ "${compiler}" = 'imagemin']; then
                                # filename (without directory path)
                                filename="${file##*/}"
@@ -77,9 +77,9 @@ $compilers.each |Integer $index, String $compiler| {
 
                                # minify with 'imagemin'
                                if [ "$file_extension" = 'gif' ]; then
-                                   cp ../src/img/"$file" ../web_interface/static/img/"$filename"
+                                   cp /src/img/"$file" /web_interface/static/img/"$filename"
                                else
-                                   imagemin ../src/img/"$file" > ../web_interface/static/img/"$filename"
+                                   imagemin /src/img/"$file" > /web_interface/static/img/"$filename"
                                fi
                            fi
                        done
