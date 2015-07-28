@@ -58,14 +58,33 @@ $compilers.each |Integer $index, String $compiler| {
                    inotifywait /web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
                        # Compile ${directory[$index]}
                        while read path action file; do
-                           # get filename (without 'last' extension)
-                           filename="${file%.*}"
+                           if [ "${compiler}" = 'uglifyjs']; then
+                               # get filename (without 'last' extension)
+                               filename="${file%.*}"
 
-                           # compile with ${compiler}
-                           uglifyjs -c --output ../web_interface/static/js/"$filename".min.js ../src/js/"$file"
+                               # compile with ${compiler}
+                               uglifyjs -c --output ../web_interface/static/js/"$filename".min.js ../src/js/"$file"
+                           elif [ "${compiler}" = 'sass']; then
+                               # filename (without 'last' extension)
+                               filename="${file%.*}"
+
+                               # compile with 'sass'
+                               sass ../src/scss/"$file" ../web_interface/static/css/"$filename".min.css --style compressed
+                           elif [ "${compiler}" = 'imagemin']; then
+                               # filename (without directory path)
+                               filename="${file##*/}"
+                               file_extension="${file##*.}"
+
+                               # minify with 'imagemin'
+                               if [ "$file_extension" = 'gif' ]; then
+                                   cp ../src/img/"$file" ../web_interface/static/img/"$filename"
+                               else
+                                   imagemin ../src/img/"$file" > ../web_interface/static/img/"$filename"
+                               fi
+                           fi
                        done
                    EOT
-				   end script
+                   end script
 
                    ## log start-up date
                    #
