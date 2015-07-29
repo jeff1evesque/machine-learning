@@ -50,7 +50,6 @@ $compilers.each |Integer $index, String $compiler| {
                    #  @chdir, set the root directory for the ${compiler} job process, since 'package.json'
                    #      is mounted in the '/vagrant/' directory.
                    script
-                   /bin/bash <<EOT
                    # track execution of script
                    set -x; exec > /log/${compiler}_execution.log 2>&1
 
@@ -83,7 +82,6 @@ $compilers.each |Integer $index, String $compiler| {
                                fi
                            fi
                        done
-                   EOT
                    end script
 
                    ## log start-up date
