@@ -57,19 +57,19 @@ $compilers.each |Integer $index, String $compiler| {
                    inotifywait /web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
                        # Compile ${directory[$index]}
                        while read path action file; do
-                           if [ "${compiler}" = 'uglifyjs' ]; then
+                           if [ ${compiler} = 'uglifyjs' ]; then
                                # get filename (without 'last' extension)
                                filename="${file%.*}"
 
                                # compile with ${compiler}
                                uglifyjs -c --output /web_interface/static/js/"$filename".min.js /src/js/"$file"
-                           elif [ "${compiler}" = 'sass' ]; then
+                           elif [ ${compiler} = 'sass' ]; then
                                # filename (without 'last' extension)
                                filename="${file%.*}"
 
                                # compile with 'sass'
                                sass /src/scss/"$file" /web_interface/static/css/"$filename".min.css --style compressed
-                           elif [ "${compiler}" = 'imagemin' ]; then
+                           elif [ ${compiler} = 'imagemin' ]; then
                                # filename (without directory path)
                                filename="${file##*/}"
                                file_extension="${file##*.}"
