@@ -78,7 +78,8 @@ $compilers.each |Integer $index, String $compiler| {
                                if [ "\$file_extension" = 'gif' ]; then
                                    cp /src/img/"\$file" /web_interface/static/img/"\$filename"
                                else
-                                   imagemin /src/img/"\$file" > /web_interface/static/img/"\$filename"                            
+                                   imagemin /src/img/"\$file" > /web_interface/static/img/"\$filename"
+                               fi
                            fi
                        done
                    end script
