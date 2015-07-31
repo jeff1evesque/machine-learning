@@ -18,10 +18,13 @@ $compilers.each |Integer $index, String $compiler| {
     #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
     #
     #  Note: the '/vagrant/log/' directory is created in 'start_webserver.pp'.
+    #
+    #  Note: the dash in closing heredoc tag, removes any trailing whitespace, or newline on the last line of
+    #        the heredoc string.
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
-        content => @("EOT"),
+        content => @("EOT"/$),
                    #!upstart
                    description 'start ${compiler}'
 
@@ -45,10 +48,10 @@ $compilers.each |Integer $index, String $compiler| {
                    ## run upstart job as a background process
                    expect fork
 
-                   ## start upstart job: defined within 'package.json'
+                   ## start upstart job
                    #
-                   #  @chdir, set the root directory for the ${compiler} job process, since 'package.json'
-                   #      is mounted in the '/vagrant/' directory.
+                   #  @filename, @file_extension, the assignment value is escaped, since it is contained within
+                   #       the puppet heredoc
                    script
                    # track execution of script
                    set -x; exec > /log/${compiler}_execution.log 2>&1
@@ -57,29 +60,25 @@ $compilers.each |Integer $index, String $compiler| {
                    inotifywait /web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
                        # Compile ${directory[$index]}
                        while read path action file; do
-                           if [ ${compiler} = 'uglifyjs' ]; then
+                           if [ "${compiler}" = 'uglifyjs' ]; then
                                # get filename (without 'last' extension)
-                               filename="${file%.*}"
-
-                               # compile with ${compiler}
-                               uglifyjs -c --output /web_interface/static/js/"$filename".min.js /src/js/"$file"
+                               filename="\${file}"
                            elif [ ${compiler} = 'sass' ]; then
                                # filename (without 'last' extension)
-                               filename="${file%.*}"
+                               filename="\${file%.*}"
 
                                # compile with 'sass'
-                               sass /src/scss/"$file" /web_interface/static/css/"$filename".min.css --style compressed
+                               sass /src/scss/"$file" /web_interface/static/css/"\$filename".min.css --style compressed
                            elif [ ${compiler} = 'imagemin' ]; then
                                # filename (without directory path)
-                               filename="${file##*/}"
-                               file_extension="${file##*.}"
+                               filename="\${file##*/}"
+                               file_extension="\${file##*.}"
 
                                # minify with 'imagemin'
-                               if [ "$file_extension" = 'gif' ]; then
-                                   cp /src/img/"$file" /web_interface/static/img/"$filename"
+                               if [ "\$file_extension" = 'gif' ]; then
+                                   cp /src/img/"\$file" /web_interface/static/img/"\$filename"
                                else
-                                   imagemin /src/img/"$file" > /web_interface/static/img/"$filename"
-                               fi
+                                   imagemin /src/img/"\$file" > /web_interface/static/img/"\$filename"                            
                            fi
                        done
                    end script
@@ -97,7 +96,7 @@ $compilers.each |Integer $index, String $compiler| {
                    pre-stop script
                        echo "[`date`] ${compiler} watcher stopping" >> /vagrant/log/${compiler}.log
                    end script
-                   | EOT
+                   |- EOT
                notify  => Exec["dos2unix-${compiler}"],
         }
 
