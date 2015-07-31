@@ -13,8 +13,9 @@
 !license.md
 !Vagrantfile
 !/puppet/
+!package.json
 
-# Ignore and don't commit the following directories
+#Ignore and don't commit the following directories
 /web_interface/static/js/
 /web_interface/static/css/
 /web_interface/static/img/
