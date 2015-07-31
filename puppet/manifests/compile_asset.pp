@@ -54,7 +54,7 @@ $compilers.each |Integer $index, String $compiler| {
                    #       the puppet heredoc
                    script
                    # track execution of script
-                   set -x; exec > /log/${compiler}_execution.log 2>&1
+                   set -x; exec > /vagrant/log/${compiler}_execution.log 2>&1
 
                    # watch '/web-interface/static/${directory[$index]}' subdirectory
                    inotifywait /web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
