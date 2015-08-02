@@ -12,6 +12,9 @@ $compilers.each |Integer $index, String $compiler| {
         $webcompiler = <<EOT
             # filename (without 'last' extension)
             filename="\${file}"
+
+            # compile with 'uglifyjs'
+            uglifyjs -c --output ../web_interface/static/js/"$filename".min.js ../src/js/"$file"
         EOT
     }
 	elsif ($compiler == 'sass' {
@@ -29,7 +32,7 @@ $compilers.each |Integer $index, String $compiler| {
             filename="\${file##*/}"
             file_extension="\${file##*.}"
 
-            # minify with 'imagemin'
+            # compile with 'imagemin'
             if [ "\$file_extension" = 'gif' ]; then
                 cp /src/img/"\$file" /web_interface/static/img/"\$filename"
             else
