@@ -7,7 +7,7 @@ $directory = ['css', 'js', 'img']
 
 ## dynamically create compilers
 $compilers.each |Integer $index, String $compiler| {
-    ## webcompiler(s)
+    ## webcompiler(s): used during creation of startup script (below)
     if ($compiler == 'uglifyjs' {
         $webcompimler = <<EOT
             # filename (without 'last' extension)
@@ -49,6 +49,9 @@ $compilers.each |Integer $index, String $compiler| {
     #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
     #
     #  Note: the '/vagrant/log/' directory is created in 'start_webserver.pp'.
+    #
+    #  Note: the '/$' in the starting heredoc tag, allows the use of '$' to be escaped within the overall
+    #        heredoc string.
     #
     #  Note: the dash in closing heredoc tag, removes any trailing whitespace, or newline on the last line of
     #        the heredoc string.
