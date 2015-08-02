@@ -7,6 +7,37 @@ $directory = ['css', 'js', 'img']
 
 ## dynamically create compilers
 $compilers.each |Integer $index, String $compiler| {
+    ## webcompiler(s)
+    if ($compiler == 'uglifyjs' {
+        $webcompimler = <<EOT
+            # filename (without 'last' extension)
+            filename="\${file}"
+        EOT
+    }
+	elsif ($compiler == 'sass' {
+        $webcompiler = <<EOT
+            # filename (without 'last' extension)
+            filename="\${file%.*}"
+
+            # compile with 'sass'
+            sass /src/scss/"$file" /web_interface/static/css/"\$filename".min.css --style compressed
+        EOT
+	}
+    elsif ($compiler == 'imagemin') {
+        $webcompiler = <<EOT
+            # filename (without directory path)
+            filename="\${file##*/}"
+            file_extension="\${file##*.}"
+
+            # minify with 'imagemin'
+            if [ "\$file_extension" = 'gif' ]; then
+                cp /src/img/"\$file" /web_interface/static/img/"\$filename"
+            else
+                imagemin /src/img/"\$file" > /web_interface/static/img/"\$filename"
+            fi
+        EOT
+	}
+
     ## create asset directories
     file {"/vagrant/web_interface/static/${directory[$index]}/":
         ensure => 'directory',
@@ -60,27 +91,8 @@ $compilers.each |Integer $index, String $compiler| {
                    inotifywait /web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
                        # Compile ${directory[$index]}
                        while read path action file; do
-                           if [ "${compiler}" = 'uglifyjs' ]; then
-                               # get filename (without 'last' extension)
-                               filename="\${file}"
-                           elif [ ${compiler} = 'sass' ]; then
-                               # filename (without 'last' extension)
-                               filename="\${file%.*}"
 
-                               # compile with 'sass'
-                               sass /src/scss/"$file" /web_interface/static/css/"\$filename".min.css --style compressed
-                           elif [ ${compiler} = 'imagemin' ]; then
-                               # filename (without directory path)
-                               filename="\${file##*/}"
-                               file_extension="\${file##*.}"
-
-                               # minify with 'imagemin'
-                               if [ "\$file_extension" = 'gif' ]; then
-                                   cp /src/img/"\$file" /web_interface/static/img/"\$filename"
-                               else
-                                   imagemin /src/img/"\$file" > /web_interface/static/img/"\$filename"
-                               fi
-                           fi
+                       ${webcompiler}
                        done
                    end script
 
