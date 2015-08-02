@@ -9,7 +9,7 @@ $directory = ['css', 'js', 'img']
 $compilers.each |Integer $index, String $compiler| {
     ## webcompiler(s): used during creation of startup script (below)
     if ($compiler == 'uglifyjs' {
-        $webcompimler = <<EOT
+        $webcompiler = <<EOT
             # filename (without 'last' extension)
             filename="\${file}"
         EOT
