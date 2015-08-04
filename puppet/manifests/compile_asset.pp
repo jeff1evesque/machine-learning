@@ -8,37 +8,37 @@ $directory = ['css', 'js', 'img']
 ## dynamically create compilers
 $compilers.each |Integer $index, String $compiler| {
     ## webcompiler(s): used during creation of startup script (below)
-    if ($compiler == 'uglifyjs' {
-        $webcompiler = <<EOT
-            # filename (without 'last' extension)
-            filename="\${file}"
+    if ($compiler == 'uglifyjs') {
+        $webcompiler = @(EOT)
+    # filename (without 'last' extension)
+        filename="${file%.*}"
 
-            # compile with 'uglifyjs'
-            uglifyjs -c --output ../web_interface/static/js/"$filename".min.js ../src/js/"$file"
-        EOT
+        # compile with 'uglifyjs'
+        uglifyjs -c --output /vagrant/web_interface/static/js/"$filename".min.js /vagrant/src/js/"$file"
+        - EOT
     }
-	elsif ($compiler == 'sass' {
-        $webcompiler = <<EOT
-            # filename (without 'last' extension)
-            filename="\${file%.*}"
+	elsif ($compiler == 'sass') {
+        $webcompiler = @(EOT)
+    # filename (without 'last' extension)
+        filename="${file%.*}"
 
-            # compile with 'sass'
-            sass /src/scss/"$file" /web_interface/static/css/"\$filename".min.css --style compressed
-        EOT
+        # compile with 'sass'
+        sass /vagrant/src/scss/"$file" /vagrant/web_interface/static/css/"\$filename".min.css --style compressed
+        - EOT
 	}
     elsif ($compiler == 'imagemin') {
-        $webcompiler = <<EOT
-            # filename (without directory path)
-            filename="\${file##*/}"
-            file_extension="\${file##*.}"
+        $webcompiler = @(EOT)
+    # filename (without directory path)
+        filename="${file##*/}"
+        file_extension="\${file##*.}"
 
-            # compile with 'imagemin'
-            if [ "\$file_extension" = 'gif' ]; then
-                cp /src/img/"\$file" /web_interface/static/img/"\$filename"
-            else
-                imagemin /src/img/"\$file" > /web_interface/static/img/"\$filename"
-            fi
-        EOT
+        # compile with 'imagemin'
+        if [ "\$file_extension" = 'gif' ]; then
+            cp /vagrant/src/img/"\$file" /vagrant/web_interface/static/img/"\$filename"
+        else
+            imagemin /vagrant/src/img/"\$file" > /vagrant/web_interface/static/img/"\$filename"
+        fi
+        - EOT
 	}
 
     ## create asset directories
@@ -90,11 +90,14 @@ $compilers.each |Integer $index, String $compiler| {
                    #  @filename, @file_extension, the assignment value is escaped, since it is contained within
                    #       the puppet heredoc
                    script
+                   # Pre-Pathing: allow ${compiler} command
+                   PATH="/usr/local/bin:\$PATH"
+
                    # track execution of script
                    set -x; exec > /vagrant/log/${compiler}_execution.log 2>&1
 
                    # watch '/web-interface/static/${directory[$index]}' subdirectory
-                   inotifywait /web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
+                   inotifywait /vagrant/web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
                        # Compile ${directory[$index]}
                        while read path action file; do
 
