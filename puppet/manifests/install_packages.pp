@@ -17,7 +17,7 @@ case $::osfamily {
 
 $packages_build_dep   = ['matplotlib', 'scikit-learn']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
-$packages_general_npm = ['uglify-js', 'imagemin', 'node-sass', 'npm-watch']
+$packages_general_npm = ['uglify-js', 'imagemin', 'node-sass']
 $packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs, and packages
