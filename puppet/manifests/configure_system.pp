@@ -7,7 +7,7 @@ class {'timezone':
     locality => 'New_York',
 }
 
-## recursively change line endings in /vagrant directory
+## recursively convert to unix line endings in /vagrant directory
 exec {'recursive-line-endings':
-    command => 'find /vagrant -type f -print0 | xargs -0 -n 1 -P 4 dos2unix ',
+    command => 'find /vagrant -type f -print0 | xargs -0 -n 1 -P 4 dos2unix',
 }
