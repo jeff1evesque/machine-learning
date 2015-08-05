@@ -13,14 +13,6 @@ $compilers.each |Integer $index, String $compiler| {
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
 
-## dynamically create compilers
-$compilers.each |String $compiler| {
-    ## create log directory
-    file {'/vagrant/log/':
-        ensure => 'directory',
-        before => File['${compiler}-startup-script'],
-    }
-
     ## create startup script (heredoc syntax)
     #
     #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
