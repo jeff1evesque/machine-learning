@@ -1,48 +1,15 @@
 ## define $PATH for all execs, and packages
-Exec {path => ['/usr/bin/']}
+Exec {path => ['/usr/bin/', '/bin/']}
 
 ## variables
-$compilers = ['uglifyjs', 'sass', 'imagemin']
-$directory = ['css', 'js', 'img']
+$compilers       = ['uglifyjs', 'sass', 'imagemin']
+$directory_src   = ['js', 'scss', 'img']
+$directory_asset = ['js', 'css', 'img']
 
 ## dynamically create compilers
 $compilers.each |Integer $index, String $compiler| {
-    ## webcompiler(s): used during creation of startup script (below)
-    if ($compiler == 'uglifyjs') {
-        $webcompiler = @(EOT)
-    # filename (without 'last' extension)
-        filename="${file%.*}"
-
-        # compile with 'uglifyjs'
-        uglifyjs -c --output /vagrant/web_interface/static/js/"$filename".min.js /vagrant/src/js/"$file"
-        - EOT
-    }
-	elsif ($compiler == 'sass') {
-        $webcompiler = @(EOT)
-    # filename (without 'last' extension)
-        filename="${file%.*}"
-
-        # compile with 'sass'
-        sass /vagrant/src/scss/"$file" /vagrant/web_interface/static/css/"\$filename".min.css --style compressed
-        - EOT
-	}
-    elsif ($compiler == 'imagemin') {
-        $webcompiler = @(EOT)
-    # filename (without directory path)
-        filename="${file##*/}"
-        file_extension="\${file##*.}"
-
-        # compile with 'imagemin'
-        if [ "\$file_extension" = 'gif' ]; then
-            cp /vagrant/src/img/"\$file" /vagrant/web_interface/static/img/"\$filename"
-        else
-            imagemin /vagrant/src/img/"\$file" > /vagrant/web_interface/static/img/"\$filename"
-        fi
-        - EOT
-	}
-
     ## create asset directories
-    file {"/vagrant/web_interface/static/${directory[$index]}/":
+    file {"/vagrant/web_interface/static/${directory_asset[$index]}/":
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
     }
@@ -50,14 +17,6 @@ $compilers.each |Integer $index, String $compiler| {
     ## create startup script (heredoc syntax)
     #
     #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
-    #
-    #  Note: the '/vagrant/log/' directory is created in 'start_webserver.pp'.
-    #
-    #  Note: the '/$' in the starting heredoc tag, allows the use of '$' to be escaped within the overall
-    #        heredoc string.
-    #
-    #  Note: the dash in closing heredoc tag, removes any trailing whitespace, or newline on the last line of
-    #        the heredoc string.
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
@@ -87,23 +46,9 @@ $compilers.each |Integer $index, String $compiler| {
 
                    ## start upstart job
                    #
-                   #  @filename, @file_extension, the assignment value is escaped, since it is contained within
-                   #       the puppet heredoc
-                   script
-                   # Pre-Pathing: allow ${compiler} command
-                   PATH="/usr/local/bin:\$PATH"
-
-                   # track execution of script
-                   set -x; exec > /vagrant/log/${compiler}_execution.log 2>&1
-
-                   # watch '/web-interface/static/${directory[$index]}' subdirectory
-                   inotifywait /vagrant/web-interface/static/${directory[$index]} -m -e close_write -e move -e create |
-                       # Compile ${directory[$index]}
-                       while read path action file; do
-
-                       ${webcompiler}
-                       done
-                   end script
+                   #  @chdir, change the current working directory
+                   chdir /vagrant/puppet/scripts/
+                   exec ./${compiler}
 
                    ## log start-up date
                    #
@@ -118,24 +63,23 @@ $compilers.each |Integer $index, String $compiler| {
                    pre-stop script
                        echo "[`date`] ${compiler} watcher stopping" >> /vagrant/log/${compiler}.log
                    end script
-                   |- EOT
-               notify  => Exec["dos2unix-${compiler}"],
+                   | EOT
+               notify  => Service["${compiler}"],
         }
-
-    ## convert clrf (windows to linux) in case host machine is windows.
-    #
-    #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
-    #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
-    #      'service' end point does not require the 'refreshonly' attribute.
-    exec {"dos2unix-${compiler}":
-        command => "dos2unix /etc/init/${compiler}.conf",
-        refreshonly => true,
-        notify => Service["${compiler}"],
-    }
 
     ## start ${compiler} service
     service {"${compiler}":
         ensure => 'running',
         enable => 'true',
+        notify  => Exec["touch-${directory_src[$index]}"],
+    }
+
+    ## touch source: ensure initial build compiles every source files
+    #
+    #  Note: inotifywait watches close_write, move, and create. However, the source files will already exist before
+    #        this 'inotifywait', since the '/vagrant' directory will already have been mounted on the initial build.
+    exec {"touch-${directory_src[$index]}":
+        command => "touch /vagrant/src/${directory_src[$index]}/*",
+        refreshonly => true,
     }
 }
