@@ -13,9 +13,6 @@ $compilers.each |Integer $index, String $compiler| {
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
 
-## variables
-$compilers = ['uglifyjs', 'sass', 'imagemin']
-
 ## dynamically create compilers
 $compilers.each |String $compiler| {
     ## create log directory
