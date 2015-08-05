@@ -12,6 +12,16 @@ $compilers.each |Integer $index, String $compiler| {
     file {"/vagrant/web_interface/static/${directory_asset[$index]}/":
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
+
+## variables
+$compilers = ['uglifyjs', 'sass', 'imagemin']
+
+## dynamically create compilers
+$compilers.each |String $compiler| {
+    ## create log directory
+    file {'/vagrant/log/':
+        ensure => 'directory',
+        before => File['${compiler}-startup-script'],
     }
 
     ## create startup script (heredoc syntax)
@@ -20,7 +30,7 @@ $compilers.each |Integer $index, String $compiler| {
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
-        content => @("EOT"/$),
+        content => @("EOT"),
                    #!upstart
                    description 'start ${compiler}'
 
