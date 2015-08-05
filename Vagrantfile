@@ -72,6 +72,13 @@ Vagrant.configure(2) do |config|
     puppet.options        = ["--parser", "future"]
   end
 
+  ## Custom Manifest: configure system (i.e. system timezone)
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "configure_system.pp"
+    puppet.module_path    = "puppet/modules"
+  end
+
   ## Custom Manifest: define webcompilers
   #
   #  Note: future parser allow heredoc sytnax (since puppet 3.5), and allows array
@@ -81,13 +88,6 @@ Vagrant.configure(2) do |config|
     puppet.manifest_file  = "compile_asset.pp"
     puppet.module_path    = "puppet/modules"
     puppet.options        = ["--parser", "future"]
-  end
-
-  ## Custom Manifest: configure system (i.e. system timezone)
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "configure_system.pp"
-    puppet.module_path    = "puppet/modules"
   end
   
   # Disable automatic box update checking. If you disable this, then
