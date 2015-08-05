@@ -43,6 +43,7 @@ mod 'sys',
 mod 'python',
   :git => "https://github.com/counsyl/puppet-python.git"
 
-## Install Module: timezone (from master)
+## Install Module: timezone
 mod 'timezone',
-  :git => "https://github.com/BashtonLtd/puppet-timezone"
+  :git => "https://github.com/BashtonLtd/puppet-timezone",
+  :ref => "v0.1.3"
