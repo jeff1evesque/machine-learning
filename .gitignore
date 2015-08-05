@@ -5,7 +5,6 @@
 !/src/
 !.gitigore
 !settings.py
-!setup.py
 !.gitmodules
 !README.md
 !__init__.py
