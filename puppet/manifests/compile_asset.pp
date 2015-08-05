@@ -12,6 +12,7 @@ $compilers.each |Integer $index, String $compiler| {
     file {"/vagrant/web_interface/static/${directory_asset[$index]}/":
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
+    }
 
     ## create startup script (heredoc syntax)
     #
