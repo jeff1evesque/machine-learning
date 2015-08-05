@@ -71,14 +71,17 @@ $compilers.each |Integer $index, String $compiler| {
     service {"${compiler}":
         ensure => 'running',
         enable => 'true',
-        notify  => Exec["touch-${directory_src[$index]}"],
+        notify  => Exec["touch-${directory_src[$index]}-files"],
     }
 
-    ## touch source: ensure initial build compiles every source files
+    ## touch source: ensure initial build compiles every source file
     #
-    #  Note: inotifywait watches close_write, move, and create. However, the source files will already exist before
-    #        this 'inotifywait', since the '/vagrant' directory will already have been mounted on the initial build.
-    exec {"touch-${directory_src[$index]}":
+    #  @touch, changes the modification time to the current system time.
+    #
+    #  Note: the current inotifywait implementation watches close_write, move, and create. However, the source files
+    #        will already exist before this 'inotifywait', since the '/vagrant' directory will already have been mounted
+    #        on the initial build.
+    exec {"touch-${directory_src[$index]}-files":
         command => "touch /vagrant/src/${directory_src[$index]}/*",
         refreshonly => true,
     }
