@@ -16,7 +16,7 @@ class {'::mysql::server':
             max_queries_per_hour => '0',
             max_updates_per_hour => '0',
             max_user_connections => '0',
-            password_hash        => '*4BE5006A1CD00511D3F326F421FE5E00511D3F3E',
+            password_hash        => mysql_password('password'),
         },
 	},
     grants => {
