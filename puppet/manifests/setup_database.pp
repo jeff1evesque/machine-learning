@@ -3,7 +3,7 @@ Exec {path => ['/usr/bin/']}
 
 ## mysql::server: install, and configure mariadb-server
 #
-#  @password_hash, must be a 41 character hexadecimal value, preceded by '*'
+#  @password_hash, default password (can be adjusted via cli)
 #  @max_connections_per_hour, @max_queries_per_hour, @max_updates_per_hour,
 #      @max_user_connections, a zero value indicates no limit
 class {'::mysql::server':
@@ -46,16 +46,16 @@ class {'::mysql::client':
 class {'::mysql::bindings':
     python_enable => 'true',
     require => [Class['::mysql::client'], Class['::mysql::server']],
+    notify => Exec['create-database-tables'],
 }
 
 ## define database tables
 #
-#  @app.py, the flask application server, when executed, allows
-#      'import' statements to be made, relative to the server.
 #  @require, syntax involves 'Class Containment'. For more information,
 #      https://puppetlabs.com/blog/class-containment-puppet
 exec {'create-database-tables':
     command => 'python setup_tables.py',
     cwd => '/vagrant/puppet/scripts/',
     require => Class['::mysql::bindings::python'],
+    refreshonly => true,
 }
