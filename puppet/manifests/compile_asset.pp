@@ -1,5 +1,5 @@
 ## define $PATH for all execs, and packages
-Exec {path => ['/usr/bin/', '/bin/']}
+Exec {path => ['/usr/bin/', '/sbin/']}
 
 ## variables
 $compilers       = ['uglifyjs', 'sass', 'imagemin']
@@ -64,8 +64,28 @@ $compilers.each |Integer $index, String $compiler| {
                        echo "[`date`] ${compiler} watcher stopping" >> /vagrant/log/${compiler}.log
                    end script
                    | EOT
-               notify  => Service["${compiler}"],
+               notify  => Exec["dos2unix-upstart-${compiler}"],
         }
+
+    ## dos2unix upstart: convert clrf (windows to linux) in case host machine is windows.
+    #
+    #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
+    #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
+    #      'service' end point does not require the 'refreshonly' attribute.
+    exec {"dos2unix-upstart-${compiler}":
+        command => "dos2unix /etc/init/${compiler}.conf",
+        notify  => Exec["dos2unix-bash-${compiler}"],
+    }
+
+    ## dos2unix bash: convert clrf (windows to linux) in case host machine is windows.
+    #
+    #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
+    #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
+    #      'service' end point does not require the 'refreshonly' attribute.
+    exec {"dos2unix-bash-${compiler}":
+        command => "dos2unix /vagrant/puppet/scripts/${compiler}",
+        notify  => Service["${compiler}"],
+    }
 
     ## start ${compiler} service
     service {"${compiler}":
