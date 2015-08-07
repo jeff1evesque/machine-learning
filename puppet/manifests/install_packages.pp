@@ -41,6 +41,7 @@ each($packages_build_dep) |$index, $package| {
         command => "apt-get build-dep $package -y",
         before => Package[$packages_general],
         refreshonly => true,
+        timeout     => 1400,
     }
 }
 
