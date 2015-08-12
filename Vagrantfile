@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins = %w(vagrant-r10k)
+  required_plugins = %w(vagrant-r10k vagrant-vbguest)
   plugin_installed = false
 
   ## Install Vagrant Plugins
