@@ -39,6 +39,7 @@ class {'::mysql::server':
             ensure => 'present',
             options => ['GRANT'],
             privileges => ['CREATE'],
+            table => '*.*',
             user => 'provisioner@localhost',
         },
     },
