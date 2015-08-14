@@ -18,7 +18,7 @@
 from brain.database.db_query import SQL
 
 ## local variables
-sql = SQL()
+sql = SQL(user='provisioner', passwd='password')
 
 ## connect to database
 sql.sql_connect('db_machine_learning')
