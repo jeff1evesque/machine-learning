@@ -61,7 +61,6 @@ class {'::mysql::client':
 class {'::mysql::bindings':
     python_enable => 'true',
     require => [Class['::mysql::client'], Class['::mysql::server']],
-    notify => Exec['create-database-tables'],
 }
 
 ## define database tables
@@ -72,5 +71,4 @@ exec {'create-database-tables':
     command => 'python setup_tables.py',
     cwd => '/vagrant/puppet/scripts/',
     require => Class['::mysql::bindings::python'],
-    refreshonly => true,
 }
