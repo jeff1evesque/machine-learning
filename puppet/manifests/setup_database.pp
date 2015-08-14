@@ -18,6 +18,14 @@ class {'::mysql::server':
             max_user_connections => '0',
             password_hash        => mysql_password('password'),
         },
+        'provisioner@localhost' => {
+            ensure => 'present',
+            max_connections_per_hour => '1',
+            max_queries_per_hour => '0',
+            max_updates_per_hour => '0',
+            max_user_connections => '1',
+            password_hash        => mysql_password('password'),
+        },
 	},
     grants => {
         'authenticated@localhost/*.*' => {
@@ -26,6 +34,12 @@ class {'::mysql::server':
             privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
             table => '*.*',
             user => 'authenticated@localhost',
+        },
+        'provisioner@localhost/*.*' => {
+            ensure => 'present',
+            options => ['GRANT'],
+            privileges => ['CREATE'],
+            user => 'provisioner@localhost',
         },
     },
     databases => {
