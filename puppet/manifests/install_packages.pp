@@ -1,14 +1,15 @@
 ## include puppet modules: this (also) runs 'apt-get update'
+include python
 include apt
 include nodejs
 
 ## variables
 case $::osfamily {
     'redhat': {
-        $packages_general = ['inotify-tools', 'python-pip', 'ruby-devel']
+        $packages_general = ['dos2unix', 'inotify-tools', 'ruby-devel']
     }
     'debian': {
-        $packages_general = ['inotify-tools', 'python-pip', 'ruby-dev']
+        $packages_general = ['dos2unix', 'inotify-tools', 'ruby-dev']
     }
     default: {
     }
@@ -16,9 +17,7 @@ case $::osfamily {
 
 $packages_build_dep   = ['matplotlib', 'scikit-learn']
 $packages_general_pip = ['redis', 'jsonschema', 'xmltodict', 'six', 'matplotlib']
-$packages_general_gem = ['sass']
-$packages_general_npm = ['uglify-js', 'imagemin']
-$packages_flask_pip   = ['flask', 'requests']
+$packages_general_npm = ['uglify-js', 'imagemin', 'node-sass']
 $packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs, and packages
@@ -42,6 +41,7 @@ each($packages_build_dep) |$index, $package| {
         command => "apt-get build-dep $package -y",
         before => Package[$packages_general],
         refreshonly => true,
+        timeout => 1400,
     }
 }
 
@@ -55,13 +55,6 @@ package {$packages_general:
 package {$packages_general_pip:
     ensure => 'installed',
     provider => 'pip',
-    before => Package[$packages_general_gem],
-}
-
-## packages: install general packages (gem)
-package {$packages_general_gem:
-    ensure => 'installed',
-    provider => 'gem',
     before => Package[$packages_general_npm],
 }
 
@@ -69,15 +62,7 @@ package {$packages_general_gem:
 package {$packages_general_npm:
     ensure => 'present',
     provider => 'npm',
-    before => Package[$packages_flask_pip],
     require => Package['npm'],
-}
-
-## packages: install flask via 'pip'
-package {$packages_flask_pip:
-    ensure => 'installed',
-    provider => 'pip',
-    before => Package['redis-server'],
 }
 
 ## package: install redis-server

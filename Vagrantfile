@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins = %w(vagrant-triggers)
+  required_plugins = %w(vagrant-r10k vagrant-vbguest)
   plugin_installed = false
 
   ## Install Vagrant Plugins
@@ -34,20 +34,9 @@ Vagrant.configure(2) do |config|
   ## Update latest version of puppet
   config.vm.provision :shell, :path => "puppet/scripts/puppet_updater.sh"
 
-  ## Create 'puppet/modules' directory for puppet provisioner(s)
-  #
-  #  :ALL, denotes the successive commands will be applied to all vagrant
-  #       commands.
-  #  -p, create directory, and parent directories if needed
-  config.trigger.before :ALL do
-    run "mkdir -p puppet/modules"
-  end
-
-  ## Custom Manifest: install puppet-librarian
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "install_puppet_librarian.pp"
-  end
+  ## Run r10k
+  config.r10k.puppet_dir = 'puppet'
+  config.r10k.puppetfile_path = 'puppet/Puppetfile'
   
   ## Custom Manifest: install needed packages
   #
@@ -59,6 +48,13 @@ Vagrant.configure(2) do |config|
     puppet.options        = ["--parser", "future"]
   end
 
+  ## Custom Manifest: install, and configure SQL database
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "setup_database.pp"
+    puppet.module_path    = "puppet/modules"
+  end
+
   ## Custom Manifest: build scikit-learn
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
@@ -66,11 +62,32 @@ Vagrant.configure(2) do |config|
     puppet.module_path    = "puppet/modules"
   end
 
-  ## Custom Manifest: install, and configure SQL database
+  ## Custom Manifest: start webserver
+  #
+  #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "setup_database.pp"
+    puppet.manifest_file  = "start_webserver.pp"
     puppet.module_path    = "puppet/modules"
+    puppet.options        = ["--parser", "future"]
+  end
+
+  ## Custom Manifest: configure system (i.e. system timezone)
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "configure_system.pp"
+    puppet.module_path    = "puppet/modules"
+  end
+
+  ## Custom Manifest: define webcompilers
+  #
+  #  Note: future parser allow heredoc sytnax (since puppet 3.5), and allows array
+  #        iteration in the puppet manifest.
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "compile_asset.pp"
+    puppet.module_path    = "puppet/modules"
+    puppet.options        = ["--parser", "future"]
   end
   
   # Disable automatic box update checking. If you disable this, then

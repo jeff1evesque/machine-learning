@@ -5,7 +5,6 @@
 !/src/
 !.gitigore
 !settings.py
-!setup.py
 !.gitmodules
 !README.md
 !__init__.py
@@ -13,11 +12,13 @@
 !license.md
 !Vagrantfile
 !/puppet/
+!package.json
 
-# Ignore and don't commit the following directories
+#Ignore and don't commit the following directories
 /web_interface/static/js/
 /web_interface/static/css/
 /web_interface/static/img/
+/puppet/modules/
 
 # Ignore and don't commit the following files
 /*.pyc

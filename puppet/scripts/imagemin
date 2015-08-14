@@ -11,16 +11,12 @@
 PATH="/usr/local/bin:$PATH"
 
 
-# create directory if doesn't exist
-mkdir -p ../web_interface/static/img/
-mkdir -p ../log/build/
-
 # track execution of script
-set -x; exec > ../log/build/bash_web_img 2>&1
+set -x; exec > /vagrant/log/imagemin_execution.log 2>&1
 
 
-# watch '../src/img/' subdirectory
-inotifywait ../src/img/ -m -e close_write -e move -e create |
+# watch '/vagrant/src/img/' subdirectory
+inotifywait /vagrant/src/img/ -m -e close_write -e move -e create |
   # Minify Images
   while read path action file; do
     # filename (without directory path)
@@ -29,8 +25,8 @@ inotifywait ../src/img/ -m -e close_write -e move -e create |
 
     # minify with 'imagemin'
     if [ "$file_extension" = 'gif' ]; then
-      cp ../src/img/"$file" ../web_interface/static/img/"$filename"
+      cp /vagrant/src/img/"$file" /vagrant/web_interface/static/img/"$filename"
     else
-      imagemin ../src/img/"$file" > ../web_interface/static/img/"$filename"
+      imagemin /vagrant/src/img/"$file" > /vagrant/web_interface/static/img/"$filename"
     fi
   done
