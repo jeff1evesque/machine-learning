@@ -32,7 +32,7 @@ class {'::mysql::server':
             ensure => 'present',
             options => ['GRANT'],
             privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
-            table => '*.*',
+            table => 'db_machine_learning.*',
             user => 'authenticated@localhost',
         },
         'provisioner@localhost/*.*' => {
