@@ -3,7 +3,7 @@ Exec {path => ['/usr/bin/']}
 
 ## mysql::server: install, and configure mariadb-server
 #
-#  @password_hash, must be a 41 character hexadecimal value, preceded by '*'
+#  @password_hash, default password (can be adjusted via cli)
 #  @max_connections_per_hour, @max_queries_per_hour, @max_updates_per_hour,
 #      @max_user_connections, a zero value indicates no limit
 class {'::mysql::server':
@@ -16,16 +16,31 @@ class {'::mysql::server':
             max_queries_per_hour => '0',
             max_updates_per_hour => '0',
             max_user_connections => '0',
-            password_hash        => '*4BE5006A1CD00511D3F326F421FE5E00511D3F3E',
+            password_hash        => mysql_password('password'),
+        },
+        'provisioner@localhost' => {
+            ensure => 'present',
+            max_connections_per_hour => '1',
+            max_queries_per_hour => '0',
+            max_updates_per_hour => '0',
+            max_user_connections => '1',
+            password_hash        => mysql_password('password'),
         },
 	},
     grants => {
-        'authenticated@localhost/*.*' => {
+        'authenticated@localhost/db_machine_learning.*' => {
             ensure => 'present',
             options => ['GRANT'],
             privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
-            table => '*.*',
+            table => 'db_machine_learning.*',
             user => 'authenticated@localhost',
+        },
+        'provisioner@localhost/db_machine_learning.*' => {
+            ensure => 'present',
+            options => ['GRANT'],
+            privileges => ['CREATE'],
+            table => 'db_machine_learning.*',
+            user => 'provisioner@localhost',
         },
     },
     databases => {
@@ -39,20 +54,21 @@ class {'::mysql::server':
 ## mysql::client: install, and configure mariadb-client
 class {'::mysql::client':
     package_name => 'mariadb-client',
+    require => Class['::mysql::server'],
 }
 
 ## mysql::bindings: install python-mariadb bindings
 class {'::mysql::bindings':
     python_enable => 'true',
-    notify => Exec['create-database-tables'],
+    require => [Class['::mysql::client'], Class['::mysql::server']],
 }
 
 ## define database tables
 #
-#  @app.py, the flask application server, when executed, allows
-#      'import' statements to be made, relative to the server.
+#  @require, syntax involves 'Class Containment'. For more information,
+#      https://puppetlabs.com/blog/class-containment-puppet
 exec {'create-database-tables':
-    command => 'python ../../app.py && python setup_tables.py',
+    command => 'python setup_tables.py',
     cwd => '/vagrant/puppet/scripts/',
-    refreshonly => true,
+    require => Class['::mysql::bindings::python'],
 }

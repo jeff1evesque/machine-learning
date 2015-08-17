@@ -12,18 +12,36 @@ from brain.database.db_settings import Database
 class SQL(object):
 
     ## constructor:
-    def __init__(self):
+    def __init__(self, host=None, user=None, passwd=None):
         self.db_settings = Database()
         self.list_error  = []
         self.proceed     = True
+
+        # host address
+        if host:
+            self.host = host
+        else:
+            self.host = self.db_settings.get_db_host()
+
+        # sql username for above host address
+        if user:
+            self.user = user
+        else:
+            self.user = self.db_settings.get_db_username()
+
+        # sql password for above username
+        if passwd:
+            self.passwd = passwd
+        else:
+            self.passwd = self.db_settings.get_db_password()
 
     ## sql_connect: create connection to MySQL / MariaDB
     def sql_connect(self, database=None):
         try:
             if database == None:
-                self.conn = DB.connect(host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password())
+                self.conn = DB.connect(self.host, self.user, self.passwd)
             else:
-                self.conn = DB.connect(host=self.db_settings.get_db_host(), user=self.db_settings.get_db_username(), passwd=self.db_settings.get_db_password(), db=database)
+                self.conn = DB.connect(self.host, self.user, self.passwd, db=database)
             self.cursor = self.conn.cursor()
             return {'status': True, 'error': None, 'id': None}
 
