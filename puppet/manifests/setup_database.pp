@@ -28,18 +28,18 @@ class {'::mysql::server':
         },
 	},
     grants => {
-        'authenticated@localhost/*.*' => {
+        'authenticated@localhost/db_machine_learning.*' => {
             ensure => 'present',
             options => ['GRANT'],
             privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
             table => 'db_machine_learning.*',
             user => 'authenticated@localhost',
         },
-        'provisioner@localhost/*.*' => {
+        'provisioner@localhost/db_machine_learning.*' => {
             ensure => 'present',
             options => ['GRANT'],
             privileges => ['CREATE'],
-            table => '*.*',
+            table => 'db_machine_learning.*',
             user => 'provisioner@localhost',
         },
     },
