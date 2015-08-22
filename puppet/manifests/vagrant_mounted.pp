@@ -10,14 +10,14 @@ file {"vagrant-startup-script":
     ensure  => 'present',
     content => @("EOT"),
                #!upstart
-               description workaround for https://github.com/mitchellh/vagrant/issues/6074
+               description 'workaround for https://github.com/mitchellh/vagrant/issues/6074'
 
                ## start job defined in this file after system services, and processes have already loaded
                #       (to prevent conflict).
                #
                #  Note: this is a workaround for https://github.com/mitchellh/vagrant/issues/6074
                #
-               #  @filesystem,
+               #  @filesystem, an event that fires after all filesystems have mounted
                start on filesystem
 
                ## job will be blocked until the job has completely transitioned back to stopped
@@ -37,12 +37,12 @@ file {"vagrant-startup-script":
 #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
 #      'service' end point does not require the 'refreshonly' attribute.
 exec {"dos2unix-upstart-vagrant":
-    command => "dos2unix /etc/init/workaround-vagrant-bug-6074.conf",
-    notify  => Service["workaround-vagrant-bug-6074.conf"],
+    command => 'dos2unix /etc/init/workaround-vagrant-bug-6074.conf',
+#    notify  => Service['workaround-vagrant-bug-6074'],
 }
 
 ## start 'workaround-vagrant-bug-6074' service
-service {"workaround-vagrant-bug-6074.conf":
+service {'workaround-vagrant-bug-6074':
     ensure => 'running',
     enable => 'true',
 }
