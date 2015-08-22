@@ -25,5 +25,21 @@ file {"vagrant-startup-script":
                    /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=$MOUNTPOINT
                end script
                | EOT
-               notify  => Exec["dos2unix-upstart-${compiler}"],
+               notify  => Exec["dos2unix-upstart-vagrant"],
+}
+
+## dos2unix upstart: convert clrf (windows to linux) in case host machine is windows.
+#
+#  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
+#      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
+#      'service' end point does not require the 'refreshonly' attribute.
+exec {"dos2unix-upstart-vagrant":
+    command => "dos2unix /etc/init/vagrant.conf",
+    notify  => Service["vagrant"],
+}
+
+## start vagrant service
+service {"vagrant":
+    ensure => 'running',
+    enable => 'true',
 }
