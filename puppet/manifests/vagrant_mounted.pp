@@ -23,6 +23,7 @@ file {"vagrant-startup-script":
                #     until the 'starting' event has completed (longer-lived).
                task
 
+               ## until successful mount, sleep with 1s delay, then emit 'vagrant-mounted' event
                script
                    until mountpoint -q ${mountpoint}; do sleep 1; done
                    /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=${mountpoint}
