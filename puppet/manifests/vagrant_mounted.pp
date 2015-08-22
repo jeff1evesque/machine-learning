@@ -1,5 +1,5 @@
 ## variables
-$MOUNTPOINT = '/vagrant/'
+$mountpoint = '/vagrant/'
 
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/']}
@@ -24,8 +24,8 @@ file {"vagrant-startup-script":
                task
 
                script
-                   until mountpoint -q ${MOUNTPOINT}; do sleep 1; done
-                   /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=${MOUNTPOINT}
+                   until mountpoint -q ${mountpoint}; do sleep 1; done
+                   /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=${mountpoint}
                end script
                | EOT
                notify  => Exec["dos2unix-upstart-vagrant"],
