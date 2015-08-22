@@ -37,7 +37,7 @@ file {"vagrant-startup-script":
 #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
 #      'service' end point does not require the 'refreshonly' attribute.
 exec {"dos2unix-upstart-vagrant":
-    command => "dos2unix /etc/init/vagrant.conf",
+    command => "dos2unix /etc/init/workaround-vagrant-bug-6074.conf",
     notify  => Service["vagrant"],
 }
 
