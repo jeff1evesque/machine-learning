@@ -1,3 +1,6 @@
+## define $PATH for all execs, and packages
+Exec {path => ['/usr/bin/']
+
 ## create startup script: for 'vagrant-mounted' event
 file {"vagrant-startup-script":
     path    => "/etc/init/workaround-vagrant-bug-6074.conf ",
