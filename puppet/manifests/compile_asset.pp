@@ -14,7 +14,7 @@ $compilers.each |Integer $index, String $compiler| {
         before => File["${compiler}-startup-script"],
     }
 
-    ## create startup script (heredoc syntax)
+    ## create startup script: for webcompilers, using heredoc syntax
     #
     #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
     file {"${compiler}-startup-script":
@@ -65,7 +65,7 @@ $compilers.each |Integer $index, String $compiler| {
                    end script
                    | EOT
                notify  => Exec["dos2unix-upstart-${compiler}"],
-        }
+    }
 
     ## dos2unix upstart: convert clrf (windows to linux) in case host machine is windows.
     #
