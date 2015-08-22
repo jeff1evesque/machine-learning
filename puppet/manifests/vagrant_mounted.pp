@@ -1,5 +1,5 @@
 ## variables
-$MOUNTPOINT
+$MOUNTPOINT = '/vagrant/'
 
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/']}
