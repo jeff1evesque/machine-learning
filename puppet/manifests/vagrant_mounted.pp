@@ -41,8 +41,8 @@ exec {"dos2unix-upstart-vagrant":
     notify  => Service["vagrant"],
 }
 
-## start vagrant service
-service {"vagrant":
+## start 'workaround-vagrant-bug-6074' service
+service {"workaround-vagrant-bug-6074.conf":
     ensure => 'running',
     enable => 'true',
 }
