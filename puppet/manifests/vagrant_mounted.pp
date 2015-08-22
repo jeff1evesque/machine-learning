@@ -24,6 +24,12 @@ file {"vagrant-startup-script":
                task
 
                ## until successful mount, sleep with 1s delay, then emit 'vagrant-mounted' event
+               #
+               #  @-q, run 'mountpoint' silently
+               #  @--no-wait, do not wait for the command to finish
+               #  @MOUNTPOINT, specifies the environment variables to be included with event, where [key=value]
+               #      being [MOUNTPOINT=${mountpoint}]. So, the receiving process can access the environment
+                      variable.
                script
                    until mountpoint -q ${mountpoint}; do sleep 1; done
                    /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=${mountpoint}
