@@ -15,12 +15,9 @@ file {"vagrant-startup-script":
                ## start job defined in this file after system services, and processes have already loaded
                #       (to prevent conflict).
                #
-               #  Note: this is a workaround for https://github.com/mitchellh/vagrant/issues/6074
-               #
                #  @filesystem, an event that fires after all filesystems have mounted
                start on filesystem
 
-               ## job will be blocked until the job has completely transitioned back to stopped
                task
 
                script
