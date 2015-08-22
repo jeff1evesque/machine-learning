@@ -13,13 +13,23 @@ file {"vagrant-startup-script":
                description 'workaround for https://github.com/mitchellh/vagrant/issues/6074'
 
                ## start job defined in this file after system services, and processes have already loaded
-               #       (to prevent conflict).
+               #      (to prevent conflict).
                #
                #  @filesystem, an event that fires after all filesystems have mounted
                start on filesystem
 
+               ## block all jobs until the 'post-stop' event from this corresponding job has completed
+               #     (short-lived). When the 'task' directive is absent, then all other jobs are blocked
+               #     until the 'starting' event has completed (longer-lived).
                task
 
+               ## until successful mount, sleep with 1s delay, then emit 'vagrant-mounted' event
+               #
+               #  @-q, run 'mountpoint' silently
+               #  @--no-wait, do not wait for the emit command to finish
+               #  @MOUNTPOINT, specifies the environment variables to be included with event, where [key=value]
+               #      being [MOUNTPOINT=${mountpoint}]. So, the receiving process can access the environment
+                      variable.
                script
                    until mountpoint -q ${mountpoint}; do sleep 1; done
                    /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=${mountpoint}
