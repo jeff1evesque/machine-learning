@@ -27,7 +27,7 @@ file {"vagrant-startup-script":
                #
                #  @-q, run 'mountpoint' silently
                #  @--no-wait, do not wait for the emit command to finish
-               #  @MOUNTPOINT, specifies the environment variables to be included with the 'emit' event, where
+               #  @MOUNTPOINT, specifies the environment variable(s) to be included with the 'emit' event, where
                #      [key=value] being [MOUNTPOINT=${mountpoint}]. This allows the receiving process(es) to use
                #      the corresponding environment variable.
                script
