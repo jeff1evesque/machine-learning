@@ -1,9 +1,12 @@
+## variables
+$MOUNTPOINT
+
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/']}
 
 ## create startup script: for 'vagrant-mounted' event
 file {"vagrant-startup-script":
-    path    => "/etc/init/workaround-vagrant-bug-6074.conf ",
+    path    => "/etc/init/workaround-vagrant-bug-6074.conf",
     ensure  => 'present',
     content => @("EOT"),
                #!upstart
@@ -20,11 +23,9 @@ file {"vagrant-startup-script":
                ## job will be blocked until the job has completely transitioned back to stopped
                task
 
-               env MOUNTPOINT=/vagrant
-
                script
-                   until mountpoint -q $MOUNTPOINT; do sleep 1; done
-                   /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=$MOUNTPOINT
+                   until mountpoint -q ${MOUNTPOINT}; do sleep 1; done
+                   /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=${MOUNTPOINT}
                end script
                | EOT
                notify  => Exec["dos2unix-upstart-vagrant"],
