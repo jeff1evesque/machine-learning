@@ -14,9 +14,8 @@ file {"vagrant-startup-script":
                #
                #  Note: this is a workaround for https://github.com/mitchellh/vagrant/issues/6074
                #
-               #  @vagrant-mounted, an event that executes after the shared folder is mounted
-               #  @[2345], represents all configuration states with general linux, and networking access
-               start on (vagrant-mounted and runlevel [2345])
+               #  @filesystem,
+               start on filesystem
 
                ## job will be blocked until the job has completely transitioned back to stopped
                task
