@@ -55,4 +55,4 @@ mod 'nginx',
 
 ## Install Module: uwsgi (from master)
 mod 'uwsgi',
-  :git => https://github.com/vaijab/puppet-uwsgi"
+  :git => "https://github.com/vaijab/puppet-uwsgi"
