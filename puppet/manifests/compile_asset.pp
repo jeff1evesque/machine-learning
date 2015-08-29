@@ -1,7 +1,7 @@
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/', '/sbin/']}
 
-## variables
+## variables: the order of the following array variables are important
 $compilers       = ['uglifyjs', 'sass', 'imagemin']
 $directory_src   = ['js', 'scss', 'img']
 $directory_asset = ['js', 'css', 'img']
