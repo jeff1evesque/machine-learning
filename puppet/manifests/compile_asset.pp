@@ -1,7 +1,7 @@
 ## define $PATH for all execs, and packages
-Exec {path => ['/usr/bin/', '/sbin/']}
+Exec {path => ['/usr/bin/', '/sbin/', '/bin/', '/usr/share/']}
 
-## variables
+## variables: the order of the following array variables are important
 $compilers       = ['uglifyjs', 'sass', 'imagemin']
 $directory_src   = ['js', 'scss', 'img']
 $directory_asset = ['js', 'css', 'img']
@@ -96,15 +96,19 @@ $compilers.each |Integer $index, String $compiler| {
         notify  => Exec["touch-${directory_src[$index]}-files"],
     }
 
-    ## touch source: ensure initial build compiles every source file
+    ## touch source: ensure initial build compiles every source file.
     #
     #  @touch, changes the modification time to the current system time.
     #
-    #  Note: the current inotifywait implementation watches close_write, move, and create. However, the source files
-    #        will already exist before this 'inotifywait', since the '/vagrant' directory will already have been mounted
-    #        on the initial build.
+    #  Note: the current inotifywait implementation watches close_write, move, and create. However, the
+    #        source files will already exist before this 'inotifywait', since the '/vagrant' directory
+    #        will already have been mounted on the initial build.
+    #
+    #  Note: every 'command' implementation checks if directory is nonempty, then touch all files in the
+	#        directory, respectively.
     exec {"touch-${directory_src[$index]}-files":
-        command => "touch /vagrant/src/${directory_src[$index]}/*",
+        command => "if [ `ls -A /vagrant/sites/all/themes/custom/sample_theme/src/${directory_src[$index]}/` ]; then touch /vagrant/sites/all/themes/custom/sample_theme/src/${directory_src[$index]}/*; fi",
         refreshonly => true,
+        provider => shell,
     }
 }
