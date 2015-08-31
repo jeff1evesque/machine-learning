@@ -28,6 +28,38 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 ##Installation
 
+In order to proceed with the installation for this project, two dependencies need to be installed:
+
+- [Vagrant](https://www.vagrantup.com/)
+- [Virtualbox](https://www.virtualbox.org/)
+
+**Note:** more information can be found within the associated vagrant [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Vagrant).
+
+Once the necessary dependencies have been installed, execute the following command to build the virtual environment:
+
+```bash
+cd /path/to/machine-learning/
+vagrant up
+```
+
+Depending on the network speed, the build can take between 10-15 minutes.  So, grab a cup of coffee, and perhaps enjoy a danish while the virtual machine builds.  Remember, the application is intended to run on localhost, where the [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Vagrantfile) defines the exact port-forward on the host machine.
+
+The following lines, indicate the application is accessible via `localhost:8080`, on the host machine:
+
+```bash
+...
+  ## Create a forwarded port mapping which allows access to a specific port
+  #  within the machine from a port on the host machine. In the example below,
+  #  accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network "forwarded_port", guest: 5000, host: 8080
+  config.vm.network "forwarded_port", guest: 443, host: 8585
+...
+```
+
+Otherwise, if ssl is configured, then the application is accessible via `https://localhost:8585`, on the host machine.
+
+**Note:** general convention implements port `443` for ssl.
+
 ##Configuration
 
 ###GIT
