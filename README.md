@@ -26,6 +26,24 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 ###Overview
 
+## Configuration
+
+Fork this project in your GitHub account, then clone your repository:
+
+```
+cd /[PROJECT-DIRECTORY]
+sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
+```
+
+**Note:** change `[PROJECT-DIRECTORY]` to a desired directory path, and `[YOUR-USERNAME]` to your corresponding git username.
+
+Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
+
+```
+cd /[PROJECT-DIRECTORY]
+git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
+```
+
 ##Installation
 
 In order to proceed with the installation for this project, two dependencies need to be installed:
@@ -61,24 +79,6 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 **Note:** general convention implements port `443` for ssl.
 
 ##Configuration
-
-###GIT
-
-Fork this project in your GitHub account, then clone your repository:
-
-```
-cd /[PROJECT-DIRECTORY]
-sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
-```
-
-**Note:** change `[PROJECT-DIRECTORY]` to a desired directory path, and `[YOUR-USERNAME]` to your corresponding git username.
-
-Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
-
-```
-cd /[PROJECT-DIRECTORY]
-git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
-```
 
 ###Flask
 
