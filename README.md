@@ -124,17 +124,6 @@ However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learnin
 
 **Note:** after running [`./bash_loader`](https://github.com/jeff1evesque/machine-learning/blob/master/build/bash_loader) for the first time, it is important to open, and save each file within the [`/src/`](https://github.com/jeff1evesque/machine-learning/tree/master/src) directory.  Otherwise, inotifywait will never detect changes within the respective [`/src/`](https://github.com/jeff1evesque/machine-learning/tree/master/src) files, and never compile the respective files into the [`/web_interface/static/`](https://github.com/jeff1evesque/machine-learning/tree/master/web_interface/static) directory.
 
-###JSON Schema
-
-[JSON Schema](https://pypi.python.org/pypi/jsonschema) provides an implementation to validate [JSON](http://en.wikipedia.org/wiki/JSON) data structures. When a specific element within the JSON structure fails validation, an [exception](https://wiki.python.org/moin/HandlingExceptions) is raised indicating the corresponding *error message*.
-
-Additional documentation:
-
-- [Understanding JSON Schema](http://spacetelescope.github.io/understanding-json-schema/)
-- [jsonschema](http://python-jsonschema.readthedocs.org/en/latest/)
-
-This project implements JSON Schema validation, as a backend-validation tool. Specifically, modules within the [`/brain/schema/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/schema) directory, define the schemas, while validation modules in the [`/brain/validator/`](https://github.com/jeff1evesque/machine-learning/tree/master/brain/validator) directory, may implement the respective validation schema(s).
-
 ###MariaDB Database
 
 [MariaDB](https://mariadb.org/) is considered an upgrade alternative to [MySQL](http://www.mysql.com/), with [added features](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-features/#extensions-entityampentity-new-features), and [performance enhancements](https://mariadb.com/kb/en/mariadb/mariadb-vs-mysql-features/#speed-improvements). In general, it is a [drop-in](https://mariadb.com/kb/en/mariadb/faq/mariadb-vs-mysql-compatibility/#mariadb-is-a-binary-drop-in-replacement-for-mysql) replacement for MySQL. Therefore, MariaDB shares identical SQL command syntax, and support for [phpMyAdmin](http://www.phpmyadmin.net/home_page/index.php).
