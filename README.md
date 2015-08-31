@@ -28,59 +28,6 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 ##Installation
 
-###Linux Packages
-
-The following packages need to be installed through terminal in Ubuntu:
-
-```
-# Gnome UI for Ubuntu:
-sudo apt-get install xorg gnome-core gnome-system-tools gnome-app-install
-
-# General Packages:
-sudo apt-get install inotify-tools
-sudo apt-get install python-pip
-sudo pip install redis
-sudo pip install jsonschema
-sudo pip install xmltodict
-sudo pip install six
-sudo pip install matplotlib
-
-# Flask with Requests
-sudo pip install Flask
-sudo pip install requests
-
-# MariaDB with Python Connector:
-sudo apt-get install mariadb-server mariadb-client
-sudo apt-get install python-mysqldb
-
-# Latest PPA for nodejs:
-curl -sL https://deb.nodesource.com/setup | sudo bash -
-
-# Install 'add-apt-repository' command
-sudo apt-get install python-software-properties
-
-# Add PPA / install Redis Server
-sudo add-apt-repository ppa:rwky/redis
-sudo apt-get update
-sudo apt-get install redis-server
-
-# ruby / nodejs (includes npm from PPA):
-sudo apt-get install ruby
-sudo apt-get install nodejs
-
-# Compiler / Minifier:
-sudo gem install sass
-sudo npm install uglify-js -g
-sudo npm install --global imagemin
-
-# Scikit-Learn Dependency:
-sudo apt-get build-dep scikit-learn
-```
-
-**Note:** This project assumes [Ubuntu Server 14.04](http://www.ubuntu.com/download/server) as the operating system.
-
-**Note:** All MySQL connectors (PHP, Perl, Python, Java, .NET, C, Ruby, etc.) work [unchanged](https://mariadb.com/kb/en/mariadb/faq/mariadb-vs-mysql-compatibility/) with MariaDB.
-
 ##Configuration
 
 ###GIT
