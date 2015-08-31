@@ -35,7 +35,7 @@ In order to proceed with the installation for this project, two dependencies nee
 
 **Note:** more information can be found within the associated vagrant [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Vagrant).
 
-Once the necessary dependencies have been installed, simply clone this repository, and execute the following command to build the virtual environment:
+Once the necessary dependencies have been installed, execute the following command to build the virtual environment:
 
 ```bash
 cd /path/to/machine-learning/
