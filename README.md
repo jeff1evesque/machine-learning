@@ -58,6 +58,8 @@ The following lines, indicate the application is accessible via `localhost:8080`
 
 Otherwise, if ssl is configured, then the application is accessible via `https://localhost:8585`, on the host machine.
 
+**Note:** general convention implements port `443` for ssl.
+
 ##Configuration
 
 ###GIT
