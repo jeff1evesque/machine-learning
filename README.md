@@ -124,21 +124,6 @@ However, the supplied [`app.py`](https://github.com/jeff1evesque/machine-learnin
 
 **Note:** after running [`./bash_loader`](https://github.com/jeff1evesque/machine-learning/blob/master/build/bash_loader) for the first time, it is important to open, and save each file within the [`/src/`](https://github.com/jeff1evesque/machine-learning/tree/master/src) directory.  Otherwise, inotifywait will never detect changes within the respective [`/src/`](https://github.com/jeff1evesque/machine-learning/tree/master/src) files, and never compile the respective files into the [`/web_interface/static/`](https://github.com/jeff1evesque/machine-learning/tree/master/web_interface/static) directory.
 
-###jQuery Validation
-
-[jQuery Validation](http://jqueryvalidation.org/) is a plugin that allows [client-side](http://en.wikipedia.org/wiki/Client-side) validation on [HTML form](http://www.w3.org/TR/html5/forms.html) elements. When a specific field fails validation, a label element is created as the next successive [DOM](http://en.wikipedia.org/wiki/Document_Object_Model) element, indicating the corresponding *error message*.
-
-Additional documentation:
-
-- [jQuery Validation](http://jqueryvalidation.org/documentation/)
-- [Validator object](http://jqueryvalidation.org/category/validator/)
-- [Validator addMethod](http://jqueryvalidation.org/jQuery.validator.addMethod/)
-- [Validation example](http://stackoverflow.com/questions/10843399#answer-10843593)
-
-This project implements client-side validation within [`form_validator.js`](https://github.com/jeff1evesque/machine-learning/blob/master/src/js/form_validator.js). Specific *how-to* can be found within the comments of the javascript [code](https://github.com/jeff1evesque/machine-learning/blob/master/src/js/form_validator.js).
-
-**Note:** this project *may* implement concepts of *machine learning*, where data is not supplied via an HTML form. If data is not supplied by the user (HTML form), then backend-validation (refer to [*JSON Schema*](https://github.com/jeff1evesque/machine-learning#json-schema)) becomes even more crucial.
-
 ###JSON Schema
 
 [JSON Schema](https://pypi.python.org/pypi/jsonschema) provides an implementation to validate [JSON](http://en.wikipedia.org/wiki/JSON) data structures. When a specific element within the JSON structure fails validation, an [exception](https://wiki.python.org/moin/HandlingExceptions) is raised indicating the corresponding *error message*.
