@@ -48,33 +48,6 @@ cd /[PROJECT-DIRECTORY]
 git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
-####GIT Submodule
-
-We need to initialize our git *submodules*:
-
-```
-sudo git submodule init
-sudo git submodule update
-```
-
-The above two commands will update submodules within the cloned repository, according to the versioned master branch. If they are already initialized in the cloned repository, then the latter command will suffice.
-
-The following updates submodule(s):
-
-```
-cd /[PROJECT-DIRECTORY]
-git checkout -b [NEW-BRANCH] master
-cd [YOUR-SUBMODULE]/
-git checkout master
-git pull
-cd ../
-git status
-```
-
-to the latest code-base, within the cloned repository branch, `[NEW-BRANCH]`.
-
-**Note:** the [scikit-learn](https://github.com/scikit-learn/scikit-learn/) submodule can be found in the [`/build/`](https://github.com/jeff1evesque/machine-learning/tree/master/build/) directory.
-
 ###Flask
 
 Python's [Flask](http://flask.pocoo.org/), is a microframework based on [Werkzeug](http://werkzeug.pocoo.org/).  Specifically, it is a [web framework](http://en.wikipedia.org/wiki/Web_application_framework), which includes, a development server, integrated support for [unit testing](http://en.wikipedia.org/wiki/Unit_testing), [RESTful](http://en.wikipedia.org/wiki/Representational_state_transfer) API, and [Jinja2](http://jinja.pocoo.org/) templating.
