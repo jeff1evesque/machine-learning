@@ -102,3 +102,5 @@ As mentioned earlier, the web application can be accessed after subsequent `vagr
 Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
 
 ###Test Scripts
+
+Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
