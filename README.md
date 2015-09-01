@@ -80,7 +80,6 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 
 ##Testing / Execution
 
-
 ###Web Interface
 
 This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), consisting of an HTML5 form, where users supply necessary training, or analysis information. During the training session, users provide csv, xml, or json file(s) representing the dataset(s). Upon form submission, user supplied form data is validated on the client-side (i.e. javascript), converted to a json object (python), validated on the server-side (python), stored into corresponding EAV database tables (python, mariadb), then cached into a nosql (redis) when appropriate.
