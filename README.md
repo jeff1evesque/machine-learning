@@ -83,13 +83,9 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 
 ###Web Interface
 
-This project provides a sample [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), which supports SVM dataset(s) in csv, or xml format:
+This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), consisting of an HTML5 form, where users supply necessary training, or analysis information. During the training session, users provide csv, xml, or json file(s) representing the dataset(s). Upon form submission, user supplied form data is validated on the client-side (i.e. javascript), converted to a json object (python), validated on the server-side (python), then stored into corresponding EAV database tables (python, mariadb) when necessary.
 
-- http://localhost:5000/
-
-Specifically, the sample web-interface consists of an HTML5 form, where users supply necessary training, or analysis information. During the training session, users provide csv, or xml file(s) representing the dataset(s). Upon form submission, user supplied form data is validated on the client-side (i.e. javascript, php), converted to a json object (python), validated on the server-side (python), then stored into corresponding EAV database tables (python, mariadb) when necessary.
-
-When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored in their correponding database tables.
+When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored in their corresponding database tables.
 
 The following are acceptable syntax:
 
@@ -97,7 +93,9 @@ The following are acceptable syntax:
 - [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/xml/)
 - [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/json/)
 
-**Note:** each dependent variable value (for JSON datasets), is an array (square brackets), since each dependent variable may have multiple observations. 
+As mentioned earlier, the web application can be accessed after subsequent `vagrant up` command, followed by using a browser referencing localhost:8080 (or https://locoalhost:5050, with ssl).
+
+**Note:** each dependent variable value (for JSON datasets), is an array (square brackets), since each dependent variable may have multiple observations.
 
 ###Programmatic Interface
 
