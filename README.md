@@ -80,16 +80,11 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 
 ##Testing / Execution
 
-
 ###Web Interface
 
-This project provides a sample [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), which supports SVM dataset(s) in csv, or xml format:
+This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), consisting of an HTML5 form, where users supply necessary training, or analysis information. During the training session, users provide csv, xml, or json file(s) representing the dataset(s). Upon form submission, user supplied form data is validated on the client-side (i.e. javascript), converted to a json object (python), validated on the server-side (python), stored into corresponding [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) database tables (python, mariadb), then cached into nosql (redis) when appropriate.
 
-- http://localhost:5000/
-
-Specifically, the sample web-interface consists of an HTML5 form, where users supply necessary training, or analysis information. During the training session, users provide csv, or xml file(s) representing the dataset(s). Upon form submission, user supplied form data is validated on the client-side (i.e. javascript, php), converted to a json object (python), validated on the server-side (python), then stored into corresponding EAV database tables (python, mariadb) when necessary.
-
-When using the web-interface, it is important to ensure the csv, or xml file(s) are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored in their correponding database tables.
+When using the web-interface, it is important to ensure the csv, xml, or json file(s) are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored into corresponding database tables; therefore, no model, or prediction can be made.
 
 The following are acceptable syntax:
 
@@ -97,21 +92,14 @@ The following are acceptable syntax:
 - [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/xml/)
 - [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/json/)
 
-**Note:** each dependent variable value (for JSON datasets), is an array (square brackets), since each dependent variable may have multiple observations. 
+**Note:** each dependent variable value (for JSON datasets), is an array (square brackets), since each dependent variable may have multiple observations.
+
+As mentioned earlier, the web application can be accessed after subsequent `vagrant up` command, followed by using a browser referencing localhost:8080 (or https://locoalhost:5050, with ssl).
 
 ###Programmatic Interface
 
-When creating (sub)projects of this repository *programmatically*, it is important to leverage existing logic when possible:
-
-- [Dataset validation](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_validator.py)
-- [Database methods](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_saver.py)
-
-The same syntax [requirement](https://github.com/jeff1evesque/machine-learning#web-interface) for csv, or xml file(s) to json conversion is required. This means logic contained within [`svm_json.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/svm_json.py) must be implemented if such files are used. However, if using a json object (dataset representation) directly is preferred, then no conversion logic is required. Simply ensure a list of dictionary elements:
-
-```python
-{ {'uid': xx, 'title': 'yyy'}, {'svm_dataset': [{'dep_variable_label': 'yyy', 'indep_variable_label': 'yyy', 'indep_variable_value': zz.zz}]}, {'id_entity': xx} }
-```
-
-is provided when inserting values into the EAV database tables. Exact syntax can be found in [`data_saver.py`](https://github.com/jeff1evesque/machine-learning/blob/master/python/data_saver.py). Be sure to validate the dataset(s) as needed before storing the dataset(s) in the database.
+Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
 
 ###Test Scripts
+
+Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
