@@ -94,7 +94,7 @@ The following are acceptable syntax:
 
 **Note:** each dependent variable value (for JSON datasets), is an array (square brackets), since each dependent variable may have multiple observations.
 
-As mentioned earlier, the web application can be accessed after subsequent `vagrant up` command, followed by using a browser referencing localhost:8080 (or https://locoalhost:5050, with ssl).
+As mentioned earlier, the web application can be accessed after subsequent `vagrant up` command, followed by using a browser referencing localhost:8080 (or https://locoalhost:5050, with ssl), on the host machine.
 
 ###Programmatic Interface
 
