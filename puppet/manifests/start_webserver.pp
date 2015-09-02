@@ -9,13 +9,15 @@ Exec {path => ['/usr/bin/']}
 class { 'nginx': }
 
 ## install, and configure uwsgi
-class { 'uwsgi'::app:
-    'webserver':
-        ensure: 'present'
-        config:
-            socket: '127.0.0.1:5000'
-            chdir: '/vagrant/'
-            wsgi-file: 'webserver.wsgi'
+class { 'uwsgi::app':
+    'webserver' => {
+        ensure => 'present',
+        config => {
+            socket => '127.0.0.1:5000',
+            chdir => '/vagrant/',
+            wsgi-file => 'webserver.wsgi',
+        },
+    },
 }
 
 ## create log directory
