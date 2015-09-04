@@ -50,7 +50,7 @@ Specifically, this implements the ssh syntax `git@github.com:account/repo.git`, 
 
 This allows r10k to clone the corresponding puppet module(s), without a deterrence of [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack).  However, to implement the above syntax, SSH keys need to be generated, and properly assigned locally, as well as on the github account.
 
-The following steps through how to implement the SSH keys with respect to github:
+The following steps through how to implement the ssh keys with respect to github:
 
 ```bash
 $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
@@ -64,7 +64,7 @@ $ ssh-add ~/.ssh/id_rsa
 
 **Note:** it is recommended to simply press enter, to keep default values when asked *Enter file in which to save the key*.  Also, if `ssh-agent -s` alternative for git bash doesn't work, then `eval $(ssh-agent -s)` for other terminal prompts should work.
 
-Finally, at the top of any github page (after login), click `Settings > SSH keys > Add SSH Keys`, and paste the above copied key into the `Key` field
+Finally, at the top of any github page (after login), click `Settings > SSH keys > Add SSH Keys`, then paste the above copied key into the `Key` field, and click *Add key*.
 
 ## Configuration
 
