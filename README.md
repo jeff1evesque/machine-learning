@@ -48,7 +48,7 @@ Specifically, this implements the ssh syntax `git@github.com:account/repo.git`, 
 - `https://github.com/account/repot.git`
 - `git://github.com/account/repot.git`
 
-This allows r10k to clone the corresponding puppet module(s), without a deterrence of [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack).  However, to implement the above syntax, SSH keys need to be generated, and properly assigned locally, as well as on the github account.
+This allows r10k to clone the corresponding puppet module(s), without a deterrence of [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack).  However, to implement the above syntax, ssh keys need to be generated, and properly assigned locally, as well as on the github account.
 
 The following steps through how to implement the ssh keys with respect to github:
 
