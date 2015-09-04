@@ -26,6 +26,46 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 ###Overview
 
+## Preconfiguration
+
+This project implements puppets [r10k](https://github.com/puppetlabs/r10k) module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile`, which includes the following syntax:
+
+```
+#!/usr/bin/env ruby
+## Install Module: stdlib (apt dependency)
+mod 'stdlib',
+  :git => "git@github.com:puppetlabs/puppetlabs-stdlib.git",
+  :ref => "4.6.0"
+
+## Install Module: apt (from master)
+mod 'apt',
+  :git => "git@github.com:puppetlabs/puppetlabs-apt.git"
+...
+```
+
+Specifically, this implements the ssh syntax `git@github.com:account/repo.git`, unlike the following alternatives:
+
+- `https://github.com/account/repot.git`
+- `git://github.com/account/repot.git`
+
+This allows r10k to clone the corresponding puppet module(s), without a deterrence of [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack).  However, to implement the above syntax, ssh keys need to be generated, and properly assigned locally, as well as on the github account.
+
+The following steps through how to implement the ssh keys with respect to github:
+
+```bash
+$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
+Enter passphrase (empty for no passphrase): [Type a passphrase]
+Enter same passphrase again: [Type passphrase again]
+$ ssh-agent -s
+Agent pid 59566
+$ ssh-add ~/.ssh/id_rsa
+```
+
+**Note:** it is recommended to simply press enter, to keep default values when asked *Enter file in which to save the key*.  Also, if `ssh-agent -s` alternative for git bash doesn't work, then `eval $(ssh-agent -s)` for other terminal prompts should work.
+
+Finally, at the top of any github page (after login), click `Settings > SSH keys > Add SSH Keys`, then paste the above copied key into the `Key` field, and click *Add key*.
+
 ## Configuration
 
 Fork this project in your GitHub account, then clone your repository:
