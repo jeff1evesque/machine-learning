@@ -53,6 +53,7 @@ This allows r10k to clone the corresponding puppet module(s), without a deterren
 The following steps through how to implement the ssh keys with respect to github:
 
 ```bash
+$ cd ~/.ssh/
 $ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
 Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
 Enter passphrase (empty for no passphrase): [Type a passphrase]
