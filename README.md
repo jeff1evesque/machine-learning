@@ -28,7 +28,7 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 ## Preconfiguration
 
-This project implements puppets r10k module via vagrants plugin. A requirement of this implementation includes a `Puppetfile`, which includes the following syntax:
+This project implements puppets [r10k](https://github.com/puppetlabs/r10k) module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile`, which includes the following syntax:
 
 ```
 #!/usr/bin/env ruby
@@ -48,7 +48,7 @@ Specifically, this syntax implements the ssh syntax `git@github.com:account/repo
 - `https://github.com/account/repot.git`
 - `git://github.com/account/repot.git`
 
-This allows r10k to clone the corresponding puppet module(s), without a deterrence of DDoS.  However, to implement the above syntax, SSH keys need to be generated, and properly assigned locally, as well as on github.
+This allows r10k to clone the corresponding puppet module(s), without a deterrence of [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack).  However, to implement the above syntax, SSH keys need to be generated, and properly assigned locally, as well as on github.
 
 The following steps through how to implement the SSH keys with respect to github:
 
@@ -64,7 +64,7 @@ $ ssh-add ~/.ssh/id_rsa
 
 **Note:** it is recommended to simply press enter, to keep default values when asked *Enter file in which to save the key*.  Also, if `ssh-agent -s` alternative for git bash doesn't work, then `eval $(ssh-agent -s)` for other terminal prompts should work.
 
-Then, at the top of any page on your github page (after login), click `Settings > SSH keys > Add SSH Keys`, and paste the above copied key into the `Key` field
+Finally, at the top of any github page (after login), click `Settings > SSH keys > Add SSH Keys`, and paste the above copied key into the `Key` field
 
 ## Configuration
 
