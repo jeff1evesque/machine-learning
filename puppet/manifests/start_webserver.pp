@@ -5,19 +5,6 @@ include python::requests
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/']}
 
-## install, and configure nginx
-class { 'nginx': }
-
-## install, and configure uwsgi
-class { 'uwsgi::app':
-    ensure => 'present',
-    config => {
-        socket => '127.0.0.1:5000',
-        chdir => '/vagrant/',
-        wsgi-file => 'webserver.wsgi',
-    },
-}
-
 ## create log directory
 file {'/vagrant/log/':
     ensure => 'directory',
