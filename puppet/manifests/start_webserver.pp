@@ -58,7 +58,7 @@ case $::osfamily {
                        expect fork
 
                        ## start upstart job
-                       exec python /vagrant/app.py
+                       exec python '/vagrant/app.py'
 
                        ## log start-up date
                        #
