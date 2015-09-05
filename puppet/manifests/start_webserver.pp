@@ -79,16 +79,8 @@ case $::osfamily {
         service {'flask':
             ensure => 'running',
             enable => 'true',
-            notify => Exec['initial-run-flask'],
         }
     }
     default: {
     }
-}
-
-## run on initial build: since above 'flask' service runs only on second, and successive 'vagrant up'
-#                        command implementations.
-exec {'initial-run-flask':
-    command => 'python /vagrant/app.py',
-    refreshonly => true,
 }
