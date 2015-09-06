@@ -65,6 +65,13 @@ Vagrant.configure(2) do |config|
     puppet.options        = ["--parser", "future"]
   end
 
+  ## Custom Manifest: install, and configure SQL database
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "setup_database.pp"
+    puppet.module_path    = "puppet/modules"
+  end
+
   ## Custom Manifest: start webserver
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
@@ -73,13 +80,6 @@ Vagrant.configure(2) do |config|
     puppet.manifest_file  = "start_webserver.pp"
     puppet.module_path    = "puppet/modules"
     puppet.options        = ["--parser", "future"]
-  end
-
-  ## Custom Manifest: install, and configure SQL database
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "setup_database.pp"
-    puppet.module_path    = "puppet/modules"
   end
 
   ## Custom Manifest: configure system (i.e. system timezone)
