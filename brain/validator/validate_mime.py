@@ -23,13 +23,12 @@ class Validate_Mime(object):
     #            of unique 'file upload(s)', discarding duplicates.
     #
     #  @application/vnd.ms-excel, mimetype used for csv file(s)
-    #  @application/octet-stream, mimetype used json file(s)
     def validate(self):
         # local variables
         list_error      = []
 
         dataset         = self.svm_data['data']['dataset']
-        acceptable_type = ['text/plain', 'text/csv', 'application/vnd.ms-excel', 'text/xml', 'text/json', 'application/octet-stream', 'application/xml', 'application/json']
+        acceptable_type = ['text/plain', 'text/csv', 'application/vnd.ms-excel', 'text/xml', 'text/json', 'application/xml', 'application/json']
 
         unique_hash     = set()
         dataset_keep    = []
