@@ -80,7 +80,7 @@
       url: true,
     },
     svm_dataset_file: {
-      checkMime: ['text/plain', 'text/csv', 'application/vnd.ms-excel', 'text/xml', 'application/octet-stream', 'application/xml', 'application/json'],
+      checkMime: ['text/plain', 'text/csv', 'text/xml', 'application/xml', 'application/json'],
     },
   });
 
