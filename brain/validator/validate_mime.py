@@ -21,8 +21,6 @@ class Validate_Mime(object):
     #            a 'training' session. If any of the 'file upload(s)' fails validation,
     #            this method will return False. Otherwise, the method will return a list
     #            of unique 'file upload(s)', discarding duplicates.
-    #
-    #  @application/vnd.ms-excel, mimetype used for csv file(s)
     def validate(self):
         # local variables
         list_error      = []
