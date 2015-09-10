@@ -1,3 +1,5 @@
+https://travis-ci.org/jeff1evesque/machine-learning.svg
+
 Machine Learning
 ================
 
