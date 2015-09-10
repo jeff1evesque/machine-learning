@@ -4,9 +4,6 @@ python:
   - "3.2"
   - "3.3"
   - "3.4"
-  - "3.5.0b3"
-  - "3.5-dev"
-  - "nightly"
 services:
   - "redis"
 env:
