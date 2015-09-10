@@ -10,6 +10,11 @@ python:
   - "3.5.0b3"
   - "3.5-dev"
   - "nightly"
+env:
+  - FLASK=0.10.1
+  - FLASK=0.9
+  - FLASK=0.8.1
+  - FLASK=0.7.2
 # command to install dependencies
 install: "pip install -r requirements.txt"
 # command to run tests
