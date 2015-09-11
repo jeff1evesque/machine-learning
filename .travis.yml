@@ -18,7 +18,7 @@ install:
   # install python-mysqldb dependencies
   - sudo apt-get install libmysqlclient18
   - sudo apt-get install python-dev libmysqlclient-dev
-  # install python mysql connector
+  # install python-mysqldb connector
   - pip install MYSQL-python
 #  - pip install -r requirements.txt
 
