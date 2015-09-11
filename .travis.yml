@@ -23,6 +23,7 @@ services:
   - "redis"
 
 install:
+  - "pip install --upgrade pip"
   - "python -m pip install jsonschema"
   # add mariadb apt-get repository
   - "sudo apt-get install software-properties-common"
