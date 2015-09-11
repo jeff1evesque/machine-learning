@@ -39,4 +39,4 @@ install:
 
 # command to run tests
 script:
-  - tox -e $TOX_ENV
+  - nosetests
