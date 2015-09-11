@@ -13,7 +13,13 @@ env:
 install:
   - "python -m pip install Flask==$FLASK"
   - "python -m pip install jsonschema"
-  - "sudo apt-get install mariadb-server mariadb-client python-mysqldb"
+  # add mariadb apt-get repository
+  - "sudo apt-get install software-properties-common"
+  - "sudo add-apt-repository 'deb http://ftp.kaist.ac.kr/mariadb/repo/5.5/ubuntu precise main'"
+  # install mariadb server
+  - "sudo apt-get update"
+  - "sudo apt-get install mariadb-server"
+  - "sudo apt-get install mariadb-client python-mysqldb"
 #  - "pip install -r requirements.txt"
 # command to run tests
 script: nosetests
