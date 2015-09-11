@@ -34,5 +34,7 @@ install:
   - "sudo apt-get update"
   - "sudo apt-get install python-mysqldb"
 #  - "pip install -r requirements.txt"
+
 # command to run tests
-script: nosetests
+script:
+  - tox -e $TOX_ENV
