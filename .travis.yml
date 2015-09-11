@@ -16,8 +16,8 @@ install:
   - pip install Flask==$FLASK
   - pip install jsonschema
   # install python-mysqldb dependencies
-  - sudo pip install pip --upgrade
-  - sudo apt-get build-dep python-mysqldb
+  - pip install pip --upgrade
+  - apt-get build-dep python-mysqldb
   # install python mysql connector
   - pip install MYSQL-python
 #  - pip install -r requirements.txt
