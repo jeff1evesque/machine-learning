@@ -12,15 +12,14 @@ services:
   - "redis"
 
 install:
-  - pip install Flask==$FLASK
   - pip install --upgrade pip
+  - pip install Flask==$FLASK
   - pip install jsonschema
-  # add mariadb apt-get repository
-  - sudo apt-get install software-properties-common
-  - sudo add-apt-repository 'deb http://ftp.kaist.ac.kr/mariadb/repo/5.5/ubuntu precise main'
-  # install mariadb server
-  - sudo apt-get update
-  - sudo apt-get install python-mysqldb
+  # install python-mysqldb dependencies
+  - sudo pip install pip --upgrade
+  - sudo apt-get build-dep python-mysqldb
+  # install python mysql connector
+  - pip install MYSQL-python
 #  - pip install -r requirements.txt
 
 # command to run tests
