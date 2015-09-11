@@ -2,7 +2,6 @@ language: python
 python:
   - "3.3"
   - "2.7"
-  - "2.6"
 
 env:
   - FLASK=0.10.1
@@ -28,7 +27,7 @@ services:
 install:
   - pip install Flask==$FLASK
   - pip install --upgrade pip
-  - python -m pip install jsonschema
+  - pip install jsonschema
   # add mariadb apt-get repository
   - sudo apt-get install software-properties-common
   - sudo add-apt-repository 'deb http://ftp.kaist.ac.kr/mariadb/repo/5.5/ubuntu precise main'
