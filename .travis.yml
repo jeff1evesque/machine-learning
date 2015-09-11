@@ -1,29 +1,29 @@
 language: python
 python: "3.4"
 
-env:
-  - "FLASK=0.10.1"
-  - "FLASK=0.9"
-  - "FLASK=0.8.1"
-
 matrix:
-  - TOX_ENV=py27
-  - TOX_ENV=py33
-  - TOX_ENV=py34
-  - TOX_ENV=pypy
-  - TOX_ENV=pypy3
-
-matrix:
-    include:
-        - addons:
-             mariadb: 5.5
-          env: TOX_ENV=py27
-        - addons:
-             mariadb: 10.0
-          env: TOX_ENV=py33
-        - addons:
-             mariadb: 10.1
-          env: TOX_ENV=py34
+  include
+    - addons:
+        mariadb: 5.5
+      env:
+        - TOX_ENV=py27
+        - FLASK=0.10.1
+        - FLASK=0.9
+        - FLASK=0.8.1
+    - addons:
+        mariadb: 10.0
+      env:
+        - TOX_ENV=py33
+        - FLASK=0.10.1
+        - FLASK=0.9
+        - FLASK=0.8.1
+    - addons:
+        mariadb: 10.1
+      env:
+        - TOX_ENV=py34
+        - FLASK=0.10.1
+        - FLASK=0.9
+        - FLASK=0.8.1
 
 services:
   - "redis"
