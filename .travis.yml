@@ -9,7 +9,7 @@ env:
   - FLASK=0.8.1
 
 matrix:
-  include
+  include:
     - addons:
         mariadb: 5.5
       env:
