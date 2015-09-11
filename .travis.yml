@@ -1,3 +1,5 @@
+language: python
+
 env:
     matrix:
         - TOX_ENV=py27
