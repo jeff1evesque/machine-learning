@@ -17,8 +17,8 @@ install:
   - pip install Flask==$FLASK
   - pip install jsonschema
   # install python-mysqldb dependencies
-  - gpg --keyserver  hkp://keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
-  - gpg -a --export CD2EFD2A | apt-key add -
+  - sudo gpg --keyserver  hkp://keys.gnupg.net --recv-keys 1C4CBDCDCD2EFD2A
+  - sudo gpg -a --export CD2EFD2A | apt-key add -
   - sudo sh -c 'echo "deb http://repo.percona.com/apt precise main" >> /etc/apt/sources.list.d/percona.list'
   - sudo apt-get update
   - sudo apt-get install python-dev libmysqlclient-dev
