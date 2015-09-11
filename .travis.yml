@@ -5,20 +5,8 @@ python:
 env:
   - FLASK=0.10.1
 
-matrix:
-  include:
-    - addons:
-        mariadb: 5.5
-      env:
-        - FLASK=0.10.1
-    - addons:
-        mariadb: 10.0
-      env:
-        - FLASK=0.10.1
-    - addons:
-        mariadb: 10.1
-      env:
-        - FLASK=0.10.1
+addons:
+  mariadb: "10.0"
 
 services:
   - "redis"
