@@ -1,17 +1,12 @@
 language: python
-python: "3.4"
-
+python:
+  - "3.3"
+  - "2.7"
+  - "2.6"
 env:
-  global:
-    - FLASK=0.10.1
-    - FLASK=0.9
-    - FLASK=0.8.1
-  matrix:
-    - TOX_ENV=py27
-    - TOX_ENV=py33
-    - TOX_ENV=py34
-    - TOX_ENV=pypy
-    - TOX_ENV=pypy3
+  - FLASK=0.10.1
+  - FLASK=0.9
+  - FLASK=0.8.1
 
 matrix:
   include
