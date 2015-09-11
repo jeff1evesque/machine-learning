@@ -12,11 +12,12 @@ services:
   - "redis"
 
 install:
+  - sudo apt-get update
   - pip install --upgrade pip
   - pip install Flask==$FLASK
   - pip install jsonschema
   # install python-mysqldb dependencies
-  - sudo aptitude install libmysqlclient18
+  - sudo apt-get install libmysqlclient18
   - sudo apt-get install python-dev libmysqlclient-dev
   # install python-mysqldb connector
   - pip install MYSQL-python
