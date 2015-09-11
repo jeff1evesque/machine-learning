@@ -1,3 +1,24 @@
+env:
+    matrix:
+        - TOX_ENV=py26
+        - TOX_ENV=py27
+        - TOX_ENV=py33
+        - TOX_ENV=py34
+        - TOX_ENV=pypy
+        - TOX_ENV=pypy3
+
+matrix:
+    include:
+        - addons:
+             mariadb: 5.5
+          env: TOX_ENV=py27
+        - addons:
+             mariadb: 10.0
+          env: TOX_ENV=py33
+        - addons:
+             mariadb: 10.1
+          env: TOX_ENV=py34
+
 language: python
 python:
   - "2.7"
@@ -18,8 +39,6 @@ install:
   - "sudo add-apt-repository 'deb http://ftp.kaist.ac.kr/mariadb/repo/5.5/ubuntu precise main'"
   # install mariadb server
   - "sudo apt-get update"
-  - "sudo apt-get install mariadb-server --force-yes"
-  - "sudo apt-get install mariadb-client --force-yes"
   - "sudo apt-get install python-mysqldb"
 #  - "pip install -r requirements.txt"
 # command to run tests
