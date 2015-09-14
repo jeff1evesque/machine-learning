@@ -38,15 +38,6 @@ mod 'sys',
 mod 'python',
   :git => "git@github.com:counsyl/puppet-python.git"
 
-## Install Module: nginx
-mod 'nginx',
-  :git => "git@github.com:jfryman/puppet-nginx.git",
-  :ref => "v0.2.7"
-
-## Install Module: uwsgi (from master)
-mod 'uwsgi',
-  :git => "git@github.com:vaijab/puppet-uwsgi.git"
-
 ## Install Module: timezone
 mod 'timezone',
   :git => "git@github.com:BashtonLtd/puppet-timezone.git",
