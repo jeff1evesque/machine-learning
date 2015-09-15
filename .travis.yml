@@ -26,5 +26,6 @@ install:
 # command to run tests
 before_script:
   - docker pull ubuntu:14.04
+  - docker-compose up
 script:
   - nosetests
