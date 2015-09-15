@@ -1,33 +1,16 @@
-language: python
-python:
-  - "2.7"
-
 sudo: required
+
+language: ruby
 
 services:
   - docker
-  - redis
 
-env:
-  - FLASK=0.10.1
-
-addons:
-  mariadb: "10.0"
-
-install:
-  - sudo apt-get update
-  - pip install --upgrade pip
-  - pip install Flask==$FLASK
-  - pip install jsonschema
-  - sudo apt-get install python-mysql.connector
-  - sudo apt-get install python-mysqldb
-  - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
-  - chmod +x docker-compose
-  - sudo mv docker-compose /usr/local/bin
+before_install:
+  
+  - docker build -t ubuntu/trusty
+  - docker run -d -p 127.0.01:80:4567 ubuntu/trusty /bin/sh -c "cd /root/trusty; bundle exec foreman start;"
+  - docker ps -a
+  - docker run ubuntu/trusty /bin/shh -c "cd /root/trusty; bundle exec rake test"
 
 # command to run tests
-before_script:
-  - docker pull ubuntu:14.04
-script:
-  - docker-compose up
-  - nosetests
+  - bundle exec rake test
