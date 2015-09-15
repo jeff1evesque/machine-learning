@@ -27,4 +27,5 @@ install:
 
 # command to run tests
 script:
+  - docker pull ubuntu:14.04
   - nosetests
