@@ -21,6 +21,9 @@ install:
   - pip install jsonschema
   - sudo apt-get install python-mysql.connector
   - sudo apt-get install python-mysqldb
+  - curl -L https://github.com/docker/compose/releases/download/1.4.0/docker-compose-`uname -s`-`uname -m` > docker-compose
+  - chmod +x docker-compose
+  - sudo mv docker-compose /usr/local/bin
 
 # command to run tests
 before_script:
