@@ -13,6 +13,7 @@
 !Vagrantfile
 !/puppet/
 !package.json
+!Dockerfile
 
 #Ignore and don't commit the following directories
 /web_interface/static/js/
