@@ -27,7 +27,7 @@ RUN apt-get install python-mysqldb -y --force-yes
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash -
 
 ## install 'add-apt-repository' command
-RUN apt-get install python-software-properties -y --force-yes
+RUN apt-get install python-properties-common -y --force-yes
 
 ## add ppa / install redis server
 RUN add-apt-repository ppa:rwky/redis
