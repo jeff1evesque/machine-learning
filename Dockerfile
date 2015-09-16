@@ -1,6 +1,6 @@
 FROM ubuntu:14.04
 
-## Install packages for building ruby
+## update package manager
 RUN apt-get update
 
 ## general packages
@@ -12,7 +12,7 @@ RUN pip install xmltodict
 RUN pip install six
 
 ## matplotlib (and dependencies)
-RUN apt-get install libfreetype6-dev
+RUN apt-get install libfreetype6-dev -y --force-yes
 RUN pip install matplotlib
 
 ## install flask with requests
