@@ -10,6 +10,9 @@ RUN pip install redis
 RUN pip install jsonschema
 RUN pip install xmltodict
 RUN pip install six
+
+## matplotlib (and dependencies)
+RUN apt-get install libfreetype6-dev
 RUN pip install matplotlib
 
 ## install flask with requests
