@@ -25,8 +25,8 @@ RUN apt-get install python-mysqldb -y --force-yes
 
 ## latest PPA for nodejs:
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash -
-RUN apt-get install nodejs
-RUN apt-get install npm
+RUN apt-get install nodejs -y --force-yes
+RUN apt-get install npm -y --force-yes
 
 ## install 'add-apt-repository' command
 RUN apt-get install software-properties-common -y --force-yes
