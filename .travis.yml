@@ -2,12 +2,13 @@ sudo: required
 
 language: ruby
 
+# allows 'docker' command
 services:
   - docker
 
 before_install:
   
-  - docker build -t ubuntu/trusty
+  - docker build -t ubuntu/trusty .
   - docker run -d -p 127.0.01:80:4567 ubuntu/trusty /bin/sh -c "cd /root/trusty; bundle exec foreman start;"
   - docker ps -a
   - docker run ubuntu/trusty /bin/shh -c "cd /root/trusty; bundle exec rake test"
