@@ -41,7 +41,6 @@ RUN apt-get install nodejs -y --force-yes
 ## compiler / Minifier:
 RUN gem install sass
 RUN npm install uglify-js -g
-RUN npm install --global imagemin
 
 ## scikit-learn dependency:
 RUN apt-get build-dep scikit-learn -y --force-yes
