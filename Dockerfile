@@ -25,6 +25,8 @@ RUN apt-get install python-mysqldb -y --force-yes
 
 ## latest PPA for nodejs:
 RUN curl -sL https://deb.nodesource.com/setup | sudo bash -
+RUN apt-get install nodejs
+RUN apt-get install npm
 
 ## install 'add-apt-repository' command
 RUN apt-get install software-properties-common -y --force-yes
@@ -41,6 +43,7 @@ RUN apt-get install nodejs -y --force-yes
 ## compiler / Minifier:
 RUN gem install sass
 RUN npm install uglify-js -g
+RUN npm install --global imagemin
 
 ## scikit-learn dependency:
 RUN apt-get build-dep scikit-learn -y --force-yes
