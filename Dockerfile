@@ -12,7 +12,7 @@ RUN pip install xmltodict
 RUN pip install six
 
 ## matplotlib (and dependencies)
-RUN apt-get install libfreetype6-dev -y --force-yes
+RUN apt-get install pkg-config -y --force-yes
 RUN pip install matplotlib
 
 ## install flask with requests
