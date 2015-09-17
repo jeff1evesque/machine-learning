@@ -12,3 +12,9 @@ RUN apt-get update -y
 ## install r10k
 RUN apt-get install rubygems-integration -y
 RUN gem install r10k
+
+## clone repository: allow puppet manifests to run (below)
+RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git /var/machine-learning
+
+## provision with puppet
+RUN for x in $(find . -name '/var/machine-learning/puppet/manifests/*.pp') ; do puppet apply $x ; done;
