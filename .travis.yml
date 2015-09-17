@@ -16,3 +16,4 @@ install:
 # command to run tests
 script:
   - flake8 brain
+  - flake8 web_interface
