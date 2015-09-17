@@ -11,4 +11,4 @@ before_install:
   - docker ps -a
 
 # command to run tests
-  - bundle exec rake unit_test
+  - bundle exec rake test
