@@ -2,7 +2,7 @@ sudo: required
 
 language: python
 
-# allows 'docker' command
+## allows 'docker' command
 services:
   - docker
 
@@ -13,7 +13,7 @@ before_install:
 install:
   - pip install flake8
 
-# command to run tests
+## run tests
 script:
   - flake8 brain
   - flake8 web_interface
