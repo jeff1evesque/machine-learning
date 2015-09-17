@@ -10,5 +10,9 @@ before_install:
   - docker build -t ubuntu/trusty .
   - docker ps -a
 
+install:
+  - pip install flake8
+
 # command to run tests
-  - nosetests
+script:
+  - flake8 brain
