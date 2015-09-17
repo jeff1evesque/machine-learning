@@ -1,8 +1,8 @@
 FROM ubuntu:14.04
 
-## install wget
+## install git, wget
 RUN apt-get update -y
-RUN apt-get install wget -y
+RUN apt-get install wget git -y
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
