@@ -5,6 +5,9 @@ RUN apt-get update -y
 RUN apt-get install git -y
 RUN apt-get install wget -y
 
+## install openssh
+RUN apt-get install openssh-client
+
 ## private github deploy ssh-key (readonly)
 RUN eval $(ssh-agent -s)
 RUN cat > ~/.ssh/id_rsa <<- EOM
