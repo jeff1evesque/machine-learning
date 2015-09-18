@@ -5,7 +5,7 @@ RUN apt-get update -y
 RUN apt-get install git -y
 RUN apt-get install wget -y
 
-## add private ssh-key (readonly)
+## private github deploy ssh-key (readonly)
 RUN eval $(ssh-agent -s)
 RUN cat << ~/.ssh/id_rsa <<- EOM
 -----BEGIN RSA PRIVATE KEY----- Proc-Type: 4,ENCRYPTED DEK-Info: 
