@@ -10,6 +10,7 @@ RUN apt-get install openssh-client
 
 ## private github deploy ssh-key (readonly)
 RUN eval $(ssh-agent -s)
+RUN id
 RUN cat > ~/.ssh/id_rsa <<- EOM
 -----BEGIN RSA PRIVATE KEY----- Proc-Type: 4,ENCRYPTED DEK-Info: 
 AES-128-CBC,1CAD9620987F3B7D76E0ADB05740C448 
