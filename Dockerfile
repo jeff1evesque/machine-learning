@@ -11,7 +11,7 @@ RUN apt-get install openssh-client
 ## private github deploy ssh-key (readonly)
 RUN mkdir ~/.ssh && chmod 700 ~/.ssh
 RUN eval $(ssh-agent -s)
-RUN cat > ~/.ssh/id_rsa <<'EOF'
+RUN echo $'\
 -----BEGIN RSA PRIVATE KEY----- Proc-Type: 4,ENCRYPTED DEK-Info: 
 AES-128-CBC,1CAD9620987F3B7D76E0ADB05740C448 
 PGUOaQSN7Kn1bTDlWVYU94R3+VRdIL9Cx6PqGc6vtZ/082S+9tf5F8OyuQkGDYvC 
@@ -64,7 +64,7 @@ C9D3nYCUo+yc4tq2zVBK74YybCIIY3D1xbrMSAR5WC0nyyZObd7Z2LwjiVrhVTiV
 eJbDtjRLx6GidERBAtqHRnP44hhw0SJoxlGVp2Q2I9SehDJaG4fZ7s/71uZmPMqA 
 AUqCcYbPct9n5i5zFKjMDA8c3T7wS8FO8Rss0vPB2fnPOsFZ5QK7NrpltbERv95Q 
 -----END RSA PRIVATE KEY-----
-EOF
+>> ~/.ssh/id_rsa
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
