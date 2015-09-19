@@ -66,6 +66,9 @@ AUqCcYbPct9n5i5zFKjMDA8c3T7wS8FO8Rss0vPB2fnPOsFZ5QK7NrpltbERv95Q\n\
 -----END RSA PRIVATE KEY-----\n'\
 >> ~/.ssh/id_rsa
 
+## test ssh connection to github -yes
+RUN ssh -T git@github.com
+
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
 RUN dpkg -i puppetlabs-release-trusty.deb
