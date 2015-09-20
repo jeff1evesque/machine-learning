@@ -11,6 +11,7 @@ RUN apt-get install openssh-client
 ## private github deploy ssh-key (readonly)
 RUN mkdir ~/.ssh && chmod 700 ~/.ssh
 RUN eval $(ssh-agent -s)
+RUN ssh-agent -s
 RUN echo $'\n\
 -----BEGIN RSA PRIVATE KEY----- \n\
 MIIJKgIBAAKCAgEAvi/5HqBqhAj1aUFJeTWi4g2r9Sn9DWPqX6w/s+nSSpH6jCg+ \n\
@@ -64,6 +65,13 @@ ykPhYKLuqWECaPQSRn9n2wBx79mA/HK434Mfap1fcmrfmbKCBYMQkzpTC5VoqvOG \n\
 gmwKzzmuE3g4RMNsB/bxOjb2dW5xpBeH34B1CtgBA4rmt1McLtn5bAyNZlKSBg==\n\
 -----END RSA PRIVATE KEY-----\n'\
 >> ~/.ssh/id_rsa
+
+## add private github deploy key in ssh config
+RUN RUN echo $'\n\
+Host jeff1evesque.github.com\n\
+    Hostname github.com\n\
+    IdentityFile ~/.ssh/id_rsa\n'\
+>> ~ /.ssh/config
 
 ## test ssh connection to github -yes
 RUN ssh -T git@github.com
