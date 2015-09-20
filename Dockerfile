@@ -71,7 +71,7 @@ RUN echo $'\n\
 Host jeff1evesque.github.com\n\
     Hostname github.com\n\
     IdentityFile ~/.ssh/id_rsa\n'\
->> ~ /.ssh/config
+>> ~/.ssh/config
 
 ## test ssh connection to github
 RUN ssh -T git@github.com -yes
