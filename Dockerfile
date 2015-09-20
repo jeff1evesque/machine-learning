@@ -73,8 +73,8 @@ Host jeff1evesque.github.com\n\
     IdentityFile ~/.ssh/id_rsa\n'\
 >> ~ /.ssh/config
 
-## test ssh connection to github -yes
-RUN ssh -T git@github.com
+## test ssh connection to github
+RUN ssh -T git@github.com -yes
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
