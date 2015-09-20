@@ -12,7 +12,7 @@ RUN apt-get install openssh-client
 RUN mkdir ~/.ssh && chmod 700 ~/.ssh
 RUN eval $(ssh-agent -s)
 RUN ssh-agent -s
-RUN echo -e '-----BEGIN RSA PRIVATE KEY-----\n\
+RUN printf '-----BEGIN RSA PRIVATE KEY-----\n\
 MIIJKgIBAAKCAgEAvi/5HqBqhAj1aUFJeTWi4g2r9Sn9DWPqX6w/s+nSSpH6jCg+\n\
 BWlezqo0ZoxcGgM5UbV28CaHt71Bwv6uuWZTWPSy6AjsjvymY92SMQCgbuw+XPfB\n\
 JMIIJ8Sn9OUi2FjmtBRTyUwOeq4UgvgYWzO7QFfOxebASbqH2IMQhkNTSzskqldn\n\
@@ -66,7 +66,7 @@ gmwKzzmuE3g4RMNsB/bxOjb2dW5xpBeH34B1CtgBA4rmt1McLtn5bAyNZlKSBg==\n\
 >> ~/.ssh/id_rsa
 
 ## add private github deploy key in ssh config
-RUN echo -e 'Host machine-learning github.com\n\
+RUN printf 'Host machine-learning github.com\n\
     Hostname github.com\n\
     IdentityFile ~/.ssh/id_rsa'\
 >> ~/.ssh/config
