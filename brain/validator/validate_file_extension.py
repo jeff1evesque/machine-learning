@@ -1,25 +1,25 @@
 #!/usr/bin/python
 
-## @validate_mime.py
-#  This script performs validation on the 'mime' type for file upload(s), and returns the
+## @validate_file_extension.py
+#  This script performs validation on the file extension for file upload(s), and returns the
 #      validated temporary file references(s), along with the corresponding file extension
 #      for each file upload(s).
 import sys
 import os.path
 from brain.converter.calculate_md5 import calculate_md5
 
-## Class: Validate_Mime, explicitly inherit 'new-style' class
+## Class: Validate_File_Extension, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'base_data.py'
-class Validate_Mime(object):
+class Validate_File_Extension(object):
 
     ## constructor: saves a subset of the passed-in form data
     def __init__(self, svm_data, svm_session=None):
         self.svm_data    = svm_data
         self.svm_session = svm_session
 
-    ## validate: this method validates the MIME type of 'file upload(s)', provided during
-    #            a 'training' session. If any of the 'file upload(s)' fails validation,
+    ## validate: this method validates the file extension of 'file upload(s)', provided
+    #            during a 'training' session. If any of the 'file upload(s)' fails validation,
     #            this method will return False. Otherwise, the method will return a list
     #            of unique 'file upload(s)', discarding duplicates.
     def validate(self):
