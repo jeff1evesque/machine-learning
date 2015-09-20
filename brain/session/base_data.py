@@ -8,7 +8,7 @@
 #        references.
 from brain.database.save_entity import Save_Entity
 from brain.database.save_feature import Save_Feature
-from brain.validator.validate_mime import Validate_Mime
+from brain.validator.validate_file_extension import Validate_File_Extension
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_observation import Save_Observation
 
@@ -21,10 +21,10 @@ class Base_Data(object):
 
     ## constructor:
     def __init__(self, svm_data):
-        self.flag_validate_mime = False
-        self.observation_labels = []
-        self.list_error         = []
-        self.uid                = 1
+        self.flag_validate_file_extension = False
+        self.observation_labels           = []
+        self.list_error                   = []
+        self.uid                          = 1
 
     ## save_svm_info: save the number of features that can be expected in a given
     #                 observation with respect to 'id_entity'.
@@ -45,14 +45,14 @@ class Base_Data(object):
         db_return = db_save.save_count()
         if db_return['error']: self.list_error.append(db_return['error'])
 
-    ## validate_mime_type: validate mime type for each dataset.
-    def validate_mime_type(self):
-        validator = Validate_Mime(self.svm_data, self.svm_session)
-        self.response_mime_validation = validator.validate()
+    ## validate_file_extension: validate file extension for each dataset.
+    def validate_file_extension(self):
+        validator = Validate_File_Extension(self.svm_data, self.svm_session)
+        self.response_file_extension_validation = validator.validate()
 
-        if self.response_mime_validation['error'] != None:
-            self.list_error.append(self.response_mime_validation['error'])
-            self.flag_validate_mime = True
+        if self.response_file_extension_validation['error'] != None:
+            self.list_error.append(self.response_file_extension_validation['error'])
+            self.flag_validate_file_extension = True
 
     ## validate_id: validate session id as positive integer.
     def validate_id(self, session_id):
@@ -111,7 +111,7 @@ class Base_Data(object):
     ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
     #                   dict object.
     #
-    #  @flag_convert, when true, indicates the file-upload mime type passed
+    #  @flag_convert, when true, indicates the file-upload file extension passed
     #      validation, and returned unique file(s) (redundancies removed).
     #
     #  @flag_append, when false, indicates the neccessary 'self.dataset' was
@@ -125,7 +125,7 @@ class Base_Data(object):
         index_count  = 0
 
         try:
-            self.response_mime_validation['dataset']['file_upload']
+            self.response_file_extension_validation['dataset']['file_upload']
             flag_convert = True
         except Exception as error:
             self.list_error.append(error)
@@ -136,7 +136,7 @@ class Base_Data(object):
             self.dataset = []
             svm_property = self.svm_data
 
-            for val in self.response_mime_validation['dataset']['file_upload']:
+            for val in self.response_file_extension_validation['dataset']['file_upload']:
                 # reset file-pointer
                 val['file'].seek(0)
 
