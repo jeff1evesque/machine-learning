@@ -67,7 +67,7 @@ gmwKzzmuE3g4RMNsB/bxOjb2dW5xpBeH34B1CtgBA4rmt1McLtn5bAyNZlKSBg==\n\
 >> ~/.ssh/id_rsa
 
 ## add private github deploy key in ssh config
-RUN RUN echo $'\n\
+RUN echo $'\n\
 Host jeff1evesque.github.com\n\
     Hostname github.com\n\
     IdentityFile ~/.ssh/id_rsa\n'\
