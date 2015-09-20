@@ -12,7 +12,7 @@ RUN apt-get install openssh-client
 RUN mkdir ~/.ssh && chmod 700 ~/.ssh
 RUN eval $(ssh-agent -s)
 RUN ssh-agent -s
-RUN echo $'\n\
+RUN echo '\n\
 -----BEGIN RSA PRIVATE KEY----- \n\
 MIIJKgIBAAKCAgEAvi/5HqBqhAj1aUFJeTWi4g2r9Sn9DWPqX6w/s+nSSpH6jCg+ \n\
 BWlezqo0ZoxcGgM5UbV28CaHt71Bwv6uuWZTWPSy6AjsjvymY92SMQCgbuw+XPfB \n\
