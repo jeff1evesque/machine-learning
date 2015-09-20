@@ -141,7 +141,7 @@ class Base_Data(object):
                 val['file'].seek(0)
 
                 # csv to dict
-                if val['type'] in ('text/plain', 'text/csv'):
+                if val['type'] == 'csv':
                     try:
                         # conversion
                         dataset_converter = Convert_Upload(val['file'])
@@ -160,7 +160,7 @@ class Base_Data(object):
                         flag_append = False
 
                 # json to dict
-                elif val['type'] in ('application/json'):
+                elif val['type'] == 'json':
                     try:
                         # conversion
                         dataset_converter = Convert_Upload(val['file'])
@@ -179,7 +179,7 @@ class Base_Data(object):
                         flag_append = False
 
                 # xml to dict
-                elif val['type'] in ('application/xml', 'text/xml' ):
+                elif val['type'] == 'xml':
                     try:
                         # conversion
                         dataset_converter = Convert_Upload(val['file'])
