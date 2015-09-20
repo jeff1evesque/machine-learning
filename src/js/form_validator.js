@@ -73,7 +73,7 @@
  *
  * Note: These rules cannot define custom messages. Instead, the custom messages
  *       must be defined as the last parameter to the 'addMethod' definition (see
- *       above 'checkMime').
+ *       above 'fileExtension').
  */
   jQuery.validator.addClassRules({
     svm_dataset_xml: {
