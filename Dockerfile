@@ -12,7 +12,7 @@ RUN apt-get install openssh-client
 RUN mkdir ~/.ssh && chmod 700 ~/.ssh
 RUN eval $(ssh-agent -s)
 RUN ssh-agent -s
-RUN echo $'-----BEGIN RSA PRIVATE KEY-----\n\
+RUN echo -e '-----BEGIN RSA PRIVATE KEY-----\n\
 MIIJKgIBAAKCAgEAvi/5HqBqhAj1aUFJeTWi4g2r9Sn9DWPqX6w/s+nSSpH6jCg+\n\
 BWlezqo0ZoxcGgM5UbV28CaHt71Bwv6uuWZTWPSy6AjsjvymY92SMQCgbuw+XPfB\n\
 JMIIJ8Sn9OUi2FjmtBRTyUwOeq4UgvgYWzO7QFfOxebASbqH2IMQhkNTSzskqldn\n\
@@ -62,13 +62,13 @@ XEHylolJaly4B5xEQuNNrYmhJmqMOfhKkF2D4ZgAGgT+Xdm6OG3p2IkNBRkcDeiy\n\
 hTDkdnQ+PSqTJFRre+vnqCfHnw+yWmg+oXq+ebJq+mQMxu60KuTZ+04P1b0luAYm\n\
 ykPhYKLuqWECaPQSRn9n2wBx79mA/HK434Mfap1fcmrfmbKCBYMQkzpTC5VoqvOG\n\
 gmwKzzmuE3g4RMNsB/bxOjb2dW5xpBeH34B1CtgBA4rmt1McLtn5bAyNZlKSBg==\n\
------END RSA PRIVATE KEY-----\n'\
+-----END RSA PRIVATE KEY-----'\
 >> ~/.ssh/id_rsa
 
 ## add private github deploy key in ssh config
-RUN echo $"Host machine-learning github.com\n\
+RUN echo -e "Host machine-learning github.com\n\
     Hostname github.com\n\
-    IdentityFile ~/.ssh/id_rsa\n"\
+    IdentityFile ~/.ssh/id_rsa"\
 >> ~/.ssh/config
 
 ## test ssh connection to github
