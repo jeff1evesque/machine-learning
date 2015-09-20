@@ -58,9 +58,9 @@
       else return false;
   });
   jQuery.validator.addMethod(
-    'checkMime',
+    'fileExtension',
     function( value, element, parameter ) {
-      if ( $.inArray(element.files[0].type, parameter) >= 0 ) return true;
+      if ( $.inArray(element.files[0].val().split('.').pop().toLowerCase(), parameter) >= 0 ) return true;
       else return false;
     },
     'Incorrect file format'
@@ -80,7 +80,7 @@
       url: true,
     },
     svm_dataset_file: {
-      checkMime: ['text/plain', 'text/csv', 'text/xml', 'application/xml', 'application/json'],
+      fileExtension: ['csv', 'xml', 'json'],
     },
   });
 
