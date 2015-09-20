@@ -2,9 +2,10 @@
 
 ## @validate_mime.py
 #  This script performs validation on the 'mime' type for file upload(s), and returns the
-#      validated temporary file references(s), along with the corresponding mimetype for
-#      each file upload(s).
+#      validated temporary file references(s), along with the corresponding file extension
+#      for each file upload(s).
 import sys
+import os.path
 from brain.converter.calculate_md5 import calculate_md5
 
 ## Class: Validate_Mime, explicitly inherit 'new-style' class
@@ -26,7 +27,7 @@ class Validate_Mime(object):
         list_error      = []
 
         dataset         = self.svm_data['data']['dataset']
-        acceptable_type = ['text/plain', 'text/csv', 'text/xml', 'text/json', 'application/xml', 'application/json']
+        acceptable_type = ['csv', 'xml', 'json']
 
         unique_hash     = set()
         dataset_keep    = []
@@ -39,19 +40,19 @@ class Validate_Mime(object):
                     # add 'hashed' value of file reference(s) to a list
                     if filehash not in unique_hash:
                         unique_hash.add(filehash)
-                        mimetype = filedata['file'].content_type
+                        file_extension = os.path.splitext(filedata['filename'])[1][1:].strip().lower()
 
-                        # validate mimetype
-                        if (mimetype not in acceptable_type):
+                        # validate file_extension
+                        if (file_extension not in acceptable_type):
                             msg = '''Problem: Uploaded file, \'''' + filedata['filename'] + '''\', must be one of the formats:'''
                             msg += '\n ' + ', '.join(acceptable_type)
                             list_error.append(msg)
 
                         # keep non-duplicated file uploads
                         else:
-                            dataset_keep.append({'type': mimetype, 'file': filedata['file'], 'filename': filedata['filename']})
+                            dataset_keep.append({'type': file_extension, 'file': filedata['file'], 'filename': filedata['filename']})
                 except:
-                    msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
+                    msg = 'Problem with file upload #' + filedata['filename'] + '. Please re-upload the file.'
                     list_error.append(msg)
 
             # replace portion of dataset with unique 'file reference(s)'
