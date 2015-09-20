@@ -74,7 +74,7 @@ Host jeff1evesque.github.com\n\
 >> ~/.ssh/config
 
 ## test ssh connection to github
-RUN ssh -T git@github.com -yes
+RUN ssh -T git@github.com
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
