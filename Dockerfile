@@ -18,6 +18,7 @@ RUN gem install r10k
 RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git /var/machine-learning
 
 ## install puppet modules using puppetfile with r10k
+RUN mkdir /var/machine-learning/puppet/modules/
 RUN PUPPETFILE=/var/machine-learning/puppet/Puppetfile_travis PUPPETFILE_DIR=/var/machine-learning/puppet/modules/ r10k puppetfile install
 
 ## provision with puppet
