@@ -11,7 +11,7 @@ before_install:
   - echo -e "$travis_pull_private_key" > ~/.ssh/id_rsa
   - chmod 700 ~/.ssh/id_rsa
   - eval `ssh-agent -s`
-  - echo -ne '\n' | ssh-add ~/.ssh/id_rsa
+  - ssh-add ~/.ssh/id_rsa
   - ssh -T git@github.com
   - docker build -t ubuntu/trusty .
   - docker ps -a
