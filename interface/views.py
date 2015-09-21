@@ -23,15 +23,18 @@ def load_data():
         # local variables
         files = None
 
-        # get submitted form files
+        # web-interface (1/2): get submitted form files
         if request.files:
             files = request.files
 
-        # reformat form data
+        # web-interface (2/2): reformat form data
         if request.form:
             settings       = request.form
             sender         = Restructure_Data(settings, files)
             data_formatted = sender.restructure()
+
+        # programmatic-interface (1/1):
+        
 
         # send reformatted data to brain
         loader = Load_Data(data_formatted)
