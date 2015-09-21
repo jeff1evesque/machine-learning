@@ -33,8 +33,11 @@ def load_data():
             sender         = Restructure_Data(settings, files)
             data_formatted = sender.restructure()
 
-        # programmatic-interface (1/1):
-        
+        # programmatic-interface (1/1): sender will have the following syntax, if using python -
+        #
+        #     r = requests.post('localhost:5000/load-data/', data=payload)
+        if not (request.files and  request.form):
+            
 
         # send reformatted data to brain
         loader = Load_Data(data_formatted)
