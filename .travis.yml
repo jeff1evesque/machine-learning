@@ -11,7 +11,7 @@ before_install:
   - echo -e "$travis_pull_private_key" > ~/.ssh/travis
   - chmod 700 ~/.ssh/travis
   - eval `ssh-agent -s`
-  - ssh -T git@github.com
+  - ssh -vT git@github.com
   - docker build -t ubuntu/trusty .
   - docker ps -a
 
