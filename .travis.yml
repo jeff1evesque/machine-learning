@@ -8,8 +8,8 @@ services:
 
 before_install:
   - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
-  - echo -e "$travis_pull_private_key" > ~/.ssh/travis
-  - chmod 700 ~/.ssh/travis
+  - echo -e "$travis_pull_private_key" > ~/.ssh/id_rsa
+  - chmod 700 ~/.ssh/id_rsa
   - eval `ssh-agent -s`
   - ssh -vT git@github.com
   - docker build -t ubuntu/trusty .
