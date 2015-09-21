@@ -37,7 +37,7 @@ def load_data():
         #
         #     r = requests.post('localhost:5000/load-data/', data=payload)
         if not (request.files and  request.form):
-            
+            data_formatted = request.get_json()
 
         # send reformatted data to brain
         loader = Load_Data(data_formatted)
