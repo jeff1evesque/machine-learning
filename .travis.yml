@@ -6,6 +6,7 @@ language: python
 services:
   - docker
 
+## setup ssh keypair, build docker container
 before_install:
   - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
   - echo -e "$travis_pull_private_key" > ~/.ssh/id_rsa
@@ -15,6 +16,7 @@ before_install:
   - docker build -t ubuntu/trusty .
   - docker ps -a
 
+## install packages for linting, and unit testing
 install:
   - pip install flake8
 
