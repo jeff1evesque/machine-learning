@@ -23,16 +23,17 @@ def load_data():
         # local variables
         files = None
 
-        # get post data
+        # get submitted form files
         if request.files:
             files = request.files
-        settings = request.form
 
-        # format post data
-        sender         = Restructure_Data(settings, files)
-        data_formatted = sender.restructure()
+        # reformat form data
+        if request.form:
+            settings       = request.form
+            sender         = Restructure_Data(settings, files)
+            data_formatted = sender.restructure()
 
-        # send data to brain
+        # send reformatted data to brain
         loader = Load_Data(data_formatted)
         if loader.get_session_type()['session_type']:
             session_type = loader.get_session_type()['session_type']
