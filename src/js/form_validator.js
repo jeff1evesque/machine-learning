@@ -58,9 +58,9 @@
       else return false;
   });
   jQuery.validator.addMethod(
-    'checkMime',
+    'fileExtension',
     function( value, element, parameter ) {
-      if ( $.inArray(element.files[0].type, parameter) >= 0 ) return true;
+      if ( $.inArray(element.files[0]['name'].split('.').pop().toLowerCase(), parameter) >= 0 ) return true;
       else return false;
     },
     'Incorrect file format'
@@ -73,14 +73,14 @@
  *
  * Note: These rules cannot define custom messages. Instead, the custom messages
  *       must be defined as the last parameter to the 'addMethod' definition (see
- *       above 'checkMime').
+ *       above 'fileExtension').
  */
   jQuery.validator.addClassRules({
     svm_dataset_xml: {
       url: true,
     },
     svm_dataset_file: {
-      checkMime: ['text/plain', 'text/csv', 'text/xml', 'application/xml', 'application/json'],
+      fileExtension: ['csv', 'xml', 'json'],
     },
   });
 

@@ -1,24 +1,25 @@
 #!/usr/bin/python
 
-## @validate_mime.py
-#  This script performs validation on the 'mime' type for file upload(s), and returns the
-#      validated temporary file references(s), along with the corresponding mimetype for
-#      each file upload(s).
+## @validate_file_extension.py
+#  This script performs validation on the file extension for file upload(s), and returns the
+#      validated temporary file references(s), along with the corresponding file extension
+#      for each file upload(s).
 import sys
+import os.path
 from brain.converter.calculate_md5 import calculate_md5
 
-## Class: Validate_Mime, explicitly inherit 'new-style' class
+## Class: Validate_File_Extension, explicitly inherit 'new-style' class
 #
 #  Note: this class is invoked within 'base_data.py'
-class Validate_Mime(object):
+class Validate_File_Extension(object):
 
     ## constructor: saves a subset of the passed-in form data
     def __init__(self, svm_data, svm_session=None):
         self.svm_data    = svm_data
         self.svm_session = svm_session
 
-    ## validate: this method validates the MIME type of 'file upload(s)', provided during
-    #            a 'training' session. If any of the 'file upload(s)' fails validation,
+    ## validate: this method validates the file extension of 'file upload(s)', provided
+    #            during a 'training' session. If any of the 'file upload(s)' fails validation,
     #            this method will return False. Otherwise, the method will return a list
     #            of unique 'file upload(s)', discarding duplicates.
     def validate(self):
@@ -26,7 +27,7 @@ class Validate_Mime(object):
         list_error      = []
 
         dataset         = self.svm_data['data']['dataset']
-        acceptable_type = ['text/plain', 'text/csv', 'text/xml', 'text/json', 'application/xml', 'application/json']
+        acceptable_type = ['csv', 'xml', 'json']
 
         unique_hash     = set()
         dataset_keep    = []
@@ -39,19 +40,19 @@ class Validate_Mime(object):
                     # add 'hashed' value of file reference(s) to a list
                     if filehash not in unique_hash:
                         unique_hash.add(filehash)
-                        mimetype = filedata['file'].content_type
+                        file_extension = os.path.splitext(filedata['filename'])[1][1:].strip().lower()
 
-                        # validate mimetype
-                        if (mimetype not in acceptable_type):
+                        # validate file_extension
+                        if (file_extension not in acceptable_type):
                             msg = '''Problem: Uploaded file, \'''' + filedata['filename'] + '''\', must be one of the formats:'''
                             msg += '\n ' + ', '.join(acceptable_type)
                             list_error.append(msg)
 
                         # keep non-duplicated file uploads
                         else:
-                            dataset_keep.append({'type': mimetype, 'file': filedata['file'], 'filename': filedata['filename']})
+                            dataset_keep.append({'type': file_extension, 'file': filedata['file'], 'filename': filedata['filename']})
                 except:
-                    msg = 'Problem with file upload #' + str(index) + '. Please re-upload the file.'
+                    msg = 'Problem with file upload #' + filedata['filename'] + '. Please re-upload the file.'
                     list_error.append(msg)
 
             # replace portion of dataset with unique 'file reference(s)'
