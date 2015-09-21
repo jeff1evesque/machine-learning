@@ -6,7 +6,13 @@ language: python
 services:
   - docker
 
-before_install:  
+before_install:
+  - echo -e "Host *\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
+  - echo -e "$travis_pull_private_key" > ~/.ssh/id_rsa
+  - chmod 600 ~/.ssh/id_rsa
+  - eval `ssh-agent -s`
+  - ssh-add ~/.ssh/id_rsa
+  - ssh -T git@github.com
   - docker build -t ubuntu/trusty .
   - docker ps -a
 
