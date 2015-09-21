@@ -20,7 +20,7 @@ before_install:
 install:
   - pip install flake8
 
-## run tests
+## lint, and unit tests
 script:
   - flake8 brain
   - flake8 web_interface
