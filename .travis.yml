@@ -20,4 +20,4 @@ install:
 script:
   - flake8 brain
   - flake8 web_interface
-  - jshint --verbose src/js
+  - jshint --verbose src/js/*.js
