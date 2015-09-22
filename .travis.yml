@@ -18,11 +18,9 @@ install:
   - gem install scss_lint
   - npm install -g bootlint
   - gem install puppet-lint
+  - gem install rubocop
 
 ## lint, and unit tests
-#
-#  @htmllint, the 'htmllint init' command will generate a configuration
-#      file, '.htmllintrc' in the current directory.
 script:
   - flake8 brain
   - flake8 web_interface
@@ -30,3 +28,5 @@ script:
   - scss-lint src/scss/*.scss --config test/linter/.scss-lint.yml
   - bootlint web_interface/templates/*.html
   - puppet-lint puppet/manifests
+  - rubocop puppet/Puppefile
+  - rubocop puppet/scripts/Puppetfile
