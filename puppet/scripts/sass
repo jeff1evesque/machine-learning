@@ -20,5 +20,5 @@ inotifywait /vagrant/src/scss/ -m -e close_write -e move -e create |
     filename="${file%.*}"
 
     # compile with 'sass'
-    node-sass /vagrant/src/scss/"$file" /vagrant/web_interface/static/css/"$filename".min.css --output-style compressed
+    node-sass /vagrant/src/scss/"$file" /vagrant/interface/static/css/"$filename".min.css --output-style compressed
   done
