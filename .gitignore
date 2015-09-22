@@ -16,6 +16,7 @@
 !Dockerfile
 !Gemfile
 !Rakefile
+!/test
 
 #Ignore and don't commit the following directories
 /web_interface/static/js/
