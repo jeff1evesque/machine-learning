@@ -22,3 +22,4 @@ script:
   - flake8 brain
   - flake8 web_interface
   - jshint --verbose src/js/*.js
+  - scss-lint src/scss/*.scss
