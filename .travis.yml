@@ -16,7 +16,7 @@ install:
   - pip install flake8
   - npm install -g jshint
   - gem install scss_lint
-  - npm install -g htmllint-cli
+  - npm install -g bootlint
 
 ## lint, and unit tests
 #
@@ -27,4 +27,4 @@ script:
   - flake8 web_interface
   - jshint --verbose src/js/*.js
   - scss-lint src/scss/*.scss --config test/linter/.scss-lint.yml
-  - htmllint interface/templates/*.html
+  - bootlint web_interface/templates/*.html
