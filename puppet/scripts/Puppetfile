@@ -1,5 +1,7 @@
 #!/usr/bin/env ruby
 
+## @Puppetfile: this file is intended for travis ci implementation.
+
 ## Install Module: stdlib (apt dependency)
 mod 'stdlib',
   :git => "https://github.com/puppetlabs/puppetlabs-stdlib.git",
