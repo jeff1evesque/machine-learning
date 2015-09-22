@@ -2,6 +2,8 @@
 
 ## @Puppetfile, any changes to this file, should be made correspondingly with
 #      the /puppet/scripts/Puppetfile file.
+#
+#  Note: /puppet/scripts/Puppetfile is used for the travis ci implementation.
 
 ## Install Module: stdlib (apt dependency)
 mod 'stdlib',
