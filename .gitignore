@@ -13,6 +13,9 @@
 !Vagrantfile
 !/puppet/
 !package.json
+!Dockerfile
+!Gemfile
+!Rakefile
 
 #Ignore and don't commit the following directories
 /web_interface/static/js/

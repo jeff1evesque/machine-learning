@@ -1,0 +1,21 @@
+sudo: required
+
+language: python
+
+## allows 'docker' command
+services:
+  - docker
+
+## setup ssh keypair, build docker container
+before_install:
+  - docker build -t ubuntu/trusty .
+  - docker ps -a
+
+## install packages for linting, and unit testing
+install:
+  - pip install flake8
+
+## lint, and unit tests
+script:
+  - flake8 brain
+  - flake8 web_interface
