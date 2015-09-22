@@ -20,5 +20,5 @@ inotifywait /vagrant/src/js/ -m -e close_write -e move -e create |
     filename="${file%.*}"
 
     # minifiy with 'uglifyjs'
-    uglifyjs -c --output /vagrant/web_interface/static/js/"$filename".min.js /vagrant/src/js/"$file"
+    uglifyjs -c --output /vagrant/interface/static/js/"$filename".min.js /vagrant/src/js/"$file"
   done
