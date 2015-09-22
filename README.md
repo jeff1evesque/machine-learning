@@ -1,4 +1,4 @@
-Machine Learning
+Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg)](https://travis-ci.org/jeff1evesque/machine-learning)
 ================
 
 ###Definition

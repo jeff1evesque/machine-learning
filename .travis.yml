@@ -1,0 +1,32 @@
+sudo: required
+
+language: python
+
+## allows 'docker' command
+services:
+  - docker
+
+## build docker container used for unit testing
+before_install:
+  - docker ps -a
+  - docker build -t ubuntu/trusty .
+
+## install packages for linting, and unit testing
+install:
+  - pip install flake8
+  - npm install -g jshint
+  - gem install scss_lint
+  - npm install -g bootlint
+  - gem install puppet-lint
+  - gem install rubocop
+
+## lint, and unit tests
+script:
+  - flake8 brain
+  - flake8 web_interface
+  - jshint --verbose src/js/*.js
+  - scss-lint src/scss/*.scss --config test/linter/.scss-lint.yml
+  - bootlint web_interface/templates/*.html
+  - puppet-lint puppet/manifests
+  - rubocop puppet/Puppefile
+  - rubocop puppet/scripts/Puppetfile
