@@ -6,7 +6,7 @@ language: python
 services:
   - docker
 
-## setup ssh keypair, build docker container
+## build docker container used for unit testing
 before_install:
   - docker build -t ubuntu/trusty .
   - docker ps -a
