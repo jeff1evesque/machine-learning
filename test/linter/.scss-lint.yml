@@ -1,0 +1,11 @@
+linters:
+  BorderZero:
+    enabled: false
+
+  Indentation:
+    severity: warning
+    width: 4
+
+  SpaceAfterPropertyColon:
+    enabled: true
+    style: no_space # or 'one_space', or 'at_least_one_space', or 'aligned'
