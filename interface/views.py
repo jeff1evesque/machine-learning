@@ -3,7 +3,7 @@
 #       the route decorators are defined, which flask to execute triggers
 #       for specific URL's.
 import json
-from web_interface import app
+from interface import app
 from flask import render_template, request
 from brain.load_data import Load_Data
 from brain.converter.restructure_data import Restructure_Data
