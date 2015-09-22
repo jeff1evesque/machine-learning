@@ -3,7 +3,6 @@
 #      https://github.com/brigade/scss-lint/blob/master/config/default.yml
 linters:
   Indentation:
-    severity: warning
     width: 4
 
   SpaceAfterPropertyColon:
