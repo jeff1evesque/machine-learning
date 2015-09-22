@@ -6,7 +6,7 @@ language: python
 services:
   - docker
 
-## setup ssh keypair, build docker container
+## build docker container used for unit testing
 before_install:
   - docker build -t ubuntu/trusty .
   - docker ps -a
@@ -14,8 +14,10 @@ before_install:
 ## install packages for linting, and unit testing
 install:
   - pip install flake8
+  - npm install -g jshint
 
 ## lint, and unit tests
 script:
   - flake8 brain
   - flake8 web_interface
+  - jshint --verbose src/js/*.js
