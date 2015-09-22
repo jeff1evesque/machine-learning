@@ -25,8 +25,8 @@ script:
   - flake8 brain
   - flake8 web_interface
   - jshint --verbose src/js/*.js
-  - scss-lint src/scss/*.scss --config test/linter/.scss-lint.yml
-  - bootlint web_interface/templates/*.html
+  - scss-lint src/scss/*.scss
+  - bootlint interface/templates/*.html
   - puppet-lint puppet/manifests
   - rubocop puppet/Puppefile
   - rubocop puppet/scripts/Puppetfile
