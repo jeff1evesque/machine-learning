@@ -1,4 +1,8 @@
 #!/usr/bin/env ruby
+
+## @Puppetfile, any changes to this file, should be made correspondingly with
+#      the /puppet/scripts/Puppetfile file.
+
 ## Install Module: stdlib (apt dependency)
 mod 'stdlib',
   :git => "git@github.com:puppetlabs/puppetlabs-stdlib.git",
