@@ -15,6 +15,7 @@ before_install:
 install:
   - pip install flake8
   - npm install -g jshint
+  - gem install scss_lint
 
 ## lint, and unit tests
 script:
