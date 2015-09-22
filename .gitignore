@@ -19,9 +19,9 @@
 !/test
 
 #Ignore and don't commit the following directories
-/web_interface/static/js/
-/web_interface/static/css/
-/web_interface/static/img/
+/interface/static/js/
+/interface/static/css/
+/interface/static/img/
 /puppet/modules/
 
 # Ignore and don't commit the following files
@@ -35,4 +35,4 @@
 /brain/session/*.pyc
 /brain/validator/*.pyc
 
-/web_interface/*.pyc
+/interface/*.pyc
