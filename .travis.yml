@@ -19,6 +19,9 @@ install:
   - npm install -g htmllint-cli
 
 ## lint, and unit tests
+#
+#  @htmllint, the 'htmllint init' command will generate a configuration
+#      file, '.htmllintrc' in the current directory.
 script:
   - flake8 brain
   - flake8 web_interface
