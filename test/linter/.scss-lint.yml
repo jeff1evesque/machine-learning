@@ -1,3 +1,6 @@
+## @.scss-lint.yml, this file overrides the default configurations:
+#
+#      https://github.com/brigade/scss-lint/blob/master/config/default.yml
 linters:
   BorderZero:
     enabled: false
