@@ -9,7 +9,7 @@ $directory_asset = ['js', 'css', 'img']
 ## dynamically create compilers
 $compilers.each |Integer $index, String $compiler| {
     ## create asset directories
-    file {"/vagrant/web_interface/static/${directory_asset[$index]}/":
+    file {"/vagrant/interface/static/${directory_asset[$index]}/":
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
     }
