@@ -29,7 +29,7 @@ This module will test the following sessions:
 """
 import requests
 import json
-import os.path.join
+import os.path
 
 # import sample dataset
 with open(os.path.join('..', '..', 'interface', 'static', 'data', 'json', 'sample-1.json')) as json_file:
