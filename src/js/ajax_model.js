@@ -37,6 +37,6 @@
       console.log('Error Status: '+textStatus);
 
     // Remove AJAX Overlay
-      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
     });
   }
