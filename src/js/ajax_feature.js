@@ -21,7 +21,7 @@
     }).done(function(data) {
 
     // Remove AJAX Overlay
-      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
 
     // Append to DOM
       if (data.error) {
@@ -49,6 +49,6 @@
       console.log('Error Status: '+textStatus);
 
     // Remove AJAX Overlay
-      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
     });
   }
