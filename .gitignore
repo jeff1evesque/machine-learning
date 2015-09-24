@@ -12,10 +12,7 @@
 !license.md
 !Vagrantfile
 !/puppet/
-!package.json
 !Dockerfile
-!Gemfile
-!Rakefile
 !/test
 
 #Ignore and don't commit the following directories
