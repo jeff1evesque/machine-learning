@@ -1,6 +1,6 @@
 # Ignore project root (except exclamated files, and directories)
 /*
-!/web_interface/
+!/interface/
 !/brain/
 !/src/
 !.gitigore
