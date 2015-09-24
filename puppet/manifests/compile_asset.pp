@@ -16,7 +16,8 @@ $compilers.each |Integer $index, String $compiler| {
 
     ## create startup script: for webcompilers, using heredoc syntax
     #
-    #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
+    #  @("EOT"), the use double quotes on the end tag, allows variable
+    #      interpolation within the puppet heredoc.
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
@@ -67,22 +68,26 @@ $compilers.each |Integer $index, String $compiler| {
                notify  => Exec["dos2unix-upstart-${compiler}"],
     }
 
-    ## dos2unix upstart: convert clrf (windows to linux) in case host machine is windows.
+    ## dos2unix upstart: convert clrf (windows to linux) in case host machine
+    #                    is windows.
     #
-    #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
-    #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
-    #      'service' end point does not require the 'refreshonly' attribute.
+    #  @notify, ensure the webserver service is started. This is similar to an
+    #      exec statement, where the 'refreshonly => true' would be implemented
+    #      on the corresponding listening end point. But, the 'service' end
+    #      point does not require the 'refreshonly' attribute.
     exec {"dos2unix-upstart-${compiler}":
         command => "dos2unix /etc/init/${compiler}.conf",
         refreshonly => true,
         notify  => Exec["dos2unix-bash-${compiler}"],
     }
 
-    ## dos2unix bash: convert clrf (windows to linux) in case host machine is windows.
+    ## dos2unix bash: convert clrf (windows to linux) in case a windows host is
+    #                 used, otherwise this is a trivial step.
     #
-    #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
-    #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
-    #      'service' end point does not require the 'refreshonly' attribute.
+    #  @notify, ensure the webserver service is started. This is similar to an
+    #      exec statement, where the 'refreshonly => true' would be implemented
+    #      on the corresponding listening end point. But, the 'service' end
+    #      point does not require the 'refreshonly' attribute.
     exec {"dos2unix-bash-${compiler}":
         command => "dos2unix /vagrant/puppet/scripts/${compiler}",
         refreshonly => true,
