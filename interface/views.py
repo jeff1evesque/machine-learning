@@ -36,7 +36,7 @@ def load_data():
         # programmatic-interface (1/1): sender will have the following syntax, if using python -
         #
         #     r = requests.post('localhost:5000/load-data/', data=payload)
-        if not (request.files and  request.form):
+        if not (request.files or request.form):
             data_formatted = request.get_json()
 
         # send reformatted data to brain
