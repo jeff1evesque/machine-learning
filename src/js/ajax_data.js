@@ -77,14 +77,14 @@ $(document).ready(function() {
         }
 
       // Remove AJAX Overlay
-        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
 
       }).fail(function(jqXHR, textStatus, errorThrown) {
         console.log('Error Thrown: '+errorThrown);
         console.log('Error Status: '+textStatus);
 
       // Remove AJAX Overlay
-        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove() });
+        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
       });
     }
 
