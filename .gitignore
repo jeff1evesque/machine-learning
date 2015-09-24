@@ -23,6 +23,9 @@
 /interface/static/css/
 /interface/static/img/
 /puppet/modules/
+/test/.cache
+/test/programmatic_interface/.cache
+/test/programmatic_interface/__pycache__
 
 # Ignore and don't commit the following files
 /*.pyc
