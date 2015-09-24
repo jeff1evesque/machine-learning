@@ -18,8 +18,8 @@
 }
 
 .error {
-  font-weight:700;
   color: #800000;
+  font-weight:700;
 }
 
 input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_variable, .svm_indep_variable ~ .svm_indep_variable {
