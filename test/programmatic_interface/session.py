@@ -11,6 +11,10 @@ This module will test the following sessions:
   - model_predict: generate a prediction by selecting a particular
                    cached model from the NoSQL cache.
 
+  Note: this module requires the installation of 'pytest'
+
+      - pip install pytest
+
 """
 import requests
 import json
