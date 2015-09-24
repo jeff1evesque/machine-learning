@@ -29,21 +29,24 @@ class Validate_Settings(object):
         # validation on 'data_new' session
         if self.svm_session == 'data_new':
             try:
-                Draft4Validator(jsonschema_data_new()).validate(self.svm_settings)
+                validate = Draft4Validator(jsonschema_data_new())
+                validate.validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'data_append' session
         if self.svm_session == 'data_append':
             try:
-                Draft4Validator(jsonschema_data_append()).validate(self.svm_settings)
+                validate = Draft4Validator(jsonschema_data_append())
+                validate.validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_generate' session
         if self.svm_session == 'model_generate':
             try:
-                Draft4Validator(jsonschema_model_generate()).validate(self.svm_settings)
+                validate = Draft4Validator(jsonschema_model_generate())
+                validate.validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
