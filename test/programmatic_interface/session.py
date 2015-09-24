@@ -23,6 +23,9 @@ This module will test the following sessions:
   Otherwise, running a simple 'py.test' will run every python module in
       the current working directory, and recursively check subdirectories.
 
+  Note: this module is recommended to be run from the directory containing
+        the 'pytest.ini', as the current working directory.
+
 """
 import requests
 import json
