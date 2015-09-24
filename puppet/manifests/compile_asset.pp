@@ -100,12 +100,13 @@ $compilers.each |Integer $index, String $compiler| {
     #
     #  @touch, changes the modification time to the current system time.
     #
-    #  Note: the current inotifywait implementation watches close_write, move, and create. However, the
-    #        source files will already exist before this 'inotifywait', since the '/vagrant' directory
-    #        will already have been mounted on the initial build.
+    #  Note: the current inotifywait implementation watches close_write, move,
+    #        and create. However, the source files will already exist before
+    #        this 'inotifywait', since the '/vagrant' directory will already
+    #        have been mounted on the initial build.
     #
-    #  Note: every 'command' implementation checks if directory is nonempty, then touch all files in the
-	#        directory, respectively.
+    #  Note: every 'command' implementation checks if directory is nonempty,
+    #        then touch all files in the directory, respectively.
     exec {"touch-${directory_src[$index]}-files":
         command => "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ]; then touch /vagrant/src/${directory_src[$index]}/*; fi",
         refreshonly => true,
