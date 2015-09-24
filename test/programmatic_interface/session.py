@@ -15,6 +15,13 @@ This module will test the following sessions:
 
       - pip install pytest
 
+  Then, this script can be run as follows from this directory:
+
+      - py.test session.py
+
+  Otherwise, running a simple 'py.test' will run python modules in
+      the current working directory.
+
 """
 import requests
 import json
