@@ -49,4 +49,4 @@ def check_data_new():
 
     """
 
-    assert requests.post('localhost:5000/load-data/', data=get_sample_json())
+    assert requests.post('http://localhost:5000/load-data/', data=get_sample_json())
