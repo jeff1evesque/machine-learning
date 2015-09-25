@@ -18,7 +18,7 @@ class {'::mysql::server':
       max_user_connections     => '0',
       password_hash            => mysql_password('password'),
     },
-    'provisioner@localhost' => {
+    'provisioner@localhost'   => {
       ensure                   => 'present',
       max_connections_per_hour => '1',
       max_queries_per_hour     => '0',
@@ -27,7 +27,7 @@ class {'::mysql::server':
       password_hash            => mysql_password('password'),
     },
   },
-  grants => {
+  grants                      => {
     'authenticated@localhost/db_machine_learning.*' => {
       ensure     => 'present',
       options    => ['GRANT'],
@@ -43,7 +43,7 @@ class {'::mysql::server':
       user       => 'provisioner@localhost',
     },
   },
-  databases => {
+  databases                   => {
     'db_machine_learning' => {
       ensure  => 'present',
       charset => 'utf8',
