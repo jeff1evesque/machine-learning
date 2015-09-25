@@ -22,8 +22,9 @@ install:
 
 ## lint, and unit tests
 #
-#  @puppet-lint, we need to check if the following issue has  been resolved,
-#      so the '--no-ensure_first_param-check' flag can be removed below:
+#  @puppet-lint, the following issue needs to be checked if it has been
+#      resolved, so the '--no-ensure_first_param-check' abusive flag
+#      implementation (below) can be removed:
 #
 #      - https://github.com/rodjek/puppet-lint/issues/410
 script:
