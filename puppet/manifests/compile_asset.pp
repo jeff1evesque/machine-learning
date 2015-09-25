@@ -16,7 +16,8 @@ $compilers.each |Integer $index, String $compiler| {
 
   ## create startup script: for webcompilers, using heredoc syntax
   #
-  #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
+  #  @("EOT"), the use double quotes on the end tag, allows variable
+  #      interpolation within the puppet heredoc.
   file {"${compiler}-startup-script":
     path    => "/etc/init/${compiler}.conf",
     ensure  => 'present',
@@ -24,11 +25,12 @@ $compilers.each |Integer $index, String $compiler| {
       #!upstart
       description 'start ${compiler}'
 
-      ## start job defined in this file after system services, and processes have already loaded
-      #       (to prevent conflict).
+      ## start job defined in this file after system services, and processes
+      #      have already loaded (to prevent conflict).
       #
-      #  @vagrant-mounted, an event that executes after the shared folder is mounted
-      #  @[2345], represents all configuration states with general linux, and networking access
+      #  @vagrant-mounted, an event that executes after '/vagrant' is mounted
+      #  @[2345], represents all configuration states with general linux, and
+      #      networking access.
       start on (vagrant-mounted and runlevel [2345])
 
       ## stop upstart job
@@ -57,7 +59,8 @@ $compilers.each |Integer $index, String $compiler| {
         echo "[`date`] ${compiler} service watcher starting" >> /vagrant/log/${compiler}.log 
       end script
 
-      ## log shut-down date, remove process id from log before '/vagrant' is unmounted
+      ## log shut-down date, then remove process id from log before '/vagrant'
+      #      is unmounted.
       #
       #  @[`date`], current date script executed
       pre-stop script
@@ -67,22 +70,24 @@ $compilers.each |Integer $index, String $compiler| {
     notify  => Exec["dos2unix-upstart-${compiler}"],
   }
 
-  ## dos2unix upstart: convert clrf (windows to linux) in case host machine is windows.
+  ## convert clrf (windows to linux) in case host machine is windows.
   #
-  #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
-  #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
-  #      'service' end point does not require the 'refreshonly' attribute.
+  #  @notify, ensure the webserver service is started. This is similar to an
+  #      exec statement, where the 'refreshonly => true' would be implemented
+  #      on the corresponding listening end point. But, the 'service' end point
+  #      does not require the 'refreshonly' attribute.
   exec {"dos2unix-upstart-${compiler}":
     command => "dos2unix /etc/init/${compiler}.conf",
     refreshonly => true,
     notify  => Exec["dos2unix-bash-${compiler}"],
   }
 
-  ## dos2unix bash: convert clrf (windows to linux) in case host machine is windows.
+  ## convert clrf (windows to linux) in case host machine is windows.
   #
-  #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
-  #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
-  #      'service' end point does not require the 'refreshonly' attribute.
+  #  @notify, ensure the webserver service is started. This is similar to an
+  #      exec statement, where the 'refreshonly => true' would be implemented
+  #      on the corresponding listening end point. But, the 'service' end point
+  #      does not require the 'refreshonly' attribute.
   exec {"dos2unix-bash-${compiler}":
     command => "dos2unix /vagrant/puppet/scripts/${compiler}",
     refreshonly => true,
@@ -100,12 +105,13 @@ $compilers.each |Integer $index, String $compiler| {
   #
   #  @touch, changes the modification time to the current system time.
   #
-  #  Note: the current inotifywait implementation watches close_write, move, and create. However, the
-  #        source files will already exist before this 'inotifywait', since the '/vagrant' directory
-  #        will already have been mounted on the initial build.
+  #  Note: the current inotifywait implementation watches close_write, move,
+  #        and create. However, the source files will already exist before this
+  #        'inotifywait', since the '/vagrant' directory will already have been
+  #        mounted on the initial build.
   #
-  #  Note: every 'command' implementation checks if directory is nonempty, then touch all files in the
-  #        directory, respectively.
+  #  Note: every 'command' implementation checks if directory is nonempty, then
+  #        touch all files in the directory, respectively.
   exec {"touch-${directory_src[$index]}-files":
     command => "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ]; then touch /vagrant/src/${directory_src[$index]}/*; fi",
     refreshonly => true,
