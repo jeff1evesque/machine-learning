@@ -22,14 +22,4 @@
 /puppet/modules/
 
 # Ignore and don't commit the following files
-/*.pyc
-
-/brain/*.pyc
-/brain/cache/*.pyc
-/brain/converter/*.pyc
-/brain/database/*.pyc
-/brain/schema/*.pyc
-/brain/session/*.pyc
-/brain/validator/*.pyc
-
-/interface/*.pyc
+*.pyc
