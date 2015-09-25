@@ -34,7 +34,7 @@ import os.path
 with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'sample-1.json')) as json_file:
     json_dataset = json.load(json_file)
 
-def data_new(data):
+def check_data_new(data):
     """@data_new
 
     This method tests the 'data_new' session
