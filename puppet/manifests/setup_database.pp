@@ -1,5 +1,7 @@
 ## define $PATH for all execs, and packages
-Exec {path => ['/usr/bin/']}
+Exec {
+  path => ['/usr/bin/'],
+}
 
 ## mysql::server: install, and configure mariadb-server
 #
