@@ -1,4 +1,4 @@
-"""@session
+"""@pytest_session
 
 This module will test the following sessions:
 
@@ -35,7 +35,7 @@ with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'sample-1.js
     json_dataset = json.load(json_file)
 
 def check_data_new(data):
-    """@data_new
+    """@check_data_new
 
     This method tests the 'data_new' session
     """
