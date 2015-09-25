@@ -21,12 +21,17 @@ install:
   - gem install rubocop
 
 ## lint, and unit tests
+#
+#  @puppet-lint, we need to check if the following issue has  been resolved,
+#      so the '--no-ensure_first_param-check' flag can be removed below:
+#
+#      - https://github.com/rodjek/puppet-lint/issues/410
 script:
   - flake8 brain
   - flake8 interface
   - jshint --verbose src/js/*.js
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
-  - puppet-lint puppet/manifests
+  - puppet-lint --no-ensure_first_param-check puppet/manifests
   - rubocop puppet/Puppefile
   - rubocop puppet/scripts/Puppetfile
