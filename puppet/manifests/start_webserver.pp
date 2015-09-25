@@ -38,6 +38,21 @@ case $::osfamily {
         respawn
 
         # required permission to write to '/vagrant/' files
+
+        ## start job defined in this file after system services, and processes have already loaded
+        #       (to prevent conflict).
+        #
+        #  @vagrant-mounted, an event that executes after the shared folder is mounted
+        #  @[2345], represents all configuration states with general linux, and networking access
+        start on (vagrant-mounted and runlevel [2345])
+
+        ## stop upstart job
+        stop on runlevel [!2345]
+
+        ## restart upstart job continuously
+        respawn
+
+        # required for permission to write to '/vagrant/' files (pre-stop stanza)
         setuid vagrant
         setgid vagrant
 
@@ -55,12 +70,16 @@ case $::osfamily {
         end script
 
         ## log shut-down date, before '/vagrant' is unmounted
+          echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log 
+        end script
+
+        ## log shut-down date, remove process id from log before '/vagrant' is unmounted
         #
         #  @[`date`], current date script executed
         pre-stop script
           echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
         end script
-        | EOT
+      | EOT
       notify  => Exec['dos2unix-flask'],
     }
 
