@@ -30,14 +30,23 @@ import requests
 import json
 import os.path
 
-# import sample dataset
-with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'sample-1.json')) as json_file:
-    json_dataset = json.load(json_file)
+def get_sample_json():
+    """@get_sample_json
 
-def check_data_new(data):
-    """@check_data_new
+    Get a sample json dataset.
 
-    This method tests the 'data_new' session
     """
 
-    r = requests.post('localhost:5000/load-data/', data=json_dataset)
+    json_dataset = None
+    with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'sample-1.json')) as json_file:
+        json_dataset = json.load(json_file)
+    return json_dataset
+
+def check_data_new():
+    """@check_data_new
+
+    This method tests the 'data_new' session.
+
+    """
+
+    assert requests.post('localhost:5000/load-data/', data=get_sample_json())
