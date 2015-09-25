@@ -1,7 +1,5 @@
 ## define $PATH for all execs, and packages
-Exec {
-  path => ['/usr/bin/'],
-}
+Exec {path => ['/usr/bin/']}
 
 ## mysql::server: install, and configure mariadb-server
 #
@@ -9,45 +7,45 @@ Exec {
 #  @max_connections_per_hour, @max_queries_per_hour, @max_updates_per_hour,
 #      @max_user_connections, a zero value indicates no limit
 class {'::mysql::server':
-  package_name => 'mariadb-server',
+  package_name  => 'mariadb-server',
   root_password => 'password',
-  users => {
+  users         => {
     'authenticated@localhost' => {
-      ensure => 'present',
+      ensure                   => 'present',
       max_connections_per_hour => '0',
-      max_queries_per_hour => '0',
-      max_updates_per_hour => '0',
-      max_user_connections => '0',
-      password_hash => mysql_password('password'),
+      max_queries_per_hour     => '0',
+      max_updates_per_hour     => '0',
+      max_user_connections     => '0',
+      password_hash            => mysql_password('password'),
     },
     'provisioner@localhost' => {
-      ensure => 'present',
+      ensure                   => 'present',
       max_connections_per_hour => '1',
-      max_queries_per_hour => '0',
-      max_updates_per_hour => '0',
-      max_user_connections => '1',
-      password_hash => mysql_password('password'),
+      max_queries_per_hour     => '0',
+      max_updates_per_hour     => '0',
+      max_user_connections     => '1',
+      password_hash            => mysql_password('password'),
     },
   },
   grants => {
     'authenticated@localhost/db_machine_learning.*' => {
-      ensure => 'present',
-      options => ['GRANT'],
+      ensure     => 'present',
+      options    => ['GRANT'],
       privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
-      table => 'db_machine_learning.*',
-      user => 'authenticated@localhost',
+      table      => 'db_machine_learning.*',
+      user       => 'authenticated@localhost',
     },
     'provisioner@localhost/db_machine_learning.*' => {
-      ensure => 'present',
-      options => ['GRANT'],
+      ensure     => 'present',
+      options    => ['GRANT'],
       privileges => ['CREATE'],
-      table => 'db_machine_learning.*',
-      user => 'provisioner@localhost',
+      table      => 'db_machine_learning.*',
+      user       => 'provisioner@localhost',
     },
   },
   databases => {
     'db_machine_learning' => {
-      ensure => 'present',
+      ensure  => 'present',
       charset => 'utf8',
     },
   }
@@ -56,13 +54,13 @@ class {'::mysql::server':
 ## mysql::client: install, and configure mariadb-client
 class {'::mysql::client':
   package_name => 'mariadb-client',
-  require => Class['::mysql::server'],
+  require      => Class['::mysql::server'],
 }
 
 ## mysql::bindings: install python-mariadb bindings
 class {'::mysql::bindings':
   python_enable => true,
-  require => [Class['::mysql::client'], Class['::mysql::server']],
+  require       => [Class['::mysql::client'], Class['::mysql::server']],
 }
 
 ## define database tables
@@ -71,6 +69,6 @@ class {'::mysql::bindings':
 #      https://puppetlabs.com/blog/class-containment-puppet
 exec {'create-database-tables':
   command => 'python setup_tables.py',
-  cwd => '/vagrant/puppet/scripts/',
+  cwd     => '/vagrant/puppet/scripts/',
   require => Class['::mysql::bindings::python'],
 }
