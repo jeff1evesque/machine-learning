@@ -27,6 +27,6 @@ script:
   - jshint --verbose src/js/*.js
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
-  - puppet-lint --f puppet/manifests
+  - puppet-lint -f puppet/manifests
   - rubocop puppet/Puppefile
   - rubocop puppet/scripts/Puppetfile
