@@ -3,28 +3,27 @@
 This module will test the following sessions:
 
   - data_new: stores supplied dataset into a SQL database.
-  - data_append: appends supplied dataset to an already stored
-                 dataset in an SQL database.
-  - model_generate: generate an model by selecting a particular
-                    range of dataset (session), and store it
-                    into a NoSQL cache.
-  - model_predict: generate a prediction by selecting a particular
-                   cached model from the NoSQL cache.
+  - data_append: appends supplied dataset to an already stored dataset in an
+                 SQL database.
+  - model_generate: generate an model by selecting a particular range of
+                    dataset (session), and store it into a NoSQL cache.
+  - model_predict: generate a prediction by selecting a particular cached
+                   model from the NoSQL cache.
 
   Note: this module requires the installation of 'pytest':
 
       - pip install pytest
 
-  Then, this script can be run as follows from this directory:
+  Then, this script can be run as follows:
 
       - py.test session.py
       - py.test /somedirectory
 
-  Otherwise, running a simple 'py.test' will run every python module in
-      the current working directory, and recursively check subdirectories.
+  Note: pytest will recursively check subdirectories for python scripts, from
+        the current working directory.
 
-  Note: this module is recommended to be run from the directory containing
-        the 'pytest.ini', as the current working directory.
+  Note: this module is recommended to be run from the directory containing the
+        'pytest.ini', as the current working directory.
 
 """
 import requests
