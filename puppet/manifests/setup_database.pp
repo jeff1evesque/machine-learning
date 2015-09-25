@@ -27,7 +27,7 @@ class {'::mysql::server':
       password_hash            => mysql_password('password'),
     },
   },
-  grants                      => {
+  grants        => {
     'authenticated@localhost/db_machine_learning.*' => {
       ensure     => 'present',
       options    => ['GRANT'],
@@ -35,7 +35,7 @@ class {'::mysql::server':
       table      => 'db_machine_learning.*',
       user       => 'authenticated@localhost',
     },
-    'provisioner@localhost/db_machine_learning.*' => {
+    'provisioner@localhost/db_machine_learning.*'   => {
       ensure     => 'present',
       options    => ['GRANT'],
       privileges => ['CREATE'],
@@ -43,7 +43,7 @@ class {'::mysql::server':
       user       => 'provisioner@localhost',
     },
   },
-  databases                   => {
+  databases     => {
     'db_machine_learning' => {
       ensure  => 'present',
       charset => 'utf8',
