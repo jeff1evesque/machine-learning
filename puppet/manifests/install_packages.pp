@@ -21,27 +21,29 @@ $packages_general_npm = ['uglify-js', 'imagemin', 'node-sass']
 $packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs, and packages
-Exec {path => ['/usr/bin/', '/bin/', '/usr/local', '/usr/sbin/', '/sbin/']}
+Exec {
+  path => ['/usr/bin/', '/bin/', '/usr/local', '/usr/sbin/', '/sbin/'],
+}
 
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
   command => 'sed -i "s/# deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
-  notify => Exec["build-package-dependencies-${packages_build_size}"],
+  notify  => Exec["build-package-dependencies-${packages_build_size}"],
 }
 
 ## enable 'multiverse' repository (part 2, replace line)
 exec {'enable-multiverse-repository-2':
   command => 'sed -i "s/# deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/deb-src http:\/\/security.ubuntu.com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
-  notify => Exec["build-package-dependencies-${packages_build_size}"],
+  notify  => Exec["build-package-dependencies-${packages_build_size}"],
 }
 
 ## build package dependencies
 each($packages_build_dep) |$index, $package| {
   exec {"build-package-dependencies-${index}":
-    command => "apt-get build-dep $package -y",
-    before => Package[$packages_general],
+    command     => "apt-get build-dep $package -y",
+    before      => Package[$packages_general],
     refreshonly => true,
-    timeout => 1400,
+    timeout     => 1400,
   }
 }
 
@@ -53,16 +55,16 @@ package {$packages_general:
 
 ## packages: install general packages (pip)
 package {$packages_general_pip:
-  ensure => 'installed',
+  ensure   => 'installed',
   provider => 'pip',
-  before => Package[$packages_general_npm],
+  before   => Package[$packages_general_npm],
 }
 
 ## packages: install general packages (npm)
 package {$packages_general_npm:
-  ensure => 'present',
+  ensure   => 'present',
   provider => 'npm',
-  require => Package['npm'],
+  require  => Package['npm'],
 }
 
 ## package: install redis-server
