@@ -18,7 +18,7 @@ This module will test the following sessions:
   Then, this script can be run as follows from this directory:
 
       - py.test session.py
-      - pyt.test /somedirectory
+      - py.test /somedirectory
 
   Otherwise, running a simple 'py.test' will run every python module in
       the current working directory, and recursively check subdirectories.
