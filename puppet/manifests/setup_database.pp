@@ -18,7 +18,7 @@ class {'::mysql::server':
       max_queries_per_hour => '0',
       max_updates_per_hour => '0',
       max_user_connections => '0',
-      password_hash        => mysql_password('password'),
+      password_hash => mysql_password('password'),
     },
     'provisioner@localhost' => {
       ensure => 'present',
@@ -26,7 +26,7 @@ class {'::mysql::server':
       max_queries_per_hour => '0',
       max_updates_per_hour => '0',
       max_user_connections => '1',
-      password_hash        => mysql_password('password'),
+      password_hash => mysql_password('password'),
     },
   },
   grants => {
