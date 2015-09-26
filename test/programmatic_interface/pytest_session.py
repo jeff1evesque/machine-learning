@@ -38,7 +38,7 @@ def get_sample_json():
     """
 
     json_dataset = None
-    with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'sample-1.json')) as json_file:
+    with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'programmatic_interface', 'sample-1.json')) as json_file:
         json_dataset = json.load(json_file)
     return json_dataset
 
