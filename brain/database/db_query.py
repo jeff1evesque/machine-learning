@@ -1,15 +1,23 @@
 #!/usr/bin/python
 
-## @db_query.py
-#  This file contains various generic SQL-related methods.
+"""@db_query
+
+This file contains various generic SQL-related methods.
+"""
+
 import MySQLdb as DB
 from brain.database.db_settings import Database
 
-## Class: SQL, explicitly inherit 'new-style' class
-#
-#  Note: this class is invoked within 'save_xx.py', and 'retrieve_xx.py'
-#        files.
 class SQL(object):
+    """@SQL
+
+    This class provides an interface to connect, execute commands, and
+    disconnect from a SQL database.  It explicitly inherits pythons 'new-style'
+    class.
+
+    Note: this class is invoked within 'save_xx.py', and 'retrieve_xx.py'
+          modules.
+    """
 
     ## constructor:
     def __init__(self, host=None, user=None, passwd=None):
