@@ -1,52 +1,101 @@
 #!/usr/bin/python
 
-## @db_settings.py
-#  This file contains various python configuration settings.
+"""@db_settings
+
+This file defines SQL database configurations.
+
+"""
+
 from settings import HOST, DB_USERNAME, DB_PASSWORD
 
-## Class: Database, explicitly inherit the 'new-style' class.
-#
-#         When instantiating this class, or defining any of the class variables,
-#         make sure the respective sql user is defined within the DBMS, and has
-#         adequate permissions. This can be done via the terminal console (or
-#         phpMyAdmin):
-#
-#             $ mysql -u root -p
-#             MariaDB> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY
-#                 ->'password';
-#             MariaDB> GRANT, CREATE, DELETE, DROP, EXECUTE, SELECT, SHOW
-#                 -> DATABASES ON *.* TO 'authenticated'@'localhost';
-#             MariaDB> FLUSH PRIVILEGES;
-#
-#  Note: this class is invoked within 'db_query.py'
 class Database(object):
+    """@Database
 
-    ## constructor:
+    This class provides an interface to get, or set the following database
+    parameters:
+
+        - host
+        - username
+        - password
+
+    When instantiating this class, or defining any of the class variables, make
+    sure the respective sql user is defined within the DBMS, and has adequate
+    permissions. This can be done via the terminal console (or phpMyAdmin):
+
+        $ mysql -u root -p
+        MariaDB> CREATE USER 'authenticated'@'localhost' IDENTIFIED BY
+            ->'password';
+        MariaDB> GRANT, CREATE, DELETE, DROP, EXECUTE, SELECT, SHOW
+            -> DATABASES ON *.* TO 'authenticated'@'localhost';
+        MariaDB> FLUSH PRIVILEGES;
+
+    Note: this class is invoked within 'db_query.py'
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self):
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
+
         self.db_host     = HOST
         self.db_username = DB_USERNAME
         self.db_password = DB_PASSWORD
 
-    ## get_db_host: get the database host
     def get_db_host(self):
+        """@get_db_host
+
+        This method is responsible for getting the database host.
+
+        """
+
         return self.db_host
 
-    ## get_db_username: get the database username
     def get_db_username(self):
+        """@get_db_username
+
+        This method is responsible for getting the database username.
+
+        """
+
         return self.db_username
 
-    ## get_db_password: get the database user password
     def get_db_password(self):
+        """@get_db_password
+
+        This method is responsible for getting the database user password.
+
+        """
+
         return self.db_password
 
-    ## set_db_host: define the database host
     def set_db_host(self, host):
+        """@set_db_host
+
+        This method is responsible for setting the database host.
+
+        """
+
         self.db_host = host
 
-    ## set_db_username: define the database user
     def set_db_username(self, user):
+        """@set_db_username
+
+        This method is responsible for setting the database username.
+
+        """
+
         self.db_username = user
 
-    ## set_db_password: define the database user password
     def set_db_password(self, pwd):
+        """@set_db_password
+
+        This method is responsible for setting the database user password.
+
+        """
+
         self.db_password = pwd
