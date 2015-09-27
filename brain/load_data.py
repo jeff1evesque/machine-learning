@@ -13,20 +13,19 @@ from brain.session.data_new import Data_New
 from brain.session.model_generate import Model_Generate
 from brain.session.model_predict import Model_Predict
 
-"""@Load_Data
-
-This class provides an interface to load the necessary parameters:
-
-    - to store, or append a dataset into a SQL database.
-    - generate a model into a NoSQL cache, using a previous stored dataset
-          from the SQL database.
-    - generate a prediction using a previous cached model.
-
-Note: this class explicitly inherits the 'new-style' class.
-
-"""
-
 class Load_Data(object):
+    """@Load_Data
+
+    This class provides an interface to load the necessary parameters:
+
+        - to store, or append a dataset into a SQL database.
+        - generate a model into a NoSQL cache, using a previous stored dataset
+              from the SQL database.
+        - generate a prediction using a previous cached model.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
 
     def __init__(self, data):
         """@__init__
