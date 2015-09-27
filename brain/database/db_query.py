@@ -17,6 +17,9 @@ class SQL(object):
 
     Note: this class is invoked within 'save_xx.py', and 'retrieve_xx.py'
           modules.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
     """
 
     def __init__(self, host=None, user=None, passwd=None):
