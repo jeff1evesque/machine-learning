@@ -19,8 +19,13 @@ class SQL(object):
           modules.
     """
 
-    ## constructor:
     def __init__(self, host=None, user=None, passwd=None):
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
+		
         self.db_settings = Database()
         self.list_error  = []
         self.proceed     = True
@@ -43,8 +48,14 @@ class SQL(object):
         else:
             self.passwd = self.db_settings.get_db_password()
 
-    ## sql_connect: create connection to MySQL / MariaDB
     def sql_connect(self, database=None):
+        """@sql_connect
+
+        This method is responsible for defining the necessary interface to
+        connect to a SQL database.
+
+        """
+
         try:
             if database == None:
                 self.conn = DB.connect(self.host, self.user, self.passwd)
@@ -58,11 +69,16 @@ class SQL(object):
             self.list_error.append(error)
             return {'status': False, 'error': self.list_error, 'id': None}
 
-    ## sql_command: execute sql statement.
-    #
-    #  @sql_args, is a tuple used for argument substitution with the supplied
-    #      'sql_statement'.
     def sql_command(self, sql_statement, sql_type, sql_args=None):
+        """@sql_connect
+
+        This method is responsible for defining the necessary interface to
+        perform SQL commands.
+
+        @sql_args, is a tuple used for argument substitution with the supplied
+            'sql_statement'.
+        """
+
         if self.proceed:
             try:
                 self.cursor.execute(sql_statement, sql_args)
@@ -82,8 +98,14 @@ class SQL(object):
         if sql_type in ['insert', 'delete', 'update']: return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
         elif sql_type == 'select': return {'status': False, 'error': self.list_error, 'result': result}
 
-    ## sql_disconnect: close connection to MySQL / MariaDB
     def sql_disconnect(self):
+        """@sql_disconnect
+
+        This method is responsible for defining the necessary interface to
+        disconnect from a SQL database.
+
+        """
+
         if self.proceed:
             try:
                 if self.conn:
@@ -93,6 +115,11 @@ class SQL(object):
                 self.list_error.append(error)
                 return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
 
-    ## get_errors: return appended error message(s)
     def get_errors(self):
+        """@get_errors
+
+        This method returns all errors pertaining to the instantiated class.
+
+        """
+
         return self.list_error
