@@ -31,4 +31,4 @@ script:
   - puppet-lint puppet/manifests
   - rubocop puppet/Puppefile
   - rubocop puppet/scripts/Puppetfile
-  - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \;
+  - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
