@@ -25,7 +25,7 @@ def data_new():
         settings = request.get_json()['properties']
 
         # restructure the dataset
-        sender = Restructure_Data(settings, files)
+        sender = Restructure_Data(settings, dataset)
         data_formatted = sender.restructure()
 
         # load the newly structured dataset
