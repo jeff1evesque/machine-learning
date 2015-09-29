@@ -19,6 +19,7 @@ install:
   - npm install -g bootlint
   - gem install puppet-lint
   - gem install rubocop
+  - npm install jsonlint -g
 
 ## lint, and unit tests
 #
@@ -36,3 +37,4 @@ script:
   - puppet-lint --no-ensure_first_param-check puppet/manifests
   - rubocop puppet/Puppefile
   - rubocop puppet/scripts/Puppetfile
+  - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
