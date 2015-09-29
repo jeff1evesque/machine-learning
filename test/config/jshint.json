@@ -6,7 +6,11 @@
  * Note: additional jshint options are available:
  *
  *       http://jshint.com/docs/options/
+ *
+ * Note: "-W041" was used instead of "eqeqeq", due to a bug:
+ *
+ *       https://github.com/madskristensen/WebEssentials2013/issues/775
  */
 {
-    eqeqeq: false
+    "-W041": false
 }
