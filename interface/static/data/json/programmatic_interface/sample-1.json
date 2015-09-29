@@ -1,6 +1,13 @@
 {
+    "properties": [
+        {
+            "svm_title": "sample_title",
+            "svm_dataset_type": "json_string",
+            "svm_session": "data_new"
+        }
+    ],
     "dataset": {
-            "dep-variable-1": [
+        "dep-variable-1": [
             {
                 "indep-variable-1": 23.45,
                 "indep-variable-2": 98.01,
