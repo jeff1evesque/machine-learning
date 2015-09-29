@@ -5,8 +5,8 @@
  *
  * Note: additional jshint options are available:
  *
- *       http://jshint.com/docs/options/#eqeqeq
+ *       http://jshint.com/docs/options/
  */
 {
-    "eqeqeq": false
+    eqeqeq: false
 }
