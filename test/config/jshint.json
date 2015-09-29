@@ -8,5 +8,6 @@
  *       http://jshint.com/docs/options/
  */
 {
+    "eqnull": true,
     "eqeqeq": false
 }
