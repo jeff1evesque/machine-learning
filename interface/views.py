@@ -20,8 +20,16 @@ def index():
 @app.route('/data_new/', methods=['POST', 'GET'])
 def data_new():
     if request.get_json():
+        # get necessary components from the dataset
         dataset  = request.get_json()['dataset']
-        loader   = Load_Data(dataset)
+        settings = request.get_json()['settings']
+
+        # restructure the dataset
+        sender = Restructure_Data(settings, files)
+        data_formatted = sender.restructure()
+
+        # load the newly structured dataset
+        loader = Load_Data(data_formatted)
         response = loader.load_data_new()
 
         # return response
