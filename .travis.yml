@@ -31,7 +31,7 @@ install:
 script:
   - flake8 brain
   - flake8 interface
-  - jshint --verbose src/js/*.js --confg test/config/jshint.json
+  - jshint --verbose src/js/*.js --config test/config/jshint.json
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check puppet/manifests
