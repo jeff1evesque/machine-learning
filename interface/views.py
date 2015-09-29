@@ -22,7 +22,7 @@ def data_new():
     if request.get_json():
         # get necessary components from the dataset
         dataset  = request.get_json()['dataset']
-        settings = request.get_json()['settings']
+        settings = request.get_json()['properties']
 
         # restructure the dataset
         sender = Restructure_Data(settings, files)
