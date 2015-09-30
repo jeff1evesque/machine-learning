@@ -50,7 +50,7 @@ class Restructure_Data(object):
             self.list_error.append(error)
             return {'data': None, 'error': self.list_error}
 
-        # restructure files: not all sessions involve files
+        # restructure dataset: not all sessions involve files
         if self.files:
             try:
                 # web-interface case: 'isinstance' implementation did not work
