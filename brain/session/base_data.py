@@ -47,12 +47,22 @@ class Base_Data(object):
 
     ## validate_file_extension: validate file extension for each dataset.
     def validate_file_extension(self):
-        validator = Validate_File_Extension(self.svm_data, self.svm_session)
-        self.response_file_extension_validation = validator.validate()
+        # web-interface: validate, and restructure dataset
+        if self.svm_data['data']['dataset']['file_upload']:
+            validator = Validate_File_Extension(self.svm_data, self.svm_session)
+            self.response_file_extension_validation = validator.validate()
 
-        if self.response_file_extension_validation['error'] != None:
-            self.list_error.append(self.response_file_extension_validation['error'])
-            self.flag_validate_file_extension = True
+            if self.response_file_extension_validation['error']:
+                self.list_error.append(self.response_file_extension_validation['error'])
+                self.flag_validate_file_extension = True
+
+        # programmatic-interface: validate, do not restructure
+        elif self.svm_data['data']['dataset']['json_string']:
+            self.response_file_extension_validation = self.svm_data['data']
+
+            if self.svm_data['error']:
+                self.list_error.append(self.svm_data['error'])
+                self.flag_validate_file_extension = True
 
     ## validate_id: validate session id as positive integer.
     def validate_id(self, session_id):
@@ -125,8 +135,19 @@ class Base_Data(object):
         index_count  = 0
 
         try:
-            self.response_file_extension_validation['dataset']['file_upload']
-            flag_convert = True
+            # web-interface: define flag to convert to dataset to json
+            if self.response_file_extension_validation['dataset']['file_upload']:
+                flag_convert = True
+
+            # programmatic-interface
+            elif self.response_file_extension_validation['dataset']['json_string']:
+                dataset_converted = self.response_file_extension_validation['dataset']['json_string']
+                count_features = dataset_converted.values()[0]
+
+                # some observations has multiple instances
+                if isinstance(count_features, list):
+                    print len(count_features[0])
+
         except Exception as error:
             self.list_error.append(error)
             print error
