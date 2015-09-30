@@ -142,11 +142,13 @@ class Base_Data(object):
             # programmatic-interface
             elif self.response_file_extension_validation['dataset']['json_string']:
                 dataset_converted = self.response_file_extension_validation['dataset']['json_string']
-                count_features = dataset_converted.values()[0]
+                features = dataset_converted.values()[0]
 
-                # some observations has multiple instances
-                if isinstance(count_features, list):
-                    print len(count_features[0])
+                # some observations may have multiple instances
+                if isinstance(features, list):
+                    count_features = len(features[0])
+                else:
+                    count_features = len(features)
 
         except Exception as error:
             self.list_error.append(error)
