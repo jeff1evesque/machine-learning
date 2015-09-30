@@ -42,7 +42,7 @@ class Restructure_Data(object):
                             elif type(formatted_settings[key.lower()]) == list:
                                 formatted_settings[key.lower()].append(lvalue)
 
-                # programmatic-interface case:
+                # programmatic-interface case: 'isinstance' implementation did not work
                 elif str(type(self.settings)) == self.type_programmatic:
                     formatted_settings = self.settings
 
@@ -60,7 +60,7 @@ class Restructure_Data(object):
 
                     dataset = {'upload_quantity': len(self.files.getlist('svm_dataset[]')), 'file_upload': formatted_files, 'json_string': None}
 
-                # programmatic-interface case:
+                # programmatic-interface case: 'isinstance' implementation did not work
                 elif str(type(self.settings)) == self.type_programmatic:
                     dataset = {'upload_quantity': 1, 'file_upload': None, 'json_string': self.files}
 
