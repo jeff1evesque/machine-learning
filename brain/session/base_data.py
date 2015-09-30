@@ -144,7 +144,7 @@ class Base_Data(object):
                 dataset_converted = self.response_file_extension_validation['dataset']['json_string']
                 features = dataset_converted.values()[0]
 
-                # some observations may have multiple instances
+                # some observations have multiple instances grouped together
                 if isinstance(features, list):
                     count_features = len(features[0])
                 else:
