@@ -70,7 +70,7 @@ class Load_Data(object):
         if not session.validate_arg_none() and not session.get_errors():
             session.validate_svm_settings()
 
-            # validate file-extension for web-interface		
+            # validate file-extension for web-interface	
             if self.data['data']['dataset']['file_upload']:
                 session.validate_file_extension()
 
