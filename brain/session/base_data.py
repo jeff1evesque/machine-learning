@@ -204,7 +204,7 @@ class Base_Data(object):
                 index_count += 1
                 if not flag_append: return False
 
-            # programmatic-interface: check label consistency was not implemented like 'web-interface'
+            # programmatic-interface
             elif self.response_file_extension_validation['dataset']['json_string']:
                 dataset_converted = self.response_file_extension_validation['dataset']['json_string']
                 features = dataset_converted.values()[0]
@@ -212,12 +212,22 @@ class Base_Data(object):
                 # some observations have multiple instances grouped together
                 if isinstance(features, list):
                     count_features = len(features[0])
-                    self.observation_labels.append(list(features[0]))
+                    self.observation_labels.extend(list(features[0]))
                 else:
                     count_features = len(features)
-                    self.observation_labels.append(list(features))
+                    self.observation_labels.extend(list(features))
 
-                # build new (relevant) dataset
+                # check label consistency
+                for feature in dataset_converted.values():
+                    if isinstance(feature, list):
+                        for nested_feature in feature:
+                            if sorted(self.observation_labels) != sorted(nested_feature):
+                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                    else:
+                        if sorted(self.observation_labels) != sorted(feature):
+                            self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+
+                # build dataset
                 self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
 
         except Exception as error:
