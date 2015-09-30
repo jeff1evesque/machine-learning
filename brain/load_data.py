@@ -27,11 +27,7 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none():
             session.validate_svm_settings()
-
-            # validate file-extension for web-interface			
-            if self.data['data']['dataset']['file_upload']:
-                session.validate_file_extension()
-
+            session.validate_file_extension()
             session.check()
 
             session_entity = session.save_svm_entity('data_new')
