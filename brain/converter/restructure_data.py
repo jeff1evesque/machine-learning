@@ -24,13 +24,12 @@ class Restructure_Data(object):
         # restructure settings
         try:
             for key, value in self.settings.items():
-                # case: web-interface
+                # web-interface case: 'isinstance' implementation did not work
                 if str(type(self.settings)) == "<class 'werkzeug.datastructures.ImmutableMultiDict'>":
                     for lvalue in self.settings.getlist(key):
                         # base case
                         if key.lower() not in formatted_settings:
-                            if key.lower() not in formatted_settings:
-                                formatted_settings[key.lower()] = lvalue.lower()
+                            formatted_settings[key.lower()] = lvalue.lower()
                         else:
                             # step case 1
                             if type(formatted_settings[key.lower()]) == unicode:
@@ -40,7 +39,9 @@ class Restructure_Data(object):
                             elif type(formatted_settings[key.lower()]) == list:
                                 formatted_settings[key.lower()].append(lvalue)
 
-                # case: programmatic-interface
+                # programmatic-interface case:
+                elif str(type(self.settings)) == "<type 'dict'>":
+                    formatted_settings = self.settings
 
         except Exception as error:
             self.list_error.append(error)
