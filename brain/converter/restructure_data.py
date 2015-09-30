@@ -9,9 +9,9 @@
 class Restructure_Data(object):
 
     ## constructor
-    def __init__(self, settings, files=None):
+    def __init__(self, settings, dataset=None):
         self.settings   = settings
-        self.files      = files
+        self.dataset    = dataset
         self.list_error = []
 
         self.type_web   = "<class 'werkzeug.datastructures.ImmutableMultiDict'>"
@@ -51,18 +51,18 @@ class Restructure_Data(object):
             return {'data': None, 'error': self.list_error}
 
         # restructure dataset: not all sessions involve files
-        if self.files:
+        if self.dataset:
             try:
                 # web-interface case: 'isinstance' implementation did not work
                 if str(type(self.settings)) == self.type_web:
-                    for file in self.files.getlist('svm_dataset[]'):
+                    for file in self.dataset.getlist('svm_dataset[]'):
                         formatted_files.append({'filename': file.filename, 'file': file})
 
-                    dataset = {'upload_quantity': len(self.files.getlist('svm_dataset[]')), 'file_upload': formatted_files, 'json_string': None}
+                    dataset = {'upload_quantity': len(self.dataset.getlist('svm_dataset[]')), 'file_upload': formatted_files, 'json_string': None}
 
                 # programmatic-interface case: 'isinstance' implementation did not work
                 elif str(type(self.settings)) == self.type_programmatic:
-                    dataset = {'upload_quantity': 1, 'file_upload': None, 'json_string': self.files}
+                    dataset = {'upload_quantity': 1, 'file_upload': None, 'json_string': self.dataset}
 
             except Exception as error:
                 self.list_error.append(error)
