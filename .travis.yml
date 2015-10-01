@@ -33,4 +33,4 @@ script:
   - rubocop puppet/Puppefile
   - rubocop puppet/scripts/Puppetfile
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
-  - find interface/static/data/csv -name '*.csv' -exec csvlint -d {} \; -print
+  - find interface/static/data/csv -name '*.csv' -exec csvlint {} \; -print
