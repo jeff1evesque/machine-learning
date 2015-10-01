@@ -206,26 +206,15 @@ class Base_Data(object):
 
             # programmatic-interface
             elif self.response_file_extension_validation['dataset']['json_string']:
-                dataset_converted = self.response_file_extension_validation['dataset']['json_string']
-                features = dataset_converted.values()[0]
+                # conversion
+                dataset_converter = Convert_Upload(self.response_file_extension_validation['dataset']['json_string'], True)
+                dataset_converted = dataset_converter.json_to_dict()
+                count_features    = dataset_converter.get_feature_count()
 
-                # some observations have multiple instances grouped together
-                if isinstance(features, list):
-                    count_features = len(features[0])
-                    self.observation_labels.extend(list(features[0]))
-                else:
-                    count_features = len(features)
-                    self.observation_labels.extend(list(features))
-
-                # check label consistency
-                for feature in dataset_converted.values():
-                    if isinstance(feature, list):
-                        for nested_feature in feature:
-                            if sorted(self.observation_labels) != sorted(nested_feature):
-                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                    else:
-                        if sorted(self.observation_labels) != sorted(feature):
-                            self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                # check label consistency, assign labels
+                if sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                labels = dataset_converter.get_observation_labels()
+                self.observation_labels.append(labels)
 
                 # build dataset
                 self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
