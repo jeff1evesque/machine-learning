@@ -20,6 +20,7 @@ install:
   - gem install puppet-lint
   - gem install rubocop
   - npm install jsonlint -g
+  - gem install csvlint
 
 ## lint, and unit tests
 script:
@@ -32,3 +33,4 @@ script:
   - rubocop puppet/Puppefile
   - rubocop puppet/scripts/Puppetfile
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
+  - csvlint interface/static/data/csv/*.csv
