@@ -20,6 +20,10 @@ def jsonschema_string():
 #                         Therefore, this schema validates the properties
 #                         describing the session, not the dataset itself.
 #
+#  @file_upload, @dataset_url, are web-interface related values.
+#
+#  @json_string, is a programmatic-interface related value.
+#
 #  Note: This validation schema is used in corresponding validator_xxx.py.
 def jsonschema_data_new():
     schema = {
@@ -35,7 +39,7 @@ def jsonschema_data_new():
             },
             'svm_dataset_type': {
                 'type': 'string',
-                'enum': ['file_upload', 'dataset_url']
+                'enum': ['file_upload', 'dataset_url', 'json_string']
             },
             'svm_session': {
                 'type': 'string',

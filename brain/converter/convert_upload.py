@@ -16,8 +16,11 @@ from brain.validator.validate_dataset import Validate_Dataset
 class Convert_Upload(object):
 
     ## constructor
-    def __init__(self, svm_file):
-        self.svm_file           = svm_file
+    #
+    #  @is_json, flag indicating 'svm_data' is a json string.
+    def __init__(self, svm_data, is_json=False):
+        self.svm_data           = svm_data
+        self.is_json            = is_json
         self.observation_labels = None
         self.count_features     = None
 
@@ -26,7 +29,7 @@ class Convert_Upload(object):
     #  @observation_label, is a list containing dependent variable labels.
     #
     #  Note: we use the 'Universal Newline Support' with the 'U" parameter
-    #        when opening 'self.svm_file'. This allows newlines to be
+    #        when opening 'self.svm_data'. This allows newlines to be
     #        understood regardless, if the newline character was created in
     #        osx, windows, or linux.
     #
@@ -40,7 +43,7 @@ class Convert_Upload(object):
         indep_variable_label = []
 
         # open temporary 'csvfile' reader object
-        dataset_reader = csv.reader(self.svm_file, delimiter=' ', quotechar='|')
+        dataset_reader = csv.reader(self.svm_data, delimiter=' ', quotechar='|')
 
         # iterate first row of csvfile
         for row in islice(dataset_reader, 0, 1):
@@ -98,7 +101,7 @@ class Convert_Upload(object):
                 list_dataset.append({'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value})
 
         # close file, save observation labels, and return
-        self.svm_file.close()
+        self.svm_data.close()
         self.observation_labels = observation_label
         return list_dataset
 
@@ -108,7 +111,11 @@ class Convert_Upload(object):
     def json_to_dict(self):
         list_dataset      = []
         observation_label = []
-        dataset           = json.load(self.svm_file)
+
+        if self.is_json:
+            dataset = self.svm_data
+        else:
+            dataset = json.load(self.svm_data)
 
         for dep_variable in dataset:
             # dependent variable with single observation
@@ -133,8 +140,11 @@ class Convert_Upload(object):
             # list of observation label
             observation_label.append(dep_variable)
 
-        # close file, save observation labels, and return
-        self.svm_file.close()
+        # close file
+        if not self.is_json:
+            self.svm_data.close()
+
+        # save observation labels, and return
         self.observation_labels = observation_label
         return list_dataset
 
@@ -146,7 +156,7 @@ class Convert_Upload(object):
         observation_label = []
 
         # convert xml file to python 'dict'
-        dataset = xmltodict.parse(self.svm_file)
+        dataset = xmltodict.parse(self.svm_data)
 
         # build 'list_dataset'
         for dep_variable in dataset['dataset']['observation']:
@@ -186,7 +196,7 @@ class Convert_Upload(object):
                 self.count_features = len(dep_variable['independent-variable'])
 
         # close file, save observation labels, and return
-        self.svm_file.close()
+        self.svm_data.close()
         self.observation_labels = observation_label
         return list_dataset
 
