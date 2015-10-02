@@ -16,66 +16,58 @@ from brain.cache.cache_hset import Cache_Hset
 def index():
     return render_template('index.html')
 
-## data_new: programmatic interface to store dataset into SQL database
-@app.route('/data_new/', methods=['POST', 'GET'])
-def data_new():
-    if request.get_json():
-        # get necessary components from the dataset
-        dataset  = request.get_json()['dataset']
-        settings = request.get_json()['properties']
-
-        # restructure the dataset
-        sender = Restructure_Data(settings, dataset)
-        data_formatted = sender.restructure()
-
-        # load the newly structured dataset
-        loader = Load_Data(data_formatted)
-        response = loader.load_data_new()
-
-        # return response
-        return response
-
-## data_append: programmatic interface to append dataset into existing dataset
-#               in the SQL database
-
-## model_generate: programmatic interface to generate a model into a NoSQL
-#                  cache, using a chosen dataset from the SQL database.
-
-## model_predict: programmatic interface to make a prediction using supplied
-#                 parameters, on a generated cached model.
-
 ## load_data: return computed data
 @app.route('/load-data/', methods=['POST', 'GET'])
 def load_data():
     if request.method == 'POST':
-        # local variables
-        files = None
 
-        # get uploaded form files
+        # load programmatic-interface
+        if request.get_json():
+            # get necessary components from the dataset
+            dataset  = request.get_json()['dataset']
+            settings = request.get_json()['properties']
+
+            # restructure the dataset
+            sender = Restructure_Data(settings, dataset)
+            data_formatted = sender.restructure()
+
+            # load the newly structured dataset
+            loader = Load_Data(data_formatted)
+            response = loader.load_data_new()
+
+            # return response
+            return response
+
+        # load web-interface
+        else:
+            # local variables
+            files = None
+
+            # get uploaded form files
         if request.files:
             files = request.files
 
-        # get submitted form data
-        if request.form:
-            settings       = request.form
-            sender         = Restructure_Data(settings, files)
-            data_formatted = sender.restructure()
+            # get submitted form data
+            if request.form:
+                settings       = request.form
+                sender         = Restructure_Data(settings, files)
+                data_formatted = sender.restructure()
 
-        # send reformatted data to brain
-        loader = Load_Data(data_formatted)
-        if loader.get_session_type()['session_type']:
-            session_type = loader.get_session_type()['session_type']
+            # send reformatted data to brain
+            loader = Load_Data(data_formatted)
+            if loader.get_session_type()['session_type']:
+                session_type = loader.get_session_type()['session_type']
 
-            if session_type == 'data_new': response = loader.load_data_new()
-            elif session_type == 'data_append': response = loader.load_data_append()
-            elif session_type == 'model_generate': response = loader.load_model_generate()
-            elif session_type == 'model_predict': response = loader.load_model_predict()
+                if session_type == 'data_new': response = loader.load_data_new()
+                elif session_type == 'data_append': response = loader.load_data_append()
+                elif session_type == 'model_generate': response = loader.load_model_generate()
+                elif session_type == 'model_predict': response = loader.load_model_predict()
+                else: response = loader.get_errors()
+
             else: response = loader.get_errors()
 
-        else: response = loader.get_errors()
-
-        # return response
-        return json.dumps(response)
+            # return response
+            return json.dumps(response)
 
 ## retrieve_session: retrieve all sessions stored in the database
 @app.route('/retrieve-session/', methods=['POST', 'GET'])
