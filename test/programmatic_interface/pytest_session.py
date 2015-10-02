@@ -30,12 +30,8 @@ import requests
 import json
 import os.path
 
-data_new = 'http://localhost:5000/data_new/'
-data_append = 'http://localhost:5000/data_append/'
-model_generate = 'http://localhost:5000/model_generate/'
-model_predict = 'http://localhost:5000/model_predict/'
-
-headers = headers={'Content-Type': 'application/json'}
+endpoint_url = 'http://localhost:5000/load-data/'
+headers      = headers={'Content-Type': 'application/json'}
 
 def get_sample_json():
     """@get_sample_json
@@ -56,7 +52,7 @@ def check_data_new():
 
     """
 
-    assert requests.post(data_new, headers=headers, data=get_sample_json())
+    assert requests.post(endpoint_url, headers=headers, data=get_sample_json())
 
 def check_data_append():
     """@check_data_append
@@ -65,4 +61,4 @@ def check_data_append():
 
     """
 
-    assert requests.post(data_append, headers=headers, data=get_sample_json())
+    assert requests.post(endpoint_url, headers=headers, data=get_sample_json())
