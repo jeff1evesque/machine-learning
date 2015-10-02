@@ -52,7 +52,7 @@ def check_data_new():
 
     """
 
-    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample_data_new.json'))
+    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample-data-new.json'))
 
 def check_data_append():
     """@check_data_append
@@ -61,4 +61,4 @@ def check_data_append():
 
     """
 
-    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample_data_append.json'))
+    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample-data-append.json'))
