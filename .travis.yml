@@ -21,6 +21,7 @@ install:
   - gem install rubocop
   - npm install jsonlint -g
   - gem install csvlint
+  - apt-get install libxml2-utils
 
 ## lint, and unit tests
 script:
@@ -34,3 +35,4 @@ script:
   - rubocop puppet/scripts/Puppetfile
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
+  - xmllint --valid --noout interface/static/data/xml/*.xml
