@@ -21,7 +21,7 @@ install:
   - gem install rubocop
   - npm install jsonlint -g
   - gem install csvlint
-  - sudo apt-get install libxml2-utils
+  - sudo apt-get install libxml2
 
 ## lint, and unit tests
 script:
