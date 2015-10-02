@@ -31,9 +31,19 @@ def load_data():
             sender = Restructure_Data(settings, dataset)
             data_formatted = sender.restructure()
 
-            # load the newly structured dataset
+            # send reformatted data to brain
             loader = Load_Data(data_formatted)
-            response = loader.load_data_new()
+            print loader.get_session_type()['session_type']
+            if loader.get_session_type()['session_type']:
+                session_type = loader.get_session_type()['session_type']
+
+                if session_type == 'data_new': response = loader.load_data_new()
+                elif session_type == 'data_append': response = loader.load_data_append()
+                elif session_type == 'model_generate': response = loader.load_model_generate()
+                elif session_type == 'model_predict': response = loader.load_model_predict()
+                else: response = loader.get_errors()
+
+            else: response = loader.get_errors()
 
             # return response
             return response
