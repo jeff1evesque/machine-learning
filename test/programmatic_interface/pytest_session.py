@@ -33,7 +33,7 @@ import os.path
 endpoint_url = 'http://localhost:5000/load-data/'
 headers      = headers={'Content-Type': 'application/json'}
 
-def get_sample_json():
+def get_sample_json(jsonfile):
     """@get_sample_json
 
     Get a sample json dataset.
@@ -41,7 +41,7 @@ def get_sample_json():
     """
 
     json_dataset = None
-    with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'programmatic_interface', 'sample-1.json'), 'r') as json_file:
+    with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'programmatic_interface', jsonfile), 'r') as json_file:
         json_dataset = json.load(json_file)
     return json.dumps(json_dataset)
 
@@ -52,7 +52,7 @@ def check_data_new():
 
     """
 
-    assert requests.post(endpoint_url, headers=headers, data=get_sample_json())
+    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample_data_new.json'))
 
 def check_data_append():
     """@check_data_append
@@ -61,4 +61,4 @@ def check_data_append():
 
     """
 
-    assert requests.post(endpoint_url, headers=headers, data=get_sample_json())
+    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample_data_append.json'))
