@@ -57,3 +57,12 @@ def check_data_new():
     """
 
     assert requests.post(data_new, headers=headers, data=get_sample_json())
+
+def check_data_append():
+    """@check_data_append
+
+    This method tests the 'data_append' session.
+
+    """
+
+    assert requests.post(data_append, headers=headers, data=get_sample_json())
