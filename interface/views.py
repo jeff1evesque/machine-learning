@@ -33,7 +33,6 @@ def load_data():
 
             # send reformatted data to brain
             loader = Load_Data(data_formatted)
-            print loader.get_session_type()['session_type']
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
 
