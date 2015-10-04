@@ -2,7 +2,8 @@
     "properties": {
         "svm_title": "sample_title",
         "svm_dataset_type": "json_string",
-        "svm_session": "data_append"
+        "svm_session": "data_append",
+        "svm_session_id": "1"
     },
     "dataset": {
         "dep-variable-1": [
