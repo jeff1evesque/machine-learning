@@ -20,40 +20,63 @@ def index():
 @app.route('/load-data/', methods=['POST', 'GET'])
 def load_data():
     if request.method == 'POST':
-        # local variables
-        files = None
 
-        # web-interface (1/2): get submitted form files
+        # load programmatic-interface
+        if request.get_json():
+            # get necessary components from the dataset
+            dataset  = request.get_json()['dataset']
+            settings = request.get_json()['properties']
+
+            # restructure the dataset
+            sender = Restructure_Data(settings, dataset)
+            data_formatted = sender.restructure()
+
+            # send reformatted data to brain
+            loader = Load_Data(data_formatted)
+            if loader.get_session_type()['session_type']:
+                session_type = loader.get_session_type()['session_type']
+
+                if session_type == 'data_new': response = loader.load_data_new()
+                elif session_type == 'data_append': response = loader.load_data_append()
+                elif session_type == 'model_generate': response = loader.load_model_generate()
+                elif session_type == 'model_predict': response = loader.load_model_predict()
+                else: response = loader.get_errors()
+
+            else: response = loader.get_errors()
+
+            # return response
+            return response
+
+        # load web-interface
+        else:
+            # local variables
+            files = None
+
+            # get uploaded form files
         if request.files:
             files = request.files
 
-        # web-interface (2/2): reformat form data
-        if request.form:
-            settings       = request.form
-            sender         = Restructure_Data(settings, files)
-            data_formatted = sender.restructure()
+            # get submitted form data
+            if request.form:
+                settings       = request.form
+                sender         = Restructure_Data(settings, files)
+                data_formatted = sender.restructure()
 
-        # programmatic-interface (1/1): sender will have the following syntax, if using python -
-        #
-        #     r = requests.post('localhost:5000/load-data/', data=payload)
-        if not (request.files or request.form):
-            data_formatted = request.get_json()
+            # send reformatted data to brain
+            loader = Load_Data(data_formatted)
+            if loader.get_session_type()['session_type']:
+                session_type = loader.get_session_type()['session_type']
 
-        # send reformatted data to brain
-        loader = Load_Data(data_formatted)
-        if loader.get_session_type()['session_type']:
-            session_type = loader.get_session_type()['session_type']
+                if session_type == 'data_new': response = loader.load_data_new()
+                elif session_type == 'data_append': response = loader.load_data_append()
+                elif session_type == 'model_generate': response = loader.load_model_generate()
+                elif session_type == 'model_predict': response = loader.load_model_predict()
+                else: response = loader.get_errors()
 
-            if session_type == 'data_new': response = loader.load_data_new()
-            elif session_type == 'data_append': response = loader.load_data_append()
-            elif session_type == 'model_generate': response = loader.load_model_generate()
-            elif session_type == 'model_predict': response = loader.load_model_predict()
             else: response = loader.get_errors()
 
-        else: response = loader.get_errors()
-
-        # return response
-        return json.dumps(response)
+            # return response
+            return json.dumps(response)
 
 ## retrieve_session: retrieve all sessions stored in the database
 @app.route('/retrieve-session/', methods=['POST', 'GET'])
