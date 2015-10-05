@@ -30,7 +30,7 @@ class Retrieve_Entity(object):
         """
 
         self.list_error = []
-        self.sql        = SQL()
+        self.sql = SQL()
 
     def get_title(self, id_entity):
         """@get_title
