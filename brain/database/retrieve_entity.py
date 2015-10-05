@@ -57,5 +57,7 @@ class Retrieve_Entity(object):
         self.sql.sql_disconnect()
 
         # return result
-        if response_error: return {'error': response_error, 'result': None}
-        else: return {'error': None, 'result': response['result']}
+        if response_error:
+            return {'error': response_error, 'result': None}
+        else:
+            return {'error': None, 'result': response['result']}
