@@ -28,10 +28,10 @@ class SQL(object):
         This constructor is responsible for defining class variables.
 
         """
-		
+
         self.db_settings = Database()
-        self.list_error  = []
-        self.proceed     = True
+        self.list_error = []
+        self.proceed = True
 
         # host address
         if host:
