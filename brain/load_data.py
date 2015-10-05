@@ -135,8 +135,10 @@ class Load_Data(object):
             session.generate_model()
 
         # return
-        if session.return_error: return False
-        else: return 'Model properly generated'
+        if session.return_error:
+            return False
+        else:
+            return 'Model properly generated'
 
     def load_model_predict(self):
         """@load_model_predict
@@ -157,7 +159,8 @@ class Load_Data(object):
             my_prediction = session.svm_prediction()
             if my_prediction['error']:
                 return {'result': None, 'error': my_prediction['error']}
-            else: return {'result': my_prediction, 'error': None}
+            else:
+                return {'result': my_prediction, 'error': None}
 
     def get_session_type(self):
         """@load_model_predict
@@ -181,8 +184,10 @@ class Load_Data(object):
             return {'session_type': None, 'error': error}
 
         # return
-        if session.return_error: return False
-        else: return 'Model properly generated'
+        if session.return_error:
+            return False
+        else:
+            return 'Model properly generated'
 
     def get_errors(self):
         """@get_errors
