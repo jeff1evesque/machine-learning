@@ -30,7 +30,7 @@ class Retrieve_Session(object):
         """
 
         self.list_error = []
-        self.sql        = SQL()
+        self.sql = SQL()
 
     def get_all_sessions(self):
         """@get_all_sessions
@@ -46,7 +46,7 @@ class Retrieve_Session(object):
         # sql query
         self.sql.sql_connect('db_machine_learning')
         sql_statement = 'SELECT id_entity, title FROM tbl_dataset_entity'
-        response      = self.sql.sql_command(sql_statement, 'select')
+        response = self.sql.sql_command(sql_statement, 'select')
 
         # rebuild session list, get error(s) if any
         if response['result']:
