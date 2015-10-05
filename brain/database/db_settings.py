@@ -8,6 +8,7 @@ This file defines SQL database configurations.
 
 from settings import HOST, DB_USERNAME, DB_PASSWORD
 
+
 class Database(object):
     """@Database
 
