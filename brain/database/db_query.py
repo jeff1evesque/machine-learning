@@ -61,7 +61,7 @@ class SQL(object):
         """
 
         try:
-            if database == None:
+            if database is None:
                 self.conn = DB.connect(
                     self.host,
                     self.user,
