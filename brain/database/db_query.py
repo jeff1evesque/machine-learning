@@ -8,6 +8,7 @@ This file contains various generic SQL-related methods.
 import MySQLdb as DB
 from brain.database.db_settings import Database
 
+
 class SQL(object):
     """@SQL
 
