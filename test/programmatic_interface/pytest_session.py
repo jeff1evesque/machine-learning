@@ -62,3 +62,12 @@ def check_data_append():
     """
 
     assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample-data-append.json'))
+
+def check_model_generate():
+    """@check_model_generate
+
+    This method tests the 'model_generate' session.
+
+    """
+
+    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample-model-generate.json'))
