@@ -12,6 +12,7 @@ from brain.session.data_new import Data_New
 from brain.session.model_generate import Model_Generate
 from brain.session.model_predict import Model_Predict
 
+
 class Load_Data(object):
     """@Load_Data
 
