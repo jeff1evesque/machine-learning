@@ -1,7 +1,5 @@
 {
     "properties": {
-        "svm_title": "sample_title",
-        "svm_dataset_type": "json_string",
         "svm_session": "model_generate",
         "svm_session_id": "1",
         "svm_model_type": "classification",
