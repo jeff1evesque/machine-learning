@@ -61,16 +61,33 @@ class SQL(object):
 
         try:
             if database == None:
-                self.conn = DB.connect(self.host, self.user, self.passwd)
+                self.conn = DB.connect(
+                    self.host,
+                    self.user,
+                    self.passwd,
+                )
             else:
-                self.conn = DB.connect(self.host, self.user, self.passwd, db=database)
+                self.conn = DB.connect(
+                    self.host,
+                    self.user,
+                    self.passwd,
+                    db=database,
+                )
             self.cursor = self.conn.cursor()
-            return {'status': True, 'error': None, 'id': None}
+            return {
+                'status': True,
+                'error': None,
+                'id': None,
+            }
 
         except DB.Error, error:
             self.proceed = False
             self.list_error.append(error)
-            return {'status': False, 'error': self.list_error, 'id': None}
+            return {
+                'status': False,
+                'error': self.list_error,
+                'id': None,
+            }
 
     def sql_command(self, sql_statement, sql_type, sql_args=None):
         """@sql_connect
@@ -96,10 +113,24 @@ class SQL(object):
             except DB.Error, error:
                 self.conn.rollback()
                 self.list_error.append(error)
-                return {'status': False, 'error': self.list_error, 'result': None}
+                return {
+                    'status': False,
+                    'error': self.list_error,
+                    'result': None,
+                }
 
-        if sql_type in ['insert', 'delete', 'update']: return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
-        elif sql_type == 'select': return {'status': False, 'error': self.list_error, 'result': result}
+        if sql_type in ['insert', 'delete', 'update']:
+            return {
+                'status': False,
+                'error': self.list_error,
+                'id': self.cursor.lastrowid,
+            }
+        elif sql_type == 'select':
+            return {
+                'status': False,
+                'error': self.list_error,
+                'result': result,
+            }
 
     def sql_disconnect(self):
         """@sql_disconnect
@@ -113,10 +144,18 @@ class SQL(object):
             try:
                 if self.conn:
                     self.conn.close()
-                    return {'status': True, 'error': None, 'id': self.cursor.lastrowid}
+                    return {
+                        'status': True,
+                        'error': None,
+                        'id': self.cursor.lastrowid,
+                    }
             except DB.Error, error:
                 self.list_error.append(error)
-                return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
+                return {
+                    'status': False,
+                    'error': self.list_error,
+                    'id': self.cursor.lastrowid,
+                }
 
     def get_errors(self):
         """@get_errors
