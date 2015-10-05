@@ -60,5 +60,7 @@ class Retrieve_Session(object):
         self.sql.sql_disconnect()
 
         # return result
-        if response_error: return {'result': None, 'error': response_error}
-        else: return {'result': list_session, 'error': None}
+        if response_error:
+            return {'result': None, 'error': response_error}
+        else:
+            return {'result': list_session, 'error': None}
