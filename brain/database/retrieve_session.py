@@ -1,22 +1,45 @@
 #!/usr/bin/python
 
-## @retrieve_session.py
-#  This file queries, and returns 'svm_title', and 'id_entity from the
-#      'tbl_dataset_entity' database table of 'db_machine_learning'.
+"""@retrieve_session
+
+This file retrieves the 'svm_title', and 'id_entity' properties.
+
+"""
+
 from brain.database.db_query import SQL
 
-## Class: Retrieve_Session, explicitly inherit 'new-style' class
-#
-#  Note: this class is invoked within 'views.py'
-class Retrieve_Session(object):
 
-    ## constructor:
+class Retrieve_Session(object):
+    """
+    @Retrieve_Session
+
+    This class provides an interface to retrieve the 'svm_title', and
+    'id_entity' from the 'tbl_dataset_entity' sql database table.
+
+    Note: this class is invoked within 'views.py'
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self):
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
+
         self.list_error = []
         self.sql        = SQL()
 
-    ## get_all_sessions: get all sessions from 'tbl_dataset_entity'
     def get_all_sessions(self):
+        """@get_all_sessions
+
+        This method is responsible for retrieving all sessions from the
+        'tbl_dataset_entity' sql database table.
+
+        """
+
         # local variables
         list_session = []
 
