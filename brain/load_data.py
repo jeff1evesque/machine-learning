@@ -156,7 +156,8 @@ class Load_Data(object):
             session.check()
 
             my_prediction = session.svm_prediction()
-            if my_prediction['error']: return {'result': None, 'error': my_prediction['error']}
+            if my_prediction['error']:
+                return {'result': None, 'error': my_prediction['error']}
             else: return {'result': my_prediction, 'error': None}
 
     def get_session_type(self):
@@ -173,7 +174,8 @@ class Load_Data(object):
         """
 
         session_type = self.data['data']['settings']['svm_session']
-        if session_type in self.session_list: return {'session_type': session_type, 'error': None}
+        if session_type in self.session_list:
+            return {'session_type': session_type, 'error': None}
         else:
             error = 'Error: the provided \'svm_session\' must be \'data_new\', \'data_append\', \'model_generate\', or \'model_predict\'.'
             self.list_error.append(error)
