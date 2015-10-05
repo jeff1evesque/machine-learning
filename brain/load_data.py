@@ -7,7 +7,6 @@ generates a return object, when required.
 
 """
 
-import sys
 from brain.session.data_append import Data_Append
 from brain.session.data_new import Data_New
 from brain.session.model_generate import Model_Generate
