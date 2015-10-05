@@ -14,7 +14,7 @@ class Retrieve_Entity(object):
     @Retrieve_Entity
 
     This class provides an interface to get an SVM entity title, from the
-	'tbl_dataset_entity' sql database table.
+    'tbl_dataset_entity' sql database table.
 
     Note: this class is invoked within 'model_generate.py'
 
