@@ -8,6 +8,7 @@ This file retrieves dataset entity related properties.
 
 from brain.database.db_query import SQL
 
+
 class Retrieve_Entity(object):
     """
     @Retrieve_Entity
