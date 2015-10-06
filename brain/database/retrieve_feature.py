@@ -63,7 +63,7 @@ class Retrieve_Feature(object):
         else:
             return {'status': True,
                     'error': None,
-                    'result': response['result'],
+                    'result': response['result']
             }
 
     def get_count(self, id_entity):
@@ -95,5 +95,5 @@ class Retrieve_Feature(object):
         else:
             return {'status': True,
                     'error': None,
-                    'result': response['result'],
+                    'result': response['result']
             }
