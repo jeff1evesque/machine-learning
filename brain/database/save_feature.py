@@ -47,7 +47,8 @@ class Save_Feature(object):
 
         # insert / update dataset value(s)
         self.sql.sql_connect('db_machine_learning')
-        sql_statement = 'INSERT INTO tbl_feature_count (id_entity, count_features) VALUES(%s, %s)'
+        sql_statement = 'INSERT INTO tbl_feature_count (id_entity, '\
+            'count_features) VALUES(%s, %s)'
         args = (
             self.svm_data['id_entity'],
             self.svm_data['count_features'],
