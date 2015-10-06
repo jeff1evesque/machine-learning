@@ -82,14 +82,14 @@ class Save_Feature(object):
         sql_statement = 'INSERT INTO tbl_feature_value (id_entity, '\
             'dep_variable_label, indep_variable_label, indep_variable_value) '\
             'VALUES(%s, %s, %s, %s)'
-        dataset       = self.svm_data['svm_dataset']
-        args          = (
+        dataset = self.svm_data['svm_dataset']
+        args = (
             self.svm_data['id_entity'],
             dataset['dep_variable_label'],
             dataset['indep_variable_label'],
             dataset['indep_variable_value'],
         )
-        response      = self.sql.sql_command(sql_statement, 'insert', args)
+        response = self.sql.sql_command(sql_statement, 'insert', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
