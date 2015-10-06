@@ -48,7 +48,8 @@ class Retrieve_Feature(object):
 
         # select dataset
         self.sql.sql_connect('db_machine_learning')
-        sql_statement = 'SELECT dep_variable_label, indep_variable_label, indep_variable_value FROM tbl_feature_value where id_entity=%s'
+        sql_statement = 'SELECT dep_variable_label, indep_variable_label, '\
+            'indep_variable_value FROM tbl_feature_value where id_entity=%s'
         args = (id_entity)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
