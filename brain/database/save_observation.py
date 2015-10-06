@@ -67,5 +67,7 @@ class Save_Observation(object):
         self.sql.sql_disconnect()
 
         # return result
-        if response_error: return {'status': False, 'error': response_error}
-        else: return {'status': True, 'error': None}
+        if response_error:
+            return {'status': False, 'error': response_error}
+        else:
+            return {'status': True, 'error': None}
