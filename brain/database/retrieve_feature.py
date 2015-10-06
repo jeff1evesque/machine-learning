@@ -30,7 +30,7 @@ class Retrieve_Feature(object):
         """
 
         self.list_error = []
-        self.sql        = SQL()
+        self.sql = SQL()
 
     def get_dataset(self, id_entity):
         """@get_dataset
