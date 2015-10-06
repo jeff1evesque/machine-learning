@@ -27,11 +27,12 @@ class Save_Observation(object):
         This constructor is responsible for defining class variables.
 
         """
+
         # class variables
-        self.svm_data     = svm_data
+        self.svm_data = svm_data
         self.session_type = session_type
-        self.list_error   = []
-        self.sql          = SQL()
+        self.list_error = []
+        self.sql = SQL()
 
     def save_label(self):
         """@save_label
@@ -54,14 +55,14 @@ class Save_Observation(object):
             # check if observation label exists in database
             sql_statement = 'SELECT * FROM tbl_observation_label WHERE '\
                 'dep_variable_label=%s AND id_entity=%s'
-            args          = (self.svm_data['label'], self.svm_data['id_entity'])
-            response      = self.sql.sql_command(sql_statement, 'select', args)
+            args = (self.svm_data['label'], self.svm_data['id_entity'])
+            response = self.sql.sql_command(sql_statement, 'select', args)
 
             # add labels if not exist
             if not response['result']:
                 sql_statement = 'INSERT INTO tbl_observation_label '\
                     '(id_entity, dep_variable_label) VALUES(%s, %s)'
-                args           = (self.svm_data['id_entity'], self.svm_data['label'])
+                args = (self.svm_data['id_entity'], self.svm_data['label'])
                 response_added = self.sql.sql_command(
                     sql_statement,
                     'insert',
