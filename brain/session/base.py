@@ -38,9 +38,9 @@ class Base(object):
 
         """
 
-        self.svm_data    = svm_data
+        self.svm_data = svm_data
         self.svm_session = self.svm_data['data']['settings']['svm_session']
-        self.list_error  = []
+        self.list_error = []
 
     def validate_arg_none(self):
         """validate_arg_none
