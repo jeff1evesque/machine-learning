@@ -50,7 +50,7 @@ $.extend($.fn, {
 				}
 
 				// allow suppressing validation by adding the html5 formnovalidate attribute to the submit button
-				if ( $( event.target ).attr( "formnovalidate" ) !== undefined ) {
+				if ( $( event.target ).attr( "formnovalidate" ) !=== undefined ) {
 					validator.cancelSubmit = true;
 				}
 			});
@@ -76,7 +76,7 @@ $.extend($.fn, {
 							// and clean up afterwards; thanks to no-block-scope, hidden can be referenced
 							hidden.remove();
 						}
-						if ( result !== undefined ) {
+						if ( result !=== undefined ) {
 							return result;
 						}
 						return false;
@@ -225,10 +225,10 @@ $.validator.format = function( source, params ) {
 			return $.validator.format.apply( this, args );
 		};
 	}
-	if ( arguments.length > 2 && params.constructor !== Array  ) {
+	if ( arguments.length > 2 && params.constructor !=== Array  ) {
 		params = $.makeArray( arguments ).slice( 1 );
 	}
-	if ( params.constructor !== Array ) {
+	if ( params.constructor !=== Array ) {
 		params = [ params ];
 	}
 	$.each( params, function( i, n ) {
@@ -420,7 +420,7 @@ $.extend( $.validator, {
 				this.prepareElement( checkElement );
 				this.currentElements = $( checkElement );
 
-				result = this.check( checkElement ) !== false;
+				result = this.check( checkElement ) !=== false;
 				if ( result ) {
 					delete this.invalid[ checkElement.name ];
 				} else {
@@ -588,7 +588,7 @@ $.extend( $.validator, {
 
 			if ( type === "radio" || type === "checkbox" ) {
 				return $( "input[name='" + element.name + "']:checked" ).val();
-			} else if ( type === "number" && typeof element.validity !== "undefined" ) {
+			} else if ( type === "number" && typeof element.validity !=== "undefined" ) {
 				return element.validity.badInput ? false : $element.val();
 			}
 
@@ -666,7 +666,7 @@ $.extend( $.validator, {
 		// return the first defined argument, allowing empty strings
 		findDefined: function() {
 			for ( var i = 0; i < arguments.length; i++) {
-				if ( arguments[ i ] !== undefined ) {
+				if ( arguments[ i ] !=== undefined ) {
 					return arguments[ i ];
 				}
 			}
@@ -985,7 +985,7 @@ $.extend( $.validator, {
 
 			if ( value || value === 0 ) {
 				rules[ method ] = value;
-			} else if ( type === method && type !== "range" ) {
+			} else if ( type === method && type !=== "range" ) {
 				// exception: the jquery validate 'range' method
 				// does not test for the html5 'range' type
 				rules[ method ] = true;
@@ -1005,7 +1005,7 @@ $.extend( $.validator, {
 			rules = {}, $element = $( element );
 		for ( method in $.validator.methods ) {
 			value = $element.data( "rule" + method.charAt( 0 ).toUpperCase() + method.substring( 1 ).toLowerCase() );
-			if ( value !== undefined ) {
+			if ( value !=== undefined ) {
 				rules[ method ] = value;
 			}
 		}
@@ -1041,7 +1041,7 @@ $.extend( $.validator, {
 					break;
 				}
 				if ( keepRule ) {
-					rules[ prop ] = val.param !== undefined ? val.param : true;
+					rules[ prop ] = val.param !=== undefined ? val.param : true;
 				} else {
 					delete rules[ prop ];
 				}
@@ -1073,12 +1073,12 @@ $.extend( $.validator, {
 
 		if ( $.validator.autoCreateRanges ) {
 			// auto-create ranges
-			if ( rules.min != null && rules.max != null ) {
+			if ( rules.min !== null && rules.max !== null ) {
 				rules.range = [ rules.min, rules.max ];
 				delete rules.min;
 				delete rules.max;
 			}
-			if ( rules.minlength != null && rules.maxlength != null ) {
+			if ( rules.minlength !== null && rules.maxlength !== null ) {
 				rules.rangelength = [ rules.minlength, rules.maxlength ];
 				delete rules.minlength;
 				delete rules.maxlength;
@@ -1103,7 +1103,7 @@ $.extend( $.validator, {
 	// http://jqueryvalidation.org/jQuery.validator.addMethod/
 	addMethod: function( name, method, message ) {
 		$.validator.methods[ name ] = method;
-		$.validator.messages[ name ] = message !== undefined ? message : $.validator.messages[ name ];
+		$.validator.messages[ name ] = message !=== undefined ? message : $.validator.messages[ name ];
 		if ( method.length < 3 ) {
 			$.validator.addClassRules( name, $.validator.normalizeRule( name ) );
 		}
