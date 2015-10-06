@@ -39,8 +39,8 @@ class Save_Observation(object):
         This method can store, or update an existing set of observation labels
         in corresponding database tables (using EAV data model).
 
-        @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
-            is used for argument substitution.
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
 
         Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
         """
@@ -52,15 +52,21 @@ class Save_Observation(object):
         if self.session_type in ['data_append', 'data_new']:
 
             # check if observation label exists in database
-            sql_statement = 'SELECT * FROM tbl_observation_label WHERE dep_variable_label=%s AND id_entity=%s'
+            sql_statement = 'SELECT * FROM tbl_observation_label WHERE '\
+                'dep_variable_label=%s AND id_entity=%s'
             args          = (self.svm_data['label'], self.svm_data['id_entity'])
             response      = self.sql.sql_command(sql_statement, 'select', args)
 
             # add labels if not exist
             if not response['result']:
-                sql_statement  = 'INSERT INTO tbl_observation_label (id_entity, dep_variable_label) VALUES(%s, %s)'
+                sql_statement = 'INSERT INTO tbl_observation_label '\
+                    '(id_entity, dep_variable_label) VALUES(%s, %s)'
                 args           = (self.svm_data['id_entity'], self.svm_data['label'])
-                response_added = self.sql.sql_command(sql_statement, 'insert', args)
+                response_added = self.sql.sql_command(
+                    sql_statement,
+                    'insert',
+                    args,
+                )
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
