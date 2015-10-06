@@ -75,8 +75,8 @@ class Retrieve_Feature(object):
 
         self.sql.sql_connect('db_machine_learning')
         sql_statement = 'SELECT count_features FROM tbl_feature_count where id_entity=%s'
-        args          = (id_entity)
-        response      = self.sql.sql_command(sql_statement, 'select', args)
+        args = (id_entity)
+        response = self.sql.sql_command(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
