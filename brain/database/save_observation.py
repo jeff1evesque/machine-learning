@@ -1,32 +1,50 @@
 #!/usr/bin/python
 
-## @save_observation.py
-#  This file saves SVM related data into corresponding 'EAV data model' database
-#      table(s), from the 'db_machine_learning' database.
+"""@save_observation
+
+This file saves the observation labels.
+
+"""
+
 from brain.database.db_query import SQL
 
-## Class: Save_Observation, explicitly inherit 'new-style' class
-#
-#  Note: this class is invoked within 'base_data.py'
-class Save_Observation(object):
 
-    ## constructor: stores an SVM label (python dict), database configurations
-    #               into their own corresponding class variable.
+class Save_Observation(object):
+    """@Save_Observation, explicitly inherit 'new-style' class
+
+    This class provides an interface to store observation labels, provided
+    from corresponding dataset(s) into corresponding database tables.
+
+    Note: this class is invoked within 'base_data.py'
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, svm_data, session_type):
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
         # class variables
         self.svm_data     = svm_data
         self.session_type = session_type
         self.list_error   = []
         self.sql          = SQL()
 
-    ## save_label: store, or update SVM dataset(s) into corresponding 'EAV data model'
-    #              database table(s).
-    #
-    #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
-    #      is used for argument substitution.
-    #
-    #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
     def save_label(self):
+        """@save_label
+
+        This method can store, or update an existing set of observation labels
+        in corresponding database tables (using EAV data model).
+
+        @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
+            is used for argument substitution.
+
+        Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
+        """
+
         # insert / update feature label(s)
         self.sql.sql_connect('db_machine_learning')
 
