@@ -1,28 +1,50 @@
 #!/usr/bin/python
 
-## @save_feature.py
-#  This file saves the feature count, as well as the feature instances within
-#      corresponding database tables.
+"""@save_feature
+
+This file saves the feature count, as well as the feature instances within
+corresponding database tables.
+
+"""
+
 from brain.database.db_query import SQL
 
-## Class: Save_Feature, explicitly inherit 'new-style' class
-#
-#  Note: this class is invoked within 'base_data.py'
-class Save_Feature(object):
 
-    ## constructor:
+class Save_Feature(object):
+    """@Save_Feature
+
+    This class provides an interface to store the expected number of features
+    that can be expected in a given dataset, and each feature instance into
+    corresponding database tables (using EAV data model).
+
+    Note: this class is invoked within 'base_data.py'
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, svm_data):
-        # class variables
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
+
         self.svm_data   = svm_data
         self.list_error = []
         self.sql        = SQL()
 
-    ## save_count: store the number of features that can be expected in a given
-    #              observation.
-    #
-    #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
-    #      is used for argument substitution.
     def save_count(self):
+        """@save_count
+
+        This method stores the number of features that can be expected in a
+        given observation.
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        """
+
         # insert / update dataset value(s)
         self.sql.sql_connect('db_machine_learning')
         sql_statement = 'INSERT INTO tbl_feature_count (id_entity, count_features) VALUES(%s, %s)'
@@ -37,14 +59,19 @@ class Save_Feature(object):
         if response_error: return {'status': False, 'error': response_error}
         else: return {'status': True, 'error': None, 'id': response['id']}
 
-    ## save_feature: store, or update SVM dataset(s) into corresponding 'EAV data model'
-    #                database table(s).
-    #
-    #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
-    #      is used for argument substitution.
-    #
-    #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
     def save_feature(self):
+        """@save_feature
+
+        This method can store, or update an existing SVM dataset stored in
+        corresponding database tables (using EAV data model).
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
+
+        """
+
         # insert / update dataset value(s)
         self.sql.sql_connect('db_machine_learning')
         sql_statement = 'INSERT INTO tbl_feature_value (id_entity, dep_variable_label, indep_variable_label, indep_variable_value) VALUES(%s, %s, %s, %s)'
