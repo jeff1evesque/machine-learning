@@ -38,7 +38,7 @@ class Load_Data(object):
         self.session_list = ['data_new',
                              'data_append',
                              'model_generate',
-                             'model_predict',
+                             'model_predict'
                             ]
         self.list_error = []
 
