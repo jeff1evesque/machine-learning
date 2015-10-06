@@ -62,7 +62,11 @@ class Base(object):
 
         """
 
-        validate = Validate_Settings(self.svm_data, self.svm_session).validate()
+        validate = Validate_Settings(
+            self.svm_data,
+            self.svm_session
+        )
+        validate.validate()
 
         if validate['error'] != None:
             self.list_error.append(validate['error'])
