@@ -35,10 +35,10 @@ class Save_Entity(object):
 
         """
 
-        self.svm_data     = svm_data
+        self.svm_data = svm_data
         self.session_type = session_type
-        self.list_error   = []
-        self.sql          = SQL()
+        self.list_error = []
+        self.sql = SQL()
 
     def save(self):
         """@save
