@@ -57,14 +57,17 @@ class Save_Entity(object):
         self.sql.sql_connect('db_machine_learning')
 
         if self.session_type == 'data_append':
-            sql_statement = 'UPDATE tbl_dataset_entity SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() WHERE id_entity=%s'
-            args          = (self.svm_data['uid'], self.svm_data['id_entity'])
-            response      = self.sql.sql_command(sql_statement, 'update', args)
+            sql_statement = 'UPDATE tbl_dataset_entity SET '\
+                'uid_modified=%s, datetime_modified=UTC_TIMESTAMP() '\
+                'WHERE id_entity=%s'
+            args = (self.svm_data['uid'], self.svm_data['id_entity'])
+            response = self.sql.sql_command(sql_statement, 'update', args)
 
         elif self.session_type == 'data_new':
-            sql_statement = 'INSERT INTO tbl_dataset_entity (title, uid_created, datetime_created) VALUES(%s, %s, UTC_TIMESTAMP())'
-            args          = (self.svm_data['title'], self.svm_data['uid'])
-            response      = self.sql.sql_command(sql_statement, 'insert', args)
+            sql_statement = 'INSERT INTO tbl_dataset_entity (title, '\
+                'uid_created, datetime_created) VALUES(%s, %s, UTC_TIMESTAMP())'
+            args = (self.svm_data['title'], self.svm_data['uid'])
+            response = self.sql.sql_command(sql_statement, 'insert', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
