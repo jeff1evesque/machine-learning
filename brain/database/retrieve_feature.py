@@ -93,4 +93,7 @@ class Retrieve_Feature(object):
         if response_error:
             return {'status': False, 'error': response_error, 'result': None}
         else:
-            return {'status': True, 'error': None, 'result': response['result']}
+            return {'status': True,
+                    'error': None,
+                    'result': response['result']
+                   }
