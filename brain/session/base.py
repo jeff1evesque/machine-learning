@@ -49,8 +49,10 @@ class Base(object):
 
         """
         
-        if self.svm_data == None: return True
-        else: return False
+        if self.svm_data == None:
+            return True
+        else:
+            return False
 
     def validate_svm_settings(self):
         """@validate_svm_settings
