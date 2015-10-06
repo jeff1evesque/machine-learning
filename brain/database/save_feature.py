@@ -30,9 +30,9 @@ class Save_Feature(object):
 
         """
 
-        self.svm_data   = svm_data
+        self.svm_data = svm_data
         self.list_error = []
-        self.sql        = SQL()
+        self.sql = SQL()
 
     def save_count(self):
         """@save_count
@@ -48,11 +48,11 @@ class Save_Feature(object):
         # insert / update dataset value(s)
         self.sql.sql_connect('db_machine_learning')
         sql_statement = 'INSERT INTO tbl_feature_count (id_entity, count_features) VALUES(%s, %s)'
-        args          = (
+        args = (
             self.svm_data['id_entity'],
             self.svm_data['count_features'],
         )
-        response      = self.sql.sql_command(sql_statement, 'insert', args)
+        response = self.sql.sql_command(sql_statement, 'insert', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
