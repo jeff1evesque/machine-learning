@@ -77,6 +77,7 @@ class Base(object):
         This method returns all current errors associated with this class.
 
         """
+
         return self.list_error
 
     def check(self):
