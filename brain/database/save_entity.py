@@ -1,40 +1,58 @@
 #!/usr/bin/python
 
-## @save_entity.py
-#  This file saves SVM related entity into corresponding 'EAV data model' database
-#      table(s), from the 'db_machine_learning' database.
+"""@save_entity
+
+This file saves SVM related entity into corresponding 'EAV data model' database
+table(s), from the 'db_machine_learning' database.
+
+"""
+
 from brain.database.db_query import SQL
 
-## Class: Save_Entity, explicitly inherit 'new-style' class
-#
-#  Note: this class is invoked within 'base_data.py', and 'data_append.py'
-class Save_Entity(object):
 
-    ## constructor: stores an SVM entity (python dict), database configurations
-    #               into their own corresponding class variable.
-    #
-    #  Note: during the SVM entity instance, 'self.svm_data' is a dictionary with the
-    #        following elements:
-    #
-    #            {'uid': xx, 'id_entity': xx, 'title': yyy}
-    #
-    #        where 'xx' denotes an integer value, 'yyy' a unicode string, and 'zz'
-    #        representing a float value.
+class Save_Entity(object):
+    """@Save_Entity
+
+    This class provides an interface to save an svm dataset.
+
+    Note: this class is invoked within 'base_data.py', and 'data_append.py'
+
+    Note: this class explicitly inherits the 'new-style' class.
+    """
+
     def __init__(self, svm_data, session_type):
-        # class variables
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        Note: during the SVM entity instance, 'self.svm_data' is a dictionary
+              with the following elements:
+
+                  {'uid': xx, 'id_entity': xx, 'title': yyy}
+
+              where 'xx' denotes an integer value, 'yyy' a unicode string, and
+              'zz' representing a float value.
+
+        """
+
         self.svm_data     = svm_data
         self.session_type = session_type
         self.list_error   = []
         self.sql          = SQL()
 
-    ## save: store, or update SVM entity into corresponding 'EAV data model'
-    #        database table.
-    #
-    #  @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
-    #      is used for argument substitution.
-    #
-    #  Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
     def save(self):
+        """@save
+
+        This method stores, or updates SVM entities into its corresponding 'EAV
+        data model' database table.
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
+
+        """
+
         # insert / update dataset entity value
         self.sql.sql_connect('db_machine_learning')
 
