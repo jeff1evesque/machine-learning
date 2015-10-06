@@ -57,8 +57,13 @@ class Retrieve_Feature(object):
         self.sql.sql_disconnect()
 
         # return result
-        if response_error: return {'status': False, 'error': response_error, 'result': None}
-        else: return {'status': True, 'error': None, 'result': response['result']}
+        if response_error:
+            return {'status': False, 'error': response_error, 'result': None}
+        else:
+            return {'status': True,
+                    'error': None,
+                    'result': response['result']
+                   }
 
     def get_count(self, id_entity):
         """@get_count
