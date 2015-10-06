@@ -66,15 +66,16 @@ class Retrieve_Feature(object):
         This method retrieves the number of features that can be expected in
         any given observation, from a particular dataset instance (id_entity).
 
-        @id_entity, this supplied argument corresponds to the 'id_entity' column from the
-            'tbl_dataset_value' database table.
+        @id_entity, this supplied argument corresponds to the 'id_entity'
+            column from the 'tbl_dataset_value' database table.
 
-        @sql_statement, is a sql format string, and not a python string. Therefore, '%s'
-            is used for argument substitution.
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
         """
 
         self.sql.sql_connect('db_machine_learning')
-        sql_statement = 'SELECT count_features FROM tbl_feature_count where id_entity=%s'
+        sql_statement = 'SELECT count_features FROM tbl_feature_count '\
+            'where id_entity=%s'
         args = (id_entity)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
