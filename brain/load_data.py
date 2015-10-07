@@ -141,7 +141,7 @@ class Load_Data(object):
             session.generate_model()
 
         # return
-        if session.return_error:
+        if session.return_error():
             return False
         else:
             return 'Model properly generated'
