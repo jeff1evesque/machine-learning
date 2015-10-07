@@ -39,6 +39,7 @@ class Data_New(Base, Base_Data):
         @self.uid, the logged-in user (i.e. userid).
 
         Note: the superclass constructor expects the same 'svm_data' argument.
+
         """
 
         super(Data_New, self).__init__(svm_data)
