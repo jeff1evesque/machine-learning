@@ -24,7 +24,7 @@ class Data_New(Base, Base_Data):
 
     Note: inherit base methods from superclass 'Base', 'Base_Data
 
-"""
+    """
 
     def __init__(self, svm_data):
         """@__init__
