@@ -16,13 +16,13 @@ from brain.session.base_data import Base_Data
 
 
 class Data_New(Base, Base_Data):
-"""@Data_New
+    """@Data_New
 
-This class provides a generic constructor interface.
+    This class provides a generic constructor interface.
 
-Note: this class is invoked within 'load_data.py'
+    Note: this class is invoked within 'load_data.py'
 
-Note: inherit base methods from superclass 'Base', 'Base_Data
+    Note: inherit base methods from superclass 'Base', 'Base_Data
 
 """
 
