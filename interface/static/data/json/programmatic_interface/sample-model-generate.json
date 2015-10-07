@@ -2,6 +2,6 @@
     "properties": {
         "svm_session": "model_generate",
         "svm_session_id": "1",
-        "svm_model_type": "classification",
+        "svm_model_type": "classification"
     }
 }

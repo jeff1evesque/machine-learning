@@ -24,7 +24,10 @@ def load_data():
         # load programmatic-interface
         if request.get_json():
             # get necessary components from the dataset
-            dataset  = request.get_json()['dataset']
+            if 'dataset' in request.get_json():
+                dataset = request.get_json()['dataset']
+            else:
+                dataset = None
             settings = request.get_json()['properties']
 
             # restructure the dataset
