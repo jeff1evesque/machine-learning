@@ -66,10 +66,11 @@ class Base(object):
             self.svm_data,
             self.svm_session
         )
-        validate.validate()
 
-        if validate['error'] != None:
-            self.list_error.append(validate['error'])
+        validated = validate.validate()
+
+        if validated['error'] != None:
+            self.list_error.append(validated['error'])
 
     def get_errors(self):
         """@get_errors
