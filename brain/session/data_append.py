@@ -35,8 +35,8 @@ class Data_Append(Base, Base_Data):
         superclass 'Base', and 'Base_Data' constructor, along with the
         constructor in this subclass.
 
-        @super(), implement 'Base', and 'Base_Data' superclass constructor within
-            this child class constructor.
+        @super(), implement 'Base', and 'Base_Data' superclass constructor
+            within this child class constructor.
 
         @self.uid, the logged-in user (i.e. userid).
 
@@ -63,7 +63,11 @@ class Data_Append(Base, Base_Data):
 
         """
 
-        svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': self.uid, 'id_entity': session_id}
+        svm_entity = {
+            'title': self.svm_data['data']['settings'].get('svm_title', None),
+            'uid': self.uid,
+            'id_entity': session_id,
+        }
         db_save    = Save_Entity(svm_entity, session_type)
 
         # save dataset element
