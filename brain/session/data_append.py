@@ -46,8 +46,8 @@ class Data_Append(Base, Base_Data):
 
         super(Data_Append, self).__init__(svm_data)
         self.observation_labels = []
-        self.list_error         = []
-        self.uid                = 1
+        self.list_error = []
+        self.uid = 1
 
     def save_svm_entity(self, session_type, session_id):
         """@save_svm_entity
@@ -68,7 +68,7 @@ class Data_Append(Base, Base_Data):
             'uid': self.uid,
             'id_entity': session_id,
         }
-        db_save    = Save_Entity(svm_entity, session_type)
+        db_save = Save_Entity(svm_entity, session_type)
 
         # save dataset element
         db_return = db_save.save()
