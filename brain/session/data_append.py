@@ -24,7 +24,7 @@ class Data_Append(Base, Base_Data):
 
     Note: this class is invoked within 'load_data.py'
 
-    Note: this class explicitly inherits the 'new-style' class.
+    Note: inherit base methods from superclass 'Base', 'Base_Data
 
     """
 
