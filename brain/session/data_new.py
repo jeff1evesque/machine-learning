@@ -43,5 +43,5 @@ Note: inherit base methods from superclass 'Base', 'Base_Data
 
         super(Data_New, self).__init__(svm_data)
         self.observation_labels = []
-        self.list_error         = []
-        self.uid                = 1
+        self.list_error = []
+        self.uid = 1
