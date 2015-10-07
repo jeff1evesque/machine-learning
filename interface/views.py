@@ -54,13 +54,14 @@ def load_data():
 
             # get uploaded form files
         if request.files:
+            print 'jeff'
             files = request.files
 
-            # get submitted form data
-            if request.form:
-                settings       = request.form
-                sender         = Restructure_Data(settings, files)
-                data_formatted = sender.restructure()
+        # get submitted form data
+        if request.form:
+            settings       = request.form
+            sender         = Restructure_Data(settings, files)
+            data_formatted = sender.restructure()
 
             # send reformatted data to brain
             loader = Load_Data(data_formatted)
