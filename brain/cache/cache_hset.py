@@ -16,6 +16,8 @@ class Cache_Hset(object):
     data structure.  Specifically, necessary data components is passed into the
     corresponding class method.
 
+    Note: this class explicitly inherits the 'new-style' class.
+
     """
 
     def __init__(self):
