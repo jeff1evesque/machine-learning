@@ -26,6 +26,8 @@ class Model_Generate(Base):
     This class provides an interface to generate svm model(s), stored within a
     NoSQL datastore.
 
+    Note: inherit base methods from superclass 'Base'
+
     """
 
     def __init__(self, svm_data):
