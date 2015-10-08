@@ -87,7 +87,7 @@ class Model_Generate(Base):
 
         # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
-            features_list = dataset[:, [[0],[2],[1]]]
+            features_list = dataset[:, [[0], [2], [1]]]
             current_features = []
             grouped_features = []
             observation_labels = []
@@ -114,7 +114,7 @@ class Model_Generate(Base):
 
             # convert observation labels to a unique integer representation
             label_encoder = preprocessing.LabelEncoder()
-            label_encoder.fit(dataset[:,0])
+            label_encoder.fit(dataset[:, 0])
             encoded_labels = label_encoder.transform(observation_labels)
 
             # create svm model
