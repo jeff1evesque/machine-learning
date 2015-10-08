@@ -44,10 +44,10 @@ class Model_Generate(Base):
 
         """
         super(Model_Generate, self).__init__(svm_data)
-        self.svm_data        = svm_data
-        self.session_id      = self.svm_data['data']['settings']['svm_session_id']
+        self.svm_data = svm_data
+        self.session_id = self.svm_data['data']['settings']['svm_session_id']
         self.feature_request = Retrieve_Feature()
-        self.list_error      = []
+        self.list_error = []
 
     ## generate_model: generate svm model
     #
@@ -70,7 +70,7 @@ class Model_Generate(Base):
         """
 
         # local variables
-        dataset       = self.feature_request.get_dataset(self.session_id)
+        dataset = self.feature_request.get_dataset(self.session_id)
         feature_count = self.feature_request.get_count(self.session_id)
         label_encoder = preprocessing.LabelEncoder()
 
@@ -92,11 +92,11 @@ class Model_Generate(Base):
 
         # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
-            features_list      = dataset[:, [[0],[2],[1]]]
-            current_features   = []
-            grouped_features   = []
+            features_list = dataset[:, [[0],[2],[1]]]
+            current_features = []
+            grouped_features = []
             observation_labels = []
-            feature_labels     = []
+            feature_labels = []
 
             # group features into observation instances, record labels
             for index, feature in enumerate(features_list):
