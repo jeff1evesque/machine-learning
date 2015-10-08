@@ -28,7 +28,7 @@ class Cache_Hset(object):
 
         # class variables
         self.list_error = []
-        self.myRedis    = Redis_Query()
+        self.myRedis = Redis_Query()
 
         # start redis client
         try:
