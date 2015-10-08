@@ -48,7 +48,7 @@ def load_data():
             else: response = loader.get_errors()
 
             # return response
-            return response
+            return json.dumps(response)
 
         # load web-interface
         else:
