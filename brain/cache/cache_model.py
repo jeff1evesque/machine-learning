@@ -1,18 +1,36 @@
 #!/usr/bin/python
 
-## @cache_model.py
-#  This file caches the supplied SVM model into the redis cache.
+"""@cache_hset
+
+This file caches, and uncaches the supplied model into a redis hash cache.
+
+"""
+
 from brain.cache.redis_query import Redis_Query
 from brain.converter.serialize_model import Serialize_Model
 
-## Class: Cache_Model, explicitly inherit 'new-style class.
-#
-#  Note: this class is invoked within 'model_generate.py', and
-#        'views.py'.
-class Cache_Model(object):
 
-    ## constructor
+class Cache_Model(object):
+    """@Cache_Model
+
+    This class provides an interface to cache, and uncache the redis hash
+    data structure.  Specifically, necessary data components is passed into the
+    corresponding class method, which allow computed model(s) to be stored into
+    a NoSQL datastore.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, model=None):
+	    """@__init__
+
+        This constructor is responsible for defining class variables, as well
+        as starting the redis client, in order to perform corresponding
+        caching, and uncaching.
+
+        """
+
         # class variables
         self.model      = model
         self.list_error = []
@@ -24,9 +42,14 @@ class Cache_Model(object):
         except Exception, error:
             self.list_error.append(str(error))
 
-    ## cache: serialize the provided svm model, then store into the
-    #         redis hash cache.
     def cache(self, hash_name, key):
+        """@cache
+
+        This method serializes, then caches the provided model into a redis
+        hash cache.
+
+        """
+
         try:
             serialized = Serialize_Model(self.model).serialize()
             self.myRedis.hset(hash_name, key, serialized)
@@ -34,15 +57,25 @@ class Cache_Model(object):
             self.list_error.append(str(error))
             print self.list_error
 
-    ## uncache: unserialize an svm model from the redis hash cache, with respect
-    #           to the supplied key.
     def uncache(self, hash_name, key):
+        """@uncache
+
+        This method unserializes, then uncaches the desired model, using
+        the provided key from the redis hash cache.
+
+        """
+
         uncached = self.myRedis.hget(hash_name, key)
         return Serialize_Model(uncached).deserialize()
 
-    ## get_all_titles: query for the stored 'svm_models' in the redis hashed
-    #                  cache.
     def get_all_titles(self, name):
+        """@get_all_titles
+
+        This method returns a list of all titles, with respect to the provided
+        model name.
+
+        """
+
         try:
             # get model(s)
             hkeys      = self.myRedis.hkeys(name)
