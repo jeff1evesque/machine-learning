@@ -13,7 +13,8 @@ class Cache_Hset(object):
     """@Cache_Hset
 
     This class provides an interface to cache, and uncache the redis hash
-    data structure.
+    data structure.  Specifically, necessary data components is passed into the
+    corresponding class method.
 
     """
 
