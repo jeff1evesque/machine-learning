@@ -49,11 +49,6 @@ class Model_Generate(Base):
         self.feature_request = Retrieve_Feature()
         self.list_error = []
 
-    ## generate_model: generate svm model
-    #
-
-    #
-
     def generate_model(self):
         """@generate_model
 
