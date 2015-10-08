@@ -23,7 +23,7 @@ class Cache_Model(object):
     """
 
     def __init__(self, model=None):
-	    """@__init__
+        """@__init__
 
         This constructor is responsible for defining class variables, as well
         as starting the redis client, in order to perform corresponding
@@ -32,9 +32,9 @@ class Cache_Model(object):
         """
 
         # class variables
-        self.model      = model
+        self.model = model
         self.list_error = []
-        self.myRedis    = Redis_Query()
+        self.myRedis = Redis_Query()
 
         # start redis client
         try:
