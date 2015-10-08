@@ -71,8 +71,8 @@ class Cache_Model(object):
     def get_all_titles(self, name):
         """@get_all_titles
 
-        This method returns a list of all titles, with respect to the provided
-        model name.
+        This method returns a list of all model titles, and the corresponding
+        numeric id value, with respect to the provided key (i.e svm_rbf_model).
 
         """
 
