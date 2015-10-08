@@ -115,7 +115,6 @@ class Model_Generate(Base):
             # convert observation labels to a unique integer representation
             label_encoder = preprocessing.LabelEncoder()
             label_encoder.fit(dataset[:,0])
-            labels = list(label_encoder.classes_)
             encoded_labels = label_encoder.transform(observation_labels)
 
             # create svm model
@@ -123,13 +122,21 @@ class Model_Generate(Base):
             clf.fit(grouped_features, encoded_labels)
 
             # get svm title, and cache (model, encoded labels, title)
-            title = Retrieve_Entity().get_title(self.session_id)['result'][0][0]
-            Cache_Model(clf).cache('svm_rbf_model', str(self.session_id) + '_' + title)
+            entity = Retrieve_Entity()
+            title = entity.get_title(self.session_id)['result'][0][0]
+            Cache_Model(clf).cache(
+                'svm_rbf_model',
+                str(self.session_id) + '_' + title
+            )
             Cache_Model(label_encoder).cache('svm_rbf_labels', self.session_id)
             Cache_Hset().cache('svm_rbf_title', self.session_id, title)
 
             # cache svm feature labels, with respect to given session id
-            Cache_Hset().cache('svm_rbf_feature_labels', str(self.session_id), json.dumps(feature_labels))
+            Cache_Hset().cache(
+                'svm_rbf_feature_labels',
+                str(self.session_id),
+                json.dumps(feature_labels)
+            )
 
     def return_error(self):
         """@return_error
