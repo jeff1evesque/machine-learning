@@ -59,8 +59,8 @@ class Redis_Query(object):
             my_redius.set_port(port)
 
         # get redis parameters
-        self.host   = my_redis.get_host()
-        self.port   = my_redis.get_port()
+        self.host = my_redis.get_host()
+        self.port = my_redis.get_port()
         self.db_num = db_num
 
     def start_redis(self):
@@ -83,7 +83,7 @@ class Redis_Query(object):
               https://github.com/jeff1evesque/machine-learning/issues/1761
 
         """
-        pool        = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_num)
+        pool = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_num)
         self.server = redis.StrictRedis(connection_pool=pool)
 
     def shutdown(self):
