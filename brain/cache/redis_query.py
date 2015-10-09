@@ -398,7 +398,6 @@ class Redis_Query(object):
 
         return self.server.smembers(name)
 
-    ## srem: remove values from redis set.
     def srem(self, name, *values):
         """@srem
 
