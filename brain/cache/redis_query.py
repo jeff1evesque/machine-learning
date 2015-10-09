@@ -83,6 +83,7 @@ class Redis_Query(object):
               https://github.com/jeff1evesque/machine-learning/issues/1761
 
         """
+
         pool = redis.ConnectionPool(
             host=self.host,
             port=self.port,
@@ -96,6 +97,7 @@ class Redis_Query(object):
         This method shuts down an established redis instance.
 
         """
+
         if self.server and type(self.server) == redis.client.StrictRedis:
             self.server.shutdown()
 
@@ -110,6 +112,7 @@ class Redis_Query(object):
               'dump.rdb'.
 
         """
+
         self.server.bgsave()
 
     def set(self, key, value):
