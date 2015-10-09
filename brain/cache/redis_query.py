@@ -280,7 +280,7 @@ class Redis_Query(object):
         """@llen
 
         This method returns the length of the redis list.
-		
+
         """
 
         return self.server.llen(name)
