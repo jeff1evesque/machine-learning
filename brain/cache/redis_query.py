@@ -77,13 +77,17 @@ class Redis_Query(object):
               default, the maximum limit is 10,000 concurrent connections, and
               can be adjusted within 'redis.conf' (maxmemory directive).
 
-        Note: for more information regarding redis concurrent client connections,
-              review the following:
+        Note: for more information regarding redis concurrent client
+              connections, review the following:
 
               https://github.com/jeff1evesque/machine-learning/issues/1761
 
         """
-        pool = redis.ConnectionPool(host=self.host, port=self.port, db=self.db_num)
+        pool = redis.ConnectionPool(
+            host=self.host,
+            port=self.port,
+            db=self.db_num
+        )
         self.server = redis.StrictRedis(connection_pool=pool)
 
     def shutdown(self):
