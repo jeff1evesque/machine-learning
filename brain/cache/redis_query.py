@@ -56,7 +56,7 @@ class Redis_Query(object):
         if host:
             my_redis.set_host(host)
         if port:
-            my_redius.set_port(port)
+            my_redis.set_port(port)
 
         # get redis parameters
         self.host = my_redis.get_host()
