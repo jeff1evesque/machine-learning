@@ -1,45 +1,94 @@
 #!/usr/bin/python
 
-## @base.py
-#  This file serves as the superclass for 'data_xx.py', and 'model_xx.py' files.
-#
-#  Note: the term 'dataset' used throughout various comments in this file,
-#        synonymously implies the user supplied 'file upload(s)', and XML url
-#        references.
+"""@base
+
+This file serves as the superclass for 'data_xx.py', and 'model_xx.py' files.
+
+Note: the term 'dataset' used throughout various comments in this file,
+      synonymously implies the user supplied 'file upload(s)', and XML url
+      references.
+
+"""
+
 import sys
 from brain.validator.validate_settings import Validate_Settings
 
-## Class: Base, explicitly inherit 'new-style' class
-#
-#  Note: this class is invoked within 'data_xx.py', 'model_xx.py'
+
 class Base(object):
+    """@Base
 
-    ## constructor:
+    This class provides a general base class, used for the following sessions,
+    and within their corresponding classes:
+
+        - data_new
+        - data_append
+        - model_generate
+        - model_predict
+
+    Note: this class is invoked within 'data_xx.py', 'model_xx.py'
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, svm_data):
-        self.svm_data    = svm_data
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
+
+        self.svm_data = svm_data
         self.svm_session = self.svm_data['data']['settings']['svm_session']
-        self.list_error  = []
+        self.list_error = []
 
-    ## validate_arg_none: check if class variable 'svm_data' is defined.
     def validate_arg_none(self):
-        if self.svm_data == None: return True
-        else: return False
+        """validate_arg_none
 
-    ## validate_svm_settings: validate svm session settings (not dataset).
+        This method checks if the class variable 'svm_data' is defined.
+
+        """
+        
+        if self.svm_data == None:
+            return True
+        else:
+            return False
+
     def validate_svm_settings(self):
-        validate = Validate_Settings(self.svm_data, self.svm_session).validate()
+        """@validate_svm_settings
 
-        if validate['error'] != None:
-            self.list_error.append(validate['error'])
+        This method validates the provided settings (not the dataset), that
+        describe the session.
 
-    ## get_errors: return appended error messages.
+        """
+
+        validate = Validate_Settings(
+            self.svm_data,
+            self.svm_session
+        )
+
+        validated = validate.validate()
+
+        if validated['error'] != None:
+            self.list_error.append(validated['error'])
+
     def get_errors(self):
+        """@get_errors
+
+        This method returns all current errors associated with this class.
+
+        """
+
         return self.list_error
 
-    ## check: check if the class instance contains any errors appended to the list
-    #         'self.list_error'. If any error(s) exists, it is printed, and the
-    #         program exits.
     def check(self):
+        """@check
+
+        This method checks if current class instance contains any errors. If
+        any error(s) exists, it is printed, and the program exits.
+
+        """
+
         if len(self.list_error) > 0:
             for error in self.list_error:
                 print error

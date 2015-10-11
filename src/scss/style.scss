@@ -10,7 +10,7 @@
 @import 'variables';
 
 .bold {
-  font-weight:700;
+  font-weight: 700;
 }
 
 .italic {
@@ -18,45 +18,51 @@
 }
 
 .error {
-  font-weight:700;
-  color:#800000;
+  color: $color_error;
+  font-weight: 700;
 }
 
-input[name='svm_dataset[]']:not(:first-of-type), .svm_dep_variable ~ .svm_dep_variable, .svm_indep_variable ~ .svm_indep_variable {
-  display:block;
+input[name='svm_dataset[]']:not(:first-of-type),
+.svm_dep_variable ~ .svm_dep_variable,
+.svm_indep_variable ~ .svm_indep_variable {
+  display: block;
 }
 
-.svm_dataset_xml_add:first-of-type, .svm_dataset_file_add:first-of-type, .svm_dep_variable_add:first-of-type, .svm_indep_variable_add:first-of-type {
-  float:left;
-  clear:none;
+.svm_dataset_xml_add:first-of-type,
+.svm_dataset_file_add:first-of-type,
+.svm_dep_variable_add:first-of-type,
+.svm_indep_variable_add:first-of-type {
+  clear: none;
+  float: left;
 }
 
 form {
   > fieldset {
-    margin-top:$form-margin;
+    margin-top: $form-margin;
 
     > fieldset {
-      margin-top:$form-margin / 2;
+      margin-top: $form-margin / 2;
     }
   }
 
   input.svm_form_submit {
-    margin-top:$form-margin;
+    margin-top: $form-margin;
   }
 }
 
 label.error {
-  float:right;
+  float: right;
 }
 
 .form_note {
-  clear:both;
-  padding-top:20px;
-  margin-bottom:10px;
+  clear: both;
+  padding-top: 20px;
+  margin-bottom: 10px;
 }
 
 .ajax_loader {
   background: url('../img/loading.gif') no-repeat center center transparent;
-  background-size:90px 90px;
-  width:100%; height:100%;
+  background-size: 90px 90px;
+  height: 100%;
+  width: 100%;
 }
