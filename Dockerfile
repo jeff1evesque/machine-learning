@@ -25,5 +25,6 @@ RUN PUPPETFILE=/var/machine-learning/puppet/scripts/Puppetfile PUPPETFILE_DIR=/v
 RUN for x in $(find . -name '/var/machine-learning/puppet/manifests/*.pp'); do puppet apply $x; done;
 
 ## unit test
+RUN apt-get install -y python python-dev python-distribute python-pip
 RUN pip install -U pytest
 RUN (cd test && py.test)
