@@ -2,9 +2,11 @@
 
 ## @validate_settings.py
 #  This script performs validation on session settings. 
-import sys
 from jsonschema.validators import Draft4Validator
-from brain.schema.jsonschema_definition import jsonschema_data_new, jsonschema_data_append, jsonschema_model_generate, jsonschema_model_predict
+from brain.schema.jsonschema_definition import jsonschema_data_new
+from brain.schema.jsonschema_definition import jsonschema_data_append
+from brain.schema.jsonschema_definition import jsonschema_model_generate
+from brain.schema.jsonschema_definition import jsonschema_model_predict
 
 ## Class: Validate_Settings, explicitly inherit 'new-style' class
 #
@@ -20,8 +22,9 @@ class Validate_Settings(object):
     ## validate: this method validates the SVM settings for the 'data_new',
     #            'data_append', 'model_generate', or 'model_predict' sessions.
     #
-    #  Note: This method does not validate the associated 'file upload(s)'. The
-    #        latter is validated via 'validate_mime.py', and 'validate_dataset.py'.
+    #  Note: This method does not validate the associated 'file upload(s)'.
+    #        The latter is validated via 'validate_file_extension.py', and
+    #        'validate_dataset.py'.
     def validate(self):
         # local variables
         list_error = []
@@ -29,28 +32,32 @@ class Validate_Settings(object):
         # validation on 'data_new' session
         if self.svm_session == 'data_new':
             try:
-                Draft4Validator(jsonschema_data_new()).validate(self.svm_settings)
+                validate = Draft4Validator(jsonschema_data_new())
+                validate.validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'data_append' session
         if self.svm_session == 'data_append':
             try:
-                Draft4Validator(jsonschema_data_append()).validate(self.svm_settings)
+                validate = Draft4Validator(jsonschema_data_append())
+                validate.validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_generate' session
         if self.svm_session == 'model_generate':
             try:
-                Draft4Validator(jsonschema_model_generate()).validate(self.svm_settings)
+                validate = Draft4Validator(jsonschema_model_generate())
+                validate.validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_predict' session
         elif self.svm_session == 'model_predict':
             try:
-                Draft4Validator(jsonschema_model_predict()).validate(self.svm_settings)
+                validate = Draft4Validator(jsonschema_model_predict())
+                validate.validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
 

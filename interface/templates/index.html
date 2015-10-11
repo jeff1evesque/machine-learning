@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+{#
+   index.html: defines 'training' or 'analysis' session, prompts users to provide an upload file
+               or URL to an XML (dataset), then defines which attributes within the dataset
+               previously defined, to use for the SVM analysis.  After the configurations and
+               attributes have been defined, it is sent to 'logic_loader.py' for further analysis.
+#}
+<html>
+  <head>
+{#
+    specify unicode (utf-8) encoding for html document
+#}
+    <meta charset='utf-8'>
+{#
+    use latest chrome rendering engine if installed; otherwise, use latest edge rendering for IE
+#}
+    <meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1' />
+{#
+    set the width of the page to follow the screen-width of the device, with no zooming applied (1:1 scale)
+#}
+    <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+
+    <script src='static/js/jquery-2.1.1.min.js'></script>
+    <script src='static/js/jquery-validate.min.js'></script>
+    <script src='static/js/html_form.min.js'></script>
+    <script src='static/js/html_form_delegator.min.js'></script>
+    <script src='static/js/form_validator.min.js'></script>
+    <script src='static/js/ajax_graphic.min.js'></script>
+    <script src='static/js/ajax_data.min.js'></script>
+    <script src='static/js/ajax_session.min.js'></script>
+    <script src='static/js/ajax_model.min.js'></script>
+    <script src='static/js/ajax_feature.min.js'></script>
+
+    <link rel='stylesheet' href='static/css/style.min.css'>
+  </head>
+  <body>
+
+    <form action='/load-data/' method='post'>
+      <fieldset class='fieldset_session_type'>
+        <legend>Session Type</legend>
+        <p>Choose a session type</p>
+        <select name='svm_session' autocomplete='off'>
+          <option value='' selected='selected'>--Select--</option>
+          <option value='data_new'>New Data</option>
+          <option value='data_append'>Append Data</option>
+          <option value='model_generate'>Generate Model</option>
+          <option value='model_predict'>Make Prediction</option>
+        </select>
+      </fieldset>
+    </form>
+
+  </body>
+</html>

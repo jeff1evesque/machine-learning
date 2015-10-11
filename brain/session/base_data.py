@@ -47,12 +47,22 @@ class Base_Data(object):
 
     ## validate_file_extension: validate file extension for each dataset.
     def validate_file_extension(self):
-        validator = Validate_File_Extension(self.svm_data, self.svm_session)
-        self.response_file_extension_validation = validator.validate()
+        # web-interface: validate, and restructure dataset
+        if self.svm_data['data']['dataset']['file_upload']:
+            validator = Validate_File_Extension(self.svm_data, self.svm_session)
+            self.response_file_extension_validation = validator.validate()
 
-        if self.response_file_extension_validation['error'] != None:
-            self.list_error.append(self.response_file_extension_validation['error'])
-            self.flag_validate_file_extension = True
+            if self.response_file_extension_validation['error']:
+                self.list_error.append(self.response_file_extension_validation['error'])
+                self.flag_validate_file_extension = True
+
+        # programmatic-interface: validate, do not restructure
+        elif self.svm_data['data']['dataset']['json_string']:
+            self.response_file_extension_validation = self.svm_data['data']
+
+            if self.svm_data['error']:
+                self.list_error.append(self.svm_data['error'])
+                self.flag_validate_file_extension = True
 
     ## validate_id: validate session id as positive integer.
     def validate_id(self, session_id):
@@ -123,82 +133,109 @@ class Base_Data(object):
         flag_convert = False
         flag_append  = True
         index_count  = 0
+        self.dataset = []
 
         try:
-            self.response_file_extension_validation['dataset']['file_upload']
-            flag_convert = True
+            # web-interface: define flag to convert to dataset to json
+            if self.response_file_extension_validation['dataset']['file_upload']:
+                svm_property = self.svm_data
+
+                for val in self.response_file_extension_validation['dataset']['file_upload']:
+                    # reset file-pointer
+                    val['file'].seek(0)
+
+                    # csv to dict
+                    if val['type'] == 'csv':
+                        try:
+                            # conversion
+                            dataset_converter = Convert_Upload(val['file'])
+                            dataset_converted = dataset_converter.csv_to_dict()
+                            count_features    = dataset_converter.get_feature_count()
+
+                            # check label consistency, assign labels
+                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            labels = dataset_converter.get_observation_labels()
+                            self.observation_labels.append(labels)
+
+                            # build new (relevant) dataset
+                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                        except Exception as error:
+                            self.list_error.append(error)
+                            flag_append = False
+
+                    # json to dict
+                    elif val['type'] == 'json':
+                        try:
+                            # conversion
+                            dataset_converter = Convert_Upload(val['file'])
+                            dataset_converted = dataset_converter.json_to_dict()
+                            count_features    = dataset_converter.get_feature_count()
+
+                            # check label consistency, assign labels
+                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            labels = dataset_converter.get_observation_labels()
+                            self.observation_labels.append(labels)
+
+                        # build new (relevant) dataset
+                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                        except Exception as error:
+                            self.list_error.append(error)
+                            flag_append = False
+
+                    # xml to dict
+                    elif val['type'] == 'xml':
+                        try:
+                            # conversion
+                            dataset_converter = Convert_Upload(val['file'])
+                            dataset_converted = dataset_converter.xml_to_dict()
+                            count_features    = dataset_converter.get_feature_count()
+
+                            # check label consistency, assign labels
+                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            labels = dataset_converter.get_observation_labels()
+                            self.observation_labels.append(labels)
+
+                            # build new (relevant) dataset
+                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                        except Exception as error:
+                            self.list_error.append(error)
+                            flag_append = False
+
+                index_count += 1
+                if not flag_append: return False
+
+            # programmatic-interface
+            elif self.response_file_extension_validation['dataset']['json_string']:
+                # conversion
+                dataset_json      = self.response_file_extension_validation['dataset']['json_string']
+                dataset_converter = Convert_Upload(dataset_json, True)
+                dataset_converted = dataset_converter.json_to_dict()
+                count_features    = dataset_converter.get_feature_count()
+                features          = dataset_json.values()[0]
+
+                # some observations have multiple instances grouped together
+                if isinstance(features, list):
+                    self.observation_labels.extend(list(features[0]))
+                else:
+                    self.observation_labels.extend(list(features))
+
+                # check label consistency
+                for feature in dataset_json.values():
+                    if isinstance(feature, list):
+                        for nested_feature in feature:
+                            if sorted(self.observation_labels) != sorted(nested_feature):
+                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                    else:
+                        if sorted(self.observation_labels) != sorted(feature):
+                            self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+
+                # build dataset
+                self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+
         except Exception as error:
             self.list_error.append(error)
             print error
             return False
-
-        if (flag_convert):
-            self.dataset = []
-            svm_property = self.svm_data
-
-            for val in self.response_file_extension_validation['dataset']['file_upload']:
-                # reset file-pointer
-                val['file'].seek(0)
-
-                # csv to dict
-                if val['type'] == 'csv':
-                    try:
-                        # conversion
-                        dataset_converter = Convert_Upload(val['file'])
-                        dataset_converted = dataset_converter.csv_to_dict()
-                        count_features    = dataset_converter.get_feature_count()
-
-                        # check label consistency, assign labels
-                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                        labels = dataset_converter.get_observation_labels()
-                        self.observation_labels.append(labels)
-
-                        # build new (relevant) dataset
-                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
-                    except Exception as error:
-                        self.list_error.append(error)
-                        flag_append = False
-
-                # json to dict
-                elif val['type'] == 'json':
-                    try:
-                        # conversion
-                        dataset_converter = Convert_Upload(val['file'])
-                        dataset_converted = dataset_converter.json_to_dict()
-                        count_features    = dataset_converter.get_feature_count()
-
-                        # check label consistency, assign labels
-                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                        labels = dataset_converter.get_observation_labels()
-                        self.observation_labels.append(labels)
-
-                        # build new (relevant) dataset
-                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
-                    except Exception as error:
-                        self.list_error.append(error)
-                        flag_append = False
-
-                # xml to dict
-                elif val['type'] == 'xml':
-                    try:
-                        # conversion
-                        dataset_converter = Convert_Upload(val['file'])
-                        dataset_converted = dataset_converter.xml_to_dict()
-                        count_features    = dataset_converter.get_feature_count()
-
-                        # check label consistency, assign labels
-                        if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != self.observation_labels: self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                        labels = dataset_converter.get_observation_labels()
-                        self.observation_labels.append(labels)
-
-                        # build new (relevant) dataset
-                        self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
-                    except Exception as error:
-                        self.list_error.append(error)
-                        flag_append = False
-
-            index_count += 1
-            if not flag_append: return False
 
     # get_errors: get all current errors.
     def get_errors(self):

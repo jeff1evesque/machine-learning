@@ -19,14 +19,24 @@ install:
   - npm install -g bootlint
   - gem install puppet-lint
   - gem install rubocop
+  - npm install jsonlint -g
+  - gem install csvlint
 
 ## lint, and unit tests
+#
+#  @puppet-lint, the following issue needs to be checked if it has been
+#      resolved, so the '--no-ensure_first_param-check' abusive flag
+#      implementation (below) can be removed:
+#
+#      - https://github.com/rodjek/puppet-lint/issues/410
 script:
   - flake8 brain
   - flake8 interface
-  - jshint --verbose src/js/*.js
+  - jshint --verbose src/js/*.js --config test/config/jshint.json
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
-  - puppet-lint puppet/manifests
+  - puppet-lint --no-ensure_first_param-check puppet/manifests
   - rubocop puppet/Puppefile
   - rubocop puppet/scripts/Puppetfile
+  - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
+  - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;

@@ -1,6 +1,6 @@
 # Ignore project root (except exclamated files, and directories)
 /*
-!/web_interface/
+!/interface/
 !/brain/
 !/src/
 !.gitigore
@@ -12,27 +12,17 @@
 !license.md
 !Vagrantfile
 !/puppet/
-!package.json
 !Dockerfile
-!Gemfile
-!Rakefile
 !/test
 
 #Ignore and don't commit the following directories
-/web_interface/static/js/
-/web_interface/static/css/
-/web_interface/static/img/
+/interface/static/js/
+/interface/static/css/
+/interface/static/img/
 /puppet/modules/
+/test/.cache
+/test/programmatic_interface/.cache
+/test/programmatic_interface/__pycache__
 
 # Ignore and don't commit the following files
-/*.pyc
-
-/brain/*.pyc
-/brain/cache/*.pyc
-/brain/converter/*.pyc
-/brain/database/*.pyc
-/brain/schema/*.pyc
-/brain/session/*.pyc
-/brain/validator/*.pyc
-
-/web_interface/*.pyc
+*.pyc

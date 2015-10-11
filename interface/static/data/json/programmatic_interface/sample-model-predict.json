@@ -1,0 +1,15 @@
+{
+    "properties": {
+        "svm_session": "model_predict",
+        "svm_model_id": "1",
+        "prediction_input[]": [
+            "22.22",
+            "96.24",
+            "338",
+            "72.55",
+            "0.001",
+            "28",
+            "0.678"
+        ]
+    }
+}

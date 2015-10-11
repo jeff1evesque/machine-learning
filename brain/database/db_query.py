@@ -1,21 +1,38 @@
 #!/usr/bin/python
 
-## @db_query.py
-#  This file contains various generic SQL-related methods.
+"""@db_query
+
+This file contains various generic SQL-related methods.
+"""
+
 import MySQLdb as DB
 from brain.database.db_settings import Database
 
-## Class: SQL, explicitly inherit 'new-style' class
-#
-#  Note: this class is invoked within 'save_xx.py', and 'retrieve_xx.py'
-#        files.
-class SQL(object):
 
-    ## constructor:
+class SQL(object):
+    """@SQL
+
+    This class provides an interface to connect, execute commands, and
+    disconnect from a SQL database.  It explicitly inherits pythons 'new-style'
+    class.
+
+    Note: this class is invoked within 'save_xx.py', and 'retrieve_xx.py'
+          modules.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, host=None, user=None, passwd=None):
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
+
         self.db_settings = Database()
-        self.list_error  = []
-        self.proceed     = True
+        self.list_error = []
+        self.proceed = True
 
         # host address
         if host:
@@ -35,26 +52,54 @@ class SQL(object):
         else:
             self.passwd = self.db_settings.get_db_password()
 
-    ## sql_connect: create connection to MySQL / MariaDB
     def sql_connect(self, database=None):
+        """@sql_connect
+
+        This method is responsible for defining the necessary interface to
+        connect to a SQL database.
+
+        """
+
         try:
-            if database == None:
-                self.conn = DB.connect(self.host, self.user, self.passwd)
+            if database is None:
+                self.conn = DB.connect(
+                    self.host,
+                    self.user,
+                    self.passwd,
+                )
             else:
-                self.conn = DB.connect(self.host, self.user, self.passwd, db=database)
+                self.conn = DB.connect(
+                    self.host,
+                    self.user,
+                    self.passwd,
+                    db=database,
+                )
             self.cursor = self.conn.cursor()
-            return {'status': True, 'error': None, 'id': None}
+            return {
+                'status': True,
+                'error': None,
+                'id': None,
+            }
 
         except DB.Error, error:
             self.proceed = False
             self.list_error.append(error)
-            return {'status': False, 'error': self.list_error, 'id': None}
+            return {
+                'status': False,
+                'error': self.list_error,
+                'id': None,
+            }
 
-    ## sql_command: execute sql statement.
-    #
-    #  @sql_args, is a tuple used for argument substitution with the supplied
-    #      'sql_statement'.
     def sql_command(self, sql_statement, sql_type, sql_args=None):
+        """@sql_connect
+
+        This method is responsible for defining the necessary interface to
+        perform SQL commands.
+
+        @sql_args, is a tuple used for argument substitution with the supplied
+            'sql_statement'.
+        """
+
         if self.proceed:
             try:
                 self.cursor.execute(sql_statement, sql_args)
@@ -69,22 +114,55 @@ class SQL(object):
             except DB.Error, error:
                 self.conn.rollback()
                 self.list_error.append(error)
-                return {'status': False, 'error': self.list_error, 'result': None}
+                return {
+                    'status': False,
+                    'error': self.list_error,
+                    'result': None,
+                }
 
-        if sql_type in ['insert', 'delete', 'update']: return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
-        elif sql_type == 'select': return {'status': False, 'error': self.list_error, 'result': result}
+        if sql_type in ['insert', 'delete', 'update']:
+            return {
+                'status': False,
+                'error': self.list_error,
+                'id': self.cursor.lastrowid,
+            }
+        elif sql_type == 'select':
+            return {
+                'status': False,
+                'error': self.list_error,
+                'result': result,
+            }
 
-    ## sql_disconnect: close connection to MySQL / MariaDB
     def sql_disconnect(self):
+        """@sql_disconnect
+
+        This method is responsible for defining the necessary interface to
+        disconnect from a SQL database.
+
+        """
+
         if self.proceed:
             try:
                 if self.conn:
                     self.conn.close()
-                    return {'status': True, 'error': None, 'id': self.cursor.lastrowid}
+                    return {
+                        'status': True,
+                        'error': None,
+                        'id': self.cursor.lastrowid,
+                    }
             except DB.Error, error:
                 self.list_error.append(error)
-                return {'status': False, 'error': self.list_error, 'id': self.cursor.lastrowid}
+                return {
+                    'status': False,
+                    'error': self.list_error,
+                    'id': self.cursor.lastrowid,
+                }
 
-    ## get_errors: return appended error message(s)
     def get_errors(self):
+        """@get_errors
+
+        This method returns all errors pertaining to the instantiated class.
+
+        """
+
         return self.list_error

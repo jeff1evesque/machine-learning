@@ -24,11 +24,28 @@ case $::osfamily {
         #!upstart
         description 'start flask server'
 
-        ## start job defined in this file after system services, and processes have already loaded
-        #       (to prevent conflict).
+        ## start job defined in this file after system services, and processes
+        #      have already loaded (to prevent conflict).
         #
-        #  @vagrant-mounted, an event that executes after the shared folder is mounted
-        #  @[2345], represents all configuration states with general linux, and networking access
+        #  @vagrant-mounted, an event that executes after the shared folder is
+        #      mounted
+        #  @[2345], represents all configuration states with general linux,
+        #      and networking access
+        start on (vagrant-mounted and runlevel [2345])
+        ## stop upstart job
+        stop on runlevel [!2345]
+        ## restart upstart job continuously
+        respawn
+
+        # required permission to write to '/vagrant/' files
+
+        ## start job defined in this file after system services, and processes
+        #       have already loaded (to prevent conflict).
+        #
+        #  @vagrant-mounted, an event that executes after the shared folder is
+        #       mounted.
+        #  @[2345], represents all configuration states with general linux, and
+        #       networking access.
         start on (vagrant-mounted and runlevel [2345])
 
         ## stop upstart job
@@ -37,7 +54,7 @@ case $::osfamily {
         ## restart upstart job continuously
         respawn
 
-        # required for permission to write to '/vagrant/' files (pre-stop stanza)
+        # required for permission to write to '/vagrant/' files
         setuid vagrant
         setgid vagrant
 
@@ -51,28 +68,34 @@ case $::osfamily {
         #
         #  @[`date`], current date script executed
         pre-start script
+          echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log
+        end script
+
+        ## log shut-down date, before '/vagrant' is unmounted
           echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log 
         end script
 
-        ## log shut-down date, remove process id from log before '/vagrant' is unmounted
+        ## log shut-down date, then remove process id from log before
+        #      '/vagrant' is unmounted.
         #
         #  @[`date`], current date script executed
         pre-stop script
           echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
         end script
-      EOT
+      | EOT
       notify  => Exec['dos2unix-flask'],
     }
 
     ## convert clrf (windows to linux) in case host machine is windows.
     #
-    #  @notify, ensure the webserver service is started. This is similar to an exec statement, where the
-    #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
-    #      'service' end point does not require the 'refreshonly' attribute.
+    #  @notify, ensure the webserver service is started. This is similar to an
+    #      exec statement, where the 'refreshonly => true' would be implemented
+    #      on the corresponding listening end point. But, the 'service' end
+    #      point does not require the 'refreshonly' attribute.
     exec {'dos2unix-flask':
-      command => 'dos2unix /etc/init/flask.conf',
+      command     => 'dos2unix /etc/init/flask.conf',
       refreshonly => true,
-      notify => Service['flask'],
+      notify      => Service['flask'],
     }
 
     ## start webserver
