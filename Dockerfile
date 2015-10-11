@@ -23,3 +23,7 @@ RUN PUPPETFILE=/var/machine-learning/puppet/scripts/Puppetfile PUPPETFILE_DIR=/v
 
 ## provision with puppet
 RUN for x in $(find . -name '/var/machine-learning/puppet/manifests/*.pp'); do puppet apply $x; done;
+
+## unit test
+RUN pip install -U pytest
+RUN (cd test && py.test)
