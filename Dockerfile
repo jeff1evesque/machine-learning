@@ -27,4 +27,4 @@ RUN for x in $(find . -name '/var/machine-learning/puppet/manifests/*.pp'); do p
 ## unit test
 RUN apt-get install -y python python-dev python-distribute python-pip
 RUN pip install -U pytest
-RUN (cd test && py.test)
+RUN (cd /var/machine-learning/test && py.test)
