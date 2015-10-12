@@ -32,6 +32,8 @@ class Redis_Query(object):
           concept to 'lists'. Also, the above included redis data structures,
           provides enough flexibility to accomplish most requirements.
 
+    Note: this class explicitly inherits the 'new-style' class.
+
     """
 
     def __init__(self, db_num=0, host=None, port=None):
