@@ -30,9 +30,9 @@ class Validate_Settings(object):
 
         """
 
-        self.svm_data     = svm_data
+        self.svm_data = svm_data
         self.svm_settings = self.svm_data['data']['settings']
-        self.svm_session  = svm_session
+        self.svm_session = svm_session
 
     ## validate: this method validates the SVM settings for the 'data_new',
     #            'data_append', 'model_generate', or 'model_predict' sessions.
