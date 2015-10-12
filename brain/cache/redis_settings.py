@@ -8,6 +8,7 @@ This file can set, or get the required redis host, or port.
 
 from settings import HOST, PORT_REDIS
 
+
 class Redis_Settings(object):
     """@Redis_Settings
 
