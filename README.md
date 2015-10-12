@@ -139,8 +139,8 @@ When using the web-interface, it is important to ensure the csv, xml, or json fi
 
 The following are acceptable syntax:
 
-- [CSV sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/csv/)
-- [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/html/machine-learning/data/xml/)
+- [CSV sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/csv/)
+- [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/)
 - [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/web_interface)
 
 **Note:** each dependent variable value (for JSON datasets), is an array (square brackets), since each dependent variable may have multiple observations.
