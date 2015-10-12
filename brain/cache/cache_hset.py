@@ -21,7 +21,7 @@ class Cache_Hset(object):
     """
 
     def __init__(self):
-	    """@__init__
+        """@__init__
 
         This constructor is responsible for defining class variables, as well
         as starting the redis client, in order to perform corresponding
