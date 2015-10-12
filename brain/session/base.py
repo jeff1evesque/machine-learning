@@ -49,7 +49,7 @@ class Base(object):
 
         """
 
-        if self.svm_data == None:
+        if self.svm_data is None:
             return True
         else:
             return False
@@ -69,7 +69,7 @@ class Base(object):
 
         validated = validate.validate()
 
-        if validated['error'] != None:
+        if validated['error'] is not None:
             self.list_error.append(validated['error'])
 
     def get_errors(self):
