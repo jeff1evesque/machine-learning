@@ -78,11 +78,11 @@ class Cache_Model(object):
 
         try:
             # get model(s)
-            hkeys      = self.myRedis.hkeys(name)
+            hkeys = self.myRedis.hkeys(name)
             list_title = []
 
             # build result
-            id    = [x[:x.find('_')] for x in hkeys]
+            id = [x[:x.find('_')] for x in hkeys]
             title = [x[x.find('_')+1:] for x in hkeys]
 
             for i in range(len(hkeys)):
