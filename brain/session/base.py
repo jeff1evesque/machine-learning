@@ -48,7 +48,7 @@ class Base(object):
         This method checks if the class variable 'svm_data' is defined.
 
         """
-        
+
         if self.svm_data == None:
             return True
         else:
