@@ -87,7 +87,9 @@ class Base_Data(object):
             self.response_file_extension_validation = validator.validate()
 
             if self.response_file_extension_validation['error']:
-                self.list_error.append(self.response_file_extension_validation['error'])
+                self.list_error.append(
+                    self.response_file_extension_validation['error']
+                )
                 self.flag_validate_file_extension = True
 
         # programmatic-interface: validate, do not restructure
@@ -155,7 +157,8 @@ class Base_Data(object):
 
                 # save dataset element, append error(s)
                 db_return = db_save.save_feature()
-                if db_return['error']: self.list_error.append(db_return['error'])
+                if db_return['error']:
+                    self.list_error.append(db_return['error'])
 
     def save_observation_label(self, session_type, session_id):
         """save_observation_label
@@ -175,11 +178,18 @@ class Base_Data(object):
         if len(self.observation_labels) > 0:
             for label_list in self.observation_labels:
                 for label in label_list:
-                    db_save = Save_Observation({'label': label, 'id_entity': session_id}, session_type)
+                    db_save = Save_Observation(
+                        {
+                            'label': label,
+                            'id_entity': session_id
+                        },
+                        session_type
+                    )
 
                     # save dataset element, append error(s)
                     db_return = db_save.save_label()
-                    if not db_return['status']: self.list_error.append(db_return['error'])
+                    if not db_return['status']:
+                        self.list_error.append(db_return['error'])
 
     def dataset_to_dict(self, id_entity):
         """@dataset_to_dict
