@@ -194,10 +194,8 @@ The following is a glossary for attributes used for the above json `data` attrib
   - `data_append`
   - `model_generate`
   - `model_predict`
-- `svm_dataset_type` this attribute used within [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-append.json), and [`sample-data-new`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-new.json), corresponds to one of the following dataset types:
-  - `json_string`: indicates that the dataset is being sent via a `post` request
-
-**Note:** in the future, the programmatic-interface may extend other dataset types.
+- `svm_dataset_type` this attribute used within [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-append.json#L4), and [`sample-data-new`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-new.json#L4), corresponds to one of the following dataset types:
+  - `json_string`: indicate that the dataset is being sent via a `post` request
   
 ###Test Scripts
 
