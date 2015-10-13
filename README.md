@@ -188,17 +188,17 @@ The following outlines what the `data` structure should be, for the above `post`
 The following (non-exhaustive) properties define the above implemented `data` attribute:
 
 - `prediction_value[]`: an array of feature values, used to generate a corresponding prediction value.  The size of this array, varies depending on the number of features that can be expected for the generated model.
-- `svm_model_id`: a string, representing a numeric id value, of the generated model in the nosql datastore.
-- `svm_model_type`: a string, assigned as one of the following model types, depending on which model is desired.
+- `svm_model_id`: the numeric id value, of the generated model in the nosql datastore.
+- `svm_model_type`: corresponds to the desired model type, which can be one of the following:
   - `classification`
   - `regression`
-- `svm_session_id`: a string, corresponding to the numeric id value, that represents the dataset stored in the sql database.
-- `svm_session`: a string, assigned as one of the following session types:
+- `svm_session_id`: the numeric id value, that represents the dataset stored in the sql database.
+- `svm_session`: corresponds to one of the following session types:
   - `data_new`
   - `data_append`
   - `model_generate`
   - `model_predict`
-- `svm_dataset_type` a string, corresponding to one of the following dataset types:
+- `svm_dataset_type` corresponds to one of the following dataset types:
   - `json_string`: indicate that the dataset is being sent via a `post` request
   
 ###Test Scripts
