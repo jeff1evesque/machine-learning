@@ -183,9 +183,9 @@ The following outlines what the `data` structure should be, for the above `post`
 
 **Note:** the content of each of the above files, can substituted for the above `data` attribute.
 
-The following provides additional context for attributes used within the above json `data` string:
+The following provides additional context on the `data` attribute, and it's corresponding properties:
 
-- `prediction_value[]`: this attribute used within [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-predict.json#L5-L13) is an array of feature values, used as input, to generate a corresponding prediction value.  The size of this array, varies depending on the number of features that can be expected for the generated model.
+- `prediction_value[]`: this attribute used within [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-predict.json#L5-L13) is an array of feature values, used to generate a corresponding prediction value.  The size of this array, varies depending on the number of features that can be expected for the generated model.
 - `svm_model_id`: this attribute used within [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-predict.json#L4) corresponds to the numeric id value, that represents the generated model in the NoSQL datastore.
 - `svm_model_type`: this attribute used within [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-generate.json#L5), can be assigned either `classification`, or `regression`, depending on which model is desired.
 - `svm_session_id`: this attribute used within [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-generate.json#L4) corresponds to the numeric id value, that represents the dataset stored in the sql database.
