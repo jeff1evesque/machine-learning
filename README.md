@@ -156,7 +156,7 @@ As mentioned earlier, the web application can be accessed after subsequent `vagr
 
 ###Programmatic Interface
 
-The programmatic interface, is a set of API, which allow users to implement the following sessions:
+The programmatic interface, or set of API, allow users to implement the following sessions:
 
 - `data_new`: store a dataset as a new dataset instance, within the implemented sql database. 
 - `data_append`: append an additional dataset, to an existing dataset representation, within the implemented sql database.
@@ -174,7 +174,7 @@ headers      = headers={'Content-Type': 'application/json'}
 requests.post(endpoint_url, headers=headers, data=json_string_here)
 ```
 
-**Note:** the sender of the post request, may elect to choose different language (i.e. php, ruby, C++), to implement the post request.
+**Note:** the sender of the post request, may choose a different language (i.e. php, ruby, C++), to implement the post request.
 
 The following outlines what the `data` structure should be, for the above `post` implementation:
 
