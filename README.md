@@ -133,7 +133,7 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 
 ###Web Interface
 
-The [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), or GUI implementation, allow users to implement the following sessions:
+The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html), or GUI implementation, allow users to implement the following sessions:
 
 - `data_new`: store the provided dataset(s), within the implemented sql database. 
 - `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
