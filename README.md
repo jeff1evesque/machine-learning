@@ -149,7 +149,34 @@ As mentioned earlier, the web application can be accessed after subsequent `vagr
 
 ###Programmatic Interface
 
-Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
+The programmatic interface, is a set of API, which allow users to implement the following sessions:
+
+- `data_new`: store a dataset as a new dataset instance, within the implemented sql database. 
+- `data_append`: append an additional dataset, to an existing dataset representation, within the implemented sql database.
+- `model_generate`: using previous stored dataset(s)(i.e. `data_new`, or `data_append`), stored in the sql database, generate a corresponding model into the implemented NoSQL datastore.
+- `model_predict`: using a previous stored model (i.e. `model_predict`) from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
+
+A post request in python:
+
+```python
+import requests
+
+endpoint_url = 'http://localhost:5000/load-data/'
+headers      = headers={'Content-Type': 'application/json'}
+
+requests.post(endpoint_url, headers=headers, data=json_string_here)
+```
+
+**Note:** the sender of the post request, may elect to choose different language (i.e. php, ruby, C++), to implement the post request.
+
+The following outlines what the `data` structure should be, for the above `post` implementation:
+
+- [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-new.json)
+- [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-append.json)
+- [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-generate.json)
+- [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-predict.json)
+
+**Note:** the content of each of the above files, can substituted for the above `data` attribute.
 
 ###Test Scripts
 
