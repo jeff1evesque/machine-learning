@@ -183,7 +183,7 @@ The following outlines what the `data` structure should be, for the above `post`
 
 **Note:** the content of each of the above files, can substituted for the above `data` attribute.
 
-####Data Attribute
+####Data Attributes
 
 The following (non-exhaustive) properties define the above implemented `data` attribute:
 
