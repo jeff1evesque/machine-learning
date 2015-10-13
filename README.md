@@ -136,7 +136,7 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 The [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), or GUI implementation, allow users to implement the following sessions:
 
 - `data_new`: store the provided dataset(s), within the implemented sql database. 
-- `data_append`: append an additional dataset(s), to an existing dataset representation, within the implemented sql database.
+- `data_append`: append additional dataset(s), to an existing dataset representation, within the implemented sql database.
 - `model_generate`: using previous stored dataset(s) (from `data_new`, or `data_append`), generate a corresponding model into the implemented NoSQL datastore.
 - `model_predict`: using a previous stored model (from `model_predict`), from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
 
@@ -157,11 +157,11 @@ As mentioned earlier, the web application can be accessed after subsequent `vagr
 The programmatic interface, or set of API, allow users to implement the following sessions:
 
 - `data_new`: store the provided dataset(s), within the implemented sql database.
-- `data_append`: append an additional dataset(s), to an existing dataset representation, within the implemented sql database.
+- `data_append`: append additional dataset(s), to an existing dataset representation, within the implemented sql database.
 - `model_generate`: using previous stored dataset(s) (from `data_new`, or `data_append`), generate a corresponding model into the implemented NoSQL datastore.
 - `model_predict`: using a previous stored model (from `model_predict`), from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
 
-A post request in python:
+A post request, can be implement in python, as follows:
 
 ```python
 import requests
@@ -172,7 +172,7 @@ headers      = headers={'Content-Type': 'application/json'}
 requests.post(endpoint_url, headers=headers, data=json_string_here)
 ```
 
-**Note:** the sender of the post request, may choose a different language (i.e. php, ruby, C++), to implement the post request.
+**Note:** the above `post` request, can be implemented in a different language, respectively.
 
 The following outlines what the `data` structure should be, for the above `post` implementation:
 
