@@ -62,7 +62,10 @@ class Base_Data(object):
         """
 
         svm_data = self.dataset[0]
-        db_save  = Save_Feature({'id_entity': svm_data['id_entity'], 'count_features': svm_data['count_features']})
+        db_save  = Save_Feature({
+            'id_entity': svm_data['id_entity'],
+            'count_features': svm_data['count_features']
+        })
 
         # save dataset element, append error(s)
         db_return = db_save.save_count()
@@ -77,7 +80,10 @@ class Base_Data(object):
 
         # web-interface: validate, and restructure dataset
         if self.svm_data['data']['dataset']['file_upload']:
-            validator = Validate_File_Extension(self.svm_data, self.svm_session)
+            validator = Validate_File_Extension(
+                self.svm_data,
+                self.svm_session
+            )
             self.response_file_extension_validation = validator.validate()
 
             if self.response_file_extension_validation['error']:
@@ -113,7 +119,11 @@ class Base_Data(object):
 
         """
 
-        svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': self.uid, 'id_entity': None}
+        svm_entity = {
+            'title': self.svm_data['data']['settings'].get('svm_title', None),
+            'uid': self.uid,
+            'id_entity': None
+        }
         db_save    = Save_Entity(svm_entity, session_type)
 
         # save dataset element
@@ -138,7 +148,10 @@ class Base_Data(object):
 
         for data in self.dataset:
             for dataset in data['svm_dataset']:
-                db_save = Save_Feature({'svm_dataset': dataset, 'id_entity': data['id_entity']})
+                db_save = Save_Feature({
+                    'svm_dataset': dataset,
+                    'id_entity': data['id_entity']
+                })
 
                 # save dataset element, append error(s)
                 db_return = db_save.save_feature()
@@ -214,7 +227,11 @@ class Base_Data(object):
                             self.observation_labels.append(labels)
 
                             # build new (relevant) dataset
-                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                            self.dataset.append({
+                                'id_entity': id_entity,
+                                'svm_dataset': dataset_converted,
+                                'count_features': count_features
+                            })
                         except Exception as error:
                             self.list_error.append(error)
                             flag_append = False
@@ -233,7 +250,11 @@ class Base_Data(object):
                             self.observation_labels.append(labels)
 
                         # build new (relevant) dataset
-                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                            self.dataset.append({
+                                'id_entity': id_entity,
+                                'svm_dataset': dataset_converted,
+                                'count_features': count_features
+                            })
                         except Exception as error:
                             self.list_error.append(error)
                             flag_append = False
@@ -252,7 +273,11 @@ class Base_Data(object):
                             self.observation_labels.append(labels)
 
                             # build new (relevant) dataset
-                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                            self.dataset.append({
+                                'id_entity': id_entity,
+                                'svm_dataset': dataset_converted,
+                                'count_features': count_features
+                            })
                         except Exception as error:
                             self.list_error.append(error)
                             flag_append = False
@@ -276,17 +301,25 @@ class Base_Data(object):
                     self.observation_labels.extend(list(features))
 
                 # check label consistency
+                error_str = 'The supplied observation labels (dependent '\
+                    'variables), are inconsistent'
+
                 for feature in dataset_json.values():
                     if isinstance(feature, list):
                         for nested_feature in feature:
-                            if sorted(self.observation_labels) != sorted(nested_feature):
-                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            if sorted(self.observation_labels) != \
+                                sorted(nested_feature):
+                                    self.list_error.append(error_str)
                     else:
                         if sorted(self.observation_labels) != sorted(feature):
-                            self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            self.list_error.append(error_str)
 
                 # build dataset
-                self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                self.dataset.append({
+                    'id_entity': id_entity,
+                    'svm_dataset': dataset_converted,
+                    'count_features': count_features
+                })
 
         except Exception as error:
             self.list_error.append(error)
