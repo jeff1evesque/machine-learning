@@ -133,16 +133,14 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 
 ###Web Interface
 
-This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), consisting of an HTML5 form, where users supply necessary training, or analysis information. During the training session, users provide csv, xml, or json file(s) representing the dataset(s). Upon form submission, user supplied form data is validated on the client-side (i.e. javascript), converted to a json object (python), validated on the server-side (python), stored into corresponding [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) database tables (python, mariadb), then cached into nosql (redis) when appropriate.
+The [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), or GUI implementation, allow users to implement the following sessions:
 
-The web-interface, or a GUI implementation, allow users to implement the following sessions:
+- `data_new`: store the provided dataset(s), within the implemented sql database. 
+- `data_append`: append an additional dataset(s), to an existing dataset representation, within the implemented sql database.
+- `model_generate`: using previous stored dataset(s) (from `data_new`, or `data_append`), generate a corresponding model into the implemented NoSQL datastore.
+- `model_predict`: using a previous stored model (from `model_predict`), from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
 
-- `data_new`: store a dataset as a new dataset instance, within the implemented sql database. 
-- `data_append`: append an additional dataset, to an existing dataset representation, within the implemented sql database.
-- `model_generate`: using previous stored dataset(s)(i.e. `data_new`, or `data_append`), stored in the sql database, generate a corresponding model into the implemented NoSQL datastore.
-- `model_predict`: using a previous stored model (i.e. `model_predict`) from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
-
-When using the web-interface, it is important to ensure the csv, xml, or json file(s) are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored into corresponding database tables; therefore, no model, or prediction can be made.
+When using the web-interface, it is important to ensure the csv, xml, or json file(s), representing the corresponding dataset(s), are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored into corresponding database tables; therefore, no model, or prediction can be made.
 
 The following are acceptable syntax:
 
@@ -158,10 +156,10 @@ As mentioned earlier, the web application can be accessed after subsequent `vagr
 
 The programmatic interface, or set of API, allow users to implement the following sessions:
 
-- `data_new`: store a dataset as a new dataset instance, within the implemented sql database. 
-- `data_append`: append an additional dataset, to an existing dataset representation, within the implemented sql database.
-- `model_generate`: using previous stored dataset(s)(i.e. `data_new`, or `data_append`), stored in the sql database, generate a corresponding model into the implemented NoSQL datastore.
-- `model_predict`: using a previous stored model (i.e. `model_predict`) from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
+- `data_new`: store the provided dataset(s), within the implemented sql database.
+- `data_append`: append an additional dataset(s), to an existing dataset representation, within the implemented sql database.
+- `model_generate`: using previous stored dataset(s) (from `data_new`, or `data_append`), generate a corresponding model into the implemented NoSQL datastore.
+- `model_predict`: using a previous stored model (from `model_predict`), from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
 
 A post request in python:
 
