@@ -1,43 +1,66 @@
 #!/usr/bin/python
 
-## @base_data.py
-#  This file serves as the superclass for 'data_xx.py' files.
-#
-#  Note: the term 'dataset' used throughout various comments in this file,
-#        synonymously implies the user supplied 'file upload(s)', and XML url
-#        references.
+"""@base_data
+
+This file serves as the superclass for 'data_xx.py' files.
+
+Note: the term 'dataset' used throughout various comments in this file,
+      synonymously implies the user supplied 'file upload(s)', and XML url
+      references.
+
+"""
+
 from brain.database.save_entity import Save_Entity
 from brain.database.save_feature import Save_Feature
 from brain.validator.validate_file_extension import Validate_File_Extension
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_observation import Save_Observation
 
-## Class: Base_Data, explicitly inherit 'new-style' class
-#
-#  @self.uid, the logged-in user (i.e. userid).
-#
-#  Note: this class is invoked within 'data_xx.py'
-class Base_Data(object):
 
-    ## constructor:
+class Base_Data(object):
+    """@Base_Data
+
+    This class provides an interface to save, and validate the provided
+    dataset, into logical ordering within the sql database.
+
+    @self.uid, the logged-in user (i.e. userid).
+
+    Note: this class is invoked within 'data_xx.py'.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, svm_data):
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
+
         self.flag_validate_file_extension = False
         self.observation_labels           = []
         self.list_error                   = []
         self.uid                          = 1
 
-    ## save_svm_info: save the number of features that can be expected in a given
-    #                 observation with respect to 'id_entity'.
-    #
-    #  @self.dataset[0], we assume that validation has occurred, and safe to assume
-    #      the data associated with the first dataset instance is identical to any
-    #      instance n within the overall collection of dataset(s).
-    #
-    #  @self.dataset['count_features'], is defined within the 'dataset_to_dict'
-    #      method.
-    #
-    #  Note: this method needs to execute after 'dataset_to_dict'
     def save_svm_info(self):
+        """@save_svm_info
+
+        This method saves the number of features that can be expected in a
+        given observation with respect to 'id_entity'.
+
+        @self.dataset[0], we assume that validation has occurred, and safe to
+            assume the data associated with the first dataset instance is
+            identical to any instance n within the overall collection of
+            dataset(s).
+
+        @self.dataset['count_features'], is defined within the
+            'dataset_to_dict' method.
+
+        Note: this method needs to execute after 'dataset_to_dict'
+
+        """
+
         svm_data = self.dataset[0]
         db_save  = Save_Feature({'id_entity': svm_data['id_entity'], 'count_features': svm_data['count_features']})
 
@@ -45,8 +68,13 @@ class Base_Data(object):
         db_return = db_save.save_count()
         if db_return['error']: self.list_error.append(db_return['error'])
 
-    ## validate_file_extension: validate file extension for each dataset.
     def validate_file_extension(self):
+        """@validate_file_extension
+
+        This method validates the file extension for each uploaded dataset.
+		
+        """
+
         # web-interface: validate, and restructure dataset
         if self.svm_data['data']['dataset']['file_upload']:
             validator = Validate_File_Extension(self.svm_data, self.svm_session)
@@ -64,17 +92,27 @@ class Base_Data(object):
                 self.list_error.append(self.svm_data['error'])
                 self.flag_validate_file_extension = True
 
-    ## validate_id: validate session id as positive integer.
     def validate_id(self, session_id):
+        """@validate_id
+
+        This method validates if the session id, is a positive integer.
+
+        """
+
         try:
             if not int(session_id) > 0:
               self.list_error.append('supplied \'session_id\' ' + session_id + ' is not a positive integer')
         except Exception, error:
             self.list_error.append(str(error))
 
-    ## save_svm_entity: save the current entity into the database, then return
-    #                   the corresponding entity id.
     def save_svm_entity(self, session_type):
+        """@save_svm_entity
+
+        This method saves the current entity into the database, then returns
+        the corresponding entity id.
+
+        """
+
         svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': self.uid, 'id_entity': None}
         db_save    = Save_Entity(svm_entity, session_type)
 
@@ -90,8 +128,14 @@ class Base_Data(object):
         elif db_return['status'] and session_type == 'data_new':
             return {'status': True, 'id': db_return['id'], 'error': None}
 
-    ## save_svm_dataset: save each dataset element into a database table.
     def save_svm_dataset(self):
+        """@save_svm_dataset
+
+        This method saves each dataset element (independent variable value)
+        into the sql database.
+
+        """
+
         for data in self.dataset:
             for dataset in data['svm_dataset']:
                 db_save = Save_Feature({'svm_dataset': dataset, 'id_entity': data['id_entity']})
@@ -100,15 +144,21 @@ class Base_Data(object):
                 db_return = db_save.save_feature()
                 if db_return['error']: self.list_error.append(db_return['error'])
 
-    ## save_observation_label: save the list of unique independent variable labels
-    #                          from a supplied session (entity id) into the database.
-    #
-    #  @self.observation_labels, list of features (independent variables), defined
-    #      after invoking the 'dataset_to_dict' method.
-    #
-    #  @session_id, the corresponding returned session id from invoking the
-    #      'save_svm_entity' method.
     def save_observation_label(self, session_type, session_id):
+        """save_observation_label
+
+        This method saves the list of unique independent variable labels,
+        which can be expected in any given observation, into the sql
+        database. This list of labels, is predicated on a supplied session
+        id (entity id).
+
+        @self.observation_labels, list of features (independent variables),
+            defined after invoking the 'dataset_to_dict' method.
+
+        @session_id, the corresponding returned session id from invoking the
+            'save_svm_entity' method.
+        """
+
         if len(self.observation_labels) > 0:
             for label_list in self.observation_labels:
                 for label in label_list:
@@ -118,18 +168,24 @@ class Base_Data(object):
                     db_return = db_save.save_label()
                     if not db_return['status']: self.list_error.append(db_return['error'])
 
-    ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
-    #                   dict object.
-    #
-    #  @flag_convert, when true, indicates the file-upload file extension passed
-    #      validation, and returned unique file(s) (redundancies removed).
-    #
-    #  @flag_append, when false, indicates the neccessary 'self.dataset' was
-    #      not properly defined, causing this method to 'return', which
-    #      essentially stops the execution of the current session.
-    #
-    #  @index_count, used to 'check label consistent'.
     def dataset_to_dict(self, id_entity):
+        """@dataset_to_dict
+
+        This method converts the supplied csv, or xml file upload(s) to a
+            uniform dict object.
+
+        @flag_convert, when true, indicates the file-upload file extension
+            passed validation, and returned unique file(s) (redundancies
+            removed).
+
+        @flag_append, when false, indicates the neccessary 'self.dataset' was
+            not properly defined, causing this method to 'return', which
+            essentially stops the execution of the current session.
+
+        @index_count, used to 'check label consistent'.
+
+        """
+
         flag_convert = False
         flag_append  = True
         index_count  = 0
@@ -237,8 +293,14 @@ class Base_Data(object):
             print error
             return False
 
-    # get_errors: get all current errors.
     def get_errors(self):
+        """get_errors
+
+        This method gets all current errors. associated with this class
+        instance.
+
+        """
+
         if len(self.list_error) > 0:
             return self.list_error
         else:
