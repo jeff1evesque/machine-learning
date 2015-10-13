@@ -167,7 +167,7 @@ A post request, can be implement in python, as follows:
 import requests
 
 endpoint_url = 'http://localhost:5000/load-data/'
-headers      = headers={'Content-Type': 'application/json'}
+headers = headers={'Content-Type': 'application/json'}
 
 requests.post(endpoint_url, headers=headers, data=json_string_here)
 ```
