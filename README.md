@@ -137,8 +137,8 @@ The [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master
 
 - `data_new`: store the provided dataset(s), within the implemented sql database. 
 - `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
-- `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented NoSQL datastore.
-- `model_predict`: using a previous stored model (from an earlier `model_predict` sesion), from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
+- `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
+- `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
 
 When using the web-interface, it is important to ensure the csv, xml, or json file(s), representing the corresponding dataset(s), are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored into corresponding database tables; therefore, no model, or prediction can be made.
 
@@ -154,12 +154,12 @@ As mentioned earlier, the web application can be accessed after subsequent `vagr
 
 ###Programmatic Interface
 
-The programmatic interface, or set of API, allow users to implement the following sessions:
+The programmatic-interface, or set of API, allow users to implement the following sessions:
 
 - `data_new`: store the provided dataset(s), within the implemented sql database. 
 - `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
-- `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented NoSQL datastore.
-- `model_predict`: using a previous stored model (from an earlier `model_predict` sesion), from the implemented NoSQL datastore, along with user supplied values, generate a corresponding prediction.
+- `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
+- `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
 
 A post request, can be implement in python, as follows:
 
