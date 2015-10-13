@@ -39,9 +39,9 @@ class Base_Data(object):
         """
 
         self.flag_validate_file_extension = False
-        self.observation_labels           = []
-        self.list_error                   = []
-        self.uid                          = 1
+        self.observation_labels = []
+        self.list_error = []
+        self.uid = 1
 
     def save_svm_info(self):
         """@save_svm_info
@@ -62,7 +62,7 @@ class Base_Data(object):
         """
 
         svm_data = self.dataset[0]
-        db_save  = Save_Feature({
+        db_save = Save_Feature({
             'id_entity': svm_data['id_entity'],
             'count_features': svm_data['count_features']
         })
@@ -126,10 +126,10 @@ class Base_Data(object):
             'uid': self.uid,
             'id_entity': None
         }
-        db_save    = Save_Entity(svm_entity, session_type)
+        db_save = Save_Entity(svm_entity, session_type)
 
         # save dataset element
-        db_return  = db_save.save()
+        db_return = db_save.save()
 
         # return error(s)
         if not db_return['status']:
@@ -210,8 +210,8 @@ class Base_Data(object):
         """
 
         flag_convert = False
-        flag_append  = True
-        index_count  = 0
+        flag_append = True
+        index_count = 0
         self.dataset = []
 
         try:
@@ -229,7 +229,7 @@ class Base_Data(object):
                             # conversion
                             dataset_converter = Convert_Upload(val['file'])
                             dataset_converted = dataset_converter.csv_to_dict()
-                            count_features    = dataset_converter.get_feature_count()
+                            count_features = dataset_converter.get_feature_count()
 
                             # check label consistency, assign labels
                             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
@@ -252,7 +252,7 @@ class Base_Data(object):
                             # conversion
                             dataset_converter = Convert_Upload(val['file'])
                             dataset_converted = dataset_converter.json_to_dict()
-                            count_features    = dataset_converter.get_feature_count()
+                            count_features = dataset_converter.get_feature_count()
 
                             # check label consistency, assign labels
                             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
@@ -275,7 +275,7 @@ class Base_Data(object):
                             # conversion
                             dataset_converter = Convert_Upload(val['file'])
                             dataset_converted = dataset_converter.xml_to_dict()
-                            count_features    = dataset_converter.get_feature_count()
+                            count_features = dataset_converter.get_feature_count()
 
                             # check label consistency, assign labels
                             if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
@@ -298,11 +298,11 @@ class Base_Data(object):
             # programmatic-interface
             elif self.response_file_extension_validation['dataset']['json_string']:
                 # conversion
-                dataset_json      = self.response_file_extension_validation['dataset']['json_string']
+                dataset_json = self.response_file_extension_validation['dataset']['json_string']
                 dataset_converter = Convert_Upload(dataset_json, True)
                 dataset_converted = dataset_converter.json_to_dict()
-                count_features    = dataset_converter.get_feature_count()
-                features          = dataset_json.values()[0]
+                count_features = dataset_converter.get_feature_count()
+                features = dataset_json.values()[0]
 
                 # some observations have multiple instances grouped together
                 if isinstance(features, list):
