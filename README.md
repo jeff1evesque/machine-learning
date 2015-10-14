@@ -174,7 +174,7 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
 
 **Note:** the above `post` request, can be implemented in a different language, respectively.
 
-The following outlines what the `data` structure should be, for the above `post` implementation:
+The following outlines what the `data` attribute should be, for the above `post` implementation:
 
 - [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-new.json)
 - [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-append.json)
