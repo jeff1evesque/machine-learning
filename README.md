@@ -133,9 +133,14 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 
 ###Web Interface
 
-This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/tree/master/templates/index.html), consisting of an HTML5 form, where users supply necessary training, or analysis information. During the training session, users provide csv, xml, or json file(s) representing the dataset(s). Upon form submission, user supplied form data is validated on the client-side (i.e. javascript), converted to a json object (python), validated on the server-side (python), stored into corresponding [EAV](https://en.wikipedia.org/wiki/Entity%E2%80%93attribute%E2%80%93value_model) database tables (python, mariadb), then cached into nosql (redis) when appropriate.
+The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html), or GUI implementation, allow users to implement the following sessions:
 
-When using the web-interface, it is important to ensure the csv, xml, or json file(s) are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored into corresponding database tables; therefore, no model, or prediction can be made.
+- `data_new`: store the provided dataset(s), within the implemented sql database. 
+- `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
+- `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
+- `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
+
+When using the web-interface, it is important to ensure the csv, xml, or json file(s), representing the corresponding dataset(s), are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored into corresponding database tables; therefore, no model, or prediction can be made.
 
 The following are acceptable syntax:
 
@@ -149,8 +154,53 @@ As mentioned earlier, the web application can be accessed after subsequent `vagr
 
 ###Programmatic Interface
 
-Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
+The programmatic-interface, or set of API, allow users to implement the following sessions:
 
+- `data_new`: store the provided dataset(s), within the implemented sql database. 
+- `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
+- `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
+- `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
+
+A post request, can be implement in python, as follows:
+
+```python
+import requests
+
+endpoint_url = 'http://localhost:5000/load-data/'
+headers = {'Content-Type': 'application/json'}
+
+requests.post(endpoint_url, headers=headers, data=json_string_here)
+```
+
+**Note:** the above `post` request, can be implemented in a different language, respectively.
+
+The following outlines what the `data` attribute should be, for the above `post` implementation:
+
+- [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-new.json)
+- [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-append.json)
+- [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-generate.json)
+- [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-predict.json)
+
+**Note:** the content of each of the above files, can substituted for the above `data` attribute.
+
+####Data Attributes
+
+The following (non-exhaustive) properties define the above implemented `data` attribute:
+
+- `prediction_value[]`: an array of feature values, used to generate a corresponding prediction value.  The size of this array, varies depending on the number of features that can be expected for the generated model.
+- `svm_model_id`: the numeric id value, of the generated model in the nosql datastore.
+- `svm_model_type`: corresponds to the desired model type, which can be one of the following:
+  - `classification`
+  - `regression`
+- `svm_session_id`: the numeric id value, that represents the dataset stored in the sql database.
+- `svm_session`: corresponds to one of the following session types:
+  - `data_new`
+  - `data_append`
+  - `model_generate`
+  - `model_predict`
+- `svm_dataset_type` corresponds to one of the following dataset types:
+  - `json_string`: indicate that the dataset is being sent via a `post` request
+  
 ###Test Scripts
 
 Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
