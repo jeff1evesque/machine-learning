@@ -11,7 +11,7 @@ untouched, and formatted within 'convert_upload.py'.
 class Restructure_Data(object):
     """@Restructure_Data
 
-    This class provides methods to restructure the supplied data into a
+    This class provides an interface to restructure the supplied data into a
     consistent structure, which allows successive parsers to implement
     corresponding logic.
 
