@@ -53,7 +53,8 @@ class Convert_Upload(object):
         This method converts the supplied csv file-object to a python
         dictionary.
 
-        @observation_label, is a list containing dependent variable labels.
+        @list_observation_label, is a list containing dependent variable
+            labels.
 
         Note: we use the 'Universal Newline Support' with the 'U" parameter
             when opening 'self.svm_data'. This allows newlines to be
@@ -151,7 +152,8 @@ class Convert_Upload(object):
         This method converts the supplied json file-object to a python
         dictionary.
 
-        @observation_label, is a list containing dependent variable labels.
+        @list_observation_label, is a list containing dependent variable
+            labels.
 
         """
 
@@ -211,7 +213,8 @@ class Convert_Upload(object):
         This method converts the supplied xml file-object to a python
         dictionary.
 
-        @observation_label, is a list containing dependent variable labels.
+        @list_observation_label, is a list containing dependent variable
+            labels.
 
         """
 
