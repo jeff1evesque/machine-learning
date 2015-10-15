@@ -72,7 +72,11 @@ class Convert_Upload(object):
         indep_variable_label = []
 
         # open temporary 'csvfile' reader object
-        dataset_reader = csv.reader(self.svm_data, delimiter=' ', quotechar='|')
+        dataset_reader = csv.reader(
+            self.svm_data,
+            delimiter=' ',
+            quotechar='|'
+        )
 
         # iterate first row of csvfile
         for row in islice(dataset_reader, 0, 1):
@@ -127,7 +131,11 @@ class Convert_Upload(object):
                     print error
                     return False
 
-                list_dataset.append({'dep_variable_label': observation_label[dep_index], 'indep_variable_label': indep_variable_label[indep_index], 'indep_variable_value': value})
+                list_dataset.append({
+                    'dep_variable_label': observation_label[dep_index],
+                    'indep_variable_label': indep_variable_label[indep_index],
+                    'indep_variable_value': value
+                })
 
         # close file, save observation labels, and return
         self.svm_data.close()
@@ -157,7 +165,11 @@ class Convert_Upload(object):
             if type(dataset[dep_variable]) == list:
                 for observation in dataset[dep_variable]:
                     for indep_variable_label, indep_variable_value in observation.items():
-                        list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+                        list_dataset.append({
+                            'dep_variable_label': dep_variable,
+                            'indep_variable_label': indep_variable_label,
+                            'indep_variable_value': indep_variable_value
+                        })
 
                     # generalized feature count in an observation
                     if not self.count_features:
@@ -166,7 +178,11 @@ class Convert_Upload(object):
             # dependent variable with multiple observations
             elif type(dataset[dep_variable]) == dict:
                 for indep_variable_label, indep_variable_value in dataset[dep_variable].items():
-                    list_dataset.append({'dep_variable_label': dep_variable, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+                    list_dataset.append({
+                        'dep_variable_label': dep_variable,
+                        'indep_variable_label': indep_variable_label,
+                        'indep_variable_value': indep_variable_value
+                    })
 
                 # generalized feature count in an observation
                 if not self.count_features:
@@ -230,7 +246,11 @@ class Convert_Upload(object):
                     print list_error_value
                     return None
                 else:
-                    list_dataset.append({'dep_variable_label': dep_variable_label, 'indep_variable_label': indep_variable_label, 'indep_variable_value': indep_variable_value})
+                    list_dataset.append({
+                        'dep_variable_label': dep_variable_label,
+                        'indep_variable_label': indep_variable_label,
+                        'indep_variable_value': indep_variable_value
+                    })
 
             # generalized feature count in an observation
             if not self.count_features:
