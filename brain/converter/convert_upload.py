@@ -42,10 +42,10 @@ class Convert_Upload(object):
 
         """
 
-        self.svm_data           = svm_data
-        self.is_json            = is_json
+        self.svm_data = svm_data
+        self.is_json = is_json
         self.observation_labels = None
-        self.count_features     = None
+        self.count_features = None
 
     def csv_to_dict(self):
         """@csv_to_dict
@@ -67,8 +67,8 @@ class Convert_Upload(object):
 
         """
 
-        list_dataset         = []
-        observation_label    = []
+        list_dataset = []
+        observation_label = []
         indep_variable_label = []
 
         # open temporary 'csvfile' reader object
@@ -144,7 +144,7 @@ class Convert_Upload(object):
 
         """
 
-        list_dataset      = []
+        list_dataset = []
         observation_label = []
 
         if self.is_json:
@@ -193,7 +193,7 @@ class Convert_Upload(object):
 
         """
 
-        list_dataset      = []
+        list_dataset = []
         observation_label = []
 
         # convert xml file to python 'dict'
