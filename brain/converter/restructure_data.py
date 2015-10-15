@@ -109,7 +109,7 @@ class Restructure_Data(object):
 
         # build input structure
         data = {'settings': formatted_settings, 'dataset': dataset}
- 
+
         # return new structured data
         return {'data': data, 'error': None}
 
