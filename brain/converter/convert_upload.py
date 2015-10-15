@@ -1,8 +1,11 @@
 #!/usr/bin/python
 
-## @convert_upload.py
-#  This file contains methods required to convert an svm dataset, into a
-#      python dictionary.
+"""@convert_upload.py
+
+This file restructures only the supplied dataset(s).
+
+"""
+
 import csv
 import json
 import xmltodict
@@ -10,34 +13,60 @@ from collections import defaultdict
 from itertools import islice
 from brain.validator.validate_dataset import Validate_Dataset
 
-## Class: Convert_Upload, explicitly inherit 'new-style' class.
-#
-#  Note: this class is invoked within 'base_data.py'
-class Convert_Upload(object):
 
-    ## constructor
-    #
-    #  @is_json, flag indicating 'svm_data' is a json string.
+class Convert_Upload(object):
+    """@Convert_Upload
+
+    This class provides an interface to convert the supplied dataset(s),
+    regardless of format (csv, json, xml), into a uniform dictionary object.
+
+    Also, this class has the capacity of returning the following generalized
+    attributes, that can be expected on any given observation, within the
+    specified dataset:
+	
+        - observation labels: unique list of (independent variable) labels,
+              expected on any given observation instance.
+        - feature count: unique count of features, expected on any given
+              observation instance.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, svm_data, is_json=False):
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        @is_json, flag indicating 'svm_data' is a json string.
+
+        """
+
         self.svm_data           = svm_data
         self.is_json            = is_json
         self.observation_labels = None
         self.count_features     = None
 
-    ## csv_to_dict: convert csv file-object to a python dictionary.
-    #
-    #  @observation_label, is a list containing dependent variable labels.
-    #
-    #  Note: we use the 'Universal Newline Support' with the 'U" parameter
-    #        when opening 'self.svm_data'. This allows newlines to be
-    #        understood regardless, if the newline character was created in
-    #        osx, windows, or linux.
-    #
-    #  Note: since 'row' is a list, with one comma-delimited string element,
-    #        the following line is required in this method:
-    #
-    #            row = row[0].split(',')
     def csv_to_dict(self):
+        """@csv_to_dict
+
+        This method converts the supplied csv file-object to a python
+        dictionary.
+
+        @observation_label, is a list containing dependent variable labels.
+
+        Note: we use the 'Universal Newline Support' with the 'U" parameter
+            when opening 'self.svm_data'. This allows newlines to be
+            understood regardless, if the newline character was created in
+            osx, windows, or linux.
+    
+        Note: since 'row' is a list, with one comma-delimited string element,
+            the following line is required in this method:
+    
+                row = row[0].split(',')
+
+        """
+
         list_dataset         = []
         observation_label    = []
         indep_variable_label = []
@@ -105,10 +134,16 @@ class Convert_Upload(object):
         self.observation_labels = observation_label
         return list_dataset
 
-    ## json_to_dict: convert json file-object to a python dictionary.
-    #
-    #  @observation_label, is a list containing dependent variable labels.
     def json_to_dict(self):
+        """@json_to_dict
+
+        This method converts the supplied json file-object to a python
+        dictionary.
+
+        @observation_label, is a list containing dependent variable labels.
+
+        """
+
         list_dataset      = []
         observation_label = []
 
@@ -148,10 +183,16 @@ class Convert_Upload(object):
         self.observation_labels = observation_label
         return list_dataset
 
-    ## xml_to_dict: convert xml file-object to a python dictionary.
-    #
-    #  @observation_label, is a list containing dependent variable labels.
     def xml_to_dict(self):
+        """@xml_to_dict
+
+        This method converts the supplied xml file-object to a python
+        dictionary.
+
+        @observation_label, is a list containing dependent variable labels.
+
+        """
+
         list_dataset      = []
         observation_label = []
 
@@ -200,13 +241,24 @@ class Convert_Upload(object):
         self.observation_labels = observation_label
         return list_dataset
 
-    ## get_observation_labels: returns a list of independent variable labels. Since
-    #                          both 'csv_to_dict', and 'xml_to_dict' defines the
-    #                          class variable this method returns, either method
-    #                          needs to be called before this one.
     def get_observation_labels(self):
+        """@get_observation_labels
+
+        This method returns a unique list of (independent variable) labels
+        that can be expected on any given observation instance. Since both
+        'csv_to_dict', and 'xml_to_dict' defines the class variable this
+        method returns, either method needs to be called before this one.
+
+        """
+
         return self.observation_labels
 
-    ## get_feature_count: return the generalied feature count for an observation
     def get_feature_count(self):
+        """@get_feature_count
+
+        This method returns the unique count of features that can be expected
+        on any given observation instance.
+
+        """
+
         return self.count_features
