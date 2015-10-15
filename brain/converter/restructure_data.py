@@ -2,7 +2,7 @@
 
 """@restructure_data
 
-This file restructures the submitted data. But, the dataset, it left
+This file restructures the supplied data. But, the dataset is left
 untouched, and formatted within 'convert_upload.py'.
 
 """
