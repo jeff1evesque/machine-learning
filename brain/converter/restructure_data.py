@@ -105,7 +105,8 @@ class Restructure_Data(object):
                 self.list_error.append(error)
                 return {'data': None, 'error': self.list_error}
 
-        else: dataset = None
+        else:
+            dataset = None
 
         # build input structure
         data = {'settings': formatted_settings, 'dataset': dataset}
