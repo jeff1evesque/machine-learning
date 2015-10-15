@@ -26,11 +26,11 @@ class Restructure_Data(object):
 
         """
 
-        self.settings   = settings
-        self.dataset    = dataset
+        self.settings = settings
+        self.dataset = dataset
         self.list_error = []
 
-        self.type_web   = "<class 'werkzeug.datastructures.ImmutableMultiDict'>"
+        self.type_web = "<class 'werkzeug.datastructures.ImmutableMultiDict'>"
         self.type_programmatic = "<type 'dict'>"
 
     def restructure(self):
@@ -43,7 +43,7 @@ class Restructure_Data(object):
 
         # local variables
         formatted_settings = {}
-        formatted_files    = []
+        formatted_files = []
 
         # restructure settings
         try:
