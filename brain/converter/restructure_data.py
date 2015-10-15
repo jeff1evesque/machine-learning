@@ -60,9 +60,7 @@ class Restructure_Data(object):
                         else:
                             # step case 1
                             if type(format_current) == unicode:
-                                format_current = [
-                                    format_current = [format_current]
-                                ]
+                                format_current = [format_current]
                                 format_current.append(lvalue)
                             # step case n
                             elif type(format_current) == list:
