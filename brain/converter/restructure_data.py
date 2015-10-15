@@ -104,5 +104,7 @@ class Restructure_Data(object):
 
         """
 
-        if len(self.list_error) > 0: return {'error': self.list_error}
-        else: return {'error': None}
+        if len(self.list_error) > 0:
+            return {'error': self.list_error}
+        else:
+            return {'error': None}
