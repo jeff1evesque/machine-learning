@@ -48,22 +48,25 @@ class Restructure_Data(object):
         # restructure settings
         try:
             for key, value in self.settings.items():
+                # variables
+                format_current = formatted_settings[key.lower()]
+
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
                     for lvalue in self.settings.getlist(key):
                         # base case
                         if key.lower() not in formatted_settings:
-                            formatted_settings[key.lower()] = lvalue.lower()
+                            format_current = lvalue.lower()
                         else:
                             # step case 1
-                            if type(formatted_settings[key.lower()]) == unicode:
-                                formatted_settings[key.lower()] = [
-                                    formatted_settings[key.lower()]
+                            if type(format_current) == unicode:
+                                format_current = [
+                                    format_current = [format_current]
                                 ]
-                                formatted_settings[key.lower()].append(lvalue)
+                                format_current.append(lvalue)
                             # step case n
-                            elif type(formatted_settings[key.lower()]) == list:
-                                formatted_settings[key.lower()].append(lvalue)
+                            elif type(format_current) == list:
+                                format_current.append(lvalue)
 
                 # programmatic-interface: 'isinstance' did not work
                 elif str(type(self.settings)) == self.type_programmatic:
@@ -85,7 +88,8 @@ class Restructure_Data(object):
                         })
 
                     dataset = {
-                        'upload_quantity': len(self.dataset.getlist('svm_dataset[]')),
+                        'upload_quantity':
+                            len(self.dataset.getlist('svm_dataset[]')),
                         'file_upload': formatted_files, 'json_string': None
                     }
 
