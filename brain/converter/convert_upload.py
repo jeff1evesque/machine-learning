@@ -68,8 +68,8 @@ class Convert_Upload(object):
         """
 
         list_dataset = []
-        observation_label = []
-        indep_variable_label = []
+        list_observation_label = []
+        list_feature_label = []
 
         # open temporary 'csvfile' reader object
         dataset_reader = csv.reader(
@@ -92,7 +92,7 @@ class Convert_Upload(object):
                     print list_error
                     return None
                 else:
-                    indep_variable_label.append(value)
+                    list_feature_label.append(value)
 
         # iterate all rows of csvfile
         for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
@@ -108,7 +108,7 @@ class Convert_Upload(object):
                     print list_error
                     return None
                 else:
-                    observation_label.append(value)
+                    list_observation_label.append(value)
 
             # generalized feature count in an observation
             row_indep_variable = row[0].split(',')
@@ -116,7 +116,10 @@ class Convert_Upload(object):
                 self.count_features = len(row_indep_variable) - 1
 
             # iterate each column in a given row
-            for indep_index, value in enumerate(islice(row_indep_variable, 1, None)):
+            for indep_index, value in enumerate(
+                islice(row_indep_variable, 1, None)
+            ):
+
                 try:
                     validate = Validate_Dataset(value)
                     validate.validate_value()
@@ -132,14 +135,14 @@ class Convert_Upload(object):
                     return False
 
                 list_dataset.append({
-                    'dep_variable_label': observation_label[dep_index],
-                    'indep_variable_label': indep_variable_label[indep_index],
+                    'dep_variable_label': list_observation_label[dep_index],
+                    'indep_variable_label': list_feature_label[indep_index],
                     'indep_variable_value': value
                 })
 
         # close file, save observation labels, and return
         self.svm_data.close()
-        self.observation_labels = observation_label
+        self.observation_labels = list_observation_label
         return list_dataset
 
     def json_to_dict(self):
@@ -153,22 +156,22 @@ class Convert_Upload(object):
         """
 
         list_dataset = []
-        observation_label = []
+        list_observation_label = []
 
         if self.is_json:
             dataset = self.svm_data
         else:
             dataset = json.load(self.svm_data)
 
-        for dep_variable in dataset:
+        for observation in dataset:
             # dependent variable with single observation
-            if type(dataset[dep_variable]) == list:
-                for observation in dataset[dep_variable]:
-                    for indep_variable_label, indep_variable_value in observation.items():
+            if type(dataset[observation]) == list:
+                for observation in dataset[observation]:
+                    for feature_label, feature_value in observation.items():
                         list_dataset.append({
-                            'dep_variable_label': dep_variable,
-                            'indep_variable_label': indep_variable_label,
-                            'indep_variable_value': indep_variable_value
+                            'dep_variable_label': observation,
+                            'indep_variable_label': feature_label,
+                            'indep_variable_value': feature_value
                         })
 
                     # generalized feature count in an observation
@@ -176,27 +179,27 @@ class Convert_Upload(object):
                         self.count_features = len(observation)
 
             # dependent variable with multiple observations
-            elif type(dataset[dep_variable]) == dict:
-                for indep_variable_label, indep_variable_value in dataset[dep_variable].items():
+            elif type(dataset[observation]) == dict:
+                for feature_label, feature_value in dataset[observation].items():
                     list_dataset.append({
-                        'dep_variable_label': dep_variable,
-                        'indep_variable_label': indep_variable_label,
-                        'indep_variable_value': indep_variable_value
+                        'dep_variable_label': observation,
+                        'indep_variable_label': feature_label,
+                        'indep_variable_value': feature_value
                     })
 
                 # generalized feature count in an observation
                 if not self.count_features:
-                    self.count_features = len(dataset[dep_variable])
+                    self.count_features = len(dataset[observation])
 
             # list of observation label
-            observation_label.append(dep_variable)
+            list_observation_label.append(observation)
 
         # close file
         if not self.is_json:
             self.svm_data.close()
 
         # save observation labels, and return
-        self.observation_labels = observation_label
+        self.observation_labels = list_observation_label
         return list_dataset
 
     def xml_to_dict(self):
@@ -210,16 +213,16 @@ class Convert_Upload(object):
         """
 
         list_dataset = []
-        observation_label = []
+        list_observation_label = []
 
         # convert xml file to python 'dict'
         dataset = xmltodict.parse(self.svm_data)
 
         # build 'list_dataset'
-        for dep_variable in dataset['dataset']['observation']:
-            dep_variable_label = dep_variable['dependent-variable']
+        for observation in dataset['dataset']['observation']:
+            observation_label = observation['dependent-variable']
 
-            validate = Validate_Dataset(dep_variable_label)
+            validate = Validate_Dataset(observation_label)
             validate.validate_label()
 
             list_error = validate.get_errors()
@@ -227,14 +230,14 @@ class Convert_Upload(object):
                 print list_error
                 return None
             else:
-                observation_label.append(dep_variable_label)
+                list_observation_label.append(observation_label)
 
-            for indep_variable in dep_variable['independent-variable']:
-                indep_variable_label = indep_variable['label']
-                indep_variable_value = indep_variable['value']
+            for feature in observation['independent-variable']:
+                feature_label = feature['label']
+                feature_value = feature['value']
 
-                validate_label = Validate_Dataset(indep_variable_label)
-                validate_value = Validate_Dataset(indep_variable_value)
+                validate_label = Validate_Dataset(feature_label)
+                validate_value = Validate_Dataset(feature_value)
 
                 validate_label.validate_label()
                 validate_value.validate_value()
@@ -247,18 +250,18 @@ class Convert_Upload(object):
                     return None
                 else:
                     list_dataset.append({
-                        'dep_variable_label': dep_variable_label,
-                        'indep_variable_label': indep_variable_label,
-                        'indep_variable_value': indep_variable_value
+                        'dep_variable_label': observation_label,
+                        'indep_variable_label': feature_label,
+                        'indep_variable_value': feature_value
                     })
 
             # generalized feature count in an observation
             if not self.count_features:
-                self.count_features = len(dep_variable['independent-variable'])
+                self.count_features = len(observation['independent-variable'])
 
         # close file, save observation labels, and return
         self.svm_data.close()
-        self.observation_labels = observation_label
+        self.observation_labels = list_observation_label
         return list_dataset
 
     def get_observation_labels(self):
