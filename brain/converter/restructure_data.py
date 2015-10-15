@@ -1,15 +1,31 @@
 #!/usr/bin/python
 
-## @restructure_data.py
-#  This file contains methods needed to correctly reformat input data.
+"""@restructure_data
 
-## Class: Restructure_Data, explicitly inherit 'new-style class
-#
-#  Note: this class is invoked within 'views.py'
+This file restructures the submitted data. But, the dataset, it left
+untouched, and formatted within 'convert_upload.py'.
+
+"""
+
+
 class Restructure_Data(object):
+    """@Restructure_Data
 
-    ## constructor
+    This class provides methods to restructure the supplied data into a
+    consistent structure, which allows successive parsers to implement
+    corresponding logic.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, settings, dataset=None):
+        """@__init__
+
+        This constructor is responsible for defining class variables.
+
+        """
+
         self.settings   = settings
         self.dataset    = dataset
         self.list_error = []
@@ -17,8 +33,13 @@ class Restructure_Data(object):
         self.type_web   = "<class 'werkzeug.datastructures.ImmutableMultiDict'>"
         self.type_programmatic = "<type 'dict'>"
 
-    ## restructure: restructure input data
     def restructure(self):
+        """@restructure
+
+        This method restructures the supplied data, into a consistent
+        dictionary format. The nested supplied dataset, is left untouched.
+
+        """
 
         # local variables
         formatted_settings = {}
@@ -76,7 +97,12 @@ class Restructure_Data(object):
         # return new structured data
         return {'data': data, 'error': None}
 
-    ## get_errors: returns all errors corresponding to this class instance
     def get_errors(self):
+        """@get_errors
+
+        This method returns all errors pertaining to the instantiated class.
+
+        """
+
         if len(self.list_error) > 0: return {'error': self.list_error}
         else: return {'error': None}
