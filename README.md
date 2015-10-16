@@ -31,7 +31,7 @@ Donations are very appreciated.  Smaller donations, could fund a latté, during 
 - server(s): this could be made open to the public, and implementing machine-learning.
 - peripheral device(s): these device(s) could connect to the machine-learning server(s):
   - [raspberry pi](https://www.raspberrypi.org/): these devices could communicate to the machine-learning server(s), or *peripheral device(s)*.
-  - [xbee chip](www.digi.com/lp/xbee): these chips could implement the [zigbee](http://www.zigbee.org/) wireless protocol.
+  - [xbee chip](www.digi.com/lp/xbee): these chips could implement the [zigbee](http://www.zigbee.org/) wireless protocol, allows peripheral devices to stay connected.
   - [sensor](http://www.adafruit.com/categories/35): multiple types of sensors could be connected via the [zigbee](http://www.zigbee.org/) wireless protocol to other sensor(s), raspberry pi(s), or directly to the machine-learning server(s).
 
 ## Preconfiguration
