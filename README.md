@@ -26,6 +26,12 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 ###Overview
 
+###Support
+
+Donations may help fund the cup of coffee, during a late night meddling code.
+
+[![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque)
+
 ## Preconfiguration
 
 This project implements puppets [r10k](https://github.com/puppetlabs/r10k) module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile` (already defined), which includes the following syntax:
