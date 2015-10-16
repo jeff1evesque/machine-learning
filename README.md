@@ -28,8 +28,8 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 Donations are very appreciated.  Smaller donations, could fund a latté, during a late night meddling code.  While larger donations, could fund further research, by assisting the cost for the following:
 
-- server: this could potentially be made open to the public, and implementing machine learning
-- peripheral device(s): potential device(s) could connect to the machine-learning server
+- server(s): this could potentially be made open to the public, and implementing machine learning.
+- peripheral device(s): these device(s) could connect to the machine-learning server:
   - [raspberry pi](https://www.raspberrypi.org/): these devices could communicate to the machine-learning server, or *peripheral device(s)*.
   - [xbee chip](www.digi.com/lp/xbee): these chips could implement the [zigbee](http://www.zigbee.org/) wireless protocol.
   - [sensor](http://www.adafruit.com/categories/35): multiple types of sensors could be connected via the [zigbee](http://www.zigbee.org/) wireless protocol to other sensors, raspberry pi, or directly to the machine-learning server.
