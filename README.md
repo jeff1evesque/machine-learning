@@ -1,8 +1,6 @@
 Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg)](https://travis-ci.org/jeff1evesque/machine-learning)
 ================
 
-##Overview
-
 ###Definition
 
 Machine learning is a [subfield](http://en.wikipedia.org/wiki/Academic_disciplines) of [computer science](http://en.wikipedia.org/wiki/Computer_science) (CS) and [artificial intelligence](http://en.wikipedia.org/wiki/Artificial_intelligence) (AI) that deals with the construction and study of systems that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than follow only explicitly programmed instructions.
