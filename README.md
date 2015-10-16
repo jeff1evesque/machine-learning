@@ -32,9 +32,9 @@ Donations are very much appreciated.  Smaller donations, would fund a latte duri
 
 - server: this could potentially be made open to the public, and implementing machine learning
 - peripheral device(s): potential device(s) could connect to the machine learning server
-  - raspberry pi
-  - zigbee chip
-  - sensors
+  - [raspberry pi](https://www.raspberrypi.org/)
+  - [xbee chip](www.digi.com/lp/xbee): these chips could implement the [zigbee](http://www.zigbee.org/) wireless protocol.
+  - [sensors](http://www.adafruit.com/categories/35)
 
 ## Preconfiguration
 
