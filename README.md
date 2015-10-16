@@ -1,6 +1,8 @@
 Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg)](https://travis-ci.org/jeff1evesque/machine-learning)
 ================
 
+##Overview
+
 ###Definition
 
 Machine learning is a [subfield](http://en.wikipedia.org/wiki/Academic_disciplines) of [computer science](http://en.wikipedia.org/wiki/Computer_science) (CS) and [artificial intelligence](http://en.wikipedia.org/wiki/Artificial_intelligence) (AI) that deals with the construction and study of systems that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than follow only explicitly programmed instructions.
@@ -23,8 +25,6 @@ Applications for machine learning include:
 In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning) models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification) and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis). 
 
 - http://en.wikipedia.org/wiki/Support_vector_machine
-
-###Overview
 
 ###Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 
