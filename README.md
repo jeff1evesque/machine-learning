@@ -28,7 +28,13 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 ###Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 
-Donations may help fund the cup of coffee, during a late night meddling code.
+Donations are very much appreciated.  Smaller donations, would fund a latte during a late night meddling code.  Larger donations, could fund research for the following:
+
+- server: this could potentially be made open to the public, and implementing machine learning
+- peripheral device(s): potential device(s) could connect to the machine learning server
+  - raspberry pi
+  - zigbee chip
+  - sensors
 
 ## Preconfiguration
 
