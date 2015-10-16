@@ -28,7 +28,7 @@ In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support ve
 
 Donations are very appreciated.  Smaller donations, could fund a latté, during a late night meddling code.  While larger donations, could fund further research, by assisting the cost for the following:
 
-- server(s): this could potentially be made open to the public, and implementing machine learning.
+- server(s): this could be made open to the public, and implementing machine-learning.
 - peripheral device(s): these device(s) could connect to the machine-learning server:
   - [raspberry pi](https://www.raspberrypi.org/): these devices could communicate to the machine-learning server, or *peripheral device(s)*.
   - [xbee chip](www.digi.com/lp/xbee): these chips could implement the [zigbee](http://www.zigbee.org/) wireless protocol.
