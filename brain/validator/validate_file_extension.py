@@ -30,7 +30,7 @@ class Validate_File_Extension(object):
 
         """
 
-        self.svm_data    = svm_data
+        self.svm_data = svm_data
         self.svm_session = svm_session
 
     def validate(self):
@@ -45,13 +45,13 @@ class Validate_File_Extension(object):
         """
 
         # local variables
-        list_error      = []
+        list_error = []
 
-        dataset         = self.svm_data['data']['dataset']
+        dataset = self.svm_data['data']['dataset']
         acceptable_type = ['csv', 'xml', 'json']
 
-        unique_hash     = set()
-        dataset_keep    = []
+        unique_hash = set()
+        dataset_keep = []
 
         if (dataset.get('file_upload', None)):
 
