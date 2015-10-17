@@ -57,23 +57,31 @@ class Validate_File_Extension(object):
 
             for index, filedata in enumerate(dataset['file_upload']):
                 try:
+                    split_path = os.path.splitext(filedata['filename'])
                     filehash = calculate_md5(filedata['file'])
                     # add 'hashed' value of file reference(s) to a list
                     if filehash not in unique_hash:
                         unique_hash.add(filehash)
-                        file_extension = os.path.splitext(filedata['filename'])[1][1:].strip().lower()
+                        file_extension = split_path[1][1:].strip().lower()
 
                         # validate file_extension
                         if (file_extension not in acceptable_type):
-                            msg = '''Problem: Uploaded file, \'''' + filedata['filename'] + '''\', must be one of the formats:'''
+                            msg = '''Problem: Uploaded file, \''''
+                            msg += filedata['filename']
+                            msg += '''\', must be one of the formats:'''
                             msg += '\n ' + ', '.join(acceptable_type)
                             list_error.append(msg)
 
                         # keep non-duplicated file uploads
                         else:
-                            dataset_keep.append({'type': file_extension, 'file': filedata['file'], 'filename': filedata['filename']})
+                            dataset_keep.append({
+                                'type': file_extension,
+                                'file': filedata['file'],
+                                'filename': filedata['filename']
+                            })
                 except:
-                    msg = 'Problem with file upload #' + filedata['filename'] + '. Please re-upload the file.'
+                    msg = 'Problem with file upload #' + filedata['filename']
+                    msg += '. Please re-upload the file.'
                     list_error.append(msg)
 
             # replace portion of dataset with unique 'file reference(s)'
