@@ -77,6 +77,11 @@ class Validate_Settings(object):
         elif self.svm_session == 'model_predict':
             try:
                 validate = Draft4Validator(jsonschema_model_predict())
+
+                int(self.svm_settings['svm_model_id'])
+                for value in self.svm_settings['prediction_input[]']:
+                    int(value)
+
                 validate.validate(self.svm_settings)
             except Exception, error:
                 list_error.append(str(error))
