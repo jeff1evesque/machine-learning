@@ -1,28 +1,49 @@
 #!/usr/bin/python
 
-## @validate_file_extension.py
-#  This script performs validation on the file extension for file upload(s), and returns the
-#      validated temporary file references(s), along with the corresponding file extension
-#      for each file upload(s).
+"""@validate_file_extension
+
+This script performs validation on the file extension for file upload(s), and
+returns the validated temporary file references(s), along with the
+corresponding file extension for each file upload(s).
+
+"""
+
 import sys
 import os.path
 from brain.converter.calculate_md5 import calculate_md5
 
-## Class: Validate_File_Extension, explicitly inherit 'new-style' class
-#
-#  Note: this class is invoked within 'base_data.py'
-class Validate_File_Extension(object):
 
-    ## constructor: saves a subset of the passed-in form data
+class Validate_File_Extension(object):
+    """@Validate_File_Extension
+
+    This class provides an interface to validate the file extension,
+    associated with any file(s) representing the dataset.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, svm_data, svm_session=None):
+        """@__init__
+
+        This constructor saves a subset of the passed-in form data.
+
+        """
+
         self.svm_data    = svm_data
         self.svm_session = svm_session
 
-    ## validate: this method validates the file extension of 'file upload(s)', provided
-    #            during a 'training' session. If any of the 'file upload(s)' fails validation,
-    #            this method will return False. Otherwise, the method will return a list
-    #            of unique 'file upload(s)', discarding duplicates.
     def validate(self):
+        """@validate
+
+        This method validates the file extension, associated with any file(s)
+        representing the dataset, during a 'training' session. If any of the
+        file(s) fails validation, this method will return False. Otherwise,
+        the method will return a list of unique 'file upload(s)', discarding
+        duplicates.
+
+        """
+
         # local variables
         list_error      = []
 
