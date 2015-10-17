@@ -57,7 +57,6 @@ def load_data():
 
             # get uploaded form files
         if request.files:
-            print 'jeff'
             files = request.files
 
         # get submitted form data
