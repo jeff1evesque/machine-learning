@@ -1,10 +1,18 @@
 #!/usr/bin/python
 
-## @jsonschema_definition.py
-#  This file contains various jsonschema definitions.
+"""@jsonschema_definition
 
-## jsonschema_string(): ensures nonempty string validation.
+This file contains various jsonschema definitions.
+
+"""
+
 def jsonschema_string():
+    """@jsonschema_string
+
+    This method validates a non-empty string.
+
+    """
+
     schema = {
         'type': 'object',
         'properties': {
@@ -16,16 +24,20 @@ def jsonschema_string():
     }
     return schema
 
-## jsonschema_data_new(): contains the jsonschema for the 'data_new' session.
-#                         Therefore, this schema validates the properties
-#                         describing the session, not the dataset itself.
-#
-#  @file_upload, @dataset_url, are web-interface related values.
-#
-#  @json_string, is a programmatic-interface related value.
-#
-#  Note: This validation schema is used in corresponding validator_xxx.py.
 def jsonschema_data_new():
+    """@jsonschema_data_new
+
+    This method validates the 'data_new' session, by validating the session
+    properties, not the dataset itself.
+
+    @file_upload, @dataset_url, are web-interface related values.
+
+    @json_string, is a programmatic-interface related value.
+
+    Note: This validation schema is used in corresponding validator_xxx.py.
+
+    """
+
     schema = {
         'type': 'object',
         'properties': {
@@ -49,12 +61,20 @@ def jsonschema_data_new():
     }
     return schema
 
-## jsonschema_data_append(): contains the jsonschema for the 'data_new' session.
-#                            Therefore, this schema validates the properties
-#                            describing the session, not the dataset itself.
-#
-#  Note: This validation schema is used in corresponding validator_xxx.py.
 def jsonschema_data_append():
+    """@jsonschema_data_new
+
+    This method validates the 'data_append' session, by validating the session
+    properties, not the dataset itself.
+
+    @file_upload, @dataset_url, are web-interface related values.
+
+    @json_string, is a programmatic-interface related value.
+
+    Note: This validation schema is used in corresponding validator_xxx.py.
+
+    """
+
     schema = {
         'type': 'object',
         'properties': {
@@ -74,13 +94,20 @@ def jsonschema_data_append():
     }
     return schema
 
-## jsonschema_model_generate(): contains the jsonschema for the 'model_generate'
-#                               session. Therefore, this schema validates the
-#                               properties describing the session, not the dataset
-#                               itself.
-#
-#  Note: This validation schema is used in the corresponding validator_xxx.py.
 def jsonschema_model_generate():
+    """@jsonschema_data_new
+
+    This method validates the 'model_generate' session, by validating the
+    session properties, not the dataset itself.
+
+    @file_upload, @dataset_url, are web-interface related values.
+
+    @json_string, is a programmatic-interface related value.
+
+    Note: This validation schema is used in corresponding validator_xxx.py.
+
+    """
+
     schema = {
         'type': 'object',
         'properties': {
@@ -100,13 +127,20 @@ def jsonschema_model_generate():
     }
     return schema
 
-## jsonschema_model_predict(): contains the jsonschema for the 'model_predict'
-#                              session. Therefore, this schema validates the
-#                              properties describing the session, not the dataset
-#                              itself.
-#
-#  Note: This validation schema is used in the corresponding validator_xxx.py.
 def jsonschema_model_predict():
+    """@jsonschema_data_new
+
+    This method validates the 'model_predict' session, by validating the
+    session properties, not the dataset itself.
+
+    @file_upload, @dataset_url, are web-interface related values.
+
+    @json_string, is a programmatic-interface related value.
+
+    Note: This validation schema is used in corresponding validator_xxx.py.
+
+    """
+
     schema = {
         'type': 'object',
         'properties': {
