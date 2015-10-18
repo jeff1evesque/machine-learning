@@ -46,7 +46,8 @@ class Model_Predict(Base):
 
         super(Model_Predict, self).__init__(svm_data)
         self.svm_data   = svm_data
-        self.model_id   = self.svm_data['data']['settings']['svm_model_id']
+        self.svm_settings = self.data['data']['settings']
+        self.model_id   = self.svm_settings['svm_model_id']
         self.list_error = []
 
     def svm_prediction(self):
@@ -62,11 +63,14 @@ class Model_Predict(Base):
         """
 
         # local variables
-        prediction_input = self.svm_data['data']['settings']['prediction_input[]']
+        prediction_input = self.svm_settings['prediction_input[]']
 
         # get necessary model
         svm_title = Cache_Hset().uncache('svm_rbf_title', self.model_id)['result']
-        clf = Cache_Model().uncache('svm_rbf_model', self.model_id + '_' + svm_title)
+        clf = Cache_Model().uncache(
+            'svm_rbf_model',
+            self.model_id + '_' + svm_title
+        )
 
         # get encoded labels
         encoded_labels = Cache_Model().uncache('svm_rbf_labels', self.model_id)
