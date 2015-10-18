@@ -4,8 +4,8 @@
 
 This file receives data (i.e. settings) required to query from the database,
 a previously stored SVM model, generated from 'model_generate.py'. The
-determined SVM Model is then used for analysis based on the input data
-provided during the current session.
+determined SVM Model is then used for analysis, based on the input data
+provided during the current session, which generates an SVM prediction.
 
 Note: the term 'dataset' used throughout various comments in this file,
       synonymously implies the user supplied 'file upload(s)', and XML url
@@ -23,8 +23,8 @@ class Model_Predict(Base):
     """@Model_Predict
 
     This class provides an interface to generate an svm prediction, using the
-    provided prediction input(s), and the stored corresponding model, within
-    the NoSQL datastore.
+    provided prediction feature input(s), and the stored corresponding model,
+    within the NoSQL datastore.
 
     Note: inherit base methods from superclass 'Base'
 
@@ -53,7 +53,7 @@ class Model_Predict(Base):
         """@svm_prediction
 
         This method generates an svm prediction using the provided prediction
-        input(s), and the stored corresponding model, within the NoSQL
+        feature input(s), and the stored corresponding model, within the NoSQL
         datastore.
     
         @prediction_input, a list of arguments (floats) required to make an SVM
