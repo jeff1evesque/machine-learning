@@ -2,9 +2,9 @@
 
 """@model_predict
 
-This file receives data (i.e. settings) required to query from the database,
-a previously stored SVM model, generated from 'model_generate.py'. The
-determined SVM Model is then used for analysis, based on the input data
+This file receives data (i.e. settings) required to query from the NoSQL
+datastore, a previously stored SVM model, generated from 'model_generate.py'.
+The determined SVM Model, is then used for analysis, based on the input data
 provided during the current session, which generates an SVM prediction.
 
 Note: the term 'dataset' used throughout various comments in this file,
