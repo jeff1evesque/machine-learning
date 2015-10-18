@@ -66,10 +66,10 @@ class Model_Predict(Base):
         prediction_input = self.svm_settings['prediction_input[]']
 
         # get necessary model
-        svm_title = Cache_Hset().uncache('svm_rbf_title', self.model_id)['result']
+        title = Cache_Hset().uncache('svm_rbf_title', self.model_id)['result']
         clf = Cache_Model().uncache(
             'svm_rbf_model',
-            self.model_id + '_' + svm_title
+            self.model_id + '_' + title
         )
 
         # get encoded labels
