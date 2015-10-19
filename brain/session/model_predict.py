@@ -25,22 +25,21 @@ class Model_Predict(Base):
     #  @super(), implement 'Base' superclass constructor within this child class
     #      constructor.
     #
+    #  @prediction_input, a list of arguments (floats) required to make an SVM
+    #      prediction, against the respective svm model.
+    #
     #  Note: the superclass constructor expects the same 'svm_data' argument.
     def __init__(self, svm_data):
         super(Model_Predict, self).__init__(svm_data)
         self.svm_data   = svm_data
-        self.model_id   = self.svm_data['data']['settings']['svm_model_id']
+        self.svm_settings = self.svm_data['data']['settings']
+        self.model_id   = self.svm_settings['svm_model_id']
+        self.predictors = self.svm_settings['prediction_input[]']
         self.list_error = []
 
     ## svm_prediction: using supplied arguments, return an svm prediction from a
     #                  determined model.
-    #
-    #  @prediction_input, a list of arguments (floats) required to make an SVM
-    #      prediction, against the respective svm model.
     def svm_prediction(self):
-        # local variables
-        prediction_input = self.svm_data['data']['settings']['prediction_input[]']
-
         # get necessary model
         svm_title = Cache_Hset().uncache('svm_rbf_title', self.model_id)['result']
         clf = Cache_Model().uncache('svm_rbf_model', self.model_id + '_' + svm_title)
@@ -49,6 +48,16 @@ class Model_Predict(Base):
         encoded_labels = Cache_Model().uncache('svm_rbf_labels', self.model_id)
 
         # perform prediction, and return the result
-        numeric_label = (clf.predict([prediction_input]))
+        numeric_label = (clf.predict([self.predictors]))
         textual_label = list(encoded_labels.inverse_transform([numeric_label]))
         return {'result': textual_label[0][0], 'error': None}
+
+    ## validate_predictors: validates the prediction input, or the list of
+    #                       arguments (floats), representing features of an
+    #                       unknown dependent variable (to be predicted).
+    def validate_predictors(self):
+        try:
+            for predictor in self.predictors:
+                float(predictor)
+        except Exception, error:
+            self.list_error.append(str(error))
