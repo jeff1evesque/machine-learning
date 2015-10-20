@@ -60,7 +60,7 @@ class Model_Predict(Base):
         This method generates an svm prediction using the provided prediction
         feature input(s), and the stored corresponding model, within the NoSQL
         datastore.
-    
+
         @prediction_input, a list of arguments (floats) required to make an SVM
             prediction, against the respective svm model.
 
