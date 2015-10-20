@@ -160,7 +160,6 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none():
             session.validate_svm_settings()
-            session.validate_predictors()
             session.check()
 
             my_prediction = session.svm_prediction()
