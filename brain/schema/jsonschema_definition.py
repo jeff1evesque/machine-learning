@@ -24,6 +24,7 @@ def jsonschema_string():
     }
     return schema
 
+
 def jsonschema_data_new():
     """@jsonschema_data_new
 
@@ -61,6 +62,7 @@ def jsonschema_data_new():
     }
     return schema
 
+
 def jsonschema_data_append():
     """@jsonschema_data_new
 
@@ -94,6 +96,7 @@ def jsonschema_data_append():
     }
     return schema
 
+
 def jsonschema_model_generate():
     """@jsonschema_data_new
 
@@ -126,6 +129,7 @@ def jsonschema_model_generate():
         },
     }
     return schema
+
 
 def jsonschema_model_predict():
     """@jsonschema_data_new
