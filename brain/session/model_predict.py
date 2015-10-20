@@ -51,13 +51,3 @@ class Model_Predict(Base):
         numeric_label = (clf.predict([self.predictors]))
         textual_label = list(encoded_labels.inverse_transform([numeric_label]))
         return {'result': textual_label[0][0], 'error': None}
-
-    ## validate_predictors: validates the prediction input, or the list of
-    #                       arguments (floats), representing features of an
-    #                       unknown dependent variable (to be predicted).
-    def validate_predictors(self):
-        try:
-            for predictor in self.predictors:
-                float(predictor)
-        except Exception, error:
-            self.list_error.append(str(error))
