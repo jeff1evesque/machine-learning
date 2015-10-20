@@ -21,11 +21,9 @@ RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git 
 RUN mkdir /var/machine-learning/puppet/modules/
 RUN PUPPETFILE=/var/machine-learning/puppet/scripts/Puppetfile PUPPETFILE_DIR=/var/machine-learning/puppet/modules/ r10k puppetfile install
 
+## debug print
+RUN ls -l /var/machine-learning
+RUN ls -l /var/machine-learning/puppet/modules
+
 ## provision with puppet
 RUN for x in $(find . -name '/var/machine-learning/puppet/manifests/*.pp'); do puppet apply $x; done;
-
-## unit test
-RUN apt-get install -y python python-dev python-distribute python-pip
-RUN pip install -U pytest
-RUN service flask status
-RUN (cd /var/machine-learning/test && py.test)
