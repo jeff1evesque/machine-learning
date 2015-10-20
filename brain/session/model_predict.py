@@ -40,7 +40,7 @@ class Model_Predict(Base):
         @super(), implement 'Base', and 'Base_Data' superclass constructor
             within this child class constructor.
 
-        @prediction_input, a list of arguments (floats) required to make an SVM
+        @self.predictors, a list of arguments (floats) required to make an SVM
             prediction, against the respective svm model.
 
         Note: the superclass constructor expects the same 'svm_data' argument.
