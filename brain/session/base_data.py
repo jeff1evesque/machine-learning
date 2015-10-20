@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from brain.database.save_entity import Save_Entity
 from brain.database.save_feature import Save_Feature
-from brain.validator.validate_file_extension import Validate_File_Extension
+from brain.validator.validate_file_extension import Validate_File_Extensions
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_observation import Save_Observation
 
@@ -38,7 +38,7 @@ class Base_Data(object):
 
         """
 
-        self.flag_validate_file_extension = False
+        self.flag_upload = False
         self.observation_labels = []
         self.list_error = []
         self.uid = 1
@@ -74,7 +74,8 @@ class Base_Data(object):
     def validate_file_extension(self):
         """@validate_file_extension
 
-        This method validates the file extension for each uploaded dataset.
+        This method validates the file extension for each uploaded dataset,
+        and returns the 
 		
         """
 
@@ -84,21 +85,21 @@ class Base_Data(object):
                 self.svm_data,
                 self.svm_session
             )
-            self.response_file_extension_validation = validator.validate()
+            self.upload = validator.validate()
 
-            if self.response_file_extension_validation['error']:
+            if self.upload['error']:
                 self.list_error.append(
-                    self.response_file_extension_validation['error']
+                    self.upload['error']
                 )
-                self.flag_validate_file_extension = True
+                self.flag_upload = True
 
         # programmatic-interface: validate, do not restructure
         elif self.svm_data['data']['dataset']['json_string']:
-            self.response_file_extension_validation = self.svm_data['data']
+            self.upload = self.svm_data['data']
 
             if self.svm_data['error']:
                 self.list_error.append(self.svm_data['error'])
-                self.flag_validate_file_extension = True
+                self.flag_upload = True
 
     def validate_id(self, session_id):
         """@validate_id
@@ -216,10 +217,10 @@ class Base_Data(object):
 
         try:
             # web-interface: define flag to convert to dataset to json
-            if self.response_file_extension_validation['dataset']['file_upload']:
+            if self.upload['dataset']['file_upload']:
                 svm_property = self.svm_data
 
-                for val in self.response_file_extension_validation['dataset']['file_upload']:
+                for val in self.upload['dataset']['file_upload']:
                     # reset file-pointer
                     val['file'].seek(0)
 
@@ -296,9 +297,9 @@ class Base_Data(object):
                 if not flag_append: return False
 
             # programmatic-interface
-            elif self.response_file_extension_validation['dataset']['json_string']:
+            elif self.upload['dataset']['json_string']:
                 # conversion
-                dataset_json = self.response_file_extension_validation['dataset']['json_string']
+                dataset_json = self.upload['dataset']['json_string']
                 dataset_converter = Convert_Upload(dataset_json, True)
                 dataset_converted = dataset_converter.json_to_dict()
                 count_features = dataset_converter.get_feature_count()
