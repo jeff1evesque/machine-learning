@@ -75,8 +75,8 @@ class Base_Data(object):
         """@validate_file_extension
 
         This method validates the file extension for each uploaded dataset,
-        and returns the 
-		
+        and returns the unique (non-duplicate) dataset.
+
         """
 
         # web-interface: validate, and restructure dataset
