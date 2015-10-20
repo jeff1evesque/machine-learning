@@ -44,8 +44,9 @@ def jsonschema_data_new():
         'type': 'object',
         'properties': {
             'svm_title': {
-            'type': 'string',
-            'minLength': 1
+                'type': 'string',
+                'minLength': 1
+            },
         },
         'svm_session_id' : {
             'type': 'string',
