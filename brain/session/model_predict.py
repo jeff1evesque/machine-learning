@@ -14,7 +14,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 """
 
 from brain.session.base import Base
-from brain.validator.validate_settings import Validate_Settings
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 
