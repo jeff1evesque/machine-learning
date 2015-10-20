@@ -9,6 +9,7 @@ services:
 ## build docker container used for unit testing
 before_install:
   - docker ps -a
+  - docker pull ubuntu:trusty
   - docker build -t ubuntu/trusty .
 
 ## install packages for linting, and unit testing
