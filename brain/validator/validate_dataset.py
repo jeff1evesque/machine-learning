@@ -29,9 +29,9 @@ class Validate_Dataset(object):
 
         """
 
-        self.data        = data
+        self.data = data
         self.svm_session = svm_session
-        self.list_error  = []
+        self.list_error = []
 
     def validate_label(self):
         """@validate_label
