@@ -48,7 +48,7 @@ def jsonschema_data_new():
                 'minLength': 1
             },
         },
-        'svm_session_id' : {
+        'svm_session_id': {
             'type': 'string',
             'minLength': 1
         },
