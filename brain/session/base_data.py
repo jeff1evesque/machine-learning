@@ -210,6 +210,8 @@ class Base_Data(object):
         flag_append = True
         index_count = 0
         self.dataset = []
+        error_olabels = 'The supplied observation labels (dependent '\
+            'variables), are inconsistent')
 
         try:
             # web-interface: define flag to convert to dataset to json
@@ -222,21 +224,23 @@ class Base_Data(object):
                     if val['type'] == 'csv':
                         try:
                             # conversion
-                            dataset_converter = Convert_Upload(val['file'])
-                            dataset_converted = dataset_converter.csv_to_dict()
-                            count_features = dataset_converter.get_feature_count()
+                            converter = Convert_Upload(val['file'])
+                            converted = converter.csv_to_dict()
+                            count_features = converter.get_feature_count()
+                            labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels):
-                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            if index_count > 0 and \
+                                    sorted(labels) != \
+                                    sorted(self.observation_labels):
+                                self.list_error.append(error_olabels)
 
-                            labels = dataset_converter.get_observation_labels()
                             self.observation_labels.append(labels)
 
                             # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': dataset_converted,
+                                'svm_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -247,21 +251,23 @@ class Base_Data(object):
                     elif val['type'] == 'json':
                         try:
                             # conversion
-                            dataset_converter = Convert_Upload(val['file'])
-                            dataset_converted = dataset_converter.json_to_dict()
-                            count_features = dataset_converter.get_feature_count()
+                            converter = Convert_Upload(val['file'])
+                            converted = converter.json_to_dict()
+                            count_features = converter.get_feature_count()
+                            labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels):
-                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            if index_count > 0 and \
+                                    sorted(labels) != \
+                                    sorted(self.observation_labels):
+                                self.list_error.append(error_olabels)
 
-                            labels = dataset_converter.get_observation_labels()
                             self.observation_labels.append(labels)
 
                         # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': dataset_converted,
+                                'svm_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -272,21 +278,23 @@ class Base_Data(object):
                     elif val['type'] == 'xml':
                         try:
                             # conversion
-                            dataset_converter = Convert_Upload(val['file'])
-                            dataset_converted = dataset_converter.xml_to_dict()
-                            count_features = dataset_converter.get_feature_count()
+                            converter = Convert_Upload(val['file'])
+                            converted = converter.xml_to_dict()
+                            count_features = converter.get_feature_count()
+                            labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels):
-                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            if index_count > 0 and \
+                                    sorted(labels) != \
+                                    sorted(self.observation_labels):
+                                self.list_error.append(error_olabels)
 
-                            labels = dataset_converter.get_observation_labels()
                             self.observation_labels.append(labels)
 
                             # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': dataset_converted,
+                                'svm_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -301,9 +309,9 @@ class Base_Data(object):
             elif self.upload['dataset']['json_string']:
                 # conversion
                 dataset_json = self.upload['dataset']['json_string']
-                dataset_converter = Convert_Upload(dataset_json, True)
-                dataset_converted = dataset_converter.json_to_dict()
-                count_features = dataset_converter.get_feature_count()
+                converter = Convert_Upload(dataset_json, True)
+                converted = converter.json_to_dict()
+                count_features = converter.get_feature_count()
                 features = dataset_json.values()[0]
 
                 # some observations have multiple instances grouped together
@@ -312,24 +320,20 @@ class Base_Data(object):
                 else:
                     self.observation_labels.extend(list(features))
 
-                # check label consistency
-                error_str = 'The supplied observation labels (dependent '\
-                    'variables), are inconsistent'
-
                 for feature in dataset_json.values():
                     if isinstance(feature, list):
                         for nested_feature in feature:
                             if sorted(self.observation_labels) != \
                                     sorted(nested_feature):
-                                self.list_error.append(error_str)
+                                self.list_error.append(error_olabels)
                     else:
                         if sorted(self.observation_labels) != sorted(feature):
-                            self.list_error.append(error_str)
+                            self.list_error.append(error_olabels)
 
                 # build dataset
                 self.dataset.append({
                     'id_entity': id_entity,
-                    'svm_dataset': dataset_converted,
+                    'svm_dataset': converted,
                     'count_features': count_features
                 })
 
