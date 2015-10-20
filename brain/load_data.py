@@ -192,7 +192,7 @@ class Load_Data(object):
             return {'session_type': None, 'error': error}
 
         # return
-        if session.return_error:
+        if self.return_error:
             return False
         else:
             return 'Model properly generated'

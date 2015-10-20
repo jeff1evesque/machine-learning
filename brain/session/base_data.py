@@ -318,8 +318,8 @@ class Base_Data(object):
                     if isinstance(feature, list):
                         for nested_feature in feature:
                             if sorted(self.observation_labels) != \
-                                sorted(nested_feature):
-                                    self.list_error.append(error_str)
+                                    sorted(nested_feature):
+                                self.list_error.append(error_str)
                     else:
                         if sorted(self.observation_labels) != sorted(feature):
                             self.list_error.append(error_str)
