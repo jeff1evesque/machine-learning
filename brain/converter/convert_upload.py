@@ -9,7 +9,6 @@ This file restructures only the supplied dataset(s).
 import csv
 import json
 import xmltodict
-from collections import defaultdict
 from itertools import islice
 from brain.validator.validate_dataset import Validate_Dataset
 
