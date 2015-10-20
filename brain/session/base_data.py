@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from brain.database.save_entity import Save_Entity
 from brain.database.save_feature import Save_Feature
-from brain.validator.validate_file_extension import Validate_File_Extensions
+from brain.validator.validate_file_extension import Validate_File_Extension
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_observation import Save_Observation
 
