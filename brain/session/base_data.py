@@ -198,10 +198,6 @@ class Base_Data(object):
         This method converts the supplied csv, or xml file upload(s) to a
             uniform dict object.
 
-        @flag_convert, when true, indicates the file-upload file extension
-            passed validation, and returned unique file(s) (redundancies
-            removed).
-
         @flag_append, when false, indicates the neccessary 'self.dataset' was
             not properly defined, causing this method to 'return', which
             essentially stops the execution of the current session.
@@ -210,7 +206,6 @@ class Base_Data(object):
 
         """
 
-        flag_convert = False
         flag_append = True
         index_count = 0
         self.dataset = []
