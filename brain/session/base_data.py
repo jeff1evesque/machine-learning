@@ -227,7 +227,9 @@ class Base_Data(object):
                             count_features = dataset_converter.get_feature_count()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels):
+                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+
                             labels = dataset_converter.get_observation_labels()
                             self.observation_labels.append(labels)
 
@@ -250,7 +252,9 @@ class Base_Data(object):
                             count_features = dataset_converter.get_feature_count()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels):
+                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+
                             labels = dataset_converter.get_observation_labels()
                             self.observation_labels.append(labels)
 
@@ -273,7 +277,9 @@ class Base_Data(object):
                             count_features = dataset_converter.get_feature_count()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels):
+                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+
                             labels = dataset_converter.get_observation_labels()
                             self.observation_labels.append(labels)
 
@@ -288,7 +294,8 @@ class Base_Data(object):
                             flag_append = False
 
                 index_count += 1
-                if not flag_append: return False
+                if not flag_append:
+                    return False
 
             # programmatic-interface
             elif self.upload['dataset']['json_string']:
