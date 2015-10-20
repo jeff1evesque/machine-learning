@@ -69,7 +69,8 @@ class Base_Data(object):
 
         # save dataset element, append error(s)
         db_return = db_save.save_count()
-        if db_return['error']: self.list_error.append(db_return['error'])
+        if db_return['error']:
+            self.list_error.append(db_return['error'])
 
     def validate_file_extension(self):
         """@validate_file_extension
