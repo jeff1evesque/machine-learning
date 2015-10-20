@@ -8,7 +8,6 @@ corresponding file extension for each file upload(s).
 
 """
 
-import sys
 import os.path
 from brain.converter.calculate_md5 import calculate_md5
 
