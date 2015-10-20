@@ -23,7 +23,7 @@ class Convert_Upload(object):
     Also, this class has the capacity of returning the following generalized
     attributes, that can be expected on any given observation, within the
     specified dataset:
-	
+
         - observation labels: unique list of (independent variable) labels,
               expected on any given observation instance.
         - feature count: unique count of features, expected on any given
@@ -60,10 +60,10 @@ class Convert_Upload(object):
             when opening 'self.svm_data'. This allows newlines to be
             understood regardless, if the newline character was created in
             osx, windows, or linux.
-    
+
         Note: since 'row' is a list, with one comma-delimited string element,
             the following line is required in this method:
-    
+
                 row = row[0].split(',')
 
         """
