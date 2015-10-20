@@ -230,9 +230,9 @@ class Base_Data(object):
                             labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and \
-                                    sorted(labels) != \
-                                    sorted(self.observation_labels):
+                            if (index_count > 0 and
+                                    sorted(labels) !=
+                                    sorted(self.observation_labels)):
                                 self.list_error.append(error_olabels)
 
                             self.observation_labels.append(labels)
@@ -257,9 +257,9 @@ class Base_Data(object):
                             labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and \
-                                    sorted(labels) != \
-                                    sorted(self.observation_labels):
+                            if (index_count > 0 and
+                                    sorted(labels) !=
+                                    sorted(self.observation_labels)):
                                 self.list_error.append(error_olabels)
 
                             self.observation_labels.append(labels)
@@ -284,9 +284,9 @@ class Base_Data(object):
                             labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and \
-                                    sorted(labels) != \
-                                    sorted(self.observation_labels):
+                            if (index_count > 0 and
+                                    sorted(labels) !=
+                                    sorted(self.observation_labels)):
                                 self.list_error.append(error_olabels)
 
                             self.observation_labels.append(labels)
@@ -323,8 +323,8 @@ class Base_Data(object):
                 for feature in dataset_json.values():
                     if isinstance(feature, list):
                         for nested_feature in feature:
-                            if sorted(self.observation_labels) != \
-                                    sorted(nested_feature):
+                            if (sorted(self.observation_labels) !=
+                                    sorted(nested_feature)):
                                 self.list_error.append(error_olabels)
                     else:
                         if sorted(self.observation_labels) != sorted(feature):
