@@ -213,8 +213,6 @@ class Base_Data(object):
         try:
             # web-interface: define flag to convert to dataset to json
             if self.upload['dataset']['file_upload']:
-                svm_property = self.svm_data
-
                 for val in self.upload['dataset']['file_upload']:
                     # reset file-pointer
                     val['file'].seek(0)
