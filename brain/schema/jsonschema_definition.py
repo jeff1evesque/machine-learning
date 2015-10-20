@@ -6,6 +6,7 @@ This file contains various jsonschema definitions.
 
 """
 
+
 def jsonschema_string():
     """@jsonschema_string
 
