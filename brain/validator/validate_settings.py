@@ -60,7 +60,7 @@ class Validate_Settings(object):
 
                 int(self.svm_settings['svm_model_id'])
                 for value in self.svm_settings['prediction_input[]']:
-                    int(value)
+                    float(value)
 
                 validate.validate(self.svm_settings)
             except Exception, error:
