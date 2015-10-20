@@ -42,22 +42,21 @@ def jsonschema_data_new():
     schema = {
         'type': 'object',
         'properties': {
-                'svm_title': {
-                'type': 'string',
-                'minLength': 1
-            },
-            'svm_session_id' : {
-                'type': 'string',
-                'minLength': 1
-            },
-            'svm_dataset_type': {
-                'type': 'string',
-                'enum': ['file_upload', 'dataset_url', 'json_string']
-            },
-            'svm_session': {
-                'type': 'string',
-                'enum': ['data_new']
-            },
+            'svm_title': {
+            'type': 'string',
+            'minLength': 1
+        },
+        'svm_session_id' : {
+            'type': 'string',
+            'minLength': 1
+        },
+        'svm_dataset_type': {
+            'type': 'string',
+            'enum': ['file_upload', 'dataset_url', 'json_string']
+        },
+        'svm_session': {
+            'type': 'string',
+            'enum': ['data_new']
         },
     }
     return schema
