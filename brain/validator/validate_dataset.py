@@ -6,8 +6,6 @@ This script performs validation on the svm dataset(s).
 
 """
 
-import json
-import sys
 from jsonschema.validators import Draft4Validator
 from brain.schema.jsonschema_definition import jsonschema_string
 
