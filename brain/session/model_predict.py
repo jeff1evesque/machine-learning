@@ -56,12 +56,14 @@ class Model_Predict(Base):
 
     def svm_prediction(self):
         """@svm_prediction
+
         This method generates an svm prediction using the provided prediction
         feature input(s), and the stored corresponding model, within the NoSQL
         datastore.
     
         @prediction_input, a list of arguments (floats) required to make an SVM
             prediction, against the respective svm model.
+
         """
 
         # get necessary model
