@@ -1,7 +1,10 @@
-## @views.py
-#   This file contains the corresponding views logic. Specifically, the
-#       the route decorators are defined, which flask to execute triggers
-#       for specific URL's.
+"""@views
+
+This file contains the (view) route decorators, which execute a defined
+function assigned to the URL within the route decorator.
+
+"""
+
 import json
 from interface import app
 from flask import render_template, request
