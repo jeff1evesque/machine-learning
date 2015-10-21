@@ -239,4 +239,4 @@ programmatic_interface/pytest_session.py ....
 =========================== 4 passed in 1.06 seconds ===========================
 ```
 
-**Note:** every script, or file(s) within this repository is linted via [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml).
+**Note:** every script, or file(s) within this repository, has been linted via [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml).
