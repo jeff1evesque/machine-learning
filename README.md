@@ -237,6 +237,6 @@ programmatic_interface/pytest_session.py ....
 =========================== 4 passed in 1.06 seconds ===========================
 ```
 
-**Note:** all unit tests will be incorporated into an automated travis-docker build, which will be available with milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0). 
+However, these unit tests will later be incorporated into docker container, within a travis build.  This automated unit testing, will be unavailable until milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0). 
 
 **Note:** more granular unit tests, will be available with milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0).
