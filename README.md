@@ -211,14 +211,16 @@ The following (non-exhaustive) properties define the above implemented `data` at
   
 ###Test Scripts
 
-This project contains high-level unit tests, defined in [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py), for the following sessions:
+This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate code, in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).
+
+These include tests for following sessions:
 
 - `data_new`
 - `data_append`
 - `model_predict`
 - `model_generate`
 
-These unit tests can be executed as follows:
+which can be executed as follows:
 
 ```bash
 $ vagrant up
