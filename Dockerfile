@@ -9,6 +9,7 @@ RUN apt-get install wget -y
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
 RUN dpkg -i puppetlabs-release-trusty.deb
 RUN apt-get update -y
+RUN apt-get install puppet -y
 
 ## install r10k
 RUN apt-get install rubygems-integration -y
