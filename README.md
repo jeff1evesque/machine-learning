@@ -211,7 +211,7 @@ The following (non-exhaustive) properties define the above implemented `data` at
   
 ###Test Scripts
 
-This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate logic in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).  Future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit tests, and automated within a travis [build](https://travis-ci.org/jeff1evesque/machine-learning), using a docker container defined via [`Dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Dockerfile).
+This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate logic in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).  Future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit tests.  These tests will be automated within a travis [build](https://travis-ci.org/jeff1evesque/machine-learning), using a docker container, defined within the [`Dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Dockerfile).
 
 Current unit tests cover the following sessions:
 
