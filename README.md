@@ -221,11 +221,11 @@ This project contains high-level unit tests, defined in [`pytest_session.py`](ht
 These unit tests can be executed as follows:
 
 ```bash
-vagrant up
-vagrant ssh
-pip install pytest
-cd /vagrant/test
-py.test
+$ vagrant up
+$ vagrant ssh
+vagrant@vagrant-ubuntu-trusty-64:~$ pip install pytest
+vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test
+vagrant@vagrant-ubuntu-trusty-64:~$ py.test
 ```
 
 **Note:** more granular unit tests, will be available with milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0).
