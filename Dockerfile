@@ -24,6 +24,7 @@ RUN PUPPETFILE=/var/machine-learning/puppet/scripts/Puppetfile PUPPETFILE_DIR=/v
 ## debug print
 RUN ls -l /var/machine-learning
 RUN ls -l /var/machine-learning/puppet/modules
+RUN ls -l /var/machine-learning/puppet/manifests
 
 ## provision with puppet
 RUN find /var/machine-learning/puppet/manifests -type f -name '*.pp' -exec puppet apply {} \;
