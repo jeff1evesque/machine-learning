@@ -211,14 +211,14 @@ The following (non-exhaustive) properties define the above implemented `data` at
   
 ###Test Scripts
 
-This project contains high-level unit tests, for the following sessions:
+This project contains high-level unit tests, defined in [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py), for the following sessions:
 
 - `data_new`
 - `data_append`
 - `model_predict`
 - `model_generate`
 
-These scripts are contained within `/path/to/machine-learning/test/pytest_session.py`, and can be executed as follows:
+These unit tests can be executed as follows:
 
 ```bash
 vagrant up
@@ -228,4 +228,4 @@ cd /vagrant/test
 py.test
 ```
 
-**Note:** the above unit tests, will be expanded to include more granular unit tests.  These tests will be unavailable until milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0).
+**Note:** more granular unit tests, will be available with milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0).
