@@ -26,4 +26,4 @@ RUN ls -l /var/machine-learning
 RUN ls -l /var/machine-learning/puppet/modules
 
 ## provision with puppet
-RUN for x in $(find . -name '/var/machine-learning/puppet/manifests/*.pp'); do puppet apply $x; done;
+RUN find /var/machine-learning/puppet/manifests -type f -name '*.pp' -exec puppet apply {} \;
