@@ -90,8 +90,8 @@ Hi jeff1evesque! You've successfully authenticated, but GitHub does not provide 
 Fork this project in your GitHub account, then clone your repository:
 
 ```
-cd /[PROJECT-DIRECTORY]
-sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
+$ cd /[PROJECT-DIRECTORY]
+$ sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
 **Note:** change `[PROJECT-DIRECTORY]` to a desired directory path, and `[YOUR-USERNAME]` to your corresponding git username.
@@ -99,8 +99,8 @@ sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learni
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
 ```
-cd /[PROJECT-DIRECTORY]
-git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
+$ cd /[PROJECT-DIRECTORY]
+$ git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
 ##Installation
@@ -115,8 +115,8 @@ In order to proceed with the installation for this project, two dependencies nee
 Once the necessary dependencies have been installed, execute the following command to build the virtual environment:
 
 ```bash
-cd /path/to/machine-learning/
-vagrant up
+$ cd /path/to/machine-learning/
+$ vagrant up
 ```
 
 Depending on the network speed, the build can take between 10-15 minutes.  So, grab a cup of coffee, and perhaps enjoy a danish while the virtual machine builds.  Remember, the application is intended to run on localhost, where the [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Vagrantfile) defines the exact port-forward on the host machine.
@@ -211,4 +211,32 @@ The following (non-exhaustive) properties define the above implemented `data` at
   
 ###Test Scripts
 
-Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
+This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate logic in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).  Future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit tests.  These tests will be automated within a travis [build](https://travis-ci.org/jeff1evesque/machine-learning), using a docker container, defined within the [`Dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Dockerfile).
+
+Current unit tests cover the following sessions:
+
+- `data_new`
+- `data_append`
+- `model_predict`
+- `model_generate`
+
+which can be executed as follows:
+
+```bash
+$ vagrant up
+$ vagrant ssh
+vagrant@vagrant-ubuntu-trusty-64:~$ pip install pytest
+vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test
+vagrant@vagrant-ubuntu-trusty-64:~$ py.test
+============================= test session starts ==============================
+
+platform linux2 -- Python 2.7.6, pytest-2.8.0, py-1.4.30, pluggy-0.3.1
+rootdir: /vagrant/test, inifile: pytest.ini
+collected 4 items
+
+programmatic_interface/pytest_session.py ....
+
+=========================== 4 passed in 1.06 seconds ===========================
+```
+
+**Note:** every script, or file(s) within this repository, has been [linted](https://en.wikipedia.org/wiki/Lint_%28software%29) via [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml).
