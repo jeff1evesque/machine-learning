@@ -211,4 +211,21 @@ The following (non-exhaustive) properties define the above implemented `data` at
   
 ###Test Scripts
 
-Unavailable until milestone [0.2](https://github.com/jeff1evesque/machine-learning/milestones/0.2).
+This project contains high-level unit tests, for the following sessions:
+
+- `data_new`
+- `data_append`
+- `model_predict`
+- `model_generate`
+
+These scripts are contained within `/path/to/machine-learning/test/pytest_session.py`, and can be executed as follows:
+
+```bash
+vagrant up
+vagrant ssh
+pip install pytest
+cd /vagrant/test
+py.test
+```
+
+**Note:** the above unit tests, will be expanded to include more granular unit tests.  These tests will be unavailable until milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0).
