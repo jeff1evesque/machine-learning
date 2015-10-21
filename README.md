@@ -90,8 +90,8 @@ Hi jeff1evesque! You've successfully authenticated, but GitHub does not provide 
 Fork this project in your GitHub account, then clone your repository:
 
 ```
-cd /[PROJECT-DIRECTORY]
-sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
+$ cd /[PROJECT-DIRECTORY]
+$ sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
 **Note:** change `[PROJECT-DIRECTORY]` to a desired directory path, and `[YOUR-USERNAME]` to your corresponding git username.
@@ -99,8 +99,8 @@ sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learni
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
 ```
-cd /[PROJECT-DIRECTORY]
-git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
+$ cd /[PROJECT-DIRECTORY]
+$ git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
 ##Installation
@@ -115,8 +115,8 @@ In order to proceed with the installation for this project, two dependencies nee
 Once the necessary dependencies have been installed, execute the following command to build the virtual environment:
 
 ```bash
-cd /path/to/machine-learning/
-vagrant up
+$ cd /path/to/machine-learning/
+$ vagrant up
 ```
 
 Depending on the network speed, the build can take between 10-15 minutes.  So, grab a cup of coffee, and perhaps enjoy a danish while the virtual machine builds.  Remember, the application is intended to run on localhost, where the [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Vagrantfile) defines the exact port-forward on the host machine.
@@ -226,6 +226,15 @@ $ vagrant ssh
 vagrant@vagrant-ubuntu-trusty-64:~$ pip install pytest
 vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test
 vagrant@vagrant-ubuntu-trusty-64:~$ py.test
+============================= test session starts ==============================
+
+platform linux2 -- Python 2.7.6, pytest-2.8.0, py-1.4.30, pluggy-0.3.1
+rootdir: /vagrant/test, inifile: pytest.ini
+collected 4 items
+
+programmatic_interface/pytest_session.py ....
+
+=========================== 4 passed in 1.06 seconds ===========================
 ```
 
 **Note:** more granular unit tests, will be available with milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0).
