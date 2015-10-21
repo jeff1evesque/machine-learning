@@ -211,9 +211,9 @@ The following (non-exhaustive) properties define the above implemented `data` at
   
 ###Test Scripts
 
-This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate code, in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).
+This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate logic in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).  Future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit tests, automated within a travis build, using a docker container.
 
-These include tests for following sessions:
+Current unit tests cover the following sessions:
 
 - `data_new`
 - `data_append`
@@ -238,5 +238,3 @@ programmatic_interface/pytest_session.py ....
 
 =========================== 4 passed in 1.06 seconds ===========================
 ```
-
-**Note:** the above unit tests, will be incorporated into a docker container, within a travis build.  This automated unit testing, will be unavailable until milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0), which will also include more granular unit tests.
