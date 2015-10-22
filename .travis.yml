@@ -6,12 +6,15 @@ language: python
 services:
   - docker
 
-## build docker container used for unit testing
+## build docker container for unit testing.
 before_install:
   - docker ps -a
   - docker build -t ubuntu/trusty .
 
-## install packages for linting, and unit testing
+## install packages for linting
+#
+#  Note: unit testing is performed within the docker container, which is
+#        defined from the Dockerfile.
 install:
   - pip install flake8
   - npm install -g jshint
@@ -21,14 +24,19 @@ install:
   - gem install rubocop
   - npm install jsonlint -g
   - gem install csvlint
+  - sudo apt-get update
+  - sudo apt-get install libxml2-utils
 
-## lint, and unit tests
+## implement linting
 #
 #  @puppet-lint, the following issue needs to be checked if it has been
 #      resolved, so the '--no-ensure_first_param-check' abusive flag
 #      implementation (below) can be removed:
 #
 #      - https://github.com/rodjek/puppet-lint/issues/410
+#
+#  Note: unit testing is performed within the docker container, which is
+#        defined from the Dockerfile.
 script:
   - flake8 brain
   - flake8 interface
@@ -40,3 +48,4 @@ script:
   - rubocop puppet/scripts/Puppetfile
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
+  - xmllint --valid --noout interface/static/data/xml/*.xml
