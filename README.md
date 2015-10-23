@@ -83,8 +83,6 @@ Warning: Permanently added 'github.com,192.30.252.130' (RSA) to the list of know
 Hi jeff1evesque! You've successfully authenticated, but GitHub does not provide shell access.
 ```
 
-**
-
 ## Configuration
 
 Fork this project in your GitHub account, then clone your repository:
