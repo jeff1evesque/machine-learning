@@ -28,9 +28,11 @@ Donations are very appreciated.  Smaller donations, could fund a latté, during 
   - [xbee chip](www.digi.com/lp/xbee): these chips could implement the [zigbee](http://www.zigbee.org/) wireless protocol, allowing peripheral device(s) to transmit data between one another, and finally to the machine-learning server(s).
   - [sensor](http://www.adafruit.com/categories/35): multiple types of sensors could be connected via the [zigbee](http://www.zigbee.org/) wireless protocol to other sensor(s), raspberry pi(s), or directly to the machine-learning server(s).
 
-**Note:** when contributing code, 
+### Contributing
 
-## Preconfiguration
+Please refer to the styleguide](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), when submitting a pull request.
+
+##Preconfiguration
 
 This project implements puppets [r10k](https://github.com/puppetlabs/r10k) module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile` (already defined), which includes the following syntax:
 
