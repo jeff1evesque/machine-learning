@@ -11,10 +11,12 @@ from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
 
+
 ## index: render 'index.html'
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 ## load_data: return computed data
 @app.route('/load-data/', methods=['POST', 'GET'])
@@ -90,6 +92,7 @@ def load_data():
             # return response
             return json.dumps(response)
 
+
 ## retrieve_session: retrieve all sessions stored in the database
 @app.route('/retrieve-session/', methods=['POST', 'GET'])
 def retrieve_session():
@@ -103,6 +106,7 @@ def retrieve_session():
         else:
             return json.dumps({'error': session_list['error']})
 
+
 ## retrieve_model: retrieve all models stored in the hashed redis cache
 @app.route('/retrieve-model/', methods=['POST', 'GET'])
 def retrieve_model():
@@ -115,6 +119,7 @@ def retrieve_model():
             return json.dumps(model_list['result'])
         else:
             return json.dumps({'error': model_list['error']})
+
 
 ## retrieve_feature_properties: retrieve generalized features properties
 #                               that can be expected for any given observation
