@@ -66,7 +66,8 @@ def load_data():
                     response = loader.load_model_generate()
                 elif session_type == 'model_predict':
                     response = loader.load_model_predict()
-                else: response = loader.get_errors()
+                else:
+                    response = loader.get_errors()
 
             else:
                 response = loader.get_errors()
