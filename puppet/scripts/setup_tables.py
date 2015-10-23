@@ -22,7 +22,12 @@ This file initializes the following database tables within the
 import MySQLdb as DB
 
 ## create connection
-conn = DB.connect('localhost', 'provisioner', 'password', 'db_machine_learning')
+conn = DB.connect(
+    'localhost',
+    'provisioner',
+    'password',
+    'db_machine_learning'
+)
 
 with conn:
     ## create cursor object
