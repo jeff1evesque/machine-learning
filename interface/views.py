@@ -65,8 +65,8 @@ def load_data():
 
         # get submitted form data
         if request.form:
-            settings       = request.form
-            sender         = Restructure_Data(settings, files)
+            settings = request.form
+            sender = Restructure_Data(settings, files)
             data_formatted = sender.restructure()
 
             # send reformatted data to brain
