@@ -68,7 +68,8 @@ def load_data():
                     response = loader.load_model_predict()
                 else: response = loader.get_errors()
 
-            else: response = loader.get_errors()
+            else:
+                response = loader.get_errors()
 
             # return response
             return json.dumps(response)
@@ -104,7 +105,8 @@ def load_data():
                 else:
                     response = loader.get_errors()
 
-            else: response = loader.get_errors()
+            else:
+                response = loader.get_errors()
 
             # return response
             return json.dumps(response)
