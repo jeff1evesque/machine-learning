@@ -3,9 +3,7 @@ Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-lea
 
 ###Definition
 
-Machine learning is a [subfield](http://en.wikipedia.org/wiki/Academic_disciplines) of [computer science](http://en.wikipedia.org/wiki/Computer_science) (CS) and [artificial intelligence](http://en.wikipedia.org/wiki/Artificial_intelligence) (AI) that deals with the construction and study of systems that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than follow only explicitly programmed instructions.
-
-- http://en.wikipedia.org/wiki/Machine_learning
+In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning) models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification) and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More generally, machine-learning deals with the construction and study of systems that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than follow only explicitly programmed instructions.
 
 Applications for machine learning include:
 
@@ -20,10 +18,6 @@ Applications for machine learning include:
 - [Sequence mining](http://en.wikipedia.org/wiki/Sequence_mining), commonly referred as *data mining*
 - [Computational advertising](http://en.wikipedia.org/wiki/Computational_advertising), and [Computational finance](http://en.wikipedia.org/wiki/Computational_finance)
 
-In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning) models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification) and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis). 
-
-- http://en.wikipedia.org/wiki/Support_vector_machine
-
 ###Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 
 Donations are very appreciated.  Smaller donations, could fund a latté, during a late night meddling code.  While larger donations, could fund further research, by assisting the cost for the following:
@@ -33,6 +27,8 @@ Donations are very appreciated.  Smaller donations, could fund a latté, during 
   - [raspberry pi](https://www.raspberrypi.org/): these devices could communicate to the machine-learning server(s), or *peripheral device(s)*.
   - [xbee chip](www.digi.com/lp/xbee): these chips could implement the [zigbee](http://www.zigbee.org/) wireless protocol, allowing peripheral device(s) to transmit data between one another, and finally to the machine-learning server(s).
   - [sensor](http://www.adafruit.com/categories/35): multiple types of sensors could be connected via the [zigbee](http://www.zigbee.org/) wireless protocol to other sensor(s), raspberry pi(s), or directly to the machine-learning server(s).
+
+**Note:** when contributing code, 
 
 ## Preconfiguration
 
@@ -84,6 +80,8 @@ Are you sure you want to continue connecting (yes/no)? yes
 Warning: Permanently added 'github.com,192.30.252.130' (RSA) to the list of known hosts.
 Hi jeff1evesque! You've successfully authenticated, but GitHub does not provide shell access.
 ```
+
+**
 
 ## Configuration
 
