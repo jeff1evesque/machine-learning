@@ -21,7 +21,7 @@ This file initializes the following database tables within the
 
 import MySQLdb as DB
 
-## create connection
+# create connection
 conn = DB.connect(
     'localhost',
     'provisioner',
@@ -30,10 +30,10 @@ conn = DB.connect(
 )
 
 with conn:
-    ## create cursor object
+    # create cursor object
     cur = conn.cursor()
 
-    ## create 'tbl_feature_count'
+    # create 'tbl_feature_count'
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS tbl_feature_count (
                         id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -43,7 +43,7 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    ## create 'tbl_dataset_entity'
+    # create 'tbl_dataset_entity'
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
                         id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -56,7 +56,7 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    ## create 'tbl_observation_label'
+    # create 'tbl_observation_label'
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS tbl_observation_label (
                         id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -66,7 +66,7 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    ## create 'tbl_feature_value'
+    # create 'tbl_feature_value'
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS tbl_feature_value (
                         id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
