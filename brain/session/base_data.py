@@ -213,7 +213,7 @@ class Base_Data(object):
         index_count = 0
         self.dataset = []
         error_olabels = 'The supplied observation labels (dependent '\
-            'variables), are inconsistent')
+            'variables), are inconsistent)'
 
         try:
             # web-interface: define flag to convert to dataset to json
