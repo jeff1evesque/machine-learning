@@ -39,10 +39,14 @@ def load_data():
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
 
-                if session_type == 'data_new': response = loader.load_data_new()
-                elif session_type == 'data_append': response = loader.load_data_append()
-                elif session_type == 'model_generate': response = loader.load_model_generate()
-                elif session_type == 'model_predict': response = loader.load_model_predict()
+                if session_type == 'data_new':
+                    response = loader.load_data_new()
+                elif session_type == 'data_append':
+                    response = loader.load_data_append()
+                elif session_type == 'model_generate':
+                    response = loader.load_model_generate()
+                elif session_type == 'model_predict':
+                    response = loader.load_model_predict()
                 else: response = loader.get_errors()
 
             else: response = loader.get_errors()
@@ -70,11 +74,16 @@ def load_data():
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
 
-                if session_type == 'data_new': response = loader.load_data_new()
-                elif session_type == 'data_append': response = loader.load_data_append()
-                elif session_type == 'model_generate': response = loader.load_model_generate()
-                elif session_type == 'model_predict': response = loader.load_model_predict()
-                else: response = loader.get_errors()
+                if session_type == 'data_new':
+                    response = loader.load_data_new()
+                elif session_type == 'data_append':
+                    response = loader.load_data_append()
+                elif session_type == 'model_generate':
+                    response = loader.load_model_generate()
+                elif session_type == 'model_predict':
+                    response = loader.load_model_predict()
+                else:
+                    response = loader.get_errors()
 
             else: response = loader.get_errors()
 
@@ -89,8 +98,10 @@ def retrieve_session():
         session_list = Retrieve_Session().get_all_sessions()
 
         # return all sessions
-        if session_list['result']: return json.dumps(session_list['result'])
-        else: return json.dumps({'error': session_list['error']})
+        if session_list['result']:
+            return json.dumps(session_list['result'])
+        else:
+            return json.dumps({'error': session_list['error']})
 
 ## retrieve_model: retrieve all models stored in the hashed redis cache
 @app.route('/retrieve-model/', methods=['POST', 'GET'])
@@ -100,8 +111,10 @@ def retrieve_model():
         model_list = Cache_Model().get_all_titles('svm_rbf_model')
 
         # return all models
-        if model_list['result']: return json.dumps(model_list['result'])
-        else: return json.dumps({'error': model_list['error']})
+        if model_list['result']:
+            return json.dumps(model_list['result'])
+        else:
+            return json.dumps({'error': model_list['error']})
 
 ## retrieve_feature_properties: retrieve generalized features properties
 #                               that can be expected for any given observation
@@ -115,5 +128,7 @@ def retrieve_feature_properties():
         label_list = Cache_Hset().uncache('svm_rbf_feature_labels', request.form['session_id'])
 
         # return all feature labels
-        if label_list['result']: return json.dumps(label_list['result'])
-        else: return json.dumps({'error': label_list['error']})
+        if label_list['result']:
+            return json.dumps(label_list['result'])
+        else:
+            return json.dumps({'error': label_list['error']})
