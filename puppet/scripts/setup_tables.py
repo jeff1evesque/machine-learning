@@ -1,20 +1,24 @@
 #!/usr/bin/python
 
-## @setup_tables.py
-#  This file initializes the following database tables within the 'db_machine_learning'
-#      database:
-#
-#  @tbl_dataset_entity, record the dataset instance, and the corresponding userid
-#      who created, or modified the information.
-#
-#  @tbl_feature_count, record the number of features expected within an observation,
-#      with respect to a given 'id_entity'.
-#
-#  @tbl_feature_value, record each feature value with its corresponding feature label,
-#      and observation label.
-#
-#  @tbl_observation_label, record every unique observation label, with respect to a
-#      given 'id_entity'.
+'''@setup_tables
+
+This file initializes the following database tables within the
+'db_machine_learning' database:
+
+    @tbl_dataset_entity, record the dataset instance, and the corresponding
+        userid who created, or modified the information.
+
+    @tbl_feature_count, record the number of features expected within an
+        observation, with respect to a given 'id_entity'.
+
+    @tbl_feature_value, record each feature value with its corresponding
+        feature label, and observation label.
+
+    @tbl_observation_label, record every unique observation label, with respect
+        to a given 'id_entity'.
+
+'''
+
 import MySQLdb as DB
 
 ## create connection
