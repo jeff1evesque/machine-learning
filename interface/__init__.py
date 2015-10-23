@@ -9,7 +9,7 @@ Note: the last 'views' import is required to be after initializing flask.
 from flask import Flask
 
 # initialize flask instance
-app = Flask(__name__)
+ app = Flask(__name__)
 
 # required circular import
-import interface.views
+import interface.views    # noqa
