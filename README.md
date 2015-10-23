@@ -30,7 +30,7 @@ Donations are very appreciated.  Smaller donations, could fund a latté, during 
 
 ### Contributing
 
-Please refer to the styleguide](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), when submitting a pull request.
+Please refer to the [styleguide](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), when submitting a pull request.
 
 ##Preconfiguration
 
