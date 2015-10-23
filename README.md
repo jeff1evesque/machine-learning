@@ -30,7 +30,7 @@ Donations are very appreciated.  Smaller donations, could fund a latté, during 
 
 ### Contributing
 
-Please adhere to the [styleguide](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), when contributing code.  Pull requests that deviate from the [styleguide](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), could be labelled as `invalid`, and closed.
+Please adhere to the [styleguide](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), when contributing code.  Pull requests that deviate from the [styleguide](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), could be [labelled](https://github.com/jeff1evesque/machine-learning/labels) as `invalid`, and closed.
 
 ##Preconfiguration
 
