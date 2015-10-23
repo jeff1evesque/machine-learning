@@ -31,7 +31,7 @@ import json
 import os.path
 
 endpoint_url = 'http://localhost:5000/load-data/'
-headers = headers={'Content-Type': 'application/json'}
+headers = {'Content-Type': 'application/json'}
 
 
 def get_sample_json(jsonfile):
