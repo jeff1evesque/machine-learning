@@ -109,9 +109,11 @@ class Base_Data(object):
 
         """
 
+        error = '\'session_id\' ' + session_id + ' not a positive integer'
+
         try:
             if not int(session_id) > 0:
-                self.list_error.append('supplied \'session_id\' ' + session_id + ' is not a positive integer')
+                self.list_error.append(error)
         except Exception, error:
             self.list_error.append(str(error))
 
