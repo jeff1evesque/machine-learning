@@ -120,12 +120,15 @@ def retrieve_model():
 #                               that can be expected for any given observation
 #                               within the supplied dataset.
 #
-#  @label_list, this value will be a json object, since it was originally cached
-#      into redis using 'json.dumps'.
+#  @label_list, this value will be a json object, since it was originally
+#      cached into redis using 'json.dumps'.
 @app.route('/retrieve-feature-properties/', methods=['POST', 'GET'])
 def retrieve_feature_properties():
     if request.method == 'POST':
-        label_list = Cache_Hset().uncache('svm_rbf_feature_labels', request.form['session_id'])
+        label_list = Cache_Hset().uncache(
+            'svm_rbf_feature_labels',
+            request.form['session_id']
+        )
 
         # return all feature labels
         if label_list['result']:
