@@ -56,7 +56,8 @@ class Restructure_Data(object):
                             formatted_settings[key.lower()] = lvalue.lower()
                         else:
                             # step case 1
-                            if type(formatted_settings[key.lower()]) == unicode:
+                            if type(formatted_settings[key.lower()]) == \
+                                    unicode:
                                 formatted_settings[key.lower()] = [
                                     formatted_settings[key.lower()]
                                 ]

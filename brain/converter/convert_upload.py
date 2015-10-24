@@ -165,9 +165,12 @@ class Convert_Upload(object):
             dataset = json.load(self.svm_data)
 
         for observation_label in dataset:
+            # variables
+            observations = dataset[observation_label]
+
             # dependent variable with single observation
-            if type(dataset[observation_label]) == list:
-                for observation in dataset[observation_label]:
+            if type(observations) == list:
+                for observation in observations:
                     for feature_label, feature_value in observation.items():
                         list_dataset.append({
                             'dep_variable_label': observation_label,
@@ -180,8 +183,8 @@ class Convert_Upload(object):
                         self.count_features = len(observation)
 
             # dependent variable with multiple observations
-            elif type(dataset[observation_label]) == dict:
-                for feature_label, feature_value in dataset[observation_label].items():
+            elif type(observations) == dict:
+                for feature_label, feature_value in observations.items():
                     list_dataset.append({
                         'dep_variable_label': observation_label,
                         'indep_variable_label': feature_label,
@@ -190,7 +193,7 @@ class Convert_Upload(object):
 
                 # generalized feature count in an observation
                 if not self.count_features:
-                    self.count_features = len(dataset[observation_label])
+                    self.count_features = len(observations)
 
             # list of observation label
             observation_labels.append(observation_label)
