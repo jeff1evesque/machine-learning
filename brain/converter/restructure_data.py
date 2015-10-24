@@ -48,23 +48,22 @@ class Restructure_Data(object):
         # restructure settings
         try:
             for key, value in self.settings.items():
-                # variables
-                format_current = formatted_settings[key.lower()]
-
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
                     for lvalue in self.settings.getlist(key):
                         # base case
                         if key.lower() not in formatted_settings:
-                            format_current = lvalue.lower()
+                            formatted_settings[key.lower()] = lvalue.lower()
                         else:
                             # step case 1
-                            if type(format_current) == unicode:
-                                format_current = [format_current]
-                                format_current.append(lvalue)
+                            if type(formatted_settings[key.lower()]) == unicode:
+                                formatted_settings[key.lower()] = [
+                                    formatted_settings[key.lower()]
+                                ]
+                                formatted_settings[key.lower()].append(lvalue)
                             # step case n
-                            elif type(format_current) == list:
-                                format_current.append(lvalue)
+                            elif type(formatted_settings[key.lower()]) == list:
+                                formatted_settings[key.lower()].append(lvalue)
 
                 # programmatic-interface: 'isinstance' did not work
                 elif str(type(self.settings)) == self.type_programmatic:
