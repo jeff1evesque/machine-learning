@@ -39,7 +39,7 @@ install:
 #        defined from the Dockerfile.
 script:
   - flake8 .
-  - jshint --verbose src/js/*.js --config test/config/jshint.json
+  - jshint --verbose src/js/*.js --config test/config/jshint.json --exclude-path test/config/.jshintignore
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check puppet/manifests
