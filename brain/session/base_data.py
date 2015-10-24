@@ -109,7 +109,7 @@ class Base_Data(object):
 
         """
 
-        error = '\'session_id\' ' + session_id + ' not a positive integer'
+        error = '\'session_id\' ' + str(session_id) + ' not a positive integer'
 
         try:
             if not int(session_id) > 0:
