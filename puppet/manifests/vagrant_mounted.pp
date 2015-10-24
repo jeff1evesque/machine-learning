@@ -5,10 +5,10 @@ $mountpoint = '/vagrant/'
 Exec {path => ['/usr/bin/']}
 
 ## create startup script: for 'vagrant-mounted' event
-file {"vagrant-startup-script":
-  path    => "/etc/init/workaround-vagrant-bug-6074.conf",
+file {'vagrant-startup-script':
+  path    => '/etc/init/workaround-vagrant-bug-6074.conf',
   ensure  => 'present',
-  content => @("EOT"),
+  content => @('EOT'),
     #!upstart
     description 'workaround for https://github.com/mitchellh/vagrant/issues/6074'
 
@@ -38,7 +38,7 @@ file {"vagrant-startup-script":
       /sbin/initctl emit --no-wait vagrant-mounted MOUNTPOINT=${mountpoint}
     end script
   | EOT
-  notify  => Exec["dos2unix-upstart-vagrant"],
+  notify  => Exec['dos2unix-upstart-vagrant'],
 }
 
 ## dos2unix upstart: convert clrf (windows to linux) in case host machine is
@@ -48,7 +48,7 @@ file {"vagrant-startup-script":
 #      statement, where the 'refreshonly => true' would be implemented on the
 #      corresponding listening end point. But, the 'service' end point does not
 #      require the 'refreshonly' attribute.
-exec {"dos2unix-upstart-vagrant":
+exec {'dos2unix-upstart-vagrant':
   command => 'dos2unix /etc/init/workaround-vagrant-bug-6074.conf',
   notify  => Service['workaround-vagrant-bug-6074'],
 }

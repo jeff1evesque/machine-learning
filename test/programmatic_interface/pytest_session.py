@@ -31,7 +31,8 @@ import json
 import os.path
 
 endpoint_url = 'http://localhost:5000/load-data/'
-headers      = headers={'Content-Type': 'application/json'}
+headers = {'Content-Type': 'application/json'}
+
 
 def get_sample_json(jsonfile):
     """@get_sample_json
@@ -41,9 +42,21 @@ def get_sample_json(jsonfile):
     """
 
     json_dataset = None
-    with open(os.path.join('..', 'interface', 'static', 'data', 'json', 'programmatic_interface', jsonfile), 'r') as json_file:
+    with open(
+        os.path.join(
+            '..',
+            'interface',
+            'static',
+            'data',
+            'json',
+            'programmatic_interface',
+            jsonfile
+        ),
+        'r'
+    ) as json_file:
         json_dataset = json.load(json_file)
     return json.dumps(json_dataset)
+
 
 def check_data_new():
     """@check_data_new
@@ -52,7 +65,12 @@ def check_data_new():
 
     """
 
-    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample-data-new.json'))
+    assert requests.post(
+        endpoint_url,
+        headers=headers,
+        data=get_sample_json('sample-data-new.json')
+    )
+
 
 def check_data_append():
     """@check_data_append
@@ -61,7 +79,12 @@ def check_data_append():
 
     """
 
-    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample-data-append.json'))
+    assert requests.post(
+        endpoint_url,
+        headers=headers,
+        data=get_sample_json('sample-data-append.json')
+    )
+
 
 def check_model_generate():
     """@check_model_generate
@@ -70,7 +93,12 @@ def check_model_generate():
 
     """
 
-    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample-model-generate.json'))
+    assert requests.post(
+        endpoint_url,
+        headers=headers,
+        data=get_sample_json('sample-model-generate.json')
+    )
+
 
 def check_model_predict():
     """@check_model_predict
@@ -79,4 +107,8 @@ def check_model_predict():
 
     """
 
-    assert requests.post(endpoint_url, headers=headers, data=get_sample_json('sample-model-predict.json'))
+    assert requests.post(
+        endpoint_url,
+        headers=headers,
+        data=get_sample_json('sample-model-predict.json')
+    )

@@ -63,7 +63,7 @@ class Save_Observation(object):
                 sql_statement = 'INSERT INTO tbl_observation_label '\
                     '(id_entity, dep_variable_label) VALUES(%s, %s)'
                 args = (self.svm_data['id_entity'], self.svm_data['label'])
-                response_added = self.sql.sql_command(
+                self.sql.sql_command(
                     sql_statement,
                     'insert',
                     args,

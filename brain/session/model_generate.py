@@ -1,11 +1,15 @@
 #!/usr/bin/python
 
-## @model_generate.py
-#  This file receives data (i.e. settings) required to query from the database,
-#      a previously stored session, involving one or more stored dataset uploads,
-#      and generates an SVM model, respectively. The new SVM model, is stored
-#      into respective database table(s), which later can be retrieved within
-#      'model_predict.py'.
+"""@model_generate
+
+This file receives data (i.e. settings) required to query from the database,
+a previously stored session, involving one or more stored dataset uploads, and
+generates an SVM model, respectively. The new SVM model, is stored into
+respective database table(s), which later can be retrieved within
+'model_predict.py'.
+
+"""
+
 from brain.session.base import Base
 from brain.database.retrieve_feature import Retrieve_Feature
 from brain.database.retrieve_entity import Retrieve_Entity
@@ -15,36 +19,53 @@ from sklearn import svm, preprocessing
 import numpy
 import json
 
-## Class: Model_Generate, inherit base methods from superclass 'Base'
-#
-#  Note: this class is invoked within 'load_data.py'
+
 class Model_Generate(Base):
+    """@Model_Generate
 
-    ## constructor: define class properties using the superclass 'Base'
-    #               constructor, along with the constructor in this subclass.
-    #
-    #  @super(), implement 'Base' superclass constructor within this child class
-    #      constructor.
-    #
-    #  Note: the superclass constructor expects the same 'svm_data' argument.
+    This class provides an interface to generate svm model(s), stored within a
+    NoSQL datastore.
+
+    Note: inherit base methods from superclass 'Base'
+
+    """
+
     def __init__(self, svm_data):
-        super(Model_Generate, self).__init__(svm_data)
-        self.svm_data        = svm_data
-        self.session_id      = self.svm_data['data']['settings']['svm_session_id']
-        self.feature_request = Retrieve_Feature()
-        self.list_error      = []
+        """@__init__
 
-    ## generate_model: generate svm model
-    #
-    #  @grouped_features, a matrix of observations, where each nested vector,
-    #      or python list, is a collection of features within the containing
-    #      observation.
-    #
-    #  @encoded_labels, observation labels (dependent variable labels), encoded
-    #      into a unique integer representation.
+        This constructor is responsible for defining class variables, using the
+        superclass 'Base' constructor, along with the
+        constructor in this subclass.
+
+        @super(), implement 'Base', and 'Base_Data' superclass constructor
+            within this child class constructor.
+
+        Note: the superclass constructor expects the same 'svm_data' argument.
+
+        """
+        super(Model_Generate, self).__init__(svm_data)
+        self.svm_data = svm_data
+        self.session_id = self.svm_data['data']['settings']['svm_session_id']
+        self.feature_request = Retrieve_Feature()
+        self.list_error = []
+
     def generate_model(self):
+        """@generate_model
+
+        This method generates an svm model, using a chosen dataset from the SQL
+        database.  The resulting model is stored into a NoSQL datastore.
+
+        @grouped_features, a matrix of observations, where each nested vector,
+            or python list, is a collection of features within the containing
+            observation.
+
+        @encoded_labels, observation labels (dependent variable labels),
+            encoded into a unique integer representation.
+
+        """
+
         # local variables
-        dataset       = self.feature_request.get_dataset(self.session_id)
+        dataset = self.feature_request.get_dataset(self.session_id)
         feature_count = self.feature_request.get_count(self.session_id)
         label_encoder = preprocessing.LabelEncoder()
 
@@ -66,11 +87,11 @@ class Model_Generate(Base):
 
         # check dataset integrity, build model
         if len(dataset) % feature_count == 0:
-            features_list      = dataset[:, [[0],[2],[1]]]
-            current_features   = []
-            grouped_features   = []
+            features_list = dataset[:, [[0], [2], [1]]]
+            current_features = []
+            grouped_features = []
             observation_labels = []
-            feature_labels     = []
+            feature_labels = []
 
             # group features into observation instances, record labels
             for index, feature in enumerate(features_list):
@@ -93,8 +114,7 @@ class Model_Generate(Base):
 
             # convert observation labels to a unique integer representation
             label_encoder = preprocessing.LabelEncoder()
-            label_encoder.fit(dataset[:,0])
-            labels = list(label_encoder.classes_)
+            label_encoder.fit(dataset[:, 0])
             encoded_labels = label_encoder.transform(observation_labels)
 
             # create svm model
@@ -102,14 +122,27 @@ class Model_Generate(Base):
             clf.fit(grouped_features, encoded_labels)
 
             # get svm title, and cache (model, encoded labels, title)
-            title = Retrieve_Entity().get_title(self.session_id)['result'][0][0]
-            Cache_Model(clf).cache('svm_rbf_model', str(self.session_id) + '_' + title)
+            entity = Retrieve_Entity()
+            title = entity.get_title(self.session_id)['result'][0][0]
+            Cache_Model(clf).cache(
+                'svm_rbf_model',
+                str(self.session_id) + '_' + title
+            )
             Cache_Model(label_encoder).cache('svm_rbf_labels', self.session_id)
             Cache_Hset().cache('svm_rbf_title', self.session_id, title)
 
             # cache svm feature labels, with respect to given session id
-            Cache_Hset().cache('svm_rbf_feature_labels', str(self.session_id), json.dumps(feature_labels))
+            Cache_Hset().cache(
+                'svm_rbf_feature_labels',
+                str(self.session_id),
+                json.dumps(feature_labels)
+            )
 
-    ## return_error: returns current error(s)
     def return_error(self):
+        """@return_error
+
+        This method returns all errors corresponding to this class instance.
+
+        """
+
         return self.list_error

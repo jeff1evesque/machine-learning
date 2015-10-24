@@ -1,30 +1,70 @@
 #!/usr/bin/python
 
-## @redis_settings.py
-#  This file contains the required class methods required to set, and
-#      get the redis host, or memcache port.
+"""@redis_settings
+
+This file can set, or get the required redis host, or port.
+
+"""
+
 from settings import HOST, PORT_REDIS
 
-## Class: Redis_Settings, explicitly inherit 'new-style' class.
-class Redis_Settings(object):
 
-    ## constructor: define default redis host, and port.
+class Redis_Settings(object):
+    """@Redis_Settings
+
+    This class provides an interface to get, or set the redis host, or redis
+    port.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self):
+        """@__init__
+
+        This constructor defines the default redis host, and redis port.
+
+        """
+
         self.host = HOST
         self.port = PORT_REDIS
 
-    ## get_host: return the redis host.
     def get_host(self):
+        """@get_host
+
+        This method returns the redis host, associated with this class
+        instance.
+
+        """
+
         return self.host
 
-    ## get_port: return the redis port.
     def get_port(self):
+        """@get_port
+
+        This method returns the redis port, associated with this redis
+        instance.
+
+        """
+
         return self.port
 
-    ## set_host: set the redis host.
     def set_host(self, host):
+        """@set_host
+
+        This method sets the redis host attribute, associated with this class
+        instance.
+
+        """
+
         self.host = host
 
-    ## set_port: set the redis port.
     def set_port(self, port):
+        """@set_host
+
+        This method sets the redis port attribute, associated with this class
+        instance.
+
+        """
+
         self.port = port

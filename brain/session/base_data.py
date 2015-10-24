@@ -1,85 +1,139 @@
 #!/usr/bin/python
 
-## @base_data.py
-#  This file serves as the superclass for 'data_xx.py' files.
-#
-#  Note: the term 'dataset' used throughout various comments in this file,
-#        synonymously implies the user supplied 'file upload(s)', and XML url
-#        references.
+"""@base_data
+
+This file serves as the superclass for 'data_xx.py' files.
+
+Note: the term 'dataset' used throughout various comments in this file,
+      synonymously implies the user supplied 'file upload(s)', and XML url
+      references.
+
+"""
+
 from brain.database.save_entity import Save_Entity
 from brain.database.save_feature import Save_Feature
 from brain.validator.validate_file_extension import Validate_File_Extension
 from brain.converter.convert_upload import Convert_Upload
 from brain.database.save_observation import Save_Observation
 
-## Class: Base_Data, explicitly inherit 'new-style' class
-#
-#  @self.uid, the logged-in user (i.e. userid).
-#
-#  Note: this class is invoked within 'data_xx.py'
+
 class Base_Data(object):
+    """@Base_Data
 
-    ## constructor:
+    This class provides an interface to save, and validate the provided
+    dataset, into logical ordering within the sql database.
+
+    @self.uid, the logged-in user (i.e. userid).
+
+    Note: this class is invoked within 'data_xx.py'.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    """
+
     def __init__(self, svm_data):
-        self.flag_validate_file_extension = False
-        self.observation_labels           = []
-        self.list_error                   = []
-        self.uid                          = 1
+        """@__init__
 
-    ## save_svm_info: save the number of features that can be expected in a given
-    #                 observation with respect to 'id_entity'.
-    #
-    #  @self.dataset[0], we assume that validation has occurred, and safe to assume
-    #      the data associated with the first dataset instance is identical to any
-    #      instance n within the overall collection of dataset(s).
-    #
-    #  @self.dataset['count_features'], is defined within the 'dataset_to_dict'
-    #      method.
-    #
-    #  Note: this method needs to execute after 'dataset_to_dict'
+        This constructor is responsible for defining class variables.
+
+        """
+
+        self.flag_upload = False
+        self.observation_labels = []
+        self.list_error = []
+        self.uid = 1
+
     def save_svm_info(self):
+        """@save_svm_info
+
+        This method saves the number of features that can be expected in a
+        given observation with respect to 'id_entity'.
+
+        @self.dataset[0], we assume that validation has occurred, and safe to
+            assume the data associated with the first dataset instance is
+            identical to any instance n within the overall collection of
+            dataset(s).
+
+        @self.dataset['count_features'], is defined within the
+            'dataset_to_dict' method.
+
+        Note: this method needs to execute after 'dataset_to_dict'
+
+        """
+
         svm_data = self.dataset[0]
-        db_save  = Save_Feature({'id_entity': svm_data['id_entity'], 'count_features': svm_data['count_features']})
+        db_save = Save_Feature({
+            'id_entity': svm_data['id_entity'],
+            'count_features': svm_data['count_features']
+        })
 
         # save dataset element, append error(s)
         db_return = db_save.save_count()
-        if db_return['error']: self.list_error.append(db_return['error'])
+        if db_return['error']:
+            self.list_error.append(db_return['error'])
 
-    ## validate_file_extension: validate file extension for each dataset.
     def validate_file_extension(self):
+        """@validate_file_extension
+
+        This method validates the file extension for each uploaded dataset,
+        and returns the unique (non-duplicate) dataset.
+
+        """
+
         # web-interface: validate, and restructure dataset
         if self.svm_data['data']['dataset']['file_upload']:
-            validator = Validate_File_Extension(self.svm_data, self.svm_session)
-            self.response_file_extension_validation = validator.validate()
+            validator = Validate_File_Extension(
+                self.svm_data,
+                self.svm_session
+            )
+            self.upload = validator.validate()
 
-            if self.response_file_extension_validation['error']:
-                self.list_error.append(self.response_file_extension_validation['error'])
-                self.flag_validate_file_extension = True
+            if self.upload['error']:
+                self.list_error.append(
+                    self.upload['error']
+                )
+                self.flag_upload = True
 
         # programmatic-interface: validate, do not restructure
         elif self.svm_data['data']['dataset']['json_string']:
-            self.response_file_extension_validation = self.svm_data['data']
+            self.upload = self.svm_data['data']
 
             if self.svm_data['error']:
                 self.list_error.append(self.svm_data['error'])
-                self.flag_validate_file_extension = True
+                self.flag_upload = True
 
-    ## validate_id: validate session id as positive integer.
     def validate_id(self, session_id):
+        """@validate_id
+
+        This method validates if the session id, is a positive integer.
+
+        """
+
+        error = '\'session_id\' ' + str(session_id) + ' not a positive integer'
+
         try:
             if not int(session_id) > 0:
-              self.list_error.append('supplied \'session_id\' ' + session_id + ' is not a positive integer')
+                self.list_error.append(error)
         except Exception, error:
             self.list_error.append(str(error))
 
-    ## save_svm_entity: save the current entity into the database, then return
-    #                   the corresponding entity id.
     def save_svm_entity(self, session_type):
-        svm_entity = {'title': self.svm_data['data']['settings'].get('svm_title', None), 'uid': self.uid, 'id_entity': None}
-        db_save    = Save_Entity(svm_entity, session_type)
+        """@save_svm_entity
+
+        This method saves the current entity into the database, then returns
+        the corresponding entity id.
+
+        """
+
+        svm_entity = {
+            'title': self.svm_data['data']['settings'].get('svm_title', None),
+            'uid': self.uid,
+            'id_entity': None
+        }
+        db_save = Save_Entity(svm_entity, session_type)
 
         # save dataset element
-        db_return  = db_save.save()
+        db_return = db_save.save()
 
         # return error(s)
         if not db_return['status']:
@@ -90,57 +144,81 @@ class Base_Data(object):
         elif db_return['status'] and session_type == 'data_new':
             return {'status': True, 'id': db_return['id'], 'error': None}
 
-    ## save_svm_dataset: save each dataset element into a database table.
     def save_svm_dataset(self):
+        """@save_svm_dataset
+
+        This method saves each dataset element (independent variable value)
+        into the sql database.
+
+        """
+
         for data in self.dataset:
             for dataset in data['svm_dataset']:
-                db_save = Save_Feature({'svm_dataset': dataset, 'id_entity': data['id_entity']})
+                db_save = Save_Feature({
+                    'svm_dataset': dataset,
+                    'id_entity': data['id_entity']
+                })
 
                 # save dataset element, append error(s)
                 db_return = db_save.save_feature()
-                if db_return['error']: self.list_error.append(db_return['error'])
+                if db_return['error']:
+                    self.list_error.append(db_return['error'])
 
-    ## save_observation_label: save the list of unique independent variable labels
-    #                          from a supplied session (entity id) into the database.
-    #
-    #  @self.observation_labels, list of features (independent variables), defined
-    #      after invoking the 'dataset_to_dict' method.
-    #
-    #  @session_id, the corresponding returned session id from invoking the
-    #      'save_svm_entity' method.
     def save_observation_label(self, session_type, session_id):
+        """save_observation_label
+
+        This method saves the list of unique independent variable labels,
+        which can be expected in any given observation, into the sql
+        database. This list of labels, is predicated on a supplied session
+        id (entity id).
+
+        @self.observation_labels, list of features (independent variables),
+            defined after invoking the 'dataset_to_dict' method.
+
+        @session_id, the corresponding returned session id from invoking the
+            'save_svm_entity' method.
+        """
+
         if len(self.observation_labels) > 0:
             for label_list in self.observation_labels:
                 for label in label_list:
-                    db_save = Save_Observation({'label': label, 'id_entity': session_id}, session_type)
+                    db_save = Save_Observation(
+                        {
+                            'label': label,
+                            'id_entity': session_id
+                        },
+                        session_type
+                    )
 
                     # save dataset element, append error(s)
                     db_return = db_save.save_label()
-                    if not db_return['status']: self.list_error.append(db_return['error'])
+                    if not db_return['status']:
+                        self.list_error.append(db_return['error'])
 
-    ## dataset_to_dict: convert either csv, or xml dataset(s) to a uniform
-    #                   dict object.
-    #
-    #  @flag_convert, when true, indicates the file-upload file extension passed
-    #      validation, and returned unique file(s) (redundancies removed).
-    #
-    #  @flag_append, when false, indicates the neccessary 'self.dataset' was
-    #      not properly defined, causing this method to 'return', which
-    #      essentially stops the execution of the current session.
-    #
-    #  @index_count, used to 'check label consistent'.
     def dataset_to_dict(self, id_entity):
-        flag_convert = False
-        flag_append  = True
-        index_count  = 0
+        """@dataset_to_dict
+
+        This method converts the supplied csv, or xml file upload(s) to a
+            uniform dict object.
+
+        @flag_append, when false, indicates the neccessary 'self.dataset' was
+            not properly defined, causing this method to 'return', which
+            essentially stops the execution of the current session.
+
+        @index_count, used to 'check label consistent'.
+
+        """
+
+        flag_append = True
+        index_count = 0
         self.dataset = []
+        error_olabels = 'The supplied observation labels (dependent '\
+            'variables), are inconsistent)'
 
         try:
             # web-interface: define flag to convert to dataset to json
-            if self.response_file_extension_validation['dataset']['file_upload']:
-                svm_property = self.svm_data
-
-                for val in self.response_file_extension_validation['dataset']['file_upload']:
+            if self.upload['dataset']['file_upload']:
+                for val in self.upload['dataset']['file_upload']:
                     # reset file-pointer
                     val['file'].seek(0)
 
@@ -148,17 +226,25 @@ class Base_Data(object):
                     if val['type'] == 'csv':
                         try:
                             # conversion
-                            dataset_converter = Convert_Upload(val['file'])
-                            dataset_converted = dataset_converter.csv_to_dict()
-                            count_features    = dataset_converter.get_feature_count()
+                            converter = Convert_Upload(val['file'])
+                            converted = converter.csv_to_dict()
+                            count_features = converter.get_feature_count()
+                            labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                            labels = dataset_converter.get_observation_labels()
+                            if (index_count > 0 and
+                                    sorted(labels) !=
+                                    sorted(self.observation_labels)):
+                                self.list_error.append(error_olabels)
+
                             self.observation_labels.append(labels)
 
                             # build new (relevant) dataset
-                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                            self.dataset.append({
+                                'id_entity': id_entity,
+                                'svm_dataset': converted,
+                                'count_features': count_features
+                            })
                         except Exception as error:
                             self.list_error.append(error)
                             flag_append = False
@@ -167,17 +253,25 @@ class Base_Data(object):
                     elif val['type'] == 'json':
                         try:
                             # conversion
-                            dataset_converter = Convert_Upload(val['file'])
-                            dataset_converted = dataset_converter.json_to_dict()
-                            count_features    = dataset_converter.get_feature_count()
+                            converter = Convert_Upload(val['file'])
+                            converted = converter.json_to_dict()
+                            count_features = converter.get_feature_count()
+                            labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                            labels = dataset_converter.get_observation_labels()
+                            if (index_count > 0 and
+                                    sorted(labels) !=
+                                    sorted(self.observation_labels)):
+                                self.list_error.append(error_olabels)
+
                             self.observation_labels.append(labels)
 
                         # build new (relevant) dataset
-                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                            self.dataset.append({
+                                'id_entity': id_entity,
+                                'svm_dataset': converted,
+                                'count_features': count_features
+                            })
                         except Exception as error:
                             self.list_error.append(error)
                             flag_append = False
@@ -186,32 +280,41 @@ class Base_Data(object):
                     elif val['type'] == 'xml':
                         try:
                             # conversion
-                            dataset_converter = Convert_Upload(val['file'])
-                            dataset_converted = dataset_converter.xml_to_dict()
-                            count_features    = dataset_converter.get_feature_count()
+                            converter = Convert_Upload(val['file'])
+                            converted = converter.xml_to_dict()
+                            count_features = converter.get_feature_count()
+                            labels = converter.get_observation_labels()
 
                             # check label consistency, assign labels
-                            if index_count > 0 and sorted(dataset_converter.get_observation_labels()) != sorted(self.observation_labels): self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
-                            labels = dataset_converter.get_observation_labels()
+                            if (index_count > 0 and
+                                    sorted(labels) !=
+                                    sorted(self.observation_labels)):
+                                self.list_error.append(error_olabels)
+
                             self.observation_labels.append(labels)
 
                             # build new (relevant) dataset
-                            self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                            self.dataset.append({
+                                'id_entity': id_entity,
+                                'svm_dataset': converted,
+                                'count_features': count_features
+                            })
                         except Exception as error:
                             self.list_error.append(error)
                             flag_append = False
 
                 index_count += 1
-                if not flag_append: return False
+                if not flag_append:
+                    return False
 
             # programmatic-interface
-            elif self.response_file_extension_validation['dataset']['json_string']:
+            elif self.upload['dataset']['json_string']:
                 # conversion
-                dataset_json      = self.response_file_extension_validation['dataset']['json_string']
-                dataset_converter = Convert_Upload(dataset_json, True)
-                dataset_converted = dataset_converter.json_to_dict()
-                count_features    = dataset_converter.get_feature_count()
-                features          = dataset_json.values()[0]
+                dataset_json = self.upload['dataset']['json_string']
+                converter = Convert_Upload(dataset_json, True)
+                converted = converter.json_to_dict()
+                count_features = converter.get_feature_count()
+                features = dataset_json.values()[0]
 
                 # some observations have multiple instances grouped together
                 if isinstance(features, list):
@@ -219,26 +322,36 @@ class Base_Data(object):
                 else:
                     self.observation_labels.extend(list(features))
 
-                # check label consistency
                 for feature in dataset_json.values():
                     if isinstance(feature, list):
                         for nested_feature in feature:
-                            if sorted(self.observation_labels) != sorted(nested_feature):
-                                self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            if (sorted(self.observation_labels) !=
+                                    sorted(nested_feature)):
+                                self.list_error.append(error_olabels)
                     else:
                         if sorted(self.observation_labels) != sorted(feature):
-                            self.list_error.append('The supplied observation labels (dependent variables), are inconsistent')
+                            self.list_error.append(error_olabels)
 
                 # build dataset
-                self.dataset.append({'id_entity': id_entity, 'svm_dataset': dataset_converted, 'count_features': count_features})
+                self.dataset.append({
+                    'id_entity': id_entity,
+                    'svm_dataset': converted,
+                    'count_features': count_features
+                })
 
         except Exception as error:
             self.list_error.append(error)
             print error
             return False
 
-    # get_errors: get all current errors.
     def get_errors(self):
+        """get_errors
+
+        This method gets all current errors. associated with this class
+        instance.
+
+        """
+
         if len(self.list_error) > 0:
             return self.list_error
         else:
