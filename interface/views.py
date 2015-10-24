@@ -22,6 +22,7 @@ def index():
     This router function renders the 'index.html' template.
 
     '''
+
     return render_template('index.html')
 
 
@@ -38,6 +39,7 @@ def load_data():
         - model_generate
 
     '''
+
     if request.method == 'POST':
 
         # load programmatic-interface
