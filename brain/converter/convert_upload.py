@@ -157,23 +157,20 @@ class Convert_Upload(object):
         """
 
         list_dataset = []
-        list_observation_label = []
+        observation_labels = []
 
         if self.is_json:
             dataset = self.svm_data
         else:
             dataset = json.load(self.svm_data)
 
-        for observation in dataset:
-            # variables
-            features = dataset[observation].items()
-
+        for observation_label in dataset:
             # dependent variable with single observation
-            if type(dataset[observation]) == list:
-                for observation in dataset[observation]:
-                    for feature_label, feature_value in features:
+            if type(dataset[observation_label]) == list:
+                for observation in dataset[observation_label]:
+                    for feature_label, feature_value in observation.items():
                         list_dataset.append({
-                            'dep_variable_label': observation,
+                            'dep_variable_label': observation_label,
                             'indep_variable_label': feature_label,
                             'indep_variable_value': feature_value
                         })
@@ -183,27 +180,27 @@ class Convert_Upload(object):
                         self.count_features = len(observation)
 
             # dependent variable with multiple observations
-            elif type(dataset[observation]) == dict:
-                for feature_label, feature_value in features:
+            elif type(dataset[observation_label]) == dict:
+                for feature_label, feature_value in dataset[observation_label].items():
                     list_dataset.append({
-                        'dep_variable_label': observation,
+                        'dep_variable_label': observation_label,
                         'indep_variable_label': feature_label,
                         'indep_variable_value': feature_value
                     })
 
                 # generalized feature count in an observation
                 if not self.count_features:
-                    self.count_features = len(dataset[observation])
+                    self.count_features = len(dataset[observation_label])
 
             # list of observation label
-            list_observation_label.append(observation)
+            observation_labels.append(observation_label)
 
         # close file
         if not self.is_json:
             self.svm_data.close()
 
         # save observation labels, and return
-        self.observation_labels = list_observation_label
+        self.observation_labels = observation_labels
         return list_dataset
 
     def xml_to_dict(self):
