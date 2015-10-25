@@ -60,7 +60,7 @@
   jQuery.validator.addMethod(
     'fileExtension',
     function( value, element, parameter ) {
-      if ( $.inArray(element.files[0]['name'].split('.').pop().toLowerCase(), parameter) >= 0 ) return true;
+      if ( $.inArray(element.files[0].name.split('.').pop().toLowerCase(), parameter) >= 0 ) return true;
       else return false;
     },
     'Incorrect file format'
