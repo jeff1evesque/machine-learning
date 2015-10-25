@@ -39,7 +39,7 @@ case $::osfamily {
     ## start webserver
     service {'flask':
       ensure => 'running',
-      enable => 'true',
+      enable => true,
     }
   }
   default: {
