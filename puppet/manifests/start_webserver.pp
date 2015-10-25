@@ -20,69 +20,7 @@ case $::osfamily {
     file {'server-startup-script':
       path    => '/etc/init/flask.conf',
       ensure  => 'present',
-      content => @(EOT),
-        #!upstart
-        description 'start flask server'
-
-        ## start job defined in this file after system services, and processes
-        #      have already loaded (to prevent conflict).
-        #
-        #  @vagrant-mounted, an event that executes after the shared folder is
-        #      mounted
-        #  @[2345], represents all configuration states with general linux,
-        #      and networking access
-        start on (vagrant-mounted and runlevel [2345])
-        ## stop upstart job
-        stop on runlevel [!2345]
-        ## restart upstart job continuously
-        respawn
-
-        # required permission to write to '/vagrant/' files
-
-        ## start job defined in this file after system services, and processes
-        #       have already loaded (to prevent conflict).
-        #
-        #  @vagrant-mounted, an event that executes after the shared folder is
-        #       mounted.
-        #  @[2345], represents all configuration states with general linux, and
-        #       networking access.
-        start on (vagrant-mounted and runlevel [2345])
-
-        ## stop upstart job
-        stop on runlevel [!2345]
-
-        ## restart upstart job continuously
-        respawn
-
-        # required for permission to write to '/vagrant/' files
-        setuid vagrant
-        setgid vagrant
-
-        ## run upstart job as a background process
-        expect fork
-
-        ## start upstart job
-        exec python '/vagrant/app.py'
-
-        ## log start-up date
-        #
-        #  @[`date`], current date script executed
-        pre-start script
-          echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log
-        end script
-
-        ## log shut-down date, before '/vagrant' is unmounted
-          echo "[`date`] flask server starting" >> /vagrant/log/flask_server.log 
-        end script
-
-        ## log shut-down date, then remove process id from log before
-        #      '/vagrant' is unmounted.
-        #
-        #  @[`date`], current date script executed
-        pre-stop script
-          echo "[`date`] flask server stopping" >> /vagrant/log/flask_server.log
-        end script
-      | EOT
+      content => '/vagrant/puppet/scripts/flask_server',
       notify  => Exec['dos2unix-flask'],
     }
 
