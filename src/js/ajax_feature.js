@@ -9,6 +9,7 @@
 // AJAX Process
   function feature_properties() {
     var data = {'session_id': $('select[name="svm_model_id"]').val()};
+    var obj_form = null;
 
     $.ajax({
       type: 'POST',
