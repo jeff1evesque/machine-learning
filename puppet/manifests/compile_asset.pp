@@ -56,7 +56,7 @@ $compilers.each |Integer $index, String $compiler| {
       #
       #  @[`date`], current date script executed
       pre-start script
-        echo "[`date`] ${compiler} service watcher starting" >> /vagrant/log/${compiler}.log 
+        echo "[`date`] ${compiler} starting" >> /vagrant/log/${compiler}.log
       end script
 
       ## log shut-down date, then remove process id from log before '/vagrant'
@@ -64,7 +64,7 @@ $compilers.each |Integer $index, String $compiler| {
       #
       #  @[`date`], current date script executed
       pre-stop script
-        echo "[`date`] ${compiler} watcher stopping" >> /vagrant/log/${compiler}.log
+        echo "[`date`] ${compiler} stopping" >> /vagrant/log/${compiler}.log
       end script
     | EOT
     notify  => Exec["dos2unix-upstart-${compiler}"],
@@ -113,7 +113,8 @@ $compilers.each |Integer $index, String $compiler| {
   #  Note: every 'command' implementation checks if directory is nonempty, then
   #        touch all files in the directory, respectively.
   exec {"touch-${directory_src[$index]}-files":
-    command => "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ]; then touch /vagrant/src/${directory_src[$index]}/*; fi",
+    command => "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ]; \
+	            then touch /vagrant/src/${directory_src[$index]}/*; fi",
     refreshonly => true,
     provider => shell,
   }
