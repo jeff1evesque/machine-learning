@@ -9,5 +9,5 @@
  */
 {
     "eqnull": true,
-    "multistr": true,
+    "multistr": false,
 }
