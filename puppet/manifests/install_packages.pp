@@ -50,7 +50,7 @@ exec {'enable-multiverse-repository-2':
 ## build package dependencies
 each($packages_build_dep) |$index, $package| {
   exec {"build-package-dependencies-${index}":
-    command     => "apt-get build-dep $package -y",
+    command     => "apt-get build-dep ${package} -y",
     before      => Package[$packages_general],
     refreshonly => true,
     timeout     => 1400,
