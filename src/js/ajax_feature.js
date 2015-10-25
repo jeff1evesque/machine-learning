@@ -29,7 +29,7 @@
         $('.fieldset_session_predict').append('<div class="error">' + data.error + '</div>');
       }
       else {
-          var obj_form = '\
+          obj_form = '\
               <fieldset class="fieldset_prediction_input">\
               <legend>Prediction Input</legend>\
             ';
