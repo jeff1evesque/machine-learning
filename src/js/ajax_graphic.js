@@ -12,8 +12,8 @@ function ajaxLoader (el) {
     bgColor      : '#fff',
     duration     : 800,
     opacity      : 0.45,
-    classOveride : false;
-  }
+    classOveride : false,
+  };
 
     this.options    = defaults;
     this.container  = el;
