@@ -1,7 +1,8 @@
-/**
- * variable.scss: contains general scss variables used throughout other
- *                scss files.
- */
+// variable.scss: contains general scss variables used throughout other scss
+//                files.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 $form-margin:1rem;
 $color_error: #800000;
