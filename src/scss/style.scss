@@ -1,11 +1,9 @@
-/*
- * style.scss: contains general stylesheet definitions.
- *
- * Note: the following syntax selects all classnames [CLASS],
- *       except the first one:
- *
- *           .[CLASS] ~ .[CLASS] { }
- */
+// style.scss: contains general stylesheet definitions.
+//
+// Note: the following syntax selects all classnames [CLASS],
+//       except the first one:
+//
+//           .[CLASS] ~ .[CLASS] { }
 
 @import 'variables';
 
