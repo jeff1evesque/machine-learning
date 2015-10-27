@@ -18,6 +18,7 @@ before_install:
 install:
   - pip install flake8
   - npm install -g jshint
+  - npm install jscs -g
   - gem install scss_lint
   - npm install -g bootlint
   - gem install puppet-lint
@@ -26,6 +27,7 @@ install:
   - gem install csvlint
   - sudo apt-get update
   - sudo apt-get install libxml2-utils
+  - gem install mdl
 
 ## implement linting
 #
@@ -40,6 +42,7 @@ install:
 script:
   - flake8 .
   - jshint --verbose src/js/*.js --config test/config/jshint.json --exclude-path test/config/.jshintignore
+  - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check puppet/manifests
@@ -48,3 +51,4 @@ script:
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --valid --noout interface/static/data/xml/*.xml
+  - mdl .
