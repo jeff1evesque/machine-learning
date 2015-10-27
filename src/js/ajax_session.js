@@ -15,7 +15,7 @@
         ajaxLoader( $('form') );
       }
     }).done(function(data) {
-      var this = 'this' + 12;
+     var this = 'this' + 12
 
     // Remove AJAX Overlay
       $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
