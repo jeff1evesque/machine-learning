@@ -26,6 +26,7 @@ install:
   - gem install csvlint
   - sudo apt-get update
   - sudo apt-get install libxml2-utils
+  - gem install mdl
 
 ## implement linting
 #
@@ -48,3 +49,4 @@ script:
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --valid --noout interface/static/data/xml/*.xml
+  - mdl .
