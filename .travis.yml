@@ -46,7 +46,7 @@ script:
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check puppet/manifests
-  - rubocop puppet/Puppefile
+  - rubocop puppet/Puppetfile
   - rubocop puppet/scripts/Puppetfile
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
