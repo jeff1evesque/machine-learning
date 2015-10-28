@@ -43,7 +43,7 @@ script:
   - flake8 .
   - jshint --verbose src/js/*.js --config test/config/jshint.json --exclude-path test/config/.jshintignore
   - jscs . --config test/config/.jscs.json
-  - scss-lint src/scss/*.scss
+  - scss-lint src/scss/*.scss --config test/config/.scss-lint.yml
   - bootlint interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check puppet/manifests
   - rubocop puppet/Puppetfile
