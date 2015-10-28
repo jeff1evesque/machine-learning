@@ -39,13 +39,13 @@ function ajaxLoader (el) {
   // insert overlay and loader into DOM
     container.append(
       overlay.append(
-        $('<div></div>').addClass('ajax_loader')
+        $('<div></div>').addClass('ajax-loader')
       ).fadeIn(this.options.duration)
     );
   };
 
   this.remove = function() {
-    var overlay = this.container.children('.ajax_overlay');
+    var overlay = this.container.children('.ajax-overlay');
 
     if (overlay.length) {
       overlay.fadeOut(this.options.classOveride, function() {
