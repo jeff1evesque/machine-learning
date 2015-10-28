@@ -5,10 +5,13 @@ $mountpoint = '/vagrant/'
 Exec {path => ['/usr/bin/']}
 
 ## create startup script: for 'vagrant-mounted' event
+#
+#  @("EOT"), the use double quotes on the end tag, allows variable
+#      interpolation within the puppet heredoc.
 file {'vagrant-startup-script':
   path    => '/etc/init/workaround-vagrant-bug-6074.conf',
   ensure  => 'present',
-  content => @('EOT'),
+  content => @("EOT"),
     #!upstart
     description 'workaround for https://github.com/mitchellh/vagrant/issues/6074'
 
