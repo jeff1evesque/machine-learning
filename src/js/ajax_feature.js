@@ -22,15 +22,15 @@
       var obj_form;
 
     // Remove AJAX Overlay
-      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
+      $('form .ajax-overlay').fadeOut(200, function(){ $(this).remove(); });
 
     // Append to DOM
       if (data.error) {
-        $('.fieldset_session_predict').append('<div class="error">' + data.error + '</div>');
+        $('.fieldset-session-predict').append('<div class="error">' + data.error + '</div>');
       }
       else {
           obj_form = '\
-              <fieldset class="fieldset_prediction_input">\
+              <fieldset class="fieldset-prediction-input">\
               <legend>Prediction Input</legend>\
             ';
 
@@ -42,14 +42,14 @@
       }
 
     // Remove previous input, add new instance
-      $('.fieldset_prediction_input').remove();
-      $('.fieldset_session_predict').append(obj_form);
+      $('.fieldset-prediction-input').remove();
+      $('.fieldset-session-predict').append(obj_form);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: '+errorThrown);
       console.log('Error Status: '+textStatus);
 
     // Remove AJAX Overlay
-      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
+      $('form .ajax-overlay').fadeOut(200, function(){ $(this).remove(); });
     });
   }
