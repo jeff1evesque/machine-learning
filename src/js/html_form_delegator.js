@@ -15,8 +15,8 @@ $(document).ready(function() {
 
 
 // delegation listeners
-  $('form').on('click', '.add_element', add_callback);
-  $('form').on('click', '.remove_element', remove_callback);
+  $('form').on('click', '.add-element', add_callback);
+  $('form').on('click', '.remove-element', remove_callback);
 
 /**
  * add_callback: callback used within 'delegation listener'.  It creates additional
@@ -33,7 +33,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     element.button_class             = $(this).prop('class').trim().split(' ')[1];
-    element.input_id                 = element.button_class.replace('_add', '');
+    element.input_id                 = element.button_class.replace('-add', '');
     element.input_class_string       = ( element.input_id !== undefined ) ? "class='"+element.input_id+"'": null;
 
     element.input_type               = ( element.input_id !== undefined ) ? $('.'+element.input_id).attr('type'): null;
@@ -57,7 +57,7 @@ $(document).ready(function() {
     $(this).parent().nextAll().remove();
 
   // Remove 'submit' button
-    $('.svm_form_submit').remove();
+    $('.svm-form-submit').remove();
   }
 
 /**
@@ -73,7 +73,7 @@ $(document).ready(function() {
     event.preventDefault();
 
     element.button_class    = $(this).prop('class').trim().split(' ')[1];
-    element.input_id        = element.button_class.replace('_remove', '');
+    element.input_id        = element.button_class.replace('-remove', '');
     element.input_name      = $('.'+element.input_id).attr('name');
     element.input_arraySize = $('[name="'+element.input_name+'"]').length;
 
