@@ -26,10 +26,10 @@ input[name='svm_dataset[]']:not(:first-of-type),
   display: block;
 }
 
-.svm_dataset_xml_add:first-of-type,
-.svm_dataset_file_add:first-of-type,
-.svm_dep_variable_add:first-of-type,
-.svm_indep_variable_add:first-of-type {
+.svm-dataset-xml-add:first-of-type,
+.svm-dataset-file-add:first-of-type,
+.svm-dep-variable-add:first-of-type,
+.svm-indep-variable-add:first-of-type {
   clear: none;
   float: left;
 }
@@ -43,7 +43,7 @@ form {
     }
   }
 
-  input.svm_form_submit {
+  input.svm-form-submit {
     margin-top: $form-margin;
   }
 }
@@ -52,13 +52,13 @@ label.error {
   float: right;
 }
 
-.form_note {
+.form-note {
   clear: both;
   margin-bottom: 10px;
   padding-top: 20px;
 }
 
-.ajax_loader {
+.ajax-loader {
   background: url('../img/loading.gif') no-repeat center center transparent;
   background-size: 90px 90px;
   height: 100%;
