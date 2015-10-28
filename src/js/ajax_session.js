@@ -17,12 +17,12 @@
     }).done(function(data) {
 
     // Remove AJAX Overlay
-      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
+      $('form .ajax-overlay').fadeOut(200, function(){ $(this).remove(); });
 
     // Append to DOM
       if (data.error) {
-        $('.fieldset_dataset_type').append('<div class="error">' + data.error + '</div>');
-        $('.fieldset_select_model').append('<div class="error">' + data.error + '</div>');
+        $('.fieldset-dataset-type').append('<div class="error">' + data.error + '</div>');
+        $('.fieldset-select-model').append('<div class="error">' + data.error + '</div>');
       }
       else {
         $.each( data, function( index, value ) {
@@ -39,6 +39,6 @@
       console.log('Error Status: '+textStatus);
 
     // Remove AJAX Overlay
-      $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
+      $('form .ajax-overlay').fadeOut(200, function(){ $(this).remove(); });
     });
   }
