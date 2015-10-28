@@ -76,16 +76,16 @@
  *       above 'fileExtension').
  */
   jQuery.validator.addClassRules({
-    svm_dataset_xml: {
+    svm-dataset-xml: {
       url: true,
     },
-    svm_dataset_file: {
+    svm-dataset-file: {
       fileExtension: ['csv', 'xml', 'json'],
     },
   });
 
 /**
- * Validation: validates form elements by the 'name attribute. This validation
+ * Validation: validates form elements by the 'name' attribute. This validation
  *             may implement the 'Definition(s)', defined from the 'addmethod'
  *             definition.
  */
