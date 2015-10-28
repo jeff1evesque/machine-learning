@@ -21,8 +21,8 @@
 }
 
 input[name='svm_dataset[]']:not(:first-of-type),
-.svm_dep_variable ~ .svm_dep_variable,
-.svm_indep_variable ~ .svm_indep_variable {
+.svm-dep-variable ~ .svm-dep-variable,
+.svm-indep-variable ~ .svm-indep-variable {
   display: block;
 }
 
