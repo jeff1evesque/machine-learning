@@ -51,9 +51,9 @@ function ajaxLoader (el) {
       overlay.fadeOut(this.options.classOveride, function() {
         overlay.remove();
       });
-    }  
+    }
   };
- 
+
   this.init();
 
 }
