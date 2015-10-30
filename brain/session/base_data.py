@@ -316,21 +316,7 @@ class Base_Data(object):
                 count_features = converter.get_feature_count()
                 features = dataset_json.values()[0]
 
-                # some observations have multiple instances grouped together
-                if isinstance(features, list):
-                    self.observation_labels.extend(list(features[0]))
-                else:
-                    self.observation_labels.extend(list(features))
-
-                for feature in dataset_json.values():
-                    if isinstance(feature, list):
-                        for nested_feature in feature:
-                            if (sorted(self.observation_labels) !=
-                                    sorted(nested_feature)):
-                                self.list_error.append(error_olabels)
-                    else:
-                        if sorted(self.observation_labels) != sorted(feature):
-                            self.list_error.append(error_olabels)
+                self.observation_labels.append(dataset_json.keys())
 
                 # build dataset
                 self.dataset.append({
