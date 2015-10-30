@@ -26,7 +26,7 @@ install:
   - gem install csvlint
   - sudo apt-get update
   - sudo apt-get install libxml2-utils
-  - apt-get install shellcheck
+  - sudo apt-get install shellcheck
 
 ## implement linting
 #
