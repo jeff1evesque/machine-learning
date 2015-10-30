@@ -22,7 +22,7 @@ install:
   - gem install scss_lint
   - npm install -g bootlint
   - gem install puppet-lint
-  - gem install rubocop
+  - gem install r10k
   - npm install jsonlint -g
   - gem install csvlint
   - sudo apt-get update
@@ -46,8 +46,8 @@ script:
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check puppet/manifests
-  - rubocop puppet/Puppetfile --except Style/HashSyntax
-  - rubocop puppet/scripts/Puppetfile --except Style/HashSyntax
+  - r10k puppet/Puppetfile check
+  - r10k puppet/scripts/Puppetfile check
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --valid --noout interface/static/data/xml/*.xml
