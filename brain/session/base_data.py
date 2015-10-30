@@ -205,12 +205,9 @@ class Base_Data(object):
             not properly defined, causing this method to 'return', which
             essentially stops the execution of the current session.
 
-        @index_count, used to 'check label consistent'.
-
         """
 
         flag_append = True
-        index_count = 0
         self.dataset = []
         error_olabels = 'The supplied observation labels (dependent '\
             'variables), are inconsistent)'
@@ -231,12 +228,7 @@ class Base_Data(object):
                             count_features = converter.get_feature_count()
                             labels = converter.get_observation_labels()
 
-                            # check label consistency, assign labels
-                            if (index_count > 0 and
-                                    sorted(labels) !=
-                                    sorted(self.observation_labels)):
-                                self.list_error.append(error_olabels)
-
+                            # assign observation labels
                             self.observation_labels.append(labels)
 
                             # build new (relevant) dataset
@@ -258,12 +250,7 @@ class Base_Data(object):
                             count_features = converter.get_feature_count()
                             labels = converter.get_observation_labels()
 
-                            # check label consistency, assign labels
-                            if (index_count > 0 and
-                                    sorted(labels) !=
-                                    sorted(self.observation_labels)):
-                                self.list_error.append(error_olabels)
-
+                            # assign observation labels
                             self.observation_labels.append(labels)
 
                         # build new (relevant) dataset
@@ -285,12 +272,7 @@ class Base_Data(object):
                             count_features = converter.get_feature_count()
                             labels = converter.get_observation_labels()
 
-                            # check label consistency, assign labels
-                            if (index_count > 0 and
-                                    sorted(labels) !=
-                                    sorted(self.observation_labels)):
-                                self.list_error.append(error_olabels)
-
+                            # assign observation labels
                             self.observation_labels.append(labels)
 
                             # build new (relevant) dataset
@@ -303,7 +285,6 @@ class Base_Data(object):
                             self.list_error.append(error)
                             flag_append = False
 
-                index_count += 1
                 if not flag_append:
                     return False
 
@@ -316,21 +297,7 @@ class Base_Data(object):
                 count_features = converter.get_feature_count()
                 features = dataset_json.values()[0]
 
-                # some observations have multiple instances grouped together
-                if isinstance(features, list):
-                    self.observation_labels.extend(list(features[0]))
-                else:
-                    self.observation_labels.extend(list(features))
-
-                for feature in dataset_json.values():
-                    if isinstance(feature, list):
-                        for nested_feature in feature:
-                            if (sorted(self.observation_labels) !=
-                                    sorted(nested_feature)):
-                                self.list_error.append(error_olabels)
-                    else:
-                        if sorted(self.observation_labels) != sorted(feature):
-                            self.list_error.append(error_olabels)
+                self.observation_labels.append(dataset_json.keys())
 
                 # build dataset
                 self.dataset.append({

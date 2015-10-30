@@ -12,7 +12,7 @@ function ajaxLoader (el) {
     bgColor      : '#fff',
     duration     : 800,
     opacity      : 0.45,
-    classOveride : false,
+    classOveride : false
   };
 
     this.options    = defaults;
@@ -39,21 +39,21 @@ function ajaxLoader (el) {
   // insert overlay and loader into DOM
     container.append(
       overlay.append(
-        $('<div></div>').addClass('ajax-loader')
+        $('<div></div>').addClass('ajax_loader')
       ).fadeIn(this.options.duration)
     );
   };
 
   this.remove = function() {
-    var overlay = this.container.children('.ajax-overlay');
+    var overlay = this.container.children('.ajax_overlay');
 
     if (overlay.length) {
       overlay.fadeOut(this.options.classOveride, function() {
         overlay.remove();
       });
-    }  
+    }
   };
- 
+
   this.init();
 
 }
