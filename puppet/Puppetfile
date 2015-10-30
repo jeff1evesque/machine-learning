@@ -26,7 +26,7 @@ mod 'git',
 
 ## Install Module: vcsrepo
 mod 'vcsrepo',
-  :git => 'git@github.com:puppetlabs/puppetlabs-vcsrepo.git'
+  :git => 'git@github.com:puppetlabs/puppetlabs-vcsrepo.git',
   :ref => '1.3.0'
 
 ## Install Module: mysql (to be used for mariadb)
