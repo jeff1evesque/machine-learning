@@ -46,8 +46,8 @@ script:
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check puppet/manifests
-  - r10k puppetfile puppet/Puppetfile check
-  - r10k puppetfile puppet/scripts/Puppetfile check
+  - (cd puppet && r10k puppetfile check)
+  - (cd puppet/scripts/ && r10k puppetfile check)
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --valid --noout interface/static/data/xml/*.xml
