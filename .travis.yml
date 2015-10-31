@@ -18,7 +18,7 @@ before_install:
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
 install:
-  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports"
+  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
   - pip install flake8
   - npm install -g jshint
   - npm install jscs -g
