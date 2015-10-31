@@ -13,10 +13,12 @@ before_install:
 
 ## install packages for linting
 #
+#  @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
+#
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
 install:
-  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
+  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports"
   - pip install flake8
   - npm install -g jshint
   - npm install jscs -g
