@@ -13,13 +13,9 @@ before_install:
 
 ## install packages for linting
 #
-#  @universe, this repository is added initially for the 'shellcheck'
-#      package.
-#
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
 install:
-  - sudo add-apt-repository universe
   - pip install flake8
   - npm install -g jshint
   - npm install jscs -g
