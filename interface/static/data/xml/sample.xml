@@ -1,8 +1,7 @@
 <?xml version='1.0'?>
 
-<!DOCTYPE dataset SYSTEM 'https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/dataset.dtd'>
-
-<dataset>
+<dataset xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+xsi:noNamespaceSchemaLocation='https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/dataset.xsd'>
   <observation>
     <dependent-variable>dep-variable-1</dependent-variable>
     <independent-variable>
