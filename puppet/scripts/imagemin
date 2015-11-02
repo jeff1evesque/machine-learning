@@ -18,7 +18,7 @@ set -x; exec > /vagrant/log/imagemin_execution.log 2>&1
 # watch '/vagrant/src/img/' subdirectory
 inotifywait /vagrant/src/img/ -m -e close_write -e move -e create |
   # Minify Images
-  while read path action file; do
+  while read path file; do
     # filename (without directory path)
     filename="${file##*/}"
     file_extension="${file##*.}"
