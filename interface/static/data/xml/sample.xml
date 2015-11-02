@@ -4,7 +4,7 @@
   <observation>
     <dependent-variable>dep-variable-1</dependent-variable>
     <independent-variable>
-      <dependent-variable>indep-variable-1</dependent-variable>
+      <label>indep-variable-1</label>
       <value>23.45</value>
     </independent-variable>
     <independent-variable>
