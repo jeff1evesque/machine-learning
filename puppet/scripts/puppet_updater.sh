@@ -6,4 +6,4 @@ if [ ! -e /tmp/puppet-updated ]; then
   apt-get update
   apt-get --assume-yes install puppet
   touch /tmp/puppet-updated
-fi
+fif
