@@ -27,5 +27,4 @@
       </xs:sequence>
     </xs:complexType>
   </xs:element>
-</xs:schema> 
-<something>
+</xs:schema>
