@@ -57,3 +57,4 @@ script:
   - xmllint --valid --noout interface/static/data/xml/*.xml
   - mdl .
   - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
+  - find . -name '*.sh' -exec shellcheck {} \;
