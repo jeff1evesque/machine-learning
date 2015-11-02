@@ -56,4 +56,4 @@ script:
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --valid --noout interface/static/data/xml/*.xml
   - mdl .
-  - shellcheck .
+  - grep --files-with-matches '#!/bin/bash' --recursive . --exec shellcheck {} \;
