@@ -15,7 +15,7 @@ set -x; exec > /vagrant/log/uglifyjs_execution.log 2>&1
 # watch '/vagrant/src/js/' subdirectory
 inotifywait /vagrant/src/js/ -m -e close_write -e move -e create |
   # Minify Javascript
-  while read path action file; do
+  while read path file; do
     # filename (without 'last' extension)
     filename="${file%.*}"
 
