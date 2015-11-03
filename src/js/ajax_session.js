@@ -12,33 +12,32 @@
       url: '/retrieve-session/',
       dataType: 'json',
       beforeSend: function() {
-        ajaxLoader( $('form') );
+        ajaxLoader($('form'));
       }
     }).done(function(data) {
 
-    // Remove AJAX Overlay
-      $('form .ajax-overlay').fadeOut(200, function(){ $(this).remove(); });
+      // Remove AJAX Overlay
+      $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
-    // Append to DOM
+      // Append to DOM
       if (data.error) {
         $('.fieldset-dataset-type').append('<div class="error">' + data.error + '</div>');
         $('.fieldset-select-model').append('<div class="error">' + data.error + '</div>');
-      }
-      else {
-        $.each( data, function( index, value ) {
+      } else {
+        $.each(data, function(index, value) {
           var value_id    = value.id;
           var value_title = value.title;
           var element     = '<option ' + 'value="' + value_id + '">' + value_id + ': ' + value_title + '</option>';
 
-          $('select[name="svm_session_id"]').append( element );
+          $('select[name="svm_session_id"]').append(element);
         });
       }
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Error Thrown: '+errorThrown);
-      console.log('Error Status: '+textStatus);
+      console.log('Error Thrown: ' + errorThrown);
+      console.log('Error Status: ' + textStatus);
 
-    // Remove AJAX Overlay
-      $('form .ajax-overlay').fadeOut(200, function(){ $(this).remove(); });
+      // Remove AJAX Overlay
+      $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
     });
   }
