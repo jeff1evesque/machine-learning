@@ -24,43 +24,43 @@
   jQuery.validator.addMethod(
     'equals',
     function(value, element, parameter) {
-      if ( $.inArray(value, parameter) >= 0 ) return true;
+      if ($.inArray(value, parameter) >= 0) return true;
       else return false;
     });
-  jQuery.validator.addMethod(
-    'integerOnly',
+jQuery.validator.addMethod(
+  'integerOnly',
     function(value, element, parameter) {
-      if ( Math.round(parseInt(value)) === parseInt(value) ) return true;
+      if (Math.round(parseInt(value)) === parseInt(value)) return true;
       else return false;
-  });
-  jQuery.validator.addMethod(
-    'numericOnly',
+    });
+jQuery.validator.addMethod(
+  'numericOnly',
     function(value, element, parameter) {
     // invalid condition: -0, and -0.0
-      if (value.match(/^-0*.0*$/)) {
-        return false;
-      }
+    if (value.match(/^-0*.0*$/)) {
+      return false;
+    }
     // validate integers: cannot start with 0 (except trivial 0)
-      else if (value.match(/^-?(0|[1-9][0-9]*)$/)) {
-        return true;
-    // validate floats: cannot start with 0 (except trivial 0.x)
-      } else if (value.match(/^-?(0|[1-9][0-9]*)?\.\d+$/)) {
-        return true;
-    // invalid condition: general
-      } else {
-        return false;
-      }
+    else if (value.match(/^-?(0|[1-9][0-9]*)$/)) {
+      return true;
+  // validate floats: cannot start with 0 (except trivial 0.x)
+    } else if (value.match(/^-?(0|[1-9][0-9]*)?\.\d+$/)) {
+      return true;
+  // invalid condition: general
+    } else {
+      return false;
+    }
   });
-  jQuery.validator.addMethod(
-    'textOnly',
+jQuery.validator.addMethod(
+  'textOnly',
     function(value, element, parameter) {
-      if ( typeof(value) === 'string' ) return true;
+      if (typeof(value) === 'string') return true;
       else return false;
-  });
-  jQuery.validator.addMethod(
-    'fileExtension',
-    function( value, element, parameter ) {
-      if ( $.inArray(element.files[0].name.split('.').pop().toLowerCase(), parameter) >= 0 ) return true;
+    });
+jQuery.validator.addMethod(
+  'fileExtension',
+    function(value, element, parameter) {
+      if ($.inArray(element.files[0].name.split('.').pop().toLowerCase(), parameter) >= 0) return true;
       else return false;
     },
     'Incorrect file format'
@@ -75,7 +75,7 @@
  *       must be defined as the last parameter to the 'addMethod' definition (see
  *       above 'fileExtension').
  */
-  jQuery.validator.addClassRules({
+jQuery.validator.addClassRules({
     'svm-dataset-xml': {
       url: true,
     },
@@ -89,9 +89,9 @@
  *             may implement the 'Definition(s)', defined from the 'addmethod'
  *             definition.
  */
-  $(document).ready(function() {
+$(document).ready(function() {
 
-    $('form').validate({
+  $('form').validate({
       rules: {
         svm_session: {
           required: true,
@@ -99,7 +99,7 @@
         },
         svm_title: {
           required: true,
-          textOnly: true          
+          textOnly: true
         },
         svm_session_id: {
           required: true,
@@ -131,4 +131,4 @@
         'prediction_input[]': 'Must be valid nonempty decimal',
       },
     });
-  });
+});
