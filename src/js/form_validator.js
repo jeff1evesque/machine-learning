@@ -24,14 +24,22 @@
   jQuery.validator.addMethod(
     'equals',
     function(value, element, parameter) {
-      if ($.inArray(value, parameter) >= 0) return true;
-      else return false;
+      if ($.inArray(value, parameter) >= 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
     });
 jQuery.validator.addMethod(
   'integerOnly',
     function(value, element, parameter) {
-      if (Math.round(parseInt(value)) === parseInt(value)) return true;
-      else return false;
+      if (Math.round(parseInt(value)) === parseInt(value)) {
+        return true;
+      }
+      else {
+        return false;
+      }
     });
 jQuery.validator.addMethod(
   'numericOnly',
@@ -54,14 +62,22 @@ jQuery.validator.addMethod(
 jQuery.validator.addMethod(
   'textOnly',
     function(value, element, parameter) {
-      if (typeof(value) === 'string') return true;
-      else return false;
+      if (typeof(value) === 'string') {
+        return true;
+      }
+      else {
+        return false;
+      }
     });
 jQuery.validator.addMethod(
   'fileExtension',
     function(value, element, parameter) {
-      if ($.inArray(element.files[0].name.split('.').pop().toLowerCase(), parameter) >= 0) return true;
-      else return false;
+      if ($.inArray(element.files[0].name.split('.').pop().toLowerCase(), parameter) >= 0) {
+        return true;
+      }
+      else {
+        return false;
+      }
     },
     'Incorrect file format'
   );
