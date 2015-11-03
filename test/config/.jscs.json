@@ -9,51 +9,32 @@
         "catch"
     ],
     "requireOperatorBeforeLineBreak": true,
-    "requireParenthesesAroundIIFE": true,
-    "requireCommaBeforeLineBreak": true,
     "requireCamelCaseOrUpperCaseIdentifiers": true,
-    "requireDotNotation": {
-        "allExcept": ["snake_case"]
-    },
-    "requireSpacesInForStatement": true,
-    "requireSpaceBetweenArguments": true,
     "maximumLineLength": {
-        "value": 100,
-        "tabSize": 4,
-        "allExcept": ["urlComments", "regex"]
+      "value": 80,
+      "allExcept": ["comments", "regex"]
     },
-    "validateQuoteMarks": { "mark": "\"", "escape": true },
-    "validateIndentation": "\t",
+    "validateIndentation": 2,
+    "validateQuoteMarks": "'",
 
-    "disallowMixedSpacesAndTabs": "smart",
-    "disallowTrailingWhitespace": true,
     "disallowMultipleLineStrings": true,
-    "disallowTrailingComma": true,
-    "disallowSpaceBeforeComma": true,
-    "requireSpaceAfterComma": true,
+    "disallowMixedSpacesAndTabs": true,
+    "disallowTrailingWhitespace": true,
+    "disallowSpaceAfterPrefixUnaryOperators": true,
+    "disallowMultipleVarDecl": true,
+    "disallowKeywordsOnNewLine": ["else"],
 
-    "requireSpaceBeforeBlockStatements": true,
-    "requireSpacesInFunctionExpression": {
-        "beforeOpeningCurlyBrace": true
-    },
-    "requireSpacesInsideParentheses": "all",
     "requireSpaceAfterKeywords": [
-        "if",
-        "else",
-        "for",
-        "while",
-        "do",
-        "switch",
-        "return",
-        "try",
-        "catch"
+      "if",
+      "else",
+      "for",
+      "while",
+      "do",
+      "switch",
+      "return",
+      "try",
+      "catch"
     ],
-    "requireSpacesInsideObjectBrackets": "all",
-    "requireSpacesInsideBrackets": true,
-    "requireSemicolons": true,
-    "requireSpacesInConditionalExpression": true,
-    "requireSpaceAfterBinaryOperators": true,
-    "requireLineFeedAtFileEnd": true,
     "requireSpaceBeforeBinaryOperators": [
         "=", "+=", "-=", "*=", "/=", "%=", "<<=", ">>=", ">>>=",
         "&=", "|=", "^=", "+=",
@@ -62,33 +43,48 @@
         "|", "^", "&&", "||", "===", "==", ">=",
         "<=", "<", ">", "!=", "!=="
     ],
-    "requireSpacesInAnonymousFunctionExpression": {
+    "requireSpaceAfterBinaryOperators": true,
+    "requireSpacesInConditionalExpression": true,
+    "requireSpaceBeforeBlockStatements": true,
+    "requireSpacesInForStatement": true,
+    "requireLineFeedAtFileEnd": true,
+    "requireSpacesInFunctionExpression": {
         "beforeOpeningCurlyBrace": true
-    },
-    "requireSpacesInNamedFunctionExpression": {
-        "beforeOpeningCurlyBrace": true
-    },
-    "requirePaddingNewLinesBeforeLineComments": true,
-    "requireCapitalizedComments": {
-        "ignoreIfInTheMiddle": true
-    },
-    "validateLineBreaks": "LF",
-
-    "disallowKeywords": [ "with" ],
-    "disallowKeywordsOnNewLine": [ "else" ],
-    "disallowSpacesInFunctionExpression": {
-        "beforeOpeningRoundBrace": true
-    },
-    "disallowSpacesInNamedFunctionExpression": {
-        "beforeOpeningRoundBrace": true
     },
     "disallowSpacesInAnonymousFunctionExpression": {
         "beforeOpeningRoundBrace": true
     },
+    "disallowSpacesInsideObjectBrackets": "all",
+    "disallowSpacesInsideArrayBrackets": "all",
+    "disallowSpacesInsideParentheses": true,
+
+    "disallowMultipleLineBreaks": true,
+    "disallowNewlineBeforeBlockStatements": true,
+    "disallowKeywords": ["with"],
+    "disallowSpacesInFunctionExpression": {
+        "beforeOpeningRoundBrace": true
+    },
+    "disallowSpacesInFunctionDeclaration": {
+        "beforeOpeningRoundBrace": true
+    },
     "disallowSpacesInCallExpression": true,
     "disallowSpaceAfterObjectKeys": true,
-    "disallowSpaceAfterPrefixUnaryOperators": true,
-    "disallowSpaceBeforePostfixUnaryOperators": true,
-    "disallowSpaceBeforeBinaryOperators": [ ",", ":" ],
-    "disallowMultipleLineBreaks": true
+    "requireSpaceBeforeObjectValues": true,
+    "requireCapitalizedConstructors": true,
+    "requireDotNotation": true,
+    "requireSemicolons": true,
+    "validateParameterSeparator": ", ",
+
+    "jsDoc": {
+        "checkAnnotations": "closurecompiler",
+        "checkParamNames": true,
+        "requireParamTypes": true,
+        "checkRedundantParams": true,
+        "checkReturnTypes": true,
+        "checkRedundantReturns": true,
+        "requireReturnTypes": true,
+        "checkTypes": true,
+        "checkRedundantAccess": true,
+        "requireNewlineAfterDescription": true
+    }
 }
