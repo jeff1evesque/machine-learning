@@ -10,76 +10,75 @@
 
 $(document).ready(function() {
 
-// local variables
+  // local variables
   var element = {};
 
-
-// delegation listeners
+  // delegation listeners
   $('form').on('click', '.add-element', add_callback);
   $('form').on('click', '.remove-element', remove_callback);
 
-/**
- * add_callback: callback used within 'delegation listener'.  It creates additional
- *               form elements to be placed after the 'Remove' button, when the
- *               event listener is fired.
- *
- * @event.preventDefault, when this method is called, the default action of the
- *               element will not be fired.
- *
- * @grep(array, Boolean), discards nulls, undefineds, empty strings and integer 0's
- */
+  /**
+   * add_callback: callback used within 'delegation listener'.  It creates additional
+   *               form elements to be placed after the 'Remove' button, when the
+   *               event listener is fired.
+   *
+   * @event.preventDefault, when this method is called, the default action of the
+   *               element will not be fired.
+   *
+   * @grep(array, Boolean), discards nulls, undefineds, empty strings and integer 0's
+   */
 
   function add_callback(event) {
     event.preventDefault();
 
     element.button_class             = $(this).prop('class').trim().split(' ')[1];
     element.input_id                 = element.button_class.replace('-add', '');
-    element.input_class_string       = ( element.input_id !== undefined ) ? "class='"+element.input_id+"'": null;
+    element.input_class_string       = (element.input_id !== undefined) ? 'class=\'' + element.input_id + '\'' : null;
 
-    element.input_type               = ( element.input_id !== undefined ) ? $('.'+element.input_id).attr('type'): null;
-    element.input_type_string        = ( element.input_type !== undefined ) ? "type='"+element.input_type+"'": null;
+    element.input_type               = (element.input_id !== undefined) ? $('.' + element.input_id).attr('type') : null;
+    element.input_type_string        = (element.input_type !== undefined) ? 'type=\'' + element.input_type + '\'' : null;
 
-    element.input_name               = ( element.input_id !== undefined ) ? $('.'+element.input_id).attr('name'): null;
-    element.input_name_string        = ( element.input_name !== undefined ) ? "name='"+element.input_name+"'": null;
+    element.input_name               = (element.input_id !== undefined) ? $('.' + element.input_id).attr('name') : null;
+    element.input_name_string        = (element.input_name !== undefined) ? 'name=\'' + element.input_name + '\'' : null;
 
-    element.input_placeholder        = ( element.input_id !== undefined ) ? $('.'+element.input_id).attr("placeholder"): null;
-    element.input_placeholder_string = ( element.input_placeholder !== undefined ) ? "placeholder='"+element.input_placeholder+"'": null;
+    element.input_placeholder        = (element.input_id !== undefined) ? $('.' + element.input_id).attr('placeholder') : null;
+    element.input_placeholder_string = (element.input_placeholder !== undefined) ? 'placeholder=\'' + element.input_placeholder + '\'' : null;
 
-    element.input_arraySize          = $("input["+element.input_name_string+"]").length;
+    element.input_arraySize          = $('input[' + element.input_name_string + ']').length;
 
-  // Append element after 'Remove' button
-    if (element.input_arraySize > 1) 
-      $("input["+element.input_name_string+"]").last().after("<input "+ $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string, element.input_class_string], Boolean).join(', ') +">");
+    // Append element after 'Remove' button
+    if (element.input_arraySize > 1)
+      $('input[' + element.input_name_string + ']').last().after('<input ' + $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string, element.input_class_string], Boolean).join(', ') + '>');
     else
-      $('.'+element.input_id+'_remove').after("<input "+ $.grep([element.input_type_string, element.input_name_string, element.input_class_string, element.input_placeholder_string], Boolean).join(', ') +">");
+      $('.' + element.input_id + '_remove').after('<input ' + $.grep([element.input_type_string, element.input_name_string, element.input_class_string, element.input_placeholder_string], Boolean).join(', ') + '>');
 
-  // Remove fieldset 'dependencies'
+    // Remove fieldset 'dependencies'
     $(this).parent().nextAll().remove();
 
-  // Remove 'submit' button
+    // Remove 'submit' button
     $('.svm-form-submit').remove();
   }
 
-/**
- * remove_callback: callback used within a 'delegation listener'.  It removes the
- *                  last corresponding form element after a 'Remove' button within
- *                  the immediate 'fieldset', when the event listener is fired.
- *
- * @event.preventDefault, when this method is called, the default action of the
- *                  element will not be fired.
- */
+  /**
+   * remove_callback: callback used within a 'delegation listener'.  It removes the
+   *                  last corresponding form element after a 'Remove' button within
+   *                  the immediate 'fieldset', when the event listener is fired.
+   *
+   * @event.preventDefault, when this method is called, the default action of the
+   *                  element will not be fired.
+   */
 
   function remove_callback(event) {
     event.preventDefault();
 
     element.button_class    = $(this).prop('class').trim().split(' ')[1];
     element.input_id        = element.button_class.replace('-remove', '');
-    element.input_name      = $('.'+element.input_id).attr('name');
-    element.input_arraySize = $('[name="'+element.input_name+'"]').length;
+    element.input_name      = $('.' + element.input_id).attr('name');
+    element.input_arraySize = $('[name="' + element.input_name + '"]').length;
 
-  // Remove last form element
+    // Remove last form element
     if (element.input_arraySize > 1) {
-      $('input[name="'+element.input_name+'"]').last().remove();
+      $('input[name="' + element.input_name + '"]').last().remove();
     }
   }
 
