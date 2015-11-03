@@ -50,7 +50,7 @@ $(document).ready(function() {
     if (element.input_arraySize > 1)
       $('input[' + element.input_name_string + ']').last().after('<input ' + $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string, element.input_class_string], Boolean).join(', ') + '>');
     else
-      $('.' + element.input_id + '_remove').after('<input ' + $.grep([element.input_type_string, element.input_name_string, element.input_class_string, element.input_placeholder_string], Boolean).join(', ') + '>');
+      $('.' + element.input_id + '-remove').after('<input ' + $.grep([element.input_type_string, element.input_name_string, element.input_class_string, element.input_placeholder_string], Boolean).join(', ') + '>');
 
     // Remove fieldset 'dependencies'
     $(this).parent().nextAll().remove();
