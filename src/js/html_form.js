@@ -79,7 +79,7 @@ $(document).ready(function() {
 
     // Session Titles: for 'svm_session_id' (defined in ajax_session.js)
     if ($.inArray($(this).val(), ['data_append', 'model_generate']) !== -1) {
-      session_id();
+      sessionId();
     }
 
     // Model IDs: for 'svm_model_id' (defined in ajax_model.js)
