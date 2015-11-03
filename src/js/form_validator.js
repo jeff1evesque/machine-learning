@@ -26,8 +26,7 @@
     function(value, element, parameter) {
       if ($.inArray(value, parameter) >= 0) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     });
@@ -36,8 +35,7 @@ jQuery.validator.addMethod(
     function(value, element, parameter) {
       if (Math.round(parseInt(value)) === parseInt(value)) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     });
@@ -64,8 +62,7 @@ jQuery.validator.addMethod(
     function(value, element, parameter) {
       if (typeof(value) === 'string') {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     });
@@ -74,8 +71,7 @@ jQuery.validator.addMethod(
     function(value, element, parameter) {
       if ($.inArray(element.files[0].name.split('.').pop().toLowerCase(), parameter) >= 0) {
         return true;
-      }
-      else {
+      } else {
         return false;
       }
     },
