@@ -23,9 +23,9 @@
         $('.fieldset-dataset-type').append('<div class="error">' + data.error + '</div>');
       } else {
         $.each(data, function(index, value) {
-          var value_id    = value.id;
-          var value_title = value.title;
-          var element     = '<option ' + 'value="' + value_id + '">' + value_id + ': ' + value_title + '</option>';
+          var valueId    = value.id;
+          var valueTitle = value.title;
+          var element     = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
 
           $('select[name="svm_model_id"]').append(element);
         });
