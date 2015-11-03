@@ -54,7 +54,7 @@ script:
   - (cd puppet/scripts/ && r10k puppetfile check)
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
-  - xmllint --valid --noout interface/static/data/xml/*.xml
+  - xmllint --noout interface/static/data/xml/*.xml --schema interface/static/data/xml/dataset.xsd
   - mdl .
   - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
   - find . -name '*.sh' | xargs shellcheck
