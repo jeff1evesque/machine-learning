@@ -4,12 +4,12 @@
 
 $(document).ready(function() {
 
-// Local Variables
+  // Local Variables
   var obj_form = {};
 
-// Append 'Session Type' Fieldset
+  // Append 'Session Type' Fieldset
   $('.fieldset-session-type').on('change', 'select[name="svm_session"]', function() {
-    if ( $(this).val().toLowerCase() == 'model_generate' ) {
+    if ($(this).val().toLowerCase() == 'model_generate') {
       obj_form.session = '\
           <fieldset class="fieldset-session-generate">\
             <legend>Generate Model</legend>\
@@ -27,8 +27,7 @@ $(document).ready(function() {
             </fieldset>\
           </fieldset>\
         ';
-    }
-    else if ( $(this).val().toLowerCase() == 'model_predict' ) {
+    } else if ($(this).val().toLowerCase() == 'model_predict') {
       obj_form.session = '\
           <fieldset class="fieldset-session-predict">\
             <legend>Analysis</legend>\
@@ -41,8 +40,7 @@ $(document).ready(function() {
             </fieldset>\
           </fieldset>\
         ';
-    }
-    else if ( $(this).val().toLowerCase() == 'data_new' ) {
+    } else if ($(this).val().toLowerCase() == 'data_new') {
       obj_form.session = '\
           <fieldset class="fieldset-session-data-upload">\
             <legend>Data Upload</legend>\
@@ -58,8 +56,7 @@ $(document).ready(function() {
             </fieldset>\
           </fieldset>\
         ';
-    }
-    else if ( $(this).val().toLowerCase() == 'data_append' ) {
+    } else if ($(this).val().toLowerCase() == 'data_append') {
       obj_form.session = '\
           <fieldset class="fieldset-session-data-upload">\
             <legend>Data Upload</legend>\
@@ -77,52 +74,49 @@ $(document).ready(function() {
             </fieldset>\
           </fieldset>\
         ';
-    }
-    else obj_form.session = null;
+    } else obj_form.session = null;
     build_form('.fieldset-session-type', obj_form.session, ['.fieldset-session-predict', '.fieldset-session-generate', '.fieldset-session-data-upload', '.svm-form-submit']);
 
-  // Session Titles: for 'svm_session_id' (defined in ajax_session.js)
-    if ( $.inArray( $(this).val(), ['data_append', 'model_generate'] ) !== -1 ) {
+    // Session Titles: for 'svm_session_id' (defined in ajax_session.js)
+    if ($.inArray($(this).val(), ['data_append', 'model_generate']) !== -1) {
       session_id();
     }
 
-  // Model IDs: for 'svm_model_id' (defined in ajax_model.js)
-    if ( $.inArray( $(this).val(), ['model_predict'] ) !== -1 ) {
+    // Model IDs: for 'svm_model_id' (defined in ajax_model.js)
+    if ($.inArray($(this).val(), ['model_predict']) !== -1) {
       model_id();
     }
 
-  // Submit Button: 'model_generate' case
+    // Submit Button: 'model_generate' case
     $('.fieldset-session-generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
-      if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val() ) {
+      if ($('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val()) {
         obj_form.submit = '<input type="submit" class="svm-form-submit">';
         build_form('.fieldset-session-generate', obj_form.submit, ['.svm_form_submit']);
-      }
-      else $('.svm-form-submit').remove();
+      } else $('.svm-form-submit').remove();
     });
 
-  // Append 'Prediction Input' Fieldset (partially define in ajax_feature.js)
+    // Append 'Prediction Input' Fieldset (partially define in ajax_feature.js)
     $('.fieldset-session-predict').on('change', 'select[name="svm_model_id"]', function() {
-      if ( $('select[name="svm_model_id"]').val() ) {
+      if ($('select[name="svm_model_id"]').val()) {
         feature_properties();
 
         $('.fieldset-session-predict').on('change', 'input[name="prediction_input[]"]', function() {
-          var flag_field = field_determinant( $('input[name="prediction_input[]"]') );
+          var flag_field = field_determinant($('input[name="prediction_input[]"]'));
 
-          if( flag_field ) {
+          if (flag_field) {
             obj_form.submit = '<input type="submit" class="svm-form-submit">';
             build_form('.fieldset-session-predict', obj_form.submit, ['.svm-form-submit']);
-          }
-          else $('.svm-form-submit').remove();
+          } else $('.svm-form-submit').remove();
         });
 
       }
     });
 
-  // Append 'Supply Dataset' Fieldset
+    // Append 'Supply Dataset' Fieldset
     $('.fieldset_session_data_upload').on('input change', 'select[name="svm_dataset_type"], select[name="svm_session_id"], input[name="svm_title"], select[name="svm_model_type"]', function() {
-    // Session: Append Data
-      if ( $('select[name="svm_session_id"]').val() && $('select[name="svm_dataset_type"]').val() ) {
-        if ( $('select[name="svm_session_id"]').val().length > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' ) {
+      // Session: Append Data
+      if ($('select[name="svm_session_id"]').val() && $('select[name="svm_dataset_type"]').val()) {
+        if ($('select[name="svm_session_id"]').val().length > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload') {
           obj_form.dataset = '\
               <fieldset class="fieldset-supply-dataset">\
                 <legend>Supply Dataset</legend>\
@@ -132,8 +126,7 @@ $(document).ready(function() {
                 <p class="form-note">*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">csv</span>, <span class="italic">json</span>, or <span class="italic">xml</span> format.</p>\
               </fieldset>\
             ';
-        }
-        else if ( $('select[name="svm_session_id"]').val() > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'dataset_url' ) {
+        } else if ($('select[name="svm_session_id"]').val() > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'dataset_url') {
           obj_form.dataset = '\
               <fieldset class="fieldset-supply-dataset">\
                 <legend>Supply Dataset</legend>\
@@ -145,9 +138,9 @@ $(document).ready(function() {
         }
       }
 
-    // Session: New Data
-      else if ( $('select[name="svm_dataset_type"]').val() && $('input[name="svm_title"]').val() ) {
-        if ( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0 ) {
+      // Session: New Data
+      else if ($('select[name="svm_dataset_type"]').val() && $('input[name="svm_title"]').val()) {
+        if ($('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload' && $('input[name="svm_title"]').val().length !== 0) {
           obj_form.dataset = '\
               <fieldset class="fieldset-supply-dataset">\
                 <legend>Supply Dataset</legend>\
@@ -157,8 +150,7 @@ $(document).ready(function() {
                 <p class="form-note">*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">csv</span>, <span class="italic">json</span>, or <span class="italic">xml</span> format.</p>\
               </fieldset>\
             ';
-        }
-        else if ( $('select[name="svm_dataset_type"]').val().toLowerCase() == 'dataset_url' && $('input[name="svm_title"]').val().length !== 0 ) {
+        } else if ($('select[name="svm_dataset_type"]').val().toLowerCase() == 'dataset_url' && $('input[name="svm_title"]').val().length !== 0) {
           obj_form.dataset = '\
               <fieldset class="fieldset-supply-dataset">\
                 <legend>Supply Dataset</legend>\
@@ -168,55 +160,52 @@ $(document).ready(function() {
               </fieldset>\
             ';
         }
-      }
+      } else obj_form.dataset = null;
 
-      else obj_form.dataset = null;
-
-    // Submit Button
+      // Submit Button
       build_form('.fieldset-dataset-type', obj_form.dataset, ['.fieldset-training-parameters', '.fieldset-training-type', '.fieldset-supply-dataset']);
       $('.fieldset-supply-dataset').on('change', 'input[name="svm_dataset[]"]', function() {
-        var flag_field = field_determinant( $('input[name="svm_dataset[]"]') );
+        var flag_field = field_determinant($('input[name="svm_dataset[]"]'));
 
-        if( flag_field ) {
+        if (flag_field) {
           obj_form.submit = '<input type="submit" class="svm-form-submit">';
           build_form('.fieldset-session-data-upload', obj_form.submit, ['.svm-form-submit']);
-        }
-        else $('.svm-form-submit').remove();
+        } else $('.svm-form-submit').remove();
       });
     });
 
   });
 
-/**
- * build_form: append form html
- */
+  /**
+   * build_form: append form html
+   */
 
   function build_form(selector, data, arr_remove) {
-  // remove successive elements
-    $('form '+selector).parent().nextAll().remove();
-    $('form '+selector).parent().parent().nextAll().remove();
+    // remove successive elements
+    $('form ' + selector).parent().nextAll().remove();
+    $('form ' + selector).parent().parent().nextAll().remove();
 
-  // remove duplicate html
+    // remove duplicate html
     if (typeof arr_remove !== 'undefined') {
       $.each(arr_remove, function(key, value) {
         $(value).remove();
       });
     }
 
-  // append html
+    // append html
     $(selector).after(data);
   }
 
-/**
- * field_determinant: if any form array fields have a string length less than
- *                    1, return false.
- */
+  /**
+   * field_determinant: if any form array fields have a string length less than
+   *                    1, return false.
+   */
 
   function field_determinant(element) {
     var num_elements = element.length;
-    
+
     for (var i = 0; i < num_elements; i++) {
-      if(element[i].value.length < 1)
+      if (element[i].value.length < 1)
         return false;
     }
 
