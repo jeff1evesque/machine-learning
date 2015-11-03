@@ -20,7 +20,7 @@
 
       // Append to DOM
       if (data.error) {
-        $('.fieldset_dataset_type').append('<div class="error">' + data.error + '</div>');
+        $('.fieldset-dataset-type').append('<div class="error">' + data.error + '</div>');
       } else {
         $.each(data, function(index, value) {
           var value_id    = value.id;
