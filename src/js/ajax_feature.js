@@ -16,40 +16,39 @@
       data: data,
       dataType: 'json',
       beforeSend: function() {
-        ajaxLoader( $('form') );
+        ajaxLoader($('form'));
       }
     }).done(function(data) {
       var obj_form;
 
-    // Remove AJAX Overlay
-      $('form .ajax-overlay').fadeOut(200, function(){ $(this).remove(); });
+      // Remove AJAX Overlay
+      $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
-    // Append to DOM
+      // Append to DOM
       if (data.error) {
         $('.fieldset-session-predict').append('<div class="error">' + data.error + '</div>');
-      }
-      else {
-          obj_form = '\
+      } else {
+        obj_form = '\
               <fieldset class="fieldset-prediction-input">\
               <legend>Prediction Input</legend>\
-            ';
+            '          ;
 
-            $.each($.parseJSON(data), function(index, value) {
-                obj_form += '<input type="text" name="prediction_input[]" placeholder="' + value + '">';
-            });
+        $.each($.parseJSON(data), function(index, value) {
+          obj_form += '<input type="text" name="prediction_input[]" placeholder="' + value + '">';
+        });
 
-          obj_form += '</fieldset>';
+        obj_form += '</fieldset>';
       }
 
-    // Remove previous input, add new instance
+      // Remove previous input, add new instance
       $('.fieldset-prediction-input').remove();
       $('.fieldset-session-predict').append(obj_form);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Error Thrown: '+errorThrown);
-      console.log('Error Status: '+textStatus);
+      console.log('Error Thrown: ' + errorThrown);
+      console.log('Error Status: ' + textStatus);
 
-    // Remove AJAX Overlay
-      $('form .ajax-overlay').fadeOut(200, function(){ $(this).remove(); });
+      // Remove AJAX Overlay
+      $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
     });
   }
