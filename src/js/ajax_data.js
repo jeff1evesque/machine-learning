@@ -8,27 +8,27 @@ $(document).ready(function() {
     event.preventDefault();
 
     // Local Variables
-    var dataset      = $('input[name="svm_dataset[]"]');
-    var pInput       = $('input[name="prediction_input[]"]');
-    var flag_dataset = true;
-    var flag_pInput  = true;
+    var dataset         = $('input[name="svm_dataset[]"]');
+    var pInput          = $('input[name="prediction_input[]"]');
+    var flagDataset     = true;
+    var flagPrediction  = true;
 
     // Check if data supplied
     dataset.each(function() {
       if (typeof $(this).val() === 'undefined') {
-        flag_dataset = false;
+        flagDataset = false;
         return false;
       }
     });
     pInput.each(function() {
       if (typeof $(this).val() === 'undefined') {
-        flag_pInput = false;
+        flagPrediction = false;
         return false;
       }
     });
 
     // AJAX Process
-    if (flag_dataset || flag_pInput) {
+    if (flagDataset || flagPrediction) {
       $.ajax({
         url: $(this).attr('action'),
         type: 'POST',
@@ -52,7 +52,7 @@ $(document).ready(function() {
 
         // JSON Object from Server
         if (data.result) {
-          var obj_result = '\
+          var content = '\
                 <fieldset class="fieldset-prediction-result">\
                   <legend>Prediction Result</legend>\
                   <p class="result"></p>\
@@ -61,27 +61,27 @@ $(document).ready(function() {
 
           if (data.result.error) {
             $('.fieldset-prediction-result').remove();
-            $('.fieldset-session-predict').append(obj_result);
+            $('.fieldset-session-predict').append(content);
             $('.result').append(data.result.error);
           } else if (data.result.result) {
             $('.fieldset-prediction-result').remove();
-            $('.fieldset-session-predict').append(obj_result);
+            $('.fieldset-session-predict').append(content);
             $('.result').append(data.result.result);
           }
         } else {
-          json_server = (!$.isEmptyObject(data)) ? JSON.stringify(data, undefined, 2) : 'none';
-          console.log('JSON object from Server: ' + json_server);
+          var content = (!$.isEmptyObject(data)) ? JSON.stringify(data, undefined, 2) : 'none';
+          console.log('JSON object from Server: ' + content);
         }
 
         // Remove AJAX Overlay
-        $('form .ajax_overlay').fadeOut(200, function() { $(this).remove(); });
+        $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
       }).fail(function(jqXHR, textStatus, errorThrown) {
         console.log('Error Thrown: ' + errorThrown);
         console.log('Error Status: ' + textStatus);
 
         // Remove AJAX Overlay
-        $('form .ajax_overlay').fadeOut(200, function() { $(this).remove(); });
+        $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
       });
     }
 
