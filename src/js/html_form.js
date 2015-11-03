@@ -84,7 +84,7 @@ $(document).ready(function() {
 
     // Model IDs: for 'svm_model_id' (defined in ajax_model.js)
     if ($.inArray($(this).val(), ['model_predict']) !== -1) {
-      model_id();
+      modelId();
     }
 
     // Submit Button: 'model_generate' case
