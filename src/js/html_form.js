@@ -207,8 +207,9 @@ $(document).ready(function() {
     var numElements = element.length;
 
     for (var i = 0; i < numElements; i++) {
-      if (element[i].value.length < 1)
+      if (element[i].value.length < 1) {
         return false;
+      }
     }
 
     return true;
