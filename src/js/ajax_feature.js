@@ -19,7 +19,7 @@
         ajaxLoader($('form'));
       }
     }).done(function(data) {
-      var obj_form;
+      var content;
 
       // Remove AJAX Overlay
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
@@ -28,21 +28,21 @@
       if (data.error) {
         $('.fieldset-session-predict').append('<div class="error">' + data.error + '</div>');
       } else {
-        obj_form = '\
+        content = '\
               <fieldset class="fieldset-prediction-input">\
               <legend>Prediction Input</legend>\
             '          ;
 
         $.each($.parseJSON(data), function(index, value) {
-          obj_form += '<input type="text" name="predictionInput[]" placeholder="' + value + '">';
+          content += '<input type="text" name="predictionInput[]" placeholder="' + value + '">';
         });
 
-        obj_form += '</fieldset>';
+        content += '</fieldset>';
       }
 
       // Remove previous input, add new instance
       $('.fieldset-prediction-input').remove();
-      $('.fieldset-session-predict').append(obj_form);
+      $('.fieldset-session-predict').append(content);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: ' + errorThrown);
