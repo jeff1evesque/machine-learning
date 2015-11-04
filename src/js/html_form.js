@@ -75,7 +75,7 @@ $(document).ready(function() {
           </fieldset>\
         ';
     } else content.session = null;
-    build_form('.fieldset-session-type', content.session, ['.fieldset-session-predict', '.fieldset-session-generate', '.fieldset-session-data-upload', '.svm-form-submit']);
+    buildForm('.fieldset-session-type', content.session, ['.fieldset-session-predict', '.fieldset-session-generate', '.fieldset-session-data-upload', '.svm-form-submit']);
 
     // Session Titles: for 'svm_session_id' (defined in ajax_session.js)
     if ($.inArray($(this).val(), ['data_append', 'model_generate']) !== -1) {
@@ -91,7 +91,7 @@ $(document).ready(function() {
     $('.fieldset-session-generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
       if ($('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val()) {
         content.submit = '<input type="submit" class="svm-form-submit">';
-        build_form('.fieldset-session-generate', content.submit, ['.svm_form_submit']);
+        buildForm('.fieldset-session-generate', content.submit, ['.svm_form_submit']);
       } else $('.svm-form-submit').remove();
     });
 
@@ -105,7 +105,7 @@ $(document).ready(function() {
 
           if (flag_field) {
             content.submit = '<input type="submit" class="svm-form-submit">';
-            build_form('.fieldset-session-predict', content.submit, ['.svm-form-submit']);
+            buildForm('.fieldset-session-predict', content.submit, ['.svm-form-submit']);
           } else $('.svm-form-submit').remove();
         });
 
@@ -163,13 +163,13 @@ $(document).ready(function() {
       } else content.dataset = null;
 
       // Submit Button
-      build_form('.fieldset-dataset-type', content.dataset, ['.fieldset-training-parameters', '.fieldset-training-type', '.fieldset-supply-dataset']);
+      buildForm('.fieldset-dataset-type', content.dataset, ['.fieldset-training-parameters', '.fieldset-training-type', '.fieldset-supply-dataset']);
       $('.fieldset-supply-dataset').on('change', 'input[name="svm_dataset[]"]', function() {
         var flag_field = field_determinant($('input[name="svm_dataset[]"]'));
 
         if (flag_field) {
           content.submit = '<input type="submit" class="svm-form-submit">';
-          build_form('.fieldset-session-data-upload', content.submit, ['.svm-form-submit']);
+          buildForm('.fieldset-session-data-upload', content.submit, ['.svm-form-submit']);
         } else $('.svm-form-submit').remove();
       });
     });
@@ -177,10 +177,10 @@ $(document).ready(function() {
   });
 
   /**
-   * build_form: append form html
+   * buildForm: append form html
    */
 
-  function build_form(selector, data, arr_remove) {
+  function buildForm(selector, data, arr_remove) {
     // remove successive elements
     $('form ' + selector).parent().nextAll().remove();
     $('form ' + selector).parent().parent().nextAll().remove();
