@@ -22,6 +22,8 @@ $(document).ready(function() {
    *              form elements to be placed after the 'Remove' button, when the
    *              event listener is fired.
    *
+   * @param {object} event, a click event.
+   *
    * @param {object} event.preventDefault, when this method is called, the default
    *     action of the element will not be fired.
    *
@@ -65,6 +67,9 @@ $(document).ready(function() {
    * removeCallback: callback used within a 'delegation listener'.  It removes the
    *                 last corresponding form element after a 'Remove' button within
    *                 the immediate 'fieldset', when the event listener is fired.
+   *
+   *
+   * @param {object} event, a click event.
    *
    * @param {object} event.preventDefault, when this method is called, the default
    *                 action of the element will not be fired.
