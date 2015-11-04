@@ -24,8 +24,8 @@ $(document).ready(function() {
    *
    * @param {object} event, a click event.
    *
-   * @param {object} event.preventDefault, when this method is called, the default
-   *     action of the element will not be fired.
+   * @param {object} event.preventDefault, the default action on the element
+   *     implementing the corresponding action, is suppressed.
    *
    * @param {function} grep(array, Boolean), discards nulls, undefineds, empty strings
    *     and integer 0's
@@ -71,8 +71,8 @@ $(document).ready(function() {
    *
    * @param {object} event, a click event.
    *
-   * @param {object} event.preventDefault, when this method is called, the default
-   *                 action of the element will not be fired.
+   * @param {object} event.preventDefault, the default action on the element
+   *     implementing the corresponding action, is suppressed.
    */
 
   function removeCallback(event) {
