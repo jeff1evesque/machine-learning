@@ -14,21 +14,21 @@ $(document).ready(function() {
   var element = {};
 
   // delegation listeners
-  $('form').on('click', '.add-element', add_callback);
-  $('form').on('click', '.remove-element', remove_callback);
+  $('form').on('click', '.add-element', addCallback);
+  $('form').on('click', '.remove-element', removeCallback);
 
   /**
-   * add_callback: callback used within 'delegation listener'.  It creates additional
-   *               form elements to be placed after the 'Remove' button, when the
-   *               event listener is fired.
+   * addCallback: callback used within 'delegation listener'.  It creates additional
+   *              form elements to be placed after the 'Remove' button, when the
+   *              event listener is fired.
    *
    * @event.preventDefault, when this method is called, the default action of the
-   *               element will not be fired.
+   *              element will not be fired.
    *
    * @grep(array, Boolean), discards nulls, undefineds, empty strings and integer 0's
    */
 
-  function add_callback(event) {
+  function addCallback(event) {
     event.preventDefault();
 
     element.buttonClass            = $(this).prop('class').trim().split(' ')[1];
@@ -60,15 +60,15 @@ $(document).ready(function() {
   }
 
   /**
-   * remove_callback: callback used within a 'delegation listener'.  It removes the
-   *                  last corresponding form element after a 'Remove' button within
-   *                  the immediate 'fieldset', when the event listener is fired.
+   * removeCallback: callback used within a 'delegation listener'.  It removes the
+   *                 last corresponding form element after a 'Remove' button within
+   *                 the immediate 'fieldset', when the event listener is fired.
    *
    * @event.preventDefault, when this method is called, the default action of the
-   *                  element will not be fired.
+   *                 element will not be fired.
    */
 
-  function remove_callback(event) {
+  function removeCallback(event) {
     event.preventDefault();
 
     element.buttonClass    = $(this).prop('class').trim().split(' ')[1];
