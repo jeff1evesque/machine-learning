@@ -48,10 +48,11 @@ $(document).ready(function() {
     element.inputArraySize         = $('input[' + element.inputNameString + ']').length;
 
     // Append element after 'Remove' button
-    if (element.inputArraySize > 1)
+    if (element.inputArraySize > 1) {
       $('input[' + element.inputNameString + ']').last().after('<input ' + $.grep([element.inputTypeString, element.inputNameString, element.inputPlaceholderString, element.inputClassString], Boolean).join(', ') + '>');
-    else
+    } else {
       $('.' + element.inputId + '-remove').after('<input ' + $.grep([element.inputTypeString, element.inputNameString, element.inputClassString, element.inputPlaceholderString], Boolean).join(', ') + '>');
+    }
 
     // Remove fieldset 'dependencies'
     $(this).parent().nextAll().remove();
