@@ -49,14 +49,15 @@ $(document).ready(function() {
           });
         }
       }).done(function(data) {
+        var content;
 
         // JSON Object from Server
         if (data.result) {
-          var content =
-                '<fieldset class="fieldset-prediction-result">' +
-                  '<legend>Prediction Result</legend>' +
-                  '<p class="result"></p>' +
-                '</fieldset>';
+          content =
+            '<fieldset class="fieldset-prediction-result">' +
+              '<legend>Prediction Result</legend>' +
+              '<p class="result"></p>' +
+            '</fieldset>';
 
           if (data.result.error) {
             $('.fieldset-prediction-result').remove();
@@ -68,7 +69,7 @@ $(document).ready(function() {
             $('.result').append(data.result.result);
           }
         } else {
-          var content = (!$.isEmptyObject(data)) ? JSON.stringify(data, undefined, 2) : 'none';
+          content = (!$.isEmptyObject(data)) ? JSON.stringify(data, undefined, 2) : 'none';
           console.log('JSON object from Server: ' + content);
         }
 
