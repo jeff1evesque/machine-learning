@@ -78,7 +78,7 @@
     "validateParameterSeparator": ", ",
 
     "jsDoc": {
-        "checkAnnotations": "jsdoc3",
+        "checkAnnotations": "closurecompiler",
         "checkParamNames": true,
         "requireParamTypes": true,
         "checkRedundantParams": true,
