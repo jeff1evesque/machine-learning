@@ -10,6 +10,7 @@
 !__init__.py
 !app.py
 !license.md
+!contributing.md
 !Vagrantfile
 !/puppet/
 !Dockerfile
