@@ -31,26 +31,26 @@ $(document).ready(function() {
   function add_callback(event) {
     event.preventDefault();
 
-    element.button_class             = $(this).prop('class').trim().split(' ')[1];
-    element.input_id                 = element.button_class.replace('-add', '');
-    element.input_class_string       = (element.input_id !== undefined) ? 'class=\'' + element.input_id + '\'' : null;
+    element.buttonClass            = $(this).prop('class').trim().split(' ')[1];
+    element.inputId                = element.buttonClass.replace('-add', '');
+    element.inputClassString       = (element.inputId !== undefined) ? 'class=\'' + element.inputId + '\'' : null;
 
-    element.input_type               = (element.input_id !== undefined) ? $('.' + element.input_id).attr('type') : null;
-    element.input_type_string        = (element.input_type !== undefined) ? 'type=\'' + element.input_type + '\'' : null;
+    element.inputType              = (element.inputId !== undefined) ? $('.' + element.inputId).attr('type') : null;
+    element.inputTypeString        = (element.inputType !== undefined) ? 'type=\'' + element.inputType + '\'' : null;
 
-    element.input_name               = (element.input_id !== undefined) ? $('.' + element.input_id).attr('name') : null;
-    element.input_name_string        = (element.input_name !== undefined) ? 'name=\'' + element.input_name + '\'' : null;
+    element.inputName              = (element.inputId !== undefined) ? $('.' + element.inputId).attr('name') : null;
+    element.inputNameString        = (element.inputName !== undefined) ? 'name=\'' + element.inputName + '\'' : null;
 
-    element.input_placeholder        = (element.input_id !== undefined) ? $('.' + element.input_id).attr('placeholder') : null;
-    element.input_placeholder_string = (element.input_placeholder !== undefined) ? 'placeholder=\'' + element.input_placeholder + '\'' : null;
+    element.inputPlaceholder       = (element.inputId !== undefined) ? $('.' + element.inputId).attr('placeholder') : null;
+    element.inputPlaceholderString = (element.inputPlaceholder !== undefined) ? 'placeholder=\'' + element.inputPlaceholder + '\'' : null;
 
-    element.input_arraySize          = $('input[' + element.input_name_string + ']').length;
+    element.inputArraySize         = $('input[' + element.inputNameString + ']').length;
 
     // Append element after 'Remove' button
-    if (element.input_arraySize > 1)
-      $('input[' + element.input_name_string + ']').last().after('<input ' + $.grep([element.input_type_string, element.input_name_string, element.input_placeholder_string, element.input_class_string], Boolean).join(', ') + '>');
+    if (element.inputArraySize > 1)
+      $('input[' + element.inputNameString + ']').last().after('<input ' + $.grep([element.inputTypeString, element.inputNameString, element.inputPlaceholderString, element.inputClassString], Boolean).join(', ') + '>');
     else
-      $('.' + element.input_id + '-remove').after('<input ' + $.grep([element.input_type_string, element.input_name_string, element.input_class_string, element.input_placeholder_string], Boolean).join(', ') + '>');
+      $('.' + element.inputId + '-remove').after('<input ' + $.grep([element.inputTypeString, element.inputNameString, element.inputClassString, element.inputPlaceholderString], Boolean).join(', ') + '>');
 
     // Remove fieldset 'dependencies'
     $(this).parent().nextAll().remove();
@@ -71,14 +71,14 @@ $(document).ready(function() {
   function remove_callback(event) {
     event.preventDefault();
 
-    element.button_class    = $(this).prop('class').trim().split(' ')[1];
-    element.input_id        = element.button_class.replace('-remove', '');
-    element.input_name      = $('.' + element.input_id).attr('name');
-    element.input_arraySize = $('[name="' + element.input_name + '"]').length;
+    element.buttonClass    = $(this).prop('class').trim().split(' ')[1];
+    element.inputId        = element.buttonClass.replace('-remove', '');
+    element.inputName      = $('.' + element.inputId).attr('name');
+    element.inputArraySize = $('[name="' + element.inputName + '"]').length;
 
     // Remove last form element
-    if (element.input_arraySize > 1) {
-      $('input[name="' + element.input_name + '"]').last().remove();
+    if (element.inputArraySize > 1) {
+      $('input[name="' + element.inputName + '"]').last().remove();
     }
   }
 
