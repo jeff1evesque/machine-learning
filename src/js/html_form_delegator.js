@@ -22,10 +22,11 @@ $(document).ready(function() {
    *              form elements to be placed after the 'Remove' button, when the
    *              event listener is fired.
    *
-   * @event.preventDefault, when this method is called, the default action of the
-   *              element will not be fired.
+   * @param {object} event.preventDefault, when this method is called, the default
+   *     action of the element will not be fired.
    *
-   * @grep(array, Boolean), discards nulls, undefineds, empty strings and integer 0's
+   * @param {function} grep(array, Boolean), discards nulls, undefineds, empty strings
+   *     and integer 0's
    */
 
   function addCallback(event) {
@@ -64,8 +65,8 @@ $(document).ready(function() {
    *                 last corresponding form element after a 'Remove' button within
    *                 the immediate 'fieldset', when the event listener is fired.
    *
-   * @event.preventDefault, when this method is called, the default action of the
-   *                 element will not be fired.
+   * @param {object} event.preventDefault, when this method is called, the default
+   *                 action of the element will not be fired.
    */
 
   function removeCallback(event) {
