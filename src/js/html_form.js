@@ -101,7 +101,7 @@ $(document).ready(function() {
         featureProperties();
 
         $('.fieldset-session-predict').on('change', 'input[name="prediction_input[]"]', function() {
-          var flagField = field_determinant($('input[name="prediction_input[]"]'));
+          var flagField = fieldDeterminant($('input[name="prediction_input[]"]'));
 
           if (flagField) {
             content.submit = '<input type="submit" class="svm-form-submit">';
@@ -165,7 +165,7 @@ $(document).ready(function() {
       // Submit Button
       buildForm('.fieldset-dataset-type', content.dataset, ['.fieldset-training-parameters', '.fieldset-training-type', '.fieldset-supply-dataset']);
       $('.fieldset-supply-dataset').on('change', 'input[name="svm_dataset[]"]', function() {
-        var flagField = field_determinant($('input[name="svm_dataset[]"]'));
+        var flagField = fieldDeterminant($('input[name="svm_dataset[]"]'));
 
         if (flagField) {
           content.submit = '<input type="submit" class="svm-form-submit">';
@@ -182,14 +182,14 @@ $(document).ready(function() {
    * buildForm: append form html
    */
 
-  function buildForm(selector, data, arr_remove) {
+  function buildForm(selector, data, arrRemove) {
     // remove successive elements
     $('form ' + selector).parent().nextAll().remove();
     $('form ' + selector).parent().parent().nextAll().remove();
 
     // remove duplicate html
-    if (typeof arr_remove !== 'undefined') {
-      $.each(arr_remove, function(key, value) {
+    if (typeof arrRemove !== 'undefined') {
+      $.each(arrRemove, function(key, value) {
         $(value).remove();
       });
     }
@@ -199,14 +199,14 @@ $(document).ready(function() {
   }
 
   /**
-   * field_determinant: if any form array fields have a string length less than
+   * fieldDeterminant: if any form array fields have a string length less than
    *                    1, return false.
    */
 
-  function field_determinant(element) {
-    var num_elements = element.length;
+  function fieldDeterminant(element) {
+    var numElements = element.length;
 
-    for (var i = 0; i < num_elements; i++) {
+    for (var i = 0; i < numElements; i++) {
       if (element[i].value.length < 1)
         return false;
     }
