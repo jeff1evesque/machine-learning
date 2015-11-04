@@ -52,12 +52,11 @@ $(document).ready(function() {
 
         // JSON Object from Server
         if (data.result) {
-          var content = '\
-                <fieldset class="fieldset-prediction-result">\
-                  <legend>Prediction Result</legend>\
-                  <p class="result"></p>\
-                </fieldset>\
-              ';
+          var content =
+                '<fieldset class="fieldset-prediction-result">' +
+                  '<legend>Prediction Result</legend>' +
+                  '<p class="result"></p>' +
+                '</fieldset>';
 
           if (data.result.error) {
             $('.fieldset-prediction-result').remove();
