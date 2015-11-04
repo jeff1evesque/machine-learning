@@ -70,7 +70,9 @@ $(document).ready(function() {
               '</select>' +
             '</fieldset>' +
           '</fieldset>';
-    } else content.session = null;
+    } else {
+      content.session = null;
+    }
     buildForm('.fieldset-session-type', content.session, ['.fieldset-session-predict', '.fieldset-session-generate', '.fieldset-session-data-upload', '.svm-form-submit']);
 
     // Session Titles: for 'svm_session_id' (defined in ajax_session.js)
@@ -88,7 +90,9 @@ $(document).ready(function() {
       if ($('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val()) {
         content.submit = '<input type="submit" class="svm-form-submit">';
         buildForm('.fieldset-session-generate', content.submit, ['.svm_form_submit']);
-      } else $('.svm-form-submit').remove();
+      } else {
+        $('.svm-form-submit').remove();
+      }
     });
 
     // Append 'Prediction Input' Fieldset (partially define in ajax_feature.js)
@@ -102,7 +106,9 @@ $(document).ready(function() {
           if (flagField) {
             content.submit = '<input type="submit" class="svm-form-submit">';
             buildForm('.fieldset-session-predict', content.submit, ['.svm-form-submit']);
-          } else $('.svm-form-submit').remove();
+          } else {
+            $('.svm-form-submit').remove();
+          }
         });
 
       }
@@ -152,7 +158,9 @@ $(document).ready(function() {
                 '<input type="button" value="Remove" class="remove-element svm-dataset-xml-remove">' +
               '</fieldset>';
         }
-      } else content.dataset = null;
+      } else {
+        content.dataset = null;
+      }
 
       // Submit Button
       buildForm('.fieldset-dataset-type', content.dataset, ['.fieldset-training-parameters', '.fieldset-training-type', '.fieldset-supply-dataset']);
@@ -162,7 +170,9 @@ $(document).ready(function() {
         if (flagField) {
           content.submit = '<input type="submit" class="svm-form-submit">';
           buildForm('.fieldset-session-data-upload', content.submit, ['.svm-form-submit']);
-        } else $('.svm-form-submit').remove();
+        } else {
+          $('.svm-form-submit').remove();
+        }
       });
     });
 
