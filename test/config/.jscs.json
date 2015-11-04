@@ -1,5 +1,5 @@
 {
-    "excludeFiles": ["../../src/js/jquery-validate.js", "../../src/js/jquery-2.1.1.js"],
+    "excludeFiles": ["src/js/jquery-validate.js", "src/js/jquery-2.1.1.js"],
     "requireCurlyBraces": [
         "if",
         "else",
