@@ -98,7 +98,7 @@ $(document).ready(function() {
     // Append 'Prediction Input' Fieldset (partially define in ajax_feature.js)
     $('.fieldset-session-predict').on('change', 'select[name="svm_model_id"]', function() {
       if ($('select[name="svm_model_id"]').val()) {
-        feature_properties();
+        featureProperties();
 
         $('.fieldset-session-predict').on('change', 'input[name="prediction_input[]"]', function() {
           var flag_field = field_determinant($('input[name="prediction_input[]"]'));
