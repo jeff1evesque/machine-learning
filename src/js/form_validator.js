@@ -105,42 +105,42 @@ $(document).ready(function() {
 
   $('form').validate({
       rules: {
-        svm_session: {
+        svmSession: {
           required: true,
           equals: ['data_new', 'data_append', 'model_predict', 'model_generate']
         },
-        svm_title: {
+        svmTitle: {
           required: true,
           textOnly: true
         },
-        svm_session_id: {
+        svmSessionId: {
           required: true,
           integerOnly: true
         },
-        svm_model_id: {
+        svmModelId: {
           required: true,
           integerOnly: true
         },
-        svm_dataset_type: {
+        svmDatasetType: {
           required: true,
           equals: ['file_upload', 'dataset_url']
         },
-        svm_model_type: {
+        svmModelType: {
           required: true,
           equals: ['classification', 'regression']
         },
-        'prediction_input[]': {
+        'predictionInput[]': {
           required: true,
           numericOnly: true
         },
       },
       messages: {
-        svm_session: 'Not valid value',
-        svm_title: 'Must be nonempty string',
-        svm_dataset_type: 'Not valid value',
-        svm_session_id: 'Not valid value',
-        svm_model_type: 'Not valid value',
-        'prediction_input[]': 'Must be valid nonempty decimal',
+        svmSession: 'Not valid value',
+        svmTitle: 'Must be nonempty string',
+        svmDatasetType: 'Not valid value',
+        svmSessionId: 'Not valid value',
+        svmModelType: 'Not valid value',
+        'predictionInput[]': 'Must be valid nonempty decimal',
       },
     });
 });
