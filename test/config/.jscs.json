@@ -11,7 +11,7 @@
     "requireOperatorBeforeLineBreak": true,
     "requireCamelCaseOrUpperCaseIdentifiers": true,
     "maximumLineLength": {
-      "value": 80,
+      /*"value": 80,*/
       "allExcept": ["comments", "regex"]
     },
     "validateIndentation": 2,
