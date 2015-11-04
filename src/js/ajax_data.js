@@ -8,8 +8,8 @@ $(document).ready(function() {
     event.preventDefault();
 
     // Local Variables
-    var dataset         = $('input[name="svm_dataset[]"]');
-    var pInput          = $('input[name="prediction_input[]"]');
+    var dataset         = $('input[name="svmDataset[]"]');
+    var pInput          = $('input[name="predictionInput[]"]');
     var flagDataset     = true;
     var flagPrediction  = true;
 
