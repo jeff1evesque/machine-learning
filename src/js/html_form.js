@@ -97,9 +97,9 @@ $(document).ready(function() {
         featureProperties();
 
         $('.fieldset-session-predict').on('change', 'input[name="prediction_input[]"]', function() {
-          var flag_field = field_determinant($('input[name="prediction_input[]"]'));
+          var flagField = field_determinant($('input[name="prediction_input[]"]'));
 
-          if (flag_field) {
+          if (flagField) {
             content.submit = '<input type="submit" class="svm-form-submit">';
             buildForm('.fieldset-session-predict', content.submit, ['.svm-form-submit']);
           } else $('.svm-form-submit').remove();
@@ -157,9 +157,9 @@ $(document).ready(function() {
       // Submit Button
       buildForm('.fieldset-dataset-type', content.dataset, ['.fieldset-training-parameters', '.fieldset-training-type', '.fieldset-supply-dataset']);
       $('.fieldset-supply-dataset').on('change', 'input[name="svm_dataset[]"]', function() {
-        var flag_field = field_determinant($('input[name="svm_dataset[]"]'));
+        var flagField = field_determinant($('input[name="svm_dataset[]"]'));
 
-        if (flag_field) {
+        if (flagField) {
           content.submit = '<input type="submit" class="svm-form-submit">';
           buildForm('.fieldset-session-data-upload', content.submit, ['.svm-form-submit']);
         } else $('.svm-form-submit').remove();
