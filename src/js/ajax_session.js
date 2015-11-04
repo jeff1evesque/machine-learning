@@ -29,7 +29,7 @@
           var valueTitle = value.title;
           var element     = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
 
-          $('select[name="svm_session_id"]').append(element);
+          $('select[name="svmSessionId"]').append(element);
         });
       }
 
