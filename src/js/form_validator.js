@@ -11,13 +11,13 @@
  * Custom Method: callback function(s) used from the 'Compound Class Rules',
  *                and the 'Validation' sections (see below).
  *
- * @value the value submitted on the given form element
+ * @param {string} value, the value submitted on the given form element
  *
- * @element the element being validated
+ * @param {string} element, the element being validated
  *
- * @parameter additional parameters from the instantiating schema. For example,
- *     the 'validate' method (see below 'Validation:'), provides an array as a
- *     parameter to the added method 'equals':
+ * @param {string} parameter, additional parameters from the instantiating schema.
+ *     For example, the 'validate' method (see below 'Validation:'), provides an
+ *     array as a parameter to the added method 'equals':
  *
  *         `equals: ['training', 'analysis']`
  */
