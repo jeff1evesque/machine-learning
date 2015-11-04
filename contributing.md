@@ -1,7 +1,7 @@
 Contributing
 ====================
 
-This project implements a [BSD 3-Clause license](https://opensource.org/licenses/BSD-3-Clause), specified within [`license.md`](https://github.com/jeff1evesque/machine-learning/blob/master/license.md).  Additional inquires can be made by sending an email to <a href='mailto:jeff1evesque@yahoo.com'>jeff1evesque@yahoo.com</a>.
+This project implements a [BSD 3-Clause license](https://opensource.org/licenses/BSD-3-Clause), specified within [`license.md`](https://github.com/jeff1evesque/machine-learning/blob/master/license.md).
 
 ## Creating an Issue
 
