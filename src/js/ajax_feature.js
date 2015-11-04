@@ -7,8 +7,8 @@
  */
 
 // AJAX Process
-  function featureProperties() {
-    var data = {'session_id': $('select[name="svm_model_id"]').val()};
+  function feature_properties() {
+    var data = {'session_id': $('select[name="svmModelId"]').val()};
 
     $.ajax({
       type: 'POST',
@@ -19,7 +19,7 @@
         ajaxLoader($('form'));
       }
     }).done(function(data) {
-      var content;
+      var obj_form;
 
       // Remove AJAX Overlay
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
@@ -28,20 +28,21 @@
       if (data.error) {
         $('.fieldset-session-predict').append('<div class="error">' + data.error + '</div>');
       } else {
-        content =
-            '<fieldset class="fieldset-prediction-input">' +
-            '<legend>Prediction Input</legend>';
+        obj_form = '\
+              <fieldset class="fieldset-prediction-input">\
+              <legend>Prediction Input</legend>\
+            '          ;
 
         $.each($.parseJSON(data), function(index, value) {
-          content += '<input type="text" name="prediction_input[]" placeholder="' + value + '">';
+          obj_form += '<input type="text" name="predictionInput[]" placeholder="' + value + '">';
         });
 
-        content += '</fieldset>';
+        obj_form += '</fieldset>';
       }
 
       // Remove previous input, add new instance
       $('.fieldset-prediction-input').remove();
-      $('.fieldset-session-predict').append(content);
+      $('.fieldset-session-predict').append(obj_form);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: ' + errorThrown);
