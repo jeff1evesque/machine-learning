@@ -28,10 +28,9 @@
       if (data.error) {
         $('.fieldset-session-predict').append('<div class="error">' + data.error + '</div>');
       } else {
-        content = '\
-              <fieldset class="fieldset-prediction-input">\
-              <legend>Prediction Input</legend>\
-            '          ;
+        content =
+              '<fieldset class="fieldset-prediction-input">' +
+              '<legend>Prediction Input</legend>';
 
         $.each($.parseJSON(data), function(index, value) {
           content += '<input type="text" name="predictionInput[]" placeholder="' + value + '">';
