@@ -22,7 +22,13 @@ $(document).ready(function() {
    *              form elements to be placed after the 'Remove' button, when the
    *              event listener is fired.
    *
-   * @param {object} event, a click event.
+   * @param {object} event - a click event.
+   *
+   * @param {object} event.preventDefault, the default action on the element
+   *     implementing the corresponding action, is suppressed.
+   *
+   * @param {function} grep(array, Boolean), discards nulls, undefineds, empty strings
+   *     and integer 0's
    */
 
   function addCallback(event) {
