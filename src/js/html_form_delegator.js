@@ -24,10 +24,10 @@ $(document).ready(function() {
    *
    * @param {object} event - a click event.
    *
-   * @param {object} event.preventDefault, the default action on the element
+   * @param {object} event.preventDefault - the default action on the element
    *     implementing the corresponding action, is suppressed.
    *
-   * @param {function} grep(array, Boolean), discards nulls, undefineds, empty strings
+   * @param {function} grep(array, Boolean) - discards nulls, undefineds, empty strings
    *     and integer 0's
    */
 
@@ -69,9 +69,9 @@ $(document).ready(function() {
    *                 the immediate 'fieldset', when the event listener is fired.
    *
    *
-   * @param {object} event, a click event.
+   * @param {object} event - a click event.
    *
-   * @param {object} event.preventDefault, the default action on the element
+   * @param {object} event.preventDefault - the default action on the element
    *     implementing the corresponding action, is suppressed.
    */
 
