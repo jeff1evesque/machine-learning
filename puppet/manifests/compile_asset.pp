@@ -20,51 +20,8 @@ $compilers.each |Integer $index, String $compiler| {
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
-        content => @("EOT"),
-                   #!upstart
-                   description 'start ${compiler}'
-
-                   ## start job defined in this file after system services, and processes have already loaded
-                   #       (to prevent conflict).
-                   #
-                   #  @vagrant-mounted, an event that executes after the shared folder is mounted
-                   #  @[2345], represents all configuration states with general linux, and networking access
-                   start on (vagrant-mounted and runlevel [2345])
-
-                   ## stop upstart job
-                   stop on runlevel [!2345]
-
-                   ## restart upstart job continuously
-                   respawn
-
-                   # required for permission to write to '/vagrant/' files (pre-stop stanza)
-                   setuid vagrant
-                   setgid vagrant
-
-                   ## run upstart job as a background process
-                   expect fork
-
-                   ## start upstart job
-                   #
-                   #  @chdir, change the current working directory
-                   chdir /vagrant/puppet/scripts/
-                   exec ./${compiler}
-
-                   ## log start-up date
-                   #
-                   #  @[`date`], current date script executed
-                   pre-start script
-                       echo "[`date`] ${compiler} service watcher starting" >> /vagrant/log/${compiler}.log 
-                   end script
-
-                   ## log shut-down date, remove process id from log before '/vagrant' is unmounted
-                   #
-                   #  @[`date`], current date script executed
-                   pre-stop script
-                       echo "[`date`] ${compiler} watcher stopping" >> /vagrant/log/${compiler}.log
-                   end script
-                   | EOT
-               notify  => Exec["dos2unix-upstart-${compiler}"],
+        content => template('/vagrant/puppet/template/webcompilers.erb'),
+        notify  => Exec["dos2unix-upstart-${compiler}"],
     }
 
     ## dos2unix upstart: convert clrf (windows to linux) in case host machine is windows.
