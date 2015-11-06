@@ -26,9 +26,6 @@ $(document).ready(function() {
    *
    * @param {object} event.preventDefault - the default action on the element
    *     implementing the corresponding action, is suppressed.
-   *
-   * @param {function} grep - discards nulls, undefineds, empty strings and
-   *     integer 0's.
    */
 
   function addCallback(event) {
