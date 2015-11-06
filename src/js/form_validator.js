@@ -1,5 +1,5 @@
 /**
- * @form_validator.js: call 'validate()' method on defined form elements.
+ * form_validator.js: call 'validate()' method on defined form elements.
  *
  *     http://jqueryvalidation.org/documentation/
  *     http://jqueryvalidation.org/category/validator/
