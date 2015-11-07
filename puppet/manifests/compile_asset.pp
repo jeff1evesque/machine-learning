@@ -15,8 +15,6 @@ $compilers.each |Integer $index, String $compiler| {
     }
 
     ## create startup script: for webcompilers, using heredoc syntax
-    #
-    #  @("EOT"), the use double quotes on the end tag, allows variable interpolation within the puppet heredoc.
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
