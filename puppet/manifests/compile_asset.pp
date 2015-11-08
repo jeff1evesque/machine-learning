@@ -45,11 +45,11 @@ $compilers.each |Integer $index, String $compiler| {
     exec {"dos2unix-bash-${compiler}":
         command     => "dos2unix /vagrant/puppet/scripts/${compiler}",
         refreshonly => true,
-        notify      => Service["${compiler}"],
+        notify      => Service[$compiler],
     }
 
     ## start ${compiler} service
-    service {"${compiler}":
+    service {$compiler":
         ensure => 'running',
         enable => true,
         notify => Exec["touch-${directory_src[$index]}-files"],
