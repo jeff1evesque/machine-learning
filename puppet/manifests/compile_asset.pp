@@ -47,7 +47,7 @@ $compilers.each |Integer $index, String $compiler| {
     ## start ${compiler} service
     service {"${compiler}":
         ensure => 'running',
-        enable => 'true',
+        enable => true,
         notify => Exec["touch-${directory_src[$index]}-files"],
     }
 
