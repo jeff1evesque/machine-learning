@@ -30,7 +30,7 @@ $compilers.each |Integer $index, String $compiler| {
     #      on the corresponding listening end point. But, the 'service' end
     #      point does not require the 'refreshonly' attribute.
     exec {"dos2unix-upstart-${compiler}":
-        command     s=> "dos2unix /etc/init/${compiler}.conf",
+        command     => "dos2unix /etc/init/${compiler}.conf",
         refreshonly => true,
         notify      => Exec["dos2unix-bash-${compiler}"],
     }
@@ -45,7 +45,7 @@ $compilers.each |Integer $index, String $compiler| {
     exec {"dos2unix-bash-${compiler}":
         command     => "dos2unix /vagrant/puppet/scripts/${compiler}",
         refreshonly => true,
-        notify     s => Service["${compiler}"],
+        notify      => Service["${compiler}"],
     }
 
     ## start ${compiler} service
