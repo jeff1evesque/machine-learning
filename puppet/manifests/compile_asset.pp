@@ -67,7 +67,7 @@ $compilers.each |Integer $index, String $compiler| {
     #  Note: every 'command' implementation checks if directory is nonempty,
     #        then touch all files in the directory, respectively.
     exec {"touch-${directory_src[$index]}-files":
-        command     => "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ]; then touch /vagrant/src/${directory_src[$index]}/*; fi",
+        command     => template('/vagrant/puppet/template/webcompilers.erb'),
         refreshonly => true,
         provider    => shell,
     }
