@@ -9,7 +9,7 @@ file {'vagrant-startup-script':
     path    => '/etc/init/workaround-vagrant-bug-6074.conf',
     ensure  => 'present',
     content => template('/vagrant/puppet/template/vagrant_mounted.erb'),
-    notify  => Exec["dos2unix-upstart-vagrant"],
+    notify  => Exec['dos2unix-upstart-vagrant'],
 }
 
 ## dos2unix upstart: convert clrf (windows to linux) in case host machine
@@ -27,5 +27,5 @@ exec {'dos2unix-upstart-vagrant':
 ## start 'workaround-vagrant-bug-6074' service
 service {'workaround-vagrant-bug-6074':
     ensure => 'running',
-    enable => 'true',
+    enable => true,
 }
