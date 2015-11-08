@@ -30,9 +30,9 @@ case $::osfamily {
         #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
         #      'service' end point does not require the 'refreshonly' attribute.
         exec {'dos2unix-flask':
-            command => 'dos2unix /etc/init/flask.conf',
+            command     => 'dos2unix /etc/init/flask.conf',
             refreshonly => true,
-            notify => Service['flask'],
+            notify      => Service['flask'],
         }
 
         ## start webserver
