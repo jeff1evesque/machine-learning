@@ -67,7 +67,7 @@ $compilers.each |Integer $index, String $compiler| {
     #  Note: every 'command' implementation checks if directory is nonempty,
     #        then touch all files in the directory, respectively.
     exec {"touch-${directory_src[$index]}-files":
-        command     => template('/vagrant/puppet/template/webcompilers.erb'),
+        command     => template('/vagrant/puppet/template/touch_source.erb'),
         refreshonly => true,
         provider    => shell,
     }
