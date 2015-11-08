@@ -28,9 +28,9 @@ $compilers.each |Integer $index, String $compiler| {
     #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
     #      'service' end point does not require the 'refreshonly' attribute.
     exec {"dos2unix-upstart-${compiler}":
-        command => "dos2unix /etc/init/${compiler}.conf",
+        command     s=> "dos2unix /etc/init/${compiler}.conf",
         refreshonly => true,
-        notify  => Exec["dos2unix-bash-${compiler}"],
+        notify      => Exec["dos2unix-bash-${compiler}"],
     }
 
     ## dos2unix bash: convert clrf (windows to linux) in case host machine is windows.
@@ -39,16 +39,16 @@ $compilers.each |Integer $index, String $compiler| {
     #      'refreshonly => true' would be implemented on the corresponding listening end point. But, the
     #      'service' end point does not require the 'refreshonly' attribute.
     exec {"dos2unix-bash-${compiler}":
-        command => "dos2unix /vagrant/puppet/scripts/${compiler}",
+        command     => "dos2unix /vagrant/puppet/scripts/${compiler}",
         refreshonly => true,
-        notify  => Service["${compiler}"],
+        notify     s => Service["${compiler}"],
     }
 
     ## start ${compiler} service
     service {"${compiler}":
         ensure => 'running',
         enable => 'true',
-        notify  => Exec["touch-${directory_src[$index]}-files"],
+        notify => Exec["touch-${directory_src[$index]}-files"],
     }
 
     ## touch source: ensure initial build compiles every source file.
@@ -62,8 +62,8 @@ $compilers.each |Integer $index, String $compiler| {
     #  Note: every 'command' implementation checks if directory is nonempty, then touch all files in the
 	#        directory, respectively.
     exec {"touch-${directory_src[$index]}-files":
-        command => "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ]; then touch /vagrant/src/${directory_src[$index]}/*; fi",
+        command     => "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ]; then touch /vagrant/src/${directory_src[$index]}/*; fi",
         refreshonly => true,
-        provider => shell,
+        provider    => shell,
     }
 }
