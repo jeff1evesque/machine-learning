@@ -25,7 +25,7 @@ install:
   - gem install scss_lint
   - npm install -g bootlint
   - gem install puppet-lint
-  - gem install rubocop
+  - gem install r10k
   - npm install jsonlint -g
   - gem install csvlint
   - sudo apt-get update
@@ -45,17 +45,17 @@ install:
 #        defined from the Dockerfile.
 script:
   - flake8 .
-  - jshint --verbose src/js/*.js --config test/config/jshint.json
+  - jshint --verbose src/js/*.js --config test/config/jshint.json --exclude-path test/config/.jshintignore
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check puppet/manifests
-  - rubocop puppet/Puppefile
-  - rubocop puppet/scripts/Puppetfile
+  - (cd puppet && r10k puppetfile check)
+  - (cd puppet/scripts/ && r10k puppetfile check)
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --noout interface/static/data/xml/*.xml --schema interface/static/data/xml/dataset.xsd
   - xmllint --noout interface/static/data/xml/*.xsd
-  - mdl .
+  - mdl . style 'test/config/markdown.md'
   - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
   - find . -name '*.sh' | xargs shellcheck

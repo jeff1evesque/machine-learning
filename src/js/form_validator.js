@@ -1,5 +1,5 @@
 /**
- * @form_validator.js: call 'validate()' method on defined form elements.
+ * form_validator.js: call 'validate()' method on defined form elements.
  *
  *     http://jqueryvalidation.org/documentation/
  *     http://jqueryvalidation.org/category/validator/
@@ -11,57 +11,69 @@
  * Custom Method: callback function(s) used from the 'Compound Class Rules',
  *                and the 'Validation' sections (see below).
  *
- * @value the value submitted on the given form element
+ * @param {string} value - the value submitted on the given form element
  *
- * @element the element being validated
+ * @param {string} element - the element being validated
  *
- * @parameter additional parameters from the instantiating schema. For example,
- *     the 'validate' method (see below 'Validation:'), provides an array as a
- *     parameter to the added method 'equals':
+ * @param {string} parameter - additional parameters from the instantiating schema.
+ *     For example, the 'validate' method (see below 'Validation:'), provides an
+ *     array as a parameter to the added method 'equals':
  *
  *         `equals: ['training', 'analysis']`
  */
   jQuery.validator.addMethod(
     'equals',
     function(value, element, parameter) {
-      if ( $.inArray(value, parameter) >= 0 ) return true;
-      else return false;
-    });
-  jQuery.validator.addMethod(
-    'integerOnly',
-    function(value, element, parameter) {
-      if ( Math.round(parseInt(value)) === parseInt(value) ) return true;
-      else return false;
-  });
-  jQuery.validator.addMethod(
-    'numericOnly',
-    function(value, element, parameter) {
-    // invalid condition: -0, and -0.0
-      if (value.match(/^-0*.0*$/)) {
-        return false;
-      }
-    // validate integers: cannot start with 0 (except trivial 0)
-      else if (value.match(/^-?(0|[1-9][0-9]*)$/)) {
+      if ($.inArray(value, parameter) >= 0) {
         return true;
-    // validate floats: cannot start with 0 (except trivial 0.x)
-      } else if (value.match(/^-?(0|[1-9][0-9]*)?\.\d+$/)) {
-        return true;
-    // invalid condition: general
       } else {
         return false;
       }
-  });
-  jQuery.validator.addMethod(
-    'textOnly',
+    });
+jQuery.validator.addMethod(
+  'integerOnly',
     function(value, element, parameter) {
-      if ( typeof(value) === 'string' ) return true;
-      else return false;
+      if (Math.round(parseInt(value)) === parseInt(value)) {
+        return true;
+      } else {
+        return false;
+      }
+    });
+jQuery.validator.addMethod(
+  'numericOnly',
+    function(value, element, parameter) {
+    // invalid condition: -0, and -0.0
+    if (value.match(/^-0*.0*$/)) {
+      return false;
+    }
+    // validate integers: cannot start with 0 (except trivial 0)
+    else if (value.match(/^-?(0|[1-9][0-9]*)$/)) {
+      return true;
+  // validate floats: cannot start with 0 (except trivial 0.x)
+    } else if (value.match(/^-?(0|[1-9][0-9]*)?\.\d+$/)) {
+      return true;
+  // invalid condition: general
+    } else {
+      return false;
+    }
   });
-  jQuery.validator.addMethod(
-    'fileExtension',
-    function( value, element, parameter ) {
-      if ( $.inArray(element.files[0]['name'].split('.').pop().toLowerCase(), parameter) >= 0 ) return true;
-      else return false;
+jQuery.validator.addMethod(
+  'textOnly',
+    function(value, element, parameter) {
+      if (typeof(value) === 'string') {
+        return true;
+      } else {
+        return false;
+      }
+    });
+jQuery.validator.addMethod(
+  'fileExtension',
+    function(value, element, parameter) {
+      if ($.inArray(element.files[0].name.split('.').pop().toLowerCase(), parameter) >= 0) {
+        return true;
+      } else {
+        return false;
+      }
     },
     'Incorrect file format'
   );
@@ -75,60 +87,60 @@
  *       must be defined as the last parameter to the 'addMethod' definition (see
  *       above 'fileExtension').
  */
-  jQuery.validator.addClassRules({
-    svm_dataset_xml: {
+jQuery.validator.addClassRules({
+    'svm-dataset-xml': {
       url: true,
     },
-    svm_dataset_file: {
+    'svm-dataset-file': {
       fileExtension: ['csv', 'xml', 'json'],
     },
   });
 
 /**
- * Validation: validates form elements by the 'name attribute. This validation
+ * Validation: validates form elements by the 'name' attribute. This validation
  *             may implement the 'Definition(s)', defined from the 'addmethod'
  *             definition.
  */
-  $(document).ready(function() {
+$(document).ready(function() {
 
-    $('form').validate({
+  $('form').validate({
       rules: {
-        svm_session: {
+        svmSession: {
           required: true,
           equals: ['data_new', 'data_append', 'model_predict', 'model_generate']
         },
-        svm_title: {
+        svmTitle: {
           required: true,
-          textOnly: true          
+          textOnly: true
         },
-        svm_session_id: {
-          required: true,
-          integerOnly: true
-        },
-        svm_model_id: {
+        svmSessionId: {
           required: true,
           integerOnly: true
         },
-        svm_dataset_type: {
+        svmModelId: {
+          required: true,
+          integerOnly: true
+        },
+        svmDatasetType: {
           required: true,
           equals: ['file_upload', 'dataset_url']
         },
-        svm_model_type: {
+        svmModelType: {
           required: true,
           equals: ['classification', 'regression']
         },
-        'prediction_input[]': {
+        'predictionInput[]': {
           required: true,
           numericOnly: true
         },
       },
       messages: {
-        svm_session: 'Not valid value',
-        svm_title: 'Must be nonempty string',
-        svm_dataset_type: 'Not valid value',
-        svm_session_id: 'Not valid value',
-        svm_model_type: 'Not valid value',
-        'prediction_input[]': 'Must be valid nonempty decimal',
+        svmSession: 'Not valid value',
+        svmTitle: 'Must be nonempty string',
+        svmDatasetType: 'Not valid value',
+        svmSessionId: 'Not valid value',
+        svmModelType: 'Not valid value',
+        'predictionInput[]': 'Must be valid nonempty decimal',
       },
     });
-  });
+});
