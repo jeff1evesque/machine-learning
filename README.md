@@ -1,7 +1,5 @@
 # Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg)](https://travis-ci.org/jeff1evesque/machine-learning)
 
-### Definition
-
 In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning) models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification) and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More generally, machine-learning deals with the construction and study of systems that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than follow only explicitly programmed instructions.
 
 Applications for machine learning include:
@@ -17,7 +15,7 @@ Applications for machine learning include:
 - [Sequence mining](http://en.wikipedia.org/wiki/Sequence_mining), commonly referred as *data mining*
 - [Computational advertising](http://en.wikipedia.org/wiki/Computational_advertising), and [Computational finance](http://en.wikipedia.org/wiki/Computational_finance)
 
-### Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
+## Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 
 Donations are very appreciated.  Smaller donations, could fund a latté, during a late night meddling code.  While larger donations, could fund further research, by assisting the cost for the following:
 
@@ -27,7 +25,7 @@ Donations are very appreciated.  Smaller donations, could fund a latté, during 
   - [xbee chip](www.digi.com/lp/xbee): these chips could implement the [zigbee](http://www.zigbee.org/) wireless protocol, allowing peripheral device(s) to transmit data between one another, and finally to the machine-learning server(s).
   - [sensor](http://www.adafruit.com/categories/35): multiple types of sensors could be connected via the [zigbee](http://www.zigbee.org/) wireless protocol to other sensor(s), raspberry pi(s), or directly to the machine-learning server(s).
 
-### Contributing
+## Contributing
 
 Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-learning/blob/master/contributing.md), when contributing code.  Pull requests that deviate from the [`contributing.md`](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), could be [labelled](https://github.com/jeff1evesque/machine-learning/labels) as `invalid`, and closed (without merging to master).  These best practices will ensure integrity, when revisions of code, or issues need to be reviewed.
 
@@ -236,4 +234,4 @@ programmatic_interface/pytest_session.py ....
 =========================== 4 passed in 1.06 seconds ===========================
 ```
 
-**Note:** every script, or file(s) within this repository, has been [linted](https://en.wikipedia.org/wiki/Lint_%28software%29) via [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml).
+**Note:** every script, or file(s) within this repository, has been[linted](https://en.wikipedia.org/wiki/Lint_%28software%29) via [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml).
