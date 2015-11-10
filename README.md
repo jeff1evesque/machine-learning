@@ -1,7 +1,7 @@
 Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg)](https://travis-ci.org/jeff1evesque/machine-learning)
 ================
 
-###Definition
+### Definition
 
 In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning) models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification) and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More generally, machine-learning deals with the construction and study of systems that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than follow only explicitly programmed instructions.
 
@@ -32,7 +32,7 @@ Donations are very appreciated.  Smaller donations, could fund a latté, during 
 
 Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-learning/blob/master/contributing.md), when contributing code.  Pull requests that deviate from the [`contributing.md`](https://github.com/jeff1evesque/machine-learning/wiki/Contributing), could be [labelled](https://github.com/jeff1evesque/machine-learning/labels) as `invalid`, and closed (without merging to master).  These best practices will ensure integrity, when revisions of code, or issues need to be reviewed.
 
-##Preconfiguration
+## Preconfiguration
 
 This project implements puppets [r10k](https://github.com/puppetlabs/r10k) module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile` (already defined), which includes the following syntax:
 
@@ -101,7 +101,7 @@ $ cd /[PROJECT-DIRECTORY]
 $ git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
-##Installation
+## Installation
 
 In order to proceed with the installation for this project, two dependencies need to be installed:
 
@@ -135,9 +135,9 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 
 **Note:** general convention implements port `443` for ssl.
 
-##Testing / Execution
+## Testing / Execution
 
-###Web Interface
+### Web Interface
 
 The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html), or GUI implementation, allow users to implement the following sessions:
 
@@ -158,7 +158,7 @@ The following are acceptable syntax:
 
 As mentioned earlier, the web application can be accessed after subsequent `vagrant up` command, followed by using a browser referencing localhost:8080 (or [https://localhost:5050](https://localhost:5050), with ssl), on the host machine.
 
-###Programmatic Interface
+### Programmatic Interface
 
 The programmatic-interface, or set of API, allow users to implement the following sessions:
 
@@ -189,7 +189,7 @@ The following outlines what the `data` attribute should be, for the above `post`
 
 **Note:** the content of each of the above files, can substituted for the above `data` attribute.
 
-####Data Attributes
+#### Data Attributes
 
 The following (non-exhaustive) properties define the above implemented `data` attribute:
 
@@ -207,7 +207,7 @@ The following (non-exhaustive) properties define the above implemented `data` at
 - `svm_dataset_type` corresponds to one of the following dataset types:
   - `json_string`: indicate that the dataset is being sent via a `post` request
   
-###Test Scripts
+### Test Scripts
 
 This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate logic in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).  Future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit tests.  These tests will be automated within a travis [build](https://travis-ci.org/jeff1evesque/machine-learning), using a docker container, defined within the [`Dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Dockerfile).
 
