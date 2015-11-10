@@ -88,8 +88,8 @@ Hi jeff1evesque! You've successfully authenticated, but GitHub does not provide 
 Fork this project in your GitHub account, then clone your repository:
 
 ```bash
-$ cd /[PROJECT-DIRECTORY]
-$ sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
+cd /[PROJECT-DIRECTORY]
+sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
 **Note:** change `[PROJECT-DIRECTORY]` to a desired directory path, and `[YOUR-USERNAME]` to your corresponding git username.
@@ -97,8 +97,8 @@ $ sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-lear
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
 ```bash
-$ cd /[PROJECT-DIRECTORY]
-$ git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
+cd /[PROJECT-DIRECTORY]
+git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
 
 ## Installation
@@ -113,8 +113,8 @@ In order to proceed with the installation for this project, two dependencies nee
 Once the necessary dependencies have been installed, execute the following command to build the virtual environment:
 
 ```bash
-$ cd /path/to/machine-learning/
-$ vagrant up
+cd /path/to/machine-learning/
+vagrant up
 ```
 
 Depending on the network speed, the build can take between 10-15 minutes.  So, grab a cup of coffee, and perhaps enjoy a danish while the virtual machine builds.  Remember, the application is intended to run on localhost, where the [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Vagrantfile) defines the exact port-forward on the host machine.
