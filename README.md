@@ -36,7 +36,7 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
 
 This project implements puppets [r10k](https://github.com/puppetlabs/r10k) module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile` (already defined), which includes the following syntax:
 
-```
+```ruby
 #!/usr/bin/env ruby
 ## Install Module: stdlib (apt dependency)
 mod 'stdlib',
@@ -87,7 +87,7 @@ Hi jeff1evesque! You've successfully authenticated, but GitHub does not provide 
 
 Fork this project in your GitHub account, then clone your repository:
 
-```
+```bash
 $ cd /[PROJECT-DIRECTORY]
 $ sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-learning.git
 ```
@@ -96,7 +96,7 @@ $ sudo git clone https://[YOUR-USERNAME]@github.com/[YOUR-USERNAME]/machine-lear
 
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
-```
+```bash
 $ cd /[PROJECT-DIRECTORY]
 $ git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
 ```
