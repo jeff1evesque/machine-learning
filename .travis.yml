@@ -56,6 +56,6 @@ script:
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --noout interface/static/data/xml/*.xml --schema interface/static/data/xml/dataset.xsd
   - xmllint --noout interface/static/data/xml/*.xsd
-  - mdl . style 'test/config/markdown.md'
+  - mdl . --style test/config/markdown.md
   - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
   - find . -name '*.sh' | xargs shellcheck
