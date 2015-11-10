@@ -141,7 +141,7 @@ Otherwise, if ssl is configured, then the application is accessible via `https:/
 
 The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html), or GUI implementation, allow users to implement the following sessions:
 
-- `data_new`: store the provided dataset(s), within the implemented sql database. 
+- `data_new`: store the provided dataset(s), within the implemented sql database.
 - `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
 - `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
 - `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
@@ -162,7 +162,7 @@ As mentioned earlier, the web application can be accessed after subsequent `vagr
 
 The programmatic-interface, or set of API, allow users to implement the following sessions:
 
-- `data_new`: store the provided dataset(s), within the implemented sql database. 
+- `data_new`: store the provided dataset(s), within the implemented sql database.
 - `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
 - `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
 - `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
@@ -206,7 +206,7 @@ The following (non-exhaustive) properties define the above implemented `data` at
   - `model_predict`
 - `svm_dataset_type` corresponds to one of the following dataset types:
   - `json_string`: indicate that the dataset is being sent via a `post` request
-  
+
 ### Test Scripts
 
 This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate logic in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).  Future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit tests.  These tests will be automated within a travis [build](https://travis-ci.org/jeff1evesque/machine-learning), using a docker container, defined within the [`Dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Dockerfile).
