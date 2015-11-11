@@ -10,7 +10,7 @@ Depending on circumstance: a descriptive, or non-descriptive issue title is acce
 
 The following is an example of a descriptive issue title:
 
-```
+```bash
 index.php, include 'header.php'
 ```
 
@@ -50,7 +50,7 @@ More specifically, branches should be named as follows:
 
 Therefore, an issue should be created prior to creating a new branch.  Once the branch has been created, the corresponding branch can be created as follows:
 
-```
+```bash
 git checkout -b [bug|feature|remove]-[issue number] master
 ```
 
@@ -74,7 +74,7 @@ The message should *always* be prefixed with an issue number that the commit cor
 
 The following pull request title, is an acceptable syntax:
 
-```
+```bash
 #230: index.php, included 'header.php'
 ```
 
