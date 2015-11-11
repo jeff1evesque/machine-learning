@@ -29,6 +29,7 @@ Implement flask upstart script
 A non-descriptive issue title is generally used, when multiple files will be modified in a single pull request.  Therefore, remember to capture the technology, or item(s) that will be implemented in less than 50 characters (without possessive tone).
 
 ### Body
+
 - filename references should *always* be wrapped by single tildas
 - codeblocks should *always* be wrapped by triple tildas ([fenced code block](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks)), where the first set of triple tildas is followed by the language being used ([syntax highlighted](https://help.github.com/articles/github-flavored-markdown/#syntax-highlighting))
 - one line code snippets must be wrapped by single tildas ([inline format](https://help.github.com/articles/markdown-basics/#inline-formats))
