@@ -1,7 +1,14 @@
-# Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-
-# learning.svg)](https://travis-ci.org/jeff1evesque/machine-learning)
+# Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg)](https://travis-ci.org/jeff1evesque/machine-learning)
 
-In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning) models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification) and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More generally, machine-learning deals with the construction and study of systems that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than follow only explicitly programmed instructions.
+In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support
+vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/
+Supervised_learning) models with associated learning [algorithms](http://en.wi
+kipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for
+ [classification](http://en.wikipedia.org/wiki/Statistical_classification) and
+ [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More
+ generally, machine-learning deals with the construction and study of systems
+ that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than
+ follow only explicitly programmed instructions.
 
 Applications for machine learning include:
 
@@ -18,7 +25,9 @@ Applications for machine learning include:
 
 ## Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 
-Donations are very appreciated.  Smaller donations, could fund a latté, during a late night meddling code.  While larger donations, could fund further research, by assisting the cost for the following:
+Donations are very appreciated.  Smaller donations, could fund a latté, during
+ a late night meddling code.  While larger donations, could fund further
+ research, by assisting the cost for the following:
 
 - server(s): this could be made open to the public, and implementing machine-learning.
 - peripheral device(s): these device(s) could connect to the machine-learning server(s):
@@ -32,7 +41,10 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
 
 ## Preconfiguration
 
-This project implements puppets [r10k](https://github.com/puppetlabs/r10k) module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile` (already defined), which includes the following syntax:
+This project implements puppets [r10k](https://github.com/puppetlabs/r10k)
+ module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A
+ requirement of this implementation includes a `Puppetfile` (already defined),
+ which includes the following syntax:
 
 ```ruby
 #!/usr/bin/env ruby
@@ -47,14 +59,19 @@ mod 'apt',
 ...
 ```
 
-Specifically, this implements the ssh syntax `git@github.com:account/repo.git`, unlike the following alternatives:
+Specifically, this implements the ssh syntax `git@github.com:account/repo.git`,
+ unlike the following alternatives:
 
 - `https://github.com/account/repo.git`
 - `git://github.com/account/repo.git`
 
-This allows r10k to clone the corresponding puppet module(s), without a deterrence of [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack).  However, to implement the above syntax, ssh keys need to be generated, and properly assigned locally, as well as on the github account.
+This allows r10k to clone the corresponding puppet module(s), without a
+ deterrence of [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack).
+ However, to implement the above syntax, ssh keys need to be generated, and
+ properly assigned locally, as well as on the github account.
 
-The following steps through how to implement the ssh keys with respect to github:
+The following steps through how to implement the ssh keys with respect to
+ github:
 
 ```bash
 $ cd ~/.ssh/
@@ -68,7 +85,10 @@ $ ssh-add ~/.ssh/id_rsa
 $ pbcopy < ~/.ssh/id_rsa.pub
 ```
 
-**Note:** it is recommended to simply press enter, to keep default values when asked *Enter file in which to save the key*.  Also, if `ssh-agent -s` alternative for git bash doesn't work, then `eval $(ssh-agent -s)` for other terminal prompts should work.
+**Note:** it is recommended to simply press enter, to keep default values
+ when asked *Enter file in which to save the key*.  Also, if `ssh-agent -s`
+ alternative for git bash doesn't work, then `eval $(ssh-agent -s)` for other
+ terminal prompts should work.
 
 Then, at the top of any github page (after login), click `Settings > SSH keys > Add SSH Keys`, then paste the above copied key into the `Key` field, and click *Add key*.  Finally, to test the ssh connection, enter the following within the same terminal window used for the above commands:
 
