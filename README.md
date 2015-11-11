@@ -190,31 +190,57 @@ The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/
 master/interface/templates/index.html), or GUI implementation, allow users to
  implement the following sessions:
 
-- `data_new`: store the provided dataset(s), within the implemented sql database.
-- `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
-- `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
-- `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
+- `data_new`: store the provided dataset(s), within the implemented sql
+ database.
+- `data_append`: append additional dataset(s), to an existing representation
+ (from an earlier `data_new` session), within the implemented sql database.
+- `model_generate`: using previous stored dataset(s) (from an earlier
+ `data_new`, or `data_append` session), generate a corresponding model into the
+ implemented nosql datastore.
+- `model_predict`: using a previous stored model (from an earlier
+ `model_predict` session), from the implemented nosql datastore, along with
+ user supplied values, generate a corresponding prediction.
 
-When using the web-interface, it is important to ensure the csv, xml, or json file(s), representing the corresponding dataset(s), are properly formatted. Dataset(s) poorly formatted will fail to create respective json dataset representation(s). Subsequently, the dataset(s) will not succeed being stored into corresponding database tables; therefore, no model, or prediction can be made.
+When using the web-interface, it is important to ensure the csv, xml, or json
+ file(s), representing the corresponding dataset(s), are properly formatted.
+ Dataset(s) poorly formatted will fail to create respective json dataset
+ representation(s). Subsequently, the dataset(s) will not succeed being stored
+ into corresponding database tables; therefore, no model, or prediction can be
+ made.
 
 The following are acceptable syntax:
 
-- [CSV sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/csv/)
-- [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/)
-- [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/web_interface)
+- [CSV sample datasets](https://github.com/jeff1evesque/machine-learning/tree/
+master/interface/static/data/csv/)
+- [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/
+master/interface/static/data/xml/)
+- [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/
+master/interface/static/data/json/web_interface)
 
-**Note:** each dependent variable value (for JSON datasets), is an array (square brackets), since each dependent variable may have multiple observations.
+**Note:** each dependent variable value (for JSON datasets), is an array
+ (square brackets), since each dependent variable may have multiple
+ observations.
 
-As mentioned earlier, the web application can be accessed after subsequent `vagrant up` command, followed by using a browser referencing localhost:8080 (or [https://localhost:5050](https://localhost:5050), with ssl), on the host machine.
+As mentioned earlier, the web application can be accessed after subsequent
+ `vagrant up` command, followed by using a browser referencing localhost:8080
+ (or [https://localhost:5050](https://localhost:5050), with ssl), on the host
+ machine.
 
 ### Programmatic Interface
 
-The programmatic-interface, or set of API, allow users to implement the following sessions:
+The programmatic-interface, or set of API, allow users to implement the
+ following sessions:
 
-- `data_new`: store the provided dataset(s), within the implemented sql database.
-- `data_append`: append additional dataset(s), to an existing representation (from an earlier `data_new` session), within the implemented sql database.
-- `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
-- `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
+- `data_new`: store the provided dataset(s), within the implemented sql
+ database.
+- `data_append`: append additional dataset(s), to an existing representation
+ (from an earlier `data_new` session), within the implemented sql database.
+- `model_generate`: using previous stored dataset(s) (from an earlier
+ `data_new`, or `data_append` session), generate a corresponding model into
+ the implemented nosql datastore.
+- `model_predict`: using a previous stored model (from an earlier
+ `model_predict` session), from the implemented nosql datastore, along with
+ user supplied values, generate a corresponding prediction.
 
 A post request, can be implement in python, as follows:
 
@@ -227,14 +253,24 @@ headers = {'Content-Type': 'application/json'}
 requests.post(endpoint_url, headers=headers, data=json_string_here)
 ```
 
-**Note:** the above `post` request, can be implemented in a different language, respectively.
+**Note:** the above `post` request, can be implemented in a different language,
+ respectively.
 
-The following outlines what the `data` attribute should be, for the above `post` implementation:
+The following outlines what the `data` attribute should be, for the above
+ `post` implementation:
 
-- [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-new.json)
-- [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-append.json)
-- [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-generate.json)
-- [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-predict.json)
+- [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/
+blob/master/interface/static/data/json/programmatic_interface/
+sample-data-new.json)
+- [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/
+blob/master/interface/static/data/json/programmatic_interface/sample-data-
+append.json)
+- [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-
+learning/blob/master/interface/static/data/json/programmatic_interface/sample-
+model-generate.json)
+- [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-
+learning/blob/master/interface/static/data/json/programmatic_interface/sample-
+model-predict.json)
 
 **Note:** the content of each of the above files, can substituted for the above
  `data` attribute.
@@ -265,7 +301,16 @@ The following (non-exhaustive) properties define the above implemented `data`
 
 ### Test Scripts
 
-This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing), to validate logic in a consistent fashion. Currently, only high-level unit tests have been defined within [`pytest_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_session.py).  Future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit tests.  These tests will be automated within a travis [build](https://travis-ci.org/jeff1evesque/machine-learning), using a docker container, defined within the [`Dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Dockerfile).
+This project implements [unit testing](https://en.wikipedia.org/wiki/
+Unit_testing), to validate logic in a consistent fashion. Currently, only high-
+level unit tests have been defined within [`pytest_session.py`](https://github
+.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/
+pytest_session.py). Future releases (i.e. milestone [1.0](https://github.com/
+jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit
+ tests. These tests will be automated within a travis [build](https://travis-
+ci.org/jeff1evesque/machine-learning), using a docker container, defined within
+ the [`Dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/
+master/Dockerfile).
 
 Current unit tests cover the following sessions:
 
@@ -294,4 +339,6 @@ programmatic_interface/pytest_session.py ....
 ```
 
 **Note:** every script, or file(s) within this repository, has been
- [linted](https://en.wikipedia.org/wiki/Lint_%28software%29) via [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml).
+ [linted](https://en.wikipedia.org/wiki/Lint_%28software%29) via
+ [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/
+.travis.yml).
