@@ -58,7 +58,7 @@ git checkout -b [bug|feature|remove]-[issue number] master
 
 ## Committing Code
 
-When creating a *commit*, be sure to include an issue number, the filename modified, and a short message.  
+When creating a *commit*, be sure to include an issue number, the filename modified, and a short message.
 
 The following git commit message, is an acceptable syntax:
 
