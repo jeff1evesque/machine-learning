@@ -22,7 +22,8 @@ Applications for machine learning include:
 - [Recommender systems](http://en.wikipedia.org/wiki/Recommender_system)
 - [Sequence mining](http://en.wikipedia.org/wiki/Sequence_mining), commonly
  referred as *data mining*
-- [Computational advertising](http://en.wikipedia.org/wiki/Computational_advertising), and [Computational finance](http://en.wikipedia.org/wiki/Computational_finance)
+- [Computational advertising](http://en.wikipedia.org/wiki/Computational_advertising)
+- [Computational finance](http://en.wikipedia.org/wiki/Computational_finance)
 
 ## Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 
