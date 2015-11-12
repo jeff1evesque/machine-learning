@@ -33,17 +33,13 @@ Exec {
 
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
-  command => 'sed -i "s/# deb http:\/\/security.ubuntu.com\/ubuntu \
-             trusty-security multiverse/deb http:\/\/security.ubuntu.\
-             com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
+  command => template('/vagrant/puppet/template/enable_multiverse_1.erb'),
   notify  => Exec["build-package-dependencies-${packages_build_size}"],
 }
 
 ## enable 'multiverse' repository (part 2, replace line)
 exec {'enable-multiverse-repository-2':
-  command => 'sed -i "s/# deb-src http:\/\/security.ubuntu.com\/ubuntu \
-              trusty-security multiverse/deb-src http:\/\/security.ubuntu.\
-              com\/ubuntu trusty-security multiverse/g" /etc/apt/sources.list',
+  command => template('/vagrant/puppet/template/enable_multiverse_2.erb'),
   notify  => Exec["build-package-dependencies-${packages_build_size}"],
 }
 
