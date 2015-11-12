@@ -27,7 +27,7 @@ More specifically, the following rules of a descriptive issue title *must* be
 
 Otherwise, a non-descriptive issue title can be used as follows:
 
-```
+```bash
 Implement flask upstart script
 ```
 
