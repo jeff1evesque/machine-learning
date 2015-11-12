@@ -13,7 +13,7 @@ Depending on circumstance: a descriptive, or non-descriptive issue title is
 
 The following is an example of a descriptive issue title:
 
-```bash
+```text
 index.php, include 'header.php'
 ```
 
@@ -27,7 +27,7 @@ More specifically, the following rules of a descriptive issue title *must* be
 
 Otherwise, a non-descriptive issue title can be used as follows:
 
-```bash
+```text
 Implement flask upstart script
 ```
 
@@ -98,7 +98,7 @@ The message should *always* be prefixed with an issue number that the commit
 
 The following pull request title, is an acceptable syntax:
 
-```bash
+```text
 #230: index.php, included 'header.php'
 ```
 
