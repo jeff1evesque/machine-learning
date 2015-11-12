@@ -264,12 +264,15 @@ The following outlines what the `data` attribute should be, for the above
 - [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/
 blob/master/interface/static/data/json/programmatic_interface/
 sample-data-new.json)
+
 - [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/
 blob/master/interface/static/data/json/programmatic_interface/sample-data-
 append.json)
+
 - [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-
 learning/blob/master/interface/static/data/json/programmatic_interface/sample-
 model-generate.json)
+
 - [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-
 learning/blob/master/interface/static/data/json/programmatic_interface/sample-
 model-predict.json)
