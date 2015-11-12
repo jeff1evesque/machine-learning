@@ -25,8 +25,7 @@ Applications for machine learning include:
 - [Computational advertising](http://en.wikipedia.org/wiki/Computational_advertising)
 - [Computational finance](http://en.wikipedia.org/wiki/Computational_finance)
 
-## Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque)
- [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
+## Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 
 Donations are very appreciated.  Smaller donations, could fund a latté, during
  a late night meddling code.  While larger donations, could fund further
@@ -49,13 +48,12 @@ learning.
 
 ## Contributing
 
-Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-
-learning/blob/master/contributing.md), when contributing code. Pull requests
- that deviate from the [`contributing.md`](https://github.com/jeff1evesque/
-machine-learning/wiki/Contributing), could be [labelled](https://github.com/
-jeff1evesque/machine-learning/labels) as `invalid`, and closed (without merging
- to master). These best practices will ensure integrity, when revisions of
- code, or issues need to be reviewed.
+Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-learning/blob/master/contributing.md)
+, when contributing code. Pull requests that deviate from the
+ [`contributing.md`](https://github.com/jeff1evesque/machine-learning/wiki/Contributing)
+, could be [labelled](https://github.com/jeff1evesque/machine-learning/labels)
+ as `invalid`, and closed (without merging to master). These best practices
+ will ensure integrity, when revisions of code, or issues need to be reviewed.
 
 ## Preconfiguration
 
@@ -165,8 +163,8 @@ vagrant up
 Depending on the network speed, the build can take between 10-15 minutes. So,
  grab a cup of coffee, and perhaps enjoy a danish while the virtual machine
  builds. Remember, the application is intended to run on localhost, where the
- [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/
- Vagrantfile) defines the exact port-forward on the host machine.
+ [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/ Vagrantfile)
+ defines the exact port-forward on the host machine.
 
 The following lines, indicate the application is accessible via
  `localhost:8080`, on the host machine:
@@ -190,9 +188,8 @@ Otherwise, if ssl is configured, then the application is accessible via
 
 ### Web Interface
 
-The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/
-master/interface/templates/index.html), or GUI implementation, allow users to
- implement the following sessions:
+The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html)
+, or GUI implementation, allow users to implement the following sessions:
 
 - `data_new`: store the provided dataset(s), within the implemented sql
  database.
@@ -214,12 +211,9 @@ When using the web-interface, it is important to ensure the csv, xml, or json
 
 The following are acceptable syntax:
 
-- [CSV sample datasets](https://github.com/jeff1evesque/machine-learning/tree/
-master/interface/static/data/csv/)
-- [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/
-master/interface/static/data/xml/)
-- [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/
-  master/interface/static/data/json/web_interface)
+- [CSV sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/csv/)
+- [XML sample datasets](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/)
+- [JSON sample datasets](https://github.com/jeff1evesque/machine-learning/tree/  master/interface/static/data/json/web_interface)
 
 **Note:** each dependent variable value (for JSON datasets), is an array
  (square brackets), since each dependent variable may have multiple
@@ -263,18 +257,10 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
 The following outlines what the `data` attribute should be, for the above
  `post` implementation:
 
-- [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/
-blob/master/interface/static/data/json/programmatic_interface/
-sample-data-new.json)
-- [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/
-blob/master/interface/static/data/json/programmatic_interface/sample-data-
-append.json)
-- [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-
-learning/blob/master/interface/static/data/json/programmatic_interface/sample-
-model-generate.json)
-- [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-
-learning/blob/master/interface/static/data/json/programmatic_interface/sample-
-model-predict.json)
+- [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-new.json)
+- [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-append.json)
+- [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-generate.json)
+- [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-predict.json)
 
 **Note:** the content of each of the above files, can substituted for the above
  `data` attribute.
