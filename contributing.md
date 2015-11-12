@@ -6,7 +6,7 @@ jeff1evesque/machine-learning/blob/master/license.md).
 
 ## Creating an Issue
 
-### Title
+### Issue: Title
 
 Depending on circumstance: a descriptive, or non-descriptive issue title is
  acceptable.
@@ -36,7 +36,7 @@ A non-descriptive issue title is generally used, when multiple files will be
  technology, or item(s) that will be implemented in less than 50 characters
  (without possessive tone).
 
-### Body
+### Issue: Body
 
 - filename references should *always* be wrapped by single tildas
 - codeblocks should *always* be wrapped by triple tildas (
@@ -92,9 +92,9 @@ The message should *always* be prefixed with an issue number that the commit
 **Note:** commits should be granular, such that, every commit corresponds to a
  small change within *one* file.
 
-## Pull Request
+## Creating Pull Request
 
-### Title
+### Pull Request: Title
 
 The following pull request title, is an acceptable syntax:
 
@@ -115,7 +115,7 @@ More specifically, the following rules *must* be followed:
 **Note:** in some cases, the filename is longer than usual, and can be omitted
  from the pull request title.
 
-### Body
+### Pull Request: Body
 
 Always include one of the following [*keywords*](https://help.github.com/
 articles/closing-issues-via-commit-messages/#keywords-for-closing-issues)
