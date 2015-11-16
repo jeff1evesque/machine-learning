@@ -34,7 +34,7 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
 
 ##Preconfiguration
 
-This project implements puppets [r10k](https://github.com/puppetlabs/r10k) module via vagrants [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile` (already defined), which includes the following syntax:
+This project implements Puppet's [r10k](https://github.com/puppetlabs/r10k) module via Vagrant's [plugin](https://github.com/jantman/vagrant-r10k). A requirement of this implementation includes a `Puppetfile` (already defined), which includes the following syntax:
 
 ```
 #!/usr/bin/env ruby
