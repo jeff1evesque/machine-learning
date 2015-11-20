@@ -115,7 +115,7 @@ $(document).ready(function() {
     });
 
     // Append 'Supply Dataset' Fieldset
-    $('.fieldset_session_data_upload').on('input change', 'select[name="svmDatasetType"], select[name="svmSessionId"], input[name="svmTitle"], select[name="svmModelType"]', function() {
+    $('.fieldset-session-data-upload').on('input change', 'select[name="svmDatasetType"], select[name="svmSessionId"], input[name="svmTitle"], select[name="svmModelType"]', function() {
       // Session: Append Data
       if ($('select[name="svmSessionId"]').val() && $('select[name="svmDatasetType"]').val()) {
         if ($('select[name="svmSessionId"]').val().length > 0 && $('select[name="svmDatasetType"]').val().toLowerCase() == 'file_upload') {
