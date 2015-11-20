@@ -145,7 +145,7 @@ $(document).ready(function() {
               '<fieldset class="fieldset-supply-dataset">' +
                 '<legend>Supply Dataset</legend>' +
                 '<input type="file" name="svmDataset[]" class="svm-dataset-file">' +
-                '<input type="button" value="Add more" class="add-element svm-datase-file-add">' +
+                '<input type="button" value="Add more" class="add-element svm-dataset-file-add">' +
                 '<input type="button" value="Remove" class="remove-element svm-dataset-file-remove">' +
                 '<p class="form-note">*<span class="bold">Note:</span> Uploaded file(s) must be formatted as <span class="italic">csv</span>, <span class="italic">json</span>, or <span class="italic">xml</span> format.</p>' +
               '</fieldset>';
