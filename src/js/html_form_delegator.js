@@ -33,7 +33,7 @@ $(document).ready(function() {
 
     element.buttonClass            = $(this).prop('class').trim().split(' ')[1];
     element.inputId                = element.buttonClass.replace('-add', '');
-    element.inputClassString       = (element.inputId !== undefined) ? 'class=\'' + element.inputId + '\'' : null;
+    element.inputClassString       = (element.inputId !== undefined) ? 'class=\'more-choose ' + element.inputId + '\'' : null;
 
     element.inputType              = (element.inputId !== undefined) ? $('.' + element.inputId).attr('type') : null;
     element.inputTypeString        = (element.inputType !== undefined) ? 'type=\'' + element.inputType + '\'' : null;
