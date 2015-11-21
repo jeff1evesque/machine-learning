@@ -15,7 +15,6 @@
         ajaxLoader($('form'));
       }
     }).done(function(data) {
-
       // Remove AJAX Overlay
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
@@ -29,7 +28,7 @@
           var valueTitle = value.title;
           var element     = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
 
-          $('select[name="svmSessionId"]').append(element);
+          $('select[name="svm_session_id"]').append(element);
         });
       }
 
