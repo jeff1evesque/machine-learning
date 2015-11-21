@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# @web_scss: is executed from 'bash_loader', which is why the directory
-#            paths seem shorter in this file (i.e. missing extra '../').
+# @web_scss: minify scss file(s).
 
 
 # Pre-Pathing: allow 'sass' command

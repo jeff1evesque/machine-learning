@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# @web_js: is executed from 'bash_loader', which is why the directory
-#          paths seem shorter in this file (i.e. missing extra '../').
+# @web_js: minify javascript file(s).
 
 
 # Pre-Pathing: allow 'uglifyjs' command

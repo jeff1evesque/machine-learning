@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# @web_img: is executed from 'bash_loader', which is why the directory
-#           paths seem shorter in this file (i.e. missing extra '../').
+# @web_img: minify image file(s).
 #
 # Note: minifid GIF files lose their animated quality. This script minifies
 #       all images except GIF (copied to the 'asset/').
