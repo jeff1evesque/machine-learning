@@ -183,6 +183,9 @@ $(document).ready(function() {
    */
 
   function buildForm(selector, data, arrRemove) {
+    // remove submit button
+    $('.svm-form-submit').remove();
+
     // remove successive elements
     $('form ' + selector).parent().nextAll().remove();
     $('form ' + selector).parent().parent().nextAll().remove();
