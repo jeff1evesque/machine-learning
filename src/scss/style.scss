@@ -20,9 +20,7 @@
   font-weight: 700;
 }
 
-[name='svmDataset[]']:not(:first-of-type),
-.svm-dep-variable ~ .svm-dep-variable,
-.svm-indep-variable ~ .svm-indep-variable {
+.more-choose {
   display: block;
 }
 
