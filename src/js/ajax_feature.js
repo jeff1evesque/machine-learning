@@ -8,7 +8,7 @@
 
 // AJAX Process
   function featureProperties() {
-    var data = {'session_id': $('select[name="svmModelId"]').val()};
+    var data = {'session_id': $('select[name="svm_model_id"]').val()};
 
     $.ajax({
       type: 'POST',
@@ -33,7 +33,7 @@
               '<legend>Prediction Input</legend>';
 
         $.each($.parseJSON(data), function(index, value) {
-          content += '<input type="text" name="predictionInput[]" placeholder="' + value + '">';
+          content += '<input type="text" name="prediction_input[]" placeholder="' + value + '">';
         });
 
         content += '</fieldset>';
