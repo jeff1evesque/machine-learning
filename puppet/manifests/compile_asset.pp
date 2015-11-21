@@ -8,6 +8,10 @@ $directory_asset = ['js', 'css', 'img']
 
 ## dynamically create compilers
 $compilers.each |Integer $index, String $compiler| {
+    ## variables
+    $check_files = "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ];"
+    $touch_files = "then touch /vagrant/src/${directory_src[$index]}/*; fi"
+
     ## create asset directories
     file {"/vagrant/interface/static/${directory_asset[$index]}/":
         ensure => 'directory',
@@ -67,7 +71,7 @@ $compilers.each |Integer $index, String $compiler| {
     #  Note: every 'command' implementation checks if directory is nonempty,
     #        then touch all files in the directory, respectively.
     exec {"touch-${directory_src[$index]}-files":
-        command     => template('/vagrant/puppet/template/touch_source.erb'),
+        command     => "${check_files}${touch_files}",
         refreshonly => true,
         provider    => shell,
     }
