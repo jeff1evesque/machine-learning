@@ -328,7 +328,7 @@ programmatic_interface/pytest_session.py ....
 =========================== 4 passed in 1.06 seconds ===========================
 ```
 
-**Note:** every script, or file(s) within this repository, has been
+**Note:** every script, or file(s) within this repository, with the [exception](https://github.com/jeff1evesque/machine-learning/issues/2234#issuecomment-158850974) of our puppet templates, has been
  [linted](https://en.wikipedia.org/wiki/Lint_%28software%29) via
  [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/
 .travis.yml).
