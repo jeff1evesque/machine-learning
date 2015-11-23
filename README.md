@@ -330,6 +330,6 @@ programmatic_interface/pytest_session.py ....
 
 **Note:** every script within this repository, with the
  [exception](https://github.com/jeff1evesque/machine-learning/issues/2234#issuecomment-158850974)
- of puppet (erb) [templates](https://github.com/jeff1evesque/machine-learning/tree/master/puppet/template)
-, have been [linted](https://en.wikipedia.org/wiki/Lint_%28software%29) via
+ of puppet (erb) [templates](https://github.com/jeff1evesque/machine-learning/tree/master/puppet/template),
+ have been [linted](https://en.wikipedia.org/wiki/Lint_%28software%29) via
  [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml).
