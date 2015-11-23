@@ -59,3 +59,4 @@ script:
   - mdl . --style test/config/markdown.rb
   - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
   - find . -name '*.sh' | xargs shellcheck
+  - erb -P -x -T '-' puppet/template/*.erb | ruby -c
