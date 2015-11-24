@@ -92,7 +92,10 @@ class Cache_Model(object):
             if list_title:
                 return {'result': list_title, 'error': None}
             else:
-                return {'result': None, 'error': 'no previous model found in cache'}
+                return {
+                    'result': None,
+                    'error': 'no previous model found in cache'
+                }
         except Exception, error:
             self.list_error.append(str(error))
             return {'result': None, 'error': self.list_error}
