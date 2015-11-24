@@ -111,10 +111,9 @@ $(document).ready(function() {
             $('.svm-form-submit').remove();
           }
         });
-      }
-      else {
+      } else {
         buildForm('.fieldset-session-predict', null, ['.svm-form-submit', '.fieldset-prediction-input', '.fieldset-prediction-result']);
-	  }
+      }
     });
 
     // Append 'Supply Dataset' Fieldset
