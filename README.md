@@ -240,7 +240,7 @@ The programmatic-interface, or set of API, allow users to implement the
  `model_predict` session), from the implemented nosql datastore, along with
  user supplied values, generate a corresponding prediction.
 
-A post request, can be implement in python, as follows:
+A post request, can be implemented in python, as follows:
 
 ```python
 import requests
