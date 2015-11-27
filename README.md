@@ -167,7 +167,7 @@ The programmatic-interface, or set of API, allow users to implement the followin
 - `model_generate`: using previous stored dataset(s) (from an earlier `data_new`, or `data_append` session), generate a corresponding model into the implemented nosql datastore.
 - `model_predict`: using a previous stored model (from an earlier `model_predict` session), from the implemented nosql datastore, along with user supplied values, generate a corresponding prediction.
 
-A post request, can be implement in python, as follows:
+A post request, can be implemented in python, as follows:
 
 ```python
 import requests
