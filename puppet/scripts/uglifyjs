@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# @web_js: is executed from 'bash_loader', which is why the directory
-#          paths seem shorter in this file (i.e. missing extra '../').
+# @web_js: minify javascript file(s).
 
 
 # Pre-Pathing: allow 'uglifyjs' command
@@ -13,9 +12,9 @@ set -x; exec > /vagrant/log/uglifyjs_execution.log 2>&1
 
 
 # watch '/vagrant/src/js/' subdirectory
-inotifywait /vagrant/src/js/ -m -e close_write -e move -e create |
+inotifywait /vagrant/src/js/ -m -e close_write -e move --format %f |
   # Minify Javascript
-  while read path action file; do
+  while read -r file; do
     # filename (without 'last' extension)
     filename="${file%.*}"
 

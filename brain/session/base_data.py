@@ -209,8 +209,6 @@ class Base_Data(object):
 
         flag_append = True
         self.dataset = []
-        error_olabels = 'The supplied observation labels (dependent '\
-            'variables), are inconsistent)'
 
         try:
             # web-interface: define flag to convert to dataset to json
@@ -295,7 +293,6 @@ class Base_Data(object):
                 converter = Convert_Upload(dataset_json, True)
                 converted = converter.json_to_dict()
                 count_features = converter.get_feature_count()
-                features = dataset_json.values()[0]
 
                 self.observation_labels.append(dataset_json.keys())
 

@@ -1,7 +1,6 @@
 #!/bin/bash
 
-# @web_scss: is executed from 'bash_loader', which is why the directory
-#            paths seem shorter in this file (i.e. missing extra '../').
+# @web_scss: minify scss file(s).
 
 
 # Pre-Pathing: allow 'sass' command
@@ -13,9 +12,9 @@ set -x; exec > /vagrant/log/sass_execution.log 2>&1
 
 
 # watch '/vagrant/src/scss/' subdirectory
-inotifywait /vagrant/src/scss/ -m -e close_write -e move -e create |
+inotifywait /vagrant/src/scss/ -m -e close_write -e move --format %f |
   # Compile CSS
-  while read path action file; do
+  while read -r file; do
     # filename (without 'last' extension)
     filename="${file%.*}"
 
