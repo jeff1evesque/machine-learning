@@ -149,9 +149,6 @@ In order to proceed with the installation for this project, two dependencies
 - [Vagrant](https://www.vagrantup.com/)
 - [Virtualbox](https://www.virtualbox.org/)
 
-**Note:** more information can be found within the associated vagrant
- [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Vagrant).
-
 Once the necessary dependencies have been installed, execute the following
  command to build the virtual environment:
 
@@ -163,8 +160,11 @@ vagrant up
 Depending on the network speed, the build can take between 10-15 minutes. So,
  grab a cup of coffee, and perhaps enjoy a danish while the virtual machine
  builds. Remember, the application is intended to run on localhost, where the
- [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/ Vagrantfile)
+ [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Vagrantfile)
  defines the exact port-forward on the host machine.
+
+**Note:** a more complete refresher on virtualization, can be found within the
+ vagrant [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Vagrant).
 
 The following lines, indicate the application is accessible via
  `localhost:8080`, on the host machine:
