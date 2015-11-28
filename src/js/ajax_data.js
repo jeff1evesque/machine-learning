@@ -7,84 +7,81 @@ $(document).ready(function() {
   $('form').on('submit', function(event) {
     event.preventDefault();
 
-  // Local Variables
-    var dataset      = $('input[name="svm_dataset[]"]');
-    var pInput       = $('input[name="prediction_input[]"]');
-    var flag_dataset = true;
-    var flag_pInput  = true;
+    // Local Variables
+    var dataset         = $('input[name="svmDataset[]"]');
+    var pInput          = $('input[name="predictionInput[]"]');
+    var flagDataset     = true;
+    var flagPrediction  = true;
 
-  // Check if data supplied
+    // Check if data supplied
     dataset.each(function() {
-      if ( typeof $(this).val() === 'undefined' ) {
-        flag_dataset = false;
+      if (typeof $(this).val() === 'undefined') {
+        flagDataset = false;
         return false;
       }
     });
     pInput.each(function() {
-      if ( typeof $(this).val() === 'undefined' ) {
-        flag_pInput = false;
+      if (typeof $(this).val() === 'undefined') {
+        flagPrediction = false;
         return false;
       }
     });
 
-  // AJAX Process
-    if ( flag_dataset || flag_pInput ) {
+    // AJAX Process
+    if (flagDataset || flagPrediction) {
       $.ajax({
         url: $(this).attr('action'),
         type: 'POST',
-        data: new FormData( this ),
+        data: new FormData(this),
         dataType: 'json',
         contentType: false,
         processData: false,
         beforeSend: function() {
 
-        // AJAX Overlay
-          ajaxLoader( $(event.currentTarget) );
+          // AJAX Overlay
+          ajaxLoader($(event.currentTarget));
 
-        // Form Validation
-          $("form").validate({
+          // Form Validation
+          $('form').validate({
             submitHandler: function(form) {
               $(form).ajaxSubmit();
             }
           });
         }
       }).done(function(data) {
+        var content;
 
-      // JSON Object from Server
+        // JSON Object from Server
         if (data.result) {
-          var obj_result = '\
-                <fieldset class="fieldset_prediction_result">\
-                  <legend>Prediction Result</legend>\
-                  <p class="result"></p>\
-                </fieldset>\
-              ';
+          content =
+            '<fieldset class="fieldset-prediction-result">' +
+              '<legend>Prediction Result</legend>' +
+              '<p class="result"></p>' +
+            '</fieldset>';
 
           if (data.result.error) {
-            $('.fieldset_prediction_result').remove();
-            $('.fieldset_session_predict').append(obj_result);
+            $('.fieldset-prediction-result').remove();
+            $('.fieldset-session-predict').append(content);
             $('.result').append(data.result.error);
-          }
-
-          else if (data.result.result) {
-            $('.fieldset_prediction_result').remove();
-            $('.fieldset_session_predict').append(obj_result);
+          } else if (data.result.result) {
+            $('.fieldset-prediction-result').remove();
+            $('.fieldset-session-predict').append(content);
             $('.result').append(data.result.result);
           }
-        }
-        else {
-          json_server = ( !$.isEmptyObject( data ) ) ? JSON.stringify(data, undefined, 2) : 'none';
-          console.log( 'JSON object from Server: ' + json_server );
+        } else {
+          content = (!$.isEmptyObject(data)) ? JSON.stringify(data, undefined, 2) : 'none';
+          console.log('JSON object from Server: ' + content);
         }
 
-      // Remove AJAX Overlay
-        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
+        // Remove AJAX Overlay
+        $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
       }).fail(function(jqXHR, textStatus, errorThrown) {
-        console.log('Error Thrown: '+errorThrown);
-        console.log('Error Status: '+textStatus);
+        console.log('Error Thrown: ' + errorThrown);
+        console.log('Error Status: ' + textStatus);
 
-      // Remove AJAX Overlay
-        $('form .ajax_overlay').fadeOut(200, function(){ $(this).remove(); });
+        // Remove AJAX Overlay
+        $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
       });
     }
 
