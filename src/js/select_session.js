@@ -4,7 +4,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var selectSession = React.createClass({
+var select_session = React.createClass({
   // initial 'state properties'
      getInitialState: function() {
          return {
