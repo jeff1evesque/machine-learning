@@ -1,8 +1,8 @@
 var select_session = React.createClass({
      getInitialState: function() {
          return {
-             value: 'select'
-         }
+             value: '--Select--'
+         };
      },
      change: function(event){
          this.setState({value: event.target.value});
@@ -13,7 +13,7 @@ var select_session = React.createClass({
                 <fieldset class='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
-                    <select name='svm_session' autocomplete='off'>
+                    <select name='svm_session' autocomplete='off' onChange={this.change} value={this.state.value}>
                         <option value='' selected='selected'>--Select--</option>
                         <option value='data_new'>New Data</option>
                         <option value='data_append'>Append Data</option>
