@@ -1,12 +1,15 @@
 var select_session = React.createClass({
+  // initial 'state properties'
      getInitialState: function() {
          return {
              value: '--Select--'
          };
      },
+  // update 'state properties'
      change: function(event){
          this.setState({value: event.target.value});
      },
+  // triggered when 'state properties' change
      render: function(){
         return(
             <form action='/load-data/' method='post'>
