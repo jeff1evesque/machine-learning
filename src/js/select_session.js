@@ -29,4 +29,5 @@ var select_session = React.createClass({
      }
 });
 
-React.render(<select_session />, document.getElementsByClassName('ml-container'));
+// render a ReactElement into the DOM, in the supplied container
+ReactDOM.render(<select_session />, document.getElementsByClassName('ml-container'));
