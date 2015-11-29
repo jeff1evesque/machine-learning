@@ -1,4 +1,10 @@
-var select_session = React.createClass({
+/**
+ * select_session.js: initial form.
+ *
+ * Note: this script implements jsx (reactjs) syntax.
+ */
+
+var selectSession = React.createClass({
   // initial 'state properties'
      getInitialState: function() {
          return {
