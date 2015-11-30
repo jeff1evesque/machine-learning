@@ -13,7 +13,7 @@ set -x; exec > /vagrant/log/browserify_execution.log 2>&1
 
 # watch '/vagrant/src/jsx/' subdirectory
 inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
-  # Convert JSX
+  # Convert JSX to JS
   while read -r file; do
     # filename (without 'last' extension)
     filename="${file%.*}"
