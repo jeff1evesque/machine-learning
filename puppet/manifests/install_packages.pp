@@ -29,7 +29,9 @@ $packages_general_npm = [
     'node-sass',
     'babel-core',
     'browserify',
-    'babelify'
+    'babelify',
+    'babel-preset-es2015',
+    'babel-preset-react'
 ]
 $packages_build_size  = size($packages_build_dep) - 1
 
