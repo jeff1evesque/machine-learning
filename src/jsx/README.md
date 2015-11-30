@@ -4,7 +4,9 @@ Corresponding [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html)
  template file(s) in this directory, will be converted from jsx to javascript
  syntax.  Specifically, the [browserify](http://browserify.org/), and
  [babelify](https://babeljs.io/) process will be implemented for this
- conversion, and place the resulting javascript in `/vagrant/src/js`.
+ conversion, and place the resulting javascript in the
+ [`/vagrant/src/js`](https://github.com/jeff1evesque/machine-learning/tree/master/src/js)
+ directory.
 
   - [browserify](http://browserify.org/): bundles files containing `require()`
  statements into a single file
