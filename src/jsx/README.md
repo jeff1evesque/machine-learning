@@ -6,9 +6,9 @@ Corresponding [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html)
  [babelify](https://babeljs.io/) process will be implemented for this
  conversion.
 
-  - [browserify](http://browserify.org/), bundles files containing `require()`
+  - [browserify](http://browserify.org/): bundles files containing `require()`
  statements into a single file
-  - [babel](https://babeljs.io/) compiles [es6](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf),
+  - [babel](https://babeljs.io/): compiles [es6](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf),
  and [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax, to
  [es5](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf)
  syntax.
