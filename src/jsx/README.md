@@ -8,9 +8,9 @@ Corresponding [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html)
  [`/vagrant/src/js`](https://github.com/jeff1evesque/machine-learning/tree/master/src/js)
  directory.
 
-  - [browserify](http://browserify.org/): bundles files containing `require()`
+- [browserify](http://browserify.org/): bundles files containing `require()`
  statements into a single file
-  - [babel](https://babeljs.io/): compiles [es6](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf),
+- [babel](https://babeljs.io/): compiles [es6](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf),
  and [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax, to
  [es5](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf)
  syntax
