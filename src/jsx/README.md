@@ -11,7 +11,7 @@ Corresponding [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html)
   - [babel](https://babeljs.io/): compiles [es6](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf),
  and [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax, to
  [es5](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf)
- syntax.
+ syntax
 
 **Note:** the jsx template file(s), correspond to the
  [reactjs](https://facebook.github.io/react/) implementation.
