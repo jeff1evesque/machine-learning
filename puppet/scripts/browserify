@@ -18,6 +18,6 @@ inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
     # filename (without 'last' extension)
     filename="${file%.*}"
 
-    # minifiy with 'uglifyjs'
+    # convert with 'browserify'
     browserify /vagrant/src/jsx/"$file" -t [ babelify --presets es2015,react ] -o /vagrant/src/js/"$filename".js
   done
