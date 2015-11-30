@@ -9,8 +9,9 @@ Corresponding [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html)
 **Note:** the jsx template file(s), correspond to the
  [reactjs](https://facebook.github.io/react/) implementation.
 
-**Note:** [babel](https://babeljs.io/) converts [es6](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf),
- and [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html) to
- [es5](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf),
- which runs in the browser. [browserify](http://browserify.org/), helps bundle
- files containing `require()` statements into a single file.
+**Note:** [browserify](http://browserify.org/), bundles files containing 
+ `require()` statements into a single file; while, [babel](https://babeljs.io/)
+ compiles [es6](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf),
+ and [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html) syntax, to
+ [es5](http://www.ecma-international.org/publications/files/ECMA-ST/Ecma-262.pdf)
+ syntax.
