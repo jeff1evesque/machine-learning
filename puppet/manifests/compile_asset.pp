@@ -2,9 +2,9 @@
 Exec {path => ['/usr/bin/', '/sbin/', '/bin/', '/usr/share/']}
 
 ## variables: the order of the following array variables are important
-$compilers       = ['uglifyjs', 'sass', 'imagemin']
-$directory_src   = ['js', 'scss', 'img']
-$directory_asset = ['js', 'css', 'img']
+$compilers       = ['uglifyjs', 'browserify', 'sass', 'imagemin']
+$directory_src   = ['js', 'jsx', 'scss', 'img']
+$directory_asset = ['js', 'js', 'css', 'img']
 
 ## dynamically create compilers
 $compilers.each |Integer $index, String $compiler| {
