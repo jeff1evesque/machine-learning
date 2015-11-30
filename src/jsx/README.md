@@ -1,9 +1,9 @@
 # JSX File(s)
 
 Corresponding [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html)
- template file(s) in this directory, will be converted from jsx to javascript
+ template file(s) in this directory, will be compiled from jsx to javascript
  syntax.  Specifically, the [browserify](http://browserify.org/), and
- [babelify](https://babeljs.io/) process will be implemented for this
+ [babelify](https://babeljs.io/) process, will be implemented for this
  conversion, which will place the resulting javascript in the
  [`/vagrant/src/js`](https://github.com/jeff1evesque/machine-learning/tree/master/src/js)
  directory.
