@@ -2,8 +2,9 @@
 
 Corresponding [jsx](https://facebook.github.io/react/docs/jsx-in-depth.html)
  template file(s) in this directory, will be converted from jsx to javascript
- syntax, using [browserify](http://browserify.org/), and the
- [babelify](https://babeljs.io/) process.
+ syntax.  Specifically, [browserify](http://browserify.org/), and the
+ [babelify](https://babeljs.io/) process will be implemented for this
+ conversion.
 
 **Note:** the jsx template file(s), correspond to the
  [reactjs](https://facebook.github.io/react/) implementation.
