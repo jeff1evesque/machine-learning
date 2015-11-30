@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# @browserify: convert jsx to js file(s).
+
+
+# Pre-Pathing: allow 'browserify' command
+PATH="/usr/local/bin:$PATH"
+
+
+# track execution of script
+set -x; exec > /vagrant/log/browserify_execution.log 2>&1
+
+
+# watch '/vagrant/src/jsx/' subdirectory
+inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
+  # Convert JSX
+  while read -r file; do
+    # filename (without 'last' extension)
+    filename="${file%.*}"
+
+    # minifiy with 'uglifyjs'
+    browserify /vagrant/src/js/"$filename".js -t [ babelify --presets es2015,react ] -o /vagrant/src/jsx/"$file"
+  done
