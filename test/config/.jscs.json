@@ -1,5 +1,11 @@
 {
-    "excludeFiles": ["src/js/jquery-validate.js", "src/js/jquery-2.1.1.js", "src/js/react.js", "src/js/react-dom.js"],
+    "excludeFiles": [
+        "src/js/jquery-validate.js",
+        "src/js/jquery-2.1.1.js",
+        "src/js/react.js",
+        "src/js/react-dom.js",
+        "src/jsx/*"
+    ],
     "requireCurlyBraces": [
         "if",
         "else",
