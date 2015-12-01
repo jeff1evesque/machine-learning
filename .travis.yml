@@ -33,6 +33,7 @@ install:
   - gem install mdl
   - sudo apt-get install shellcheck
   - npm install -g eslint babel-eslint
+  - npm install -g eslint-plugin-react
 
 ## implement linting
 #
@@ -60,4 +61,4 @@ script:
   - mdl . --style test/config/markdown.rb
   - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
   - find . -name '*.sh' | xargs shellcheck
-  - eslint . --ext=jsx
+  - eslint . --ext=jsx -c test/config/eslint.json
