@@ -1,7 +1,7 @@
 /**
  * eslint.json: this file provides a configuration of rules that eslint will
- *              implement, when imported via the "-c [path/to/eslint.json]"
- *              flag.
+ *              implement, to validate 'jsx' files, when imported via the
+ *              '-c [path/to/eslint.json]' flag.
  *
  * Note: eslint rules, and options are available:
  *
