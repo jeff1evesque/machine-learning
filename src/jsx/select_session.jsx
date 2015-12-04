@@ -9,8 +9,8 @@ var select_session = React.createClass({
      getInitialState: function() {
          return {
              value: '--Select--'
-         };
-     },
+         }
+     }
   // update 'state properties'
      change: function(event){
          this.setState({value: event.target.value});
