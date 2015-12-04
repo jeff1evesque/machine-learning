@@ -22,13 +22,13 @@ $compilers = {
 }
 
 ## dynamically create compilers
-$compilers.each |String $index, Hash $compiler| {
+$compilers.each |String $compiler, Hash $resource| {
     ## variables
-    $check_files = "if [ 'ls -A /vagrant/src/${compiler['src']}/' ];"
-    $touch_files = "then touch /vagrant/src/${compiler['src']}/*; fi"
+    $check_files = "if [ 'ls -A /vagrant/src/${resource['src']}/' ];"
+    $touch_files = "then touch /vagrant/src/${resource['src']}/*; fi"
 
     ## create asset directories
-    file {"/vagrant/interface/static/${compiler['asset']}/":
+    file {"/vagrant/interface/static/${resource['asset']}/":
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
     }
@@ -71,7 +71,7 @@ $compilers.each |String $index, Hash $compiler| {
     service {$compiler:
         ensure => 'running',
         enable => true,
-        notify => Exec["touch-${compiler['src']}-files"],
+        notify => Exec["touch-${resource['src']}-files"],
     }
 
     ## touch source: ensure initial build compiles every source file.
@@ -85,7 +85,7 @@ $compilers.each |String $index, Hash $compiler| {
     #
     #  Note: every 'command' implementation checks if directory is nonempty,
     #        then touch all files in the directory, respectively.
-    exec {"touch-${compiler['src']}-files":
+    exec {"touch-${resource['src']}-files":
         command     => "${check_files}${touch_files}",
         refreshonly => true,
         provider    => shell,
