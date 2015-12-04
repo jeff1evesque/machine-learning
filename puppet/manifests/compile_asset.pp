@@ -5,7 +5,7 @@ Exec {path => ['/usr/bin/', '/sbin/', '/bin/', '/usr/share/']}
 $compilers = {
     uglifyjs   => {
         src   => 'js',
-        asset => 'asset'
+        asset => 'js'
     },
     browserify => {
         src  => 'jsx',
