@@ -2,18 +2,33 @@
 Exec {path => ['/usr/bin/', '/sbin/', '/bin/', '/usr/share/']}
 
 ## variables: the order of the following array variables are important
-$compilers       = ['uglifyjs', 'browserify', 'sass', 'imagemin']
-$directory_src   = ['js', 'jsx', 'scss', 'img']
-$directory_asset = ['js', 'js', 'css', 'img']
+$compilers = {
+    uglifyjs   => {
+        src   => 'js',
+        asset => 'asset'
+    },
+    browserify => {
+        src  => 'jsx',
+        asset => 'js'
+    },
+    sass       => {
+        src   => 'scss',
+        asset => 'css'
+    },
+    imagemin   => {
+        src   => 'img',
+        asset => 'img'
+    }
+}
 
 ## dynamically create compilers
 $compilers.each |Integer $index, String $compiler| {
     ## variables
-    $check_files = "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ];"
-    $touch_files = "then touch /vagrant/src/${directory_src[$index]}/*; fi"
+    $check_files = "if [ 'ls -A /vagrant/src/${compiler['src']}/' ];"
+    $touch_files = "then touch /vagrant/src/${compiler['src']}/*; fi"
 
     ## create asset directories
-    file {"/vagrant/interface/static/${directory_asset[$index]}/":
+    file {"/vagrant/interface/static/${compiler['asset']}/":
         ensure => 'directory',
         before => File["${compiler}-startup-script"],
     }
@@ -56,7 +71,7 @@ $compilers.each |Integer $index, String $compiler| {
     service {$compiler:
         ensure => 'running',
         enable => true,
-        notify => Exec["touch-${directory_src[$index]}-files"],
+        notify => Exec["touch-${compiler['src']}-files"],
     }
 
     ## touch source: ensure initial build compiles every source file.
@@ -70,7 +85,7 @@ $compilers.each |Integer $index, String $compiler| {
     #
     #  Note: every 'command' implementation checks if directory is nonempty,
     #        then touch all files in the directory, respectively.
-    exec {"touch-${directory_src[$index]}-files":
+    exec {"touch-${compiler['src']}-files":
         command     => "${check_files}${touch_files}",
         refreshonly => true,
         provider    => shell,
