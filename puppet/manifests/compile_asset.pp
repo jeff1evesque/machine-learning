@@ -22,7 +22,7 @@ $compilers = {
 }
 
 ## dynamically create compilers
-$compilers.each |Integer $index, String $compiler| {
+$compilers.each |Integer $index, Struct $compiler| {
     ## variables
     $check_files = "if [ 'ls -A /vagrant/src/${compiler['src']}/' ];"
     $touch_files = "then touch /vagrant/src/${compiler['src']}/*; fi"
