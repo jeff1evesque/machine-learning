@@ -2,34 +2,56 @@
 Exec {path => ['/usr/bin/', '/sbin/', '/bin/', '/usr/share/']}
 
 ## variables
+#
+#  @asset_dir, indicate whether to to create corresponding asset directory.
+#
+#  @src_dir, indicate whether to create corresponding source directory.
+#
+#  Note: hash iteration is done alphabetically.
 $compilers = {
-    uglifyjs   => {
-        src   => 'js',
-        asset => 'js'
-    },
     browserify => {
-        src  => 'jsx',
-        asset => 'js'
-    },
-    sass       => {
-        src   => 'scss',
-        asset => 'css'
+        src       => 'jsx',
+        asset     => 'js',
+        asset_dir => true,
+        src_dir   => true,
     },
     imagemin   => {
         src   => 'img',
-        asset => 'img'
+        asset => 'img',
+        asset_dir => false,
+        src_dir   => true,
+    },
+    sass       => {
+        src       => 'scss',
+        asset     => 'css',
+        asset_dir => true,
+        src_dir   => true,
+    },
+    uglifyjs   => {
+        src       => 'js',
+        asset     => 'js',
+        asset_dir => false,
+        src_dir   => false,
     }
 }
 
 ## dynamically create compilers
 $compilers.each |String $compiler, Hash $resource| {
     ## variables
-    $check_files = "if [ 'ls -A /vagrant/src/${resource['src']}/' ];"
+    $check_files = "if [ \"$(ls -A /vagrant/src/${resource['src']}/)\" ];"
     $touch_files = "then touch /vagrant/src/${resource['src']}/*; fi"
 
-    ## create asset directories
-    if ! defined(File["/vagrant/interface/static/${resource['asset']}"]) {
+    ## create asset directories (if not exist)
+    if ($resource['asset_dir']) {
         file {"/vagrant/interface/static/${resource['asset']}/":
+            ensure => 'directory',
+            before => File["${compiler}-startup-script"],
+        }
+    }
+
+    ## create src directories (if not exist)
+    if ($resource['src_dir']) {
+        file {"/vagrant/src/${resource['src']}/":
             ensure => 'directory',
             before => File["${compiler}-startup-script"],
         }
@@ -88,7 +110,7 @@ $compilers.each |String $compiler, Hash $resource| {
     #  Note: every 'command' implementation checks if directory is nonempty,
     #        then touch all files in the directory, respectively.
     exec {"touch-${resource['src']}-files":
-        command     => "${check_files}${touch_files}",
+        command     => "${check_files} ${touch_files}",
         refreshonly => true,
         provider    => shell,
     }
