@@ -28,9 +28,11 @@ $compilers.each |String $compiler, Hash $resource| {
     $touch_files = "then touch /vagrant/src/${resource['src']}/*; fi"
 
     ## create asset directories
-    file {"/vagrant/interface/static/${resource['asset']}/":
-        ensure => 'directory',
-        before => File["${compiler}-startup-script"],
+    if ! defined(File["/vagrant/interface/static/${resource['asset']}"]) {
+        file {"/vagrant/interface/static/${resource['asset']}/":
+            ensure => 'directory',
+            before => File["${compiler}-startup-script"],
+        }
     }
 
     ## create startup script: for webcompilers, using heredoc syntax
