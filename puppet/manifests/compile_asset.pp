@@ -3,7 +3,7 @@ Exec {path => ['/usr/bin/', '/sbin/', '/bin/', '/usr/share/']}
 
 ## variables
 #
-#  @asset_dir, indicate whether to to create corresponding asset directory.
+#  @asset_dir, indicate whether to create corresponding asset directory.
 #
 #  @src_dir, indicate whether to create corresponding source directory.
 #
@@ -18,7 +18,7 @@ $compilers = {
     imagemin   => {
         src   => 'img',
         asset => 'img',
-        asset_dir => false,
+        asset_dir => true,
         src_dir   => true,
     },
     sass       => {
