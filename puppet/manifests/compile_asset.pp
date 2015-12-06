@@ -57,7 +57,7 @@ $compilers.each |String $compiler, Hash $resource| {
         }
     }
 
-    ## create startup script: for webcompilers, using heredoc syntax
+    ## create startup script: for webcompilers, using puppet templating
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
