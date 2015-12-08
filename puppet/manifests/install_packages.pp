@@ -96,12 +96,19 @@ package {$packages_general_pip:
 ## packages: install general packages (npm)
 $packages_general_npm.each |String $package, Hash $resource| {
     ## packages: install general packages (npm)
-    package {$package:
-        ensure   => 'present',
-        provider => 'npm',
-        require  => Package['npm'],
-        if (! $resource['default_dir']) {
+    if (! $resource['default_dir']) {
+        package {$package:
+            ensure   => 'present',
+            provider => 'npm',
+            require  => Package['npm'],
             install_options => [ { '--prefix' => $resource['custom_dir'] } ],
+        }
+    }
+    else {
+        package {$package:
+            ensure   => 'present',
+            provider => 'npm',
+            require  => Package['npm'],
         }
     }
 }
