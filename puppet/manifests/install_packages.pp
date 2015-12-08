@@ -44,11 +44,11 @@ $packages_general_npm = {
     },
     babel-preset-es2015 => {
         default_dir => false,
-        custom_dir => '/path/to/install/module',
+        custom_dir => '/vagrant/src/jsx',
     },
     babel-preset-react => {
         default_dir => false,
-        custom_dir => '/path/to/install/module',
+        custom_dir => '/vagrant/src/jsx',
     },
 }
 $packages_build_size  = size($packages_build_dep) - 1
