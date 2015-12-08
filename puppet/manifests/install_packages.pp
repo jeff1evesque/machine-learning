@@ -23,16 +23,34 @@ $packages_general_pip = [
     'six',
     'matplotlib'
 ]
-$packages_general_npm = [
-    'uglify-js',
-    'imagemin',
-    'node-sass',
-    'babel-core',
-    'browserify',
-    'babelify',
-    'babel-preset-es2015',
-    'babel-preset-react'
-]
+$packages_general_npm = {
+    uglify-js => {
+        default_dir => true
+    },
+    imagemin => {
+        default_dir => true
+    },
+    node-sass => {
+        default_dir => true
+    },
+    babel-core => {
+        default_dir => true
+    },
+    browserify => {
+        default_dir => true
+    },
+    babelify => {
+        default_dir => true
+    },
+    babel-preset-es2015 => {
+        default_dir => false,
+        custom_dir => '/path/to/install/module',
+    },
+    babel-preset-react => {
+        default_dir => false,
+        custom_dir => '/path/to/install/module',
+    },
+}
 $packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs, and packages
