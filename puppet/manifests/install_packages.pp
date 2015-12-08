@@ -94,10 +94,16 @@ package {$packages_general_pip:
 }
 
 ## packages: install general packages (npm)
-package {$packages_general_npm:
-  ensure   => 'present',
-  provider => 'npm',
-  require  => Package['npm'],
+$packages_general_npm.each |String $package, Hash $resource| {
+    ## packages: install general packages (npm)
+    package {$package:
+        ensure   => 'present',
+        provider => 'npm',
+        require  => Package['npm'],
+        if (! $resource['default_dir']) {
+            install_options => [ { '--prefix' => $resource['custom_dir'] } ],
+        }
+    }
 }
 
 ## package: install redis-server
