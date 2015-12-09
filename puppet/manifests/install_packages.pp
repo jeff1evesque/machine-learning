@@ -90,7 +90,7 @@ package {$packages_general:
 package {$packages_general_pip:
   ensure   => 'installed',
   provider => 'pip',
-  before   => Package[$packages_general_npm],
+  before   => Package[$package],
 }
 
 ## packages: install general packages (npm)
@@ -108,7 +108,7 @@ $packages_general_npm.each |String $package, Hash $resource| {
             ensure   => 'present',
             provider => 'npm',
             require  => Package['npm'],
-            install_options => [ { '--prefix' => $resource['custom_dir'] } ],
+            install_options => [ '-g', { '--prefix' => $resource['custom_dir'] } ],
         }
     }
 }
