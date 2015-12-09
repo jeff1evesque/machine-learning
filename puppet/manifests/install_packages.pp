@@ -23,34 +23,11 @@ $packages_general_pip = [
     'six',
     'matplotlib'
 ]
-$packages_general_npm = {
-    uglify-js => {
-        default_dir => true
-    },
-    imagemin => {
-        default_dir => true
-    },
-    node-sass => {
-        default_dir => true
-    },
-    babel-core => {
-        default_dir => true
-    },
-    browserify => {
-        default_dir => true
-    },
-    babelify => {
-        default_dir => true
-    },
-    babel-preset-es2015 => {
-        default_dir => false,
-        custom_dir => '/vagrant/src/jsx',
-    },
-    babel-preset-react => {
-        default_dir => false,
-        custom_dir => '/vagrant/src/jsx',
-    },
-}
+$packages_general_npm = [
+    'uglify-js',
+    'imagemin',
+    'node-sass'
+]
 $packages_build_size  = size($packages_build_dep) - 1
 
 ## define $PATH for all execs, and packages
@@ -90,27 +67,14 @@ package {$packages_general:
 package {$packages_general_pip:
   ensure   => 'installed',
   provider => 'pip',
-  before   => Package[$package],
+  before   => Package[$packages_general_npm],
 }
 
 ## packages: install general packages (npm)
-$packages_general_npm.each |String $package, Hash $resource| {
-    ## packages: install general packages (npm)
-    if ($resource['default_dir']) {
-        package {$package:
-            ensure   => 'present',
-            provider => 'npm',
-            require  => Package['npm'],
-        }
-    }
-    else {
-        package {$package:
-            ensure   => 'present',
-            provider => 'npm',
-            require  => Package['npm'],
-            install_options => [ '-g', { '--prefix' => $resource['custom_dir'] } ],
-        }
-    }
+package {$packages_general_npm:
+  ensure   => 'present',
+  provider => 'npm',
+  require  => Package['npm'],
 }
 
 ## package: install redis-server
