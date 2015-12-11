@@ -1,7 +1,10 @@
 ## include puppet modules: this (also) runs 'apt-get update'
 include python
 include apt
-include nodejs
+
+class { 'nodejs':
+  repo_url_suffix => 'node_5.x',
+}
 
 ## variables
 case $::osfamily {
