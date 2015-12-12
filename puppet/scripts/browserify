@@ -28,4 +28,3 @@ inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
 
       fi
     done
-  fi
