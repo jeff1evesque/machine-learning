@@ -20,6 +20,7 @@ inotifywait /vagrant/src/img/ -m -e close_write -e move --format %f |
   while read -r file; do
     # filename (without directory path)
     filename="${file##*/}"
+    # get last `.` occurence as starting extension
     file_extension="${file##*.}"
 
     # minify with 'imagemin'
