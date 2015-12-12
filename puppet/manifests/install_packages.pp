@@ -29,7 +29,10 @@ $packages_general_pip = [
 $packages_general_npm = [
     'uglify-js',
     'imagemin',
-    'node-sass'
+    'node-sass',
+    'babel-core',
+    'browserify',
+    'babelify'
 ]
 $packages_build_size  = size($packages_build_dep) - 1
 
