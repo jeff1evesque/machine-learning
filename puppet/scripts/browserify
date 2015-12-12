@@ -20,7 +20,7 @@ inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
       # filename (without 'last' extension)
       filename="${file%.*}"
 
-      if [[ $extension = jsx ]]
+      if [ "$extension" = 'jsx' ]
       then
 
         # convert with 'browserify'
