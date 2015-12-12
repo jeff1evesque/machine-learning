@@ -24,6 +24,7 @@
 /test/.cache
 /test/programmatic_interface/.cache
 /test/programmatic_interface/__pycache__
+/src/jsx/node_modules/
 
 # Ignore and don't commit the following files
 *.pyc
