@@ -86,7 +86,7 @@ package {$packages_general_npm:
 
 ## packages: install babelify presets for reactjs (npm)
 exec {'install-babelify-presets':
-  command     => 'npm install',
+  command     => 'npm install --no-bin-links',
   cwd         => '/vagrant/src/jsx/',
   before      => Package['redis-server'],
   refreshonly => true,
