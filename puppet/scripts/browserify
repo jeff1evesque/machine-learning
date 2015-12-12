@@ -16,11 +16,11 @@ inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
     # Convert JSX to JS
     while read -r file; do
       # get last `.` occurence as starting extension
-      extension=${file##*.}
+      file_extension="${file##*.}"
       # filename (without 'last' extension)
       filename="${file%.*}"
 
-      if [ "$extension" = 'jsx' ]
+      if [ "$file_extension" = 'jsx' ]
       then
 
         # convert with 'browserify'
