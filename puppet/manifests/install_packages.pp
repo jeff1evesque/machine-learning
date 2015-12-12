@@ -77,7 +77,16 @@ package {$packages_general_pip:
 package {$packages_general_npm:
   ensure   => 'present',
   provider => 'npm',
+  notify   => Exec['install-babelify-presets'],
   require  => Package['npm'],
+}
+
+## packages: install babelify presets for reactjs (npm)
+exec {'install-babelify-presets':
+  command     => 'npm install',
+  cwd         => '/vagrant/src/jsx/',
+  before      => Package['redis-server'],
+  refreshonly => true,
 }
 
 ## package: install redis-server
