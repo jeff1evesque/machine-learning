@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# @web_js: minify javascript file(s).
+# @uglifyjs: minify javascript file(s).
 
 
 # Pre-Pathing: allow 'uglifyjs' command
