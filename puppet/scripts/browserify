@@ -11,6 +11,10 @@ PATH="/usr/local/bin:$PATH"
 set -x; exec > /vagrant/log/browserify_execution.log 2>&1
 
 
+# create empty '.gitignore'
+cat /dev/null > /vagrant/src/js/.gitignore
+
+
 # watch '/vagrant/src/jsx/' subdirectory
 inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
     # Convert JSX to JS
@@ -25,6 +29,9 @@ inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
 
         # convert with 'browserify'
         (cd /usr/lib/node_modules && browserify /vagrant/src/jsx/"$file" -t [ babelify --presets es2015,react ] -o /vagrant/src/js/"$filename".js)
+
+        # append javascript to '.gitignore'
+        echo "/vagrant/src/js/$filename".js >> '/vagrant/src/js/.gitignore'
 
       fi
     done
