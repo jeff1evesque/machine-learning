@@ -15,9 +15,17 @@ set -x; exec > /vagrant/log/uglifyjs_execution.log 2>&1
 inotifywait /vagrant/src/js/ -m -e close_write -e move --format %f |
   # Minify Javascript
   while read -r file; do
-    # filename (without 'last' extension)
-    filename="${file%.*}"
 
-    # minifiy with 'uglifyjs'
-    uglifyjs -c --output /vagrant/interface/static/js/"$filename".min.js /vagrant/src/js/"$file"
+      # get last `.` occurence as starting extension
+      extension=${file##*.}
+      # filename (without 'last' extension)
+      filename="${file%.*}"
+
+      if [ "$extension" = 'js' ]
+      then
+
+        # minifiy with 'uglifyjs'
+        uglifyjs -c --output /vagrant/interface/static/js/"$filename".min.js /vagrant/src/js/"$file"
+
+      fi
   done
