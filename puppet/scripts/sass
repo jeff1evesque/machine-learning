@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# @web_scss: minify scss file(s).
+# @sass: minify scss file(s).
 
 
 # Pre-Pathing: allow 'sass' command
@@ -15,9 +15,16 @@ set -x; exec > /vagrant/log/sass_execution.log 2>&1
 inotifywait /vagrant/src/scss/ -m -e close_write -e move --format %f |
   # Compile CSS
   while read -r file; do
+    # get last `.` occurence as starting extension
+    extension=${file##*.}
     # filename (without 'last' extension)
     filename="${file%.*}"
 
-    # compile with 'sass'
-    node-sass /vagrant/src/scss/"$file" /vagrant/interface/static/css/"$filename".min.css --output-style compressed
+    if [ "$extension" = 'scss' ]
+    then
+
+      # compile with 'scss'
+      node-sass /vagrant/src/scss/"$file" /vagrant/interface/static/css/"$filename".min.css --output-style compressed
+
+    fi
   done
