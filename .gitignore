@@ -28,3 +28,4 @@
 
 # Ignore and don't commit the following files
 *.pyc
+/src/js/.gitignore
