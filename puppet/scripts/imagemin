@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# @web_img: minify image file(s).
+# @imagemin: minify image file(s).
 #
 # Note: minifid GIF files lose their animated quality. This script minifies
 #       all images except GIF (copied to the 'asset/').
@@ -20,6 +20,7 @@ inotifywait /vagrant/src/img/ -m -e close_write -e move --format %f |
   while read -r file; do
     # filename (without directory path)
     filename="${file##*/}"
+    # get last `.` occurence as starting extension
     file_extension="${file##*.}"
 
     # minify with 'imagemin'

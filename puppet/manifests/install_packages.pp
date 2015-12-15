@@ -1,7 +1,10 @@
 ## include puppet modules: this (also) runs 'apt-get update'
 include python
 include apt
-include nodejs
+
+class { 'nodejs':
+  repo_url_suffix => 'node_5.x',
+}
 
 ## variables
 case $::osfamily {
@@ -29,9 +32,7 @@ $packages_general_npm = [
     'node-sass',
     'babel-core',
     'browserify',
-    'babelify',
-    'babel-preset-es2015',
-    'babel-preset-react'
+    'babelify'
 ]
 $packages_build_size  = size($packages_build_dep) - 1
 
@@ -79,7 +80,16 @@ package {$packages_general_pip:
 package {$packages_general_npm:
   ensure   => 'present',
   provider => 'npm',
+  notify   => Exec['install-babelify-presets'],
   require  => Package['npm'],
+}
+
+## packages: install babelify presets for reactjs (npm)
+exec {'install-babelify-presets':
+  command     => 'npm install --no-bin-links',
+  cwd         => '/vagrant/src/jsx/',
+  before      => Package['redis-server'],
+  refreshonly => true,
 }
 
 ## package: install redis-server

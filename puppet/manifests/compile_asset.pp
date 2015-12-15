@@ -1,24 +1,63 @@
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/', '/sbin/', '/bin/', '/usr/share/']}
 
-## variables: the order of the following array variables are important
-$compilers       = ['uglifyjs', 'browserify', 'sass', 'imagemin']
-$directory_src   = ['js', 'jsx', 'scss', 'img']
-$directory_asset = ['js', 'js', 'css', 'img']
+## variables
+#
+#  @asset_dir, indicate whether to create corresponding asset directory.
+#
+#  @src_dir, indicate whether to create corresponding source directory.
+#
+#  Note: hash iteration is done alphabetically.
+$compilers = {
+    browserify => {
+        src       => 'jsx',
+        asset     => 'js',
+        asset_dir => true,
+        src_dir   => true,
+    },
+    imagemin   => {
+        src   => 'img',
+        asset => 'img',
+        asset_dir => true,
+        src_dir   => true,
+    },
+    sass       => {
+        src       => 'scss',
+        asset     => 'css',
+        asset_dir => true,
+        src_dir   => true,
+    },
+    uglifyjs   => {
+        src       => 'js',
+        asset     => 'js',
+        asset_dir => false,
+        src_dir   => false,
+    }
+}
 
 ## dynamically create compilers
-$compilers.each |Integer $index, String $compiler| {
+$compilers.each |String $compiler, Hash $resource| {
     ## variables
-    $check_files = "if [ 'ls -A /vagrant/src/${directory_src[$index]}/' ];"
-    $touch_files = "then touch /vagrant/src/${directory_src[$index]}/*; fi"
+    $check_files = "if [ \"$(ls -A /vagrant/src/${resource['src']}/)\" ];"
+    $touch_files = "then touch /vagrant/src/${resource['src']}/*; fi"
 
-    ## create asset directories
-    file {"/vagrant/interface/static/${directory_asset[$index]}/":
-        ensure => 'directory',
-        before => File["${compiler}-startup-script"],
+    ## create asset directories (if not exist)
+    if ($resource['asset_dir']) {
+        file {"/vagrant/interface/static/${resource['asset']}/":
+            ensure => 'directory',
+            before => File["${compiler}-startup-script"],
+        }
     }
 
-    ## create startup script: for webcompilers, using heredoc syntax
+    ## create src directories (if not exist)
+    if ($resource['src_dir']) {
+        file {"/vagrant/src/${resource['src']}/":
+            ensure => 'directory',
+            before => File["${compiler}-startup-script"],
+        }
+    }
+
+    ## create startup script: for webcompilers, using puppet templating
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
@@ -56,7 +95,7 @@ $compilers.each |Integer $index, String $compiler| {
     service {$compiler:
         ensure => 'running',
         enable => true,
-        notify => Exec["touch-${directory_src[$index]}-files"],
+        notify => Exec["touch-${resource['src']}-files"],
     }
 
     ## touch source: ensure initial build compiles every source file.
@@ -70,8 +109,8 @@ $compilers.each |Integer $index, String $compiler| {
     #
     #  Note: every 'command' implementation checks if directory is nonempty,
     #        then touch all files in the directory, respectively.
-    exec {"touch-${directory_src[$index]}-files":
-        command     => "${check_files}${touch_files}",
+    exec {"touch-${resource['src']}-files":
+        command     => "${check_files} ${touch_files}",
         refreshonly => true,
         provider    => shell,
     }
