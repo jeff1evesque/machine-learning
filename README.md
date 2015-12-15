@@ -134,7 +134,7 @@ cd /[destination-directory]
 sudo git clone https://[account]@github.com/[account]/machine-learning.git
 ```
 
-### Check out hash commit
+### Checkout hash commit
 
 ```bash
 $ cd /[destination-directory]
