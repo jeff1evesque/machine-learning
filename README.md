@@ -134,7 +134,7 @@ cd /[destination-directory]
 sudo git clone https://[account]@github.com/[account]/machine-learning.git
 ```
 
-### Check out hash commit:
+### Check out hash commit
 
 ```bash
 $ cd /[destination-directory]
@@ -148,10 +148,10 @@ $ git checkout [hash]
 ```
 
 **Note:** the hashes associated with a release, can be found under the
- corresponding tag value, specifically on the [release](https://github.com/jeff1evesque/machine-learning/releases)
+ corresponding tag value, on the [release](https://github.com/jeff1evesque/machine-learning/releases)
  page.
 
-### Clone release tag:
+### Clone release tag
 
 ```bash
 $ cd /[destination-directory]
