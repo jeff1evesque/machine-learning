@@ -127,6 +127,11 @@ shell access.
 Fork this project in your GitHub account.  Then, clone your repository, with
  one of the following approaches:
 
+- simple clone: clone from the remote master branch.
+- hash commit: clone the the remote master branch, then check out a specific
+ commit hash.
+- release tag: clone the remote branch associated with the desired release tag.
+
 ### Simple clone
 
 ```bash
@@ -134,7 +139,7 @@ cd /[destination-directory]
 sudo git clone https://[account]@github.com/[account]/machine-learning.git
 ```
 
-### Hash commit
+### Commit hash
 
 ```bash
 $ cd /[destination-directory]
