@@ -127,12 +127,12 @@ shell access.
 Fork this project in your GitHub account.  Then, clone your repository, with
  one of the following approaches:
 
-- [simple clone](https://github.com/jeff1evesque/machine-learning/#simple-clone):
- clone from the remote master branch.
-- [commit hash](https://github.com/jeff1evesque/machine-learning/#commit-hash):
- clone the the remote master branch, then check out a specific commit hash.
-- [release tag](https://github.com/jeff1evesque/machine-learning/#release-tag):
- clone the remote branch associated with the desired release tag.
+- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#simple-clone):
+ clone the remote master branch.
+- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#commit-hash):
+ clone the remote master branch, then check out a specific commit hash.
+- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#release-tag):
+ clone the remote branch, associated with the desired release tag.
 
 ### Simple clone
 
