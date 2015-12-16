@@ -137,10 +137,10 @@ Fork this project in your GitHub account.  Then, clone your repository, with
 ### Simple clone
 
 ```bash
-$ cd /[destination-directory]
-$ sudo git clone https://[account]@github.com/[account]/machine-learning.git
-$ cd machine-learning
-$ git remote add upstream https://github.com/[account]/machine-learning.git
+cd /[destination-directory]
+sudo git clone https://[account]@github.com/[account]/machine-learning.git
+cd machine-learning
+git remote add upstream https://github.com/[account]/machine-learning.git
 ```
 
 **Note:** `[destination-directory]` corresponds to the desired directory path,
@@ -152,15 +152,15 @@ $ git remote add upstream https://github.com/[account]/machine-learning.git
 ### Commit hash
 
 ```bash
-$ cd /[destination-directory]
-$ sudo git clone https://[account]@github.com/[account]/machine-learning.git
-$ cd machine-learning
-$ git remote add upstream https://github.com/[account]/machine-learning.git
+cd /[destination-directory]
+sudo git clone https://[account]@github.com/[account]/machine-learning.git
+cd machine-learning
+git remote add upstream https://github.com/[account]/machine-learning.git
 # stop vagrant
-$ vagrant halt
+vagrant halt
 # ensure diffs don't prevent checkout, then checkout hash
-$ git checkout -- .
-$ git checkout [hash]
+git checkout -- .
+git checkout [hash]
 ```
 
 **Note:** the hashes associated with a release, can be found under the
@@ -176,16 +176,16 @@ $ git checkout [hash]
 ### Release tag
 
 ```bash
-$ cd /[destination-directory]
+cd /[destination-directory]
 # clone release tag: master branch does not exist
-$ sudo git clone -b [release-tag] --single-branch --depth 1 https://github.com/[account]/machine-learning.git [destination-directory]
-$ git remote add upstream https://github.com/[account]/machine-learning.git
+sudo git clone -b [release-tag] --single-branch --depth 1 https://github.com/[account]/machine-learning.git [destination-directory]
+git remote add upstream https://github.com/[account]/machine-learning.git
 # create master branch from remote master
-$ cd machine-learning
-$ git checkout -b master
-$ git pull upstream master
+cd machine-learning
+git checkout -b master
+git pull upstream master
 # return to release tag branch
-$ git checkout [release-tag]
+git checkout [release-tag]
 ```
 
 **Note:** `[release-tag]` corresponds to the [release tag](https://github.com/jeff1evesque/machine-learning/tags)
