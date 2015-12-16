@@ -130,9 +130,11 @@ Fork this project in your GitHub account.  Then, clone your repository, with
 - [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#simple-clone):
  clone the remote master branch.
 - [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#commit-hash):
- clone the remote master branch, then check out a specific commit hash.
+ clone the remote master branch, then checkout a specific commit hash.
 - [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#release-tag):
  clone the remote branch, associated with the desired release tag.
+
+Then, define the corresponding [remote upstream](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#remote-upstream)
 
 ### Simple clone
 
@@ -140,6 +142,12 @@ Fork this project in your GitHub account.  Then, clone your repository, with
 cd /[destination-directory]
 sudo git clone https://[account]@github.com/[account]/machine-learning.git
 ```
+
+**Note:** `[destination-directory]` corresponds to the desired directory path,
+ where the project repository resides.  `[account]` corresponds to the git
+ username, where the repository is being cloned from.  If the original
+ repository was forked, then use your git username, otherwise, use
+ `jeff1evesque`.
 
 ### Commit hash
 
@@ -158,6 +166,12 @@ $ git checkout [hash]
  corresponding tag value, on the [release](https://github.com/jeff1evesque/machine-learning/releases)
  page.
 
+**Note:** `[destination-directory]` corresponds to the desired directory path,
+ where the project repository resides.  `[account]` corresponds to the git
+ username, where the repository is being cloned from.  If the original
+ repository was forked, then use your git username, otherwise, use
+ `jeff1evesque`.
+
 ### Release tag
 
 ```bash
@@ -174,15 +188,21 @@ $ git pull upstream master
 **Note:** `[release-tag]` corresponds to the [release tag](https://github.com/jeff1evesque/machine-learning/tags)
  value, used to distinguish between releases.
 
-Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
+**Note:** `[destination-directory]` corresponds to the desired directory path,
+ where the project repository resides.  `[account]` corresponds to the git
+ username, where the repository is being cloned from.  If the original
+ repository was forked, then use your git username, otherwise, use
+ `jeff1evesque`.
+
+### Remote upstream
+
+Set the *Remote Upstream*, if this hasn't been done.  This allows commits to be
+ pushed to the remote upstream, and branches to be merged:
 
 ```bash
 cd /[destination-directory]/machine-learning
 git remote add upstream https://github.com/[account]/machine-learning.git
 ```
-
-**Note:** change `[destination-directory]` to a desired directory path, and
- `[account]` to your corresponding git username.
 
 ## Installation
 
