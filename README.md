@@ -124,22 +124,65 @@ shell access.
 
 ## Configuration
 
-Fork this project in your GitHub account, then clone your repository:
+Fork this project in your GitHub account.  Then, clone your repository, with
+ one of the following approaches:
+
+- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#simple-clone):
+ clone the remote master branch.
+- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#commit-hash):
+ clone the remote master branch, then check out a specific commit hash.
+- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#release-tag):
+ clone the remote branch, associated with the desired release tag.
+
+### Simple clone
 
 ```bash
-cd /[PROJECT-DIRECTORY]
-sudo git clone https://[USERNAME]@github.com/[USERNAME]/machine-learning.git
+cd /[destination-directory]
+sudo git clone https://[account]@github.com/[account]/machine-learning.git
 ```
 
-**Note:** change `[PROJECT-DIRECTORY]` to a desired directory path, and
- `[USERNAME]` to your corresponding git username.
+### Commit hash
+
+```bash
+$ cd /[destination-directory]
+$ sudo git clone https://[account]@github.com/[account]/machine-learning.git
+$ cd /[destination-directory]/machine-learning
+# stop vagrant
+$ vagrant halt
+# ensure diffs don't prevent checkout
+$ git checkout -- .
+$ git checkout [hash]
+```
+
+**Note:** the hashes associated with a release, can be found under the
+ corresponding tag value, on the [release](https://github.com/jeff1evesque/machine-learning/releases)
+ page.
+
+### Release tag
+
+```bash
+$ cd /[destination-directory]
+# clone release tag: master branch does not exist
+$ sudo git clone -b [release-tag] --single-branch --depth 1 https://github.com/[account]/machine-learning.git [destination-directory]
+# create master branch from remote master
+$ cd /[destination-directory]/machine-learning
+$ git remote add upstream https://github.com/[account]/machine-learning.git
+$ git checkout -b master
+$ git pull upstream master
+```
+
+**Note:** `[release-tag]` corresponds to the [release tag](https://github.com/jeff1evesque/machine-learning/tags)
+ value, used to distinguish between releases.
 
 Then, add the *Remote Upstream*, this way we can pull any merged pull-requests:
 
 ```bash
-cd /[PROJECT-DIRECTORY]
-git remote add upstream https://github.com/[YOUR-USERNAME]/machine-learning.git
+cd /[destination-directory]/machine-learning
+git remote add upstream https://github.com/[account]/machine-learning.git
 ```
+
+**Note:** change `[destination-directory]` to a desired directory path, and
+ `[account]` to your corresponding git username.
 
 ## Installation
 
