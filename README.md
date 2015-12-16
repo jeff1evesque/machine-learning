@@ -134,8 +134,6 @@ Fork this project in your GitHub account.  Then, clone your repository, with
 - [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#release-tag):
  clone the remote branch, associated with the desired release tag.
 
-Finally, remember to define the corresponding [remote upstream](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#remote-upstream).
-
 ### Simple clone
 
 ```bash
