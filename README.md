@@ -181,8 +181,9 @@ cd /[destination-directory]/machine-learning
 git remote add upstream https://github.com/[account]/machine-learning.git
 ```
 
-**Note:** change `[destination-directory]` to a desired directory path, and
- `[account]` to your corresponding git username.
+**Note:** `[destination-directory]` corresponds to the desired directory path,
+ where the project repository resides.  `[account]` corresponds to your
+ corresponding git username, if the original repository was forked.
 
 ## Installation
 
