@@ -154,7 +154,7 @@ $ git remote add upstream https://github.com/[account]/machine-learning.git
 ```bash
 $ cd /[destination-directory]
 $ sudo git clone https://[account]@github.com/[account]/machine-learning.git
-$ cd /[destination-directory]/machine-learning
+$ cd machine-learning
 $ git remote add upstream https://github.com/[account]/machine-learning.git
 # stop vagrant
 $ vagrant halt
@@ -179,11 +179,13 @@ $ git checkout [hash]
 $ cd /[destination-directory]
 # clone release tag: master branch does not exist
 $ sudo git clone -b [release-tag] --single-branch --depth 1 https://github.com/[account]/machine-learning.git [destination-directory]
-# create master branch from remote master
-$ cd /[destination-directory]/machine-learning
 $ git remote add upstream https://github.com/[account]/machine-learning.git
+# create master branch from remote master
+$ cd machine-learning
 $ git checkout -b master
 $ git pull upstream master
+# return to release tag branch
+$ git checkout [release-tag]
 ```
 
 **Note:** `[release-tag]` corresponds to the [release tag](https://github.com/jeff1evesque/machine-learning/tags)
