@@ -130,7 +130,7 @@ Fork this project in your GitHub account.  Then, clone your repository, with
 - [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#simple-clone):
  clone the remote master branch.
 - [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#commit-hash):
- clone the remote master branch, then check out a specific commit hash.
+ clone the remote master branch, then checkout a specific commit hash.
 - [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#release-tag):
  clone the remote branch, associated with the desired release tag.
 
