@@ -22,11 +22,11 @@ var Select_Session = React.createClass({
      render: function(){
         return(
             <form action='/load-data/' method='post'>
-                <fieldset class='fieldset-session-type'>
+                <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
-                    <select name='svm_session' autocomplete='off' onChange={this.change} value={this.state.value}>
-                        <option value='' selected='selected'>--Select--</option>
+                    <select name='svm_session' autoComplete='off' onChange={this.change} value={this.state.value}>
+                        <option value='' defaultValue>--Select--</option>
                         <option value='data_new'>New Data</option>
                         <option value='data_append'>Append Data</option>
                         <option value='model_generate'>Generate Model</option>
