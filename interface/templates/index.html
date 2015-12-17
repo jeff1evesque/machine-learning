@@ -21,7 +21,11 @@
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
 
     <script src='static/js/jquery-2.1.1.min.js'></script>
+    <script src='static/js/react.min.js'></script>
+    <script src='static/js/react-dom.min.js'></script>
     <script src='static/js/jquery-validate.min.js'></script>
+
+    <script src='static/js/select_session.min.js'></script>
     <script src='static/js/html_form.min.js'></script>
     <script src='static/js/html_form_delegator.min.js'></script>
     <script src='static/js/form_validator.min.js'></script>
@@ -34,20 +38,8 @@
     <link rel='stylesheet' href='static/css/style.min.css'>
   </head>
   <body>
-
-    <form action='/load-data/' method='post'>
-      <fieldset class='fieldset-session-type'>
-        <legend>Session Type</legend>
-        <p>Choose a session type</p>
-        <select name='svm_session' autocomplete='off'>
-          <option value='' selected='selected'>--Select--</option>
-          <option value='data_new'>New Data</option>
-          <option value='data_append'>Append Data</option>
-          <option value='model_generate'>Generate Model</option>
-          <option value='model_predict'>Make Prediction</option>
-        </select>
-      </fieldset>
-    </form>
+  
+    <div class='ml-container'></div>
 
   </body>
 </html>
