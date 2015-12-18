@@ -1,5 +1,5 @@
 /**
- * model_predict.jsx: append 'model_generate' fieldset.
+ * model_predict.jsx: append 'model_predict' fieldset.
  *
  * @Model_Predict, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
