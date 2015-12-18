@@ -9,17 +9,17 @@
 
 var Select_Session = React.createClass({
   // initial 'state properties'
-     getInitialState: function() {
-         return {
-             value: '--Select--'
-         };
-     },
+    getInitialState: function() {
+        return {
+            value: '--Select--'
+        };
+    },
   // update 'state properties'
-     change: function(event){
-         this.setState({value: event.target.value});
-     },
+    change: function(event){
+        this.setState({value: event.target.value});
+    },
   // triggered when 'state properties' change
-     render: function(){
+    render: function(){
         return(
             <form action='/load-data/' method='post'>
                 <fieldset className='fieldset-session-type'>
@@ -35,7 +35,7 @@ var Select_Session = React.createClass({
                 </fieldset>
             </form>
         );
-     }
+    }
 });
 
 // render a ReactElement into the DOM, in the supplied container
