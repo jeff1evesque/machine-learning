@@ -1,5 +1,5 @@
 /**
- * model_generate.js: append 'model_generate' fieldset.
+ * model_generate.jsx: append 'model_generate' fieldset.
  *
  * @Model_Generate, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
