@@ -16,9 +16,7 @@ var Data_Upload_New = React.createClass({
     },
   // update 'state properties'
     change: function(event){
-        this.setState({
-            this.setState({value: event.target.value});
-        });
+        this.setState({value: event.target.value});
     },
   // triggered when 'state properties' change
     render: function(){
