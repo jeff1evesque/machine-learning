@@ -26,7 +26,7 @@ var Data_Upload_New = React.createClass({
                 <fieldset class='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Please save the <i>Session Name</i>, then provide dataset type</p>
-                    <input type='text' name='svm_title' placeholder='Session Name'>
+                    <input type='text' name='svm_title' placeholder='Session Name' />
                     <select name='svm_dataset_type' autoComplete='off' onChange={this.change} value={this.state.value}>
                         <option value='' defaultValue>--Select--</option>
                         <option value='file_upload'>Upload file</option>
