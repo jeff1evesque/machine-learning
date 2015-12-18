@@ -28,7 +28,7 @@ var Model_Predict = React.createClass({
                 <fieldset class='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
-                    <select name='svm_model_id'>
+                    <select name='svm_model_id' autoComplete='off' onChange={this.change} value={this.state.value}>
                         <option value='' defaultValue>--Select--</option>
                     </select>
                 </fieldset>
