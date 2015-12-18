@@ -10,68 +10,13 @@ $(document).ready(function() {
   // Append 'Session Type' Fieldset
   $('.fieldset-session-type').on('change', 'select[name="svm_session"]', function() {
     if ($(this).val().toLowerCase() == 'model_generate') {
-      content.session =
-          '<fieldset class="fieldset-session-generate">' +
-            '<legend>Generate Model</legend>' +
-            '<fieldset class="fieldset-select-model">' +
-              '<legend>Configurations</legend>' +
-              '<p>Select past session, and model type</p>' +
-              '<select name="svm_session_id">' +
-                '<option value="" selected="selected">--Select--</option>' +
-              '</select>' +
-              '<select name="svm_model_type">' +
-                '<option value="" selected="selected">--Select--</option>' +
-                '<option value="classification">Classification</option>' +
-                '<option value="regression">Regression</option>' +
-              '</select>' +
-            '</fieldset>' +
-          '</fieldset>';
+        require('model_generate');
     } else if ($(this).val().toLowerCase() == 'model_predict') {
-      content.session =
-          '<fieldset class="fieldset-session-predict">' +
-            '<legend>Analysis</legend>' +
-            '<fieldset class="fieldset-dataset-type">' +
-              '<legend>Configurations</legend>' +
-              '<p>Select a previous model to analyze</p>' +
-              '<select name="svm_model_id">' +
-                '<option value="" selected="selected">--Select--</option>' +
-              '</select>' +
-            '</fieldset>' +
-         '</fieldset>';
+        require('model_predict');
     } else if ($(this).val().toLowerCase() == 'data_new') {
-      content.session =
-          '<fieldset class="fieldset-session-data-upload">' +
-            '<legend>Data Upload</legend>' +
-            '<fieldset class="fieldset-dataset-type">' +
-              '<legend>Configurations</legend>' +
-              '<p>Please save the <i>Session Name</i>, then provide dataset type</p>' +
-              '<input type="text" name="svm_title" placeholder="Session Name">' +
-              '<select name="svm_dataset_type">' +
-                '<option value="" selected="selected">--Select--</option>' +
-                '<option value="file_upload">Upload file</option>' +
-                '<option value="dataset_url">Dataset URL</option>' +
-              '</select>' +
-            '</fieldset>' +
-          '</fieldset>';
+        require('data_upload_new');
     } else if ($(this).val().toLowerCase() == 'data_append') {
-      content.session =
-          '<fieldset class="fieldset-session-data-upload">' +
-            '<legend>Data Upload</legend>' +
-            '<fieldset class="fieldset-dataset-type"' +
-              '<legend>Configurations</legend>' +
-              '<p>Select past session, and upload type</p>' +
-              '<select name="svm_session_id">' +
-                '<option value="" selected="selected">--Select--</option>' +
-              '</select>' +
-              '<select name="svm_dataset_type">' +
-                '<option value="" selected="selected">--Select--</option>' +
-                '<option value="file_upload">Upload file</option>' +
-                '<option value="dataset_url">Dataset URL</option>' +
-              '</select>' +
-            '</fieldset>' +
-          '</fieldset>';
-    } else {
-      content.session = null;
+        require('data_upload_append');
     }
     buildForm('.fieldset-session-type', content.session, ['.fieldset-session-predict', '.fieldset-session-generate', '.fieldset-session-data-upload', '.svm-form-submit']);
 
