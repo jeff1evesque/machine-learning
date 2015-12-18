@@ -42,5 +42,5 @@ var Data_Upload_New = React.createClass({
 
 // render a ReactElement into the DOM, in the supplied container
 $(document).ready(function() {
-    ReactDOM.render(<Model_Predict />, document.querySelector('.fieldset-session-type'));
+    ReactDOM.render(<Data_Upload_New />, document.querySelector('.fieldset-session-type'));
 });
