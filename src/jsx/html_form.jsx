@@ -33,7 +33,7 @@ $(document).ready(function() {
     // Submit Button: 'model_generate' case
     $('.fieldset-session-generate').on('change', 'select[name="svm_session_id"], select[name="svm_model_type"]', function() {
       if ($('select[name="svm_session_id"]').val() && $('select[name="svm_model_type"]').val()) {
-        content.submit = '<input type="submit" class="svm-form-submit">';
+        require('require/submit');
         buildForm('.fieldset-session-generate', null, ['.svm_form_submit']);
       } else {
         $('.svm-form-submit').remove();
@@ -49,7 +49,7 @@ $(document).ready(function() {
           var flagField = fieldDeterminant($('input[name="prediction_input[]"]'));
 
           if (flagField) {
-            content.submit = '<input type="submit" class="svm-form-submit">';
+            require('require/submit');
             buildForm('.fieldset-session-predict', null, ['.svm-form-submit']);
           } else {
             buildForm('.fieldset-session-predict', null, ['.svm-form-submit', '.fieldset-prediction-result']);
@@ -68,8 +68,7 @@ $(document).ready(function() {
         if ($('select[name="svm_session_id"]').val().length > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'file_upload') {
           require('require/supply_dataset_file');
         } else if ($('select[name="svm_session_id"]').val() > 0 && $('select[name="svm_dataset_type"]').val().toLowerCase() == 'dataset_url') {
-          content.dataset =
-              require('require/supply_dataset_url');
+          require('require/supply_dataset_url');
         }
       }
 
@@ -90,7 +89,7 @@ $(document).ready(function() {
         var flagField = fieldDeterminant($('input[name="svm_dataset[]"]'));
 
         if (flagField) {
-          content.submit = '<input type="submit" class="svm-form-submit">';
+          require('require/submit');
           buildForm('.fieldset-session-data-upload', null, ['.svm-form-submit']);
         } else {
           $('.svm-form-submit').remove();
