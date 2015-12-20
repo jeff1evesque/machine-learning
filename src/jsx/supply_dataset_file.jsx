@@ -1,5 +1,5 @@
 /**
- * supply_dataset_file.js: file upload fieldset.
+ * supply_dataset_file.jsx: file upload fieldset.
  *
  * @Upload_File, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
