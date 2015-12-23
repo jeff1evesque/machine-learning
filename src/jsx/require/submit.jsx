@@ -8,18 +8,6 @@
  */
 
 var Submit = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            value_session_id: '--Select--'
-        };
-    },
-  // update 'state properties'
-    change: function(event){
-        this.setState({
-            value_session_id: event.target.value_session_id
-        });
-    },
   // triggered when 'state properties' change
     render: function(){
         return(<input type='submit' class='svm-form-submit' />);
