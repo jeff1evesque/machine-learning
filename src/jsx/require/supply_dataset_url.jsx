@@ -23,7 +23,7 @@ var Upload_Url = React.createClass({
         return(
             <fieldset class='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input type='url' name='svm_dataset[]' placeholder='Dataset URL' class='svm-dataset-xml' onChange={this.change} />
+                <input type='url' name='svm_dataset[]' placeholder='Dataset URL' class='svm-dataset-xml' onChange={this.change} value={this.state.value} />
                 <input type='button' value='Add more' class='add-element svm-dataset-xml-add' />
                 <input type='button' value='Remove' class='remove-element svm-dataset-xml-remove' />
             </fieldset>
