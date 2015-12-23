@@ -79,8 +79,6 @@ $(document).ready(function() {
         } else if ($('select[name="svm_dataset_type"]').val().toLowerCase() == 'dataset_url' && $('input[name="svm_title"]').val().length !== 0) {
           require('require/supply_dataset_url');
         }
-      } else {
-        content.dataset = null;
       }
 
       // Submit Button
