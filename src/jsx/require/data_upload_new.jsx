@@ -38,6 +38,9 @@ var Data_Upload_New = React.createClass({
     }
 });
 
+// indicate which class can be exported, and instantiated via 'require'
+export default Data_Upload_New
+
 // render a ReactElement into the DOM, in the supplied container
 $(document).ready(function() {
     ReactDOM.render(<Data_Upload_New />, document.querySelector('.fieldset-session-type'));
