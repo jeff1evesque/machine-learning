@@ -22,7 +22,7 @@ var Submit = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        return(<input type='submit' class='svm-form-submit'>);
+        return(<input type='submit' class='svm-form-submit' />);
     }
 });
 
