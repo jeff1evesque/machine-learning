@@ -11,7 +11,7 @@ var Upload_File = React.createClass({
   // initial 'state properties'
      getInitialState: function() {
          return {
-             value: '--Select--'
+             value: null
          };
      },
   // update 'state properties'
@@ -23,7 +23,7 @@ var Upload_File = React.createClass({
         return(
             <fieldset class='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input type='file' name='svm_dataset[]' class='svm-dataset-file' />
+                <input type='file' name='svm_dataset[]' class='svm-dataset-file' onChange={this.change} value={this.state.value} />
                 <input type='button' value='Add more' class='add-element svm-dataset-file-add' />
                 <input type='button' value='Remove' class='remove-element svm-dataset-file-remove' />
                 <p class='form-note'>*<span class='bold'>Note:</span> Uploaded file(s) must be formatted as <span class='italic'>csv</span>, <span class='italic'>json</span>, or <span class='italic'>xml</span> format.</p>
