@@ -46,7 +46,7 @@ A non-descriptive issue title is generally used, when multiple files will be
  ([inline format](https://help.github.com/articles/markdown-basics/#inline-formats))
 - when referring to another issue, always provide a reference to it. This can
  be done by either [linking](https://help.github.com/articles/markdown-basics/#links)
- keywords within *issue body*, or by simply providing the issue number (i.e. `#230`).
+ keywords within *issue body*, or by simply providing the issue number (i.e. `#230`)
 
 ## Creating GIT Branch
 
