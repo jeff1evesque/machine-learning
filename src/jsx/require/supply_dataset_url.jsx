@@ -35,6 +35,4 @@ var Upload_Url = React.createClass({
 export default Upload_Url
 
 // render a ReactElement into the DOM, in the supplied container
-$(document).ready(function() {
-    ReactDOM.render(<Upload_Url />, document.querySelector('.fieldset-dataset-type'));
-});
+ReactDOM.render(<Upload_Url />, document.querySelector('.fieldset-dataset-type'));
