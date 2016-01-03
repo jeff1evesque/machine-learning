@@ -48,6 +48,4 @@ var Data_Upload_Append = React.createClass({
 export default Data_Upload_Append
 
 // render a ReactElement into the DOM, in the supplied container
-$(document).ready(function() {
-    ReactDOM.render(<Data_Upload_Append />, document.querySelector('.fieldset-session-type'));
-});
+ReactDOM.render(<Data_Upload_Append />, document.querySelector('.fieldset-session-type'));
