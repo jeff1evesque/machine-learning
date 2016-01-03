@@ -39,6 +39,4 @@ var Model_Predict = React.createClass({
 export default Model_Predict
 
 // render a ReactElement into the DOM, in the supplied container
-$(document).ready(function() {
-    ReactDOM.render(<Model_Predict />, document.querySelector('.fieldset-session-type'));
-});
+ReactDOM.render(<Model_Predict />, document.querySelector('.fieldset-session-type'));
