@@ -18,6 +18,4 @@ var Submit = React.createClass({
 export default Generate
 
 // render a ReactElement into the DOM, in the supplied container
-$(document).ready(function() {
-    ReactDOM.render(<Submit />, document.querySelector('.ml-container form fieldset:last-of-type'));
-});
+ReactDOM.render(<Submit />, document.querySelector('.ml-container form fieldset:last-of-type'));
