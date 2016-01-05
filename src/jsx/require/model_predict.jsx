@@ -21,9 +21,9 @@ var Model_Predict = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <fieldset class='fieldset-session-predict'>
+            <fieldset className='fieldset-session-predict'>
                 <legend>Analysis</legend>
-                <fieldset class='fieldset-dataset-type'>
+                <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
                     <select name='svm_model_id' autoComplete='off' onChange={this.change} value={this.state.value}>
