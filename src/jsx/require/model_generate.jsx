@@ -25,9 +25,9 @@ var Model_Generate = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <fieldset class='fieldset-session-generate'>
+            <fieldset className='fieldset-session-generate'>
                 <legend>Generate Model</legend>
-                <fieldset class='fieldset-select-model'>
+                <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
                     <p>Select past session, and model type</p>
                     <select name='svm_session_id' autoComplete='off' onChange={this.change} value={this.state.value_session_id}>
