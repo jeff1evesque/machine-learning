@@ -21,9 +21,9 @@ var Data_Upload_New = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <fieldset class='fieldset-session-data-upload'>
+            <fieldset className='fieldset-session-data-upload'>
                 <legend>Data Upload</legend>
-                <fieldset class='fieldset-dataset-type'>
+                <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Please save the <i>Session Name</i>, then provide dataset type</p>
                     <input type='text' name='svm_title' placeholder='Session Name' />
