@@ -25,9 +25,9 @@ var Data_Upload_Append = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <fieldset class='fieldset-session-data-upload'>
+            <fieldset className='fieldset-session-data-upload'>
                 <legend>Data Upload</legend>
-                <fieldset class='fieldset-dataset-type'>
+                <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select past session, and upload type</p>
                     <select name='svm_session_id' autoComplete='off' onChange={this.change} value={this.state.value_session_id}>
