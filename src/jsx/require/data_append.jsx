@@ -7,7 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var Model_Generate = React.createClass({
+var Data_Append = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
