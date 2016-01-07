@@ -34,6 +34,3 @@ var Upload_File = React.createClass({
 
 // indicate which class can be exported, and instantiated via 'require'
 export default Upload_File
-
-// render a ReactElement into the DOM, in the supplied container
-ReactDOM.render(<Upload_File />, document.querySelector('.fieldset-dataset-type'));
