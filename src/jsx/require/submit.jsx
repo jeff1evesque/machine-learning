@@ -15,4 +15,4 @@ var Submit = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Generate
+export default Submit
