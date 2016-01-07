@@ -46,6 +46,3 @@ var Model_Generate = React.createClass({
 
 // indicate which class can be exported, and instantiated via 'require'
 export default Model_Generate
-
-// render a ReactElement into the DOM, in the supplied container
-ReactDOM.render(<Model_Generate />, document.querySelector('.fieldset-session-type'));
