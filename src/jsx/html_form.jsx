@@ -10,6 +10,8 @@ $(document).ready(function() {
   // ReactJS Variables
   var modelGenerate = require('./require/model_generate.jsx');
   var modelPredict = require('./require/model_predict.jsx');
+  var data_new = require('./require/data_new.jsx');
+  var data_append = require('./require/data_append.jsx');
   var dataUploadNew = require('./require/data_upload_new.jsx');
   var dataUploadAppend = require('./require/data_upload_append.jsx');
   var submit = require('./require/submit.jsx');
