@@ -5,7 +5,7 @@
 $(document).ready(function() {
 
   // Local variables
-  import content = {};
+  var content = {};
 
   // ReactJS variables
   import ModelGenerate from './require/model_generate.jsx';
