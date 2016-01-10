@@ -4,19 +4,19 @@
 
 $(document).ready(function() {
 
-  // Local Variables
-  var content = {};
+  // Local importiables
+  import content = {};
 
-  // ReactJS Variables
-  var ModelGenerate = require('./require/model_generate.jsx');
-  var ModelPredict = require('./require/model_predict.jsx');
-  var DataNew = require('./require/data_new.jsx');
-  var DataAppend = require('./require/data_append.jsx');
-  var DataUploadNew = require('./require/data_upload_new.jsx');
-  var DataUploadAppend = require('./require/data_upload_append.jsx');
-  var Submit = require('./require/submit.jsx');
-  var SupplyDatasetFile = require('./require/supply_dataset_file.jsx');
-  var SupplyDatasetUrl = require('./require/supply_dataset_url.jsx');
+  // ReactJS importiables
+  import ModelGenerate from './require/model_generate.jsx';
+  import ModelPredict from './require/model_predict.jsx';
+  import DataNew from './require/data_new.jsx';
+  import DataAppend from './require/data_append.jsx';
+  import DataUploadNew from './require/data_upload_new.jsx';
+  import DataUploadAppend from './require/data_upload_append.jsx';
+  import Submit from './require/submit.jsx';
+  import SupplyDatasetFile from './require/supply_dataset_file.jsx';
+  import SupplyDatasetUrl from './require/supply_dataset_url.jsx';
 
   // Append 'Session Type' Fieldset
   $('.fieldset-session-type').on('change', 'select[name="svm_session"]', function() {
