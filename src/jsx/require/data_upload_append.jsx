@@ -1,13 +1,13 @@
 /**
  * data_upload_append.jsx: append 'data_upload' fieldset.
  *
- * @Data_Upload_Append, must be capitalized in order for reactjs to render it as a
+ * @DataUploadAppend, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var Data_Upload_Append = React.createClass({
+var DataUploadAppend = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -45,4 +45,4 @@ var Data_Upload_Append = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Data_Upload_Append
+export default DataUploadAppend
