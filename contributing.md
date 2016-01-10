@@ -1,8 +1,7 @@
 # Contributing
 
-This project implements a [BSD 3-Clause License](https://opensource.org/
-licenses/BSD-3-Clause), specified within [`license.md`](https://github.com/
-jeff1evesque/machine-learning/blob/master/license.md).
+This project implements a [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause),
+ specified within [`license.md`](https://github.com/jeff1evesque/machine-learning/blob/master/license.md).
 
 ## Creating an Issue
 
@@ -117,8 +116,7 @@ More specifically, the following rules *must* be followed:
 
 ### Pull Request: Body
 
-Always include one of the following [*keywords*](https://help.github.com/
-articles/closing-issues-via-commit-messages/#keywords-for-closing-issues)
+Always include one of the following [*keywords*](https://help.github.com/articles/closing-issues-via-commit-messages/#keywords-for-closing-issues)
  followed by the *issue number* in a pull request body:
 
 - Close
