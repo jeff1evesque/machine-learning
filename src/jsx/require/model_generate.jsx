@@ -1,13 +1,13 @@
 /**
  * model_generate.jsx: append 'model_generate' fieldset.
  *
- * @Model_Generate, must be capitalized in order for reactjs to render it as a
+ * @ModelGenerate, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var Model_Generate = React.createClass({
+var ModelGenerate = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -45,4 +45,4 @@ var Model_Generate = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Model_Generate
+export default ModelGenerate
