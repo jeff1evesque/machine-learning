@@ -1,13 +1,13 @@
 /**
  * supply_dataset_file.jsx: file upload fieldset.
  *
- * @Upload_File, must be capitalized in order for reactjs to render it as a
- *     component. Otherwise, the variable is rendered as a dom node.
+ * @SupplyDatasetFile, must be capitalized in order for reactjs to render it as
+ *     a component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var Upload_File = React.createClass({
+var SupplyDatasetFile = React.createClass({
   // initial 'state properties'
      getInitialState: function() {
          return {
@@ -33,4 +33,4 @@ var Upload_File = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Upload_File
+export default SupplyDatasetFile
