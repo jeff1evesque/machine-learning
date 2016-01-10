@@ -4,10 +4,10 @@
 
 $(document).ready(function() {
 
-  // Local importiables
+  // Local variables
   import content = {};
 
-  // ReactJS importiables
+  // ReactJS variables
   import ModelGenerate from './require/model_generate.jsx';
   import ModelPredict from './require/model_predict.jsx';
   import DataNew from './require/data_new.jsx';
