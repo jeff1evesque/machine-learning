@@ -1,13 +1,13 @@
 /**
  * model_predict.jsx: append 'model_predict' fieldset.
  *
- * @Model_Predict, must be capitalized in order for reactjs to render it as a
+ * @ModelPredict, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var Model_Predict = React.createClass({
+var ModelPredict = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -36,4 +36,4 @@ var Model_Predict = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Model_Predict
+export default ModelPredict
