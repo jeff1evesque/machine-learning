@@ -1,13 +1,13 @@
 /**
  * select_dataset_url.jss: url upload fieldset.
  *
- * @Upload_Url, must be capitalized in order for reactjs to render it as a
+ * @SelectDatasetUrl, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var Upload_Url = React.createClass({
+var SelectDatasetUrl = React.createClass({
   // initial 'state properties'
      getInitialState: function() {
          return {
@@ -32,4 +32,4 @@ var Upload_Url = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Upload_Url
+export default SelectDatasetUrl
