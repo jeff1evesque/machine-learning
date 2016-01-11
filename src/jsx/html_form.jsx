@@ -18,7 +18,7 @@ import SupplyDatasetUrl from './require/supply_dataset_url.jsx';
 var content = {};
 
 // Render initial form component
-ReactDom.render(<SelectSession/>, document.querySelector('.ml-container'));
+ReactDOM.render(<SelectSession/>, document.querySelector('.ml-container'));
 
 // Append 'Session Type' Fieldset
 $('.fieldset-session-type').on('change', 'select[name="svm_session"]', function() {
