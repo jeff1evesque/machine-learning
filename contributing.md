@@ -1,8 +1,7 @@
 # Contributing
 
-This project implements a [BSD 3-Clause License](https://opensource.org/
-licenses/BSD-3-Clause), specified within [`license.md`](https://github.com/
-jeff1evesque/machine-learning/blob/master/license.md).
+This project implements a [BSD 3-Clause License](https://opensource.org/licenses/BSD-3-Clause),
+ specified within [`license.md`](https://github.com/jeff1evesque/machine-learning/blob/master/license.md).
 
 ## Creating an Issue
 
@@ -39,18 +38,14 @@ A non-descriptive issue title is generally used, when multiple files will be
 ### Issue: Body
 
 - filename references should *always* be wrapped by single tildas
-- codeblocks should *always* be wrapped by triple tildas (
-[fenced code block](https://help.github.com/articles/github-flavored-markdown/
-#fenced-code-blocks)), where the first set of triple tildas is followed by the
- language being used ([syntax highlighted](https://help.github.com/articles/
-github-flavored-markdown/#syntax-highlighting))
-- one line code snippets must be wrapped by single tildas (
-[inline format](https://help.github.com/articles/markdown-basics/#inline-
-formats))
+- codeblocks should *always* be wrapped by triple tildas
+ ([fenced code block](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks)), where the first set of triple tildas is followed by the
+ language being used ([syntax highlighted](https://help.github.com/articles/github-flavored-markdown/#syntax-highlighting))
+- one line code snippets must be wrapped by single tildas
+ ([inline format](https://help.github.com/articles/markdown-basics/#inline-formats))
 - when referring to another issue, always provide a reference to it. This can
- be done by either [linking](https://help.github.com/articles/markdown-basics/
-#links) keywords within *issue body*, or by simply providing the issue number
- (i.e. `#230`).
+ be done by either [linking](https://help.github.com/articles/markdown-basics/#links)
+ keywords within *issue body*, or by simply providing the issue number (i.e. `#230`)
 
 ## Creating GIT Branch
 
@@ -117,8 +112,7 @@ More specifically, the following rules *must* be followed:
 
 ### Pull Request: Body
 
-Always include one of the following [*keywords*](https://help.github.com/
-articles/closing-issues-via-commit-messages/#keywords-for-closing-issues)
+Always include one of the following [*keywords*](https://help.github.com/articles/closing-issues-via-commit-messages/#keywords-for-closing-issues)
  followed by the *issue number* in a pull request body:
 
 - Close
