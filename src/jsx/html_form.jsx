@@ -2,21 +2,21 @@
  * html_form.js: conditionally create form fieldsets, and form elements.
  */
 
+// ReactJS variables
+import ModelGenerate from './require/model_generate.jsx';
+import ModelPredict from './require/model_predict.jsx';
+import DataNew from './require/data_new.jsx';
+import DataAppend from './require/data_append.jsx';
+import DataUploadNew from './require/data_upload_new.jsx';
+import DataUploadAppend from './require/data_upload_append.jsx';
+import Submit from './require/submit.jsx';
+import SupplyDatasetFile from './require/supply_dataset_file.jsx';
+import SupplyDatasetUrl from './require/supply_dataset_url.jsx';
+
 $(document).ready(function() {
 
   // Local variables
   var content = {};
-
-  // ReactJS variables
-  import ModelGenerate from './require/model_generate.jsx';
-  import ModelPredict from './require/model_predict.jsx';
-  import DataNew from './require/data_new.jsx';
-  import DataAppend from './require/data_append.jsx';
-  import DataUploadNew from './require/data_upload_new.jsx';
-  import DataUploadAppend from './require/data_upload_append.jsx';
-  import Submit from './require/submit.jsx';
-  import SupplyDatasetFile from './require/supply_dataset_file.jsx';
-  import SupplyDatasetUrl from './require/supply_dataset_url.jsx';
 
   // Append 'Session Type' Fieldset
   $('.fieldset-session-type').on('change', 'select[name="svm_session"]', function() {
