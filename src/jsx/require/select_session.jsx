@@ -1,13 +1,13 @@
 /**
  * select_session.js: initial form.
  *
- * @Select_Session, must be capitalized in order for reactjs to render it as a
+ * @SelectSession, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var Select_Session = React.createClass({
+var SelectSession = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -38,7 +38,5 @@ var Select_Session = React.createClass({
     }
 });
 
-// render a ReactElement into the DOM, in the supplied container
-$(document).ready(function() {
-    ReactDOM.render(<Select_Session />, document.querySelector('.ml-container'));
-});
+// indicate which class can be exported, and instantiated via 'require'
+export default SelectSession
