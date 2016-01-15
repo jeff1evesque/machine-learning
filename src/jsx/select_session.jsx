@@ -43,7 +43,7 @@ var SelectSession = React.createClass({
                         <option value='model_predict'>Make Prediction</option>
                     </select>
                     if (this.state.value === 'data_new') {
-                        <DateNew/>
+                        <DataNew/>
                     }
                     elseif (this.state.value === 'data_append') {
                         <DataAppend/>
