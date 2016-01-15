@@ -18,7 +18,7 @@ var DataNew = React.createClass({
   // update 'state properties'
     change: function(event){
         this.setState({
-            value: event.target.value_dataset_type,
+            value_dataset_type: event.target.value_dataset_type,
             value_title: event.target.value_title
         });
     },
