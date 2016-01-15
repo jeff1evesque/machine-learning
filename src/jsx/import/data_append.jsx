@@ -25,7 +25,7 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <fieldset class='fieldset-session-data-upload'>
+            <fieldset className='fieldset-session-data-upload'>
                 <legend>Data Upload</legend>
                 <fieldset class='fieldset-dataset-type'>
                     <legend>Configurations</legend>
