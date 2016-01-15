@@ -44,6 +44,7 @@ var SelectSession = React.createClass({
         elseif (this.state.value === 'model_predict') {
             sessionType = <ModelPredict/>
         }
+
         return(
             <form action='/load-data/' method='post'>
                 <fieldset className='fieldset-session-type'>
@@ -56,6 +57,7 @@ var SelectSession = React.createClass({
                         <option value='model_generate'>Generate Model</option>
                         <option value='model_predict'>Make Prediction</option>
                     </select>
+
                     {sessionType}
                 </fieldset>
             </form>
