@@ -7,15 +7,15 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import ModelGenerate from './require/model_generate.jsx';
-import ModelPredict from './require/model_predict.jsx';
-import DataNew from './require/data_new.jsx';
-import DataAppend from './require/data_append.jsx';
-import DataUploadNew from './require/data_upload_new.jsx';
-import DataUploadAppend from './require/data_upload_append.jsx';
-import Submit from './require/submit.jsx';
-import SupplyDatasetFile from './require/supply_dataset_file.jsx';
-import SupplyDatasetUrl from './require/supply_dataset_url.jsx';
+import ModelGenerate from './import/model_generate.jsx';
+import ModelPredict from './import/model_predict.jsx';
+import DataNew from './import/data_new.jsx';
+import DataAppend from './import/data_append.jsx';
+import DataUploadNew from './import/data_upload_new.jsx';
+import DataUploadAppend from './import/data_upload_append.jsx';
+import Submit from './import/submit.jsx';
+import SupplyDatasetFile from './import/supply_dataset_file.jsx';
+import SupplyDatasetUrl from './import/supply_dataset_url.jsx';
 
 var SelectSession = React.createClass({
   // initial 'state properties'
