@@ -49,14 +49,14 @@ var SelectSession = React.createClass({
             </form>
         );
     },
-  // call back: used within the above 'render'
+  // call back: used for the above 'render' (return 'span' if undefined)
     getSessionType: function(type) {
         return {
             data_new: DataNew,
             data_append: DataAppend,
             model_generate: ModelGenerate,
             model_predict: ModelPredict
-        }[type];
+        }[type] || 'span';
     }
 });
 
