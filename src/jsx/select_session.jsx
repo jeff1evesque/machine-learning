@@ -30,6 +30,20 @@ var SelectSession = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
+        var sessionType;
+
+        if (this.state.value === 'data_new') {
+            sessionType = <DataNew/>
+        }
+        elseif (this.state.value === 'data_append') {
+            sessionType = <DataAppend/>
+        }
+        elseif (this.state.value === 'model_generate') {
+            sessionType = <ModelGenerate/>
+        }
+        elseif (this.state.value === 'model_predict') {
+            sessionType = <ModelPredict/>
+        }
         return(
             <form action='/load-data/' method='post'>
                 <fieldset className='fieldset-session-type'>
@@ -42,18 +56,7 @@ var SelectSession = React.createClass({
                         <option value='model_generate'>Generate Model</option>
                         <option value='model_predict'>Make Prediction</option>
                     </select>
-                    if (this.state.value === 'data_new') {
-                        <DataNew/>
-                    }
-                    elseif (this.state.value === 'data_append') {
-                        <DataAppend/>
-                    }
-                    elseif (this.state.value === 'model_generate') {
-                        <ModelGenerate/>
-                    }
-                    elseif (this.state.value === 'model_predict') {
-                        <ModelPredict/>
-                    }
+                    {sessionType}
                 </fieldset>
             </form>
         );
