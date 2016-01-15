@@ -31,10 +31,10 @@ var DataAppend = React.createClass({
                     <legend>Configurations</legend>
                     <p>Select past session, and upload type</p>
                     <select name='svm_session_id' autoComplete='off' onChange={this.change} value={this.state.value_session_id}>
-                        <option value='' selected='selected'>--Select--</option>
+                        <option value='' defaultValue>--Select--</option>
                     </select>
                     <select name='svm_dataset_type' autoComplete='off' onChange={this.change} value={this.state.value_dataset_type}>
-                        <option value='' selected='selected'>--Select--</option>
+                        <option value='' defaultValue>--Select--</option>
                         <option value='file_upload'>Upload file</option>
                         <option value='dataset_url'>Dataset URL</option>
                     </select>
