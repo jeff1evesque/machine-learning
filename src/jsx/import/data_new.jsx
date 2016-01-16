@@ -31,7 +31,7 @@ var DataNew = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        var SupplyDataset = this.getSupplyDataset(this.state.value_title, this.state.value_dataset_type);
+        var SupplyDataset = this.getSupplyDataset();
         return(
             <fieldset className='fieldset-session-data-upload'>
                 <legend>Data Upload</legend>
@@ -51,12 +51,12 @@ var DataNew = React.createClass({
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function(title, dataset_type) {
-//        if (title !== null) {
+    getSupplyDataset: function() {
+//        if (this.state.value_title !== null) {
             return {
-                file_upload: SupplyDatasetFile,
-                dataset_url: SupplyDatasetUrl
-            }[dataset_type] || 'span';
+                file_upload: this.state.value_title,
+                dataset_url: this.state.value_dataset_type
+            }[this.state.value_dataset_type] || 'span';
         }
 //    }
 });
