@@ -31,7 +31,7 @@ var DataNew = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        var SupplyDataset = this.getSupplyDataset();
+        var SupplyDataset = this.getSupplyDataset(this.state.value_title, this.state.value_dataset_type);
         return(
             <fieldset className='fieldset-session-data-upload'>
                 <legend>Data Upload</legend>
@@ -46,17 +46,19 @@ var DataNew = React.createClass({
                     </select>
                 </fieldset>
             </fieldset>
+
+            <SupplyDataset/>
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function() {
-        if (this.state.value_title !== null) {
+    getSupplyDataset: function(title, dataset_type) {
+//        if (title !== null) {
             return {
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
-            }[this.state.value_dataset_type] || 'span';
+            }[dataset_type] || 'span';
         }
-    }
+//    }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
