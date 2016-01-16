@@ -42,7 +42,7 @@ var SelectSession = React.createClass({
                         <option value='model_predict'>Make Prediction</option>
                     </select>
 
-                    <SessionType />
+                    <SessionType/>
                 </fieldset>
             </form>
         );
