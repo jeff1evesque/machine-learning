@@ -7,19 +7,22 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import SupplyDatasetFile from './supply_dataset_file.jsx';
+import SupplyDatasetUrl from './supply_dataset_url.jsx';
+
 var DataNew = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_dataset_type: '--Select--',
-            value_title: null
+            value_title: null,
+            value_dataset_type: '--Select--'
         };
     },
   // update 'state properties'
     change: function(event){
         this.setState({
-            value_dataset_type: event.target.value_dataset_type,
-            value_title: event.target.value_title
+            value_title: event.target.value_title,
+            value_dataset_type: event.target.value_dataset_type
         });
     },
   // triggered when 'state properties' change
@@ -31,7 +34,7 @@ var DataNew = React.createClass({
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Please save the <i>Session Name</i>, then provide dataset type</p>
-                    <input type='text' name='svm_title' placeholder='Session Name' onChange={this.change} value={this.state.value} />
+                    <input type='text' name='svm_title' placeholder='Session Name' onChange={this.change} value={this.state.value_title} />
                     <select name='svm_dataset_type' autoComplete='off' onChange={this.change} value={this.state.value_dataset_type}>
                         <option value='' defaultValue>--Select--</option>
                         <option value='file_upload'>Upload file</option>
