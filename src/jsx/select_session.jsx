@@ -14,8 +14,6 @@ import DataAppend from './import/data_append.jsx';
 import DataUploadNew from './import/data_upload_new.jsx';
 import DataUploadAppend from './import/data_upload_append.jsx';
 import Submit from './import/submit.jsx';
-import SupplyDatasetFile from './import/supply_dataset_file.jsx';
-import SupplyDatasetUrl from './import/supply_dataset_url.jsx';
 
 var SelectSession = React.createClass({
   // initial 'state properties'
