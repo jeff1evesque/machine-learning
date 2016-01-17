@@ -45,18 +45,21 @@ var DataNew = React.createClass({
                         <option value='dataset_url'>Dataset URL</option>
                     </select>
                 </fieldset>
-            </fieldset>
 
-            <SupplyDataset/>
+                <SupplyDataset/>
+            </fieldset>
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
     getSupplyDataset: function() {
         if (this.state.value_title !== null) {
             return {
-                file_upload: this.state.value_title,
-                dataset_url: this.state.value_dataset_type
+                file_upload: SupplyDatasetFile,
+                dataset_url: SupplyDatasetUrl
             }[this.state.value_dataset_type] || 'span';
+        }
+        else {
+            return null;
         }
     }
 });
