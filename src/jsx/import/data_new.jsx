@@ -52,13 +52,13 @@ var DataNew = React.createClass({
     },
   // call back: used for the above 'render' (return 'span' if undefined)
     getSupplyDataset: function() {
-//        if (this.state.value_title !== null) {
+        if (this.state.value_title !== null) {
             return {
                 file_upload: this.state.value_title,
                 dataset_url: this.state.value_dataset_type
             }[this.state.value_dataset_type] || 'span';
         }
-//    }
+    }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
