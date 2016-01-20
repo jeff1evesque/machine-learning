@@ -26,9 +26,20 @@ var SelectSession = React.createClass({
     change: function(event){
         this.setState({value: event.target.value});
     },
+  // update 'state properties' from children component
+    displaySubmit: function(event) {
+        this.setState({render_submit: event.target.displaySubmit});
+    },
   // triggered when 'state properties' change
     render: function(){
         var SessionType = this.getSessionType(this.state.value);
+        if (this.state.render_submit) {
+            var SubmitButton = Submit;
+        }
+        else {
+            var SubmitButton = 'span';
+        }
+
         return(
             <form action='/load-data/' method='post'>
                 <fieldset className='fieldset-session-type'>
@@ -43,7 +54,8 @@ var SelectSession = React.createClass({
                     </select>
                 </fieldset>
 
-                <SessionType/>
+                <SessionType onChange={this.displaySubmit}/>
+                <SubmitButton/>
             </form>
         );
     },
