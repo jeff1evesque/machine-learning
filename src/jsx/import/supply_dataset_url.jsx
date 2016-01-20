@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import Submit from './submit.jsx';
+
 var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
      getInitialState: function() {
@@ -20,6 +22,7 @@ var SupplyDatasetUrl = React.createClass({
      },
   // triggered when 'state properties' change
      render: function(){
+        var SubmitButton = this.getSubmitButton();
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
@@ -27,8 +30,19 @@ var SupplyDatasetUrl = React.createClass({
                 <input type='button' value='Add more' className='add-element svm-dataset-xml-add' />
                 <input type='button' value='Remove' className='remove-element svm-dataset-xml-remove' />
             </fieldset>
+
+            <SubmitButton/>
         );
-     }
+     },
+  // call back: used for the above 'render' (return 'span' if undefined)
+    getSubmitButton: function() {
+        if (typeof this.state.value === 'string' && String(this.state.value).length > 0) {
+            return Submit;
+        }
+        else {
+            return 'span';
+        }
+    }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
