@@ -42,7 +42,7 @@ var DataNew = React.createClass({
                     </select>
                 </fieldset>
 
-                <SupplyDataset/>
+                <SupplyDataset onChange={this.change}/>
             </fieldset>
         );
     },
