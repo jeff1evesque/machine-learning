@@ -14,7 +14,7 @@ var DataNew = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_title: '',
+            value_title: null,
             value_dataset_type: '--Select--'
         };
     },
@@ -48,14 +48,14 @@ var DataNew = React.createClass({
     },
   // call back: used for the above 'render' (return 'span' if undefined)
     getSupplyDataset: function() {
-        if (typeof this.state.value_title !== 'undefined' && this.state.value_title.length > 0) {
+        if (typeof this.state.value_title === 'string' && String(this.state.value_title).length > 0) {
             return {
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
             }[this.state.value_dataset_type] || 'span';
         }
         else {
-            return null;
+            return 'span';
         }
     }
 });
