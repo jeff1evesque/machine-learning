@@ -16,9 +16,12 @@ var SupplyDatasetUrl = React.createClass({
              value: null
          };
      },
-  // update 'state properties'
-     change: function(event){
-         this.setState({value: event.target.value});
+  // update 'state properties': allow parent component(s) to access properties
+     displaySubmit: function(event){
+        if (typeof this.state.value === 'string' && String(this.state.value).length > 0) {
+            this.props.onChange({display_submit: true});
+        }
+        this.setState({value: event.target.value});
      },
   // triggered when 'state properties' change
      render: function(){
@@ -26,23 +29,12 @@ var SupplyDatasetUrl = React.createClass({
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' onChange={this.change} value={this.state.value} />
+                <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' onChange={this.displaySubmit} value={this.state.value} />
                 <input type='button' value='Add more' className='add-element svm-dataset-xml-add' />
                 <input type='button' value='Remove' className='remove-element svm-dataset-xml-remove' />
-
-                <SubmitButton/>
             </fieldset>
         );
-     },
-  // call back: used for the above 'render' (return 'span' if undefined)
-    getSubmitButton: function() {
-        if (typeof this.state.value === 'string' && String(this.state.value).length > 0) {
-            return Submit;
-        }
-        else {
-            return 'span';
-        }
-    }
+     }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
