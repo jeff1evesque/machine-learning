@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import Submit from './submit.jsx';
+
 var SupplyDatasetFile = React.createClass({
   // initial 'state properties'
      getInitialState: function() {
@@ -20,6 +22,7 @@ var SupplyDatasetFile = React.createClass({
      },
   // triggered when 'state properties' change
      render: function(){
+        var SubmitButton = this.getSubmitButton();
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
@@ -28,8 +31,19 @@ var SupplyDatasetFile = React.createClass({
                 <input type='button' value='Remove' className='remove-element svm-dataset-file-remove' />
                 <p className='form-note'>*<span className='bold'>Note:</span> Uploaded file(s) must be formatted as <span className='italic'>csv</span>, <span className='italic'>json</span>, or <span className='italic'>xml</span> format.</p>
             </fieldset>
+
+            <SubmitButton/>
         );
-     }
+     },
+  // call back: used for the above 'render' (return 'span' if undefined)
+    getSubmitButton: function() {
+        if (typeof this.state.value === 'string' && String(this.state.value).length > 0) {
+            return Submit;
+        }
+        else {
+            return 'span';
+        }
+    }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
