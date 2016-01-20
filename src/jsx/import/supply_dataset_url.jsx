@@ -7,8 +7,6 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import Submit from './submit.jsx';
-
 var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
      getInitialState: function() {
@@ -27,7 +25,6 @@ var SupplyDatasetUrl = React.createClass({
      },
   // triggered when 'state properties' change
      render: function(){
-        var SubmitButton = this.getSubmitButton();
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
