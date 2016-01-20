@@ -21,11 +21,11 @@ var DataNew = React.createClass({
   // update 'state properties'
     changeDatasetType: function(event){
         this.setState({value_dataset_type: event.target.value});
-        this.displaySubmit();
+        this.displaySubmit(event);
     },
     changeTitle: function(event){
         this.setState({value_title: event.target.value});
-        this.displaySubmit();
+        this.displaySubmit(event);
     },
   // update 'state properties' from children component
     displaySubmit: function(event) {
