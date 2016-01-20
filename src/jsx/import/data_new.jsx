@@ -27,7 +27,7 @@ var DataNew = React.createClass({
     },
   // update 'state properties' from children component
     displaySubmit: function(event) {
-        this.setState({render_submit: event.target.displaySubmit});
+        this.props.onChange({render_submit: event.target.displaySubmit});
     },
   // triggered when 'state properties' change
     render: function(){
