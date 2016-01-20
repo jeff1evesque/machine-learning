@@ -25,6 +25,10 @@ var DataNew = React.createClass({
     changeTitle: function(event){
         this.setState({value_title: event.target.value});
     },
+  // update 'state properties' from children component
+    displaySubmit: function(event) {
+        this.setState({render_submit: event.target.displaySubmit});
+    }
   // triggered when 'state properties' change
     render: function(){
         var SupplyDataset = this.getSupplyDataset();
@@ -42,7 +46,7 @@ var DataNew = React.createClass({
                     </select>
                 </fieldset>
 
-                <SupplyDataset onChange={this.change}/>
+                <SupplyDataset onChange={this.displaySubmit}/>
             </fieldset>
         );
     },
