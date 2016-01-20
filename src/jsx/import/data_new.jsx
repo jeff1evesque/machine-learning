@@ -15,7 +15,8 @@ var DataNew = React.createClass({
     getInitialState: function() {
         return {
             value_title: null,
-            value_dataset_type: '--Select--'
+            value_dataset_type: '--Select--',
+            render_submit: false
         };
     },
   // update 'state properties'
@@ -31,9 +32,6 @@ var DataNew = React.createClass({
     displaySubmit: function(event) {
         if (this.state.render_submit) {
             this.props.onChange({render_submit: event.target.displaySubmit});
-        }
-        else {
-            this.props.onChange({render_submit: false});
         }
     },
   // triggered when 'state properties' change
