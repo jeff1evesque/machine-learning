@@ -21,7 +21,9 @@ var SupplyDatasetUrl = React.createClass({
         if (typeof this.state.value === 'string' && String(this.state.value).length > 0) {
             this.props.onChange({display_submit: true});
         }
-        this.setState({value: event.target.value});
+        else {
+            this.props.onChange({display_submit: false});
+        }
      },
   // triggered when 'state properties' change
      render: function(){
