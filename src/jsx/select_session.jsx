@@ -41,9 +41,9 @@ var SelectSession = React.createClass({
                         <option value='model_generate'>Generate Model</option>
                         <option value='model_predict'>Make Prediction</option>
                     </select>
-
-                    <SessionType/>
                 </fieldset>
+
+                <SessionType/>
             </form>
         );
     },
