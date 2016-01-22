@@ -22,16 +22,14 @@ var DataNew = React.createClass({
   // update 'state properties'
     changeDatasetType: function(event){
         this.setState({value_dataset_type: event.target.value});
-        this.displaySubmit(event);
     },
     changeTitle: function(event){
         this.setState({value_title: event.target.value});
-        this.displaySubmit(event);
     },
-  // update 'state properties' from children component
+  // update 'state properties' from children component (i.e. 'validStringEntered')
     displaySubmit: function(event) {
-        if (this.state.render_submit) {
-            this.props.onChange({render_submit: event.target.displaySubmit});
+        if (event.display_submit) {
+            this.props.onChange({render_submit: event.display_submit});
         }
     },
   // triggered when 'state properties' change
