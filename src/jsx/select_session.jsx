@@ -26,14 +26,14 @@ var SelectSession = React.createClass({
     change: function(event){
         this.setState({value: event.target.value});
     },
-  // update 'state properties' from children component
+  // update 'state properties' from children component (i.e. 'render_submit')
     displaySubmit: function(event) {
-        this.setState({render_submit: event.target.displaySubmit});
+        this.setState({submit: event.render_submit});
     },
   // triggered when 'state properties' change
     render: function(){
         var SessionType = this.getSessionType(this.state.value);
-        if (this.state.render_submit) {
+        if (this.state.submit) {
             var SubmitButton = Submit;
         }
         else {
