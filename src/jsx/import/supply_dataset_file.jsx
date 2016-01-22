@@ -34,8 +34,6 @@ var SupplyDatasetFile = React.createClass({
                     <input type='button' value='Remove' className='remove-element svm-dataset-file-remove' />
                     <p className='form-note'>*<span className='bold'>Note:</span> Uploaded file(s) must be formatted as <span className='italic'>csv</span>, <span className='italic'>json</span>, or <span className='italic'>xml</span> format.</p>
                 </fieldset>
-
-                <SubmitButton/>
             </div>
         );
      }
