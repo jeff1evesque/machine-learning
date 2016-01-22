@@ -9,22 +9,22 @@
 
 var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
-     getInitialState: function() {
-         return {
-             value: null
-         };
-     },
+    getInitialState: function() {
+        return {
+            value: null
+        };
+    },
   // update 'state properties': allow parent component(s) to access properties
-     validStringEntered: function(event){
+    validStringEntered: function(event){
         if (typeof this.state.value === 'string' && String(this.state.value).length > 0) {
             this.props.onChange({display_submit: true});
         }
         else {
             this.props.onChange({display_submit: false});
         }
-     },
+    },
   // triggered when 'state properties' change
-     render: function(){
+    render: function(){
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
@@ -33,7 +33,7 @@ var SupplyDatasetUrl = React.createClass({
                 <input type='button' value='Remove' className='remove-element svm-dataset-xml-remove' />
             </fieldset>
         );
-     }
+    }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
