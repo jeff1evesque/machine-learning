@@ -9,10 +9,10 @@
 
 var SupplyDatasetFile = React.createClass({
   // initial 'state properties'
-     getInitialState: function() {
-         return {
-             value: null
-         };
+    getInitialState: function() {
+        return {
+            value: null
+        };
      },
   // update 'state properties': allow parent component(s) to access properties
      validStringEntered: function(event){
@@ -29,7 +29,7 @@ var SupplyDatasetFile = React.createClass({
             <div>
                 <fieldset className='fieldset-supply-dataset'>
                     <legend>Supply Dataset</legend>
-                    <input type='file' name='svm_dataset[]' className='svm-dataset-file' onChange={this.change} value={this.state.value} />
+                    <input type='file' name='svm_dataset[]' className='svm-dataset-file' onInput={this.validStringEntered} value={this.state.value} />
                     <input type='button' value='Add more' className='add-element svm-dataset-file-add' />
                     <input type='button' value='Remove' className='remove-element svm-dataset-file-remove' />
                     <p className='form-note'>*<span className='bold'>Note:</span> Uploaded file(s) must be formatted as <span className='italic'>csv</span>, <span className='italic'>json</span>, or <span className='italic'>xml</span> format.</p>
