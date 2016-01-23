@@ -94,8 +94,8 @@ var DataAppend = React.createClass({
         var sessionObject = this.state.value_session_ajax;
 
       // get session object from server side, define into react state
-        sessionId(function (sessionObj) {
-            this.setState({value_session_ajax: sessionObj});
+        sessionId(function (asynchObject) {
+            this.setState({value_session_ajax: asynchObject});
         });
 
       // define error, or build options
