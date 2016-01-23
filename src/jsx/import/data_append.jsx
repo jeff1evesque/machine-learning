@@ -47,6 +47,8 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var SupplyDataset = this.getSupplyDataset();
+        var session = sessionId();
+
         return(
             <fieldset className='fieldset-session-data-upload'>
                 <legend>Data Upload</legend>
