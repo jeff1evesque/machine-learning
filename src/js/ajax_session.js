@@ -6,7 +6,7 @@
  */
 
 // AJAX Process
-  function sessionId() {
+  function sessionId(callback) {
     $.ajax({
       type: 'POST',
       url: '/retrieve-session/',
@@ -19,7 +19,7 @@
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
       // Return server side data
-      return data;
+      callback(data);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
       console.log('Error Thrown: ' + errorThrown);
