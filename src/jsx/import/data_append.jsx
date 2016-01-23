@@ -86,8 +86,7 @@ var DataAppend = React.createClass({
     }
   // call back: acquire session id from server side, and append to form
     getSessionId: function () {
-        var sessionId = sessionId(function (sessionId) {
-
+        var sid = sessionId(function (sessionId) {
             // Append stored session id instances
             if (sessionId.error) {
                 $('.fieldset-dataset-type').append('<div class="error">' + sessionId.error + '</div>');
@@ -101,8 +100,9 @@ var DataAppend = React.createClass({
                     $('select[name="svm_session_id"]').append(element);
                 });
             }
-
         }
+
+        return sid;
     }
 });
 
