@@ -82,21 +82,23 @@ var DataAppend = React.createClass({
         }
     }
   // call back: acquire session id from server side, and append to form
-    getSessionId: function() {
-        var sessionId = sessionId();
+    getSessionId: function () {
+        var sessionId = sessionId(function (sessionId) {
 
-      // Append stored session id instances
-        if (sessionId.error) {
-            $('.fieldset-dataset-type').append('<div class="error">' + sessionId.error + '</div>');
-            $('.fieldset-select-model').append('<div class="error">' + sessionId + '</div>');
-        } else {
-            $.each(sessionId, function(index, value) {
-                var valueId    = value.id;
-                var valueTitle = value.title;
-                var element    = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
+            // Append stored session id instances
+            if (sessionId.error) {
+                $('.fieldset-dataset-type').append('<div class="error">' + sessionId.error + '</div>');
+                $('.fieldset-select-model').append('<div class="error">' + sessionId + '</div>');
+            } else {
+                $.each(sessionId, function(index, value) {
+                    var valueId    = value.id;
+                    var valueTitle = value.title;
+                    var element    = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
 
-                $('select[name="svm_session_id"]').append(element);
-            });
+                    $('select[name="svm_session_id"]').append(element);
+                });
+            }
+
         }
     }
 });
