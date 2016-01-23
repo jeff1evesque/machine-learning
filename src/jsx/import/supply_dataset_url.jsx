@@ -16,7 +16,7 @@ var SupplyDatasetUrl = React.createClass({
     },
   // update 'state properties': allow parent component(s) to access properties
     validStringEntered: function(event){
-        if (typeof this.state.value === 'string' && String(this.state.value).length > 0) {
+        if (typeof event.target.value === 'string' && String(event.target.value).length > 0) {
             this.props.onChange({display_submit: true});
         }
         else {
