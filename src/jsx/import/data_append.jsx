@@ -93,16 +93,11 @@ var DataAppend = React.createClass({
         var optionElements = [];
         var sessionObject = this.state.value_session_ajax;
 
-      // get session object from server side
-        sessionId(function (sessionId) {
-            this.setState({value_session_ajax: sessionId});
-        });
-
       // restructure server side data
-        if (sessionObject.error) {
+        if (sessionObject && sessionObject.error) {
             this.setState({value_session_error: sessionObject.error});
         }
-        else {
+        else if (sessionObject) {
             $.each(sessionObject, function(index, value) {
                 var valueId    = value.id;
                 var valueTitle = value.title;
