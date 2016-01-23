@@ -25,6 +25,7 @@ var SelectSession = React.createClass({
   // update 'state properties'
     change: function(event){
         this.setState({value: event.target.value});
+        this.setState({submit: false});
     },
   // update 'state properties' from children component (i.e. 'render_submit')
     displaySubmit: function(event) {
