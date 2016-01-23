@@ -31,6 +31,9 @@ var DataNew = React.createClass({
         if (event.display_submit) {
             this.props.onChange({render_submit: event.display_submit});
         }
+        else {
+            this.props.onChange({render_submit: false});
+        }
     },
   // triggered when 'state properties' change
     render: function(){
