@@ -3,6 +3,7 @@
  *
  * @DataAppend, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
+ * @sessionId, pass a callback to be run, within the corresponding ajax script.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
