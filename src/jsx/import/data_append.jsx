@@ -98,6 +98,7 @@ var DataAppend = React.createClass({
             this.setState({value_session_ajax: sessionObj});
         });
 
+      // define error, or build options
         if (sessionObject && sessionObject.error) {
             this.setState({value_session_error: sessionObject.error});
         }
