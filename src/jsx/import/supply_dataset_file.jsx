@@ -4,6 +4,8 @@
  * @SupplyDatasetFile, must be capitalized in order for reactjs to render it as
  *     a component. Otherwise, the variable is rendered as a dom node.
  *
+ * @display_submit, a boolean value, defined via '!== 0'
+ *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
@@ -16,12 +18,7 @@ var SupplyDatasetFile = React.createClass({
      },
   // update 'state properties': allow parent component(s) to access properties
      validStringEntered: function(event){
-        if (typeof event.target.value === 'string' && String(event.target.value).length > 0) {
-            this.props.onChange({display_submit: true});
-        }
-        else {
-            this.props.onChange({display_submit: false});
-        }
+        this.props.onChange({display_submit: event.target.files.length !== 0})
      },
   // triggered when 'state properties' change
      render: function(){
