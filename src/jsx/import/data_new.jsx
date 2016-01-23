@@ -21,10 +21,20 @@ var DataNew = React.createClass({
     },
   // update 'state properties'
     changeDatasetType: function(event){
-        this.setState({value_dataset_type: event.target.value});
+        if (event.target.value) {
+            this.setState({value_dataset_type: event.target.value});
+        }
+        else {
+            this.props.onChange({render_submit: false});
+        }
     },
     changeTitle: function(event){
-        this.setState({value_title: event.target.value});
+        if (event.target.value) {
+            this.setState({value_title: event.target.value});
+        }
+        else {
+            this.props.onChange({render_submit: false});
+        }
     },
   // update 'state properties' from children component (i.e. 'validStringEntered')
     displaySubmit: function(event) {
