@@ -19,6 +19,7 @@ var DataAppend = React.createClass({
         return {
             value_session_id: '--Select--',
             value_dataset_type: '--Select--',
+            value_session_ajax: null,
             value_session_error: null
         };
     },
@@ -90,8 +91,11 @@ var DataAppend = React.createClass({
     getSessionId: function () {
       // local variables
         var optionElements = [];
-        var sessionObject = sessionId(function (sessionId) {
-            return sessionId;
+        var sessionObject = this.state.value_session_ajax;
+
+      // get session object from server side
+        sessionId(function (sessionId) {
+            this.setState({value_session_ajax: sessionId});
         });
 
       // restructure server side data
