@@ -101,7 +101,6 @@ var DataAppend = React.createClass({
                 });
             }
         }
-
         return sid;
     }
 });
