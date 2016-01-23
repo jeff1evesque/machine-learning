@@ -18,7 +18,8 @@ var DataAppend = React.createClass({
     getInitialState: function() {
         return {
             value_session_id: '--Select--',
-            value_dataset_type: '--Select--'
+            value_dataset_type: '--Select--',
+            value_session_error: null
         };
     },
   // update 'state properties'
@@ -50,7 +51,7 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var SupplyDataset = this.getSupplyDataset();
-        var SessionId = this.getSessionId();
+        var options = this.getSessionId();
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -60,6 +61,7 @@ var DataAppend = React.createClass({
                     <p>Select past session, and upload type</p>
                     <select name='svm_session_id' autoComplete='off' onChange={this.changeSessionId} value={this.state.value_session_id}>
                         <option value='' defaultValue>--Select--</option>
+                        {options}
                     </select>
                     <select name='svm_dataset_type' autoComplete='off' onChange={this.changeDatasetType} value={this.state.value_dataset_type}>
                         <option value='' defaultValue>--Select--</option>
@@ -86,22 +88,28 @@ var DataAppend = React.createClass({
     }
   // call back: acquire session id from server side, and append to form
     getSessionId: function () {
-        var sid = sessionId(function (sessionId) {
-            // Append stored session id instances
-            if (sessionId.error) {
-                $('.fieldset-dataset-type').append('<div class="error">' + sessionId.error + '</div>');
-                $('.fieldset-select-model').append('<div class="error">' + sessionId + '</div>');
-            } else {
-                $.each(sessionId, function(index, value) {
-                    var valueId    = value.id;
-                    var valueTitle = value.title;
-                    var element    = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
+      // local variables
+        var optionElements = [];
+        var sessionObject = sessionId(function (sessionId) {
+            return sessionId;
+        });
 
-                    $('select[name="svm_session_id"]').append(element);
-                });
-            }
+      // restructure server side data
+        if (sessionObject.error) {
+            this.setState({value_session_error: sessionObject.error});
         }
-        return sid;
+        else {
+            $.each(sessionObject, function(index, value) {
+                var valueId    = value.id;
+                var valueTitle = value.title;
+                var element    = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
+
+                optionElements.push(element);
+            });
+        }
+
+      // return array of options
+        return optionElements;
     }
 });
 
