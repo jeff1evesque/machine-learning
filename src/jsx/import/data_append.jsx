@@ -85,7 +85,7 @@ var DataAppend = React.createClass({
         else {
             return 'span';
         }
-    }
+    },
   // call back: acquire session id from server side, and append to form
     getSessionId: function () {
       // local variables
