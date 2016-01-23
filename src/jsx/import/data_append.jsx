@@ -47,7 +47,7 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var SupplyDataset = this.getSupplyDataset();
-        var session = sessionId();
+        var SessionId = this.getSessionId();
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -79,6 +79,24 @@ var DataAppend = React.createClass({
         }
         else {
             return 'span';
+        }
+    }
+  // call back: acquire session id from server side, and append to form
+    getSessionId: function() {
+        var sessionId = sessionId();
+
+      // Append stored session id instances
+        if (sessionId.error) {
+            $('.fieldset-dataset-type').append('<div class="error">' + sessionId.error + '</div>');
+            $('.fieldset-select-model').append('<div class="error">' + sessionId + '</div>');
+        } else {
+            $.each(sessionId, function(index, value) {
+                var valueId    = value.id;
+                var valueTitle = value.title;
+                var element    = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
+
+                $('select[name="svm_session_id"]').append(element);
+            });
         }
     }
 });
