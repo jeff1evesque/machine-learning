@@ -50,9 +50,9 @@ var DataAppend = React.createClass({
         }
     },
   // triggered when 'state properties' change
-    render: function(){
+    render: function(sessionId){
         var SupplyDataset = this.getSupplyDataset();
-        var options = this.getSessionId();
+        sessionId();
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -62,7 +62,6 @@ var DataAppend = React.createClass({
                     <p>Select past session, and upload type</p>
                     <select name='svm_session_id' autoComplete='off' onChange={this.changeSessionId} value={this.state.value_session_id}>
                         <option value='' defaultValue>--Select--</option>
-                        {options}
                     </select>
                     <select name='svm_dataset_type' autoComplete='off' onChange={this.changeDatasetType} value={this.state.value_dataset_type}>
                         <option value='' defaultValue>--Select--</option>
@@ -89,31 +88,29 @@ var DataAppend = React.createClass({
     },
   // call back: acquire session id from server side, and append to form
     getSessionId: function () {
-      // local variables
-        var optionElements = [];
-        var sessionObject = this.state.value_session_ajax;
-
-      // get session object from server side, define into react state
+      // get session object via ajax callback, define into react state
         sessionId(function (asynchObject) {
-            this.setState({value_session_ajax: asynchObject});
-        }.bind(this));
+        // Append to DOM
+            if (asynchObject.error) {
+                $('.fieldset-dataset-type').append('<div class="error">' + asynchObject.error + '</div>');
+            } else {
+                $.each(asynchObject, function(index, value) {
+                    var valueId    = value.id;
+                    var valueTitle = value.title;
+                    var element     = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
 
-      // define error, or build options
-        if (sessionObject && sessionObject.error) {
-            this.setState({value_session_error: sessionObject.error});
-        }
-        else if (sessionObject) {
-            $.each(sessionObject, function(index, value) {
-                var valueId    = value.id;
-                var valueTitle = value.title;
-                var element    = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
-
-                optionElements.push(element);
-            });
-        }
-
-      // return array of options
-        return optionElements;
+                   $('select[name="svm_session_id"]').append(element);
+                });
+            }
+        },
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                console.log('Error Thrown: ' + asynchError);
+            }
+        });
     }
 });
 
