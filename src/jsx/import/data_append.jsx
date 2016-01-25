@@ -52,7 +52,7 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(sessionId){
         var SupplyDataset = this.getSupplyDataset();
-        sessionId();
+        this.getSessionOptions();
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -86,8 +86,8 @@ var DataAppend = React.createClass({
             return 'span';
         }
     },
-  // call back: acquire session id from server side, and append to form
-    getSessionId: function () {
+  // call back: get session id(s) from server side, and append to form
+    getSessionOptions: function () {
       // asychronous callback: ajax 'done' promise
         sessionId(function (asynchObject) {
         // Append to DOM
