@@ -91,9 +91,9 @@ var DataAppend = React.createClass({
       // asychronous callback: ajax 'done' promise
         sessionId(function (asynchObject) {
         // Append to DOM
-            if (asynchObject.error) {
+            if (asynchObject && asynchObject.error) {
                 $('.fieldset-dataset-type').append('<div class="error">' + asynchObject.error + '</div>');
-            } else {
+            } else if (asynchObject) {
                 $.each(asynchObject, function(index, value) {
                     var valueId    = value.id;
                     var valueTitle = value.title;
