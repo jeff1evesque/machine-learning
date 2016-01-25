@@ -89,9 +89,8 @@ var DataAppend = React.createClass({
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
-      // asychronous callback: ajax 'done' promise
+      // asynchronous callback: ajax 'done' promise
         sessionId(function (asynchObject) {
-        console.log(this);
         // Append to DOM
             if (asynchObject && asynchObject.error) {
                 this.setState({value_session_error: asynchObject.error});
