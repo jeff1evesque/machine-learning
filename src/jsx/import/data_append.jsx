@@ -19,8 +19,10 @@ var DataAppend = React.createClass({
         return {
             value_session_id: '--Select--',
             value_dataset_type: '--Select--',
-            value_session_ajax: null,
-            value_session_error: null
+            value_session_options: null,
+            value_session_error: null,
+            value_session_error: null,
+            value_session_status: null
         };
     },
   // update 'state properties'
@@ -52,7 +54,6 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(sessionId){
         var SupplyDataset = this.getSupplyDataset();
-        this.getSessionOptions();
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -87,31 +88,36 @@ var DataAppend = React.createClass({
         }
     },
   // call back: get session id(s) from server side, and append to form
-    getSessionOptions: function () {
+    componentDidMount: function () {
       // asychronous callback: ajax 'done' promise
         sessionId(function (asynchObject) {
+        console.log(this);
         // Append to DOM
             if (asynchObject && asynchObject.error) {
-                $('.fieldset-dataset-type').append('<div class="error">' + asynchObject.error + '</div>');
+                this.setState({value_session_error: asynchObject.error});
             } else if (asynchObject) {
+                var options = [];
                 $.each(asynchObject, function(index, value) {
                     var valueId    = value.id;
                     var valueTitle = value.title;
                     var element     = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
 
-                   $('select[name="svm_session_id"]').append(element);
+                   options.push(element);
                 });
+                this.setState({value_session_options: options});
             }
-        },
+        }.bind(this),
       // asynchronous callback: ajax 'fail' promise
         function (asynchStatus, asynchError) {
             if (asynchStatus) {
+                this.setState({value_fail_status: asynchStatus});
                 console.log('Error Status: ' + asynchStatus);
             }
             if (asynchError) {
+                this.setState({value_fail_error: asynchError});
                 console.log('Error Thrown: ' + asynchError);
             }
-        });
+        }.bind(this));
     }
 });
 
