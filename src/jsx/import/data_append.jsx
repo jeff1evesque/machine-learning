@@ -54,6 +54,7 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(sessionId){
         var SupplyDataset = this.getSupplyDataset();
+        var options = this.state.value_session_options;
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -63,6 +64,7 @@ var DataAppend = React.createClass({
                     <p>Select past session, and upload type</p>
                     <select name='svm_session_id' autoComplete='off' onChange={this.changeSessionId} value={this.state.value_session_id}>
                         <option value='' defaultValue>--Select--</option>
+                        {options}
                     </select>
                     <select name='svm_dataset_type' autoComplete='off' onChange={this.changeDatasetType} value={this.state.value_dataset_type}>
                         <option value='' defaultValue>--Select--</option>
@@ -101,7 +103,7 @@ var DataAppend = React.createClass({
                     var valueTitle = value.title;
                     var element     = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
 
-                   options.push(element);
+                    options.push(element);
                 });
                 this.setState({value_session_options: options});
             }
