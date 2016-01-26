@@ -64,7 +64,11 @@ var DataAppend = React.createClass({
                     <p>Select past session, and upload type</p>
                     <select name='svm_session_id' autoComplete='off' onChange={this.changeSessionId} value={this.state.value_session_id}>
                         <option value='' defaultValue>--Select--</option>
-                        {options}
+
+                        {options.map(function(value) {
+                            return <option ' + 'value="' + value.id + '">' + value.id + ': ' + value.title + '</option>;
+                        })}
+
                     </select>
                     <select name='svm_dataset_type' autoComplete='off' onChange={this.changeDatasetType} value={this.state.value_dataset_type}>
                         <option value='' defaultValue>--Select--</option>
@@ -97,15 +101,7 @@ var DataAppend = React.createClass({
             if (asynchObject && asynchObject.error) {
                 this.setState({ajax_done_error: asynchObject.error});
             } else if (asynchObject) {
-                var options = [];
-                $.each(asynchObject, function(index, value) {
-                    var valueId    = value.id;
-                    var valueTitle = value.title;
-                    var element     = '<option ' + 'value="' + valueId + '">' + valueId + ': ' + valueTitle + '</option>';
-
-                    options.push(element);
-                });
-                this.setState({ajax_done_options: options});
+                this.setState({ajax_done_options: asynchObject});
             }
         }.bind(this),
       // asynchronous callback: ajax 'fail' promise
