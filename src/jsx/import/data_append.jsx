@@ -21,8 +21,8 @@ var DataAppend = React.createClass({
             value_dataset_type: '--Select--',
             value_session_options: null,
             value_session_error: null,
-            value_session_error: null,
-            value_session_status: null
+            value_fail_error: null,
+            value_fail_status: null
         };
     },
   // update 'state properties'
