@@ -54,9 +54,9 @@ var DataAppend = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(sessionId){
-        var inputDataType = this.state.value_dataset_type;
+        var inputDatasetType = this.state.value_dataset_type;
         var inputSessionId = this.state.value_session_id;
-        var SupplyDataset = this.getSupplyDataset(inputDataType, inputSessionId);
+        var SupplyDataset = this.getSupplyDataset(inputDatasetType, inputSessionId);
         var options = this.state.ajax_done_options;
 
         return(
