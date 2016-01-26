@@ -34,7 +34,7 @@ var DataNew = React.createClass({
             this.setState({value_title: event.target.value});
         }
         else {
-            this.setState({value_dataset_type: null});
+            this.setState({value_title: null});
             this.props.onChange({render_submit: false});
         }
     },
