@@ -1,4 +1,4 @@
-/** 
+/**
  * select_session.js: initial form.
  *
  * @SelectSession, must be capitalized in order for reactjs to render it as a

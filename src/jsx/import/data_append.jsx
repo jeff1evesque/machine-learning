@@ -65,6 +65,7 @@ var DataAppend = React.createClass({
                     <select name='svm_session_id' autoComplete='off' onChange={this.changeSessionId} value={this.state.value_session_id}>
                         <option value='' defaultValue>--Select--</option>
 
+                        {/* array components require unique 'key' value */}
                         {options && options.map(function(value) {
                             return <option key={value.id} value={value.id}>{value.id}: {value.title}</option>;
                         })}
