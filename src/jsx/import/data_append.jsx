@@ -66,7 +66,7 @@ var DataAppend = React.createClass({
                         <option value='' defaultValue>--Select--</option>
 
                         {options && options.map(function(value) {
-                            return <option value="value.id"> + value.id + ': ' + value.title + </option>;
+                            return <option value={value.id}>{value.id}: {value.title}</option>;
                         })}
 
                     </select>
