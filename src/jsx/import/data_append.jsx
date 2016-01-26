@@ -19,6 +19,7 @@ var DataAppend = React.createClass({
         return {
             value_session_id: '--Select--',
             value_dataset_type: '--Select--',
+            render_submit: false,
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
@@ -53,7 +54,9 @@ var DataAppend = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(sessionId){
-        var SupplyDataset = this.getSupplyDataset();
+        var inputDataType = this.state.value_dataset_type;
+        var inputSessionId = this.state.value_session_id;
+        var SupplyDataset = this.getSupplyDataset(inputDataType, inputSessionId);
         var options = this.state.ajax_done_options;
 
         return(
@@ -83,12 +86,12 @@ var DataAppend = React.createClass({
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function() {
-        if (typeof this.state.value_title === 'string' && String(this.state.value_title).length > 0) {
+    getSupplyDataset: function(datasetType, sessionId) {
+        if (datasetType != '--Select--' && Number(sessionId)) {
             return {
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
-            }[this.state.value_dataset_type] || 'span';
+            }[datasetType] || 'span';
         }
         else {
             return 'span';
