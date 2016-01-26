@@ -19,10 +19,10 @@ var DataAppend = React.createClass({
         return {
             value_session_id: '--Select--',
             value_dataset_type: '--Select--',
-            value_session_options: null,
-            value_session_error: null,
-            value_fail_error: null,
-            value_fail_status: null
+            ajax_done_options: null,
+            ajax_done_error: null,
+            ajax_fail_error: null,
+            ajax_fail_status: null
         };
     },
   // update 'state properties'
@@ -54,7 +54,7 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(sessionId){
         var SupplyDataset = this.getSupplyDataset();
-        var options = this.state.value_session_options;
+        var options = this.state.ajax_done_options;
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -95,7 +95,7 @@ var DataAppend = React.createClass({
         sessionId(function (asynchObject) {
         // Append to DOM
             if (asynchObject && asynchObject.error) {
-                this.setState({value_session_error: asynchObject.error});
+                this.setState({ajax_done_error: asynchObject.error});
             } else if (asynchObject) {
                 var options = [];
                 $.each(asynchObject, function(index, value) {
@@ -105,17 +105,17 @@ var DataAppend = React.createClass({
 
                     options.push(element);
                 });
-                this.setState({value_session_options: options});
+                this.setState({ajax_done_options: options});
             }
         }.bind(this),
       // asynchronous callback: ajax 'fail' promise
         function (asynchStatus, asynchError) {
             if (asynchStatus) {
-                this.setState({value_fail_status: asynchStatus});
+                this.setState({ajax_fail_status: asynchStatus});
                 console.log('Error Status: ' + asynchStatus);
             }
             if (asynchError) {
-                this.setState({value_fail_error: asynchError});
+                this.setState({ajax_fail_error: asynchError});
                 console.log('Error Thrown: ' + asynchError);
             }
         }.bind(this));
