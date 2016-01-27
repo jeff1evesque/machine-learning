@@ -11,12 +11,23 @@ var ModelPredict = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: '--Select--'
+            value: '--Select--',
+            render_submit: false,
+            ajax_done_options: null,
+            ajax_done_error: null,
+            ajax_fail_error: null,
+            ajax_fail_status: null
         };
     },
   // update 'state properties'
-    change: function(event){
-        this.setState({value: event.target.value});
+    changeModelId: function(event){
+        if (event.target.value) {
+            this.setState({value_model_id: event.target.value});
+        }
+        else {
+            this.setState({value_model_id: '--Select--'});
+            this.props.onChange({render_submit: false});
+        }
     },
   // triggered when 'state properties' change
     render: function(){
@@ -26,7 +37,7 @@ var ModelPredict = React.createClass({
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
-                    <select name='svm_model_id' autoComplete='off' onChange={this.change} value={this.state.value}>
+                    <select name='svm_model_id' autoComplete='off' onChange={this.changeModelId} value={this.state.value}>
                         <option value='' defaultValue>--Select--</option>
                     </select>
                 </fieldset>
