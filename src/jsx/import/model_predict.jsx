@@ -11,7 +11,7 @@ var ModelPredict = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: '--Select--',
+            value_model_id: '--Select--',
             render_submit: false,
             ajax_done_options: null,
             ajax_done_error: null,
@@ -47,7 +47,7 @@ var ModelPredict = React.createClass({
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
-                    <select name='svm_model_id' autoComplete='off' onChange={this.changeModelId} value={this.state.value}>
+                    <select name='svm_model_id' autoComplete='off' onChange={this.changeModelId} value={this.state.value_model_id}>
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
