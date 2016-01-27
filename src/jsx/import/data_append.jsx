@@ -28,7 +28,9 @@ var DataAppend = React.createClass({
     },
   // update 'state properties'
     changeSessionId: function(event){
-        if (event.target.value) {
+        var sessionId = event.target.value;
+
+        if (sessionId && sessionId != '--Select--') {
             this.setState({value_session_id: event.target.value});
         }
         else {
@@ -37,7 +39,9 @@ var DataAppend = React.createClass({
         }
     },
     changeDatasetType: function(event){
-        if (event.target.value) {
+        var datasetType = event.target.value;
+
+        if (datasetType && datasetType != '--Select--') {
             this.setState({value_dataset_type: event.target.value});
         }
         else {
