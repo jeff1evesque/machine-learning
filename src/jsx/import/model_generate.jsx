@@ -13,6 +13,7 @@ var ModelGenerate = React.createClass({
         return {
             value_session_id: '--Select--',
             value_model_type: '--Select--',
+            render_submit: false,
             ajax_done_options: null
         };
     },
@@ -39,14 +40,14 @@ var ModelGenerate = React.createClass({
     },
   // update 'state properties': allow parent component(s) to access properties
     dispatchSubmitButton: function(){
-        var modelId = this.state.value_model_id;
+        var modelId = this.state.value_model_type;
         var sessionId = this.state.value_session_id;
 
         if (modelId != '--Select--' && Number(sessionId)) {
-            this.props.onChange({display_submit: true});
+            this.props.onChange({render_submit: true});
         }
         else {
-            this.props.onChange({display_submit: false});
+            this.props.onChange({render_submit: false});
         }
     },
   // triggered when 'state properties' change
