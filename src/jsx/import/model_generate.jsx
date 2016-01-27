@@ -52,11 +52,7 @@ var ModelGenerate = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        var inputModelType = this.state.value_model_type;
-        var inputSessionId = this.state.value_session_id;
-        var generateModel = this.generateModel(inputModelType, inputSessionId);
         var sessionOptions = this.state.ajax_done_sessionId;
-
         return(
             <fieldset className='fieldset-session-generate'>
                 <legend>Generate Model</legend>
