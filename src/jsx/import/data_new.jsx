@@ -21,7 +21,9 @@ var DataNew = React.createClass({
     },
   // update 'state properties'
     changeDatasetType: function(event){
-        if (event.target.value) {
+        var datasetType = event.target.value;
+
+        if (datasetType && datasetType != '--Select--') {
             this.setState({value_dataset_type: event.target.value});
         }
         else {
