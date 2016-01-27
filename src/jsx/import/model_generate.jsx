@@ -14,7 +14,10 @@ var ModelGenerate = React.createClass({
             value_session_id: '--Select--',
             value_model_type: '--Select--',
             render_submit: false,
-            ajax_done_options: null
+            ajax_done_options: null,
+            ajax_done_error: null,
+            ajax_fail_error: null,
+            ajax_fail_status: null
         };
     },
   // update 'state properties': allow parent component(s) to access 'render_submit'
