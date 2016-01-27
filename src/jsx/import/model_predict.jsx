@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import SupplyPredictors from './supply_predictors.jsx';
+
 var ModelPredict = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
@@ -59,6 +61,8 @@ var ModelPredict = React.createClass({
 
                     </select>
                 </fieldset>
+
+                <SupplyPredictors onChange={this.displaySubmit}/>
             </fieldset>
         );
     },
