@@ -18,7 +18,7 @@ var SupplyDatasetFile = React.createClass({
      },
   // update 'state properties': allow parent component(s) to access properties
      validStringEntered: function(event){
-        this.props.onChange({display_submit: event.target.files.length !== 0})
+        this.props.onChange({display_submit: event.target.files.length !== 0});
      },
   // triggered when 'state properties' change
      render: function(){
