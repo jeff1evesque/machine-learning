@@ -21,7 +21,7 @@ var ModelGenerate = React.createClass({
     changeSessionId: function(event){
         if (event.target.value) {
             this.setState({value_session_id: event.target.value});
-            dispatchSubmitButton();
+            this.dispatchSubmitButton();
         }
         else {
             this.setState({value_session_id: '--Select--'});
@@ -31,7 +31,7 @@ var ModelGenerate = React.createClass({
     changeModelId: function(event){
         if (event.target.value) {
             this.setState({value_model_id: event.target.value});
-            dispatchSubmitButton();
+            this.dispatchSubmitButton();
         }
         else {
             this.setState({value_model_type: '--Select--'});
