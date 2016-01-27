@@ -13,8 +13,7 @@ var ModelGenerate = React.createClass({
         return {
             value_session_id: '--Select--',
             value_model_type: '--Select--',
-            ajax_done_sessionId: null,
-            ajax_done_modelId: null
+            ajax_done_options: null
         };
     },
   // update 'state properties'
@@ -52,7 +51,7 @@ var ModelGenerate = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        var sessionOptions = this.state.ajax_done_sessionId;
+        var options = this.state.ajax_done_options;
         return(
             <fieldset className='fieldset-session-generate'>
                 <legend>Generate Model</legend>
@@ -63,7 +62,7 @@ var ModelGenerate = React.createClass({
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
-                        {sessionOptions && sessionOptions.map(function(value) {
+                        {options && options.map(function(value) {
                             return <option key={value.id} value={value.id}>{value.id}: {value.title}</option>;
                         })}
 
