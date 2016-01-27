@@ -43,7 +43,7 @@ var ModelGenerate = React.createClass({
         var modelType = this.state.value_model_type;
         var sessionId = this.state.value_session_id;
 
-        if (modelId != '--Select--' && Number(sessionId)) {
+        if (modelType != '--Select--' && Number(sessionId)) {
             this.props.onChange({render_submit: true});
         }
         else {
