@@ -29,15 +29,6 @@ var ModelPredict = React.createClass({
             this.props.onChange({render_submit: false});
         }
     },
-  // update 'state properties' from children component (i.e. 'validStringEntered')
-    displaySubmit: function(event) {
-        if (event.display_submit) {
-            this.props.onChange({render_submit: event.display_submit});
-        }
-        else {
-            this.props.onChange({render_submit: false});
-        }
-    },
   // triggered when 'state properties' change
     render: function(){
         return(
