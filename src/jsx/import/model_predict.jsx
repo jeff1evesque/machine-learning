@@ -50,6 +50,29 @@ var ModelPredict = React.createClass({
                 </fieldset>
             </fieldset>
         );
+    },
+  // call back: get session id(s) from server side, and append to form
+    componentDidMount: function () {
+      // asynchronous callback: ajax 'done' promise
+        modelId(function (asynchObject) {
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            } else if (asynchObject) {
+                this.setState({ajax_done_options: asynchObject});
+            }
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+        }.bind(this));
     }
 });
 
