@@ -39,7 +39,7 @@ var ModelGenerate = React.createClass({
         }
     },
   // update 'state properties': allow parent component(s) to access properties
-     dispatchSubmitButton: function(){
+    dispatchSubmitButton: function(){
         var modelId = this.state.value_model_id;
         var sessionId = this.state.value_session_id;
 
@@ -49,7 +49,7 @@ var ModelGenerate = React.createClass({
         else {
             this.props.onChange({display_submit: false});
         }
-     },
+    },
   // triggered when 'state properties' change
     render: function(){
         var inputModelType = this.state.value_model_type;
