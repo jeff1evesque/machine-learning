@@ -31,6 +31,7 @@ var ModelPredict = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
+        var options = this.state.ajax_done_options;
         return(
             <fieldset className='fieldset-session-predict'>
                 <legend>Analysis</legend>
@@ -39,6 +40,12 @@ var ModelPredict = React.createClass({
                     <p>Select a previous model to analyze</p>
                     <select name='svm_model_id' autoComplete='off' onChange={this.changeModelId} value={this.state.value}>
                         <option value='' defaultValue>--Select--</option>
+
+                        {/* array components require unique 'key' value */}
+                        {options && options.map(function(value) {
+                            return <option key={value.id} value={value.id}>{value.id}: {value.title}</option>;
+                        })}
+
                     </select>
                 </fieldset>
             </fieldset>
