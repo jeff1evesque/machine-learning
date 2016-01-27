@@ -12,18 +12,51 @@ var ModelGenerate = React.createClass({
     getInitialState: function() {
         return {
             value_session_id: '--Select--',
-            value_model_type: '--Select--'
+            value_model_type: '--Select--',
+            ajax_done_sessionId: null,
+            ajax_done_modelId: null
         };
     },
   // update 'state properties'
-    change: function(event){
-        this.setState({
-            value_session_id: event.target.value_session_id,
-            value_model_type: event.target.value_model_type
-        });
+    changeSessionId: function(event){
+        if (event.target.value) {
+            this.setState({value_session_id: event.target.value});
+            dispatchSubmitButton();
+        }
+        else {
+            this.setState({value_session_id: '--Select--'});
+            this.props.onChange({render_submit: false});
+        }
     },
+    changeModelId: function(event){
+        if (event.target.value) {
+            this.setState({value_model_id: event.target.value});
+            dispatchSubmitButton();
+        }
+        else {
+            this.setState({value_model_type: '--Select--'});
+            this.props.onChange({render_submit: false});
+        }
+    },
+  // update 'state properties': allow parent component(s) to access properties
+     dispatchSubmitButton: function(){
+        var modelId = this.state.value_model_id;
+        var sessionId = this.state.value_session_id;
+
+        if (modelId != '--Select--' && Number(sessionId)) {
+            this.props.onChange({display_submit: true});
+        }
+        else {
+            this.props.onChange({display_submit: false});
+        }
+     },
   // triggered when 'state properties' change
     render: function(){
+        var inputModelType = this.state.value_model_type;
+        var inputSessionId = this.state.value_session_id;
+        var generateModel = this.generateModel(inputModelType, inputSessionId);
+        var sessionOptions = this.state.ajax_done_sessionId;
+
         return(
             <fieldset className='fieldset-session-generate'>
                 <legend>Generate Model</legend>
@@ -32,6 +65,12 @@ var ModelGenerate = React.createClass({
                     <p>Select past session, and model type</p>
                     <select name='svm_session_id' autoComplete='off' onChange={this.change} value={this.state.value_session_id}>
                         <option value='' defaultValue>--Select--</option>
+
+                        {/* array components require unique 'key' value */}
+                        {sessionOptions && sessionOptions.map(function(value) {
+                            return <option key={value.id} value={value.id}>{value.id}: {value.title}</option>;
+                        })}
+
                     </select>
                     <select name='svm_model_type' autoComplete='off' onChange={this.change} value={this.state.value_model_type}>
                         <option value='' defaultValue>--Select--</option>
@@ -41,6 +80,29 @@ var ModelGenerate = React.createClass({
                 </fieldset>
             </fieldset>
         );
+    },
+  // call back: get session id(s) from server side, and append to form
+    componentDidMount: function () {
+      // asynchronous callback: ajax 'done' promise
+        sessionId(function (asynchObject) {
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            } else if (asynchObject) {
+                this.setState({ajax_done_options: asynchObject});
+            }
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+        }.bind(this));
     }
 });
 
