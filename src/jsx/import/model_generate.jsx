@@ -17,11 +17,20 @@ var ModelGenerate = React.createClass({
             ajax_done_options: null
         };
     },
-  // update 'state properties'
+  // update 'state properties': allow parent component(s) to access 'render_submit'
     changeSessionId: function(event){
-        if (event.target.value) {
-            this.setState({value_session_id: event.target.value});
-            this.dispatchSubmitButton();
+        var sessionId = event.target.value;
+        var modelType = this.state.value_model_type;
+
+        if (sessionId && Number(sessionId)) {
+            this.setState({value_session_id: sessionId});
+
+            if (modelType != '--Select--') {
+                this.props.onChange({render_submit: true});
+            }
+            else {
+                this.props.onChange({render_submit: false});
+            }
         }
         else {
             this.setState({value_session_id: '--Select--'});
@@ -29,24 +38,21 @@ var ModelGenerate = React.createClass({
         }
     },
     changeModelType: function(event){
-        if (event.target.value) {
+        var sessionId = this.state.value_session_id;
+        var modelType = event.target.value;
+
+        if (modelType && modelType != '--Select--') {
             this.setState({value_model_type: event.target.value});
-            this.dispatchSubmitButton();
+
+            if (Number(sessionId)) {
+                this.props.onChange({render_submit: true});
+            }
+            else {
+                this.props.onChange({render_submit: false});
+            }
         }
         else {
             this.setState({value_model_type: '--Select--'});
-            this.props.onChange({render_submit: false});
-        }
-    },
-  // update 'state properties': allow parent component(s) to access properties
-    dispatchSubmitButton: function(){console.log('hello');
-        var modelType = this.state.value_model_type;
-        var sessionId = this.state.value_session_id;
-
-        if (modelType != '--Select--' && Number(sessionId)) {
-            this.props.onChange({render_submit: true});
-        }
-        else {
             this.props.onChange({render_submit: false});
         }
     },
