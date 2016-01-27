@@ -28,9 +28,9 @@ var ModelGenerate = React.createClass({
             this.props.onChange({render_submit: false});
         }
     },
-    changeModelId: function(event){
+    changeModelType: function(event){
         if (event.target.value) {
-            this.setState({value_model_id: event.target.value});
+            this.setState({value_model_type: event.target.value});
             this.dispatchSubmitButton();
         }
         else {
@@ -39,7 +39,7 @@ var ModelGenerate = React.createClass({
         }
     },
   // update 'state properties': allow parent component(s) to access properties
-    dispatchSubmitButton: function(){
+    dispatchSubmitButton: function(){console.log('hello');
         var modelId = this.state.value_model_type;
         var sessionId = this.state.value_session_id;
 
@@ -68,7 +68,7 @@ var ModelGenerate = React.createClass({
                         })}
 
                     </select>
-                    <select name='svm_model_type' autoComplete='off' onChange={this.changeModelId} value={this.state.value_model_type}>
+                    <select name='svm_model_type' autoComplete='off' onChange={this.changeModelType} value={this.state.value_model_type}>
                         <option value='' defaultValue>--Select--</option>
                         <option value='classification'>Classification</option>
                         <option value='regression'>Regression</option>
