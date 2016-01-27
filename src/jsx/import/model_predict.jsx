@@ -25,16 +25,18 @@ var ModelPredict = React.createClass({
 
         if (modelId && modelId != '--Select--') {
             this.setState({value_model_id: event.target.value});
-
-            if (Number(modelId)) {
-                this.props.onChange({render_submit: true});
-            }
-            else {
-                this.props.onChange({render_submit: false});
-            }
         }
         else {
             this.setState({value_model_id: '--Select--'});
+            this.props.onChange({render_submit: false});
+        }
+    },
+  // update 'state properties' from children component (i.e. 'validStringEntered')
+    displaySubmit: function(event) {
+        if (event.display_submit) {
+            this.props.onChange({render_submit: event.display_submit});
+        }
+        else {
             this.props.onChange({render_submit: false});
         }
     },
