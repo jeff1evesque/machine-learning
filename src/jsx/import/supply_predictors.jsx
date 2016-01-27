@@ -11,7 +11,10 @@ var SupplyPredictors = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-
+            ajax_done_options: null,
+            ajax_done_error: null,
+            ajax_fail_error: null,
+            ajax_fail_status: null
         };
     },
   // triggered when 'state properties' change
@@ -23,6 +26,29 @@ var SupplyPredictors = React.createClass({
 
             </fieldset>
         );
+    },
+  // call back: get session id(s) from server side, and append to form
+    componentDidMount: function () {
+      // asynchronous callback: ajax 'done' promise
+        featureProperties(function (asynchObject) {
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            } else if (asynchObject) {
+                this.setState({ajax_done_options: asynchObject});
+            }
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+        }.bind(this));
     }
 });
 
