@@ -21,7 +21,9 @@ var ModelPredict = React.createClass({
     },
   // update 'state properties'
     changeModelId: function(event){
-        if (event.target.value) {
+        var modelId = event.target.value;
+
+        if (modelId && modelId != '--Select--') {
             this.setState({value_model_id: event.target.value});
         }
         else {
