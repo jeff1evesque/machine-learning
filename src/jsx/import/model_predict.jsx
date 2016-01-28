@@ -44,7 +44,10 @@ var ModelPredict = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
+        var inputModelId = this.state.value_model_id;
+        var SupplyPredictors = this.getSupplyPredictors(inputModelId);
         var options = this.state.ajax_done_options;
+
         return(
             <fieldset className='fieldset-session-predict'>
                 <legend>Analysis</legend>
@@ -66,6 +69,14 @@ var ModelPredict = React.createClass({
                 <SupplyPredictors onChange={this.displaySubmit} selectedModelId={this.state.value_model_id} />
             </fieldset>
         );
+    },
+  // call back: used for the above 'render' (return 'span' if undefined)
+    getSupplyPredictors: function(modelId) {
+        if (modelId != '--Select--' && Number(modelId)) {
+            return SupplyPredictors;
+        else {
+            return 'span';
+        }
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
