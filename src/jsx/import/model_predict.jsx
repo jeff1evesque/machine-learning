@@ -45,7 +45,7 @@ var ModelPredict = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var inputModelId = this.state.value_model_id;
-        var SupplyPredictors = this.getSupplyPredictors(inputModelId);
+        var Predictors = this.getSupplyPredictors(inputModelId);
         var options = this.state.ajax_done_options;
 
         return(
@@ -66,7 +66,7 @@ var ModelPredict = React.createClass({
                 </fieldset>
 
                 {/* 'selectedModelId' is accessible within child component as 'this.props.selectedModelId' */}
-                <SupplyPredictors onChange={this.displaySubmit} selectedModelId={this.state.value_model_id} />
+                <Predictors onChange={this.displaySubmit} selectedModelId={this.state.value_model_id} />
             </fieldset>
         );
     },
