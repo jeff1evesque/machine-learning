@@ -20,7 +20,7 @@ var SupplyPredictors = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <fieldset class='fieldset-prediction-input'>
+            <fieldset className='fieldset-prediction-input'>
                 <legend>Prediction Input</legend>
 
 
