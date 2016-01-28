@@ -19,9 +19,12 @@ var SupplyPredictors = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
+        var options = this.state.ajax_done_options;
+
         return(
             <fieldset className='fieldset-prediction-input'>
                 <legend>Prediction Input</legend>
+
 
 
             </fieldset>
