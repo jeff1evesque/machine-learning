@@ -62,7 +62,8 @@ var ModelPredict = React.createClass({
                     </select>
                 </fieldset>
 
-                <SupplyPredictors onChange={this.displaySubmit}/>
+                {/* 'selectedModelId' is accessible within child component as 'this.props.selectedModelId' */}
+                <SupplyPredictors onChange={this.displaySubmit} selectedModelId={this.state.value_model_id} />
             </fieldset>
         );
     },
