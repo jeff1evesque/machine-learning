@@ -48,7 +48,9 @@ var SupplyPredictors = React.createClass({
                 this.setState({ajax_fail_error: asynchError});
                 console.log('Error Thrown: ' + asynchError);
             }
-        }.bind(this));
+        }.bind(this),
+      // defined from parent component
+        this.props.selectedModelId);
     }
 });
 
