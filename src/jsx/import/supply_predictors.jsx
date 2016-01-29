@@ -19,15 +19,15 @@ var SupplyPredictors = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        var options = this.state.ajax_done_options;
+        var options = JSON.parse(this.state.ajax_done_options);
 
         return(
             <fieldset className='fieldset-prediction-input'>
                 <legend>Prediction Input</legend>
 
                 {/* array components require unique 'key' value */}
-                {options && options.map(function(key, value) {
-                    return <input type='text' name='prediction_input[]' placeholder={value} key={key} />;
+                {options && options.map(function(value, index){ 
+                    return <input type='text' name='prediction_input[]' placeholder={value} key={index} />;
                 })}
 
             </fieldset>
