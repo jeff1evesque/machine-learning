@@ -62,7 +62,7 @@ var DataAppend = React.createClass({
     render: function(sessionId){
         var inputDatasetType = this.state.value_dataset_type;
         var inputSessionId = this.state.value_session_id;
-        var SupplyDataset = this.getSupplyDataset(inputDatasetType, inputSessionId);
+        var Dataset = this.getSupplyDataset(inputDatasetType, inputSessionId);
         var options = this.state.ajax_done_options;
 
         return(
@@ -87,7 +87,7 @@ var DataAppend = React.createClass({
                     </select>
                 </fieldset>
 
-                <SupplyDataset onChange={this.displaySubmit}/>
+                <Dataset onChange={this.displaySubmit}/>
             </fieldset>
         );
     },
