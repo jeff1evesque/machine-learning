@@ -25,7 +25,10 @@ var SupplyPredictors = React.createClass({
             <fieldset className='fieldset-prediction-input'>
                 <legend>Prediction Input</legend>
 
-
+                {/* array components require unique 'key' value */}
+                {options && options.map(function(key, value) {
+                    return <input type='text' name='prediction_input[]' placeholder={value} key={key} />;
+                })}
 
             </fieldset>
         );
