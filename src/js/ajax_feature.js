@@ -20,18 +20,18 @@
       }
     }).done(function(data) {
 
-    // asynchronous callback
+      // asynchronous callback
       callbackDone(data);
 		
-    // remove ajax overlay
+      // remove ajax overlay
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
 
-    // asynchronous callback
+      // asynchronous callback
       callbackFail(textStatus, errorThrown);
 
-    // remove ajax overlay
+      // remove ajax overlay
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
     });
