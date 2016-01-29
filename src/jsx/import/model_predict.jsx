@@ -74,6 +74,7 @@ var ModelPredict = React.createClass({
     getSupplyPredictors: function(modelId) {
         if (modelId != '--Select--' && Number(modelId)) {
             return SupplyPredictors;
+        }
         else {
             return 'span';
         }
