@@ -20,19 +20,19 @@
       }
     }).done(function(data) {
 
-      // asynchronous callback
-        callbackDone(data);
+    // asynchronous callback
+      callbackDone(data);
 		
-      // remove ajax overlay
-        $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
+    // remove ajax overlay
+      $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
 
-      // asynchronous callback
-        callbackFail(textStatus, errorThrown);
+    // asynchronous callback
+      callbackFail(textStatus, errorThrown);
 
-      // remove ajax overlay
-        $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
+    // remove ajax overlay
+      $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
     });
   }
