@@ -17,6 +17,11 @@ var SupplyPredictors = React.createClass({
             ajax_fail_status: null
         };
     },
+  // update 'state properties': allow parent component(s) to access properties
+    validIntegerEntered: function(event){
+        console.log(event);
+        this.props.onChange({display_submit: true});
+    },
   // triggered when 'state properties' change
     render: function(){
         var options = JSON.parse(this.state.ajax_done_options);
@@ -27,7 +32,7 @@ var SupplyPredictors = React.createClass({
 
                 {/* array components require unique 'key' value */}
                 {options && options.map(function(value, index){ 
-                    return <input type='text' name='prediction_input[]' placeholder={value} key={index} />;
+                    return <input type='text' name='prediction_input[]' placeholder={value} key={index} onChange={this.validIntegerEntered} value={this.state.value_predictor+index} />;
                 })}
 
             </fieldset>
