@@ -19,8 +19,30 @@ var SupplyPredictors = React.createClass({
     },
   // update 'state properties': allow parent component(s) to access properties
     validIntegerEntered: function(event){
-        console.log(event);
-        this.props.onChange({display_submit: true});
+        {/* get array of input elements, by classname */}
+        var predictionNodeList = document.getElementsByClassName('predictionInput');
+
+        {/* if input value is empty, store 'false' within corresponding array */}
+        var submitArray = Array.prototype.map.call(predictionNodeList, function(element) {
+            if (!element.value) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        });
+
+        {/* check if every element is 'true' */}
+        var submitBoolean = submitArray.every(function(element) {
+            return element == true;
+        });
+
+        if (submitBoolean) {
+            this.props.onChange({display_submit: true});
+        }
+        else {
+            this.props.onChange({display_submit: false});
+        }
     },
   // triggered when 'state properties' change
     render: function(){
@@ -32,7 +54,7 @@ var SupplyPredictors = React.createClass({
 
                 {/* array components require unique 'key' value */}
                 {options && options.map(function(value, index){ 
-                    return <input type='text' name='prediction_input[]' placeholder={value} key={index} onChange={this.validIntegerEntered} value={this.state['value_predictor' + index.toString()]} />;
+                    return <input type='text' name='prediction_input[]' className='predictionInput' placeholder={value} key={index} onChange={this.validIntegerEntered} value={this.state['value_predictor' + index.toString()]} />;
                 }.bind(this))}
 
             </fieldset>
