@@ -5,7 +5,7 @@
  */
 
 // AJAX Process
-  function modelId() {
+  function modelId(callbackDone, callbackFail) {
     $.ajax({
       type: 'POST',
       url: '/retrieve-model/',
