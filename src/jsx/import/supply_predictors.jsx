@@ -32,7 +32,7 @@ var SupplyPredictors = React.createClass({
 
                 {/* array components require unique 'key' value */}
                 {options && options.map(function(value, index){ 
-                    return <input type='text' name='prediction_input[]' placeholder={value} key={index} onChange={this.validIntegerEntered} value={this.state.value_predictor+index} />;
+                    return <input type='text' name='prediction_input[]' placeholder={value} key={index} onChange={this.validIntegerEntered} value={this.state['value_predictor' + index.toString()]} />;
                 })}
 
             </fieldset>
