@@ -22,7 +22,7 @@
 
       // asynchronous callback
       callbackDone(data);
-		
+
       // remove ajax overlay
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
