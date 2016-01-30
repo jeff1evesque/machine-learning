@@ -7,8 +7,8 @@
  */
 
 // AJAX Process
-  function featureProperties() {
-    var data = {'session_id': $('select[name="svm_model_id"]').val()};
+  function featureProperties(callbackDone, callbackFail, modelId) {
+    var data = {'session_id': modelId};
 
     $.ajax({
       type: 'POST',
@@ -19,35 +19,20 @@
         ajaxLoader($('form'));
       }
     }).done(function(data) {
-      var content;
 
-      // Remove AJAX Overlay
+      // asynchronous callback
+      callbackDone(data);
+
+      // remove ajax overlay
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
-
-      // Append to DOM
-      if (data.error) {
-        $('.fieldset-session-predict').append('<div class="error">' + data.error + '</div>');
-      } else {
-        content =
-              '<fieldset class="fieldset-prediction-input">' +
-              '<legend>Prediction Input</legend>';
-
-        $.each($.parseJSON(data), function(index, value) {
-          content += '<input type="text" name="prediction_input[]" placeholder="' + value + '">';
-        });
-
-        content += '</fieldset>';
-      }
-
-      // Remove previous input, add new instance
-      $('.fieldset-prediction-input').remove();
-      $('.fieldset-session-predict').append(content);
 
     }).fail(function(jqXHR, textStatus, errorThrown) {
-      console.log('Error Thrown: ' + errorThrown);
-      console.log('Error Status: ' + textStatus);
 
-      // Remove AJAX Overlay
+      // asynchronous callback
+      callbackFail(textStatus, errorThrown);
+
+      // remove ajax overlay
       $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
+
     });
   }

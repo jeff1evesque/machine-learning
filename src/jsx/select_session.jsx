@@ -1,13 +1,21 @@
 /**
  * select_session.js: initial form.
  *
- * @Select_Session, must be capitalized in order for reactjs to render it as a
+ * @SelectSession, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var Select_Session = React.createClass({
+import ModelGenerate from './import/model_generate.jsx';
+import ModelPredict from './import/model_predict.jsx';
+import DataNew from './import/data_new.jsx';
+import DataAppend from './import/data_append.jsx';
+import DataUploadNew from './import/data_upload_new.jsx';
+import DataUploadAppend from './import/data_upload_append.jsx';
+import Submit from './import/submit.jsx';
+
+var SelectSession = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -17,9 +25,22 @@ var Select_Session = React.createClass({
   // update 'state properties'
     change: function(event){
         this.setState({value: event.target.value});
+        this.setState({submit: false});
+    },
+  // update 'state properties' from children component (i.e. 'render_submit')
+    displaySubmit: function(event) {
+        this.setState({submit: event.render_submit});
     },
   // triggered when 'state properties' change
     render: function(){
+        var SessionType = this.getSessionType(this.state.value);
+        if (this.state.submit) {
+            var SubmitButton = Submit;
+        }
+        else {
+            var SubmitButton = 'span';
+        }
+
         return(
             <form action='/load-data/' method='post'>
                 <fieldset className='fieldset-session-type'>
@@ -33,12 +54,22 @@ var Select_Session = React.createClass({
                         <option value='model_predict'>Make Prediction</option>
                     </select>
                 </fieldset>
+
+                <SessionType onChange={this.displaySubmit}/>
+                <SubmitButton/>
             </form>
         );
+    },
+  // call back: used for the above 'render' (return 'span' if undefined)
+    getSessionType: function(type) {
+        return {
+            data_new: DataNew,
+            data_append: DataAppend,
+            model_generate: ModelGenerate,
+            model_predict: ModelPredict
+        }[type] || 'span';
     }
 });
 
-// render a ReactElement into the DOM, in the supplied container
-$(document).ready(function() {
-    ReactDOM.render(<Select_Session />, document.querySelector('.ml-container'));
-});
+// render form
+ReactDOM.render(<SelectSession/>, document.querySelector('.ml-container'));

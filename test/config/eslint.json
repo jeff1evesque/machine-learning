@@ -13,7 +13,8 @@
         "react"
     ],
     "ecmaFeatures": {
-        "jsx": true
+        "jsx": true,
+        "modules": true
     },
     "rules": {
         "react/display-name": 1,
