@@ -23,7 +23,7 @@ var Submit = React.createClass({
      },
   // triggered when 'state properties' change
     render: function(){
-        return(<input type='submit' className='svm-form-submit' onChange={this.formSubmit} />);
+        return(<input type='submit' className='svm-form-submit' onClick={this.formSubmit} />);
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
