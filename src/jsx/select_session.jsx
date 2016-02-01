@@ -34,7 +34,7 @@ var SelectSession = React.createClass({
     },
   // get form response (after form submission)
     displayResult: function(event) {
-        this.setState({result: event.form_response});
+        this.setState({result: event.result_form_response});
     }
   // triggered when 'state properties' change
     render: function(){
@@ -47,7 +47,7 @@ var SelectSession = React.createClass({
             var SubmitButton = 'span';
         }
         {/* form submission result */}
-        if (this.state.form_response) {
+        if (this.state.result_form_response) {
             var FormResponse = ResultDisplay;
         }
         else {
