@@ -8,9 +8,18 @@
  */
 
 var Submit = React.createClass({
-  // submit form to server side, get response (if exists)
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            ajax_done_result: null,
+            ajax_done_error: null,
+            ajax_fail_error: null,
+            ajax_fail_status: null
+        };
+    },
+  // update 'state properties': allow parent component(s) to access properties
      formSubmit: function(event){
-
+        this.props.onChange({result_form_submit: this.state.ajax_done_result});
      },
   // triggered when 'state properties' change
     render: function(){
@@ -33,7 +42,10 @@ var Submit = React.createClass({
             if (asynchObject && asynchObject.error) {
                 this.setState({ajax_done_error: asynchObject.error});
             } else if (asynchObject) {
-                this.setState({ajax_done_options: asynchObject});
+                this.setState({ajax_done_result: asynchObject});
+            }
+            else {
+                this.setState({ajax_done_result: null});
             }
         }.bind(this),
       // asynchronous callback: ajax 'fail' promise
