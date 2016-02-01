@@ -19,7 +19,7 @@ var Submit = React.createClass({
     },
   // update 'state properties': allow parent component(s) to access properties
      formSubmit: function(event){
-        this.props.onChange({result_form_submit: this.state.ajax_done_result});
+        this.props.onChange({result_form_response: this.state.ajax_done_result});
      },
   // triggered when 'state properties' change
     render: function(){
