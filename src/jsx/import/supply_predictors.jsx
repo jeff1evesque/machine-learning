@@ -62,8 +62,16 @@ var SupplyPredictors = React.createClass({
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
+      // ajax arguments
+        var ajaxEndpoint = '/retrieve-feature-properties/';
+        var ajaxData = {'session_id': this.props.selectedModelId};
+        var ajaxArguments = {
+            'endpoint': ajaxEndpoint,
+            'data': ajaxData
+        };
+
       // asynchronous callback: ajax 'done' promise
-        featureProperties(function (asynchObject) {
+        ajaxCaller(function (asynchObject) {
         // Append to DOM
             if (asynchObject && asynchObject.error) {
                 this.setState({ajax_done_error: asynchObject.error});
@@ -82,8 +90,8 @@ var SupplyPredictors = React.createClass({
                 console.log('Error Thrown: ' + asynchError);
             }
         }.bind(this),
-      // defined from parent component
-        this.props.selectedModelId);
+      // pass ajax arguments
+        ajaxArguments);
     }
 });
 

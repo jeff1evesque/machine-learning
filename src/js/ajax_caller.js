@@ -1,19 +1,17 @@
 /**
- * ajax_feature.js: this script utilizes ajax to retrieve data from 'views.py'.
- *                  Specifically, an array of feature (independent variables)
- *                  names, and the generalized count of features that can be
- *                  expected within an observation, is inserted to respective
- *                  DOM elements.
+ * ajax_caller.js: this script utilizes ajax to retrieve data from 'views.py'.
+ *                 Specifically, an array of feature (independent variables)
+ *                 names, and the generalized count of features that can be
+ *                 expected within an observation, is inserted to respective
+ *                 DOM elements.
  */
 
 // AJAX Process
-  function featureProperties(callbackDone, callbackFail, modelId) {
-    var data = {'session_id': modelId};
-
+  function ajaxCaller(callbackDone, callbackFail, args) {
     $.ajax({
       type: 'POST',
-      url: '/retrieve-feature-properties/',
-      data: data,
+      url: args.endpoint,
+      data: args.data,
       dataType: 'json',
       beforeSend: function() {
         ajaxLoader($('form'));
