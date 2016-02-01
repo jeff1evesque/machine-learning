@@ -1,7 +1,7 @@
 /**
  * submit.jsx: append 'submit' button.
  *
- * @submit, must be capitalized in order for reactjs to render it as a
+ * @Submit, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
