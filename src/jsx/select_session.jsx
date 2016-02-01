@@ -68,9 +68,10 @@ var SelectSession = React.createClass({
                     </select>
                 </fieldset>
 
-                <SessionType onChange={this.displaySubmit}/>
-                <FormResponse/>
-                <SubmitButton onChange={this.displayResult}/>
+                {/* 'formResult' is accessible within child component as 'this.props.formResult' */}
+                <SessionType onChange={this.displaySubmit} />
+                <FormResponse formResult={this.state.result.form_response} />
+                <SubmitButton onChange={this.displayResult} />
             </form>
         );
     },
