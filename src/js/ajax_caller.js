@@ -12,8 +12,8 @@
   function ajaxCaller(callbackDone, callbackFail, args) {
     $.ajax({
       type: 'POST',
-      url: args['endpoint'],
-      data: args['data'],
+      url: args.endpoint,
+      data: args.data,
       dataType: 'json',
       beforeSend: function() {
         ajaxLoader($('form'));
