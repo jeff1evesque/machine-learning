@@ -8,15 +8,6 @@
  */
 
 var ResultDisplay = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            ajax_done_result: null,
-            ajax_done_error: null,
-            ajax_fail_error: null,
-            ajax_fail_status: null
-        };
-    },
   // triggered when 'state properties' change
     render: function(){
         var result = this.props.formResult;
