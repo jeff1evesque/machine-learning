@@ -14,6 +14,7 @@ import DataAppend from './import/data_append.jsx';
 import DataUploadNew from './import/data_upload_new.jsx';
 import DataUploadAppend from './import/data_upload_append.jsx';
 import Submit from './import/submit.jsx';
+import ResultDisplay from './import/result_display.jsx';
 
 var SelectSession = React.createClass({
   // initial 'state properties'
@@ -31,14 +32,26 @@ var SelectSession = React.createClass({
     displaySubmit: function(event) {
         this.setState({submit: event.render_submit});
     },
+  // get form response (after form submission)
+    displayResult: function(event) {
+        this.setState({result: event.form_response});
+    }
   // triggered when 'state properties' change
     render: function(){
         var SessionType = this.getSessionType(this.state.value);
+        {/* form submission button */}
         if (this.state.submit) {
             var SubmitButton = Submit;
         }
         else {
             var SubmitButton = 'span';
+        }
+        {/* form submission result */}
+        if (this.state.form_response) {
+            var FormResponse = ResultDisplay;
+        }
+        else {
+            var FormResponse = 'span';
         }
 
         return(
@@ -56,7 +69,8 @@ var SelectSession = React.createClass({
                 </fieldset>
 
                 <SessionType onChange={this.displaySubmit}/>
-                <SubmitButton/>
+                <FormResponse/>
+                <SubmitButton onChange={this.displayResult}/>
             </form>
         );
     },
