@@ -35,7 +35,7 @@ var SelectSession = React.createClass({
   // get form response (after form submission)
     displayResult: function(event) {
         this.setState({result: event.result_form_response});
-    }
+    },
   // triggered when 'state properties' change
     render: function(){
         var SessionType = this.getSessionType(this.state.value);
