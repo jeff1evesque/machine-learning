@@ -12,6 +12,7 @@
     if (!args.contentType === null) {
         args.contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
     }
+
   // tell jquery to process the data
     if (args.processData === null) {
         args.processData = true;
