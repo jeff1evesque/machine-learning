@@ -88,8 +88,15 @@ var ModelGenerate = React.createClass({
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
+      // ajax arguments
+        var ajaxEndpoint = '/retrieve-session/';
+        var ajaxArguments = {
+            'endpoint': ajaxEndpoint,
+            'data': null
+        };
+
       // asynchronous callback: ajax 'done' promise
-        sessionId(function (asynchObject) {
+        ajaxCaller(function (asynchObject) {
         // Append to DOM
             if (asynchObject && asynchObject.error) {
                 this.setState({ajax_done_error: asynchObject.error});
@@ -107,7 +114,9 @@ var ModelGenerate = React.createClass({
                 this.setState({ajax_fail_error: asynchError});
                 console.log('Error Thrown: ' + asynchError);
             }
-        }.bind(this));
+        }.bind(this),
+      // pass ajax arguments
+        ajaxArguments);
     }
 });
 
