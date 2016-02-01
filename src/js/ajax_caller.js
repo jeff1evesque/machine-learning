@@ -4,8 +4,6 @@
  *                 names, and the generalized count of features that can be
  *                 expected within an observation, is inserted to respective
  *                 DOM elements.
- *
- * @args, and array of parameters (url, data).
  */
 
 // AJAX Process
