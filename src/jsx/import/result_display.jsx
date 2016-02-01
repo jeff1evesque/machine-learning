@@ -27,7 +27,6 @@ var ResultDisplay = React.createClass({
                 <p className='result'>{result}</p>
             </fieldset>
         );
-        return(<input type='submit' className='svm-form-submit' onClick={this.formSubmit} />);
     }
 });
 
