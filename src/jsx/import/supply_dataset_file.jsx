@@ -13,13 +13,9 @@ var SupplyDatasetFile = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: null,
-            ajax_done_result: null,
-            ajax_done_error: null,
-            ajax_fail_error: null,
-            ajax_fail_status: null
+            value: null
         };
-     },
+    },
   // update 'state properties': allow parent component(s) to access properties
     validStringEntered: function(event){
         this.props.onChange({display_submit: event.target.files.length !== 0});
@@ -37,49 +33,6 @@ var SupplyDatasetFile = React.createClass({
                 </fieldset>
             </div>
         );
-    },
-  // call back: get session id(s) from server side, and append to form
-    componentDidMount: function () {
-      // ajax arguments
-        if (this.state.ajax_done_result) {
-            var ajaxEndpoint = $(this).attr('action');
-            var ajaxData = new FormData(this);
-            var contentType = false;
-            var processData = false;
-
-            var ajaxArguments = {
-                'endpoint': ajaxEndpoint,
-                'data': new FormData(this.props.formObject),
-                'contentType': false,
-                'processData': false,
-            };
-
-          // asynchronous callback: ajax 'done' promise
-            ajaxCaller(function (asynchObject) {
-            // Append to DOM
-                if (asynchObject && asynchObject.error) {
-                    this.setState({ajax_done_error: asynchObject.error});
-                } else if (asynchObject) {
-                    this.setState({ajax_done_result: asynchObject});
-                }
-                else {
-                    this.setState({ajax_done_result: null});
-                }
-            }.bind(this),
-          // asynchronous callback: ajax 'fail' promise
-            function (asynchStatus, asynchError) {
-                if (asynchStatus) {
-                    this.setState({ajax_fail_status: asynchStatus});
-                    console.log('Error Status: ' + asynchStatus);
-                }
-                if (asynchError) {
-                    this.setState({ajax_fail_error: asynchError});
-                    console.log('Error Thrown: ' + asynchError);
-                }
-            }.bind(this),
-          // pass ajax arguments
-            ajaxArguments);
-        }
     }
 });
 
