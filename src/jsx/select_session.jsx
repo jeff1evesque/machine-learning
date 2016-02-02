@@ -113,6 +113,7 @@ var SelectSession = React.createClass({
                     </select>
                 </fieldset>
 
+                {/* 'formResult' is accessible within child component as 'this.props.formResult' */}
                 <SessionType onChange={this.displaySubmit} />
                 <SubmitButton onChange={this.sendData} />
                 <Result formResult={this.state.ajax_done_result} />
