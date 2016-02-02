@@ -20,39 +20,84 @@ var SelectSession = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: '--Select--',
-            sent_form_data: false
+            value_session_type: '--Select--',
+            ajax_done_result: null,
+            ajax_done_error: null,
+            ajax_fail_error: null,
+            ajax_fail_status: null
         };
     },
   // update 'state properties'
     changeSessionType: function(event){
-        this.setState({value: event.target.session_type});
+        this.setState({value_session_type: event.target.value});
         this.setState({submit: false});
+        this.setState({send_data: false});
     },
   // update 'state properties' from children component (i.e. 'render_submit')
-    displaySubmitButton: function(event) {
+    displaySubmit: function(event) {
         this.setState({submit: event.render_submit});
     },
-    formSubmitted: function(event) {
-        this.setState({sent_form_data: event.created_submit_button});
+    sendData: function(event) {
+        this.setState({send_data: event.created_submit_button});
+    },
+    handleSubmit: function(event) {
+      // ajax arguments
+        var ajaxEndpoint = '/load-data/';
+        var ajaxArguments = {
+            'endpoint': ajaxEndpoint,
+            'data': new FormData(this.refs.form),
+            'contentType': false,
+            'processData': false,
+        };
+
+      // asynchronous callback: ajax 'done' promise
+        ajaxCaller(function (asynchObject) {
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            } else if (asynchObject) {
+                this.setState({ajax_done_result: asynchObject});
+            }
+            else {
+                this.setState({ajax_done_result: null});
+            }
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+        }.bind(this),
+      // pass ajax arguments
+        ajaxArguments);
     },
   // triggered when 'state properties' change
-    render: function(){
-        var SessionType = this.getSessionType(this.state.session_type);
-        {/* form submission button */}
+    render: function() {
+        var SessionType = this.getSessionType(this.state.value_session_type);
         if (this.state.submit) {
             var SubmitButton = Submit;
         }
         else {
             var SubmitButton = 'span';
         }
+        if (this.state.ajax_done_result) {
+            var Result = ResultDisplay;
+        }
+        else {
+            var Result = 'span';
+        }
 
         return(
-            <form action='/load-data/' method='post'>
+            <form onSubmit={this.handleSubmit}>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
-                    <select name='svm_session' autoComplete='off' onChange={this.changeSessionType} value={this.state.session_type}>
+                    <select name='svm_session' autoComplete='off' onChange={this.changeSessionType} value={this.state.value_session_type}>
                         <option value='' defaultValue>--Select--</option>
                         <option value='data_new'>New Data</option>
                         <option value='data_append'>Append Data</option>
@@ -61,11 +106,9 @@ var SelectSession = React.createClass({
                     </select>
                 </fieldset>
 
-
-                {/* 'formResult' is accessible within child component as 'this.props.formResult' */}
-                <SessionType onChange={this.displaySubmitButton} dataSent={this.state.sent_form_data} formObject={this} />
-                <FormResponse formResult={this.state.result_form_response} />
-                <SubmitButton onChange={this.formSubmitted} />
+                <SessionType onChange={this.displaySubmit} />
+                <SubmitButton onChange={this.sendData} />
+                <ResultDisplay formResult={this.state.ajax_done_result} />
             </form>
         );
     },
