@@ -69,7 +69,7 @@ var DataNew = React.createClass({
                     </select>
                 </fieldset>
 
-                <SupplyDataset onChange={this.displaySubmit}/>
+                <SupplyDataset onChange={this.displaySubmit} formObject={this.props.formObject} />
             </fieldset>
         );
     },
