@@ -12,12 +12,17 @@ var ResultDisplay = React.createClass({
     render: function(){
         var result = this.props.formResult;
 
-        return(
-            <fieldset className='fieldset-prediction-result'>
-                <legend>Prediction Result</legend>
-                <p className='result'>{result}</p>
-            </fieldset>
-        );
+        if (result) {
+            return(
+                <fieldset className='fieldset-prediction-result'>
+                    <legend>Prediction Result</legend>
+                    <p className='result'>{result}</p>
+                </fieldset>
+            );
+        }
+        else {
+            return(<span />);
+        }
     }
 });
 
