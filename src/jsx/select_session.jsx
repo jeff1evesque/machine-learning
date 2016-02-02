@@ -1,4 +1,4 @@
-/** 
+/**
  * select_session.js: initial form.
  *
  * @SelectSession, must be capitalized in order for reactjs to render it as a
@@ -40,44 +40,47 @@ var SelectSession = React.createClass({
     sendData: function(event) {
         this.setState({send_data: event.created_submit_button});
     },
-    handleSubmit: function(event) {
+    handleSubmit: function(event) {console.log(this.refs.form);
       // prevent page reload
         event.preventDefault();
 
-      // ajax arguments
-        var ajaxEndpoint = '/load-data/';
-        var ajaxArguments = {
-            'endpoint': ajaxEndpoint,
-            'data': new FormData(this.refs.form),
-            'contentType': false,
-            'processData': false,
-        };
+        var sessionType = this.state.value_session_type;
+        if (sessionType == 'data_new' || sessionType == 'data_append') {
+        // ajax arguments
+            var ajaxEndpoint = '/load-data/';
+            var ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': new FormData(this.refs.form),
+                'contentType': false,
+                'processData': false,
+            };
 
-      // asynchronous callback: ajax 'done' promise
-        ajaxCaller(function (asynchObject) {
-        // Append to DOM
-            if (asynchObject && asynchObject.error) {
-                this.setState({ajax_done_error: asynchObject.error});
-            } else if (asynchObject) {
-                this.setState({ajax_done_result: asynchObject});
-            }
-            else {
-                this.setState({ajax_done_result: null});
-            }
-        }.bind(this),
-      // asynchronous callback: ajax 'fail' promise
-        function (asynchStatus, asynchError) {
-            if (asynchStatus) {
-                this.setState({ajax_fail_status: asynchStatus});
-                console.log('Error Status: ' + asynchStatus);
-            }
-            if (asynchError) {
-                this.setState({ajax_fail_error: asynchError});
-                console.log('Error Thrown: ' + asynchError);
-            }
-        }.bind(this),
-      // pass ajax arguments
-        ajaxArguments);
+          // asynchronous callback: ajax 'done' promise
+           ajaxCaller(function (asynchObject) {
+            // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ajax_done_error: asynchObject.error});
+                } else if (asynchObject) {
+                    this.setState({ajax_done_result: asynchObject});
+                }
+                else {
+                    this.setState({ajax_done_result: null});
+                }
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
+                if (asynchStatus) {
+                    this.setState({ajax_fail_status: asynchStatus});
+                    console.log('Error Status: ' + asynchStatus);
+                }
+                if (asynchError) {
+                    this.setState({ajax_fail_error: asynchError});
+                    console.log('Error Thrown: ' + asynchError);
+                }
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+        }
     },
   // triggered when 'state properties' change
     render: function() {
