@@ -20,25 +20,25 @@ var SelectSession = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: '--Select--'
+            value: '--Select--',
+            sent_form_data: false
         };
     },
   // update 'state properties'
-    change: function(event){
-        this.setState({value: event.target.value});
+    changeSessionType: function(event){
+        this.setState({value: event.target.session_type});
         this.setState({submit: false});
     },
   // update 'state properties' from children component (i.e. 'render_submit')
-    displaySubmit: function(event) {
+    displaySubmitButton: function(event) {
         this.setState({submit: event.render_submit});
     },
-  // get form response (after form submission)
-    displayResult: function(event) {
-        this.setState({result: event.result_form_response});
+    formSubmitted: function(event) {
+        this.setState({sent_form_data: event.created_submit_button});
     },
   // triggered when 'state properties' change
     render: function(){
-        var SessionType = this.getSessionType(this.state.value);
+        var SessionType = this.getSessionType(this.state.session_type);
         {/* form submission button */}
         if (this.state.submit) {
             var SubmitButton = Submit;
@@ -46,20 +46,13 @@ var SelectSession = React.createClass({
         else {
             var SubmitButton = 'span';
         }
-        {/* form submission result */}
-        if (this.state.result_form_response) {
-            var FormResponse = ResultDisplay;
-        }
-        else {
-            var FormResponse = 'span';
-        }
 
         return(
             <form action='/load-data/' method='post'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
-                    <select name='svm_session' autoComplete='off' onChange={this.change} value={this.state.value}>
+                    <select name='svm_session' autoComplete='off' onChange={this.changeSessionType} value={this.state.session_type}>
                         <option value='' defaultValue>--Select--</option>
                         <option value='data_new'>New Data</option>
                         <option value='data_append'>Append Data</option>
@@ -68,10 +61,11 @@ var SelectSession = React.createClass({
                     </select>
                 </fieldset>
 
+
                 {/* 'formResult' is accessible within child component as 'this.props.formResult' */}
-                <SessionType onChange={this.displaySubmit} />
+                <SessionType onChange={this.displaySubmitButton} dataSent={this.state.sent_form_data} formObject={this} />
                 <FormResponse formResult={this.state.result_form_response} />
-                <SubmitButton onChange={this.displayResult} />
+                <SubmitButton onChange={this.formSubmitted} />
             </form>
         );
     },
