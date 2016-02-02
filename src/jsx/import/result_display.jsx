@@ -10,9 +10,15 @@
 var ResultDisplay = React.createClass({
   // triggered when 'state properties' change
     render: function(){
-        var result = this.props.formResult;
+        var serverObject = this.props.formResult;
+        var displayResult = false;
 
-        if (result) {
+        if (serverObject && serverObject.result && serverObject.result.result) {
+            var result = serverObject.result.result;
+            displayResult = true;
+        }
+
+        if (displayResult) {
             return(
                 <fieldset className='fieldset-prediction-result'>
                     <legend>Prediction Result</legend>
