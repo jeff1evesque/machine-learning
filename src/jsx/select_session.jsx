@@ -50,7 +50,7 @@ var SelectSession = React.createClass({
             var ajaxEndpoint = '/load-data/';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.form),
+                'data': new FormData(this.refs.svmForm),
                 'contentType': false,
                 'processData': false,
             };
@@ -99,7 +99,7 @@ var SelectSession = React.createClass({
         }
 
         return(
-            <form onSubmit={this.handleSubmit}>
+            <form onSubmit={this.handleSubmit} ref='svmForm'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
