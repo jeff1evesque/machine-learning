@@ -44,17 +44,29 @@ var SelectSession = React.createClass({
       // prevent page reload
         event.preventDefault();
 
+      // local variables
+        var executeAjax = false;
+        var ajaxEndpoint = '/load-data/';
         var sessionType = this.state.value_session_type;
-        if (sessionType == 'data_new' || sessionType == 'data_append') {
-        // ajax arguments
-            var ajaxEndpoint = '/load-data/';
+
+        if (sessionType == 'data_new' || sessionType == 'data_append' || sessionType == 'model_predict') {
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
                 'data': new FormData(this.refs.svmForm),
                 'contentType': false,
                 'processData': false,
             };
+            executeAjax = true;
+        }
+        else if (sessionType == 'model_generate') {
+            var ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': new FormData(this.refs.svmForm),
+            };
+            executeAjax = true;
+        }
 
+        if (executeAjax) {
           // asynchronous callback: ajax 'done' promise
            ajaxCaller(function (asynchObject) {
             // Append to DOM
