@@ -1,4 +1,4 @@
-/**
+/** 
  * select_session.jsx: initial form.
  *
  * @SelectSession, must be capitalized in order for reactjs to render it as a
@@ -98,8 +98,11 @@ var SelectSession = React.createClass({
             var Result = 'span';
         }
 
+        {/* return:
+            @svmForm, attribute is used within 'handleSubmit' callback
+            @formResult, is accessible within child component as 'this.props.formResult'
+        */}
         return(
-            {/* 'svmForm' attribute is used within 'handleSubmit' callback */}
             <form onSubmit={this.handleSubmit} ref='svmForm'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
@@ -113,7 +116,6 @@ var SelectSession = React.createClass({
                     </select>
                 </fieldset>
 
-                {/* 'formResult' is accessible within child component as 'this.props.formResult' */}
                 <SessionType onChange={this.displaySubmit} />
                 <SubmitButton onChange={this.sendData} />
                 <Result formResult={this.state.ajax_done_result} />
