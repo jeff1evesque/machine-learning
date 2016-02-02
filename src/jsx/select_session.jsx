@@ -108,7 +108,7 @@ var SelectSession = React.createClass({
 
                 <SessionType onChange={this.displaySubmit} />
                 <SubmitButton onChange={this.sendData} />
-                <ResultDisplay formResult={this.state.ajax_done_result} />
+                <Result formResult={this.state.ajax_done_result} />
             </form>
         );
     },
