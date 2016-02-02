@@ -58,13 +58,6 @@ var SelectSession = React.createClass({
             };
             executeAjax = true;
         }
-        else if (sessionType == 'model_generate') {
-            var ajaxArguments = {
-                'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.svmForm),
-            };
-            executeAjax = true;
-        }
 
         if (executeAjax) {
           // asynchronous callback: ajax 'done' promise
