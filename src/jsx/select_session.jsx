@@ -1,5 +1,5 @@
 /**
- * select_session.js: initial form.
+ * select_session.jsx: initial form.
  *
  * @SelectSession, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
