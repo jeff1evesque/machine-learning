@@ -1,4 +1,4 @@
-/** 
+/**
  * select_session.jsx: initial form.
  *
  * @SelectSession, must be capitalized in order for reactjs to render it as a
@@ -40,7 +40,7 @@ var SelectSession = React.createClass({
     sendData: function(event) {
         this.setState({send_data: event.created_submit_button});
     },
-    handleSubmit: function(event) {console.log(this.refs.form);
+    handleSubmit: function(event) {
       // prevent page reload
         event.preventDefault();
 
@@ -91,7 +91,7 @@ var SelectSession = React.createClass({
         else {
             var SubmitButton = 'span';
         }
-        if (this.state.ajax_done_result) {
+        if (this.state.ajax_done_result && SessionType == 'model_predict') {
             var Result = ResultDisplay;
         }
         else {
