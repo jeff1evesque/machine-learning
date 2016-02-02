@@ -99,6 +99,7 @@ var SelectSession = React.createClass({
         }
 
         return(
+            {/* 'svmForm' attribute is used within 'handleSubmit' callback */}
             <form onSubmit={this.handleSubmit} ref='svmForm'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
