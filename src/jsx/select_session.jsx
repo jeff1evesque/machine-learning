@@ -1,4 +1,4 @@
-/** 
+/**
  * select_session.jsx: initial form.
  *
  * @SelectSession, must be capitalized in order for reactjs to render it as a
@@ -84,18 +84,14 @@ var SelectSession = React.createClass({
     },
   // triggered when 'state properties' change
     render: function() {
+        var Result = ResultDisplay;
         var SessionType = this.getSessionType(this.state.value_session_type);
+
         if (this.state.submit) {
             var SubmitButton = Submit;
         }
         else {
             var SubmitButton = 'span';
-        }
-        if (this.state.ajax_done_result && SessionType == 'model_predict') {
-            var Result = ResultDisplay;
-        }
-        else {
-            var Result = 'span';
         }
 
         {/* return:
