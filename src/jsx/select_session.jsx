@@ -1,4 +1,4 @@
-/**
+/** 
  * select_session.jsx: initial form.
  *
  * @SelectSession, must be capitalized in order for reactjs to render it as a
@@ -45,21 +45,16 @@ var SelectSession = React.createClass({
         event.preventDefault();
 
       // local variables
-        var executeAjax = false;
-        var ajaxEndpoint = '/load-data/';
         var sessionType = this.state.value_session_type;
-
-        if (sessionType == 'data_new' || sessionType == 'data_append' || sessionType == 'model_predict') {
+        if (sessionType == 'data_new' || sessionType == 'data_append' || sessionType == 'model_generate' || sessionType == 'model_predict') {
+            var ajaxEndpoint = '/load-data/';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
                 'data': new FormData(this.refs.svmForm),
                 'contentType': false,
                 'processData': false,
             };
-            executeAjax = true;
-        }
 
-        if (executeAjax) {
           // asynchronous callback: ajax 'done' promise
            ajaxCaller(function (asynchObject) {
             // Append to DOM
