@@ -10,6 +10,7 @@
 var Submit = React.createClass({
   // update 'state properties': allow parent component(s) to access properties
      formSubmit: function(event){
+        event.preventDefault();
         this.props.onChange({created_submit_button: true});
      },
   // triggered when 'state properties' change
