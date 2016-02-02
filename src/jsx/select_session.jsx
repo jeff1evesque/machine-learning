@@ -1,4 +1,4 @@
-/**
+/** 
  * select_session.js: initial form.
  *
  * @SelectSession, must be capitalized in order for reactjs to render it as a
@@ -41,6 +41,9 @@ var SelectSession = React.createClass({
         this.setState({send_data: event.created_submit_button});
     },
     handleSubmit: function(event) {
+      // prevent page reload
+        event.preventDefault();
+
       // ajax arguments
         var ajaxEndpoint = '/load-data/';
         var ajaxArguments = {
