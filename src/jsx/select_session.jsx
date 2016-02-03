@@ -37,6 +37,11 @@ var SelectSession = React.createClass({
   // update 'state properties' from children component (i.e. 'render_submit')
     displaySubmit: function(event) {
         this.setState({submit: event.render_submit});
+
+      // don't display result, if no submit button present
+        if (!event.render_submit) {
+            this.setState({ajax_done_result: null});
+        }
     },
     sendData: function(event) {
         this.setState({send_data: event.created_submit_button});
