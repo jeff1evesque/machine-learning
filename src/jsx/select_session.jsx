@@ -29,6 +29,7 @@ var SelectSession = React.createClass({
     },
   // update 'state properties'
     changeSessionType: function(event){
+        this.setState({ajax_done_result: null});
         this.setState({value_session_type: event.target.value});
         this.setState({submit: false});
         this.setState({send_data: false});
