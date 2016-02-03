@@ -15,13 +15,13 @@ var SupplyDatasetFile = React.createClass({
         return {
             value: null
         };
-     },
+    },
   // update 'state properties': allow parent component(s) to access properties
-     validStringEntered: function(event){
+    validStringEntered: function(event){
         this.props.onChange({display_submit: event.target.files.length !== 0});
-     },
+    },
   // triggered when 'state properties' change
-     render: function(){
+    render: function(){
         return(
             <div>
                 <fieldset className='fieldset-supply-dataset'>
@@ -33,7 +33,7 @@ var SupplyDatasetFile = React.createClass({
                 </fieldset>
             </div>
         );
-     }
+    }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
