@@ -23,15 +23,13 @@ var SupplyDatasetFile = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <div>
-                <fieldset className='fieldset-supply-dataset'>
-                    <legend>Supply Dataset</legend>
-                    <input type='file' name='svm_dataset[]' className='svm-dataset-file' onChange={this.validStringEntered} value={this.state.value} />
-                    <input type='button' value='Add more' className='add-element svm-dataset-file-add' />
-                    <input type='button' value='Remove' className='remove-element svm-dataset-file-remove' />
-                    <p className='form-note'>*<span className='bold'>Note:</span> Uploaded file(s) must be formatted as <span className='italic'>csv</span>, <span className='italic'>json</span>, or <span className='italic'>xml</span> format.</p>
-                </fieldset>
-            </div>
+            <fieldset className='fieldset-supply-dataset'>
+                <legend>Supply Dataset</legend>
+                <input type='file' name='svm_dataset[]' className='svm-dataset-file' onChange={this.validStringEntered} value={this.state.value} />
+                <input type='button' value='Add more' className='add-element svm-dataset-file-add' />
+                <input type='button' value='Remove' className='remove-element svm-dataset-file-remove' />
+                <p className='form-note'>*<span className='bold'>Note:</span> Uploaded file(s) must be formatted as <span className='italic'>csv</span>, <span className='italic'>json</span>, or <span className='italic'>xml</span> format.</p>
+            </fieldset>
         );
     }
 });
