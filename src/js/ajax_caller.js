@@ -9,7 +9,7 @@
 // AJAX Process
   function ajaxCaller(callbackDone, callbackFail, args) {
     // tell jquery to set the contentType
-    if (!args.contentType === null) {
+    if (args.contentType === null) {
       args.contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
     }
 
