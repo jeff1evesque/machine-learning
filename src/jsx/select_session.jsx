@@ -46,6 +46,7 @@ var SelectSession = React.createClass({
     sendData: function(event) {
         this.setState({send_data: event.created_submit_button});
     },
+  // send form data to serverside on form submission
     handleSubmit: function(event) {
       // prevent page reload
         event.preventDefault();
