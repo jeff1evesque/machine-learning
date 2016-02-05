@@ -61,7 +61,7 @@ var SupplyDatasetUrl = React.createClass({
                 <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' onChange={this.validUrlEntered} value={this.state.value_dataset_0} />
 
                 {/* array components require unique 'key' value */}
-                {for (index = 0; index < this.state.input_index; index++) {
+                {for (index = 0; this.state.input_index < index; index++) {
                     return <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-url' key={index} onChange={this.validUrlEntered} value={this.state['value_dataset_' + index.toString()]} />;
                 }.bind(this)}
 
