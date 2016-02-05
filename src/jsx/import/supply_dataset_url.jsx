@@ -12,7 +12,7 @@ var SupplyDatasetUrl = React.createClass({
     getInitialState: function() {
         return {
             value: null,
-            index: 0
+            input_index: 0
         };
     },
   // update 'state properties': allow parent component(s) to access properties
@@ -26,10 +26,10 @@ var SupplyDatasetUrl = React.createClass({
     },
   // update 'state properties': add, or remove additional input elements
     handleAddMore: function(event){
-
+        this.state.input_index++;
     },
     handleRemove: function(event){
-
+        this.state.input_index--;
     },
   // triggered when 'state properties' change
     render: function(){
