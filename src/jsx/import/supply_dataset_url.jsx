@@ -43,9 +43,9 @@ var SupplyDatasetUrl = React.createClass({
                 <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' onChange={this.validStringEntered} value={this.state.value} />
 
                 {/* array components require unique 'key' value */}
-                {inputElements && inputElements.map(function(value, index){ 
+                {for (index = 0; index < this.state.input_index; index++) {
                     return <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' key={index} onChange={this.validStringEntered} value={this.state['value_predictor' + index.toString()]} />;
-                }.bind(this))}
+                }.bind(this)}
 
                 <input type='button' value='Add more' className='add-element svm-dataset-xml-add' onClick={handleAddMore} />
                 <input type='button' value='Remove' className='remove-element svm-dataset-xml-remove' onClick={handleRemove} />
