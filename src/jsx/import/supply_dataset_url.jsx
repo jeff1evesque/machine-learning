@@ -11,7 +11,8 @@ var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: null
+            value: null,
+            index: 0
         };
     },
   // update 'state properties': allow parent component(s) to access properties
@@ -23,14 +24,29 @@ var SupplyDatasetUrl = React.createClass({
             this.props.onChange({display_submit: false});
         }
     },
+  // update 'state properties': add, or remove additional input elements
+    handleAddMore: function(event){
+
+    },
+    handleRemove: function(event){
+
+    },
   // triggered when 'state properties' change
     render: function(){
+        var inputElements = this.state.array_input;
+
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
                 <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' onChange={this.validStringEntered} value={this.state.value} />
-                <input type='button' value='Add more' className='add-element svm-dataset-xml-add' />
-                <input type='button' value='Remove' className='remove-element svm-dataset-xml-remove' />
+
+                {/* array components require unique 'key' value */}
+                {inputElements && inputElements.map(function(value, index){ 
+                    return <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' key={index} onChange={this.validStringEntered} value={this.state['value_predictor' + index.toString()]} />;
+                }.bind(this))}
+
+                <input type='button' value='Add more' className='add-element svm-dataset-xml-add' onClick={handleAddMore} />
+                <input type='button' value='Remove' className='remove-element svm-dataset-xml-remove' onClick={handleRemove} />
             </fieldset>
         );
     }
