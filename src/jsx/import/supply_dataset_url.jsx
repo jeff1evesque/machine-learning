@@ -24,12 +24,14 @@ var SupplyDatasetUrl = React.createClass({
             this.props.onChange({display_submit: false});
         }
     },
-  // update 'state properties': add, or remove additional input elements
+  // update 'state properties': index for additional input elements
     handleAddMore: function(event){
         this.state.input_index++;
     },
     handleRemove: function(event){
-        this.state.input_index--;
+        if (this.state.input_index > 0) {
+            this.state.input_index--;
+        }
     },
   // triggered when 'state properties' change
     render: function(){
