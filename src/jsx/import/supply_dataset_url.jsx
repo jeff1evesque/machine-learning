@@ -41,7 +41,7 @@ var SupplyDatasetUrl = React.createClass({
         });
 
         {/* check if every element is 'true' */}
-        var datasetBoolean = submitArray.every(function(element) {
+        var datasetBoolean = datasetArray.every(function(element) {
             return element == true;
         });
 
