@@ -12,16 +12,17 @@ var SupplyDatasetUrl = React.createClass({
     getInitialState: function() {
         return {
             value: null,
-            input_index: 1
+            additional_input: []
         };
     },
   // update 'state properties': index for additional input elements
     handleAddMore: function(event){
-        this.state.input_index++;
+        this.state.additional_input.push(true);
     },
     handleRemove: function(event){
-        if (this.state.input_index > 1) {
-            this.state.input_index--;
+        var elements = this.state.additional_input;
+        if (elements.length > 1) {
+            elements.pop();
         }
     },
   // update 'state properties': allow parent component(s) to access properties
@@ -53,17 +54,17 @@ var SupplyDatasetUrl = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        var inputElements = this.state.array_input;
+        var inputs = this.state.additional_input;
 
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' onChange={this.validUrlEntered} value={this.state.value_dataset_0} />
+                <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-xml' onChange={this.validUrlEntered} value={this.state.value} />
 
                 {/* array components require unique 'key' value */}
-                {for (index = 0; this.state.input_index < index; index++) {
+                {inputs && inputs.map(function(value, index){ 
                     return <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-url' key={index} onChange={this.validUrlEntered} value={this.state['value_dataset_' + index.toString()]} />;
-                }.bind(this)}
+                }.bind(this))}
 
                 <input type='button' value='Add more' className='add-element svm-dataset-xml-add' onClick={handleAddMore} />
                 <input type='button' value='Remove' className='remove-element svm-dataset-xml-remove' onClick={handleRemove} />
