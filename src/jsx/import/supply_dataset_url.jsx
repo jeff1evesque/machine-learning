@@ -17,12 +17,17 @@ var SupplyDatasetUrl = React.createClass({
     },
   // update 'state properties': index for additional input elements
     handleAddMore: function(event){
-        this.state.additional_input.push(true);
+        var elements = this.state.additional_input;
+        elements.push(true);
+        this.setState({additional_input: elements})
+
+        this.setState({additional_input: this.state.additional_input.push(true)});
     },
     handleRemove: function(event){
         var elements = this.state.additional_input;
         if (elements.length > 1) {
             elements.pop();
+            this.setState({additional_input: elements});
         }
     },
   // update 'state properties': allow parent component(s) to access properties
