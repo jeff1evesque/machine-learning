@@ -27,10 +27,11 @@ var SupplyDatasetUrl = React.createClass({
         if (elements.length > 0) {
             elements.pop();
             this.setState({additional_elements: elements});
+            this.validUrlEntered();
         }
     },
   // update 'state properties': allow parent component(s) to access properties
-    validUrlEntered: function(event){
+    validUrlEntered: function(){
         {/* get array of input elements, by classname */}
         var datasetNodeList = document.getElementsByClassName('svm-dataset-url');
 
