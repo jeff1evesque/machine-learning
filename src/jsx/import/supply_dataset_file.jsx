@@ -13,8 +13,22 @@ var SupplyDatasetFile = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: null
+            value: null,
+            additional_elements: []
         };
+    },
+  // update 'state properties': index for additional input elements
+    handleAddMore: function(event){
+        var elements = this.state.additional_elements;
+        elements.push(true);
+        this.setState({additional_elements: elements});
+    },
+    handleRemove: function(event){
+        var elements = this.state.additional_elements;
+        if (elements.length > 0) {
+            elements.pop();
+            this.setState({additional_elements: elements});
+        }
     },
   // update 'state properties': allow parent component(s) to access properties
     validStringEntered: function(event){
