@@ -12,20 +12,20 @@ var SupplyDatasetUrl = React.createClass({
     getInitialState: function() {
         return {
             value: null,
-            additional_input: []
+            additional_elements: []
         };
     },
   // update 'state properties': index for additional input elements
     handleAddMore: function(event){
-        var elements = this.state.additional_input;
+        var elements = this.state.additional_elements;
         elements.push(true);
-        this.setState({additional_input: elements});
+        this.setState({additional_elements: elements});
     },
     handleRemove: function(event){
-        var elements = this.state.additional_input;
+        var elements = this.state.additional_elements;
         if (elements.length > 0) {
             elements.pop();
-            this.setState({additional_input: elements});
+            this.setState({additional_elements: elements});
         }
     },
   // update 'state properties': allow parent component(s) to access properties
@@ -57,7 +57,7 @@ var SupplyDatasetUrl = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        var inputs = this.state.additional_input;
+        var inputs = this.state.additional_elements;
 
         return(
             <fieldset className='fieldset-supply-dataset'>
