@@ -68,7 +68,7 @@ var SupplyDatasetFile = React.createClass({
 
                 {/* array components require unique 'key' value */}
                 {inputs && inputs.map(function(value, index){
-                    return <input type='file' name='svm_dataset[]' className='svm-dataset-file' key={index} onChange={this.validUrlEntered} value={this.state['value_dataset_' + index.toString()]} />;
+                    return <input type='file' name='svm_dataset[]' className='svm-dataset-file' key={index} onChange={this.validFileEntered} value={this.state['value_dataset_' + index.toString()]} />;
                 }.bind(this))}
 
                 <input type='button' value='Add more' onClick={this.handleAddMore} />
