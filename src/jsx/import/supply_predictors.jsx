@@ -38,10 +38,10 @@ var SupplyPredictors = React.createClass({
         });
 
         if (submitBoolean) {
-            this.props.onChange({display_submit: true});
+            this.props.onChange({submitted_proper_predictor: true});
         }
         else {
-            this.props.onChange({display_submit: false});
+            this.props.onChange({submitted_proper_predictor: false});
         }
     },
   // triggered when 'state properties' change
@@ -54,7 +54,7 @@ var SupplyPredictors = React.createClass({
 
                 {/* array components require unique 'key' value */}
                 {options && options.map(function(value, index){ 
-                    return <input type='text' name='prediction_input[]' className='predictionInput' placeholder={value} key={index} onChange={this.validIntegerEntered} value={this.state['value_predictor' + index.toString()]} />;
+                    return <input type='text' name='prediction_input[]' className='predictionInput' placeholder={value} key={index} onChange={this.validIntegerEntered} value={this.state['value_predictor_' + index.toString()]} />;
                 }.bind(this))}
 
             </fieldset>
