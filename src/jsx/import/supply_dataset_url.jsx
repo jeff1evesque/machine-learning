@@ -19,9 +19,7 @@ var SupplyDatasetUrl = React.createClass({
     handleAddMore: function(event){
         var elements = this.state.additional_input;
         elements.push(true);
-        this.setState({additional_input: elements})
-
-        this.setState({additional_input: this.state.additional_input.push(true)});
+        this.setState({additional_input: elements});
     },
     handleRemove: function(event){
         var elements = this.state.additional_input;
