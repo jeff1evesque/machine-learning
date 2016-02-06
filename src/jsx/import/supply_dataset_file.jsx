@@ -35,7 +35,7 @@ var SupplyDatasetFile = React.createClass({
   // update 'state properties': allow parent component(s) to access properties
     validFileEntered: function(){
         {/* get array of input elements, by classname */}
-        var datasetNodeList = document.getElementsByClassName('svm-dataset-url');
+        var datasetNodeList = document.getElementsByClassName('svm-dataset-file');
 
         {/* if input value is empty, store 'false' within corresponding array */}
         var datasetArray = Array.prototype.map.call(datasetNodeList, function(element) {
