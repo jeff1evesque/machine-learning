@@ -31,15 +31,38 @@ var SupplyDatasetFile = React.createClass({
         }
     },
   // update 'state properties': allow parent component(s) to access properties
-    validStringEntered: function(event){
-        this.props.onChange({display_submit: event.target.files.length !== 0});
+    validFileEntered: function(event){
+        {/* get array of input elements, by classname */}
+        var datasetNodeList = document.getElementsByClassName('svm-dataset-url');
+
+        {/* if input value is empty, store 'false' within corresponding array */}
+        var datasetArray = Array.prototype.map.call(datasetNodeList, function(element) {
+            if (!element.value) {
+                return false;
+            }
+            else {
+                return true;
+            }
+        });
+
+        {/* check if every element is 'true' */}
+        var datasetBoolean = datasetArray.every(function(element) {
+            return element == true;
+        });
+
+        if (datasetBoolean) {
+            this.props.onChange({submitted_proper_dataset: true});
+        }
+        else {
+            this.props.onChange({submitted_proper_dataset: false});
+        }
     },
   // triggered when 'state properties' change
     render: function(){
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input type='file' name='svm_dataset[]' className='svm-dataset-file' onChange={this.validStringEntered} value={this.state.value} />
+                <input type='file' name='svm_dataset[]' className='svm-dataset-file' onChange={this.validFileEntered} value={this.state.value} />
                 <input type='button' value='Add more' className='add-element svm-dataset-file-add' />
                 <input type='button' value='Remove' className='remove-element svm-dataset-file-remove' />
                 <p className='form-note'>*<span className='bold'>Note:</span> Uploaded file(s) must be formatted as <span className='italic'>csv</span>, <span className='italic'>json</span>, or <span className='italic'>xml</span> format.</p>
