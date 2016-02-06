@@ -23,7 +23,7 @@ var SupplyDatasetUrl = React.createClass({
     },
     handleRemove: function(event){
         var elements = this.state.additional_input;
-        if (elements.length > 1) {
+        if (elements.length > 0) {
             elements.pop();
             this.setState({additional_input: elements});
         }
