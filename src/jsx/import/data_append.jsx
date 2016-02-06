@@ -51,8 +51,8 @@ var DataAppend = React.createClass({
     },
   // update 'state properties' from children component (i.e. 'validStringEntered')
     displaySubmit: function(event) {
-        if (event.display_submit) {
-            this.props.onChange({render_submit: event.display_submit});
+        if (event.submitted_proper_dataset) {
+            this.props.onChange({render_submit: event.submitted_proper_dataset});
         }
         else {
             this.props.onChange({render_submit: false});
