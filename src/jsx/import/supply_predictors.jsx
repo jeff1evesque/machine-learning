@@ -38,10 +38,10 @@ var SupplyPredictors = React.createClass({
         });
 
         if (submitBoolean) {
-            this.props.onChange({display_submit: true});
+            this.props.onChange({submitted_proper_predictor: true});
         }
         else {
-            this.props.onChange({display_submit: false});
+            this.props.onChange({submitted_proper_predictor: false});
         }
     },
   // triggered when 'state properties' change
