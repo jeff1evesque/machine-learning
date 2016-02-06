@@ -28,7 +28,6 @@ var SupplyDatasetUrl = React.createClass({
             elements.pop();
             this.setState({additional_elements: elements});
         }
-        this.props.onChange({submitted_proper_predictor: false});
     },
   // update 'state properties': allow parent component(s) to access properties
     validUrlEntered: function(event){
