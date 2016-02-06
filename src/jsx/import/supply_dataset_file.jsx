@@ -26,10 +26,29 @@ var SupplyDatasetFile = React.createClass({
     },
     handleRemove: function(event){
         var elements = this.state.additional_elements;
+        var datasetBoolean = true;
+
         if (elements.length > 0) {
             elements.pop();
             this.setState({additional_elements: elements});
-            this.validFileEntered();
+
+            {/* define boolean to indicate all files properly defined */}
+            for (var index = 0; index < elements.length; index++) {
+                var inputValue = this.state['value_dataset_' + index.toString()];
+
+                if (typeof inputValue == 'undefined') {
+                    datasetBoolean = false;
+                    return datasetBoolean;
+                }
+	        }
+
+            {/* allow parent component to know all files properly defined */}
+            if (datasetBoolean) {
+                this.props.onChange({submitted_proper_dataset: true});
+            }
+            else {
+                this.props.onChange({submitted_proper_dataset: false});
+            }
         }
     },
   // update 'state properties': allow parent component(s) to access properties
