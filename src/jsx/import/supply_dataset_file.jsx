@@ -22,6 +22,7 @@ var SupplyDatasetFile = React.createClass({
         var elements = this.state.additional_elements;
         elements.push(true);
         this.setState({additional_elements: elements});
+        this.props.onChange({submitted_proper_predictor: false});
     },
     handleRemove: function(event){
         var elements = this.state.additional_elements;
@@ -29,6 +30,7 @@ var SupplyDatasetFile = React.createClass({
             elements.pop();
             this.setState({additional_elements: elements});
         }
+        this.props.onChange({submitted_proper_predictor: false});
     },
   // update 'state properties': allow parent component(s) to access properties
     validFileEntered: function(event){
