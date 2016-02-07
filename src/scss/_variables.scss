@@ -1,5 +1,7 @@
-// variable.scss: contains general scss variables used throughout other scss
-//                files.
+// _variables.scss: contains general scss variables.
+//                  
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
 //
 // Note: '//' comment(s), will not appear in the corresponding compiled css,
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
