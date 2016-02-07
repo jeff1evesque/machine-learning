@@ -62,6 +62,9 @@ var SelectSession = React.createClass({
                 'processData': false,
             };
 
+          // boolean to show ajax spinner
+              this.setState({display_spinner: true});
+
           // asynchronous callback: ajax 'done' promise
            ajaxCaller(function (asynchObject) {
             // Append to DOM
@@ -73,6 +76,8 @@ var SelectSession = React.createClass({
                 else {
                     this.setState({ajax_done_result: null});
                 }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
             }.bind(this),
           // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
@@ -84,6 +89,8 @@ var SelectSession = React.createClass({
                     this.setState({ajax_fail_error: asynchError});
                     console.log('Error Thrown: ' + asynchError);
                 }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
             }.bind(this),
           // pass ajax arguments
             ajaxArguments);
@@ -101,12 +108,19 @@ var SelectSession = React.createClass({
             var SubmitButton = 'span';
         }
 
+        if (this.state.display_spinner) {
+            var ajaxStatus = 'sending';
+        }
+        else {
+            var ajaxStatus = 'waiting';
+        }
+
         {/* return:
             @svmForm, attribute is used within 'handleSubmit' callback
             @formResult, is accessible within child component as 'this.props.formResult'
         */}
         return(
-            <form onSubmit={this.handleSubmit} ref='svmForm'>
+            <form className={ajaxStatus} onSubmit={this.handleSubmit} ref='svmForm'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
