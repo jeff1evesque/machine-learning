@@ -15,6 +15,7 @@ import DataUploadNew from './import/data_upload_new.jsx';
 import DataUploadAppend from './import/data_upload_append.jsx';
 import Submit from './import/submit.jsx';
 import ResultDisplay from './import/result_display.jsx';
+import Spinner from './import/spinner.jsx';
 
 var SelectSession = React.createClass({
   // initial 'state properties'
@@ -109,10 +110,10 @@ var SelectSession = React.createClass({
         }
 
         if (this.state.display_spinner) {
-            var ajaxStatus = 'sending';
+            var AjaxSpinner = Spinner;
         }
         else {
-            var ajaxStatus = 'waiting';
+            var AjaxSpinner = 'span';
         }
 
         {/* return:
@@ -120,7 +121,7 @@ var SelectSession = React.createClass({
             @formResult, is accessible within child component as 'this.props.formResult'
         */}
         return(
-            <form className={ajaxStatus} onSubmit={this.handleSubmit} ref='svmForm'>
+            <form onSubmit={this.handleSubmit} ref='svmForm'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
@@ -136,6 +137,7 @@ var SelectSession = React.createClass({
                 <SessionType onChange={this.displaySubmit} />
                 <SubmitButton onChange={this.sendData} />
                 <Result formResult={this.state.ajax_done_result} />
+                <AjaxSpinner />
             </form>
         );
     },
