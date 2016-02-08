@@ -87,13 +87,14 @@ var SupplyDatasetFile = React.createClass({
                 <legend>Supply Dataset</legend>
                 <input type='file' name='svm_dataset[]' className='svm-dataset-file' onChange={this.validFileEntered} value={this.state.value} />
 
+                <input type='button' value='Add more' onClick={this.handleAddMore} />
+                <input type='button' value='Remove' onClick={this.handleRemove} />
+
                 {/* array components require unique 'key' value */}
                 {inputs && inputs.map(function(value, index){
                     return <input type='file' name='svm_dataset[]' className='svm-dataset-file' key={index} onChange={this.validFileEntered} value={this.state['value_dataset_' + index.toString()]} />;
                 }.bind(this))}
 
-                <input type='button' value='Add more' onClick={this.handleAddMore} />
-                <input type='button' value='Remove' onClick={this.handleRemove} />
                 <p className='form-note'>*<span className='bold'>Note:</span> Uploaded file(s) must be formatted as <span className='italic'>csv</span>, <span className='italic'>json</span>, or <span className='italic'>xml</span> format.</p>
             </fieldset>
         );
