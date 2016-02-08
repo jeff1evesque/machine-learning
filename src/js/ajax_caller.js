@@ -26,23 +26,20 @@
       contentType: args.contentType,
       processData: args.processData,
       beforeSend: function() {
-        ajaxLoader($('form'));
+
+        // asynchronous callback
+        // callbackBeforeSend();
+
       }
     }).done(function(data) {
 
       // asynchronous callback
       callbackDone(data);
 
-      // remove ajax overlay
-      $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
-
     }).fail(function(jqXHR, textStatus, errorThrown) {
 
       // asynchronous callback
       callbackFail(textStatus, errorThrown);
-
-      // remove ajax overlay
-      $('form .ajax-overlay').fadeOut(200, function() { $(this).remove(); });
 
     });
   }

@@ -1,0 +1,27 @@
+// _spinner.scss: generates css solution for ajax spinner.
+//
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
+
+.sending {
+  animation: rotation .6s infinite linear;
+  border-bottom: 6px solid $baby-blue-transparent;
+  border-left: 6px solid $baby-blue-transparent;
+  border-radius: 100%;
+  border-right: 6px solid $baby-blue-transparent;
+  border-top: 6px solid $baby-blue-solid;
+  height: 60px;
+  left: 40%;
+  margin: 0 auto;
+  position: absolute;
+  top: 40%;
+  width: 60px;
+}
+
+@keyframes rotation {
+  from {transform: rotate(0deg);}
+  to {transform: rotate(359deg);}
+}

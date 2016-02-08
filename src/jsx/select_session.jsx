@@ -15,6 +15,7 @@ import DataUploadNew from './import/data_upload_new.jsx';
 import DataUploadAppend from './import/data_upload_append.jsx';
 import Submit from './import/submit.jsx';
 import ResultDisplay from './import/result_display.jsx';
+import Spinner from './import/spinner.jsx';
 
 var SelectSession = React.createClass({
   // initial 'state properties'
@@ -62,6 +63,9 @@ var SelectSession = React.createClass({
                 'processData': false,
             };
 
+          // boolean to show ajax spinner
+              this.setState({display_spinner: true});
+
           // asynchronous callback: ajax 'done' promise
            ajaxCaller(function (asynchObject) {
             // Append to DOM
@@ -73,6 +77,8 @@ var SelectSession = React.createClass({
                 else {
                     this.setState({ajax_done_result: null});
                 }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
             }.bind(this),
           // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
@@ -84,6 +90,8 @@ var SelectSession = React.createClass({
                     this.setState({ajax_fail_error: asynchError});
                     console.log('Error Thrown: ' + asynchError);
                 }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
             }.bind(this),
           // pass ajax arguments
             ajaxArguments);
@@ -99,6 +107,13 @@ var SelectSession = React.createClass({
         }
         else {
             var SubmitButton = 'span';
+        }
+
+        if (this.state.display_spinner) {
+            var AjaxSpinner = Spinner;
+        }
+        else {
+            var AjaxSpinner = 'span';
         }
 
         {/* return:
@@ -122,6 +137,7 @@ var SelectSession = React.createClass({
                 <SessionType onChange={this.displaySubmit} />
                 <SubmitButton onChange={this.sendData} />
                 <Result formResult={this.state.ajax_done_result} />
+                <AjaxSpinner />
             </form>
         );
     },
