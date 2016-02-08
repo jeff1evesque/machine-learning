@@ -21,12 +21,16 @@
   font-weight: 700;
 }
 
-.svm-dataset-url-add:first-of-type,
-.svm-dataset-file-add:first-of-type,
-.svm-dep-variable-add:first-of-type,
-.svm-indep-variable-add:first-of-type {
+.svm-dataset-url:first-of-type,
+.svm-dataset-file:first-of-type {
   clear: both;
   float: left;
+}
+
+.svm-dataset-url,
+.svm-dataset-file {
+  clear: both;
+  display: block;
 }
 
 form {
