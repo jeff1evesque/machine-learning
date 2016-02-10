@@ -7,7 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import SupplyPredictors from './supply_predictors.jsx';
+import SupplyPredictors from '../input-data/supply_predictors.jsx';
 
 var ModelPredict = React.createClass({
   // initial 'state properties'
