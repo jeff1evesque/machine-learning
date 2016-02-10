@@ -10,8 +10,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import SupplyDatasetFile from './supply_dataset_file.jsx';
-import SupplyDatasetUrl from './supply_dataset_url.jsx';
+import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
+import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
 
 var DataAppend = React.createClass({
   // initial 'state properties'
