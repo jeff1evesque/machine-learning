@@ -8,7 +8,7 @@
  */
 
 import ModelGenerate from './import/session-type/model_generate.jsx';
-import ModelPredict from './import/model_predict.jsx';
+import ModelPredict from './import/session-type/model_predict.jsx';
 import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
 import DataUploadNew from './import/input-type/data_upload_new.jsx';
