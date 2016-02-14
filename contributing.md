@@ -39,12 +39,12 @@ A non-descriptive issue title is generally used, when multiple files will be
 
 - filename references should *always* be wrapped by single tildas
 - codeblocks should *always* be wrapped by triple tildas
- ([fenced code block](https://help.github.com/articles/github-flavored-markdown/#fenced-code-blocks)), where the first set of triple tildas is followed by the
- language being used ([syntax highlighted](https://help.github.com/articles/github-flavored-markdown/#syntax-highlighting))
+ ([fenced code block](https://help.github.com/articles/creating-and-highlighting-code-blocks/#fenced-code-blocks)), where the first set of triple tildas is followed by the
+ language being used ([syntax highlighted](https://help.github.com/articles/creating-and-highlighting-code-blocks/#syntax-highlighting))
 - one line code snippets must be wrapped by single tildas
- ([inline format](https://help.github.com/articles/markdown-basics/#inline-formats))
+ ([inline format](https://help.github.com/articles/basic-writing-and-formatting-syntax/#quoting-code))
 - when referring to another issue, always provide a reference to it. This can
- be done by either [linking](https://help.github.com/articles/markdown-basics/#links)
+ be done by either [linking](https://help.github.com/articles/autolinked-references-and-urls/#issues-and-pull-requests)
  keywords within *issue body*, or by simply providing the issue number (i.e. `#230`)
 
 ## Creating GIT Branch
