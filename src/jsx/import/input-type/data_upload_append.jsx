@@ -7,6 +7,9 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import checkValidInt from './import/validator/valid_int.js';
+import checkValidString from './import/validator/valid_string.js';
+
 var DataUploadAppend = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
@@ -16,11 +19,21 @@ var DataUploadAppend = React.createClass({
         };
     },
   // update 'state properties'
-    change: function(event){
-        this.setState({
-            value_session_id: event.target.value_session_id,
-            value_dataset_type: event.target.value_dataset_type
-        });
+    changeSessionId: function(event){
+        var sessionId = event.target.value_session_id;
+        if (checkValidInt(sessionId)) {
+            this.setState({
+                value_session_id: sessionId
+            });
+        }
+    },
+    changeDatasetType: function(event){
+        var datasetType = event.target.value_dataset_type;
+        if (checkValidString(datasetType)) (
+            this.setState({
+                value_dataset_type: datasetType
+            });
+        }
     },
   // triggered when 'state properties' change
     render: function(){
@@ -30,10 +43,10 @@ var DataUploadAppend = React.createClass({
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select past session, and upload type</p>
-                    <select name='svm_session_id' autoComplete='off' onChange={this.change} value={this.state.value_session_id}>
+                    <select name='svm_session_id' autoComplete='off' onChange={this.changeSessionId} value={this.state.value_session_id}>
                         <option value='' defaultValue>--Select--</option>
                     </select>
-                    <select name='svm_dataset_type' autoComplete='off' onChange={this.change} value={this.state.value_dataset_value}>
+                    <select name='svm_dataset_type' autoComplete='off' onChange={this.changeDatasetType} value={this.state.value_dataset_type}>
                         <option value='' defaultValue>--Select--</option>
                         <option value='file_upload'>Upload file</option>
                         <option value='dataset_url'>Dataset URL</option>
