@@ -7,14 +7,17 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import checkValidString from './import/validator/valid_string.js';
+
 var ResultDisplay = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var serverObject = this.props.formResult;
+        var serverResult = serverObject.result;
         var displayResult = false;
 
-        if (serverObject && serverObject.result && serverObject.result.result) {
-            var result = serverObject.result.result;
+        if (serverObject && serverResult && serverResult.result && checkValidString(serverResult.result)) {
+            var result = serverResult.result;
             displayResult = true;
         }
 
