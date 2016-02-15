@@ -9,6 +9,6 @@ function validator(value) {
   }
 }
 
-export function checkValidInt(value) {
+export function checkValidString(value) {
   return validator(value);
 }
