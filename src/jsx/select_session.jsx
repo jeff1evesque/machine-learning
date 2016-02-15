@@ -16,7 +16,7 @@ import DataUploadAppend from './import/input-type/data_upload_append.jsx';
 import Submit from './import/general/submit.jsx';
 import ResultDisplay from './import/result/result_display.jsx';
 import Spinner from './import/general/spinner.jsx';
-import customName from './import/validator/valid_string.js';
+import checkValidString from './import/validator/valid_string.js';
 
 var SelectSession = React.createClass({
   // initial 'state properties'
