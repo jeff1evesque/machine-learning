@@ -10,6 +10,6 @@ function validator(value) {
   }
 }
 
-export function checkValidInt(value) {
+export function checkValidFile(value) {
   return validator(value);
 }
