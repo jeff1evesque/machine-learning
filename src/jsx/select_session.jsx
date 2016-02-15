@@ -16,6 +16,7 @@ import DataUploadAppend from './import/input-type/data_upload_append.jsx';
 import Submit from './import/general/submit.jsx';
 import ResultDisplay from './import/result/result_display.jsx';
 import Spinner from './import/general/spinner.jsx';
+import customName from './import/validator/valid_string.js';
 
 var SelectSession = React.createClass({
   // initial 'state properties'
@@ -30,10 +31,12 @@ var SelectSession = React.createClass({
     },
   // update 'state properties'
     changeSessionType: function(event){
-        this.setState({ajax_done_result: null});
-        this.setState({value_session_type: event.target.value});
-        this.setState({submit: false});
-        this.setState({send_data: false});
+        if (checkValidString(event.target.value)) {
+            this.setState({ajax_done_result: null});
+            this.setState({value_session_type: event.target.value});
+            this.setState({submit: false});
+            this.setState({send_data: false});
+        }
     },
   // update 'state properties' from children component (i.e. 'render_submit')
     displaySubmit: function(event) {
