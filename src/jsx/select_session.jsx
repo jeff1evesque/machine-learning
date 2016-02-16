@@ -11,8 +11,6 @@ import ModelGenerate from './import/session-type/model_generate.jsx';
 import ModelPredict from './import/session-type/model_predict.jsx';
 import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
-import DataUploadNew from './import/input-type/data_upload_new.jsx';
-import DataUploadAppend from './import/input-type/data_upload_append.jsx';
 import Submit from './import/general/submit.jsx';
 import ResultDisplay from './import/result/result_display.jsx';
 import Spinner from './import/general/spinner.jsx';
