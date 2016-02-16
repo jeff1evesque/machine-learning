@@ -12,10 +12,7 @@
     "plugins": [
         "react"
     ],
-    "ecmaFeatures": {
-        "jsx": true,
-        "modules": true
-    },
+    "parser": "babel-eslint",
     "rules": {
         "react/display-name": 1,
         "react/forbid-prop-types": 1,
