@@ -7,7 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import checkValidString from './import/validator/valid_string.js';
+import checkValidString from './../validator/valid_string.js';
 
 var ResultDisplay = React.createClass({
   // triggered when 'state properties' change
