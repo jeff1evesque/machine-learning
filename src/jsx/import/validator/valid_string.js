@@ -5,6 +5,6 @@ function validator(value) {
   return typeof value === 'string';
 }
 
-export function checkValidString(value) {
+export default function checkValidString(value) {
   return validator(value);
 }

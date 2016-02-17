@@ -18,6 +18,6 @@ function validator(value) {
   }
 }
 
-export function checkValidFloat(value) {
+export default function checkValidFloat(value) {
   return validator(value);
 }

@@ -6,6 +6,6 @@ function validator(value) {
   return urlregex.test(value);
 }
 
-export function checkValidUrl(value) {
+export default function checkValidUrl(value) {
   return validator(value);
 }
