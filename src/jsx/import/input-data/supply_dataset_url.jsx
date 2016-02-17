@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import checkValidUrl from './../validator/valid_url.js';
+
 var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
