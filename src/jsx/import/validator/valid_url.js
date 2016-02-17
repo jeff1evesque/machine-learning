@@ -9,6 +9,6 @@ function validator(value) {
     return (false);
 }
 
-export function checkValidInt(value) {
+export function checkValidUrl(value) {
   return validator(value);
 }
