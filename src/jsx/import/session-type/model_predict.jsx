@@ -8,6 +8,7 @@
  */
 
 import SupplyPredictors from '../input-data/supply_predictors.jsx';
+import checkValidInt from './../validator/valid_int.js';
 
 var ModelPredict = React.createClass({
   // initial 'state properties'
@@ -25,7 +26,7 @@ var ModelPredict = React.createClass({
     changeModelId: function(event){
         var modelId = event.target.value;
 
-        if (modelId && modelId != '--Select--') {
+        if (modelId && modelId != '--Select--' && checkValidInt(modelId)) {
             this.setState({value_model_id: event.target.value});
         }
         else {
