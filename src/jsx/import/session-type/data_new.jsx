@@ -9,6 +9,7 @@
 
 import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
 import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
+import checkValidString from './../validator/valid_string.js';
 
 var DataNew = React.createClass({
   // initial 'state properties'
@@ -23,7 +24,7 @@ var DataNew = React.createClass({
     changeDatasetType: function(event){
         var datasetType = event.target.value;
 
-        if (datasetType && datasetType != '--Select--') {
+        if (datasetType && datasetType != '--Select--' && checkValidString(datasetType)) {
             this.setState({value_dataset_type: event.target.value});
             this.props.onChange({render_submit: false});
         }
@@ -33,7 +34,7 @@ var DataNew = React.createClass({
         }
     },
     changeTitle: function(event){
-        if (event.target.value) {
+        if (event.target.value && checkValidString(event.target.value)) {
             this.setState({value_title: event.target.value});
         }
         else {
