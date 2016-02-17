@@ -51,7 +51,7 @@ var SupplyDatasetUrl = React.createClass({
         {/* get array of input elements, by classname */}
         var datasetNodeList = document.getElementsByClassName('svm-dataset-url');
 
-        {/* if input value is a valid url store 'true' within corresponding array */}
+        {/* if input value is a valid url, store 'true', within corresponding array */}
         var datasetArray = Array.prototype.map.call(datasetNodeList, function(element) {
             if (element.value && checkValidUrl(element.value)) {
                 return true;
