@@ -24,7 +24,7 @@ var SupplyPredictors = React.createClass({
         {/* get array of input elements, by classname */}
         var predictionNodeList = document.getElementsByClassName('predictionInput');
 
-        {/* if input value is empty, store 'false' within corresponding array */}
+        {/* if input value is a valid fload, store 'true', within corresponding array */}
         var submitArray = Array.prototype.map.call(predictionNodeList, function(element) {
             if (element.value && checkValidFloat(element.value)) {
                 return true;
