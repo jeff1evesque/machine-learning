@@ -2,11 +2,7 @@
  * valid_int.js: check if provided argument is int type.
  */
 function validator(value) {
-  if (Math.round(parseInt(value)) === parseInt(value)) {
-    return true;
-  } else {
-    return false;
-  }
+  return Math.round(parseInt(value)) === parseInt(value);
 }
 
 export function checkValidInt(value) {
