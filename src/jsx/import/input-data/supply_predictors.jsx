@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import checkValidFloat from './../validator/valid_float.js';
+
 var SupplyPredictors = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
@@ -22,13 +24,13 @@ var SupplyPredictors = React.createClass({
         {/* get array of input elements, by classname */}
         var predictionNodeList = document.getElementsByClassName('predictionInput');
 
-        {/* if input value is empty, store 'false' within corresponding array */}
+        {/* if input value is a valid float, store 'true', within corresponding array */}
         var submitArray = Array.prototype.map.call(predictionNodeList, function(element) {
-            if (!element.value) {
-                return false;
+            if (element.value && checkValidFloat(element.value)) {
+                return true;
             }
             else {
-                return true;
+                return false;
             }
         });
 

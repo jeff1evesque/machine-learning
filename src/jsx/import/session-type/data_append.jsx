@@ -12,6 +12,8 @@
 
 import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
 import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
+import checkValidString from './../validator/valid_string.js';
+import checkValidInt from './../validator/valid_int.js';
 
 var DataAppend = React.createClass({
   // initial 'state properties'
@@ -30,7 +32,7 @@ var DataAppend = React.createClass({
     changeSessionId: function(event){
         var sessionId = event.target.value;
 
-        if (sessionId && sessionId != '--Select--') {
+        if (sessionId && sessionId != '--Select--' && checkValidInt(sessionId)) {
             this.setState({value_session_id: event.target.value});
         }
         else {
@@ -41,7 +43,7 @@ var DataAppend = React.createClass({
     changeDatasetType: function(event){
         var datasetType = event.target.value;
 
-        if (datasetType && datasetType != '--Select--') {
+        if (datasetType && datasetType != '--Select--' && checkValidString(datasetType)) {
             this.setState({value_dataset_type: event.target.value});
             this.props.onChange({render_submit: false});
         }

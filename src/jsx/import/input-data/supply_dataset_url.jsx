@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import checkValidUrl from './../validator/valid_url.js';
+
 var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
@@ -49,13 +51,13 @@ var SupplyDatasetUrl = React.createClass({
         {/* get array of input elements, by classname */}
         var datasetNodeList = document.getElementsByClassName('svm-dataset-url');
 
-        {/* if input value is empty, store 'false' within corresponding array */}
+        {/* if input value is a valid url, store 'true', within corresponding array */}
         var datasetArray = Array.prototype.map.call(datasetNodeList, function(element) {
-            if (!element.value) {
-                return false;
+            if (element.value && checkValidUrl(element.value)) {
+                return true;
             }
             else {
-                return true;
+                return false;
             }
         });
 

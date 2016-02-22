@@ -7,6 +7,9 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import checkValidString from './../validator/valid_string.js';
+import checkValidInt from './../validator/valid_int.js';
+
 var ModelGenerate = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
@@ -25,7 +28,7 @@ var ModelGenerate = React.createClass({
         var sessionId = event.target.value;
         var modelType = this.state.value_model_type;
 
-        if (sessionId && Number(sessionId)) {
+        if (sessionId && checkValidInt(sessionId)) {
             this.setState({value_session_id: sessionId});
 
             if (modelType != '--Select--') {
@@ -44,7 +47,7 @@ var ModelGenerate = React.createClass({
         var sessionId = this.state.value_session_id;
         var modelType = event.target.value;
 
-        if (modelType && modelType != '--Select--') {
+        if (modelType && modelType != '--Select--' && checkValidString(modelType)) {
             this.setState({value_model_type: event.target.value});
 
             if (Number(sessionId)) {
