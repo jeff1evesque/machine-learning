@@ -12,6 +12,7 @@ import checkValidString from './../validator/valid_string.js';
 var ResultDisplay = React.createClass({
   // triggered when 'state properties' change
     render: function(){
+      // variables
         var serverObject  = this.props.formResult ? this.props.formResult : false;
         var serverResult  = serverObject.result ? serverObject.result : false;
         var displayResult = false;
@@ -21,6 +22,7 @@ var ResultDisplay = React.createClass({
             displayResult = true;
         }
 
+      // display result
         if (displayResult) {
             return(
                 <fieldset className='fieldset-prediction-result'>
