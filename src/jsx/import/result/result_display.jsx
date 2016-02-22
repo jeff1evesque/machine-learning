@@ -12,8 +12,8 @@ import checkValidString from './../validator/valid_string.js';
 var ResultDisplay = React.createClass({
   // triggered when 'state properties' change
     render: function(){
-        var serverObject = this.props.formResult;
-        var serverResult = serverObject.result;
+        var serverObject  = this.props.formResult ? this.props.formResult : false;
+        var serverResult  = serverObject.result ? serverObject.result : false;
         var displayResult = false;
 
         if (serverObject && serverResult && serverResult.result && checkValidString(serverResult.result)) {
