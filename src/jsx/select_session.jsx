@@ -29,11 +29,14 @@ var SelectSession = React.createClass({
     },
   // update 'state properties'
     changeSessionType: function(event){
+      // reset value(s)
+        this.setState({ajax_done_result: null});
+        this.setState({submit: false});
+        this.setState({send_data: false});
+
+      // define sessionType
         if (event.target.value && checkValidString(event.target.value)) {
-            this.setState({ajax_done_result: null});
             this.setState({value_session_type: event.target.value});
-            this.setState({submit: false});
-            this.setState({send_data: false});
         }
     },
   // update 'state properties' from children component (i.e. 'render_submit')
