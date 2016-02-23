@@ -51,34 +51,50 @@ class install_db {
     }
 }
 
-## install mariadb bindings
-class install_bindings {
+## install mariadb client
+class install_client {
+    ## set dependency
+    require install_db
+
     ## mysql::client: install, and configure mariadb-client
     class {'::mysql::client':
         package_name => 'mariadb-client',
-        require      => Class['::mysql::server'],
+    }
+}
+
+## install mariad bindings
+class install_bindings {
+    ## set dependency
+    require install_db
+    require install_client
+
+    class {'::mysql::bindings':
+        python_enable => true,
+    }
+}
+
+## create database tables
+class create_database {
+    ## set dependency
+    require install_db
+    require install_client
+    require isntall_bindings
+
+    ## define database tables
+    #
+    #  @require, syntax involves 'Class Containment'. For more information,
+    #      https://puppetlabs.com/blog/class-containment-puppet
+    exec {'create-database-tables':
+        command => 'python setup_tables.py',
+        cwd     => '/vagrant/puppet/scripts/',
     }
 }
 
 ## constructor
 class constructor {
     contain install_db
+    contain install_client
     contain install_bindings
+    contain create_database
 }
 include constructor
-
-## mysql::bindings: install python-mariadb bindings
-class {'::mysql::bindings':
-  python_enable => true,
-  require       => [Class['::mysql::client'], Class['::mysql::server']],
-}
-
-## define database tables
-#
-#  @require, syntax involves 'Class Containment'. For more information,
-#      https://puppetlabs.com/blog/class-containment-puppet
-exec {'create-database-tables':
-  command => 'python setup_tables.py',
-  cwd     => '/vagrant/puppet/scripts/',
-  require => Class['::mysql::bindings::python'],
-}
