@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins = %w(vagrant-r10k vagrant-vbguest)
+  required_plugins = %w(vagrant-r10k vagrant-vbguest vagrant-triggers)
   plugin_installed = false
 
   ## Install Vagrant Plugins
@@ -33,6 +33,12 @@ Vagrant.configure(2) do |config|
   
   ## Update latest version of puppet
   config.vm.provision :shell, :path => "puppet/scripts/puppet_updater.sh"
+
+  ## Create a forwarded port mapping which allows access to a specific port
+  #  within the machine from a port on the host machine. In the example below,
+  #  accessing "localhost:8080" will access port 80 on the guest machine.
+  config.vm.network "forwarded_port", guest: 5000, host: 8080
+  config.vm.network "forwarded_port", guest: 443, host: 8585
 
   ## Run r10k
   config.r10k.puppet_dir = 'puppet'
@@ -99,17 +105,23 @@ Vagrant.configure(2) do |config|
     puppet.module_path    = "puppet/modules"
     puppet.options        = ["--parser", "future"]
   end
+
+  # clean up files on the host after the guest is destroyed
+  config.trigger.after :destroy do
+    run 'rm -Rf log'
+    run 'rm -Rf build'
+    run 'rm -Rf interface/static/css'
+    run 'rm -Rf interface/static/img'
+    run 'rm -Rf interface/static/js'
+    run 'rm -Rf puppet/modules'
+    run 'rm src/js/.gitignore'
+    run 'rm src/js/select_session.js'
+  end
   
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
   # `vagrant box outdated`. This is not recommended.
   # config.vm.box_check_update = false
-
-  ## Create a forwarded port mapping which allows access to a specific port
-  #  within the machine from a port on the host machine. In the example below,
-  #  accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 5000, host: 8080
-  config.vm.network "forwarded_port", guest: 443, host: 8585
 
   # Create a private network, which allows host-only access to the machine
   # using a specific IP.
