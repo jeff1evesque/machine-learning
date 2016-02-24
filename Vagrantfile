@@ -40,10 +40,15 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 5000, host: 8080
   config.vm.network "forwarded_port", guest: 443, host: 8585
 
+  ## ensure puppet/modules directory on the host before 'vagrant up'
+  config.trigger.before :up do
+    run 'mkdir -p puppet/modules'
+  end
+
   ## Run r10k
   config.r10k.puppet_dir = 'puppet'
   config.r10k.puppetfile_path = 'puppet/Puppetfile'
-  
+
   ## Custom Manifest: install needed packages
   #
   #  Note: future parser allow array iteration in the puppet manifest
@@ -104,11 +109,6 @@ Vagrant.configure(2) do |config|
     puppet.manifest_file  = "compile_asset.pp"
     puppet.module_path    = "puppet/modules"
     puppet.options        = ["--parser", "future"]
-  end
-
-  ## ensure puppet/modules directory on the host before 'vagrant up'
-  config.trigger.before :up do
-    run 'mkdir -p puppet/modules'
   end
 
   # clean up files on the host after 'vagrant destroy'
