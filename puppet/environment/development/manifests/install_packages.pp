@@ -43,13 +43,13 @@ Exec {
 
 ## enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
-  command => template('/vagrant/puppet/template/enable_multiverse_1.erb'),
+  command => template('/vagrant/puppet/environment/development/template/enable_multiverse_1.erb'),
   notify  => Exec["build-package-dependencies-${packages_build_size}"],
 }
 
 ## enable 'multiverse' repository (part 2, replace line)
 exec {'enable-multiverse-repository-2':
-  command => template('/vagrant/puppet/template/enable_multiverse_2.erb'),
+  command => template('/vagrant/puppet/environment/development/template/enable_multiverse_2.erb'),
   notify  => Exec["build-package-dependencies-${packages_build_size}"],
 }
 
