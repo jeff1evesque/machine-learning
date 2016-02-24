@@ -69,6 +69,6 @@ class {'::mysql::bindings':
 #      https://puppetlabs.com/blog/class-containment-puppet
 exec {'create-database-tables':
   command => 'python setup_tables.py',
-  cwd     => '/vagrant/puppet/scripts/',
+  cwd     => '/vagrant/puppet/environment/development/scripts/',
   require => Class['::mysql::bindings::python'],
 }
