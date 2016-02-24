@@ -57,7 +57,7 @@ Vagrant.configure(2) do |config|
     puppet.environment      = 'development'
     puppet.manifests_path   = 'puppet/environment/development/manifests'
     puppet.module_path      = 'puppet/environment/development/modules'
-    puppet.manifest_file  = "install_packages.pp"
+    puppet.manifest_file    = "install_packages.pp"
 
   end
 
@@ -67,7 +67,7 @@ Vagrant.configure(2) do |config|
     puppet.environment      = 'development'
     puppet.manifests_path   = 'puppet/environment/development/manifests'
     puppet.module_path      = 'puppet/environment/development/modules'
-    puppet.manifest_file  = "install_sklearn.pp"
+    puppet.manifest_file    = "install_sklearn.pp"
   end
 
   ## Custom Manifest: ensure vagrant-mounted event
