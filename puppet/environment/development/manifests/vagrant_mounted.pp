@@ -8,7 +8,7 @@ Exec {path => ['/usr/bin/']}
 file {'vagrant-startup-script':
     path    => '/etc/init/workaround-vagrant-bug-6074.conf',
     ensure  => 'present',
-    content => template('/vagrant/puppet/template/vagrant_mounted.erb'),
+    content => template('/vagrant/puppet/environment/development/template/vagrant_mounted.erb'),
     notify  => Exec['dos2unix-upstart-vagrant'],
 }
 
