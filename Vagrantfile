@@ -106,7 +106,12 @@ Vagrant.configure(2) do |config|
     puppet.options        = ["--parser", "future"]
   end
 
-  # clean up files on the host after the guest is destroyed
+  ## ensure puppet/modules directory on the host before 'vagrant up'
+  config.trigger.before :up do
+    run 'mkdir puppet/modules'
+  end
+
+  # clean up files on the host after 'vagrant destroy'
   config.trigger.after :destroy do
     run 'rm -Rf log'
     run 'rm -Rf build'
