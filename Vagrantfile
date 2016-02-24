@@ -27,6 +27,11 @@ Vagrant.configure(2) do |config|
     exec "vagrant #{ARGV.join(' ')}"
   end
 
+  ## ensure puppet/modules directory on the host before 'vagrant up'
+  config.trigger.before :up do
+    run 'mkdir -p puppet/modules'
+  end
+
   ## Every Vagrant development environment requires a box. You can search for
   #  boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/trusty64"
@@ -39,11 +44,6 @@ Vagrant.configure(2) do |config|
   #  accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network "forwarded_port", guest: 5000, host: 8080
   config.vm.network "forwarded_port", guest: 443, host: 8585
-
-  ## ensure puppet/modules directory on the host before 'vagrant up'
-  config.trigger.before :up do
-    run 'mkdir -p puppet/modules'
-  end
 
   ## Run r10k
   config.r10k.puppet_dir = 'puppet'
