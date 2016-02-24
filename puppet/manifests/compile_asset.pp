@@ -93,7 +93,7 @@ class create_compilers {
             notify      => Service[$compiler],
         }
 
-        ## start ${compiler} service
+        ## start $compiler service
         service {$compiler:
             ensure => 'running',
             enable => true,
