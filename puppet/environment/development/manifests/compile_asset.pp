@@ -61,7 +61,7 @@ $compilers.each |String $compiler, Hash $resource| {
     file {"${compiler}-startup-script":
         path    => "/etc/init/${compiler}.conf",
         ensure  => 'present',
-        content => template('/vagrant/puppet/template/webcompilers.erb'),
+        content => template('/vagrant/puppet/environment/development/template/webcompilers.erb'),
         notify  => Exec["dos2unix-upstart-${compiler}"],
     }
 
@@ -86,7 +86,7 @@ $compilers.each |String $compiler, Hash $resource| {
     #      on the corresponding listening end point. But, the 'service' end
     #      point does not require the 'refreshonly' attribute.
     exec {"dos2unix-bash-${compiler}":
-        command     => "dos2unix /vagrant/puppet/scripts/${compiler}",
+        command     => "dos2unix /vagrant/puppet/environment/development/scripts/${compiler}",
         refreshonly => true,
         notify      => Service[$compiler],
     }
