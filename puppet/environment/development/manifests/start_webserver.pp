@@ -20,7 +20,7 @@ case $::osfamily {
         file {'server-startup-script':
             path    => '/etc/init/flask.conf',
             ensure  => 'present',
-            content => template('/vagrant/puppet/template/webserver.erb'),
+            content => template('/vagrant/puppet/environment/development/template/webserver.erb'),
             notify  => Exec['dos2unix-flask'],
         }
 
