@@ -108,7 +108,7 @@ Vagrant.configure(2) do |config|
 
   ## ensure puppet/modules directory on the host before 'vagrant up'
   config.trigger.before :up do
-    run 'mkdir puppet/modules'
+    run 'mkdir -p puppet/modules'
   end
 
   # clean up files on the host after 'vagrant destroy'
