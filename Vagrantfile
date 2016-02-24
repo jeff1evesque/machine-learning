@@ -114,8 +114,8 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf interface/static/img'
     run 'rm -Rf interface/static/js'
     run 'rm -Rf puppet/modules'
-    run 'rm src/js/.gitignore'
-    run 'rm src/js/select_session.js'
+    run 'rm -f src/js/.gitignore'
+    run 'rm -f src/js/select_session.js'
   end
   
   # Disable automatic box update checking. If you disable this, then
