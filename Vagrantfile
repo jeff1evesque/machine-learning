@@ -29,7 +29,7 @@ Vagrant.configure(2) do |config|
 
   ## ensure puppet/modules directory on the host before 'vagrant up'
   config.trigger.before :up do
-    run 'mkdir -p puppet/modules'
+    run 'mkdir -p puppet/environment/development/modules'
   end
 
   ## Every Vagrant development environment requires a box. You can search for
@@ -129,7 +129,7 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf interface/static/css'
     run 'rm -Rf interface/static/img'
     run 'rm -Rf interface/static/js'
-    run 'rm -Rf puppet/modules'
+    run 'rm -Rf puppet/environment/development/modules'
     run 'rm -f src/js/.gitignore'
     run 'rm -f src/js/select_session.js'
   end
