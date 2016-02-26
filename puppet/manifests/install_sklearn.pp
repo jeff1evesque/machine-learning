@@ -1,6 +1,3 @@
-## include puppet modules: this (also) runs 'apt-get update'
-include git
-
 ## create '/vagrant/build/' directory
 class create_build_directory {
     file {'/vagrant/build/':
@@ -9,10 +6,16 @@ class create_build_directory {
     }
 }
 
+## install git
+class install_git {
+    include git
+}
+
 ## download scikit-learn
 class download_sklearn {
     ## set dependency
     require create_build_directory
+    require install_git
 
     vcsrepo {'/vagrant/build/scikit-learn':
         ensure   => present,
@@ -28,6 +31,7 @@ class download_sklearn {
 class build_sklearn {
     ## set dependency
     require create_build_directory
+    require install_git
     require download_sklearn
 
     exec {'build-sklearn':
@@ -43,6 +47,7 @@ class build_sklearn {
 class install_sklearn {
     ## set dependency
     require create_build_directory
+    require install_git
     require download_sklearn
     require build_sklearn
 
@@ -57,6 +62,7 @@ class install_sklearn {
 ## constructor
 class constructor {
     contain create_build_directory
+    contain install_git
     contain download_sklearn
     contain build_sklearn
     contain install_sklearn
