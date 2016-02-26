@@ -35,8 +35,57 @@ $compilers = {
     }
 }
 
+## install nodejs
+class install_nodejs {
+    class { 'nodejs':
+        repo_url_suffix => 'node_5.x',
+    }
+}
+
+## install webcompiler packages
+class install_webcompiler_packages {
+    ## set dependency
+    require install_nodejs
+
+    $packages = [
+        'uglify-js',
+        'imagemin',
+        'node-sass',
+        'babel-core',
+        'browserify',
+        'babelify'
+    ]
+
+    ## install packages
+    package { $packages:
+        ensure   => 'present',
+        provider => 'npm',
+        notify   => Exec['install-babelify-presets'],
+        require  => Package['npm'],
+    }
+}
+
+## packages: install babelify presets for reactjs (npm)
+class install_babelify_presets {
+    ## set dependency
+    require install_nodejs
+    require install_webcompiler_packages
+
+    exec {'install-babelify-presets':
+        command     => 'npm install --no-bin-links',
+        cwd         => '/vagrant/src/jsx/',
+        before      => Package['redis-server'],
+        refreshonly => true,
+    }
+}
+
 ## create compilers
 class create_compilers {
+    ## set dependency
+    require install_nodejs
+    require install_webcompiler_packages
+    require install_babelify_presets
+
     ## dynamically create compilers
     $compilers.each |String $compiler, Hash $resource| {
         ## variables
@@ -121,6 +170,9 @@ class create_compilers {
 
 ## constructor
 class constructor {
+    contain install_nodejs
+    contain install_webcompiler_packages
+    contain install_babelify_presets
     contain create_compilers
 }
 include constructor
