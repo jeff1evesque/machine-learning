@@ -2,10 +2,6 @@
 include python
 include apt
 
-class { 'nodejs':
-  repo_url_suffix => 'node_5.x',
-}
-
 ## variables
 case $::osfamily {
   'redhat': {
@@ -24,14 +20,6 @@ $packages_general_pip = [
     'xmltodict',
     'six',
     'matplotlib'
-]
-$packages_general_npm = [
-    'uglify-js',
-    'imagemin',
-    'node-sass',
-    'babel-core',
-    'browserify',
-    'babelify'
 ]
 $packages_build_size  = size($packages_build_dep) - 1
 
@@ -73,20 +61,4 @@ package {$packages_general_pip:
   ensure   => 'installed',
   provider => 'pip',
   before   => Package[$packages_general_npm],
-}
-
-## packages: install general packages (npm)
-package {$packages_general_npm:
-  ensure   => 'present',
-  provider => 'npm',
-  notify   => Exec['install-babelify-presets'],
-  require  => Package['npm'],
-}
-
-## packages: install babelify presets for reactjs (npm)
-exec {'install-babelify-presets':
-  command     => 'npm install --no-bin-links',
-  cwd         => '/vagrant/src/jsx/',
-  before      => Package['redis-server'],
-  refreshonly => true,
 }
