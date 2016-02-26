@@ -27,6 +27,11 @@ Vagrant.configure(2) do |config|
     exec "vagrant #{ARGV.join(' ')}"
   end
 
+  ## ensure puppet/modules directory on the host before 'vagrant up'
+  config.trigger.before :up do
+    run 'mkdir -p puppet/modules'
+  end
+
   ## Every Vagrant development environment requires a box. You can search for
   #  boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/trusty64"
@@ -43,7 +48,7 @@ Vagrant.configure(2) do |config|
   ## Run r10k
   config.r10k.puppet_dir = 'puppet'
   config.r10k.puppetfile_path = 'puppet/Puppetfile'
-  
+
   ## Custom Manifest: install needed packages
   #
   #  Note: future parser allow array iteration in the puppet manifest
@@ -106,7 +111,7 @@ Vagrant.configure(2) do |config|
     puppet.options        = ["--parser", "future"]
   end
 
-  # clean up files on the host after the guest is destroyed
+  # clean up files on the host after 'vagrant destroy'
   config.trigger.after :destroy do
     run 'rm -Rf log'
     run 'rm -Rf build'
@@ -114,8 +119,8 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf interface/static/img'
     run 'rm -Rf interface/static/js'
     run 'rm -Rf puppet/modules'
-    run 'rm src/js/.gitignore'
-    run 'rm src/js/select_session.js'
+    run 'rm -f src/js/.gitignore'
+    run 'rm -f src/js/select_session.js'
   end
   
   # Disable automatic box update checking. If you disable this, then
