@@ -1,8 +1,13 @@
-## define $PATH for all execs, and packages
-Exec {path => ['/usr/bin/']}
-
 ## define system timezone
-class {'timezone':
-    region   => 'America',
-    locality => 'New_York',
+class set_timezone {
+    class {'timezone':
+        region   => 'America',
+        locality => 'New_York',
+    }
 }
+
+## constructor
+class constructor {
+    contain set_timezone
+}
+include constructor
