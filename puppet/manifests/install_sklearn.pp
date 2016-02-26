@@ -11,11 +11,21 @@ class install_git {
     include git
 }
 
+## install sklearn dependencies
+class install_sklearn_dependencies {
+    exec { 'install-sklearn-dependencies':
+        command     => 'apt-get build-dep scikit-learn -y',
+        refreshonly => true,
+        timeout     => 1400,
+    }
+}
+
 ## download scikit-learn
 class download_sklearn {
     ## set dependency
     require create_build_directory
     require install_git
+    require install_sklearn_dependencies
 
     vcsrepo {'/vagrant/build/scikit-learn':
         ensure   => present,
@@ -32,6 +42,7 @@ class build_sklearn {
     ## set dependency
     require create_build_directory
     require install_git
+    require install_sklearn_dependencies
     require download_sklearn
 
     exec {'build-sklearn':
@@ -49,6 +60,7 @@ class install_sklearn {
     require create_build_directory
     require install_git
     require download_sklearn
+    require install_sklearn_dependencies
     require build_sklearn
 
     exec {'install-sklearn':
@@ -65,6 +77,7 @@ class constructor {
     contain install_git
     contain download_sklearn
     contain build_sklearn
+    contain install_sklearn_dependencies
     contain install_sklearn
 }
 include constructor
