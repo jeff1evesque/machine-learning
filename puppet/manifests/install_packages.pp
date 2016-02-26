@@ -5,10 +5,10 @@ include apt
 ## variables
 case $::osfamily {
   'redhat': {
-    $packages_general = ['dos2unix', 'inotify-tools', 'ruby-devel']
+    $packages_general = ['dos2unix', 'ruby-devel']
   }
   'debian': {
-    $packages_general = ['dos2unix', 'inotify-tools', 'ruby-dev']
+    $packages_general = ['dos2unix', 'ruby-dev']
   }
   default: {
   }
