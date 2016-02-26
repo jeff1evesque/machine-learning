@@ -47,7 +47,7 @@ class install_webcompiler_packages {
     ## set dependency
     require install_nodejs
 
-    $packages = [
+    $webtools = [
         'uglify-js',
         'imagemin',
         'node-sass',
@@ -56,12 +56,21 @@ class install_webcompiler_packages {
         'babelify'
     ]
 
-    ## install packages
-    package { $packages:
+    $compiler_tools = [
+        'inotify-tools'
+    ]
+
+    ## install web tools
+    package { $webtools
         ensure   => 'present',
         provider => 'npm',
         notify   => Exec['install-babelify-presets'],
         require  => Package['npm'],
+    }
+
+    ## install compiler tools
+    package { $compiler_tools:
+        ensure => 'installed',
     }
 }
 
