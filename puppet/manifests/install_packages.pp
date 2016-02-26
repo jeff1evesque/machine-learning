@@ -14,7 +14,7 @@ case $::osfamily {
   }
 }
 
-$packages_build_dep   = ['matplotlib', 'scikit-learn']
+$packages_build_dep   = ['matplotlib']
 $packages_general_pip = [
     'jsonschema',
     'xmltodict',
