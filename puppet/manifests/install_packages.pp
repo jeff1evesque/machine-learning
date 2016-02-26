@@ -20,7 +20,6 @@ case $::osfamily {
 
 $packages_build_dep   = ['matplotlib', 'scikit-learn']
 $packages_general_pip = [
-    'redis',
     'jsonschema',
     'xmltodict',
     'six',
@@ -90,9 +89,4 @@ exec {'install-babelify-presets':
   cwd         => '/vagrant/src/jsx/',
   before      => Package['redis-server'],
   refreshonly => true,
-}
-
-## package: install redis-server
-package {'redis-server':
-  ensure => 'installed',
 }
