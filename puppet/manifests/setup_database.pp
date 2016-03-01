@@ -78,7 +78,7 @@ class create_database {
     ## set dependency
     require install_db
     require install_client
-    require isntall_bindings
+    require install_bindings
 
     ## define database tables
     #
