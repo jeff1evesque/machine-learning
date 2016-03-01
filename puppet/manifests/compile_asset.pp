@@ -64,7 +64,6 @@ class install_webcompiler_packages {
     package { $compilers:
         ensure   => 'present',
         provider => 'npm',
-        notify   => Exec['install-babelify-presets'],
         require  => Package['npm'],
     }
 
@@ -83,7 +82,6 @@ class install_babelify_presets {
     exec {'install-babelify-presets':
         command     => 'npm install --no-bin-links',
         cwd         => '/vagrant/src/jsx/',
-        refreshonly => true,
     }
 }
 
