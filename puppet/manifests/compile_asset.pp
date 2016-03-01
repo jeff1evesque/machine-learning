@@ -73,31 +73,10 @@ class install_webcompiler_packages {
     }
 }
 
-## packages: install babelify presets for reactjs (npm)
-class install_babelify_presets {
-    ## set dependency
-    require install_nodejs
-    require install_webcompiler_packages
-
-    exec { 'install-babelify-presets':
-        command     => 'npm install --no-bin-links',
-        cwd         => '/vagrant/src/jsx/',
-    }
-}
-
-## create compilers
-class create_compilers {
-    ## set dependency
-    require install_nodejs
-    require install_webcompiler_packages
-    require install_babelify_presets
-
+## ensure compiler directories
+class create_compiler_directories {
     ## dynamically create compilers
     $compilers.each |String $compiler, Hash $resource| {
-        ## variables
-        $check_files = "if [ \"$(ls -A /vagrant/src/${resource['src']}/)\" ];"
-        $touch_files = "then touch /vagrant/src/${resource['src']}/*; fi"
-
         ## create asset directories (if not exist)
         if ($resource['asset_dir']) {
             file {"/vagrant/interface/static/${resource['asset']}/":
@@ -113,6 +92,35 @@ class create_compilers {
                 before => File["${compiler}-startup-script"],
             }
         }
+    }
+}
+
+## packages: install babelify presets for reactjs (npm)
+class install_babelify_presets {
+    ## set dependency
+    require create_compiler_directories
+    require install_nodejs
+    require install_webcompiler_packages
+
+    exec { 'install-babelify-presets':
+        command => 'npm install --no-bin-links',
+        cwd     => '/vagrant/src/jsx/',
+    }
+}
+
+## create compilers
+class create_compilers {
+    ## set dependency
+    require create_compiler_directories
+    require install_nodejs
+    require install_webcompiler_packages
+    require install_babelify_presets
+
+    ## dynamically create compilers
+    $compilers.each |String $compiler, Hash $resource| {
+        ## variables
+        $check_files = "if [ \"$(ls -A /vagrant/src/${resource['src']}/)\" ];"
+        $touch_files = "then touch /vagrant/src/${resource['src']}/*; fi"
 
         ## create startup script: for webcompilers, using puppet templating
         file { "${compiler}-startup-script":
@@ -176,6 +184,7 @@ class create_compilers {
 
 ## constructor
 class constructor {
+    contain create_compiler_directories
     contain install_nodejs
     contain install_webcompiler_packages
     contain install_babelify_presets
