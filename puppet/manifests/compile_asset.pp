@@ -79,7 +79,7 @@ class install_babelify_presets {
     require install_nodejs
     require install_webcompiler_packages
 
-    exec {'install-babelify-presets':
+    exec { 'install-babelify-presets':
         command     => 'npm install --no-bin-links',
         cwd         => '/vagrant/src/jsx/',
     }
@@ -115,7 +115,7 @@ class create_compilers {
         }
 
         ## create startup script: for webcompilers, using puppet templating
-        file {"${compiler}-startup-script":
+        file { "${compiler}-startup-script":
             path    => "/etc/init/${compiler}.conf",
             ensure  => 'present',
             content => template('/vagrant/puppet/template/webcompilers.erb'),
@@ -129,7 +129,7 @@ class create_compilers {
         #      exec statement, where the 'refreshonly => true' would be implemented
         #      on the corresponding listening end point. But, the 'service' end
         #      point does not require the 'refreshonly' attribute.
-        exec {"dos2unix-upstart-${compiler}":
+        exec { "dos2unix-upstart-${compiler}":
             command     => "dos2unix /etc/init/${compiler}.conf",
             refreshonly => true,
             notify      => Exec["dos2unix-bash-${compiler}"],
@@ -142,14 +142,14 @@ class create_compilers {
         #      exec statement, where the 'refreshonly => true' would be implemented
         #      on the corresponding listening end point. But, the 'service' end
         #      point does not require the 'refreshonly' attribute.
-        exec {"dos2unix-bash-${compiler}":
+        exec { "dos2unix-bash-${compiler}":
             command     => "dos2unix /vagrant/puppet/scripts/${compiler}",
             refreshonly => true,
             notify      => Service[$compiler],
         }
 
         ## start $compiler service
-        service {$compiler:
+        service { $compiler:
             ensure => 'running',
             enable => true,
             notify => Exec["touch-${resource['src']}-files"],
