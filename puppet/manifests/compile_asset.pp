@@ -83,7 +83,6 @@ class install_babelify_presets {
     exec {'install-babelify-presets':
         command     => 'npm install --no-bin-links',
         cwd         => '/vagrant/src/jsx/',
-        before      => Package['redis-server'],
         refreshonly => true,
     }
 }
