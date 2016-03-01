@@ -11,7 +11,6 @@ class install_redis_client {
     package { 'redis':
         ensure   => 'installed',
         provider => 'pip',
-        before   => Package[$packages_general_npm],
     }
 }
 
