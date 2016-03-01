@@ -87,6 +87,7 @@ class create_database {
     exec {'create-database-tables':
         command => 'python setup_tables.py',
         cwd     => '/vagrant/puppet/scripts/',
+        path    => '/usr/bin',
     }
 }
 
