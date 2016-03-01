@@ -17,6 +17,7 @@ class install_sklearn_dependencies {
         command     => 'apt-get build-dep scikit-learn -y',
         refreshonly => true,
         timeout     => 1400,
+        path        => '/usr/bin',
     }
 }
 
