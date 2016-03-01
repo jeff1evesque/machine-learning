@@ -61,7 +61,7 @@ class install_webcompiler_packages {
     ]
 
     ## install compilers
-    package { $compilers
+    package { $compilers:
         ensure   => 'present',
         provider => 'npm',
         notify   => Exec['install-babelify-presets'],
