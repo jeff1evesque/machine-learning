@@ -1,23 +1,21 @@
-## create '/vagrant/build/' directory
-class create_build_directory {
-    file {'/vagrant/build/':
-        ensure => 'directory',
-        before => Vcsrepo['/vagrant/build/scikit-learn'],
-    }
-}
-
 ## install git
 class install_git {
     include git
 }
 
+## create '/vagrant/build/' directory
+class create_build_directory {
+    file {'/vagrant/build/':
+        ensure => 'directory',
+    }
+}
+
 ## install sklearn dependencies
 class install_sklearn_dependencies {
     exec { 'install-sklearn-dependencies':
-        command     => 'apt-get build-dep scikit-learn -y',
-        refreshonly => true,
-        timeout     => 1400,
-        path        => '/usr/bin',
+        command => 'apt-get build-dep scikit-learn -y',
+        timeout => 1400,
+        path    => '/usr/bin',
     }
 }
 
@@ -33,8 +31,6 @@ class download_sklearn {
         provider => git,
         source   => 'https://github.com/scikit-learn/scikit-learn',
         revision => '0.16.1',
-        before   => Exec['build-sklearn'],
-        notify   => Exec['build-sklearn'],
     }
 }
 
@@ -47,11 +43,9 @@ class build_sklearn {
     require download_sklearn
 
     exec {'build-sklearn':
-        command     => 'python setup.py build',
-        cwd         => '/vagrant/build/scikit-learn/',
-        notify      => Exec['install-sklearn'],
-        refreshonly => true,
-        path        => '/usr/bin',
+        command => 'python setup.py build',
+        cwd     => '/vagrant/build/scikit-learn/',
+        path    => '/usr/bin',
     }
 }
 
@@ -65,10 +59,9 @@ class install_sklearn {
     require build_sklearn
 
     exec {'install-sklearn':
-        command     => 'python setup.py install',
-        cwd         => '/vagrant/build/scikit-learn/',
-        refreshonly => true,
-        path        => '/usr/bin',
+        command => 'python setup.py install',
+        cwd     => '/vagrant/build/scikit-learn/',
+        path    => '/usr/bin',
     }
 }
 
