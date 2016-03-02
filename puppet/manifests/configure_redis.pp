@@ -6,7 +6,7 @@ class install_pip {
 ## install redis-client
 class install_redis_client {
     ## set dependency
-    require create_log_directory
+    require install_pip
 
     package { 'redis':
         ensure   => 'installed',
@@ -16,6 +16,9 @@ class install_redis_client {
 
 ## package: install redis-server
 class install_redis_server {
+    # set dependency
+    require install_pip
+
     package { 'redis-server':
         ensure => 'installed',
     }
