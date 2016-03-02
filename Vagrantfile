@@ -83,6 +83,15 @@ Vagrant.configure(2) do |config|
     puppet.module_path    = "puppet/modules"
   end
 
+  ## Custom Manifest: install redis client / server
+  #
+  #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
+  config.vm.provision "puppet" do |puppet|
+    puppet.manifests_path = "puppet/manifests"
+    puppet.manifest_file  = "configure_redis.pp"
+    puppet.module_path    = "puppet/modules"
+  end
+
   ## Custom Manifest: start webserver
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
