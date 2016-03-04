@@ -12,10 +12,11 @@ class create_build_directory {
 
 ## install sklearn dependencies
 class install_sklearn_dependencies {
+    ## 'path' satisfies: apt-get, sh, rm, tar, ldconfig, start-stop-daemon
     exec { 'install-sklearn-dependencies':
         command => 'apt-get build-dep scikit-learn -y',
         timeout => 1400,
-        path    => '/usr/bin',
+        path    => ['/usr/bin', '/bin', '/sbin'],
     }
 }
 
