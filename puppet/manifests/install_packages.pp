@@ -19,7 +19,7 @@ $packages_general_pip = [
     'jsonschema',
     'xmltodict',
     'six',
-    'matplotlib'
+    'python-matplotlib'
 ]
 $packages_build_size  = size($packages_build_dep) - 1
 
@@ -28,22 +28,23 @@ Exec {
   path => ['/usr/bin/', '/bin/', '/usr/local', '/usr/sbin/', '/sbin/'],
 }
 
-## enable 'multiverse' repository (part 1, replace line)
+## matplotlib: enable 'multiverse' repository (part 1, replace line)
 exec {'enable-multiverse-repository-1':
   command => template('/vagrant/puppet/template/enable_multiverse_1.erb'),
-  notify  => Exec["build-package-dependencies-${packages_build_size}"],
+  notify  => Exec["enable-multiverse-repository-2"],
 }
 
-## enable 'multiverse' repository (part 2, replace line)
+## matplotlib: enable 'multiverse' repository (part 2, replace line)
 exec {'enable-multiverse-repository-2':
   command => template('/vagrant/puppet/template/enable_multiverse_2.erb'),
   notify  => Exec["build-package-dependencies-${packages_build_size}"],
+  refreshonly => true,
 }
 
 ## build package dependencies
 each($packages_build_dep) |$index, $package| {
   exec {"build-package-dependencies-${index}":
-    command     => "apt-get build-dep ${package} -y",
+    command     => "apt-get install build-essential ${package} -y",
     before      => Package[$packages_general],
     refreshonly => true,
     timeout     => 1400,
