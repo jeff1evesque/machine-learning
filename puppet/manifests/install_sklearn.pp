@@ -1,6 +1,7 @@
-## install git
-class install_git {
+## install puppet modules
+class install_modules {
     include git
+    include stdlib
 }
 
 ## create '/vagrant/build/' directory
@@ -12,7 +13,8 @@ class create_build_directory {
 
 ## install sklearn dependencies
 class install_sklearn_dependencies {
-## enable 'multiverse' repository (part 1, replace line)
+    require install_modules
+
     ## variables
     $dependencies = [
         'python-dev',
@@ -26,21 +28,14 @@ class install_sklearn_dependencies {
     ]
 
     ## install dependencies
-    $dependencies.each |String $dependency| {
-        exec { 'install-sklearn-dependencies':
-            command     => "apt-get install build-essential ${dependency}",
-            timeout     => 1400,
-            path        => ['/usr/bin'],
-            refreshonly => true,
-        }
-    }
+    ensure_packages( $dependencies )
 }
 
 ## download scikit-learn
 class download_sklearn {
     ## set dependency
     require create_build_directory
-    require install_git
+    require install_modules
     require install_sklearn_dependencies
 
     vcsrepo {'/vagrant/build/scikit-learn':
@@ -55,7 +50,7 @@ class download_sklearn {
 class build_sklearn {
     ## set dependency
     require create_build_directory
-    require install_git
+    require install_modules
     require install_sklearn_dependencies
     require download_sklearn
 
@@ -70,7 +65,7 @@ class build_sklearn {
 class install_sklearn {
     ## set dependency
     require create_build_directory
-    require install_git
+    require install_modules
     require download_sklearn
     require install_sklearn_dependencies
     require build_sklearn
@@ -85,7 +80,7 @@ class install_sklearn {
 ## constructor
 class constructor {
     contain create_build_directory
-    contain install_git
+    contain install_modules
     contain download_sklearn
     contain build_sklearn
     contain install_sklearn_dependencies
