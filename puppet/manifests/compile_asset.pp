@@ -16,8 +16,8 @@ $compilers = {
         src_dir   => true,
     },
     imagemin   => {
-        src   => 'img',
-        asset => 'img',
+        src       => 'img',
+        asset     => 'img',
         asset_dir => true,
         src_dir   => true,
     },
@@ -64,7 +64,6 @@ class install_webcompiler_packages {
     package { $compilers:
         ensure   => 'present',
         provider => 'npm',
-        require  => Package['npm'],
     }
 
     ## install compiler dependencies
