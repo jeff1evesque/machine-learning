@@ -35,7 +35,7 @@ exec {'enable-multiverse-repository-1':
 ## matplotlib: enable 'multiverse' repository (part 2, replace line)
 exec {'enable-multiverse-repository-2':
   command => template('/vagrant/puppet/template/enable_multiverse_2.erb'),
-  notify  => Exec["build-package-dependencies-${packages_build_size}"],
+  notify  => Package[$packages_general],
   refreshonly => true,
 }
 
