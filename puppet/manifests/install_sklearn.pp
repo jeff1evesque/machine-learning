@@ -28,7 +28,7 @@ class install_sklearn_dependencies {
     ## install dependencies
     $dependencies.each |String $dependency| {
         exec { 'install-sklearn-dependencies':
-            command     => "apt-get install build-essential ${dependency'}"
+            command     => "apt-get install build-essential ${dependency}",
             timeout     => 1400,
             path        => ['/usr/bin'],
             refreshonly => true,
