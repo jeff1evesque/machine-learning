@@ -33,9 +33,6 @@ class install_sklearn_dependencies {
             path        => ['/usr/bin'],
             refreshonly => true,
         }
-sudo apt-get install build-essential python-dev python-numpy \
-  python-numpy-dev python-scipy libatlas-dev g++ python-matplotlib \
-  ipython
     }
 }
 
