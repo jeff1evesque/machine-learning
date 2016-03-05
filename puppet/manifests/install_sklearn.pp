@@ -12,11 +12,30 @@ class create_build_directory {
 
 ## install sklearn dependencies
 class install_sklearn_dependencies {
-    ## 'path' satisfies: apt-get, sh, rm, tar, ldconfig, start-stop-daemon
-    exec { 'install-sklearn-dependencies':
-        command => 'apt-get build-dep scikit-learn -y',
-        timeout => 1400,
-        path    => ['/usr/bin', '/bin', '/sbin'],
+## enable 'multiverse' repository (part 1, replace line)
+    ## variables
+    $dependencies = [
+        'python-dev',
+        'python-numpy',
+        'python-numpy-dev',
+        'python-scipy',
+        'libatlas-dev',
+        'g++',
+        'python-matplotlib',
+        'ipython'
+    ]
+
+    ## install dependencies
+    $dependencies.each |String $dependency| {
+        exec { 'install-sklearn-dependencies':
+            command     => 'apt-get install build-essential $dependency',
+            timeout     => 1400,
+            path        => ['/usr/bin'],
+            refreshonly => true,
+        }
+sudo apt-get install build-essential python-dev python-numpy \
+  python-numpy-dev python-scipy libatlas-dev g++ python-matplotlib \
+  ipython
     }
 }
 
