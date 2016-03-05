@@ -38,7 +38,7 @@ $compilers = {
 ## install nodejs
 class install_nodejs {
     class { 'nodejs':
-        repo_url_suffix => 'node_5.x',
+        repo_url_suffix => '5.x',
     }
 }
 
