@@ -14,12 +14,10 @@ case $::osfamily {
   }
 }
 
-$packages_build_dep   = ['matplotlib']
 $packages_general_pip = [
     'jsonschema',
     'xmltodict',
-    'six',
-    'python-matplotlib'
+    'six'
 ]
 $packages_build_size  = size($packages_build_dep) - 1
 
@@ -39,16 +37,6 @@ exec {'enable-multiverse-repository-2':
   command => template('/vagrant/puppet/template/enable_multiverse_2.erb'),
   notify  => Exec["build-package-dependencies-${packages_build_size}"],
   refreshonly => true,
-}
-
-## build package dependencies
-each($packages_build_dep) |$index, $package| {
-  exec {"build-package-dependencies-${index}":
-    command     => "apt-get install build-essential ${package} -y",
-    before      => Package[$packages_general],
-    refreshonly => true,
-    timeout     => 1400,
-  }
 }
 
 ## packages: install general packages (apt, yum)
