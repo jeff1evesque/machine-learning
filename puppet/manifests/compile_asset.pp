@@ -16,8 +16,8 @@ $compilers = {
         src_dir   => true,
     },
     imagemin   => {
-        src       => 'img',
-        asset     => 'img',
+        src   => 'img',
+        asset => 'img',
         asset_dir => true,
         src_dir   => true,
     },
@@ -57,18 +57,20 @@ class install_webcompiler_packages {
     ]
 
     $compiler_dependencies = [
-        'inotify-tools'
+        'inotify-tools',
+        'ruby-full',
     ]
+
+    ## install compiler dependencies
+    package { $compiler_dependencies:
+        ensure => 'installed',
+        before => Package[$compilers],
+    }
 
     ## install compilers
     package { $compilers:
         ensure   => 'present',
         provider => 'npm',
-    }
-
-    ## install compiler dependencies
-    package { $compiler_dependencies:
-        ensure => 'installed',
     }
 }
 
