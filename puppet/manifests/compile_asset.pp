@@ -56,10 +56,16 @@ class install_webcompiler_packages {
         'babelify'
     ]
 
-    $compiler_dependencies = [
-        'inotify-tools',
-        'ruby-dev',
-    ]
+    case $::osfamily {
+        'redhat': {
+            $compiler_dependencies =  ['dos2unix', 'inotify-tools', 'ruby-devel']
+        }
+        'debian': {
+            $compiler_dependencies = ['dos2unix', 'inotify-tools', 'ruby-dev']
+        }
+        default: {
+        }
+    }
 
     ## install compiler dependencies
     package { $compiler_dependencies:
