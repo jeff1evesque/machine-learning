@@ -58,7 +58,7 @@ class install_webcompiler_packages {
 
     $compiler_dependencies = [
         'inotify-tools',
-        'ruby-full',
+        'ruby-dev',
     ]
 
     ## install compiler dependencies
