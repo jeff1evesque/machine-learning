@@ -4,8 +4,14 @@ $mountpoint = '/vagrant/'
 ## define $PATH for all execs, and packages
 Exec {path => ['/usr/bin/']}
 
+## install compiler dependencies
+package { 'dos2unix':
+    ensure => 'installed',
+    before => File['vagrant-startup-script'],
+}
+
 ## create startup script: for 'vagrant-mounted' event
-file {'vagrant-startup-script':
+file { 'vagrant-startup-script':
     path    => '/etc/init/workaround-vagrant-bug-6074.conf',
     ensure  => 'present',
     content => template('/vagrant/puppet/template/vagrant_mounted.erb'),
