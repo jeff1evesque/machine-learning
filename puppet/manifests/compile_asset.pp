@@ -35,19 +35,20 @@ $compilers = {
     }
 }
 
-## install nodejs
-class install_nodejs {
-    class { 'nodejs':
-        repo_url_suffix => '5.x',
+class webcompiler_packages {
+    ## variables
+    case $::osfamily {
+        'redhat': {
+            $packages_general = ['dos2unix', 'inotify-tools', 'ruby-devel']
+        }
+        'debian': {
+            $packages_general = ['dos2unix', 'inotify-tools', 'ruby-dev']
+        }
+        default: {
+        }
     }
-}
 
-## install webcompiler packages
-class install_webcompiler_packages {
-    ## set dependency
-    require install_nodejs
-
-    $compilers = [
+    $packages_general_npm = [
         'uglify-js',
         'imagemin',
         'node-sass',
@@ -56,79 +57,56 @@ class install_webcompiler_packages {
         'babelify'
     ]
 
-    case $::osfamily {
-        'redhat': {
-            $compiler_dependencies =  ['dos2unix', 'inotify-tools', 'ruby-devel']
-        }
-        'debian': {
-            $compiler_dependencies = ['dos2unix', 'inotify-tools', 'ruby-dev']
-        }
-        default: {
-        }
+    ## install nodejs (with npm)
+    class { 'nodejs':
+        repo_url_suffix => '5.x',
     }
 
-    ## install compiler dependencies
-    package { $compiler_dependencies:
+    ## packages: install general packages (apt, yum)
+    package { $packages_general:
         ensure => 'installed',
-        before => Package[$compilers],
+        before => Package[$packages_general_npm],
     }
 
-    ## install compilers
-    package { $compilers:
+    ## packages: install general packages (npm)
+    package { $packages_general_npm:
         ensure   => 'present',
         provider => 'npm',
+        notify   => Exec['install-babelify-presets'],
+        require  => Class['nodejs'],
+    }
+
+    ## packages: install babelify presets for reactjs (npm)
+    exec { 'install-babelify-presets':
+        command     => 'npm install --no-bin-links',
+        cwd         => '/vagrant/src/jsx/',
+        refreshonly => true,
     }
 }
 
-## ensure compiler directories
-class create_compiler_directories {
-    ## dynamically create compilers
+class create_directories {
     $compilers.each |String $compiler, Hash $resource| {
         ## create asset directories (if not exist)
         if ($resource['asset_dir']) {
-            file {"/vagrant/interface/static/${resource['asset']}/":
+            file { "/vagrant/interface/static/${resource['asset']}/":
                 ensure => 'directory',
-                before => File["${compiler}-startup-script"],
             }
         }
 
         ## create src directories (if not exist)
         if ($resource['src_dir']) {
-            file {"/vagrant/src/${resource['src']}/":
+            file { "/vagrant/src/${resource['src']}/":
                 ensure => 'directory',
-                before => File["${compiler}-startup-script"],
             }
         }
     }
 }
 
-## packages: install babelify presets for reactjs (npm)
-class install_babelify_presets {
+class create_webcompilers {
     ## set dependency
-    require create_compiler_directories
-    require install_nodejs
-    require install_webcompiler_packages
+    require webcompiler_packages
 
-    exec { 'install-babelify-presets':
-        command => 'npm install --no-bin-links',
-        cwd     => '/vagrant/src/jsx/',
-    }
-}
-
-## create compilers
-class create_compilers {
-    ## set dependency
-    require create_compiler_directories
-    require install_nodejs
-    require install_webcompiler_packages
-    require install_babelify_presets
-
-    ## dynamically create compilers
     $compilers.each |String $compiler, Hash $resource| {
-        ## variables
-        $check_files = "if [ \"$(ls -A /vagrant/src/${resource['src']}/)\" ];"
-        $touch_files = "then touch /vagrant/src/${resource['src']}/*; fi"
-
         ## create startup script: for webcompilers, using puppet templating
         file { "${compiler}-startup-script":
             path    => "/etc/init/${compiler}.conf",
@@ -160,10 +138,21 @@ class create_compilers {
         exec { "dos2unix-bash-${compiler}":
             command     => "dos2unix /vagrant/puppet/scripts/${compiler}",
             refreshonly => true,
-            notify      => Service[$compiler],
         }
+    }
+}
 
-        ## start $compiler service
+class run_webcompilers {
+    ## set dependency
+    require webcompiler_packages
+    require create_webcompilers
+
+    $compilers.each |String $compiler, Hash $resource| {
+        ## variables
+        $check_files = "if [ \"$(ls -A /vagrant/src/${resource['src']}/)\" ];"
+        $touch_files = "then touch /vagrant/src/${resource['src']}/*; fi"
+
+        ## start ${compiler} service
         service { $compiler:
             ensure => 'running',
             enable => true,
@@ -181,7 +170,7 @@ class create_compilers {
         #
         #  Note: every 'command' implementation checks if directory is nonempty,
         #        then touch all files in the directory, respectively.
-        exec {"touch-${resource['src']}-files":
+        exec { "touch-${resource['src']}-files":
             command     => "${check_files} ${touch_files}",
             refreshonly => true,
             provider    => shell,
@@ -191,10 +180,9 @@ class create_compilers {
 
 ## constructor
 class constructor {
-    contain create_compiler_directories
-    contain install_nodejs
-    contain install_webcompiler_packages
-    contain install_babelify_presets
-    contain create_compilers
+    contain webcompiler_packages
+    contain create_directories
+    contain create_webcompilers
+    contain run_webcompilers
 }
 include constructor
