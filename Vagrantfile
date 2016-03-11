@@ -27,9 +27,10 @@ Vagrant.configure(2) do |config|
     exec "vagrant #{ARGV.join(' ')}"
   end
 
-  ## ensure puppet/modules directory on the host before 'vagrant up'
+  ## ensure puppet modules directory on the host before 'vagrant up'
   config.trigger.before :up do
-    run 'mkdir -p puppet/modules'
+    run 'mkdir -p puppet/environment/development/modules'
+    run 'mkdir -p puppet/environment/development/modules_contrib'
   end
 
   ## Every Vagrant development environment requires a box. You can search for
@@ -55,7 +56,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "install_packages.pp"
-    puppet.module_path    = "puppet/modules"
+    puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.options        = ["--parser", "future"]
   end
 
@@ -63,7 +64,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "install_sklearn.pp"
-    puppet.module_path    = "puppet/modules"
+    puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
   end
 
   ## Custom Manifest: ensure vagrant-mounted event
@@ -72,7 +73,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "vagrant_mounted.pp"
-    puppet.module_path    = "puppet/modules"
+    puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.options        = ["--parser", "future"]
   end
 
@@ -80,7 +81,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "setup_database.pp"
-    puppet.module_path    = "puppet/modules"
+    puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
   end
 
   ## Custom Manifest: install redis client / server
@@ -89,7 +90,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "configure_redis.pp"
-    puppet.module_path    = "puppet/modules"
+    puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
   end
 
   ## Custom Manifest: start webserver
@@ -98,7 +99,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "start_webserver.pp"
-    puppet.module_path    = "puppet/modules"
+    puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.options        = ["--parser", "future"]
   end
 
@@ -106,7 +107,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "configure_system.pp"
-    puppet.module_path    = "puppet/modules"
+    puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
   end
 
   ## Custom Manifest: define webcompilers
@@ -116,7 +117,7 @@ Vagrant.configure(2) do |config|
   config.vm.provision "puppet" do |puppet|
     puppet.manifests_path = "puppet/manifests"
     puppet.manifest_file  = "compile_asset.pp"
-    puppet.module_path    = "puppet/modules"
+    puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.options        = ["--parser", "future"]
   end
 
@@ -127,7 +128,7 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf interface/static/css'
     run 'rm -Rf interface/static/img'
     run 'rm -Rf interface/static/js'
-    run 'rm -Rf puppet/modules'
+    run 'rm -Rf puppet/environment/development/modules_contrib'
     run 'rm -f src/js/.gitignore'
     run 'rm -f src/js/select_session.js'
   end
