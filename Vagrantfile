@@ -47,8 +47,8 @@ Vagrant.configure(2) do |config|
   config.vm.network "forwarded_port", guest: 443, host: 8585
 
   ## Run r10k
-  config.r10k.puppet_dir = 'puppet'
-  config.r10k.puppetfile_path = 'puppet/Puppetfile'
+  config.r10k.puppet_dir = 'puppet/environment/development'
+  config.r10k.puppetfile_path = 'puppet/environment/development/Puppetfile'
 
   ## Custom Manifest: install needed packages
   #
