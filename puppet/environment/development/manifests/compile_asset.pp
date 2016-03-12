@@ -15,5 +15,5 @@ include compiler::start_uglifyjs
 include compiler::start_browserify
 include compiler::start_imagemin
 
-## initial compiler
+## initial compile
 include compiler::initial_compile
