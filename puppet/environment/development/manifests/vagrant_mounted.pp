@@ -10,7 +10,7 @@
 ## install dos2unix
 include package::dos2unix
 
-## vagrant service: service indicating vagrant mounted
+## configure service
 include vagrant::service
 
 ## start service
