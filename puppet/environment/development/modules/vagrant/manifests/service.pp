@@ -3,6 +3,9 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class vagrant::service {
+    ## variables
+    $mountpoint = '/vagrant/'
+
     ## create startup script: for 'vagrant-mounted' event
     file { 'vagrant-startup-script':
         path    => '/etc/init/workaround-vagrant-bug-6074.conf',
