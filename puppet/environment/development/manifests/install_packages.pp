@@ -6,20 +6,44 @@
 ###
 
 ## update apt repository
-include apt
+class update_apt {
+    include apt
+}
 
 ## nodejs, with npm: this cannot be wrapped into a module, and included, as
 #      needed. Puppet will only allow one instance of this class, regardless of
 #      of its implementation.
-class { 'nodejs':
-  repo_url_suffix => '5.x',
+class install_nodejs {
+    ## set dependency
+    require update_apt
+
+    ## install nodejs, with npm
+    class { 'nodejs':
+        repo_url_suffix => '5.x',
+    }
+    contain nodejs
 }
 
 ## general packages
-include package::dos2unix
-include package::inotify_tools
-include package::react_presets
-include package::jsonschema
-include package::xmltodict
-include package::six
-include system::webcompiler_directories
+class install_general_packages {
+    ## set dependency
+    require update_apt
+    require install_nodejs
+
+    ## install packages
+    include package::dos2unix
+    include package::inotify_tools
+    include package::react_presets
+    include package::jsonschema
+    include package::xmltodict
+    include package::six
+    include system::webcompiler_directories
+}
+
+## constructor
+class constructor {
+    contain update_apt
+    contain install_nodejs
+    contain install_general_packages
+}
+include constructor
