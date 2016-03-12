@@ -1,8 +1,15 @@
+### start_webserver.pp: implement webserver, with necessary dependencies.
+###
+### Note: the prefix 'package::', corresponds to a puppet convention:
+###
+###       https://github.com/jeff1evesque/machine-learning/issues/2349
+###
+
 ## create log directory
 include system::log_directory
 
 ## install webserver
 include webserver::service
 
-## detect os family: create startup script, start flask server
+## start webservers
 include webserver::start
