@@ -5,7 +5,7 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
-## updates apt repository
+## update apt repository
 include apt
 
 ## nodejs, with npm: this cannot be wrapped into a module, and included, as
