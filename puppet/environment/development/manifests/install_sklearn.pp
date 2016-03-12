@@ -1,9 +1,3 @@
-## install git
-class install_modules {
-    include git
-    include stdlib
-}
-
 ## create '/vagrant/build/' directory
 include system::build_directory
 
