@@ -9,9 +9,14 @@
 include apt
 include package::dos2unix
 include package::inotify_tools
-include package::nodejs
 include package::react_presets
 include package::jsonschema
 include package::xmltodict
 include package::six
 include system::webcompiler_directories
+
+## install nodejs, with npm: this cannot be wrapped into a module, and
+#      included, as needed. Puppet will only allow one instance of this class.
+class { 'nodejs':
+  repo_url_suffix => '5.x',
+}
