@@ -38,7 +38,7 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   
   ## Update latest version of puppet
-  config.vm.provision :shell, :path => "puppet/scripts/puppet_updater.sh"
+  config.vm.provision :shell, :path => "puppet/environment/development/scripts/puppet_updater.sh"
 
   ## Create a forwarded port mapping which allows access to a specific port
   #  within the machine from a port on the host machine. In the example below,
