@@ -54,7 +54,7 @@ Vagrant.configure(2) do |config|
   #
   #  Note: future parser allow array iteration in the puppet manifest
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file  = "install_packages.pp"
     puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.options        = ["--parser", "future"]
@@ -62,7 +62,7 @@ Vagrant.configure(2) do |config|
 
   ## Custom Manifest: build scikit-learn
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file  = "install_sklearn.pp"
     puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
   end
@@ -71,7 +71,7 @@ Vagrant.configure(2) do |config|
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file  = "vagrant_mounted.pp"
     puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.options        = ["--parser", "future"]
@@ -79,7 +79,7 @@ Vagrant.configure(2) do |config|
 
   ## Custom Manifest: install, and configure SQL database
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file  = "setup_database.pp"
     puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
   end
@@ -88,7 +88,7 @@ Vagrant.configure(2) do |config|
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file  = "configure_redis.pp"
     puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
   end
@@ -97,7 +97,7 @@ Vagrant.configure(2) do |config|
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file  = "start_webserver.pp"
     puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.options        = ["--parser", "future"]
@@ -105,7 +105,7 @@ Vagrant.configure(2) do |config|
 
   ## Custom Manifest: configure system (i.e. system timezone)
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file  = "configure_system.pp"
     puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
   end
@@ -115,7 +115,7 @@ Vagrant.configure(2) do |config|
   #  Note: future parser allow heredoc sytnax (since puppet 3.5), and allows array
   #        iteration in the puppet manifest.
   config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
+    puppet.manifests_path = "puppet/environment/development/manifests"
     puppet.manifest_file  = "compile_asset.pp"
     puppet.module_path    = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.options        = ["--parser", "future"]
