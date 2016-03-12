@@ -20,7 +20,7 @@ class install_nodejs {
 }
 
 ## general packages
-class install_general_packages {
+class general_packages {
     ## set dependency
     require apt
     require install_nodejs
@@ -38,6 +38,6 @@ class install_general_packages {
 ## constructor
 class constructor {
     contain install_nodejs
-    contain install_general_packages
+    contain general_packages
 }
 include constructor
