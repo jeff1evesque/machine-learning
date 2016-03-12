@@ -15,8 +15,9 @@ include package::xmltodict
 include package::six
 include system::webcompiler_directories
 
-## install nodejs, with npm: this cannot be wrapped into a module, and
-#      included, as needed. Puppet will only allow one instance of this class.
+## nodejs, with npm: this cannot be wrapped into a module, and included, as
+#      needed. Puppet will only allow one instance of this class, regardless of
+#      of its implementation.
 class { 'nodejs':
   repo_url_suffix => '5.x',
 }
