@@ -1,5 +1,5 @@
-## install python, and pip
+## install redis client
 include redis::client
 
-## package: install redis-server
+## install redis-server
 include redis::server
