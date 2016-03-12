@@ -2,7 +2,7 @@
 ###
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
-class system::directory_directories {
+class system::webcompiler_directories {
     $directories = {
         browserify => {
             src       => 'jsx',
