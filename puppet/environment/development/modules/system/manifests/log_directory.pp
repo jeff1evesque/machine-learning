@@ -2,7 +2,7 @@
 ###
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
-class system::build_directory {
+class system::log_directory {
     file {'/vagrant/log/':
         ensure => 'directory',
     }
