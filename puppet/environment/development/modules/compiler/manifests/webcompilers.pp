@@ -2,7 +2,7 @@
 ###
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
-class compiler::services {
+class compiler::webcompilers {
     $compilers = [
         'browserify',
         'imagemin',
