@@ -5,17 +5,12 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
-## update apt repository
-class update_apt {
-    include apt
-}
-
 ## nodejs, with npm: this cannot be wrapped into a module, and included, as
 #      needed. Puppet will only allow one instance of this class, regardless of
 #      of its implementation.
 class install_nodejs {
     ## set dependency
-    require update_apt
+    require apt
 
     ## install nodejs, with npm
     class { 'nodejs':
@@ -27,7 +22,7 @@ class install_nodejs {
 ## general packages
 class install_general_packages {
     ## set dependency
-    require update_apt
+    require apt
     require install_nodejs
 
     ## install packages
@@ -42,7 +37,6 @@ class install_general_packages {
 
 ## constructor
 class constructor {
-    contain update_apt
     contain install_nodejs
     contain install_general_packages
 }
