@@ -35,9 +35,5 @@ class general_packages {
     include system::webcompiler_directories
 }
 
-## constructor
-class constructor {
-    contain install_nodejs
-    contain general_packages
-}
-include constructor
+## initiate
+include general_packages
