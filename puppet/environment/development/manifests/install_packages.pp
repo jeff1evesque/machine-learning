@@ -26,13 +26,13 @@ class general_packages {
     require install_nodejs
 
     ## install packages
-    include package::dos2unix
-    include package::inotify_tools
-    include package::react_presets
-    include package::jsonschema
-    include package::xmltodict
-    include package::six
-    include system::webcompiler_directories
+    contain package::dos2unix
+    contain package::inotify_tools
+    contain package::react_presets
+    contain package::jsonschema
+    contain package::xmltodict
+    contain package::six
+    contain system::webcompiler_directories
 }
 
 ## initiate
