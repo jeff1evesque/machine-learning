@@ -25,5 +25,6 @@ class vagrant::service {
     exec { 'dos2unix-upstart-vagrant':
         command => 'dos2unix /etc/init/workaround-vagrant-bug-6074.conf',
         refreshonly => true,
+        path => '/usr/bin',
     }
 }
