@@ -33,6 +33,7 @@ class compiler::webcompilers {
             command     => "dos2unix /etc/init/${compiler}.conf",
             refreshonly => true,
             notify      => Exec["dos2unix-bash-${compiler}"],
+            path        => '/usr/bin',
         }
 
         ## dos2unix bash: convert clrf (windows to linux) in case host machine is
@@ -45,6 +46,7 @@ class compiler::webcompilers {
         exec { "dos2unix-bash-${compiler}":
             command     => "dos2unix /vagrant/puppet/environment/${environment}/${compiler}",
             refreshonly => true,
+            path        => '/usr/bin',
         }
     }
 }
