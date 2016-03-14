@@ -44,7 +44,7 @@ class compiler::webcompilers {
         #      on the corresponding listening end point. But, the 'service' end
         #      point does not require the 'refreshonly' attribute.
         exec { "dos2unix-bash-${compiler}":
-            command     => "dos2unix /vagrant/puppet/environment/${environment}/${compiler}",
+            command     => "dos2unix /vagrant/puppet/environment/${environment}/scripts/${compiler}",
             refreshonly => true,
             path        => '/usr/bin',
         }
