@@ -3,6 +3,9 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class compiler::webcompilers {
+    ## variables
+    $environment = 'development'
+
     $compilers = [
         'browserify',
         'imagemin',
@@ -15,7 +18,7 @@ class compiler::webcompilers {
         file { "${compiler}-startup-script":
             path    => "/etc/init/${compiler}.conf",
             ensure  => 'present',
-            content => template('/vagrant/puppet/template/webcompilers.erb'),
+            content => template("/vagrant/puppet/environment/${environment}/template/webcompilers.erb"),
             notify  => Exec["dos2unix-upstart-${compiler}"],
         }
 
@@ -40,7 +43,7 @@ class compiler::webcompilers {
         #      on the corresponding listening end point. But, the 'service' end
         #      point does not require the 'refreshonly' attribute.
         exec { "dos2unix-bash-${compiler}":
-            command     => "dos2unix /vagrant/puppet/scripts/${compiler}",
+            command     => "dos2unix /vagrant/puppet/environment/${environment}/${compiler}",
             refreshonly => true,
         }
     }
