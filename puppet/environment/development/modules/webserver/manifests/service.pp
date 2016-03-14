@@ -3,10 +3,13 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class webserver::service {
+    ## variables
+    $environment = 'development'
+
     file { 'server-startup-script':
         path    => '/etc/init/flask.conf',
         ensure  => 'present',
-        content => template('/vagrant/puppet/template/webserver.erb'),
+        content => template("/vagrant/puppet/environment/${environment}/template/webserver.erb"),
         notify  => Exec['dos2unix-flask'],
     }
 
