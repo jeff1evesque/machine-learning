@@ -8,7 +8,7 @@
 
 ## install package dependencies
 class dependencies {
-    contain package:webcompilers
+    contain package::webcompilers
 }
 
 ## configure webcompilers
