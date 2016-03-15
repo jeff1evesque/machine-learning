@@ -14,7 +14,7 @@ class dependencies {
 ## configure webcompilers
 class configure {
     ## set dependency
-    require configure
+    require dependencies
 
     contain compiler::webcompilers
 }
