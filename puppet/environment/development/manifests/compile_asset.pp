@@ -6,14 +6,42 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
+## install package dependencies
+class dependencies {
+    contain package:webcompilers
+}
+
 ## configure webcompilers
-include compiler::webcompilers
+class configure {
+    ## set dependency
+    require configure
+
+    contain compiler::webcompilers
+}
 
 ## start webcompilers
-include compiler::start_sass
-include compiler::start_uglifyjs
-include compiler::start_browserify
-include compiler::start_imagemin
+class start {
+    ## set dependency
+    require dependencies
+    require configure
+
+    ## start compiler(s)
+    contain compiler::start_sass
+    contain compiler::start_uglifyjs
+    contain compiler::start_browserify
+    contain compiler::start_imagemin
+}
 
 ## initial compile
-include compiler::initial_compile
+class initiate {
+    ## set dependency
+    require dependencies
+    require configure
+    require start
+
+    ## initial compile
+    contain compiler::initial_compile
+}
+
+## initiate
+include initiate
