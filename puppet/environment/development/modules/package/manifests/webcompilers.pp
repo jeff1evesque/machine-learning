@@ -3,6 +3,7 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class package::webcompilers {
+    ## variables
     $webcompilers = [
         'uglify-js',
         'imagemin',
@@ -16,6 +17,5 @@ class package::webcompilers {
     package { $webcompilers:
         ensure   => 'present',
         provider => 'npm',
-        require  => Class['nodejs'],
     }
 }
