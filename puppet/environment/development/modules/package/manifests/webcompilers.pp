@@ -2,7 +2,7 @@
 ###
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
-class package:webcompilers {
+class package::webcompilers {
     $webcompilers = [
         'uglify-js',
         'imagemin',
