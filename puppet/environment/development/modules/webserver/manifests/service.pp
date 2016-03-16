@@ -6,6 +6,12 @@ class webserver::service {
     ## variables
     $environment = 'development'
 
+    ## include webserver dependencies
+    include python
+    include python::flask
+    include python::requests
+
+    ## define webserver
     file { 'server-startup-script':
         path    => '/etc/init/flask.conf',
         ensure  => 'present',
