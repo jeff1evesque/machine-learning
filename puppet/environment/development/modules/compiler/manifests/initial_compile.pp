@@ -28,7 +28,6 @@ class compiler::initial_compile {
         #        then touch all files in the directory, respectively.
         exec { "touch-${source}-files":
             command     => "${check_files} ${touch_files}",
-            refreshonly => true,
             provider    => shell,
         }
     }
