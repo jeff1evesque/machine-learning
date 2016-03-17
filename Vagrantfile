@@ -11,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins = %w(vagrant-r10k vagrant-vbguest vagrant-triggers)
+ required_plugins  = %w(vagrant-r10k vagrant-vbguest vagrant-triggers vagrant-puppet-install)
   plugin_installed = false
 
   ## Install Vagrant Plugins
@@ -27,88 +27,119 @@ Vagrant.configure(2) do |config|
     exec "vagrant #{ARGV.join(' ')}"
   end
 
-  ## ensure puppet/modules directory on the host before 'vagrant up'
+  ## ensure puppet modules directory on the host before 'vagrant up'
   config.trigger.before :up do
-    run 'mkdir -p puppet/modules'
+    run 'mkdir -p puppet/environment/development/modules'
+    run 'mkdir -p puppet/environment/development/modules_contrib'
   end
 
   ## Every Vagrant development environment requires a box. You can search for
   #  boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = "ubuntu/trusty64"
-  
-  ## Update latest version of puppet
-  config.vm.provision :shell, :path => "puppet/scripts/puppet_updater.sh"
+  config.vm.box = 'ubuntu/trusty64'
+
+  ## Ensure puppet installed within guest
+  config.puppet_install.puppet_version = '4.3.2'
 
   ## Create a forwarded port mapping which allows access to a specific port
   #  within the machine from a port on the host machine. In the example below,
   #  accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 5000, host: 8080
-  config.vm.network "forwarded_port", guest: 443, host: 8585
+  config.vm.network 'forwarded_port', guest: 5000, host: 8080
+  config.vm.network 'forwarded_port', guest: 443, host: 8585
 
   ## Run r10k
-  config.r10k.puppet_dir = 'puppet'
-  config.r10k.puppetfile_path = 'puppet/Puppetfile'
+  config.r10k.puppet_dir      = 'puppet/environment/development'
+  config.r10k.puppetfile_path = 'puppet/environment/development/Puppetfile'
 
   ## Custom Manifest: install needed packages
   #
   #  Note: future parser allow array iteration in the puppet manifest
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "install_packages.pp"
-    puppet.module_path    = "puppet/modules"
-    puppet.options        = ["--parser", "future"]
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'install_packages.pp'
   end
 
   ## Custom Manifest: build scikit-learn
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "install_sklearn.pp"
-    puppet.module_path    = "puppet/modules"
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'install_sklearn.pp'
   end
 
   ## Custom Manifest: ensure vagrant-mounted event
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "vagrant_mounted.pp"
-    puppet.module_path    = "puppet/modules"
-    puppet.options        = ["--parser", "future"]
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'vagrant_mounted.pp'
   end
 
-  ## Custom Manifest: install, and configure SQL database
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "setup_database.pp"
-    puppet.module_path    = "puppet/modules"
-  end
-
-  ## Custom Manifest: start webserver
+  ## Custom Manifest: install redis client / server
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "start_webserver.pp"
-    puppet.module_path    = "puppet/modules"
-    puppet.options        = ["--parser", "future"]
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'configure_redis.pp'
+  end
+
+  ## Custom Manifest: configure webserver
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'configure_webserver.pp'
   end
 
   ## Custom Manifest: configure system (i.e. system timezone)
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "configure_system.pp"
-    puppet.module_path    = "puppet/modules"
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'configure_system.pp'
   end
 
   ## Custom Manifest: define webcompilers
   #
   #  Note: future parser allow heredoc sytnax (since puppet 3.5), and allows array
   #        iteration in the puppet manifest.
-  config.vm.provision "puppet" do |puppet|
-    puppet.manifests_path = "puppet/manifests"
-    puppet.manifest_file  = "compile_asset.pp"
-    puppet.module_path    = "puppet/modules"
-    puppet.options        = ["--parser", "future"]
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'compile_asset.pp'
+  end
+
+  ## Custom Manifest: install, and configure SQL database
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'setup_database.pp'
+  end
+
+  ## Custom Manifest: start webserver
+  #
+  #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
+  config.vm.provision 'puppet' do |puppet|
+    puppet.environment_path = 'puppet/environment'
+    puppet.environment      = 'development'
+    puppet.manifests_path   = 'puppet/environment/development/manifests'
+    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file    = 'start_webserver.pp'
   end
 
   # clean up files on the host after 'vagrant destroy'
@@ -118,7 +149,7 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf interface/static/css'
     run 'rm -Rf interface/static/img'
     run 'rm -Rf interface/static/js'
-    run 'rm -Rf puppet/modules'
+    run 'rm -Rf puppet/environment/development/modules_contrib'
     run 'rm -f src/js/.gitignore'
     run 'rm -f src/js/select_session.js'
   end
