@@ -20,7 +20,7 @@
 /interface/static/js/
 /interface/static/css/
 /interface/static/img/
-/puppet/modules/
+/puppet/environment/development/modules_contrib/
 /test/.cache
 /test/programmatic_interface/.cache
 /test/programmatic_interface/__pycache__
