@@ -79,7 +79,6 @@ Vagrant.configure(2) do |config|
     puppet.manifests_path   = 'puppet/environment/development/manifests'
     puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.manifest_file    = 'vagrant_mounted.pp'
-  end
 
   ## Custom Manifest: install redis client / server
   #
@@ -108,7 +107,6 @@ Vagrant.configure(2) do |config|
     puppet.manifests_path   = 'puppet/environment/development/manifests'
     puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
     puppet.manifest_file    = 'configure_system.pp'
-  end
 
   ## Custom Manifest: define webcompilers
   #
