@@ -1,4 +1,4 @@
-### start_webserver.pp: implement webserver, with necessary dependencies.
+### start_webserver.pp: start webserver.
 ###
 ### Note: the prefix 'package::', corresponds to a puppet convention:
 ###
