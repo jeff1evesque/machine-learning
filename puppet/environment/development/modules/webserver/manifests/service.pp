@@ -29,7 +29,6 @@ class webserver::service {
     exec { 'dos2unix-flask':
         command     => 'dos2unix /etc/init/flask.conf',
         refreshonly => true,
-        notify      => Service['flask'],
         path        => '/usr/bin/',
     }
 }
