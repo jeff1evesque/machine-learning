@@ -7,9 +7,6 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
-## install dos2unix
-include package::dos2unix
-
 ## configure service
 include vagrant::service
 
