@@ -4,31 +4,26 @@
 ###
 class webserver::service {
     ## variables
-    $environment = 'development'
+    $environment      = 'development'
+    $environment_path = "/vagrant/puppet/environment/${environment}"
+    $flask_service    = template("${environment_path}/template/webserver.erb")
 
     ## include webserver dependencies
     include python
     include python::flask
     include python::requests
 
-    ## define webserver
-    file { 'server-startup-script':
-        path    => '/etc/init/flask.conf',
-        ensure  => 'present',
-        content => template("/vagrant/puppet/environment/${environment}/template/webserver.erb"),
-        notify  => Exec['dos2unix-flask'],
-    }
-
-    ## convert clrf (windows to linux) in case host machine is windows.
+    ## dos2unix: convert clrf (windows to linux) in case host machine is
+    #            windows.
     #
     #  @notify, ensure the webserver service is started. This is similar
     #      to an exec statement, where the 'refreshonly => true' would be
     #      implemented on the corresponding listening end point. But, the
     #      'service' end point does not require the 'refreshonly'
     #      attribute.
-    exec { 'dos2unix-flask':
-        command     => 'dos2unix /etc/init/flask.conf',
-        refreshonly => true,
-        path        => '/usr/bin/',
+    file { '/etc/init/flask.conf':
+        ensure      => file,
+        content     => dos2unix($flask_service),
+        notify      => Service['flask'],
     }
 }
