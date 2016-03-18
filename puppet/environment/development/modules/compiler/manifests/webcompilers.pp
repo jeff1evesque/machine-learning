@@ -10,7 +10,6 @@ class compiler::webcompilers {
     $environment        = 'development'
     $environment_path   = "/vagrant/puppet/environment/${environment}"
     $compiler_path      = "${environment_path}/template/webcompilers.erb"
-    $compiler_bash_path = "${environment_path}/scripts/${compiler}"
 
     $compilers = [
         'browserify',
@@ -32,7 +31,7 @@ class compiler::webcompilers {
         #                 windows.
         file { $compiler_bash_path:
             ensure      => file,
-            content     => dos2unix($compiler_bash_path),
+            content     => dos2unix($compiler_bash_path/scripts/${compiler}),
         }
     }
 }
