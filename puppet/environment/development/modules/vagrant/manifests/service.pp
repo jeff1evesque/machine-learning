@@ -11,15 +11,8 @@ class vagrant::service {
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
-    #
-    #  @notify, ensure the webserver service is started. This is similar
-    #      to an exec statement, where the 'refreshonly => true' would be
-    #      implemented on the corresponding listening end point. But, the
-    #      'service' end point does not require the 'refreshonly'
-    #      attribute.
     file { '/etc/init/workaround-vagrant-bug-6074.conf':
         ensure      => file,
         content     => dos2unix($vagrant_service),
-        notify      => Service['workaround-vagrant-bug-6074'],
     }
 }
