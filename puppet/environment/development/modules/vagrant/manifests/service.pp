@@ -4,17 +4,13 @@
 ###
 class vagrant::service {
     ## variables
-    $mountpoint      = '/vagrant/'
-    $environment     = 'development'
-    $module          = 'vagrant'
-    $environment_dir = "/vagrant/puppet/environment/${environment}"
-    $template_dir    = "${environment_path}/modules/${module}/template"
-    $vagrant_service = "${template_dir}/vagrant_mounted.erb"
+    $mountpoint    = '/vagrant/'
+    $template_path = 'vagrant/vagrant_mounted.erb'
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
     file { '/etc/init/workaround-vagrant-bug-6074.conf':
-        ensure      => file,
-        content     => dos2unix(template($vagrant_service)),
+        ensure  => file,
+        content => dos2unix(template($template_path)),
     }
 }
