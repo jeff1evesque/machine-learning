@@ -4,10 +4,12 @@
 ###
 class vagrant::service {
     ## variables
-    $mountpoint       = '/vagrant/'
-    $environment      = 'development'
-    $environment_path = "/vagrant/puppet/environment/${environment}"
-    $vagrant_service  = template("${environment_path}/template/vagrant_mounted.erb")
+    $mountpoint      = '/vagrant'/
+    $environment     = 'development'
+    $module          = 'vagrant'
+    $environment_dir = "/vagrant/puppet/environment/${environment}"
+    $template_dir    = "${environment_path}/modules/${module}/template"
+    $vagrant_service = "${template_dir}/vagrant_mounted.erb"
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
