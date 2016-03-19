@@ -26,7 +26,6 @@ class general_packages {
     require install_nodejs
 
     ## install packages
-    contain package::dos2unix
     contain package::inotify_tools
     contain package::react_presets
     contain package::jsonschema
