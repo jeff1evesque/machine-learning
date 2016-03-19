@@ -4,11 +4,12 @@
 ###
 class compiler::webcompilers {
     ## variables
-    $environment     = 'development'
-    $module          = 'compiler'
-    $environment_dir = "/vagrant/puppet/environment/${environment}"
-    $template_dir    = "${environment_path}/modules/${module}/template"
-    $compiler_path   = "${template_dir}/webcompilers.erb"
+    $environment      = 'development'
+    $module           = 'compiler'
+    $environment_dir  = "/vagrant/puppet/environment/${environment}"
+    $template_dir     = "${environment_path}/modules/${module}/template"
+    $compiler_service = "${template_dir}/webcompilers.erb"
+    $compiler_path    = "${environment_path}/modules/${module}/scripts"
 
     $compilers = [
         'browserify',
