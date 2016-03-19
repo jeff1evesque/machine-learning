@@ -4,7 +4,7 @@
 ###
 class vagrant::service {
     ## variables
-    $mountpoint      = '/vagrant'/
+    $mountpoint      = '/vagrant/'
     $environment     = 'development'
     $module          = 'vagrant'
     $environment_dir = "/vagrant/puppet/environment/${environment}"
