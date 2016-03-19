@@ -3,13 +3,12 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class compiler::webcompilers {
-    ## set dependency
-    require stdlib
-
     ## variables
-    $environment        = 'development'
-    $environment_path   = "/vagrant/puppet/environment/${environment}"
-    $compiler_path      = "${environment_path}/template/webcompilers.erb"
+    $environment     = 'development'
+    $module          = 'compiler'
+    $environment_dir = "/vagrant/puppet/environment/${environment}"
+    $template_dir    = "${environment_path}/modules/${module}/template"
+    $compiler_path   = "${template_dir}/webcompilers.erb"
 
     $compilers = [
         'browserify',
@@ -18,12 +17,13 @@ class compiler::webcompilers {
         'uglifyjs'
     ]
 
+    ## define compilers
     $compilers.each |String $compiler| {
         ## dos2unix upstart: convert clrf (windows to linux) in case host machine
         #                    is windows.
         file { "/etc/init/${compiler}.conf":
-            ensure      => file,
-            content     => dos2unix(template($compiler_path)),
+            ensure  => file,
+            content => dos2unix(template($compiler_path)),
         }
     }
 }
