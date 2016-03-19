@@ -24,7 +24,6 @@ class compiler::webcompilers {
         file { "/etc/init/${compiler}.conf":
             ensure      => file,
             content     => dos2unix(template($compiler_path)),
-            before      => File[$compiler_bash_path],
         }
     }
 }
