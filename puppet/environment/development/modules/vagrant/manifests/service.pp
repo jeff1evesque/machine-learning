@@ -15,6 +15,6 @@ class vagrant::service {
     #            windows.
     file { '/etc/init/workaround-vagrant-bug-6074.conf':
         ensure      => file,
-        content     => dos2unix($vagrant_service),
+        content     => dos2unix(template($vagrant_service)),
     }
 }
