@@ -15,15 +15,8 @@ class webserver::service {
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
-    #
-    #  @notify, ensure the webserver service is started. This is similar
-    #      to an exec statement, where the 'refreshonly => true' would be
-    #      implemented on the corresponding listening end point. But, the
-    #      'service' end point does not require the 'refreshonly'
-    #      attribute.
     file { '/etc/init/flask.conf':
         ensure      => file,
         content     => dos2unix($flask_service),
-        notify      => Service['flask'],
     }
 }
