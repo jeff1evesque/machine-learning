@@ -29,7 +29,7 @@ class compiler::webcompilers {
 
         ## dos2unix bash: convert clrf (windows to linux) in case host machine is
         #                 windows.
-        file { $compiler_bash_path:
+        file { $compiler_path:
             ensure      => file,
             content     => dos2unix("${compiler_bash_path}/scripts/${compiler}"),
         }
