@@ -4,9 +4,10 @@
 ###
 class compiler::webcompilers {
     ## variables
+    $root_dir        = '/vagrant'
     $environment     = 'development'
     $module          = 'compiler'
-    $environment_dir = "/vagrant/puppet/environment/${environment}"
+    $environment_dir = "${root_dir}/puppet/environment/${environment}"
     $compiler_path   = "${environment_dir}/modules/${module}/scripts"
     $template_path   = 'compiler/webcompilers.erb'
 
