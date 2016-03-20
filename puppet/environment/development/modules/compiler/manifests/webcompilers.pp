@@ -4,7 +4,7 @@
 ###
 class compiler::webcompilers {
     ## variables
-    $module = 'compiler'
+    $template_path = 'compiler/webcompilers.erb'
 
     $compilers = [
         'browserify',
@@ -19,7 +19,7 @@ class compiler::webcompilers {
         #                    is windows.
         file { "/etc/init/${compiler}.conf":
             ensure  => file,
-            content => dos2unix(template("${module}/webcompilers.erb")),
+            content => dos2unix(template($template_path)),
         }
     }
 }
