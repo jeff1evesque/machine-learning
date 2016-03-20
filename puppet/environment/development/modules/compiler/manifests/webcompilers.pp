@@ -6,6 +6,11 @@ class compiler::webcompilers {
     ## variables
     $template_path = 'compiler/webcompilers.erb'
 
+    $environment     = 'development'
+    $module          = 'compiler'
+    $environment_dir = "/vagrant/puppet/environment/${environment}"
+    $compiler_path   = "${environment_dir}/modules/${module}/scripts"
+
     $compilers = [
         'browserify',
         'imagemin',
