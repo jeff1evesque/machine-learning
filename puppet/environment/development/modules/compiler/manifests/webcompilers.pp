@@ -19,7 +19,7 @@ class compiler::webcompilers {
         #                    is windows.
         file { "/etc/init/${compiler}.conf":
             ensure  => file,
-            content => dos2unix(template("${module}/${compiler}")),
+            content => dos2unix(template("${module}/webcompilers.erb")),
         }
     }
 }
