@@ -8,7 +8,7 @@ class compiler::webcompilers {
     $environment     = 'development'
     $module          = 'compiler'
     $environment_dir = "${root_dir}/puppet/environment/${environment}"
-    $compiler_path   = "${environment_dir}/modules/${module}/scripts"
+    $compiler_dir    = "${environment_dir}/modules/${module}/scripts"
     $template_path   = 'compiler/webcompilers.erb'
 
     $compilers = [
