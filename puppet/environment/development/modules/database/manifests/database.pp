@@ -4,7 +4,10 @@
 ###
 class database::database {
     ## variables
-    $environment = 'development'
+    $module          = 'database'
+    $environment     = 'development'
+    $environment_dir = "/vagrant/puppet/environment/${environment}"
+    $script_dir      = "${environment_dir}/modules/${module}/scripts"
 
     ## define database tables
     #
@@ -12,7 +15,7 @@ class database::database {
     #      https://puppetlabs.com/blog/class-containment-puppet
     exec {'create-database-tables':
         command => 'python setup_tables.py',
-        cwd     => "/vagrant/puppet/environment/${environment}/scripts/",
+        cwd     => $script_dir,
         path    => '/usr/bin',
     }
 }
