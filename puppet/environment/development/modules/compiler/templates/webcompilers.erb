@@ -25,7 +25,7 @@ expect fork
 ## start upstart job
 #
 #  @chdir, change the current working directory
-chdir /vagrant/puppet/environment/development/scripts
+chdir <%= @compiler_dir %>
 exec ./<%= @compiler %>
 
 ## log start-up date

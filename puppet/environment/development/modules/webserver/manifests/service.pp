@@ -4,9 +4,8 @@
 ###
 class webserver::service {
     ## variables
-    $environment      = 'development'
-    $environment_path = "/vagrant/puppet/environment/${environment}"
-    $flask_service    = "${environment_path}/template/webserver.erb"
+    $environment   = 'development'
+    $template_path = 'webserver/webserver.erb'
 
     ## include webserver dependencies
     include python
@@ -17,6 +16,6 @@ class webserver::service {
     #            windows.
     file { '/etc/init/flask.conf':
         ensure  => file,
-        content => dos2unix(template($flask_service)),
+        content => dos2unix(template($template_path)),
     }
 }
