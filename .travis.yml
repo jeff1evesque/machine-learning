@@ -19,21 +19,21 @@ before_install:
 #        defined from the Dockerfile.
 install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
-  - pip install flake8
-  - npm install -g jshint
-  - npm install jscs -g
-  - gem install scss_lint
-  - npm install -g bootlint
-  - gem install puppet-lint
-  - gem install r10k
-  - npm install jsonlint -g
-  - gem install csvlint
+  - pip install flake8==2.5.4
+  - npm install -g jshint@2.9.1
+  - npm install -g jscs@2.11.0
+  - gem install scss_lint -v 0.38.0
+  - npm install -g bootlint@0.14.2
+  - gem install puppet-lint -v 1.1.0
+  - gem install r10k -v 2.2.0
+  - npm install -g jsonlint@1.6.2
+  - gem install csvlint -v 0.3.0
   - sudo apt-get update
-  - sudo apt-get install libxml2-utils
-  - gem install mdl
-  - sudo apt-get install shellcheck
+  - sudo apt-get install libxml2-utils=2.9.1+dfsg1-3ubuntu4.7
+  - gem install mdl -v 0.3.1
+  - sudo apt-get install shellcheck=0.3.3-1~ubuntu14.04.1
   - npm install -g eslint babel-eslint@6.0.0-beta.6
-  - npm install -g eslint-plugin-react
+  - npm install -g eslint-plugin-react@4.2.3
 
 ## implement linting
 #
