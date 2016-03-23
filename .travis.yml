@@ -32,7 +32,7 @@ install:
   - sudo apt-get install libxml2-utils
   - gem install mdl
   - sudo apt-get install shellcheck
-  - npm install -g eslint babel-eslint@6.x
+  - npm install -g eslint babel-eslint@6.0.0-beta.6
   - npm install -g eslint-plugin-react
 
 ## implement linting
