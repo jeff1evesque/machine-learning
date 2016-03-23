@@ -51,7 +51,7 @@ script:
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
-  - puppet-lint --no-ensure_first_param-check puppet/environment/development/manifests
+  - puppet-lint --no-ensure_first_param-check --no-autoloader_layout-check puppet/environment/development/manifests
   - puppet-lint --no-ensure_first_param-check puppet/environment/development/modules
   - (cd puppet/environment/development/ && r10k puppetfile check)
   - (cd test/ && r10k puppetfile check)
