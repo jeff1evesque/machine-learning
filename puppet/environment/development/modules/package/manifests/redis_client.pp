@@ -6,7 +6,7 @@ class package::redis_client {
     require python
 
     package { 'redis':
-        ensure   => 'installed',
+        ensure   => '2.10.5',
         provider => 'pip',
     }
 }
