@@ -7,9 +7,9 @@ class compiler::webcompilers {
     require stdlib
 
     ## variables
-    $environment        = 'development'
-    $environment_path   = "/vagrant/puppet/environment/${environment}"
-    $compiler_path      = "${environment_path}/template/webcompilers.erb"
+    $environment      = 'development'
+    $environment_path = "/vagrant/puppet/environment/${environment}"
+    $compiler_path    = "${environment_path}/template/webcompilers.erb"
 
     $compilers = [
         'browserify',
@@ -19,12 +19,11 @@ class compiler::webcompilers {
     ]
 
     $compilers.each |String $compiler| {
-        ## dos2unix upstart: convert clrf (windows to linux) in case host machine
-        #                    is windows.
+        ## dos2unix upstart: convert clrf (windows to linux) in case host
+        #                    machine is windows.
         file { "/etc/init/${compiler}.conf":
-            ensure      => file,
-            content     => dos2unix(template($compiler_path)),
-            before      => File[$compiler_bash_path],
+            ensure  => file,
+            content => dos2unix(template($compiler_path)),
         }
     }
 }
