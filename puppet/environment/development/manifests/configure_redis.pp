@@ -6,7 +6,7 @@
 ###
 
 ## install redis client
-include redis::client
+include package::redis_client
 
 ## install redis-server
-include redis::server
+include package::redis_server
