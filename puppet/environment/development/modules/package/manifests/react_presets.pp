@@ -5,8 +5,8 @@
 class package::react_presets {
     ## install babelify presets for reactjs (npm)
     exec { 'install-babelify-presets':
-        command     => 'npm install --no-bin-links',
-        cwd         => '/vagrant/src/jsx/',
-        path        => '/usr/bin',
+        command => 'npm install --no-bin-links',
+        cwd     => '/vagrant/src/jsx/',
+        path    => '/usr/bin',
     }
 }

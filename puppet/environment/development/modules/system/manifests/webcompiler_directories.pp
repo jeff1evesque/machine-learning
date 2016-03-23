@@ -30,17 +30,17 @@ class system::webcompiler_directories {
         }
     }
 
-    $directories.each |String $directory, Hash $type| {
+    $directories.each |String $directory, Hash $compiler| {
         ## create asset directories (if not exist)
-        if ($type['asset_dir']) {
-            file { "/vagrant/interface/static/${type['asset']}/":
+        if ($compiler['asset_dir']) {
+            file { "/vagrant/interface/static/${compiler['asset']}/":
                 ensure => 'directory',
             }
         }
 
         ## create src directories (if not exist)
-        if ($type['src_dir']) {
-            file { "/vagrant/src/${type['src']}/":
+        if ($compiler['src_dir']) {
+            file { "/vagrant/src/${compiler['src']}/":
                 ensure => 'directory',
             }
         }

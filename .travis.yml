@@ -32,7 +32,7 @@ install:
   - sudo apt-get install libxml2-utils
   - gem install mdl
   - sudo apt-get install shellcheck
-  - npm install -g eslint babel-eslint
+  - npm install -g eslint babel-eslint@6.0.0-beta.6
   - npm install -g eslint-plugin-react
 
 ## implement linting
@@ -51,14 +51,15 @@ script:
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint interface/templates/*.html
-  - puppet-lint --no-ensure_first_param-check puppet/manifests
-  - (cd puppet && r10k puppetfile check)
-  - (cd puppet/scripts/ && r10k puppetfile check)
+  - puppet-lint --no-ensure_first_param-check --no-autoloader_layout-check --no-variable_scope-check puppet/environment/development/manifests
+  - puppet-lint --no-ensure_first_param-check --no-variable_scope-check puppet/environment/development/modules
+  - (cd puppet/environment/development/ && r10k puppetfile check)
+  - (cd test/ && r10k puppetfile check)
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --noout interface/static/data/xml/*.xml --schema interface/static/data/xml/dataset.xsd
   - xmllint --noout interface/static/data/xml/*.xsd
   - mdl . --style test/config/markdown.rb
   - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
-  - find . -name '*.sh' | xargs shellcheck
+  - find . -name '*.sh' -type f -exec shellcheck {} \;
   - eslint . --ext=jsx -c test/config/eslint.json

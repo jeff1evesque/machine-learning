@@ -18,8 +18,8 @@ RUN gem install r10k
 RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git /var/machine-learning
 
 ## install puppet modules using puppetfile with r10k
-RUN mkdir /var/machine-learning/puppet/modules/
-RUN PUPPETFILE=/var/machine-learning/puppet/scripts/Puppetfile PUPPETFILE_DIR=/var/machine-learning/puppet/modules/ r10k puppetfile install
+RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contrib/
+RUN PUPPETFILE=/var/machine-learning/test/Puppetfile PUPPETFILE_DIR=/var/machine-learning/puppet/environment/development/modules_contrib/ r10k puppetfile install
 
 ## provision with puppet
-RUN for x in $(find . -name '/var/machine-learning/puppet/manifests/*.pp'); do puppet apply $x; done;
+RUN for x in $(find . -name '/var/machine-learning/puppet/environment/development/manifests/*.pp'); do puppet apply $x; done;

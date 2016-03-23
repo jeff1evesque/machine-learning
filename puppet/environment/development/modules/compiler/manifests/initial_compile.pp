@@ -19,16 +19,16 @@ class compiler::initial_compile {
         #
         #  @touch, changes the modification time to the current system time.
         #
-        #  Note: the current inotifywait implementation watches close_write, move,
-        #        and create. However, the source files will already exist before
-        #        this 'inotifywait', since the '/vagrant' directory will already
-        #        have been mounted on the initial build.
+        #  Note: the current inotifywait implementation watches close_write,
+        #        move, and create. However, the source files will already exist
+        #        before this 'inotifywait', since the '/vagrant' directory will
+        #        already have been mounted on the initial build.
         #
-        #  Note: every 'command' implementation checks if directory is nonempty,
-        #        then touch all files in the directory, respectively.
+        #  Note: every 'command' implementation checks if directory is
+        #        nonempty, then touch all files in the directory, respectively.
         exec { "touch-${source}-files":
-            command     => "${check_files} ${touch_files}",
-            provider    => shell,
+            command  => "${check_files} ${touch_files}",
+            provider => shell,
         }
     }
 }
