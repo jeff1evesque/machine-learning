@@ -6,7 +6,7 @@ class webserver::service {
     ## variables
     $environment      = 'development'
     $environment_path = "/vagrant/puppet/environment/${environment}"
-    $flask_service    = template("${environment_path}/template/webserver.erb")
+    $flask_service    = "${environment_path}/template/webserver.erb"
 
     ## include webserver dependencies
     include python
@@ -16,7 +16,7 @@ class webserver::service {
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
     file { '/etc/init/flask.conf':
-        ensure      => file,
-        content     => dos2unix($flask_service),
+        ensure  => file,
+        content => dos2unix(template($flask_service)),
     }
 }
