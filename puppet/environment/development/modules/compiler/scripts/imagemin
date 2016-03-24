@@ -27,6 +27,6 @@ inotifywait /vagrant/src/img/ -m -e close_write -e move --format %f |
     if [ "$file_extension" = 'gif' ]; then
       cp /vagrant/src/img/"$file" /vagrant/interface/static/img/"$filename"
     else
-      imagemin /vagrant/src/img/"$file" > /vagrant/interface/static/img/"$filename"
+      imagemin /vagrant/src/img/"$file" > /vagrant/interface/static/img/"$filename" &
     fi
   done
