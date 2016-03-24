@@ -4,6 +4,6 @@
 ###
 class package::redis_server {
     package { 'redis-server':
-        ensure => '2:2.8.4.2',
+        ensure => '2:2.8.4-2',
     }
 }
