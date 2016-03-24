@@ -4,9 +4,9 @@
 ###
 class package::inotify_tools {
     ## update apt-get
-    include apt
+    require apt
 
-    package { 'inotify-tools':
+    package { 'inotify-tools=3.14-1ubuntu1':
         ensure => 'installed',
     }
 }

@@ -3,7 +3,7 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class package::sklearn {
-    include git
+    require git
 
     vcsrepo {'/vagrant/build/scikit-learn':
         ensure   => present,

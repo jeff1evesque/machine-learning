@@ -6,7 +6,7 @@ class package::jsonschema {
     include python
 
     package { 'jsonschema':
-        ensure   => 'installed',
+        ensure   => '2.5.1',
         provider => 'pip',
     }
 }

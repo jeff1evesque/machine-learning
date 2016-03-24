@@ -3,10 +3,10 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class package::six {
-    include python
+    require python
 
     package { 'six':
-        ensure   => 'installed',
+        ensure   => '1.5.2',
         provider => 'pip',
     }
 }
