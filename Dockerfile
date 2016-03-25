@@ -1,18 +1,18 @@
 FROM ubuntu:14.04
 
 ## install git, and wget
-RUN apt-get update -y
-RUN apt-get install git -y
-RUN apt-get install wget -y
+RUN apt-get -y update
+RUN apt-get -y install git=1:1.9.1-1ubuntu0.3
+RUN apt-get -y install wget=1.15-1ubuntu1.14.04.1
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-trusty.deb
 RUN dpkg -i puppetlabs-release-trusty.deb
-RUN apt-get update -y
+RUN apt-get -y update
 
 ## install r10k
-RUN apt-get install rubygems-integration -y
-RUN gem install r10k
+RUN apt-get -y install rubygems-integration=1.5
+RUN gem install r10k -v 2.2.0
 
 ## clone repository: allow puppet manifests to run (below)
 RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git /var/machine-learning
