@@ -30,8 +30,8 @@ inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
         # convert with 'browserify'
         (cd /usr/lib/node_modules && browserify /vagrant/src/jsx/"$file" -t [ babelify --presets es2015,react ] -o /vagrant/src/js/"$filename".js)
 
-        # append javascript to '.gitignore'
-        echo "$filename".js >> '/vagrant/src/js/.gitignore'
+        # append file to '.gitignore'
+        fgrep -q "$filename".js /vagrant/src/js/.gitignore || echo "$filename".js >> /vagrant/src/js/.gitignore
 
       fi
     done
