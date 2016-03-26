@@ -58,7 +58,10 @@ var SelectSession = React.createClass({
 
       // local variables
         var sessionType = this.state.value_session_type;
-        if (sessionType == 'data_new' || sessionType == 'data_append' || sessionType == 'model_generate' || sessionType == 'model_predict') {
+        if (
+            sessionType == 'data_new' || sessionType == 'data_append' ||
+            sessionType == 'model_generate' || sessionType == 'model_predict'
+        ) {
             var ajaxEndpoint = '/load-data/';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
