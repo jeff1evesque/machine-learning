@@ -132,7 +132,12 @@ var SelectSession = React.createClass({
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
-                    <select name='svm_session' autoComplete='off' onChange={this.changeSessionType} value={this.state.value_session_type}>
+                    <select
+                        name='svm_session'
+                        autoComplete='off'
+                        onChange={this.changeSessionType}
+                        value={this.state.value_session_type}
+                    >
                         <option value='' defaultValue>--Select--</option>
                         <option value='data_new'>New Data</option>
                         <option value='data_append'>Append Data</option>
