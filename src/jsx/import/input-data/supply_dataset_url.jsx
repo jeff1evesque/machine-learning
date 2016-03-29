@@ -1,8 +1,8 @@
 /**
  * supply_dataset_url.jss: url upload fieldset.
  *
- * @SupplyDatasetUrl, must be capitalized in order for reactjs to render it as a
- *     component. Otherwise, the variable is rendered as a dom node.
+ * @SupplyDatasetUrl, must be capitalized in order for reactjs to render it as
+ *     a component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
@@ -32,27 +32,36 @@ var SupplyDatasetUrl = React.createClass({
             elements.pop();
             this.setState({additional_elements: elements});
 
+            {/* define boolean to indicate all urls properly defined */}
             for (index = 0; index < elements.length; index++) {
-                if (this.state['value_dataset_' + index.toString()] === undefined) {
+                var value = this.state['value_dataset_' + index.toString()];
+                if ( value === undefined) {
                     datasetBoolean = false;
                 }
             }
 
+           {/* allow parent component to know all files properly defined */}
             if (datasetBoolean) {
                 this.props.onChange({submitted_proper_dataset: true});
             }
             else {
                 this.props.onChange({submitted_proper_dataset: false});
             }
+
+            {/* possibly clear submit button */}
+            this.validUrlEntered();
         }
     },
   // update 'state properties': allow parent component(s) to access properties
     validUrlEntered: function(){
         {/* get array of input elements, by classname */}
-        var datasetNodeList = document.getElementsByClassName('svm-dataset-url');
+        var dataset = document.getElementsByClassName('svm-dataset-url');
 
-        {/* if input value is a valid url, store 'true', within corresponding array */}
-        var datasetArray = Array.prototype.map.call(datasetNodeList, function(element) {
+        {/*
+            Iterate the node list containing the supplied dataset(s). If the
+            input value is a valid file, store 'true', within the array.
+        */}
+        var boolArray = Array.prototype.map.call(dataset, function(element) {
             if (element.value && checkValidUrl(element.value)) {
                 return true;
             }
@@ -62,11 +71,11 @@ var SupplyDatasetUrl = React.createClass({
         });
 
         {/* check if every element is 'true' */}
-        var datasetBoolean = datasetArray.every(function(element) {
+        var datasetFlag = boolArray.every(function(element) {
             return element == true;
         });
 
-        if (datasetBoolean) {
+        if (datasetFlag) {
             this.props.onChange({submitted_proper_dataset: true});
         }
         else {
@@ -80,14 +89,38 @@ var SupplyDatasetUrl = React.createClass({
         return(
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-url' onChange={this.validUrlEntered} value={this.state.value} />
+                <input
+                    type='url'
+                    name='svm_dataset[]'
+                    placeholder='Dataset URL'
+                    className='svm-dataset-url'
+                    onChange={this.validUrlEntered}
+                    value={this.state.value}
+                />
 
-                <input type='button' value='Add more' onClick={this.handleAddMore} />
-                <input type='button' value='Remove' onClick={this.handleRemove} />
+                <input
+                    type='button'
+                    value='Add more'
+                    onClick={this.handleAddMore}
+                />
+
+                <input
+                    type='button'
+                    value='Remove'
+                    onClick={this.handleRemove}
+                />
 
                 {/* array components require unique 'key' value */}
                 {inputs && inputs.map(function(value, index){ 
-                    return <input type='url' name='svm_dataset[]' placeholder='Dataset URL' className='svm-dataset-url' key={index} onChange={this.validUrlEntered} value={this.state['value_dataset_' + index.toString()]} />;
+                    return <input
+                        type='url'
+                        name='svm_dataset[]'
+                        placeholder='Dataset URL'
+                        className='svm-dataset-url'
+                        key={index}
+                        onChange={this.validUrlEntered}
+                        value={this.state['value_dataset_' + index.toString()]}
+                    />;
                 }.bind(this))}
             </fieldset>
         );
