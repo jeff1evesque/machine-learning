@@ -51,6 +51,9 @@ var SupplyDatasetFile = React.createClass({
             else {
                 this.props.onChange({submitted_proper_dataset: false});
             }
+
+            {/* possibly clear submit button */}
+            this.validFileEntered();
         }
     },
   // update 'state properties': allow parent component(s) to access properties

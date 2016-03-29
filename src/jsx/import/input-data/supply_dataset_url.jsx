@@ -32,6 +32,7 @@ var SupplyDatasetUrl = React.createClass({
             elements.pop();
             this.setState({additional_elements: elements});
 
+            {/* define boolean to indicate all urls properly defined */}
             for (index = 0; index < elements.length; index++) {
                 var value = this.state['value_dataset_' + index.toString()];
                 if ( value === undefined) {
@@ -39,12 +40,16 @@ var SupplyDatasetUrl = React.createClass({
                 }
             }
 
+           {/* allow parent component to know all files properly defined */}
             if (datasetBoolean) {
                 this.props.onChange({submitted_proper_dataset: true});
             }
             else {
                 this.props.onChange({submitted_proper_dataset: false});
             }
+
+            {/* possibly clear submit button */}
+            this.validUrlEntered();
         }
     },
   // update 'state properties': allow parent component(s) to access properties
