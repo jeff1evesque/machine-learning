@@ -13,11 +13,14 @@ var ResultDisplay = React.createClass({
   // triggered when 'state properties' change
     render: function(){
       // variables
-        var serverObject  = this.props.formResult ? this.props.formResult : false;
-        var serverResult  = serverObject.result ? serverObject.result : false;
+        var serverObj = this.props.formResult ? this.props.formResult : false;
+        var serverResult = serverObj.result ? serverObj.result : false;
         var displayResult = false;
 
-        if (serverObject && serverResult && serverResult.result && checkValidString(serverResult.result)) {
+        if (
+            serverObject && serverResult && serverResult.result &&
+            checkValidString(serverResult.result)
+        ) {
             var result = serverResult.result;
             displayResult = true;
         }
