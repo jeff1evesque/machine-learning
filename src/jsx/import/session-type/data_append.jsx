@@ -32,7 +32,10 @@ var DataAppend = React.createClass({
     changeSessionId: function(event){
         var sessionId = event.target.value;
 
-        if (sessionId && sessionId != '--Select--' && checkValidInt(sessionId)) {
+        if (
+            sessionId && sessionId != '--Select--' &&
+            checkValidInt(sessionId)
+        ) {
             this.setState({value_session_id: event.target.value});
         }
         else {
@@ -43,7 +46,10 @@ var DataAppend = React.createClass({
     changeDatasetType: function(event){
         var datasetType = event.target.value;
 
-        if (datasetType && datasetType != '--Select--' && checkValidString(datasetType)) {
+        if (
+            datasetType && datasetType != '--Select--' &&
+            checkValidString(datasetType)
+        ) {
             this.setState({value_dataset_type: event.target.value});
             this.props.onChange({render_submit: false});
         }
@@ -52,10 +58,12 @@ var DataAppend = React.createClass({
             this.props.onChange({render_submit: false});
         }
     },
-  // update 'state properties' from children component (i.e. 'validStringEntered')
+  // update 'state properties' from child component (i.e. 'validStringEntered')
     displaySubmit: function(event) {
         if (event.submitted_proper_dataset) {
-            this.props.onChange({render_submit: event.submitted_proper_dataset});
+            this.props.onChange({
+                render_submit: event.submitted_proper_dataset
+            });
         }
         else {
             this.props.onChange({render_submit: false});
@@ -74,19 +82,35 @@ var DataAppend = React.createClass({
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select past session, and upload type</p>
-                    <select name='svm_session_id' autoComplete='off' onChange={this.changeSessionId} value={this.state.value_session_id}>
+                    <select
+                        name='svm_session_id'
+                        autoComplete='off'
+                        onChange={this.changeSessionId}
+                        value={this.state.value_session_id}
+                    >
+
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
                         {options && options.map(function(value) {
-                            return <option key={value.id} value={value.id}>{value.id}: {value.title}</option>;
+                            return <option key={value.id} value={value.id}>
+                                       {value.id}: {value.title}
+                                   </option>;
                         })}
 
                     </select>
-                    <select name='svm_dataset_type' autoComplete='off' onChange={this.changeDatasetType} value={this.state.value_dataset_type}>
+
+                    <select
+                        name='svm_dataset_type'
+                        autoComplete='off'
+                        onChange={this.changeDatasetType}
+                        value={this.state.value_dataset_type}
+                    >
+
                         <option value='' defaultValue>--Select--</option>
                         <option value='file_upload'>Upload file</option>
                         <option value='dataset_url'>Dataset URL</option>
+
                     </select>
                 </fieldset>
 
