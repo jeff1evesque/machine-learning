@@ -55,14 +55,16 @@ var SupplyPredictors = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var options = JSON.parse(this.state.ajax_done_options);
-        var predictor_value = this.state['value_predictor_' + index.toString()];
 
         return(
             <fieldset className='fieldset-prediction-input'>
                 <legend>Prediction Input</legend>
 
                 {/* array components require unique 'key' value */}
-                {options && options.map(function(value, index){ 
+                {options && options.map(function(value, index){
+                    var suffix = index.toString()
+				    var predictor = this.state['value_predictor_' + suffix];
+
                     return <input
                         type='text'
                         name='prediction_input[]'
@@ -70,7 +72,7 @@ var SupplyPredictors = React.createClass({
                         placeholder={value}
                         key={index}
                         onChange={this.validIntegerEntered}
-                        value={predictor_value}
+                        value={predictor}
                     />;
                 }.bind(this))}
 
