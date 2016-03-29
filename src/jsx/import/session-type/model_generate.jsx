@@ -23,7 +23,7 @@ var ModelGenerate = React.createClass({
             ajax_fail_status: null
         };
     },
-  // update 'state properties': allow parent component(s) to access 'render_submit'
+  // update 'state properties'
     changeSessionId: function(event){
         var sessionId = event.target.value;
         var modelType = this.state.value_model_type;
@@ -31,6 +31,7 @@ var ModelGenerate = React.createClass({
         if (sessionId && checkValidInt(sessionId)) {
             this.setState({value_session_id: sessionId});
 
+          // allow parent component(s) to access 'render_submit'
             if (modelType != '--Select--') {
                 this.props.onChange({render_submit: true});
             }
@@ -47,7 +48,10 @@ var ModelGenerate = React.createClass({
         var sessionId = this.state.value_session_id;
         var modelType = event.target.value;
 
-        if (modelType && modelType != '--Select--' && checkValidString(modelType)) {
+        if (
+                modelType && modelType != '--Select--' &&
+                checkValidString(modelType)
+            ) {
             this.setState({value_model_type: event.target.value});
 
             if (Number(sessionId)) {
@@ -71,19 +75,35 @@ var ModelGenerate = React.createClass({
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
                     <p>Select past session, and model type</p>
-                    <select name='svm_session_id' autoComplete='off' onChange={this.changeSessionId} value={this.state.value_session_id}>
+                    <select
+                        name='svm_session_id'
+                        autoComplete='off'
+                        onChange={this.changeSessionId}
+                        value={this.state.value_session_id}
+                    >
+
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
                         {options && options.map(function(value) {
-                            return <option key={value.id} value={value.id}>{value.id}: {value.title}</option>;
+                            return <option key={value.id} value={value.id}>
+                                {value.id}: {value.title}
+                            </option>;
                         })}
 
                     </select>
-                    <select name='svm_model_type' autoComplete='off' onChange={this.changeModelType} value={this.state.value_model_type}>
+
+                    <select
+                        name='svm_model_type'
+                        autoComplete='off'
+                        onChange={this.changeModelType}
+                        value={this.state.value_model_type}
+                    >
+
                         <option value='' defaultValue>--Select--</option>
                         <option value='classification'>Classification</option>
                         <option value='regression'>Regression</option>
+
                     </select>
                 </fieldset>
             </fieldset>
