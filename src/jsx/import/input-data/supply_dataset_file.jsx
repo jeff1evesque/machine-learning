@@ -123,7 +123,7 @@ var SupplyDatasetFile = React.createClass({
                 }.bind(this))}
 
                 <p className='form-note'>
-                    <span class='asterick'>*</span>
+                    <span className='asterick'>*</span>
 				    <span className='bold'>Note: </span>
                     <span>Uploaded file(s) must be formatted as </span>
                     <span className='italic'>csv</span>,
