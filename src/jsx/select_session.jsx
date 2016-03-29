@@ -58,7 +58,10 @@ var SelectSession = React.createClass({
 
       // local variables
         var sessionType = this.state.value_session_type;
-        if (sessionType == 'data_new' || sessionType == 'data_append' || sessionType == 'model_generate' || sessionType == 'model_predict') {
+        if (
+            sessionType == 'data_new' || sessionType == 'data_append' ||
+            sessionType == 'model_generate' || sessionType == 'model_predict'
+        ) {
             var ajaxEndpoint = '/load-data/';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
@@ -122,14 +125,20 @@ var SelectSession = React.createClass({
 
         {/* return:
             @svmForm, attribute is used within 'handleSubmit' callback
-            @formResult, is accessible within child component as 'this.props.formResult'
+            @formResult, is accessible within child component as
+                'this.props.formResult'
         */}
         return(
             <form onSubmit={this.handleSubmit} ref='svmForm'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
-                    <select name='svm_session' autoComplete='off' onChange={this.changeSessionType} value={this.state.value_session_type}>
+                    <select
+                        name='svm_session'
+                        autoComplete='off'
+                        onChange={this.changeSessionType}
+                        value={this.state.value_session_type}
+                    >
                         <option value='' defaultValue>--Select--</option>
                         <option value='data_new'>New Data</option>
                         <option value='data_append'>Append Data</option>

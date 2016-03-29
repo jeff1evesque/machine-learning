@@ -34,10 +34,12 @@ var ModelPredict = React.createClass({
             this.props.onChange({render_submit: false});
         }
     },
-  // update 'state properties' from children component (i.e. 'validStringEntered')
+  // update 'state properties' from child component (i.e. 'validStringEntered')
     displaySubmit: function(event) {
         if (event.submitted_proper_predictor) {
-            this.props.onChange({render_submit: event.submitted_proper_predictor});
+            this.props.onChange({
+                render_submit: event.submitted_proper_predictor
+            });
         }
         else {
             this.props.onChange({render_submit: false});
@@ -55,19 +57,32 @@ var ModelPredict = React.createClass({
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
-                    <select name='svm_model_id' autoComplete='off' onChange={this.changeModelId} value={this.state.value_model_id}>
+                    <select
+                        name='svm_model_id'
+                        autoComplete='off'
+                        onChange={this.changeModelId}
+                        value={this.state.value_model_id}
+                    >
+
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
                         {options && options.map(function(value) {
-                            return <option key={value.id} value={value.id}>{value.id}: {value.title}</option>;
+                            return <option key={value.id} value={value.id}>
+                                {value.id}: {value.title}
+                            </option>;
                         })}
-
                     </select>
                 </fieldset>
 
-                {/* 'selectedModelId' is accessible within child component as 'this.props.selectedModelId' */}
-                <Predictors onChange={this.displaySubmit} selectedModelId={this.state.value_model_id} />
+                {/*
+                    'selectedModelId' is accessible within child component as
+                    'this.props.selectedModelId'
+                */}
+                <Predictors
+                    onChange={this.displaySubmit}
+                    selectedModelId={this.state.value_model_id}
+                />
             </fieldset>
         );
     },
