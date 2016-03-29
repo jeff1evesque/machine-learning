@@ -125,7 +125,8 @@ var SelectSession = React.createClass({
 
         {/* return:
             @svmForm, attribute is used within 'handleSubmit' callback
-            @formResult, is accessible within child component as 'this.props.formResult'
+            @formResult, is accessible within child component as
+                'this.props.formResult'
         */}
         return(
             <form onSubmit={this.handleSubmit} ref='svmForm'>
