@@ -22,24 +22,30 @@ var SupplyPredictors = React.createClass({
   // update 'state properties': allow parent component(s) to access properties
     validIntegerEntered: function(event){
         {/* get array of input elements, by classname */}
-        var predictionNodeList = document.getElementsByClassName('predictionInput');
+        var predictors = document.getElementsByClassName('predictionInput');
 
-        {/* if input value is a valid float, store 'true', within corresponding array */}
-        var submitArray = Array.prototype.map.call(predictionNodeList, function(element) {
-            if (element.value && checkValidFloat(element.value)) {
-                return true;
+        {/*
+            Iterate the node list containing the supplied dataset(s). If the
+            input value is a valid file, store 'true', within the array.
+        */}
+        var boolArray = Array.prototype.map.call(
+            predictors,
+            function(element) {
+                if (element.value && checkValidFloat(element.value)) {
+                    return true;
+                }
+                else {
+                    return false;
+                }
             }
-            else {
-                return false;
-            }
-        });
+        );
 
         {/* check if every element is 'true' */}
-        var submitBoolean = submitArray.every(function(element) {
+        var datasetFlag = boolArray.every(function(element) {
             return element == true;
         });
 
-        if (submitBoolean) {
+        if (datasetFlag) {
             this.props.onChange({submitted_proper_predictor: true});
         }
         else {
