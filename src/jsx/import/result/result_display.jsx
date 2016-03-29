@@ -18,7 +18,7 @@ var ResultDisplay = React.createClass({
         var displayResult = false;
 
         if (
-            serverObject && serverResult && serverResult.result &&
+            serverObj && serverResult && serverResult.result &&
             checkValidString(serverResult.result)
         ) {
             var result = serverResult.result;
