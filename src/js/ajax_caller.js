@@ -27,7 +27,7 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     if (response.ok) {
       // asynchronous callback
       callbackDone(response)
-	} else {
+    } else {
       // define error
       var error = new Error(response.statusText)
       error.response = response
