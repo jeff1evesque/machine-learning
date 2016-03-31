@@ -22,19 +22,19 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     body: args.data,
     headers: {
       'Content-Type':  args.contentType
-	}
+    }
   }).then(function(response) {
     if (response.ok) {
       // asynchronous callback
-      callbackDone(response)
+      callbackDone(response);
     } else {
       // define error
-      var error = new Error(response.statusText)
-      error.response = response
-      throw error
+      var error = new Error(response.statusText);
+      error.response = response;
+      throw error;
     }
   }, function(error) {
     // asynchronous callback
     callbackFail(error.message, error.response);
-  })
+  });
 }
