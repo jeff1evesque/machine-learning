@@ -19,5 +19,8 @@ function ajaxCaller(callbackDone, callbackFail, args) {
   fetch(args.endpoint, {
     method: 'post',
     body: args.data,
+    headers: {
+      'Content-Type':  args.contentType
+	}
   })
 }
