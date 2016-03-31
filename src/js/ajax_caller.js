@@ -36,5 +36,5 @@ function ajaxCaller(callbackDone, callbackFail, args) {
   }, function(error) {
     // asynchronous callback
     callbackFail(error.message, error.response);
-  }
+  })
 }
