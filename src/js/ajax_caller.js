@@ -28,13 +28,21 @@ function ajaxCaller(callbackDone, callbackFail, args) {
       // asynchronous callback
       callbackDone(response.json());
     } else {
+      // need status in variables
+      var errorCode = response.status;
+
       // define error
-      var error = new Error(response.statusText);
+      var error = new Error(
+        response.statusText,
+        response.headers
+      );
       error.response = response;
       throw error;
     }
-  }).catch(function(error) {
+  }).catch(function(errorMessage, headers) {
+    // variables
+    var serverResponse = (headers) ? headers : 'no server response';
     // asynchronous callback
-    callbackFail(error.message, error.response);
+    callbackFail(errorMessage, serverResponse);
   });
 }
