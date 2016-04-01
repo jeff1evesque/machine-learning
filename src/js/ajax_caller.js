@@ -31,14 +31,11 @@ function ajaxCaller(callbackDone, callbackFail, args) {
       // throw custom error
       var error = {
         'statusText': response.statusText,
-        'status': response.status,
-        'headers': response.headers
+        'status': response.status
 	  }
       throw error;
     }
   }).catch(function(e) {
-    // variables
-    var serverResponse = (e.headers) ? e.headers : 'no server response';
     // asynchronous callback
     callbackFail(e.statusText, e.status);
   });
