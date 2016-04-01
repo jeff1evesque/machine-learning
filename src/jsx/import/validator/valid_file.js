@@ -3,7 +3,7 @@
  */
 function validator(value) {
   var validExtensions = ['csv', 'xml', 'json'];
-  if ($.inArray(value.split('.').pop().toLowerCase(), validExtensions) >= 0) {
+  if (validExtensions.indexOf(value.split('.').pop()toLowerCase()) > -1) {
     return true;
   } else {
     return false;
