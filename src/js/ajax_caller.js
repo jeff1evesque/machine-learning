@@ -26,14 +26,14 @@ function ajaxCaller(callbackDone, callbackFail, args) {
   }).then(function(response) {
     if (response.ok) {
       // asynchronous callback
-      callbackDone(response);
+      callbackDone(response.json());
     } else {
       // define error
       var error = new Error(response.statusText);
       error.response = response;
       throw error;
     }
-  }, function(error) {
+  }).catch(function(error) {
     // asynchronous callback
     callbackFail(error.message, error.response);
   });
