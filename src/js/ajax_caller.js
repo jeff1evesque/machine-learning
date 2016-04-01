@@ -28,14 +28,12 @@ function ajaxCaller(callbackDone, callbackFail, args) {
       // asynchronous callback
       callbackDone(response.json());
     } else {
-      // variables
+      // throw custom error
       var error = {
         response.statusText,
         response.status,
         response.headers
 	  }
- 
-    // throw error
       throw error;
     }
   }).catch(function(e) {
