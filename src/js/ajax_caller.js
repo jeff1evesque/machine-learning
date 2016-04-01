@@ -30,9 +30,9 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     } else {
       // throw custom error
       var error = {
-        response.statusText,
-        response.status,
-        response.headers
+        'statusText': response.statusText,
+        'status': response.status,
+        'headers': response.headers
 	  }
       throw error;
     }
