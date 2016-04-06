@@ -6,12 +6,12 @@
 
 // AJAX Process
 function ajaxCaller(callbackDone, callbackFail, args) {
-  // tell jquery to set the contentType
+  // set the contentType
   if (args.contentType === null) {
     args.contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
   }
 
-  // tell jquery to process the data
+  // process the data
   if (args.processData === null) {
     args.processData = true;
   }
@@ -26,7 +26,7 @@ function ajaxCaller(callbackDone, callbackFail, args) {
   }).then(function(response) {
     if (response.ok) {
       // asynchronous callback
-      callbackDone(response.json());
+      response.json().then((data) => callbackDone(data));
     } else {
       // throw custom error
       var error = {
