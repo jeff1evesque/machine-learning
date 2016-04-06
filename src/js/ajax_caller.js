@@ -21,13 +21,12 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     method: 'post',
     body: args.data,
     headers: {
-      'Accept': 'text/javascript',
-      'Content-Type': args.contentType
+      'Accept': 'text/javascript'
     }
   }).then(function(response) {
     if (response.ok) {
       // asynchronous callback
-      response.json().then((data) => callbackDone(data));
+      response.json().then(function(data) { callbackDone(data); });
     } else {
       // throw custom error
       var error = {
