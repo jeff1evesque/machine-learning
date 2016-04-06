@@ -21,7 +21,8 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     method: 'post',
     body: args.data,
     headers: {
-      'Content-Type':  args.contentType
+      'Accept': 'text/javascript',
+      'Content-Type': args.contentType
     }
   }).then(function(response) {
     if (response.ok) {
