@@ -14,6 +14,7 @@ var ModelGenerate = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            mounted: 'false',
             value_session_id: '--Select--',
             value_model_type: '--Select--',
             render_submit: false,
@@ -111,6 +112,9 @@ var ModelGenerate = React.createClass({
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
+      // variables
+        this.mounted = true;
+
       // ajax arguments
         var ajaxEndpoint = '/retrieve-session/';
         var ajaxArguments = {
@@ -140,6 +144,9 @@ var ModelGenerate = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+    },
+    componentWillUnmount() {
+        this.mounted = false;
     }
 });
 
