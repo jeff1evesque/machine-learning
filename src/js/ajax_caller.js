@@ -8,12 +8,7 @@
 function ajaxCaller(callbackDone, callbackFail, args) {
   // set the contentType
   if (args.contentType === null) {
-    args.contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
-  }
-
-  // process the data
-  if (args.processData === null) {
-    args.processData = true;
+    args.contentType = 'text/plain';
   }
 
   // ajax logic
@@ -21,7 +16,8 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     method: 'post',
     body: args.data,
     headers: {
-      'Accept': 'text/javascript'
+      'Accept': 'text/javascript',
+      'Content-Type': args.contentType
     }
   }).then(function(response) {
     if (response.ok) {
