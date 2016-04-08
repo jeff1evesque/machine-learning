@@ -90,7 +90,8 @@ var SupplyPredictors = React.createClass({
         var ajaxData = {'session_id': this.props.selectedModelId};
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,
-            'data': ajaxData
+            'data': JSON.stringify(ajaxData),
+            'contentType': 'application/json'
         };
 
       // asynchronous callback: ajax 'done' promise
