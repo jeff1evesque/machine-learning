@@ -50,9 +50,9 @@ var ModelGenerate = React.createClass({
         var modelType = event.target.value;
 
         if (
-                modelType && modelType != '--Select--' &&
-                checkValidString(modelType)
-            ) {
+            modelType && modelType != '--Select--' &&
+            checkValidString(modelType)
+        ) {
             this.setState({value_model_type: event.target.value});
 
             if (Number(sessionId)) {
