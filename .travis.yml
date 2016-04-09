@@ -50,7 +50,7 @@ script:
   - jshint --verbose src/js/*.js --config test/config/jshint.json --exclude-path test/config/.jshintignore
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
-  - bootlint interface/templates/*.html
+  - bootlint -d W005 interface/templates/*.html
   - puppet-lint --no-ensure_first_param-check --no-autoloader_layout-check --no-variable_scope-check puppet/environment/development/manifests
   - puppet-lint --no-ensure_first_param-check --no-variable_scope-check puppet/environment/development/modules
   - (cd puppet/environment/development/ && r10k puppetfile check)
