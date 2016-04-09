@@ -6,7 +6,7 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
-## install package dependencies
+## ensure log directory, package dependencies
 class dependencies {
     require system::log_directory
     contain package::webcompilers
