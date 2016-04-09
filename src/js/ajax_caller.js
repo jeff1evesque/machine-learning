@@ -10,13 +10,12 @@ function ajaxCaller(callbackDone, callbackFail, args) {
   if (args.contentType === null || args.contentType == undefined) {
     var headers = {
       'Accept': 'text/javascript'
-    }
-  }
-  else {
+    };
+  } else {
     var headers = {
       'Accept': 'text/javascript',
       'Content-Type': args.contentType
-    }
+    };
   }
 
   // ajax logic
@@ -33,7 +32,7 @@ function ajaxCaller(callbackDone, callbackFail, args) {
       var error = {
         'statusText': response.statusText,
         'status': response.status
-	  }
+      };
       throw error;
     }
   }).catch(function(e) {
