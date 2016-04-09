@@ -6,9 +6,17 @@
 
 // AJAX Process
 function ajaxCaller(callbackDone, callbackFail, args) {
-  // set the contentType
-  if (args.contentType === null) {
-    args.contentType = 'text/plain';
+  // define fetch headers
+  if (args.contentType === null || args.contentType == undefined) {
+    var headers = {
+      'Accept': 'text/javascript'
+    }
+  }
+  else {
+    var headers = {
+      'Accept': 'text/javascript',
+      'Content-Type': args.contentType
+    }
   }
 
   // ajax logic
