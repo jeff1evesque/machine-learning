@@ -92,15 +92,6 @@ Vagrant.configure(2) do |config|
     puppet.manifest_file    = 'configure_redis.pp'
   end
 
-  ## Custom Manifest: configure webserver
-  config.vm.provision 'puppet' do |puppet|
-    puppet.environment_path = 'puppet/environment'
-    puppet.environment      = 'development'
-    puppet.manifests_path   = 'puppet/environment/development/manifests'
-    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
-    puppet.manifest_file    = 'configure_webserver.pp'
-  end
-
   ## Custom Manifest: configure system (i.e. system timezone)
   config.vm.provision 'puppet' do |puppet|
     puppet.environment_path = 'puppet/environment'
