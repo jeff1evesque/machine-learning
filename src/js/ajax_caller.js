@@ -12,7 +12,7 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     'Content-Type': args.contentType
   };
   if (args.contentType === null || args.contentType === undefined) {
-    var fetchHeaders = {
+    fetchHeaders = {
       'Accept': 'text/javascript'
     };
   }
