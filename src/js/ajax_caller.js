@@ -7,14 +7,13 @@
 // AJAX Process
 function ajaxCaller(callbackDone, callbackFail, args) {
   // define fetch headers
-  if (args.contentType === null || args.contentType == undefined) {
-    var headers = {
+  var fetchHeaders = {
+    'Accept': 'text/javascript',
+    'Content-Type': args.contentType
+  };
+  if (args.contentType === null || args.contentType === undefined) {
+    var fetchHeaders = {
       'Accept': 'text/javascript'
-    };
-  } else {
-    var headers = {
-      'Accept': 'text/javascript',
-      'Content-Type': args.contentType
     };
   }
 
@@ -22,7 +21,7 @@ function ajaxCaller(callbackDone, callbackFail, args) {
   fetch(args.endpoint, {
     method: 'post',
     body: args.data,
-    headers: headers
+    headers: fetchHeaders
   }).then(function(response) {
     if (response.ok) {
       // asynchronous callback
