@@ -1,45 +1,43 @@
 /**
- * ajax_caller.js: this script utilizes ajax to retrieve data from 'views.py'.
- *                 Specifically, an array of feature (independent variables)
- *                 names, and the generalized count of features that can be
- *                 expected within an observation, is inserted to respective
- *                 DOM elements.
+ * ajax_caller.js: an array of feature (independent variables) names, and the
+ *                 generalized count of features that can be expected within an
+ *                 observation, is inserted to respective DOM elements.
  */
 
 // AJAX Process
-  function ajaxCaller(callbackDone, callbackFail, args) {
-    // tell jquery to set the contentType
-    if (args.contentType === null) {
-      args.contentType = 'application/x-www-form-urlencoded; charset=UTF-8';
+function ajaxCaller(callbackDone, callbackFail, args) {
+  // define fetch headers
+  if (args.contentType === null || args.contentType == undefined) {
+    var headers = {
+      'Accept': 'text/javascript'
     }
-
-    // tell jquery to process the data
-    if (args.processData === null) {
-      args.processData = true;
-    }
-
-    $.ajax({
-      type: 'POST',
-      url: args.endpoint,
-      data: args.data,
-      dataType: 'json',
-      contentType: args.contentType,
-      processData: args.processData,
-      beforeSend: function() {
-
-        // asynchronous callback
-        // callbackBeforeSend();
-
-      }
-    }).done(function(data) {
-
-      // asynchronous callback
-      callbackDone(data);
-
-    }).fail(function(jqXHR, textStatus, errorThrown) {
-
-      // asynchronous callback
-      callbackFail(textStatus, errorThrown);
-
-    });
   }
+  else {
+    var headers = {
+      'Accept': 'text/javascript',
+      'Content-Type': args.contentType
+    }
+  }
+
+  // ajax logic
+  fetch(args.endpoint, {
+    method: 'post',
+    body: args.data,
+    headers: headers
+  }).then(function(response) {
+    if (response.ok) {
+      // asynchronous callback
+      response.json().then(function(data) { callbackDone(data); });
+    } else {
+      // throw custom error
+      var error = {
+        'statusText': response.statusText,
+        'status': response.status
+	  }
+      throw error;
+    }
+  }).catch(function(e) {
+    // asynchronous callback
+    callbackFail(e.statusText, e.status);
+  });
+}

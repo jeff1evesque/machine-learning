@@ -65,9 +65,7 @@ var SelectSession = React.createClass({
             var ajaxEndpoint = '/load-data/';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.svmForm),
-                'contentType': false,
-                'processData': false,
+                'data': new FormData(this.refs.svmForm)
             };
 
           // boolean to show ajax spinner

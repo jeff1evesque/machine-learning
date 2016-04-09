@@ -31,7 +31,7 @@ class general_packages {
     contain package::jsonschema
     contain package::xmltodict
     contain package::six
-    contain system::webcompiler_directories
+    contain package::fetch
 }
 
 ## initiate
