@@ -19,7 +19,6 @@ var DataAppend = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            mounted: false,
             value_session_id: '--Select--',
             value_dataset_type: '--Select--',
             render_submit: false,
@@ -134,7 +133,7 @@ var DataAppend = React.createClass({
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
       // variables
-        this.setState({mounted: true});
+        this.mounted = true;
 
       // ajax arguments
         var ajaxEndpoint = '/retrieve-session/';
@@ -146,7 +145,7 @@ var DataAppend = React.createClass({
       // asynchronous callback: ajax 'done' promise
         ajaxCaller(function (asynchObject) {
         // Append to DOM
-            if (this.state.mounted) {
+            if (this.mounted) {
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
@@ -156,7 +155,7 @@ var DataAppend = React.createClass({
         }.bind(this),
       // asynchronous callback: ajax 'fail' promise
         function (asynchStatus, asynchError) {
-            if (this.state.mounted) {
+            if (this.mounted) {
                 if (asynchStatus) {
                     this.setState({ajax_fail_status: asynchStatus});
                     console.log('Error Status: ' + asynchStatus);
@@ -171,7 +170,7 @@ var DataAppend = React.createClass({
         ajaxArguments);
     },
     componentWillUnmount() {
-        this.setState({mounted: false});
+        this.mounted = false;
     }
 });
 
