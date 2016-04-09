@@ -168,7 +168,7 @@ def retrieve_feature_properties():
     if request.method == 'POST':
         label_list = Cache_Hset().uncache(
             'svm_rbf_feature_labels',
-            request.form['session_id']
+            request.get_json()['session_id']
         )
 
         # return all feature labels
