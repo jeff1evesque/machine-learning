@@ -8,6 +8,7 @@
 
 ## install package dependencies
 class dependencies {
+    require system::log_directory
     contain package::webcompilers
 }
 
