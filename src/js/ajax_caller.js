@@ -23,10 +23,7 @@ function ajaxCaller(callbackDone, callbackFail, args) {
   fetch(args.endpoint, {
     method: 'post',
     body: args.data,
-    headers: {
-      'Accept': 'text/javascript',
-      'Content-Type': args.contentType
-    }
+    headers: headers
   }).then(function(response) {
     if (response.ok) {
       // asynchronous callback
