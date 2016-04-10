@@ -9,6 +9,7 @@
 
 import checkValidString from './../validator/valid_string.js';
 import checkValidInt from './../validator/valid_int.js';
+import Spinner from './../general/spinner.jsx';
 
 var ModelGenerate = React.createClass({
   // initial 'state properties'
@@ -69,6 +70,14 @@ var ModelGenerate = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var options = this.state.ajax_done_options;
+
+        if (this.state.display_spinner) {
+            var AjaxSpinner = Spinner;
+        }
+        else {
+            var AjaxSpinner = 'span';
+        }
+
         return(
             <fieldset className='fieldset-session-generate'>
                 <legend>Generate Model</legend>
@@ -106,6 +115,8 @@ var ModelGenerate = React.createClass({
 
                     </select>
                 </fieldset>
+
+                <AjaxSpinner />
             </fieldset>
         );
     },
@@ -121,6 +132,9 @@ var ModelGenerate = React.createClass({
             'data': null
         };
 
+      // boolean to show ajax spinner
+        this.setState({display_spinner: true});
+
       // asynchronous callback: ajax 'done' promise
         if (this.mounted) {
             ajaxCaller(function (asynchObject) {
@@ -130,6 +144,8 @@ var ModelGenerate = React.createClass({
                 } else if (asynchObject) {
                     this.setState({ajax_done_options: asynchObject});
                 }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
             }.bind(this),
           // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
@@ -141,6 +157,8 @@ var ModelGenerate = React.createClass({
                     this.setState({ajax_fail_error: asynchError});
                     console.log('Error Thrown: ' + asynchError);
                 }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
             }.bind(this),
           // pass ajax arguments
             ajaxArguments);
