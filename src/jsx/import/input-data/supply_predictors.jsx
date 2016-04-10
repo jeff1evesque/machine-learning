@@ -25,8 +25,8 @@ var SupplyPredictors = React.createClass({
         var predictors = document.getElementsByClassName('predictionInput');
 
         {/*
-            Iterate the node list containing the supplied dataset(s). If the
-            input value is a valid file, store 'true', within the array.
+            Iterate the node list containing the supplied predictors(s). If
+            input value is a valid float, store 'true', within the array.
         */}
         var boolArray = Array.prototype.map.call(
             predictors,
