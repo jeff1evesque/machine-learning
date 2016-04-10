@@ -72,7 +72,7 @@ var SupplyPredictors = React.createClass({
                         placeholder={value}
                         key={index}
                         onChange={this.validIntegerEntered}
-                        value={predictor}
+//                        value={predictor}
                     />;
                 }.bind(this))}
 
