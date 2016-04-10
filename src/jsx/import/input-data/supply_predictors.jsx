@@ -62,7 +62,7 @@ var SupplyPredictors = React.createClass({
 
                 {/* array components require unique 'key' value */}
                 {options && options.map(function(value, index){
-                    var suffix = index.toString()
+                    var suffix = index.toString();
 				    var predictor = this.state['value_predictor_' + suffix];
 
                     return <input
