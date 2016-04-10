@@ -143,19 +143,17 @@ var DataAppend = React.createClass({
         };
 
       // asynchronous callback: ajax 'done' promise
-        ajaxCaller(function (asynchObject) {
-        // Append to DOM
-            if (this.mounted) {
+        if (this.mounted) {
+            ajaxCaller(function (asynchObject) {
+              // Append to DOM
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
                     this.setState({ajax_done_options: asynchObject});
                 }
-            }
-        }.bind(this),
-      // asynchronous callback: ajax 'fail' promise
-        function (asynchStatus, asynchError) {
-            if (this.mounted) {
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
                 if (asynchStatus) {
                     this.setState({ajax_fail_status: asynchStatus});
                     console.log('Error Status: ' + asynchStatus);
@@ -164,10 +162,10 @@ var DataAppend = React.createClass({
                     this.setState({ajax_fail_error: asynchError});
                     console.log('Error Thrown: ' + asynchError);
                 }
-            }
-        }.bind(this),
-      // pass ajax arguments
-        ajaxArguments);
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+        }
     },
     componentWillUnmount() {
         this.mounted = false;
