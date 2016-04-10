@@ -26,12 +26,22 @@ var ModelPredict = React.createClass({
     changeModelId: function(event){
         var modelId = event.target.value;
 
+      // clear predictors, remove submit button
+          var predictors = document.getElementsByClassName('predictionInput');
+
+          if (predictors) {
+              for (var i = 0; i < predictors.length; i++) {
+                  predictors[i].value='';
+              }
+          }
+          this.props.onChange({render_submit: false});
+
+      // store modelId into state
         if (modelId && modelId != '--Select--' && checkValidInt(modelId)) {
             this.setState({value_model_id: event.target.value});
         }
         else {
             this.setState({value_model_id: '--Select--'});
-            this.props.onChange({render_submit: false});
         }
     },
   // update 'state properties' from child component (i.e. 'validStringEntered')
