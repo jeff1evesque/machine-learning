@@ -111,7 +111,7 @@ var SupplyDatasetUrl = React.createClass({
                 />
 
                 {/* array components require unique 'key' value */}
-                {inputs && inputs.map(function(value, index){ 
+                {inputs && inputs.map(function(value, index){
                     return <input
                         type='url'
                         name='svm_dataset[]'
