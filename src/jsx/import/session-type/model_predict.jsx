@@ -9,6 +9,7 @@
 
 import SupplyPredictors from '../input-data/supply_predictors.jsx';
 import checkValidInt from './../validator/valid_int.js';
+import Spinner from './../general/spinner.jsx';
 
 var ModelPredict = React.createClass({
   // initial 'state properties'
@@ -61,6 +62,13 @@ var ModelPredict = React.createClass({
         var Predictors = this.getSupplyPredictors(inputModelId);
         var options = this.state.ajax_done_options;
 
+        if (this.state.display_spinner) {
+            var AjaxSpinner = Spinner;
+        }
+        else {
+            var AjaxSpinner = 'span';
+        }
+
         return(
             <fieldset className='fieldset-session-predict'>
                 <legend>Analysis</legend>
@@ -93,6 +101,8 @@ var ModelPredict = React.createClass({
                     onChange={this.displaySubmit}
                     selectedModelId={this.state.value_model_id}
                 />
+
+                <AjaxSpinner />
             </fieldset>
         );
     },
@@ -117,20 +127,23 @@ var ModelPredict = React.createClass({
             'data': null
         };
 
+      // boolean to show ajax spinner
+        this.setState({display_spinner: true});
+
       // asynchronous callback: ajax 'done' promise
-        ajaxCaller(function (asynchObject) {
-        // Append to DOM
-            if (this.mounted) {
+        if (this.mounted) {
+            ajaxCaller(function (asynchObject) {
+            // Append to DOM
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
                     this.setState({ajax_done_options: asynchObject});
                 }
-            }
-        }.bind(this),
-      // asynchronous callback: ajax 'fail' promise
-        function (asynchStatus, asynchError) {
-            if (this.mounted) {
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
                 if (asynchStatus) {
                     this.setState({ajax_fail_status: asynchStatus});
                     console.log('Error Status: ' + asynchStatus);
@@ -139,10 +152,12 @@ var ModelPredict = React.createClass({
                     this.setState({ajax_fail_error: asynchError});
                     console.log('Error Thrown: ' + asynchError);
                 }
-            }
-        }.bind(this),
-      // pass ajax arguments
-        ajaxArguments);
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+        }
     },
     componentWillUnmount() {
         this.mounted = false;
