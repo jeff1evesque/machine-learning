@@ -103,7 +103,7 @@ var ModelGenerate = React.createClass({
             this.setState({value_kernel_type: '--Select--'});
             this.props.onChange({render_submit: false});
         }
-    }
+    },
   // triggered when 'state properties' change
     render: function(){
         var options = this.state.ajax_done_options;
