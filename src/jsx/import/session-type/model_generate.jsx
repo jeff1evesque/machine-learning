@@ -114,6 +114,22 @@ var ModelGenerate = React.createClass({
                         <option value='regression'>Regression</option>
 
                     </select>
+
+                    <select
+                        name='svm_kernel_type'
+                        autoComplete='off'
+                        onChange={this.changeKernelType}
+                        value={this.state.value_kernel_type}
+                    >
+
+                        <option value='' defaultValue>--Select--</option>
+                        <option value='linear'>Linear</option>
+                        <option value='polynomial'>Polynomial</option>
+                        <option value='rbf'>RBF</option>
+                        <option value='sigmoid'>Sigmoid</option>
+                        <option value='precomputed'>Precomputed</option>
+
+                    </select>
                 </fieldset>
 
                 <AjaxSpinner />
