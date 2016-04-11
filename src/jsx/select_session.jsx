@@ -69,7 +69,7 @@ var SelectSession = React.createClass({
             };
 
           // boolean to show ajax spinner
-              this.setState({display_spinner: true});
+            this.setState({display_spinner: true});
 
           // asynchronous callback: ajax 'done' promise
            ajaxCaller(function (asynchObject) {
