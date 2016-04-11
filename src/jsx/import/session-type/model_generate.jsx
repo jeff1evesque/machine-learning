@@ -26,14 +26,21 @@ var ModelGenerate = React.createClass({
     },
   // update 'state properties'
     changeSessionId: function(event){
-        var sessionId = event.target.value;
-        var modelType = this.state.value_model_type;
+        var sessionId  = event.target.value;
+        var modelType  = this.state.value_model_type;
+        var kernelType = this.state.value_kernel_type;
 
-        if (sessionId && checkValidInt(sessionId)) {
+        if (
+            sessionId && sessionId != '--Select--' &&
+            checkValidInt(sessionId)
+        ) {
             this.setState({value_session_id: sessionId});
 
           // allow parent component(s) to access 'render_submit'
-            if (modelType != '--Select--') {
+            if (
+                modelType != '--Select--' && kernelType != '--Select--' &&
+                checkValidString(modelType) && checkValidString(kernelType)
+            ) {
                 this.props.onChange({render_submit: true});
             }
             else {
@@ -46,8 +53,9 @@ var ModelGenerate = React.createClass({
         }
     },
     changeModelType: function(event){
-        var sessionId = this.state.value_session_id;
-        var modelType = event.target.value;
+        var sessionId  = this.state.value_session_id;
+        var modelType  = event.target.value;
+        var kernelType = this.state.value_kernel_type;
 
         if (
             modelType && modelType != '--Select--' &&
@@ -55,7 +63,10 @@ var ModelGenerate = React.createClass({
         ) {
             this.setState({value_model_type: event.target.value});
 
-            if (Number(sessionId)) {
+            if (
+                Number(sessionId) && kernelType != '--Select--' &&
+                checkValidString(kernelType)
+            ) {
                 this.props.onChange({render_submit: true});
             }
             else {
@@ -67,6 +78,32 @@ var ModelGenerate = React.createClass({
             this.props.onChange({render_submit: false});
         }
     },
+    changeKernelType: function(event) {
+        var sessionId  = this.state.value_session_id;
+        var modelType  = this.state.value_model_type;
+        var kernelType = event.target.value;
+
+        if (
+            kernelType && kernelType != '--Select--' &&
+            checkValidString(kernelType)
+        ) {
+            this.setState({value_model_type: event.target.value});
+
+            if (
+                Number(sessionId) && modelType != '--Select--' &&
+                checkValidString(modelType)
+            ) {
+                this.props.onChange({render_submit: true});
+            }
+            else {
+                this.props.onChange({render_submit: false});
+            }
+        }
+        else {
+            this.setState({value_kernel_type: '--Select--'});
+            this.props.onChange({render_submit: false});
+        }
+    }
   // triggered when 'state properties' change
     render: function(){
         var options = this.state.ajax_done_options;
