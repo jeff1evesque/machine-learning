@@ -19,7 +19,7 @@ from interface import app
 # variables
 LOG_FILENAME = '/vagrant/log/access.log'
 
-# define log handler: requires the below logger
+# log handler: requires the below logger
 formatter = logging.Formatter(
     "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
 handler = RotatingFileHandler(LOG_FILENAME, maxBytes=10000000, backupCount=5)
@@ -27,7 +27,7 @@ handler.setLevel(logging.DEBUG)
 handler.setFormatter(formatter)
 app.logger.addHandler(handler)
 
-# define logger: complements the log handler
+# logger: complements the log handler
 log = logging.getLogger('werkzeug')
 log.setLevel(logging.DEBUG)
 log.addHandler(handler)
