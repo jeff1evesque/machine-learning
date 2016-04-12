@@ -1,7 +1,7 @@
 /**
  * support_vector.jsx: initial form.
  *
- * @SelectSession, must be capitalized in order for reactjs to render it as a
+ * @SupportVector, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
