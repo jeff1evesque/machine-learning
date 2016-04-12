@@ -1,7 +1,7 @@
 /**
- * select_session.jsx: initial form.
+ * support_vector.jsx: initial form.
  *
- * @SelectSession, must be capitalized in order for reactjs to render it as a
+ * @SupportVector, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
@@ -16,7 +16,7 @@ import ResultDisplay from './import/result/result_display.jsx';
 import Spinner from './import/general/spinner.jsx';
 import checkValidString from './import/validator/valid_string.js';
 
-var SelectSession = React.createClass({
+var SupportVector = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -164,4 +164,4 @@ var SelectSession = React.createClass({
 });
 
 // render form
-ReactDOM.render(<SelectSession/>, document.querySelector('.ml-container'));
+ReactDOM.render(<SupportVector/>, document.querySelector('.ml-container'));

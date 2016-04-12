@@ -142,7 +142,7 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf interface/static/js'
     run 'rm -Rf puppet/environment/development/modules_contrib'
     run 'rm -f src/js/.gitignore'
-    run 'rm -f src/js/select_session.js'
+    run 'rm -f src/js/support_vector.js'
   end
   
   # Disable automatic box update checking. If you disable this, then
