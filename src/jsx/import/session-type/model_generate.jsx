@@ -64,7 +64,7 @@ var ModelGenerate = React.createClass({
             this.setState({value_model_type: event.target.value});
 
             if (
-                Number(sessionId) && kernelType != '--Select--' &&
+                checkValidInt(sessionId) && kernelType != '--Select--' &&
                 checkValidString(kernelType)
             ) {
                 this.props.onChange({render_submit: true});
@@ -87,10 +87,10 @@ var ModelGenerate = React.createClass({
             kernelType && kernelType != '--Select--' &&
             checkValidString(kernelType)
         ) {
-            this.setState({value_model_type: event.target.value});
+            this.setState({value_kernel_type: event.target.value});
 
             if (
-                Number(sessionId) && modelType != '--Select--' &&
+                checkValidInt(sessionId) && modelType != '--Select--' &&
                 checkValidString(modelType)
             ) {
                 this.props.onChange({render_submit: true});
