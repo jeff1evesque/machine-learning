@@ -63,6 +63,7 @@ var ModelGenerate = React.createClass({
         ) {
             this.setState({value_model_type: event.target.value});
 
+          // allow parent component(s) to access 'render_submit'
             if (
                 checkValidInt(sessionId) && kernelType != '--Select--' &&
                 checkValidString(kernelType)
@@ -89,6 +90,7 @@ var ModelGenerate = React.createClass({
         ) {
             this.setState({value_kernel_type: event.target.value});
 
+          // allow parent component(s) to access 'render_submit'
             if (
                 checkValidInt(sessionId) && modelType != '--Select--' &&
                 checkValidString(modelType)
