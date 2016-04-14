@@ -5,6 +5,7 @@
 This file contains various generic SQL-related methods.
 """
 
+import logging
 import MySQLdb as DB
 from brain.database.db_settings import Database
 
@@ -33,6 +34,10 @@ class SQL(object):
         self.db_settings = Database()
         self.list_error = []
         self.proceed = True
+
+        # database logger
+        self.logger = logging.getLogger(__name__)
+        self.logger.setLevel(logging.DEBUG)
 
         # host address
         if host:
