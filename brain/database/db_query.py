@@ -36,8 +36,9 @@ class SQL(object):
         self.proceed = True
 
         # database logger
+        log_path = self.db.settings.get_db_log()
         self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.DEBUG)
+        self.logger.basicConfig(filename=log_path,level=logging.DEBUG)
 
         # host address
         if host:
