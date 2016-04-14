@@ -135,7 +135,8 @@ class SQL(object):
                     result = self.cursor.fetchall()
 
                 # log transaction
-                self.logger.debug('transaction: success, statement: ' + sql_statement + ', arguments: ' + sql_args)
+                arguments = sql_args if sql_args else 'None'
+                self.logger.debug('transaction: success, statement: ' + sql_statement + ', arguments: ' + arguments)
 
             except DB.Error, error:
                 self.conn.rollback()
@@ -147,7 +148,8 @@ class SQL(object):
                 }
 
                 # log transaction
-                self.logger.debug('transaction: success, statement' + sql_statement + ', arguments: ' + sql_args)
+                arguments = sql_args if sql_args else 'None'
+                self.logger.debug('transaction: success, statement' + sql_statement + ', arguments: ' + arguments)
 
         if sql_type in ['insert', 'delete', 'update']:
             return {
