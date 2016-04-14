@@ -34,11 +34,18 @@ class SQL(object):
         self.db_settings = Database()
         self.list_error = []
         self.proceed = True
+        log_path = self.db_settings.get_db_log()
 
         # database logger
-        log_path = self.db.settings.get_db_log()
+        formatter = logging.Formatter(
+            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+        fh = logging.FileHandler(log_path)
+        fh.setLevel(logging.DEBUG)
+        fh.setFormatter(formatter)
+
         self.logger = logging.getLogger(__name__)
-        self.logger.basicConfig(filename=log_path,level=logging.DEBUG)
+        self.logger.setLevel(logging.DEBUG)
+        self.logger.addHandler(fh)
 
         # host address
         if host:
@@ -81,6 +88,11 @@ class SQL(object):
                     db=database,
                 )
             self.cursor = self.conn.cursor()
+
+            # log successful connection
+            if (self.cursor):
+                self.logger.debug('database connected: success')
+
             return {
                 'status': True,
                 'error': None,
@@ -90,6 +102,11 @@ class SQL(object):
         except DB.Error, error:
             self.proceed = False
             self.list_error.append(error)
+
+            # log unsuccessful connection
+            if (self.cursor):
+                self.logger.debug('database connected: fail')
+
             return {
                 'status': False,
                 'error': self.list_error,
@@ -117,6 +134,9 @@ class SQL(object):
                 elif sql_type == 'select':
                     result = self.cursor.fetchall()
 
+                # log transaction
+                self.logger.debug('transaction: success, statement: ' + sql_statement + ', arguments: ' + sql_args)
+
             except DB.Error, error:
                 self.conn.rollback()
                 self.list_error.append(error)
@@ -125,6 +145,9 @@ class SQL(object):
                     'error': self.list_error,
                     'result': None,
                 }
+
+                # log transaction
+                self.logger.debug('transaction: success, statement' + sql_statement + ', arguments: ' + sql_args)
 
         if sql_type in ['insert', 'delete', 'update']:
             return {
@@ -151,6 +174,10 @@ class SQL(object):
             try:
                 if self.conn:
                     self.conn.close()
+
+                    # log disconnection
+                    self.logger.debug('database disconnected: success')
+
                     return {
                         'status': True,
                         'error': None,
@@ -158,6 +185,10 @@ class SQL(object):
                     }
             except DB.Error, error:
                 self.list_error.append(error)
+
+                # log disconnection
+                self.logger.debug('database disconnected: fail')
+
                 return {
                     'status': False,
                     'error': self.list_error,
