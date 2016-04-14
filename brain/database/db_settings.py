@@ -6,7 +6,7 @@ This file defines SQL database configurations.
 
 """
 
-from settings import HOST, DB_USERNAME, DB_PASSWORD
+from settings import HOST, DB_USERNAME, DB_PASSWORD, DB_LOG
 
 
 class Database(object):
@@ -18,6 +18,9 @@ class Database(object):
         - host
         - username
         - password
+
+    Additionally, this class provides an interface to get, or set the log
+    directory path.
 
     When instantiating this class, or defining any of the class variables, make
     sure the respective sql user is defined within the DBMS, and has adequate
@@ -46,6 +49,7 @@ class Database(object):
         self.db_host = HOST
         self.db_username = DB_USERNAME
         self.db_password = DB_PASSWORD
+        self.db_log = DB_LOG
 
     def get_db_host(self):
         """@get_db_host
@@ -74,6 +78,15 @@ class Database(object):
 
         return self.db_password
 
+    def get_db_log(self):
+        """@get_db_log
+
+        This method is responsible for getting the database log directory path.
+
+        """
+
+        return self.db_log
+
     def set_db_host(self, host):
         """@set_db_host
 
@@ -100,3 +113,12 @@ class Database(object):
         """
 
         self.db_password = pwd
+
+    def set_db_log(self, path):
+        """@set_db_log
+
+        This method is responsible for setting the database log directory path.
+
+        """
+
+        self.db_log = path
