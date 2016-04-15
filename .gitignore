@@ -15,6 +15,7 @@
 !/puppet/
 !Dockerfile
 !/test
+!/log/
 
 #Ignore and don't commit the following directories
 /interface/static/js/
@@ -29,3 +30,4 @@
 # Ignore and don't commit the following files
 *.pyc
 /src/js/.gitignore
+/log/*.log
