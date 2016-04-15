@@ -3,7 +3,17 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class system::log_directory {
-    file {'/vagrant/log/':
+    ## variables
+    directories = [
+        '/vagrant/log/database',
+        '/vagrant/log/error',
+        '/vagrant/log/warning',
+        '/vagrant/log/info',
+        '/vagrant/log/debug',
+    ]
+
+    ## create log directories
+    file { $directories:
         ensure => 'directory',
     }
 }
