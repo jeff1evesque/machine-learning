@@ -30,4 +30,8 @@
 # Ignore and don't commit the following files
 *.pyc
 /src/js/.gitignore
-/log/*.log
+/log/database
+/log/error
+/log/warning
+/log/info
+/log/debug
