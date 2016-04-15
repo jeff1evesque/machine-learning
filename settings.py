@@ -12,4 +12,4 @@ PORT_REDIS = 6379
 
 DB_USERNAME = 'authenticated'
 DB_PASSWORD = 'password'
-DB_LOG = '/vagrant/log/database.log'
+DB_LOG_PATH = '/vagrant/log/database.log'
