@@ -22,7 +22,7 @@ class Logger(object):
 
     """
 
-    def __init__(self, type, level=None, namespace=__name__):
+    def __init__(self, type, level=None, filename=None, namespace=__name__):
         """@__init__
 
         This constructor is responsible for defining class variables.
@@ -41,6 +41,8 @@ class Logger(object):
             - warning
             - info
             - debug
+
+        @filename, optional argument, which names the corresponding log file.
 
         @namespace, the object instantiating this class should define this
             argument with '__name__'.
@@ -77,18 +79,26 @@ class Logger(object):
         # log level
         if log_level == 'error':
             self.log_level = logging.ERROR
+            self.log_filename = log_level
         elif log_level = 'warning':
             self.log_level = logging.WARNING
+            self.log_filename = log_level
         elif log_level = 'info':
             self.log_level = logging.INFO
+            self.log_filename = log_level
         elif log_level = 'debug':
             self.log_level = logging.DEBUG'
+            self.log_filename = log_level
         else:
             self.logger = False
             self.log_path = WARNING_LOG_PATH
             self.log_level = logging.WARNING
             self.log_namespace = namespace
             this.log('log level not properly set')
+
+        # override default filename (optional)
+        if filename:
+            self.log_filename = filename
 
         # log namespace
         if namespace:
@@ -112,7 +122,7 @@ class Logger(object):
             # log handler: requires the below logger
             formatter = logging.Formatter(
                 "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
-            fh = logging.FileHandler(self.log_path)
+            fh = logging.FileHandler(self.log_path + '/' + self.log_filename)
             fh.setLevel(self.log_level)
             fh.setFormatter(formatter)
 
