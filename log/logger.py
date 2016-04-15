@@ -57,6 +57,7 @@ class Logger(object):
         # log type
         if log_type == 'database':
             self.log_path = DB_LOG_PATH
+            self.log_filename = 'database.log'
         elif log_type == 'error':
             self.log_path = ERROR_LOG_PATH
             log_type = 'ERROR'
@@ -79,16 +80,16 @@ class Logger(object):
         # log level
         if log_level == 'error':
             self.log_level = logging.ERROR
-            self.log_filename = log_level
+            self.log_filename = log_level + '.log'
         elif log_level = 'warning':
             self.log_level = logging.WARNING
-            self.log_filename = log_level
+            self.log_filename = log_level + '.log'
         elif log_level = 'info':
             self.log_level = logging.INFO
-            self.log_filename = log_level
+            self.log_filename = log_level + '.log'
         elif log_level = 'debug':
             self.log_level = logging.DEBUG'
-            self.log_filename = log_level
+            self.log_filename = log_level + '.log'
         else:
             self.logger = False
             self.log_path = WARNING_LOG_PATH
