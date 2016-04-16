@@ -13,7 +13,7 @@ PORT_REDIS = 6379
 
 DB_USERNAME = 'authenticated'
 DB_PASSWORD = 'password'
-DB_LOG_PATH = ROOT + '/log/database/database.log'
+DB_LOG_PATH = ROOT + '/log/database/'
 
 LOG_LEVEL        = 'debug'
 ERROR_LOG_PATH   = ROOT + '/log/error'
