@@ -104,8 +104,8 @@ class Logger(object):
         elif logger_level == 'warning':
             self.logger_level = logging.WARNING
             self.log_filename = logger_level + '.log'
-        elif logger_level = 'info':
-            self.logger_level == logging.INFO
+        elif logger_level == 'info':
+            self.logger_level = logging.INFO
             self.log_filename = logger_level + '.log'
         elif logger_level == 'debug':
             self.logger_level = logging.DEBUG'
