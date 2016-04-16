@@ -87,7 +87,7 @@ class Logger(object):
         if handler_level == 'error':
             self.handler_level = logging.ERROR
         elif handler_level == 'warning':
-            self.handler.level = logging.WARNING
+            self.handler_level = logging.WARNING
         elif handler_level == 'info':
             self.handler_level = logging.INFO
         elif handler_level == 'debug':
