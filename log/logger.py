@@ -69,13 +69,13 @@ class Logger(object):
         elif log_type == 'error':
             self.log_path = ERROR_LOG_PATH
             log_type = 'ERROR'
-        elif log_type = 'warning':
+        elif log_type == 'warning':
             self.log_path = WARNING_LOG_PATH
             log_type = 'WARNING'
-        elif log_type = 'info':
+        elif log_type == 'info':
             self.log_path = INFO_LOG_PATH
             log_type = 'INFO'
-        elif log_type = 'debug':
+        elif log_type == 'debug':
             self.log_path = DEBUG_LOG_PATH
             log_type = 'DEBUG'
         else:
@@ -86,11 +86,11 @@ class Logger(object):
         # handler level: application wide constant
         if handler_level == 'error':
             self.handler_level = logging.ERROR
-        elif handler_level = 'warning':
+        elif handler_level == 'warning':
             self.handler.level = logging.WARNING
-        elif handler_level = 'info':
+        elif handler_level == 'info':
             self.handler.level = logging.INFO
-        elif handler_level = 'debug':
+        elif handler_level == 'debug':
             self.handler.level = logging.DEBUG
         else:
             self.logger = False
@@ -101,13 +101,13 @@ class Logger(object):
         if logger_level == 'error':
             self.logger_level = logging.ERROR
             self.log_filename = logger_level + '.log'
-        elif logger_level = 'warning':
+        elif logger_level == 'warning':
             self.logger_level = logging.WARNING
             self.log_filename = logger_level + '.log'
         elif logger_level = 'info':
-            self.logger_level = logging.INFO
+            self.logger_level == logging.INFO
             self.log_filename = logger_level + '.log'
-        elif logger_level = 'debug':
+        elif logger_level == 'debug':
             self.logger_level = logging.DEBUG'
             self.log_filename = logger_level + '.log'
         else:
@@ -153,11 +153,11 @@ class Logger(object):
         if self.logger:
             if logger_level == 'error':
                 self.logger.ERROR(msg)
-            elif logger_level = 'warning':
+            elif logger_level == 'warning':
                 self.logger.WARNING(msg)
-            elif logger_level = 'info':
+            elif logger_level == 'info':
                 self.logger.INFO(msg)
-            elif logger_level = 'debug':
+            elif logger_level == 'debug':
                 self.logger.DEBUG(msg)
         else:
             self.logger.WARNING(self.log_warning)
