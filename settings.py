@@ -15,6 +15,7 @@ DB_USERNAME = 'authenticated'
 DB_PASSWORD = 'password'
 DB_LOG_PATH = ROOT + '/log/database/database.log'
 
+LOG_LEVEL        = 'debug'
 ERROR_LOG_PATH   = ROOT + '/log/error'
 WARNING_LOG_PATH = ROOT + '/log/warning'
 INFO_LOG_PATH    = ROOT + '/log/info'
