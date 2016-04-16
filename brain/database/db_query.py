@@ -5,8 +5,8 @@
 This file contains various generic SQL-related methods.
 """
 
-import logging
 import MySQLdb as DB
+from log.logging import Logger
 from brain.database.db_settings import Database
 
 
@@ -34,18 +34,9 @@ class SQL(object):
         self.db_settings = Database()
         self.list_error = []
         self.proceed = True
-        log_path = self.db_settings.get_db_log()
 
         # database logger
-        formatter = logging.Formatter(
-            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
-        fh = logging.FileHandler(log_path)
-        fh.setLevel(logging.DEBUG)
-        fh.setFormatter(formatter)
-
-        self.logger = logging.getLogger(__name__)
-        self.logger.setLevel(logging.DEBUG)
-        self.logger.addHandler(fh)
+        self.logger = Logger('debug', 'database')
 
         # host address
         if host:
