@@ -26,7 +26,9 @@ class Logger(object):
     def __init__(self, type, level=None, filename=None, namespace=__name__):
         """@__init__
 
-        This constructor is responsible for defining class variables.
+        This constructor is responsible for defining the necessary logger
+        instance, which is used with additional methods to generate a
+        corresponding log.
 
         @type, required argument, with valid log types:
 
@@ -47,6 +49,10 @@ class Logger(object):
 
         @namespace, the object instantiating this class should define this
             argument with '__name__'.
+
+        Note: the handler level, determines the base line, for the logger
+              level. This means if the logger level exceeds the corresponding
+              handler level, it will not logged.
 
         """
 
@@ -115,18 +121,6 @@ class Logger(object):
 
         # log namespace
         self.log_namespace = namespace
-        
-
-    def log(msg):
-        """@__init__
-
-        This method is responsible for generating the corresponding log.
-
-        Note: the handler level, determines the base line, for the logger
-              level. This means if the logger level exceeds the corresponding
-              handler level, it will not logged.
-
-        """
 
         # redefine if not properly set
         if not self.logger:
@@ -146,10 +140,24 @@ class Logger(object):
         self.logger = logging.getLogger(self.log_namespace)
         self.logger.setLevel(self.logger_level)
         self.logger.addHandler(fh)
+        
+
+    def log(msg):
+        """@__init__
+
+        This method is responsible for generating the corresponding log.
+
+        """
 
         # generate log
         if self.logger:
-            self.logger(msg)
+            if logger_level == 'error':
+                self.logger.ERROR(msg)
+            elif logger_level = 'warning':
+                self.logger.WARNING(msg)
+            elif logger_level = 'info':
+                self.logger.INFO(msg)
+            elif logger_level = 'debug':
+                self.logger.DEBUG(msg)
         else:
-            self.logger(self.log_warning)
-
+            self.logger.WARNING(self.log_warning)
