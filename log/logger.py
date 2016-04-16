@@ -74,10 +74,8 @@ class Logger(object):
             log_type = 'DEBUG'
         else:
             self.logger = False
-            self.log_path = WARNING_LOG_PATH
-            self.logger_level = logging.WARNING
             self.log_namespace = namespace
-            this.log('log type not properly set')
+            self.log_warning = 'log type not properly set'
 
         # handler level: application wide constant
         if handler_level == 'error':
@@ -90,10 +88,8 @@ class Logger(object):
             self.handler.level = logging.DEBUG
         else:
             self.logger = False
-            self.log_path = WARNING_LOG_PATH
-            self.logger_level = logging.WARNING
             self.log_namespace = namespace
-            this.log('log handler level not properly set')
+            self.log_warning = 'log handler level not properly set'
 
         # logger level: overriden by calling module
         if logger_level == 'error':
@@ -110,10 +106,8 @@ class Logger(object):
             self.log_filename = logger_level + '.log'
         else:
             self.logger = False
-            self.log_path = WARNING_LOG_PATH
-            self.logger_level = logging.WARNING
             self.log_namespace = namespace
-            this.log('logger level not properly set')
+            self.log_warning = 'logger level not properly set'
 
         # override default filename (optional)
         if filename:
@@ -134,15 +128,28 @@ class Logger(object):
 
         """
 
-        if self.logger:
-            # log handler: requires the below logger
-            formatter = logging.Formatter(
-                "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
-            fh = logging.FileHandler(self.log_path + '/' + self.log_filename)
-            fh.setLevel(LOG_LEVEL)
-            fh.setFormatter(formatter)
+        # redefine if not properly set
+        if not self.logger:
+            LOG_LEVEL = logging.WARNING
+            self.logger_level = logging.WARNING
+            self.log_filename = 'warning.log'
+            self.log_path = WARNING_LOG_PATH
 
-            # logger: complements the log handler
-            self.logger = logging.getLogger(self.log_namespace)
-            self.logger.setLevel(self.logger_level)
-            self.logger.addHandler(fh)
+        # log handler: requires the below logger
+        formatter = logging.Formatter(
+            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+        fh = logging.FileHandler(self.log_path + '/' + self.log_filename)
+        fh.setLevel(LOG_LEVEL)
+        fh.setFormatter(formatter)
+
+        # logger: complements the log handler
+        self.logger = logging.getLogger(self.log_namespace)
+        self.logger.setLevel(self.logger_level)
+        self.logger.addHandler(fh)
+
+        # generate log
+        if self.logger:
+            self.logger(msg)
+        else:
+            self.logger(self.log_warning)
+
