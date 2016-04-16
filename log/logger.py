@@ -117,7 +117,7 @@ class Logger(object):
 
         # override default filename (optional)
         if filename:
-            self.log_filename = filename
+            self.log_filename = filename + '.log'
 
         # log namespace
         self.log_namespace = namespace
