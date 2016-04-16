@@ -89,9 +89,9 @@ class Logger(object):
         elif handler_level == 'warning':
             self.handler.level = logging.WARNING
         elif handler_level == 'info':
-            self.handler.level = logging.INFO
+            self.handler_level = logging.INFO
         elif handler_level == 'debug':
-            self.handler.level = logging.DEBUG
+            self.handler_level = logging.DEBUG
         else:
             self.logger = False
             self.log_namespace = namespace
