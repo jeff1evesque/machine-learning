@@ -6,7 +6,7 @@ This file contains various generic SQL-related methods.
 """
 
 import MySQLdb as DB
-from log.logging import Logger
+from log.logger import Logger
 from brain.database.db_settings import Database
 
 
