@@ -23,7 +23,7 @@ class Logger(object):
 
     """
 
-    def __init__(self, type, level=None, filename=None, namespace=__name__):
+    def __init__(self, type, filename=None, level=None, namespace=__name__):
         """@__init__
 
         This constructor is responsible for defining the necessary logger
@@ -38,14 +38,14 @@ class Logger(object):
             - info
             - debug
 
+        @filename, optional argument, which names the corresponding log file.
+
         @level, required argument when 'log_type' is 'database':
 
             - error
             - warning
             - info
             - debug
-
-        @filename, optional argument, which names the corresponding log file.
 
         @namespace, the object instantiating this class should define this
             argument with '__name__'.
