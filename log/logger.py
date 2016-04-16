@@ -108,7 +108,7 @@ class Logger(object):
             self.logger_level = logging.INFO
             self.log_filename = logger_level + '.log'
         elif logger_level == 'debug':
-            self.logger_level = logging.DEBUG'
+            self.logger_level = logging.DEBUG
             self.log_filename = logger_level + '.log'
         else:
             self.logger = False
