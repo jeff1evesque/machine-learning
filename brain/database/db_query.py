@@ -82,7 +82,7 @@ class SQL(object):
 
             # log successful connection
             if (self.cursor):
-                self.logger.debug('database connected: success')
+                self.logger.log('database connected: success')
 
             return {
                 'status': True,
@@ -96,7 +96,7 @@ class SQL(object):
 
             # log unsuccessful connection
             if (self.cursor):
-                self.logger.debug('database connected: fail')
+                self.logger.log('database connected: fail')
 
             return {
                 'status': False,
@@ -127,7 +127,7 @@ class SQL(object):
 
                 # log transaction
                 arguments = sql_args if sql_args else 'None'
-                self.logger.debug('transaction: success, statement: ' + sql_statement + ', arguments: ' + arguments)
+                self.logger.log('transaction: success, statement: ' + sql_statement + ', arguments: ' + arguments)
 
             except DB.Error, error:
                 self.conn.rollback()
@@ -140,7 +140,7 @@ class SQL(object):
 
                 # log transaction
                 arguments = sql_args if sql_args else 'None'
-                self.logger.debug('transaction: success, statement' + sql_statement + ', arguments: ' + arguments)
+                self.logger.log('transaction: success, statement' + sql_statement + ', arguments: ' + arguments)
 
         if sql_type in ['insert', 'delete', 'update']:
             return {
@@ -169,7 +169,7 @@ class SQL(object):
                     self.conn.close()
 
                     # log disconnection
-                    self.logger.debug('database disconnected: success')
+                    self.logger.log('database disconnected: success')
 
                     return {
                         'status': True,
@@ -180,7 +180,7 @@ class SQL(object):
                 self.list_error.append(error)
 
                 # log disconnection
-                self.logger.debug('database disconnected: fail')
+                self.logger.log('database disconnected: fail')
 
                 return {
                     'status': False,
