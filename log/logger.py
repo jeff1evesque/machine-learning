@@ -124,7 +124,7 @@ class Logger(object):
 
         # redefine if not properly set
         if not self.logger:
-            LOG_LEVEL = logging.WARNING
+            self.handler_level = logging.WARNING
             self.logger_level = logging.WARNING
             self.log_filename = 'warning.log'
             self.log_path = WARNING_LOG_PATH
@@ -133,7 +133,7 @@ class Logger(object):
         formatter = logging.Formatter(
             "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
         fh = logging.FileHandler(self.log_path + '/' + self.log_filename)
-        fh.setLevel(LOG_LEVEL)
+        fh.setLevel(self.handler_level)
         fh.setFormatter(formatter)
 
         # logger: complements the log handler
