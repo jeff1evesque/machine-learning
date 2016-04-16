@@ -36,7 +36,7 @@ class SQL(object):
         self.proceed = True
 
         # database logger
-        self.logger = Logger('debug', 'database')
+        self.logger = Logger('database', 'database', 'debug')
 
         # host address
         if host:
