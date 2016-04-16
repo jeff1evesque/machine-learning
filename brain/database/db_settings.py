@@ -49,7 +49,6 @@ class Database(object):
         self.db_host = HOST
         self.db_username = DB_USERNAME
         self.db_password = DB_PASSWORD
-        self.db_log = DB_LOG
 
     def get_db_host(self):
         """@get_db_host
