@@ -7,6 +7,7 @@ This file provides a mean to generate logs in a consistent manner.
 """
 
 import logging
+from settings import LOG_LEVEL
 from settings import DB_LOG_PATH
 from settings import ERROR_LOG_PATH
 from settings import WARNING_LOG_PATH
@@ -52,7 +53,8 @@ class Logger(object):
         # variables
         self.logger = True
         log_type = type.lower()
-        log_level = level.lower()
+        logger_level = level.lower()
+        handler_level = LOG_LEVEL.lower()
 
         # log type
         if log_type == 'database':
@@ -73,49 +75,62 @@ class Logger(object):
         else:
             self.logger = False
             self.log_path = WARNING_LOG_PATH
-            self.log_level = logging.WARNING
+            self.logger_level = logging.WARNING
             self.log_namespace = namespace
             this.log('log type not properly set')
 
-        # log level
-        if log_level == 'error':
-            self.log_level = logging.ERROR
-            self.log_filename = log_level + '.log'
-        elif log_level = 'warning':
-            self.log_level = logging.WARNING
-            self.log_filename = log_level + '.log'
-        elif log_level = 'info':
-            self.log_level = logging.INFO
-            self.log_filename = log_level + '.log'
-        elif log_level = 'debug':
-            self.log_level = logging.DEBUG'
-            self.log_filename = log_level + '.log'
+        # handler level: application wide constant
+        if handler_level == 'error':
+            self.handler_level = logging.ERROR
+        elif handler_level = 'warning':
+            self.handler.level = logging.WARNING
+        elif handler_level = 'info':
+            self.handler.level = logging.INFO
+        elif handler_level = 'debug':
+            self.handler.level = logging.DEBUG
         else:
             self.logger = False
             self.log_path = WARNING_LOG_PATH
-            self.log_level = logging.WARNING
+            self.logger_level = logging.WARNING
             self.log_namespace = namespace
-            this.log('log level not properly set')
+            this.log('log handler level not properly set')
+
+        # logger level: overriden by calling module
+        if logger_level == 'error':
+            self.logger_level = logging.ERROR
+            self.log_filename = logger_level + '.log'
+        elif logger_level = 'warning':
+            self.logger_level = logging.WARNING
+            self.log_filename = logger_level + '.log'
+        elif logger_level = 'info':
+            self.logger_level = logging.INFO
+            self.log_filename = logger_level + '.log'
+        elif logger_level = 'debug':
+            self.logger_level = logging.DEBUG'
+            self.log_filename = logger_level + '.log'
+        else:
+            self.logger = False
+            self.log_path = WARNING_LOG_PATH
+            self.logger_level = logging.WARNING
+            self.log_namespace = namespace
+            this.log('logger level not properly set')
 
         # override default filename (optional)
         if filename:
             self.log_filename = filename
 
         # log namespace
-        if namespace:
-            self.log_namespace = namespace
-        else:
-            self.logger = False
-            self.log_path = WARNING_LOG_PATH
-            self.log_level = logging.WARNING
-            self.log_namespace = __name__
-            this.log('log level not properly set')
+        self.log_namespace = namespace
         
 
     def log(msg):
         """@__init__
 
         This method is responsible for generating the corresponding log.
+
+        Note: the handler level, determines the base line, for the logger
+              level. This means if the logger level exceeds the corresponding
+              handler level, it will not logged.
 
         """
 
@@ -124,10 +139,10 @@ class Logger(object):
             formatter = logging.Formatter(
                 "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
             fh = logging.FileHandler(self.log_path + '/' + self.log_filename)
-            fh.setLevel(self.log_level)
+            fh.setLevel(LOG_LEVEL)
             fh.setFormatter(formatter)
 
             # logger: complements the log handler
             self.logger = logging.getLogger(self.log_namespace)
-            self.logger.setLevel(self.log_level)
+            self.logger.setLevel(self.logger_level)
             self.logger.addHandler(fh)
