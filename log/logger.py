@@ -57,7 +57,7 @@ class Logger(object):
         """
 
         # variables
-        self.logger = True
+        self.logger_bool = True
         log_type = type.lower()
         logger_level = level.lower()
         handler_level = LOG_LEVEL.lower()
@@ -79,7 +79,7 @@ class Logger(object):
             self.log_path = DEBUG_LOG_PATH
             log_type = 'DEBUG'
         else:
-            self.logger = False
+            self.logger_bool = False
             self.log_namespace = namespace
             self.log_warning = 'log type not properly set'
 
@@ -93,7 +93,7 @@ class Logger(object):
         elif handler_level == 'debug':
             self.handler_level = logging.DEBUG
         else:
-            self.logger = False
+            self.logger_bool = False
             self.log_namespace = namespace
             self.log_warning = 'log handler level not properly set'
 
@@ -111,7 +111,7 @@ class Logger(object):
             self.logger_level = logging.DEBUG
             self.log_filename = logger_level + '.log'
         else:
-            self.logger = False
+            self.logger_bool = False
             self.log_namespace = namespace
             self.log_warning = 'logger level not properly set'
 
@@ -123,7 +123,7 @@ class Logger(object):
         self.log_namespace = namespace
 
         # redefine if not properly set
-        if not self.logger:
+        if not self.logger_bool:
             self.handler_level = logging.WARNING
             self.logger_level = logging.WARNING
             self.log_filename = 'warning.log'
@@ -138,8 +138,8 @@ class Logger(object):
 
         # logger: complements the log handler
         self.logger = logging.getLogger(self.log_namespace)
-        self.logger.setLevel(self.logger_level)
         self.logger.addHandler(fh)
+        self.logger.setLevel(self.logger_level)
         
 
     def log(self, msg):
@@ -150,14 +150,14 @@ class Logger(object):
         """
 
         # generate log
-        if self.logger:
-            if self.logger_level == 'error':
-                self.logger.ERROR(msg)
-            elif self.logger_level == 'warning':
-                self.logger.WARNING(msg)
-            elif self.logger_level == 'info':
-                self.logger.INFO(msg)
-            elif self.logger_level == 'debug':
-                self.logger.DEBUG(msg)
+        if self.logger_bool:
+            if self.logger_level == logging.ERROR:
+                self.logger.error(msg)
+            elif self.logger_level == logging.WARNING:
+                self.logger.warning(msg)
+            elif self.logger_level == logging.INFO:
+                self.logger.info(msg)
+            elif self.logger_level == logging.DEBUG:
+                self.logger.debug(msg)
         else:
-            self.logger.WARNING(self.log_warning)
+            self.logger.warning(self.log_warning)
