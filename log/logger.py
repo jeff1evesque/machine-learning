@@ -151,13 +151,13 @@ class Logger(object):
 
         # generate log
         if self.logger:
-            if logger_level == 'error':
+            if self.logger_level == 'error':
                 self.logger.ERROR(msg)
-            elif logger_level == 'warning':
+            elif self.logger_level == 'warning':
                 self.logger.WARNING(msg)
-            elif logger_level == 'info':
+            elif self.logger_level == 'info':
                 self.logger.INFO(msg)
-            elif logger_level == 'debug':
+            elif self.logger_level == 'debug':
                 self.logger.DEBUG(msg)
         else:
             self.logger.WARNING(self.log_warning)
