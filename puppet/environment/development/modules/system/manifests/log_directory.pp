@@ -4,7 +4,7 @@
 ###
 class system::log_directory {
     ## variables
-    directories = [
+    $directories = [
         '/vagrant/log/database',
         '/vagrant/log/error',
         '/vagrant/log/warning',
