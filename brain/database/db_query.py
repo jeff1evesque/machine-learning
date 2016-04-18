@@ -129,7 +129,7 @@ class SQL(object):
                 arguments = sql_args if sql_args else 'None'
                 self.logger.log(
                     'transaction: success, statement: ' + sql_statement +
-					', arguments: ' + arguments
+                    ', arguments: ' + arguments
                 )
 
             except DB.Error, error:
