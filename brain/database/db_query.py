@@ -127,7 +127,10 @@ class SQL(object):
 
                 # log transaction
                 arguments = sql_args if sql_args else 'None'
-                self.logger.log('transaction: success, statement: ' + sql_statement + ', arguments: ' + arguments)
+                self.logger.log(
+                    'transaction: success, statement: ' + sql_statement +
+					', arguments: ' + arguments
+                )
 
             except DB.Error, error:
                 self.conn.rollback()
@@ -140,7 +143,10 @@ class SQL(object):
 
                 # log transaction
                 arguments = sql_args if sql_args else 'None'
-                self.logger.log('transaction: success, statement' + sql_statement + ', arguments: ' + arguments)
+                self.logger.log(
+                    'transaction: success, statement' + sql_statement +
+                    ', arguments: ' + arguments
+                )
 
         if sql_type in ['insert', 'delete', 'update']:
             return {
