@@ -131,7 +131,9 @@ class Logger(object):
 
         # log handler: requires the below logger
         formatter = logging.Formatter(
-            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+            "[%(asctime)s] {%(pathname)s:%(lineno)d} "
+            "%(levelname)s - %(message)s"
+        )
         fh = logging.FileHandler(self.log_path + '/' + self.log_filename)
         fh.setLevel(self.handler_level)
         fh.setFormatter(formatter)
@@ -140,7 +142,6 @@ class Logger(object):
         self.logger = logging.getLogger(self.log_namespace)
         self.logger.addHandler(fh)
         self.logger.setLevel(self.logger_level)
-        
 
     def log(self, msg):
         """@__init__
