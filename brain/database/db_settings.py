@@ -19,6 +19,9 @@ class Database(object):
         - username
         - password
 
+    Additionally, this class provides an interface to get, or set the log
+    directory path.
+
     When instantiating this class, or defining any of the class variables, make
     sure the respective sql user is defined within the DBMS, and has adequate
     permissions. This can be done via the terminal console (or phpMyAdmin):
