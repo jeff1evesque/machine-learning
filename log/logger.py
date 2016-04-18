@@ -142,7 +142,7 @@ class Logger(object):
         self.logger.addHandler(fh)
         
 
-    def log(msg):
+    def log(self, msg):
         """@__init__
 
         This method is responsible for generating the corresponding log.
