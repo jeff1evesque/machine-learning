@@ -128,9 +128,8 @@ class SQL(object):
                 # log transaction
                 arguments = sql_args if sql_args else 'None'
                 self.logger.log(
-                    'transaction: success, statement: ' + sql_statement +
-                    ', arguments: ' + arguments
-                )
+                    'transaction: success, statement: %s, arguments: %s' %
+                    (sql_statement, arguments))
 
             except DB.Error, error:
                 self.conn.rollback()
