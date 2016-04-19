@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
-"""@retrieve_entity
+'''@retrieve_entity
 
 This file retrieves dataset entity related properties.
 
-"""
+'''
 
 from brain.database.db_query import SQL
 
 
 class Retrieve_Entity(object):
-    """
+    '''
     @Retrieve_Entity
 
     This class provides an interface to get an SVM entity title, from the
@@ -20,20 +20,20 @@ class Retrieve_Entity(object):
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables.
 
-        """
+        '''
 
         self.list_error = []
         self.sql = SQL()
 
     def get_title(self, id_entity):
-        """@get_title
+        '''@get_title
 
         This method is responsible for retrieving an SVM entity title, from the
         SQL database, using a fixed 'id_entity'.
@@ -44,7 +44,7 @@ class Retrieve_Entity(object):
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
 
-        """
+        '''
 
         # select dataset
         self.sql.sql_connect('db_machine_learning')
