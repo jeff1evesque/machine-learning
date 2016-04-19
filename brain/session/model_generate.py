@@ -10,7 +10,6 @@ respective database table(s), which later can be retrieved within
 
 '''
 
-from log.logger import Logger
 from brain.session.base import Base
 from brain.database.retrieve_feature import Retrieve_Feature
 from brain.database.retrieve_entity import Retrieve_Entity
@@ -49,14 +48,6 @@ class Model_Generate(Base):
         self.session_id = self.svm_data['data']['settings']['svm_session_id']
         self.feature_request = Retrieve_Feature()
         self.list_error = []
-
-        # database logger
-        self.logger = Logger('database', 'test', 'debug')
-        self.logger.log('test message')
-
-        # custom logger
-        self.logger = Logger('database', 'test2', 'debug')
-        self.logger.log('second test message')
 
     def generate_model(self):
         '''@generate_model
