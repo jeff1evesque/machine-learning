@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-"""@data_append
+'''@data_append
 
 This file allows methods defined from the Base, or Base_Data superclass to be
 overridden, if needed.
@@ -9,7 +9,7 @@ Note: the term 'dataset' used throughout various comments in this file,
       synonymously implies the user supplied 'file upload(s)', and XML url
       references.
 
-"""
+'''
 
 from brain.session.base import Base
 from brain.session.base_data import Base_Data
@@ -17,7 +17,7 @@ from brain.database.save_entity import Save_Entity
 
 
 class Data_Append(Base, Base_Data):
-    """@Data_Append
+    '''@Data_Append
 
     This class provides an interface to update existing stored entities within
     the sql database.
@@ -26,10 +26,10 @@ class Data_Append(Base, Base_Data):
 
     Note: inherit base methods from superclass 'Base', 'Base_Data
 
-    """
+    '''
 
     def __init__(self, svm_data):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables, using the
         superclass 'Base', and 'Base_Data' constructor, along with the
@@ -42,7 +42,7 @@ class Data_Append(Base, Base_Data):
 
         Note: the superclass constructor expects the same 'svm_data' argument.
 
-        """
+        '''
 
         super(Data_Append, self).__init__(svm_data)
         self.observation_labels = []
@@ -50,7 +50,7 @@ class Data_Append(Base, Base_Data):
         self.uid = 1
 
     def save_svm_entity(self, session_type, session_id):
-        """@save_svm_entity
+        '''@save_svm_entity
 
         This method overrides the identical method from the inherited
         superclass, 'Base_Data'. Specifically, this method updates an
@@ -61,7 +61,7 @@ class Data_Append(Base, Base_Data):
             update 'modified_xx' columns within the 'tbl_dataset_entity'
             database table.
 
-        """
+        '''
 
         svm_entity = {
             'title': self.svm_data['data']['settings'].get('svm_title', None),
