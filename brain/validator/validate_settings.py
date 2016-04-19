@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-"""@validate_settings
+'''@validate_settings
 
 This file performs validation on session settings.
 
-"""
+'''
 
 from jsonschema.validators import Draft4Validator
 from brain.schema.jsonschema_definition import jsonschema_data_new
@@ -14,28 +14,28 @@ from brain.schema.jsonschema_definition import jsonschema_model_predict
 
 
 class Validate_Settings(object):
-    """@Validate_Settings
+    '''@Validate_Settings
 
     This class provides an interface to validate the settings for each
     session.
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self, svm_data, svm_session=None):
-        """@__init__
+        '''@__init__
 
         This constructor saves a subset of the passed-in form data.
 
-        """
+        '''
 
         self.svm_data = svm_data
         self.svm_settings = self.svm_data['data']['settings']
         self.svm_session = svm_session
 
     def validate(self):
-        """@validate
+        '''@validate
 
         This method validates the SVM settings for the 'data_new',
         'data_append', 'model_generate', or 'model_predict' sessions.
@@ -44,7 +44,7 @@ class Validate_Settings(object):
               The latter is validated via 'validate_file_extension.py', and
               'validate_dataset.py'.
 
-        """
+        '''
 
         # local variables
         list_error = []
