@@ -35,3 +35,4 @@
 /log/warning
 /log/info
 /log/debug
+/log/*.log
