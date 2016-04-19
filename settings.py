@@ -2,12 +2,15 @@
 
 '''@settings
 
-This file contains sensitive configuration settings used to implement redis,
-and to establish required database connection(s).
+This file contains configuration settings for following:
+
+    - redis
+    - database
+    - application logging
 
 '''
 
-# server configuration
+# redis
 ROOT = '/vagrant'
 HOST = 'localhost'
 PORT_REDIS = 6379
@@ -17,9 +20,24 @@ DB_USERNAME = 'authenticated'
 DB_PASSWORD = 'password'
 DB_LOG_PATH = ROOT + '/log/database/'
 
-# logging: the possible log levels are constrained by -
+# application logging: the possible logging levels are constrained by the
+#                      python 'logging' module.
 #
-# https://docs.python.org/2/library/logging.html#logging-levels
+# @LOG_LEVEL, defines the application baseline (i.e. handler) level for logs.
+#     This means the logger level cannot exceed this baseline.
+#
+#     The following are supported 'LOG_LEVEL' values:
+#
+#     - CRITICAL
+#     - ERRORR
+#     - WARNING
+#     - INFO
+#     - DEBUG
+#
+# Note: the specific log levels can be reviewed:
+#
+#       https://docs.python.org/2/library/logging.html#logging-levels
+#
 LOG_LEVEL = 'debug'
 ERROR_LOG_PATH = ROOT + '/log/error'
 WARNING_LOG_PATH = ROOT + '/log/warning'
