@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
-"""@cache_hset
+'''@cache_hset
 
 This file caches, and uncaches supplied data using the redis hash cache.
 
-"""
+'''
 
 from brain.cache.redis_query import Redis_Query
 
 
 class Cache_Hset(object):
-    """@Cache_Hset
+    '''@Cache_Hset
 
     This class provides an interface to cache, and uncache the redis hash
     data structure.  Specifically, necessary data components is passed into the
@@ -18,16 +18,16 @@ class Cache_Hset(object):
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables, as well
         as starting the redis client, in order to perform corresponding
         caching, and uncaching.
 
-        """
+        '''
 
         # class variables
         self.list_error = []
@@ -40,11 +40,11 @@ class Cache_Hset(object):
             self.list_error.append(str(error))
 
     def cache(self, hash_name, key, value):
-        """@cache
+        '''@cache
 
         This method caches the provided data into a redis hash cache.
 
-        """
+        '''
 
         try:
             self.myRedis.hset(hash_name, key, value)
@@ -53,11 +53,11 @@ class Cache_Hset(object):
             print self.list_error
 
     def uncache(self, hash_name, key):
-        """@uncache
+        '''@uncache
 
         This method uncaches the provided key from a redis hash cache.
 
-        """
+        '''
 
         try:
             return {'result': self.myRedis.hget(hash_name, key), 'error': None}

@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
-"""@save_observation
+'''@save_observation
 
 This file saves the observation labels.
 
-"""
+'''
 
 from brain.database.db_query import SQL
 
 
 class Save_Observation(object):
-    """@Save_Observation, explicitly inherit 'new-style' class
+    '''@Save_Observation, explicitly inherit 'new-style' class
 
     This class provides an interface to store observation labels, provided
     from corresponding dataset(s) into corresponding database tables.
@@ -19,14 +19,14 @@ class Save_Observation(object):
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self, svm_data, session_type):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables.
 
-        """
+        '''
 
         # class variables
         self.svm_data = svm_data
@@ -35,7 +35,7 @@ class Save_Observation(object):
         self.sql = SQL()
 
     def save_label(self):
-        """@save_label
+        '''@save_label
 
         This method can store, or update an existing set of observation labels
         in corresponding database tables (using EAV data model).
@@ -44,7 +44,7 @@ class Save_Observation(object):
             Therefore, '%s' is used for argument substitution.
 
         Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
-        """
+        '''
 
         # insert / update feature label(s)
         self.sql.sql_connect('db_machine_learning')

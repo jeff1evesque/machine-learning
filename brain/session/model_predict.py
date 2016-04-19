@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-"""@model_predict
+'''@model_predict
 
 This file receives data (i.e. settings) required to query from the NoSQL
 datastore, a previously stored SVM model, generated from 'model_generate.py'.
@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
       synonymously implies the user supplied 'file upload(s)', and XML url
       references.
 
-"""
+'''
 
 from brain.session.base import Base
 from brain.cache.cache_hset import Cache_Hset
@@ -19,7 +19,7 @@ from brain.cache.cache_model import Cache_Model
 
 
 class Model_Predict(Base):
-    """@Model_Predict
+    '''@Model_Predict
 
     This class provides an interface to generate an svm prediction, using the
     provided prediction feature input(s), and the stored corresponding model,
@@ -27,10 +27,10 @@ class Model_Predict(Base):
 
     Note: inherit base methods from superclass 'Base'
 
-    """
+    '''
 
     def __init__(self, svm_data):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables, using the
         superclass 'Base' constructor, along with the
@@ -44,7 +44,7 @@ class Model_Predict(Base):
 
         Note: the superclass constructor expects the same 'svm_data' argument.
 
-        """
+        '''
 
         super(Model_Predict, self).__init__(svm_data)
         self.svm_data = svm_data
@@ -54,7 +54,7 @@ class Model_Predict(Base):
         self.list_error = []
 
     def svm_prediction(self):
-        """@svm_prediction
+        '''@svm_prediction
 
         This method generates an svm prediction using the provided prediction
         feature input(s), and the stored corresponding model, within the NoSQL
@@ -63,7 +63,7 @@ class Model_Predict(Base):
         @prediction_input, a list of arguments (floats) required to make an SVM
             prediction, against the respective svm model.
 
-        """
+        '''
 
         # get necessary model
         title = Cache_Hset().uncache('svm_rbf_title', self.model_id)['result']

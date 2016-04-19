@@ -1,17 +1,17 @@
 #!/usr/bin/python
 
-"""@cache_hset
+'''@cache_hset
 
 This file caches, and uncaches the supplied model into a redis hash cache.
 
-"""
+'''
 
 from brain.cache.redis_query import Redis_Query
 from brain.converter.serialize_model import Serialize_Model
 
 
 class Cache_Model(object):
-    """@Cache_Model
+    '''@Cache_Model
 
     This class provides an interface to cache, and uncache the redis hash
     data structure.  Specifically, necessary data components is passed into the
@@ -20,16 +20,16 @@ class Cache_Model(object):
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self, model=None):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables, as well
         as starting the redis client, in order to perform corresponding
         caching, and uncaching.
 
-        """
+        '''
 
         # class variables
         self.model = model
@@ -43,12 +43,12 @@ class Cache_Model(object):
             self.list_error.append(str(error))
 
     def cache(self, hash_name, key):
-        """@cache
+        '''@cache
 
         This method serializes, then caches the provided model into a redis
         hash cache.
 
-        """
+        '''
 
         try:
             serialized = Serialize_Model(self.model).serialize()
@@ -58,23 +58,23 @@ class Cache_Model(object):
             print self.list_error
 
     def uncache(self, hash_name, key):
-        """@uncache
+        '''@uncache
 
         This method unserializes, then uncaches the desired model, using
         the provided key from the redis hash cache.
 
-        """
+        '''
 
         uncached = self.myRedis.hget(hash_name, key)
         return Serialize_Model(uncached).deserialize()
 
     def get_all_titles(self, name):
-        """@get_all_titles
+        '''@get_all_titles
 
         This method returns a list of all model titles, and the corresponding
         numeric id value, with respect to the provided key (i.e svm_rbf_model).
 
-        """
+        '''
 
         try:
             # get model(s)

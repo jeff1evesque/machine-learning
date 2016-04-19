@@ -1,10 +1,10 @@
 #!/usr/bin/python
 
-"""@logger
+'''@logger
 
 This file provides a mean to generate logs in a consistent manner.
 
-"""
+'''
 
 import logging
 from settings import LOG_LEVEL
@@ -16,15 +16,15 @@ from settings import DEBUG_LOG_PATH
 
 
 class Logger(object):
-    """@Logger
+    '''@Logger
 
     This class provides an interface to define necessary attributes needed to
     generate a corresponding log.
 
-    """
+    '''
 
     def __init__(self, type, filename=None, level=None, namespace=__name__):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining the necessary logger
         instance, which is used with additional methods to generate a
@@ -54,7 +54,7 @@ class Logger(object):
               level. This means if the logger level exceeds the corresponding
               handler level, it will not logged.
 
-        """
+        '''
 
         # variables
         self.logger_bool = True
@@ -144,11 +144,11 @@ class Logger(object):
         self.logger.setLevel(self.logger_level)
 
     def log(self, msg):
-        """@__init__
+        '''@__init__
 
         This method is responsible for generating the corresponding log.
 
-        """
+        '''
 
         # generate log
         if self.logger_bool:

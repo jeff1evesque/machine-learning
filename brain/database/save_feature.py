@@ -1,17 +1,17 @@
 #!/usr/bin/python
 
-"""@save_feature
+'''@save_feature
 
 This file saves the feature count, as well as the feature instances within
 corresponding database tables.
 
-"""
+'''
 
 from brain.database.db_query import SQL
 
 
 class Save_Feature(object):
-    """@Save_Feature
+    '''@Save_Feature
 
     This class provides an interface to store the expected number of features
     that can be expected in a given dataset, and each feature instance into
@@ -21,21 +21,21 @@ class Save_Feature(object):
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self, svm_data):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables.
 
-        """
+        '''
 
         self.svm_data = svm_data
         self.list_error = []
         self.sql = SQL()
 
     def save_count(self):
-        """@save_count
+        '''@save_count
 
         This method stores the number of features that can be expected in a
         given observation.
@@ -43,7 +43,7 @@ class Save_Feature(object):
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
 
-        """
+        '''
 
         # insert / update dataset value(s)
         self.sql.sql_connect('db_machine_learning')
@@ -66,7 +66,7 @@ class Save_Feature(object):
             return {'status': True, 'error': None, 'id': response['id']}
 
     def save_feature(self):
-        """@save_feature
+        '''@save_feature
 
         This method can store, or update an existing SVM dataset stored in
         corresponding database tables (using EAV data model).
@@ -76,7 +76,7 @@ class Save_Feature(object):
 
         Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
 
-        """
+        '''
 
         # insert / update dataset value(s)
         self.sql.sql_connect('db_machine_learning')

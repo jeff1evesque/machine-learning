@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-"""@db_query
+'''@db_query
 
 This file contains various generic SQL-related methods.
-"""
+'''
 
 import MySQLdb as DB
 from log.logger import Logger
@@ -11,7 +11,7 @@ from brain.database.db_settings import Database
 
 
 class SQL(object):
-    """@SQL
+    '''@SQL
 
     This class provides an interface to connect, execute commands, and
     disconnect from a SQL database.  It explicitly inherits pythons 'new-style'
@@ -22,14 +22,14 @@ class SQL(object):
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self, host=None, user=None, passwd=None):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables.
 
-        """
+        '''
 
         self.db_settings = Database()
         self.list_error = []
@@ -57,12 +57,12 @@ class SQL(object):
             self.passwd = self.db_settings.get_db_password()
 
     def sql_connect(self, database=None):
-        """@sql_connect
+        '''@sql_connect
 
         This method is responsible for defining the necessary interface to
         connect to a SQL database.
 
-        """
+        '''
 
         try:
             if database is None:
@@ -105,14 +105,14 @@ class SQL(object):
             }
 
     def sql_command(self, sql_statement, sql_type, sql_args=None):
-        """@sql_connect
+        '''@sql_connect
 
         This method is responsible for defining the necessary interface to
         perform SQL commands.
 
         @sql_args, is a tuple used for argument substitution with the supplied
             'sql_statement'.
-        """
+        '''
 
         if self.proceed:
             try:
@@ -161,12 +161,12 @@ class SQL(object):
             }
 
     def sql_disconnect(self):
-        """@sql_disconnect
+        '''@sql_disconnect
 
         This method is responsible for defining the necessary interface to
         disconnect from a SQL database.
 
-        """
+        '''
 
         if self.proceed:
             try:
@@ -194,10 +194,10 @@ class SQL(object):
                 }
 
     def get_errors(self):
-        """@get_errors
+        '''@get_errors
 
         This method returns all errors pertaining to the instantiated class.
 
-        """
+        '''
 
         return self.list_error

@@ -1,15 +1,15 @@
 #!/usr/bin/python
 
-"""@restructure_data
+'''@restructure_data
 
 This file restructures the supplied data. But, the dataset is left
 untouched, and formatted within 'convert_upload.py'.
 
-"""
+'''
 
 
 class Restructure_Data(object):
-    """@Restructure_Data
+    '''@Restructure_Data
 
     This class provides an interface to restructure the supplied data into a
     consistent structure, which allows successive parsers to implement
@@ -17,14 +17,14 @@ class Restructure_Data(object):
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self, settings, dataset=None):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables.
 
-        """
+        '''
 
         self.settings = settings
         self.dataset = dataset
@@ -34,12 +34,12 @@ class Restructure_Data(object):
         self.type_programmatic = "<type 'dict'>"
 
     def restructure(self):
-        """@restructure
+        '''@restructure
 
         This method restructures the supplied data, into a consistent
         dictionary format. The nested supplied dataset, is left untouched.
 
-        """
+        '''
 
         # local variables
         formatted_settings = {}
@@ -113,11 +113,11 @@ class Restructure_Data(object):
         return {'data': data, 'error': None}
 
     def get_errors(self):
-        """@get_errors
+        '''@get_errors
 
         This method returns all errors pertaining to the instantiated class.
 
-        """
+        '''
 
         if len(self.list_error) > 0:
             return {'error': self.list_error}
