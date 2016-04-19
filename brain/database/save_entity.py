@@ -1,27 +1,27 @@
 #!/usr/bin/python
 
-"""@save_entity
+'''@save_entity
 
 This file saves SVM related entity into corresponding 'EAV data model' database
 table(s), from the 'db_machine_learning' database.
 
-"""
+'''
 
 from brain.database.db_query import SQL
 
 
 class Save_Entity(object):
-    """@Save_Entity
+    '''@Save_Entity
 
     This class provides an interface to save an svm dataset.
 
     Note: this class is invoked within 'base_data.py', and 'data_append.py'
 
     Note: this class explicitly inherits the 'new-style' class.
-    """
+    '''
 
     def __init__(self, svm_data, session_type):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables.
 
@@ -33,7 +33,7 @@ class Save_Entity(object):
               where 'xx' denotes an integer value, 'yyy' a unicode string, and
               'zz' representing a float value.
 
-        """
+        '''
 
         self.svm_data = svm_data
         self.session_type = session_type
@@ -41,7 +41,7 @@ class Save_Entity(object):
         self.sql = SQL()
 
     def save(self):
-        """@save
+        '''@save
 
         This method stores, or updates SVM entities into its corresponding 'EAV
         data model' database table.
@@ -51,7 +51,7 @@ class Save_Entity(object):
 
         Note: 'UTC_TIMESTAMP' returns the universal UTC datetime
 
-        """
+        '''
 
         # insert / update dataset entity value
         self.sql.sql_connect('db_machine_learning')
