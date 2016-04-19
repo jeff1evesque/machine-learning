@@ -1,16 +1,16 @@
 #!/usr/bin/python
 
-"""@retrieve_feature
+'''@retrieve_feature
 
 This file retrieves feature characteristics.
 
-"""
+'''
 
 from brain.database.db_query import SQL
 
 
 class Retrieve_Feature(object):
-    """@Retrieve_Feature
+    '''@Retrieve_Feature
 
     This class provides an interface to retrieve an svm dataset, using a fixed
     supplied 'id_entity'.  The 'id_entity' is a reference, indicating which
@@ -20,20 +20,20 @@ class Retrieve_Feature(object):
 
     Note: this class explicitly inherits the 'new-style' class.
 
-    """
+    '''
 
     def __init__(self):
-        """@__init__
+        '''@__init__
 
         This constructor is responsible for defining class variables.
 
-        """
+        '''
 
         self.list_error = []
         self.sql = SQL()
 
     def get_dataset(self, id_entity):
-        """@get_dataset
+        '''@get_dataset
 
         This method retrieves an SVM dataset, from corresponding 'EAV data
         model' database table(s), using a fixed 'id_entity'.
@@ -44,7 +44,7 @@ class Retrieve_Feature(object):
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
 
-        """
+        '''
 
         # select dataset
         self.sql.sql_connect('db_machine_learning')
@@ -68,7 +68,7 @@ class Retrieve_Feature(object):
             }
 
     def get_count(self, id_entity):
-        """@get_count
+        '''@get_count
 
         This method retrieves the number of features that can be expected in
         any given observation, from a particular dataset instance (id_entity).
@@ -78,7 +78,7 @@ class Retrieve_Feature(object):
 
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
-        """
+        '''
 
         self.sql.sql_connect('db_machine_learning')
         sql_statement = 'SELECT count_features FROM tbl_feature_count '\
