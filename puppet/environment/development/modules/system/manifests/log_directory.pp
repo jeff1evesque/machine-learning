@@ -10,6 +10,7 @@ class system::log_directory {
         '/vagrant/log/warning',
         '/vagrant/log/info',
         '/vagrant/log/debug',
+        '/vagrant/log/webcompiler',
     ]
 
     ## create log directories
