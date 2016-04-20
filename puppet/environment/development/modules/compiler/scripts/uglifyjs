@@ -8,7 +8,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-set -x; exec > /vagrant/log/uglifyjs_execution.log 2>&1
+set -x; exec > /vagrant/log/webcompiler/uglifyjs_execution.log 2>&1
 
 
 # watch '/vagrant/src/js/' subdirectory
