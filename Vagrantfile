@@ -140,6 +140,7 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf log/warning'
     run 'rm -Rf log/info'
     run 'rm -Rf log/debug'
+    run 'rm -Rf log/webcompiler'
     run 'rm -Rf build'
     run 'rm -Rf interface/static/css'
     run 'rm -Rf interface/static/img'
