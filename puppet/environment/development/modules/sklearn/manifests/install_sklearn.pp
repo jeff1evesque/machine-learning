@@ -6,7 +6,7 @@ class sklearn::install_sklearn {
     ## set dependency
     require python
 
-    exec {'install-sklearn':
+    exec { 'install-sklearn':
         command => 'python setup.py install',
         cwd     => '/vagrant/build/scikit-learn/',
         path    => '/usr/bin',
