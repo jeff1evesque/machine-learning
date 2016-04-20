@@ -8,7 +8,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-set -x; exec > /vagrant/log/sass_execution.log 2>&1
+set -x; exec > /vagrant/log/webcompiler/sass_execution.log 2>&1
 
 
 # watch '/vagrant/src/scss/' subdirectory
