@@ -3,7 +3,7 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class database::bindings {
-    class {'::mysql::bindings':
+    class { '::mysql::bindings':
         python_enable => true,
     }
 }
