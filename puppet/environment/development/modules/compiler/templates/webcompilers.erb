@@ -32,12 +32,12 @@ exec ./<%= @compiler %>
 #
 #  @[`date`], current date script executed
 pre-start script
-    echo "[`date`] <%= @compiler %> service watcher starting" >> /vagrant/log/<%= @compiler %>.log 
+    echo "[`date`] <%= @compiler %> service watcher starting" >> /vagrant/log/webcompiler/<%= @compiler %>.log 
 end script
 
 ## log shut-down date, remove process id from log before '/vagrant' is unmounted
 #
 #  @[`date`], current date script executed
 pre-stop script
-    echo "[`date`] <%= @compiler %> watcher stopping" >> /vagrant/log/<%= @compiler %>.log
+    echo "[`date`] <%= @compiler %> watcher stopping" >> /vagrant/log/webcompiler/<%= @compiler %>.log
 end script
