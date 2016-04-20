@@ -5,7 +5,7 @@
 class package::sklearn {
     require git
 
-    vcsrepo {'/vagrant/build/scikit-learn':
+    vcsrepo { '/vagrant/build/scikit-learn':
         ensure   => present,
         provider => git,
         source   => 'https://github.com/scikit-learn/scikit-learn',
