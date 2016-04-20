@@ -11,7 +11,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-set -x; exec > /vagrant/log/imagemin_execution.log 2>&1
+set -x; exec > /vagrant/log/webcompiler/imagemin_execution.log 2>&1
 
 
 # watch '/vagrant/src/img/' subdirectory
