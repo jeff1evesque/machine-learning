@@ -8,7 +8,7 @@ class database::server {
     #  @password_hash, default password (can be adjusted via cli)
     #  @max_connections_per_hour, @max_queries_per_hour, @max_updates_per_hour,
     #      @max_user_connections, a zero value indicates no limit
-    class {'::mysql::server':
+    class { '::mysql::server':
         package_name  => 'mariadb-server',
         root_password => 'password',
         users         => {
