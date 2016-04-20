@@ -8,7 +8,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-set -x; exec > /vagrant/log/webcompiler/browserify_execution.log 2>&1
+set -x; exec > /vagrant/log/webcompiler/browserify.log 2>&1
 
 
 # create empty '.gitignore'
