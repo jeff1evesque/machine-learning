@@ -11,11 +11,11 @@ PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-log=/vagrant/log/webcompiler/imagemin.log
-date=$(date +%Y-%m-%d:%H:%M:%S)
+log_file=/vagrant/log/webcompiler/imagemin.log
+log_date=$(date +%Y-%m-%d:%H:%M:%S)
 set -x;
 exec &> >(while read -r line
-  do printf "%s %s" "$date" "$line" >> "$log"
+  do printf "%s %s" "$log_date" "$line" >> "$log_file"
 done)
 
 
