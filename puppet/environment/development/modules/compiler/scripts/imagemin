@@ -15,7 +15,7 @@ log_file=/vagrant/log/webcompiler/imagemin.log
 log_date=$(date +%Y-%m-%d:%H:%M:%S)
 set -x;
 exec &> >(while read -r line
-  do printf "%s %s\n" "$log_date" "$line" >> "$log_file"
+  do printf "%s %s\n" "[$log_date]" "$line" >> "$log_file"
 done)
 
 
