@@ -19,10 +19,8 @@ respawn
 #
 #  @setuid, required for permission to write to '/vagrant/' files
 #  @setgid, required for permission to write to '/vagrant/' files
-#  @DATE, preformatted string for datetime.
 setuid vagrant
 setgid vagrant
-env DATE='date +%Y-%m-%d:%H:%M:%S'
 
 ## run upstart job as a background process
 expect fork
@@ -31,12 +29,18 @@ expect fork
 exec python '/vagrant/app.py'
 
 ## log start-up date
+#
+#  @DATE, preformatted string for datetime.
 pre-start script
-    echo "$DATE flask server starting" >> /vagrant/log/flask_server.log 
+    DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
+    echo "$DATE flask server starting" >> /vagrant/log/flask.log 
 end script
 
 ## log shut-down date, remove process id from log before '/vagrant' is
 #  unmounted.
+#
+#  @DATE, preformatted string for datetime.
 pre-stop script
-    echo "$DATE flask server stopping" >> /vagrant/log/flask_server.log
+    DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
+    echo "$DATE flask server stopping" >> /vagrant/log/flask.log
 end script
