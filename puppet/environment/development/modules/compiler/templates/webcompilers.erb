@@ -22,7 +22,7 @@ respawn
 #  @DATE, preformatted string for datetime.
 setuid vagrant
 setgid vagrant
-DATE=`date +%Y-%m-%d:%H:%M:%S`
+env DATE='date +%Y-%m-%d:%H:%M:%S'
 
 ## run upstart job as a background process
 expect fork
