@@ -11,7 +11,10 @@ PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-set -x; exec > /vagrant/log/webcompiler/imagemin.log 2>&1
+log=/vagrant/log/webcompiler/imagemin.log
+date=$(date +%Y-%m-%d:%H:%M:%S)
+set -x;
+exec &> >(while read -r line; do printf "$date $line" >> "$log"; done;)
 
 
 # watch '/vagrant/src/img/' subdirectory
