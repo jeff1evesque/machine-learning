@@ -11,7 +11,7 @@ PATH="/usr/local/bin:$PATH"
 log=/vagrant/log/webcompiler/uglifyjs.log
 date=$(date +%Y-%m-%d:%H:%M:%S)
 set -x;
-exec &> >(while read -r line; do printf "$date $line" >> "$log"; done;)
+exec &> >(while read -r line; do printf "%s %s" "$date $line" >> "$log"; done;)
 
 
 # watch '/vagrant/src/js/' subdirectory
