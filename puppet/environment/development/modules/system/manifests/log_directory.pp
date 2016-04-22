@@ -6,11 +6,12 @@ class system::log_directory {
     ## variables
     $directories = [
         '/vagrant/log/database',
-        '/vagrant/log/error',
-        '/vagrant/log/warning',
-        '/vagrant/log/info',
-        '/vagrant/log/debug',
         '/vagrant/log/webcompiler',
+        '/vagrant/log/application',
+        '/vagrant/log/application/error',
+        '/vagrant/log/application/warning',
+        '/vagrant/log/application/info',
+        '/vagrant/log/application/debug',
     ]
 
     ## create log directories
