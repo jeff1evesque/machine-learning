@@ -43,7 +43,7 @@ Vagrant.configure(2) do |config|
   ## Create a forwarded port mapping which allows access to a specific port
   #  within the machine from a port on the host machine. In the example below,
   #  accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network 'forwarded_port', guest: 5000, host: 8080
+  config.vm.network 'forwarded_port', guest: 5000, host: 8081
   config.vm.network 'forwarded_port', guest: 443, host: 8585
 
   ## Run r10k
@@ -136,10 +136,7 @@ Vagrant.configure(2) do |config|
   # clean up files on the host after 'vagrant destroy'
   config.trigger.after :destroy do
     run 'rm -Rf log/database'
-    run 'rm -Rf log/error'
-    run 'rm -Rf log/warning'
-    run 'rm -Rf log/info'
-    run 'rm -Rf log/debug'
+    run 'rm -Rf log/application'
     run 'rm -Rf log/webcompiler'
     run 'rm -Rf build'
     run 'rm -Rf interface/static/css'
