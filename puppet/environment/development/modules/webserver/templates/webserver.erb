@@ -33,7 +33,7 @@ exec python '/vagrant/app.py'
 #  @DATE, preformatted string for datetime.
 pre-start script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE flask server starting" >> /vagrant/log/application/flask.log
+    echo "$DATE flask server starting" >> /vagrant/log/webserver/flask.log
 end script
 
 ## log shut-down date, remove process id from log before '/vagrant' is
@@ -42,5 +42,5 @@ end script
 #  @DATE, preformatted string for datetime.
 pre-stop script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE flask server stopping" >> /vagrant/log/application/flask.log
+    echo "$DATE flask server stopping" >> /vagrant/log/webserver/flask.log
 end script
