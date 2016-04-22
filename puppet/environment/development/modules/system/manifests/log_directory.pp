@@ -7,6 +7,7 @@ class system::log_directory {
     $directories = [
         '/vagrant/log/database',
         '/vagrant/log/webcompiler',
+        '/vagrant/log/webserver',
         '/vagrant/log/application',
         '/vagrant/log/application/error',
         '/vagrant/log/application/warning',
