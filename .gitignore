@@ -33,6 +33,7 @@
 /log/database
 /log/error
 /log/warning
+/log/webcompiler
 /log/info
 /log/debug
 /log/*.log
