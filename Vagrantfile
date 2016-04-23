@@ -136,10 +136,7 @@ Vagrant.configure(2) do |config|
   # clean up files on the host after 'vagrant destroy'
   config.trigger.after :destroy do
     run 'rm -Rf log/database'
-    run 'rm -Rf log/error'
-    run 'rm -Rf log/warning'
-    run 'rm -Rf log/info'
-    run 'rm -Rf log/debug'
+    run 'rm -Rf log/application'
     run 'rm -Rf log/webcompiler'
     run 'rm -Rf build'
     run 'rm -Rf interface/static/css'

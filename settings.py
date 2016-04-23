@@ -39,7 +39,7 @@ DB_LOG_PATH = ROOT + '/log/database/'
 #       https://docs.python.org/2/library/logging.html#logging-levels
 #
 LOG_LEVEL = 'debug'
-ERROR_LOG_PATH = ROOT + '/log/error'
-WARNING_LOG_PATH = ROOT + '/log/warning'
-INFO_LOG_PATH = ROOT + '/log/info'
-DEBUG_LOG_PATH = ROOT + '/log/debug'
+ERROR_LOG_PATH = ROOT + '/log/application/error'
+WARNING_LOG_PATH = ROOT + '/log/application/warning'
+INFO_LOG_PATH = ROOT + '/log/application/info'
+DEBUG_LOG_PATH = ROOT + '/log/application/debug'
