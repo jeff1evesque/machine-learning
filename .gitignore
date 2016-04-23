@@ -31,9 +31,6 @@
 *.pyc
 /src/js/.gitignore
 /log/database
-/log/error
-/log/warning
+/log/application
 /log/webcompiler
-/log/info
-/log/debug
 /log/*.log
