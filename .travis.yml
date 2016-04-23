@@ -53,7 +53,7 @@ script:
   - bootlint -d W005 interface/templates/*.html
   - puppet parser validate /environment/development/manifests
   - puppet parser validate /environment/development/modules
-  - puppet-lint puppet/environment/development/modules
+  - puppet-lint --no-variable_scope-check puppet/environment/development/modules
   - (cd puppet/environment/development/ && r10k puppetfile check)
   - (cd test/ && r10k puppetfile check)
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
