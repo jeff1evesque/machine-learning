@@ -10,6 +10,11 @@ services:
 before_install:
   - docker ps -a
   - docker build -t ubuntu/trusty .
+  - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+  - sudo dpkg -i puppetlabs-release-trusty.deb 
+  - sudo apt-get update
+  - sudo apt-get install puppet
+  - puppet -V
 
 ## install packages for linting
 #
