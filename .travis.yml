@@ -13,7 +13,7 @@ before_install:
   - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
   - sudo dpkg -i puppetlabs-release-trusty.deb 
   - sudo apt-get update
-  - sudo apt-get install -f puppet
+  - sudo apt-get install puppet -f
   - puppet -V
 
 ## install packages for linting
