@@ -10,6 +10,11 @@ services:
 before_install:
   - docker ps -a
   - docker build -t ubuntu/trusty .
+  - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+  - sudo dpkg -i puppetlabs-release-trusty.deb 
+  - sudo apt-get update
+  - sudo apt-get install puppet -y
+  - puppet -V
 
 ## install packages for linting
 #
@@ -51,8 +56,9 @@ script:
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint -d W005 interface/templates/*.html
-  - puppet-lint --no-ensure_first_param-check --no-autoloader_layout-check --no-variable_scope-check puppet/environment/development/manifests
-  - puppet-lint --no-ensure_first_param-check --no-variable_scope-check puppet/environment/development/modules
+  - puppet parser validate puppet/environment/development/manifests
+  - puppet parser validate puppet/environment/development/modules
+  - puppet-lint --no-variable_scope-check puppet/environment/development/modules
   - (cd puppet/environment/development/ && r10k puppetfile check)
   - (cd test/ && r10k puppetfile check)
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
