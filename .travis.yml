@@ -56,8 +56,8 @@ script:
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint -d W005 interface/templates/*.html
-  - puppet parser validate /environment/development/manifests
-  - puppet parser validate /environment/development/modules
+  - puppet parser validate puppet/environment/development/manifests
+  - puppet parser validate puppet/environment/development/modules
   - puppet-lint --no-variable_scope-check puppet/environment/development/modules
   - (cd puppet/environment/development/ && r10k puppetfile check)
   - (cd test/ && r10k puppetfile check)
