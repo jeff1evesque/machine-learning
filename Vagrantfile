@@ -138,6 +138,7 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf log/database'
     run 'rm -Rf log/application'
     run 'rm -Rf log/webcompiler'
+    run 'rm -Rf log/webserver'
     run 'rm -Rf build'
     run 'rm -Rf interface/static/css'
     run 'rm -Rf interface/static/img'

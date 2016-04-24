@@ -10,8 +10,10 @@ This file contains configuration settings for following:
 
 '''
 
-# redis
+# variables
 ROOT = '/vagrant'
+
+# redis
 HOST = 'localhost'
 PORT_REDIS = 6379
 
@@ -28,7 +30,6 @@ DB_LOG_PATH = ROOT + '/log/database/'
 #
 #     The following are supported 'LOG_LEVEL' values:
 #
-#     - CRITICAL
 #     - ERRORR
 #     - WARNING
 #     - INFO
