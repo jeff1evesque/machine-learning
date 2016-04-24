@@ -29,9 +29,9 @@ class compiler::webcompilers {
 
         ## dos2unix upstart: convert clrf (windows to linux) in case host
         #                    machine is windows.
-        file { "${compiler_dir}/$compiler":
+        file { "${compiler_dir}/${compiler}":
             ensure  => file,
-            content => dos2unix(template("${compiler_dir}/$compiler")),
+            content => dos2unix(template("${compiler_dir}/${compiler}")),
         }
     }
 }
