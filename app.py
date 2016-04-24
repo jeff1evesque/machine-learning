@@ -17,7 +17,7 @@ from logging.handlers import RotatingFileHandler
 from interface import app
 
 # variables
-LOG_FILENAME = '/vagrant/log/application/flask.log'
+LOG_FILENAME = '/vagrant/log/webserver/flask.log'
 
 # log handler: requires the below logger
 formatter = logging.Formatter(
