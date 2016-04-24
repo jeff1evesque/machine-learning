@@ -18,7 +18,7 @@ class configure {
     require dependencies
 
     ## configure webcompilers	
-    contain system::webcompiler_directories
+    contain system::webcompiler_directory
     contain compiler::webcompilers
 }
 
