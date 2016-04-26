@@ -1,6 +1,6 @@
 ## @settings
 #
-#  This file contains configuration settings for following:
+#  This file contains configuration settings for the following:
 #
 #    - redis
 #    - database
@@ -22,9 +22,9 @@ redis:
 #       the above 'general: root' definition.
 #
 database:
-    username = 'authenticated'
-    password = 'password'
-    log_path = '/log/database/'
+    username: 'authenticated'
+    password: 'password'
+    log_path: '/log/database/'
 
 ## application logging: the possible logging levels are constrained by the
 #                      python 'logging' module.
@@ -47,8 +47,8 @@ database:
 #       the above 'general: root' definition.
 #
 application:
-    log_level        = 'debug'
-    error_log_path   = '/log/application/error'
-    warning_log_path = '/log/application/warning'
-    info_log_path    = '/log/application/info'
-    debug_log_path   = '/log/application/debug'
+    log_level: 'debug'
+    error_log_path: '/log/application/error'
+    warning_log_path: '/log/application/warning'
+    info_log_path: '/log/application/info'
+    debug_log_path: '/log/application/debug'
