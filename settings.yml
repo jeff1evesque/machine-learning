@@ -16,6 +16,10 @@ general:
 redis:
     port = 6379
 
+## webserver
+webserver:
+    flask_log_path: '/log/webserver/flask.log'
+
 ## application database
 #
 #  Note: when referencing a hash path value, remember to prefix the call with
