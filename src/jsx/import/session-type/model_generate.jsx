@@ -10,6 +10,7 @@
 import checkValidString from './../validator/valid_string.js';
 import checkValidInt from './../validator/valid_int.js';
 import Spinner from './../general/spinner.jsx';
+import SupportVectorKernels from './../kernel/sv_kernel.jsx';
 
 var ModelGenerate = React.createClass({
   // initial 'state properties'
@@ -112,7 +113,7 @@ var ModelGenerate = React.createClass({
         var options = this.state.ajax_done_options;
 
         if (this.state.kernel_type == 'regression' || this.state.kernel_type == 'svm') {
-            var KernelChoice = SupportVector;
+            var KernelChoice = SupportVectorKernels;
         }
         else {
             var KernelChoice = 'span';
