@@ -9,7 +9,7 @@
 
 import checkValidString from './../validator/valid_string.js';
 
-var SupportVector = React.createClass({
+var SupportVectorKernels = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -46,4 +46,4 @@ var SupportVector = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default SupportVector
+export default SupportVectorKernels
