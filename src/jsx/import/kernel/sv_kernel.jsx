@@ -1,0 +1,49 @@
+/**
+ * sv_kernel.jsx: append list of support vector kernels.
+ *
+ * @ResultDisplay, must be capitalized in order for reactjs to render it as a
+ *     component. Otherwise, the variable is rendered as a dom node.
+ *
+ * Note: this script implements jsx (reactjs) syntax.
+ */
+
+import checkValidString from './../validator/valid_string.js';
+
+var SupportVector = React.createClass({
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            value_title: null,
+            value_dataset_type: '--Select--',
+            render_submit: false
+        };
+    },
+  // update 'state properties'
+    changeKernelType: function(){
+        this.props.onChange({kernelType: this.state.value_kernel_type});
+    },
+  // triggered when 'state properties' change
+    render: function(){
+      // display result
+        return(
+            <select
+                name='svm_kernel_type'
+                autoComplete='off'
+                onChange={this.changeKernelType}
+                value={this.state.value_kernel_type}
+            >
+
+                <option value='' defaultValue>--Select--</option>
+                <option value='linear'>Linear</option>
+                <option value='polynomial'>Polynomial</option>
+                <option value='rbf'>RBF</option>
+                <option value='sigmoid'>Sigmoid</option>
+                <option value='precomputed'>Precomputed</option>
+
+            </select>
+        );
+    }
+});
+
+// indicate which class can be exported, and instantiated via 'require'
+export default SupportVector
