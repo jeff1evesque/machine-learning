@@ -1,8 +1,8 @@
 /**
  * sv_kernel.jsx: append list of support vector kernels.
  *
- * @ResultDisplay, must be capitalized in order for reactjs to render it as a
- *     component. Otherwise, the variable is rendered as a dom node.
+ * @SupportVectorKernels, must be capitalized in order for reactjs to render it
+ *     as a component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
@@ -13,9 +13,7 @@ var SupportVectorKernels = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_title: null,
-            value_dataset_type: '--Select--',
-            render_submit: false
+            value_kernel_type: '--Select--'
         };
     },
   // update 'state properties'
