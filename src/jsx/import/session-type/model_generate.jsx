@@ -111,8 +111,9 @@ var ModelGenerate = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var options = this.state.ajax_done_options;
+        var kernelType = this.state.kernel_type;
 
-        if (this.state.kernel_type == 'regression' || this.state.kernel_type == 'svm') {
+        if ( kernelType == 'regression' || kernelType == 'svm' ) {
             var KernelChoice = SupportVectorKernels;
         }
         else {
