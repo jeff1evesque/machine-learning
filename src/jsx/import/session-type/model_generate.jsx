@@ -132,7 +132,7 @@ var ModelGenerate = React.createClass({
                 <legend>Generate Model</legend>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
-                    <p>Select past session, and model type</p>
+                    <p>Select past session, model type, kernel type</p>
                     <select
                         name='svm_session_id'
                         autoComplete='off'
