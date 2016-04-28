@@ -10,6 +10,7 @@
 import checkValidString from './../validator/valid_string.js';
 import checkValidInt from './../validator/valid_int.js';
 import Spinner from './../general/spinner.jsx';
+import SupportVectorKernels from './../kernel/sv_kernel.jsx';
 
 var ModelGenerate = React.createClass({
   // initial 'state properties'
@@ -79,10 +80,11 @@ var ModelGenerate = React.createClass({
             this.props.onChange({render_submit: false});
         }
     },
+  // update 'state properties' from children component (i.e. 'render_submit')
     changeKernelType: function(event) {
         var sessionId  = this.state.value_session_id;
         var modelType  = this.state.value_model_type;
-        var kernelType = event.target.value;
+        var kernelType = event.kernelType;
 
         if (
             kernelType && kernelType != '--Select--' &&
@@ -109,6 +111,14 @@ var ModelGenerate = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var options = this.state.ajax_done_options;
+        var kernelType = this.state.kernel_type;
+
+        if ( kernelType == 'regression' || kernelType == 'svm' ) {
+            var KernelChoice = SupportVectorKernels;
+        }
+        else {
+            var KernelChoice = 'span';
+        }
 
         if (this.state.display_spinner) {
             var AjaxSpinner = Spinner;
@@ -122,7 +132,7 @@ var ModelGenerate = React.createClass({
                 <legend>Generate Model</legend>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
-                    <p>Select past session, and model type</p>
+                    <p>Select past session, model type, kernel type</p>
                     <select
                         name='svm_session_id'
                         autoComplete='off'
@@ -154,21 +164,8 @@ var ModelGenerate = React.createClass({
 
                     </select>
 
-                    <select
-                        name='svm_kernel_type'
-                        autoComplete='off'
-                        onChange={this.changeKernelType}
-                        value={this.state.value_kernel_type}
-                    >
+                    <KernelChoice onChange={this.changeKernelType} />
 
-                        <option value='' defaultValue>--Select--</option>
-                        <option value='linear'>Linear</option>
-                        <option value='polynomial'>Polynomial</option>
-                        <option value='rbf'>RBF</option>
-                        <option value='sigmoid'>Sigmoid</option>
-                        <option value='precomputed'>Precomputed</option>
-
-                    </select>
                 </fieldset>
 
                 <AjaxSpinner />
