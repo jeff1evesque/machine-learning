@@ -23,14 +23,14 @@ class Save_Feature(object):
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, premodel_data):
         '''@__init__
 
         This constructor is responsible for defining class variables.
 
         '''
 
-        self.svm_data = svm_data
+        self.premodel_data = premodel_data
         self.list_error = []
         self.sql = SQL()
 
@@ -50,8 +50,8 @@ class Save_Feature(object):
         sql_statement = 'INSERT INTO tbl_feature_count (id_entity, '\
             'count_features) VALUES(%s, %s)'
         args = (
-            self.svm_data['id_entity'],
-            self.svm_data['count_features'],
+            self.premodel_data['id_entity'],
+            self.premodel_data['count_features'],
         )
         response = self.sql.sql_command(sql_statement, 'insert', args)
 
@@ -83,9 +83,9 @@ class Save_Feature(object):
         sql_statement = 'INSERT INTO tbl_feature_value (id_entity, '\
             'dep_variable_label, indep_variable_label, indep_variable_value) '\
             'VALUES(%s, %s, %s, %s)'
-        dataset = self.svm_data['svm_dataset']
+        dataset = self.premodel_data['premodel_dataset']
         args = (
-            self.svm_data['id_entity'],
+            self.premodel_data['id_entity'],
             dataset['dep_variable_label'],
             dataset['indep_variable_label'],
             dataset['indep_variable_value'],
