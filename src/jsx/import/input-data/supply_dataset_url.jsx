@@ -55,7 +55,7 @@ var SupplyDatasetUrl = React.createClass({
   // update 'state properties': allow parent component(s) to access properties
     validUrlEntered: function(){
         {/* get array of input elements, by classname */}
-        var dataset = document.getElementsByClassName('svm-dataset-url');
+        var dataset = document.getElementsByClassName('dataset-url');
 
         {/*
             Iterate the node list containing the supplied dataset(s). If the
@@ -91,9 +91,9 @@ var SupplyDatasetUrl = React.createClass({
                 <legend>Supply Dataset</legend>
                 <input
                     type='url'
-                    name='svm_dataset[]'
+                    name='dataset[]'
                     placeholder='Dataset URL'
-                    className='svm-dataset-url'
+                    className='dataset-url'
                     onChange={this.validUrlEntered}
                     value={this.state.value}
                 />
@@ -114,9 +114,9 @@ var SupplyDatasetUrl = React.createClass({
                 {inputs && inputs.map(function(value, index){
                     return <input
                         type='url'
-                        name='svm_dataset[]'
+                        name='dataset[]'
                         placeholder='Dataset URL'
-                        className='svm-dataset-url'
+                        className='dataset-url'
                         key={index}
                         onChange={this.validUrlEntered}
                         value={this.state['value_dataset_' + index.toString()]}
