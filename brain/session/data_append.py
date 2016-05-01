@@ -64,7 +64,7 @@ class Data_Append(Base, Base_Data):
         '''
 
         svm_entity = {
-            'title': self.svm_data['data']['settings'].get('svm_title', None),
+            'title': self.svm_data['data']['settings'].get('session_name', None),
             'uid': self.uid,
             'id_entity': session_id,
         }
