@@ -39,7 +39,7 @@ class Base(object):
         '''
 
         self.svm_data = svm_data
-        self.svm_session = self.svm_data['data']['settings']['svm_session']
+        self.session_type = self.svm_data['data']['settings']['session_type']
         self.list_error = []
 
     def validate_arg_none(self):
@@ -64,7 +64,7 @@ class Base(object):
 
         validate = Validate_Settings(
             self.svm_data,
-            self.svm_session
+            self.session_type
         )
 
         validated = validate.validate()
