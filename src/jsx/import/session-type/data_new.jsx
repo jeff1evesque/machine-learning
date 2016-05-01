@@ -77,7 +77,7 @@ var DataNew = React.createClass({
                     />
 
                     <select
-                        name='svm_dataset_type'
+                        name='dataset_type'
                         autoComplete='off'
                         onChange={this.changeDatasetType}
                         value={this.state.value_dataset_type}
