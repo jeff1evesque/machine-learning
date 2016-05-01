@@ -22,7 +22,7 @@ class Validate_File_Extension(object):
 
     '''
 
-    def __init__(self, svm_data, svm_session=None):
+    def __init__(self, svm_data, session_type=None):
         '''@__init__
 
         This constructor saves a subset of the passed-in form data.
@@ -30,7 +30,7 @@ class Validate_File_Extension(object):
         '''
 
         self.svm_data = svm_data
-        self.svm_session = svm_session
+        self.session_type = session_type
 
     def validate(self):
         '''@validate
