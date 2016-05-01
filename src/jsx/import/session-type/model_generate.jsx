@@ -142,7 +142,7 @@ var ModelGenerate = React.createClass({
                     </select>
 
                     <select
-                        name='svm_model_type'
+                        name='sv_model_type'
                         autoComplete='off'
                         onChange={this.changeModelType}
                         value={this.state.value_model_type}
@@ -155,7 +155,7 @@ var ModelGenerate = React.createClass({
                     </select>
 
                     <select
-                        name='svm_kernel_type'
+                        name='sv_kernel_type'
                         autoComplete='off'
                         onChange={this.changeKernelType}
                         value={this.state.value_kernel_type}
