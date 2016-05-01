@@ -78,7 +78,7 @@ class Validate_Settings(object):
             try:
                 validate = Draft4Validator(jsonschema_model_predict())
 
-                int(self.svm_settings['svm_model_id'])
+                int(self.svm_settings['model_id'])
                 for value in self.svm_settings['prediction_input[]']:
                     float(value)
 
