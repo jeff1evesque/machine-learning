@@ -48,7 +48,7 @@ def jsonschema_data_new():
                 'minLength': 1
             },
         },
-        'svm_session_id': {
+        'session_id': {
             'type': 'string',
             'minLength': 1
         },
@@ -81,7 +81,7 @@ def jsonschema_data_append():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_session_id': {
+            'session_id': {
                 'type': 'string',
                 'minLength': 1
             },
@@ -115,7 +115,7 @@ def jsonschema_model_generate():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_session_id': {
+            'session_id': {
                 'type': 'string',
                 'minLength': 1
             },
