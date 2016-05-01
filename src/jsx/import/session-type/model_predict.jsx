@@ -76,7 +76,7 @@ var ModelPredict = React.createClass({
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
                     <select
-                        name='svm_model_id'
+                        name='model_id'
                         autoComplete='off'
                         onChange={this.changeModelId}
                         value={this.state.value_model_id}
