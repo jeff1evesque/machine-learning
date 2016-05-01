@@ -49,7 +49,7 @@ class Model_Predict(Base):
         super(Model_Predict, self).__init__(svm_data)
         self.svm_data = svm_data
         self.svm_settings = self.svm_data['data']['settings']
-        self.model_id = self.svm_settings['svm_model_id']
+        self.model_id = self.svm_settings['model_id']
         self.predictors = self.svm_settings['prediction_input[]']
         self.list_error = []
 
