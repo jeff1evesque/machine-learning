@@ -70,7 +70,7 @@ var DataNew = React.createClass({
                     <p>Provide the <i>Session Name</i>, and dataset type</p>
                     <input
                         type='text'
-                        name='svm_title'
+                        name='session_name'
                         placeholder='Session Name'
                         onInput={this.changeTitle}
                         value={this.state.value_title}
