@@ -43,7 +43,7 @@ def jsonschema_data_new():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_title': {
+            'session_name': {
                 'type': 'string',
                 'minLength': 1
             },
