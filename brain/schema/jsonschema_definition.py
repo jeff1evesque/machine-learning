@@ -56,7 +56,7 @@ def jsonschema_data_new():
             'type': 'string',
             'enum': ['file_upload', 'dataset_url', 'json_string']
         },
-        'svm_session': {
+        'session_type': {
             'type': 'string',
             'enum': ['data_new']
         },
@@ -89,7 +89,7 @@ def jsonschema_data_append():
                 'type': 'string',
                 'enum': ['file_upload', 'dataset_url', 'json_string']
             },
-            'svm_session': {
+            'session_type': {
                 'type': 'string',
                 'enum': ['data_append']
             },
@@ -123,7 +123,7 @@ def jsonschema_model_generate():
                 'type': 'string',
                 'enum': ['classification', 'regression']
             },
-            'svm_session': {
+            'session_type': {
                 'type': 'string',
                 'enum': ['model_generate']
             },
@@ -149,7 +149,7 @@ def jsonschema_model_predict():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_session': {
+            'session_type': {
                 'type': 'string',
                 'enum': ['model_predict']
             },
