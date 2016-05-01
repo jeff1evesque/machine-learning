@@ -95,7 +95,7 @@ class Load_Data(object):
         session = Data_Append(self.data)
 
         # define current session id
-        session_id = self.data['data']['settings']['svm_session_id']
+        session_id = self.data['data']['settings']['session_id']
         session.validate_id(session_id)
 
         # implement class methods
