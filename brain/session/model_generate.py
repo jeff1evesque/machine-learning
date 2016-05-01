@@ -30,7 +30,7 @@ class Model_Generate(Base):
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, premodel_data):
         '''@__init__
 
         This constructor is responsible for defining class variables, using the
@@ -40,12 +40,13 @@ class Model_Generate(Base):
         @super(), implement 'Base', and 'Base_Data' superclass constructor
             within this child class constructor.
 
-        Note: the superclass constructor expects the same 'svm_data' argument.
+        Note: the superclass constructor expects the same 'premodel_data'
+              argument.
 
         '''
-        super(Model_Generate, self).__init__(svm_data)
-        self.svm_data = svm_data
-        self.session_id = self.svm_data['data']['settings']['svm_session_id']
+        super(Model_Generate, self).__init__(premodel_data)
+        self.premodel_data = premodel_data
+        self.session_id = self.premodel_data['data']['settings']['session_id']
         self.feature_request = Retrieve_Feature()
         self.list_error = []
 
