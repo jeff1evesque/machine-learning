@@ -84,7 +84,7 @@ class Base_Data(object):
         if self.svm_data['data']['dataset']['file_upload']:
             validator = Validate_File_Extension(
                 self.svm_data,
-                self.svm_session
+                self.session_type
             )
             self.upload = validator.validate()
 
