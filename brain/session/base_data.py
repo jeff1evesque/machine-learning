@@ -144,8 +144,8 @@ class Base_Data(object):
         elif db_return['status'] and session_type == 'data_new':
             return {'status': True, 'id': db_return['id'], 'error': None}
 
-    def save_svm_dataset(self):
-        '''@save_svm_dataset
+    def save_premodel_dataset(self):
+        '''@save_premodel_dataset
 
         This method saves each dataset element (independent variable value)
         into the sql database.
@@ -153,9 +153,9 @@ class Base_Data(object):
         '''
 
         for data in self.dataset:
-            for dataset in data['svm_dataset']:
+            for dataset in data['premodel_dataset']:
                 db_save = Save_Feature({
-                    'svm_dataset': dataset,
+                    'premodel_dataset': dataset,
                     'id_entity': data['id_entity']
                 })
 
@@ -232,7 +232,7 @@ class Base_Data(object):
                             # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': converted,
+                                'premodel_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -254,7 +254,7 @@ class Base_Data(object):
                         # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': converted,
+                                'premodel_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -276,7 +276,7 @@ class Base_Data(object):
                             # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': converted,
+                                'premodel_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -299,7 +299,7 @@ class Base_Data(object):
                 # build dataset
                 self.dataset.append({
                     'id_entity': id_entity,
-                    'svm_dataset': converted,
+                    'premodel_dataset': converted,
                     'count_features': count_features
                 })
 
