@@ -181,11 +181,11 @@ class Load_Data(object):
 
         '''
 
-        session_type = self.data['data']['settings']['svm_session']
+        session_type = self.data['data']['settings']['session_type']
         if session_type in self.session_list:
             return {'session_type': session_type, 'error': None}
         else:
-            error = 'Error: the provided \'svm_session\' must be '\
+            error = 'Error: the provided \'svm_type\' must be '\
                 '\'data_new\', \'data_append\', \'model_generate\', or'\
                 '\'model_predict\'.'
             self.list_error.append(error)
