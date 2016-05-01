@@ -119,7 +119,7 @@ def jsonschema_model_generate():
                 'type': 'string',
                 'minLength': 1
             },
-            'svm_model_type': {
+            'sv_model_type': {
                 'type': 'string',
                 'enum': ['classification', 'regression']
             },
