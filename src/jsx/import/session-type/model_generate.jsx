@@ -124,7 +124,7 @@ var ModelGenerate = React.createClass({
                     <legend>Configurations</legend>
                     <p>Select past session, and model type</p>
                     <select
-                        name='svm_session_id'
+                        name='session_id'
                         autoComplete='off'
                         onChange={this.changeSessionId}
                         value={this.state.value_session_id}
