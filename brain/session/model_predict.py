@@ -21,7 +21,8 @@ from brain.cache.cache_model import Cache_Model
 class Model_Predict(Base):
     '''@Model_Predict
 
-    This class provides an interface to generate an svm prediction, using the
+    This class provides an interface to generate a prediction, based on a
+    specified model. Specifically, a prediction can be obtained by using the
     provided prediction feature input(s), and the stored corresponding model,
     within the NoSQL datastore.
 
@@ -29,7 +30,7 @@ class Model_Predict(Base):
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, prediction_input):
         '''@__init__
 
         This constructor is responsible for defining class variables, using the
@@ -39,18 +40,18 @@ class Model_Predict(Base):
         @super(), implement 'Base', and 'Base_Data' superclass constructor
             within this child class constructor.
 
-        @self.predictors, a list of arguments (floats) required to make an SVM
-            prediction, against the respective svm model.
+        @self.predictors, a list of arguments (floats) required to make a
+            corresponding prediction, against the respective model.
 
-        Note: the superclass constructor expects the same 'svm_data' argument.
+        Note: the superclass constructor expects the same 'prediction_input' argument.
 
         '''
 
-        super(Model_Predict, self).__init__(svm_data)
-        self.svm_data = svm_data
-        self.svm_settings = self.svm_data['data']['settings']
-        self.model_id = self.svm_settings['model_id']
-        self.predictors = self.svm_settings['prediction_input[]']
+        super(Model_Predict, self).__init__(prediction_input)
+        self.prediction_input = prediction_input
+        self.prediction_settings = self.prediction_input['data']['settings']
+        self.model_id = self.prediction_settings['model_id']
+        self.predictors = self.prediction_settings['prediction_input[]']
         self.list_error = []
 
     def svm_prediction(self):
