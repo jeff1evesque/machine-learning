@@ -121,7 +121,7 @@ var ModelPredict = React.createClass({
         this.mounted = true;
 
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-model/';
+        var ajaxEndpoint = '/retrieve-sv-model/';
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null
