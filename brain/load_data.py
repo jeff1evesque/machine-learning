@@ -61,7 +61,7 @@ class Load_Data(object):
             session.validate_file_extension()
             session.check()
 
-            session_entity = session.save_svm_entity('data_new')
+            session_entity = session.save_entity('data_new')
             if session_entity['status']:
                 session_id = session_entity['id']
                 session.validate_id(session_id)
@@ -104,7 +104,7 @@ class Load_Data(object):
             session.validate_file_extension()
             session.check()
 
-            session_entity = session.save_svm_entity('data_append', session_id)
+            session_entity = session.save_entity('data_append', session_id)
             if session_entity['status']:
                 session.check()
 
