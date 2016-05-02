@@ -2,7 +2,7 @@
 
 '''@validate_dataset
 
-This script performs validation on the svm dataset(s).
+This script performs validation on correpsonding dataset(s).
 
 '''
 
