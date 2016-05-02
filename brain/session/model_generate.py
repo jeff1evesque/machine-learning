@@ -4,8 +4,8 @@
 
 This file receives data (i.e. settings) required to query from the database,
 a previously stored session, involving one or more stored dataset uploads, and
-generates an SVM model, respectively. The new SVM model, is stored into
-respective database table(s), which later can be retrieved within
+generates a corresponding model, respectively. The new model, is then stored
+into respective database table(s), which later can be retrieved within
 'model_predict.py'.
 
 '''
@@ -23,8 +23,8 @@ import json
 class Model_Generate(Base):
     '''@Model_Generate
 
-    This class provides an interface to generate svm model(s), stored within a
-    NoSQL datastore.
+    This class provides an interface to generate a corresponding model, within
+    a NoSQL datastore.
 
     Note: inherit base methods from superclass 'Base'
 
@@ -53,8 +53,9 @@ class Model_Generate(Base):
     def generate_model(self):
         '''@generate_model
 
-        This method generates an svm model, using a chosen dataset from the SQL
-        database.  The resulting model is stored into a NoSQL datastore.
+        This method generates a corresponding model, using a chosen dataset
+        from the SQL database. The resulting model is stored into a NoSQL
+        datastore.
 
         @grouped_features, a matrix of observations, where each nested vector,
             or python list, is a collection of features within the containing
