@@ -31,7 +31,7 @@ class Base_Data(object):
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, premodel_data):
         '''@__init__
 
         This constructor is responsible for defining class variables.
@@ -43,8 +43,8 @@ class Base_Data(object):
         self.list_error = []
         self.uid = 1
 
-    def save_svm_info(self):
-        '''@save_svm_info
+    def save_feature_count(self):
+        '''@save_feature_count
 
         This method saves the number of features that can be expected in a
         given observation with respect to 'id_entity'.
@@ -61,10 +61,10 @@ class Base_Data(object):
 
         '''
 
-        svm_data = self.dataset[0]
+        premodel_data = self.dataset[0]
         db_save = Save_Feature({
-            'id_entity': svm_data['id_entity'],
-            'count_features': svm_data['count_features']
+            'id_entity': premodel_data['id_entity'],
+            'count_features': premodel_data['count_features']
         })
 
         # save dataset element, append error(s)
@@ -81,9 +81,9 @@ class Base_Data(object):
         '''
 
         # web-interface: validate, and restructure dataset
-        if self.svm_data['data']['dataset']['file_upload']:
+        if self.premodel_data['data']['dataset']['file_upload']:
             validator = Validate_File_Extension(
-                self.svm_data,
+                self.premodel_data,
                 self.session_type
             )
             self.upload = validator.validate()
@@ -95,11 +95,11 @@ class Base_Data(object):
                 self.flag_upload = True
 
         # programmatic-interface: validate, do not restructure
-        elif self.svm_data['data']['dataset']['json_string']:
-            self.upload = self.svm_data['data']
+        elif self.premodel_data['data']['dataset']['json_string']:
+            self.upload = self.premodel_data['data']
 
-            if self.svm_data['error']:
-                self.list_error.append(self.svm_data['error'])
+            if self.premodel_data['error']:
+                self.list_error.append(self.premodel_data['error'])
                 self.flag_upload = True
 
     def validate_id(self, session_id):
@@ -125,12 +125,12 @@ class Base_Data(object):
 
         '''
 
-        svm_entity = {
-            'title': self.svm_data['data']['settings'].get('session_name', None),
+        premodel_entity = {
+            'title': self.premodel_data['data']['settings'].get('session_name', None),
             'uid': self.uid,
             'id_entity': None
         }
-        db_save = Save_Entity(svm_entity, session_type)
+        db_save = Save_Entity(premodel_entity, session_type)
 
         # save dataset element
         db_return = db_save.save()
