@@ -26,7 +26,7 @@ class Data_New(Base, Base_Data):
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, premodel_data):
         '''@__init__
 
         This constructor defines class properties using the superclass 'Base',
@@ -38,11 +38,11 @@ class Data_New(Base, Base_Data):
 
         @self.uid, the logged-in user (i.e. userid).
 
-        Note: the superclass constructor expects the same 'svm_data' argument.
+        Note: the superclass constructor expects the same 'premodel_data' argument.
 
         '''
 
-        super(Data_New, self).__init__(svm_data)
+        super(Data_New, self).__init__(premodel_data)
         self.observation_labels = []
         self.list_error = []
         self.uid = 1
