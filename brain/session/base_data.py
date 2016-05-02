@@ -117,8 +117,8 @@ class Base_Data(object):
         except Exception, error:
             self.list_error.append(str(error))
 
-    def save_svm_entity(self, session_type):
-        '''@save_svm_entity
+    def save_entity(self, session_type):
+        '''@save_entity
 
         This method saves the current entity into the database, then returns
         the corresponding entity id.
@@ -176,7 +176,7 @@ class Base_Data(object):
             defined after invoking the 'dataset_to_dict' method.
 
         @session_id, the corresponding returned session id from invoking the
-            'save_svm_entity' method.
+            'save_entity' method.
         '''
 
         if len(self.observation_labels) > 0:
