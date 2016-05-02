@@ -57,7 +57,7 @@ class Load_Data(object):
 
         # implement class methods
         if not session.validate_arg_none():
-            session.validate_svm_settings()
+            session.validate_premodel_settings()
             session.validate_file_extension()
             session.check()
 
@@ -100,7 +100,7 @@ class Load_Data(object):
 
         # implement class methods
         if not session.validate_arg_none() and not session.get_errors():
-            session.validate_svm_settings()
+            session.validate_premodel_settings()
             session.validate_file_extension()
             session.check()
 
@@ -136,7 +136,7 @@ class Load_Data(object):
 
         # generate model
         if not session.validate_arg_none():
-            session.validate_svm_settings()
+            session.validate_premodel_settings()
             session.check()
             session.generate_model()
 
@@ -159,7 +159,7 @@ class Load_Data(object):
 
         # implement class methods
         if not session.validate_arg_none():
-            session.validate_svm_settings()
+            session.validate_premodel_settings()
             session.check()
 
             my_prediction = session.svm_prediction()
