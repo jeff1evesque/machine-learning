@@ -12,9 +12,9 @@ from brain.database.db_query import SQL
 class Retrieve_Feature(object):
     '''@Retrieve_Feature
 
-    This class provides an interface to retrieve an svm dataset, using a fixed
-    supplied 'id_entity'.  The 'id_entity' is a reference, indicating which
-    dataset to get.
+    This class provides an interface to retrieve corresponding dataset(s),
+    using a fixed supplied 'id_entity'.  The 'id_entity' is a reference,
+    indicating which dataset to get.
 
     Note: this class is invoked within 'model_generate.py'
 
@@ -35,8 +35,8 @@ class Retrieve_Feature(object):
     def get_dataset(self, id_entity):
         '''@get_dataset
 
-        This method retrieves an SVM dataset, from corresponding 'EAV data
-        model' database table(s), using a fixed 'id_entity'.
+        This method retrieves a correspondinng dataset, from corresponding
+        'EAV data model' database table(s), using a fixed 'id_entity'.
 
         @id_entity, this supplied argument corresponds to the 'id_entity'
             column from the 'tbl_dataset_value' database table.
