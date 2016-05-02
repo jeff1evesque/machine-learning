@@ -69,7 +69,7 @@ class Load_Data(object):
 
                 session.dataset_to_dict(session_id)
                 session.check()
-                session.save_svm_info()
+                session.save_feature_count()
                 session.check()
 
                 session.save_observation_label('data_new', session_id)
