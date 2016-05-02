@@ -28,7 +28,7 @@ class Data_Append(Base, Base_Data):
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, premodel_data):
         '''@__init__
 
         This constructor is responsible for defining class variables, using the
@@ -40,11 +40,12 @@ class Data_Append(Base, Base_Data):
 
         @self.uid, the logged-in user (i.e. userid).
 
-        Note: the superclass constructor expects the same 'svm_data' argument.
+        Note: the superclass constructor expects the same 'premodel_data'
+              argument.
 
         '''
 
-        super(Data_Append, self).__init__(svm_data)
+        super(Data_Append, self).__init__(premodel_data)
         self.observation_labels = []
         self.list_error = []
         self.uid = 1
@@ -63,12 +64,12 @@ class Data_Append(Base, Base_Data):
 
         '''
 
-        svm_entity = {
-            'title': self.svm_data['data']['settings'].get('session_name', None),
+        premodel_entity = {
+            'title': self.premodel_data['data']['settings'].get('session_name', None),
             'uid': self.uid,
             'id_entity': session_id,
         }
-        db_save = Save_Entity(svm_entity, session_type)
+        db_save = Save_Entity(premodel_entity, session_type)
 
         # save dataset element
         db_return = db_save.save()
