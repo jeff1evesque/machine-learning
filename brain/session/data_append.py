@@ -49,8 +49,8 @@ class Data_Append(Base, Base_Data):
         self.list_error = []
         self.uid = 1
 
-    def save_svm_entity(self, session_type, session_id):
-        '''@save_svm_entity
+    def save_entity(self, session_type, session_id):
+        '''@save_entity
 
         This method overrides the identical method from the inherited
         superclass, 'Base_Data'. Specifically, this method updates an
