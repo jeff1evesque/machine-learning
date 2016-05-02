@@ -54,8 +54,8 @@ class Base(object):
         else:
             return False
 
-    def validate_svm_settings(self):
-        '''@validate_svm_settings
+    def validate_premodel_settings(self):
+        '''@validate_premodel_settings
 
         This method validates the provided settings (not the dataset), that
         describe the session.
