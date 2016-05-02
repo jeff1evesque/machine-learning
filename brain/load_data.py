@@ -75,7 +75,7 @@ class Load_Data(object):
                 session.save_observation_label('data_new', session_id)
                 session.check()
 
-                session.save_svm_dataset()
+                session.save_premodel_dataset()
                 session.check()
 
             return 'Dataset(s) properly uploaded into database'
@@ -114,7 +114,7 @@ class Load_Data(object):
                 session.save_observation_label('data_append', session_id)
                 session.check()
 
-                session.save_svm_dataset()
+                session.save_premodel_dataset()
                 session.check()
 
             return 'Dataset(s) properly appended into database'
