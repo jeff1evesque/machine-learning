@@ -32,16 +32,20 @@ class Convert_Upload(object):
 
     '''
 
-    def __init__(self, svm_data, is_json=False):
+    def __init__(self, raw_data, is_json=False):
         '''@__init__
 
         This constructor is responsible for defining class variables.
 
-        @is_json, flag indicating 'svm_data' is a json string.
+        @raw_data, generally a file (or json string) containing the raw
+            dataset(s), to be used when computing a corresponding model. If
+            this argument is a file, it needs to be closed.
+
+        @is_json, flag indicating 'raw_data' is a json string.
 
         '''
 
-        self.svm_data = svm_data
+        self.raw_data = raw_data
         self.is_json = is_json
         self.observation_labels = None
         self.count_features = None
@@ -55,8 +59,8 @@ class Convert_Upload(object):
         @list_observation_label, is a list containing dependent variable
             labels.
 
-        Note: we use the 'Universal Newline Support' with the 'U" parameter
-            when opening 'self.svm_data'. This allows newlines to be
+        Note: we use the 'Universal Newline Support' with the 'U' parameter
+            when opening 'self.raw_data'. This allows newlines to be
             understood regardless, if the newline character was created in
             osx, windows, or linux.
 
@@ -73,7 +77,7 @@ class Convert_Upload(object):
 
         # open temporary 'csvfile' reader object
         dataset_reader = csv.reader(
-            self.svm_data,
+            self.raw_data,
             delimiter=' ',
             quotechar='|'
         )
@@ -141,7 +145,7 @@ class Convert_Upload(object):
                 })
 
         # close file, save observation labels, and return
-        self.svm_data.close()
+        self.raw_data.close()
         self.observation_labels = list_observation_label
         return list_dataset
 
@@ -160,9 +164,9 @@ class Convert_Upload(object):
         observation_labels = []
 
         if self.is_json:
-            dataset = self.svm_data
+            dataset = self.raw_data
         else:
-            dataset = json.load(self.svm_data)
+            dataset = json.load(self.raw_data)
 
         for observation_label in dataset:
             # variables
@@ -200,7 +204,7 @@ class Convert_Upload(object):
 
         # close file
         if not self.is_json:
-            self.svm_data.close()
+            self.raw_data.close()
 
         # save observation labels, and return
         self.observation_labels = observation_labels
@@ -221,7 +225,7 @@ class Convert_Upload(object):
         list_observation_label = []
 
         # convert xml file to python 'dict'
-        dataset = xmltodict.parse(self.svm_data)
+        dataset = xmltodict.parse(self.raw_data)
 
         # build 'list_dataset'
         for observation in dataset['dataset']['observation']:
@@ -265,7 +269,7 @@ class Convert_Upload(object):
                 self.count_features = len(observation['independent-variable'])
 
         # close file, save observation labels, and return
-        self.svm_data.close()
+        self.raw_data.close()
         self.observation_labels = list_observation_label
         return list_dataset
 

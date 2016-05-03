@@ -79,7 +79,7 @@ class Restructure_Data(object):
             try:
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
-                    for file in self.dataset.getlist('svm_dataset[]'):
+                    for file in self.dataset.getlist('dataset[]'):
                         formatted_files.append({
                             'filename': file.filename,
                             'file': file
@@ -87,7 +87,7 @@ class Restructure_Data(object):
 
                     dataset = {
                         'upload_quantity':
-                            len(self.dataset.getlist('svm_dataset[]')),
+                            len(self.dataset.getlist('dataset[]')),
                         'file_upload': formatted_files, 'json_string': None
                     }
 

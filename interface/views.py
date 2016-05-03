@@ -134,9 +134,9 @@ def retrieve_session():
             return json.dumps({'error': session_list['error']})
 
 
-@app.route('/retrieve-model/', methods=['POST'])
-def retrieve_model():
-    '''@retrieve_model
+@app.route('/retrieve-sv-model/', methods=['POST'])
+def retrieve_sv_model():
+    '''@retrieve_sv_model
 
     The router function retrieves all models stored in the hashed redis cache.
 
@@ -153,9 +153,9 @@ def retrieve_model():
             return json.dumps({'error': model_list['error']})
 
 
-@app.route('/retrieve-feature-properties/', methods=['POST'])
-def retrieve_feature_properties():
-    '''@retrieve_feature_properties
+@app.route('/retrieve-sv-features/', methods=['POST'])
+def retrieve_sv_features():
+    '''@retrieve_sv_features
 
     This router function retrieves the generalized features properties that can
     be expected for any given observation within the supplied dataset.

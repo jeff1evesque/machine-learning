@@ -59,7 +59,7 @@ var SupplyDatasetFile = React.createClass({
   // update 'state properties': allow parent component(s) to access properties
     validFileEntered: function(){
         {/* get array of input elements, by classname */}
-        var dataset = document.getElementsByClassName('svm-dataset-file');
+        var dataset = document.getElementsByClassName('dataset-file');
 
         {/*
             Iterate the node list containing the supplied dataset(s). If the
@@ -95,8 +95,8 @@ var SupplyDatasetFile = React.createClass({
                 <legend>Supply Dataset</legend>
                 <input
                     type='file'
-                    name='svm_dataset[]'
-                    className='svm-dataset-file'
+                    name='dataset[]'
+                    className='dataset-file'
                     onChange={this.validFileEntered}
                     value={this.state.value}
                 />
@@ -117,8 +117,8 @@ var SupplyDatasetFile = React.createClass({
                 {inputs && inputs.map(function(value, index) {
                     return <input
                         type='file'
-                        name='svm_dataset[]'
-                        className='svm-dataset-file'
+                        name='dataset[]'
+                        className='dataset-file'
                         key={index}
                         onChange={this.validFileEntered}
                         value={this.state['value_dataset_' + index.toString()]}

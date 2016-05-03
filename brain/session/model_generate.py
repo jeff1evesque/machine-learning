@@ -4,8 +4,8 @@
 
 This file receives data (i.e. settings) required to query from the database,
 a previously stored session, involving one or more stored dataset uploads, and
-generates an SVM model, respectively. The new SVM model, is stored into
-respective database table(s), which later can be retrieved within
+generates a corresponding model, respectively. The new model, is then stored
+into respective database table(s), which later can be retrieved within
 'model_predict.py'.
 
 '''
@@ -23,14 +23,14 @@ import json
 class Model_Generate(Base):
     '''@Model_Generate
 
-    This class provides an interface to generate svm model(s), stored within a
-    NoSQL datastore.
+    This class provides an interface to generate a corresponding model, within
+    a NoSQL datastore.
 
     Note: inherit base methods from superclass 'Base'
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, premodel_data):
         '''@__init__
 
         This constructor is responsible for defining class variables, using the
@@ -40,20 +40,22 @@ class Model_Generate(Base):
         @super(), implement 'Base', and 'Base_Data' superclass constructor
             within this child class constructor.
 
-        Note: the superclass constructor expects the same 'svm_data' argument.
+        Note: the superclass constructor expects the same 'premodel_data'
+              argument.
 
         '''
-        super(Model_Generate, self).__init__(svm_data)
-        self.svm_data = svm_data
-        self.session_id = self.svm_data['data']['settings']['svm_session_id']
+        super(Model_Generate, self).__init__(premodel_data)
+        self.premodel_data = premodel_data
+        self.session_id = self.premodel_data['data']['settings']['session_id']
         self.feature_request = Retrieve_Feature()
         self.list_error = []
 
     def generate_model(self):
         '''@generate_model
 
-        This method generates an svm model, using a chosen dataset from the SQL
-        database.  The resulting model is stored into a NoSQL datastore.
+        This method generates a corresponding model, using a chosen dataset
+        from the SQL database. The resulting model is stored into a NoSQL
+        datastore.
 
         @grouped_features, a matrix of observations, where each nested vector,
             or python list, is a collection of features within the containing

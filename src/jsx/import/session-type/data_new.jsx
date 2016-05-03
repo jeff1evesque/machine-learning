@@ -70,14 +70,14 @@ var DataNew = React.createClass({
                     <p>Provide the <i>Session Name</i>, and dataset type</p>
                     <input
                         type='text'
-                        name='svm_title'
+                        name='session_name'
                         placeholder='Session Name'
                         onInput={this.changeTitle}
                         value={this.state.value_title}
                     />
 
                     <select
-                        name='svm_dataset_type'
+                        name='dataset_type'
                         autoComplete='off'
                         onChange={this.changeDatasetType}
                         value={this.state.value_dataset_type}

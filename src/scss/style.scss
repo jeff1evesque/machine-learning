@@ -21,14 +21,14 @@
   font-weight: 700;
 }
 
-.svm-dataset-url:first-of-type,
-.svm-dataset-file:first-of-type {
+.dataset-url:first-of-type,
+.dataset-file:first-of-type {
   clear: both;
   float: left;
 }
 
-.svm-dataset-url,
-.svm-dataset-file {
+.dataset-url,
+.dataset-file {
   clear: both;
   display: block;
 }
@@ -42,7 +42,7 @@ form {
     }
   }
 
-  .svm-form-submit {
+  .form-submit {
     margin-top: $form-margin;
   }
 }

@@ -2,7 +2,7 @@
 
 '''@validate_dataset
 
-This script performs validation on the svm dataset(s).
+This script performs validation on correpsonding dataset(s).
 
 '''
 
@@ -20,7 +20,7 @@ class Validate_Dataset(object):
 
     '''
 
-    def __init__(self, data, svm_session=None):
+    def __init__(self, data, session_type=None):
         '''@__init__
 
         This constructor saves a subset of the passed-in form data.
@@ -28,7 +28,7 @@ class Validate_Dataset(object):
         '''
 
         self.data = data
-        self.svm_session = svm_session
+        self.session_type = session_type
         self.list_error = []
 
     def validate_label(self):

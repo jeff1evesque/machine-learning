@@ -2,7 +2,7 @@
 
 '''@retrieve_session
 
-This file retrieves the 'svm_title', and 'id_entity' properties.
+This file retrieves the 'session_name', and 'id_entity' properties.
 
 '''
 
@@ -13,7 +13,7 @@ class Retrieve_Session(object):
     '''
     @Retrieve_Session
 
-    This class provides an interface to retrieve the 'svm_title', and
+    This class provides an interface to retrieve the 'session_name', and
     'id_entity' from the 'tbl_dataset_entity' sql database table.
 
     Note: this class is invoked within 'views.py'

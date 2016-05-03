@@ -57,11 +57,11 @@ class Load_Data(object):
 
         # implement class methods
         if not session.validate_arg_none():
-            session.validate_svm_settings()
+            session.validate_premodel_settings()
             session.validate_file_extension()
             session.check()
 
-            session_entity = session.save_svm_entity('data_new')
+            session_entity = session.save_entity('data_new')
             if session_entity['status']:
                 session_id = session_entity['id']
                 session.validate_id(session_id)
@@ -69,13 +69,13 @@ class Load_Data(object):
 
                 session.dataset_to_dict(session_id)
                 session.check()
-                session.save_svm_info()
+                session.save_feature_count()
                 session.check()
 
                 session.save_observation_label('data_new', session_id)
                 session.check()
 
-                session.save_svm_dataset()
+                session.save_premodel_dataset()
                 session.check()
 
             return 'Dataset(s) properly uploaded into database'
@@ -95,16 +95,16 @@ class Load_Data(object):
         session = Data_Append(self.data)
 
         # define current session id
-        session_id = self.data['data']['settings']['svm_session_id']
+        session_id = self.data['data']['settings']['session_id']
         session.validate_id(session_id)
 
         # implement class methods
         if not session.validate_arg_none() and not session.get_errors():
-            session.validate_svm_settings()
+            session.validate_premodel_settings()
             session.validate_file_extension()
             session.check()
 
-            session_entity = session.save_svm_entity('data_append', session_id)
+            session_entity = session.save_entity('data_append', session_id)
             if session_entity['status']:
                 session.check()
 
@@ -114,7 +114,7 @@ class Load_Data(object):
                 session.save_observation_label('data_append', session_id)
                 session.check()
 
-                session.save_svm_dataset()
+                session.save_premodel_dataset()
                 session.check()
 
             return 'Dataset(s) properly appended into database'
@@ -136,7 +136,7 @@ class Load_Data(object):
 
         # generate model
         if not session.validate_arg_none():
-            session.validate_svm_settings()
+            session.validate_premodel_settings()
             session.check()
             session.generate_model()
 
@@ -159,7 +159,7 @@ class Load_Data(object):
 
         # implement class methods
         if not session.validate_arg_none():
-            session.validate_svm_settings()
+            session.validate_premodel_settings()
             session.check()
 
             my_prediction = session.svm_prediction()
@@ -181,11 +181,11 @@ class Load_Data(object):
 
         '''
 
-        session_type = self.data['data']['settings']['svm_session']
+        session_type = self.data['data']['settings']['session_type']
         if session_type in self.session_list:
             return {'session_type': session_type, 'error': None}
         else:
-            error = 'Error: the provided \'svm_session\' must be '\
+            error = 'Error: the provided \'svm_type\' must be '\
                 '\'data_new\', \'data_append\', \'model_generate\', or'\
                 '\'model_predict\'.'
             self.list_error.append(error)

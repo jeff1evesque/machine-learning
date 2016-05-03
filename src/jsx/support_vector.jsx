@@ -132,7 +132,7 @@ var SupportVector = React.createClass({
                     <legend>Session Type</legend>
                     <p>Choose a session type</p>
                     <select
-                        name='svm_session'
+                        name='session_type'
                         autoComplete='off'
                         onChange={this.changeSessionType}
                         value={this.state.value_session_type}
