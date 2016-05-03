@@ -31,7 +31,7 @@ class Base_Data(object):
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, premodel_data):
         '''@__init__
 
         This constructor is responsible for defining class variables.
@@ -43,8 +43,8 @@ class Base_Data(object):
         self.list_error = []
         self.uid = 1
 
-    def save_svm_info(self):
-        '''@save_svm_info
+    def save_feature_count(self):
+        '''@save_feature_count
 
         This method saves the number of features that can be expected in a
         given observation with respect to 'id_entity'.
@@ -61,10 +61,10 @@ class Base_Data(object):
 
         '''
 
-        svm_data = self.dataset[0]
+        premodel_data = self.dataset[0]
         db_save = Save_Feature({
-            'id_entity': svm_data['id_entity'],
-            'count_features': svm_data['count_features']
+            'id_entity': premodel_data['id_entity'],
+            'count_features': premodel_data['count_features']
         })
 
         # save dataset element, append error(s)
@@ -81,10 +81,10 @@ class Base_Data(object):
         '''
 
         # web-interface: validate, and restructure dataset
-        if self.svm_data['data']['dataset']['file_upload']:
+        if self.premodel_data['data']['dataset']['file_upload']:
             validator = Validate_File_Extension(
-                self.svm_data,
-                self.svm_session
+                self.premodel_data,
+                self.session_type
             )
             self.upload = validator.validate()
 
@@ -95,11 +95,11 @@ class Base_Data(object):
                 self.flag_upload = True
 
         # programmatic-interface: validate, do not restructure
-        elif self.svm_data['data']['dataset']['json_string']:
-            self.upload = self.svm_data['data']
+        elif self.premodel_data['data']['dataset']['json_string']:
+            self.upload = self.premodel_data['data']
 
-            if self.svm_data['error']:
-                self.list_error.append(self.svm_data['error'])
+            if self.premodel_data['error']:
+                self.list_error.append(self.premodel_data['error'])
                 self.flag_upload = True
 
     def validate_id(self, session_id):
@@ -117,20 +117,21 @@ class Base_Data(object):
         except Exception, error:
             self.list_error.append(str(error))
 
-    def save_svm_entity(self, session_type):
-        '''@save_svm_entity
+    def save_entity(self, session_type):
+        '''@save_entity
 
         This method saves the current entity into the database, then returns
         the corresponding entity id.
 
         '''
 
-        svm_entity = {
-            'title': self.svm_data['data']['settings'].get('svm_title', None),
+        premodel_settings = self.premodel_data['data']['settings']
+        premodel_entity = {
+            'title': premodel_settings.get('session_name', None),
             'uid': self.uid,
             'id_entity': None
         }
-        db_save = Save_Entity(svm_entity, session_type)
+        db_save = Save_Entity(premodel_entity, session_type)
 
         # save dataset element
         db_return = db_save.save()
@@ -144,8 +145,8 @@ class Base_Data(object):
         elif db_return['status'] and session_type == 'data_new':
             return {'status': True, 'id': db_return['id'], 'error': None}
 
-    def save_svm_dataset(self):
-        '''@save_svm_dataset
+    def save_premodel_dataset(self):
+        '''@save_premodel_dataset
 
         This method saves each dataset element (independent variable value)
         into the sql database.
@@ -153,9 +154,9 @@ class Base_Data(object):
         '''
 
         for data in self.dataset:
-            for dataset in data['svm_dataset']:
+            for dataset in data['premodel_dataset']:
                 db_save = Save_Feature({
-                    'svm_dataset': dataset,
+                    'premodel_dataset': dataset,
                     'id_entity': data['id_entity']
                 })
 
@@ -176,7 +177,7 @@ class Base_Data(object):
             defined after invoking the 'dataset_to_dict' method.
 
         @session_id, the corresponding returned session id from invoking the
-            'save_svm_entity' method.
+            'save_entity' method.
         '''
 
         if len(self.observation_labels) > 0:
@@ -232,7 +233,7 @@ class Base_Data(object):
                             # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': converted,
+                                'premodel_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -254,7 +255,7 @@ class Base_Data(object):
                         # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': converted,
+                                'premodel_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -276,7 +277,7 @@ class Base_Data(object):
                             # build new (relevant) dataset
                             self.dataset.append({
                                 'id_entity': id_entity,
-                                'svm_dataset': converted,
+                                'premodel_dataset': converted,
                                 'count_features': count_features
                             })
                         except Exception as error:
@@ -299,7 +300,7 @@ class Base_Data(object):
                 # build dataset
                 self.dataset.append({
                     'id_entity': id_entity,
-                    'svm_dataset': converted,
+                    'premodel_dataset': converted,
                     'count_features': count_features
                 })
 

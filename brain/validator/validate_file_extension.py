@@ -22,15 +22,15 @@ class Validate_File_Extension(object):
 
     '''
 
-    def __init__(self, svm_data, svm_session=None):
+    def __init__(self, premodel_data, session_type=None):
         '''@__init__
 
         This constructor saves a subset of the passed-in form data.
 
         '''
 
-        self.svm_data = svm_data
-        self.svm_session = svm_session
+        self.premodel_data = premodel_data
+        self.session_type = session_type
 
     def validate(self):
         '''@validate
@@ -46,7 +46,7 @@ class Validate_File_Extension(object):
         # local variables
         list_error = []
 
-        dataset = self.svm_data['data']['dataset']
+        dataset = self.premodel_data['data']['dataset']
         acceptable_type = ['csv', 'xml', 'json']
 
         unique_hash = set()

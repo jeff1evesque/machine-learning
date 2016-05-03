@@ -76,7 +76,7 @@ var ModelPredict = React.createClass({
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
                     <select
-                        name='svm_model_id'
+                        name='model_id'
                         autoComplete='off'
                         onChange={this.changeModelId}
                         value={this.state.value_model_id}
@@ -121,7 +121,7 @@ var ModelPredict = React.createClass({
         this.mounted = true;
 
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-model/';
+        var ajaxEndpoint = '/retrieve-sv-model/';
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null

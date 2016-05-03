@@ -85,7 +85,7 @@ var SupplyPredictors = React.createClass({
         this.mounted = true;
 
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-feature-properties/';
+        var ajaxEndpoint = '/retrieve-sv-features/';
         var ajaxData = {'session_id': this.props.selectedModelId};
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,

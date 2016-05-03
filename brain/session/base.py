@@ -31,31 +31,32 @@ class Base(object):
 
     '''
 
-    def __init__(self, svm_data):
+    def __init__(self, premodel_data):
         '''@__init__
 
         This constructor is responsible for defining class variables.
 
         '''
 
-        self.svm_data = svm_data
-        self.svm_session = self.svm_data['data']['settings']['svm_session']
+        self.premodel_data = premodel_data
+        settings = self.premodel_data['data']['settings']
+        self.session_type = settings['session_type']
         self.list_error = []
 
     def validate_arg_none(self):
         '''validate_arg_none
 
-        This method checks if the class variable 'svm_data' is defined.
+        This method checks if the class variable 'premodel_data' is defined.
 
         '''
 
-        if self.svm_data is None:
+        if self.premodel_data is None:
             return True
         else:
             return False
 
-    def validate_svm_settings(self):
-        '''@validate_svm_settings
+    def validate_premodel_settings(self):
+        '''@validate_premodel_settings
 
         This method validates the provided settings (not the dataset), that
         describe the session.
@@ -63,8 +64,8 @@ class Base(object):
         '''
 
         validate = Validate_Settings(
-            self.svm_data,
-            self.svm_session
+            self.premodel_data,
+            self.session_type
         )
 
         validated = validate.validate()

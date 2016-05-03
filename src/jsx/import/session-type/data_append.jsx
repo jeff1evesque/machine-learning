@@ -91,7 +91,7 @@ var DataAppend = React.createClass({
                     <legend>Configurations</legend>
                     <p>Select past session, and upload type</p>
                     <select
-                        name='svm_session_id'
+                        name='session_id'
                         autoComplete='off'
                         onChange={this.changeSessionId}
                         value={this.state.value_session_id}
@@ -109,7 +109,7 @@ var DataAppend = React.createClass({
                     </select>
 
                     <select
-                        name='svm_dataset_type'
+                        name='dataset_type'
                         autoComplete='off'
                         onChange={this.changeDatasetType}
                         value={this.state.value_dataset_type}

@@ -43,20 +43,20 @@ def jsonschema_data_new():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_title': {
+            'session_name': {
                 'type': 'string',
                 'minLength': 1
             },
         },
-        'svm_session_id': {
+        'session_id': {
             'type': 'string',
             'minLength': 1
         },
-        'svm_dataset_type': {
+        'dataset_type': {
             'type': 'string',
             'enum': ['file_upload', 'dataset_url', 'json_string']
         },
-        'svm_session': {
+        'session_type': {
             'type': 'string',
             'enum': ['data_new']
         },
@@ -81,15 +81,15 @@ def jsonschema_data_append():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_session_id': {
+            'session_id': {
                 'type': 'string',
                 'minLength': 1
             },
-            'svm_dataset_type': {
+            'dataset_type': {
                 'type': 'string',
                 'enum': ['file_upload', 'dataset_url', 'json_string']
             },
-            'svm_session': {
+            'session_type': {
                 'type': 'string',
                 'enum': ['data_append']
             },
@@ -115,15 +115,15 @@ def jsonschema_model_generate():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_session_id': {
+            'session_id': {
                 'type': 'string',
                 'minLength': 1
             },
-            'svm_model_type': {
+            'sv_model_type': {
                 'type': 'string',
                 'enum': ['classification', 'regression']
             },
-            'svm_session': {
+            'session_type': {
                 'type': 'string',
                 'enum': ['model_generate']
             },
@@ -149,7 +149,7 @@ def jsonschema_model_predict():
     schema = {
         'type': 'object',
         'properties': {
-            'svm_session': {
+            'session_type': {
                 'type': 'string',
                 'enum': ['model_predict']
             },

@@ -23,12 +23,15 @@ class Logger(object):
 
     '''
 
-    def __init__(self, type, filename=None, level=None, namespace=__name__):
+    def __init__(self, namespace, type, filename=None, level=None):
         '''@__init__
 
         This constructor is responsible for defining the necessary logger
         instance, which is used with additional methods to generate a
         corresponding log.
+
+        @namespace, required argument, where the object instantiating this
+            class should define this argument with '__name__'.
 
         @type, required argument, with valid log types:
 
@@ -46,9 +49,6 @@ class Logger(object):
             - warning
             - info
             - debug
-
-        @namespace, the object instantiating this class should define this
-            argument with '__name__'.
 
         Note: the handler level, determines the base line, for the logger
               level. This means if the logger level exceeds the corresponding
