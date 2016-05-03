@@ -43,7 +43,8 @@ class Model_Predict(Base):
         @self.predictors, a list of arguments (floats) required to make a
             corresponding prediction, against the respective model.
 
-        Note: the superclass constructor expects the same 'prediction_input' argument.
+        Note: the superclass constructor expects the same 'prediction_input'
+              argument.
 
         '''
 
