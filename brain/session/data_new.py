@@ -38,7 +38,8 @@ class Data_New(Base, Base_Data):
 
         @self.uid, the logged-in user (i.e. userid).
 
-        Note: the superclass constructor expects the same 'premodel_data' argument.
+        Note: the superclass constructor expects the same 'premodel_data'
+              argument.
 
         '''
 
