@@ -1,4 +1,4 @@
-# Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg)](https://travis-ci.org/jeff1evesque/machine-learning)
+# Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg?branch=master)](https://travis-ci.org/jeff1evesque/machine-learning)
 
 In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support
 vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/
