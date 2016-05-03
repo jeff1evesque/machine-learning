@@ -125,8 +125,9 @@ class Base_Data(object):
 
         '''
 
+        premodel_settings = self.premodel_data['data']['settings']
         premodel_entity = {
-            'title': self.premodel_data['data']['settings'].get('session_name', None),
+            'title': premodel_settings.get('session_name', None),
             'uid': self.uid,
             'id_entity': None
         }
