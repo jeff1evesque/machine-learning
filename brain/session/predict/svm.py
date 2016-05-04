@@ -1,15 +1,8 @@
 #!/usr/bin/python
 
-'''@model_predict
+'''@svm
 
-This file receives data (i.e. settings) required to query from the NoSQL
-datastore, a previously stored SVM model, generated from 'model_generate.py'.
-The determined SVM Model, is then used for analysis, based on the input data
-provided during the current session, which generates an SVM prediction.
-
-Note: the term 'dataset' used throughout various comments in this file,
-      synonymously implies the user supplied 'file upload(s)', and XML url
-      references.
+This file generates an svm prediction.
 
 '''
 
@@ -24,20 +17,20 @@ def svm_prediction(model, kernel, model_id, predictors):
     feature input(s), and the stored corresponding model, within the NoSQL
     datastore.
 
-    @prediction_input, a list of arguments (floats) required to make an SVM
+    @predictors, a list of arguments (floats) required to make an SVM
         prediction, against the respective svm model.
 
     '''
 
     # get necessary model
-    title = Cache_Hset().uncache(model+'_rbf_title', model_id)['result']
+    title = Cache_Hset().uncache(model + '_' + kernel + '_title', model_id)['result']
     clf = Cache_Model().uncache(
-        model+'_rbf_model',
-        self.model_id + '_' + title
+        model + '_' + kernel + '_model',
+        model_id + '_' + title
     )
 
     # get encoded labels
-    encoded_labels = Cache_Model().uncache(model+'_rbf_labels', model_id)
+    encoded_labels = Cache_Model().uncache(model + '_' + kernel + '_rbf_labels', model_id)
 
     # perform prediction, and return the result
     numeric_label = (clf.predict([predictors]))
