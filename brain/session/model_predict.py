@@ -14,7 +14,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.session.base import Base
-from brain.session.predict import svm_prediction
+from brain.session.predict.svm import svm_prediction
 
 
 class Model_Predict(Base):
