@@ -14,8 +14,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.session.base import Base
-from brain.cache.cache_hset import Cache_Hset
-from brain.cache.cache_model import Cache_Model
+from brain.session.predict import svm_prediction
 
 
 class Model_Predict(Base):
@@ -55,29 +54,13 @@ class Model_Predict(Base):
         self.predictors = self.prediction_settings['prediction_input[]']
         self.list_error = []
 
-    def svm_prediction(self):
-        '''@svm_prediction
+    def predict(self):
+        '''@predict
 
-        This method generates an svm prediction using the provided prediction
-        feature input(s), and the stored corresponding model, within the NoSQL
-        datastore.
-
-        @prediction_input, a list of arguments (floats) required to make an SVM
-            prediction, against the respective svm model.
+        This method generates a prediction with respect to the implemented
+        model, using the provided prediction feature input(s), and the stored
+        corresponding model, within the NoSQL datastore.
 
         '''
 
-        # get necessary model
-        title = Cache_Hset().uncache('svm_rbf_title', self.model_id)['result']
-        clf = Cache_Model().uncache(
-            'svm_rbf_model',
-            self.model_id + '_' + title
-        )
-
-        # get encoded labels
-        encoded_labels = Cache_Model().uncache('svm_rbf_labels', self.model_id)
-
-        # perform prediction, and return the result
-        numeric_label = (clf.predict([self.predictors]))
-        textual_label = list(encoded_labels.inverse_transform([numeric_label]))
-        return {'result': textual_label[0][0], 'error': None}
+        return svm_prediction('svm', 'rbf', self.model_id, self.predictors)
