@@ -30,7 +30,7 @@ def svm_prediction(model, kernel, model_id, predictors):
     )
 
     # get encoded labels
-    encoded_labels = Cache_Model().uncache(model + '_' + kernel + '_rbf_labels', model_id)
+    encoded_labels = Cache_Model().uncache(model + '_' + kernel + '_labels', model_id)
 
     # perform prediction, and return the result
     numeric_label = (clf.predict([predictors]))
