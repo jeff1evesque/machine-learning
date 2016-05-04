@@ -16,6 +16,7 @@ from brain.database.retrieve_entity import Retrieve_Entity
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 from sklearn import svm, preprocessing
+from log.logger import Logger
 import numpy
 import json
 
@@ -44,7 +45,9 @@ class Model_Generate(Base):
               argument.
 
         '''
+
         super(Model_Generate, self).__init__(premodel_data)
+        self.logger = Logger(__name__, 'error', 'error')
         self.premodel_data = premodel_data
         self.session_id = self.premodel_data['data']['settings']['session_id']
         self.feature_request = Retrieve_Feature()
@@ -73,7 +76,7 @@ class Model_Generate(Base):
 
         # get dataset
         if dataset['error']:
-            print dataset['error']
+            self.logger.log(dataset['error'])
             self.list_error.append(dataset['error'])
             dataset = None
         else:
@@ -81,7 +84,7 @@ class Model_Generate(Base):
 
         # get feature count
         if feature_count['error']:
-            print feature_count['error']
+            self.logger.log(feature_count['error'])
             self.list_error.append(feature_count['error'])
             feature_count = None
         else:
