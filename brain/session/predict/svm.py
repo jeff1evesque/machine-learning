@@ -23,14 +23,20 @@ def svm_prediction(model, kernel, model_id, predictors):
     '''
 
     # get necessary model
-    title = Cache_Hset().uncache(model + '_' + kernel + '_title', model_id)['result']
+    title = Cache_Hset().uncache(
+        model + '_' + kernel + '_title',
+        model_id
+    )['result']
     clf = Cache_Model().uncache(
         model + '_' + kernel + '_model',
         model_id + '_' + title
     )
 
     # get encoded labels
-    encoded_labels = Cache_Model().uncache(model + '_' + kernel + '_labels', model_id)
+    encoded_labels = Cache_Model().uncache(
+        model + '_' + kernel + '_labels',
+        model_id
+    )
 
     # perform prediction, and return the result
     numeric_label = (clf.predict([predictors]))
