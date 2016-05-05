@@ -162,7 +162,7 @@ class Load_Data(object):
             session.validate_premodel_settings()
             session.check()
 
-            my_prediction = session.svm_prediction()
+            my_prediction = session.predict()
             if my_prediction['error']:
                 return {'result': None, 'error': my_prediction['error']}
             else:
