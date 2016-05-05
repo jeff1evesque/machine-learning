@@ -23,7 +23,7 @@ class Logger(object):
 
     '''
 
-    def __init__(self, namespace, type, filename=None, level=None):
+    def __init__(self, namespace, type, filename=None, level=LOG_LEVEL):
         '''@__init__
 
         This constructor is responsible for defining the necessary logger
