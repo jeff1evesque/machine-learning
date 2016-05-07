@@ -12,10 +12,11 @@ from itertools import islice
 from brain.validator.validate_dataset import Validate_Dataset
 
 
-def csv_to_dict(raw_data):
-    '''@csv_to_dict
+def svm_converter(raw_data):
+    '''@svm_converter
 
-    This method converts the supplied csv file-object to a python dictionary.
+    This method converts the supplied csv file-object, intended for an svm
+    model, to a python dictionary.
 
     @raw_data, generally a file (or json string) containing the raw dataset(s),
         to be used when computing a corresponding model. If this argument is a
