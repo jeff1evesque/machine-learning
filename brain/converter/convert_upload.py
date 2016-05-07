@@ -11,6 +11,7 @@ import json
 import xmltodict
 from itertools import islice
 from brain.validator.validate_dataset import Validate_Dataset
+from brain.converter.dataset.csv import svm_converter
 
 
 class Convert_Upload(object):
@@ -56,98 +57,14 @@ class Convert_Upload(object):
         This method converts the supplied csv file-object to a python
         dictionary.
 
-        @list_observation_label, is a list containing dependent variable
-            labels.
-
-        Note: we use the 'Universal Newline Support' with the 'U' parameter
-            when opening 'self.raw_data'. This allows newlines to be
-            understood regardless, if the newline character was created in
-            osx, windows, or linux.
-
-        Note: since 'row' is a list, with one comma-delimited string element,
-            the following line is required in this method:
-
-                row = row[0].split(',')
-
         '''
 
-        list_dataset = []
-        list_observation_label = []
-        list_feature_label = []
+        # svm dataset
+        data = svm_converter(self.raw.data)
+        self.observation_labels = data['observation_labels']
+        self.count_features = data['feature_count']
 
-        # open temporary 'csvfile' reader object
-        dataset_reader = csv.reader(
-            self.raw_data,
-            delimiter=' ',
-            quotechar='|'
-        )
-
-        # iterate first row of csvfile
-        for row in islice(dataset_reader, 0, 1):
-
-            # iterate each column in a given row
-            row_indep_label = row[0].split(',')
-            for value in islice(row_indep_label, 1, None):
-                validate = Validate_Dataset(value)
-                validate.validate_label()
-
-                list_error = validate.get_errors()
-                if list_error:
-                    print list_error
-                    return None
-                else:
-                    list_feature_label.append(value)
-
-        # iterate all rows of csvfile
-        for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
-
-            # iterate first column of each row (except first)
-            row_dep_label = row[0].split(',')
-            for value in row_dep_label[:1]:
-                validate = Validate_Dataset(value)
-                validate.validate_label()
-
-                list_error = validate.get_errors()
-                if list_error:
-                    print list_error
-                    return None
-                else:
-                    list_observation_label.append(value)
-
-            # generalized feature count in an observation
-            row_indep_variable = row[0].split(',')
-            if not self.count_features:
-                self.count_features = len(row_indep_variable) - 1
-
-            # iterate each column in a given row
-            for indep_index, value in enumerate(
-                islice(row_indep_variable, 1, None)
-            ):
-
-                try:
-                    validate = Validate_Dataset(value)
-                    validate.validate_value()
-
-                    list_error = validate.get_errors()
-                    if list_error:
-                        print list_error
-                        return None
-                    else:
-                        value = float(value)
-                except Exception as error:
-                    print error
-                    return False
-
-                list_dataset.append({
-                    'dep_variable_label': list_observation_label[dep_index],
-                    'indep_variable_label': list_feature_label[indep_index],
-                    'indep_variable_value': value
-                })
-
-        # close file, save observation labels, and return
-        self.raw_data.close()
-        self.observation_labels = list_observation_label
-        return list_dataset
+        return data['dataset']
 
     def json_to_dict(self):
         '''@json_to_dict
