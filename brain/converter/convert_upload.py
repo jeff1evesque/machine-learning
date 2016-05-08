@@ -6,13 +6,10 @@ This file restructures only the supplied dataset(s).
 
 '''
 
-import csv
-import json
-import xmltodict
 from itertools import islice
-from brain.validator.validate_dataset import Validate_Dataset
 from brain.converter.dataset.csv import svm_csv_converter
 from brain.converter.dataset.json import svm_json_converter
+from brain.converter.dataset.xml import svm_xml_converter
 
 
 class Convert_Upload(object):
@@ -96,57 +93,12 @@ class Convert_Upload(object):
 
         '''
 
-        list_dataset = []
-        list_observation_label = []
+        # svm dataset
+        data = svm_xml_converter(self.raw.data)
+        self.observation_labels = data['observation_labels']
+        self.count_features = data['feature_count']
 
-        # convert xml file to python 'dict'
-        dataset = xmltodict.parse(self.raw_data)
-
-        # build 'list_dataset'
-        for observation in dataset['dataset']['observation']:
-            observation_label = observation['dependent-variable']
-
-            validate = Validate_Dataset(observation_label)
-            validate.validate_label()
-
-            list_error = validate.get_errors()
-            if list_error:
-                print list_error
-                return None
-            else:
-                list_observation_label.append(observation_label)
-
-            for feature in observation['independent-variable']:
-                feature_label = feature['label']
-                feature_value = feature['value']
-
-                validate_label = Validate_Dataset(feature_label)
-                validate_value = Validate_Dataset(feature_value)
-
-                validate_label.validate_label()
-                validate_value.validate_value()
-
-                list_error_label = validate.get_errors()
-                list_error_value = validate.get_errors()
-                if list_error_label or list_error_value:
-                    print list_error_label
-                    print list_error_value
-                    return None
-                else:
-                    list_dataset.append({
-                        'dep_variable_label': observation_label,
-                        'indep_variable_label': feature_label,
-                        'indep_variable_value': feature_value
-                    })
-
-            # generalized feature count in an observation
-            if not self.count_features:
-                self.count_features = len(observation['independent-variable'])
-
-        # close file, save observation labels, and return
-        self.raw_data.close()
-        self.observation_labels = list_observation_label
-        return list_dataset
+        return data['dataset']
 
     def get_observation_labels(self):
         '''@get_observation_labels
