@@ -59,7 +59,7 @@ class Convert_Dataset(object):
         '''
 
         # svm dataset
-        data = svm_csv_converter(self.raw.data)
+        data = svm_csv_converter(self.raw_data)
         self.observation_labels = data['observation_labels']
         self.count_features = data['feature_count']
 
@@ -76,7 +76,7 @@ class Convert_Dataset(object):
         '''
 
         # svm dataset
-        data = svm_json_converter(self.raw.data, self.is_json)
+        data = svm_json_converter(self.raw_data, self.is_json)
         self.observation_labels = data['observation_labels']
         self.count_features = data['feature_count']
 
@@ -93,7 +93,7 @@ class Convert_Dataset(object):
         '''
 
         # svm dataset
-        data = svm_xml_converter(self.raw.data)
+        data = svm_xml_converter(self_raw.data)
         self.observation_labels = data['observation_labels']
         self.count_features = data['feature_count']
 
