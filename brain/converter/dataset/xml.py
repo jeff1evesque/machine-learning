@@ -11,7 +11,7 @@ import xmltodict
 from brain.validator.validate_dataset import Validate_Dataset
 
 
-def xml_to_dict(raw_data):
+def svm_xml_converter(raw_data):
     '''@xml_to_dict
 
     This method converts the supplied xml file-object to a python dictionary.
