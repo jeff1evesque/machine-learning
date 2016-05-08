@@ -2,7 +2,7 @@
 
 '''@json.py
 
-This file restructures only the supplied dataset(s), from a csv file to a
+This file restructures only the supplied dataset(s), from a json file to a
 python dictionary format.
 
 '''
@@ -23,8 +23,7 @@ def svm_json_converter(raw_data, is_json):
 
     @is_json, flag indicating 'raw_data' is a json string.
 
-    @list_observation_label, is a list containing dependent variable
-        labels.
+    @observation_labels, is a list containing dependent variable labels.
 
     '''
 
