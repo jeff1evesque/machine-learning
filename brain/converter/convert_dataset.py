@@ -93,7 +93,7 @@ class Convert_Dataset(object):
         '''
 
         # svm dataset
-        data = svm_xml_converter(self_raw.data)
+        data = svm_xml_converter(self.raw.data)
         self.observation_labels = data['observation_labels']
         self.count_features = data['feature_count']
 
