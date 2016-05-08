@@ -35,6 +35,7 @@ def svm_csv_converter(raw_data):
 
         '''
 
+    feature_count = None
     list_dataset = []
     list_observation_label = []
     list_feature_label = []
