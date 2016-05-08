@@ -11,7 +11,8 @@ import json
 import xmltodict
 from itertools import islice
 from brain.validator.validate_dataset import Validate_Dataset
-from brain.converter.dataset.csv import svm_converter
+from brain.converter.dataset.csv import svm_csv_converter
+from brain.converter.dataset.json import svm_json_converter
 
 
 class Convert_Upload(object):
@@ -57,10 +58,12 @@ class Convert_Upload(object):
         This method converts the supplied csv file-object to a python
         dictionary.
 
+        @self.observation_label, is a list containing dependent variable labels.
+
         '''
 
         # svm dataset
-        data = svm_converter(self.raw.data)
+        data = svm_csv_converter(self.raw.data)
         self.observation_labels = data['observation_labels']
         self.count_features = data['feature_count']
 
@@ -72,60 +75,16 @@ class Convert_Upload(object):
         This method converts the supplied json file-object to a python
         dictionary.
 
-        @list_observation_label, is a list containing dependent variable
-            labels.
+        @self.observation_label, is a list containing dependent variable labels.
 
         '''
 
-        list_dataset = []
-        observation_labels = []
+        # svm dataset
+        data = svm_json_converter(self.raw.data, self.is_json)
+        self.observation_labels = data['observation_labels']
+        self.count_features = data['feature_count']
 
-        if self.is_json:
-            dataset = self.raw_data
-        else:
-            dataset = json.load(self.raw_data)
-
-        for observation_label in dataset:
-            # variables
-            observations = dataset[observation_label]
-
-            # dependent variable with single observation
-            if type(observations) == list:
-                for observation in observations:
-                    for feature_label, feature_value in observation.items():
-                        list_dataset.append({
-                            'dep_variable_label': observation_label,
-                            'indep_variable_label': feature_label,
-                            'indep_variable_value': feature_value
-                        })
-
-                    # generalized feature count in an observation
-                    if not self.count_features:
-                        self.count_features = len(observation)
-
-            # dependent variable with multiple observations
-            elif type(observations) == dict:
-                for feature_label, feature_value in observations.items():
-                    list_dataset.append({
-                        'dep_variable_label': observation_label,
-                        'indep_variable_label': feature_label,
-                        'indep_variable_value': feature_value
-                    })
-
-                # generalized feature count in an observation
-                if not self.count_features:
-                    self.count_features = len(observations)
-
-            # list of observation label
-            observation_labels.append(observation_label)
-
-        # close file
-        if not self.is_json:
-            self.raw_data.close()
-
-        # save observation labels, and return
-        self.observation_labels = observation_labels
-        return list_dataset
+        return data['dataset']
 
     def xml_to_dict(self):
         '''@xml_to_dict
@@ -133,8 +92,7 @@ class Convert_Upload(object):
         This method converts the supplied xml file-object to a python
         dictionary.
 
-        @list_observation_label, is a list containing dependent variable
-            labels.
+        @self.observation_label, is a list containing dependent variable labels.
 
         '''
 
