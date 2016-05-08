@@ -77,6 +77,6 @@ def svm_xml_converter(raw_data):
     raw_data.close()
     return {
         'dataset': list_dataset,
-        'observation_labels': observation_labels,
+        'observation_labels': list_observation_label,
         'feature_count': feature_count
     }
