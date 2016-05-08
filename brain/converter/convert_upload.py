@@ -6,7 +6,6 @@ This file restructures only the supplied dataset(s).
 
 '''
 
-from itertools import islice
 from brain.converter.dataset.csv import svm_csv_converter
 from brain.converter.dataset.json import svm_json_converter
 from brain.converter.dataset.xml import svm_xml_converter
@@ -55,7 +54,7 @@ class Convert_Upload(object):
         This method converts the supplied csv file-object to a python
         dictionary.
 
-        @self.observation_label, is a list containing dependent variable labels.
+        @self.observation_label, list containing dependent variable labels.
 
         '''
 
@@ -72,7 +71,7 @@ class Convert_Upload(object):
         This method converts the supplied json file-object to a python
         dictionary.
 
-        @self.observation_label, is a list containing dependent variable labels.
+        @self.observation_label, list containing dependent variable labels.
 
         '''
 
@@ -89,7 +88,7 @@ class Convert_Upload(object):
         This method converts the supplied xml file-object to a python
         dictionary.
 
-        @self.observation_label, is a list containing dependent variable labels.
+        @self.observation_label, list containing dependent variable labels.
 
         '''
 
