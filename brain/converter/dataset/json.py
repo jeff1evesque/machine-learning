@@ -27,6 +27,7 @@ def svm_json_converter(raw_data, is_json):
 
     '''
 
+    feature_count = None
     list_dataset = []
     observation_labels = []
 
