@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@convert_upload.py
+'''@convert_dataset.py
 
 This file restructures only the supplied dataset(s).
 
@@ -11,8 +11,8 @@ from brain.converter.dataset.json import svm_json_converter
 from brain.converter.dataset.xml import svm_xml_converter
 
 
-class Convert_Upload(object):
-    '''@Convert_Upload
+class Convert_Dataset(object):
+    '''@Convert_Dataset
 
     This class provides an interface to convert the supplied dataset(s),
     regardless of format (csv, json, xml), into a uniform dictionary object.
