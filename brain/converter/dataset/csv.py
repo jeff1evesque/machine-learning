@@ -110,9 +110,8 @@ def svm_csv_converter(raw_data):
 
     # close file, save observation labels, and return
     raw_data.close()
-    observation_labels = list_observation_label
     return {
         'dataset': list_dataset,
-        'observation_labels': observation_labels,
+        'observation_labels': list_observation_label,
         'feature_count': feature_count
     }
