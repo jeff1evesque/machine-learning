@@ -25,6 +25,7 @@ def xml_to_dict(raw_data):
 
     '''
 
+    feature_count = None
     list_dataset = []
     list_observation_label = []
 
