@@ -12,7 +12,7 @@ from brain.validator.validate_dataset import Validate_Dataset
 
 
 def svm_xml_converter(raw_data):
-    '''@svm_xml_to_dict
+    '''@svm_xml_converter
 
     This method converts the supplied xml file-object to a python dictionary.
 
