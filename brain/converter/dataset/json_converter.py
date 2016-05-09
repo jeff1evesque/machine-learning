@@ -8,7 +8,6 @@ python dictionary format.
 '''
 
 import json
-from brain.validator.validate_dataset import Validate_Dataset
 
 
 def svm_json_converter(raw_data, is_json):
