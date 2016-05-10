@@ -97,7 +97,7 @@ def svm_json_converter(raw_data, is_json):
         for error in [olabel_error, flabel_error, fvalue_error]:
             if error:
                 logger.log(error)
-        if len(error) > 0:
+        if error and len(error) > 0:
             return None
 
     # close file
