@@ -28,6 +28,7 @@ def svm_xml_converter(raw_data):
     feature_count = None
     list_dataset = []
     list_observation_label = []
+    self.logger = Logger(__name__, 'error', 'error')
 
     # convert xml file to python 'dict'
     dataset = xmltodict.parse(raw_data)
@@ -41,7 +42,7 @@ def svm_xml_converter(raw_data):
 
         list_error = validate.get_errors()
         if list_error:
-            print list_error
+            self.logger.log(list_error)
             return None
         else:
             list_observation_label.append(observation_label)
@@ -59,8 +60,8 @@ def svm_xml_converter(raw_data):
             list_error_label = validate.get_errors()
             list_error_value = validate.get_errors()
             if list_error_label or list_error_value:
-                print list_error_label
-                print list_error_value
+                self.logger.log(list_error_label)
+                self.logger.log(list_error_value)
                 return None
             else:
                 list_dataset.append({
