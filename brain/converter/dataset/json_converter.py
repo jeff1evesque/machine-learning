@@ -31,7 +31,7 @@ def svm_json_converter(raw_data, is_json):
     feature_count = None
     list_dataset = []
     observation_labels = []
-    self.logger = Logger(__name__, 'error', 'error')
+    logger = Logger(__name__, 'error', 'error')
 
     if is_json:
         dataset = raw_data
@@ -96,7 +96,7 @@ def svm_json_converter(raw_data, is_json):
         fvalue_error = validate_fvalue.get_errors()
         for error in [olabel_error, flabel_error, fvalue_error]:
             if error:
-                self.logger.log(error)
+                logger.log(error)
         if len(error) > 0:
             return None
 
