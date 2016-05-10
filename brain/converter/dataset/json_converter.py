@@ -9,6 +9,7 @@ python dictionary format.
 
 import json
 from brain.validator.validate_dataset import Validate_Dataset
+from log.logger import Logger
 
 
 def svm_json_converter(raw_data, is_json):
@@ -30,6 +31,7 @@ def svm_json_converter(raw_data, is_json):
     feature_count = None
     list_dataset = []
     observation_labels = []
+    logger = Logger(__name__, 'error', 'error')
 
     if is_json:
         dataset = raw_data
@@ -92,8 +94,10 @@ def svm_json_converter(raw_data, is_json):
         olabel_error = validate_olabel.get_errors()
         flabel_error = validate_flabel.get_errors()
         fvalue_error = validate_fvalue.get_errors()
-        if olabel_error or flabel_error or fvalue_error:
-            print olabel_error, flabel_error, fvalue_error
+        for error in [olabel_error, flabel_error, fvalue_error]:
+            if error:
+                logger.log(error)
+        if error and len(error) > 0:
             return None
 
     # close file
