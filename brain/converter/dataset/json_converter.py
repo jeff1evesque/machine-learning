@@ -8,6 +8,7 @@ python dictionary format.
 '''
 
 import json
+from brain.validator.validate_dataset import Validate_Dataset
 
 
 def svm_json_converter(raw_data, is_json):
@@ -39,10 +40,21 @@ def svm_json_converter(raw_data, is_json):
         # variables
         observations = dataset[observation_label]
 
+        # validation (part 1)
+        validate_olabel = Validate_Dataset(observation_label)
+        validate_olabel.validate_label()
+
         # dependent variable with single observation
         if type(observations) == list:
             for observation in observations:
                 for feature_label, feature_value in observation.items():
+                    # validation (part 2)
+                    validate_flabel = Validate_Dataset(feature_label)
+                    validate_flabel.validate_label()
+                    validate_fvalue = Validate_Dataset(feature_value)
+                    validate_fvalue.validate_value()
+
+                    # restructured data
                     list_dataset.append({
                         'dep_variable_label': observation_label,
                         'indep_variable_label': feature_label,
@@ -56,6 +68,13 @@ def svm_json_converter(raw_data, is_json):
         # dependent variable with multiple observations
         elif type(observations) == dict:
             for feature_label, feature_value in observations.items():
+                # validation (part 2)
+                validate_flabel = Validate_Dataset(feature_label)
+                validate_flabel.validate_label()
+                validate_fvalue = Validate_Dataset(feature_value)
+                validate_fvalue.validate_value()
+
+                # restructured data
                 list_dataset.append({
                     'dep_variable_label': observation_label,
                     'indep_variable_label': feature_label,
@@ -68,6 +87,14 @@ def svm_json_converter(raw_data, is_json):
 
         # list of observation label
         observation_labels.append(observation_label)
+
+        # check for errors
+        olabel_error = validate_olabel.get_errors()
+        flabel_error = validate_flabel.get_errors()
+        fvalue_error = validate_fvalue.get_errors()
+        if olabel_error or flabel_error or fvalue_error:
+            print list_error, flabel_error, fvalue_error
+            return None
 
     # close file
     if not is_json:
