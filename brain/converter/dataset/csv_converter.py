@@ -40,7 +40,7 @@ def svm_csv_converter(raw_data):
     list_dataset = []
     list_observation_label = []
     list_feature_label = []
-    self.logger = Logger(__name__, 'error', 'error')
+    logger = Logger(__name__, 'error', 'error')
 
     # open temporary 'csvfile' reader object
     dataset_reader = csv.reader(
@@ -60,7 +60,7 @@ def svm_csv_converter(raw_data):
 
             list_error = validate.get_errors()
             if list_error:
-                self.logger.log(list_error)
+                logger.log(list_error)
                 return None
             else:
                 list_feature_label.append(value)
@@ -76,7 +76,7 @@ def svm_csv_converter(raw_data):
 
             list_error = validate.get_errors()
             if list_error:
-                self.logger.log(list_error)
+                logger.log(list_error)
                 return None
             else:
                 list_observation_label.append(value)
@@ -97,12 +97,12 @@ def svm_csv_converter(raw_data):
 
                 list_error = validate.get_errors()
                 if list_error:
-                    self.logger.log(list_error)
+                    logger.log(list_error)
                     return None
                 else:
                     value = float(value)
             except Exception as error:
-                self.logger.log(error)
+                logger.log(error)
                 return False
 
             list_dataset.append({
