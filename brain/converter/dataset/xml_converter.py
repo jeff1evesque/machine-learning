@@ -9,6 +9,7 @@ python dictionary format.
 
 import xmltodict
 from brain.validator.validate_dataset import Validate_Dataset
+from log.logger import Logger
 
 
 def svm_xml_converter(raw_data):
