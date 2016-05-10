@@ -93,7 +93,7 @@ def svm_json_converter(raw_data, is_json):
         flabel_error = validate_flabel.get_errors()
         fvalue_error = validate_fvalue.get_errors()
         if olabel_error or flabel_error or fvalue_error:
-            print list_error, flabel_error, fvalue_error
+            print olabel_error, flabel_error, fvalue_error
             return None
 
     # close file
