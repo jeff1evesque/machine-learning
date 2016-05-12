@@ -9,7 +9,7 @@ import json
 from interface import app
 from flask import render_template, request
 from brain.load_data import Load_Data
-from brain.converter.restructure_data import Restructure_Data
+from brain.converter.restructure_settings import Restructure_Settings
 from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
@@ -52,7 +52,7 @@ def load_data():
             settings = request.get_json()['properties']
 
             # restructure the dataset
-            sender = Restructure_Data(settings, dataset)
+            sender = Restructure_Settings(settings, dataset)
             data_formatted = sender.restructure()
 
             # send reformatted data to brain
@@ -89,7 +89,7 @@ def load_data():
         # get submitted form data
         if request.form:
             settings = request.form
-            sender = Restructure_Data(settings, files)
+            sender = Restructure_Settings(settings, files)
             data_formatted = sender.restructure()
 
             # send reformatted data to brain
