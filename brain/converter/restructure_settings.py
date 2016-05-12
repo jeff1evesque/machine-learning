@@ -2,8 +2,9 @@
 
 '''@restructure_settings
 
-This file restructures the supplied data. But, the dataset is left
-untouched, and formatted within 'convert_dataset.py'.
+This file restructures the supplied settings, required to generate, or operate
+on an existing model. The dataset is left untouched, and formatted within
+'convert_dataset.py'.
 
 '''
 
