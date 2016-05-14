@@ -2,7 +2,6 @@
     "properties": {
         "session": "model_predict",
         "model_id": "1",
-        "criterion": "25.555",
         "prediction_input[]": [
             "22.22",
             "96.24",
