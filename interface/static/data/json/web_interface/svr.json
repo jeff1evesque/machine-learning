@@ -1,5 +1,5 @@
 {
-    "dep-variable-1": [
+    "dataset": [
         {
             "criterion": 34.543,
             "predictors": {
@@ -11,9 +11,7 @@
                 "predictor-6":0.002,
                 "predictor-7":25
             }
-        }
-    ],
-    "dep-variable-2": [
+        },
         {
             "criterion": 54.666,
             "predictors": {
@@ -25,9 +23,7 @@
                 "predictor-6":0.001,
                 "predictor-7":31
             }
-        }
-    ],
-    "dep-variable-3": [
+        },
         {
             "criterion": 22.020,
             "predictors": {
