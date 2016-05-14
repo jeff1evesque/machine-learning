@@ -1,0 +1,8 @@
+{
+    "properties": {
+        "session": "model_generate",
+        "session_id": "1",
+        "criterion": "37.294",
+        "model_type": "regression"
+    }
+}
