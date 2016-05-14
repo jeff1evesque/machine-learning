@@ -1,0 +1,16 @@
+{
+    "properties": {
+        "svr_session": "model_predict",
+        "svr_model_id": "1",
+        "criterion": "25.555",
+        "prediction_input[]": [
+            "22.22",
+            "96.24",
+            "338",
+            "72.55",
+            "0.001",
+            "28",
+            "0.678"
+        ]
+    }
+}
