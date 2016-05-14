@@ -1,5 +1,5 @@
 {
-    "dep-variable-1": [
+    "dataset": [
         {
             "criterion": 24.535,
             "predictors": {
@@ -11,9 +11,7 @@
                 "predictor-7": 23,
                 "predictor-3": 0.432
             }
-        }
-    ],
-    "dep-variable-4": [
+        },
         {
             "criterion": 41.004,
             "predictors": {
@@ -37,9 +35,7 @@
                 "predictor-7": 30,
                 "predictor-3": 0.648
             }
-        }
-    ],
-    "dep-variable-5": [
+        },
         {
             "criterion": 44.200,
             "predictors": {
@@ -75,18 +71,17 @@
                 "predictor-7": 29,
                 "predictor-3": 0.638
             }
-        }
-    ],
-    "dep-variable-3": {
-        "criterion": 42.222,
-        "predictors": {
-            "predictor-1": 22.67,
-            "predictor-2": 101.21,
-            "predictor-4": 427,
-            "predictor-5": 75.45,
-            "predictor-6": 0.002,
-            "predictor-7": 26,
-            "predictor-3": 0.832
+        },
+        {
+            "criterion": 42.222,
+            "predictors": {
+                "predictor-1": 22.67,
+                "predictor-2": 101.21,
+                "predictor-4": 427,
+                "predictor-5": 75.45,
+                "predictor-6": 0.002,
+                "predictor-7": 26,
+                "predictor-3": 0.832
         }
     }
 }
