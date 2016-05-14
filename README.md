@@ -310,13 +310,19 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
 **Note:** the above `post` request, can be implemented in a different language,
  respectively.
 
-The following outlines what the `data` attribute should be, for the above
- `post` implementation:
+Some additional sample files have been provided, which outline how the `data`
+ attribute implement should be implemented, with respect to the above `post`
+ implementation:
 
-- [`sample-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-new.json)
-- [`sample-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-data-append.json)
-- [`sample-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-generate.json)
-- [`sample-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/sample-model-predict.json)
+- [`svm-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm-data-append.json)
+- [`svm-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm-data-new.json)
+- [`svm-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm-model-generate.json)
+- [`svm-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm-model-predict.json)
+
+- [`svr-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr-data-append.json)
+- [`svr-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr-data-new.json)
+- [`svr-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr-model-generate.json)
+- [`svr-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr-model-predict.json)
 
 **Note:** the content of each of the above files, can substituted for the above
  `data` attribute.
@@ -329,15 +335,15 @@ The following (non-exhaustive) properties define the above implemented `data`
 - `prediction_value[]`: an array of feature values, used to generate a
  corresponding prediction value.  The size of this array, varies depending on
  the number of features that can be expected for the generated model.
-- `svm_model_id`: the numeric id value, of the generated model in the nosql
+- `model_id`: the numeric id value, of the generated model in the nosql
  datastore.
-- `svm_model_type`: corresponds to the desired model type, which can be one of
+- `model_type`: corresponds to the desired model type, which can be one of
  the following:
   - `classification`
   - `regression`
-- `svm_session_id`: the numeric id value, that represents the dataset stored in
+- `session_id`: the numeric id value, that represents the dataset stored in
  the sql database.
-- `svm_session`: corresponds to one of the following session types:
+- `session`: corresponds to one of the following session types:
   - `data_new`
   - `data_append`
   - `model_generate`
