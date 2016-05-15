@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+  <xs:element name='dataset'>
+    <xs:complexType>
+
+      <xs:sequence>
+        <xs:element name='observation' maxOccurs='unbounded'>
+          <xs:complexType>
+
+            <xs:sequence>
+              <xs:element name='criterion' type='xs:decimal'/>
+              <xs:element name='independent-variable' maxOccurs='unbounded'/>
+            </xs:sequence>
+
+           </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
