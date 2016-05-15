@@ -4,76 +4,34 @@
 xsi:noNamespaceSchemaLocation='https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/svr.xsd'>
   <observation>
     <criterion>34.332</criterion>
-    <predictor>
-      <value>23.45</value>
-    </predictor>
-    <predictor>
-      <value>98.01</value>
-    </predictor>
-    <predictor>
-      <value>0.432</value>
-    </predictor>
-    <predictor>
-      <value>325</value>
-    </predictor>
-    <predictor>
-      <value>54.64</value>
-    </predictor>
-    <predictor>
-      <value>0.002</value>
-    </predictor>
-    <predictor>
-      <value>25</value>
-    </predictor>
+    <predictor>23.45</predictor>
+    <predictor>98.01</predictor>
+    <predictor>0.432</predictor>
+    <predictor>325</predictor>
+    <predictor>54.64</predictor>
+    <predictor>0.002</predictor>
+    <predictor>25</predictor>
   </observation>
 
   <observation>
     <criterion>45.873</criterion>
-    <predictor>
-      <value>24.32</value>
-    </predictor>
-    <predictor>
-      <value>92.22</value>
-    </predictor>
-    <predictor>
-      <value>0.356</value>
-    </predictor>
-    <predictor>
-      <value>235</value>
-    </predictor>
-    <predictor>
-      <value>64.45</value>
-    </predictor>
-    <predictor>
-      <value>0.001</value>
-    </predictor>
-    <predictor>
-      <value>31</value>
-    </predictor>
+    <predictor>24.32</predictor>
+    <predictor>92.22</predictor>
+    <predictor>0.356</predictor>
+    <predictor>235</predictor>
+    <predictor>64.45</predictor>
+    <predictor>0.001</predictor>
+    <predictor>31</predictor>
   </observation>
 
   <observation>
     <criterion>36.183</criterion>
-    <predictor>
-      <value>22.67</value>
-    </predictor>
-    <predictor>
-      <value>101.21</value>
-    </predictor>
-    <predictor>
-      <value>0.832</value>
-    </predictor>
-    <predictor>
-      <value>427</value>
-    </predictor>
-    <predictor>
-      <value>75.45</value>
-    </predictor>
-    <predictor>
-      <value>0.002</value>
-    </predictor>
-    <predictor>
-      <value>24</value>
-    </predictor>
+    <predictor>22.67</predictor>
+    <predictor>101.21</predictor>
+    <predictor>0.832</predictor>
+    <predictor>427</predictor>
+    <predictor>75.45</predictor>
+    <predictor>0.002</predictor>
+    <predictor>24</predictor>
   </observation>
 </dataset>
