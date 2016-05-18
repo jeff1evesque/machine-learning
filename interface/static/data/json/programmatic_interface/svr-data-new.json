@@ -30,7 +30,7 @@
             }
         },
         {
-            "criterion": 33.331
+            "criterion": 33.331,
             "predictors": {
                 "predictor-1": 20.71,
                 "predictor-2": 99.33,
