@@ -314,19 +314,8 @@ Some additional sample files have been provided, which outline how the `data`
  attribute implement should be implemented, with respect to the above `post`
  implementation:
 
-**SVM Dataset**
-
-- [`svm-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm-data-append.json)
-- [`svm-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm-data-new.json)
-- [`svm-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm-model-generate.json)
-- [`svm-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm-model-predict.json)
-
-**SVR Dataset**
-
-- [`svr-data-append.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr-data-append.json)
-- [`svr-data-new.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr-data-new.json)
-- [`svr-model-generate.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr-model-generate.json)
-- [`svr-model-predict.json`](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr-model-predict.json)
+- [SVM sample datasets](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm)
+- [SVR sample datasets](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr)
 
 **Note:** the content of each of the above files, can substituted for the above
  `data` attribute.
