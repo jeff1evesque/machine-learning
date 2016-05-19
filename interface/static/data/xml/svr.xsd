@@ -10,7 +10,7 @@
 
             <xs:sequence>
               <xs:element name='criterion' type='xs:string'/>
-              <xs:element name='predictor' type='xs:decimal'/>
+              <xs:element name='predictor' type='xs:decimal' maxOccurs='unbounded'/>
             </xs:sequence>
 
            </xs:complexType>
