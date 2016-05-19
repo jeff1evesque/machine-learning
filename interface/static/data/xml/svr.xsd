@@ -9,7 +9,7 @@
           <xs:complexType>
 
             <xs:sequence>
-              <xs:element name='criterion' type='xs:decimal'/>
+              <xs:element name='criterion' type='xs:string'/>
               <xs:element name='predictor' type='xs:decimal'/>
             </xs:sequence>
 
