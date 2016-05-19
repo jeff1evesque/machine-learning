@@ -13,7 +13,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.database.save_entity import Save_Entity
 from brain.database.save_feature import Save_Feature
 from brain.validator.validate_file_extension import Validate_File_Extension
-from brain.converter.convert_upload import Convert_Upload
+from brain.converter.convert_dataset import Convert_Dataset
 from brain.database.save_observation import Save_Observation
 
 
@@ -222,7 +222,7 @@ class Base_Data(object):
                     if val['type'] == 'csv':
                         try:
                             # conversion
-                            converter = Convert_Upload(val['file'])
+                            converter = Convert_Dataset(val['file'])
                             converted = converter.csv_to_dict()
                             count_features = converter.get_feature_count()
                             labels = converter.get_observation_labels()
@@ -244,7 +244,7 @@ class Base_Data(object):
                     elif val['type'] == 'json':
                         try:
                             # conversion
-                            converter = Convert_Upload(val['file'])
+                            converter = Convert_Dataset(val['file'])
                             converted = converter.json_to_dict()
                             count_features = converter.get_feature_count()
                             labels = converter.get_observation_labels()
@@ -266,7 +266,7 @@ class Base_Data(object):
                     elif val['type'] == 'xml':
                         try:
                             # conversion
-                            converter = Convert_Upload(val['file'])
+                            converter = Convert_Dataset(val['file'])
                             converted = converter.xml_to_dict()
                             count_features = converter.get_feature_count()
                             labels = converter.get_observation_labels()
@@ -291,7 +291,7 @@ class Base_Data(object):
             elif self.upload['dataset']['json_string']:
                 # conversion
                 dataset_json = self.upload['dataset']['json_string']
-                converter = Convert_Upload(dataset_json, True)
+                converter = Convert_Dataset(dataset_json, True)
                 converted = converter.json_to_dict()
                 count_features = converter.get_feature_count()
 

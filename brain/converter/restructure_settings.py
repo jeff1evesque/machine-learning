@@ -1,15 +1,16 @@
 #!/usr/bin/python
 
-'''@restructure_data
+'''@restructure_settings
 
-This file restructures the supplied data. But, the dataset is left
-untouched, and formatted within 'convert_upload.py'.
+This file restructures the supplied settings, required to generate, or operate
+on an existing model. The dataset is left untouched, and formatted within
+'convert_dataset.py'.
 
 '''
 
 
-class Restructure_Data(object):
-    '''@Restructure_Data
+class Restructure_Settings(object):
+    '''@Restructure_Settings
 
     This class provides an interface to restructure the supplied data into a
     consistent structure, which allows successive parsers to implement
