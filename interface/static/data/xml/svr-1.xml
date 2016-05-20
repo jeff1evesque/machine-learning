@@ -1,0 +1,81 @@
+<?xml version='1.0'?>
+
+<dataset xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+xsi:noNamespaceSchemaLocation='https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/svr.xsd'>
+  <observation>
+    <criterion>dep-variable-1</criterion>
+    <predictor>23.45</predictor>
+    <predictor>98.01</predictor>
+    <predictor>325</predictor>
+    <predictor>56.64</predictor>
+    <predictor>0.002</predictor>
+    <predictor>23</predictor>
+    <predictor>0.432</predictor>
+  </observation>
+
+  <observation>
+    <criterion>dep-variable-4</criterion>
+    <predictor>22.1</predictor>
+    <predictor>95.96</predictor>
+    <predictor>342</predictor>
+    <predictor>66.67</predictor>
+    <predictor>0.001</predictor>
+    <predictor>32</predictor>
+    <predictor>0.743</predictor>
+  </observation>
+
+  <observation>
+    <criterion>dep-variable-5</criterion>
+    <predictor>23.27</predictor>
+    <predictor>95.03</predictor>
+    <predictor>295</predictor>
+    <predictor>55.83</predictor>
+    <predictor>0.001</predictor>
+    <predictor>27</predictor>
+    <predictor>0.488</predictor>
+  </observation>
+
+  <observation>
+    <criterion>dep-variable-3</criterion>
+    <predictor>22.67</predictor>
+    <predictor>101.21</predictor>
+    <predictor>427</predictor>
+    <predictor>75.45</predictor>
+    <predictor>0.002</predictor>
+    <predictor>26</predictor>
+    <predictor>0.832</predictor>
+  </observation>
+
+  <observation>
+    <criterion>dep-variable-5</criterion>
+    <predictor>19.99</predictor>
+    <predictor>97.78</predictor>
+    <predictor>303</predictor>
+    <predictor>58.88</predictor>
+    <predictor>0.001</predictor>
+    <predictor>29</predictor>
+    <predictor>0.638</predictor>
+  </observation>
+
+  <observation>
+    <criterion>dep-variable-1</criterion>
+    <predictor>23.27</predictor>
+    <predictor>95.03</predictor>
+    <predictor>295</predictor>
+    <predictor>55.83</predictor>
+    <predictor>0.001</predictor>
+    <predictor>27</predictor>
+    <predictor>0.488</predictor>
+  </observation>
+
+  <observation>
+    <criterion>dep-variable-1</criterion>
+    <predictor>20.71</predictor>
+    <predictor>99.33</predictor>
+    <predictor>342</predictor>
+    <predictor>75.67</predictor>
+    <predictor>0.001</predictor>
+    <predictor>30</predictor>
+    <predictor>0.648</predictor>
+  </observation>
+</dataset>

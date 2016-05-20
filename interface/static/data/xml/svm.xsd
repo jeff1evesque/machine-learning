@@ -9,7 +9,7 @@
           <xs:complexType>
 
             <xs:sequence>
-              <xs:element name='dependent-variable' maxOccurs='unbounded' type='xs:string'/>
+              <xs:element name='dependent-variable' type='xs:string'/>
               <xs:element name='independent-variable' maxOccurs='unbounded'>
                 <xs:complexType>
 

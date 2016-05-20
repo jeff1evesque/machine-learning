@@ -63,7 +63,8 @@ script:
   - (cd test/ && r10k puppetfile check)
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
-  - xmllint --noout interface/static/data/xml/*.xml --schema interface/static/data/xml/dataset.xsd
+  - xmllint --noout interface/static/data/xml/svr*.xml --schema interface/static/data/xml/svr.xsd
+  - xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd
   - xmllint --noout interface/static/data/xml/*.xsd
   - mdl . --style test/config/markdown.rb
   - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
