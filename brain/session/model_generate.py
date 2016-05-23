@@ -43,8 +43,6 @@ class Model_Generate(Base):
 
         super(Model_Generate, self).__init__(premodel_data)
         self.kernel = str(premodel_data['data']['settings']['sv_kernel_type'])
-        if self.kernel == 'polynomial':
-            self.kernel = 'poly'
         self.session_id = premodel_data['data']['settings']['session_id']
         self.feature_request = Retrieve_Feature()
         self.list_error = []
