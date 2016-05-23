@@ -13,7 +13,6 @@ into respective database table(s), which later can be retrieved within
 from brain.session.base import Base
 from brain.database.retrieve_feature import Retrieve_Feature
 from brain.session.model.svm import svm_model
-from log.logger import Logger
 
 
 class Model_Generate(Base):
