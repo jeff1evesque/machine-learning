@@ -15,7 +15,7 @@ import numpy
 import json
 
 
-def svm_model(kernel_type='rbf', session_id, feature_request, list_error):
+def svm_model(kernel_type, session_id, feature_request, list_error):
     '''@svm_model
 
     This method generates an svm prediction using the provided prediction
