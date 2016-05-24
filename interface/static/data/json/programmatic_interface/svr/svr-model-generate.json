@@ -3,5 +3,6 @@
         "session": "model_generate",
         "session_id": "1",
         "model_type": "regression"
+        "sv_kernel_type": "poly"
     }
 }
