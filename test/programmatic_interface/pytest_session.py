@@ -50,6 +50,7 @@ def get_sample_json(jsonfile):
             'data',
             'json',
             'programmatic_interface',
+            'svm',
             jsonfile
         ),
         'r'
@@ -68,7 +69,7 @@ def check_data_new():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('sample-data-new.json')
+        data=get_sample_json('svm-data-new.json')
     )
 
 
@@ -82,7 +83,7 @@ def check_data_append():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('sample-data-append.json')
+        data=get_sample_json('svm-data-append.json')
     )
 
 
@@ -96,7 +97,7 @@ def check_model_generate():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('sample-model-generate.json')
+        data=get_sample_json('svm-model-generate.json')
     )
 
 
@@ -110,5 +111,5 @@ def check_model_predict():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('sample-model-predict.json')
+        data=get_sample_json('svm-model-predict.json')
     )
