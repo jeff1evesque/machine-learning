@@ -51,7 +51,7 @@ database:
 #       the above 'general: root' definition.
 #
 application:
-    log_level: 'debug'
+    log_level: 'DEBUG'
     error_log_path: '/log/application/error'
     warning_log_path: '/log/application/warning'
     info_log_path: '/log/application/info'
