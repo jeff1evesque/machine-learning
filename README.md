@@ -336,7 +336,7 @@ The following (non-exhaustive) properties define the above implemented `data`
   - `regression`
 - `session_id`: the numeric id value, that represents the dataset stored in
  the sql database.
-- `session`: corresponds to one of the following session types:
+- `session_type`: corresponds to one of the following session types:
   - `data_new`
   - `data_append`
   - `model_generate`
