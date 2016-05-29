@@ -1,6 +1,6 @@
 {
     "properties": {
-        "title": "sample_title",
+        "session_name": "sample_title",
         "dataset_type": "json_string",
         "session_type": "data_append",
         "session_id": "1"
