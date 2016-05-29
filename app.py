@@ -26,8 +26,8 @@ with open('settings.yml', 'r') as stream:
         LOG_PATH = root + '/' + settings['webserver']['flask_log_path']
         HANDLER_LEVEL = settings['application']['log_level']
     except yaml.YAMLError as error:
-        self.logger = Logger('error', 'yaml')
-        self.logger.log(error)
+        logger = Logger('error', 'yaml')
+        logger.log(error)
 
 # log handler: requires the below logger
 formatter = logging.Formatter(
