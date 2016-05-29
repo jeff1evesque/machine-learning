@@ -163,7 +163,7 @@ var ModelGenerate = React.createClass({
 
                         <option value='' defaultValue>--Select--</option>
                         <option value='linear'>Linear</option>
-                        <option value='polynomial'>Polynomial</option>
+                        <option value='poly'>Polynomial</option>
                         <option value='rbf'>RBF</option>
                         <option value='sigmoid'>Sigmoid</option>
                         <option value='precomputed'>Precomputed</option>

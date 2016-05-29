@@ -1,8 +1,8 @@
 {
     "properties": {
-        "title": "sample_title",
+        "session_name": "sample_title",
         "dataset_type": "json_string",
-        "session": "data_new"
+        "session_type": "data_new"
     },
     "dataset": [
         {

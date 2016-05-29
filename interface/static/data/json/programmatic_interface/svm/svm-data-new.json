@@ -1,8 +1,8 @@
 {
     "properties": {
-        "svm_title": "sample_title",
-        "svm_dataset_type": "json_string",
-        "svm_session": "data_new"
+        "session_name": "sample_title",
+        "dataset_type": "json_string",
+        "session_type": "data_new"
     },
     "dataset": {
         "dep-variable-1": [

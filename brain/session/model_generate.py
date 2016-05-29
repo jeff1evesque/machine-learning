@@ -41,8 +41,8 @@ class Model_Generate(Base):
         '''
 
         super(Model_Generate, self).__init__(premodel_data)
-        premodel_data = premodel_data
-        self.session_id = self.premodel_data['data']['settings']['session_id']
+        self.kernel = str(premodel_data['data']['settings']['sv_kernel_type'])
+        self.session_id = premodel_data['data']['settings']['session_id']
         self.feature_request = Retrieve_Feature()
         self.list_error = []
 
@@ -56,6 +56,7 @@ class Model_Generate(Base):
         '''
 
         result = svm_model(
+            self.kernel,
             self.session_id,
             self.feature_request,
             self.list_error
