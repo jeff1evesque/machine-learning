@@ -23,7 +23,7 @@ with open('settings.yml', 'r') as stream:
     try:
         settings = yaml.load(stream)
         root = settings['general']['root']
-        LOG_PATH = root + '/' + settings['server']['flask_log_path']
+        LOG_PATH = root + '/' + settings['webserver']['flask_log_path']
         HANDLER_LEVEL = settings['application']['log_level']
     except yaml.YAMLError as error:
         self.logger = Logger('error', 'yaml')
