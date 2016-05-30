@@ -6,7 +6,7 @@ This file can set, or get the required redis host, or port.
 
 '''
 
-from settings import HOST, PORT_REDIS
+from flask import current_app
 
 
 class Redis_Settings(object):
@@ -26,8 +26,8 @@ class Redis_Settings(object):
 
         '''
 
-        self.host = HOST
-        self.port = PORT_REDIS
+        self.host = current_app.config.get('HOST')
+        self.port = current_app.config.get('PORT_REDIS')
 
     def get_host(self):
         '''@get_host
