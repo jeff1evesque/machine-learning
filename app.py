@@ -32,7 +32,7 @@ with open('settings.yml', 'r') as stream:
         # flask attributes: accessible across application
         app.config.update(
             HANDLER_LEVEL=settings['application']['log_level'],
-            DB_LOG_PATH=settings['database']['log_path']
+            DB_LOG_PATH=settings['database']['log_path'],
             FLASK_LOG_PATH=settings['webserver']['flask_log_path'],
             ERROR_LOG_PATH=settings['application']['error_log_path'],
             WARNING_LOG_PATH=settings['application']['warning_log_path'],
