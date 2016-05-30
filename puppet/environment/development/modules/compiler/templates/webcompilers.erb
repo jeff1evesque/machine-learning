@@ -17,10 +17,10 @@ respawn
 
 ## variables: 'setuid', 'setgid', are both used within the pre-stop stanza
 #
-#  @setuid, required for permission to write to '/vagrant/' files
-#  @setgid, required for permission to write to '/vagrant/' files
-setuid vagrant
-setgid vagrant
+#  @setuid, required for permission to write to '<%= @user %>' files
+#  @setgid, required for permission to write to '<%= @group %>' files
+setuid <%= @user %>
+setgid <%= @group %>
 
 ## run upstart job as a background process
 expect fork
@@ -36,7 +36,7 @@ exec ./<%= @compiler %>
 #  @DATE, preformatted string for datetime.
 pre-start script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE <%= @compiler %> service watcher starting" >> /vagrant/log/webcompiler/<%= @compiler %>.log 
+    echo "$DATE <%= @compiler %> service watcher starting" >> <%= @log_path %>/<%= @compiler %>.log
 end script
 
 ## log shut-down date, remove process id from log before '/vagrant' is unmounted
@@ -44,5 +44,5 @@ end script
 #  @DATE, preformatted string for datetime.
 pre-stop script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE <%= @compiler %> watcher stopping" >> /vagrant/log/webcompiler/<%= @compiler %>.log
+    echo "$DATE <%= @compiler %> watcher stopping" >> <%= @log_path %>/<%= @compiler %>.log
 end script
