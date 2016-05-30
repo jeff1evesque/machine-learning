@@ -4,11 +4,13 @@
 ###
 class database::server {
     ## local variables
-    $host          = 'localhost'
-    $db            = 'db_machine_learning'
-    $db_username   = 'authenticated'
-    $db_password   = 'password'
-    $root_password = 'password'
+    $host             = 'localhost'
+    $db               = 'db_machine_learning'
+    $db_user          = 'authenticated'
+    $db_pass          = 'password'
+    $provisioner      = 'provisioner'
+    $provisioner_pass = 'password'
+    $root_pass        = 'password'
 
     ## mysql::server: install, and configure mariadb-server
     #
@@ -17,23 +19,23 @@ class database::server {
     #      @max_user_connections, a zero value indicates no limit
     class { '::mysql::server':
         package_name  => 'mariadb-server',
-        root_password => $root_password,
+        root_password => $root_pass,
         users         => {
-            "${db_username}@${host}" => {
+            "${db_user}@${host}" => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
                 max_updates_per_hour     => '0',
                 max_user_connections     => '0',
-                password_hash            => mysql_password($db_password),
+                password_hash            => mysql_password($db_pass),
             },
-            "provisioner@${host}"   => {
+            "${provisioner}@${host}"   => {
                 ensure                   => 'present',
                 max_connections_per_hour => '1',
                 max_queries_per_hour     => '0',
                 max_updates_per_hour     => '0',
                 max_user_connections     => '1',
-                password_hash            => mysql_password('password'),
+                password_hash            => mysql_password($provisioner_pass),
             },
         },
         grants        => {
@@ -42,14 +44,14 @@ class database::server {
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
                 table      => "${db}.*",
-                user       => "${db_username}@${host}",
+                user       => "${db_user}@${host}",
             },
-            'provisioner@${host}/${db}.*'   => {
+            "${provisioner}@${host}/${db}.*"   => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['CREATE'],
                 table      => "${db}.*",
-                user       => "provisioner@${host}",
+                user       => "${provisioner}@${host}",
             },
         },
         databases     => {
