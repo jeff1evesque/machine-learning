@@ -19,14 +19,22 @@ This file initializes the following database tables within the
 
 '''
 
+import yaml
 import MySQLdb as DB
+
+# define configuration
+with open('settings.yml', 'r') as stream:
+    host = settings['general']['host']
+    db = settings['database']['name']
+    provisioner = settings['database']['provisioner']
+    provisioner_password = settings['database']['provisioner_password']
 
 # create connection
 conn = DB.connect(
-    'localhost',
-    'provisioner',
-    'password',
-    'db_machine_learning'
+    host,
+    provisioner,
+    provisioner_password,
+    db
 )
 
 with conn:
