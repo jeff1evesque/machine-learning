@@ -18,13 +18,7 @@ class Logger(object):
 
     '''
 
-    def __init__(
-        self,
-        namespace,
-        log_type,
-        filename=None,
-        level=current_app.config.get('LOG_LEVEL')
-    ):
+    def __init__(self, namespace, log_type, filename=None, level=None):
         '''@__init__
 
         This constructor is responsible for defining the necessary logger
@@ -57,7 +51,11 @@ class Logger(object):
 
         '''
 
-        # variables
+        # check level
+        if not level:
+            level = current_app.config.get('LOG_LEVEL')
+
+        # local variables
         self.logger_bool = True
         logger_type = log_type.lower()
         logger_level = level.lower()
