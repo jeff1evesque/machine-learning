@@ -21,13 +21,21 @@ This file initializes the following database tables within the
 
 import yaml
 import MySQLdb as DB
+from log.logger import Logger
 
 # define configuration
 with open('settings.yml', 'r') as stream:
-    host = settings['general']['host']
-    db = settings['database']['name']
-    provisioner = settings['database']['provisioner']
-    provisioner_password = settings['database']['provisioner_password']
+    try:
+        # local variables
+        settings = yaml.load(stream)
+
+        host = settings['general']['host']
+        db = settings['database']['name']
+        provisioner = settings['database']['provisioner']
+        provisioner_password = settings['database']['provisioner_password']
+    except yaml.YAMLError as error:
+        logger = Logger(__name__, 'database', 'database', 'error')
+        logger.log(error)
 
 # create connection
 conn = DB.connect(
