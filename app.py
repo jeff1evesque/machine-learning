@@ -40,7 +40,8 @@ with open('settings.yml', 'r') as stream:
             DEBUG_LOG_PATH=settings['application']['debug_log_path'],
             DB_USERNAME=settings['database']['username'],
             DB_PASSWORD=settings['database']['password'],
-            HOST=settings['general']['host']
+            HOST=settings['general']['host'],
+            PORT_REDIS=settings['redis']['port']
         )
     except yaml.YAMLError as error:
         logger = Logger('error', 'yaml')
