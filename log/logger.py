@@ -59,6 +59,7 @@ class Logger(object):
         self.logger_bool = True
         logger_type = log_type.lower()
         logger_level = level.lower()
+        self.root = handler_level = current_app.config.get('ROOT').lower()
         handler_level = current_app.config.get('LOG_LEVEL').lower()
 
         # log type
@@ -133,7 +134,8 @@ class Logger(object):
             "[%(asctime)s] {%(pathname)s:%(lineno)d} "
             "%(levelname)s - %(message)s"
         )
-        fh = logging.FileHandler(self.log_path + '/' + self.log_filename)
+        fh_log_path = self.root + '/' + self.log_path + '/' + self.log_filename
+        fh = logging.FileHandler(fh_log_path)
         fh.setLevel(self.handler_level)
         fh.setFormatter(formatter)
 
