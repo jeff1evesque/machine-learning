@@ -12,18 +12,28 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 '''
 
+import yaml
 import logging
+from log.logger import Logger
 from logging.handlers import RotatingFileHandler
 from interface import app
 
-# variables
-LOG_FILENAME = '/vagrant/log/webserver/flask.log'
+# get configuration
+with open('settings.yml', 'r') as stream:
+    try:
+        settings = yaml.load(stream)
+        root = settings['general']['root']
+        LOG_PATH = root + '/' + settings['webserver']['flask_log_path']
+        HANDLER_LEVEL = settings['application']['log_level']
+    except yaml.YAMLError as error:
+        logger = Logger('error', 'yaml')
+        logger.log(error)
 
 # log handler: requires the below logger
 formatter = logging.Formatter(
     "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
-handler = RotatingFileHandler(LOG_FILENAME, maxBytes=10000000, backupCount=5)
-handler.setLevel(logging.DEBUG)
+handler = RotatingFileHandler(LOG_PATH, maxBytes=10000000, backupCount=5)
+handler.setLevel(HANDLER_LEVEL)
 handler.setFormatter(formatter)
 app.logger.addHandler(handler)
 
