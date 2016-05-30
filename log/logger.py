@@ -7,12 +7,7 @@ This file provides a mean to generate logs in a consistent manner.
 '''
 
 import logging
-from settings import LOG_LEVEL
-from settings import DB_LOG_PATH
-from settings import ERROR_LOG_PATH
-from settings import WARNING_LOG_PATH
-from settings import INFO_LOG_PATH
-from settings import DEBUG_LOG_PATH
+from flask import current_app
 
 
 class Logger(object):
@@ -23,7 +18,7 @@ class Logger(object):
 
     '''
 
-    def __init__(self, namespace, type, filename=None, level=LOG_LEVEL):
+    def __init__(self, namespace, log_type, filename=None, level=None):
         '''@__init__
 
         This constructor is responsible for defining the necessary logger
@@ -33,7 +28,7 @@ class Logger(object):
         @namespace, required argument, where the object instantiating this
             class should define this argument with '__name__'.
 
-        @type, required argument, with valid log types:
+        @log_type, required argument, with valid log types:
 
             - database
             - error
@@ -43,7 +38,7 @@ class Logger(object):
 
         @filename, optional argument, which names the corresponding log file.
 
-        @level, required argument when 'log_type' is 'database':
+        @level, required argument when 'logger_type' is 'database':
 
             - error
             - warning
@@ -56,28 +51,33 @@ class Logger(object):
 
         '''
 
-        # variables
+        # check level
+        if not level:
+            level = current_app.config.get('LOG_LEVEL')
+
+        # local variables
         self.logger_bool = True
-        log_type = type.lower()
+        logger_type = log_type.lower()
         logger_level = level.lower()
-        handler_level = LOG_LEVEL.lower()
+        self.root = handler_level = current_app.config.get('ROOT').lower()
+        handler_level = current_app.config.get('LOG_LEVEL').lower()
 
         # log type
-        if log_type == 'database':
-            self.log_path = DB_LOG_PATH
+        if logger_type == 'database':
+            self.log_path = current_app.config.get('DB_LOG_PATH')
             self.log_filename = 'database.log'
-        elif log_type == 'error':
-            self.log_path = ERROR_LOG_PATH
-            log_type = 'ERROR'
-        elif log_type == 'warning':
-            self.log_path = WARNING_LOG_PATH
-            log_type = 'WARNING'
-        elif log_type == 'info':
-            self.log_path = INFO_LOG_PATH
-            log_type = 'INFO'
-        elif log_type == 'debug':
-            self.log_path = DEBUG_LOG_PATH
-            log_type = 'DEBUG'
+        elif logger_type == 'error':
+            self.log_path = current_app.config.get('ERROR_LOG_PATH')
+            logger_type = 'ERROR'
+        elif logger_type == 'warning':
+            self.log_path = current_app.config.get('WARNING_LOG_PATH')
+            logger_type = 'WARNING'
+        elif logger_type == 'info':
+            self.log_path = current_app.config.get('INFO_LOG_PATH')
+            logger_type = 'INFO'
+        elif logger_type == 'debug':
+            self.log_path = current_app.config.get('DEBUG_LOG_PATH')
+            logger_type = 'DEBUG'
         else:
             self.logger_bool = False
             self.log_namespace = namespace
@@ -127,14 +127,15 @@ class Logger(object):
             self.handler_level = logging.WARNING
             self.logger_level = logging.WARNING
             self.log_filename = 'warning.log'
-            self.log_path = WARNING_LOG_PATH
+            self.log_path = current_app.config.get('WARNING_LOG_PATH')
 
         # log handler: requires the below logger
         formatter = logging.Formatter(
             "[%(asctime)s] {%(pathname)s:%(lineno)d} "
             "%(levelname)s - %(message)s"
         )
-        fh = logging.FileHandler(self.log_path + '/' + self.log_filename)
+        fh_log_path = self.root + '/' + self.log_path + '/' + self.log_filename
+        fh = logging.FileHandler(fh_log_path)
         fh.setLevel(self.handler_level)
         fh.setFormatter(formatter)
 
