@@ -38,7 +38,7 @@ database:
 #
 #      The following are supported 'LOG_LEVEL' values:
 #
-#      - ERRORR
+#      - ERROR
 #      - WARNING
 #      - INFO
 #      - DEBUG
