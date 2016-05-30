@@ -28,6 +28,9 @@ webserver:
 #       the above 'general: root' definition.
 #
 database:
+    name: 'db_machine_learning'
+    provisioner: 'provisioner'
+    provisioner_password: 'password'
     username: 'authenticated'
     password: 'password'
     log_path: '/log/database'
