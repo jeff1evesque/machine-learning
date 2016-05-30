@@ -39,7 +39,7 @@ class database::server {
             },
         },
         grants        => {
-            "${db_username}@${host}/${db}.*" => {
+            "${db_user}@${host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
