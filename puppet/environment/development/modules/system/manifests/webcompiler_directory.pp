@@ -3,6 +3,8 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class system::webcompiler_directory {
+    ## local variables
+    $root_dir = '/vagrant'
     $directories = {
         browserify => {
             src       => 'jsx',
@@ -33,14 +35,14 @@ class system::webcompiler_directory {
     $directories.each |String $directory, Hash $compiler| {
         ## create asset directories (if not exist)
         if ($compiler['asset_dir']) {
-            file { "/vagrant/interface/static/${compiler['asset']}/":
+            file { "${root_dir}/interface/static/${compiler['asset']}/":
                 ensure => 'directory',
             }
         }
 
         ## create src directories (if not exist)
         if ($compiler['src_dir']) {
-            file { "/vagrant/src/${compiler['src']}/":
+            file { "${root_dir}/src/${compiler['src']}/":
                 ensure => 'directory',
             }
         }
