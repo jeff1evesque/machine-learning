@@ -18,7 +18,7 @@ from log.logger import Logger
 from logging.handlers import RotatingFileHandler
 from interface import app
 
-# get configuration
+# define configuration
 with open('settings.yml', 'r') as stream:
     try:
         # local variables
