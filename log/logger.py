@@ -55,7 +55,7 @@ class Logger(object):
         self.logger_bool = True
         log_type = type.lower()
         logger_level = level.lower()
-        handler_level = current_app.config.get('HANDLER_LEVEL').lower()
+        handler_level = current_app.config.get('LOG_LEVEL').lower()
 
         # log type
         if log_type == 'database':
