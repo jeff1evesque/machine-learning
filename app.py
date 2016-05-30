@@ -21,10 +21,23 @@ from interface import app
 # get configuration
 with open('settings.yml', 'r') as stream:
     try:
+        # local variables
         settings = yaml.load(stream)
+
+        # local logger: used for this module
         root = settings['general']['root']
         LOG_PATH = root + '/' + settings['webserver']['flask_log_path']
         HANDLER_LEVEL = settings['application']['log_level']
+
+        # flask attributes: accessible across application
+        app.config.update(
+            HANDLER_LEVEL=settings['application']['log_level'],
+            FLASK_LOG_PATH=settings['webserver']['flask_log_path'],
+            ERROR_LOG_PATH=settings['application']['error_log_path'],
+            WARNING_LOG_PATH=settings['application']['warning_log_path'],
+            INFO_LOG_PATH=settings['application']['info_log_path'],
+            DEBUG_LOG_PATH=settings['application']['debug_log_path'],
+        )
     except yaml.YAMLError as error:
         logger = Logger('error', 'yaml')
         logger.log(error)
