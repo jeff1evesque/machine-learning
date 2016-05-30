@@ -4,9 +4,10 @@
 ###
 class database::database {
     ## variables
+    $root_dir        = '/vagrant'
     $module          = 'database'
     $environment     = 'development'
-    $environment_dir = "/vagrant/puppet/environment/${environment}"
+    $environment_dir = "${root_dir}/puppet/environment/${environment}"
     $script_dir      = "${environment_dir}/modules/${module}/scripts"
 
     ## define database tables
