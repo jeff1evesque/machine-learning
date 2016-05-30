@@ -4,7 +4,8 @@
 ###
 class webserver::service {
     ## variables
-    $environment   = 'development'
+    $webroot       = '/vagrant'
+    $log_path      = "${webroot}/log/webserver/flask.log"
     $template_path = 'webserver/webserver.erb'
 
     ## include webserver dependencies
