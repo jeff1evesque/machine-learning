@@ -11,6 +11,8 @@
 general:
     root: '/vagrant'
     host: 'localhost'
+    user: 'vagrant'
+    group: 'vagrant'
 
 ## redis
 redis:
