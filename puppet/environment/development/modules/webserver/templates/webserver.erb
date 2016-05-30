@@ -12,9 +12,6 @@ start on (vagrant-mounted and runlevel [2345])
 ## stop upstart job
 stop on runlevel [!2345]
 
-## restart upstart job continuously
-respawn
-
 ## variables: 'setuid', 'setgid', are both used within the pre-stop stanza
 #
 #  @setuid, required for permission to write to '/vagrant/' files
@@ -26,21 +23,24 @@ setgid vagrant
 expect fork
 
 ## start upstart job
-exec python '/vagrant/app.py'
+script
+    chdir <%= @webroot %>
+    exec python app.py
+end script
 
 ## log start-up date
 #
 #  @DATE, preformatted string for datetime.
 pre-start script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE flask server starting" >> /vagrant/log/webserver/flask.log
+    echo "$DATE flask server starting" >> <%= @log_path %>
 end script
 
-## log shut-down date, remove process id from log before '/vagrant' is
+## log shut-down date, remove process id from log before <%= @webroot %> is
 #  unmounted.
 #
 #  @DATE, preformatted string for datetime.
 pre-stop script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE flask server stopping" >> /vagrant/log/webserver/flask.log
+    echo "$DATE flask server stopping" >> <%= @log_path %>
 end script
