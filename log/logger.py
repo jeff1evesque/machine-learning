@@ -7,12 +7,7 @@ This file provides a mean to generate logs in a consistent manner.
 '''
 
 import logging
-from settings import LOG_LEVEL
-from settings import DB_LOG_PATH
-from settings import ERROR_LOG_PATH
-from settings import WARNING_LOG_PATH
-from settings import INFO_LOG_PATH
-from settings import DEBUG_LOG_PATH
+from flask import current_app
 
 
 class Logger(object):
@@ -60,23 +55,23 @@ class Logger(object):
         self.logger_bool = True
         log_type = type.lower()
         logger_level = level.lower()
-        handler_level = LOG_LEVEL.lower()
+        handler_level = current_app.config.get('HANDLER_LEVEL').lower()
 
         # log type
         if log_type == 'database':
-            self.log_path = DB_LOG_PATH
+            self.log_path = current_app.config.get('DB_LOG_PATH')
             self.log_filename = 'database.log'
         elif log_type == 'error':
-            self.log_path = ERROR_LOG_PATH
+            self.log_path = current_app.config.get('ERROR_LOG_PATH')
             log_type = 'ERROR'
         elif log_type == 'warning':
-            self.log_path = WARNING_LOG_PATH
+            self.log_path = current_app.config.get('WARNING_LOG_PATH')
             log_type = 'WARNING'
         elif log_type == 'info':
-            self.log_path = INFO_LOG_PATH
+            self.log_path = current_app.config.get('INFO_LOG_PATH')
             log_type = 'INFO'
         elif log_type == 'debug':
-            self.log_path = DEBUG_LOG_PATH
+            self.log_path = current_app.config.get('DEBUG_LOG_PATH')
             log_type = 'DEBUG'
         else:
             self.logger_bool = False
@@ -127,7 +122,7 @@ class Logger(object):
             self.handler_level = logging.WARNING
             self.logger_level = logging.WARNING
             self.log_filename = 'warning.log'
-            self.log_path = WARNING_LOG_PATH
+            self.log_path = current_app.config.get('WARNING_LOG_PATH')
 
         # log handler: requires the below logger
         formatter = logging.Formatter(
