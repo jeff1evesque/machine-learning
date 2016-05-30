@@ -14,7 +14,7 @@ general:
 
 ## redis
 redis:
-    port = 6379
+    port: 6379
 
 ## webserver
 webserver:
