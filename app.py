@@ -41,7 +41,8 @@ with open('settings.yml', 'r') as stream:
             DB_USERNAME=settings['database']['username'],
             DB_PASSWORD=settings['database']['password'],
             HOST=settings['general']['host'],
-            PORT_REDIS=settings['redis']['port']
+            PORT_REDIS=settings['redis']['port'],
+            ROOT=settings['general']['root']
         )
     except yaml.YAMLError as error:
         logger = Logger('error', 'yaml')
