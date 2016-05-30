@@ -12,7 +12,7 @@ class sklearn::install_sklearn {
     ## install sklearn
     exec { 'install-sklearn':
         command => 'python setup.py install',
-        cwd     => '${root_dir}/build/scikit-learn/',
+        cwd     => "${root_dir}/build/scikit-learn/",
         path    => '/usr/bin',
     }
 }
