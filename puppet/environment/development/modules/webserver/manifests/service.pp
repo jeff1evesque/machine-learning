@@ -5,7 +5,7 @@
 class webserver::service {
     ## variables
     $root_dir      = '/vagrant'
-    $log_path      = "${webroot}/log/webserver/flask.log"
+    $log_path      = "${root_dir}/log/webserver/flask.log"
     $user          = 'vagrant'
     $group         = 'vagrant'
     $template_path = 'webserver/webserver.erb'
