@@ -20,10 +20,14 @@ This file initializes the following database tables within the
 '''
 
 import yaml
+from sys import argv
 import MySQLdb as DB
 
 # define configuration
-with open('settings.yml', 'r') as stream:
+#
+# @argv[0], first command line argument
+#
+with open(argv[0] + '/settings.yml', 'r') as stream:
     # local variables
     settings = yaml.load(stream)
 
