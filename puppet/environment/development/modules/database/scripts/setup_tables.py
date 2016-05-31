@@ -25,9 +25,9 @@ import MySQLdb as DB
 
 # define configuration
 #
-# @argv[0], first command line argument
+# @argv[1], first passed-in argument from command (argv[0] is the filename)
 #
-with open(argv[0] + '/settings.yml', 'r') as stream:
+with open(argv[1] + '/settings.yml', 'r') as stream:
     # local variables
     settings = yaml.load(stream)
 
