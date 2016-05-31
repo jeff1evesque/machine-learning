@@ -5,7 +5,11 @@
 class package::sklearn {
     require git
 
-    vcsrepo { '/vagrant/build/scikit-learn':
+    ## local variables
+    $root_dir = '/vagrant'
+
+    ## download sklearn
+    vcsrepo { "${root_dir}/build/scikit-learn":
         ensure   => present,
         provider => git,
         source   => 'https://github.com/scikit-learn/scikit-learn',

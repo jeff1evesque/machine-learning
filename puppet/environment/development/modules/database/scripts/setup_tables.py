@@ -19,61 +19,76 @@ This file initializes the following database tables within the
 
 '''
 
+import yaml
+from sys import argv
 import MySQLdb as DB
 
-# create connection
-conn = DB.connect(
-    'localhost',
-    'provisioner',
-    'password',
-    'db_machine_learning'
-)
+# define configuration
+#
+# @argv[1], first passed-in argument from command (argv[0] is the filename)
+#
+with open(argv[1] + '/settings.yml', 'r') as stream:
+    # local variables
+    settings = yaml.load(stream)
 
-with conn:
-    # create cursor object
-    cur = conn.cursor()
+    host = settings['general']['host']
+    db = settings['database']['name']
+    provisioner = settings['database']['provisioner']
+    provisioner_password = settings['database']['provisioner_password']
 
-    # create 'tbl_feature_count'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_feature_count (
-                        id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_entity INT NOT NULL,
-                        count_features INT NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
+    # create connection
+    conn = DB.connect(
+        host,
+        provisioner,
+        provisioner_password,
+        db
+    )
 
-    # create 'tbl_dataset_entity'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
-                        id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        title VARCHAR (50) NOT NULL,
-                        uid_created INT NOT NULL,
-                        datetime_created DATETIME NOT NULL,
-                        uid_modified INT NULL,
-                        datetime_modified DATETIME NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
+    with conn:
+        # create cursor object
+        cur = conn.cursor()
 
-    # create 'tbl_observation_label'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_observation_label (
-                        id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_entity INT NOT NULL,
-                        dep_variable_label VARCHAR(75) NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
+        # create 'tbl_feature_count'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_feature_count (
+                            id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_entity INT NOT NULL,
+                            count_features INT NOT NULL
+                        );
+                        '''
+        cur.execute(sql_statement)
 
-    # create 'tbl_feature_value'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_feature_value (
-                        id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_entity INT NOT NULL,
-                        dep_variable_label VARCHAR (50) NOT NULL,
-                        indep_variable_label VARCHAR (50) NOT NULL,
-                        indep_variable_value FLOAT NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
+        # create 'tbl_dataset_entity'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
+                            id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            title VARCHAR (50) NOT NULL,
+                            uid_created INT NOT NULL,
+                            datetime_created DATETIME NOT NULL,
+                            uid_modified INT NULL,
+                            datetime_modified DATETIME NULL
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_observation_label'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_observation_label (
+                            id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_entity INT NOT NULL,
+                            dep_variable_label VARCHAR(75) NOT NULL
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_feature_value'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_feature_value (
+                            id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_entity INT NOT NULL,
+                            dep_variable_label VARCHAR (50) NOT NULL,
+                            indep_variable_label VARCHAR (50) NOT NULL,
+                            indep_variable_value FLOAT NOT NULL
+                        );
+                        '''
+        cur.execute(sql_statement)

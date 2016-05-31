@@ -3,16 +3,17 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class system::log_directory {
-    ## variables
+    ## local variables
+    $root_dir = '/vagrant'
     $directories = [
-        '/vagrant/log/database',
-        '/vagrant/log/webcompiler',
-        '/vagrant/log/webserver',
-        '/vagrant/log/application',
-        '/vagrant/log/application/error',
-        '/vagrant/log/application/warning',
-        '/vagrant/log/application/info',
-        '/vagrant/log/application/debug',
+        "${root_dir}/log/database",
+        "${root_dir}/log/webcompiler",
+        "${root_dir}/log/webserver",
+        "${root_dir}/log/application",
+        "${root_dir}/log/application/error",
+        "${root_dir}/log/application/warning",
+        "${root_dir}/log/application/info",
+        "${root_dir}/log/application/debug",
     ]
 
     ## create log directories

@@ -3,7 +3,9 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class compiler::initial_compile {
-    $sources = [
+    ## local variables
+    $root_dir = '/vagrant'
+    $sources  = [
         'jsx',
         'img',
         'scss',
@@ -12,8 +14,8 @@ class compiler::initial_compile {
 
     $sources.each |String $source| {
         ## variables
-        $check_files = "if [ \"$(ls -A /vagrant/src/${source}/)\" ];"
-        $touch_files = "then touch /vagrant/src/${source}/*; fi"
+        $check_files = "if [ \"$(ls -A ${root_dir}/src/${source}/)\" ];"
+        $touch_files = "then touch ${root_dir}/src/${source}/*; fi"
 
         ## touch source: ensure initial build compiles every source file.
         #
