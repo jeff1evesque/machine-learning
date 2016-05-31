@@ -15,7 +15,7 @@ class database::database {
     #  @require, syntax involves 'Class Containment'. For more information,
     #      https://puppetlabs.com/blog/class-containment-puppet
     exec { 'create-database-tables':
-        command => 'python setup_tables.py',
+        command => "python setup_tables.py ${root_dir}",
         cwd     => $script_dir,
         path    => '/usr/bin',
     }
