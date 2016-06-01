@@ -1,12 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# require
-require 'yaml'
-
-# load yaml configuration
-yaml_config = YAML.load_file('settings.yml')
-
 # All Vagrant configuration is done below. The "2" in Vagrant.configure
 # configures the configuration version (we support older styles for
 # backwards compatibility). Please don't change it unless you know what
@@ -17,7 +11,7 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins  = %w(vagrant-r10k vagrant-vbguest vagrant-triggers vagrant-puppet-install)
+  required_plugins = %w(vagrant-r10k vagrant-vbguest vagrant-triggers vagrant-puppet-install)
   plugin_installed = false
 
   ## Install Vagrant Plugins
@@ -49,7 +43,7 @@ Vagrant.configure(2) do |config|
   ## Create a forwarded port mapping which allows access to a specific port
   #  within the machine from a port on the host machine. In the example below,
   #  accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network 'forwarded_port', guest: 5000, host: 8081
+  config.vm.network 'forwarded_port', guest: 5000, host: 8080
   config.vm.network 'forwarded_port', guest: 443, host: 8585
 
   ## Run r10k
@@ -60,40 +54,34 @@ Vagrant.configure(2) do |config|
   #
   #  Note: future parser allow array iteration in the puppet manifest
   config.vm.provision 'puppet' do |puppet|
-    puppet.environment_path = 'puppet/environment'
-    puppet.environment      = 'development'
-    puppet.manifests_path   = 'puppet/environment/development/manifests'
-    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
-    puppet.manifest_file    = 'install_packages.pp'
-    puppet.facter           = {
-        'root_dir' => $yaml_config['general']['root'],
-    }
+    puppet.environment_path  = 'puppet/environment'
+    puppet.environment       = 'development'
+    puppet.manifests_path    = 'puppet/environment/development/manifests'
+    puppet.module_path       = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file     = 'install_packages.pp'
+    puppet.hiera_config_path = 'hiera.yaml'
   end
 
   ## Custom Manifest: build scikit-learn
   config.vm.provision 'puppet' do |puppet|
-    puppet.environment_path = 'puppet/environment'
-    puppet.environment      = 'development'
-    puppet.manifests_path   = 'puppet/environment/development/manifests'
-    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
-    puppet.manifest_file    = 'install_sklearn.pp'
-    puppet.facter           = {
-        'root_dir' => $yaml_config['general']['root'],
-    }
+    puppet.environment_path  = 'puppet/environment'
+    puppet.environment       = 'development'
+    puppet.manifests_path    = 'puppet/environment/development/manifests'
+    puppet.module_path       = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file     = 'install_sklearn.pp'
+    puppet.hiera_config_path = 'hiera.yaml'
   end
 
   ## Custom Manifest: ensure vagrant-mounted event
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
   config.vm.provision 'puppet' do |puppet|
-    puppet.environment_path = 'puppet/environment'
-    puppet.environment      = 'development'
-    puppet.manifests_path   = 'puppet/environment/development/manifests'
-    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
-    puppet.manifest_file    = 'vagrant_mounted.pp'
-    puppet.facter           = {
-        'root_dir' => $yaml_config['general']['root'],
-    }
+    puppet.environment_path  = 'puppet/environment'
+    puppet.environment       = 'development'
+    puppet.manifests_path    = 'puppet/environment/development/manifests'
+    puppet.module_path       = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file     = 'vagrant_mounted.pp'
+    puppet.hiera_config_path = 'hiera.yaml'
   end
 
   ## Custom Manifest: install redis client / server
@@ -121,51 +109,34 @@ Vagrant.configure(2) do |config|
   #  Note: future parser allow heredoc sytnax (since puppet 3.5), and allows array
   #        iteration in the puppet manifest.
   config.vm.provision 'puppet' do |puppet|
-    puppet.environment_path = 'puppet/environment'
-    puppet.environment      = 'development'
-    puppet.manifests_path   = 'puppet/environment/development/manifests'
-    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
-    puppet.manifest_file    = 'compile_asset.pp'
-    puppet.facter           = {
-        'root_dir' => $yaml_config['general']['root'],
-        'user'     => $yaml_config['general']['user'],
-        'group'    => $yaml_config['general']['group'],
-    }
+    puppet.environment_path  = 'puppet/environment'
+    puppet.environment       = 'development'
+    puppet.manifests_path    = 'puppet/environment/development/manifests'
+    puppet.module_path       = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file     = 'compile_asset.pp'
+    puppet.hiera_config_path = 'hiera.yaml'
   end
 
   ## Custom Manifest: install, and configure SQL database
   config.vm.provision 'puppet' do |puppet|
-    puppet.environment_path = 'puppet/environment'
-    puppet.environment      = 'development'
-    puppet.manifests_path   = 'puppet/environment/development/manifests'
-    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
-    puppet.manifest_file    = 'setup_database.pp'
-    puppet.facter           = {
-        'root_dir'             => $yaml_config['general']['root'],
-        'host'                 => $yaml_config['general']['host'],
-        'db'                   => $yaml_config['database']['name'],
-        'db_username'          => $yaml_config['database']['username'],
-        'db_password'          => $yaml_config['database']['password'],
-        'provisioner'          => $yaml_config['database']['provisioner'],
-        'provisioner_password' => $yaml_config['database']['provisioner_password'],
-        'root_password'        => $yaml_config['database']['root_password'],
-    }
+    puppet.environment_path  = 'puppet/environment'
+    puppet.environment       = 'development'
+    puppet.manifests_path    = 'puppet/environment/development/manifests'
+    puppet.module_path       = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file     = 'setup_database.pp'
+    puppet.hiera_config_path = 'hiera.yaml'
   end
 
   ## Custom Manifest: start webserver
   #
   #  Note: future parser allow heredoc syntax in the puppet manifest (since puppet 3.5)
   config.vm.provision 'puppet' do |puppet|
-    puppet.environment_path = 'puppet/environment'
-    puppet.environment      = 'development'
-    puppet.manifests_path   = 'puppet/environment/development/manifests'
-    puppet.module_path      = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
-    puppet.manifest_file    = 'start_webserver.pp'
-    puppet.facter           = {
-        'root_dir' => $yaml_config['general']['root'],
-        'user'     => $yaml_config['general']['user'],
-        'group'    => $yaml_config['general']['group'],
-    }
+    puppet.environment_path  = 'puppet/environment'
+    puppet.environment       = 'development'
+    puppet.manifests_path    = 'puppet/environment/development/manifests'
+    puppet.module_path       = ['puppet/environment/development/modules_contrib', 'puppet/environment/development/modules']
+    puppet.manifest_file     = 'start_webserver.pp'
+    puppet.hiera_config_path = 'hiera.yaml'
   end
 
   # clean up files on the host after 'vagrant destroy'
