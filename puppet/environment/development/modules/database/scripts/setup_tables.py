@@ -27,7 +27,7 @@ import MySQLdb as DB
 #
 # @argv[1], first passed-in argument from command (argv[0] is the filename)
 #
-with open(argv[1] + '/settings.yml', 'r') as stream:
+with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
     # local variables
     settings = yaml.load(stream)
 
