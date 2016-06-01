@@ -19,7 +19,7 @@ from logging.handlers import RotatingFileHandler
 from interface import app
 
 # define configuration
-with open('settings.yml', 'r') as stream:
+with open('hiera/settings.yaml', 'r') as stream:
     try:
         # local variables
         settings = yaml.load(stream)
