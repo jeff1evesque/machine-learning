@@ -3,6 +3,7 @@
 !/interface/
 !/brain/
 !/src/
+!/hiera/
 !.gitigore
 !settings.yaml
 !.gitmodules
