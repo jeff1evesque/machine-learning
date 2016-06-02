@@ -4,13 +4,15 @@
 ###
 class database::server {
     ## local variables
-    $host             = 'localhost'
-    $db               = 'db_machine_learning'
-    $db_user          = 'authenticated'
-    $db_pass          = 'password'
-    $provisioner      = 'provisioner'
-    $provisioner_pass = 'password'
-    $root_pass        = 'password'
+    $hiera_general    = hiera('general')
+    $hiera_database   = hiera('database')
+    $host             = $hiera_general['host']
+    $db               = $hiera_database['name']
+    $db_user          = $hiera_database['username']
+    $db_pass          = $hiera_database['password']
+    $provisioner      = $hiera_database['provisioner']
+    $provisioner_pass = $hiera_database['provisioner_password']
+    $root_pass        = $hiera_database['root_password']
 
     ## mysql::server: install, and configure mariadb-server
     #
