@@ -9,6 +9,7 @@
 
 ## variables
 general:
+    environment: 'development'
     root: '/vagrant'
     host: 'localhost'
     user: 'vagrant'
@@ -33,6 +34,7 @@ database:
     provisioner_password: 'password'
     username: 'authenticated'
     password: 'password'
+    root_password: 'password'
     log_path: '/log/database'
 
 ## application logging: the possible logging levels are constrained by the

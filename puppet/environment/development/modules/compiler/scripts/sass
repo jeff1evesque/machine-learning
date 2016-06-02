@@ -1,6 +1,8 @@
 #!/bin/bash
 
 # @sass: minify scss file(s).
+#
+# @$1, first passed-in argument from command ($0 is the filename)
 
 
 # Pre-Pathing: allow 'sass' command
@@ -8,7 +10,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-log_file=/vagrant/log/webcompiler/sass.log
+log_file="$1"/log/webcompiler/sass.log
 set -x;
 exec &> >(while read -r line; do
   log_date=$(date +%Y-%m-%d:%H:%M:%S)
@@ -16,8 +18,8 @@ exec &> >(while read -r line; do
 done)
 
 
-# watch '/vagrant/src/scss/' subdirectory
-inotifywait /vagrant/src/scss/ -m -e close_write -e move --format %f |
+# watch '[root_dir]/src/scss/' subdirectory
+inotifywait "$1"/src/scss/ -m -e close_write -e move --format %f |
   # Compile CSS
   while read -r file; do
     # get last `.` occurence as starting extension
@@ -29,7 +31,7 @@ inotifywait /vagrant/src/scss/ -m -e close_write -e move --format %f |
     then
 
       # compile with 'scss'
-      node-sass /vagrant/src/scss/"$file" /vagrant/interface/static/css/"$filename".min.css --output-style compressed
+      node-sass "$1/src/scss/$file" "$1/interface/static/css/$filename".min.css --output-style compressed
 
     fi
   done

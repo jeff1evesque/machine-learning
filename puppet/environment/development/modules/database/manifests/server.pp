@@ -4,13 +4,15 @@
 ###
 class database::server {
     ## local variables
-    $host             = 'localhost'
-    $db               = 'db_machine_learning'
-    $db_user          = 'authenticated'
-    $db_pass          = 'password'
-    $provisioner      = 'provisioner'
-    $provisioner_pass = 'password'
-    $root_pass        = 'password'
+    $hiera_general    = hiera('general')
+    $hiera_database   = hiera('database')
+    $host             = $hiera_general['host']
+    $db               = $hiera_database['name']
+    $db_user          = $hiera_database['username']
+    $db_pass          = $hiera_database['password']
+    $provisioner      = $hiera_database['provisioner']
+    $provisioner_pass = $hiera_database['provisioner_password']
+    $root_pass        = $hiera_database['root_password']
 
     ## mysql::server: install, and configure mariadb-server
     #
@@ -21,7 +23,7 @@ class database::server {
         package_name  => 'mariadb-server',
         root_password => $root_pass,
         users         => {
-            "${db_user}@${host}" => {
+            "${db_user}@${host}"       => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
@@ -39,14 +41,14 @@ class database::server {
             },
         },
         grants        => {
-            "${db_user}@${host}/${db}.*" => {
+            "${db_user}@${host}/${db}.*"     => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
                 table      => "${db}.*",
                 user       => "${db_user}@${host}",
             },
-            "${provisioner}@${host}/${db}.*"   => {
+            "${provisioner}@${host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['CREATE'],

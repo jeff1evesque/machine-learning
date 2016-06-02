@@ -4,7 +4,7 @@
 ###
 class system::log_directory {
     ## local variables
-    $root_dir = '/vagrant'
+    $root_dir = hiera('general')['root']
     $directories = [
         "${root_dir}/log/database",
         "${root_dir}/log/webcompiler",

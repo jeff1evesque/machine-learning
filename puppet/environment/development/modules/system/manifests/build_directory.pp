@@ -4,7 +4,7 @@
 ###
 class system::build_directory {
     ## local variables
-    $root_dir = '/vagrant'
+    $root_dir = hiera('general')['root']
 
     file { "${root_dir}/build/":
         ensure => 'directory',

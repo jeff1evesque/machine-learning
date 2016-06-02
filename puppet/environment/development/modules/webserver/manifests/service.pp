@@ -4,10 +4,11 @@
 ###
 class webserver::service {
     ## variables
-    $root_dir      = '/vagrant'
+    $hiera_general = hiera('general')
+    $root_dir      = $hiera_general['root']
+    $user          = $hiera_general['user']
+    $group         = $hiera_general['group']
     $log_path      = "${root_dir}/log/webserver/flask.log"
-    $user          = 'vagrant'
-    $group         = 'vagrant'
     $template_path = 'webserver/webserver.erb'
 
     ## include webserver dependencies

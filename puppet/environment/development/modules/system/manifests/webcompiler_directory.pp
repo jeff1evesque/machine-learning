@@ -4,7 +4,7 @@
 ###
 class system::webcompiler_directory {
     ## local variables
-    $root_dir = '/vagrant'
+    $root_dir = hiera('general')['root']
     $directories = {
         browserify => {
             src       => 'jsx',

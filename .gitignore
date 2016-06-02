@@ -3,8 +3,9 @@
 !/interface/
 !/brain/
 !/src/
+!/hiera/
 !.gitigore
-!settings.yml
+!hiera.yaml
 !.gitmodules
 !README.md
 !__init__.py

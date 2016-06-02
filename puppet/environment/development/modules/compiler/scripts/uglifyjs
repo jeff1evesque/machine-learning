@@ -1,14 +1,15 @@
 #!/bin/bash
 
 # @uglifyjs: minify javascript file(s).
-
+#
+# @$1, first passed-in argument from command ($0 is the filename)
 
 # Pre-Pathing: allow 'uglifyjs' command
 PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-log_file=/vagrant/log/webcompiler/uglifyjs.log
+log_file="$1"/log/webcompiler/uglifyjs.log
 set -x;
 exec &> >(while read -r line; do
   log_date=$(date +%Y-%m-%d:%H:%M:%S)
@@ -16,8 +17,8 @@ exec &> >(while read -r line; do
 done)
 
 
-# watch '/vagrant/src/js/' subdirectory
-inotifywait /vagrant/src/js/ -m -e close_write -e move --format %f |
+# watch '[root_dir]/src/js/' subdirectory
+inotifywait "$1"/src/js/ -m -e close_write -e move --format %f |
   # Minify Javascript
   while read -r file; do
 
@@ -30,7 +31,7 @@ inotifywait /vagrant/src/js/ -m -e close_write -e move --format %f |
       then
 
         # minifiy with 'uglifyjs'
-        uglifyjs -c --output /vagrant/interface/static/js/"$filename".min.js /vagrant/src/js/"$file"
+        uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
 
       fi
   done

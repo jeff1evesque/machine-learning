@@ -7,7 +7,7 @@ class sklearn::install_sklearn {
     require python
 
     ## local variables
-    $root_dir = '/vagrant'
+    $root_dir = hiera('general')['root']
 
     ## install sklearn
     exec { 'install-sklearn':
