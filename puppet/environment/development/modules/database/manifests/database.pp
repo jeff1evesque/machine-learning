@@ -4,9 +4,10 @@
 ###
 class database::database {
     ## variables
-    $root_dir        = '/vagrant'
+    $hiera_general   = hiera('general')
+    $root_dir        = $hiera_general['root']
+    $environment     = $hiera_general['environment']
     $module          = 'database'
-    $environment     = 'development'
     $environment_dir = "${root_dir}/puppet/environment/${environment}"
     $script_dir      = "${environment_dir}/modules/${module}/scripts"
 
