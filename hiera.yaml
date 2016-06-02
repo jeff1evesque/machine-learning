@@ -1,0 +1,9 @@
+---
+:backends:
+  - yaml
+
+:hierarchy:
+  - settings
+
+:yaml:
+  :datadir: /vagrant/hiera
