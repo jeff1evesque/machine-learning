@@ -32,8 +32,8 @@ inotifywait "$1"/src/img/ -m -e close_write -e move --format %f |
 
     # minify with 'imagemin'
     if [ "$file_extension" = 'gif' ]; then
-      cp "$1"/src/img/"$file" "$1"/interface/static/img/"$filename"
+      cp "$1/src/img/$file" "$1/interface/static/img/$filename"
     else
-      imagemin "$1"/src/img/"$file" > "$1"/interface/static/img/"$filename" &
+      imagemin "$1/src/img/$file" > "$1/interface/static/img/$filename" &
     fi
   done
