@@ -5,7 +5,7 @@
 !/src/
 !/hiera/
 !.gitigore
-!settings.yaml
+!hiera.yaml
 !.gitmodules
 !README.md
 !__init__.py
