@@ -203,7 +203,7 @@ In order to proceed with the installation for this project, two dependencies
  need to be installed:
 
 - [Vagrant](https://www.vagrantup.com/)
-- [Virtualbox](https://www.virtualbox.org/)
+- [Virtualbox](https://www.virtualbox.org/) (with extension pack)
 
 Once the necessary dependencies have been installed, execute the following
  command to build the virtual environment:
