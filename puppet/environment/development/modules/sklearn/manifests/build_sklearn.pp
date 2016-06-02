@@ -4,7 +4,7 @@
 ###
 class sklearn::build_sklearn {
     ## local variables
-    $root_dir = '/vagrant'
+    $root_dir = hiera('general')['root']
 
     ## build sklearn
     exec { 'build-sklearn':
