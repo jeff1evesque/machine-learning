@@ -9,6 +9,7 @@
 
 ## variables
 general:
+    environment: 'development'
     root: '/vagrant'
     host: 'localhost'
     user: 'vagrant'
