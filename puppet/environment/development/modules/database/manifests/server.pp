@@ -21,7 +21,7 @@ class database::server {
         package_name  => 'mariadb-server',
         root_password => $root_pass,
         users         => {
-            "${db_user}@${host}" => {
+            "${db_user}@${host}"       => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
@@ -39,14 +39,14 @@ class database::server {
             },
         },
         grants        => {
-            "${db_user}@${host}/${db}.*" => {
+            "${db_user}@${host}/${db}.*"     => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
                 table      => "${db}.*",
                 user       => "${db_user}@${host}",
             },
-            "${provisioner}@${host}/${db}.*"   => {
+            "${provisioner}@${host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['CREATE'],
