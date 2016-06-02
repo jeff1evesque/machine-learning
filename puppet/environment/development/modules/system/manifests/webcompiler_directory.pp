@@ -4,7 +4,7 @@
 ###
 class system::webcompiler_directory {
     ## local variables
-    hiera('general')['root']
+    $root_dir = hiera('general')['root']
     $directories = {
         browserify => {
             src       => 'jsx',
