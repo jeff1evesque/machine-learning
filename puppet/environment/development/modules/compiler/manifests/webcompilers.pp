@@ -4,14 +4,15 @@
 ###
 class compiler::webcompilers {
     ## variables
-    $root_dir        = '/vagrant'
+    $hiera_general   = hiera('general')
+    $root_dir        = $hiera_general['root']
+    $user            = $hiera_general['user']
+    $group           = $hiera_general['group']
+    $environment     = $hiera_general['environment']
     $log_path        = "${root_dir}/log/webcompiler"
-    $environment     = 'development'
     $module          = 'compiler'
     $environment_dir = "${root_dir}/puppet/environment/${environment}"
     $compiler_dir    = "${environment_dir}/modules/${module}/scripts"
-    $user            = 'vagrant'
-    $group           = 'vagrant'
     $template_path   = 'compiler/webcompilers.erb'
 
     $compilers = [
