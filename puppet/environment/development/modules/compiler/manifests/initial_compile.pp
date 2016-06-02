@@ -4,7 +4,7 @@
 ###
 class compiler::initial_compile {
     ## local variables
-    $root_dir = '/vagrant'
+    $root_dir = hiera('general')['root']
     $sources  = [
         'jsx',
         'img',
