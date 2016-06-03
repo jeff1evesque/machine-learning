@@ -51,7 +51,7 @@ class database::server {
             "${provisioner}@${host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
-                privileges => ['CREATE', 'INSERT'],
+                privileges => ['INSERT', 'CREATE'],
                 table      => "${db}.*",
                 user       => "${provisioner}@${host}",
             },
