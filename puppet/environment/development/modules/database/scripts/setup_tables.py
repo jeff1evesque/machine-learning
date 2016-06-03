@@ -116,6 +116,6 @@ with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
         # populate 'tbl_model_type'
         args = [('svm'), ('svr')]
         sql_statement = '''\
-                        INSERT INTO tbl_model_type (model) VALUES (%s, %s);
+                        INSERT INTO tbl_model_type (model) VALUES (%s);
                         '''
         cur.executemany(sql_statement, args)
