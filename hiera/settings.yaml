@@ -58,6 +58,9 @@ database:
 #       the above 'general: root' definition.
 #
 application:
+    model_type:
+        - svm
+        - svr
     log_level: 'DEBUG'
     error_log_path: '/log/application/error'
     warning_log_path: '/log/application/warning'
