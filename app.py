@@ -33,9 +33,9 @@ with open('hiera/settings.yaml', 'r') as stream:
         app.config.update(
             HOST=settings['general']['host'],
             PORT_REDIS=settings['redis']['port'],
-            ROOT=settings['general']['root']
+            ROOT=settings['general']['root'],
             DB_LOG_PATH=settings['database']['log_path'],
-            DB_ML=settings['database']['name']
+            DB_ML=settings['database']['name'],
             DB_USERNAME=settings['database']['username'],
             DB_PASSWORD=settings['database']['password'],
             LOG_LEVEL=HANDLER_LEVEL,
