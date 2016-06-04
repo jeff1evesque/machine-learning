@@ -31,19 +31,19 @@ with open('hiera/settings.yaml', 'r') as stream:
 
         # flask attributes: accessible across application
         app.config.update(
-            LOG_LEVEL=HANDLER_LEVEL,
+            HOST=settings['general']['host'],
+            PORT_REDIS=settings['redis']['port'],
+            ROOT=settings['general']['root']
             DB_LOG_PATH=settings['database']['log_path'],
+            DB_ML=settings['database']['name']
+            DB_USERNAME=settings['database']['username'],
+            DB_PASSWORD=settings['database']['password'],
+            LOG_LEVEL=HANDLER_LEVEL,
             FLASK_LOG_PATH=settings['webserver']['flask_log_path'],
             ERROR_LOG_PATH=settings['application']['error_log_path'],
             WARNING_LOG_PATH=settings['application']['warning_log_path'],
             INFO_LOG_PATH=settings['application']['info_log_path'],
             DEBUG_LOG_PATH=settings['application']['debug_log_path'],
-            DB_ML=settings['database']['name']
-            DB_USERNAME=settings['database']['username'],
-            DB_PASSWORD=settings['database']['password'],
-            HOST=settings['general']['host'],
-            PORT_REDIS=settings['redis']['port'],
-            ROOT=settings['general']['root']
         )
     except yaml.YAMLError as error:
         logger = Logger('error', 'yaml')
