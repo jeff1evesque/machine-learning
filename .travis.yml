@@ -40,6 +40,7 @@ install:
   - npm install -g eslint babel-eslint@6.0.0-beta.6
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint
+  - npm install -g travis-lint
 
 ## implement linting
 #
@@ -72,4 +73,5 @@ script:
   - find . -name '*.sh' -type f -exec shellcheck {} \;
   - eslint . --ext=jsx -c test/config/eslint.json
   - yaml-lint hiera/
-  - yaml-lint *.y*ml
+  - yaml-lint *.yaml
+  - travis-lint .travis.yml
