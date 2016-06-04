@@ -6,6 +6,7 @@ This file retrieves feature characteristics.
 
 '''
 
+from flask import current_app
 from brain.database.db_query import SQL
 
 
@@ -31,6 +32,7 @@ class Retrieve_Feature(object):
 
         self.list_error = []
         self.sql = SQL()
+        self.db_ml = current_app.config.get('DB_ML')
 
     def get_dataset(self, id_entity):
         '''@get_dataset
@@ -47,7 +49,7 @@ class Retrieve_Feature(object):
         '''
 
         # select dataset
-        self.sql.sql_connect('db_machine_learning')
+        self.sql.sql_connect(self.db_ml)
         sql_statement = 'SELECT dep_variable_label, indep_variable_label, '\
             'indep_variable_value FROM tbl_feature_value where id_entity=%s'
         args = (id_entity)
@@ -80,7 +82,7 @@ class Retrieve_Feature(object):
             Therefore, '%s' is used for argument substitution.
         '''
 
-        self.sql.sql_connect('db_machine_learning')
+        self.sql.sql_connect(self.db_ml)
         sql_statement = 'SELECT count_features FROM tbl_feature_count '\
             'where id_entity=%s'
         args = (id_entity)
