@@ -42,7 +42,7 @@ with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
     settings = yaml.load(stream)
     models = settings['application']['model_type']
     host = settings['general']['host']
-    db = settings['database']['name']
+    db_ml = settings['database']['name']
     provisioner = settings['database']['provisioner']
     provisioner_password = settings['database']['provisioner_password']
 
@@ -51,7 +51,7 @@ with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
         host,
         provisioner,
         provisioner_password,
-        db
+        db_ml
     )
 
     with conn:

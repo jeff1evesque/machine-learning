@@ -6,6 +6,7 @@ This file saves the observation labels.
 
 '''
 
+from flask import current_app
 from brain.database.db_query import SQL
 
 
@@ -33,6 +34,7 @@ class Save_Observation(object):
         self.session_type = session_type
         self.list_error = []
         self.sql = SQL()
+        self.db_ml = current_app.config.get('DB_ML')
 
     def save_label(self):
         '''@save_label
@@ -47,7 +49,7 @@ class Save_Observation(object):
         '''
 
         # insert / update feature label(s)
-        self.sql.sql_connect('db_machine_learning')
+        self.sql.sql_connect(self.db_ml)
 
         # add labels (append case)
         if self.session_type in ['data_append', 'data_new']:

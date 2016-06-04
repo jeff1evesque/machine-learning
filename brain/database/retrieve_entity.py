@@ -6,6 +6,7 @@ This file retrieves dataset entity related properties.
 
 '''
 
+from flask import current_app
 from brain.database.db_query import SQL
 
 
@@ -31,6 +32,7 @@ class Retrieve_Entity(object):
 
         self.list_error = []
         self.sql = SQL()
+        self.db_ml = current_app.config.get('DB_ML')
 
     def get_title(self, id_entity):
         '''@get_title
@@ -47,7 +49,7 @@ class Retrieve_Entity(object):
         '''
 
         # select dataset
-        self.sql.sql_connect('db_machine_learning')
+        self.sql.sql_connect(self.db_ml)
         sql_statement = 'SELECT title FROM tbl_dataset_entity'\
             ' where id_entity=%s'
         args = (id_entity)

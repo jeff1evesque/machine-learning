@@ -7,6 +7,7 @@ corresponding database tables.
 
 '''
 
+from flask import current_app
 from brain.database.db_query import SQL
 
 
@@ -33,6 +34,7 @@ class Save_Feature(object):
         self.premodel_data = premodel_data
         self.list_error = []
         self.sql = SQL()
+        self.db_ml = current_app.config.get('DB_ML')
 
     def save_count(self):
         '''@save_count
@@ -46,7 +48,7 @@ class Save_Feature(object):
         '''
 
         # insert / update dataset value(s)
-        self.sql.sql_connect('db_machine_learning')
+        self.sql.sql_connect(self.db_ml)
         sql_statement = 'INSERT INTO tbl_feature_count (id_entity, '\
             'count_features) VALUES(%s, %s)'
         args = (
@@ -79,7 +81,7 @@ class Save_Feature(object):
         '''
 
         # insert / update dataset value(s)
-        self.sql.sql_connect('db_machine_learning')
+        self.sql.sql_connect(self.db_ml)
         sql_statement = 'INSERT INTO tbl_feature_value (id_entity, '\
             'dep_variable_label, indep_variable_label, indep_variable_value) '\
             'VALUES(%s, %s, %s, %s)'
