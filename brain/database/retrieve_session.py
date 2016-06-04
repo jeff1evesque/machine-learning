@@ -6,6 +6,7 @@ This file retrieves the 'session_name', and 'id_entity' properties.
 
 '''
 
+from flask import current_app
 from brain.database.db_query import SQL
 
 
@@ -31,6 +32,7 @@ class Retrieve_Session(object):
 
         self.list_error = []
         self.sql = SQL()
+        self.db_ml = current_app.config.get('DB_ML')
 
     def get_all_sessions(self):
         '''@get_all_sessions
@@ -44,7 +46,7 @@ class Retrieve_Session(object):
         list_session = []
 
         # sql query
-        self.sql.sql_connect('db_machine_learning')
+        self.sql.sql_connect(self.db_ml)
         sql_statement = 'SELECT id_entity, title FROM tbl_dataset_entity'
         response = self.sql.sql_command(sql_statement, 'select')
 
