@@ -40,6 +40,7 @@ import MySQLdb as DB
 with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
     # local variables
     settings = yaml.load(stream)
+    models = settings['application']['model_type']
     host = settings['general']['host']
     db = settings['database']['name']
     provisioner = settings['database']['provisioner']
@@ -114,8 +115,7 @@ with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
         cur.execute(sql_statement)
 
         # populate 'tbl_model_type'
-        args = [('svm'), ('svr')]
         sql_statement = '''\
                         INSERT INTO tbl_model_type (model) VALUES (%s);
                         '''
-        cur.executemany(sql_statement, args)
+        cur.executemany(sql_statement, models)
