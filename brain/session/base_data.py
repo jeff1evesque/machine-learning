@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from brain.database.save_entity import Save_Entity
 from brain.session.data.svm.save_feature_count import svm_feature_count
-from brain.validator.validate_file_extension import Validate_File_Extension
+from brain.session.data.svm.validate_file_extension import svm_file_extension
 from brain.converter.convert_dataset import Convert_Dataset
 from brain.database.save_observation import Save_Observation
 
@@ -38,7 +38,6 @@ class Base_Data(object):
 
         '''
 
-        self.flag_upload = False
         self.observation_labels = []
         self.list_error = []
         self.uid = 1
@@ -64,29 +63,16 @@ class Base_Data(object):
         This method validates the file extension for each uploaded dataset,
         and returns the unique (non-duplicate) dataset.
 
+        @self.session_type, defined from 'base.py' superclass.
+
         '''
 
-        # web-interface: validate, and restructure dataset
-        if self.premodel_data['data']['dataset']['file_upload']:
-            validator = Validate_File_Extension(
-                self.premodel_data,
-                self.session_type
-            )
-            self.upload = validator.validate()
-
-            if self.upload['error']:
-                self.list_error.append(
-                    self.upload['error']
-                )
-                self.flag_upload = True
-
-        # programmatic-interface: validate, do not restructure
-        elif self.premodel_data['data']['dataset']['json_string']:
-            self.upload = self.premodel_data['data']
-
-            if self.premodel_data['error']:
-                self.list_error.append(self.premodel_data['error'])
-                self.flag_upload = True
+        # svm dataset
+        response = svm_file_extension(self.dataset[0], self.session_type)
+        if response['error']:
+            self.list_error.append(response['error'])
+        else:
+            self.upload = response['dataset']
 
     def validate_id(self, session_id):
         '''@validate_id
