@@ -10,9 +10,9 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.database.save_entity import Save_Entity
 from brain.session.data.svm.save_feature_count import svm_feature_count
 from brain.session.data.svm.validate_file_extension import svm_file_extension
+from brain.session.data.svm.save_entity import svm_entity
 from brain.converter.convert_dataset import Convert_Dataset
 from brain.database.save_observation import Save_Observation
 
@@ -97,24 +97,13 @@ class Base_Data(object):
 
         '''
 
-        premodel_settings = self.premodel_data['data']['settings']
-        premodel_entity = {
-            'title': premodel_settings.get('session_name', None),
-            'uid': self.uid,
-            'id_entity': None
-        }
-        db_save = Save_Entity(premodel_entity, session_type)
+        # save svm entity
+        response = svm_entity(dataset[0], session_type)
 
-        # save dataset element
-        db_return = db_save.save()
-
-        # return error(s)
-        if not db_return['status']:
-            self.list_error.append(db_return['error'])
-            return {'status': False, 'id': None, 'error': self.list_error}
-
-        # return session id
-        elif db_return['status'] and session_type == 'data_new':
+        # return result
+        if response['error']:
+            return {'status': False, 'id': None, 'error': response['error']}
+        else:
             return {'status': True, 'id': db_return['id'], 'error': None}
 
     def save_premodel_dataset(self):
