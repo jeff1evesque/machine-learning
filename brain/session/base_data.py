@@ -10,9 +10,10 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.session.data.svm.save_feature_count import svm_feature_count
-from brain.session.data.svm.validate_file_extension import svm_file_extension
-from brain.session.data.svm.save_entity import svm_entity
+from brain.session.data.save_feature_count import feature_count
+from brain.session.data.validate_file_extension import reduce_dataset
+from brain.session.data.save_entity import entity
+from brain.session.data.save_dataset import dataset
 from brain.converter.convert_dataset import Convert_Dataset
 from brain.database.save_observation import Save_Observation
 
@@ -53,7 +54,7 @@ class Base_Data(object):
         '''
 
         # svm feature count
-        response = svm_feature_count(self.dataset[0])
+        response = feature_count(self.dataset[0])
         if response['error']:
             self.list_error.append(response['error'])
 
@@ -67,8 +68,8 @@ class Base_Data(object):
 
         '''
 
-        # svm dataset
-        response = svm_file_extension(self.premodel_data, self.session_type)
+        # validate and reduce dataset
+        response = reduce_dataset(self.premodel_data, self.session_type)
         if response['error']:
             self.list_error.append(response['error'])
         else:
@@ -98,7 +99,7 @@ class Base_Data(object):
         '''
 
         # save svm entity
-        response = svm_entity(self.premodel_data, session_type)
+        response = entity(self.premodel_data, session_type)
 
         # return result
         if response['error']:
@@ -113,19 +114,13 @@ class Base_Data(object):
         This method saves each dataset element (independent variable value)
         into the sql database.
 
+        @self.dataset, defined from the 'dataset_to_dict' method.
+
         '''
 
-        for data in self.dataset:
-            for dataset in data['premodel_dataset']:
-                db_save = Save_Feature({
-                    'premodel_dataset': dataset,
-                    'id_entity': data['id_entity']
-                })
-
-                # save dataset element, append error(s)
-                db_return = db_save.save_feature()
-                if db_return['error']:
-                    self.list_error.append(db_return['error'])
+        response = dataset(self.dataset)
+        if response['error']:
+            self.list_error.append(response['error'])
 
     def save_observation_label(self, session_type, session_id):
         '''save_observation_label
