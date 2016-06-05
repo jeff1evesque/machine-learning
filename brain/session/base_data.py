@@ -54,7 +54,7 @@ class Base_Data(object):
 
         # svm feature count
         response = svm_feature_count(self.dataset[0])
-        if response['error']::
+        if response['error']:
             self.list_error.append(response['error'])
 
     def validate_file_extension(self):
@@ -68,7 +68,7 @@ class Base_Data(object):
         '''
 
         # svm dataset
-        response = svm_file_extension(self.dataset[0], self.session_type)
+        response = svm_file_extension(self.premodel_data, self.session_type)
         if response['error']:
             self.list_error.append(response['error'])
         else:
@@ -98,7 +98,7 @@ class Base_Data(object):
         '''
 
         # save svm entity
-        response = svm_entity(dataset[0], session_type)
+        response = svm_entity(self.premodel_data, session_type)
 
         # return result
         if response['error']:
