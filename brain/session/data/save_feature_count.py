@@ -11,8 +11,8 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.database.save_feature import Save_Feature
 
 
-def svm_feature_count(self, dataset):
-    '''@svm_feature_count
+def feature_count(self, dataset):
+    '''@feature_count
 
     This method saves the number of features that can be expected in a given
     observation with respect to 'id_entity'.

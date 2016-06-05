@@ -5,8 +5,8 @@
 from brain.validator.validate_file_extension import Validate_File_Extension
 
 
-def svm_file_extension(self, dataset, session_type):
-    '''@svm_file_extension
+def reduce_dataset(self, dataset, session_type):
+    '''@reduce_dataset
 
     This method validates the file extension for each uploaded dataset,
     and returns the unique (non-duplicate) dataset.
