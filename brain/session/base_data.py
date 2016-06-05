@@ -104,7 +104,7 @@ class Base_Data(object):
         if response['error']:
             return {'status': False, 'id': None, 'error': response['error']}
         else:
-            return {'status': True, 'id': db_return['id'], 'error': None}
+            return {'status': True, 'id': response['id'], 'error': None}
 
     def save_premodel_dataset(self):
         '''@save_premodel_dataset
