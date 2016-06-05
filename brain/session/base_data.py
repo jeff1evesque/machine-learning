@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.database.save_entity import Save_Entity
-from brain.database.save_feature import Save_Feature
+from brain.session.data.svm.save_feature_count import svm_feature_count
 from brain.validator.validate_file_extension import Validate_File_Extension
 from brain.converter.convert_dataset import Convert_Dataset
 from brain.database.save_observation import Save_Observation
@@ -49,28 +49,14 @@ class Base_Data(object):
         This method saves the number of features that can be expected in a
         given observation with respect to 'id_entity'.
 
-        @self.dataset[0], we assume that validation has occurred, and safe to
-            assume the data associated with the first dataset instance is
-            identical to any instance n within the overall collection of
-            dataset(s).
-
-        @self.dataset['count_features'], is defined within the
-            'dataset_to_dict' method.
-
         Note: this method needs to execute after 'dataset_to_dict'
 
         '''
 
-        premodel_data = self.dataset[0]
-        db_save = Save_Feature({
-            'id_entity': premodel_data['id_entity'],
-            'count_features': premodel_data['count_features']
-        })
-
-        # save dataset element, append error(s)
-        db_return = db_save.save_count()
-        if db_return['error']:
-            self.list_error.append(db_return['error'])
+        # svm feature count
+        response = svm_feature_count(self.dataset[0])
+        if response['error']::
+            self.list_error.append(response['error'])
 
     def validate_file_extension(self):
         '''@validate_file_extension
