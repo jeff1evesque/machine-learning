@@ -102,6 +102,7 @@ class Base_Data(object):
 
         # return result
         if response['error']:
+            self.list_error.append(response['error'])
             return {'status': False, 'id': None, 'error': response['error']}
         else:
             return {'status': True, 'id': response['id'], 'error': None}
