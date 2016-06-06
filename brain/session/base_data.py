@@ -15,7 +15,7 @@ from brain.session.data.validate_file_extension import reduce_dataset
 from brain.session.data.save_entity import entity
 from brain.session.data.save_dataset import dataset
 from brain.session.data.save_observation_label import observation_label
-from brain.converter.convert_dataset import Convert_Dataset
+from brain.session.data.dataset_to_dict import dataset_to_dict
 
 
 class Base_Data(object):
@@ -53,8 +53,10 @@ class Base_Data(object):
 
         '''
 
-        # svm feature count
+        # save feature count
         response = feature_count(self.dataset[0])
+
+        # return result
         if response['error']:
             self.list_error.append(response['error'])
 
@@ -70,6 +72,8 @@ class Base_Data(object):
 
         # validate and reduce dataset
         response = reduce_dataset(self.premodel_data, self.session_type)
+
+        # return result
         if response['error']:
             self.list_error.append(response['error'])
         else:
@@ -98,7 +102,7 @@ class Base_Data(object):
 
         '''
 
-        # save svm entity
+        # save entity description
         response = entity(self.premodel_data, session_type)
 
         # return result
@@ -118,7 +122,10 @@ class Base_Data(object):
 
         '''
 
+        # save dataset
         response = dataset(self.dataset)
+
+        # return result
         if response['error']:
             self.list_error.append(response['error'])
 
@@ -138,14 +145,16 @@ class Base_Data(object):
 
         '''
 
+        # save observation
         response = observation_label(
             session_type,
             session_id,
             self.observation_labels
         )
 
+        # return result
         if response['error']:
-            self.list_error.append(db_return['error'])
+            self.list_error.append(response['error'])
 
     def dataset_to_dict(self, id_entity):
         '''@dataset_to_dict
@@ -157,108 +166,19 @@ class Base_Data(object):
             not properly defined, causing this method to 'return', which
             essentially stops the execution of the current session.
 
+        @self.upload, define from 'validate_file_extension'.
+
         '''
 
-        flag_append = True
-        self.dataset = []
+        # convert to dictionary
+        response = dataset_to_dict(id_entity, self.upload)
 
-        try:
-            # web-interface: define flag to convert to dataset to json
-            if self.upload['dataset']['file_upload']:
-                for val in self.upload['dataset']['file_upload']:
-                    # reset file-pointer
-                    val['file'].seek(0)
-
-                    # csv to dict
-                    if val['type'] == 'csv':
-                        try:
-                            # conversion
-                            converter = Convert_Dataset(val['file'])
-                            converted = converter.csv_to_dict()
-                            count_features = converter.get_feature_count()
-                            labels = converter.get_observation_labels()
-
-                            # assign observation labels
-                            self.observation_labels.append(labels)
-
-                            # build new (relevant) dataset
-                            self.dataset.append({
-                                'id_entity': id_entity,
-                                'premodel_dataset': converted,
-                                'count_features': count_features
-                            })
-                        except Exception as error:
-                            self.list_error.append(error)
-                            flag_append = False
-
-                    # json to dict
-                    elif val['type'] == 'json':
-                        try:
-                            # conversion
-                            converter = Convert_Dataset(val['file'])
-                            converted = converter.json_to_dict()
-                            count_features = converter.get_feature_count()
-                            labels = converter.get_observation_labels()
-
-                            # assign observation labels
-                            self.observation_labels.append(labels)
-
-                        # build new (relevant) dataset
-                            self.dataset.append({
-                                'id_entity': id_entity,
-                                'premodel_dataset': converted,
-                                'count_features': count_features
-                            })
-                        except Exception as error:
-                            self.list_error.append(error)
-                            flag_append = False
-
-                    # xml to dict
-                    elif val['type'] == 'xml':
-                        try:
-                            # conversion
-                            converter = Convert_Dataset(val['file'])
-                            converted = converter.xml_to_dict()
-                            count_features = converter.get_feature_count()
-                            labels = converter.get_observation_labels()
-
-                            # assign observation labels
-                            self.observation_labels.append(labels)
-
-                            # build new (relevant) dataset
-                            self.dataset.append({
-                                'id_entity': id_entity,
-                                'premodel_dataset': converted,
-                                'count_features': count_features
-                            })
-                        except Exception as error:
-                            self.list_error.append(error)
-                            flag_append = False
-
-                if not flag_append:
-                    return False
-
-            # programmatic-interface
-            elif self.upload['dataset']['json_string']:
-                # conversion
-                dataset_json = self.upload['dataset']['json_string']
-                converter = Convert_Dataset(dataset_json, True)
-                converted = converter.json_to_dict()
-                count_features = converter.get_feature_count()
-
-                self.observation_labels.append(dataset_json.keys())
-
-                # build dataset
-                self.dataset.append({
-                    'id_entity': id_entity,
-                    'premodel_dataset': converted,
-                    'count_features': count_features
-                })
-
-        except Exception as error:
-            self.list_error.append(error)
-            print error
-            return False
+        # return result
+        if response['error']:
+            self.list_error.append(response['error'])
+        else:
+            self.observation_labels.append(response['observation_labels'])
+            self.dataset.append(response['dataset'])
 
     def get_errors(self):
         '''get_errors
