@@ -5,7 +5,7 @@
 from brain.database.save_observation import Save_Observation
 
 
-def observation_label(self, session_type, session_id, labels):
+def observation_label(session_type, session_id, labels):
     '''observation_label
 
     This method saves the list of unique independent variable labels, which can
