@@ -42,6 +42,7 @@ class Base_Data(object):
         self.observation_labels = []
         self.list_error = []
         self.uid = 1
+        self.dataset = []
 
     def save_feature_count(self):
         '''@save_feature_count
