@@ -163,11 +163,7 @@ class Base_Data(object):
         This method converts the supplied csv, or xml file upload(s) to a
             uniform dict object.
 
-        @flag_append, when false, indicates the neccessary 'self.dataset' was
-            not properly defined, causing this method to 'return', which
-            essentially stops the execution of the current session.
-
-        @self.upload, define from 'validate_file_extension'.
+        @self.upload, defined from 'validate_file_extension'.
 
         '''
 
