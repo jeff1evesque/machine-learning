@@ -27,10 +27,9 @@ def feature_count(dataset):
 
     '''
 
-    premodel_data = dataset
     db_save = Save_Feature({
-        'id_entity': premodel_data['id_entity'],
-        'count_features': premodel_data['count_features']
+        'id_entity': dataset['id_entity'],
+        'count_features': dataset['count_features']
     })
 
     # save dataset element, append error(s)
