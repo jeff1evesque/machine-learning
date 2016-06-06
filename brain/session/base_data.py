@@ -150,7 +150,7 @@ class Base_Data(object):
         response = observation_label(
             session_type,
             session_id,
-            self.observation_labels
+            self.observation_labels[0][0]
         )
 
         # return result
@@ -179,7 +179,7 @@ class Base_Data(object):
             self.list_error.append(response['error'])
         else:
             self.observation_labels.append(response['observation_labels'])
-            self.dataset.append(response['dataset'])
+            self.dataset = response['dataset']
 
     def get_errors(self):
         '''get_errors
