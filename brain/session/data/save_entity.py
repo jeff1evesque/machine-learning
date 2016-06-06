@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.database.save_entity import Save_Entity
 
 
-def entity(self, dataset, session_type):
+def entity(dataset, session_type):
     '''@entity
 
     This method saves the current entity into the database, then returns the
