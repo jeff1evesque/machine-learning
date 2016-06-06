@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.converter.convert_dataset import Convert_Dataset
 
 
-def dataset_to_dict(self, id_entity):
+def dataset_to_dict(self, id_entity, upload):
     '''@dataset_to_dict
 
     This method converts the supplied csv, or xml file upload(s) to a uniform
@@ -20,6 +20,8 @@ def dataset_to_dict(self, id_entity):
     @flag_append, when false, indicates the neccessary 'dataset' was not
         properly defined, causing this method to 'return', which essentially
         stops the execution of the current session.
+
+    @upload, uploaded dataset(s).
 
     '''
 
