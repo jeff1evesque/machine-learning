@@ -14,7 +14,6 @@ def reduce_dataset(self, dataset, session_type):
     '''
 
     # variables
-    flag_upload = False
     list_error = []
 
     # web-interface: validate, and restructure dataset
@@ -29,7 +28,6 @@ def reduce_dataset(self, dataset, session_type):
             list_error.append(
                 adjusted_dataset['error']
             )
-            flag_upload = True
 
     # programmatic-interface: validate, do not restructure
     elif dataset['data']['dataset']['json_string']:
@@ -37,7 +35,6 @@ def reduce_dataset(self, dataset, session_type):
 
         if dataset['error']:
             list_error.append(self.premodel_data['error'])
-            flag_upload = True
 
     # return
     if list_error:
