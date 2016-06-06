@@ -47,3 +47,4 @@ class Data_New(Base, Base_Data):
         self.observation_labels = []
         self.list_error = []
         self.uid = 1
+        self.dataset = []

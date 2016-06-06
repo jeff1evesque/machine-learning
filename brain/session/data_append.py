@@ -49,6 +49,7 @@ class Data_Append(Base, Base_Data):
         self.observation_labels = []
         self.list_error = []
         self.uid = 1
+        self.dataset = []
 
     def save_entity(self, session_type, session_id):
         '''@save_entity
