@@ -146,7 +146,7 @@ class Base_Data(object):
 
         '''
 
-        # save observation
+        # save observation labels
         response = observation_label(
             session_type,
             session_id,
