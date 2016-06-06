@@ -163,7 +163,7 @@ class Base_Data(object):
         This method converts the supplied csv, or xml file upload(s) to a
             uniform dict object.
 
-        @self.upload, define from 'validate_file_extension'.
+        @self.upload, defined from 'validate_file_extension'.
 
         '''
 
