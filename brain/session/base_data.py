@@ -103,7 +103,7 @@ class Base_Data(object):
         '''
 
         # save entity description
-        response = entity(self.premodel_data, session_type)
+        response = entity(self.premodel_data, session_type, self.uid)
 
         # return result
         if response['error']:
