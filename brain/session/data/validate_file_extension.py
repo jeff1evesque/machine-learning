@@ -5,7 +5,7 @@
 from brain.validator.validate_file_extension import Validate_File_Extension
 
 
-def reduce_dataset(self, dataset, session_type):
+def reduce_dataset(dataset, session_type):
     '''@reduce_dataset
 
     This method validates the file extension for each uploaded dataset,
