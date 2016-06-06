@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.database.save_feature import Save_Feature
 
 
-def feature_count(self, dataset):
+def feature_count(dataset):
     '''@feature_count
 
     This method saves the number of features that can be expected in a given
