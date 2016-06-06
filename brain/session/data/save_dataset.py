@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.database.save_feature import Save_Feature
 
 
-def dataset(self, dataset):
+def dataset(dataset):
     '''@dataset
 
     This method saves each dataset element (independent variable value) into
