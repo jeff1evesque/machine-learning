@@ -14,8 +14,8 @@ from brain.session.data.save_feature_count import feature_count
 from brain.session.data.validate_file_extension import reduce_dataset
 from brain.session.data.save_entity import entity
 from brain.session.data.save_dataset import dataset
+from brain.session.data.save_observation_label import observation_label
 from brain.converter.convert_dataset import Convert_Dataset
-from brain.database.save_observation import Save_Observation
 
 
 class Base_Data(object):
@@ -135,23 +135,17 @@ class Base_Data(object):
 
         @session_id, the corresponding returned session id from invoking the
             'save_entity' method.
+
         '''
 
-        if len(self.observation_labels) > 0:
-            for label_list in self.observation_labels:
-                for label in label_list:
-                    db_save = Save_Observation(
-                        {
-                            'label': label,
-                            'id_entity': session_id
-                        },
-                        session_type
-                    )
+        response = observation_label(
+            session_type,
+            session_id,
+            self.observation_labels
+        )
 
-                    # save dataset element, append error(s)
-                    db_return = db_save.save_label()
-                    if not db_return['status']:
-                        self.list_error.append(db_return['error'])
+        if response['error']:
+            self.list_error.append(db_return['error'])
 
     def dataset_to_dict(self, id_entity):
         '''@dataset_to_dict
