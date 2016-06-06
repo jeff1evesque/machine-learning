@@ -15,7 +15,7 @@ from brain.session.data.validate_file_extension import reduce_dataset
 from brain.session.data.save_entity import entity
 from brain.session.data.save_dataset import dataset
 from brain.session.data.save_observation_label import observation_label
-from brain.session.data.dataset_to_dict import dataset_to_dict
+from brain.session.data.dataset_to_dict import dataset_dictionary
 
 
 class Base_Data(object):
@@ -171,7 +171,7 @@ class Base_Data(object):
         '''
 
         # convert to dictionary
-        response = dataset_to_dict(id_entity, self.upload)
+        response = dataset_dictionary(id_entity, self.upload)
 
         # return result
         if response['error']:
