@@ -34,7 +34,7 @@ def reduce_dataset(dataset, session_type):
         adjusted_dataset = dataset['data']
 
         if dataset['error']:
-            list_error.append(self.premodel_data['error'])
+            list_error.append(adjusted_dataset['error'])
 
     # return
     if list_error:
