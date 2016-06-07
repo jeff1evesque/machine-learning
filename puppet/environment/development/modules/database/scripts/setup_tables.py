@@ -17,7 +17,6 @@ This file initializes the following database tables within the
         - observation label: synonymous to dependent variable label, and can be
               'NULL' if the 'criterion value' is defined
         - criterion value: can be 'NULL' if the 'observation label' is defined
-        - model type: generally the model type (i.e. svm, svr)
         - feature label: synonymous to independent variable label, or predictor
              label
         - feature value: synonymous to independent variable, or predictor value
