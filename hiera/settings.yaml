@@ -59,8 +59,8 @@ database:
 #
 application:
     model_type:
-        - svm
-        - svr
+        - classification
+        - regression
     log_level: 'DEBUG'
     error_log_path: '/log/application/error'
     warning_log_path: '/log/application/warning'
