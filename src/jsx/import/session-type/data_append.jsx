@@ -14,6 +14,7 @@ import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
 import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
 import checkValidString from './../validator/valid_string.js';
 import checkValidInt from './../validator/valid_int.js';
+import ModelType from './../model/model_type.js';
 import Spinner from './../general/spinner.jsx';
 
 var DataAppend = React.createClass({
@@ -59,7 +60,21 @@ var DataAppend = React.createClass({
             this.props.onChange({render_submit: false});
         }
     },
-  // update 'state properties' from child component (i.e. 'validStringEntered')
+  // update 'state properties' from child component
+    changeModelType: function(event) {
+        if (
+            modelType && modelType != '--Select--' &&
+            checkValidString(modelType)
+        ) {
+            this.setState({value_model_type: event.model_type});
+            this.props.onChange({render_submit: false});
+        }
+        else {
+            this.setState({value_model_type: '--Select--'});
+            this.props.onChange({render_submit: false});
+        }
+    },
+  // update 'state properties' from child component
     displaySubmit: function(event) {
         if (event.submitted_proper_dataset) {
             this.props.onChange({
@@ -74,7 +89,12 @@ var DataAppend = React.createClass({
     render: function(sessionId){
         var inputDatasetType = this.state.value_dataset_type;
         var inputSessionId = this.state.value_session_id;
-        var Dataset = this.getSupplyDataset(inputDatasetType, inputSessionId);
+        var modelType = this.state.value_model_type;
+        var Dataset = this.getSupplyDataset(
+            inputDatasetType,
+            inputSessionId,
+            modelType
+        );
         var options = this.state.ajax_done_options;
 
         if (this.state.display_spinner) {
@@ -120,6 +140,8 @@ var DataAppend = React.createClass({
                         <option value='dataset_url'>Dataset URL</option>
 
                     </select>
+
+                    <ModelType onChange={this.changeModelType} />
                 </fieldset>
 
                 <Dataset onChange={this.displaySubmit}/>
@@ -129,8 +151,13 @@ var DataAppend = React.createClass({
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function(datasetType, sessionId) {
-        if (datasetType != '--Select--' && Number(sessionId)) {
+    getSupplyDataset: function(datasetType, sessionId, modelType) {
+        if (
+            datasetType && checkValidString(datasetType) &&
+            datasetType != '--Select--' && sessionId &&
+            checkValidInt(sessionId) && modelType &&
+            checkValidString(modelType) && modelType != '--Select--'
+        ) {
             return {
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
