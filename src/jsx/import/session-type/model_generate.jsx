@@ -142,7 +142,7 @@ var ModelGenerate = React.createClass({
                     </select>
 
                     <select
-                        name='sv_model_type'
+                        name='model_type'
                         autoComplete='off'
                         onChange={this.changeModelType}
                         value={this.state.value_model_type}
