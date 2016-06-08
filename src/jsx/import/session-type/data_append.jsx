@@ -23,6 +23,7 @@ var DataAppend = React.createClass({
         return {
             value_session_id: '--Select--',
             value_dataset_type: '--Select--',
+            value_model_type: '--Select--',
             render_submit: false,
             ajax_done_options: null,
             ajax_done_error: null,
