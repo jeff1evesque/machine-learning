@@ -11,5 +11,6 @@ class sklearn::build_sklearn {
         command => 'python setup.py build',
         cwd     => "${root_dir}/build/scikit-learn/",
         path    => '/usr/bin',
+        timeout => 1800,
     }
 }
