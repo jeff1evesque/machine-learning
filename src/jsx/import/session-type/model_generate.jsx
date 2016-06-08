@@ -149,8 +149,8 @@ var ModelGenerate = React.createClass({
                     >
 
                         <option value='' defaultValue>--Select--</option>
-                        <option value='classification'>Classification</option>
-                        <option value='regression'>Regression</option>
+                        <option value='svm'>Support Vector Machine</option>
+                        <option value='svr'>Support Vector Regression</option>
 
                     </select>
 
