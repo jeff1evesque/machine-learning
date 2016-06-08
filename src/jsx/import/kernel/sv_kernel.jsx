@@ -17,8 +17,13 @@ var SupportVectorKernels = React.createClass({
         };
     },
   // update 'state properties'
-    changeKernelType: function(){
-        this.props.onChange({kernelType: this.state.value_kernel_type});
+    changeKernelType: function(event){
+        if checkValidString(event.target.value) {
+            this.props.onChange({kernelType: this.state.value_kernel_type});
+        }
+        else {
+            this.props.onChange({kernelType: null});
+        }
     },
   // triggered when 'state properties' change
     render: function(){
