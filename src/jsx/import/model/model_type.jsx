@@ -27,7 +27,7 @@ var ModelType = React.createClass({
       // display result
         return(
             <select
-                name='svm_model_type'
+                name='model_type'
                 autoComplete='off'
                 onChange={this.changeModelType}
                 value={this.state.value_model_type}
