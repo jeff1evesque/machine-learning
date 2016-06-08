@@ -14,7 +14,7 @@ import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
 import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
 import checkValidString from './../validator/valid_string.js';
 import checkValidInt from './../validator/valid_int.js';
-import ModelType from './../model/model_type.js';
+import ModelType from './../model/model_type.jsx';
 import Spinner from './../general/spinner.jsx';
 
 var DataAppend = React.createClass({
