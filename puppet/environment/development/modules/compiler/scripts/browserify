@@ -10,7 +10,7 @@ PATH="/usr/local/bin:$PATH"
 
 
 # track execution of script
-log_file="$1"/log/webcompiler/browserify.log
+log_file=/vagrant/log/webcompiler/browserify.log
 set -x;
 exec &> >(while read -r line; do
   log_date=$(date +%Y-%m-%d:%H:%M:%S)
@@ -19,11 +19,11 @@ done)
 
 
 # create empty '.gitignore'
-cat /dev/null > "$1"/src/js/.gitignore
+cat /dev/null > /vagrant/src/js/.gitignore
 
 
 # watch '[root_dir]/src/jsx/' subdirectory
-inotifywait "$1"/src/jsx/ -m -e close_write -e move --format %f |
+inotifywait /vagrant/src/jsx/ -m -e close_write -e move --format %f |
     # Convert JSX to JS
     while read -r file; do
       # filename (without 'last' extension)
@@ -35,10 +35,10 @@ inotifywait "$1"/src/jsx/ -m -e close_write -e move --format %f |
       then
 
         # convert with 'browserify'
-        (cd /usr/lib/node_modules && browserify "$1/src/jsx/$file" -t [ babelify --presets es2015,react ] -o "$1/src/js/$filename.js")
+        (cd /usr/lib/node_modules && browserify /vagrant/src/jsx/"$file" -t [ babelify --presets es2015,react ] -o /vagrant/src/js/"$filename".js)
 
         # append file to '.gitignore'
-        fgrep -q "$filename".js "$1"/src/js/.gitignore || echo "$filename".js >> "$1"/src/js/.gitignore
+        fgrep -q "$filename".js /vagrant/src/js/.gitignore || echo "$filename".js >> /vagrant/src/js/.gitignore
 
       fi
     done
