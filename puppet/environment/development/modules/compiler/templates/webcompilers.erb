@@ -28,7 +28,7 @@ expect fork
 ## start upstart job
 #
 #  @chdir, change the current working directory
-#  @root_dir, interpolated puppet variable, needed by <%= @compiler %>
+#  @root_dir, passed in from puppet template, interpolated as <%= @root_dir %>
 chdir <%= @compiler_dir %>
 exec ./<%= @compiler %> <%= @root_dir %>
 
