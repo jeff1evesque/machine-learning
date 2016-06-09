@@ -31,7 +31,7 @@ inotifywait /vagrant/src/scss/ -m -e close_write -e move --format %f |
     then
 
       # compile with 'scss'
-      node-sass /vagrant/src/scss/$file" /vagrant/interface/static/css/$filename".min.css --output-style compressed
+      node-sass /vagrant/src/scss/"$file" /vagrant/interface/static/css/"$filename".min.css --output-style compressed
 
     fi
   done
