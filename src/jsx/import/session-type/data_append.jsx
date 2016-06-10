@@ -61,13 +61,15 @@ var DataAppend = React.createClass({
             this.props.onChange({render_submit: false});
         }
     },
-  // update 'state properties' from child component
+  // update 'state properties' from child component (i.e. 'value_model_type')
     changeModelType: function(event) {
+        var modelType = event.value_model_type;
+
         if (
             modelType && modelType != '--Select--' &&
             checkValidString(modelType)
         ) {
-            this.setState({value_model_type: event.model_type});
+            this.setState({value_model_type: modelType});
             this.props.onChange({render_submit: false});
         }
         else {
