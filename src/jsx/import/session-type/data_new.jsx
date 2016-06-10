@@ -39,21 +39,25 @@ var DataNew = React.createClass({
         }
     },
     changeTitle: function(event){
-        if (event.target.value && checkValidString(event.target.value)) {
-            this.setState({value_title: event.target.value});
+        var sessionTitle = event.target.value;
+
+        if (sessionTitle && checkValidString(sessionTitle)) {
+            this.setState({value_title: sessionTitle});
         }
         else {
             this.setState({value_title: null});
             this.props.onChange({render_submit: false});
         }
     },
-  // update 'state properties' from child component
+  // update 'state properties' from child component (i.e. 'value_model_type')
     changeModelType: function(event) {
+        var modelType = event.value_model_type;
+
         if (
             modelType && modelType != '--Select--' &&
             checkValidString(modelType)
         ) {
-            this.setState({value_model_type: event.model_type});
+            this.setState({value_model_type: modelType});
             this.props.onChange({render_submit: false});
         }
         else {
@@ -119,11 +123,12 @@ var DataNew = React.createClass({
     },
   // call back: used for the above 'render' (return 'span' if undefined)
     getSupplyDataset: function(datasetType, title, modelType) {
+
         if (
             title && checkValidString(title) && datasetType && 
             checkValidString(datasetType) && datasetType != '--Select--' &&
             modelType && checkValidString(modelType) &&
-            modelType !== '--Select--'
+            modelType != '--Select--'
         ) {
             return {
                 file_upload: SupplyDatasetFile,
