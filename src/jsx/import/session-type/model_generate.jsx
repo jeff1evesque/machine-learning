@@ -122,7 +122,7 @@ var ModelGenerate = React.createClass({
                 <legend>Generate Model</legend>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
-                    <p>Select past session, and model type</p>
+                    <p>Select past session, model type, and kernel type</p>
                     <select
                         name='session_id'
                         autoComplete='off'
@@ -149,8 +149,8 @@ var ModelGenerate = React.createClass({
                     >
 
                         <option value='' defaultValue>--Select--</option>
-                        <option value='svm'>Support Vector Machine</option>
-                        <option value='svr'>Support Vector Regression</option>
+                        <option value='svm'>SVM</option>
+                        <option value='svr'>SVR</option>
 
                     </select>
 
