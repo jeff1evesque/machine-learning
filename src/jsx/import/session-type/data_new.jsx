@@ -10,6 +10,7 @@
 import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
 import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
 import checkValidString from './../validator/valid_string.js';
+import ModelType from './../model/model_type.jsx';
 
 var DataNew = React.createClass({
   // initial 'state properties'
@@ -17,6 +18,7 @@ var DataNew = React.createClass({
         return {
             value_title: null,
             value_dataset_type: '--Select--',
+            value_model_type: '--Select--',
             render_submit: false
         };
     },
@@ -37,15 +39,33 @@ var DataNew = React.createClass({
         }
     },
     changeTitle: function(event){
-        if (event.target.value && checkValidString(event.target.value)) {
-            this.setState({value_title: event.target.value});
+        var sessionTitle = event.target.value;
+
+        if (sessionTitle && checkValidString(sessionTitle)) {
+            this.setState({value_title: sessionTitle});
         }
         else {
             this.setState({value_title: null});
             this.props.onChange({render_submit: false});
         }
     },
-  // update 'state properties' from child component (i.e. 'validStringEntered')
+  // update 'state properties' from child component (i.e. 'value_model_type')
+    changeModelType: function(event) {
+        var modelType = event.value_model_type;
+
+        if (
+            modelType && modelType != '--Select--' &&
+            checkValidString(modelType)
+        ) {
+            this.setState({value_model_type: modelType});
+            this.props.onChange({render_submit: false});
+        }
+        else {
+            this.setState({value_model_type: '--Select--'});
+            this.props.onChange({render_submit: false});
+        }
+    },
+  // update 'state properties' from child component
     displaySubmit: function(event) {
         if (event.submitted_proper_dataset) {
             this.props.onChange({
@@ -60,7 +80,12 @@ var DataNew = React.createClass({
     render: function(){
         var datasetType = this.state.value_dataset_type;
         var datasetTitle = this.state.value_title;
-        var SupplyDataset = this.getSupplyDataset(datasetType, datasetTitle);
+        var modelType = this.state.value_model_type;
+        var Dataset = this.getSupplyDataset(
+            datasetType,
+            datasetTitle,
+            modelType
+        );
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -88,15 +113,23 @@ var DataNew = React.createClass({
                         <option value='dataset_url'>Dataset URL</option>
 
                     </select>
+
+                    <ModelType onChange={this.changeModelType} />
                 </fieldset>
 
-                <SupplyDataset onChange={this.displaySubmit}/>
+                <Dataset onChange={this.displaySubmit} />
             </fieldset>
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function(datasetType, title) {
-        if (typeof title === 'string' && String(title).length > 0) {
+    getSupplyDataset: function(datasetType, title, modelType) {
+
+        if (
+            title && checkValidString(title) && datasetType && 
+            checkValidString(datasetType) && datasetType != '--Select--' &&
+            modelType && checkValidString(modelType) &&
+            modelType != '--Select--'
+        ) {
             return {
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl

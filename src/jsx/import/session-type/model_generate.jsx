@@ -122,7 +122,7 @@ var ModelGenerate = React.createClass({
                 <legend>Generate Model</legend>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
-                    <p>Select past session, and model type</p>
+                    <p>Select past session, model type, and kernel type</p>
                     <select
                         name='session_id'
                         autoComplete='off'
@@ -142,15 +142,15 @@ var ModelGenerate = React.createClass({
                     </select>
 
                     <select
-                        name='sv_model_type'
+                        name='model_type'
                         autoComplete='off'
                         onChange={this.changeModelType}
                         value={this.state.value_model_type}
                     >
 
                         <option value='' defaultValue>--Select--</option>
-                        <option value='classification'>Classification</option>
-                        <option value='regression'>Regression</option>
+                        <option value='svm'>SVM</option>
+                        <option value='svr'>SVR</option>
 
                     </select>
 
