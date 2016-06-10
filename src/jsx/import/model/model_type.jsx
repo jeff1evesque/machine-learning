@@ -16,10 +16,11 @@ var ModelType = React.createClass({
   // update 'state properties': pass property to parent component
     changeModelType: function(event){
         if (checkValidString(event.target.value)) {
-            this.props.onChange({modelType: this.state.value_model_type});
+            this.setState({value_model_type: event.target.value});
+            this.props.onChange({value_model_type: event.target.value});
         }
         else {
-            this.props.onChange({modelType: false});
+            this.setState({value_model_type: '--Select--'});
         }
     },
   // triggered when 'state properties' change
