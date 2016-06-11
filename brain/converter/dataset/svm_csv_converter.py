@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@csv_converter.py
+'''@svm_csv_converter.py
 
 This file restructures only the supplied dataset(s), from a csv file to a
 python dictionary format.
