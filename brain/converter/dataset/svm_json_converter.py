@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@json_converter.py
+'''@svm_json_converter.py
 
 This file restructures only the supplied dataset(s), from a json file to a
 python dictionary format.
