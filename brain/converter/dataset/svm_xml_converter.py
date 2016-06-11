@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@xml_converter.py
+'''@svm_xml_converter.py
 
 This file restructures only the supplied dataset(s), from an xml file to a
 python dictionary format.
