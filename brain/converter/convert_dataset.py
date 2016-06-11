@@ -9,6 +9,9 @@ This file restructures only the supplied dataset(s).
 from brain.converter.dataset.svm_csv_converter import svm_csv_converter
 from brain.converter.dataset.svm_json_converter import svm_json_converter
 from brain.converter.dataset.svm_xml_converter import svm_xml_converter
+from brain.converter.dataset.svr_csv_converter import svr_csv_converter
+from brain.converter.dataset.svr_json_converter import svr_json_converter
+from brain.converter.dataset.svr_xml_converter import svr_xml_converter
 
 
 class Convert_Dataset(object):
