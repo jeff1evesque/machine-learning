@@ -47,7 +47,27 @@ def svm_json_converter(raw_data, is_json):
         validate_olabel.validate_label()
 
         # dependent variable with single observation
-        if type(observations) == list:
+        if type(observations) == dict:
+            for feature_label, feature_value in observations.items():
+                # validation (part 2)
+                validate_flabel = Validate_Dataset(feature_label)
+                validate_flabel.validate_label()
+                validate_fvalue = Validate_Dataset(feature_value)
+                validate_fvalue.validate_value()
+
+                # restructured data
+                list_dataset.append({
+                    'dep_variable_label': observation_label,
+                    'indep_variable_label': feature_label,
+                    'indep_variable_value': feature_value
+                })
+
+            # generalized feature count in an observation
+            if not feature_count:
+                feature_count = len(observations)
+
+        # dependent variable with multiple observations
+        elif type(observations) == list:
             for observation in observations:
                 for feature_label, feature_value in observation.items():
                     # validation (part 2)
@@ -66,26 +86,6 @@ def svm_json_converter(raw_data, is_json):
                 # generalized feature count in an observation
                 if not feature_count:
                     feature_count = len(observation)
-
-        # dependent variable with multiple observations
-        elif type(observations) == dict:
-            for feature_label, feature_value in observations.items():
-                # validation (part 2)
-                validate_flabel = Validate_Dataset(feature_label)
-                validate_flabel.validate_label()
-                validate_fvalue = Validate_Dataset(feature_value)
-                validate_fvalue.validate_value()
-
-                # restructured data
-                list_dataset.append({
-                    'dep_variable_label': observation_label,
-                    'indep_variable_label': feature_label,
-                    'indep_variable_value': feature_value
-                })
-
-            # generalized feature count in an observation
-            if not feature_count:
-                feature_count = len(observations)
 
         # list of observation label
         observation_labels.append(observation_label)
