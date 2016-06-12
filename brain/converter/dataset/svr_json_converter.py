@@ -62,7 +62,7 @@ def svr_json_converter(raw_data, is_json):
 
             # generalized feature count in an observation
             if not feature_count:
-                feature_count = len(observation)
+                feature_count = len(observation['predictors'])
 
         # dependent variable with multiple observations
         elif type(observation['predictors']) == list:
@@ -79,9 +79,9 @@ def svr_json_converter(raw_data, is_json):
                         'indep_variable_value': feature_value
                     })
 
-                # generalized feature count in an observation
-                if not feature_count:
-                    feature_count = len(observation)
+            # generalized feature count in an observation
+            if not feature_count:
+                feature_count = len(observation['predictors'])
 
         # list of observation label
         observation_labels.append(str(observation_label))
@@ -91,7 +91,6 @@ def svr_json_converter(raw_data, is_json):
         fvalue_error = validate_fvalue.get_errors()
         for error in [olabel_error, fvalue_error]:
             if error:
-                print error
                 logger.log(error)
         if error and len(error) > 0:
             return None
