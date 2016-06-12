@@ -6,6 +6,7 @@ This file restructures only the supplied dataset(s).
 
 '''
 
+from flask import current_app
 from brain.converter.dataset.svm_csv_converter import svm_csv_converter
 from brain.converter.dataset.svm_json_converter import svm_json_converter
 from brain.converter.dataset.svm_xml_converter import svm_xml_converter
@@ -33,7 +34,7 @@ class Convert_Dataset(object):
 
     '''
 
-    def __init__(self, raw_data, is_json=False):
+    def __init__(self, raw_data, model_type, is_json=False):
         '''@__init__
 
         This constructor is responsible for defining class variables.
@@ -50,6 +51,8 @@ class Convert_Dataset(object):
         self.is_json = is_json
         self.observation_labels = None
         self.count_features = None
+        self.model_type = model_type
+        self.classication = current_app.config.get('MODEL_TYPE_CLASSICATION')
 
     def csv_to_dict(self):
         '''@csv_to_dict
@@ -62,9 +65,10 @@ class Convert_Dataset(object):
         '''
 
         # svm dataset
-        data = svm_csv_converter(self.raw_data)
-        self.observation_labels = data['observation_labels']
-        self.count_features = data['feature_count']
+        if self.model_type == self.classication:
+            data = svm_csv_converter(self.raw_data)
+            self.observation_labels = data['observation_labels']
+            self.count_features = data['feature_count']
 
         return data['dataset']
 
@@ -79,9 +83,10 @@ class Convert_Dataset(object):
         '''
 
         # svm dataset
-        data = svm_json_converter(self.raw_data, self.is_json)
-        self.observation_labels = data['observation_labels']
-        self.count_features = data['feature_count']
+        if self.model_type == self.classication:
+            data = svm_json_converter(self.raw_data, self.is_json)
+            self.observation_labels = data['observation_labels']
+            self.count_features = data['feature_count']
 
         return data['dataset']
 
@@ -96,9 +101,10 @@ class Convert_Dataset(object):
         '''
 
         # svm dataset
-        data = svm_xml_converter(self.raw_data)
-        self.observation_labels = data['observation_labels']
-        self.count_features = data['feature_count']
+        if self.model_type == self.classication:
+            data = svm_xml_converter(self.raw_data)
+            self.observation_labels = data['observation_labels']
+            self.count_features = data['feature_count']
 
         return data['dataset']
 
