@@ -50,15 +50,13 @@ def svr_json_converter(raw_data, is_json):
         if type(observation['predictors']) == dict:
             for feature_label, feature_value in observation['predictors'].items():
                 # validation (part 2)
-                validate_flabel = Validate_Dataset(feature_label)
-                validate_flabel.validate_label()
                 validate_fvalue = Validate_Dataset(feature_value)
                 validate_fvalue.validate_value()
 
                 # restructured data
                 list_dataset.append({
                     'dep_variable_label': observation_label,
-                    'indep_variable_label': feature_label,
+                    'indep_variable_label': str(feature_label),
                     'indep_variable_value': feature_value
                 })
 
@@ -71,15 +69,13 @@ def svr_json_converter(raw_data, is_json):
             for observation in observation['predictors']:
                 for feature_label, feature_value in observation.items():
                     # validation (part 2)
-                    validate_flabel = Validate_Dataset(feature_label)
-                    validate_flabel.validate_label()
                     validate_fvalue = Validate_Dataset(feature_value)
                     validate_fvalue.validate_value()
 
                     # restructured data
                     list_dataset.append({
                         'dep_variable_label': observation_label,
-                        'indep_variable_label': feature_label,
+                        'indep_variable_label': str(feature_label),
                         'indep_variable_value': feature_value
                     })
 
@@ -92,7 +88,6 @@ def svr_json_converter(raw_data, is_json):
 
         # check for errors
         olabel_error = validate_olabel.get_errors()
-        flabel_error = validate_flabel.get_errors()
         fvalue_error = validate_fvalue.get_errors()
         for error in [olabel_error, flabel_error, fvalue_error]:
             if error:
