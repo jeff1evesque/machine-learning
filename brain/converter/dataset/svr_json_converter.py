@@ -43,7 +43,7 @@ def svr_json_converter(raw_data, is_json):
         observation_label = observation['criterion']
 
         # validation (part 1)
-        validate_olabel = Validate_Dataset(observation_label)
+        validate_olabel = Validate_Dataset(str(observation_label))
         validate_olabel.validate_label()
 
         # dependent variable with single observation
@@ -55,8 +55,8 @@ def svr_json_converter(raw_data, is_json):
 
                 # restructured data
                 list_dataset.append({
-                    'dep_variable_label': observation_label,
-                    'indep_variable_label': str(feature_label),
+                    'dep_variable_label': str(observation_label),
+                    'indep_variable_label': feature_label,
                     'indep_variable_value': feature_value
                 })
 
@@ -74,8 +74,8 @@ def svr_json_converter(raw_data, is_json):
 
                     # restructured data
                     list_dataset.append({
-                        'dep_variable_label': observation_label,
-                        'indep_variable_label': str(feature_label),
+                        'dep_variable_label': str(observation_label),
+                        'indep_variable_label': feature_label,
                         'indep_variable_value': feature_value
                     })
 
@@ -84,16 +84,18 @@ def svr_json_converter(raw_data, is_json):
                     feature_count = len(observation)
 
         # list of observation label
-        observation_labels.append(observation_label)
+        observation_labels.append(str(observation_label))
 
         # check for errors
         olabel_error = validate_olabel.get_errors()
         fvalue_error = validate_fvalue.get_errors()
-        for error in [olabel_error, flabel_error, fvalue_error]:
+        for error in [olabel_error, fvalue_error]:
             if error:
+                print error
                 logger.log(error)
         if error and len(error) > 0:
             return None
+
 
     # close file
     if not is_json:
