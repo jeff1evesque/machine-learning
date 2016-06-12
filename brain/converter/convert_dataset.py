@@ -53,6 +53,7 @@ class Convert_Dataset(object):
         self.count_features = None
         self.model_type = model_type
         self.classication = current_app.config.get('MODEL_TYPE_CLASSICATION')
+        self.regression = current_app.config.get('MODEL_TYPE_REGRESSION')
 
     def csv_to_dict(self):
         '''@csv_to_dict
@@ -64,12 +65,19 @@ class Convert_Dataset(object):
 
         '''
 
-        # svm dataset
+        # convert classificationd dataset
         if self.model_type == self.classication:
             data = svm_csv_converter(self.raw_data)
-            self.observation_labels = data['observation_labels']
-            self.count_features = data['feature_count']
 
+        # convert regression dataset
+        elif self.model_type == self.regression:
+            data = svr_csv_converter(self.raw_data)
+
+        # record observation labels, and feature count
+        self.observation_labels = data['observation_labels']
+        self.count_features = data['feature_count']
+
+        # return data
         return data['dataset']
 
     def json_to_dict(self):
@@ -82,12 +90,19 @@ class Convert_Dataset(object):
 
         '''
 
-        # svm dataset
+        # convert classification dataset
         if self.model_type == self.classication:
             data = svm_json_converter(self.raw_data, self.is_json)
-            self.observation_labels = data['observation_labels']
-            self.count_features = data['feature_count']
 
+        # convert regression dataset
+        elif self.model_type == self.regression:
+            data = svr_json_converter(self.raw_data, self.is_json)
+
+        # record observataion labels, and feature count
+        self.observation_labels = data['observation_labels']
+        self.count_features = data['feature_count']
+
+        # return data
         return data['dataset']
 
     def xml_to_dict(self):
@@ -100,12 +115,19 @@ class Convert_Dataset(object):
 
         '''
 
-        # svm dataset
+        # convert classification dataset
         if self.model_type == self.classication:
             data = svm_xml_converter(self.raw_data)
-            self.observation_labels = data['observation_labels']
-            self.count_features = data['feature_count']
 
+        # convert regression dataset
+        elif self.model_type == self.regression:
+            data = svr_xml_converter(self.raw_data)
+
+        # record observation labels, and feature count
+        self.observation_labels = data['observation_labels']
+        self.count_features = data['feature_count']
+
+        # return data
         return data['dataset']
 
     def get_observation_labels(self):
