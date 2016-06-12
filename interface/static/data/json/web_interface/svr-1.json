@@ -14,15 +14,26 @@
         },
         {
             "criterion": 41.004,
-            "predictors": {
-                "predictor-1": 22.1,
-                "predictor-2": 95.96,
-                "predictor-4": 342,
-                "predictor-5": 66.67,
-                "predictor-6": 0.001,
-                "predictor-7": 32,
-                "predictor-3": 0.743
-            }
+            "predictors": [
+                {
+                    "predictor-1": 22.1,
+                    "predictor-2": 95.96,
+                    "predictor-4": 342,
+                    "predictor-5": 66.67,
+                    "predictor-6": 0.001,
+                    "predictor-7": 32,
+                    "predictor-3": 0.743
+                },
+				{
+                    "predictor-1": 17.342,
+                    "predictor-2": 88.882,
+                    "predictor-4": 268.348,
+                    "predictor-5": 77.777,
+                    "predictor-6": 0.011,
+                    "predictor-7": 28,
+                    "predictor-3": 0.777
+                }
+            ]
         },
         {
             "criterion": 35.555,
