@@ -167,8 +167,11 @@ class Base_Data(object):
 
         '''
 
+        # local variables
+        model_type = self.premodel_data['data']['settings']['model_type']
+
         # convert to dictionary
-        response = dataset_dictionary(id_entity, self.upload)
+        response = dataset_dictionary(id_entity, model_type, self.upload)
 
         # return result
         if response['error']:
