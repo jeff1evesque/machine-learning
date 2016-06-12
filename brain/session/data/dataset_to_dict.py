@@ -63,7 +63,7 @@ def dataset_dictionary(id_entity, model_type, upload):
                 elif val['type'] == 'json':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'])
+                        converter = Convert_Dataset(val['file'], model_type)
                         converted = converter.json_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
@@ -85,7 +85,7 @@ def dataset_dictionary(id_entity, model_type, upload):
                 elif val['type'] == 'xml':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'])
+                        converter = Convert_Dataset(val['file'], model_type)
                         converted = converter.xml_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
