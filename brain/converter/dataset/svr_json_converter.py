@@ -37,3 +37,31 @@ def svr_json_converter(raw_data, is_json):
         dataset = raw_data
     else:
         dataset = json.load(raw_data)
+
+    for observation in dataset['dataset']:
+        # variables
+        observation_label = observation['criterion']
+
+        # validation (part 1)
+        validate_olabel = Validate_Dataset(observation_label)
+        validate_olabel.validate_label()
+
+        # dependent variable with single observation
+        if type(observation['predictors']) == 'dict':
+            for feature_label, feature_value in observation['predictors'].items():
+                # validation (part 2)
+                validate_flabel = Validate_Dataset(feature_label)
+                validate_flabel.validate_label()
+                validate_fvalue = Validate_Dataset(feature_value)
+                validate_fvalue.validate_value()
+
+                # restructured data
+                list_dataset.append({
+                    'dep_variable_label': observation_label,
+                    'indep_variable_label': feature_label,
+                    'indep_variable_value': feature_value
+                })
+
+            # generalized feature count in an observation
+            if not feature_count:
+                feature_count = len(observation)
