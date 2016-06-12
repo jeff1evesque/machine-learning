@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.converter.convert_dataset import Convert_Dataset
 
 
-def dataset_dictionary(id_entity, upload):
+def dataset_dictionary(id_entity, model_type, upload):
     '''@dataset_dictionary
 
     This method converts the supplied csv, or xml file upload(s) to a uniform
@@ -41,7 +41,7 @@ def dataset_dictionary(id_entity, upload):
                 if val['type'] == 'csv':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'])
+                        converter = Convert_Dataset(val['file'], model_type)
                         converted = converter.csv_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
