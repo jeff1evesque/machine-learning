@@ -40,27 +40,21 @@ def svr_xml_converter(raw_data):
             if key == 'criterion':
                 list_observation_label.append(observation[key])
             elif key == 'predictor':
-                for label, predictor in observation['key']:
-                    feature_label = label
-                    feature_value = value
+                for predictor in observation[key]:
+                    predictor_label = str(predictor['label'])
+                    predictor_value = predictor['value']
 
-                    validate_label = Validate_Dataset(feature_label)
-                    validate_value = Validate_Dataset(feature_value)
-
-                    validate_label.validate_label()
+                    validate_value = Validate_Dataset(predictor_value)
                     validate_value.validate_value()
-
-                    list_error_label = validate.get_errors()
-                    list_error_value = validate.get_errors()
-                    if list_error_label or list_error_value:
-                        logger.log(list_error_label)
+                    list_error_value = validate_value.get_errors()
+                    if list_error_value:
                         logger.log(list_error_value)
                         return None
                     else:
                         list_dataset.append({
-                            'dep_variable_label': observation_label,
-                            'indep_variable_label': feature_label,
-                            'indep_variable_value': feature_value
+                            'dep_variable_label': observation[key],
+                            'indep_variable_label': predictor_label,
+                            'indep_variable_value': predictor_value
                         })
 
         # generalized feature count in an observation
