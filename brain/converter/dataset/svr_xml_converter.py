@@ -52,7 +52,7 @@ def svr_xml_converter(raw_data):
                         return None
                     else:
                         list_dataset.append({
-                            'dep_variable_label': observation[key],
+                            'dep_variable_label': str(observation[key]),
                             'indep_variable_label': predictor_label,
                             'indep_variable_value': predictor_value
                         })
