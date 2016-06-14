@@ -48,16 +48,16 @@ def svr_json_converter(raw_data, is_json):
 
         # dependent variable with single observation
         if type(observation['predictors']) == dict:
-            for feature_label, feature_value in observation['predictors'].items():
+            for flabel, fvalue in observation['predictors'].items():
                 # validation (part 2)
-                validate_fvalue = Validate_Dataset(feature_value)
+                validate_fvalue = Validate_Dataset(fvalue)
                 validate_fvalue.validate_value()
 
                 # restructured data
                 list_dataset.append({
                     'dep_variable_label': str(observation_label),
-                    'indep_variable_label': feature_label,
-                    'indep_variable_value': feature_value
+                    'indep_variable_label': flabel,
+                    'indep_variable_value': fvalue
                 })
 
             # generalized feature count in an observation
@@ -67,16 +67,16 @@ def svr_json_converter(raw_data, is_json):
         # dependent variable with multiple observations
         elif type(observation['predictors']) == list:
             for observation in observation['predictors']:
-                for feature_label, feature_value in observation.items():
+                for flabel, fvalue in observation.items():
                     # validation (part 2)
-                    validate_fvalue = Validate_Dataset(feature_value)
+                    validate_fvalue = Validate_Dataset(fvalue)
                     validate_fvalue.validate_value()
 
                     # restructured data
                     list_dataset.append({
                         'dep_variable_label': str(observation_label),
-                        'indep_variable_label': feature_label,
-                        'indep_variable_value': feature_value
+                        'indep_variable_label': flabel,
+                        'indep_variable_value': fvalue
                     })
 
             # generalized feature count in an observation
@@ -94,7 +94,6 @@ def svr_json_converter(raw_data, is_json):
                 logger.log(error)
         if error and len(error) > 0:
             return None
-
 
     # close file
     if not is_json:
