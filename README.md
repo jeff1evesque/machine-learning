@@ -341,8 +341,15 @@ The following (non-exhaustive) properties define the above implemented `data`
   - `data_append`
   - `model_generate`
   - `model_predict`
-- `svm_dataset_type` corresponds to one of the following dataset types:
+- `svm_dataset_type`: corresponds to one of the following dataset types:
   - `json_string`: indicate that the dataset is being sent via a `post` request
+- `sv_kernel_type`: the type of kernel to apply to the support vector
+ `model_type`:
+  - `linear`
+  - `polynomial`
+  - `rbf`
+  - `sigmoid`
+  - `precomputed`
 
 ### Test Scripts
 
