@@ -17,7 +17,7 @@
                     <xs:element name='value' type='xs:decimal'/>
                 </xs:sequence>
 
-              </xs:sequence>
+              </xs:element>
             </xs:sequence>
 
            </xs:complexType>
