@@ -12,10 +12,12 @@
               <xs:element name='criterion' type='xs:string'/>
               <xs:element name='predictor' maxOccurs='unbounded'>
 
-                <xs:sequence>
+                <xs:complexType>
+                  <xs:sequence>
                     <xs:element name='label' type='xs:string'/>
                     <xs:element name='value' type='xs:decimal'/>
-                </xs:sequence>
+                  </xs:sequence>
+                </xs:complexType>
 
               </xs:element>
             </xs:sequence>
