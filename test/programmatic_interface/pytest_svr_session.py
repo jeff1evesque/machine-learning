@@ -69,7 +69,7 @@ def check_data_new():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-data-new.json', 'svm')
+        data=get_sample_json('svr-data-new.json', 'svr')
     )
 
 
@@ -83,7 +83,7 @@ def check_data_append():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-data-append.json', 'svm')
+        data=get_sample_json('svr-data-append.json', 'svr')
     )
 
 
@@ -97,7 +97,7 @@ def check_model_generate():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-model-generate.json', 'svm')
+        data=get_sample_json('svr-model-generate.json', 'svr')
     )
 
 
@@ -111,7 +111,7 @@ def check_model_predict():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-model-predict.json', 'svm')
+        data=get_sample_json('svr-model-predict.json', 'svr')
     )
 
 
@@ -139,7 +139,7 @@ def check_data_append():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svr-data-append.json', 'svm')
+        data=get_sample_json('svr-data-append.json', 'svr')
     )
 
 
