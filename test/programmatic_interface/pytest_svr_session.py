@@ -1,6 +1,6 @@
 """@pytest_svr_session
 
-This module will test the following sessions:
+This module will test the following svr sessions:
 
   - data_new: stores supplied dataset into a SQL database.
   - data_append: appends supplied dataset to an already stored dataset in an
