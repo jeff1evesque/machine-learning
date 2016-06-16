@@ -52,8 +52,8 @@ class Convert_Dataset(object):
         self.observation_labels = None
         self.count_features = None
         self.model_type = model_type
-        self.classication = current_app.config.get('MODEL_TYPE_CLASSICATION')
-        self.regression = current_app.config.get('MODEL_TYPE_REGRESSION')
+        self.classification = current_app.config.get('MODEL_TYPE')[0]
+        self.regression = current_app.config.get('MODEL_TYPE')[1]
 
     def csv_to_dict(self):
         '''@csv_to_dict
@@ -91,7 +91,7 @@ class Convert_Dataset(object):
         '''
 
         # convert classification dataset
-        if self.model_type == self.classication:
+        if self.model_type == self.classification:
             data = svm_json_converter(self.raw_data, self.is_json)
 
         # convert regression dataset
