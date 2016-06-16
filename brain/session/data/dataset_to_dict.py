@@ -110,7 +110,7 @@ def dataset_dictionary(id_entity, model_type, upload):
         elif upload['dataset']['json_string']:
             # conversion
             dataset_json = upload['dataset']['json_string']
-            converter = Convert_Dataset(dataset_json, True)
+            converter = Convert_Dataset(dataset_json, model_type, True)
             converted = converter.json_to_dict()
             count_features = converter.get_feature_count()
 
