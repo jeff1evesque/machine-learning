@@ -33,67 +33,55 @@ def svr_json_converter(raw_data, is_json):
     observation_labels = []
     logger = Logger(__name__, 'error', 'error')
 
+    # variables
     if is_json:
         dataset = raw_data
     else:
         dataset = json.load(raw_data)
+    observation_label = str(dataset['criterion'])
 
-    for observation in dataset['dataset']:
-        # variables
-        observation_label = observation['criterion']
+    # criterion with single observation
+    if type(dataset['predictors']) == dict:
+        for label, predictor in dataset['predictors'].items():
+            # validation (part 1)
+            validate_predictor = Validate_Dataset(str(predictor))
+            validate_predictor.validate_value()
 
-        # validation (part 1)
-        validate_olabel = Validate_Dataset(str(observation_label))
-        validate_olabel.validate_label()
-
-        # dependent variable with single observation
-        if type(observation['predictors']) == dict:
-            for flabel, fvalue in observation['predictors'].items():
-                # validation (part 2)
-                validate_fvalue = Validate_Dataset(fvalue)
-                validate_fvalue.validate_value()
-
+            if validate_predictor.get_errors():
+                logger.log(validate_predictor.get_errors())
+            else:
                 # restructured data
                 list_dataset.append({
                     'dep_variable_label': str(observation_label),
-                    'indep_variable_label': flabel,
-                    'indep_variable_value': fvalue
+                    'indep_variable_label': str(label),
+                    'indep_variable_value': predictor
                 })
 
-            # generalized feature count in an observation
-            if not feature_count:
-                feature_count = len(observation['predictors'])
+        # generalized feature count in an observation
+        if not feature_count:
+            feature_count = len(dataset['predictors'].items())
 
-        # dependent variable with multiple observations
-        elif type(observation['predictors']) == list:
-            for observation in observation['predictors']:
-                for flabel, fvalue in observation.items():
-                    # validation (part 2)
-                    validate_fvalue = Validate_Dataset(fvalue)
-                    validate_fvalue.validate_value()
+    # criterion with multiple observation
+    if type(dataset['predictors']) == list:
+        for criterion in dataset['predictors']:
+            for label, predictor in criterion.items():
+                # validation (part 1)
+                validate_predictor = Validate_Dataset(str(predictor))
+                validate_predictor.validate_value()
 
+                if validate_predictor.get_errors():
+                    logger.log(validate_predictor.get_errors())
+                else:
                     # restructured data
                     list_dataset.append({
                         'dep_variable_label': str(observation_label),
-                        'indep_variable_label': flabel,
-                        'indep_variable_value': fvalue
+                        'indep_variable_label': str(label),
+                        'indep_variable_value': predictor
                     })
 
             # generalized feature count in an observation
             if not feature_count:
-                feature_count = len(observation['predictors'])
-
-        # list of observation label
-        observation_labels.append(str(observation_label))
-
-        # check for errors
-        olabel_error = validate_olabel.get_errors()
-        fvalue_error = validate_fvalue.get_errors()
-        for error in [olabel_error, fvalue_error]:
-            if error:
-                logger.log(error)
-        if error and len(error) > 0:
-            return None
+                feature_count = len(dataset['predictors'].items())
 
     # close file
     if not is_json:
