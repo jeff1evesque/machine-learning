@@ -1,6 +1,6 @@
-"""@pytest_session
+"""@pytest_svm_session
 
-This module will test the following sessions:
+This module will test the following svm sessions:
 
   - data_new: stores supplied dataset into a SQL database.
   - data_append: appends supplied dataset to an already stored dataset in an
@@ -34,7 +34,7 @@ endpoint_url = 'http://localhost:5000/load-data/'
 headers = {'Content-Type': 'application/json'}
 
 
-def get_sample_json(jsonfile):
+def get_sample_json(jsonfile, model_type):
     """@get_sample_json
 
     Get a sample json dataset.
@@ -50,7 +50,7 @@ def get_sample_json(jsonfile):
             'data',
             'json',
             'programmatic_interface',
-            'svm',
+            model_type,
             jsonfile
         ),
         'r'
@@ -69,7 +69,7 @@ def check_data_new():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-data-new.json')
+        data=get_sample_json('svm-data-new.json', 'svm')
     )
 
 
@@ -83,7 +83,7 @@ def check_data_append():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-data-append.json')
+        data=get_sample_json('svm-data-append.json', 'svm')
     )
 
 
@@ -97,7 +97,7 @@ def check_model_generate():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-model-generate.json')
+        data=get_sample_json('svm-model-generate.json', 'svm')
     )
 
 
@@ -111,5 +111,5 @@ def check_model_predict():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-model-predict.json')
+        data=get_sample_json('svm-model-predict.json', 'svm')
     )
