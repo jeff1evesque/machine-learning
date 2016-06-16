@@ -2,7 +2,8 @@
     "properties": {
         "session_name": "sample_title",
         "dataset_type": "json_string",
-        "session_type": "data_new"
+        "session_type": "data_new",
+        "model_type": "classification"
     },
     "dataset": {
         "dep-variable-1": [
