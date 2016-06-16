@@ -108,20 +108,20 @@ def dataset_dictionary(id_entity, model_type, upload):
 
         # programmatic-interface
         elif upload['dataset']['json_string']:
-            # conversion
-            dataset_json = upload['dataset']['json_string']
-            converter = Convert_Dataset(dataset_json, model_type, True)
-            converted = converter.json_to_dict()
-            count_features = converter.get_feature_count()
+            for dataset_json in upload['dataset']['json_string']:
+                # conversion
+                converter = Convert_Dataset(dataset_json, model_type, True)
+                converted = converter.json_to_dict()
+                count_features = converter.get_feature_count()
 
-            observation_labels.append(dataset_json.keys())
+                observation_labels.append(dataset_json.keys())
 
-            # build dataset
-            dataset.append({
-                'id_entity': id_entity,
-                'premodel_dataset': converted,
-                'count_features': count_features
-            })
+                # build new (relevant) dataset
+                dataset.append({
+                    'id_entity': id_entity,
+                    'premodel_dataset': converted,
+                    'count_features': count_features
+                })
 
     except Exception as error:
         list_error.append(error)
