@@ -43,6 +43,7 @@ class Base_Data(object):
         self.list_error = []
         self.uid = 1
         self.dataset = []
+        self.model_type = premodel_data['data']['settings']['model_type']
 
     def save_feature_count(self):
         '''@save_feature_count
@@ -124,7 +125,7 @@ class Base_Data(object):
         '''
 
         # save dataset
-        response = dataset(self.dataset)
+        response = dataset(self.dataset, self.model_type)
 
         # return result
         if response['error']:
@@ -167,11 +168,8 @@ class Base_Data(object):
 
         '''
 
-        # local variables
-        model_type = self.premodel_data['data']['settings']['model_type']
-
         # convert to dictionary
-        response = dataset_dictionary(id_entity, model_type, self.upload)
+        response = dataset_dictionary(id_entity, self.model_type, self.upload)
 
         # return result
         if response['error']:
