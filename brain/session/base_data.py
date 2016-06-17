@@ -151,7 +151,8 @@ class Base_Data(object):
         response = observation_label(
             session_type,
             session_id,
-            self.observation_labels[0]
+            self.observation_labels[0],
+            self.premodel_data['data']['dataset']['file_upload']
         )
 
         # return result
