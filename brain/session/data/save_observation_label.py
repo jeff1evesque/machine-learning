@@ -18,7 +18,7 @@ def observation_label(session_type, session_id, labels, file_upload):
     # variables
     list_error = []
 
-    # save labels
+    # web-interface: save labels
     if file_upload:
         if len(labels) > 0:
             for label_list in labels:
@@ -36,6 +36,7 @@ def observation_label(session_type, session_id, labels, file_upload):
                     if not db_return['status']:
                         list_error.append(db_return['error'])
 
+    # programmatic api: save labels
     else:
         if len(labels) > 0:
             for label in labels:
