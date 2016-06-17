@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.database.save_feature import Save_Feature
 
 
-def dataset(dataset):
+def dataset(dataset, model_type):
     '''@dataset
 
     This method saves each dataset element (independent variable value) into
@@ -24,14 +24,14 @@ def dataset(dataset):
 
     # save dataset
     for data in dataset:
-        for dataset in data['premodel_dataset']:
+        for select_data in data['premodel_dataset']:
             db_save = Save_Feature({
-                'premodel_dataset': dataset,
-                'id_entity': data['id_entity']
+                'premodel_dataset': select_data,
+                'id_entity': data['id_entity'],
             })
 
             # save dataset element, append error(s)
-            db_return = db_save.save_feature()
+            db_return = db_save.save_feature(model_type)
             if db_return['error']:
                 list_error.append(db_return['error'])
 
