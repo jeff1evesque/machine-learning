@@ -25,10 +25,15 @@ def dataset_dictionary(id_entity, model_type, upload):
 
     '''
 
+    # local variables
     flag_append = True
     dataset = []
     observation_labels = []
     list_error = []
+    if upload['dataset']['json_string']:
+        is_json = True
+    else:
+        is_json = False
 
     try:
         # web-interface: define flag to convert to dataset to json
@@ -41,7 +46,11 @@ def dataset_dictionary(id_entity, model_type, upload):
                 if val['type'] == 'csv':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'], model_type)
+                        converter = Convert_Dataset(
+                            val['file'],
+                            model_type,
+                            is_json
+                        )
                         converted = converter.csv_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
@@ -63,7 +72,11 @@ def dataset_dictionary(id_entity, model_type, upload):
                 elif val['type'] == 'json':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'], model_type)
+                        converter = Convert_Dataset(
+                            val['file'],
+                            model_type,
+                            is_json
+                        )
                         converted = converter.json_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
@@ -85,7 +98,11 @@ def dataset_dictionary(id_entity, model_type, upload):
                 elif val['type'] == 'xml':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'], model_type)
+                        converter = Convert_Dataset(
+                            val['file'],
+                            model_type,
+                            is_json
+                        )
                         converted = converter.xml_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
