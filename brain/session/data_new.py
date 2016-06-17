@@ -48,3 +48,4 @@ class Data_New(Base, Base_Data):
         self.list_error = []
         self.uid = 1
         self.dataset = []
+        self.model_type = premodel_data['data']['settings']['model_type']
