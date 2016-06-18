@@ -14,7 +14,6 @@ def observation_label(session_type, session_id, labels, file_upload):
 
     '''
 
-
     # variables
     list_error = []
 
