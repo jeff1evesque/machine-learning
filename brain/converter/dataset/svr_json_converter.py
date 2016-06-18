@@ -44,6 +44,9 @@ def svr_json_converter(raw_data, is_json):
         for observation in dataset['dataset']:
             observation_label = str(observation['criterion'])
 
+            # list of observation label
+            observation_labels.append(observation_label)
+
             # criterion with single observation
             if type(observation['predictors']) == dict:
                 for label, predictor in observation['predictors'].items():
@@ -90,6 +93,9 @@ def svr_json_converter(raw_data, is_json):
     # programmatic-interface
     else:
         observation_label = str(dataset['criterion'])
+
+        # list of observation label
+        observation_labels.append(observation_label)
 
         # criterion with single observation
         if type(dataset['predictors']) == dict:
