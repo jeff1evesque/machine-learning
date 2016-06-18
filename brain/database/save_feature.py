@@ -86,8 +86,8 @@ class Save_Feature(object):
         self.sql.sql_connect(self.db_ml)
         if model_type == self.classification:
             sql_statement = 'INSERT INTO tbl_feature_value (id_entity, '\
-                'dep_variable_label, indep_variable_label, indep_variable_value) '\
-                'VALUES(%s, %s, %s, %s)'
+                'dep_variable_label, indep_variable_label, '\
+                'indep_variable_value) VALUES(%s, %s, %s, %s)'
         elif model_type == self.regression:
             sql_statement = 'INSERT INTO tbl_feature_value (id_entity, '\
                 'criterion, indep_variable_label, indep_variable_value) '\
