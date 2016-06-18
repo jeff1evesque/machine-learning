@@ -46,7 +46,7 @@ def svr_json_converter(raw_data, is_json):
 
             # criterion with single observation
             if type(observation['predictors']) == dict:
-                for label, predictor in observation['predictors']:
+                for label, predictor in observation['predictors'].items():
                     # validation (part 1)
                     validate_predictor = Validate_Dataset(str(predictor))
                     validate_predictor.validate_value()
