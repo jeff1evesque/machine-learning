@@ -28,48 +28,27 @@ def svm_json_converter(raw_data, is_json):
 
     '''
 
+    # local variables
     feature_count = None
     list_dataset = []
     observation_labels = []
     logger = Logger(__name__, 'error', 'error')
 
-    if is_json:
-        dataset = raw_data
-    else:
+    # web-interface
+    if not is_json:
         dataset = json.load(raw_data)
 
-    for observation_label in dataset:
-        # variables
-        observations = dataset[observation_label]
+        for observation_label in dataset:
+            # variables
+            observations = dataset[observation_label]
 
-        # validation (part 1)
-        validate_olabel = Validate_Dataset(observation_label)
-        validate_olabel.validate_label()
+            # validation (part 1)
+            validate_olabel = Validate_Dataset(observation_label)
+            validate_olabel.validate_label()
 
-        # dependent variable with single observation
-        if type(observations) == dict:
-            for feature_label, feature_value in observations.items():
-                # validation (part 2)
-                validate_flabel = Validate_Dataset(feature_label)
-                validate_flabel.validate_label()
-                validate_fvalue = Validate_Dataset(feature_value)
-                validate_fvalue.validate_value()
-
-                # restructured data
-                list_dataset.append({
-                    'dep_variable_label': observation_label,
-                    'indep_variable_label': feature_label,
-                    'indep_variable_value': feature_value
-                })
-
-            # generalized feature count in an observation
-            if not feature_count:
-                feature_count = len(observations)
-
-        # dependent variable with multiple observations
-        elif type(observations) == list:
-            for observation in observations:
-                for feature_label, feature_value in observation.items():
+            # dependent variable with single observation
+            if type(observations) == dict:
+                for feature_label, feature_value in observations.items():
                     # validation (part 2)
                     validate_flabel = Validate_Dataset(feature_label)
                     validate_flabel.validate_label()
@@ -85,20 +64,45 @@ def svm_json_converter(raw_data, is_json):
 
                 # generalized feature count in an observation
                 if not feature_count:
-                    feature_count = len(observation)
+                    feature_count = len(observations)
 
-        # list of observation label
-        observation_labels.append(observation_label)
+            # dependent variable with multiple observations
+            elif type(observations) == list:
+                for observation in observations:
+                    for feature_label, feature_value in observation.items():
+                        # validation (part 2)
+                        validate_flabel = Validate_Dataset(feature_label)
+                        validate_flabel.validate_label()
+                        validate_fvalue = Validate_Dataset(feature_value)
+                        validate_fvalue.validate_value()
 
-        # check for errors
-        olabel_error = validate_olabel.get_errors()
-        flabel_error = validate_flabel.get_errors()
-        fvalue_error = validate_fvalue.get_errors()
-        for error in [olabel_error, flabel_error, fvalue_error]:
-            if error:
-                logger.log(error)
-        if error and len(error) > 0:
-            return None
+                        # restructured data
+                        list_dataset.append({
+                            'dep_variable_label': observation_label,
+                            'indep_variable_label': feature_label,
+                            'indep_variable_value': feature_value
+                        })
+
+                    # generalized feature count in an observation
+                    if not feature_count:
+                        feature_count = len(observation)
+
+            # list of observation label
+            observation_labels.append(observation_label)
+
+    # programmatic-interface
+    else:
+        dataset = raw_data
+
+    # check for errors
+    olabel_error = validate_olabel.get_errors()
+    flabel_error = validate_flabel.get_errors()
+    fvalue_error = validate_fvalue.get_errors()
+    for error in [olabel_error, flabel_error, fvalue_error]:
+        if error:
+            logger.log(error)
+    if error and len(error) > 0:
+        return None
 
     # close file
     if not is_json:
