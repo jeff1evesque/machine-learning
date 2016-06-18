@@ -8,6 +8,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+from flask import current_app
 from brain.converter.convert_dataset import Convert_Dataset
 
 
@@ -30,6 +31,7 @@ def dataset_dictionary(id_entity, model_type, upload):
     dataset = []
     observation_labels = []
     list_error = []
+
     if upload['dataset']['json_string']:
         is_json = True
     else:
@@ -125,20 +127,39 @@ def dataset_dictionary(id_entity, model_type, upload):
 
         # programmatic-interface
         elif upload['dataset']['json_string']:
-            for dataset_json in upload['dataset']['json_string']:
-                # conversion
-                converter = Convert_Dataset(dataset_json, model_type, True)
-                converted = converter.json_to_dict()
-                count_features = converter.get_feature_count()
+            # classification
+            if upload['settings']['model_type'] == 'classification':
+                for dataset_json in upload['dataset']['json_string'].items():
+                    # conversion
+                    converter = Convert_Dataset(dataset_json, model_type, True)
+                    converted = converter.json_to_dict()
+                    count_features = converter.get_feature_count()
 
-                observation_labels.append(str(dataset_json['criterion']))
+                    observation_labels.append(str(dataset_json['criterion']))
 
-                # build new (relevant) dataset
-                dataset.append({
-                    'id_entity': id_entity,
-                    'premodel_dataset': converted,
-                    'count_features': count_features
-                })
+                    # build new (relevant) dataset
+                    dataset.append({
+                        'id_entity': id_entity,
+                        'premodel_dataset': converted,
+                        'count_features': count_features
+                    })
+
+            # regression
+            elif upload['settings']['model_type'] == 'regression':
+                for dataset_json in upload['dataset']['json_string']:
+                    # conversion
+                    converter = Convert_Dataset(dataset_json, model_type, True)
+                    converted = converter.json_to_dict()
+                    count_features = converter.get_feature_count()
+
+                    observation_labels.append(str(dataset_json['criterion']))
+
+                    # build new (relevant) dataset
+                    dataset.append({
+                        'id_entity': id_entity,
+                        'premodel_dataset': converted,
+                        'count_features': count_features
+                    })
 
     except Exception as error:
         list_error.append(error)
