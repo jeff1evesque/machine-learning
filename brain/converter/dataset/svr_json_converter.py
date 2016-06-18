@@ -66,7 +66,7 @@ def svr_json_converter(raw_data, is_json):
                     feature_count = len(observation['predictors'].items())
 
             # criterion with multiple observation
-            if type(observation['predictors']) == dict:
+            if type(observation['predictors']) == list:
                 for criterion in observation['predictors']:
                     for label, predictor in criterion.items():
                         # validation (part 1)
