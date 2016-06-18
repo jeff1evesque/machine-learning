@@ -63,7 +63,7 @@ def svr_json_converter(raw_data, is_json):
 
                 # generalized feature count in an observation
                 if not feature_count:
-                    feature_count = len(dataset['predictors'].items())
+                    feature_count = len(observation['predictors'].items())
 
             # criterion with multiple observation
             if type(observation['predictors']) == dict:
@@ -85,7 +85,7 @@ def svr_json_converter(raw_data, is_json):
 
                     # generalized feature count in an observation
                     if not feature_count:
-                        feature_count = len(dataset['predictors'].items())
+                        feature_count = len(observation['predictors'].items())
 
     # programmatic-interface
     else:
