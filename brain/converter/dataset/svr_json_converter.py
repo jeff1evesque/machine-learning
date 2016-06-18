@@ -89,7 +89,7 @@ def svr_json_converter(raw_data, is_json):
 
     # programmatic-interface
     else:
-    observation_label = str(dataset['criterion'])
+        observation_label = str(dataset['criterion'])
 
         # criterion with single observation
         if type(dataset['predictors']) == dict:
