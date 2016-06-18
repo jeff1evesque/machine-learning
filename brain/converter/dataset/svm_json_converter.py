@@ -58,7 +58,7 @@ def svm_json_converter(raw_data, is_json):
                     else:
                         # restructured data
                         list_dataset.append({
-                            'dep_variable_label': str(observation_label,
+                            'dep_variable_label': observation_label,
                             'indep_variable_label': str(feature_label),
                             'indep_variable_value': feature_value
                         })
@@ -81,7 +81,7 @@ def svm_json_converter(raw_data, is_json):
                             # restructured data
                             list_dataset.append({
                                 'dep_variable_label': observation_label,
-                                'indep_variable_label': feature_label,
+                                'indep_variable_label': str(feature_label),
                                 'indep_variable_value': feature_value
                             })
 
