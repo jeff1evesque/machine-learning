@@ -34,13 +34,10 @@ def svr_json_converter(raw_data, is_json):
     observation_labels = []
     logger = Logger(__name__, 'error', 'error')
 
-    if is_json:
-        dataset = raw_data
-    else:
-        dataset = json.load(raw_data)
-
     # web-interface
     if not is_json:
+        dataset = json.load(raw_data)
+
         for observation in dataset['dataset']:
             observation_label = str(observation['criterion'])
 
@@ -92,6 +89,7 @@ def svr_json_converter(raw_data, is_json):
 
     # programmatic-interface
     else:
+        dataset = raw_data
         observation_label = str(dataset['criterion'])
 
         # list of observation label
