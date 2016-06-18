@@ -50,17 +50,18 @@ def svm_json_converter(raw_data, is_json):
             if type(observations) == dict:
                 for feature_label, feature_value in observations.items():
                     # validation (part 2)
-                    validate_flabel = Validate_Dataset(feature_label)
-                    validate_flabel.validate_label()
                     validate_fvalue = Validate_Dataset(feature_value)
                     validate_fvalue.validate_value()
 
-                    # restructured data
-                    list_dataset.append({
-                        'dep_variable_label': observation_label,
-                        'indep_variable_label': feature_label,
-                        'indep_variable_value': feature_value
-                    })
+                    if validate_flabel.get_errors():
+                        logger.log(validate_flabel.get_errors())
+                    else:
+                        # restructured data
+                        list_dataset.append({
+                            'dep_variable_label': str(observation_label,
+                            'indep_variable_label': str(feature_label),
+                            'indep_variable_value': feature_value
+                        })
 
                 # generalized feature count in an observation
                 if not feature_count:
@@ -71,17 +72,18 @@ def svm_json_converter(raw_data, is_json):
                 for observation in observations:
                     for feature_label, feature_value in observation.items():
                         # validation (part 2)
-                        validate_flabel = Validate_Dataset(feature_label)
-                        validate_flabel.validate_label()
                         validate_fvalue = Validate_Dataset(feature_value)
                         validate_fvalue.validate_value()
 
-                        # restructured data
-                        list_dataset.append({
-                            'dep_variable_label': observation_label,
-                            'indep_variable_label': feature_label,
-                            'indep_variable_value': feature_value
-                        })
+                        if validate_flabel.get_errors():
+                            logger.log(validate_flabel.get_errors())
+                        else:
+                            # restructured data
+                            list_dataset.append({
+                                'dep_variable_label': observation_label,
+                                'indep_variable_label': feature_label,
+                                'indep_variable_value': feature_value
+                            })
 
                     # generalized feature count in an observation
                     if not feature_count:
@@ -93,16 +95,6 @@ def svm_json_converter(raw_data, is_json):
     # programmatic-interface
     else:
         dataset = raw_data
-
-    # check for errors
-    olabel_error = validate_olabel.get_errors()
-    flabel_error = validate_flabel.get_errors()
-    fvalue_error = validate_fvalue.get_errors()
-    for error in [olabel_error, flabel_error, fvalue_error]:
-        if error:
-            logger.log(error)
-    if error and len(error) > 0:
-        return None
 
     # close file
     if not is_json:
