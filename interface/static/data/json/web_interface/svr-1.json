@@ -1,5 +1,5 @@
 {
-    24.535: {
+    "24.535": {
         "predictor-1": 23.45,
         "predictor-2": 98.01,
         "predictor-4": 325,
@@ -8,7 +8,7 @@
         "predictor-7": 23,
         "predictor-3": 0.432
     },
-    41.004: [
+    "41.004": [
         {
             "predictor-1": 22.1,
             "predictor-2": 95.96,
@@ -28,7 +28,7 @@
             "predictor-3": 0.777
         }
     ],
-    35.555: {
+    "35.555": {
         "predictor-1": 20.71,
         "predictor-2": 99.33,
         "predictor-4": 342,
@@ -37,7 +37,7 @@
         "predictor-7": 30,
         "predictor-3": 0.648
     },
-    44.200: {
+    "44.200": {
         "predictor-1": 23.27,
         "predictor-2": 95.03,
         "predictor-4": 295,
@@ -46,7 +46,7 @@
         "predictor-7": 27,
         "predictor-3": 0.488
     },
-    39.652: {
+    "39.652": {
         "predictor-1": 23.27,
         "predictor-2": 95.03,
         "predictor-4": 295,
@@ -55,7 +55,7 @@
         "predictor-7": 27,
         "predictor-3": 0.488
     },
-    29.404: {
+    "29.404": {
         "predictor-1": 19.99,
         "predictor-2": 97.78,
         "predictor-4": 303,
@@ -64,7 +64,7 @@
         "predictor-7": 29,
         "predictor-3": 0.638
     },
-    42.222: {
+    "42.222": {
         "predictor-1": 22.67,
         "predictor-2": 101.21,
         "predictor-4": 427,
