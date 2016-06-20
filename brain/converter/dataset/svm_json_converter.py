@@ -98,9 +98,9 @@ def svm_json_converter(raw_data, is_json):
 
         # dependent variable with single observation
         if type(raw_data[1]) == dict:
-            for feature in raw_data[1].items():
+            for label, feature in raw_data[1].items():
                 # validation
-                validate_fvalue = Validate_Dataset(feature[1])
+                validate_fvalue = Validate_Dataset(feature)
                 validate_fvalue.validate_value()
 
                 if validate_fvalue.get_errors():
@@ -109,13 +109,13 @@ def svm_json_converter(raw_data, is_json):
                     # restructured data
                     list_dataset.append({
                         'dep_variable_label': str(observation_label),
-                        'indep_variable_label': str(feature[0]),
-                        'indep_variable_value': feature[1]
+                        'indep_variable_label': str(label),
+                        'indep_variable_value': feature
                     })
 
             # generalized feature count in an observation
             if not feature_count:
-                feature_count = len(raw_data[1][0])
+                feature_count = len(raw_data[1])
 
         # dependent variable with multiple observations
         if type(raw_data[1]) == list:
