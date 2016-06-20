@@ -115,7 +115,7 @@ def svm_json_converter(raw_data, is_json):
 
         # generalized feature count in an observation
         if not feature_count:
-            feature_count = len(raw_data[1])
+            feature_count = len(raw_data[1][0])
 
         # dependent variable with multiple observations
         if type(raw_data[1]) == list:
@@ -137,7 +137,7 @@ def svm_json_converter(raw_data, is_json):
 
                 # generalized feature count in an observation
                 if not feature_count:
-                    feature_count = len(feature_set.items())
+                    feature_count = len(feature_set)
 
     # close file
     if not is_json:
