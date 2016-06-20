@@ -1,6 +1,5 @@
 {
     "properties": {
-        "session_name": "sample_svr_title",
         "dataset_type": "json_string",
         "session_type": "data_append",
         "model_type": "regression",
