@@ -135,7 +135,7 @@ def dataset_dictionary(id_entity, model_type, upload):
                     converted = converter.json_to_dict()
                     count_features = converter.get_feature_count()
 
-                    observation_labels.append(str(dataset_json['criterion']))
+                    observation_labels.append(str(dataset_json[0]))
 
                     # build new (relevant) dataset
                     dataset.append({
