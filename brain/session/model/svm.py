@@ -33,7 +33,7 @@ def svm_model(kernel_type, session_id, feature_request, list_error):
 
     # local variables
     dataset = feature_request.get_dataset(session_id)
-    feature_count = feature_request.get_count(session_id)
+    get_feature_count = feature_request.get_count(session_id)
     label_encoder = preprocessing.LabelEncoder()
     logger = Logger(__name__, 'error', 'error')
 
@@ -46,12 +46,12 @@ def svm_model(kernel_type, session_id, feature_request, list_error):
         dataset = numpy.asarray(dataset['result'])
 
     # get feature count
-    if feature_count['error']:
-        logger.log(feature_count['error'])
-        list_error.append(feature_count['error'])
+    if get_feature_count['error']:
+        logger.log(get_feature_count['error'])
+        list_error.append(get_feature_count['error'])
         feature_count = None
     else:
-        feature_count = feature_count['result'][0][0]
+        feature_count = get_feature_count['result'][0][0]
 
     # check dataset integrity, build model
     if len(dataset) % feature_count == 0:

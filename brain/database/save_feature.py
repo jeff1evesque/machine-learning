@@ -35,6 +35,8 @@ class Save_Feature(object):
         self.list_error = []
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
+        self.classification = current_app.config.get('MODEL_TYPE')[0]
+        self.regression = current_app.config.get('MODEL_TYPE')[1]
 
     def save_count(self):
         '''@save_count
@@ -67,7 +69,7 @@ class Save_Feature(object):
         else:
             return {'status': True, 'error': None, 'id': response['id']}
 
-    def save_feature(self):
+    def save_feature(self, model_type):
         '''@save_feature
 
         This method can store, or update an existing SVM dataset stored in
@@ -82,9 +84,14 @@ class Save_Feature(object):
 
         # insert / update dataset value(s)
         self.sql.sql_connect(self.db_ml)
-        sql_statement = 'INSERT INTO tbl_feature_value (id_entity, '\
-            'dep_variable_label, indep_variable_label, indep_variable_value) '\
-            'VALUES(%s, %s, %s, %s)'
+        if model_type == self.classification:
+            sql_statement = 'INSERT INTO tbl_feature_value (id_entity, '\
+                'dep_variable_label, indep_variable_label, '\
+                'indep_variable_value) VALUES(%s, %s, %s, %s)'
+        elif model_type == self.regression:
+            sql_statement = 'INSERT INTO tbl_feature_value (id_entity, '\
+                'criterion, indep_variable_label, indep_variable_value) '\
+                'VALUES(%s, %s, %s, %s)'
         dataset = self.premodel_data['premodel_dataset']
         args = (
             self.premodel_data['id_entity'],

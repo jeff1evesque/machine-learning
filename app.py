@@ -44,6 +44,7 @@ with open('hiera/settings.yaml', 'r') as stream:
             WARNING_LOG_PATH=settings['application']['warning_log_path'],
             INFO_LOG_PATH=settings['application']['info_log_path'],
             DEBUG_LOG_PATH=settings['application']['debug_log_path'],
+            MODEL_TYPE=settings['application']['model_type']
         )
     except yaml.YAMLError as error:
         logger = Logger('error', 'yaml')

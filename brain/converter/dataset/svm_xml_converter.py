@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@xml_converter.py
+'''@svm_xml_converter.py
 
 This file restructures only the supplied dataset(s), from an xml file to a
 python dictionary format.
@@ -49,19 +49,13 @@ def svm_xml_converter(raw_data):
             list_observation_label.append(observation_label)
 
         for feature in observation['independent-variable']:
-            feature_label = feature['label']
+            feature_label = str(feature['label'])
             feature_value = feature['value']
 
-            validate_label = Validate_Dataset(feature_label)
             validate_value = Validate_Dataset(feature_value)
-
-            validate_label.validate_label()
             validate_value.validate_value()
-
-            list_error_label = validate.get_errors()
             list_error_value = validate.get_errors()
-            if list_error_label or list_error_value:
-                logger.log(list_error_label)
+            if list_error_value:
                 logger.log(list_error_value)
                 return None
             else:

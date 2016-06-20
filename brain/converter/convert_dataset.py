@@ -6,9 +6,13 @@ This file restructures only the supplied dataset(s).
 
 '''
 
-from brain.converter.dataset.csv_converter import svm_csv_converter
-from brain.converter.dataset.json_converter import svm_json_converter
-from brain.converter.dataset.xml_converter import svm_xml_converter
+from flask import current_app
+from brain.converter.dataset.svm_csv_converter import svm_csv_converter
+from brain.converter.dataset.svm_json_converter import svm_json_converter
+from brain.converter.dataset.svm_xml_converter import svm_xml_converter
+from brain.converter.dataset.svr_csv_converter import svr_csv_converter
+from brain.converter.dataset.svr_json_converter import svr_json_converter
+from brain.converter.dataset.svr_xml_converter import svr_xml_converter
 
 
 class Convert_Dataset(object):
@@ -30,7 +34,7 @@ class Convert_Dataset(object):
 
     '''
 
-    def __init__(self, raw_data, is_json=False):
+    def __init__(self, raw_data, model_type, is_json=False):
         '''@__init__
 
         This constructor is responsible for defining class variables.
@@ -47,6 +51,9 @@ class Convert_Dataset(object):
         self.is_json = is_json
         self.observation_labels = None
         self.count_features = None
+        self.model_type = model_type
+        self.classification = current_app.config.get('MODEL_TYPE')[0]
+        self.regression = current_app.config.get('MODEL_TYPE')[1]
 
     def csv_to_dict(self):
         '''@csv_to_dict
@@ -58,11 +65,19 @@ class Convert_Dataset(object):
 
         '''
 
-        # svm dataset
-        data = svm_csv_converter(self.raw_data)
+        # convert classificationd dataset
+        if self.model_type == self.classication:
+            data = svm_csv_converter(self.raw_data)
+
+        # convert regression dataset
+        elif self.model_type == self.regression:
+            data = svr_csv_converter(self.raw_data)
+
+        # record observation labels, and feature count
         self.observation_labels = data['observation_labels']
         self.count_features = data['feature_count']
 
+        # return data
         return data['dataset']
 
     def json_to_dict(self):
@@ -75,11 +90,19 @@ class Convert_Dataset(object):
 
         '''
 
-        # svm dataset
-        data = svm_json_converter(self.raw_data, self.is_json)
+        # convert classification dataset
+        if self.model_type == self.classification:
+            data = svm_json_converter(self.raw_data, self.is_json)
+
+        # convert regression dataset
+        elif self.model_type == self.regression:
+            data = svr_json_converter(self.raw_data, self.is_json)
+
+        # record observataion labels, and feature count
         self.observation_labels = data['observation_labels']
         self.count_features = data['feature_count']
 
+        # return data
         return data['dataset']
 
     def xml_to_dict(self):
@@ -92,11 +115,19 @@ class Convert_Dataset(object):
 
         '''
 
-        # svm dataset
-        data = svm_xml_converter(self.raw_data)
+        # convert classification dataset
+        if self.model_type == self.classication:
+            data = svm_xml_converter(self.raw_data)
+
+        # convert regression dataset
+        elif self.model_type == self.regression:
+            data = svr_xml_converter(self.raw_data)
+
+        # record observation labels, and feature count
         self.observation_labels = data['observation_labels']
         self.count_features = data['feature_count']
 
+        # return data
         return data['dataset']
 
     def get_observation_labels(self):

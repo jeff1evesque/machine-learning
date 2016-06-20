@@ -1,8 +1,9 @@
 {
     "properties": {
-        "session_name": "sample_title",
+        "session_name": "sample_svm_title",
         "dataset_type": "json_string",
         "session_type": "data_append",
+        "model_type": "classification",
         "session_id": "1"
     },
     "dataset": {

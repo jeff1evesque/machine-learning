@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.converter.convert_dataset import Convert_Dataset
 
 
-def dataset_dictionary(id_entity, upload):
+def dataset_dictionary(id_entity, model_type, upload):
     '''@dataset_dictionary
 
     This method converts the supplied csv, or xml file upload(s) to a uniform
@@ -25,10 +25,16 @@ def dataset_dictionary(id_entity, upload):
 
     '''
 
+    # local variables
     flag_append = True
     dataset = []
     observation_labels = []
     list_error = []
+
+    if upload['dataset']['json_string']:
+        is_json = True
+    else:
+        is_json = False
 
     try:
         # web-interface: define flag to convert to dataset to json
@@ -41,7 +47,11 @@ def dataset_dictionary(id_entity, upload):
                 if val['type'] == 'csv':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'])
+                        converter = Convert_Dataset(
+                            val['file'],
+                            model_type,
+                            is_json
+                        )
                         converted = converter.csv_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
@@ -63,7 +73,11 @@ def dataset_dictionary(id_entity, upload):
                 elif val['type'] == 'json':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'])
+                        converter = Convert_Dataset(
+                            val['file'],
+                            model_type,
+                            is_json
+                        )
                         converted = converter.json_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
@@ -85,7 +99,11 @@ def dataset_dictionary(id_entity, upload):
                 elif val['type'] == 'xml':
                     try:
                         # conversion
-                        converter = Convert_Dataset(val['file'])
+                        converter = Convert_Dataset(
+                            val['file'],
+                            model_type,
+                            is_json
+                        )
                         converted = converter.xml_to_dict()
                         count_features = converter.get_feature_count()
                         labels = converter.get_observation_labels()
@@ -108,20 +126,39 @@ def dataset_dictionary(id_entity, upload):
 
         # programmatic-interface
         elif upload['dataset']['json_string']:
-            # conversion
-            dataset_json = upload['dataset']['json_string']
-            converter = Convert_Dataset(dataset_json, True)
-            converted = converter.json_to_dict()
-            count_features = converter.get_feature_count()
+            # classification
+            if upload['settings']['model_type'] == 'classification':
+                for dataset_json in upload['dataset']['json_string'].items():
+                    # conversion
+                    converter = Convert_Dataset(dataset_json, model_type, True)
+                    converted = converter.json_to_dict()
+                    count_features = converter.get_feature_count()
 
-            observation_labels.append(dataset_json.keys())
+                    observation_labels.append(str(dataset_json[0]))
 
-            # build dataset
-            dataset.append({
-                'id_entity': id_entity,
-                'premodel_dataset': converted,
-                'count_features': count_features
-            })
+                    # build new (relevant) dataset
+                    dataset.append({
+                        'id_entity': id_entity,
+                        'premodel_dataset': converted,
+                        'count_features': count_features
+                    })
+
+            # regression
+            elif upload['settings']['model_type'] == 'regression':
+                for dataset_json in upload['dataset']['json_string']:
+                    # conversion
+                    converter = Convert_Dataset(dataset_json, model_type, True)
+                    converted = converter.json_to_dict()
+                    count_features = converter.get_feature_count()
+
+                    observation_labels.append(str(dataset_json['criterion']))
+
+                    # build new (relevant) dataset
+                    dataset.append({
+                        'id_entity': id_entity,
+                        'premodel_dataset': converted,
+                        'count_features': count_features
+                    })
 
     except Exception as error:
         list_error.append(error)

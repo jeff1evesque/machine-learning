@@ -50,6 +50,7 @@ class Data_Append(Base, Base_Data):
         self.list_error = []
         self.uid = 1
         self.dataset = []
+        self.model_type = premodel_data['data']['settings']['model_type']
 
     def save_entity(self, session_type, session_id):
         '''@save_entity

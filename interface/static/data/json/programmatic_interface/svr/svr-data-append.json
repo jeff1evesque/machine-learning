@@ -1,9 +1,10 @@
 {
     "properties": {
-        "session_name": "sample_title",
+        "session_name": "sample_svr_title",
         "dataset_type": "json_string",
         "session_type": "data_append",
-        "session_id": "1"
+        "model_type": "regression",
+        "session_id": "2"
     },
     "dataset": [
         {

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@csv_converter.py
+'''@svr_csv_converter.py
 
 This file restructures only the supplied dataset(s), from a csv file to a
 python dictionary format.
@@ -13,8 +13,8 @@ from brain.validator.validate_dataset import Validate_Dataset
 from log.logger import Logger
 
 
-def svm_csv_converter(raw_data):
-    '''@svm_csv_converter
+def svr_csv_converter(raw_data):
+    '''@svr_csv_converter
 
     This method converts the supplied csv file-object, intended for an svm
     model, to a python dictionary.
