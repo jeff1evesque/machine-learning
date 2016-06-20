@@ -111,11 +111,11 @@ def svm_json_converter(raw_data, is_json):
                         'dep_variable_label': str(observation_label),
                         'indep_variable_label': str(feature[0]),
                         'indep_variable_value': feature[1]
-                })
+                    })
 
-        # generalized feature count in an observation
-        if not feature_count:
-            feature_count = len(raw_data[1][0])
+            # generalized feature count in an observation
+            if not feature_count:
+                feature_count = len(raw_data[1][0])
 
         # dependent variable with multiple observations
         if type(raw_data[1]) == list:
@@ -133,7 +133,7 @@ def svm_json_converter(raw_data, is_json):
                             'dep_variable_label': str(observation_label),
                             'indep_variable_label': str(feature_label),
                             'indep_variable_value': feature_value
-                    })
+                        })
 
                 # generalized feature count in an observation
                 if not feature_count:
