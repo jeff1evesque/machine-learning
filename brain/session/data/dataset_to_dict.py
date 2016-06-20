@@ -8,7 +8,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from flask import current_app
 from brain.converter.convert_dataset import Convert_Dataset
 
 
