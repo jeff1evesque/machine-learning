@@ -85,7 +85,6 @@ def svr_json_converter(raw_data, is_json):
                         # generalized feature count in an observation
                         if not feature_count:
                             feature_count = len(criterion.items())
-                            print feature_count
 
     # programmatic-interface
     else:
