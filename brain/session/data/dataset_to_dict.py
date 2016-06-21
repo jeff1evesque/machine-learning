@@ -30,6 +30,7 @@ def dataset_dictionary(id_entity, model_type, upload):
     dataset = []
     observation_labels = []
     list_error = []
+    json_upload = upload['dataset']['json_string']
 
     if upload['dataset']['json_string']:
         is_json = True
@@ -145,20 +146,20 @@ def dataset_dictionary(id_entity, model_type, upload):
 
             # regression
             elif upload['settings']['model_type'] == 'regression':
-                for criterion, predictors in upload['dataset']['json_string'].items():
-                    # conversion
-                    converter = Convert_Dataset(predictors, model_type, True)
-                    converted = converter.json_to_dict()
-                    count_features = converter.get_feature_count()
+                # conversion
+                converter = Convert_Dataset(upload['dataset']['json_string'], model_type, True)
+                converted = converter.json_to_dict()
+                count_features = converter.get_feature_count()
 
+                for criterion, predictors in upload['dataset']['json_string'].items():
                     observation_labels.append(criterion)
 
-                    # build new (relevant) dataset
-                    dataset.append({
-                        'id_entity': id_entity,
-                        'premodel_dataset': converted,
-                        'count_features': count_features
-                    })
+                # build new (relevant) dataset
+                dataset.append({
+                    'id_entity': id_entity,
+                    'premodel_dataset': converted,
+                    'count_features': count_features
+                })
 
     except Exception as error:
         list_error.append(error)
