@@ -32,7 +32,7 @@ def dataset_dictionary(id_entity, model_type, upload):
     list_error = []
     json_upload = upload['dataset']['json_string']
 
-    if upload['dataset']['json_string']:
+    if json_upload:
         is_json = True
     else:
         is_json = False
@@ -126,10 +126,10 @@ def dataset_dictionary(id_entity, model_type, upload):
                 return False
 
         # programmatic-interface
-        elif upload['dataset']['json_string']:
+        elif json_upload:
             # classification
             if upload['settings']['model_type'] == 'classification':
-                for dataset_json in upload['dataset']['json_string'].items():
+                for dataset_json in json_upload.items():
                     # conversion
                     converter = Convert_Dataset(dataset_json, model_type, True)
                     converted = converter.json_to_dict()
@@ -147,11 +147,11 @@ def dataset_dictionary(id_entity, model_type, upload):
             # regression
             elif upload['settings']['model_type'] == 'regression':
                 # conversion
-                converter = Convert_Dataset(upload['dataset']['json_string'], model_type, True)
+                converter = Convert_Dataset(json_upload, model_type, True)
                 converted = converter.json_to_dict()
                 count_features = converter.get_feature_count()
 
-                for criterion, predictors in upload['dataset']['json_string'].items():
+                for criterion, predictors in json_upload.items():
                     observation_labels.append(criterion)
 
                 # build new (relevant) dataset
