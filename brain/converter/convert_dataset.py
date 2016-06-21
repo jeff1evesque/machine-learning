@@ -65,8 +65,8 @@ class Convert_Dataset(object):
 
         '''
 
-        # convert classificationd dataset
-        if self.model_type == self.classication:
+        # convert classification dataset
+        if self.model_type == self.classification:
             data = svm_csv_converter(self.raw_data)
 
         # convert regression dataset
@@ -116,7 +116,7 @@ class Convert_Dataset(object):
         '''
 
         # convert classification dataset
-        if self.model_type == self.classication:
+        if self.model_type == self.classification:
             data = svm_xml_converter(self.raw_data)
 
         # convert regression dataset
