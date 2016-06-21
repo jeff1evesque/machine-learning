@@ -31,19 +31,6 @@ class Validate_Dataset(object):
         self.session_type = session_type
         self.list_error = []
 
-    def validate_label(self):
-        '''@validate_label
-
-        This method validates either the dependent variable (observation)
-        label(s), or the independent variable (feature) label(s).
-
-        '''
-
-        try:
-            Draft4Validator(jsonschema_string()).validate({'value': self.data})
-        except Exception, error:
-            self.list_error.append(str(error))
-
     def validate_value(self):
         '''@validate_value
 
