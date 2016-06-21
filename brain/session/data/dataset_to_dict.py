@@ -145,13 +145,13 @@ def dataset_dictionary(id_entity, model_type, upload):
 
             # regression
             elif upload['settings']['model_type'] == 'regression':
-                for dataset_json in upload['dataset']['json_string']:
+                for criterion, predictors in upload['dataset']['json_string'].items():
                     # conversion
-                    converter = Convert_Dataset(dataset_json, model_type, True)
+                    converter = Convert_Dataset(predictors, model_type, True)
                     converted = converter.json_to_dict()
                     count_features = converter.get_feature_count()
 
-                    observation_labels.append(str(dataset_json['criterion']))
+                    observation_labels.append(criterion)
 
                     # build new (relevant) dataset
                     dataset.append({
