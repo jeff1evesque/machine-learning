@@ -30,8 +30,9 @@ def dataset_dictionary(id_entity, model_type, upload):
     dataset = []
     observation_labels = []
     list_error = []
+    json_upload = upload['dataset']['json_string']
 
-    if upload['dataset']['json_string']:
+    if json_upload:
         is_json = True
     else:
         is_json = False
@@ -125,10 +126,10 @@ def dataset_dictionary(id_entity, model_type, upload):
                 return False
 
         # programmatic-interface
-        elif upload['dataset']['json_string']:
+        elif json_upload:
             # classification
             if upload['settings']['model_type'] == 'classification':
-                for dataset_json in upload['dataset']['json_string'].items():
+                for dataset_json in json_upload.items():
                     # conversion
                     converter = Convert_Dataset(dataset_json, model_type, True)
                     converted = converter.json_to_dict()
@@ -145,20 +146,20 @@ def dataset_dictionary(id_entity, model_type, upload):
 
             # regression
             elif upload['settings']['model_type'] == 'regression':
-                for dataset_json in upload['dataset']['json_string']:
-                    # conversion
-                    converter = Convert_Dataset(dataset_json, model_type, True)
-                    converted = converter.json_to_dict()
-                    count_features = converter.get_feature_count()
+                # conversion
+                converter = Convert_Dataset(json_upload, model_type, True)
+                converted = converter.json_to_dict()
+                count_features = converter.get_feature_count()
 
-                    observation_labels.append(str(dataset_json['criterion']))
+                for criterion, predictors in json_upload.items():
+                    observation_labels.append(criterion)
 
-                    # build new (relevant) dataset
-                    dataset.append({
-                        'id_entity': id_entity,
-                        'premodel_dataset': converted,
-                        'count_features': count_features
-                    })
+                # build new (relevant) dataset
+                dataset.append({
+                    'id_entity': id_entity,
+                    'premodel_dataset': converted,
+                    'count_features': count_features
+                })
 
     except Exception as error:
         list_error.append(error)

@@ -5,42 +5,33 @@
         "model_type": "regression",
         "session_id": "2"
     },
-    "dataset": [
-        {
-            "criterion": 19.348,
-            "predictors": {
-                "predictor-1":23.45,
-                "predictor-2":98.01,
-                "predictor-3":0.432,
-                "predictor-4":325,
-                "predictor-5":54.64,
-                "predictor-6":0.002,
-                "predictor-7":25
-            }
+    "dataset": {
+        "19.348": {
+            "predictor-1":23.45,
+            "predictor-2":98.01,
+            "predictor-3":0.432,
+            "predictor-4":325,
+            "predictor-5":54.64,
+            "predictor-6":0.002,
+            "predictor-7":25
         },
-        {
-            "criterion": 48.357,
-            "predictors": {
-                "predictor-1":24.32,
-                "predictor-2":92.22,
-                "predictor-3":0.356,
-                "predictor-4":235,
-                "predictor-5":64.45,
-                "predictor-6":0.001,
-                "predictor-7":31
-            }
+        "48.357": {
+            "predictor-1":24.32,
+            "predictor-2":92.22,
+            "predictor-3":0.356,
+            "predictor-4":235,
+            "predictor-5":64.45,
+            "predictor-6":0.001,
+            "predictor-7":31
         },
-        {
-            "criterion": 35.548,
-            "predictors": {
-                "predictor-1":22.67,
-                "predictor-2":101.21,
-                "predictor-3":0.832,
-                "predictor-4":427,
-                "predictor-5":75.45,
-                "predictor-6":0.002,
-                "predictor-7":24
-            }
+        "35.548": {
+            "predictor-1":22.67,
+            "predictor-2":101.21,
+            "predictor-3":0.832,
+            "predictor-4":427,
+            "predictor-5":75.45,
+            "predictor-6":0.002,
+            "predictor-7":24
         }
-    ]
+    }
 }

@@ -325,9 +325,6 @@ Some additional sample files have been provided, which outline how the `data`
 The following (non-exhaustive) properties define the above implemented `data`
  attribute:
 
-- `prediction_value[]`: an array of feature values, used to generate a
- corresponding prediction value.  The size of this array, varies depending on
- the number of features that can be expected for the generated model.
 - `model_id`: the numeric id value, of the generated model in the nosql
  datastore.
 - `model_type`: corresponds to the desired model type, which can be one of
