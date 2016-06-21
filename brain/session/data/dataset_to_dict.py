@@ -44,83 +44,38 @@ def dataset_dictionary(id_entity, model_type, upload):
                 # reset file-pointer
                 val['file'].seek(0)
 
-                # csv to dict
-                if val['type'] == 'csv':
-                    try:
-                        # conversion
-                        converter = Convert_Dataset(
-                            val['file'],
-                            model_type,
-                            is_json
-                        )
+                try:
+                    # initialize converter
+                    converter = Convert_Dataset(
+                        val['file'],
+                        model_type,
+                        is_json
+                    )
+
+                    # convert dataset(s)
+                    if val['type'] == 'csv':
                         converted = converter.csv_to_dict()
-                        count_features = converter.get_feature_count()
-                        labels = converter.get_observation_labels()
-
-                        # assign observation labels
-                        observation_labels.append(labels)
-
-                        # build new (relevant) dataset
-                        dataset.append({
-                            'id_entity': id_entity,
-                            'premodel_dataset': converted,
-                            'count_features': count_features
-                        })
-                    except Exception as error:
-                        list_error.append(error)
-                        flag_append = False
-
-                # json to dict
-                elif val['type'] == 'json':
-                    try:
-                        # conversion
-                        converter = Convert_Dataset(
-                            val['file'],
-                            model_type,
-                            is_json
-                        )
+                    elif val['type'] == 'json':
                         converted = converter.json_to_dict()
-                        count_features = converter.get_feature_count()
-                        labels = converter.get_observation_labels()
-
-                        # assign observation labels
-                        observation_labels.append(labels)
-
-                        # build new (relevant) dataset
-                        dataset.append({
-                            'id_entity': id_entity,
-                            'premodel_dataset': converted,
-                            'count_features': count_features
-                        })
-                    except Exception as error:
-                        list_error.append(error)
-                        flag_append = False
-
-                # xml to dict
-                elif val['type'] == 'xml':
-                    try:
-                        # conversion
-                        converter = Convert_Dataset(
-                            val['file'],
-                            model_type,
-                            is_json
-                        )
+                    elif val['type'] == 'xml':
                         converted = converter.xml_to_dict()
-                        count_features = converter.get_feature_count()
-                        labels = converter.get_observation_labels()
 
-                        # assign observation labels
-                        observation_labels.append(labels)
+                    count_features = converter.get_feature_count()
+                    labels = converter.get_observation_labels()
 
-                        # build new (relevant) dataset
-                        dataset.append({
-                            'id_entity': id_entity,
-                            'premodel_dataset': converted,
-                            'count_features': count_features
-                        })
-                    except Exception as error:
-                        list_error.append(error)
-                        flag_append = False
+                    # assign observation labels
+                    observation_labels.append(labels)
+
+                    # build new (relevant) dataset
+                    dataset.append({
+                        'id_entity': id_entity,
+                        'premodel_dataset': converted,
+                        'count_features': count_features
+                    })
+
+                except Exception as error:
+                    list_error.append(error)
+                    flag_append = False
 
             if not flag_append:
                 return False
