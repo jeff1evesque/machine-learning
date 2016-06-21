@@ -89,38 +89,16 @@ def svr_json_converter(raw_data, is_json):
     # programmatic-interface
     else:
         dataset = raw_data
-        observation_label = str(dataset['criterion'])
 
-        # list of observation label
-        observation_labels.append(observation_label)
+        for criterion, predictors in dataset.items():
+            # list of observation label
+            observation_labels.append(criterion)
 
-        # criterion with single observation
-        if type(dataset['predictors']) == dict:
-            for label, predictor in dataset['predictors'].items():
-                # validation (part 1)
-                validate_predictor = Validate_Dataset(str(predictor))
-                validate_predictor.validate_value()
-
-                if validate_predictor.get_errors():
-                    logger.log(validate_predictor.get_errors())
-                else:
-                    # restructured data
-                    list_dataset.append({
-                        'dep_variable_label': str(observation_label),
-                        'indep_variable_label': str(label),
-                        'indep_variable_value': predictor
-                    })
-
-            # generalized feature count in an observation
-            if not feature_count:
-                feature_count = len(dataset['predictors'].items())
-
-        # criterion with multiple observation
-        if type(dataset['predictors']) == list:
-            for criterion in dataset['predictors']:
-                for label, predictor in criterion.items():
+            # criterion with single observation
+            if type(predictors) == dict:
+                for label, predictor in predictors.items():
                     # validation (part 1)
-                    validate_predictor = Validate_Dataset(str(predictor))
+                    validate_predictor = Validate_Dataset(predictor)
                     validate_predictor.validate_value()
 
                     if validate_predictor.get_errors():
@@ -128,14 +106,36 @@ def svr_json_converter(raw_data, is_json):
                     else:
                         # restructured data
                         list_dataset.append({
-                            'dep_variable_label': str(observation_label),
+                            'dep_variable_label': str(criterion),
                             'indep_variable_label': str(label),
                             'indep_variable_value': predictor
                         })
 
-                # generalized feature count in an observation
-                if not feature_count:
-                    feature_count = len(dataset['predictors'].items())
+            # generalized feature count in an observation
+            if not feature_count:
+                feature_count = len(predictors.items())
+
+            # criterion with multiple observation
+            if type(predictors) == list:
+                for single_predictors in predictors:
+                    for label, predictor in single_predictors.items():
+                        # validation (part 1)
+                        validate_predictor = Validate_Dataset(predictor)
+                        validate_predictor.validate_value()
+
+                        if validate_predictor.get_errors():
+                            logger.log(validate_predictor.get_errors())
+                        else:
+                            # restructured data
+                            list_dataset.append({
+                                'dep_variable_label': str(criterion),
+                                'indep_variable_label': str(label),
+                                'indep_variable_value': predictor
+                            })
+
+                    # generalized feature count in an observation
+                    if not feature_count:
+                        feature_count = len(single_predictors.items())
 
     # close file
     if not is_json:
