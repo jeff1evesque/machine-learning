@@ -74,10 +74,11 @@
         "52.395": {
             "predictor-1": 22.67,
             "predictor-2": 101.21,
-            "predictor-4": 427,
-            "predictor-5": 75.45,
-            "predictor-6": 0.002,
-            "predictor-7": 26
+            "predictor-3": 427,
+            "predictor-4": 75.45,
+            "predictor-5": 0.002,
+            "predictor-6": 26
+            "predictor-7": 0.555
         }
     }
 }
