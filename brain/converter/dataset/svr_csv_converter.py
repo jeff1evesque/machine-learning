@@ -55,15 +55,7 @@ def svr_csv_converter(raw_data):
         # iterate each column in a given row
         row_indep_label = row[0].split(',')
         for value in islice(row_indep_label, 1, None):
-            validate = Validate_Dataset(value)
-            validate.validate_label()
-
-            list_error = validate.get_errors()
-            if list_error:
-                logger.log(list_error)
-                return None
-            else:
-                list_feature_label.append(value)
+            list_feature_label.append(str(value))
 
     # iterate all rows of csvfile
     for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
@@ -71,15 +63,7 @@ def svr_csv_converter(raw_data):
         # iterate first column of each row (except first)
         row_dep_label = row[0].split(',')
         for value in row_dep_label[:1]:
-            validate = Validate_Dataset(value)
-            validate.validate_label()
-
-            list_error = validate.get_errors()
-            if list_error:
-                logger.log(list_error)
-                return None
-            else:
-                list_observation_label.append(value)
+            list_observation_label.append(str(value))
 
         # generalized feature count in an observation
         row_indep_variable = row[0].split(',')
