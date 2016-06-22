@@ -77,11 +77,9 @@ class Data_Append(Base, Base_Data):
         # save dataset element
         db_return = db_save.save()
 
-        # return error(s)
-        if not db_return['status']:
+        # return
+        if db_return['status']:
+            return {'status': True, 'error': None}
+        else:
             self.list_error.append(db_return['error'])
             return {'status': False, 'error': self.list_error}
-
-        # return status
-        elif db_return['status'] and session_type == 'data_append':
-            return {'status': True, 'error': None}

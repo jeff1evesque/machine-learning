@@ -67,9 +67,13 @@ class Save_Entity(object):
 
         elif self.session_type == 'data_new':
             sql_statement = 'INSERT INTO tbl_dataset_entity (title, '\
-                'uid_created, datetime_created) VALUES(%s, %s, '\
-                'UTC_TIMESTAMP())'
-            args = (self.premodel_data['title'], self.premodel_data['uid'])
+                'model_type, uid_created, datetime_created) VALUES(%s, %s, '\
+                '%s, UTC_TIMESTAMP())'
+            args = (
+                self.premodel_data['title'],
+                self.premodel_data['model_type'],
+                self.premodel_data['uid']
+            )
             response = self.sql.sql_command(sql_statement, 'insert', args)
 
         # retrieve any error(s), disconnect from database
