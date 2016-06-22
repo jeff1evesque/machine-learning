@@ -45,7 +45,7 @@ def svm_xml_converter(raw_data):
 
             validate_value = Validate_Dataset(feature_value)
             validate_value.validate_value()
-            list_error_value = validate.get_errors()
+            list_error_value = validate_value.get_errors()
             if list_error_value:
                 logger.log(list_error_value)
                 return None
