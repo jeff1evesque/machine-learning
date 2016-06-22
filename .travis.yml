@@ -9,7 +9,6 @@ services:
 
 ## build docker container for unit testing.
 before_install:
-  - docker ps -a
   - docker build -t ubuntu/trusty .
   - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
   - sudo dpkg -i puppetlabs-release-trusty.deb 
