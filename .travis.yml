@@ -18,7 +18,6 @@ before_install:
 
 ## install packages for linting
 #
-<<<<<<< HEAD
 #  @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
 #
 #  Note: unit testing is performed within the docker container, which is
@@ -42,22 +41,6 @@ install:
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint
   - npm install -g travis-lint
-=======
-#  Note: unit testing is performed within the docker container, which is
-#        defined from the Dockerfile.
-install:
-  - pip install flake8
-  - npm install -g jshint
-  - gem install scss_lint
-  - npm install -g bootlint
-  - gem install puppet-lint
-  - gem install rubocop
-  - npm install jsonlint -g
-  - gem install csvlint
-  - sudo apt-get update
-  - sudo apt-get install libxml2-utils
-  - sudo apt-get install shellcheck
->>>>>>> f08431f32d3e97607c441bfc97c8c95ae40ab304
 
 ## implement linting
 #
@@ -82,7 +65,6 @@ script:
   - (cd test/ && r10k puppetfile check)
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
-<<<<<<< HEAD
   - xmllint --noout interface/static/data/xml/svr*.xml --schema interface/static/data/xml/svr.xsd
   - xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd
   - xmllint --noout interface/static/data/xml/*.xsd
@@ -93,7 +75,3 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-=======
-  - xmllint --valid --noout interface/static/data/xml/*.xml
-  - spellcheck .
->>>>>>> f08431f32d3e97607c441bfc97c8c95ae40ab304
