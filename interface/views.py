@@ -1,9 +1,18 @@
+<<<<<<< HEAD
 '''@views
 
 This file contains the corresponding views logic. Specifically, the route
 decorators are defined, which flask to execute triggers for specific URL's.
 
 '''
+=======
+"""@views
+
+This file contains the (view) route decorators, which execute a defined
+function assigned to the URL within the route decorator.
+
+"""
+>>>>>>> f08431f32d3e97607c441bfc97c8c95ae40ab304
 
 import json
 from interface import app
