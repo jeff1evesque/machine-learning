@@ -6,9 +6,6 @@ This script performs validation on correpsonding dataset(s).
 
 '''
 
-from jsonschema.validators import Draft4Validator
-from brain.schema.jsonschema_definition import jsonschema_string
-
 
 class Validate_Dataset(object):
     '''Validate_Dataset
@@ -30,19 +27,6 @@ class Validate_Dataset(object):
         self.data = data
         self.session_type = session_type
         self.list_error = []
-
-    def validate_label(self):
-        '''@validate_label
-
-        This method validates either the dependent variable (observation)
-        label(s), or the independent variable (feature) label(s).
-
-        '''
-
-        try:
-            Draft4Validator(jsonschema_string()).validate({'value': self.data})
-        except Exception, error:
-            self.list_error.append(str(error))
 
     def validate_value(self):
         '''@validate_value
@@ -67,4 +51,4 @@ class Validate_Dataset(object):
         if len(self.list_error) > 0:
             return self.list_error
         else:
-            return None
+            return False

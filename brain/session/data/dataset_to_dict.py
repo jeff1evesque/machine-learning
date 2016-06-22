@@ -17,16 +17,11 @@ def dataset_dictionary(id_entity, model_type, upload):
     This method converts the supplied csv, or xml file upload(s) to a uniform
     dict object.
 
-    @flag_append, when false, indicates the neccessary 'dataset' was not
-        properly defined, causing this method to 'return', which essentially
-        stops the execution of the current session.
-
     @upload, uploaded dataset(s).
 
     '''
 
     # local variables
-    flag_append = True
     dataset = []
     observation_labels = []
     list_error = []
@@ -44,41 +39,33 @@ def dataset_dictionary(id_entity, model_type, upload):
                 # reset file-pointer
                 val['file'].seek(0)
 
-                try:
-                    # initialize converter
-                    converter = Convert_Dataset(
-                        val['file'],
-                        model_type,
-                        is_json
-                    )
+                # initialize converter
+                converter = Convert_Dataset(
+                    val['file'],
+                    model_type,
+                    is_json
+                )
 
-                    # convert dataset(s)
-                    if val['type'] == 'csv':
-                        converted = converter.csv_to_dict()
-                    elif val['type'] == 'json':
-                        converted = converter.json_to_dict()
-                    elif val['type'] == 'xml':
-                        converted = converter.xml_to_dict()
+                # convert dataset(s)
+                if val['type'] == 'csv':
+                    converted = converter.csv_to_dict()
+                elif val['type'] == 'json':
+                    converted = converter.json_to_dict()
+                elif val['type'] == 'xml':
+                    converted = converter.xml_to_dict()
 
-                    count_features = converter.get_feature_count()
-                    labels = converter.get_observation_labels()
+                count_features = converter.get_feature_count()
+                labels = converter.get_observation_labels()
 
-                    # assign observation labels
-                    observation_labels.append(labels)
+                # assign observation labels
+                observation_labels.append(labels)
 
-                    # build new (relevant) dataset
-                    dataset.append({
-                        'id_entity': id_entity,
-                        'premodel_dataset': converted,
-                        'count_features': count_features
-                    })
-
-                except Exception as error:
-                    list_error.append(error)
-                    flag_append = False
-
-            if not flag_append:
-                return False
+                # build new (relevant) dataset
+                dataset.append({
+                    'id_entity': id_entity,
+                    'premodel_dataset': converted,
+                    'count_features': count_features
+                })
 
         # programmatic-interface
         elif json_upload:
@@ -121,7 +108,7 @@ def dataset_dictionary(id_entity, model_type, upload):
         print error
 
     # return results
-    if list_error:
+    if len(list_error) > 0:
         return {
             'dataset': dataset,
             'observation_labels': observation_labels,
@@ -131,5 +118,5 @@ def dataset_dictionary(id_entity, model_type, upload):
         return {
             'dataset': dataset,
             'observation_labels': observation_labels,
-            'error': None
+            'error': False
         }
