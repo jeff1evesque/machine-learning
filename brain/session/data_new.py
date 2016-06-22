@@ -66,10 +66,10 @@ class Data_New(Base, Base_Data):
             database table.
 
         @numeric_model_type, list indices begin at 0, and needs to be corrected
-            by adding 1. This allows the numeric representation to relate to
-            another database table, which maps integer value with 'model_type'.
-            This corresponding table containing the mapping ,begins its index
-            at 1.
+            by adding 1. This allows the numeric representation of the
+            'model_type' to relate to another database table, which maps
+            integer values with the corresponding 'model_type' name. The
+            integer column of the mapping table begins at 1.
 
         '''
 
