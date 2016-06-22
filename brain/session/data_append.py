@@ -77,7 +77,7 @@ class Data_Append(Base, Base_Data):
         # save dataset element
         db_return = db_save.save()
 
-        # return error(s)
+        # return
         if db_return['status']:
             return {'status': True, 'error': None}
         else:
