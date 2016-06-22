@@ -54,4 +54,4 @@ class Validate_Dataset(object):
         if len(self.list_error) > 0:
             return self.list_error
         else:
-            return None
+            return False
