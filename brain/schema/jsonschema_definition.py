@@ -7,25 +7,6 @@ This file contains various jsonschema definitions.
 '''
 
 
-def jsonschema_string():
-    '''@jsonschema_string
-
-    This method validates a non-empty string.
-
-    '''
-
-    schema = {
-        'type': 'object',
-        'properties': {
-            'value': {
-                'type': 'string',
-                'minLength': 1
-            },
-        },
-    }
-    return schema
-
-
 def jsonschema_data_new():
     '''@jsonschema_data_new
 
