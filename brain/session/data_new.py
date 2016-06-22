@@ -87,7 +87,6 @@ class Data_New(Base, Base_Data):
 
         # save dataset element
         db_return = db_save.save()
-        print db_return['id']
 
         # return error(s)
         if not db_return['status']:
