@@ -1,23 +1,11 @@
-<<<<<<< HEAD
 '''@__init__
-=======
-"""@__init__
->>>>>>> f08431f32d3e97607c441bfc97c8c95ae40ab304
-
 This file allows the containing directory to be considered a python package,
 consisting of python module(s). Also, this file initializes flask object, which
 allows each module to import it.
-
 Note: the last 'views' import is required to be after initializing flask.
-
-<<<<<<< HEAD
 Note: the use of '# noqa', at the end of specified line(s) of code, causes
       flake8 to ignore the corresponding line, during pep8 linting.
-
 '''
-=======
-"""
->>>>>>> f08431f32d3e97607c441bfc97c8c95ae40ab304
 
 from flask import Flask
 
@@ -25,4 +13,4 @@ from flask import Flask
 app = Flask(__name__)
 
 # required circular import
-import interface.views    # noqa
+import interface.views # noqa
