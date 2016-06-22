@@ -94,5 +94,5 @@ class Data_New(Base, Base_Data):
             return {'status': False, 'error': self.list_error}
 
         # return status
-        elif db_return['status'] and session_type == 'data_new':
+        else:
             return {'status': True, 'error': None, 'id': db_return['id']}
