@@ -6,9 +6,6 @@ This script performs validation on correpsonding dataset(s).
 
 '''
 
-from jsonschema.validators import Draft4Validator
-from brain.schema.jsonschema_definition import jsonschema_string
-
 
 class Validate_Dataset(object):
     '''Validate_Dataset
