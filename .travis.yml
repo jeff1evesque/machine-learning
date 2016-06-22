@@ -5,6 +5,7 @@ language: python
 ## allows 'docker' command
 services:
   - docker
+  - redis-server
 
 ## build docker container for unit testing.
 before_install:
