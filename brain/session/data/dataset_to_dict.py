@@ -17,16 +17,11 @@ def dataset_dictionary(id_entity, model_type, upload):
     This method converts the supplied csv, or xml file upload(s) to a uniform
     dict object.
 
-    @flag_append, when false, indicates the neccessary 'dataset' was not
-        properly defined, causing this method to 'return', which essentially
-        stops the execution of the current session.
-
     @upload, uploaded dataset(s).
 
     '''
 
     # local variables
-    flag_append = True
     dataset = []
     observation_labels = []
     list_error = []
