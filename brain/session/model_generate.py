@@ -59,7 +59,7 @@ class Model_Generate(Base):
 
         '''
 
-        # generate model
+        # svm model
         if self.model_type = self.list_model_type[0]:
             result = svm_model(
                 self.kernel,
@@ -68,6 +68,7 @@ class Model_Generate(Base):
                 self.list_error
             )
 
+        # svr model
         elif model_type = self.list_model_type[1]:
             result = svr_model(
                 self.kernel,
