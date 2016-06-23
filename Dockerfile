@@ -25,8 +25,8 @@ RUN PUPPETFILE=/var/machine-learning/test/Puppetfile PUPPETFILE_DIR=/var/machine
 
 ## debug print
 RUN ls -l /var/machine-learning
-RUN ls -l /var/machine-learning/puppet/modules
-RUN ls -l /var/machine-learning/puppet/manifests
+RUN ls -l /var/machine-learning/puppet/environment/development/modules
+RUN ls -l /var/machine-learning/puppet/environment/development/manifests
 
 ## provision with puppet
 RUN for x in $(find . -name '/var/machine-learning/puppet/environment/development/manifests/*.pp'); do puppet apply $x; done;
