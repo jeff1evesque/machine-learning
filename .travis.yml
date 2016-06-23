@@ -13,7 +13,7 @@ services:
 #      @--name, assign container name to running container
 before_install:
   - docker build -t ubuntu/trusty .
-  - docker run -d --name trusty
+  - docker run -d ubuntu/trusty --name trusty
 
 ## install packages for linting
 #
