@@ -18,8 +18,8 @@ import json
 def svm_model(kernel_type, session_id, feature_request, list_error):
     '''@svm_model
 
-    This method generates an svm prediction using the provided prediction
-    feature input(s), and the stored corresponding model, within the NoSQL
+    This method generates an svm model using feature data, retrieved from
+    the database. The generated model, is then stored within the NoSQL
     datastore.
 
     @grouped_features, a matrix of observations, where each nested vector,
