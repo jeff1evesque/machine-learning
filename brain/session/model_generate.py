@@ -46,10 +46,9 @@ class Model_Generate(Base):
         self.kernel = str(premodel_data['data']['settings']['sv_kernel_type'])
         self.session_id = premodel_data['data']['settings']['session_id']
         self.feature_request = Retrieve_Feature()
-        self.list_error = []
+        self.premodel_data = premodel_data['data']['settings']['model_type']
         self.list_model_type = current_app.config.get('MODEL_TYPE')
-
-        self.premodel_data = premodel_data
+        self.list_error = []
 
     def generate_model(self):
         '''@generate_model
@@ -60,17 +59,15 @@ class Model_Generate(Base):
 
         '''
 
-        # local variables
-        model_type = self.premodel_data['data']['settings']['model_type']
-
         # generate model
-        if model_type = self.list_model_type[0]:
+        if self.model_type = self.list_model_type[0]:
             result = svm_model(
                 self.kernel,
                 self.session_id,
                 self.feature_request,
                 self.list_error
             )
+
         elif model_type = self.list_model_type[1]:
             result = svr_model(
                 self.kernel,
