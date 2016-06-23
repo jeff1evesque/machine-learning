@@ -7,13 +7,13 @@ services:
   - docker
 
 ## build docker container for unit testing.
+#
+#  @docker run:
+#      @d, run container in background and print container ID
+#      @--name, assign container name to running container
 before_install:
   - docker build -t ubuntu/trusty .
-  - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
-  - sudo dpkg -i puppetlabs-release-trusty.deb 
-  - sudo apt-get update
-  - sudo apt-get install puppet -y
-  - puppet -V
+  - docker run -d --name trusty
 
 ## install packages for linting
 #
@@ -74,3 +74,4 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
+  - docker ps | grep -q trusty
