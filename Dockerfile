@@ -46,6 +46,4 @@ RUN ls -l /var/machine-learning/puppet/environment/development/manifests
 #  Note: more information can be obtained via:
 #
 #        https://docs.puppet.com/puppet/3.6/reference/config_file_main.html
-RUN puppet config set environmentpath /var/machine-learning/puppet/environment/development --section agent
-RUN puppet config set modulepath modules_contrib --section agent
-RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x"; done;
+RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x" --modulepath /var/machine-learning/puppet/environment/development/modules_contrib; done;
