@@ -33,7 +33,9 @@ RUN ls -l /var/machine-learning/puppet/environment/development/manifests
 #  @config set <SETTING NAME> <VALUE> --section <CONFIG SECTION>
 #      @--section, specifies which section of the 'puppet.conf' to modify. The
 #          'main' indicates the global section used by all commands and
-#          services, which can be overridden by the other sections.
+#          services, which can be overridden by the more specific sections,
+#          whereas the more specific 'agent', indicates the section used by the
+#          puppet agent.
 #      @<SETTING NAME>, @<VALUE>, corresponds to attributes set in the
 #          'puppet.conf' config sections (i.e. 'main').
 #
