@@ -40,5 +40,6 @@ RUN ls -l /var/machine-learning/puppet/environment/development/manifests
 #  Note: The 'puppet.conf' file is Puppet’s main config file. It configures all
 #        of the Puppet commands and services, including puppet agent, puppet
 #        master, puppet apply, and puppet cert.
-RUN puppet config set modulepath /var/machine-learning/puppet/environment/development/modules_contrib --section main 
+RUN puppet config set environmentpath /var/machine-learning/puppet/environment/development --section main
+RUN puppet config set modulepath modules_contrib --section main
 RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x"; done;
