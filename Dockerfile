@@ -29,5 +29,12 @@ RUN ls -l /var/machine-learning/puppet/environment/development/modules
 RUN ls -l /var/machine-learning/puppet/environment/development/manifests
 
 ## provision with puppet
-RUN puppet config set --section main environmentpath /var/machine-learning/puppet/environment/
-RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x" --modulepath development/modules_contrib; done;
+#
+#  @config set <SETTING NAME> <VALUE> --section <CONFIG SECTION>
+#      @--section, specifies which section of the 'puppet.conf' to modify. The
+#          'main' indicates the global section used by all commands and
+#          services, which can be overridden by the other sections.
+#      @<SETTING NAME>, @<VALUE>, corresponds to attributes set in the
+#          'puppet.conf' config sections (i.e. 'main').
+RUN puppet config set modulepath /var/machine-learning/puppet/environment/development/modules_contrib --section main 
+RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x"; done;
