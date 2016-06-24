@@ -36,5 +36,9 @@ RUN ls -l /var/machine-learning/puppet/environment/development/manifests
 #          services, which can be overridden by the other sections.
 #      @<SETTING NAME>, @<VALUE>, corresponds to attributes set in the
 #          'puppet.conf' config sections (i.e. 'main').
+#
+#  Note: The 'puppet.conf' file is Puppet’s main config file. It configures all
+#        of the Puppet commands and services, including puppet agent, puppet
+#        master, puppet apply, and puppet cert.
 RUN puppet config set modulepath /var/machine-learning/puppet/environment/development/modules_contrib --section main 
 RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x"; done;
