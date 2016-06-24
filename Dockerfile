@@ -28,5 +28,10 @@ RUN ls -l /var/machine-learning/puppet/environment/development/modules_contrib
 RUN ls -l /var/machine-learning/puppet/environment/development/modules
 RUN ls -l /var/machine-learning/puppet/environment/development/manifests
 
+## debug print
+RUN sudo puppet config print modulepath
+RUN sudo puppet config print modulepath --section master
+RUN sudo puppet config print modulepath --section master --environment development
+
 ## provision with puppet
 RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x"; done;
