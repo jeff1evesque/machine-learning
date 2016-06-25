@@ -17,6 +17,8 @@ RUN gem install r10k -v 2.2.0
 
 ## debug print
 RUN /opt/puppetlabs/bin/puppet -V
+RUN ls -l /var/machine-learning
+RUN ls -l /var/machine-learning/hiera
 
 ## clone repository: allow puppet manifests to run (below)
 RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git /var/machine-learning
@@ -26,4 +28,4 @@ RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contri
 RUN PUPPETFILE=/var/machine-learning/test/Puppetfile PUPPETFILE_DIR=/var/machine-learning/puppet/environment/development/modules_contrib/ r10k puppetfile install
 
 ## provision with puppet
-RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do /opt/puppetlabs/bin/puppet apply "$x" --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning; done;
+RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do /opt/puppetlabs/bin/puppet apply "$x" --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules; done;
