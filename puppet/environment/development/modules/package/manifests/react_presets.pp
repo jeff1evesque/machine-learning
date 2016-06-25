@@ -4,7 +4,7 @@
 ###
 class package::react_presets {
     ## local variables
-    $root_dir = hiera('general')['root']
+    $root_dir = hiera('general').root
 
     ## install babelify presets for reactjs (npm)
     exec { 'install-babelify-presets':
