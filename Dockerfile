@@ -11,6 +11,8 @@ RUN dpkg -i puppetlabs-release-pc1-trusty.deb
 RUN apt-get update -y
 RUN apt-get install puppet-agent -y
 
+## configure puppet
+
 ## install r10k
 RUN apt-get -y install rubygems-integration=1.5
 RUN gem install r10k -v 2.2.0
@@ -23,8 +25,7 @@ RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contri
 RUN PUPPETFILE=/var/machine-learning/test/Puppetfile PUPPETFILE_DIR=/var/machine-learning/puppet/environment/development/modules_contrib/ r10k puppetfile install
 
 ## debug print
-RUN ls /var/machine-learning/puppet/environment/development/modules_contrib/
-RUN ls /var/machine-learning/puppet/environment/development/modules
+cat ~/.bash_profile
 
 ## provision with puppet
 RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x" --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning; done;
