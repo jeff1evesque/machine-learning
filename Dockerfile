@@ -9,7 +9,7 @@ RUN apt-get -y install wget=1.15-1ubuntu1.14.04.2
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
 RUN dpkg -i puppetlabs-release-pc1-trusty.deb
 RUN apt-get update -y
-RUN apt-get install puppet-agent -y
+RUN apt-get install puppet -y
 
 ## configure puppet
 RUN echo 'PATH=$PATH:$HOME/.local/bin:$HOME/bin:/opt/puppetlabs/bin/' >> ~/.profile
