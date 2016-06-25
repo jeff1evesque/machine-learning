@@ -12,6 +12,8 @@ RUN apt-get update -y
 RUN apt-get install puppet-agent -y
 
 ## configure puppet
+RUN echo 'PATH=$PATH:$HOME/.local/bin:$HOME/bin:/opt/puppetlabs/bin/' >> ~/.profile
+RUN echo 'export PATH' >> ~/.profile
 
 ## install r10k
 RUN apt-get -y install rubygems-integration=1.5
