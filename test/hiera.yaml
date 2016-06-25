@@ -3,7 +3,7 @@
   - yaml
 
 :yaml:
-  :datadir: /var/testing/hiera
+  :datadir: /var/test/hiera
 
 :hierarchy:
   - settings
