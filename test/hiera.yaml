@@ -3,7 +3,7 @@
   - yaml
 
 :yaml:
-  :datadir: /var/machine-learning/hiera
+  :datadir: /var/testing/hiera
 
 :hierarchy:
   - settings
