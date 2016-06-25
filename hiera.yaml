@@ -6,7 +6,4 @@
   - settings
 
 :yaml:
-  # vagrant container
   :datadir: /vagrant/hiera
-  # docker container
-  :datadir: /var/machine-learning/hiera
