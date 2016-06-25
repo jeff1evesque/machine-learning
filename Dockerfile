@@ -24,9 +24,7 @@ RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contri
 RUN PUPPETFILE=/var/machine-learning/test/Puppetfile PUPPETFILE_DIR=/var/machine-learning/puppet/environment/development/modules_contrib/ r10k puppetfile install
 
 ## debug print
-RUN ls -l /var/machine-learning/puppet/environment/development/modules_contrib
-RUN ls -l /var/machine-learning/puppet/environment/development/modules
-RUN ls -l /var/machine-learning/puppet/environment/development/manifests
+RUN puppet --version
 
 ## provision with puppet
 RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x" --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules; done;
