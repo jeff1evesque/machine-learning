@@ -2,7 +2,7 @@ FROM ubuntu:14.04
 
 ## copy files into container
 RUN mkdir /var/machine-learning
-RUN COPY . /var/machine-learning
+COPY . /var/machine-learning
 
 ## install git, and wget
 RUN apt-get -y update
