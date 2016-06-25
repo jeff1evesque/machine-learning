@@ -15,13 +15,13 @@ RUN apt-get install puppet-agent -y
 RUN apt-get -y install rubygems-integration=1.5
 RUN gem install r10k -v 2.2.0
 
+## clone repository: allow puppet manifests to run (below)
+RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git /var/machine-learning
+
 ## debug print
 RUN /opt/puppetlabs/bin/puppet -V
 RUN ls -l /var/machine-learning
 RUN ls -l /var/machine-learning/hiera
-
-## clone repository: allow puppet manifests to run (below)
-RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git /var/machine-learning
 
 ## install puppet modules using puppetfile with r10k
 RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contrib/
