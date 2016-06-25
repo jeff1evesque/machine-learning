@@ -19,6 +19,8 @@ class install_nodejs {
     contain nodejs
 }
 
+Class['::nodejs'] -> Package <| provider == 'npm' |>
+
 ## general packages
 class general_packages {
     ## set dependency
