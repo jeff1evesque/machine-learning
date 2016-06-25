@@ -20,7 +20,6 @@ RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git 
 
 ## debug print
 RUN /opt/puppetlabs/bin/puppet -V
-RUN ls -l /var/machine-learning
 RUN ls -l /var/machine-learning/hiera
 RUN ls -l /var/machine-learning/test
 
