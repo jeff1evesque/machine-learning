@@ -1,10 +1,9 @@
 ---
 :backends:
   - yaml
-  
+
 :yaml:
-  :datadir: /
+  :datadir: /vagrant/hiera
 
 :hierarchy:
-  - /vagrant/hiera/settings
-  - /var/machine-learning/hiera/settings
+  - settings
