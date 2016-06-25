@@ -4,7 +4,7 @@
 ###
 class vagrant::service {
     ## variables
-    $mountpoint    = hiera('general').root
+    $mountpoint    = hiera('general')['root']
     $template_path = 'vagrant/vagrant_mounted.erb'
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
