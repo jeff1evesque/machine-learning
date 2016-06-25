@@ -20,9 +20,7 @@ RUN apt-get -y install rubygems-integration=1.5
 RUN gem install r10k -v 2.2.0
 
 ## debug print
-RUN ls -l /var
-RUN ls -l /var/machine-learning/hiera
-RUN ls -l /var/machine-learning/test
+RUN ls -l /var/machine-learning
 
 ## install puppet modules using puppetfile with r10k
 RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contrib/
