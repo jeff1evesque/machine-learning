@@ -9,11 +9,7 @@ RUN apt-get -y install wget=1.15-1ubuntu1.14.04.2
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
 RUN dpkg -i puppetlabs-release-pc1-trusty.deb
 RUN apt-get update -y
-RUN apt-get install puppet -y
-
-## configure puppet
-RUN echo 'PATH=$PATH:$HOME/.local/bin:$HOME/bin:/opt/puppetlabs/bin/' >> ~/.profile
-RUN echo 'export PATH' >> ~/.profile
+RUN apt-get install puppet-agent -y
 
 ## install r10k
 RUN apt-get -y install rubygems-integration=1.5
@@ -26,8 +22,5 @@ RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git 
 RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contrib/
 RUN PUPPETFILE=/var/machine-learning/test/Puppetfile PUPPETFILE_DIR=/var/machine-learning/puppet/environment/development/modules_contrib/ r10k puppetfile install
 
-## debug print
-RUN cat ~/.profile
-
 ## provision with puppet
-RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do puppet apply "$x" --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning; done;
+RUN for x in /var/machine-learning/puppet/environment/development/manifests/*.pp; do /opt/puppetlabs/bin/puppet apply "$x" --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning; done;
