@@ -13,7 +13,7 @@ services:
 #      @--name, assign container name to running container
 before_install:
   - docker build -t ubuntu/trusty .
-  - docker run -d ubuntu/trusty --name trusty-unit-test
+  - docker run -d ubuntu/trusty --name docker-test-container
   - docker ps -a
 
 ## install packages for linting
@@ -75,4 +75,4 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker exec trusty-unit-test test/py.test
+  - docker exec docker-test-container test/py.test
