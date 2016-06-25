@@ -10,7 +10,7 @@
 ## variables
 general:
     environment: 'development'
-    root: '/var'
+    root: '/var/machine-learning'
     host: 'localhost'
     user: 'root'
     group: 'root'
