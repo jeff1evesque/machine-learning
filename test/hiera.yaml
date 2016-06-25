@@ -2,8 +2,8 @@
 :backends:
   - yaml
 
-:hierarchy:
-  - settings
-
 :yaml:
   :datadir: /var/machine-learning/hiera
+
+:hierarchy:
+  - settings
