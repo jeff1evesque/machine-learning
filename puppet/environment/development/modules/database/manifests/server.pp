@@ -6,13 +6,13 @@ class database::server {
     ## local variables
     $hiera_general    = hiera('general')
     $hiera_database   = hiera('database')
-    $host             = $hiera_general['host']
-    $db               = $hiera_database['name']
-    $db_user          = $hiera_database['username']
-    $db_pass          = $hiera_database['password']
-    $provisioner      = $hiera_database['provisioner']
-    $provisioner_pass = $hiera_database['provisioner_password']
-    $root_pass        = $hiera_database['root_password']
+    $host             = $hiera_general.host
+    $db               = $hiera_database.name
+    $db_user          = $hiera_database.username
+    $db_pass          = $hiera_database.password
+    $provisioner      = $hiera_database.provisioner
+    $provisioner_pass = $hiera_database.provisioner_password
+    $root_pass        = $hiera_database.root_password
 
     ## mysql::server: install, and configure mariadb-server
     #
