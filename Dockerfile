@@ -15,6 +15,9 @@ RUN apt-get install puppet-agent -y
 RUN apt-get -y install rubygems-integration=1.5
 RUN gem install r10k -v 2.2.0
 
+## debug print
+RUN /opt/puppetlabs/bin/puppet -V
+
 ## clone repository: allow puppet manifests to run (below)
 RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git /var/machine-learning
 
