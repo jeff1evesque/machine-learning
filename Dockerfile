@@ -10,7 +10,6 @@ RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
 RUN dpkg -i puppetlabs-release-pc1-trusty.deb
 RUN apt-get update -y
 RUN apt-get install puppet-agent -y
-RUN apt-get install puppet -y
 
 ## install r10k
 RUN apt-get -y install rubygems-integration=1.5
