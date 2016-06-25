@@ -1,5 +1,9 @@
 FROM ubuntu:14.04
 
+## copy files into container
+RUN mkdir /var/machine-learning
+RUN . /var/machine-learning
+
 ## install git, and wget
 RUN apt-get -y update
 RUN apt-get -y install git=1:1.9.1-1ubuntu0.3
