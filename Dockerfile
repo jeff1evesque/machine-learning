@@ -22,6 +22,7 @@ RUN git clone https://jeff1evesque@github.com/jeff1evesque/machine-learning.git 
 RUN /opt/puppetlabs/bin/puppet -V
 RUN ls -l /var/machine-learning
 RUN ls -l /var/machine-learning/hiera
+RUN ls -l /var/machine-learning/test
 
 ## install puppet modules using puppetfile with r10k
 RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contrib/
