@@ -10,6 +10,7 @@
 ## variables
 general:
     environment: 'development'
+    vagrant_implement: false
     root: '/var/machine-learning'
     host: 'localhost'
     user: 'root'
