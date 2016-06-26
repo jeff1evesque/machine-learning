@@ -10,6 +10,7 @@
 ## variables
 general:
     environment: 'development'
+    vagrant_implement: true
     root: '/vagrant'
     host: 'localhost'
     user: 'vagrant'
