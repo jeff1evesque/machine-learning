@@ -37,4 +37,5 @@ RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/de
 ## debug
 RUN ls -l /etc/init
 RUN cat /etc/init/sass.conf
+RUN service sass start
 RUN ls -l /var/machine-learning/puppet/environment/development/modules/compiler/scripts
