@@ -37,6 +37,7 @@ class compiler::webcompilers {
         file { "${compiler_dir}/${compiler}":
             ensure  => file,
             content => dos2unix(template("${compiler_dir}/${compiler}")),
+            mode    => '744',
         }
     }
 }
