@@ -39,3 +39,5 @@ RUN ls -l /etc/init
 RUN cat /etc/init/sass.conf
 RUN ls -l /var/machine-learning/puppet/environment/development/modules/compiler/scripts
 RUN initctl check-config sass
+RUN initctl start sass
+RUN service start sass
