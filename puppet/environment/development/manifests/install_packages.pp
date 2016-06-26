@@ -32,6 +32,7 @@ class general_packages {
     contain package::xmltodict
     contain package::six
     contain package::fetch
+    contain package::pyyaml
 }
 
 ## initiate
