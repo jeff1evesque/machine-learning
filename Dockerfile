@@ -10,7 +10,6 @@ COPY . /var/machine-learning
 RUN apt-get -y update
 RUN apt-get -y install git=1:1.9.1-1ubuntu0.3
 RUN apt-get -y install wget=1.15-1ubuntu1.14.04.2
-RUN apt-get -y install upstart-sysv
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
