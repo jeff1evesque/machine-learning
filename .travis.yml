@@ -75,4 +75,3 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker exec docker-test-container test/py.test
