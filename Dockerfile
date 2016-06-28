@@ -38,3 +38,6 @@ RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/de
 RUN ls -l /etc/init
 RUN cat /etc/init/sass.conf
 RUN ls -l /var/machine-learning/puppet/environment/development/modules/compiler/scripts
+RUN ls -l /var/machine-learning/interface/static/css
+RUN ls -l /var/machine-learning/interface/static/img
+RUN ls -l /var/machine-learning/interface/static/js
