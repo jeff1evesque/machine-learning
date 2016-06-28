@@ -15,6 +15,11 @@ before_install:
   - docker build -t ubuntu/trusty .
   - docker run --name docker-test-container -d ubuntu/trusty
   - docker ps -a
+  - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+  - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
+  - sudo apt-get update
+  - sudo apt-get install puppet-agent -y
+  - puppet -V
 
 ## install packages for linting
 #
@@ -41,9 +46,6 @@ install:
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint
   - npm install -g travis-lint
-  - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
-  - sudo apt-get -y update
-  - sudo apt-get -y install puppet-agent
 
 ## implement linting
 #
@@ -61,8 +63,8 @@ script:
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint -d W005 interface/templates/*.html
-  - /opt/puppetlabs/bin/puppet parser validate puppet/environment/development/manifests
-  - /opt/puppetlabs/bin/puppet parser validate puppet/environment/development/modules
+  - puppet parser validate puppet/environment/development/manifests
+  - puppet parser validate puppet/environment/development/modules
   - puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/development/modules
   - (cd puppet/environment/development/ && r10k puppetfile check)
   - (cd test/ && r10k puppetfile check)
