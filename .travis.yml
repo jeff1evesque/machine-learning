@@ -41,9 +41,9 @@ install:
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint
   - npm install -g travis-lint
-  - RUN dpkg -i puppetlabs-release-pc1-trusty.deb
-  - RUN apt-get -y update
-  - RUN apt-get -y install puppet-agent
+  - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
+  - sudo apt-get -y update
+  - sudo apt-get -y install puppet-agent
 
 ## implement linting
 #
