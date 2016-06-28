@@ -13,4 +13,4 @@ from flask import Flask
 app = Flask(__name__)
 
 # required circular import
-import interface.views # noqa
+import interface.views  # noqa
