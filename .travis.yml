@@ -15,7 +15,7 @@ before_install:
   - docker build -t ubuntu/trusty .
   - docker run --name docker-test-container -d ubuntu/trusty
   - docker ps -a
-  - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+  - wget http://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
   - sudo apt-get install puppet-agent -y
