@@ -41,3 +41,5 @@ RUN ls -l /var/machine-learning/puppet/environment/development/modules/compiler/
 RUN ls -l /var/machine-learning/interface/static/css
 RUN ls -l /var/machine-learning/interface/static/img
 RUN ls -l /var/machine-learning/interface/static/js
+RUN ls -l /var/machine-learning/log
+RUN cat /var/machine-learning/log/webserver/flask.log
