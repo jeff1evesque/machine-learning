@@ -13,7 +13,7 @@ services:
 #      @--name, assign container name to running container
 before_install:
   - docker build -t ubuntu/trusty .
-  - docker run --name docker-test-container -d ubuntu/trusty test/py.test
+  - docker run -d ubuntu/trusty --shell=/bin/bash (cd test && py.test)
   - docker ps -a
   - wget http://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
