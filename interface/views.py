@@ -1,6 +1,8 @@
 '''@views
+
 This file contains the corresponding views logic. Specifically, the route
 decorators are defined, which flask to execute triggers for specific URL's.
+
 '''
 
 import json
@@ -16,7 +18,9 @@ from brain.cache.cache_hset import Cache_Hset
 @app.route('/')
 def index():
     '''@index
+
     This router function renders the 'index.html' template.
+
     '''
 
     return render_template('index.html')
@@ -25,12 +29,15 @@ def index():
 @app.route('/load-data/', methods=['POST'])
 def load_data():
     '''@load_data
+
     This method returns the computed data, resulting from one of the following
     implemented session:
+
         - data_new
         - data_append
         - model_predict
         - model_generate
+
     '''
 
     if request.method == 'POST':
@@ -111,7 +118,9 @@ def load_data():
 @app.route('/retrieve-session/', methods=['POST'])
 def retrieve_session():
     '''@retrieve_session
+
     This router function retrieves all sessions stored in the database.
+
     '''
 
     if request.method == 'POST':
@@ -128,7 +137,9 @@ def retrieve_session():
 @app.route('/retrieve-sv-model/', methods=['POST'])
 def retrieve_sv_model():
     '''@retrieve_sv_model
+
     The router function retrieves all models stored in the hashed redis cache.
+
     '''
 
     if request.method == 'POST':
@@ -145,10 +156,13 @@ def retrieve_sv_model():
 @app.route('/retrieve-sv-features/', methods=['POST'])
 def retrieve_sv_features():
     '''@retrieve_sv_features
+
     This router function retrieves the generalized features properties that can
     be expected for any given observation within the supplied dataset.
+
     @label_list, this value will be a json object, since it was originally
         cached into redis using 'json.dumps'.
+
     '''
 
     if request.method == 'POST':
@@ -161,4 +175,4 @@ def retrieve_sv_features():
         if label_list['result']:
             return json.dumps(label_list['result'])
         else:
-return json.dumps({'error': label_list['error']})
+            return json.dumps({'error': label_list['error']})
