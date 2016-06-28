@@ -35,10 +35,4 @@ RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/de
 RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/start_webserver.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
 
 ## debug
-RUN ls -l /etc/init
-RUN cat /etc/init/sass.conf
-RUN ls -l /var/machine-learning/puppet/environment/development/modules/compiler/scripts
-RUN ls -l /var/machine-learning/interface/static/css
-RUN ls -l /var/machine-learning/interface/static/img
-RUN ls -l /var/machine-learning/interface/static/js
-RUN ls -l /var/machine-learning/log
+RUN /var/machine-learning/test/py.test
