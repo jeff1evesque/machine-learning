@@ -9,8 +9,8 @@ services:
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
   - docker build -t ubuntu/trusty .
-  - wget http://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
-  - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
+  - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
+  - sudo dpkg -i puppetlabs-release-trusty.deb 
   - sudo apt-get update
   - sudo apt-get install puppet -y
   - puppet -V
