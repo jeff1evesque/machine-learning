@@ -14,7 +14,6 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install puppet -y
   - puppet -V
-  - sudo pip install pytest==2.9.2
 
 ## install packages for linting
 #
