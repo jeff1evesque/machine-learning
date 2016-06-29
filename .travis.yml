@@ -6,14 +6,9 @@ language: python
 services:
   - docker
 
-## build docker container for unit testing.
-#
-#  @docker run:
-#      @d, run container in background and print container ID
-#      @--name, assign container name to running container
+## build docker, install puppet (i.e. puppet parser validate)
 before_install:
   - docker build -t ubuntu/trusty .
-  - docker run -d ubuntu/trusty bash -c "(cd test && py.test)"
   - wget http://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
@@ -43,8 +38,8 @@ install:
   - sudo apt-get install shellcheck=0.3.3-1~ubuntu14.04.1
   - npm install -g eslint babel-eslint@6.0.0-beta.6
   - npm install -g eslint-plugin-react@4.2.3
-  - gem install yaml-lint
-  - npm install -g travis-lint
+  - gem install yaml-lint -v 0.0.7
+  - npm install -g travis-lint@1.0.0
 
 ## implement linting
 #
@@ -53,6 +48,9 @@ install:
 #      implementation (below) can be removed:
 #
 #      - https://github.com/rodjek/puppet-lint/issues/410
+#
+#  @docker run:
+#      @d, run container in background and print container ID
 #
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
@@ -79,3 +77,4 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
+  - docker run -d ubuntu/trusty bash -c "(cd test && py.test)"
