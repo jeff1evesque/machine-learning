@@ -4,7 +4,8 @@
 ###
 class compiler::initial_compile {
     ## local variables
-    $root_dir = hiera('general')['root']
+    $hiera_general = hiera('general')
+    $root_dir      = $hiera_general['root']
     $sources  = [
         'jsx',
         'img',
