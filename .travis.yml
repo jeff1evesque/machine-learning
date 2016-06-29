@@ -50,7 +50,7 @@ install:
 #      - https://github.com/rodjek/puppet-lint/issues/410
 #
 #  @docker run:
-#      @d, run container in background and print container ID
+#      -d, run container in background and print container ID
 #
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
@@ -77,4 +77,4 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker run -d ubuntu/trusty bash -c "cd test; py.test"
+  - docker run ubuntu/trusty bash -c "cd test; py.test"
