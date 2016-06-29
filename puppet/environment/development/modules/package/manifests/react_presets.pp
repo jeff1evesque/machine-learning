@@ -4,8 +4,8 @@
 ###
 class package::react_presets {
     ## local variables
-    $hiera_general   = hiera('general')
-    $vagrant_mounted = $hiera_general['root']
+    $hiera_general = hiera('general')
+    $root_dir      = $hiera_general['root']
 
     ## install babelify presets for reactjs (npm)
     exec { 'install-babelify-presets':
