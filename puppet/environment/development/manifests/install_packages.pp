@@ -24,6 +24,7 @@ class general_packages {
     ## set dependency
     require apt
     require install_nodejs
+    require system::webcompiler_directory
 
     ## install packages
     contain package::inotify_tools
