@@ -14,7 +14,6 @@ services:
 before_install:
   - docker build -t ubuntu/trusty .
   - docker run -d ubuntu/trusty bash -c "(cd test && py.test)"
-  - docker ps -a
   - wget http://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
