@@ -6,8 +6,8 @@ class package::sklearn {
     require git
 
     ## local variables
-    $hiera_general   = hiera('general')
-    $vagrant_mounted = $hiera_general['root']
+    $hiera_general = hiera('general')
+    $root_dir      = $hiera_general['root']
 
     ## download sklearn
     vcsrepo { "${root_dir}/build/scikit-learn":
