@@ -4,7 +4,8 @@
 ###
 class compiler::start_browserify {
     # variables
-    $vagrant_mounted = hiera('general')['vagrant_implement']
+    $hiera_general   = hiera('general')
+    $vagrant_mounted = $hiera_general['vagrant_implement']
 
     # run sass
     if $vagrant_mounted {
