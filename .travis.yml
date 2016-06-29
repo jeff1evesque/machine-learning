@@ -77,4 +77,4 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker run ubuntu/trusty bash -c "cd test; py.test"
+  - docker run ubuntu/trusty bash -c "cd /var/machine-learning/test; py.test"
