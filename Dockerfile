@@ -22,6 +22,7 @@ RUN apt-get -y install rubygems-integration=1.5
 RUN gem install r10k -v 2.2.0
 
 ## install pytest
+RUN apt-get -y install python-pip
 RUN pip install pytest==2.9.2
 
 ## install puppet modules using puppetfile with r10k
