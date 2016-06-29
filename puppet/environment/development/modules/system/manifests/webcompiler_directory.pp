@@ -5,7 +5,7 @@
 class system::webcompiler_directory {
     ## local variables
     $hiera_general = hiera('general')
-    $root_dir = $hiera_general['root']
+    $root_dir      = $hiera_general['root']
 
     $directories = {
         browserify => {
