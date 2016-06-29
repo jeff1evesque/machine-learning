@@ -4,7 +4,7 @@ FROM ubuntu:14.04
 RUN mkdir /var/machine-learning
 COPY . /var/machine-learning
 
-## install upstart, git, and wget
+## install git, and wget
 #
 #  Note: r10k requires 'git' installed
 RUN apt-get -y update
@@ -20,6 +20,9 @@ RUN apt-get -y install puppet-agent
 ## install r10k
 RUN apt-get -y install rubygems-integration=1.5
 RUN gem install r10k -v 2.2.0
+
+## install pytest
+RUN pip install pytest==2.9.2
 
 ## install puppet modules using puppetfile with r10k
 RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contrib/
