@@ -77,4 +77,4 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker run -d ubuntu/trusty bash -c "(cd test && py.test)"
+  - docker run -d ubuntu/trusty bash -c "cd test; py.test"
