@@ -5,7 +5,7 @@
 class webserver::service {
     ## variables
     $hiera_general   = hiera('general')
-    $vagrant_mounted = hiera('general')['vagrant_implement']
+    $vagrant_mounted = $hiera_general['vagrant_implement']
     $root_dir        = $hiera_general['root']
     $user            = $hiera_general['user']
     $group           = $hiera_general['group']
