@@ -4,7 +4,8 @@
 ###
 class webserver::start {
     # variables
-    $vagrant_mounted = hiera('general')['vagrant_implement']
+    $hiera_general   = hiera('general')
+    $vagrant_mounted = $hiera_general['vagrant_implement']
 
     # run flask
     if $vagrant_mounted {
