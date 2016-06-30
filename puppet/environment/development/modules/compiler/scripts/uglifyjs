@@ -13,7 +13,7 @@ if [ "$1" = "/var/machine-learning" ]; then
   echo 'test' >> "$1"/interface/static/js/one.txt
   echo 'test' >> /var/machine-learning/interface/static/js/two.txt
 
-  while read -r file; do
+  for file in "$1"/*; do
     echo 'test' >> /var/machine-learning/interface/static/js/three.txt
 
     # get last `.` occurence as starting extension
