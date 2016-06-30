@@ -5,6 +5,7 @@
 class compiler::start_uglifyjs {
     # variables
     $hiera_general   = hiera('general')
+    $root_dir        = $hiera_general['root']
     $vagrant_mounted = $hiera_general['vagrant_implement']
 
     # run uglifyjs
@@ -16,9 +17,13 @@ class compiler::start_uglifyjs {
         }
     }
     else {
-        # run and restart when needed
-        service { 'uglifyjs':
-            ensure => 'running',
+        # local variables
+        $asset_dir = "${root_dir}/interface/static/js"
+        $src_dir   = "${root_dir}/src/js"
+
+        # manually compile
+        exec { 'uglifyjs':
+            command => "for file in $asset_dir/*; do uglifyjs -c --output $root_dir/interface/static/js/${file%.*}.min.js $src_dir/$file; done",
         }
     }
 }
