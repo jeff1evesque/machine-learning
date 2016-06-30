@@ -48,5 +48,4 @@ RUN ls -l /var/machine-learning/src/jsx
 RUN ls -l /var/machine-learning/src/scss
 
 ## show log(s)
-RUN netstat -ntlup
 RUN cat /var/machine-learning/log/webserver/flask.log
