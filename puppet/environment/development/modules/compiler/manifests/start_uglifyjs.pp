@@ -22,6 +22,7 @@ class compiler::start_uglifyjs {
         exec { 'uglifyjs':
             command => "./uglifyjs ${root_dir}",
             cwd     => "${dev_env_path}/modules/compiler/scripts/uglifyjs",
+            path    => '/usr/bin',
         }
     }
 }
