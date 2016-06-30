@@ -43,6 +43,9 @@ RUN ls -l /var/machine-learning/interface/static/js
 RUN ls -l /var/machine-learning/interface/static/css
 RUN ls -l /var/machine-learning/interface/static/img
 RUN ls -l /var/machine-learning/puppet/environment/development/modules/compiler/scripts
+RUN ls -l /var/machine-learning/src/js
+RUN ls -l /var/machine-learning/src/jsx
+RUN ls -l /var/machine-learning/src/scss
 
 ## show log(s)
 RUN netstat -ntlup
