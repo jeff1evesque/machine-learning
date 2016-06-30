@@ -20,7 +20,7 @@ class compiler::start_sass {
     else {
         # manually compile
         exec { 'sass':
-            command => "./sass ${root_dir}",
+            command => ".sass ${root_dir}",
             cwd     => "${dev_env_path}/modules/compiler/scripts",
         }
     }
