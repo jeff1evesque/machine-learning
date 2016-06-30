@@ -23,8 +23,9 @@ class compiler::start_uglifyjs {
 
         # manually compile
         exec { 'uglifyjs':
-            command => "for file in $asset_dir/*; do uglifyjs -c --output $root_dir/interface/static/js/${file%.*}.min.js $src_dir/$file; done",
+            command  => "for file in $asset_dir/*; do uglifyjs -c --output $root_dir/interface/static/js/${file%.*}.min.js $src_dir/$file; done",
             provider => shell,
+            path     => '/usr/bin',
         }
     }
 }
