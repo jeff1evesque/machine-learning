@@ -45,4 +45,4 @@ RUN ls -l /var/machine-learning/interface/static/img
 
 ## show log(s)
 RUN cat /var/machine-learning/log/webserver/flask.log
-RUN netstat -nl|grep 3306
+RUN netstat -tlpn
