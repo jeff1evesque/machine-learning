@@ -16,9 +16,10 @@ class compiler::start_sass {
         }
     }
     else {
-        # run and restart when needed
-        service { 'sass':
-            ensure => 'running',
+        # manually compile
+        exec { 'sass':
+            command => "./sass ${root_dir}",
+            cwd     => "${dev_env_path}/modules/compiler/scripts",
         }
     }
 }
