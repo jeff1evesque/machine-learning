@@ -21,7 +21,7 @@ class compiler::start_uglifyjs {
         # manually compile
         exec { 'uglifyjs':
             command => "./uglifyjs ${root_dir}",
-            path    => "${dev_env_path}/modules/compiler/scripts/uglifyjs",
+            cwd     => "${dev_env_path}/modules/compiler/scripts/uglifyjs",
         }
     }
 }
