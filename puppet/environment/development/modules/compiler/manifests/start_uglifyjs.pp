@@ -7,6 +7,7 @@ class compiler::start_uglifyjs {
     $hiera_general   = hiera('general')
     $root_dir        = $hiera_general['root']
     $vagrant_mounted = $hiera_general['vagrant_implement']
+    $dev_env_path        = "${root_dir}/puppet/environment/development"
 
     # run uglifyjs
     if $vagrant_mounted {
@@ -17,15 +18,10 @@ class compiler::start_uglifyjs {
         }
     }
     else {
-        # local variables
-        $asset_dir = "${root_dir}/interface/static/js"
-        $src_dir   = "${root_dir}/src/js"
-
         # manually compile
         exec { 'uglifyjs':
-            command  => "for file in $asset_dir/*; do uglifyjs -c --output $root_dir/interface/static/js/\${file%.*}.min.js $src_dir/$file; done",
-            provider => shell,
-            path     => '/usr/bin',
+            command => "./uglifyjs ${root_dir}",
+            path    => "${dev_env_path}/modules/compiler/scripts/uglifyjs",
         }
     }
 }
