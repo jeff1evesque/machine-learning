@@ -42,6 +42,7 @@ RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/de
 RUN ls -l /var/machine-learning/interface/static/js
 RUN ls -l /var/machine-learning/interface/static/css
 RUN ls -l /var/machine-learning/interface/static/img
+RUN ls -l /var/machine-learning/puppet/environment/development/modules/compiler/scripts
 
 ## show log(s)
 RUN netstat -ntlup
