@@ -22,6 +22,7 @@ class compiler::start_browserify {
         exec { 'browserify':
             command  => "./browserify ${root_dir}",
             cwd      => "${dev_env_path}/modules/compiler/scripts",
+            path     => '/usr/bin',
             provider => shell,
         }
     }
