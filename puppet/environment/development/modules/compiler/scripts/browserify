@@ -26,7 +26,7 @@ if [ "$1" = "/var/machine-learning" ]; then
     then
       echo 'test' >> "$1/src/jsx/three.txt"
       # convert with 'browserify'
-      (cd /usr/lib/node_modules && browserify "$1/src/jsx/$file" -t [ babelify --presets es2015,react ] -o "$1/src/js/$filename.js")
+      cd /usr/lib/node_modules && browserify "$1/src/jsx/$file" -t [ babelify --presets es2015,react ] -o "$1/src/js/$filename.js"
 
       # append file to '.gitignore'
       fgrep -q "$filename".js "$1"/src/js/.gitignore || echo "$filename".js >> "$1"/src/js/.gitignore
