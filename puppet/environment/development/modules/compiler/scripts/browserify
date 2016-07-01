@@ -11,15 +11,20 @@ PATH="/usr/local/bin:$PATH"
 
 # docker container
 if [ "$1" = "/var/machine-learning" ]; then
+  echo 'test' >> "$1/src/jsx/one.txt"
   cd "$1"/src/jsx && for file in *; do
     # filename (without 'last' extension)
     filename="${file%.*}"
     # get last `.` occurence as starting extension
     file_extension="${file##*.}"
 
+    echo "$file" >> "$1/src/jsx/two.txt"
+    echo "$filename" >> "$1/src/jsx/two.txt"
+    echo "$file_extension" >> "$1/src/jsx/two.txt"
+
     if [ "$file_extension" = 'jsx' ]
     then
-
+      echo 'test' >> "$1/src/jsx/three.txt"
       # convert with 'browserify'
       (cd /usr/lib/node_modules && browserify "$1/src/jsx/$file" -t [ babelify --presets es2015,react ] -o "$1/src/js/$filename.js")
 
