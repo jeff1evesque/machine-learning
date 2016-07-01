@@ -23,7 +23,9 @@ if [ "$1" = "/var/machine-learning" ]; then
 
     if [ "$extension" = 'js' ]
     then
-      echo 'test' >> /var/machine-learning/interface/static/js/four.txt
+      echo "$file----" >> /var/machine-learning/interface/static/js/four.txt
+      echo "$extension----" >> /var/machine-learning/interface/static/js/four.txt
+      echo "$filename----" >> /var/machine-learning/interface/static/js/four.txt
       # minifiy with 'uglifyjs'
       #uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
       cat /var/machine-learning/interface/static/js/four.txt
