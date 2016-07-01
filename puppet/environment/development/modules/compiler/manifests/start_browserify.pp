@@ -16,9 +16,11 @@ class compiler::start_browserify {
         }
     }
     else {
-        # run and restart when needed
-        service { 'browserify':
-            ensure => 'running',
+        # manually compile
+        exec { 'browserify':
+            command => "./browserify ${root_dir}",
+            cwd     => "${dev_env_path}/modules/compiler/scripts",
+            path    => '/usr/bin',
         }
     }
 }
