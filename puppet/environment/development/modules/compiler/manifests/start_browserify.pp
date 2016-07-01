@@ -20,9 +20,9 @@ class compiler::start_browserify {
     else {
         # manually compile
         exec { 'browserify':
-            command => "./browserify ${root_dir}",
-            cwd     => "${dev_env_path}/modules/compiler/scripts",
-            path    => '/usr/bin',
+            command  => "./browserify ${root_dir}",
+            cwd      => "${dev_env_path}/modules/compiler/scripts",
+            provider => shell,
         }
     }
 }
