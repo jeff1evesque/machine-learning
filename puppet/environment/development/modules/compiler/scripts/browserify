@@ -18,9 +18,9 @@ if [ "$1" = "/var/machine-learning" ]; then
     # get last `.` occurence as starting extension
     file_extension="${file##*.}"
 
-    echo "$file" >> "$1/src/jsx/two.txt"
-    echo "$filename" >> "$1/src/jsx/two.txt"
-    echo "$file_extension" >> "$1/src/jsx/two.txt"
+    echo "file: $file" >> "$1/src/jsx/two.txt"
+    echo "filename: $filename" >> "$1/src/jsx/two.txt"
+    echo "file_extension: $file_extension" >> "$1/src/jsx/two.txt"
 
     if [ "$file_extension" = 'jsx' ]
     then
