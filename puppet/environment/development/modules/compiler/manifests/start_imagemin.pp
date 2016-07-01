@@ -16,9 +16,11 @@ class compiler::start_imagemin {
         }
     }
     else {
-        # run and restart when needed
-        service { 'imagemin':
-            ensure => 'running',
+        # manually compile
+        exec { 'imagemin':
+            command => "./imagemin ${root_dir}",
+            cwd     => "${dev_env_path}/modules/compiler/scripts",
+            path    => '/usr/bin',
         }
     }
 }
