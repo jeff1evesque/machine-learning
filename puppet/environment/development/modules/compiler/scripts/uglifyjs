@@ -24,6 +24,7 @@ if [ "$1" = "/var/machine-learning" ]; then
 
     fi
   done
+
 # vagrant container
 else
   # track execution of script
