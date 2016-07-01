@@ -27,6 +27,8 @@ if [ "$1" = "/var/machine-learning" ]; then
       fgrep -q "$filename".js "$1"/src/js/.gitignore || echo "$filename".js >> "$1"/src/js/.gitignore
 
     fi
+  done
+
 # vagrant container
 else
   # track execution of script
