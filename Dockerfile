@@ -39,14 +39,10 @@ RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/de
 RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/start_webserver.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
 
 ## show directory
-RUN ls -l /var/machine-learning/interface/static/js
-RUN ls -l /var/machine-learning/interface/static/css
-RUN ls -l /var/machine-learning/interface/static/img
 RUN ls -l /var/machine-learning/puppet/environment/development/modules/compiler/scripts
 RUN ls -l /var/machine-learning/src/js
 RUN ls -l /var/machine-learning/src/jsx
 RUN ls -l /var/machine-learning/src/scss
-RUN cat /var/machine-learning/interface/static/js/four.txt
-
-## show log(s)
-RUN cat /var/machine-learning/log/webserver/flask.log
+RUN ls -l /var/machine-learning/interface/static/js
+RUN ls -l /var/machine-learning/interface/static/css
+RUN ls -l /var/machine-learning/interface/static/img
