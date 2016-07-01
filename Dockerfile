@@ -50,4 +50,4 @@ RUN ls -l /var/machine-learning/interface/static/img
 ## debug statements
 RUN ls -l /usr/lib/node_modules
 RUN cat /var/machine-learning/src/jsx/two.txt
-RUN cat /var/machine-learning/src/js/.gitignore
+RUN cat /var/machine-learning/src/jsx/three.txt
