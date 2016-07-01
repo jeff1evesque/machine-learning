@@ -13,7 +13,7 @@ if [ "$1" = "/var/machine-learning" ]; then
   echo 'test' >> "$1"/interface/static/js/one.txt
   echo 'test' >> /var/machine-learning/interface/static/js/two.txt
 
-  cd "$1"/src/js && for file in *; do
+  (cd "$1"/src/js && for file in *; do
     echo 'test' >> /var/machine-learning/interface/static/js/three.js
 
     # get last `.` occurence as starting extension
@@ -30,7 +30,7 @@ if [ "$1" = "/var/machine-learning" ]; then
       uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
 
     fi
-  done
+  done)
 # vagrant container
 else
   # track execution of script
