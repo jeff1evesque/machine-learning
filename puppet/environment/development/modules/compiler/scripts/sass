@@ -38,19 +38,19 @@ else
 
   # watch '[root_dir]/src/scss/' subdirectory
   inotifywait "$1"/src/scss/ -m -e close_write -e move --format %f |
-  # Compile CSS
-  while read -r file; do
-    # get last `.` occurence as starting extension
-    extension=${file##*.}
-    # filename (without 'last' extension)
-    filename="${file%.*}"
+    # Compile CSS
+    while read -r file; do
+      # get last `.` occurence as starting extension
+      extension=${file##*.}
+      # filename (without 'last' extension)
+      filename="${file%.*}"
 
-    if [ "$extension" = 'scss' ] && [ "${file:0:1}" != '_' ]
-    then
+      if [ "$extension" = 'scss' ] && [ "${file:0:1}" != '_' ]
+      then
 
-      # compile with 'scss'
-      node-sass "$1/src/scss/$file" "$1/interface/static/css/$filename".min.css --output-style compressed
+        # compile with 'scss'
+        node-sass "$1/src/scss/$file" "$1/interface/static/css/$filename".min.css --output-style compressed
 
-    fi
-  done
+      fi
+    done
 fi
