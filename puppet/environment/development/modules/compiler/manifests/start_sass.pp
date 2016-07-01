@@ -22,7 +22,7 @@ class compiler::start_sass {
         exec { 'sass':
             command  => "./sass ${root_dir}",
             cwd      => "${dev_env_path}/modules/compiler/scripts",
-            path     => '/usr/bin',
+            provider => shell,
         }
     }
 }
