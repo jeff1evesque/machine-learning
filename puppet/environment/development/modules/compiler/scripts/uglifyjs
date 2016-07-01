@@ -37,20 +37,20 @@ else
 
   # watch '[root_dir]/src/js/' subdirectory
   inotifywait "$1"/src/js/ -m -e close_write -e move --format %f |
-  # Minify Javascript
-  while read -r file; do
+    # Minify Javascript
+    while read -r file; do
 
-    # get last `.` occurence as starting extension
-    extension=${file##*.}
-    # filename (without 'last' extension)
-    filename="${file%.*}"
+      # get last `.` occurence as starting extension
+      extension=${file##*.}
+      # filename (without 'last' extension)
+      filename="${file%.*}"
 
-    if [ "$extension" = 'js' ]
-    then
+      if [ "$extension" = 'js' ]
+      then
 
-      # minifiy with 'uglifyjs'
-      uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
+        # minifiy with 'uglifyjs'
+        uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
 
-    fi
-  done
+      fi
+    done
 fi
