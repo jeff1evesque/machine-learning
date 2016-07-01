@@ -25,7 +25,8 @@ if [ "$1" = "/var/machine-learning" ]; then
     then
       echo 'test' >> /var/machine-learning/interface/static/js/four.txt
       # minifiy with 'uglifyjs'
-      uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
+      #uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
+      cat /var/machine-learning/interface/static/js/four.txt
 
     fi
   done
