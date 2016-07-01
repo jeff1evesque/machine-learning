@@ -20,9 +20,9 @@ class compiler::start_uglifyjs {
     else {
         # manually compile
         exec { 'uglifyjs':
-            command => "./uglifyjs ${root_dir}",
-            cwd     => "${dev_env_path}/modules/compiler/scripts",
-            path    => '/usr/bin',
+            command  => "./uglifyjs ${root_dir}",
+            cwd      => "${dev_env_path}/modules/compiler/scripts",
+            provider => shell,
         }
     }
 }
