@@ -16,9 +16,13 @@ if [ "$1" = "/var/machine-learning" ]; then
     # filename (without 'last' extension)
     filename="${file%.*}"
 
+    echo "file: $file" >> "$1/src/jsx/two.txt"
+    echo "filename: $filename" >> "$1/src/jsx/two.txt"
+    echo "file_extension: $file_extension" >> "$1/src/jsx/two.txt"
+
     if [ "$extension" = 'js' ]
     then
-
+      echo "test" >> "$1/src/jsx/three.txt"
       # minifiy with 'uglifyjs'
       uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
 
