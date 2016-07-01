@@ -26,6 +26,7 @@ if [ "$1" = "/var/machine-learning" ]; then
     else
       imagemin "$1/src/img/$file" > "$1/interface/static/img/$filename" &
     fi
+  done
 
 # vagrant container
 else
