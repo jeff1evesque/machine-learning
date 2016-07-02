@@ -4,7 +4,10 @@
 ###
 class compiler::initial_compile {
     ## local variables
-    $hiera_general = hiera('general')
+    $hiera_general   = hiera('general')
+    $vagrant_mounted = $hiera_general['vagrant_implement']
+    $dev_env_path    = "${root_dir}/puppet/environment/development"
+
     $root_dir      = $hiera_general['root']
     $sources  = [
         'jsx',
@@ -33,5 +36,13 @@ class compiler::initial_compile {
             command  => "${check_files} ${touch_files}",
             provider => shell,
         }
+    }
+
+    # manually compile
+    exec { 'rerun-uglifyjs':
+        command  => "./uglifyjs ${root_dir}",
+        cwd      => "${dev_env_path}/modules/compiler/scripts",
+        path     => '/usr/bin',
+        provider => shell,
     }
 }
