@@ -16,10 +16,7 @@ before_install:
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
   - sudo apt-get install puppet-agent -y
-  - ls -l /home
-  - echo 'export PATH=$PATH:$HOME/bin:/opt/puppetlabs/bin' >> /home/travis/.bash_profile
-  - cat /home/travis/.bash_profile
-  - puppet -V
+  - /opt/puppetlabs/binpuppet -V
 
 ## install packages for linting
 #
@@ -66,8 +63,8 @@ script:
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint -d W005 interface/templates/*.html
-  - find puppet/environment/development/manifests -name '*.pp' -type f -exec puppet parser validate {} \;
-  - find puppet/environment/development/modules -name '*.pp' -type f -exec puppet parser validate {} \;
+  - find puppet/environment/development/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
+  - find puppet/environment/development/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
   - puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/development/modules
   - (cd puppet/environment/development/ && r10k puppetfile check)
   - (cd test/ && r10k puppetfile check)
