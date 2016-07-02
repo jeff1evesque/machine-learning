@@ -94,11 +94,11 @@ def check_model_generate():
 
     """
 
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
-        data=get_sample_json('svr-model-generate.json', 'svr')
-    )
+#    assert requests.post(
+#        endpoint_url,
+#        headers=headers,
+#        data=get_sample_json('svr-model-generate.json', 'svr')
+#    )
 
 
 def check_model_predict():
@@ -108,8 +108,8 @@ def check_model_predict():
 
     """
 
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
-        data=get_sample_json('svr-model-predict.json', 'svr')
-    )
+#    assert requests.post(
+#        endpoint_url,
+#        headers=headers,
+#        data=get_sample_json('svr-model-predict.json', 'svr')
+#    )
