@@ -9,6 +9,9 @@ services:
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
   - docker build -t ubuntu/trusty .
+  - docker run ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/configure_redis.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
+  - docker run ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/setup_database.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
+  - docker run ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/start_webserver.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
   - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
   - sudo dpkg -i puppetlabs-release-trusty.deb 
   - sudo apt-get update
