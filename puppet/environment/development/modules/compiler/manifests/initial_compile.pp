@@ -16,6 +16,7 @@ class compiler::initial_compile {
         'js'
     ]
 
+    ## vagrant container
     if $vagrant_mounted {
         $sources.each |String $source| {
             ## variables
@@ -39,8 +40,10 @@ class compiler::initial_compile {
             }
         }
     }
+    ## docker container
     else {
-        # manually compile js compiled from jsx templates
+        ## manually compile jsx asset, since first pass through via
+        # 'start_uglifyjs.pp' does not have adequate scope resolution.
         exec { 'rerun-uglifyjs':
             command  => "./uglifyjs ${root_dir}",
             cwd      => "${dev_env_path}/modules/compiler/scripts",
