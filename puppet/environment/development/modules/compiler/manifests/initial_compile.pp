@@ -9,7 +9,6 @@ class compiler::initial_compile {
     $vagrant_mounted = $hiera_general['vagrant_implement']
     $dev_env_path    = "${root_dir}/puppet/environment/development"
 
-    $root_dir      = $hiera_general['root']
     $sources  = [
         'jsx',
         'img',
