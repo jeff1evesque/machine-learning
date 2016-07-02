@@ -32,12 +32,8 @@ RUN PUPPETFILE=/var/machine-learning/test/Puppetfile PUPPETFILE_DIR=/var/machine
 ## provision with puppet
 RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/install_packages.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
 RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/install_sklearn.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
-RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/configure_redis.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
 RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/configure_system.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
-#RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/compile_asset.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
 RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/compile_asset.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
-RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/setup_database.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
-RUN /opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/start_webserver.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test
 
 ## show directory
 RUN ls -l /var/machine-learning/interface/static/js
