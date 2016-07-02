@@ -17,9 +17,8 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install puppet-agent -y
   - ls -l /home
-  - echo 'PATH=$PATH:$HOME/bin:/opt/puppetlabs/bin' >> /home/travis/.bash_profile
+  - echo 'export PATH=$PATH:$HOME/bin:/opt/puppetlabs/bin' >> /home/travis/.bash_profile
   - cat /home/travis/.bash_profile
-  - cat /home/ubuntu/.bash_profile
   - puppet -V
 
 ## install packages for linting
