@@ -45,6 +45,12 @@ with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
     provisioner = settings['database']['provisioner']
     provisioner_password = settings['database']['provisioner_password']
 
+    with open("/var/machine-learning/db-trace.txt", "w") as text_file:
+        text_file.write("host: %s" % host)
+        text_file.write("provisioner: %s" % provisioner)
+        text_file.write("provisioner password: %s" % provisioner_password)
+        text_file.write("database: %s" % db_ml)
+
     # create connection
     conn = DB.connect(
         host,
