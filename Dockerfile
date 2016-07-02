@@ -45,4 +45,5 @@ RUN ls -l /var/machine-learning/interface/static/css
 RUN ls -l /var/machine-learning/interface/static/img
 
 ## debug
+RUN echo "DB Boolean: $(mysql -uUSER -pPASS -sse "SELECT EXISTS(SELECT 1 FROM mysql.user WHERE user = 'provisioner')")"
 RUN cat /var/machine-learning/db-trace.txt
