@@ -12,8 +12,8 @@ before_install:
   - docker run ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/configure_redis.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
   - docker run ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/setup_database.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
   - docker run ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/start_webserver.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
-  - wget https://puppetlabs-release-puppetlabs-release-pc1-trusty.deb
-  - sudo dpkg -i puppetlabs-release-puppetlabs-release-pc1-trusty.deb
+  - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+  - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
   - sudo apt-get install puppet-agent -y
   - puppet -V
