@@ -17,6 +17,8 @@ before_install:
   - sudo apt-get update
   - sudo apt-get install puppet-agent -y
   - ls -l /opt/puppetlabs/bin
+  - /opt/puppetlabs/bin/puppet -V
+  - /opt/puppetlabs/puppet/bin/puppet -V
 
 ## install packages for linting
 #
