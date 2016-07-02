@@ -5,6 +5,7 @@
 class compiler::initial_compile {
     ## local variables
     $hiera_general   = hiera('general')
+    $root_dir        = $hiera_general['root']
     $vagrant_mounted = $hiera_general['vagrant_implement']
     $dev_env_path    = "${root_dir}/puppet/environment/development"
 
@@ -40,7 +41,7 @@ class compiler::initial_compile {
         }
     }
     else {
-        # manually compile
+        # manually compile js compiled from jsx templates
         exec { 'rerun-uglifyjs':
             command  => "./uglifyjs ${root_dir}",
             cwd      => "${dev_env_path}/modules/compiler/scripts",
