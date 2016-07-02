@@ -47,8 +47,3 @@ RUN ls -l /var/machine-learning/src/scss
 RUN ls -l /var/machine-learning/interface/static/js
 RUN ls -l /var/machine-learning/interface/static/css
 RUN ls -l /var/machine-learning/interface/static/img
-
-## debug statements
-RUN ls -l /usr/lib/node_modules
-RUN cat /var/machine-learning/src/jsx/two.txt
-RUN cat /var/machine-learning/src/jsx/three.txt
