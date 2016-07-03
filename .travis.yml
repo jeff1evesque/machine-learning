@@ -54,6 +54,7 @@ install:
 #
 #  @docker run:
 #      -d, run container in background and print container ID
+#      -t, allocate pseudo-tty instead of default tty to running container
 #
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
