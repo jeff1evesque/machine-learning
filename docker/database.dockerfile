@@ -1,4 +1,4 @@
-## base container: custom container built locally
+## custom container built locally
 FROM container-default
 
 ## provision with puppet
