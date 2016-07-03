@@ -4,9 +4,14 @@ FROM ubuntu:14.04.4
 RUN mkdir /var/machine-learning
 COPY . /var/machine-learning
 
-## install puppet
+## install git, and wget
+#
+#  Note: r10k requires 'git' installed
 RUN apt-get -y update
-RUN apt-get -y install wget
+RUN apt-get -y install git=1:1.9.1-1ubuntu0.3
+RUN apt-get -y install wget=1.15-1ubuntu1.14.04.2
+
+## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
 RUN dpkg -i puppetlabs-release-pc1-trusty.deb
 RUN apt-get -y update
