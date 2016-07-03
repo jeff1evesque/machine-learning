@@ -9,9 +9,9 @@ services:
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
   - docker build -f docker/default.dockerfile -t container-default .
-  - docker build -f docker/redis.dockerfile . container-redis
-  - docker build -f docker/database.dockerfile . container-database
-  - docker build -f docker/webserver.dockerfile . container-webserver
+  - docker build -f docker/redis.dockerfile -t container-redis .
+  - docker build -f docker/database.dockerfile -t container-database .
+  - docker build -f docker/webserver.dockerfile -t container-webserver .
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
