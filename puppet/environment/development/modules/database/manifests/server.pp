@@ -7,12 +7,12 @@ class database::server {
     $hiera_general    = hiera('general')
     $hiera_database   = hiera('database')
     $host             = $hiera_general['host']
-    $db               = $hiera_general['name']
-    $db_user          = $hiera_general['username']
-    $db_pass          = $hiera_general['password']
-    $provisioner      = $hiera_general['provisioner']
-    $provisioner_pass = $hiera_general['provisioner_password']
-    $root_pass        = $hiera_general['root_password']
+    $db               = $hiera_database['name']
+    $db_user          = $hiera_database['username']
+    $db_pass          = $hiera_database['password']
+    $provisioner      = $hiera_database['provisioner']
+    $provisioner_pass = $hiera_database['provisioner_password']
+    $root_pass        = $hiera_database['root_password']
 
     ## mysql::server: install, and configure mariadb-server
     #
