@@ -32,9 +32,9 @@ import yaml
 from sys import argv
 import MySQLdb as DB
 
-import subprocess
-subprocess.call("outside: python subprocess worked >> /var/machine-learning/db-trace.txt", shell=True)
-subprocess.call("outside: argv[1] - " + argv[1] + " >> /var/machine-learning/db-trace.txt", shell=True)
+with open('/var/machine-learning/db-trace.txt', 'w') as file:
+    file.write("outside: python subprocess worked")
+    file.write("outside: argv[1] - " + argv[1])
 
 
 # define configuration
@@ -42,7 +42,8 @@ subprocess.call("outside: argv[1] - " + argv[1] + " >> /var/machine-learning/db-
 # @argv[1], first passed-in argument from command (argv[0] is the filename)
 #
 with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
-    subprocess.call("inside: python subprocess worked >> /var/machine-learning/db-trace.txt", shell=True)
+    with open('/var/machine-learning/db-trace.txt', 'w') as file:
+        filefile.write("inside: python subprocess worked")
     # local variables
     settings = yaml.load(stream)
     models = settings['application']['model_type']
