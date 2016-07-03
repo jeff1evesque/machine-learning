@@ -9,9 +9,9 @@ services:
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
   - docker build -f docker/default.dockerfile -t container-default .
-  - docker build -f docker/redis.dockerfile .
-  - docker build -f docker/database.dockerfile .
-  - docker build -f docker/webserver.dockerfile .
+  - docker build -f docker/redis.dockerfile . container-redis
+  - docker build -f docker/database.dockerfile . container-database
+  - docker build -f docker/webserver.dockerfile . container-webserver
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
@@ -80,4 +80,6 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker run ubuntu/trusty bash -c "cd /var/machine-learning/test; py.test"
+  - docker run --name redis container-redis
+  - docker run --name database container-database
+  - docker run --link redis --link database container-webserver bash -c "cd /var/machine-learning/test; py.test"
