@@ -39,9 +39,12 @@ with open('/var/machine-learning/db-trace.txt', 'w') as file:
 
 ## local variables
 #
-#  @argv[1], first passed-in argument from command (argv[0] is the filename)
-#  @argv[2], second passed-in argument from command
-if argv[2] == 'false':
+#  @argv[1], first passed-in argument from command (argv[0] is the filename),
+#      indicating the project root directory.
+#
+#  @argv[2], second passed-in argument from command, or boolean value
+#      indicating if build is vagrant instance.
+if argv[2] == 'true':
     prepath = argv[1]
 else:
     prepath = argv[1] + '/test'
