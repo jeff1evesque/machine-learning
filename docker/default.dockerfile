@@ -21,10 +21,6 @@ RUN apt-get -y install puppet-agent
 RUN apt-get -y install rubygems-integration=1.5
 RUN gem install r10k -v 2.2.0
 
-## install pytest
-RUN apt-get -y install python-pip
-RUN pip install pytest==2.9.2
-
 ## install puppet modules using puppetfile with r10k
 RUN mkdir -p /var/machine-learning/puppet/environment/development/modules_contrib/
 RUN PUPPETFILE=/var/machine-learning/test/Puppetfile PUPPETFILE_DIR=/var/machine-learning/puppet/environment/development/modules_contrib/ r10k puppetfile install
