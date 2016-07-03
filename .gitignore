@@ -17,6 +17,7 @@
 !Dockerfile
 !/test
 !/log/
+!/docker/
 
 #Ignore and don't commit the following directories
 /interface/static/js/
