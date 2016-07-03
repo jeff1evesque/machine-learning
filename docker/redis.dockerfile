@@ -5,6 +5,7 @@ RUN mkdir /var/machine-learning
 COPY . /var/machine-learning
 
 ## install puppet
+RUN apt-get -y update
 RUN apt-get -y install wget
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
 RUN dpkg -i puppetlabs-release-pc1-trusty.deb
