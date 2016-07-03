@@ -38,15 +38,15 @@ with open('/var/machine-learning/db-trace.txt', 'w') as file:
 
 
 ## local variables
+#
+#  @argv[1], first passed-in argument from command (argv[0] is the filename)
+#  @argv[2], second passed-in argument from command
 if argv[2] == 'false':
     prepath = argv[1]
 else:
     prepath = argv[1] + '/test'
 
 # define configuration
-#
-# @argv[1], first passed-in argument from command (argv[0] is the filename)
-#
 with open(prepath + '/hiera/settings.yaml', 'r') as stream:
     with open('/var/machine-learning/db-trace.txt', 'w') as file:
         file.write("inside: python subprocess worked")
