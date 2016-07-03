@@ -8,10 +8,10 @@ services:
 
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
-  - docker build -t ubuntu/trusty .
-  - docker run --name persist-redis ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/configure_redis.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
-  - docker run --name persist-database ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/setup_database.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
-  - docker run --name persist-webserver --link persist-redis --link persist-database ubuntu/trusty bash -c "/opt/puppetlabs/bin/puppet apply /var/machine-learning/puppet/environment/development/manifests/start_webserver.pp --modulepath=/var/machine-learning/puppet/environment/development/modules_contrib:/var/machine-learning/puppet/environment/development/modules --confdir=/var/machine-learning/test"
+  - docker build -t ubuntu/trusty . -f docker/redis.dockerfile
+  - docker build -t ubuntu/trusty . -f docker/database.dockerfile
+  - docker build -t ubuntu/trusty . -f docker/webserver.dockerfile
+  - docker build -t ubuntu/trusty . -f docker/default.dockerfile
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
@@ -80,4 +80,4 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker run --link persist-webserver ubuntu/trusty bash -c "cd /var/machine-learning/test; py.test"
+  - docker run ubuntu/trusty bash -c "cd /var/machine-learning/test; py.test"
