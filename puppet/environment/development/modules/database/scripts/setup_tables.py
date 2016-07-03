@@ -32,6 +32,11 @@ import yaml
 from sys import argv
 import MySQLdb as DB
 
+import subprocess
+subprocess.call("outside: python subprocess worked >> /var/machine-learning/db-trace.txt", shell=True)
+subprocess.call("outside: argv[1] - " + argv[1] + " >> /var/machine-learning/db-trace.txt", shell=True)
+
+
 # define configuration
 #
 # @argv[1], first passed-in argument from command (argv[0] is the filename)
