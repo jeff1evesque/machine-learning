@@ -82,4 +82,5 @@ script:
   - travis-lint .travis.yml
   - docker run --name redis container-redis
   - docker run --name database container-database
+  - cat /var/machine-learning/db-trace.txt
   - docker run --link redis --link database container-webserver bash -c "cd /var/machine-learning/test; py.test"
