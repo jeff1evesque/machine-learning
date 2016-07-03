@@ -80,6 +80,6 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker run -d --name redis container-redis
-  - docker run -d --name database container-database
+  - docker run -dt --name redis container-redis
+  - docker run -dt --name database container-database
   - docker run --link redis --link database container-webserver bash -c "cd /var/machine-learning/test; py.test"
