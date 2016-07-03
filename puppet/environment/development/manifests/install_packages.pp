@@ -34,6 +34,7 @@ class general_packages {
     contain package::six
     contain package::fetch
     contain package::pyyaml
+    contain package::pytest
 }
 
 ## initiate
