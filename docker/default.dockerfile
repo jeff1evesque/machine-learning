@@ -1,3 +1,4 @@
+## base container: container from dockerhub
 FROM ubuntu:14.04.4
 
 ## copy files into container
