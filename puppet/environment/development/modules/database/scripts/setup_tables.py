@@ -32,18 +32,14 @@ import yaml
 from sys import argv
 import MySQLdb as DB
 
-with open('/var/machine-learning/db-trace.txt', 'w') as file:
-    file.write("outside: python subprocess worked")
-    file.write("outside: argv[1] - " + argv[1])
 
-
-## local variables
+# local variables
 #
-#  @argv[1], first passed-in argument from command (argv[0] is the filename),
-#      indicating the project root directory.
+# @argv[1], first passed-in argument from command (argv[0] is the filename),
+#     indicating the project root directory.
 #
-#  @argv[2], second passed-in argument from command, or boolean value
-#      indicating if build is vagrant instance.
+# @argv[2], second passed-in argument from command, or boolean value
+#     indicating if build is vagrant instance.
 if argv[2] == 'true':
     prepath = argv[1]
 else:
@@ -51,8 +47,6 @@ else:
 
 # define configuration
 with open(prepath + '/hiera/settings.yaml', 'r') as stream:
-    with open('/var/machine-learning/db-trace.txt', 'w') as file:
-        file.write("inside: python subprocess worked")
     # local variables
     settings = yaml.load(stream)
     models = settings['application']['model_type']
@@ -60,12 +54,6 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
     db_ml = settings['database']['name']
     provisioner = settings['database']['provisioner']
     provisioner_password = settings['database']['provisioner_password']
-
-    with open("/var/machine-learning/db-trace.txt", "w") as text_file:
-        text_file.write("host: %s" % host)
-        text_file.write("provisioner: %s" % provisioner)
-        text_file.write("provisioner password: %s" % provisioner_password)
-        text_file.write("database: %s" % db_ml)
 
     # create connection
     conn = DB.connect(
