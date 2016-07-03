@@ -43,7 +43,7 @@ with open('/var/machine-learning/db-trace.txt', 'w') as file:
 #
 with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
     with open('/var/machine-learning/db-trace.txt', 'w') as file:
-        filefile.write("inside: python subprocess worked")
+        file.write("inside: python subprocess worked")
     # local variables
     settings = yaml.load(stream)
     models = settings['application']['model_type']
