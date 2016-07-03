@@ -42,6 +42,7 @@ subprocess.call("outside: argv[1] - " + argv[1] + " >> /var/machine-learning/db-
 # @argv[1], first passed-in argument from command (argv[0] is the filename)
 #
 with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
+    subprocess.call("inside: python subprocess worked >> /var/machine-learning/db-trace.txt", shell=True)
     # local variables
     settings = yaml.load(stream)
     models = settings['application']['model_type']
