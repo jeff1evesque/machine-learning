@@ -4,7 +4,8 @@
 ###
 class sklearn::build_sklearn {
     ## local variables
-    $root_dir = hiera('general')['root']
+    $hiera_general = hiera('general')
+    $root_dir      = $hiera_general['root']
 
     ## build sklearn
     exec { 'build-sklearn':

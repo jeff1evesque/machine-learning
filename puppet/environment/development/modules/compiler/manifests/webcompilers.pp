@@ -5,6 +5,7 @@
 class compiler::webcompilers {
     ## variables
     $hiera_general   = hiera('general')
+    $vagrant_mounted = $hiera_general['vagrant_implement']
     $root_dir        = $hiera_general['root']
     $user            = $hiera_general['user']
     $group           = $hiera_general['group']
@@ -36,6 +37,7 @@ class compiler::webcompilers {
         file { "${compiler_dir}/${compiler}":
             ensure  => file,
             content => dos2unix(template("${compiler_dir}/${compiler}")),
+            mode    => '0755',
         }
     }
 }

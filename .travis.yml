@@ -6,15 +6,17 @@ language: python
 services:
   - docker
 
-## build docker container for unit testing.
+## build docker, install puppet (i.e. puppet parser validate)
 before_install:
-  - docker ps -a
-  - docker build -t ubuntu/trusty .
-  - wget http://apt.puppetlabs.com/puppetlabs-release-trusty.deb
-  - sudo dpkg -i puppetlabs-release-trusty.deb 
+  - docker build -f docker/default.dockerfile -t container-default .
+  - docker build -f docker/redis.dockerfile -t container-redis .
+  - docker build -f docker/database.dockerfile -t container-database .
+  - docker build -f docker/webserver.dockerfile -t container-webserver .
+  - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+  - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
-  - sudo apt-get install puppet -y
-  - puppet -V
+  - sudo apt-get install puppet-agent -y
+  - sudo /opt/puppetlabs/bin/puppet -V
 
 ## install packages for linting
 #
@@ -39,8 +41,8 @@ install:
   - sudo apt-get install shellcheck=0.3.3-1~ubuntu14.04.1
   - npm install -g eslint babel-eslint@6.0.0-beta.6
   - npm install -g eslint-plugin-react@4.2.3
-  - gem install yaml-lint
-  - npm install -g travis-lint
+  - gem install yaml-lint -v 0.0.7
+  - npm install -g travis-lint@1.0.0
 
 ## implement linting
 #
@@ -50,6 +52,10 @@ install:
 #
 #      - https://github.com/rodjek/puppet-lint/issues/410
 #
+#  @docker run:
+#      -d, run container in background and print container ID
+#      -t, allocate pseudo-tty instead of default tty to running container
+#
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
 script:
@@ -58,8 +64,8 @@ script:
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint -d W005 interface/templates/*.html
-  - puppet parser validate puppet/environment/development/manifests
-  - puppet parser validate puppet/environment/development/modules
+  - sudo find puppet/environment/development/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
+  - sudo find puppet/environment/development/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
   - puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/development/modules
   - (cd puppet/environment/development/ && r10k puppetfile check)
   - (cd test/ && r10k puppetfile check)
@@ -75,3 +81,6 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
+  - docker run -dt --name redis container-redis
+  - docker run -dt --name database container-database
+#  - docker run --link redis:container-redis --link database:container-database container-webserver bash -c "cd /var/machine-learning/test; py.test"

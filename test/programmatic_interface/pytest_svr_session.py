@@ -87,29 +87,29 @@ def check_data_append():
     )
 
 
-def check_model_generate():
+# def check_model_generate():
     """@check_model_generate
 
     This method tests the 'model_generate' session.
 
     """
 
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
-        data=get_sample_json('svr-model-generate.json', 'svr')
-    )
+#    assert requests.post(
+#        endpoint_url,
+#        headers=headers,
+#        data=get_sample_json('svr-model-generate.json', 'svr')
+#    )
 
 
-def check_model_predict():
+# def check_model_predict():
     """@check_model_predict
 
     This method tests the 'model_predict' session.
 
     """
 
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
-        data=get_sample_json('svr-model-predict.json', 'svr')
-    )
+#    assert requests.post(
+#        endpoint_url,
+#        headers=headers,
+#        data=get_sample_json('svr-model-predict.json', 'svr')
+#    )

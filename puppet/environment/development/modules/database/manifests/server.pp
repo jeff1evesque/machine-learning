@@ -23,7 +23,7 @@ class database::server {
         package_name  => 'mariadb-server',
         root_password => $root_pass,
         users         => {
-            "${db_user}@${host}"       => {
+            "${db_user}@${host}"     => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
@@ -31,7 +31,7 @@ class database::server {
                 max_user_connections     => '0',
                 password_hash            => mysql_password($db_pass),
             },
-            "${provisioner}@${host}"   => {
+            "${provisioner}@${host}" => {
                 ensure                   => 'present',
                 max_connections_per_hour => '1',
                 max_queries_per_hour     => '0',

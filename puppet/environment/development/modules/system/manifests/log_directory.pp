@@ -4,7 +4,9 @@
 ###
 class system::log_directory {
     ## local variables
-    $root_dir = hiera('general')['root']
+    $hiera_general = hiera('general')
+    $root_dir = $hiera_general['root']
+
     $directories = [
         "${root_dir}/log/database",
         "${root_dir}/log/webcompiler",

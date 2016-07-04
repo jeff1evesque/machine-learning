@@ -32,11 +32,21 @@ import yaml
 from sys import argv
 import MySQLdb as DB
 
+
+# local variables
+#
+# @argv[1], first passed-in argument from command (argv[0] is the filename),
+#     indicating the project root directory.
+#
+# @argv[2], second passed-in argument from command, or boolean value
+#     indicating if build is vagrant instance.
+if argv[2] == 'true':
+    prepath = argv[1]
+else:
+    prepath = argv[1] + '/test'
+
 # define configuration
-#
-# @argv[1], first passed-in argument from command (argv[0] is the filename)
-#
-with open(argv[1] + '/hiera/settings.yaml', 'r') as stream:
+with open(prepath + '/hiera/settings.yaml', 'r') as stream:
     # local variables
     settings = yaml.load(stream)
     models = settings['application']['model_type']

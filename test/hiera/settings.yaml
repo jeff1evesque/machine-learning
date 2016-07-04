@@ -10,11 +10,11 @@
 ## variables
 general:
     environment: 'development'
-    vagrant_implement: true
-    root: '/vagrant'
+    vagrant_implement: false
+    root: '/var/machine-learning'
     host: 'localhost'
-    user: 'vagrant'
-    group: 'vagrant'
+    user: 'root'
+    group: 'root'
 
 ## redis
 redis:
