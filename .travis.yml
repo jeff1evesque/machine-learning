@@ -82,5 +82,5 @@ script:
   - yaml-lint *.yaml
   - travis-lint .travis.yml
   - docker run -dt --name redis container-redis
-  - docker run -dt --name database container-database
+  - docker run -dt --name database container-database service mysql start
   - docker run --link redis:env-redis --link database:env-database container-webserver env
