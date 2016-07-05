@@ -81,6 +81,6 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
-  - docker run -dt --name redis container-redis
-  - docker run -dt --name database container-database
+  - docker run -t --name redis container-redis
+  - docker run -t --name database container-database
   - docker run --link redis:env-redis --link database:env-database container-webserver env
