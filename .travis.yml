@@ -43,6 +43,7 @@ install:
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint -v 0.0.7
   - npm install -g travis-lint@1.0.0
+  - npm install -g dockerlint@0.2.0
 
 ## implement linting
 #
@@ -81,6 +82,7 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - travis-lint .travis.yml
+  - dockerlint docker/*.dockerfile
   - docker run -dt --name redis container-redis
   - docker run -dt --name database container-database
 #  - docker run --link redis:container-redis --link database:container-database container-webserver bash -c "cd /var/machine-learning/test; py.test"
