@@ -1,4 +1,3 @@
-## custom container built locally
 FROM container-default
 
 ## provision with puppet
