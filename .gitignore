@@ -23,7 +23,7 @@
 /interface/static/js/
 /interface/static/css/
 /interface/static/img/
-/puppet/environment/development/modules_contrib/
+/puppet/environment/*/modules_contrib/
 /test/.cache
 /test/programmatic_interface/.cache
 /test/programmatic_interface/__pycache__
