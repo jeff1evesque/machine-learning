@@ -68,8 +68,7 @@ script:
   - find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
   - find puppet/environment/*/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
   - puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/*/modules
-  - (cd puppet/environment/development/ && r10k puppetfile check)
-  - (cd test/ && r10k puppetfile check)
+  - find puppet -name Puppetfile -execdir r10k puppetfile check Puppetfile \;
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
   - find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
   - xmllint --noout interface/static/data/xml/svr*.xml --schema interface/static/data/xml/svr.xsd
