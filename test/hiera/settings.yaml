@@ -9,7 +9,7 @@
 
 ## variables
 general:
-    environment: 'development'
+    environment: 'docker'
     vagrant_implement: false
     root: '/var/machine-learning'
     host: 'localhost'
