@@ -65,8 +65,8 @@ script:
   - jscs . --config test/config/.jscs.json
   - scss-lint src/scss/*.scss
   - bootlint -d W005 interface/templates/*.html
-  - find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
-  - find puppet/environment/*/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
+  - sudo find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
+  - sudo find puppet/environment/*/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
   - puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/*/modules
   - find puppet -name Puppetfile -execdir r10k puppetfile check Puppetfile \;
   - find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
