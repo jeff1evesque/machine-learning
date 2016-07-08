@@ -79,7 +79,6 @@ script:
   - eslint . --ext=jsx -c test/config/eslint.json
   - yaml-lint hiera/
   - yaml-lint *.yaml
-  - travis lint .travis.yml
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
   - docker run -dt --name redis container-redis
   - docker run -dt --name database container-database
