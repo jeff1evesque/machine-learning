@@ -9,8 +9,9 @@
 ## ensure log directory
 require system::log_directory
 
-## install mariadb client
+## install mariadb
 include database::client
+include database::bindings
 
 ## install redis client
 include package::redis_client
