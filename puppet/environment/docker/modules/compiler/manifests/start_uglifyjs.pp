@@ -7,7 +7,8 @@ class compiler::start_uglifyjs {
     $hiera_general   = hiera('general')
     $root_dir        = $hiera_general['root']
     $vagrant_mounted = $hiera_general['vagrant_implement']
-    $dev_env_path    = "${root_dir}/puppet/environment/development"
+    $environment     = $hiera_general['environment']
+    $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
 
     # run uglifyjs
     if $vagrant_mounted {
