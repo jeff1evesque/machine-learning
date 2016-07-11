@@ -20,7 +20,7 @@ from logging.handlers import RotatingFileHandler
 from interface import app
 
 # path to yaml
-prefix = None
+prefix = ''
 if len(sys.argv) >= 2:
     if sys.argv[1] == 'test':
         prefix = 'test/'
