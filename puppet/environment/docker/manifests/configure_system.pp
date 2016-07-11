@@ -5,5 +5,8 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
+## ensure log directory
+require system::log_directory
+
 ## define system timezone
 include system::set_timezone
