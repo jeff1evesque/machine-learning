@@ -26,7 +26,11 @@ def create_app():
     with open('hiera/settings.yaml', 'r') as stream:
         try:
             # local variables
-            app = Flask(__name__, template_folder='interface/templates')
+            app = Flask(
+                __name__,
+                template_folder = 'interface/templates',
+                static_url_path = 'interface/static'
+            )
             settings = yaml.load(stream)
 
             # register blueprint
