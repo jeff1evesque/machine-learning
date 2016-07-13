@@ -17,6 +17,7 @@ from brain.cache.cache_hset import Cache_Hset
 # local variables
 blueprint = Blueprint('name', __name__)
 
+
 @blueprint.route('/')
 def index():
     '''@index
