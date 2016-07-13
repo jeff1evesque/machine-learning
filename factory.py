@@ -29,7 +29,7 @@ def create_app():
             app = Flask(
                 __name__,
                 template_folder = 'interface/templates',
-                static_url_path = 'interface/static'
+                static_folder = 'interface/static'
             )
             settings = yaml.load(stream)
 
