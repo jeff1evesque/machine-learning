@@ -14,6 +14,9 @@ from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
 
 
+app = Flask(__name__)
+
+
 @blueprint.route('/')
 def index():
     '''@index
@@ -39,7 +42,6 @@ def load_data():
 
     '''
 
-    app = Flask(__name__)
     if request.method == 'POST':
 
         # load programmatic-interface
