@@ -67,6 +67,3 @@ def create_app():
 
     # return
     return app
-
-# run application
-app.run(host='0.0.0.0')
