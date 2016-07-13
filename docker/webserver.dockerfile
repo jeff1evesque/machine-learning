@@ -10,4 +10,4 @@ RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/start_webserver.
 
 ## executed everytime container starts
 WORKDIR /var/machine-learning
-CMD ["python", "app.py"]
+ENTRYPOINT ["python", "app.py"]
