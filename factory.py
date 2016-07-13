@@ -19,8 +19,6 @@ from logging.handlers import RotatingFileHandler
 from flask import Flask
 from interface.views import blueprint
 
-# register blueprint
-app.register_blueprint(blueprint)
 
 # application factory
 def create_app():
@@ -30,6 +28,9 @@ def create_app():
             # local variables
             app = Flask(__name__)
             settings = yaml.load(stream)
+
+            # register blueprint
+            app.register_blueprint(blueprint)
 
             # local logger: used for this module
             root = settings['general']['root']
