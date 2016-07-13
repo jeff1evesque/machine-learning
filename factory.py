@@ -16,7 +16,7 @@ import yaml
 import logging
 from log.logger import Logger
 from logging.handlers import RotatingFileHandler
-from interface import app
+from flask import Flask
 
 # application factory
 def create_app():
@@ -24,6 +24,7 @@ def create_app():
     with open('hiera/settings.yaml', 'r') as stream:
         try:
             # local variables
+            app = Flask(__name__)
             settings = yaml.load(stream)
 
             # local logger: used for this module
