@@ -17,6 +17,10 @@ import logging
 from log.logger import Logger
 from logging.handlers import RotatingFileHandler
 from flask import Flask
+from interface.views import blueprint
+
+# register blueprint
+app.register_blueprint(blueprint)
 
 # application factory
 def create_app():
