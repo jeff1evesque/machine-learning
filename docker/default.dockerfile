@@ -1,4 +1,4 @@
-FROM ubuntu:14.04.4
+FROM ubuntu:14.04
 
 ## local variables
 ENV ROOT_PROJECT /var/machine-learning
