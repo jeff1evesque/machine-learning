@@ -10,6 +10,7 @@
 !README.md
 !__init__.py
 !app.py
+!factory.py
 !license.md
 !contributing.md
 !Vagrantfile
