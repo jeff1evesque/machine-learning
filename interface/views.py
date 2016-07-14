@@ -6,8 +6,7 @@ decorators are defined, which flask to execute triggers for specific URL's.
 '''
 
 import json
-from interface import app
-from flask import render_template, request
+from flask import Blueprint, render_template, request
 from brain.load_data import Load_Data
 from brain.converter.restructure_settings import Restructure_Settings
 from brain.database.retrieve_session import Retrieve_Session
@@ -15,7 +14,11 @@ from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
 
 
-@app.route('/')
+# local variables
+blueprint = Blueprint('name', __name__)
+
+
+@blueprint.route('/')
 def index():
     '''@index
 
@@ -26,7 +29,7 @@ def index():
     return render_template('index.html')
 
 
-@app.route('/load-data/', methods=['POST'])
+@blueprint.route('/load-data/', methods=['POST'])
 def load_data():
     '''@load_data
 
@@ -115,7 +118,7 @@ def load_data():
             return json.dumps(response)
 
 
-@app.route('/retrieve-session/', methods=['POST'])
+@blueprint.route('/retrieve-session/', methods=['POST'])
 def retrieve_session():
     '''@retrieve_session
 
@@ -134,7 +137,7 @@ def retrieve_session():
             return json.dumps({'error': session_list['error']})
 
 
-@app.route('/retrieve-sv-model/', methods=['POST'])
+@blueprint.route('/retrieve-sv-model/', methods=['POST'])
 def retrieve_sv_model():
     '''@retrieve_sv_model
 
@@ -153,7 +156,7 @@ def retrieve_sv_model():
             return json.dumps({'error': model_list['error']})
 
 
-@app.route('/retrieve-sv-features/', methods=['POST'])
+@blueprint.route('/retrieve-sv-features/', methods=['POST'])
 def retrieve_sv_features():
     '''@retrieve_sv_features
 
