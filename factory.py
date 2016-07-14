@@ -28,8 +28,8 @@ def create_app():
             # local variables
             app = Flask(
                 __name__,
-                template_folder = 'interface/templates',
-                static_folder = 'interface/static'
+                template_folder='interface/templates',
+                static_folder='interface/static'
             )
             settings = yaml.load(stream)
 
