@@ -4,12 +4,9 @@ This file implements the 'Manager' instance, which allows external scripts to
     be run within the corresponding flask script.  Specifically, 'pytest' is
     used to perform corresponding unit testing.
 
-Note: the 'Manager' instance implements the 'Fask-Script':
+Note: the 'Manager', and 'pytest' instances can further be reviewed:
 
     - https://flask-script.readthedocs.io/en/latest/
-
-Note: the 'pytest' instance can be further reviewed:
-
     - http://docs.pytest.org/en/latest/usage.html
 
 '''
@@ -19,6 +16,8 @@ from flask.ext.script import Manager
 
 class Manager(object):
     '''@Manager
+
+    This constructor is responsible for defining class variables.
 
     Note: this class explicitly inherits the 'new-style' class.
 
