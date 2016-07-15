@@ -21,9 +21,9 @@ from interface.views import blueprint
 
 
 # application factory
-def create_app():
+def create_app(prefix=''):
     # define configuration
-    with open('hiera/settings.yaml', 'r') as stream:
+    with open(prefix + 'hiera/settings.yaml', 'r') as stream:
         try:
             # local variables
             app = Flask(
