@@ -17,7 +17,7 @@ class Manager(object):
 
     This class provides an interface to 'Manager' instance.
 
-    @app, 
+    @app, flask app instance, generated from app factory.
 
     Note: this class explicitly inherits the 'new-style' class.
 
