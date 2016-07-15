@@ -16,14 +16,16 @@ import sys
 from manager import Manager
 from factory import create_app
 
-# run application
+# app factory
 app = create_app()
 
-# unit test
+# implement app factory
 if len(sys.argv) >= 2:
+    # unit test
     if sys.argv[1] == 'test':
         manager = Manager(app)
         manager.pytest()
+    # base case
     else:
         app.run(host='0.0.0.0')
 else:
