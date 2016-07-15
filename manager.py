@@ -27,6 +27,8 @@ class Manager(object):
     def __init__(app):
         '''@__init__
 
+        This constructor is responsible for defining class variables.
+
         @app, flask app instance, generated from app factory.
 
         '''
