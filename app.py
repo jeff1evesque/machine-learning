@@ -25,7 +25,7 @@ if len(sys.argv) >= 2:
     if sys.argv[1] == 'test':
         manager = Manager(app)
         manager.pytest()
-    # base case
+    # other case
     else:
         app.run(host='0.0.0.0')
 else:
