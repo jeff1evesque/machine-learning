@@ -12,7 +12,7 @@ Note: the 'Manager', and 'pytest' instances can further be reviewed:
 '''
 
 import pytest
-from flask.ext.script import Manager, Command
+from flask.ext.script import Command, Manager
 
 def flask_manager(app, prefix):
     class flask_manager(Command):
