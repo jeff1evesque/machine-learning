@@ -35,7 +35,7 @@ class general_packages {
     contain package::fetch
     contain package::pyyaml
     contain package::pytest
-    contain package:flask_script
+    contain package::flask_script
 }
 
 ## initiate
