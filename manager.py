@@ -12,35 +12,15 @@ Note: the 'Manager', and 'pytest' instances can further be reviewed:
 '''
 
 import pytest
-from flask.ext.script import Manager
+from flask.ext.script import Manager, Command
 
-class Manager(object):
-    '''@Manager
+def flask_manager(app, prefix):
+    class flask_manager(Command):
 
-    This constructor is responsible for defining class variables.
+        manager = Manager(app)
 
-    Note: this class explicitly inherits the 'new-style' class.
+        @manager.command
+        def run():
+            pytest.main(['-x', 'test'])
 
-    '''
-
-    def __init__(app):
-        '''@__init__
-
-        This constructor is responsible for defining class variables.
-
-        @app, flask app instance, generated from app factory.
-
-        '''
-
-        self.manager = Manager(app)
-        self.manager.run(pytest())
-
-    @manager.command
-    def pytest():
-        '''@pytest
-		
-        This method implements pytest within the 'test/' directory.
-
-        '''
-
-        pytest.main(['-x', 'test'])
+        manager.add_command('test', run())
