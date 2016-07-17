@@ -21,16 +21,24 @@ from interface.views import blueprint
 
 
 # application factory
-def create_app(prefix=''):
+def create_app(args={'prefix': '', 'settings': ''}):
     # define configuration
-    with open(prefix + 'hiera/settings.yaml', 'r') as stream:
+    with open(args['prefix'] + 'hiera/settings.yaml', 'r') as stream:
         try:
             # local variables
-            app = Flask(
-                __name__,
-                template_folder='interface/templates',
-                static_folder='interface/static'
-            )
+            if args['settings']:
+                app = Flask(
+                    __name__,
+                    args['settings'],
+                    template_folder='interface/templates',
+                    static_folder='interface/static',
+                )
+            else:
+                app = Flask(
+                    __name__,
+                    template_folder='interface/templates',
+                    static_folder='interface/static',
+                )
             settings = yaml.load(stream)
 
             # register blueprint
@@ -38,7 +46,7 @@ def create_app(prefix=''):
 
             # local logger: used for this module
             root = settings['general']['root']
-            LOG_PATH = root + '/' + settings['webserver']['flask_log_path']
+            LOG_PATH = root + settings['webserver']['flask_log_path']
             HANDLER_LEVEL = settings['application']['log_level']
 
             # flask attributes: accessible across application
