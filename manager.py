@@ -14,32 +14,28 @@ Note: the 'Manager', and 'pytest' instances can further be reviewed:
 import pytest
 from factory import create_app
 from test.programmatic_interface.pytest_svm_session import *
-from flask import Flask
+from flask import Flask, url_for
 
 def flask_manager(app):
-    class flask_manager(Command):
-
-        manager = Manager(app)
-
-        @pytest.fixture(scope="session")
-        def test_app():
-            settings_override = {
-                settings: {
-                    'TESTING': True
-                }
+    @pytest.fixture(scope="session")
+    def test_app():
+        settings_override = {
+            settings: {
+                'TESTING': True
             }
+        }
 
-            app = create_app(settings_override)
+        app = create_app(settings_override, url_for)
 
-            # Establish an application context before running the tests
-            ctx = app.app_context()
-            ctx.push()
+        # Establish an application context before running the tests
+        ctx = app.app_context()
+        ctx.push()
 
-            # run tests
-            check_data_new(ctx)
+        # run tests
+        check_data_new(ctx)
 
-            def teardown():
-                ctx.pop()
+        def teardown():
+            ctx.pop()
 
-            request.addfinalizer(teardown)
-            return app
+        request.addfinalizer(teardown)
+        return app
