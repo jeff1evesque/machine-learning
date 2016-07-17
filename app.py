@@ -12,8 +12,21 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 '''
 
+import sys
+from manager import Manager
 from factory import create_app
 
-# run application
+# app factory
 app = create_app()
-app.run(host='0.0.0.0')
+
+# implement app factory
+if len(sys.argv) >= 2:
+    # unit test
+    if sys.argv[1] == 'test':
+        manager = Manager(app)
+        manager.pytest()
+    # other case
+    else:
+        app.run(host='0.0.0.0')
+else:
+    app.run(host='0.0.0.0')
