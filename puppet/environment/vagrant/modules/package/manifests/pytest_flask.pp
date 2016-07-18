@@ -2,11 +2,11 @@
 ###
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
-class package::pytest {
+class package::pytest_flask {
     require python
 
-    package { 'pytest':
-        ensure   => '2.9.2',
+    package { 'pytest-flask':
+        ensure   => '0.10.0',
         provider => 'pip',
     }
 }
