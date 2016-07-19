@@ -11,7 +11,6 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 '''
 
-import sys
 from factory import create_app
 
 # app factory
