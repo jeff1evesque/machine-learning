@@ -1,4 +1,4 @@
-"""@pytest_svm_session
+'''@pytest_svm_session
 
 This module will test the following svm sessions:
 
@@ -10,41 +10,31 @@ This module will test the following svm sessions:
   - model_predict: generate a prediction by selecting a particular cached
                    model from the NoSQL cache.
 
-  Note: this module requires the installation of 'pytest':
+'''
 
-      - pip install pytest
-
-  Then, this script can be run as follows:
-
-      - py.test session.py
-      - py.test /somedirectory
-
-  Note: pytest will recursively check subdirectories for python scripts, from
-        the current working directory.
-
-  Note: this module is recommended to be run from the directory containing the
-        'pytest.ini', as the current working directory.
-
-"""
+import urllib2
+import pytest
 import requests
 import json
 import os.path
-
-endpoint_url = 'http://localhost:5000/load-data/'
-headers = {'Content-Type': 'application/json'}
+from flask import current_app
+from flask import Flask, url_for
 
 
 def get_sample_json(jsonfile, model_type):
-    """@get_sample_json
+    '''@get_sample_json
 
     Get a sample json dataset.
 
-    """
+    '''
 
+    # local variables
+    root = current_app.config.get('ROOT')
+
+    # open file
     json_dataset = None
     with open(
-        os.path.join(
-            '..',
+        root + os.path.join(
             'interface',
             'static',
             'data',
@@ -59,57 +49,89 @@ def get_sample_json(jsonfile, model_type):
     return json.dumps(json_dataset)
 
 
-def check_data_new():
-    """@check_data_new
+def test_data_new(accept_json, client, live_server):
+    '''@test_data_new
 
     This method tests the 'data_new' session.
 
-    """
+    '''
 
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
+    @live_server.app.route('/load-data/')
+    def get_endpoint():
+        return url_for('name.load_data', _external=True)
+
+    live_server.start()
+
+    res = client.post(
+        get_endpoint(),
+        headers={'Content-Type': 'application/json'},
         data=get_sample_json('svm-data-new.json', 'svm')
     )
 
+    assert res.status_code == 200
 
-def check_data_append():
-    """@check_data_append
 
-    This method tests the 'data_append' session.
+def test_data_append(accept_json, client, live_server):
+    '''@test_data_append
 
-    """
+    This method tests the 'data_new' session.
 
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
+    '''
+
+    @live_server.app.route('/load-data/')
+    def get_endpoint():
+        return url_for('name.load_data', _external=True)
+
+    live_server.start()
+
+    res = client.post(
+        get_endpoint(),
+        headers={'Content-Type': 'application/json'},
         data=get_sample_json('svm-data-append.json', 'svm')
     )
 
+    assert res.status_code == 200
 
-def check_model_generate():
-    """@check_model_generate
+
+def test_model_generate(accept_json, client, live_server):
+    '''@test_model_generate
 
     This method tests the 'model_generate' session.
 
-    """
+    '''
 
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
+    @live_server.app.route('/load-data/')
+    def get_endpoint():
+        return url_for('name.load_data', _external=True)
+
+    live_server.start()
+
+    res = client.post(
+        get_endpoint(),
+        headers={'Content-Type': 'application/json'},
         data=get_sample_json('svm-model-generate.json', 'svm')
     )
 
+    assert res.status_code == 200
 
-def check_model_predict():
-    """@check_model_predict
+
+def test_model_predict(accept_json, client, live_server):
+    '''@test_model_predict
 
     This method tests the 'model_predict' session.
 
-    """
+    '''
 
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
+    @live_server.app.route('/load-data/')
+    def get_endpoint():
+        return url_for('name.load_data', _external=True)
+
+    live_server.start()
+
+    res = client.post(
+        get_endpoint(),
+        headers={'Content-Type': 'application/json'},
         data=get_sample_json('svm-model-predict.json', 'svm')
     )
+
+    assert res.status_code == 200
