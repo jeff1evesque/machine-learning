@@ -39,7 +39,8 @@ def get_sample_json(jsonfile, model_type):
     # open file
     json_dataset = None
     with open(
-        root + os.path.join(
+        os.path.join(
+            root,
             'interface',
             'static',
             'data',
