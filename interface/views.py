@@ -154,7 +154,11 @@ def retrieve_session():
             return json.dumps({'error': session_list['error']})
 
 
-@blueprint.route('/retrieve-sv-model/', methods=['POST'], endpoint='retrieve_sv_model')
+@blueprint.route(
+    '/retrieve-sv-model/',
+    methods=['POST'],
+    endpoint='retrieve_sv_model'
+)
 def retrieve_sv_model():
     '''@retrieve_sv_model
 
@@ -173,7 +177,11 @@ def retrieve_sv_model():
             return json.dumps({'error': model_list['error']})
 
 
-@blueprint.route('/retrieve-sv-features/', methods=['POST'], endpoint='retrieve_sv_features')
+@blueprint.route(
+    '/retrieve-sv-features/',
+    methods=['POST'],
+    endpoint='retrieve_sv_features'
+)
 def retrieve_sv_features():
     '''@retrieve_sv_features
 
