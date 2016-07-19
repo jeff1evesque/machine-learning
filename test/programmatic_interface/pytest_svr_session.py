@@ -19,8 +19,8 @@ Note: the 'pytest' instances can further be reviewed:
 
 import json
 import os.path
+from flask import url_for
 from flask import current_app
-from flask import Flask, url_for
 
 
 def get_sample_json(jsonfile, model_type):
@@ -96,7 +96,7 @@ def test_data_append(accept_json, client, live_server):
     assert res.status_code == 200
 
 
-#def test_model_generate(accept_json, client, live_server):
+# def test_model_generate(accept_json, client, live_server):
 #    '''@test_model_generate
 #
 #    This method tests the 'model_generate' session.
@@ -118,7 +118,7 @@ def test_data_append(accept_json, client, live_server):
 #    assert res.status_code == 200
 
 
-#def test_model_predict(accept_json, client, live_server):
+# def test_model_predict(accept_json, client, live_server):
 #    '''@test_model_predict
 #
 #    This method tests the 'model_predict' session.
