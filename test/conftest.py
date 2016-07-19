@@ -15,9 +15,7 @@ import pytest
 import sys
 sys.path.append("..")
 from factory import create_app
-#from test.programmatic_interface.pytest_svm_session import *
 from flask import Flask, url_for
-
 
 @pytest.fixture
 def app():
