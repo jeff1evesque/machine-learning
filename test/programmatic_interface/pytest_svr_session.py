@@ -71,7 +71,7 @@ def test_data_new(accept_json, client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svr-data-new.json', 'svm')
+        data=get_sample_json('svr-data-new.json', 'svr')
     )
 
     assert res.status_code == 200
@@ -93,7 +93,7 @@ def test_data_append(accept_json, client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svr-data-append.json', 'svm')
+        data=get_sample_json('svr-data-append.json', 'svr')
     )
 
     assert res.status_code == 200
@@ -115,7 +115,7 @@ def test_data_append(accept_json, client, live_server):
 #    res = client.post(
 #        get_endpoint(),
 #        headers={'Content-Type': 'application/json'},
-#        data=get_sample_json('svr-model-generate.json', 'svm')
+#        data=get_sample_json('svr-model-generate.json', 'svr')
 #    )
 #
 #    assert res.status_code == 200
@@ -137,7 +137,7 @@ def test_data_append(accept_json, client, live_server):
 #    res = client.post(
 #        get_endpoint(),
 #        headers={'Content-Type': 'application/json'},
-#        data=get_sample_json('svr-model-predict.json', 'svm')
+#        data=get_sample_json('svr-model-predict.json', 'svr')
 #    )
 #
 #    assert res.status_code == 200
