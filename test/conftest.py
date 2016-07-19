@@ -15,6 +15,7 @@ import sys
 sys.path.append("..")
 from factory import create_app
 
+
 @pytest.fixture
 def app():
     app = create_app()
