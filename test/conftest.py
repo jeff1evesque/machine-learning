@@ -12,8 +12,8 @@ Note: the 'pytest' instances can further be reviewed:
 
 import pytest
 import sys
-sys.path.append("..")
-from factory import create_app
+sys.path.append('..')
+from factory import create_app # noqa
 
 
 @pytest.fixture
