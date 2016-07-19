@@ -1,12 +1,11 @@
 '''@manager
 
-This file implements the 'Manager' instance, which allows external scripts to
-    be run within the corresponding flask script.  Specifically, 'pytest' is
-    used to perform corresponding unit testing.
+This file creates the necessary constructs, which pytest will load, and make
+    for each available for each pytest instance.
 
-Note: the 'Manager', and 'pytest' instances can further be reviewed:
+Note: the 'pytest' instances can further be reviewed:
 
-    - https://flask-script.readthedocs.io/en/latest/
+    - https://pytest-flask.readthedocs.io/en/latest
     - http://docs.pytest.org/en/latest/usage.html
 
 '''
