@@ -1,7 +1,7 @@
 '''@manager
 
 This file creates the necessary constructs, which pytest will load, and make
-    for each available for each pytest instance.
+    available for each pytest execution instance.
 
 Note: the 'pytest' instances can further be reviewed:
 
