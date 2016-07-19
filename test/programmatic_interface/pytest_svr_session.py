@@ -17,9 +17,6 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-import urllib2
-import pytest
-import requests
 import json
 import os.path
 from flask import current_app
