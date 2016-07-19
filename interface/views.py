@@ -1,7 +1,19 @@
 '''@views
 
 This file contains the corresponding views logic. Specifically, the route
-decorators are defined, which flask to execute triggers for specific URL's.
+decorators are defined, which flask triggers for specific URL's.
+
+@blueprint, organizes the entire application as a series of modules.
+
+    @endpoint, optional attribute defined within (blueprint) route decorators.
+        This allows other functions, within the same flask context, to make
+        reference of it, via the 'url_for' method:
+
+            @blueprint.route('/example', methods=['POST'], endpoint='sample')
+
+        can be accessed within the same flask context:
+
+            url_for(name.load_data)
 
 '''
 
@@ -15,7 +27,12 @@ from brain.cache.cache_hset import Cache_Hset
 
 
 # local variables
-blueprint = Blueprint('name', __name__)
+blueprint = Blueprint(
+    'name',
+    __name__,
+    template_folder='interface/templates',
+    static_folder='interface/static'
+)
 
 
 @blueprint.route('/')
@@ -29,7 +46,7 @@ def index():
     return render_template('index.html')
 
 
-@blueprint.route('/load-data/', methods=['POST'])
+@blueprint.route('/load-data/', methods=['POST'], endpoint='load_data')
 def load_data():
     '''@load_data
 
@@ -137,7 +154,7 @@ def retrieve_session():
             return json.dumps({'error': session_list['error']})
 
 
-@blueprint.route('/retrieve-sv-model/', methods=['POST'])
+@blueprint.route('/retrieve-sv-model/', methods=['POST'], endpoint='retrieve_sv_model')
 def retrieve_sv_model():
     '''@retrieve_sv_model
 
@@ -156,7 +173,7 @@ def retrieve_sv_model():
             return json.dumps({'error': model_list['error']})
 
 
-@blueprint.route('/retrieve-sv-features/', methods=['POST'])
+@blueprint.route('/retrieve-sv-features/', methods=['POST'], endpoint='retrieve_sv_features')
 def retrieve_sv_features():
     '''@retrieve_sv_features
 
