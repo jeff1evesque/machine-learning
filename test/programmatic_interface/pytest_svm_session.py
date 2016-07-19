@@ -19,8 +19,8 @@ Note: the 'pytest' instances can further be reviewed:
 
 import json
 import os.path
+from flask import url_for
 from flask import current_app
-from flask import Flask, url_for
 
 
 def get_sample_json(jsonfile, model_type):
