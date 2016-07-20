@@ -3,15 +3,11 @@ sudo: required
 language: python
 
 ## allows 'docker' command
-#services:
-#  - docker
+services:
+  - docker
 
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
-#  - docker build -f docker/default.dockerfile -t container-default .
-#  - docker build -f docker/redis.dockerfile -t container-redis .
-#  - docker build -f docker/database.dockerfile -t container-database .
-#  - docker build -f docker/webserver.dockerfile -t container-webserver .
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
@@ -43,6 +39,7 @@ install:
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint -v 0.0.7
   - npm install -g dockerlint@0.2.0
+  - pip install pytest-flask==0.10.0
 
 ## implement linting
 #
@@ -55,6 +52,9 @@ install:
 #  @docker run:
 #      -d, run container in background and print container ID
 #      -t, allocate pseudo-tty instead of default tty to running container
+#
+#  @python -m pytest:
+#      -s, execute stdout (i.e python 'print', or 'echo').
 #
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
@@ -81,6 +81,3 @@ script:
   - yaml-lint *.yaml
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
   - python -m pytest test -s
-#  - docker run -dt --name redis container-redis
-#  - docker run -dt --name database container-database
-#  - docker run --link redis:container-redis --link database:container-database container-webserver bash -c "cd /var/machine-learning/test; py.test"
