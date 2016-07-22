@@ -15,10 +15,9 @@
 !contributing.md
 !Vagrantfile
 !/puppet/
-!Dockerfile
 !/test
 !/log/
-!/docker/
+!*.dockerfile
 
 #Ignore and don't commit the following directories
 /interface/static/js/
