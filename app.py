@@ -2,7 +2,6 @@
 
 This file is the acting web server.
 
-@debug, enables debugging, and tracebacks
 @host, tells the OS (guest VM) to accept connections from all public IP
     addresses.
 
@@ -14,6 +13,8 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 from factory import create_app
 
-# run application
+# app factory
 app = create_app()
+
+# implement app factory
 app.run(host='0.0.0.0')
