@@ -11,10 +11,14 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 '''
 
+import sys
+import pytest
 from factory import create_app
 
-# app factory
-app = create_app()
-
-# implement app factory
-app.run(host='0.0.0.0')
+# run unit test
+if len(sys.argv) > 1 && sys.argv[1] == 'test':
+    pytest.main(['-x', 'test'])
+# run application
+else:
+    app = create_app()
+    app.run(host='0.0.0.0')
