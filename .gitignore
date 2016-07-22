@@ -20,7 +20,7 @@
 !*.dockerfile
 !build_docker
 
-#Ignore and don't commit the following directories
+# Ignore and don't commit the following directories
 /interface/static/js/
 /interface/static/css/
 /interface/static/img/
