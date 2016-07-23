@@ -5,8 +5,12 @@
 class package::xmltodict {
     include python
 
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['pip']['xmltodict']
+
     package { 'xmltodict':
-        ensure   => '0.10.1',
+        ensure   => $version,
         provider => 'pip',
     }
 }
