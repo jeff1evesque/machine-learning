@@ -32,8 +32,8 @@ RUN PUPPETFILE=$ROOT_PROJECT/test/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/mod
 
 ## show directory
 RUN ls -l $ROOT_PROJECT
-RUN ls -l $ROOT_PROJECT/modules_contrib
-RUN ls -l $ROOT_PROJECT/modules
+RUN ls -l $ENVIRONMENT_DIR/modules_contrib
+RUN ls -l $ENVIRONMENT_DIR/modules
 RUN ls -l $ROOT_PROJECT/test
 
 ## provision with puppet
