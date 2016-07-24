@@ -30,12 +30,6 @@ RUN gem install r10k -v 2.2.0
 RUN mkdir -p $ENVIRONMENT_DIR/modules_contrib/
 RUN PUPPETFILE=$ROOT_PROJECT/test/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/modules_contrib/ r10k puppetfile install
 
-## show directory
-RUN ls -l $ROOT_PROJECT
-RUN ls -l $ENVIRONMENT_DIR/modules_contrib
-RUN ls -l $ENVIRONMENT_DIR/modules
-RUN ls -l $ROOT_PROJECT/test
-
 ## provision with puppet
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/install_packages.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/test
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/install_sklearn.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/test
