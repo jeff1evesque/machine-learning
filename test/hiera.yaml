@@ -6,5 +6,5 @@
   :datadir: /var/machine-learning
 
 :hierarchy:
-  - "hiera/packages"
-  - "test/hiera/settings"
+  - hiera/packages
+  - test/hiera/settings
