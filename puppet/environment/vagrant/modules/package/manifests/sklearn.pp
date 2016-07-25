@@ -8,7 +8,7 @@ class package::sklearn {
     ## local variables
     $hiera_general = hiera('general')
     $root_dir      = $hiera_general['root']
-    $hiera_dev     = $hiera_general['development']
+    $hiera_dev     = $hiera_dev['development']
     $version       = $hiera_dev['github']['sklearn']
 
     ## download sklearn
