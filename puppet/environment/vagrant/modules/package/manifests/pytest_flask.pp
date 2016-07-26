@@ -5,8 +5,12 @@
 class package::pytest_flask {
     require python
 
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['pip']['pytest-flask']
+
     package { 'pytest-flask':
-        ensure   => '0.10.0',
+        ensure   => $version,
         provider => 'pip',
     }
 }

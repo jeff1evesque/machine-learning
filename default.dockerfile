@@ -34,7 +34,7 @@ RUN PUPPETFILE=$ROOT_PROJECT/test/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/mod
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/install_packages.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/test
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/install_sklearn.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/test
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/configure_system.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/test
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/compile_asset.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/test
+RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/compile_asset.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/test --debug
 
 ## show directory
 RUN ls -l $ROOT_PROJECT/interface/static/js

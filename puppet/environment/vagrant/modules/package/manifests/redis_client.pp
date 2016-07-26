@@ -5,8 +5,12 @@
 class package::redis_client {
     require python
 
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['pip']['redis']
+
     package { 'redis':
-        ensure   => '2.10.5',
+        ensure   => $version,
         provider => 'pip',
     }
 }

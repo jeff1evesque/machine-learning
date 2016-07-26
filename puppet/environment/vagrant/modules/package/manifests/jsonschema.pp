@@ -5,8 +5,12 @@
 class package::jsonschema {
     include python
 
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['pip']['jsonschema']
+
     package { 'jsonschema':
-        ensure   => '2.5.1',
+        ensure   => $version,
         provider => 'pip',
     }
 }

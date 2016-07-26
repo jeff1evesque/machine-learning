@@ -3,8 +3,12 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class package::fetch {
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['npm']['fetch']
+
     ## package: install general packages (npm)
-    package { 'whatwg-fetch@0.11.0':
+    package { "whatwg-fetch@${version}":
         ensure   => 'present',
         provider => 'npm',
     }

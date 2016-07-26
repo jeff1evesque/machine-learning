@@ -18,7 +18,10 @@
 !/test
 !/log/
 !*.dockerfile
+<<<<<<< HEAD
 !build_docker
+=======
+>>>>>>> master
 
 # Ignore and don't commit the following directories
 /interface/static/js/
