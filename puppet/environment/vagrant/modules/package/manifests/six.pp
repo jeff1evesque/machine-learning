@@ -5,8 +5,12 @@
 class package::six {
     require python
 
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['pip']['six']
+
     package { 'six':
-        ensure   => '1.5.2',
+        ensure   => $version,
         provider => 'pip',
     }
 }

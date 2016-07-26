@@ -3,6 +3,15 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class package::webcompilers {
+    ## hiera attributes
+    $hiera_dev          = hiera('development')
+    $version_uglify_js  = $hiera_dev['pip']['uglify-js']
+    $version_imagemin   = $hiera_dev['pip']['imagemin']
+    $version_node_sass  = $hiera_dev['pip']['node-sass']
+    $version_babel_core = $hiera_dev['pip']['babel-core']
+    $version_browserify = $hiera_dev['pip']['browserify']
+    $version_babelify   = $hiera_dev['pip']['babelify']
+
     ## variables
     $webcompilers = [
         'uglify-js@2.6.2',

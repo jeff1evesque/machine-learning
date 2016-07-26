@@ -6,4 +6,5 @@
   :datadir: /vagrant/hiera
 
 :hierarchy:
+  - packages
   - settings

@@ -6,7 +6,11 @@ class package::inotify_tools {
     ## update apt-get
     require apt
 
-    package { 'inotify-tools=3.14-1ubuntu1':
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['apt']['inotify-tools']
+
+    package { "inotify-tools=${version}":
         ensure => 'installed',
     }
 }

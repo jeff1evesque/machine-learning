@@ -5,8 +5,12 @@
 class package::pyyaml {
     require python
 
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['pip']['pyyaml']
+
     package { 'pyyaml':
-        ensure   => '3.11',
+        ensure   => $version,
         provider => 'pip',
     }
 }
