@@ -19,7 +19,8 @@ from factory import create_app  # noqa
 @pytest.fixture
 def app():
     args = {
-        'prefix': 'test'
+        'prefix': 'test',
+        'settings': ''
     }
     app = create_app(args)
     app.testing = True
