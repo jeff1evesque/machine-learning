@@ -16,7 +16,7 @@ import pytest
 from factory import create_app
 
 # run unit test
-if len(sys.argv) > 1 && sys.argv[1] == 'test':
+if len(sys.argv) > 1 and sys.argv[1] == 'test':
     pytest.main(['-x', 'test'])
 # run application
 else:
