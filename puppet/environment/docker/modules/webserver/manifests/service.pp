@@ -9,7 +9,9 @@ class webserver::service {
     $root_dir        = $hiera_general['root']
     $user            = $hiera_general['user']
     $group           = $hiera_general['group']
-    $log_path        = "${root_dir}/log/webserver/flask.log"
+
+    $hiera_webserver = hiera('webserver')
+    $log_path        = "$root_dir$hiera_webserver['flask_log_path']"
     $template_path   = 'webserver/webserver.erb'
 
     ## include webserver dependencies
