@@ -26,10 +26,13 @@ webserver:
 
 ## application database
 #
+#  @host, defined from executed 'docker' command.
+#
 #  Note: when referencing a hash path value, remember to prefix the call with
 #       the above 'general: root' definition.
 #
 database:
+    host: 'database'
     name: 'db_machine_learning'
     provisioner: 'provisioner'
     provisioner_password: 'password'
