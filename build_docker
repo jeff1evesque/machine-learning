@@ -19,7 +19,7 @@ if [ "$(uname -s)" == 'Linux' ]; then
   docker run --name redis --net=app_nw -d container-redis && \
   docker run --name webserver --net=app_nw -d container-webserver && \
   docker run --name database --net=app_nw -d container-database && \
-  winpty docker run --name webserver --net=app_nw -it container-webserver test
+  docker run --name webserver --net=app_nw -it container-webserver test
 else
   winpty docker network create -d bridge app_nw && \
   winpty docker run --name base --net=app_nw -d container-default && \
