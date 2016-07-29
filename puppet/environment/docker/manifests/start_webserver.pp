@@ -15,6 +15,3 @@ include package::redis_client
 
 ## install webserver
 include webserver::service
-
-## start webservers
-include webserver::start
