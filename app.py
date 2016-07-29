@@ -16,8 +16,16 @@ import pytest
 from factory import create_app
 
 # run unit test
-if len(sys.argv) > 1 and sys.argv[1] == 'test':
-    pytest.main(['-x', 'test'])
+if len(sys.argv) > 1:
+    if sys.argv[1] == 'test':
+        pytest.main(['-x', 'test'])
+    elif sys.argv[1] == 'run':
+        args = {
+            'prefix': 'test',
+            'settings': ''
+        }
+        app = create_app(args)
+        app.run(host='0.0.0.0')
 # run application
 else:
     app = create_app()
