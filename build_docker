@@ -24,7 +24,7 @@ else
   winpty docker network create -d bridge app_nw && \
   winpty docker run --name base --net=app_nw -d container-default && \
   winpty docker run --name redis --net=app_nw -d container-redis && \
-  winpty docker run --name webserver --net=app_nw -d container-webserver && \
+  winpty docker run --name webserver --net=app_nw -d container-webserver run && \
   winpty docker run --name database --net=app_nw -d container-database && \
   winpty docker run --name webserver-pytest --net=app_nw -it container-webserver test
 fi
