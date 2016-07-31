@@ -43,19 +43,19 @@ class database::server {
             },
         },
         grants        => {
-            "${db_user}@${host}/${db}.*"     => {
+            "${db_user}@%/${db}.*"     => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
                 table      => "${db}.*",
-                user       => "${db_user}@${host}",
+                user       => "${db_user}@%",
             },
-            "${provisioner}@${host}/${db}.*" => {
+            "${provisioner}@%/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'CREATE'],
                 table      => "${db}.*",
-                user       => "${provisioner}@${host}",
+                user       => "${provisioner}@%",
             },
         },
         databases     => {
