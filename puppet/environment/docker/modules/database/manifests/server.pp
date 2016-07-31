@@ -13,6 +13,7 @@ class database::server {
     $provisioner      = $hiera_database['provisioner']
     $provisioner_pass = $hiera_database['provisioner_password']
     $root_pass        = $hiera_database['root_password']
+    $bind_address     = $hiera_database['bind_address']
 
     ## mysql::server: install, and configure mariadb-server
     #
@@ -64,7 +65,7 @@ class database::server {
         },
         override_options => {
             'mysqld' => {
-                'bind-address' => '0.0.0.0',
+                'bind-address' => $bind_address,
             }
         },
     }
