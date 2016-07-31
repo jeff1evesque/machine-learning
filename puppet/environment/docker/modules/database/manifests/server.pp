@@ -62,5 +62,10 @@ class database::server {
                 charset => 'utf8',
             },
         },
+        override_options => {
+            'mysqld' => {
+                'bind-address' => '0.0.0.0',
+            }
+        },
     }
 }
