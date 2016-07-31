@@ -5,7 +5,9 @@
 class database::server {
     ## local variables
     $hiera_database   = hiera('database')
-    $host             = $hiera_database['host']
+    $hiera_general    = hiera('general')
+    $localhost        = $hiera_general['host']
+    $db_host          = $hiera_database['host']
     $db               = $hiera_database['name']
     $db_user          = $hiera_database['username']
     $db_pass          = $hiera_database['password']
@@ -61,11 +63,6 @@ class database::server {
                 ensure  => 'present',
                 charset => 'utf8',
             },
-        },
-        override_options => {
-            'mysqld' => {
-                'bind-address' => $bind_address,
-            }
         },
     }
 }
