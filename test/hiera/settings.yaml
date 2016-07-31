@@ -32,6 +32,7 @@ webserver:
 #       the above 'general: root' definition.
 #
 database:
+    bind_address: '0.0.0.0'
     host: 'database'
     name: 'db_machine_learning'
     provisioner: 'provisioner'
