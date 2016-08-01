@@ -5,10 +5,8 @@
 class database::server {
     ## local variables
     $hiera_database   = hiera('database')
-    $hiera_general    = hiera('general')
-    $localhost        = $hiera_general['host']
-    $db_host          = $hiera_database['host']
     $db               = $hiera_database['name']
+    $db_host          = $hiera_database['host']
     $db_user          = $hiera_database['username']
     $db_pass          = $hiera_database['password']
     $provisioner      = $hiera_database['provisioner']
@@ -25,7 +23,7 @@ class database::server {
         package_name  => 'mariadb-server',
         root_password => $root_pass,
         users         => {
-            "${db_user}@${host}"     => {
+            "${db_user}@${db_host}"     => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
@@ -33,7 +31,7 @@ class database::server {
                 max_user_connections     => '0',
                 password_hash            => mysql_password($db_pass),
             },
-            "${provisioner}@${host}" => {
+            "${provisioner}@${db_host}" => {
                 ensure                   => 'present',
                 max_connections_per_hour => '1',
                 max_queries_per_hour     => '0',
@@ -43,19 +41,19 @@ class database::server {
             },
         },
         grants        => {
-            "${db_user}@%/${db}.*"     => {
+            "${db_user}@${db_host}/${db}.*"     => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
                 table      => "${db}.*",
-                user       => "${db_user}@%",
+                user       => "${db_user}@${db_host}",
             },
-            "${provisioner}@%/${db}.*" => {
+            "${provisioner}@${db_host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'CREATE'],
                 table      => "${db}.*",
-                user       => "${provisioner}@%",
+                user       => "${provisioner}@${db_host}",
             },
         },
         databases     => {
@@ -63,6 +61,11 @@ class database::server {
                 ensure  => 'present',
                 charset => 'utf8',
             },
+        },
+        override_options => {
+            'mysqld' => {
+                'bind-address' => $bind_address,
+            }
         },
     }
 }
