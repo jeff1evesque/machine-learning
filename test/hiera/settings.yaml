@@ -33,7 +33,7 @@ webserver:
 #
 database:
     bind_address: '0.0.0.0'
-    host: 'database'
+    host: '%'
     name: 'db_machine_learning'
     provisioner: 'provisioner'
     provisioner_password: 'password'
