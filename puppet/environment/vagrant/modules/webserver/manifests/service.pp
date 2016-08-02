@@ -5,15 +5,14 @@
 class webserver::service {
     ## variables
     $hiera_general   = hiera('general')
-    $hiera_webserver = hiera('webserver')
-    $log_path        = $hiera_webserver['flask_log_path']
     $vagrant_mounted = $hiera_general['vagrant_implement']
     $root_dir        = $hiera_general['root']
     $user            = $hiera_general['user']
     $group           = $hiera_general['group']
 
     $hiera_webserver = hiera('webserver')
-    $log_path        = "${root_dir}${log_path}"
+    $flask_log_path  = $hiera_webserver['flask_log_path']
+    $log_path        = "${root_dir}${flask_log_path}"
     $template_path   = 'webserver/webserver.erb'
 
     ## include webserver dependencies
