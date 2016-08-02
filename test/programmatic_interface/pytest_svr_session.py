@@ -52,7 +52,7 @@ def get_sample_json(jsonfile, model_type):
     return json.dumps(json_dataset)
 
 
-def test_data_new(accept_json, client, live_server):
+def test_data_new(client, live_server):
     '''@test_data_new
 
     This method tests the 'data_new' session.
@@ -74,7 +74,7 @@ def test_data_new(accept_json, client, live_server):
     assert res.status_code == 200
 
 
-def test_data_append(accept_json, client, live_server):
+def test_data_append(client, live_server):
     '''@test_data_append
 
     This method tests the 'data_new' session.
@@ -96,7 +96,7 @@ def test_data_append(accept_json, client, live_server):
     assert res.status_code == 200
 
 
-# def test_model_generate(accept_json, client, live_server):
+# def test_model_generate(client, live_server):
 #    '''@test_model_generate
 #
 #    This method tests the 'model_generate' session.
@@ -118,7 +118,7 @@ def test_data_append(accept_json, client, live_server):
 #    assert res.status_code == 200
 
 
-# def test_model_predict(accept_json, client, live_server):
+# def test_model_predict(client, live_server):
 #    '''@test_model_predict
 #
 #    This method tests the 'model_predict' session.

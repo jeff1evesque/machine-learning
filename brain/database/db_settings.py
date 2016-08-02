@@ -46,7 +46,7 @@ class Database(object):
 
         '''
 
-        self.db_host = current_app.config.get('HOST')
+        self.db_host = current_app.config.get('DB_HOST')
         self.db_username = current_app.config.get('DB_USERNAME')
         self.db_password = current_app.config.get('DB_PASSWORD')
 

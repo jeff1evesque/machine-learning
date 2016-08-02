@@ -22,8 +22,15 @@ from interface.views import blueprint
 
 # application factory
 def create_app(args={'prefix': '', 'settings': ''}):
+
+    # path to hiera
+    if args['prefix']:
+        path = args['prefix'] + '/hiera/settings.yaml'
+    else:
+        path = 'hiera/settings.yaml'
+
     # define configuration
-    with open(args['prefix'] + 'hiera/settings.yaml', 'r') as stream:
+    with open(path, 'r') as stream:
         try:
             # local variables
             if args['settings']:
@@ -54,6 +61,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 HOST=settings['general']['host'],
                 PORT_REDIS=settings['redis']['port'],
                 ROOT=settings['general']['root'],
+                DB_HOST=settings['database']['host'],
                 DB_LOG_PATH=settings['database']['log_path'],
                 DB_ML=settings['database']['name'],
                 DB_USERNAME=settings['database']['username'],

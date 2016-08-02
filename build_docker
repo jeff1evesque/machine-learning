@@ -1,0 +1,30 @@
+#!/bin/bash 
+
+# remove containers, images, and networks
+docker stop "$(docker ps -a -q)"
+docker rm "$(docker ps -a -q)"
+docker rmi -f "$(docker images -q)"
+docker network rm "$(docker network ls -q)"
+
+# build containers
+docker build -f default.dockerfile -t container-default .
+docker build -f database.dockerfile -t container-database .
+docker build -f redis.dockerfile -t container-redis .
+docker build -f webserver.dockerfile -t container-webserver .
+
+# run containers within common network
+if [ "$(uname -s)" == 'Linux' ]; then
+  docker network create -d bridge app_nw && \
+  docker run --name base --net=app_nw -d container-default && \
+  docker run --name redis --net=app_nw -d container-redis && \
+  docker run --name webserver --net=app_nw -d container-webserver run && \
+  docker run --name database --net=app_nw -d container-database && \
+  docker run --name webserver --net=app_nw -it container-webserver test
+else
+  winpty docker network create -d bridge app_nw && \
+  winpty docker run --name base --net=app_nw -d container-default && \
+  winpty docker run --name redis --net=app_nw -d container-redis && \
+  winpty docker run --name webserver --net=app_nw -d container-webserver run && \
+  winpty docker run --name database --net=app_nw -d container-database && \
+  winpty docker run --name webserver-pytest --net=app_nw -it container-webserver test
+fi

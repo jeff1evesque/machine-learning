@@ -1,4 +1,4 @@
-'''@manager
+'''@conftest
 
 This file creates the necessary constructs, which pytest will load, and make
     available for each pytest execution instance.
@@ -18,6 +18,10 @@ from factory import create_app  # noqa
 
 @pytest.fixture
 def app():
-    app = create_app()
+    args = {
+        'prefix': 'test',
+        'settings': ''
+    }
+    app = create_app(args)
     app.testing = True
     return app
