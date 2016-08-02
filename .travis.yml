@@ -80,4 +80,3 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
-  - ./build_docker
