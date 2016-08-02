@@ -80,6 +80,3 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
-  - docker run -dt --name redis container-redis
-  - docker run -dt --name database container-database
-  - docker run --link redis:env-redis --link database:env-database container-webserver env
