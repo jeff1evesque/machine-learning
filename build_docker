@@ -1,10 +1,10 @@
 #!/bin/bash 
 
 # remove containers, images, and networks
-docker stop $(docker ps -a -q)
-docker rm $(docker ps -a -q)
-docker rmi -f $(docker images -q)
-docker network rm $(docker network ls -q)
+docker stop "$(docker ps -a -q)"
+docker rm "$(docker ps -a -q)"
+docker rmi -f "$(docker images -q)"
+docker network rm "$(docker network ls -q)"
 
 # build containers
 docker build -f default.dockerfile -t container-default .
