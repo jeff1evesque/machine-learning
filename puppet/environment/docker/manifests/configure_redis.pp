@@ -7,3 +7,6 @@
 
 ## install redis-server
 include package::redis_server
+
+## configure redis-server
+include redis::configuration
