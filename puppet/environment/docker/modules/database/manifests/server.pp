@@ -4,15 +4,15 @@
 ###
 class database::server {
     ## local variables
-    $hiera_general    = hiera('general')
     $hiera_database   = hiera('database')
-    $host             = $hiera_general['host']
+    $db_host          = $hiera_database['allow_host']
     $db               = $hiera_database['name']
     $db_user          = $hiera_database['username']
     $db_pass          = $hiera_database['password']
     $provisioner      = $hiera_database['provisioner']
     $provisioner_pass = $hiera_database['provisioner_password']
     $root_pass        = $hiera_database['root_password']
+    $bind_address     = $hiera_database['bind_address']
 
     ## mysql::server: install, and configure mariadb-server
     #
@@ -23,7 +23,7 @@ class database::server {
         package_name  => 'mariadb-server',
         root_password => $root_pass,
         users         => {
-            "${db_user}@${host}"     => {
+            "${db_user}@${db_host}"     => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
@@ -31,7 +31,7 @@ class database::server {
                 max_user_connections     => '0',
                 password_hash            => mysql_password($db_pass),
             },
-            "${provisioner}@${host}" => {
+            "${provisioner}@${db_host}" => {
                 ensure                   => 'present',
                 max_connections_per_hour => '1',
                 max_queries_per_hour     => '0',
@@ -41,19 +41,19 @@ class database::server {
             },
         },
         grants        => {
-            "${db_user}@${host}/${db}.*"     => {
+            "${db_user}@${db_host}/${db}.*"     => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
                 table      => "${db}.*",
-                user       => "${db_user}@${host}",
+                user       => "${db_user}@${db_host}",
             },
-            "${provisioner}@${host}/${db}.*" => {
+            "${provisioner}@${db_host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'CREATE'],
                 table      => "${db}.*",
-                user       => "${provisioner}@${host}",
+                user       => "${provisioner}@${db_host}",
             },
         },
         databases     => {
@@ -61,6 +61,11 @@ class database::server {
                 ensure  => 'present',
                 charset => 'utf8',
             },
+        },
+        override_options => {
+            'mysqld' => {
+                'bind-address' => $bind_address,
+            }
         },
     }
 }

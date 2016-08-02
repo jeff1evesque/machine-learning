@@ -106,6 +106,7 @@ Vagrant.configure(2) do |config|
       "puppet/environment/#{environment}/modules",
     ]
     puppet.manifest_file    = 'configure_redis.pp'
+    puppet.hiera_config_path = 'hiera.yaml'
   end
 
   ## Custom Manifest: configure system (i.e. system timezone)

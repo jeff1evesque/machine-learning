@@ -3,7 +3,11 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 class package::redis_server {
+    ## local variables
+    $hiera_dev = hiera('development')
+    $version   = $hiera_dev['apt']['redis-server']
+
     package { 'redis-server':
-        ensure => '2:2.8.4-2',
+        ensure => $version,
     }
 }

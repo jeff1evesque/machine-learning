@@ -15,12 +15,15 @@
 !contributing.md
 !Vagrantfile
 !/puppet/
-!Dockerfile
 !/test
 !/log/
-!/docker/
+!*.dockerfile
+<<<<<<< HEAD
+!build_docker
+=======
+>>>>>>> master
 
-#Ignore and don't commit the following directories
+# Ignore and don't commit the following directories
 /interface/static/js/
 /interface/static/css/
 /interface/static/img/
