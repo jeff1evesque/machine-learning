@@ -25,9 +25,6 @@ before_install:
   # docker version after update
   - docker version
 
-  # puppet version before update
-  - sudo /opt/puppetlabs/bin/puppet -V
-
   # install puppet
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
