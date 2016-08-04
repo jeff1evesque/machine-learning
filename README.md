@@ -354,7 +354,7 @@ This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testin
  to validate logic in a consistent fashion. Currently, only high-level unit
  tests have been defined within [`pytest_svm_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_svm_session.py),
  and [`pytest_svr_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_svr_session.py).
- These unit tests have been automated within the travis [build](https://travis-ci.org/jeff1evesque/machine-learning),
+ These unit tests have been automated within corresponding travis [builds](https://travis-ci.org/jeff1evesque/machine-learning),
  using a series of docker containers, connected via a common docker network:
 
 - [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/960febf5b1178dafd2ce23acbe4d0ca59785c668/.travis.yml#L101-L108)
