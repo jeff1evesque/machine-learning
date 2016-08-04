@@ -6,16 +6,32 @@ language: python
 services:
   - docker
 
+## environment variables
+env:
+  global:
+    - DOCKER_VERSION=1.12.0-0~trusty
+
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
-  - docker build -f default.dockerfile -t container-default .
-  - docker build -f redis.dockerfile -t container-redis .
-  - docker build -f database.dockerfile -t container-database .
-  - docker build -f webserver.dockerfile -t container-webserver .
+  # docker version before update
+  - docker version
+
+  # list docker-engine versions
+  #- apt-cache madison docker-engine
+
+  # upgrade docker-engine to specific version
+  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
+
+  # docker version after update
+  - docker version
+
+  # install puppet
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
   - sudo apt-get install puppet-agent -y
+
+  # puppet version after update
   - sudo /opt/puppetlabs/bin/puppet -V
 
 ## install packages for linting
@@ -59,6 +75,7 @@ install:
 #  Note: unit testing is performed within the docker container, which is
 #        defined from the Dockerfile.
 script:
+  # lint codebase
   - flake8 .
   - jshint --verbose src/js/*.js --config test/config/jshint.json --exclude-path test/config/.jshintignore
   - jscs . --config test/config/.jscs.json
@@ -80,4 +97,12 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
+
+  # build docker container(s)
+  - docker build -f default.dockerfile -t container-default .
+  - docker build -f redis.dockerfile -t container-redis .
+  - docker build -f database.dockerfile -t container-database .
+  - docker build -f webserver.dockerfile -t container-webserver .
+
+  # run unit test(s)
   - docker network create -d bridge app_nw && docker run --name base --net=app_nw -d container-default && docker run --name redis --net=app_nw -d container-redis && docker run --name webserver --net=app_nw -d container-webserver run && docker run --name database --net=app_nw -d container-database && docker run --name webserver --net=app_nw -it container-webserver test
