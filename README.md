@@ -363,9 +363,6 @@ This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testin
 - [`redis.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile)
 - [`webserver.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile)
 
-**Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
- will include more granular unit tests.
-
 Current unit tests cover the following sessions:
 
 - `data_new`
@@ -376,6 +373,7 @@ Current unit tests cover the following sessions:
 which can be executed manually as follows:
 
 ```bash
+$ /path/to/machine-learning/
 $ vagrant up
 $ vagrant ssh
 vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test
@@ -396,6 +394,9 @@ test/programmatic_interface/pytest_svr_session.py ..
 
 =========================== 6 passed in 7.65 seconds ===========================
 ```
+
+**Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
+ will include more granular unit tests.
 
 **Note:** every script within this repository, with the
  [exception](https://github.com/jeff1evesque/machine-learning/issues/2234#issuecomment-158850974)
