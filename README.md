@@ -386,7 +386,7 @@ rootdir: /vagrant/test, inifile: pytest.ini
 
 plugins: flask-0.10.0
 
-collected 6 items 
+collected 6 items
 
 test/programmatic_interface/pytest_svm_session.py ....
 
