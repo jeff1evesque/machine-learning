@@ -373,7 +373,7 @@ Current unit tests cover the following sessions:
 which can be executed manually as follows:
 
 ```bash
-$ /path/to/machine-learning/
+$ cd /path/to/machine-learning/
 $ vagrant up
 $ vagrant ssh
 vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test
