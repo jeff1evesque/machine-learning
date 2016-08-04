@@ -350,16 +350,18 @@ The following (non-exhaustive) properties define the above implemented `data`
 
 ### Test Scripts
 
-This project implements [unit testing](https://en.wikipedia.org/wiki/
-Unit_testing), to validate logic in a consistent fashion. Currently, only high-
-level unit tests have been defined within [`pytest_session.py`](https://github
-.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/
-pytest_session.py). Future releases (i.e. milestone [1.0](https://github.com/
-jeff1evesque/machine-learning/milestones/1.0)), will include more granular unit
- tests. These tests will be automated within a travis [build](https://travis-
-ci.org/jeff1evesque/machine-learning), using a docker container, defined within
- the [`Dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/
-master/Dockerfile).
+This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing),
+ to validate logic in a consistent fashion. Currently, only high-level unit
+ tests have been defined within [`pytest_svm_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_svm_session.py),
+ and [`pytest_svr_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_svr_session.py).
+ These unit tests have been automated within corresponding travis [builds](https://travis-ci.org/jeff1evesque/machine-learning),
+ using a series of docker containers, connected via a common docker network:
+
+- [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/960febf5b1178dafd2ce23acbe4d0ca59785c668/.travis.yml#L101-L108)
+- [`default.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile)
+- [`database.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile)
+- [`redis.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile)
+- [`webserver.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile)
 
 Current unit tests cover the following sessions:
 
@@ -368,24 +370,33 @@ Current unit tests cover the following sessions:
 - `model_predict`
 - `model_generate`
 
-which can be executed as follows:
+which can be executed manually as follows:
 
 ```bash
+$ cd /path/to/machine-learning/
 $ vagrant up
 $ vagrant ssh
-vagrant@vagrant-ubuntu-trusty-64:~$ pip install pytest
 vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test
 vagrant@vagrant-ubuntu-trusty-64:~$ py.test
 ============================= test session starts ==============================
 
-platform linux2 -- Python 2.7.6, pytest-2.8.0, py-1.4.30, pluggy-0.3.1
+platform linux2 -- Python 2.7.6, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
+
 rootdir: /vagrant/test, inifile: pytest.ini
-collected 4 items
 
-programmatic_interface/pytest_session.py ....
+plugins: flask-0.10.0
 
-=========================== 4 passed in 1.06 seconds ===========================
+collected 6 items
+
+test/programmatic_interface/pytest_svm_session.py ....
+
+test/programmatic_interface/pytest_svr_session.py ..
+
+=========================== 6 passed in 7.65 seconds ===========================
 ```
+
+**Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
+ will include more granular unit tests.
 
 **Note:** every script within this repository, with the
  [exception](https://github.com/jeff1evesque/machine-learning/issues/2234#issuecomment-158850974)
