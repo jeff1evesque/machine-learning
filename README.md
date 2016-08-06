@@ -381,7 +381,7 @@ root@vagrant-ubuntu-trusty-64:~$ apt-get -y install dos2unix
 root@vagrant-ubuntu-trusty-64:~$ cd /vagrant
 root@vagrant-ubuntu-trusty-64:~$ dos2unix build_docker && chmod u+x build_docker
 root@vagrant-ubuntu-trusty-64:~$ apt-get -y install docker.io
-root@vagrant-ubuntu-trusty-64:~$ echo "deb https://packages.docker.com/1.11/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
+root@vagrant-ubuntu-trusty-64:~$ echo "deb https://packages.docker.com/1.12/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
 root@vagrant-ubuntu-trusty-64:~$ apt-get -y update && sudo apt-get -y upgrade docker-engine
 root@vagrant-ubuntu-trusty-64:~$ ./build_docker
 ...
