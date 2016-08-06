@@ -385,7 +385,7 @@ root@vagrant-ubuntu-trusty-64:~$ echo "deb https://packages.docker.com/1.11/apt/
 root@vagrant-ubuntu-trusty-64:~$ apt-get -y update && sudo apt-get -y upgrade docker-engine
 root@vagrant-ubuntu-trusty-64:~$ ./build_docker
 ...
-[TRACEBACK-OMMITED]
+[TRACEBACK-PARTIALLY-OMMITED]
 ============================= test session starts ==============================
 
 platform linux2 -- Python 2.7.6, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
