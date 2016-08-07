@@ -14,7 +14,7 @@ class install_nodejs {
 
     ## install nodejs, with npm
     class { 'nodejs':
-        repo_url_suffix => '5.x',
+        repo_url_suffix => '6.x',
     }
     contain nodejs
 }
