@@ -78,8 +78,14 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
         # log handler: requires the below logger
         formatter = logging.Formatter(
-            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
-        handler = RotatingFileHandler(LOG_PATH, maxBytes=10000000, backupCount=5)
+            "[%(asctime)s] {%(pathname)s:%(lineno)d} "
+            "%(levelname)s - %(message)s"
+        )
+        handler = RotatingFileHandler(
+            LOG_PATH,
+            maxBytes=10000000,
+            backupCount=5
+        )
         handler.setLevel(HANDLER_LEVEL)
         handler.setFormatter(formatter)
         app.logger.addHandler(handler)
