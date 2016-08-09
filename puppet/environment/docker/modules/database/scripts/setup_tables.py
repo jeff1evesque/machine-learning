@@ -41,12 +41,12 @@ import MySQLdb as DB
 # @argv[2], second passed-in argument from command, or boolean value
 #     indicating if build is vagrant instance.
 if argv[2] == 'true':
-    prepath = argv[1]
+    adjusted_path = ''
 else:
-    prepath = argv[1] + '/test'
+    adjusted_path = 'test/hiera'
 
 # define configuration
-with open(prepath + '/hiera/settings.yaml', 'r') as stream:
+with open(argv[1] + '/hiera/' + adjusted_path + 'settings.yaml', 'r') as stream:
     # local variables
     settings = yaml.load(stream)
     models = settings['application']['model_type']
