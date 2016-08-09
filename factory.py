@@ -95,4 +95,4 @@ def create_app(args={'prefix': '', 'settings': ''}):
     except Exception as error:
         logger = Logger('error', 'yaml')
         logger.log(error)
-        raise Exception(error)
+        raise
