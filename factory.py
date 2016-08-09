@@ -25,7 +25,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
     # path to hiera
     if args['prefix']:
-        path = '/hiera/' + args['prefix'] + '/settings.yaml'
+        path = '/hiera/' + args['prefix'] + '/hiera/settings.yaml'
     else:
         path = 'hiera/settings.yaml'
 
