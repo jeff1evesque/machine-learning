@@ -29,9 +29,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
     else:
         path = 'hiera/settings.yaml'
 
-    # define configuration
-    with open(path, 'r') as stream:
-        try:
+    try:
+        # define configuration
+        with open(path, 'r') as stream:
             # local variables
             if args['settings']:
                 app = Flask(
@@ -75,22 +75,23 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 DEBUG_LOG_PATH=settings['application']['debug_log_path'],
                 MODEL_TYPE=settings['application']['model_type']
             )
-        except yaml.YAMLError as error:
-            logger = Logger('error', 'yaml')
-            logger.log(error)
 
-    # log handler: requires the below logger
-    formatter = logging.Formatter(
-        "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
-    handler = RotatingFileHandler(LOG_PATH, maxBytes=10000000, backupCount=5)
-    handler.setLevel(HANDLER_LEVEL)
-    handler.setFormatter(formatter)
-    app.logger.addHandler(handler)
+        # log handler: requires the below logger
+        formatter = logging.Formatter(
+            "[%(asctime)s] {%(pathname)s:%(lineno)d} %(levelname)s - %(message)s")
+        handler = RotatingFileHandler(LOG_PATH, maxBytes=10000000, backupCount=5)
+        handler.setLevel(HANDLER_LEVEL)
+        handler.setFormatter(formatter)
+        app.logger.addHandler(handler)
 
-    # logger: complements the log handler
-    log = logging.getLogger('werkzeug')
-    log.setLevel(logging.DEBUG)
-    log.addHandler(handler)
+        # logger: complements the log handler
+        log = logging.getLogger('werkzeug')
+        log.setLevel(logging.DEBUG)
+        log.addHandler(handler)
 
-    # return
-    return app
+        # return
+        return app
+
+    except Exception as error:
+        logger = Logger('error', 'yaml')
+        logger.log(error)
