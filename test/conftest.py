@@ -18,10 +18,15 @@ from factory import create_app  # noqa
 
 @pytest.fixture
 def app():
-    args = {
-        'prefix': 'test',
-        'settings': ''
-    }
-    app = create_app(args)
-    app.testing = True
-    return app
+    try:
+        args = {
+            'prefix': 'test',
+            'settings': ''
+        }
+        app = create_app(args)
+        app.testing = True
+
+        return app
+
+    except Exception as error:
+        raise pytest.UsageError(error)
