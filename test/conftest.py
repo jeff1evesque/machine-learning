@@ -17,7 +17,7 @@ from factory import create_app  # noqa
 
 
 @pytest.fixture
-def app(report):
+def app():
     try:
         args = {
             'prefix': 'test',
@@ -26,12 +26,7 @@ def app(report):
         app = create_app(args)
         app.testing = True
 
-        # pytest exception: collection error
-        if report.failed:
-            raise pytest.UsageError('Errors during collection, aborting')
-
         return app
 
-    # general exception
     except Exception as error:
         raise pytest.UsageError(error)
