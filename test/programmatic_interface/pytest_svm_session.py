@@ -53,7 +53,7 @@ def get_sample_json(jsonfile, model_type):
             json_dataset = json.load(json_file)
 
     except Exception as error:
-        raise IOError(error)
+        pytest.fail(error)
 
     return json.dumps(json_dataset)
 
