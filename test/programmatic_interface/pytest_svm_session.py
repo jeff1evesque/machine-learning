@@ -35,20 +35,26 @@ def get_sample_json(jsonfile, model_type):
 
     # open file
     json_dataset = None
-    with open(
-        os.path.join(
-            root,
-            'interface',
-            'static',
-            'data',
-            'json',
-            'programmatic_interface',
-            model_type,
-            jsonfile
-        ),
-        'r'
-    ) as json_file:
-        json_dataset = json.load(json_file)
+
+    try:
+        with open(
+            os.path.join(
+                root,
+                'interface',
+                'static',
+                'data',
+                'json',
+                'programmatic_interface',
+                model_type,
+                jsonfile
+            ),
+            'r'
+        ) as json_file:
+            json_dataset = json.load(json_file)
+
+    except Exception as error:
+        raise IOError(error)
+
     return json.dumps(json_dataset)
 
 
@@ -68,7 +74,7 @@ def test_data_new(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-data-new.json', 'svm')
+        data=get_sample_json('svm-data-new-typo.json', 'svm')
     )
 
     assert res.status_code == 200
