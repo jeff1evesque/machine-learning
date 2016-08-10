@@ -28,5 +28,5 @@ def app():
 
         return app
 
-    except Exception as error:
-        sys.exit(1)
+    except:
+        raise
