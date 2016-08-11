@@ -20,7 +20,7 @@ class install_sql {
 ## create database tables
 class create_db {
     require install_sql
-    include database::database
+    contain database::database
 }
 
 ## initiate
