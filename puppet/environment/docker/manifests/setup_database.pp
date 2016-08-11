@@ -8,13 +8,13 @@
 ## install sql
 class install_sql {
     ## install mariadb
-    include database::server
+    contain database::server
 
     ## install mariadb client
-    include database::client
+    contain database::client
 
     ## install mariad bindings
-    include database::bindings
+    contain database::bindings
 }
 
 ## create database tables
