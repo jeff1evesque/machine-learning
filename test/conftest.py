@@ -28,5 +28,5 @@ def app():
 
         return app
 
-    except Exception as error:
-        raise pytest.UsageError(error)
+    except:
+        raise

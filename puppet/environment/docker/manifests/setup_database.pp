@@ -5,14 +5,24 @@
 ###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
-## install mariadb
-include database::server
+## install sql
+class install_sql {
+    ## install mariadb
+    contain database::server
 
-## install mariadb client
-include database::client
+    ## install mariadb client
+    contain database::client
 
-## install mariad bindings
-include database::bindings
+    ## install mariad bindings
+    contain database::bindings
+}
 
 ## create database tables
-include database::database
+class create_db {
+    require install_sql
+    contain database::database
+}
+
+## initiate
+include create_db
+

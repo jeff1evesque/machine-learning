@@ -68,4 +68,5 @@ class database::server {
             }
         },
     }
+    contain mysql::server
 }

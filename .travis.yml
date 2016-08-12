@@ -104,6 +104,17 @@ script:
   - docker build -f database.dockerfile -t container-database .
   - docker build -f webserver.dockerfile -t container-webserver .
 
-  # run unit test(s), list all containers
-  - docker network create -d bridge app_nw && docker run --name base --net=app_nw -d container-default && docker run --name redis --net=app_nw -d container-redis && docker run --name webserver --net=app_nw -d container-webserver run && docker run --name database --net=app_nw -d container-database && docker run --name webserver-pytest --net=app_nw -it container-webserver test
+  # run unit test(s): return 0 if match found
+  #
+  # Note: travis has issues with exclamation, so is contained in a subshell
+  - docker network create -d bridge app_nw && docker run --name base --net=app_nw -d container-default && docker run --name redis --net=app_nw -d container-redis && docker run --name webserver --net=app_nw -d container-webserver run && docker run --name database --net=app_nw -d container-database && docker run --name webserver-pytest --net=app_nw -it container-webserver test  > pytest.log
+  - cat pytest.log
+  - (! grep -q '= FAILURES =' pytest.log)
+
+  # check exit code: 'docker exec' will fail if the container has an exit code
+  - docker exec -it webserver echo "'docker exec' only works on an active running container"
+  - docker exec -it database echo "'docker exec' only works on an active running container"
+  - docker exec -it redis echo "'docker exec' only works on an active running container"
+
+  # list all containers
   - docker ps -a

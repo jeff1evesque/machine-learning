@@ -18,6 +18,7 @@ Note: the 'pytest' instances can further be reviewed:
 '''
 
 import json
+import pytest
 import os.path
 from flask import url_for
 from flask import current_app
@@ -35,20 +36,26 @@ def get_sample_json(jsonfile, model_type):
 
     # open file
     json_dataset = None
-    with open(
-        os.path.join(
-            root,
-            'interface',
-            'static',
-            'data',
-            'json',
-            'programmatic_interface',
-            model_type,
-            jsonfile
-        ),
-        'r'
-    ) as json_file:
-        json_dataset = json.load(json_file)
+
+    try:
+        with open(
+            os.path.join(
+                root,
+                'interface',
+                'static',
+                'data',
+                'json',
+                'programmatic_interface',
+                model_type,
+                jsonfile
+            ),
+            'r'
+        ) as json_file:
+            json_dataset = json.load(json_file)
+
+    except Exception as error:
+        pytest.fail(error)
+
     return json.dumps(json_dataset)
 
 
