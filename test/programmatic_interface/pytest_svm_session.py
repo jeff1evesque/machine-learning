@@ -75,7 +75,7 @@ def test_data_new(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-data-new.json', 'svm')
+        data=get_sample_json('svm-data-new-typo.json', 'svm')
     )
 
     assert res.status_code == 200
