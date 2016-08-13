@@ -7,4 +7,5 @@ class system::set_timezone {
         region   => 'America',
         locality => 'New_York',
     }
+    contain timezone
 }

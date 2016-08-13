@@ -6,4 +6,5 @@ class database::bindings {
     class { '::mysql::bindings':
         python_enable => true,
     }
+    contain mysql::bindings
 }
