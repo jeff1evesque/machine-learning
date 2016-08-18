@@ -59,6 +59,9 @@ class Model_Generate(Base):
 
         '''
 
+        # local variables
+        result = None
+
         # svm model
         if self.model_type == self.list_model_type[0]:
             result = svm_model(
@@ -78,7 +81,8 @@ class Model_Generate(Base):
             )
 
         # store any errors
-        self.list_error.extend(result['error'])
+        if result and result['error']:
+            self.list_error.extend(result['error'])
 
     def return_error(self):
         '''@return_error
