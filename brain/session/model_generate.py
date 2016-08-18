@@ -46,7 +46,7 @@ class Model_Generate(Base):
         self.kernel = str(premodel_data['data']['settings']['sv_kernel_type'])
         self.session_id = premodel_data['data']['settings']['session_id']
         self.feature_request = Retrieve_Feature()
-        self.premodel_data = premodel_data['data']['settings']['model_type']
+        self.model_type = premodel_data['data']['settings']['model_type']
         self.list_model_type = current_app.config.get('MODEL_TYPE')
         self.list_error = []
 
@@ -69,7 +69,7 @@ class Model_Generate(Base):
             )
 
         # svr model
-        elif model_type == self.list_model_type[1]:
+        elif self.model_type == self.list_model_type[1]:
             result = svr_model(
                 self.kernel,
                 self.session_id,
