@@ -60,7 +60,7 @@ class Model_Generate(Base):
         '''
 
         # svm model
-        if self.model_type = self.list_model_type[0]:
+        if self.model_type == self.list_model_type[0]:
             result = svm_model(
                 self.kernel,
                 self.session_id,
@@ -69,7 +69,7 @@ class Model_Generate(Base):
             )
 
         # svr model
-        elif model_type = self.list_model_type[1]:
+        elif model_type == self.list_model_type[1]:
             result = svr_model(
                 self.kernel,
                 self.session_id,
