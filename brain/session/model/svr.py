@@ -38,6 +38,14 @@ def svr_model(kernel_type, session_id, feature_request, list_error):
     else:
         dataset = numpy.asarray(dataset['result'])
 
+    # get feature count
+    if get_feature_count['error']:
+        logger.log(get_feature_count['error'])
+        list_error.append(get_feature_count['error'])
+        feature_count = None
+    else:
+        feature_count = get_feature_count['result'][0][0]
+
     # check dataset integrity, build model
     if len(dataset) % feature_count == 0:
         features_list = dataset[:, [[0], [2], [1]]]
