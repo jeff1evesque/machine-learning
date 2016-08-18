@@ -95,7 +95,6 @@ def svr_model(kernel_type, session_id, feature_request, list_error):
         # cache svr feature labels, with respect to given session id
         Cache_Hset().cache(
             'svr_feature_labels',
-            'svr_feature_labels',
             str(session_id),
             json.dumps(feature_labels)
         )
