@@ -9,7 +9,7 @@ This file generates an svr model.
 from brain.database.retrieve_entity import Retrieve_Entity
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
-from sklearn import svr, preprocessing
+from sklearn import svm, preprocessing
 from log.logger import Logger
 import numpy
 import json
@@ -71,7 +71,7 @@ def svr_model(kernel_type, session_id, feature_request, list_error):
         encoded_labels = label_encoder.transform(observation_labels)
 
         # create svr model
-        clf = svr.SVR(kernel=kernel_type)
+        clf = svm.SVR(kernel=kernel_type)
         clf.fit(grouped_features, encoded_labels)
 
         # get svr title, and cache (model, encoded labels, title)
