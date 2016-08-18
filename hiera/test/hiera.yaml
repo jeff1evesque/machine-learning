@@ -3,8 +3,8 @@
   - yaml
 
 :yaml:
-  :datadir: /var/machine-learning
+  :datadir: /var/machine-learning/hiera
 
 :hierarchy:
-  - hiera/packages
+  - packages
   - test/hiera/settings
