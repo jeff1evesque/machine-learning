@@ -103,7 +103,7 @@ def test_data_append(client, live_server):
     assert res.status_code == 200
 
 
- def test_model_generate(client, live_server):
+def test_model_generate(client, live_server):
     '''@test_model_generate
 
     This method tests the 'model_generate' session.
