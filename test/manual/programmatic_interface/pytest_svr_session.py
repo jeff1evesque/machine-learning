@@ -86,18 +86,18 @@ def test_data_append():
     )
 
 
-def test_model_generate():
-    '''@test_model_generate
-
-    This method tests the 'model_generate' session.
-
-    '''
-
-    assert requests.post(
-        endpoint_url,
-        headers=headers,
-        data=get_sample_json('svr-model-generate.json')
-    )
+# def test_model_generate():
+#    '''@test_model_generate
+#
+#    This method tests the 'model_generate' session.
+#
+#    '''
+#
+#    assert requests.post(
+#        endpoint_url,
+#        headers=headers,
+#        data=get_sample_json('svr-model-generate.json')
+#    )
 
 
 # def test_model_predict():
