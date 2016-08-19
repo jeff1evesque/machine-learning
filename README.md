@@ -381,12 +381,12 @@ vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test && py.test manual
 platform linux2 -- Python 2.7.6, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
 rootdir: /vagrant/test/manual, inifile: pytest.ini
 plugins: flask-0.10.0
-collected 7 items
+collected 8 items
 
 manual/programmatic_interface/pytest_svm_session.py ....
-manual/programmatic_interface/pytest_svr_session.py ...
+manual/programmatic_interface/pytest_svr_session.py ....
 
-========================================= 7 passed in 29.09 seconds ==========================================
+========================================= 7 passed in 43.21 seconds ==========================================
 ```
 
 **Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
