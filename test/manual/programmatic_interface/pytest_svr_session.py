@@ -100,7 +100,7 @@ def test_model_generate():
     )
 
 
-#def test_model_predict():
+# def test_model_predict():
 #    '''@test_model_predict
 #
 #    This method tests the 'model_predict' session.
