@@ -376,31 +376,17 @@ which can be executed manually as follows:
 $ cd /path/to/machine-learning/
 $ vagrant up
 $ vagrant ssh
-vagrant@vagrant-ubuntu-trusty-64:~$ sudo su
-root@vagrant-ubuntu-trusty-64:~$ apt-get -y install dos2unix
-root@vagrant-ubuntu-trusty-64:~$ cd /vagrant
-root@vagrant-ubuntu-trusty-64:~$ dos2unix build_docker && chmod u+x build_docker
-root@vagrant-ubuntu-trusty-64:~$ apt-get -y install docker.io
-root@vagrant-ubuntu-trusty-64:~$ echo "deb https://packages.docker.com/1.11/apt/repo ubuntu-trusty main" | sudo tee /etc/apt/sources.list.d/docker.list
-root@vagrant-ubuntu-trusty-64:~$ apt-get -y update && apt-get -y --force-yes upgrade docker-engine
-root@vagrant-ubuntu-trusty-64:~$ ./build_docker
-...
-[TRACEBACK-PARTIALLY-OMMITED]
-============================= test session starts ==============================
-
+vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test && py.test manual
+============================================ test session starts =============================================
 platform linux2 -- Python 2.7.6, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
-
-rootdir: /vagrant/test, inifile: pytest.ini
-
+rootdir: /vagrant/test/manual, inifile: pytest.ini
 plugins: flask-0.10.0
+collected 7 items
 
-collected 6 items
+manual/programmatic_interface/pytest_svm_session.py ....
+manual/programmatic_interface/pytest_svr_session.py ...
 
-test/programmatic_interface/pytest_svm_session.py ....
-
-test/programmatic_interface/pytest_svr_session.py ..
-
-=========================== 6 passed in 7.65 seconds ===========================
+========================================= 7 passed in 29.09 seconds ==========================================
 ```
 
 **Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
