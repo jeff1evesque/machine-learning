@@ -1,6 +1,6 @@
-'''@pytest_svm_session
+'''@pytest_svr_session
 
-This file will test the following svm sessions:
+This file will test the following svr sessions:
 
   - data_new: stores supplied dataset into a SQL database.
   - data_append: appends supplied dataset to an already stored dataset in an
@@ -75,7 +75,7 @@ def test_data_new(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-data-new.json', 'svm')
+        data=get_sample_json('svr-data-new.json', 'svr')
     )
 
     assert res.status_code == 200
@@ -97,13 +97,13 @@ def test_data_append(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-data-append.json', 'svm')
+        data=get_sample_json('svr-data-append.json', 'svr')
     )
 
     assert res.status_code == 200
 
 
-def test_model_generate(client, live_server):
+ def test_model_generate(client, live_server):
     '''@test_model_generate
 
     This method tests the 'model_generate' session.
@@ -119,29 +119,29 @@ def test_model_generate(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-model-generate.json', 'svm')
+        data=get_sample_json('svr-model-generate.json', 'svr')
     )
 
     assert res.status_code == 200
 
 
-def test_model_predict(client, live_server):
-    '''@test_model_predict
-
-    This method tests the 'model_predict' session.
-
-    '''
-
-    @live_server.app.route('/load-data/')
-    def get_endpoint():
-        return url_for('name.load_data', _external=True)
-
-    live_server.start()
-
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-model-predict.json', 'svm')
-    )
-
-    assert res.status_code == 200
+# def test_model_predict(client, live_server):
+#    '''@test_model_predict
+#
+#    This method tests the 'model_predict' session.
+#
+#    '''
+#
+#    @live_server.app.route('/load-data/')
+#    def get_endpoint():
+#        return url_for('name.load_data', _external=True)
+#
+#    live_server.start()
+#
+#    res = client.post(
+#        get_endpoint(),
+#        headers={'Content-Type': 'application/json'},
+#        data=get_sample_json('svr-model-predict.json', 'svr')
+#    )
+#
+#    assert res.status_code == 200
