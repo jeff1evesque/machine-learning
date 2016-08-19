@@ -357,7 +357,7 @@ This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testin
  These unit tests have been automated within corresponding travis [builds](https://travis-ci.org/jeff1evesque/machine-learning),
  using a series of docker containers, connected via a common docker network:
 
-- [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/960febf5b1178dafd2ce23acbe4d0ca59785c668/.travis.yml#L101-L108)
+- [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120)
 - [`default.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile)
 - [`database.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile)
 - [`redis.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile)
