@@ -8,7 +8,9 @@ This file will test the following svm sessions:
                     dataset (session), and store it into a NoSQL cache.
   - model_predict: generate a prediction by selecting a particular cached
                    model from the NoSQL cache.
+
 Note: the 'pytest' instances can further be reviewed:
+
     - https://pytest-flask.readthedocs.io/en/latest
     - http://docs.pytest.org/en/latest/usage.html
 
