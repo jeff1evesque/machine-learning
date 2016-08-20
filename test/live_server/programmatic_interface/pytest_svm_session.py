@@ -25,7 +25,9 @@ from flask import current_app
 
 def get_sample_json(jsonfile, model_type):
     '''@get_sample_json
+
     Get a sample json dataset.
+
     '''
 
     # local variables
@@ -58,7 +60,9 @@ def get_sample_json(jsonfile, model_type):
 
 def test_data_new(client, live_server):
     '''@test_data_new
+
     This method tests the 'data_new' session.
+
     '''
 
     @live_server.app.route('/load-data/')
@@ -78,7 +82,9 @@ def test_data_new(client, live_server):
 
 def test_data_append(client, live_server):
     '''@test_data_append
+
     This method tests the 'data_new' session.
+
     '''
 
     @live_server.app.route('/load-data/')
@@ -98,7 +104,9 @@ def test_data_append(client, live_server):
 
 def test_model_generate(client, live_server):
     '''@test_model_generate
+
     This method tests the 'model_generate' session.
+
     '''
 
     @live_server.app.route('/load-data/')
@@ -118,7 +126,9 @@ def test_model_generate(client, live_server):
 
 def test_model_predict(client, live_server):
     '''@test_model_predict
+
     This method tests the 'model_predict' session.
+
     '''
 
     @live_server.app.route('/load-data/')
