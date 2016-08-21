@@ -63,4 +63,4 @@ class Model_Predict(Base):
 
         '''
 
-        return svm_prediction('svm', 'rbf', self.model_id, self.predictors)
+        return svm_prediction('svm', self.model_id, self.predictors)
