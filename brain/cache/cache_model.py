@@ -72,7 +72,7 @@ class Cache_Model(object):
         '''@get_all_titles
 
         This method returns a list of all model titles, and the corresponding
-        numeric id value, with respect to the provided key (i.e svm_rbf_model).
+        numeric id value, with respect to the provided key (i.e svm_model).
 
         '''
 
