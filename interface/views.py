@@ -168,7 +168,7 @@ def retrieve_sv_model():
 
     if request.method == 'POST':
         # get all models
-        model_list = Cache_Model().get_all_titles('svm_rbf_model')
+        model_list = Cache_Model().get_all_titles('svm_model')
 
         # return all models
         if model_list['result']:
@@ -195,7 +195,7 @@ def retrieve_sv_features():
 
     if request.method == 'POST':
         label_list = Cache_Hset().uncache(
-            'svm_rbf_feature_labels',
+            'svm_feature_labels',
             request.get_json()['session_id']
         )
 
