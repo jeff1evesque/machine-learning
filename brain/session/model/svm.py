@@ -93,15 +93,15 @@ def svm_model(kernel_type, session_id, feature_request, list_error):
         entity = Retrieve_Entity()
         title = entity.get_title(session_id)['result'][0][0]
         Cache_Model(clf).cache(
-            'svm_rbf_model',
+            'svm_model',
             str(session_id) + '_' + title
         )
-        Cache_Model(label_encoder).cache('svm_rbf_labels', session_id)
-        Cache_Hset().cache('svm_rbf_title', session_id, title)
+        Cache_Model(label_encoder).cache('svm_labels', session_id)
+        Cache_Hset().cache('svm_title', session_id, title)
 
         # cache svm feature labels, with respect to given session id
         Cache_Hset().cache(
-            'svm_rbf_feature_labels',
+            'svm_feature_labels',
             str(session_id),
             json.dumps(feature_labels)
         )

@@ -10,7 +10,7 @@ from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 
 
-def svm_prediction(model, kernel, model_id, predictors):
+def svm_prediction(model, model_id, predictors):
     '''@svm_prediction
 
     This method generates an svm prediction using the provided prediction
@@ -24,17 +24,17 @@ def svm_prediction(model, kernel, model_id, predictors):
 
     # get necessary model
     title = Cache_Hset().uncache(
-        model + '_' + kernel + '_title',
+        model + '_title',
         model_id
     )['result']
     clf = Cache_Model().uncache(
-        model + '_' + kernel + '_model',
+        model + '_model',
         model_id + '_' + title
     )
 
     # get encoded labels
     encoded_labels = Cache_Model().uncache(
-        model + '_' + kernel + '_labels',
+        model + '_labels',
         model_id
     )
 

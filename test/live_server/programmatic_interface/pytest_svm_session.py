@@ -1,7 +1,6 @@
 '''@pytest_svm_session
 
 This file will test the following svm sessions:
-
   - data_new: stores supplied dataset into a SQL database.
   - data_append: appends supplied dataset to an already stored dataset in an
                  SQL database.
