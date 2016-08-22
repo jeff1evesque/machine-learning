@@ -29,7 +29,7 @@ def svm_prediction(model, model_id, predictors):
     )['result']
     clf = Cache_Model().uncache(
         model + '_model',
-        model_id + '_title'
+        model_id + '_' + title
     )
 
     # get encoded labels
