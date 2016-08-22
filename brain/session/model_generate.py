@@ -10,7 +10,6 @@ into respective database table(s), which later can be retrieved within
 
 '''
 
-from flask import current_app
 from brain.session.base import Base
 from brain.database.retrieve_feature import Retrieve_Feature
 from brain.session.model.svm import svm_model
@@ -46,8 +45,6 @@ class Model_Generate(Base):
         self.kernel = str(premodel_data['data']['settings']['sv_kernel_type'])
         self.session_id = premodel_data['data']['settings']['session_id']
         self.feature_request = Retrieve_Feature()
-        self.model_type = premodel_data['data']['settings']['model_type']
-        self.list_model_type = current_app.config.get('MODEL_TYPE')
         self.list_error = []
 
     def generate_model(self):
@@ -61,9 +58,10 @@ class Model_Generate(Base):
 
         # local variables
         result = None
+        model_type = self.premodel_data['data']['settings']['model_type']
 
         # svm model
-        if self.model_type == self.list_model_type[0]:
+        if model_type == 'svm':
             result = svm_model(
                 self.kernel,
                 self.session_id,
@@ -72,7 +70,7 @@ class Model_Generate(Base):
             )
 
         # svr model
-        elif self.model_type == self.list_model_type[1]:
+        elif model_type == 'svr':
             result = svr_model(
                 self.kernel,
                 self.session_id,
