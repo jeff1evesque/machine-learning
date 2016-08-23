@@ -178,7 +178,8 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf puppet/environment/*/modules_contrib'
     run 'rm -f src/js/.gitignore'
     run 'rm -f src/js/support_vector.js'
-    run 'find . -type f -name *.pyc -delete'
-    run 'find . -type d -name __pycache__ -delete'
+    run 'find . -name *.pyc -type f -exec rm -r {} +'
+    run 'find . -name __pycache__ -type d -exec rm -r {} +'
+    run 'find . -name .cache -type d -exec rm -r {} +'
   end
 end
