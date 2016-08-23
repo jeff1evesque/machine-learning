@@ -50,7 +50,7 @@ class Model_Predict(Base):
         super(Model_Predict, self).__init__(prediction_input)
         self.prediction_input = prediction_input
         self.prediction_settings = self.prediction_input['data']['settings']
-        self.model_id = self.prediction_settings['model_id']
+        self.model_id = str(self.prediction_settings['model_id'])
         self.predictors = self.prediction_settings['prediction_input[]']
         self.list_error = []
 
