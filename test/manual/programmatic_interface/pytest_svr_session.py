@@ -33,7 +33,7 @@ endpoint_url = 'http://localhost:5000/load-data/'
 headers = {'Content-Type': 'application/json'}
 
 
-def get_sample_json(jsonfile):
+def get_sample_json(jsonfile, model_type):
     '''@get_sample_json
 
     Get a sample json dataset.
@@ -49,7 +49,7 @@ def get_sample_json(jsonfile):
             'data',
             'json',
             'programmatic_interface',
-            'svr',
+            model_type,
             jsonfile
         ),
         'r'
@@ -68,7 +68,7 @@ def test_data_new():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svr-data-new.json')
+        data=get_sample_json('svr-data-new.json', 'svr')
     )
 
 
@@ -82,22 +82,22 @@ def test_data_append():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svr-data-append.json')
+        data=get_sample_json('svr-data-append.json', 'svr')
     )
 
 
-# def test_model_generate():
-#    '''@test_model_generate
-#
-#    This method tests the 'model_generate' session.
-#
-#    '''
-#
-#    assert requests.post(
-#        endpoint_url,
-#        headers=headers,
-#        data=get_sample_json('svr-model-generate.json')
-#    )
+def test_model_generate():
+    '''@test_model_generate
+
+    This method tests the 'model_generate' session.
+
+    '''
+
+    assert requests.post(
+        endpoint_url,
+        headers=headers,
+        data=get_sample_json('svr-model-generate.json', 'svr')
+    )
 
 
 # def test_model_predict():
@@ -110,5 +110,5 @@ def test_data_append():
 #    assert requests.post(
 #        endpoint_url,
 #        headers=headers,
-#        data=get_sample_json('svr-model-predict.json')
+#        data=get_sample_json('svr-model-predict.json', 'svr')
 #    )

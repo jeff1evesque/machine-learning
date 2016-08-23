@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-'''@svm
+'''@svr
 
-This file generates an svm model.
+This file generates an svr model.
 
 '''
 
@@ -15,19 +15,12 @@ import numpy
 import json
 
 
-def svm_model(kernel_type, session_id, feature_request, list_error):
+def svr_model(kernel_type, session_id, feature_request, list_error):
     '''@svm_model
 
-    This method generates an svm model using feature data, retrieved from
+    This method generates an svr model using feature data, retrieved from
     the database. The generated model, is then stored within the NoSQL
     datastore.
-
-    @grouped_features, a matrix of observations, where each nested vector,
-        or python list, is a collection of features within the containing
-        observation.
-
-    @encoded_labels, observation labels (dependent variable labels),
-        encoded into a unique integer representation.
 
     '''
 
@@ -85,23 +78,23 @@ def svm_model(kernel_type, session_id, feature_request, list_error):
         label_encoder.fit(dataset[:, 0])
         encoded_labels = label_encoder.transform(observation_labels)
 
-        # create svm model
-        clf = svm.SVC(kernel=kernel_type)
+        # create svr model
+        clf = svm.SVR(kernel=kernel_type)
         clf.fit(grouped_features, encoded_labels)
 
-        # get svm title, and cache (model, encoded labels, title)
+        # get svr title, and cache (model, encoded labels, title)
         entity = Retrieve_Entity()
         title = entity.get_title(session_id)['result'][0][0]
         Cache_Model(clf).cache(
-            'svm_model',
+            'svr_model',
             str(session_id) + '_' + title
         )
-        Cache_Model(label_encoder).cache('svm_labels', session_id)
-        Cache_Hset().cache('svm_title', session_id, title)
+        Cache_Model(label_encoder).cache('svr_labels', session_id)
+        Cache_Hset().cache('svr_title', session_id, title)
 
-        # cache svm feature labels, with respect to given session id
+        # cache svr feature labels, with respect to given session id
         Cache_Hset().cache(
-            'svm_feature_labels',
+            'svr_feature_labels',
             str(session_id),
             json.dumps(feature_labels)
         )
