@@ -63,7 +63,6 @@ class Model_Generate(Base):
         model_type = self.premodel_data['data']['settings']['model_type']
 
         # svm model
-        print model_type
         if model_type == self.list_model_type[0]:
             result = svm_model(
                 self.kernel,
