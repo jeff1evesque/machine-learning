@@ -29,7 +29,11 @@ class Serialize_Model(object):
         '''
 
         self.model = model
-        self.acceptable = [svm.classes.SVC, preprocessing.label.LabelEncoder]
+        self.acceptable = [
+            svm.classes.SVC,
+            svm.classes.SVR,
+            preprocessing.label.LabelEncoder
+        ]
 
     def serialize(self):
         '''@serialize
