@@ -27,6 +27,9 @@ def svm_prediction(model, model_id, predictors):
         model + '_title',
         model_id
     )['result']
+    print 'title: ' + title + 'type: ' + type(title)
+    print 'model_id: ' + model_id + 'model_id: ' + type(model_id)
+    print 'model: ' + model + 'model: ' + type(model)
     clf = Cache_Model().uncache(
         model + '_model',
         model_id + '_' + title
