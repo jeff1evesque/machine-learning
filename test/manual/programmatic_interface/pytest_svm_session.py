@@ -33,7 +33,7 @@ endpoint_url = 'http://localhost:5000/load-data/'
 headers = {'Content-Type': 'application/json'}
 
 
-def get_sample_json(jsonfile):
+def get_sample_json(jsonfile, model_type):
     '''@get_sample_json
 
     Get a sample json dataset.
@@ -49,7 +49,7 @@ def get_sample_json(jsonfile):
             'data',
             'json',
             'programmatic_interface',
-            'svm',
+            model_type,
             jsonfile
         ),
         'r'
@@ -68,7 +68,7 @@ def test_data_new():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-data-new.json')
+        data=get_sample_json('svm-data-new.json', 'svm')
     )
 
 
@@ -82,7 +82,7 @@ def test_data_append():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-data-append.json')
+        data=get_sample_json('svm-data-append.json', 'svm')
     )
 
 
@@ -96,7 +96,7 @@ def test_model_generate():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-model-generate.json')
+        data=get_sample_json('svm-model-generate.json', 'svm')
     )
 
 
@@ -110,5 +110,5 @@ def test_model_predict():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-model-predict.json')
+        data=get_sample_json('svm-model-predict.json', 'svm')
     )
