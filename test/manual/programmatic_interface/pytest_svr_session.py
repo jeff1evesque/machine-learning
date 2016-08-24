@@ -100,15 +100,15 @@ def test_model_generate():
     )
 
 
-# def test_model_predict():
-#    '''@test_model_predict
-#
-#    This method tests the 'model_predict' session.
-#
-#    '''
-#
-#    assert requests.post(
-#        endpoint_url,
-#        headers=headers,
-#        data=get_sample_json('svr-model-predict.json', 'svr')
-#    )
+def test_model_predict():
+    '''@test_model_predict
+
+    This method tests the 'model_predict' session.
+
+    '''
+
+    assert requests.post(
+        endpoint_url,
+        headers=headers,
+        data=get_sample_json('svr-model-predict.json', 'svr')
+    )
