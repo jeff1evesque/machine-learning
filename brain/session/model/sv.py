@@ -6,6 +6,7 @@ This file generates an sv model.
 
 '''
 
+from flask import current_app
 from brain.database.retrieve_entity import Retrieve_Entity
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
@@ -87,12 +88,14 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
         encoded_labels = label_encoder.transform(observation_labels)
 
         # case 1: create svm model
-        if model == 'svm':
+        if model == list_model_type[0]:
             clf = svm.SVC(kernel=kernel_type)
+            model_prefix = 'svm'
 
         # case 2: create svr model
-        elif model == 'svr':
+        elif model == list_model_type[1]:
             clf = svm.SVR(kernel=kernel_type)
+            model_prefix = 'svr'
 
         # fit model
         clf.fit(grouped_features, encoded_labels)
@@ -103,15 +106,15 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
 
         # cache model, encoded labels, title
         Cache_Model(clf).cache(
-            model + '_model',
+            model_prefix + '_model',
             str(session_id) + '_' + title
         )
-        Cache_Model(label_encoder).cache(model + '_labels', session_id)
-        Cache_Hset().cache(model + '_title', session_id, title)
+        Cache_Model(label_encoder).cache(model_prefix + '_labels', session_id)
+        Cache_Hset().cache(model_prefix + '_title', session_id, title)
 
         # cache feature labels, with respect to given session id
         Cache_Hset().cache(
-            model + '_feature_labels',
+            model_prefix + '_feature_labels',
             str(session_id),
             json.dumps(feature_labels)
         )
