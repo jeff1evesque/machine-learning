@@ -4,7 +4,6 @@
 This file generates an sv model.
 '''
 
-from flask import current_app
 from brain.database.retrieve_entity import Retrieve_Entity
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
@@ -29,7 +28,6 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
     # local variables
     dataset = feature_request.get_dataset(session_id)
     get_feature_count = feature_request.get_count(session_id)
-    list_model_type = current_app.config.get('MODEL_TYPE')
     label_encoder = preprocessing.LabelEncoder()
     logger = Logger(__name__, 'error', 'error')
 
@@ -82,12 +80,12 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
         encoded_labels = label_encoder.transform(observation_labels)
 
         # case 1: create svm model
-        if model == list_model_type[0]:
+        if model == 'svm':
             clf = svm.SVC(kernel=kernel_type)
             model_prefix = 'svm'
 
         # case 2: create svr model
-        elif model == list_model_type[1]:
+        elif model == 'svr':
             clf = svm.SVR(kernel=kernel_type)
             model_prefix = 'svr'
 
