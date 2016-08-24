@@ -17,6 +17,8 @@ def svm_prediction(model, model_id, predictors):
     feature input(s), and the stored corresponding model, within the NoSQL
     datastore.
 
+    @clf, decoded model, containing several methods (i.e. predict)
+
     @predictors, a list of arguments (floats) required to make an SVM
         prediction, against the respective svm model.
 
