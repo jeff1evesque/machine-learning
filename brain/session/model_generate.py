@@ -56,6 +56,7 @@ class Model_Generate(Base):
                 self.session_id,
                 self.feature_request,
                 self.list_error
+            )
 
         # store any errors
         if result and result['error']:
