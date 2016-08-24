@@ -386,7 +386,7 @@ collected 8 items
 manual/programmatic_interface/pytest_svm_session.py ....
 manual/programmatic_interface/pytest_svr_session.py ....
 
-========================================= 8 passed in 43.21 seconds ==========================================
+========================================= 8 passed in 7.82 seconds ==========================================
 ```
 
 **Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
