@@ -2,7 +2,7 @@
     "properties": {
         "session_type": "model_generate",
         "session_id": "2",
-        "model_type": "regression",
+        "model_type": "svr",
         "sv_kernel_type": "poly"
     }
 }
