@@ -10,6 +10,7 @@ into respective database table(s), which later can be retrieved within
 
 '''
 
+from flask import current_app
 from brain.session.base import Base
 from brain.database.retrieve_feature import Retrieve_Feature
 from brain.session.model.sv import sv_model
@@ -61,8 +62,10 @@ class Model_Generate(Base):
         model_type = self.premodel_data['data']['settings']['model_type']
 
         # svm model, svr model
-        print model_type
-        if (model_type == 'svm' or model_type == 'svr'):
+        if (
+               model_type == self.list_model_type[0] or
+               model_type == self.list_model_type[1]
+        ):
             result = sv_model(
                 model_type,
                 self.kernel,
