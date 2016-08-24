@@ -93,7 +93,7 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
             model_prefix = 'svm'
 
         # case 2: create svr model
-        elif model == list_model_type[1]
+        elif model == list_model_type[1]:
             clf = svm.SVR(kernel=kernel_type)
             model_prefix = 'svr'
 
