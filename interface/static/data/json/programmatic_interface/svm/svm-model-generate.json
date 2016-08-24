@@ -2,7 +2,7 @@
     "properties": {
         "session_type": "model_generate",
         "session_id": "1",
-        "model_type": "classification",
+        "model_type": "svm",
         "sv_kernel_type": "rbf"
     }
 }
