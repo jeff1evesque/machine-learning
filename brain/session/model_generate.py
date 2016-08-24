@@ -58,6 +58,7 @@ class Model_Generate(Base):
         # local variables
         result = None
         model_type = self.premodel_data['data']['settings']['model_type']
+        print model_type
 
         # svm model, svr model
         if (
