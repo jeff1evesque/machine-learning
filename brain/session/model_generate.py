@@ -48,23 +48,14 @@ class Model_Generate(Base):
         result = None
         model_type = self.premodel_data['data']['settings']['model_type']
 
-        # svm model
-        if model_type == 'svm':
-            result = svm_model(
+        # case 1: svm model, or svr model
+        if (model_type == 'svm') or (model_type == 'svr'):
+            result = sv_model(
+                model_type,
                 self.kernel,
                 self.session_id,
                 self.feature_request,
                 self.list_error
-            )
-
-        # svr model
-        elif model_type == 'svr':
-            result = svr_model(
-                self.kernel,
-                self.session_id,
-                self.feature_request,
-                self.list_error
-            )
 
         # store any errors
         if result and result['error']:
