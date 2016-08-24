@@ -65,7 +65,7 @@ class Model_Generate(Base):
         if (
                model_type == self.list_model_type[0] or
                model_type == self.list_model_type[1]
-            ):
+        ):
             result = sv_model(
                 model_type,
                 self.kernel,
