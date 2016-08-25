@@ -15,7 +15,7 @@ import json
 
 def sv_model(model, kernel_type, session_id, feature_request, list_error):
     '''@sv_model
-    This method generates an sv model (i.e. svm, or svr) using feature data,
+    This method generates an sv (i.e. svm, or svr) model using feature data,
     retrieved from the database. The generated model, is then stored within the
     NoSQL datastore.
     @grouped_features, a matrix of observations, where each nested vector,
