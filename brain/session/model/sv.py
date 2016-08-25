@@ -1,9 +1,7 @@
 #!/usr/bin/python
 
-'''@svr
-
-This file generates an svr model.
-
+'''@sv
+This file generates an sv model.
 '''
 
 from brain.database.retrieve_entity import Retrieve_Entity
@@ -15,13 +13,16 @@ import numpy
 import json
 
 
-def svr_model(kernel_type, session_id, feature_request, list_error):
-    '''@svm_model
-
-    This method generates an svr model using feature data, retrieved from
-    the database. The generated model, is then stored within the NoSQL
-    datastore.
-
+def sv_model(model, kernel_type, session_id, feature_request, list_error):
+    '''@sv_model
+    This method generates an sv model (i.e. svm, or svr) using feature data,
+    retrieved from the database. The generated model, is then stored within the
+    NoSQL datastore.
+    @grouped_features, a matrix of observations, where each nested vector,
+        or python list, is a collection of features within the containing
+        observation.
+    @encoded_labels, observation labels (dependent variable labels),
+        encoded into a unique integer representation.
     '''
 
     # local variables
@@ -78,23 +79,34 @@ def svr_model(kernel_type, session_id, feature_request, list_error):
         label_encoder.fit(dataset[:, 0])
         encoded_labels = label_encoder.transform(observation_labels)
 
-        # create svr model
-        clf = svm.SVR(kernel=kernel_type)
+        # case 1: create svm model
+        if model == 'svm':
+            clf = svm.SVC(kernel=kernel_type)
+            model_prefix = 'svm'
+
+        # case 2: create svr model
+        elif model == 'svr':
+            clf = svm.SVR(kernel=kernel_type)
+            model_prefix = 'svr'
+
+        # fit model
         clf.fit(grouped_features, encoded_labels)
 
-        # get svr title, and cache (model, encoded labels, title)
+        # get svm title
         entity = Retrieve_Entity()
         title = entity.get_title(session_id)['result'][0][0]
+
+        # cache model, encoded labels, title
         Cache_Model(clf).cache(
-            'svr_model',
+            model_prefix + '_model',
             str(session_id) + '_' + title
         )
-        Cache_Model(label_encoder).cache('svr_labels', session_id)
-        Cache_Hset().cache('svr_title', session_id, title)
+        Cache_Model(label_encoder).cache(model_prefix + '_labels', session_id)
+        Cache_Hset().cache(model_prefix + '_title', session_id, title)
 
-        # cache svr feature labels, with respect to given session id
+        # cache feature labels, with respect to given session id
         Cache_Hset().cache(
-            'svr_feature_labels',
+            model_prefix + '_feature_labels',
             str(session_id),
             json.dumps(feature_labels)
         )
