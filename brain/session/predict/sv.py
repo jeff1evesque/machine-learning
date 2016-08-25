@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-'''@svm
+'''@sv
 
-This file generates an svm prediction.
+This file generates an sv prediction.
 
 '''
 
@@ -13,9 +13,9 @@ from brain.cache.cache_model import Cache_Model
 def svm_prediction(model, model_id, predictors):
     '''@svm_prediction
 
-    This method generates an svm prediction using the provided prediction
-    feature input(s), and the stored corresponding model, within the NoSQL
-    datastore.
+    This method generates an sv (i.e. svm, or svr) prediction using the
+    provided prediction feature input(s), and the stored corresponding model,
+    within the NoSQL datastore.
 
     @clf, decoded model, containing several methods (i.e. predict)
 
