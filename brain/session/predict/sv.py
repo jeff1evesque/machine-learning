@@ -10,8 +10,8 @@ from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 
 
-def svm_prediction(model, model_id, predictors):
-    '''@svm_prediction
+def sv_prediction(model, model_id, predictors):
+    '''@sv_prediction
 
     This method generates an sv (i.e. svm, or svr) prediction using the
     provided prediction feature input(s), and the stored corresponding model,
