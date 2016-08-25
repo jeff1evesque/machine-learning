@@ -82,12 +82,10 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
         # case 1: create svm model
         if model == 'svm':
             clf = svm.SVC(kernel=kernel_type)
-            model_prefix = 'svm'
 
         # case 2: create svr model
         elif model == 'svr':
             clf = svm.SVR(kernel=kernel_type)
-            model_prefix = 'svr'
 
         # fit model
         clf.fit(grouped_features, encoded_labels)
@@ -98,15 +96,15 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
 
         # cache model, encoded labels, title
         Cache_Model(clf).cache(
-            model_prefix + '_model',
+            model + '_model',
             str(session_id) + '_' + title
         )
-        Cache_Model(label_encoder).cache(model_prefix + '_labels', session_id)
-        Cache_Hset().cache(model_prefix + '_title', session_id, title)
+        Cache_Model(label_encoder).cache(model + '_labels', session_id)
+        Cache_Hset().cache(model + '_title', session_id, title)
 
         # cache feature labels, with respect to given session id
         Cache_Hset().cache(
-            model_prefix + '_feature_labels',
+            model + '_feature_labels',
             str(session_id),
             json.dumps(feature_labels)
         )
