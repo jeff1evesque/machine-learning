@@ -14,7 +14,8 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.session.base import Base
-from brain.session.predict.svm import svm_prediction
+from brain.session.predict.sv import sv_prediction
+from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
 
 
 class Model_Predict(Base):
@@ -63,4 +64,6 @@ class Model_Predict(Base):
 
         '''
 
-        return svm_prediction('svm', self.model_id, self.predictors)
+        # get model type
+        model_type = M_Type().get_model_type(self.model_id)
+        return sv_prediction(model_type, self.model_id, self.predictors)
