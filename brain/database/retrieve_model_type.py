@@ -48,7 +48,7 @@ class Retrieve_Model_Type(object):
             ' FROM tbl_dataset_entity mid'
             ' INNER JOIN tbl_model_type mtype'\
             ' ON mid.model_type = mtype.id_model'\
-            ' mid.id_entity=%s'
+            ' WHERE mid.id_entity=%s'
         args = (id_entity)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
