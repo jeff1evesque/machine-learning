@@ -185,7 +185,7 @@ def retrieve_sv_model():
         else:
             return json.dumps({'error': svr_list['error']})
 
-        # return combine model(s)
+        # return combined model(s)
         combined_result = svm_result + svr_result
         return json.dumps(combined_result)
 
