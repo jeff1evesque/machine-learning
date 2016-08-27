@@ -44,6 +44,7 @@ class Retrieve_Model_Type(object):
         '''
 
         # select dataset
+        self.sql.sql_connect(self.db_ml)
         sql_statement = 'SELECT mtype.model'\
             ' FROM tbl_dataset_entity mid'\
             ' INNER JOIN tbl_model_type mtype'\
