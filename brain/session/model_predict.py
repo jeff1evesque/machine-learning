@@ -65,5 +65,5 @@ class Model_Predict(Base):
         '''
 
         # get model type
-        model_type = M_Type().get_model_type(self.model_id)
+        model_type = M_Type().get_model_type(self.model_id)['result']
         return sv_prediction(model_type, self.model_id, self.predictors)
