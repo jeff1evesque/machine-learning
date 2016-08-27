@@ -61,4 +61,4 @@ class Retrieve_Model_Type(object):
         if response_error:
             return {'error': response_error, 'result': None}
         else:
-            return {'error': None, 'result': response['result']}
+            return {'error': None, 'result': response['result'][0][0]}
