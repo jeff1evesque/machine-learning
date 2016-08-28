@@ -53,7 +53,6 @@ class Model_Predict(Base):
         self.prediction_settings = self.prediction_input['data']['settings']
         self.model_id = self.prediction_settings['model_id']
         self.predictors = self.prediction_settings['prediction_input[]']
-        self.list_error = []
 
     def predict(self):
         '''@predict
