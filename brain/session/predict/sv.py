@@ -6,6 +6,7 @@ This file generates an sv prediction.
 
 '''
 
+from flask import current_app
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
 
@@ -24,6 +25,9 @@ def sv_prediction(model, model_id, predictors):
 
     '''
 
+    # local variables
+    list_model_type = current_app.config.get('MODEL_TYPE')
+
     # get necessary model
     title = Cache_Hset().uncache(
         model + '_title',
@@ -34,13 +38,21 @@ def sv_prediction(model, model_id, predictors):
         model_id + '_' + title
     )
 
-    # get encoded labels
-    encoded_labels = Cache_Model().uncache(
-        model + '_labels',
-        model_id
-    )
+    # svm model: get encoded labels
+    if model == list_model_type[0]:
+        encoded_labels = Cache_Model().uncache(
+            model + '_labels',
+            model_id
+        )
 
-    # perform prediction, and return the result
-    numeric_label = (clf.predict([predictors]))
-    textual_label = list(encoded_labels.inverse_transform([numeric_label]))
-    return {'result': textual_label[0][0], 'error': None}
+    # perform prediction
+    numeric_label = clf.predict([predictors])
+
+    # result: svm model
+    if model == list_model_type[0]:
+        textual_label = list(encoded_labels.inverse_transform([numeric_label]))
+        return {'result': textual_label[0], 'error': None}
+
+    # result: svr model
+    elif model == list_model_type[1]:
+        return {'result': numeric_label, 'error': None}
