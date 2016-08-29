@@ -27,7 +27,7 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
     '''
 
     # local variables
-    dataset = feature_request.get_dataset(session_id)
+    dataset = feature_request.get_dataset(session_id, model)
     get_feature_count = feature_request.get_count(session_id)
     label_encoder = preprocessing.LabelEncoder()
     logger = Logger(__name__, 'error', 'error')
