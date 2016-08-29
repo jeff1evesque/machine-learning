@@ -46,13 +46,13 @@ def sv_prediction(model, model_id, predictors):
         )
 
     # perform prediction
-    numeric_label = clf.predict([predictors])
+    numeric_label = (clf.predict([predictors]))
 
     # result: svm model
     if model == list_model_type[0]:
         textual_label = list(encoded_labels.inverse_transform([numeric_label]))
-        return {'result': textual_label[0], 'error': None}
+        return {'result': textual_label[0][0], 'error': None}
 
     # result: svr model
     elif model == list_model_type[1]:
-        return {'result': numeric_label, 'error': None}
+        return {'result': str(numeric_label[0]), 'error': None}
