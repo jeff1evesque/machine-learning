@@ -41,12 +41,12 @@ import MySQLdb as DB
 # @argv[2], second passed-in argument from command, or boolean value
 #     indicating if build is vagrant instance.
 if argv[2] == 'true':
-    configuration = argv[1] + '/hiera/settings.yaml'
+    prepath = argv[1]
 else:
-    configuration = argv[1] + '/hiera/test/hiera/settings.yaml'
+    prepath = argv[1] + '/test'
 
 # define configuration
-with open(configuration, 'r') as stream:
+with open(prepath + '/hiera/settings.yaml', 'r') as stream:
     # local variables
     settings = yaml.load(stream)
     models = settings['application']['model_type']
@@ -107,7 +107,7 @@ with open(configuration, 'r') as stream:
                             id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             id_entity INT NOT NULL,
                             dep_variable_label VARCHAR (50) NULL,
-                            criterion FLOAT NULL,
+                            criterion VARCHAR (50) NULL,
                             indep_variable_label VARCHAR (50) NOT NULL,
                             indep_variable_value FLOAT NOT NULL
                         );
