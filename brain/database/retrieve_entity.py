@@ -50,8 +50,9 @@ class Retrieve_Entity(object):
 
         # select dataset
         self.sql.sql_connect(self.db_ml)
-        sql_statement = 'SELECT title FROM tbl_dataset_entity'\
-            ' where id_entity=%s'
+        sql_statement = 'SELECT title '\
+            'FROM tbl_dataset_entity '\
+            'WHERE id_entity=%s'
         args = (id_entity)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
