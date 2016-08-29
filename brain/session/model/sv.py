@@ -89,14 +89,18 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
             # cache encoded labels
             Cache_Model(label_encoder).cache(model + '_labels', session_id)
 
+            # fit model
+            clf.fit(grouped_features, encoded_labels)
+
         # case 2: svr model
         elif model == list_model_type[1]:
+            # create model
             clf = svm.SVR(kernel=kernel_type)
 
-        # fit model
-        clf.fit(grouped_features, encoded_labels)
+            # fit model
+            clf.fit(grouped_features, observation_labels)
 
-        # get svm title
+        # get title
         entity = Retrieve_Entity()
         title = entity.get_title(session_id)['result'][0][0]
 
