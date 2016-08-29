@@ -59,16 +59,16 @@ class Save_Entity(object):
         self.sql.sql_connect(self.db_ml)
 
         if self.session_type == 'data_append':
-            sql_statement = 'UPDATE tbl_dataset_entity SET '\
-                'uid_modified=%s, datetime_modified=UTC_TIMESTAMP() '\
+            sql_statement = 'UPDATE tbl_dataset_entity '\
+                'SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() '\
                 'WHERE id_entity=%s'
             args = (self.premodel_data['uid'], self.premodel_data['id_entity'])
             response = self.sql.sql_command(sql_statement, 'update', args)
 
         elif self.session_type == 'data_new':
-            sql_statement = 'INSERT INTO tbl_dataset_entity (title, '\
-                'model_type, uid_created, datetime_created) VALUES(%s, %s, '\
-                '%s, UTC_TIMESTAMP())'
+            sql_statement = 'INSERT INTO tbl_dataset_entity '\
+                '(title, model_type, uid_created, datetime_created) '\
+                'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
             args = (
                 self.premodel_data['title'],
                 self.premodel_data['model_type'],
