@@ -208,7 +208,7 @@ def retrieve_sv_features():
     '''
 
     # get model type
-    model_id = request.get_json()['session_id']
+    model_id = request.get_json()['model_id']
     model_type = M_Type().get_model_type(model_id)['result']
 
     # return all feature labels
