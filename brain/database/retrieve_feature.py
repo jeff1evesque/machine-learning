@@ -58,13 +58,17 @@ class Retrieve_Feature(object):
 
         # case 1: svm data
         if model == list_model_type[0]:
-            sql_statement = 'SELECT dep_variable_label, indep_variable_label, '\
-                'indep_variable_value FROM tbl_feature_value where id_entity=%s'
+            sql_statement = 'SELECT dep_variable_label, '\
+                'indep_variable_label, indep_variable_value '\
+                'FROM tbl_feature_value '\
+                'WHERE id_entity=%s'
 
         # case 2: svr data
         elif model == list_model_type[1]:
             sql_statement = 'SELECT criterion, indep_variable_label, '\
-                'indep_variable_value FROM tbl_feature_value where id_entity=%s'
+                'indep_variable_value '\
+                'FROM tbl_feature_value '\
+                'WHERE id_entity=%s'
 
         # get dataset
         args = (id_entity)
@@ -76,7 +80,11 @@ class Retrieve_Feature(object):
 
         # return result
         if response_error:
-            return {'status': False, 'error': response_error, 'result': None}
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
         else:
             return {
                 'status': True,
@@ -98,8 +106,9 @@ class Retrieve_Feature(object):
         '''
 
         self.sql.sql_connect(self.db_ml)
-        sql_statement = 'SELECT count_features FROM tbl_feature_count '\
-            'where id_entity=%s'
+        sql_statement = 'SELECT count_features '\
+            'FROM tbl_feature_count '\
+            'WHERE id_entity=%s'
         args = (id_entity)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
@@ -109,7 +118,11 @@ class Retrieve_Feature(object):
 
         # return result
         if response_error:
-            return {'status': False, 'error': response_error, 'result': None}
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
         else:
             return {
                 'status': True,
