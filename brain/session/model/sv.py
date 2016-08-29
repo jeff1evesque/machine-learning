@@ -76,16 +76,20 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
                 observation_labels.append(feature[0][0])
                 current_features = []
 
-        # convert observation labels to a unique integer representation
-        label_encoder = preprocessing.LabelEncoder()
-        label_encoder.fit(dataset[:, 0])
-        encoded_labels = label_encoder.transform(observation_labels)
-
-        # case 1: create svm model
+        # case 1: svm model
         if model == list_model_type[0]:
+            # convert observation labels to a unique integer representation
+            label_encoder = preprocessing.LabelEncoder()
+            label_encoder.fit(dataset[:, 0])
+            encoded_labels = label_encoder.transform(observation_labels)
+
+            # create model
             clf = svm.SVC(kernel=kernel_type)
 
-        # case 2: create svr model
+            # cache encoded labels
+            Cache_Model(label_encoder).cache(model + '_labels', session_id)
+
+        # case 2: svr model
         elif model == list_model_type[1]:
             clf = svm.SVR(kernel=kernel_type)
 
@@ -96,12 +100,11 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
         entity = Retrieve_Entity()
         title = entity.get_title(session_id)['result'][0][0]
 
-        # cache model, encoded labels, title
+        # cache model, title
         Cache_Model(clf).cache(
             model + '_model',
             str(session_id) + '_' + title
         )
-        Cache_Model(label_encoder).cache(model + '_labels', session_id)
         Cache_Hset().cache(model + '_title', session_id, title)
 
         # cache feature labels, with respect to given session id
