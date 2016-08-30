@@ -2,7 +2,7 @@
     "properties": {
         "dataset_type": "json_string",
         "session_type": "data_append",
-        "model_type": "regression",
+        "model_type": "svr",
         "session_id": "2"
     },
     "dataset": {
