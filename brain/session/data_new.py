@@ -74,7 +74,8 @@ class Data_New(Base, Base_Data):
         '''
 
         # assign numerical representation
-        numeric_model_type = self.list_model_type.index(self.model_type) + 1
+        model_type = self.premodel_data['data']['settings']['model_type']
+        numeric_model_type = self.list_model_type.index(model_type) + 1
 
         # store entity values in database
         premodel_settings = self.premodel_data['data']['settings']
