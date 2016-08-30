@@ -51,7 +51,7 @@ class Data_New(Base, Base_Data):
         self.uid = 1
         self.dataset = []
         self.list_model_type = current_app.config.get('MODEL_TYPE')
-        self.premodel_data = premodel_data
+        self.model_type = premodel_data['data']['settings']['model_type']
 
     def save_entity(self, session_type, id_entity=None):
         '''@save_entity
@@ -74,8 +74,8 @@ class Data_New(Base, Base_Data):
         '''
 
         # assign numerical representation
-        model_type = self.premodel_data['data']['settings']['model_type']
-        numeric_model_type = self.list_model_type.index(model_type) + 1
+        numeric_model_type = self.list_model_type.index(self.model_type) + 1
+        print numeric_model_type
 
         # store entity values in database
         premodel_settings = self.premodel_data['data']['settings']
