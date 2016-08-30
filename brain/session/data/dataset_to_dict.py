@@ -8,6 +8,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+from flask import current_app
 from brain.converter.convert_dataset import Convert_Dataset
 
 
@@ -26,6 +27,7 @@ def dataset_dictionary(id_entity, model_type, upload):
     observation_labels = []
     list_error = []
     json_upload = upload['dataset']['json_string']
+    list_model_type = current_app.config.get('MODEL_TYPE')
 
     if json_upload:
         is_json = True
@@ -70,7 +72,7 @@ def dataset_dictionary(id_entity, model_type, upload):
         # programmatic-interface
         elif json_upload:
             # classification
-            if upload['settings']['model_type'] == 'classification':
+            if upload['settings']['model_type'] == list_model_type[0]:
                 for dataset_json in json_upload.items():
                     # conversion
                     converter = Convert_Dataset(dataset_json, model_type, True)
@@ -87,7 +89,7 @@ def dataset_dictionary(id_entity, model_type, upload):
                     })
 
             # regression
-            elif upload['settings']['model_type'] == 'regression':
+            elif upload['settings']['model_type'] == list_model_type[1]:
                 # conversion
                 converter = Convert_Dataset(json_upload, model_type, True)
                 converted = converter.json_to_dict()
