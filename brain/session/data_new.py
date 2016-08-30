@@ -51,6 +51,7 @@ class Data_New(Base, Base_Data):
         self.uid = 1
         self.dataset = []
         self.list_model_type = current_app.config.get('MODEL_TYPE')
+        self.premodel_data = premodel_data
 
     def save_entity(self, session_type, id_entity=None):
         '''@save_entity
