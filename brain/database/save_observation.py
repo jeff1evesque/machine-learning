@@ -55,8 +55,9 @@ class Save_Observation(object):
         if self.session_type in ['data_append', 'data_new']:
 
             # check if observation label exists in database
-            sql_statement = 'SELECT * FROM tbl_observation_label WHERE '\
-                'dep_variable_label=%s AND id_entity=%s'
+            sql_statement = 'SELECT * FROM tbl_observation_label '\
+                'WHERE dep_variable_label=%s '\
+                'AND id_entity=%s'
             args = (
                 self.premodel_data['label'],
                 self.premodel_data['id_entity']

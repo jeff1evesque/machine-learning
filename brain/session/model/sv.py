@@ -4,6 +4,7 @@
 This file generates an sv model.
 '''
 
+from flask import current_app
 from brain.database.retrieve_entity import Retrieve_Entity
 from brain.cache.cache_hset import Cache_Hset
 from brain.cache.cache_model import Cache_Model
@@ -15,7 +16,7 @@ import json
 
 def sv_model(model, kernel_type, session_id, feature_request, list_error):
     '''@sv_model
-    This method generates an sv model (i.e. svm, or svr) using feature data,
+    This method generates an sv (i.e. svm, or svr) model using feature data,
     retrieved from the database. The generated model, is then stored within the
     NoSQL datastore.
     @grouped_features, a matrix of observations, where each nested vector,
@@ -26,10 +27,11 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
     '''
 
     # local variables
-    dataset = feature_request.get_dataset(session_id)
+    dataset = feature_request.get_dataset(session_id, model)
     get_feature_count = feature_request.get_count(session_id)
     label_encoder = preprocessing.LabelEncoder()
     logger = Logger(__name__, 'error', 'error')
+    list_model_type = current_app.config.get('MODEL_TYPE')
 
     # get dataset
     if dataset['error']:
@@ -74,39 +76,44 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
                 observation_labels.append(feature[0][0])
                 current_features = []
 
-        # convert observation labels to a unique integer representation
-        label_encoder = preprocessing.LabelEncoder()
-        label_encoder.fit(dataset[:, 0])
-        encoded_labels = label_encoder.transform(observation_labels)
+        # case 1: svm model
+        if model == list_model_type[0]:
+            # convert observation labels to a unique integer representation
+            label_encoder = preprocessing.LabelEncoder()
+            label_encoder.fit(dataset[:, 0])
+            encoded_labels = label_encoder.transform(observation_labels)
 
-        # case 1: create svm model
-        if model == 'svm':
+            # create model
             clf = svm.SVC(kernel=kernel_type)
-            model_prefix = 'svm'
 
-        # case 2: create svr model
-        elif model == 'svr':
+            # cache encoded labels
+            Cache_Model(label_encoder).cache(model + '_labels', session_id)
+
+            # fit model
+            clf.fit(grouped_features, encoded_labels)
+
+        # case 2: svr model
+        elif model == list_model_type[1]:
+            # create model
             clf = svm.SVR(kernel=kernel_type)
-            model_prefix = 'svr'
 
-        # fit model
-        clf.fit(grouped_features, encoded_labels)
+            # fit model
+            clf.fit(grouped_features, observation_labels)
 
-        # get svm title
+        # get title
         entity = Retrieve_Entity()
         title = entity.get_title(session_id)['result'][0][0]
 
-        # cache model, encoded labels, title
+        # cache model, title
         Cache_Model(clf).cache(
-            model_prefix + '_model',
+            model + '_model',
             str(session_id) + '_' + title
         )
-        Cache_Model(label_encoder).cache(model_prefix + '_labels', session_id)
-        Cache_Hset().cache(model_prefix + '_title', session_id, title)
+        Cache_Hset().cache(model + '_title', session_id, title)
 
         # cache feature labels, with respect to given session id
         Cache_Hset().cache(
-            model_prefix + '_feature_labels',
+            model + '_feature_labels',
             str(session_id),
             json.dumps(feature_labels)
         )

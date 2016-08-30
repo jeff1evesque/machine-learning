@@ -125,23 +125,23 @@ def test_model_generate(client, live_server):
     assert res.status_code == 200
 
 
-# def test_model_predict(client, live_server):
-#    '''@test_model_predict
-#
-#    This method tests the 'model_predict' session.
-#
-#    '''
-#
-#    @live_server.app.route('/load-data/')
-#    def get_endpoint():
-#        return url_for('name.load_data', _external=True)
-#
-#    live_server.start()
-#
-#    res = client.post(
-#        get_endpoint(),
-#        headers={'Content-Type': 'application/json'},
-#        data=get_sample_json('svr-model-predict.json', 'svr')
-#    )
-#
-#    assert res.status_code == 200
+def test_model_predict(client, live_server):
+    '''@test_model_predict
+
+    This method tests the 'model_predict' session.
+
+    '''
+
+    @live_server.app.route('/load-data/')
+    def get_endpoint():
+        return url_for('name.load_data', _external=True)
+
+    live_server.start()
+
+    res = client.post(
+        get_endpoint(),
+        headers={'Content-Type': 'application/json'},
+        data=get_sample_json('svr-model-predict.json', 'svr')
+    )
+
+    assert res.status_code == 200

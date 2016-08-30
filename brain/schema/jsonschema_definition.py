@@ -102,7 +102,7 @@ def jsonschema_model_generate():
             },
             'sv_model_type': {
                 'type': 'string',
-                'enum': ['classification', 'regression']
+                'enum': ['svm', 'svr']
             },
             'session_type': {
                 'type': 'string',

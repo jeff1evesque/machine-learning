@@ -21,6 +21,7 @@ import json
 from flask import Blueprint, render_template, request
 from brain.load_data import Load_Data
 from brain.converter.restructure_settings import Restructure_Settings
+from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
 from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
@@ -168,13 +169,26 @@ def retrieve_sv_model():
 
     if request.method == 'POST':
         # get all models
-        model_list = Cache_Model().get_all_titles('svm_model')
+        svm_list = Cache_Model().get_all_titles('svm_model')
+        svr_list = Cache_Model().get_all_titles('svr_model')
+        svm_result = []
+        svr_result = []
 
-        # return all models
-        if model_list['result']:
-            return json.dumps(model_list['result'])
+        # get svm model(s)
+        if svm_list['result']:
+            svm_result = svm_list['result']
         else:
-            return json.dumps({'error': model_list['error']})
+            return json.dumps({'error': svm_list['error']})
+
+        # get svr model(s)
+        if svr_list['result']:
+            svr_result = svr_list['result']
+        else:
+            return json.dumps({'error': svr_list['error']})
+
+        # return combined model(s)
+        combined_result = svm_result + svr_result
+        return json.dumps(combined_result)
 
 
 @blueprint.route(
@@ -193,13 +207,17 @@ def retrieve_sv_features():
 
     '''
 
+    # get model type
+    model_id = request.get_json()['model_id']
+    model_type = M_Type().get_model_type(model_id)['result']
+
+    # return all feature labels
     if request.method == 'POST':
         label_list = Cache_Hset().uncache(
-            'svm_feature_labels',
-            request.get_json()['session_id']
+            model_type + '_feature_labels',
+            model_id
         )
 
-        # return all feature labels
         if label_list['result']:
             return json.dumps(label_list['result'])
         else:

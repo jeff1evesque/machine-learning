@@ -35,8 +35,8 @@ var ModelType = React.createClass({
             >
 
                 <option value='' defaultValue>--Select--</option>
-                <option value='classification'>Classification</option>
-                <option value='regression'>Regression</option>
+                <option value='svm'>Classification</option>
+                <option value='svr'>Regression</option>
 
             </select>
         );

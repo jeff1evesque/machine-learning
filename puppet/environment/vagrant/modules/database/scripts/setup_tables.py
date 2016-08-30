@@ -107,7 +107,7 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                             id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             id_entity INT NOT NULL,
                             dep_variable_label VARCHAR (50) NULL,
-                            criterion FLOAT NULL,
+                            criterion VARCHAR (50) NULL,
                             indep_variable_label VARCHAR (50) NOT NULL,
                             indep_variable_value FLOAT NOT NULL
                         );

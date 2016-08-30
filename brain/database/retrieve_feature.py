@@ -34,7 +34,7 @@ class Retrieve_Feature(object):
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
 
-    def get_dataset(self, id_entity):
+    def get_dataset(self, id_entity, model):
         '''@get_dataset
 
         This method retrieves a correspondinng dataset, from corresponding
@@ -46,12 +46,31 @@ class Retrieve_Feature(object):
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
 
+        @model, is the model type (i.e. svm, svr)
+
         '''
 
-        # select dataset
+        # local variables
+        list_model_type = current_app.config.get('MODEL_TYPE')
+
+        # establish connection
         self.sql.sql_connect(self.db_ml)
-        sql_statement = 'SELECT dep_variable_label, indep_variable_label, '\
-            'indep_variable_value FROM tbl_feature_value where id_entity=%s'
+
+        # case 1: svm data
+        if model == list_model_type[0]:
+            sql_statement = 'SELECT dep_variable_label, '\
+                'indep_variable_label, indep_variable_value '\
+                'FROM tbl_feature_value '\
+                'WHERE id_entity=%s'
+
+        # case 2: svr data
+        elif model == list_model_type[1]:
+            sql_statement = 'SELECT criterion, indep_variable_label, '\
+                'indep_variable_value '\
+                'FROM tbl_feature_value '\
+                'WHERE id_entity=%s'
+
+        # get dataset
         args = (id_entity)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
@@ -61,7 +80,11 @@ class Retrieve_Feature(object):
 
         # return result
         if response_error:
-            return {'status': False, 'error': response_error, 'result': None}
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
         else:
             return {
                 'status': True,
@@ -83,8 +106,9 @@ class Retrieve_Feature(object):
         '''
 
         self.sql.sql_connect(self.db_ml)
-        sql_statement = 'SELECT count_features FROM tbl_feature_count '\
-            'where id_entity=%s'
+        sql_statement = 'SELECT count_features '\
+            'FROM tbl_feature_count '\
+            'WHERE id_entity=%s'
         args = (id_entity)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
@@ -94,7 +118,11 @@ class Retrieve_Feature(object):
 
         # return result
         if response_error:
-            return {'status': False, 'error': response_error, 'result': None}
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
         else:
             return {
                 'status': True,
