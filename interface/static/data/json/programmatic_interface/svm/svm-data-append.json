@@ -2,7 +2,7 @@
     "properties": {
         "dataset_type": "json_string",
         "session_type": "data_append",
-        "model_type": "classification",
+        "model_type": "svm",
         "session_id": "1"
     },
     "dataset": {
