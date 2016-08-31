@@ -346,7 +346,6 @@ The following (non-exhaustive) properties define the above implemented `data`
   - `polynomial`
   - `rbf`
   - `sigmoid`
-  - `precomputed`
 
 ### Test Scripts
 
