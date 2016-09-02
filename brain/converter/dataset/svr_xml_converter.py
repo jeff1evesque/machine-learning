@@ -41,7 +41,7 @@ def svr_xml_converter(raw_data):
                 list_observation_label.append(observation[key])
             elif key == 'predictor':
                 for predictor in observation[key]:
-                    predictor_label = str(predictor['label'])
+                    predictor_label = predictor['label']
                     predictor_value = predictor['value']
 
                     validate_value = Validate_Dataset(predictor_value)
@@ -52,8 +52,8 @@ def svr_xml_converter(raw_data):
                         return None
                     else:
                         list_dataset.append({
-                            'dep_variable_label': observation['criterion'],
-                            'indep_variable_label': predictor_label,
+                            'dep_variable_label': str(observation['criterion']),
+                            'indep_variable_label': str(predictor_label),
                             'indep_variable_value': predictor_value
                         })
 
