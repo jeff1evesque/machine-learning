@@ -12,13 +12,27 @@ import base64
 
 saltlength = 32
 
-# returns a hash and salt from a password p
 def hashpass(p):
+    '''@hashpass
+
+    This method returns a hash and salt from a password p
+    
+    @salt - a random string of saltlength bytes generated to hash the password
+    
+    '''
     salt = base64.b64encode(os.urandom(saltlength))
     return hashlib.sha512(salt + p).hexdigest()+"$"+salt
 
-# verifies that a password p hashes to a hash h
 def verifypass(p, h):
+    '''@verifypass
+
+    This function verifies that a password p hashes to a hash h as 
+    returned by hashpass.
+
+    @h - hash extracted from the hash+salt
+    @s - salt extracted from the hash+salt
+
+    '''
     h,s = h.split('$')
     return hashlib.sha512(s + p).hexdigest() == h
 
