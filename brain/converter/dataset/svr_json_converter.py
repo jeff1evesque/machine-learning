@@ -47,7 +47,7 @@ def svr_json_converter(raw_data, is_json):
             if type(predictors) == dict:
                 for label, predictor in predictors.items():
                     # validation (part 1)
-                    validate_predictor = Validate_Dataset(str(predictor))
+                    validate_predictor = Validate_Dataset(predictor)
                     validate_predictor.validate_value()
 
                     if validate_predictor.get_errors():
@@ -55,7 +55,7 @@ def svr_json_converter(raw_data, is_json):
                     else:
                         # restructured data
                         list_dataset.append({
-                            'dep_variable_label': observation_label,
+                            'dep_variable_label': str(observation_label),
                             'indep_variable_label': str(label),
                             'indep_variable_value': predictor
                         })
