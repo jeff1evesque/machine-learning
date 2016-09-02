@@ -36,11 +36,11 @@ def svm_xml_converter(raw_data):
 
     # build 'list_dataset'
     for observation in dataset['dataset']['observation']:
-        observation_label = str(observation['dependent-variable'])
+        observation_label = observation['dependent-variable']
         list_observation_label.append(observation_label)
 
         for feature in observation['independent-variable']:
-            feature_label = str(feature['label'])
+            feature_label = feature['label']
             feature_value = feature['value']
 
             validate_value = Validate_Dataset(feature_value)
@@ -51,8 +51,8 @@ def svm_xml_converter(raw_data):
                 return None
             else:
                 list_dataset.append({
-                    'dep_variable_label': observation_label,
-                    'indep_variable_label': feature_label,
+                    'dep_variable_label': str(observation_label),
+                    'indep_variable_label': str(feature_label),
                     'indep_variable_value': feature_value
                 })
 
