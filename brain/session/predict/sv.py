@@ -2,7 +2,8 @@
 
 '''@sv
 
-This file generates an sv prediction.
+This file generates an sv prediction, and can return associated confidence
+levels , associated with corresponding predictions.
 
 '''
 
@@ -17,6 +18,18 @@ def sv_prediction(model, model_id, predictors):
     This method generates an sv (i.e. svm, or svr) prediction using the
     provided prediction feature input(s), and the stored corresponding model,
     within the NoSQL datastore.
+
+    Additionally, the following is returned for SVM predictions:
+
+        - array of probability a given point (predictors) is one of the
+          defined set of classifiers.
+        - array of sum distances a given point (predictors) is to the set
+          of associated hyperplanes.
+
+    However, the following is returned for SVR predictions:
+
+        - coefficient of determination (r^2).
+
 
     @clf, decoded model, containing several methods (i.e. predict)
 
@@ -38,21 +51,24 @@ def sv_prediction(model, model_id, predictors):
         model_id + '_' + title
     )
 
-    # svm model: get encoded labels
-    if model == list_model_type[0]:
-        encoded_labels = Cache_Model().uncache(
-            model + '_labels',
-            model_id
-        )
+    # get encoded labels
+    encoded_labels = Cache_Model().uncache(
+        model + '_labels',
+        model_id
+    )
 
-    # perform prediction
+    # case 1: svm model
+    if model == list_model_type[0]:
+        probability = clf.predict_proba(predictors)
+        decision_distance = clf.decision_function(predictors)
+        confidence = probability + decision_distance
+
+    # perform prediction, and return the result
     numeric_label = (clf.predict([predictors]))
+    textual_label = list(encoded_labels.inverse_transform([numeric_label]))
 
-    # result: svm model
-    if model == list_model_type[0]:
-        textual_label = list(encoded_labels.inverse_transform([numeric_label]))
-        return {'result': textual_label[0][0], 'error': None}
-
-    # result: svr model
-    elif model == list_model_type[1]:
-        return {'result': str(numeric_label[0]), 'error': None}
+    return {
+        'result': textual_label[0][0],
+        'confidence': confidence,
+        'error': None
+    }
