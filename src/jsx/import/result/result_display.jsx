@@ -8,6 +8,7 @@
  */
 
 import checkValidString from './../validator/valid_string.js';
+import checkValidFloat from './../validator/valid_float.js';
 
 var ResultDisplay = React.createClass({
   // triggered when 'state properties' change
@@ -25,12 +26,34 @@ var ResultDisplay = React.createClass({
             displayResult = true;
         }
 
+        if (
+            serverResult.model == 'svm' &&
+            checkValidString(serverResult.model) &&
+            serverResult.confidence.probability &&
+            checkValidFloat(serverResult.confidence.probability) &&
+            serverResult.confidence.decision_function &&
+            checkValidFloat(serverResult.confidence.decision_function)
+        ) {
+            confidence = {
+                'probability': serverResult.confidence.probability,
+                'decision-function': serverResult.confidence.decision_function
+            }
+        }
+
       // display result
         if (displayResult) {
             return(
                 <fieldset className='fieldset-prediction-result'>
                     <legend>Prediction Result</legend>
                     <p className='result'>{result}</p>
+                    <legend>Confidence Level</legend>
+
+                    {/* array components require unique 'key' value */}
+                    {confidence && confidence.map(function(value) {
+                        return <p className={value.id}>
+                            {value.id}: {value.title}
+                        </p>;
+                    })}
                 </fieldset>
             );
         }
