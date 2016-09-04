@@ -71,8 +71,8 @@ def sv_prediction(model, model_id, predictors):
             'result': textual_label[0][0],
             'model': model,
             'confidence': {
-                'probability': probability[0][0],
-                'decision_function': decision_function[0][0]
+                'probability': str(probability[0][0]),
+                'decision_function': str(decision_function[0][0])
             },
             'error': None
         }
