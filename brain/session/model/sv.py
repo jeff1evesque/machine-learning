@@ -84,7 +84,7 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
             encoded_labels = label_encoder.transform(observation_labels)
 
             # create model
-            clf = svm.SVC(kernel=kernel_type)
+            clf = svm.SVC(kernel=kernel_type, probability=True)
 
             # cache encoded labels
             Cache_Model(label_encoder).cache(model + '_labels', session_id)
