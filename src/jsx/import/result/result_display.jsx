@@ -46,8 +46,8 @@ var ResultDisplay = React.createClass({
                 <fieldset className='fieldset-prediction-result'>
                     <legend>Prediction Result</legend>
                     <p className='result'>{result}</p>
-                    <legend>Confidence Level</legend>
 
+                    <legend>Confidence Level</legend>
                     {/* array components require unique 'key' value */}
                     {confidence && confidence.map(function(value) {
                         return <p className={value.id}>
