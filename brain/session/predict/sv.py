@@ -53,27 +53,37 @@ def sv_prediction(model, model_id, predictors):
         model_id + '_' + title
     )
 
-    # get encoded labels
-    encoded_labels = Cache_Model().uncache(
-        model + '_labels',
-        model_id
-    )
+    # perform prediction, and return the result
+    prediction = (clf.predict([predictors]))
 
-    # case 1: svm model
+    # case 1: return svm prediction, and confidence level
     if model == list_model_type[0]:
+        encoded_labels = Cache_Model().uncache(
+            model + '_labels',
+            model_id
+        )
+
+        textual_label = list(encoded_labels.inverse_transform([prediction]))
         probability = clf.predict_proba(predictors)
         decision_function = clf.decision_function(predictors)
 
-    # perform prediction, and return the result
-    numeric_label = (clf.predict([predictors]))
-    textual_label = list(encoded_labels.inverse_transform([numeric_label]))
-
-    return {
-        'result': textual_label[0][0],
-        'model': model,
-        'confidence': {
-            'probability': probability,
-            'decision_function': decision_function
+        return {
+            'result': textual_label[0][0],
+            'model': model,
+            'confidence': {
+                'probability': probability,
+                'decision_function': decision_function
+            }
+            'error': None
         }
-        'error': None
-    }
+
+    # case 2: return svr prediction, and confidence level
+    elif model == list_model_type[1]:
+        return {
+            'result': str(prediction[0]),
+            'model': model,
+            'confidence': {
+
+            }
+            'error': None
+        }
