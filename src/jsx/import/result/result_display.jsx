@@ -49,10 +49,10 @@ var ResultDisplay = React.createClass({
                     <p className='result'>{result}</p>
 
                     <legend>Confidence Level</legend>
-                    {/* array components require unique 'key' value */}
-                    {confidence && confidence.map(function(value) {
-                        return <p className={value.id}>
-                            {value.id}: {value.title}
+                    {/* iterate dynamic object */}
+                    {confidence && Object.keys(confidence).map(function(value, index) {
+                        return <p className={index}>
+                            {index}: {value}
                         </p>;
                     })}
                 </fieldset>
