@@ -72,7 +72,7 @@ def sv_prediction(model, model_id, predictors):
             'model': model,
             'confidence': {
                 'probability': probability[0],
-                'decision_function': decision_function
+                'decision_function': decision_function[0][0]
             },
             'error': None
         }
