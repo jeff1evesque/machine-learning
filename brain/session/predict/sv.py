@@ -73,7 +73,7 @@ def sv_prediction(model, model_id, predictors):
             'confidence': {
                 'probability': probability,
                 'decision_function': decision_function
-            }
+            },
             'error': None
         }
 
@@ -84,6 +84,6 @@ def sv_prediction(model, model_id, predictors):
             'model': model,
             'confidence': {
 
-            }
+            },
             'error': None
         }
