@@ -39,6 +39,8 @@ def sv_prediction(model, model_id, predictors):
     '''
 
     # local variables
+    probability = None
+    decision_function = None
     list_model_type = current_app.config.get('MODEL_TYPE')
 
     # get necessary model
@@ -60,8 +62,7 @@ def sv_prediction(model, model_id, predictors):
     # case 1: svm model
     if model == list_model_type[0]:
         probability = clf.predict_proba(predictors)
-        decision_distance = clf.decision_function(predictors)
-        confidence = probability + decision_distance
+        decision_function = clf.decision_function(predictors)
 
     # perform prediction, and return the result
     numeric_label = (clf.predict([predictors]))
@@ -69,6 +70,10 @@ def sv_prediction(model, model_id, predictors):
 
     return {
         'result': textual_label[0][0],
-        'confidence': confidence,
+        'model': model,
+        'confidence': {
+            'probability': probability,
+            'decision_function': decision_function
+        }
         'error': None
     }
