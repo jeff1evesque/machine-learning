@@ -17,6 +17,7 @@ var ResultDisplay = React.createClass({
         var serverObj = this.props.formResult ? this.props.formResult : false;
         var serverResult = serverObj.result ? serverObj.result : false;
         var displayResult = false;
+        var confidence = false;
 
         if (
             serverObj && serverResult && serverResult.result &&
