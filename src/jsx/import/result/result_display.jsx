@@ -33,13 +33,12 @@ var ResultDisplay = React.createClass({
             serverResult.model &&
             serverResult.model == 'svm' &&
             confidence.classes &&
-//            confidence.classes.every(checkValidFloat) &&
+            confidence.classes.every(checkValidFloat) &&
             confidence.probability &&
-//            confidence.probability.every(checkValidFloat) &&
-            confidence.decision_function
-//            confidence.decision_function.every(checkValidFloat)
+            confidence.probability.every(checkValidFloat) &&
+            confidence.decision_function &&
+            confidence.decision_function.every(checkValidFloat)
         ) {
-            console.log(confidence);
             adjustedConfidence = {
                 'classes': confidence.classes.join(', '),
                 'probability': confidence.probability.join(', '),
