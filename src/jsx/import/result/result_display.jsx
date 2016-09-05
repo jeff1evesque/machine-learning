@@ -41,9 +41,9 @@ var ResultDisplay = React.createClass({
         ) {
             console.log(confidence);
             adjustedConfidence = {
-                'classes': confidence.classes,
-                'probability': confidence.probability,
-                'decision-function': confidence.decision_function
+                'classes': confidence.classes.join(', '),
+                'probability': confidence.probability.join(', '),
+                'decision-function': confidence.decision_function.join(', ')
             }
         }
 
