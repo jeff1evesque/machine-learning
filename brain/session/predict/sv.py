@@ -72,7 +72,7 @@ def sv_prediction(model, model_id, predictors):
             'result': textual_label[0][0],
             'model': model,
             'confidence': {
-                'classes': str(classes)
+                'classes': str(classes),
                 'probability': str(probability[0]),
                 'decision_function': str(decision_function[0])
             },
