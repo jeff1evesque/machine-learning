@@ -32,12 +32,15 @@ var ResultDisplay = React.createClass({
             serverResult &&
             serverResult.model &&
             serverResult.model == 'svm' &&
+            confidence.classes &&
+            checkValidString(confidence.classes) &&
             confidence.probability &&
             checkValidString(confidence.probability) &&
             confidence.decision_function &&
             checkValidString(confidence.decision_function)
         ) {
             adjustedConfidence = {
+                'classes': confidence.classes,
                 'probability': confidence.probability,
                 'decision-function': confidence.decision_function
             }
