@@ -63,7 +63,7 @@ def sv_prediction(model, model_id, predictors):
             model_id
         )
 
-        textual_label = list(encoded_labels.inverse_transform([prediction]))
+        textual_label = encoded_labels.inverse_transform([prediction])
         probability = clf.predict_proba(predictors)
         decision_function = clf.decision_function(predictors)
         classes = clf.classes_
