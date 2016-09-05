@@ -15,23 +15,23 @@ var ResultDisplay = React.createClass({
     render: function(){
       // variables
         var serverObj = this.props.formResult ? this.props.formResult : false;
-        var serverResult = serverObj.result ? serverObj.result : false;
-        var confidence = serverResult.confidence ? serverResult.confidence : false;
+        var resultSet = serverObj.result ? serverObj.result : false;
+        var confidence = resultSet.confidence ? resultSet.confidence : false;
         var displayResult = false;
         var adjustedConfidence = false;
 
         if (
-            serverObj && serverResult && serverResult.result &&
-            checkValidString(serverResult.result)
+            serverObj && resultSet && resultSet.result &&
+            checkValidString(resultSet.result)
         ) {
-            var result = serverResult.result;
+            var result = resultSet.result;
             displayResult = true;
         }
 
         if (
-            serverResult &&
-            serverResult.model &&
-            serverResult.model == 'svm' &&
+            resultSet &&
+            resultSet.model &&
+            resultSet.model == 'svm' &&
             confidence.classes &&
             confidence.classes.every(checkValidString) &&
             confidence.probability &&
@@ -54,10 +54,12 @@ var ResultDisplay = React.createClass({
                     <p className='result'>prediction: {result}</p>
 
                     {/* iterate dynamic object */}
-                    {adjustedConfidence && Object.keys(adjustedConfidence).map(function(key) {
-                        return <p key={key} className={key}>
-                            {key}: {adjustedConfidence[key]}
-                        </p>;
+                    {
+                        adjustedConfidence &&
+                        Object.keys(adjustedConfidence).map(function(key) {
+                            return <p key={key} className={key}>
+                                {key}: {adjustedConfidence[key]}
+                            </p>;
                     })}
                 </fieldset>
             );
