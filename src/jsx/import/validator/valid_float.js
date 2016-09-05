@@ -2,6 +2,11 @@
  * valid_float.js: check if provided argument is float type.
  */
 function validator(value) {
+  // convert to string
+  if (typeof value != 'string') {
+    value = value.toString();
+  }
+
   // invalid condition: -0, and -0.0
   if (value.match(/^-0*.0*$/)) {
     return false;
