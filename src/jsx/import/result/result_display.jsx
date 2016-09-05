@@ -16,8 +16,9 @@ var ResultDisplay = React.createClass({
       // variables
         var serverObj = this.props.formResult ? this.props.formResult : false;
         var serverResult = serverObj.result ? serverObj.result : false;
+        var confidence = serverResult.confidence ? serverResult.confidence : false;
         var displayResult = false;
-        var confidence = false;
+        var adjustedConfidence = false;
 
         if (
             serverObj && serverResult && serverResult.result &&
@@ -28,16 +29,17 @@ var ResultDisplay = React.createClass({
         }
 
         if (
+            serverResult &&
+            serverResult.model &&
             serverResult.model == 'svm' &&
-            checkValidString(serverResult.model) &&
-            serverResult.confidence.probability &&
-            checkValidFloat(serverResult.confidence.probability) &&
-            serverResult.confidence.decision_function &&
-            checkValidFloat(serverResult.confidence.decision_function)
+            confidence.probability &&
+            checkValidString(confidence.probability) &&
+            confidence.decision_function &&
+            checkValidString(confidence.decision_function)
         ) {
-            confidence = {
-                'probability': serverResult.confidence.probability,
-                'decision-function': serverResult.confidence.decision_function
+            adjustedConfidence = {
+                'probability': confidence.probability,
+                'decision-function': confidence.decision_function
             }
         }
 
@@ -46,13 +48,12 @@ var ResultDisplay = React.createClass({
             return(
                 <fieldset className='fieldset-prediction-result'>
                     <legend>Prediction Result</legend>
-                    <p className='result'>{result}</p>
+                    <p className='result'>prediction: {result}</p>
 
-                    <legend>Confidence Level</legend>
                     {/* iterate dynamic object */}
-                    {confidence && Object.keys(confidence).map(function(value, index) {
-                        return <p className={index}>
-                            {index}: {value}
+                    {adjustedConfidence && Object.keys(adjustedConfidence).map(function(key) {
+                        return <p key={key} className={key}>
+                            {key}: {adjustedConfidence[key]}
                         </p>;
                     })}
                 </fieldset>
