@@ -33,7 +33,7 @@ var ResultDisplay = React.createClass({
             serverResult.model &&
             serverResult.model == 'svm' &&
             confidence.classes &&
-            confidence.classes.every(checkValidFloat) &&
+            confidence.classes.every(checkValidString) &&
             confidence.probability &&
             confidence.probability.every(checkValidFloat) &&
             confidence.decision_function &&
