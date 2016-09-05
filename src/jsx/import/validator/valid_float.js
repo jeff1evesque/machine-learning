@@ -12,10 +12,10 @@ function validator(value) {
     return false;
   }
   // validate integers: cannot start with 0 (except trivial 0)
-  else if (value.match(/^-?(0|[1-9][0-9]*)$/)) {
+  else if (value.match(/^-?(0|[1-9][0-9]*)(e[+|-][1-9]*[0-9]*)$/)) {
     return true;
   // validate floats: cannot start with 0 (except trivial 0.x)
-  } else if (value.match(/^-?(0|[1-9][0-9]*)?\.\d+$/)) {
+  } else if (value.match(/^-?(0|[1-9][0-9]*)?\.?([1-9]*[0-9]+)(e[+|-][1-9]*[0-9]*)?$/)) {
     return true;
   // invalid condition: general
   } else {
