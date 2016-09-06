@@ -11,7 +11,9 @@ import yaml
 def test_hashing():
     with open("/vagrant/hiera/settings.yaml", 'r') as stream:
         try:
-            cryptopath = yaml.load(stream)['crypto']['path']
+            yamlres = yaml.load(stream)
+            root = yamlres['general']['root']
+            cryptopath = root + yamlres['crypto']['path']
         except yaml.YAMLError as exc:
             print exc
 
