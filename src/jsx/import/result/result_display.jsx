@@ -33,6 +33,7 @@ var ResultDisplay = React.createClass({
             resultSet &&
             resultSet.model &&
             resultSet.model == 'svm' &&
+            confidence &&
             confidence.classes &&
             confidence.classes.every(checkValidString) &&
             confidence.probability &&
@@ -52,12 +53,9 @@ var ResultDisplay = React.createClass({
             resultSet &&
             resultSet.model &&
             resultSet.model == 'svr' &&
-            confidence.classes &&
-            confidence.classes.every(checkValidString) &&
-            confidence.probability &&
-            confidence.probability.every(checkValidFloat) &&
-            confidence.decision_function &&
-            confidence.decision_function.every(checkValidFloat)
+            confidence &&
+            confidence.score &&
+            confidence.score.every(checkValidFloat) &&
         ) {
             adjustedConfidence = {
                 'score': confidence.score.join(', ')
