@@ -75,4 +75,5 @@ application:
     debug_log_path: '/log/application/debug'
 
 crypto:
-    salt_length: '32'
+    path: '/vagrant/brain/converter/crypto.py'
+    salt_length: 32

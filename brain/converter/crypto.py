@@ -9,9 +9,14 @@ from flask import current_app
 import os
 import hashlib
 import base64
+import yaml
 
-salt_length = int(current_app.config.get('SALT_LENGTH'))
-
+# salt_length = current_app.config.get('SALT_LENGTH')
+with open("/vagrant/hiera/settings.yaml", 'r') as stream:
+    try:
+        salt_length = yaml.load(stream)['crypto']['salt_length'] 
+    except yaml.YAMLError as exc:
+        print(exc)
 
 def hashpass(p):
     '''@hashpass
@@ -21,7 +26,6 @@ def hashpass(p):
     @salt - a random string of saltlength bytes generated to hash the password
 
     '''
-    global salt_length
 
     salt = base64.b64encode(os.urandom(salt_length))
     return hashlib.sha512(salt + p).hexdigest()+"$"+salt
@@ -37,5 +41,6 @@ def verifypass(p, h):
     @s - salt extracted from the hash+salt
 
     '''
+
     h, s = h.split('$')
     return hashlib.sha512(s + p).hexdigest() == h
