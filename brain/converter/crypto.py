@@ -5,12 +5,12 @@ This file contains various cryptography wrappers.
 
 '''
 
-
+from flask import current_app
 import os
 import hashlib
 import base64
 
-saltlength = 32
+salt_length = int(current_app.config.get('SALT_LENGTH'))
 
 
 def hashpass(p):
@@ -21,7 +21,9 @@ def hashpass(p):
     @salt - a random string of saltlength bytes generated to hash the password
 
     '''
-    salt = base64.b64encode(os.urandom(saltlength))
+    global salt_length
+
+    salt = base64.b64encode(os.urandom(salt_length))
     return hashlib.sha512(salt + p).hexdigest()+"$"+salt
 
 

@@ -73,7 +73,8 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 WARNING_LOG_PATH=settings['application']['warning_log_path'],
                 INFO_LOG_PATH=settings['application']['info_log_path'],
                 DEBUG_LOG_PATH=settings['application']['debug_log_path'],
-                MODEL_TYPE=settings['application']['model_type']
+                MODEL_TYPE=settings['application']['model_type'],
+                SALT_LENGTH=settings['crypto']['salt_length']
             )
 
         # log handler: requires the below logger
