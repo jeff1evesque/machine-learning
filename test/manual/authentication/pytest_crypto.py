@@ -4,9 +4,7 @@ This file will test the cryptography functionalities with respect to
 authentication.
 
 '''
-import pytest
 import imp
-import os.path
 import yaml
 
 
@@ -21,7 +19,7 @@ def test_hashing():
 
     passwords = ['blue', 'red', 'green', 'yellow']
 
-    for p in passwords: 
+    for p in passwords:
         h1 = crypto.hashpass(p)
         h2 = crypto.hashpass(p)
         assert h1 != h2

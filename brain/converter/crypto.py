@@ -5,7 +5,6 @@ This file contains various cryptography wrappers.
 
 '''
 
-from flask import current_app
 import os
 import hashlib
 import base64
@@ -14,9 +13,10 @@ import yaml
 # salt_length = current_app.config.get('SALT_LENGTH')
 with open("/vagrant/hiera/settings.yaml", 'r') as stream:
     try:
-        salt_length = yaml.load(stream)['crypto']['salt_length'] 
+        salt_length = yaml.load(stream)['crypto']['salt_length']
     except yaml.YAMLError as exc:
         print(exc)
+
 
 def hashpass(p):
     '''@hashpass
@@ -34,7 +34,7 @@ def hashpass(p):
 def verifypass(p, h):
     '''@verifypass
 
-    This function verifies that a password p hashes to a hash h as 
+    This function verifies that a password p hashes to a hash h as
     returned by hashpass.
 
     @h - hash extracted from the hash+salt
