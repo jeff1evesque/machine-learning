@@ -59,19 +59,19 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
 
         # group features into observation instances, record labels
         for index, feature in enumerate(features_list):
-            if not (index+1) % feature_count == 0:
-                # observation labels
+            # svm: observation labels
+            if model == list_model_type[0]:
                 current_features.append(feature[1][0])
 
-                # general feature labels in every observation
-                if not len(feature_labels) == feature_count:
-                    feature_labels.append(feature[2][0])
-            else:
-                # general feature labels in every observation
-                if not len(feature_labels) == feature_count:
-                    feature_labels.append(feature[2][0])
+            # svr: observation labels
+            elif model == list_model_type[1]:
+                current_features.append(float(feature[1][0]))
 
-                current_features.append(feature[1][0])
+            # general feature labels in every observation
+            if not len(feature_labels) == feature_count:
+                feature_labels.append(feature[2][0])
+
+            if (index+1) % feature_count == 0:
                 grouped_features.append(current_features)
                 observation_labels.append(feature[0][0])
                 current_features = []
