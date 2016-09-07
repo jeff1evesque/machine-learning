@@ -81,11 +81,16 @@ def sv_prediction(model, model_id, predictors):
 
     # case 2: return svr prediction, and confidence level
     elif model == list_model_type[1]:
+        r2 = Cache_Hset().uncache(
+            model + '_r2',
+            model_id
+        )['result']
+
         return {
             'result': str(prediction[0]),
             'model': model,
             'confidence': {
-
+                'score': r2
             },
             'error': None
         }

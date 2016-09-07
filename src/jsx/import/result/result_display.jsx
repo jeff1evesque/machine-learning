@@ -28,10 +28,12 @@ var ResultDisplay = React.createClass({
             displayResult = true;
         }
 
+       // svm confidence measurements
         if (
             resultSet &&
             resultSet.model &&
             resultSet.model == 'svm' &&
+            confidence &&
             confidence.classes &&
             confidence.classes.every(checkValidString) &&
             confidence.probability &&
@@ -43,6 +45,20 @@ var ResultDisplay = React.createClass({
                 'classes': confidence.classes.join(', '),
                 'probability': confidence.probability.join(', '),
                 'decision-function': confidence.decision_function.join(', ')
+            }
+        }
+
+      // svr confidence measurements  
+        else if (
+            resultSet &&
+            resultSet.model &&
+            resultSet.model == 'svr' &&
+            confidence &&
+            confidence.score &&
+            checkValidFloat(confidence.score)
+        ) {
+            adjustedConfidence = {
+                'r^2': confidence.score
             }
         }
 
