@@ -58,7 +58,7 @@ var ResultDisplay = React.createClass({
             checkValidFloat(confidence.score)
         ) {
             adjustedConfidence = {
-                'score': confidence.score
+                'r^2': confidence.score
             }
         }
 
