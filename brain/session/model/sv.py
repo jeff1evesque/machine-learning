@@ -100,6 +100,10 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
             # fit model
             clf.fit(grouped_features, observation_labels)
 
+            # compute, and cache coefficient of determination
+            r2 = clf.score(grouped_features, observation_labels)
+            Cache_Model(r2).cache(model + '_r2', session_id)
+
         # get title
         entity = Retrieve_Entity()
         title = entity.get_title(session_id)['result'][0][0]
