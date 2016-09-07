@@ -49,7 +49,7 @@ var ResultDisplay = React.createClass({
         }
 
       // svr confidence measurements  
-        elif (
+        else if (
             resultSet &&
             resultSet.model &&
             resultSet.model == 'svr' &&
