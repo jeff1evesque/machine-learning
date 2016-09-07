@@ -63,18 +63,23 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
             if model == list_model_type[0]:
                 current_features.append(feature[1][0])
 
+                if (index+1) % feature_count == 0:
+                    grouped_features.append(current_features)
+                    observation_labels.append(feature[0][0])
+                    current_features = []
+
             # svr: observation labels
             elif model == list_model_type[1]:
                 current_features.append(float(feature[1][0]))
 
+                if (index+1) % feature_count == 0:
+                    grouped_features.append(current_features)
+                    observation_labels.append(float(feature[0][0]))
+                    current_features = []
+
             # general feature labels in every observation
             if not len(feature_labels) == feature_count:
                 feature_labels.append(feature[2][0])
-
-            if (index+1) % feature_count == 0:
-                grouped_features.append(current_features)
-                observation_labels.append(feature[0][0])
-                current_features = []
 
         # case 1: svm model
         if model == list_model_type[0]:
@@ -102,7 +107,11 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
 
             # compute, and cache coefficient of determination
             r2 = clf.score(grouped_features, observation_labels)
-            Cache_Model(r2).cache(model + '_r2', session_id)
+            Cache_Hset().cache(
+                model + '_r2',
+                session_id,
+                r2
+            )
 
         # get title
         entity = Retrieve_Entity()
