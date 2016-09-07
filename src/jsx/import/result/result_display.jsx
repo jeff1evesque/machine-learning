@@ -55,10 +55,10 @@ var ResultDisplay = React.createClass({
             resultSet.model == 'svr' &&
             confidence &&
             confidence.score &&
-            confidence.score.every(checkValidFloat)
+            checkValidFloat(confidence.score)
         ) {
             adjustedConfidence = {
-                'score': confidence.score.join(', ')
+                'score': confidence.score
             }
         }
 
