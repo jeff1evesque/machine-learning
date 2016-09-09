@@ -30,7 +30,7 @@ def hashpass(p):
 def verifypass(p, h):
     '''@verifypass
 
-    This function verifies that a password p hashes to a hash h as 
+    This function verifies that a password p hashes to a hash h as
     returned by hashpass.
 
     @h - hash extracted from the hash+salt
