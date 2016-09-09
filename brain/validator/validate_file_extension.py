@@ -45,14 +45,19 @@ class Validate_File_Extension(object):
 
         # local variables
         list_error = []
-
-        dataset = self.premodel_data['data']['dataset']
         acceptable_type = ['csv', 'xml', 'json']
 
         unique_hash = set()
         dataset_keep = []
 
-        if (dataset.get('file_upload', None)):
+        # validate and restructure: file upload
+        if (
+                self.premodel_data.get('data', None) and
+                self.premodel_data['data'].get('dataset', None) and
+                self.premodel_data['data']['dataset'].get('file_upload', None)
+            ):
+
+            dataset = self.premodel_data['data']['dataset']
 
             for index, filedata in enumerate(dataset['file_upload']):
                 try:
@@ -85,6 +90,14 @@ class Validate_File_Extension(object):
 
             # replace portion of dataset with unique 'file reference(s)'
             dataset['file_upload'][:] = dataset_keep
+
+        # validate and restructure: url reference
+        elif (
+            self.premodel_data.get('dataset_type', None) == 'dataset_url' and
+            self.premodel_data.get('data', None)
+            ):
+
+            dataset = self.premodel_data['data']
 
         else:
             msg = 'No file(s) were uploaded'
