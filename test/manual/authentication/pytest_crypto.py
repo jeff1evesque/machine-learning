@@ -7,6 +7,7 @@ authentication.
 import imp
 import yaml
 
+
 def test_hashing():
     with open("/vagrant/hiera/settings.yaml", 'r') as stream:
         try:
