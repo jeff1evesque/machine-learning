@@ -93,9 +93,9 @@ class Validate_File_Extension(object):
 
         # validate and restructure: url reference
         elif (
-            self.premodel_data.get('dataset_type', None) == 'dataset_url' and
-            self.premodel_data.get('data', None)
-            ):
+                 self.premodel_data.get('data', None) and
+                 self.premodel_data.get('dataset_type', None) == 'dataset_url'
+             ):
 
             dataset = self.premodel_data['data']
 
