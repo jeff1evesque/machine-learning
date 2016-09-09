@@ -75,4 +75,4 @@ application:
     debug_log_path: '/log/application/debug'
 
 crypto:
-    salt_length: '32'
+    salt_length: 32

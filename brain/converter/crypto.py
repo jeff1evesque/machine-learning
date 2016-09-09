@@ -10,7 +10,7 @@ import os
 import hashlib
 import base64
 
-salt_length = int(current_app.config.get('SALT_LENGTH'))
+salt_length = current_app.config.get('SALT_LENGTH')
 
 
 def hashpass(p):
