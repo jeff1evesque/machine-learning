@@ -2,6 +2,7 @@
 
 '''@save_feature_count'''
 
+import requests
 from brain.validator.validate_file_extension import Validate_File_Extension
 
 
@@ -16,8 +17,27 @@ def reduce_dataset(dataset, session_type):
     # variables
     list_error = []
 
-    # web-interface: validate, and restructure dataset
-    if dataset['data']['dataset']['file_upload']:
+    # web-interface: validate, and restructure 'file-upload' dataset
+    if (
+            dataset['data'].get('dataset', None) and
+            dataset['data']['dataset'].get('file_upload', None)
+        ):
+        validator = Validate_File_Extension(
+            dataset,
+            session_type
+        )
+        adjusted_dataset = validator.validate()
+
+        if adjusted_dataset['error']:
+            list_error.append(
+                adjusted_dataset['error']
+            )
+
+    # web-interface: validate, and restructure url dataset
+    elif dataset['data']['settings'].get('dataset[]', None):
+        urls = dataset['data']['settings']['dataset[]']
+        dataset = [requests.get(url) for url in urls]
+
         validator = Validate_File_Extension(
             dataset,
             session_type
