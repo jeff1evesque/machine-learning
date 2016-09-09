@@ -36,10 +36,13 @@ def reduce_dataset(dataset, session_type):
     # web-interface: validate, and restructure url dataset
     elif dataset['data']['settings'].get('dataset[]', None):
         urls = dataset['data']['settings']['dataset[]']
-        dataset = [requests.get(url) for url in urls]
+        requests_url = [requests.get(url) for url in urls]
 
         validator = Validate_File_Extension(
-            dataset,
+            {
+                'data': requests_url,
+                'dataset_type': dataset['data']['settings']['dataset_type']
+            },
             session_type
         )
         adjusted_dataset = validator.validate()
@@ -49,12 +52,14 @@ def reduce_dataset(dataset, session_type):
                 adjusted_dataset['error']
             )
 
-    # programmatic-interface: validate, do not restructure
+    # programmatic-interface: validate, do not restructure file upload
     elif dataset['data']['dataset']['json_string']:
         adjusted_dataset = dataset['data']
 
         if dataset['error']:
             list_error.append(adjusted_dataset['error'])
+
+    # programmatic-interface: validate, and restructure url dataset
 
     # return
     if list_error:
