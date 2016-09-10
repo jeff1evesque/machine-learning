@@ -50,7 +50,7 @@ class Validate_File_Extension(object):
         list_error = []
         acceptable_type = ['csv', 'xml', 'json']
 
-        unique_hash = set()
+        unique_data = set()
         dataset_keep = []
 
         # validate and restructure: file upload
@@ -67,8 +67,8 @@ class Validate_File_Extension(object):
                     split_path = os.path.splitext(filedata['filename'])
                     filehash = calculate_md5(filedata['file'])
                     # add 'hashed' value of file reference(s) to a list
-                    if filehash not in unique_hash:
-                        unique_hash.add(filehash)
+                    if filehash not in unique_data:
+                        unique_data.add(filehash)
                         file_extension = split_path[1][1:].strip().lower()
 
                         # validate file_extension
@@ -111,8 +111,8 @@ class Validate_File_Extension(object):
                  file_extension = split_path[1][1:].strip().lower()
 
                  try:
-                     if url not in unique_hash:
-                         unique_hash.add(url)
+                     if url not in unique_data:
+                         unique_data.add(url)
 
                          # validate file_extension
                          if (file_extension not in acceptable_type):
@@ -122,7 +122,7 @@ class Validate_File_Extension(object):
                              msg += '\n ' + ', '.join(acceptable_type)
                              list_error.append(msg)
 
-                         # check hashed value of url
+                         # keep non-duplicated url references
                          else:
                              filename = os.path.split(filepath)[1]
                              dataset_keep.append({
