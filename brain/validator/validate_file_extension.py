@@ -137,7 +137,6 @@ class Validate_File_Extension(object):
                      list_error.append(msg)
 
              # define unique 'file reference(s)'
-             print dataset_keep
              dataset['file_upload'] = dataset_keep
 
         else:
