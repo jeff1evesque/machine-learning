@@ -2,9 +2,6 @@
 
 '''@save_feature_count'''
 
-import os
-import urlparse
-import requests
 from brain.validator.validate_file_extension import Validate_File_Extension
 
 
@@ -38,16 +35,11 @@ def reduce_dataset(dataset, session_type):
     # web-interface: validate, and restructure url dataset
     elif dataset['data']['settings'].get('dataset[]', None):
         urls = dataset['data']['settings']['dataset[]']
-        filepaths = [urlparse.urlsplit(url).path for url in urls]
-        filenames = [os.path.split(filepath)[1] for filepath in filepaths]
-        requests_url = [requests.get(url) for url in urls]
-
         validator = Validate_File_Extension(
             {
                 'data': {
                     'dataset': {
                         'urls': urls,
-                        'filenames': filenames
                     }
                 },
             },
