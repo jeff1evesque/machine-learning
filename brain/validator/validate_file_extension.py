@@ -94,10 +94,13 @@ class Validate_File_Extension(object):
         # validate and restructure: url reference
         elif (
                  self.premodel_data.get('data', None) and
-                 self.premodel_data.get('dataset_type', None) == 'dataset_url'
+                 self.premodel_data['data'].get('dataset', None) and
+                 self.premodel_data['data']['dataset'].get('urls', None) and
+                 self.premodel_data['data']['dataset'].get('filenames', None)
              ):
 
-            dataset = self.premodel_data['data']
+             filenames = sself.premodel_data['data']['dataset']['filenames']
+             urls = self.premodel_data['data']['dataset']['urls']
 
         else:
             msg = 'No file(s) were uploaded'
