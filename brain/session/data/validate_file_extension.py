@@ -44,9 +44,12 @@ def reduce_dataset(dataset, session_type):
 
         validator = Validate_File_Extension(
             {
-                'filenames': filenames,
-                'data': requests_url,
-                'dataset_type': dataset['data']['settings']['dataset_type']
+                'data': {
+                    'dataset': {
+                        'urls': urls,
+                        'filenames': filenames
+                    }
+                },
             },
             session_type
         )
