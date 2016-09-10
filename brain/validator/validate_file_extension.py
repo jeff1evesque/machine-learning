@@ -99,7 +99,7 @@ class Validate_File_Extension(object):
                  self.premodel_data['data']['dataset'].get('filenames', None)
              ):
 
-             filenames = sself.premodel_data['data']['dataset']['filenames']
+             filenames = self.premodel_data['data']['dataset']['filenames']
              urls = self.premodel_data['data']['dataset']['urls']
 
         else:
