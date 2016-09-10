@@ -9,6 +9,9 @@ corresponding file extension for each file upload(s).
 '''
 
 import os.path
+import urlparse
+import urllib2
+import requests
 from brain.converter.calculate_md5 import calculate_md5
 
 
@@ -95,12 +98,47 @@ class Validate_File_Extension(object):
         elif (
                  self.premodel_data.get('data', None) and
                  self.premodel_data['data'].get('dataset', None) and
-                 self.premodel_data['data']['dataset'].get('urls', None) and
-                 self.premodel_data['data']['dataset'].get('filenames', None)
+                 self.premodel_data['data']['dataset'].get('urls', None)
              ):
 
-             filenames = self.premodel_data['data']['dataset']['filenames']
+             dataset = self.premodel_data['data']['dataset']
              urls = self.premodel_data['data']['dataset']['urls']
+             filepaths = [urlparse.urlsplit(url).path for url in urls]
+             filenames = [os.path.split(filepath)[1] for filepath in filepaths]
+
+             for index, url in enumerate(urls):
+                 split_path = os.path.splitext(url)
+                 file_extension = split_path[1][1:].strip().lower()
+
+                 try:
+                     if url not in unique_hash:
+                         unique_hash.add(url)
+
+                         # validate file_extension
+                         if (file_extension not in acceptable_type):
+                             msg = '''Problem: url reference, \''''
+                             msg += file_extension
+                             msg += '''\', must be one of the formats:'''
+                             msg += '\n ' + ', '.join(acceptable_type)
+                             list_error.append(msg)
+
+                         # check hashed value of url
+                         else:
+                             filename = os.path.split(filepath)[1]
+                             dataset_keep.append({
+                                 'type': file_extension,
+                                 'file': requests.get(urls[index]),
+                                 'filename': filename
+                             })
+
+                 except:
+                     msg = 'Problem with url reference ' + url
+                     msg += '. Please re-upload the file.'
+                     list_error.append(msg)
+
+             # define unique 'file reference(s)'
+             print dataset_keep
+             dataset['file_upload'] = dataset_keep
 
         else:
             msg = 'No file(s) were uploaded'
