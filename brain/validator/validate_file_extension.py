@@ -10,6 +10,8 @@ corresponding file extension for each file upload(s).
 
 import os.path
 import urlparse
+import urllib
+import cStringIO
 import urllib2
 import requests
 from brain.converter.calculate_md5 import calculate_md5
@@ -127,7 +129,9 @@ class Validate_File_Extension(object):
                              filename = os.path.split(filepath)[1]
                              dataset_keep.append({
                                  'type': file_extension,
-                                 'file': requests.get(urls[index]),
+                                 'file': cStringIO.StringIO(
+                                             urllib.urlopen(url).read()
+                                         ),
                                  'filename': filename
                              })
 
