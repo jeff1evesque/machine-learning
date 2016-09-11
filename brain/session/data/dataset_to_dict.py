@@ -26,7 +26,7 @@ def dataset_dictionary(id_entity, model_type, upload):
     dataset = []
     observation_labels = []
     list_error = []
-    json_upload = upload['dataset']['json_string']
+    json_upload = upload['dataset'].get('json_string', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
     if json_upload:
