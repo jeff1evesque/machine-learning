@@ -142,7 +142,7 @@ class Validate_File_Extension(object):
 
                  except:
                      msg = 'Problem with url reference ' + url
-                     msg += '. Please re-upload the file.'
+                     msg += '. Please re-upload the information.'
                      list_error.append(msg)
 
              # define unique 'file reference(s)'
