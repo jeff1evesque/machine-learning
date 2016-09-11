@@ -19,7 +19,9 @@ def reduce_dataset(dataset, session_type):
     # web-interface: validate, and restructure 'file-upload' dataset
     if (
             dataset['data'].get('dataset', None) and
-            dataset['data']['dataset'].get('file_upload', None)
+            dataset['data']['dataset'].get('file_upload', None) and
+            dataset['data']['settings'].get(
+                'dataset_type', None) == 'file_upload'
         ):
         validator = Validate_File_Extension(
             dataset,
@@ -33,13 +35,18 @@ def reduce_dataset(dataset, session_type):
             )
 
     # web-interface: validate, and restructure url dataset
-    elif dataset['data']['settings'].get('dataset[]', None):
+    elif (
+             dataset['data']['settings'].get('dataset[]', None) and
+             dataset['data']['settings'].get(
+                'dataset_type', None) == 'dataset_url'
+         ):
         urls = dataset['data']['settings']['dataset[]']
         validator = Validate_File_Extension(
             {
                 'data': {
                     'dataset': {
-                        'urls': urls,
+                        'file_upload': urls,
+                        'type': dataset['data']['settings']['dataset_type'],
                     }
                 },
             },
