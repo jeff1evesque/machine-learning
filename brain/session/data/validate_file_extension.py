@@ -46,7 +46,11 @@ def reduce_dataset(dataset, session_type):
         # define 'file_upload' since doesn't exist
         data = dataset['data']
         data['dataset'] = {}
-        data['dataset']['file_upload'] = data['settings']['dataset[]']
+        if type(data['settings']['dataset[]']) is list:
+            data['dataset']['file_upload'] = data['settings']['dataset[]']
+        else:
+            data['dataset']['file_upload'] = []
+            data['dataset']['file_upload'].append(data['settings']['dataset[]'])
 
         # validate and restructure
         validator = Validate_File_Extension(
