@@ -75,7 +75,7 @@ def reduce_dataset(dataset, session_type):
     elif (
              dataset['data']['dataset'].get('json_string', None) and
              dataset['data']['settings'].get(
-                 'dataset_type', None) == 'dataset_url'
+                 'dataset_type', None) == 'file_upload'
          ):
 
          adjusted_dataset = dataset['data']
