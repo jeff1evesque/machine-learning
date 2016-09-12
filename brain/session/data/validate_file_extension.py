@@ -72,11 +72,16 @@ def reduce_dataset(dataset, session_type):
             )
 
     # programmatic-interface: validate, do not restructure file upload
-    elif dataset['data']['dataset']['json_string']:
-        adjusted_dataset = dataset['data']
+    elif (
+             dataset['data']['dataset'].get('json_string', None) and
+             dataset['data']['settings'].get(
+                 'dataset_type', None) == 'dataset_url'
+         ):
 
-        if dataset['error']:
-            list_error.append(adjusted_dataset['error'])
+         adjusted_dataset = dataset['data']
+
+         if dataset['error']:
+             list_error.append(adjusted_dataset['error'])
 
     # programmatic-interface: validate, and restructure url dataset
 
