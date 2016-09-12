@@ -1,7 +1,7 @@
 {
     "properties": {
         "session_name": "sample_svm_title",
-        "dataset_type": "dataset_url",
+        "dataset_type": "file_upload",
         "session_type": "data_new",
         "model_type": "svm"
     },
