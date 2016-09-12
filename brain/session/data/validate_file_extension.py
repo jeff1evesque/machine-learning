@@ -84,6 +84,14 @@ def reduce_dataset(dataset, session_type):
              list_error.append(adjusted_dataset['error'])
 
     # programmatic-interface: validate, and restructure url dataset
+    elif (
+             dataset['data']['dataset'].get('json_string', None) and
+             dataset['data']['settings'].get(
+                 'dataset_type', None) == 'dataset_url'
+         ):
+
+         # define 'file_upload' since doesn't exist
+         data = dataset['data']
 
     # return
     if list_error:
