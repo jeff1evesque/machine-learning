@@ -92,6 +92,30 @@ def reduce_dataset(dataset, session_type):
 
          # define 'file_upload' since doesn't exist
          data = dataset['data']
+         if type(data['dataset']['json_string']) is list:
+             data['dataset']['file_upload'] = data['dataset']['json_string']
+         else:
+             data['dataset']['file_upload'] = []
+             data['dataset']['file_upload'].append(data['dataset']['json_string'])
+
+         # validate and restructure
+         validator = Validate_File_Extension(
+             {
+                 'data': {
+                     'dataset': {
+                         'file_upload': data['dataset']['json_string'],
+                         'type': data['settings']['dataset_type'],
+                     }
+                 },
+             },
+             session_type
+         )
+         adjusted_dataset = validator.validate()
+
+         if adjusted_dataset['error']:
+             list_error.append(
+                 adjusted_dataset['error']
+             )
 
     # return
     if list_error:
