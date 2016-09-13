@@ -40,18 +40,20 @@ def get_sample_json(jsonfile, model_type):
 
     '''
 
+    root = '/vagrant'
     json_dataset = None
+
     with open(
+        root + '/' +
         os.path.join(
-            '..',
             'interface',
             'static',
             'data',
             'json',
             'programmatic_interface',
             model_type,
-            jsonfile,
-            'file_upload'
+            'file_upload',
+            jsonfile
         ),
         'r'
     ) as json_file:
