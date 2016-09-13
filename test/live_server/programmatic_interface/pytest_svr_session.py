@@ -47,8 +47,8 @@ def get_sample_json(jsonfile, model_type):
                 'json',
                 'programmatic_interface',
                 model_type,
-                jsonfile,
-                'file_upload'
+                'file_upload',
+                jsonfile
             ),
             'r'
         ) as json_file:
