@@ -107,7 +107,7 @@ def reduce_dataset(dataset, session_type):
             {
                 'data': {
                     'dataset': {
-                        'file_upload': data['dataset']['json_string'],
+                        'file_upload': data['dataset']['file_upload'],
                         'type': data['settings']['dataset_type'],
                     }
                 },
