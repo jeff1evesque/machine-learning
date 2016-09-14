@@ -38,8 +38,8 @@ def reduce_dataset(dataset, session_type):
 
     # web-interface: validate, and restructure url dataset
     elif (
-             dataset['data']['settings'].get('dataset[]', None) and
-             dataset['data']['settings'].get(
+            dataset['data']['settings'].get('dataset[]', None) and
+            dataset['data']['settings'].get(
                 'dataset_type', None) == 'dataset_url'
     ):
 
@@ -75,49 +75,49 @@ def reduce_dataset(dataset, session_type):
 
     # programmatic-interface: validate, do not restructure file upload
     elif (
-             dataset['data']['dataset'].get('json_string', None) and
-             dataset['data']['settings'].get(
-                 'dataset_type', None) == 'file_upload'
+            dataset['data']['dataset'].get('json_string', None) and
+            dataset['data']['settings'].get(
+                'dataset_type', None) == 'file_upload'
     ):
 
-         adjusted_dataset = dataset['data']
+        adjusted_dataset = dataset['data']
 
-         if dataset['error']:
-             list_error.append(adjusted_dataset['error'])
+        if dataset['error']:
+            list_error.append(adjusted_dataset['error'])
 
     # programmatic-interface: validate, and restructure url dataset
     elif (
-             dataset['data']['dataset'].get('json_string', None) and
-             dataset['data']['settings'].get(
-                 'dataset_type', None) == 'dataset_url'
+            dataset['data']['dataset'].get('json_string', None) and
+            dataset['data']['settings'].get(
+                'dataset_type', None) == 'dataset_url'
     ):
 
-         # define 'file_upload' since doesn't exist
-         data = dataset['data']
-         if type(data['dataset']['json_string']) is list:
-             data['dataset']['file_upload'] = data['dataset']['json_string']
-         else:
-             data['dataset']['file_upload'] = []
-             data['dataset']['file_upload'].append(data['dataset']['json_string'])
+        # define 'file_upload' since doesn't exist
+        data = dataset['data']
+        if type(data['dataset']['json_string']) is list:
+            data['dataset']['file_upload'] = data['dataset']['json_string']
+        else:
+            data['dataset']['file_upload'] = []
+            data['dataset']['file_upload'].append(data['dataset']['json_string'])
 
-         # validate and restructure
-         validator = Validate_File_Extension(
-             {
-                 'data': {
-                     'dataset': {
-                         'file_upload': data['dataset']['json_string'],
-                         'type': data['settings']['dataset_type'],
-                     }
-                 },
-             },
-             session_type
-         )
-         adjusted_dataset = validator.validate()
+        # validate and restructure
+        validator = Validate_File_Extension(
+            {
+                'data': {
+                    'dataset': {
+                        'file_upload': data['dataset']['json_string'],
+                        'type': data['settings']['dataset_type'],
+                    }
+                },
+            },
+            session_type
+        )
+        adjusted_dataset = validator.validate()
 
-         if adjusted_dataset['error']:
-             list_error.append(
-                 adjusted_dataset['error']
-             )
+        if adjusted_dataset['error']:
+            list_error.append(
+                adjusted_dataset['error']
+            )
 
     # return
     if list_error:
