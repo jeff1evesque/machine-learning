@@ -1,4 +1,4 @@
-'''@pytest_svm_session
+'''@pytest_svm_file_upload
 
 This module will test the following sessions:
 
