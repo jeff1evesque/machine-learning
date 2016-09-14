@@ -22,7 +22,7 @@ def reduce_dataset(dataset, session_type):
             dataset['data']['dataset'].get('file_upload', None) and
             dataset['data']['settings'].get(
                 'dataset_type', None) == 'file_upload'
-        ):
+    ):
 
         # validate and restructure
         validator = Validate_File_Extension(
@@ -41,7 +41,7 @@ def reduce_dataset(dataset, session_type):
              dataset['data']['settings'].get('dataset[]', None) and
              dataset['data']['settings'].get(
                 'dataset_type', None) == 'dataset_url'
-         ):
+    ):
 
         # define 'file_upload' since doesn't exist
         data = dataset['data']
@@ -76,7 +76,7 @@ def reduce_dataset(dataset, session_type):
              dataset['data']['dataset'].get('json_string', None) and
              dataset['data']['settings'].get(
                  'dataset_type', None) == 'file_upload'
-         ):
+    ):
 
          adjusted_dataset = dataset['data']
 
@@ -88,7 +88,7 @@ def reduce_dataset(dataset, session_type):
              dataset['data']['dataset'].get('json_string', None) and
              dataset['data']['settings'].get(
                  'dataset_type', None) == 'dataset_url'
-         ):
+    ):
 
          # define 'file_upload' since doesn't exist
          data = dataset['data']
