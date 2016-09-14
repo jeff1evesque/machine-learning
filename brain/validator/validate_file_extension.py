@@ -128,7 +128,7 @@ class Validate_File_Extension(object):
 
                         # keep non-duplicated url references
                         else:
-                            filename = os.path.split(filepath)[1]
+                            filename = os.path.split(url)[1]
                             dataset_keep.append({
                                 'type': file_extension,
                                 'file': cStringIO.StringIO(
