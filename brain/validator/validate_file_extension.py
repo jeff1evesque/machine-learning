@@ -63,7 +63,7 @@ class Validate_File_Extension(object):
                 self.premodel_data.get('data', None) and
                 self.premodel_data['data'].get('dataset', None) and
                 self.premodel_data['data']['dataset'].get('file_upload', None)
-            ):
+        ):
 
             dataset = self.premodel_data['data']['dataset']
 
@@ -106,7 +106,7 @@ class Validate_File_Extension(object):
                  self.premodel_data['data']['dataset'].get(
                      'type', None) and
                  self.premodel_data['data']['dataset']['type'] == 'dataset_url'
-             ):
+        ):
 
              dataset = self.premodel_data['data']['dataset']
              urls = self.premodel_data['data']['dataset']['file_upload']
