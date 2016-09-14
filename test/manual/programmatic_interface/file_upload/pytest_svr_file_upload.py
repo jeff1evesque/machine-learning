@@ -1,4 +1,4 @@
-'''@pytest_svr_session
+'''@pytest_svr_file_upload
 
 This module will test the following sessions:
 
