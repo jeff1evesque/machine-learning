@@ -2,7 +2,7 @@
     "properties": {
         "dataset_type": "dataset_url",
         "session_type": "data_append",
-        "model_type": "svm"
+        "model_type": "svm",
         "session_id": "1"
     },
     "dataset": [
