@@ -99,52 +99,52 @@ class Validate_File_Extension(object):
 
         # validate and restructure: url reference
         elif (
-                 self.premodel_data.get('data', None) and
-                 self.premodel_data['data'].get('dataset', None) and
-                 self.premodel_data['data']['dataset'].get(
-                     'type', None) and
-                 self.premodel_data['data']['dataset']['type'] == 'dataset_url'
+                self.premodel_data.get('data', None) and
+                self.premodel_data['data'].get('dataset', None) and
+                self.premodel_data['data']['dataset'].get(
+                    'type', None) and
+                self.premodel_data['data']['dataset']['type'] == 'dataset_url'
         ):
 
-             dataset = self.premodel_data['data']['dataset']
-             urls = self.premodel_data['data']['dataset']['file_upload']
-             filepaths = [urlparse.urlsplit(url).path for url in urls]
-             filenames = [os.path.split(filepath)[1] for filepath in filepaths]
+            dataset = self.premodel_data['data']['dataset']
+            urls = self.premodel_data['data']['dataset']['file_upload']
+            filepaths = [urlparse.urlsplit(url).path for url in urls]
+            filenames = [os.path.split(filepath)[1] for filepath in filepaths]
 
-             for index, url in enumerate(urls):
-                 split_path = os.path.splitext(url)
-                 file_extension = split_path[1][1:].strip().lower()
+            for index, url in enumerate(urls):
+                split_path = os.path.splitext(url)
+                file_extension = split_path[1][1:].strip().lower()
 
-                 try:
-                     if url not in unique_data:
-                         unique_data.add(url)
+                try:
+                    if url not in unique_data:
+                        unique_data.add(url)
 
-                         # validate file_extension
-                         if (file_extension not in acceptable_type):
-                             msg = '''Problem: url reference, \''''
-                             msg += file_extension
-                             msg += '''\', must be one of the formats:'''
-                             msg += '\n ' + ', '.join(acceptable_type)
-                             list_error.append(msg)
+                        # validate file_extension
+                        if (file_extension not in acceptable_type):
+                            msg = '''Problem: url reference, \''''
+                            msg += file_extension
+                            msg += '''\', must be one of the formats:'''
+                            msg += '\n ' + ', '.join(acceptable_type)
+                            list_error.append(msg)
 
-                         # keep non-duplicated url references
-                         else:
-                             filename = os.path.split(filepath)[1]
-                             dataset_keep.append({
-                                 'type': file_extension,
-                                 'file': cStringIO.StringIO(
-                                             urllib.urlopen(url).read()
-                                         ),
-                                 'filename': filename
-                             })
+                        # keep non-duplicated url references
+                        else:
+                            filename = os.path.split(filepath)[1]
+                            dataset_keep.append({
+                                'type': file_extension,
+                                'file': cStringIO.StringIO(
+                                            urllib.urlopen(url).read()
+                                        ),
+                                'filename': filename
+                            })
 
-                 except:
-                     msg = 'Problem with url reference ' + url
-                     msg += '. Please re-upload the information.'
-                     list_error.append(msg)
+                except:
+                    msg = 'Problem with url reference ' + url
+                    msg += '. Please re-upload the information.'
+                    list_error.append(msg)
 
-             # define unique 'file reference(s)'
-             dataset['file_upload'][:] = dataset_keep
+            # define unique 'file reference(s)'
+            dataset['file_upload'][:] = dataset_keep
 
         else:
             msg = 'No file(s) were uploaded'
