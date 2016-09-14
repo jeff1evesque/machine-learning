@@ -1,4 +1,4 @@
-'''@pytest_svm_session
+'''@pytest_svm_dataset_url
 
 This file will test the following svm sessions:
   - data_new: stores supplied dataset into a SQL database.
@@ -46,6 +46,7 @@ def get_sample_json(jsonfile, model_type):
                 'json',
                 'programmatic_interface',
                 model_type,
+                'dataset_url',
                 jsonfile
             ),
             'r'

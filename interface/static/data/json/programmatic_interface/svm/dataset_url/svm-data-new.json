@@ -1,0 +1,12 @@
+{
+    "properties": {
+        "session_name": "sample_svm_title",
+        "dataset_type": "dataset_url",
+        "session_type": "data_new",
+        "model_type": "svm"
+    },
+    "dataset": [
+        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/svm.json",
+        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/svm-1.json"
+    ]
+}

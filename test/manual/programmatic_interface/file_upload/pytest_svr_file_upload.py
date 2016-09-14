@@ -1,4 +1,4 @@
-'''@pytest_svr_session
+'''@pytest_svr_file_upload
 
 This module will test the following sessions:
 
@@ -40,16 +40,19 @@ def get_sample_json(jsonfile, model_type):
 
     '''
 
+    root = '/vagrant'
     json_dataset = None
+
     with open(
+        root + '/' +
         os.path.join(
-            '..',
             'interface',
             'static',
             'data',
             'json',
             'programmatic_interface',
             model_type,
+            'file_upload',
             jsonfile
         ),
         'r'
