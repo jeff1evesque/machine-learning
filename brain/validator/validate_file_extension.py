@@ -9,7 +9,6 @@ corresponding file extension for each file upload(s).
 '''
 
 import os.path
-import urlparse
 import urllib
 import cStringIO
 from brain.converter.calculate_md5 import calculate_md5
