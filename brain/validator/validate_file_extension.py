@@ -109,7 +109,6 @@ class Validate_File_Extension(object):
             dataset = self.premodel_data['data']['dataset']
             urls = self.premodel_data['data']['dataset']['file_upload']
             filepaths = [urlparse.urlsplit(url).path for url in urls]
-            filenames = [os.path.split(filepath)[1] for filepath in filepaths]
 
             for index, url in enumerate(urls):
                 split_path = os.path.splitext(url)
