@@ -98,7 +98,9 @@ def reduce_dataset(dataset, session_type):
             data['dataset']['file_upload'] = data['dataset']['json_string']
         else:
             data['dataset']['file_upload'] = []
-            data['dataset']['file_upload'].append(data['dataset']['json_string'])
+            data['dataset']['file_upload'].append(
+                data['dataset']['json_string']
+            )
 
         # validate and restructure
         validator = Validate_File_Extension(
