@@ -1,4 +1,4 @@
-'''@pytest_svr_session
+'''@pytest_svr_dataset_url
 
 This module will test the following sessions:
 
