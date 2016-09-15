@@ -359,11 +359,10 @@ The following (non-exhaustive) properties define the above implemented `data`
 ### Test Scripts
 
 This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing),
- to validate logic in a consistent fashion. Currently, only high-level unit
- tests have been defined within [`pytest_svm_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_svm_session.py),
- and [`pytest_svr_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_svr_session.py).
- These unit tests have been automated within corresponding travis [builds](https://travis-ci.org/jeff1evesque/machine-learning),
- using a series of docker containers, connected via a common docker network:
+ to validate logic in a consistent fashion. Currently, only [high-level](https://github.com/jeff1evesque/machine-learning/tree/master/test/live_server)
+ unit tests have been defined. These unit tests have been automated within corresponding
+ travis [builds](https://travis-ci.org/jeff1evesque/machine-learning), using
+ a series of docker containers, connected via a common docker network:
 
 - [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120)
 - [`default.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile)
@@ -378,7 +377,8 @@ Current unit tests cover the following sessions:
 - `model_predict`
 - `model_generate`
 
-which can be executed manually as follows:
+which can be executed [manually](https://github.com/jeff1evesque/machine-learning/tree/master/test/manual)
+ as follows:
 
 ```bash
 $ cd /path/to/machine-learning/
