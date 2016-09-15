@@ -1,11 +1,10 @@
 # Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg?branch=master)](https://travis-ci.org/jeff1evesque/machine-learning)
 
 In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support
-vector machines (SVMs) are [supervised learning](http://en.wikipedia.org/wiki/
-Supervised_learning) models with associated learning [algorithms](http://en.wi
-kipedia.org/wiki/Algorithm) that analyze data and recognize patterns, used for
- [classification](http://en.wikipedia.org/wiki/Statistical_classification) and
- [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More
+ vector machines (SVMs), and support vector machines (SVRs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning)
+ models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm)
+ that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification)
+ and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More
  generally, machine-learning deals with the construction and study of systems
  that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than
  follow only explicitly programmed instructions.
@@ -314,8 +313,12 @@ Some additional sample files have been provided, which outline how the `data`
  attribute implement should be implemented, with respect to the above `post`
  implementation:
 
-- [SVM sample datasets](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm)
-- [SVR sample datasets](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr)
+- [SVM datasets](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm)
+  - [dataset url](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/dataset_url)
+  - [file upload](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/file_upload)
+- [SVR datasets](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr)
+  - [dataset url](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/dataset_url)
+  - [file upload](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/file_upload)
 
 **Note:** the content of each of the above files, can substituted for the above
  `data` attribute.
@@ -326,13 +329,17 @@ The following (non-exhaustive) properties define the above implemented `data`
  attribute:
 
 - `model_id`: the numeric id value, of the generated model in the nosql
- datastore.
+ datastore
 - `model_type`: corresponds to the desired model type, which can be one of
  the following:
   - `classification`
   - `regression`
 - `session_id`: the numeric id value, that represents the dataset stored in
  the sql database.
+- `dataset_type`: corresponds to one of the following types:
+  - `dataset_url`: indication that the supplied dataset will be url references
+  - `file_upload`: indication that the supplied dataset(s) will be defined as a
+ json string within the `dataset` attribute
 - `session_type`: corresponds to one of the following session types:
   - `data_new`
   - `data_append`
@@ -346,15 +353,16 @@ The following (non-exhaustive) properties define the above implemented `data`
   - `polynomial`
   - `rbf`
   - `sigmoid`
+- `prediction_input[]`: an array of prediction input, supplied to the generated
+ model to compute a prediction
 
 ### Test Scripts
 
 This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing),
- to validate logic in a consistent fashion. Currently, only high-level unit
- tests have been defined within [`pytest_svm_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_svm_session.py),
- and [`pytest_svr_session.py`](https://github.com/jeff1evesque/machine-learning/blob/master/test/programmatic_interface/pytest_svr_session.py).
- These unit tests have been automated within corresponding travis [builds](https://travis-ci.org/jeff1evesque/machine-learning),
- using a series of docker containers, connected via a common docker network:
+ to validate logic in a consistent fashion. Currently, only [high-level](https://github.com/jeff1evesque/machine-learning/tree/master/test/live_server)
+ unit tests have been defined. These unit tests have been automated within corresponding
+ travis [builds](https://travis-ci.org/jeff1evesque/machine-learning), using
+ a series of docker containers, connected via a common docker network:
 
 - [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120)
 - [`default.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile)
@@ -369,23 +377,26 @@ Current unit tests cover the following sessions:
 - `model_predict`
 - `model_generate`
 
-which can be executed manually as follows:
+which can be executed [manually](https://github.com/jeff1evesque/machine-learning/tree/master/test/manual)
+ as follows:
 
 ```bash
 $ cd /path/to/machine-learning/
 $ vagrant up
 $ vagrant ssh
-vagrant@vagrant-ubuntu-trusty-64:~$ cd /vagrant/test && py.test manual
-============================================ test session starts =============================================
-platform linux2 -- Python 2.7.6, pytest-2.9.2, py-1.4.31, pluggy-0.3.1
+vagrant@vagrant-ubuntu-trusty-64:~$ (cd /vagrant/test && pytest manual)
+================================================= test session starts ==================================================
+platform linux2 -- Python 2.7.6, pytest-3.0.2, py-1.4.31, pluggy-0.3.1
 rootdir: /vagrant/test/manual, inifile: pytest.ini
 plugins: flask-0.10.0
-collected 8 items
+collected 16 items
 
-manual/programmatic_interface/pytest_svm_session.py ....
-manual/programmatic_interface/pytest_svr_session.py ....
+manual/programmatic_interface/dataset_url/pytest_svm_dataset_url.py ....
+manual/programmatic_interface/dataset_url/pytest_svr_dataset_url.py ....
+manual/programmatic_interface/file_upload/pytest_svm_file_upload.py ....
+manual/programmatic_interface/file_upload/pytest_svr_file_upload.py ....
 
-========================================= 8 passed in 7.82 seconds ==========================================
+============================================== 16 passed in 58.60 seconds ==============================================
 ```
 
 **Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
