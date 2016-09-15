@@ -12,6 +12,7 @@
 !app.py
 !factory.py
 !license.md
+!.coveralls.yml
 !contributing.md
 !Vagrantfile
 !/puppet/
