@@ -75,3 +75,6 @@ application:
     warning_log_path: '/log/application/warning'
     info_log_path: '/log/application/info'
     debug_log_path: '/log/application/debug'
+
+crypto:
+    salt_length: 32
