@@ -1,7 +1,7 @@
 # Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg?branch=master)](https://travis-ci.org/jeff1evesque/machine-learning)
 
 In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support
- vector machines (SVMs), and support vector machines (SVRs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning)
+ vector machine (SVMs), and support vector regression (SVRs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning)
  models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm)
  that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification)
  and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More
