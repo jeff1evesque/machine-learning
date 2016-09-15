@@ -10,12 +10,12 @@ import hashlib
 import base64
 import yaml
 
-# salt_length = current_app.config.get('SALT_LENGTH')
 with open("/vagrant/hiera/settings.yaml", 'r') as stream:
     try:
         salt_length = yaml.load(stream)['crypto']['salt_length']
     except yaml.YAMLError as exc:
         print(exc)
+salt_length = current_app.config.get('SALT_LENGTH')
 
 
 def hashpass(p):
