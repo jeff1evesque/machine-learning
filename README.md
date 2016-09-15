@@ -1,4 +1,4 @@
-# Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg?branch=master)](https://travis-ci.org/jeff1evesque/machine-learning)
+# Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg?branch=master)](https://travis-ci.org/jeff1evesque/machine-learning) [![Coverage Status](https://coveralls.io/repos/github/jeff1evesque/machine-learning/badge.svg?branch=master)](https://coveralls.io/github/jeff1evesque/machine-learning?branch=master)
 
 In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support
  vector machine (SVMs), and support vector regression (SVRs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning)
