@@ -101,13 +101,24 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                         '''
         cur.execute(sql_statement)
 
-        # create 'tbl_feature_value'
+        # create 'tbl_svm_data'
         sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_feature_value (
+                        CREATE TABLE IF NOT EXISTS tbl_svm_data (
                             id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             id_entity INT NOT NULL,
-                            dep_variable_label VARCHAR (50) NULL,
-                            criterion VARCHAR (50) NULL,
+                            dep_variable_label VARCHAR (50) NOT NULL,
+                            indep_variable_label VARCHAR (50) NOT NULL,
+                            indep_variable_value FLOAT NOT NULL
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_svr_data'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_svr_data (
+                            id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_entity INT NOT NULL,
+                            criterion VARCHAR (50) NOT NULL,
                             indep_variable_label VARCHAR (50) NOT NULL,
                             indep_variable_value FLOAT NOT NULL
                         );
