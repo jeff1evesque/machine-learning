@@ -60,14 +60,14 @@ class Retrieve_Feature(object):
         if model == list_model_type[0]:
             sql_statement = 'SELECT dep_variable_label, '\
                 'indep_variable_label, indep_variable_value '\
-                'FROM tbl_feature_value '\
+                'FROM tbl_svm_data '\
                 'WHERE id_entity=%s'
 
         # case 2: svr data
         elif model == list_model_type[1]:
             sql_statement = 'SELECT criterion, indep_variable_label, '\
                 'indep_variable_value '\
-                'FROM tbl_feature_value '\
+                'FROM tbl_svr_data '\
                 'WHERE id_entity=%s'
 
         # get dataset
