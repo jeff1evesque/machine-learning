@@ -11,6 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+from flask import current_app
 from brain.session.base import Base
 from brain.session.base_data import Base_Data
 from brain.database.save_entity import Save_Entity
@@ -48,8 +49,8 @@ class Data_Append(Base, Base_Data):
         super(Data_Append, self).__init__(premodel_data)
         self.observation_labels = []
         self.list_error = []
-        self.uid = 1
         self.dataset = []
+        self.uid = current_app.config.get('USER_ID')
         self.model_type = premodel_data['data']['settings']['model_type']
 
     def save_entity(self, session_type, session_id):
