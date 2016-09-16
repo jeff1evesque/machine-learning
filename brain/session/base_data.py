@@ -10,6 +10,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+from flask import current_app
 from brain.session.data.save_feature_count import feature_count
 from brain.session.data.validate_file_extension import reduce_dataset
 from brain.session.data.save_entity import entity
@@ -41,7 +42,7 @@ class Base_Data(object):
 
         self.observation_labels = []
         self.list_error = []
-        self.uid = 1
+        self.uid = current_app.config.get('USER_ID')
         self.dataset = []
         self.model_type = premodel_data['data']['settings']['model_type']
 
