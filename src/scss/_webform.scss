@@ -1,0 +1,43 @@
+// _webform.scss: contains general webform variables.
+//
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
+
+.dataset-url:first-of-type,
+.dataset-file:first-of-type {
+  clear: both;
+  float: left;
+}
+
+.dataset-url,
+.dataset-file {
+  clear: both;
+  display: block;
+}
+
+form {
+  > fieldset {
+    margin-top: $form-margin;
+
+    > fieldset {
+      margin-top: $form-margin / 2;
+    }
+  }
+
+  .form-submit {
+    margin-top: $form-margin;
+  }
+}
+
+fieldset .error {
+  float: right;
+}
+
+.form-note {
+  clear: both;
+  margin-bottom: 10px;
+  padding-top: 20px;
+}
