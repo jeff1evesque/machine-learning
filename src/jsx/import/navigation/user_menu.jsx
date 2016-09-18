@@ -9,8 +9,8 @@ var UserMenu = React.createClass({
     render: function() {
         return(
             <nav className='main-navigation'>
-                <a href='/login' className='btn btn-primary'>Sign in</a>
-                <a href='/register' className='btn'>Sign up</a>
+                <a href='/login' className='btn'>Sign in</a>
+                <a href='/register' className='btn btn-primary'>Sign up</a>
             </nav>
         );
     }
