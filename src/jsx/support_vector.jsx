@@ -163,5 +163,5 @@ var SupportVector = React.createClass({
     }
 });
 
-// render form
-ReactDOM.render(<SupportVector/>, document.querySelector('.container'));
+// indicate which class can be exported, and instantiated via 'require'
+export default SupportVector
