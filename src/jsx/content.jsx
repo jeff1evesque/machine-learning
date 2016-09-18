@@ -11,13 +11,15 @@ var Content = React.createClass({
   // display result
     render: function() {
         return(
-            <div className='menu-container'>
-                <UserMenu />
-            </div>
-            <div className='main'>
-                <div className='navBar'></div>
-                <div className='content'>
-                    <SupportVector />
+            <div className='container-inner'>
+                <div className='menu-container'>
+                    <UserMenu />
+                </div>
+                <div className='main'>
+                    <div className='navBar'></div>
+                    <div className='content'>
+                        <SupportVector />
+                    </div>
                 </div>
             </div>
         );
