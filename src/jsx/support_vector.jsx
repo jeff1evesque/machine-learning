@@ -164,4 +164,4 @@ var SupportVector = React.createClass({
 });
 
 // render form
-ReactDOM.render(<SupportVector/>, document.querySelector('.ml-container'));
+ReactDOM.render(<SupportVector/>, document.querySelector('.container'));
