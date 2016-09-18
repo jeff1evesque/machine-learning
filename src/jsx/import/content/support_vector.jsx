@@ -14,7 +14,7 @@ import DataAppend from '../session-type/data_append.jsx';
 import Submit from '../general/submit.jsx';
 import ResultDisplay from '../result/result_display.jsx';
 import Spinner from '../general/spinner.jsx';
-import checkValidString from '../validator/valid_string.jsx';
+import checkValidString from '../validator/valid_string.js';
 
 var SupportVector = React.createClass({
   // initial 'state properties'
