@@ -52,6 +52,13 @@ a {
   appearance: none;
 }
 
+.btn:hover {
+  background-color:#ddd;
+  background-image:-webkit-linear-gradient(#eee, #ddd);
+  background-image:linear-gradient(#eee, #ddd);
+  border-color:#ccc;
+}
+
 .btn-primary {
   color: #fff;
   text-shadow: 0 -1px 0 rgba(0,0,0,0.15);
@@ -59,4 +66,12 @@ a {
   background-image: -webkit-linear-gradient(#8add6d, #60b044);
   background-image: linear-gradient(#8add6d, #60b044);
   border-color: #5ca941;
+}
+
+.btn-primary:hover {
+  color:#fff;
+  background-color:#569e3d;
+  background-image:-webkit-linear-gradient(#79d858, #569e3d);
+  background-image:linear-gradient(#79d858, #569e3d);
+  border-color:#4a993e
 }
