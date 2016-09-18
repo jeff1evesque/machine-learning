@@ -4,8 +4,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import SupportVector from './support_vector.jsx';
-import UserMenu from '/user_menu.jsx';
+import SupportVector from './import/content/support_vector.jsx';
+import UserMenu from './import/navigation/user_menu.jsx';
 
 var Content = React.createClass({
   // display result
