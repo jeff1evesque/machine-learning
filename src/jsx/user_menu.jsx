@@ -16,5 +16,5 @@ var UserMenu = React.createClass({
     }
 });
 
-// render form
-ReactDOM.render(<UserMenu/>, document.querySelector('.container'));
+// indicate which class can be exported, and instantiated via 'require'
+export default UserMenu
