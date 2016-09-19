@@ -13,10 +13,9 @@ def test_hashing():
         try:
             yamlres = yaml.load(stream)
             root = yamlres['general']['root']
-            cryptopath = root + yamlres['crypto']['path']
+            cryptopath = root + '/brain/converter/crypto.py'
         except yaml.YAMLError as error:
             print error
-
     crypto = imp.load_source('crypto', cryptopath)
 
     passwords = ['blue', 'red', 'green', 'yellow']
