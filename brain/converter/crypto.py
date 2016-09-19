@@ -31,6 +31,7 @@ def load_salt(app=True, root='/vagrant'):
             except yaml.YAMLError as error:
                 return {'salt_length': None, 'error': error}
 
+				
 def hashpass(p):
     '''@hashpass
 
