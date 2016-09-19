@@ -1,5 +1,5 @@
 /**
- * user_menu.jsx: menu for logged-in, and anonymous users.
+ * content.jsx: generate main content.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
