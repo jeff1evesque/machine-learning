@@ -1,4 +1,4 @@
-'''@pytest_svm_session
+'''@pytest_svr_dataset_url
 
 This module will test the following sessions:
 
@@ -40,16 +40,19 @@ def get_sample_json(jsonfile, model_type):
 
     '''
 
+    root = '/vagrant'
     json_dataset = None
+
     with open(
+        root + '/' +
         os.path.join(
-            '..',
             'interface',
             'static',
             'data',
             'json',
             'programmatic_interface',
             model_type,
+            'dataset_url',
             jsonfile
         ),
         'r'
@@ -68,7 +71,7 @@ def test_data_new():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-data-new.json', 'svm')
+        data=get_sample_json('svr-data-new.json', 'svr')
     )
 
 
@@ -82,7 +85,7 @@ def test_data_append():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-data-append.json', 'svm')
+        data=get_sample_json('svr-data-append.json', 'svr')
     )
 
 
@@ -96,7 +99,7 @@ def test_model_generate():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-model-generate.json', 'svm')
+        data=get_sample_json('svr-model-generate.json', 'svr')
     )
 
 
@@ -110,5 +113,5 @@ def test_model_predict():
     assert requests.post(
         endpoint_url,
         headers=headers,
-        data=get_sample_json('svm-model-predict.json', 'svm')
+        data=get_sample_json('svr-model-predict.json', 'svr')
     )

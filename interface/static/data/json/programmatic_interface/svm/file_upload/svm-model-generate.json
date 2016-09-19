@@ -1,0 +1,8 @@
+{
+    "properties": {
+        "session_type": "model_generate",
+        "session_id": "3",
+        "model_type": "svm",
+        "sv_kernel_type": "rbf"
+    }
+}

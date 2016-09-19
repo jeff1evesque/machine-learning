@@ -9,6 +9,8 @@ corresponding file extension for each file upload(s).
 '''
 
 import os.path
+import urllib
+import cStringIO
 from brain.converter.calculate_md5 import calculate_md5
 
 
@@ -45,22 +47,30 @@ class Validate_File_Extension(object):
 
         # local variables
         list_error = []
-
-        dataset = self.premodel_data['data']['dataset']
         acceptable_type = ['csv', 'xml', 'json']
 
-        unique_hash = set()
+        unique_data = set()
         dataset_keep = []
 
-        if (dataset.get('file_upload', None)):
+        # validate and restructure: file upload
+        if (
+                self.premodel_data['data'].get('settings', None) and
+                self.premodel_data['data']['settings'].get(
+                    'dataset_type', None) == 'file_upload' and
+                self.premodel_data.get('data', None) and
+                self.premodel_data['data'].get('dataset', None) and
+                self.premodel_data['data']['dataset'].get('file_upload', None)
+        ):
+
+            dataset = self.premodel_data['data']['dataset']
 
             for index, filedata in enumerate(dataset['file_upload']):
                 try:
                     split_path = os.path.splitext(filedata['filename'])
                     filehash = calculate_md5(filedata['file'])
                     # add 'hashed' value of file reference(s) to a list
-                    if filehash not in unique_hash:
-                        unique_hash.add(filehash)
+                    if filehash not in unique_data:
+                        unique_data.add(filehash)
                         file_extension = split_path[1][1:].strip().lower()
 
                         # validate file_extension
@@ -84,6 +94,53 @@ class Validate_File_Extension(object):
                     list_error.append(msg)
 
             # replace portion of dataset with unique 'file reference(s)'
+            dataset['file_upload'][:] = dataset_keep
+
+        # validate and restructure: url reference
+        elif (
+                self.premodel_data.get('data', None) and
+                self.premodel_data['data'].get('dataset', None) and
+                self.premodel_data['data']['dataset'].get(
+                    'type', None) and
+                self.premodel_data['data']['dataset']['type'] == 'dataset_url'
+        ):
+
+            dataset = self.premodel_data['data']['dataset']
+            urls = self.premodel_data['data']['dataset']['file_upload']
+
+            for index, url in enumerate(urls):
+                split_path = os.path.splitext(url)
+                file_extension = split_path[1][1:].strip().lower()
+
+                try:
+                    if url not in unique_data:
+                        unique_data.add(url)
+
+                        # validate file_extension
+                        if (file_extension not in acceptable_type):
+                            msg = '''Problem: url reference, \''''
+                            msg += file_extension
+                            msg += '''\', must be one of the formats:'''
+                            msg += '\n ' + ', '.join(acceptable_type)
+                            list_error.append(msg)
+
+                        # keep non-duplicated url references
+                        else:
+                            filename = os.path.split(url)[1]
+                            dataset_keep.append({
+                                'type': file_extension,
+                                'file': cStringIO.StringIO(
+                                            urllib.urlopen(url).read()
+                                        ),
+                                'filename': filename
+                            })
+
+                except:
+                    msg = 'Problem with url reference ' + url
+                    msg += '. Please re-upload the information.'
+                    list_error.append(msg)
+
+            # define unique 'file reference(s)'
             dataset['file_upload'][:] = dataset_keep
 
         else:

@@ -1,0 +1,8 @@
+{
+    "properties": {
+        "session_type": "model_generate",
+        "session_id": "4",
+        "model_type": "svr",
+        "sv_kernel_type": "poly"
+    }
+}

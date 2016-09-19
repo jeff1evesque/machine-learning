@@ -8,21 +8,58 @@
  */
 
 import checkValidString from './../validator/valid_string.js';
+import checkValidFloat from './../validator/valid_float.js';
 
 var ResultDisplay = React.createClass({
   // triggered when 'state properties' change
     render: function(){
       // variables
         var serverObj = this.props.formResult ? this.props.formResult : false;
-        var serverResult = serverObj.result ? serverObj.result : false;
+        var resultSet = serverObj.result ? serverObj.result : false;
+        var confidence = resultSet.confidence ? resultSet.confidence : false;
         var displayResult = false;
+        var adjustedConfidence = false;
 
         if (
-            serverObj && serverResult && serverResult.result &&
-            checkValidString(serverResult.result)
+            serverObj && resultSet && resultSet.result &&
+            checkValidString(resultSet.result)
         ) {
-            var result = serverResult.result;
+            var result = resultSet.result;
             displayResult = true;
+        }
+
+       // svm confidence measurements
+        if (
+            resultSet &&
+            resultSet.model &&
+            resultSet.model == 'svm' &&
+            confidence &&
+            confidence.classes &&
+            confidence.classes.every(checkValidString) &&
+            confidence.probability &&
+            confidence.probability.every(checkValidFloat) &&
+            confidence.decision_function &&
+            confidence.decision_function.every(checkValidFloat)
+        ) {
+            adjustedConfidence = {
+                'classes': confidence.classes.join(', '),
+                'probability': confidence.probability.join(', '),
+                'decision-function': confidence.decision_function.join(', ')
+            }
+        }
+
+      // svr confidence measurements  
+        else if (
+            resultSet &&
+            resultSet.model &&
+            resultSet.model == 'svr' &&
+            confidence &&
+            confidence.score &&
+            checkValidFloat(confidence.score)
+        ) {
+            adjustedConfidence = {
+                'r^2': confidence.score
+            }
         }
 
       // display result
@@ -30,7 +67,16 @@ var ResultDisplay = React.createClass({
             return(
                 <fieldset className='fieldset-prediction-result'>
                     <legend>Prediction Result</legend>
-                    <p className='result'>{result}</p>
+                    <p className='result'>prediction: {result}</p>
+
+                    {/* iterate dynamic object */}
+                    {
+                        adjustedConfidence &&
+                        Object.keys(adjustedConfidence).map(function(key) {
+                            return <p key={key} className={key}>
+                                {key}: {adjustedConfidence[key]}
+                            </p>;
+                    })}
                 </fieldset>
             );
         }

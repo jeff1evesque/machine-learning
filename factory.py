@@ -75,7 +75,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 DEBUG_LOG_PATH=settings['application']['debug_log_path'],
                 MODEL_TYPE=settings['application']['model_type'],
                 SALT_LENGTH=settings['crypto']['salt_length'],
-                CRYPTO_PATH=settings['crypto']['path']
+                USER_ID=0,
             )
 
         # log handler: requires the below logger

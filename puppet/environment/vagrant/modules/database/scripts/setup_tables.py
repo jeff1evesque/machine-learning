@@ -11,8 +11,8 @@ This file initializes the following database tables within the
     @tbl_feature_count, record the number of features expected within an
         observation, with respect to a given 'id_entity'.
 
-    @tbl_feature_value, records a tuple of criterion-predictor related values,
-        or a tuple of observation-feature related values:
+    @tbl_svm_data, records a tuple of observation-feature values
+    @tbl_svr_data, records a tuple of criterion-predictor values
 
         - observation label: synonymous to dependent variable label, and can be
               'NULL' if the 'criterion value' is defined
@@ -72,7 +72,8 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                         CREATE TABLE IF NOT EXISTS tbl_feature_count (
                             id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             id_entity INT NOT NULL,
-                            count_features INT NOT NULL
+                            count_features INT NOT NULL,
+                            INDEX (id_size)
                         );
                         '''
         cur.execute(sql_statement)
@@ -86,7 +87,8 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                             uid_created INT NOT NULL,
                             datetime_created DATETIME NOT NULL,
                             uid_modified INT NULL,
-                            datetime_modified DATETIME NULL
+                            datetime_modified DATETIME NULL,
+                            INDEX (id_entity)
                         );
                         '''
         cur.execute(sql_statement)
@@ -96,20 +98,34 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                         CREATE TABLE IF NOT EXISTS tbl_observation_label (
                             id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             id_entity INT NOT NULL,
-                            dep_variable_label VARCHAR(75) NOT NULL
+                            dep_variable_label VARCHAR(75) NOT NULL,
+                            INDEX (id_label)
                         );
                         '''
         cur.execute(sql_statement)
 
-        # create 'tbl_feature_value'
+        # create 'tbl_svm_data'
         sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_feature_value (
+                        CREATE TABLE IF NOT EXISTS tbl_svm_data (
                             id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             id_entity INT NOT NULL,
-                            dep_variable_label VARCHAR (50) NULL,
-                            criterion VARCHAR (50) NULL,
+                            dep_variable_label VARCHAR (50) NOT NULL,
                             indep_variable_label VARCHAR (50) NOT NULL,
-                            indep_variable_value FLOAT NOT NULL
+                            indep_variable_value FLOAT NOT NULL,
+                            INDEX (id_value)
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_svr_data'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_svr_data (
+                            id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_entity INT NOT NULL,
+                            criterion VARCHAR (50) NOT NULL,
+                            indep_variable_label VARCHAR (50) NOT NULL,
+                            indep_variable_value FLOAT NOT NULL,
+                            INDEX (id_value)
                         );
                         '''
         cur.execute(sql_statement)
@@ -118,7 +134,8 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
         sql_statement = '''\
                         CREATE TABLE IF NOT EXISTS tbl_model_type (
                             id_model INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            model VARCHAR (50) NOT NULL
+                            model VARCHAR (50) NOT NULL,
+                            INDEX (id_model)
                         );
                         '''
         cur.execute(sql_statement)

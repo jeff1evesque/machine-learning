@@ -48,8 +48,8 @@ class Data_New(Base, Base_Data):
         super(Data_New, self).__init__(premodel_data)
         self.observation_labels = []
         self.list_error = []
-        self.uid = 1
         self.dataset = []
+        self.uid = current_app.config.get('USER_ID')
         self.list_model_type = current_app.config.get('MODEL_TYPE')
         self.model_type = premodel_data['data']['settings']['model_type']
 

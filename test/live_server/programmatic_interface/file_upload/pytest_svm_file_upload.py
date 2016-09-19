@@ -1,7 +1,6 @@
-'''@pytest_svr_session
+'''@pytest_svm_session
 
-This file will test the following svr sessions:
-
+This file will test the following svm sessions:
   - data_new: stores supplied dataset into a SQL database.
   - data_append: appends supplied dataset to an already stored dataset in an
                  SQL database.
@@ -47,6 +46,7 @@ def get_sample_json(jsonfile, model_type):
                 'json',
                 'programmatic_interface',
                 model_type,
+                'file_upload',
                 jsonfile
             ),
             'r'
@@ -75,7 +75,7 @@ def test_data_new(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svr-data-new.json', 'svr')
+        data=get_sample_json('svm-data-new.json', 'svm')
     )
 
     assert res.status_code == 200
@@ -97,7 +97,7 @@ def test_data_append(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svr-data-append.json', 'svr')
+        data=get_sample_json('svm-data-append.json', 'svm')
     )
 
     assert res.status_code == 200
@@ -119,7 +119,7 @@ def test_model_generate(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svr-model-generate.json', 'svr')
+        data=get_sample_json('svm-model-generate.json', 'svm')
     )
 
     assert res.status_code == 200
@@ -141,7 +141,7 @@ def test_model_predict(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svr-model-predict.json', 'svr')
+        data=get_sample_json('svm-model-predict.json', 'svm')
     )
 
     assert res.status_code == 200
