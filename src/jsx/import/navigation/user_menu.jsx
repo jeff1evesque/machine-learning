@@ -5,12 +5,22 @@
  */
 
 var UserMenu = React.createClass({
+  // callback for login page
+    clickLogin: function(event) {
+      // prevent page reload
+        event.preventDefault();
+    },
+  // callback for register page
+    clickRegister: function(event) {
+      // prevent page reload
+        event.preventDefault();
+    },
   // display result
     render: function() {
         return(
             <nav className='main-navigation'>
-                <a href='/login' className='btn mn-2'>Sign in</a>
-                <a href='/register' className='btn btn-primary'>Sign up</a>
+                <a href='#' className='btn mn-2' onClick={this.clickLogin}>Sign in</a>
+                <a href='#' className='btn btn-primary' onClick={this.clickRegister}>Sign up</a>
             </nav>
         );
     }
