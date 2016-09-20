@@ -11,7 +11,7 @@ var UserMenu = React.createClass({
         event.preventDefault();
 
       // return state to parent component
-        this.props.onChange({click_login: true});
+        this.props.onChange({login: true});
     },
   // callback for register page
     clickRegister: function(event) {
@@ -19,7 +19,7 @@ var UserMenu = React.createClass({
         event.preventDefault();
 
       // return state to parent component
-        this.props.onChange({click_register: true});
+        this.props.onChange({register: true});
     },
   // display result
     render: function() {
