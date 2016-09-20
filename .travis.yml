@@ -79,7 +79,7 @@ script:
   - flake8 .
   - jshint --verbose src/js/*.js --config test/lint/jshint.json --exclude-path test/lint/.jshintignore
   - jscs . --config test/lint/.jscs.json
-  - scss-lint src/scss/*.scss
+  - scss-lint src/scss/*.scss --exclude-linter VendorPrefix
   - bootlint -d W005 interface/templates/*.html
   - sudo find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
   - sudo find puppet/environment/*/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;

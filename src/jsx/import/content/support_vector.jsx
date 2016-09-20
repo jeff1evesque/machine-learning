@@ -7,14 +7,14 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import ModelGenerate from './import/session-type/model_generate.jsx';
-import ModelPredict from './import/session-type/model_predict.jsx';
-import DataNew from './import/session-type/data_new.jsx';
-import DataAppend from './import/session-type/data_append.jsx';
-import Submit from './import/general/submit.jsx';
-import ResultDisplay from './import/result/result_display.jsx';
-import Spinner from './import/general/spinner.jsx';
-import checkValidString from './import/validator/valid_string.js';
+import ModelGenerate from '../session-type/model_generate.jsx';
+import ModelPredict from '../session-type/model_predict.jsx';
+import DataNew from '../session-type/data_new.jsx';
+import DataAppend from '../session-type/data_append.jsx';
+import Submit from '../general/submit.jsx';
+import ResultDisplay from '../result/result_display.jsx';
+import Spinner from '../general/spinner.jsx';
+import checkValidString from '../validator/valid_string.js';
 
 var SupportVector = React.createClass({
   // initial 'state properties'
@@ -163,5 +163,5 @@ var SupportVector = React.createClass({
     }
 });
 
-// render form
-ReactDOM.render(<SupportVector/>, document.querySelector('.ml-container'));
+// indicate which class can be exported, and instantiated via 'require'
+export default SupportVector
