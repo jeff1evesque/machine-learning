@@ -39,9 +39,9 @@ body {
   background-color: $lighter-gray;
   background-image: -webkit-linear-gradient($off-white, $lighter-gray);
   background-image: linear-gradient($off-white, $lighter-gray);
-  border: 1px solid $gray;
+  border: 1px solid $dark-gray;
   border-radius: 3px;
-  color: $dark-gray;
+  color: $darker-gray;
   cursor: pointer;
   display: inline-block;
   font-size: 13px;
@@ -61,7 +61,7 @@ body {
   background-color: $light-gray;
   background-image: -webkit-linear-gradient($lighter-gray, $light-gray);
   background-image: linear-gradient($lighter-gray, $light-gray);
-  border-color: #ccc;
+  border-color: $gray;
 }
 
 .btn-primary {
