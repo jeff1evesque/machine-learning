@@ -36,9 +36,9 @@ body {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-color: #eee;
-  background-image: -webkit-linear-gradient(#fcfcfc, #eee);
-  background-image: linear-gradient(#fcfcfc, #eee);
+  background-color: $light-gray;
+  background-image: -webkit-linear-gradient($off-white, $light-gray);
+  background-image: linear-gradient($off-white, $light-gray);
   border: 1px solid #d5d5d5;
   border-radius: 3px;
   color: #333;
@@ -58,25 +58,25 @@ body {
 }
 
 .btn:hover {
-  background-color: #ddd;
-  background-image: -webkit-linear-gradient(#eee, #ddd);
-  background-image: linear-gradient(#eee, #ddd);
+  background-color: $gray;
+  background-image: -webkit-linear-gradient($light-gray, $gray);
+  background-image: linear-gradient($light-gray, $gray);
   border-color: #ccc;
 }
 
 .btn-primary {
-  background-color: #60b044;
-  background-image: -webkit-linear-gradient(#8add6d, #60b044);
-  background-image: linear-gradient(#8add6d, #60b044);
-  border-color: #5ca941;
-  color: #fff;
+  background-color: $green-level-1;
+  background-image: -webkit-linear-gradient($lighter-green, $green);
+  background-image: linear-gradient($lighter-green, $green);
+  border-color: $green-level-2;
+  color: $white;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, .15);
 }
 
 .btn-primary:hover {
-  background-color: #569e3d;
-  background-image: -webkit-linear-gradient(#79d858, #569e3d);
-  background-image: linear-gradient(#79d858, #569e3d);
-  border-color: #4a993e;
-  color: #fff;
+  background-color: $dark-green;
+  background-image: -webkit-linear-gradient($light-green, $dark-green);
+  background-image: linear-gradient($light-green, $dark-green);
+  border-color: $darker-green;
+  color: $white;
 }
