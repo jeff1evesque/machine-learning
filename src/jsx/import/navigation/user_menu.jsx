@@ -5,15 +5,28 @@
  */
 
 var UserMenu = React.createClass({
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            click_login: false,
+            click_register: false
+        };
+    },
   // callback for login page
     clickLogin: function(event) {
       // prevent page reload
         event.preventDefault();
+
+      // return state to parent component
+        this.setState({click_login: true});
     },
   // callback for register page
     clickRegister: function(event) {
       // prevent page reload
         event.preventDefault();
+
+      // return state to parent component
+        this.setState({click_register: true});
     },
   // display result
     render: function() {
