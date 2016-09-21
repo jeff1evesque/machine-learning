@@ -7,6 +7,7 @@
 import SupportVector from './import/content/support_vector.jsx';
 import LoginForm from './import/content/login.jsx';
 import RegisterForm from './import/content/register.jsx';
+import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 
 var Content = React.createClass({
@@ -41,9 +42,19 @@ var Content = React.createClass({
         else {
             return SupportVector;
         }
-    }
+    },
+  // call back: return side navigation
+    getNavBar: function(type) {
+        if (this.state.login || this.state.register) {
+            return 'span';
+        }
+        else {
+            return NavBar;
+        }
+    },
   // display result
     render: function() {
+        var SideBar = this.getNavBar();
         var Content = this.getContent();
 
         return(
@@ -52,10 +63,8 @@ var Content = React.createClass({
                     <UserMenu onChange={this.setClickType} />
                 </div>
                 <div className='main'>
-                    <div className='navBar'></div>
-                    <div className='content'>
-                        <Content />
-                    </div>
+                    <SideBar />
+                    <Content />
                 </div>
             </div>
         );
