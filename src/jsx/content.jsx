@@ -5,6 +5,8 @@
  */
 
 import SupportVector from './import/content/support_vector.jsx';
+import LoginForm from './import/content/login.jsx';
+import RegisterForm from './import/content/register.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 
 var Content = React.createClass({
@@ -28,8 +30,22 @@ var Content = React.createClass({
             this.setState({render_register: true});
         }
     },
+  // call back: generate main content
+    getContent: function(type) {
+        if (this.state.login) {
+            return LoginForm;
+        }
+        else if (this.state.register) {
+            return RegisterForm;
+        }
+        else {
+            return SupportVector;
+        }
+    }
   // display result
     render: function() {
+        var Content = this.getContent();
+
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
@@ -38,7 +54,7 @@ var Content = React.createClass({
                 <div className='main'>
                     <div className='navBar'></div>
                     <div className='content'>
-                        <SupportVector />
+                        <Content />
                     </div>
                 </div>
             </div>
