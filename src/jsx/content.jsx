@@ -15,26 +15,26 @@ var Content = React.createClass({
     getInitialState: function() {
         return {
             render_login: false,
-            render_register: false,
+            render_registration: false,
         };
     },
   // update 'state properties': click event has not 'target'
     setClickType: function(event){
         if (event.login) {
-            this.setState({render_register: false});
+            this.setState({render_registration: false});
             this.setState({render_login: true});
         }
         else if (event.register) {
             this.setState({render_login: false});
-            this.setState({render_register: true});
+            this.setState({render_registration: true});
         }
     },
   // call back: generate main content
     getContent: function(type) {
-        if (this.state.login) {
+        if (this.state.render_login) {
             return LoginForm;
         }
-        else if (this.state.register) {
+        else if (this.state.render_registration) {
             return RegisterForm;
         }
         else {
