@@ -124,5 +124,5 @@ def validate_password(password):
 
     '''
     return req_min_c(password) and req_max_c(password) and \
-           req_numeral(password) and (req_lower(password) or 
-           req_upper(password))
+        req_numeral(password) and (req_lower(password) or
+        req_upper(password))
