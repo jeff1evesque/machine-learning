@@ -10,6 +10,12 @@
 import Spinner from '../general/spinner.jsx';
 
 var RegisterForm = React.createClass({
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            display_spinner: false,
+        };
+    },
   // call back: used to return spinner
     getSpinner: function() {
         if (this.state.display_spinner) {
