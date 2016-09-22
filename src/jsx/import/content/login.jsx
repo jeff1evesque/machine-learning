@@ -30,20 +30,20 @@ var LoginForm = React.createClass({
         var AjaxSpinner = this.getSpinner();
 
         return(
-            <div className='main-full-span'>
+            <div className='main-full-span login-form'>
                 <form onSubmit={this.handleSubmit} ref='registerForm'>
-                    <fieldset className='fieldset-login-form'>
-                        <input
-                            type='text'
-                            name='user[login]'
-                            className='input-block'
-                        />
-                        <input
-                            type='text'
-                            name='user[password]'
-                            className='input-block'
-                        />
-                    </fieldset>
+                    <label>Username or email address</label>
+                    <input
+                        type='text'
+                        name='user[login]'
+                        className='input-block'
+                    />
+                    <label>Password</label>
+                    <input
+                        type='text'
+                        name='user[password]'
+                        className='input-block'
+                    />
 
                     <input type="submit" className='input-submit' />
                     <AjaxSpinner />
