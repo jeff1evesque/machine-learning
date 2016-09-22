@@ -9,11 +9,17 @@ var UserMenu = React.createClass({
     clickLogin: function(event) {
       // prevent page reload
         event.preventDefault();
+
+      // return state to parent component
+        this.props.onChange({login: true});
     },
   // callback for register page
     clickRegister: function(event) {
       // prevent page reload
         event.preventDefault();
+
+      // return state to parent component
+        this.props.onChange({register: true});
     },
   // display result
     render: function() {
