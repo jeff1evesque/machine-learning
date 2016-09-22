@@ -18,15 +18,13 @@ var Content = React.createClass({
             render_register: false,
         };
     },
-  // update 'state properties'
+  // update 'state properties': click event has not 'target'
     setClickType: function(event){
-        var clickType = event.target;
-
-        if (clickType && clickType.login) {
+        if (event.login) {
             this.setState({render_register: false});
             this.setState({render_login: true});
         }
-        else if (clickType && clickType.register) {
+        else if (event.register) {
             this.setState({render_login: false});
             this.setState({render_register: true});
         }
