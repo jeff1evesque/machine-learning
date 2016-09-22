@@ -24,31 +24,33 @@ var RegisterForm = React.createClass({
         var AjaxSpinner = getSpinner();
 
         return(
-            <form onSubmit={this.handleSubmit} ref='registerForm'>
-                <fieldset className='fieldset-register-form'>
-                    <input
-                        type='text'
-                        name='user[login]'
-                        className='input-block'
-                        placeholder='Pick a username'
-                    >
-                    <input
-                        type='text'
-                        name='user[email]'
-                        className='input-block'
-                        placeholder='Your email address'
-                    >
-                    <input
-                        type='text'
-                        name='user[password]'
-                        className='input-block'
-                        placeholder='Create a password'
-                    >
-                </fieldset>
+            <div className='main-full-span'>
+                <form onSubmit={this.handleSubmit} ref='registerForm'>
+                    <fieldset className='fieldset-register-form'>
+                        <input
+                            type='text'
+                            name='user[login]'
+                            className='input-block'
+                            placeholder='Pick a username'
+                        >
+                        <input
+                            type='text'
+                            name='user[email]'
+                            className='input-block'
+                            placeholder='Your email address'
+                        >
+                        <input
+                            type='text'
+                            name='user[password]'
+                            className='input-block'
+                            placeholder='Create a password'
+                        >
+                    </fieldset>
 
-                <input type="submit" className='input-submit'>
-                <AjaxSpinner />
-            </form>
+                    <input type="submit" className='input-submit'>
+                    <AjaxSpinner />
+                </form>
+            </div>
         );
     }
 });
