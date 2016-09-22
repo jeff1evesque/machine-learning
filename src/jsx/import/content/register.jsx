@@ -32,22 +32,22 @@ var RegisterForm = React.createClass({
                             name='user[login]'
                             className='input-block'
                             placeholder='Pick a username'
-                        >
+                        />
                         <input
                             type='text'
                             name='user[email]'
                             className='input-block'
                             placeholder='Your email address'
-                        >
+                        />
                         <input
                             type='text'
                             name='user[password]'
                             className='input-block'
                             placeholder='Create a password'
-                        >
+                        />
                     </fieldset>
 
-                    <input type="submit" className='input-submit'>
+                    <input type="submit" className='input-submit' />
                     <AjaxSpinner />
                 </form>
             </div>
