@@ -43,7 +43,7 @@ var Content = React.createClass({
     },
   // call back: return side navigation
     getNavBar: function(type) {
-        if (this.state.login || this.state.register) {
+        if (this.state.render_login || this.state.render_registration) {
             return 'span';
         }
         else {
