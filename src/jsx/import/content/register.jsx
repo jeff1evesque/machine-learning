@@ -30,28 +30,26 @@ var RegisterForm = React.createClass({
         var AjaxSpinner = this.getSpinner();
 
         return(
-            <div className='main-full-span'>
+            <div className='main-full-span register-form'>
                 <form onSubmit={this.handleSubmit} ref='registerForm'>
-                    <fieldset className='fieldset-register-form'>
-                        <input
-                            type='text'
-                            name='user[login]'
-                            className='input-block'
-                            placeholder='Pick a username'
-                        />
-                        <input
-                            type='text'
-                            name='user[email]'
-                            className='input-block'
-                            placeholder='Your email address'
-                        />
-                        <input
-                            type='text'
-                            name='user[password]'
-                            className='input-block'
-                            placeholder='Create a password'
-                        />
-                    </fieldset>
+                    <input
+                        type='text'
+                        name='user[login]'
+                        className='input-block'
+                        placeholder='Pick a username'
+                    />
+                    <input
+                        type='text'
+                        name='user[email]'
+                        className='input-block'
+                        placeholder='Your email address'
+                    />
+                    <input
+                        type='text'
+                        name='user[password]'
+                        className='input-block'
+                        placeholder='Create a password'
+                    />
 
                     <input type="submit" className='input-submit' />
                     <AjaxSpinner />
