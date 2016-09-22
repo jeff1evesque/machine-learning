@@ -30,7 +30,7 @@ var Content = React.createClass({
         }
     },
   // call back: generate main content
-    getContent: function(type) {
+    getContent: function() {
         if (this.state.render_login) {
             return LoginForm;
         }
