@@ -27,7 +27,7 @@ var RegisterForm = React.createClass({
     },
   // triggered when 'state properties' change
     render: function() {
-        var AjaxSpinner = getSpinner();
+        var AjaxSpinner = this.getSpinner();
 
         return(
             <div className='main-full-span'>
