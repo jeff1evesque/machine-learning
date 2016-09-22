@@ -17,21 +17,25 @@ def test_validate_password():
             print error
     vp = imp.load_source('validate_password', validate_password)
 
-    passwords = ['abcdefghij123', # just right
-                 'ABCDEFGHIJ123', # just right
-                 'abcDEFGHIJ123', # just right
-                 'abcdefgh1',     # too short
-                 'abcdefghijk',   # no numbers
-                 '12345678911',   # no letters
-                 'abcdefghIJK',   # no numbers
-                 'a1' * 65]       # too long
-    answers = [True,
-               True,
-               True,
-               False,
-               False,
-               False,
-               False,
-               False]
+    passwords = [
+        'abcdefghij123', # just right
+        'ABCDEFGHIJ123', # just right
+        'abcDEFGHIJ123', # just right
+        'abcdefgh1',     # too short
+        'abcdefghijk',   # no numbers
+        '12345678911',   # no letters
+        'abcdefghIJK',   # no numbers
+        'a1' * 65        # too long
+    ]
+    answers = [
+        True,
+        True,
+        True,
+        False,
+        False,
+        False,
+        False,
+        False
+    ]
 
     assert map(vp.validate_password, passwords) == answers
