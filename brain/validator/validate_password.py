@@ -18,7 +18,7 @@ def load_min(app=True, root='/vagrant'):
 
     '''
     if app:
-        min_c = current_app.config.get('PASSWORD_MIN_C')
+        min_c = current_app.config.get('PASSWORD_MIN_C', None)
         return {'password_min_c': min_c, 'error': None}
     else:
         with open(root + "/hiera/settings.yaml", 'r') as stream:
@@ -39,7 +39,7 @@ def load_max(app=True, root='/vagrant'):
 
     '''
     if app:
-        max_c = current_app.config.get('PASSWORD_MAX_C')
+        max_c = current_app.config.get('PASSWORD_MAX_C', None)
         return {'password_max_c': max_c, 'error': None}
     else:
         with open(root + "/hiera/settings.yaml", 'r') as stream:
@@ -123,8 +123,8 @@ def validate_password(password):
     @password, is the password to be validated
 
     '''
-    return (req_min_c(password) and
-            req_max_c(password) and
-            req_numeral(password) and
-            (req_lower(password) or
-             req_upper(password)))
+    return (
+        req_min_c(password) and
+        req_max_c(password) and
+        req_numeral(password) and
+        (req_lower(password) or req_upper(password)))
