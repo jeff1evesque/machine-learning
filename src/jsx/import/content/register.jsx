@@ -25,7 +25,7 @@ var RegisterForm = React.createClass({
 
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>
-                <fieldset className='fieldset-user-info'>
+                <fieldset className='fieldset-register-form'>
                     <input
                         type='text'
                         name='user[login]'
