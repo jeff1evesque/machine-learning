@@ -31,15 +31,15 @@ var LoginForm = React.createClass({
                             type='text'
                             name='user[login]'
                             className='input-block'
-                        >
+                        />
                         <input
                             type='text'
                             name='user[password]'
                             className='input-block'
-                        >
+                        />
                     </fieldset>
 
-                    <input type="submit" className='input-submit'>
+                    <input type="submit" className='input-submit' />
                     <AjaxSpinner />
                 </form>
             </div>
