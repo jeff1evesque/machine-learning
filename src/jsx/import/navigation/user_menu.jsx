@@ -6,7 +6,7 @@
 
 var UserMenu = React.createClass({
   // callback for home page
-    clickLogin: function(event) {
+    clickHome: function(event) {
       // prevent page reload
         event.preventDefault();
 
