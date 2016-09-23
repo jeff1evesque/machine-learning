@@ -23,7 +23,8 @@ def load_min(app=True, root='/vagrant'):
     else:
         with open(root + "/hiera/settings.yaml", 'r') as stream:
             try:
-                min_c =yaml.load(stream)['validate_password']['password_min_c']
+				yamlres = yaml.load(stream)
+                min_c = yamlres['validate_password']['password_min_c']
                 return {'password_min_c': min_c, 'error': None}
             except yaml.YAMLError as error:
                 return {'password_min_c': None, 'error': error}
@@ -43,7 +44,8 @@ def load_max(app=True, root='/vagrant'):
     else:
         with open(root + "/hiera/settings.yaml", 'r') as stream:
             try:
-                max_c =yaml.load(stream)['validate_password']['password_max_c']
+				yamlres = yaml.load(stream)
+                max_c = yamlres['validate_password']['password_max_c']
                 return {'password_max_c': max_c, 'error': None}
             except yaml.YAMLError as error:
                 return {'password_max_c': None, 'error': error}
