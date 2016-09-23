@@ -20,18 +20,28 @@ var Content = React.createClass({
     },
   // update 'state properties': click event has not 'target'
     setClickType: function(event){
-        if (event.login) {
+        if (event.home) {
+            this.setState({render_login: false});
+            this.setState({render_registration: false});
+            this.setState({render_home: true});
+        }
+        else if (event.login) {
+            this.setState({render_home: false});
             this.setState({render_registration: false});
             this.setState({render_login: true});
         }
         else if (event.register) {
+            this.setState({render_home: false});
             this.setState({render_login: false});
             this.setState({render_registration: true});
         }
     },
   // call back: generate main content
     getContent: function() {
-        if (this.state.render_login) {
+        if (this.state.render_home) {
+            return SupportVector;
+        }
+        else if (this.state.render_login) {
             return LoginForm;
         }
         else if (this.state.render_registration) {
