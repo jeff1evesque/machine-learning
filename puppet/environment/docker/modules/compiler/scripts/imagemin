@@ -21,7 +21,7 @@ if [ "$1" = "/var/machine-learning" ]; then
     file_extension="${file##*.}"
 
     # minify with 'imagemin'
-    if [ "$file_extension" = 'gif' ]; then
+    if [ "$file_extension" = 'gif' ] || [ "$file_extension" = 'svg' ]; then
       cp "$1/src/img/$file" "$1/interface/static/img/$filename"
     else
       imagemin "$1/src/img/$file" > "$1/interface/static/img/$filename" &
@@ -48,7 +48,7 @@ else
       file_extension="${file##*.}"
 
       # minify with 'imagemin'
-      if [ "$file_extension" = 'gif' ]; then
+      if [ "$file_extension" = 'gif' ] || [ "$file_extension" = 'svg' ]; then
         cp "$1/src/img/$file" "$1/interface/static/img/$filename"
       else
         imagemin "$1/src/img/$file" > "$1/interface/static/img/$filename" &
