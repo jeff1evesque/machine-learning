@@ -128,4 +128,4 @@ def validate_password(password):
         req_max_c(password) and
         req_numeral(password) and
         (req_lower(password) or req_upper(password))
-	)
+    )
