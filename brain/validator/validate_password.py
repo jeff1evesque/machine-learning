@@ -44,7 +44,7 @@ def load_max(app=True, root='/vagrant'):
     else:
         with open(root + "/hiera/settings.yaml", 'r') as stream:
             try:
-				yamlres = yaml.load(stream)
+                yamlres = yaml.load(stream)
                 max_c = yamlres['validate_password']['password_max_c']
                 return {'password_max_c': max_c, 'error': None}
             except yaml.YAMLError as error:
@@ -127,4 +127,5 @@ def validate_password(password):
         req_min_c(password) and
         req_max_c(password) and
         req_numeral(password) and
-        (req_lower(password) or req_upper(password)))
+        (req_lower(password) or req_upper(password))
+	)
