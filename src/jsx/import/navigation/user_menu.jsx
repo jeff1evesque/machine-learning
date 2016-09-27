@@ -60,7 +60,7 @@ var UserMenu = React.createClass({
 
         {/* return:
             @homeHover, is accessible within child component as
-                'this.props.homeHover'
+                'this.props.hover'
         */}
         return(
             <nav className='main-navigation'>
