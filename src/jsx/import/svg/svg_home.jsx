@@ -37,8 +37,9 @@ var SvgHome = React.createClass({
                 height='45px' viewBox='0 0 626.000000 626.000000'
                 preserveAspectRatio='xMidYMid meet'
             >
-                <g transform='translate(0.000000,626.000000)
-                    scale(0.100000,-0.100000)' stroke='none'
+                <g transform={`translate(0.000000,626.000000)
+                    scale(0.100000,-0.100000)`}
+                    stroke='none'
                 >
 
                     <path style={{fill:this.state.roof_color}} d={`M3020 5606
