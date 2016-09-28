@@ -16,17 +16,21 @@ var SvgHome = React.createClass({
             house_color: '#404040',
         };
     },
+  // callback for mouseOver home svg
+    mouseOverHome: function(event) {
+        this.setState({roof_color: '#003300'});
+    },
+  // callback for mouseOut home svg
+    mouseOutHome: function(event) {
+        this.setState({roof_color: '#808080'});
+    },
   // triggered when 'state properties' change
     render: function(){
-      // implement hover effect
-        if (this.props.hover) {
-            this.setState({roof_color: '#003300'});
-        }
-
         return(
             <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='45px'
                 height='45px' viewBox='0 0 626.000000 626.000000'
-                preserveAspectRatio='xMidYMid meet'
+                preserveAspectRatio='xMidYMid meet' onMouseOver={this.mouseOverHome}
+                onMouseOut={this.mouseOutHome}
             >
                 <g transform={`translate(0.000000,626.000000)
                     scale(0.100000,-0.100000)`}
