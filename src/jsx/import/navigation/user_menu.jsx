@@ -4,6 +4,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import SvgHome from '../svg/svg_home.jsx';
+
 var UserMenu = React.createClass({
   // callback for home page
     clickHome: function(event) {
@@ -37,7 +39,7 @@ var UserMenu = React.createClass({
                    className='icon home'
                    onClick={this.clickHome}
                 >
-                    <img src='static/img/home.svg' alt='Home' />
+                    <SvgHome />
                 </a>
                 <a href='#'
                    className='btn mn-2'
