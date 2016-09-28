@@ -29,7 +29,8 @@ var SvgHome = React.createClass({
         return(
             <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='45px'
                 height='45px' viewBox='0 0 626.000000 626.000000'
-                preserveAspectRatio='xMidYMid meet' onMouseOver={this.mouseOverHome}
+                preserveAspectRatio='xMidYMid meet'
+                onMouseOver={this.mouseOverHome}
                 onMouseOut={this.mouseOutHome}
             >
                 <g transform={`translate(0.000000,626.000000)
