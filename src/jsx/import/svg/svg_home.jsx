@@ -28,7 +28,9 @@ var SvgHome = React.createClass({
   // triggered when 'state properties' change
     render: function(){
       // implement hover effect
-        this.hover(this.props.hover);
+        if (this.props.hover) {
+            this.hover(this.props.hover);
+        }
 
         return(
             <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='45px'
