@@ -4,7 +4,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import SvgHome from '../general/spinner.jsx';
+import SvgHome from '../svg/svg_home.jsx';
 
 var UserMenu = React.createClass({
   // initial 'state properties'
