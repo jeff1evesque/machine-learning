@@ -15,7 +15,7 @@ var UserMenu = React.createClass({
     },
   // call back: return home svg
     getSvgHome: function() {
-        if (this.state.svg_home) {
+        if (this.state.home_hover) {
             return SvgHome;
         }
         else {
