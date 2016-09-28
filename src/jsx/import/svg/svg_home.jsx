@@ -18,7 +18,7 @@ var SvgHome = React.createClass({
     },
   // callback for mouseOver home svg
     mouseOverHome: function(event) {
-        this.setState({roof_color: '#003300'});
+        this.setState({roof_color: '#5ca941'});
     },
   // callback for mouseOut home svg
     mouseOutHome: function(event) {
