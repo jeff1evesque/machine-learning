@@ -61,7 +61,7 @@ def req_min_c(password):
 
     '''
     min_c = load_min(app=False)['password_min_c']
-    min_c = 10 if min_c is None else min_c
+    min_c = 10 if (min_c is None or min_c < 10) else min_c
     return len(password) >= min_c
 
 
@@ -75,7 +75,7 @@ def req_max_c(password):
 
     '''
     max_c = load_max(app=False)['password_max_c']
-    max_c = 64 if max_c is None else max_c
+    max_c = 64 if (max_c is None or max_c < 64) else max_c
     return len(password) <= max_c
 
 
@@ -88,7 +88,7 @@ def req_numeral(password):
 
     '''
     numerals = '0123456789'
-    return any(map(lambda n: n in password, list(numerals)))
+    return any(a in password for a in numerals)
 
 
 def req_lower(password):
@@ -100,7 +100,7 @@ def req_lower(password):
 
     '''
     lowers = 'abcdefghijklmnopqrstuvwxyz'
-    return any(map(lambda a: a in password, list(lowers)))
+    return any(a in password for a in lowers)
 
 
 def req_upper(password):
@@ -112,7 +112,7 @@ def req_upper(password):
 
     '''
     uppers = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-    return any(map(lambda a: a in password, list(uppers)))
+    return any(a in password for a in uppers)
 
 
 def validate_password(password):
