@@ -16,20 +16,11 @@ var SvgHome = React.createClass({
             house_color: '#404040',
         };
     },
-  // callback for setting roof color
-   hover: function(event) {
-        if (event) {
-            this.setState({roof_color: '#003300'});
-        }
-        else {
-            this.setState({roof_color: '#808080'});
-        }
-    },
   // triggered when 'state properties' change
     render: function(){
       // implement hover effect
         if (this.props.hover) {
-            this.hover(this.props.hover);
+            this.setState({roof_color: '#003300'});
         }
 
         return(
