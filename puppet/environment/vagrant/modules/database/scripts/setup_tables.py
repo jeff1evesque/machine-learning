@@ -75,6 +75,7 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                             last_name VARCHAR (100) NOT NULL,
                             username VARCHAR (50) NOT NULL,
                             email VARCHAR (255) NOT NULL,
+                            password VARCHAR (128) NOT NULL,
                             INDEX (username)
                         );
                         '''
