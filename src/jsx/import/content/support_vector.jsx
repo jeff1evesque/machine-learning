@@ -65,7 +65,7 @@ var SupportVector = React.createClass({
             var ajaxEndpoint = '/load-data/';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.svmForm)
+                'data': new FormData(this.refs.analysisForm)
             };
 
           // boolean to show ajax spinner
@@ -122,7 +122,7 @@ var SupportVector = React.createClass({
         }
 
         {/* return:
-            @svmForm, attribute is used within 'handleSubmit' callback
+            @analysisForm, attribute is used within 'handleSubmit' callback
             @formResult, is accessible within child component as
                 'this.props.formResult'
         */}
