@@ -71,8 +71,6 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
         sql_statement = '''\
                         CREATE TABLE IF NOT EXISTS tbl_user (
                             id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            first_name VARCHAR (100) NOT NULL,
-                            last_name VARCHAR (100) NOT NULL,
                             username VARCHAR (50) NOT NULL,
                             email VARCHAR (255) NOT NULL,
                             password VARCHAR (128) NOT NULL,
