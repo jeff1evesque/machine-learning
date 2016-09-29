@@ -173,22 +173,26 @@ def retrieve_sv_model():
         svr_list = Cache_Model().get_all_titles('svr_model')
         svm_result = []
         svr_result = []
+        result_error = []
 
         # get svm model(s)
         if svm_list['result']:
             svm_result = svm_list['result']
-        else:
-            return json.dumps({'error': svm_list['error']})
+        elif svm_list['error']:
+            result_error.extend(svm_list['error'])
 
         # get svr model(s)
         if svr_list['result']:
             svr_result = svr_list['result']
-        else:
-            return json.dumps({'error': svr_list['error']})
+        elif svr_list['error']:
+            result_error.extend(svr_list['error'])
 
         # return combined model(s)
         combined_result = svm_result + svr_result
-        return json.dumps(combined_result)
+        if combined_result:
+            return json.dumps(combined_result)
+        elif result_error:
+            return json.dumps({'error': error})
 
 
 @blueprint.route(
