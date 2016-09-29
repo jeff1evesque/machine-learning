@@ -9,9 +9,10 @@ class compiler::start_sass {
     $environment     = $hiera_general['environment']
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
 
-    # ensure service starts at boot
-    service { 'sass':
-        ensure => 'running',
-        enable => true,
+    # manually compile
+    exec { 'sass':
+        command  => "./sass ${root_dir}",
+        cwd      => "${dev_env_path}/modules/compiler/scripts",
+        provider => shell,
     }
 }
