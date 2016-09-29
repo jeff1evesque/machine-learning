@@ -67,6 +67,18 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
         # create cursor object
         cur = conn.cursor()
 
+        # create 'tbl_user'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_user (
+                            id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            username VARCHAR (50) NOT NULL,
+                            email VARCHAR (255) NOT NULL,
+                            password VARCHAR (128) NOT NULL,
+                            INDEX (username)
+                        );
+                        '''
+        cur.execute(sql_statement)
+
         # create 'tbl_feature_count'
         sql_statement = '''\
                         CREATE TABLE IF NOT EXISTS tbl_feature_count (
