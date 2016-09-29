@@ -6,25 +6,14 @@ class compiler::start_browserify {
     # variables
     $hiera_general   = hiera('general')
     $root_dir        = $hiera_general['root']
-    $vagrant_mounted = $hiera_general['vagrant_implement']
     $environment     = $hiera_general['environment']
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
 
-    # run sass
-    if $vagrant_mounted {
-        # ensure service starts at boot
-        service { 'browserify':
-            ensure => 'running',
-            enable => true,
-        }
-    }
-    else {
-        # manually compile
-        exec { 'browserify':
-            command  => "./browserify ${root_dir}",
-            cwd      => "${dev_env_path}/modules/compiler/scripts",
-            path     => '/usr/bin',
-            provider => shell,
-        }
+    # manually compile
+    exec { 'browserify':
+        command  => "./browserify ${root_dir}",
+        cwd      => "${dev_env_path}/modules/compiler/scripts",
+        path     => '/usr/bin',
+        provider => shell,
     }
 }
