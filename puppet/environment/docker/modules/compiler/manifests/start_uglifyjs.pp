@@ -9,9 +9,10 @@ class compiler::start_uglifyjs {
     $environment     = $hiera_general['environment']
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
 
-    # ensure service starts at boot
-    service { 'uglifyjs':
-        ensure => 'running',
-        enable => true,
+    # manually compile
+    exec { 'uglifyjs':
+        command  => "./uglifyjs ${root_dir}",
+        cwd      => "${dev_env_path}/modules/compiler/scripts",
+        provider => shell,
     }
 }
