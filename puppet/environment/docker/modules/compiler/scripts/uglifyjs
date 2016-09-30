@@ -17,6 +17,9 @@ cd "$1"/src/js && for file in *; do
   if [ "$extension" = 'js' ]
   then
 
+    # ensure proper eol
+    dos2unix "$1/src/js/$file"
+
     # minifiy with 'uglifyjs'
     uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
 
