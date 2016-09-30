@@ -4,12 +4,12 @@
 ###
 ### Note: this installs 'dos2unix'
 ###
-class package::tofrodos {
+class package::dos2unix {
     ## local variables
     $hiera_dev = hiera('development')
-    $version   = $hiera_dev['apt']['tofrodos']
+    $version   = $hiera_dev['apt']['dos2unix']
 
-    package { 'tofrodos':
+    package { 'dos2unix':
         ensure => $version,
     }
 }
