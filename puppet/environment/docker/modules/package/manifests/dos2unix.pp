@@ -8,7 +8,7 @@ class package::dos2unix {
     $hiera_dev = hiera('development')
     $version   = $hiera_dev['apt']['dos2unix']
 
-    package { 'tofrodos':
+    package { 'dos2unix':
         ensure => $version,
     }
 }
