@@ -31,7 +31,7 @@ inotifywait "$1"/src/scss/ -m -e close_write -e move --format %f |
 
       # compile with 'scss'
       node-sass "$1/src/scss/$file" "$1/interface/static/css/$filename".min.css --output-style compressed
-      node-sass "$1/src/scss/style.scss" "$1"/interface/static/css/style.min.css --output-style compressed
+      node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
 
     fi
   done
