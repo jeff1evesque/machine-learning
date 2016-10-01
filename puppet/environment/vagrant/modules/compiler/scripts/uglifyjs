@@ -29,9 +29,6 @@ inotifywait "$1"/src/js/ -m -e close_write -e move --format %f |
     if [ "$extension" = 'js' ]
     then
 
-      # ensure proper eol
-      dos2unix "$1/src/js/$file"
-
       # minifiy with 'uglifyjs'
       uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
 
