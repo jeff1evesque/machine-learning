@@ -18,9 +18,6 @@ cd "$1"/src/jsx && for file in *; do
   if [ "$file_extension" = 'jsx' ]
   then
 
-    # ensure proper eol
-    dos2unix "$1/src/jsx/$file"
-
     # convert with 'browserify'
     (cd /usr/lib/node_modules && browserify "$1/src/jsx/$file" -t [ babelify --presets es2015,react ] -o "$1/src/js/$filename.js")
     (cd /usr/lib/node_modules && browserify "$1"/src/jsx/content.jsx -t [ babelify --presets es2015,react ] -o "$1"/src/js/content.js)
