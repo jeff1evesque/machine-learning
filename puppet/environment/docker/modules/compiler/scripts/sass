@@ -18,9 +18,6 @@ cd "$1"/src/scss && for file in *; do
   if [ "$extension" = 'scss' ] && [ "${file:0:1}" != '_' ]
   then
 
-    # ensure proper eol
-    dos2unix "$1/src/scss/$file"
-
     # compile with 'scss'
     node-sass "$1/src/scss/$file" "$1/interface/static/css/$filename".min.css --output-style compressed
     node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
