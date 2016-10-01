@@ -22,7 +22,7 @@ cat /dev/null > "$1"/src/js/.gitignore
 
 
 # watch '[root_dir]/src/jsx/' subdirectory
-inotifywait "$1"/src/jsx/ -m -e close_write -e move --format %f |
+inotifywait "$1"/src/jsx/ -m -r -e close_write -e move --format %f |
   # Convert JSX to JS
   while read -r file; do
     # filename (without 'last' extension)
