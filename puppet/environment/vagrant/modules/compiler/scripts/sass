@@ -3,6 +3,7 @@
 # @sass: minify scss file(s).
 #
 # @$1, first passed-in argument from command ($0 is the filename)
+# @$2, second passed-in argument from command
 
 
 # Pre-Pathing: allow 'sass' command
@@ -18,20 +19,7 @@ exec &> >(while read -r line; do
 done)
 
 # watch '[root_dir]/src/scss/' subdirectory
-inotifywait "$1"/src/scss/ -m -r -e close_write -e move --format %f |
-  # Compile CSS
-  while read -r file; do
-    # get last `.` occurence as starting extension
-    extension=${file##*.}
-    # filename (without 'last' extension)
-    filename="${file%.*}"
+inotifywait "$1"/src/scss/ -m -r -e close_write -e move |
 
-    if [ "$extension" = 'scss' ] && [ "${file:0:1}" != '_' ]
-    then
-
-      # compile with 'scss'
-      node-sass "$1/src/scss/$file" "$1/interface/static/css/$filename".min.css --output-style compressed
-      node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
-
-    fi
-  done
+  # compile with 'scss'
+  node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
