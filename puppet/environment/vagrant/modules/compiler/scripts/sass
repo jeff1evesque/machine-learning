@@ -3,7 +3,6 @@
 # @sass: minify scss file(s).
 #
 # @$1, first passed-in argument from command ($0 is the filename)
-# @$2, second passed-in argument from command
 
 
 # Pre-Pathing: allow 'sass' command
