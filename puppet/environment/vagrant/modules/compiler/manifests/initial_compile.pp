@@ -18,7 +18,7 @@ class compiler::initial_compile {
 
     $sources.each |String $source| {
         ## variables
-        $check_files = 'test "$(ls -A ${root_dir}/src/${source})"'
+        $check_files = 'test "\$(ls -A ${root_dir}/src/${source})"'
         $touch_files = "touch ${root_dir}/src/${source}/*"
 
         ## touch source: ensure initial build compiles every source file.
