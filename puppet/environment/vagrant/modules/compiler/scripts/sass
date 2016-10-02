@@ -21,4 +21,4 @@ done)
 inotifywait "$1"/src/scss/ -m -r -e close_write -e move |
 
   # compile with 'scss'
-  (node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed)
+  node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
