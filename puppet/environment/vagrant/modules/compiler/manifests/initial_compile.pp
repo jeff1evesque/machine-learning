@@ -18,8 +18,8 @@ class compiler::initial_compile {
 
     $sources.each |String $source| {
         ## variables
-        $check_files = "if [ \"$(ls -A ${root_dir}/src/${source}/)\" ];"
-        $touch_files = "then touch ${root_dir}/src/${source}/*; fi"
+        $check_files = "ls -A ${root_dir}/src/${source}/"
+        $touch_files = "touch ${root_dir}/src/${source}/*"
 
         ## touch source: ensure initial build compiles every source file.
         #
@@ -32,8 +32,10 @@ class compiler::initial_compile {
         #
         #  Note: every 'command' implementation checks if directory is
         #        nonempty, then touch all files in the directory, respectively.
+        #
         exec { "touch-${source}-files":
-            command  => "${check_files} ${touch_files}",
+            command  => $touch_files,
+            onlyif   => $check_files,
             provider => shell,
         }
     }
