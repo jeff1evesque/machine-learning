@@ -32,9 +32,9 @@ var SvgMenu = React.createClass({
         var bool_toggle = !this.state.activate_menu;
         this.setState({activate_menu: bool_toggle});
         this.props.onChange({activate_menu: true});
-    }
+    },
   // triggered when 'state properties' change
-    render: function(){
+    render: function() {
         return(
             <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='18px'
                 height='24px' viewBox='0 0 12 16'
