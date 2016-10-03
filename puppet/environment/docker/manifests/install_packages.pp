@@ -36,6 +36,9 @@ class general_packages {
     contain package::pyyaml
     contain package::flask_script
     contain package::pytest_flask
+    contain package::python_dev
+    contain package::libssl_dev
+    contain package::scrypt
 }
 
 ## initiate
