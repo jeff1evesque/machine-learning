@@ -7,9 +7,9 @@ This file contains various cryptography wrappers.
 
 from flask import current_app
 import os
-import hashlib
 import base64
 import yaml
+import scrypt
 
 
 def getsalt(app=True, root='/vagrant'):
@@ -41,7 +41,11 @@ def hashpass(p):
 
     '''
     salt = getsalt(app=False)
-    return hashlib.sha512(salt + p).hexdigest() + "$" + salt
+    try:
+        hashed = scrypt.hash(p, salt, N=pow(2,18), r=8,p=1, buflen=512).encode("hex")
+        return hashed + "$" + salt
+    except scrypt.error:
+        return False
 
 
 def verifypass(p, h):
@@ -55,4 +59,5 @@ def verifypass(p, h):
 
     '''
     h, s = h.split('$')
-    return hashlib.sha512(s + p).hexdigest() == h
+    hashed = scrypt.hash(p, s, N=pow(2,18), r=8,p=1, buflen=512).encode("hex")
+    return hashed == h
