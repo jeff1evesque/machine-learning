@@ -12,7 +12,7 @@ import base64
 import yaml
 
 
-def load_salt(app=True, root='/vagrant'):
+def getsalt(app=True, root='/vagrant'):
     '''@load_salt
 
     This method returns the salt length.
@@ -27,9 +27,9 @@ def load_salt(app=True, root='/vagrant'):
         with open(root + "/hiera/settings.yaml", 'r') as stream:
             try:
                 salt_length = yaml.load(stream)['crypto']['salt_length']
-                return {'salt_length': salt_length, 'error': None}
+                return base64.b64encode(os.urandom(salt_length))
             except yaml.YAMLError as error:
-                return {'salt_length': None, 'error': error}
+                return base64.b64encode(os.urandom(32))
 
 
 def hashpass(p):
@@ -40,10 +40,8 @@ def hashpass(p):
     @salt - a random string of saltlength bytes generated to hash the password
 
     '''
-    salt_length = load_salt(app=False)['salt_length']
-    salt_length = salt_length if salt_length is not None else 32
-    salt = base64.b64encode(os.urandom(salt_length))
-    return hashlib.sha512(salt + p).hexdigest()+"$"+salt
+    salt = getsalt(app=False)
+    return hashlib.sha512(salt + p).hexdigest() + "$" + salt
 
 
 def verifypass(p, h):
