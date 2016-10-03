@@ -24,9 +24,10 @@ var SvgMenu = React.createClass({
     mouseOutIcon: function(event) {
         this.setState({color: '#333'});
     },
-  {/* callback for onClick:
-      @activate_menu, is accessible to parent component
-  */}
+  // callback for clickMenu
+  //
+  //   @activate_menu, is accessible to parent component
+  //
     clickMenu: function(event) {
         var bool_toggle = !this.state.activate_menu;
         this.setState({activate_menu: bool_toggle});
