@@ -37,9 +37,15 @@ def getscryptparams(app=True, root='/vagrant'):
 
     This method returns the parameters N,r,p for the scrypt function.
 
+    @N - work factor (iteration count). N must be power of 2, so the settings
+         value indicates the exponent.
+    @r - blocksize for underlying hash. Should be increased based on memory
+         improvement.
+    @p - parallelization factor. Should be increased based on CPU improvement.
+
     Note: No minimum is enforced for these parameters because a minimum can
     potentially break the hashing function in a system incapable of meeting
-    those requirements
+    those requirements.
 
     @app, indicates if function is to be used by application, or manually
 
