@@ -75,6 +75,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 DEBUG_LOG_PATH=settings['application']['debug_log_path'],
                 MODEL_TYPE=settings['application']['model_type'],
                 SALT_LENGTH=settings['crypto']['salt_length'],
+                SCRYPT_N=settings['crypto']['scrypt_n'],
+                SCRYPT_R=settings['crypto']['scrypt_r'],
+                SCRYPT_P=settings['crypto']['scrypt_p'],
                 USER_ID=0,
             )
 

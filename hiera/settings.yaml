@@ -76,7 +76,9 @@ application:
 
 crypto:
     salt_length: 32
-
+    scrypt_n: 18
+    scrypt_r: 8
+    scrypt_p: 1
 validate_password:
     password_min_c: 10
     password_max_c: 64
