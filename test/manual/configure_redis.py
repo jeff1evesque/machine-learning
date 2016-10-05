@@ -10,7 +10,7 @@ import subprocess
 def configure_redis():
     '''
 
-    Empties all redis database(s).
+    Remove all keys from all existing redis database(s).
 
     '''
 
