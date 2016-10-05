@@ -9,6 +9,12 @@ import MySQLdb as DB
 
 
 def configure_database():
+    '''
+
+    Empties corresponding database tables, and checks each row count is zero.
+
+    '''
+
     # local variables
     configuration = '/vagrant/hiera/test/hiera/settings.yaml'
 
@@ -33,22 +39,34 @@ def configure_database():
             # create cursor object
             cur = conn.cursor()
 
-            # truncate 'tbl_feature_count'
-            sql_statement = 'TRUNCATE TABLE tbl_feature_count;'
-            cur.execute(sql_statement)
+            # truncate database tables
+            cur.execute('TRUNCATE TABLE tbl_feature_count;')
+            cur.execute('TRUNCATE TABLE tbl_dataset_entity;')
+            cur.execute('TRUNCATE TABLE tbl_observation_label;')
+            cur.execute('TRUNCATE TABLE tbl_svm_data;')
+            cur.execute('TRUNCATE TABLE tbl_svr_data;')
 
-            # create 'tbl_dataset_entity'
-            sql_statement = 'TRUNCATE TABLE tbl_dataset_entity;'
-            cur.execute(sql_statement)
+            # count columns
+            count_feature = cur.execute(
+                'SELECT COUNT(*) FROM tbl_feature_count;'
+            )
+            count_entity = cur.execute(
+                'SELECT COUNT(*) FROM tbl_dataset_entity;'
+            )
+            count_label = cur.execute(
+                'SELECT COUNT(*) FROM tbl_observation_label;'
+            )
+            count_svm = cur.execute(
+                'SELECT COUNT(*) FROM tbl_svm_data;'
+            )
+            count_svr = cur.execute(
+                'SELECT COUNT(*) FROM tbl_svr_data;'
+            )
 
-            # create 'tbl_observation_label'
-            sql_statement = 'TRUNCATE TABLE tbl_observation_label;'
-            cur.execute(sql_statement)
-
-            # create 'tbl_svm_data'
-            sql_statement = 'TRUNCATE TABLE tbl_svm_data;'
-            cur.execute(sql_statement)
-
-            # create 'tbl_svr_data'
-            sql_statement = 'TRUNCATE TABLE tbl_svr_data;'
-            cur.execute(sql_statement)
+    assert (
+        count_feature == 0 and
+        count_entity == 0 and
+        count_label == 0 and
+        count_svm == 0 and
+        count_svr == 0
+    )
