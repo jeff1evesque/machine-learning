@@ -39,6 +39,14 @@ class database::server {
                 max_user_connections     => '1',
                 password_hash            => mysql_password($provisioner_pass),
             },
+            "${tester}@${db_host}" => {
+                ensure                   => 'present',
+                max_connections_per_hour => '0',
+                max_queries_per_hour     => '0',
+                max_updates_per_hour     => '0',
+                max_user_connections     => '1',
+                password_hash            => mysql_password($tester_pass),
+            },
         },
         grants        => {
             "${db_user}@${host}/${db}.*"     => {
@@ -54,6 +62,13 @@ class database::server {
                 privileges => ['INSERT', 'CREATE'],
                 table      => "${db}.*",
                 user       => "${provisioner}@${host}",
+            },
+            "${tester}@${host}/${db}.*" => {
+                ensure     => 'present',
+                options    => ['GRANT'],
+                privileges => ['DROP'],
+                table      => "${db}.*",
+                user       => "${tester}@${host}",
             },
         },
         databases     => {
