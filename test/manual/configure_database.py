@@ -1,6 +1,7 @@
 '''@configure_database
 
-This module will truncate database tables.
+This module will truncate corresponding database tables, which allow manual
+unit tests to be run as many times as needed.
 
 '''
 
@@ -24,14 +25,14 @@ def configure_database():
         settings = yaml.load(stream)
         host = settings['general']['host']
         db_ml = settings['database']['name']
-        provisioner = settings['database']['provisioner']
-        provisioner_password = settings['database']['provisioner_password']
+        tester = settings['database']['tester']
+        tester_password = settings['database']['tester_password']
 
         # create connection
         conn = DB.connect(
             host,
-            provisioner,
-            provisioner_password,
+            tester,
+            tester_password,
             db_ml
         )
 
