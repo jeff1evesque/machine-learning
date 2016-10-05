@@ -41,7 +41,7 @@ class database::server {
                 max_user_connections     => '1',
                 password_hash            => mysql_password($provisioner_pass),
             },
-            "${tester}@${db_host}" => {
+            "${tester}@${host}" => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
