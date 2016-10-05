@@ -1,6 +1,6 @@
 '''@configure_redis
 
-This module will flushall keys in the redis database.
+This module will FLUSHALL keys in the redis database.
 
 '''
 
@@ -18,5 +18,5 @@ def configure_redis():
 	subprocess.check_call(['redis-cli', 'FLUSHALL'])
 
     # assert FLUSHALL succeed
-	count_keys = subprocess.check_call(['redis-cli', 'DBSIZE'])
+    count_keys = subprocess.check_call(['redis-cli', 'DBSIZE'])
     assert count_keys == 0
