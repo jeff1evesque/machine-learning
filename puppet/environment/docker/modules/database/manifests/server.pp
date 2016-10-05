@@ -65,7 +65,7 @@ class database::server {
                 table      => "${db}.*",
                 user       => "${provisioner}@${db_host}",
             },
-            "${tester}@${host}/${db}.*" => {
+            "${tester}@${db_host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['SELECT', 'DROP'],
