@@ -15,7 +15,7 @@ def configure_redis():
     '''
 
     # flush all redis keys
-	subprocess.check_call(['redis-cli', 'FLUSHALL'])
+    subprocess.check_call(['redis-cli', 'FLUSHALL'])
 
     # assert FLUSHALL succeed
     count_keys = subprocess.check_call(['redis-cli', 'DBSIZE'])
