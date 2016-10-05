@@ -18,7 +18,7 @@ def configure_database():
     # local variables
     configuration = '/vagrant/hiera/test/hiera/settings.yaml'
 
-    # define configuration
+    # truncate tables
     with open(configuration, 'r') as stream:
         # local variables
         settings = yaml.load(stream)
@@ -63,6 +63,7 @@ def configure_database():
                 'SELECT COUNT(*) FROM tbl_svr_data;'
             )
 
+    # assert truncate succeeded
     assert (
         count_feature == 0 and
         count_entity == 0 and
