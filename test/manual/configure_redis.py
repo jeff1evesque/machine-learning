@@ -1,0 +1,22 @@
+'''@configure_redis
+
+This module will flushall keys in the redis database.
+
+'''
+
+import subprocess
+
+
+def configure_redis():
+    '''
+
+    Empties all redis database(s).
+
+    '''
+
+    # flush all redis keys
+	subprocess.check_call(['redis-cli', 'FLUSHALL'])
+
+    # assert FLUSHALL succeeed
+	count_keys = subprocess.check_call(['redis-cli', 'DBSIZE'])
+    assert count_keys == 0
