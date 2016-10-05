@@ -12,6 +12,8 @@ class database::server {
     $db_pass          = $hiera_database['password']
     $provisioner      = $hiera_database['provisioner']
     $provisioner_pass = $hiera_database['provisioner_password']
+    $tester           = $hiera_database['tester']
+    $tester_pass      = $hiera_database['tester_password']
     $root_pass        = $hiera_database['root_password']
 
     ## mysql::server: install, and configure mariadb-server
