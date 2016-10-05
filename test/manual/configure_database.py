@@ -49,19 +49,19 @@ def configure_database():
 
             # count columns
             count_feature = cur.execute(
-                'SELECT COUNT(*) FROM tbl_feature_count;'
+                'SELECT COUNT(*) AS n FROM tbl_feature_count HAVING n > 0;'
             )
             count_entity = cur.execute(
-                'SELECT COUNT(*) FROM tbl_dataset_entity;'
+                'SELECT COUNT(*) AS n FROM tbl_dataset_entity HAVING n > 0;'
             )
             count_label = cur.execute(
-                'SELECT COUNT(*) FROM tbl_observation_label;'
+                'SELECT COUNT(*) AS n FROM tbl_observation_label HAVING n > 0;'
             )
             count_svm = cur.execute(
-                'SELECT COUNT(*) FROM tbl_svm_data;'
+                'SELECT COUNT(*) AS n FROM tbl_svm_data HAVING n > 0;'
             )
             count_svr = cur.execute(
-                'SELECT COUNT(*) FROM tbl_svr_data;'
+                'SELECT COUNT(*) AS n FROM tbl_svr_data HAVING n > 0;'
             )
 
     # assert truncate succeeded
