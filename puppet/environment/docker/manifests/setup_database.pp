@@ -25,4 +25,3 @@ class create_db {
 
 ## initiate
 include create_db
-
