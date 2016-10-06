@@ -70,7 +70,7 @@ class database::server {
                 options    => ['GRANT'],
                 privileges => ['SELECT', 'DROP'],
                 table      => "${db}.*",
-                user       => "${tester}@${host}",
+                user       => "${tester}@${db_host}",
             },
         },
         databases     => {
