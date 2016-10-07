@@ -4,7 +4,17 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import SvgHome from '../svg/svg_home.jsx';
+
 var UserMenu = React.createClass({
+  // callback for home page
+    clickHome: function(event) {
+      // prevent page reload
+        event.preventDefault();
+
+      // return state to parent component
+        this.props.onChange({home: true});
+    },
   // callback for login page
     clickLogin: function(event) {
       // prevent page reload
@@ -25,6 +35,12 @@ var UserMenu = React.createClass({
     render: function() {
         return(
             <nav className='main-navigation'>
+                <a href='#'
+                   className='icon home'
+                   onClick={this.clickHome}
+                >
+                    <SvgHome />
+                </a>
                 <a href='#'
                    className='btn mn-2'
                    onClick={this.clickLogin}

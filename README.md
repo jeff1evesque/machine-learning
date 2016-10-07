@@ -385,18 +385,22 @@ $ cd /path/to/machine-learning/
 $ vagrant up
 $ vagrant ssh
 vagrant@vagrant-ubuntu-trusty-64:~$ (cd /vagrant/test && pytest manual)
-================================================= test session starts ==================================================
-platform linux2 -- Python 2.7.6, pytest-3.0.2, py-1.4.31, pluggy-0.3.1
+========================================= test session starts ==========================================
+platform linux2 -- Python 2.7.6, pytest-3.0.3, py-1.4.31, pluggy-0.4.0
 rootdir: /vagrant/test/manual, inifile: pytest.ini
 plugins: flask-0.10.0
-collected 16 items
+collected 20 items
 
+manual/configure_database.py .
+manual/configure_redis.py .
+manual/authentication/pytest_crypto.py .
+manual/authentication/pytest_validate_password.py .
 manual/programmatic_interface/dataset_url/pytest_svm_dataset_url.py ....
 manual/programmatic_interface/dataset_url/pytest_svr_dataset_url.py ....
 manual/programmatic_interface/file_upload/pytest_svm_file_upload.py ....
 manual/programmatic_interface/file_upload/pytest_svr_file_upload.py ....
 
-============================================== 16 passed in 58.60 seconds ==============================================
+====================================== 20 passed in 51.27 seconds ======================================
 ```
 
 **Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
