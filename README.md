@@ -309,7 +309,7 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
 **Note:** the above `post` request, can be implemented in a different language,
  respectively.
 
-**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/documentation/programmatic/data_attributes.rst) can be nested in above `POST` request.
+**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/documentation/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
 
 ### Test Scripts
 
