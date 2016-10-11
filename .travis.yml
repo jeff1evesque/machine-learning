@@ -98,7 +98,7 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
-  - find documentation -name '*.rst' -type -f exec rst-lint {} \;
+  - find documentation -name '*.rst' -type f exec rst-lint {} \;
 
   # build docker container(s)
   - docker build -f default.dockerfile -t container-default .
