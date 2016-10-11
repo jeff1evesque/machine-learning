@@ -309,9 +309,8 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
 **Note:** the above `post` request, can be implemented in a different language,
  respectively.
 
-#### Data Attributes
+**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/documentation/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
 
-The [Data attributes](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/programmatic/data_attributes.rst) implemented.
 ### Test Scripts
 
 This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing),
