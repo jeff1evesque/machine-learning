@@ -98,7 +98,7 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
-  - find documentation -name '*.rst' -type f -exec rst-lint {} \;
+  - val=$(find /vagrant/documentation -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'WARNING|ERROR'); echo $?
 
   # build docker container(s)
   - docker build -f default.dockerfile -t container-default .
