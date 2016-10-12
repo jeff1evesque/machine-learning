@@ -126,7 +126,7 @@ shell access.
 Fork this project in your GitHub account.  Then, clone your repository, with
  one of the following approaches:
 
-- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst#ssimple-clone):
+- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst#simple-clone):
  clone the remote master branch.
 - [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst#commit-hash):
  clone the remote master branch, then checkout a specific commit hash.
