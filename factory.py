@@ -75,7 +75,12 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 DEBUG_LOG_PATH=settings['application']['debug_log_path'],
                 MODEL_TYPE=settings['application']['model_type'],
                 SALT_LENGTH=settings['crypto']['salt_length'],
-                USER_ID=0,
+                SCRYPT_N=settings['crypto']['scrypt_n'],
+                SCRYPT_R=settings['crypto']['scrypt_r'],
+                SCRYPT_P=settings['crypto']['scrypt_p'],
+                PASSWORD_MIN_C=settings['validate_password']['password_min_c'],
+                PASSWORD_MAX_C=settings['validate_password']['password_max_c'],
+                USER_ID=0
             )
 
         # log handler: requires the below logger
