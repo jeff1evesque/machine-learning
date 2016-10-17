@@ -78,7 +78,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 SCRYPT_N=settings['crypto']['scrypt_n'],
                 SCRYPT_R=settings['crypto']['scrypt_r'],
                 SCRYPT_P=settings['crypto']['scrypt_p'],
-                USER_ID=0,
+                PASSWORD_MIN_C=settings['validate_password']['password_min_c'],
+                PASSWORD_MAX_C=settings['validate_password']['password_max_c'],
+                USER_ID=0
             )
 
         # log handler: requires the below logger
