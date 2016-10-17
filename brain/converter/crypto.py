@@ -44,8 +44,8 @@ def getscryptparams(app=True, root='/vagrant'):
     @p - parallelization factor. Should be increased based on CPU improvement.
 
     Note: No minimum is enforced for these parameters because a minimum can
-    potentially break the hashing function in a system incapable of meeting
-    those requirements.
+    break the hashing function in a system incapable of meeting those
+    requirements.
 
     @app, indicates if function is to be used by application, or manually
 
