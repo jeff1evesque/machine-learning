@@ -60,7 +60,7 @@ install:
   - gem install yaml-lint -v 0.0.7
   - npm install -g dockerlint@0.2.0
 
-## implement linting
+## implement linting / unit tests
 #
 #  @puppet-lint, the following issue needs to be checked if it has been
 #      resolved, so the '--no-ensure_first_param-check' abusive flag
