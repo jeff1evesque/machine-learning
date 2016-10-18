@@ -61,7 +61,7 @@ install:
   - npm install -g dockerlint@0.2.0
   - pip install restructuredtext_lint==0.17.2
 
-## implement linting
+## implement linting / unit tests
 #
 #  @puppet-lint, the following issue needs to be checked if it has been
 #      resolved, so the '--no-ensure_first_param-check' abusive flag
