@@ -59,8 +59,9 @@ install:
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint -v 0.0.7
   - npm install -g dockerlint@0.2.0
+  - pip install restructuredtext_lint==0.17.2
 
-## implement linting
+## implement linting / unit tests
 #
 #  @puppet-lint, the following issue needs to be checked if it has been
 #      resolved, so the '--no-ensure_first_param-check' abusive flag
@@ -97,6 +98,7 @@ script:
   - yaml-lint hiera/
   - yaml-lint *.yaml
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
+  - val=$(find documentation -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
 
   # build docker container(s)
   - docker build -f default.dockerfile -t container-default .

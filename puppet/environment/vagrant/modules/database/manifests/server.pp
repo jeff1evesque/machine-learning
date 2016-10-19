@@ -12,6 +12,8 @@ class database::server {
     $db_pass          = $hiera_database['password']
     $provisioner      = $hiera_database['provisioner']
     $provisioner_pass = $hiera_database['provisioner_password']
+    $tester           = $hiera_database['tester']
+    $tester_pass      = $hiera_database['tester_password']
     $root_pass        = $hiera_database['root_password']
 
     ## mysql::server: install, and configure mariadb-server
@@ -39,6 +41,14 @@ class database::server {
                 max_user_connections     => '1',
                 password_hash            => mysql_password($provisioner_pass),
             },
+            "${tester}@${host}" => {
+                ensure                   => 'present',
+                max_connections_per_hour => '0',
+                max_queries_per_hour     => '0',
+                max_updates_per_hour     => '0',
+                max_user_connections     => '1',
+                password_hash            => mysql_password($tester_pass),
+            },
         },
         grants        => {
             "${db_user}@${host}/${db}.*"     => {
@@ -54,6 +64,13 @@ class database::server {
                 privileges => ['INSERT', 'CREATE'],
                 table      => "${db}.*",
                 user       => "${provisioner}@${host}",
+            },
+            "${tester}@${host}/${db}.*" => {
+                ensure     => 'present',
+                options    => ['GRANT'],
+                privileges => ['SELECT', 'DROP'],
+                table      => "${db}.*",
+                user       => "${tester}@${host}",
             },
         },
         databases     => {

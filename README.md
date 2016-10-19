@@ -126,75 +126,14 @@ shell access.
 Fork this project in your GitHub account.  Then, clone your repository, with
  one of the following approaches:
 
-- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#simple-clone):
+- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst#simple-clone):
  clone the remote master branch.
-- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#commit-hash):
+- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst#commit-hash):
  clone the remote master branch, then checkout a specific commit hash.
-- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#release-tag):
+- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst#release-tag):
  clone the remote branch, associated with the desired release tag.
 
-### Simple clone
-
-```bash
-cd /[destination-directory]
-sudo git clone https://[account]@github.com/[account]/machine-learning.git
-cd machine-learning
-git remote add upstream https://github.com/[account]/machine-learning.git
-```
-
-**Note:** `[destination-directory]` corresponds to the desired directory path,
- where the project repository resides.  `[account]` corresponds to the git
- username, where the repository is being cloned from.  If the original
- repository was forked, then use your git username, otherwise, use
- `jeff1evesque`.
-
-### Commit hash
-
-```bash
-cd /[destination-directory]
-sudo git clone https://[account]@github.com/[account]/machine-learning.git
-cd machine-learning
-git remote add upstream https://github.com/[account]/machine-learning.git
-# stop vagrant
-vagrant halt
-# ensure diffs don't prevent checkout, then checkout hash
-git checkout -- .
-git checkout [hash]
-```
-
-**Note:** the hashes associated with a release, can be found under the
- corresponding tag value, on the [release](https://github.com/jeff1evesque/machine-learning/releases)
- page.
-
-**Note:** `[destination-directory]` corresponds to the desired directory path,
- where the project repository resides.  `[account]` corresponds to the git
- username, where the repository is being cloned from.  If the original
- repository was forked, then use your git username, otherwise, use
- `jeff1evesque`.
-
-### Release tag
-
-```bash
-cd /[destination-directory]
-# clone release tag: master branch does not exist
-sudo git clone -b [release-tag] --single-branch --depth 1 https://github.com/[account]/machine-learning.git [destination-directory]
-git remote add upstream https://github.com/[account]/machine-learning.git
-# create master branch from remote master
-cd machine-learning
-git checkout -b master
-git pull upstream master
-# return to release tag branch
-git checkout [release-tag]
-```
-
-**Note:** `[release-tag]` corresponds to the [release tag](https://github.com/jeff1evesque/machine-learning/tags)
- value, used to distinguish between releases.
-
-**Note:** `[destination-directory]` corresponds to the desired directory path,
- where the project repository resides.  `[account]` corresponds to the git
- username, where the repository is being cloned from.  If the original
- repository was forked, then use your git username, otherwise, use
- `jeff1evesque`.
+**Note**: various [approaches](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst) can be used to clone the repository, which would cover the possibility of cloning the repository, at a specific commit hash.
 
 ## Installation
 
@@ -309,52 +248,7 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
 **Note:** the above `post` request, can be implemented in a different language,
  respectively.
 
-Some additional sample files have been provided, which outline how the `data`
- attribute implement should be implemented, with respect to the above `post`
- implementation:
-
-- [SVM datasets](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm)
-  - [dataset url](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/dataset_url)
-  - [file upload](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/file_upload)
-- [SVR datasets](https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr)
-  - [dataset url](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/dataset_url)
-  - [file upload](https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/file_upload)
-
-**Note:** the content of each of the above files, can substituted for the above
- `data` attribute.
-
-#### Data Attributes
-
-The following (non-exhaustive) properties define the above implemented `data`
- attribute:
-
-- `model_id`: the numeric id value, of the generated model in the nosql
- datastore
-- `model_type`: corresponds to the desired model type, which can be one of
- the following:
-  - `classification`
-  - `regression`
-- `session_id`: the numeric id value, that represents the dataset stored in
- the sql database.
-- `dataset_type`: corresponds to one of the following types:
-  - `dataset_url`: indication that the supplied dataset will be url references
-  - `file_upload`: indication that the supplied dataset(s) will be defined as a
- json string within the `dataset` attribute
-- `session_type`: corresponds to one of the following session types:
-  - `data_new`
-  - `data_append`
-  - `model_generate`
-  - `model_predict`
-- `svm_dataset_type`: corresponds to one of the following dataset types:
-  - `json_string`: indicate that the dataset is being sent via a `post` request
-- `sv_kernel_type`: the type of kernel to apply to the support vector
- `model_type`:
-  - `linear`
-  - `polynomial`
-  - `rbf`
-  - `sigmoid`
-- `prediction_input[]`: an array of prediction input, supplied to the generated
- model to compute a prediction
+**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/documentation/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
 
 ### Test Scripts
 
@@ -385,18 +279,22 @@ $ cd /path/to/machine-learning/
 $ vagrant up
 $ vagrant ssh
 vagrant@vagrant-ubuntu-trusty-64:~$ (cd /vagrant/test && pytest manual)
-================================================= test session starts ==================================================
-platform linux2 -- Python 2.7.6, pytest-3.0.2, py-1.4.31, pluggy-0.3.1
+========================================= test session starts ==========================================
+platform linux2 -- Python 2.7.6, pytest-3.0.3, py-1.4.31, pluggy-0.4.0
 rootdir: /vagrant/test/manual, inifile: pytest.ini
 plugins: flask-0.10.0
-collected 16 items
+collected 20 items
 
+manual/configure_database.py .
+manual/configure_redis.py .
+manual/authentication/pytest_crypto.py .
+manual/authentication/pytest_validate_password.py .
 manual/programmatic_interface/dataset_url/pytest_svm_dataset_url.py ....
 manual/programmatic_interface/dataset_url/pytest_svr_dataset_url.py ....
 manual/programmatic_interface/file_upload/pytest_svm_file_upload.py ....
 manual/programmatic_interface/file_upload/pytest_svr_file_upload.py ....
 
-============================================== 16 passed in 58.60 seconds ==============================================
+====================================== 20 passed in 51.27 seconds ======================================
 ```
 
 **Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
