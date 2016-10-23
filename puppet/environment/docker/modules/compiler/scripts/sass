@@ -18,8 +18,8 @@ cd "$1"/src/scss && for file in *; do
   if [ "$extension" = 'scss' ] && [ "${file:0:1}" != '_' ]
   then
 
-    # compile with 'scss'
-    node-sass "$1/src/scss/$file" "$1/interface/static/css/$filename".min.css --output-style compressed
+    # compile with 'node-sass'
+    node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
 
   fi
 done
