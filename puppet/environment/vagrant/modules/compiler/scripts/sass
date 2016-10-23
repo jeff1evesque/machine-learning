@@ -20,3 +20,9 @@ done)
 # compile with 'node-sass'
 node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
 node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
+
+# ensure proper file extension
+for file in $(find "$1"/src/scss/ -name '*.css' -and ! -name '*.min.css')
+do
+    mv $file $(echo "$file" | sed -r 's|.css|.min.css|g')
+done
