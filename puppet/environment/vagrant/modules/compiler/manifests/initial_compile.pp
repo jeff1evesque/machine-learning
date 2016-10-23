@@ -40,13 +40,4 @@ class compiler::initial_compile {
             provider => shell,
         }
     }
-
-    ## manually restart sass service after initial compile.
-    #
-    #  Note: https://github.com/jeff1evesque/machine-learning/issues/2746
-    #
-    exec { 'bug-276-restart-sass':
-        command => 'sudo service sass start',
-        path    => '/usr/bin',
-    }
 }
