@@ -12,13 +12,12 @@ PATH="/usr/local/bin:$PATH"
 cd "$1"/src/scss && for file in *; do
   # get last `.` occurence as starting extension
   extension=${file##*.}
-  # filename (without 'last' extension)
-  filename="${file%.*}"
 
   if [ "$extension" = 'scss' ] && [ "${file:0:1}" != '_' ]
   then
 
     # compile with 'node-sass'
+    node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
     node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
 
   fi
