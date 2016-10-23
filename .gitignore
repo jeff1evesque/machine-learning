@@ -20,14 +20,13 @@
 !*.dockerfile
 
 # Ignore and don't commit the following directories
+*.sass-cache/
+*__pycache__/
+*.cache/
 /interface/static/js/
 /interface/static/css/
 /interface/static/img/
 /puppet/environment/*/modules_contrib/
-/test/manual/.cache
-/test/manual/programmatic_interface/__pycache__
-/test/live_test/.cache
-/test/live_test/programmatic_interface/__pycache__
 /src/jsx/node_modules/
 
 # Ignore and don't commit the following files
