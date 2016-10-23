@@ -23,7 +23,8 @@ class compiler::initial_compile {
 
         ## touch source: ensure initial build compiles every source file.
         #
-        #  @touch, changes the modification time to the current system time.
+        #  @touch, changes the modification time to the current system time,
+        #      which triggers corresponding compilers.
         #
         #  Note: the current inotifywait implementation watches close_write,
         #        move, and create. However, the source files will already exist
@@ -38,5 +39,14 @@ class compiler::initial_compile {
             onlyif   => $check_files,
             provider => shell,
         }
+    }
+
+    ## manually restart sass service after initial compile.
+    #
+    #  Note: https://github.com/jeff1evesque/machine-learning/issues/2746
+    #
+    exec { 'bug-276-restart-sass':
+        command => 'sudo service sass start',
+        path    => '/usr/bin',
     }
 }
