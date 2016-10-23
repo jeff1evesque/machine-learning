@@ -17,5 +17,5 @@ exec &> >(while read -r line; do
   printf "%s %s\n" "[$log_date]" "$line" >> "$log_file"
 done)
 
-# compile with 'scss'
-node-sass -r "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
+# compile with 'node-sass'
+node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
