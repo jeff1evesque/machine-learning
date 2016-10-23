@@ -9,10 +9,18 @@ class compiler::initial_compile {
     $environment     = $hiera_general['environment']
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
 
+    ## scss doesn't need to be manually compiled per:
+    #
+    #  - 4d1ae5b
+    #  - db9a6da
+    #
+    #  Note: the above commit hash(es), are predicated on the following issue:
+    #
+    #        https://github.com/jeff1evesque/machine-learning/issues/2746
+    #
     $sources  = [
         'jsx',
         'img',
-        'scss',
         'js'
     ]
 
