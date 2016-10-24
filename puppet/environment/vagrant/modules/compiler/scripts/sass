@@ -27,6 +27,7 @@ node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compres
 
 # watch '[root_dir]/interface/static/css/' subdirectory
 inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move --format "%w%f" |
+
   # ensure proper file extension: on successive builds
   while read -r file; do
     if [ -f "$file" ] && [[ $file = !(*.min).css ]]; then
