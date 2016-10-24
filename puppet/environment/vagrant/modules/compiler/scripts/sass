@@ -37,6 +37,6 @@ inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move --format %f 
   # ensure proper file extension: on successive builds
   while read -r file; do
 
-    if [ "$file" != '*.min.css' ]; then
+    if [[ "$file" != '*.min.css' ]]; then
       mv "$file" "${file/%css/min.css}"
     fi
