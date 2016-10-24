@@ -33,5 +33,4 @@ inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move --format "%w
     if [ -f "$file" ] && [[ $file = !(*.min).css ]]; then
       mv "$file" "${file/%.css/.min.css}"
     fi
-
   done
