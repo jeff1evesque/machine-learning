@@ -9,6 +9,10 @@
 PATH="/usr/local/bin:$PATH"
 
 
+# allow globstar, and extglob patterns
+shopt -s globstar extglob
+
+
 cd "$1"/src/scss && for file in *; do
   # get last `.` occurence as starting extension
   extension=${file##*.}
@@ -19,6 +23,9 @@ cd "$1"/src/scss && for file in *; do
     # compile with 'node-sass'
     node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
     node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
+
+    # ensure proper file extension (via globstar, and extglob)
+    for file in "$1"/src/scss/**/!(*.min).css; do mv "$file" "${file/%css/min.css}"; done
 
   fi
 done
