@@ -9,6 +9,9 @@
 PATH="/usr/local/bin:$PATH"
 
 
+# allow globstar, and extglob patterns
+shopt -s globstar extglob
+
 # track execution of script
 log_file="$1"/log/webcompiler/sass.log
 set -x;
@@ -21,5 +24,5 @@ done)
 node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
 node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
 
-# ensure proper file extension
+# ensure proper file extension (via globstar, and extglob)
 for file in "$1"/src/scss/**/!(*.min).css; do mv "$file" "${file/%css/min.css}"; done
