@@ -25,8 +25,17 @@ done)
 node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
 node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
 
+# ensure proper file extension: performed on initial build
+#
+# Note: the globstar, and extglob patterns are implemented
+#
+for file in "$1"/interface/static/css/**/!(*.min).css; do mv "$file" "${file/%css/min.css}"; done
+
 # watch '[root_dir]/src/scss/' subdirectory
-inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move |
+inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move --format %f |
+
+  # Minify Javascript
+  while read -r file; do
 
     # ensure proper file extension (via globstar, and extglob)
-    for file in "$1"/interface/static/css/**/!(*.min).css; do mv "$file" "${file/%css/min.css}"; done
+    mv "$file" "${file/%css/min.css}"; done
