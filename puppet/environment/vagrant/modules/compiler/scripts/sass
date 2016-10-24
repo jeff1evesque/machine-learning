@@ -23,7 +23,7 @@ done)
 
 # compile with 'node-sass'
 node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
-node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
+node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed &
 
 # ensure proper file extension: on initial build
 #
@@ -34,12 +34,10 @@ for file in "$1"/interface/static/css/**/!(*.min).css; do
 done
 
 # watch '[root_dir]/interface/static/css/' subdirectory
-inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move --format %f |
-
+inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move --format "%w%f" |
   # ensure proper file extension: on successive builds
   while read -r file; do
-
-    if [[ $file = !(*.min).css ]]; then
+    if [ -f "$file" ] && [[ $file = !(*.min).css ]]; then
       mv "$file" "${file/%.css/.min.css}"
     fi
 
