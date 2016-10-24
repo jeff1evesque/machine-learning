@@ -24,7 +24,9 @@ cd "$1"/src/scss && for file in *; do
     node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compressed
 
     # ensure proper file extension (via globstar, and extglob)
-    for file in "$1"/interface/static/css/**/!(*.min).css; do mv "$file" "${file/%css/min.css}"; done
+    for file in "$1"/interface/static/css/**/!(*.min).css; do
+      mv "$file" "${file/%.css/.min.css}"
+    done
 
   fi
 done
