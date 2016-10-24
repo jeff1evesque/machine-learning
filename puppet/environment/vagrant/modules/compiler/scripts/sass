@@ -29,7 +29,9 @@ node-sass -w "$1"/src/scss/ -o "$1"/interface/static/css/ --output-style compres
 #
 # Note: the globstar, and extglob patterns are implemented
 #
-for file in "$1"/interface/static/css/**/!(*.min).css; do mv "$file" "${file/%css/min.css}"; done
+for file in "$1"/interface/static/css/**/!(*.min).css; do
+  mv "$file" "${file/%.css/.min.css}"
+done
 
 # watch '[root_dir]/interface/static/css/' subdirectory
 inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move --format %f |
@@ -37,8 +39,8 @@ inotifywait "$1"/interface/static/css/ -m -r -e close_write -e move --format %f 
   # ensure proper file extension: on successive builds
   while read -r file; do
 
-    if [[ "$file" != '*.min.css' ]]; then
-      mv "$file" "${file/%css/min.css}"
+    if [[ "$file" != *.min.css ]] && [[ "$file" = *.css ]]; then
+      mv "$file" "${file/%.css/.min.css}"
     fi
 
   done
