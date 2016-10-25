@@ -48,4 +48,11 @@ class compiler::initial_compile {
             provider => shell,
         }
     }
+
+    # initial compile
+    exec { 'node-sass-initial-compile':
+        command  => "node-sass ${root_dir}/src/scss/style.scss ${root_dir}/interface/static/css/style.min.css --output-style compressed >> ${log_file} 2>&1 &",
+        path     => '/usr/bin',
+        provider => shell,
+    }
 }
