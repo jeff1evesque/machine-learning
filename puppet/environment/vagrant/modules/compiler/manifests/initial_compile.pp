@@ -8,6 +8,9 @@ class compiler::initial_compile {
     $root_dir        = $hiera_general['root']
     $environment     = $hiera_general['environment']
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
+    $source          = "${root_dir}/src/scss/style.scss"
+    $asset           = "${root_dir}/interface/static/css/style.css"
+    $options         = '--output-style compressed'
 
     ## scss doesn't need to be manually compiled per:
     #
@@ -51,7 +54,7 @@ class compiler::initial_compile {
 
     # initial compile
     exec { 'node-sass-initial-compile':
-        command  => "node-sass ${root_dir}/src/scss/style.scss ${root_dir}/interface/static/css/style.min.css --output-style compressed >> ${log_file} 2>&1 &",
+        command  => "node-sass ${source} ${asset} ${options}",
         path     => '/usr/bin',
         provider => shell,
     }
