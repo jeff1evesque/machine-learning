@@ -15,8 +15,7 @@ cd "$1"/src/jsx && for file in *; do
   # get last `.` occurence as starting extension
   file_extension="${file##*.}"
 
-  if [ "$file_extension" = 'jsx' ]
-  then
+  if [ "$file_extension" = 'jsx' ]; then
 
     # convert with 'browserify'
     (cd /usr/lib/node_modules && browserify "$1/src/jsx/$file" -t [ babelify --presets es2015,react ] -o "$1/src/js/$filename.js")

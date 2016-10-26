@@ -17,8 +17,5 @@ exec &> >(while read -r line; do
   printf "%s %s\n" "[$log_date]" "$line" >> "$log_file"
 done)
 
-# watch '[root_dir]/src/scss/' subdirectory
-inotifywait "$1"/src/scss/ -m -r -e close_write -e move |
-
-  # compile with 'scss'
-  node-sass "$1"/src/scss/style.scss "$1"/interface/static/css/style.min.css --output-style compressed
+# watch '[root_dir]/interface/static/css/' subdirectory
+node-sass -w "$1"/src/scss -o "$1"/interface/static/css &

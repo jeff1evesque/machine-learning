@@ -14,8 +14,7 @@ cd "$1"/src/js && for file in *; do
   # filename (without 'last' extension)
   filename="${file%.*}"
 
-  if [ "$extension" = 'js' ]
-  then
+  if [ "$extension" = 'js' ]; then
 
     # minifiy with 'uglifyjs'
     uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
