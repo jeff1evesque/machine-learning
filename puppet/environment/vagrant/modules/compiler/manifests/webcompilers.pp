@@ -16,10 +16,12 @@ class compiler::webcompilers {
     $compiler_dir    = "${environment_dir}/modules/${module}/scripts"
     $template_path   = 'compiler/webcompilers.erb'
 
+    ## sass is compiled via 'node-sass':
+    #
+    #  https://github.com/jeff1evesque/machine-learning/issues/2746
     $compilers = [
         'browserify',
         'imagemin',
-        'sass',
         'uglifyjs'
     ]
 
