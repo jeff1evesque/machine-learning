@@ -10,7 +10,6 @@ class compiler::initial_compile {
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
     $source          = "${root_dir}/src/scss/style.scss"
     $asset           = "${root_dir}/interface/static/css/style.css"
-    $options         = '--output-style compressed'
 
     ## scss doesn't need to be manually compiled per:
     #
@@ -54,7 +53,7 @@ class compiler::initial_compile {
 
     # initial compile
     exec { 'node-sass-initial-compile':
-        command  => "node-sass ${source} ${asset} ${options}",
+        command  => "node-sass ${source} ${asset}",
         path     => '/usr/bin',
         provider => shell,
     }
