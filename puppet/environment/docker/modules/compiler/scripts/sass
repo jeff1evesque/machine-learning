@@ -9,10 +9,6 @@
 PATH="/usr/local/bin:$PATH"
 
 
-# allow globstar, and extglob patterns
-shopt -s globstar extglob
-
-
 cd "$1"/src/scss && for file in *; do
   # get last `.` occurence as starting extension
   extension=${file##*.}
