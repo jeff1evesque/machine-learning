@@ -18,4 +18,4 @@ exec &> >(while read -r line; do
 done)
 
 # watch '[root_dir]/interface/static/css/' subdirectory
-node-sass -w "$1"/src/scss -o "$1"/interface/static/css --output-style compressed &
+node-sass -w "$1"/src/scss -o "$1"/interface/static/css &
