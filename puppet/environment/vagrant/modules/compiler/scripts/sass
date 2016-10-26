@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# @sass: minify scss file(s).
+#
+# @$1, first passed-in argument from command ($0 is the filename)
+
+
+# Pre-Pathing: allow 'sass' command
+PATH="/usr/local/bin:$PATH"
+
+
+# allow globstar, and extglob patterns
+shopt -s globstar extglob
+
+
+# track execution of script
+log_file="$1"/log/webcompiler/sass.log
+set -x;
+exec &> >(while read -r line; do
+  log_date=$(date +%Y-%m-%d:%H:%M:%S)
+  printf "%s %s\n" "[$log_date]" "$line" >> "$log_file"
+done)
+
+# watch '[root_dir]/interface/static/css/' subdirectory
+node-sass -w "$1"/src/scss -o "$1"/interface/static/css --output-style compressed &
