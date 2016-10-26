@@ -9,10 +9,6 @@
 PATH="/usr/local/bin:$PATH"
 
 
-# allow globstar, and extglob patterns
-shopt -s globstar extglob
-
-
 # track execution of script
 log_file="$1"/log/webcompiler/sass.log
 set -x;
