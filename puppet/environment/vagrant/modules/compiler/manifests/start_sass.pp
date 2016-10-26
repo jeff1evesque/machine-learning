@@ -21,10 +21,4 @@ class compiler::start_sass {
         path     => '/usr/bin',
         provider => shell,
     }
-
-    # ensure service starts at boot
-    service { 'sass':
-        ensure => 'running',
-        enable => true,
-    }
 }
