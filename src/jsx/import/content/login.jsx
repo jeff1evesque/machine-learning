@@ -32,21 +32,30 @@ var LoginForm = React.createClass({
         return(
             <div className='main-full-span login-form'>
                 <form onSubmit={this.handleSubmit} ref='registerForm'>
-                    <label>Username or email address</label>
-                    <input
-                        type='text'
-                        name='user[login]'
-                        className='input-block'
-                    />
-                    <label>Password</label>
-                    <input
-                        type='text'
-                        name='user[password]'
-                        className='input-block'
-                    />
+                    <div className='form-header'>
+                        <h1>Sign in Web-Interface</h1>
+                    </div>
+                    <div className='form-body'>
+                        <label>Username or email address</label>
+                         <input
+                            type='text'
+                            name='user[login]'
+                            className='input-block'
+                            autoFocus
+                        />
+                        <label>Password</label>
+                        <input
+                            type='text'
+                            name='user[password]'
+                            className='input-block'
+                        />
 
-                    <input type="submit" className='input-submit' />
-                    <AjaxSpinner />
+                        <input
+                            type='submit'
+                            className='input-submit btn btn-primary'
+                        />
+                        <AjaxSpinner />
+                    </div>
                 </form>
             </div>
         );
