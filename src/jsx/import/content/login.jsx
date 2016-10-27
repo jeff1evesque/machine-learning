@@ -50,7 +50,10 @@ var LoginForm = React.createClass({
                             className='input-block'
                         />
 
-                        <input type="submit" className='input-submit' />
+                        <input
+                            type='submit'
+                            className='input-submit btn-primary'
+                        />
                         <AjaxSpinner />
                     </div>
                 </form>
