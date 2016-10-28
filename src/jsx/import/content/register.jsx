@@ -51,7 +51,10 @@ var RegisterForm = React.createClass({
                         placeholder='Create a password'
                     />
 
-                    <input type="submit" className='input-submit' />
+                    <input
+                        type='submit'
+                        className='btn btn-primary'
+                    />
                     <AjaxSpinner />
                 </form>
             </div>
