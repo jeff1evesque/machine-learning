@@ -18,6 +18,12 @@
   display: block;
 }
 
+.input-submit {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
 form {
   > fieldset {
     margin-top: $form-margin;
@@ -44,12 +50,6 @@ form {
     display: block;
     font-size: .875rem;
     padding: .425rem .55rem;
-    width: 100%;
-  }
-
-  .input-submit {
-    display: block;
-    text-align: center;
     width: 100%;
   }
 }
@@ -98,4 +98,9 @@ fieldset .error {
       margin-top: 1.25rem;
     }
   }
+}
+
+.register-form {
+  margin: 0 auto;
+  width: 28rem;
 }
