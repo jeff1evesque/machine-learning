@@ -38,7 +38,7 @@ form {
   }
 
   label {
-    color: $gray-5;
+    color: $gray-6;
   }
 
   .input-block {
@@ -46,12 +46,16 @@ form {
     border-radius: .1875rem;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, .085);
     box-sizing: border-box;
-    color: $gray-5;
+    color: $gray-6;
     display: block;
     font-size: .875rem;
     padding: .425rem .55rem;
     width: 100%;
   }
+}
+
+.form-group {
+    margin: 1.15rem 0;
 }
 
 fieldset .error {
@@ -101,11 +105,19 @@ fieldset .error {
 }
 
 .register-form {
+  color: $gray-6;
   margin: 0 auto;
   width: 28rem;
 
   h1 {
     font-size: 2.813rem;
     font-weight: 400;
+  }
+
+  label {
+    display: block;
+    color: $gray-6;
+    font-weight: 600;
+    margin: 0 0 0.4rem;
   }
 }
