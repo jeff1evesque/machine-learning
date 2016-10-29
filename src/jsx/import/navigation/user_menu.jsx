@@ -4,55 +4,20 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import SvgHome from '../svg/svg_home.jsx';
+import MenuHome from 'menu-items/menu_home.jsx';
+import MenuLogin from 'menu-items/menu_login.jsx';
+import MenuRegister from 'menu-items/menu_register.jsx';
 
 var UserMenu = React.createClass({
-  // callback for home page
-    clickHome: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
-      // return state to parent component
-        this.props.onChange({home: true});
-    },
-  // callback for login page
-    clickLogin: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
-      // return state to parent component
-        this.props.onChange({login: true});
-    },
-  // callback for register page
-    clickRegister: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
-      // return state to parent component
-        this.props.onChange({register: true});
-    },
   // display result
     render: function() {
+        var AjaxSpinner = this.getSpinner();
+
         return(
-            <nav className='main-navigation'>
-                <a href='#'
-                   className='icon home'
-                   onClick={this.clickHome}
-                >
-                    <SvgHome />
-                </a>
-                <a href='#'
-                   className='btn mn-2'
-                   onClick={this.clickLogin}
-                >
-                    Sign in
-                </a>
-                <a href='#'
-                   className='btn btn-primary'
-                   onClick={this.clickRegister}
-                >
-                    Sign up
-                </a>
+            <nav className='main-navigation {this.state.home_class}'>
+                <MenuHome />
+                <MenuLogin />
+                <MenuRegister />
             </nav>
         );
     }
