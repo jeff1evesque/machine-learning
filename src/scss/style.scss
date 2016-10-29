@@ -15,7 +15,7 @@ a {
 }
 
 body {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', Helvetica, sans-serif, 'Open Sans';
   font-size: 14px;
   word-wrap: break-word;
 }
@@ -52,7 +52,7 @@ h6 {
   background-image: linear-gradient($off-white, $gray-1);
   border: 1px solid $gray-4;
   border-radius: 3px;
-  color: $gray-5;
+  color: $gray-6;
   cursor: pointer;
   display: inline-block;
   font-size: 13px;
@@ -93,7 +93,7 @@ h6 {
 }
 
 .note {
-  margin: .3rem 0 .2rem;
+  margin: .4rem 0 .3rem;
   font-size: .75rem;
-  color: $gray-4;
+  color: $gray-5;
 }
