@@ -55,7 +55,7 @@ form {
 }
 
 .form-group {
-    margin: 1.15rem 0;
+  margin: 1.15rem 0;
 }
 
 fieldset .error {
@@ -115,9 +115,9 @@ fieldset .error {
   }
 
   label {
-    display: block;
     color: $gray-6;
+    display: block;
     font-weight: 600;
-    margin: 0 0 0.4rem;
+    margin: 0 0 .4rem;
   }
 }
