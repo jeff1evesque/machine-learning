@@ -77,6 +77,7 @@ var RegisterForm = React.createClass({
                     <input
                         type='submit'
                         className='btn btn-primary'
+                        value='Create an account'
                     />
                     <AjaxSpinner />
                 </form>
