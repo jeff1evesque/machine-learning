@@ -31,27 +31,54 @@ var RegisterForm = React.createClass({
 
         return(
             <div className='main-full-span register-form'>
+                <h1>Create your account</h1>
                 <form onSubmit={this.handleSubmit} ref='registerForm'>
-                    <input
-                        type='text'
-                        name='user[login]'
-                        className='input-block'
-                        placeholder='Pick a username'
-                    />
-                    <input
-                        type='text'
-                        name='user[email]'
-                        className='input-block'
-                        placeholder='Your email address'
-                    />
-                    <input
-                        type='text'
-                        name='user[password]'
-                        className='input-block'
-                        placeholder='Create a password'
-                    />
+                    <div className='form-group'>
+                        <label className='form-label'>Username</label>
+                        <input
+                            type='text'
+                            name='user[login]'
+                            className='input-block'
+                            placeholder='Pick a username'
+                        />
+                        <p className='note'>This will be your username</p>
+                    </div>
 
-                    <input type="submit" className='input-submit' />
+                    <div className='form-group'>
+                        <label className='form-label'>Email Address</label>
+                        <input
+                            type='text'
+                            name='user[email]'
+                            className='input-block'
+                            placeholder='Your email address'
+                        />
+                        <p className='note'>
+                            You will get updates regarding account changes,
+                            or activitites. This email address will not be
+                            shared with anyone.
+                        </p>
+                    </div>
+
+ 
+                    <div className='form-group'>
+                        <label className='form-label'>Password</label>
+                        <input
+                            type='text'
+                            name='user[password]'
+                            className='input-block'
+                            placeholder='Create a password'
+                        />
+                        <p className='note'>
+                            Use at least one letter, one numeral,
+                            and seven characters.
+                        </p>
+                    </div>
+
+                    <input
+                        type='submit'
+                        className='btn btn-primary'
+                        value='Create an account'
+                    />
                     <AjaxSpinner />
                 </form>
             </div>

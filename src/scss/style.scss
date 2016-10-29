@@ -15,7 +15,7 @@ a {
 }
 
 body {
-  font-family: 'Open Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: 'Segoe UI', Helvetica, sans-serif, 'Open Sans';
   font-size: 14px;
   word-wrap: break-word;
 }
@@ -47,12 +47,12 @@ h6 {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
-  background-color: $lighter-gray;
-  background-image: -webkit-linear-gradient($off-white, $lighter-gray);
-  background-image: linear-gradient($off-white, $lighter-gray);
-  border: 1px solid $dark-gray;
+  background-color: $gray-1;
+  background-image: -webkit-linear-gradient($off-white, $gray-1);
+  background-image: linear-gradient($off-white, $gray-1);
+  border: 1px solid $gray-4;
   border-radius: 3px;
-  color: $darker-gray;
+  color: $gray-6;
   cursor: pointer;
   display: inline-block;
   font-size: 13px;
@@ -69,10 +69,10 @@ h6 {
 }
 
 .btn:hover {
-  background-color: $light-gray;
-  background-image: -webkit-linear-gradient($lighter-gray, $light-gray);
-  background-image: linear-gradient($lighter-gray, $light-gray);
-  border-color: $gray;
+  background-color: $gray-1;
+  background-image: -webkit-linear-gradient($gray-1, $gray-2);
+  background-image: linear-gradient($gray-1, $gray-2);
+  border-color: $gray-3;
 }
 
 .btn-primary {
@@ -90,4 +90,10 @@ h6 {
   background-image: linear-gradient($light-green, $dark-green);
   border-color: $darker-green;
   color: $white;
+}
+
+.note {
+  color: $gray-5;
+  font-size: .75rem;
+  margin: .4rem 0 .3rem;
 }
