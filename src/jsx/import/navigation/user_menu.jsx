@@ -4,9 +4,9 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import MenuHome from 'menu-items/menu_home.jsx';
-import MenuLogin from 'menu-items/menu_login.jsx';
-import MenuRegister from 'menu-items/menu_register.jsx';
+import MenuHome from './menu-items/menu_home.jsx';
+import MenuLogin from './menu-items/menu_login.jsx';
+import MenuRegister from './menu-items/menu_register.jsx';
 
 var UserMenu = React.createClass({
   // update 'state properties' from child component
