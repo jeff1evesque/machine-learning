@@ -42,13 +42,13 @@ var UserMenu = React.createClass({
     render: function() {
         var AjaxSpinner = this.getSpinner();
         if (this.state.show_login) {
-            var Login = <MenuLogin />
+            var Login = MenuLogin
         }
         else {
             var Login = 'span'
         }
         if (this.state.show_register) {
-            var Register = <MenuRegister />
+            var Register = MenuRegister
         }
         else {
             var Register = 'span'
