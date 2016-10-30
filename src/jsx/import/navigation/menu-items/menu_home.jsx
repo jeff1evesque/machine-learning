@@ -17,12 +17,18 @@ var MenuHome = React.createClass({
 
       // return state to parent component
         this.props.onChange({home: true});
+        if (this.props.show_login || this.props.show_register) {
+            this.setState({css_options: 'not-centered'});
+        }
+        else {
+            this.setState({css_options: 'centered'});
+        }
     },
   // triggered when 'state properties' change
     render: function(){
         return(
             <a href='#'
-                className='icon home'
+                className='icon home {this.state.css_options}'
                 onClick={this.clickHome}
             >
                 <SvgHome />
