@@ -56,9 +56,9 @@ var UserMenu = React.createClass({
 
         {/* return:
             @classRegister, is accessible within child component as
-                'this.props.show_register'
+                'this.props.classRegister'
             @classLogin, is accessible within child component as
-                'this.props.show_login'
+                'this.props.classLogin'
         */}
         return(
             <nav className='main-navigation {this.state.home_class}'>
