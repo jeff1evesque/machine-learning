@@ -123,7 +123,6 @@ var DataNew = React.createClass({
     },
   // call back: used for the above 'render' (return 'span' if undefined)
     getSupplyDataset: function(datasetType, title, modelType) {
-
         if (
             title && checkValidString(title) && datasetType && 
             checkValidString(datasetType) && datasetType != '--Select--' &&
