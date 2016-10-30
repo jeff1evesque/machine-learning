@@ -17,7 +17,9 @@ var MenuHome = React.createClass({
 
       // return state to parent component
         this.props.onChange({home: true});
-        if (this.props.show_login || this.props.show_register) {
+
+      // conditional classname: defined from parent component
+        if (this.props.classLogin || this.props.classRegister) {
             this.setState({css_options: 'not-centered'});
         }
         else {
@@ -28,7 +30,7 @@ var MenuHome = React.createClass({
     render: function(){
         return(
             <a href='#'
-                className='icon home {this.state.css_options}'
+                className={'icon home ' + this.state.css_options}
                 onClick={this.clickHome}
             >
                 <SvgHome />
