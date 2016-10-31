@@ -7,7 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var MenuHome = React.createClass({
+var MenuLogin = React.createClass({
   // callback for login page
     clickLogin: function(event) {
       // prevent page reload
