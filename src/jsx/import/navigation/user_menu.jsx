@@ -16,7 +16,7 @@ var UserMenu = React.createClass({
   // return state to parent, and current component
     displayLogin: function(event) {
       // return state to parent component
-        this.props.onChange({login: event.login});
+        this.props.onChange({login: true});
 
       // conditionally define state(s)
         if (event.login) {
@@ -30,7 +30,7 @@ var UserMenu = React.createClass({
     },
   // return state to parent component
     displayRegister: function(event) {
-        this.props.onChange({home: event.register});
+        this.props.onChange({home: true});
     },
   // display result
     render: function() {
