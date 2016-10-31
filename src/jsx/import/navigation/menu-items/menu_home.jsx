@@ -10,6 +10,12 @@
 import SvgHome from '../../svg/svg_home.jsx';
 
 var MenuHome = React.createClass({
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            css_options: 'not-centered',
+        };
+    },
   // callback for home page
     clickHome: function(event) {
       // prevent page reload
