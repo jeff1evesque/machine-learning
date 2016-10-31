@@ -9,9 +9,21 @@ import MenuLogin from './menu-items/menu_login.jsx';
 import MenuRegister from './menu-items/menu_register.jsx';
 
 var UserMenu = React.createClass({
-  // return state to parent component
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            show_login: true,
+            show_register: true,
+        };
+    },
+  // return state to parent, and current component
     displayHome: function(event) {
+      // return state to parent component
         this.props.onChange({home: event.home});
+
+      // display login / register buttons
+        this.setState({show_login: true});
+        this.setState({show_register: true});
     },
   // return state to parent, and current component
     displayLogin: function(event) {
@@ -19,22 +31,20 @@ var UserMenu = React.createClass({
         this.props.onChange({login: true});
 
       // conditionally define state(s)
-        if (event.login) {
-            this.setState({show_login: false});
-            this.setState({show_register: false});
-        }
-        else {
-            this.setState({show_login: true});
-            this.setState({show_register: true});
-        }
+        this.setState({show_login: false});
+        this.setState({show_register: false});
     },
-  // return state to parent component
+  // return state to parent, and current component
     displayRegister: function(event) {
-        this.props.onChange({home: true});
+      // return state to parent component
+        this.props.onChange({register: true});
+
+      // display login / register buttons
+        this.setState({show_login: true});
+        this.setState({show_register: true});
     },
   // display result
     render: function() {
-        var AjaxSpinner = this.getSpinner();
         if (this.state.show_login) {
             var Login = MenuLogin
         }
