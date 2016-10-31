@@ -8,10 +8,24 @@
 
 .main-navigation {
   font-weight: 500;
-  padding-bottom: 1.75rem;
+  padding: .75rem .75rem;
   text-align: right;
 
   .mn-2 {
     margin-right: .625rem;
+  }
+}
+
+.menu-home,
+.menu-register {
+  .home {
+    float: left;
+  }
+}
+
+.menu-login {
+  .home {
+    display: block;
+    text-align: center;
   }
 }
