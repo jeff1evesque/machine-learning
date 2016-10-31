@@ -63,7 +63,7 @@ var RegisterForm = React.createClass({
                     <div className='form-group'>
                         <label className='form-label'>Password</label>
                         <input
-                            type='text'
+                            type='password'
                             name='user[password]'
                             className='input-block'
                             placeholder='Create a password'
