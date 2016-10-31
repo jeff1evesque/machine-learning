@@ -14,16 +14,18 @@ var UserMenu = React.createClass({
         return {
             show_login: true,
             show_register: true,
+            page: 'home',
         };
     },
   // return state to parent, and current component
     displayHome: function(event) {
       // return state to parent component
-        this.props.onChange({home: event.home});
+        this.props.onChange({home: true});
 
       // display login / register buttons
         this.setState({show_login: true});
         this.setState({show_register: true});
+        this.setState({page: 'home'});
     },
   // return state to parent, and current component
     displayLogin: function(event) {
@@ -33,6 +35,7 @@ var UserMenu = React.createClass({
       // conditionally define state(s)
         this.setState({show_login: false});
         this.setState({show_register: false});
+        this.setState({page: 'login'});
     },
   // return state to parent, and current component
     displayRegister: function(event) {
@@ -42,6 +45,7 @@ var UserMenu = React.createClass({
       // display login / register buttons
         this.setState({show_login: true});
         this.setState({show_register: true});
+        this.setState({page: 'register'});
     },
   // display result
     render: function() {
@@ -65,7 +69,9 @@ var UserMenu = React.createClass({
                 'this.props.classLogin'
         */}
         return(
-            <nav className='main-navigation {this.state.home_class}'>
+            <nav
+                className={'main-navigation menu-' + this.state.page}
+            >
                 <MenuHome
                     onChange={this.displayHome}
                     classRegister={this.state.show_register}
