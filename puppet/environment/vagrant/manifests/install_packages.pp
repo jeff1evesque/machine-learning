@@ -39,6 +39,7 @@ class general_packages {
     contain package::python_dev
     contain package::libssl_dev
     contain package::scrypt
+    contain package::react_router
 }
 
 ## initiate
