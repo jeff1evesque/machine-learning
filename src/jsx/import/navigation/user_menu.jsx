@@ -4,55 +4,81 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import SvgHome from '../svg/svg_home.jsx';
+import MenuHome from './menu-items/menu_home.jsx';
+import MenuLogin from './menu-items/menu_login.jsx';
+import MenuRegister from './menu-items/menu_register.jsx';
 
 var UserMenu = React.createClass({
-  // callback for home page
-    clickHome: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            show_login: true,
+            show_register: true,
+            page: 'home',
+        };
+    },
+  // return state to parent, and current component
+    displayHome: function(event) {
       // return state to parent component
         this.props.onChange({home: true});
-    },
-  // callback for login page
-    clickLogin: function(event) {
-      // prevent page reload
-        event.preventDefault();
 
+      // display login / register buttons
+        this.setState({show_login: true});
+        this.setState({show_register: true});
+        this.setState({page: 'home'});
+    },
+  // return state to parent, and current component
+    displayLogin: function(event) {
       // return state to parent component
         this.props.onChange({login: true});
-    },
-  // callback for register page
-    clickRegister: function(event) {
-      // prevent page reload
-        event.preventDefault();
 
+      // conditionally define state(s)
+        this.setState({show_login: false});
+        this.setState({show_register: false});
+        this.setState({page: 'login'});
+    },
+  // return state to parent, and current component
+    displayRegister: function(event) {
       // return state to parent component
         this.props.onChange({register: true});
+
+      // display login / register buttons
+        this.setState({show_login: true});
+        this.setState({show_register: true});
+        this.setState({page: 'register'});
     },
   // display result
     render: function() {
+        if (this.state.show_login) {
+            var Login = MenuLogin
+        }
+        else {
+            var Login = 'span'
+        }
+        if (this.state.show_register) {
+            var Register = MenuRegister
+        }
+        else {
+            var Register = 'span'
+        }
+
+        {/* return:
+            @classRegister, is accessible within child component as
+                'this.props.classRegister'
+            @classLogin, is accessible within child component as
+                'this.props.classLogin'
+        */}
         return(
-            <nav className='main-navigation'>
-                <a href='#'
-                   className='icon home'
-                   onClick={this.clickHome}
-                >
-                    <SvgHome />
-                </a>
-                <a href='#'
-                   className='btn mn-2'
-                   onClick={this.clickLogin}
-                >
-                    Sign in
-                </a>
-                <a href='#'
-                   className='btn btn-primary'
-                   onClick={this.clickRegister}
-                >
-                    Sign up
-                </a>
+            <nav
+                className={'main-navigation menu-' + this.state.page}
+            >
+                <MenuHome
+                    onChange={this.displayHome}
+                    classRegister={this.state.show_register}
+                    classLogin={this.state.show_login}
+                />
+                <Login onChange={this.displayLogin} />
+                <Register onChange={this.displayRegister} />
             </nav>
         );
     }
