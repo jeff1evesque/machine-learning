@@ -45,7 +45,7 @@ var LoginForm = React.createClass({
                         />
                         <label>Password</label>
                         <input
-                            type='text'
+                            type='password'
                             name='user[password]'
                             className='input-block'
                         />
