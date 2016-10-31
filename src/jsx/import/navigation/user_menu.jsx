@@ -9,34 +9,28 @@ import MenuLogin from './menu-items/menu_login.jsx';
 import MenuRegister from './menu-items/menu_register.jsx';
 
 var UserMenu = React.createClass({
-  // update 'state properties' from child component
+  // return state to parent component
     displayHome: function(event) {
-        if (event.home) {
-            this.props.onChange({home: event.home});
-        }
-        else {
-            this.props.onChange({render_submit: false});
-        }
+        this.props.onChange({home: event.home});
     },
+  // return state to parent, and current component
     displayLogin: function(event) {
+      // return state to parent component
+        this.props.onChange({login: event.login});
+
+      // conditionally define state(s)
         if (event.login) {
-            this.props.onChange({login: event.login});
             this.setState({show_login: false});
             this.setState({show_register: false});
         }
         else {
-            this.props.onChange({render_submit: false});
             this.setState({show_login: true});
             this.setState({show_register: true});
         }
     },
+  // return state to parent component
     displayRegister: function(event) {
-        if (event.register) {
-            this.props.onChange({home: event.register});
-        }
-        else {
-            this.props.onChange({render_submit: false});
-        }
+        this.props.onChange({home: event.register});
     },
   // display result
     render: function() {
