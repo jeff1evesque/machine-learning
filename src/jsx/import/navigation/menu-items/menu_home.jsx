@@ -10,12 +10,6 @@
 import SvgHome from '../../svg/svg_home.jsx';
 
 var MenuHome = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            css_options: 'not-centered',
-        };
-    },
   // callback for home page
     clickHome: function(event) {
       // prevent page reload
@@ -23,20 +17,12 @@ var MenuHome = React.createClass({
 
       // return state to parent component
         this.props.onChange({home: true});
-
-      // conditional classname: defined from parent component
-        if (this.props.classLogin || this.props.classRegister) {
-            this.setState({css_options: 'not-centered'});
-        }
-        else {
-            this.setState({css_options: 'centered'});
-        }
     },
   // triggered when 'state properties' change
     render: function(){
         return(
             <a href='#'
-                className={'icon home ' + this.state.css_options}
+                className='icon home'
                 onClick={this.clickHome}
             >
                 <SvgHome />
