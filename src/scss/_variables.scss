@@ -1,4 +1,6 @@
-// _variables.scss: contains general scss variables.
+// _variables.scss: contains general scss variables, where higher numeral
+//                  suffixes, associate with darker colors, while suffixes
+//                  ending with 't', correspond to transparent colors.
 //
 // Note: this partial, is ignored by the scss compiler, and can be imported
 //       into another scss file.
@@ -7,20 +9,20 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 $form-margin:1rem;
-$color-error: #800000;
-$baby-blue-transparent: rgba(0, 174, 239, .15);
-$baby-blue-solid: rgba(0, 174, 239, .8);
 $gray-6: #333;
 $gray-5: #777;
 $gray-4: #d5d5d5;
 $gray-3: #ccc;
 $gray-2: #ddd;
 $gray-1: #eee;
-$off-white: #fcfcfc;
-$darker-green: #4a993e;
-$dark-green: #569e3d;
-$green-level-1: #60b044;
-$green-level-2: #5ca941;
-$light-green: #79d858;
-$lighter-green: #8add6d;
-$white: #fff;
+$green-6: #4a993e;
+$green-5: #569e3d;
+$green-4: #60b044;
+$green-3: #5ca941;
+$green-2: #79d858;
+$green-1: #8add6d;
+$blue-2t: rgba(0, 174, 239, .8);
+$blue-1t: rgba(0, 174, 239, .15);
+$white-2: #fcfcfc;
+$white-1: #fff;
+$red-1: #800000;
