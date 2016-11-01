@@ -4,17 +4,44 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import { Router, Route, Link, browserHistory } from 'react-router'
+import { Link } from 'react-router'
 
 var NavBar = React.createClass({
   // display result
     render: function() {
         return(
             <div className='side-menu'>
-                <Link to={`/data_new`}><div className='menu-item'>Add new data</div></Link>
-                <Link to={`/data_append`}><div className='menu-item'>Append data</div></Link>
-                <Link to={`/model_generate`}><div className='menu-item'>Generate model</div></Link>
-                <Link to={`/model_predict`}><div className='menu-item'>Make prediction</div></Link>
+                <Link
+                    to={`/data_new`}
+                    activeClassName='active'
+                    className='menu-item'
+                >
+                    Add new data
+                </Link>
+
+                <Link
+                    to={`/data_append`}
+                    activeClassName='active'
+                    className='menu-item'
+                >
+                    Append data
+                </Link>
+
+                <Link
+                    to={`/model_generate`}
+                    activeClassName='active'
+                    className='menu-item'
+                >
+                    Generate model
+                </Link>
+
+                <Link
+                    to={`/model_predict`}
+                    activeClassName='active'
+                    className='menu-item'
+                >
+                    Make prediction
+                </Link>
             </div>
         );
     }
