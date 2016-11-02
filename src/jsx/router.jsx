@@ -16,6 +16,8 @@ var AppRouter = React.createClass({
     render: function() {
         {/* return:
             @this.props.indexRoute, defined from parent component.
+            @IndexRoute, declare which component will be displayed when the app
+                initially loads.
         */}
         return(
             <Router>
