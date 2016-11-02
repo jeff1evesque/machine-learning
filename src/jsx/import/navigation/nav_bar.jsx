@@ -15,7 +15,7 @@ var NavBar = React.createClass({
                 <ul className='side-menu'>
                     <li>
                         <Link
-                            to='/data-new'
+                           to='/data-new'
                            activeClassName='active'
                            className='menu-item'
                         >
