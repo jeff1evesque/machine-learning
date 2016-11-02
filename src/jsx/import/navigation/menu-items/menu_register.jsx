@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
+
 var MenuRegister = React.createClass({
   // callback for register page
     clickRegister: function(event) {
