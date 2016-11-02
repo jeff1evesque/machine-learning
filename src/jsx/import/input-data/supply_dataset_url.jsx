@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import checkValidUrl from './../validator/valid_url.js';
 
 var SupplyDatasetUrl = React.createClass({
