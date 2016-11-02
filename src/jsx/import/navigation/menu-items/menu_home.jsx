@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import SvgHome from '../../svg/svg_home.jsx';
 
 var MenuHome = React.createClass({
