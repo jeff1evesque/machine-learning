@@ -9,6 +9,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import checkValidFile from './../validator/valid_file.js';
 
 var SupplyDatasetFile = React.createClass({
