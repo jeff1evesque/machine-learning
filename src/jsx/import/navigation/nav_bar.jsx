@@ -4,6 +4,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import { Link } from 'react-router'
 
 var NavBar = React.createClass({
