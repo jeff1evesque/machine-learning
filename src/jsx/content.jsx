@@ -87,6 +87,6 @@ var Content = React.createClass({
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
 ReactDOM.render(
-    <AppRouter indexRoute={Content}/>,
+    <AppRouter indexRoute={Content} />,
     document.querySelector('.container')
 );
