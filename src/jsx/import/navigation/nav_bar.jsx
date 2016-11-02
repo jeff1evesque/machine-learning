@@ -11,8 +11,8 @@ var NavBar = React.createClass({
   // display result
     render: function() {
         return(
-            <div className='side-menu'>
-                <ul>
+            <div className='menu-container'>
+                <ul className='side-menu'>
                     <li>
                         <Link
                             to='/data_new'
