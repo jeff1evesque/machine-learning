@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Router, Route, IndexRoute } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router'
 import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
 import ModelGenerate from './import/session-type/model_generate.jsx';
@@ -16,9 +16,12 @@ var AppRouter = React.createClass({
     render: function() {
         {/* return:
             @this.props.indexRoute, defined from parent component.
+            @history, is required per 'react-router's ability to handle url:
+
+                - [GitHub-URL]issues/2727#issuecomment-258030214
         */}
         return(
-            <Router>
+            <Router history={browserHistory}>
                 <Route path='/' component={this.props.indexRoute} >
                     <Route path='/data-new' component={DataNew} />
                     <Route path='/data-append' component={DataAppend} />
