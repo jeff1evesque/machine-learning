@@ -4,6 +4,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import MenuHome from './menu-items/menu_home.jsx';
 import MenuLogin from './menu-items/menu_login.jsx';
 import MenuRegister from './menu-items/menu_register.jsx';
