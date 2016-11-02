@@ -16,13 +16,10 @@ var AppRouter = React.createClass({
     render: function() {
         {/* return:
             @this.props.indexRoute, defined from parent component.
-            @IndexRoute, declare which component will be displayed when the app
-                initially loads.
         */}
         return(
             <Router>
                 <Route path='/' component={this.props.indexRoute} >
-                    <IndexRoute component={this.props.indexRoute} />
                     <Route path='/data-new' component={DataNew} />
                     <Route path='/data-append' component={DataAppend} />
                     <Route path='/model-generate' component={ModelGenerate} />
