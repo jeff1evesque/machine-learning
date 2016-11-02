@@ -128,7 +128,7 @@ var SupportVector = React.createClass({
                 'this.props.formResult'
         */}
         return(
-            <div className='container-analysis'>
+            <div className='analysis-container'>
                 <form onSubmit={this.handleSubmit} ref='analysisForm'>
                     <fieldset className='fieldset-session-type'>
                         <legend>Session Type</legend>
