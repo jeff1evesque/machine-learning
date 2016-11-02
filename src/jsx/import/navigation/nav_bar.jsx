@@ -12,37 +12,47 @@ var NavBar = React.createClass({
     render: function() {
         return(
             <div className='side-menu'>
-                <Link
-                    to='/data_new'
-                    activeClassName='active'
-                    className='menu-item'
-                >
-                    Add new data
-                </Link>
+                <ul>
+                    <li>
+                        <Link
+                            to='/data_new'
+                           activeClassName='active'
+                           className='menu-item'
+                        >
+                            Add new data
+                        </Link>
+                    </li>
 
-                <Link
-                    to='/data_append'
-                    activeClassName='active'
-                    className='menu-item'
-                >
-                    Append data
-                </Link>
+                    <li>
+                        <Link
+                            to='/data_append'
+                            activeClassName='active'
+                            className='menu-item'
+                        >
+                            Append data
+                        </Link>
+                    </li>
 
-                <Link
-                    to='/model_generate'
-                    activeClassName='active'
-                    className='menu-item'
-                >
-                    Generate model
-                </Link>
+                    <li>
+                        <Link
+                            to='/model_generate'
+                            activeClassName='active'
+                            className='menu-item'
+                        >
+                            Generate model
+                        </Link>
+                    </li>
 
-                <Link
-                    to='/model_predict'
-                    activeClassName='active'
-                    className='menu-item'
-                >
-                    Make prediction
-                </Link>
+                    <li>
+                        <Link
+                            to='/model_predict'
+                            activeClassName='active'
+                            className='menu-item'
+                        >
+                            Make prediction
+                        </Link>
+                    </li>
+                </ul>
             </div>
         );
     }
