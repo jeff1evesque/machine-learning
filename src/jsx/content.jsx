@@ -4,6 +4,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
+import ReactDOM from 'react-dom';
 import SupportVector from './import/content/support_vector.jsx';
 import LoginForm from './import/content/login.jsx';
 import RegisterForm from './import/content/register.jsx';
