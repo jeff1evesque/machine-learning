@@ -1,0 +1,18 @@
+// _layout.scss: generates css solution for the overall layout.
+//
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
+
+.main {
+  .menu-container {
+    float: left;
+    width: 16rem;
+  }
+
+  .analysis-container {
+    margin-left: 16rem;
+  }
+}
