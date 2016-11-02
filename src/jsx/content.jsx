@@ -11,7 +11,7 @@ import LoginForm from './import/content/login.jsx';
 import RegisterForm from './import/content/register.jsx';
 import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
-import AppRouter from './app_router.jsx';
+import AppRouter from './router.jsx';
 
 var Content = React.createClass({
   // initial 'state properties'
