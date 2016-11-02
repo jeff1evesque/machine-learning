@@ -4,6 +4,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import checkValidString from './../validator/valid_string.js';
 
 var ModelType = React.createClass({
