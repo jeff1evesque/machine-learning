@@ -6,9 +6,9 @@
 
 import React from 'react';
 import DataNew from './import/session-type/data_new.jsx';
-import DataAppend from './import/navigation/data_append.jsx';
-import ModelGenerate from './import/navigation/model_generate.jsx';
-import ModelPredict from './import/navigation/model_predict.jsx';
+import DataAppend from './import/session-type/data_append.jsx';
+import ModelGenerate from './import/session-type/model_generate.jsx';
+import ModelPredict from './import/session-type/model_predict.jsx';
 
 var AppRouter = React.createClass({
   // display result
