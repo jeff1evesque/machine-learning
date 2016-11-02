@@ -13,6 +13,9 @@ import ModelPredict from './import/navigation/model_predict.jsx';
 var AppRouter = React.createClass({
   // display result
     render: function() {
+        {/* return:
+            @this.props.indexRoute, defined from parent component.
+        */}
         return(
             <Router>
                 <Route path='/' component={this.props.indexRoute} >
