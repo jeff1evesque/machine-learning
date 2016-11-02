@@ -18,7 +18,7 @@ var AppRouter = React.createClass({
             @this.props.indexRoute, defined from parent component.
             @history, is required per 'react-router's ability to handle url:
 
-                - [GitHub-URL]issues/2727#issuecomment-258030214
+                - [GitHub-URL]/issues/2727#issuecomment-258030214
         */}
         return(
             <Router history={browserHistory}>
