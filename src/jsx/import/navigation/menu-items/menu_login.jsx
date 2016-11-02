@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
+
 var MenuLogin = React.createClass({
   // callback for login page
     clickLogin: function(event) {
