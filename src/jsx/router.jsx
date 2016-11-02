@@ -1,5 +1,5 @@
 /**
- * content.jsx: generate main content.
+ * router.jsx: defines react-router tree.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
