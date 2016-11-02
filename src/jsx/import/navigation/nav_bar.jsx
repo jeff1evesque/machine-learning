@@ -12,7 +12,7 @@ var NavBar = React.createClass({
         return(
             <div className='side-menu'>
                 <Link
-                    to={`/data_new`}
+                    to='/data_new'
                     activeClassName='active'
                     className='menu-item'
                 >
@@ -20,7 +20,7 @@ var NavBar = React.createClass({
                 </Link>
 
                 <Link
-                    to={`/data_append`}
+                    to='/data_append'
                     activeClassName='active'
                     className='menu-item'
                 >
@@ -28,7 +28,7 @@ var NavBar = React.createClass({
                 </Link>
 
                 <Link
-                    to={`/model_generate`}
+                    to='/model_generate'
                     activeClassName='active'
                     className='menu-item'
                 >
@@ -36,7 +36,7 @@ var NavBar = React.createClass({
                 </Link>
 
                 <Link
-                    to={`/model_predict`}
+                    to='/model_predict'
                     activeClassName='active'
                     className='menu-item'
                 >
