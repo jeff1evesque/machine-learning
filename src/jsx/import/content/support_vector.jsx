@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import ModelGenerate from '../session-type/model_generate.jsx';
 import ModelPredict from '../session-type/model_predict.jsx';
 import DataNew from '../session-type/data_new.jsx';
