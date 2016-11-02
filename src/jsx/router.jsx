@@ -6,10 +6,19 @@
 
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router'
+import NavBar from './import/navigation/nav_bar.jsx';
 import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
 import ModelGenerate from './import/session-type/model_generate.jsx';
 import ModelPredict from './import/session-type/model_predict.jsx';
+
+// constant: general layout
+const MainLayout = (props) => (
+    <div>
+        <NavBar />
+        {props.children}
+    </div>
+);
 
 var AppRouter = React.createClass({
   // display result
@@ -23,10 +32,24 @@ var AppRouter = React.createClass({
         return(
             <Router history={browserHistory}>
                 <Route path='/' component={this.props.indexRoute} >
-                    <Route path='/data-new' component={DataNew} />
-                    <Route path='/data-append' component={DataAppend} />
-                    <Route path='/model-generate' component={ModelGenerate} />
-                    <Route path='/model-predict' component={ModelPredict} />
+                    <Route component={MainLayout}>
+                        <Route
+                            path='/data-new'
+                            component={DataNew}
+                        />
+                        <Route
+                            path='/data-append'
+                            component={DataAppend}
+                        />
+                        <Route
+                            path='/model-generate'
+                            component={ModelGenerate}
+                        />
+                        <Route
+                            path='/model-predict'
+                            component={ModelPredict}
+                        />
+                    </Route>
                 </Route>
             </Router>
         );
