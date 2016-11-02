@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 
 var SvgMenu = React.createClass({
   // initial 'state properties'
