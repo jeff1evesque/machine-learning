@@ -10,6 +10,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
 import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
 import checkValidString from './../validator/valid_string.js';
