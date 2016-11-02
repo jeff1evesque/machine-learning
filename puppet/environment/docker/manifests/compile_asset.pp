@@ -33,7 +33,6 @@ class start {
     contain compiler::start_uglifyjs
     contain compiler::start_browserify
     contain compiler::start_imagemin
-    contain package::react_router
 }
 
 ## initial compile
