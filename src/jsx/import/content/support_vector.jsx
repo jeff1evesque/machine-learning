@@ -128,29 +128,45 @@ var SupportVector = React.createClass({
                 'this.props.formResult'
         */}
         return(
-            <form onSubmit={this.handleSubmit} ref='analysisForm'>
-                <fieldset className='fieldset-session-type'>
-                    <legend>Session Type</legend>
-                    <p>Choose a session type</p>
-                    <select
-                        name='session_type'
-                        autoComplete='off'
-                        onChange={this.changeSessionType}
-                        value={this.state.value_session_type}
-                    >
-                        <option value='' defaultValue>--Select--</option>
-                        <option value='data_new'>New Data</option>
-                        <option value='data_append'>Append Data</option>
-                        <option value='model_generate'>Generate Model</option>
-                        <option value='model_predict'>Make Prediction</option>
-                    </select>
-                </fieldset>
+            <div className='container-analysis'>
+                <form onSubmit={this.handleSubmit} ref='analysisForm'>
+                    <fieldset className='fieldset-session-type'>
+                        <legend>Session Type</legend>
+                        <p>Choose a session type</p>
+                        <select
+                            name='session_type'
+                            autoComplete='off'
+                            onChange={this.changeSessionType}
+                            value={this.state.value_session_type}
+                        >
+                            <option value='' defaultValue>
+                                --Select--
+                            </option>
 
-                <SessionType onChange={this.displaySubmit} />
-                <SubmitButton onChange={this.sendData} />
-                <Result formResult={this.state.ajax_done_result} />
-                <AjaxSpinner />
-            </form>
+                            <option value='data_new'>
+                                New Data
+                            </option>
+
+                            <option value='data_append'>
+                                Append Data
+                            </option>
+
+                            <option value='model_generate'>
+                                Generate Model
+                            </option>
+
+                            <option value='model_predict'>
+                                Make Prediction
+                            </option>
+                        </select>
+                    </fieldset>
+
+                    <SessionType onChange={this.displaySubmit} />
+                    <SubmitButton onChange={this.sendData} />
+                    <Result formResult={this.state.ajax_done_result} />
+                    <AjaxSpinner />
+                </form>
+            </div>
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
