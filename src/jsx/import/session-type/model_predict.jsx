@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import SupplyPredictors from '../input-data/supply_predictors.jsx';
 import checkValidInt from './../validator/valid_int.js';
 import Spinner from './../general/spinner.jsx';
