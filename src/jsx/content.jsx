@@ -13,7 +13,7 @@ import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 import AppRouter from './router.jsx';
 
-var Content = React.createClass({
+var Page = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -87,6 +87,6 @@ var Content = React.createClass({
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
 ReactDOM.render(
-    <AppRouter indexRoute={Content} />,
+    <AppRouter indexRoute={Page} />,
     document.querySelector('.container')
 );
