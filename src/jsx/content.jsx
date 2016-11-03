@@ -75,7 +75,7 @@ var Content = React.createClass({
                 </div>
                 <div className='main'>
                     <NavBar />
-                    <Content />
+                    <Content routerProp={this.props.children} />
                 </div>
             </div>
         );
