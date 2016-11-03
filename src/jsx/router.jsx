@@ -32,8 +32,8 @@ var AppRouter = React.createClass({
         */}
         return(
             <Router history={browserHistory}>
-                <Route path='/' component={this.props.indexRoute} >
-                    <Route component={MainLayout}>
+                <Route component={this.props.indexRoute} >
+                    <Route path='/' component={MainLayout}>
                         <Route path='/session' component={SupportVector} >
                             <Route
                                 path='/session/data-new'
