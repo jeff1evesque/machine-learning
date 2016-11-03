@@ -106,7 +106,12 @@ var SupportVector = React.createClass({
   // triggered when 'state properties' change
     render: function() {
         var Result = ResultDisplay;
-        var SessionType = this.getSessionType(this.state.value_session_type);
+        if (this.props.routerProp) {
+            var SessionType = this.props.routerProp;
+        }
+        else {
+            var SessionType = this.getSessionType(this.state.value_session_type);
+        }
 
         if (this.state.submit) {
             var SubmitButton = Submit;
