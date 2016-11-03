@@ -15,7 +15,6 @@ import ModelPredict from './import/session-type/model_predict.jsx';
 // constant: general layout
 const MainLayout = (props) => (
     <div>
-        <NavBar />
         {props.children}
     </div>
 );
@@ -58,4 +57,3 @@ var AppRouter = React.createClass({
 
 // indicate which class can be exported, and instantiated via 'require'
 export default AppRouter
-
