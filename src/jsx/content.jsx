@@ -73,9 +73,10 @@ var Page = React.createClass({
                 <div className='menu-container'>
                     <UserMenu onChange={this.setClickType} />
                 </div>
+
                 <div className='main'>
                     <NavBar />
-                    <Content routerProp={this.props.children} />
+                    {this.props.children}
                 </div>
             </div>
         );
