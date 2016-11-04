@@ -137,7 +137,7 @@ var SupportVector = React.createClass({
       // render directly
         else {
             var SessionType = this.getSessionType(this.state.value_session_type);
-            this.setState({router_assigned: false);
+            this.setState({router_assigned: false});
 
         }
 
