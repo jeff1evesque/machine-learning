@@ -16,7 +16,7 @@ import ModelPredict from './import/session-type/model_predict.jsx';
 // constant: general layout
 const MainLayout = (props) => (
     <div className='main'>
-        {props.children}
+        <SupportVector routerProp={props.children} />
     </div>
 );
 
@@ -32,25 +32,23 @@ var AppRouter = React.createClass({
         return(
             <Router history={browserHistory}>
                 <Route component={this.props.indexRoute} >
-                    <Route component={MainLayout}>
-                        <Route path='/' component={SupportVector} >
-                            <Route
-                                path='/data-new'
-                                component={DataNew}
-                            />
-                            <Route
-                                path='/data-append'
-                                component={DataAppend}
-                            />
-                            <Route
-                                path='/model-generate'
-                                component={ModelGenerate}
-                            />
-                            <Route
-                                path='/model-predict'
-                                component={ModelPredict}
-                            />
-                        </Route>
+                    <Route path='/' component={MainLayout}>
+                        <Route
+                            path='/session/data-new'
+                            component={DataNew}
+                        />
+                        <Route
+                            path='/session/data-append'
+                            component={DataAppend}
+                        />
+                        <Route
+                            path='/session/model-generate'
+                            component={ModelGenerate}
+                        />
+                        <Route
+                            path='/session/model-predict'
+                            component={ModelPredict}
+                        />
                     </Route>
                 </Route>
             </Router>
