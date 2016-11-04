@@ -25,7 +25,7 @@ var SupportVector = React.createClass({
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
-            ajax_fail_status: null
+            ajax_fail_status: null,
             option_data_new: 'disabled',
             option_data_append: 'disabled',
             option_model_generate: 'disabled',
