@@ -119,25 +119,25 @@ var SupportVector = React.createClass({
         if (routerProp) {
             var SessionType = routerProp.props.route.component;
             var routerName = routerProp.props.route.component.displayName;
-            this.setState({router_assigned, true);
+            this.setState({router_assigned: true);
 
             if (routerName == 'DataNew') {
-                this.setState({value_session_type, 'selected'});
+                this.setState({value_session_type: 'data_new'});
             }
             else if (routerName == 'DataAppend') {
-                this.setState({value_session_type, 'selected'});
+                this.setState({value_session_type: 'data_append'});
             }
             else if (routerName == 'DataNew') {
-                this.setState({value_session_type, 'selected'});
+                this.setState({value_session_type: 'model_generate'});
             }
             else if (routerName == 'DataNew') {
-                this.setState({value_session_type, 'selected'});
+                this.setState({value_session_type: 'model_predict'});
             }
         }
       // render directly
         else {
             var SessionType = this.getSessionType(this.state.value_session_type);
-            this.setState({router_assigned, false);
+            this.setState({router_assigned: false);
 
         }
 
