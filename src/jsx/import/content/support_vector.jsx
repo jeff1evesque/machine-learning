@@ -26,7 +26,7 @@ var SupportVector = React.createClass({
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
-            router_assigned: false;
+            router_assigned: false,
         };
     },
   // update 'state properties'
