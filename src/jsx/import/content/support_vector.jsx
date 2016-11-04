@@ -119,7 +119,7 @@ var SupportVector = React.createClass({
         if (routerProp) {
             var SessionType = routerProp.props.route.component;
             var routerName = routerProp.props.route.component.displayName;
-            this.setState({router_assigned: true);
+            this.setState({router_assigned: true});
 
             if (routerName == 'DataNew') {
                 this.setState({value_session_type: 'data_new'});
