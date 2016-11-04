@@ -114,12 +114,7 @@ var SupportVector = React.createClass({
 
       // render from router
         if (routerProp) {
-          // debug
-          //  console.log(routerProp);
-
-          // local variables
             var SessionType = routerProp.props.route.component;
-
         }
       // render directly
         else {
