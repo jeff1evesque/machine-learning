@@ -26,10 +26,7 @@ var SupportVector = React.createClass({
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
-            option_data_new: 'disabled',
-            option_data_append: 'disabled',
-            option_model_generate: 'disabled',
-            option_model_predict: 'disabled'
+            router_assigned: false;
         };
     },
   // update 'state properties'
@@ -40,7 +37,11 @@ var SupportVector = React.createClass({
         this.setState({send_data: false});
 
       // define sessionType
-        if (event.target.value && checkValidString(event.target.value)) {
+        if (
+            event.target.value &&
+            checkValidString(event.target.value) &&
+            this.state.router_assigned
+        ) {
             this.setState({value_session_type: event.target.value});
         }
     },
@@ -64,8 +65,10 @@ var SupportVector = React.createClass({
       // local variables
         var sessionType = this.state.value_session_type;
         if (
-            sessionType == 'data_new' || sessionType == 'data_append' ||
-            sessionType == 'model_generate' || sessionType == 'model_predict'
+            sessionType == 'data_new' ||
+            sessionType == 'data_append' ||
+            sessionType == 'model_generate' ||
+            sessionType == 'model_predict'
         ) {
             var ajaxEndpoint = '/load-data/';
             var ajaxArguments = {
@@ -115,10 +118,27 @@ var SupportVector = React.createClass({
       // render from router
         if (routerProp) {
             var SessionType = routerProp.props.route.component;
+            var routerName = routerProp.props.route.component.displayName;
+            this.setState({router_assigned, true);
+
+            if (routerName == 'DataNew') {
+                this.setState({value_session_type, 'selected'});
+            }
+            else if (routerName == 'DataAppend') {
+                this.setState({value_session_type, 'selected'});
+            }
+            else if (routerName == 'DataNew') {
+                this.setState({value_session_type, 'selected'});
+            }
+            else if (routerName == 'DataNew') {
+                this.setState({value_session_type, 'selected'});
+            }
         }
       // render directly
         else {
             var SessionType = this.getSessionType(this.state.value_session_type);
+            this.setState({router_assigned, false);
+
         }
 
         if (this.state.submit) {
