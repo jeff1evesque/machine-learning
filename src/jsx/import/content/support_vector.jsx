@@ -111,41 +111,17 @@ var SupportVector = React.createClass({
     render: function() {
         var Result = ResultDisplay;
         var routerProp = this.props.routerProp;
+
+      // render from router
         if (routerProp) {
           // debug
-            console.log(routerProp);
-            console.log(routerProp.props);
+          //  console.log(routerProp);
 
           // local variables
-            var routerType = routerProp.route.component.displayName;
             var SessionType = routerProp.props.route.component;
 
-            if (routerType == 'DataNew') {
-                this.setState({option_data_new: 'selected'});
-                this.setState({option_data_append: ''});
-                this.setState({option_model_generate: ''});
-                this.setState({option_model_predict: ''});
-            }
-            else if (routerType == 'DataAppend') {
-                this.setState({option_data_new: ''});
-                this.setState({option_data_append: 'selected'});
-                this.setState({option_model_generate: ''});
-                this.setState({option_model_predict: ''});
-            }
-            else if (routerType == 'ModelGenerate') {
-                this.setState({option_data_new: ''});
-                this.setState({option_data_append: ''});
-                this.setState({option_model_generate: 'selected'});
-                this.setState({option_model_predict: ''});
-            }
-            else if (routerType == 'ModelPredict') {
-                this.setState({option_data_new: ''});
-                this.setState({option_data_append: ''});
-                this.setState({option_model_generate: ''});
-                this.setState({option_model_predict: 'selected'});
-            }
-
         }
+      // render directly
         else {
             var SessionType = this.getSessionType(this.state.value_session_type);
         }
@@ -185,19 +161,19 @@ var SupportVector = React.createClass({
                                 --Select--
                             </option>
 
-                            <option value='data_new' {this.state.option_data_new}>
+                            <option value='data_new'>
                                 New Data
                             </option>
 
-                            <option value='data_append' {this.state.option_data_append}>
+                            <option value='data_append'>
                                 Append Data
                             </option>
 
-                            <option value='model_generate' {this.state.option_model_generate}>
+                            <option value='model_generate'>
                                 Generate Model
                             </option>
 
-                            <option value='model_predict' {this.state.option_model_predict}>
+                            <option value='model_predict'>
                                 Make Prediction
                             </option>
                         </select>
