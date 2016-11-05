@@ -39,8 +39,7 @@ var SupportVector = React.createClass({
       // define sessionType
         if (
             event.target.value &&
-            checkValidString(event.target.value) &&
-            this.state.router_assigned
+            checkValidString(event.target.value)
         ) {
             this.setState({value_session_type: event.target.value});
         }
@@ -110,9 +109,8 @@ var SupportVector = React.createClass({
             ajaxArguments);
         }
     },
-  // triggered when 'state properties' change
-    render: function() {
-        var Result = ResultDisplay;
+    componentWillMount: function() {
+      // local variables
         var routerProp = this.props.routerProp;
 
       // render from router
@@ -138,8 +136,11 @@ var SupportVector = React.createClass({
         else {
             var SessionType = this.getSessionType(this.state.value_session_type);
             this.setState({router_assigned: false});
-
         }
+    },
+  // triggered when 'state properties' change
+    render: function() {
+        var Result = ResultDisplay;
 
         if (this.state.submit) {
             var SubmitButton = Submit;
