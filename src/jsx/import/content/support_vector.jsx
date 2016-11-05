@@ -119,7 +119,7 @@ var SupportVector = React.createClass({
             routerProp.props.route &&
             routerProp.props.route.component &&
             routerProp.props.route.component.displayName
-        } {
+        ) {
             var routerSession = routerProp.props.route.component.displayName;
 
           // assign state: if router triggered component
