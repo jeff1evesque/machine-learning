@@ -113,9 +113,8 @@ var SupportVector = React.createClass({
       // local variables
         var routerProp = this.props.routerProp;
 
-      // render from router
+      // assign state: if router triggered component
         if (routerProp) {
-            var SessionType = routerProp.props.route.component;
             var routerName = routerProp.props.route.component.displayName;
             this.setState({router_assigned: true});
 
@@ -132,16 +131,26 @@ var SupportVector = React.createClass({
                 this.setState({value_session_type: 'model_predict'});
             }
         }
-      // render directly
+      // assign state: if router not triggered
         else {
-            var SessionType = this.getSessionType(this.state.value_session_type);
             this.setState({router_assigned: false});
         }
     },
   // triggered when 'state properties' change
     render: function() {
+      // local variables
         var Result = ResultDisplay;
+        var routerProp = this.props.routerProp;
 
+      // conditionally render component based on supplied router, or state
+        if (routerProp) {
+            var SessionType = routerProp.props.route.component;
+        }
+        else {
+            var SessionType = this.getSessionType(this.state.value_session_type);
+        }
+
+      // conditionally render form submit
         if (this.state.submit) {
             var SubmitButton = Submit;
         }
@@ -149,6 +158,7 @@ var SupportVector = React.createClass({
             var SubmitButton = 'span';
         }
 
+      // conditionally render ajax spinner
         if (this.state.display_spinner) {
             var AjaxSpinner = Spinner;
         }
