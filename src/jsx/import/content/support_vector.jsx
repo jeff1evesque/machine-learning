@@ -109,31 +109,22 @@ var SupportVector = React.createClass({
             ajaxArguments);
         }
     },
-    componentWillMount: function() {
+    componentDidMount: function() {
       // local variables
-        var routerProp = this.props.routerProp;
+        var routerName = this.state.router_assigned;
 
       // assign state: if router triggered component
-        if (routerProp) {
-            var routerName = routerProp.props.route.component.displayName;
-            this.setState({router_assigned: true});
-
-            if (routerName == 'DataNew') {
-                this.setState({value_session_type: 'data_new'});
-            }
-            else if (routerName == 'DataAppend') {
-                this.setState({value_session_type: 'data_append'});
-            }
-            else if (routerName == 'DataNew') {
-                this.setState({value_session_type: 'model_generate'});
-            }
-            else if (routerName == 'DataNew') {
-                this.setState({value_session_type: 'model_predict'});
-            }
+        if (routerName == 'DataNew') {
+            this.setState({value_session_type: 'data_new'});
         }
-      // assign state: if router not triggered
-        else {
-            this.setState({router_assigned: false});
+        else if (routerName == 'DataAppend') {
+            this.setState({value_session_type: 'data_append'});
+        }
+        else if (routerName == 'DataNew') {
+           this.setState({value_session_type: 'model_generate'});
+        }
+        else if (routerName == 'DataNew') {
+            this.setState({value_session_type: 'model_predict'});
         }
     },
   // triggered when 'state properties' change
@@ -141,6 +132,15 @@ var SupportVector = React.createClass({
       // local variables
         var Result = ResultDisplay;
         var routerProp = this.props.routerProp;
+        var routerSession = routerProp.props.route.component.displayName;
+
+      // assign session type
+        if (routerSession) {
+            this.setState({router_assigned: routerSession});
+        }
+        else {
+            this.setState({router_assigned: false});
+        }
 
       // conditionally render component based on supplied router, or state
         if (routerProp) {
