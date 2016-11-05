@@ -109,22 +109,32 @@ var SupportVector = React.createClass({
             ajaxArguments);
         }
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
       // local variables
-        var routerName = this.state.router_assigned;
+        var routerProp = this.props.routerProp;
 
-      // assign state: if router triggered component
-        if (routerName == 'DataNew') {
-            this.setState({value_session_type: 'data_new'});
-        }
-        else if (routerName == 'DataAppend') {
-            this.setState({value_session_type: 'data_append'});
-        }
-        else if (routerName == 'DataNew') {
-           this.setState({value_session_type: 'model_generate'});
-        }
-        else if (routerName == 'DataNew') {
-            this.setState({value_session_type: 'model_predict'});
+      // conditionally render component based on supplied router, or state
+        if (
+            routerProp &&
+            routerProp.props.route &&
+            routerProp.props.route.component &&
+            routerProp.props.route.component.displayName
+        } {
+            var routerSession = routerProp.props.route.component.displayName;
+
+          // assign state: if router triggered component
+            if (routerSession == 'DataNew') {
+                this.setState({value_session_type: 'data_new'});
+            }
+            else if (routerSession == 'DataAppend') {
+                this.setState({value_session_type: 'data_append'});
+            }
+            else if (routerSession == 'DataNew') {
+                this.setState({value_session_type: 'model_generate'});
+            }
+            else if (routerSession == 'DataNew') {
+                this.setState({value_session_type: 'model_predict'});
+            }
         }
     },
   // triggered when 'state properties' change
@@ -132,18 +142,13 @@ var SupportVector = React.createClass({
       // local variables
         var Result = ResultDisplay;
         var routerProp = this.props.routerProp;
-        var routerSession = routerProp.props.route.component.displayName;
-
-      // assign session type
-        if (routerSession) {
-            this.setState({router_assigned: routerSession});
-        }
-        else {
-            this.setState({router_assigned: false});
-        }
 
       // conditionally render component based on supplied router, or state
-        if (routerProp) {
+        if (
+            routerProp &&
+            routerProp.props.route &&
+            routerProp.props.route.component
+        ) {
             var SessionType = routerProp.props.route.component;
         }
         else {
