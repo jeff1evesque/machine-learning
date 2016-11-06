@@ -109,7 +109,7 @@ var SupportVector = React.createClass({
             ajaxArguments);
         }
     },
-    componentWillMount: function() {
+    componentDidMount: function() {
       // local variables
         var routerProp = this.props.routerProp;
 
