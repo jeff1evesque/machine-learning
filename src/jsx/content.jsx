@@ -31,6 +31,21 @@ var Page = React.createClass({
             this.setState({render_subpage: 'RegisterForm'});
         }
     },
+  // call back: generate main content
+    getContent: function() {
+        if (this.state.render_home) {
+            return SupportVector;
+        }
+        else if (this.state.render_login) {
+            return LoginForm;
+        }
+        else if (this.state.render_registration) {
+            return RegisterForm;
+        }
+        else {
+            return SupportVector;
+        }
+    },
   // call back: return side navigation
     getNavBar: function(type) {
         if (this.state.render_login || this.state.render_registration) {
@@ -43,7 +58,14 @@ var Page = React.createClass({
   // display result
     render: function() {
         var SideBar = this.getNavBar();
-        var Content = this.getContent();
+        if (this.props.children) {
+            var Content = 'span'
+            var router_component = this.props.children;
+        }
+        else {
+            var Content = this.getContent();
+            var router_component = null;
+        }
 
         return(
             <div className='container-inner'>
@@ -53,7 +75,8 @@ var Page = React.createClass({
 
                 <div className='main'>
                     <NavBar />
-                    {this.props.children}
+                    <Content />
+                    {router_component}
                 </div>
             </div>
         );
@@ -65,6 +88,6 @@ var Page = React.createClass({
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
 ReactDOM.render(
-    <AppRouter indexRoute={Page} renderSubpage={this.state.render_subpage} />,
+    <AppRouter indexRoute={Page} />,
     document.querySelector('.container')
 );
