@@ -132,7 +132,7 @@ var SupportVector = React.createClass({
             routerProp.props.route &&
             routerProp.props.route.component &&
             routerProp.props.route.component.displayName &&
-            routerProb.probs.route.component != this.state.router_assigned
+            routerProp.probs.route.component != this.state.router_assigned
         ) {
             var routerSession = routerProp.props.route.component.displayName;
 
@@ -167,7 +167,7 @@ var SupportVector = React.createClass({
             routerProp &&
             routerProp.props.route &&
             routerProp.props.route.component &&
-            routerProb.probs.route.component != this.state.router_assigned
+            routerProp.probs.route.component != this.state.router_assigned
         ) {
             var SessionType = routerProp.props.route.component;
         }
