@@ -12,27 +12,54 @@ import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
 import ModelGenerate from './import/session-type/model_generate.jsx';
 import ModelPredict from './import/session-type/model_predict.jsx';
+import RegisterForm from './import/content/register.jsx';
+import LoginForm from './import/content/login.jsx';
 
-// constant: general layout
-const MainLayout = (props) => (
-    <div className='main'>
+// constant: analysis layout
+const AnalysisLayout = (props) => (
+    <div className='analysis-container'>
         <SupportVector routerProp={props.children} />
     </div>
 );
 
+// constant: register layout
+const RegisterLayout = (props) => (
+    <div className='main-full-span register-form'>
+        <RegisterForm />
+    </div>
+);
+
+// constant: login layout
+const LoginLayout = (props) => (
+    <div className='main-full-span login-form'>
+        <LoginForm />
+    </div>
+);
+
+// application router
 var AppRouter = React.createClass({
   // display result
     render: function() {
         {/* return:
             @this.props.indexRoute, defined from parent component.
+            @this.props.renderSubpage, defined from parent component.
             @history, is required per 'react-router's ability to handle url:
 
                 - [GitHub-URL]/issues/2727#issuecomment-258030214
         */}
+
+        if (
+            this.props.renderSubpage == 'SupportVector' ||
+            this.props.renderSubpage == 'LoginForm' ||
+            this.props.renderSubpage == 'RegisterForm'
+        ) {
+            RouterLayout = this.props.renderSubpage;
+        }
+
         return(
             <Router history={browserHistory}>
                 <Route component={this.props.indexRoute} >
-                    <Route path='/' component={MainLayout}>
+                    <Route path='/' component={RenderLayout}>
                         <Route
                             path='/session/data-new'
                             component={DataNew}
