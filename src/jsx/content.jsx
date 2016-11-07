@@ -8,9 +8,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import SupportVector from './import/content/support_vector.jsx';
 import LoginForm from './import/content/login.jsx';
-import RegisterForm from './import/content/register.jsx';
-import NavBar from './import/navigation/nav_bar.jsx';
-import UserMenu from './import/navigation/user_menu.jsx';
 import AppRouter from './router.jsx';
 
 var Page = React.createClass({
@@ -19,39 +16,19 @@ var Page = React.createClass({
         return {
             render_login: false,
             render_registration: false,
+            render_subpage: 'SupportVector',
         };
     },
   // update 'state properties': click event has not 'target'
     setClickType: function(event){
         if (event.home) {
-            this.setState({render_login: false});
-            this.setState({render_registration: false});
-            this.setState({render_home: true});
+            this.setState({render_subpage: 'SupportVector'});
         }
         else if (event.login) {
-            this.setState({render_home: false});
-            this.setState({render_registration: false});
-            this.setState({render_login: true});
+            this.setState({render_subpage: 'LoginForm'});
         }
         else if (event.register) {
-            this.setState({render_home: false});
-            this.setState({render_login: false});
-            this.setState({render_registration: true});
-        }
-    },
-  // call back: generate main content
-    getContent: function() {
-        if (this.state.render_home) {
-            return SupportVector;
-        }
-        else if (this.state.render_login) {
-            return LoginForm;
-        }
-        else if (this.state.render_registration) {
-            return RegisterForm;
-        }
-        else {
-            return SupportVector;
+            this.setState({render_subpage: 'RegisterForm'});
         }
     },
   // call back: return side navigation
@@ -88,6 +65,6 @@ var Page = React.createClass({
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
 ReactDOM.render(
-    <AppRouter indexRoute={Page} />,
+    <AppRouter indexRoute={Page} renderSubpage={this.state.render_subpage} />,
     document.querySelector('.container')
 );
