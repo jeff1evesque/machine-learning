@@ -114,6 +114,9 @@ var SupportVector = React.createClass({
         if (this.props.routerProp) {
             var routerProp = this.props.routerProp;
         }
+        else {
+            var routerProp = null;
+        }
 
       // conditionally define state based on supplied router property
         if (
@@ -154,6 +157,9 @@ var SupportVector = React.createClass({
         var Result = ResultDisplay;
         if (this.props.routerProp) {
             var routerProp = this.props.routerProp;
+        }
+        else {
+            var routerProp = null;
         }
 
       // conditionally render component based on supplied router, or state
