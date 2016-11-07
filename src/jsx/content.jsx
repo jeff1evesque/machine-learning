@@ -6,6 +6,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import NavBar from './import/navigation/nav_bar.jsx';
 import SupportVector from './import/content/support_vector.jsx';
 import LoginForm from './import/content/login.jsx';
 import AppRouter from './router.jsx';
