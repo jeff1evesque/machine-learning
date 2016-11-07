@@ -111,16 +111,12 @@ var SupportVector = React.createClass({
     },
     componentDidUpdate: function() {
       // local variables
-        if (this.props.routerProp) {
-            var routerProp = this.props.routerProp;
-        }
-        else {
-            var routerProp = null;
-        }
+        var routerProp = this.props.routerProp;
 
       // conditionally define state based on supplied router property
         if (
             routerProp &&
+            routerProp.props &&
             routerProp.props.route &&
             routerProp.props.route.component
         ) {
@@ -129,6 +125,7 @@ var SupportVector = React.createClass({
 
         if (
             routerProp &&
+            routerProp.props &&
             routerProp.props.route &&
             routerProp.props.route.component &&
             routerProp.props.route.component.displayName &&
@@ -155,16 +152,12 @@ var SupportVector = React.createClass({
     render: function() {
       // local variables
         var Result = ResultDisplay;
-        if (this.props.routerProp) {
-            var routerProp = this.props.routerProp;
-        }
-        else {
-            var routerProp = null;
-        }
+        var routerProp = this.props.routerProp;
 
       // conditionally render component based on supplied router, or state
         if (
             routerProp &&
+            routerProp.props &&
             routerProp.props.route &&
             routerProp.props.route.component &&
             routerProp.probs.route.component != this.state.router_assigned
