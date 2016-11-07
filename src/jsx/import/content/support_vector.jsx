@@ -111,14 +111,25 @@ var SupportVector = React.createClass({
     },
     componentDidUpdate: function() {
       // local variables
-        var routerProp = this.props.routerProp;
+        if (this.props.routerProp) {
+            var routerProp = this.props.routerProp;
+        }
 
-      // conditionally render component based on supplied router, or state
+      // conditionally define state based on supplied router property
+        if (
+            routerProp &&
+            routerProp.props.route &&
+            routerProp.props.route.component
+        ) {
+            this.setState({router_assigned: routerProp.props.route.component});
+        }
+
         if (
             routerProp &&
             routerProp.props.route &&
             routerProp.props.route.component &&
-            routerProp.props.route.component.displayName
+            routerProp.props.route.component.displayName &&
+            routerProb.probs.route.component != this.state.router_assigned
         ) {
             var routerSession = routerProp.props.route.component.displayName;
 
@@ -141,13 +152,16 @@ var SupportVector = React.createClass({
     render: function() {
       // local variables
         var Result = ResultDisplay;
-        var routerProp = this.props.routerProp;
+        if (this.props.routerProp) {
+            var routerProp = this.props.routerProp;
+        }
 
       // conditionally render component based on supplied router, or state
         if (
             routerProp &&
             routerProp.props.route &&
-            routerProp.props.route.component
+            routerProp.props.route.component &&
+            routerProb.probs.route.component != this.state.router_assigned
         ) {
             var SessionType = routerProp.props.route.component;
         }
