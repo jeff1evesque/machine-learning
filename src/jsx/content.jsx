@@ -10,6 +10,7 @@ import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 import SupportVector from './import/content/support_vector.jsx';
 import LoginForm from './import/content/login.jsx';
+import RegisterForm from './import/content/register.jsx';
 import AppRouter from './router.jsx';
 
 var Page = React.createClass({
@@ -60,14 +61,6 @@ var Page = React.createClass({
   // display result
     render: function() {
         var SideBar = this.getNavBar();
-        if (this.props.children) {
-            var Content = 'span'
-            var router_component = this.props.children;
-        }
-        else {
-            var Content = this.getContent();
-            var router_component = null;
-        }
 
         return(
             <div className='container-inner'>
@@ -77,8 +70,7 @@ var Page = React.createClass({
 
                 <div className='main'>
                     <NavBar />
-                    <Content />
-                    {router_component}
+                    {this.props.children}
                 </div>
             </div>
         );
