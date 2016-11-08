@@ -30,8 +30,11 @@ var Page = React.createClass({
         }
     },
   // call back: return side navigation
-    getNavBar: function(type) {
-        if (this.state.render_login || this.state.render_registration) {
+    getNavBar: function() {
+        if (
+            this.state.render_subpage == 'LoginForm' ||
+            this.state.render_subpage == 'RegisterForm'
+        ) {
             return 'span';
         }
         else {
@@ -48,7 +51,7 @@ var Page = React.createClass({
                 </div>
 
                 <div className='main'>
-                    <NavBar />
+                    <SideBar />
                     {this.props.children}
                 </div>
             </div>
@@ -61,6 +64,6 @@ var Page = React.createClass({
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
 ReactDOM.render(
-    <AppRouter indexRoute={Page} subPage={this.state.render_subPage} />,
+    <AppRouter indexRoute={Page} subpage={this.state.render_subpage} />,
     document.querySelector('.container')
 );
