@@ -29,8 +29,8 @@ const LoginLayout = (props) => (
 );
 
 // constant: register layout
-const AnalysisLayout = (props) => (
-    <div className='main-full-span login-form'>
+const RegisterLayout = (props) => (
+    <div className='main-full-span register-form'>
         <RegisterForm routerProp={props.children} />
     </div>
 );
