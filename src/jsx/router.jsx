@@ -10,6 +10,7 @@ import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
 import ModelGenerate from './import/session-type/model_generate.jsx';
 import ModelPredict from './import/session-type/model_predict.jsx';
+import SupportVector from './import/content/support_vector.jsx';
 
 // constant: analysis layout
 const AnalysisLayout = (props) => (
