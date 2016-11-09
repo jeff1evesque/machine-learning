@@ -13,9 +13,6 @@ import SvgHome from '../../svg/svg_home.jsx';
 var MenuHome = React.createClass({
   // callback for home page
     clickHome: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
       // return state to parent component
         this.props.onChange({home: true});
     },
