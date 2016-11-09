@@ -21,6 +21,13 @@ const AnalysisLayout = (props) => (
     </div>
 );
 
+// constant: inner container
+const InnerMain = (props) => (
+    <div className='main-inner'>
+        <SupportVector />
+    </div>
+);
+
 // constant: login layout
 const LoginLayout = (props) => (
     <div className='main-full-span login-form'>
@@ -46,44 +53,30 @@ var AppRouter = React.createClass({
 
                 - [GitHub-URL]/issues/2727#issuecomment-258030214
         */}
-      // conditionally determine subroute(s)
-        if (this.prop.subpage == 'SupportVector') {
-            var AnalysisPage = AnalysisLayout;
-            var LoginPage = 'span';
-            var RegisterPage = 'span';
-        }
-        else if (this.prop.subpage == 'LoginForm') {
-            var AnalysisPage = 'span';
-            var LoginPage = LoginLayout;
-            var RegisterPage = 'span';
-        }
-        else if (this.prop.subpage == 'LoginForm') {
-            var AnalysisPage = 'span';
-            var LoginPage = 'span';
-            var RegisterPage = RegisterLayout;
-        }
 
       // render routers
         return(
             <Router history={browserHistory}>
-                <Route path='/' component={this.props.indexRoute}>
-                    <Route path='/session' component={AnalysisLayout}>
-                        <Route
-                            path='/session/data-new'
-                            component={DataNew}
-                        />
-                        <Route
-                            path='/session/data-append'
-                            component={DataAppend}
-                        />
-                        <Route
-                            path='/session/model-generate'
-                            component={ModelGenerate}
-                        />
-                        <Route
-                            path='/session/model-predict'
-                            component={ModelPredict}
-                        />
+                <Route component={this.props.indexRoute}>
+                    <Route path='/' component={InnerMain}>
+                        <Route path='/session' component={AnalysisLayout}>
+                            <Route
+                                path='/session/data-new'
+                                component={DataNew}
+                            />
+                            <Route
+                                path='/session/data-append'
+                                component={DataAppend}
+                            />
+                            <Route
+                                path='/session/model-generate'
+                                component={ModelGenerate}
+                            />
+                            <Route
+                                path='/session/model-predict'
+                                component={ModelPredict}
+                            />
+                        </Route>
                     </Route>
                     <Route path='/login' component={LoginLayout} />
                     <Route path='/register' component={RegisterLayout} />
