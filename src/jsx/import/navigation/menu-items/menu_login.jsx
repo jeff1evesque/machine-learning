@@ -10,11 +10,6 @@
 import React from 'react';
 
 var MenuLogin = React.createClass({
-  // callback for login page
-    clickLogin: function(event) {
-      // return state to parent component
-        this.props.onChange({login: true});
-    },
   // triggered when 'state properties' change
     render: function(){
         return(
