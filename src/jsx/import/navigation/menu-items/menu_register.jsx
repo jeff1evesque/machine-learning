@@ -7,24 +7,25 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-var MenuRegister = React.createClass({
-  // callback for register page
-    clickRegister: function(event) {
-      // prevent page reload
-        event.preventDefault();
+import React from 'react';
+import { Link } from 'react-router'
 
-      // return state to parent component
-        this.props.onChange({register: true});
+var MenuRegister = React.createClass({
+  // return state to parent component
+    menuClicked: function(event) {
+        this.props.onChange({menu_clicked: 'register'});
     },
   // triggered when 'state properties' change
     render: function(){
         return(
-            <a href='#'
+            <Link
+                to='/register'
+                activeClassName='active'
                 className='btn btn-primary'
-                onClick={this.clickRegister}
+                onClick={this.menuClicked}
             >
-                Sign up
-            </a>
+                <span>Sign up</span>
+            </Link>
         )
     }
 });

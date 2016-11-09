@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
+
 var Spinner = React.createClass({
   // triggered when 'state properties' change
     render: function(){

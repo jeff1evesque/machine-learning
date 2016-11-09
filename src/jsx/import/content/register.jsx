@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import Spinner from '../general/spinner.jsx';
 
 var RegisterForm = React.createClass({

@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import checkValidFloat from './../validator/valid_float.js';
 
 var SupplyPredictors = React.createClass({

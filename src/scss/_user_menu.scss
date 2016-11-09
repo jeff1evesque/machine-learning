@@ -29,3 +29,18 @@
     text-align: center;
   }
 }
+
+.menu-container {
+  a:visited {
+    color: inherit;
+  }
+
+  ul {
+    list-style: none;
+    padding-left: 0;
+
+    li {
+      margin-bottom: .75rem;
+    }
+  }
+}
