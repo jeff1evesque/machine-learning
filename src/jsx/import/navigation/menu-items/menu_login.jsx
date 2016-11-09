@@ -13,7 +13,7 @@ var MenuLogin = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <span onClick={this.clickLogin}>Sign in</span>
+            <span>Sign in</span>
         )
     }
 });
