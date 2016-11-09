@@ -24,7 +24,7 @@ const AnalysisLayout = (props) => (
 // constant: inner container
 const InnerMain = (props) => (
     <div className='main-inner'>
-        <SupportVector />
+        <AnalysisLayout />
     </div>
 );
 
