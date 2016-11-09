@@ -8,12 +8,24 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router'
 
 var MenuLogin = React.createClass({
+  // return state to parent component
+    menuClicked: function(event) {
+        this.props.onChange({menu_clicked: 'login'});
+    },
   // triggered when 'state properties' change
     render: function(){
         return(
-            <span>Sign in</span>
+            <Link
+                to='/login'
+                activeClassName='active'
+                className='btn mn-2'
+                onClick={this.menuClicked}
+            >
+                <span>Sign in</span>
+            </Link>
         )
     }
 });
