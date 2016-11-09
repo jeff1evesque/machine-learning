@@ -64,6 +64,6 @@ var Page = React.createClass({
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
 ReactDOM.render(
-    <AppRouter indexRoute={Page} subpage={this.state.render_subpage} />,
+    <AppRouter indexRoute={Page} />,
     document.querySelector('.container')
 );
