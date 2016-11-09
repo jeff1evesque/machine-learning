@@ -12,21 +12,13 @@ import React from 'react';
 var MenuLogin = React.createClass({
   // callback for login page
     clickLogin: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
       // return state to parent component
         this.props.onChange({login: true});
     },
   // triggered when 'state properties' change
     render: function(){
         return(
-            <a href='#'
-                className='btn mn-2'
-                onClick={this.clickLogin}
-            >
-                Sign in
-            </a>
+            <span onClick={this.clickLogin}>Sign in</span>
         )
     }
 });
