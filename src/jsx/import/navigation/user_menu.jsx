@@ -78,28 +78,27 @@ var UserMenu = React.createClass({
                     to='/'
                     activeClassName='active'
                     className='icon home'
+                    onClick={this.displayHome}
                 >
-                    <MenuHome
-                        onChange={this.displayHome}
-                        classRegister={this.state.show_register}
-                        classLogin={this.state.show_login}
-                    />
+                    <MenuHome />
                 </Link>
 
                 <Link
                     to='/login'
                     activeClassName='active'
                     className='btn mn-2'
+                    onClick={this.displayLogin}
                 >
-                    <Login onChange={this.displayLogin} />
+                    <Login />
                 </Link>
 
                 <Link
                     to='/register'
                     activeClassName='active'
                     className='btn btn-primary'
+                    onClick={this.displayRegister}
                 >
-                    <Register onChange={this.displayRegister} />
+                    <Register />
                 </Link>
             </nav>
         );
