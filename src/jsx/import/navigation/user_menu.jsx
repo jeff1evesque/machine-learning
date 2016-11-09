@@ -5,6 +5,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router'
 import MenuHome from './menu-items/menu_home.jsx';
 import MenuLogin from './menu-items/menu_login.jsx';
 import MenuRegister from './menu-items/menu_register.jsx';
@@ -73,13 +74,33 @@ var UserMenu = React.createClass({
             <nav
                 className={'main-navigation menu-' + this.state.page}
             >
-                <MenuHome
-                    onChange={this.displayHome}
-                    classRegister={this.state.show_register}
-                    classLogin={this.state.show_login}
-                />
-                <Login onChange={this.displayLogin} />
-                <Register onChange={this.displayRegister} />
+                <Link
+                    to='/'
+                    activeClassName='active'
+                    className='icon home'
+                >
+                    <MenuHome
+                        onChange={this.displayHome}
+                        classRegister={this.state.show_register}
+                        classLogin={this.state.show_login}
+                    />
+                </Link>
+
+                <Link
+                    to='/login'
+                    activeClassName='active'
+                    className='btn mn-2'
+                >
+                    <Login onChange={this.displayLogin} />
+                </Link>
+
+                <Link
+                    to='/register'
+                    activeClassName='active'
+                    className='btn btn-primary'
+                >
+                    <Register onChange={this.displayRegister} />
+                </Link>
             </nav>
         );
     }
