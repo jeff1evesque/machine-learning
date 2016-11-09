@@ -22,12 +22,7 @@ var MenuHome = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         return(
-            <a href='#'
-                className='icon home'
-                onClick={this.clickHome}
-            >
-                <SvgHome />
-            </a>
+            <SvgHome onClick={this.clickHome} />
         )
     }
 });
