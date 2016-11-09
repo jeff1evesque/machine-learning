@@ -8,13 +8,25 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router'
 import SvgHome from '../../svg/svg_home.jsx';
 
 var MenuHome = React.createClass({
+  // return state to parent component
+    menuClicked: function(event) {
+        this.props.onChange({menu_clicked: 'home'});
+    },
   // triggered when 'state properties' change
     render: function(){
         return(
-            <SvgHome onClick={this.clickHome} />
+            <Link
+                to='/'
+                activeClassName='active'
+                className='icon home'
+                onClick={this.menuClicked}
+            >
+                <SvgHome />
+            </Link>
         )
     }
 });
