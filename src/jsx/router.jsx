@@ -47,11 +47,12 @@ var AppRouter = React.createClass({
   // display result
     render: function() {
         {/* return:
+
             @this.props.indexRoute, defined from parent component.
-            @this.props.subpage, defined from parent component.
             @history, is required per 'react-router's ability to handle url:
 
                 - [GitHub-URL]/issues/2727#issuecomment-258030214
+
         */}
 
       // render routers
