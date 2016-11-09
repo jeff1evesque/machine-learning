@@ -10,11 +10,6 @@
 import React from 'react';
 
 var MenuRegister = React.createClass({
-  // callback for register page
-    clickRegister: function(event) {
-      // return state to parent component
-        this.props.onChange({register: true});
-    },
   // triggered when 'state properties' change
     render: function(){
         return(
