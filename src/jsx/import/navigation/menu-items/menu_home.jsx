@@ -11,11 +11,6 @@ import React from 'react';
 import SvgHome from '../../svg/svg_home.jsx';
 
 var MenuHome = React.createClass({
-  // callback for home page
-    clickHome: function(event) {
-      // return state to parent component
-        this.props.onChange({home: true});
-    },
   // triggered when 'state properties' change
     render: function(){
         return(
