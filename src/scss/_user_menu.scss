@@ -31,8 +31,10 @@
 }
 
 .menu-container {
-  a:visited {
-    color: inherit;
+  .side-menu {
+    a:visited {
+      color: inherit;
+    }
   }
 
   ul {
