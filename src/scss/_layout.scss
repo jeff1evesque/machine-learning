@@ -6,13 +6,18 @@
 // Note: '//' comment(s), will not appear in the corresponding compiled css,
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
-.main {
-  .menu-container {
-    float: left;
-    width: 16rem;
-  }
+.container {
+  margin: 0 auto;
+  width: 50rem;
 
-  .analysis-container {
-    margin-left: 16rem;
+  .main {
+    .menu-container {
+      float: left;
+      width: 16rem;
+    }
+
+    .analysis-container {
+      margin-left: 16rem;
+    }
   }
 }
