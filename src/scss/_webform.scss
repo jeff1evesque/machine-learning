@@ -26,15 +26,15 @@
 
 form {
   > fieldset {
-    margin-top: $form-margin;
+    margin-top: $gutter-1 / 2;
 
     > fieldset {
-      margin-top: $form-margin / 2;
+      margin-top: $gutter-1 / 4;
     }
   }
 
   .form-submit {
-    margin-top: $form-margin;
+    margin-top: $gutter-1 / 2;
   }
 
   label {
