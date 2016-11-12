@@ -162,6 +162,7 @@ var SupportVector = React.createClass({
             routerProp.props.route.component.displayName &&
             router_assigned != routerProp.props.route.component.displayName
         ) {
+            this.setState({ajax_done_result: null});
             var SessionType = routerProp.props.route.component;
         }
         else {
