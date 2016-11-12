@@ -35,9 +35,10 @@
     a {
       color: $gray-6;
     }
+
     a:hover {
       background-color: $gray-1;
-      border-right: 0.35rem solid $green-4;
+      border-right: .35rem solid $green-4;
       color: $gray-7;
     }
   }
@@ -50,7 +51,7 @@
     a {
       border-bottom: 1px solid $gray-2;
       display: inline-block;
-      padding: 1rem 0 1rem 0.75rem;
+      padding: 1rem 0 1rem .75rem;
       width: 100%;
     }
   }
