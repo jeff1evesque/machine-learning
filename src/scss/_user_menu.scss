@@ -37,19 +37,20 @@
     }
     a:hover {
       background-color: $gray-1;
+      border-right: 0.35rem solid $green-4;
       color: $gray-7;
     }
   }
 
   ul {
     list-style: none;
-    margin-right: $gutter-2;
+    margin-right: $gutter-1 * 2;
     padding-left: 0;
 
     a {
       border-bottom: 1px solid $gray-2;
       display: inline-block;
-      padding: .75rem 0 0.75rem 0.75rem;
+      padding: 1rem 0 1rem 0.75rem;
       width: 100%;
     }
   }
