@@ -32,17 +32,25 @@
 
 .menu-container {
   .side-menu {
-    a:visited {
-      color: inherit;
+    a {
+      color: $gray-6;
+    }
+    a:hover {
+      background-color: $gray-1;
+      color: $gray-7;
     }
   }
 
   ul {
     list-style: none;
+    margin-right: $gutter-1;
     padding-left: 0;
 
-    li {
-      margin-bottom: .75rem;
+    a {
+      border-bottom: 1px solid $gray-2;
+      display: inline-block;
+      padding: .75rem 0 0.75rem 0.75rem;
+      width: 100%;
     }
   }
 }
