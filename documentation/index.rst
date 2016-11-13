@@ -3,13 +3,13 @@ Machine Learning
 ================
 
 In `machine learning <http://en.wikipedia.org/wiki/Machine_learning>`_, support
- vector machine (SVMs), and support vector regression (SVRs) are `supervised learning <http://en.wikipedia.org/wiki/Supervised_learning>`_
- models with associated learning `algorithms <http://en.wikipedia.org/wiki/Algorithm>`_
- that analyze data and recognize patterns, used for `classification <http://en.wikipedia.org/wiki/Statistical_classification>`_
- and `regression analysis <http://en.wikipedia.org/wiki/Regression_analysis>`_.  More
- generally, machine-learning deals with the construction and study of systems
- that can `learn <http://en.wikipedia.org/wiki/Learning>`_ from data, rather than
- follow only explicitly programmed instructions.
+vector machine (SVMs), and support vector regression (SVRs) are `supervised learning <http://en.wikipedia.org/wiki/Supervised_learning>`_
+models with associated learning `algorithms <http://en.wikipedia.org/wiki/Algorithm>`_
+that analyze data and recognize patterns, used for `classification <http://en.wikipedia.org/wiki/Statistical_classification>`_
+and `regression analysis <http://en.wikipedia.org/wiki/Regression_analysis>`_.  More
+generally, machine-learning deals with the construction and study of systems
+that can `learn <http://en.wikipedia.org/wiki/Learning>`_ from data, rather than
+follow only explicitly programmed instructions.
 
 Applications for machine learning include:
 
