@@ -21,7 +21,6 @@ Applications for machine learning include:
 - `Speech <http://en.wikipedia.org/wiki/Speech_recognition>`_ and `handwriting recognition <http://en.wikipedia.org/wiki/Speech_recognition>`_
 - `Sentiment analysis <http://en.wikipedia.org/wiki/Sentiment_analysis>`_
 - `Recommender systems <http://en.wikipedia.org/wiki/Recommender_system>`_
-- `Sequence mining <http://en.wikipedia.org/wiki/Sequence_mining>`_, commonly
- referred as *data mining*
+- `Sequence mining <http://en.wikipedia.org/wiki/Sequence_mining>`_, commonly referred as *data mining*
 - `Computational advertising <http://en.wikipedia.org/wiki/Computational_advertising>`_
 - `Computational finance <http://en.wikipedia.org/wiki/Computational_finance>`_
