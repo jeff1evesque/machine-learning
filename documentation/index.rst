@@ -1,6 +1,6 @@
-===============
+================
 Machine Learning
-===============
+================
 
 In `machine learning <http://en.wikipedia.org/wiki/Machine_learning>`_, support
  vector machine (SVMs), and support vector regression (SVRs) are `supervised learning <http://en.wikipedia.org/wiki/Supervised_learning>`_
