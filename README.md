@@ -6,7 +6,7 @@ This project provides a [web-interface](https://github.com/jeff1evesque/machine-
  a corresponding [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/index.rst)
  makes this same reflection.
 
-**Support algorithms**:
+**Supported algorithms**:
 
 - [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine) (SVM)
 - [Support Vector Regression](https://en.wikipedia.org/wiki/Support_vector_machine#Regression) (SVR)
