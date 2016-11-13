@@ -2,7 +2,7 @@
 Machine Learning
 ================
 
-In `machine learning <http://en.wikipedia.org/wiki/Machine_learning>`__,  support
+In `machine learning <http://en.wikipedia.org/wiki/Machine_learning>`_, support
  vector machine (SVMs), and support vector regression (SVRs) are `supervised learning <http://en.wikipedia.org/wiki/Supervised_learning>`_
  models with associated learning `algorithms <http://en.wikipedia.org/wiki/Algorithm>`_
  that analyze data and recognize patterns, used for `classification <http://en.wikipedia.org/wiki/Statistical_classification>`_
