@@ -6,6 +6,11 @@ This project provides a [web-interface](https://github.com/jeff1evesque/machine-
  a corresponding [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/index.rst)
  makes this same reflection.
 
+Current support algorithms:
+
+- [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine) (SVM)
+- [Support Vector Regression](https://en.wikipedia.org/wiki/Support_vector_machine#Regression) (SVR)
+
 ## Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 
 Donations are very appreciated.  Smaller donations, could fund a latté, during
