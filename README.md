@@ -1,28 +1,15 @@
 # Machine Learning [![Build Status](https://travis-ci.org/jeff1evesque/machine-learning.svg?branch=master)](https://travis-ci.org/jeff1evesque/machine-learning) [![Coverage Status](https://coveralls.io/repos/github/jeff1evesque/machine-learning/badge.svg?branch=master)](https://coveralls.io/github/jeff1evesque/machine-learning?branch=master)
 
-In [machine learning](http://en.wikipedia.org/wiki/Machine_learning), support
- vector machine (SVMs), and support vector regression (SVRs) are [supervised learning](http://en.wikipedia.org/wiki/Supervised_learning)
- models with associated learning [algorithms](http://en.wikipedia.org/wiki/Algorithm)
- that analyze data and recognize patterns, used for [classification](http://en.wikipedia.org/wiki/Statistical_classification)
- and [regression analysis](http://en.wikipedia.org/wiki/Regression_analysis).  More
- generally, machine-learning deals with the construction and study of systems
- that can [learn](http://en.wikipedia.org/wiki/Learning) from data, rather than
- follow only explicitly programmed instructions.
+This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#web-interface),
+ as well as a [programmatic-api](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#programmatic-interface)
+ for various machine learning algorithms. Since the application for such algorithms are so broad,
+ a corresponding [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/index.rst)
+ makes this same reflection.
 
-Applications for machine learning include:
+**Supported algorithms**:
 
-- [Object recognition](http://en.wikipedia.org/wiki/Object_recognition)
-- [Natural language processing](http://en.wikipedia.org/wiki/Natural_language_processing)
-- [Search engines](http://en.wikipedia.org/wiki/Search_engines)
-- [Bioinformatics](http://en.wikipedia.org/wiki/Bioinformatics)
-- [Stock market](http://en.wikipedia.org/wiki/Stock_market) analysis
-- [Speech](http://en.wikipedia.org/wiki/Speech_recognition) and [handwriting recognition](http://en.wikipedia.org/wiki/Speech_recognition)
-- [Sentiment analysis](http://en.wikipedia.org/wiki/Sentiment_analysis)
-- [Recommender systems](http://en.wikipedia.org/wiki/Recommender_system)
-- [Sequence mining](http://en.wikipedia.org/wiki/Sequence_mining), commonly
- referred as *data mining*
-- [Computational advertising](http://en.wikipedia.org/wiki/Computational_advertising)
-- [Computational finance](http://en.wikipedia.org/wiki/Computational_finance)
+- [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine) (SVM)
+- [Support Vector Regression](https://en.wikipedia.org/wiki/Support_vector_machine#Regression) (SVR)
 
 ## Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
 

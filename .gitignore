@@ -4,6 +4,7 @@
 !/brain/
 !/src/
 !/hiera/
+!/documentation/
 !.gitigore
 !hiera.yaml
 !.gitmodules
