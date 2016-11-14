@@ -146,8 +146,8 @@ Otherwise, if ssl is configured, then the application is accessible via
 
 ## Execution
 
-Both the web-interface, and the programmatic api, have corresponding
- [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/unit_test/pytest.rst)
+Both the web-interface, and the programmatic-api, have corresponding
+ [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/unit_test/pytest.rst)
  which can be reviewed, and implemented.
 
 ### Web Interface
