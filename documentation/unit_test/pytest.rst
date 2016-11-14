@@ -8,7 +8,7 @@ unit tests have been defined. These unit tests have been automated within corres
 travis `builds <https://travis-ci.org/jeff1evesque/machine-learning>`_, using
 a series of docker containers, connected via a common docker network:
 
-- |.travis.yml|
+- |.travis.yml|_
 - ```default.dockerfile`` <https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile>`_
 - ```database.dockerfile`` <https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile>`_
 - ```redis.dockerfile`` <https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile>`_
