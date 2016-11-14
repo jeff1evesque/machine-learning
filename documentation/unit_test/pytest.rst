@@ -1,6 +1,6 @@
-================
+=================
 Unit Test: pytest
-================
+=================
 
 This project implements `unit testing <https://en.wikipedia.org/wiki/Unit_testing>`_,
 to validate logic in a consistent fashion. Currently, only `high-level <https://github.com/jeff1evesque/machine-learning/tree/master/test/live_server>`_
@@ -8,14 +8,11 @@ unit tests have been defined. These unit tests have been automated within corres
 travis `builds <https://travis-ci.org/jeff1evesque/machine-learning>`_, using
 a series of docker containers, connected via a common docker network:
 
-- |.travis.yml|_
-- ```default.dockerfile`` <https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile>`_
-- ```database.dockerfile`` <https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile>`_
-- ```redis.dockerfile`` <https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile>`_
-- ```webserver.dockerfile`` <https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile>`_
-
-.. |.travis.yml| replace:: ``.travis.yml``
-.. .travis.yml: https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120
+- |.travis.yml#L101-L120|_
+- |default.dockerfile|_
+- |database.dockerfile|_
+- |redis.dockerfile|_
+- |webserver.dockerfile|_
 
 Current unit tests cover the following sessions:
 
@@ -57,4 +54,17 @@ will include more granular unit tests.
 `exception <https://github.com/jeff1evesque/machine-learning/issues/2234#issuecomment-158850974>`_
 of puppet (erb) `templates <https://github.com/jeff1evesque/machine-learning/tree/master/puppet/template>`_,
 and a handful of open source libraries, have been `linted <https://en.wikipedia.org/wiki/Lint_%28software%29>`_
-via ```.travis.yml`` <https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml>`_.
+via |.travis.yml|_
+
+.. |.travis.yml| replace:: ``.travis.yml``
+.. _.travis.yml: https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml
+.. |.travis.yml#L101-L120| replace:: ``.travis.yml#L101-L120``
+.. _.travis.yml#L101-L120: https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120
+.. |default.dockerfile| replace:: ``default.dockerfile``
+.. _default.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile
+.. |database.dockerfile| replace:: ``database.dockerfile``
+.. _database.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile
+.. |redis.dockerfile| replace:: ``redis.dockerfile``
+.. _redis.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile
+.. |webserver.dockerfile| replace:: ``webserver.dockerfile``
+.. _webserver.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile
