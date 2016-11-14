@@ -101,8 +101,6 @@ Fork this project in your GitHub account.  Then, clone your repository, with
 - [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst#release-tag):
  clone the remote branch, associated with the desired release tag.
 
-**Note**: various [approaches](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst) can be used to clone the repository, which would cover the possibility of cloning the repository, at a specific commit hash.
-
 ## Installation
 
 In order to proceed with the installation for this project, two dependencies
