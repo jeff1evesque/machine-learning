@@ -2,44 +2,25 @@
 
 This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#web-interface),
  as well as a [programmatic-api](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#programmatic-interface)
- for various machine learning algorithms. Since the application for such algorithms are so broad,
- a corresponding [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/index.rst)
- makes this same reflection.
+ for various machine learning algorithms. Some of it's general applications, have
+ been outlined within [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/index.rst).
 
 **Supported algorithms**:
 
 - [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine) (SVM)
 - [Support Vector Regression](https://en.wikipedia.org/wiki/Support_vector_machine#Regression) (SVR)
 
-## Support [![paypal](https://camo.githubusercontent.com/11b2f47d7b4af17ef3a803f57c37de3ac82ac039/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f70617970616c2d646f6e6174652d79656c6c6f772e737667)](https://www.paypal.me/jeff1evesque) [![bitcoin](https://camo.githubusercontent.com/c705adb6695b3d8f60b9a005674cb58b3f1ef1cc/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f646f6e6174652d626974636f696e2d677265656e2e737667)](http://coinbase.com/jeff1evesque)
-
-Donations are very appreciated.  Smaller donations, could fund a latté, during
- a late night meddling code.  While larger donations, could fund further
- research, by assisting the cost for the following:
-
-- server(s): this could be made open to the public, and implementing machine-
-learning.
-- peripheral device(s): these device(s) could connect to the machine-learning
- server(s):
-  - [raspberry pi](https://www.raspberrypi.org/): these devices could
- communicate to the machine-learning server(s), or *peripheral device(s)*.
-  - [xbee chip](www.digi.com/lp/xbee): these chips could implement the
- [zigbee](http://www.zigbee.org/) wireless protocol, allowing peripheral
- device(s) to transmit data between one another, and finally to the machine-
- learning server(s).
-  - [sensor](http://www.adafruit.com/categories/35): multiple types of sensors
- could be connected via the [zigbee](http://www.zigbee.org/) wireless protocol
- to other sensor(s), raspberry pi(s), or directly to the machine-learning
- server(s).
-
 ## Contributing
 
-Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-learning/blob/master/contributing.md)
-, when contributing code. Pull requests that deviate from the
- [`contributing.md`](https://github.com/jeff1evesque/machine-learning/blob/master/contributing.md)
-, could be [labelled](https://github.com/jeff1evesque/machine-learning/labels)
+Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-learning/blob/master/contributing.md),
+ when contributing code. Pull requests that deviate from the
+ [`contributing.md`](https://github.com/jeff1evesque/machine-learning/blob/master/contributing.md),
+ could be [labelled](https://github.com/jeff1evesque/machine-learning/labels)
  as `invalid`, and closed (without merging to master). These best practices
  will ensure integrity, when revisions of code, or issues need to be reviewed.
+
+**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/contribution/support.rst),
+ to further assist with development.
 
 ## Preconfiguration
 
@@ -120,8 +101,6 @@ Fork this project in your GitHub account.  Then, clone your repository, with
 - [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst#release-tag):
  clone the remote branch, associated with the desired release tag.
 
-**Note**: various [approaches](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/configuration/setup_clone.rst) can be used to clone the repository, which would cover the possibility of cloning the repository, at a specific commit hash.
-
 ## Installation
 
 In order to proceed with the installation for this project, two dependencies
@@ -165,7 +144,11 @@ Otherwise, if ssl is configured, then the application is accessible via
 
 **Note:** general convention implements port `443` for ssl.
 
-## Testing / Execution
+## Execution
+
+Both the web-interface, as well as the programmatic api, have corresponding
+ [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/unit_test/pytest.rst)
+ which can be further reviewed, and implemented.
 
 ### Web Interface
 
@@ -236,59 +219,3 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
  respectively.
 
 **Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/documentation/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
-
-### Test Scripts
-
-This project implements [unit testing](https://en.wikipedia.org/wiki/Unit_testing),
- to validate logic in a consistent fashion. Currently, only [high-level](https://github.com/jeff1evesque/machine-learning/tree/master/test/live_server)
- unit tests have been defined. These unit tests have been automated within corresponding
- travis [builds](https://travis-ci.org/jeff1evesque/machine-learning), using
- a series of docker containers, connected via a common docker network:
-
-- [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120)
-- [`default.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile)
-- [`database.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile)
-- [`redis.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile)
-- [`webserver.dockerfile`](https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile)
-
-Current unit tests cover the following sessions:
-
-- `data_new`
-- `data_append`
-- `model_predict`
-- `model_generate`
-
-which can be executed [manually](https://github.com/jeff1evesque/machine-learning/tree/master/test/manual)
- as follows:
-
-```bash
-$ cd /path/to/machine-learning/
-$ vagrant up
-$ vagrant ssh
-vagrant@vagrant-ubuntu-trusty-64:~$ (cd /vagrant/test && pytest manual)
-========================================= test session starts ==========================================
-platform linux2 -- Python 2.7.6, pytest-3.0.3, py-1.4.31, pluggy-0.4.0
-rootdir: /vagrant/test/manual, inifile: pytest.ini
-plugins: flask-0.10.0
-collected 20 items
-
-manual/configure_database.py .
-manual/configure_redis.py .
-manual/authentication/pytest_crypto.py .
-manual/authentication/pytest_validate_password.py .
-manual/programmatic_interface/dataset_url/pytest_svm_dataset_url.py ....
-manual/programmatic_interface/dataset_url/pytest_svr_dataset_url.py ....
-manual/programmatic_interface/file_upload/pytest_svm_file_upload.py ....
-manual/programmatic_interface/file_upload/pytest_svr_file_upload.py ....
-
-====================================== 20 passed in 51.27 seconds ======================================
-```
-
-**Note:** future releases (i.e. milestone [1.0](https://github.com/jeff1evesque/machine-learning/milestones/1.0)),
- will include more granular unit tests.
-
-**Note:** every script within this repository, with the
- [exception](https://github.com/jeff1evesque/machine-learning/issues/2234#issuecomment-158850974)
- of puppet (erb) [templates](https://github.com/jeff1evesque/machine-learning/tree/master/puppet/template),
- and a handful of open source libraries, have been [linted](https://en.wikipedia.org/wiki/Lint_%28software%29)
- via [`.travis.yml`](https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml).
