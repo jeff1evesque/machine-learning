@@ -8,11 +8,11 @@ unit tests have been defined. These unit tests have been automated within corres
 travis `builds <https://travis-ci.org/jeff1evesque/machine-learning>`_, using
 a series of docker containers, connected via a common docker network:
 
-- ``.travis.yml` <https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120>`_
-- ``default.dockerfile` <https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile>`_
-- ``database.dockerfile` <https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile>`_
-- ``redis.dockerfile` <https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile>`_
-- ``webserver.dockerfile` <https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile>`_
+- ``.travis.yml <https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120>`_`
+- ``default.dockerfile <https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile>`_`
+- ``database.dockerfile <https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile>`_`
+- ``redis.dockerfile <https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile>`_`
+- ``webserver.dockerfile <https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile>`_`
 
 Current unit tests cover the following sessions:
 
@@ -54,4 +54,4 @@ will include more granular unit tests.
 `exception <https://github.com/jeff1evesque/machine-learning/issues/2234#issuecomment-158850974>`_
 of puppet (erb) `templates <https://github.com/jeff1evesque/machine-learning/tree/master/puppet/template>`_,
 and a handful of open source libraries, have been `linted <https://en.wikipedia.org/wiki/Lint_%28software%29>`_
-via ``.travis.yml` <https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml>`_.
+via ```.travis.yml`` <https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml>`_.
