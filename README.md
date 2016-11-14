@@ -10,9 +10,6 @@ This project provides a [web-interface](https://github.com/jeff1evesque/machine-
 - [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine) (SVM)
 - [Support Vector Regression](https://en.wikipedia.org/wiki/Support_vector_machine#Regression) (SVR)
 
-**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/contribution/support.rst),
- to further assist with development.
-
 ## Contributing
 
 Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-learning/blob/master/contributing.md),
@@ -21,6 +18,9 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
  could be [labelled](https://github.com/jeff1evesque/machine-learning/labels)
  as `invalid`, and closed (without merging to master). These best practices
  will ensure integrity, when revisions of code, or issues need to be reviewed.
+
+**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/documentation/contribution/support.rst),
+ to further assist with development.
 
 ## Preconfiguration
 
