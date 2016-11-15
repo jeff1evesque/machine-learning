@@ -123,7 +123,7 @@ var RegisterForm = React.createClass({
                         />
                         <p className='note'>
                             Use at least one letter, one numeral,
-                            and seven characters.
+                            and ten characters.
                         </p>
                     </div>
 
