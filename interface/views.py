@@ -25,6 +25,7 @@ from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
 from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
+from brain.validator.validate_password import validate_password
 
 
 # local variables
@@ -145,7 +146,13 @@ def register():
     '''
 
     if request.method == 'POST':
+        # local variables
+        username = request.form.getlist('user[login]')
+        email = request.form.getlist('user[email]')
+        password = request.form.getlist('user[password]')
+
         # verify minimum requirements
+        if (validate_password(password)):
 
             # check username is unique
 
