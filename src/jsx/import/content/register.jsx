@@ -38,7 +38,7 @@ var RegisterForm = React.createClass({
 
       // local variables
         if (this.submit_registration) {
-            var ajaxEndpoint = '/register';
+            var ajaxEndpoint = '/register/';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
                 'data': new FormData(this.refs.registerForm)
