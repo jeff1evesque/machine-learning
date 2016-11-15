@@ -15,7 +15,6 @@ class Save_Account(object):
 
     This class provides an interface to save a username, and their
     corresponding password.
-    
 
     Note: this class explicitly inherits the 'new-style' class.
 
