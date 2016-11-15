@@ -28,6 +28,7 @@ from brain.cache.cache_hset import Cache_Hset
 from brain.validator.validate_password import validate_password
 from brain.database.retrieve_username import Retrieve_Username
 from brain.database.save_account import Save_Account
+from brain.converter.crypto import hashpass
 
 
 # local variables
@@ -168,7 +169,8 @@ def register():
             if not Retrieve_Username().check_username(username):
 
                 # database query: save username, and password
-                result = Save_Account().save_account(username, email, password)
+                hashed = hashpass(password)
+                result = Save_Account().save_account(username, email, hashed)
 
                 # notification: attempt to store account
                 if result:
