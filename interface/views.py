@@ -26,6 +26,7 @@ from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
 from brain.validator.validate_password import validate_password
+from brain.database.retrieve_username import Retrieve_Username
 
 
 # local variables
@@ -155,6 +156,7 @@ def register():
         if (validate_password(password)):
 
             # check username is unique
+            if Retrieve_Username().check_username(username):
 
                 # store username, and password
 
