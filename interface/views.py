@@ -158,13 +158,12 @@ def register():
 
     if request.method == 'POST':
         # local variables
-        username = request.form.getlist('user[login]')
-        email = request.form.getlist('user[email]')
-        password = request.form.getlist('user[password]')
+        username = request.form.getlist('user[login]')[0]
+        email = request.form.getlist('user[email]')[0]
+        password = request.form.getlist('user[password]')[0]
 
         # verify requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
-
             # validate: unique username
             if not Retrieve_Username().check_username(username):
 
