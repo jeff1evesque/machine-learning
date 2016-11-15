@@ -136,6 +136,22 @@ def load_data():
             return json.dumps(response)
 
 
+@blueprint.route('/register/', methods=['POST'])
+def register():
+    '''@register
+
+    This router function attempts to register a new username.
+
+    '''
+
+    if request.method == 'POST':
+        # verify minimum requirements
+
+            # check username is unique
+
+                # store username, and password
+
+
 @blueprint.route('/retrieve-session/', methods=['POST'])
 def retrieve_session():
     '''@retrieve_session
