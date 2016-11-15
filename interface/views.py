@@ -156,7 +156,7 @@ def register():
         if (validate_password(password)):
 
             # check username is unique
-            if Retrieve_Username().check_username(username):
+            if not Retrieve_Username().check_username(username):
 
                 # store username, and password
 
