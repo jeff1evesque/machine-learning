@@ -74,7 +74,7 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                             username VARCHAR (50) NOT NULL,
                             email VARCHAR (255) NOT NULL,
                             password VARCHAR (1069) NOT NULL,
-                            datetime_joined DATETIME NOT NULL,
+                            datetime_joined DATETIME NULL,
                             INDEX (username)
                         );
                         '''
