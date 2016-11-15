@@ -27,6 +27,7 @@ from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
 from brain.validator.validate_password import validate_password
 from brain.database.retrieve_username import Retrieve_Username
+from brain.database.save_account import Save_Account
 
 
 # local variables
@@ -142,7 +143,15 @@ def load_data():
 def register():
     '''@register
 
-    This router function attempts to register a new username.
+    This router function attempts to register a new username. During it's
+    attempt, it returns a tuple, with three values:
+
+        - boolean, inidicates if account created
+        - string, codified indicator of registration attempt:
+            - 0, successful account creation
+            - 1, password doesn't meet minimum requirements
+            - 2, username already exists in the database
+            - 3, internal database error
 
     '''
 
@@ -152,13 +161,28 @@ def register():
         email = request.form.getlist('user[email]')
         password = request.form.getlist('user[password]')
 
-        # verify minimum requirements
+        # verify requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
 
-            # check username is unique
+            # validate: unique username
             if not Retrieve_Username().check_username(username):
 
-                # store username, and password
+                # database query: save username, and password
+                result = Save_Account().save_account(username, email, password)
+
+                # notification: attempt to store account
+                if result:
+                    return (True, '0', username)
+                else:
+                    return (False, '3', username)
+
+            # notification: account already exists
+            else:
+                return (False, '2', username)
+
+        # notification: password doesn't meet criteria
+        else:
+            return (False, '1', password)
 
 
 @blueprint.route('/retrieve-session/', methods=['POST'])
