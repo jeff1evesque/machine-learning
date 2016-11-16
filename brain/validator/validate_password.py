@@ -51,7 +51,7 @@ def load_max(app=True, root='/vagrant'):
                 return {'password_max_c': None, 'error': error}
 
 
-def req_min_c(password):
+def req_min_c(password, app):
     '''@req_min_c
 
     This method returns True if the minimum password character requirement is
@@ -60,12 +60,12 @@ def req_min_c(password):
     @password, is the password to be validated
 
     '''
-    min_c = load_min(app=False)['password_min_c']
+    min_c = load_min(app=app)['password_min_c']
     min_c = 10 if (min_c is None or min_c < 10) else min_c
     return len(password) >= min_c
 
 
-def req_max_c(password):
+def req_max_c(password, app):
     '''@req_max_c
 
     This method returns True if the maximum password character requirement is
@@ -74,7 +74,7 @@ def req_max_c(password):
     @password, is the password to be validated
 
     '''
-    max_c = load_max(app=False)['password_max_c']
+    max_c = load_max(app=app)['password_max_c']
     max_c = 64 if (max_c is None or max_c < 64) else max_c
     return len(password) <= max_c
 
@@ -115,7 +115,7 @@ def req_upper(password):
     return any(a in password for a in uppers)
 
 
-def validate_password(password):
+def validate_password(password, app=False):
     '''@validate_password
 
     This method returns True if the password meets all requirements.
@@ -124,8 +124,8 @@ def validate_password(password):
 
     '''
     return (
-        req_min_c(password) and
-        req_max_c(password) and
+        req_min_c(password, app) and
+        req_max_c(password, app) and
         req_numeral(password) and
         (req_lower(password) or req_upper(password))
     )
