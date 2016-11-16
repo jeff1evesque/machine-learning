@@ -36,7 +36,7 @@ def test_registration(client, live_server):
         if not Retrieve_Username().check_username(username)['result']:
 
             # database query: save username, and password
-            hashed = hashpass(password)
+            hashed = hashpass(str(password))
             result = Save_Account().save_account(username, email, hashed)
 
             # notification: attempt to store account
