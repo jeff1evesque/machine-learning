@@ -43,8 +43,6 @@ def test_registration():
                 result['id'] and not
                 result['error']
             )
-            else:
-                assert False
 
         # notification: account already exists
         else:
