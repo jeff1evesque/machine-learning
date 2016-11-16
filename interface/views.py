@@ -148,7 +148,7 @@ def register():
     attempt, it returns a tuple, with three values:
 
         - boolean, inidicates if account created
-        - string, codified indicator of registration attempt:
+        - integer, codified indicator of registration attempt:
             - 0, successful account creation
             - 1, password doesn't meet minimum requirements
             - 2, username already exists in the database
@@ -164,26 +164,43 @@ def register():
 
         # verify requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
+
             # validate: unique username
-            if not Retrieve_Username().check_username(username):
+            if not Retrieve_Username().check_username(username)['result']:
 
                 # database query: save username, and password
-                hashed = hashpass(password)
+                hashed = hashpass(str(password))
                 result = Save_Account().save_account(username, email, hashed)
 
                 # notification: attempt to store account
                 if result:
-                    return (True, '0', username)
+                    return json.dumps({
+                        'status': True,
+                        'reference': 0,
+                        'username': username
+                    })
                 else:
-                    return (False, '3', username)
+                    return json.dumps({
+                        'status': False,
+                        'reference': 3,
+                        'username': username
+                    })
 
             # notification: account already exists
             else:
-                return (False, '2', username)
+                return json.dumps({
+                    'status': False,
+                    'reference': 2,
+                    'username': username
+                })
 
         # notification: password doesn't meet criteria
         else:
-            return (False, '1', password)
+            return json.dumps({
+                'status': False,
+                'reference': 1,
+                'username': username
+            })
 
 
 @blueprint.route('/retrieve-session/', methods=['POST'])
