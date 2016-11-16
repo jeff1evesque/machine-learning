@@ -9,11 +9,6 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-import json
-import pytest
-import os.path
-from flask import url_for
-from flask import current_app
 from brain.validator.validate_password import validate_password
 from brain.database.retrieve_username import Retrieve_Username
 from brain.database.save_account import Save_Account
