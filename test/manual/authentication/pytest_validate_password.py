@@ -9,7 +9,7 @@ import yaml
 
 
 def test_validate_password():
-    with open("/vagrant/hiera/settings.yaml", 'r') as stream:
+    with open('/vagrant/hiera/settings.yaml', 'r') as stream:
         try:
             yamlres = yaml.load(stream)
             root = yamlres['general']['root']
