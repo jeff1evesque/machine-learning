@@ -3,6 +3,7 @@
 This file will test the password validation functionality.
 
 '''
+
 import imp
 import yaml
 
@@ -15,6 +16,7 @@ def test_validate_password():
             validate_password = root + '/brain/validator/validate_password.py'
         except yaml.YAMLError as error:
             print error
+
     vp = imp.load_source('validate_password', validate_password)
 
     passwords = [
@@ -27,6 +29,7 @@ def test_validate_password():
         'abcdefghIJK',    # no numbers
         'a1' * 65         # too long
     ]
+
     answers = [
         True,
         True,
@@ -38,4 +41,4 @@ def test_validate_password():
         False
     ]
 
-    assert map(vp.validate_password, passwords) == answers
+    assert map(lambda p: vp.validate_password(p, app=False), passwords) == answers
