@@ -30,7 +30,7 @@ def test_registration(client, live_server):
     password = 'password123'
 
     # verify requirements: one letter, one number, and ten characters.
-    if (validate_password(password, True)):
+    if (validate_password(password)):
 
         # validate: unique username
         if not Retrieve_Username().check_username(username)['result']:
