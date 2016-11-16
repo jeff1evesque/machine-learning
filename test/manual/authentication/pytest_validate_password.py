@@ -41,4 +41,7 @@ def test_validate_password():
         False
     ]
 
-    assert map(lambda p: vp.validate_password(p, app=False), passwords) == answers
+    assert map(
+        lambda p: vp.validate_password(p, app=False),
+        passwords
+    ) == answers
