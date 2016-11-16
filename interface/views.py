@@ -25,6 +25,10 @@ from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
 from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
+from brain.validator.validate_password import validate_password
+from brain.database.retrieve_username import Retrieve_Username
+from brain.database.save_account import Save_Account
+from brain.converter.crypto import hashpass
 
 
 # local variables
@@ -134,6 +138,69 @@ def load_data():
 
             # return response
             return json.dumps(response)
+
+
+@blueprint.route('/register/', methods=['POST'])
+def register():
+    '''@register
+
+    This router function attempts to register a new username. During it's
+    attempt, it returns a tuple, with three values:
+
+        - boolean, inidicates if account created
+        - integer, codified indicator of registration attempt:
+            - 0, successful account creation
+            - 1, password doesn't meet minimum requirements
+            - 2, username already exists in the database
+            - 3, internal database error
+
+    '''
+
+    if request.method == 'POST':
+        # local variables
+        username = request.form.getlist('user[login]')[0]
+        email = request.form.getlist('user[email]')[0]
+        password = request.form.getlist('user[password]')[0]
+
+        # verify requirements: one letter, one number, and ten characters.
+        if (validate_password(password)):
+
+            # validate: unique username
+            if not Retrieve_Username().check_username(username)['result']:
+
+                # database query: save username, and password
+                hashed = hashpass(str(password))
+                result = Save_Account().save_account(username, email, hashed)
+
+                # notification: attempt to store account
+                if result:
+                    return json.dumps({
+                        'status': True,
+                        'reference': 0,
+                        'username': username
+                    })
+                else:
+                    return json.dumps({
+                        'status': False,
+                        'reference': 3,
+                        'username': username
+                    })
+
+            # notification: account already exists
+            else:
+                return json.dumps({
+                    'status': False,
+                    'reference': 2,
+                    'username': username
+                })
+
+        # notification: password doesn't meet criteria
+        else:
+            return json.dumps({
+                'status': False,
+                'reference': 1,
+                'username': username
+            })
 
 
 @blueprint.route('/retrieve-session/', methods=['POST'])

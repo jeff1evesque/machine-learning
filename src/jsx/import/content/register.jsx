@@ -15,15 +15,67 @@ var RegisterForm = React.createClass({
     getInitialState: function() {
         return {
             display_spinner: false,
+            submit_registration: false,
         };
     },
-  // call back: used to return spinner
+  // callback: used to return spinner
     getSpinner: function() {
         if (this.state.display_spinner) {
             return Spinner;
         }
         else {
             return 'span';
+        }
+    },
+  // callback: update state signifying submitted registration
+    submit_registration: function(event) {
+        this.setState({submitted_registration: true});
+    },
+  // send form data to serverside on form submission
+    handleSubmit: function(event) {
+      // prevent page reload
+        event.preventDefault();
+
+      // local variables
+        if (this.submit_registration) {
+            var ajaxEndpoint = '/register/';
+            var ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': new FormData(this.refs.registerForm)
+            };
+
+          // boolean to show ajax spinner
+            this.setState({display_spinner: true});
+
+          // asynchronous callback: ajax 'done' promise
+           ajaxCaller(function (asynchObject) {
+            // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ajax_done_error: asynchObject.error});
+                } else if (asynchObject) {
+                    this.setState({ajax_done_result: asynchObject});
+                }
+                else {
+                    this.setState({ajax_done_result: null});
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
+                if (asynchStatus) {
+                    this.setState({ajax_fail_status: asynchStatus});
+                    console.log('Error Status: ' + asynchStatus);
+                }
+                if (asynchError) {
+                    this.setState({ajax_fail_error: asynchError});
+                    console.log('Error Thrown: ' + asynchError);
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
         }
     },
   // triggered when 'state properties' change
@@ -71,7 +123,7 @@ var RegisterForm = React.createClass({
                         />
                         <p className='note'>
                             Use at least one letter, one numeral,
-                            and seven characters.
+                            and ten characters.
                         </p>
                     </div>
 
@@ -79,6 +131,7 @@ var RegisterForm = React.createClass({
                         type='submit'
                         className='btn btn-primary'
                         value='Create an account'
+                        onClick={this.submit_registration}
                     />
                     <AjaxSpinner />
                 </form>

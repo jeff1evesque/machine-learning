@@ -73,7 +73,8 @@ with open(configuration, 'r') as stream:
                             id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             username VARCHAR (50) NOT NULL,
                             email VARCHAR (255) NOT NULL,
-                            password VARCHAR (128) NOT NULL,
+                            password VARCHAR (1069) NOT NULL,
+                            datetime_joined DATETIME NOT NULL,
                             INDEX (username)
                         );
                         '''

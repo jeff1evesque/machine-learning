@@ -67,7 +67,7 @@ def getscryptparams(app=True, root='/vagrant'):
                 return pow(2, 18), 8, 1
 
 
-def hashpass(password):
+def hashpass(password, app=True):
     '''@hashpass
 
     This method returns a hash and salt from a password p
@@ -75,8 +75,8 @@ def hashpass(password):
     @salt - a random string of saltlength bytes generated to hash the password
 
     '''
-    salt = getsalt(app=False)
-    N, r, p = getscryptparams(app=False)
+    salt = getsalt(app=app)
+    N, r, p = getscryptparams(app=app)
     try:
         hashed = scrypt.hash(password, salt, N=N, r=r, p=p, buflen=512)
         hashed = hashed.encode("hex")
@@ -85,7 +85,7 @@ def hashpass(password):
         return False
 
 
-def verifypass(password, h):
+def verifypass(password, h, app=True):
     '''@verifypass
 
     This function verifies that a password p hashes to a hash h as
@@ -95,7 +95,7 @@ def verifypass(password, h):
     @s - salt extracted from the hash+salt
 
     '''
-    N, r, p = getscryptparams(app=False)
+    N, r, p = getscryptparams(app=app)
     h, s = h.split('$')
     hashed = scrypt.hash(password, s, N=N, r=r, p=p, buflen=512)
     hashed = hashed.encode("hex")

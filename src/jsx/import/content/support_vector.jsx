@@ -21,6 +21,7 @@ var SupportVector = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            display_spinner: false,
             value_session_type: '--Select--',
             ajax_done_result: null,
             ajax_done_error: null,
