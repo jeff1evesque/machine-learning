@@ -42,7 +42,7 @@ class Retrieve_Username(object):
         self.sql.sql_connect(self.db_ml)
         sql_statement = 'SELECT * '\
             'FROM tbl_user '\
-            'WHERE id_entity=%s'
+            'WHERE username=%s'
         args = (username)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
