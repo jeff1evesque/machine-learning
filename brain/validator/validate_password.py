@@ -9,7 +9,7 @@ from flask import current_app
 import yaml
 
 
-def load_min(app=True, root='/vagrant'):
+def load_min(app=False, root='/vagrant'):
     '''@load_min
 
     This method returns the minimum character requirement for passwords.
@@ -31,7 +31,7 @@ def load_min(app=True, root='/vagrant'):
                 return {'password_min_c': None, 'error': error}
 
 
-def load_max(app=True, root='/vagrant'):
+def load_max(app=False, root='/vagrant'):
     '''@load_max
 
     This method returns the maximum character requirement for passwords.
@@ -53,7 +53,7 @@ def load_max(app=True, root='/vagrant'):
                 return {'password_max_c': None, 'error': error}
 
 
-def req_min_c(password, app):
+def req_min_c(password, app=False):
     '''@req_min_c
 
     This method returns True if the minimum password character requirement is
@@ -68,7 +68,7 @@ def req_min_c(password, app):
     return len(password) >= min_c
 
 
-def req_max_c(password, app):
+def req_max_c(password, app=False):
     '''@req_max_c
 
     This method returns True if the maximum password character requirement is
