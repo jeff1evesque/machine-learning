@@ -45,8 +45,6 @@ def test_registration(client, live_server):
                 result['id'] and not
                 result['error']
             )
-            else:
-                assert False
 
         # notification: account already exists
         else:
