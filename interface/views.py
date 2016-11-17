@@ -171,14 +171,14 @@ def login():
                 })
             else:
                 return json.dumps({
-                    'status': 3,
+                    'status': 2,
                     'username': username
                 })
 
         # notification: username does not exist
         else:
             return json.dumps({
-                'status': 2,
+                'status': 1,
                 'username': username
             })
 
