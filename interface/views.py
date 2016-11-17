@@ -51,9 +51,14 @@ def index():
     return render_template('index.html')
 
 
-@blueprint.route(404)
+@blueprint.app_errorhandler(404)
 def page_not_found(e):
     return render_template('index.html'), 404
+
+
+@blueprint.app_errorhandler(405)
+def method_not_allowed(e):
+    return render_template('index.html'), 405
 
 
 @blueprint.route('/load-data/', methods=['POST'], endpoint='load_data')
