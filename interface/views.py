@@ -140,19 +140,62 @@ def load_data():
             return json.dumps(response)
 
 
+@blueprint.route('/login/', methods=['POST'])
+def login():
+    '''@login
+
+    This router function attempts to fulfill a login request. During its
+    attempt, it returns a json string, with two values:
+
+        - boolean, inidicates if account exists
+        - integer, codified indicator of registration attempt:
+            - 0, successful login
+            - 1, username does not exist
+            - 2, unsuccessful login password match
+
+    '''
+
+    if request.method == 'POST':
+        # local variables
+
+        # validate: check username
+        if ():
+
+            # database query: get password
+
+            # notification: verify user
+            if result:
+                return json.dumps({
+                    'status': 0,
+                    'username': username
+                })
+            else:
+                return json.dumps({
+                    'status': 3,
+                    'username': username
+                })
+
+        # notification: username does not exist
+        else:
+            return json.dumps({
+                'status': 2,
+                'username': username
+            })
+
+
 @blueprint.route('/register/', methods=['POST'])
 def register():
     '''@register
 
-    This router function attempts to register a new username. During it's
-    attempt, it returns a tuple, with three values:
+    This router function attempts to register a new username. During its
+    attempt, it returns a json string, with two values:
 
-        - boolean, inidicates if account created
         - integer, codified indicator of registration attempt:
             - 0, successful account creation
             - 1, password doesn't meet minimum requirements
             - 2, username already exists in the database
             - 3, internal database error
+        - username, string value of the user
 
     '''
 
@@ -175,30 +218,26 @@ def register():
                 # notification: attempt to store account
                 if result:
                     return json.dumps({
-                        'status': True,
-                        'reference': 0,
+                        'status': 0,
                         'username': username
                     })
                 else:
                     return json.dumps({
-                        'status': False,
-                        'reference': 3,
+                        'status': 3,
                         'username': username
                     })
 
             # notification: account already exists
             else:
                 return json.dumps({
-                    'status': False,
-                    'reference': 2,
+                    'status': 2,
                     'username': username
                 })
 
         # notification: password doesn't meet criteria
         else:
             return json.dumps({
-                'status': False,
-                'reference': 1,
+                'status': 1,
                 'username': username
             })
 
