@@ -29,7 +29,7 @@ var LoginForm = React.createClass({
     },
   // callback: update state signifying submitted login
     submit_login: function(event) {
-        this.setState({submitted_registration: true});
+        this.setState({submitted_login: true});
     },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
@@ -37,7 +37,7 @@ var LoginForm = React.createClass({
         event.preventDefault();
 
       // local variables
-        if (this.submit_registration) {
+        if (this.submit_login) {
             var ajaxEndpoint = '/login';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
