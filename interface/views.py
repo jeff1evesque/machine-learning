@@ -161,7 +161,8 @@ def login():
         - integer, codified indicator of registration attempt:
             - 0, successful login
             - 1, username does not exist
-            - 2, unsuccessful login password match
+            - 2, username does not have a password
+            - 3, supplied password does not match stored password
 
     '''
 
@@ -177,12 +178,22 @@ def login():
             # database query: get hashed password
             hashed_password = authenticate.get_password(user)
 
-            # notification: verify password
-            if verifypass(password, hashed_password):
-                return json.dumps({
-                    'status': 0,
-                    'username': username
-                })
+            # notification: verify hashed password exists
+            if hashed_password:
+
+                # notification: verify password
+                if verifypass(password, hashed_password):
+                    return json.dumps({
+                        'status': 0,
+                        'username': username
+                    })
+                else:
+                    return json.dumps({
+                        'status': 3,
+                        'username': username
+                    })
+
+            # notification: user does not have a password
             else:
                 return json.dumps({
                     'status': 2,
@@ -218,12 +229,13 @@ def register():
         username = request.form.getlist('user[login]')[0]
         email = request.form.getlist('user[email]')[0]
         password = request.form.getlist('user[password]')[0]
+        authenticate = Retrieve_Account()
 
         # verify requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
 
             # validate: unique username
-            if not Retrieve_Account().check_username(username)['result']:
+            if not authenticate.check_username(username)['result']:
 
                 # database query: save username, and password
                 hashed = hashpass(str(password))
