@@ -176,13 +176,13 @@ def login():
         if authenticate.check_username(username)['result']:
 
             # database query: get hashed password
-            hashed_password = authenticate.get_password(username)
+            hashed_password = authenticate.get_password(username)['result']
 
             # notification: verify hashed password exists
             if hashed_password:
 
                 # notification: verify password
-                if verifypass(password, hashed_password):
+                if verifypass(str(password), hashed_password):
                     return json.dumps({
                         'status': 0,
                         'username': username
