@@ -15,6 +15,7 @@ var LoginForm = React.createClass({
     getInitialState: function() {
         return {
             display_spinner: false,
+            submit_login: false,
         };
     },
   // call back: used to return spinner
@@ -26,13 +27,64 @@ var LoginForm = React.createClass({
             return 'span';
         }
     },
+  // callback: update state signifying submitted login
+    submit_login: function(event) {
+        this.setState({submitted_login: true});
+    },
+  // send form data to serverside on form submission
+    handleSubmit: function(event) {
+      // prevent page reload
+        event.preventDefault();
+
+      // local variables
+        if (this.submit_login) {
+            var ajaxEndpoint = '/login';
+            var ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': new FormData(this.refs.loginForm)
+            };
+
+          // boolean to show ajax spinner
+            this.setState({display_spinner: true});
+
+          // asynchronous callback: ajax 'done' promise
+           ajaxCaller(function (asynchObject) {
+            // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ajax_done_error: asynchObject.error});
+                } else if (asynchObject) {
+                    this.setState({ajax_done_result: asynchObject});
+                }
+                else {
+                    this.setState({ajax_done_result: null});
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
+                if (asynchStatus) {
+                    this.setState({ajax_fail_status: asynchStatus});
+                    console.log('Error Status: ' + asynchStatus);
+                }
+                if (asynchError) {
+                    this.setState({ajax_fail_error: asynchError});
+                    console.log('Error Thrown: ' + asynchError);
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+        }
+    },
   // triggered when 'state properties' change
     render: function() {
         var AjaxSpinner = this.getSpinner();
 
         return(
             <div className='main-full-span login-form'>
-                <form onSubmit={this.handleSubmit} ref='registerForm'>
+                <form onSubmit={this.handleSubmit} ref='loginForm'>
                     <div className='form-header'>
                         <h1>Sign in Web-Interface</h1>
                     </div>
@@ -54,6 +106,7 @@ var LoginForm = React.createClass({
                         <input
                             type='submit'
                             className='input-submit btn btn-primary'
+                            onClick={this.submit_login}
                         />
                         <AjaxSpinner />
                     </div>

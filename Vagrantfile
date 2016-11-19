@@ -47,6 +47,11 @@ Vagrant.configure(2) do |config|
   config.vm.network 'forwarded_port', guest: 5000, host: 8080
   config.vm.network 'forwarded_port', guest: 443, host: 8585
 
+  ## increase RAM to ensure scrypt doesn't exhaust memory
+  config.vm.provider 'virtualbox' do |v|
+    v.customize ['modifyvm', :id, '--memory', '10000']
+  end
+
   ## Run r10k
   config.r10k.puppet_dir      = "puppet/environment/#{environment}"
   config.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
