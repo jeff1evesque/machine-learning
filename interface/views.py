@@ -171,13 +171,13 @@ def login():
         password = request.form.getlist('user[password]')[0]
         authenticate = Retrieve_Account()
 
-        # validate: check username
+        # validate: check username exists
         if authenticate.check_username(username)['result']:
 
-            # database query: get password
+            # database query: get hashed password
             hashed_password = authenticate.get_password(user)
 
-            # notification: verify user
+            # notification: verify password
             if verifypass(password, hashed_password):
                 return json.dumps({
                     'status': 0,
