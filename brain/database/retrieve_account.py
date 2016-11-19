@@ -10,7 +10,7 @@ from flask import current_app
 from brain.database.db_query import SQL
 
 
-class Retrieve_Username(object):
+class Retrieve_Account(object):
     '''
     @Retrieve_Username
 
