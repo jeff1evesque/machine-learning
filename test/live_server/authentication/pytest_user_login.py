@@ -31,7 +31,7 @@ def test_login(client, live_server):
     if authenticate.check_username(username)['result']:
 
         # database query: get hashed password
-        hashed_password = authenticate.get_password(username)
+        hashed_password = authenticate.get_password(username)['result']
 
         # notification: verify hashed password exists
         if hashed_password:
