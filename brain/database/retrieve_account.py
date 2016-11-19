@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
-'''@retrieve_username
+'''@retrieve_account
 
-This file retrieves dataset entity related properties.
+This file retrieves user account values.
 
 '''
 
@@ -14,7 +14,8 @@ class Retrieve_Username(object):
     '''
     @Retrieve_Username
 
-    This class provides an interface to check if a username already exists.
+    This class provides an interface to check if a username already exists,
+    and retrieves the corresponding password.
 
     Note: this class explicitly inherits the 'new-style' class.
 
@@ -32,9 +33,9 @@ class Retrieve_Username(object):
         self.db_ml = current_app.config.get('DB_ML')
 
     def check_username(self, username):
-        '''@get_title
+        '''@check_username
 
-        This method checks if the supplied username already exists
+        This method checks if the supplied username already exists.
 
         '''
 
@@ -44,6 +45,31 @@ class Retrieve_Username(object):
             'FROM tbl_user '\
             'WHERE username=%s'
         args = (username)
+        response = self.sql.sql_command(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.sql_disconnect()
+
+        # return result
+        if response_error:
+            return {'error': response_error, 'result': None}
+        else:
+            return {'error': None, 'result': response['result']}
+
+    def check_password(self, password):
+        '''@check_password
+
+        This method checks if the supplied password is correct.
+
+        '''
+
+        # select dataset
+        self.sql.sql_connect(self.db_ml)
+        sql_statement = 'SELECT * '\
+            'FROM tbl_user '\
+            'WHERE password=%s'
+        args = (password)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
