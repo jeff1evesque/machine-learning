@@ -26,9 +26,9 @@ from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
 from brain.validator.validate_password import validate_password
-from brain.database.retrieve_username import Retrieve_Username
+from brain.database.retrieve_account import Retrieve_Account
 from brain.database.save_account import Save_Account
-from brain.converter.crypto import hashpass
+from brain.converter.crypto import hashpass, verifypass
 
 
 # local variables
@@ -169,14 +169,16 @@ def login():
         # local variables
         username = request.form.getlist('user[login]')[0]
         password = request.form.getlist('user[password]')[0]
+        authenticate = Retrieve_Account()
 
         # validate: check username
-        if Retrieve_Username().check_username(username)['result']:
+        if authenticate.check_username(username)['result']:
 
             # database query: get password
+            hashed_password = authenticate.get_password(user)
 
             # notification: verify user
-            if result:
+            if verifypass(password, hashed_password):
                 return json.dumps({
                     'status': 0,
                     'username': username
@@ -221,7 +223,7 @@ def register():
         if (validate_password(password)):
 
             # validate: unique username
-            if not Retrieve_Username().check_username(username)['result']:
+            if not Retrieve_Account().check_username(username)['result']:
 
                 # database query: save username, and password
                 hashed = hashpass(str(password))
