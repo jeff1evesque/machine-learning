@@ -70,7 +70,7 @@ var SupportVector = React.createClass({
             sessionType == 'model_generate' ||
             sessionType == 'model_predict'
         ) {
-            var ajaxEndpoint = '/load-data/';
+            var ajaxEndpoint = '/load-data';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
                 'data': new FormData(this.refs.analysisForm)
