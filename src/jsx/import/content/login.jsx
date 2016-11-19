@@ -41,7 +41,7 @@ var LoginForm = React.createClass({
             var ajaxEndpoint = '/login';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.registerForm)
+                'data': new FormData(this.refs.loginForm)
             };
 
           // boolean to show ajax spinner
@@ -84,7 +84,7 @@ var LoginForm = React.createClass({
 
         return(
             <div className='main-full-span login-form'>
-                <form onSubmit={this.handleSubmit} ref='registerForm'>
+                <form onSubmit={this.handleSubmit} ref='loginForm'>
                     <div className='form-header'>
                         <h1>Sign in Web-Interface</h1>
                     </div>
