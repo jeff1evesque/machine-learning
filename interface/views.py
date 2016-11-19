@@ -167,9 +167,11 @@ def login():
 
     if request.method == 'POST':
         # local variables
+        username = request.form.getlist('user[login]')[0]
+        password = request.form.getlist('user[password]')[0]
 
         # validate: check username
-        if ():
+        if Retrieve_Username().check_username(username)['result']:
 
             # database query: get password
 
