@@ -16,7 +16,7 @@ from brain.converter.crypto import hashpass
 
 
 def test_registration(client, live_server):
-    '''@test_model_predict
+    '''@test_registration
 
     This method tests the user registration process.
 
