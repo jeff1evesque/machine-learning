@@ -3,16 +3,16 @@ Data Attributes
 ===============
 
 -  `SVM
-   datasets <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm>`__
+   datasets <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm>`_
 
-   -  `dataset url <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/dataset_url>`__
-   -  `file upload <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/file_upload>`__
+   -  `dataset url <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/dataset_url>`_
+   -  `file upload <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/file_upload>`_
 
 -  `SVR
-   datasets <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr>`__
+   datasets <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr>`_
 
-   -  `dataset url <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/dataset_url>`__
-   -  `file upload <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/file_upload>`__
+   -  `dataset url <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/dataset_url>`_
+   -  `file upload <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/file_upload>`_
 
 **Note:** the content of each of the above files, can be substituted for
 the ``data`` attribute.

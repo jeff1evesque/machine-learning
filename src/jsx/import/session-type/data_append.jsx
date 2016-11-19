@@ -177,7 +177,7 @@ var DataAppend = React.createClass({
         this.mounted = true;
 
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-session/';
+        var ajaxEndpoint = '/retrieve-session';
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null
