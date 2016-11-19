@@ -54,24 +54,30 @@ var AppRouter = React.createClass({
                 <Route component={this.props.indexRoute}>
                     <Route path='/' component={AnalysisLayout}>
                         <Route
-                            path='/session/data-new'
+                            path='/data-new'
                             component={DataNew}
                         />
                         <Route
-                            path='/session/data-append'
+                            path='/data-append'
                             component={DataAppend}
                         />
                         <Route
-                            path='/session/model-generate'
+                            path='/model-generate'
                             component={ModelGenerate}
                         />
                         <Route
-                            path='/session/model-predict'
+                            path='/model-predict'
                             component={ModelPredict}
                         />
                     </Route>
-                    <Route path='/login' component={LoginLayout} />
-                    <Route path='/register' component={RegisterLayout} />
+                    <Route
+                        path='/login'
+                        component={LoginLayout}
+                    />
+                    <Route
+                        path='/register'
+                        component={RegisterLayout}
+                    />
                 </Route>
             </Router>
         );

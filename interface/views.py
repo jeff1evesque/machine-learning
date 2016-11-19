@@ -51,7 +51,17 @@ def index():
     return render_template('index.html')
 
 
-@blueprint.route('/load-data/', methods=['POST'], endpoint='load_data')
+@blueprint.app_errorhandler(404)
+def page_not_found(e):
+    return render_template('index.html'), 404
+
+
+@blueprint.app_errorhandler(405)
+def method_not_allowed(e):
+    return render_template('index.html'), 405
+
+
+@blueprint.route('/load-data', methods=['POST'], endpoint='load_data')
 def load_data():
     '''@load_data
 
@@ -140,7 +150,7 @@ def load_data():
             return json.dumps(response)
 
 
-@blueprint.route('/register/', methods=['POST'])
+@blueprint.route('/register', methods=['POST'])
 def register():
     '''@register
 
@@ -203,7 +213,7 @@ def register():
             })
 
 
-@blueprint.route('/retrieve-session/', methods=['POST'])
+@blueprint.route('/retrieve-session', methods=['POST'])
 def retrieve_session():
     '''@retrieve_session
 
@@ -223,7 +233,7 @@ def retrieve_session():
 
 
 @blueprint.route(
-    '/retrieve-sv-model/',
+    '/retrieve-sv-model',
     methods=['POST'],
     endpoint='retrieve_sv_model'
 )
@@ -263,7 +273,7 @@ def retrieve_sv_model():
 
 
 @blueprint.route(
-    '/retrieve-sv-features/',
+    '/retrieve-sv-features',
     methods=['POST'],
     endpoint='retrieve_sv_features'
 )
