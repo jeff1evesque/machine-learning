@@ -37,7 +37,7 @@ def test_login(client, live_server):
         if hashed_password:
 
             # notification: verify password
-            assert verifypass(password, hashed_password)
+            assert verifypass(str(password), hashed_password)
 
         # notification: user does not have password
         else:
