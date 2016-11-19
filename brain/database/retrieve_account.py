@@ -57,7 +57,7 @@ class Retrieve_Account(object):
         else:
             return {'error': None, 'result': response['result']}
 
-    def get_password(self, user):
+    def get_password(self, username):
         '''@get_password
 
         This method checks returns the hashed password for a supplied user.
@@ -68,8 +68,8 @@ class Retrieve_Account(object):
         self.sql.sql_connect(self.db_ml)
         sql_statement = 'SELECT password '\
             'FROM tbl_user '\
-            'WHERE user=%s'
-        args = (user)
+            'WHERE username=%s'
+        args = (username)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
