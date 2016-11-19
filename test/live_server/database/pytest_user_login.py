@@ -1,4 +1,4 @@
-'''@pytest_account_login
+'''@pytest_user_login
 
 This file will test the necessary interfaces required to login.
 
@@ -9,9 +9,8 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-from brain.validator.validate_password import validate_password
 from brain.database.retrieve_account import Retrieve_Account
-from brain.converter.crypto import hashpass, verifypass
+from brain.converter.crypto import verifypass
 
 
 def test_login(client, live_server):
@@ -32,7 +31,7 @@ def test_login(client, live_server):
     if authenticate.check_username(username)['result']:
 
         # database query: get hashed password
-        hashed_password = authenticate.get_password(user)
+        hashed_password = authenticate.get_password(username)
 
         # notification: verify hashed password exists
         if hashed_password:
