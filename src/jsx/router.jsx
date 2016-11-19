@@ -69,15 +69,15 @@ var AppRouter = React.createClass({
                             path='/model-predict'
                             component={ModelPredict}
                         />
-                        <Route
-                            path='/login'
-                            component={LoginLayout}
-                        />
-                        <Route
-                            path='/register'
-                            component={RegisterLayout}
-                        />
                     </Route>
+                    <Route
+                        path='/login'
+                        component={LoginLayout}
+                    />
+                    <Route
+                        path='/register'
+                        component={RegisterLayout}
+                    />
                 </Route>
             </Router>
         );
