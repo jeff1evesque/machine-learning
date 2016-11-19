@@ -150,7 +150,7 @@ def load_data():
             return json.dumps(response)
 
 
-@blueprint.route('/login/', methods=['POST'])
+@blueprint.route('/login', methods=['POST'])
 def login():
     '''@login
 
@@ -176,7 +176,7 @@ def login():
         if authenticate.check_username(username)['result']:
 
             # database query: get hashed password
-            hashed_password = authenticate.get_password(user)
+            hashed_password = authenticate.get_password(username)
 
             # notification: verify hashed password exists
             if hashed_password:
