@@ -241,7 +241,7 @@ def register():
             if not authenticate.check_username(username)['result']:
 
                 # validate: unique email
-                if not authenticate.check_email(username)['result']:
+                if not authenticate.check_email(email)['result']:
 
                     # database query: save username, and password
                     hashed = hashpass(str(password))
