@@ -254,6 +254,7 @@ def register():
                             'username': username,
                             'email': email
                         })
+
                     else:
                         return json.dumps({
                             'status': 4,
