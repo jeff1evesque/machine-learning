@@ -59,9 +59,9 @@ class Retrieve_Account(object):
 
 
     def get_email(self, username):
-        '''@check_username
+        '''@get_email
 
-        This method checks if the supplied username already exists.
+        This method returns the corresponding email for a supplied username.
 
         '''
 
@@ -87,7 +87,7 @@ class Retrieve_Account(object):
     def get_password(self, username):
         '''@get_password
 
-        This method checks returns the hashed password for a supplied user.
+        This method returns the hashed password for a supplied username.
 
         '''
 
