@@ -105,7 +105,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
         # instantiate login manager
         login_manager = LoginManager()
-        login_manager.init_app(blueprint)
+        login_manager.init_app(app)
 
         # return
         return app
