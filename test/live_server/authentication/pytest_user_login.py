@@ -27,7 +27,7 @@ def test_login(client, live_server):
     password = 'password123'
     authenticate = Retrieve_Account()
 
-    # validate: check username exists
+    # validate: username exists
     if authenticate.check_username(username)['result']:
 
         # database query: get hashed password
@@ -39,7 +39,7 @@ def test_login(client, live_server):
             # notification: verify password
             assert verifypass(str(password), hashed_password)
 
-        # notification: user does not have password
+        # notification: user does not have a password
         else:
             assert False
 

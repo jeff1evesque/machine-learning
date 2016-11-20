@@ -57,10 +57,35 @@ class Retrieve_Account(object):
         else:
             return {'error': None, 'result': response['result']}
 
+    def check_email(self, email):
+        '''@get_email
+
+        This method checks if the supplied email already exists.
+
+        '''
+
+        # select dataset
+        self.sql.sql_connect(self.db_ml)
+        sql_statement = 'SELECT * '\
+            'FROM tbl_user '\
+            'WHERE email=%s'
+        args = (email)
+        response = self.sql.sql_command(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.sql_disconnect()
+
+        # return result
+        if response_error:
+            return {'error': response_error, 'result': None}
+        else:
+            return {'error': None, 'result': response['result']}
+
     def get_password(self, username):
         '''@get_password
 
-        This method checks returns the hashed password for a supplied user.
+        This method returns the hashed password for a supplied username.
 
         '''
 

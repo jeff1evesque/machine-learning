@@ -213,14 +213,17 @@ def register():
     '''@register
 
     This router function attempts to register a new username. During its
-    attempt, it returns a json string, with two values:
+    attempt, it returns a json string, with three possible values:
 
         - integer, codified indicator of registration attempt:
             - 0, successful account creation
             - 1, password doesn't meet minimum requirements
             - 2, username already exists in the database
-            - 3, internal database error
+            - 3, email already exists in the database
+            - 4, internal database error
         - username, string value of the user
+        - email, is returned if the value already exists in the database, or
+            the registration process was successful
 
     '''
 
@@ -231,26 +234,43 @@ def register():
         password = request.form.getlist('user[password]')[0]
         authenticate = Retrieve_Account()
 
-        # verify requirements: one letter, one number, and ten characters.
+        # validate requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
 
             # validate: unique username
             if not authenticate.check_username(username)['result']:
 
-                # database query: save username, and password
-                hashed = hashpass(str(password))
-                result = Save_Account().save_account(username, email, hashed)
+                # validate: unique email
+                if not authenticate.check_email(email)['result']:
 
-                # notification: attempt to store account
-                if result:
-                    return json.dumps({
-                        'status': 0,
-                        'username': username
-                    })
+                    # database query: save username, and password
+                    hashed = hashpass(str(password))
+                    result = Save_Account().save_account(
+                        username,
+                        email,
+                        hashed
+                    )
+
+                    # notification: attempt to store account
+                    if result:
+                        return json.dumps({
+                            'status': 0,
+                            'username': username,
+                            'email': email
+                        })
+
+                    else:
+                        return json.dumps({
+                            'status': 4,
+                            'username': username,
+                        })
+
+                # notification: email already exists
                 else:
                     return json.dumps({
                         'status': 3,
-                        'username': username
+                        'username': username,
+                        'email': email
                     })
 
             # notification: account already exists

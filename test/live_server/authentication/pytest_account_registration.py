@@ -36,16 +36,23 @@ def test_registration(client, live_server):
         # validate: unique username
         if not authenticate.check_username(username)['result']:
 
-            # database query: save username, and password
-            hashed = hashpass(str(password))
-            result = Save_Account().save_account(username, email, hashed)
+            # validate: unique email
+            if not authenticate.check_email(email)['result']:
 
-            # notification: attempt to store account
-            assert (
-                result['status'] and
-                result['id'] and not
-                result['error']
-            )
+                # database query: save username, and password
+                hashed = hashpass(str(password))
+                result = Save_Account().save_account(username, email, hashed)
+
+                # notification: attempt to store account
+                assert (
+                    result['status'] and
+                    result['id'] and not
+                    result['error']
+                )
+
+            # notification: email already exists
+            else:
+                assert False
 
         # notification: account already exists
         else:
