@@ -24,14 +24,16 @@ def test_login(client, live_server):
 
     # local variables
     username = 'jeff1evesque'
+    email = 'jeff1evesque@yahoo.com'
     password = 'password123'
+
     authenticate = Retrieve_Account()
 
     # validate: check username exists
     if authenticate.check_username(username)['result']:
 
         # validate: unique email
-        if not authenticate.check_email(username)['result']:
+        if not authenticate.check_email(email)['result']:
 
             # database query: get hashed password
             hashed_password = authenticate.get_password(username)['result']
