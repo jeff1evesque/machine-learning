@@ -58,19 +58,19 @@ class Retrieve_Account(object):
             return {'error': None, 'result': response['result']}
 
 
-    def get_email(self, username):
+    def check_email(self, email):
         '''@get_email
 
-        This method returns the corresponding email for a supplied username.
+        This method checks if the supplied email already exists.
 
         '''
 
         # select dataset
         self.sql.sql_connect(self.db_ml)
-        sql_statement = 'SELECT email '\
+        sql_statement = 'SELECT * '\
             'FROM tbl_user '\
-            'WHERE username=%s'
-        args = (username)
+            'WHERE email=%s'
+        args = (email)
         response = self.sql.sql_command(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
