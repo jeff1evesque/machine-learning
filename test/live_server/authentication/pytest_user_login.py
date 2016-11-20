@@ -26,10 +26,9 @@ def test_login(client, live_server):
     username = 'jeff1evesque'
     email = 'jeff1evesque@yahoo.com'
     password = 'password123'
-
     authenticate = Retrieve_Account()
 
-    # validate: check username exists
+    # validate: username exists
     if authenticate.check_username(username)['result']:
 
         # validate: unique email
