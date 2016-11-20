@@ -28,6 +28,7 @@ development:
         react-router: '3.0.0'
     pip:
         flask-script: '2.0.5'
+        flask-login: '0.4.0'
         jsonschema: '2.5.1'
         pytest-flask: '0.10.0'
         pyyaml: '3.11'
