@@ -245,7 +245,11 @@ def register():
 
                     # database query: save username, and password
                     hashed = hashpass(str(password))
-                    result = Save_Account().save_account(username, email, hashed)
+                    result = Save_Account().save_account(
+                        username,
+                        email,
+                        hashed
+                    )
 
                     # notification: attempt to store account
                     if result:
