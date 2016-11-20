@@ -183,6 +183,10 @@ def login():
 
                 # notification: verify password
                 if verifypass(str(password), hashed_password):
+                    # login the user
+                    login_user(username)
+
+                    # return status
                     return json.dumps({
                         'status': 0,
                         'username': username
@@ -206,6 +210,13 @@ def login():
                 'status': 1,
                 'username': username
             })
+
+
+@app.route('/logout')
+@login_required
+def logout():
+    logout_user()
+    return render_template('index.html')
 
 
 @blueprint.route('/register', methods=['POST'])
