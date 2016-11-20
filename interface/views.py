@@ -168,8 +168,8 @@ def login():
 
     if request.method == 'POST':
         # local variables
-        username = request.form.getlist('user[login]')[0]
-        password = request.form.getlist('user[password]')[0]
+        username = request.form['user[login]']
+        password = request.form['user[password]']
         authenticate = Retrieve_Account()
 
         # validate: check username exists
@@ -229,9 +229,9 @@ def register():
 
     if request.method == 'POST':
         # local variables
-        username = request.form.getlist('user[login]')[0]
-        email = request.form.getlist('user[email]')[0]
-        password = request.form.getlist('user[password]')[0]
+        username = request.form['user[login]']
+        email = request.form['user[email]']
+        password = request.form['user[password]']
         authenticate = Retrieve_Account()
 
         # validate requirements: one letter, one number, and ten characters.
