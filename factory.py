@@ -17,7 +17,7 @@ import logging
 from log.logger import Logger
 from logging.handlers import RotatingFileHandler
 from flask import Flask
-from flask-login import LoginManager
+from flask_login import LoginManager
 from interface.views import blueprint
 
 
@@ -48,6 +48,10 @@ def create_app(args={'prefix': '', 'settings': ''}):
                     static_folder='interface/static',
                 )
             settings = yaml.load(stream)
+
+            # intialize login manager before blueprint
+            login_manager = LoginManager()
+            login_manager.init_app(app)
 
             # register blueprint
             app.register_blueprint(blueprint)
@@ -102,10 +106,6 @@ def create_app(args={'prefix': '', 'settings': ''}):
         log = logging.getLogger('werkzeug')
         log.setLevel(logging.DEBUG)
         log.addHandler(handler)
-
-        # instantiate login manager
-        login_manager = LoginManager()
-        login_manager.init_app(app)
 
         # return
         return app
