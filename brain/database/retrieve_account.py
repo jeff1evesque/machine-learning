@@ -57,7 +57,6 @@ class Retrieve_Account(object):
         else:
             return {'error': None, 'result': response['result']}
 
-
     def check_email(self, email):
         '''@get_email
 
@@ -82,7 +81,6 @@ class Retrieve_Account(object):
             return {'error': response_error, 'result': None}
         else:
             return {'error': None, 'result': response['result']}
-
 
     def get_password(self, username):
         '''@get_password
