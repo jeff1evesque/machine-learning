@@ -261,11 +261,12 @@ def register():
                         })
 
                 # notification: email already exists
-                return json.dumps({
-                    'status': 3,
-                    'username': username,
-                    'email': email
-                })
+                else:
+                    return json.dumps({
+                        'status': 3,
+                        'username': username,
+                        'email': email
+                    })
 
             # notification: account already exists
             else:
