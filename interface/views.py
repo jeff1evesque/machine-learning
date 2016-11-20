@@ -19,6 +19,7 @@ decorators are defined, which flask triggers for specific URL's.
 
 import json
 from flask import Blueprint, render_template, request
+from flask_login import login_user, logout_user, login_required
 from brain.load_data import Load_Data
 from brain.converter.restructure_settings import Restructure_Settings
 from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
@@ -212,7 +213,7 @@ def login():
             })
 
 
-@app.route('/logout')
+@blueprint.route('/logout')
 @login_required
 def logout():
     logout_user()
