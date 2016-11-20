@@ -24,30 +24,22 @@ def test_login(client, live_server):
 
     # local variables
     username = 'jeff1evesque'
-    email = 'jeff1evesque@yahoo.com'
     password = 'password123'
     authenticate = Retrieve_Account()
 
     # validate: username exists
     if authenticate.check_username(username)['result']:
 
-        # validate: unique email
-        if not authenticate.check_email(email)['result']:
+        # database query: get hashed password
+        hashed_password = authenticate.get_password(username)['result']
 
-            # database query: get hashed password
-            hashed_password = authenticate.get_password(username)['result']
+        # notification: verify hashed password exists
+        if hashed_password:
 
-            # notification: verify hashed password exists
-            if hashed_password:
+            # notification: verify password
+            assert verifypass(str(password), hashed_password)
 
-                # notification: verify password
-                assert verifypass(str(password), hashed_password)
-
-            # notification: user does not have password
-            else:
-                assert False
-
-        # notification: email already exists
+        # notification: user does not have a password
         else:
             assert False
 
