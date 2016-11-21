@@ -21,7 +21,13 @@ from flask_login import LoginManager
 from interface.views import blueprint
 
 # initialize login manager
+#
+# By default, when a user attempts to access a login_required view without
+# being logged in, Flask-Login will flash a message and redirect them to the
+# log in view. (If the login view is not set, it will abort with a 401 error.)
+#
 login_manager = LoginManager()
+login_manager.login_view = '/login'
 
 # application factory
 def create_app(args={'prefix': '', 'settings': ''}):
