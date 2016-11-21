@@ -1,6 +1,6 @@
 '''
 
-This file initialized the LoginManager
+This file initializes the LoginManager
 
 '''
 
