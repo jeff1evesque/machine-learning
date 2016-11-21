@@ -18,6 +18,8 @@ decorators are defined, which flask triggers for specific URL's.
 '''
 
 import json
+from factory import login_manager
+from brain.interface.model import User
 from flask import Blueprint, render_template, request
 from flask_login import login_user, logout_user, login_required
 from brain.load_data import Load_Data
@@ -149,6 +151,33 @@ def load_data():
 
             # return response
             return json.dumps(response)
+
+
+@login_manager.user_loader
+def load_user(username):
+    '''
+
+    This callback is used to reload the user object from the user ID stored in
+    the session. It should take the unicode ID of a user, and return the
+    corresponding user object.
+
+    It should return None (not raise an exception) if the ID is not valid. (In
+    that case, the ID will manually be removed from the session and processing
+    will continue.)
+
+    - https://flask-login.readthedocs.io/en/0.4.0/#how-it-works
+
+    '''
+
+    # local variables
+    account = Retrieve_Account()
+    uid = account.get_uid(username)['result']
+
+    # return
+    if uid:
+        return User(uid)
+    else:
+        return None
 
 
 @blueprint.route('/login', methods=['POST'])
