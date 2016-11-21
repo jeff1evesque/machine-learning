@@ -54,7 +54,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
             login_manager.init_app(app)
 
             # set secret key (used by flask-login)
-            app.secret_key = os.urandom(32)
+            app.secret_key = os.urandom(
+                settings['application']['security_key']['length']
+            )
 
             # register blueprint
             app.register_blueprint(blueprint)
