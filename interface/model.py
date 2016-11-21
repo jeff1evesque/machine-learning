@@ -34,6 +34,7 @@ class User(object):
             users will fulfill the criteria of login_required.)
 
             '''
+
             return self.authenticated
  
         @property
@@ -47,6 +48,7 @@ class User(object):
             being forced of course).
 
             '''
+
             return True
  
         @property
@@ -57,6 +59,7 @@ class User(object):
             (Actual users should return False instead.)
 
             '''
+
             return False
 
         def get_id(self):
@@ -68,4 +71,5 @@ class User(object):
             an int or some other type, you will need to convert it to unicode.
 
             '''
+
             return str(self.uid)
