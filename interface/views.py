@@ -19,7 +19,7 @@ decorators are defined, which flask triggers for specific URL's.
 
 import json
 from factory import login_manager
-from brain.interface.model import User
+from interface.model import User
 from flask import Blueprint, render_template, request
 from flask_login import login_user, logout_user, login_required
 from brain.load_data import Load_Data
