@@ -175,7 +175,7 @@ def load_user(username):
 
     # return
     if uid:
-        return User(uid)
+        return User(uid).get_id()
     else:
         return None
 
@@ -214,7 +214,7 @@ def login():
                 # notification: verify password
                 if verifypass(str(password), hashed_password):
                     # login the user
-                    login_user(username)
+                    login_user(User(username))
 
                     # return status
                     return json.dumps({
