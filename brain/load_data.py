@@ -44,7 +44,6 @@ class Load_Data(object):
         self.list_error = []
 
     def load_data_new(self):
-
         '''@load_data_new
 
         This method validates the supplied parameters, before being stored as
