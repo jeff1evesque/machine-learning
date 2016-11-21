@@ -1,9 +1,9 @@
-'''
+"""
 
 This file initializes the LoginManager
 
 @session_protection, when session protection is active, each request, it
-    generates an identifier for the user’s computer (basically, a secure hash
+    generates an identifier for the user's computer (basically, a secure hash
     of the IP address and user agent). If the session does not have an
     associated identifier, the one generated will be stored. If it has an
     identifier, and it matches the one generated, then the request is OK.
@@ -27,7 +27,7 @@ This file initializes the LoginManager
 
   - https://flask-login.readthedocs.io/en/0.4.0/#customizing-the-login-process
 
-'''
+"""
 
 from flask_login import LoginManager
 
