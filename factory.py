@@ -12,6 +12,7 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 '''
 
+import os
 import yaml
 import logging
 from log.logger import Logger
@@ -51,6 +52,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
             # intialize app with login manager
             login_manager.init_app(app)
+
+            # set secret key (used by flask-login)
+            app.secret_key = os.urandom(32)
 
             # register blueprint
             app.register_blueprint(blueprint)
