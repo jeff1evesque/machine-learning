@@ -26,7 +26,7 @@ from interface.views import blueprint
 # being logged in, Flask-Login will flash a message and redirect them to the
 # log in view. (If the login view is not set, it will abort with a 401 error.)
 #
-# - https://flask-login.readthedocs.io/en/latest/#customizing-the-login-process
+# - https://flask-login.readthedocs.io/en/0.4.0/#customizing-the-login-process
 #
 login_manager = LoginManager()
 login_manager.login_view = '/login'
