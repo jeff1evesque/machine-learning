@@ -20,6 +20,8 @@ from flask import Flask
 from flask_login import LoginManager
 from interface.views import blueprint
 
+# initialize login manager
+login_manager = LoginManager()
 
 # application factory
 def create_app(args={'prefix': '', 'settings': ''}):
@@ -49,8 +51,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 )
             settings = yaml.load(stream)
 
-            # intialize login manager before blueprint
-            login_manager = LoginManager()
+            # intialize app with login manager
             login_manager.init_app(app)
 
             # register blueprint
