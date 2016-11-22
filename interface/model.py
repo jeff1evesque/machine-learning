@@ -72,6 +72,9 @@ class User(object):
         callback. Note that this must be a unicode - if the ID is natively
         an int or some other type, you will need to convert it to unicode.
 
+        Note: when a user logins, this method is used, and returns a unique
+              user id, to the 'load_user' method.
+
         '''
 
         try:
