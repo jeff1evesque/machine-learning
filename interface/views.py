@@ -21,7 +21,7 @@ import json
 from interface.login import login_manager
 from interface.model import User
 from flask import Blueprint, render_template, request
-from flask_login import login_user, logout_user, login_required
+from flask_login import login_user, logout_user, login_required, current_user
 from brain.load_data import Load_Data
 from brain.converter.restructure_settings import Restructure_Settings
 from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
@@ -51,6 +51,7 @@ def index():
 
     '''
 
+    print current_user
     return render_template('index.html')
 
 
@@ -175,7 +176,7 @@ def load_user(username):
 
     # return
     if uid:
-        return User(uid).get_id()
+        return User(uid)
     else:
         return None
 
@@ -214,7 +215,9 @@ def login():
                 # notification: verify password
                 if verifypass(str(password), hashed_password):
                     # login the user
+                    print current_user
                     login_user(User(username))
+                    print current_user
 
                     # return status
                     return json.dumps({
@@ -243,10 +246,18 @@ def login():
 
 
 @blueprint.route('/logout', methods=['POST'])
-@login_required
 def logout():
-    logout_user()
-    return render_template('index.html')
+    if request.method == 'POST':
+        print current_user
+        #logout_user()
+        print current_user
+
+        # indicate whether user logged out
+        if current_user.is_authenticated:
+            return json.dumps({'status': 1})
+
+        else:
+            return json.dumps({'status': 0})
 
 
 @blueprint.route('/register', methods=['POST'])
