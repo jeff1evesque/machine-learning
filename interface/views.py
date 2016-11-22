@@ -168,11 +168,12 @@ def load_user(username):
 
     - https://flask-login.readthedocs.io/en/0.4.0/#how-it-works
 
+    Note: the 'uid' is obtains from the 'get_id' method from the User class.
+
     '''
 
     # local variables
     account = Retrieve_Account()
-    uid = account.get_uid(username)['result']
     email = account.get_email(username)['result']
 
     # return
