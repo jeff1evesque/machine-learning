@@ -155,7 +155,7 @@ def load_data():
 
 
 @login_manager.user_loader
-def load_user(username):
+def load_user(uid):
     '''
 
     This callback is used to reload the user object from the user ID stored in
@@ -175,13 +175,10 @@ def load_user(username):
     # local variables
     account = Retrieve_Account()
     email = account.get_email(username)['result']
+    username = account.get_username(uid)['result']
 
     # return
-    if (
-        uid and
-        account.check_username(username)['result'] and
-        email
-    ):
+    if (uid and username and email):
         return User(uid, username, email)
 
     else:
