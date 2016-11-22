@@ -8,8 +8,6 @@ This script provides the required interface by 'flask-login':
 
 '''
 
-from flask_login import AnonymousUserMixin
-
 
 class User(object):
     '''
@@ -18,7 +16,7 @@ class User(object):
 
     '''
 
-    def __init__(self, uid):
+    def __init__(self, uid=None, username=None, email=None):
         '''
 
         This constructor is responsible for defining class variables.
@@ -26,6 +24,8 @@ class User(object):
         '''
 
         self.id = uid
+        self.username = username
+        self.email = email
 
     @property
     def is_authenticated(self):
@@ -76,5 +76,6 @@ class User(object):
 
         try:
             return unicode(self.id)
+
         except AttributeError:
             raise NotImplementedError("No `id` attribute - override get_id")
