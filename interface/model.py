@@ -16,7 +16,7 @@ class User(object):
 
     '''
 
-    def __init__(self, uid=None, username=None, email=None):
+    def __init__(self, uid, username, email):
         '''
 
         This constructor is responsible for defining class variables.
