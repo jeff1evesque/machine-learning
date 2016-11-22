@@ -173,10 +173,16 @@ def load_user(username):
     # local variables
     account = Retrieve_Account()
     uid = account.get_uid(username)['result']
+    email = account.get_email(username)['result']
 
     # return
-    if uid:
-        return User(uid)
+    if (
+        uid and
+        account.check_username(username)['result'] and
+        email
+    ):
+        return User(uid, username, email)
+
     else:
         return None
 
@@ -199,15 +205,17 @@ def login():
 
     if request.method == 'POST':
         # local variables
+        account = Retrieve_Account()
         username = request.form['user[login]']
         password = request.form['user[password]']
-        authenticate = Retrieve_Account()
+        uid = account.get_uid(username)['result']
+        email = account.get_email(username)['result']
 
         # validate: check username exists
-        if authenticate.check_username(username)['result']:
+        if account.check_username(username)['result']:
 
             # database query: get hashed password
-            hashed_password = authenticate.get_password(username)['result']
+            hashed_password = account.get_password(username)['result']
 
             # notification: verify hashed password exists
             if hashed_password:
@@ -216,7 +224,7 @@ def login():
                 if verifypass(str(password), hashed_password):
                     # login the user
                     print current_user
-                    login_user(User(username))
+                    login_user(User(uid, username, email))
                     print current_user
 
                     # return status
@@ -253,7 +261,7 @@ def logout():
         print current_user
 
         # indicate whether user logged out
-        if current_user.is_authenticated:
+        if current_user:
             return json.dumps({'status': 1})
 
         else:
@@ -284,16 +292,16 @@ def register():
         username = request.form['user[login]']
         email = request.form['user[email]']
         password = request.form['user[password]']
-        authenticate = Retrieve_Account()
+        account = Retrieve_Account()
 
         # validate requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
 
             # validate: unique username
-            if not authenticate.check_username(username)['result']:
+            if not account.check_username(username)['result']:
 
                 # validate: unique email
-                if not authenticate.check_email(email)['result']:
+                if not account.check_email(email)['result']:
 
                     # database query: save username, and password
                     hashed = hashpass(str(password))
