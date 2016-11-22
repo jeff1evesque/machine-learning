@@ -168,7 +168,7 @@ def load_user(uid):
 
     - https://flask-login.readthedocs.io/en/0.4.0/#how-it-works
 
-    Note: the 'uid' is obtains from the 'get_id' method from the User class.
+    Note: 'uid' is obtained from the 'get_id' method from the User class.
 
     '''
 
