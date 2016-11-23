@@ -12,6 +12,7 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 '''
 
+import os
 import yaml
 import logging
 from log.logger import Logger
