@@ -69,6 +69,8 @@ database:
 #       the above 'general: root' definition.
 #
 application:
+    security_key:
+        length: 32
     model_type:
         - svm
         - svr
