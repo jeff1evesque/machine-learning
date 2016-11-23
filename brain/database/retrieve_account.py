@@ -132,6 +132,54 @@ class Retrieve_Account(object):
         else:
             return {'error': None, 'result': response['result'][0][0]}
 
+
+    def get_user(self, id):
+        '''@get_user
+
+        Takes a unicode id (eg. u'1') and returns a dict containing enough
+        info to build a `User` object.
+        '''
+        print("Got {} of type {}".format(id, type(id)))
+
+        # select dataset
+        self.sql.sql_connect(self.db_ml)
+        sql_statement = 'SELECT id_user, username, email '\
+            'FROM tbl_user '\
+            'WHERE id_user=%s'
+        args = (int(id))
+        response = self.sql.sql_command(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.sql_disconnect()
+
+        print("Results: {}".format(response["result"]))
+
+        # return result
+        if response_error:
+            print("Got Error, returning None")
+            return {'error': response_error, 'result': None}
+
+        print("Len of results: {}".format(len(response["result"])))
+
+        # No errors-- but do we have a single user returned?
+        if response['result'] and len(response['result']) == 1:
+            user_row = response['result'][0]
+            print("Looks good-- returning no errors and user info")
+            return {
+                'error': None,
+                'result': {
+                    'uid': user_row[0],
+                    'username': user_row[1],
+                    'email': user_row[2],
+                }
+            }
+        else:
+            print("Results empty or too many, returning None")
+            return {'error': None, 'result': None}
+
+
+
     def get_uid(self, username):
         '''@get_uid
 

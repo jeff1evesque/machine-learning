@@ -174,15 +174,11 @@ def load_user(uid):
 
     # local variables
     account = Retrieve_Account()
-    email = account.get_email(username)['result']
-    username = account.get_username(uid)['result']
+    user = account.get_user(uid)
 
-    # return
-    if (uid and username and email):
-        return User(uid, username, email)
-
-    else:
-        return None
+    if user["result"]:
+        return User(**user["result"])
+    return None
 
 
 @blueprint.route('/login', methods=['POST'])
