@@ -188,6 +188,7 @@ def login():
                     #              user database table, and a unique integer
                     #              representing the username.
                     session['uid'] = uid
+                    print session['uid']
 
                     # return user status
                     return json.dumps({
@@ -228,10 +229,11 @@ def logout():
 
     if request.method == 'POST':
         # remove session
+        print session.get('uid')
         session.pop('uid', None)
 
         # indicate whether user logged out
-        if session['uid']:
+        if session.get('uid'):
             return json.dumps({'status': 1})
         else:
             return json.dumps({'status': 0})
