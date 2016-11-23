@@ -233,7 +233,6 @@ def logout():
         # indicate whether user logged out
         if session['uid']:
             return json.dumps({'status': 1})
-
         else:
             return json.dumps({'status': 0})
 
