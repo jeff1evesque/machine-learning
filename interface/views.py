@@ -184,7 +184,9 @@ def login():
 
                 # notification: verify password
                 if verifypass(str(password), hashed_password):
-                    # set user session
+                    # set session: uid corresponds to primary key, from the
+                    #              user database table, and a unique integer
+                    #              representing the username.
                     session['uid'] = uid
 
                     # return user status
@@ -225,7 +227,7 @@ def logout():
     '''
 
     if request.method == 'POST':
-        # remove the username from the session if it's there
+        # remove session
         session.pop('uid', None)
 
         # indicate whether user logged out
