@@ -18,7 +18,7 @@ decorators are defined, which flask triggers for specific URL's.
 '''
 
 import json
-from flask import Blueprint, render_template, request
+from flask import Blueprint, render_template, request, session
 from brain.load_data import Load_Data
 from brain.converter.restructure_settings import Restructure_Settings
 from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
@@ -170,19 +170,24 @@ def login():
         # local variables
         username = request.form.getlist('user[login]')[0]
         password = request.form.getlist('user[password]')[0]
-        authenticate = Retrieve_Account()
+        account = Retrieve_Account()
+        uid = account.get_uid(username)['result']
 
         # validate: check username exists
-        if authenticate.check_username(username)['result']:
+        if account.check_username(username)['result']:
 
             # database query: get hashed password
-            hashed_password = authenticate.get_password(username)['result']
+            hashed_password = account.get_password(username)['result']
 
             # notification: verify hashed password exists
             if hashed_password:
 
                 # notification: verify password
                 if verifypass(str(password), hashed_password):
+                    # set user session
+                    session['uid'] = uid
+
+                    # return user status
                     return json.dumps({
                         'status': 0,
                         'username': username
@@ -206,6 +211,29 @@ def login():
                 'status': 1,
                 'username': username
             })
+
+
+@blueprint.route('/logout', methods=['POST'])
+def logout():
+    '''
+
+    This route function returns the status of the '/logout' request:
+
+        - 0, indicates successful logout
+        - 1, indicates unsuccessful logout
+
+    '''
+
+    if request.method == 'POST':
+        # remove the username from the session if it's there
+        session.pop('uid', None)
+
+        # indicate whether user logged out
+        if session['uid']:
+            return json.dumps({'status': 1})
+
+        else:
+            return json.dumps({'status': 0})
 
 
 @blueprint.route('/register', methods=['POST'])
@@ -232,16 +260,16 @@ def register():
         username = request.form.getlist('user[login]')[0]
         email = request.form.getlist('user[email]')[0]
         password = request.form.getlist('user[password]')[0]
-        authenticate = Retrieve_Account()
+        account = Retrieve_Account()
 
         # validate requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
 
             # validate: unique username
-            if not authenticate.check_username(username)['result']:
+            if not account.check_username(username)['result']:
 
                 # validate: unique email
-                if not authenticate.check_email(email)['result']:
+                if not account.check_email(email)['result']:
 
                     # database query: save username, and password
                     hashed = hashpass(str(password))
