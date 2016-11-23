@@ -106,3 +106,28 @@ class Retrieve_Account(object):
             return {'error': response_error, 'result': None}
         else:
             return {'error': None, 'result': response['result'][0][0]}
+
+    def get_uid(self, username):
+        '''@get_uid
+
+        This method returns the userid (i.e uid) for a supplied username.
+
+        '''
+
+        # select dataset
+        self.sql.sql_connect(self.db_ml)
+        sql_statement = 'SELECT id_user '\
+            'FROM tbl_user '\
+            'WHERE username=%s'
+        args = (username)
+        response = self.sql.sql_command(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.sql_disconnect()
+
+        # return result
+        if response_error:
+            return {'error': response_error, 'result': None}
+        else:
+            return {'error': None, 'result': response['result'][0][0]}
