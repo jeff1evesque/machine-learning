@@ -171,7 +171,7 @@ def login():
         username = request.form.getlist('user[login]')[0]
         password = request.form.getlist('user[password]')[0]
         account = Retrieve_Account()
-        uid = account.get_uid(username)['result']
+        uid = str(account.get_uid(username)['result'])
 
         # validate: check username exists
         if account.check_username(username)['result']:
@@ -229,9 +229,9 @@ def logout():
 
     if request.method == 'POST':
         # remove session
-        print 'uid before logout: ' + session.get('uid')
+        print 'uid before logout: ' + str(session.get('uid'))
         session.pop('uid', None)
-        print 'uid after logout: ' + session.get('uid')
+        print 'uid after logout: ' + str(session.get('uid'))
 
         # indicate whether user logged out
         if session.get('uid'):
