@@ -48,6 +48,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 )
             settings = yaml.load(stream)
 
+            # secret key: used for maintaining flask sessions
+            app.secret_key = settings['application']['security_key']
+
             # register blueprint
             app.register_blueprint(blueprint)
 
