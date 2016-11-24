@@ -69,8 +69,7 @@ database:
 #       the above 'general: root' definition.
 #
 application:
-    security_key:
-        length: 32
+    security_key: 'change-this'
     model_type:
         - svm
         - svr
