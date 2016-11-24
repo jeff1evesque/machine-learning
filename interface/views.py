@@ -187,8 +187,8 @@ def login():
                     # set session: uid corresponds to primary key, from the
                     #              user database table, and a unique integer
                     #              representing the username.
-                    session['uid'] = uid
-                    print 'uid logged in: ' + session['uid']
+                    if not session.get('uid'):
+                        session['uid'] = uid
 
                     # return user status
                     return json.dumps({
@@ -229,9 +229,7 @@ def logout():
 
     if request.method == 'POST':
         # remove session
-        print 'uid before logout: ' + str(session.get('uid'))
         session.pop('uid', None)
-        print 'uid after logout: ' + str(session.get('uid'))
 
         # indicate whether user logged out
         if session.get('uid'):
