@@ -187,8 +187,7 @@ def login():
                     # set session: uid corresponds to primary key, from the
                     #              user database table, and a unique integer
                     #              representing the username.
-                    if not session.get('uid'):
-                        session['uid'] = uid
+                    session['uid'] = uid
 
                     # return user status
                     return json.dumps({
