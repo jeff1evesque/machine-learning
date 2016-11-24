@@ -51,7 +51,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
             # secret key: used for maintaining flask sessions
             app.secret_key = os.urandom(
-                settings['application']['security_key']['length']
+                settings['application']['security_key']
             )
 
             # register blueprint
