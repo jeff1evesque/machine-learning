@@ -16,7 +16,7 @@ from brain.converter.crypto import verifypass
 def test_login(client, live_server):
     '''@test_login
 
-    This method tests the user registration process.
+    This method tests the user login process.
 
     '''
 
