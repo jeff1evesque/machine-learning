@@ -22,7 +22,10 @@ def test_logout(client, live_server):
     live_server.start()
 
     # remove session
-    session.pop('uid', None)
+    if session.get('uid'):
+        session.pop('uid', None)
+    else:
+        assert False
 
     # indicate whether user logged out
     if session.get('uid'):
