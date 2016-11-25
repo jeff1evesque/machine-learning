@@ -9,6 +9,8 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
+from flask import session
+
 
 def test_logout(client, live_server):
     '''@test_logout
