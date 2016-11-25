@@ -9,7 +9,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-from flask import session
+import requests
 from brain.database.retrieve_account import Retrieve_Account
 from brain.converter.crypto import verifypass
 
