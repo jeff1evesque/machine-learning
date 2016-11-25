@@ -15,20 +15,31 @@ from flask import session
 def test_logout(client, live_server):
     '''@test_logout
 
-    This method tests the user logout process.
+    This method tests the user logout process. It seems redundant, since it
+    requires executing the login session. However, this login session is not
+    identical to the login session test, which covers testing the username,
+    and password requirements, along with the password hashing function. This
+    test simply assumes the latter conditions have been met, and proceeds to
+    testing if the logout would succeed, given the user can login.
 
     '''
 
     live_server.start()
 
-    # remove session
-    if session.get('uid'):
-        session.pop('uid', None)
-    else:
-        assert False
+    # local variables
+    username = 'jeff1evesque'
+    password = 'password123'
+    url = 'http://localhost:5000'
+    s = requests.Session()
 
-    # indicate whether user logged out
-    if session.get('uid'):
-        assert False
-    else:
-        assert True
+    # post requests: login, and logout response
+    login = s.post(
+        url + '/login',
+        data={
+            'user[login]': username,
+            'user[password]': password
+        }
+    )
+    logout = s.post(url + '/logout')
+
+    assert login == 200 and logout == 200
