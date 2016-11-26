@@ -46,7 +46,7 @@ def test_login(client, live_server):
                 payload = {'user[login]': username, 'user[password]': password}
                 login = client.post(url, data=payload)
 
-                assert login == 200
+                assert login.status_code == 200
             else:
                 assert False
 
