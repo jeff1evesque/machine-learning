@@ -35,4 +35,4 @@ def test_logout(client, live_server):
     logout = client.post(url)
 
     #assert login == 200 and logout == 200
-    assert login == 200 and logout == 200
+    assert logout.status_code == 200
