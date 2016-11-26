@@ -33,13 +33,8 @@ def test_logout(client, live_server):
     s = requests.Session()
 
     # post requests: login, and logout response
-    login = s.post(
-        url + '/login',
-        data={
-            'user[login]': username,
-            'user[password]': password
-        }
-    )
+    payload = {'user[login]': username, 'user[password]': password}
+    login = s.post(url + '/login', payload)
     logout = s.post(url + '/logout')
 
     assert login == 200 and logout == 200
