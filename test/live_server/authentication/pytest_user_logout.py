@@ -29,13 +29,19 @@ def test_logout(client, live_server):
     # local variables
     username = 'jeff1evesque'
     password = 'password123'
+    payload = {'user[login]': username, 'user[password]': password}
     url = '/logout'
 
     # post requests: login, and logout response
+    login = client.post(url, data=payload)
     if session.get('uid'):
         logout = client.post(url)
     else:
         assert False
 
     # check logout succeeded
-    assert logout.status_code == 200 and not session.get('uid')
+    assert (
+        login.status_code == 200 and
+        logout.status_code == 200 and
+        session.get('uid')
+    )
