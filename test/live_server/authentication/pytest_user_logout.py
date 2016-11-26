@@ -42,5 +42,5 @@ def test_logout(client, live_server):
     assert (
         login.status_code == 200 and
         logout.status_code == 200 and
-        session.get('uid')
+        not session.get('uid')
     )
