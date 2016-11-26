@@ -45,13 +45,8 @@ def test_login(client, live_server):
             # notification: verify password
             if verifypass(str(password), hashed_password):
                 # post requests: login response
-                login = s.post(
-                    url,
-                    data={
-                        'user[login]': username,
-                        'user[password]': password
-                    }
-                )
+                payload = {'user[login]': username, 'user[password]': password}
+                login = s.post(url, data=payload)
 
                 assert login == 200
             else:
