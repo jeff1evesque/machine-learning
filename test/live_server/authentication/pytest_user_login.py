@@ -28,7 +28,7 @@ def test_login(client, live_server):
     # local variables
     username = 'jeff1evesque'
     password = 'password123'
-    url = 'http://localhost:5000/login'
+    url = '/login'
     authenticate = Retrieve_Account()
 
     # validate: username exists
