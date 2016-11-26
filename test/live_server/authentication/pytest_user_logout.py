@@ -27,12 +27,12 @@ def test_logout(client, live_server):
     # local variables
     username = 'jeff1evesque'
     password = 'password123'
-    url = 'http://localhost:5000'
+    url = '/logout'
 
     # post requests: login, and logout response
     payload = {'user[login]': username, 'user[password]': password}
     #login = s.post(url + '/login', payload)
-    logout = client.post(url + '/logout')
+    logout = client.post(url')
 
     #assert login == 200 and logout == 200
     assert login == 200 and logout == 200
