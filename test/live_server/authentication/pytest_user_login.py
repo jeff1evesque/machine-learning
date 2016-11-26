@@ -9,7 +9,6 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-import requests
 from brain.database.retrieve_account import Retrieve_Account
 from brain.converter.crypto import verifypass
 
@@ -30,7 +29,6 @@ def test_login(client, live_server):
     username = 'jeff1evesque'
     password = 'password123'
     url = 'http://localhost:5000/login'
-    s = requests.Session()
     authenticate = Retrieve_Account()
 
     # validate: username exists
@@ -46,7 +44,7 @@ def test_login(client, live_server):
             if verifypass(str(password), hashed_password):
                 # post requests: login response
                 payload = {'user[login]': username, 'user[password]': password}
-                login = s.post(url, data=payload)
+                login = client.post(url, data=payload)
 
                 assert login == 200
             else:
