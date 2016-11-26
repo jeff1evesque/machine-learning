@@ -30,12 +30,11 @@ def test_logout(client, live_server):
     username = 'jeff1evesque'
     password = 'password123'
     payload = {'user[login]': username, 'user[password]': password}
-    url = '/logout'
 
     # post requests: login, and logout response
-    login = client.post(url, data=payload)
+    login = client.post('/login', data=payload)
     if session.get('uid'):
-        logout = client.post(url)
+        logout = client.post('/logout')
     else:
         assert False
 
