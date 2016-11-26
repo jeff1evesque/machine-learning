@@ -9,8 +9,6 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-import requests
-
 
 def test_logout(client, live_server):
     '''@test_logout
@@ -30,11 +28,11 @@ def test_logout(client, live_server):
     username = 'jeff1evesque'
     password = 'password123'
     url = 'http://localhost:5000'
-    s = requests.Session()
 
     # post requests: login, and logout response
     payload = {'user[login]': username, 'user[password]': password}
-    login = s.post(url + '/login', payload)
-    logout = s.post(url + '/logout')
+    #login = s.post(url + '/login', payload)
+    logout = client.post(url + '/logout')
 
+    #assert login == 200 and logout == 200
     assert login == 200 and logout == 200
