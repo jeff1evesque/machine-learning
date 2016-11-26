@@ -9,6 +9,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
+from flask import session
 from brain.database.retrieve_account import Retrieve_Account
 from brain.converter.crypto import verifypass
 
@@ -16,7 +17,10 @@ from brain.converter.crypto import verifypass
 def test_login(client, live_server):
     '''@test_login
 
-    This method tests the user registration process.
+    This method tests the user login process. Specifically, the tests include
+    verifying the user credentials (i.e. username, and password). Then, it
+    checks, if the flask session has successfully stored the userid (i.e. uid),
+    into flask's session implementation.
 
     '''
 
@@ -25,6 +29,7 @@ def test_login(client, live_server):
     # local variables
     username = 'jeff1evesque'
     password = 'password123'
+    url = '/login'
     authenticate = Retrieve_Account()
 
     # validate: username exists
@@ -37,7 +42,14 @@ def test_login(client, live_server):
         if hashed_password:
 
             # notification: verify password
-            assert verifypass(str(password), hashed_password)
+            if verifypass(str(password), hashed_password):
+                # post requests: login response
+                payload = {'user[login]': username, 'user[password]': password}
+                login = client.post(url, data=payload)
+
+                assert login.status_code == 200 and session.get('uid')
+            else:
+                assert False
 
         # notification: user does not have a password
         else:
