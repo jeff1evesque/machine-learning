@@ -6,7 +6,6 @@ This file contains various generic SQL-related methods.
 '''
 
 import MySQLdb as DB
-from log.logger import Logger
 from brain.database.db_settings import Database
 
 
@@ -34,9 +33,6 @@ class SQL(object):
         self.db_settings = Database()
         self.list_error = []
         self.proceed = True
-
-        # database logger
-        self.logger = Logger(__name__, 'database', 'database', 'debug')
 
         # host address
         if host:
@@ -80,10 +76,6 @@ class SQL(object):
                 )
             self.cursor = self.conn.cursor()
 
-            # log successful connection
-            if (self.cursor):
-                self.logger.log('database connected: success')
-
             return {
                 'status': True,
                 'error': None,
@@ -93,10 +85,6 @@ class SQL(object):
         except DB.Error, error:
             self.proceed = False
             self.list_error.append(error)
-
-            # log unsuccessful connection
-            if (self.cursor):
-                self.logger.log('database connected: fail')
 
             return {
                 'status': False,
@@ -125,12 +113,6 @@ class SQL(object):
                 elif sql_type == 'select':
                     result = self.cursor.fetchall()
 
-                # log transaction
-                arguments = sql_args if sql_args else 'None'
-                self.logger.log(
-                    'transaction: success, statement: %s, arguments: %s' %
-                    (sql_statement, arguments))
-
             except DB.Error, error:
                 self.conn.rollback()
                 self.list_error.append(error)
@@ -139,13 +121,6 @@ class SQL(object):
                     'error': self.list_error,
                     'result': None,
                 }
-
-                # log transaction
-                arguments = sql_args if sql_args else 'None'
-                self.logger.log(
-                    'transaction: success, statement' + sql_statement +
-                    ', arguments: ' + arguments
-                )
 
         if sql_type in ['insert', 'delete', 'update']:
             return {
@@ -173,9 +148,6 @@ class SQL(object):
                 if self.conn:
                     self.conn.close()
 
-                    # log disconnection
-                    self.logger.log('database disconnected: success')
-
                     return {
                         'status': True,
                         'error': None,
@@ -183,9 +155,6 @@ class SQL(object):
                     }
             except DB.Error, error:
                 self.list_error.append(error)
-
-                # log disconnection
-                self.logger.log('database disconnected: fail')
 
                 return {
                     'status': False,
