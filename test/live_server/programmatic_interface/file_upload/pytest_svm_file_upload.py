@@ -66,7 +66,7 @@ def test_data_new(client, live_server):
 
     '''
 
-    @live_server.app.route('/load-data/')
+    @live_server.app.route('/load-data')
     def get_endpoint():
         return url_for('name.load_data', _external=True)
 
@@ -88,7 +88,7 @@ def test_data_append(client, live_server):
 
     '''
 
-    @live_server.app.route('/load-data/')
+    @live_server.app.route('/load-data')
     def get_endpoint():
         return url_for('name.load_data', _external=True)
 
@@ -110,7 +110,7 @@ def test_model_generate(client, live_server):
 
     '''
 
-    @live_server.app.route('/load-data/')
+    @live_server.app.route('/load-data')
     def get_endpoint():
         return url_for('name.load_data', _external=True)
 
@@ -132,7 +132,7 @@ def test_model_predict(client, live_server):
 
     '''
 
-    @live_server.app.route('/load-data/')
+    @live_server.app.route('/load-data')
     def get_endpoint():
         return url_for('name.load_data', _external=True)
 
