@@ -35,3 +35,4 @@ development:
         six: '1.5.2'
         xmltodict: '0.10.1'
         scrypt: '0.8.0'
+        gunicorn: '19.6.0'

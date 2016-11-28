@@ -14,4 +14,5 @@ include database::bindings
 include package::redis_client
 
 ## install webserver
+include package::gunicorn
 include webserver::service
