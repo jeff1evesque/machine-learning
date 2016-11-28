@@ -29,7 +29,7 @@ import requests
 import json
 import os.path
 
-endpoint_url = 'http://localhost:5000/load-data/'
+endpoint_url = 'http://localhost:5000/load-data'
 headers = {'Content-Type': 'application/json'}
 
 
