@@ -10,15 +10,22 @@ class webserver::service {
     $user            = $hiera_general['user']
     $group           = $hiera_general['group']
 
-    $hiera_webserver = hiera('webserver')
-    $flask_log_path  = $hiera_webserver['flask_log_path']
-    $log_path        = "${root_dir}${flask_log_path}"
-    $template_path   = 'webserver/webserver.erb'
+    $hiera_development = $hiera('development')
+    $hiera_webserver   = hiera('webserver')
+    $flask_log_path    = $hiera_webserver['flask_log_path']
+    $log_path          = "${root_dir}${flask_log_path}"
+    $template_path     = 'webserver/webserver.erb'
+    $nginx_version     = $hiera_development['puppet']['nginx']
 
     ## include webserver dependencies
     include python
     include python::flask
     include python::requests
+
+    ## install nginx
+    class { 'nginx':
+        package_ensure: $nginx_version,
+    }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
