@@ -24,7 +24,7 @@ class webserver::service {
 
     ## install nginx
     class { 'nginx':
-        package_ensure: $nginx_version,
+        package_ensure => $nginx_version,
     }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
