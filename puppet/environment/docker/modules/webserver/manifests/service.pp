@@ -4,20 +4,27 @@
 ###
 class webserver::service {
     ## variables
-    $hiera_general   = hiera('general')
-    $vagrant_mounted = $hiera_general['vagrant_implement']
-    $root_dir        = $hiera_general['root']
-    $user            = $hiera_general['user']
-    $group           = $hiera_general['group']
+    $hiera_general     = hiera('general')
+    $vagrant_mounted   = $hiera_general['vagrant_implement']
+    $root_dir          = $hiera_general['root']
+    $user              = $hiera_general['user']
+    $group             = $hiera_general['group']
 
-    $hiera_webserver = hiera('webserver')
-    $log_path        = "$root_dir$hiera_webserver['flask_log_path']"
-    $template_path   = 'webserver/webserver.erb'
+    $hiera_development = hiera('development')
+    $hiera_webserver   = hiera('webserver')
+    $nginx_version     = $hiera_development['apt']['nginx']
+    $log_path          = "$root_dir$hiera_webserver['flask_log_path']"
+    $template_path     = 'webserver/webserver.erb'
 
     ## include webserver dependencies
     include python
     include python::flask
     include python::requests
+
+    ## install nginx
+    class { 'nginx':
+        package_ensure => $nginx_version
+    }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
