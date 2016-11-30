@@ -14,17 +14,11 @@ class webserver::service {
     $hiera_webserver   = hiera('webserver')
     $log_path          = "$root_dir$hiera_webserver['flask_log_path']"
     $template_path     = 'webserver/webserver.erb'
-    $nginx_version     = $hiera_development['apt']['nginx']
 
     ## include webserver dependencies
     include python
     include python::flask
     include python::requests
-
-    ## install nginx
-    class { 'nginx':
-        ensure => $nginx_version,
-    }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
