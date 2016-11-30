@@ -11,10 +11,14 @@ class webserver::service {
     $group           = $hiera_general['group']
 
     $hiera_development = hiera('development')
-    $hiera_webserver   = hiera('webserver')
     $nginx_version     = $hiera_development['apt']['nginx']
-    $flask_log_path    = $hiera_webserver['flask_log_path']
-    $log_path          = "${root_dir}${flask_log_path}"
+
+    $hiera_webserver   = hiera('webserver')
+    $log_path          = $hiera_webserver['flask_log_path']
+    $gunicorn_bind     = $hiera_webserver['gunicorn']['bind']
+    $gunicorn_port     = $hiera_webserver['gunicorn']['port']
+    $gunicorn_workers  = $hiera_webserver['gunicorn']['workers']
+    $full_log_path     = "${root_dir}${flask_log_path}"
     $template_path     = 'webserver/webserver.erb'
 
     ## include webserver dependencies
