@@ -15,6 +15,7 @@ development:
         gplus: '4:4.8.2-1ubuntu6'
         python-matplotlib: '1.3.1-1ubuntu5'
         ipython: '1.2.1-2'
+        nginx: '1.4.6-1ubuntu3.7'
     github:
         sklearn: '0.16.1'
     npm:
@@ -36,5 +37,3 @@ development:
         xmltodict: '0.10.1'
         scrypt: '0.8.0'
         gunicorn: '19.6.0'
-    puppet:
-        nginx: '1.10.2'
