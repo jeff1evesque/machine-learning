@@ -1,5 +1,5 @@
 #!upstart
-description 'start flask server'
+description 'start gunicorn server'
 
 ## start job defined in this file after system services, and processes have
 #  already loaded (to prevent conflict).
@@ -29,7 +29,7 @@ expect fork
 ## start upstart job
 script
     chdir <%= @root_dir %>
-    exec python app.py
+    exec gunicorn -b <%= @gunicorn_bind %>:<%= @gunicorn_port %> --workers=<%= @gunicorn_workers %> 'factory:create_app()'
 end script
 
 ## log start-up date
@@ -37,7 +37,7 @@ end script
 #  @DATE, preformatted string for datetime.
 pre-start script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE flask server starting" >> <%= @log_path %>
+    echo "$DATE gunicorn server starting" >> <%= @full_log_path %>
 end script
 
 ## log shut-down date, remove process id from log before <%= @root_dir %> is
@@ -46,5 +46,5 @@ end script
 #  @DATE, preformatted string for datetime.
 pre-stop script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE flask server stopping" >> <%= @log_path %>
+    echo "$DATE gunicorn server stopping" >> <%= @full_log_path %>
 end script
