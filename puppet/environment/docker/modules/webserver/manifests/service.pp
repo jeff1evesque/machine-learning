@@ -23,7 +23,7 @@ class webserver::service {
     $nginx               = $hiera_webserver['nginx']
     $nginx_reverse_proxy = $nginx['reverse_proxy']
     $nginx_version       = $hiera_development['apt']['nginx']
-    $nginx_proxy         = "${nginx_reverse_proxy}['proxy']:${gunicorn_port}"
+    $nginx_proxy         = "${nginx_reverse_proxy['proxy']}:${gunicorn_port}"
 
     ## include webserver dependencies
     include python
