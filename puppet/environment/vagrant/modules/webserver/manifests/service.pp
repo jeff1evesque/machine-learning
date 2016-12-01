@@ -4,31 +4,46 @@
 ###
 class webserver::service {
     ## variables
-    $hiera_general   = hiera('general')
+    $hiera_general     = hiera('general')
+    $hiera_development = hiera('development')
+    $hiera_webserver   = hiera('webserver')
+    $template_path     = 'webserver/webserver.erb'
+
     $vagrant_mounted = $hiera_general['vagrant_implement']
     $root_dir        = $hiera_general['root']
     $user            = $hiera_general['user']
     $group           = $hiera_general['group']
 
-    $hiera_development = hiera('development')
-    $nginx_version     = $hiera_development['apt']['nginx']
+    $gunicorn          = $hiera_webserver['gunicorn']
+    $gunicorn_log_path = "${root_dir}${gunicorn}['log_path']"
+    $gunicorn_bind     = $gunicorn['bind']
+    $gunicorn_port     = $gunicorn['port']
+    $gunicorn_workers  = $gunicorn['workers']
 
-    $hiera_webserver   = hiera('webserver')
-    $log_path          = $hiera_webserver['flask_log_path']
-    $gunicorn_bind     = $hiera_webserver['gunicorn']['bind']
-    $gunicorn_port     = $hiera_webserver['gunicorn']['port']
-    $gunicorn_workers  = $hiera_webserver['gunicorn']['workers']
-    $full_log_path     = "${root_dir}${flask_log_path}"
-    $template_path     = 'webserver/webserver.erb'
+    $nginx               = $hiera_webserver['nginx']
+    $nginx_reverse_proxy = $nginx['reverse_proxy']
+    $nginx_version       = $hiera_development['apt']['nginx']
+    $nginx_proxy         = "${nginx_reverse_proxy}['proxy']:${gunicorn_port}"
 
     ## include webserver dependencies
     include python
     include python::flask
     include python::requests
 
-    ## install nginx
+    ## nginx: installation
     class { 'nginx':
         package_ensure => $nginx_version
+    }
+
+    ## nginx: ensure nginx starts on boot
+    service { 'nginx':
+        enable => true,
+    }
+
+    ## nginx: define reverse proxy
+    nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
+        listen_port => $nginx_reverse_proxy['listen_port'],
+        proxy       => $nginx_proxy,
     }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
