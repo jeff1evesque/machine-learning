@@ -36,6 +36,11 @@ webserver:
         port: 5000
         workers: 6
         log_path: '/log/webserver/gunicorn.log'
+    nginx:
+        reverse_proxy:
+            vhost: 'machine-learning.com'
+            listen_port: 80
+            proxy: 'http://localhost'
 
 ## application database
 ##
