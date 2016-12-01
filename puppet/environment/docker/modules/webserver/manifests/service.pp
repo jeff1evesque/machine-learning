@@ -35,11 +35,6 @@ class webserver::service {
         package_ensure => $nginx_version
     }
 
-    ## nginx: ensure nginx starts on boot
-    service { 'nginx':
-        enable => true,
-    }
-
     ## nginx: define reverse proxy
     nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
         listen_port => $nginx_reverse_proxy['listen_port'],
@@ -48,7 +43,7 @@ class webserver::service {
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     #            windows.
-    file { '/etc/init/flask.conf':
+    file { '/etc/init/start_gunicorn.conf':
         ensure  => file,
         content => dos2unix(template($template_path)),
     }
