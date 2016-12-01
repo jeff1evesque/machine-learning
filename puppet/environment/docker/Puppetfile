@@ -46,6 +46,11 @@ mod 'timezone',
   :git => 'https://github.com/BashtonLtd/puppet-timezone.git',
   :ref => 'v0.1.3'
 
+## Install Module: concat
+mod 'concat',
+  :git => 'github.com/puppetlabs/puppetlabs-concat.git',
+  :ref => '2.2.0'
+
 ## Install Module: nginx
 mod 'nginx',
   :git => 'https://github.com/voxpupuli/puppet-nginx.git',
