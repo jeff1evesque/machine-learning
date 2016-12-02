@@ -184,7 +184,7 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf src/jsx/node_modules'
     run 'rm -f src/js/.gitignore'
     run 'rm -f src/js/content.js'
-    run 'find . -name "*.pyc" -type f -exec rm -r {} +'
+    run 'find . -name "*.pyc" -exec rm -rf {} \;'
     run 'find . -name __pycache__ -type d -exec rm -r {} +'
     run 'find . -name .cache -type d -exec rm -r {} +'
   end
