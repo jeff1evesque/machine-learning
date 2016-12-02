@@ -42,7 +42,6 @@ webserver:
             listen_port: 5000
             proxy: 'http://localhost'
 
-
 ## application database
 ##
 ## @host, defined from executed 'docker' command.
