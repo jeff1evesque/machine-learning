@@ -33,13 +33,13 @@ redis:
 webserver:
     gunicorn:
         bind: 0.0.0.0
-        port: 5000
+        port: 5001
         workers: 6
         log_path: '/log/webserver/gunicorn.log'
     nginx:
         reverse_proxy:
             vhost: 'machine-learning.com'
-            listen_port: 80
+            listen_port: 5000
             proxy: 'http://localhost'
 
 
