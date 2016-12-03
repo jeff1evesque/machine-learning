@@ -14,6 +14,12 @@ class webserver::service {
     $user            = $hiera_general['user']
     $group           = $hiera_general['group']
 
+    $gunicorn          = $hiera_webserver['gunicorn']
+    $gunicorn_log_path = "${root_dir}${gunicorn['log_path']}"
+    $gunicorn_bind     = $gunicorn['bind']
+    $gunicorn_port     = $gunicorn['port']
+    $gunicorn_workers  = $gunicorn['workers']
+
     $nginx = $hiera_webserver['nginx']
 
     ## include webserver dependencies
