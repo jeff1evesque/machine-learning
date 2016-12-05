@@ -71,7 +71,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 DB_USERNAME=settings['database']['username'],
                 DB_PASSWORD=settings['database']['password'],
                 LOG_LEVEL=HANDLER_LEVEL,
-                FLASK_LOG_PATH=settings['webserver']['flask_log_path'],
+                FLASK_LOG_PATH=settings['webserver']['flask']['log_path'],
                 ERROR_LOG_PATH=settings['application']['error_log_path'],
                 WARNING_LOG_PATH=settings['application']['warning_log_path'],
                 INFO_LOG_PATH=settings['application']['info_log_path'],
@@ -109,6 +109,4 @@ def create_app(args={'prefix': '', 'settings': ''}):
         return app
 
     except Exception as error:
-        logger = Logger('error', 'yaml')
-        logger.log(error)
-        raise
+        print error
