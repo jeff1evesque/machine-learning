@@ -20,7 +20,7 @@ class webserver::service {
     $gunicorn_port     = $gunicorn['port']
     $gunicorn_workers  = $gunicorn['workers']
 
-    $nginx = $hiera_webserver['nginx']
+    $nginx_version = $hiera_development['apt']['nginx']
 
     ## include webserver dependencies
     include python
