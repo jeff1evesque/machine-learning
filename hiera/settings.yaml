@@ -31,6 +31,8 @@ redis:
 ##     http://docs.gunicorn.org/en/latest/run.html#commonly-used-arguments
 ##
 webserver:
+    flask
+        log_path: '/log/webserver/flask.log'
     gunicorn:
         bind: 0.0.0.0
         port: 5000
