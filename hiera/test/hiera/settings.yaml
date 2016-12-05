@@ -31,7 +31,7 @@ redis:
 ##     http://docs.gunicorn.org/en/latest/run.html#commonly-used-arguments
 ##
 webserver:
-    flask
+    flask:
         log_path: '/log/webserver/flask.log'
     gunicorn:
         bind: 0.0.0.0
