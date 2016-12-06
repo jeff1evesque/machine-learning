@@ -52,32 +52,34 @@ var AppRouter = React.createClass({
         return(
             <Router history={browserHistory}>
                 <Route component={this.props.indexRoute}>
-                    <Route path='/' component={AnalysisLayout}>
+                    <Route path='/' component={Home}>
+                        <Route path='/session' component={AnalysisLayout}>
+                            <Route
+                                path='/session/data-new'
+                                component={DataNew}
+                            />
+                            <Route
+                                path='/session/data-append'
+                                component={DataAppend}
+                            />
+                            <Route
+                                path='/session/model-generate'
+                                component={ModelGenerate}
+                            />
+                            <Route
+                                path='/session/model-predict'
+                                component={ModelPredict}
+                            />
+                        </Route>
                         <Route
-                            path='/data-new'
-                            component={DataNew}
+                            path='/login'
+                            component={LoginLayout}
                         />
                         <Route
-                            path='/data-append'
-                            component={DataAppend}
-                        />
-                        <Route
-                            path='/model-generate'
-                            component={ModelGenerate}
-                        />
-                        <Route
-                            path='/model-predict'
-                            component={ModelPredict}
+                            path='/register'
+                            component={RegisterLayout}
                         />
                     </Route>
-                    <Route
-                        path='/login'
-                        component={LoginLayout}
-                    />
-                    <Route
-                        path='/register'
-                        component={RegisterLayout}
-                    />
                 </Route>
             </Router>
         );
