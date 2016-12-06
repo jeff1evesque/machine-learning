@@ -20,16 +20,25 @@ class webserver::service {
     $gunicorn_port     = $gunicorn['port']
     $gunicorn_workers  = $gunicorn['workers']
 
-    $nginx_version = $hiera_development['apt']['nginx']
+    $nginx               = $hiera_webserver['nginx']
+    $nginx_reverse_proxy = $nginx['reverse_proxy']
+    $nginx_version       = $hiera_development['apt']['nginx']
+    $nginx_proxy         = "${nginx_reverse_proxy['proxy']}:${gunicorn_port}"
 
     ## include webserver dependencies
     include python
     include python::flask
     include python::requests
 
-    ## install nginx
+    ## nginx: installation
     class { 'nginx':
         package_ensure => $nginx_version
+    }
+
+    ## nginx: define reverse proxy
+    nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
+        listen_port => $nginx_reverse_proxy['listen_port'],
+        proxy       => $nginx_proxy,
     }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
