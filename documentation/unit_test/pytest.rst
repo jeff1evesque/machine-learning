@@ -45,7 +45,7 @@ as follows:
     manual/programmatic_interface/file_upload/pytest_svm_file_upload.py ....
     manual/programmatic_interface/file_upload/pytest_svr_file_upload.py ....
 
-    ====================================== 20 passed in 51.27 seconds ======================================
+    ====================================== 20 passed in 27.05 seconds ======================================
 
 **Note:** future releases (i.e. milestone `1.0 <https://github.com/jeff1evesque/machine-learning/milestones/1.0>`_),
 will include more granular unit tests.
