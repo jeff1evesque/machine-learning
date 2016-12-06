@@ -56,7 +56,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
             # local logger: used for this module
             root = settings['general']['root']
-            LOG_PATH = root + settings['webserver']['flask_log_path']
+            LOG_PATH = root + settings['webserver']['flask']['log_path']
             HANDLER_LEVEL = settings['application']['log_level']
 
             # flask attributes: accessible across application
@@ -71,7 +71,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
                 DB_USERNAME=settings['database']['username'],
                 DB_PASSWORD=settings['database']['password'],
                 LOG_LEVEL=HANDLER_LEVEL,
-                FLASK_LOG_PATH=settings['webserver']['flask_log_path'],
+                FLASK_LOG_PATH=settings['webserver']['flask']['log_path'],
                 ERROR_LOG_PATH=settings['application']['error_log_path'],
                 WARNING_LOG_PATH=settings['application']['warning_log_path'],
                 INFO_LOG_PATH=settings['application']['info_log_path'],
