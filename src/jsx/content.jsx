@@ -6,6 +6,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import MainContent form './import/main.jsx';
 import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 import AppRouter from './router.jsx';
@@ -30,30 +31,27 @@ var Page = React.createClass({
         }
     },
   // call back: return side navigation
-    getNavBar: function() {
+    renderNavBar: function() {
         if (
             this.state.render_subpage == 'LoginForm' ||
             this.state.render_subpage == 'RegisterForm'
         ) {
-            return 'span';
+            return false;
         }
         else {
-            return NavBar;
+            return true;
         }
     },
   // display result
     render: function() {
-        var SideBar = this.getNavBar();
+        var navbar = this.renderNavBar();
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
                     <UserMenu onChange={this.setClickType} />
                 </div>
 
-                <div className='main'>
-                    <SideBar />
-                    {this.props.children}
-                </div>
+                <MainContent renderNavBar={navbar} />
             </div>
         );
     }
