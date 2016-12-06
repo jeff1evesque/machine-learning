@@ -7,17 +7,17 @@ class webserver::start {
     $hiera_general   = hiera('general')
     $vagrant_mounted = $hiera_general['vagrant_implement']
 
-    # run flask
+    # run gunicorn
     if $vagrant_mounted {
         # ensure service starts at boot
-        service { 'flask':
+        service { 'start_gunicorn':
             ensure => 'running',
             enable => true,
         }
     }
     else {
         # run and restart when needed
-        service { 'flask':
+        service { 'start_gunicorn':
             ensure => 'running',
         }
     }

@@ -9,7 +9,7 @@ services:
 ## environment variables
 env:
   global:
-    - DOCKER_VERSION=1.12.0-0~trusty
+    - DOCKER_VERSION=1.12.3-0~trusty
 
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
