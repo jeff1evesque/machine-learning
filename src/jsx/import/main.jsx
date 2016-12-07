@@ -13,7 +13,7 @@ var MainContent = React.createClass({
   // call back: return side navigation
     isNavBar: function() {
         if (this.props.renderNavBar) {
-            return NavBar
+            return NavBar;
         }
         else {
             return 'span';
