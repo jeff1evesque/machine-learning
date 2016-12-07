@@ -26,7 +26,7 @@ var MainContent = React.createClass({
         return(
             <div className='main'>
                 <SideBar />
-                {this.props.children}
+                {this.props.renderChildren}
             </div>
         );
     }
