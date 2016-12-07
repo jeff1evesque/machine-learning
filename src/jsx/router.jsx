@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router'
-import MainContent form './import/main.jsx';
+import MainContent from './import/main.jsx';
 import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
 import ModelGenerate from './import/session-type/model_generate.jsx';
