@@ -51,7 +51,10 @@ var Page = React.createClass({
                     <UserMenu onChange={this.setClickType} />
                 </div>
 
-                <MainContent renderNavBar={navbar} />
+                <MainContent
+                    renderNavBar={navbar}
+                    renderChildren={this.props.children}
+                />
             </div>
         );
     }
