@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router'
+import MainContent form './import/main.jsx';
 import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
 import ModelGenerate from './import/session-type/model_generate.jsx';
@@ -52,7 +53,7 @@ var AppRouter = React.createClass({
         return(
             <Router history={browserHistory}>
                 <Route component={this.props.indexRoute}>
-                    <Route path='/' component={Home}>
+                    <Route path='/' component={MainContent}>
                         <Route path='/session' component={AnalysisLayout}>
                             <Route
                                 path='/session/data-new'
