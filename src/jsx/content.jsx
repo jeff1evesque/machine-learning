@@ -6,7 +6,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import MainContent form './import/main.jsx';
+import MainContent from './import/main.jsx';
 import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 import AppRouter from './router.jsx';
