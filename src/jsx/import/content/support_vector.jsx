@@ -112,19 +112,22 @@ var SupportVector = React.createClass({
     },
     componentDidUpdate: function() {
       // local variables
-        var routerProp = this.props.routerProp;
+        var prop = this.props;
         var router_assigned = this.state.router_assigned;
 
       // conditionally define state based on supplied router property
         if (
-            routerProp &&
-            routerProp.props &&
-            routerProp.props.route &&
-            routerProp.props.route.component &&
-            routerProp.props.route.component.displayName &&
-            router_assigned != routerProp.props.route.component.displayName
+            prop &&
+            prop.children &&
+            prop.children.props &&
+            prop.children.props.children &&
+            prop.children.props.children.props &&
+            prop.children.props.children.props.route &&
+            prop.children.props.children.props.component &&
+            prop.children.props.children.props.component.displayName &&
+            stored != prop.children.props.children.props.component.displayName
         ) {
-            var routerSession = routerProp.props.route.component.displayName;
+            var routerSession = prop.props.route.component.displayName;
             this.setState({router_assigned: routerSession});
 
           // assign state: if router triggered component
@@ -150,21 +153,25 @@ var SupportVector = React.createClass({
     render: function() {
       // local variables
         var Result = ResultDisplay;
-        var routerProp = this.props.routerProp;
-        var router_assigned = this.state.router_assigned;
+        var prop = this.props;
+        var stored = this.state.router_assigned;
         var session_type = this.state.value_session_type;
+        console.log(this.props);
 
       // conditionally render component based on supplied router, or state
         if (
-            routerProp &&
-            routerProp.props &&
-            routerProp.props.route &&
-            routerProp.props.route.component &&
-            routerProp.props.route.component.displayName &&
-            router_assigned != routerProp.props.route.component.displayName
+            prop &&
+            prop.children &&
+            prop.children.props &&
+            prop.children.props.children &&
+            prop.children.props.children.props &&
+            prop.children.props.children.props.route &&
+            prop.children.props.children.props.component &&
+            prop.children.props.children.props.component.displayName &&
+            stored != prop.children.props.children.props.component.displayName
         ) {
             this.setState({ajax_done_result: null});
-            var SessionType = routerProp.props.route.component;
+            var SessionType = prop.children.props.children.props.component;
         }
         else {
             var SessionType = this.getSessionType(session_type);
