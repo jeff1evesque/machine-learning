@@ -22,6 +22,13 @@ const AnalysisLayout = (props) => (
     </div>
 );
 
+// constant: main layout
+const MainLayout = (props) => (
+    <div className='main-content'>
+        <AnalysisLayout routerProp={props.children} />
+    </div>
+);
+
 // constant: login layout
 const LoginLayout = (props) => (
     <div className='main-full-span login-form'>
@@ -53,7 +60,7 @@ var AppRouter = React.createClass({
         return(
             <Router history={browserHistory}>
                 <Route component={this.props.indexRoute}>
-                    <Route path='/' component={MainContent}>
+                    <Route path='/' component={MainLayout}>
                         <Route path='/session' component={AnalysisLayout}>
                             <Route
                                 path='/session/data-new'
