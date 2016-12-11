@@ -153,25 +153,16 @@ var SupportVector = React.createClass({
     render: function() {
       // local variables
         var Result = ResultDisplay;
-        var prop = this.props;
         var stored = this.state.router_assigned;
-        var session_type = this.state.value_session_type;
-        console.log(this.props);
 
       // conditionally render component based on supplied router, or state
         if (
-            prop &&
-            prop.children &&
-            prop.children.props &&
-            prop.children.props.children &&
-            prop.children.props.children.props &&
-            prop.children.props.children.props.route &&
-            prop.children.props.children.props.component &&
-            prop.children.props.children.props.component.displayName &&
-            stored != prop.children.props.children.props.component.displayName
+            this.props.displayName &&
+            stored != this.props.displayName
         ) {
             this.setState({ajax_done_result: null});
-            var SessionType = prop.children.props.children.props.component;
+            this.setState({value_session_type: this.props.displayName});
+            var SessionType = this.props.displayName;
         }
         else {
             var SessionType = this.getSessionType(session_type);
@@ -191,12 +182,6 @@ var SupportVector = React.createClass({
         }
         else {
             var AjaxSpinner = 'span';
-        }
-
-      // conditionally define session type
-        if (this.props.routerProp) {
-            console.log(this.props.routerProp);
-            this.setState({value_session_type: this.props.routerProp});
         }
 
         {/* return:
