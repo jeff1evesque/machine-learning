@@ -31,19 +31,20 @@ var MainContent = React.createClass({
   // display result
     render: function() {
         var SideBar = this.isNavBar();
-        console.log(this.props);
-        var childRoute = this.props.children.props.children.props.route;
-        var sessionName = childRoute.component.displayName;
+        var sessionName = this.props.sessionType;
+        var componentName = this.props.componentType;
 
-        if (sessionName == 'AnalysisLayout') {
-            var ChildComponent = SupportVector;
-            var childAttribute = sessionName;
+        if (componentName == 'AnalysisLayout') {
+            var ChildComponent = <SupportVector displayName={sessionName} />;
+        }
+        else {
+            var ChildComponent = 'span';
         }
 
         return(
             <div className='main'>
                 <SideBar />
-                <ChildComponent displayName={childAttribute} />
+                {ChildComponent}
             </div>
         );
     }
