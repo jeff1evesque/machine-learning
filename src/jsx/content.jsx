@@ -44,7 +44,37 @@ var Page = React.createClass({
     },
   // display result
     render: function() {
+      // local variables
         var navbar = this.renderNavBar();
+        if (
+            this.props &&
+            this.props.children &&
+            this.props.children.props &&
+            this.props.children.props.children.props.children
+        ) {
+            var children = this.props.children.props.children.props.children;
+        }
+
+      // get display name
+        if (
+            children.props.children.props &&
+            children.props.children.props.route &&
+            children.props.children.props.route.component &&
+            children.props.children.props.route.component.displayName
+        ) {
+            var displayName = children.props.route.component.displayName;
+        }
+
+      // get component name
+        if (
+            children.props &&
+            children.props.route &&
+            children.props.route.component &&
+            children.props.route.component.name
+        ) {
+            var componentName = children.props.route.component.name;
+        }
+
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
@@ -53,7 +83,8 @@ var Page = React.createClass({
 
                 <MainContent
                     renderNavBar={navbar}
-                    renderChildren={this.props}
+                    componentType={componentName}
+                    sessionType={displayName}
                 />
             </div>
         );
