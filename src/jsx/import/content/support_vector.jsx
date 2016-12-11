@@ -193,16 +193,18 @@ var SupportVector = React.createClass({
             var AjaxSpinner = 'span';
         }
 
+      // conditionally define session type
+        if (this.props.routerProp) {
+            console.log(this.props.routerProp);
+            this.setState({value_session_type: this.props.routerProp});
+        }
+
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
             @formResult, is accessible within child component as
                 'this.props.formResult'
         */}
         return(
-            if (this.props.routerProp) {
-                this.setState({state.value_session_type: this.props.routerProp});
-            }
-
             <form onSubmit={this.handleSubmit} ref='analysisForm'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
