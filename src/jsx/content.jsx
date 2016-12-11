@@ -53,7 +53,7 @@ var Page = React.createClass({
 
                 <MainContent
                     renderNavBar={navbar}
-                    renderChildren={this.props.children}
+                    renderChildren={this.props}
                 />
             </div>
         );
