@@ -9,7 +9,7 @@ import ReactDOM from 'react-dom';
 import NavBar from './navigation/nav_bar.jsx';
 import UserMenu from './navigation/user_menu.jsx';
 
-var MainContent = React.createClass({
+var SupportVector = React.createClass({
   // display result
     render: function() {
         <div className='analysis-container'>
@@ -31,11 +31,12 @@ var MainContent = React.createClass({
   // display result
     render: function() {
         var SideBar = this.isNavBar();
+        console.log(this.props);
         var childRoute = this.props.children.props.children.props.route;
         var sessionName = childRoute.component.displayName;
 
-        if (childRoute.component == 'AnalysisLayout') {
-            var ChildComponent = MainContent;
+        if (sessionName == 'AnalysisLayout') {
+            var ChildComponent = SupportVector;
             var childAttribute = sessionName;
         }
 
