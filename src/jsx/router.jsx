@@ -18,14 +18,14 @@ import RegisterForm from './import/content/register.jsx';
 // constant: analysis layout
 const AnalysisLayout = (props) => (
     <div className='analysis-container'>
-        <SupportVector routerProp={props.children} />
+        <SupportVector />
     </div>
 );
 
 // constant: main layout
 const MainLayout = (props) => (
     <div className='main-content'>
-        <AnalysisLayout routerProp={props.children} />
+        <AnalysisLayout />
     </div>
 );
 
