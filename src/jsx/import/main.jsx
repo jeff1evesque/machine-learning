@@ -8,7 +8,15 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from './navigation/nav_bar.jsx';
 import UserMenu from './navigation/user_menu.jsx';
-import SupportVector from './content/support_vector.jsx';
+
+var MainContent = React.createClass({
+  // display result
+    render: function() {
+        <div className='analysis-container'>
+            <SupportVector routerProp={this.props.displayName} />
+        </div>
+    }
+});
 
 var MainContent = React.createClass({
   // call back: return side navigation
@@ -23,10 +31,18 @@ var MainContent = React.createClass({
   // display result
     render: function() {
         var SideBar = this.isNavBar();
+        var childRoute = this.props.children.props.children.props.route;
+        var sessionName = childRoute.component.displayName;
+
+        if (childRoute.component == 'AnalysisLayout') {
+            var ChildComponent = MainContent;
+            var childAttribute = sessionName;
+        }
+
         return(
             <div className='main'>
                 <SideBar />
-                {this.props.renderChildren}
+                <ChildComponent displayName={childAttribute} />
             </div>
         );
     }
