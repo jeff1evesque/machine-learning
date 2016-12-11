@@ -199,6 +199,10 @@ var SupportVector = React.createClass({
                 'this.props.formResult'
         */}
         return(
+            if (this.props.routerProp) {
+                this.setState({state.value_session_type: this.props.routerProp});
+            }
+
             <form onSubmit={this.handleSubmit} ref='analysisForm'>
                 <fieldset className='fieldset-session-type'>
                     <legend>Session Type</legend>
