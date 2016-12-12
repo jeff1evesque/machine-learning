@@ -46,10 +46,13 @@ var Page = React.createClass({
     render: function() {
       // local variables
         var navbar = this.renderNavBar();
+
         if (
             this.props &&
             this.props.children &&
             this.props.children.props &&
+            this.props.children.props.children &&
+            this.props.children.props.children.props &&
             this.props.children.props.children.props.children
         ) {
             var children = this.props.children.props.children.props.children;
