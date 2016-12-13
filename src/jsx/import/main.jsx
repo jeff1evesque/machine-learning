@@ -8,13 +8,16 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import NavBar from './navigation/nav_bar.jsx';
 import UserMenu from './navigation/user_menu.jsx';
+import SupportVector from './content/support_vector.jsx';
 
-var SupportVector = React.createClass({
+var SvContainer = React.createClass({
   // display result
     render: function() {
-        <div className='analysis-container'>
-            <SupportVector routerProp={this.props.displayName} />
-        </div>
+        return(
+            <div className='analysis-container'>
+                <SupportVector routerProp={this.props.displayName} />
+            </div>
+        );
     }
 });
 
@@ -25,20 +28,23 @@ var MainContent = React.createClass({
             return NavBar;
         }
         else {
-            return 'span';
+            return <span />;
         }
     },
   // display result
     render: function() {
         var SideBar = this.isNavBar();
-        var sessionName = this.props.sessionType;
-        var componentName = this.props.componentType;
+        console.log(this.props);
 
-        if (componentName == 'AnalysisLayout') {
-            var ChildComponent = <SupportVector displayName={sessionName} />;
+        if (
+            this.props &&
+            this.props.componentType == 'AnalysisLayout'
+        ) {
+            var sessionType = this.props.sessionType;
+            var ChildComponent = <SvContainer displayName={sessionType} />;
         }
         else {
-            var ChildComponent = 'span';
+            var ChildComponent = <span />;
         }
 
         return(
