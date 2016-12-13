@@ -55,27 +55,29 @@ var Page = React.createClass({
             this.props.children.props.children.props &&
             this.props.children.props.children.props.children
         ) {
-            var children = this.props.children.props.children.props.children;
+            var property = this.props.children.props.children.props;
+            var children = property.children;
         }
 
       // get display name
         if (
-            children.props.children.props &&
-            children.props.children.props.route &&
-            children.props.children.props.route.component &&
-            children.props.children.props.route.component.displayName
+            children &&
+            children.props &&
+            children.props.route &&
+            children.props.route.component &&
+            children.props.route.component.displayName
         ) {
             var displayName = children.props.route.component.displayName;
         }
 
       // get component name
         if (
-            children.props &&
-            children.props.route &&
-            children.props.route.component &&
-            children.props.route.component.name
+            property &&
+            property.route &&
+            property.route.component &&
+            property.route.component.name
         ) {
-            var componentName = children.props.route.component.name;
+            var componentName = property.route.component.name;
         }
 
         return(
