@@ -147,6 +147,7 @@ var SupportVector = React.createClass({
       // local variables
         var Result = ResultDisplay;
         var stored = this.state.router_assigned;
+        var session_type = this.state.value_session_type;
 
       // conditionally render component based on supplied router, or state
         if (
