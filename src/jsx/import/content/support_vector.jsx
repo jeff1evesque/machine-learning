@@ -118,7 +118,7 @@ var SupportVector = React.createClass({
         if (
             this.props &&
             this.props.routerProp &&
-            stored != this.props.routerProp
+            router_assigned != this.props.routerProp
         ) {
             var routerSession = this.props.routerProp;
             this.setState({router_assigned: routerSession});
@@ -146,14 +146,14 @@ var SupportVector = React.createClass({
     render: function() {
       // local variables
         var Result = ResultDisplay;
-        var stored = this.state.router_assigned;
+        var router_assigned = this.state.router_assigned;
         var session_type = this.state.value_session_type;
 
       // conditionally render component based on supplied router, or state
         if (
             this.props &&
             this.props.routerProp &&
-            stored != this.props.routerProp
+            router_assigned != this.props.routerProp
         ) {
             var SessionType = this.props.routerProp;
         }
