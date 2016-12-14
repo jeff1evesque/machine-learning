@@ -34,7 +34,6 @@ var MainContent = React.createClass({
   // display result
     render: function() {
         var SideBar = this.isNavBar();
-        console.log(this.props);
 
         if (
             this.props &&
