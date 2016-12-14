@@ -116,6 +116,7 @@ var SupportVector = React.createClass({
 
       // conditionally define state based on supplied router property
         if (
+            this.props &&
             this.props.routerProp &&
             stored != this.props.routerProp
         ) {
@@ -153,8 +154,6 @@ var SupportVector = React.createClass({
             this.props.routerProp &&
             stored != this.props.routerProp
         ) {
-            this.setState({ajax_done_result: null});
-            this.setState({value_session_type: this.props.routerProp});
             var SessionType = this.props.routerProp;
         }
         else {
