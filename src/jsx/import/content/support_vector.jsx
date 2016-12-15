@@ -142,6 +142,18 @@ var SupportVector = React.createClass({
             }
         }
     },
+    componentWillMount: function() {
+      // conditionally render component based on supplied router, or state
+        if (
+            this.props &&
+            this.props.routerProp &&
+            router_assigned != this.props.routerProp
+        ) {
+            this.setState({
+                value_session_type: this.getSessionValue(this.props.routerProp)
+            });
+        }
+    },
   // triggered when 'state properties' change
     render: function() {
       // local variables
@@ -230,7 +242,15 @@ var SupportVector = React.createClass({
             model_generate: ModelGenerate,
             model_predict: ModelPredict
         }[type] || 'span';
-    }
+    },
+    getSessionValue: function(type) {
+        return {
+            DataNew: 'data_new',
+            DataAppend: 'data_append',
+            ModelGenerate: 'model_generate',
+            ModelPredict: 'model_predict'
+        }[type] || 'span';
+    },
 });
 
 // indicate which class can be exported, and instantiated via 'require'
