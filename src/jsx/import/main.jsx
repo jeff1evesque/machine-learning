@@ -43,7 +43,7 @@ var MainContent = React.createClass({
             var ChildComponent = <SvContainer displayName={sessionType} />;
         }
         else {
-            var ChildComponent = <span />;
+            var ChildComponent = <SvContainer />;
         }
 
         return(
