@@ -143,7 +143,7 @@ var SupportVector = React.createClass({
         }
     },
     componentWillMount: function() {
-      // conditionally render component based on supplied router, or state
+      // conditionally define state used in render
         if (
             this.props &&
             this.props.routerProp &&
