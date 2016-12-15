@@ -19,6 +19,7 @@ import RegisterForm from './import/content/register.jsx';
 const AnalysisLayout = (props) => (
     <div className='analysis-container'>
         <SupportVector />
+        {this.props.children}
     </div>
 );
 
@@ -26,6 +27,7 @@ const AnalysisLayout = (props) => (
 const MainLayout = (props) => (
     <div className='main-content'>
         <AnalysisLayout />
+        {this.props.children}
     </div>
 );
 
@@ -61,30 +63,30 @@ var AppRouter = React.createClass({
             <Router history={browserHistory}>
                 <Route component={this.props.indexRoute}>
                     <Route path='/' component={MainLayout}>
-                        <Route path='session' component={AnalysisLayout}>
+                        <Route path='/session' component={AnalysisLayout}>
                             <Route
-                                path='session/data-new'
+                                path='/session/data-new'
                                 component={DataNew}
                             />
                             <Route
-                                path='session/data-append'
+                                path='/session/data-append'
                                 component={DataAppend}
                             />
                             <Route
-                                path='session/model-generate'
+                                path='/session/model-generate'
                                 component={ModelGenerate}
                             />
                             <Route
-                                path='session/model-predict'
+                                path='/session/model-predict'
                                 component={ModelPredict}
                             />
                         </Route>
                         <Route
-                            path='login'
+                            path='/login'
                             component={LoginLayout}
                         />
                         <Route
-                            path='register'
+                            path='/register'
                             component={RegisterLayout}
                         />
                     </Route>
