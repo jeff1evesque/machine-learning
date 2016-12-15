@@ -7,10 +7,10 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import MainContent from './import/main.jsx';
-import DataNew from './import/session-type/data_new.jsx';
-import DataAppend from './import/session-type/data_append.jsx';
-import ModelGenerate from './import/session-type/model_generate.jsx';
-import ModelPredict from './import/session-type/model_predict.jsx';
+import DataNew from './importsession-type/data_new.jsx';
+import DataAppend from './importsession-type/data_append.jsx';
+import ModelGenerate from './importsession-type/model_generate.jsx';
+import ModelPredict from './importsession-type/model_predict.jsx';
 import SupportVector from './import/content/support_vector.jsx';
 import LoginForm from './import/content/login.jsx';
 import RegisterForm from './import/content/register.jsx';
@@ -61,30 +61,30 @@ var AppRouter = React.createClass({
             <Router history={browserHistory}>
                 <Route component={this.props.indexRoute}>
                     <Route path='/' component={MainLayout}>
-                        <Route path='/session' component={AnalysisLayout}>
+                        <Route path='session' component={AnalysisLayout}>
                             <Route
-                                path='/session/data-new'
+                                path='session/data-new'
                                 component={DataNew}
                             />
                             <Route
-                                path='/session/data-append'
+                                path='session/data-append'
                                 component={DataAppend}
                             />
                             <Route
-                                path='/session/model-generate'
+                                path='session/model-generate'
                                 component={ModelGenerate}
                             />
                             <Route
-                                path='/session/model-predict'
+                                path='session/model-predict'
                                 component={ModelPredict}
                             />
                         </Route>
                         <Route
-                            path='/login'
+                            path='login'
                             component={LoginLayout}
                         />
                         <Route
-                            path='/register'
+                            path='register'
                             component={RegisterLayout}
                         />
                     </Route>
