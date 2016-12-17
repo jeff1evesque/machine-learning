@@ -143,6 +143,9 @@ var SupportVector = React.createClass({
         }
     },
     componentWillMount: function() {
+      // local variables
+        var router_assigned = this.state.router_assigned;
+
       // conditionally define state used in render
         if (
             this.props &&
