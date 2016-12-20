@@ -9,6 +9,8 @@ import ReactDOM from 'react-dom';
 import NavBar from './navigation/nav_bar.jsx';
 import UserMenu from './navigation/user_menu.jsx';
 import SupportVector from './content/support_vector.jsx';
+import LoginForm from './content/login.jsx';
+import RegisterForm from './content/register.jsx';
 
 var SvContainer = React.createClass({
   // display result
@@ -34,8 +36,21 @@ var MainContent = React.createClass({
   // display result
     render: function() {
         var SideBar = this.isNavBar();
+        console.log(this.props);
 
         if (
+            this.props &&
+            this.props.componentType == 'LoginLayout'
+        ) {
+            var ChildComponent = <LoginForm />;
+        }
+        else if (
+            this.props &&
+            this.props.componentType == 'RegisterLayout'
+        ) {
+            var ChildComponent = <RegisterForm />;
+        }
+        else if (
             this.props &&
             this.props.componentType == 'AnalysisLayout'
         ) {
