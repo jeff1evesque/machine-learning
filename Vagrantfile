@@ -11,6 +11,10 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
+  atlas_repo       = 'jeff1evesque'
+  atlas_box        = 'trusty64'
+  box_version      = '1.0.0'
+
   required_plugins = %w(vagrant-r10k vagrant-vbguest vagrant-triggers vagrant-puppet-install)
   plugin_installed = false
   environment      = 'vagrant'
@@ -34,9 +38,15 @@ Vagrant.configure(2) do |config|
     run "mkdir -p puppet/environment/#{environment}/modules_contrib"
   end
 
+  ## ensure pty is used for provisioning (useful for vagrant base box)
+  config.ssh.pty = true
+
   ## Every Vagrant development environment requires a box. You can search for
   #  boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = 'ubuntu/trusty64'
+  config.vm.box                        = "#{atlas_repo}/#{atlas_box}"
+  config.vm.box_download_checksum      = '037904f875f0de86eca58e5740d934b7'
+  config.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{box_version}/providers/virtualbox.box"
+  config.vm.box_download_checksum_type = 'md5'
 
   ## Ensure puppet installed within guest
   config.puppet_install.puppet_version = '4.3.2'
