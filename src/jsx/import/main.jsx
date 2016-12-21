@@ -23,6 +23,28 @@ var SvContainer = React.createClass({
     }
 });
 
+var LoginLayout = React.createClass({
+  // display result
+    render: function() {
+        return(
+            <div className='main-full-span login-form'>
+                <LoginForm />
+            </div>
+        );
+    }
+});
+
+var RegisterLayout = React.createClass({
+  // display result
+    render: function() {
+        return(
+            <div className='main-full-span register-form'>
+                <RegisterForm />
+            </div>
+        );
+    }
+});
+
 var MainContent = React.createClass({
   // call back: return side navigation
     isNavBar: function() {
@@ -36,19 +58,18 @@ var MainContent = React.createClass({
   // display result
     render: function() {
         var SideBar = this.isNavBar();
-        console.log(this.props);
 
         if (
             this.props &&
             this.props.componentType == 'LoginLayout'
         ) {
-            var ChildComponent = <LoginForm />;
+            var ChildComponent = <LoginLayout />;
         }
         else if (
             this.props &&
             this.props.componentType == 'RegisterLayout'
         ) {
-            var ChildComponent = <RegisterForm />;
+            var ChildComponent = <RegisterLayout />;
         }
         else if (
             this.props &&
