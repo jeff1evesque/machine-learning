@@ -42,6 +42,44 @@ var Page = React.createClass({
             return true;
         }
     },
+    componentDidUpdate: function() {
+        console.log(this.props);
+        if (
+            this.props &&
+            this.props.children &&
+            this.props.children.props &&
+            this.props.children.props.children &&
+            this.props.children.props.children.props &&
+            this.props.children.props.children.props.children
+        ) {
+            var property = this.props.children.props.children.props;
+            var children = property.children;
+        }
+
+      // get display name
+        if (
+            children &&
+            children.props &&
+            children.props.route &&
+            children.props.route.component &&
+            children.props.route.component.displayName
+        ) {
+            this.setState({displayName: children.props.route.component.displayName});
+        }
+        else {
+            this.setState({displayName: 'none'});
+        }
+
+      // session component name
+        if (
+            property &&
+            property.route &&
+            property.route.component &&
+            property.route.component.name
+        ) {
+            this.setState({componentName: property.route.component.name});
+        }
+    },
   // display result
     render: function() {
       // local variables
@@ -69,8 +107,11 @@ var Page = React.createClass({
         ) {
             var displayName = children.props.route.component.displayName;
         }
+        else {
+            var displayName = 'none';
+        }
 
-      // get component name
+      // session component name
         if (
             property &&
             property.route &&
@@ -88,8 +129,8 @@ var Page = React.createClass({
 
                 <MainContent
                     renderNavBar={navbar}
-                    componentType={componentName}
-                    sessionType={displayName}
+                    componentType={this.state.componentName}
+                    sessionType={this.state.displayName}
                 />
             </div>
         );
