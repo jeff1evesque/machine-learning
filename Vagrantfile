@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
   atlas_box        = 'trusty64'
   box_version      = '1.0.0'
 
-  required_plugins = %w(vagrant-r10k vagrant-vbguest vagrant-triggers vagrant-puppet-install)
+  required_plugins = %w(vagrant-r10k vagrant-triggers vagrant-puppet-install)
   plugin_installed = false
   environment      = 'vagrant'
 
@@ -44,7 +44,7 @@ Vagrant.configure(2) do |config|
   ## Every Vagrant development environment requires a box. You can search for
   #  boxes at https://atlas.hashicorp.com/search.
   config.vm.box                        = "#{atlas_repo}/#{atlas_box}"
-  config.vm.box_download_checksum      = '037904f875f0de86eca58e5740d934b7'
+  config.vm.box_download_checksum      = '25db01ebb2b9fb42e53b823138d4524b'
   config.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{box_version}/providers/virtualbox.box"
   config.vm.box_download_checksum_type = 'md5'
 
