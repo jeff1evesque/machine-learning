@@ -16,6 +16,7 @@ var Page = React.createClass({
     getInitialState: function() {
         return {
             render_subpage: 'SupportVector',
+            display_name: 'none',
         };
     },
   // update 'state properties': click event has not 'target'
@@ -42,84 +43,33 @@ var Page = React.createClass({
             return true;
         }
     },
-    componentDidUpdate: function() {
-        console.log(this.props);
+    componentDidMount: function() {
         if (
             this.props &&
             this.props.children &&
             this.props.children.props &&
             this.props.children.props.children &&
             this.props.children.props.children.props &&
-            this.props.children.props.children.props.children
+            this.props.children.props.children.props.route &&
+            this.props.children.props.children.props.route.component &&
+            this.props.children.props.children.props.route.component.name
         ) {
             var property = this.props.children.props.children.props;
-            var children = property.children;
-        }
+            var componentName = property.route.component.name;
 
-      // get display name
-        if (
-            children &&
-            children.props &&
-            children.props.route &&
-            children.props.route.component &&
-            children.props.route.component.displayName
-        ) {
-            this.setState({displayName: children.props.route.component.displayName});
-        }
-        else {
-            this.setState({displayName: 'none'});
-        }
-
-      // session component name
-        if (
-            property &&
-            property.route &&
-            property.route.component &&
-            property.route.component.name
-        ) {
-            this.setState({componentName: property.route.component.name});
+            if (
+                componentName == 'LoginLayout' ||
+                componentName == 'RegisterLayout'
+            ) {
+                this.setState({component_name: componentName});
+                this.setState({display_name: 'none'});
+            }
         }
     },
   // display result
     render: function() {
       // local variables
         var navbar = this.renderNavBar();
-
-        if (
-            this.props &&
-            this.props.children &&
-            this.props.children.props &&
-            this.props.children.props.children &&
-            this.props.children.props.children.props &&
-            this.props.children.props.children.props.children
-        ) {
-            var property = this.props.children.props.children.props;
-            var children = property.children;
-        }
-
-      // get display name
-        if (
-            children &&
-            children.props &&
-            children.props.route &&
-            children.props.route.component &&
-            children.props.route.component.displayName
-        ) {
-            var displayName = children.props.route.component.displayName;
-        }
-        else {
-            var displayName = 'none';
-        }
-
-      // session component name
-        if (
-            property &&
-            property.route &&
-            property.route.component &&
-            property.route.component.name
-        ) {
-            var componentName = property.route.component.name;
-        }
 
         return(
             <div className='container-inner'>
@@ -129,8 +79,8 @@ var Page = React.createClass({
 
                 <MainContent
                     renderNavBar={navbar}
-                    componentType={this.state.componentName}
-                    sessionType={this.state.displayName}
+                    componentType={this.state.component_name}
+                    sessionType={this.state.display_name}
                 />
             </div>
         );
