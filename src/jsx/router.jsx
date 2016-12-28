@@ -5,7 +5,8 @@
  */
 
 import React from 'react';
-import { Router, Route, browserHistory } from 'react-router'
+import { Router, Route, browserHistory } from 'react-router';
+import MainContent from './import/main.jsx';
 import DataNew from './import/session-type/data_new.jsx';
 import DataAppend from './import/session-type/data_append.jsx';
 import ModelGenerate from './import/session-type/model_generate.jsx';
@@ -17,7 +18,16 @@ import RegisterForm from './import/content/register.jsx';
 // constant: analysis layout
 const AnalysisLayout = (props) => (
     <div className='analysis-container'>
-        <SupportVector routerProp={props.children} />
+        <SupportVector />
+        {this.props.children}
+    </div>
+);
+
+// constant: main layout
+const MainLayout = (props) => (
+    <div className='main-content'>
+        <AnalysisLayout />
+        {this.props.children}
     </div>
 );
 
@@ -52,32 +62,34 @@ var AppRouter = React.createClass({
         return(
             <Router history={browserHistory}>
                 <Route component={this.props.indexRoute}>
-                    <Route path='/' component={AnalysisLayout}>
+                    <Route path='/' component={MainLayout}>
+                        <Route path='/session' component={AnalysisLayout}>
+                            <Route
+                                path='/session/data-new'
+                                component={DataNew}
+                            />
+                            <Route
+                                path='/session/data-append'
+                                component={DataAppend}
+                            />
+                            <Route
+                                path='/session/model-generate'
+                                component={ModelGenerate}
+                            />
+                            <Route
+                                path='/session/model-predict'
+                                component={ModelPredict}
+                            />
+                        </Route>
                         <Route
-                            path='/data-new'
-                            component={DataNew}
+                            path='/login'
+                            component={LoginLayout}
                         />
                         <Route
-                            path='/data-append'
-                            component={DataAppend}
-                        />
-                        <Route
-                            path='/model-generate'
-                            component={ModelGenerate}
-                        />
-                        <Route
-                            path='/model-predict'
-                            component={ModelPredict}
+                            path='/register'
+                            component={RegisterLayout}
                         />
                     </Route>
-                    <Route
-                        path='/login'
-                        component={LoginLayout}
-                    />
-                    <Route
-                        path='/register'
-                        component={RegisterLayout}
-                    />
                 </Route>
             </Router>
         );
