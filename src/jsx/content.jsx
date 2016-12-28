@@ -76,15 +76,37 @@ var Page = React.createClass({
             this.props.children &&
             this.props.children.props &&
             this.props.children.props.children &&
-            this.props.children.props.children.props &&
-            this.props.children.props.children.props.route &&
-            this.props.children.props.children.props.route.component &&
-            this.props.children.props.children.props.route.component.name
+            this.props.children.props.children.props
         ) {
             var property = this.props.children.props.children.props;
+        }
+
+      // page assignment: login, registration
+        if (
+            property &&
+            property.route &&
+            property.route.component &&
+            property.route.component.name
+        ) {
+            var displayName = this.state.display_name;
             var componentName = property.route.component.name;
+
+          // session assignment: analysis
+            if (
+                property &&
+                property.children &&
+                property.children.props &&
+                property.children.props.route &&
+                property.children.props.route.component &&
+                property.children.props.route.component.displayName
+            ) {
+                var route = property.children.props.route;
+                var displayName = route.component.displayName;
+                var componentName = property.route.component.name;
+            }
         }
         else {
+            var displayName = this.state.display_name;
             var componentName = this.state.component_name;
         }
 
@@ -97,7 +119,7 @@ var Page = React.createClass({
                 <MainContent
                     renderNavBar={navbar}
                     componentType={componentName}
-                    sessionType={this.state.display_name}
+                    sessionType={displayName}
                 />
             </div>
         );
