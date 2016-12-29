@@ -6,6 +6,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import createStore from 'redux';
+import Provider from 'react-redux';
 import MainContent from './import/main.jsx';
 import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
@@ -126,11 +128,16 @@ var Page = React.createClass({
     }
 });
 
+// redux store: contains entire state tree for the application
+store = createStore();
+
 // render form
 //
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
 ReactDOM.render(
-    <AppRouter indexRoute={Page} />,
+    <Provider store={store}>
+        <AppRouter indexRoute={Page} />
+    </Provider>,
     document.querySelector('.container')
 );
