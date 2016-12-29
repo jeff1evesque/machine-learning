@@ -128,7 +128,7 @@ var Page = React.createClass({
     }
 });
 
-// redux store: contains entire state tree for the application
+// redux store: entire state tree for the application
 store = createStore();
 
 // render form
