@@ -15,6 +15,11 @@ import React from 'react';
 import { connect } from 'react-redux'
 import Spinner from '../general/spinner.jsx';
 
+const LoginState = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(LoginForm)
+
 var LoginForm = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
