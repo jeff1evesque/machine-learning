@@ -2,12 +2,16 @@
  * content.jsx: generate main content.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
+ *
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import createStore from 'redux';
-import Provider from 'react-redux';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 import MainContent from './import/main.jsx';
 import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
