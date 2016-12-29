@@ -5,9 +5,14 @@
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
+ *
  */
 
 import React from 'react';
+import { connect } from 'react-redux'
 import Spinner from '../general/spinner.jsx';
 
 var LoginForm = React.createClass({
