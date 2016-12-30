@@ -1,5 +1,5 @@
 /**
- * login_redux.jsx: redux store for login, and logout processes.
+ * login.jsx: redux store for login, and logout processes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
