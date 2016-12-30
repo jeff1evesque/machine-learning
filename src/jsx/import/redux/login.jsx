@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import LoginForm from '../import/content/login.jsx';
 
 const mapStateToProps = (state, ownProps) => {
   return {
