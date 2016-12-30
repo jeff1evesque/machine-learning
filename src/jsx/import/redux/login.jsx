@@ -12,7 +12,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../import/content/login.jsx';
 
-// transforms redux data store to react properties
+// transforms redux state tree to react properties
 const mapStateToProps = (state, ownProps) => {
   return {
     active: ownProps.filter === state.visibilityFilter
