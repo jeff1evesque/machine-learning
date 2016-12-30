@@ -8,12 +8,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../import/content/login.jsx';
 
+// transforms redux data store to react properties
 const mapStateToProps = (state, ownProps) => {
   return {
     active: ownProps.filter === state.visibilityFilter
   }
 }
 
+// wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     onClick: () => {
@@ -22,6 +24,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   }
 }
 
+// pass selected properties from redux state tree to component
 const LoginState = connect(
   mapStateToProps,
   mapDispatchToProps
