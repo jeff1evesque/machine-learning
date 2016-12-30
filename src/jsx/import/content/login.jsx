@@ -13,7 +13,6 @@
 
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
-import LoginState from '../redux/login.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
