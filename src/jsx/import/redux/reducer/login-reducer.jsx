@@ -15,3 +15,6 @@ const login = (state='logged-out', action) => {
         return state;
     }
 }
+
+// indicate which class can be exported, and instantiated via 'require'
+export default login
