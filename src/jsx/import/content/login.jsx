@@ -14,6 +14,7 @@
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
 import mapDispatchToProps from '../redux/container/login-container.jsx';
+import setloginState from '../redux/action/login-action.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
@@ -63,7 +64,8 @@ var LoginForm = React.createClass({
                   // store into redux store logged-in state
                     console.log(asynchObject);
                     if (true) {
-                        dispatch('logged-in');
+                        var action = setloginState('logged-in');
+                        dispatch(action);
                     }
                 }
                 else {
