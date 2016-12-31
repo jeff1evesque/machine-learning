@@ -1,5 +1,5 @@
 /**
- * login.jsx: describe how login state changes.
+ * login-reducer.jsx: describe how login state changes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
