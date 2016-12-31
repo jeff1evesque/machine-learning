@@ -1,5 +1,5 @@
 /**
- * login-action.jsx: send login data from the application to the store.
+ * login-action.jsx: send login status from the application to the store.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
