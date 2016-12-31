@@ -16,6 +16,7 @@ import MainContent from './import/main.jsx';
 import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 import AppRouter from './router.jsx';
+import login from './import/redux/reducer/login-reducer.jsx';
 
 var Page = React.createClass({
   // initial 'state properties'
@@ -133,7 +134,7 @@ var Page = React.createClass({
 });
 
 // redux store: entire state tree for the application
-store = createStore();
+store = createStore(login);
 
 // render form
 //
