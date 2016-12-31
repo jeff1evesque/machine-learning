@@ -1,5 +1,5 @@
 /**
- * login.jsx: redux store for login, and logout processes.
+ * login-container.jsx: redux store for login, and logout processes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import LoginForm from '../import/content/login.jsx';
+import LoginForm from '../../import/content/login.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state, ownProps) => {
