@@ -13,6 +13,7 @@
 
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
+import mapDispatchToProps from '../redux/container/login-container.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
@@ -58,6 +59,12 @@ var LoginForm = React.createClass({
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
                     this.setState({ajax_done_result: asynchObject});
+
+                  // store into redux store logged-in state
+                    console.log(asynchObject);
+                    if (true) {
+                        dispatch('logged-in');
+                    }
                 }
                 else {
                     this.setState({ajax_done_result: null});
