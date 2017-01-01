@@ -14,24 +14,24 @@ import LoginForm from '../../content/login.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state, ownProps) => {
-  return {
-    active: ownProps.filter === state.visibilityFilter
-  }
+    return {
+        active: ownProps.filter === state.visibilityFilter
+    }
 }
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch, ownProps) => {
-  return {
-    onClick: () => {
-      dispatch(setVisibilityFilter(ownProps.filter))
+    return {
+        onClick: () => {
+            dispatch(setVisibilityFilter(ownProps.filter))
+        }
     }
-  }
 }
 
 // pass selected properties from redux state tree to component
 const LoginState = connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(LoginForm)
 
 // indicate which class can be exported, and instantiated via 'require'
