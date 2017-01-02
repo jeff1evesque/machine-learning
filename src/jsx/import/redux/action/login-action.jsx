@@ -5,6 +5,9 @@
  *
  */
 
-export function setloginState(value) {
-    return { type: 'LOGIN-STATE', value };
+export function setLoginState(login_state, username) {
+    return {
+        type: login_state,
+        username: value
+    };
 }
