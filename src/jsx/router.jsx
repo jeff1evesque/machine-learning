@@ -12,7 +12,7 @@ import DataAppend from './import/session-type/data_append.jsx';
 import ModelGenerate from './import/session-type/model_generate.jsx';
 import ModelPredict from './import/session-type/model_predict.jsx';
 import SupportVector from './import/content/support_vector.jsx';
-import LoginForm from './import/content/login.jsx';
+import LoginState from './import/redux/container/login-container.jsx';
 import RegisterForm from './import/content/register.jsx';
 
 // constant: analysis layout
@@ -34,7 +34,7 @@ const MainLayout = (props) => (
 // constant: login layout
 const LoginLayout = (props) => (
     <div className='main-full-span login-form'>
-        <LoginForm />
+        <LoginState />
     </div>
 );
 
