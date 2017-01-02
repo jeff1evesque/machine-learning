@@ -61,9 +61,12 @@ var LoginForm = React.createClass({
                     this.setState({ajax_done_result: asynchObject});
 
                   // store into redux store logged-in state
-                    console.log(asynchObject);
-                    if (true) {
-                        var action = setloginState('logged-in');
+                    if (asynchObject.username) {
+                        var action = setloginState(asynchObject.username);
+                        this.props.dispatch(action);
+                    }
+                    else {
+                        var action = setloginState('anonymous');
                         this.props.dispatch(action);
                     }
                 }
