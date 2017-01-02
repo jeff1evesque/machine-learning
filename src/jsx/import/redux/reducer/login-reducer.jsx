@@ -7,9 +7,9 @@
 
 const login = (state='logged-out', action) => {
     switch(action.type) {
-        case 'LOGIN':
+        case 'LOGGED-IN':
             return 'logged-in';
-        case 'LOGOUT':
+        case 'LOGGED-OUT':
             return 'logged-out';
     default:
         return state;
