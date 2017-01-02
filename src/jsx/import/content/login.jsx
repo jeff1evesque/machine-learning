@@ -13,7 +13,7 @@
 
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
-import setloginState from '../redux/action/login-action.jsx';
+import setLoginState from '../redux/action/login-action.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
@@ -62,11 +62,10 @@ var LoginForm = React.createClass({
 
                   // store into redux store logged-in state
                     if (asynchObject.username) {
-                        var action = setloginState(asynchObject.username);
-                        this.props.dispatch(action);
-                    }
-                    else {
-                        var action = setloginState('anonymous');
+                        var action = setLoginState(
+                            'LOGIN',
+                            asynchObject.username
+                        );
                         this.props.dispatch(action);
                     }
                 }
