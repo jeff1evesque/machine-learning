@@ -5,7 +5,7 @@
  *
  */
 
-const login = (state='anonymous', action) => {
+const login = (state='logged-out', action) => {
     switch(action.type) {
         case 'LOGIN':
             return 'logged-in';
