@@ -27,7 +27,7 @@ var Page = React.createClass({
         };
     },
   // update 'state properties': click event has not 'target'
-    setClickType: function(event){
+    setClickType: function(event) {
         if (event.home) {
             this.setState({render_subpage: 'SupportVector'});
         }
@@ -134,7 +134,7 @@ var Page = React.createClass({
 });
 
 // redux store: entire state tree for the application
-store = createStore(login);
+const store = createStore(login);
 
 // render form
 //
