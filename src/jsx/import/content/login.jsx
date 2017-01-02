@@ -63,7 +63,7 @@ var LoginForm = React.createClass({
                   // store into redux store logged-in state
                     if (asynchObject.username) {
                         var action = setLoginState(
-                            'LOGIN',
+                            'LOGGED-IN',
                             asynchObject.username
                         );
                         this.props.dispatch(action);
