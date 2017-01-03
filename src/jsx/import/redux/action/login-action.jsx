@@ -8,7 +8,7 @@
 function setLoginState(login_state, username) {
     return {
         type: login_state,
-        username: value
+        username: username
     };
 }
 
