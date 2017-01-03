@@ -5,10 +5,9 @@
  *
  */
 
-function setLogoutState(username) {
+function setLogoutState() {
     return {
-        type: 'logged-out',
-        username: username
+        type: 'logged-out'
     };
 }
 
