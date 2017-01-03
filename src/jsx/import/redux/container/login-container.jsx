@@ -21,11 +21,8 @@ const mapStateToProps = (state, ownProps) => {
 }
 
 // wraps each function of the object to be dispatch callable
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
-        onClick: () => {
-            dispatch(setLoginState(ownProps.filter))
-        },
         dispatch: dispatch,
     }
 }
