@@ -5,9 +5,12 @@
  *
  */
 
-export function setLoginState(login_state, username) {
+function setLoginState(login_state, username) {
     return {
         type: login_state,
         username: value
     };
 }
+
+// indicate which class can be exported, and instantiated via 'require'
+export default setLoginState
