@@ -5,9 +5,9 @@
  *
  */
 
-function setLoginState(login_state, username) {
+function setLoginState(username) {
     return {
-        type: login_state,
+        type: 'logged-in',
         username: username
     };
 }
