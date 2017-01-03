@@ -11,7 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../../content/login.jsx';
-import setLoginState from '../redux/action/login-action.jsx';
+import setLoginState from '../action/login-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state, ownProps) => {
