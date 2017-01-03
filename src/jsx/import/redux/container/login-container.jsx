@@ -11,6 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../../content/login.jsx';
+import setLoginState from '../redux/action/login-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state, ownProps) => {
@@ -23,7 +24,7 @@ const mapStateToProps = (state, ownProps) => {
 const mapDispatchToProps = (dispatch, ownProps) => {
     return {
         onClick: () => {
-            dispatch(setVisibilityFilter(ownProps.filter))
+            dispatch(setLoginState(ownProps.filter))
         },
         dispatch: dispatch,
     }
