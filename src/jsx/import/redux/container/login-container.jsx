@@ -16,7 +16,7 @@ import setLoginState from '../action/login-action.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     return {
-        state: state
+        username: state
     }
 }
 
