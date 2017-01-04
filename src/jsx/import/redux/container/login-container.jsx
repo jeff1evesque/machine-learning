@@ -14,9 +14,9 @@ import LoginForm from '../../content/login.jsx';
 import setLoginState from '../action/login-action.jsx';
 
 // transforms redux state tree to react properties
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
     return {
-        active: ownProps.filter === state.visibilityFilter
+        state: state
     }
 }
 
