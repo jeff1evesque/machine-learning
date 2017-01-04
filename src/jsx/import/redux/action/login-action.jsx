@@ -7,7 +7,7 @@
 
 function setLoginState(username) {
     return {
-        type: 'logged-in',
+        type: 'LOGGED-IN',
         username: username
     };
 }
