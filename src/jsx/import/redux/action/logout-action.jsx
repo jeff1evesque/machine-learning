@@ -7,7 +7,7 @@
 
 function setLogoutState() {
     return {
-        type: 'logged-out'
+        type: 'LOGGED-OUT'
     };
 }
 
