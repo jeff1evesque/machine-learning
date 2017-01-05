@@ -6,7 +6,7 @@
  */
 
 // attempt to retrieve from sessionStorage
-const loadState = (key) => {
+export const loadState = (key) => {
     try {
         const serializedState = sessionStorage.getItem(key);
         if (serializedState === null) {
@@ -19,5 +19,12 @@ const loadState = (key) => {
     }
 };
 
-// indicate which class can be exported, and instantiated via 'require'
-export default loadState
+// attempt to save (key, value) into sessionStorage
+export const saveState = (key, value) => {
+    try {
+        const serializedState = JSON.stringify(key, value);
+        sessionStorage.setItem(key, value);
+    } catch (error) {
+        console.log(error);
+    }
+};
