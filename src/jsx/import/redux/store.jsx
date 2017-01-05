@@ -1,11 +1,10 @@
 /**
- * login-action.jsx: send login status from the application to the store.
- *
- * Note: this script implements jsx (reactjs) syntax.
+ * store.jsx: create consistent redux state tree.
  *
  */
 
 import { createStore } from 'redux';
+import login from './reducer/login-reducer.jsx';
 
 // redux store: entire state tree for the application
 const store = createStore(login);
