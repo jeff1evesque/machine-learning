@@ -10,13 +10,13 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import MainContent from './import/main.jsx';
 import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 import AppRouter from './router.jsx';
 import login from './import/redux/reducer/login-reducer.jsx';
+import store from './import/redux/store.jsx';
 
 var Page = React.createClass({
   // initial 'state properties'
@@ -132,9 +132,6 @@ var Page = React.createClass({
         );
     }
 });
-
-// redux store: entire state tree for the application
-const store = createStore(login);
 
 // render form
 //
