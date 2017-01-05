@@ -9,6 +9,13 @@
 
 import React from 'react';
 import { Link } from 'react-router';
+import { connect } from 'react-redux';
+
+const mapStateToProps = (state) => {
+    return {
+        username: state
+    }
+}
 
 var MenuLogin = React.createClass({
   // return state to parent component
@@ -17,6 +24,8 @@ var MenuLogin = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
+        console.log(getState());
+
         return(
             <Link
                 to='/login'
@@ -30,5 +39,9 @@ var MenuLogin = React.createClass({
     }
 });
 
+const MenuLoginState = connect(
+    mapStateToProps
+)(MenuLogin)
+
 // indicate which class can be exported, and instantiated via 'require'
-export default MenuLogin
+export default MenuLoginState
