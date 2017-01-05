@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
 
 var MenuLogin = React.createClass({
   // return state to parent component
