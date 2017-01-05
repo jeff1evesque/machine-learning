@@ -10,6 +10,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
+import { loadState, saveState } from '../../redux/load-storage.jsx';
 
 const mapStateToProps = (state) => {
     return {
