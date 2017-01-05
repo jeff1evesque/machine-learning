@@ -5,7 +5,7 @@
  *
  */
 
-// redux store: entire state tree for the application
+// attempt to retrieve from sessionStorage
 const loadState = (key) => {
     try {
         const serializedState = sessionStorage.getItem(key);
