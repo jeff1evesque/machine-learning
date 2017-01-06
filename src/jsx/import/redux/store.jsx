@@ -1,6 +1,9 @@
 /**
  * store.jsx: create consistent redux state tree.
  *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
+ *
  */
 
 import { createStore } from 'redux';
