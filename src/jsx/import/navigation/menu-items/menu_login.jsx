@@ -10,7 +10,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { loadState, saveState } from '../../redux/load-storage.jsx';
+import { loadState } from '../../redux/load-storage.jsx';
 
 const mapStateToProps = (state) => {
     return {
@@ -23,18 +23,29 @@ var MenuLogin = React.createClass({
     menuClicked: function(event) {
         this.props.onChange({menu_clicked: 'login'});
     },
+  // get login, logout button properties
+    getButton: function() {
+        if (loadState('username') != 'anonymous') {
+            return {url: '/logout', text: 'Logout'};
+        }
+        else {
+            return {url: '/login', text: 'Sign in'};
+        }
+    },
   // triggered when 'state properties' change
     render: function(){
-        console.log(getState());
+      // local variables
+        var url = this.getButton().url;
+        var caption = this.getButton().text;
 
         return(
             <Link
-                to='/login'
+                to={url}
                 activeClassName='active'
                 className='btn mn-2'
                 onClick={this.menuClicked}
             >
-                <span>Sign in</span>
+                <span>{caption}</span>
             </Link>
         )
     }
