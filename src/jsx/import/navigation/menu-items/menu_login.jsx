@@ -18,33 +18,40 @@ import { loadState } from '../../redux/load-storage.jsx';
 import setLoginState from '../../redux/action/login-action.jsx';
 
 var MenuLogin = React.createClass({
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            url: '/login',
+            url_caption: 'Sign in',
+        };
+    },
   // return state to parent component
     menuClicked: function(event) {
         this.props.onChange({menu_clicked: 'login'});
     },
-  // get login, logout button properties
-    getButton: function() {
-        if (loadState('username') != 'anonymous') {
-            return {url: '/logout', text: 'Logout'};
+    componentDidMount: function() {
+        if (
+            String(loadState('username')) &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
         }
         else {
-            return {url: '/login', text: 'Sign in'};
+            this.setState({url: '/login'});
+            this.setState({url_caption: 'Sign in'});
         }
     },
   // triggered when 'state properties' change
     render: function(){
-      // local variables
-        var url = this.getButton().url;
-        var caption = this.getButton().text;
-
         return(
             <Link
-                to={url}
+                to={this.state.url}
                 activeClassName='active'
                 className='btn mn-2'
                 onClick={this.menuClicked}
             >
-                <span>{caption}</span>
+                <span>{this.state.url_caption}</span>
             </Link>
         )
     }
