@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import MenuLogin from '../../navigation/menu-items/menu-login.jsx';
+import MenuLogin from '../../navigation/menu-items/menu_login.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
