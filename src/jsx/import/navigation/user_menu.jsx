@@ -6,7 +6,7 @@
 
 import React from 'react';
 import MenuHome from './menu-items/menu_home.jsx';
-import MenuLoginState from '../redux/container/menu_login.jsx';
+import MenuLoginState from '../redux/container/menu-login-container.jsx';
 import MenuRegister from './menu-items/menu_register.jsx';
 
 var UserMenu = React.createClass({
