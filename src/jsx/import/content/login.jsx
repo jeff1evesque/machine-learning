@@ -14,6 +14,7 @@
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
+import { saveState } from '../redux/load-storage.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
@@ -62,8 +63,12 @@ var LoginForm = React.createClass({
 
                   // store into redux store logged-in state
                     if (asynchObject.username) {
+                      // update redux store
                         var action = setLoginState(asynchObject.username);
                         this.props.dispatch(action);
+
+                      // store username into sessionStorage
+                        saveState('username', asynchObject.username);
                     }
                 }
                 else {
