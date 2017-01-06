@@ -15,7 +15,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 import { loadState } from '../../redux/load-storage.jsx';
-import setLoginState from '../../redux/action/login-action.jsx';
+import setLogoutState from '../../redux/action/login-action.jsx';
 
 var MenuLogin = React.createClass({
   // initial 'state properties'
@@ -34,10 +34,16 @@ var MenuLogin = React.createClass({
             loadState('username') &&
             String(loadState('username')) != 'anonymous'
         ) {
+          // update component states
             this.setState({url: '/logout'});
             this.setState({url_caption: 'Log out'});
+
+          // update redux store
+            var action = setLogoutState();
+            this.props.dispatch(action);
         }
         else {
+          // update component states
             this.setState({url: '/login'});
             this.setState({url_caption: 'Sign in'});
         }
