@@ -21,12 +21,6 @@ var MenuLogin = React.createClass({
   // return state to parent component
     menuClicked: function(event) {
         this.props.onChange({menu_clicked: 'login'});
-
-      // redux store
-        if (loadState('username') != 'anonymous') {
-            var action = setLoginState('anonymous');
-            this.props.dispatch(action);
-        }
     },
   // get login, logout button properties
     getButton: function() {
