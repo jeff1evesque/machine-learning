@@ -2,14 +2,20 @@
  * content.jsx: generate main content.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
+ *
  */
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Provider } from 'react-redux';
 import MainContent from './import/main.jsx';
 import NavBar from './import/navigation/nav_bar.jsx';
 import UserMenu from './import/navigation/user_menu.jsx';
 import AppRouter from './router.jsx';
+import store from './import/redux/store.jsx';
 
 var Page = React.createClass({
   // initial 'state properties'
@@ -20,7 +26,7 @@ var Page = React.createClass({
         };
     },
   // update 'state properties': click event has not 'target'
-    setClickType: function(event){
+    setClickType: function(event) {
         if (event.home) {
             this.setState({render_subpage: 'SupportVector'});
         }
@@ -130,7 +136,12 @@ var Page = React.createClass({
 //
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
+// Note: the 'Provider' component, makes redux data to be accessible to all
+//       container components, without passing it explicitly.
+//
 ReactDOM.render(
-    <AppRouter indexRoute={Page} />,
+    <Provider store={store}>
+        <AppRouter indexRoute={Page} />
+    </Provider>,
     document.querySelector('.container')
 );

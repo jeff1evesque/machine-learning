@@ -5,10 +5,16 @@
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
+ *
  */
 
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
+import setLoginState from '../redux/action/login-action.jsx';
+import { saveState } from '../redux/load-storage.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
@@ -49,11 +55,25 @@ var LoginForm = React.createClass({
 
           // asynchronous callback: ajax 'done' promise
            ajaxCaller(function (asynchObject) {
+
             // Append to DOM
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
                     this.setState({ajax_done_result: asynchObject});
+
+                  // store into redux store logged-in state
+                    if (
+                        asynchObject.username &&
+                        asynchObject.status === 0
+                    ) {
+                      // update redux store
+                        var action = setLoginState(asynchObject.username);
+                        this.props.dispatch(action);
+
+                      // store username into sessionStorage
+                        saveState('username', asynchObject.username);
+                    }
                 }
                 else {
                     this.setState({ajax_done_result: null});

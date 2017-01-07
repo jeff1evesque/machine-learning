@@ -5,26 +5,69 @@
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
+ *
  */
 
 import React from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { loadState } from '../../redux/load-storage.jsx';
+import setLogoutState from '../../redux/action/login-action.jsx';
 
 var MenuLogin = React.createClass({
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            url: '/login',
+            url_caption: 'Sign in',
+        };
+    },
   // return state to parent component
     menuClicked: function(event) {
+      // logout: remove username from sessionStorage
+        if (
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous' &&
+            this.state.url == '/logout'
+        ) {
+            sessionStorage.removeItem('username');
+        }
+
+      // property indication what links to display
         this.props.onChange({menu_clicked: 'login'});
+    },
+    componentDidMount: function() {
+        if (
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+          // update component states
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
+
+          // update redux store
+            var action = setLogoutState();
+            this.props.dispatch(action);
+        }
+        else {
+          // update component states
+            this.setState({url: '/login'});
+            this.setState({url_caption: 'Sign in'});
+        }
     },
   // triggered when 'state properties' change
     render: function(){
         return(
             <Link
-                to='/login'
+                to={this.state.url}
                 activeClassName='active'
                 className='btn mn-2'
                 onClick={this.menuClicked}
             >
-                <span>Sign in</span>
+                <span>{this.state.url_caption}</span>
             </Link>
         )
     }

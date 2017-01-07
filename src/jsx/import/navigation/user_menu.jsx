@@ -6,7 +6,7 @@
 
 import React from 'react';
 import MenuHome from './menu-items/menu_home.jsx';
-import MenuLogin from './menu-items/menu_login.jsx';
+import MenuLoginState from '../redux/container/menu-login-container.jsx';
 import MenuRegister from './menu-items/menu_register.jsx';
 
 var UserMenu = React.createClass({
@@ -57,7 +57,7 @@ var UserMenu = React.createClass({
   // display result
     render: function() {
         if (this.state.show_login) {
-            var Login = MenuLogin
+            var Login = MenuLoginState
         }
         else {
             var Login = 'span'
