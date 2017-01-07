@@ -86,6 +86,10 @@ var AppRouter = React.createClass({
                             component={LoginLayout}
                         />
                         <Route
+                            path='/logout'
+                            component={LoginLayout}
+                        />
+                        <Route
                             path='/register'
                             component={RegisterLayout}
                         />
