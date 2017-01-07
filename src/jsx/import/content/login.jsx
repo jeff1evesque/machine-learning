@@ -55,6 +55,7 @@ var LoginForm = React.createClass({
 
           // asynchronous callback: ajax 'done' promise
            ajaxCaller(function (asynchObject) {
+
             // Append to DOM
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
@@ -62,7 +63,10 @@ var LoginForm = React.createClass({
                     this.setState({ajax_done_result: asynchObject});
 
                   // store into redux store logged-in state
-                    if (asynchObject.username) {
+                    if (
+                        asynchObject.username &&
+                        asynchObject.status === 0
+                    ) {
                       // update redux store
                         var action = setLoginState(asynchObject.username);
                         this.props.dispatch(action);
