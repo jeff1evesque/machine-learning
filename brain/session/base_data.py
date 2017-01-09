@@ -47,9 +47,9 @@ class Base_Data(object):
         self.model_type = premodel_data['data']['settings']['model_type']
 
         if 'uid' in session:
-            self.uid = session['uid']
+            self.uid = int(session['uid'])
         else:
-            self.uid = self.uid = current_app.config.get('USER_ID')
+            self.uid = current_app.config.get('USER_ID')
 
     def save_feature_count(self):
         '''@save_feature_count
