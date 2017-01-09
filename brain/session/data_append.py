@@ -54,9 +54,9 @@ class Data_Append(Base, Base_Data):
         self.model_type = premodel_data['data']['settings']['model_type']
 
         if 'uid' in session:
-            self.uid = session['uid']
+            self.uid = int(session['uid'])
         else:
-            self.uid = self.uid = current_app.config.get('USER_ID')
+            self.uid = current_app.config.get('USER_ID')
 
     def save_entity(self, session_type, session_id):
         '''@save_entity
