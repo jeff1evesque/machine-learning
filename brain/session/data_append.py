@@ -37,13 +37,9 @@ class Data_Append(Base, Base_Data):
         superclass 'Base', and 'Base_Data' constructor, along with the
         constructor in this subclass.
 
-        @self.uid, the logged-in user (i.e. userid).
-
-        Note: the superclass constructor expects the same 'premodel_data'
-              argument.
-
         '''
 
+        # superclass constructor
         Base.__init__(self, premodel_data)
         Base_Data.__init__(self, premodel_data)
 
