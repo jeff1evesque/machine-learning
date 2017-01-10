@@ -36,9 +36,6 @@ class Data_New(Base, Base_Data):
         and 'Base_Data' constructor, along with the constructor in this
         subclass.
 
-        @super(), implement 'Base', and 'Base_Data' superclass constructor
-            within this child class constructor.
-
         @self.uid, the logged-in user (i.e. userid).
 
         Note: the superclass constructor expects the same 'premodel_data'
@@ -46,17 +43,8 @@ class Data_New(Base, Base_Data):
 
         '''
 
-        super(Data_New, self).__init__(premodel_data)
-        self.observation_labels = []
-        self.list_error = []
-        self.dataset = []
-        self.list_model_type = current_app.config.get('MODEL_TYPE')
-        self.model_type = premodel_data['data']['settings']['model_type']
-
-        if 'uid' in session:
-            self.uid = int(session['uid'])
-        else:
-            self.uid = current_app.config.get('USER_ID')
+        Base.__init__(self, premodel_data)
+        Base_Data.__init__(self, premodel_data)
 
     def save_entity(self, session_type, id_entity=None):
         '''@save_entity
