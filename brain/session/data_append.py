@@ -11,8 +11,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from flask import current_app
-from flask import session
 from brain.session.base import Base
 from brain.session.base_data import Base_Data
 from brain.database.save_entity import Save_Entity
