@@ -14,7 +14,6 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 import yaml
 import logging
-from log.logger import Logger
 from logging.handlers import RotatingFileHandler
 from flask import Flask
 from interface.views import blueprint
@@ -29,7 +28,6 @@ def create_app(args={'prefix': '', 'settings': ''}):
         path = 'hiera/' + args['prefix'] + '/hiera/settings.yaml'
     else:
         path = 'hiera/settings.yaml'
-
 
     # define configuration
     with open(path, 'r') as stream:
