@@ -30,14 +30,12 @@ class Data_New(Base, Base_Data):
     def __init__(self, premodel_data):
         '''@__init__
 
-        This constructor defines class properties using the superclass 'Base',
-        and 'Base_Data' constructor, along with the constructor in this
-        subclass.
+        This constructor inherits additional class properties, from the
+        constructor of the 'Base_Data' superclass.
 
         '''
 
         # superclass constructor
-        Base.__init__(self, premodel_data)
         Base_Data.__init__(self, premodel_data)
 
     def save_entity(self, session_type, id_entity=None):
