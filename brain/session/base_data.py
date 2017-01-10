@@ -37,7 +37,8 @@ class Base_Data(object):
     def __init__(self, premodel_data):
         '''@__init__
 
-        This constructor is responsible for defining class variables.
+        This constructor inherits additional class properties, from the
+        constructor of the 'Base_Data' superclass.
 
         @self.uid, the logged-in user (i.e. userid).
 
