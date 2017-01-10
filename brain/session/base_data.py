@@ -38,7 +38,7 @@ class Base_Data(object):
         '''@__init__
 
         This constructor inherits additional class properties, from the
-        constructor of the 'Base_Data' superclass.
+        constructor of the 'Base' superclass.
 
         @self.uid, the logged-in user (i.e. userid).
 
