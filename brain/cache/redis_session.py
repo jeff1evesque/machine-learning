@@ -2,11 +2,10 @@
 
 '''@base_data
 
-This file serves as the superclass for 'data_xx.py' files.
+This file stores user sessions into the redis-server.
 
-Note: the term 'dataset' used throughout various comments in this file,
-      synonymously implies the user supplied 'file upload(s)', and XML url
-      references.
+    - http://flask.pocoo.org/snippets/75/
+    - https://github.com/mrichman/flask-redis/blob/master/redissession.py
 
 '''
 
