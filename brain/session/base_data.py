@@ -39,15 +39,21 @@ class Base_Data(object):
 
         This constructor is responsible for defining class variables.
 
+        @self.uid, the logged-in user (i.e. userid).
+
         '''
 
+        # superclass constructor
+        Base.__init__(self, premodel_data)
+
+        # class variable
         self.observation_labels = []
         self.list_error = []
         self.dataset = []
         self.model_type = premodel_data['data']['settings']['model_type']
 
         if 'uid' in session:
-            self.uid = int(session['uid'])
+            self.uid = session['uid']
         else:
             self.uid = current_app.config.get('USER_ID')
 
