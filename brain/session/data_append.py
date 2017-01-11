@@ -11,12 +11,11 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.session.base import Base
 from brain.session.base_data import Base_Data
 from brain.database.save_entity import Save_Entity
 
 
-class Data_Append(Base, Base_Data):
+class Data_Append(Base_Data):
     '''@Data_Append
 
     This class provides an interface to update existing stored entities within
@@ -24,7 +23,7 @@ class Data_Append(Base, Base_Data):
 
     Note: this class is invoked within 'load_data.py'
 
-    Note: inherit base methods from superclass 'Base', 'Base_Data
+    Note: inherit base methods from the superclass 'Base_Data
 
     '''
 
