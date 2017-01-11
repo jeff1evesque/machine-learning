@@ -10,6 +10,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+from brain.session.base import Base
 from flask import current_app
 from flask import session
 from brain.session.data.save_feature_count import feature_count
@@ -20,7 +21,7 @@ from brain.session.data.save_observation_label import observation_label
 from brain.session.data.dataset_to_dict import dataset_dictionary
 
 
-class Base_Data(object):
+class Base_Data(Base):
     '''@Base_Data
 
     This class provides an interface to save, and validate the provided
