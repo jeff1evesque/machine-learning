@@ -11,6 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 import sys
+from flask import current_app
 from brain.validator.validate_settings import Validate_Settings
 
 
@@ -40,6 +41,7 @@ class Base(object):
 
         self.premodel_data = premodel_data
         settings = self.premodel_data['data']['settings']
+        self.list_model_type = current_app.config.get('MODEL_TYPE')
         self.session_type = settings['session_type']
         self.list_error = []
 
