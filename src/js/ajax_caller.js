@@ -2,6 +2,9 @@
  * ajax_caller.js: an array of feature (independent variables) names, and the
  *                 generalized count of features that can be expected within an
  *                 observation, is inserted to respective DOM elements.
+ *
+ * @credentials, https://[github-url]/issues/2863#issuecomment-272355998
+ *
  */
 
 // AJAX Process
