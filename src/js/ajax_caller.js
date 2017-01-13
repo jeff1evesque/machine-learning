@@ -3,8 +3,6 @@
  *                 generalized count of features that can be expected within an
  *                 observation, is inserted to respective DOM elements.
  *
- * @credentials, https://[github-url]/issues/2863#issuecomment-272355998
- *
  */
 
 // AJAX Process
@@ -20,7 +18,13 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     };
   }
 
-  // ajax logic
+  // ajax logic: generalized function that can be imported, and implemented.
+  //
+  // Note: in order to understand header responses with respect the fetch api
+  //       the following can be reviewed:
+  //
+  //       https://[github-url]/issues/2863#issuecomment-272355998
+  //
   fetch(args.endpoint, {
     method: 'post',
     body: args.data,
