@@ -21,6 +21,7 @@ function ajaxCaller(callbackDone, callbackFail, args) {
   fetch(args.endpoint, {
     method: 'post',
     body: args.data,
+    credentials: 'include',
     headers: fetchHeaders
   }).then(function(response) {
     if (response.ok) {
