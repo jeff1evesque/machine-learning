@@ -18,7 +18,8 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     };
   }
 
-  // ajax logic: generalized function that can be imported, and implemented.
+  // ajax logic: the encapsulating function, utilizes this fetch api, to
+  //             properly send data, to the corresponding endpoint.
   //
   // Note: in order to better understand header responses, with respect to the
   //       fetch api, the following can be reviewed:
