@@ -13,7 +13,6 @@ import pickle
 import redis
 from datetime import timedelta
 from uuid import uuid4
-from brain.cache.redis_settings import Redis_Settings
 from werkzeug.datastructures import CallbackDict
 from flask.sessions import SessionInterface, SessionMixin
 
@@ -33,11 +32,10 @@ class RedisSessionInterface(SessionInterface):
     serializer = pickle
     session_class = RedisSession
 
-    def __init__(self, my_redis=None, prefix='session:'):
+    def __init__(self, prefix='session:'):
         # local variables
-        my_redis = Redis_Settings()
-        host = my_redis.get_host()
-        port = my_redis.get_port()
+        host = 'localhost'
+        port = 6379
         db_num = 0
 
         pool = redis.ConnectionPool(
@@ -46,10 +44,7 @@ class RedisSessionInterface(SessionInterface):
             db=db_num
         )
 
-        if my_redis is None:
-            redis_instance = redis.StrictRedis(connection_pool=pool)
-        else:
-            redis_instance = my_redis
+        redis_instance = redis.StrictRedis(connection_pool=pool)
 
         # class variables
         self.redis = redis_instance
