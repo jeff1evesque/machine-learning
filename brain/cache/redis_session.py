@@ -46,10 +46,10 @@ class RedisSessionInterface(SessionInterface):
             db=db_num
         )
 
-        redis = redis.StrictRedis(connection_pool=pool)
+        redis_instance = redis.StrictRedis(connection_pool=pool)
 
         # class variables
-        self.redis = redis
+        self.redis = redis_instance
         self.prefix = prefix
 
     def generate_sid(self):
