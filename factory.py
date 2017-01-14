@@ -49,7 +49,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
         )
 
     # replace default cookie session with server-side redis
-    app.session_interface = RedisSessionInterface()
+    #app.session_interface = RedisSessionInterface()
 
     # secret key: used for maintaining flask sessions
     app.secret_key = settings['application']['security_key']
