@@ -38,7 +38,7 @@ class RedisSessionInterface(SessionInterface):
         my_redis = Redis_Settings()
         host = my_redis.get_host()
         port = my_redis.get_port()
-        db_num = db_num
+        db_num = 0
 
         pool = redis.ConnectionPool(
             host=host,
