@@ -10,9 +10,10 @@ This file stores user sessions into the redis-server.
 '''
 
 import pickle
+import redis
 from datetime import timedelta
 from uuid import uuid4
-from redis import Redis
+from brain.cache.redis_settings import Redis_Settings
 from werkzeug.datastructures import CallbackDict
 from flask.sessions import SessionInterface, SessionMixin
 
@@ -32,9 +33,22 @@ class RedisSessionInterface(SessionInterface):
     serializer = pickle
     session_class = RedisSession
 
-    def __init__(self, redis=None, prefix='session:'):
-        if redis is None:
-            redis = Redis()
+    def __init__(self, prefix='session:'):
+        # local variables
+        my_redis = Redis_Settings()
+        host = my_redis.get_host()
+        port = my_redis.get_port()
+        db_num = db_num
+
+        pool = redis.ConnectionPool(
+            host=host,
+            port=port,
+            db=db_num
+        )
+
+        redis = redis.StrictRedis(connection_pool=pool)
+
+        # class variables
         self.redis = redis
         self.prefix = prefix
 
