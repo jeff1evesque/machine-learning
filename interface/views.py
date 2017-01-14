@@ -171,13 +171,16 @@ def login():
         username = request.form.getlist('user[login]')[0]
         password = request.form.getlist('user[password]')[0]
         account = Retrieve_Account()
-        uid = str(account.get_uid(username)['result'])
 
         # validate: check username exists
-        if account.check_username(username)['result']:
+        if (
+            account.check_username(username)['result'] and
+            account.get_uid(username)['result']
+        ):
 
-            # database query: get hashed password
+            # database query: get hashed password, and userid
             hashed_password = account.get_password(username)['result']
+            uid = account.get_uid(username)['result']
 
             # notification: verify hashed password exists
             if hashed_password:

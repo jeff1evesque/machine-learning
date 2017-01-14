@@ -9,7 +9,7 @@
  *
  *       // manual console trace
  *         store.subscribe(() => {
- *             console.log('store changed', store.getState())
+ *             console.log('store changed', store.getState());
  *         })
  *
  */

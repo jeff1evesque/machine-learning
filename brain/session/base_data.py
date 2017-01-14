@@ -10,7 +10,9 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+from brain.session.base import Base
 from flask import current_app
+from flask import session
 from brain.session.data.save_feature_count import feature_count
 from brain.session.data.validate_file_extension import reduce_dataset
 from brain.session.data.save_entity import entity
@@ -19,7 +21,7 @@ from brain.session.data.save_observation_label import observation_label
 from brain.session.data.dataset_to_dict import dataset_dictionary
 
 
-class Base_Data(object):
+class Base_Data(Base):
     '''@Base_Data
 
     This class provides an interface to save, and validate the provided
@@ -36,15 +38,26 @@ class Base_Data(object):
     def __init__(self, premodel_data):
         '''@__init__
 
-        This constructor is responsible for defining class variables.
+        This constructor inherits additional class properties, from the
+        constructor of the 'Base' superclass.
+
+        @self.uid, the logged-in user (i.e. userid).
 
         '''
 
+        # superclass constructor
+        Base.__init__(self, premodel_data)
+
+        # class variable
         self.observation_labels = []
         self.list_error = []
-        self.uid = current_app.config.get('USER_ID')
         self.dataset = []
         self.model_type = premodel_data['data']['settings']['model_type']
+
+        if 'uid' in session:
+            self.uid = session['uid']
+        else:
+            self.uid = current_app.config.get('USER_ID')
 
     def save_feature_count(self):
         '''@save_feature_count
