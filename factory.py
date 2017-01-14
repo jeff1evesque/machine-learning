@@ -48,6 +48,12 @@ def create_app(args={'prefix': '', 'settings': ''}):
             static_folder='interface/static',
         )
 
+    # replace default cookie session with server-side redis
+    app.session_interface = RedisSessionInterface()
+
+    # secret key: used for maintaining flask sessions
+    app.secret_key = settings['application']['security_key']
+
     # register blueprint
     app.register_blueprint(blueprint)
 
@@ -82,12 +88,6 @@ def create_app(args={'prefix': '', 'settings': ''}):
         PASSWORD_MAX_C=settings['validate_password']['password_max_c'],
         USER_ID=0
     )
-
-    # replace default cookie session with server-side redis
-    app.session_interface = RedisSessionInterface()
-
-    # secret key: used for maintaining flask sessions
-    app.secret_key = settings['application']['security_key']
 
     # log handler: requires the below logger
     formatter = logging.Formatter(
