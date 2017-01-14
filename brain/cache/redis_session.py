@@ -33,7 +33,7 @@ class RedisSessionInterface(SessionInterface):
     serializer = pickle
     session_class = RedisSession
 
-    def __init__(self, prefix='session:'):
+    def __init__(self, my_redis=None, prefix='session:'):
         # local variables
         my_redis = Redis_Settings()
         host = my_redis.get_host()
@@ -46,7 +46,10 @@ class RedisSessionInterface(SessionInterface):
             db=db_num
         )
 
-        redis_instance = redis.StrictRedis(connection_pool=pool)
+        if my_redis is None:
+            redis_instance = redis.StrictRedis(connection_pool=pool)
+        else:
+            redis_instance = my_redis
 
         # class variables
         self.redis = redis_instance
