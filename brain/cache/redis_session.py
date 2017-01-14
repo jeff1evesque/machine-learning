@@ -34,7 +34,7 @@ class RedisSessionInterface(SessionInterface):
 
     def __init__(self, prefix='session:'):
         # local variables
-        host = 'localhost'
+        host = '127.0.0.1'
         port = 6379
         db_num = 0
 
