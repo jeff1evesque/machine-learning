@@ -28,16 +28,16 @@ form {
   input,
   select,
   textarea {
-    border:1px solid #gray-5;
-    box-sizing: border-box;
-    -webkit-box-sizing: border-box;
+    border: 1px solid #gray-5;
     -moz-box-sizing: border-box;
-    padding: .438rem;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
     margin: 0;
+    outline: none;
+    padding: .438rem;
     -moz-transition: all .30s ease-in-out;
     -ms-transition: all .30s ease-in-out;
     -o-transition: all .30s ease-in-out;
-    outline: none;
     -webkit-transition: all .30s ease-in-out;
   }
 
@@ -45,9 +45,9 @@ form {
   select:focus,
   textarea:focus {
     border: 1px solid $focus;
-    box-shadow: 0 0 .5rem $focus;
     -moz-box-shadow: 0 0 .5rem $focus;
     -webkit-box-shadow: 0 0 .5rem $focus;
+    box-shadow: 0 0 .5rem $focus;
   }
 
   fieldset {
@@ -85,8 +85,8 @@ form {
   }
 
   legend {
-    font-size: .938rem;
     color: $gray-7;
+    font-size: .938rem;
     padding: 0 $gutter-1 / 4;
   }
 }
