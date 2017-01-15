@@ -25,10 +25,44 @@
 }
 
 form {
-  > fieldset {
+  margin: .625rem auto;
+  padding: 1.25rem .75rem .625rem 1.25rem;
+
+  input,
+  select,
+  textarea {
+    border:1px solid #BEBEBE;
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    padding: .438rem;
+    margin:0px;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+    outline: none;
+    -webkit-transition: all 0.30s ease-in-out;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border: 1px solid #88D5E9;
+    box-shadow: 0 0 .5rem #88D5E9;
+    -moz-box-shadow: 0 0 .5rem #88D5E9;
+    -webkit-box-shadow: 0 0 .5rem #88D5E9;
+  }
+
+  fieldset {
+    border: 1px solid $gray-2;
     margin-top: $gutter-1 / 2;
+  }
+
+  > fieldset {
+    padding: .75rem 1.5rem 1rem;
 
     > fieldset {
+      border: 1px solid $gray-1;
       margin-top: $gutter-1 / 4;
     }
   }
@@ -51,6 +85,12 @@ form {
     font-size: .875rem;
     padding: .425rem .55rem;
     width: 100%;
+  }
+
+  legend {
+    font-size: .938rem;
+    color: $gray-6;
+    padding: 0 $gutter-1 / 4;
   }
 }
 
