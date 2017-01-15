@@ -60,7 +60,7 @@ install:
   - gem install yaml-lint -v 0.0.7
   - npm install -g dockerlint@0.2.0
   - pip install restructuredtext_lint==0.17.2
-  - npm install -g coveralls@2.11.15
+  - pip install python-coveralls==2.9.0
 
 ## implement linting / unit tests
 ##
@@ -124,9 +124,5 @@ script:
   - docker ps -a
 
 ## post build: the following commands are run after a successful, or failed build.
-##
-## @coveralls.js, an executable file, supplied by the npm coveralls module, which can be
-##      used to send coverage output to Coveralls.
-##
 after_success:
-  - cat /var/machine-learning/coverage.xml | ./node_modules/coveralls/bin/coveralls.js
+  - coveralls --data_file=/var/machine-learning/coverage.xml
