@@ -121,3 +121,6 @@ script:
   
   # list all containers
   - docker ps -a
+
+after_success:
+  - coveralls
