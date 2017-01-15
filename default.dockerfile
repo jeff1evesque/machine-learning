@@ -26,6 +26,9 @@ RUN apt-get -y install puppet-agent
 RUN apt-get -y install rubygems-integration=1.5
 RUN gem install r10k -v 2.2.0
 
+## install pytest-cov
+RUN pip install pytest-cov==2.4.0
+
 ## install puppet modules using puppetfile with r10k
 RUN mkdir -p $ENVIRONMENT_DIR/modules_contrib/
 RUN PUPPETFILE=$ENVIRONMENT_DIR/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/modules_contrib/ r10k puppetfile install
