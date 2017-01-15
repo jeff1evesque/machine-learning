@@ -18,7 +18,7 @@ from factory import create_app
 # run unit test
 if len(sys.argv) > 1:
     if sys.argv[1] == 'test':
-        pytest.main(['--cov', '.', '--output', 'coverage.json', 'test/live_server'])
+        pytest.main(['--cov', '.', '--cov-report', 'xml:coverage.xml', 'test/live_server'])
     elif sys.argv[1] == 'run':
         args = {
             'prefix': 'test',
