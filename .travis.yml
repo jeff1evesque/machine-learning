@@ -112,7 +112,7 @@ script:
   # Note: travis has issues with exclamation, so it's contained in a subshell
   - docker network create -d bridge app_nw && docker run --name base --net=app_nw -d container-default && docker run --name redis --net=app_nw -d container-redis && docker run --name webserver --net=app_nw -d container-webserver run && docker run --name database --net=app_nw -d container-database && docker run --name webserver-pytest --net=app_nw -it container-webserver test  > pytest.log
   - cat pytest.log
-  - cat coverage.xml
+  - cat /var/machine-learning/coverage.xml
   - (! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
 
   # check exit code: 'docker exec' will fail if the container has an exit code
@@ -129,4 +129,4 @@ script:
 ##      used to send coverage output to Coveralls.
 ##
 after_success:
-  - cat coverage.xml | ./node_modules/coveralls/bin/coveralls.js
+  - cat /var/machine-learning/coverage.xml | ./node_modules/coveralls/bin/coveralls.js
