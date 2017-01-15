@@ -60,6 +60,7 @@ install:
   - gem install yaml-lint -v 0.0.7
   - npm install -g dockerlint@0.2.0
   - pip install restructuredtext_lint==0.17.2
+  - pip install coveralls
 
 ## implement linting / unit tests
 #
