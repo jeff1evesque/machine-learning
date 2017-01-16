@@ -19,7 +19,6 @@
 !/test
 !/log/
 !*.dockerfile
-!.coveragerc
 
 # Ignore and don't commit the following directories
 *.sass-cache/
