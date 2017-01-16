@@ -115,6 +115,11 @@ script:
   - (! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
 
   ## acquire coverage results
+  ##
+  ## Note: more information regarding the '.coverage.docker' naming convention:
+  ##
+  ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
+  ##
   - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage.docker
 
   # check exit code: 'docker exec' will fail if the container has an exit code
@@ -126,6 +131,11 @@ script:
   - docker ps -a
 
 ## post build: the following commands are run after a successful build.
+##
+## Note: more information regarding the coverage-coverall implementation:
+##
+##       https://github.com/pytest-dev/pytest-cov/issues/146
+##
 after_success:
   - coverage combine
   - coveralls
