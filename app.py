@@ -20,6 +20,7 @@ if len(sys.argv) > 1:
     if sys.argv[1] == 'test':
         pytest.main([
             '--cov', '.',
+            '--config_file', '.coveragerc',
             'test/live_server'
         ])
     elif sys.argv[1] == 'run':
