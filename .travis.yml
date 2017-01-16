@@ -115,8 +115,8 @@ script:
   - (! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
 
   ## acquire coverage results
-  - docker cp webserver-pytest:/var/machine-learning/coverage.xml coverage.xml
-  - cat coverage.xml
+  - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage
+  - cat .coverage
 
   # check exit code: 'docker exec' will fail if the container has an exit code
   - docker exec -it webserver echo "'docker exec' only works on an active running container"
@@ -128,4 +128,4 @@ script:
 
 ## post build: the following commands are run after a successful, or failed build.
 after_success:
-  - coveralls --data_file=coverage.xml
+  - coveralls --data_file=.coverage
