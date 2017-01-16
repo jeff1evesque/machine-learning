@@ -20,7 +20,7 @@ if len(sys.argv) > 1:
     if sys.argv[1] == 'test':
         pytest.main([
             '--cov', '.',
-            '--cov-report', 'xml:/var/machine-learning/coverage.xml',
+            '--cov-report', '.coverage',
             'test/live_server'
         ])
     elif sys.argv[1] == 'run':
