@@ -128,5 +128,6 @@ script:
 
 ## post build: the following commands are run after a successful, or failed build.
 after_success:
+  - coverage help
   - coverage combine --append
   - coveralls
