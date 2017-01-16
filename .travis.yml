@@ -125,9 +125,7 @@ script:
   # list all containers
   - docker ps -a
 
-## post build: the following commands are run after a successful, or failed build.
+## post build: the following commands are run after a successful build.
 after_success:
-  - coverage report
   - coverage combine
-  - coverage report
   - coveralls
