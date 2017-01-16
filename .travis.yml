@@ -128,4 +128,4 @@ script:
 
 ## post build: the following commands are run after a successful, or failed build.
 after_success:
-  - coveralls --data_file=.coverage
+  - coveralls --data_file=.coverage --config_file=.coveragerc
