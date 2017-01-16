@@ -116,7 +116,6 @@ script:
 
   ## acquire coverage results
   - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage.docker
-  - cat .coverage
 
   # check exit code: 'docker exec' will fail if the container has an exit code
   - docker exec -it webserver echo "'docker exec' only works on an active running container"
