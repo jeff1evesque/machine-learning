@@ -115,7 +115,7 @@ script:
   - (! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
 
   ## acquire coverage results
-  - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage
+  - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage.docker
   - cat .coverage
 
   # check exit code: 'docker exec' will fail if the container has an exit code
