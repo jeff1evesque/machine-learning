@@ -78,10 +78,16 @@ class Load_Data(object):
                 session.save_premodel_dataset()
                 session.check()
 
-            return 'Dataset(s) properly uploaded into database'
+            return {
+                'status': 0,
+                'msg': 'Dataset(s) properly uploaded into database'
+            }
         else:
             print session.get_errors()
-            return None
+            return {
+                'status': 1,
+                'msg': 'Dataset(s) not uploaded into database'
+            }
 
     def load_data_append(self):
         '''@load_data_append
@@ -117,10 +123,16 @@ class Load_Data(object):
                 session.save_premodel_dataset()
                 session.check()
 
-            return 'Dataset(s) properly appended into database'
+            return {
+                'status': 0,
+                'msg': 'Dataset(s) properly appended into database'
+            }
         else:
             print session.get_errors()
-            return None
+            return {
+                'status': 1,
+                'msg': 'Dataset(s) not uploaded into database'
+            }
 
     def load_model_generate(self):
         '''@load_model_generate
@@ -142,9 +154,15 @@ class Load_Data(object):
 
         # return
         if session.return_error():
-            return False
+            return {
+                'status': 1,
+                'msg': 'Model not generated'
+            }
         else:
-            return 'Model properly generated'
+            return {
+                'status': 0,
+                'msg': 'Model properly generated'
+            }
 
     def load_model_predict(self):
         '''@load_model_predict
@@ -164,9 +182,15 @@ class Load_Data(object):
 
             my_prediction = session.predict()
             if my_prediction['error']:
-                return {'result': None, 'error': my_prediction['error']}
+                return {
+                    'status': 1,
+                    'result': my_prediction['error'],
+                }
             else:
-                return {'result': my_prediction, 'error': None}
+                return {
+                    'status': 0,
+                    'result': my_prediction,
+                }
 
     def get_session_type(self):
         '''@load_model_predict
