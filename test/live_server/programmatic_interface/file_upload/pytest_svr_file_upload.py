@@ -145,4 +145,5 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svr-model-predict.json', 'svr')
     )
 
+    print res.content.result
     assert res.status_code == 200 && res.content.status == 0
