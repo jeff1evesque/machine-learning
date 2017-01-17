@@ -78,7 +78,7 @@ def test_data_new(client, live_server):
         data=get_sample_json('svm-data-new.json', 'svm')
     )
 
-    assert res.status_code == 200 and res['status'] == 0
+    assert res.status_code == 200 and res.json()['status'] == 0
 
 
 def test_data_append(client, live_server):
@@ -100,7 +100,7 @@ def test_data_append(client, live_server):
         data=get_sample_json('svm-data-append.json', 'svm')
     )
 
-    assert res.status_code == 200 and res['status'] == 0
+    assert res.status_code == 200 and res.json()['status'] == 0
 
 
 def test_model_generate(client, live_server):
@@ -122,7 +122,7 @@ def test_model_generate(client, live_server):
         data=get_sample_json('svm-model-generate.json', 'svm')
     )
 
-    assert res.status_code == 200 and res['status'] == 0
+    assert res.status_code == 200 and res.json()['status'] == 0
 
 
 def test_model_predict(client, live_server):
@@ -144,5 +144,5 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svm-model-predict.json', 'svm')
     )
 
-    print res['result']
-    assert res.status_code == 200 and res['status'] == 0
+    print res.json()['result']
+    assert res.status_code == 200 and res.json()['status'] == 0
