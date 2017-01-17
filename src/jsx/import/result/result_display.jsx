@@ -16,7 +16,7 @@ var ResultDisplay = React.createClass({
     render: function(){
       // variables
         var serverObj = this.props.formResult ? this.props.formResult : false;
-        var resultSet = serverObj.result ? serverObj.result : false;
+        var resultSet = serverObj.status ? serverObj.status : false;
         var confidence = resultSet.confidence ? resultSet.confidence : false;
         var displayResult = false;
         var adjustedConfidence = false;
