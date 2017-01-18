@@ -4,9 +4,10 @@
 
 This file allocates input to respective 'data_xxx.py', 'model_xx.py', and
 generates a return object, when required.
-
+json.dumps(
 '''
 
+import json
 from brain.session.data_append import Data_Append
 from brain.session.data_new import Data_New
 from brain.session.model_generate import Model_Generate
@@ -78,16 +79,19 @@ class Load_Data(object):
                 session.save_premodel_dataset()
                 session.check()
 
-            return {
+            response = {
                 'status': 0,
                 'msg': 'Dataset(s) properly uploaded into database'
             }
+
         else:
             print session.get_errors()
-            return {
+            response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database'
             }
+
+        return json.dumps(response)
 
     def load_data_append(self):
         '''@load_data_append
@@ -123,16 +127,19 @@ class Load_Data(object):
                 session.save_premodel_dataset()
                 session.check()
 
-            return {
+            response = {
                 'status': 0,
                 'msg': 'Dataset(s) properly appended into database'
             }
+
         else:
             print session.get_errors()
-            return {
+            response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database'
             }
+
+        return json.dumps(response)
 
     def load_model_generate(self):
         '''@load_model_generate
@@ -154,15 +161,17 @@ class Load_Data(object):
 
         # return
         if session.return_error():
-            return {
+            response = {
                 'status': 1,
                 'msg': 'Model not generated'
             }
         else:
-            return {
+            response = {
                 'status': 0,
                 'msg': 'Model properly generated'
             }
+
+        return json.dumps(response)
 
     def load_model_predict(self):
         '''@load_model_predict
@@ -182,15 +191,17 @@ class Load_Data(object):
 
             my_prediction = session.predict()
             if my_prediction['error']:
-                return {
+                response = {
                     'status': 1,
                     'result': my_prediction['error'],
                 }
             else:
-                return {
+                response = {
                     'status': 0,
                     'result': my_prediction,
                 }
+
+            return json.dumps(response)
 
     def get_session_type(self):
         '''@load_model_predict
