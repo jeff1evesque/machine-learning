@@ -79,7 +79,7 @@ def test_data_new(client, live_server):
         data=get_sample_json('svr-data-new.json', 'svr')
     )
 
-    assert res.status_code == 200 and json.loads(res.json)['status'] == 0
+    assert res.status_code == 200 and res.json['status'] == 0
 
 
 def test_data_append(client, live_server):
@@ -101,7 +101,7 @@ def test_data_append(client, live_server):
         data=get_sample_json('svr-data-append.json', 'svr')
     )
 
-    assert res.status_code == 200 and json.loads(res.json)['status'] == 0
+    assert res.status_code == 200 and res.json['status'] == 0
 
 
 def test_model_generate(client, live_server):
@@ -123,7 +123,7 @@ def test_model_generate(client, live_server):
         data=get_sample_json('svr-model-generate.json', 'svr')
     )
 
-    assert res.status_code == 200 and json.loads(res.json)['status'] == 0
+    assert res.status_code == 200 and res.json['status'] == 0
 
 
 def test_model_predict(client, live_server):
@@ -146,4 +146,4 @@ def test_model_predict(client, live_server):
     )
 
     print json.loads(res.json)['result']
-    assert res.status_code == 200 and json.loads(res.json)['status'] == 0
+    assert res.status_code == 200 and res.json['status'] == 0
