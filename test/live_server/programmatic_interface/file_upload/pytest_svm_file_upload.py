@@ -144,11 +144,13 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svm-model-predict.json', 'svm')
     )
 
-    print json.loads(res.json['result']['confidence']['classes'])
+    print json.loads(res.json['result']['confidence'])
     assert (
         res.status_code == 200 and
         res.json['status'] == 0 and
         res.json['result'] and
         res.json['result']['confidence'] and
-        res.json['result']['confidence']['classes']
+        res.json['result']['confidence']['classes'] and
+        res.json['result']['confidence']['model'] == 'svm' and
+        res.json['result']['confidence']['result'] == 'dep-variable-4'
     )
