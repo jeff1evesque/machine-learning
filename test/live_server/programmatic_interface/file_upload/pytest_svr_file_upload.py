@@ -151,6 +151,6 @@ def test_model_predict(client, live_server):
         res.json['result'] and
         res.json['result']['confidence'] and
         res.json['result']['confidence']['score'] == '0.97326950222129949' and
-        res.json['result']['confidence']['model'] == 'svr' and
-        res.json['result']['confidence']['result'] == '294.71600377'
+        res.json['result']['model'] == 'svr' and
+        res.json['result']['result'] == '294.71600377'
     )
