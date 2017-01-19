@@ -150,7 +150,13 @@ def test_model_predict(client, live_server):
         res.json['status'] == 0 and
         res.json['result'] and
         res.json['result']['confidence'] and
-        res.json['result']['confidence']['classes'] and
+        res.json['result']['confidence']['classes'] == [
+            'dep-variable-1',
+            'dep-variable-2',
+            'dep-variable-3',
+            'dep-variable-4',
+            'dep-variable-5'
+        ] and
         res.json['result']['confidence']['model'] == 'svm' and
         res.json['result']['confidence']['result'] == 'dep-variable-4'
     )
