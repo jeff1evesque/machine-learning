@@ -133,7 +133,7 @@ def test_model_predict(client, live_server):
     Note: for debugging, the following syntax will output the corresponding json
           values, nested within 'json.loads()', to the travis ci:
 
-          print json.loads(res.json['result']['key1'])
+          raise ValueError(res.json['result']['key1'])
 
     '''
 
@@ -149,7 +149,7 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svm-model-predict.json', 'svm')
     )
 
-    print json.loads(res.json['result']['confidence']['decision_function'])
+    raise ValueError(res.json['result']['confidence']['decision_function'])
     assert (
         res.status_code == 200 and
         res.json['status'] == 0 and
