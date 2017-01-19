@@ -163,6 +163,13 @@ def test_model_predict(client, live_server):
             'dep-variable-4',
             'dep-variable-5'
         ] and
+        res.json['result']['confidence']['probability'] = [
+            0.3090315561788815,
+            0.05089304164409372,
+            0.30885779009321146,
+            0.042701621539446635,
+            0.28851599054436644
+        ] and
         res.json['result']['confidence']['model'] == 'svm' and
         res.json['result']['confidence']['result'] == 'dep-variable-4'
     )
