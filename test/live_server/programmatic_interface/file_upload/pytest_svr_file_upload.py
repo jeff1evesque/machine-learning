@@ -145,7 +145,6 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svr-model-predict.json', 'svr')
     )
 
-    print json.loads(res.json['result']['confidence'])
     assert (
         res.status_code == 200 and
         res.json['status'] == 0 and
