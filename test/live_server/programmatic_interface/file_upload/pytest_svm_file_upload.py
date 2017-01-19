@@ -162,7 +162,7 @@ def test_model_predict(client, live_server):
             'dep-variable-4',
             'dep-variable-5'
         ] and
-        res.json['result']['confidence']['probability'] = [
+        res.json['result']['confidence']['probability'] == [
             0.3090315561788815,
             0.05089304164409372,
             0.30885779009321146,
