@@ -134,7 +134,7 @@ def test_model_predict(client, live_server):
     Note: for debugging, the following syntax will output the corresponding json
           values, nested within 'json.loads()', to the travis ci:
 
-          json.loads(res.json['result']['key1'])
+          print json.loads(res.json['result']['key1'])
 
     '''
 
