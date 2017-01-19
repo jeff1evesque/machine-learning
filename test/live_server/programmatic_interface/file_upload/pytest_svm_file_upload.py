@@ -144,5 +144,9 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svm-model-predict.json', 'svm')
     )
 
-    print json.loads(res.json)['result']
-    assert res.status_code == 200 and res.json['status'] == 0
+    print res.json['result']
+    assert (
+        res.status_code == 200 and
+        res.json['status'] == 0 and
+        res.json['result']
+    )
