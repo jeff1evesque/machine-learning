@@ -145,11 +145,13 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svr-model-predict.json', 'svr')
     )
 
-    print json.loads(res.json['result']['confidence']['classes'])
+    print json.loads(res.json['result']['confidence'])
     assert (
         res.status_code == 200 and
         res.json['status'] == 0 and
         res.json['result'] and
         res.json['result']['confidence'] and
-        res.json['result']['confidence']['classes']
+        res.json['result']['confidence']['score'] == '0.29007217517499473' and
+        res.json['result']['confidence']['model'] == 'svr' and
+        res.json['result']['confidence']['result'] == '37.7622192912'
     )
