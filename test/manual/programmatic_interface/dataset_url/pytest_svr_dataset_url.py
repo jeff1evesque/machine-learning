@@ -139,4 +139,3 @@ def test_model_predict():
     assert res.json['result']['confidence']['score'] == '0.29007217517499473'
     assert res.json['result']['model'] == 'svr'
     assert res.json['result']['result'] == '37.7622192912'
-
