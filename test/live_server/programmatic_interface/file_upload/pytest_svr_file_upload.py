@@ -18,7 +18,6 @@ Note: the 'pytest' instances can further be reviewed:
 '''
 
 import json
-import pytest
 import os.path
 from flask import url_for
 from flask import current_app
@@ -37,25 +36,21 @@ def get_sample_json(jsonfile, model_type):
     # open file
     json_dataset = None
 
-    try:
-        with open(
-            os.path.join(
-                root,
-                'interface',
-                'static',
-                'data',
-                'json',
-                'programmatic_interface',
-                model_type,
-                'file_upload',
-                jsonfile
-            ),
-            'r'
-        ) as json_file:
-            json_dataset = json.load(json_file)
-
-    except Exception as error:
-        pytest.fail(error)
+    with open(
+        os.path.join(
+            root,
+            'interface',
+            'static',
+            'data',
+            'json',
+            'programmatic_interface',
+            model_type,
+            'file_upload',
+            jsonfile
+        ),
+        'r'
+    ) as json_file:
+        json_dataset = json.load(json_file)
 
     return json.dumps(json_dataset)
 
@@ -79,7 +74,9 @@ def test_data_new(client, live_server):
         data=get_sample_json('svr-data-new.json', 'svr')
     )
 
+    # assertion checks
     assert res.status_code == 200
+    assert res.json['status'] == 0
 
 
 def test_data_append(client, live_server):
@@ -101,7 +98,9 @@ def test_data_append(client, live_server):
         data=get_sample_json('svr-data-append.json', 'svr')
     )
 
+    # assertion checks
     assert res.status_code == 200
+    assert res.json['status'] == 0
 
 
 def test_model_generate(client, live_server):
@@ -123,13 +122,20 @@ def test_model_generate(client, live_server):
         data=get_sample_json('svr-model-generate.json', 'svr')
     )
 
+    # assertion checks
     assert res.status_code == 200
+    assert res.json['status'] == 0
 
 
 def test_model_predict(client, live_server):
     '''@test_model_predict
 
     This method tests the 'model_predict' session.
+
+    Note: for debugging, the following syntax will output the corresponding
+          json values, nested within 'json.loads()', to the travis ci:
+
+          raise ValueError(res.json['result']['key1'])
 
     '''
 
@@ -145,4 +151,11 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svr-model-predict.json', 'svr')
     )
 
+    # assertion checks
     assert res.status_code == 200
+    assert res.json['status'] == 0
+    assert res.json['result']
+    assert res.json['result']['confidence']
+    assert res.json['result']['confidence']['score'] == '0.97326950222129949'
+    assert res.json['result']['model'] == 'svr'
+    assert res.json['result']['result'] == '294.71600377'

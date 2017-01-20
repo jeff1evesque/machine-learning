@@ -44,11 +44,9 @@ def test_registration(client, live_server):
                 result = Save_Account().save_account(username, email, hashed)
 
                 # notification: attempt to store account
-                assert (
-                    result['status'] and
-                    result['id'] and not
-                    result['error']
-                )
+                assert result['status']
+                assert result['id']
+                assert not result['error']
 
             # notification: email already exists
             else:

@@ -110,7 +110,7 @@ def load_data():
                 response = loader.get_errors()
 
             # return response
-            return json.dumps(response)
+            return response
 
         # load web-interface
         else:
@@ -147,7 +147,7 @@ def load_data():
                 response = loader.get_errors()
 
             # return response
-            return json.dumps(response)
+            return response
 
 
 @blueprint.route('/login', methods=['POST'])

@@ -76,6 +76,7 @@ install:
 ##
 ## Note: unit testing is performed within the docker container, which is
 ##       defined from the Dockerfile.
+##
 script:
   # lint codebase
   - flake8 .
@@ -114,12 +115,12 @@ script:
   - cat pytest.log
   - (! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
 
-  ## acquire coverage results
-  ##
-  ## Note: more information regarding the '.coverage.docker' naming convention:
-  ##
-  ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
-  ##
+  # acquire coverage results
+  #
+  # Note: more information regarding the '.coverage.docker' naming convention:
+  #
+  #       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
+  #
   - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage.docker
 
   # check exit code: 'docker exec' will fail if the container has an exit code
