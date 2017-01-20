@@ -130,8 +130,8 @@ def test_model_predict(client, live_server):
 
     This method tests the 'model_predict' session.
 
-    Note: for debugging, the following syntax will output the corresponding json
-          values, nested within 'json.loads()', to the travis ci:
+    Note: for debugging, the following syntax will output the corresponding
+          json values, nested within 'json.loads()', to the travis ci:
 
           raise ValueError(res.json['result']['key1'])
 
