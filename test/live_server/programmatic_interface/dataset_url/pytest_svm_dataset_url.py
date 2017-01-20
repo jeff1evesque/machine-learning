@@ -17,7 +17,6 @@ Note: the 'pytest' instances can further be reviewed:
 '''
 
 import json
-import pytest
 import os.path
 from flask import url_for
 from flask import current_app
