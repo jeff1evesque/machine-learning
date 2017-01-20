@@ -1,4 +1,4 @@
-'''@app
+'''
 
 This file is the acting web server.
 
@@ -29,6 +29,7 @@ if len(sys.argv) > 1:
         }
         app = create_app(args)
         app.run(host='0.0.0.0')
+
 # run application
 else:
     app = create_app()

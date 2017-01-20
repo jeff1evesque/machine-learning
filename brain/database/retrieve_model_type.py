@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@retrieve_modell_type
+'''
 
 This file retrieves model type, when provided the model id.
 
@@ -12,14 +12,13 @@ from brain.database.db_query import SQL
 
 class Retrieve_Model_Type(object):
     '''
-    @Retrieve_Model_Type
 
     Note: this class explicitly inherits the 'new-style' class.
 
     '''
 
     def __init__(self):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -30,7 +29,7 @@ class Retrieve_Model_Type(object):
         self.db_ml = current_app.config.get('DB_ML')
 
     def get_model_type(self, id_entity):
-        '''@get_title
+        '''
 
         This method is responsible for retrieving the model type, from the
         SQL database, using a fixed 'model_id'.

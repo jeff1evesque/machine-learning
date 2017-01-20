@@ -1,4 +1,4 @@
-'''@pytest_user_login
+'''
 
 This file will test the necessary interfaces required to login.
 
@@ -15,7 +15,7 @@ from brain.converter.crypto import verifypass
 
 
 def test_login(client, live_server):
-    '''@test_login
+    '''
 
     This method tests the user login process. Specifically, the tests include
     verifying the user credentials (i.e. username, and password). Then, it

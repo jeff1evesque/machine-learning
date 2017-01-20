@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@validate_settings
+'''
 
 This file performs validation on session settings.
 
@@ -14,7 +14,7 @@ from brain.schema.jsonschema_definition import jsonschema_model_predict
 
 
 class Validate_Settings(object):
-    '''@Validate_Settings
+    '''
 
     This class provides an interface to validate the settings for each
     session.
@@ -24,7 +24,7 @@ class Validate_Settings(object):
     '''
 
     def __init__(self, premodel_data, session_type=None):
-        '''@__init__
+        '''
 
         This constructor saves a subset of the passed-in form data.
 
@@ -35,7 +35,7 @@ class Validate_Settings(object):
         self.session_type = session_type
 
     def validate(self):
-        '''@validate
+        '''
 
         This method validates the premodel settings for the 'data_new',
         'data_append', 'model_generate', or 'model_predict' sessions.

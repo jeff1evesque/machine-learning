@@ -1,4 +1,4 @@
-'''@pytest_crypto
+'''
 
 This file will test the cryptography functionalities with respect to
 authentication.
@@ -14,10 +14,11 @@ def test_hashing():
             yamlres = yaml.load(stream)
             root = yamlres['general']['root']
             cryptopath = root + '/brain/converter/crypto.py'
+
         except yaml.YAMLError as error:
             print error
-    crypto = imp.load_source('crypto', cryptopath)
 
+    crypto = imp.load_source('crypto', cryptopath)
     passwords = ['blue', 'red', 'green', 'yellow']
 
     for p in passwords:

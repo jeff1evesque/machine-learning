@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@save_entity
+'''
 
 This file saves a dataset entity into corresponding 'EAV data model' database
 table(s), from the 'db_machine_learning' database.
@@ -12,7 +12,7 @@ from brain.database.db_query import SQL
 
 
 class Save_Entity(object):
-    '''@Save_Entity
+    '''
 
     This class provides an interface to save dataset(s) later used to generate
     corresponding model(s).
@@ -20,10 +20,11 @@ class Save_Entity(object):
     Note: this class is invoked within 'base_data.py', and 'data_append.py'
 
     Note: this class explicitly inherits the 'new-style' class.
+
     '''
 
     def __init__(self, premodel_data, session_type):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -43,7 +44,7 @@ class Save_Entity(object):
         self.db_ml = current_app.config.get('DB_ML')
 
     def save(self):
-        '''@save
+        '''
 
         This method stores, or updates dataset entities into its corresponding
         'EAV data model' database table.

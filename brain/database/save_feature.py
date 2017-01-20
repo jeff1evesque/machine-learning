@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@save_feature
+'''
 
 This file saves the feature count, as well as the feature instances within
 corresponding database tables.
@@ -12,7 +12,7 @@ from brain.database.db_query import SQL
 
 
 class Save_Feature(object):
-    '''@Save_Feature
+    '''
 
     This class provides an interface to store the expected number of features
     that can be expected in a given dataset, and each feature instance into
@@ -25,7 +25,7 @@ class Save_Feature(object):
     '''
 
     def __init__(self, premodel_data):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -39,7 +39,7 @@ class Save_Feature(object):
         self.regression = current_app.config.get('MODEL_TYPE')[1]
 
     def save_count(self):
-        '''@save_count
+        '''
 
         This method stores the number of features that can be expected in a
         given observation.
@@ -70,7 +70,7 @@ class Save_Feature(object):
             return {'status': True, 'error': None, 'id': response['id']}
 
     def save_feature(self, model_type):
-        '''@save_feature
+        '''
 
         This method can store, or update an existing SVM dataset stored in
         corresponding database tables (using EAV data model).

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@retrieve_account
+'''
 
 This file retrieves user account values.
 
@@ -12,7 +12,6 @@ from brain.database.db_query import SQL
 
 class Retrieve_Account(object):
     '''
-    @Retrieve_Username
 
     This class provides an interface to check if a username already exists,
     and retrieves the corresponding password.
@@ -22,7 +21,7 @@ class Retrieve_Account(object):
     '''
 
     def __init__(self):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -33,7 +32,7 @@ class Retrieve_Account(object):
         self.db_ml = current_app.config.get('DB_ML')
 
     def check_username(self, username):
-        '''@check_username
+        '''
 
         This method checks if the supplied username already exists.
 
@@ -58,7 +57,7 @@ class Retrieve_Account(object):
             return {'error': None, 'result': response['result']}
 
     def check_email(self, email):
-        '''@get_email
+        '''
 
         This method checks if the supplied email already exists.
 
@@ -83,7 +82,7 @@ class Retrieve_Account(object):
             return {'error': None, 'result': response['result']}
 
     def get_password(self, username):
-        '''@get_password
+        '''
 
         This method returns the hashed password for a supplied username.
 
@@ -108,7 +107,7 @@ class Retrieve_Account(object):
             return {'error': None, 'result': response['result'][0][0]}
 
     def get_uid(self, username):
-        '''@get_uid
+        '''
 
         This method returns the userid (i.e uid) for a supplied username.
 

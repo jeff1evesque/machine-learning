@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@svr_json_converter.py
+'''
 
 This file restructures only the supplied dataset(s), from a json file to a
 python dictionary format.
@@ -13,7 +13,7 @@ from log.logger import Logger
 
 
 def svr_json_converter(raw_data, is_json):
-    '''@svr_json_converter
+    '''
 
     This method converts the supplied json file-object to a python
     dictionary.

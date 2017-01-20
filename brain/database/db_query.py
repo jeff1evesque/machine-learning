@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@db_query
+'''
 
 This file contains various generic SQL-related methods.
 '''
@@ -10,7 +10,7 @@ from brain.database.db_settings import Database
 
 
 class SQL(object):
-    '''@SQL
+    '''
 
     This class provides an interface to connect, execute commands, and
     disconnect from a SQL database.  It explicitly inherits pythons 'new-style'
@@ -24,7 +24,7 @@ class SQL(object):
     '''
 
     def __init__(self, host=None, user=None, passwd=None):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -53,7 +53,7 @@ class SQL(object):
             self.passwd = self.db_settings.get_db_password()
 
     def sql_connect(self, database=None):
-        '''@sql_connect
+        '''
 
         This method is responsible for defining the necessary interface to
         connect to a SQL database.
@@ -93,13 +93,14 @@ class SQL(object):
             }
 
     def sql_command(self, sql_statement, sql_type, sql_args=None):
-        '''@sql_connect
+        '''
 
         This method is responsible for defining the necessary interface to
         perform SQL commands.
 
         @sql_args, is a tuple used for argument substitution with the supplied
             'sql_statement'.
+
         '''
 
         if self.proceed:
@@ -136,7 +137,7 @@ class SQL(object):
             }
 
     def sql_disconnect(self):
-        '''@sql_disconnect
+        '''
 
         This method is responsible for defining the necessary interface to
         disconnect from a SQL database.
@@ -163,7 +164,7 @@ class SQL(object):
                 }
 
     def get_errors(self):
-        '''@get_errors
+        '''
 
         This method returns all errors pertaining to the instantiated class.
 

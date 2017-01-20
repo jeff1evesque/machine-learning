@@ -1,4 +1,4 @@
-'''@pytest_svm_file_upload
+'''
 
 This module will test the following sessions:
 
@@ -34,7 +34,7 @@ headers = {'Content-Type': 'application/json'}
 
 
 def get_sample_json(jsonfile, model_type):
-    '''@get_sample_json
+    '''
 
     Get a sample json dataset.
 
@@ -65,7 +65,7 @@ def get_sample_json(jsonfile, model_type):
 
 
 def test_data_new():
-    '''@test_data_new
+    '''
 
     This method tests the 'data_new' session.
 
@@ -83,7 +83,7 @@ def test_data_new():
 
 
 def test_data_append():
-    '''@test_data_append
+    '''
 
     This method tests the 'data_append' session.
 
@@ -101,7 +101,7 @@ def test_data_append():
 
 
 def test_model_generate():
-    '''@test_model_generate
+    '''
 
     This method tests the 'model_generate' session.
 
@@ -119,7 +119,7 @@ def test_model_generate():
 
 
 def test_model_predict():
-    '''@test_model_predict
+    '''
 
     This method tests the 'model_predict' session.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@retrieve_feature
+'''
 
 This file retrieves feature characteristics.
 
@@ -11,7 +11,7 @@ from brain.database.db_query import SQL
 
 
 class Retrieve_Feature(object):
-    '''@Retrieve_Feature
+    '''
 
     This class provides an interface to retrieve corresponding dataset(s),
     using a fixed supplied 'id_entity'.  The 'id_entity' is a reference,
@@ -24,7 +24,7 @@ class Retrieve_Feature(object):
     '''
 
     def __init__(self):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -35,7 +35,7 @@ class Retrieve_Feature(object):
         self.db_ml = current_app.config.get('DB_ML')
 
     def get_dataset(self, id_entity, model):
-        '''@get_dataset
+        '''
 
         This method retrieves a correspondinng dataset, from corresponding
         'EAV data model' database table(s), using a fixed 'id_entity'.
@@ -93,7 +93,7 @@ class Retrieve_Feature(object):
             }
 
     def get_count(self, id_entity):
-        '''@get_count
+        '''
 
         This method retrieves the number of features that can be expected in
         any given observation, from a particular dataset instance (id_entity).

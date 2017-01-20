@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@base_data
+'''
 
 This file serves as the superclass for 'data_xx.py' files.
 
@@ -22,7 +22,7 @@ from brain.session.data.dataset_to_dict import dataset_dictionary
 
 
 class Base_Data(Base):
-    '''@Base_Data
+    '''
 
     This class provides an interface to save, and validate the provided
     dataset, into logical ordering within the sql database.
@@ -36,7 +36,7 @@ class Base_Data(Base):
     '''
 
     def __init__(self, premodel_data):
-        '''@__init__
+        '''
 
         This constructor inherits additional class properties, from the
         constructor of the 'Base' superclass.
@@ -60,7 +60,7 @@ class Base_Data(Base):
             self.uid = current_app.config.get('USER_ID')
 
     def save_feature_count(self):
-        '''@save_feature_count
+        '''
 
         This method saves the number of features that can be expected in a
         given observation with respect to 'id_entity'.
@@ -77,7 +77,7 @@ class Base_Data(Base):
             self.list_error.append(response['error'])
 
     def validate_file_extension(self):
-        '''@validate_file_extension
+        '''
 
         This method validates the file extension for each uploaded dataset,
         and returns the unique (non-duplicate) dataset.
@@ -96,7 +96,7 @@ class Base_Data(Base):
             self.upload = response['dataset']
 
     def validate_id(self, session_id):
-        '''@validate_id
+        '''
 
         This method validates if the session id, is a positive integer.
 
@@ -111,7 +111,7 @@ class Base_Data(Base):
             self.list_error.append(str(error))
 
     def save_entity(self, session_type):
-        '''@save_entity
+        '''
 
         This method saves the current entity into the database, then returns
         the corresponding entity id.
@@ -129,7 +129,7 @@ class Base_Data(Base):
             return {'status': True, 'id': response['id'], 'error': None}
 
     def save_premodel_dataset(self):
-        '''@save_premodel_dataset
+        '''
 
         This method saves each dataset element (independent variable value)
         into the sql database.
@@ -146,7 +146,7 @@ class Base_Data(Base):
             self.list_error.append(response['error'])
 
     def save_observation_label(self, session_type, session_id):
-        '''save_observation_label
+        '''
 
         This method saves the list of unique independent variable labels,
         which can be expected in any given observation, into the sql
@@ -174,7 +174,7 @@ class Base_Data(Base):
             self.list_error.append(response['error'])
 
     def dataset_to_dict(self, id_entity):
-        '''@dataset_to_dict
+        '''
 
         This method converts the supplied csv, or xml file upload(s) to a
             uniform dict object.
@@ -194,7 +194,7 @@ class Base_Data(Base):
             self.dataset = response['dataset']
 
     def get_errors(self):
-        '''get_errors
+        '''
 
         This method gets all current errors. associated with this class
         instance.

@@ -1,4 +1,4 @@
-'''@views
+'''
 
 This file contains the corresponding views logic. Specifically, the route
 decorators are defined, which flask triggers for specific URL's.
@@ -42,7 +42,7 @@ blueprint = Blueprint(
 
 @blueprint.route('/')
 def index():
-    '''@index
+    '''
 
     This router function renders the 'index.html' template.
 
@@ -63,7 +63,7 @@ def method_not_allowed(e):
 
 @blueprint.route('/load-data', methods=['POST'], endpoint='load_data')
 def load_data():
-    '''@load_data
+    '''
 
     This method returns the computed data, resulting from one of the following
     implemented session:
@@ -152,7 +152,7 @@ def load_data():
 
 @blueprint.route('/login', methods=['POST'])
 def login():
-    '''@login
+    '''
 
     This router function attempts to fulfill a login request. During its
     attempt, it returns a json string, with two values:
@@ -242,7 +242,7 @@ def logout():
 
 @blueprint.route('/register', methods=['POST'])
 def register():
-    '''@register
+    '''
 
     This router function attempts to register a new username. During its
     attempt, it returns a json string, with three possible values:
@@ -322,7 +322,7 @@ def register():
 
 @blueprint.route('/retrieve-session', methods=['POST'])
 def retrieve_session():
-    '''@retrieve_session
+    '''
 
     This router function retrieves all sessions stored in the database.
 
@@ -345,7 +345,7 @@ def retrieve_session():
     endpoint='retrieve_sv_model'
 )
 def retrieve_sv_model():
-    '''@retrieve_sv_model
+    '''
 
     The router function retrieves all models stored in the hashed redis cache.
 
@@ -385,7 +385,7 @@ def retrieve_sv_model():
     endpoint='retrieve_sv_features'
 )
 def retrieve_sv_features():
-    '''@retrieve_sv_features
+    '''
 
     This router function retrieves the generalized features properties that can
     be expected for any given observation within the supplied dataset.

@@ -1,9 +1,9 @@
 #!/usr/bin/python
 
-'''@sv
+'''
 
 This file generates an sv prediction, and can return associated confidence
-levels , associated with corresponding predictions.
+levels, associated with corresponding predictions.
 
 '''
 
@@ -13,7 +13,7 @@ from brain.cache.cache_model import Cache_Model
 
 
 def sv_prediction(model, model_id, predictors):
-    '''@sv_prediction
+    '''
 
     This method generates an sv (i.e. svm, or svr) prediction using the
     provided prediction feature input(s), and the stored corresponding model,

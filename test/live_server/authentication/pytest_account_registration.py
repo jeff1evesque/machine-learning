@@ -1,4 +1,4 @@
-'''@pytest_account_registration
+'''
 
 This file will test the necessary interfaces required to create a user account.
 
@@ -16,7 +16,7 @@ from brain.converter.crypto import hashpass
 
 
 def test_registration(client, live_server):
-    '''@test_registration
+    '''
 
     This method tests the user registration process.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''## @data_new
+'''
 
 This file allows methods defined from the Base, or Base_Data superclass to be
 overridden, if needed.
@@ -16,7 +16,7 @@ from brain.database.save_entity import Save_Entity
 
 
 class Data_New(Base_Data):
-    '''@Data_New
+    '''
 
     This class provides a generic constructor interface.
 
@@ -27,7 +27,7 @@ class Data_New(Base_Data):
     '''
 
     def __init__(self, premodel_data):
-        '''@__init__
+        '''
 
         This constructor inherits additional class properties, from the
         constructor of the 'Base_Data' superclass.
@@ -38,7 +38,7 @@ class Data_New(Base_Data):
         Base_Data.__init__(self, premodel_data)
 
     def save_entity(self, session_type, id_entity=None):
-        '''@save_entity
+        '''
 
         This method overrides the identical method from the inherited
         superclass, 'Base_Data'. Specifically, this method updates an

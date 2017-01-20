@@ -1,4 +1,4 @@
-'''@configure_database
+'''
 
 This module will truncate corresponding database tables, which allow manual
 unit tests to be run as many times as needed.

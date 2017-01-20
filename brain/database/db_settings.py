@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@db_settings
+'''
 
 This file defines SQL database configurations.
 
@@ -10,7 +10,7 @@ from flask import current_app
 
 
 class Database(object):
-    '''@Database
+    '''
 
     This class provides an interface to get, or set the following database
     parameters:
@@ -40,7 +40,7 @@ class Database(object):
     '''
 
     def __init__(self):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -51,7 +51,7 @@ class Database(object):
         self.db_password = current_app.config.get('DB_PASSWORD')
 
     def get_db_host(self):
-        '''@get_db_host
+        '''
 
         This method is responsible for getting the database host.
 
@@ -60,7 +60,7 @@ class Database(object):
         return self.db_host
 
     def get_db_username(self):
-        '''@get_db_username
+        '''
 
         This method is responsible for getting the database username.
 
@@ -69,7 +69,7 @@ class Database(object):
         return self.db_username
 
     def get_db_password(self):
-        '''@get_db_password
+        '''
 
         This method is responsible for getting the database user password.
 
@@ -78,7 +78,7 @@ class Database(object):
         return self.db_password
 
     def set_db_host(self, host):
-        '''@set_db_host
+        '''
 
         This method is responsible for setting the database host.
 
@@ -87,7 +87,7 @@ class Database(object):
         self.db_host = host
 
     def set_db_username(self, user):
-        '''@set_db_username
+        '''
 
         This method is responsible for setting the database username.
 
@@ -96,7 +96,7 @@ class Database(object):
         self.db_username = user
 
     def set_db_password(self, pwd):
-        '''@set_db_password
+        '''
 
         This method is responsible for setting the database user password.
 

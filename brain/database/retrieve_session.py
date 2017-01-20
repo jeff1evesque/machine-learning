@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@retrieve_session
+'''
 
 This file retrieves the 'session_name', and 'id_entity' properties.
 
@@ -12,7 +12,6 @@ from brain.database.db_query import SQL
 
 class Retrieve_Session(object):
     '''
-    @Retrieve_Session
 
     This class provides an interface to retrieve the 'session_name', and
     'id_entity' from the 'tbl_dataset_entity' sql database table.
@@ -24,7 +23,7 @@ class Retrieve_Session(object):
     '''
 
     def __init__(self):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -35,7 +34,7 @@ class Retrieve_Session(object):
         self.db_ml = current_app.config.get('DB_ML')
 
     def get_all_sessions(self):
-        '''@get_all_sessions
+        '''
 
         This method is responsible for retrieving all sessions from the
         'tbl_dataset_entity' sql database table.
