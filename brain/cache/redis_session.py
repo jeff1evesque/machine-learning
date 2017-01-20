@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@base_data
+'''
 
 This file stores user sessions into the redis-server.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@svr_csv_converter.py
+'''
 
 This file restructures only the supplied dataset(s), from a csv file to a
 python dictionary format.
@@ -14,7 +14,7 @@ from log.logger import Logger
 
 
 def svr_csv_converter(raw_data):
-    '''@svr_csv_converter
+    '''
 
     This method converts the supplied csv file-object, intended for an svm
     model, to a python dictionary.
@@ -34,7 +34,7 @@ def svr_csv_converter(raw_data):
 
           row = row[0].split(',')
 
-        '''
+    '''
 
     feature_count = None
     list_dataset = []

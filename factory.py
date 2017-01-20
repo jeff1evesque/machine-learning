@@ -1,4 +1,4 @@
-'''@factory
+'''
 
 This file is the acting web server.
 

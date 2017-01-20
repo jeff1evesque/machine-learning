@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@model_generate
+'''
 
 This file receives data (i.e. settings) required to query from the database,
 a previously stored session, involving one or more stored dataset uploads, and
@@ -16,7 +16,7 @@ from brain.session.model.sv import sv_model
 
 
 class Model_Generate(Base):
-    '''@Model_Generate
+    '''
 
     This class provides an interface to generate a corresponding model, within
     a NoSQL datastore.
@@ -25,7 +25,7 @@ class Model_Generate(Base):
     '''
 
     def __init__(self, premodel_data):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables, using the
         superclass 'Base' constructor, along with the
@@ -46,7 +46,7 @@ class Model_Generate(Base):
         self.list_error = []
 
     def generate_model(self):
-        '''@generate_model
+        '''
 
         This method generates a corresponding model, using a chosen dataset
         from the SQL database. The resulting model is stored into a NoSQL
@@ -73,7 +73,7 @@ class Model_Generate(Base):
             self.list_error.extend(result['error'])
 
     def return_error(self):
-        '''@return_error
+        '''
 
         This method returns all errors corresponding to this class instance.
 

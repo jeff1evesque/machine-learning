@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@jsonschema_definition
+'''
 
 This file contains various jsonschema definitions.
 
@@ -8,7 +8,7 @@ This file contains various jsonschema definitions.
 
 
 def jsonschema_data_new():
-    '''@jsonschema_data_new
+    '''
 
     This method validates the 'data_new' session, by validating the session
     properties, not the dataset itself.
@@ -46,7 +46,7 @@ def jsonschema_data_new():
 
 
 def jsonschema_data_append():
-    '''@jsonschema_data_new
+    '''
 
     This method validates the 'data_append' session, by validating the session
     properties, not the dataset itself.
@@ -80,7 +80,7 @@ def jsonschema_data_append():
 
 
 def jsonschema_model_generate():
-    '''@jsonschema_data_new
+    '''
 
     This method validates the 'model_generate' session, by validating the
     session properties, not the dataset itself.
@@ -114,7 +114,7 @@ def jsonschema_model_generate():
 
 
 def jsonschema_model_predict():
-    '''@jsonschema_data_new
+    '''
 
     This method validates the 'model_predict' session, by validating the
     session properties, not the dataset itself.

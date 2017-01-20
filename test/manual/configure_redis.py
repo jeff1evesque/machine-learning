@@ -1,4 +1,4 @@
-'''@configure_redis
+'''
 
 This module will FLUSHALL keys in the redis database.
 

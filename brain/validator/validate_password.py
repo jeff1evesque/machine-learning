@@ -1,4 +1,4 @@
-'''@validate_password
+'''
 
 This file contains functions for validating the user's password against
 a set of requirements.
@@ -10,7 +10,7 @@ import yaml
 
 
 def load_min(app=True, root='/vagrant'):
-    '''@load_min
+    '''
 
     This method returns the minimum character requirement for passwords.
 
@@ -22,7 +22,7 @@ def load_min(app=True, root='/vagrant'):
         min_c = current_app.config.get('PASSWORD_MIN_C', None)
         return {'password_min_c': min_c, 'error': None}
     else:
-        with open(root + "/hiera/settings.yaml", 'r') as stream:
+        with open(root + '/hiera/settings.yaml', 'r') as stream:
             try:
                 yamlres = yaml.load(stream)
                 min_c = yamlres['validate_password']['password_min_c']
@@ -32,7 +32,7 @@ def load_min(app=True, root='/vagrant'):
 
 
 def load_max(app=True, root='/vagrant'):
-    '''@load_max
+    '''
 
     This method returns the maximum character requirement for passwords.
 
@@ -44,7 +44,7 @@ def load_max(app=True, root='/vagrant'):
         max_c = current_app.config.get('PASSWORD_MAX_C', None)
         return {'password_max_c': max_c, 'error': None}
     else:
-        with open(root + "/hiera/settings.yaml", 'r') as stream:
+        with open(root + '/hiera/settings.yaml', 'r') as stream:
             try:
                 yamlres = yaml.load(stream)
                 max_c = yamlres['validate_password']['password_max_c']
@@ -54,7 +54,7 @@ def load_max(app=True, root='/vagrant'):
 
 
 def req_min_c(password, app=True):
-    '''@req_min_c
+    '''
 
     This method returns True if the minimum password character requirement is
     met.
@@ -69,7 +69,7 @@ def req_min_c(password, app=True):
 
 
 def req_max_c(password, app=True):
-    '''@req_max_c
+    '''
 
     This method returns True if the maximum password character requirement is
     met.
@@ -84,7 +84,7 @@ def req_max_c(password, app=True):
 
 
 def req_numeral(password):
-    '''@req_numeral
+    '''
 
     This method returns True if the password contains a number.
 
@@ -97,7 +97,7 @@ def req_numeral(password):
 
 
 def req_lower(password):
-    '''@req_lower
+    '''
 
     This method returns True if the password contains a lowercase letter.
 
@@ -110,7 +110,7 @@ def req_lower(password):
 
 
 def req_upper(password):
-    '''@req_upper
+    '''
 
     This method returns True if the password contains an uppercase letter.
 
@@ -123,7 +123,7 @@ def req_upper(password):
 
 
 def validate_password(password, app=True):
-    '''@validate_password
+    '''
 
     This method returns True if the password meets all requirements.
 

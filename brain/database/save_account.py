@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@save_account
+'''
 
 This file saves a user account during registration.
 
@@ -11,7 +11,7 @@ from brain.database.db_query import SQL
 
 
 class Save_Account(object):
-    '''@Save_Account
+    '''
 
     This class provides an interface to save a username, and their
     corresponding password.
@@ -21,7 +21,7 @@ class Save_Account(object):
     '''
 
     def __init__(self):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -32,7 +32,7 @@ class Save_Account(object):
         self.db_ml = current_app.config.get('DB_ML')
 
     def save_account(self, username, email, password):
-        '''@save_account
+        '''
 
         This method stores a user account, along with their corresponding
         password into an 'EAV data model' database table.

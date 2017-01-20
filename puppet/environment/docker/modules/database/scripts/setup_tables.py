@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@setup_tables
+'''
 
 This file initializes the following database tables within the
 'db_machine_learning' database:

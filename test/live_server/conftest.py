@@ -1,4 +1,4 @@
-'''@conftest
+'''
 
 This file creates the necessary constructs, which pytest will load, and make
     available for each pytest execution instance.

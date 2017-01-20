@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@save_entity
+'''
 
 Note: the term 'dataset' used throughout various comments in this file,
       synonymously implies the user supplied 'file upload(s)', and XML url
@@ -13,7 +13,7 @@ from brain.converter.convert_dataset import Convert_Dataset
 
 
 def dataset_dictionary(id_entity, model_type, upload):
-    '''@dataset_dictionary
+    '''
 
     This method converts the supplied csv, or xml file upload(s) to a uniform
     dict object.

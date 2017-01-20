@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@load_data
+'''
 
 This file allocates input to respective 'data_xxx.py', 'model_xx.py', and
 generates a return object, when required.
@@ -15,7 +15,7 @@ from brain.session.model_predict import Model_Predict
 
 
 class Load_Data(object):
-    '''@Load_Data
+    '''
 
     This class provides an interface to load the necessary parameters:
 
@@ -29,7 +29,7 @@ class Load_Data(object):
     '''
 
     def __init__(self, data):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -45,8 +45,7 @@ class Load_Data(object):
         self.list_error = []
 
     def load_data_new(self):
-
-        '''@load_data_new
+        '''
 
         This method validates the supplied parameters, before being stored as
         new entries, into corresponding tables in the SQL database.
@@ -94,7 +93,7 @@ class Load_Data(object):
         return json.dumps(response)
 
     def load_data_append(self):
-        '''@load_data_append
+        '''
 
         This method validates the supplied parameters, before being appended to
         existing entries, from corresponding tables in the SQL database.
@@ -142,7 +141,7 @@ class Load_Data(object):
         return json.dumps(response)
 
     def load_model_generate(self):
-        '''@load_model_generate
+        '''
 
         This method validates the supplied parameters, before generating a
         model into a NoSQL cache, using a chosen stored dataset from the SQL
@@ -174,7 +173,7 @@ class Load_Data(object):
         return json.dumps(response)
 
     def load_model_predict(self):
-        '''@load_model_predict
+        '''
 
         This method validates the supplied parameters, before generating a
         prediction, using a chosen stored model from the NoSQL cache.
@@ -204,7 +203,7 @@ class Load_Data(object):
             return json.dumps(response)
 
     def get_session_type(self):
-        '''@load_model_predict
+        '''
 
         This method returns the following session type, from the corresponding
         supplied parameters:
@@ -233,7 +232,7 @@ class Load_Data(object):
             return 'Model properly generated'
 
     def get_errors(self):
-        '''@get_errors
+        '''
 
         This method returns all errors pertaining to the instantiated class.
 

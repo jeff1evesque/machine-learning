@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@cache_hset
+'''
 
 This file caches, and uncaches the supplied model into a redis hash cache.
 
@@ -11,7 +11,7 @@ from brain.converter.serialize_model import Serialize_Model
 
 
 class Cache_Model(object):
-    '''@Cache_Model
+    '''
 
     This class provides an interface to cache, and uncache the redis hash
     data structure.  Specifically, necessary data components is passed into the
@@ -23,7 +23,7 @@ class Cache_Model(object):
     '''
 
     def __init__(self, model=None):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables, as well
         as starting the redis client, in order to perform corresponding
@@ -43,7 +43,7 @@ class Cache_Model(object):
             self.list_error.append(str(error))
 
     def cache(self, hash_name, key):
-        '''@cache
+        '''
 
         This method serializes, then caches the provided model into a redis
         hash cache.
@@ -58,7 +58,7 @@ class Cache_Model(object):
             print self.list_error
 
     def uncache(self, hash_name, key):
-        '''@uncache
+        '''
 
         This method unserializes, then uncaches the desired model, using
         the provided key from the redis hash cache.
@@ -69,7 +69,7 @@ class Cache_Model(object):
         return Serialize_Model(uncached).deserialize()
 
     def get_all_titles(self, name):
-        '''@get_all_titles
+        '''
 
         This method returns a list of all model titles, and the corresponding
         numeric id value, with respect to the provided key (i.e svm_model).
@@ -96,6 +96,7 @@ class Cache_Model(object):
                     'result': None,
                     'error': 'no previous model found in cache'
                 }
+
         except Exception, error:
             self.list_error.append(str(error))
             return {'result': None, 'error': self.list_error}

@@ -1,7 +1,6 @@
-'''@crypto
+'''
 
 This file contains various cryptography wrappers.
-
 
 '''
 
@@ -13,13 +12,14 @@ import scrypt
 
 
 def getsalt(app=True, root='/vagrant'):
-    '''@getsalt
+    '''
 
     This method returns the salt.
 
     @app, indicates if function is to be used by application, or manually
 
     '''
+
     if app:
         salt_length = current_app.config.get('SALT_LENGTH')
         return base64.b64encode(os.urandom(salt_length))
@@ -33,7 +33,7 @@ def getsalt(app=True, root='/vagrant'):
 
 
 def getscryptparams(app=True, root='/vagrant'):
-    '''@getscryptparams
+    '''
 
     This method returns the parameters N,r,p for the scrypt function.
 
@@ -50,6 +50,7 @@ def getscryptparams(app=True, root='/vagrant'):
     @app, indicates if function is to be used by application, or manually
 
     '''
+
     if app:
         N = current_app.config.get('SCRYPT_N')
         r = current_app.config.get('SCRYPT_R')
@@ -68,13 +69,14 @@ def getscryptparams(app=True, root='/vagrant'):
 
 
 def hashpass(password, app=True):
-    '''@hashpass
+    '''
 
     This method returns a hash and salt from a password p
 
     @salt - a random string of saltlength bytes generated to hash the password
 
     '''
+
     salt = getsalt(app=app)
     N, r, p = getscryptparams(app=app)
     try:
@@ -86,7 +88,7 @@ def hashpass(password, app=True):
 
 
 def verifypass(password, h, app=True):
-    '''@verifypass
+    '''
 
     This function verifies that a password p hashes to a hash h as
     returned by hashpass.
@@ -95,6 +97,7 @@ def verifypass(password, h, app=True):
     @s - salt extracted from the hash+salt
 
     '''
+
     N, r, p = getscryptparams(app=app)
     h, s = h.split('$')
     hashed = scrypt.hash(password, s, N=N, r=r, p=p, buflen=512)

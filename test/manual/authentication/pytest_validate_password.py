@@ -1,4 +1,4 @@
-'''@pytest_validate_password
+'''
 
 This file will test the password validation functionality.
 

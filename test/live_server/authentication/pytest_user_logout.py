@@ -1,4 +1,4 @@
-'''@pytest_user_logout
+'''
 
 This file will test the necessary interfaces required to logout.
 
@@ -13,7 +13,7 @@ from flask import session
 
 
 def test_logout(client, live_server):
-    '''@test_logout
+    '''
 
     This method tests the user logout process. It seems redundant, since it
     requires executing the login session. However, this login session is not
@@ -33,6 +33,7 @@ def test_logout(client, live_server):
 
     # post requests: login, and logout response
     login = client.post('/login', data=payload)
+
     if session.get('uid'):
         logout = client.post('/logout')
     else:
