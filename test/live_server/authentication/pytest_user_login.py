@@ -47,7 +47,8 @@ def test_login(client, live_server):
                 payload = {'user[login]': username, 'user[password]': password}
                 login = client.post(url, data=payload)
 
-                assert login.status_code == 200 and session.get('uid')
+                assert login.status_code == 200
+                assert session.get('uid') == 1
             else:
                 assert False
 
