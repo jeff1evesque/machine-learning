@@ -37,25 +37,21 @@ def get_sample_json(jsonfile, model_type):
     # open file
     json_dataset = None
 
-    try:
-        with open(
-            os.path.join(
-                root,
-                'interface',
-                'static',
-                'data',
-                'json',
-                'programmatic_interface',
-                model_type,
-                'dataset_url',
-                jsonfile
-            ),
-            'r'
-        ) as json_file:
-            json_dataset = json.load(json_file)
-
-    except Exception as error:
-        pytest.fail(error)
+    with open(
+        os.path.join(
+            root,
+            'interface',
+            'static',
+            'data',
+            'json',
+            'programmatic_interface',
+            model_type,
+            'dataset_url',
+            jsonfile
+        ),
+        'r'
+    ) as json_file:
+        json_dataset = json.load(json_file)
 
     return json.dumps(json_dataset)
 
