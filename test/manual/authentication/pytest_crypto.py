@@ -25,7 +25,5 @@ def test_hashing():
         h2 = crypto.hashpass(p, app=False)
 
         assert h1 != h2
-        assert (
-            crypto.verifypass(p, h1, app=False) and
-            crypto.verifypass(p, h2, app=False)
-        )
+        assert crypto.verifypass(p, h1, app=False)
+        assert crypto.verifypass(p, h2, app=False)
