@@ -149,12 +149,23 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svm-model-predict.json', 'svm')
     )
 
-    raise ValueError(res.json['result']['confidence']['decision_function'])
     assert (
         res.status_code == 200 and
         res.json['status'] == 0 and
         res.json['result'] and
         res.json['result']['confidence'] and
+        res.json['result']['confidence']['decision_function'] == [
+            0.1221379769127864,
+            0.0,
+            -0.2201467913263242,
+            -0.22014661657537662,
+            -0.12213797691278638,
+            -0.33333297925570843,
+            -0.33333281615328886,
+            -0.2201467913263242,
+            -0.22014661657537662,
+            1.8353514974478458e-07
+        ] and
         res.json['result']['confidence']['classes'] == [
             'dep-variable-1',
             'dep-variable-2',
