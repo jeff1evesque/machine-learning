@@ -170,5 +170,5 @@ def test_model_predict():
         1.8353514974478458e-07
     ]
     assert check_prob
-    assert res.json['result']['confidence']['model'] == 'svm'
-    assert res.json['result']['confidence']['result'] == 'dep-variable-4'
+    assert res.json['result']['model'] == 'svm'
+    assert res.json['result']['result'] == 'dep-variable-4'
