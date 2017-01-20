@@ -78,7 +78,9 @@ def test_data_new(client, live_server):
         data=get_sample_json('svm-data-new.json', 'svm')
     )
 
-    assert res.status_code == 200 and res.json['status'] == 0
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
 
 
 def test_data_append(client, live_server):
@@ -100,7 +102,9 @@ def test_data_append(client, live_server):
         data=get_sample_json('svm-data-append.json', 'svm')
     )
 
-    assert res.status_code == 200 and res.json['status'] == 0
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
 
 
 def test_model_generate(client, live_server):
@@ -122,7 +126,9 @@ def test_model_generate(client, live_server):
         data=get_sample_json('svm-model-generate.json', 'svm')
     )
 
-    assert res.status_code == 200 and res.json['status'] == 0
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
 
 
 def test_model_predict(client, live_server):
@@ -149,37 +155,44 @@ def test_model_predict(client, live_server):
         data=get_sample_json('svm-model-predict.json', 'svm')
     )
 
-    assert (
-        res.status_code == 200 and
-        res.json['status'] == 0 and
-        res.json['result'] and
-        res.json['result']['confidence'] and
-        res.json['result']['confidence']['decision_function'] == [
-            0.1221379769127864,
-            0.0,
-            -0.2201467913263242,
-            -0.22014661657537662,
-            -0.12213797691278638,
-            -0.33333297925570843,
-            -0.33333281615328886,
-            -0.2201467913263242,
-            -0.22014661657537662,
-            1.8353514974478458e-07
-        ] and
-        res.json['result']['confidence']['classes'] == [
-            'dep-variable-1',
-            'dep-variable-2',
-            'dep-variable-3',
-            'dep-variable-4',
-            'dep-variable-5'
-        ] and
-        res.json['result']['confidence']['probability'] == [
-            0.1686231365969297,
-            0.1439542445974467,
-            0.16914705321687704,
-            0.2354476679148742,
-            0.2828278976738722
-        ] and
-        res.json['result']['confidence']['model'] == 'svm' and
-        res.json['result']['confidence']['result'] == 'dep-variable-4'
-    )
+    # check each probability is within acceptable margin
+    fixed_prob = [
+        0.1686231365969297,
+        0.1439542445974467,
+        0.16914705321687704,
+        0.2354476679148742,
+        0.2828278976738722
+    ]
+    cp = res.json['result']['confidence']['probability']
+    margin_prob = 0.005
+    check_prob = [
+        i for i in fixed_prob if any(abs(i-j) > margin_prob for j in cp)
+    ]
+
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+    assert res.json['result']
+    assert res.json['result']['confidence']
+    assert res.json['result']['confidence']['classes'] == [
+        'dep-variable-1',
+        'dep-variable-2',
+        'dep-variable-3',
+        'dep-variable-4',
+        'dep-variable-5'
+    ]
+    assert res.json['result']['confidence']['decision_function'] == [
+        0.1221379769127864,
+        0.0,
+        -0.2201467913263242,
+        -0.22014661657537662,
+        -0.12213797691278638,
+        -0.33333297925570843,
+        -0.33333281615328886,
+        -0.2201467913263242,
+        -0.22014661657537662,
+        1.8353514974478458e-07
+    ]
+    assert check_prob
+    assert res.json['result']['confidence']['model'] == 'svm'
+    assert res.json['result']['confidence']['result'] == 'dep-variable-4'
