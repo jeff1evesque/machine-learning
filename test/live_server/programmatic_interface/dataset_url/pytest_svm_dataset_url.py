@@ -153,11 +153,11 @@ def test_model_predict(client, live_server):
 
     # check each probability is within acceptable margin
     fixed_prob = [
-        0.1686231365969297,
-        0.1439542445974467,
-        0.16914705321687704,
-        0.2354476679148742,
-        0.2828278976738722
+        0.14075033321086294,
+        0.14500955005546354,
+        0.14156072707544004,
+        0.19249135186767916,
+        0.38018803779055466
     ]
     cp = res.json['result']['confidence']['probability']
     margin_prob = 0.005
