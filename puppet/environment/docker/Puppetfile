@@ -33,7 +33,7 @@ mod 'mysql',
 
 ## Install Module: mongodb
 mod 'mongodb',
-  :git => 'git@github.com:echocat/puppet-mongodb.git',
+  :git => 'https://github.com/echocat/puppet-mongodb.git',
   :ref => 'v3.5.0'
 
 ## Install Module: sys (required for heredoc logic in 'start_webserver.pp')
