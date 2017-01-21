@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@retrieve_entity
+'''
 
 This file retrieves dataset entity related properties.
 
@@ -12,7 +12,6 @@ from brain.database.db_query import SQL
 
 class Retrieve_Entity(object):
     '''
-    @Retrieve_Entity
 
     This class provides an interface to get an SVM entity title, from the
     'tbl_dataset_entity' sql database table.
@@ -24,7 +23,7 @@ class Retrieve_Entity(object):
     '''
 
     def __init__(self):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -35,7 +34,7 @@ class Retrieve_Entity(object):
         self.db_ml = current_app.config.get('DB_ML')
 
     def get_title(self, id_entity):
-        '''@get_title
+        '''
 
         This method is responsible for retrieving an SVM entity title, from the
         SQL database, using a fixed 'id_entity'.

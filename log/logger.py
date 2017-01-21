@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@logger
+'''
 
 This file provides a mean to generate logs in a consistent manner.
 
@@ -11,7 +11,7 @@ from flask import current_app
 
 
 class Logger(object):
-    '''@Logger
+    '''
 
     This class provides an interface to define necessary attributes needed to
     generate a corresponding log.
@@ -19,7 +19,7 @@ class Logger(object):
     '''
 
     def __init__(self, namespace, log_type, filename=None, level=None):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining the necessary logger
         instance, which is used with additional methods to generate a
@@ -145,7 +145,7 @@ class Logger(object):
         self.logger.setLevel(self.logger_level)
 
     def log(self, msg):
-        '''@__init__
+        '''
 
         This method is responsible for generating the corresponding log.
 

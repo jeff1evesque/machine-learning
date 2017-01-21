@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import ModelGenerate from '../session-type/model_generate.jsx';
 import ModelPredict from '../session-type/model_predict.jsx';
 import DataNew from '../session-type/data_new.jsx';
@@ -20,11 +21,13 @@ var SupportVector = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            display_spinner: false,
             value_session_type: '--Select--',
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
-            ajax_fail_status: null
+            ajax_fail_status: null,
+            router_assigned: false,
         };
     },
   // update 'state properties'
@@ -35,7 +38,10 @@ var SupportVector = React.createClass({
         this.setState({send_data: false});
 
       // define sessionType
-        if (event.target.value && checkValidString(event.target.value)) {
+        if (
+            event.target.value &&
+            checkValidString(event.target.value)
+        ) {
             this.setState({value_session_type: event.target.value});
         }
     },
@@ -59,10 +65,12 @@ var SupportVector = React.createClass({
       // local variables
         var sessionType = this.state.value_session_type;
         if (
-            sessionType == 'data_new' || sessionType == 'data_append' ||
-            sessionType == 'model_generate' || sessionType == 'model_predict'
+            sessionType == 'data_new' ||
+            sessionType == 'data_append' ||
+            sessionType == 'model_generate' ||
+            sessionType == 'model_predict'
         ) {
-            var ajaxEndpoint = '/load-data/';
+            var ajaxEndpoint = '/load-data';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
                 'data': new FormData(this.refs.analysisForm)
@@ -102,11 +110,73 @@ var SupportVector = React.createClass({
             ajaxArguments);
         }
     },
+    componentDidUpdate: function() {
+      // local variables
+        var router_assigned = this.state.router_assigned;
+
+      // conditionally define state based on supplied router property
+        if (
+            this.props &&
+            this.props.routerProp &&
+            router_assigned != this.props.routerProp
+        ) {
+            var routerSession = this.props.routerProp;
+            this.setState({router_assigned: routerSession});
+
+          // assign state: if router triggered component
+            if (routerSession == 'DataNew') {
+                this.setState({submit: false});
+                this.setState({value_session_type: 'data_new'});
+            }
+            else if (routerSession == 'DataAppend') {
+                this.setState({submit: false});
+                this.setState({value_session_type: 'data_append'});
+            }
+            else if (routerSession == 'ModelGenerate') {
+                this.setState({submit: false});
+                this.setState({value_session_type: 'model_generate'});
+            }
+            else if (routerSession == 'ModelPredict') {
+                this.setState({submit: false});
+                this.setState({value_session_type: 'model_predict'});
+            }
+        }
+    },
+    componentDidMount: function() {
+      // local variables
+        var router_assigned = this.state.router_assigned;
+
+      // conditionally define state used in render
+        if (
+            this.props &&
+            this.props.routerProp &&
+            router_assigned != this.props.routerProp
+        ) {
+            this.setState({
+                value_session_type: this.getSessionValue(this.props.routerProp)
+            });
+        }
+    },
   // triggered when 'state properties' change
     render: function() {
+      // local variables
         var Result = ResultDisplay;
-        var SessionType = this.getSessionType(this.state.value_session_type);
+        var router_assigned = this.state.router_assigned;
+        var session_type = this.state.value_session_type;
 
+      // conditionally render component based on supplied router, or state
+        if (
+            this.props &&
+            this.props.routerProp &&
+            router_assigned != this.props.routerProp
+        ) {
+            var SessionType = this.props.routerProp;
+        }
+        else {
+            var SessionType = this.getSessionType(session_type);
+        }
+
+      // conditionally render form submit
         if (this.state.submit) {
             var SubmitButton = Submit;
         }
@@ -114,6 +184,7 @@ var SupportVector = React.createClass({
             var SubmitButton = 'span';
         }
 
+      // conditionally render ajax spinner
         if (this.state.display_spinner) {
             var AjaxSpinner = Spinner;
         }
@@ -137,11 +208,25 @@ var SupportVector = React.createClass({
                         onChange={this.changeSessionType}
                         value={this.state.value_session_type}
                     >
-                        <option value='' defaultValue>--Select--</option>
-                        <option value='data_new'>New Data</option>
-                        <option value='data_append'>Append Data</option>
-                        <option value='model_generate'>Generate Model</option>
-                        <option value='model_predict'>Make Prediction</option>
+                        <option value='' defaultValue>
+                            --Select--
+                        </option>
+
+                        <option value='data_new'>
+                            New Data
+                        </option>
+
+                        <option value='data_append'>
+                            Append Data
+                        </option>
+
+                        <option value='model_generate'>
+                            Generate Model
+                        </option>
+
+                        <option value='model_predict'>
+                            Make Prediction
+                        </option>
                     </select>
                 </fieldset>
 
@@ -160,7 +245,15 @@ var SupportVector = React.createClass({
             model_generate: ModelGenerate,
             model_predict: ModelPredict
         }[type] || 'span';
-    }
+    },
+    getSessionValue: function(type) {
+        return {
+            DataNew: 'data_new',
+            DataAppend: 'data_append',
+            ModelGenerate: 'model_generate',
+            ModelPredict: 'model_predict'
+        }[type] || 'span';
+    },
 });
 
 // indicate which class can be exported, and instantiated via 'require'

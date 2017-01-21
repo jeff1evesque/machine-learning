@@ -1,12 +1,16 @@
 #!/usr/bin/python
 
-'''@save_observation_label'''
+'''
+
+This file provides necessary methods to store observation labels.
+
+'''
 
 from brain.database.save_observation import Save_Observation
 
 
 def observation_label(session_type, session_id, labels, file_upload):
-    '''observation_label
+    '''
 
     This method saves the list of unique independent variable labels, which can
     be expected in any given observation, into the sql database. This list of

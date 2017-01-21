@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@base
+'''
 
 This file serves as the superclass for 'data_xx.py', and 'model_xx.py' files.
 
@@ -11,11 +11,12 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 import sys
+from flask import current_app
 from brain.validator.validate_settings import Validate_Settings
 
 
 class Base(object):
-    '''@Base
+    '''
 
     This class provides a general base class, used for the following sessions,
     and within their corresponding classes:
@@ -32,7 +33,7 @@ class Base(object):
     '''
 
     def __init__(self, premodel_data):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -40,11 +41,12 @@ class Base(object):
 
         self.premodel_data = premodel_data
         settings = self.premodel_data['data']['settings']
+        self.list_model_type = current_app.config.get('MODEL_TYPE')
         self.session_type = settings['session_type']
         self.list_error = []
 
     def validate_arg_none(self):
-        '''validate_arg_none
+        '''
 
         This method checks if the class variable 'premodel_data' is defined.
 
@@ -56,7 +58,7 @@ class Base(object):
             return False
 
     def validate_premodel_settings(self):
-        '''@validate_premodel_settings
+        '''
 
         This method validates the provided settings (not the dataset), that
         describe the session.
@@ -74,7 +76,7 @@ class Base(object):
             self.list_error.append(validated['error'])
 
     def get_errors(self):
-        '''@get_errors
+        '''
 
         This method returns all current errors associated with this class.
 
@@ -83,7 +85,7 @@ class Base(object):
         return self.list_error
 
     def check(self):
-        '''@check
+        '''
 
         This method checks if current class instance contains any errors. If
         any error(s) exists, it is printed, and the program exits.

@@ -12,4 +12,5 @@ require system::log_directory
 include webserver::service
 
 ## start webservers
+include package::gunicorn
 include webserver::start

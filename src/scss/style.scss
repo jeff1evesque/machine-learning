@@ -6,9 +6,10 @@
 //           .[CLASS] ~ .[CLASS] { }
 
 @import 'variables';
-@import 'user_menu';
+@import 'navigation';
 @import 'webform';
 @import 'spinner';
+@import 'layout';
 
 a {
   text-decoration: none;
@@ -39,7 +40,7 @@ h6 {
 }
 
 .error {
-  color: $color-error;
+  color: $red-1;
   font-weight: 700;
 }
 
@@ -48,11 +49,11 @@ h6 {
   -webkit-appearance: none;
   appearance: none;
   background-color: $gray-1;
-  background-image: -webkit-linear-gradient($off-white, $gray-1);
-  background-image: linear-gradient($off-white, $gray-1);
+  background-image: -webkit-linear-gradient($white-2, $gray-1);
+  background-image: linear-gradient($white-2, $gray-1);
   border: 1px solid $gray-4;
   border-radius: 3px;
-  color: $gray-6;
+  color: $gray-7;
   cursor: pointer;
   display: inline-block;
   font-size: 13px;
@@ -76,24 +77,24 @@ h6 {
 }
 
 .btn-primary {
-  background-color: $green-level-1;
-  background-image: -webkit-linear-gradient($lighter-green, $green-level-1);
-  background-image: linear-gradient($lighter-green, $green-level-1);
-  border-color: $green-level-2;
-  color: $white;
+  background-color: $green-4;
+  background-image: -webkit-linear-gradient($green-1, $green-4);
+  background-image: linear-gradient($green-1, $green-4);
+  border-color: $green-3;
+  color: $white-1;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, .15);
 }
 
 .btn-primary:hover {
-  background-color: $dark-green;
-  background-image: -webkit-linear-gradient($light-green, $dark-green);
-  background-image: linear-gradient($light-green, $dark-green);
-  border-color: $darker-green;
-  color: $white;
+  background-color: $green-5;
+  background-image: -webkit-linear-gradient($green-2, $green-5);
+  background-image: linear-gradient($green-2, $green-5);
+  border-color: $green-6;
+  color: $white-1;
 }
 
 .note {
-  color: $gray-5;
+  color: $gray-6;
   font-size: .75rem;
   margin: .4rem 0 .3rem;
 }

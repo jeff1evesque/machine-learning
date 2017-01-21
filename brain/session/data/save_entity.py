@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@save_entity
+'''
 
 Note: the term 'dataset' used throughout various comments in this file,
       synonymously implies the user supplied 'file upload(s)', and XML url
@@ -12,7 +12,7 @@ from brain.database.save_entity import Save_Entity
 
 
 def entity(dataset, session_type, userid):
-    '''@entity
+    '''
 
     This method saves the current entity into the database, then returns the
     corresponding entity id.

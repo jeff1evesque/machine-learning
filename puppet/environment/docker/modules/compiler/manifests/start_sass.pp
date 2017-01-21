@@ -9,10 +9,11 @@ class compiler::start_sass {
     $environment     = $hiera_general['environment']
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
 
-    # manually compile
+    # manually compile: increase default timeout (300s)
     exec { 'sass':
         command  => "./sass ${root_dir}",
         cwd      => "${dev_env_path}/modules/compiler/scripts",
+        timeout  => 700,
         provider => shell,
     }
 }

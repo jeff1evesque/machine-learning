@@ -25,20 +25,51 @@
 }
 
 form {
+  input,
+  select,
+  textarea {
+    border: 1px solid #gray-5;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    padding: .438rem;
+    -moz-transition: all .30s ease-in-out;
+    -ms-transition: all .30s ease-in-out;
+    -o-transition: all .30s ease-in-out;
+    -webkit-transition: all .30s ease-in-out;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border: 1px solid $focus;
+    -moz-box-shadow: 0 0 .5rem $focus;
+    -webkit-box-shadow: 0 0 .5rem $focus;
+    box-shadow: 0 0 .5rem $focus;
+  }
+
+  fieldset {
+    padding: .75rem 1.5rem 1rem;
+  }
+
   > fieldset {
-    margin-top: $form-margin;
+    border: 1px solid $gray-2;
+    margin-top: $gutter-1 / 2;
 
     > fieldset {
-      margin-top: $form-margin / 2;
+      border: 1px solid $gray-1;
+      margin-top: $gutter-1 / 4;
     }
   }
 
   .form-submit {
-    margin-top: $form-margin;
+    margin-top: $gutter-1 / 2;
   }
 
   label {
-    color: $gray-6;
+    color: $gray-7;
   }
 
   .input-block {
@@ -46,11 +77,17 @@ form {
     border-radius: .1875rem;
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, .085);
     box-sizing: border-box;
-    color: $gray-6;
+    color: $gray-7;
     display: block;
     font-size: .875rem;
     padding: .425rem .55rem;
     width: 100%;
+  }
+
+  legend {
+    color: $gray-7;
+    font-size: .938rem;
+    padding: 0 $gutter-1 / 4;
   }
 }
 
@@ -66,6 +103,14 @@ fieldset .error {
   clear: both;
   margin-bottom: .625rem;
   padding-top: 1.25rem;
+}
+
+.analysis-container {
+  form {
+    margin: .625rem auto;
+    padding: 0 0 .625rem 1.25rem;
+
+  }
 }
 
 .login-form {
@@ -105,7 +150,7 @@ fieldset .error {
 }
 
 .register-form {
-  color: $gray-6;
+  color: $gray-7;
   margin: 0 auto;
   width: 28rem;
 
@@ -115,7 +160,7 @@ fieldset .error {
   }
 
   label {
-    color: $gray-6;
+    color: $gray-7;
     display: block;
     font-weight: 600;
     margin: 0 0 .4rem;

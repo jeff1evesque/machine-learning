@@ -2,6 +2,7 @@
  * ajax_caller.js: an array of feature (independent variables) names, and the
  *                 generalized count of features that can be expected within an
  *                 observation, is inserted to respective DOM elements.
+ *
  */
 
 // AJAX Process
@@ -17,10 +18,18 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     };
   }
 
-  // ajax logic
+  // ajax logic: the encapsulating function, utilizes this fetch api, to
+  //             properly send data, to the corresponding endpoint.
+  //
+  // Note: in order to better understand header responses, with respect to the
+  //       fetch api, the following can be reviewed:
+  //
+  //       https://[github-url]/issues/2863#issuecomment-272355998
+  //
   fetch(args.endpoint, {
     method: 'post',
     body: args.data,
+    credentials: 'include',
     headers: fetchHeaders
   }).then(function(response) {
     if (response.ok) {

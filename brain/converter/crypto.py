@@ -1,7 +1,6 @@
-'''@crypto
+'''
 
 This file contains various cryptography wrappers.
-
 
 '''
 
@@ -13,13 +12,14 @@ import scrypt
 
 
 def getsalt(app=True, root='/vagrant'):
-    '''@getsalt
+    '''
 
     This method returns the salt.
 
     @app, indicates if function is to be used by application, or manually
 
     '''
+
     if app:
         salt_length = current_app.config.get('SALT_LENGTH')
         return base64.b64encode(os.urandom(salt_length))
@@ -33,7 +33,7 @@ def getsalt(app=True, root='/vagrant'):
 
 
 def getscryptparams(app=True, root='/vagrant'):
-    '''@getscryptparams
+    '''
 
     This method returns the parameters N,r,p for the scrypt function.
 
@@ -50,6 +50,7 @@ def getscryptparams(app=True, root='/vagrant'):
     @app, indicates if function is to be used by application, or manually
 
     '''
+
     if app:
         N = current_app.config.get('SCRYPT_N')
         r = current_app.config.get('SCRYPT_R')
@@ -67,16 +68,17 @@ def getscryptparams(app=True, root='/vagrant'):
                 return pow(2, 18), 8, 1
 
 
-def hashpass(password):
-    '''@hashpass
+def hashpass(password, app=True):
+    '''
 
     This method returns a hash and salt from a password p
 
     @salt - a random string of saltlength bytes generated to hash the password
 
     '''
-    salt = getsalt(app=False)
-    N, r, p = getscryptparams(app=False)
+
+    salt = getsalt(app=app)
+    N, r, p = getscryptparams(app=app)
     try:
         hashed = scrypt.hash(password, salt, N=N, r=r, p=p, buflen=512)
         hashed = hashed.encode("hex")
@@ -85,8 +87,8 @@ def hashpass(password):
         return False
 
 
-def verifypass(password, h):
-    '''@verifypass
+def verifypass(password, h, app=True):
+    '''
 
     This function verifies that a password p hashes to a hash h as
     returned by hashpass.
@@ -95,7 +97,8 @@ def verifypass(password, h):
     @s - salt extracted from the hash+salt
 
     '''
-    N, r, p = getscryptparams(app=False)
+
+    N, r, p = getscryptparams(app=app)
     h, s = h.split('$')
     hashed = scrypt.hash(password, s, N=N, r=r, p=p, buflen=512)
     hashed = hashed.encode("hex")

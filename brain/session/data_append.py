@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@data_append
+'''
 
 This file allows methods defined from the Base, or Base_Data superclass to be
 overridden, if needed.
@@ -11,50 +11,35 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from flask import current_app
-from brain.session.base import Base
 from brain.session.base_data import Base_Data
 from brain.database.save_entity import Save_Entity
 
 
-class Data_Append(Base, Base_Data):
-    '''@Data_Append
+class Data_Append(Base_Data):
+    '''
 
     This class provides an interface to update existing stored entities within
     the sql database.
 
     Note: this class is invoked within 'load_data.py'
 
-    Note: inherit base methods from superclass 'Base', 'Base_Data
+    Note: inherit base methods from the superclass 'Base_Data
 
     '''
 
     def __init__(self, premodel_data):
-        '''@__init__
+        '''
 
-        This constructor is responsible for defining class variables, using the
-        superclass 'Base', and 'Base_Data' constructor, along with the
-        constructor in this subclass.
-
-        @super(), implement 'Base', and 'Base_Data' superclass constructor
-            within this child class constructor.
-
-        @self.uid, the logged-in user (i.e. userid).
-
-        Note: the superclass constructor expects the same 'premodel_data'
-              argument.
+        This constructor inherits additional class properties, from the
+        constructor of the 'Base_Data' superclass.
 
         '''
 
-        super(Data_Append, self).__init__(premodel_data)
-        self.observation_labels = []
-        self.list_error = []
-        self.dataset = []
-        self.uid = current_app.config.get('USER_ID')
-        self.model_type = premodel_data['data']['settings']['model_type']
+        # superclass constructor
+        Base_Data.__init__(self, premodel_data)
 
     def save_entity(self, session_type, session_id):
-        '''@save_entity
+        '''
 
         This method overrides the identical method from the inherited
         superclass, 'Base_Data'. Specifically, this method updates an

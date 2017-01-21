@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@svr_xml_converter.py
+'''
 
 This file restructures only the supplied dataset(s), from an xml file to a
 python dictionary format.
@@ -13,7 +13,7 @@ from log.logger import Logger
 
 
 def svr_xml_converter(raw_data):
-    '''@svr_xml_converter
+    '''
 
     This method converts the supplied xml file-object to a python dictionary.
 

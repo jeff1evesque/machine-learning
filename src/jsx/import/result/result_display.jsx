@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import checkValidString from './../validator/valid_string.js';
 import checkValidFloat from './../validator/valid_float.js';
 

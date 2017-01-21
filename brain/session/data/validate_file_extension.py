@@ -1,12 +1,16 @@
 #!/usr/bin/python
 
-'''@save_feature_count'''
+'''
+
+This file validates file extensions, as well as reducing supplied dataset(s).
+
+'''
 
 from brain.validator.validate_file_extension import Validate_File_Extension
 
 
 def reduce_dataset(dataset, session_type):
-    '''@reduce_dataset
+    '''
 
     This method validates the file extension for each uploaded dataset,
     and returns the unique (non-duplicate) dataset.

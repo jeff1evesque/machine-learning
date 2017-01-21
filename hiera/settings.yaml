@@ -1,11 +1,11 @@
 ## @settings
-#
-#  This file contains configuration settings for the following:
-#
-#    - redis
-#    - database
-#    - application logging
-#
+##
+## This file contains configuration settings for the following:
+##
+##   - redis
+##   - database
+##   - application logging
+##
 
 ## variables
 general:
@@ -24,16 +24,35 @@ redis:
     path: '/etc/redis/redis.conf'
 
 ## webserver
+##
+## @gunicorn:workers, the number of work processes should be between 2-4
+##     workers per core in the server.
+##
+##     http://docs.gunicorn.org/en/latest/run.html#commonly-used-arguments
+##
 webserver:
-    flask_log_path: '/log/webserver/flask.log'
+    flask:
+        log_path: '/log/webserver/flask.log'
+
+    gunicorn:
+        bind: 0.0.0.0
+        port: 5001
+        workers: 6
+        log_path: '/log/webserver/gunicorn.log'
+
+    nginx:
+        reverse_proxy:
+            vhost: 'machine-learning.com'
+            listen_port: 5000
+            proxy: 'http://localhost'
 
 ## application database
-#
-#  @host, defined from executed 'docker' command.
-#
-#  Note: when referencing a hash path value, remember to prefix the call with
-#       the above 'general: root' definition.
-#
+##
+## @host, defined from executed 'docker' command.
+##
+## Note: when referencing a hash path value, remember to prefix the call with
+##       the above 'general: root' definition.
+##
 database:
     host: 'localhost'
     name: 'db_machine_learning'
@@ -47,26 +66,27 @@ database:
     log_path: '/log/database'
 
 ## application logging: the possible logging levels are constrained by the
-#                      python 'logging' module.
-#
-#  @LOG_LEVEL, defines the application baseline (i.e. handler) level for logs.
-#      This means the logger level cannot exceed this baseline.
-#
-#      The following are supported 'LOG_LEVEL' values:
-#
-#      - ERROR
-#      - WARNING
-#      - INFO
-#      - DEBUG
-#
-#  Note: the specific log levels can be reviewed:
-#
-#        https://docs.python.org/2/library/logging.html#logging-levels
-#
-#  Note: when referencing a hash path value, remember to prefix the call with
-#       the above 'general: root' definition.
-#
+##                      python 'logging' module.
+##
+## @LOG_LEVEL, defines the application baseline (i.e. handler) level for logs.
+##     This means the logger level cannot exceed this baseline.
+##
+##     The following are supported 'LOG_LEVEL' values:
+##
+##     - ERROR
+##     - WARNING
+##     - INFO
+##     - DEBUG
+##
+## Note: the specific log levels can be reviewed:
+##
+##       https://docs.python.org/2/library/logging.html#logging-levels
+##
+## Note: when referencing a hash path value, remember to prefix the call with
+##       the above 'general: root' definition.
+##
 application:
+    security_key: 'change-this'
     model_type:
         - svm
         - svr

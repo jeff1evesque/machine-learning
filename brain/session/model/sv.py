@@ -1,7 +1,9 @@
 #!/usr/bin/python
 
-'''@sv
+'''
+
 This file generates an sv model.
+
 '''
 
 from flask import current_app
@@ -15,15 +17,18 @@ import json
 
 
 def sv_model(model, kernel_type, session_id, feature_request, list_error):
-    '''@sv_model
+    '''
+
     This method generates an sv (i.e. svm, or svr) model using feature data,
     retrieved from the database. The generated model, is then stored within the
     NoSQL datastore.
+
     @grouped_features, a matrix of observations, where each nested vector,
         or python list, is a collection of features within the containing
         observation.
     @encoded_labels, observation labels (dependent variable labels),
         encoded into a unique integer representation.
+
     '''
 
     # local variables

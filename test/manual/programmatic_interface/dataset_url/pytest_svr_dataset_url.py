@@ -1,4 +1,4 @@
-'''@pytest_svr_dataset_url
+'''
 
 This module will test the following sessions:
 
@@ -29,20 +29,22 @@ import requests
 import json
 import os.path
 
-endpoint_url = 'http://localhost:5000/load-data/'
+endpoint_url = 'http://localhost:5000/load-data'
 headers = {'Content-Type': 'application/json'}
 
 
 def get_sample_json(jsonfile, model_type):
-    '''@get_sample_json
+    '''
 
     Get a sample json dataset.
 
     '''
 
+    # local variables
     root = '/vagrant'
     json_dataset = None
 
+    # open file
     with open(
         root + '/' +
         os.path.join(
@@ -58,60 +60,82 @@ def get_sample_json(jsonfile, model_type):
         'r'
     ) as json_file:
         json_dataset = json.load(json_file)
+
     return json.dumps(json_dataset)
 
 
 def test_data_new():
-    '''@test_data_new
+    '''
 
     This method tests the 'data_new' session.
 
     '''
 
-    assert requests.post(
+    res = requests.post(
         endpoint_url,
         headers=headers,
         data=get_sample_json('svr-data-new.json', 'svr')
     )
 
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+
 
 def test_data_append():
-    '''@test_data_append
+    '''
 
     This method tests the 'data_append' session.
 
     '''
 
-    assert requests.post(
+    res = requests.post(
         endpoint_url,
         headers=headers,
         data=get_sample_json('svr-data-append.json', 'svr')
     )
 
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+
 
 def test_model_generate():
-    '''@test_model_generate
+    '''
 
     This method tests the 'model_generate' session.
 
     '''
 
-    assert requests.post(
+    res = requests.post(
         endpoint_url,
         headers=headers,
         data=get_sample_json('svr-model-generate.json', 'svr')
     )
 
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+
 
 def test_model_predict():
-    '''@test_model_predict
+    '''
 
     This method tests the 'model_predict' session.
 
     '''
 
-    assert requests.post(
+    res = requests.post(
         endpoint_url,
         headers=headers,
         data=get_sample_json('svr-model-predict.json', 'svr')
     )
+
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+    assert res.json['result']
+    assert res.json['result']['confidence']
+    assert res.json['result']['confidence']['score'] == '0.29007217517499473'
+    assert res.json['result']['model'] == 'svr'
+    assert res.json['result']['result'] == '37.7622192912'

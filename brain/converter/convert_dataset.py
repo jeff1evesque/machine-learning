@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@convert_dataset.py
+'''
 
 This file restructures only the supplied dataset(s).
 
@@ -16,7 +16,7 @@ from brain.converter.dataset.svr_xml_converter import svr_xml_converter
 
 
 class Convert_Dataset(object):
-    '''@Convert_Dataset
+    '''
 
     This class provides an interface to convert the supplied dataset(s),
     regardless of format (csv, json, xml), into a uniform dictionary object.
@@ -35,7 +35,7 @@ class Convert_Dataset(object):
     '''
 
     def __init__(self, raw_data, model_type, is_json=False):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -56,7 +56,7 @@ class Convert_Dataset(object):
         self.regression = current_app.config.get('MODEL_TYPE')[1]
 
     def csv_to_dict(self):
-        '''@csv_to_dict
+        '''
 
         This method converts the supplied csv file-object to a python
         dictionary.
@@ -81,7 +81,7 @@ class Convert_Dataset(object):
         return data['dataset']
 
     def json_to_dict(self):
-        '''@json_to_dict
+        '''
 
         This method converts the supplied json file-object to a python
         dictionary.
@@ -106,7 +106,7 @@ class Convert_Dataset(object):
         return data['dataset']
 
     def xml_to_dict(self):
-        '''@xml_to_dict
+        '''
 
         This method converts the supplied xml file-object to a python
         dictionary.
@@ -131,7 +131,7 @@ class Convert_Dataset(object):
         return data['dataset']
 
     def get_observation_labels(self):
-        '''@get_observation_labels
+        '''
 
         This method returns a unique list of (independent variable) labels
         that can be expected on any given observation instance. Since both
@@ -143,7 +143,7 @@ class Convert_Dataset(object):
         return self.observation_labels
 
     def get_feature_count(self):
-        '''@get_feature_count
+        '''
 
         This method returns the unique count of features that can be expected
         on any given observation instance.

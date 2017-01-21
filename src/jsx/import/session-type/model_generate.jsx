@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import checkValidString from './../validator/valid_string.js';
 import checkValidInt from './../validator/valid_int.js';
 import Spinner from './../general/spinner.jsx';
@@ -180,7 +181,7 @@ var ModelGenerate = React.createClass({
         this.mounted = true;
 
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-session/';
+        var ajaxEndpoint = '/retrieve-session';
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null

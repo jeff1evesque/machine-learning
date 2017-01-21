@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@model_predict
+'''
 
 This file receives data (i.e. settings) required to query from the NoSQL
 datastore, a previously stored SVM model, generated from 'model_generate.py'.
@@ -19,7 +19,7 @@ from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
 
 
 class Model_Predict(Base):
-    '''@Model_Predict
+    '''
 
     This class provides an interface to generate a prediction, based on a
     specified model. Specifically, a prediction can be obtained by using the
@@ -31,7 +31,7 @@ class Model_Predict(Base):
     '''
 
     def __init__(self, prediction_input):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables, using the
         superclass 'Base' constructor, along with the
@@ -55,7 +55,7 @@ class Model_Predict(Base):
         self.predictors = self.prediction_settings['prediction_input[]']
 
     def predict(self):
-        '''@predict
+        '''
 
         This method generates a prediction with respect to the implemented
         model, using the provided prediction feature input(s), and the stored

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-'''@restructure_settings
+'''
 
 This file restructures the supplied settings, required to generate, or operate
 on an existing model. The dataset is left untouched, and formatted within
@@ -10,7 +10,7 @@ on an existing model. The dataset is left untouched, and formatted within
 
 
 class Restructure_Settings(object):
-    '''@Restructure_Settings
+    '''
 
     This class provides an interface to restructure the supplied data into a
     consistent structure, which allows successive parsers to implement
@@ -21,7 +21,7 @@ class Restructure_Settings(object):
     '''
 
     def __init__(self, settings, dataset=None):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -35,7 +35,7 @@ class Restructure_Settings(object):
         self.type_programmatic = "<type 'dict'>"
 
     def restructure(self):
-        '''@restructure
+        '''
 
         This method restructures the supplied data, into a consistent
         dictionary format. The nested supplied dataset, is left untouched.
@@ -114,7 +114,7 @@ class Restructure_Settings(object):
         return {'data': data, 'error': None}
 
     def get_errors(self):
-        '''@get_errors
+        '''
 
         This method returns all errors pertaining to the instantiated class.
 

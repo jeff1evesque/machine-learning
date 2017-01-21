@@ -7,6 +7,8 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
+
 var Submit = React.createClass({
   // update 'state properties': allow parent component(s) to access properties
      formSubmit: function(event){

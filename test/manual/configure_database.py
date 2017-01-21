@@ -1,4 +1,4 @@
-'''@configure_database
+'''
 
 This module will truncate corresponding database tables, which allow manual
 unit tests to be run as many times as needed.
@@ -65,10 +65,8 @@ def configure_database():
             )
 
     # assert truncate succeeded
-    assert (
-        count_feature == 0 and
-        count_entity == 0 and
-        count_label == 0 and
-        count_svm == 0 and
-        count_svr == 0
-    )
+    assert count_feature == 0
+    assert count_entity == 0
+    assert count_label == 0
+    assert count_svm == 0
+    assert count_svr == 0

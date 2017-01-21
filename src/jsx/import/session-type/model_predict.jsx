@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import SupplyPredictors from '../input-data/supply_predictors.jsx';
 import checkValidInt from './../validator/valid_int.js';
 import Spinner from './../general/spinner.jsx';
@@ -121,7 +122,7 @@ var ModelPredict = React.createClass({
         this.mounted = true;
 
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-sv-model/';
+        var ajaxEndpoint = '/retrieve-sv-model';
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null

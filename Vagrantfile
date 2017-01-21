@@ -11,7 +11,11 @@ Vagrant.configure(2) do |config|
   # https://docs.vagrantup.com.
 
   ## Variables (ruby syntax)
-  required_plugins = %w(vagrant-r10k vagrant-vbguest vagrant-triggers vagrant-puppet-install)
+  atlas_repo       = 'jeff1evesque'
+  atlas_box        = 'trusty64'
+  box_version      = '1.0.0'
+
+  required_plugins = %w(vagrant-r10k vagrant-triggers vagrant-puppet-install)
   plugin_installed = false
   environment      = 'vagrant'
 
@@ -36,7 +40,10 @@ Vagrant.configure(2) do |config|
 
   ## Every Vagrant development environment requires a box. You can search for
   #  boxes at https://atlas.hashicorp.com/search.
-  config.vm.box = 'ubuntu/trusty64'
+  config.vm.box                        = "#{atlas_repo}/#{atlas_box}"
+  config.vm.box_download_checksum      = 'c26da6ba1c169bdc6e9168125ddb0525'
+  config.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{box_version}/providers/virtualbox.box"
+  config.vm.box_download_checksum_type = 'md5'
 
   ## Ensure puppet installed within guest
   config.puppet_install.puppet_version = '4.3.2'
@@ -46,6 +53,11 @@ Vagrant.configure(2) do |config|
   #  accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network 'forwarded_port', guest: 5000, host: 8080
   config.vm.network 'forwarded_port', guest: 443, host: 8585
+
+  ## increase RAM to ensure scrypt doesn't exhaust memory
+  config.vm.provider 'virtualbox' do |v|
+    v.customize ['modifyvm', :id, '--memory', '10000']
+  end
 
   ## Run r10k
   config.r10k.puppet_dir      = "puppet/environment/#{environment}"
@@ -176,6 +188,7 @@ Vagrant.configure(2) do |config|
     run 'rm -Rf interface/static/img'
     run 'rm -Rf interface/static/js'
     run 'rm -Rf puppet/environment/*/modules_contrib'
+    run 'rm -Rf src/jsx/node_modules'
     run 'rm -f src/js/.gitignore'
     run 'rm -f src/js/content.js'
     run 'find . -name "*.pyc" -type f -exec rm -r {} +'

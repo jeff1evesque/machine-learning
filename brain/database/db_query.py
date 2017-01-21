@@ -1,17 +1,16 @@
 #!/usr/bin/python
 
-'''@db_query
+'''
 
 This file contains various generic SQL-related methods.
 '''
 
 import MySQLdb as DB
-from log.logger import Logger
 from brain.database.db_settings import Database
 
 
 class SQL(object):
-    '''@SQL
+    '''
 
     This class provides an interface to connect, execute commands, and
     disconnect from a SQL database.  It explicitly inherits pythons 'new-style'
@@ -25,7 +24,7 @@ class SQL(object):
     '''
 
     def __init__(self, host=None, user=None, passwd=None):
-        '''@__init__
+        '''
 
         This constructor is responsible for defining class variables.
 
@@ -34,9 +33,6 @@ class SQL(object):
         self.db_settings = Database()
         self.list_error = []
         self.proceed = True
-
-        # database logger
-        self.logger = Logger(__name__, 'database', 'database', 'debug')
 
         # host address
         if host:
@@ -57,7 +53,7 @@ class SQL(object):
             self.passwd = self.db_settings.get_db_password()
 
     def sql_connect(self, database=None):
-        '''@sql_connect
+        '''
 
         This method is responsible for defining the necessary interface to
         connect to a SQL database.
@@ -80,10 +76,6 @@ class SQL(object):
                 )
             self.cursor = self.conn.cursor()
 
-            # log successful connection
-            if (self.cursor):
-                self.logger.log('database connected: success')
-
             return {
                 'status': True,
                 'error': None,
@@ -94,10 +86,6 @@ class SQL(object):
             self.proceed = False
             self.list_error.append(error)
 
-            # log unsuccessful connection
-            if (self.cursor):
-                self.logger.log('database connected: fail')
-
             return {
                 'status': False,
                 'error': self.list_error,
@@ -105,13 +93,14 @@ class SQL(object):
             }
 
     def sql_command(self, sql_statement, sql_type, sql_args=None):
-        '''@sql_connect
+        '''
 
         This method is responsible for defining the necessary interface to
         perform SQL commands.
 
         @sql_args, is a tuple used for argument substitution with the supplied
             'sql_statement'.
+
         '''
 
         if self.proceed:
@@ -125,12 +114,6 @@ class SQL(object):
                 elif sql_type == 'select':
                     result = self.cursor.fetchall()
 
-                # log transaction
-                arguments = sql_args if sql_args else 'None'
-                self.logger.log(
-                    'transaction: success, statement: %s, arguments: %s' %
-                    (sql_statement, arguments))
-
             except DB.Error, error:
                 self.conn.rollback()
                 self.list_error.append(error)
@@ -139,13 +122,6 @@ class SQL(object):
                     'error': self.list_error,
                     'result': None,
                 }
-
-                # log transaction
-                arguments = sql_args if sql_args else 'None'
-                self.logger.log(
-                    'transaction: success, statement' + sql_statement +
-                    ', arguments: ' + arguments
-                )
 
         if sql_type in ['insert', 'delete', 'update']:
             return {
@@ -161,7 +137,7 @@ class SQL(object):
             }
 
     def sql_disconnect(self):
-        '''@sql_disconnect
+        '''
 
         This method is responsible for defining the necessary interface to
         disconnect from a SQL database.
@@ -173,9 +149,6 @@ class SQL(object):
                 if self.conn:
                     self.conn.close()
 
-                    # log disconnection
-                    self.logger.log('database disconnected: success')
-
                     return {
                         'status': True,
                         'error': None,
@@ -184,9 +157,6 @@ class SQL(object):
             except DB.Error, error:
                 self.list_error.append(error)
 
-                # log disconnection
-                self.logger.log('database disconnected: fail')
-
                 return {
                     'status': False,
                     'error': self.list_error,
@@ -194,7 +164,7 @@ class SQL(object):
                 }
 
     def get_errors(self):
-        '''@get_errors
+        '''
 
         This method returns all errors pertaining to the instantiated class.
 

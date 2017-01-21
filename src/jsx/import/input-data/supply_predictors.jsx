@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
 import checkValidFloat from './../validator/valid_float.js';
 
 var SupplyPredictors = React.createClass({
@@ -85,7 +86,7 @@ var SupplyPredictors = React.createClass({
         this.mounted = true;
 
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-sv-features/';
+        var ajaxEndpoint = '/retrieve-sv-features';
         var ajaxData = {'model_id': this.props.selectedModelId};
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,

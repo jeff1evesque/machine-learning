@@ -7,26 +7,26 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import React from 'react';
+import { Link } from 'react-router'
 import SvgHome from '../../svg/svg_home.jsx';
 
 var MenuHome = React.createClass({
-  // callback for home page
-    clickHome: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
-      // return state to parent component
-        this.props.onChange({home: true});
+  // return state to parent component
+    menuClicked: function(event) {
+        this.props.onChange({menu_clicked: 'home'});
     },
   // triggered when 'state properties' change
     render: function(){
         return(
-            <a href='#'
+            <Link
+                to='/'
+                activeClassName='active'
                 className='icon home'
-                onClick={this.clickHome}
+                onClick={this.menuClicked}
             >
                 <SvgHome />
-            </a>
+            </Link>
         )
     }
 });

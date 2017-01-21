@@ -4,6 +4,7 @@
 !/brain/
 !/src/
 !/hiera/
+!/documentation/
 !.gitigore
 !hiera.yaml
 !.gitmodules
@@ -18,6 +19,7 @@
 !/test
 !/log/
 !*.dockerfile
+!.coveragerc
 
 # Ignore and don't commit the following directories
 *.sass-cache/

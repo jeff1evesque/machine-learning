@@ -9,7 +9,7 @@ services:
 ## environment variables
 env:
   global:
-    - DOCKER_VERSION=1.12.0-0~trusty
+    - DOCKER_VERSION=1.12.3-0~trusty
 
 ## build docker, install puppet (i.e. puppet parser validate)
 before_install:
@@ -35,11 +35,11 @@ before_install:
   - sudo /opt/puppetlabs/bin/puppet -V
 
 ## install packages for linting
-#
-#  @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
-#
-#  Note: unit testing is performed within the docker container, which is
-#        defined from the Dockerfile.
+##
+## @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
+##
+## Note: unit testing is performed within the docker container, which is
+##        defined from the Dockerfile.
 install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
   - pip install flake8==2.5.4
@@ -60,21 +60,23 @@ install:
   - gem install yaml-lint -v 0.0.7
   - npm install -g dockerlint@0.2.0
   - pip install restructuredtext_lint==0.17.2
+  - pip install python-coveralls==2.9.0
 
 ## implement linting / unit tests
-#
-#  @puppet-lint, the following issue needs to be checked if it has been
-#      resolved, so the '--no-ensure_first_param-check' abusive flag
-#      implementation (below) can be removed:
-#
-#      - https://github.com/rodjek/puppet-lint/issues/410
-#
-#  @docker run:
-#      -d, run container in background and print container ID
-#      -t, allocate pseudo-tty instead of default tty to running container
-#
-#  Note: unit testing is performed within the docker container, which is
-#        defined from the Dockerfile.
+##
+## @puppet-lint, the following issue needs to be checked if it has been
+##     resolved, so the '--no-ensure_first_param-check' abusive flag
+##     implementation (below) can be removed:
+##
+##     - https://github.com/rodjek/puppet-lint/issues/410
+##
+## @docker run:
+##     -d, run container in background and print container ID
+##     -t, allocate pseudo-tty instead of default tty to running container
+##
+## Note: unit testing is performed within the docker container, which is
+##       defined from the Dockerfile.
+##
 script:
   # lint codebase
   - flake8 .
@@ -113,6 +115,14 @@ script:
   - cat pytest.log
   - (! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
 
+  # acquire coverage results
+  #
+  # Note: more information regarding the '.coverage.docker' naming convention:
+  #
+  #       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
+  #
+  - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage.docker
+
   # check exit code: 'docker exec' will fail if the container has an exit code
   - docker exec -it webserver echo "'docker exec' only works on an active running container"
   - docker exec -it database echo "'docker exec' only works on an active running container"
@@ -120,3 +130,13 @@ script:
   
   # list all containers
   - docker ps -a
+
+## post build: the following commands are run after a successful build.
+##
+## Note: more information regarding the coverage-coverall implementation:
+##
+##       https://github.com/pytest-dev/pytest-cov/issues/146
+##
+after_success:
+  - coverage combine
+  - coveralls
