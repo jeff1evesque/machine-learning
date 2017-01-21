@@ -6,9 +6,9 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NavBar from './navigation/nav_bar.jsx';
-import UserMenu from './navigation/user_menu.jsx';
-import SupportVector from './content/support_vector.jsx';
+import NavBar from './navigation/nav-bar.jsx';
+import UserMenu from './navigation/user-menu.jsx';
+import SupportVector from './content/support-vector.jsx';
 import LoginState from './redux/container/login-container.jsx';
 import RegisterForm from './content/register.jsx';
 

@@ -1,5 +1,5 @@
 /**
- * supply_dataset_url.jss: url upload fieldset.
+ * supply-dataset-url.jss: url upload fieldset.
  *
  * @SupplyDatasetUrl, must be capitalized in order for reactjs to render it as
  *     a component. Otherwise, the variable is rendered as a dom node.
@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import checkValidUrl from './../validator/valid_url.js';
+import checkValidUrl from './../validator/valid-url.js';
 
 var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'

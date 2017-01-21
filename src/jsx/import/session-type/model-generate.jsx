@@ -1,5 +1,5 @@
 /**
- * model_generate.jsx: append 'model_generate' fieldset.
+ * model-generate.jsx: append 'model_generate' fieldset.
  *
  * @ModelGenerate, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
@@ -8,8 +8,8 @@
  */
 
 import React from 'react';
-import checkValidString from './../validator/valid_string.js';
-import checkValidInt from './../validator/valid_int.js';
+import checkValidString from './../validator/valid-string.js';
+import checkValidInt from './../validator/valid-int.js';
 import Spinner from './../general/spinner.jsx';
 
 var ModelGenerate = React.createClass({

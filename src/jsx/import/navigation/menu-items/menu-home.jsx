@@ -1,5 +1,5 @@
 /**
- * menu_home.jsx: home menu markup.
+ * menu-home.jsx: home menu markup.
  *
  * @MenuHome, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
@@ -9,7 +9,7 @@
 
 import React from 'react';
 import { Link } from 'react-router'
-import SvgHome from '../../svg/svg_home.jsx';
+import SvgHome from '../../svg/svg-home.jsx';
 
 var MenuHome = React.createClass({
   // return state to parent component

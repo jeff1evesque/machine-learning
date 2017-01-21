@@ -1,5 +1,5 @@
 /**
- * supply_dataset_file.jsx: file upload fieldset.
+ * supply-dataset-file.jsx: file upload fieldset.
  *
  * @SupplyDatasetFile, must be capitalized in order for reactjs to render it as
  *     a component. Otherwise, the variable is rendered as a dom node.
@@ -10,7 +10,7 @@
  */
 
 import React from 'react';
-import checkValidFile from './../validator/valid_file.js';
+import checkValidFile from './../validator/valid-file.js';
 
 var SupplyDatasetFile = React.createClass({
   // initial 'state properties'

@@ -1,13 +1,13 @@
 /**
- * user_menu.jsx: menu for logged-in, and anonymous users.
+ * user-menu.jsx: menu for logged-in, and anonymous users.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
 import React from 'react';
-import MenuHome from './menu-items/menu_home.jsx';
+import MenuHome from './menu-items/menu-home.jsx';
 import MenuLoginState from '../redux/container/menu-login-container.jsx';
-import MenuRegister from './menu-items/menu_register.jsx';
+import MenuRegister from './menu-items/menu-register.jsx';
 
 var UserMenu = React.createClass({
   // initial 'state properties'

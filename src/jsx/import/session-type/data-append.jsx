@@ -1,5 +1,5 @@
 /**
- * data_append.jsx: append 'data_append' fieldset.
+ * data-append.jsx: append 'data_append' fieldset.
  *
  * @DataAppend, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
@@ -11,11 +11,11 @@
  */
 
 import React from 'react';
-import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
-import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
-import checkValidString from './../validator/valid_string.js';
-import checkValidInt from './../validator/valid_int.js';
-import ModelType from './../model/model_type.jsx';
+import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
+import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
+import checkValidString from './../validator/valid-string.js';
+import checkValidInt from './../validator/valid-int.js';
+import ModelType from './../model/model-type.jsx';
 import Spinner from './../general/spinner.jsx';
 
 var DataAppend = React.createClass({

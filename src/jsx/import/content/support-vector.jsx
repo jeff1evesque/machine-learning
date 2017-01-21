@@ -1,5 +1,5 @@
 /**
- * support_vector.jsx: initial form.
+ * support-vector.jsx: initial form.
  *
  * @SupportVector, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
@@ -8,14 +8,14 @@
  */
 
 import React from 'react';
-import ModelGenerate from '../session-type/model_generate.jsx';
-import ModelPredict from '../session-type/model_predict.jsx';
-import DataNew from '../session-type/data_new.jsx';
-import DataAppend from '../session-type/data_append.jsx';
+import ModelGenerate from '../session-type/model-generate.jsx';
+import ModelPredict from '../session-type/model-predict.jsx';
+import DataNew from '../session-type/data-new.jsx';
+import DataAppend from '../session-type/data-append.jsx';
 import Submit from '../general/submit.jsx';
-import ResultDisplay from '../result/result_display.jsx';
+import ResultDisplay from '../result/result-display.jsx';
 import Spinner from '../general/spinner.jsx';
-import checkValidString from '../validator/valid_string.js';
+import checkValidString from '../validator/valid-string.js';
 
 var SupportVector = React.createClass({
   // initial 'state properties'
