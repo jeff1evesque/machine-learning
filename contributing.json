@@ -41,8 +41,8 @@
         "name_must_be_longer_than": 4,
         "name_must_be_shorter_than": 15,
         "name_must_include_prefix": {
-            "prefixes": ["feature-", "bug-", "remove-"]
-        },
-        "name_must_include_github_issue": true
+            "prefixes": ["feature", "bug", "remove"],
+            "require_after_prefix": "-"
+        }
     }
 }
