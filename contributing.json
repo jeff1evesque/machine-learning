@@ -7,7 +7,7 @@
         "subject_lines_must_be_shorter_than": 50,
         "subject_must_be_single_line": true,
         "subject_must_include_prefix": {
-            "prefixes": "#"
+            "prefixes": ["#"]
         },
         "subject_must_include_github_issue": "start",
         "subject_must_be_in_tense": "imperative",
@@ -20,7 +20,7 @@
         "subject_must_be_shorter_than": 50,
         "subject_must_be_in_tense": "imperative",
         "subject_must_include_prefix": {
-            "prefixes": "#"
+            "prefixes": ["#"]
         },
         "subject_must_include_github_issue": "start",
         "subject_must_not_end_with_dot": true,
@@ -41,7 +41,7 @@
         "name_must_be_longer_than": 4,
         "name_must_be_shorter_than": 15,
         "name_must_include_prefix": {
-            "prefixes": "#"
+            "prefixes": ["feature-", "bug-", "remove-"]
         },
         "name_must_include_github_issue": true
     }
