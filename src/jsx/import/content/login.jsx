@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
 import { saveState } from '../redux/load-storage.jsx';
@@ -101,6 +102,13 @@ var LoginForm = React.createClass({
   // triggered when 'state properties' change
     render: function() {
         var AjaxSpinner = this.getSpinner();
+        var loggedInUser = this.props.getState();
+        console.log(loggedInUser);
+
+      // redirect to homepage if logged-in
+        if (loggedInUser) {
+            browserHistory.push('/');
+        }
 
         return(
             <div className='main-full-span login-form'>
