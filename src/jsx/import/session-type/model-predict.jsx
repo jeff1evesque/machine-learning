@@ -1,5 +1,5 @@
 /**
- * model_predict.jsx: append 'model_predict' fieldset.
+ * model-predict.jsx: append 'model_predict' fieldset.
  *
  * @ModelPredict, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
@@ -8,8 +8,8 @@
  */
 
 import React from 'react';
-import SupplyPredictors from '../input-data/supply_predictors.jsx';
-import checkValidInt from './../validator/valid_int.js';
+import SupplyPredictors from '../input-data/supply-predictors.jsx';
+import checkValidInt from './../validator/valid-int.js';
 import Spinner from './../general/spinner.jsx';
 
 var ModelPredict = React.createClass({

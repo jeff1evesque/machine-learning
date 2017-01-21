@@ -1,5 +1,5 @@
 /**
- * data_new.jsx: append 'data_new' fieldset.
+ * data-new.jsx: append 'data_new' fieldset.
  *
  * @DataNew, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
@@ -8,10 +8,10 @@
  */
 
 import React from 'react';
-import SupplyDatasetFile from '../input-data/supply_dataset_file.jsx';
-import SupplyDatasetUrl from '../input-data/supply_dataset_url.jsx';
-import checkValidString from './../validator/valid_string.js';
-import ModelType from './../model/model_type.jsx';
+import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
+import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
+import checkValidString from './../validator/valid-string.js';
+import ModelType from './../model/model-type.jsx';
 
 var DataNew = React.createClass({
   // initial 'state properties'

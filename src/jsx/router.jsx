@@ -7,11 +7,11 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import MainContent from './import/main.jsx';
-import DataNew from './import/session-type/data_new.jsx';
-import DataAppend from './import/session-type/data_append.jsx';
-import ModelGenerate from './import/session-type/model_generate.jsx';
-import ModelPredict from './import/session-type/model_predict.jsx';
-import SupportVector from './import/content/support_vector.jsx';
+import DataNew from './import/session-type/data-new.jsx';
+import DataAppend from './import/session-type/data-append.jsx';
+import ModelGenerate from './import/session-type/model-generate.jsx';
+import ModelPredict from './import/session-type/model-predict.jsx';
+import SupportVector from './import/content/support-vector.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
 import RegisterForm from './import/content/register.jsx';
 

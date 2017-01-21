@@ -1,5 +1,5 @@
 /**
- * menu_login.jsx: login menu markup.
+ * menu-login.jsx: login menu markup.
  *
  * @MenuLogin, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.

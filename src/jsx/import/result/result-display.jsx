@@ -1,5 +1,5 @@
 /**
- * result_display.jsx: append form submission result.
+ * result-display.jsx: append form submission result.
  *
  * @ResultDisplay, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
@@ -8,8 +8,8 @@
  */
 
 import React from 'react';
-import checkValidString from './../validator/valid_string.js';
-import checkValidFloat from './../validator/valid_float.js';
+import checkValidString from './../validator/valid-string.js';
+import checkValidFloat from './../validator/valid-float.js';
 
 var ResultDisplay = React.createClass({
   // triggered when 'state properties' change

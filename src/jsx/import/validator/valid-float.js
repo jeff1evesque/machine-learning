@@ -1,5 +1,5 @@
 /**
- * valid_float.js: check if provided argument is float type.
+ * valid-float.js: check if provided argument is float type.
  */
 function validator(value) {
   // convert to string

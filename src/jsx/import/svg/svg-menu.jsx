@@ -1,5 +1,5 @@
 /**
- * svg_menu.jsx: append menu toggle icon.
+ * svg-menu.jsx: append menu toggle icon.
  *
  * @SvgMenu, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.

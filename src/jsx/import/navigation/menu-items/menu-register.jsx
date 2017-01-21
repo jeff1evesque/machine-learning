@@ -1,5 +1,5 @@
 /**
- * menu_register.jsx: register menu markup.
+ * menu-register.jsx: register menu markup.
  *
  * @MenuRegister, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.

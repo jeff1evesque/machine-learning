@@ -1,5 +1,5 @@
 /**
- * ajax_caller.js: an array of feature (independent variables) names, and the
+ * ajax-caller.js: an array of feature (independent variables) names, and the
  *                 generalized count of features that can be expected within an
  *                 observation, is inserted to respective DOM elements.
  *

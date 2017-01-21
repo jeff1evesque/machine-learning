@@ -1,11 +1,11 @@
 /**
- * model_type.jsx: append list of model types.
+ * model-type.jsx: append list of model types.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
 import React from 'react';
-import checkValidString from './../validator/valid_string.js';
+import checkValidString from './../validator/valid-string.js';
 
 var ModelType = React.createClass({
   // initial 'state properties'

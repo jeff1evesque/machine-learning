@@ -1,5 +1,5 @@
 /**
- * svg_home.jsx: append home button.
+ * svg-home.jsx: append home button.
  *
  * @SvgHome, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.

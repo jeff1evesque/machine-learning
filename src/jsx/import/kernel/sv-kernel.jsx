@@ -1,5 +1,5 @@
 /**
- * sv_kernel.jsx: append list of support vector kernels.
+ * sv-kernel.jsx: append list of support vector kernels.
  *
  * @SupportVectorKernels, must be capitalized in order for reactjs to render it
  *     as a component. Otherwise, the variable is rendered as a dom node.
@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import checkValidString from './../validator/valid_string.js';
+import checkValidString from './../validator/valid-string.js';
 
 var SupportVectorKernels = React.createClass({
   // initial 'state properties'

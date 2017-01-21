@@ -1,5 +1,5 @@
 /**
- * navbar.jsx: secondary menu..
+ * nav-bar.jsx: secondary menu..
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
