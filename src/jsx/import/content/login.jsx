@@ -102,11 +102,10 @@ var LoginForm = React.createClass({
   // triggered when 'state properties' change
     render: function() {
         var AjaxSpinner = this.getSpinner();
-        var loggedInUser = this.props.getState();
-        console.log(loggedInUser);
+        var username = this.props.username;
 
       // redirect to homepage if logged-in
-        if (loggedInUser) {
+        if (username && username != 'anonymous') {
             browserHistory.push('/');
         }
 
