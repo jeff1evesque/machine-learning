@@ -112,7 +112,10 @@ var LoginForm = React.createClass({
     },
     componentWillMount: function() {
       // load username from redux: user already logged-in
-        if (this.props && this.props.username) {
+        if (
+            this.props &&
+            this.props.username != 'anonymous'
+        ) {
             var username = this.props.username;
         }
       // load username from sessionStorage: maybe browser reloaded
