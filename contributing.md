@@ -81,7 +81,7 @@ The following git commit message, is an acceptable syntax:
 
 The message should *always* be prefixed with an issue number that the commit
  corresponds to. When all components are factored in, the commit message should
- *never* be more than 50 characters long, *never* be in a possessive tone, and
+ *never* be more than 65 characters long, *never* be in a possessive tone, and
  any references to a file, or method *should* be wrapped by a single quote.
 
 **Note:** commits should be granular, such that, every commit corresponds to a

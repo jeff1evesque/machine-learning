@@ -12,6 +12,8 @@
  */
 
 import React from 'react';
+import { browserHistory } from 'react-router';
+import { loadState } from '../redux/load-storage.jsx';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
 import { saveState } from '../redux/load-storage.jsx';
@@ -67,19 +69,29 @@ var LoginForm = React.createClass({
                         asynchObject.username &&
                         asynchObject.status === 0
                     ) {
+                      // local variables
+                        var username = asynchObject.username
+
                       // update redux store
-                        var action = setLoginState(asynchObject.username);
+                        var action = setLoginState(username);
                         this.props.dispatch(action);
 
                       // store username into sessionStorage
-                        saveState('username', asynchObject.username);
+                        saveState('username', username);
                     }
                 }
                 else {
                     this.setState({ajax_done_result: null});
                 }
+
             // boolean to hide ajax spinner
                 this.setState({display_spinner: false});
+
+            // redirect to homepage if logged-in
+                if (username && username != 'anonymous') {
+                    browserHistory.push('/');
+                }
+
             }.bind(this),
           // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
@@ -96,6 +108,31 @@ var LoginForm = React.createClass({
             }.bind(this),
           // pass ajax arguments
             ajaxArguments);
+        }
+    },
+    componentWillMount: function() {
+      // load username from redux: user already logged-in
+        if (
+            this.props &&
+            this.props.username != 'anonymous'
+        ) {
+            var username = this.props.username;
+        }
+      // load username from sessionStorage: maybe browser reloaded
+        else if (
+            this.props &&
+            this.props.username == 'anonymous' &&
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+            var username = loadState('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+        }
+
+      // redirect to homepage if logged-in
+        if (username && username != 'anonymous') {
+            browserHistory.push('/');
         }
     },
   // triggered when 'state properties' change

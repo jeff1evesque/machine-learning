@@ -52,7 +52,7 @@ var MainContent = React.createClass({
             return NavBar;
         }
         else {
-            return <span />;
+            return 'span';
         }
     },
   // display result
