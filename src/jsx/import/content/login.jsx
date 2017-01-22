@@ -13,6 +13,7 @@
 
 import React from 'react';
 import { browserHistory } from 'react-router';
+import { loadState } from '../../redux/load-storage.jsx';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
 import { saveState } from '../redux/load-storage.jsx';
@@ -88,8 +89,6 @@ var LoginForm = React.createClass({
 
             // redirect to homepage if logged-in
                 if (username && username != 'anonymous') {
-                    console.log(username);
-                    console.log(typeof username);
                     browserHistory.push('/');
                 }
 
@@ -112,8 +111,21 @@ var LoginForm = React.createClass({
         }
     },
     componentWillMount: function() {
-      // local variables
-        var username = this.props.username;
+      // load username from redux: user already logged-in
+        if (this.props && this.props.username) {
+            var username = this.props.username;
+        }
+      // load username from sessionStorage: maybe browser reloaded
+        else if (
+            this.props &&
+            this.props.username == 'anonymous' &&
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+            var username = loadState('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+        }
 
       // redirect to homepage if logged-in
         if (username && username != 'anonymous') {
