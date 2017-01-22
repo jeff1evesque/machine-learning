@@ -12,7 +12,6 @@
  */
 
 import React from 'react';
-import { browserHistory } from 'react-router';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
 import { saveState } from '../redux/load-storage.jsx';
@@ -68,19 +67,31 @@ var LoginForm = React.createClass({
                         asynchObject.username &&
                         asynchObject.status === 0
                     ) {
+                      // local variables
+                        var username = asynchObject.username
+
                       // update redux store
-                        var action = setLoginState(asynchObject.username);
+                        var action = setLoginState(username);
                         this.props.dispatch(action);
 
                       // store username into sessionStorage
-                        saveState('username', asynchObject.username);
+                        saveState('username', username);
                     }
                 }
                 else {
                     this.setState({ajax_done_result: null});
                 }
+
             // boolean to hide ajax spinner
                 this.setState({display_spinner: false});
+
+            // redirect to homepage if logged-in
+                if (username && username != 'anonymous') {
+                    console.log(username);
+                    console.log(typeof username);
+                    this.props.router.push('/');
+                }
+
             }.bind(this),
           // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
@@ -99,15 +110,18 @@ var LoginForm = React.createClass({
             ajaxArguments);
         }
     },
-  // triggered when 'state properties' change
-    render: function() {
-        var AjaxSpinner = this.getSpinner();
+    componentWillMount: function() {
+      // local variables
         var username = this.props.username;
 
       // redirect to homepage if logged-in
         if (username && username != 'anonymous') {
-            browserHistory.push('/');
+            this.props.router.push('/');
         }
+    },
+  // triggered when 'state properties' change
+    render: function() {
+        var AjaxSpinner = this.getSpinner();
 
         return(
             <div className='main-full-span login-form'>
