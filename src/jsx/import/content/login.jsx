@@ -12,6 +12,7 @@
  */
 
 import React from 'react';
+import { browserHistory } from 'react-router';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
 import { saveState } from '../redux/load-storage.jsx';
@@ -89,7 +90,7 @@ var LoginForm = React.createClass({
                 if (username && username != 'anonymous') {
                     console.log(username);
                     console.log(typeof username);
-                    this.props.router.push('/');
+                    browserHistory.push('/');
                 }
 
             }.bind(this),
@@ -116,7 +117,7 @@ var LoginForm = React.createClass({
 
       // redirect to homepage if logged-in
         if (username && username != 'anonymous') {
-            this.props.router.push('/');
+            browserHistory.push('/');
         }
     },
   // triggered when 'state properties' change
