@@ -105,7 +105,7 @@ var LoginForm = React.createClass({
             ajaxArguments);
         }
     },
-    shouldComponentUpdate: function() {
+    componentDidUpdate: function() {
       // redirect to homepage if logged-in
         if (
             this.props &&
