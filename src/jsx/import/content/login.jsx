@@ -87,6 +87,11 @@ var LoginForm = React.createClass({
             // boolean to hide ajax spinner
                 this.setState({display_spinner: false});
 
+            // redirect to homepage if logged-in
+                if (username && username != 'anonymous') {
+                    browserHistory.push('/');
+                }
+
             }.bind(this),
           // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
@@ -103,15 +108,6 @@ var LoginForm = React.createClass({
             }.bind(this),
           // pass ajax arguments
             ajaxArguments);
-        }
-    },
-    componentDidUpdate: function() {
-      // redirect to homepage if logged-in
-        if (
-            this.props &&
-            this.props.username != 'anonymous'
-        ) {
-            browserHistory.push('/');
         }
     },
     componentWillMount: function() {
