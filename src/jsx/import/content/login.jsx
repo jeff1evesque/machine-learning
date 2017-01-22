@@ -13,7 +13,7 @@
 
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { loadState } from '../../redux/load-storage.jsx';
+import { loadState } from '../redux/load-storage.jsx';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
 import { saveState } from '../redux/load-storage.jsx';
