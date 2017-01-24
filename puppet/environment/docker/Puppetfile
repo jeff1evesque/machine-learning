@@ -9,7 +9,8 @@ mod 'stdlib',
 
 ## Install Module: apt (from master)
 mod 'apt',
-  :git => 'https://github.com/puppetlabs/puppetlabs-apt.git'
+  :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
+  :ref => '2.3.0'
 
 ## Install Module: nodejs
 mod 'nodejs',
@@ -44,7 +45,8 @@ mod 'sys',
 ## Install Module: python (from master), which includes pip, devel,
 #                  flask, requests, pipx (enhanced pip).
 mod 'python',
-  :git => 'https://github.com/counsyl/puppet-python.git'
+  :git => 'https://github.com/counsyl/puppet-python.git',
+  :ref => '0.9.9'
 
 ## Install Module: timezone
 mod 'timezone',
