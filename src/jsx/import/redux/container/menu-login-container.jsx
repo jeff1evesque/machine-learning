@@ -1,5 +1,5 @@
 /**
- * login-container.jsx: redux store for login, and logout processes.
+ * menu-login-container.jsx: redux store for login, and logout processes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
