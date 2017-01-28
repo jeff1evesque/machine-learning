@@ -13,7 +13,7 @@ import ModelGenerate from './import/session-type/model-generate.jsx';
 import ModelPredict from './import/session-type/model-predict.jsx';
 import SupportVector from './import/content/support-vector.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
-import RegisterForm from './import/content/register.jsx';
+import RegisterState from './import/redux/container/register-container.jsx';
 
 // constant: analysis layout
 const AnalysisLayout = (props) => (
@@ -41,7 +41,7 @@ const LoginLayout = (props) => (
 // constant: register layout
 const RegisterLayout = (props) => (
     <div className='main-full-span register-form'>
-        <RegisterForm />
+        <RegisterState />
     </div>
 );
 
