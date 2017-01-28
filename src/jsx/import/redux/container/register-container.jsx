@@ -20,7 +20,7 @@ const mapStateToProps = (state) => {
 }
 
 // pass selected properties from redux state tree to component
-const MenuLoginState = connect(
+const RegisterState = connect(
     mapStateToProps
 )(RegisterForm)
 
