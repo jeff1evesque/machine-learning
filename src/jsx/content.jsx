@@ -16,6 +16,20 @@ import NavBar from './import/navigation/nav-bar.jsx';
 import UserMenu from './import/navigation/user-menu.jsx';
 import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
+import Home from './import/content/home.jsx';
+
+var GeneralContent = React.createClass({
+  // display result
+    render: function() {
+        return(
+            <MainContent
+                renderNavBar={navbar}
+                componentType={componentName}
+                sessionType={displayName}
+            />
+        );
+    }
+});
 
 var Page = React.createClass({
   // initial 'state properties'
@@ -23,6 +37,7 @@ var Page = React.createClass({
         return {
             render_subpage: 'SupportVector',
             display_name: 'none',
+            render_home: true,
         };
     },
   // update 'state properties': click event has not 'target'
@@ -49,47 +64,63 @@ var Page = React.createClass({
             return true;
         }
     },
-  // display result
-    render: function() {
-      // local variables
-        var navbar = this.renderNavBar();
-
-        if (
-            this.props &&
-            this.props.children &&
-            this.props.children.props
-        ) {
-            var property = this.props.children.props;
-        }
-
-      // page assignment: login, registration
-        if (
-            property &&
-            property.route &&
-            property.route.component &&
-            property.route.component.name
-        ) {
-            var displayName = this.state.display_name;
-            var componentName = property.route.component.name;
-
-          // session assignment: analysis
-            if (
-                property &&
-                property.children &&
-                property.children.props &&
-                property.children.props.route &&
-                property.children.props.route.component &&
-                property.children.props.route.component.displayName
-            ) {
-                var route = property.children.props.route;
-                var displayName = route.component.displayName;
-                var componentName = property.route.component.name;
-            }
+  // main content or homepage
+    renderContent: function() {
+        if (this.state.render_home) {
+            var SelectedContent = <Home />;
         }
         else {
-            var displayName = this.state.display_name;
-            var componentName = this.state.component_name;
+            var navbar = this.renderNavBar();
+
+            if (
+                this.props &&
+                this.props.children &&
+                this.props.children.props
+            ) {
+                var property = this.props.children.props;
+            }
+
+          // page assignment: login, registration
+            if (
+                property &&
+                property.route &&
+                property.route.component &&
+                property.route.component.name
+            ) {
+                var displayName = this.state.display_name;
+                var componentName = property.route.component.name;
+
+              // session assignment: analysis
+                if (
+                    property &&
+                    property.children &&
+                    property.children.props &&
+                    property.children.props.route &&
+                    property.children.props.route.component &&
+                    property.children.props.route.component.displayName
+                ) {
+                    var route = property.children.props.route;
+                    var displayName = route.component.displayName;
+                    var componentName = property.route.component.name;
+                }
+            }
+            else {
+                var displayName = this.state.display_name;
+                var componentName = this.state.component_name;
+            }
+
+            var SelectedContent = <GeneralContent
+                                      renderNavBar={navbar}
+                                      componentType={componentName}
+                                      sessionType={displayName}
+                                  />;
         }
+
+        return SelectedContent;
+    },
+  // display result
+    render: function() {
+        var SelectedContent = this.renderContent();
 
         return(
             <div className='container-inner'>
@@ -97,11 +128,7 @@ var Page = React.createClass({
                     <UserMenu onChange={this.setClickType} />
                 </div>
 
-                <MainContent
-                    renderNavBar={navbar}
-                    componentType={componentName}
-                    sessionType={displayName}
-                />
+                <SelectedContent />
             </div>
         );
     }
