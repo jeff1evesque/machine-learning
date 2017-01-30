@@ -16,7 +16,7 @@ import NavBar from './import/navigation/nav-bar.jsx';
 import UserMenu from './import/navigation/user-menu.jsx';
 import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
-import Home from './import/content/home.jsx';
+import Home from './import/content/home-page.jsx';
 
 var GeneralContent = React.createClass({
   // display result
