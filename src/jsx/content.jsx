@@ -49,29 +49,6 @@ var Page = React.createClass({
             return true;
         }
     },
-    componentDidMount: function() {
-        if (
-            this.props &&
-            this.props.children &&
-            this.props.children.props &&
-            this.props.children.props.children &&
-            this.props.children.props.children.props &&
-            this.props.children.props.children.props.route &&
-            this.props.children.props.children.props.route.component &&
-            this.props.children.props.children.props.route.component.name
-        ) {
-            var property = this.props.children.props.children.props;
-            var componentName = property.route.component.name;
-
-            if (
-                componentName == 'LoginLayout' ||
-                componentName == 'RegisterLayout'
-            ) {
-                this.setState({component_name: componentName});
-                this.setState({display_name: 'none'});
-            }
-        }
-    },
   // display result
     render: function() {
       // local variables
