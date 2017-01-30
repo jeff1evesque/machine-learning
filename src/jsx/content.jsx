@@ -80,11 +80,9 @@ var Page = React.createClass({
         if (
             this.props &&
             this.props.children &&
-            this.props.children.props &&
-            this.props.children.props.children &&
-            this.props.children.props.children.props
+            this.props.children.props
         ) {
-            var property = this.props.children.props.children.props;
+            var property = this.props.children.props;
         }
 
       // page assignment: login, registration
