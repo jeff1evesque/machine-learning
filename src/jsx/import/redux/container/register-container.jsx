@@ -19,9 +19,17 @@ const mapStateToProps = (state) => {
     }
 }
 
+// wraps each function of the object to be dispatch callable
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatch: dispatch,
+    }
+}
+
 // pass selected properties from redux state tree to component
 const RegisterState = connect(
-    mapStateToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(RegisterForm)
 
 // indicate which class can be exported, and instantiated via 'require'
