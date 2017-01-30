@@ -10,7 +10,7 @@ import NavBar from './navigation/nav-bar.jsx';
 import UserMenu from './navigation/user-menu.jsx';
 import SupportVector from './content/support-vector.jsx';
 import LoginState from './redux/container/login-container.jsx';
-import RegisterForm from './content/register.jsx';
+import RegisterState from './redux/container/register-container.jsx';
 
 var SvContainer = React.createClass({
   // display result
@@ -39,7 +39,7 @@ var RegisterLayout = React.createClass({
     render: function() {
         return(
             <div className='main-full-span register-form'>
-                <RegisterForm />
+                <RegisterState />
             </div>
         );
     }
