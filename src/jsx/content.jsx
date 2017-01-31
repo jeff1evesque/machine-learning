@@ -16,7 +16,7 @@ import NavBar from './import/navigation/nav-bar.jsx';
 import UserMenu from './import/navigation/user-menu.jsx';
 import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
-import Home from './import/content/home-page.jsx';
+import HomePage from './import/content/home-page.jsx';
 
 var GeneralContent = React.createClass({
   // display result
@@ -37,7 +37,6 @@ var Page = React.createClass({
         return {
             render_subpage: 'SupportVector',
             display_name: 'none',
-            render_home: true,
         };
     },
   // update 'state properties': click event has not 'target'
@@ -66,19 +65,14 @@ var Page = React.createClass({
     },
   // main content or homepage
     renderContent: function() {
-        if (this.state.render_home) {
-            var SelectedContent = <Home />;
-        }
-        else {
-            var navbar = this.renderNavBar();
 
-            if (
-                this.props &&
-                this.props.children &&
-                this.props.children.props
-            ) {
-                var property = this.props.children.props;
-            }
+        if (
+            this.props &&
+            this.props.children &&
+            this.props.children.props
+        ) {
+            var navbar = this.renderNavBar();
+            var property = this.props.children.props;
 
           // page assignment: login, registration
             if (
@@ -114,6 +108,9 @@ var Page = React.createClass({
                                       componentType={componentName}
                                       sessionType={displayName}
                                   />;
+        }
+        else {
+            var SelectedContent = <HomePage />;
         }
 
         return SelectedContent;
