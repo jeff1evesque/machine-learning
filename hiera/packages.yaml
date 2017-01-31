@@ -8,7 +8,7 @@ development:
         inotify-tools: '3.14-1ubuntu1'
         redis-server: '2:2.8.4-2'
         python-dev: '2.7.5-5ubuntu3'
-        libssl-dev: '1.0.1f-1ubuntu2.21'
+        libssl-dev: '1.0.1f-1ubuntu2.22'
         python-numpy: '1:1.8.2-0ubuntu0.1'
         python-scipy: '0.13.3-1build1'
         libatlas-dev: '3.10.1-4'
