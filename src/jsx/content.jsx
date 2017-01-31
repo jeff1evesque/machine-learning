@@ -104,7 +104,7 @@ var Page = React.createClass({
     },
   // display result
     render: function() {
-        var SelectedContent = this.renderContent();
+        var selectedContent = this.renderContent();
 
         return(
             <div className='container-inner'>
@@ -112,7 +112,7 @@ var Page = React.createClass({
                     <UserMenu onChange={this.setClickType} />
                 </div>
 
-                {SelectedContent}
+                {selectedContent}
             </div>
         );
     }
