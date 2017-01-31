@@ -1,7 +1,7 @@
 BSD License
 ====================
 
-_Copyright © 2015-2016, Jeffrey Levesque_
+_Copyright © 2015-2017, Jeffrey Levesque_
 _All rights reserved._
 
 Redistribution and use in source and binary forms, with or without
