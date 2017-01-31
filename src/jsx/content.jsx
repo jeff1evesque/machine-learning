@@ -128,7 +128,7 @@ var Page = React.createClass({
                     <UserMenu onChange={this.setClickType} />
                 </div>
 
-                <SelectedContent />
+                {SelectedContent}
             </div>
         );
     }
