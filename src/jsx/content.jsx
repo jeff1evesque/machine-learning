@@ -18,19 +18,6 @@ import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
 import HomePage from './import/content/home-page.jsx';
 
-var GeneralContent = React.createClass({
-  // display result
-    render: function() {
-        return(
-            <MainContent
-                renderNavBar={navbar}
-                componentType={componentName}
-                sessionType={displayName}
-            />
-        );
-    }
-});
-
 var Page = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
@@ -103,7 +90,7 @@ var Page = React.createClass({
                 var componentName = this.state.component_name;
             }
 
-            var SelectedContent = <GeneralContent
+            var SelectedContent = <MainContent
                                       renderNavBar={navbar}
                                       componentType={componentName}
                                       sessionType={displayName}
