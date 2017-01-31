@@ -22,7 +22,7 @@ var HomePage = React.createClass({
                 <Link
                     to='/session'
                     activeClassName='active'
-                    className='icon home'
+                    className='btn mn-2'
                     onClick={this.menuClicked}
                 >
                 Begin Analysis
