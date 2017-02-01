@@ -41,6 +41,14 @@ var MenuLogin = React.createClass({
     },
     componentDidMount: function() {
         if (
+            this.props &&
+            this.props.username != 'anonymous' &&
+        ) {
+          // update component states
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
+        }
+        else if (
             loadState('username') &&
             String(loadState('username')) != 'anonymous'
         ) {
