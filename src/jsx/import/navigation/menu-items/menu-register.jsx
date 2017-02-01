@@ -21,6 +21,13 @@ var MenuRegister = React.createClass({
     },
     componentDidMount: function() {
         if (
+            this.props &&
+            this.props.username != 'anonymous'
+        ) {
+          // update component states
+            this.setState({show_button: false});
+        }
+        else if (
             loadState('username') &&
             String(loadState('username')) != 'anonymous'
         ) {
@@ -46,19 +53,17 @@ var MenuRegister = React.createClass({
                        onClick={this.menuClicked}
                    >
                        <span>Sign up</span>
-                   </Link>
+                   </Link>;
         }
         else {
-            return 'span';
+            return <span />;
         }
     },
   // triggered when 'state properties' change
     render: function(){
         var selectedContent = this.renderContent();
 
-        return(
-            {selectedContent}
-        )
+        return(selectedContent);
     }
 });
 
