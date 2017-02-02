@@ -39,7 +39,7 @@ var MenuLogin = React.createClass({
       // property indication what links to display
         this.props.onChange({menu_clicked: 'login'});
     },
-    componentDidMount: function() {
+    componentDidUpdate: function() {
         if (
             this.props &&
             this.props.username == 'undefined'
@@ -51,7 +51,43 @@ var MenuLogin = React.createClass({
         else if (
             this.props &&
             this.props.username &&
-            this.props.username != 'anonymous'
+            this.props.username != 'anonymous' &&
+        ) {
+          // update component states
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
+        }
+        else if (
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+          // update component states
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
+
+          // update redux store
+            var action = setLogoutState();
+            this.props.dispatch(action);
+        }
+        else {
+          // update component states
+            this.setState({url: '/login'});
+            this.setState({url_caption: 'Sign in'});
+        }
+    },
+    componentWillMount: function() {
+        if (
+            this.props &&
+            this.props.username == 'undefined'
+        ) {
+          // update component states
+            this.setState({url: '/login'});
+            this.setState({url_caption: 'Sign in'});
+        }
+        else if (
+            this.props &&
+            this.props.username &&
+            this.props.username != 'anonymous' &&
         ) {
           // update component states
             this.setState({url: '/logout'});

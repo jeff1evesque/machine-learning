@@ -18,8 +18,20 @@ var MenuRegister = React.createClass({
     menuClicked: function(event) {
         this.props.onChange({menu_clicked: 'register'});
     },
+    componentDidUpdate: function() {
+        if (
+            this.props &&
+            this.props.username &&
+            this.props.username == 'anonymous' &&
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+          // update redux store
+            var action = setLoginState();
+            this.props.dispatch(action);
+        }
+    },
     componentWillMount: function() {
-        console.log('menu-register.jsx (componentWillMount): ', this.props);
         if (
             this.props &&
             this.props.username &&
