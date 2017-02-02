@@ -120,6 +120,15 @@ var LoginForm = React.createClass({
         }
       // load username from sessionStorage: maybe browser reloaded
         else if (
+            (this.props === undefined || this.props.username === undefined) &&
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+            var username = loadState('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+        }
+        else if (
             this.props &&
             this.props.username == 'anonymous' &&
             loadState('username') &&
@@ -131,7 +140,7 @@ var LoginForm = React.createClass({
         }
 
       // redirect to homepage if logged-in
-        if (username && username != 'anonymous') {
+        if (username && String(username) != 'anonymous') {
             browserHistory.push('/');
         }
     },
