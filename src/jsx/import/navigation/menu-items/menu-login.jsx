@@ -27,13 +27,22 @@ var MenuLogin = React.createClass({
     },
   // return state to parent component
     menuClicked: function(event) {
-      // logout: remove username from sessionStorage
+      // logout: remove username
         if (
             loadState('username') &&
             String(loadState('username')) != 'anonymous' &&
             this.state.url == '/logout'
         ) {
+          // update sessionStorage
             sessionStorage.removeItem('username');
+
+          // update component states
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
+
+          // update redux store
+            var action = setLogoutState();
+            this.props.dispatch(action);
         }
 
       // property indication what links to display
