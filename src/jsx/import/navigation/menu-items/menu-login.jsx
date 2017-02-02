@@ -13,7 +13,6 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import { loadState } from '../../redux/load-storage.jsx';
 import setLogoutState from '../../redux/action/login-action.jsx';
 
@@ -28,11 +27,7 @@ var MenuLogin = React.createClass({
   // return state to parent component
     menuClicked: function(event) {
       // logout: remove username
-        if (
-            loadState('username') &&
-            String(loadState('username')) != 'anonymous' &&
-            this.state.url == '/logout'
-        ) {
+        if (this.state.url == '/logout') {
           // update sessionStorage
             sessionStorage.removeItem('username');
 
@@ -43,15 +38,19 @@ var MenuLogin = React.createClass({
           // update redux store
             var action = setLogoutState();
             this.props.dispatch(action);
-        }
 
-      // property indication what links to display
-        this.props.onChange({menu_clicked: 'login'});
+          // redirect to homepage if logged-in
+            browserHistory.push('/login');
+        }
+        else {
+          // property indication what links to display
+            this.props.onChange({menu_clicked: 'login'});
+        }
     },
     componentDidUpdate: function() {
         if (
-            this.props &&
-            this.props.username == 'undefined'
+            this.props === undefined &&
+            this.props.username === undefined
         ) {
           // update component states
             this.setState({url: '/login'});
@@ -86,8 +85,8 @@ var MenuLogin = React.createClass({
     },
     componentWillMount: function() {
         if (
-            this.props &&
-            this.props.username == 'undefined'
+            this.props === undefined ||
+            this.props.username === undefined
         ) {
           // update component states
             this.setState({url: '/login'});
