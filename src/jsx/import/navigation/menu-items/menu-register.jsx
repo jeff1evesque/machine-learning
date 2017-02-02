@@ -44,27 +44,12 @@ var MenuRegister = React.createClass({
             this.props.dispatch(action);
         }
     },
-  // call back: return side navigation
+  // call back: return register button
     renderContent: function() {
         if (
             this.props &&
             this.props.username &&
             this.props.username == 'anonymous'
-        ) {
-            return (
-                <Link
-                    to='/register'
-                    activeClassName='active'
-                    className='btn btn-primary'
-                    onClick={this.menuClicked}
-                >
-                   <span>Sign up</span>
-                </Link>
-            );
-        }
-        else if (
-            this.props === undefined ||
-            this.props.username === undefined
         ) {
             return (
                 <Link
