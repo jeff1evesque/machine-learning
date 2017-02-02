@@ -17,46 +17,47 @@ var MenuRegister = React.createClass({
   // return state to parent component
     menuClicked: function(event) {
         this.props.onChange({menu_clicked: 'register'});
-        this.props.onChange({show_button: true});
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
+        console.log('menu-register.jsx (componentWillMount): ', this.props);
         if (
             this.props &&
-            this.props.username != 'anonymous'
-        ) {
-          // update component states
-            this.setState({show_button: false});
-        }
-        else if (
+            this.props.username &&
+            this.props.username == 'anonymous' &&
             loadState('username') &&
             String(loadState('username')) != 'anonymous'
         ) {
-          // update component states
-            this.setState({show_button: false});
-
           // update redux store
             var action = setLoginState();
             this.props.dispatch(action);
         }
-        else {
-          // update component states
-            this.setState({show_button: true});
-        }
     },
   // call back: return side navigation
     renderContent: function() {
-        if (this.props.show_button) {
-            return <Link
-                       to='/register'
-                       activeClassName='active'
-                       className='btn btn-primary'
-                       onClick={this.menuClicked}
-                   >
-                       <span>Sign up</span>
-                   </Link>;
+        if (
+            this.props &&
+            this.props.username &&
+            this.props.username == 'anonymous'
+        ) {
+            return (
+                <Link
+                    to='/register'
+                    activeClassName='active'
+                    className='btn btn-primary'
+                    onClick={this.menuClicked}
+                >
+                   <span>Sign up</span>
+                </Link>
+            );
+        }
+        else if (
+            this.props === undefined ||
+            this.props.username === undefined
+        ) {
+            return (<span />);
         }
         else {
-            return <span />;
+            return (<span />);
         }
     },
   // triggered when 'state properties' change
