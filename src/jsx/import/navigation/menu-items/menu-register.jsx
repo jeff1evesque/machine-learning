@@ -66,7 +66,16 @@ var MenuRegister = React.createClass({
             this.props === undefined ||
             this.props.username === undefined
         ) {
-            return (<span />);
+            return (
+                <Link
+                    to='/register'
+                    activeClassName='active'
+                    className='btn btn-primary'
+                    onClick={this.menuClicked}
+                >
+                   <span>Sign up</span>
+                </Link>
+            );
         }
         else {
             return (<span />);
