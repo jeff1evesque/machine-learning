@@ -51,7 +51,7 @@ var MenuLogin = React.createClass({
         else if (
             this.props &&
             this.props.username &&
-            this.props.username != 'anonymous' &&
+            this.props.username != 'anonymous'
         ) {
           // update component states
             this.setState({url: '/logout'});
@@ -87,7 +87,7 @@ var MenuLogin = React.createClass({
         else if (
             this.props &&
             this.props.username &&
-            this.props.username != 'anonymous' &&
+            this.props.username != 'anonymous'
         ) {
           // update component states
             this.setState({url: '/logout'});
