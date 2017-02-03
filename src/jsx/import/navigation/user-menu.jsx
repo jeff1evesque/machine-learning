@@ -41,26 +41,53 @@ var UserMenu = React.createClass({
   // return state to parent, and current component
     renderContent: function() {
         if (this.state.page == 'home') {
-            return <MenuHome />;
+            return (
+                <nav
+                    className={'main-navigation menu-' + this.state.page}
+                >
+                    <MenuHome />
+                    <MenuLoginState />
+                    <MenuRegisterState />
+                </nav>
+            );
         }
         else if (this.state.page == 'login') {
-            return <MenuLoginState />;
+            return (
+                <nav
+                    className={'main-navigation menu-' + this.state.page}
+                >
+                    <MenuHome />
+                </nav>
+            );
         }
         else if (this.state.page == 'register') {
-            return <MenuRegisterState />;
+            return (
+                <nav
+                    className={'main-navigation menu-' + this.state.page}
+                >
+                    <MenuHome />
+                    <MenuLoginState />
+                    <MenuRegisterState />
+                </nav>
+            );
+        }
+        else {
+            return (
+                <nav
+                    className={'main-navigation menu-' + this.state.page}
+                >
+                    <MenuHome />
+                    <MenuLoginState />
+                    <MenuRegisterState />
+                </nav>
+            );
         }
     },
   // display result
     render: function() {
-        var SelectedContent = this.renderContent();
+        var selectedContent = this.renderContent();
 
-        return(
-            <nav
-                className={'main-navigation menu-' + this.state.page}
-            >
-                {SelectedContent}
-            </nav>
-        );
+        return(selectedContent);
     }
 });
 
