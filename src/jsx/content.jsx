@@ -104,7 +104,7 @@ var Page = React.createClass({
     },
   // display result
     render: function() {
-        var selectedContent = this.renderContent();
+        var SelectedContent = this.renderContent();
         var componentName = 'Home';
 
       // page assignment: login, registration
@@ -134,7 +134,7 @@ var Page = React.createClass({
                     />
                 </div>
 
-                {selectedContent}
+                {SelectedContent}
             </div>
         );
     }
