@@ -20,7 +20,7 @@ var UserMenu = React.createClass({
     },
   // return state to parent, and current component
     displayHome: function(event) {
-        if (event.menu_clicked == 'home') {
+        if (this.props.componentType == 'Home') {
           // return state to parent component
             this.props.onChange({home: true});
 
@@ -32,7 +32,7 @@ var UserMenu = React.createClass({
     },
   // return state to parent, and current component
     displayLogin: function(event) {
-        if (event.menu_clicked == 'login') {
+        if (this.props.componentType == 'LoginLayout') {
           // return state to parent component
             this.props.onChange({login: true});
 
@@ -44,7 +44,7 @@ var UserMenu = React.createClass({
     },
   // return state to parent, and current component
     displayRegister: function(event) {
-        if (event.menu_clicked == 'register') {
+        if (this.props.componentType == 'RegisterLayout') {
           // return state to parent component
             this.props.onChange({register: true});
 
