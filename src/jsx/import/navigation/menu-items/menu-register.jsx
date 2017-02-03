@@ -14,10 +14,6 @@ import { loadState } from '../../redux/load-storage.jsx';
 import setLoginState from '../../redux/action/login-action.jsx';
 
 var MenuRegister = React.createClass({
-  // return state to parent component
-    menuClicked: function(event) {
-        this.props.onChange({menu_clicked: 'register'});
-    },
     componentDidUpdate: function() {
         if (
             this.props &&
@@ -56,7 +52,6 @@ var MenuRegister = React.createClass({
                     to='/register'
                     activeClassName='active'
                     className='btn btn-primary'
-                    onClick={this.menuClicked}
                 >
                    <span>Sign up</span>
                 </Link>
