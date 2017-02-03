@@ -38,9 +38,6 @@ var MenuLogin = React.createClass({
           // update redux store
             var action = setLogoutState();
             this.props.dispatch(action);
-
-          // redirect to homepage if logged-in
-            browserHistory.push('/login');
         }
         else {
           // property indication what links to display
