@@ -24,26 +24,6 @@ var MenuLogin = React.createClass({
             url_caption: 'Sign in',
         };
     },
-  // return state to parent component
-    menuClicked: function(event) {
-      // logout: remove username
-        if (this.state.url == '/logout') {
-          // update sessionStorage
-            sessionStorage.removeItem('username');
-
-          // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
-
-          // update redux store
-            var action = setLogoutState();
-            this.props.dispatch(action);
-        }
-        else {
-          // property indication what links to display
-            this.props.onChange({menu_clicked: 'login'});
-        }
-    },
     componentDidUpdate: function() {
         if (
             this.props === undefined &&
@@ -123,7 +103,6 @@ var MenuLogin = React.createClass({
                 to={this.state.url}
                 activeClassName='active'
                 className='btn mn-2'
-                onClick={this.menuClicked}
             >
                 <span>{this.state.url_caption}</span>
             </Link>
