@@ -22,7 +22,7 @@ var MenuHome = React.createClass({
             >
                 <SvgHome />
             </Link>
-        )
+        );
     }
 });
 
