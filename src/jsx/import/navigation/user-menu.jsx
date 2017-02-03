@@ -13,69 +13,52 @@ var UserMenu = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            show_login: true,
-            show_register: true,
             page: 'home',
         };
     },
-  // return state to parent, and current component
-    displayHome: function(event) {
+    componentDidUpdate: function() {
         if (this.props.componentType == 'Home') {
-          // return state to parent component
-            this.props.onChange({home: true});
-
-          // display login / register buttons
-            this.setState({show_login: true});
-            this.setState({show_register: true});
             this.setState({page: 'home'});
         }
-    },
-  // return state to parent, and current component
-    displayLogin: function(event) {
-        if (this.props.componentType == 'LoginLayout') {
-          // return state to parent component
-            this.props.onChange({login: true});
-
-          // conditionally define state(s)
-            this.setState({show_login: false});
-            this.setState({show_register: false});
+        else if (this.props.componentType == 'LoginLayout') {
             this.setState({page: 'login'});
+        }
+        else if (this.props.componentType == 'RegisterLayout') {
+            this.setState({page: 'register'});
+        }
+    },
+    componentWillMount: function() {
+        if (this.props.componentType == 'Home') {
+            this.setState({page: 'home'});
+        }
+        else if (this.props.componentType == 'LoginLayout') {
+            this.setState({page: 'login'});
+        }
+        else if (this.props.componentType == 'RegisterLayout') {
+            this.setState({page: 'register'});
         }
     },
   // return state to parent, and current component
-    displayRegister: function(event) {
-        if (this.props.componentType == 'RegisterLayout') {
-          // return state to parent component
-            this.props.onChange({register: true});
-
-          // display login / register buttons
-            this.setState({show_login: true});
-            this.setState({show_register: true});
-            this.setState({page: 'register'});
+    renderContent: function() {
+        if (this.state.page == 'home') {
+            return <MenuHome />;
+        }
+        else if (this.state.page == 'login') {
+            return <MenuLoginState />;
+        }
+        else if (this.state.page == 'register') {
+            return <MenuRegisterState />;
         }
     },
   // display result
     render: function() {
-        if (this.state.show_login) {
-            var Login = MenuLoginState
-        }
-        else {
-            var Login = 'span'
-        }
-        if (this.state.show_register) {
-            var Register = MenuRegisterState
-        }
-        else {
-            var Register = 'span'
-        }
+        var SelectedContent = this.renderContent();
 
         return(
             <nav
                 className={'main-navigation menu-' + this.state.page}
             >
-                <MenuHome onChange={this.displayHome} />
-                <Login onChange={this.displayLogin} />
-                <Register onChange={this.displayRegister} />
+                {SelectedContent}
             </nav>
         );
     }
