@@ -14,7 +14,7 @@ var UserMenu = React.createClass({
         if (this.props.componentType == 'LoginLayout') {
             return (
                 <nav
-                    className={'main-navigation menu-' + this.state.page}
+                    className={'main-navigation menu-login'}
                 >
                     <MenuHome />
                 </nav>
@@ -23,7 +23,7 @@ var UserMenu = React.createClass({
         else if (this.props.componentType == 'RegisterLayout') {
             return (
                 <nav
-                    className={'main-navigation menu-' + this.state.page}
+                    className={'main-navigation menu-register'}
                 >
                     <MenuHome />
                     <MenuLoginState />
@@ -34,7 +34,7 @@ var UserMenu = React.createClass({
         else {
             return (
                 <nav
-                    className={'main-navigation menu-' + this.state.page}
+                    className={'main-navigation menu-home'}
                 >
                     <MenuHome />
                     <MenuLoginState />
