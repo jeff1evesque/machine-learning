@@ -8,25 +8,80 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router'
+import { Link } from 'react-router';
+import { connect } from 'react-redux';
+import { loadState } from '../../redux/load-storage.jsx';
+import setLoginState from '../../redux/action/login-action.jsx';
 
 var MenuRegister = React.createClass({
-  // return state to parent component
-    menuClicked: function(event) {
-        this.props.onChange({menu_clicked: 'register'});
+  // call back: return register button
+    renderContent: function() {
+        if (
+            this.props &&
+            this.props.username &&
+            this.props.username == 'anonymous'
+        ) {
+            return (
+                <Link
+                    to='/register'
+                    activeClassName='active'
+                    className='btn btn-primary'
+                >
+                   <span>Sign up</span>
+                </Link>
+            );
+        }
+        else {
+            return (<span />);
+        }
+    },
+    componentDidUpdate: function() {
+        if (
+            (this.props === undefined || this.props.username === undefined) &&
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+            var username = loadState('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+        }
+        else if (
+            this.props &&
+            this.props.username == 'anonymous' &&
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+            var username = loadState('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+        }
+    },
+    componentWillMount: function() {
+        if (
+            (this.props === undefined || this.props.username === undefined) &&
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+            var username = loadState('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+        }
+        else if (
+            this.props &&
+            this.props.username == 'anonymous' &&
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+            var username = loadState('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+        }
     },
   // triggered when 'state properties' change
     render: function(){
-        return(
-            <Link
-                to='/register'
-                activeClassName='active'
-                className='btn btn-primary'
-                onClick={this.menuClicked}
-            >
-                <span>Sign up</span>
-            </Link>
-        )
+        var selectedContent = this.renderContent();
+
+        return(selectedContent);
     }
 });
 

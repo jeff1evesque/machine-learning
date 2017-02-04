@@ -105,11 +105,33 @@ var Page = React.createClass({
   // display result
     render: function() {
         var SelectedContent = this.renderContent();
+        var componentName = 'Home';
+
+      // page assignment: login, registration
+        if (
+            this.props &&
+            this.props.children &&
+            this.props.children.props
+        ) {
+            var property = this.props.children.props;
+
+            if (
+                property &&
+                property.route &&
+                property.route.component &&
+                property.route.component.name
+            ) {
+                var componentName = property.route.component.name;
+            }
+        }
 
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
-                    <UserMenu onChange={this.setClickType} />
+                    <UserMenu
+                        onChange={this.setClickType}
+                        componentType={componentName}
+                    />
                 </div>
 
                 {SelectedContent}

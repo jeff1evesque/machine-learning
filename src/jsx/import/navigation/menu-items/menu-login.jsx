@@ -13,7 +13,6 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { connect } from 'react-redux';
 import { loadState } from '../../redux/load-storage.jsx';
 import setLogoutState from '../../redux/action/login-action.jsx';
 
@@ -25,32 +24,31 @@ var MenuLogin = React.createClass({
             url_caption: 'Sign in',
         };
     },
-  // return state to parent component
-    menuClicked: function(event) {
-      // logout: remove username from sessionStorage
+    componentDidUpdate: function() {
         if (
-            loadState('username') &&
-            String(loadState('username')) != 'anonymous' &&
-            this.state.url == '/logout'
+            this.props === undefined &&
+            this.props.username === undefined
         ) {
-            sessionStorage.removeItem('username');
+          // update component states
+            this.setState({url: '/login'});
+            this.setState({url_caption: 'Sign in'});
         }
-
-      // property indication what links to display
-        this.props.onChange({menu_clicked: 'login'});
-    },
-    componentDidMount: function() {
-        if (
+        else if (
+            this.props &&
+            this.props.username &&
+            this.props.username != 'anonymous'
+        ) {
+          // update component states
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
+        }
+        else if (
             loadState('username') &&
             String(loadState('username')) != 'anonymous'
         ) {
           // update component states
             this.setState({url: '/logout'});
             this.setState({url_caption: 'Log out'});
-
-          // update redux store
-            var action = setLogoutState();
-            this.props.dispatch(action);
         }
         else {
           // update component states
@@ -58,6 +56,56 @@ var MenuLogin = React.createClass({
             this.setState({url_caption: 'Sign in'});
         }
     },
+    componentWillMount: function() {
+        if (
+            this.props === undefined ||
+            this.props.username === undefined
+        ) {
+          // update component states
+            this.setState({url: '/login'});
+            this.setState({url_caption: 'Sign in'});
+        }
+        else if (
+            this.props &&
+            this.props.username &&
+            this.props.username != 'anonymous'
+        ) {
+          // update component states
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
+        }
+        else if (
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous'
+        ) {
+          // update component states
+            this.setState({url: '/logout'});
+            this.setState({url_caption: 'Log out'});
+        }
+        else {
+          // update component states
+            this.setState({url: '/login'});
+            this.setState({url_caption: 'Sign in'});
+        }
+    },
+    menuClicked: function(event) {
+      // logout: remove username from sessionStorage
+        if (
+            loadState('username') &&
+            String(loadState('username')) != 'anonymous' &&
+            this.state.url == '/logout'
+        ) {
+          // update redux store
+            var action = setLogoutState();
+            this.props.dispatch(action);
+
+          // remove username from sessionStorage
+            sessionStorage.removeItem('username');
+
+          // redirect to homepage if logged-out
+            browserHistory.push('/');
+        }
+},
   // triggered when 'state properties' change
     render: function(){
         return(

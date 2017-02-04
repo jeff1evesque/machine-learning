@@ -7,77 +7,47 @@
 import React from 'react';
 import MenuHome from './menu-items/menu-home.jsx';
 import MenuLoginState from '../redux/container/menu-login-container.jsx';
-import MenuRegister from './menu-items/menu-register.jsx';
+import MenuRegisterState from '../redux/container/menu-register-container.jsx';
 
 var UserMenu = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            show_login: true,
-            show_register: true,
-            page: 'home',
-        };
-    },
-  // return state to parent, and current component
-    displayHome: function(event) {
-        if (event.menu_clicked == 'home') {
-          // return state to parent component
-            this.props.onChange({home: true});
-
-          // display login / register buttons
-            this.setState({show_login: true});
-            this.setState({show_register: true});
-            this.setState({page: 'home'});
+    renderContent: function() {
+        if (this.props.componentType == 'LoginLayout') {
+            return (
+                <nav
+                    className={'main-navigation menu-login'}
+                >
+                    <MenuHome />
+                </nav>
+            );
         }
-    },
-  // return state to parent, and current component
-    displayLogin: function(event) {
-        if (event.menu_clicked == 'login') {
-          // return state to parent component
-            this.props.onChange({login: true});
-
-          // conditionally define state(s)
-            this.setState({show_login: false});
-            this.setState({show_register: false});
-            this.setState({page: 'login'});
+        else if (this.props.componentType == 'RegisterLayout') {
+            return (
+                <nav
+                    className={'main-navigation menu-register'}
+                >
+                    <MenuHome />
+                    <MenuLoginState />
+                    <MenuRegisterState />
+                </nav>
+            );
         }
-    },
-  // return state to parent, and current component
-    displayRegister: function(event) {
-        if (event.menu_clicked == 'register') {
-          // return state to parent component
-            this.props.onChange({register: true});
-
-          // display login / register buttons
-            this.setState({show_login: true});
-            this.setState({show_register: true});
-            this.setState({page: 'register'});
+        else {
+            return (
+                <nav
+                    className={'main-navigation menu-home'}
+                >
+                    <MenuHome />
+                    <MenuLoginState />
+                    <MenuRegisterState />
+                </nav>
+            );
         }
     },
   // display result
     render: function() {
-        if (this.state.show_login) {
-            var Login = MenuLoginState
-        }
-        else {
-            var Login = 'span'
-        }
-        if (this.state.show_register) {
-            var Register = MenuRegister
-        }
-        else {
-            var Register = 'span'
-        }
+        var selectedContent = this.renderContent();
 
-        return(
-            <nav
-                className={'main-navigation menu-' + this.state.page}
-            >
-                <MenuHome onChange={this.displayHome} />
-                <Login onChange={this.displayLogin} />
-                <Register onChange={this.displayRegister} />
-            </nav>
-        );
+        return(selectedContent);
     }
 });
 
