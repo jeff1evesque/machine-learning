@@ -44,7 +44,7 @@ var MenuLogin = React.createClass({
         }
         else if (
             loadState('username') &&
-            String(loadState('username')) != 'anonymous'
+            loadState('username') != 'anonymous'
         ) {
           // update component states
             this.setState({url: '/logout'});
@@ -76,7 +76,7 @@ var MenuLogin = React.createClass({
         }
         else if (
             loadState('username') &&
-            String(loadState('username')) != 'anonymous'
+            loadState('username') != 'anonymous'
         ) {
           // update component states
             this.setState({url: '/logout'});
@@ -92,7 +92,7 @@ var MenuLogin = React.createClass({
       // logout: remove username from sessionStorage
         if (
             loadState('username') &&
-            String(loadState('username')) != 'anonymous' &&
+            loadState('username') != 'anonymous' &&
             this.state.url == '/logout'
         ) {
           // update redux store

@@ -39,7 +39,7 @@ var MenuRegister = React.createClass({
         if (
             (this.props === undefined || this.props.username === undefined) &&
             loadState('username') &&
-            String(loadState('username')) != 'anonymous'
+            loadState('username') != 'anonymous'
         ) {
             var username = loadState('username')
             var action = setLoginState(username);
@@ -49,7 +49,7 @@ var MenuRegister = React.createClass({
             this.props &&
             this.props.username == 'anonymous' &&
             loadState('username') &&
-            String(loadState('username')) != 'anonymous'
+            loadState('username') != 'anonymous'
         ) {
             var username = loadState('username')
             var action = setLoginState(username);
@@ -60,7 +60,7 @@ var MenuRegister = React.createClass({
         if (
             (this.props === undefined || this.props.username === undefined) &&
             loadState('username') &&
-            String(loadState('username')) != 'anonymous'
+            loadState('username') != 'anonymous'
         ) {
             var username = loadState('username')
             var action = setLoginState(username);
@@ -70,7 +70,7 @@ var MenuRegister = React.createClass({
             this.props &&
             this.props.username == 'anonymous' &&
             loadState('username') &&
-            String(loadState('username')) != 'anonymous'
+            loadState('username') != 'anonymous'
         ) {
             var username = loadState('username')
             var action = setLoginState(username);
