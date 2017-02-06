@@ -26,12 +26,15 @@ var MenuLogin = React.createClass({
     },
     componentDidUpdate: function() {
         if (
-            this.props === undefined &&
-            this.props.username === undefined
+            (this.props === undefined || this.props.username === undefined) &&
+            loadState('username') &&
+            loadState('username') != 'anonymous'
         ) {
           // update component states
-            this.setState({url: '/login'});
-            this.setState({url_caption: 'Sign in'});
+            this.setState({
+                url: '/login',
+                url_caption: 'Sign in'
+            });
         }
         else if (
             this.props &&
@@ -39,31 +42,40 @@ var MenuLogin = React.createClass({
             this.props.username != 'anonymous'
         ) {
           // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
+            this.setState({
+                url: '/logout',
+                url_caption: 'Log out'
+            });
         }
         else if (
             loadState('username') &&
             loadState('username') != 'anonymous'
         ) {
           // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
+            this.setState({
+                url: '/logout',
+                url_caption: 'Log out'
+            });
         }
         else {
           // update component states
-            this.setState({url: '/login'});
-            this.setState({url_caption: 'Sign in'});
+            this.setState({
+                url: '/login',
+                url_caption: 'Sign in'
+            });
         }
     },
     componentWillMount: function() {
         if (
-            this.props === undefined ||
-            this.props.username === undefined
+            (this.props === undefined || this.props.username === undefined) &&
+            loadState('username') &&
+            loadState('username') != 'anonymous'
         ) {
           // update component states
-            this.setState({url: '/login'});
-            this.setState({url_caption: 'Sign in'});
+            this.setState({
+                url: '/login',
+                url_caption: 'Sign in'
+            });
         }
         else if (
             this.props &&
@@ -71,21 +83,27 @@ var MenuLogin = React.createClass({
             this.props.username != 'anonymous'
         ) {
           // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
+            this.setState({
+                url: '/logout',
+                url_caption: 'Log out'
+            });
         }
         else if (
             loadState('username') &&
             loadState('username') != 'anonymous'
         ) {
           // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
+            this.setState({
+                url: '/logout',
+                url_caption: 'Log out'
+            });
         }
         else {
           // update component states
-            this.setState({url: '/login'});
-            this.setState({url_caption: 'Sign in'});
+            this.setState({
+                url: '/login',
+                url_caption: 'Sign in'
+            });
         }
     },
     menuClicked: function(event) {
