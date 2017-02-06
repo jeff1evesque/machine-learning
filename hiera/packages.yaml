@@ -22,7 +22,7 @@ development:
         fetch: '0.11.0'
         uglify-js: '2.6.2'
         imagemin: '5.0.0'
-        node-sass: '3.7.0'
+        node-sass: '4.5.0'
         babel-core: '6.7.4'
         browserify: '13.0.0'
         babelify: '7.2.0'
