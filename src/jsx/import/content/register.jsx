@@ -111,7 +111,7 @@ var RegisterForm = React.createClass({
         }
 
       // redirect to homepage if logged-in
-        if (username && String(username) != 'anonymous') {
+        if (username && username != 'anonymous') {
             browserHistory.push('/');
         }
     },
