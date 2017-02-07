@@ -13,7 +13,6 @@ import { connect } from 'react-redux';
 import setLoginState from '../../redux/action/login-action.jsx';
 
 var MenuRegister = React.createClass({
-    },
   // call back: return register button
     renderContent: function() {
         if (
