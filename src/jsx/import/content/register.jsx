@@ -10,7 +10,6 @@
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
 import { browserHistory } from 'react-router';
-import { loadState } from '../redux/load-storage.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
 
 var RegisterForm = React.createClass({
@@ -92,20 +91,20 @@ var RegisterForm = React.createClass({
       // load username from sessionStorage: maybe browser reloaded
         else if (
             (this.props === undefined || this.props.username === undefined) &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
-            var username = loadState('username')
+            var username = sessionStorage.getItem('username')
             var action = setLoginState(username);
             this.props.dispatch(action);
         }
         else if (
             this.props &&
             this.props.username == 'anonymous' &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
-            var username = loadState('username')
+            var username = sessionStorage.getItem('username')
             var action = setLoginState(username);
             this.props.dispatch(action);
         }

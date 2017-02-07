@@ -5,15 +5,13 @@
  *
  */
 
-const login = (state='anonymous', action) => {
-    switch(action.type) {
-        case 'LOGGED-IN':
-            return action.username;
-        case 'LOGGED-OUT':
-            return 'anonymous';
-    default:
-        return state;
+const storageMiddleware = store => next => action => {
+    if (action.type === 'LOGGED-IN') {
+        sessionStorage.setItem('username', action.username)
+    } else if (action.type === 'LOGGED-OUT') {
+        sessionStorage.removeItem('username')
     }
+    return next(action)
 }
 
 // indicate which class can be exported, and instantiated via 'require'

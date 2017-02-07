@@ -13,10 +13,8 @@
 
 import React from 'react';
 import { browserHistory } from 'react-router';
-import { loadState } from '../redux/load-storage.jsx';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
-import { saveState } from '../redux/load-storage.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
@@ -75,9 +73,6 @@ var LoginForm = React.createClass({
                       // update redux store
                         var action = setLoginState(username);
                         this.props.dispatch(action);
-
-                      // store username into sessionStorage
-                        saveState('username', username);
                     }
                 }
                 else {
@@ -121,20 +116,20 @@ var LoginForm = React.createClass({
       // load username from sessionStorage: maybe browser reloaded
         else if (
             (this.props === undefined || this.props.username === undefined) &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
-            var username = loadState('username')
+            var username = sessionStorage.getItem('username')
             var action = setLoginState(username);
             this.props.dispatch(action);
         }
         else if (
             this.props &&
             this.props.username == 'anonymous' &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
-            var username = loadState('username')
+            var username = sessionStorage.getItem('username')
             var action = setLoginState(username);
             this.props.dispatch(action);
         }

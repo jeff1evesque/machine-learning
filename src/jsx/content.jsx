@@ -15,7 +15,7 @@ import MainContent from './import/main.jsx';
 import NavBar from './import/navigation/nav-bar.jsx';
 import UserMenu from './import/navigation/user-menu.jsx';
 import AppRouter from './router.jsx';
-import store from './import/redux/store.jsx';
+import storageMiddleware from './import/redux/store.jsx';
 import HomePage from './import/content/home-page.jsx';
 
 var Page = React.createClass({
@@ -148,7 +148,7 @@ var Page = React.createClass({
 //       container components, without passing it explicitly.
 //
 ReactDOM.render(
-    <Provider store={store}>
+    <Provider store={storageMiddleware}>
         <AppRouter indexRoute={Page} />
     </Provider>,
     document.querySelector('.container')

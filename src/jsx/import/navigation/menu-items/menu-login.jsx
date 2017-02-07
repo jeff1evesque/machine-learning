@@ -13,7 +13,6 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { loadState } from '../../redux/load-storage.jsx';
 import setLogoutState from '../../redux/action/login-action.jsx';
 
 var MenuLogin = React.createClass({
@@ -27,8 +26,8 @@ var MenuLogin = React.createClass({
     componentDidUpdate: function() {
         if (
             (this.props === undefined || this.props.username === undefined) &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -48,8 +47,8 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -68,8 +67,8 @@ var MenuLogin = React.createClass({
     componentWillMount: function() {
         if (
             (this.props === undefined || this.props.username === undefined) &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -89,8 +88,8 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -109,16 +108,13 @@ var MenuLogin = React.createClass({
     menuClicked: function(event) {
       // logout: remove username from sessionStorage
         if (
-            loadState('username') &&
-            loadState('username') != 'anonymous' &&
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous' &&
             this.state.url == '/logout'
         ) {
           // update redux store
             var action = setLogoutState();
             this.props.dispatch(action);
-
-          // remove username from sessionStorage
-            sessionStorage.removeItem('username');
 
           // redirect to homepage if logged-out
             browserHistory.push('/');

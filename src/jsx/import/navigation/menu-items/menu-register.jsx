@@ -10,10 +10,10 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import { loadState } from '../../redux/load-storage.jsx';
 import setLoginState from '../../redux/action/login-action.jsx';
 
 var MenuRegister = React.createClass({
+    },
   // call back: return register button
     renderContent: function() {
         if (
@@ -38,20 +38,20 @@ var MenuRegister = React.createClass({
     componentDidUpdate: function() {
         if (
             (this.props === undefined || this.props.username === undefined) &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
-            var username = loadState('username')
+            var username = sessionStorage.getItem('username')
             var action = setLoginState(username);
             this.props.dispatch(action);
         }
         else if (
             this.props &&
             this.props.username == 'anonymous' &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
-            var username = loadState('username')
+            var username = sessionStorage.getItem('username')
             var action = setLoginState(username);
             this.props.dispatch(action);
         }
@@ -59,20 +59,20 @@ var MenuRegister = React.createClass({
     componentWillMount: function() {
         if (
             (this.props === undefined || this.props.username === undefined) &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
-            var username = loadState('username')
+            var username = sessionStorage.getItem('username')
             var action = setLoginState(username);
             this.props.dispatch(action);
         }
         else if (
             this.props &&
             this.props.username == 'anonymous' &&
-            loadState('username') &&
-            loadState('username') != 'anonymous'
+            sessionStorage.getItem('username') &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
-            var username = loadState('username')
+            var username = sessionStorage.getItem('username')
             var action = setLoginState(username);
             this.props.dispatch(action);
         }
