@@ -15,11 +15,7 @@ import setLoginState from '../../redux/action/login-action.jsx';
 var MenuRegister = React.createClass({
   // call back: return register button
     renderContent: function() {
-        if (
-            this.props &&
-            this.props.username &&
-            this.props.username == 'anonymous'
-        ) {
+        if (!!this.props.username.name) {
             return (
                 <Link
                     to='/register'
@@ -36,7 +32,7 @@ var MenuRegister = React.createClass({
     },
     componentDidUpdate: function() {
         if (
-            (this.props === undefined || this.props.username === undefined) &&
+            !!this.props.username.name &&
             sessionStorage.getItem('username') &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
@@ -45,8 +41,7 @@ var MenuRegister = React.createClass({
             this.props.dispatch(action);
         }
         else if (
-            this.props &&
-            this.props.username == 'anonymous' &&
+            this.props.username.name == 'anonymous' &&
             sessionStorage.getItem('username') &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
@@ -57,7 +52,7 @@ var MenuRegister = React.createClass({
     },
     componentWillMount: function() {
         if (
-            (this.props === undefined || this.props.username === undefined) &&
+            !!this.props.username.name &&
             sessionStorage.getItem('username') &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
@@ -66,8 +61,7 @@ var MenuRegister = React.createClass({
             this.props.dispatch(action);
         }
         else if (
-            this.props &&
-            this.props.username == 'anonymous' &&
+            this.props.username.name == 'anonymous' &&
             sessionStorage.getItem('username') &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {

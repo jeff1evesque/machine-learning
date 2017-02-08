@@ -107,15 +107,12 @@ var LoginForm = React.createClass({
     },
     componentWillMount: function() {
       // load username from redux: user already logged-in
-        if (
-            this.props &&
-            this.props.username != 'anonymous'
-        ) {
-            var username = this.props.username;
+        if (this.props.username.name != 'anonymous') {
+            var username = this.props.username.name;
         }
       // load username from sessionStorage: maybe browser reloaded
         else if (
-            (this.props === undefined || this.props.username === undefined) &&
+            !!this.props.username.name &&
             sessionStorage.getItem('username') &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
@@ -124,8 +121,7 @@ var LoginForm = React.createClass({
             this.props.dispatch(action);
         }
         else if (
-            this.props &&
-            this.props.username == 'anonymous' &&
+            this.props.username.name == 'anonymous' &&
             sessionStorage.getItem('username') &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {

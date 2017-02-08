@@ -25,7 +25,7 @@ var MenuLogin = React.createClass({
     },
     componentDidUpdate: function() {
         if (
-            (this.props === undefined || this.props.username === undefined) &&
+            !!this.props.username.name &&
             sessionStorage.getItem('username') &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
@@ -36,9 +36,8 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            this.props &&
-            this.props.username &&
-            this.props.username != 'anonymous'
+            this.props.username.name &&
+            this.props.username.name != 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -66,7 +65,7 @@ var MenuLogin = React.createClass({
     },
     componentWillMount: function() {
         if (
-            (this.props === undefined || this.props.username === undefined) &&
+            !!this.props.username.name &&
             sessionStorage.getItem('username') &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
@@ -77,9 +76,8 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            this.props &&
-            this.props.username &&
-            this.props.username != 'anonymous'
+            this.props.username.name &&
+            this.props.username.name != 'anonymous'
         ) {
           // update component states
             this.setState({
