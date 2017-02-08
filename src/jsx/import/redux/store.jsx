@@ -18,10 +18,39 @@ import { createStore } from 'redux';
 import storageMiddleware from './reducer/login-reducer.jsx';
 
 // redux store: entire state tree for the application
-const store = createStore(
-    storageMiddleware,
-    {username: sessionStorage.getItem('username') || 'anonymous'}
-);
+if (
+    !!sessionStorage.getItem('username') &&
+    sessionStorage.getItem('username') != 'anonymous'
+) {
+    const store = createStore(
+        storageMiddleware,
+        {
+            type: 'LOGGED-IN',
+            username: sessionStorage.getItem('username')
+        }
+    );
+}
+else if (
+    !!sessionStorage.getItem('username') &&
+    sessionStorage.getItem('username') == 'anonymous'
+) {
+    const store = createStore(
+        storageMiddleware,
+        {
+            type: 'LOGGED-OUT',
+            username: 'anonymous'
+        }
+    );
+}
+else {
+    const store = createStore(
+        storageMiddleware,
+        {
+            type: 'LOGGED-OUT',
+            username: 'anonymous'
+        }
+    );
+}
 
 // indicate which class can be exported, and instantiated via 'require'
 export default store
