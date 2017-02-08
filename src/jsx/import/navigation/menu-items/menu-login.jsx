@@ -25,9 +25,23 @@ var MenuLogin = React.createClass({
     },
     componentDidUpdate: function() {
         if (
-            !!this.props.username.name &&
-            sessionStorage.getItem('username') &&
+            this.props.username.name == 'anonymous' &&
             sessionStorage.getItem('username') != 'anonymous'
+        ) {
+          // update redux store
+            var username = sessionStorage.getItem('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+
+          // update component states
+            this.setState({
+                url: '/logout',
+                url_caption: 'Log out'
+            });
+        }
+        else if (
+            this.props.username.name != 'anonymous' &&
+            sessionStorage.getItem('username') == 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -36,8 +50,8 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            this.props.username.name &&
-            this.props.username.name != 'anonymous'
+            this.props.username.name != 'anonymous' &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -46,13 +60,13 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            sessionStorage.getItem('username') &&
-            sessionStorage.getItem('username') != 'anonymous'
+            this.props.username.name == 'anonymous' &&
+            sessionStorage.getItem('username') == 'anonymous'
         ) {
           // update component states
             this.setState({
-                url: '/logout',
-                url_caption: 'Log out'
+                url: '/login',
+                url_caption: 'Sign in'
             });
         }
         else {
@@ -64,31 +78,7 @@ var MenuLogin = React.createClass({
         }
     },
     componentWillMount: function() {
-        if (
-            !!this.props.username.name &&
-            sessionStorage.getItem('username') &&
-            sessionStorage.getItem('username') != 'anonymous'
-        ) {
-          // update component states
-            this.setState({
-                url: '/login',
-                url_caption: 'Sign in'
-            });
-        }
-        else if (
-            this.props.username.name &&
-            this.props.username.name != 'anonymous'
-        ) {
-          // update component states
-            this.setState({
-                url: '/logout',
-                url_caption: 'Log out'
-            });
-        }
-        else if (
-            sessionStorage.getItem('username') &&
-            sessionStorage.getItem('username') != 'anonymous'
-        ) {
+        if (this.props.username.name != 'anonymous') {
           // update component states
             this.setState({
                 url: '/logout',
@@ -106,8 +96,7 @@ var MenuLogin = React.createClass({
     menuClicked: function(event) {
       // logout: remove username from sessionStorage
         if (
-            sessionStorage.getItem('username') &&
-            sessionStorage.getItem('username') != 'anonymous' &&
+            this.props.username.name != 'anonymous'
             this.state.url == '/logout'
         ) {
           // update redux store
