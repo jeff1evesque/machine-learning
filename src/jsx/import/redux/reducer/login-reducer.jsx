@@ -7,12 +7,12 @@
 
 const storageMiddleware = store => next => action => {
     if (action.type === 'LOGGED-IN') {
-        sessionStorage.setItem('username', action.username)
+        sessionStorage.setItem('username', action.username);
     } else if (action.type === 'LOGGED-OUT') {
-        sessionStorage.removeItem('username')
+        sessionStorage.removeItem('username');
     }
-    return next(action)
+    return next(action);
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default login
+export default storageMiddleware
