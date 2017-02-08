@@ -96,7 +96,7 @@ var MenuLogin = React.createClass({
     menuClicked: function(event) {
       // logout: remove username from sessionStorage
         if (
-            this.props.username.name != 'anonymous'
+            this.props.username.name != 'anonymous' &&
             this.state.url == '/logout'
         ) {
           // update redux store

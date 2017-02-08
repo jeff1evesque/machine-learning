@@ -15,7 +15,7 @@ import setLoginState from '../../redux/action/login-action.jsx';
 var MenuRegister = React.createClass({
   // call back: return register button
     renderContent: function() {
-        if (this.props.username.name == anonymous) {
+        if (this.props.username.name == 'anonymous') {
             return (
                 <Link
                     to='/register'
