@@ -73,6 +73,9 @@ var LoginForm = React.createClass({
                       // update redux store
                         var action = setLoginState(username);
                         this.props.dispatch(action);
+
+                      // store username into sessionStorage
+                        sessionStorage.setItem('user', username);
                     }
                 }
                 else {
