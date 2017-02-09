@@ -25,7 +25,7 @@ var MenuLogin = React.createClass({
     },
     componentDidUpdate: function() {
         if (
-            this.props.username.name == 'anonymous' &&
+            this.props.user.name == 'anonymous' &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
           // update redux store
@@ -40,7 +40,7 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            this.props.username.name != 'anonymous' &&
+            this.props.user.name != 'anonymous' &&
             sessionStorage.getItem('username') == 'anonymous'
         ) {
           // update component states
@@ -50,7 +50,7 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            this.props.username.name != 'anonymous' &&
+            this.props.user.name != 'anonymous' &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
           // update component states
@@ -60,7 +60,7 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
-            this.props.username.name == 'anonymous' &&
+            this.props.user.name == 'anonymous' &&
             sessionStorage.getItem('username') == 'anonymous'
         ) {
           // update component states
@@ -78,7 +78,7 @@ var MenuLogin = React.createClass({
         }
     },
     componentWillMount: function() {
-        if (this.props.username.name != 'anonymous') {
+        if (this.props.user.name != 'anonymous') {
           // update component states
             this.setState({
                 url: '/logout',
@@ -96,7 +96,7 @@ var MenuLogin = React.createClass({
     menuClicked: function(event) {
       // logout: remove username from sessionStorage
         if (
-            this.props.username.name != 'anonymous' &&
+            this.props.user.name != 'anonymous' &&
             this.state.url == '/logout'
         ) {
           // update redux store

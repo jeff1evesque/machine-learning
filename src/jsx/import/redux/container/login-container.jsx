@@ -15,7 +15,7 @@ import LoginForm from '../../content/login.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     return {
-        username: state
+        user: state
     }
 }
 

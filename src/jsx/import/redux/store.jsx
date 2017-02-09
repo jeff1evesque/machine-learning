@@ -24,7 +24,7 @@ const username = sessionStorage.getItem('username') || 'anonymous'
 const store = createStore(
     login, {
         type: username == 'anonymous' ? 'LOGGED-OUT' : 'LOGGED-IN',
-        username: username
+        name: username
     }
 );
 
