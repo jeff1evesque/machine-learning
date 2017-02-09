@@ -20,9 +20,13 @@ const mapStateToProps = (state) => {
 }
 
 // wraps each function of the object to be dispatch callable
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = (dispatch, entity) => {
     return {
         dispatch: dispatch,
+        user: {
+            name: entity.name,
+            type: entity.type,
+        }
     }
 }
 
