@@ -75,7 +75,7 @@ var LoginForm = React.createClass({
                         this.props.dispatch(action);
 
                       // store username into sessionStorage
-                        sessionStorage.setItem('user', username);
+                        sessionStorage.setItem('username', username);
                     }
                 }
                 else {
