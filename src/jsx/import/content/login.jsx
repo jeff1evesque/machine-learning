@@ -107,7 +107,7 @@ var LoginForm = React.createClass({
     },
     componentWillMount: function() {
       // redirect to homepage if logged-in
-        if (this.props.username.name != 'anonymous') {
+        if (this.props.user.name != 'anonymous') {
             browserHistory.push('/');
         }
     },
