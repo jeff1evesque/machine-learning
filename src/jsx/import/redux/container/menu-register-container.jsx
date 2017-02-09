@@ -15,13 +15,14 @@ import MenuRegister from '../../navigation/menu-items/menu-register.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     return {
-        name: state
+        user: state
     }
 }
 
 // pass selected properties from redux state tree to component
 const MenuLoginState = connect(
-    mapStateToProps
+    mapStateToProps,
+    null
 )(MenuRegister)
 
 // indicate which class can be exported, and instantiated via 'require'

@@ -15,13 +15,14 @@ import RegisterForm from '../../content/register.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     return {
-        name: state
+        user: state
     }
 }
 
 // pass selected properties from redux state tree to component
 const RegisterState = connect(
-    mapStateToProps
+    mapStateToProps,
+    null
 )(RegisterForm)
 
 // indicate which class can be exported, and instantiated via 'require'
