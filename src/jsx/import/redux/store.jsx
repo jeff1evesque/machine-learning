@@ -15,7 +15,7 @@
  */
 
 import { createStore } from 'redux';
-import storageMiddleware from './reducer/login-reducer.jsx';
+import login from './reducer/login-reducer.jsx';
 
 // redux store: entire state tree for the application
 if (
@@ -23,7 +23,7 @@ if (
     sessionStorage.getItem('username') != 'anonymous'
 ) {
     const store = createStore(
-        storageMiddleware,
+        login,
         {
             type: 'LOGGED-IN',
             username: sessionStorage.getItem('username')
@@ -35,7 +35,7 @@ else if (
     sessionStorage.getItem('username') == 'anonymous'
 ) {
     const store = createStore(
-        storageMiddleware,
+        login,
         {
             type: 'LOGGED-OUT',
             username: 'anonymous'
@@ -44,7 +44,7 @@ else if (
 }
 else {
     const store = createStore(
-        storageMiddleware,
+        login,
         {
             type: 'LOGGED-OUT',
             username: 'anonymous'
