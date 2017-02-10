@@ -17,8 +17,11 @@
 import { createStore } from 'redux';
 import login from './reducer/login-reducer.jsx';
 
-// redux store: entire state tree for the application
-const store = createStore(login);
+// username from sessionStorage
+const username = sessionStorage.getItem('username') || 'anonymous'
+
+// create and initialize redux
+const store = createStore(login, {name: username});
 
 // indicate which class can be exported, and instantiated via 'require'
 export default store
