@@ -10,7 +10,7 @@ function setPageState(settings) {
     var current_page = settings.current_page;
 
     return {
-        page: { current: current_page }
+        page: { current_page: current_page }
     };
 }
 

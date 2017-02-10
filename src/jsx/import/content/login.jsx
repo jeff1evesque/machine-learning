@@ -16,6 +16,7 @@ import { browserHistory } from 'react-router';
 import { loadState } from '../redux/load-storage.jsx';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
+import setPageState from '../redux/action/page-action.jsx';
 import { saveState } from '../redux/load-storage.jsx';
 
 var LoginForm = React.createClass({
@@ -125,7 +126,10 @@ var LoginForm = React.createClass({
             String(loadState('username')) != 'anonymous'
         ) {
             var username = loadState('username')
-            var action = setLoginState(username);
+            var action = {
+                username: setLoginState(username),
+                page: setPageState({current_page: 'login'})
+            }
             this.props.dispatch(action);
         }
         else if (
