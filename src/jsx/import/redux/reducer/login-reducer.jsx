@@ -12,9 +12,9 @@
 const login = (state='anonymous', action) => {
     switch(action.type) {
         case 'LOGGED-IN':
-            return Object.assign({}, state, { user : action.username});
+            return Object.assign({}, state, {name : action.username});
         case 'LOGGED-OUT':
-            return Object.assign({}, state, { user : action.username});
+            return Object.assign({}, state, {name : 'anonymous'});
     default:
         return state;
     }
