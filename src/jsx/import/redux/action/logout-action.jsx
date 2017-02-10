@@ -1,5 +1,5 @@
 /**
- * logout-action.jsx: send logout status from the application to the store.
+ * logout-action.jsx: send logout status to the redux store.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
