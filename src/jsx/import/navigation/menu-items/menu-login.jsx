@@ -103,6 +103,9 @@ var MenuLogin = React.createClass({
             var action = setLogoutState();
             this.props.dispatch(action);
 
+          // remove username from sessionStorage
+            sessionStorage.removeItem('username');
+
           // redirect to homepage if logged-out
             browserHistory.push('/');
         }
