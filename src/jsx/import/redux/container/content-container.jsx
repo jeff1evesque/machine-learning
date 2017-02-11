@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import Page from '../../../content.jsx';
+import PageLayout from '../../page-layout.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
 const PageState = connect(
     mapStateToProps,
     null
-)(Page)
+)(PageLayout)
 
 // indicate which class can be exported, and instantiated via 'require'
 export default PageState
