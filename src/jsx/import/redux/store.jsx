@@ -21,7 +21,10 @@ import login from './reducer/login-reducer.jsx';
 const username = sessionStorage.getItem('username') || 'anonymous'
 
 // create and initialize redux
-const store = createStore(combineReducers({login, page}), {name: username});
+const store = createStore(combineReducers({login, page}), {
+    name: username,
+    page: {layout: 'default'}
+});
 
 // indicate which class can be exported, and instantiated via 'require'
 export default store
