@@ -16,8 +16,10 @@ import store from './import/redux/store.jsx';
 
 // render application
 //
-// Note: the 'Provider' component, makes redux data to be accessible to all
-//       container components, without passing it explicitly.
+// @Provider, allows a common redux state tree, be accessible to all
+//     connected react components, when integrated with a common 'store'. This
+//     elimates the hassle associated with passing properites between parent,
+//     and children react components.
 //
 ReactDOM.render(
     <Provider store={store}>
