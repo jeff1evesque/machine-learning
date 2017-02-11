@@ -59,25 +59,24 @@ var MainContent = React.createClass({
     render: function() {
         if (
             this.props &&
-            this.props.componentType == 'LoginLayout'
+            this.props.layout == 'login'
         ) {
             var SideBar = 'span';
             var ChildComponent = <LoginLayout />;
         }
         else if (
             this.props &&
-            this.props.componentType == 'RegisterLayout'
+            this.props.layout == 'register'
         ) {
             var SideBar = 'span';
             var ChildComponent = <RegisterLayout />;
         }
         else if (
             this.props &&
-            this.props.componentType == 'AnalysisLayout'
+            this.props.layout == 'support-vector'
         ) {
             var SideBar = this.isNavBar();
-            var sessionType = this.props.sessionType;
-            var ChildComponent = <SvContainer displayName={sessionType} />;
+            var ChildComponent = <SvContainer />;
         }
         else {
             var SideBar = this.isNavBar();

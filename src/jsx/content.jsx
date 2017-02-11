@@ -42,7 +42,10 @@ var Page = React.createClass({
             this.state.props.page.layout == 'register' ||
             this.state.props.page.layout == 'support-vector'
         ) {
-            var SelectedContent = <MainContent renderNavBar={navbar} />;
+            var SelectedContent = <MainContent
+                                      renderNavBar={navbar}
+                                      layout={this.state.props.layout}
+                                  />;
         }
         else {
             var SelectedContent = <HomePage />;
