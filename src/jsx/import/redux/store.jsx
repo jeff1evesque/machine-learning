@@ -14,14 +14,14 @@
  *
  */
 
-import { createStore } from 'redux';
+import { createStore, combineReducers } from 'redux';
 import login from './reducer/login-reducer.jsx';
 
 // username from sessionStorage
 const username = sessionStorage.getItem('username') || 'anonymous'
 
 // create and initialize redux
-const store = createStore(login, {name: username});
+const store = createStore(combineReducers({login, page}), {name: username});
 
 // indicate which class can be exported, and instantiated via 'require'
 export default store

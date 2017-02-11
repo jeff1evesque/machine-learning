@@ -12,18 +12,23 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../../content/login.jsx';
 import setLoginState from '../action/login-action.jsx';
+import setPageState from '../action/page-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     return {
-        user: state
+        username: state.user,
+        page: {
+            current_page: state.page.current_page
+        }
     }
 }
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatch: dispatch.bind(setLoginState),
+        dispatchLogin: dispatch.bind(setLoginState),
+        dispatchPage: dispatch.bind(setPageState)
     }
 }
 
