@@ -13,7 +13,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
-import PageState from './import/redux/container/content-container.jsx';
 
 // render application
 //
@@ -24,7 +23,7 @@ import PageState from './import/redux/container/content-container.jsx';
 //
 ReactDOM.render(
     <Provider store={store}>
-        <AppRouter indexRoute={PageState} />
+        <AppRouter />
     </Provider>,
     document.querySelector('.container')
 );

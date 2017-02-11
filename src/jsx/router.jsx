@@ -13,6 +13,7 @@ import ModelPredict from './import/session-type/model-predict.jsx';
 import SupportVector from './import/content/support-vector.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
+import PageState from './import/redux/container/content-container.jsx';
 
 // constant: analysis layout
 const AnalysisLayout = (props) => (
@@ -42,7 +43,6 @@ var AppRouter = React.createClass({
     render: function() {
         {/* return:
 
-            @this.props.indexRoute, defined from parent component.
             @history, is required per 'react-router's ability to handle url:
 
                 - [GitHub-URL]/issues/2727#issuecomment-258030214
@@ -52,7 +52,7 @@ var AppRouter = React.createClass({
       // render routers
         return(
             <Router history={browserHistory}>
-                <Route path='/' component={this.props.indexRoute}>
+                <Route path='/' component={PageState}>
                     <Route path='/session' component={AnalysisLayout}>
                         <Route
                             path='/session/data-new'
