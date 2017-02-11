@@ -6,11 +6,8 @@
  */
 
 function setPageState(settings) {
-  // local variables
-    var layout = settings.layout;
-
     return {
-        page: { layout: layout }
+        page: { layout: settings.layout }
     };
 }
 
