@@ -83,7 +83,7 @@ var RegisterForm = React.createClass({
     componentWillMount: function() {
       // update redux store
         var action = {
-            page: setPageState({current_page: 'register'})
+            page: setPageState({layout: 'register'})
         }
         this.props.dispatchPage(action);
 

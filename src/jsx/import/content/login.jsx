@@ -116,7 +116,7 @@ var LoginForm = React.createClass({
 
       // update redux store
         var action = {
-            page: setPageState({current_page: 'login'})
+            page: setPageState({layout: 'login'})
         }
         this.props.dispatchPage(action);
     },

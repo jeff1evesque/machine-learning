@@ -11,7 +11,7 @@
 
 const page = (state, action) => {
     return Object.assign({}, state, {
-        page: {current_page: action.page.current_page}
+        page: {layout: action.page.layout}
     });
 }
 

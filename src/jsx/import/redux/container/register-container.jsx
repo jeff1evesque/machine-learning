@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
     return {
         user: state,
         page: {
-            current_page: state.page.current_page
+            layout: state.page.layout
         }
     }
 }
