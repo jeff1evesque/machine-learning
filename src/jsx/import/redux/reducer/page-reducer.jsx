@@ -9,7 +9,7 @@
  *
  */
 
-const pageSettings = (state='default', action) => {
+const pageConfig = (state='default', action) => {
     if (!!action && !!action.page && !!action.page.layout) {
         return Object.assign({}, state, {
             page: {
@@ -23,4 +23,4 @@ const pageSettings = (state='default', action) => {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default pageSettings
+export default pageConfig
