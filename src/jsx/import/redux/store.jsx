@@ -16,6 +16,7 @@
 
 import { createStore, combineReducers } from 'redux';
 import login from './reducer/login-reducer.jsx';
+import page from './reducer/page-reducer.jsx';
 
 // username from sessionStorage
 const username = sessionStorage.getItem('username') || 'anonymous'
