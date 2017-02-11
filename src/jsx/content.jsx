@@ -17,14 +17,9 @@ import UserMenu from './import/navigation/user-menu.jsx';
 import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
 import HomePage from './import/content/home-page.jsx';
+import PageState from './import/redux/container/content-container.jsx';
 
 var Page = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            display_name: 'none',
-        };
-    },
   // call back: return side navigation
     renderNavBar: function() {
         if (
@@ -72,6 +67,9 @@ var Page = React.createClass({
     }
 });
 
+// indicate which class can be exported, and instantiated via 'require'
+export default Page
+
 // render form
 //
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
@@ -81,7 +79,7 @@ var Page = React.createClass({
 //
 ReactDOM.render(
     <Provider store={store}>
-        <AppRouter indexRoute={Page} />
+        <AppRouter indexRoute={PageState} />
     </Provider>,
     document.querySelector('.container')
 );
