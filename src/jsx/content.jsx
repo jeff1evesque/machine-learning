@@ -22,27 +22,14 @@ var Page = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            render_subpage: 'SupportVector',
             display_name: 'none',
         };
-    },
-  // update 'state properties': click event has not 'target'
-    setClickType: function(event) {
-        if (event.home) {
-            this.setState({render_subpage: 'SupportVector'});
-        }
-        else if (event.login) {
-            this.setState({render_subpage: 'LoginForm'});
-        }
-        else if (event.register) {
-            this.setState({render_subpage: 'RegisterForm'});
-        }
     },
   // call back: return side navigation
     renderNavBar: function() {
         if (
-            this.state.render_subpage == 'LoginForm' ||
-            this.state.render_subpage == 'RegisterForm'
+            this.state.props.page.layout == 'login' ||
+            this.state.props.page.layout == 'register'
         ) {
             return false;
         }
@@ -52,49 +39,15 @@ var Page = React.createClass({
     },
   // main content or homepage
     renderContent: function() {
+      // local variables
+        var navbar = this.renderNavBar();
 
         if (
-            this.props &&
-            this.props.children &&
-            this.props.children.props
+            this.state.props.page.layout == 'login' ||
+            this.state.props.page.layout == 'register' ||
+            this.state.props.page.layout == 'support-vector'
         ) {
-            var navbar = this.renderNavBar();
-            var property = this.props.children.props;
-
-          // page assignment: login, registration
-            if (
-                property &&
-                property.route &&
-                property.route.component &&
-                property.route.component.name
-            ) {
-                var displayName = this.state.display_name;
-                var componentName = property.route.component.name;
-
-              // session assignment: analysis
-                if (
-                    property &&
-                    property.children &&
-                    property.children.props &&
-                    property.children.props.route &&
-                    property.children.props.route.component &&
-                    property.children.props.route.component.displayName
-                ) {
-                    var route = property.children.props.route;
-                    var displayName = route.component.displayName;
-                    var componentName = property.route.component.name;
-                }
-            }
-            else {
-                var displayName = this.state.display_name;
-                var componentName = this.state.component_name;
-            }
-
-            var SelectedContent = <MainContent
-                                      renderNavBar={navbar}
-                                      componentType={componentName}
-                                      sessionType={displayName}
-                                  />;
+            var SelectedContent = <MainContent renderNavBar={navbar} />;
         }
         else {
             var SelectedContent = <HomePage />;
@@ -104,34 +57,13 @@ var Page = React.createClass({
     },
   // display result
     render: function() {
+      // local variables
         var SelectedContent = this.renderContent();
-        var componentName = 'Home';
-
-      // page assignment: login, registration
-        if (
-            this.props &&
-            this.props.children &&
-            this.props.children.props
-        ) {
-            var property = this.props.children.props;
-
-            if (
-                property &&
-                property.route &&
-                property.route.component &&
-                property.route.component.name
-            ) {
-                var componentName = property.route.component.name;
-            }
-        }
 
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
-                    <UserMenu
-                        onChange={this.setClickType}
-                        componentType={componentName}
-                    />
+                    <UserMenu />
                 </div>
 
                 {SelectedContent}
