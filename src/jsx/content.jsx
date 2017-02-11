@@ -13,7 +13,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
-import PageState from './redux/container/content-container.jsx';
+import PageState from './import/redux/container/content-container.jsx';
 
 // render form
 //
