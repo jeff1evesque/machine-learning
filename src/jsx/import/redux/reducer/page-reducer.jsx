@@ -11,7 +11,7 @@
 
 const page = (state, action) => {
     return Object.assign({}, state, {
-        page: {layout: action.page.layout}
+        layout: action.page.layout
     });
 }
 
