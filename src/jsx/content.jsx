@@ -16,8 +16,6 @@ import store from './import/redux/store.jsx';
 
 // render application
 //
-// @indexRoute, is accessible within child component as 'this.props.indexRoute'
-//
 // Note: the 'Provider' component, makes redux data to be accessible to all
 //       container components, without passing it explicitly.
 //
