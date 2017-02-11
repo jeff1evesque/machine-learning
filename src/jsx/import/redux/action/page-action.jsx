@@ -7,7 +7,7 @@
 
 function setPageState(settings) {
   // local variables
-    var current_page = settings.layout;
+    var layout = settings.layout;
 
     return {
         page: { layout: layout }
