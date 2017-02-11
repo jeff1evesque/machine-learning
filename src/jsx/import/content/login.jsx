@@ -109,16 +109,16 @@ var LoginForm = React.createClass({
         }
     },
     componentWillMount: function() {
-      // redirect to homepage if logged-in
-        if (this.props.user.name != 'anonymous') {
-            browserHistory.push('/');
-        }
-
       // update redux store
         var action = {
             page: setPageState({layout: 'login'})
         }
         this.props.dispatchPage(action);
+
+      // redirect to homepage if logged-in
+        if (this.props.user.name != 'anonymous') {
+            browserHistory.push('/');
+        }
     },
   // triggered when 'state properties' change
     render: function() {

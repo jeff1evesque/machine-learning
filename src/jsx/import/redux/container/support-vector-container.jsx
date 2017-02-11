@@ -1,6 +1,5 @@
 /**
- * register-container.jsx: redux store for general page settings, login, and
- *                         logout processes.
+ * support-vector.jsx: rredux store for general page settings.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,13 +10,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import RegisterForm from '../../content/register.jsx';
+import LoginForm from '../../content/support-vector.jsx';
 import setPageState from '../action/page-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     return {
-        user: state,
         page: {
             layout: state.page.layout
         }
@@ -32,10 +30,10 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 // pass selected properties from redux state tree to component
-const RegisterState = connect(
+const SvState = connect(
     mapStateToProps,
     mapDispatchToProps
-)(RegisterForm)
+)(SupportVector)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default RegisterState
+export default SvState

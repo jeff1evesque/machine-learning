@@ -17,7 +17,7 @@ import ResultDisplay from '../result/result-display.jsx';
 import Spinner from '../general/spinner.jsx';
 import checkValidString from '../validator/valid-string.js';
 
-var SupportVector = React.createClass({
+var SvState = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -164,6 +164,13 @@ var SupportVector = React.createClass({
                 value_session_type: this.getSessionValue(this.props.routerProp)
             });
         }
+    },
+    componentWillMount: function() {
+      // update redux store
+        var action = {
+            page: setPageState({layout: 'support-vector'})
+        }
+        this.props.dispatchPage(action)
     },
   // triggered when 'state properties' change
     render: function() {

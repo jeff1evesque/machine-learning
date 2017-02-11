@@ -10,14 +10,14 @@ import DataNew from './import/session-type/data-new.jsx';
 import DataAppend from './import/session-type/data-append.jsx';
 import ModelGenerate from './import/session-type/model-generate.jsx';
 import ModelPredict from './import/session-type/model-predict.jsx';
-import SupportVector from './import/content/support-vector.jsx';
+import SvState from './import/redux/container/support-vector-container.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
 
 // constant: analysis layout
 const AnalysisLayout = (props) => (
     <div className='analysis-container'>
-        <SupportVector />
+        <SvState />
         {this.props.children}
     </div>
 );
