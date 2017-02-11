@@ -15,7 +15,7 @@ import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
 import PageState from './import/redux/container/content-container.jsx';
 
-// render form
+// render application
 //
 // @indexRoute, is accessible within child component as 'this.props.indexRoute'
 //
