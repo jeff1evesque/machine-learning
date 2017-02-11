@@ -13,7 +13,6 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import { loadState } from '../../redux/load-storage.jsx';
 import setLogoutState from '../../redux/action/login-action.jsx';
 
 var MenuLogin = React.createClass({
@@ -26,73 +25,78 @@ var MenuLogin = React.createClass({
     },
     componentDidUpdate: function() {
         if (
-            this.props === undefined &&
-            this.props.username === undefined
+            this.props.user.name == 'anonymous' &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
+          // update redux store
+            var username = sessionStorage.getItem('username')
+            var action = setLoginState(username);
+            this.props.dispatch(action);
+
           // update component states
-            this.setState({url: '/login'});
-            this.setState({url_caption: 'Sign in'});
+            this.setState({
+                url: '/logout',
+                url_caption: 'Log out'
+            });
         }
         else if (
-            this.props &&
-            this.props.username &&
-            this.props.username != 'anonymous'
+            this.props.user.name != 'anonymous' &&
+            sessionStorage.getItem('username') == 'anonymous'
         ) {
           // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
+            this.setState({
+                url: '/login',
+                url_caption: 'Sign in'
+            });
         }
         else if (
-            loadState('username') &&
-            String(loadState('username')) != 'anonymous'
+            this.props.user.name != 'anonymous' &&
+            sessionStorage.getItem('username') != 'anonymous'
         ) {
           // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
+            this.setState({
+                url: '/logout',
+                url_caption: 'Log out'
+            });
+        }
+        else if (
+            this.props.user.name == 'anonymous' &&
+            sessionStorage.getItem('username') == 'anonymous'
+        ) {
+          // update component states
+            this.setState({
+                url: '/login',
+                url_caption: 'Sign in'
+            });
         }
         else {
           // update component states
-            this.setState({url: '/login'});
-            this.setState({url_caption: 'Sign in'});
+            this.setState({
+                url: '/login',
+                url_caption: 'Sign in'
+            });
         }
     },
     componentWillMount: function() {
-        if (
-            this.props === undefined ||
-            this.props.username === undefined
-        ) {
+        if (this.props.user.name != 'anonymous') {
           // update component states
-            this.setState({url: '/login'});
-            this.setState({url_caption: 'Sign in'});
-        }
-        else if (
-            this.props &&
-            this.props.username &&
-            this.props.username != 'anonymous'
-        ) {
-          // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
-        }
-        else if (
-            loadState('username') &&
-            String(loadState('username')) != 'anonymous'
-        ) {
-          // update component states
-            this.setState({url: '/logout'});
-            this.setState({url_caption: 'Log out'});
+            this.setState({
+                url: '/logout',
+                url_caption: 'Log out'
+            });
         }
         else {
           // update component states
-            this.setState({url: '/login'});
-            this.setState({url_caption: 'Sign in'});
+            this.setState({
+                url: '/login',
+                url_caption: 'Sign in'
+            });
         }
     },
     menuClicked: function(event) {
       // logout: remove username from sessionStorage
         if (
-            loadState('username') &&
-            String(loadState('username')) != 'anonymous' &&
+            this.props.user.name != 'anonymous' &&
             this.state.url == '/logout'
         ) {
           // update redux store

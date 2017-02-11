@@ -10,7 +10,6 @@
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
 import { browserHistory } from 'react-router';
-import { loadState } from '../redux/load-storage.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
 
 var RegisterForm = React.createClass({
@@ -82,36 +81,8 @@ var RegisterForm = React.createClass({
         }
     },
     componentWillMount: function() {
-      // load username from redux: user already logged-in
-        if (
-            this.props &&
-            this.props.username != 'anonymous'
-        ) {
-            var username = this.props.username;
-        }
-      // load username from sessionStorage: maybe browser reloaded
-        else if (
-            (this.props === undefined || this.props.username === undefined) &&
-            loadState('username') &&
-            String(loadState('username')) != 'anonymous'
-        ) {
-            var username = loadState('username')
-            var action = setLoginState(username);
-            this.props.dispatch(action);
-        }
-        else if (
-            this.props &&
-            this.props.username == 'anonymous' &&
-            loadState('username') &&
-            String(loadState('username')) != 'anonymous'
-        ) {
-            var username = loadState('username')
-            var action = setLoginState(username);
-            this.props.dispatch(action);
-        }
-
       // redirect to homepage if logged-in
-        if (username && String(username) != 'anonymous') {
+        if (this.props.user.name != 'anonymous') {
             browserHistory.push('/');
         }
     },

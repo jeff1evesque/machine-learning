@@ -125,20 +125,28 @@ var SupportVector = React.createClass({
 
           // assign state: if router triggered component
             if (routerSession == 'DataNew') {
-                this.setState({submit: false});
-                this.setState({value_session_type: 'data_new'});
+                this.setState({
+                    submit: false,
+                    value_session_type: 'data_new'
+                });
             }
             else if (routerSession == 'DataAppend') {
-                this.setState({submit: false});
-                this.setState({value_session_type: 'data_append'});
+                this.setState({
+                    submit: false,
+                    value_session_type: 'data_append'
+                });
             }
             else if (routerSession == 'ModelGenerate') {
-                this.setState({submit: false});
-                this.setState({value_session_type: 'model_generate'});
+                this.setState({
+                    submit: false,
+                    value_session_type: 'model_generate'
+                });
             }
             else if (routerSession == 'ModelPredict') {
-                this.setState({submit: false});
-                this.setState({value_session_type: 'model_predict'});
+                this.setState({
+                    submit: false,
+                    value_session_type: 'model_predict'
+                });
             }
         }
     },
