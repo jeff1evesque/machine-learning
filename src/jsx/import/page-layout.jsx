@@ -68,4 +68,4 @@ var PageLayout = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Layout
+export default PageLayout
