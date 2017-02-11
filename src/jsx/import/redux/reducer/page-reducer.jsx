@@ -10,9 +10,16 @@
  */
 
 const page = (state, action) => {
-    return Object.assign({}, state, {
-        layout: action.page.layout
-    });
+    if (!!action && !!action.page && !!action.page.layout) {
+        return Object.assign({}, state, {
+            page: {
+                layout: action.page.layout
+            }
+        });
+    }
+    else {
+        return state;
+    }
 }
 
 // indicate which class can be exported, and instantiated via 'require'
