@@ -15,8 +15,8 @@ const login = (state='anonymous', action) => {
             return Object.assign({}, state, {name : action.username});
         case 'LOGGED-OUT':
             return Object.assign({}, state, {name : 'anonymous'});
-    default:
-        return state;
+        default:
+            return state;
     }
 }
 
