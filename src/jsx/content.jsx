@@ -11,67 +11,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import MainContent from './import/main.jsx';
-import NavBar from './import/navigation/nav-bar.jsx';
-import UserMenu from './import/navigation/user-menu.jsx';
 import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
-import HomePage from './import/content/home-page.jsx';
-import PageState from './import/redux/container/content-container.jsx';
-
-var Page = React.createClass({
-  // call back: return side navigation
-    renderNavBar: function() {
-        if (
-            this.state.props.page.layout == 'login' ||
-            this.state.props.page.layout == 'register'
-        ) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    },
-  // main content or homepage
-    renderContent: function() {
-      // local variables
-        var navbar = this.renderNavBar();
-
-        if (
-            this.state.props.page.layout == 'login' ||
-            this.state.props.page.layout == 'register' ||
-            this.state.props.page.layout == 'support-vector'
-        ) {
-            var SelectedContent = <MainContent
-                                      renderNavBar={navbar}
-                                      layout={this.state.props.layout}
-                                  />;
-        }
-        else {
-            var SelectedContent = <HomePage />;
-        }
-
-        return SelectedContent;
-    },
-  // display result
-    render: function() {
-      // local variables
-        var SelectedContent = this.renderContent();
-
-        return(
-            <div className='container-inner'>
-                <div className='menu-container'>
-                    <UserMenu />
-                </div>
-
-                {SelectedContent}
-            </div>
-        );
-    }
-});
-
-// indicate which class can be exported, and instantiated via 'require'
-export default Page
+import PageState from './redux/container/content-container.jsx';
 
 // render form
 //
