@@ -17,7 +17,7 @@ import ResultDisplay from '../result/result-display.jsx';
 import Spinner from '../general/spinner.jsx';
 import checkValidString from '../validator/valid-string.js';
 
-var SvState = React.createClass({
+var SupportVector = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
