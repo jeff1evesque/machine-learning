@@ -15,7 +15,6 @@ import RegisterState from './redux/container/register-container.jsx';
 var SvContainer = React.createClass({
   // display result
     render: function() {
-        console.log('main.jsx (render): ', this.props);
         return(
             <div className='analysis-container'>
                 <SupportVector routerProp={this.props.displayName} />
