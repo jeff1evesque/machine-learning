@@ -7,7 +7,8 @@
 
 function setPageState(settings) {
     return {
-        page: { layout: settings.layout }
+        type: 'PAGE-CONFIG',
+        page: {layout: settings.layout}
     };
 }
 
