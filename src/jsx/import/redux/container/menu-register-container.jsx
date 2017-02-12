@@ -15,7 +15,7 @@ import MenuRegister from '../../navigation/menu-items/menu-register.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     return {
-        user: state
+        user: {name: state.user}
     }
 }
 
