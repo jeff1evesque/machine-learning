@@ -58,7 +58,7 @@ var PageLayout = React.createClass({
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
-                    <UserMenu />
+                    <UserMenu layout={this.props.page.layout} />
                 </div>
 
                 {SelectedContent}
