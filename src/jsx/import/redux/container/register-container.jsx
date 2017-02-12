@@ -17,7 +17,9 @@ import setPageState from '../action/page-action.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     return {
-        user: state,
+        user: {
+            name: state.user
+        },
         page: {
             layout: state.page.layout
         }

@@ -23,7 +23,7 @@ const username = sessionStorage.getItem('username') || 'anonymous'
 
 // create and initialize redux
 const store = createStore(combineReducers({login, page}), {
-    login: {name: username},
+    user: {name: username},
     page: {layout: 'default'}
 });
 
