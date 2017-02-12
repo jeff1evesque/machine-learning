@@ -13,7 +13,8 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import setLogoutState from '../../redux/action/login-action.jsx';
+import setLoginState from '../../redux/action/login-action.jsx';
+import setLogoutState from '../../redux/action/logout-action.jsx';
 
 var MenuLogin = React.createClass({
   // initial 'state properties'
