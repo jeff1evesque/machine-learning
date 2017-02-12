@@ -20,8 +20,8 @@ var PageLayout = React.createClass({
   // call back: return side navigation
     renderNavBar: function() {
         if (
-            this.state.props.page.layout == 'login' ||
-            this.state.props.page.layout == 'register'
+            this.props.page.layout == 'login' ||
+            this.props.page.layout == 'register'
         ) {
             return false;
         }
@@ -35,9 +35,9 @@ var PageLayout = React.createClass({
         var navbar = this.renderNavBar();
 
         if (
-            this.state.props.page.layout == 'login' ||
-            this.state.props.page.layout == 'register' ||
-            this.state.props.page.layout == 'support-vector'
+            this.props.page.layout == 'login' ||
+            this.props.page.layout == 'register' ||
+            this.props.page.layout == 'support-vector'
         ) {
             var SelectedContent = <MainContent
                                       renderNavBar={navbar}
