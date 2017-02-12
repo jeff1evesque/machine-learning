@@ -28,39 +28,8 @@ var MenuLogin = React.createClass({
         if (
             this.props &&
             this.props.user &&
-            this.props.user.name == 'anonymous' &&
-            sessionStorage.getItem('username') != 'anonymous'
-        ) {
-          // update redux store
-            var username = sessionStorage.getItem('username')
-            var action = setLoginState(username);
-            this.props.dispatch(action);
-
-          // update component states
-            this.setState({
-                url: '/logout',
-                url_caption: 'Log out'
-            });
-        }
-        else if (
-            this.props &&
-            this.props.user &&
             !!this.props.user.name &&
-            this.props.user.name != 'anonymous' &&
-            sessionStorage.getItem('username') == 'anonymous'
-        ) {
-          // update component states
-            this.setState({
-                url: '/login',
-                url_caption: 'Sign in'
-            });
-        }
-        else if (
-            this.props &&
-            this.props.user &&
-            !!this.props.user.name &&
-            this.props.user.name != 'anonymous' &&
-            sessionStorage.getItem('username') != 'anonymous'
+            this.props.user.name != 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -71,8 +40,8 @@ var MenuLogin = React.createClass({
         else if (
             this.props &&
             this.props.user &&
-            this.props.user.name == 'anonymous' &&
-            sessionStorage.getItem('username') == 'anonymous'
+            this.props.user.name &&
+            this.props.user.name == 'anonymous'
         ) {
           // update component states
             this.setState({
@@ -128,7 +97,7 @@ var MenuLogin = React.createClass({
           // redirect to homepage if logged-out
             browserHistory.push('/');
         }
-},
+    },
   // triggered when 'state properties' change
     render: function(){
         return(
