@@ -88,7 +88,12 @@ var RegisterForm = React.createClass({
         this.props.dispatchPage(action);
 
       // redirect to homepage if logged-in
-        if (this.props.user.name != 'anonymous') {
+        if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
+        ) {
             browserHistory.push('/');
         }
     },
