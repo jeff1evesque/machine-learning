@@ -13,7 +13,7 @@ import ModelPredict from './import/session-type/model-predict.jsx';
 import SupportVector from './import/content/support-vector.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
-import PageState from './import/redux/container/content-container.jsx';
+import PageState from './import/redux/container/page-container.jsx';
 
 // constant: analysis layout
 const AnalysisLayout = (props) => (

@@ -1,5 +1,5 @@
 /**
- * content-container.jsx: redux store for general page settings.
+ * page-container.jsx: redux store for general page settings.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
