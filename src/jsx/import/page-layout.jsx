@@ -12,6 +12,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import UserMenu from './navigation/user-menu.jsx';
+import HomePage from './content/home-page.jsx';
 import NavBar from './navigation/nav-bar.jsx';
 import setPageState from './redux/action/page-action.jsx';
 
@@ -25,26 +26,31 @@ var PageLayout = React.createClass({
         if (layout == 'login') {
             var SideBar = 'span';
             var contentCSS = 'main-full-span login-form';
+            var Content = this.props.children;
         }
         else if (layout == 'register') {
             var SideBar = 'span';
             var contentCSS = 'main-full-span register-form'
+            var Content = this.props.children;
         }
         else if (layout == 'support-vector') {
             var SideBar = NavBar;
             var contentCSS = 'analysis-container';
+            var Content = this.props.children;
         }
         else if (layout == 'home') {
             var SideBar = 'span';
             var contentCSS = 'main-full-span';
+            var Content = <HomePage />;
         }
         else {
             var SideBar = NavBar;
             var contentCSS = 'analysis-container';
+            var Content = this.props.children;
         }
 
       // return sidebar and css string
-        return {sidebar: SideBar, contentCSS: contentCSS}
+        return {sidebar: SideBar, contentCSS: contentCSS, content: Content}
     },
   // before component mounted
     componentWillMount: function() {
@@ -56,6 +62,7 @@ var PageLayout = React.createClass({
     render: function() {
       // local variables
         var getLayout = this.getLayout();
+        var Content = getLayout.content;
         var contentCSS = getLayout.contentCSS;
         var SideBar = getLayout.sidebar;
 
@@ -68,7 +75,7 @@ var PageLayout = React.createClass({
                 <div className='main'>
                     <SideBar />
                     <div className={contentCSS}>
-                        {this.props.children}
+                        {Content}
                     </div>
                 </div>
             </div>
