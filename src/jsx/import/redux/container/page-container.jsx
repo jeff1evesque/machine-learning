@@ -29,10 +29,17 @@ const mapStateToProps = (state) => {
     }
 }
 
+// wraps each function of the object to be dispatch callable
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchPage: dispatch.bind(setPageState)
+    }
+}
+
 // pass selected properties from redux state tree to component
 const PageState = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(PageLayout)
 
 // indicate which class can be exported, and instantiated via 'require'
