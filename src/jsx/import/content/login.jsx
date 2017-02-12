@@ -15,6 +15,7 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
+import setPageState from '../redux/action/page-action.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
