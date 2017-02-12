@@ -16,12 +16,29 @@ import setPageState from '../action/page-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
+  // validate username
+    if (state && state.user && !!state.user.name){
+        var username = state.user.name
+    }
+    else {
+        var username = 'anonymous'
+    }
+
+  // validate layout
+    if (state && state.page && !!state.page.layout){
+        var layout = state.page.layout
+    }
+    else {
+        var layout = 'default'
+    }
+
+  // return redux to state
     return {
         user: {
-            name: state.user.name
-        },
+            name: username
+        }
         page: {
-            layout: state.page.layout
+            layout: layout
         }
     }
 }

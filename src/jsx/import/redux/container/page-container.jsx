@@ -14,9 +14,17 @@ import PageLayout from '../../page-layout.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
+  // validate layout
+    if (state && state.page && !!state.page.layout){
+        var layout = state.page.layout
+    }
+    else {
+        var layout = 'default'
+    }
+
     return {
         page: {
-            layout: state.page.layout
+            layout: layout
         }
     }
 }
