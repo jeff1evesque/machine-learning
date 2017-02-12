@@ -9,7 +9,7 @@
  *
  */
 
-const login = (state='anonymous', action) => {
+const user = (state='anonymous', action) => {
     switch(action.type) {
         case 'LOGGED-IN':
             return Object.assign({}, state, {name : action.username});
@@ -21,4 +21,4 @@ const login = (state='anonymous', action) => {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default login
+export default user
