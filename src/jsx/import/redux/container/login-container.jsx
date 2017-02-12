@@ -37,7 +37,7 @@ const mapStateToProps = (state) => {
     return {
         user: {
             name: username
-        }
+        },
         page: {
             layout: layout
         }
