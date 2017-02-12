@@ -19,8 +19,8 @@ import setPageState from '../action/page-action.jsx';
 const mapStateToProps = (state) => {
     return {
         user: {
-            name: state.user
-        },
+            name: state.user.name
+        }
         page: {
             layout: state.page.layout
         }
