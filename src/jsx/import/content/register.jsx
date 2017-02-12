@@ -83,9 +83,7 @@ var RegisterForm = React.createClass({
     },
     componentWillMount: function() {
       // update redux store
-        var action = {
-            page: setPageState({layout: 'register'})
-        }
+        var action = setPageState({layout: 'register'});
         this.props.dispatchPage(action);
 
       // redirect to homepage if logged-in
