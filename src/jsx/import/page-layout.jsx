@@ -11,49 +11,29 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import MainContent from './main-content.jsx';
-import NavBar from './navigation/nav-bar.jsx';
 import UserMenu from './navigation/user-menu.jsx';
-import HomePage from './content/home-page.jsx';
+import NavBar from './navigation/nav-bar.jsx';
 
 var PageLayout = React.createClass({
-  // call back: return side navigation
-    renderNavBar: function() {
-        if (
-            this.props.page.layout == 'login' ||
-            this.props.page.layout == 'register'
-        ) {
-            return false;
-        }
-        else {
-            return true;
-        }
-    },
-  // main content or homepage
-    renderContent: function() {
-      // local variables
-        var navbar = this.renderNavBar();
-
-        if (
-            this.props.page.layout == 'login' ||
-            this.props.page.layout == 'register' ||
-            this.props.page.layout == 'support-vector'
-        ) {
-            var SelectedContent = <MainContent
-                                      renderNavBar={navbar}
-                                      layout={this.props.page.layout}
-                                  />;
-        }
-        else {
-            var SelectedContent = <HomePage />;
-        }
-
-        return SelectedContent;
-    },
   // display result
     render: function() {
-      // local variables
-        var SelectedContent = this.renderContent();
+        var layout = this.props.page.layout;
+        if (layout == 'login') {
+            var SideBar = 'span';
+            var contentCSS = 'main-full-span login-form';
+        }
+        else if (this.props.layout == 'register') {
+            var SideBar = 'span';
+            var contentCSS = 'main-full-span register-form'
+        }
+        else if (this.props.layout == 'support-vector') {
+            var SideBar = NavBar;
+            var contentCSS = 'analysis-container';
+        }
+        else {
+            var SideBar = NavBar;
+            var contentCSS = 'main-full-span login-form';
+        }
 
         return(
             <div className='container-inner'>
@@ -61,7 +41,12 @@ var PageLayout = React.createClass({
                     <UserMenu layout={this.props.page.layout} />
                 </div>
 
-                {SelectedContent}
+                <div className='main'>
+                    <SideBar />
+                    <div className={contentCSS}>
+                        {this.props.children}
+                    </div>
+                </div>
             </div>
         );
     }
