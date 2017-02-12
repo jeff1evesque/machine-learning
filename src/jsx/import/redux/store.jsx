@@ -22,7 +22,7 @@ import page from './reducer/page-reducer.jsx';
 const username = sessionStorage.getItem('username') || 'anonymous'
 
 // create and initialize redux
-const store = createStore(combineReducers({login, page}), {
+const store = createStore(combineReducers({user, page}), {
     user: {name: username},
     page: {layout: 'default'}
 });
