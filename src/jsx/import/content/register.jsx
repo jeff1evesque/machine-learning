@@ -9,8 +9,9 @@
 
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
-import setLoginState from '../redux/action/login-action.jsx';
 import { browserHistory } from 'react-router';
+import setLoginState from '../redux/action/login-action.jsx';
+import setPageState from '../redux/action/page-action.jsx';
 
 var RegisterForm = React.createClass({
   // initial 'state properties'
