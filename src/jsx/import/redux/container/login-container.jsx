@@ -18,7 +18,7 @@ import setPageState from '../action/page-action.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
   // validate username
-    if (state && state.user && !!state.user.name){
+    if (state && state.user && !!state.user.name) {
         var username = state.user.name
     }
     else {
@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
     }
 
   // validate layout
-    if (state && state.page && !!state.page.layout){
+    if (state && state.page && !!state.page.layout) {
         var layout = state.page.layout
     }
     else {

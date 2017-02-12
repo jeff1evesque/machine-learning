@@ -15,7 +15,7 @@ import MenuLogin from '../../navigation/menu-items/menu-login.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
   // validate username
-    if (state && state.user && !!state.user.name){
+    if (state && state.user && !!state.user.name) {
         var username = state.user.name
     }
     else {
