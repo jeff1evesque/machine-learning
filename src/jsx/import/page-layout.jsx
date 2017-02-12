@@ -41,7 +41,7 @@ var PageLayout = React.createClass({
         ) {
             var SelectedContent = <MainContent
                                       renderNavBar={navbar}
-                                      layout={this.props.layout}
+                                      layout={this.props.page.layout}
                                   />;
         }
         else {
