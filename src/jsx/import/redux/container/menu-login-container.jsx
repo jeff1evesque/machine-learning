@@ -14,9 +14,7 @@ import MenuLogin from '../../navigation/menu-items/menu-login.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-    return {
-        user: {name: state.user}
-    }
+    return {user: state.user}
 }
 
 // pass selected properties from redux state tree to component
