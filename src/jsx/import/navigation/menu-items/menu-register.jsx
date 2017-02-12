@@ -44,7 +44,6 @@ var MenuRegister = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var selectedContent = this.renderContent();
-
         return(selectedContent);
     }
 });
