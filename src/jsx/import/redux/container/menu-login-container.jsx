@@ -27,4 +27,3 @@ const MenuLoginState = connect(
 
 // indicate which class can be exported, and instantiated via 'require'
 export default MenuLoginState
-
