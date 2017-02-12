@@ -15,9 +15,12 @@ import UserMenu from './navigation/user-menu.jsx';
 import NavBar from './navigation/nav-bar.jsx';
 
 var PageLayout = React.createClass({
-  // display result
-    render: function() {
+  // callback: used to return spinner
+    getLayout: function() {
+      // local variables
         var layout = this.props.page.layout;
+
+      // determine sidebar and css string
         if (layout == 'login') {
             var SideBar = 'span';
             var contentCSS = 'main-full-span login-form';
@@ -34,6 +37,16 @@ var PageLayout = React.createClass({
             var SideBar = NavBar;
             var contentCSS = 'main-full-span login-form';
         }
+
+      // return sidebar and css string
+        return {sidebar: SideBar, contentCSS: contentCSS}
+    },
+  // display result
+    render: function() {
+      // local variables
+        var getLayout = this.getLayout();
+        var contentCSS = getLayout.contentCSS;
+        var SideBar = getLayout.sidebar;
 
         return(
             <div className='container-inner'>
