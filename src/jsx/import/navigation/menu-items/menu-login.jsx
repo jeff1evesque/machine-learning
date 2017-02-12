@@ -25,6 +25,8 @@ var MenuLogin = React.createClass({
     },
     componentDidUpdate: function() {
         if (
+            this.props &&
+            this.props.user &&
             this.props.user.name == 'anonymous' &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
@@ -40,6 +42,9 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
             this.props.user.name != 'anonymous' &&
             sessionStorage.getItem('username') == 'anonymous'
         ) {
@@ -50,6 +55,9 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
             this.props.user.name != 'anonymous' &&
             sessionStorage.getItem('username') != 'anonymous'
         ) {
@@ -60,6 +68,8 @@ var MenuLogin = React.createClass({
             });
         }
         else if (
+            this.props &&
+            this.props.user &&
             this.props.user.name == 'anonymous' &&
             sessionStorage.getItem('username') == 'anonymous'
         ) {
@@ -78,7 +88,12 @@ var MenuLogin = React.createClass({
         }
     },
     componentWillMount: function() {
-        if (this.props.user.name != 'anonymous') {
+        if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
+        ) {
           // update component states
             this.setState({
                 url: '/logout',

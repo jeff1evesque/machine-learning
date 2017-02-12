@@ -32,7 +32,9 @@ var MenuRegister = React.createClass({
     },
     componentDidUpdate: function() {
         if (
-            this.props.user.name &&
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
             sessionStorage.getItem('username') &&
             this.props.user.name != sessionStorage.getItem('username')
         ) {
