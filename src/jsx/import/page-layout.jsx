@@ -13,6 +13,7 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import UserMenu from './navigation/user-menu.jsx';
 import NavBar from './navigation/nav-bar.jsx';
+import setPageState from './redux/action/page-action.jsx';
 
 var PageLayout = React.createClass({
   // callback: used to return spinner
