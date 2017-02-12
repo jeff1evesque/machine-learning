@@ -9,13 +9,11 @@
  *
  */
 
-const pageConfig = (state, action) => {
+const pageConfig = (state='default', action) => {
     switch(action.type) {
         case 'PAGE-CONFIG':
             return Object.assign({}, state, {
-                page: {
-                    layout: action.page.layout
-                }
+                layout: action.page.layout
             });
         default:
             return state;
