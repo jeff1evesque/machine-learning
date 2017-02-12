@@ -25,21 +25,31 @@ var PageLayout = React.createClass({
             var SideBar = 'span';
             var contentCSS = 'main-full-span login-form';
         }
-        else if (this.props.layout == 'register') {
+        else if (layout == 'register') {
             var SideBar = 'span';
             var contentCSS = 'main-full-span register-form'
         }
-        else if (this.props.layout == 'support-vector') {
+        else if (layout == 'support-vector') {
             var SideBar = NavBar;
             var contentCSS = 'analysis-container';
         }
+        else if (layout == 'home') {
+            var SideBar = 'span';
+            var contentCSS = 'main-full-span';
+        }
         else {
             var SideBar = NavBar;
-            var contentCSS = 'main-full-span login-form';
+            var contentCSS = 'analysis-container';
         }
 
       // return sidebar and css string
         return {sidebar: SideBar, contentCSS: contentCSS}
+    },
+  // before component mounted
+    componentWillMount: function() {
+      // update redux store
+        var action = setPageState({layout: 'home'});
+        this.props.dispatchPage(action);
     },
   // display result
     render: function() {
