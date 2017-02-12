@@ -57,24 +57,15 @@ var MainContent = React.createClass({
     },
   // display result
     render: function() {
-        if (
-            this.props &&
-            this.props.layout == 'login'
-        ) {
+        if (this.props.layout == 'login') {
             var SideBar = 'span';
             var ChildComponent = <LoginLayout />;
         }
-        else if (
-            this.props &&
-            this.props.layout == 'register'
-        ) {
+        else if (this.props.layout == 'register') {
             var SideBar = 'span';
             var ChildComponent = <RegisterLayout />;
         }
-        else if (
-            this.props &&
-            this.props.layout == 'support-vector'
-        ) {
+        else if (this.props.layout == 'support-vector') {
             var SideBar = this.isNavBar();
             var ChildComponent = <SvContainer />;
         }
