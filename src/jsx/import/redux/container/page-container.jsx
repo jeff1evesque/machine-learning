@@ -11,6 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PageLayout from '../../page-layout.jsx';
+import setPageState from '../action/page-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
