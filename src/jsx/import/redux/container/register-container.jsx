@@ -12,7 +12,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RegisterForm from '../../content/register.jsx';
-import setPageState from '../action/page-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -22,24 +21,6 @@ const mapStateToProps = (state) => {
     }
     else {
         var username = 'anonymous'
-    }
-
-  // validate layout
-    if (state && state.page && !!state.page.layout) {
-        var layout = state.page.layout
-    }
-    else {
-        var layout = 'default'
-    }
-
-  // return redux to state
-    return {
-        user: {
-            name: username
-        },
-        page: {
-            layout: layout
-        }
     }
 }
 
