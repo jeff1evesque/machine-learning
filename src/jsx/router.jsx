@@ -13,7 +13,8 @@ import ModelPredict from './import/session-type/model-predict.jsx';
 import SupportVector from './import/content/support-vector.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
-import PageState from './import/redux/container/page-container.jsx';
+import PageLayout from './import/page-layout.jsx';
+import UserMenu from './import/navigation/user-menu.jsx';
 
 // constant: analysis layout
 const AnalysisLayout = (props) => (
@@ -52,8 +53,16 @@ var AppRouter = React.createClass({
       // render routers
         return(
             <Router history={browserHistory}>
-                <Route path='/' component={PageState}>
-                    <Route path='/session' component={AnalysisLayout}>
+                <Route path='/' component={PageLayout}>
+                    <Route
+                        path='/session'
+                        components={{
+                            MainContent: AnalysisLayout,
+                            userMenu: UserMenu,
+                            css: 'analysis-container',
+                            layout: 'analysis'
+                        }}
+                    >
                         <Route
                             path='/session/data-new'
                             component={DataNew}
@@ -73,15 +82,30 @@ var AppRouter = React.createClass({
                     </Route>
                     <Route
                         path='/login'
-                        component={LoginLayout}
+                        components={{
+                            MainContent: LoginLayout,
+                            userMenu: UserMenu,
+                            css: 'main-full-span login-form',
+                            layout: 'login'
+                        }}
                     />
                     <Route
                         path='/logout'
-                        component={LoginLayout}
+                        components={{
+                            MainContent: LoginLayout,
+                            userMenu: UserMenu,
+                            css: 'main-full-span login-form',
+                            layout: 'login'
+                        }}
                     />
                     <Route
                         path='/register'
-                        component={RegisterLayout}
+                        components={{
+                            MainContent: RegisterLayout,
+                            userMenu: UserMenu,
+                            css: 'main-full-span register-form',
+                            layout: 'register'
+                        }}
                     />
                 </Route>
             </Router>
