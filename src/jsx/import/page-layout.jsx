@@ -17,65 +17,60 @@ import NavBar from './navigation/nav-bar.jsx';
 import setPageState from './redux/action/page-action.jsx';
 
 var PageLayout = React.createClass({
-  // callback: used to return spinner
-    getLayout: function() {
+    componentWillMount: function() {
       // local variables
         var layout = this.props.page.layout;
 
+      // assign layout
+        this.setState({layout: layout});
+
       // determine sidebar and css string
         if (layout == 'login') {
-            var SideBar = 'span';
-            var contentCSS = 'main-full-span login-form';
-            var Content = this.props.children;
+            this.setState({sidebar: 'span'});
+            this.setState({css: 'main-full-span login-form'});
+            this.setState({home: 'span'});
         }
         else if (layout == 'register') {
-            var SideBar = 'span';
-            var contentCSS = 'main-full-span register-form'
-            var Content = this.props.children;
+            this.setState({sidebar: 'span'});
+            this.setState({css: 'main-full-span register-form'});
+            this.setState({home: 'span'});
         }
         else if (layout == 'support-vector') {
-            var SideBar = NavBar;
-            var contentCSS = 'analysis-container';
-            var Content = this.props.children;
+            this.setState({sidebar: NavBar});
+            this.setState({css: 'analysis-container'});
+            this.setState({home: 'span'});
         }
         else if (layout == 'home') {
-            var SideBar = 'span';
-            var contentCSS = 'main-full-span';
-            var Content = <HomePage />;
+            this.setState({sidebar: 'span'});
+            this.setState({css: 'main-full-span home'});
+            this.setState({home: HomePage});
         }
         else {
-            var SideBar = NavBar;
-            var contentCSS = 'analysis-container';
-            var Content = this.props.children;
+            this.setState({sidebar: 'span'});
+            this.setState({css: 'main-full-span'});
+            this.setState({home: HomePage});
         }
 
-      // return sidebar and css string
-        return {sidebar: SideBar, contentCSS: contentCSS, content: Content}
-    },
-  // before component mounted
-    componentWillMount: function() {
       // update redux store
         var action = setPageState({layout: 'home'});
         this.props.dispatchPage(action);
     },
   // display result
     render: function() {
-      // local variables
-        var getLayout = this.getLayout();
-        var Content = getLayout.content;
-        var contentCSS = getLayout.contentCSS;
-        var SideBar = getLayout.sidebar;
+        var SideBar = this.state.sidebar;
+        var Home = this.state.home;
 
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
-                    <UserMenu layout={this.props.page.layout} />
+                    <UserMenu layout={this.state.layout} />
                 </div>
 
                 <div className='main'>
                     <SideBar />
-                    <div className={contentCSS}>
-                        {Content}
+                    <div className={this.state.css}>
+                        <Home />
+                        {this.props.children}
                     </div>
                 </div>
             </div>
