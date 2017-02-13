@@ -11,12 +11,47 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import HomePage from './content/home-page.jsx';
+import UserMenu from './navigation/user-menu.jsx';
 
 var PageLayout = React.createClass({
   // display result
     render: function() {
       // destructure router object
-        const { MainContent, UserMenu, css, layout } = this.props
+        if (this.props && !!this.props.MainContent) {
+            var MainContent = this.props.MainContent;
+        }
+        else {
+            var MainContent = HomePage;
+        }
+
+        if (this.props && !!this.props.UserMenu) {
+            var UserMenu = this.props.UserMenu;
+        }
+        else {
+            var UserMenu = UserMenu;
+        }
+
+        if (this.props && !!this.props.SideBar) {
+            var SideBar = this.props.SideBar;
+        }
+        else {
+            var SideBar = 'span';
+        }
+
+        if (this.props && !!this.props.css) {
+            var css = this.props.css;
+        }
+        else {
+            var css = 'main-full-span home';
+        }
+
+        if (this.props && !!this.props.layout) {
+            var layout = this.props.layout;
+        }
+        else {
+            var SideBar = 'home';
+        }
 
       // render content
         return(
