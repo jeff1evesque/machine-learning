@@ -21,7 +21,7 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 // pass selected properties from redux state tree to component
-const MenuLoginState = connect(
+const MenuHomeState = connect(
     null,
     mapDispatchToProps
 )(MenuHome)
