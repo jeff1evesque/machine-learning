@@ -10,7 +10,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import setLoginState from '../../redux/action/login-action.jsx';
+import setPageState from './redux/action/page-action.jsx';
 
 var MenuRegister = React.createClass({
   // call back: return register button
@@ -25,6 +25,7 @@ var MenuRegister = React.createClass({
                     to='/register'
                     activeClassName='active'
                     className='btn btn-primary'
+                    onClick={this.menuClicked}
                 >
                    <span>Sign up</span>
                 </Link>
@@ -33,6 +34,11 @@ var MenuRegister = React.createClass({
         else {
             return (<span />);
         }
+    },
+    menuClicked: function(event) {
+      // update redux store
+        var action = setPageState({layout: 'register'});
+        this.props.dispatchPage(action);
     },
   // triggered when 'state properties' change
     render: function(){
