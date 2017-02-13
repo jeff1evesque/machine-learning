@@ -11,7 +11,6 @@ import React from 'react';
 import Spinner from '../general/spinner.jsx';
 import { browserHistory } from 'react-router';
 import setLoginState from '../redux/action/login-action.jsx';
-import setPageState from '../redux/action/page-action.jsx';
 
 var RegisterForm = React.createClass({
   // initial 'state properties'
@@ -82,10 +81,6 @@ var RegisterForm = React.createClass({
         }
     },
     componentWillMount: function() {
-      // update redux store
-        var action = setPageState({layout: 'register'});
-        this.props.dispatchPage(action);
-
       // redirect to homepage if logged-in
         if (
             this.props &&

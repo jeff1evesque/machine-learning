@@ -15,7 +15,6 @@ import React from 'react';
 import { browserHistory } from 'react-router';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login-action.jsx';
-import setPageState from '../redux/action/page-action.jsx';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
@@ -110,10 +109,6 @@ var LoginForm = React.createClass({
         }
     },
     componentWillMount: function() {
-      // update redux store
-        var action = setPageState({layout: 'login'});
-        this.props.dispatchPage(action);
-
       // redirect to homepage if logged-in
         if (
             this.props &&
