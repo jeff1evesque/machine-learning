@@ -11,6 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import MenuHome from '../../navigation/menu-items/menu-home.jsx';
+import setPageState from '../action/page-action.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
@@ -27,4 +28,3 @@ const MenuLoginState = connect(
 
 // indicate which class can be exported, and instantiated via 'require'
 export default MenuHomeState
-
