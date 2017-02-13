@@ -10,7 +10,7 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import setPageState from './redux/action/page-action.jsx';
+import setPageState from '../../redux/action/page-action.jsx';
 
 var MenuRegister = React.createClass({
   // call back: return register button

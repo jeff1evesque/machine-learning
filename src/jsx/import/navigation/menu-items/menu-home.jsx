@@ -10,7 +10,7 @@
 import React from 'react';
 import { Link } from 'react-router'
 import SvgHome from '../../svg/svg-home.jsx';
-import setPageState from './redux/action/page-action.jsx';
+import setPageState from '../../redux/action/page-action.jsx';
 
 var MenuHome = React.createClass({
     menuClicked: function(event) {
