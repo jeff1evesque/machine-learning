@@ -50,7 +50,7 @@ var PageLayout = React.createClass({
             var layout = this.props.layout;
         }
         else {
-            var SideBar = 'home';
+            var layout = 'home';
         }
 
       // render content
