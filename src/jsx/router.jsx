@@ -67,19 +67,31 @@ var AppRouter = React.createClass({
                     >
                         <Route
                             path='/session/data-new'
-                            component={DataNew}
+                            components={{
+                                component: DataNew,
+                                session_type_value: 'data_new'
+                            }}
                         />
                         <Route
                             path='/session/data-append'
-                            component={DataAppend}
+                            components={{
+                                component: DataAppend,
+                                session_type_value: 'data_append'
+                            }}
                         />
                         <Route
                             path='/session/model-generate'
-                            component={ModelGenerate}
+                            components={{
+                                component: ModelGenerate,
+                                session_type_value: 'model_generate'
+                            }}
                         />
                         <Route
                             path='/session/model-predict'
-                            component={ModelPredict}
+                            components={{
+                                component: ModelPredict,
+                                session_type_value: 'model_predict'
+                            }}
                         />
                     </Route>
                     <Route
