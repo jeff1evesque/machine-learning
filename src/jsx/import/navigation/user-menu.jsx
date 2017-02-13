@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import MenuHomeState from '../redux/container/menu-home-container.jsx';
+import MenuHome from './menu-items/menu-home.jsx';
 import MenuLoginState from '../redux/container/menu-login-container.jsx';
 import MenuRegisterState from '../redux/container/menu-register-container.jsx';
 
@@ -16,7 +16,7 @@ var UserMenu = React.createClass({
                 <nav
                     className={'main-navigation menu-login'}
                 >
-                    <MenuHomeState />
+                    <MenuHome />
                 </nav>
             );
         }
@@ -25,7 +25,7 @@ var UserMenu = React.createClass({
                 <nav
                     className={'main-navigation menu-register'}
                 >
-                    <MenuHomeState />
+                    <MenuHome />
                     <MenuLoginState />
                     <MenuRegisterState />
                 </nav>
@@ -36,7 +36,7 @@ var UserMenu = React.createClass({
                 <nav
                     className={'main-navigation menu-home'}
                 >
-                    <MenuHomeState />
+                    <MenuHome />
                     <MenuLoginState />
                     <MenuRegisterState />
                 </nav>
@@ -46,6 +46,7 @@ var UserMenu = React.createClass({
   // display result
     render: function() {
         var selectedContent = this.renderContent();
+
         return(selectedContent);
     }
 });
