@@ -15,6 +15,7 @@ import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
 import PageLayout from './import/page-layout.jsx';
 import UserMenu from './import/navigation/user-menu.jsx';
+import NavBar from './import/navigation/nav-bar.jsx';
 
 // constant: analysis layout
 const AnalysisLayout = (props) => (
@@ -58,7 +59,8 @@ var AppRouter = React.createClass({
                         path='/session'
                         components={{
                             MainContent: AnalysisLayout,
-                            userMenu: UserMenu,
+                            UserMenu: UserMenu,
+                            SideBar NavBar,
                             css: 'analysis-container',
                             layout: 'analysis'
                         }}
@@ -84,7 +86,8 @@ var AppRouter = React.createClass({
                         path='/login'
                         components={{
                             MainContent: LoginLayout,
-                            userMenu: UserMenu,
+                            UserMenu: UserMenu,
+                            SideBar 'span',
                             css: 'main-full-span login-form',
                             layout: 'login'
                         }}
@@ -93,7 +96,8 @@ var AppRouter = React.createClass({
                         path='/logout'
                         components={{
                             MainContent: LoginLayout,
-                            userMenu: UserMenu,
+                            UserMenu: UserMenu,
+                            SideBar 'span',
                             css: 'main-full-span login-form',
                             layout: 'login'
                         }}
@@ -102,7 +106,8 @@ var AppRouter = React.createClass({
                         path='/register'
                         components={{
                             MainContent: RegisterLayout,
-                            userMenu: UserMenu,
+                            UserMenu: UserMenu,
+                            SideBar 'span',
                             css: 'main-full-span register-form',
                             layout: 'register'
                         }}
