@@ -10,8 +10,14 @@
 import React from 'react';
 import { Link } from 'react-router'
 import SvgHome from '../../svg/svg-home.jsx';
+import setPageState from './redux/action/page-action.jsx';
 
 var MenuHome = React.createClass({
+    menuClicked: function(event) {
+      // update redux store
+        var action = setPageState({layout: 'home'});
+        this.props.dispatchPage(action);
+    },
   // triggered when 'state properties' change
     render: function(){
         return(
@@ -19,6 +25,7 @@ var MenuHome = React.createClass({
                 to='/'
                 activeClassName='active'
                 className='icon home'
+                onClick={this.menuClicked}
             >
                 <SvgHome />
             </Link>
