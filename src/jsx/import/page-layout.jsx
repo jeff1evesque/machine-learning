@@ -18,9 +18,8 @@ var PageLayout = React.createClass({
     render: function() {
       // destructure router: fallback with default values
         const {
-            MainContent=HomePage,
-            MainMenu=UserMenu,
-            SideBar='span',
+            content=HomePage,
+            sidebar='span',
             css='main-full-span default',
             layout='default'
         } = this.props;
@@ -29,12 +28,12 @@ var PageLayout = React.createClass({
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
-                    <UserMenu layout={layout}/>
+                    <UserMenu layout={layout} />
                 </div>
                 <div className='main'>
-                    <SideBar />
+                    {sidebar}
                     <div className={css}>
-                        <MainContent />
+                        {content}
                     </div>
                 </div>
             </div>
