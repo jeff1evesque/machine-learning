@@ -6,6 +6,11 @@
  * Note: importing 'named export' (multiple export statements in a module),
  *       requires the object being imported, to be surrounded by { brackets }.
  *
+ * Note: when destructuring objects, if the associated object was assigned
+ *       null, undefined, false, or 0, the default values will not be set.
+ *       However, if the associated object property does not exist, then during
+ *       destructuring, it will be assigned the default value.
+ *
  */
 
 import React from 'react';
@@ -16,13 +21,37 @@ import UserMenu from './navigation/user-menu.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
-      // destructure router: fallback with default values
-        const {
-            content=HomePage,
-            sidebar=null,
-            css='main-full-span default',
-            layout='default'
+      // destructure router
+        var {
+            content,
+            sidebar,
+            css,
+            layout
         } = this.props;
+
+      // default value: main content
+        if (!content && this.props.route.path == '/') {
+            var content = HomePage;
+        }
+        else {
+            var content = null;
+        }
+
+      // default value: css classnames
+        if (css) {
+            var css = css.key;
+        }
+        else {
+            var css = 'main-full-span default';
+        }
+
+      // default value: layout style
+        if (layout) {
+            var layout = layout.key;
+        }
+        else {
+            var layout = 'default';
+        }
 
       // render content
         return(
