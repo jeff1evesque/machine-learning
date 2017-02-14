@@ -28,6 +28,15 @@ var SupportVector = React.createClass({
             ajax_fail_status: null,
         };
     },
+  // callback: get session type
+    getSessionType: function(type) {
+        return {
+            data_new: DataNew,
+            data_append: DataAppend,
+            model_generate: ModelGenerate,
+            model_predict: ModelPredict
+        }[type] || 'span';
+    },
   // update 'state properties'
     changeSessionType: function(event){
       // reset value(s)
@@ -40,7 +49,10 @@ var SupportVector = React.createClass({
             event.target.value &&
             checkValidString(event.target.value)
         ) {
-            this.setState({session_type_value: event.target.value});
+            this.setState({
+                session_type: this.getSessionType(event.target.value),
+                session_type_value: event.target.value
+            });
         }
     },
   // update 'state properties' from children component (i.e. 'render_submit')
