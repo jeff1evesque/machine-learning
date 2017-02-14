@@ -109,17 +109,23 @@ var SupportVector = React.createClass({
         }
     },
     componentWillMount: function() {
-      // SessionType: define with supplied router
-        if (this.props && !!this.props.component) {
-            this.setState({session_type: this.props.session_type});
+      // destructure router: fallback with default values
+        const {
+            content,
+            session_type_value
+        } = this.props;
+
+      // default value: content
+        if (!content) {
+            this.setState({session_type: null});
         }
         else {
-            this.setState({session_type: 'span'});
+            this.setState({session_type: session});
         }
 
-      // session_type_value: define with supplied router
-        if (this.props && !!this.props.session_type_value) {
-            this.setState({session_type_value: this.props.session_type_value});
+      // default value: session value
+        if (session_type_value && !!session_type_value.key) {
+            this.setState({session_type_value: session_type_value});
         }
         else {
             this.setState({session_type_value: '--Select--'});
@@ -127,7 +133,7 @@ var SupportVector = React.createClass({
     },
   // triggered when 'state properties' change
     render: function() {
-      // local variables
+      // define components
         var Result = ResultDisplay;
         var SessionType = this.state.session_type;
 
