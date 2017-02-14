@@ -15,9 +15,8 @@ import HomePage from './content/home-page.jsx';
 import UserMenu from './navigation/user-menu.jsx';
 
 var PageLayout = React.createClass({
-  // display result
     render: function() {
-      // destructure router object with default values
+      // destructure router: fallback with default values
         const {
             MainContent=HomePage,
             MainMenu=UserMenu,
