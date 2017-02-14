@@ -46,7 +46,6 @@ var UserMenu = React.createClass({
   // display result
     render: function() {
         var selectedContent = this.renderContent();
-
         return(selectedContent);
     }
 });

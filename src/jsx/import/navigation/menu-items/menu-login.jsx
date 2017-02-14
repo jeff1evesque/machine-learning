@@ -15,7 +15,6 @@ import React from 'react';
 import { Link } from 'react-router';
 import setLoginState from '../../redux/action/login-action.jsx';
 import setLogoutState from '../../redux/action/logout-action.jsx';
-import setPageState from '../../redux/action/page-action.jsx';
 
 var MenuLogin = React.createClass({
   // initial 'state properties'
@@ -89,10 +88,8 @@ var MenuLogin = React.createClass({
             this.state.url == '/logout'
         ) {
           // update redux store
-            var register_action = setPageState({layout: 'register'});
-            this.props.dispatchPage(register_action);
-            var logout_action = setLogoutState();
-            this.props.dispatch(logout_action);
+            var action = setLogoutState();
+            this.props.dispatch(action);
 
           // remove username from sessionStorage
             sessionStorage.removeItem('username');
