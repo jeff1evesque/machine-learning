@@ -17,41 +17,14 @@ import UserMenu from './navigation/user-menu.jsx';
 var PageLayout = React.createClass({
   // display result
     render: function() {
-      // destructure router object
-        if (this.props && !!this.props.MainContent) {
-            var MainContent = this.props.MainContent;
-        }
-        else {
-            var MainContent = HomePage;
-        }
-
-        if (this.props && !!this.props.UserMenu) {
-            var UserMenu = this.props.UserMenu;
-        }
-        else {
-            var UserMenu = UserMenu;
-        }
-
-        if (this.props && !!this.props.SideBar) {
-            var SideBar = this.props.SideBar;
-        }
-        else {
-            var SideBar = 'span';
-        }
-
-        if (this.props && !!this.props.css) {
-            var css = this.props.css;
-        }
-        else {
-            var css = 'main-full-span home';
-        }
-
-        if (this.props && !!this.props.layout) {
-            var layout = this.props.layout;
-        }
-        else {
-            var layout = 'home';
-        }
+      // destructure router object with default values
+        const {
+            MainContent=HomePage,
+            MainMenu=UserMenu,
+            SideBar='span',
+            css='main-full-span default',
+            layout='default'
+        } = this.props;
 
       // render content
         return(
