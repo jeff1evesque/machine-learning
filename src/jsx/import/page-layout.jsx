@@ -38,7 +38,7 @@ var PageLayout = React.createClass({
         }
 
       // default value: css classnames
-        if (css) {
+        if (css && css.key) {
             var css = css.key;
         }
         else {
@@ -46,7 +46,7 @@ var PageLayout = React.createClass({
         }
 
       // default value: layout style
-        if (layout) {
+        if (layout && layout.key) {
             var layout = layout.key;
         }
         else {
