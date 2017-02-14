@@ -120,7 +120,7 @@ var SupportVector = React.createClass({
             this.setState({session_type: null});
         }
         else {
-            this.setState({session_type: session});
+            this.setState({session_type: content});
         }
 
       // default value: session value
