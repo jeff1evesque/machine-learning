@@ -14,7 +14,6 @@ import SupportVector from './import/content/support-vector.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
 import PageLayout from './import/page-layout.jsx';
-import UserMenu from './import/navigation/user-menu.jsx';
 import NavBar from './import/navigation/nav-bar.jsx';
 
 // constant: analysis layout
@@ -58,9 +57,8 @@ var AppRouter = React.createClass({
                     <Route
                         path='/session'
                         components={{
-                            MainContent: AnalysisLayout,
-                            UserMenu: UserMenu,
-                            SideBar: NavBar,
+                            content: AnalysisLayout,
+                            sidebar: NavBar,
                             css: 'analysis-container',
                             layout: 'analysis'
                         }}
@@ -97,9 +95,8 @@ var AppRouter = React.createClass({
                     <Route
                         path='/login'
                         components={{
-                            MainContent: LoginLayout,
-                            UserMenu: UserMenu,
-                            SideBar: 'span',
+                            content: LoginLayout,
+                            sidebar: 'span',
                             css: 'main-full-span login-form',
                             layout: 'login'
                         }}
@@ -107,9 +104,8 @@ var AppRouter = React.createClass({
                     <Route
                         path='/logout'
                         components={{
-                            MainContent: LoginLayout,
-                            UserMenu: UserMenu,
-                            SideBar: 'span',
+                            content: LoginLayout,
+                            sidebar: 'span',
                             css: 'main-full-span login-form',
                             layout: 'login'
                         }}
@@ -117,9 +113,8 @@ var AppRouter = React.createClass({
                     <Route
                         path='/register'
                         components={{
-                            MainContent: RegisterLayout,
-                            UserMenu: UserMenu,
-                            SideBar: 'span',
+                            content: RegisterLayout,
+                            sidebar: 'span',
                             css: 'main-full-span register-form',
                             layout: 'register'
                         }}
