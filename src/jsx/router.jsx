@@ -96,7 +96,7 @@ var AppRouter = React.createClass({
                         path='/login'
                         components={{
                             content: LoginLayout,
-                            sidebar: 'span',
+                            sidebar: null,
                             css: 'main-full-span login-form',
                             layout: 'login'
                         }}
@@ -105,7 +105,7 @@ var AppRouter = React.createClass({
                         path='/logout'
                         components={{
                             content: LoginLayout,
-                            sidebar: 'span',
+                            sidebar: null,
                             css: 'main-full-span login-form',
                             layout: 'login'
                         }}
@@ -114,7 +114,7 @@ var AppRouter = React.createClass({
                         path='/register'
                         components={{
                             content: RegisterLayout,
-                            sidebar: 'span',
+                            sidebar: null,
                             css: 'main-full-span register-form',
                             layout: 'register'
                         }}
