@@ -23,6 +23,13 @@ const mapStateToProps = (state) => {
     else {
         var username = 'anonymous'
     }
+
+  // return redux to state
+    return {
+        user: {
+            name: username
+        }
+    }
 }
 
 // wraps each function of the object to be dispatch callable
