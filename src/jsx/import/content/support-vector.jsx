@@ -121,7 +121,7 @@ var SupportVector = React.createClass({
         }
     },
     componentWillMount: function() {
-      // destructure router: fallback with default values
+      // destructure router
         const {
             content,
             session_type_value
@@ -136,7 +136,7 @@ var SupportVector = React.createClass({
         }
 
       // default value: session value
-        if (session_type_value && !!session_type_value.key) {
+        if (session_type_value && !!session_type_value.type) {
             this.setState({session_type_value: session_type_value});
         }
         else {
