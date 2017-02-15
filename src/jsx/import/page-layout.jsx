@@ -6,11 +6,6 @@
  * Note: importing 'named export' (multiple export statements in a module),
  *       requires the object being imported, to be surrounded by { brackets }.
  *
- * Note: when destructuring an object, if the associated properties was
- *       assigned null, undefined, false, or 0, the default values will not be
- *       set. However, if the associated object property does not exist, then
- *       during destructuring, it will be assigned the default value.
- *
  */
 
 import React from 'react';
@@ -30,38 +25,37 @@ var PageLayout = React.createClass({
         } = this.props;
 
       // default value: main content
-        if (!content && this.props.location.pathname == '/') {
-            var content = HomePage;
+        if (this.props.location.pathname == '/') {
+            var content = <HomePage />;
         }
         else if (!content) {
             var content = null;
         }
 
       // default value: css classnames
-        if (css && !!css.type) {
-            var css = css.type;
+        if (css && !!css.key) {
+            var css = css.key;
         }
         else {
             var css = 'main-full-span default';
         }
 
       // default value: layout style
-        if (layout && !!layout.type) {
-            var layout = layout.type;
+        if (layout && !!layout.key) {
+            var layout = layout.key;
         }
         else {
             var layout = 'default';
         }
 
-      // render content
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
-                    <UserMenu layout={layout.type} />
+                    <UserMenu layout={layout.key} />
                 </div>
                 <div className='main'>
                     {sidebar}
-                    <div className={css.type}>
+                    <div className={css.key}>
                         {content}
                     </div>
                 </div>
