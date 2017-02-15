@@ -16,7 +16,7 @@ import UserMenu from './navigation/user-menu.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
-      // destructure router
+      // destructure react-router
         var {
             content,
             sidebar,

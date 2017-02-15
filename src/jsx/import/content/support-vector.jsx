@@ -120,28 +120,12 @@ var SupportVector = React.createClass({
             ajaxArguments);
         }
     },
+  // define properties before mount
     componentWillMount: function() {
-      // destructure router
-        const {
-            content,
-            session_type_value
-        } = this.props;
-
-      // default value: content
-        if (!content) {
-            this.setState({session_type: null});
-        }
-        else {
-            this.setState({session_type: content});
-        }
-
-      // default value: session value
-        if (session_type_value && !!session_type_value.key) {
-            this.setState({session_type_value: session_type_value});
-        }
-        else {
-            this.setState({session_type_value: '--Select--'});
-        }
+        this.setState({
+            session_type: this.props.sessionType,
+            session_type_value: this.props.sessionTypeValue
+        });
     },
   // triggered when 'state properties' change
     render: function() {

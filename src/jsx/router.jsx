@@ -16,29 +16,55 @@ import RegisterState from './import/redux/container/register-container.jsx';
 import PageLayout from './import/page-layout.jsx';
 import NavBar from './import/navigation/nav-bar.jsx';
 
-// constant: analysis layout
-const AnalysisLayout = (props) => (
-    <div className='analysis-container'>
-        <SupportVector />
-        {this.props.children}
-    </div>
-);
+var AnalysisLayout = React.createClass({
+    render: function() {
+      // destructure react-router
+        var {
+            content,
+            session_type_value
+        } = this.props;
 
-// constant: login layout
-const LoginLayout = (props) => (
-    <div className='main-full-span login-form'>
-        <LoginState />
-    </div>
-);
+      // default value: content
+        if (!content) {
+            var content = null;
+        }
 
-// constant: register layout
-const RegisterLayout = (props) => (
-    <div className='main-full-span register-form'>
-        <RegisterState />
-    </div>
-);
+      // default value: session value
+        if (!session_type_value || !session_type_value.key) {
+            var session_type_value = '--Select--'});
+        }
 
-// application router
+        return(
+            <div className='analysis-container'>
+                <SupportVector
+                    sessionType={content}
+                    sessionTypeValue={session_type_value}
+                />
+            </div>
+        );
+    }
+});
+
+var LoginLayout = React.createClass({
+    render: function() {
+        return(
+            <div className='main-full-span login-form'>
+                <LoginState />
+            </div>
+        );
+    }
+});
+
+var RegisterLayout = React.createClass({
+    render: function() {
+        return(
+            <div className='main-full-span register-form'>
+                <RegisterState />
+            </div>
+        );
+    }
+});
+
 var AppRouter = React.createClass({
   // display result
     render: function() {
