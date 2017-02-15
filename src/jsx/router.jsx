@@ -31,7 +31,7 @@ var AnalysisLayout = React.createClass({
 
       // default value: session value
         if (!session_type_value || !session_type_value.key) {
-            var session_type_value = '--Select--'});
+            var session_type_value = '--Select--';
         }
 
         return(
