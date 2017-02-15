@@ -1,5 +1,5 @@
 /**
- * content.jsx: generate main content.
+ * page-layout.jsx: general page layout.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
