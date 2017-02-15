@@ -136,7 +136,7 @@ var SupportVector = React.createClass({
         }
 
       // default value: session value
-        if (session_type_value && !!session_type_value.type) {
+        if (session_type_value && !!session_type_value.key) {
             this.setState({session_type_value: session_type_value});
         }
         else {
