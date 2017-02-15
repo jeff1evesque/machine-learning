@@ -187,7 +187,12 @@ var SupportVector = React.createClass({
                     </select>
                 </fieldset>
 
-                <SessionType onChange={this.displaySubmit} />
+                {
+                    SessionType ?
+                        <SessionType onChange={this.displaySubmit} /> :
+                        null
+                }
+
                 <SubmitButton onChange={this.sendData} />
                 <Result formResult={this.state.ajax_done_result} />
                 <AjaxSpinner />
