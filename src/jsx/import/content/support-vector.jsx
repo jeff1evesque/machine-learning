@@ -121,7 +121,6 @@ var SupportVector = React.createClass({
     componentDidUpdate: function() {
         if (
             this.props.sessionType &&
-            this.state.session_type &&
             this.props.sessionType != this.state.session_type
         ) {
             this.setState({session_type: this.props.sessionType});
@@ -129,8 +128,7 @@ var SupportVector = React.createClass({
 
         if (
             this.props.sessionTypeValue &&
-            this.state.session_type_value &&
-            this.props.sessionTypeValue != this.state.session_type_value
+            this.props.sessionTypeValue.type != this.state.session_type_value
         ) {
             this.setState({
                session_type_value: this.props.sessionTypeValue.type
