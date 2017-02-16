@@ -114,7 +114,7 @@ var SupportVector = React.createClass({
     componentWillMount: function() {
         this.setState({
             session_type: this.props.sessionType,
-            session_type_value: this.props.sessionTypeValue
+            session_type_value: this.props.sessionTypeValue.type
         });
     },
   // define properties after update
@@ -132,18 +132,20 @@ var SupportVector = React.createClass({
             this.state.session_type_value &&
             this.props.sessionTypeValue != this.state.session_type_value
         ) {
-            this.setState({session_type_value: this.props.sessionTypeValue});
+            this.setState({
+               session_type_value: this.props.sessionTypeValue.type
+            });
         }
     },
   // triggered when 'state properties' change
     render: function() {
       // define components
         var Result = ResultDisplay;
-
-      // conditionally render form submit
-        var session = this.state.session_type ? this.state.session_type : null;
-        var submit_button = this.state.render_submit ? Submit : null;
-        var spinner = this.state.display_spinner ? Spinner : null;
+        var SubmitButton = this.state.render_submit ? Submit : 'span';
+        var AjaxSpinner = this.state.display_spinner ? Spinner : 'span';
+        var Session = this.state.session_type ?
+            this.state.session_type :
+            'span';
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
@@ -183,11 +185,11 @@ var SupportVector = React.createClass({
                     </select>
                 </fieldset>
 
-                {session}
-                {submit_button}
+                <Session />
 
+                <SubmitButton />
                 <Result formResult={this.state.ajax_done_result} />
-                {spinner}
+                <AjaxSpinner />
             </form>
         );
     },
