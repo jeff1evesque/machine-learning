@@ -143,9 +143,7 @@ var SupportVector = React.createClass({
         var Result = ResultDisplay;
         var SubmitButton = this.state.render_submit ? Submit : 'span';
         var AjaxSpinner = this.state.display_spinner ? Spinner : 'span';
-        var Session = this.state.session_type ?
-            this.state.session_type :
-            'span';
+        var session = this.state.session_type ? this.state.session_type : null;
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
@@ -185,7 +183,7 @@ var SupportVector = React.createClass({
                     </select>
                 </fieldset>
 
-                <Session />
+                {session}
 
                 <SubmitButton />
                 <Result formResult={this.state.ajax_done_result} />
