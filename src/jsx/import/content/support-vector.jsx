@@ -56,11 +56,11 @@ var SupportVector = React.createClass({
         }
     },
   // update 'state properties' from children component (i.e. 'render_submit')
-    displaySubmit: function(event) {
-        this.setState({submit: event.render_submit});
+    displaySubmit: function(render_submit) {
+        this.setState({submit: render_submit});
 
       // don't display result, if no submit button present
-        if (!event.render_submit) {
+        if (!render_submit) {
             this.setState({ajax_done_result: null});
         }
     },
@@ -189,7 +189,9 @@ var SupportVector = React.createClass({
 
                 {
                     SessionType ?
-                        <SessionType onChange={this.displaySubmit} /> :
+                        <SessionType onChange={
+                            this.displaySubmit(this.state.render_submit)
+                        } /> :
                         null
                 }
 
