@@ -40,32 +40,22 @@ var SupportVector = React.createClass({
   // update 'state properties'
     changeSessionType: function(event){
       // reset value(s)
-        this.setState({ajax_done_result: null});
-        this.setState({submit: false});
-        this.setState({send_data: false});
+        this.setState({
+            ajax_done_result: null,
+        });
 
       // define sessionType
         if (
             event.target.value &&
-            checkValidString(event.target.value)
+            checkValidString(event.target.value) &&
+            this.state.session_type_value != event.target.value &&
+            this.state.session_type != this.getSessionType(event.target.value)
         ) {
             this.setState({
                 session_type: this.getSessionType(event.target.value),
                 session_type_value: event.target.value
             });
         }
-    },
-  // update 'state properties' from children component (i.e. 'render_submit')
-    displaySubmit: function(render_submit) {
-        this.setState({submit: render_submit});
-
-      // don't display result, if no submit button present
-        if (!render_submit) {
-            this.setState({ajax_done_result: null});
-        }
-    },
-    sendData: function(event) {
-        this.setState({send_data: event.created_submit_button});
     },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
@@ -127,27 +117,33 @@ var SupportVector = React.createClass({
             session_type_value: this.props.sessionTypeValue
         });
     },
+  // define properties after update
+    componentDidUpdate: function() {
+        if (
+            this.props.sessionType &&
+            this.state.session_type &&
+            this.props.sessionType != this.state.session_type
+        ) {
+            this.setState({session_type: this.props.sessionType});
+        }
+
+        if (
+            this.props.sessionTypeValue &&
+            this.state.session_type_value &&
+            this.props.sessionTypeValue != this.state.session_type_value
+        ) {
+            this.setState({session_type_value: this.props.sessionTypeValue});
+        }
+    },
   // triggered when 'state properties' change
     render: function() {
       // define components
         var Result = ResultDisplay;
-        var SessionType = this.state.session_type;
 
       // conditionally render form submit
-        if (this.state.submit) {
-            var SubmitButton = Submit;
-        }
-        else {
-            var SubmitButton = 'span';
-        }
-
-      // conditionally render ajax spinner
-        if (this.state.display_spinner) {
-            var AjaxSpinner = Spinner;
-        }
-        else {
-            var AjaxSpinner = 'span';
-        }
+        var session = this.state.session_type ? this.state.session_type : null;
+        var submit_button = this.state.render_submit ? Submit : null;
+        var spinner = this.state.display_spinner ? Spinner : null;
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
@@ -187,17 +183,11 @@ var SupportVector = React.createClass({
                     </select>
                 </fieldset>
 
-                {
-                    SessionType ?
-                        <SessionType onChange={
-                            this.displaySubmit(this.state.render_submit)
-                        } /> :
-                        null
-                }
+                {session}
+                {submit_button}
 
-                <SubmitButton onChange={this.sendData} />
                 <Result formResult={this.state.ajax_done_result} />
-                <AjaxSpinner />
+                {spinner}
             </form>
         );
     },
