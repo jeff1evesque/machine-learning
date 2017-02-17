@@ -16,7 +16,7 @@ import RegisterState from './import/redux/container/register-container.jsx';
 import PageLayout from './import/page-layout.jsx';
 import NavBar from './import/navigation/nav-bar.jsx';
 
-export default AnalysisLayout = React.createClass({
+export AnalysisLayout = React.createClass({
     render: function() {
       // destructure react-router
         var {
@@ -153,4 +153,4 @@ var AppRouter = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default AppRouter
+export AppRouter

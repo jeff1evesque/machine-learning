@@ -12,7 +12,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RegisterForm from '../../content/register.jsx';
-import AnalysisLayout from '../../../router.jsx'
+import { AnalysisLayout } from '../../../router.jsx'
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
