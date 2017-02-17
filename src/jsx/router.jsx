@@ -13,6 +13,7 @@ import ModelPredictState from './import/redux/container/model-predict-container.
 import SupportVector from './import/content/support-vector.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
+import AnalysisLayoutState from './import/redux/container/analysis-layout-container.jsx';
 import PageLayout from './import/page-layout.jsx';
 import NavBar from './import/navigation/nav-bar.jsx';
 
@@ -81,15 +82,7 @@ var AppRouter = React.createClass({
         return(
             <Router history={browserHistory}>
                 <Route path='/' component={PageLayout}>
-                    <Route
-                        path='/session'
-                        components={{
-                            content: AnalysisLayout,
-                            sidebar: NavBar,
-                            css: 'analysis-container',
-                            layout: 'analysis'
-                        }}
-                    >
+                    <Route path='/session' component={AnalysisLayoutState}>
                         <Route
                             path='/session/data-new'
                             components={{
