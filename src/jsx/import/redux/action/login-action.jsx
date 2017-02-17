@@ -8,7 +8,9 @@
 function setLoginState(username) {
     return {
         type: 'LOGGED-IN',
-        name: username
+        user: {
+            name: username
+        }
     };
 }
 
