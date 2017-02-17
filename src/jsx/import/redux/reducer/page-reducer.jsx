@@ -9,7 +9,7 @@
  *
  */
 
-const pageConfig = (state='default', action) => {
+const page = (state='default', action) => {
     switch(action.type) {
         case 'SUBMIT-SV-ANALYSIS':
             return Object.assign({}, state, {
@@ -24,4 +24,4 @@ const pageConfig = (state='default', action) => {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default pageConfig
+export default page
