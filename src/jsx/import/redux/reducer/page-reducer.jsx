@@ -15,7 +15,7 @@ const pageConfig = (state='default', action) => {
             return Object.assign({}, state, {
                 status: 'default',
                 submit_button: {
-                    analysis: action.submit_button.analysis
+                    analysis: action.page.submit_button.analysis
                 }
             });
         default:
