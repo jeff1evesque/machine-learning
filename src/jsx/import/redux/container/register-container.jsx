@@ -12,7 +12,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RegisterForm from '../../content/register.jsx';
-import setLoginState from '../action/login-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -32,17 +31,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-// wraps each function of the object to be dispatch callable
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatchPage: dispatch.bind(setLoginState)
-    }
-}
-
 // pass selected properties from redux state tree to component
 const RegisterState = connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(RegisterForm)
 
 // indicate which class can be exported, and instantiated via 'require'
