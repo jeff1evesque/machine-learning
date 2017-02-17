@@ -6,17 +6,17 @@
 
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
-import DataNew from './import/session-type/data-new.jsx';
-import DataAppend from './import/session-type/data-append.jsx';
-import ModelGenerate from './import/session-type/model-generate.jsx';
-import ModelPredict from './import/session-type/model-predict.jsx';
+import DataNewState from './import/redux/container/data-new-container.jsx';
+import DataAppendState from './import/redux/container/data-append-container.jsx';
+import ModelGenerateState from './import/redux/container/model-generate-container.jsx';
+import ModelPredictState from './import/redux/container/model-predict-container.jsx';
 import SupportVector from './import/content/support-vector.jsx';
 import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
 import PageLayout from './import/page-layout.jsx';
 import NavBar from './import/navigation/nav-bar.jsx';
 
-var AnalysisLayout = React.createClass({
+export default AnalysisLayout = React.createClass({
     render: function() {
       // destructure react-router
         var {
@@ -39,6 +39,7 @@ var AnalysisLayout = React.createClass({
                 <SupportVector
                     sessionType={content}
                     sessionTypeValue={session_type_value}
+                    submitSvButton={this.props.page.submit_button.analysis}
                 />
             </div>
         );
@@ -92,28 +93,28 @@ var AppRouter = React.createClass({
                         <Route
                             path='/session/data-new'
                             components={{
-                                content: DataNew,
+                                content: DataNewState,
                                 session_type_value: 'data_new'
                             }}
                         />
                         <Route
                             path='/session/data-append'
                             components={{
-                                content: DataAppend,
+                                content: DataAppendState,
                                 session_type_value: 'data_append'
                             }}
                         />
                         <Route
                             path='/session/model-generate'
                             components={{
-                                content: ModelGenerate,
+                                content: ModelGenerateState,
                                 session_type_value: 'model_generate'
                             }}
                         />
                         <Route
                             path='/session/model-predict'
                             components={{
-                                content: ModelPredict,
+                                content: ModelPredictState,
                                 session_type_value: 'model_predict'
                             }}
                         />

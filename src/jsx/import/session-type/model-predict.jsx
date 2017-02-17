@@ -11,13 +11,13 @@ import React from 'react';
 import SupplyPredictors from '../input-data/supply-predictors.jsx';
 import checkValidInt from './../validator/valid-int.js';
 import Spinner from './../general/spinner.jsx';
+import setSvButton from '../../redux/action/page-action.jsx';
 
 var ModelPredict = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_model_id: '--Select--',
-            render_submit: false,
+            value_model_id: '--Select--'
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
@@ -36,7 +36,10 @@ var ModelPredict = React.createClass({
                   predictors[i].value='';
               }
           }
-          this.props.onChange({render_submit: false});
+
+        // update redux store
+          var action = setSvButton({submit_button: {analysis: false}});
+          this.props.dispatchSvButton(action);
 
       // store modelId into state
         if (modelId && modelId != '--Select--' && checkValidInt(modelId)) {
@@ -46,15 +49,15 @@ var ModelPredict = React.createClass({
             this.setState({value_model_id: '--Select--'});
         }
     },
-  // update 'state properties' from child component (i.e. 'validStringEntered')
+  // update redux store
     displaySubmit: function(event) {
         if (event.submitted_proper_predictor) {
-            this.props.onChange({
-                render_submit: event.submitted_proper_predictor
-            });
+            var action = setSvButton({submit_button: {analysis: event.submitted_proper_predictor}});
+            this.props.dispatchSvButton(action);
         }
         else {
-            this.props.onChange({render_submit: false});
+            var action = setSvButton({submit_button: {analysis: false}});
+            this.props.dispatchSvButton(action);
         }
     },
   // triggered when 'state properties' change
@@ -118,9 +121,6 @@ var ModelPredict = React.createClass({
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
-      // variables
-        this.mounted = true;
-
       // ajax arguments
         var ajaxEndpoint = '/retrieve-sv-model';
         var ajaxArguments = {
@@ -132,36 +132,36 @@ var ModelPredict = React.createClass({
         this.setState({display_spinner: true});
 
       // asynchronous callback: ajax 'done' promise
-        if (this.mounted) {
-            ajaxCaller(function (asynchObject) {
-            // Append to DOM
-                if (asynchObject && asynchObject.error) {
-                    this.setState({ajax_done_error: asynchObject.error});
-                } else if (asynchObject) {
-                    this.setState({ajax_done_options: asynchObject});
-                }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
-            }.bind(this),
-          // asynchronous callback: ajax 'fail' promise
-            function (asynchStatus, asynchError) {
-                if (asynchStatus) {
-                    this.setState({ajax_fail_status: asynchStatus});
-                    console.log('Error Status: ' + asynchStatus);
-                }
-                if (asynchError) {
-                    this.setState({ajax_fail_error: asynchError});
-                    console.log('Error Thrown: ' + asynchError);
-                }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
-            }.bind(this),
-          // pass ajax arguments
-            ajaxArguments);
-        }
+        ajaxCaller(function (asynchObject) {
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            } else if (asynchObject) {
+                this.setState({ajax_done_options: asynchObject});
+            }
+        // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+        // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // pass ajax arguments
+        ajaxArguments);
     },
     componentWillUnmount() {
-        this.mounted = false;
+      // update redux store
+        var action = setSvButton({submit_button: {analysis: false}});
+        this.props.dispatchSvButton(action);
     }
 });
 

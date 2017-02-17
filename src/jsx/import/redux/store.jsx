@@ -24,7 +24,7 @@ const username = sessionStorage.getItem('username') || 'anonymous'
 // create and initialize redux
 const store = createStore(combineReducers({user, page}), {
     user: {name: username},
-    page: {layout: 'default'}
+    page: {status: 'default'}
 });
 
 // indicate which class can be exported, and instantiated via 'require'

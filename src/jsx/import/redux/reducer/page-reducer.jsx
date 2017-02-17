@@ -11,9 +11,12 @@
 
 const pageConfig = (state='default', action) => {
     switch(action.type) {
-        case 'PAGE-CONFIG':
+        case 'SUBMIT-SV-ANALYSIS':
             return Object.assign({}, state, {
-                layout: action.page.layout
+                status: 'default',
+                submit_button: {
+                    analysis: action.submit_button.analysis
+                }
             });
         default:
             return state;

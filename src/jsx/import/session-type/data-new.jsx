@@ -12,6 +12,7 @@ import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from './../validator/valid-string.js';
 import ModelType from './../model/model-type.jsx';
+import setSvButton from '../../redux/action/page-action.jsx';
 
 var DataNew = React.createClass({
   // initial 'state properties'
@@ -19,8 +20,7 @@ var DataNew = React.createClass({
         return {
             value_title: null,
             value_dataset_type: '--Select--',
-            value_model_type: '--Select--',
-            render_submit: false
+            value_model_type: '--Select--'
         };
     },
   // update 'state properties'
@@ -32,11 +32,17 @@ var DataNew = React.createClass({
             checkValidString(datasetType)
         ) {
             this.setState({value_dataset_type: event.target.value});
-            this.props.onChange({render_submit: false});
+
+          // update redux store
+            var action = setSvButton({submit_button: {analysis: false}});
+            this.props.dispatchSvButton(action);
         }
         else {
             this.setState({value_dataset_type: '--Select--'});
-            this.props.onChange({render_submit: false});
+
+          // update redux store
+            var action = setSvButton({submit_button: {analysis: false}});
+            this.props.dispatchSvButton(action);
         }
     },
     changeTitle: function(event){
@@ -47,7 +53,10 @@ var DataNew = React.createClass({
         }
         else {
             this.setState({value_title: null});
-            this.props.onChange({render_submit: false});
+
+          // update redux store
+            var action = setSvButton({submit_button: {analysis: false}});
+            this.props.dispatchSvButton(action);
         }
     },
   // update 'state properties' from child component (i.e. 'value_model_type')
@@ -59,22 +68,32 @@ var DataNew = React.createClass({
             checkValidString(modelType)
         ) {
             this.setState({value_model_type: modelType});
-            this.props.onChange({render_submit: false});
+
+          // update redux store
+            var action = setSvButton({submit_button: {analysis: false}});
+            this.props.dispatchSvButton(action);
         }
         else {
             this.setState({value_model_type: '--Select--'});
-            this.props.onChange({render_submit: false});
+
+          // update redux store
+            var action = setSvButton({submit_button: {analysis: false}});
+            this.props.dispatchSvButton(action);
         }
     },
   // update 'state properties' from child component
     displaySubmit: function(event) {
         if (event.submitted_proper_dataset) {
-            this.props.onChange({
-                render_submit: event.submitted_proper_dataset
+          // update redux store
+            var action = setSvButton({
+                submit_button: {analysis: event.submitted_proper_dataset}
             });
+            this.props.dispatchSvButton(action);
         }
         else {
-            this.props.onChange({render_submit: false});
+          // update redux store
+            var action = setSvButton({submit_button: {analysis: false}});
+            this.props.dispatchSvButton(action);
         }
     },
   // triggered when 'state properties' change
@@ -138,6 +157,11 @@ var DataNew = React.createClass({
         else {
             return 'span';
         }
+    },
+    componentWillUnmount() {
+      // update redux store
+        var action = setSvButton({submit_button: {analysis: false}});
+        this.props.dispatchSvButton(action);
     }
 });
 

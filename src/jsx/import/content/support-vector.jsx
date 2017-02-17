@@ -139,7 +139,7 @@ var SupportVector = React.createClass({
     render: function() {
       // define components
         var Result = ResultDisplay;
-        var SubmitButton = this.state.render_submit ? Submit : 'span';
+        var SubmitButton = this.props.submitSvButton ? Submit : 'span';
         var AjaxSpinner = this.state.display_spinner ? Spinner : 'span';
         var session = this.state.session_type ? this.state.session_type : null;
 

@@ -1,16 +1,18 @@
 /**
- * page-action.jsx: send current page settings to the redux store.
- *
- * Note: this script implements jsx (reactjs) syntax.
+ * page-action.jsx: send current support vector 'submit button' boolean,
+ *                  indicating whether it should be displayed to the redux
+ *                  store.
  *
  */
 
-function setPageState(settings) {
+function setSvButton(settings) {
     return {
-        type: 'PAGE-CONFIG',
-        page: {layout: settings.layout}
+        type: 'SUBMIT-SV-ANALYSIS',
+        submit_button: {
+            analysis: settings.submit_button.analysis
+        }
     };
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default setPageState
+export default setSvButton
