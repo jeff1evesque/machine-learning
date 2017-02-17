@@ -36,6 +36,7 @@ var MenuLogin = React.createClass({
             );
         }
         else {
+            return (
                 <Link
                     to='/logout'
                     activeClassName='active'
@@ -44,6 +45,7 @@ var MenuLogin = React.createClass({
                 >
                     <span>Logout</span>
                 </Link>
+            );
         }
     },
   // logout: remove username from sessionStorage
