@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
         state.page.submit_button &&
         !!state.page.submit_button.analysis
     ) {
-        var display = state.submit_button.analysis;
+        var display = state.page.submit_button.analysis;
     }
     else {
         var display = false;
