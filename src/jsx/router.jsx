@@ -11,61 +11,12 @@ import DataAppendState from './import/redux/container/data-append-container.jsx'
 import ModelGenerateState from './import/redux/container/model-generate-container.jsx';
 import ModelPredictState from './import/redux/container/model-predict-container.jsx';
 import SupportVector from './import/content/support-vector.jsx';
-import LoginState from './import/redux/container/login-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
 import AnalysisLayoutState from './import/redux/container/analysis-layout-container.jsx';
-import PageLayout from './import/page-layout.jsx';
+import PageLayout from './import/layout/page-layout.jsx';
+import LoginLayout from './import/layout/login-layout.jsx';
+import RegisterLayout from './import/layout/register-layout.jsx';
 import NavBar from './import/navigation/nav-bar.jsx';
-
-var AnalysisLayout = React.createClass({
-    render: function() {
-      // destructure react-router
-        var {
-            content,
-            session_type_value
-        } = this.props;
-
-      // default value: content
-        if (!content) {
-            var content = null;
-        }
-
-      // default value: session value
-        if (!session_type_value || !session_type_value.key) {
-            var session_type_value = '--Select--';
-        }
-
-        return(
-            <div className='analysis-container'>
-                <SupportVector
-                    sessionType={content}
-                    sessionTypeValue={session_type_value}
-                    submitSvButton={this.props.page.submit_button.analysis}
-                />
-            </div>
-        );
-    }
-});
-
-var LoginLayout = React.createClass({
-    render: function() {
-        return(
-            <div className='main-full-span login-form'>
-                <LoginState />
-            </div>
-        );
-    }
-});
-
-var RegisterLayout = React.createClass({
-    render: function() {
-        return(
-            <div className='main-full-span register-form'>
-                <RegisterState />
-            </div>
-        );
-    }
-});
 
 var AppRouter = React.createClass({
   // display result

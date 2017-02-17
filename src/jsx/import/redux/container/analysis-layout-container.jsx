@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { AnalysisLayout } from '../../../router.jsx'
+import AnalysisLayout from '../../layout/analysis-layout.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {

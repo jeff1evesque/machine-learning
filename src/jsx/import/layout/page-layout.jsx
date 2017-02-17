@@ -11,8 +11,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import HomePage from './content/home-page.jsx';
-import UserMenu from './navigation/user-menu.jsx';
+import HomePage from '../content/home-page.jsx';
+import UserMenu from '../navigation/user-menu.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
