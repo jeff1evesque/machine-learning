@@ -52,7 +52,9 @@ var ModelPredict = React.createClass({
   // update redux store
     displaySubmit: function(event) {
         if (event.submitted_proper_predictor) {
-            var action = setSvButton({submit_button: {analysis: event.submitted_proper_predictor}});
+            var action = setSvButton({
+                submit_button: {analysis: event.submitted_proper_predictor}
+            });
             this.props.dispatchSvButton(action);
         }
         else {
