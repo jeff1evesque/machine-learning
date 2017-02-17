@@ -16,7 +16,7 @@ import { AnalysisLayout } from '../../../router.jsx'
 const mapStateToProps = (state) => {
   // validate username
     if (
-	    state &&
+        state &&
         state.page &&
         state.page.submit_button &&
         !!state.page.submit_button.analysis
