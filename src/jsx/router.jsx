@@ -10,7 +10,6 @@ import DataNewState from './import/redux/container/data-new-container.jsx';
 import DataAppendState from './import/redux/container/data-append-container.jsx';
 import ModelGenerateState from './import/redux/container/model-generate-container.jsx';
 import ModelPredictState from './import/redux/container/model-predict-container.jsx';
-import SupportVector from './import/content/support-vector.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
 import AnalysisLayoutState from './import/redux/container/analysis-layout-container.jsx';
 import PageLayout from './import/layout/page-layout.jsx';

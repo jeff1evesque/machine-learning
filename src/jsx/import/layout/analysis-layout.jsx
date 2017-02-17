@@ -7,6 +7,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import SupportVector from '../content/support-vector.jsx';
 
 var AnalysisLayout = React.createClass({
     render: function() {
