@@ -18,7 +18,7 @@ var ModelGenerate = React.createClass({
     getInitialState: function() {
         return {
             value_session_id: '--Select--',
-            value_model_type: '--Select--'
+            value_model_type: '--Select--',
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
