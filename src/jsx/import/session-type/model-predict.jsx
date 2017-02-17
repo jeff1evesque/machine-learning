@@ -17,7 +17,7 @@ var ModelPredict = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_model_id: '--Select--'
+            value_model_id: '--Select--',
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
