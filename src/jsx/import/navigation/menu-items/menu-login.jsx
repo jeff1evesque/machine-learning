@@ -17,7 +17,7 @@ import setLoginState from '../../redux/action/login-action.jsx';
 import setLogoutState from '../../redux/action/logout-action.jsx';
 
 var MenuLogin = React.createClass({
-  // call back: return register button
+  // call back: return login button
     renderContent: function() {
         if (
             this.props &&
@@ -46,8 +46,8 @@ var MenuLogin = React.createClass({
                 </Link>
         }
     },
+  // logout: remove username from sessionStorage
     menuClicked: function(event) {
-      // logout: remove username from sessionStorage
         if (
             this.props &&
             this.props.user &&
