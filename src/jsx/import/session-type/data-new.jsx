@@ -34,14 +34,20 @@ var DataNew = React.createClass({
             this.setState({value_dataset_type: event.target.value});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
+                submit_button: {analysis: false}
+            });
             this.props.dispatchSvButton(action);
         }
         else {
             this.setState({value_dataset_type: '--Select--'});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
+                submit_button: {analysis: false}
+            });
             this.props.dispatchSvButton(action);
         }
     },
@@ -55,7 +61,10 @@ var DataNew = React.createClass({
             this.setState({value_title: null});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
+                submit_button: {analysis: false}
+            });
             this.props.dispatchSvButton(action);
         }
     },
@@ -70,14 +79,20 @@ var DataNew = React.createClass({
             this.setState({value_model_type: modelType});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
+                submit_button: {analysis: false}
+            });
             this.props.dispatchSvButton(action);
         }
         else {
             this.setState({value_model_type: '--Select--'});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
+                submit_button: {analysis: false}
+            });
             this.props.dispatchSvButton(action);
         }
     },
@@ -86,13 +101,17 @@ var DataNew = React.createClass({
         if (event.submitted_proper_dataset) {
           // update redux store
             var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
                 submit_button: {analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
         }
         else {
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
+                submit_button: {analysis: false}
+            });
             this.props.dispatchSvButton(action);
         }
     },
@@ -160,7 +179,10 @@ var DataNew = React.createClass({
     },
     componentWillUnmount() {
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({
+            type: 'SUBMIT-SV-ANALYSIS',
+            submit_button: {analysis: false}
+        });
         this.props.dispatchSvButton(action);
     }
 });

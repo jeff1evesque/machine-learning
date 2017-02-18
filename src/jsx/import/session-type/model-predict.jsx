@@ -29,17 +29,20 @@ var ModelPredict = React.createClass({
         var modelId = event.target.value;
 
       // clear predictors, remove submit button
-          var predictors = document.getElementsByClassName('predictionInput');
+        var predictors = document.getElementsByClassName('predictionInput');
 
-          if (predictors) {
-              for (var i = 0; i < predictors.length; i++) {
-                  predictors[i].value='';
-              }
-          }
+        if (predictors) {
+            for (var i = 0; i < predictors.length; i++) {
+                predictors[i].value='';
+            }
+        }
 
         // update redux store
-          var action = setSvButton({submit_button: {analysis: false}});
-          this.props.dispatchSvButton(action);
+        var action = setSvButton({
+            type: 'SUBMIT-SV-ANALYSIS',
+            submit_button: {analysis: false}
+        });
+        this.props.dispatchSvButton(action);
 
       // store modelId into state
         if (modelId && modelId != '--Select--' && checkValidInt(modelId)) {
@@ -53,12 +56,16 @@ var ModelPredict = React.createClass({
     displaySubmit: function(event) {
         if (event.submitted_proper_predictor) {
             var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
                 submit_button: {analysis: event.submitted_proper_predictor}
             });
             this.props.dispatchSvButton(action);
         }
         else {
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({
+                type: 'SUBMIT-SV-ANALYSIS',
+                submit_button: {analysis: false}
+            });
             this.props.dispatchSvButton(action);
         }
     },
@@ -162,7 +169,10 @@ var ModelPredict = React.createClass({
     },
     componentWillUnmount() {
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({
+            type: 'SUBMIT-SV-ANALYSIS',
+            submit_button: {analysis: false}
+        });
         this.props.dispatchSvButton(action);
     }
 });
