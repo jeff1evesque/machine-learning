@@ -5,11 +5,11 @@
  *
  */
 
-function setSvButton(settings) {
+function setSvButton(action) {
     return {
         type: 'SUBMIT-SV-ANALYSIS',
         submit_button: {
-            analysis: settings.submit_button.analysis
+            analysis: action.submit_button.analysis
         }
     };
 }
