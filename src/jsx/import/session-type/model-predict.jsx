@@ -38,10 +38,7 @@ var ModelPredict = React.createClass({
         }
 
         // update redux store
-        var action = setSvButton({
-            type: 'SUBMIT-SV-ANALYSIS',
-            submit_button: {analysis: false}
-        });
+        var action = setSvButton({submit_button: {analysis: false}});
         this.props.dispatchSvButton(action);
 
       // store modelId into state
@@ -56,16 +53,12 @@ var ModelPredict = React.createClass({
     displaySubmit: function(event) {
         if (event.submitted_proper_predictor) {
             var action = setSvButton({
-                type: 'SUBMIT-SV-ANALYSIS',
                 submit_button: {analysis: event.submitted_proper_predictor}
             });
             this.props.dispatchSvButton(action);
         }
         else {
-            var action = setSvButton({
-                type: 'SUBMIT-SV-ANALYSIS',
-                submit_button: {analysis: false}
-            });
+            var action = setSvButton({submit_button: {analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -169,10 +162,7 @@ var ModelPredict = React.createClass({
     },
     componentWillUnmount() {
       // update redux store
-        var action = setSvButton({
-            type: 'SUBMIT-SV-ANALYSIS',
-            submit_button: {analysis: false}
-        });
+        var action = setSvButton({submit_button: {analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });

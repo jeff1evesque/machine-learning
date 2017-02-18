@@ -42,17 +42,11 @@ var ModelGenerate = React.createClass({
                 modelType != '--Select--' && kernelType != '--Select--' &&
                 checkValidString(modelType) && checkValidString(kernelType)
             ) {
-                var action = setSvButton({
-                    type: 'SUBMIT-SV-ANALYSIS',
-                    submit_button: {analysis: true}
-                });
+                var action = setSvButton({submit_button: {analysis: true}});
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({
-                    type: 'SUBMIT-SV-ANALYSIS',
-                    submit_button: {analysis: false}
-                });
+                var action = setSvButton({submit_button: {analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -60,10 +54,7 @@ var ModelGenerate = React.createClass({
             this.setState({value_session_id: '--Select--'});
 
           // update redux store
-            var action = setSvButton({
-                type: 'SUBMIT-SV-ANALYSIS',
-                submit_button: {analysis: false}
-            });
+            var action = setSvButton({submit_button: {analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -87,10 +78,7 @@ var ModelGenerate = React.createClass({
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({
-                    type: 'SUBMIT-SV-ANALYSIS',
-                    submit_button: {analysis: false}
-                });
+                var action = setSvButton({submit_button: {analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -98,10 +86,7 @@ var ModelGenerate = React.createClass({
             this.setState({value_model_type: '--Select--'});
 
           // update redux store
-            var action = setSvButton({
-                type: 'SUBMIT-SV-ANALYSIS',
-                submit_button: {analysis: false}
-            });
+            var action = setSvButton({submit_button: {analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -121,17 +106,11 @@ var ModelGenerate = React.createClass({
                 checkValidInt(sessionId) && modelType != '--Select--' &&
                 checkValidString(modelType)
             ) {
-                var action = setSvButton({
-                    type: 'SUBMIT-SV-ANALYSIS',
-                    submit_button: {analysis: true}
-                });
+                var action = setSvButton({submit_button: {analysis: true}});
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({
-                    type: 'SUBMIT-SV-ANALYSIS',
-                    submit_button: {analysis: false}
-                });
+                var action = setSvButton({submit_button: {analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -139,10 +118,7 @@ var ModelGenerate = React.createClass({
             this.setState({value_kernel_type: '--Select--'});
 
           // update redux store
-            var action = setSvButton({
-                type: 'SUBMIT-SV-ANALYSIS',
-                submit_button: {analysis: false}
-            });
+            var action = setSvButton({submit_button: {analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -255,10 +231,7 @@ var ModelGenerate = React.createClass({
     },
     componentWillUnmount() {
       // update redux store
-        var action = setSvButton({
-            type: 'SUBMIT-SV-ANALYSIS',
-            submit_button: {analysis: false}
-        });
+        var action = setSvButton({submit_button: {analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });
