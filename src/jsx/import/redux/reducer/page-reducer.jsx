@@ -10,12 +10,24 @@
  */
 
 const page = (state='default', action) => {
+    if (
+        action &&
+        action.page &&
+        action.page.submit_button &&
+        !!action.page.submit_button.analysis
+    ) {
+        var submitButtonAnalysis = true;
+    }
+    else {
+        var submitButtonAnalysis = false;
+    }
+
     switch(action.type) {
         case 'SUBMIT-SV-ANALYSIS':
             return Object.assign({}, state, {
                 status: 'default',
                 submit_button: {
-                    analysis: action.page.submit_button.analysis
+                    analysis: submitButtonAnalysis
                 }
             });
         default:
