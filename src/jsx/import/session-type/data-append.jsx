@@ -58,18 +58,14 @@ var DataAppend = React.createClass({
             checkValidString(datasetType)
         ) {
             this.setState({value_dataset_type: event.target.value});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
         else {
             this.setState({value_dataset_type: '--Select--'});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
+
+      // update redux store
+        var action = setSvButton({submit_button: {analysis: false}});
+        this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component (i.e. 'value_model_type')
     changeModelType: function(event) {
@@ -80,18 +76,14 @@ var DataAppend = React.createClass({
             checkValidString(modelType)
         ) {
             this.setState({value_model_type: modelType});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
         else {
             this.setState({value_model_type: '--Select--'});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
+
+      // update redux store
+        var action = setSvButton({submit_button: {analysis: false}});
+        this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component
     displaySubmit: function(event) {

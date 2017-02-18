@@ -32,18 +32,14 @@ var DataNew = React.createClass({
             checkValidString(datasetType)
         ) {
             this.setState({value_dataset_type: event.target.value});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
         else {
             this.setState({value_dataset_type: '--Select--'});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
+
+      // update redux store
+        var action = setSvButton({submit_button: {analysis: false}});
+        this.props.dispatchSvButton(action);
     },
     changeTitle: function(event){
         var sessionTitle = event.target.value;
@@ -53,11 +49,11 @@ var DataNew = React.createClass({
         }
         else {
             this.setState({value_title: null});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
+
+      // update redux store
+        var action = setSvButton({submit_button: {analysis: false}});
+        this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component (i.e. 'value_model_type')
     changeModelType: function(event) {
@@ -68,18 +64,14 @@ var DataNew = React.createClass({
             checkValidString(modelType)
         ) {
             this.setState({value_model_type: modelType});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
         else {
             this.setState({value_model_type: '--Select--'});
-
-          // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
-            this.props.dispatchSvButton(action);
         }
+
+      // update redux store
+        var action = setSvButton({submit_button: {analysis: false}});
+        this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component
     displaySubmit: function(event) {
@@ -88,7 +80,6 @@ var DataNew = React.createClass({
             var action = setSvButton({
                 submit_button: {analysis: event.submitted_proper_dataset}
             });
-            console.log(action);
             this.props.dispatchSvButton(action);
         }
         else {
