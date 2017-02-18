@@ -96,4 +96,4 @@ var AppRouter = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export { AppRouter, AnalysisLayout }
+export default AppRouter
