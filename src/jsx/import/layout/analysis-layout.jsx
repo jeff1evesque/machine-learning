@@ -11,7 +11,6 @@ import SupportVector from '../content/support-vector.jsx';
 
 var AnalysisLayout = React.createClass({
     render: function() {
-        console.log('router.jsx (render): ', this.props);
       // destructure react-router
         var {
             content,

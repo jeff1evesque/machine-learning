@@ -32,7 +32,15 @@ var AppRouter = React.createClass({
         return(
             <Router history={browserHistory}>
                 <Route path='/' component={PageLayout}>
-                    <Route path='/session' component={AnalysisLayoutState}>
+                    <Route
+                        path='/session'
+                        components={{
+                            content: AnalysisLayoutState,
+                            sidebar: NavBar,
+                            css: 'analysis-container',
+                            layout: 'analysis'
+                        }}
+                    >
                         <Route
                             path='/session/data-new'
                             components={{
