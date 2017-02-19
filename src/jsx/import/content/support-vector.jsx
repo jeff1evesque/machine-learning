@@ -22,40 +22,40 @@ var SupportVector = React.createClass({
     getInitialState: function() {
         return {
             display_spinner: false,
-            value_session_type: '--Select--',
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
-            router_assigned: false,
         };
+    },
+  // callback: get session type
+    getSessionType: function(type) {
+        return {
+            data_new: DataNew,
+            data_append: DataAppend,
+            model_generate: ModelGenerate,
+            model_predict: ModelPredict
+        }[type] || 'span';
     },
   // update 'state properties'
     changeSessionType: function(event){
       // reset value(s)
-        this.setState({ajax_done_result: null});
-        this.setState({submit: false});
-        this.setState({send_data: false});
+        this.setState({
+            ajax_done_result: null,
+        });
 
       // define sessionType
         if (
             event.target.value &&
-            checkValidString(event.target.value)
+            checkValidString(event.target.value) &&
+            this.state.session_type_value != event.target.value &&
+            this.state.session_type != this.getSessionType(event.target.value)
         ) {
-            this.setState({value_session_type: event.target.value});
+            this.setState({
+                session_type: this.getSessionType(event.target.value),
+                session_type_value: event.target.value
+            });
         }
-    },
-  // update 'state properties' from children component (i.e. 'render_submit')
-    displaySubmit: function(event) {
-        this.setState({submit: event.render_submit});
-
-      // don't display result, if no submit button present
-        if (!event.render_submit) {
-            this.setState({ajax_done_result: null});
-        }
-    },
-    sendData: function(event) {
-        this.setState({send_data: event.created_submit_button});
     },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
@@ -63,7 +63,7 @@ var SupportVector = React.createClass({
         event.preventDefault();
 
       // local variables
-        var sessionType = this.state.value_session_type;
+        var sessionType = this.state.session_type_value;
         if (
             sessionType == 'data_new' ||
             sessionType == 'data_append' ||
@@ -110,95 +110,38 @@ var SupportVector = React.createClass({
             ajaxArguments);
         }
     },
-    componentDidUpdate: function() {
-      // local variables
-        var router_assigned = this.state.router_assigned;
-
-      // conditionally define state based on supplied router property
-        if (
-            this.props &&
-            this.props.routerProp &&
-            router_assigned != this.props.routerProp
-        ) {
-            var routerSession = this.props.routerProp;
-            this.setState({router_assigned: routerSession});
-
-          // assign state: if router triggered component
-            if (routerSession == 'DataNew') {
-                this.setState({
-                    submit: false,
-                    value_session_type: 'data_new'
-                });
-            }
-            else if (routerSession == 'DataAppend') {
-                this.setState({
-                    submit: false,
-                    value_session_type: 'data_append'
-                });
-            }
-            else if (routerSession == 'ModelGenerate') {
-                this.setState({
-                    submit: false,
-                    value_session_type: 'model_generate'
-                });
-            }
-            else if (routerSession == 'ModelPredict') {
-                this.setState({
-                    submit: false,
-                    value_session_type: 'model_predict'
-                });
-            }
-        }
+  // define properties before mount
+    componentWillMount: function() {
+        this.setState({
+            session_type: this.props.sessionType,
+            session_type_value: this.props.sessionTypeValue.type
+        });
     },
-    componentDidMount: function() {
-      // local variables
-        var router_assigned = this.state.router_assigned;
-
-      // conditionally define state used in render
+  // define properties after update
+    componentDidUpdate: function() {
         if (
-            this.props &&
-            this.props.routerProp &&
-            router_assigned != this.props.routerProp
+            this.props.sessionType &&
+            this.props.sessionType != this.state.session_type
+        ) {
+            this.setState({session_type: this.props.sessionType});
+        }
+
+        if (
+            this.props.sessionTypeValue &&
+            this.props.sessionTypeValue.type != this.state.session_type_value
         ) {
             this.setState({
-                value_session_type: this.getSessionValue(this.props.routerProp)
+               session_type_value: this.props.sessionTypeValue.type
             });
         }
     },
   // triggered when 'state properties' change
     render: function() {
-      // local variables
+      // define components
         var Result = ResultDisplay;
-        var router_assigned = this.state.router_assigned;
-        var session_type = this.state.value_session_type;
-
-      // conditionally render component based on supplied router, or state
-        if (
-            this.props &&
-            this.props.routerProp &&
-            router_assigned != this.props.routerProp
-        ) {
-            var SessionType = this.props.routerProp;
-        }
-        else {
-            var SessionType = this.getSessionType(session_type);
-        }
-
-      // conditionally render form submit
-        if (this.state.submit) {
-            var SubmitButton = Submit;
-        }
-        else {
-            var SubmitButton = 'span';
-        }
-
-      // conditionally render ajax spinner
-        if (this.state.display_spinner) {
-            var AjaxSpinner = Spinner;
-        }
-        else {
-            var AjaxSpinner = 'span';
-        }
+        var SubmitButton = this.props.submitSvButton ? Submit : 'span';
+        var AjaxSpinner = this.state.display_spinner ? Spinner : 'span';
+        var session = this.state.session_type ? this.state.session_type : null;
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
@@ -214,7 +157,7 @@ var SupportVector = React.createClass({
                         name='session_type'
                         autoComplete='off'
                         onChange={this.changeSessionType}
-                        value={this.state.value_session_type}
+                        value={this.state.session_type_value}
                     >
                         <option value='' defaultValue>
                             --Select--
@@ -238,29 +181,13 @@ var SupportVector = React.createClass({
                     </select>
                 </fieldset>
 
-                <SessionType onChange={this.displaySubmit} />
-                <SubmitButton onChange={this.sendData} />
+                {session}
+
+                <SubmitButton />
                 <Result formResult={this.state.ajax_done_result} />
                 <AjaxSpinner />
             </form>
         );
-    },
-  // call back: used for the above 'render' (return 'span' if undefined)
-    getSessionType: function(type) {
-        return {
-            data_new: DataNew,
-            data_append: DataAppend,
-            model_generate: ModelGenerate,
-            model_predict: ModelPredict
-        }[type] || 'span';
-    },
-    getSessionValue: function(type) {
-        return {
-            DataNew: 'data_new',
-            DataAppend: 'data_append',
-            ModelGenerate: 'model_generate',
-            ModelPredict: 'model_predict'
-        }[type] || 'span';
     },
 });
 

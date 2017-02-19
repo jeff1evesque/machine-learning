@@ -13,91 +13,48 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import setLogoutState from '../../redux/action/login-action.jsx';
+import setLoginState from '../../redux/action/login-action.jsx';
+import setLogoutState from '../../redux/action/logout-action.jsx';
 
 var MenuLogin = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            url: '/login',
-            url_caption: 'Sign in',
-        };
-    },
-    componentDidUpdate: function() {
+  // call back: return login button
+    renderContent: function() {
         if (
-            this.props.user.name == 'anonymous' &&
-            sessionStorage.getItem('username') != 'anonymous'
+            this.props &&
+            this.props.user &&
+            this.props.user.name == 'anonymous'
         ) {
-          // update redux store
-            var username = sessionStorage.getItem('username')
-            var action = setLoginState(username);
-            this.props.dispatch(action);
-
-          // update component states
-            this.setState({
-                url: '/logout',
-                url_caption: 'Log out'
-            });
-        }
-        else if (
-            this.props.user.name != 'anonymous' &&
-            sessionStorage.getItem('username') == 'anonymous'
-        ) {
-          // update component states
-            this.setState({
-                url: '/login',
-                url_caption: 'Sign in'
-            });
-        }
-        else if (
-            this.props.user.name != 'anonymous' &&
-            sessionStorage.getItem('username') != 'anonymous'
-        ) {
-          // update component states
-            this.setState({
-                url: '/logout',
-                url_caption: 'Log out'
-            });
-        }
-        else if (
-            this.props.user.name == 'anonymous' &&
-            sessionStorage.getItem('username') == 'anonymous'
-        ) {
-          // update component states
-            this.setState({
-                url: '/login',
-                url_caption: 'Sign in'
-            });
+            return (
+                <Link
+                    to='/login'
+                    activeClassName='active'
+                    className='btn mn-2'
+                    onClick={this.menuClicked}
+                >
+                    <span>Sign in</span>
+                </Link>
+            );
         }
         else {
-          // update component states
-            this.setState({
-                url: '/login',
-                url_caption: 'Sign in'
-            });
+            return (
+                <Link
+                    to='/logout'
+                    activeClassName='active'
+                    className='btn mn-2'
+                    onClick={this.menuClicked}
+                >
+                    <span>Logout</span>
+                </Link>
+            );
         }
     },
-    componentWillMount: function() {
-        if (this.props.user.name != 'anonymous') {
-          // update component states
-            this.setState({
-                url: '/logout',
-                url_caption: 'Log out'
-            });
-        }
-        else {
-          // update component states
-            this.setState({
-                url: '/login',
-                url_caption: 'Sign in'
-            });
-        }
-    },
+  // logout: remove username from sessionStorage
     menuClicked: function(event) {
-      // logout: remove username from sessionStorage
         if (
-            this.props.user.name != 'anonymous' &&
-            this.state.url == '/logout'
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
         ) {
           // update redux store
             var action = setLogoutState();
@@ -109,19 +66,10 @@ var MenuLogin = React.createClass({
           // redirect to homepage if logged-out
             browserHistory.push('/');
         }
-},
-  // triggered when 'state properties' change
+    },
     render: function(){
-        return(
-            <Link
-                to={this.state.url}
-                activeClassName='active'
-                className='btn mn-2'
-                onClick={this.menuClicked}
-            >
-                <span>{this.state.url_caption}</span>
-            </Link>
-        )
+        var selectedContent = this.renderContent();
+        return(selectedContent);
     }
 });
 

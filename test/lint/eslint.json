@@ -20,7 +20,7 @@
     ],
     "parser": "babel-eslint",
     "rules": {
-        "max-len": [2, {"code": 80, "tabWidth": 4, "ignoreUrls": true}],
+        "max-len": [2, {"code": 100, "tabWidth": 4, "ignoreUrls": true}],
         "react/display-name": 1,
         "react/forbid-prop-types": 1,
         "react/jsx-boolean-value": 1,

@@ -11,7 +11,7 @@ import MenuRegisterState from '../redux/container/menu-register-container.jsx';
 
 var UserMenu = React.createClass({
     renderContent: function() {
-        if (this.props.componentType == 'LoginLayout') {
+        if (this.props.layout == 'login') {
             return (
                 <nav
                     className={'main-navigation menu-login'}
@@ -20,7 +20,7 @@ var UserMenu = React.createClass({
                 </nav>
             );
         }
-        else if (this.props.componentType == 'RegisterLayout') {
+        else if (this.props.layout == 'register') {
             return (
                 <nav
                     className={'main-navigation menu-register'}
@@ -46,7 +46,6 @@ var UserMenu = React.createClass({
   // display result
     render: function() {
         var selectedContent = this.renderContent();
-
         return(selectedContent);
     }
 });

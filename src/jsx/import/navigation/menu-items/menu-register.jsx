@@ -10,12 +10,15 @@
 import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
-import setLoginState from '../../redux/action/login-action.jsx';
 
 var MenuRegister = React.createClass({
   // call back: return register button
     renderContent: function() {
-        if (this.props.user.name == 'anonymous') {
+        if (
+            this.props &&
+            this.props.user &&
+            this.props.user.name == 'anonymous'
+        ) {
             return (
                 <Link
                     to='/register'
@@ -30,21 +33,9 @@ var MenuRegister = React.createClass({
             return (<span />);
         }
     },
-    componentDidUpdate: function() {
-        if (
-            this.props.user.name &&
-            sessionStorage.getItem('username') &&
-            this.props.user.name != sessionStorage.getItem('username')
-        ) {
-            var username = sessionStorage.getItem('username')
-            var action = setLoginState(username);
-            this.props.dispatch(action);
-        }
-    },
   // triggered when 'state properties' change
     render: function(){
         var selectedContent = this.renderContent();
-
         return(selectedContent);
     }
 });

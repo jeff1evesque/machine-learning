@@ -9,16 +9,23 @@
  *
  */
 
-const login = (state='anonymous', action) => {
+const user = (state='anonymous', action) => {
+    if (action && action.user && !!action.user.name) {
+        var username = action.user.name;
+    }
+    else {
+        var username = 'anonymous';
+    }
+
     switch(action.type) {
         case 'LOGGED-IN':
-            return Object.assign({}, state, {name : action.username});
+            return Object.assign({}, state, {name : username});
         case 'LOGGED-OUT':
             return Object.assign({}, state, {name : 'anonymous'});
-    default:
-        return state;
+        default:
+            return state;
     }
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default login
+export default user

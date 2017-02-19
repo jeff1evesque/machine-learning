@@ -6,43 +6,22 @@
 
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
-import DataNew from './import/session-type/data-new.jsx';
-import DataAppend from './import/session-type/data-append.jsx';
-import ModelGenerate from './import/session-type/model-generate.jsx';
-import ModelPredict from './import/session-type/model-predict.jsx';
-import SupportVector from './import/content/support-vector.jsx';
-import LoginState from './import/redux/container/login-container.jsx';
+import DataNewState from './import/redux/container/data-new-container.jsx';
+import DataAppendState from './import/redux/container/data-append-container.jsx';
+import ModelGenerateState from './import/redux/container/model-generate-container.jsx';
+import ModelPredictState from './import/redux/container/model-predict-container.jsx';
 import RegisterState from './import/redux/container/register-container.jsx';
+import AnalysisLayoutState from './import/redux/container/analysis-layout-container.jsx';
+import PageLayout from './import/layout/page-layout.jsx';
+import LoginLayout from './import/layout/login-layout.jsx';
+import RegisterLayout from './import/layout/register-layout.jsx';
+import NavBar from './import/navigation/nav-bar.jsx';
 
-// constant: analysis layout
-const AnalysisLayout = (props) => (
-    <div className='analysis-container'>
-        <SupportVector />
-        {this.props.children}
-    </div>
-);
-
-// constant: login layout
-const LoginLayout = (props) => (
-    <div className='main-full-span login-form'>
-        <LoginState />
-    </div>
-);
-
-// constant: register layout
-const RegisterLayout = (props) => (
-    <div className='main-full-span register-form'>
-        <RegisterState />
-    </div>
-);
-
-// application router
 var AppRouter = React.createClass({
   // display result
     render: function() {
         {/* return:
 
-            @this.props.indexRoute, defined from parent component.
             @history, is required per 'react-router's ability to handle url:
 
                 - [GitHub-URL]/issues/2727#issuecomment-258030214
@@ -52,36 +31,71 @@ var AppRouter = React.createClass({
       // render routers
         return(
             <Router history={browserHistory}>
-                <Route path='/' component={this.props.indexRoute}>
-                    <Route path='/session' component={AnalysisLayout}>
+                <Route path='/' component={PageLayout}>
+                    <Route
+                        path='/session'
+                        components={{
+                            content: AnalysisLayoutState,
+                            sidebar: NavBar,
+                            css: 'analysis-container',
+                            layout: 'analysis'
+                        }}
+                    >
                         <Route
                             path='/session/data-new'
-                            component={DataNew}
+                            components={{
+                                content: DataNewState,
+                                session_type_value: 'data_new'
+                            }}
                         />
                         <Route
                             path='/session/data-append'
-                            component={DataAppend}
+                            components={{
+                                content: DataAppendState,
+                                session_type_value: 'data_append'
+                            }}
                         />
                         <Route
                             path='/session/model-generate'
-                            component={ModelGenerate}
+                            components={{
+                                content: ModelGenerateState,
+                                session_type_value: 'model_generate'
+                            }}
                         />
                         <Route
                             path='/session/model-predict'
-                            component={ModelPredict}
+                            components={{
+                                content: ModelPredictState,
+                                session_type_value: 'model_predict'
+                            }}
                         />
                     </Route>
                     <Route
                         path='/login'
-                        component={LoginLayout}
+                        components={{
+                            content: LoginLayout,
+                            sidebar: null,
+                            css: 'main-full-span login-form',
+                            layout: 'login'
+                        }}
                     />
                     <Route
                         path='/logout'
-                        component={LoginLayout}
+                        components={{
+                            content: LoginLayout,
+                            sidebar: null,
+                            css: 'main-full-span login-form',
+                            layout: 'login'
+                        }}
                     />
                     <Route
                         path='/register'
-                        component={RegisterLayout}
+                        components={{
+                            content: RegisterLayout,
+                            sidebar: null,
+                            css: 'main-full-span register-form',
+                            layout: 'register'
+                        }}
                     />
                 </Route>
             </Router>

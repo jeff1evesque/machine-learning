@@ -1,6 +1,5 @@
 /**
- * register-container.jsx: redux store for general page settings, login, and
- *                         logout processes.
+ * analysis-layout-container.jsx: redux store for general page settings.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,31 +10,36 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import RegisterForm from '../../content/register.jsx';
+import AnalysisLayout from '../../layout/analysis-layout.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
   // validate username
-    if (state && state.user && !!state.user.name) {
-        var username = state.user.name
+    if (
+        state &&
+        state.page &&
+        state.page.submit_button &&
+        !!state.page.submit_button.analysis
+    ) {
+        var display = state.page.submit_button.analysis;
     }
     else {
-        var username = 'anonymous'
+        var display = false;
     }
 
   // return redux to state
     return {
-        user: {
-            name: username
+        page: {
+            submit_button: {analysis: display}
         }
     }
 }
 
 // pass selected properties from redux state tree to component
-const RegisterState = connect(
+const AnalysisLayoutState = connect(
     mapStateToProps,
     null
-)(RegisterForm)
+)(AnalysisLayout)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default RegisterState
+export default AnalysisLayoutState

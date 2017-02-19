@@ -1,14 +1,14 @@
 /**
- * login-action.jsx: send login status from the application to the store.
- *
- * Note: this script implements jsx (reactjs) syntax.
+ * login-action.jsx: send login status to the redux store.
  *
  */
 
 function setLoginState(username) {
     return {
         type: 'LOGGED-IN',
-        name: username
+        user: {
+            name: username
+        }
     };
 }
 

@@ -72,7 +72,7 @@ var LoginForm = React.createClass({
 
                       // update redux store
                         var action = setLoginState(username);
-                        this.props.dispatch(action);
+                        this.props.dispatchLogin(action);
 
                       // store username into sessionStorage
                         sessionStorage.setItem('username', username);
@@ -86,7 +86,7 @@ var LoginForm = React.createClass({
                 this.setState({display_spinner: false});
 
             // redirect to homepage if logged-in
-                if (username && username != 'anonymous') {
+                if (!!username && username != 'anonymous') {
                     browserHistory.push('/');
                 }
 
@@ -110,7 +110,12 @@ var LoginForm = React.createClass({
     },
     componentWillMount: function() {
       // redirect to homepage if logged-in
-        if (this.props.user.name != 'anonymous') {
+        if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
+        ) {
             browserHistory.push('/');
         }
     },
