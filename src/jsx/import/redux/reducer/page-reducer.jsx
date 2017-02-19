@@ -12,9 +12,8 @@
 const page = (state='default', action) => {
     if (
         action &&
-        action.page &&
-        action.page.submit_button &&
-        !!action.page.submit_button.analysis
+        action.submit_button &&
+        !!action.submit_button.analysis
     ) {
         var submitButtonAnalysis = true;
     }
