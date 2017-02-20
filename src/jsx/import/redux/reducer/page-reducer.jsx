@@ -9,6 +9,8 @@
  *
  */
 
+import 'object-assign';
+
 const page = (state='default', action) => {
     if (
         action &&

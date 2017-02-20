@@ -19,6 +19,7 @@
     "redux": "^3.6.0",
     "react-redux": "^5.0.2",
     "whatwg-fetch": "^2.0.2",
-    "promise-polyfill": "^6.0.2"
+    "promise-polyfill": "^6.0.2",
+    "object-assign": "^4.1.1"
   }
 }
