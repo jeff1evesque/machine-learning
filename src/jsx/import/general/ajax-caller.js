@@ -10,7 +10,7 @@ import 'whatwg-fetch';
 import Promise from 'promise-polyfill';
 
 // AJAX Process
-function ajaxCaller(callbackDone, callbackFail, args) {
+function fetchCaller(callbackDone, callbackFail, args) {
   // define fetch headers
   var fetchHeaders = {
     'Accept': 'text/javascript',
@@ -54,4 +54,6 @@ function ajaxCaller(callbackDone, callbackFail, args) {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ajaxCaller
+export default function ajaxCaller(callbackDone, callbackFail, args) {
+    fetchCaller(callbackDone, callbackFail, args);
+}
