@@ -148,7 +148,7 @@ var SupportVector = React.createClass({
         var session = this.state.session_type ? this.state.session_type : null;
 
         if (this.state.session_type && !!this.state.session_type) {
-          // current component: accessed via form element
+          // current component: accessed via form element update
             if (typeof this.state.session_type === 'function' ) {
                 const SessionComponent = this.state.session_type;
                 var session = <SessionComponent />;
