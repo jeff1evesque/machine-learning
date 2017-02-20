@@ -5,6 +5,10 @@
  *
  */
 
+// import fetch polyfill
+import 'whatwg-fetch';
+import Promise from 'promise-polyfill';
+
 // AJAX Process
 function ajaxCaller(callbackDone, callbackFail, args) {
   // define fetch headers
