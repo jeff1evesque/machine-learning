@@ -81,7 +81,7 @@ var SupportVector = React.createClass({
             this.setState({display_spinner: true});
 
           // asynchronous callback: ajax 'done' promise
-           ajaxCaller(function (asynchObject) {
+            ajaxCaller(function (asynchObject) {
             // Append to DOM
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
@@ -120,8 +120,10 @@ var SupportVector = React.createClass({
     },
   // define properties after update
     componentDidUpdate: function() {
+      // update state using react-route properties
         if (
             this.props.sessionType &&
+            !!this.props.sessionType &&
             this.props.sessionType != this.state.session_type
         ) {
             this.setState({session_type: this.props.sessionType});
@@ -129,6 +131,7 @@ var SupportVector = React.createClass({
 
         if (
             this.props.sessionTypeValue &&
+            !!this.props.sessionTypeValue.type &&
             this.props.sessionTypeValue.type != this.state.session_type_value
         ) {
             this.setState({
@@ -143,6 +146,21 @@ var SupportVector = React.createClass({
         var SubmitButton = this.props.submitSvButton ? Submit : 'span';
         var AjaxSpinner = this.state.display_spinner ? Spinner : 'span';
         var session = this.state.session_type ? this.state.session_type : null;
+
+        if (this.state.session_type && !!this.state.session_type) {
+          // current component provides function instance
+            if (typeof this.state.session_type === 'function' ) {
+                const SessionComponent = this.state.session_type;
+                var session = <SessionComponent />;
+            }
+          // router provides object instances
+            else if (typeof this.state.session_type === 'object' ) {
+                var session = this.state.session_type;
+            }
+        }
+        else {
+            var session = null;
+        }
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
