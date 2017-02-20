@@ -9,6 +9,7 @@
 
 import React from 'react';
 import checkValidFloat from './../validator/valid-float.js';
+import ajaxCaller from '../general/ajax-caller.js';
 
 var SupplyPredictors = React.createClass({
   // initial 'state properties'
