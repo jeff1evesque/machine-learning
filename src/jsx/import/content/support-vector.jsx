@@ -53,6 +53,10 @@ var SupportVector = React.createClass({
             this.state.session_type_value != event.target.value &&
             this.state.session_type != this.getSessionType(event.target.value)
         ) {
+          // current component: accessed via form element update
+            const url_suffix = event.target.value.replace(/_/g, '-');
+            browserHistory.replace('/session/' + url_suffix);
+
           // update states
             this.setState({
                 session_type: this.getSessionType(event.target.value),
