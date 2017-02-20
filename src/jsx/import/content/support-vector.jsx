@@ -8,15 +8,16 @@
  */
 
 import React from 'react';
-import ModelGenerate from '../session-type/model-generate.jsx';
-import ModelPredict from '../session-type/model-predict.jsx';
-import DataNew from '../session-type/data-new.jsx';
-import DataAppend from '../session-type/data-append.jsx';
+import ModelGenerateState from '../redux/container/model-generate-container.jsx';
+import ModelPredictState from '../redux/container/model-predict-container.jsx';
+import DataNewState from '../redux/container/data-new-container.jsx';
+import DataAppendState from '../redux/container/data-append-container.jsx';
 import Submit from '../general/submit.jsx';
 import ResultDisplay from '../result/result-display.jsx';
 import Spinner from '../general/spinner.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ajaxCaller from '../general/ajax-caller.js';
+import { browserHistory } from 'react-router'
 
 var SupportVector = React.createClass({
   // initial 'state properties'
@@ -32,10 +33,10 @@ var SupportVector = React.createClass({
   // callback: get session type
     getSessionType: function(type) {
         return {
-            data_new: DataNew,
-            data_append: DataAppend,
-            model_generate: ModelGenerate,
-            model_predict: ModelPredict
+            data_new: DataNewState,
+            data_append: DataAppendState,
+            model_generate: ModelGenerateState,
+            model_predict: ModelPredictState
         }[type] || 'span';
     },
   // update 'state properties'
@@ -52,6 +53,7 @@ var SupportVector = React.createClass({
             this.state.session_type_value != event.target.value &&
             this.state.session_type != this.getSessionType(event.target.value)
         ) {
+          // update states
             this.setState({
                 session_type: this.getSessionType(event.target.value),
                 session_type_value: event.target.value
@@ -146,21 +148,6 @@ var SupportVector = React.createClass({
         var SubmitButton = this.props.submitSvButton ? Submit : 'span';
         var AjaxSpinner = this.state.display_spinner ? Spinner : 'span';
         var session = this.state.session_type ? this.state.session_type : null;
-
-        if (this.state.session_type && !!this.state.session_type) {
-          // current component: accessed via form element update
-            if (typeof this.state.session_type === 'function' ) {
-                const SessionComponent = this.state.session_type;
-                var session = <SessionComponent />;
-            }
-          // react-router: accessed via browser load, or 'Link'
-            else if (typeof this.state.session_type === 'object' ) {
-                var session = this.state.session_type;
-            }
-        }
-        else {
-            var session = null;
-        }
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
