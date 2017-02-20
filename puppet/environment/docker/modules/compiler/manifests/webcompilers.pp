@@ -24,8 +24,8 @@ class compiler::webcompilers {
 
     ## create js source directory
     file { "${root_dir}/src/js":
-        ensure  =>  directory,
-        mode    =>  0755,
+        ensure => directory,
+        mode   => '0755',
     }
 
     ## define compilers
