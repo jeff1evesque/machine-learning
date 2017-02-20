@@ -16,6 +16,7 @@ import Submit from '../general/submit.jsx';
 import ResultDisplay from '../result/result-display.jsx';
 import Spinner from '../general/spinner.jsx';
 import checkValidString from '../validator/valid-string.js';
+import ajaxCaller from '../general/ajax-caller.js';
 
 var SupportVector = React.createClass({
   // initial 'state properties'

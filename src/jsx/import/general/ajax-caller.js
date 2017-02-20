@@ -52,3 +52,6 @@ function ajaxCaller(callbackDone, callbackFail, args) {
     callbackFail(e.statusText, e.status);
   });
 }
+
+// indicate which class can be exported, and instantiated via 'require'
+export default ajaxCaller
