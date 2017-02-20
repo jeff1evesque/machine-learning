@@ -12,8 +12,7 @@ class compiler::initial_compile {
     $sources  = [
         'jsx',
         'img',
-        'scss',
-        'js'
+        'scss'
     ]
 
     ## manually compile jsx asset, since first pass through via
