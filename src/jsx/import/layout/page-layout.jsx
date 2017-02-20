@@ -33,16 +33,16 @@ var PageLayout = React.createClass({
         }
 
       // default value: css classnames
-        if (css && !!css.key) {
-            var css = css.key;
+        if (css && !!css.type) {
+            var css = css.type;
         }
         else {
             var css = 'main-full-span default';
         }
 
       // default value: layout style
-        if (layout && !!layout.key) {
-            var layout = layout.key;
+        if (layout && !!layout.type) {
+            var layout = layout.type;
         }
         else {
             var layout = 'default';
@@ -51,13 +51,11 @@ var PageLayout = React.createClass({
         return(
             <div className='container-inner'>
                 <div className='menu-container'>
-                    <UserMenu layout={layout.key} />
+                    <UserMenu layout={layout} />
                 </div>
                 <div className='main'>
                     {sidebar}
-                    <div className={css.key}>
-                        {content}
-                    </div>
+                    {content}
                 </div>
             </div>
         );
