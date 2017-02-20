@@ -148,12 +148,12 @@ var SupportVector = React.createClass({
         var session = this.state.session_type ? this.state.session_type : null;
 
         if (this.state.session_type && !!this.state.session_type) {
-          // current component provides function instance
+          // current component: accessed via form element
             if (typeof this.state.session_type === 'function' ) {
                 const SessionComponent = this.state.session_type;
                 var session = <SessionComponent />;
             }
-          // router provides object instances
+          // react-router: accessed via browser loading, or 'Link'
             else if (typeof this.state.session_type === 'object' ) {
                 var session = this.state.session_type;
             }
