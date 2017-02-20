@@ -3,9 +3,9 @@
  */
 
 function validator(value) {
-  return typeof value === 'string';
+    return typeof value === 'string';
 }
 
 export default function checkValidString(value) {
-  return validator(value);
+    return validator(value);
 }
