@@ -11,6 +11,11 @@ import Promise from 'promise-polyfill';
 
 // AJAX Process
 function fetchCaller(callbackDone, callbackFail, args) {
+  // add promise to window
+    if (!window.Promise) {
+        window.Promise = Promise;
+    }
+
   // define fetch headers
   var fetchHeaders = {
     'Accept': 'text/javascript',
@@ -55,5 +60,5 @@ function fetchCaller(callbackDone, callbackFail, args) {
 
 // indicate which class can be exported, and instantiated via 'require'
 export default function ajaxCaller(callbackDone, callbackFail, args) {
-    fetchCaller(callbackDone, callbackFail, args);
+    return fetchCaller(callbackDone, callbackFail, args);
 }
