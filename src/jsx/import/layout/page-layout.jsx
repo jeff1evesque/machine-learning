@@ -37,7 +37,7 @@ var PageLayout = React.createClass({
             var css = css.type;
         }
         else {
-            var css = 'main-full-span default';
+            var css = 'container default';
         }
 
       // default value: layout style
