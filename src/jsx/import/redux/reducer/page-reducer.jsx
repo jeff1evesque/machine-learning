@@ -9,6 +9,8 @@
  *
  */
 
+import 'core-js/modules/es6.object.assign';
+
 const page = (state='default', action) => {
     if (
         action &&
