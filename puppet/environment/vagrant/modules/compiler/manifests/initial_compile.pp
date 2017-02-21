@@ -22,8 +22,7 @@ class compiler::initial_compile {
     #
     $sources  = [
         'jsx',
-        'img',
-        'js'
+        'img'
     ]
 
     $sources.each |String $source| {

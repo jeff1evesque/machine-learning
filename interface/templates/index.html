@@ -1,33 +1,22 @@
 <!DOCTYPE html>
 {#
-   index.html: defines 'training' or 'analysis' session, prompts users to provide an upload file
-               or URL to an XML (dataset), then defines which attributes within the dataset
-               previously defined, to use for the SVM analysis.  After the configurations and
-               attributes have been defined, it is sent to 'logic_loader.py' for further analysis.
+    index.html, single page application skeleton.
+
+    @charset, specify unicode (utf-8) encoding for html document
+    @http-equiv, use latest (IE) rendering engine, for IE
+    @script, motivated by https://github.com/jeff1evesque/machine-learning/issues/2347
+    @name='viewport', set the width of the page to follow the screen-width of the device,
+        with no zooming applied (1:1 scale)
 #}
 <html>
   <head>
-{#
-    specify unicode (utf-8) encoding for html document
-#}
     <meta charset='utf-8'>
-{#
-    use latest (IE) rendering engine, for IE
-#}
     <meta http-equiv='X-UA-Compatible' content='IE=edge' />
-{#
-    set the width of the page to follow the screen-width of the device, with no zooming applied (1:1 scale)
-#}
     <meta name='viewport' content='width=device-width, initial-scale=1.0'>
-    <script src='/static/js/ajax-caller.min.js'></script>
     <link rel='stylesheet' href='/static/css/style.css'>
   </head>
   <body>
     <div class='container'></div>
-{#
-    reactjs scripts: motivated by https://github.com/jeff1evesque/machine-learning/issues/2347
-#}
     <script src='/static/js/content.min.js'></script>
-
   </body>
 </html>

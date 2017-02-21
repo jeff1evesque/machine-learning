@@ -23,6 +23,12 @@ class compiler::webcompilers {
         'uglifyjs'
     ]
 
+    ## create js source directory
+    file { "${root_dir}/src/js":
+        ensure => directory,
+        mode   => '0755',
+    }
+
     ## define compilers
     $compilers.each |String $compiler| {
         ## dos2unix upstart: convert clrf (windows to linux) in case host

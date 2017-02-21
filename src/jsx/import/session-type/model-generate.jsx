@@ -12,6 +12,7 @@ import checkValidString from '../validator/valid-string.js';
 import checkValidInt from '../validator/valid-int.js';
 import Spinner from '../general/spinner.jsx';
 import setSvButton from '../redux/action/page-action.jsx';
+import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelGenerate = React.createClass({
   // initial 'state properties'

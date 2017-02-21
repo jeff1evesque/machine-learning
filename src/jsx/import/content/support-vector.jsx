@@ -8,14 +8,16 @@
  */
 
 import React from 'react';
-import ModelGenerate from '../session-type/model-generate.jsx';
-import ModelPredict from '../session-type/model-predict.jsx';
-import DataNew from '../session-type/data-new.jsx';
-import DataAppend from '../session-type/data-append.jsx';
+import ModelGenerateState from '../redux/container/model-generate-container.jsx';
+import ModelPredictState from '../redux/container/model-predict-container.jsx';
+import DataNewState from '../redux/container/data-new-container.jsx';
+import DataAppendState from '../redux/container/data-append-container.jsx';
 import Submit from '../general/submit.jsx';
 import ResultDisplay from '../result/result-display.jsx';
 import Spinner from '../general/spinner.jsx';
 import checkValidString from '../validator/valid-string.js';
+import ajaxCaller from '../general/ajax-caller.js';
+import { browserHistory } from 'react-router'
 
 var SupportVector = React.createClass({
   // initial 'state properties'
@@ -31,10 +33,10 @@ var SupportVector = React.createClass({
   // callback: get session type
     getSessionType: function(type) {
         return {
-            data_new: DataNew,
-            data_append: DataAppend,
-            model_generate: ModelGenerate,
-            model_predict: ModelPredict
+            data_new: DataNewState,
+            data_append: DataAppendState,
+            model_generate: ModelGenerateState,
+            model_predict: ModelPredictState
         }[type] || 'span';
     },
   // update 'state properties'
@@ -51,6 +53,11 @@ var SupportVector = React.createClass({
             this.state.session_type_value != event.target.value &&
             this.state.session_type != this.getSessionType(event.target.value)
         ) {
+          // current component: accessed via form element update
+            const url_suffix = event.target.value.replace(/_/g, '-');
+            browserHistory.replace('/session/' + url_suffix);
+
+          // update states
             this.setState({
                 session_type: this.getSessionType(event.target.value),
                 session_type_value: event.target.value
@@ -80,7 +87,7 @@ var SupportVector = React.createClass({
             this.setState({display_spinner: true});
 
           // asynchronous callback: ajax 'done' promise
-           ajaxCaller(function (asynchObject) {
+            ajaxCaller(function (asynchObject) {
             // Append to DOM
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
@@ -119,8 +126,10 @@ var SupportVector = React.createClass({
     },
   // define properties after update
     componentDidUpdate: function() {
+      // update state using react-route properties
         if (
             this.props.sessionType &&
+            !!this.props.sessionType &&
             this.props.sessionType != this.state.session_type
         ) {
             this.setState({session_type: this.props.sessionType});
@@ -128,6 +137,7 @@ var SupportVector = React.createClass({
 
         if (
             this.props.sessionTypeValue &&
+            !!this.props.sessionTypeValue.type &&
             this.props.sessionTypeValue.type != this.state.session_type_value
         ) {
             this.setState({
