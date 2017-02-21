@@ -98,7 +98,6 @@ var RegisterForm = React.createClass({
 
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>
-                <h1>Create your account</h1>
                 <div className='form-group'>
                     <label className='form-label'>Username</label>
                     <input
@@ -124,7 +123,6 @@ var RegisterForm = React.createClass({
                         shared with anyone.
                     </p>
                 </div>
-
  
                 <div className='form-group'>
                     <label className='form-label'>Password</label>

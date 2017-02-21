@@ -13,6 +13,7 @@ var RegisterLayout = React.createClass({
     render: function() {
         return(
             <div className='main-full-span register-form'>
+                <h1>Create your account</h1>
                 <RegisterState />
             </div>
         );
