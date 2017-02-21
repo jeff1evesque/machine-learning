@@ -45,7 +45,7 @@ var PageLayout = React.createClass({
             var layout = layout.type;
         }
         else {
-            var layout = 'default';
+            var layout = 'container default';
         }
 
         return(
