@@ -7,15 +7,9 @@
 
 // import fetch polyfill
 import 'whatwg-fetch';
-import Promise from 'promise-polyfill';
 
 // AJAX Process
 function fetchCaller(callbackDone, callbackFail, args) {
-  // add promise to window
-    if (!window.Promise) {
-        window.Promise = Promise;
-    }
-
   // define fetch headers
   var fetchHeaders = {
     'Accept': 'text/javascript',
