@@ -13,7 +13,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import AppRouter from './router.jsx';
 import store from './import/redux/store.jsx';
-import 'babel-polyfill';
 
 // render application
 //
