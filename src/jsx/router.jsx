@@ -37,7 +37,7 @@ var AppRouter = React.createClass({
                         components={{
                             content: AnalysisLayoutState,
                             sidebar: NavBar,
-                            css: 'analysis-container',
+                            css: 'container-inner analysis-container',
                             layout: 'analysis'
                         }}
                     >
@@ -75,7 +75,7 @@ var AppRouter = React.createClass({
                         components={{
                             content: LoginLayout,
                             sidebar: null,
-                            css: 'main-full-span login-form',
+                            css: 'container-inner login',
                             layout: 'login'
                         }}
                     />
@@ -84,7 +84,7 @@ var AppRouter = React.createClass({
                         components={{
                             content: LoginLayout,
                             sidebar: null,
-                            css: 'main-full-span login-form',
+                            css: 'container-inner login',
                             layout: 'login'
                         }}
                     />
@@ -93,7 +93,7 @@ var AppRouter = React.createClass({
                         components={{
                             content: RegisterLayout,
                             sidebar: null,
-                            css: 'main-full-span register-form',
+                            css: 'container-inner register',
                             layout: 'register'
                         }}
                     />

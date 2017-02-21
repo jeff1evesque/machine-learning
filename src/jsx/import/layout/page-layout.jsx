@@ -49,7 +49,7 @@ var PageLayout = React.createClass({
         }
 
         return(
-            <div className='container-inner'>
+            <div className={css}>
                 <div className='menu-container'>
                     <UserMenu layout={layout} />
                 </div>

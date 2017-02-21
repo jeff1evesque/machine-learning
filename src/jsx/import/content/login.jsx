@@ -125,35 +125,33 @@ var LoginForm = React.createClass({
         var AjaxSpinner = this.getSpinner();
 
         return(
-            <div className='main-full-span login-form'>
-                <form onSubmit={this.handleSubmit} ref='loginForm'>
-                    <div className='form-header'>
-                        <h1>Sign in Web-Interface</h1>
-                    </div>
-                    <div className='form-body'>
-                        <label>Username or email address</label>
-                         <input
-                            type='text'
-                            name='user[login]'
-                            className='input-block'
-                            autoFocus
-                        />
-                        <label>Password</label>
-                        <input
-                            type='password'
-                            name='user[password]'
-                            className='input-block'
-                        />
+            <form onSubmit={this.handleSubmit} ref='loginForm'>
+                <div className='form-header'>
+                    <h1>Sign in Web-Interface</h1>
+                </div>
+                <div className='form-body'>
+                    <label>Username or email address</label>
+                    <input
+                        type='text'
+                        name='user[login]'
+                        className='input-block'
+                        autoFocus
+                    />
+                    <label>Password</label>
+                    <input
+                        type='password'
+                        name='user[password]'
+                        className='input-block'
+                    />
 
-                        <input
-                            type='submit'
-                            className='input-submit btn btn-primary'
-                            onClick={this.submit_login}
-                        />
-                        <AjaxSpinner />
-                    </div>
-                </form>
-            </div>
+                    <input
+                        type='submit'
+                        className='input-submit btn btn-primary'
+                        onClick={this.submit_login}
+                    />
+                    <AjaxSpinner />
+                </div>
+            </form>
         );
     }
 });
