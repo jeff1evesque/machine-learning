@@ -40,25 +40,19 @@ blueprint = Blueprint(
 )
 
 
-@blueprint.route('/')
-def index():
+@blueprint.route('/', defaults={'path': ''})
+@blueprint.route('/<path:path>')
+def index(path):
     '''
 
-    This router function renders the 'index.html' template.
+    This router function renders the 'index.html' template, for all requests,
+    which do not have corresponding route definitions.
+
+    Note: http://flask.pocoo.org/snippets/57/
 
     '''
 
     return render_template('index.html')
-
-
-@blueprint.app_errorhandler(404)
-def page_not_found(e):
-    return render_template('index.html'), 404
-
-
-@blueprint.app_errorhandler(405)
-def method_not_allowed(e):
-    return render_template('index.html'), 405
 
 
 @blueprint.route('/load-data', methods=['POST'], endpoint='load_data')
