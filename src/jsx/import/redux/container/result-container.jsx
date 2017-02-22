@@ -10,26 +10,38 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
+import ResultLayout from '../../layout/result-layout.jsx';
+import setResult from '../action/result-action.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
   // validate button
     if (
         state &&
-        state.page &&
-        state.page.submit_button &&
-        !!state.page.submit_button.analysis
+        state.result &&
+        !!state.result.type &&
+        state.result.data &&
+        !!state.result.data.keys &&
+        !!state.result.data.values
     ) {
-        var display = state.page.submit_button.analysis;
+        var result_type = state.result.type;
+        var result_keys = state.result.data.keys;
+        var result_values = state.result.data.values;
     }
     else {
-        var display = false;
+        var result_type = null;
+        var result_keys = null;
+        var result_values = null;
     }
 
   // return redux to state
     return {
-        page: {
-            submit_button: {analysis: display}
+        result: {
+            type: result_type,
+            data: {
+                keys: result_keys,
+                values: result_values
+            }
         }
     }
 }
@@ -37,15 +49,15 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchSvButton: dispatch.bind(setSvButton)
+        dispatchSvButton: dispatch.bind(setResult)
     }
 }
 
 // pass selected properties from redux state tree to component
-const ModelPredictState = connect(
+const ResultState = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ModelPredict)
+)(ResultLayout)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ModelPredictState
+export default ResultState
