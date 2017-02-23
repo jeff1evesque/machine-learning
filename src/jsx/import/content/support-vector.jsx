@@ -15,7 +15,9 @@ import DataAppendState from '../redux/container/data-append.jsx';
 import SubmitAnalysis from '../general/submit-analysis.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
+import setResults from '../redux/action/results.js';
 import checkValidString from '../validator/valid-string.js';
+import checkValidFload from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
 import { browserHistory } from 'react-router'
 
@@ -145,13 +147,70 @@ var SupportVector = React.createClass({
             });
         }
     },
+  // update redux store
+    storeResults: function() {
+        var serverObj = this.props.formResult ? this.props.formResult : false;
+        var resultSet = serverObj.result ? serverObj.result : false;
+        var confidence = resultSet.confidence ? resultSet.confidence : false;
+
+        if (
+            resultSet &&
+            resultSet.model == 'svm' &&
+            confidence &&
+            confidence.classes.length > 0 &&
+            confidence.classes.every(checkValidString) &&
+            confidence.probability.length > 0 &&
+            confidence.probability.every(checkValidFloat) &&
+            confidence.decision_function.length > 0 &&
+            confidence.decision_function.every(checkValidFloat)
+        ) {
+            var result_type = resultSet.model;
+            var result_keys = ['classes', 'probability', 'decision-function'];
+            var result_values = [
+                confidence.classes,
+                confidence.probability,
+                confidence.decision_function
+            ];
+        }
+        else if (
+            resultSet &&
+            resultSet.model == 'svr' &&
+            confidence &&
+            confidence.score &&
+            checkValidFloat(confidence.score)
+        ) {
+            var result_type = resultSet.model;
+            var result_keys = ['r^2'];
+            var result_values = [[confidence.score]];
+        }
+        else {
+            var result_type = null;
+            var result_keys = null;
+            var result_values = null;
+        }
+
+        payload = {
+            type: result_type,
+            results: {
+                keys: result_keys,
+                values: result_values
+            }
+        }
+        var action = setResults(payload);
+        this.props.dispatchResults(action);
+    },
   // triggered when 'state properties' change
     render: function() {
       // define components
-        var submitBtn = this.props.submitSvButton ? <SubmitAnalysis /> : null;
         var spinner = this.state.display_spinner ? <Spinner /> : null;
         var session = this.state.session_type ? this.state.session_type : null;
         var resultBtn = this.state.ajax_done_result ? <ResultsLink /> : null;
+        if (this.props.submitSvButton) {
+            var submitBtn = <SubmitAnalysis onClick={this.storeResults} />
+        }
+        else {
+            var submitBtn = null;
+        }
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
