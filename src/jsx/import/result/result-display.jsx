@@ -32,7 +32,7 @@ var ResultDisplay = React.createClass({
             <div className='result-container'>
                 <h1>{result_type} Prediction Result</h1>
                 {result}
-            </fieldset>
+            </div>
         }
     }
 });
