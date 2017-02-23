@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import LinkRegister from '../../navigation/menu-items/register.jsx';
+import RegisterLink from '../../navigation/menu-items/register.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -31,10 +31,10 @@ const mapStateToProps = (state) => {
 }
 
 // pass selected properties from redux state tree to component
-const MenuLoginState = connect(
+const LoginLinkState = connect(
     mapStateToProps,
     null
-)(LinkRegister)
+)(RegisterLink)
 
 // indicate which class can be exported, and instantiated via 'require'
 export default LinkLoginState
