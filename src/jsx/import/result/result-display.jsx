@@ -24,7 +24,7 @@ var ResultDisplay = React.createClass({
             }
         }
         else {
-            result.push(<div className='result-item'>Error: mismatch with results array)</div>);
+            result.push(<div className='result-item error'>Error: mismatch with results array)</div>);
         }
 
       // display result
