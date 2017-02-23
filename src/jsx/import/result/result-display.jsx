@@ -12,19 +12,46 @@ import React from 'react';
 var ResultDisplay = React.createClass({
     render: function(){
       // local variables
-        var result = [];
+        var result_list = [];
         var result_type = this.props.data.type.toUpperCase();;
         var result_keys = this.props.data.result.keys;
         var result_values = this.props.data.result.values;
 
       // generate result
-        if (result_keys.length == result_values.length) {
+        if (
+            results_keys &&
+            results_values &&
+            result_keys.length > 0 &&
+            result_keys.length == result_values.length
+        ) {
             result_keys.map((result_key, index) => {
-                result.push(<li className='result-item'>result_key: result_values[index]</li>);
+                result_list.push(<li className='result-item'>result_key: result_values[index]</li>);
             });
         }
+        else if (
+            results_keys &&
+            results_values &&
+            (result_keys.length > 0 || result_values.length > 0) &&
+            result_keys.length != result_values.length
+        )
+            result_list.push(
+                <li className='result-item error'>Error: array results mismatching.</li>
+            );
+        }
+        else if (
+            results_keys &&
+            results_values &&
+            result_keys.length = 0 &&
+            result_values.length = 0
+        )
+            result_list.push(
+                <li className='result-item error'>Error: empty result returned.</li>
+            );
+        }
         else {
-            result.push(<li className='result-item error'>Error: mismatch with results array)</li>);
+            result_list.push(
+                <li className='result-item'>No results available!</li>
+            );
         }
 
       // display result
@@ -32,7 +59,7 @@ var ResultDisplay = React.createClass({
             <div className='result-container'>
                 <h1>{result_type} Prediction Result</h1>
                 <ul className='result-list'>
-                    {result}
+                    {result_list}
                 </ul>
             </div>
         );
