@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router';
 
 var ResultsLink = React.createClass({
     render: function(){
