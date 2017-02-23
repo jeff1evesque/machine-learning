@@ -1,6 +1,6 @@
 /**
- * data-new-container.jsx: redux store for general page settings, associated
- *                         with the data-new session.
+ * model-predict.jsx: redux store for general page settings, associated with
+ *                    the data-new session.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,8 +11,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import DataNew from '../../session-type/data-new.jsx';
-import setSvButton from '../action/page-action.jsx';
+import ModelPredict from '../../session-type/model-predict.jsx';
+import setSvButton from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -45,10 +45,10 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 // pass selected properties from redux state tree to component
-const DataNewState = connect(
+const ModelPredictState = connect(
     mapStateToProps,
     mapDispatchToProps
-)(DataNew)
+)(ModelPredict)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default DataNewState
+export default ModelPredictState

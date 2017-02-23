@@ -8,13 +8,12 @@
  */
 
 import React from 'react';
-import ModelGenerateState from '../redux/container/model-generate-container.jsx';
-import ModelPredictState from '../redux/container/model-predict-container.jsx';
-import DataNewState from '../redux/container/data-new-container.jsx';
-import DataAppendState from '../redux/container/data-append-container.jsx';
-import Submit from '../general/submit.jsx';
+import ModelGenerateState from '../redux/container/model-generate.jsx';
+import ModelPredictState from '../redux/container/model-predict.jsx';
+import DataNewState from '../redux/container/data-new.jsx';
+import DataAppendState from '../redux/container/data-append.jsx';
 import SubmitAnalysis from '../general/submit-analysis.jsx';
-import LinkResults from '../navigation/menu-items/results.jsx';
+import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -152,7 +151,7 @@ var SupportVector = React.createClass({
         var submitBtn = this.props.submitSvButton ? <SubmitAnalysis /> : null;
         var spinner = this.state.display_spinner ? <Spinner /> : null;
         var session = this.state.session_type ? this.state.session_type : null;
-        var resultBtn = this.state.ajax_done_result ? <LinkResults /> : null;
+        var resultBtn = this.state.ajax_done_result ? <ResultsLink /> : null;
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback

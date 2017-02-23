@@ -1,7 +1,7 @@
 /**
- * menu-results.jsx: append 'goto-results' button.
+ * results.jsx: results link markup.
  *
- * @Submit, must be capitalized in order for reactjs to render it as a
+ * @ResultsLink, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
@@ -9,7 +9,7 @@
 
 import React from 'react';
 
-var LinkResults = React.createClass({
+var ResultsLink = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         <Link
@@ -23,4 +23,4 @@ var LinkResults = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default LinkResults
+export default ResultsLink

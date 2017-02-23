@@ -1,6 +1,5 @@
 /**
- * data-append-container.jsx: redux store for general page settings, associated
- *                            with the data-append session.
+ * analysis-layout.jsx: redux store for general page settings.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,12 +10,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import DataAppend from '../../session-type/data-append.jsx';
-import setSvButton from '../action/page-action.jsx';
+import AnalysisLayout from '../../layout/analysis.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate button
+  // validate username
     if (
         state &&
         state.page &&
@@ -37,18 +35,11 @@ const mapStateToProps = (state) => {
     }
 }
 
-// wraps each function of the object to be dispatch callable
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatchSvButton: dispatch.bind(setSvButton)
-    }
-}
-
 // pass selected properties from redux state tree to component
-const DataAppendState = connect(
+const AnalysisLayoutState = connect(
     mapStateToProps,
-    mapDispatchToProps
-)(DataAppend)
+    null
+)(AnalysisLayout)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default DataAppendState
+export default AnalysisLayoutState

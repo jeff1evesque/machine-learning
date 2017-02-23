@@ -1,5 +1,5 @@
 /**
- * login-layout.jsx: general register layout.
+ * register.jsx: general register layout.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -7,7 +7,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RegisterState from '../redux/container/register-container.jsx';
+import RegisterState from '../redux/container/register.jsx';
 
 var RegisterLayout = React.createClass({
     render: function() {

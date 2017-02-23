@@ -1,7 +1,7 @@
 /**
- * menu-login.jsx: login menu markup.
+ * login.jsx: login link markup.
  *
- * @MenuLogin, must be capitalized in order for reactjs to render it as a
+ * @LoginLink, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
@@ -13,10 +13,10 @@
 
 import React from 'react';
 import { Link } from 'react-router';
-import setLoginState from '../../redux/action/login-action.jsx';
-import setLogoutState from '../../redux/action/logout-action.jsx';
+import setLoginState from '../../redux/action/login.jsx';
+import setLogoutState from '../../redux/action/logout.jsx';
 
-var MenuLogin = React.createClass({
+var LoginLink = React.createClass({
   // call back: return login button
     renderContent: function() {
         if (
@@ -74,4 +74,4 @@ var MenuLogin = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default MenuLogin
+export default LoginLink

@@ -1,7 +1,7 @@
 /**
- * menu-register.jsx: register menu markup.
+ * register.jsx: register link markup.
  *
- * @MenuRegister, must be capitalized in order for reactjs to render it as a
+ * @RegisterLink, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
@@ -11,7 +11,7 @@ import React from 'react';
 import { Link } from 'react-router';
 import { connect } from 'react-redux';
 
-var MenuRegister = React.createClass({
+var RegisterLink = React.createClass({
   // call back: return register button
     renderContent: function() {
         if (
@@ -41,4 +41,4 @@ var MenuRegister = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default MenuRegister
+export default RegisterLink

@@ -1,5 +1,5 @@
 /**
- * submit.jsx: append 'submit' button.
+ * submit-analysis.jsx: append 'submit-analysi' button.
  *
  * @Submit, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
@@ -9,7 +9,7 @@
 
 import React from 'react';
 
-var Submit = React.createClass({
+var SubmitAnalysis = React.createClass({
   // update 'state properties': allow parent component(s) to access properties
      formSubmit: function(event){
         this.props.onChange({created_submit_button: true});
@@ -21,4 +21,4 @@ var Submit = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Submit
+export default SubmitAnalysis

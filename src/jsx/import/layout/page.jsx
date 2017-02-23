@@ -1,5 +1,5 @@
 /**
- * page-layout.jsx: general page layout.
+ * page.jsx: general page layout.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *

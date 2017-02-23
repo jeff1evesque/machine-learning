@@ -1,5 +1,5 @@
 /**
- * result-action.jsx: send current prediction result to the redux store.
+ * result.jsx: send current prediction result to the redux store.
  *
  */
 

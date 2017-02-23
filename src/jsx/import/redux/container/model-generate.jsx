@@ -1,5 +1,6 @@
 /**
- * analysis-layout-container.jsx: redux store for general page settings.
+ * model-generate.jsx: redux store for general page settings, associated with
+ *                     the data-new session.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,11 +11,12 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import AnalysisLayout from '../../layout/analysis-layout.jsx';
+import ModelGenerate from '../../session-type/model-generate.jsx';
+import setSvButton from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate username
+  // validate button
     if (
         state &&
         state.page &&
@@ -35,11 +37,18 @@ const mapStateToProps = (state) => {
     }
 }
 
+// wraps each function of the object to be dispatch callable
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchSvButton: dispatch.bind(setSvButton)
+    }
+}
+
 // pass selected properties from redux state tree to component
-const AnalysisLayoutState = connect(
+const ModelGenerateState = connect(
     mapStateToProps,
-    null
-)(AnalysisLayout)
+    mapDispatchToProps
+)(ModelGenerate)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default AnalysisLayoutState
+export default ModelGenerateState

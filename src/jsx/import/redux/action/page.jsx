@@ -1,7 +1,6 @@
 /**
- * page-action.jsx: send current support vector 'submit button' boolean,
- *                  indicating whether it should be displayed to the redux
- *                  store.
+ * page.jsx: send current support vector 'submit button' boolean, indication
+ *           whether it should be displayed to the redux store.
  *
  */
 

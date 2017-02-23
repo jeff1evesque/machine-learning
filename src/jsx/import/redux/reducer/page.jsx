@@ -1,5 +1,5 @@
 /**
- * page-reducer.jsx: describe page attributes.
+ * page.jsx: describe page attributes.
  *
  * Note: the triple dots is the 'object spread' syntax:
  *

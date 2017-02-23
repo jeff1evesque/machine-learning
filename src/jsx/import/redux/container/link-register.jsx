@@ -1,5 +1,5 @@
 /**
- * menu-register-container.jsx: redux store for login, and logout processes.
+ * link-register.jsx: redux store for login, and logout processes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import MenuRegister from '../../navigation/menu-items/menu-register.jsx';
+import LinkRegister from '../../navigation/menu-items/register.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -34,8 +34,8 @@ const mapStateToProps = (state) => {
 const MenuLoginState = connect(
     mapStateToProps,
     null
-)(MenuRegister)
+)(LinkRegister)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default MenuLoginState
+export default LinkLoginState
 

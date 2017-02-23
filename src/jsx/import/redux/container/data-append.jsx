@@ -1,6 +1,6 @@
 /**
- * model-generate-container.jsx: redux store for general page settings,
- *                               associated with the data-new session.
+ * data-append.jsx: redux store for general page settings, associated with the
+ *                  data-append session.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,8 +11,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import ModelGenerate from '../../session-type/model-generate.jsx';
-import setSvButton from '../action/page-action.jsx';
+import DataAppend from '../../session-type/data-append.jsx';
+import setSvButton from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -45,10 +45,10 @@ const mapDispatchToProps = (dispatch) => {
 }
 
 // pass selected properties from redux state tree to component
-const ModelGenerateState = connect(
+const DataAppendState = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ModelGenerate)
+)(DataAppend)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ModelGenerateState
+export default DataAppendState

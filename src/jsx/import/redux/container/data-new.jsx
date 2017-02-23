@@ -1,6 +1,6 @@
 /**
- * login-container.jsx: redux store for general page settings, login, and
- *                      logout processes.
+ * data-new.jsx: redux store for general page settings, associated with the
+ *               data-new session.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,23 +11,28 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import LoginForm from '../../content/login.jsx';
-import setLoginState from '../action/login-action.jsx';
+import DataNew from '../../session-type/data-new.jsx';
+import setSvButton from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate username
-    if (state && state.user && !!state.user.name) {
-        var username = state.user.name
+  // validate button
+    if (
+        state &&
+        state.page &&
+        state.page.submit_button &&
+        !!state.page.submit_button.analysis
+    ) {
+        var display = state.page.submit_button.analysis;
     }
     else {
-        var username = 'anonymous'
+        var display = false;
     }
 
   // return redux to state
     return {
-        user: {
-            name: username
+        page: {
+            submit_button: {analysis: display}
         }
     }
 }
@@ -35,15 +40,15 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchLogin: dispatch.bind(setLoginState)
+        dispatchSvButton: dispatch.bind(setSvButton)
     }
 }
 
 // pass selected properties from redux state tree to component
-const LoginState = connect(
+const DataNewState = connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoginForm)
+)(DataNew)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default LoginState
+export default DataNewState

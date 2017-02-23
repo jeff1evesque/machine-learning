@@ -1,5 +1,5 @@
 /**
- * analysis-layout.jsx: general analysis layout.
+ * analysis.jsx: general analysis layout.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *

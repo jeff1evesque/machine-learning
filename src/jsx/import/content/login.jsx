@@ -14,7 +14,7 @@
 import React from 'react';
 import { browserHistory } from 'react-router';
 import Spinner from '../general/spinner.jsx';
-import setLoginState from '../redux/action/login-action.jsx';
+import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var LoginForm = React.createClass({

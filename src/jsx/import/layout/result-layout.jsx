@@ -1,5 +1,5 @@
 /**
- * login-layout.jsx: general login layout.
+ * result.jsx: general result layout.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -7,17 +7,17 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginState from '../redux/container/login-container.jsx';
+import ResultDisplay from '../result/result-display.jsx';
 
-var LoginLayout = React.createClass({
+var ResultLayout = React.createClass({
     render: function() {
         return(
-            <div className='main-full-span login-form'>
-                <LoginState />
+            <div className='analysis-container'>
+                <ResultDisplay />
             </div>
         );
     }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default LoginLayout
+export default ResultLayout

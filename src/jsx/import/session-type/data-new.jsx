@@ -12,7 +12,7 @@ import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
-import setSvButton from '../redux/action/page-action.jsx';
+import setSvButton from '../redux/action/page.jsx';
 
 var DataNew = React.createClass({
   // initial 'state properties'
