@@ -155,6 +155,7 @@ var SupportVector = React.createClass({
 
         if (
             resultSet &&
+            !!resultSet.result &&
             resultSet.model == 'svm' &&
             confidence &&
             confidence.classes.length > 0 &&
@@ -165,8 +166,9 @@ var SupportVector = React.createClass({
             confidence.decision_function.every(checkValidFloat)
         ) {
             var result_type = resultSet.model;
-            var result_keys = ['classes', 'probability', 'decision-function'];
+            var result_keys = ['result', 'classes', 'probability', 'decision-function'];
             var result_values = [
+                resultSet.result,
                 confidence.classes,
                 confidence.probability,
                 confidence.decision_function
@@ -174,14 +176,15 @@ var SupportVector = React.createClass({
         }
         else if (
             resultSet &&
+            !!resultSet.result &&
             resultSet.model == 'svr' &&
             confidence &&
             confidence.score &&
             checkValidFloat(confidence.score)
         ) {
             var result_type = resultSet.model;
-            var result_keys = ['r^2'];
-            var result_values = [[confidence.score]];
+            var result_keys = ['result', 'r^2'];
+            var result_values = [resultSet.result, confidence.score];
         }
         else {
             var result_type = null;
