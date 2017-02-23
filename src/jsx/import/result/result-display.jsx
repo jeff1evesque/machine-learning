@@ -33,7 +33,7 @@ var ResultDisplay = React.createClass({
                 <h1>{result_type} Prediction Result</h1>
                 {result}
             </div>
-        }
+        );
     }
 });
 
