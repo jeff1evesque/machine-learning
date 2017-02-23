@@ -15,7 +15,7 @@ import DataAppendState from '../redux/container/data-append.jsx';
 import SubmitAnalysis from '../general/submit-analysis.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
-import setResults from '../redux/action/results.js';
+import setResults from '../redux/action/results.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFload from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
