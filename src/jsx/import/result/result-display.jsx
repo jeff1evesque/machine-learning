@@ -20,18 +20,20 @@ var ResultDisplay = React.createClass({
       // generate result
         if (result_keys.length == result_values.length) {
             result_keys.map((result_key, index) => {
-                result.push(<div className='result-item'>result_key: result_values[index]</div>);
+                result.push(<li className='result-item'>result_key: result_values[index]</li>);
             });
         }
         else {
-            result.push(<div className='result-item error'>Error: mismatch with results array)</div>);
+            result.push(<li className='result-item error'>Error: mismatch with results array)</li>);
         }
 
       // display result
         return(
             <div className='result-container'>
                 <h1>{result_type} Prediction Result</h1>
-                {result}
+                <ul className='result-list'>
+                    {result}
+                </ul>
             </div>
         );
     }
