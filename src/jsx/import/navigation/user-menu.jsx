@@ -6,8 +6,8 @@
 
 import React from 'react';
 import HomeLink from './menu-items/home.jsx';
-import LoginLinkState from '../redux/container/link-login.jsx';
-import RegisterLinkState from '../redux/container/link-register.jsx';
+import LoginLinkState from '../redux/container/login-link.jsx';
+import RegisterLinkState from '../redux/container/register-link.jsx';
 
 var UserMenu = React.createClass({
     renderContent: function() {

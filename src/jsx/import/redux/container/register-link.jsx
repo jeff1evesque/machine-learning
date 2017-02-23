@@ -1,5 +1,5 @@
 /**
- * link-register.jsx: redux store for login, and logout processes.
+ * register-link.jsx: redux store for login, and logout processes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -31,11 +31,11 @@ const mapStateToProps = (state) => {
 }
 
 // pass selected properties from redux state tree to component
-const LoginLinkState = connect(
+const RegisterLinkState = connect(
     mapStateToProps,
     null
 )(RegisterLink)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default LinkLoginState
+export default RegisterLinkState
 
