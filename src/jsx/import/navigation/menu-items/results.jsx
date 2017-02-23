@@ -11,14 +11,16 @@ import React from 'react';
 import { Link } from 'react-router';
 
 var ResultsLink = React.createClass({
-    render: function(){
-        <Link
-            to='/session/results'
-            activeClassName='active'
-            className='btn mn-2'
-        >
-            <span>Goto results</span>
-        </Link>
+    render: function() {
+        return (
+            <Link
+                to='/session/results'
+                activeClassName='active'
+                className='btn mn-2'
+            >
+                <span>Goto results</span>
+            </Link>
+        );
     }
 });
 

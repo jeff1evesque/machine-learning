@@ -13,7 +13,7 @@ import SvgHome from '../../svg/svg-home.jsx';
 
 var HomeLink = React.createClass({
   // triggered when 'state properties' change
-    render: function(){
+    render: function() {
         return(
             <Link
                 to='/'
