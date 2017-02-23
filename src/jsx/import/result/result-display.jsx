@@ -41,8 +41,8 @@ var ResultDisplay = React.createClass({
         else if (
             results_keys &&
             results_values &&
-            result_keys.length = 0 &&
-            result_values.length = 0
+            result_keys.length == 0 &&
+            result_values.length == 0
         ) {
             result_list.push(
                 <li className='result-item error'>Error: empty result returned.</li>
