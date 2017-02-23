@@ -1,5 +1,5 @@
 /**
- * result.jsx: general result layout.
+ * results.jsx: general result layout.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *

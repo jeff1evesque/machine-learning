@@ -1,5 +1,5 @@
 /**
- * result.jsx: redux store for analysis results.
+ * results.jsx: redux store for analysis results.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,7 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ResultDisplay from '../../import/result-display.jsx';
-import setResult from '../action/result.jsx';
+import setResult from '../action/results.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {

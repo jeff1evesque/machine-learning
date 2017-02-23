@@ -10,7 +10,6 @@
 import React from 'react';
 
 var ResultsLink = React.createClass({
-  // triggered when 'state properties' change
     render: function(){
         <Link
             to='/session/results'

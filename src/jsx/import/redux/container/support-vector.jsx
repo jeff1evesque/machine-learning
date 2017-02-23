@@ -11,7 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SupportVector from '../../content/support-vector.jsx';
-import setResult from '../action/result.jsx';
+import setResult from '../action/results.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
