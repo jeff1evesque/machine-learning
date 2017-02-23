@@ -13,7 +13,7 @@ var ResultDisplay = React.createClass({
     render: function(){
       // local variables
         var result_list = [];
-        var result_type = this.props.data.type.toUpperCase();;
+        var result_type = this.props.data.type.toUpperCase();
         var result_keys = this.props.data.result.keys;
         var result_values = this.props.data.result.values;
 
