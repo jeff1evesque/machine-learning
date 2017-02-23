@@ -8,81 +8,31 @@
  */
 
 import React from 'react';
-import checkValidString from './../validator/valid-string.js';
-import checkValidFloat from './../validator/valid-float.js';
 
 var ResultDisplay = React.createClass({
-  // triggered when 'state properties' change
     render: function(){
-      // variables
-        var serverObj = this.props.formResult ? this.props.formResult : false;
-        var resultSet = serverObj.result ? serverObj.result : false;
-        var confidence = resultSet.confidence ? resultSet.confidence : false;
-        var displayResult = false;
-        var adjustedConfidence = false;
+      // local variables
+        var result = [];
+        var result_type = this.props.data.type.toUpperCase();;
+        var result_keys = this.props.data.result.keys;
+        var result_values = this.props.data.result.values;
 
-        if (
-            serverObj && resultSet && resultSet.result &&
-            checkValidString(resultSet.result)
-        ) {
-            var result = resultSet.result;
-            displayResult = true;
-        }
-
-       // svm confidence measurements
-        if (
-            resultSet &&
-            resultSet.model &&
-            resultSet.model == 'svm' &&
-            confidence &&
-            confidence.classes &&
-            confidence.classes.every(checkValidString) &&
-            confidence.probability &&
-            confidence.probability.every(checkValidFloat) &&
-            confidence.decision_function &&
-            confidence.decision_function.every(checkValidFloat)
-        ) {
-            adjustedConfidence = {
-                'classes': confidence.classes.join(', '),
-                'probability': confidence.probability.join(', '),
-                'decision-function': confidence.decision_function.join(', ')
+      // generate result
+        if (result_keys.length == result_values.length) {
+            for (var i = 0; i < result.keys.length; i++) {
+                result.push(<div className='result-item'>result_keys[i]: result_values[i]</div>);
             }
         }
-
-      // svr confidence measurements  
-        else if (
-            resultSet &&
-            resultSet.model &&
-            resultSet.model == 'svr' &&
-            confidence &&
-            confidence.score &&
-            checkValidFloat(confidence.score)
-        ) {
-            adjustedConfidence = {
-                'r^2': confidence.score
-            }
+        else {
+            result.push(<div className='result-item'>Error: mismatch with results array)</div>);
         }
 
       // display result
-        if (displayResult) {
-            return(
-                <fieldset className='fieldset-prediction-result'>
-                    <legend>Prediction Result</legend>
-                    <p className='result'>prediction: {result}</p>
-
-                    {/* iterate dynamic object */}
-                    {
-                        adjustedConfidence &&
-                        Object.keys(adjustedConfidence).map(function(key) {
-                            return <p key={key} className={key}>
-                                {key}: {adjustedConfidence[key]}
-                            </p>;
-                    })}
-                </fieldset>
-            );
-        }
-        else {
-            return(<span />);
+        return(
+            <div className='result-container'>
+                <h1>{result_type} Prediction Result</h1>
+                {result}
+            </fieldset>
         }
     }
 });
