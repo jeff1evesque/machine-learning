@@ -7,7 +7,7 @@
 import React from 'react';
 import HomeLink from './menu-items/home.jsx';
 import LoginLinkState from '../redux/container/link-login-container.jsx';
-import LoginRegisterState from '../redux/container/link-register-container.jsx';
+import RegisterLinkState from '../redux/container/link-register-container.jsx';
 
 var UserMenu = React.createClass({
     renderContent: function() {
@@ -27,7 +27,7 @@ var UserMenu = React.createClass({
                 >
                     <HomeLink />
                     <LoginLinkState />
-                    <LoginRegisterState />
+                    <RegisterLinkState />
                 </nav>
             );
         }
@@ -38,7 +38,7 @@ var UserMenu = React.createClass({
                 >
                     <HomeLink />
                     <LoginLinkState />
-                    <LoginRegisterState />
+                    <RegisterLinkState />
                 </nav>
             );
         }
