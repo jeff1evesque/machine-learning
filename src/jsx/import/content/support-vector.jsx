@@ -13,7 +13,8 @@ import ModelPredictState from '../redux/container/model-predict-container.jsx';
 import DataNewState from '../redux/container/data-new-container.jsx';
 import DataAppendState from '../redux/container/data-append-container.jsx';
 import Submit from '../general/submit.jsx';
-import ResultDisplay from '../result/result-display.jsx';
+import SubmitAnalysis from '../general/submit-analysis.jsx';
+import LinkResults from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -148,10 +149,10 @@ var SupportVector = React.createClass({
   // triggered when 'state properties' change
     render: function() {
       // define components
-        var Result = ResultDisplay;
-        var SubmitButton = this.props.submitSvButton ? Submit : 'span';
-        var AjaxSpinner = this.state.display_spinner ? Spinner : 'span';
+        var submitBtn = this.props.submitSvButton ? <SubmitAnalysis /> : null;
+        var spinner = this.state.display_spinner ? <Spinner /> : null;
         var session = this.state.session_type ? this.state.session_type : null;
+        var resultBtn = this.state.ajax_done_result ? <LinkResults /> : null;
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
@@ -193,9 +194,9 @@ var SupportVector = React.createClass({
 
                 {session}
 
-                <SubmitButton />
-                <Result formResult={this.state.ajax_done_result} />
-                <AjaxSpinner />
+                {submitBtn}
+                {resultBtn}
+                {spinner}
             </form>
         );
     },
