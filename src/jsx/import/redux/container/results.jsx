@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import ResultDisplay from '../../import/result-display.jsx';
+import ResultDisplay from '../../result/result-display.jsx';
 import setResult from '../action/results.jsx';
 
 // transforms redux state tree to react properties
