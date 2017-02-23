@@ -7,7 +7,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import SupportVector from '../content/support-vector.jsx';
+import SupportVectorState from '../redux/container/support-vector.jsx';
 
 var AnalysisLayout = React.createClass({
     render: function() {
@@ -29,7 +29,7 @@ var AnalysisLayout = React.createClass({
 
         return(
             <div className='analysis-container'>
-                <SupportVector
+                <SupportVectorState
                     sessionType={content}
                     sessionTypeValue={session_type_value}
                     submitSvButton={this.props.page.submit_button.analysis}
