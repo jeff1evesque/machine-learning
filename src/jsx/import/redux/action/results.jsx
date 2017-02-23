@@ -1,14 +1,14 @@
 /**
- * result.jsx: send current prediction result to the redux store.
+ * results.jsx: send current prediction result to the redux store.
  *
  */
 
-function setResult(action) {
+function setResults(action) {
     return {
         type: 'DISPLAY-RESULT',
         result: {
             type: action.analysis.type,
-            data: {
+            results: {
                 keys: action.analysis.data.keys.split(/\s*,\s*/),
                 values: action.analysis.data.values.split(/\s*,\s*/)
             }
@@ -17,4 +17,4 @@ function setResult(action) {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default setResult
+export default setResults
