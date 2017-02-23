@@ -71,7 +71,7 @@ var AppRouter = React.createClass({
                             }}
                         />
                         <Route
-                            path='/session/result'
+                            path='/session/results'
                             component={ResultState}
                         />
                     </Route>
