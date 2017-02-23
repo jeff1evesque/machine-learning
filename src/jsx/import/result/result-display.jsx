@@ -20,7 +20,7 @@ var ResultDisplay = React.createClass({
       // generate result
         if (result_keys.length == result_values.length) {
             result_keys.map((result_key, index) => {
-                result.push(<div className='result-item'>result_keys: result_values[index]</div>);
+                result.push(<div className='result-item'>result_key: result_values[index]</div>);
             });
         }
         else {
