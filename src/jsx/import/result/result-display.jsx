@@ -19,9 +19,9 @@ var ResultDisplay = React.createClass({
 
       // generate result
         if (result_keys.length == result_values.length) {
-            for (var i = 0; i < result.keys.length; i++) {
-                result.push(<div className='result-item'>result_keys[i]: result_values[i]</div>);
-            }
+            result_keys.map((result_key, index) => {
+                result.push(<div className='result-item'>result_keys: result_values[index]</div>);
+            });
         }
         else {
             result.push(<div className='result-item error'>Error: mismatch with results array)</div>);
