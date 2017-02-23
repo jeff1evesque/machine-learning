@@ -33,7 +33,7 @@ var ResultDisplay = React.createClass({
             results_values &&
             (result_keys.length > 0 || result_values.length > 0) &&
             result_keys.length != result_values.length
-        )
+        ) {
             result_list.push(
                 <li className='result-item error'>Error: array results mismatching.</li>
             );
@@ -43,7 +43,7 @@ var ResultDisplay = React.createClass({
             results_values &&
             result_keys.length = 0 &&
             result_values.length = 0
-        )
+        ) {
             result_list.push(
                 <li className='result-item error'>Error: empty result returned.</li>
             );
