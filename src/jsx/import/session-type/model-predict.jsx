@@ -42,8 +42,10 @@ var ModelPredict = React.createClass({
         }
 
         // update redux store
-        var action = setSvButton({button: {submit_analysis: false}});
-        this.props.dispatchSvButton(action);
+        const analysisButton = setSvButton({button: {submit_analysis: false}});
+        const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+        this.props.dispatchSvButton(analysisButton);
+        this.props.dispatchSvButton(gotoResultsButton);
 
       // store modelId into state
         if (modelId && modelId != '--Select--' && checkValidInt(modelId)) {
@@ -56,15 +58,17 @@ var ModelPredict = React.createClass({
   // update redux store
     displaySubmit: function(event) {
         if (event.submitted_proper_predictor) {
-            var action = setSvButton({
+            const action = setSvButton({
                 button: {submit_analysis: event.submitted_proper_predictor}
             });
             this.props.dispatchSvButton(action);
         }
         else {
-            var action = setSvButton({button: {submit_analysis: false}});
+            const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
+        const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+        this.props.dispatchSvButton(gotoResultsButton);
     },
   // triggered when 'state properties' change
     render: function(){
