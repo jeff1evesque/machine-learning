@@ -32,7 +32,7 @@ var AnalysisLayout = React.createClass({
         if (
             this.props.page &&
             this.props.page.button &&
-            !!this.props.page.button.goto_result
+            !!this.props.page.button.goto_results
         ) {
             var content = <ResultDisplay />
         }
