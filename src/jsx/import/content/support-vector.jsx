@@ -16,6 +16,7 @@ import SubmitAnalysis from '../general/submit-analysis.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import setResults from '../redux/action/results.jsx';
+import { setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFload from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -149,6 +150,10 @@ var SupportVector = React.createClass({
     },
   // update redux store
     storeResults: function() {
+      // update redux store
+        const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+        this.props.dispatchSvButton(gotoResultsButton);
+
         var serverObj = this.props.formResult ? this.props.formResult : false;
         var resultSet = serverObj.result ? serverObj.result : false;
         var confidence = resultSet.confidence ? resultSet.confidence : false;
@@ -215,15 +220,7 @@ var SupportVector = React.createClass({
     render: function() {
       // spinner
         var spinner = this.state.display_spinner ? <Spinner /> : null;
-
-      // session component
-        if (this.state.session_type) {
-            const Component = this.state.session_type;
-            var session = <Component onChange={this.removeResultsButton} />
-        }
-        else {
-            var session = null;
-        }
+        var session = this.state.session_type ? this.state.session_type : null;
 
       // submit button
         if (this.props.submitSvButton) {

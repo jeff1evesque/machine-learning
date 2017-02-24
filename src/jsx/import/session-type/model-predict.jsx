@@ -14,7 +14,7 @@ import React from 'react';
 import SupplyPredictors from '../input-data/supply-predictors.jsx';
 import checkValidInt from '../validator/valid-int.js';
 import Spinner from '../general/spinner.jsx';
-import { setSvButton } from '../redux/action/page.jsx';
+import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelPredict = React.createClass({
@@ -41,7 +41,7 @@ var ModelPredict = React.createClass({
             }
         }
 
-        // update redux store
+      // update redux store
         const analysisButton = setSvButton({button: {submit_analysis: false}});
         const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
         this.props.dispatchSvButton(analysisButton);
@@ -170,8 +170,10 @@ var ModelPredict = React.createClass({
     },
     componentWillUnmount() {
       // update redux store
-        var action = setSvButton({button: {submit_analysis: false}});
-        this.props.dispatchSvButton(action);
+        const analysisButton = setSvButton({button: {submit_analysis: false}});
+        const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+        this.props.dispatchSvButton(analysisButton);
+        this.props.dispatchSvButton(gotoResultsButton);
     }
 });
 
