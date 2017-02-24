@@ -13,5 +13,14 @@ function setSvButton(action) {
     };
 }
 
+function setGotoResults(action) {
+    return {
+        type: 'GOTO-RESULTS',
+        button: {
+            goto_results: action.button.goto_results
+        }
+    };
+}
+
 // indicate which class can be exported, and instantiated via 'require'
-export { setSvButton }
+export { setSvButton, setGotoResults }
