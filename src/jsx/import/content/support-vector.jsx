@@ -202,17 +202,46 @@ var SupportVector = React.createClass({
         var action = setResults(payload);
         this.props.dispatchResults(action);
     },
+  // update redux store
+    removeResultsButton: function() {
+        if (
+            this.state.ajax_done_result &&
+            this.state.ajax_done_result.type == 'model-predict'
+        ) {
+            this.setState({ajax_done_result: null});
+        }
+    },
   // triggered when 'state properties' change
     render: function() {
-      // define components
+      // spinner
         var spinner = this.state.display_spinner ? <Spinner /> : null;
-        var session = this.state.session_type ? this.state.session_type : null;
-        var resultBtn = this.state.ajax_done_result ? <ResultsLink /> : null;
+
+      // session component
+        if (this.state.session_type) {
+            const Component = this.state.session_type;
+            var session = <Component onChange={this.removeResultsButton} />
+        }
+        else {
+            var session = null;
+        }
+
+      // submit button
         if (this.props.submitSvButton) {
             var submitBtn = <SubmitAnalysis onClick={this.storeResults} />
         }
         else {
             var submitBtn = null;
+        }
+
+      // results button
+        if (
+            this.state.ajax_done_result &&
+            this.state.ajax_done_result.type == 'model-predict'
+        ) {
+            var resultBtn = <ResultsLink />;
+        }
+        else {
+            var resultBtn = null;
         }
 
         {/* return:
