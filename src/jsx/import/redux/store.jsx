@@ -26,8 +26,8 @@ const store = createStore(combineReducers({user, page}), {
     user: {name: username},
     page: {
         status: 'default',
-        submit_button: {
-            analysis: false
+        button: {
+            submit_analysis: false
         }
     }
 });

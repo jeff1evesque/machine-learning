@@ -18,10 +18,10 @@ const mapStateToProps = (state) => {
     if (
         state &&
         state.page &&
-        state.page.submit_button &&
-        !!state.page.submit_button.analysis
+        state.page.button &&
+        !!state.page.button.submit_analysis
     ) {
-        var display = state.page.submit_button.analysis;
+        var display = state.page.button.submit_analysis;
     }
     else {
         var display = false;
@@ -30,7 +30,7 @@ const mapStateToProps = (state) => {
   // return redux to state
     return {
         page: {
-            submit_button: {analysis: display}
+            button: {submit_analysis: display}
         }
     }
 }

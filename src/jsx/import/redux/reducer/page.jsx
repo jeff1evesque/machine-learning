@@ -14,8 +14,8 @@ import 'core-js/modules/es6.object.assign';
 const page = (state='default', action) => {
     if (
         action &&
-        action.submit_button &&
-        !!action.submit_button.analysis
+        action.button &&
+        !!action.button.submit_analysis
     ) {
         var submitButtonAnalysis = true;
     }
@@ -27,8 +27,8 @@ const page = (state='default', action) => {
         case 'SUBMIT-SV-ANALYSIS':
             return Object.assign({}, state, {
                 status: 'default',
-                submit_button: {
-                    analysis: submitButtonAnalysis
+                button: {
+                    submit_analysis: submitButtonAnalysis
                 }
             });
         default:

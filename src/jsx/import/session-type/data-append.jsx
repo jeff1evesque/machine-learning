@@ -47,7 +47,7 @@ var DataAppend = React.createClass({
             this.setState({value_session_id: '--Select--'});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -65,7 +65,7 @@ var DataAppend = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component (i.e. 'value_model_type')
@@ -83,7 +83,7 @@ var DataAppend = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component
@@ -91,13 +91,13 @@ var DataAppend = React.createClass({
         if (event.submitted_proper_dataset) {
           // update redux store
             var action = setSvButton({
-                submit_button: {analysis: event.submitted_proper_dataset}
+                button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
         }
         else {
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -224,7 +224,7 @@ var DataAppend = React.createClass({
     },
     componentWillUnmount() {
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });

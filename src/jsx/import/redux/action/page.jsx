@@ -7,8 +7,8 @@
 function setSvButton(action) {
     return {
         type: 'SUBMIT-SV-ANALYSIS',
-        submit_button: {
-            analysis: action.submit_button.analysis
+        button: {
+            submit_analysis: action.button.submit_analysis
         }
     };
 }

@@ -38,7 +38,7 @@ var DataNew = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
     changeTitle: function(event){
@@ -52,7 +52,7 @@ var DataNew = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component (i.e. 'value_model_type')
@@ -70,7 +70,7 @@ var DataNew = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component
@@ -78,13 +78,13 @@ var DataNew = React.createClass({
         if (event.submitted_proper_dataset) {
           // update redux store
             var action = setSvButton({
-                submit_button: {analysis: event.submitted_proper_dataset}
+                button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
         }
         else {
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -152,7 +152,7 @@ var DataNew = React.createClass({
     },
     componentWillUnmount() {
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });
