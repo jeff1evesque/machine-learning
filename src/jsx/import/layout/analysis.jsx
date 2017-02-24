@@ -8,6 +8,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SupportVectorState from '../redux/container/support-vector.jsx';
+import ResultDisplay from '../result/result-display.jsx';
 
 var AnalysisLayout = React.createClass({
     render: function() {
@@ -27,13 +28,22 @@ var AnalysisLayout = React.createClass({
             var session_type_value = '--Select--';
         }
 
+      // determine content
+        if (this.props.page.button.goto_resulst) {
+            var content = <ResultDisplay />
+        }
+        else {
+            const submit_analysis = this.props.page.button.submit_analysis;
+            var content = <SupportVectorState
+                              sessionType={content}
+                              sessionTypeValue={session_type_value}
+                              submitSvButton={submit_analysis}
+                          />
+        }
+
         return(
             <div className='analysis-container'>
-                <SupportVectorState
-                    sessionType={content}
-                    sessionTypeValue={session_type_value}
-                    submitSvButton={this.props.page.button.submit_analysis}
-                />
+                {content}
             </div>
         );
     }
