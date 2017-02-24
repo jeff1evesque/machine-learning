@@ -16,7 +16,7 @@ import SubmitAnalysis from '../general/submit-analysis.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import setResults from '../redux/action/results.jsx';
-import { setGotoResultsButton } from '../redux/action/page.jsx';
+import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFload from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -150,10 +150,6 @@ var SupportVector = React.createClass({
     },
   // update redux store
     storeResults: function() {
-      // update redux store
-        const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
-        this.props.dispatchSvButton(gotoResultsButton);
-
         var serverObj = this.props.formResult ? this.props.formResult : false;
         var resultSet = serverObj.result ? serverObj.result : false;
         var confidence = resultSet.confidence ? resultSet.confidence : false;
@@ -178,6 +174,10 @@ var SupportVector = React.createClass({
                 confidence.probability,
                 confidence.decision_function
             ];
+
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
         else if (
             resultSet &&
@@ -190,11 +190,19 @@ var SupportVector = React.createClass({
             var result_type = resultSet.model;
             var result_keys = ['result', 'r^2'];
             var result_values = [resultSet.result, confidence.score];
+
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
         else {
             var result_type = null;
             var result_keys = null;
             var result_values = null;
+
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
 
         payload = {
@@ -232,6 +240,10 @@ var SupportVector = React.createClass({
 
       // results button
         if (
+            this.props &&
+            this.props.page &&
+            this.props.page.button &&
+            this.props.page.button.goto_results &&
             this.state.ajax_done_result &&
             this.state.ajax_done_result.type == 'model-predict'
         ) {
