@@ -14,35 +14,6 @@ import { connect } from 'react-redux';
 import ModelPredict from '../../session-type/model-predict.jsx';
 import { setSvButton, setGotoResultsButton } from '../action/page.jsx';
 
-// transforms redux state tree to react properties
-const mapStateToProps = (state) => {
-    var displaySubmitAnalysis = false;
-    var displayGotoResults = false;
-
-    if (
-        state &&
-        state.page &&
-        state.page.button
-    ) {
-        if  (!!state.page.button.submit_analysis) {
-            var displaySubmitAnalysis = state.page.button.submit_analysis;
-        }
-        if (!!state.page.button.goto_results) {
-            var displaySupportVectorResults = state.page.button.goto_results;
-        }
-    }
-
-  // return redux to state
-    return {
-        page: {
-            button: {
-                submit_analysis: displaySubmitAnalysis,
-                goto_results: displayGotoResults
-            }
-        }
-    }
-}
-
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -53,7 +24,7 @@ const mapDispatchToProps = (dispatch) => {
 
 // pass selected properties from redux state tree to component
 const ModelPredictState = connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(ModelPredict)
 
