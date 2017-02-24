@@ -3,11 +3,15 @@
  *
  * @DataAppend, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
+ *
  * @sessionId, pass a callback to be run, within the corresponding ajax
  *     script. This allows the server side to return a list of all stored
  *     session id's, and append them to the form, respectively.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
  */
 
 import React from 'react';
@@ -17,7 +21,7 @@ import checkValidString from '../validator/valid-string.js';
 import checkValidInt from '../validator/valid-int.js';
 import ModelType from '../model/model-type.jsx';
 import Spinner from '../general/spinner.jsx';
-import setSvButton from '../redux/action/page.jsx';
+import { setSvButton } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var DataAppend = React.createClass({

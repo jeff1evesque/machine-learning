@@ -14,4 +14,4 @@ function setSvButton(action) {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default setSvButton
+export { setSvButton }

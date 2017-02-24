@@ -12,7 +12,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DataAppend from '../../session-type/data-append.jsx';
-import setSvButton from '../action/page.jsx';
+import { setSvButton } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {

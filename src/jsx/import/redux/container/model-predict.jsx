@@ -12,27 +12,33 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ModelPredict from '../../session-type/model-predict.jsx';
-import setSvButton from '../action/page.jsx';
+import { setSvButton } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate button
+    var displaySubmitAnalysis = false;
+    var displayGotoResults = false;
+
     if (
         state &&
         state.page &&
-        state.page.button &&
-        !!state.page.button.submit_analysis
+        state.page.button
     ) {
-        var display = state.page.button.submit_analysis;
-    }
-    else {
-        var display = false;
+        if  (!!state.page.button.submit_analysis) {
+            var displaySubmitAnalysis = state.page.button.submit_analysis;
+        }
+        if (!!state.page.button.goto_results) {
+            var displaySupportVectorResults = state.page.button.goto_results;
+        }
     }
 
   // return redux to state
     return {
         page: {
-            button: {submit_analysis: display}
+            button: {
+                submit_analysis: displaySubmitAnalysis,
+                goto_results: displayGotoResults
+            }
         }
     }
 }
