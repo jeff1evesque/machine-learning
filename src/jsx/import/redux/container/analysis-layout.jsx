@@ -14,23 +14,31 @@ import AnalysisLayout from '../../layout/analysis.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate username
+  // local variables
+    var displaySubmitAnalysis = false;
+    var displayGotoResults = false;
+
     if (
         state &&
         state.page &&
-        state.page.button &&
-        !!state.page.button.submit_analysis
+        state.page.button
     ) {
-        var display = state.page.button.submit_analysis;
-    }
-    else {
-        var display = false;
+        if (!!state.page.button.submit_analysis) {
+            var displaySubmitAnalysis = state.page.button.submit_analysis;
+        }
+        if (!!state.page.button.goto_results) {
+            var displayGotoResults = state.page.button.goto_results;
+        }
     }
 
   // return redux to state
     return {
         page: {
-            button: {submit_analysis: display}
+            button: {
+                submit_analysis: displaySubmitAnalysis,
+                goto_results: displayGotoResults
+
+            }
         }
     }
 }
