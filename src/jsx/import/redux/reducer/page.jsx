@@ -9,26 +9,33 @@
  *
  */
 
-import 'core-js/modules/es6.object.assign';
+import 'assign-deeply';
 
 const page = (state='default', action) => {
+    submitButtonAnalysis = false;
+    gotoResults = false;
+
     if (
         action &&
-        action.button &&
-        !!action.button.submit_analysis
+        action.button
     ) {
-        var submitButtonAnalysis = true;
-    }
-    else {
-        var submitButtonAnalysis = false;
+        var submitButtonAnalysis = !!action.button.submit_analysis ? true : false;
+        var gotoResults = !!action.button.goto_results ? true : false;
     }
 
     switch(action.type) {
         case 'SUBMIT-SV-ANALYSIS':
-            return Object.assign({}, state, {
+            return merge(state, {
                 status: 'default',
                 button: {
                     submit_analysis: submitButtonAnalysis
+                }
+            });
+        case 'GOTO-RESULTS':
+            return merge(state, {
+                status: 'default',
+                button: {
+                    goto_results: gotoResults
                 }
             });
         default:
