@@ -1,5 +1,5 @@
 /**
- * result-display.jsx: append form submission result.
+ * result-display.jsx: display prediction result.
  *
  * @ResultDisplay, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
