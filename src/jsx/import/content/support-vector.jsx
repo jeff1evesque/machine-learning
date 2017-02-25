@@ -179,6 +179,16 @@ var SupportVector = React.createClass({
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);
+
+            const payload = {
+                type: result_type,
+                results: {
+                    keys: result_keys,
+                    values: result_values
+                }
+            }
+            var action = setResults(payload);
+            this.props.dispatchResults(action);
         }
         else if (
             resultSet &&
@@ -195,6 +205,16 @@ var SupportVector = React.createClass({
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);
+
+            const payload = {
+                type: result_type,
+                results: {
+                    keys: result_keys,
+                    values: result_values
+                }
+            }
+            var action = setResults(payload);
+            this.props.dispatchResults(action);
         }
         else {
             var result_type = null;
@@ -205,16 +225,6 @@ var SupportVector = React.createClass({
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
-
-        const payload = {
-            type: result_type,
-            results: {
-                keys: result_keys,
-                values: result_values
-            }
-        }
-        var action = setResults(payload);
-        this.props.dispatchResults(action);
     },
   // triggered when 'state properties' change
     render: function() {
