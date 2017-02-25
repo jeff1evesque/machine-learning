@@ -5,12 +5,12 @@
 
 function setResults(action) {
     return {
-        type: 'DISPLAY-RESULT',
+        type: 'DISPLAY-RESULTS',
         data: {
             type: action.type,
             results: {
-                keys: action.results.keys,
-                values: action.results.values
+                keys: action.data.results.keys,
+                values: action.data.results.values
             }
         }
     };
