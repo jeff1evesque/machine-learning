@@ -26,7 +26,7 @@ const data = (state='default', action) => {
     switch(action.type) {
         case 'DISPLAY-RESULTS':
             return Object.assign({}, state, {
-                status: 'default',
+                type: 'default',
                 results: {
                     keys: result_keys,
                     values: result_values
