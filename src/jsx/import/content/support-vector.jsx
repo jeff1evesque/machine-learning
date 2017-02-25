@@ -96,6 +96,7 @@ var SupportVector = React.createClass({
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
                     this.setState({ajax_done_result: asynchObject});
+                    this.storeResults();
                 }
                 else {
                     this.setState({ajax_done_result: null});
@@ -151,8 +152,8 @@ var SupportVector = React.createClass({
   // update redux store
     storeResults: function() {
         var serverObj = !!this.state.ajax_done_result ? this.state.ajax_done_result : false;
-        var resultSet = serverObj.result ? serverObj.result : false;
-        var confidence = resultSet.confidence ? resultSet.confidence : false;
+        var resultSet = !!serverObj.result ? serverObj.result : false;
+        var confidence = !!resultSet.confidence ? resultSet.confidence : false;
 
         if (
             resultSet &&
@@ -233,7 +234,7 @@ var SupportVector = React.createClass({
 
       // submit button
         if (this.props.submitSvButton) {
-            var submitBtn = <SubmitAnalysis onClick={this.storeResults} />
+            var submitBtn = <SubmitAnalysis />
         }
         else {
             var submitBtn = null;
