@@ -13,9 +13,24 @@ var ResultDisplay = React.createClass({
     render: function(){
       // local variables
         var result_list = [];
-        var result_type = this.props.data.type.toUpperCase();
-        var result_keys = JSON.parse(this.props.data.result.keys);
-        var result_values = JSON.parse(this.props.data.result.values);
+        var result_type = 'default';
+        var result_keys = null;
+        var result_values = null;
+
+        if (
+            this.props &&
+            this.props.data &&
+            !!this.props.data.type &&
+            this.props.data.results
+        ) {
+            var result_type = this.props.data.type.toUpperCase();
+            if (this.props.data.results.keys) {
+                var result_keys = JSON.parse(this.props.data.results.keys);
+            }
+            if (this.props.data.results.values) {
+                var result_values = JSON.parse(this.props.data.results.values);
+            }
+        }
 
       // generate result
         if (
