@@ -12,8 +12,8 @@
 import 'assign-deeply';
 
 const page = (state='default', action) => {
-    submitButtonAnalysis = false;
-    gotoResults = false;
+    var submitButtonAnalysis = false;
+    var gotoResults = false;
 
     if (
         action &&
