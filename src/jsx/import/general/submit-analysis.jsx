@@ -12,11 +12,12 @@ import React from 'react';
 var SubmitAnalysis = React.createClass({
   // triggered when 'state properties' change
     render: function(){
+        var clickCallback = !!this.props.onClick ? this.props.onClick : null;
         return(
             <input
                 type='submit'
                 className='form-submit'
-                onClick={this.props.onClick}
+                onClick={clickCallback}
             />
         );
     }
