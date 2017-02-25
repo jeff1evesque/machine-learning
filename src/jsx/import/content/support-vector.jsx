@@ -153,6 +153,7 @@ var SupportVector = React.createClass({
         var serverObj = this.props.formResult ? this.props.formResult : false;
         var resultSet = serverObj.result ? serverObj.result : false;
         var confidence = resultSet.confidence ? resultSet.confidence : false;
+        console.log('support-vector.jsx (storeResults): ', serverObj);
 
         if (
             resultSet &&
@@ -205,7 +206,7 @@ var SupportVector = React.createClass({
             this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
 
-        payload = {
+        const payload = {
             type: result_type,
             results: {
                 keys: result_keys,
