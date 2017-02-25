@@ -9,7 +9,7 @@
  *
  */
 
-import merge from 'assign-deeply';
+import assign from 'assign-deep';
 
 const page = (state='default', action) => {
     var submitButtonAnalysis = false;
@@ -25,14 +25,14 @@ const page = (state='default', action) => {
 
     switch(action.type) {
         case 'SUBMIT-SV-ANALYSIS':
-            return merge(state, {
+            return assign({}, state, {
                 status: 'default',
                 button: {
                     submit_analysis: submitButtonAnalysis
                 }
             });
         case 'GOTO-RESULTS':
-            return merge(state, {
+            return assign({}, state, {
                 status: 'default',
                 button: {
                     goto_results: gotoResults
