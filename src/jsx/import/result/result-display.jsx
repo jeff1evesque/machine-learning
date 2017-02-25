@@ -34,8 +34,8 @@ var ResultDisplay = React.createClass({
 
       // generate result
         if (
-            results_keys &&
-            results_values &&
+            result_keys &&
+            result_values &&
             result_keys.length > 0 &&
             result_keys.length == result_values.length
         ) {
@@ -44,8 +44,8 @@ var ResultDisplay = React.createClass({
             });
         }
         else if (
-            results_keys &&
-            results_values &&
+            result_keys &&
+            result_values &&
             (result_keys.length > 0 || result_values.length > 0) &&
             result_keys.length != result_values.length
         ) {
@@ -54,8 +54,8 @@ var ResultDisplay = React.createClass({
             );
         }
         else if (
-            results_keys &&
-            results_values &&
+            result_keys &&
+            result_values &&
             result_keys.length == 0 &&
             result_values.length == 0
         ) {
