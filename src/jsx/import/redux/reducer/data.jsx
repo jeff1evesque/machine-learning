@@ -24,7 +24,7 @@ const data = (state='default', action) => {
     }
 
     switch(action.type) {
-        case 'DISPLAY-SV-RESULTS':
+        case 'DISPLAY-RESULTS':
             return Object.assign({}, state, {
                 status: 'default',
                 results: {
