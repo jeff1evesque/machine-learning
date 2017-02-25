@@ -9,7 +9,7 @@
  *
  */
 
-import 'assign-deeply';
+import merge from 'assign-deeply';
 
 const page = (state='default', action) => {
     var submitButtonAnalysis = false;
