@@ -12,7 +12,13 @@ import React from 'react';
 var SubmitAnalysis = React.createClass({
   // triggered when 'state properties' change
     render: function(){
-        return(<input type='submit' className='form-submit' />);
+        return(
+            <input
+                type='submit'
+                className='form-submit'
+                onClick={this.props.onClick}
+            />
+        );
     }
 });
 
