@@ -216,15 +216,6 @@ var SupportVector = React.createClass({
         var action = setResults(payload);
         this.props.dispatchResults(action);
     },
-  // update redux store
-    removeResultsButton: function() {
-        if (
-            this.state.ajax_done_result &&
-            this.state.ajax_done_result.type == 'model-predict'
-        ) {
-            this.setState({ajax_done_result: null});
-        }
-    },
   // triggered when 'state properties' change
     render: function() {
       // spinner
