@@ -9,8 +9,8 @@ function setResults(action) {
         data: {
             type: action.type,
             results: {
-                keys: action.results.keys.split(/\s*,\s*/),
-                values: action.results.values.split(/\s*,\s*/)
+                keys: action.results.keys,
+                values: action.results.values
             }
         }
     };
