@@ -6,7 +6,7 @@
 function setResults(action) {
     return {
         type: 'DISPLAY-RESULT',
-        result: {
+        data: {
             type: action.analysis.type,
             results: {
                 keys: action.analysis.data.keys.split(/\s*,\s*/),
