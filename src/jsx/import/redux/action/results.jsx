@@ -7,10 +7,10 @@ function setResults(action) {
     return {
         type: 'DISPLAY-RESULT',
         data: {
-            type: action.analysis.type,
+            type: action.type,
             results: {
-                keys: action.analysis.data.keys.split(/\s*,\s*/),
-                values: action.analysis.data.values.split(/\s*,\s*/)
+                keys: action.results.keys.split(/\s*,\s*/),
+                values: action.results.values.split(/\s*,\s*/)
             }
         }
     };
