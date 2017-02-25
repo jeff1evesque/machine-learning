@@ -12,6 +12,7 @@
 import 'core-js/modules/es6.object.assign';
 
 const data = (state='default', action) => {
+    var type = 'default';
     var result_keys = false;
     var result_values = false;
 
@@ -19,6 +20,7 @@ const data = (state='default', action) => {
         action &&
         action.results
     ) {
+        var type = !!action.type ? action.type ? 'default';
         var result_keys = !!action.results.keys ? action.results.keys : null;
         var result_values = !!action.results.values ? action.results.values : null;
     }
