@@ -18,7 +18,7 @@ import Spinner from '../general/spinner.jsx';
 import setResults from '../redux/action/results.jsx';
 import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
-import checkValidFload from '../validator/valid-float.js';
+import checkValidFloat from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
 import { browserHistory } from 'react-router'
 
@@ -150,10 +150,9 @@ var SupportVector = React.createClass({
     },
   // update redux store
     storeResults: function() {
-        var serverObj = this.props.formResult ? this.props.formResult : false;
+        var serverObj = !!this.state.ajax_done_result ? this.state.ajax_done_result : false;
         var resultSet = serverObj.result ? serverObj.result : false;
         var confidence = resultSet.confidence ? resultSet.confidence : false;
-        console.log('support-vector.jsx (storeResults): ', serverObj);
 
         if (
             resultSet &&
