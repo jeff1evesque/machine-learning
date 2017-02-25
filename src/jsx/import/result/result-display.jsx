@@ -14,8 +14,8 @@ var ResultDisplay = React.createClass({
       // local variables
         var result_list = [];
         var result_type = this.props.data.type.toUpperCase();
-        var result_keys = this.props.data.result.keys;
-        var result_values = this.props.data.result.values;
+        var result_keys = JSON.parse(this.props.data.result.keys);
+        var result_values = JSON.parse(this.props.data.result.values);
 
       // generate result
         if (

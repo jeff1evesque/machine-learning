@@ -184,8 +184,8 @@ var SupportVector = React.createClass({
                 type: result_type,
                 data: {
                     results: {
-                        keys: result_keys,
-                        values: result_values
+                        keys: JSON.stringify(result_keys),
+                        values: JSON.stringify(result_values)
                     }
                 }
             }
@@ -211,8 +211,8 @@ var SupportVector = React.createClass({
             const payload = {
                 type: result_type,
                 results: {
-                    keys: result_keys,
-                    values: result_values
+                    keys: JSON.stringify(result_keys),
+                    values: JSON.stringify(result_values)
                 }
             }
             var action = setResults(payload);
