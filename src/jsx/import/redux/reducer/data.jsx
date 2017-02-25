@@ -20,7 +20,7 @@ const data = (state='default', action) => {
         action &&
         action.results
     ) {
-        var type = !!action.type ? action.type ? 'default';
+        var type = !!action.type ? action.type : 'default';
         var result_keys = !!action.results.keys ? action.results.keys : null;
         var result_values = !!action.results.values ? action.results.values : null;
     }
