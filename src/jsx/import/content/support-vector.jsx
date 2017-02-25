@@ -181,9 +181,8 @@ var SupportVector = React.createClass({
             this.props.dispatchGotoResultsButton(gotoResultsButton);
 
             const payload = {
-                type: 'DISPLAY-RESULTS',
+                type: result_type,
                 data: {
-                    type: result_type,
                     results: {
                         keys: result_keys,
                         values: result_values
