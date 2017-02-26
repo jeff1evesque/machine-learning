@@ -19,7 +19,7 @@ const page = (state='default', action) => {
         case 'SUBMIT-SV-ANALYSIS':
             if (action && action.button && !!action.button.submit_analysis) {
                 var submitButtonAnalysis = action.button.submit_analysis;
-            )
+            }
 
             return assign({}, state, {
                 status: 'default',
