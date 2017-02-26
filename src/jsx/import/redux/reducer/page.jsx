@@ -15,16 +15,12 @@ const page = (state='default', action) => {
     var submitButtonAnalysis = false;
     var gotoResults = false;
 
-    if (
-        action &&
-        action.button
-    ) {
-        var submitButtonAnalysis = !!action.button.submit_analysis ? true : false;
-        var gotoResults = !!action.button.goto_results ? true : false;
-    }
-
     switch(action.type) {
         case 'SUBMIT-SV-ANALYSIS':
+            if (action && action.button && !!action.button.submit_analysis) {
+                var submitButtonAnalysis = action.button.submit_analysis;
+            )
+
             return assign({}, state, {
                 status: 'default',
                 button: {
@@ -32,6 +28,10 @@ const page = (state='default', action) => {
                 }
             });
         case 'GOTO-RESULTS':
+            if (action && action.button && !!action.button.goto_results) {
+                var gotoResults = action.button.goto_results;
+            }
+
             return assign({}, state, {
                 status: 'default',
                 button: {
