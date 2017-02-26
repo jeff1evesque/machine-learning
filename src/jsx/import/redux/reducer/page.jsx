@@ -20,13 +20,12 @@ const page = (state='default', action) => {
                 var submitButtonAnalysis = action.button.submit_analysis;
 
                 return {
-                   ...state,
-                   {
-                        status: 'default',
-                        button: {
-                            ...submit_analysis: submitButtonAnalysis
-                        }
-                   }
+                    ...state,
+                    status: 'default',
+                    button: {
+                        ...state.button,
+                        submit_analysis: submitButtonAnalysis
+                    }
                 }
             }
         case 'GOTO-RESULTS':
@@ -34,12 +33,11 @@ const page = (state='default', action) => {
                 var gotoResults = action.button.goto_results;
 
                 return {
-                   ...state,
-                   {
-                        status: 'default',
-                        button: {
-                            ...submit_analysis: submitButtonAnalysis
-                        }
+                    ...state,
+                    status: 'default',
+                    button: {
+                        ...state.button,
+                        ...submit_analysis: gotoResults
                    }
                 }
             }
