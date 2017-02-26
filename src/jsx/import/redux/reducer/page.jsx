@@ -37,7 +37,7 @@ const page = (state='default', action) => {
                     status: 'default',
                     button: {
                         ...state.button,
-                        ...submit_analysis: gotoResults
+                        goto_results: gotoResults
                    }
                 }
             }
