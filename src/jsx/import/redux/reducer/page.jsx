@@ -9,7 +9,7 @@
  *
  */
 
-import assign from 'assign-deep';
+import 'core-js/modules/es6.object.assign';
 
 const page = (state='default', action) => {
     var submitButtonAnalysis = false;
@@ -20,27 +20,21 @@ const page = (state='default', action) => {
             if (action && action.button && !!action.button.submit_analysis) {
                 var submitButtonAnalysis = action.button.submit_analysis;
             }
-
-            return assign({}, state, {
-                status: 'default',
-                button: {
-                    submit_analysis: submitButtonAnalysis
-                }
-            });
         case 'GOTO-RESULTS':
             if (action && action.button && !!action.button.goto_results) {
                 var gotoResults = action.button.goto_results;
             }
-
-            return assign({}, state, {
-                status: 'default',
-                button: {
-                    goto_results: gotoResults
-                }
-            });
         default:
             return state;
     }
+
+    return assign({}, state, {
+        status: 'default',
+        button: {
+            submit_analysis: submitButtonAnalysis,
+            goto_results: gotoResults
+        }
+    });
 }
 
 // indicate which class can be exported, and instantiated via 'require'
