@@ -16,7 +16,8 @@ import { setGotoResultsButton } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate button
+    var display = false;
+
     if (
         state &&
         state.page &&
@@ -24,9 +25,6 @@ const mapStateToProps = (state) => {
         !!state.page.button.goto_results
     ) {
         var display = state.page.button.goto_results;
-    }
-    else {
-        var display = false;
     }
 
   // return redux to state
