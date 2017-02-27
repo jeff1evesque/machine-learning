@@ -6,7 +6,7 @@
 function setResults(action) {
     return {
         type: 'SET-RESULTS',
-        data: {
+        results: {
             type: action.type,
             data: action.data
         }

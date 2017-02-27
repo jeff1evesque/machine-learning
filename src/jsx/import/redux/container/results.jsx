@@ -18,30 +18,23 @@ const mapStateToProps = (state) => {
   // validate button
     if (
         state &&
-        state.result &&
-        !!state.result.type &&
-        state.result.data &&
-        !!state.result.data.keys &&
-        !!state.result.data.values
+        state.results &&
+        !!state.results.type &&
+        !!state.results.data
     ) {
-        var result_type = state.result.type;
-        var result_keys = state.result.data.keys;
-        var result_values = state.result.data.values;
+        var result_type = state.results.type;
+        var result_data = state.results.data;
     }
     else {
         var result_type = null;
-        var result_keys = null;
-        var result_values = null;
+        var result_data = null;
     }
 
   // return redux to state
     return {
-        data: {
+        results: {
             type: result_type,
-            results: {
-                keys: result_keys,
-                values: result_values
-            }
+            data: result_data
         }
     }
 }

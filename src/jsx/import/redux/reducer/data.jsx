@@ -19,15 +19,15 @@ const data = (state='default', action) => {
         action &&
         action.results
     ) {
-        var type = !!action.type ? action.type : 'default';
-        var data = !!action.data ? action.data : null;
+        var result_type = !!action.results.type ? action.results.type : 'default';
+        var result_data = !!action.results.data ? action.results.data : null;
     }
 
     switch(action.type) {
         case 'SET-RESULTS':
             return Object.assign({}, state, {
-                type: 'default',
-                data: data
+                type: result_type,
+                data: result_data
             });
         default:
             return state;
