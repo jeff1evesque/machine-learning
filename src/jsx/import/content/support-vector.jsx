@@ -16,6 +16,7 @@ import SubmitAnalysis from '../general/submit-analysis.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import setResults from '../redux/action/results.jsx';
+import setSvButton from '../redux/action/results.jsx';
 import { setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
@@ -66,6 +67,9 @@ var SupportVector = React.createClass({
                 session_type_value: event.target.value
             });
         }
+
+      // update redux
+        this.props.dispatchSvButton(setSvButton({button: {submit_analysis: false}}));
     },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
@@ -196,7 +200,7 @@ var SupportVector = React.createClass({
                 type: resultSet.model,
                 data: JSON.stringify({
                     result: resultSet.result,
-                    r^2: confidence.score
+                    r2: confidence.score
                 })
             }
             this.props.dispatchResults(setResults(payload));
@@ -218,26 +222,23 @@ var SupportVector = React.createClass({
         var session = this.state.session_type ? this.state.session_type : null;
 
       // submit button
-        if (this.props.submitSvButton) {
-            var submitBtn = <SubmitAnalysis />
-        }
-        else {
-            var submitBtn = null;
-        }
-
-      // results button
         if (
+            session &&
             this.props &&
             this.props.page &&
-            this.props.page.button &&
-            this.props.page.button.goto_results &&
-            this.state.ajax_done_result &&
-            this.state.ajax_done_result.type == 'model-predict'
+            this.props.page.button
         ) {
-            var resultBtn = <ResultsLink />;
-        }
-        else {
-            var resultBtn = null;
+            const button = this.props.page.button;
+            var submitBtn = !!button.submit_analysis ? <SubmitAnalysis /> : null;
+
+            if (
+                this.state.ajax_done &&
+                this.state.ajax_done_result &&
+                !!this.state.ajax_done_result.type &&
+                this.state.ajax_done_result.type == 'model-predict'
+            ) {
+                var resultBtn = !!button.goto_results ? <ResultsLink /> : null;
+            }
         }
 
         {/* return:
