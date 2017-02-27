@@ -16,7 +16,7 @@ import SubmitAnalysis from '../general/submit-analysis.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import setResults from '../redux/action/results.jsx';
-import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
+import { setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -30,7 +30,7 @@ var SupportVector = React.createClass({
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
-            ajax_fail_status: null,
+            ajax_fail_status: null
         };
     },
   // callback: get session type
@@ -167,30 +167,21 @@ var SupportVector = React.createClass({
             confidence.decision_function.length > 0 &&
             confidence.decision_function.every(checkValidFloat)
         ) {
-            var result_type = resultSet.model;
-            var result_keys = ['result', 'classes', 'probability', 'decision-function'];
-            var result_values = [
-                resultSet.result,
-                confidence.classes,
-                confidence.probability,
-                confidence.decision_function
-            ];
+          // update redux store
+            const payload = {
+                type: resultSet.model,
+                data: JSON.stringify({
+                    result: resultSet.result,
+                    classes: confidence.classes,
+                    probability: confidence.probability,
+                    decision_function: confidence.decision_function
+                })
+            }
+            this.props.dispatchResults(setResults(payload));
 
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);
-
-            const payload = {
-                type: result_type,
-                data: {
-                    results: {
-                        keys: JSON.stringify(result_keys),
-                        values: JSON.stringify(result_values)
-                    }
-                }
-            }
-            var action = setResults(payload);
-            this.props.dispatchResults(action);
         }
         else if (
             resultSet &&
@@ -200,29 +191,21 @@ var SupportVector = React.createClass({
             confidence.score &&
             checkValidFloat(confidence.score)
         ) {
-            var result_type = resultSet.model;
-            var result_keys = ['result', 'r^2'];
-            var result_values = [resultSet.result, confidence.score];
+          // update redux store
+            const payload = {
+                type: resultSet.model,
+                data: JSON.stringify({
+                    result: resultSet.result,
+                    r^2: confidence.score
+                })
+            }
+            this.props.dispatchResults(setResults(payload));
 
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);
-
-            const payload = {
-                type: result_type,
-                results: {
-                    keys: JSON.stringify(result_keys),
-                    values: JSON.stringify(result_values)
-                }
-            }
-            var action = setResults(payload);
-            this.props.dispatchResults(action);
         }
         else {
-            var result_type = null;
-            var result_keys = null;
-            var result_values = null;
-
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);

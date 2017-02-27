@@ -13,26 +13,21 @@ import 'core-js/modules/es6.object.assign';
 
 const data = (state='default', action) => {
     var type = 'default';
-    var result_keys = false;
-    var result_values = false;
+    var data = null;
 
     if (
         action &&
         action.results
     ) {
         var type = !!action.type ? action.type : 'default';
-        var result_keys = !!action.results.keys ? action.results.keys : null;
-        var result_values = !!action.results.values ? action.results.values : null;
+        var data = !!action.data ? action.data : null;
     }
 
     switch(action.type) {
-        case 'DISPLAY-RESULTS':
+        case 'SET-RESULTS':
             return Object.assign({}, state, {
                 type: 'default',
-                results: {
-                    keys: result_keys,
-                    values: result_values
-                }
+                data: data
             });
         default:
             return state;

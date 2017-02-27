@@ -5,13 +5,10 @@
 
 function setResults(action) {
     return {
-        type: 'DISPLAY-RESULTS',
+        type: 'SET-RESULTS',
         data: {
             type: action.type,
-            results: {
-                keys: action.data.results.keys,
-                values: action.data.results.values
-            }
+            data: action.data
         }
     };
 }
