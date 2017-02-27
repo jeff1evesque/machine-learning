@@ -15,26 +15,24 @@ import setResults from '../action/results.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate button
+    var resultType = null;
+    var resultData = null;
+
     if (
         state &&
         state.results &&
         !!state.results.type &&
         !!state.results.data
     ) {
-        var result_type = state.results.type;
-        var result_data = state.results.data;
-    }
-    else {
-        var result_type = null;
-        var result_data = null;
+        var resultType = state.results.type;
+        var resultData = state.results.data;
     }
 
   // return redux to state
     return {
         results: {
-            type: result_type,
-            data: result_data
+            type: resultType,
+            data: resultData
         }
     }
 }
