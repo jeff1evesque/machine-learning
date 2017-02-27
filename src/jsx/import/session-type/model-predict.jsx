@@ -168,7 +168,7 @@ var ModelPredict = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-    componentWillUnmount() {
+    componentWillUnmount(): function () {
       // update redux store
         const analysisButton = setSvButton({button: {submit_analysis: false}});
         const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
