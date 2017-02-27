@@ -226,7 +226,7 @@ var DataAppend = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-    componentWillUnmount(): function () { {
+    componentWillUnmount: function () {
       // update redux store
         var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
