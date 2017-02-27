@@ -12,25 +12,31 @@ import React from 'react';
 import { connect } from 'react-redux';
 import SupportVector from '../../content/support-vector.jsx';
 import setResult from '../action/results.jsx';
-import { setGotoResultsButton } from '../action/page.jsx';
+import { setGotoResultsButton, setSvButton } from '../action/page.jsx';
+import setResults from '../action/results.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-    var display = false;
+    var resultsBtn = false;
+    var submitAnalysisBtn = false;
 
     if (
         state &&
         state.page &&
-        state.page.button &&
-        !!state.page.button.goto_results
+        state.page.button
     ) {
-        var display = state.page.button.goto_results;
+        const button = state.page.button;
+        var resultsBtn = !!button.goto_results ? button.goto_results : null;
+        var submitBtn = !!button.submit_analysis ? button.submit_analysis : null;
     }
 
   // return redux to state
     return {
         page: {
-            button: {goto_results: display}
+            button: {
+                goto_results: resultsBtn,
+                submit_analysis: submitBtn
+            }
         }
     }
 }
@@ -38,7 +44,8 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchResults: dispatch.bind(setResult),
+        dispatchSvButton: dispatch.bind(setSvButton),
+        dispatchResults: dispatch.bind(setResults),
         dispatchGotoResultsButton: dispatch.bind(setGotoResultsButton)
     }
 }

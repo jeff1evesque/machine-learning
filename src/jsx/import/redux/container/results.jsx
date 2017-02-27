@@ -11,7 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ResultDisplay from '../../result/result-display.jsx';
-import setResult from '../action/results.jsx';
+import setResults from '../action/results.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchSvButton: dispatch.bind(setResult)
+        dispatchSvButton: dispatch.bind(setResults)
     }
 }
 
