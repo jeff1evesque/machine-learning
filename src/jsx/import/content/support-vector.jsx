@@ -22,6 +22,7 @@ import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
 import { browserHistory } from 'react-router'
+import "includes"
 
 var SupportVector = React.createClass({
   // initial 'state properties'
@@ -31,7 +32,13 @@ var SupportVector = React.createClass({
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
-            ajax_fail_status: null
+            ajax_fail_status: null,
+            sessions: [
+                'data-new',
+                'data-append',
+                'model-generate',
+                'model-predict'
+            ]
         };
     },
   // callback: get session type
@@ -136,7 +143,6 @@ var SupportVector = React.createClass({
     componentDidUpdate: function() {
       // update state using react-route properties
         if (
-            this.props.sessionType &&
             !!this.props.sessionType &&
             this.props.sessionType != this.state.session_type
         ) {
@@ -147,10 +153,15 @@ var SupportVector = React.createClass({
             this.props.sessionTypeValue &&
             !!this.props.sessionTypeValue.type &&
             this.props.sessionTypeValue.type != this.state.session_type_value
+            this.state.sessions.includes(this.props.sessionTypeValue)
         ) {
             this.setState({
                session_type_value: this.props.sessionTypeValue.type
             });
+
+            this.props.dispatchSvButton(
+                setSvButton({button: {submit_analysis: false}})
+            );
         }
     },
   // update redux store
@@ -223,7 +234,6 @@ var SupportVector = React.createClass({
 
       // submit button
         if (
-            session &&
             this.props &&
             this.props.page &&
             this.props.page.button
