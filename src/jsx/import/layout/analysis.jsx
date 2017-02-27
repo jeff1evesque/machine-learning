@@ -37,11 +37,9 @@ var AnalysisLayout = React.createClass({
             var content = <ResultDisplay />
         }
         else {
-            const submit_analysis = this.props.page.button.submit_analysis;
             var content = <SupportVectorState
                               sessionType={content}
                               sessionTypeValue={session_type_value}
-                              submitSvButton={submit_analysis}
                           />
         }
 
