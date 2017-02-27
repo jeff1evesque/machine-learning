@@ -22,7 +22,7 @@ import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
 import { browserHistory } from 'react-router'
-import "includes"
+import includes from 'array-includes'
 
 var SupportVector = React.createClass({
   // initial 'state properties'
@@ -152,7 +152,7 @@ var SupportVector = React.createClass({
         if (
             this.props.sessionTypeValue &&
             !!this.props.sessionTypeValue.type &&
-            this.props.sessionTypeValue.type != this.state.session_type_value
+            this.props.sessionTypeValue.type != this.state.session_type_value &&
             this.state.sessions.includes(this.props.sessionTypeValue)
         ) {
             this.setState({
