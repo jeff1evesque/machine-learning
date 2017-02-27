@@ -14,29 +14,6 @@ import { connect } from 'react-redux';
 import DataAppend from '../../session-type/data-append.jsx';
 import { setSvButton } from '../action/page.jsx';
 
-// transforms redux state tree to react properties
-const mapStateToProps = (state) => {
-  // validate button
-    if (
-        state &&
-        state.page &&
-        state.page.button &&
-        !!state.page.button.submit_analysis
-    ) {
-        var display = state.page.button.submit_analysis;
-    }
-    else {
-        var display = false;
-    }
-
-  // return redux to state
-    return {
-        page: {
-            button: {submit_analysis: display}
-        }
-    }
-}
-
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -46,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 
 // pass selected properties from redux state tree to component
 const DataAppendState = connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(DataAppend)
 
