@@ -38,7 +38,7 @@ var ResultDisplay = React.createClass({
         }
         else {
             result_list.push(
-                <h3 className='result-item'>No results available!</h3>
+                <h3>No results available!</h3>
             );
         }
 
