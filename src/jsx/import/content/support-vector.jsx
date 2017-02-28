@@ -162,10 +162,13 @@ var SupportVector = React.createClass({
             !!resultSet.result &&
             resultSet.model == 'svm' &&
             confidence &&
+            confidence.classes &&
             confidence.classes.length > 0 &&
             confidence.classes.every(checkValidString) &&
+            confidence.probability &&
             confidence.probability.length > 0 &&
             confidence.probability.every(checkValidFloat) &&
+            confidence.decision_function &&
             confidence.decision_function.length > 0 &&
             confidence.decision_function.every(checkValidFloat)
         ) {
@@ -229,7 +232,6 @@ var SupportVector = React.createClass({
             var submitBtn = !!button.submit_analysis ? <SubmitAnalysis /> : null;
 
             if (
-                this.state.ajax_done &&
                 this.state.ajax_done_result &&
                 !!this.state.ajax_done_result.type &&
                 this.state.ajax_done_result.type == 'model-predict'
