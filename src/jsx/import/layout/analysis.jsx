@@ -8,7 +8,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import SupportVectorState from '../redux/container/support-vector.jsx';
-import ResultState from '../redux/container/results.jsx';
 
 var AnalysisLayout = React.createClass({
     render: function() {
@@ -17,11 +16,6 @@ var AnalysisLayout = React.createClass({
             content,
             content_type
         } = this.props;
-
-      // default value: content
-        if (!content) {
-            var content = null;
-        }
 
       // default value: session value
         if (!content_type || !content_type.type) {
@@ -33,10 +27,10 @@ var AnalysisLayout = React.createClass({
 
       // determine content
         if (content && content_type == 'result') {
-            var content = <ResultState />
+            var display_content = content;
         }
         else {
-            var content = <SupportVectorState
+            var display_content = <SupportVectorState
                               sessionType={content}
                               sessionTypeValue={contentSelection}
                           />;
@@ -44,7 +38,7 @@ var AnalysisLayout = React.createClass({
 
         return(
             <div className='analysis-container'>
-                {content}
+                {display_content}
             </div>
         );
     }
