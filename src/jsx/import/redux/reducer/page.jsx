@@ -16,29 +16,25 @@ const page = (state='default', action) => {
   // assign elements from action
     switch(action.type) {
         case 'SUBMIT-SV-ANALYSIS':
-            if (action && action.button && !!action.button.submit_analysis) {
-                var submitButtonAnalysis = action.button.submit_analysis;
+            var submitButtonAnalysis = action.button.submit_analysis;
 
-                return {
-                    ...state,
-                    status: 'default',
-                    button: {
-                        ...state.button,
-                        submit_analysis: submitButtonAnalysis
-                    }
+            return {
+                ...state,
+                status: 'default',
+                button: {
+                    ...state.button,
+                    submit_analysis: submitButtonAnalysis
                 }
             }
         case 'GOTO-RESULTS':
-            if (action && action.button && !!action.button.goto_results) {
-                var gotoResults = action.button.goto_results;
+            var gotoResults = action.button.goto_results;
 
-                return {
-                    ...state,
-                    status: 'default',
-                    button: {
-                        ...state.button,
-                        goto_results: gotoResults
-                   }
+            return {
+                ...state,
+                status: 'default',
+                button: {
+                    ...state.button,
+                    goto_results: gotoResults
                 }
             }
         default:
