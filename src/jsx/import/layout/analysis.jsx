@@ -26,14 +26,17 @@ var AnalysisLayout = React.createClass({
         }
 
       // determine content
-        if (content && content_type == 'result') {
+        if (content && content_type && content_type.type == 'result') {
             var display_content = content;
         }
-        else {
+        else if (content && content_type && !!content_type.type) {
             var display_content = <SupportVectorState
-                              sessionType={content}
-                              sessionTypeValue={contentSelection}
-                          />;
+                sessionType={content}
+                sessionTypeValue={contentSelection}
+            />;
+        }
+        else {
+            var display_content = this.props.children;
         }
 
         return(
