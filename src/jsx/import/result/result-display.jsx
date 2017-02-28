@@ -30,7 +30,7 @@ var ResultDisplay = React.createClass({
 
       // generate result
         if (result_data && result_data.length > 0) {
-            result_list.push(<ul className='result-list'>);
+            result_list.push(<ul>);
             Immutable.Map(result_data).map(
                (value, key) => result_list.push(<li className='result-item'>key: value</li>);
             );
@@ -46,7 +46,7 @@ var ResultDisplay = React.createClass({
         return(
             <div className='result-container'>
                 <h1>{result_type} Prediction Result</h1>
-                <div className='result-list'>
+                <div className='results'>
                     {result_list}
                 </div>
             </div>
