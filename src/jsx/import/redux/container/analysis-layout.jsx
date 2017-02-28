@@ -37,7 +37,6 @@ const mapStateToProps = (state) => {
             button: {
                 submit_analysis: displaySubmitAnalysis,
                 goto_results: displayGotoResults
-
             }
         }
     }
