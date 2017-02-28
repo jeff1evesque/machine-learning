@@ -8,7 +8,6 @@
  */
 
 import React from 'react';
-import Immutable from 'immutable';
 
 var ResultDisplay = React.createClass({
     render: function(){
@@ -31,8 +30,8 @@ var ResultDisplay = React.createClass({
       // generate result
         if (result_data && result_data.length > 0) {
             result_list.push(<ul>);
-            Immutable.Map(result_data).map(
-               (value, key) => result_list.push(<li className='result-item'>key: value</li>);
+            for (var key in result_data) {
+               result_list.push(<li className='result-item'>key: result_data[key]</li>);
             );
             result_list.push(</ul>)
         }
