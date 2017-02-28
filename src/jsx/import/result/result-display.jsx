@@ -8,64 +8,37 @@
  */
 
 import React from 'react';
+import Immutable from 'immutable';
 
 var ResultDisplay = React.createClass({
     render: function(){
       // local variables
         var result_list = [];
         var result_type = 'default';
-        var result_keys = null;
-        var result_values = null;
+        var result_data = null;
+        console.log('result-display.jsx (render): ', this.props);
 
         if (
             this.props &&
-            this.props.data &&
-            !!this.props.data.type &&
-            this.props.data.results
+            this.props.results &&
+            !!this.props.results.type &&
+            !!this.props.results.data
         ) {
-            var result_type = this.props.data.type.toUpperCase();
-            if (this.props.data.results.keys) {
-                var result_keys = JSON.parse(this.props.data.results.keys);
-            }
-            if (this.props.data.results.values) {
-                var result_values = JSON.parse(this.props.data.results.values);
-            }
+            var result_type = this.props.results.type.toUpperCase();
+            var result_data = JSON.parse(this.props.results.data);
         }
 
       // generate result
-        if (
-            result_keys &&
-            result_values &&
-            result_keys.length > 0 &&
-            result_keys.length == result_values.length
-        ) {
-            result_keys.map((result_key, index) => {
-                result_list.push(<li className='result-item'>result_key: result_values[index]</li>);
-            });
-        }
-        else if (
-            result_keys &&
-            result_values &&
-            (result_keys.length > 0 || result_values.length > 0) &&
-            result_keys.length != result_values.length
-        ) {
-            result_list.push(
-                <li className='result-item error'>Error: array results mismatching.</li>
+        if (result_data && result_data.length > 0) {
+            result_list.push(<ul className='result-list'>);
+            Immutable.Map(result_data).map(
+               (value, key) => result_list.push(<li className='result-item'>key: value</li>);
             );
-        }
-        else if (
-            result_keys &&
-            result_values &&
-            result_keys.length == 0 &&
-            result_values.length == 0
-        ) {
-            result_list.push(
-                <li className='result-item error'>Error: empty result returned.</li>
-            );
+            result_list.push(</ul>)
         }
         else {
             result_list.push(
-                <li className='result-item'>No results available!</li>
+                <h3 className='result-item'>No results available!</h3>
             );
         }
 
@@ -73,9 +46,9 @@ var ResultDisplay = React.createClass({
         return(
             <div className='result-container'>
                 <h1>{result_type} Prediction Result</h1>
-                <ul className='result-list'>
+                <div className='result-list'>
                     {result_list}
-                </ul>
+                </div>
             </div>
         );
     }
