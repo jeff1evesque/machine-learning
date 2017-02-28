@@ -16,13 +16,11 @@ import SubmitAnalysis from '../general/submit-analysis.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import setResults from '../redux/action/results.jsx';
-import setSvButton from '../redux/action/results.jsx';
-import { setGotoResultsButton } from '../redux/action/page.jsx';
+import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
 import { browserHistory } from 'react-router'
-import includes from 'array-includes'
 
 var SupportVector = React.createClass({
   // initial 'state properties'
@@ -32,13 +30,7 @@ var SupportVector = React.createClass({
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
-            ajax_fail_status: null,
-            sessions: [
-                'data-new',
-                'data-append',
-                'model-generate',
-                'model-predict'
-            ]
+            ajax_fail_status: null
         };
     },
   // callback: get session type
@@ -91,7 +83,7 @@ var SupportVector = React.createClass({
             sessionType == 'model_generate' ||
             sessionType == 'model_predict'
         ) {
-            var ajaxEndpoint = '/load-data';
+            const ajaxEndpoint = '/load-data';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
                 'data': new FormData(this.refs.analysisForm)
@@ -152,16 +144,11 @@ var SupportVector = React.createClass({
         if (
             this.props.sessionTypeValue &&
             !!this.props.sessionTypeValue.type &&
-            this.props.sessionTypeValue.type != this.state.session_type_value &&
-            this.state.sessions.includes(this.props.sessionTypeValue)
+            this.props.sessionTypeValue.type != this.state.session_type_value
         ) {
             this.setState({
                session_type_value: this.props.sessionTypeValue.type
             });
-
-            this.props.dispatchSvButton(
-                setSvButton({button: {submit_analysis: false}})
-            );
         }
     },
   // update redux store
