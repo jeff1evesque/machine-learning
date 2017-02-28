@@ -15,7 +15,7 @@ var AnalysisLayout = React.createClass({
       // destructure react-router
         var {
             content,
-            session_type_value
+            content_type
         } = this.props;
 
       // default value: content
@@ -24,23 +24,22 @@ var AnalysisLayout = React.createClass({
         }
 
       // default value: session value
-        if (!session_type_value || !session_type_value.type) {
-            var session_type_value = '--Select--';
+        if (!content_type || !content_type.type) {
+            var contentSelection = '--Select--';
+        }
+        else {
+            var contentSelection = content_type.type;
         }
 
       // determine content
-        if (
-            content &&
-            !!session_type_value &&
-            session_type_value != '--Select--'
-        ) {
-            var content = <SupportVectorState
-                              sessionType={content}
-                              sessionTypeValue={session_type_value}
-                          />;
+        if (content && content_type == 'result') {
+            var content = <ResultState />
         }
         else {
-            var content = <ResultState />;
+            var content = <SupportVectorState
+                              sessionType={content}
+                              sessionTypeValue={contentSelection}
+                          />;
         }
 
         return(
