@@ -30,8 +30,8 @@ var ResultDisplay = React.createClass({
       // generate result
         if (result_data && result_data.length > 0) {
             result_list.push(<ul>);
-            for (var key in result_data) {
-               result_list.push(<li className='result-item'>key: result_data[key]</li>);
+            Object.entries(result_data).forEach(([key, value]) =>
+               result_list.push(<li className='result-item'>key: value</li>);
             );
             result_list.push(</ul>);
         }
