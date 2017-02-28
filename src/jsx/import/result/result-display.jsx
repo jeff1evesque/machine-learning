@@ -33,7 +33,7 @@ var ResultDisplay = React.createClass({
             for (var key in result_data) {
                result_list.push(<li className='result-item'>key: result_data[key]</li>);
             );
-            result_list.push(</ul>)
+            result_list.push(</ul>);
         }
         else {
             result_list.push(
