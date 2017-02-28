@@ -128,7 +128,7 @@ var SupportVector = React.createClass({
     componentWillMount: function() {
         this.setState({
             session_type: this.props.sessionType,
-            session_type_value: this.props.sessionTypeValue.type
+            session_type_value: this.props.sessionTypeValue
         });
     },
   // define properties after update
@@ -142,12 +142,11 @@ var SupportVector = React.createClass({
         }
 
         if (
-            this.props.sessionTypeValue &&
-            !!this.props.sessionTypeValue.type &&
-            this.props.sessionTypeValue.type != this.state.session_type_value
+            !!this.props.sessionTypeValue &&
+            this.props.sessionTypeValue != this.state.session_type_value
         ) {
             this.setState({
-               session_type_value: this.props.sessionTypeValue.type
+               session_type_value: this.props.sessionTypeValue
             });
         }
     },
