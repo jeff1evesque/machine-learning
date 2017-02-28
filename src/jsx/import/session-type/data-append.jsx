@@ -188,7 +188,7 @@ var DataAppend = React.createClass({
         }
     },
   // call back: get session id(s) from server side, and append to form
-    componentDidMount: function () {
+    componentDidMount: function() {
       // ajax arguments
         var ajaxEndpoint = '/retrieve-session';
         var ajaxArguments = {
@@ -226,7 +226,7 @@ var DataAppend = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-    componentWillUnmount: function () {
+    componentWillUnmount: function() {
       // update redux store
         var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
