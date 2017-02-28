@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import Object.entries from 'object.entries';
 
 var ResultDisplay = React.createClass({
     render: function(){
