@@ -16,7 +16,7 @@ var SupplyDatasetFile = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: null,
+            value: '',
             additional_elements: []
         };
     },
@@ -37,9 +37,9 @@ var SupplyDatasetFile = React.createClass({
 
             {/* define boolean to indicate all files properly defined */}
             for (var index = 0; index < elements.length; index++) {
-                var inputVal = this.state['value_dataset_' + index.toString()];
+                const inputVal = this.state['value_dataset_' + index.toString()];
 
-                if (typeof inputVal == 'undefined') {
+                if (!!inputVal) {
                     datasetBoolean = false;
                     return datasetBoolean;
                 }

@@ -14,7 +14,7 @@ var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: null,
+            value: '',
             additional_elements: []
         };
     },
@@ -35,8 +35,8 @@ var SupplyDatasetUrl = React.createClass({
 
             {/* define boolean to indicate all urls properly defined */}
             for (index = 0; index < elements.length; index++) {
-                var value = this.state['value_dataset_' + index.toString()];
-                if ( value === undefined) {
+                const value = this.state['value_dataset_' + index.toString()];
+                if (!!value) {
                     datasetBoolean = false;
                 }
             }
