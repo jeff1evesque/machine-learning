@@ -35,9 +35,9 @@ var ResultDisplay = React.createClass({
         ) {
             var result_list = <ul className='result-list'>{
                 Object.entries(result_data).map(([key, value]) =>
-                    <li>{key}: {
+                    <li key={key}>{key}: {
                         Array.isArray(value) ?
-                            value.map(v => <ul className='sublist'><li>{v}</li></ul>) :
+                            value.map(v => <ul className='sublist' key={'u-' + v}><li key={'l-' + v}>{v}</li></ul>) :
                             value
                         }
                     </li>
