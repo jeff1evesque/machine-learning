@@ -1,5 +1,5 @@
 /**
- * login-layout.jsx: general login layout.
+ * login.jsx: general login layout.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -7,7 +7,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LoginState from '../redux/container/login-container.jsx';
+import LoginState from '../redux/container/login.jsx';
 
 var LoginLayout = React.createClass({
     render: function() {

@@ -1,5 +1,5 @@
 /**
- * menu-register-container.jsx: redux store for login, and logout processes.
+ * analysis-layout.jsx: redux store for general page settings.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,32 +10,36 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import MenuRegister from '../../navigation/menu-items/menu-register.jsx';
+import AnalysisLayout from '../../layout/analysis.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate username
-    if (state && state.user && !!state.user.name) {
-        var username = state.user.name
-    }
-    else {
-        var username = 'anonymous'
+    var displayGotoResults = false;
+
+    if (
+        state &&
+        state.page &&
+        state.page.button &&
+        !!state.page.button.goto_results
+    ) {
+            var displayGotoResults = state.page.button.goto_results;
     }
 
   // return redux to state
     return {
-        user: {
-            name: username
+        page: {
+            button: {
+                goto_results: displayGotoResults
+            }
         }
     }
 }
 
 // pass selected properties from redux state tree to component
-const MenuLoginState = connect(
+const AnalysisLayoutState = connect(
     mapStateToProps,
     null
-)(MenuRegister)
+)(AnalysisLayout)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default MenuLoginState
-
+export default AnalysisLayoutState

@@ -1,5 +1,5 @@
 /**
- * login-reducer.jsx: describe how login state changes.
+ * login.jsx: describe how login state changes.
  *
  * Note: the triple dots is the 'object spread' syntax:
  *

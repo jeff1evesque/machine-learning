@@ -3,11 +3,15 @@
  *
  * @DataAppend, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
+ *
  * @sessionId, pass a callback to be run, within the corresponding ajax
  *     script. This allows the server side to return a list of all stored
  *     session id's, and append them to the form, respectively.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
  */
 
 import React from 'react';
@@ -17,7 +21,7 @@ import checkValidString from '../validator/valid-string.js';
 import checkValidInt from '../validator/valid-int.js';
 import ModelType from '../model/model-type.jsx';
 import Spinner from '../general/spinner.jsx';
-import setSvButton from '../redux/action/page-action.jsx';
+import { setSvButton } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var DataAppend = React.createClass({
@@ -47,7 +51,7 @@ var DataAppend = React.createClass({
             this.setState({value_session_id: '--Select--'});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -65,7 +69,7 @@ var DataAppend = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component (i.e. 'value_model_type')
@@ -83,7 +87,7 @@ var DataAppend = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component
@@ -91,13 +95,13 @@ var DataAppend = React.createClass({
         if (event.submitted_proper_dataset) {
           // update redux store
             var action = setSvButton({
-                submit_button: {analysis: event.submitted_proper_dataset}
+                button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
         }
         else {
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -184,7 +188,7 @@ var DataAppend = React.createClass({
         }
     },
   // call back: get session id(s) from server side, and append to form
-    componentDidMount: function () {
+    componentDidMount: function() {
       // ajax arguments
         var ajaxEndpoint = '/retrieve-session';
         var ajaxArguments = {
@@ -222,9 +226,9 @@ var DataAppend = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-    componentWillUnmount() {
+    componentWillUnmount: function() {
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });

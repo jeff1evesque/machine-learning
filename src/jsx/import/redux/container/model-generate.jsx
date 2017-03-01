@@ -1,6 +1,6 @@
 /**
- * model-generate-container.jsx: redux store for general page settings,
- *                               associated with the data-new session.
+ * model-generate.jsx: redux store for general page settings, associated with
+ *                     the data-new session.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -12,30 +12,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ModelGenerate from '../../session-type/model-generate.jsx';
-import setSvButton from '../action/page-action.jsx';
-
-// transforms redux state tree to react properties
-const mapStateToProps = (state) => {
-  // validate button
-    if (
-        state &&
-        state.page &&
-        state.page.submit_button &&
-        !!state.page.submit_button.analysis
-    ) {
-        var display = state.page.submit_button.analysis;
-    }
-    else {
-        var display = false;
-    }
-
-  // return redux to state
-    return {
-        page: {
-            submit_button: {analysis: display}
-        }
-    }
-}
+import { setSvButton } from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
@@ -46,7 +23,7 @@ const mapDispatchToProps = (dispatch) => {
 
 // pass selected properties from redux state tree to component
 const ModelGenerateState = connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(ModelGenerate)
 

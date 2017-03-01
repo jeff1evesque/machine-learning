@@ -1,6 +1,5 @@
 /**
- * login-container.jsx: redux store for general page settings, login, and
- *                      logout processes.
+ * register-link.jsx: redux store for login, and logout processes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,8 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import LoginForm from '../../content/login.jsx';
-import setLoginState from '../action/login-action.jsx';
+import RegisterLink from '../../navigation/menu-items/register.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -32,18 +30,12 @@ const mapStateToProps = (state) => {
     }
 }
 
-// wraps each function of the object to be dispatch callable
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatchLogin: dispatch.bind(setLoginState)
-    }
-}
-
 // pass selected properties from redux state tree to component
-const LoginState = connect(
+const RegisterLinkState = connect(
     mapStateToProps,
-    mapDispatchToProps
-)(LoginForm)
+    null
+)(RegisterLink)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default LoginState
+export default RegisterLinkState
+

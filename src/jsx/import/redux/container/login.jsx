@@ -1,5 +1,6 @@
 /**
- * analysis-layout-container.jsx: redux store for general page settings.
+ * login.jsx: redux store for general page settings, login, and logout
+ *            processes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,36 +11,39 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import AnalysisLayout from '../../layout/analysis-layout.jsx';
+import LoginForm from '../../content/login.jsx';
+import setLoginState from '../action/login.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
   // validate username
-    if (
-        state &&
-        state.page &&
-        state.page.submit_button &&
-        !!state.page.submit_button.analysis
-    ) {
-        var display = state.page.submit_button.analysis;
+    if (state && state.user && !!state.user.name) {
+        var username = state.user.name
     }
     else {
-        var display = false;
+        var username = 'anonymous'
     }
 
   // return redux to state
     return {
-        page: {
-            submit_button: {analysis: display}
+        user: {
+            name: username
         }
     }
 }
 
+// wraps each function of the object to be dispatch callable
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchLogin: dispatch.bind(setLoginState)
+    }
+}
+
 // pass selected properties from redux state tree to component
-const AnalysisLayoutState = connect(
+const LoginState = connect(
     mapStateToProps,
-    null
-)(AnalysisLayout)
+    mapDispatchToProps
+)(LoginForm)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default AnalysisLayoutState
+export default LoginState

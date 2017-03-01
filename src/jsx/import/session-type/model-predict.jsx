@@ -5,13 +5,16 @@
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
  */
 
 import React from 'react';
 import SupplyPredictors from '../input-data/supply-predictors.jsx';
 import checkValidInt from '../validator/valid-int.js';
 import Spinner from '../general/spinner.jsx';
-import setSvButton from '../redux/action/page-action.jsx';
+import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelPredict = React.createClass({
@@ -38,9 +41,11 @@ var ModelPredict = React.createClass({
             }
         }
 
-        // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
-        this.props.dispatchSvButton(action);
+      // update redux store
+        const analysisButton = setSvButton({button: {submit_analysis: false}});
+        const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+        this.props.dispatchSvButton(analysisButton);
+        this.props.dispatchGotoResultsButton(gotoResultsButton);
 
       // store modelId into state
         if (modelId && modelId != '--Select--' && checkValidInt(modelId)) {
@@ -53,15 +58,17 @@ var ModelPredict = React.createClass({
   // update redux store
     displaySubmit: function(event) {
         if (event.submitted_proper_predictor) {
-            var action = setSvButton({
-                submit_button: {analysis: event.submitted_proper_predictor}
+            const action = setSvButton({
+                button: {submit_analysis: event.submitted_proper_predictor}
             });
             this.props.dispatchSvButton(action);
         }
         else {
-            var action = setSvButton({submit_button: {analysis: false}});
+            const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
+        const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+        this.props.dispatchGotoResultsButton(gotoResultsButton);
     },
   // triggered when 'state properties' change
     render: function(){
@@ -161,10 +168,12 @@ var ModelPredict = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-    componentWillUnmount() {
+    componentWillUnmount: function () {
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
-        this.props.dispatchSvButton(action);
+        const analysisButton = setSvButton({button: {submit_analysis: false}});
+        const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+        this.props.dispatchSvButton(analysisButton);
+        this.props.dispatchGotoResultsButton(gotoResultsButton);
     }
 });
 

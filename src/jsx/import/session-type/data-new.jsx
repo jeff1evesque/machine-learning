@@ -5,6 +5,9 @@
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
  */
 
 import React from 'react';
@@ -12,7 +15,7 @@ import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
-import setSvButton from '../redux/action/page-action.jsx';
+import { setSvButton } from '../redux/action/page.jsx';
 
 var DataNew = React.createClass({
   // initial 'state properties'
@@ -38,7 +41,7 @@ var DataNew = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
     changeTitle: function(event){
@@ -52,7 +55,7 @@ var DataNew = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component (i.e. 'value_model_type')
@@ -70,7 +73,7 @@ var DataNew = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component
@@ -78,13 +81,13 @@ var DataNew = React.createClass({
         if (event.submitted_proper_dataset) {
           // update redux store
             var action = setSvButton({
-                submit_button: {analysis: event.submitted_proper_dataset}
+                button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
         }
         else {
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -150,9 +153,9 @@ var DataNew = React.createClass({
             return 'span';
         }
     },
-    componentWillUnmount() {
+    componentWillUnmount: function() {
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });

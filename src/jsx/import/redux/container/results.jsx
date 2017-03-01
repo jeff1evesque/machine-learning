@@ -1,6 +1,5 @@
 /**
- * data-new-container.jsx: redux store for general page settings, associated
- *                         with the data-new session.
+ * results.jsx: redux store for analysis results.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,28 +10,30 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import DataNew from '../../session-type/data-new.jsx';
-import setSvButton from '../action/page-action.jsx';
+import ResultDisplay from '../../result/result-display.jsx';
+import setResults from '../action/results.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate button
+    var resultType = null;
+    var resultData = null;
+
     if (
         state &&
-        state.page &&
-        state.page.submit_button &&
-        !!state.page.submit_button.analysis
+        state.data &&
+        state.data.results &&
+        !!state.data.results.type &&
+        !!state.data.results.data
     ) {
-        var display = state.page.submit_button.analysis;
-    }
-    else {
-        var display = false;
+        var resultType = state.data.results.type;
+        var resultData = state.data.results.data;
     }
 
   // return redux to state
     return {
-        page: {
-            submit_button: {analysis: display}
+        results: {
+            type: resultType,
+            data: resultData
         }
     }
 }
@@ -40,15 +41,15 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchSvButton: dispatch.bind(setSvButton)
+        dispatchSvButton: dispatch.bind(setResults)
     }
 }
 
 // pass selected properties from redux state tree to component
-const DataNewState = connect(
+const ResultState = connect(
     mapStateToProps,
     mapDispatchToProps
-)(DataNew)
+)(ResultDisplay)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default DataNewState
+export default ResultState

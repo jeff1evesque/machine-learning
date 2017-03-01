@@ -80,14 +80,16 @@ class Load_Data(object):
 
             response = {
                 'status': 0,
-                'msg': 'Dataset(s) properly uploaded into database'
+                'msg': 'Dataset(s) properly uploaded into database',
+                'type': 'data-new'
             }
 
         else:
             print session.get_errors()
             response = {
                 'status': 1,
-                'msg': 'Dataset(s) not uploaded into database'
+                'msg': 'Dataset(s) not uploaded into database',
+                'type': 'data-new'
             }
 
         return json.dumps(response)
@@ -128,14 +130,16 @@ class Load_Data(object):
 
             response = {
                 'status': 0,
-                'msg': 'Dataset(s) properly appended into database'
+                'msg': 'Dataset(s) properly appended into database',
+                'type': 'data-append'
             }
 
         else:
             print session.get_errors()
             response = {
                 'status': 1,
-                'msg': 'Dataset(s) not uploaded into database'
+                'msg': 'Dataset(s) not uploaded into database',
+                'type': 'data-append'
             }
 
         return json.dumps(response)
@@ -162,12 +166,14 @@ class Load_Data(object):
         if session.return_error():
             response = {
                 'status': 1,
-                'msg': 'Model not generated'
+                'msg': 'Model not generated',
+                'type': 'model-generate'
             }
         else:
             response = {
                 'status': 0,
-                'msg': 'Model properly generated'
+                'msg': 'Model properly generated',
+                'type': 'model-generate'
             }
 
         return json.dumps(response)
@@ -193,11 +199,13 @@ class Load_Data(object):
                 response = {
                     'status': 1,
                     'result': my_prediction['error'],
+                    'type': 'model-predict'
                 }
             else:
                 response = {
                     'status': 0,
                     'result': my_prediction,
+                    'type': 'model-predict'
                 }
 
             return json.dumps(response)

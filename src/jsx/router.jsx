@@ -6,15 +6,16 @@
 
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
-import DataNewState from './import/redux/container/data-new-container.jsx';
-import DataAppendState from './import/redux/container/data-append-container.jsx';
-import ModelGenerateState from './import/redux/container/model-generate-container.jsx';
-import ModelPredictState from './import/redux/container/model-predict-container.jsx';
-import RegisterState from './import/redux/container/register-container.jsx';
-import AnalysisLayoutState from './import/redux/container/analysis-layout-container.jsx';
-import PageLayout from './import/layout/page-layout.jsx';
-import LoginLayout from './import/layout/login-layout.jsx';
-import RegisterLayout from './import/layout/register-layout.jsx';
+import DataNewState from './import/redux/container/data-new.jsx';
+import DataAppendState from './import/redux/container/data-append.jsx';
+import ModelGenerateState from './import/redux/container/model-generate.jsx';
+import ModelPredictState from './import/redux/container/model-predict.jsx';
+import ResultState from './import/redux/container/results.jsx';
+import RegisterState from './import/redux/container/register.jsx';
+import AnalysisLayoutState from './import/redux/container/analysis-layout.jsx';
+import PageLayout from './import/layout/page.jsx';
+import LoginLayout from './import/layout/login.jsx';
+import RegisterLayout from './import/layout/register.jsx';
 import NavBar from './import/navigation/nav-bar.jsx';
 
 var AppRouter = React.createClass({
@@ -45,28 +46,35 @@ var AppRouter = React.createClass({
                             path='/session/data-new'
                             components={{
                                 content: DataNewState,
-                                session_type_value: 'data_new'
+                                content_type: 'data_new'
                             }}
                         />
                         <Route
                             path='/session/data-append'
                             components={{
                                 content: DataAppendState,
-                                session_type_value: 'data_append'
+                                content_type: 'data_append'
                             }}
                         />
                         <Route
                             path='/session/model-generate'
                             components={{
                                 content: ModelGenerateState,
-                                session_type_value: 'model_generate'
+                                content_type: 'model_generate'
                             }}
                         />
                         <Route
                             path='/session/model-predict'
                             components={{
                                 content: ModelPredictState,
-                                session_type_value: 'model_predict'
+                                content_type: 'model_predict'
+                            }}
+                        />
+                        <Route
+                            path='/session/results'
+                            components={{
+                                content: ResultState,
+                                content_type: 'result'
                             }}
                         />
                     </Route>

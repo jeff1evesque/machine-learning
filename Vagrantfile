@@ -46,7 +46,7 @@ Vagrant.configure(2) do |config|
   config.vm.box_download_checksum_type = 'md5'
 
   ## Ensure puppet installed within guest
-  config.puppet_install.puppet_version = '4.3.2'
+  config.puppet_install.puppet_version = '4.9.2'
 
   ## Create a forwarded port mapping which allows access to a specific port
   #  within the machine from a port on the host machine. In the example below,

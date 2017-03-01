@@ -1,5 +1,5 @@
 /**
- * login-action.jsx: send login status to the redux store.
+ * login.jsx: send login status to the redux store.
  *
  */
 

@@ -5,13 +5,16 @@
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
+ *
+ * Note: importing 'named export' (multiple export statements in a module),
+ *       requires the object being imported, to be surrounded by { brackets }.
  */
 
 import React from 'react';
 import checkValidString from '../validator/valid-string.js';
 import checkValidInt from '../validator/valid-int.js';
 import Spinner from '../general/spinner.jsx';
-import setSvButton from '../redux/action/page-action.jsx';
+import { setSvButton } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelGenerate = React.createClass({
@@ -43,11 +46,11 @@ var ModelGenerate = React.createClass({
                 modelType != '--Select--' && kernelType != '--Select--' &&
                 checkValidString(modelType) && checkValidString(kernelType)
             ) {
-                var action = setSvButton({submit_button: {analysis: true}});
+                var action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({submit_button: {analysis: false}});
+                var action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -55,7 +58,7 @@ var ModelGenerate = React.createClass({
             this.setState({value_session_id: '--Select--'});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -75,11 +78,11 @@ var ModelGenerate = React.createClass({
                 checkValidInt(sessionId) && kernelType != '--Select--' &&
                 checkValidString(kernelType)
             ) {
-                var action = setSvButton({submit_button: {analysis: true}});
+                var action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({submit_button: {analysis: false}});
+                var action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -87,7 +90,7 @@ var ModelGenerate = React.createClass({
             this.setState({value_model_type: '--Select--'});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -107,11 +110,11 @@ var ModelGenerate = React.createClass({
                 checkValidInt(sessionId) && modelType != '--Select--' &&
                 checkValidString(modelType)
             ) {
-                var action = setSvButton({submit_button: {analysis: true}});
+                var action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({submit_button: {analysis: false}});
+                var action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -119,7 +122,7 @@ var ModelGenerate = React.createClass({
             this.setState({value_kernel_type: '--Select--'});
 
           // update redux store
-            var action = setSvButton({submit_button: {analysis: false}});
+            var action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
@@ -192,7 +195,7 @@ var ModelGenerate = React.createClass({
         );
     },
   // call back: get session id(s) from server side, and append to form
-    componentDidMount: function () {
+    componentDidMount: function() {
       // ajax arguments
         var ajaxEndpoint = '/retrieve-session';
         var ajaxArguments = {
@@ -230,9 +233,9 @@ var ModelGenerate = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-    componentWillUnmount() {
+    componentWillUnmount: function() {
       // update redux store
-        var action = setSvButton({submit_button: {analysis: false}});
+        var action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });

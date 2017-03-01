@@ -8,14 +8,17 @@
  */
 
 import React from 'react';
-import ModelGenerateState from '../redux/container/model-generate-container.jsx';
-import ModelPredictState from '../redux/container/model-predict-container.jsx';
-import DataNewState from '../redux/container/data-new-container.jsx';
-import DataAppendState from '../redux/container/data-append-container.jsx';
-import Submit from '../general/submit.jsx';
-import ResultDisplay from '../result/result-display.jsx';
+import ModelGenerateState from '../redux/container/model-generate.jsx';
+import ModelPredictState from '../redux/container/model-predict.jsx';
+import DataNewState from '../redux/container/data-new.jsx';
+import DataAppendState from '../redux/container/data-append.jsx';
+import SubmitAnalysis from '../general/submit-analysis.jsx';
+import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
+import setResults from '../redux/action/results.jsx';
+import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
+import checkValidFloat from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
 import { browserHistory } from 'react-router'
 
@@ -27,7 +30,7 @@ var SupportVector = React.createClass({
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
-            ajax_fail_status: null,
+            ajax_fail_status: null
         };
     },
   // callback: get session type
@@ -63,6 +66,9 @@ var SupportVector = React.createClass({
                 session_type_value: event.target.value
             });
         }
+
+      // update redux
+        this.props.dispatchSvButton(setSvButton({button: {submit_analysis: false}}));
     },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
@@ -77,7 +83,7 @@ var SupportVector = React.createClass({
             sessionType == 'model_generate' ||
             sessionType == 'model_predict'
         ) {
-            var ajaxEndpoint = '/load-data';
+            const ajaxEndpoint = '/load-data';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
                 'data': new FormData(this.refs.analysisForm)
@@ -93,6 +99,7 @@ var SupportVector = React.createClass({
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
                     this.setState({ajax_done_result: asynchObject});
+                    this.storeResults();
                 }
                 else {
                     this.setState({ajax_done_result: null});
@@ -121,14 +128,13 @@ var SupportVector = React.createClass({
     componentWillMount: function() {
         this.setState({
             session_type: this.props.sessionType,
-            session_type_value: this.props.sessionTypeValue.type
+            session_type_value: this.props.sessionTypeValue
         });
     },
   // define properties after update
     componentDidUpdate: function() {
       // update state using react-route properties
         if (
-            this.props.sessionType &&
             !!this.props.sessionType &&
             this.props.sessionType != this.state.session_type
         ) {
@@ -136,22 +142,102 @@ var SupportVector = React.createClass({
         }
 
         if (
-            this.props.sessionTypeValue &&
-            !!this.props.sessionTypeValue.type &&
-            this.props.sessionTypeValue.type != this.state.session_type_value
+            !!this.props.sessionTypeValue &&
+            this.props.sessionTypeValue != this.state.session_type_value
         ) {
             this.setState({
-               session_type_value: this.props.sessionTypeValue.type
+               session_type_value: this.props.sessionTypeValue
             });
+        }
+    },
+  // update redux store
+    storeResults: function() {
+        var serverObj = !!this.state.ajax_done_result ? this.state.ajax_done_result : false;
+        var resultSet = !!serverObj.result ? serverObj.result : false;
+        var confidence = !!resultSet.confidence ? resultSet.confidence : false;
+
+        if (
+            resultSet &&
+            !!resultSet.result &&
+            resultSet.model == 'svm' &&
+            confidence &&
+            confidence.classes &&
+            confidence.classes.length > 0 &&
+            confidence.classes.every(checkValidString) &&
+            confidence.probability &&
+            confidence.probability.length > 0 &&
+            confidence.probability.every(checkValidFloat) &&
+            confidence.decision_function &&
+            confidence.decision_function.length > 0 &&
+            confidence.decision_function.every(checkValidFloat)
+        ) {
+          // update redux store
+            const payload = {
+                type: resultSet.model,
+                data: JSON.stringify({
+                    result: resultSet.result,
+                    classes: confidence.classes,
+                    probability: confidence.probability,
+                    decision_function: confidence.decision_function
+                })
+            }
+            this.props.dispatchResults(setResults(payload));
+
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
+        }
+        else if (
+            resultSet &&
+            !!resultSet.result &&
+            resultSet.model == 'svr' &&
+            confidence &&
+            confidence.score &&
+            checkValidFloat(confidence.score)
+        ) {
+          // update redux store
+            const payload = {
+                type: resultSet.model,
+                data: JSON.stringify({
+                    result: resultSet.result,
+                    r2: confidence.score
+                })
+            }
+            this.props.dispatchResults(setResults(payload));
+
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
+        }
+        else {
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
     },
   // triggered when 'state properties' change
     render: function() {
-      // define components
-        var Result = ResultDisplay;
-        var SubmitButton = this.props.submitSvButton ? Submit : 'span';
-        var AjaxSpinner = this.state.display_spinner ? Spinner : 'span';
+      // spinner
+        var spinner = this.state.display_spinner ? <Spinner /> : null;
         var session = this.state.session_type ? this.state.session_type : null;
+
+      // submit button
+        if (
+            this.props &&
+            this.props.page &&
+            this.props.page.button
+        ) {
+            const button = this.props.page.button;
+            var submitBtn = !!button.submit_analysis ? <SubmitAnalysis /> : null;
+
+            if (
+                this.state.ajax_done_result &&
+                !!this.state.ajax_done_result.type &&
+                this.state.ajax_done_result.type == 'model-predict'
+            ) {
+                var resultBtn = !!button.goto_results ? <ResultsLink /> : null;
+            }
+        }
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
@@ -193,9 +279,9 @@ var SupportVector = React.createClass({
 
                 {session}
 
-                <SubmitButton />
-                <Result formResult={this.state.ajax_done_result} />
-                <AjaxSpinner />
+                {submitBtn}
+                {resultBtn}
+                {spinner}
             </form>
         );
     },

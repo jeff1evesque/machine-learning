@@ -1,5 +1,5 @@
 /**
- * page-reducer.jsx: describe page attributes.
+ * data.jsx: describe data attributes associated with predictions.
  *
  * Note: the triple dots is the 'object spread' syntax:
  *
@@ -11,24 +11,24 @@
 
 import 'core-js/modules/es6.object.assign';
 
-const page = (state='default', action) => {
+const data = (state='default', action) => {
+    var type = 'default';
+    var data = null;
+
     if (
         action &&
-        action.submit_button &&
-        !!action.submit_button.analysis
+        action.results
     ) {
-        var submitButtonAnalysis = true;
-    }
-    else {
-        var submitButtonAnalysis = false;
+        var result_type = !!action.results.type ? action.results.type : 'default';
+        var result_data = !!action.results.data ? action.results.data : null;
     }
 
     switch(action.type) {
-        case 'SUBMIT-SV-ANALYSIS':
+        case 'SET-RESULTS':
             return Object.assign({}, state, {
-                status: 'default',
-                submit_button: {
-                    analysis: submitButtonAnalysis
+                results: {
+                    type: result_type,
+                    data: result_data
                 }
             });
         default:
@@ -37,4 +37,4 @@ const page = (state='default', action) => {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default page
+export default data

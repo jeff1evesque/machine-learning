@@ -10,7 +10,7 @@
 import React from 'react';
 import Spinner from '../general/spinner.jsx';
 import { browserHistory } from 'react-router';
-import setLoginState from '../redux/action/login-action.jsx';
+import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var RegisterForm = React.createClass({

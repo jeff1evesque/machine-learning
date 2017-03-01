@@ -1,6 +1,6 @@
 /**
- * register-container.jsx: redux store for general page settings, login, and
- *                         logout processes.
+ * register.jsx: redux store for general page settings, login, and logout
+ *               processes.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
