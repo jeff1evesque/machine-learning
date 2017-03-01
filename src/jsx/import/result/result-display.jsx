@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import 'object.entries';
+import 'core-js/modules/es7.object.entries';
 
 var ResultDisplay = React.createClass({
     render: function(){
@@ -24,6 +24,11 @@ var ResultDisplay = React.createClass({
         ) {
             var result_type = this.props.results.type.toUpperCase();
             var result_data = JSON.parse(this.props.results.data);
+        }
+
+      // polyfill 'entries'
+        if (!Object.entries) {
+            entries.shim();
         }
 
       // generate result
