@@ -26,7 +26,7 @@ var ResultDisplay = React.createClass({
             var result_data = JSON.parse(this.props.results.data);
         }
 
-      // generate result: 'result_data' breaks 'if'
+      // generate result
         if (
             this.props &&
             this.props.results &&
@@ -34,12 +34,18 @@ var ResultDisplay = React.createClass({
             Object.keys(result_data).length > 0
         ) {
             var result_list = <ul className='result-list'>{
-                Object.entries(result_data).map(([key, value]) =>
-                    <li key={key}>{key}: {
+                Object.entries(result_data).map(([item_key, value]) =>
+                    <li key={item_key}>{item_key}: {
                         Array.isArray(value) ?
-                            value.map(v => <ul className='sublist' key={'u-' + v}><li key={'l-' + v}>{v}</li></ul>) :
-                            value
-                        }
+                            <ul className='sublist' key={'sublist-' + item_key}>
+                                {
+                                    value.map(function(value, index) {
+                                        return <li key={'subitem-' + index}>{value}</li>;
+                                    })
+                                }
+                            </ul>
+                        : value
+                    }
                     </li>
                 )
             }</ul>;
