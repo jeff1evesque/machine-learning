@@ -16,7 +16,6 @@ var ResultDisplay = React.createClass({
         var result_list = [];
         var result_type = null;
         var result_data = null;
-        console.log('result-display.jsx (render): ', this.props);
 
         if (
             this.props &&
@@ -29,7 +28,7 @@ var ResultDisplay = React.createClass({
         }
 
       // generate result
-        if (result_data && result_data.length > 0) {
+        if (result_data && Object.keys(result_data).length > 0) {
             result_list.push(<ul>);
             Object.entries(result_data).forEach(([key, value]) =>
                result_list.push(<li className='result-item'>key: value</li>);
