@@ -20,12 +20,13 @@ const mapStateToProps = (state) => {
 
     if (
         state &&
-        state.results &&
-        !!state.results.type &&
-        !!state.results.data
+        state.data &&
+        state.data.results &&
+        !!state.data.results.type &&
+        !!state.data.results.data
     ) {
-        var resultType = state.results.type;
-        var resultData = state.results.data;
+        var resultType = state.data.results.type;
+        var resultData = state.data.results.data;
     }
 
   // return redux to state
