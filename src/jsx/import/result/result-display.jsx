@@ -13,7 +13,6 @@ import 'object.entries';
 var ResultDisplay = React.createClass({
     render: function(){
       // local variables
-        var result_list = [];
         var result_type = null;
         var result_data = null;
 
@@ -27,18 +26,21 @@ var ResultDisplay = React.createClass({
             var result_data = JSON.parse(this.props.results.data);
         }
 
-      // generate result
-        if (result_data && Object.keys(result_data).length > 0) {
-            result_list.push(<ul>);
-            Object.entries(result_data).forEach(([key, value]) =>
-               result_list.push(<li className='result-item'>key: value</li>);
-            );
-            result_list.push(</ul>);
+      // generate result: 'result_data' breaks 'if'
+        if (
+            this.props &&
+            this.props.results &&
+            this.props.results.data &&
+            Object.keys(result_data).length > 0
+        ) {
+            var result_list = <ul>{
+                Object.entries(result_data).map(([key, value]) =>
+                    <li className='result-item'>{key}: {value}</li>
+                )
+            }</ul>;
         }
         else {
-            result_list.push(
-                <h3>No results available!</h3>
-            );
+            var result_list = <h3>No results available!</h3>;
         }
 
       // display result
