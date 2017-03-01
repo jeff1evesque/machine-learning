@@ -33,21 +33,23 @@ var ResultDisplay = React.createClass({
             this.props.results.data &&
             Object.keys(result_data).length > 0
         ) {
-            var result_list = <ul>{
+            var result_list = <ul className='result-list'>{
                 Object.entries(result_data).map(([key, value]) =>
-                    <li className='result-item'>{key}: {value}</li>
+                    <li>{key}: {
+                        Array.isArray(value) ?
+                            value.map(v => <ul className='sublist'><li>{v}</li></ul>) :
+                            value
+                        }
+                    </li>
                 )
             }</ul>;
-        }
-        else {
-            var result_list = <h3>No results available!</h3>;
         }
 
       // display result
         return(
             <div className='result-container'>
                 <h1>{result_type} Result</h1>
-                <div className='results'>
+                <div>
                     {result_list}
                 </div>
             </div>
