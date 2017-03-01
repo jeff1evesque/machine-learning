@@ -14,7 +14,7 @@ var ResultDisplay = React.createClass({
     render: function(){
       // local variables
         var result_list = [];
-        var result_type = 'default';
+        var result_type = null;
         var result_data = null;
         console.log('result-display.jsx (render): ', this.props);
 
@@ -45,7 +45,7 @@ var ResultDisplay = React.createClass({
       // display result
         return(
             <div className='result-container'>
-                <h1>{result_type} Prediction Result</h1>
+                <h1>{result_type} Result</h1>
                 <div className='results'>
                     {result_list}
                 </div>
