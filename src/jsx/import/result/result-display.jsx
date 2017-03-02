@@ -17,8 +17,8 @@ var ResultDisplay = React.createClass({
     },
     render: function(){
       // local variables
-        var result_type = null;
-        var result_data = null;
+        var resultType = null;
+        var resultData = null;
 
         if (
             this.props &&
@@ -26,8 +26,8 @@ var ResultDisplay = React.createClass({
             !!this.props.results.type &&
             !!this.props.results.data
         ) {
-            var result_type = this.props.results.type.toUpperCase();
-            var result_data = JSON.parse(this.props.results.data);
+            var resultType = this.props.results.type.toUpperCase();
+            var resultData = JSON.parse(this.props.results.data);
         }
 
       // polyfill 'entries'
@@ -40,10 +40,10 @@ var ResultDisplay = React.createClass({
             this.props &&
             this.props.results &&
             this.props.results.data &&
-            Object.keys(result_data).length > 0
+            Object.keys(resultData).length > 0
         ) {
             var resultList = <ul className='result-list'>{
-                Object.entries(result_data).map(([item_key, value]) =>
+                Object.entries(resultData).map(([item_key, value]) =>
                     <li key={item_key}>{item_key}: {
                         Array.isArray(value) ?
                             <ul className='sublist' key={'sublist-' + item_key}>
@@ -65,7 +65,7 @@ var ResultDisplay = React.createClass({
       // display result
         return(
             <div className='result-container'>
-                <h1>{result_type} Result</h1>
+                <h1>{resultType} Result</h1>
                 <div>
                     {resultList}
                     {saveBtn}
