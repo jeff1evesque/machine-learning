@@ -123,6 +123,7 @@ var SupplyDatasetFile = React.createClass({
                         key={index}
                         onChange={this.validFileEntered}
                         value={this.state['value_dataset_' + index.toString()]}
+                        defaultValue=''
                     />;
                 }.bind(this))}
 

@@ -121,6 +121,7 @@ var SupplyDatasetUrl = React.createClass({
                         key={index}
                         onChange={this.validUrlEntered}
                         value={this.state['value_dataset_' + index.toString()]}
+                        defaultValue=''
                     />;
                 }.bind(this))}
             </fieldset>
