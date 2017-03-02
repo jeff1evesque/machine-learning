@@ -36,7 +36,7 @@ var SupplyDatasetUrl = React.createClass({
             {/* define boolean to indicate all urls properly defined */}
             for (index = 0; index < elements.length; index++) {
                 const value = this.state['value_dataset_' + index.toString()];
-                if (!!value) {
+                if (!value) {
                     datasetBoolean = false;
                 }
             }

@@ -39,7 +39,7 @@ var SupplyDatasetFile = React.createClass({
             for (var index = 0; index < elements.length; index++) {
                 const inputVal = this.state['value_dataset_' + index.toString()];
 
-                if (!!inputVal) {
+                if (!inputVal) {
                     datasetBoolean = false;
                     return datasetBoolean;
                 }
