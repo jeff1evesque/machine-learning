@@ -30,7 +30,8 @@ var ModelPredict = React.createClass({
     },
   // update 'state properties'
     changeModelId: function(event){
-        const modelId = event.target.value;
+        var modelId = event.target.value;
+        console.log('model-predict.jsx (changeModelId): ', modelId);
 
       // clear predictors, remove submit button
         var predictors = document.getElementsByClassName('predictionInput');
@@ -48,7 +49,7 @@ var ModelPredict = React.createClass({
         this.props.dispatchGotoResultsButton(gotoResultsButton);
 
       // store modelId into state
-        if (modelId && modelId != '--Select--' && checkValidInt(modelId)) {
+        if (!!modelId && modelId != '--Select--' && checkValidInt(modelId)) {
             this.setState({value_model_id: event.target.value});
         }
         else {
@@ -72,24 +73,17 @@ var ModelPredict = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
+        var inputPredictors = null;
         const inputModelId = this.state.value_model_id;
-        const options = this.state.ajax_done_options;
-        var predictors = null;
-
-        if (this.state.display_spinner) {
-            var AjaxSpinner = Spinner;
-        }
-        else {
-            var AjaxSpinner = 'span';
-        }
-
-        if (inputModelId && this.getSupplyPredictors(inputModelId)) {
-            const Predictors = this.getSupplyPredictors(inputModelId);
-            var predictors = <Predictors
+        var Predictors = this.getSupplyPredictors(inputModelId);
+        if (!!Predictors) {
+            var inputPredictors = <Predictors
                 onChange={this.displaySubmit}
                 selectedModelId={this.state.value_model_id}
             />
         }
+        var options = this.state.ajax_done_options;
+        const spinner = !!this.state.display_spinner ? <Spinner /> : null;
 
         return(
             <fieldset className='fieldset-session-predict'>
@@ -115,9 +109,8 @@ var ModelPredict = React.createClass({
                     </select>
                 </fieldset>
 
-                {predictors}
-
-                <AjaxSpinner />
+                {inputPredictors}
+                {spinner}
             </fieldset>
         );
     },
