@@ -59,7 +59,11 @@ var ResultDisplay = React.createClass({
                 )
             }</ul>;
 
-            var saveBtn = <Submit btnValue='Save results' onClick={this.saveResults} />;
+            var saveBtn = <Submit
+                btnValue='Save results'
+                onClick={this.saveResults}
+                cssClass='btn'
+            />;
         }
 
       // display result
