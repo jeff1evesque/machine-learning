@@ -30,7 +30,7 @@ var ModelPredict = React.createClass({
     },
   // update 'state properties'
     changeModelId: function(event){
-        const modelId = event.target.value;
+        var modelId = event.target.value;
 
       // clear predictors, remove submit button
         var predictors = document.getElementsByClassName('predictionInput');
@@ -72,23 +72,15 @@ var ModelPredict = React.createClass({
     },
   // triggered when 'state properties' change
     render: function(){
-        const inputModelId = this.state.value_model_id;
-        const options = this.state.ajax_done_options;
-        var predictors = null;
+        var inputModelId = this.state.value_model_id;
+        var Predictors = this.getSupplyPredictors(inputModelId);
+        var options = this.state.ajax_done_options;
 
         if (this.state.display_spinner) {
             var AjaxSpinner = Spinner;
         }
         else {
             var AjaxSpinner = 'span';
-        }
-
-        if (inputModelId && this.getSupplyPredictors(inputModelId)) {
-            const Predictors = this.getSupplyPredictors(inputModelId);
-            var predictors = <Predictors
-                onChange={this.displaySubmit}
-                selectedModelId={this.state.value_model_id}
-            />
         }
 
         return(
@@ -115,7 +107,14 @@ var ModelPredict = React.createClass({
                     </select>
                 </fieldset>
 
-                {predictors}
+                {/*
+                    'selectedModelId' is accessible within child component as
+                    'this.props.selectedModelId'
+                */}
+                <Predictors
+                    onChange={this.displaySubmit}
+                    selectedModelId={this.state.value_model_id}
+                />
 
                 <AjaxSpinner />
             </fieldset>
@@ -127,14 +126,14 @@ var ModelPredict = React.createClass({
             return SupplyPredictors;
         }
         else {
-            return null;
+            return 'span';
         }
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function () {
       // ajax arguments
-        const ajaxEndpoint = '/retrieve-sv-model';
-        const ajaxArguments = {
+        var ajaxEndpoint = '/retrieve-sv-model';
+        var ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null
         };

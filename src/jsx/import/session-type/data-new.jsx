@@ -21,7 +21,7 @@ var DataNew = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_title: '',
+            value_title: null,
             value_dataset_type: '--Select--',
             value_model_type: '--Select--'
         };
@@ -51,7 +51,7 @@ var DataNew = React.createClass({
             this.setState({value_title: sessionTitle});
         }
         else {
-            this.setState({value_title: ''});
+            this.setState({value_title: null});
         }
 
       // update redux store

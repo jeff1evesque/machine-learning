@@ -12,7 +12,7 @@ import ModelGenerateState from '../redux/container/model-generate.jsx';
 import ModelPredictState from '../redux/container/model-predict.jsx';
 import DataNewState from '../redux/container/data-new.jsx';
 import DataAppendState from '../redux/container/data-append.jsx';
-import SubmitAnalysis from '../general/submit-analysis.jsx';
+import Submit from '../general/submit-button.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import setResults from '../redux/action/results.jsx';
@@ -228,7 +228,7 @@ var SupportVector = React.createClass({
             this.props.page.button
         ) {
             const button = this.props.page.button;
-            var submitBtn = !!button.submit_analysis ? <SubmitAnalysis /> : null;
+            var submitBtn = !!button.submit_analysis ? <Submit /> : null;
 
             if (
                 this.state.ajax_done_result &&

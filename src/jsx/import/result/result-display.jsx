@@ -9,8 +9,12 @@
 
 import React from 'react';
 import 'core-js/modules/es7.object.entries';
+import Submit from '../general/submit-button.jsx';
 
 var ResultDisplay = React.createClass({
+  // update redux store
+    saveResults: function() {
+    },
     render: function(){
       // local variables
         var result_type = null;
@@ -38,7 +42,7 @@ var ResultDisplay = React.createClass({
             this.props.results.data &&
             Object.keys(result_data).length > 0
         ) {
-            var result_list = <ul className='result-list'>{
+            var resultList = <ul className='result-list'>{
                 Object.entries(result_data).map(([item_key, value]) =>
                     <li key={item_key}>{item_key}: {
                         Array.isArray(value) ?
@@ -54,6 +58,8 @@ var ResultDisplay = React.createClass({
                     </li>
                 )
             }</ul>;
+
+            var saveBtn = <Submit btnValue='Save results' onClick={this.saveResults} />;
         }
 
       // display result
@@ -61,7 +67,8 @@ var ResultDisplay = React.createClass({
             <div className='result-container'>
                 <h1>{result_type} Result</h1>
                 <div>
-                    {result_list}
+                    {resultList}
+                    {saveBtn}
                 </div>
             </div>
         );
