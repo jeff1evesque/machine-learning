@@ -19,6 +19,7 @@ var ResultDisplay = React.createClass({
       // local variables
         var resultType = null;
         var resultData = null;
+        var saveBtn = null;
 
         if (
             this.props &&
