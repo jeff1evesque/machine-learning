@@ -31,7 +31,6 @@ var ModelPredict = React.createClass({
   // update 'state properties'
     changeModelId: function(event){
         var modelId = event.target.value;
-        console.log('model-predict.jsx (changeModelId): ', modelId);
 
       // clear predictors, remove submit button
         var predictors = document.getElementsByClassName('predictionInput');

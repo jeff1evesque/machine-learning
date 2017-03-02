@@ -14,7 +14,6 @@ var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: null,
             additional_elements: []
         };
     },
@@ -97,7 +96,6 @@ var SupplyDatasetUrl = React.createClass({
                     placeholder='Dataset URL'
                     className='dataset-url'
                     onChange={this.validUrlEntered}
-                    value={this.state.value}
                     defaultValue=''
                 />
 
@@ -122,7 +120,6 @@ var SupplyDatasetUrl = React.createClass({
                         className='dataset-url'
                         key={index}
                         onChange={this.validUrlEntered}
-                        value={this.state['value_dataset_' + index.toString()]}
                         defaultValue=''
                     />;
                 }.bind(this))}
