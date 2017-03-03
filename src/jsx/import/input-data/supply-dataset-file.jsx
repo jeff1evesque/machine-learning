@@ -16,7 +16,6 @@ var SupplyDatasetFile = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: '',
             additional_elements: []
         };
     },
@@ -98,7 +97,7 @@ var SupplyDatasetFile = React.createClass({
                     name='dataset[]'
                     className='dataset-file'
                     onChange={this.validFileEntered}
-                    value={this.state.value}
+                    defaultValue=''
                 />
 
                 <input
