@@ -16,7 +16,7 @@ var ResultsLink = React.createClass({
             <Link
                 to='/session/results'
                 activeClassName='active'
-                className='btn mn-2'
+                className='btn btn-primary'
             >
                 <span>Goto results</span>
             </Link>

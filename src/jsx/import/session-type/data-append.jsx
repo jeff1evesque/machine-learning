@@ -39,7 +39,7 @@ var DataAppend = React.createClass({
     },
   // update 'state properties'
     changeSessionId: function(event){
-        var sessionId = event.target.value;
+        const sessionId = event.target.value;
 
         if (
             sessionId && sessionId != '--Select--' &&
@@ -51,12 +51,12 @@ var DataAppend = React.createClass({
             this.setState({value_session_id: '--Select--'});
 
           // update redux store
-            var action = setSvButton({button: {submit_analysis: false}});
+            const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
     changeDatasetType: function(event){
-        var datasetType = event.target.value;
+        const datasetType = event.target.value;
 
         if (
             datasetType && datasetType != '--Select--' &&
@@ -69,12 +69,12 @@ var DataAppend = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({button: {submit_analysis: false}});
+        const action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component (i.e. 'value_model_type')
     changeModelType: function(event) {
-        var modelType = event.value_model_type;
+        const modelType = event.value_model_type;
 
         if (
             modelType && modelType != '--Select--' &&
@@ -87,42 +87,37 @@ var DataAppend = React.createClass({
         }
 
       // update redux store
-        var action = setSvButton({button: {submit_analysis: false}});
+        const action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     },
   // update 'state properties' from child component
     displaySubmit: function(event) {
         if (event.submitted_proper_dataset) {
           // update redux store
-            var action = setSvButton({
+            const action = setSvButton({
                 button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
         }
         else {
           // update redux store
-            var action = setSvButton({button: {submit_analysis: false}});
+            const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
   // triggered when 'state properties' change
     render: function(sessionId){
-        var inputDatasetType = this.state.value_dataset_type;
-        var inputSessionId = this.state.value_session_id;
-        var modelType = this.state.value_model_type;
-        var Dataset = this.getSupplyDataset(
+        const inputDatasetType = this.state.value_dataset_type;
+        const inputSessionId = this.state.value_session_id;
+        const modelType = this.state.value_model_type;
+        const Dataset = this.getSupplyDataset(
             inputDatasetType,
             inputSessionId,
             modelType
         );
-        var options = this.state.ajax_done_options;
-
-        if (this.state.display_spinner) {
-            var AjaxSpinner = Spinner;
-        }
-        else {
-            var AjaxSpinner = 'span';
-        }
+        const datasetInput = !!Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
+        const options = this.state.ajax_done_options;
+        const spinner = !!this.state.display_spinner ? <Spinner /> : null;
 
         return(
             <fieldset className='fieldset-session-data-upload'>
@@ -164,9 +159,8 @@ var DataAppend = React.createClass({
                     <ModelType onChange={this.changeModelType} />
                 </fieldset>
 
-                <Dataset onChange={this.displaySubmit}/>
-
-                <AjaxSpinner />
+                {datasetInput}
+                {spinner}
             </fieldset>
         );
     },
@@ -181,17 +175,17 @@ var DataAppend = React.createClass({
             return {
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
-            }[datasetType] || 'span';
+            }[datasetType] || null;
         }
         else {
-            return 'span';
+            return null;
         }
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function() {
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-session';
-        var ajaxArguments = {
+        const ajaxEndpoint = '/retrieve-session';
+        const ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null
         };
@@ -228,7 +222,7 @@ var DataAppend = React.createClass({
     },
     componentWillUnmount: function() {
       // update redux store
-        var action = setSvButton({button: {submit_analysis: false}});
+        const action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });

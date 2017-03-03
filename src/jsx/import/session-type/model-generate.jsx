@@ -31,9 +31,9 @@ var ModelGenerate = React.createClass({
     },
   // update 'state properties'
     changeSessionId: function(event){
-        var sessionId  = event.target.value;
-        var modelType  = this.state.value_model_type;
-        var kernelType = this.state.value_kernel_type;
+        const sessionId  = event.target.value;
+        const modelType  = this.state.value_model_type;
+        const kernelType = this.state.value_kernel_type;
 
         if (
             sessionId && sessionId != '--Select--' &&
@@ -46,11 +46,11 @@ var ModelGenerate = React.createClass({
                 modelType != '--Select--' && kernelType != '--Select--' &&
                 checkValidString(modelType) && checkValidString(kernelType)
             ) {
-                var action = setSvButton({button: {submit_analysis: true}});
+                const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({button: {submit_analysis: false}});
+                const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -58,14 +58,14 @@ var ModelGenerate = React.createClass({
             this.setState({value_session_id: '--Select--'});
 
           // update redux store
-            var action = setSvButton({button: {submit_analysis: false}});
+            const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
     changeModelType: function(event){
-        var sessionId  = this.state.value_session_id;
-        var modelType  = event.target.value;
-        var kernelType = this.state.value_kernel_type;
+        const sessionId  = this.state.value_session_id;
+        const modelType  = event.target.value;
+        const kernelType = this.state.value_kernel_type;
 
         if (
             modelType && modelType != '--Select--' &&
@@ -78,11 +78,11 @@ var ModelGenerate = React.createClass({
                 checkValidInt(sessionId) && kernelType != '--Select--' &&
                 checkValidString(kernelType)
             ) {
-                var action = setSvButton({button: {submit_analysis: true}});
+                const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({button: {submit_analysis: false}});
+                const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -90,14 +90,14 @@ var ModelGenerate = React.createClass({
             this.setState({value_model_type: '--Select--'});
 
           // update redux store
-            var action = setSvButton({button: {submit_analysis: false}});
+            const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
     changeKernelType: function(event) {
-        var sessionId  = this.state.value_session_id;
-        var modelType  = this.state.value_model_type;
-        var kernelType = event.target.value;
+        const sessionId  = this.state.value_session_id;
+        const modelType  = this.state.value_model_type;
+        const kernelType = event.target.value;
 
         if (
             kernelType && kernelType != '--Select--' &&
@@ -110,11 +110,11 @@ var ModelGenerate = React.createClass({
                 checkValidInt(sessionId) && modelType != '--Select--' &&
                 checkValidString(modelType)
             ) {
-                var action = setSvButton({button: {submit_analysis: true}});
+                const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
             }
             else {
-                var action = setSvButton({button: {submit_analysis: false}});
+                const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
         }
@@ -122,20 +122,14 @@ var ModelGenerate = React.createClass({
             this.setState({value_kernel_type: '--Select--'});
 
           // update redux store
-            var action = setSvButton({button: {submit_analysis: false}});
+            const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
   // triggered when 'state properties' change
     render: function(){
-        var options = this.state.ajax_done_options;
-
-        if (this.state.display_spinner) {
-            var AjaxSpinner = Spinner;
-        }
-        else {
-            var AjaxSpinner = 'span';
-        }
+        const options = this.state.ajax_done_options;
+        const spinner = !!this.state.display_spinner ? <Spinner /> : null;
 
         return(
             <fieldset className='fieldset-session-generate'>
@@ -190,15 +184,15 @@ var ModelGenerate = React.createClass({
                     </select>
                 </fieldset>
 
-                <AjaxSpinner />
+                {spinner}
             </fieldset>
         );
     },
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function() {
       // ajax arguments
-        var ajaxEndpoint = '/retrieve-session';
-        var ajaxArguments = {
+        const ajaxEndpoint = '/retrieve-session';
+        const ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null
         };
@@ -235,7 +229,7 @@ var ModelGenerate = React.createClass({
     },
     componentWillUnmount: function() {
       // update redux store
-        var action = setSvButton({button: {submit_analysis: false}});
+        const action = setSvButton({button: {submit_analysis: false}});
         this.props.dispatchSvButton(action);
     }
 });

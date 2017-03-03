@@ -14,10 +14,12 @@ var Submit = React.createClass({
     render: function(){
         const buttonValue = !!this.props.btnValue ? this.props.btnValue : null;
         const clickCallback = !!this.props.onClick ? this.props.onClick : null;
+        const cssClass = !!this.props.cssClass ? this.props.cssClass : 'form-submit';
+
         return(
             <input
                 type='submit'
-                className='form-submit'
+                className={cssClass}
                 onClick={clickCallback}
                 value={buttonValue}
             />

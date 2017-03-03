@@ -14,14 +14,12 @@ var SupplyDatasetUrl = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value: null,
             additional_elements: []
         };
     },
   // update 'state properties': index for additional input elements
     handleAddMore: function(event){
-        var elements = this.state.additional_elements;
-        elements.push(true);
+        var elements = this.state.additional_elements.push(true);
         this.setState({additional_elements: elements});
         this.props.onChange({submitted_proper_predictor: false});
     },
@@ -35,8 +33,9 @@ var SupplyDatasetUrl = React.createClass({
 
             {/* define boolean to indicate all urls properly defined */}
             for (index = 0; index < elements.length; index++) {
-                var value = this.state['value_dataset_' + index.toString()];
-                if ( value === undefined) {
+
+                const value = this.state['value_dataset_' + index.toString()];
+                if (inputVal === undefined) {
                     datasetBoolean = false;
                 }
             }
@@ -96,7 +95,7 @@ var SupplyDatasetUrl = React.createClass({
                     placeholder='Dataset URL'
                     className='dataset-url'
                     onChange={this.validUrlEntered}
-                    value={this.state.value}
+                    defaultValue=''
                 />
 
                 <input
@@ -120,7 +119,7 @@ var SupplyDatasetUrl = React.createClass({
                         className='dataset-url'
                         key={index}
                         onChange={this.validUrlEntered}
-                        value={this.state['value_dataset_' + index.toString()]}
+                        defaultValue=''
                     />;
                 }.bind(this))}
             </fieldset>
