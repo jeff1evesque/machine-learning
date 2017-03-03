@@ -16,13 +16,13 @@ var SupplyDatasetFile = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            value: '',
             additional_elements: []
         };
     },
   // update 'state properties': index for additional input elements
     handleAddMore: function(event){
-        var elements = this.state.additional_elements;
-        elements.push(true);
+        var elements = this.state.additional_elements.push(true);
         this.setState({additional_elements: elements});
         this.props.onChange({submitted_proper_predictor: false});
     },
@@ -98,7 +98,7 @@ var SupplyDatasetFile = React.createClass({
                     name='dataset[]'
                     className='dataset-file'
                     onChange={this.validFileEntered}
-                    value=''
+                    value={this.state.value}
                 />
 
                 <input
@@ -121,13 +121,13 @@ var SupplyDatasetFile = React.createClass({
                         className='dataset-file'
                         key={index}
                         onChange={this.validFileEntered}
-                        value=''
+                        defaultValue=''
                     />;
                 }.bind(this))}
 
                 <p className='form-note'>
                     <span className='asterick'>*</span>
-				    <span className='bold'>Note: </span>
+                    <span className='bold'>Note: </span>
                     <span>Uploaded file(s) must be formatted as </span>
                     <span className='italic'>csv</span>,
                     <span className='italic'> json</span>, or
