@@ -8,23 +8,39 @@ This file initializes the following database tables within the
     @tbl_dataset_entity, record the dataset instance, and the corresponding
         userid who created, or modified the information, and the model type.
 
-    @tbl_feature_count, record the number of features expected within an
-        observation, with respect to a given 'id_entity'.
+        @tbl_feature_count, record the number of features expected within an
+            observation, with respect to a given 'id_entity'.
 
-    @tbl_svm_data, records a tuple of observation-feature values
-    @tbl_svr_data, records a tuple of criterion-predictor values
+        @tbl_svm_data, records a tuple of observation-feature values
+        @tbl_svr_data, records a tuple of criterion-predictor values
 
-        - observation label: synonymous to dependent variable label, and can be
-              'NULL' if the 'criterion value' is defined
-        - criterion value: can be 'NULL' if the 'observation label' is defined
-        - feature label: synonymous to independent variable label, or predictor
-             label
-        - feature value: synonymous to independent variable, or predictor value
+            - observation label: synonymous to dependent variable label, and
+                can be 'NULL' if the 'criterion value' is defined
+            - criterion value: can be 'NULL' if the 'observation label' is
+                defined.
+            - feature label / value: synonymous to independent variable label,
+                or predictor label.
 
-    @model_type, reference table containing all possible model types.
+        @model_type, reference table containing all possible model types.
 
-    @tbl_observation_label, record every unique observation label, with respect
-        to a given 'id_entity'.
+        @tbl_observation_label, record every unique observation label, with
+            respect to a given 'id_entity'.
+
+    @tbl_svm_results, record svm prediction result, with respect to the
+        following linked tables:
+
+        @tbl_svm_results_class, record predicted classes, with respect to to a
+            given 'id_result'.
+        @tbl_svm_results_probability, record predicted probabilities, with
+            respect to a given 'id_result'.
+        @tbl_svm_results_decision_function, record predicted decisision
+            function, with respect to a given 'id_result'.
+
+    @tbl_svm_results, record svr prediction result, with respect to the
+        following linked tables:
+
+        @tbl_svr_results_results_r2, record predicted r^2, with respect to a
+            given 'id_result'.
 
 '''
 
@@ -158,3 +174,65 @@ with open(configuration, 'r') as stream:
                         INSERT INTO tbl_model_type (model) VALUES (%s);
                         '''
         cur.executemany(sql_statement, models)
+
+        # create 'tbl_svm_results'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_svm_results (
+                            id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            title VARCHAR (50) NOT NULL,
+                            result VARCHAR (30) NOT NULL,
+                            INDEX (title)
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_svm_results_class'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_svm_results_class (
+                            id_class INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_result INT NOT NULL,
+                            class VARCHAR (50) NOT NULL
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_svm_results_probability'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_svm_results_probability (
+                            id_probability INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_result INT NOT NULL,
+                            probability FLOAT NOT NULL
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_svm_results_decision_function'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_svm_results_decision_function (
+                            id_decision_function INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_result INT NOT NULL,
+                            decision_function FLOAT NOT NULL
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_svr_results'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_svr_results (
+                            id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            title VARCHAR (50) NOT NULL,
+                            result VARCHAR (30) NOT NULL,
+                            INDEX (title)
+                        );
+                        '''
+        cur.execute(sql_statement)
+
+        # create 'tbl_svr_results_r2'
+        sql_statement = '''\
+                        CREATE TABLE IF NOT EXISTS tbl_svr_results_r2 (
+                            id_r2 INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                            id_result INT NOT NULL,
+                            r2 FLOAT NOT NULL
+                        );
+                        '''
+        cur.execute(sql_statement)
