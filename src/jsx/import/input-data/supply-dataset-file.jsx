@@ -98,7 +98,7 @@ var SupplyDatasetFile = React.createClass({
                     name='dataset[]'
                     className='dataset-file'
                     onChange={this.validFileEntered}
-                    defaultValue=''
+                    value=''
                 />
 
                 <input
@@ -121,7 +121,7 @@ var SupplyDatasetFile = React.createClass({
                         className='dataset-file'
                         key={index}
                         onChange={this.validFileEntered}
-                        defaultValue=''
+                        value=''
                     />;
                 }.bind(this))}
 

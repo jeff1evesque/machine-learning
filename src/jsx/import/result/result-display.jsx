@@ -19,7 +19,7 @@ var ResultDisplay = React.createClass({
       // local variables
         var resultType = null;
         var resultData = null;
-        var saveBtn = null;
+        var saveResults = null;
 
         if (
             this.props &&
@@ -60,11 +60,20 @@ var ResultDisplay = React.createClass({
                 )
             }</ul>;
 
-            var saveBtn = <Submit
-                btnValue='Save results'
-                onClick={this.saveResults}
-                cssClass='btn'
-            />;
+            var saveResults = <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                <input
+                    type='text'
+                    name='prediction_name'
+                    placeholder='Result name'
+                    className='mn-2'
+                    defaultValue=''
+                />
+                <Submit
+                    btnValue='Save results'
+                    onClick={this.saveResults}
+                    cssClass='btn'
+                />
+            </form>
         }
 
       // display result
@@ -73,7 +82,7 @@ var ResultDisplay = React.createClass({
                 <h1>{resultType} Result</h1>
                 <div>
                     {resultList}
-                    {saveBtn}
+                    {saveResults}
                 </div>
             </div>
         );
