@@ -182,7 +182,7 @@ with open(configuration, 'r') as stream:
                             title VARCHAR (50) NOT NULL,
                             result VARCHAR (30) NOT NULL,
                             uid_created INT NOT NULL,
-                            datetime_created DATETIME NOT NULL
+                            datetime_created DATETIME NOT NULL,
                             INDEX (title)
                         );
                         '''
@@ -225,7 +225,7 @@ with open(configuration, 'r') as stream:
                             title VARCHAR (50) NOT NULL,
                             result VARCHAR (30) NOT NULL,
                             uid_created INT NOT NULL,
-                            datetime_created DATETIME NOT NULL
+                            datetime_created DATETIME NOT NULL,
                             INDEX (title)
                         );
                         '''
