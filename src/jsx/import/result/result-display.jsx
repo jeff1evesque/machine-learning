@@ -75,6 +75,9 @@ var ResultDisplay = React.createClass({
                 />
             </form>
         }
+        else {
+            var resultList = <div className='result-list'>Sorry, no results available!</div>;
+        }
 
       // display result
         return(
