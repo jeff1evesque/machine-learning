@@ -64,12 +64,12 @@ var ResultDisplay = React.createClass({
                 <input
                     type='text'
                     name='prediction_name'
-                    placeholder='Result name'
+                    placeholder='Name your result'
                     className='mn-2'
                     defaultValue=''
                 />
                 <Submit
-                    btnValue='Save results'
+                    btnValue='Save'
                     onClick={this.saveResults}
                     cssClass='btn'
                 />
