@@ -181,6 +181,8 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                             id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             title VARCHAR (50) NOT NULL,
                             result VARCHAR (30) NOT NULL,
+                            uid_created INT NOT NULL,
+                            datetime_created DATETIME NOT NULL,
                             INDEX (title)
                         );
                         '''
@@ -222,6 +224,8 @@ with open(prepath + '/hiera/settings.yaml', 'r') as stream:
                             id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                             title VARCHAR (50) NOT NULL,
                             result VARCHAR (30) NOT NULL,
+                            uid_created INT NOT NULL,
+                            datetime_created DATETIME NOT NULL,
                             INDEX (title)
                         );
                         '''
