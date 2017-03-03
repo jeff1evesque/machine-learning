@@ -79,7 +79,7 @@ install:
 ##
 script:
   # lint codebase
-  - flake8 .
+  - flake8 . --max-line-length=100
   - jshint --verbose src/js/*.js --config test/lint/jshint.json --exclude-path test/lint/.jshintignore
   - jscs . --config test/lint/.jscs.json
   - scss-lint src/scss/*.scss --exclude-linter VendorPrefix
