@@ -19,7 +19,8 @@ var SupplyDatasetUrl = React.createClass({
     },
   // update 'state properties': index for additional input elements
     handleAddMore: function(event){
-        var elements = this.state.additional_elements.push(true);
+        var elements = this.state.additional_elements;
+        elements.push(true);
         this.setState({additional_elements: elements});
         this.props.onChange({submitted_proper_predictor: false});
     },
@@ -95,7 +96,7 @@ var SupplyDatasetUrl = React.createClass({
                     placeholder='Dataset URL'
                     className='dataset-url'
                     onChange={this.validUrlEntered}
-                    defaultValue=''
+                    defaultValue==''
                 />
 
                 <input
@@ -119,7 +120,7 @@ var SupplyDatasetUrl = React.createClass({
                         className='dataset-url'
                         key={index}
                         onChange={this.validUrlEntered}
-                        defaultValue=''
+                        defaultValue==''
                     />;
                 }.bind(this))}
             </fieldset>

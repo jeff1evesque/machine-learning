@@ -21,7 +21,8 @@ var SupplyDatasetFile = React.createClass({
     },
   // update 'state properties': index for additional input elements
     handleAddMore: function(event){
-        var elements = this.state.additional_elements.push(true);
+        var elements = this.state.additional_elements;
+        elements.push(true);
         this.setState({additional_elements: elements});
         this.props.onChange({submitted_proper_predictor: false});
     },
