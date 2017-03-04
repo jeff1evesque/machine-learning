@@ -4,7 +4,7 @@
 ###
 class database::database {
     ## variables
-    $hiera_general   = hiera('general')
+    $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
     $vagrant_mounted = $hiera_general['vagrant_implement']
     $environment     = $hiera_general['environment']

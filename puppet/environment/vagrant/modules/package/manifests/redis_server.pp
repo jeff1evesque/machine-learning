@@ -4,7 +4,7 @@
 ###
 class package::redis_server {
     ## local variables
-    $hiera_dev = hiera('development')
+    $hiera_dev = lookup('development')
     $version   = $hiera_dev['apt']['redis-server']
 
     package { 'redis-server':

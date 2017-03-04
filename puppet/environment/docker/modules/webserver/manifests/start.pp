@@ -4,7 +4,7 @@
 ###
 class webserver::start {
     # variables
-    $hiera_general   = hiera('general')
+    $hiera_general   = lookup('general')
     $vagrant_mounted = $hiera_general['vagrant_implement']
 
     # run gunicorn

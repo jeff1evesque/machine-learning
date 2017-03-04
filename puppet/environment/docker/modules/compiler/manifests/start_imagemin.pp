@@ -4,7 +4,7 @@
 ###
 class compiler::start_imagemin {
     # variables
-    $hiera_general   = hiera('general')
+    $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
     $environment     = $hiera_general['environment']
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"

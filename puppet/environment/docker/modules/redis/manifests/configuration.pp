@@ -4,7 +4,7 @@
 ###
 class redis::configuration {
     ## variables
-    $hiera_redis   = hiera('redis')
+    $hiera_redis   = lookup('redis')
     $bind_address  = $hiera_redis['bind_address']
     $config_file   = $hiera_redis['path']
     $template_path = 'redis/configuration.erb'

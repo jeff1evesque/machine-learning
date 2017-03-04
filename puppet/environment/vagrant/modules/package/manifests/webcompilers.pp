@@ -4,7 +4,7 @@
 ###
 class package::webcompilers {
     ## hiera attributes
-    $hiera_dev          = hiera('development')
+    $hiera_dev          = lookup('development')
     $version_uglify_js  = $hiera_dev['npm']['uglify-js']
     $version_imagemin   = $hiera_dev['npm']['imagemin']
     $version_node_sass  = $hiera_dev['npm']['node-sass']

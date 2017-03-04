@@ -4,7 +4,7 @@
 ###
 class compiler::webcompilers {
     ## variables
-    $hiera_general   = hiera('general')
+    $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
     $user            = $hiera_general['user']
     $group           = $hiera_general['group']

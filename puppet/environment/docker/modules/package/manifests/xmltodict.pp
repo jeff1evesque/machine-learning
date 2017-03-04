@@ -6,7 +6,7 @@ class package::xmltodict {
     include python
 
     ## local variables
-    $hiera_dev = hiera('development')
+    $hiera_dev = lookup('development')
     $version   = $hiera_dev['pip']['xmltodict']
 
     package { 'xmltodict':

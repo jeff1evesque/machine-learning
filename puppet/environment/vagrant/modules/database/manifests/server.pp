@@ -4,8 +4,8 @@
 ###
 class database::server {
     ## local variables
-    $hiera_general    = hiera('general')
-    $hiera_database   = hiera('database')
+    $hiera_general    = lookup('general')
+    $hiera_database   = lookup('database')
     $host             = $hiera_general['host']
     $db               = $hiera_database['name']
     $db_user          = $hiera_database['username']

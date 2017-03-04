@@ -6,7 +6,7 @@ class package::flask_script {
     require python
 
     ## local variables
-    $hiera_dev = hiera('development')
+    $hiera_dev = lookup('development')
     $version   = $hiera_dev['pip']['flask-script']
 
     package { 'Flask-Script':
