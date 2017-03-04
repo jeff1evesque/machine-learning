@@ -96,7 +96,7 @@ var SupplyDatasetUrl = React.createClass({
                     placeholder='Dataset URL'
                     className='dataset-url'
                     onChange={this.validUrlEntered}
-                    defaultValue==''
+                    defaultValue=''
                 />
 
                 <input
@@ -120,7 +120,7 @@ var SupplyDatasetUrl = React.createClass({
                         className='dataset-url'
                         key={index}
                         onChange={this.validUrlEntered}
-                        defaultValue==''
+                        defaultValue=''
                     />;
                 }.bind(this))}
             </fieldset>
