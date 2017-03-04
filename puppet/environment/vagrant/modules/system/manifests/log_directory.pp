@@ -4,7 +4,7 @@
 ###
 class system::log_directory {
     ## local variables
-    $hiera_general = hiera('general')
+    $hiera_general = lookup('general')
     $root_dir = $hiera_general['root']
 
     $directories = [

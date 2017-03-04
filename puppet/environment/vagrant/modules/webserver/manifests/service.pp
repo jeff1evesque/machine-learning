@@ -4,9 +4,9 @@
 ###
 class webserver::service {
     ## variables
-    $hiera_general     = hiera('general')
-    $hiera_development = hiera('development')
-    $hiera_webserver   = hiera('webserver')
+    $hiera_general     = lookup('general')
+    $hiera_development = lookup('development')
+    $hiera_webserver   = lookup('webserver')
     $template_path     = 'webserver/gunicorn.erb'
 
     $vagrant_mounted = $hiera_general['vagrant_implement']

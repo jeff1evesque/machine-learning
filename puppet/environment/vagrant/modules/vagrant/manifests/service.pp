@@ -4,7 +4,7 @@
 ###
 class vagrant::service {
     ## variables
-    $hiera_general   = hiera('general')
+    $hiera_general   = lookup('general')
     $mountpoint      = $hiera_general['root']
     $vagrant_mounted = $hiera_general['vagrant']
     $template_path   = 'vagrant/vagrant_mounted.erb'

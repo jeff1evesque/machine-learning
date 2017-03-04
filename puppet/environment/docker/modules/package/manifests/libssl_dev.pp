@@ -7,7 +7,7 @@ class package::libssl_dev {
     require apt
 
     ## local variables
-    $hiera_dev = hiera('development')
+    $hiera_dev = lookup('development')
     $version   = $hiera_dev['apt']['libssl-dev']
 
     package { "libssl-dev=${version}":

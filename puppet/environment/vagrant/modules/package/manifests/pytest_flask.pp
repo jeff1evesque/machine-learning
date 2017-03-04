@@ -6,7 +6,7 @@ class package::pytest_flask {
     require python
 
     ## local variables
-    $hiera_dev = hiera('development')
+    $hiera_dev = lookup('development')
     $version   = $hiera_dev['pip']['pytest-flask']
 
     package { 'pytest-flask':

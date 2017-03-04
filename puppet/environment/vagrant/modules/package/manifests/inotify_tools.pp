@@ -7,7 +7,7 @@ class package::inotify_tools {
     require apt
 
     ## local variables
-    $hiera_dev = hiera('development')
+    $hiera_dev = lookup('development')
     $version   = $hiera_dev['apt']['inotify-tools']
 
     package { "inotify-tools=${version}":
