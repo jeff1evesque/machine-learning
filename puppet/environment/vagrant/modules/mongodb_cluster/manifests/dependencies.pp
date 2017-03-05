@@ -7,7 +7,9 @@ class mongodb_cluster::dependencies {
     $hiera_mongodb  = lookup('mongodb_cluster')
     $shard1         = $hiera_mongodb['shard']['shard1']
     $plato          = $shard1['cluster1']['node1']
-    $aristotle      = $shard1['cluster1']['node2]
+    $aristotle      = $shard1['cluster1']['node2']
+    $socrates       = $shard2['cluster2']['node1']
+    $confucius      = $shard2['cluster2']['node2']
 
     ## recommended repository
     class { '::mongodb::globals':

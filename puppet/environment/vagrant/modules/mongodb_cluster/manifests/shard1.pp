@@ -8,7 +8,7 @@ class mongodb_cluster::shard1 {
     $hiera_user     = $hiera_mongodb['user']
     $shard1         = $hiera_mongodb['shard']['shard1']
     $plato          = $shard1['cluster1']['node1']
-    $aristotle      = $shard1['cluster1']['node2]
+    $aristotle      = $shard1['cluster1']['node2']
     $admin_user     = $hiera_user['admin']['name']
     $admin_password = $hiera_user['admin']['password']
 
