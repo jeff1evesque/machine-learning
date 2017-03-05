@@ -1,13 +1,12 @@
 ---
 version: 5
-
 defaults:
   datadir: /vagrant/hiera
   data_hash: yaml_data
 
 hierarchy:
   - name: 'General build packages'
-    path: packages
+    path: packages.yaml
 
   - name: 'General application settings'
-    path: settings
+    path: settings.yaml
