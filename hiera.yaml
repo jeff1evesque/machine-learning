@@ -10,4 +10,4 @@ hierarchy:
     path: packages
 
   - name: 'General application settings'
-  - settings
+    path: settings
