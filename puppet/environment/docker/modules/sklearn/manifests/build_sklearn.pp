@@ -1,6 +1,5 @@
-### Note: the prefix 'sklearn::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### build_sklearn.pp, build sklearn.
 ###
 class sklearn::build_sklearn {
     ## local variables

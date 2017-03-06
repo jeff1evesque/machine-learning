@@ -1,6 +1,5 @@
-### Note: the prefix 'vagrant::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### start.pp, ensure vagrant work around service running.
 ###
 class vagrant::start {
     service { 'workaround-vagrant-bug-6074':

@@ -1,6 +1,5 @@
-### Note: the prefix 'package::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### sklearn.pp, clone github codebase.
 ###
 class package::sklearn {
     require git

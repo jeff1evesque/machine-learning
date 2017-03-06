@@ -1,13 +1,10 @@
+###
 ### install_packages.pp: install general packages.
-###
-### Note: the prefix 'package::', corresponds to a puppet convention:
-###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
 ## nodejs, with npm: this cannot be wrapped into a module, and included, as
-#      needed. Puppet will only allow one instance of this class, regardless of
-#      of its implementation.
+##     needed. Puppet will only allow one instance of this class, regardless of
+##     of its implementation.
 class install_nodejs {
     ## set dependency
     require apt

@@ -1,6 +1,5 @@
-### Note: the prefix 'package::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### scrypt.pp, install package.
 ###
 class package::scrypt {
     require python

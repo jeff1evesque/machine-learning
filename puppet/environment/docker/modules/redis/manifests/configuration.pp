@@ -1,6 +1,5 @@
-### Note: the prefix 'database::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### configuration.pp, configure redis-server.
 ###
 class redis::configuration {
     ## variables

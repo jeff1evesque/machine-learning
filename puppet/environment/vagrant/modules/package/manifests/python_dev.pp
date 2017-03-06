@@ -1,6 +1,5 @@
-### Note: the prefix 'package::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### python_dev.pp, install package.
 ###
 class package::python_dev {
     ## update apt-get

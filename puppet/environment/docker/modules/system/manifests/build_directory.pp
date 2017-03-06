@@ -1,6 +1,5 @@
-### Note: the prefix 'system::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### build_directory.pp, create 'build/' directory.
 ###
 class system::build_directory {
     ## local variables

@@ -1,6 +1,5 @@
-### Note: the prefix 'database::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### bindings.pp, ensure mariadb bindings.
 ###
 class database::bindings {
     class { '::mysql::bindings':
