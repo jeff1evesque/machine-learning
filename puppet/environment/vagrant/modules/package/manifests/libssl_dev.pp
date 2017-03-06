@@ -1,5 +1,5 @@
 ###
-### libssl_dev.pp, install package.s
+### libssl_dev.pp, install package.
 ###
 class package::libssl_dev {
     ## update apt-get

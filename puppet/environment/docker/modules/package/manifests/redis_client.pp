@@ -1,5 +1,5 @@
 ###
-### @redis_client.pp, install package.
+### redis_client.pp, install package.
 ###
 class package::redis_client {
     require python

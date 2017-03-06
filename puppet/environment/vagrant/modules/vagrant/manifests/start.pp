@@ -1,5 +1,5 @@
 ###
-### start.pp, ensure vagrant work around service running.
+### start.pp, ensure vagrant workaround service running.
 ###
 class vagrant::start {
     service { 'workaround-vagrant-bug-6074':
