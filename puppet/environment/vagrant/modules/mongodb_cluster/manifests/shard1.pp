@@ -1,7 +1,6 @@
 ###
 ### Configures mongodb cluster (shard1).
 ###
-
 class mongodb_cluster::shard1 {
     ## local variables
     $hiera_mongodb  = lookup('mongodb_cluster')

@@ -1,7 +1,6 @@
 ###
 ### Configures mongodb cluster dependencies.
 ###
-
 class mongodb_cluster::dependencies {
     ## local variables
     $hiera_mongodb  = lookup('mongodb_cluster')
