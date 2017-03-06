@@ -1,9 +1,6 @@
+###
 ### compile_asset.pp: install, configure, and run initial compile against
 ###                   source files.
-###
-### Note: the prefix 'package::', corresponds to a puppet convention:
-###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
 ###
 
 ## ensure log directory, package dependencies

@@ -1,6 +1,5 @@
-### Note: the prefix 'compiler::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### webcompilers.pp, create webcompiler services.
 ###
 class compiler::webcompilers {
     ## variables
@@ -32,14 +31,14 @@ class compiler::webcompilers {
     ## define compilers
     $compilers.each |String $compiler| {
         ## dos2unix upstart: convert clrf (windows to linux) in case host
-        #                    machine is windows.
+        ##                   machine is windows.
         file { "/etc/init/${compiler}.conf":
             ensure  => file,
             content => dos2unix(template($template_path)),
         }
 
         ## dos2unix upstart: convert clrf (windows to linux) in case host
-        #                    machine is windows.
+        ##                   machine is windows.
         file { "${compiler_dir}/${compiler}":
             ensure  => file,
             content => dos2unix(template("${compiler_dir}/${compiler}")),

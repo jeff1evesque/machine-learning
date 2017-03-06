@@ -1,6 +1,5 @@
-### Note: the prefix 'sklearn::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### install_sklearn.pp, install sklearn, after dependencies built.
 ###
 class sklearn::install_sklearn {
     ## set dependency

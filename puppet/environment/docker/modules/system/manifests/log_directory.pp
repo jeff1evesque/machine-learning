@@ -1,6 +1,5 @@
-### Note: the prefix 'system::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### log_directory.pp, create log subdirectories.
 ###
 class system::log_directory {
     ## local variables

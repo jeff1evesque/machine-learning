@@ -1,6 +1,5 @@
-### Note: the prefix 'system::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### set_timezone.pp, set system timezone.
 ###
 class system::set_timezone {
     class { 'timezone':

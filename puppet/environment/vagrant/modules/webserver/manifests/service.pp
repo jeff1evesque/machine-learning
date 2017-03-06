@@ -1,6 +1,5 @@
-### Note: the prefix 'webserver::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### service.pp, configure webserver(s), and corresponding proxy.
 ###
 class webserver::service {
     ## variables
@@ -42,7 +41,7 @@ class webserver::service {
     }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
-    #            windows.
+    ##           windows.
     file { '/etc/init/start_gunicorn.conf':
         ensure  => file,
         content => dos2unix(template($template_path)),
