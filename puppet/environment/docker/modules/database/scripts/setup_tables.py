@@ -67,9 +67,10 @@ with open(configuration, 'r') as stream:
     settings = yaml.load(stream)
     models = settings['application']['model_type']
     host = settings['general']['host']
-    db_ml = settings['database']['name']
-    provisioner = settings['database']['provisioner']
-    provisioner_password = settings['database']['provisioner_password']
+    database = settings['database']['mariadb']
+    db_ml = database['name']
+    provisioner = database['provisioner']
+    provisioner_password = database['provisioner_password']
 
     # create connection
     conn = DB.connect(

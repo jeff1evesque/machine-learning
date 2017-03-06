@@ -54,16 +54,17 @@ webserver:
 ##       the above 'general: root' definition.
 ##
 database:
-    host: 'localhost'
-    name: 'db_machine_learning'
-    provisioner: 'provisioner'
-    provisioner_password: 'password'
-    username: 'authenticated'
-    password: 'password'
-    tester: 'tester'
-    tester_password: 'password'
-    root_password: 'password'
-    log_path: '/log/database'
+    mariadb:
+        host: 'localhost'
+        name: 'db_machine_learning'
+        provisioner: 'provisioner'
+        provisioner_password: 'password'
+        username: 'authenticated'
+        password: 'password'
+        tester: 'tester'
+        tester_password: 'password'
+        root_password: 'password'
+        log_path: '/log/database'
 
 ## application logging: the possible logging levels are constrained by the
 ##                      python 'logging' module.
