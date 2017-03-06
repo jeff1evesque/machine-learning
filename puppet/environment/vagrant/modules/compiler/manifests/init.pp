@@ -1,6 +1,5 @@
 ###
-### init.pp: install, configure, and run initial compile against
-###                   source files.
+### init.pp: install, configure, and run initial compile against source files.
 ###
 
 class compiler {
