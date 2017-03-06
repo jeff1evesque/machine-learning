@@ -4,11 +4,12 @@
 class mongodb_cluster::dependencies {
     ## local variables
     $hiera_mongodb  = lookup('mongodb_cluster')
-    $shard1         = $hiera_mongodb['shard']['shard1']
-    $plato          = $shard1['cluster1']['node1']
-    $aristotle      = $shard1['cluster1']['node2']
-    $socrates       = $shard2['cluster2']['node1']
-    $confucius      = $shard2['cluster2']['node2']
+    $shard1         = $hiera_mongodb['cluster']['shard1']
+    $shard2         = $hiera_mongodb['cluster']['shard2']
+    $plato          = $shard1['node1']
+    $aristotle      = $shard1['node2']
+    $socrates       = $shard2['node1']
+    $confucius      = $shard2['node2']
 
     ## recommended repository
     class { '::mongodb::globals':

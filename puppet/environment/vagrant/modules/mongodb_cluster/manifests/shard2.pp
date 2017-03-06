@@ -5,9 +5,9 @@ class mongodb_cluster::shard2 {
     ## local variables
     $hiera_mongodb  = lookup('mongodb_cluster')
     $hiera_user     = $hiera_mongodb['user']
-    $shard2         = $hiera_mongodb['shard']['shard2']
-    $socrates       = $shard2['cluster2']['node1']
-    $confucius      = $shard2['cluster2']['node2']
+    $shard2         = $hiera_mongodb['cluster']['shard2']
+    $socrates       = $shard2['node1']
+    $confucius      = $shard2['node2']
     $admin_user     = $hiera_user['admin']['name']
     $admin_password = $hiera_user['admin']['password']
 
