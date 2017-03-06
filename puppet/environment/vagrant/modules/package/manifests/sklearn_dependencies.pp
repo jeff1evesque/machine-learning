@@ -1,10 +1,9 @@
-### Note: the prefix 'package::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### sklearn_dependencies.pp, install sklearn related packages.
 ###
 class package::sklearn_dependencies {
     ## local variables
-    $hiera_dev            = hiera('development')
+    $hiera_dev            = lookup('development')
     $version_python_dev   = $hiera_dev['apt']['python-dev']
     $version_python_numpy = $hiera_dev['apt']['python-numpy']
     $version_python_scipy = $hiera_dev['apt']['python-scipy']

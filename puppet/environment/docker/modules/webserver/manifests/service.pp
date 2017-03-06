@@ -1,12 +1,11 @@
-### Note: the prefix 'webserver::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### service.pp, configure webserver(s), and corresponding proxy.
 ###
 class webserver::service {
     ## variables
-    $hiera_general     = hiera('general')
-    $hiera_development = hiera('development')
-    $hiera_webserver   = hiera('webserver')
+    $hiera_general     = lookup('general')
+    $hiera_development = lookup('development')
+    $hiera_webserver   = lookup('webserver')
     $template_path     = 'webserver/gunicorn.erb'
 
     $vagrant_mounted = $hiera_general['vagrant_implement']
@@ -42,7 +41,7 @@ class webserver::service {
     }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
-    #            windows.
+    ##           windows.
     file { '/etc/init/start_gunicorn.conf':
         ensure  => file,
         content => dos2unix(template($template_path)),

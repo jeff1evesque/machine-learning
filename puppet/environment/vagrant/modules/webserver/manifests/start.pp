@@ -1,13 +1,12 @@
-### Note: the prefix 'vagrant::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### start.pp, ensure gunicorn webserver workers running.
 ###
 class webserver::start {
-    # variables
-    $hiera_general   = hiera('general')
+    ## variables
+    $hiera_general   = lookup('general')
     $vagrant_mounted = $hiera_general['vagrant_implement']
 
-    # run gunicorn
+    ## run gunicorn
     if $vagrant_mounted {
         # ensure service starts at boot
         service { 'start_gunicorn':
@@ -16,7 +15,7 @@ class webserver::start {
         }
     }
     else {
-        # run and restart when needed
+        ## run and restart when needed
         service { 'start_gunicorn':
             ensure => 'running',
         }

@@ -1,6 +1,5 @@
-### Note: the prefix 'compiler::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### start_sass.pp, ensure custom sass service running.
 ###
 class compiler::start_sass {
     service { 'sass':

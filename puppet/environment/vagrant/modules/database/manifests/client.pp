@@ -1,6 +1,5 @@
-### Note: the prefix 'database::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### client.pp, mysql::client: install, and configure mariadb-client.
 ###
 class database::client {
     ## mysql::client: install, and configure mariadb-client

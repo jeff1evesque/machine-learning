@@ -1,11 +1,10 @@
-### Note: the prefix 'database::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### server.pp, create mariadb database, with user permissions.
 ###
 class database::server {
     ## local variables
-    $hiera_general    = hiera('general')
-    $hiera_database   = hiera('database')
+    $hiera_general    = lookup('general')
+    $hiera_database   = lookup('database')
     $host             = $hiera_general['host']
     $db               = $hiera_database['name']
     $db_user          = $hiera_database['username']
@@ -17,10 +16,11 @@ class database::server {
     $root_pass        = $hiera_database['root_password']
 
     ## mysql::server: install, and configure mariadb-server
-    #
-    #  @password_hash, default password (can be adjusted via cli)
-    #  @max_connections_per_hour, @max_queries_per_hour, @max_updates_per_hour,
-    #      @max_user_connections, a zero value indicates no limit
+    ##
+    ## @password_hash, default password (can be adjusted via cli)
+    ## @max_connections_per_hour, @max_queries_per_hour, @max_updates_per_hour,
+    ## @max_user_connections, a zero value indicates no limit
+    ##
     class { '::mysql::server':
         package_name  => 'mariadb-server',
         root_password => $root_pass,

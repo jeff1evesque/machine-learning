@@ -1,10 +1,9 @@
-### Note: the prefix 'package::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### webcompilers.pp, install webcompiler packages.
 ###
 class package::webcompilers {
     ## hiera attributes
-    $hiera_dev          = hiera('development')
+    $hiera_dev          = lookup('development')
     $version_uglify_js  = $hiera_dev['npm']['uglify-js']
     $version_imagemin   = $hiera_dev['npm']['imagemin']
     $version_node_sass  = $hiera_dev['npm']['node-sass']

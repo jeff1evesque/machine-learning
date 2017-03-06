@@ -1,15 +1,14 @@
-### Note: the prefix 'package::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### sklearn.pp, clone github codebase.
 ###
 class package::sklearn {
     require git
 
     ## local variables
-    $hiera_general = hiera('general')
+    $hiera_general = lookup('general')
     $root_dir      = $hiera_general['root']
 
-    $hiera_dev     = hiera('development')
+    $hiera_dev     = lookup('development')
     $version       = $hiera_dev['github']['sklearn']
 
     ## download sklearn

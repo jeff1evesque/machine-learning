@@ -1,11 +1,10 @@
-### Note: the prefix 'system::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### log_directory.pp, create log subdirectories.
 ###
 class system::log_directory {
     ## local variables
-    $hiera_general = hiera('general')
-    $root_dir = $hiera_general['root']
+    $hiera_general = lookup('general')
+    $root_dir      = $hiera_general['root']
 
     $directories = [
         "${root_dir}/log/database",

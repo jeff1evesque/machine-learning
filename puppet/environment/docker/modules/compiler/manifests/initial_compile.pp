@@ -1,10 +1,9 @@
-### Note: the prefix 'compiler::::', corresponds to a puppet convention:
 ###
-###       https://github.com/jeff1evesque/machine-learning/issues/2349
+### initial_compile.pp, manually compile javascript.
 ###
 class compiler::initial_compile {
     ## local variables
-    $hiera_general   = hiera('general')
+    $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
     $environment     = $hiera_general['environment']
     $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
@@ -16,7 +15,7 @@ class compiler::initial_compile {
     ]
 
     ## manually compile jsx asset, since first pass through via
-    # 'start_uglifyjs.pp' does not have adequate scope resolution.
+    ## 'start_uglifyjs.pp' does not have adequate scope resolution.
     exec { 'rerun-uglifyjs':
         command  => "./uglifyjs ${root_dir}",
         cwd      => "${dev_env_path}/modules/compiler/scripts",
