@@ -10,8 +10,9 @@ RUN mkdir /var/machine-learning
 COPY . /var/machine-learning
 
 ## install git, wget, pip
-#
-#  Note: r10k requires 'git' installed
+##
+##  Note: r10k requires 'git' installed
+##
 RUN apt-get -y update
 RUN apt-get -y install git=1:1.9.1-1ubuntu0.3
 RUN apt-get -y install wget=1.15-1ubuntu1.14.04.2
@@ -35,10 +36,10 @@ RUN mkdir -p $ENVIRONMENT_DIR/modules_contrib/
 RUN PUPPETFILE=$ENVIRONMENT_DIR/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/modules_contrib/ r10k puppetfile install
 
 ## provision with puppet
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/install_packages.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/install_sklearn.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/configure_system.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/manifests/compile_asset.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test --debug
+RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/package/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
+RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/sklearn/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
+RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/system/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
+RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/compiler/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test --debug
 
 ## show directory
 RUN ls -l $ROOT_PROJECT/interface/static/js
