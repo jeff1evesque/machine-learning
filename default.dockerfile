@@ -40,7 +40,3 @@ RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/package/manifests/
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/sklearn/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/system/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/compiler/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test --debug
-
-## show directory
-RUN ls -l $ROOT_PROJECT/interface/static/css
-RUN ls -l $ROOT_PROJECT/interface/static/img
