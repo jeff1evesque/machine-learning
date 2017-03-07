@@ -2,6 +2,8 @@
 ### service.pp, configure webserver(s), and corresponding proxy.
 ###
 class webserver::service {
+    include compiler::initial_compile
+
     ## variables
     $hiera_general     = lookup('general')
     $hiera_development = lookup('development')
@@ -24,10 +26,10 @@ class webserver::service {
     $nginx_version       = $hiera_development['apt']['nginx']
     $nginx_proxy         = "${nginx_reverse_proxy['proxy']}:${gunicorn_port}"
 
-    ## include webserver dependencies
-    include python
-    include python::flask
-    include python::requests
+    ## contain webserver dependencies
+    contain python
+    contain python::flask
+    contain python::requests
 
     ## nginx: installation
     class { 'nginx':
@@ -45,5 +47,6 @@ class webserver::service {
     file { '/etc/init/start_gunicorn.conf':
         ensure  => file,
         content => dos2unix(template($template_path)),
+        require => Class['compiler::initial_compile'],
     }
 }
