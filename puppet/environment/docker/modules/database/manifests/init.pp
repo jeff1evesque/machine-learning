@@ -3,24 +3,15 @@
 ###
 
 class database {
-    ## install sql
-    class install_sql {
-        ## install mariadb
-        contain database::server
+    ## install mariadb
+    contain database::server
 
-        ## install mariadb client
-        contain database::client
+    ## install mariadb client
+    contain database::client
 
-        ## install mariad bindings
-        contain database::bindings
-    }
+    ## install mariad bindings
+    contain database::bindings
 
     ## create database tables
-    class create_db {
-        require install_sql
-        contain database::database
-    }
-
-    ## initiate
-    include create_db
+    contain database::database
 }
