@@ -2,13 +2,13 @@
 ### site.pp: load all necessary modules.
 ###
 ### Note: this file is not currently implemented, since the docker environment
-###       employs dockerfiles, where corresponding 'init.pp' are included.
+###       employs dockerfiles, where corresponding 'init.pp' are containd.
 ###
 
-include package
-include sklearn
-include redis
-include system
-include compiler
-include database
-include webserver
+contain package
+contain sklearn
+contain redis
+contain system
+contain compiler
+contain database
+contain webserver

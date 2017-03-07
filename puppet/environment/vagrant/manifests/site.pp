@@ -2,11 +2,11 @@
 ### site.pp: load all necessary modules.
 ###
 
-include package
-include sklearn
-include vagrant
-include redis
-include system
-include compiler
-include database
-include webserver
+contain package
+contain sklearn
+contain vagrant
+contain redis
+contain system
+contain compiler
+contain database
+contain webserver
