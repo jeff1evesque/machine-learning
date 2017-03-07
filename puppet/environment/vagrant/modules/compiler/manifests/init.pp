@@ -8,6 +8,7 @@ class compiler {
     contain package::webcompilers
 
     ## configure webcompilers
+    require system::webcompiler_directory
     contain compiler::webcompilers
 
     ## start compiler(s)
