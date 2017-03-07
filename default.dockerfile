@@ -42,6 +42,5 @@ RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/system/manifests/i
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/compiler/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test --debug
 
 ## show directory
-RUN ls -l $ROOT_PROJECT/interface/static/js
 RUN ls -l $ROOT_PROJECT/interface/static/css
 RUN ls -l $ROOT_PROJECT/interface/static/img
