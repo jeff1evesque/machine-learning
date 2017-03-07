@@ -3,7 +3,7 @@
 ###
 class webserver::service {
     include compiler::initial_compile
-    include webserver::service
+    include webserver::start
 
     ## variables
     $hiera_general     = lookup('general')
@@ -49,6 +49,6 @@ class webserver::service {
         ensure  => file,
         content => dos2unix(template($template_path)),
         require => Class['compiler::initial_compile'],
-        notify  => Class['webserver::service'],
+        notify  => Class['webserver::start'],
     }
 }
