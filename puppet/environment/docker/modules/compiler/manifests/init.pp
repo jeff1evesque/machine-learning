@@ -5,7 +5,6 @@
 class compiler {
     ## ensure log directory, package dependencies
     require system::log_directory
-    contain package::webcompilers
 
     ## configure webcompilers
     require system::webcompiler_directory
