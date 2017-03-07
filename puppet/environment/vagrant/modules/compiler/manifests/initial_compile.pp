@@ -2,6 +2,8 @@
 ### initial_compile.pp, manually compile javascript.
 ###
 class compiler::initial_compile {
+    include package::webcompilers
+
     ## local variables
     $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
@@ -46,6 +48,7 @@ class compiler::initial_compile {
             command  => $touch_files,
             onlyif   => $check_files,
             provider => shell,
+            require  => Class['package::webcompilers'],
         }
     }
 
@@ -54,5 +57,6 @@ class compiler::initial_compile {
         command  => "node-sass ${source} ${asset}",
         path     => '/usr/bin',
         provider => shell,
+        require  => Class['package::webcompilers'],
     }
 }
