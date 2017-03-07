@@ -7,5 +7,5 @@ class system {
     require system::log_directory
 
     ## define system timezone
-    include system::set_timezone
+    contain system::set_timezone
 }

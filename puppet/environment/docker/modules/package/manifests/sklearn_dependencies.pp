@@ -2,7 +2,7 @@
 ### sklearn_dependencies.pp, install sklearn related packages.
 ###
 class package::sklearn_dependencies {
-    include package::python_dev
+    contain package::python_dev
 
     ## local variables
     $hiera_dev            = lookup('development')

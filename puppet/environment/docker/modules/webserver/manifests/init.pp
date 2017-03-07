@@ -5,13 +5,13 @@
 
 class webserver {
     ## install mariadb
-    include database::client
-    include database::bindings
+    contain database::client
+    contain database::bindings
 
     ## install redis client
-    include package::redis_client
+    contain package::redis_client
 
     ## install webserver
-    include package::gunicorn
-    include webserver::service
+    contain package::gunicorn
+    contain webserver::service
 }

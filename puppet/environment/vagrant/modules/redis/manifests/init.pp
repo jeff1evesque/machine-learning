@@ -4,8 +4,8 @@
 
 class redis {
     ## install redis client
-    include package::redis_client
+    contain package::redis_client
 
     ## install redis-server
-    include package::redis_server
+    contain package::redis_server
 }

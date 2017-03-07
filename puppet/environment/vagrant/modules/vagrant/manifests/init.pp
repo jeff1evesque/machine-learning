@@ -5,8 +5,8 @@
 
 class vagrant {
     ## configure service
-    include vagrant::service
+    contain vagrant::service
 
     ## start service
-    include vagrant::start
+    contain vagrant::start
 }

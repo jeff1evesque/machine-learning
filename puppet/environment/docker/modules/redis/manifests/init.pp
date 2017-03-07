@@ -3,6 +3,6 @@
 ###
 
 class redis {
-    include package::redis_server
-    include redis::configuration
+    contain package::redis_server
+    contain redis::configuration
 }

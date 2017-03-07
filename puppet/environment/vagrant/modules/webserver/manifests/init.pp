@@ -7,9 +7,9 @@ class webserver {
     require system::log_directory
 
     ## install webserver
-    include webserver::service
+    contain webserver::service
 
     ## start webservers
-    include package::gunicorn
-    include webserver::start
+    contain package::gunicorn
+    contain webserver::start
 }

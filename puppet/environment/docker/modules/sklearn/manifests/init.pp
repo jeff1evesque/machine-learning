@@ -4,17 +4,17 @@
 
 class sklearn {
     ## create '/vagrant/build/' directory
-    include system::build_directory
+    contain system::build_directory
 
     ## install sklearn dependencies
-    include package::sklearn_dependencies
+    contain package::sklearn_dependencies
 
     ## download scikit-learn
-    include package::sklearn
+    contain package::sklearn
 
     ## build scikit-learn
-    include sklearn::build_sklearn
+    contain sklearn::build_sklearn
 
     ## install scikit-learn
-    include sklearn::install_sklearn
+    contain sklearn::install_sklearn
 }

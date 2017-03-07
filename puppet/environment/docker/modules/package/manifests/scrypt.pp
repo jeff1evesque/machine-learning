@@ -3,7 +3,7 @@
 ###
 class package::scrypt {
     require python
-    import package::python_dev
+    include package::python_dev
 
     ## local variables
     $hiera_dev = lookup('development')

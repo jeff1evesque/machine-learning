@@ -3,5 +3,5 @@
 ###
 
 class system {
-    include system::set_timezone
+    contain system::set_timezone
 }
