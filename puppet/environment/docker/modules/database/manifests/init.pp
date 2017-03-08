@@ -15,3 +15,4 @@ class database {
     ## create database tables
     contain database::database
 }
+contain database

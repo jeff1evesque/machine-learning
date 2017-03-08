@@ -19,3 +19,4 @@ class compiler {
     ## initial compile
     contain compiler::initial_compile
 }
+contain compiler

@@ -9,3 +9,4 @@ class system {
     ## define system timezone
     contain system::set_timezone
 }
+contain system

@@ -19,3 +19,4 @@ class package {
     contain package::libssl_dev
     contain package::scrypt
 }
+contain package

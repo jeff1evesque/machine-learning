@@ -15,3 +15,4 @@ class webserver {
     contain package::gunicorn
     contain webserver::service
 }
+contain webserver

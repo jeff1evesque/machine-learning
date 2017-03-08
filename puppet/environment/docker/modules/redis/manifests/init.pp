@@ -6,3 +6,4 @@ class redis {
     contain package::redis_server
     contain redis::configuration
 }
+contain redis

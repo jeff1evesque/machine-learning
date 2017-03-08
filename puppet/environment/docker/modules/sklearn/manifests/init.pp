@@ -18,3 +18,4 @@ class sklearn {
     ## install scikit-learn
     contain sklearn::install_sklearn
 }
+contain sklearn
