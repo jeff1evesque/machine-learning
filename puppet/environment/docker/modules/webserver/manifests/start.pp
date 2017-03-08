@@ -4,11 +4,11 @@
 class webserver::start {
     include webserver::service
 
-    # variables
+    ## variables
     $hiera_general   = lookup('general')
     $vagrant_mounted = $hiera_general['vagrant_implement']
 
-    # run gunicorn
+    ## run gunicorn
     if $vagrant_mounted {
         # ensure service starts at boot
         service { 'start_gunicorn':
@@ -18,7 +18,7 @@ class webserver::start {
         }
     }
     else {
-        # run and restart when needed
+        ## run and restart when needed
         service { 'start_gunicorn':
             ensure  => 'running',
             require => Class['webserver::service'],
