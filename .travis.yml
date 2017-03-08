@@ -1,10 +1,6 @@
-sudo: required
-
 language: python
-
-## allows 'docker' command
-services:
-- docker
+dist: trusty
+sudo: required
 
 ## environment variables
 env:
@@ -18,9 +14,6 @@ env:
 ##       https://docs.docker.com/engine/installation/linux/ubuntu/
 ##
 before_install:
-  # uninstall old docker-engine
-  - sudo apt-get remove docker docker-engine
-
   # install docker to specific version
   - sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
   - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
