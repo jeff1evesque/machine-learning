@@ -10,6 +10,7 @@ class webserver {
     contain webserver::service
 
     ## start webservers
+    contain package::pyyaml
     contain package::gunicorn
     contain webserver::start
 }

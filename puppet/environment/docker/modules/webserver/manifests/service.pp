@@ -4,7 +4,6 @@
 class webserver::service {
     include compiler::initial_compile
     include webserver::start
-    include package::pyyaml
 
     ## variables
     $hiera_general     = lookup('general')
@@ -53,10 +52,7 @@ class webserver::service {
     file { '/etc/init/start_gunicorn.conf':
         ensure  => file,
         content => dos2unix(template($template_path)),
-        require => [
-            Class['package::pyyaml'],
-            Class['compiler::initial_compile']
-        ],
+        require => Class['compiler::initial_compile'],
         notify  => Class['webserver::start'],
     }
 }
