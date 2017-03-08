@@ -2,6 +2,8 @@
 ### start_imagemin.pp, minify images, when possible.
 ###
 class compiler::start_imagemin {
+    include compiler::webcompilers
+
     ## variables
     $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
@@ -10,7 +12,8 @@ class compiler::start_imagemin {
 
     ## ensure service starts at boot
     service { 'imagemin':
-        ensure => 'running',
-        enable => true,
+        ensure  => 'running',
+        enable  => true,
+        require => Class['compiler::webcompilers'],
     }
 }

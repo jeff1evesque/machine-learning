@@ -2,6 +2,9 @@
 ### webcompilers.pp, create webcompiler services.
 ###
 class compiler::webcompilers {
+    include package::react_presets
+    include package::webcompilers
+
     ## variables
     $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
@@ -34,6 +37,10 @@ class compiler::webcompilers {
         file { "/etc/init/${compiler}.conf":
             ensure  => file,
             content => dos2unix(template($template_path)),
+            require => [
+                Class['package::webcompilers'],
+                Class['package::react_presets'],
+            ],
         }
 
         ## dos2unix upstart: convert clrf (windows to linux) in case host
@@ -42,6 +49,10 @@ class compiler::webcompilers {
             ensure  => file,
             content => dos2unix(template("${compiler_dir}/${compiler}")),
             mode    => '0755',
+            require => [
+                Class['package::webcompilers'],
+                Class['package::react_presets'],
+            ],
         }
     }
 }

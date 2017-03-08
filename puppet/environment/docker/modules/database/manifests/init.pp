@@ -1,9 +1,8 @@
 ###
-### setup_database.pp: install client, and initialize database tables.
+### init.pp: install client, and initialize database tables.
 ###
 
-## install sql
-class install_sql {
+class database {
     ## install mariadb
     contain database::server
 
@@ -12,13 +11,8 @@ class install_sql {
 
     ## install mariad bindings
     contain database::bindings
-}
 
-## create database tables
-class create_db {
-    require install_sql
+    ## create database tables
     contain database::database
 }
-
-## initiate
-include create_db
+contain database

@@ -2,6 +2,8 @@
 ### database.pp, create mariadb database structure.
 ###
 class database::database {
+    include package::pyyaml
+
     ## variables
     $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
@@ -19,5 +21,6 @@ class database::database {
         command => "python setup_tables.py ${root_dir} ${vagrant_mounted}",
         cwd     => $script_dir,
         path    => '/usr/bin',
+        require => Class['package::pyyaml'],
     }
 }

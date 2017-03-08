@@ -3,6 +3,7 @@
 ##
 class package::xmltodict {
     include python
+    include package::nodejs
 
     ## local variables
     $hiera_dev = lookup('development')
@@ -11,5 +12,6 @@ class package::xmltodict {
     package { 'xmltodict':
         ensure   => $version,
         provider => 'pip',
+        require  => Class['package::nodejs'],
     }
 }

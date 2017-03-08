@@ -2,6 +2,8 @@
 ### start_browserify.pp, compile jsx into javascript.
 ###
 class compiler::start_browserify {
+    include compiler::webcompilers
+
     ## variables
     $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
@@ -14,5 +16,6 @@ class compiler::start_browserify {
         cwd      => "${dev_env_path}/modules/compiler/scripts",
         path     => '/usr/bin',
         provider => shell,
+        require  => Class['compiler::webcompilers'],
     }
 }

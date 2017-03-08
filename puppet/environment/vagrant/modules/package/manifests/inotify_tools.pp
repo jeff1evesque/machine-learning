@@ -2,6 +2,8 @@
 ### inotify_tools.pp, install package.
 ###
 class package::inotify_tools {
+    include package::nodejs
+
     ## update apt-get
     require apt
 
@@ -10,6 +12,7 @@ class package::inotify_tools {
     $version   = $hiera_dev['apt']['inotify-tools']
 
     package { "inotify-tools=${version}":
-        ensure => 'installed',
+        ensure  => 'installed',
+        require => Class['package::nodejs'],
     }
 }
