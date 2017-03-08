@@ -7,7 +7,7 @@ class package::nodejs {
     class { 'nodejs':
         manage_package_repo => true,
         repo_url_suffix => '5.x',
-        nodejs_package_ensure => '5.0.0-3nodesource1~trusty1'
+        nodejs_package_ensure => 'latest'
     }
     contain nodejs
 }
