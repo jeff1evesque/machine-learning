@@ -36,7 +36,6 @@ RUN mkdir -p $ENVIRONMENT_DIR/modules_contrib/
 RUN PUPPETFILE=$ENVIRONMENT_DIR/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/modules_contrib/ r10k puppetfile install
 
 ## remove npm: it will be installed via puppet
-RUN npm uninstall npm -g
 RUN apt-get uninstall nodejs npm node
 RUN apt-get remove nodejs npm node
 
