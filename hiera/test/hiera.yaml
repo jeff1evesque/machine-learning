@@ -1,10 +1,12 @@
 ---
-:backends:
-  - yaml
+version: 5
+defaults:
+  datadir: /var/machine-learning/hiera
+  data_hash: yaml_data
 
-:yaml:
-  :datadir: /var/machine-learning/hiera
+hierarchy:
+  - name: 'General build packages'
+    path: packages.yaml
 
-:hierarchy:
-  - packages
-  - test/hiera/settings
+  - name: 'General application settings'
+    path: test/hiera/settings
