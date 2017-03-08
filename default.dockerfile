@@ -35,7 +35,7 @@ RUN pip install pytest-cov==2.4.0
 RUN mkdir -p $ENVIRONMENT_DIR/modules_contrib/
 RUN PUPPETFILE=$ENVIRONMENT_DIR/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/modules_contrib/ r10k puppetfile install
 
-## remove npm (installed via puppet)
+## remove npm: it will be installed via puppet
 RUN npm uninstall npm -g
 
 ## provision with puppet
