@@ -8,7 +8,7 @@
 ## Install Module: stdlib (apt dependency)
 mod 'stdlib',
   :git => 'git@github.com:puppetlabs/puppetlabs-stdlib.git',
-  :ref => '4.11.0'
+  :ref => '4.15.0'
 
 ## Install Module: apt (from master)
 mod 'apt',
