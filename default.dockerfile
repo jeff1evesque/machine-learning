@@ -36,8 +36,9 @@ RUN mkdir -p $ENVIRONMENT_DIR/modules_contrib/
 RUN PUPPETFILE=$ENVIRONMENT_DIR/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/modules_contrib/ r10k puppetfile install
 
 ## remove npm: it will be installed via puppet
-RUN apt-get uninstall nodejs npm node
-RUN apt-get remove nodejs npm node
+RUN npm -v
+RUN node -v
+RUN nodejs -v
 
 ## provision with puppet
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/package/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
