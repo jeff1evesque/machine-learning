@@ -26,7 +26,7 @@ RUN apt-get -y install puppet-agent
 
 ## install r10k
 RUN apt-get -y install rubygems-integration=1.5
-RUN gem install r10k -v 2.2.0
+RUN gem install r10k -v 2.5.2
 
 ## install pytest-cov
 RUN pip install pytest-cov==2.4.0
