@@ -4,6 +4,7 @@
 class webserver::service {
     include compiler::initial_compile
     include webserver::start
+    include package::pyyaml
 
     ## variables
     $hiera_general     = lookup('general')
@@ -45,10 +46,17 @@ class webserver::service {
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     ##           windows.
+    ##
+    ## Note: when the application starts, particular package dependencies are
+    ##       required to be installed, so the flask application can run.
+    ##
     file { '/etc/init/start_gunicorn.conf':
         ensure  => file,
         content => dos2unix(template($template_path)),
-        require => Class['compiler::initial_compile'],
+        require => [
+            Class['package::pyyaml'],
+            Class['compiler::initial_compile']
+        ],
         notify  => Class['webserver::start'],
     }
 }
