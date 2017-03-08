@@ -9,4 +9,4 @@ ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/database/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
 
 ## executed everytime container starts
-CMD ["mysqld"]
+CMD ["/bin/sh", "-l", "-c", "mysqld"]
