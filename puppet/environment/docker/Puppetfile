@@ -15,7 +15,7 @@ mod 'apt',
 ## Install Module: nodejs
 mod 'nodejs',
   :git => 'https://github.com/puppet-community/puppet-nodejs.git',
-  :ref => 'v2.3.0'
+  :ref => 'v1.3.0'
 
 ## Install Module: git
 mod 'git',
