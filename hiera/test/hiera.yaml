@@ -9,4 +9,4 @@ hierarchy:
     path: packages.yaml
 
   - name: 'General application settings'
-    path: test/hiera/settings
+    path: test/hiera/settings.yaml
