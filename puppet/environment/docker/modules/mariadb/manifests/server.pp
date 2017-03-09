@@ -1,7 +1,7 @@
 ###
 ### server.pp, create mariadb database, with user permissions.
 ###
-class database::server {
+class mariadb::server {
     ## local variables
     $hiera_database   = lookup('database')
     $database         = $hiera_database['mariadb']
