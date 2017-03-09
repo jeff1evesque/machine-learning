@@ -3,8 +3,8 @@
 ###
 
 class mariadb {
-    contain database::server
-    contain database::client
-    contain database::bindings
-    contain database::database
+    contain mariadb::server
+    contain mariadb::client
+    contain mariadb::bindings
+    contain mariadb::database
 }
