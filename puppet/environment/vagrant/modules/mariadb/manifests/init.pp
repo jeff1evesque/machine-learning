@@ -2,7 +2,7 @@
 ### init.pp: install client, and initialize database tables.
 ###
 
-class database {
+class mariadb {
     contain database::server
     contain database::client
     contain database::bindings

@@ -1,7 +1,7 @@
 ###
 ### bindings.pp, ensure mariadb bindings.
 ###
-class database::bindings {
+class mariadb::bindings {
     class { '::mysql::bindings':
         python_enable => true,
     }
