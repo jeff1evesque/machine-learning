@@ -3,7 +3,8 @@
 ###
 class mongodb_cluster::dependencies {
     ## local variables
-    $hiera_mongodb  = lookup('mongodb_cluster')
+    $hiera_database = lookup('database')
+    $hiera_mongodb  = $hiera_database['mongodb_cluster']
     $shard1         = $hiera_mongodb['cluster']['shard1']
     $shard2         = $hiera_mongodb['cluster']['shard2']
     $plato          = $shard1['node1']

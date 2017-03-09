@@ -4,7 +4,8 @@
 
 class mongodb_cluster::databases {
     ## local variables
-    $hiera_mongodb  = lookup('mongodb_cluster')
+    $hiera_database = lookup('database')
+    $hiera_mongodb  = $hiera_database['mongodb_cluster']
     $hiera_user     = $hiera_mongodb['user']
     $admin_user     = $hiera_user['admin']['name']
     $admin_password = $hiera_user['admin']['password']

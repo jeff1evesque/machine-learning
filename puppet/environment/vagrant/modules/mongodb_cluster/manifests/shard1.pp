@@ -3,7 +3,8 @@
 ###
 class mongodb_cluster::shard1 {
     ## local variables
-    $hiera_mongodb  = lookup('mongodb_cluster')
+    $hiera_database = lookup('database')
+    $hiera_mongodb  = $hiera_database['mongodb_cluster']
     $hiera_user     = $hiera_mongodb['user']
     $shard1         = $hiera_mongodb['cluster']['shard1']
     $plato          = $shard1['node1']
