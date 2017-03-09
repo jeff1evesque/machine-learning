@@ -1,29 +1,25 @@
-sudo: required
-
 language: python
-
-## allows 'docker' command
-services:
-  - docker
+dist: trusty
+sudo: required
 
 ## environment variables
 env:
   global:
-    - DOCKER_VERSION=1.12.3-0~trusty
+    - DOCKER_VERSION=17.03.0~ce-0~ubuntu-trusty
 
 ## build docker, install puppet (i.e. puppet parser validate)
+##
+## Note: we install docker per dockers official documentation:
+##
+##       https://docs.docker.com/engine/installation/linux/ubuntu/
+##
 before_install:
-  # docker version before update
-  - docker version
-
-  # list docker-engine versions
-  #- apt-cache madison docker-engine
-
-  # upgrade docker-engine to specific version
-  - sudo apt-get -o Dpkg::Options::="--force-confnew" install -y docker-engine=${DOCKER_VERSION}
-
-  # docker version after update
-  - docker version
+  # install docker to specific version
+  - sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
+  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+  - sudo apt-get update
+  - sudo apt-get install docker-ce=${DOCKER_VERSION}
 
   # install puppet
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb

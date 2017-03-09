@@ -2,6 +2,8 @@
 ### webcompilers.pp, install webcompiler packages.
 ###
 class package::webcompilers {
+    include package::nodejs
+
     ## hiera attributes
     $hiera_dev          = lookup('development')
     $version_uglify_js  = $hiera_dev['npm']['uglify-js']
@@ -25,5 +27,6 @@ class package::webcompilers {
     package { $webcompilers:
         ensure   => 'present',
         provider => 'npm',
+        require  => Class['package::nodejs'],
     }
 }

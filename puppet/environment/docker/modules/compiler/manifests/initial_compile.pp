@@ -2,6 +2,8 @@
 ### initial_compile.pp, manually compile javascript.
 ###
 class compiler::initial_compile {
+    include package::webcompilers
+
     ## local variables
     $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
@@ -21,5 +23,6 @@ class compiler::initial_compile {
         cwd      => "${dev_env_path}/modules/compiler/scripts",
         path     => '/usr/bin',
         provider => shell,
+        require  => Class['package::webcompilers'],
     }
 }
