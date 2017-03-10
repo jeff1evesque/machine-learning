@@ -31,6 +31,7 @@ Vagrant.configure(2) do |config|
     config.vm.define 'aristotle' do |aristotle|
         environment = 'mongodb_cluster'
 
+        ## increase RAM
         aristotle.vm.provider 'virtualbox' do |v|
             v.customize ['modifyvm', :id, '--memory', '1000']
         end
@@ -127,7 +128,7 @@ Vagrant.configure(2) do |config|
     end
 
     ## mongodb cluster
-    config.vm.define 'plato' do |socrates|
+    config.vm.define 'plato' do |plato|
         environment = 'mongodb_cluster'
 
         ## increase RAM
