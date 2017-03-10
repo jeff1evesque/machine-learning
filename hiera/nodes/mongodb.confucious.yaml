@@ -1,0 +1,8 @@
+##
+## This file is node specific configuration, with respect to mongodb.
+##
+database:
+    mongodb_cluster:
+        node:
+            host: 'localhost'
+            port: 27021

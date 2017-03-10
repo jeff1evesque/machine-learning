@@ -24,18 +24,3 @@ database:
             admin:
                 name: 'admin'
                 password: 'password'
-        cluster:
-            shard1:
-                node1:
-                    host: 'localhost'
-                    port: 27018
-                node2:
-                    host: 'localhost'
-                    port: 27019
-            shard2:
-                node1:
-                    host: 'localhost'
-                    port: 27020
-                node2:
-                    host: 'localhost'
-                    port: 27021

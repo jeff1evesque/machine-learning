@@ -11,6 +11,9 @@ hierarchy:
   - name: 'Webserver configurations'
     path: webserver.yaml
 
+  - name: 'MongoDB specific configuration to override database.yaml'
+    path: "node/%{hostname}.yaml"
+
   - name: 'Database configurations'
     path: database.yaml
 
