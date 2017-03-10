@@ -1,0 +1,41 @@
+##
+## This file contains database related configurations:
+##
+##  - mongodb
+##  - mariadb
+##
+## @host, defined from executed 'docker' command.
+##
+database:
+    mariadb:
+        host: 'localhost'
+        name: 'db_machine_learning'
+        provisioner: 'provisioner'
+        provisioner_password: 'password'
+        username: 'authenticated'
+        password: 'password'
+        tester: 'tester'
+        tester_password: 'password'
+        root_password: 'password'
+        log_path: '/log/database'
+
+    mongodb_cluster:
+        user:
+            admin:
+                name: 'admin'
+                password: 'password'
+        cluster:
+            shard1:
+                node1:
+                    host: 'localhost'
+                    port: 27018
+                node2:
+                    host: 'localhost'
+                    port: 27019
+            shard2:
+                node1:
+                    host: 'localhost'
+                    port: 27020
+                node2:
+                    host: 'localhost'
+                    port: 27021

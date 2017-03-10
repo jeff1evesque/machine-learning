@@ -1,8 +1,6 @@
-## @packages
-#
-#  This file contains versions of installed packages.
-#
-
+##
+## This file contains versions of installed packages.
+##
 development:
     apt:
         inotify-tools: '3.14-1ubuntu1'
