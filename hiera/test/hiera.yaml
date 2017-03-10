@@ -9,16 +9,16 @@ hierarchy:
     path: packages.yaml
 
   - name: 'Webserver configurations'
-    path: webserver.yaml
+    path: test/hiera/webserver.yaml
 
   - name: 'Database configurations'
-    path: database.yaml
+    path: test/hiera/database.yaml
 
   - name: 'Caching configurations'
-    path: cache.yaml
+    path: test/hiera/cache.yaml
 
   - name: 'General application configurations'
-    path: application.yaml
+    path: test/hiera/application.yaml
 
   - name: 'General configurations'
-    path: common.yaml
+    path: test/hiera/common.yaml
