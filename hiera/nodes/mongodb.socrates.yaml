@@ -6,3 +6,11 @@ database:
         node:
             host: 'localhost'
             port: 27019
+            auth: false
+            configsvr: true
+            shardsvr: true
+            replset: 'shard1'
+            verbose: true
+            manage_package_repo: true
+            keyfile: 'foo.txt'
+            key: 1
