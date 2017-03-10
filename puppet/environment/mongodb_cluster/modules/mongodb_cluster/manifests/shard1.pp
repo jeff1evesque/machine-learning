@@ -12,22 +12,6 @@ class mongodb_cluster::shard1 {
     $admin_user     = $hiera_user['admin']['name']
     $admin_password = $hiera_user['admin']['password']
 
-    ## shard 1: add members to the shard
-    mongodb_shard { 'shard1':
-        member => "${plato['host']}:${plato['port']}",
-        keys   => [{
-            $plato['keyfile'] => {'name' => $plato['key1']}
-            $plato['keyfile'] => {'name' => $plato['key2']}
-        }],
-    }
-    mongodb_shard { 'shard1':
-        member => "${aristotle['host']}:${aristotle['port']}",
-        keys   => [{
-            $plato['keyfile'] => {'name' => $plato['key1']}
-            $plato['keyfile'] => {'name' => $plato['key2']}
-        }],
-    }
-
     ## shard 1: master
     class { '::mongodb::server':
         port           => $plato['port'],
@@ -36,8 +20,8 @@ class mongodb_cluster::shard1 {
         configsvr      => true,
         shardsvr       => true,
         replset        => 'shard1',
-        keyfile        => $plato['keyfile'],
-        key            => $plato['key']
+#        keyfile        => $plato['keyfile'],
+#        key            => $plato['key']
         admin_username => $admin_user,
         admin_password => $admin_password,
         replset_config => {
@@ -57,9 +41,25 @@ class mongodb_cluster::shard1 {
         verbose        => true,
         auth           => true,
         replset        => 'shard1',
-        keyfile        => $aristotle['keyfile'],
-        key            => $aristotle['key']
+#        keyfile        => $aristotle['keyfile'],
+#        key            => $aristotle['key']
         admin_username => $admin_user,
         admin_password => $admin_password,
     }
+
+    ## shard 1: add members to the shard
+#    mongodb_shard { 'shard1':
+#        member => "${plato['host']}:${plato['port']}",
+#        keys   => [{
+#            $plato['keyfile'] => {'name' => $plato['key1']}
+#            $plato['keyfile'] => {'name' => $plato['key2']}
+#        }],
+#    }
+#    mongodb_shard { 'shard1':
+#        member => "${aristotle['host']}:${aristotle['port']}",
+#        keys   => [{
+#            $plato['keyfile'] => {'name' => $plato['key1']}
+#            $plato['keyfile'] => {'name' => $plato['key2']}
+#        }],
+#    }
 }

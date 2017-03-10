@@ -35,11 +35,6 @@ mod 'mysql',
   :git => 'git@github.com:puppetlabs/puppetlabs-mysql.git',
   :ref => '3.4.0'
 
-## Install Module: mongodb
-mod 'mongodb',
-  :git => 'git@github.com:puppetlabs/puppetlabs-mongodb.git',
-  :ref => '0.17.0'
-
 ## Install Module: sys (required for heredoc logic in 'start_webserver.pp')
 mod 'sys',
   :git => 'git@github.com:counsyl/puppet-sys.git',

@@ -12,22 +12,6 @@ class mongodb_cluster::shard2 {
     $admin_user     = $hiera_user['admin']['name']
     $admin_password = $hiera_user['admin']['password']
 
-    ## shard 2: add members to the shard
-    mongodb_shard { 'shard2':
-        member => "${socrates['host']}:${socrates['port']}",
-        keys   => [{
-            $socrates['keyfile'] => {'name' => $socrates['key1']}
-            $socrates['keyfile'] => {'name' => $socrates['key2']}
-        }],
-    }
-    mongodb_shard { 'shard2':
-        member => "${confucius['host']}:${confucius['port']}",
-        keys   => [{
-            $confucius['keyfile'] => {'name' => $confucius['key1']}
-            $confucius['keyfile'] => {'name' => $confucius['key2']}
-        }],
-    }
-
     ## shard 2: master
     class { '::mongodb::server':
         port           => $socrates['port'],
@@ -36,8 +20,8 @@ class mongodb_cluster::shard2 {
         configsvr      => true,
         shardsvr       => true,
         replset        => 'shard2',
-        keyfile        => $socrates['keyfile'],
-        key            => $socrates['key']
+#        keyfile        => $socrates['keyfile'],
+#        key            => $socrates['key']
         admin_username => $admin_user,
         admin_password => $admin_password,
         replset_config => {
@@ -57,9 +41,25 @@ class mongodb_cluster::shard2 {
         verbose        => true,
         auth           => true,
         replset        => 'shard2',
-        keyfile        => $confucius['keyfile'],
-        key            => $confucius['key']
+#        keyfile        => $confucius['keyfile'],
+#        key            => $confucius['key']
         admin_username => $admin_user,
         admin_password => $admin_password,
     }
+
+    ## shard 2: add members to the shard
+#    mongodb_shard { 'shard2':
+#        member => "${socrates['host']}:${socrates['port']}",
+#        keys   => [{
+#            $socrates['keyfile'] => {'name' => $socrates['key1']}
+#            $socrates['keyfile'] => {'name' => $socrates['key2']}
+#        }],
+#    }
+#    mongodb_shard { 'shard2':
+#        member => "${confucius['host']}:${confucius['port']}",
+#        keys   => [{
+#            $confucius['keyfile'] => {'name' => $confucius['key1']}
+#            $confucius['keyfile'] => {'name' => $confucius['key2']}
+#        }],
+#    }
 }
