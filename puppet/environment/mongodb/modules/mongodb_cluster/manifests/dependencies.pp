@@ -18,7 +18,6 @@ class mongodb_cluster::dependencies {
     class { '::mongodb::mongos':
         ensure         => true,
         configdb       => "${mongodb_host}:${mongodb_port}",
-        ],
         service_enable => true,
         service_ensure => true,
     }
