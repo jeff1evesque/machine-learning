@@ -30,7 +30,7 @@ Vagrant.configure(2) do |config|
     ## mongodb cluster
     config.vm.define 'aristotle' do |aristotle|
         ## set vagrant environment and hostname
-        environment = 'mongodb_cluster'
+        environment = 'mongodb'
         aristotle.vm.hostname = 'mongodb.aristotle'
 
         ## increase RAM
@@ -82,7 +82,7 @@ Vagrant.configure(2) do |config|
     ## mongodb cluster
     config.vm.define 'socrates' do |socrates|
         ## set vagrant environment and hostname
-        environment = 'mongodb_cluster'
+        environment = 'mongodb'
         socrates.vm.hostname = 'mongodb.socrates'
 
         ## increase RAM
@@ -134,7 +134,7 @@ Vagrant.configure(2) do |config|
     ## mongodb cluster
     config.vm.define 'plato' do |plato|
         ## set vagrant environment and hostname
-        environment = 'mongodb_cluster'
+        environment = 'mongodb'
         plato.vm.hostname = 'mongodb.plato'
 
         ## increase RAM
@@ -186,7 +186,7 @@ Vagrant.configure(2) do |config|
     ## mongodb cluster
     config.vm.define 'confucious' do |confucious|
         ## set vagrant environment and hostname
-        environment = 'mongodb_cluster'
+        environment = 'mongodb'
         confucious.vm.hostname = 'mongodb.confucious'
 
         ## increase RAM
