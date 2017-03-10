@@ -29,9 +29,8 @@ Vagrant.configure(2) do |config|
 
     ## mongodb cluster
     config.vm.define 'aristotle' do |aristotle|
-        ## set vagrant environment and hostname
+        ## set vagrant environment
         environment = 'mongodb'
-        aristotle.vm.hostname = 'mongodb.aristotle'
 
         ## increase RAM
         aristotle.vm.provider 'virtualbox' do |v|
@@ -60,7 +59,12 @@ Vagrant.configure(2) do |config|
         aristotle.r10k.puppet_dir      = "puppet/environment/#{environment}"
         aristotle.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
 
-        ## Custom Manifest: install needed packages
+        ## provision hostname (needed by puppet)
+        aristotle.vm.provision 'shell', inline: <<-SHELL
+            hostname mongodb.aristotle
+        SHELL
+
+        ## provision mongodb
         aristotle.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
             puppet.environment       = environment
@@ -83,7 +87,7 @@ Vagrant.configure(2) do |config|
     config.vm.define 'socrates' do |socrates|
         ## set vagrant environment and hostname
         environment = 'mongodb'
-        socrates.vm.hostname = 'mongodb.socrates'
+        socrates.vm.host_name = 'mongodb.socrates'
 
         ## increase RAM
         socrates.vm.provider 'virtualbox' do |v|
@@ -112,7 +116,12 @@ Vagrant.configure(2) do |config|
         socrates.r10k.puppet_dir      = "puppet/environment/#{environment}"
         socrates.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
 
-        ## Custom Manifest: install needed packages
+        ## provision hostname (needed by puppet)
+        socrates.vm.provision 'shell', inline: <<-SHELL
+            hostname mongodb.socrates
+        SHELL
+
+        ## provision mongodb
         socrates.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
             puppet.environment       = environment
@@ -133,9 +142,8 @@ Vagrant.configure(2) do |config|
 
     ## mongodb cluster
     config.vm.define 'plato' do |plato|
-        ## set vagrant environment and hostname
+        ## set vagrant environment
         environment = 'mongodb'
-        plato.vm.hostname = 'mongodb.plato'
 
         ## increase RAM
         plato.vm.provider 'virtualbox' do |v|
@@ -164,7 +172,12 @@ Vagrant.configure(2) do |config|
         plato.r10k.puppet_dir      = "puppet/environment/#{environment}"
         plato.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
 
-        ## Custom Manifest: install needed packages
+        ## provision hostname (needed by puppet)
+        plato.vm.provision 'shell', inline: <<-SHELL
+            hostname mongodb.plato
+        SHELL
+
+        ## provision mongodb
         plato.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
             puppet.environment       = environment
@@ -185,9 +198,8 @@ Vagrant.configure(2) do |config|
 
     ## mongodb cluster
     config.vm.define 'confucious' do |confucious|
-        ## set vagrant environment and hostname
+        ## set vagrant environment
         environment = 'mongodb'
-        confucious.vm.hostname = 'mongodb.confucious'
 
         ## increase RAM
         confucious.vm.provider 'virtualbox' do |v|
@@ -211,7 +223,12 @@ Vagrant.configure(2) do |config|
         confucious.r10k.puppet_dir      = "puppet/environment/#{environment}"
         confucious.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
 
-        ## Custom Manifest: install needed packages
+        ## provision hostname (needed by puppet)
+        confucious.vm.provision 'shell', inline: <<-SHELL
+            hostname mongodb.confucious
+        SHELL
+
+        ## provision mongodb
         confucious.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
             puppet.environment       = environment
