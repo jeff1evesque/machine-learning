@@ -85,7 +85,7 @@ Vagrant.configure(2) do |config|
 
             ## provision hostname (needed by puppet)
             srv.vm.provision 'shell', inline: <<-SHELL
-                cd current_dir/build/
+                cd current_dir/utility/
                 ./configure-host fqdn host_ip hostname
                 ./configure-puppet fqdn host_ip environment
             SHELL

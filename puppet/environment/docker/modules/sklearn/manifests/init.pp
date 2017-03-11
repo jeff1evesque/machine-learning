@@ -3,6 +3,9 @@
 ###
 
 class sklearn {
+    ## create '/vagrant/build/' directory
+    contain system::build_directory
+
     ## install sklearn dependencies
     contain package::sklearn_dependencies
 
