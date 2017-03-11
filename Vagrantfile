@@ -1,10 +1,14 @@
 ## -*- mode: ruby -*-
 ## vi: set ft=ruby :
 
-## All Vagrant configuration is done below. The "2" in Vagrant.configure
-## configures the configuration version (we support older styles for
-# backwards compatibility). Please don't change it unless you know what
-## you're doing.
+require 'yaml'
+
+current_dir        = File.dirname(File.expand_path(__FILE__))
+aristotle.mongodb  = YAML.load_file("#{current_dir}/hiera/nodes/aristotle.mongodb.yaml")
+socrates.mongodb   = YAML.load_file("#{current_dir}/hiera/nodes/socrates.mongodb.yaml")
+plato.mongodb      = YAML.load_file("#{current_dir}/hiera/nodes/plato.mongodb.yaml")
+confucious.mongodb = YAML.load_file("#{current_dir}/hiera/nodes/confucious.mongodb.yaml")
+
 Vagrant.configure(2) do |config|
     ## Variables (ruby syntax)
     atlas_repo       = 'jeff1evesque'
@@ -29,8 +33,11 @@ Vagrant.configure(2) do |config|
 
     ## mongodb cluster
     config.vm.define 'aristotle' do |aristotle|
-        ## set vagrant environment
-        environment = 'mongodb'
+        ## local variables
+        puppet_env = 'mongodb'
+        fqdn        = aristotle.mongodb['database']['mongodb_cluster']['node']['fqdn']
+        host_ip     = aristotle.mongodb['database']['mongodb_cluster']['node']['ip']
+        hostname    = aristotle.mongodb['database']['mongodb_cluster']['node']['hostname']
 
         ## increase RAM
         aristotle.vm.provider 'virtualbox' do |v|
@@ -38,8 +45,8 @@ Vagrant.configure(2) do |config|
         end
 
         aristotle.trigger.before :up do
-            run "mkdir -p puppet/environment/#{environment}/modules"
-            run "mkdir -p puppet/environment/#{environment}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
         end
 
         aristotle.vm.box                        = "#{atlas_repo}/#{atlas_box}"
@@ -52,26 +59,28 @@ Vagrant.configure(2) do |config|
 
         ## ensure puppet modules directory on the host before 'vagrant up'
         aristotle.trigger.before :up do
-            run "mkdir -p puppet/environment/#{environment}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
         end
 
         ## Run r10k
-        aristotle.r10k.puppet_dir      = "puppet/environment/#{environment}"
-        aristotle.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
+        aristotle.r10k.puppet_dir      = "puppet/environment/#{puppet_env}"
+        aristotle.r10k.puppetfile_path = "puppet/environment/#{puppet_env}/Puppetfile"
 
         ## provision hostname (needed by puppet)
         aristotle.vm.provision 'shell', inline: <<-SHELL
-            hostname mongodb.aristotle
+            cd current_dir/build/
+            ./configure-host fqdn host_ip hostname
+            ./configure-puppet fqdn host_ip environment
         SHELL
 
         ## provision mongodb
         aristotle.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
-            puppet.environment       = environment
-            puppet.manifests_path    = "puppet/environment/#{environment}/manifests"
+            puppet.environment       = puppet_env
+            puppet.manifests_path    = "puppet/environment/#{puppet_env}/manifests"
             puppet.module_path       = [
-                "puppet/environment/#{environment}/modules_contrib",
-                "puppet/environment/#{environment}/modules",
+                "puppet/environment/#{puppet_env}/modules_contrib",
+                "puppet/environment/#{puppet_env}/modules",
             ]
             puppet.manifest_file     = 'site.pp'
             puppet.hiera_config_path = 'hiera.yaml'
@@ -85,9 +94,11 @@ Vagrant.configure(2) do |config|
 
     ## mongodb cluster
     config.vm.define 'socrates' do |socrates|
-        ## set vagrant environment and hostname
-        environment = 'mongodb'
-        socrates.vm.host_name = 'mongodb.socrates'
+        ## local variables
+        puppet_env = 'mongodb'
+        fqdn        = socrates.mongodb['database']['mongodb_cluster']['node']['fqdn']
+        host_ip     = socrates.mongodb['database']['mongodb_cluster']['node']['ip']
+        hostname    = socrates.mongodb['database']['mongodb_cluster']['node']['hostname']
 
         ## increase RAM
         socrates.vm.provider 'virtualbox' do |v|
@@ -95,8 +106,8 @@ Vagrant.configure(2) do |config|
         end
 
         socrates.trigger.before :up do
-            run "mkdir -p puppet/environment/#{environment}/modules"
-            run "mkdir -p puppet/environment/#{environment}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
         end
 
         socrates.vm.box                        = "#{atlas_repo}/#{atlas_box}"
@@ -109,26 +120,27 @@ Vagrant.configure(2) do |config|
 
         ## ensure puppet modules directory on the host before 'vagrant up'
         socrates.trigger.before :up do
-            run "mkdir -p puppet/environment/#{environment}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
         end
 
         ## Run r10k
-        socrates.r10k.puppet_dir      = "puppet/environment/#{environment}"
-        socrates.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
+        socrates.r10k.puppet_dir      = "puppet/environment/#{puppet_env}"
+        socrates.r10k.puppetfile_path = "puppet/environment/#{puppet_env}/Puppetfile"
 
         ## provision hostname (needed by puppet)
         socrates.vm.provision 'shell', inline: <<-SHELL
-            hostname mongodb.socrates
+            hostname socrates
+            echo 'socrates' > /etc/hostname
         SHELL
 
         ## provision mongodb
         socrates.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
-            puppet.environment       = environment
-            puppet.manifests_path    = "puppet/environment/#{environment}/manifests"
+            puppet.environment       = puppet_env
+            puppet.manifests_path    = "puppet/environment/#{puppet_env}/manifests"
             puppet.module_path       = [
-                "puppet/environment/#{environment}/modules_contrib",
-                "puppet/environment/#{environment}/modules",
+                "puppet/environment/#{puppet_env}/modules_contrib",
+                "puppet/environment/#{puppet_env}/modules",
             ]
             puppet.manifest_file     = 'site.pp'
             puppet.hiera_config_path = 'hiera.yaml'
@@ -142,8 +154,11 @@ Vagrant.configure(2) do |config|
 
     ## mongodb cluster
     config.vm.define 'plato' do |plato|
-        ## set vagrant environment
-        environment = 'mongodb'
+        ## local variables
+        puppet_env = 'mongodb'
+        fqdn        = plato.mongodb['database']['mongodb_cluster']['node']['fqdn']
+        host_ip     = plato.mongodb['database']['mongodb_cluster']['node']['ip']
+        hostname    = plato.mongodb['database']['mongodb_cluster']['node']['hostname']
 
         ## increase RAM
         plato.vm.provider 'virtualbox' do |v|
@@ -151,8 +166,8 @@ Vagrant.configure(2) do |config|
         end
 
         plato.trigger.before :up do
-            run "mkdir -p puppet/environment/#{environment}/modules"
-            run "mkdir -p puppet/environment/#{environment}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
         end
 
         plato.vm.box                        = "#{atlas_repo}/#{atlas_box}"
@@ -165,26 +180,27 @@ Vagrant.configure(2) do |config|
 
         ## ensure puppet modules directory on the host before 'vagrant up'
         plato.trigger.before :up do
-            run "mkdir -p puppet/environment/#{environment}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
         end
 
         ## Run r10k
-        plato.r10k.puppet_dir      = "puppet/environment/#{environment}"
-        plato.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
+        plato.r10k.puppet_dir      = "puppet/environment/#{puppet_env}"
+        plato.r10k.puppetfile_path = "puppet/environment/#{puppet_env}/Puppetfile"
 
         ## provision hostname (needed by puppet)
         plato.vm.provision 'shell', inline: <<-SHELL
-            hostname mongodb.plato
+            hostname plato
+            echo 'plato' > /etc/hostname
         SHELL
 
         ## provision mongodb
         plato.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
-            puppet.environment       = environment
-            puppet.manifests_path    = "puppet/environment/#{environment}/manifests"
+            puppet.environment       = puppet_env
+            puppet.manifests_path    = "puppet/environment/#{puppet_env}/manifests"
             puppet.module_path       = [
-                "puppet/environment/#{environment}/modules_contrib",
-                "puppet/environment/#{environment}/modules",
+                "puppet/environment/#{puppet_env}/modules_contrib",
+                "puppet/environment/#{puppet_env}/modules",
             ]
             puppet.manifest_file     = 'site.pp'
             puppet.hiera_config_path = 'hiera.yaml'
@@ -198,8 +214,11 @@ Vagrant.configure(2) do |config|
 
     ## mongodb cluster
     config.vm.define 'confucious' do |confucious|
-        ## set vagrant environment
-        environment = 'mongodb'
+        ## local variables
+        puppet_env = 'mongodb'
+        fqdn       = confucious.mongodb['database']['mongodb_cluster']['node']['fqdn']
+        host_ip    = confucious.mongodb['database']['mongodb_cluster']['node']['ip']
+        hostname   = confucious.mongodb['database']['mongodb_cluster']['node']['hostname']
 
         ## increase RAM
         confucious.vm.provider 'virtualbox' do |v|
@@ -208,7 +227,7 @@ Vagrant.configure(2) do |config|
 
         ## ensure puppet modules directory on the host before 'vagrant up'
         confucious.trigger.before :up do
-            run "mkdir -p puppet/environment/#{environment}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
         end
 
         confucious.vm.box                        = "#{atlas_repo}/#{atlas_box}"
@@ -220,22 +239,23 @@ Vagrant.configure(2) do |config|
         confucious.puppet_install.puppet_version = '4.9.3'
 
         ## Run r10k
-        confucious.r10k.puppet_dir      = "puppet/environment/#{environment}"
-        confucious.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
+        confucious.r10k.puppet_dir      = "puppet/environment/#{puppet_env}"
+        confucious.r10k.puppetfile_path = "puppet/environment/#{puppet_env}/Puppetfile"
 
         ## provision hostname (needed by puppet)
         confucious.vm.provision 'shell', inline: <<-SHELL
-            hostname mongodb.confucious
+            hostname confucious
+            echo 'confucious' > /etc/hostname
         SHELL
 
         ## provision mongodb
         confucious.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
-            puppet.environment       = environment
-            puppet.manifests_path    = "puppet/environment/#{environment}/manifests"
+            puppet.environment       = puppet_env
+            puppet.manifests_path    = "puppet/environment/#{puppet_env}/manifests"
             puppet.module_path       = [
-                "puppet/environment/#{environment}/modules_contrib",
-                "puppet/environment/#{environment}/modules",
+                "puppet/environment/#{puppet_env}/modules_contrib",
+                "puppet/environment/#{puppet_env}/modules",
             ]
             puppet.manifest_file     = 'site.pp'
             puppet.hiera_config_path = 'hiera.yaml'
@@ -249,7 +269,7 @@ Vagrant.configure(2) do |config|
 
     ## general application
     config.vm.define 'main' do |main|
-        environment = 'vagrant'
+        puppet_env = 'vagrant'
 
         ## increase RAM to ensure scrypt doesn't exhaust memory
         main.vm.provider 'virtualbox' do |v|
@@ -258,7 +278,7 @@ Vagrant.configure(2) do |config|
 
         ## ensure puppet modules directory on the host before 'vagrant up'
         main.trigger.before :up do
-            run "mkdir -p puppet/environment/#{environment}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
         end
 
         main.vm.box                        = "#{atlas_repo}/#{atlas_box}"
@@ -276,17 +296,17 @@ Vagrant.configure(2) do |config|
         main.vm.network 'forwarded_port', guest: 443, host: 8585
 
         ## Run r10k
-        main.r10k.puppet_dir      = "puppet/environment/#{environment}"
-        main.r10k.puppetfile_path = "puppet/environment/#{environment}/Puppetfile"
+        main.r10k.puppet_dir      = "puppet/environment/#{puppet_env}"
+        main.r10k.puppetfile_path = "puppet/environment/#{puppet_env}/Puppetfile"
 
         ## Custom Manifest: install needed packages
         main.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
-            puppet.environment       = environment
-            puppet.manifests_path    = "puppet/environment/#{environment}/manifests"
+            puppet.environment       = puppet_env
+            puppet.manifests_path    = "puppet/environment/#{puppet_env}/manifests"
             puppet.module_path       = [
-                "puppet/environment/#{environment}/modules_contrib",
-                "puppet/environment/#{environment}/modules",
+                "puppet/environment/#{puppet_env}/modules_contrib",
+                "puppet/environment/#{puppet_env}/modules",
             ]
             puppet.manifest_file     = 'site.pp'
             puppet.hiera_config_path = 'hiera.yaml'
