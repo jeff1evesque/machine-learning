@@ -1,0 +1,37 @@
+#!/bin/bash
+
+## variables
+##
+## @HOST_FQDN, this needs match the result of running the 'hostnamectl' command
+##     from the environment running the puppetserver / puppetmaster.
+##
+## @HOST_IP, address that corresponds to the puppetserver.
+##
+
+## local variables
+HOST_FQDN="$1"
+HOST_IP="$2"
+PUPPET_ENVIRONMENT="$3"
+
+## get hostname (ubuntu 14.04)
+HOSTNAME=$(hostname)
+
+## create puppet environment directory
+sudo mkdir -p "/etc/puppetlabs/code/environments/$PUPPET_ENVIRONMENT"
+sudo chown vagrant:root "/etc/puppetlabs/code/environments/$PUPPET_ENVIRONMENT"
+
+## set puppet environment (ubuntu 14.04)
+sudo puppet config set environment "$PUPPET_ENVIRONMENT"
+
+## assign puppet agent configuration (ubuntu 14.04)
+sudo puppet config set server "$HOST_FQDN"
+sudo puppet config set certname "$HOSTNAME"
+
+## prevent ssl collision
+##
+## Note: sometimes when ssl certificates exists, errors prevent puppetagents
+##       from connecting with the puppetserver.
+##
+if [ -f /var/lib/puppet/ssl ]; then
+    sudo mv /var/lib/puppet/ssl /var/lib/puppet/ssl.old
+fi

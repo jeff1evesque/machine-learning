@@ -1,0 +1,17 @@
+#!/bin/bash
+
+## local variables
+HOST_FQDN="$1"
+HOST_IP="$2"
+HOST_NAME="$3"
+
+## set fqdn
+printf '%s %s\n' "$HOST_IP" "$HOST_FQDN" | sudo tee -a /etc/hosts
+sudo ifdown eth0 && sudo ifup eth0
+
+## set hostname
+sudo hostname "$HOST_NAME"
+echo "$HOST_NAME" > /etc/hostname
+
+## restart network
+sudo ifdown eth0 && sudo ifup eth0
