@@ -4,10 +4,10 @@
 require 'yaml'
 
 current_dir        = File.dirname(File.expand_path(__FILE__))
-aristotle.mongodb  = YAML.load_file("#{current_dir}/hiera/nodes/aristotle.mongodb.yaml")
-socrates.mongodb   = YAML.load_file("#{current_dir}/hiera/nodes/socrates.mongodb.yaml")
-plato.mongodb      = YAML.load_file("#{current_dir}/hiera/nodes/plato.mongodb.yaml")
-confucious.mongodb = YAML.load_file("#{current_dir}/hiera/nodes/confucious.mongodb.yaml")
+aristotle_mongodb  = YAML.load_file("#{current_dir}/hiera/nodes/aristotle.mongodb.com.yaml")
+socrates_mongodb   = YAML.load_file("#{current_dir}/hiera/nodes/socrates.mongodb.com.yaml")
+plato_mongodb      = YAML.load_file("#{current_dir}/hiera/nodes/plato.mongodb.com.yaml")
+confucious_mongodb = YAML.load_file("#{current_dir}/hiera/nodes/confucious.mongodb.com.yaml")
 
 Vagrant.configure(2) do |config|
     ## Variables (ruby syntax)
@@ -35,9 +35,9 @@ Vagrant.configure(2) do |config|
     config.vm.define 'aristotle' do |aristotle|
         ## local variables
         puppet_env = 'mongodb'
-        fqdn        = aristotle.mongodb['database']['mongodb_cluster']['node']['fqdn']
-        host_ip     = aristotle.mongodb['database']['mongodb_cluster']['node']['ip']
-        hostname    = aristotle.mongodb['database']['mongodb_cluster']['node']['hostname']
+        fqdn        = aristotle_mongodb['database']['mongodb_cluster']['node']['fqdn']
+        host_ip     = aristotle_mongodb['database']['mongodb_cluster']['node']['ip']
+        hostname    = aristotle_mongodb['database']['mongodb_cluster']['node']['hostname']
 
         ## increase RAM
         aristotle.vm.provider 'virtualbox' do |v|
@@ -96,9 +96,9 @@ Vagrant.configure(2) do |config|
     config.vm.define 'socrates' do |socrates|
         ## local variables
         puppet_env = 'mongodb'
-        fqdn        = socrates.mongodb['database']['mongodb_cluster']['node']['fqdn']
-        host_ip     = socrates.mongodb['database']['mongodb_cluster']['node']['ip']
-        hostname    = socrates.mongodb['database']['mongodb_cluster']['node']['hostname']
+        fqdn        = socrates_mongodb['database']['mongodb_cluster']['node']['fqdn']
+        host_ip     = socrates_mongodb['database']['mongodb_cluster']['node']['ip']
+        hostname    = socrates_mongodb['database']['mongodb_cluster']['node']['hostname']
 
         ## increase RAM
         socrates.vm.provider 'virtualbox' do |v|
@@ -156,9 +156,9 @@ Vagrant.configure(2) do |config|
     config.vm.define 'plato' do |plato|
         ## local variables
         puppet_env = 'mongodb'
-        fqdn        = plato.mongodb['database']['mongodb_cluster']['node']['fqdn']
-        host_ip     = plato.mongodb['database']['mongodb_cluster']['node']['ip']
-        hostname    = plato.mongodb['database']['mongodb_cluster']['node']['hostname']
+        fqdn        = plato_mongodb['database']['mongodb_cluster']['node']['fqdn']
+        host_ip     = plato_mongodb['database']['mongodb_cluster']['node']['ip']
+        hostname    = plato_mongodb['database']['mongodb_cluster']['node']['hostname']
 
         ## increase RAM
         plato.vm.provider 'virtualbox' do |v|
@@ -216,9 +216,9 @@ Vagrant.configure(2) do |config|
     config.vm.define 'confucious' do |confucious|
         ## local variables
         puppet_env = 'mongodb'
-        fqdn       = confucious.mongodb['database']['mongodb_cluster']['node']['fqdn']
-        host_ip    = confucious.mongodb['database']['mongodb_cluster']['node']['ip']
-        hostname   = confucious.mongodb['database']['mongodb_cluster']['node']['hostname']
+        fqdn       = confucious_mongodb['database']['mongodb_cluster']['node']['fqdn']
+        host_ip    = confucious_mongodb['database']['mongodb_cluster']['node']['ip']
+        hostname   = confucious_mongodb['database']['mongodb_cluster']['node']['hostname']
 
         ## increase RAM
         confucious.vm.provider 'virtualbox' do |v|
