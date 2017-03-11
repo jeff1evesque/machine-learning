@@ -4,8 +4,11 @@
 database:
     mongodb_cluster:
         node:
-            host: 'localhost'
+            hostname: 'confucious'
+            fqdn: 'confucious.mongodb.com'
+            ip: 192.168.0.33
             port: 27021
+            auth: false
             configsvr: true
             shardsvr: true
             replset: 'shard2'

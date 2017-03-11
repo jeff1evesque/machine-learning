@@ -4,7 +4,9 @@
 database:
     mongodb_cluster:
         node:
-            host: 'localhost'
+            hostname: 'socrates'
+            fqdn: 'socrates.mongodb.com'
+            ip: 192.168.0.31
             port: 27019
             auth: false
             configsvr: true

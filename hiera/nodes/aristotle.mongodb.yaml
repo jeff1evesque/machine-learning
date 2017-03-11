@@ -4,8 +4,11 @@
 database:
     mongodb_cluster:
         node:
-            host: 'localhost'
+            hostname: 'aristotle'
+            fqdn: 'aristotle.mongodb.com'
+            ip: 192.168.0.30
             port: 27018
+            auth: false
             configsvr: true
             shardsvr: true
             replset: 'shard1'

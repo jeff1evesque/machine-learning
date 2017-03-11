@@ -4,8 +4,11 @@
 database:
     mongodb_cluster:
         node:
-            host: 'localhost'
+            hostname: 'plato'
+            fqdn: 'plato.mongodb.com'
+            ip: 192.168.0.32
             port: 27020
+            auth: false
             configsvr: true
             shardsvr: true
             replset: 'shard2'
