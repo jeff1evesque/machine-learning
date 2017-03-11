@@ -20,6 +20,11 @@ database:
         log_path: '/log/database'
 
     mongodb_cluster:
+        server:
+            - aristotle
+            - socrates
+            - plato
+            - confucious
         user:
             admin:
                 name: 'admin'

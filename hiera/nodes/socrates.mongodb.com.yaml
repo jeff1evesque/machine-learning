@@ -8,6 +8,7 @@ database:
             fqdn: 'socrates.mongodb.com'
             ip: 192.168.0.31
             port: 27019
+            memory: '1000'
             auth: false
             configsvr: true
             shardsvr: true
@@ -16,3 +17,9 @@ database:
             manage_package_repo: true
             keyfile: 'foo.txt'
             key: 1
+            atlas_repo: 'jeff1evesque'
+            atlas_box: 'trusty64'
+            atlas_box_version: '1.0.0'
+            atlas_checksum: 'c26da6ba1c169bdc6e9168125ddb0525'
+            atlas_checksum_type: 'md5'
+            puppet_version: '4.9.3'
