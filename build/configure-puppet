@@ -13,17 +13,17 @@ HOST_FQDN="$1"
 HOST_IP="$2"
 PUPPET_ENVIRONMENT="$3"
 
-## get hostname (ubuntu 14.04)
+## get hostname
 HOSTNAME=$(hostname)
 
 ## create puppet environment directory
 sudo mkdir -p "/etc/puppetlabs/code/environments/$PUPPET_ENVIRONMENT"
 sudo chown vagrant:root "/etc/puppetlabs/code/environments/$PUPPET_ENVIRONMENT"
 
-## set puppet environment (ubuntu 14.04)
+## set puppet environment
 sudo puppet config set environment "$PUPPET_ENVIRONMENT"
 
-## assign puppet agent configuration (ubuntu 14.04)
+## assign puppet agent configuration
 sudo puppet config set server "$HOST_FQDN"
 sudo puppet config set certname "$HOSTNAME"
 
