@@ -9,13 +9,13 @@ current_dir    = File.join(File.expand_path(__FILE__))
 db_config      = Pathname(current_dir).join(
     'hiera',
     'nodes',
-    "#{server}.mongodb.com.yaml"
+    'database.yaml'
 )
-mongodb_servers = db_config['database']['mongodb_cluster']['server']
+mongodb_nodes = db_config['database']['mongodb_cluster']['hostname']
 
 ## mongodb: array of configuration files
 mongodb_config = Array.new
-mongodb_servers.map { |server|
+mongodb_nodes.map { |server|
     YAML.load_file("#{current_dir}/hiera/nodes/#{server}.mongodb.com.yaml")
 }
 
