@@ -6,11 +6,10 @@ require 'yaml'
 
 ## mongodb: get server hostnames
 current_dir    = File.join(File.expand_path(__FILE__))
-db_config      = Pathname(current_dir).join(
+db_config      = YAML.load_file(Pathname(current_dir).join(
     'hiera',
-    'nodes',
     'database.yaml'
-)
+))
 mongodb_nodes = db_config['database']['mongodb_cluster']['hostname']
 
 ## mongodb: array of configuration files
@@ -42,7 +41,7 @@ Vagrant.configure(2) do |config|
     mongodb_servers.each do |server|
         config.vm.define server['database']['mongodb_cluster']['node']['hostname'] do |srv|
             ## local variables
-            puppet_env          = 'mongodb'
+            puppet_environment  = 'mongodb'
             node                = srv['database']['mongodb_cluster']['node']
             fqdn                = node['fqdn']
             host_ip             = node['ip']
@@ -55,7 +54,7 @@ Vagrant.configure(2) do |config|
             puppet_version      = node['puppet_version']
 
             ## custom box settings
-            srv.vm.box = "#{atlas_repo}/#{atlas_box}"
+            srv.vm.box                        = "#{atlas_repo}/#{atlas_box}"
             srv.vm.box_download_checksum      = atlas_checksum
             srv.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{box_version}/providers/virtualbox.box"
             srv.vm.box_download_checksum_type = atlas_checksum_type
@@ -67,8 +66,8 @@ Vagrant.configure(2) do |config|
 
             ## ensure puppet directories
             srv.trigger.before :up do
-                run "mkdir -p puppet/environment/#{puppet_env}/modules"
-                run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
+                run "mkdir -p puppet/environment/#{puppet_environment}/modules"
+                run "mkdir -p puppet/environment/#{puppet_environment}/modules_contrib"
             end
 
             ## Ensure puppet installed within guest
@@ -76,14 +75,14 @@ Vagrant.configure(2) do |config|
 
             ## ensure puppet modules directory on the host before 'vagrant up'
             srv.trigger.before :up do
-                run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
+                run "mkdir -p puppet/environment/#{puppet_environment}/modules_contrib"
             end
 
             ## Run r10k
-            srv.r10k.puppet_dir      = "puppet/environment/#{puppet_env}"
-            srv.r10k.puppetfile_path = "puppet/environment/#{puppet_env}/Puppetfile"
+            srv.r10k.puppet_dir      = "puppet/environment/#{puppet_environment}"
+            srv.r10k.puppetfile_path = "puppet/environment/#{puppet_environment}/Puppetfile"
 
-            ## provision hostname (needed by puppet)
+            ## provision host: needed by puppet
             srv.vm.provision 'shell', inline: <<-SHELL
                 cd current_dir/utility/
                 ./configure-host fqdn host_ip hostname
@@ -93,11 +92,11 @@ Vagrant.configure(2) do |config|
             ## provision mongodb
             srv.vm.provision 'puppet' do |puppet|
                 puppet.environment_path  = 'puppet/environment'
-                puppet.environment       = puppet_env
-                puppet.manifests_path    = "puppet/environment/#{puppet_env}/manifests"
+                puppet.environment       = puppet_environment
+                puppet.manifests_path    = "puppet/environment/#{puppet_environment}/manifests"
                 puppet.module_path       = [
-                    "puppet/environment/#{puppet_env}/modules_contrib",
-                    "puppet/environment/#{puppet_env}/modules",
+                    "puppet/environment/#{puppet_environment}/modules_contrib",
+                    "puppet/environment/#{puppet_environment}/modules",
                 ]
                 puppet.manifest_file     = 'site.pp'
                 puppet.hiera_config_path = 'hiera.yaml'
@@ -105,7 +104,7 @@ Vagrant.configure(2) do |config|
 
             ## clean up files on the host after 'vagrant destroy'
             srv.trigger.after :destroy do
-                run 'rm -Rf puppet/environment/*/modules_contrib'
+                run "rm -Rf puppet/environment/#{puppet_environment}/modules_contrib"
             end
         end
     end
@@ -113,10 +112,10 @@ Vagrant.configure(2) do |config|
     ## general application
     config.vm.define 'main' do |main|
         ## local variables
-        atlas_repo  = 'jeff1evesque'
-        atlas_box   = 'trusty64'
-        box_version = '1.0.0'
-        puppet_env  = 'vagrant'
+        atlas_repo          = 'jeff1evesque'
+        atlas_box           = 'trusty64'
+        box_version         = '1.0.0'
+        puppet_environment  = 'vagrant'
 
         ## increase RAM to ensure scrypt doesn't exhaust memory
         main.vm.provider 'virtualbox' do |v|
@@ -125,7 +124,7 @@ Vagrant.configure(2) do |config|
 
         ## ensure puppet modules directory on the host before 'vagrant up'
         main.trigger.before :up do
-            run "mkdir -p puppet/environment/#{puppet_env}/modules_contrib"
+            run "mkdir -p puppet/environment/#{puppet_environment}/modules_contrib"
         end
 
         main.vm.box                        = "#{atlas_repo}/#{atlas_box}"
@@ -143,17 +142,17 @@ Vagrant.configure(2) do |config|
         main.vm.network 'forwarded_port', guest: 443, host: 8585
 
         ## Run r10k
-        main.r10k.puppet_dir      = "puppet/environment/#{puppet_env}"
-        main.r10k.puppetfile_path = "puppet/environment/#{puppet_env}/Puppetfile"
+        main.r10k.puppet_dir      = "puppet/environment/#{puppet_environment}"
+        main.r10k.puppetfile_path = "puppet/environment/#{puppet_environment}/Puppetfile"
 
         ## Custom Manifest: install needed packages
         main.vm.provision 'puppet' do |puppet|
             puppet.environment_path  = 'puppet/environment'
-            puppet.environment       = puppet_env
-            puppet.manifests_path    = "puppet/environment/#{puppet_env}/manifests"
+            puppet.environment       = puppet_environment
+            puppet.manifests_path    = "puppet/environment/#{puppet_environment}/manifests"
             puppet.module_path       = [
-                "puppet/environment/#{puppet_env}/modules_contrib",
-                "puppet/environment/#{puppet_env}/modules",
+                "puppet/environment/#{puppet_environment}/modules_contrib",
+                "puppet/environment/#{puppet_environment}/modules",
             ]
             puppet.manifest_file     = 'site.pp'
             puppet.hiera_config_path = 'hiera.yaml'
@@ -169,7 +168,7 @@ Vagrant.configure(2) do |config|
             run 'rm -Rf interface/static/css'
             run 'rm -Rf interface/static/img'
             run 'rm -Rf interface/static/js'
-            run 'rm -Rf puppet/environment/*/modules_contrib'
+            run "rm -Rf puppet/environment/#{puppet_environment}/modules_contrib"
             run 'rm -Rf src/jsx/node_modules'
             run 'rm -f src/js/.gitignore'
             run 'rm -f src/js/content.js'
