@@ -83,6 +83,8 @@ Vagrant.configure(2) do |config|
             ## provision host: needed by puppet
             srv.vm.provision 'shell', inline: <<-SHELL
                 cd /vagrant/utility
+                apt-get install -y dos2unix
+                dos2unix *
                 ./configure-host fqdn host_ip hostname
                 ./configure-puppet fqdn host_ip environment
             SHELL
