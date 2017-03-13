@@ -20,7 +20,7 @@ database:
         log_path: '/log/database'
 
     mongodb_cluster:
-        hostname:
+        hostnames:
             - aristotle
             - socrates
             - plato
