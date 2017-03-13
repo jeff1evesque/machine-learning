@@ -3,19 +3,22 @@
 
 ## require ruby modules
 require 'yaml'
+require 'pathname'
 
 ## mongodb: get server hostnames
-current_dir    = File.join(File.expand_path(__FILE__))
-db_config      = YAML.load_file(Pathname(current_dir).join(
+current_dir = File.dirname(__FILE__)
+db_config   = YAML.load_file(Pathname(current_dir).join(
     'hiera',
     'database.yaml'
 ))
-mongodb_nodes = db_config['database']['mongodb_cluster']['hostname']
 
-## mongodb: array of configuration files
-mongodb_config = Array.new
-mongodb_nodes.map { |server|
-    YAML.load_file("#{current_dir}/hiera/nodes/#{server}.mongodb.com.yaml")
+## mongodb: combine yaml configurations
+mongodb_nodes = db_config['database']['mongodb_cluster']['hostnames'].map { |hostname|
+    YAML.load_file(Pathname(current_dir).join(
+        'hiera',
+        'nodes',
+        "#{hostname}.mongodb.com.yaml"
+    ))
 }
 
 ## build vagrant instances
@@ -38,36 +41,31 @@ Vagrant.configure(2) do |config|
     end
 
     ## configure mongodb cluster
-    mongodb_servers.each do |server|
+    mongodb_nodes.each do |server|
         config.vm.define server['database']['mongodb_cluster']['node']['hostname'] do |srv|
             ## local variables
             puppet_environment  = 'mongodb'
-            node                = srv['database']['mongodb_cluster']['node']
+            node                = server['database']['mongodb_cluster']['node']
             fqdn                = node['fqdn']
             host_ip             = node['ip']
             hostname            = node['hostname']
             memory              = node['memory']
             atlas_repo          = node['atlas_repo']
             atlas_box           = node['atlas_box']
+            atlas_box_version   = node['atlas_box_version']
             atlas_checksum      = node['atlas_checksum']
             atlas_checksum_type = node['atlas_checksum_type']
             puppet_version      = node['puppet_version']
 
             ## custom box settings
             srv.vm.box                        = "#{atlas_repo}/#{atlas_box}"
+            srv.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{atlas_box_version}/providers/virtualbox.box"
             srv.vm.box_download_checksum      = atlas_checksum
-            srv.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{box_version}/providers/virtualbox.box"
             srv.vm.box_download_checksum_type = atlas_checksum_type
 
             ## increase RAM
             srv.vm.provider 'virtualbox' do |v|
                 v.customize ['modifyvm', :id, '--memory', memory]
-            end
-
-            ## ensure puppet directories
-            srv.trigger.before :up do
-                run "mkdir -p puppet/environment/#{puppet_environment}/modules"
-                run "mkdir -p puppet/environment/#{puppet_environment}/modules_contrib"
             end
 
             ## Ensure puppet installed within guest
@@ -84,7 +82,7 @@ Vagrant.configure(2) do |config|
 
             ## provision host: needed by puppet
             srv.vm.provision 'shell', inline: <<-SHELL
-                cd current_dir/utility/
+                cd /vagrant/utility
                 ./configure-host fqdn host_ip hostname
                 ./configure-puppet fqdn host_ip environment
             SHELL
