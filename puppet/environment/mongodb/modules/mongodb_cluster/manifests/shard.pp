@@ -5,19 +5,18 @@ class mongodb_cluster::shard {
     ## local variables
     $hiera_database    = lookup('database')
     $hiera_mongodb     = lookup('mongodb_node')
-    $mongodb_node      = $hiera_mongodb['mongodb_node']
     $hiera_user        = $hiera_database['mongodb_cluster']['user']
     $admin_user        = $hiera_user['admin']['name']
     $admin_password    = $hiera_user['admin']['password']
-    $mongodb_host      = $mongodb_node['host']
-    $mongodb_port      = $mongodb_node['port']
-    $mongodb_auth      = $mongodb_node['auth']
-    $mongodb_configsvr = $mongodb_node['configsvr']
-    $mongodb_shardsvr = $mongodb_node['shardsvr']
-    $mongodb_replset   = $mongodb_node['replset']
-    $mongodb_verbose   = $mongodb_node['verbose']
-    $mongodb_keyfile   = $mongodb_node['keyfile']
-    $mongodb_key       = $mongodb_node['key']
+    $mongodb_host      = $hiera_mongodb['host']
+    $mongodb_port      = $hiera_mongodb['port']
+    $mongodb_auth      = $hiera_mongodb['auth']
+    $mongodb_configsvr = $hiera_mongodb['configsvr']
+    $mongodb_shardsvr  = $hiera_mongodb['shardsvr']
+    $mongodb_replset   = $hiera_mongodb['replset']
+    $mongodb_verbose   = $hiera_mongodb['verbose']
+    $mongodb_keyfile   = $hiera_mongodb['keyfile']
+    $mongodb_key       = $hiera_mongodb['key']
 
     ## mongodb node
     class { '::mongodb::server':

@@ -4,10 +4,9 @@
 class mongodb_cluster::dependencies {
     ## local variables
     $hiera_mongodb = lookup('mongodb_node')
-    $mongodb_node  = $hiera_mongodb['mongodb_node']
-    $mongodb_host  = $mongodb_node['fqdn']
-    $mongodb_port  = $mongodb_node['port']
-    $mongodb_10gen = $mongodb_node['manage_package_repo']
+    $mongodb_host  = $hiera_mongodb['fqdn']
+    $mongodb_port  = $hiera_mongodb['port']
+    $mongodb_10gen = $hiera_mongodb['manage_package_repo']
 
     ## recommended repository
     class { '::mongodb::globals':
