@@ -4,8 +4,9 @@
 class mongodb_cluster::shard {
     ## local variables
     $hiera_database    = lookup('database')
-    $mongodb_node      = $hiera_database['mongodb_cluster']['node']
-    $hiera_user        = $hiera_mongodb['mongodb_cluster']['user']
+    $hiera_mongodb     = lookup('mongodb_node')
+    $mongodb_node      = $hiera_mongodb['mongodb_node']
+    $hiera_user        = $hiera_database['mongodb_cluster']['user']
     $admin_user        = $hiera_user['admin']['name']
     $admin_password    = $hiera_user['admin']['password']
     $mongodb_host      = $mongodb_node['host']

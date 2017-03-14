@@ -50,10 +50,10 @@ Vagrant.configure(2) do |config|
 
     ## configure mongodb cluster
     mongodb_nodes.each do |server|
-        config.vm.define server['database']['mongodb_cluster']['node']['hostname'] do |srv|
+        config.vm.define server['mongodb_node']['hostname'] do |srv|
             ## local variables
             puppet_environment  = 'mongodb'
-            node                = server['database']['mongodb_cluster']['node']
+            node                = server['mongodb_node']
             puppetserver        = puppetserver_config['puppetserver']
             puppetserver_fqdn   = puppetserver['fqdn']
             puppetserver_ip     = puppetserver['ip']
