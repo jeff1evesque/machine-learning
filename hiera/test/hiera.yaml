@@ -5,6 +5,9 @@ defaults:
   data_hash: yaml_data
 
 hierarchy:
+  - name: 'Puppetserver configurations'
+    path: puppetserver.yaml
+
   - name: 'General build packages'
     path: packages.yaml
 
@@ -12,7 +15,7 @@ hierarchy:
     path: test/hiera/webserver.yaml
 
   - name: 'MongoDB specific configuration to override database.yaml'
-    path: "node/%{hostname}.yaml"
+    path: "nodes/%{::trusted.certname}.yaml"
 
   - name: 'Database configurations'
     path: test/hiera/database.yaml
