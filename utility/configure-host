@@ -31,7 +31,7 @@ sudo sh -c "printf \"$IP\t\t$FQDN\t$HOSTNAME\n\" >> /etc/hosts"
 ## static ip
 sudo sh -c 'printf "auto eth0\n" > /etc/network/interfaces'
 sudo sh -c 'printf "iface eth0 inet static\n" >> /etc/network/interfaces'
-sudo sh -c "printf \"\t\taddress\t%s\n\" >> /etc/network/interfaces"
+sudo sh -c "printf \"\t\taddress\t$IP\n\" >> /etc/network/interfaces"
 sudo sh -c "printf \"\t\tnetmask\t$NETMASK\n\" >> /etc/network/interfaces"
 sudo sh -c "printf \"\t\tgateway\t$GATEWAY\n\" >> /etc/network/interfaces"
 sudo sh -c "printf \"\t\tdns-nameservers\t$NAMESERVER\n\" >> /etc/network/interfaces"
