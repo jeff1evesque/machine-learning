@@ -60,6 +60,7 @@ Vagrant.configure(2) do |config|
             node_hostname       = node['hostname']
             node_fqdn           = node['fqdn']
             node_ip             = node['ip']
+            node_nameserver     = node['nameserver']
             node_netmask        = node['netmask']
             node_memory         = node['memory']
             atlas_repo          = node['atlas_repo']
@@ -98,10 +99,19 @@ Vagrant.configure(2) do |config|
                     cd /vagrant/utility
                     apt-get install -y dos2unix
                     dos2unix *
-                    ./configure-host "$1" "$2" "$4" "$5" "$6" "$7"
+                    ./configure-host "$1" "$2" "$4" "$5" "$6" "$7" "$8"
                     ./configure-puppet "$1" "$3" "$4" "$5"
                 SHELL
-                s.args = [puppetserver_fqdn, puppetserver_ip, puppet_environment, node_hostname, node_fqdn, node_ip, node_netmask]
+                s.args = [
+                    puppetserver_fqdn,
+                    puppetserver_ip,
+                    puppet_environment,
+                    node_hostname,
+                    node_fqdn,
+                    node_ip,
+                    node_nameserver,
+                    node_netmask
+                ]
             end
 
             ## provision mongodb

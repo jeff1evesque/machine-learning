@@ -14,26 +14,27 @@ PUPPETSERVER_IP="$2"
 HOSTNAME="$3"
 FQDN="$4"
 IP="$5"
-NETMASK="$6"
+NAMESERVER="$6"
+NETMASK="$7"
 
 ## local variable: use default if none provided
 if [ -n "$7"]; then
     GATEWAY=$(route -n | grep 'UG[ \t]' | awk '{print $2}')
 else
-    GATEWAY="$7"
+    GATEWAY="$8"
 fi
 
 ## set fqdn
-sudo sh -c "echo \"$PUPPETSERVER_IP		$PUPPETSERVER_FQDN\" >> /etc/hosts"
-sudo sh -c "echo \"$IP		$FQDN	$HOSTNAME\" >> /etc/hosts"
+sudo sh -c "printf \"$PUPPETSERVER_IP\t\t$PUPPETSERVER_FQDN\n\" >> /etc/hosts"
+sudo sh -c "printf \"$IP\t\t$FQDN\t$HOSTNAME\n\" >> /etc/hosts"
 
 ## static ip
-sudo sh -c 'auto lo eth0 > /etc/network/interfaces'
-sudo sh -c 'iface lo inet static >> /etc/network/interfaces'
-sudo sh -c 'iface eth0 inet static >> /etc/network/interfaces'
-sudo sh -c "		address \"$IP\" >> /etc/network/interfaces"
-sudo sh -c "		netmask \"$NETMASK\" >> /etc/network/interfaces"
-sudo sh -c "		gateway \"$GATEWAY\" >> /etc/network/interfaces"
+sudo sh -c 'printf "auto eth0" > /etc/network/interfaces'
+sudo sh -c 'printf "iface eth0 inet static" >> /etc/network/interfaces'
+sudo sh -c "printf \"\t\taddress\t$IP\" >> /etc/network/interfaces"
+sudo sh -c "printf \"\t\tnetmask\t$NETMASK\" >> /etc/network/interfaces"
+sudo sh -c "printf \"\t\tgateway\t$GATEWAY\" >> /etc/network/interfaces"
+sudo sh -c "printf \"\t\tdns-nameservers\t$NAMESERVER\" >> /etc/network/interfaces"
 
 ## set hostname
 sudo hostname "$HOSTNAME"
