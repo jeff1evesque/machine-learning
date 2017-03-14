@@ -57,9 +57,11 @@ Vagrant.configure(2) do |config|
             puppetserver        = puppetserver_config['puppetserver']
             puppetserver_fqdn   = puppetserver['fqdn']
             puppetserver_ip     = puppetserver['ip']
-            hostname            = node['hostname']
-            fqdn                = node['fqdn']
-            memory              = node['memory']
+            node_hostname       = node['hostname']
+            node_fqdn           = node['fqdn']
+            node_ip             = node['ip']
+            node_netmask        = node['netmask']
+            node_memory         = node['memory']
             atlas_repo          = node['atlas_repo']
             atlas_box           = node['atlas_box']
             atlas_box_version   = node['atlas_box_version']
@@ -75,7 +77,7 @@ Vagrant.configure(2) do |config|
 
             ## increase RAM
             srv.vm.provider 'virtualbox' do |v|
-                v.customize ['modifyvm', :id, '--memory', memory]
+                v.customize ['modifyvm', :id, '--memory', node_memory]
             end
 
             ## Ensure puppet installed within guest
@@ -96,10 +98,10 @@ Vagrant.configure(2) do |config|
                     cd /vagrant/utility
                     apt-get install -y dos2unix
                     dos2unix *
-                    ./configure-host "$1" "$2" "$4"
+                    ./configure-host "$1" "$2" "$4" "$5" "$6" "$7"
                     ./configure-puppet "$1" "$3" "$4" "$5"
                 SHELL
-                s.args = [puppetserver_fqdn, puppetserver_ip, puppet_environment, hostname, fqdn]
+                s.args = [puppetserver_fqdn, puppetserver_ip, puppet_environment, node_hostname, node_fqdn, node_ip, node_netmask]
             end
 
             ## provision mongodb
@@ -117,7 +119,7 @@ Vagrant.configure(2) do |config|
 
             ## clean up files on the host after 'vagrant destroy'
             srv.trigger.after :destroy do
-                run "rm -Rf puppet/environment/#{puppet_environment}/modules_contrib"
+                run "rm -rf puppet/environment/#{puppet_environment}/modules_contrib"
             end
         end
     end

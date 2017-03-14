@@ -5,6 +5,7 @@ mongodb_node:
     hostname: 'aristotle'
     fqdn: 'aristotle.mongodb.com'
     ip: 192.168.0.30
+    netmask: 255.255.255.0
     port: 27018
     memory: '1000'
     auth: false

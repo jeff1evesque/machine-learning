@@ -5,6 +5,7 @@ mongodb_node:
     hostname: 'socrates'
     fqdn: 'socrates.mongodb.com'
     ip: 192.168.0.31
+    netmask: 255.255.255.0
     port: 27019
     memory: '1000'
     auth: false

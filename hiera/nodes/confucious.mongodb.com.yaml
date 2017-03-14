@@ -5,6 +5,7 @@ mongodb_node:
     hostname: 'confucious'
     fqdn: 'confucious.mongodb.com'
     ip: 192.168.0.33
+    netmask: 255.255.255.0
     port: 27021
     memory: '1000'
     auth: false

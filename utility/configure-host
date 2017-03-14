@@ -12,9 +12,28 @@
 PUPPETSERVER_FQDN="$1"
 PUPPETSERVER_IP="$2"
 HOSTNAME="$3"
+FQDN="$4"
+IP="$5"
+NETMASK="$6"
+
+## local variable: use default if none provided
+if [ -n "$7"]; then
+    GATEWAY=$(route -n | grep 'UG[ \t]' | awk '{print $2}')
+else
+    GATEWAY="$7"
+fi
 
 ## set fqdn
-sudo sh -c "echo \"$PUPPETSERVER_IP  $PUPPETSERVER_FQDN\" >> /etc/hosts"
+sudo sh -c "echo \"$PUPPETSERVER_IP		$PUPPETSERVER_FQDN\" >> /etc/hosts"
+sudo sh -c "echo \"$IP		$FQDN	$HOSTNAME\" >> /etc/hosts"
+
+## static ip
+sudo sh -c 'auto lo eth0 > /etc/network/interfaces'
+sudo sh -c 'iface lo inet static >> /etc/network/interfaces'
+sudo sh -c 'iface eth0 inet static >> /etc/network/interfaces'
+sudo sh -c "		address \"$IP\" >> /etc/network/interfaces"
+sudo sh -c "		netmask \"$NETMASK\" >> /etc/network/interfaces"
+sudo sh -c "		gateway \"$GATEWAY\" >> /etc/network/interfaces"
 
 ## set hostname
 sudo hostname "$HOSTNAME"
