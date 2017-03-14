@@ -1,17 +1,24 @@
 #!/bin/bash
 
+## variables
+##
+## @PUPPETSERVER_FQDN, this needs match the result of running the 'hostnamectl' command
+##     from the environment running the puppetserver / puppetmaster.
+##
+## @PUPPETSERVER_IP, address that corresponds to the puppetserver.
+##
+
 ## local variables
-HOST_FQDN="$1"
-HOST_IP="$2"
-HOST_NAME="$3"
+PUPPETSERVER_FQDN="$1"
+PUPPETSERVER_IP="$2"
+HOSTNAME="$3"
 
 ## set fqdn
-printf '%s %s\n' "$HOST_IP" "$HOST_FQDN" | sudo tee -a /etc/hosts
-sudo ifdown eth0 && sudo ifup eth0
+sudo sh -c "echo \"$PUPPETSERVER_IP  $PUPPETSERVER_FQDN\" >> /etc/hosts"
 
 ## set hostname
-sudo hostname "$HOST_NAME"
-echo "$HOST_NAME" > /etc/hostname
+sudo hostname "$HOSTNAME"
+sudo sh -c "echo \"$HOSTNAME\" > /etc/hostname"
 
 ## restart network
 sudo ifdown eth0 && sudo ifup eth0

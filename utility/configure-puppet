@@ -2,16 +2,15 @@
 
 ## variables
 ##
-## @HOST_FQDN, this needs match the result of running the 'hostnamectl' command
+## @PUPPETSERVER_FQDN, this needs match the result of running the 'hostnamectl' command
 ##     from the environment running the puppetserver / puppetmaster.
-##
-## @HOST_IP, address that corresponds to the puppetserver.
 ##
 
 ## local variables
-HOST_FQDN="$1"
-HOST_IP="$2"
-PUPPET_ENVIRONMENT="$3"
+PUPPETSERVER_FQDN="$1"
+PUPPET_ENVIRONMENT="$2"
+HOSTNAME="$3"
+FQDN="$4"
 
 ## get hostname
 HOSTNAME=$(hostname)
@@ -21,11 +20,11 @@ sudo mkdir -p "/etc/puppetlabs/code/environments/$PUPPET_ENVIRONMENT"
 sudo chown vagrant:root "/etc/puppetlabs/code/environments/$PUPPET_ENVIRONMENT"
 
 ## set puppet environment
-sudo puppet config set environment "$PUPPET_ENVIRONMENT"
+sudo /opt/puppetlabs/bin/puppet config set environment "$PUPPET_ENVIRONMENT"
 
 ## assign puppet agent configuration
-sudo puppet config set server "$HOST_FQDN"
-sudo puppet config set certname "$HOSTNAME"
+sudo /opt/puppetlabs/bin/puppet config set server "$PUPPETSERVER_FQDN"
+sudo /opt/puppetlabs/bin/puppet config set certname "$FQDN"
 
 ## prevent ssl collision
 ##

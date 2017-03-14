@@ -5,9 +5,17 @@
 require 'yaml'
 require 'pathname'
 
-## mongodb: get server hostnames
+## ruby variables
 current_dir = File.dirname(__FILE__)
-db_config   = YAML.load_file(Pathname(current_dir).join(
+
+## puppetserver
+puppetserver_config = YAML.load_file(Pathname(current_dir).join(
+    'hiera',
+    'puppetserver.yaml'
+))
+
+## mongodb: get server hostnames
+db_config = YAML.load_file(Pathname(current_dir).join(
     'hiera',
     'database.yaml'
 ))
@@ -46,9 +54,11 @@ Vagrant.configure(2) do |config|
             ## local variables
             puppet_environment  = 'mongodb'
             node                = server['database']['mongodb_cluster']['node']
-            fqdn                = node['fqdn']
-            host_ip             = node['ip']
+            puppetserver        = puppetserver_config['puppetserver']
+            puppetserver_fqdn   = puppetserver['fqdn']
+            puppetserver_ip     = puppetserver['ip']
             hostname            = node['hostname']
+            fqdn                = node['fqdn']
             memory              = node['memory']
             atlas_repo          = node['atlas_repo']
             atlas_box           = node['atlas_box']
@@ -81,13 +91,16 @@ Vagrant.configure(2) do |config|
             srv.r10k.puppetfile_path = "puppet/environment/#{puppet_environment}/Puppetfile"
 
             ## provision host: needed by puppet
-            srv.vm.provision 'shell', inline: <<-SHELL
-                cd /vagrant/utility
-                apt-get install -y dos2unix
-                dos2unix *
-                ./configure-host fqdn host_ip hostname
-                ./configure-puppet fqdn host_ip environment
-            SHELL
+            srv.vm.provision 'shell' do |s|
+                s.inline = <<-SHELL
+                    cd /vagrant/utility
+                    apt-get install -y dos2unix
+                    dos2unix *
+                    ./configure-host "$1" "$2" "$4"
+                    ./configure-puppet "$1" "$3" "$4" "$5"
+                SHELL
+                s.args = [puppetserver_fqdn, puppetserver_ip, puppet_environment, hostname, fqdn]
+            end
 
             ## provision mongodb
             srv.vm.provision 'puppet' do |puppet|
