@@ -3,10 +3,9 @@
 ###
 class mariadb::server {
     ## local variables
-    $hiera_general    = lookup('general')
     $hiera_database   = lookup('database')
     $database         = $hiera_database['mariadb']
-    $host             = $hiera_general['host']
+    $db_host          = $database['host']
     $db               = $database['name']
     $db_user          = $database['username']
     $db_pass          = $database['password']
@@ -26,7 +25,7 @@ class mariadb::server {
         package_name  => 'mariadb-server',
         root_password => $root_pass,
         users         => {
-            "${db_user}@${host}"     => {
+            "${db_user}@${db_host}"     => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
@@ -34,7 +33,7 @@ class mariadb::server {
                 max_user_connections     => '0',
                 password_hash            => mysql_password($db_pass),
             },
-            "${provisioner}@${host}" => {
+            "${provisioner}@${db_host}" => {
                 ensure                   => 'present',
                 max_connections_per_hour => '1',
                 max_queries_per_hour     => '0',
@@ -42,7 +41,7 @@ class mariadb::server {
                 max_user_connections     => '1',
                 password_hash            => mysql_password($provisioner_pass),
             },
-            "${tester}@${host}" => {
+            "${tester}@${db_host}" => {
                 ensure                   => 'present',
                 max_connections_per_hour => '0',
                 max_queries_per_hour     => '0',
@@ -52,26 +51,26 @@ class mariadb::server {
             },
         },
         grants        => {
-            "${db_user}@${host}/${db}.*"     => {
+            "${db_user}@${db_host}/${db}.*"     => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'DELETE', 'UPDATE', 'SELECT'],
                 table      => "${db}.*",
-                user       => "${db_user}@${host}",
+                user       => "${db_user}@${db_host}",
             },
-            "${provisioner}@${host}/${db}.*" => {
+            "${provisioner}@${db_host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['INSERT', 'CREATE'],
                 table      => "${db}.*",
-                user       => "${provisioner}@${host}",
+                user       => "${provisioner}@${db_host}",
             },
-            "${tester}@${host}/${db}.*" => {
+            "${tester}@${db_host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
                 privileges => ['SELECT', 'DROP'],
                 table      => "${db}.*",
-                user       => "${tester}@${host}",
+                user       => "${tester}@${db_host}",
             },
         },
         databases     => {
