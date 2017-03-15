@@ -7,7 +7,7 @@ mongodb_node:
     ip: 192.168.0.32
     netmask: 255.255.255.0
     nameserver: 8.8.8.8
-    port: 27020
+    port: 27017
     memory: '1000'
     auth: false
     configsvr: true
