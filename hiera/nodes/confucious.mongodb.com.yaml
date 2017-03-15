@@ -8,10 +8,10 @@ mongodb_node:
     netmask: 255.255.255.0
     nameserver: 8.8.8.8
     port: 27017
-    memory: '1000'
+    memory: '128'
     auth: false
     smallfiles: true
-    configsvr: true
+    configsvr: false
     verbose: true
     manage_package_repo: true
     atlas_repo: 'jeff1evesque'

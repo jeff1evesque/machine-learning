@@ -2,16 +2,16 @@
 ## This file is node specific configuration, with respect to mongodb.
 ##
 mongodb_node:
-    hostname: 'plato'
-    fqdn: 'plato.mongodb.com'
-    ip: 192.168.0.32
+    hostname: 'copernicus'
+    fqdn: 'copernicus.mongodb.com'
+    ip: 192.168.0.37
     netmask: 255.255.255.0
     nameserver: 8.8.8.8
     port: 27017
-    memory: '512'
+    memory: '128'
     auth: false
     smallfiles: true
-    configsvr: false
+    configsvr: true
     verbose: true
     manage_package_repo: true
     atlas_repo: 'jeff1evesque'

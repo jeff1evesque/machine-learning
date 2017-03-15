@@ -2,9 +2,9 @@
 ## This file is node specific configuration, with respect to mongodb.
 ##
 mongodb_node:
-    hostname: 'plato'
-    fqdn: 'plato.mongodb.com'
-    ip: 192.168.0.32
+    hostname: 'laotzu'
+    fqdn: 'laotzu.mongodb.com'
+    ip: 192.168.0.34
     netmask: 255.255.255.0
     nameserver: 8.8.8.8
     port: 27017

@@ -25,6 +25,11 @@ database:
             - socrates
             - plato
             - confucious
+            - laotzu
+            - siddhartha
+            - galileo
+            - copernicus
+            - kepler
         user:
             admin:
                 name: 'admin'
