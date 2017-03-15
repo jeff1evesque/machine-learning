@@ -29,7 +29,7 @@ sudo sh -c "printf \"$PUPPETSERVER_IP\t\t$PUPPETSERVER_FQDN\n\" >> /etc/hosts"
 sudo sh -c "printf \"$IP\t\t$FQDN\t$HOSTNAME\n\" >> /etc/hosts"
 
 ## static ip
-if [ ! -d /vagrant && ! -d /vagrant/.git && ! -d /vagrant/.vagrant ]; then
+if [ ! -d /vagrant ] && [ ! -d /vagrant/.git ] && [ ! -d /vagrant/.vagrant ]; then
     sudo sh -c 'printf "auto eth0\n" > /etc/network/interfaces'
     sudo sh -c 'printf "iface eth0 inet static\n" >> /etc/network/interfaces'
     sudo sh -c "printf \"\t\taddress\t$IP\n\" >> /etc/network/interfaces"
