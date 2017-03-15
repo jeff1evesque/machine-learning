@@ -76,6 +76,9 @@ Vagrant.configure(2) do |config|
             srv.vm.box_download_checksum      = atlas_checksum
             srv.vm.box_download_checksum_type = atlas_checksum_type
 
+            ## assign private network
+            srv.vm.network "private_network", ip: node_ip
+
             ## increase RAM
             srv.vm.provider 'virtualbox' do |v|
                 v.customize ['modifyvm', :id, '--memory', node_memory]
