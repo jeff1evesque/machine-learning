@@ -8,7 +8,7 @@ mongodb_node:
     netmask: 255.255.255.0
     nameserver: 8.8.8.8
     port: 27017
-    memory: '128'
+    memory: '256'
     auth: false
     smallfiles: true
     configsvr: true
