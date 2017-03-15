@@ -8,5 +8,5 @@ contain vagrant
 contain redis
 contain system
 contain compiler
-contain mariadb
+contain mariadb_cluster
 contain webserver

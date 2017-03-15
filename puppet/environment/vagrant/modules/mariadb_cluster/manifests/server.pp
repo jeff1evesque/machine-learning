@@ -1,7 +1,7 @@
 ###
 ### server.pp, create mariadb database, with user permissions.
 ###
-class mariadb::server {
+class mariadb_cluster::server {
     ## local variables
     $hiera_database   = lookup('database')
     $database         = $hiera_database['mariadb']
@@ -14,7 +14,6 @@ class mariadb::server {
     $tester           = $database['tester']
     $tester_pass      = $database['tester_password']
     $root_pass        = $database['root_password']
-    $bind_address     = $database['bind_address']
 
     ## mysql::server: install, and configure mariadb-server
     ##
@@ -79,11 +78,6 @@ class mariadb::server {
                 ensure  => 'present',
                 charset => 'utf8',
             },
-        },
-        override_options => {
-            'mysqld' => {
-                'bind-address' => $bind_address,
-            }
         },
     }
     contain mysql::server
