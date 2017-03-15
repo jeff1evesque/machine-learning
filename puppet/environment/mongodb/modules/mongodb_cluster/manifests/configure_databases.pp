@@ -2,7 +2,7 @@
 ### Configures mongodb databases.
 ###
 
-class mongodb_cluster::databases {
+class mongodb_cluster::configure_databases {
     ## local variables
     $hiera_database = lookup('database')
     $hiera_mongodb  = $hiera_database['mongodb_cluster']

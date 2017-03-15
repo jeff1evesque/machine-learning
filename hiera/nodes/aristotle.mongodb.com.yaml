@@ -10,13 +10,10 @@ mongodb_node:
     port: 27017
     memory: '1000'
     auth: false
+    smallfiles: true
     configsvr: true
-    shardsvr: true
-    replset: 'shard1'
     verbose: true
     manage_package_repo: true
-    keyfile: 'foo.txt'
-    key: 1
     atlas_repo: 'jeff1evesque'
     atlas_box: 'trusty64'
     atlas_box_version: '1.0.0'
