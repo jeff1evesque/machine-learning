@@ -34,3 +34,16 @@ database:
             admin:
                 name: 'admin'
                 password: 'password'
+        replset:
+            csrs:
+                - galileo
+                - copernicus
+                - kepler
+            shard1:
+                - aristotle
+                - socrates
+                - plato
+            shard2:
+                - confucious
+                - laotzu
+                - siddhartha

@@ -10,7 +10,6 @@ mongodb_node:
     port: 27017
     memory: '256'
     auth: false
-    replset: 'csrs'
     smallfiles: true
     configsvr: true
     verbose: true

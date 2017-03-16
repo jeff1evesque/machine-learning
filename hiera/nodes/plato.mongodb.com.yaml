@@ -10,7 +10,6 @@ mongodb_node:
     port: 27017
     memory: '512'
     auth: false
-    replset: 'shard1'
     smallfiles: true
     configsvr: false
     verbose: true
