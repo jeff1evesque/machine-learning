@@ -12,6 +12,7 @@ class mongodb_cluster::install {
     $mongodb_host       = $hiera_mongodb['host']
     $mongodb_port       = $hiera_mongodb['port']
     $mongodb_auth       = $hiera_mongodb['auth']
+    $mongodb_replset    = $hiera_mongodb['replset']
     $mongodb_smallfiles = $hiera_mongodb['smallfiles']
     $mongodb_configsvr  = $hiera_mongodb['configsvr']
     $mongodb_verbose    = $hiera_mongodb['verbose']
@@ -34,5 +35,6 @@ class mongodb_cluster::install {
         configsvr      => $mongodb_configsvr,
         admin_username => $admin_user,
         admin_password => $admin_password,
+        replset        => $mongodb_replset,
     }
 }
