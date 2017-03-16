@@ -1,7 +1,7 @@
 ###
 ### database.pp, create mariadb database structure.
 ###
-class mariadb_cluster::database {
+class mariadb::database {
     include package::pyyaml
 
     ## variables
