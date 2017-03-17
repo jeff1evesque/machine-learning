@@ -9,15 +9,14 @@ import yaml
 
 
 def test_validate_password():
-    with open('/vagrant/hiera/settings.yaml', 'r') as stream:
+    with open('/vagrant/hiera/common.yaml', 'r') as stream:
         try:
             yamlres = yaml.load(stream)
             root = yamlres['general']['root']
             validate_password = root + '/brain/validator/validate_password.py'
+            vp = imp.load_source('validate_password', validate_password)
         except yaml.YAMLError as error:
             print error
-
-    vp = imp.load_source('validate_password', validate_password)
 
     passwords = [
         'abcdefghij123',  # just right
