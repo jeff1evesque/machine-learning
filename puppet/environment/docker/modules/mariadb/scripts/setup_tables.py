@@ -57,9 +57,9 @@ import MySQLdb as DB
 # @argv[2], second passed-in argument from command, or boolean value
 #     indicating if build is vagrant instance.
 if argv[2] == 'true':
-    configuration = argv[1]
+    prepath = argv[1]
 else:
-    configuration = argv[1] + '/test'
+    prepath = argv[1] + '/test'
 
 # yaml configuration: database attributes
 with open(prepath + '/hiera/database.yaml', 'r') as stream:
