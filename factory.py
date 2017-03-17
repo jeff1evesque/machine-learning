@@ -21,16 +21,34 @@ from interface.views import blueprint
 
 # application factory
 def create_app(args={'prefix': '', 'settings': ''}):
-
     # path to hiera
     if args['prefix']:
-        path = 'hiera/' + args['prefix'] + '/hiera/settings.yaml'
+        prepath = 'hiera/' + args['prefix'] + '/hiera/settings.yaml'
     else:
-        path = 'hiera/settings.yaml'
+        prepath = 'hiera/settings.yaml'
 
-    # define configuration
-    with open(path, 'r') as stream:
+    # get values from yaml
+    with open(prepath + '/database.yaml', 'r') as stream:
         settings = yaml.load(stream)
+        database = settings['database']['mariadb']
+
+    with open(prepath + '/common.yaml', 'r') as stream:
+        settings = yaml.load(stream)
+        general = settings['general']
+
+    with open(prepath + '/webserver.yaml', 'r') as stream:
+        settings = yaml.load(stream)
+        webserver = settings['webserver']
+
+    with open(prepath + '/cache.yaml', 'r') as stream:
+        settings = yaml.load(stream)
+        redis = settings['redis']
+
+    with open(prepath + '/application.yaml', 'r') as stream:
+        settings = yaml.load(stream)
+        application = settings['application']
+        crypto = settings['crypto']
+        validate_password = settings['validate_password']
 
     # local variables
     if args['settings']:
@@ -48,40 +66,40 @@ def create_app(args={'prefix': '', 'settings': ''}):
         )
 
     # secret key: used for maintaining flask sessions
-    app.secret_key = settings['application']['security_key']
+    app.secret_key = application['security_key']
 
     # register blueprint
     app.register_blueprint(blueprint)
 
     # local logger: used for this module
-    root = settings['general']['root']
-    LOG_PATH = root + settings['webserver']['flask']['log_path']
-    HANDLER_LEVEL = settings['application']['log_level']
+    root = general['root']
+    LOG_PATH = root + webserver['flask']['log_path']
+    HANDLER_LEVEL = application['log_level']
 
     # flask attributes: accessible across application
     app.config.update(
-        HOST=settings['general']['host'],
-        REDIS_HOST=settings['redis']['host'],
-        REDIS_PORT=settings['redis']['port'],
-        ROOT=settings['general']['root'],
-        DB_HOST=settings['database']['host'],
-        DB_LOG_PATH=settings['database']['log_path'],
-        DB_ML=settings['database']['name'],
-        DB_USERNAME=settings['database']['username'],
-        DB_PASSWORD=settings['database']['password'],
+        HOST=general['host'],
+        REDIS_HOST=redis['host'],
+        REDIS_PORT=redis['port'],
+        ROOT=general['root'],
+        DB_HOST=database['host'],
+        DB_LOG_PATH=database['log_path'],
+        DB_ML=database['name'],
+        DB_USERNAME=database['username'],
+        DB_PASSWORD=database['password'],
         LOG_LEVEL=HANDLER_LEVEL,
-        FLASK_LOG_PATH=settings['webserver']['flask']['log_path'],
-        ERROR_LOG_PATH=settings['application']['error_log_path'],
-        WARNING_LOG_PATH=settings['application']['warning_log_path'],
-        INFO_LOG_PATH=settings['application']['info_log_path'],
-        DEBUG_LOG_PATH=settings['application']['debug_log_path'],
-        MODEL_TYPE=settings['application']['model_type'],
-        SALT_LENGTH=settings['crypto']['salt_length'],
-        SCRYPT_N=settings['crypto']['scrypt_n'],
-        SCRYPT_R=settings['crypto']['scrypt_r'],
-        SCRYPT_P=settings['crypto']['scrypt_p'],
-        PASSWORD_MIN_C=settings['validate_password']['password_min_c'],
-        PASSWORD_MAX_C=settings['validate_password']['password_max_c'],
+        FLASK_LOG_PATH=webserver['flask']['log_path'],
+        ERROR_LOG_PATH=application['error_log_path'],
+        WARNING_LOG_PATH=application['warning_log_path'],
+        INFO_LOG_PATH=application['info_log_path'],
+        DEBUG_LOG_PATH=application['debug_log_path'],
+        MODEL_TYPE=application['model_type'],
+        SALT_LENGTH=crypto['salt_length'],
+        SCRYPT_N=crypto['scrypt_n'],
+        SCRYPT_R=crypto['scrypt_r'],
+        SCRYPT_P=crypto['scrypt_p'],
+        PASSWORD_MIN_C=validate_password['password_min_c'],
+        PASSWORD_MAX_C=validate_password['password_max_c'],
         USER_ID=0
     )
 
