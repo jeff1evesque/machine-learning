@@ -9,7 +9,7 @@ class mariadb::database {
     $root_dir        = $hiera_general['root']
     $vagrant_mounted = $hiera_general['vagrant_implement']
     $environment     = $hiera_general['environment']
-    $module          = 'database'
+    $module          = 'mariadb'
     $environment_dir = "${root_dir}/puppet/environment/${environment}"
     $script_dir      = "${environment_dir}/modules/${module}/scripts"
 
