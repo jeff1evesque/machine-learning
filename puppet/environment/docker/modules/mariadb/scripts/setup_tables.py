@@ -57,12 +57,12 @@ import MySQLdb as DB
 # @argv[2], second passed-in argument from command, or boolean value
 #     indicating if build is vagrant instance.
 if argv[2] == 'true':
-    prepath = argv[1]
+    prepath = argv[1] + '/hiera'
 else:
-    prepath = argv[1] + '/test'
+    prepath = argv[1] + '/hiera/test/hiera'
 
 # yaml configuration: database attributes
-with open(prepath + '/hiera/database.yaml', 'r') as stream:
+with open(prepath + '/database.yaml', 'r') as stream:
     settings = yaml.load(stream)
     database = settings['database']['mariadb']
     db_ml = database['name']
@@ -70,12 +70,12 @@ with open(prepath + '/hiera/database.yaml', 'r') as stream:
     provisioner_password = database['provisioner_password']
 
 # yaml configuration: application attributes
-with open(prepath + '/hiera/application.yaml', 'r') as stream:
+with open(prepath + '/application.yaml', 'r') as stream:
     settings = yaml.load(stream)
     models = settings['application']['model_type']
 
 # yaml configuration: general attributes
-with open(prepath + '/hiera/common.yaml', 'r') as stream:
+with open(prepath + '/common.yaml', 'r') as stream:
     settings = yaml.load(stream)
     models = settings['application']['model_type']
 
