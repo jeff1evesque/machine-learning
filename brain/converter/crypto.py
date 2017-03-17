@@ -24,7 +24,7 @@ def getsalt(app=True, root='/vagrant'):
         salt_length = current_app.config.get('SALT_LENGTH')
         return base64.b64encode(os.urandom(salt_length))
     else:
-        with open(root + "/hiera/settings.yaml", 'r') as stream:
+        with open(root + "/hiera/application.yaml", 'r') as stream:
             try:
                 salt_length = yaml.load(stream)['crypto']['salt_length']
                 return base64.b64encode(os.urandom(salt_length))

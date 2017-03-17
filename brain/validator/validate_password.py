@@ -22,7 +22,7 @@ def load_min(app=True, root='/vagrant'):
         min_c = current_app.config.get('PASSWORD_MIN_C', None)
         return {'password_min_c': min_c, 'error': None}
     else:
-        with open(root + '/hiera/settings.yaml', 'r') as stream:
+        with open(root + '/hiera/application.yaml', 'r') as stream:
             try:
                 yamlres = yaml.load(stream)
                 min_c = yamlres['validate_password']['password_min_c']

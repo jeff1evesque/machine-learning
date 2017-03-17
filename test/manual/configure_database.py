@@ -17,7 +17,7 @@ def configure_database():
     '''
 
     # local variables
-    configuration = '/vagrant/hiera/test/hiera/settings.yaml'
+    configuration = '/vagrant/hiera/test/hiera'
 
     # yaml configuration: database attributes
     with open(configuration + '/database.yaml', 'r') as stream:

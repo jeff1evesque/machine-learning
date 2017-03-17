@@ -23,9 +23,9 @@ from interface.views import blueprint
 def create_app(args={'prefix': '', 'settings': ''}):
     # path to hiera
     if args['prefix']:
-        prepath = 'hiera/' + args['prefix'] + '/hiera/settings.yaml'
+        prepath = 'hiera/' + args['prefix']
     else:
-        prepath = 'hiera/settings.yaml'
+        prepath = 'hiera'
 
     # get values from yaml
     with open(prepath + '/database.yaml', 'r') as stream:
