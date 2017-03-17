@@ -77,7 +77,7 @@ with open(prepath + '/application.yaml', 'r') as stream:
 # yaml configuration: general attributes
 with open(prepath + '/common.yaml', 'r') as stream:
     settings = yaml.load(stream)
-    models = settings['application']['model_type']
+    host = settings['general']['host']
 
 # create connection
 conn = DB.connect(
