@@ -61,183 +61,190 @@ if argv[2] == 'true':
 else:
     prepath = argv[1] + '/test'
 
-# define configuration
-with open(prepath + '/hiera/settings.yaml', 'r') as stream:
-    # local variables
+# yaml configuration: database attributes
+with open(prepath + '/hiera/database.yaml', 'r') as stream:
     settings = yaml.load(stream)
-    models = settings['application']['model_type']
-    host = settings['general']['host']
     database = settings['database']['mariadb']
     db_ml = database['name']
     provisioner = database['provisioner']
     provisioner_password = database['provisioner_password']
 
-    # create connection
-    conn = DB.connect(
-        host,
-        provisioner,
-        provisioner_password,
-        db_ml
-    )
+# yaml configuration: application attributes
+with open(prepath + '/hiera/application.yaml', 'r') as stream:
+    settings = yaml.load(stream)
+    models = settings['application']['model_type']
 
-    with conn:
-        # create cursor object
-        cur = conn.cursor()
+# yaml configuration: general attributes
+with open(prepath + '/hiera/common.yaml', 'r') as stream:
+    settings = yaml.load(stream)
+    models = settings['application']['model_type']
 
-        # create 'tbl_user'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_user (
-                            id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            username VARCHAR (50) NOT NULL,
-                            email VARCHAR (255) NOT NULL,
-                            password VARCHAR (1069) NOT NULL,
-                            datetime_joined DATETIME NOT NULL,
-                            INDEX (username)
-                        );
-                        '''
-        cur.execute(sql_statement)
+# create connection
+conn = DB.connect(
+    host,
+    provisioner,
+    provisioner_password,
+    db_ml
+)
 
-        # create 'tbl_feature_count'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_feature_count (
-                            id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            id_entity INT NOT NULL,
-                            count_features INT NOT NULL,
-                            INDEX (id_size)
-                        );
-                        '''
-        cur.execute(sql_statement)
+with conn:
+    # create cursor object
+    cur = conn.cursor()
 
-        # create 'tbl_dataset_entity'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
-                            id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            title VARCHAR (50) NOT NULL,
-                            model_type INT NOT NULL,
-                            uid_created INT NOT NULL,
-                            datetime_created DATETIME NOT NULL,
-                            uid_modified INT NULL,
-                            datetime_modified DATETIME NULL,
-                            INDEX (id_entity)
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_user'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_user (
+                        id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        username VARCHAR (50) NOT NULL,
+                        email VARCHAR (255) NOT NULL,
+                        password VARCHAR (1069) NOT NULL,
+                        datetime_joined DATETIME NOT NULL,
+                        INDEX (username)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_observation_label'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_observation_label (
-                            id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            id_entity INT NOT NULL,
-                            dep_variable_label VARCHAR(75) NOT NULL,
-                            INDEX (id_label)
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_feature_count'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_feature_count (
+                        id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_entity INT NOT NULL,
+                        count_features INT NOT NULL,
+                        INDEX (id_size)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_svm_data'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_svm_data (
-                            id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            id_entity INT NOT NULL,
-                            dep_variable_label VARCHAR (50) NOT NULL,
-                            indep_variable_label VARCHAR (50) NOT NULL,
-                            indep_variable_value FLOAT NOT NULL,
-                            INDEX (id_value)
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_dataset_entity'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
+                        id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        title VARCHAR (50) NOT NULL,
+                        model_type INT NOT NULL,
+                        uid_created INT NOT NULL,
+                        datetime_created DATETIME NOT NULL,
+                        uid_modified INT NULL,
+                        datetime_modified DATETIME NULL,
+                        INDEX (id_entity)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_svr_data'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_svr_data (
-                            id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            id_entity INT NOT NULL,
-                            criterion VARCHAR (50) NOT NULL,
-                            indep_variable_label VARCHAR (50) NOT NULL,
-                            indep_variable_value FLOAT NOT NULL,
-                            INDEX (id_value)
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_observation_label'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_observation_label (
+                        id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_entity INT NOT NULL,
+                        dep_variable_label VARCHAR(75) NOT NULL,
+                        INDEX (id_label)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_model_type'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_model_type (
-                            id_model INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            model VARCHAR (50) NOT NULL,
-                            INDEX (id_model)
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_svm_data'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svm_data (
+                        id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_entity INT NOT NULL,
+                        dep_variable_label VARCHAR (50) NOT NULL,
+                        indep_variable_label VARCHAR (50) NOT NULL,
+                        indep_variable_value FLOAT NOT NULL,
+                        INDEX (id_value)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # populate 'tbl_model_type'
-        sql_statement = '''\
-                        INSERT INTO tbl_model_type (model) VALUES (%s);
-                        '''
-        cur.executemany(sql_statement, models)
+    # create 'tbl_svr_data'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svr_data (
+                        id_value INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_entity INT NOT NULL,
+                        criterion VARCHAR (50) NOT NULL,
+                        indep_variable_label VARCHAR (50) NOT NULL,
+                        indep_variable_value FLOAT NOT NULL,
+                        INDEX (id_value)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_svm_results'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_svm_results (
-                            id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            title VARCHAR (50) NOT NULL,
-                            result VARCHAR (30) NOT NULL,
-                            uid_created INT NOT NULL,
-                            datetime_created DATETIME NOT NULL,
-                            INDEX (title)
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_model_type'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_model_type (
+                        id_model INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        model VARCHAR (50) NOT NULL,
+                        INDEX (id_model)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_svm_results_class'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_svm_results_class (
-                            id_class INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            id_result INT NOT NULL,
-                            class VARCHAR (50) NOT NULL
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # populate 'tbl_model_type'
+    sql_statement = '''\
+                    INSERT INTO tbl_model_type (model) VALUES (%s);
+                    '''
+    cur.executemany(sql_statement, models)
 
-        # create 'tbl_svm_results_probability'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_svm_results_probability (
-                            id_probability INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            id_result INT NOT NULL,
-                            probability FLOAT NOT NULL
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_svm_results'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svm_results (
+                        id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        title VARCHAR (50) NOT NULL,
+                        result VARCHAR (30) NOT NULL,
+                        uid_created INT NOT NULL,
+                        datetime_created DATETIME NOT NULL,
+                        INDEX (title)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_svm_results_decision_function'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_svm_results_decision_function (
-                            id_decision_function INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            id_result INT NOT NULL,
-                            decision_function FLOAT NOT NULL
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_svm_results_class'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svm_results_class (
+                        id_class INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_result INT NOT NULL,
+                        class VARCHAR (50) NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_svr_results'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_svr_results (
-                            id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            title VARCHAR (50) NOT NULL,
-                            result VARCHAR (30) NOT NULL,
-                            uid_created INT NOT NULL,
-                            datetime_created DATETIME NOT NULL,
-                            INDEX (title)
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_svm_results_probability'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svm_results_probability (
+                        id_probability INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_result INT NOT NULL,
+                        probability FLOAT NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
 
-        # create 'tbl_svr_results_r2'
-        sql_statement = '''\
-                        CREATE TABLE IF NOT EXISTS tbl_svr_results_r2 (
-                            id_r2 INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                            id_result INT NOT NULL,
-                            r2 FLOAT NOT NULL
-                        );
-                        '''
-        cur.execute(sql_statement)
+    # create 'tbl_svm_results_decision_function'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svm_results_decision_function (
+                        id_decision_function INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_result INT NOT NULL,
+                        decision_function FLOAT NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # create 'tbl_svr_results'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svr_results (
+                        id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        title VARCHAR (50) NOT NULL,
+                        result VARCHAR (30) NOT NULL,
+                        uid_created INT NOT NULL,
+                        datetime_created DATETIME NOT NULL,
+                        INDEX (title)
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # create 'tbl_svr_results_r2'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svr_results_r2 (
+                        id_r2 INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_result INT NOT NULL,
+                        r2 FLOAT NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
