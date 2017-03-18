@@ -50,6 +50,7 @@ install:
 ##     - https://github.com/rodjek/puppet-lint/issues/410
 ##
 script:
+  - CURRENT_DIRECTORY=$(pwd)
   - flake8 . --max-line-length=100
   - jshint --verbose src/js/*.js --config test/lint/jshint.json --exclude-path test/lint/.jshintignore
   - jscs . --config test/lint/.jscs.json
@@ -74,8 +75,9 @@ script:
   - val=$(find documentation -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
 
   # run unit tests
-  - cd "$PROJECT_ROOT"/utility
+  - cd utility
   - ./unit-tests "$PROJECT_ROOT"
+  - cd "$CURRENT_DIRECTORY"
 
 ## post build: the following commands are run after a successful build.
 ##
