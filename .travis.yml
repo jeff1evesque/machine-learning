@@ -7,14 +7,8 @@ env:
   global:
     - PROJECT_ROOT='/var/machine-learning'
 
-## build docker, install puppet (i.e. puppet parser validate)
-##
-## Note: we install docker per dockers official documentation:
-##
-##       https://docs.docker.com/engine/installation/linux/ubuntu/
-##
+## install puppet (i.e. puppet parser validate)
 before_install:
-  # install puppet
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
@@ -25,8 +19,6 @@ before_install:
 ##
 ## @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
 ##
-## Note: unit testing is performed within the docker container, which is
-##        defined from the Dockerfile.
 install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
   - pip install flake8==2.5.4
@@ -49,7 +41,7 @@ install:
   - pip install restructuredtext_lint==0.17.2
   - pip install python-coveralls==2.9.0
 
-## implement linting / unit tests
+## linting and unit test
 ##
 ## @puppet-lint, the following issue needs to be checked if it has been
 ##     resolved, so the '--no-ensure_first_param-check' abusive flag
@@ -57,15 +49,7 @@ install:
 ##
 ##     - https://github.com/rodjek/puppet-lint/issues/410
 ##
-## @docker run:
-##     -d, run container in background and print container ID
-##     -t, allocate pseudo-tty instead of default tty to running container
-##
-## Note: unit testing is performed within the docker container, which is
-##       defined from the Dockerfile.
-##
 script:
-  # lint codebase
   - flake8 . --max-line-length=100
   - jshint --verbose src/js/*.js --config test/lint/jshint.json --exclude-path test/lint/.jshintignore
   - jscs . --config test/lint/.jscs.json

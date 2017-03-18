@@ -9,6 +9,11 @@ if [[ ! $1 ]]; then
 fi
 
 ## install docker to specific version
+##
+## Note: we install docker per dockers official documentation:
+##
+##       https://docs.docker.com/engine/installation/linux/ubuntu/
+##
 if [[ ! $(apt-cache policy docker-ce | grep $DOCKER_VERSION) ]]; then
     sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
@@ -24,6 +29,11 @@ docker build -f "$PROJECT_ROOT/database.dockerfile" -t container-database .
 docker build -f "$PROJECT_ROOT/webserver.dockerfile" -t container-webserver .
 
 ## run unit test(s): return 1 if match found (result negated)
+##
+## @docker run:
+##     -d, run container in background and print container ID
+##     -t, allocate pseudo-tty instead of default tty to running container
+##
 docker network create -d bridge app_nw $$ \
     docker run --name base --net=app_nw -d container-default && \
     docker run --name redis --net=app_nw -d container-redis && \
