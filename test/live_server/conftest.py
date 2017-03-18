@@ -20,7 +20,7 @@ from factory import create_app  # noqa
 def app():
     try:
         args = {
-            'prefix': 'test',
+            'prefix': 'test/hiera',
             'settings': ''
         }
         app = create_app(args)
