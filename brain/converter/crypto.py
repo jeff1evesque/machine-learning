@@ -57,7 +57,7 @@ def getscryptparams(app=True, root='/vagrant'):
         p = current_app.config.get('SCRYPT_P')
         return pow(2, N), r, p
     else:
-        with open(root + "/hiera/settings.yaml", 'r') as stream:
+        with open(root + "/hiera/application.yaml", 'r') as stream:
             try:
                 yamlstream = yaml.load(stream)
                 N = yamlstream['crypto']['scrypt_n']
