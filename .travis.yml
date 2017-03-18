@@ -119,14 +119,6 @@ script:
   #
   - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage.docker
 
-  # check exit code: 'docker exec' will fail if the container has an exit code
-  - docker exec -it webserver echo "'docker exec' only works on an active running container"
-  - docker exec -it database echo "'docker exec' only works on an active running container"
-  - docker exec -it redis echo "'docker exec' only works on an active running container"
-  
-  # list all containers
-  - docker ps -a
-
 ## post build: the following commands are run after a successful build.
 ##
 ## Note: more information regarding the coverage-coverall implementation:
