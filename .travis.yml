@@ -74,7 +74,7 @@ script:
   - val=$(find documentation -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
 
   # run unit tests
-  - (cd utility && sudo ./unit-tests "$PROJECT_ROOT")
+  - (cd "$PROJECT_ROOT/utility" && sudo ./unit-tests "$PROJECT_ROOT")
 
 ## post build: the following commands are run after a successful build.
 ##
