@@ -34,7 +34,7 @@ docker build -f "$PROJECT_ROOT/webserver.dockerfile" -t container-webserver .
 ##     -d, run container in background and print container ID
 ##     -t, allocate pseudo-tty instead of default tty to running container
 ##
-docker network create -d bridge app_nw $$ \
+docker network create -d bridge app_nw && \
     docker run --name base --net=app_nw -d container-default && \
     docker run --name redis --net=app_nw -d container-redis && \
     docker run --name webserver --net=app_nw -d container-webserver run && \
