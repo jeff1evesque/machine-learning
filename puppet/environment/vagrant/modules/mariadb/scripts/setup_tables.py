@@ -59,7 +59,7 @@ import MySQLdb as DB
 if argv[2] == 'true':
     prepath = argv[1] + '/hiera'
 else:
-    prepath = argv[1] + '/test/hiera'
+    prepath = argv[1] + '/hiera/test/hiera'
 
 # yaml configuration: database attributes
 with open(prepath + '/database.yaml', 'r') as stream:

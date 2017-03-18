@@ -5,7 +5,7 @@ class mariadb::server {
     ## local variables
     $hiera_database   = lookup('database')
     $database         = $hiera_database['mariadb']
-    $db_host          = $database['host']
+    $db_host          = $database['allow_host']
     $db               = $database['name']
     $db_user          = $database['username']
     $db_pass          = $database['password']
