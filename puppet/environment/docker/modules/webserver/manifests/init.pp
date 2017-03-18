@@ -5,8 +5,8 @@
 
 class webserver {
     ## install mariadb
-    contain database::client
-    contain database::bindings
+    contain mariadb::client
+    contain mariadb::bindings
 
     ## install redis client
     contain package::redis_client

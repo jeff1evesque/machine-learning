@@ -5,8 +5,26 @@ defaults:
   data_hash: yaml_data
 
 hierarchy:
+  - name: 'Puppetserver configurations'
+    path: puppetserver.yaml
+
   - name: 'General build packages'
     path: packages.yaml
 
-  - name: 'General application settings'
-    path: settings.yaml
+  - name: 'Webserver configurations'
+    path: webserver.yaml
+
+  - name: 'MongoDB specific configuration to override database.yaml'
+    path: "nodes/%{::trusted.certname}.yaml"
+
+  - name: 'Database configurations'
+    path: database.yaml
+
+  - name: 'Caching configurations'
+    path: cache.yaml
+
+  - name: 'General application configurations'
+    path: application.yaml
+
+  - name: 'General configurations'
+    path: common.yaml

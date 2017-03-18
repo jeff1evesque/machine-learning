@@ -1,0 +1,10 @@
+##
+## This file contains general configurations.
+##
+general:
+    environment: 'vagrant'
+    vagrant_implement: true
+    root: '/vagrant'
+    host: 'localhost'
+    user: 'vagrant'
+    group: 'vagrant'

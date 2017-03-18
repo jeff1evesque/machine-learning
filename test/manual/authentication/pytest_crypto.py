@@ -9,16 +9,15 @@ import yaml
 
 
 def test_hashing():
-    with open('/vagrant/hiera/settings.yaml', 'r') as stream:
+    with open('/vagrant/hiera/common.yaml', 'r') as stream:
         try:
             yamlres = yaml.load(stream)
             root = yamlres['general']['root']
             cryptopath = root + '/brain/converter/crypto.py'
-
+            crypto = imp.load_source('crypto', cryptopath)
         except yaml.YAMLError as error:
             print error
 
-    crypto = imp.load_source('crypto', cryptopath)
     passwords = ['blue', 'red', 'green', 'yellow']
 
     for p in passwords:

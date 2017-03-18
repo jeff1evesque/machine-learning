@@ -1,0 +1,6 @@
+##
+## This file contains the puppetserver configurations.
+##
+puppetserver:
+    fqdn: 'puppetserver.com'
+    ip: '192.168.0.40'

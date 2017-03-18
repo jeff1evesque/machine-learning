@@ -1,0 +1,8 @@
+##
+## This file contains caching related configurations.
+##
+redis:
+    bind_address: '127.0.0.1'
+    host: 'localhost'
+    port: 6379
+    path: '/etc/redis/redis.conf'

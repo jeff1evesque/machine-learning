@@ -1,0 +1,21 @@
+##
+## This file contains database related configurations:
+##
+##  - mariadb
+##
+## @host, defined from executed 'docker' command.
+##
+database:
+    mariadb:
+        bind_address: '0.0.0.0'
+        host: 'database'
+        allow_host: '%'
+        name: 'db_machine_learning'
+        provisioner: 'provisioner'
+        provisioner_password: 'password'
+        username: 'authenticated'
+        password: 'password'
+        tester: 'tester'
+        tester_password: 'password'
+        root_password: 'password'
+        log_path: '/log/database'

@@ -1,0 +1,22 @@
+##
+## This file is node specific configuration, with respect to mongodb.
+##
+mongodb_node:
+    hostname: 'confucious'
+    fqdn: 'confucious.mongodb.com'
+    ip: 192.168.0.33
+    netmask: 255.255.255.0
+    nameserver: 8.8.8.8
+    port: 27017
+    memory: '512'
+    auth: false
+    smallfiles: true
+    configsvr: false
+    verbose: true
+    manage_package_repo: true
+    atlas_repo: 'jeff1evesque'
+    atlas_box: 'trusty64'
+    atlas_box_version: '1.0.0'
+    atlas_checksum: 'c26da6ba1c169bdc6e9168125ddb0525'
+    atlas_checksum_type: 'md5'
+    puppet_version: '4.9.3'
