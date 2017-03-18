@@ -8,7 +8,7 @@
 database:
     mariadb:
         bind_address: '0.0.0.0'
-        host: '%'
+        host: 'localhost'
         name: 'db_machine_learning'
         provisioner: 'provisioner'
         provisioner_password: 'password'
