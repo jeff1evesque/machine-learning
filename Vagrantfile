@@ -147,7 +147,7 @@ Vagrant.configure(2) do |config|
 
         ## increase RAM to ensure scrypt doesn't exhaust memory
         main.vm.provider 'virtualbox' do |v|
-            v.customize ['modifyvm', :id, '--memory', '6000']
+            v.customize ['modifyvm', :id, '--memory', '1024']
         end
 
         ## ensure puppet modules directory on the host before 'vagrant up'
