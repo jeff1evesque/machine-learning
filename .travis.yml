@@ -76,6 +76,7 @@ script:
 
   # run unit tests
   - cd utility
+  - chmod u+x unit-tests
   - ./unit-tests "$PROJECT_ROOT"
   - cd "$CURRENT_DIRECTORY"
 
