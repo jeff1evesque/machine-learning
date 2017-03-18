@@ -57,7 +57,7 @@ import MySQLdb as DB
 # @argv[2], second passed-in argument from command, or boolean value
 #     indicating if build is vagrant instance.
 if argv[2] == 'true':
-    prepath = argv[1]
+    prepath = argv[1] + '/hiera'
 else:
     prepath = argv[1] + '/test/hiera'
 
