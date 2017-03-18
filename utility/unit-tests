@@ -1,0 +1,42 @@
+#!/bin/bash
+
+## local variables
+DOCKER_VERSION=17.03.0~ce-0~ubuntu-trusty
+PROJECT_ROOT="$1"
+
+if [[ ! $1 ]]; then
+    PROJECT_ROOT='/vagrant'
+fi
+
+## install docker to specific version
+if [[ ! $(apt-cache policy docker-ce | grep $DOCKER_VERSION) ]]; then
+    sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
+    curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo apt-get -y update
+    sudo apt-get -y install docker-ce="$DOCKER_VERSION"
+fi
+
+## build docker container(s)
+docker build -f default.dockerfile -t container-default .
+docker build -f redis.dockerfile -t container-redis .
+docker build -f database.dockerfile -t container-database .
+docker build -f webserver.dockerfile -t container-webserver .
+
+## run unit test(s): return 1 if match found (result negated)
+docker network create -d bridge app_nw $$ \
+    docker run --name base --net=app_nw -d container-default && \
+    docker run --name redis --net=app_nw -d container-redis && \
+    docker run --name webserver --net=app_nw -d container-webserver run && \
+    docker run --name database --net=app_nw -d container-database && \
+    docker run --name webserver-pytest --net=app_nw -it container-webserver test  > pytest.log
+cat pytest.log
+! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log
+
+## acquire coverage results
+##
+## Note: more information regarding the '.coverage.docker' naming convention:
+##
+##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
+##
+docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT/".coverage.docker
