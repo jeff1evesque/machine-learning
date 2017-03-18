@@ -18,10 +18,10 @@ if [[ ! $(apt-cache policy docker-ce | grep $DOCKER_VERSION) ]]; then
 fi
 
 ## build docker container(s)
-docker build -f default.dockerfile -t container-default .
-docker build -f redis.dockerfile -t container-redis .
-docker build -f database.dockerfile -t container-database .
-docker build -f webserver.dockerfile -t container-webserver .
+docker build -f "$PROJECT_ROOT/default.dockerfile" -t container-default .
+docker build -f "$PROJECT_ROOT/redis.dockerfile" -t container-redis .
+docker build -f "$PROJECT_ROOT/database.dockerfile" -t container-database .
+docker build -f "$PROJECT_ROOT/webserver.dockerfile" -t container-webserver .
 
 ## run unit test(s): return 1 if match found (result negated)
 docker network create -d bridge app_nw $$ \
