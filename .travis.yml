@@ -45,7 +45,7 @@ install:
 ##     - https://github.com/rodjek/puppet-lint/issues/410
 ##
 script:
-  - CURRENT_DIRECTORY=$(pwd)
+  - PROJECT_DIRECTORY=$(pwd)
   - flake8 . --max-line-length=100
   - jshint --verbose src/js/*.js --config test/lint/jshint.json --exclude-path test/lint/.jshintignore
   - jscs . --config test/lint/.jscs.json
@@ -72,8 +72,8 @@ script:
   # run unit tests
   - cd utility
   - chmod u+x unit-tests
-  - ./unit-tests "$CURRENT_DIRECTORY"
-  - cd "$CURRENT_DIRECTORY"
+  - ./unit-tests "$PROJECT_DIRECTORY"
+  - cd "$PROJECT_DIRECTORY"
 
 ## post build: the following commands are run after a successful build.
 ##
