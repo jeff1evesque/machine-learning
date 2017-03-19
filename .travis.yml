@@ -18,7 +18,7 @@ install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
   - pip install flake8==2.5.4
   - npm install -g jshint@2.9.4
-  - npm install -g jscs@2.11.0
+  - npm install -g jscs@3.0.7
   - gem install scss_lint -v 0.38.0
   - npm install -g bootlint@0.14.2
   - gem install puppet-lint -v 1.1.0
