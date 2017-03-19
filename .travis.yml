@@ -2,11 +2,6 @@ language: python
 dist: trusty
 sudo: required
 
-## environment variables
-env:
-  global:
-    - PROJECT_ROOT='/var/machine-learning'
-
 ## install puppet (i.e. puppet parser validate)
 before_install:
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
@@ -77,7 +72,7 @@ script:
   # run unit tests
   - cd utility
   - chmod u+x unit-tests
-  - ./unit-tests "$PROJECT_ROOT"
+  - ./unit-tests "$CURRENT_DIRECTORY"
   - cd "$CURRENT_DIRECTORY"
 
 ## post build: the following commands are run after a successful build.
