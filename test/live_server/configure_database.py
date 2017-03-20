@@ -23,9 +23,10 @@ def configure_database():
     # yaml configuration: database attributes
     with open(prepath + '/database.yaml', 'r') as stream:
         settings = yaml.load(stream)
-        db_ml = settings['database']['name']
-        tester = settings['database']['tester']
-        tester_password = settings['database']['tester_password']
+        database = settings['database']['mariadb']
+        db_ml = database['name']
+        tester = database['tester']
+        tester_password = database['tester_password']
 
     # yaml configuration: general attributes
     with open(prepath + '/common.yaml', 'r') as stream:
