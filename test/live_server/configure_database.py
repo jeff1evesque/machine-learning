@@ -17,7 +17,8 @@ def configure_database():
     '''
 
     # local variables
-    configuration = '/vagrant/hiera/test/hiera'
+    root = '/var/machine-learning'
+    prepath = root + '/hiera/test/hiera'
 
     # yaml configuration: database attributes
     with open(configuration + '/database.yaml', 'r') as stream:

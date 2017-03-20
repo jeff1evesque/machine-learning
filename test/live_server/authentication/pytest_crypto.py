@@ -9,10 +9,12 @@ import yaml
 
 
 def test_hashing():
-    with open('/vagrant/hiera/common.yaml', 'r') as stream:
+    root = '/var/machine-learning'
+    prepath = root + '/hiera/test/hiera'
+
+    with open(prepath + '/common.yaml', 'r') as stream:
         try:
             yamlres = yaml.load(stream)
-            root = yamlres['general']['root']
             cryptopath = root + '/brain/converter/crypto.py'
             crypto = imp.load_source('crypto', cryptopath)
         except yaml.YAMLError as error:
