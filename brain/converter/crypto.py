@@ -11,7 +11,7 @@ import yaml
 import scrypt
 
 
-def getsalt(app=True, root='/vagrant'):
+def getsalt(app=True, root='/var/machine-learning'):
     '''
 
     This method returns the salt.
@@ -24,7 +24,7 @@ def getsalt(app=True, root='/vagrant'):
         salt_length = current_app.config.get('SALT_LENGTH')
         return base64.b64encode(os.urandom(salt_length))
     else:
-        with open(root + "/hiera/application.yaml", 'r') as stream:
+        with open(root + '/hiera/application.yaml', 'r') as stream:
             try:
                 salt_length = yaml.load(stream)['crypto']['salt_length']
                 return base64.b64encode(os.urandom(salt_length))
@@ -32,7 +32,7 @@ def getsalt(app=True, root='/vagrant'):
                 return base64.b64encode(os.urandom(32))
 
 
-def getscryptparams(app=True, root='/vagrant'):
+def getscryptparams(app=True, root='/var/machine-learning'):
     '''
 
     This method returns the parameters N,r,p for the scrypt function.
@@ -57,7 +57,7 @@ def getscryptparams(app=True, root='/vagrant'):
         p = current_app.config.get('SCRYPT_P')
         return pow(2, N), r, p
     else:
-        with open(root + "/hiera/application.yaml", 'r') as stream:
+        with open(root + '/hiera/application.yaml', 'r') as stream:
             try:
                 yamlstream = yaml.load(stream)
                 N = yamlstream['crypto']['scrypt_n']
@@ -81,8 +81,8 @@ def hashpass(password, app=True):
     N, r, p = getscryptparams(app=app)
     try:
         hashed = scrypt.hash(password, salt, N=N, r=r, p=p, buflen=512)
-        hashed = hashed.encode("hex")
-        return hashed + "$" + salt
+        hashed = hashed.encode('hex')
+        return hashed + '$' + salt
     except scrypt.error:
         return False
 
@@ -101,5 +101,5 @@ def verifypass(password, h, app=True):
     N, r, p = getscryptparams(app=app)
     h, s = h.split('$')
     hashed = scrypt.hash(password, s, N=N, r=r, p=p, buflen=512)
-    hashed = hashed.encode("hex")
+    hashed = hashed.encode('hex')
     return hashed == h
