@@ -21,14 +21,14 @@ def configure_database():
     prepath = root + '/hiera/test/hiera'
 
     # yaml configuration: database attributes
-    with open(configuration + '/database.yaml', 'r') as stream:
+    with open(prepath + '/database.yaml', 'r') as stream:
         settings = yaml.load(stream)
         db_ml = settings['database']['name']
         tester = settings['database']['tester']
         tester_password = settings['database']['tester_password']
 
     # yaml configuration: general attributes
-    with open(configuration + '/common.yaml', 'r') as stream:
+    with open(prepath + '/common.yaml', 'r') as stream:
         settings = yaml.load(stream)
         host = settings['general']['host']
 
