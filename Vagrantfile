@@ -142,7 +142,7 @@ Vagrant.configure(2) do |config|
         ## local variables
         atlas_repo          = 'jeff1evesque'
         atlas_box           = 'trusty64'
-        box_version         = '1.0.0'
+        box_version         = '1.1.0'
         puppet_environment  = 'vagrant'
 
         ## increase RAM to ensure scrypt doesn't exhaust memory
@@ -156,7 +156,7 @@ Vagrant.configure(2) do |config|
         end
 
         main.vm.box                        = "#{atlas_repo}/#{atlas_box}"
-        main.vm.box_download_checksum      = 'c26da6ba1c169bdc6e9168125ddb0525'
+        main.vm.box_download_checksum      = 'cc8794f71f2a694b775028e3d96200b8'
         main.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{box_version}/providers/virtualbox.box"
         main.vm.box_download_checksum_type = 'md5'
 
