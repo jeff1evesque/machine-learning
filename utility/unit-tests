@@ -52,10 +52,10 @@ cat pytest.log
 ##
 ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
 ##
-sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT/".coverage.docker
+sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT"/.coverage.docker
 
 ## remove all containers: allows unit tests to be re-runnable
-if [ "$PROJECT_ROOT" == '/vagrant' ]; then
+if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     sudo docker kill $(docker ps -a -q)
     sudo docker rm $(docker ps -a -q)
 fi
