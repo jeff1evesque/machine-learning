@@ -25,10 +25,10 @@ fi
 
 ## build docker container(s)
 cd "$PROJECT_ROOT"
-docker build -f default.dockerfile -t container-default .
-docker build -f redis.dockerfile -t container-redis .
-docker build -f database.dockerfile -t container-database .
-docker build -f webserver.dockerfile -t container-webserver .
+sudo docker build -f default.dockerfile -t container-default .
+sudo docker build -f redis.dockerfile -t container-redis .
+sudo docker build -f database.dockerfile -t container-database .
+sudo docker build -f webserver.dockerfile -t container-webserver .
 cd "$PWD"
 
 ## run unit test(s): return 1 if match found (result negated)
@@ -37,12 +37,12 @@ cd "$PWD"
 ##     -d, run container in background and print container ID
 ##     -t, allocate pseudo-tty instead of default tty to running container
 ##
-docker network create -d bridge app_nw && \
-    docker run --name base --net=app_nw -d container-default && \
-    docker run --name redis --net=app_nw -d container-redis && \
-    docker run --name webserver --net=app_nw -d container-webserver run && \
-    docker run --name database --net=app_nw -d container-database && \
-    docker run --name webserver-pytest --net=app_nw -it container-webserver test  > pytest.log
+sudo docker network create -d bridge app_nw && \
+    sudo docker run --name base --net=app_nw -d container-default && \
+    sudo docker run --name redis --net=app_nw -d container-redis && \
+    sudo docker run --name webserver --net=app_nw -d container-webserver run && \
+    sudo docker run --name database --net=app_nw -d container-database && \
+    sudo docker run --name webserver-pytest --net=app_nw -it container-webserver test  > pytest.log
 cat pytest.log
 ! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log
 
@@ -52,10 +52,10 @@ cat pytest.log
 ##
 ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
 ##
-docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT/".coverage.docker
+sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT/".coverage.docker
 
 ## remove all containers: allows unit tests to be re-runnable
 if [ "$PROJECT_ROOT" == '/vagrant' ]; then
-    docker kill $(docker ps -a -q)
-    docker rm $(docker ps -a -q)
+    sudo docker kill $(docker ps -a -q)
+    sudo docker rm $(docker ps -a -q)
 fi
