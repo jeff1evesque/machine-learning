@@ -56,6 +56,6 @@ docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT/".cove
 
 ## remove all containers: allows unit tests to be re-runnable
 if [ "$PROJECT_ROOT" == '/vagrant' ]; then
-    docker stop $(docker ps -a -q)
+    docker kill $(docker ps -a -q)
     docker rm $(docker ps -a -q)
 fi
