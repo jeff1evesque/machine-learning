@@ -72,7 +72,7 @@ Vagrant.configure(2) do |config|
 
             ## custom box settings
             srv.vm.box                        = "#{atlas_repo}/#{atlas_box}"
-            srv.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{atlas_box_version}/providers/virtualbox.box"
+            srv.vm.box_version                = atlas_box_version
             srv.vm.box_download_checksum      = atlas_checksum
             srv.vm.box_download_checksum_type = atlas_checksum_type
 
@@ -156,8 +156,8 @@ Vagrant.configure(2) do |config|
         end
 
         main.vm.box                        = "#{atlas_repo}/#{atlas_box}"
-        main.vm.box_download_checksum      = 'cc8794f71f2a694b775028e3d96200b8'
-        main.vm.box_url                    = "https://atlas.hashicorp.com/#{atlas_repo}/boxes/#{atlas_box}/versions/#{box_version}/providers/virtualbox.box"
+        main.vm.box_version                = '1.1.0'
+        main.vm.box_download_checksum      = '28f704ae302a7b11879a7d835a727e8'
         main.vm.box_download_checksum_type = 'md5'
 
         ## Ensure puppet installed within guest

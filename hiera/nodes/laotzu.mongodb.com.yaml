@@ -17,6 +17,6 @@ mongodb_node:
     atlas_repo: 'jeff1evesque'
     atlas_box: 'trusty64'
     atlas_box_version: '1.1.0'
-    atlas_checksum: 'cc8794f71f2a694b775028e3d96200b8'
+    atlas_checksum: '28f704ae302a7b11879a7d835a727e8'
     atlas_checksum_type: 'md5'
     puppet_version: '4.9.3'
