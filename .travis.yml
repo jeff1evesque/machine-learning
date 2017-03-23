@@ -2,45 +2,21 @@ language: python
 dist: trusty
 sudo: required
 
-## environment variables
-env:
-  global:
-    - DOCKER_VERSION=17.03.0~ce-0~ubuntu-trusty
-
-## build docker, install puppet (i.e. puppet parser validate)
-##
-## Note: we install docker per dockers official documentation:
-##
-##       https://docs.docker.com/engine/installation/linux/ubuntu/
-##
+## install puppet (i.e. puppet parser validate)
 before_install:
-  # install docker to specific version
-  - sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-  - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-  - sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-  - sudo apt-get update
-  - sudo apt-get install docker-ce=${DOCKER_VERSION}
-
-  # install puppet
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
   - sudo apt-get install puppet-agent -y
-
-  # puppet version after update
   - sudo /opt/puppetlabs/bin/puppet -V
 
 ## install packages for linting
 ##
 ## @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
 ##
-## Note: unit testing is performed within the docker container, which is
-##        defined from the Dockerfile.
 install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
   - pip install flake8==2.5.4
-  - npm install -g jshint@2.9.1
-  - npm install -g jscs@2.11.0
   - gem install scss_lint -v 0.38.0
   - npm install -g bootlint@0.14.2
   - gem install puppet-lint -v 1.1.0
@@ -51,14 +27,14 @@ install:
   - sudo apt-get install libxml2-utils=2.9.1+dfsg1-3ubuntu4.9
   - gem install mdl -v 0.3.1
   - sudo apt-get install shellcheck=0.3.3-1~ubuntu14.04.1
-  - npm install -g eslint babel-eslint@6.0.0-beta.6
+  - npm install -g eslint babel-eslint@7.1.1
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint -v 0.0.7
   - npm install -g dockerlint@0.2.0
   - pip install restructuredtext_lint==0.17.2
   - pip install python-coveralls==2.9.0
 
-## implement linting / unit tests
+## linting and unit test
 ##
 ## @puppet-lint, the following issue needs to be checked if it has been
 ##     resolved, so the '--no-ensure_first_param-check' abusive flag
@@ -66,18 +42,9 @@ install:
 ##
 ##     - https://github.com/rodjek/puppet-lint/issues/410
 ##
-## @docker run:
-##     -d, run container in background and print container ID
-##     -t, allocate pseudo-tty instead of default tty to running container
-##
-## Note: unit testing is performed within the docker container, which is
-##       defined from the Dockerfile.
-##
 script:
-  # lint codebase
+  - PROJECT_DIRECTORY=$(pwd)
   - flake8 . --max-line-length=100
-  - jshint --verbose src/js/*.js --config test/lint/jshint.json --exclude-path test/lint/.jshintignore
-  - jscs . --config test/lint/.jscs.json
   - scss-lint src/scss/*.scss --exclude-linter VendorPrefix
   - bootlint -d W005 interface/templates/*.html
   - sudo find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
@@ -98,26 +65,11 @@ script:
   - find . -name '*.dockerfile' -type f -exec dockerlint {} \;
   - val=$(find documentation -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
 
-  # build docker container(s)
-  - docker build -f default.dockerfile -t container-default .
-  - docker build -f redis.dockerfile -t container-redis .
-  - docker build -f database.dockerfile -t container-database .
-  - docker build -f webserver.dockerfile -t container-webserver .
-
-  # run unit test(s): return 1 if match found (result negated)
-  #
-  # Note: travis has issues with exclamation, so it's contained in a subshell
-  - docker network create -d bridge app_nw && docker run --name base --net=app_nw -d container-default && docker run --name redis --net=app_nw -d container-redis && docker run --name webserver --net=app_nw -d container-webserver run && docker run --name database --net=app_nw -d container-database && docker run --name webserver-pytest --net=app_nw -it container-webserver test  > pytest.log
-  - cat pytest.log
-  - (! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
-
-  # acquire coverage results
-  #
-  # Note: more information regarding the '.coverage.docker' naming convention:
-  #
-  #       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
-  #
-  - docker cp webserver-pytest:/var/machine-learning/.coverage .coverage.docker
+  # run unit tests
+  - cd utility
+  - chmod u+x unit-tests
+  - ./unit-tests "$PROJECT_DIRECTORY"
+  - cd "$PROJECT_DIRECTORY"
 
 ## post build: the following commands are run after a successful build.
 ##
