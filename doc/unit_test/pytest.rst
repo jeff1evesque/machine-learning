@@ -157,7 +157,7 @@ needed for the unit tests, is resource intensive, also with respect to the hardd
 Therefore, the `unit-tests` bash script, properly `cleans-up <https://github.com/jeff1evesque/machine-learning/blob/b9fdb85c55fa99992ed78cba538d5ef7f3c62c64/utility/unit-tests#L75-L89>`_
 after it's execution. Additionally, given that the vagrant development environment,
 has not exceeded harddisk limitations, all executions should have necessary space by
-default, from an initial `vagrant up xxx`. For example, during the execution of the
+default, from an initial ``vagrant up xxx``. For example, during the execution of the
 `unit-tests` (before clean-up), the harddisk partitions were as follows:
 
 .. code:: bash
