@@ -62,7 +62,6 @@ sudo docker network create -d bridge app_nw && \
     sudo docker run --name webserver --net=app_nw -d container-webserver run && \
     sudo docker run --name database --net=app_nw -d container-database && \
     sudo docker run --name webserver-pytest --net=app_nw -it container-webserver test | sudo tee pytest.log
-cat pytest.log
 ! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log
 
 ## acquire coverage results
