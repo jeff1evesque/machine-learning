@@ -13,12 +13,19 @@ fi
 ##              vagrant environment:
 ##
 ##   - add 'vagrant' user to the docker group
-##   - remove all docker containers and images
+##   - stop all docker containers
+##   - remove all docker containers
+##   - remove all docker images
+##   - remove all docker volumes
+##   - delete all docker networks
 ##
 if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     sudo usermod -a -G docker vagrant
-    sudo docker rm "$(docker ps -a -q)"
-	sudo docker rmi "$(docker images -q)"
+    sudo docker ps -q | xargs -r docker kill
+    sudo docker ps -a -q | xargs -r docker rm
+    sudo docker images -q | xargs -r docker rmi
+    sudo docker volume ls -q | xargs -r docker volume rm
+    sudo docker network ls -q | xargs -r docker network rm
 fi
 
 ## install docker to specific version
@@ -65,3 +72,21 @@ cat pytest.log
 ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
 ##
 sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT"/.coverage.docker
+
+## clean up vagrant environment: harddisk space is limited
+##
+##   - add 'vagrant' user to the docker group
+##   - stop all docker containers
+##   - remove all docker containers
+##   - remove all docker images
+##   - remove all docker volumes
+##   - delete all docker networks
+##
+if [ "$PROJECT_ROOT" = '/vagrant' ]; then
+    sudo usermod -a -G docker vagrant
+    sudo docker ps -q | xargs -r docker kill
+    sudo docker ps -a -q | xargs -r docker rm
+    sudo docker images -q | xargs -r docker rmi
+    sudo docker volume ls -q | xargs -r docker volume rm
+    sudo docker network ls -q | xargs -r docker network rm
+fi
