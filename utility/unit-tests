@@ -75,7 +75,6 @@ sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT"/
 
 ## clean up vagrant environment: harddisk space is limited
 ##
-##   - add 'vagrant' user to the docker group
 ##   - stop all docker containers
 ##   - remove all docker containers
 ##   - remove all docker images
@@ -83,7 +82,6 @@ sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT"/
 ##   - delete all docker networks
 ##
 if [ "$PROJECT_ROOT" = '/vagrant' ]; then
-    sudo usermod -a -G docker vagrant
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
     sudo docker images -q | xargs -r docker rmi
