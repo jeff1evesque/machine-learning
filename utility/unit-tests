@@ -9,13 +9,25 @@ if [[ ! $1 ]]; then
     PROJECT_ROOT='/vagrant'
 fi
 
+## re-runnable: the following allows this script to be re-runnable within the
+##              vagrant environment:
+##
+##   - add 'vagrant' user to the docker group
+##   - remove all docker containers and images
+##
+if [ "$PROJECT_ROOT" = '/vagrant' ]; then
+    sudo usermod -a -G docker vagrant
+    sudo docker rm "$(docker ps -a -q)"
+	sudo docker rmi "$(docker images -q)"
+fi
+
 ## install docker to specific version
 ##
 ## Note: we install docker per dockers official documentation:
 ##
 ##       https://docs.docker.com/engine/installation/linux/ubuntu/
 ##
-if [[ ! $(apt-cache policy docker-ce | grep -q $DOCKER_VERSION) ]]; then
+if ! sudo apt-cache policy docker-ce | grep -q "$DOCKER_VERSION"; then
     sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
     sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
@@ -24,12 +36,12 @@ if [[ ! $(apt-cache policy docker-ce | grep -q $DOCKER_VERSION) ]]; then
 fi
 
 ## build docker container(s)
-cd "$PROJECT_ROOT"
+cd "$PROJECT_ROOT" || exit
 sudo docker build -f default.dockerfile -t container-default .
 sudo docker build -f redis.dockerfile -t container-redis .
 sudo docker build -f database.dockerfile -t container-database .
 sudo docker build -f webserver.dockerfile -t container-webserver .
-cd "$PWD"
+cd "$PWD" || exit
 
 ## run unit test(s): return 1 if match found (result negated)
 ##
@@ -42,7 +54,7 @@ sudo docker network create -d bridge app_nw && \
     sudo docker run --name redis --net=app_nw -d container-redis && \
     sudo docker run --name webserver --net=app_nw -d container-webserver run && \
     sudo docker run --name database --net=app_nw -d container-database && \
-    sudo docker run --name webserver-pytest --net=app_nw -it container-webserver test  > pytest.log
+    sudo docker run --name webserver-pytest --net=app_nw -it container-webserver test | sudo tee pytest.log
 cat pytest.log
 ! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log
 
@@ -53,9 +65,3 @@ cat pytest.log
 ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
 ##
 sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT"/.coverage.docker
-
-## remove all containers: allows unit tests to be re-runnable
-if [ "$PROJECT_ROOT" = '/vagrant' ]; then
-    sudo docker kill "$(docker ps -a -q)"
-    sudo docker rm "$(docker ps -a -q)"
-fi
