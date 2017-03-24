@@ -22,7 +22,7 @@ This allows unit tests to cover the following sessions:
 - ``model_predict``
 - ``model_generate``
 
-As well as the following specific authentication cases:
+As well as the following authentication cases:
 
 - account registration
 - crypto function
@@ -30,8 +30,8 @@ As well as the following specific authentication cases:
 - user logout
 - password validation
 
-However, both the automated, and manual unit testing implement the same |unit-tests|_
-bash script. Therefore, manual unit tests can be implemented as follows:
+However, both the automated, and manual unit tests, implement the same |unit-tests|_
+bash script. Therefore, the manual unit tests can be implemented as follows:
 
 .. code:: bash
 
@@ -178,7 +178,7 @@ default, from an initial ``vagrant up xxx``. For example, during the execution o
     tmp_vagrant-puppet_modules-044f8ea6fe024da4abbd7bbb8407a17e    466G  145G  322G  31% /tmp/vagrant-puppet/modules-044f8ea6fe024da4abbd7bbb8407a17e
     tmp_vagrant-puppet_manifests-3def0df79d1c452de6a52de4d163c7cc  466G  145G  322G  31% /tmp/vagrant-puppet/manifests-3def0df79d1c452de6a52de4d163c7cc
 
-After the |unit-tests|_ successfully executed, the harddisk should be reduced,
+After the |unit-tests|_ successfully executes, the harddisk should be reduced,
 as a part of it's intrinsic clean-up:
 
 .. code:: bash
