@@ -163,6 +163,7 @@ default, from an initial ``vagrant up xxx``. For example, during the execution o
 `unit-tests` (before clean-up), the harddisk partitions should be as follows:
 
 .. code:: bash
+
     vagrant@trusty64:/vagrant/utility$ df -h
     Filesystem                                                     Size  Used Avail Use% Mounted on
     udev                                                           486M  4.0K  486M   1% /dev
@@ -182,6 +183,7 @@ After the |unit-tests|_ successfully execute, the harddisk should be reduced,
 as a part of it's intrinsic clean-up:
 
 .. code:: bash
+
     vagrant@trusty64:/vagrant/utility$ df -h
     Filesystem                                                     Size  Used Avail Use% Mounted on
     udev                                                           486M  4.0K  486M   1% /dev
