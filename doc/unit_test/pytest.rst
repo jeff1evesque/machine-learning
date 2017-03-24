@@ -3,9 +3,12 @@ Unit Test: pytest
 =================
 
 This project implements `unit testing <https://en.wikipedia.org/wiki/Unit_testing>`_,
-to validate logic in a consistent fashion. These unit tests have been automated within
-corresponding travis `builds <https://travis-ci.org/jeff1evesque/machine-learning>`_,
-using a series of docker containers, connected via a common docker network:
+to validate logic in a consistent fashion. This is done through an automated process
+via travis `builds <https://travis-ci.org/jeff1evesque/machine-learning>`_, when code
+is submitted through a pull request.
+
+Essentially, a series of docker containers, connected under a common docker network,
+are created by the `travis ci <https://travis-ci.org/jeff1evesque/machine-learning>`_:
 
 - |.travis.yml#L101-L120|_
 - |default.dockerfile|_
@@ -13,14 +16,14 @@ using a series of docker containers, connected via a common docker network:
 - |redis.dockerfile|_
 - |webserver.dockerfile|_
 
-Current unit tests cover the following sessions:
+This allows unit tests to cover the following sessions:
 
 - ``data_new``
 - ``data_append``
 - ``model_predict``
 - ``model_generate``
 
-As well as the following authentication specific cases:
+As well as the following specific authentication cases:
 
 - account registration
 - crypto function
@@ -28,9 +31,8 @@ As well as the following authentication specific cases:
 - user logout
 - password validation
 
-The unit tests are automatically executed upon submitting a pull request. However,
-the same tests can be run manually, since both implementations execute the same
-|unit-tests|_ bash script:
+However, both the automated, and manual unit testing implement the same |unit-tests|_
+bash script. Therefore, manual unit tests can be implemented as follows:
 
 .. code:: bash
 
@@ -149,16 +151,16 @@ the same tests can be run manually, since both implementations execute the same
     ========================== 21 passed in 63.84 seconds ==========================
 
 **Note:** future releases (i.e. milestone `1.0 <https://github.com/jeff1evesque/machine-learning/milestones/1.0>`_),
-will include more granular unit tests, or more logical ordered, such that particular
-sets of unit tests will conditionally run upon execution of test dependencies.
+will include more granular unit tests, or better logical order, such that particular
+sets of unit tests will conditionally run, upon successful execution of dependencies.
 
 It is important to understand that building the corresponding docker containers
 needed for the unit tests, is resource intensive, also with respect to the harddisk.
-Therefore, the `unit-tests` bash script, properly `cleans-up <https://github.com/jeff1evesque/machine-learning/blob/b9fdb85c55fa99992ed78cba538d5ef7f3c62c64/utility/unit-tests#L75-L89>`_
+Therefore, the |unit-tests|_ will `clean-up <https://github.com/jeff1evesque/machine-learning/blob/b9fdb85c55fa99992ed78cba538d5ef7f3c62c64/utility/unit-tests#L75-L89>`_
 after it's execution. Additionally, given that the vagrant development environment,
 has not exceeded harddisk limitations, all executions should have necessary space by
 default, from an initial ``vagrant up xxx``. For example, during the execution of the
-`unit-tests` (before clean-up), the harddisk partitions were as follows:
+`unit-tests` (before clean-up), the harddisk partitions should be as follows:
 
 .. code:: bash
     vagrant@trusty64:/vagrant/utility$ df -h
@@ -195,7 +197,7 @@ as a part of it's intrinsic clean-up:
     tmp_vagrant-puppet_modules-044f8ea6fe024da4abbd7bbb8407a17e    466G  145G  322G  31% /tmp/vagrant-puppet/modules-044f8ea6fe024da4abbd7bbb8407a17e
     tmp_vagrant-puppet_manifests-3def0df79d1c452de6a52de4d163c7cc  466G  145G  322G  31% /tmp/vagrant-puppet/manifests-3def0df79d1c452de6a52de4d163c7cc
 
-Therefore, it is fair to assume that if the main host had adequate resources
+Therefore, it is fair to assume that if the main host has adequate resources
 to build this application:
 
 - harddisk
@@ -203,9 +205,9 @@ to build this application:
 - cpu
 - network speed
 
-Then, the unit tests should be re-runnable, meaning multiple executions of the
-|unit-tests|_ bash script, should run without a problem. More information regarding
-`hardware architecture <https://github.com/jeff1evesque/machine-learning/blob/master/documentation/hardware/architecture.st>`_,
+Then, the unit tests should be re-runnable, meaning multiple successive executions
+of the |unit-tests|_ bash script, should run without a problem. More information
+regarding `hardware architecture <https://github.com/jeff1evesque/machine-learning/blob/master/documentation/hardware/architecture.st>`_,
 and resources can be reviewed to determine the best combination for a given situation.
 
 **Note:** every script within this repository, with the
