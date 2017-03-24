@@ -219,7 +219,7 @@ via |.travis.yml|_
 
 .. |.travis.yml| replace:: ``.travis.yml``
 .. _.travis.yml: https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml
-.. |unit-tests#L47-L50| replace:: ``.travis.yml#L101-L120``
+.. |unit-tests#L47-L50| replace:: ``unit-tests#L47-L50``
 .. _unit-tests#L47-L50: https://github.com/jeff1evesque/machine-learning/blob/b9fdb85c55fa99992ed78cba538d5ef7f3c62c64/utility/unit-tests#L47-L50
 .. |default.dockerfile| replace:: ``default.dockerfile``
 .. _default.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile
