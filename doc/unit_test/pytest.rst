@@ -6,7 +6,7 @@ This project implements `unit testing <https://en.wikipedia.org/wiki/Unit_testin
 to validate logic in a consistent fashion. This is done through an automated process
 via travis `builds <https://travis-ci.org/jeff1evesque/machine-learning>`_, when code
 is submitted through a `pull request <https://github.com/jeff1evesque/machine-learning/pulls>`_.
-Essentially, a series of docker containers, connected under a common docker network,
+Essentially, a series of docker containers, connected under a common `docker network <https://docs.docker.com/engine/userguide/networking/>`_,
 are created by the `travis ci <https://travis-ci.org/jeff1evesque/machine-learning>`_:
 
 - |unit-tests#L47-L50|_
