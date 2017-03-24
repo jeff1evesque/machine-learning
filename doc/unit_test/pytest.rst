@@ -5,12 +5,11 @@ Unit Test: pytest
 This project implements `unit testing <https://en.wikipedia.org/wiki/Unit_testing>`_,
 to validate logic in a consistent fashion. This is done through an automated process
 via travis `builds <https://travis-ci.org/jeff1evesque/machine-learning>`_, when code
-is submitted through a pull request.
-
+is submitted through a `pull request <https://github.com/jeff1evesque/machine-learning/pulls>`_.
 Essentially, a series of docker containers, connected under a common docker network,
 are created by the `travis ci <https://travis-ci.org/jeff1evesque/machine-learning>`_:
 
-- |.travis.yml#L101-L120|_
+- |unit-tests#L47-L50|_
 - |default.dockerfile|_
 - |database.dockerfile|_
 - |redis.dockerfile|_
@@ -179,7 +178,7 @@ default, from an initial ``vagrant up xxx``. For example, during the execution o
     tmp_vagrant-puppet_modules-044f8ea6fe024da4abbd7bbb8407a17e    466G  145G  322G  31% /tmp/vagrant-puppet/modules-044f8ea6fe024da4abbd7bbb8407a17e
     tmp_vagrant-puppet_manifests-3def0df79d1c452de6a52de4d163c7cc  466G  145G  322G  31% /tmp/vagrant-puppet/manifests-3def0df79d1c452de6a52de4d163c7cc
 
-After the |unit-tests|_ successfully execute, the harddisk should be reduced,
+After the |unit-tests|_ successfully executed, the harddisk should be reduced,
 as a part of it's intrinsic clean-up:
 
 .. code:: bash
@@ -220,8 +219,8 @@ via |.travis.yml|_
 
 .. |.travis.yml| replace:: ``.travis.yml``
 .. _.travis.yml: https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml
-.. |.travis.yml#L101-L120| replace:: ``.travis.yml#L101-L120``
-.. _.travis.yml#L101-L120: https://github.com/jeff1evesque/machine-learning/blob/e83f4222a9de11fcd839d6b3e789d63bab82e093/.travis.yml#L101-L120
+.. |unit-tests#L47-L50| replace:: ``.travis.yml#L101-L120``
+.. _unit-tests#L47-L50: https://github.com/jeff1evesque/machine-learning/blob/b9fdb85c55fa99992ed78cba538d5ef7f3c62c64/utility/unit-tests#L47-L50
 .. |default.dockerfile| replace:: ``default.dockerfile``
 .. _default.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile
 .. |database.dockerfile| replace:: ``database.dockerfile``
