@@ -3,7 +3,7 @@
 This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#web-interface),
  as well as a [programmatic-api](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#programmatic-interface)
  for various machine learning algorithms. Some of it's general applications, have
- been outlined within [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/docs/index.rst).
+ been outlined within [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/doc/index.rst).
 
 **Supported algorithms**:
 
@@ -19,7 +19,7 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
  as `invalid`, and closed (without merging to master). These best practices
  will ensure integrity, when revisions of code, or issues need to be reviewed.
 
-**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/docs/contribution/support.rst),
+**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/doc/contribution/support.rst),
  to further assist with development.
 
 ## Preconfiguration
@@ -94,11 +94,11 @@ shell access.
 Fork this project in your GitHub account.  Then, clone your repository, with
  one of the following approaches:
 
-- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/docs/configuration/setup_clone.rst#simple-clone):
+- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#simple-clone):
  clone the remote master branch.
-- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/docs/configuration/setup_clone.rst#commit-hash):
+- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#commit-hash):
  clone the remote master branch, then checkout a specific commit hash.
-- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/docs/configuration/setup_clone.rst#release-tag):
+- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#release-tag):
  clone the remote branch, associated with the desired release tag.
 
 ## Installation
@@ -147,7 +147,7 @@ Otherwise, if ssl is configured, then the application is accessible via
 ## Execution
 
 Both the web-interface, and the programmatic-api, have corresponding
- [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/docs/unit_test/pytest.rst)
+ [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/doc/unit_test/pytest.rst)
  which can be reviewed, and implemented.
 
 ### Web Interface
@@ -218,4 +218,4 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
 **Note:** the above `post` request, can be implemented in a different language,
  respectively.
 
-**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/docs/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
+**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
