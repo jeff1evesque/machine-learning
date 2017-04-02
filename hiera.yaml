@@ -14,9 +14,6 @@ hierarchy:
   - name: 'Webserver configurations'
     path: webserver.yaml
 
-  - name: 'MongoDB specific configuration to override database.yaml'
-    path: "nodes/%{::trusted.certname}.yaml"
-
   - name: 'Database configurations'
     path: database.yaml
 

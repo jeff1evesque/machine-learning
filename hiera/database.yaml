@@ -18,32 +18,3 @@ database:
         tester_password: 'password'
         root_password: 'password'
         log_path: '/log/database'
-
-    mongodb_cluster:
-        hostnames:
-            - aristotle
-            - socrates
-            - plato
-            - confucious
-            - laotzu
-            - siddhartha
-            - galileo
-            - copernicus
-            - kepler
-        user:
-            admin:
-                name: 'admin'
-                password: 'password'
-        replset:
-            csrs:
-                - galileo
-                - copernicus
-                - kepler
-            shard1:
-                - aristotle
-                - socrates
-                - plato
-            shard2:
-                - confucious
-                - laotzu
-                - siddhartha
