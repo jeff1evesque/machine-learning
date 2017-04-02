@@ -1,34 +1,6 @@
 ## -*- mode: ruby -*-
 ## vi: set ft=ruby :
 
-## require ruby modules
-require 'yaml'
-require 'pathname'
-
-## ruby variables
-current_dir = File.dirname(__FILE__)
-
-## puppetserver
-puppetserver_config = YAML.load_file(Pathname(current_dir).join(
-    'hiera',
-    'puppetserver.yaml'
-))
-
-## mongodb: get server hostnames
-db_config = YAML.load_file(Pathname(current_dir).join(
-    'hiera',
-    'database.yaml'
-))
-
-## mongodb: combine yaml configurations
-mongodb_nodes = db_config['database']['mongodb_cluster']['hostnames'].map { |hostname|
-    YAML.load_file(Pathname(current_dir).join(
-        'hiera',
-        'nodes',
-        "#{hostname}.mongodb.com.yaml"
-    ))
-}
-
 ## build vagrant instances
 Vagrant.configure(2) do |config|
     ## globally configure plugins
@@ -46,95 +18,6 @@ Vagrant.configure(2) do |config|
     ## Restart Vagrant: if new plugin installed
     if plugin_installed == true
         exec "vagrant #{ARGV.join(' ')}"
-    end
-
-    ## configure mongodb cluster
-    mongodb_nodes.each do |server|
-        config.vm.define server['mongodb_node']['hostname'] do |srv|
-            ## local variables
-            puppet_environment  = 'mongodb'
-            node                = server['mongodb_node']
-            puppetserver        = puppetserver_config['puppetserver']
-            puppetserver_fqdn   = puppetserver['fqdn']
-            puppetserver_ip     = puppetserver['ip']
-            node_hostname       = node['hostname']
-            node_fqdn           = node['fqdn']
-            node_ip             = node['ip']
-            node_nameserver     = node['nameserver']
-            node_netmask        = node['netmask']
-            node_memory         = node['memory']
-            atlas_repo          = node['atlas_repo']
-            atlas_box           = node['atlas_box']
-            atlas_box_version   = node['atlas_box_version']
-            atlas_checksum      = node['atlas_checksum']
-            atlas_checksum_type = node['atlas_checksum_type']
-            puppet_version      = node['puppet_version']
-
-            ## custom box settings
-            srv.vm.box                        = "#{atlas_repo}/#{atlas_box}"
-            srv.vm.box_version                = atlas_box_version
-            srv.vm.box_download_checksum      = atlas_checksum
-            srv.vm.box_download_checksum_type = atlas_checksum_type
-
-            ## assign private network
-            srv.vm.network "private_network", ip: node_ip
-
-            ## increase RAM
-            srv.vm.provider 'virtualbox' do |v|
-                v.customize ['modifyvm', :id, '--memory', node_memory]
-            end
-
-            ## Ensure puppet installed within guest
-            srv.puppet_install.puppet_version = puppet_version
-
-            ## ensure puppet modules directory on the host before 'vagrant up'
-            srv.trigger.before :up do
-                run "mkdir -p puppet/environment/#{puppet_environment}/modules_contrib"
-            end
-
-            ## Run r10k
-            srv.r10k.puppet_dir      = "puppet/environment/#{puppet_environment}"
-            srv.r10k.puppetfile_path = "puppet/environment/#{puppet_environment}/Puppetfile"
-
-            ## provision host: needed by puppet
-            srv.vm.provision 'shell' do |s|
-                s.inline = <<-SHELL
-                    cd /vagrant/utility
-                    apt-get install -y dos2unix
-                    dos2unix *
-                    ./configure-host "$1" "$2" "$4" "$5" "$6" "$7" "$8"
-                    ./configure-puppet "$1" "$3" "$4" "$5"
-                SHELL
-                s.args = [
-                    puppetserver_fqdn,
-                    puppetserver_ip,
-                    puppet_environment,
-                    node_hostname,
-                    node_fqdn,
-                    node_ip,
-                    node_nameserver,
-                    node_netmask
-                ]
-            end
-
-            ## provision mongodb
-            srv.vm.provision 'puppet' do |puppet|
-                puppet.environment_path  = 'puppet/environment'
-                puppet.environment       = puppet_environment
-                puppet.manifests_path    = "puppet/environment/#{puppet_environment}/manifests"
-                puppet.module_path       = [
-                    "puppet/environment/#{puppet_environment}/modules_contrib",
-                    "puppet/environment/#{puppet_environment}/modules",
-                ]
-                puppet.manifest_file     = 'site.pp'
-                puppet.hiera_config_path = 'hiera.yaml'
-            end
-
-            ## clean up files on the host after 'vagrant destroy'
-            srv.trigger.after :destroy do
-                run "rm -rf puppet/environment/#{puppet_environment}/modules_contrib"
-            end
-        end
     end
 
     ## general application
