@@ -66,7 +66,7 @@ script:
   - val=$(find documentation -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
 
   # run unit tests
-  - cd utility
+  - cd test
   - chmod u+x unit-tests
   - ./unit-tests "$PROJECT_DIRECTORY"
   - cd "$PROJECT_DIRECTORY"

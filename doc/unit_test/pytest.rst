@@ -35,7 +35,7 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
 
 .. code:: bash
 
-    vagrant@trusty64:/vagrant/utility$ ./unit-tests
+    vagrant@trusty64:/vagrant/test$ ./unit-tests
     ...
     ============================= test session starts ==============================
     platform linux2 -- Python 2.7.6, pytest-3.0.7, py-1.4.33, pluggy-0.4.0
@@ -155,7 +155,7 @@ sets of unit tests will conditionally run, upon successful execution of dependen
 
 It is important to understand that building the corresponding docker containers
 needed for the unit tests, is resource intensive, also with respect to the harddisk.
-Therefore, the |unit-tests|_ will `clean-up <https://github.com/jeff1evesque/machine-learning/blob/b9fdb85c55fa99992ed78cba538d5ef7f3c62c64/utility/unit-tests#L75-L89>`_
+Therefore, the |unit-tests|_ will `clean-up <https://github.com/jeff1evesque/machine-learning/blob/d3ecbd53299d082ceffe77d28875743a923fec1b/test/unit-tests#L75-L89>`_
 after it's execution. Additionally, given that the vagrant development environment,
 has not exceeded harddisk limitations, all executions should have necessary space by
 default, from an initial ``vagrant up xxx``. For example, during the execution of the
@@ -163,7 +163,7 @@ default, from an initial ``vagrant up xxx``. For example, during the execution o
 
 .. code:: bash
 
-    vagrant@trusty64:/vagrant/utility$ df -h
+    vagrant@trusty64:/vagrant/test$ df -h
     Filesystem                                                     Size  Used Avail Use% Mounted on
     udev                                                           486M  4.0K  486M   1% /dev
     tmpfs                                                          100M  644K   99M   1% /run
@@ -183,7 +183,7 @@ as a part of it's intrinsic clean-up:
 
 .. code:: bash
 
-    vagrant@trusty64:/vagrant/utility$ df -h
+    vagrant@trusty64:/vagrant/test$ df -h
     Filesystem                                                     Size  Used Avail Use% Mounted on
     udev                                                           486M  4.0K  486M   1% /dev
     tmpfs                                                          100M  548K   99M   1% /run
@@ -220,7 +220,7 @@ via |.travis.yml|_
 .. |.travis.yml| replace:: ``.travis.yml``
 .. _.travis.yml: https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml
 .. |unit-tests#L47-L50| replace:: ``unit-tests#L47-L50``
-.. _unit-tests#L47-L50: https://github.com/jeff1evesque/machine-learning/blob/b9fdb85c55fa99992ed78cba538d5ef7f3c62c64/utility/unit-tests#L47-L50
+.. _unit-tests#L47-L50: https://github.com/jeff1evesque/machine-learning/blob/d3ecbd53299d082ceffe77d28875743a923fec1b/test/unit-tests#L47-L50
 .. |default.dockerfile| replace:: ``default.dockerfile``
 .. _default.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile
 .. |database.dockerfile| replace:: ``database.dockerfile``
@@ -230,4 +230,4 @@ via |.travis.yml|_
 .. |webserver.dockerfile| replace:: ``webserver.dockerfile``
 .. _webserver.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile
 .. |unit-tests| replace:: ``unit-tests``
-.. _unit-tests: https://github.com/jeff1evesque/machine-learning/blob/master/utility/unit-tests
+.. _unit-tests: https://github.com/jeff1evesque/machine-learning/blob/master/test/unit-tests
