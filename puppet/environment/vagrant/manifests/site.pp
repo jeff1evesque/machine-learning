@@ -9,4 +9,5 @@ contain redis
 contain system
 contain compiler
 contain mariadb
+contain mongodb
 contain webserver
