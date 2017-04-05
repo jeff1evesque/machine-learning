@@ -18,20 +18,23 @@ database:
         tester_password: 'password'
         root_password: 'password'
         log_path: '/log/database'
+
     mongodb:
         storage:
             dbPath:
                 - '/data'
                 - '/data/db'
+
         systemLog
-            verbosity: ''
-            destination: ''
-            logAppend: ''
-            systemLogPath: ''
+            verbosity: 1
+            destination: file
+            logAppend: true
+            systemLogPath: '/var/log/mongodb/mongod.log'
+
         net:
-            port: ''
-            bindIp: ''
+            port: 27017
+            bindIp: 127.0.0.1
+
         processManagement:
-            fork: ''
-            pidfilepath: ''
-            
+            fork: true
+            pidfilepath: '/var/run/mongodb/mongod.pid'
