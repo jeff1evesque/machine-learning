@@ -30,7 +30,7 @@ class mongodb::run {
     ## general mongod configuration
     file { '/etc/mongod.conf':
         ensure  => file,
-        content => dos2unix(template('mongodb_cluster/mongodb.conf.erb')),
+        content => dos2unix(template('mongodb/mongodb.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
         root    => root,
@@ -40,7 +40,7 @@ class mongodb::run {
     ## mongod init script
     file { '/etc/init/upstart-mongod.conf':
         ensure  => file,
-        content => dos2unix(template('mongodb_cluster/mongod.conf.erb')),
+        content => dos2unix(template('mongodb/mongod.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
         root    => root,
