@@ -26,7 +26,7 @@ database:
                 - '/data'
                 - '/data/db'
 
-        systemLog
+        systemLog:
             verbosity: 1
             destination: file
             logAppend: true
