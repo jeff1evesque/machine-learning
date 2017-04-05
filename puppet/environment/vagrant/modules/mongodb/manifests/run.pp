@@ -17,7 +17,7 @@ class mongodb::run {
     $port          = $net['port']
     $bindIp        = $net['bindIp']
     $fork          = $process['fork']
-    $pidfilepath   = $process['fork']
+    $pidfilepath   = $process['pidfilepath']
 
     ## ensure base path
     file { $db_path:
