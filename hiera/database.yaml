@@ -18,3 +18,20 @@ database:
         tester_password: 'password'
         root_password: 'password'
         log_path: '/log/database'
+    mongodb:
+        storage:
+            dbPath:
+                - '/data'
+                - '/data/db'
+        systemLog
+            verbosity: ''
+            destination: ''
+            logAppend: ''
+            systemLogPath: ''
+        net:
+            port: ''
+            bindIp: ''
+        processManagement:
+            fork: ''
+            pidfilepath: ''
+            
