@@ -24,6 +24,8 @@ database:
             dbPath:
                 - '/data'
                 - '/data/db'
+            journal:
+                enabled: true
 
         systemLog:
             verbosity: 1
