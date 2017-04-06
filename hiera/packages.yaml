@@ -42,3 +42,4 @@ development:
         xmltodict: '0.10.1'
         scrypt: '0.8.0'
         gunicorn: '19.6.0'
+        pymongo: '3.4.0'
