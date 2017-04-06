@@ -33,7 +33,7 @@ class mongodb::run {
         content => dos2unix(template('mongodb/mongodb.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
-        root    => root,
+        group   => root,
         notify  => Service['start-mongod'],
     }
 
@@ -43,7 +43,7 @@ class mongodb::run {
         content => dos2unix(template('mongodb/mongod.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
-        root    => root,
+        group   => root,
         notify  => Service['upstart-mongod'],
     }
 
