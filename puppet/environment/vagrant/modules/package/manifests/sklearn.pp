@@ -9,7 +9,7 @@ class package::sklearn {
     $root_dir      = $hiera_general['root']
 
     $hiera_dev     = lookup('development')
-    $version       = $hiera_dev['github']['sklearn']
+    $version       = $hiera_dev['github']['specific']['sklearn']
 
     ## download sklearn
     vcsrepo { "${root_dir}/build/scikit-learn":

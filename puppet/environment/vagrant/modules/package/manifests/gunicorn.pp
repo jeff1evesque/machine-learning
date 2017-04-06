@@ -6,7 +6,7 @@ class package::gunicorn {
 
     ## local variables
     $hiera_dev = lookup('development')
-    $version   = $hiera_dev['pip']['gunicorn']
+    $version   = $hiera_dev['pip']['specific']['gunicorn']
 
     package { 'gunicorn':
         ensure   => $version,

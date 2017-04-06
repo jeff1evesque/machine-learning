@@ -6,7 +6,7 @@ class package::redis_client {
 
     ## local variables
     $hiera_dev = lookup('development')
-    $version   = $hiera_dev['pip']['redis']
+    $version   = $hiera_dev['pip']['specific']['redis']
 
     package { 'redis':
         ensure   => $version,
