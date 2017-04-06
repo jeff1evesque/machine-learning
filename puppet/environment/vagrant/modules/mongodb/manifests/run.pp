@@ -34,7 +34,7 @@ class mongodb::run {
         mode    => '0644',
         owner   => mongodb,
         group   => root,
-        notify  => Service['start-mongod'],
+        notify  => Service['upstart-mongod'],
     }
 
     ## mongod init script
