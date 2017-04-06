@@ -20,7 +20,7 @@ class mongodb::run {
     $pidfilepath   = $process['pidfilepath']
 
     ## ensure base path
-    file { $db_path:
+    file { $dbPath:
         ensure => directory,
         mode   => '0755',
         owner  => mongodb,
