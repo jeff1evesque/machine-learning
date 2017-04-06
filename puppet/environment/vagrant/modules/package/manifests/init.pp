@@ -4,6 +4,9 @@
 
 class package {
     require apt
+    require python
+    include package::nodejs
+    include package::python_dev
 
     ## local variables
     $packages = lookup('development')
@@ -15,6 +18,10 @@ class package {
                 package { $package:
                     ensure   => $version,
                     provider => $provider,
+                    require  => [
+                        Class['package::nodejs'],
+                        Class['package::python_dev']
+                    ],
                 }
             }
         }
