@@ -20,10 +20,10 @@ class mongodb::install {
         path    => '/etc/apt/sources.list.d/mongodb-org-3.4.list',
         content => $mongodb_source_list,
         require => Exec['apt-key-puppetlabs'],
-        notify  => Exec['apt_update'],
+        notify  => Exec['apt-get-update'],
     }
 
-    exec { 'apt_update':
+    exec { 'apt-get-update':
         command     => 'apt-get update',
         path        => '/usr/bin',
         before      => Package['mongodb-org-server'],
