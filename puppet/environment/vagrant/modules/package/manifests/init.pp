@@ -5,17 +5,18 @@
 class package {
     require apt
 
-    ## general packages
-    contain package::nodejs
-    contain package::inotify_tools
-    contain package::react_presets
-    contain package::jsonschema
-    contain package::xmltodict
-    contain package::six
-    contain package::fetch
-    contain package::pyyaml
-    contain package::flask_script
-    contain package::pytest_flask
-    contain package::libssl_dev
-    contain package::scrypt
+    ## local variables
+    $packages = lookup('development')
+
+    ## iterate 'packages' hash
+    $packages.each|String $provider| {
+        if ($provider in ['apt', 'npm', 'pip']) {
+            $provider['general'].each|String $package, String $version| {
+                package { $package:
+                    ensure   => $version,
+                    provider => $provider,
+                }
+            }
+        }
+    }
 }
