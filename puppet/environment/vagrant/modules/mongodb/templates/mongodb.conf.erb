@@ -1,0 +1,24 @@
+## mongodb.conf, this file is enforced by puppet.
+
+## where and how to store data.
+storage:
+  dbPath: <%= @dbPath[1] %>
+  journal:
+    enabled: <%= @journal %>
+
+## where to write logging data.
+systemLog:
+  verbosity: <%= @verbosity %>
+  destination: <%= @destination %>
+  logAppend: <%= @logAppend %>
+  path: <%= @systemLogPath %>
+
+## network interfaces
+net:
+  port: <%= @port %>
+  bindIp: <%= @bindIp %>
+
+## mongodb process
+processManagement:
+  fork: <%= @fork %>
+  pidFilePath: <%= @pidfilepath %>
