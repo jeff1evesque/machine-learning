@@ -53,7 +53,7 @@ class mongodb::run {
         enable  => true,
         require => [
             File['/etc/mongod.conf'],
-            File['/etc/init/start-mongod.conf'],
+            File['/etc/init/upstart-mongod.conf'],
         ],
     }
 }
