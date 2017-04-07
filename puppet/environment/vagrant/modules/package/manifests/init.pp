@@ -13,8 +13,6 @@ class package {
 
     ## iterate 'packages' hash
     $packages.each |String $provider, $providers| {
-        notify { "provider: ${provider}": }
-        notify { "providers: ${providers}": }
         if ($provider in ['apt', 'npm', 'pip']) {
             $providers['general'].each|String $package, String $version| {
                 package { $package:
