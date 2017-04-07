@@ -44,7 +44,6 @@ development:
             flask-script: '2.0.5'
             jsonschema: '2.5.1'
             pytest-flask: '0.10.0'
-            pyyaml: '3.11'
             six: '1.5.2'
             xmltodict: '0.10.1'
             scrypt: '0.8.0'
@@ -52,3 +51,4 @@ development:
         specific:
             redis: '2.10.5'
             gunicorn: '19.6.0'
+            pyyaml: '3.11'
