@@ -6,12 +6,12 @@ class package::sklearn_dependencies {
 
     ## local variables
     $hiera_dev            = lookup('development')
-    $version_python_numpy = $hiera_dev['apt']['specific']['python-numpy']
-    $version_python_scipy = $hiera_dev['apt']['specific']['python-scipy']
-    $version_libatlas_dev = $hiera_dev['apt']['specific']['libatlas-dev']
-    $version_gplus        = $hiera_dev['apt']['specific']['gplus']
-    $version_python_lib   = $hiera_dev['apt']['specific']['python-matplotlib']
-    $version_ipython      = $hiera_dev['apt']['specific']['ipython']
+    $version_python_numpy = $hiera_dev['apt']['custom']['python-numpy']
+    $version_python_scipy = $hiera_dev['apt']['custom']['python-scipy']
+    $version_libatlas_dev = $hiera_dev['apt']['custom']['libatlas-dev']
+    $version_gplus        = $hiera_dev['apt']['custom']['gplus']
+    $version_python_lib   = $hiera_dev['apt']['custom']['python-matplotlib']
+    $version_ipython      = $hiera_dev['apt']['custom']['ipython']
 
     $dependencies = [
         "python-numpy=${$version_python_numpy}",

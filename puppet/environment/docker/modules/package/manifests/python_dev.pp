@@ -7,7 +7,7 @@ class package::python_dev {
 
     ## local variables
     $hiera_dev = lookup('development')
-    $version   = $hiera_dev['apt']['specific']['python-dev']
+    $version   = $hiera_dev['apt']['custom']['python-dev']
 
     package { "python-dev=${version}":
         ensure => 'installed',

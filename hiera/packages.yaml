@@ -12,7 +12,7 @@ development:
             inotify-tools: '3.14-1ubuntu1'
             libssl-dev: '1.0.1f-1ubuntu2.22'
 
-        specific:
+        custom:
             redis-server: '2:2.8.4-2'
             python-dev: '2.7.5-5ubuntu3'
             python-numpy: '1:1.8.2-0ubuntu0.1'
@@ -24,14 +24,14 @@ development:
             nginx: '1.4.6-1ubuntu3.7'
 
     github:
-        specific:
+        custom:
             sklearn: '0.16.1'
 
     npm:
         general:
             fetch: '1.1.0'
 
-        specific:
+        custom:
             uglify-js: '2.7.5'
             imagemin: '5.2.2'
             node-sass: '4.5.0'
@@ -48,7 +48,7 @@ development:
             xmltodict: '0.10.1'
             scrypt: '0.8.0'
 
-        specific:
+        custom:
             redis: '2.10.5'
             gunicorn: '19.6.0'
             pyyaml: '3.11'
