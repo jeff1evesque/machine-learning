@@ -3,8 +3,8 @@
 ###
 
 class package {
-    require apt
-    require python
+    include apt
+    include python
     include package::nodejs
     include package::python_dev
 
@@ -12,13 +12,17 @@ class package {
     $packages = lookup('development')
 
     ## iterate 'packages' hash
-    $packages.each |$provider| {
+    $packages.each |String $provider, $providers| {
+        notify { "provider: ${provider}": }
+        notify { "providers: ${providers}": }
         if ($provider in ['apt', 'npm', 'pip']) {
-            $provider['general'].each|String $package, String $version| {
+            $providers['general'].each|String $package, String $version| {
                 package { $package:
                     ensure   => $version,
                     provider => $provider,
                     require  => [
+                        Class['apt'],
+                        Class['python'],
                         Class['package::nodejs'],
                         Class['package::python_dev']
                     ],
