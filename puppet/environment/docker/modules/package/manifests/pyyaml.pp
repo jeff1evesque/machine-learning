@@ -6,7 +6,7 @@ class package::pyyaml {
 
     ## local variables
     $hiera_dev = lookup('development')
-    $version   = $hiera_dev['pip']['pyyaml']
+    $version   = $hiera_dev['pip']['custom']['pyyaml']
 
     package { 'pyyaml':
         ensure   => $version,

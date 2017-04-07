@@ -6,12 +6,12 @@ class package::webcompilers {
 
     ## hiera attributes
     $hiera_dev          = lookup('development')
-    $version_uglify_js  = $hiera_dev['npm']['uglify-js']
-    $version_imagemin   = $hiera_dev['npm']['imagemin']
-    $version_node_sass  = $hiera_dev['npm']['node-sass']
-    $version_babel_core = $hiera_dev['npm']['babel-core']
-    $version_browserify = $hiera_dev['npm']['browserify']
-    $version_babelify   = $hiera_dev['npm']['babelify']
+    $version_uglify_js  = $hiera_dev['npm']['custom']['uglify-js']
+    $version_imagemin   = $hiera_dev['npm']['custom']['imagemin']
+    $version_node_sass  = $hiera_dev['npm']['custom']['node-sass']
+    $version_babel_core = $hiera_dev['npm']['custom']['babel-core']
+    $version_browserify = $hiera_dev['npm']['custom']['browserify']
+    $version_babelify   = $hiera_dev['npm']['custom']['babelify']
 
     ## variables
     $webcompilers = [
