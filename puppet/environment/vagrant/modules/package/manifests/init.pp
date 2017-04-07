@@ -12,7 +12,7 @@ class package {
     $packages = lookup('development')
 
     ## iterate 'packages' hash
-    $packages.each|String $provider| {
+    $packages.each |$provider| {
         if ($provider in ['apt', 'npm', 'pip']) {
             $provider['general'].each|String $package, String $version| {
                 package { $package:
