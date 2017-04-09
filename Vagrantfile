@@ -80,7 +80,7 @@ Vagrant.configure(2) do |config|
             run 'rm -Rf interface/static/img'
             run 'rm -Rf interface/static/js'
             run "rm -Rf puppet/environment/#{puppet_environment}/modules_contrib"
-            run 'rm -Rf src/jsx/node_modules'
+            run 'rm -Rf src/node_modules'
             run 'rm -f src/js/.gitignore'
             run 'rm -f src/js/content.js'
             run 'find . -name "*.pyc" -type f -exec rm -r {} +'
