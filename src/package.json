@@ -1,7 +1,7 @@
 {
   "name": "reactjs",
   "version": "1.0.0",
-  "description": "contains packages for reactjs",
+  "description": "packages needed for source files.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
