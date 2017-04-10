@@ -24,8 +24,8 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
 
 ## Configuration
 
-Fork this project to your GitHub account. Then, remember to [generate](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/ssh_keys.rst)
- ssh keys, followed by cloning your repository, with one of the following approaches:
+Fork this project, and remember to [generate](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/ssh_keys.rst)
+ ssh keys, before cloning the repository:
 
 - [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#simple-clone):
  clone the remote master branch.
