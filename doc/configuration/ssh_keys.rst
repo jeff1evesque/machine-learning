@@ -17,14 +17,14 @@ The following steps through how to generate ssh keys with respect to github:
     $ pbcopy < ~/.ssh/id_rsa.pub
 
 **Note:** it is recommended to simply press enter, to keep default values
- when asked *Enter file in which to save the key*.  Also, if ``ssh-agent -s``
- alternative for git bash doesn't work, then ``eval $(ssh-agent -s)`` for
- other terminal prompts should work.
+when asked *Enter file in which to save the key*.  Also, if ``ssh-agent -s``
+alternative for git bash doesn't work, then ``eval $(ssh-agent -s)`` for
+other terminal prompts should work.
 
 Then, at the top of any github page (after login), click ``Settings > SSH keys >
- Add SSH Keys``, then paste the above copied key into the ``Key`` field, and click
- *Add key*.  Finally, to test the ssh connection, enter the following within
- the same terminal window used for the above commands:
+Add SSH Keys``, then paste the above copied key into the ``Key`` field, and click
+*Add key*.  Finally, to test the ssh connection, enter the following within
+the same terminal window used for the above commands:
 
 .. code:: bash
 
