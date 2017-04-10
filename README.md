@@ -35,8 +35,7 @@ Fork this project to your GitHub account. Then, remember to [generate](https://g
  clone the remote branch, associated with the desired release tag.
 
 **Note:** the [`puppetfile.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/doc/background/puppetfile.rst)
- can be reviewed, to better understand why ssh keys are required to be
- generated.
+ can be reviewed, to better understand why ssh keys are required.
 
 ## Installation
 
