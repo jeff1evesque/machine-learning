@@ -8,8 +8,8 @@ This file generates an sv model.
 
 from flask import current_app
 from brain.database.retrieve_entity import Retrieve_Entity
-from brain.cache.cache_hset import Cache_Hset
-from brain.cache.cache_model import Cache_Model
+from brain.cache.hset import Hset
+from brain.cache.model import Model
 from sklearn import svm, preprocessing
 from log.logger import Logger
 import numpy
@@ -97,7 +97,7 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
             clf = svm.SVC(kernel=kernel_type, probability=True)
 
             # cache encoded labels
-            Cache_Model(label_encoder).cache(model + '_labels', session_id)
+            Model(label_encoder).cache(model + '_labels', session_id)
 
             # fit model
             clf.fit(grouped_features, encoded_labels)
@@ -112,7 +112,7 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
 
             # compute, and cache coefficient of determination
             r2 = clf.score(grouped_features, observation_labels)
-            Cache_Hset().cache(
+            Hset().cache(
                 model + '_r2',
                 session_id,
                 r2
@@ -123,14 +123,14 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
         title = entity.get_title(session_id)['result'][0][0]
 
         # cache model, title
-        Cache_Model(clf).cache(
+        Model(clf).cache(
             model + '_model',
             str(session_id) + '_' + title
         )
-        Cache_Hset().cache(model + '_title', session_id, title)
+        Hset().cache(model + '_title', session_id, title)
 
         # cache feature labels, with respect to given session id
-        Cache_Hset().cache(
+        Hset().cache(
             model + '_feature_labels',
             str(session_id),
             json.dumps(feature_labels)

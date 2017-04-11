@@ -6,11 +6,11 @@ This file caches, and uncaches the supplied model into a redis hash cache.
 
 '''
 
-from brain.cache.redis_query import Redis_Query
+from brain.cache.query import Query
 from brain.converter.serialize_model import Serialize_Model
 
 
-class Cache_Model(object):
+class Model(object):
     '''
 
     This class provides an interface to cache, and uncache the redis hash
@@ -34,7 +34,7 @@ class Cache_Model(object):
         # class variables
         self.model = model
         self.list_error = []
-        self.myRedis = Redis_Query()
+        self.myRedis = Query()
 
         # start redis client
         try:

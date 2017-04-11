@@ -9,7 +9,7 @@ This file can set, or get the required redis host, or port.
 from flask import current_app
 
 
-class Redis_Settings(object):
+class Settings(object):
     '''
 
     This class provides an interface to get, or set the redis host, or redis

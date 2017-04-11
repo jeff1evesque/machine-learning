@@ -6,10 +6,10 @@ This file caches, and uncaches supplied data using the redis hash cache.
 
 '''
 
-from brain.cache.redis_query import Redis_Query
+from brain.cache.query import Query
 
 
-class Cache_Hset(object):
+class Hset(object):
     '''
 
     This class provides an interface to cache, and uncache the redis hash
@@ -31,7 +31,7 @@ class Cache_Hset(object):
 
         # class variables
         self.list_error = []
-        self.myRedis = Redis_Query()
+        self.myRedis = Query()
 
         # start redis client
         try:

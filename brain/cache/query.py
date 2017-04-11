@@ -7,10 +7,10 @@ This file allows various redis data structures to be used for caching.
 '''
 
 import redis
-from brain.cache.redis_settings import Redis_Settings
+from brain.cache.settings import Settings
 
 
-class Redis_Query(object):
+class Query(object):
     '''
 
     This class provides an interface to various Redis data structures.
@@ -52,7 +52,7 @@ class Redis_Query(object):
         '''
 
         # redis settings
-        my_redis = Redis_Settings()
+        my_redis = Settings()
 
         # define host, and port, if provided
         if host:
