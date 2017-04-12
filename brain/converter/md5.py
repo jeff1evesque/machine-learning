@@ -9,7 +9,7 @@ This file converts an object, to hash value equivalent.
 import hashlib
 
 
-def calculate_md5(item, block_size=256*128, hr=False):
+def calculate(item, block_size=256*128, hr=False):
     '''
 
     This method converts the contents of a given object, to a hash value

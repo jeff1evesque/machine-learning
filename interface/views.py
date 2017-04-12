@@ -20,7 +20,7 @@ decorators are defined, which flask triggers for specific URL's.
 import json
 from flask import Blueprint, render_template, request, session
 from brain.load_data import Load_Data
-from brain.converter.restructure_settings import Restructure_Settings
+from brain.converter.settings import Settings
 from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
 from brain.database.retrieve_session import Retrieve_Session
 from brain.cache.cache_model import Cache_Model
@@ -28,7 +28,7 @@ from brain.cache.cache_hset import Cache_Hset
 from brain.validator.validate_password import validate_password
 from brain.database.retrieve_account import Retrieve_Account
 from brain.database.save_account import Save_Account
-from brain.converter.crypto import hashpass, verifypass
+from brain.converter.crypto import hash_pass, verify_pass
 
 
 # local variables
@@ -81,7 +81,7 @@ def load_data():
             settings = request.get_json()['properties']
 
             # restructure the dataset
-            sender = Restructure_Settings(settings, dataset)
+            sender = Settings(settings, dataset)
             data_formatted = sender.restructure()
 
             # send reformatted data to brain
@@ -118,7 +118,7 @@ def load_data():
         # get submitted form data
         if request.form:
             settings = request.form
-            sender = Restructure_Settings(settings, files)
+            sender = Settings(settings, files)
             data_formatted = sender.restructure()
 
             # send reformatted data to brain
@@ -180,7 +180,7 @@ def login():
             if hashed_password:
 
                 # notification: verify password
-                if verifypass(str(password), hashed_password):
+                if verify_pass(str(password), hashed_password):
                     # set session: uid corresponds to primary key, from the
                     #              user database table, and a unique integer
                     #              representing the username.
@@ -270,7 +270,7 @@ def register():
                 if not account.check_email(email)['result']:
 
                     # database query: save username, and password
-                    hashed = hashpass(str(password))
+                    hashed = hash_pass(str(password))
                     result = Save_Account().save_account(
                         username,
                         email,

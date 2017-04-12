@@ -9,7 +9,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from flask import current_app
-from brain.converter.convert_dataset import Convert_Dataset
+from brain.converter.dataset import Dataset
 
 
 def dataset_dictionary(id_entity, model_type, upload):
@@ -42,7 +42,7 @@ def dataset_dictionary(id_entity, model_type, upload):
                 val['file'].seek(0)
 
                 # initialize converter
-                converter = Convert_Dataset(
+                converter = Dataset(
                     val['file'],
                     model_type,
                     is_json
@@ -75,7 +75,7 @@ def dataset_dictionary(id_entity, model_type, upload):
             if upload['settings']['model_type'] == list_model_type[0]:
                 for dataset_json in json_upload.items():
                     # conversion
-                    converter = Convert_Dataset(dataset_json, model_type, True)
+                    converter = Dataset(dataset_json, model_type, True)
                     converted = converter.json_to_dict()
                     count_features = converter.get_feature_count()
 
@@ -91,7 +91,7 @@ def dataset_dictionary(id_entity, model_type, upload):
             # regression
             elif upload['settings']['model_type'] == list_model_type[1]:
                 # conversion
-                converter = Convert_Dataset(json_upload, model_type, True)
+                converter = Dataset(json_upload, model_type, True)
                 converted = converter.json_to_dict()
                 count_features = converter.get_feature_count()
 

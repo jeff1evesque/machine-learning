@@ -12,7 +12,7 @@ Note: the 'pytest' instances can further be reviewed:
 from brain.validator.validate_password import validate_password
 from brain.database.retrieve_account import Retrieve_Account
 from brain.database.save_account import Save_Account
-from brain.converter.crypto import hashpass
+from brain.converter.crypto import hash_pass
 
 
 def test_registration(client, live_server):
@@ -40,7 +40,7 @@ def test_registration(client, live_server):
             if not authenticate.check_email(email)['result']:
 
                 # database query: save username, and password
-                hashed = hashpass(str(password))
+                hashed = hash_pass(str(password))
                 result = Save_Account().save_account(username, email, hashed)
 
                 # notification: attempt to store account

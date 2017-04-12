@@ -9,7 +9,7 @@ on an existing model. The dataset is left untouched, and formatted within
 '''
 
 
-class Restructure_Settings(object):
+class Operation(object):
     '''
 
     This class provides an interface to restructure the supplied data into a

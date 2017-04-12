@@ -12,7 +12,7 @@ from brain.validator.validate_dataset import Validate_Dataset
 from log.logger import Logger
 
 
-def svr_xml_converter(raw_data):
+def svr_xml2dict(raw_data):
     '''
 
     This method converts the supplied xml file-object to a python dictionary.

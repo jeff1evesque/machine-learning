@@ -13,7 +13,7 @@ from brain.validator.validate_dataset import Validate_Dataset
 from log.logger import Logger
 
 
-def svm_csv_converter(raw_data):
+def svm_csv2dict(raw_data):
     '''
 
     This method converts the supplied csv file-object, intended for an svm

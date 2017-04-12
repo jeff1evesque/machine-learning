@@ -11,7 +11,7 @@ corresponding file extension for each file upload(s).
 import os.path
 import urllib
 import cStringIO
-from brain.converter.calculate_md5 import calculate_md5
+from brain.converter.md5 import calculate
 
 
 class Validate_File_Extension(object):
@@ -67,7 +67,7 @@ class Validate_File_Extension(object):
             for index, filedata in enumerate(dataset['file_upload']):
                 try:
                     split_path = os.path.splitext(filedata['filename'])
-                    filehash = calculate_md5(filedata['file'])
+                    filehash = calculate(filedata['file'])
                     # add 'hashed' value of file reference(s) to a list
                     if filehash not in unique_data:
                         unique_data.add(filehash)

@@ -10,7 +10,7 @@ from six.moves import cPickle as pickle
 from sklearn import svm, preprocessing
 
 
-class Serialize_Model(object):
+class Model(object):
     '''
 
     This class provides an interface to serialize, and deserialize an SVM

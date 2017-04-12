@@ -60,24 +60,24 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     app.py                                                                             12     12     0%
     brain/__init__.py                                                                   0      0   100%
     brain/cache/__init__.py                                                             0      0   100%
-    brain/cache/cache_hset.py                                                          22     14    36%
-    brain/cache/cache_model.py                                                         36     26    28%
-    brain/cache/redis_query.py                                                         87     77    11%
-    brain/cache/redis_session.py                                                       54     54     0%
-    brain/cache/redis_settings.py                                                      14     10    29%
+    brain/cache/hset.py                                                                22     14    36%
+    brain/cache/model.py                                                               36     26    28%
+    brain/cache/query.py                                                               87     77    11%
+    brain/cache/session.py                                                             54     54     0%
+    brain/cache/settings.py                                                            14     10    29%
     brain/converter/__init__.py                                                         0      0   100%
-    brain/converter/calculate_md5.py                                                    9      9     0%
-    brain/converter/convert_dataset.py                                                 45     29    36%
+    brain/converter/md5.py                                                              9      9     0%
+    brain/converter/dataset.py                                                         45     29    36%
     brain/converter/crypto.py                                                          45      6    87%
     brain/converter/dataset/__init__.py                                                 0      0   100%
-    brain/converter/dataset/svm_csv_converter.py                                       38     38     0%
-    brain/converter/dataset/svm_json_converter.py                                      58     10    83%
-    brain/converter/dataset/svm_xml_converter.py                                       27     27     0%
-    brain/converter/dataset/svr_csv_converter.py                                       38     38     0%
-    brain/converter/dataset/svr_json_converter.py                                      58     10    83%
-    brain/converter/dataset/svr_xml_converter.py                                       30     30     0%
-    brain/converter/restructure_settings.py                                            45     25    44%
-    brain/converter/serialize_model.py                                                 12      7    42%
+    brain/converter/dataset/svm_csv.py                                                 38     38     0%
+    brain/converter/dataset/svm_json.py                                                58     10    83%
+    brain/converter/dataset/svm_xml.py                                                 27     27     0%
+    brain/converter/dataset/svr_csv.py                                                 38     38     0%
+    brain/converter/dataset/svr_json.py                                                58     10    83%
+    brain/converter/dataset/svr_xml.py                                                 30     30     0%
+    brain/converter/operation.py                                                       45     25    44%
+    brain/converter/model.py                                                           12      7    42%
     brain/database/__init__.py                                                          0      0   100%
     brain/database/db_query.py                                                         55     24    56%
     brain/database/db_settings.py                                                      19     13    32%
