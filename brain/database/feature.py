@@ -7,7 +7,7 @@ corresponding database tables.
 
 '''
 
-from flask import current_apps
+from flask import current_app
 from brain.database.query import SQL
 
 
