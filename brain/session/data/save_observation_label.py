@@ -6,7 +6,7 @@ This file provides necessary methods to store observation labels.
 
 '''
 
-from brain.database.save_observation import Save_Observation
+from brain.database.observation import Observation
 
 
 def observation_label(session_type, session_id, labels, file_upload):
@@ -26,7 +26,7 @@ def observation_label(session_type, session_id, labels, file_upload):
         if len(labels) > 0:
             for label_list in labels:
                 for label in label_list:
-                    db_save = Save_Observation(
+                    db_save = Observation(
                         {
                             'label': label,
                             'id_entity': session_id
@@ -43,7 +43,7 @@ def observation_label(session_type, session_id, labels, file_upload):
     else:
         if len(labels) > 0:
             for label in labels:
-                db_save = Save_Observation(
+                db_save = Observation(
                     {
                         'label': label,
                         'id_entity': session_id

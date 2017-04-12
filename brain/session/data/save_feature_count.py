@@ -8,7 +8,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.database.save_feature import Save_Feature
+from brain.database.feature import Feature
 
 
 def feature_count(dataset):
@@ -27,7 +27,7 @@ def feature_count(dataset):
 
     '''
 
-    db_save = Save_Feature({
+    db_save = Feature({
         'id_entity': dataset['id_entity'],
         'count_features': dataset['count_features']
     })

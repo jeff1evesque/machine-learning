@@ -79,17 +79,14 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     brain/converter/operation.py                                                       45     25    44%
     brain/converter/model.py                                                           12      7    42%
     brain/database/__init__.py                                                          0      0   100%
-    brain/database/db_query.py                                                         55     24    56%
-    brain/database/db_settings.py                                                      19     13    32%
-    brain/database/retrieve_account.py                                                 48     13    73%
-    brain/database/retrieve_entity.py                                                  18      7    61%
-    brain/database/retrieve_feature.py                                                 32      9    72%
-    brain/database/retrieve_model_type.py                                              18      7    61%
-    brain/database/retrieve_session.py                                                 22     22     0%
-    brain/database/save_account.py                                                     18      7    61%
-    brain/database/save_entity.py                                                      25      7    72%
-    brain/database/save_feature.py                                                     35      9    74%
-    brain/database/save_observation.py                                                 25      7    72%
+    brain/database/query.py                                                            55     24    56%
+    brain/database/settings.py                                                         19     13    32%
+    brain/database/account.py                                                          48     13    73%
+    brain/database/entity.py                                                           18      7    61%
+    brain/database/feature.py                                                          32      9    72%
+    brain/database/model_type.py                                                       18      7    61%
+    brain/database/session.py                                                          22     22     0%
+    brain/database/observation.py                                                      25      7    72%
     brain/load_data.py                                                                 89     29    67%
     brain/schema/__init__.py                                                            0      0   100%
     brain/schema/jsonschema_definition.py                                              13      5    62%

@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.session.base_data import Base_Data
-from brain.database.save_entity import Save_Entity
+from brain.database.entity import Entity
 
 
 class Data_New(Base_Data):
@@ -37,7 +37,7 @@ class Data_New(Base_Data):
         # superclass constructor
         Base_Data.__init__(self, premodel_data)
 
-    def save_entity(self, session_type, id_entity=None):
+    def Entity(self, session_type, id_entity=None):
         '''
 
         This method overrides the identical method from the inherited
@@ -67,7 +67,7 @@ class Data_New(Base_Data):
             'model_type': numeric_model_type,
             'uid': self.uid,
         }
-        db_save = Save_Entity(premodel_entity, session_type)
+        db_save = Entity(premodel_entity, session_type)
 
         # save dataset element
         db_return = db_save.save()

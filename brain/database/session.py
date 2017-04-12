@@ -7,10 +7,10 @@ This file retrieves the 'session_name', and 'id_entity' properties.
 '''
 
 from flask import current_app
-from brain.database.db_query import SQL
+from brain.database.query import SQL
 
 
-class Retrieve_Session(object):
+class Session(object):
     '''
 
     This class provides an interface to retrieve the 'session_name', and
@@ -45,9 +45,9 @@ class Retrieve_Session(object):
         list_session = []
 
         # sql query
-        self.sql.sql_connect(self.db_ml)
+        self.sql.connect(self.db_ml)
         sql_statement = 'SELECT id_entity, title FROM tbl_dataset_entity'
-        response = self.sql.sql_command(sql_statement, 'select')
+        response = self.sql.execute(sql_statement, 'select')
 
         # rebuild session list, get error(s) if any
         if response['result']:
@@ -58,7 +58,7 @@ class Retrieve_Session(object):
             response_error = 'no previous session found in database'
 
         # disconnect from database
-        self.sql.sql_disconnect()
+        self.sql.disconnect()
 
         # return result
         if response_error:

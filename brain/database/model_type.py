@@ -7,10 +7,10 @@ This file retrieves model type, when provided the model id.
 '''
 
 from flask import current_app
-from brain.database.db_query import SQL
+from brain.database.query import SQL
 
 
-class Retrieve_Model_Type(object):
+class ModelType(object):
     '''
 
     Note: this class explicitly inherits the 'new-style' class.
@@ -43,18 +43,18 @@ class Retrieve_Model_Type(object):
         '''
 
         # select dataset
-        self.sql.sql_connect(self.db_ml)
+        self.sql.connect(self.db_ml)
         sql_statement = 'SELECT mtype.model'\
             ' FROM tbl_dataset_entity mid'\
             ' INNER JOIN tbl_model_type mtype'\
             ' ON mid.model_type = mtype.id_model'\
             ' WHERE mid.id_entity=%s'
         args = (id_entity)
-        response = self.sql.sql_command(sql_statement, 'select', args)
+        response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
-        self.sql.sql_disconnect()
+        self.sql.disconnect()
 
         # return result
         if response_error:

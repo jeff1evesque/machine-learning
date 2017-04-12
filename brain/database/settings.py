@@ -33,7 +33,7 @@ class Database(object):
             -> DATABASES ON *.* TO 'authenticated'@'localhost';
         MariaDB> FLUSH PRIVILEGES;
 
-    Note: this class is invoked within 'db_query.py'
+    Note: this class is invoked within 'query.py'
 
     Note: this class explicitly inherits the 'new-style' class.
 

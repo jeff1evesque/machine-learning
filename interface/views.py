@@ -21,13 +21,12 @@ import json
 from flask import Blueprint, render_template, request, session
 from brain.load_data import Load_Data
 from brain.converter.settings import Settings
-from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
-from brain.database.retrieve_session import Retrieve_Session
+from brain.database.model_type import ModelType
+from brain.database.session import Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
 from brain.validator.validate_password import validate_password
-from brain.database.retrieve_account import Retrieve_Account
-from brain.database.save_account import Save_Account
+from brain.database.account import Account
 from brain.converter.crypto import hash_pass, verify_pass
 
 
@@ -164,7 +163,7 @@ def login():
         # local variables
         username = request.form.getlist('user[login]')[0]
         password = request.form.getlist('user[password]')[0]
-        account = Retrieve_Account()
+        account = Account()
 
         # validate: check username exists
         if (
@@ -258,7 +257,7 @@ def register():
         username = request.form.getlist('user[login]')[0]
         email = request.form.getlist('user[email]')[0]
         password = request.form.getlist('user[password]')[0]
-        account = Retrieve_Account()
+        account = Account()
 
         # validate requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
@@ -271,7 +270,7 @@ def register():
 
                     # database query: save username, and password
                     hashed = hash_pass(str(password))
-                    result = Save_Account().save_account(
+                    result = Account().Account(
                         username,
                         email,
                         hashed
@@ -324,7 +323,7 @@ def retrieve_session():
 
     if request.method == 'POST':
         # get all sessions
-        session_list = Retrieve_Session().get_all_sessions()
+        session_list = Session().get_all_sessions()
 
         # return all sessions
         if session_list['result']:
@@ -391,7 +390,7 @@ def retrieve_sv_features():
 
     # get model type
     model_id = request.get_json()['model_id']
-    model_type = M_Type().get_model_type(model_id)['result']
+    model_type = ModelType().get_model_type(model_id)['result']
 
     # return all feature labels
     if request.method == 'POST':

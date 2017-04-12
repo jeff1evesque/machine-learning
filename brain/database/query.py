@@ -6,7 +6,7 @@ This file contains various generic SQL-related methods.
 '''
 
 import MySQLdb as DB
-from brain.database.db_settings import Database
+from brain.database.settings import Database
 
 
 class SQL(object):
@@ -30,7 +30,7 @@ class SQL(object):
 
         '''
 
-        self.db_settings = Database()
+        self.settings = Database()
         self.list_error = []
         self.proceed = True
 
@@ -38,21 +38,21 @@ class SQL(object):
         if host:
             self.host = host
         else:
-            self.host = self.db_settings.get_db_host()
+            self.host = self.settings.get_db_host()
 
         # sql username for above host address
         if user:
             self.user = user
         else:
-            self.user = self.db_settings.get_db_username()
+            self.user = self.settings.get_db_username()
 
         # sql password for above username
         if passwd:
             self.passwd = passwd
         else:
-            self.passwd = self.db_settings.get_db_password()
+            self.passwd = self.settings.get_db_password()
 
-    def sql_connect(self, database=None):
+    def connect(self, database=None):
         '''
 
         This method is responsible for defining the necessary interface to
@@ -92,7 +92,7 @@ class SQL(object):
                 'id': None,
             }
 
-    def sql_command(self, sql_statement, sql_type, sql_args=None):
+    def execute(self, sql_statement, sql_type, sql_args=None):
         '''
 
         This method is responsible for defining the necessary interface to
@@ -136,7 +136,7 @@ class SQL(object):
                 'result': result,
             }
 
-    def sql_disconnect(self):
+    def disconnect(self):
         '''
 
         This method is responsible for defining the necessary interface to

@@ -7,7 +7,7 @@ This file saves the observation labels.
 '''
 
 from flask import current_app
-from brain.database.db_query import SQL
+from brain.database.query import SQL
 
 
 class Save_Observation(object):
@@ -50,7 +50,7 @@ class Save_Observation(object):
         '''
 
         # insert / update feature label(s)
-        self.sql.sql_connect(self.db_ml)
+        self.sql.connect(self.db_ml)
 
         # add labels (append case)
         if self.session_type in ['data_append', 'data_new']:
@@ -63,7 +63,7 @@ class Save_Observation(object):
                 self.premodel_data['label'],
                 self.premodel_data['id_entity']
             )
-            response = self.sql.sql_command(sql_statement, 'select', args)
+            response = self.sql.execute(sql_statement, 'select', args)
 
             # add labels if not exist
             if not response['result']:
@@ -73,7 +73,7 @@ class Save_Observation(object):
                     self.premodel_data['id_entity'],
                     self.premodel_data['label']
                 )
-                self.sql.sql_command(
+                self.sql.execute(
                     sql_statement,
                     'insert',
                     args,
@@ -81,7 +81,7 @@ class Save_Observation(object):
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
-        self.sql.sql_disconnect()
+        self.sql.disconnect()
 
         # return result
         if response_error:

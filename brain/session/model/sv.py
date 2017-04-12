@@ -7,7 +7,7 @@ This file generates an sv model.
 '''
 
 from flask import current_app
-from brain.database.retrieve_entity import Retrieve_Entity
+from brain.database.entity import Entity
 from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
@@ -119,7 +119,7 @@ def sv_model(model, kernel_type, session_id, feature_request, list_error):
             )
 
         # get title
-        entity = Retrieve_Entity()
+        entity = Entity()
         title = entity.get_title(session_id)['result'][0][0]
 
         # cache model, title

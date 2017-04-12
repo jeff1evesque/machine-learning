@@ -8,7 +8,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.database.save_entity import Save_Entity
+from brain.database.entity import Entity
 
 
 def entity(dataset, session_type, userid):
@@ -26,7 +26,7 @@ def entity(dataset, session_type, userid):
         'uid': userid,
         'id_entity': None
     }
-    db_save = Save_Entity(premodel_entity, session_type)
+    db_save = Entity(premodel_entity, session_type)
 
     # save dataset element
     db_return = db_save.save()

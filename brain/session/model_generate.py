@@ -11,7 +11,7 @@ into respective database table(s), which later can be retrieved within
 '''
 
 from brain.session.base import Base
-from brain.database.retrieve_feature import Retrieve_Feature
+from brain.database.feature import Feature
 from brain.session.model.sv import sv_model
 
 
@@ -42,7 +42,7 @@ class Model_Generate(Base):
         super(Model_Generate, self).__init__(premodel_data)
         self.kernel = str(premodel_data['data']['settings']['sv_kernel_type'])
         self.session_id = premodel_data['data']['settings']['session_id']
-        self.feature_request = Retrieve_Feature()
+        self.feature_request = Feature()
         self.list_error = []
 
     def generate_model(self):

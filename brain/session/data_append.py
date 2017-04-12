@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.session.base_data import Base_Data
-from brain.database.save_entity import Save_Entity
+from brain.database.entity import Entity
 
 
 class Data_Append(Base_Data):
@@ -38,7 +38,7 @@ class Data_Append(Base_Data):
         # superclass constructor
         Base_Data.__init__(self, premodel_data)
 
-    def save_entity(self, session_type, session_id):
+    def Entity(self, session_type, session_id):
         '''
 
         This method overrides the identical method from the inherited
@@ -58,7 +58,7 @@ class Data_Append(Base_Data):
             'uid': self.uid,
             'id_entity': session_id,
         }
-        db_save = Save_Entity(premodel_entity, session_type)
+        db_save = Entity(premodel_entity, session_type)
 
         # save dataset element
         db_return = db_save.save()

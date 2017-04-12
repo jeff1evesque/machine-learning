@@ -8,7 +8,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.database.save_feature import Save_Feature
+from brain.database.feature import Feature
 
 
 def dataset(dataset, model_type):
@@ -25,13 +25,13 @@ def dataset(dataset, model_type):
     # save dataset
     for data in dataset:
         for select_data in data['premodel_dataset']:
-            db_save = Save_Feature({
+            db_save = Feature({
                 'premodel_dataset': select_data,
                 'id_entity': data['id_entity'],
             })
 
             # save dataset element, append error(s)
-            db_return = db_save.save_feature(model_type)
+            db_return = db_save.Feature(model_type)
             if db_return['error']:
                 list_error.append(db_return['error'])
 
