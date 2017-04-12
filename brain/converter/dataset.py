@@ -12,7 +12,7 @@ from brain.converter.dataset.svm_json import svm_json2dict
 from brain.converter.dataset.svm_xml import svm_xml2dict
 from brain.converter.dataset.svr_csv import svr_csv2dict
 from brain.converter.dataset.svr_json import svr_json2dict
-from brain.converter.dataset.svr_xml import svr_json2dict
+from brain.converter.dataset.svr_xml import svr_xml2dict
 
 
 class Dataset(object):
@@ -67,7 +67,7 @@ class Dataset(object):
 
         # convert classification dataset
         if self.model_type == self.classification:
-            data = svm_csv_converter(self.raw_data)
+            data = svm_csv2dict(self.raw_data)
 
         # convert regression dataset
         elif self.model_type == self.regression:
@@ -121,7 +121,7 @@ class Dataset(object):
 
         # convert regression dataset
         elif self.model_type == self.regression:
-            data = svr_json2dict(self.raw_data)
+            data = svr_xml2dict(self.raw_data)
 
         # record observation labels, and feature count
         self.observation_labels = data['observation_labels']
