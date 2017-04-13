@@ -67,7 +67,7 @@ class Load_Data(object):
                 session.validate_id(session_id)
                 session.check()
 
-                session.dataset(session_id)
+                session.dataset2dict(session_id)
                 session.check()
                 session.save_feature_count()
                 session.check()
@@ -119,7 +119,7 @@ class Load_Data(object):
             if session_entity['status']:
                 session.check()
 
-                session.dataset(session_id)
+                session.dataset2dict(session_id)
                 session.check()
 
                 session.save_observation_label('data_append', session_id)
