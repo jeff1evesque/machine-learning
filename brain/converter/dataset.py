@@ -7,12 +7,12 @@ This file restructures only the supplied dataset(s).
 '''
 
 from flask import current_app
-from brain.converter.dataset.svm_csv import svm_csv2dict
-from brain.converter.dataset.svm_json import svm_json2dict
-from brain.converter.dataset.svm_xml import svm_xml2dict
-from brain.converter.dataset.svr_csv import svr_csv2dict
-from brain.converter.dataset.svr_json import svr_json2dict
-from brain.converter.dataset.svr_xml import svr_xml2dict
+from brain.converter.svm.csv import svm_csv2dict
+from brain.converter.svm.json import svm_json2dict
+from brain.converter.svm.xml import svm_xml2dict
+from brain.converter.svr.csv import svr_csv2dict
+from brain.converter.svr.json import svr_json2dict
+from brain.converter.svr.xml import svr_xml2dict
 
 
 class Dataset(object):
