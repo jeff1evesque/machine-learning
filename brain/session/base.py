@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 import sys
 from flask import current_app
-from brain.validator.validate_settings import Validate_Settings
+from brain.validator.settings import Validator
 
 
 class Base(object):

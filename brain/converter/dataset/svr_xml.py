@@ -8,7 +8,7 @@ python dictionary format.
 '''
 
 import xmltodict
-from brain.validator.validate_dataset import Validate_Dataset
+from brain.validator.dataset import Validator
 from log.logger import Logger
 
 
@@ -45,7 +45,7 @@ def svr_xml2dict(raw_data):
                     predictor_label = predictor['label']
                     predictor_value = predictor['value']
 
-                    validate_value = Validate_Dataset(predictor_value)
+                    validate_value = Validator(predictor_value)
                     validate_value.validate_value()
                     list_error_value = validate_value.get_errors()
                     if list_error_value:

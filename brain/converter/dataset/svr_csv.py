@@ -9,7 +9,7 @@ python dictionary format.
 
 import csv
 from itertools import islice
-from brain.validator.validate_dataset import Validate_Dataset
+from brain.validator.dataset import Validator
 from log.logger import Logger
 
 
@@ -76,7 +76,7 @@ def svr_csv2dict(raw_data):
         ):
 
             try:
-                validate = Validate_Dataset(value)
+                validate = Validator(value)
                 validate.validate_value()
 
                 list_error = validate.get_errors()

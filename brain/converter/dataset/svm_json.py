@@ -8,7 +8,7 @@ python dictionary format.
 '''
 
 import json
-from brain.validator.validate_dataset import Validate_Dataset
+from brain.validator.dataset import Validator
 from log.logger import Logger
 
 
@@ -46,7 +46,7 @@ def svr_json2dict(raw_data, is_json):
             if type(observations) == dict:
                 for feature_label, feature_value in observations.items():
                     # validation
-                    validate_fvalue = Validate_Dataset(feature_value)
+                    validate_fvalue = Validator(feature_value)
                     validate_fvalue.validate_value()
 
                     if validate_fvalue.get_errors():
@@ -68,7 +68,7 @@ def svr_json2dict(raw_data, is_json):
                 for observation in observations:
                     for feature_label, feature_value in observation.items():
                         # validation
-                        validate_fvalue = Validate_Dataset(feature_value)
+                        validate_fvalue = Validator(feature_value)
                         validate_fvalue.validate_value()
 
                         if validate_fvalue.get_errors():
@@ -100,7 +100,7 @@ def svr_json2dict(raw_data, is_json):
         if type(raw_data[1]) == dict:
             for label, feature in raw_data[1].items():
                 # validation
-                validate_fvalue = Validate_Dataset(feature)
+                validate_fvalue = Validator(feature)
                 validate_fvalue.validate_value()
 
                 if validate_fvalue.get_errors():
@@ -122,7 +122,7 @@ def svr_json2dict(raw_data, is_json):
             for feature_set in raw_data[1]:
                 for feature_label, feature_value in feature_set.items():
                     # validation
-                    validate_fvalue = Validate_Dataset(feature_value)
+                    validate_fvalue = Validator(feature_value)
                     validate_fvalue.validate_value()
 
                     if validate_fvalue.get_errors():

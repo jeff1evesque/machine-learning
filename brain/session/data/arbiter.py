@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.database.entity import Entity
 from brain.database.feature import Feature
 from brain.database.observation import Observation
-from brain.validator.validate_file_extension import Validate_File_Extension
+from brain.validator.file_extension import Validator
 
 
 def save_info(dataset, session_type, userid):
@@ -141,7 +141,7 @@ def reduce(dataset, session_type):
     ):
 
         # validate and restructure
-        validator = Validate_File_Extension(
+        validator = Validator(
             dataset,
             session_type
         )
@@ -171,7 +171,7 @@ def reduce(dataset, session_type):
             )
 
         # validate and restructure
-        validator = Validate_File_Extension(
+        validator = Validator(
             {
                 'data': {
                     'dataset': {
@@ -219,7 +219,7 @@ def reduce(dataset, session_type):
             )
 
         # validate and restructure
-        validator = Validate_File_Extension(
+        validator = Validator(
             {
                 'data': {
                     'dataset': {

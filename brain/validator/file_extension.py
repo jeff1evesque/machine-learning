@@ -14,7 +14,7 @@ import cStringIO
 from brain.converter.md5 import calculate
 
 
-class Validate_File_Extension(object):
+class Validator(object):
     '''
 
     This class provides an interface to validate the file extension,

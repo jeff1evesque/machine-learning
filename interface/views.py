@@ -25,7 +25,7 @@ from brain.database.model_type import ModelType
 from brain.database.session import Session
 from brain.cache.cache_model import Cache_Model
 from brain.cache.cache_hset import Cache_Hset
-from brain.validator.validate_password import validate_password
+from brain.validator.password import validate_password
 from brain.database.account import Account
 from brain.converter.crypto import hash_pass, verify_pass
 

@@ -7,7 +7,7 @@ This script performs validation on correpsonding dataset(s).
 '''
 
 
-class Validate_Dataset(object):
+class Validator(object):
     '''
 
     This class provies an interface to validate provided dataset(s) during

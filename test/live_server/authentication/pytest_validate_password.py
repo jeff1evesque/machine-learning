@@ -16,7 +16,7 @@ def test_validate_password():
         try:
             yamlres = yaml.load(stream)
             root = yamlres['general']['root']
-            validate_password = root + '/brain/validator/validate_password.py'
+            validate_password = root + '/brain/validator/password.py'
             vp = imp.load_source('validate_password', validate_password)
         except yaml.YAMLError as error:
             print error

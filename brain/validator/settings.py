@@ -13,7 +13,7 @@ from brain.schema.session import schema_model_generate
 from brain.schema.session import schema_model_predict
 
 
-class Validate_Settings(object):
+class Validator(object):
     '''
 
     This class provides an interface to validate the settings for each

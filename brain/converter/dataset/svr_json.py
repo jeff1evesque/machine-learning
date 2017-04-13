@@ -8,7 +8,7 @@ python dictionary format.
 '''
 
 import json
-from brain.validator.validate_dataset import Validate_Dataset
+from brain.validator.dataset import Validator
 from log.logger import Logger
 
 
@@ -47,7 +47,7 @@ def svr_json2dict(raw_data, is_json):
             if type(predictors) == dict:
                 for label, predictor in predictors.items():
                     # validation (part 1)
-                    validate_predictor = Validate_Dataset(predictor)
+                    validate_predictor = Validator(predictor)
                     validate_predictor.validate_value()
 
                     if validate_predictor.get_errors():
@@ -69,7 +69,7 @@ def svr_json2dict(raw_data, is_json):
                 for criterion in predictors:
                     for label, predictor in criterion.items():
                         # validation (part 1)
-                        validate_predictor = Validate_Dataset(predictor)
+                        validate_predictor = Validator(predictor)
                         validate_predictor.validate_value()
 
                         if validate_predictor.get_errors():
@@ -98,7 +98,7 @@ def svr_json2dict(raw_data, is_json):
             if type(predictors) == dict:
                 for label, predictor in predictors.items():
                     # validation (part 1)
-                    validate_predictor = Validate_Dataset(predictor)
+                    validate_predictor = Validator(predictor)
                     validate_predictor.validate_value()
 
                     if validate_predictor.get_errors():
@@ -120,7 +120,7 @@ def svr_json2dict(raw_data, is_json):
                 for single_predictors in predictors:
                     for label, predictor in single_predictors.items():
                         # validation (part 1)
-                        validate_predictor = Validate_Dataset(predictor)
+                        validate_predictor = Validator(predictor)
                         validate_predictor.validate_value()
 
                         if validate_predictor.get_errors():

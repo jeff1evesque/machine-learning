@@ -9,7 +9,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-from brain.validator.validate_password import validate_password
+from brain.validator.password import validate_password
 from brain.database.account import Account
 from brain.converter.crypto import hash_pass
 
