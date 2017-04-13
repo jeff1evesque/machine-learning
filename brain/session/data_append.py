@@ -38,7 +38,7 @@ class DataAppend(BaseData):
         # superclass constructor
         BaseData.__init__(self, premodel_data)
 
-    def Entity(self, session_type, session_id):
+    def save_entity(self, session_type, session_id):
         '''
 
         This method overrides the identical method from the inherited

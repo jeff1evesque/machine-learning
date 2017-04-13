@@ -37,7 +37,7 @@ class DataNew(BaseData):
         # superclass constructor
         BaseData.__init__(self, premodel_data)
 
-    def Entity(self, session_type, id_entity=None):
+    def save_entity(self, session_type, id_entity=None):
         '''
 
         This method overrides the identical method from the inherited
