@@ -40,7 +40,7 @@ def test_registration(client, live_server):
 
                 # database query: save username, and password
                 hashed = hash_pass(str(password))
-                result = Account().Account(username, email, hashed)
+                result = Account().save_account(username, email, hashed)
 
                 # notification: attempt to store account
                 assert result['status']

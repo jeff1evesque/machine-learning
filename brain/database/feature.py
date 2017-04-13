@@ -132,7 +132,7 @@ class Feature(object):
         list_model_type = current_app.config.get('MODEL_TYPE')
 
         # establish connection
-        self.sql.sql_connect(self.db_ml)
+        self.sql.connect(self.db_ml)
 
         # case 1: svm data
         if model == list_model_type[0]:
@@ -183,7 +183,7 @@ class Feature(object):
             Therefore, '%s' is used for argument substitution.
         '''
 
-        self.sql.sql_connect(self.db_ml)
+        self.sql.connect(self.db_ml)
         sql_statement = 'SELECT count_features '\
             'FROM tbl_feature_count '\
             'WHERE id_entity=%s'
