@@ -65,7 +65,7 @@ class Base(object):
 
         '''
 
-        validate = Validate_Settings(
+        validate = Validator(
             self.premodel_data,
             self.session_type
         )

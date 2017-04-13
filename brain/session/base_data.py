@@ -114,7 +114,7 @@ class BaseData(Base):
         '''
 
         # save entity description
-        response = save_descripto(self.premodel_data, session_type, self.uid)
+        response = save_info(self.premodel_data, session_type, self.uid)
 
         # return result
         if response['error']:

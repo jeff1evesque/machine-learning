@@ -43,6 +43,7 @@ def save_info(dataset, session_type, userid):
     elif db_return['status'] and session_type == 'data_new':
         return {'id': db_return['id'], 'error': None}
 
+
 def save_count(dataset):
     '''
 
@@ -70,6 +71,7 @@ def save_count(dataset):
         return {'error': db_return['error']}
     else:
         return {'error': None}
+
 
 def save_olabels(session_type, session_id, labels, file_upload):
     '''
@@ -120,6 +122,7 @@ def save_olabels(session_type, session_id, labels, file_upload):
 
     # return
     return {'error': list_error}
+
 
 def reduce(dataset, session_type):
     '''
