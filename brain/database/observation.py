@@ -10,7 +10,7 @@ from flask import current_app
 from brain.database.query import SQL
 
 
-class Save_Observation(object):
+class Observation(object):
     '''
 
     This class provides an interface to store observation labels, provided
