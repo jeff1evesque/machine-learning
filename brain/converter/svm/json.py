@@ -12,7 +12,7 @@ from brain.validator.dataset import Validator
 from log.logger import Logger
 
 
-def svr_json2dict(raw_data, is_json):
+def svm_json2dict(raw_data, is_json):
     '''
 
     This method converts the supplied json file-object to a python
