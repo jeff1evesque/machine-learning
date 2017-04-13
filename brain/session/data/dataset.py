@@ -10,13 +10,14 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from flask import current_app
 from brain.converter.dataset import Dataset
+from brain.database.feature import Feature
 
 
-def dataset_dictionary(id_entity, model_type, upload):
+def dataset2dict(id_entity, model_type, upload):
     '''
 
     This method converts the supplied csv, or xml file upload(s) to a uniform
-    dict object.
+    dict object, using necessary converter utility functions.
 
     @upload, uploaded dataset(s).
 
@@ -122,3 +123,30 @@ def dataset_dictionary(id_entity, model_type, upload):
             'observation_labels': observation_labels,
             'error': False
         }
+
+def save_dataset(dataset, model_type):
+    '''
+
+    This method saves each dataset element (independent variable value) into
+    the sql database.
+
+    '''
+
+    # variables
+    list_error = []
+
+    # save dataset
+    for data in dataset:
+        for select_data in data['premodel_dataset']:
+            db_save = Feature({
+                'premodel_dataset': select_data,
+                'id_entity': data['id_entity'],
+            })
+
+            # save dataset element, append error(s)
+            db_return = db_save.Feature(model_type)
+            if db_return['error']:
+                list_error.append(db_return['error'])
+
+    # return
+    return {'error': list_error}

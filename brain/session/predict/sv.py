@@ -12,7 +12,7 @@ from brain.cache.hset import Hset
 from brain.cache.model import Model
 
 
-def sv_prediction(model, model_id, predictors):
+def predict(model, model_id, predictors):
     '''
 
     This method generates an sv (i.e. svm, or svr) prediction using the

@@ -89,14 +89,13 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     brain/database/observation.py                                                      25      7    72%
     brain/load_data.py                                                                 89     29    67%
     brain/schema/__init__.py                                                            0      0   100%
-    brain/schema/jsonschema_definition.py                                              13      5    62%
+    brain/schema/schema_definition.py                                                  13      5    62%
     brain/session/__init__.py                                                           0      0   100%
     brain/session/base.py                                                              27     16    41%
     brain/session/base_data.py                                                         60     35    42%
     brain/session/data/__init__.py                                                      0      0   100%
-    brain/session/data/dataset_to_dict.py                                              48     11    77%
-    brain/session/data/save_dataset.py                                                 11      4    64%
-    brain/session/data/save_entity.py                                                  13     13     0%
+    brain/session/data/dataset.py                                                      48     11    77%
+    brain/session/data/configuration.py                                                13     13     0%
     brain/session/data/save_feature_count.py                                            8      4    50%
     brain/session/data/save_observation_label.py                                       19      5    74%
     brain/session/data/validate_file_extension.py                                      37     22    41%

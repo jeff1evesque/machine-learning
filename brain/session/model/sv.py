@@ -16,7 +16,7 @@ import numpy
 import json
 
 
-def sv_model(model, kernel_type, session_id, feature_request, list_error):
+def generate(model, kernel_type, session_id, feature_request, list_error):
     '''
 
     This method generates an sv (i.e. svm, or svr) model using feature data,

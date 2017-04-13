@@ -8,10 +8,10 @@ json.dumps(
 '''
 
 import json
-from brain.session.data_append import Data_Append
-from brain.session.data_new import Data_New
-from brain.session.model_generate import Model_Generate
-from brain.session.model_predict import Model_Predict
+from brain.session.data_append import DataAppend
+from brain.session.data_new import DataNew
+from brain.session.model_generate import ModelGenerate
+from brain.session.model_predict import ModelPredict
 
 
 class Load_Data(object):
@@ -53,7 +53,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = Data_New(self.data)
+        session = DataNew(self.data)
 
         # implement class methods
         if not session.validate_arg_none():
@@ -67,7 +67,7 @@ class Load_Data(object):
                 session.validate_id(session_id)
                 session.check()
 
-                session.dataset_to_dict(session_id)
+                session.dataset(session_id)
                 session.check()
                 session.save_feature_count()
                 session.check()
@@ -103,7 +103,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = Data_Append(self.data)
+        session = DataAppend(self.data)
 
         # define current session id
         session_id = self.data['data']['settings']['session_id']
@@ -119,7 +119,7 @@ class Load_Data(object):
             if session_entity['status']:
                 session.check()
 
-                session.dataset_to_dict(session_id)
+                session.dataset(session_id)
                 session.check()
 
                 session.save_observation_label('data_append', session_id)
@@ -154,7 +154,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = Model_Generate(self.data)
+        session = ModelGenerate(self.data)
 
         # generate model
         if not session.validate_arg_none():
@@ -187,7 +187,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = Model_Predict(self.data)
+        session = ModelPredict(self.data)
 
         # implement class methods
         if not session.validate_arg_none():

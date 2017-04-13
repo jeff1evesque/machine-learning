@@ -7,7 +7,7 @@ This file contains various jsonschema definitions.
 '''
 
 
-def jsonschema_data_new():
+def schema_data_new():
     '''
 
     This method validates the 'data_new' session, by validating the session
@@ -45,7 +45,7 @@ def jsonschema_data_new():
     return schema
 
 
-def jsonschema_data_append():
+def schema_data_append():
     '''
 
     This method validates the 'data_append' session, by validating the session
@@ -79,7 +79,7 @@ def jsonschema_data_append():
     return schema
 
 
-def jsonschema_model_generate():
+def schema_model_generate():
     '''
 
     This method validates the 'model_generate' session, by validating the
@@ -113,7 +113,7 @@ def jsonschema_model_generate():
     return schema
 
 
-def jsonschema_model_predict():
+def schema_model_predict():
     '''
 
     This method validates the 'model_predict' session, by validating the

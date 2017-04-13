@@ -2,7 +2,7 @@
 
 '''
 
-This file allows methods defined from the Base, or Base_Data superclass to be
+This file allows methods defined from the Base, or BaseData superclass to be
 overridden, if needed.
 
 Note: the term 'dataset' used throughout various comments in this file,
@@ -11,11 +11,11 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.session.base_data import Base_Data
+from brain.session.base_data import BaseData
 from brain.database.entity import Entity
 
 
-class Data_Append(Base_Data):
+class DataAppend(BaseData):
     '''
 
     This class provides an interface to update existing stored entities within
@@ -23,7 +23,7 @@ class Data_Append(Base_Data):
 
     Note: this class is invoked within 'load_data.py'
 
-    Note: inherit base methods from the superclass 'Base_Data
+    Note: inherit base methods from the superclass 'BaseData'
 
     '''
 
@@ -31,18 +31,18 @@ class Data_Append(Base_Data):
         '''
 
         This constructor inherits additional class properties, from the
-        constructor of the 'Base_Data' superclass.
+        constructor of the 'BaseData' superclass.
 
         '''
 
         # superclass constructor
-        Base_Data.__init__(self, premodel_data)
+        BaseData.__init__(self, premodel_data)
 
     def Entity(self, session_type, session_id):
         '''
 
         This method overrides the identical method from the inherited
-        superclass, 'Base_Data'. Specifically, this method updates an
+        superclass, 'BaseData'. Specifically, this method updates an
         existing entity within the corresponding database table,
         'tbl_dataset_entity'.
 
