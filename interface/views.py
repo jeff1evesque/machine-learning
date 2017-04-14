@@ -346,8 +346,8 @@ def retrieve_sv_model():
 
     if request.method == 'POST':
         # get all models
-        svm_list = Cache_Model().get_all_titles('svm_model')
-        svr_list = Cache_Model().get_all_titles('svr_model')
+        svm_list = Model().get_all_titles('svm_model')
+        svr_list = Model().get_all_titles('svr_model')
         svm_result = []
         svr_result = []
         error_result = []
@@ -394,7 +394,7 @@ def retrieve_sv_features():
 
     # return all feature labels
     if request.method == 'POST':
-        label_list = Cache_Hset().uncache(
+        label_list = Hset().uncache(
             model_type + '_feature_labels',
             model_id
         )
