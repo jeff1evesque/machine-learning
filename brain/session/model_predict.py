@@ -14,11 +14,11 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.session.base import Base
-from brain.session.predict.sv import sv_prediction
-from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
+from brain.session.predict.sv import predict
+from brain.database.model_type import ModelType
 
 
-class Model_Predict(Base):
+class ModelPredict(Base):
     '''
 
     This class provides an interface to generate a prediction, based on a
@@ -34,10 +34,10 @@ class Model_Predict(Base):
         '''
 
         This constructor is responsible for defining class variables, using the
-        superclass 'Base' constructor, along with the
-        constructor in this subclass.
+        superclass 'Base' constructor, along with the constructor in this
+        subclass.
 
-        @super(), implement 'Base', and 'Base_Data' superclass constructor
+        @super(), implement 'Base', and 'BaseData' superclass constructor
             within this child class constructor.
 
         @self.predictors, a list of arguments (floats) required to make a
@@ -48,7 +48,7 @@ class Model_Predict(Base):
 
         '''
 
-        super(Model_Predict, self).__init__(prediction_input)
+        super(ModelPredict, self).__init__(prediction_input)
         self.prediction_input = prediction_input
         self.prediction_settings = self.prediction_input['data']['settings']
         self.model_id = self.prediction_settings['model_id']
@@ -64,5 +64,5 @@ class Model_Predict(Base):
         '''
 
         # get model type
-        model_type = M_Type().get_model_type(self.model_id)['result']
-        return sv_prediction(model_type, self.model_id, self.predictors)
+        model_type = ModelType().get_model_type(self.model_id)['result']
+        return predict(model_type, self.model_id, self.predictors)

@@ -10,8 +10,8 @@ Note: the 'pytest' instances can further be reviewed:
 '''
 
 from flask import session
-from brain.database.retrieve_account import Retrieve_Account
-from brain.converter.crypto import verifypass
+from brain.database.account import Account
+from brain.converter.crypto import verify_pass
 
 
 def test_login(client, live_server):
@@ -30,7 +30,7 @@ def test_login(client, live_server):
     username = 'jeff1evesque'
     password = 'password123'
     url = '/login'
-    authenticate = Retrieve_Account()
+    authenticate = Account()
 
     # validate: username exists
     if authenticate.check_username(username)['result']:
@@ -42,7 +42,7 @@ def test_login(client, live_server):
         if hashed_password:
 
             # notification: verify password
-            if verifypass(str(password), hashed_password):
+            if verify_pass(str(password), hashed_password):
                 # post requests: login response
                 payload = {'user[login]': username, 'user[password]': password}
                 login = client.post(url, data=payload)

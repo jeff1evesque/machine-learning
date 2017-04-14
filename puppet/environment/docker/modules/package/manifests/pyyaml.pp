@@ -2,7 +2,7 @@
 ### pyyaml.pp, install package.
 ###
 class package::pyyaml {
-    require python
+    include python
 
     ## local variables
     $hiera_dev = lookup('development')
@@ -11,5 +11,6 @@ class package::pyyaml {
     package { 'pyyaml':
         ensure   => $version,
         provider => 'pip',
+        require  => Class['python'],
     }
 }

@@ -51,4 +51,4 @@ development:
         custom:
             redis: '2.10.5'
             gunicorn: '19.6.0'
-            pyyaml: '3.11'
+            pyyaml: '3.12'
