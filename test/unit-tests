@@ -64,7 +64,7 @@ sudo docker run --name database --net=app_nw -d container-database && \
 sudo docker run --name webserver-pytest --net=app_nw -it container-webserver test | sudo tee pytest.log
 
 ## check unit test results
-ERRORS=$(! grep -qE '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
+ERRORS=$(! grep -E '= FAILURES =|= ERRORS =|= no tests ran in 0.00 seconds =' pytest.log)
 if [ -n "$ERRORS" ]; then
     echo 'Error: unit test exited.'
     exit 1
