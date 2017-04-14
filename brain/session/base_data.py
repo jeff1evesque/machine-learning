@@ -168,7 +168,7 @@ class BaseData(Base):
         if response['error']:
             self.list_error.append(response['error'])
 
-    def dataset_to_dict(self, id_entity):
+    def convert_dataset(self, id_entity):
         '''
 
         This method converts the supplied csv, or xml file upload(s) to a
