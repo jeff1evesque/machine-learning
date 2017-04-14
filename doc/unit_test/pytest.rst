@@ -66,39 +66,38 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     brain/cache/session.py                                                             54     54     0%
     brain/cache/settings.py                                                            14     10    29%
     brain/converter/__init__.py                                                         0      0   100%
-    brain/converter/md5.py                                                              9      9     0%
-    brain/converter/dataset.py                                                         45     29    36%
     brain/converter/crypto.py                                                          45      6    87%
-    brain/converter/dataset/__init__.py                                                 0      0   100%
-    brain/converter/dataset/svm_csv.py                                                 38     38     0%
-    brain/converter/dataset/svm_json.py                                                58     10    83%
-    brain/converter/dataset/svm_xml.py                                                 27     27     0%
-    brain/converter/dataset/svr_csv.py                                                 38     38     0%
-    brain/converter/dataset/svr_json.py                                                58     10    83%
-    brain/converter/dataset/svr_xml.py                                                 30     30     0%
-    brain/converter/operation.py                                                       45     25    44%
+    brain/converter/dataset.py                                                         45     29    36%
+    brain/converter/md5.py                                                              9      9     0%
     brain/converter/model.py                                                           12      7    42%
+    brain/converter/operation.py                                                       45     45     0%
+    brain/converter/settings.py                                                        45     25    44%
+    brain/converter/svm/__init__.py                                                     0      0   100%
+    brain/converter/svm/csv2dict.py                                                    38     38     0%
+    brain/converter/svm/json2dict.py                                                   58     10    83%
+    brain/converter/svm/xml2dict.py                                                    27     27     0%
+    brain/converter/svr/__init__.py                                                     0      0   100%
+    brain/converter/svr/csv2dict.py                                                    38     38     0%
+    brain/converter/svr/json2dict.py                                                   58     10    83%
+    brain/converter/svr/xml2dict.py                                                    30     30     0%
     brain/database/__init__.py                                                          0      0   100%
-    brain/database/query.py                                                            55     24    56%
-    brain/database/settings.py                                                         19     13    32%
-    brain/database/account.py                                                          48     13    73%
-    brain/database/entity.py                                                           18      7    61%
-    brain/database/feature.py                                                          32      9    72%
+    brain/database/account.py                                                          58     15    74%
+    brain/database/entity.py                                                           35      9    74%
+    brain/database/feature.py                                                          59     13    78%
     brain/database/model_type.py                                                       18      7    61%
-    brain/database/session.py                                                          22     22     0%
     brain/database/observation.py                                                      25      7    72%
+    brain/database/query.py                                                            55     24    56%
+    brain/database/session.py                                                          22     22     0%
+    brain/database/settings.py                                                         19     13    32%
     brain/load_data.py                                                                 89     29    67%
     brain/schema/__init__.py                                                            0      0   100%
-    brain/schema/schema_definition.py                                                  13      5    62%
+    brain/schema/session.py                                                            13      5    62%
     brain/session/__init__.py                                                           0      0   100%
     brain/session/base.py                                                              27     16    41%
-    brain/session/base_data.py                                                         60     35    42%
+    brain/session/base_data.py                                                         55     30    45%
     brain/session/data/__init__.py                                                      0      0   100%
-    brain/session/data/dataset.py                                                      48     11    77%
-    brain/session/data/configuration.py                                                13     13     0%
-    brain/session/data/save_feature_count.py                                            8      4    50%
-    brain/session/data/save_observation_label.py                                       19      5    74%
-    brain/session/data/validate_file_extension.py                                      37     22    41%
+    brain/session/data/arbiter.py                                                      74     41    45%
+    brain/session/data/dataset.py                                                      58     14    76%
     brain/session/data_append.py                                                       15      8    47%
     brain/session/data_new.py                                                          16      8    50%
     brain/session/model/__init__.py                                                     0      0   100%
@@ -108,13 +107,13 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     brain/session/predict/__init__.py                                                   0      0   100%
     brain/session/predict/sv.py                                                        21      5    76%
     brain/validator/__init__.py                                                         0      0   100%
-    brain/validator/validate_dataset.py                                                15      8    47%
-    brain/validator/validate_file_extension.py                                         62     40    35%
-    brain/validator/validate_password.py                                               43      4    91%
-    brain/validator/validate_settings.py                                               43     18    58%
+    brain/validator/dataset.py                                                         15      8    47%
+    brain/validator/file_extension.py                                                  62     40    35%
+    brain/validator/password.py                                                        43      4    91%
+    brain/validator/settings.py                                                        43     18    58%
     factory.py                                                                         44      8    82%
     interface/__init__.py                                                               0      0   100%
-    interface/views.py                                                                132     97    27%
+    interface/views.py                                                                131     96    27%
     log/__init__.py                                                                     0      0   100%
     log/logger.py                                                                      84     50    40%
     puppet/__init__.py                                                                  0      0   100%
@@ -129,7 +128,7 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     puppet/environment/vagrant/modules/mariadb/__init__.py                              0      0   100%
     puppet/environment/vagrant/modules/mariadb/scripts/__init__.py                      0      0   100%
     puppet/environment/vagrant/modules/mariadb/scripts/setup_tables.py                 50     50     0%
-    test/live_server/authentication/pytest_account_registration.py                     21      3    86%
+    test/live_server/authentication/pytest_account_registration.py                     20      3    85%
     test/live_server/authentication/pytest_crypto.py                                   15      2    87%
     test/live_server/authentication/pytest_user_login.py                               20      3    85%
     test/live_server/authentication/pytest_user_logout.py                              13      1    92%
@@ -140,10 +139,8 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     test/live_server/programmatic_interface/file_upload/pytest_svm_file_upload.py      49      0   100%
     test/live_server/programmatic_interface/file_upload/pytest_svr_file_upload.py      43      0   100%
     ---------------------------------------------------------------------------------------------------
-    TOTAL                                                                            2224   1082    51%
-
-
-    ========================== 21 passed in 63.84 seconds ==========================
+    TOTAL                                                                            2234   1102    51%
+    ========================== 21 passed in 52.19 seconds ==========================
 
 **Note:** future releases (i.e. milestone `1.0 <https://github.com/jeff1evesque/machine-learning/milestones/1.0>`_),
 will include more granular unit tests, or better logical order, such that particular
