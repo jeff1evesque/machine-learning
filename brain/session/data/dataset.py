@@ -145,7 +145,7 @@ def save_dataset(dataset, model_type):
             })
 
             # save dataset element, append error(s)
-            db_return = db_save.Feature(model_type)
+            db_return = db_save.save_feature(model_type)
             if db_return['error']:
                 list_error.append(db_return['error'])
 
