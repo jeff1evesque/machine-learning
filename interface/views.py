@@ -270,7 +270,7 @@ def register():
 
                     # database query: save username, and password
                     hashed = hash_pass(str(password))
-                    result = Account().Account(
+                    result = Account().save_account(
                         username,
                         email,
                         hashed
