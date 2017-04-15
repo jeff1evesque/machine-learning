@@ -16,7 +16,7 @@ var ResultDisplay = React.createClass({
     getInitialState: function() {
         return {
             computed_result: null,
-        },
+        };
     },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
