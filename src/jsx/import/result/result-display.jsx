@@ -12,8 +12,58 @@ import 'core-js/modules/es7.object.entries';
 import Submit from '../general/submit-button.jsx';
 
 var ResultDisplay = React.createClass({
-  // update redux store
-    saveResults: function() {
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            computed_result: null,
+        },
+    },
+  // send form data to serverside on form submission
+    handleSubmit: function(event) {
+      // prevent page reload
+        event.preventDefault();
+
+        const ajaxEndpoint = '/save-results';
+        var formData = new FormData(this.refs.savePredictionForm)
+
+        var ajaxArguments = {
+            'endpoint': ajaxEndpoint,
+            'data': formData.append(this.state.computed_result)
+        };
+
+      // boolean to show ajax spinner
+        this.setState({display_spinner: true});
+
+      // asynchronous callback: ajax 'done' promise
+        ajaxCaller(function (asynchObject) {
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            } else if (asynchObject) {
+                this.setState({ajax_done_result: asynchObject});
+                this.storeResults();
+            }
+            else {
+                this.setState({ajax_done_result: null});
+            }
+        // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+        // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // pass ajax arguments
+        ajaxArguments);
     },
     render: function(){
       // local variables
@@ -29,6 +79,7 @@ var ResultDisplay = React.createClass({
         ) {
             var resultType = this.props.results.type.toUpperCase();
             var resultData = JSON.parse(this.props.results.data);
+            this.setState({computed_result: this.props.results.data});
         }
 
       // polyfill 'entries'
@@ -68,11 +119,7 @@ var ResultDisplay = React.createClass({
                     className='mn-2'
                     defaultValue=''
                 />
-                <Submit
-                    btnValue='Save'
-                    onClick={this.saveResults}
-                    cssClass='btn'
-                />
+                <Submit cssClass='btn' />
             </form>
         }
         else {
