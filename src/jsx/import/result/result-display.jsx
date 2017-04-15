@@ -23,7 +23,7 @@ var ResultDisplay = React.createClass({
       // prevent page reload
         event.preventDefault();
 
-        const ajaxEndpoint = '/save-results';
+        const ajaxEndpoint = '/save-prediction';
         var formData = new FormData(this.refs.savePredictionForm)
 
         var ajaxArguments = {
