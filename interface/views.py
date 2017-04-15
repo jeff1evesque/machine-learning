@@ -403,3 +403,19 @@ def retrieve_sv_features():
             return json.dumps(label_list['result'])
         else:
             return json.dumps({'error': label_list['error']})
+
+@blueprint.route(
+    '/save-prediction',
+    methods=['POST'],
+    endpoint='save-prediction'
+)
+def save_prediction():
+    '''
+
+    This router function saves the prediction results generated from a computed
+    svm or svr prediction session.
+
+    '''
+
+    # local variables
+    results = request.get_json()
