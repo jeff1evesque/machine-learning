@@ -23,13 +23,29 @@ var ResultDisplay = React.createClass({
       // prevent page reload
         event.preventDefault();
 
+      // local variables
         const ajaxEndpoint = '/save-prediction';
-        var formData = new FormData(this.refs.savePredictionForm)
 
-        var ajaxArguments = {
-            'endpoint': ajaxEndpoint,
-            'data': formData.append(this.state.computed_result)
-        };
+      // ajax process
+        if (this.state.computed_result) {
+            var formData = new FormData(this.refs.savePredictionForm);
+            formData.append('status', 'valid');
+            formData.append('data', JSON.parse(this.state.computed_result));
+
+            var ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': formData
+            };
+        }
+        else {
+            var formData = new FormData();
+            formData.append('status', 'no-data');
+
+            var ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': formData
+            };
+        }
 
       // boolean to show ajax spinner
         this.setState({display_spinner: true});
@@ -75,11 +91,12 @@ var ResultDisplay = React.createClass({
             this.props &&
             this.props.results &&
             !!this.props.results.type &&
-            !!this.props.results.data
+            !!this.props.results.data &&
+            this.state.computed_result != JSON.stringify(this.props.results.data)
         ) {
             var resultType = this.props.results.type.toUpperCase();
             var resultData = JSON.parse(this.props.results.data);
-            this.setState({computed_result: this.props.results.data});
+            this.setState({computed_result: JSON.stringify(this.props.results.data)});
         }
 
       // polyfill 'entries'
