@@ -15,7 +15,7 @@ var ResultDisplay = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            computed_result: null,
+            computed_result: false,
         };
     },
   // send form data to serverside on form submission
@@ -81,6 +81,17 @@ var ResultDisplay = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
+  // define properties after update
+    componentDidUpdate: function() {
+        if (
+            this.props &&
+            this.props.results &&
+            !!this.props.results.data &&
+            this.state.computed_result != JSON.stringify(this.props.results.data)
+        ) {
+            this.setState({computed_result: JSON.stringify(this.props.results.data)});
+        }
+    },
     render: function(){
       // local variables
         var resultType = null;
@@ -91,12 +102,10 @@ var ResultDisplay = React.createClass({
             this.props &&
             this.props.results &&
             !!this.props.results.type &&
-            !!this.props.results.data &&
-            this.state.computed_result != JSON.stringify(this.props.results.data)
+            !!this.props.results.data
         ) {
             var resultType = this.props.results.type.toUpperCase();
             var resultData = JSON.parse(this.props.results.data);
-            this.setState({computed_result: JSON.stringify(this.props.results.data)});
         }
 
       // polyfill 'entries'
@@ -106,6 +115,7 @@ var ResultDisplay = React.createClass({
 
       // generate result
         if (
+            resultData &&
             this.props &&
             this.props.results &&
             this.props.results.data &&
