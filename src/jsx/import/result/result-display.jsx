@@ -10,6 +10,8 @@
 import React from 'react';
 import 'core-js/modules/es7.object.entries';
 import Submit from '../general/submit-button.jsx';
+import Spinner from '../general/spinner.jsx';
+import ajaxCaller from '../general/ajax-caller.js';
 
 var ResultDisplay = React.createClass({
   // initial 'state properties'
