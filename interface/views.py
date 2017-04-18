@@ -437,7 +437,7 @@ def save_prediction():
             # save prediction
             if status == 'valid':
                 prediction = Prediction()
-	            result = prediction.save(data)
+	            result = prediction.save(data, type)
 
                 # notification: prediction status
                 if result:

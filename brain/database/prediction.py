@@ -31,7 +31,7 @@ class Prediction(object):
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
 
-    def save(self, data):
+    def save(self, data, type):
         '''
 
         This method stores the corresponding prediction.
