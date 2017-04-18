@@ -50,13 +50,13 @@ class Prediction(object):
         # insert prediction
         self.sql.connect(self.db_ml)
 
-        # svm results
         if type == 'svm':
             classes = data['classes']
             probability = data['probability']
             decision_function = data['decision_function']
 
-            svm_results = 'INSERT INTO tbl_svm_results '\
+            # svm results
+            sql_statement = 'INSERT INTO tbl_svm_results '\
                 '(title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
             args = (
@@ -64,7 +64,7 @@ class Prediction(object):
                 result,
                 self.premodel_data['uid']
             )
-            self.sql.execute(
+            svm_results = self.sql.execute(
                 sql_statement,
                 'insert',
                 args,
@@ -110,6 +110,33 @@ class Prediction(object):
             )
 
         elif type == 'svr':
+            # svr results
+            sql_statement = 'INSERT INTO tbl_svr_results '\
+                '(title, result, uid_created, datetime_created) '\
+                'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
+            args = (
+                title,
+                result,
+                self.premodel_data['uid']
+            )
+            svr_results = self.sql.execute(
+                sql_statement,
+                'insert',
+                args,
+            )
+
+            # svr r2
+            sql_statement = 'INSERT INTO tbl_svm_results_probability '\
+                '(id_result, probability) VALUES(%s, %s)'
+            args = (
+                svr_results['id'],
+                result['r2']
+            )
+            self.sql.execute(
+                sql_statement,
+                'insert',
+                args,
+            )
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
