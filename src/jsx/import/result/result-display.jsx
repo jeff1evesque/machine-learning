@@ -17,7 +17,8 @@ var ResultDisplay = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            computed_result: false,
+            computed_result: null,
+            computed_type: null,
         };
     },
   // send form data to serverside on form submission
@@ -29,10 +30,11 @@ var ResultDisplay = React.createClass({
         const ajaxEndpoint = '/save-prediction';
 
       // ajax process
-        if (this.state.computed_result) {
+        if (this.state.computed_result && this.state.computed_type) {
             var formData = new FormData();
             formData.append('status', 'valid');
             formData.append('data', this.state.computed_result);
+            formData.append('type', this.state.computed_type);
 
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
@@ -89,9 +91,13 @@ var ResultDisplay = React.createClass({
             this.props &&
             this.props.results &&
             !!this.props.results.data &&
+            !!this.props.results.type &&
             this.state.computed_result != JSON.stringify(this.props.results.data)
         ) {
-            this.setState({computed_result: JSON.stringify(this.props.results.data)});
+            this.setState({
+                computed_result: JSON.stringify(this.props.results.data),
+                computed_type: JSON.stringify(this.props.results.type)
+            });
         }
     },
     render: function(){
