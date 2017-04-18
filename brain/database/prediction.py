@@ -43,5 +43,74 @@ class Prediction(object):
 
         '''
 
-        # insert / update dataset entity value
+        # local variables
+        title = data['prediction_name']
+        result = data['result']
+
+        # insert prediction
         self.sql.connect(self.db_ml)
+
+        # svm results
+        if type == 'svm':
+            classes = data['classes']
+            probability = data['probability']
+            decision_function = data['decision_function']
+
+            svm_results = 'INSERT INTO tbl_svm_results '\
+                '(title, result, uid_created, datetime_created) '\
+                'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
+            args = (
+                title,
+                result,
+                self.premodel_data['uid']
+            )
+            self.sql.execute(
+                sql_statement,
+                'insert',
+                args,
+            )
+
+            # svm classes
+            sql_statement = 'INSERT INTO tbl_svm_results_class '\
+                '(id_result, class) VALUES(%s, %s)'
+            args = (
+                svm_results['id'],
+                (classes,)
+            )
+            self.sql.execute(
+                sql_statement,
+                'insert',
+                args,
+            )
+
+            # svm probability
+            sql_statement = 'INSERT INTO tbl_svm_results_probability '\
+                '(id_result, probability) VALUES(%s, %s)'
+            args = (
+                svm_results['id'],
+                (probability,)
+            )
+            self.sql.execute(
+                sql_statement,
+                'insert',
+                args,
+            )
+
+            # decision function
+            sql_statement = 'INSERT INTO tbl_svm_results_decision_function '\
+                '(id_result, decision_function) VALUES(%s, %s)'
+            args = (
+                svm_results['id'],
+                (decision_function,)
+            )
+            self.sql.execute(
+                sql_statement,
+                'insert',
+                args,
+            )
+
+        elif type == 'svr':
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.disconnect()
