@@ -30,9 +30,9 @@ var ResultDisplay = React.createClass({
 
       // ajax process
         if (this.state.computed_result) {
-            var formData = new FormData(this.refs.savePredictionForm);
+            var formData = new FormData();
             formData.append('status', 'valid');
-            formData.append('data', JSON.parse(this.state.computed_result));
+            formData.append('data', this.state.computed_result);
 
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
