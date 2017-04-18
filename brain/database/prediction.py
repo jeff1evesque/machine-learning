@@ -141,3 +141,9 @@ class Prediction(object):
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
         self.sql.disconnect()
+
+        # return result
+        if response_error:
+            return {'error': response_error, 'result': 1}
+        else:
+            return {'error': None, 'result': 0}
