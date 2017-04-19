@@ -31,7 +31,7 @@ var ResultDisplay = React.createClass({
 
       // ajax process
         if (this.state.computed_result && this.state.computed_type) {
-            var formData = new FormData();
+            var formData = new FormData(this.refs.savePredictionForm);
             formData.append('status', 'valid');
             formData.append('data', this.state.computed_result);
             formData.append('type', this.state.computed_type);
@@ -42,7 +42,7 @@ var ResultDisplay = React.createClass({
             };
         }
         else {
-            var formData = new FormData();
+            var formData = new FormData(this.refs.savePredictionForm);
             formData.append('status', 'no-data');
 
             var ajaxArguments = {
