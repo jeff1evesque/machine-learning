@@ -430,9 +430,9 @@ def save_prediction():
         if request.form:
             # local variables
             results = request.form
-            data = json.loads(results['data'])
-            status = json.loads(results['status'])
-            type = json.loads(results['type'])
+            data = results['data']
+            status = results['status']
+            type = results['type']
 
             # save prediction
             if status == 'valid':
