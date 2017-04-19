@@ -419,10 +419,10 @@ def save_prediction():
     string, with the following value:
 
         - integer, codified indicator of save attempt:
-            - 0, successful login
-            - 1, username does not exist
-            - 2, username does not have a password
-            - 3, supplied password does not match stored password
+            - 0, successfully stored the prediction result
+            - 1, unsuccessfully stored the prediction result
+            - 2, status was not 'valid'
+            - 3, no form data supplied
 
     '''
 
@@ -450,4 +450,4 @@ def save_prediction():
                 return json.dumps({'status': 2})
 
         # notification: no form data
-        return json.dumps({'status': 1})
+        return json.dumps({'status': 3})
