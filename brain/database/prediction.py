@@ -6,6 +6,7 @@ This file saves previous predictions.
 
 '''
 
+import json
 from flask import current_app
 from brain.database.query import SQL
 
@@ -31,7 +32,7 @@ class Prediction(object):
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
 
-    def save(self, data, type, title):
+    def save(self, payload, type, title):
         '''
 
         This method stores the corresponding prediction.
@@ -44,6 +45,7 @@ class Prediction(object):
         '''
 
         # local variables
+        data = json.loads(payload)
         result = data['result']
 
         # insert prediction
