@@ -61,7 +61,6 @@ var ResultDisplay = React.createClass({
                 this.setState({ajax_done_error: asynchObject.error});
             } else if (asynchObject) {
                 this.setState({ajax_done_result: asynchObject});
-                this.storeResults();
             }
             else {
                 this.setState({ajax_done_result: null});
