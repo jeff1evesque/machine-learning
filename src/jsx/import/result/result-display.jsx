@@ -95,7 +95,7 @@ var ResultDisplay = React.createClass({
         ) {
             this.setState({
                 computed_result: JSON.stringify(this.props.results.data),
-                computed_type: JSON.stringify(this.props.results.type)
+                computed_type: this.props.results.type
             });
         }
     },

@@ -32,7 +32,7 @@ class Prediction(object):
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
 
-    def save(self, payload, type, title):
+    def save(self, payload, model_type, title, user):
         '''
 
         This method stores the corresponding prediction.
@@ -46,25 +46,23 @@ class Prediction(object):
 
         # local variables
         data = json.loads(payload)
-        result = data['result']
+        result = str(data['result'])
 
         # insert prediction
         self.sql.connect(self.db_ml)
 
-        if type == 'svm':
-            classes = data['classes']
-            probability = data['probability']
-            decision_function = data['decision_function']
+        if model_type == 'svm':
+            logger = Logger(__name__, 'debug', 'debug')
+            logger.log('type2: ' + model_type)
+            classes = str(data['classes'])
+            probability = str(data['probability'])
+            decision_function = str(data['decision_function'])
 
             # svm results
             sql_statement = 'INSERT INTO tbl_svm_results '\
                 '(title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (
-                title,
-                result,
-                self.premodel_data['uid']
-            )
+            args = (title, result, user)
             svm_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -110,16 +108,12 @@ class Prediction(object):
                 args,
             )
 
-        elif type == 'svr':
+        elif str(model_type) == 'svr':
             # svr results
             sql_statement = 'INSERT INTO tbl_svr_results '\
                 '(title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (
-                title,
-                result,
-                self.premodel_data['uid']
-            )
+            args = (title, result, user)
             svr_results = self.sql.execute(
                 sql_statement,
                 'insert',
