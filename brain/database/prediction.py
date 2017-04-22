@@ -46,7 +46,7 @@ class Prediction(object):
 
         # local variables
         data = json.loads(payload)
-        result = str(data['result'])
+        result = data['result']
 
         # insert prediction
         self.sql.connect(self.db_ml)
@@ -88,7 +88,7 @@ class Prediction(object):
                 args = (svm_results['id'], x,)
                 self.sql.execute(sql_statement, 'insert', args,)
 
-        elif str(model_type) == 'svr':
+        elif model_type == 'svr':
             # svr results
             sql_statement = 'INSERT INTO tbl_svr_results '\
                 '(title, result, uid_created, datetime_created) '\
@@ -101,17 +101,14 @@ class Prediction(object):
             )
 
             # svr r2
-            sql_statement = 'INSERT INTO tbl_svm_results_probability '\
-                '(id_result, probability) VALUES(%s, %s)'
-            args = (svr_results['id'], result['r2'])
+            sql_statement = 'INSERT INTO tbl_svr_results_r2 '\
+                '(id_result, r2) VALUES(%s, %s)'
+            args = (svr_results['id'], data['r2'])
             self.sql.execute(sql_statement, 'insert', args,)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
         self.sql.disconnect()
-
-        logger = Logger(__name__, 'debug', 'debug')
-        logger.log('classes: ' + repr(response_error))
 
         # return result
         if response_error:
