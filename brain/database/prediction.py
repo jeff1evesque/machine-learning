@@ -7,7 +7,7 @@ This file saves previous predictions.
 '''
 
 import json
-from flask import current_app
+from flask import current_app, session
 from brain.database.query import SQL
 
 
@@ -32,7 +32,7 @@ class Prediction(object):
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
 
-    def save(self, payload, model_type, title, user):
+    def save(self, payload, model_type, title):
         '''
 
         This method stores the corresponding prediction.
@@ -48,6 +48,11 @@ class Prediction(object):
         data = json.loads(payload)
         result = data['result']
 
+        if session.get('uid'):
+            uid = int(session.get('uid'))
+        else:
+            uid = 0
+
         # insert prediction
         self.sql.connect(self.db_ml)
 
@@ -60,7 +65,7 @@ class Prediction(object):
             sql_statement = 'INSERT INTO tbl_svm_results '\
                 '(title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (title, result, user)
+            args = (title, result, uid)
             svm_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -93,7 +98,7 @@ class Prediction(object):
             sql_statement = 'INSERT INTO tbl_svr_results '\
                 '(title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (title, result, user)
+            args = (title, result, uid)
             svr_results = self.sql.execute(
                 sql_statement,
                 'insert',
