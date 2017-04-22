@@ -62,8 +62,7 @@ var LoginLink = React.createClass({
 
           // local variables
             var ajaxArguments = {
-                'endpoint': '/logout,
-                'data': formData
+                'endpoint': '/logout'
             };
 
           // asynchronous callback: ajax 'done' promise
