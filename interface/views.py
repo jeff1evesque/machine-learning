@@ -212,7 +212,7 @@ def login():
             })
 
 
-@blueprint.route('/logout', methods=['POST'])
+@blueprint.route('/logout', methods=['GET', 'POST'])
 def logout():
     '''
 
@@ -223,7 +223,7 @@ def logout():
 
     '''
 
-    if request.method == 'POST':
+    if request.method in ['GET', 'POST']:
         # remove session
         session.pop('uid', None)
 
