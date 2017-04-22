@@ -52,11 +52,9 @@ class Prediction(object):
         self.sql.connect(self.db_ml)
 
         if model_type == 'svm':
-            logger = Logger(__name__, 'debug', 'debug')
-            logger.log('type2: ' + model_type)
-            classes = str(data['classes'])
-            probability = str(data['probability'])
-            decision_function = str(data['decision_function'])
+            classes = data['classes']
+            probability = data['probability']
+            decision_function = data['decision_function']
 
             # svm results
             sql_statement = 'INSERT INTO tbl_svm_results '\
@@ -70,43 +68,25 @@ class Prediction(object):
             )
 
             # svm classes
-            sql_statement = 'INSERT INTO tbl_svm_results_class '\
-                '(id_result, class) VALUES(%s, %s)'
-            args = (
-                svm_results['id'],
-                (classes,)
-            )
-            self.sql.execute(
-                sql_statement,
-                'insert',
-                args,
-            )
+            for x in classes:
+                sql_statement = 'INSERT INTO tbl_svm_results_class '\
+                    '(id_result, class) VALUES(%s, %s)'
+                args = (svm_results['id'], x)
+                self.sql.execute(sql_statement, 'insert', args,)
 
             # svm probability
-            sql_statement = 'INSERT INTO tbl_svm_results_probability '\
-                '(id_result, probability) VALUES(%s, %s)'
-            args = (
-                svm_results['id'],
-                (probability,)
-            )
-            self.sql.execute(
-                sql_statement,
-                'insert',
-                args,
-            )
+            for x in probability:
+                sql_statement = 'INSERT INTO tbl_svm_results_probability '\
+                    '(id_result, probability) VALUES(%s, %s)'
+                args = (svm_results['id'], x)
+                self.sql.execute(sql_statement, 'insert', args,)
 
-            # decision function
-            sql_statement = 'INSERT INTO tbl_svm_results_decision_function '\
-                '(id_result, decision_function) VALUES(%s, %s)'
-            args = (
-                svm_results['id'],
-                (decision_function,)
-            )
-            self.sql.execute(
-                sql_statement,
-                'insert',
-                args,
-            )
+            # svm decision function
+            for x in decision_function:
+                sql_statement = 'INSERT INTO tbl_svm_results_decision_function '\
+                    '(id_result, decision_function) VALUES(%s, %s)'
+                args = (svm_results['id'], x,)
+                self.sql.execute(sql_statement, 'insert', args,)
 
         elif str(model_type) == 'svr':
             # svr results
@@ -123,19 +103,15 @@ class Prediction(object):
             # svr r2
             sql_statement = 'INSERT INTO tbl_svm_results_probability '\
                 '(id_result, probability) VALUES(%s, %s)'
-            args = (
-                svr_results['id'],
-                result['r2']
-            )
-            self.sql.execute(
-                sql_statement,
-                'insert',
-                args,
-            )
+            args = (svr_results['id'], result['r2'])
+            self.sql.execute(sql_statement, 'insert', args,)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
         self.sql.disconnect()
+
+        logger = Logger(__name__, 'debug', 'debug')
+        logger.log('classes: ' + repr(response_error))
 
         # return result
         if response_error:
