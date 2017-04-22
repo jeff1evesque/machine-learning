@@ -10,10 +10,94 @@
 import React from 'react';
 import 'core-js/modules/es7.object.entries';
 import Submit from '../general/submit-button.jsx';
+import Spinner from '../general/spinner.jsx';
+import ajaxCaller from '../general/ajax-caller.js';
 
 var ResultDisplay = React.createClass({
-  // update redux store
-    saveResults: function() {
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            computed_result: null,
+            computed_type: null,
+        };
+    },
+  // send form data to serverside on form submission
+    handleSubmit: function(event) {
+      // prevent page reload
+        event.preventDefault();
+
+      // local variables
+        const ajaxEndpoint = '/save-prediction';
+
+      // ajax process
+        if (this.state.computed_result && this.state.computed_type) {
+            var formData = new FormData(this.refs.savePredictionForm);
+            formData.append('status', 'valid');
+            formData.append('data', this.state.computed_result);
+            formData.append('type', this.state.computed_type);
+
+            var ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': formData
+            };
+        }
+        else {
+            var formData = new FormData(this.refs.savePredictionForm);
+            formData.append('status', 'no-data');
+
+            var ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': formData
+            };
+        }
+
+      // boolean to show ajax spinner
+        this.setState({display_spinner: true});
+
+      // asynchronous callback: ajax 'done' promise
+        ajaxCaller(function (asynchObject) {
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            } else if (asynchObject) {
+                this.setState({ajax_done_result: asynchObject});
+            }
+            else {
+                this.setState({ajax_done_result: null});
+            }
+        // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+        // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // pass ajax arguments
+        ajaxArguments);
+    },
+  // define properties after update
+    componentDidUpdate: function() {
+        if (
+            this.props &&
+            this.props.results &&
+            !!this.props.results.data &&
+            !!this.props.results.type &&
+            this.state.computed_result != JSON.stringify(this.props.results.data)
+        ) {
+            this.setState({
+                computed_result: JSON.stringify(this.props.results.data),
+                computed_type: this.props.results.type
+            });
+        }
     },
     render: function(){
       // local variables
@@ -38,6 +122,7 @@ var ResultDisplay = React.createClass({
 
       // generate result
         if (
+            resultData &&
             this.props &&
             this.props.results &&
             this.props.results.data &&
@@ -68,11 +153,7 @@ var ResultDisplay = React.createClass({
                     className='mn-2'
                     defaultValue=''
                 />
-                <Submit
-                    btnValue='Save'
-                    onClick={this.saveResults}
-                    cssClass='btn'
-                />
+                <Submit cssClass='btn' />
             </form>
         }
         else {

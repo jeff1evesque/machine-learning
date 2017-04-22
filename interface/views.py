@@ -27,6 +27,7 @@ from brain.cache.model import Model
 from brain.cache.hset import Hset
 from brain.validator.password import validate_password
 from brain.database.account import Account
+from brain.database.prediction import Prediction
 from brain.converter.crypto import hash_pass, verify_pass
 
 
@@ -150,8 +151,8 @@ def login():
     This router function attempts to fulfill a login request. During its
     attempt, it returns a json string, with two values:
 
-        - boolean, inidicates if account exists
-        - integer, codified indicator of registration attempt:
+        - username, user attempting to login
+        - integer, codified indicator of login attempt:
             - 0, successful login
             - 1, username does not exist
             - 2, username does not have a password
@@ -403,3 +404,52 @@ def retrieve_sv_features():
             return json.dumps(label_list['result'])
         else:
             return json.dumps({'error': label_list['error']})
+
+
+@blueprint.route(
+    '/save-prediction',
+    methods=['POST'],
+    endpoint='save_prediction'
+)
+def save_prediction():
+    '''
+
+    This router function saves the prediction results generated from a computed
+    svm or svr prediction session.  During its attempt, it returns a json
+    string, with the following value:
+
+        - integer, codified indicator of save attempt:
+            - 0, successfully stored the prediction result
+            - 1, unsuccessfully stored the prediction result
+            - 2, status was not 'valid'
+            - 3, no form data supplied
+
+    '''
+
+    if request.method == 'POST':
+        if request.form:
+            # local variables
+            results = request.form
+            data = json.loads(results['data'])
+            user = 'anonymous'
+            status = results['status']
+            type = results['type']
+            title = results['prediction_name']
+
+            # save prediction
+            if status == 'valid':
+                prediction = Prediction()
+                result = prediction.save(data, type, title, user)['result']
+
+                # notification: prediction status
+                if result:
+                    return json.dumps({'status': 0})
+                else:
+                    return json.dumps({'status': 1})
+
+            # notification: status not valid
+            else:
+                return json.dumps({'status': 2})
+
+        # notification: no form data
+        return json.dumps({'status': 3})
