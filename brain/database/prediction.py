@@ -125,6 +125,9 @@ class Prediction(object):
 
         This method retrieves all stored predictions for the current user.
 
+        @model_type, constrains the 'select' result to a specified model type.
+            Otherwise, defaults to return results for all model types.
+
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
 
