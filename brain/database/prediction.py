@@ -31,6 +31,10 @@ class Prediction(object):
         self.list_error = []
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
+        if session.get('uid'):
+            self.uid = int(session.get('uid'))
+        else:
+            self.uid = 0
 
     def save(self, payload, model_type, title):
         '''
@@ -48,11 +52,6 @@ class Prediction(object):
         data = json.loads(payload)
         result = data['result']
 
-        if session.get('uid'):
-            uid = int(session.get('uid'))
-        else:
-            uid = 0
-
         # insert prediction
         self.sql.connect(self.db_ml)
 
@@ -65,7 +64,7 @@ class Prediction(object):
             sql_statement = 'INSERT INTO tbl_svm_results '\
                 '(title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (title, result, uid)
+            args = (title, result, self.uid)
             svm_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -98,7 +97,7 @@ class Prediction(object):
             sql_statement = 'INSERT INTO tbl_svr_results '\
                 '(title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (title, result, uid)
+            args = (title, result, self.uid)
             svr_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -120,3 +119,60 @@ class Prediction(object):
             return {'error': response_error, 'result': 1}
         else:
             return {'error': None, 'result': 0}
+
+    def get_all_titles(self, model_type=None):
+        '''
+
+        This method retrieves all stored predictions for the current user.
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        '''
+
+        # select prediction
+        self.sql.connect(self.db_ml)
+
+        if model_type == 'svm':
+            sql_statement = 'SELECT title, datetime_created ' \
+                'FROM tbl_svm_results '\
+                'WHERE uid_created=%s'
+            args = (self.uid)
+            response = self.sql.execute(sql_statement, 'select', args)
+
+        elif model_type == 'svr':
+            sql_statement = 'SELECT title, datetime_created ' \
+                'FROM tbl_svr_results '\
+                'WHERE uid_created=%s'
+            args = (self.uid)
+            response = self.sql.execute(sql_statement, 'select', args)
+
+        else:
+            sql_statement = 'SELECT tbl_svm_results.title, '\
+                'tbl_svm_results.datetime_created, ' \
+                'tbl_svr_results.title, '\
+                'tbl_svr_results.datetime_created '\
+                'FROM tbl_svm_results JOIN tbl_svr_results '\
+                'ON tbl_svm_results.id = tbl_svr_results.id '\
+                'WHERE tbl_svm_results.uid_created=%s '\
+                'AND tbl_svr_results.uid_created=%s '\
+            args = (self.uid, self.uid)
+            response = self.sql.execute(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.disconnect()
+
+        # return result
+        if response_error:
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
+        else:
+            return {
+                'status': True,
+                'error': None,
+                'result': response['result'],
+            }
