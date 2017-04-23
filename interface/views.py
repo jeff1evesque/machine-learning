@@ -469,6 +469,45 @@ def retrieve_prediction():
 
     '''
 
+    if request.method == 'POST':
+        if request.form:
+            # local variables
+            results = request.form
+            args = json.loads(results['args'])
+            id_result = args['id_result']
+            model_type = args['model_type']
+
+            # query database and return results
+            prediction = Prediction()
+
+            if model_type == 'svm':
+                result = prediction.get_result(id_result, model_type)
+                classes = prediction.get_value(id_result, model_type, 'class')
+                df = prediction.get_value(id_result, model_type, 'decision_function')
+                prob = prediction.get_value(id_result, model_type, 'probability')
+
+                if result['status']:
+                    return json.dumps({
+                        'status': 0,
+                        'result': result,
+                        'classes': classes,
+                        'decision_function': df,
+                        'probability': prob
+                    })
+                else:
+                    return json.dumps({'status': 1})
+
+            elif model_type == 'svr':
+                coefficient = prediction.get_value(id_result, model_type, 'r2')
+
+                if result['status']:
+                    return json.dumps({
+                        'status': 0,
+                        'r2': coefficient
+                    })
+                else:
+                    return json.dumps({'status': 1})
+
 
 @blueprint.route(
     '/save-prediction',
