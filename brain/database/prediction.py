@@ -31,6 +31,7 @@ class Prediction(object):
         self.list_error = []
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
+
         if session.get('uid'):
             self.uid = int(session.get('uid'))
         else:
@@ -158,7 +159,7 @@ class Prediction(object):
                 'FROM tbl_svm_results JOIN tbl_svr_results '\
                 'ON tbl_svm_results.id = tbl_svr_results.id '\
                 'WHERE tbl_svm_results.uid_created=%s '\
-                'AND tbl_svr_results.uid_created=%s '\
+                'AND tbl_svr_results.uid_created=%s'
             args = (self.uid, self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
 
