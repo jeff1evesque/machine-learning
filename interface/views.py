@@ -443,7 +443,7 @@ def retrieve_prediction_titles():
                     'titles': response['result']
                 })
 
-            else response['status']:
+            else:
                 return json.dumps({
                     'status': 1,
                     'titles': None
