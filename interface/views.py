@@ -407,6 +407,28 @@ def retrieve_sv_features():
 
 
 @blueprint.route(
+    '/retrieve-prediction-titles',
+    methods=['POST'],
+    endpoint='retrieve_prediction_titles'
+)
+def retrieve_prediction_titles():
+    '''
+
+    This router function retrieves all prediction titles stored via the
+    'save_prediction' router function. During its attempt, it returns a json
+    string, with the following value:
+
+        - integer, codified indicator of save attempt:
+            - 0, successfully stored the prediction result
+            - 1, unsuccessfully stored the prediction result
+            - 2, status was not 'valid'
+            - 3, no form data supplied
+        - string, array of prediction titles
+
+    '''
+
+
+@blueprint.route(
     '/save-prediction',
     methods=['POST'],
     endpoint='save_prediction'
