@@ -418,14 +418,36 @@ def retrieve_prediction_titles():
     'save_prediction' router function. During its attempt, it returns a json
     string, with the following value:
 
-        - integer, codified indicator of save attempt:
-            - 0, successfully stored the prediction result
-            - 1, unsuccessfully stored the prediction result
-            - 2, status was not 'valid'
-            - 3, no form data supplied
+        - integer, codified indicator of database query:
+            - 0, successful retrieval of prediction titles
+            - 1, unsuccessful retrieval of prediction titles
         - string, array of prediction titles
 
     '''
+
+    if request.method == 'POST':
+        if request.form:
+            # local variables
+            results = request.form
+            args = json.loads(results['args'])
+            model_type = args['model_type']
+
+            # query database
+            prediction = Prediction()
+            response = prediction.get_all_titles(model_type)
+
+            # return results
+            if response['status']:
+                return json.dumps({
+                    'status': 0,
+                    'titles': response['result']
+                })
+
+            else response['status']:
+                return json.dumps({
+                    'status': 1,
+                    'titles': None
+                })
 
 
 @blueprint.route(
