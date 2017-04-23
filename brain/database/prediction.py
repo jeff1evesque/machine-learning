@@ -137,18 +137,11 @@ class Prediction(object):
         # select prediction
         self.sql.connect(self.db_ml)
 
-        if model_type == 'svm':
+        if model_type in ['svm', 'svr']:
             sql_statement = 'SELECT title, datetime_created ' \
-                'FROM tbl_svm_results '\
+                'FROM tbl_%s_results '\
                 'WHERE uid_created=%s'
-            args = (self.uid)
-            response = self.sql.execute(sql_statement, 'select', args)
-
-        elif model_type == 'svr':
-            sql_statement = 'SELECT title, datetime_created ' \
-                'FROM tbl_svr_results '\
-                'WHERE uid_created=%s'
-            args = (self.uid)
+            args = (model_type, self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
 
         else:
