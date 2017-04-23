@@ -216,7 +216,7 @@ class Prediction(object):
                 'result': response['result'],
             }
 
-    def get_svm_params(self, id_result, model_type, param):
+    def get_value(self, id_result, model_type, param):
         '''
 
         This method retrieves values to a specified parameter, with respect to
