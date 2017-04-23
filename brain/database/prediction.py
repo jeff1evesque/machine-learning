@@ -14,8 +14,8 @@ from brain.database.query import SQL
 class Prediction(object):
     '''
 
-    This class provides an interface to save, a previous generated svm or svr
-    prediction result.
+    This class provides an interface to save, or retrieve, a previously
+    generated svm or, svr prediction result.
 
     Note: this class explicitly inherits the 'new-style' class.
 
