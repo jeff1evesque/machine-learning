@@ -175,7 +175,7 @@ class Prediction(object):
                 'result': response['result'],
             }
 
-    def get_result(self, model_type, id_result):
+    def get_result(self, id_result, model_type):
         '''
 
         This method retrieves a prediction result, based on the supplied
