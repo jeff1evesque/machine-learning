@@ -458,14 +458,12 @@ def retrieve_prediction_titles():
 def retrieve_prediction():
     '''
 
-    This router function retrieves all prediction parameters.
+    This router function retrieves a specified prediction parameter.
 
         - integer, codified indicator of save attempt:
-            - 0, successfully stored the prediction result
-            - 1, unsuccessfully stored the prediction result
-            - 2, status was not 'valid'
-            - 3, no form data supplied
-        - string, array of prediction titles
+            - 0, successful retrieval of specified prediction parameter
+            - 1, unsuccessful retrieval of specified prediction parameter
+        - string, prediction parameter
 
     '''
 
