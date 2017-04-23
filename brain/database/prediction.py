@@ -233,9 +233,10 @@ class Prediction(object):
         @param, specifies which table, and corresponding column parameter to
             query, and select from:
 
-            - class
-            - decision_function
-            - probability
+            - class: requires svm 'model_type'
+            - decision_function: requires svm 'model_type'
+            - probability: requires svm 'model_type'
+            - r2: requires svr 'model_type'
 
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
