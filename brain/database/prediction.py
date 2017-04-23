@@ -2,7 +2,7 @@
 
 '''
 
-This file saves previous predictions.
+This file saves, as well as retrieves, previous stored predictions.
 
 '''
 
