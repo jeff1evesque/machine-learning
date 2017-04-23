@@ -31,6 +31,7 @@ class Prediction(object):
         self.list_error = []
         self.sql = SQL()
         self.db_ml = current_app.config.get('DB_ML')
+        self.model_list = current_app.config.get('MODEL_TYPE')
 
         if session.get('uid'):
             self.uid = int(session.get('uid'))
@@ -137,7 +138,7 @@ class Prediction(object):
         # select prediction
         self.sql.connect(self.db_ml)
 
-        if model_type in ['svm', 'svr']:
+        if model_type in self.model_list:
             sql_statement = 'SELECT title, datetime_created ' \
                 'FROM tbl_%s_results '\
                 'WHERE uid_created=%s'
@@ -190,11 +191,12 @@ class Prediction(object):
         # select result
         self.sql.connect(self.db_ml)
 
-        sql_statement = 'SELECT result '\
-            'FROM tbl_%s_results '\
-            'WHERE id_result=%s'
-        args = (model_type, id_result)
-        response = self.sql.execute(sql_statement, 'select', args)
+        if model_type in self.model_list:
+            sql_statement = 'SELECT result '\
+                'FROM tbl_%s_results '\
+                'WHERE id_result=%s'
+            args = (model_type, id_result)
+            response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -239,12 +241,13 @@ class Prediction(object):
         # select parameter
         self.sql.connect(self.db_ml)
 
-        if param in ['class', 'decision_function', 'probability']:
-            sql_statement = 'SELECT %s '\
-                'FROM tbl_%s_results_%s '\
-                'WHERE id_result=%s'
-            args = (param, model_type, param, id_result)
-            response = self.sql.execute(sql_statement, 'select', args)
+        if model_type in self.model_list:
+            if param in ['class', 'decision_function', 'probability']:
+                sql_statement = 'SELECT %s '\
+                    'FROM tbl_%s_results_%s '\
+                    'WHERE id_result=%s'
+                args = (param, model_type, param, id_result)
+                response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
