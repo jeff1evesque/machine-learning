@@ -179,3 +179,51 @@ class Prediction(object):
                 'error': None,
                 'result': response['result'],
             }
+
+    def get_result(self, model_type, id_result):
+        '''
+
+        This method retrieves a prediction result, based on the supplied
+            model_type, and id_result.
+
+        @model_type, constrains the 'select' result to a specified model type.
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        '''
+
+        # select result
+        self.sql.connect(self.db_ml)
+
+        if model_type == 'svm':
+            sql_statement = 'SELECT result '\
+                'FROM tbl_svm_results '\
+                'WHERE id_result=%s'
+            args = (id_result)
+            response = self.sql.execute(sql_statement, 'select', args)
+
+        elif model_type == 'svr':
+            sql_statement = 'SELECT result '\
+                'FROM tbl_svr_results '\
+                'WHERE id_result=%s'
+            args = (id_result)
+            response = self.sql.execute(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.disconnect()
+
+        # return result
+        if response_error:
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
+        else:
+            return {
+                'status': True,
+                'error': None,
+                'result': response['result'],
+            }
