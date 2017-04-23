@@ -16,6 +16,7 @@ import { Link } from 'react-router';
 import setLoginState from '../../redux/action/login.jsx';
 import setLogoutState from '../../redux/action/logout.jsx';
 import ajaxCaller from '../../general/ajax-caller.js';
+import { browserHistory } from 'react-router';
 
 var LoginLink = React.createClass({
   // call back: return login button
