@@ -197,19 +197,11 @@ class Prediction(object):
         # select result
         self.sql.connect(self.db_ml)
 
-        if model_type == 'svm':
-            sql_statement = 'SELECT result '\
-                'FROM tbl_svm_results '\
-                'WHERE id_result=%s'
-            args = (id_result)
-            response = self.sql.execute(sql_statement, 'select', args)
-
-        elif model_type == 'svr':
-            sql_statement = 'SELECT result '\
-                'FROM tbl_svr_results '\
-                'WHERE id_result=%s'
-            args = (id_result)
-            response = self.sql.execute(sql_statement, 'select', args)
+        sql_statement = 'SELECT result '\
+            'FROM tbl_%s_results '\
+            'WHERE id_result=%s'
+        args = (model_type, id_result)
+        response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -229,12 +221,14 @@ class Prediction(object):
                 'result': response['result'],
             }
 
-    def get_svm_params(self, id_result, param):
+    def get_svm_params(self, id_result, model_type, param):
         '''
 
         This method retrieves values to a specified parameter, with respect to
             a supplied id_result, for a corresponding stored svm prediction
             result.
+
+        @model_type, constrains the 'select' result to a specified model type.
 
         @param, specifies which table, and corresponding column parameter to
             query, and select from:
@@ -253,9 +247,9 @@ class Prediction(object):
 
         if param in ['class', 'decision_function', 'probability']:
             sql_statement = 'SELECT %s '\
-                'FROM tbl_svm_results_%s '\
+                'FROM tbl_%s_results_%s '\
                 'WHERE id_result=%s'
-            args = (param, param, id_result)
+            args = (param, model_type, param, id_result)
             response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
