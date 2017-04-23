@@ -229,11 +229,19 @@ class Prediction(object):
                 'result': response['result'],
             }
 
-    def get_svm_classes(self, id_result):
+    def get_svm_params(self, id_result, param):
         '''
 
-        This method retrieves all svm classes, with respect to a provided
-            id_result, for a corresponding stored prediction result.
+        This method retrieves values to a specified parameter, with respect to
+            a supplied id_result, for a corresponding stored svm prediction
+            result.
+
+        @param, specifies which table, and corresponding column parameter to
+            query, and select from:
+
+            - class
+            - decision_function
+            - probability
 
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
@@ -243,11 +251,12 @@ class Prediction(object):
         # select classes
         self.sql.connect(self.db_ml)
 
-        sql_statement = 'SELECT result '\
-            'FROM tbl_svm_results_class '\
-            'WHERE id_result=%s'
-        args = (id_result)
-        response = self.sql.execute(sql_statement, 'select', args)
+        if param in ['class', 'decision_function', 'probability']:
+            sql_statement = 'SELECT %s '\
+                'FROM tbl_svm_results_%s '\
+                'WHERE id_result=%s'
+            args = (param, param, id_result)
+            response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
