@@ -228,3 +228,41 @@ class Prediction(object):
                 'error': None,
                 'result': response['result'],
             }
+
+    def get_svm_classes(self, id_result):
+        '''
+
+        This method retrieves all svm classes, with respect to a provided
+            id_result, for a corresponding stored prediction result.
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        '''
+
+        # select classes
+        self.sql.connect(self.db_ml)
+
+        sql_statement = 'SELECT result '\
+            'FROM tbl_svm_results_class '\
+            'WHERE id_result=%s'
+        args = (id_result)
+        response = self.sql.execute(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.disconnect()
+
+        # return result
+        if response_error:
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
+        else:
+            return {
+                'status': True,
+                'error': None,
+                'result': response['result'],
+            }
