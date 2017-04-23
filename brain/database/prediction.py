@@ -243,7 +243,7 @@ class Prediction(object):
 
         '''
 
-        # select classes
+        # select parameter
         self.sql.connect(self.db_ml)
 
         if param in ['class', 'decision_function', 'probability']:
