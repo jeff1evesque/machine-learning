@@ -421,6 +421,7 @@ def retrieve_prediction_titles():
         - integer, codified indicator of database query:
             - 0, successful retrieval of prediction titles
             - 1, unsuccessful retrieval of prediction titles
+            - 2, improper request submitted
         - string, array of prediction titles
 
     '''
@@ -437,6 +438,10 @@ def retrieve_prediction_titles():
             # local variables
             results = request.form
             args = json.loads(results['args'])
+
+        # error case
+        else:
+            return json.dumps({'status': 2})
 
         # local variables
         model_type = args['model_type']
@@ -532,7 +537,7 @@ def save_prediction():
             - 0, successfully stored the prediction result
             - 1, unsuccessfully stored the prediction result
             - 2, status was not 'valid'
-            - 3, no form data supplied
+            - 3, improper request submitted
 
     '''
 
@@ -546,6 +551,10 @@ def save_prediction():
         elif request.form:
             results = request.form
             data = json.loads(results['data'])
+
+        # error case
+        else:
+            return json.dumps({'status': 3})
 
         # local variables
         status = results['status']
@@ -566,6 +575,3 @@ def save_prediction():
         # notification: status not valid
         else:
             return json.dumps({'status': 2})
-
-    # notification: no form data
-    return json.dumps({'status': 3})
