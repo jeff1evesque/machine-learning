@@ -439,7 +439,7 @@ def retrieve_prediction_titles():
             results = request.form
             args = json.loads(results['args'])
 
-        # error case
+        # invalid request
         else:
             return json.dumps({'status': 2})
 
@@ -494,7 +494,7 @@ def retrieve_prediction():
             results = request.form
             args = json.loads(results['args'])
 
-        # error case
+        # invalid request
         else:
             return json.dumps({'status': 2})
 
@@ -565,7 +565,7 @@ def save_prediction():
             results = request.form
             data = json.loads(results['data'])
 
-        # error case
+        # invalid request
         else:
             return json.dumps({'status': 3})
 
