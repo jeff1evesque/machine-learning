@@ -3,7 +3,7 @@
 This file will test the following cases:
   - saving a proposed svm prediction.
   - retrieving a supposed generated svm prediction.
-  - retrieving all svm prediction titles, with respect to a suppplied userid.
+  - retrieving all svm prediction titles, with respect to a supplied userid.
 
 Note: the 'pytest' instances can further be reviewed:
 
