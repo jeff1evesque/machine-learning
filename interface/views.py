@@ -537,28 +537,35 @@ def save_prediction():
     '''
 
     if request.method == 'POST':
-        if request.form:
-            # local variables
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            data = results['data']
+
+        # web-interface
+        elif request.form:
             results = request.form
             data = json.loads(results['data'])
-            status = results['status']
-            type = results['type']
-            title = results['prediction_name']
 
-            # save prediction
-            if status == 'valid':
-                prediction = Prediction()
-                result = prediction.save(data, type, title)['result']
+        # local variables
+        status = results['status']
+        type = results['type']
+        title = results['prediction_name']
 
-                # notification: prediction status
-                if result:
-                    return json.dumps({'status': 0})
-                else:
-                    return json.dumps({'status': 1})
+        # save prediction
+        if status == 'valid':
+            prediction = Prediction()
+            result = prediction.save(data, type, title)['result']
 
-            # notification: status not valid
+            # notification: prediction status
+            if result:
+                return json.dumps({'status': 0})
             else:
-                return json.dumps({'status': 2})
+                return json.dumps({'status': 1})
 
-        # notification: no form data
-        return json.dumps({'status': 3})
+        # notification: status not valid
+        else:
+            return json.dumps({'status': 2})
+
+    # notification: no form data
+    return json.dumps({'status': 3})
