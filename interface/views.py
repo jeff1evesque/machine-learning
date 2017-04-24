@@ -444,7 +444,10 @@ def retrieve_prediction_titles():
             return json.dumps({'status': 2})
 
         # local variables
-        model_type = args['model_type']
+        if args['model_type']:
+            model_type = args['model_type']
+        else:
+            model_type = None
 
         # query database
         prediction = Prediction()
