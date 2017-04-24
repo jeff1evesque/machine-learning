@@ -477,48 +477,61 @@ def retrieve_prediction():
         - integer, codified indicator of save attempt:
             - 0, successful retrieval of specified prediction parameter
             - 1, unsuccessful retrieval of specified prediction parameter
+            - 2, improper request submitted
         - string, prediction parameter
 
     '''
 
     if request.method == 'POST':
-        if request.form:
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            args = results['args']
+
+        # web-interface
+        elif request.form:
             # local variables
             results = request.form
             args = json.loads(results['args'])
-            id_result = args['id_result']
-            model_type = args['model_type']
 
-            # query database and return results
-            prediction = Prediction()
+        # error case
+        else:
+            return json.dumps({'status': 2})
 
-            if model_type == 'svm':
-                result = prediction.get_result(id_result, model_type)
-                classes = prediction.get_value(id_result, model_type, 'class')
-                df = prediction.get_value(id_result, model_type, 'decision_function')
-                prob = prediction.get_value(id_result, model_type, 'probability')
+        # local variables
+        id_result = args['id_result']
+        model_type = args['model_type']
 
-                if result['status']:
-                    return json.dumps({
-                        'status': 0,
-                        'result': result,
-                        'classes': classes,
-                        'decision_function': df,
-                        'probability': prob
-                    })
-                else:
-                    return json.dumps({'status': 1})
+        # query database and return results
+        prediction = Prediction()
 
-            elif model_type == 'svr':
-                coefficient = prediction.get_value(id_result, model_type, 'r2')
+        if model_type == 'svm':
+            result = prediction.get_result(id_result, model_type)
+            classes = prediction.get_value(id_result, model_type, 'class')
+            df = prediction.get_value(id_result, model_type, 'decision_function')
+            prob = prediction.get_value(id_result, model_type, 'probability')
 
-                if result['status']:
-                    return json.dumps({
-                        'status': 0,
-                        'r2': coefficient
-                    })
-                else:
-                    return json.dumps({'status': 1})
+            if result['status']:
+                return json.dumps({
+                    'status': 0,
+                    'result': result,
+                    'classes': classes,
+                    'decision_function': df,
+                    'probability': prob
+                })
+            else:
+                return json.dumps({'status': 1})
+
+        elif model_type == 'svr':
+            coefficient = prediction.get_value(id_result, model_type, 'r2')
+
+            if result['status']:
+                return json.dumps({
+                    'status': 0,
+                    'r2': coefficient
+                })
+            else:
+                return json.dumps({'status': 1})
 
 
 @blueprint.route(
