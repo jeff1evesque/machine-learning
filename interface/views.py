@@ -426,28 +426,37 @@ def retrieve_prediction_titles():
     '''
 
     if request.method == 'POST':
-        if request.form:
+        # programmatic-interface
+        if request.get_json():
+            # local variables
+            results = request.get_json()
+            args = results['args']
+
+        # web-interface
+        elif request.form:
             # local variables
             results = request.form
             args = json.loads(results['args'])
-            model_type = args['model_type']
 
-            # query database
-            prediction = Prediction()
-            response = prediction.get_all_titles(model_type)
+        # local variables
+        model_type = args['model_type']
 
-            # return results
-            if response['status']:
-                return json.dumps({
-                    'status': 0,
-                    'titles': response['result']
-                })
+        # query database
+        prediction = Prediction()
+        response = prediction.get_all_titles(model_type)
 
-            else:
-                return json.dumps({
-                    'status': 1,
-                    'titles': None
-                })
+        # return results
+        if response['status']:
+            return json.dumps({
+                'status': 0,
+                'titles': response['result']
+            })
+
+        else:
+            return json.dumps({
+                'status': 1,
+                'titles': None
+            })
 
 
 @blueprint.route(
