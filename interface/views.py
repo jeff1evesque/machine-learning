@@ -106,16 +106,13 @@ def load_data():
             # return response
             return response
 
-        # load web-interface
-        else:
-            # local variables
-            files = None
-
-            # get uploaded form files
+        # get uploaded form files
         if request.files:
             files = request.files
+        else:
+            files = None
 
-        # get submitted form data
+        # web-interface: get submitted form data
         if request.form:
             settings = request.form
             sender = Settings(settings, files)
