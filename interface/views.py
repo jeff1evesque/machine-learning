@@ -71,7 +71,7 @@ def load_data():
 
     if request.method == 'POST':
 
-        # load programmatic-interface
+        # programmatic-interface
         if request.get_json():
             # get necessary components from the dataset
             if 'dataset' in request.get_json():
