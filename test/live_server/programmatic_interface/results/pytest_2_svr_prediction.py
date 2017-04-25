@@ -72,9 +72,12 @@ def test_save_prediction(client, live_server):
     assert res.status_code == 200
 
     if res.json['status'] == 1:
-        print 'Unsuccessful retrieval of prediction titles.'
+        print 'Unsuccessful storing the prediction result.'
         assert False
     elif res.json['status'] == 2:
+        print 'Status was not valid.'
+        assert False
+    elif res.json['status'] == 3
         print 'Improper request submitted.'
         assert False
     else:
