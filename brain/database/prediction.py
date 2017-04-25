@@ -51,8 +51,7 @@ class Prediction(object):
         '''
 
         # local variables
-        data = json.loads(payload)
-        result = data['result']
+        result = payload['result']
 
         # insert prediction
         self.sql.connect(self.db_ml)
