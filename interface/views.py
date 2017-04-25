@@ -429,13 +429,10 @@ def retrieve_prediction_titles():
     if request.method == 'POST':
         # programmatic-interface
         if request.get_json():
-            # local variables
             results = request.get_json()
-            args = results['args']
 
         # web-interface
         elif request.form:
-            # local variables
             results = request.form
             args = json.loads(results['args'])
 
@@ -489,11 +486,9 @@ def retrieve_prediction():
         # programmatic-interface
         if request.get_json():
             results = request.get_json()
-            args = results['args']
 
         # web-interface
         elif request.form:
-            # local variables
             results = request.form
             args = json.loads(results['args'])
 
