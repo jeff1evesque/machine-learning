@@ -70,7 +70,6 @@ def test_save_prediction(client, live_server):
 
     # assertion checks
     assert res.status_code == 200
-    assert res.json['status'] == 0
 
     if res.json['status'] != 0:
         print res.json['error']
@@ -97,7 +96,6 @@ def test_retrieve_prediction(client, live_server):
 
     # assertion checks
     assert res.status_code == 200
-    assert res.json['status'] == 0
 
     if res.json['status'] != 0:
         print res.json['error']
@@ -125,7 +123,6 @@ def test_retrieve_titles(client, live_server):
 
     # assertion checks
     assert res.status_code == 200
-    assert res.json['status'] == 0
 
     if res.json['status'] != 0:
         print res.json['error']
