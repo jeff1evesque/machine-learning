@@ -483,19 +483,19 @@ def retrieve_prediction():
         # programmatic-interface
         if request.get_json():
             results = request.get_json()
+            id_result = results['id_result']
+            model_type = results['model_type']
 
         # web-interface
         elif request.form:
             results = request.form
             args = json.loads(results['args'])
+            id_result = args['id_result']
+            model_type = args['model_type']
 
         # invalid request
         else:
             return json.dumps({'status': 2})
-
-        # local variables
-        id_result = args['id_result']
-        model_type = args['model_type']
 
         # query database and return results
         prediction = Prediction()
