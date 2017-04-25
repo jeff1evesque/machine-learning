@@ -6,7 +6,6 @@ This file saves, as well as retrieves, previous stored predictions.
 
 '''
 
-import json
 from flask import current_app, session
 from brain.database.query import SQL
 
