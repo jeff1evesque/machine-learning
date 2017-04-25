@@ -71,5 +71,5 @@ def test_retrieve_titles(client, live_server):
     assert res.status_code == 200
     assert res.json['status'] == 0
 
-    if assert res.json['status'] != 0:
+    if res.json['status'] != 0:
         print res.json['error']
