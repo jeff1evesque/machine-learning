@@ -575,7 +575,7 @@ def save_prediction():
         # local variables
         status = results['status']
         type = results['type']
-        title = results['prediction_name']
+        title = results['title']
 
         # save prediction
         if status == 'valid':

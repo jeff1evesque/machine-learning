@@ -148,7 +148,7 @@ var ResultDisplay = React.createClass({
             var saveResults = <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
                 <input
                     type='text'
-                    name='prediction_name'
+                    name='title'
                     placeholder='Name your result'
                     className='mn-2'
                     defaultValue=''
