@@ -37,7 +37,7 @@ class Prediction(object):
         else:
             self.uid = 0
 
-    def save(self, payload, model_type, title):
+    def save(self, data, model_type, title):
         '''
 
         This method stores the corresponding prediction.
@@ -50,7 +50,7 @@ class Prediction(object):
         '''
 
         # local variables
-        data = payload['result']
+        result = data['result']
 
         # insert prediction
         self.sql.connect(self.db_ml)
