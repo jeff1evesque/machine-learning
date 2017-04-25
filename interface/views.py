@@ -427,21 +427,17 @@ def retrieve_prediction_titles():
         # programmatic-interface
         if request.get_json():
             results = request.get_json()
+            model_type = results['model_type']
 
         # web-interface
         elif request.form:
             results = request.form
             args = json.loads(results['args'])
+            model_type = args['model_type']
 
         # invalid request
         else:
             return json.dumps({'status': 2})
-
-        # local variables
-        if args['model_type']:
-            model_type = args['model_type']
-        else:
-            model_type = None
 
         # query database
         prediction = Prediction()
@@ -566,7 +562,7 @@ def save_prediction():
 
         # local variables
         status = results['status']
-        type = results['type']
+        type = results['model_type']
         title = results['title']
 
         # save prediction

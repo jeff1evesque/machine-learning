@@ -1,6 +1,6 @@
 {
     "status": "valid",
-    "type": "svm",
+    "model_type": "svm",
     "title": "svm-prediction-1",
     "data": {
         "result": "dep-variable-2",

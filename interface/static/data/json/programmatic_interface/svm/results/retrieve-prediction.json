@@ -1,4 +1,4 @@
 {
-    "id": "1",
-    "type": "svm"
+    "id_result": "1",
+    "model_type": "svm"
 }
