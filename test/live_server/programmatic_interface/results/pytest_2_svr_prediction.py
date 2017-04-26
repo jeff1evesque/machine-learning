@@ -115,6 +115,9 @@ def test_retrieve_prediction(client, live_server):
     else:
         assert res.json['status']
 
+    assert res.json['result'] == '166.001388043'
+    assert res.json['r2'] == '0.99114929281077535'
+
 
 def test_retrieve_titles(client, live_server):
     '''
@@ -147,3 +150,5 @@ def test_retrieve_titles(client, live_server):
         assert False
     else:
         assert res.json['status']
+
+    assert res.json['title'] == ['svr-prediction-1']
