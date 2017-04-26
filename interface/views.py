@@ -556,10 +556,10 @@ def save_prediction():
             results = request.get_json()
             data = results['data']
 
-        # web-interface
+        # web-interface: double decoder required, since nested encoding
         elif request.form:
             results = request.form
-            data = json.loads(results['data'])
+            data = json.loads(json.loads(results['data']))
 
         # invalid request
         else:
