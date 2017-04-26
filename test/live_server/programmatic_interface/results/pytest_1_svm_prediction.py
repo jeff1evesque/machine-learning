@@ -132,6 +132,7 @@ def test_retrieve_prediction(client, live_server):
         '0.9450164353712046'
     ]
 
+
 def test_retrieve_titles(client, live_server):
     '''
 
