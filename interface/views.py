@@ -502,7 +502,12 @@ def retrieve_prediction():
             df = prediction.get_value(id_result, model_type, 'decision_function')
             prob = prediction.get_value(id_result, model_type, 'probability')
 
-            if result['status']:
+            if (
+                result['status'] and
+                classes['status'] and
+                df['status'] and
+                prob['status']
+            ):
                 return json.dumps({
                     'status': 0,
                     'result': result,
@@ -516,7 +521,7 @@ def retrieve_prediction():
         elif model_type == 'svr':
             coefficient = prediction.get_value(id_result, model_type, 'r2')
 
-            if result['status']:
+            if coefficient['status']:
                 return json.dumps({
                     'status': 0,
                     'r2': coefficient
