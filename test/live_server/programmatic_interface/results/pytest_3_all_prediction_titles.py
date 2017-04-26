@@ -70,10 +70,10 @@ def test_retrieve_titles(client, live_server):
     # assertion checks
     assert res.status_code == 200
 
-    if res.json['status'] == '1':
+    if res.json['status'] == 1:
         print 'Unsuccessful retrieval of prediction titles'
         assert False
-    elif res.json['status'] == '2':
+    elif res.json['status'] == 2:
         print 'Improper request submitted.'
         assert False
     else:
