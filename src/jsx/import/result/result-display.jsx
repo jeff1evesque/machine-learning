@@ -34,7 +34,7 @@ var ResultDisplay = React.createClass({
             var formData = new FormData(this.refs.savePredictionForm);
             formData.append('status', 'valid');
             formData.append('data', this.state.computed_result);
-            formData.append('type', this.state.computed_type);
+            formData.append('model_type', this.state.computed_type);
 
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
