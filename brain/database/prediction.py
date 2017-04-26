@@ -247,6 +247,12 @@ class Prediction(object):
                 args = (param, model_type, param, id_result)
                 response = self.sql.execute(sql_statement, 'select', args)
 
+                return {
+                    'status': True,
+                    'error': None,
+                    'result': response['result'],
+                }
+
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
         self.sql.disconnect()
@@ -258,9 +264,10 @@ class Prediction(object):
                 'error': response_error,
                 'result': None
             }
+
         else:
             return {
-                'status': True,
-                'error': None,
-                'result': response['result'],
+                'status': False,
+			    'error': 'Nothing sql logic executed',
+                'result': None
             }
