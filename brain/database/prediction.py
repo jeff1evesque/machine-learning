@@ -268,6 +268,6 @@ class Prediction(object):
         else:
             return {
                 'status': False,
-			    'error': 'Nothing sql logic executed',
+                'error': 'Nothing sql logic executed',
                 'result': None
             }
