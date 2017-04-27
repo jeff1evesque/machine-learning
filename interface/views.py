@@ -576,7 +576,7 @@ def save_prediction():
             result = prediction.save(data, type, title)['result']
 
             # notification: prediction status
-            if result:
+            if result == 0:
                 return json.dumps({'status': 0})
             else:
                 return json.dumps({'status': 1})
