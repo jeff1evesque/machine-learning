@@ -77,7 +77,7 @@ def test_retrieve_titles(client, live_server):
         print 'Improper request submitted.'
         assert False
     else:
-        assert res.json['status']
+        assert res.json['status'] == 0
 
     assert res.json['titles']['result'] == [
         'svm-prediction-1',

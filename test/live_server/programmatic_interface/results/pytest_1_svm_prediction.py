@@ -81,7 +81,7 @@ def test_save_prediction(client, live_server):
         print 'Improper request submitted.'
         assert False
     else:
-        assert res.json['status']
+        assert res.json['status'] == 0
 
 
 def test_retrieve_prediction(client, live_server):
@@ -113,7 +113,7 @@ def test_retrieve_prediction(client, live_server):
         print 'Improper request submitted.'
         assert False
     else:
-        assert res.json['status']
+        assert res.json['status'] == 0
 
     assert res.json['result']['result'] == 'dep-variable-2'
     assert res.json['classes']['result'] == [
@@ -163,6 +163,6 @@ def test_retrieve_titles(client, live_server):
         print 'Improper request submitted.'
         assert False
     else:
-        assert res.json['status']
+        assert res.json['status'] == 0
 
     assert res.json['titles']['result'] == ['svm-prediction-1']
