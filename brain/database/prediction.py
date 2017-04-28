@@ -139,8 +139,8 @@ class Prediction(object):
         if model_type in self.model_list:
             sql_statement = 'SELECT title, datetime_created ' \
                 'FROM tbl_%s_results '\
-                'WHERE uid_created=%s'
-            args = (model_type, self.uid)
+                'WHERE uid_created=%%s' % (model_type)
+            args = (self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
 
         else:
@@ -190,10 +190,9 @@ class Prediction(object):
         self.sql.connect(self.db_ml)
 
         if model_type in self.model_list:
-            sql_statement = 'SELECT result '\
-                'FROM tbl_%s_results '\
-                'WHERE id_result=%s'
-            args = (model_type, id_result)
+            sql_statement = 'SELECT result FROM tbl_%s_results '\
+		        'WHERE id_result=%%s' % (model_type)
+            args = (id_result,)
             response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
@@ -241,10 +240,9 @@ class Prediction(object):
 
         if model_type in self.model_list:
             if param in ['class', 'decision_function', 'probability']:
-                sql_statement = 'SELECT %s '\
-                    'FROM tbl_%s_results_%s '\
-                    'WHERE id_result=%s'
-                args = (param, model_type, param, id_result)
+                sql_statement = 'SELECT %s FROM tbl_%s_results_%s '\
+		            'WHERE id_result=%%s' % (param, model_type, param)
+                args = (id_result,)
                 response = self.sql.execute(sql_statement, 'select', args)
 
                 return {
