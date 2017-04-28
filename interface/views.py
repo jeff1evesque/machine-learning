@@ -443,12 +443,14 @@ def retrieve_prediction_titles():
         prediction = Prediction()
         response = prediction.get_all_titles(model_type)
 
-        # return results
+        # return results: datetime is not serializable, without 'default'
+        #                 string serializer, for incompatible objects.
+        #
         if response['status']:
             return json.dumps({
                 'status': 0,
                 'titles': response['result']
-            })
+            }, default=str)
 
         else:
             return json.dumps({
