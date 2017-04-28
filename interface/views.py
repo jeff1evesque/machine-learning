@@ -524,7 +524,7 @@ def retrieve_prediction():
             if coefficient['status']:
                 return json.dumps({
                     'status': 0,
-                    'r2': coefficient
+                    'r2': coefficient['result']
                 })
             else:
                 return json.dumps({'status': 1})
