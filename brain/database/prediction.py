@@ -143,13 +143,13 @@ class Prediction(object):
             args = (self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
 
-        else:
+        elif model_type == 'all':
             sql_statement = 'SELECT tbl_svm_results.title, '\
-                'tbl_svm_results.datetime_created, ' \
+                'tbl_svm_results.datetime_created, '\
                 'tbl_svr_results.title, '\
                 'tbl_svr_results.datetime_created '\
                 'FROM tbl_svm_results JOIN tbl_svr_results '\
-                'ON tbl_svm_results.id = tbl_svr_results.id '\
+                'ON tbl_svm_results.uid_created = tbl_svr_results.uid_created '\
                 'WHERE tbl_svm_results.uid_created=%s '\
                 'AND tbl_svr_results.uid_created=%s'
             args = (self.uid, self.uid)
