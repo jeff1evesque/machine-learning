@@ -510,10 +510,10 @@ def retrieve_prediction():
             ):
                 return json.dumps({
                     'status': 0,
-                    'result': result,
-                    'classes': classes,
-                    'decision_function': df,
-                    'probability': prob
+                    'result': result['result'],
+                    'classes': classes['result'],
+                    'decision_function': df['result'],
+                    'probability': prob['result']
                 })
             else:
                 return json.dumps({'status': 1})
