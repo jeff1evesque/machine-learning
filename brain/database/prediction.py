@@ -239,7 +239,7 @@ class Prediction(object):
         self.sql.connect(self.db_ml)
 
         if model_type in self.model_list:
-            if param in ['class', 'decision_function', 'probability']:
+            if param in ['class', 'decision_function', 'probability', 'r2']:
                 sql_statement = 'SELECT %s FROM tbl_%s_results_%s '\
 		            'WHERE id_result=%%s' % (param, model_type, param)
                 args = (id_result,)
@@ -266,6 +266,6 @@ class Prediction(object):
         else:
             return {
                 'status': False,
-                'error': 'Nothing sql logic executed',
+                'error': 'No sql logic executed',
                 'result': None
             }
