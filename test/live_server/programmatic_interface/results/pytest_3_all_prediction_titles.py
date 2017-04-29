@@ -80,6 +80,6 @@ def test_retrieve_titles(client, live_server):
         assert res.json['status'] == 0
 
     assert res.json['titles']['result'] == [
-        'svm-prediction-1',
-        'svr-prediction-1'
+        ['svm-prediction-1'],
+        ['svr-prediction-1']
     ]
