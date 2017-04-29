@@ -115,21 +115,21 @@ def test_retrieve_prediction(client, live_server):
     else:
         assert res.json['status'] == 0
 
-    assert res.json['result'][0] == ['dep-variable-2']
-    assert res.json['classes'][0] == [
+    assert res.json['result'] == [['dep-variable-2']]
+    assert res.json['classes'] == [
         ['dep-variable-1'],
         ['dep-variable-2'],
         ['dep-variable-3']
     ]
-    assert res.json['decision_function'][0] == [
-        ['-5.916312596654728'],
-        ['7.243579276069545'],
-        ['3.4348334629146398']
+    assert res.json['decision_function'] == [
+        [-5.916312596654728],
+        [7.243579276069545],
+        [3.4348334629146398]
     ]
-    assert res.json['probability'][0] == [
-        ['0.01194470442600185'],
-        ['0.04303886020279356'],
-        ['0.9450164353712046']
+    assert res.json['probability'] == [
+        [0.01194470442600185],
+        [0.04303886020279356],
+        [0.9450164353712046]
     ]
 
 
