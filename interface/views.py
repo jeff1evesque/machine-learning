@@ -497,9 +497,9 @@ def retrieve_prediction():
 
         # query database and return results
         prediction = Prediction()
+        result = prediction.get_result(id_result, model_type)
 
         if model_type == 'svm':
-            result = prediction.get_result(id_result, model_type)
             classes = prediction.get_value(id_result, model_type, 'class')
             df = prediction.get_value(id_result, model_type, 'decision_function')
             prob = prediction.get_value(id_result, model_type, 'probability')
@@ -526,6 +526,7 @@ def retrieve_prediction():
             if coefficient['status']:
                 return json.dumps({
                     'status': 0,
+                    'result': result['result'],
                     'r2': coefficient['result']
                 })
             else:
