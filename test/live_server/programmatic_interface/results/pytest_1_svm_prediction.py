@@ -106,6 +106,9 @@ def test_retrieve_prediction(client, live_server):
     # assertion checks
     assert res.status_code == 200
 
+    # remove this
+    print res
+
     if res.json['status'] == 1:
         print 'Unsuccessful retrieval of specified prediction parameter.'
         assert False
@@ -115,7 +118,7 @@ def test_retrieve_prediction(client, live_server):
     else:
         assert res.json['status'] == 0
 
-    assert res.json['result'] == [['dep-variable-2']]
+    assert res.json['result']['result'] == [['dep-variable-2']]
     assert res.json['classes'] == [
         ['dep-variable-1'],
         ['dep-variable-2'],
