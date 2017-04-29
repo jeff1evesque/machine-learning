@@ -115,7 +115,7 @@ def test_retrieve_prediction(client, live_server):
     else:
         assert res.json['status'] == 0
 
-    assert res.json['result']['result'] == 'dep-variable-2'
+    assert res.json['result']['result'][0] == 'dep-variable-2'
     assert res.json['classes']['result'] == [
         'dep-variable-1',
         'dep-variable-2',
