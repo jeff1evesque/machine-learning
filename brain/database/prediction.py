@@ -191,7 +191,7 @@ class Prediction(object):
 
         if model_type in self.model_list:
             sql_statement = 'SELECT result FROM tbl_%s_results '\
-		        'WHERE uid_created=%%s' % (model_type)
+                'WHERE uid_created=%%s' % (model_type)
             args = (id_result,)
             response = self.sql.execute(sql_statement, 'select', args)
 
@@ -241,7 +241,7 @@ class Prediction(object):
         if model_type in self.model_list:
             if param in ['class', 'decision_function', 'probability', 'r2']:
                 sql_statement = 'SELECT %s FROM tbl_%s_results_%s '\
-		            'WHERE id_result=%%s' % (param, model_type, param)
+                    'WHERE id_result=%%s' % (param, model_type, param)
                 args = (id_result,)
                 response = self.sql.execute(sql_statement, 'select', args)
 
