@@ -103,6 +103,8 @@ def test_retrieve_prediction(client, live_server):
         data=get_sample_json('retrieve-prediction.json', 'svr')
     )
 
+    print repr(res)
+
     # assertion checks
     assert res.status_code == 200
 

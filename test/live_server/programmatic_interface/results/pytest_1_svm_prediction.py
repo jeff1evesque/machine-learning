@@ -107,7 +107,7 @@ def test_retrieve_prediction(client, live_server):
     assert res.status_code == 200
 
     # remove this
-    print res
+    print repr(res)
 
     if res.json['status'] == 1:
         print 'Unsuccessful retrieval of specified prediction parameter.'
@@ -155,6 +155,8 @@ def test_retrieve_titles(client, live_server):
         headers={'Content-Type': 'application/json'},
         data=get_sample_json('retrieve-titles.json', 'svm')
     )
+
+    print repr(res)
 
     # assertion checks
     assert res.status_code == 200
