@@ -103,8 +103,6 @@ def test_retrieve_prediction(client, live_server):
         data=get_sample_json('retrieve-prediction.json', 'svr')
     )
 
-    print repr(res.json['result'])
-
     # assertion checks
     assert res.status_code == 200
 
@@ -117,7 +115,7 @@ def test_retrieve_prediction(client, live_server):
     else:
         assert res.json['status'] == 0
 
-    assert res.json['result'] == ['166.001388043']
+    assert res.json['result'] == [['166.001388043']]
     assert res.json['r2'] == [['0.99114929281077535']]
 
 
