@@ -148,7 +148,7 @@ with conn:
                         id_entity INT NOT NULL,
                         dep_variable_label VARCHAR (50) NOT NULL,
                         indep_variable_label VARCHAR (50) NOT NULL,
-                        indep_variable_value FLOAT NOT NULL,
+                        indep_variable_value DECIMAL(40,20) NOT NULL,
                         INDEX (id_value)
                     );
                     '''
@@ -161,7 +161,7 @@ with conn:
                         id_entity INT NOT NULL,
                         criterion VARCHAR (50) NOT NULL,
                         indep_variable_label VARCHAR (50) NOT NULL,
-                        indep_variable_value FLOAT NOT NULL,
+                        indep_variable_value DECIMAL(40,20) NOT NULL,
                         INDEX (id_value)
                     );
                     '''
@@ -211,7 +211,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS tbl_svm_results_probability (
                         id_probability INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         id_result INT NOT NULL,
-                        probability FLOAT NOT NULL
+                        probability DECIMAL(40,20) NOT NULL
                     );
                     '''
     cur.execute(sql_statement)
@@ -221,7 +221,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS tbl_svm_results_decision_function (
                         id_decision_function INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         id_result INT NOT NULL,
-                        decision_function FLOAT NOT NULL
+                        decision_function DECIMAL(40,20) NOT NULL
                     );
                     '''
     cur.execute(sql_statement)
@@ -244,7 +244,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS tbl_svr_results_r2 (
                         id_r2 INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         id_result INT NOT NULL,
-                        r2 FLOAT NOT NULL
+                        r2 DECIMAL(40,20) NOT NULL
                     );
                     '''
     cur.execute(sql_statement)
