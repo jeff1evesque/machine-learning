@@ -510,13 +510,17 @@ def retrieve_prediction():
                 df['status'] and
                 prob['status']
             ):
+                # return results: queried 'decimal' database values, are not
+                #                 json serializable, without using the 'default'
+                #                 string serializer.
+                #
                 return json.dumps({
                     'status': 0,
                     'result': result['result'],
                     'classes': classes['result'],
                     'decision_function': df['result'],
                     'probability': prob['result']
-                })
+                }, default=str)
             else:
                 return json.dumps({'status': 1})
 
@@ -524,11 +528,15 @@ def retrieve_prediction():
             coefficient = prediction.get_value(id_result, model_type, 'r2')
 
             if coefficient['status']:
+                # return results: queried 'decimal' database values, are not
+                #                 json serializable, without using the 'default'
+                #                 string serializer.
+                #
                 return json.dumps({
                     'status': 0,
                     'result': result['result'],
                     'r2': coefficient['result']
-                })
+                }, default=str)
             else:
                 return json.dumps({'status': 1})
 
