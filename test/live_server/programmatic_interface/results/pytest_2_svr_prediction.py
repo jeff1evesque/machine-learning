@@ -117,7 +117,7 @@ def test_retrieve_prediction(client, live_server):
     else:
         assert res.json['status'] == 0
 
-    assert res.json['result'] == [166.001388043]
+    assert res.json['result'][0][0] == [166.001388043]
     assert res.json['r2'] == [[0.99114929281077535]]
 
 
