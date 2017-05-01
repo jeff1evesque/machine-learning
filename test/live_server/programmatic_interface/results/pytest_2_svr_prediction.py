@@ -116,7 +116,7 @@ def test_retrieve_prediction(client, live_server):
         assert res.json['status'] == 0
 
     assert res.json['result'] == [['166.001388043']]
-    assert res.json['r2'] == [['0.99114929281077535']]
+    assert res.json['r2'] == [['0.991149292811']]
 
 
 def test_retrieve_titles(client, live_server):
