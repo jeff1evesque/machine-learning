@@ -34,7 +34,7 @@ var ResultDisplay = React.createClass({
             var formData = new FormData(this.refs.savePredictionForm);
             formData.append('status', 'valid');
             formData.append('data', this.state.computed_result);
-            formData.append('type', this.state.computed_type);
+            formData.append('model_type', this.state.computed_type);
 
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
@@ -148,7 +148,7 @@ var ResultDisplay = React.createClass({
             var saveResults = <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
                 <input
                     type='text'
-                    name='prediction_name'
+                    name='title'
                     placeholder='Name your result'
                     className='mn-2'
                     defaultValue=''

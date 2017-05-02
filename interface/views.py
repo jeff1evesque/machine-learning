@@ -71,7 +71,7 @@ def load_data():
 
     if request.method == 'POST':
 
-        # load programmatic-interface
+        # programmatic-interface
         if request.get_json():
             # get necessary components from the dataset
             if 'dataset' in request.get_json():
@@ -106,16 +106,13 @@ def load_data():
             # return response
             return response
 
-        # load web-interface
-        else:
-            # local variables
-            files = None
-
-            # get uploaded form files
+        # get uploaded form files
         if request.files:
             files = request.files
+        else:
+            files = None
 
-        # get submitted form data
+        # web-interface: get submitted form data
         if request.form:
             settings = request.form
             sender = Settings(settings, files)
@@ -407,6 +404,144 @@ def retrieve_sv_features():
 
 
 @blueprint.route(
+    '/retrieve-prediction-titles',
+    methods=['POST'],
+    endpoint='retrieve_prediction_titles'
+)
+def retrieve_prediction_titles():
+    '''
+
+    This router function retrieves all prediction titles, stored via the
+    'save_prediction' router function. During its attempt, it returns a json
+    string, with the following value:
+
+        - integer, codified indicator of database query:
+            - 0, successful retrieval of prediction titles
+            - 1, unsuccessful retrieval of prediction titles
+            - 2, improper request submitted
+        - string, array of prediction titles
+
+    '''
+
+    if request.method == 'POST':
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            model_type = results['model_type']
+
+        # web-interface
+        elif request.form:
+            results = request.form
+            args = json.loads(results['args'])
+            model_type = args['model_type']
+
+        # invalid request
+        else:
+            return json.dumps({'status': 2})
+
+        # query database
+        prediction = Prediction()
+        response = prediction.get_all_titles(model_type)
+
+        # return results: datetime is not serializable, without 'default'
+        #                 string serializer, for incompatible objects.
+        #
+        if response['status']:
+            return json.dumps({
+                'status': 0,
+                'titles': response['result']
+            }, default=str)
+
+        else:
+            return json.dumps({
+                'status': 1,
+                'titles': None
+            })
+
+
+@blueprint.route(
+    '/retrieve-prediction',
+    methods=['POST'],
+    endpoint='retrieve_prediction'
+)
+def retrieve_prediction():
+    '''
+
+    This router function retrieves a specified prediction parameter.
+
+        - integer, codified indicator of save attempt:
+            - 0, successful retrieval of specified prediction parameter
+            - 1, unsuccessful retrieval of specified prediction parameter
+            - 2, improper request submitted
+        - string, prediction parameter
+
+    '''
+
+    if request.method == 'POST':
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            id_result = results['id_result']
+            model_type = results['model_type']
+
+        # web-interface
+        elif request.form:
+            results = request.form
+            args = json.loads(results['args'])
+            id_result = args['id_result']
+            model_type = args['model_type']
+
+        # invalid request
+        else:
+            return json.dumps({'status': 2})
+
+        # query database and return results
+        prediction = Prediction()
+        result = prediction.get_result(id_result, model_type)
+
+        if model_type == 'svm':
+            classes = prediction.get_value(id_result, model_type, 'class')
+            df = prediction.get_value(id_result, model_type, 'decision_function')
+            prob = prediction.get_value(id_result, model_type, 'probability')
+
+            if (
+                result['status'] and
+                classes['status'] and
+                df['status'] and
+                prob['status']
+            ):
+                # return results: queried 'decimal' database values, are not
+                #                 json serializable, without using the 'default'
+                #                 string serializer.
+                #
+                return json.dumps({
+                    'status': 0,
+                    'result': result['result'],
+                    'classes': classes['result'],
+                    'decision_function': df['result'],
+                    'probability': prob['result']
+                }, default=str)
+            else:
+                return json.dumps({'status': 1})
+
+        elif model_type == 'svr':
+            coefficient = prediction.get_value(id_result, model_type, 'r2')
+
+            if coefficient['status']:
+                # return results: queried 'decimal' database values, are not
+                #                 json serializable, without using the 'default'
+                #                 string serializer.
+                #
+                return json.dumps({
+                    'status': 0,
+                    'result': result['result'],
+                    'r2': coefficient['result']
+                }, default=str)
+            else:
+                return json.dumps({'status': 1})
+
+
+@blueprint.route(
     '/save-prediction',
     methods=['POST'],
     endpoint='save_prediction'
@@ -422,33 +557,41 @@ def save_prediction():
             - 0, successfully stored the prediction result
             - 1, unsuccessfully stored the prediction result
             - 2, status was not 'valid'
-            - 3, no form data supplied
+            - 3, improper request submitted
 
     '''
 
     if request.method == 'POST':
-        if request.form:
-            # local variables
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            data = results['data']
+
+        # web-interface: double decoder required, since nested encoding
+        elif request.form:
             results = request.form
-            data = json.loads(results['data'])
-            status = results['status']
-            type = results['type']
-            title = results['prediction_name']
+            data = json.loads(json.loads(results['data']))
 
-            # save prediction
-            if status == 'valid':
-                prediction = Prediction()
-                result = prediction.save(data, type, title)['result']
+        # invalid request
+        else:
+            return json.dumps({'status': 3})
 
-                # notification: prediction status
-                if result:
-                    return json.dumps({'status': 0})
-                else:
-                    return json.dumps({'status': 1})
+        # local variables
+        status = results['status']
+        type = results['model_type']
+        title = results['title']
 
-            # notification: status not valid
+        # save prediction
+        if status == 'valid':
+            prediction = Prediction()
+            result = prediction.save(data, type, title)['result']
+
+            # notification: prediction status
+            if result == 0:
+                return json.dumps({'status': 0})
             else:
-                return json.dumps({'status': 2})
+                return json.dumps({'status': 1})
 
-        # notification: no form data
-        return json.dumps({'status': 3})
+        # notification: status not valid
+        else:
+            return json.dumps({'status': 2})
