@@ -91,9 +91,10 @@ def test_retrieve_titles(client, live_server):
         datetime.datetime.strptime(date_svm, '%Y-%m-%d %H:%M:%S')
         datetime.datetime.strptime(date_svr, '%Y-%m-%d %H:%M:%S')
 
+        print res.json['titles']
         if (
-            ['svm-prediction-1', date_svm] == res.json['titles'][0] and
-            ['svr-prediction-1', date_svr] == res.json['titles'][1]
+            [['svm-prediction-1', date_svm]] == res.json['titles'][0] and
+            [['svr-prediction-1', date_svr]] == res.json['titles'][1]
         ):
             assert True
         else:
