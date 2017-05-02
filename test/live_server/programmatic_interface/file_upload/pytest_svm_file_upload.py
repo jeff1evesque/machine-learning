@@ -175,11 +175,10 @@ def test_model_predict(client, live_server):
         'dep-variable-4',
         'dep-variable-5'
     ]
-    print res.json['result']['confidence']['decision_function']
     assert res.json['result']['confidence']['decision_function'] == [
         0.2176409363746643,
         0.0,
-        -0.22014656301316302,
+        -0.2201467913263242,
         -0.22014661657537662,
         -0.2176409363746643,
         -0.49999960156529255,

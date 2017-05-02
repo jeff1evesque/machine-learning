@@ -121,6 +121,7 @@ def test_retrieve_prediction(client, live_server):
         ['dep-variable-2'],
         ['dep-variable-3']
     ]
+    print res.json['decision_function']
     assert res.json['decision_function'] == [
         ['-5.916312596654728'],
         ['7.243579276069545'],
