@@ -150,7 +150,7 @@ class Prediction(object):
                 'UNION '\
                 'SELECT tbl_svr_results.title, '\
                 'tbl_svr_results.datetime_created, '\
-                'WHERE tbl_svr_results.uid_created=%s '\
+                'WHERE tbl_svr_results.uid_created=%s'
             args = (self.uid, self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
 
