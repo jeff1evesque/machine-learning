@@ -14,6 +14,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 import json
 import os.path
+import datetime
 from flask import current_app, url_for
 
 
@@ -154,7 +155,7 @@ def test_retrieve_titles(client, live_server):
     try:
         date_svr = res.json['titles'][0][1]
         datetime.datetime.strptime(date_svr, '%Y-%m-%d %H:%M:%S')
-        if ['svr-prediction-1', date_text] == res.json['titles'][0]:
+        if ['svr-prediction-1', date_svr] == res.json['titles'][0]:
             assert True
         else:
             assert False
