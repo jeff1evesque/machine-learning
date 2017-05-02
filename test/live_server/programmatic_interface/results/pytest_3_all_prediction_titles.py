@@ -80,13 +80,13 @@ def test_retrieve_titles(client, live_server):
     else:
         assert res.json['status'] == 0
 
+    print res.json['titles']
     try:
         date_svm = res.json['titles'][0][1]
         date_svr = res.json['titles'][1][1]
         datetime.datetime.strptime(date_svm, '%Y-%m-%d %H:%M:%S')
         datetime.datetime.strptime(date_svr, '%Y-%m-%d %H:%M:%S')
 
-        print res.json['titles']
         if (
             [['svm-prediction-1', date_svm]] == res.json['titles'][0] and
             [['svr-prediction-1', date_svr]] == res.json['titles'][1]
