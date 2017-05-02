@@ -121,11 +121,10 @@ def test_retrieve_prediction(client, live_server):
         ['dep-variable-2'],
         ['dep-variable-3']
     ]
-    print res.json['decision_function']
     assert res.json['decision_function'] == [
-        ['-5.916312596654728'],
-        ['7.243579276069545'],
-        ['3.4348334629146398']
+        ['-5.916312596655'],
+        ['7.243579276070'],
+        ['3.434833462915']
     ]
     assert res.json['probability'] == [
         ['0.01194470442600185'],
@@ -166,4 +165,5 @@ def test_retrieve_titles(client, live_server):
     else:
         assert res.json['status'] == 0
 
+    print res.json['titles'][0]
     assert res.json['titles'][0] == ['svm-prediction-1']
