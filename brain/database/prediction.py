@@ -148,7 +148,7 @@ class Prediction(object):
                 'tbl_svm_results.datetime_created, '\
                 'tbl_svr_results.title, '\
                 'tbl_svr_results.datetime_created '\
-                'FROM tbl_svm_results JOIN tbl_svr_results '\
+                'FROM tbl_svm_results UNION tbl_svr_results '\
                 'ON tbl_svm_results.uid_created = tbl_svr_results.uid_created '\
                 'WHERE tbl_svm_results.uid_created=%s '\
                 'AND tbl_svr_results.uid_created=%s'
