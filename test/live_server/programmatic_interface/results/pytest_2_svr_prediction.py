@@ -155,6 +155,7 @@ def test_retrieve_titles(client, live_server):
     try:
         date_svr = res.json['titles'][0][1]
         datetime.datetime.strptime(date_svr, '%Y-%m-%d %H:%M:%S')
+
         if ['svr-prediction-1', date_svr] == res.json['titles'][0]:
             assert True
         else:
