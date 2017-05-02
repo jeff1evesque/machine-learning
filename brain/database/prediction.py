@@ -144,13 +144,13 @@ class Prediction(object):
             response = self.sql.execute(sql_statement, 'select', args)
 
         elif model_type == 'all':
-            sql_statement = 'SELECT tbl_svm_results.title, '\
-                'tbl_svm_results.datetime_created, '\
-                'WHERE tbl_svm_results.uid_created=%s '\
+            sql_statement = 'SELECT title, datetime_created '\
+                'FROM tbl_svm_results '\
+                'WHERE uid_created=%s '\
                 'UNION '\
-                'SELECT tbl_svr_results.title, '\
-                'tbl_svr_results.datetime_created, '\
-                'WHERE tbl_svr_results.uid_created=%s'
+                'SELECT title, datetime_created '\
+                'FROM tbl_svr_results '\
+                'WHERE uid_created=%s'
             args = (self.uid, self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
 
