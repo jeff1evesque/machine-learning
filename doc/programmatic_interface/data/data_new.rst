@@ -23,7 +23,7 @@ the ``data`` attribute, in a given ``POST`` request:
 
     import requests
 
-    endpoint_url = 'http://localhost:8080/[END-POINT-URL]'
+    endpoint_url = 'http://localhost:8080/[END-POINT]'
     headers = {'Content-Type': 'application/json'}
 
     requests.post(endpoint_url, headers=headers, data=json_string_here)
