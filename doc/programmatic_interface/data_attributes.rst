@@ -3,8 +3,11 @@ Data Attributes
 ===============
 
 The programmatic-api, is intended to provide many of the functionalities, offered by the
-web-interface. This is done by encoding various equivalent attributes, into a json string,
-which is then encapsulated into a ``POST`` request, and sent to a respective url endpoint.
+web-interface. This is done by encoding equivalent attributes, into a json string, which
+is then encapsulated into a ``POST`` request, and sent to its respective url endpoint.
+Below, the corresponding endpoints are briefly explained, and carefully linked to further
+examples of its implementation.
+
 
 Main Session
 ============
