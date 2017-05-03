@@ -41,6 +41,6 @@ The following properties define the above ``data`` attributes:
   - ``svr``
 
 - ``session_id``: corresponds to the id associated with the original ``data_new``
- session dataset(s), being appended to.
+  session dataset(s), being appended to.
 
 - ``dataset``: the supplied dataset, contingent upon the ``dataset_type``
