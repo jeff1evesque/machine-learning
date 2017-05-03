@@ -24,17 +24,17 @@ The following properties define the above ``data`` attributes:
 
 - ``dataset_type``: corresponds to one of the following types:
 
-    - ``dataset_url``: indication that the supplied dataset will be url
-      references
-    - ``file_upload``: indication that the supplied dataset(s) will be
-      defined as a json string within the ``dataset`` attribute
+  - ``dataset_url``: indication that the supplied dataset will be url
+    references
+  - ``file_upload``: indication that the supplied dataset(s) will be
+    defined as a json string within the ``dataset`` attribute
 
 - ``session_type``: corresponds to one of the following session types:
 
-    - ``data_new``
-    - ``data_append``
-    - ``model_generate``
-    - ``model_predict``
+  - ``data_new``
+  - ``data_append``
+  - ``model_generate``
+  - ``model_predict``
 
 - ``model_type``: the type of model to perform on:
 
