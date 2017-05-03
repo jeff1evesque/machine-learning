@@ -3,14 +3,14 @@ Data New
 ========
 
 The `data_new` session, is an implementation that uploads new dataset(s), which can later be used
-to generate successive models. There are two ways for a `data_new` session to upload data:
+to generate successive models. There are two ways for a ``data_new`` session to upload data:
 
-- dataset urls: `json` string, containing an array of `dataset` urls.
+- dataset urls: ``json`` string, containing an array of ``dataset`` urls.
 
     - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/dataset_url/svm-data-new.json>`_
     - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/dataset_url/svr-data-new.json>`_
 
-- file uploads: `json` string, containing an inline array of `dataset` values.
+- file uploads: ``json`` string, containing an inline array of ``dataset`` values.
 
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/file_upload/svm-data-new.json>`_
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-new.json>`_
@@ -18,8 +18,7 @@ to generate successive models. There are two ways for a `data_new` session to up
 **Note:** the content of each of the above files, can be substituted for
 the ``data`` attribute.
 
-The following (non-exhaustive) properties define the implemented
-``data`` attribute:
+The following properties define the above ``data`` attributes:
 
 -  ``session_name``: title for the corresponding ``data_new`` session
 -  ``dataset_type``: corresponds to one of the following types:
@@ -36,4 +35,3 @@ The following (non-exhaustive) properties define the implemented
     - ``svm``
     - ``svr``
 - ``dataset``: the supplied dataset, contingent upon the ``dataset_type``
-
