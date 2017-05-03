@@ -22,20 +22,23 @@ The following properties define the above ``data`` attributes:
 
 - ``session_name``: title for the corresponding ``data_new`` session
 
-- ``dataset_type``: corresponds to one of the following types:
+- ``dataset_type``: corresponds to one of the following types
     - ``dataset_url``: indication that the supplied dataset will be url
       references
     - ``file_upload``: indication that the supplied dataset(s) will be
       defined as a json string within the ``dataset`` attribute
 
-- ``session_type``: corresponds to one of the following session types:
+- ``session_type``: corresponds to one of the following session types
     - ``data_new``
     - ``data_append``
     - ``model_generate``
     - ``model_predict``
 
-- ``model_type``: the type of model to perform on:
+- ``model_type``: the type of model to perform on
     - ``svm``
     - ``svr``
 
 - ``dataset``: the supplied dataset, contingent upon the ``dataset_type``
+
+.. |r10k| replace:: ``r10k``
+.. _r10k: https://github.com/puppetlabs/r10k
