@@ -4,7 +4,8 @@ Model Generate
 
 The ``model_generate`` session, is an implementation that generates a desired model,
 based upon uploaded dataset(s), via the ``data_new``, and the ``data_append`` session.
-There are two ways, for a ``data_new`` session to upload data:
+There are two ways, for a ``model_generate`` session to upload data, to the ``/load-data``
+endpoint:
 
 - dataset urls: ``json`` string, containing an array of ``dataset`` urls.
 

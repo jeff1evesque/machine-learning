@@ -3,7 +3,8 @@ Data New
 ========
 
 The ``data_new`` session, is an implementation that uploads new dataset(s), which can later be used
-to generate successive models. There are two ways, for a ``data_new`` session to upload data:
+to generate successive models. There are two ways, for a ``data_new`` session to upload data, to the
+``/load-data`` endpoint:
 
 - dataset urls: ``json`` string, containing an array of ``dataset`` urls.
 

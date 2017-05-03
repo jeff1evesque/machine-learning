@@ -2,9 +2,9 @@
 Data Append
 ===========
 
-The ``data_append`` session, is an implementation that appends additional dataset(s), to a
-previous implemented ``data_new`` session. Like the ``data_new`` session, there are two ways
-to upload data:
+The ``data_append`` session, is an implementation that appends additional dataset(s), to
+a previous implemented ``data_new`` session. Like the ``data_new`` session, there are two
+ways to upload data, to the ``/load-data`` endpoint:
 
 - dataset urls: ``json`` string, containing an array of ``dataset`` urls.
 
