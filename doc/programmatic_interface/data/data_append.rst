@@ -14,7 +14,7 @@ to upload data:
 - file uploads: ``json`` string, containing an inline array of ``dataset`` values.
 
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/file_upload/svm-data-append.json>`_
-  - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-append.json>`_
+  - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-append.json>`_
 
 **Note:** the content of each of the above files, can be substituted for
 the ``data`` attribute.
@@ -41,6 +41,6 @@ The following properties define the above ``data`` attributes:
   - ``svr``
 
 - ``session_id``: corresponds to the id associated with the original ``data_new``
-  session dataset(s), being appended to.
+  uploaded dataset(s), being appended to.
 
 - ``dataset``: the supplied dataset, contingent upon the ``dataset_type``

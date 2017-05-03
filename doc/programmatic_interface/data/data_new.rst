@@ -13,7 +13,7 @@ to generate successive models. There are two ways, for a ``data_new`` session to
 - file uploads: ``json`` string, containing an inline array of ``dataset`` values.
 
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/file_upload/svm-data-new.json>`_
-  - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-new.json>`_
+  - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-new.json>`_
 
 **Note:** the content of each of the above files, can be substituted for
 the ``data`` attribute.
