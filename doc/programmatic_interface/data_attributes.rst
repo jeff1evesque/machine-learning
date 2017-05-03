@@ -6,7 +6,8 @@ The programmatic-api is intended to provide the same functionality as the web-in
 with the exception that corresponding commands, are contained within various attributes,
 encapsulated into a ``POST`` request, and sent to its respective url endpoint.
 
-The following are corresponding endpoints, currently supported by this application:
+Main Session:
+=============
 
 - ``/load-data``: which supports the following sessions:
 
@@ -14,6 +15,9 @@ The following are corresponding endpoints, currently supported by this applicati
   - |data_append|_: append additional dataset(s), into an existing dataset entry in the database
   - |model_generate|_: generate a model, using an existing dataset entry from the database
   - |model_predict|_: generate a prediction, using an existing generated model
+
+Result Arbiter:
+===============
 
 - ``/save-prediction``: store a generated prediction, from a ``model_predict`` session.
 
