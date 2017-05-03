@@ -2,9 +2,9 @@
 Data Attributes
 ===============
 
-The programmatic-api is intended to provide the same functionality as the web-interface,
-with the exception that corresponding commands, are contained within various attributes,
-encapsulated into a ``POST`` request, and sent to its respective url endpoint.
+The programmatic-api, is intended to provide many of the functionalities, offered by the
+web-interface. This is done by encoding various equivalent attributes, into a json string,
+which is then encapsulated into a ``POST`` request, and sent to a respective url endpoint.
 
 Main Session
 ============
