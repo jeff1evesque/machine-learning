@@ -6,8 +6,8 @@ The programmatic-api is intended to provide the same functionality as the web-in
 with the exception that corresponding commands, are contained within various attributes,
 encapsulated into a ``POST`` request, and sent to its respective url endpoint.
 
-Main Session:
-=============
+Main Session
+============
 
 - ``/load-data``: which supports the following sessions:
 
@@ -16,12 +16,12 @@ Main Session:
   - |model_generate|_: generate a model, using an existing dataset entry from the database
   - |model_predict|_: generate a prediction, using an existing generated model
 
-Result Arbiter:
-===============
+Result Arbiter
+==============
 
-- ``/save-prediction``: store a generated prediction, from a ``model_predict`` session.
+- |/save-prediction|_: store a generated prediction, from a ``model_predict`` session.
 
-- ``/retrieve-prediction``: retrieves the following saved prediction attributes:
+- |/retrieve-prediction|_: retrieves the following saved prediction attributes:
 
   - result: pertains to all ``model_type``
   - classes: pertains only to svm ``model_type``
@@ -29,7 +29,7 @@ Result Arbiter:
   - probabilities: pertains only to svm ``model_type``
   - coefficient of determination: pertains only to svr ``model_type``
 
-- ``/retrieve-prediction-titles``: retrieves predictions saved titles, for either a specified
+- |/retrieve-prediction-titles|_: retrieves predictions saved titles, for either a specified
   ``model_type``, otherwise return all saved titles, for all ``model_type``.
 
 .. |data_new| replace:: ``data_new``
@@ -40,3 +40,9 @@ Result Arbiter:
 .. _model_generate: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/model/model_generate.rst
 .. |model_predict| replace:: ``model_predict``
 .. _model_predict: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/predict/model_predict.rst
+.. |/save-prediction| replace:: ``/save-prediction``
+.. _/save-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/result/save_prediction.rst
+.. |/retrieve-prediction| replace:: ``/retrieve-prediction``
+.. _/retrieve-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/result/retrieve_prediction.rst
+.. |/retrieve-prediction-titles| replace:: ``/retrieve-prediction-titles``
+.. _/retrieve-prediction-titles: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/result/retrieve_prediction_titles.rst
