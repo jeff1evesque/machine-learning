@@ -1,20 +1,10 @@
-==============
-Result Arbiter
-==============
+==========================
+Retrieve Prediction Titles
+==========================
 
-The result arbiter provides an interface to perform the following tasks:
-
-- store prediction: corresponds to the ``/save-prediction`` endpoint
-
-  - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/results/save-prediction.json>`_
-  - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/results/save-prediction.json>`_
-
-- retrieve prediction: corresponds to the ``/retrieve-prediction`` endpoint
-
-  - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/results/retrieve-prediction.json>`_
-  - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/results/retrieve-prediction.json>`_
-
-- retrieve prediction titles: corresponds to the ``/retrieve-prediction-titles`` endpoint
+The ``retrieve_prediction_titles`` session, is an implementation that retrieves all prediction
+titles, based upon the supplied ``model_type``, from the applications database, via the
+``/retrieve-prediction-titles`` endpoint:
 
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/results/retrieve-titles.json>`_
   - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/results/retrieve-titles.json>`_
