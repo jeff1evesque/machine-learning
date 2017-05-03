@@ -37,5 +37,5 @@ The following properties define the above ``data`` attribute:
 - ``model_type``: corresponds to the desired model type:
 
   - ``all``: pertains to all stored model types
-  - ``svm``: pertains only for the support vector machine model type
-  - ``svr``: pertains only for the suppport vector regression model type
+  - ``svm``: pertains only to the support vector machine model type
+  - ``svr``: pertains only to the suppport vector regression model type
