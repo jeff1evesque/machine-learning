@@ -38,10 +38,7 @@ The following properties define the above ``data`` attributes:
 
 - ``model_type``: the type of model to perform on:
 
-    - ``svm``
-    - ``svr``
+  - ``svm``
+  - ``svr``
 
 - ``dataset``: the supplied dataset, contingent upon the ``dataset_type``
-
-.. |r10k| replace:: ``r10k``
-.. _r10k: https://github.com/puppetlabs/r10k
