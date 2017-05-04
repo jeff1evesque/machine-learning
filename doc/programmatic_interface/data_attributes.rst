@@ -5,14 +5,14 @@ Data Attributes
 The programmatic-api, is intended to provide many of the functionalities, offered by the
 web-interface. This is done by encoding equivalent attributes, into a json string, and
 sent to its respective url endpoint, as an encapsulated ``POST`` request. Below, the
-corresponding endpoints are briefly explained, and carefully linked to further examples
+corresponding endpoints are briefly explained, and carefully linked, to further examples
 of its implementation.
 
 
 Main Session
 ============
 
-- ``/load-data``: which supports the following sessions:
+- ``/load-data``: interfaces the following main sessions:
 
   - |data_new|_: store dataset(s) into the applications database
   - |data_append|_: append additional dataset(s), into an existing dataset entry in the database
@@ -27,10 +27,10 @@ Result Arbiter
 - |/retrieve-prediction|_: retrieves the following saved prediction attributes:
 
   - result: pertains to all ``model_type``
-  - classes: pertains only to svm ``model_type``
-  - decision function: pertains only to svm ``model_type``
-  - probabilities: pertains only to svm ``model_type``
-  - coefficient of determination: pertains only to svr ``model_type``
+  - classes: pertains only to the svm ``model_type``
+  - decision function: pertains only to the svm ``model_type``
+  - probabilities: pertains only to the svm ``model_type``
+  - coefficient of determination: pertains only to the svr ``model_type``
 
 - |/retrieve-prediction-titles|_: retrieves predictions saved titles, for either a specified
   ``model_type``, otherwise return all saved titles, for all ``model_type``.
