@@ -7,8 +7,6 @@ using previously uploaded dataset(s), via either the ``data_new``, or the ``data
 session. The required attributes needed, for the corresponding session, is sent to the
 ``/load-data`` endpoint, which is demonstrated as follows:
 
-- dataset urls: ``json`` string, containing an array of ``dataset`` urls.
-
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/dataset_url/svm-model-generate.json>`_
   - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/dataset_url/svr-model-generate.json>`_
 
