@@ -28,7 +28,7 @@ the ``data`` attribute, in a given ``POST`` request:
 
     requests.post(endpoint_url, headers=headers, data=json_string_here)
 
-The following properties define the above ``data`` attributes:
+The following properties define the above ``data`` attribute:
 
 - ``dataset_type``: corresponds to one of the following types:
 
