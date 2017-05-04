@@ -61,10 +61,10 @@ class Prediction(object):
             decision_function = data['decision_function']
 
             # svm results
-            sql_statement = 'INSERT INTO tbl_svm_results '\
-                '(title, result, uid_created, datetime_created) '\
-                'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (title, result, self.uid)
+            sql_statement = 'INSERT INTO tbl_prediction_results '\
+                '(model_type, title, result, uid_created, datetime_created) '\
+                'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
+            args = (self.model_list.index(model_type), title, result, self.uid)
             svm_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -94,10 +94,10 @@ class Prediction(object):
 
         elif model_type == 'svr':
             # svr results
-            sql_statement = 'INSERT INTO tbl_svr_results '\
-                '(title, result, uid_created, datetime_created) '\
-                'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (title, result, self.uid)
+            sql_statement = 'INSERT INTO tbl_prediction_results '\
+                '(model_type, title, result, uid_created, datetime_created) '\
+                'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
+            args = (self.model_list.index(model_type), title, result, self.uid)
             svr_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -138,18 +138,15 @@ class Prediction(object):
 
         if model_type in self.model_list:
             sql_statement = 'SELECT title, datetime_created ' \
-                'FROM tbl_%s_results '\
-                'WHERE uid_created=%%s' % (model_type)
-            args = (self.uid)
+                'FROM tbl_prediction_results '\
+                'WHERE uid_created=%s '\
+                'AND model_type=%s'
+            args = (self.uid, self.model_list.index(model_type))
             response = self.sql.execute(sql_statement, 'select', args)
 
         elif model_type == 'all':
             sql_statement = 'SELECT title, datetime_created '\
-                'FROM tbl_svm_results '\
-                'WHERE uid_created=%s '\
-                'UNION '\
-                'SELECT title, datetime_created '\
-                'FROM tbl_svr_results '\
+                'FROM tbl_prediction_results '\
                 'WHERE uid_created=%s'
             args = (self.uid, self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
@@ -172,7 +169,7 @@ class Prediction(object):
                 'result': response['result'],
             }
 
-    def get_result(self, id_result, model_type):
+    def get_result(self, id_result):
         '''
 
         This method retrieves a prediction result, based on the supplied
@@ -189,8 +186,8 @@ class Prediction(object):
         self.sql.connect(self.db_ml)
 
         if model_type in self.model_list:
-            sql_statement = 'SELECT result FROM tbl_%s_results '\
-                'WHERE id_result=%%s' % (model_type)
+            sql_statement = 'SELECT result FROM tbl_prediction_results '\
+                'WHERE id_result=%s'
             args = (id_result,)
             response = self.sql.execute(sql_statement, 'select', args)
 
