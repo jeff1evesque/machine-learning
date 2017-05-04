@@ -36,16 +36,16 @@ Result Arbiter
   ``model_type``, otherwise return all saved titles, for all ``model_type``.
 
 .. |data_new| replace:: ``data_new``
-.. _data_new: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/data/data_new.rst
+.. _data_new: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-interface/data/data_new.rst
 .. |data_append| replace:: ``data_append``
-.. _data_append: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/data/data_append.rst
+.. _data_append: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_append.rst
 .. |model_generate| replace:: ``model_generate``
-.. _model_generate: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/model/model_generate.rst
+.. _model_generate: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-interface/model/model_generate.rst
 .. |model_predict| replace:: ``model_predict``
-.. _model_predict: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/predict/model_predict.rst
+.. _model_predict: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-interface/predict/model_predict.rst
 .. |/save-prediction| replace:: ``/save-prediction``
-.. _/save-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/result/save_prediction.rst
+.. _/save-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-interface/result/save_prediction.rst
 .. |/retrieve-prediction| replace:: ``/retrieve-prediction``
-.. _/retrieve-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/result/retrieve_prediction.rst
+.. _/retrieve-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-interface/result/retrieve_prediction.rst
 .. |/retrieve-prediction-titles| replace:: ``/retrieve-prediction-titles``
-.. _/retrieve-prediction-titles: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-api/result/retrieve_prediction_titles.rst
+.. _/retrieve-prediction-titles: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic-interface/result/retrieve_prediction_titles.rst
