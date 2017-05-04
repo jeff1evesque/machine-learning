@@ -213,8 +213,8 @@ class Prediction(object):
         '''
 
         This method retrieves values to a specified parameter, with respect to
-            a supplied id_result, for a corresponding stored svm prediction
-            result.
+            a supplied id_result, for a corresponding stored 'model_type'
+            prediction result.
 
         @model_type, constrains the 'select' result to a specified model type.
 
