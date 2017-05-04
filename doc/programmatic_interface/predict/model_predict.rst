@@ -3,7 +3,7 @@ Model Predict
 =============
 
 The ``model_predict`` session, is an implementation that performs a prediction, using
-a previously generated model, from a ``model_generate``, session. There are two ways,
+a previously generated model, from a ``model_generate`` session. There are two ways,
 for a ``model_predict`` session to upload data, to the ``/load-data`` endpoint:
 
 - dataset urls: ``json`` string, containing an array of ``dataset`` urls.
