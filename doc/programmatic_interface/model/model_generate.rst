@@ -4,7 +4,7 @@ Model Generate
 
 The ``model_generate`` session, is an implementation that generates a desired model,
 using previously uploaded dataset(s), via either the ``data_new``, or the ``data_append``
-session. The required attributes, needed for the ``model_predict`` session, is sent to the
+session. The required attributes, needed for the corresponding session, is sent to the
 ``/load-data`` endpoint as follows:
 
 - dataset urls: ``json`` string, containing an array of ``dataset`` urls.

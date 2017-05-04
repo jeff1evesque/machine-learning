@@ -4,7 +4,7 @@ Model Predict
 
 The ``model_predict`` session, is an implementation that performs a prediction, using a
 previously generated model, from a ``model_generate`` session. The required attributes,
-needed for the ``model_predict`` session, is sent to the ``/load-data`` endpoint as follows:
+needed for the corresponding session, is sent to the ``/load-data`` endpoint as follows:
 
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/dataset_url/svm-model-predict.json>`_
   - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/dataset_url/svr-model-predict.json>`_
