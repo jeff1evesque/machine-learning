@@ -35,4 +35,4 @@ The following properties define the above ``data`` attributes:
   session.
 
 - ``prediction_input[]``: an array of prediction input, supplied to the previously
-   generated model to compute a prediction.
+  generated model to compute a prediction.
