@@ -183,11 +183,10 @@ class Prediction(object):
         # select result
         self.sql.connect(self.db_ml)
 
-        if model_type in self.model_list:
-            sql_statement = 'SELECT result FROM tbl_prediction_results '\
-                'WHERE id_result=%s'
-            args = (id_result,)
-            response = self.sql.execute(sql_statement, 'select', args)
+        sql_statement = 'SELECT result FROM tbl_prediction_results '\
+            'WHERE id_result=%s'
+        args = (id_result,)
+        response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
