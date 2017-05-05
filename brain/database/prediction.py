@@ -209,7 +209,7 @@ class Prediction(object):
     def get_model_type(self, id_result):
         '''
 
-        This method retrieves the 'model_type' value given the 'id_result'.
+        This method retrieves the 'model_type' name given the 'id_result'.
 
         '''
 
