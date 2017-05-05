@@ -15,7 +15,7 @@ This file initializes the following database tables within the
         @tbl_svr_data, records a tuple of criterion-predictor values
 
             - observation label: synonymous to dependent variable label, and
-                can be 'NULL' if the 'criterion value' is defined.
+                can be 'NULL' if the 'criterion value' is defined
             - criterion value: can be 'NULL' if the 'observation label' is
                 defined.
             - feature label / value: synonymous to independent variable label,
@@ -23,24 +23,25 @@ This file initializes the following database tables within the
 
         @model_type, reference table containing all possible model types.
 
-        @tbl_observation_label, record every unique observation label, with respect
-            to a given 'id_entity'.
+        @tbl_observation_label, record every unique observation label, with
+            respect to a given 'id_entity'.
 
-    @tbl_svm_results, record svm prediction result, with respect to the
-        following linked tables:
+    @tbl_prediction_results, record the prediction result, with respect to the
+        corresponding 'model_type' column. The following are associated tables:
 
-        @tbl_svm_results_class, record predicted classes, with respect to to a
-            given 'id_result'.
-        @tbl_svm_results_probability, record predicted probabilities, with
-            respect to a given 'id_result'.
-        @tbl_svm_results_decision_function, record predicted decisision
-            function, with respect to a given 'id_result'.
+        svm model type:
 
-    @tbl_svm_results, record svr prediction result, with respect to the
-        following linked tables:
+            @tbl_svm_results_class, record predicted classes, with respect
+                to a given 'id_result'.
+            @tbl_svm_results_probability, record predicted probabilities,
+                with respect to a given 'id_result'.
+            @tbl_svm_results_decision_function, record predicted decisision
+                function, with respect to a given 'id_result'.
 
-        @tbl_svr_results_results_r2, record predicted r^2, with respect to a
-            given 'id_result'.
+        svr model type:
+
+            @tbl_svr_results_results_r2, record predicted r^2, with respect
+                to a given 'id_result'.
 
 '''
 
@@ -183,10 +184,11 @@ with conn:
                     '''
     cur.executemany(sql_statement, models)
 
-    # create 'tbl_svm_results'
+    # create 'tbl_prediction_results'
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_svm_results (
+                    CREATE TABLE IF NOT EXISTS tbl_prediction_results (
                         id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        model_type INT NOT NULL,
                         title VARCHAR (50) NOT NULL,
                         result VARCHAR (30) NOT NULL,
                         uid_created INT NOT NULL,
@@ -222,19 +224,6 @@ with conn:
                         id_decision_function INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         id_result INT NOT NULL,
                         decision_function DECIMAL (65,12) NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    # create 'tbl_svr_results'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_svr_results (
-                        id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        title VARCHAR (50) NOT NULL,
-                        result VARCHAR (30) NOT NULL,
-                        uid_created INT NOT NULL,
-                        datetime_created DATETIME NOT NULL,
-                        INDEX (title)
                     );
                     '''
     cur.execute(sql_statement)

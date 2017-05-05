@@ -61,10 +61,10 @@ class Prediction(object):
             decision_function = data['decision_function']
 
             # svm results
-            sql_statement = 'INSERT INTO tbl_svm_results '\
-                '(title, result, uid_created, datetime_created) '\
-                'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (title, result, self.uid)
+            sql_statement = 'INSERT INTO tbl_prediction_results '\
+                '(model_type, title, result, uid_created, datetime_created) '\
+                'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
+            args = (self.model_list.index(model_type) + 1, title, result, self.uid)
             svm_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -94,10 +94,10 @@ class Prediction(object):
 
         elif model_type == 'svr':
             # svr results
-            sql_statement = 'INSERT INTO tbl_svr_results '\
-                '(title, result, uid_created, datetime_created) '\
-                'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
-            args = (title, result, self.uid)
+            sql_statement = 'INSERT INTO tbl_prediction_results '\
+                '(model_type, title, result, uid_created, datetime_created) '\
+                'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
+            args = (self.model_list.index(model_type) + 1, title, result, self.uid)
             svr_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -138,20 +138,17 @@ class Prediction(object):
 
         if model_type in self.model_list:
             sql_statement = 'SELECT title, datetime_created ' \
-                'FROM tbl_%s_results '\
-                'WHERE uid_created=%%s' % (model_type)
-            args = (self.uid)
+                'FROM tbl_prediction_results '\
+                'WHERE uid_created=%s '\
+                'AND model_type=%s'
+            args = (self.uid, self.model_list.index(model_type) + 1)
             response = self.sql.execute(sql_statement, 'select', args)
 
         elif model_type == 'all':
             sql_statement = 'SELECT title, datetime_created '\
-                'FROM tbl_svm_results '\
-                'WHERE uid_created=%s '\
-                'UNION '\
-                'SELECT title, datetime_created '\
-                'FROM tbl_svr_results '\
+                'FROM tbl_prediction_results '\
                 'WHERE uid_created=%s'
-            args = (self.uid, self.uid)
+            args = (self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
@@ -172,13 +169,11 @@ class Prediction(object):
                 'result': response['result'],
             }
 
-    def get_result(self, id_result, model_type):
+    def get_result(self, id_result):
         '''
 
         This method retrieves a prediction result, based on the supplied
-            model_type, and id_result.
-
-        @model_type, constrains the 'select' result to a specified model type.
+            id_result.
 
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
@@ -188,11 +183,10 @@ class Prediction(object):
         # select result
         self.sql.connect(self.db_ml)
 
-        if model_type in self.model_list:
-            sql_statement = 'SELECT result FROM tbl_%s_results '\
-                'WHERE id_result=%%s' % (model_type)
-            args = (id_result,)
-            response = self.sql.execute(sql_statement, 'select', args)
+        sql_statement = 'SELECT result FROM tbl_prediction_results '\
+            'WHERE id_result=%s'
+        args = (id_result,)
+        response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -212,12 +206,51 @@ class Prediction(object):
                 'result': response['result'],
             }
 
+    def get_model_type(self, id_result):
+        '''
+
+        This method retrieves the 'model_type' name given the 'id_result'.
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        '''
+
+        # select parameter
+        self.sql.connect(self.db_ml)
+
+        sql_statement = 'SELECT model FROM tbl_model_type '\
+            'WHERE id_model '\
+            'IN (SELECT model_type '\
+            'FROM tbl_prediction_results '\
+            'WHERE id_result=%s)'
+        args = (id_result,)
+        response = self.sql.execute(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.disconnect()
+
+        # return result
+        if response_error:
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
+
+        else:
+            return {
+                'status': False,
+                'error': 'No sql logic executed',
+                'result': response['result'][0][0]
+            }
+
     def get_value(self, id_result, model_type, param):
         '''
 
-        This method retrieves values to a specified parameter, with respect to
-            a supplied id_result, for a corresponding stored svm prediction
-            result.
+        This method retrieves a specified param, with respect to a supplied
+            id_result, and 'model_type', for a given prediction result.
 
         @model_type, constrains the 'select' result to a specified model type.
 
@@ -230,7 +263,7 @@ class Prediction(object):
             - r2: requires svr 'model_type'
 
         @sql_statement, is a sql format string, and not a python string.
-            Therefore, '%s' is used for argument substitution.
+            Therefore, '%%s' is used for argument substitution.
 
         '''
 

@@ -23,9 +23,3 @@ the ``data`` attribute, in a given ``POST`` request:
 The following properties define the above ``data`` attribute:
 
 - ``id_result``: corresponds to the id of the desired model.
-
-- ``model_type``: corresponds to the desired model type:
-
-  - ``all``: pertains to all stored model types
-  - ``svm``: pertains only to the support vector machine model type
-  - ``svr``: pertains only to the suppport vector regression model type
