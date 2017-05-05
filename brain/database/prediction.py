@@ -206,6 +206,43 @@ class Prediction(object):
                 'result': response['result'],
             }
 
+    def get_model_type(self, id_result):
+        '''
+
+        This method retrieves the 'model_type' value given the 'id_result'.
+
+        '''
+
+        # select parameter
+        self.sql.connect(self.db_ml)
+
+        sql_statement = 'SELECT model FROM tbl_model_type '\
+            'WHERE id_model '\
+            'IN (SELECT model_type '\
+            'FROM tbl_prediction_results '\
+            'WHERE id_result=%s)'
+        args = (id_result,)
+        response = self.sql.execute(sql_statement, 'select', args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.disconnect()
+
+        # return result
+        if response_error:
+            return {
+                'status': False,
+                'error': response_error,
+                'result': None
+            }
+
+        else:
+            return {
+                'status': False,
+                'error': 'No sql logic executed',
+                'result': None
+            }
+
     def get_value(self, id_result, model_type, param):
         '''
 
