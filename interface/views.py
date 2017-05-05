@@ -496,6 +496,7 @@ def retrieve_prediction():
         # query database and return results
         prediction = Prediction()
         result = prediction.get_result(id_result)
+        model_type = prediction.get_model_type(id_result)
 
         if model_type == 'svm':
             classes = prediction.get_value(id_result, model_type, 'class')
