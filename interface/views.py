@@ -473,6 +473,7 @@ def retrieve_prediction():
             - 0, successful retrieval of specified prediction parameter
             - 1, unsuccessful retrieval of specified prediction parameter
             - 2, improper request submitted
+            - 3, invalid 'model_type'
         - string, prediction parameter
 
     '''
@@ -496,7 +497,7 @@ def retrieve_prediction():
         # query database and return results
         prediction = Prediction()
         result = prediction.get_result(id_result)
-        model_type = prediction.get_model_type(id_result)
+        model_type = prediction.get_model_type(id_result)['result']
 
         if model_type == 'svm':
             classes = prediction.get_value(id_result, model_type, 'class')
@@ -538,6 +539,9 @@ def retrieve_prediction():
                 }, default=str)
             else:
                 return json.dumps({'status': 1})
+
+        else:
+            return json.dumps({'status': 3})
 
 
 @blueprint.route(
