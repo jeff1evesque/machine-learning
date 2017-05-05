@@ -482,14 +482,12 @@ def retrieve_prediction():
         if request.get_json():
             results = request.get_json()
             id_result = results['id_result']
-            model_type = results['model_type']
 
         # web-interface
         elif request.form:
             results = request.form
             args = json.loads(results['args'])
             id_result = args['id_result']
-            model_type = args['model_type']
 
         # invalid request
         else:
@@ -497,7 +495,7 @@ def retrieve_prediction():
 
         # query database and return results
         prediction = Prediction()
-        result = prediction.get_result(id_result, model_type)
+        result = prediction.get_result(id_result)
 
         if model_type == 'svm':
             classes = prediction.get_value(id_result, model_type, 'class')

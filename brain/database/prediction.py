@@ -173,9 +173,7 @@ class Prediction(object):
         '''
 
         This method retrieves a prediction result, based on the supplied
-            model_type, and id_result.
-
-        @model_type, constrains the 'select' result to a specified model type.
+            id_result.
 
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
