@@ -211,6 +211,9 @@ class Prediction(object):
 
         This method retrieves the 'model_type' name given the 'id_result'.
 
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
         '''
 
         # select parameter
@@ -260,7 +263,7 @@ class Prediction(object):
             - r2: requires svr 'model_type'
 
         @sql_statement, is a sql format string, and not a python string.
-            Therefore, '%s' is used for argument substitution.
+            Therefore, '%%s' is used for argument substitution.
 
         '''
 
