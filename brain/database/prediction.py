@@ -64,7 +64,7 @@ class Prediction(object):
             sql_statement = 'INSERT INTO tbl_prediction_results '\
                 '(model_type, title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
-            args = (self.model_list.index(model_type), title, result, self.uid)
+            args = (self.model_list.index(model_type) + 1, title, result, self.uid)
             svm_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -97,7 +97,7 @@ class Prediction(object):
             sql_statement = 'INSERT INTO tbl_prediction_results '\
                 '(model_type, title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
-            args = (self.model_list.index(model_type), title, result, self.uid)
+            args = (self.model_list.index(model_type) + 1, title, result, self.uid)
             svr_results = self.sql.execute(
                 sql_statement,
                 'insert',
@@ -141,7 +141,7 @@ class Prediction(object):
                 'FROM tbl_prediction_results '\
                 'WHERE uid_created=%s '\
                 'AND model_type=%s'
-            args = (self.uid, self.model_list.index(model_type))
+            args = (self.uid, self.model_list.index(model_type) + 1)
             response = self.sql.execute(sql_statement, 'select', args)
 
         elif model_type == 'all':
