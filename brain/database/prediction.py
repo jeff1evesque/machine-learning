@@ -246,9 +246,8 @@ class Prediction(object):
     def get_value(self, id_result, model_type, param):
         '''
 
-        This method retrieves values to a specified parameter, with respect to
-            a supplied id_result, for a corresponding stored 'model_type'
-            prediction result.
+        This method retrieves a specified param, with respect to a supplied
+            id_result, and 'model_type', for a given prediction result.
 
         @model_type, constrains the 'select' result to a specified model type.
 
