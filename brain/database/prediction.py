@@ -148,7 +148,7 @@ class Prediction(object):
             sql_statement = 'SELECT title, datetime_created '\
                 'FROM tbl_prediction_results '\
                 'WHERE uid_created=%s'
-            args = (self.uid, self.uid)
+            args = (self.uid)
             response = self.sql.execute(sql_statement, 'select', args)
 
         # retrieve any error(s), disconnect from database
