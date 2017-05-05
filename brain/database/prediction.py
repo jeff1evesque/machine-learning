@@ -243,7 +243,7 @@ class Prediction(object):
             return {
                 'status': False,
                 'error': 'No sql logic executed',
-                'result': None
+                'result': response['result']
             }
 
     def get_value(self, id_result, model_type, param):
