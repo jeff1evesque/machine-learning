@@ -39,6 +39,7 @@ class webserver::service {
 
     ## nginx: define reverse proxy
     nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
+        ssl         => true,
         listen_port => $nginx_reverse_proxy['listen_port'],
         proxy       => $nginx_proxy,
     }
