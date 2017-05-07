@@ -12,6 +12,7 @@ class webserver::service {
     $template_path     = 'webserver/gunicorn.erb'
 
     $ssl_cert_path   = '/etc/puppetlabs/puppet/ssl/certs/'
+    $ssl_pkey_path   = '/etc/puppetlabs/puppet/ssl/private_keys/'
     $vagrant_mounted = $hiera_general['vagrant_implement']
     $root_dir        = $hiera_general['root']
     $user            = $hiera_general['user']
@@ -41,7 +42,8 @@ class webserver::service {
     ## nginx: define reverse proxy
     nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
         ssl         => true,
-        ssl_cert    => "${ssl_cert_path}/${nginx_reverse_proxy}['vhost']",
+        ssl_cert    => "${ssl_cert_path}/${nginx_reverse_proxy}['vhost'].pem",
+        ssl_key     => "${ssl_pkey_path}/${nginx_reverse_proxy}['vhost'].pem",
         listen_port => $nginx_reverse_proxy['listen_port'],
         proxy       => $nginx_proxy,
     }
