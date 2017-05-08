@@ -42,8 +42,8 @@ class webserver::service {
     ## nginx: define reverse proxy
     nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
         ssl         => true,
-        ssl_cert    => "${ssl_cert_path}/${nginx_reverse_proxy}['vhost'].pem",
-        ssl_key     => "${ssl_pkey_path}/${nginx_reverse_proxy}['vhost'].pem",
+        ssl_cert    => "${ssl_cert_path}/${nginx_reverse_proxy['vhost']}.pem",
+        ssl_key     => "${ssl_pkey_path}/${nginx_reverse_proxy['vhost']}.pem",
         listen_port => $nginx_reverse_proxy['listen_port'],
         proxy       => $nginx_proxy,
     }
