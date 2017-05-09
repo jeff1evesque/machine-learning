@@ -3,30 +3,30 @@
 ###
 class webserver::ssl {
     ## variables
-    $hiera_webserver     = lookup('webserver')
-    $nginx               = $hiera_webserver['nginx']
-    $nginx_reverse_proxy = $nginx['reverse_proxy']
-    $nginx_vhost         = $nginx_reverse_proxy['vhost']
-    $nginx_cert          = $nginx['certificate']
-    $nginx_cert_path     = $nginx_cert['cert_path']
-    $nginx_pkey_path     = $nginx_cert['pkey_path']
-    $nginx_cert_name     = $nginx_cert['name']
-    $nginx_cert_country  = $nginx_cert['props']['country']
-    $nginx_cert_org      = $nginx_cert['props']['organization']
-    $nginx_cert_state    = $nginx_cert['props']['state']
-    $nginx_cert_locality = $nginx_cert['props']['locality']
-    $nginx_cert_unit     = $nginx_cert['props']['unit']
-    $nginx_cert_bit      = $nginx_cert['props']['bit']
-    $nginx_cert_days     = $nginx_cert['props']['days']
+    $hiera_webserver = lookup('webserver')
+    $nginx           = $hiera_webserver['nginx']
+    $reverse_proxy   = $nginx['reverse_proxy']
+    $vhost           = $reverse_proxy['vhost']
+    $cert            = $nginx['certificate']
+    $cert_path       = $cert['cert_path']
+    $pkey_path       = $cert['pkey_path']
+    $cert_name       = $cert['name']
+    $cert_country    = $cert['props']['country']
+    $cert_org        = $cert['props']['organization']
+    $cert_state      = $cert['props']['state']
+    $cert_locality   = $cert['props']['locality']
+    $cert_unit       = $cert['props']['unit']
+    $cert_bit        = $cert['props']['bit']
+    $cert_days       = $cert['props']['days']
 
     ## create ssl certificate
     exec { 'create-ssl-certificate':
-      command     => dos2unix(template('webserver/ssl.erb')),
-      unless      => [
+      command  => dos2unix(template('webserver/ssl.erb')),
+      unless   => [
         "test -f ${nginx_cert_path}/${vhost}.crt",
         "test -f ${nginx_pkey_path}/${vhost}.key",
       ],
-      path        => '/usr/bin',
-      provider    => shell,
+      path     => '/usr/bin',
+      provider => shell,
     }
 }
