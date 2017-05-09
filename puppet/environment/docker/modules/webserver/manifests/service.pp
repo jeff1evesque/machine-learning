@@ -6,28 +6,29 @@ class webserver::service {
     include webserver::start
 
     ## variables
-    $hiera_general     = lookup('general')
-    $hiera_development = lookup('development')
-    $hiera_webserver   = lookup('webserver')
-    $template_path     = 'webserver/gunicorn.erb'
+    $hiera_general       = lookup('general')
+    $hiera_development   = lookup('development')
+    $hiera_webserver     = lookup('webserver')
+    $template_path       = 'webserver/gunicorn.erb'
 
-    $ssl_cert_path   = '/etc/puppetlabs/puppet/ssl/certs'
-    $ssl_pkey_path   = '/etc/puppetlabs/puppet/ssl/private_keys'
-    $vagrant_mounted = $hiera_general['vagrant_implement']
-    $root_dir        = $hiera_general['root']
-    $user            = $hiera_general['user']
-    $group           = $hiera_general['group']
+    $vagrant_mounted     = $hiera_general['vagrant_implement']
+    $root_dir            = $hiera_general['root']
+    $user                = $hiera_general['user']
+    $group               = $hiera_general['group']
 
-    $gunicorn          = $hiera_webserver['gunicorn']
-    $gunicorn_log_path = "${root_dir}${gunicorn['log_path']}"
-    $gunicorn_bind     = $gunicorn['bind']
-    $gunicorn_port     = $gunicorn['port']
-    $gunicorn_workers  = $gunicorn['workers']
+    $gunicorn            = $hiera_webserver['gunicorn']
+    $gunicorn_log_path   = "${root_dir}${gunicorn['log_path']}"
+    $gunicorn_bind       = $gunicorn['bind']
+    $gunicorn_port       = $gunicorn['port']
+    $gunicorn_workers    = $gunicorn['workers']
 
     $nginx               = $hiera_webserver['nginx']
     $nginx_reverse_proxy = $nginx['reverse_proxy']
-    $nginx_version       = $hiera_development['apt']['custom']['nginx']
-    $nginx_proxy         = "${nginx_reverse_proxy['proxy']}:${gunicorn_port}"
+    $nginx_cert          = $nginx['certificate']
+    $nginx_vhost         = $nginx_reverse_proxy['vhost']
+    $nginx_listen_port   = $nginx_reverse_proxy['listen_port']
+    $nginx_cert_path     = $nginx_cert['cert_path']
+    $nginx_pkey_path     = $nginx_cert['pkey_path']
 
     ## contain webserver dependencies
     contain python
@@ -40,12 +41,18 @@ class webserver::service {
     }
 
     ## nginx: define reverse proxy
+    ##
+    ## @497, allows 'http://' to redirect to 'https://'
+    ##
     nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
         ssl         => true,
-        ssl_cert    => "${ssl_cert_path}/${nginx_reverse_proxy['vhost']}.pem",
-        ssl_key     => "${ssl_pkey_path}/${nginx_reverse_proxy['vhost']}.pem",
+        ssl_cert    => "${nginx_cert_path}/${nginx_vhost}.crt",
+        ssl_key     => "${nginx_pkey_path}/${nginx_vhost}.key",
         listen_port => $nginx_reverse_proxy['listen_port'],
         ssl_port    => $nginx_reverse_proxy['listen_port'],
+        error_pages => {
+            '497' => "https://$host:${nginx_listen_port}$request_uri"
+        },
         proxy       => $nginx_proxy,
     }
 
