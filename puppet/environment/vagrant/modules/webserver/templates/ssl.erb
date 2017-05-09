@@ -1,5 +1,3 @@
-#!/bin/bash
-
 openssl req -x509 -nodes -days <%= @cert_days %> \
     -newkey rsa:<%= @cert_bit %> \
     -keyout <%= @pkey_path %>/<%= @vhost %>.key \
