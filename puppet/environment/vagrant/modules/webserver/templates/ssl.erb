@@ -1,0 +1,7 @@
+#!/bin/bash
+
+openssl req -x509 -nodes -days <%= @nginx_cert_days %> \
+    -newkey rsa:<%= @nginx_cert_bit %> \
+    -keyout <%= @nginx_pkey_path %>/<%= @nginx_vhost %>.key \
+    -out <%= @nginx_cert_path %>/<%= @nginx_vhost %>.crt \
+    -subj '/C=<%= @nginx_cert_country %>/ST=<%= @nginx_cert_state %>/L=<%= @nginx_cert_locality %>/O=<%= @nginx_cert_org %>/OU=<%= @nginx_cert_unit %>/CN=<%= @nginx_vhost %>'
