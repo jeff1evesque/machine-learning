@@ -29,6 +29,7 @@ class webserver::service {
     $nginx_listen_port   = $nginx_reverse_proxy['listen_port']
     $nginx_cert_path     = $nginx_cert['cert_path']
     $nginx_pkey_path     = $nginx_cert['pkey_path']
+    $nginx_proxy         = "${nginx_reverse_proxy['proxy']}:${gunicorn_port}"
 
     ## contain webserver dependencies
     contain python
@@ -51,7 +52,7 @@ class webserver::service {
         listen_port => $nginx_reverse_proxy['listen_port'],
         ssl_port    => $nginx_reverse_proxy['listen_port'],
         error_pages => {
-            '497' => "https://$host:${nginx_listen_port}$request_uri"
+            '497' => "https://\$host:${nginx_listen_port}\$request_uri",
         },
         proxy       => $nginx_proxy,
     }
