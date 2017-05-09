@@ -20,7 +20,7 @@ class webserver::ssl {
     $nginx_cert_days     = $nginx_cert['props']['days']
 
     ## create ssl certificate
-    exec { 'chage-pass':
+    exec { 'create-ssl-certificate':
       command     => dos2unix(template('webserver/ssl.erb')),
       unless      => [
         "test -f ${nginx_cert_path}/${vhost}.crt",
