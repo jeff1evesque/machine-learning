@@ -29,7 +29,7 @@ webserver:
 
         certificate:
             cert_path: '/etc/puppetlabs/puppet/ssl/certs'
-            pkey_path: '/etc/puppetlabs/puppet/ssl/certs/private_keys'
+            pkey_path: '/etc/puppetlabs/puppet/ssl/private_keys'
             props:
                 days: 365
                 bit: 4096
