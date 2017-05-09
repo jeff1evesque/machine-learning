@@ -27,6 +27,7 @@ class webserver::service {
     $nginx_cert          = $nginx['certificate']
     $nginx_vhost         = $nginx_reverse_proxy['vhost']
     $nginx_listen_port   = $nginx_reverse_proxy['listen_port']
+    $nginx_host_port     = $nginx_reverse_proxy['host_port']
     $nginx_cert_path     = $nginx_cert['cert_path']
     $nginx_pkey_path     = $nginx_cert['pkey_path']
     $nginx_version       = $hiera_development['apt']['custom']['nginx']
@@ -50,10 +51,10 @@ class webserver::service {
         ssl         => true,
         ssl_cert    => "${nginx_cert_path}/${nginx_vhost}.crt",
         ssl_key     => "${nginx_pkey_path}/${nginx_vhost}.key",
-        listen_port => $nginx_reverse_proxy['listen_port'],
-        ssl_port    => $nginx_reverse_proxy['listen_port'],
+        listen_port => $nginx_listen_port,
+        ssl_port    => $nginx_listen_port,
         error_pages => {
-            '497' => "https://\$host:${nginx_listen_port}\$request_uri",
+            '497' => "https://\$host:${nginx_host_port}\$request_uri",
         },
         proxy       => $nginx_proxy,
     }
