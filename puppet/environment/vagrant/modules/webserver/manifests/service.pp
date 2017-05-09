@@ -29,6 +29,7 @@ class webserver::service {
     $nginx_listen_port   = $nginx_reverse_proxy['listen_port']
     $nginx_cert_path     = $nginx_cert['cert_path']
     $nginx_pkey_path     = $nginx_cert['pkey_path']
+    $nginx_version       = $hiera_development['apt']['custom']['nginx']
     $nginx_proxy         = "${nginx_reverse_proxy['proxy']}:${gunicorn_port}"
 
     ## contain webserver dependencies
