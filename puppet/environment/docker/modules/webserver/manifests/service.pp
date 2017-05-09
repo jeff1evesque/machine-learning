@@ -42,7 +42,7 @@ class webserver::service {
 
     ## nginx: define reverse proxy
     ##
-    ## @497, allows 'http://' to redirect to 'https://'
+    ## @497, redirect 'http://' to 'https://'
     ##
     nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
         ssl         => true,
