@@ -23,8 +23,8 @@ class webserver::ssl {
     exec { 'create-ssl-certificate':
       command  => dos2unix(template('webserver/ssl.erb')),
       unless   => [
-        "test -f ${nginx_cert_path}/${vhost}.crt",
-        "test -f ${nginx_pkey_path}/${vhost}.key",
+        "test -f ${cert_path}/${vhost}.crt",
+        "test -f ${pkey_path}/${vhost}.key",
       ],
       path     => '/usr/bin',
       provider => shell,
