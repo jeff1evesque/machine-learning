@@ -29,7 +29,7 @@ class webserver::ssl {
 
     file { '/root/build/ssl-nginx':
       ensure  => present,
-      mode    => '0700',
+      mode    => '0600',
       owner   => 'root',
       group   => 'root',
       content => dos2unix(template('webserver/ssl.erb')),
@@ -45,5 +45,6 @@ class webserver::ssl {
         "test -f ${pkey_path}/${vhost}.key",
       ],
       path        => '/usr/bin',
+      provider    => shell,
     }
 }
