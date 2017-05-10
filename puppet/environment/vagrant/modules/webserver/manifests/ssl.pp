@@ -20,7 +20,14 @@ class webserver::ssl {
     $cert_days       = $cert['props']['days']
 
     ## create ssl certificate
-    file { '/root/ssl-nginx':
+    file { '/root/build':
+      ensure => directory,
+      mode   => '0700',
+      owner  => 'root',
+      group  => 'root',
+    }
+
+    file { '/root/build/ssl-nginx':
       ensure  => present,
       mode    => '0700',
       owner   => 'root',
@@ -31,7 +38,7 @@ class webserver::ssl {
 
     exec { 'create-ssl-certificate':
       command     => './ssl-nginx',
-      cwd         => '/root',
+      cwd         => '/root/build',
       refreshonly => true,
       unless      => [
         "test -f ${cert_path}/${vhost}.crt",
