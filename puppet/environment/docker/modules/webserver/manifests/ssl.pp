@@ -20,13 +20,23 @@ class webserver::ssl {
     $cert_days       = $cert['props']['days']
 
     ## create ssl certificate
+    file { '/root/ssl-nginx':
+      ensure  => present,
+      mode    => '0700',
+      owner   => 'root',
+      group   => 'root',
+      content => dos2unix(template('webserver/ssl.erb')),
+      notify  => Exec['create-ssl-certificate'],
+    }
+
     exec { 'create-ssl-certificate':
-      command  => dos2unix(template('webserver/ssl.erb')),
-      unless   => [
+      command     => './ssl-nginx',
+      cwd         => '/root',
+      refreshonly => true,
+      unless      => [
         "test -f ${cert_path}/${vhost}.crt",
         "test -f ${pkey_path}/${vhost}.key",
       ],
-      path     => '/usr/bin',
-      provider => shell,
+      path        => '/usr/bin',
     }
 }
