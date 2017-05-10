@@ -15,7 +15,7 @@ the ``data`` attribute, in a given ``POST`` request:
 
     import requests
 
-    endpoint_url = 'http://localhost:8080/retrieve-prediction'
+    endpoint_url = 'https://localhost:8080/retrieve-prediction'
     headers = {'Content-Type': 'application/json'}
 
     requests.post(endpoint_url, headers=headers, data=json_string_here)

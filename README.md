@@ -62,8 +62,8 @@ Depending on the network speed, the build can take between 10-15 minutes. So,
 **Note:** a more complete refresher on virtualization, can be found within the
  vagrant [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Vagrant).
 
-The following lines, indicate the application is accessible via
- `localhost:8080`, on the host machine:
+The following lines, indicate the application is accessible via `localhost:8080`,
+ on the host machine:
 
 ```bash
 ...
@@ -71,14 +71,11 @@ The following lines, indicate the application is accessible via
   #  within the machine from a port on the host machine. In the example below,
   #  accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network "forwarded_port", guest: 5000, host: 8080
-  config.vm.network "forwarded_port", guest: 443, host: 8585
 ...
 ```
 
-Otherwise, if ssl is configured, then the application is accessible via
- `https://localhost:8585`, on the host machine.
-
-**Note:** general convention implements port `443` for ssl.
+**Note:** ssl is configured on the [reverse proxy](https://www.nginx.com/resources/admin-guide/reverse-proxy/),
+ such that accessing `http://localhost:8080`, on the host machine, will redirect to `https://localhost:8080`.
 
 ## Execution
 
@@ -120,9 +117,8 @@ The following are acceptable syntax:
  observations.
 
 As mentioned earlier, the web application can be accessed after subsequent
- `vagrant up` command, followed by using a browser referencing localhost:8080
- (or [https://localhost:5050](https://localhost:5050), with ssl), on the host
- machine.
+ `vagrant up` command, followed by using a browser referencing localhost:8080,
+ on the host machine.
 
 ### Programmatic Interface
 
@@ -145,7 +141,7 @@ A post request, can be implemented in python, as follows:
 ```python
 import requests
 
-endpoint_url = 'http://localhost:8080/load-data'
+endpoint_url = 'https://localhost:8080/load-data'
 headers = {'Content-Type': 'application/json'}
 
 requests.post(endpoint_url, headers=headers, data=json_string_here)

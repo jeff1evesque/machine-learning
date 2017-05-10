@@ -6,6 +6,9 @@ class webserver {
     ## ensure log directory
     require system::log_directory
 
+    ## ssl for nginx
+    contain webserver::ssl
+
     ## install webserver
     contain webserver::service
 

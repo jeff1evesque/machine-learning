@@ -23,5 +23,18 @@ webserver:
     nginx:
         reverse_proxy:
             vhost: 'machine-learning.com'
+            host_port: 8080
             listen_port: 5000
             proxy: 'http://localhost'
+
+        certificate:
+            cert_path: '/etc/puppetlabs/puppet/ssl/certs'
+            pkey_path: '/etc/puppetlabs/puppet/ssl/private_keys'
+            props:
+                days: 365
+                bit: 4096
+                country: 'US'
+                organization: 'MLearning'
+                state: 'CA'
+                locality: 'Palo Alto'
+                unit: 'ML'

@@ -11,6 +11,7 @@ development:
         general:
             inotify-tools: '3.14-1ubuntu1'
             libssl-dev: '1.0.1f-1ubuntu2.22'
+            openssl: '1.0.1f-1ubuntu2.22'
 
         custom:
             redis-server: '2:2.8.4-2'
