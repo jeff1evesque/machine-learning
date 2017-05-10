@@ -42,23 +42,5 @@ class webserver::ssl {
       path        => '/usr/bin',
       provider    => shell,
       refreshonly => true,
-      before      => [
-        File["${pkey_path}/${vhost}.key"],
-        File["${cert_path}/${vhost}.key"],
-      ],
-    }
-
-    file { "${pkey_path}/${vhost}.key":
-      ensure => present,
-      mode   => '0600',
-      owner  => 'root',
-      group  => 'root',
-    }
-
-    file { "${cert_path}/${vhost}.key":
-      ensure => present,
-      mode   => '0600',
-      owner  => 'root',
-      group  => 'root',
     }
 }
