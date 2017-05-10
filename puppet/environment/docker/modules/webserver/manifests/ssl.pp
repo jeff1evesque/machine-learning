@@ -40,9 +40,9 @@ class webserver::ssl {
       command     => './ssl-nginx',
       cwd         => '/root/build',
       refreshonly => true,
-      unless      => [
-        "test -f ${cert_path}/${vhost}.crt",
-        "test -f ${pkey_path}/${vhost}.key",
+      onlyif      => [
+        "if [ ! -f ${cert_path}/${vhost}.crt ]; then exit 0; else exit 1; fi",
+        "if [ ! -f ${pkey_path}/${vhost}.key ]; then exit 0; else exit 1; fi",
       ],
       path        => '/usr/bin',
       provider    => shell,
