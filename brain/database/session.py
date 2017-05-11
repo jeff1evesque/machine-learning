@@ -47,7 +47,7 @@ class Session(object):
         # sql query
         self.sql.connect(self.db_ml)
         sql_statement = 'SELECT id_entity, title FROM tbl_dataset_entity'
-        response = self.sql.execute(sql_statement, 'select')
+        response = self.sql.execute('select', sql_statement)
 
         # rebuild session list, get error(s) if any
         if response['result']:

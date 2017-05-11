@@ -63,7 +63,7 @@ class Observation(object):
                 self.premodel_data['label'],
                 self.premodel_data['id_entity']
             )
-            response = self.sql.execute(sql_statement, 'select', args)
+            response = self.sql.execute('select', sql_statement, args)
 
             # add labels if not exist
             if not response['result']:
@@ -73,11 +73,7 @@ class Observation(object):
                     self.premodel_data['id_entity'],
                     self.premodel_data['label']
                 )
-                self.sql.execute(
-                    sql_statement,
-                    'insert',
-                    args,
-                )
+                self.sql.execute('insert', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()

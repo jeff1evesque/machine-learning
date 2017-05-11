@@ -50,7 +50,7 @@ class ModelType(object):
             ' ON mid.model_type = mtype.id_model'\
             ' WHERE mid.id_entity=%s'
         args = (id_entity)
-        response = self.sql.execute(sql_statement, 'select', args)
+        response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()

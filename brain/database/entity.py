@@ -64,7 +64,7 @@ class Entity(object):
                 'SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() '\
                 'WHERE id_entity=%s'
             args = (self.premodel_data['uid'], self.premodel_data['id_entity'])
-            response = self.sql.execute(sql_statement, 'update', args)
+            response = self.sql.execute('update', sql_statement, args)
 
         elif self.session_type == 'data_new':
             sql_statement = 'INSERT INTO tbl_dataset_entity '\
@@ -75,7 +75,7 @@ class Entity(object):
                 self.premodel_data['model_type'],
                 self.premodel_data['uid']
             )
-            response = self.sql.execute(sql_statement, 'insert', args)
+            response = self.sql.execute('insert', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -107,7 +107,7 @@ class Entity(object):
             'FROM tbl_dataset_entity '\
             'WHERE id_entity=%s'
         args = (id_entity)
-        response = self.sql.execute(sql_statement, 'select', args)
+        response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()

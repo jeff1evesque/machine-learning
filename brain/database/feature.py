@@ -58,7 +58,7 @@ class Feature(object):
             self.premodel_data['id_entity'],
             self.premodel_data['count_features'],
         )
-        response = self.sql.execute(sql_statement, 'insert', args)
+        response = self.sql.execute('insert', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -100,7 +100,7 @@ class Feature(object):
             dataset['indep_variable_label'],
             dataset['indep_variable_value'],
         )
-        response = self.sql.execute(sql_statement, 'insert', args)
+        response = self.sql.execute('insert', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -150,7 +150,7 @@ class Feature(object):
 
         # get dataset
         args = (id_entity)
-        response = self.sql.execute(sql_statement, 'select', args)
+        response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -188,7 +188,7 @@ class Feature(object):
             'FROM tbl_feature_count '\
             'WHERE id_entity=%s'
         args = (id_entity)
-        response = self.sql.execute(sql_statement, 'select', args)
+        response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
