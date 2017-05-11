@@ -3,6 +3,7 @@
 '''
 
 This file contains various generic SQL-related methods.
+
 '''
 
 import MySQLdb as MariaClient
