@@ -5,7 +5,7 @@
 This file contains various generic SQL-related methods.
 '''
 
-import MySQLdb as DB
+import MySQLdb as MariaClient
 from pymongo import MongoClient
 from brain.database.settings import Database
 
@@ -137,13 +137,13 @@ class SQL(object):
 
         try:
             if database is None:
-                self.conn = DB.connect(
+                self.conn = MariaClient.connect(
                     self.host,
                     self.user,
                     self.passwd,
                 )
             else:
-                self.conn = DB.connect(
+                self.conn = MariaClient.connect(
                     self.host,
                     self.user,
                     self.passwd,
@@ -157,7 +157,7 @@ class SQL(object):
                 'id': None,
             }
 
-        except DB.Error, error:
+        except MariaClient.Error, error:
             self.proceed = False
             self.list_error.append(error)
 
@@ -189,7 +189,7 @@ class SQL(object):
                 elif sql_type == 'select':
                     result = self.cursor.fetchall()
 
-            except DB.Error, error:
+            except MariaClient.Error, error:
                 self.conn.rollback()
                 self.list_error.append(error)
                 return {
@@ -229,7 +229,7 @@ class SQL(object):
                         'error': None,
                         'id': self.cursor.lastrowid,
                     }
-            except DB.Error, error:
+            except MariaClient.Error, error:
                 self.list_error.append(error)
 
                 return {
