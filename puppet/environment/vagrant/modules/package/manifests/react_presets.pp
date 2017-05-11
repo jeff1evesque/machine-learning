@@ -11,7 +11,7 @@ class package::react_presets {
     ## install babelify presets for reactjs (npm)
     exec { 'install-web-packages':
         command => 'npm install --no-bin-links',
-        cwd     => "${root_dir}/src/jsx/",
+        cwd     => "${root_dir}/src/",
         path    => '/usr/bin',
         require => Class['package::nodejs'],
     }

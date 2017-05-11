@@ -57,7 +57,7 @@ script:
   - xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd
   - xmllint --noout interface/static/data/xml/*.xsd
   - mdl . --style test/lint/markdown.rb
-  - find . -type f -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
+  - find . -type f ! -name '*.erb' -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
   - find . -name '*.sh' -type f -exec shellcheck {} \;
   - eslint . --ext=jsx -c test/lint/eslint.json
   - yaml-lint hiera/

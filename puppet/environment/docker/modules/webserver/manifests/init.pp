@@ -11,6 +11,9 @@ class webserver {
     ## install redis client
     contain package::redis_client
 
+    ## ssl for nginx
+    contain webserver::ssl
+
     ## install webserver
     contain package::gunicorn
     contain webserver::service

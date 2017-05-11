@@ -2,51 +2,50 @@
 Data Attributes
 ===============
 
--  `SVM
-   datasets <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm>`_
+The programmatic-api, is intended to provide many of the functionalities, offered by the
+web-interface. This is done by encoding equivalent attributes, into a json string, and
+sent to its respective url endpoint, as an encapsulated ``POST`` request. Below, the
+corresponding endpoints are briefly explained, and carefully linked, to further examples
+of its implementation.
 
-   -  `dataset url <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/dataset_url>`_
-   -  `file upload <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svm/file_upload>`_
 
--  `SVR
-   datasets <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr>`_
+Main Session
+============
 
-   -  `dataset url <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/dataset_url>`_
-   -  `file upload <https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/json/programmatic_interface/svr/file_upload>`_
+- ``/load-data``: interfaces the following main sessions:
 
-**Note:** the content of each of the above files, can be substituted for
-the ``data`` attribute.
+  - |data_new|_: store dataset(s) into the applications database
+  - |data_append|_: append additional dataset(s), into an existing dataset entry in the database
+  - |model_generate|_: generate a model, using an existing dataset entry from the database
+  - |model_predict|_: generate a prediction, using an existing generated model
 
-The following (non-exhaustive) properties define the implemented
-``data`` attribute:
+Result Arbiter
+==============
 
--  ``model_id``: the numeric id value, of the generated model in the
-   nosql datastore
--  ``model_type``: corresponds to the desired model type, which can be
-   one of the following:
--  ``classification``
--  ``regression``
--  ``session_id``: the numeric id value, that represents the dataset
-   stored in the sql database.
--  ``dataset_type``: corresponds to one of the following types:
--  ``dataset_url``: indication that the supplied dataset will be url
-   references
--  ``file_upload``: indication that the supplied dataset(s) will be
-   defined as a json string within the ``dataset`` attribute
--  ``session_type``: corresponds to one of the following session types:
--  ``data_new``
--  ``data_append``
--  ``model_generate``
--  ``model_predict``
--  ``svm_dataset_type``: corresponds to one of the following dataset
-   types:
--  ``json_string``: indicate that the dataset is being sent via a
-   ``post`` request
--  ``sv_kernel_type``: the type of kernel to apply to the support vector
-   ``model_type``:
--  ``linear``
--  ``polynomial``
--  ``rbf``
--  ``sigmoid``
--  ``prediction_input[]``: an array of prediction input, supplied to the
-   generated model to compute a prediction
+- |/save-prediction|_: store a generated prediction, from a ``model_predict`` session.
+
+- |/retrieve-prediction|_: retrieves the following saved prediction attributes:
+
+  - result: pertains to all ``model_type``
+  - classes: pertains only to the svm ``model_type``
+  - decision function: pertains only to the svm ``model_type``
+  - probabilities: pertains only to the svm ``model_type``
+  - coefficient of determination: pertains only to the svr ``model_type``
+
+- |/retrieve-prediction-titles|_: retrieves predictions saved titles, for either a specified
+  ``model_type``, otherwise return all saved titles, for all ``model_type``.
+
+.. |data_new| replace:: ``data_new``
+.. _data_new: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst
+.. |data_append| replace:: ``data_append``
+.. _data_append: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_append.rst
+.. |model_generate| replace:: ``model_generate``
+.. _model_generate: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/model/model_generate.rst
+.. |model_predict| replace:: ``model_predict``
+.. _model_predict: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/predict/model_predict.rst
+.. |/save-prediction| replace:: ``/save-prediction``
+.. _/save-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/result/save_prediction.rst
+.. |/retrieve-prediction| replace:: ``/retrieve-prediction``
+.. _/retrieve-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/result/retrieve_prediction.rst
+.. |/retrieve-prediction-titles| replace:: ``/retrieve-prediction-titles``
+.. _/retrieve-prediction-titles: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/result/retrieve_prediction_titles.rst

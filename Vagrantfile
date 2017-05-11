@@ -50,7 +50,6 @@ Vagrant.configure(2) do |config|
         ## within the machine from a port on the host machine. In the example below,
         ## accessing "localhost:8080" will access port 80 on the guest machine.
         main.vm.network 'forwarded_port', guest: 5000, host: 8080
-        main.vm.network 'forwarded_port', guest: 443, host: 8585
 
         ## Run r10k
         main.r10k.puppet_dir      = "puppet/environment/#{puppet_environment}"
@@ -80,7 +79,7 @@ Vagrant.configure(2) do |config|
             run 'rm -Rf interface/static/img'
             run 'rm -Rf interface/static/js'
             run "rm -Rf puppet/environment/#{puppet_environment}/modules_contrib"
-            run 'rm -Rf src/jsx/node_modules'
+            run 'rm -Rf src/node_modules'
             run 'rm -f src/js/.gitignore'
             run 'rm -f src/js/content.js'
             run 'find . -name "*.pyc" -type f -exec rm -r {} +'

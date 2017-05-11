@@ -2,7 +2,7 @@
 
 '''
 
-This file allows methods defined from the Base, or Base_Data superclass to be
+This file allows methods defined from the Base, or BaseData superclass to be
 overridden, if needed.
 
 Note: the term 'dataset' used throughout various comments in this file,
@@ -11,18 +11,18 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.session.base_data import Base_Data
-from brain.database.save_entity import Save_Entity
+from brain.session.base_data import BaseData
+from brain.database.entity import Entity
 
 
-class Data_New(Base_Data):
+class DataNew(BaseData):
     '''
 
     This class provides a generic constructor interface.
 
     Note: this class is invoked within 'load_data.py'
 
-    Note: inherit base methods from the superclass 'Base_Data
+    Note: inherit base methods from the superclass 'BaseData'
 
     '''
 
@@ -30,18 +30,18 @@ class Data_New(Base_Data):
         '''
 
         This constructor inherits additional class properties, from the
-        constructor of the 'Base_Data' superclass.
+        constructor of the 'BaseData' superclass.
 
         '''
 
         # superclass constructor
-        Base_Data.__init__(self, premodel_data)
+        BaseData.__init__(self, premodel_data)
 
     def save_entity(self, session_type, id_entity=None):
         '''
 
         This method overrides the identical method from the inherited
-        superclass, 'Base_Data'. Specifically, this method updates an
+        superclass, 'BaseData'. Specifically, this method updates an
         existing entity within the corresponding database table,
         'tbl_dataset_entity'.
 
@@ -67,7 +67,7 @@ class Data_New(Base_Data):
             'model_type': numeric_model_type,
             'uid': self.uid,
         }
-        db_save = Save_Entity(premodel_entity, session_type)
+        db_save = Entity(premodel_entity, session_type)
 
         # save dataset element
         db_return = db_save.save()

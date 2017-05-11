@@ -11,17 +11,12 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.session.base import Base
-from flask import current_app
-from flask import session
-from brain.session.data.save_feature_count import feature_count
-from brain.session.data.validate_file_extension import reduce_dataset
-from brain.session.data.save_entity import entity
-from brain.session.data.save_dataset import dataset
-from brain.session.data.save_observation_label import observation_label
-from brain.session.data.dataset_to_dict import dataset_dictionary
+from flask import current_app, session
+from brain.session.data.arbiter import save_info, save_count, save_olabels, reduce
+from brain.session.data.dataset import save_dataset, dataset2dict
 
 
-class Base_Data(Base):
+class BaseData(Base):
     '''
 
     This class provides an interface to save, and validate the provided
@@ -65,12 +60,12 @@ class Base_Data(Base):
         This method saves the number of features that can be expected in a
         given observation with respect to 'id_entity'.
 
-        Note: this method needs to execute after 'dataset_to_dict'
+        Note: this method needs to execute after 'dataset'
 
         '''
 
         # save feature count
-        response = feature_count(self.dataset[0])
+        response = save_count(self.dataset[0])
 
         # return result
         if response['error']:
@@ -87,7 +82,7 @@ class Base_Data(Base):
         '''
 
         # validate and reduce dataset
-        response = reduce_dataset(self.premodel_data, self.session_type)
+        response = reduce(self.premodel_data, self.session_type)
 
         # return result
         if response['error']:
@@ -119,7 +114,7 @@ class Base_Data(Base):
         '''
 
         # save entity description
-        response = entity(self.premodel_data, session_type, self.uid)
+        response = save_info(self.premodel_data, session_type, self.uid)
 
         # return result
         if response['error']:
@@ -134,12 +129,12 @@ class Base_Data(Base):
         This method saves each dataset element (independent variable value)
         into the sql database.
 
-        @self.dataset, defined from the 'dataset_to_dict' method.
+        @self.dataset, defined from the 'dataset' method.
 
         '''
 
         # save dataset
-        response = dataset(self.dataset, self.model_type)
+        response = save_dataset(self.dataset, self.model_type)
 
         # return result
         if response['error']:
@@ -154,7 +149,7 @@ class Base_Data(Base):
         id (entity id).
 
         @self.observation_labels, list of features (independent variables),
-            defined after invoking the 'dataset_to_dict' method.
+            defined after invoking the 'dataset' method.
 
         @session_id, the corresponding returned session id from invoking the
             'save_entity' method.
@@ -162,7 +157,7 @@ class Base_Data(Base):
         '''
 
         # save observation labels
-        response = observation_label(
+        response = save_olabels(
             session_type,
             session_id,
             self.observation_labels[0],
@@ -173,7 +168,7 @@ class Base_Data(Base):
         if response['error']:
             self.list_error.append(response['error'])
 
-    def dataset_to_dict(self, id_entity):
+    def convert_dataset(self, id_entity):
         '''
 
         This method converts the supplied csv, or xml file upload(s) to a
@@ -184,7 +179,7 @@ class Base_Data(Base):
         '''
 
         # convert to dictionary
-        response = dataset_dictionary(id_entity, self.model_type, self.upload)
+        response = dataset2dict(id_entity, self.model_type, self.upload)
 
         # return result
         if response['error']:

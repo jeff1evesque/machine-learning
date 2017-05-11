@@ -22,77 +22,10 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
 **Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/doc/contribution/support.rst),
  to further assist with development.
 
-## Preconfiguration
-
-This project implements puppet's [r10k](https://github.com/puppetlabs/r10k)
- module via vagrant's [plugin](https://github.com/jantman/vagrant-r10k). A
- requirement of this implementation includes a `Puppetfile` (already defined),
- which includes the following syntax:
-
-```ruby
-#!/usr/bin/env ruby
-## Install Module: stdlib (apt dependency)
-mod 'stdlib',
-  :git => "git@github.com:puppetlabs/puppetlabs-stdlib.git",
-  :ref => "4.6.0"
-
-## Install Module: apt (from master)
-mod 'apt',
-  :git => "git@github.com:puppetlabs/puppetlabs-apt.git"
-...
-```
-
-Specifically, this implements the ssh syntax `git@github.com:account/repo.git`,
- unlike the following alternatives:
-
-- `https://github.com/account/repo.git`
-- `git://github.com/account/repo.git`
-
-This allows r10k to clone the corresponding puppet module(s), without a
- deterrence of [DDoS](https://en.wikipedia.org/wiki/Denial-of-service_attack).
- However, to implement the above syntax, ssh keys need to be generated, and
- properly assigned locally, as well as on the github account.
-
-The following steps through how to implement the ssh keys with respect to
- github:
-
-```bash
-$ cd ~/.ssh/
-$ ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-Enter file in which to save the key (/Users/you/.ssh/id_rsa): [Press enter]
-Enter passphrase (empty for no passphrase): [Type a passphrase]
-Enter same passphrase again: [Type passphrase again]
-$ ssh-agent -s
-Agent pid 59566
-$ ssh-add ~/.ssh/id_rsa
-$ pbcopy < ~/.ssh/id_rsa.pub
-```
-
-**Note:** it is recommended to simply press enter, to keep default values
- when asked *Enter file in which to save the key*.  Also, if `ssh-agent -s`
- alternative for git bash doesn't work, then `eval $(ssh-agent -s)` for other
- terminal prompts should work.
-
-Then, at the top of any github page (after login), click `Settings > SSH keys >
- Add SSH Keys`, then paste the above copied key into the `Key` field, and click
- *Add key*.  Finally, to test the ssh connection, enter the following within
- the same terminal window used for the above commands:
-
-```bash
-$ ssh -T git@github.com
-The authenticity of host 'github.com (207.97.227.239)' can't be established.
-RSA key fingerprint is 16:27:ac:a5:76:28:2d:36:63:1b:56:4d:eb:df:a6:48.
-Are you sure you want to continue connecting (yes/no)? yes
-Warning: Permanently added 'github.com,192.30.252.130' (RSA) to the list of
-known hosts.
-Hi jeff1evesque! You've successfully authenticated, but GitHub does not provide
-shell access.
-```
-
 ## Configuration
 
-Fork this project in your GitHub account.  Then, clone your repository, with
- one of the following approaches:
+Fork this project, and remember to [generate](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/ssh_keys.rst)
+ ssh keys, before cloning the repository:
 
 - [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#simple-clone):
  clone the remote master branch.
@@ -100,6 +33,9 @@ Fork this project in your GitHub account.  Then, clone your repository, with
  clone the remote master branch, then checkout a specific commit hash.
 - [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#release-tag):
  clone the remote branch, associated with the desired release tag.
+
+**Note:** the [`puppetfile.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/doc/background/puppetfile.rst)
+ can be reviewed, to better understand why ssh keys are required.
 
 ## Installation
 
@@ -126,8 +62,8 @@ Depending on the network speed, the build can take between 10-15 minutes. So,
 **Note:** a more complete refresher on virtualization, can be found within the
  vagrant [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Vagrant).
 
-The following lines, indicate the application is accessible via
- `localhost:8080`, on the host machine:
+The following lines, indicate the application is accessible via `localhost:8080`,
+ on the host machine:
 
 ```bash
 ...
@@ -135,14 +71,11 @@ The following lines, indicate the application is accessible via
   #  within the machine from a port on the host machine. In the example below,
   #  accessing "localhost:8080" will access port 80 on the guest machine.
   config.vm.network "forwarded_port", guest: 5000, host: 8080
-  config.vm.network "forwarded_port", guest: 443, host: 8585
 ...
 ```
 
-Otherwise, if ssl is configured, then the application is accessible via
- `https://localhost:8585`, on the host machine.
-
-**Note:** general convention implements port `443` for ssl.
+**Note:** ssl is configured on the [reverse proxy](https://www.nginx.com/resources/admin-guide/reverse-proxy/),
+ such that accessing `http://localhost:8080`, on the host machine, will redirect to `https://localhost:8080`.
 
 ## Execution
 
@@ -184,9 +117,8 @@ The following are acceptable syntax:
  observations.
 
 As mentioned earlier, the web application can be accessed after subsequent
- `vagrant up` command, followed by using a browser referencing localhost:8080
- (or [https://localhost:5050](https://localhost:5050), with ssl), on the host
- machine.
+ `vagrant up` command, followed by using a browser referencing localhost:8080,
+ on the host machine.
 
 ### Programmatic Interface
 
@@ -209,7 +141,7 @@ A post request, can be implemented in python, as follows:
 ```python
 import requests
 
-endpoint_url = 'http://localhost:8080/load-data'
+endpoint_url = 'https://localhost:8080/load-data'
 headers = {'Content-Type': 'application/json'}
 
 requests.post(endpoint_url, headers=headers, data=json_string_here)
@@ -218,4 +150,4 @@ requests.post(endpoint_url, headers=headers, data=json_string_here)
 **Note:** the above `post` request, can be implemented in a different language,
  respectively.
 
-**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
+**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.

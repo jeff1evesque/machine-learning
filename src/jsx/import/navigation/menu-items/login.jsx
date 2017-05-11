@@ -12,9 +12,10 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { browserHistory, Link } from 'react-router';
 import setLoginState from '../../redux/action/login.jsx';
 import setLogoutState from '../../redux/action/logout.jsx';
+import ajaxCaller from '../../general/ajax-caller.js';
 
 var LoginLink = React.createClass({
   // call back: return login button
@@ -56,6 +57,44 @@ var LoginLink = React.createClass({
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
+          // prevent page reload
+            event.preventDefault();
+
+          // local variables
+            var ajaxArguments = {
+                'endpoint': '/logout'
+            };
+
+          // asynchronous callback: ajax 'done' promise
+            ajaxCaller(function (asynchObject) {
+            // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ajax_done_error: asynchObject.error});
+                } else if (asynchObject) {
+                    this.setState({ajax_done_result: asynchObject});
+                }
+                else {
+                    this.setState({ajax_done_result: null});
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
+                if (asynchStatus) {
+                    this.setState({ajax_fail_status: asynchStatus});
+                    console.log('Error Status: ' + asynchStatus);
+                }
+                if (asynchError) {
+                    this.setState({ajax_fail_error: asynchError});
+                    console.log('Error Thrown: ' + asynchError);
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+
           // update redux store
             var action = setLogoutState();
             this.props.dispatch(action);

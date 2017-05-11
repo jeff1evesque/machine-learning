@@ -20,15 +20,15 @@ decorators are defined, which flask triggers for specific URL's.
 import json
 from flask import Blueprint, render_template, request, session
 from brain.load_data import Load_Data
-from brain.converter.restructure_settings import Restructure_Settings
-from brain.database.retrieve_model_type import Retrieve_Model_Type as M_Type
-from brain.database.retrieve_session import Retrieve_Session
-from brain.cache.cache_model import Cache_Model
-from brain.cache.cache_hset import Cache_Hset
-from brain.validator.validate_password import validate_password
-from brain.database.retrieve_account import Retrieve_Account
-from brain.database.save_account import Save_Account
-from brain.converter.crypto import hashpass, verifypass
+from brain.converter.settings import Settings
+from brain.database.model_type import ModelType
+from brain.database.session import Session
+from brain.cache.model import Model
+from brain.cache.hset import Hset
+from brain.validator.password import validate_password
+from brain.database.account import Account
+from brain.database.prediction import Prediction
+from brain.converter.crypto import hash_pass, verify_pass
 
 
 # local variables
@@ -71,7 +71,7 @@ def load_data():
 
     if request.method == 'POST':
 
-        # load programmatic-interface
+        # programmatic-interface
         if request.get_json():
             # get necessary components from the dataset
             if 'dataset' in request.get_json():
@@ -81,7 +81,7 @@ def load_data():
             settings = request.get_json()['properties']
 
             # restructure the dataset
-            sender = Restructure_Settings(settings, dataset)
+            sender = Settings(settings, dataset)
             data_formatted = sender.restructure()
 
             # send reformatted data to brain
@@ -106,19 +106,16 @@ def load_data():
             # return response
             return response
 
-        # load web-interface
-        else:
-            # local variables
-            files = None
-
-            # get uploaded form files
+        # get uploaded form files
         if request.files:
             files = request.files
+        else:
+            files = None
 
-        # get submitted form data
+        # web-interface: get submitted form data
         if request.form:
             settings = request.form
-            sender = Restructure_Settings(settings, files)
+            sender = Settings(settings, files)
             data_formatted = sender.restructure()
 
             # send reformatted data to brain
@@ -151,8 +148,8 @@ def login():
     This router function attempts to fulfill a login request. During its
     attempt, it returns a json string, with two values:
 
-        - boolean, inidicates if account exists
-        - integer, codified indicator of registration attempt:
+        - username, user attempting to login
+        - integer, codified indicator of login attempt:
             - 0, successful login
             - 1, username does not exist
             - 2, username does not have a password
@@ -164,7 +161,7 @@ def login():
         # local variables
         username = request.form.getlist('user[login]')[0]
         password = request.form.getlist('user[password]')[0]
-        account = Retrieve_Account()
+        account = Account()
 
         # validate: check username exists
         if (
@@ -180,7 +177,7 @@ def login():
             if hashed_password:
 
                 # notification: verify password
-                if verifypass(str(password), hashed_password):
+                if verify_pass(str(password), hashed_password):
                     # set session: uid corresponds to primary key, from the
                     #              user database table, and a unique integer
                     #              representing the username.
@@ -212,7 +209,7 @@ def login():
             })
 
 
-@blueprint.route('/logout', methods=['POST'])
+@blueprint.route('/logout', methods=['GET', 'POST'])
 def logout():
     '''
 
@@ -223,7 +220,7 @@ def logout():
 
     '''
 
-    if request.method == 'POST':
+    if request.method in ['GET', 'POST']:
         # remove session
         session.pop('uid', None)
 
@@ -258,7 +255,7 @@ def register():
         username = request.form.getlist('user[login]')[0]
         email = request.form.getlist('user[email]')[0]
         password = request.form.getlist('user[password]')[0]
-        account = Retrieve_Account()
+        account = Account()
 
         # validate requirements: one letter, one number, and ten characters.
         if (validate_password(password)):
@@ -270,8 +267,8 @@ def register():
                 if not account.check_email(email)['result']:
 
                     # database query: save username, and password
-                    hashed = hashpass(str(password))
-                    result = Save_Account().save_account(
+                    hashed = hash_pass(str(password))
+                    result = Account().save_account(
                         username,
                         email,
                         hashed
@@ -324,7 +321,7 @@ def retrieve_session():
 
     if request.method == 'POST':
         # get all sessions
-        session_list = Retrieve_Session().get_all_sessions()
+        session_list = Session().get_all_sessions()
 
         # return all sessions
         if session_list['result']:
@@ -347,8 +344,8 @@ def retrieve_sv_model():
 
     if request.method == 'POST':
         # get all models
-        svm_list = Cache_Model().get_all_titles('svm_model')
-        svr_list = Cache_Model().get_all_titles('svr_model')
+        svm_list = Model().get_all_titles('svm_model')
+        svr_list = Model().get_all_titles('svr_model')
         svm_result = []
         svr_result = []
         error_result = []
@@ -391,11 +388,11 @@ def retrieve_sv_features():
 
     # get model type
     model_id = request.get_json()['model_id']
-    model_type = M_Type().get_model_type(model_id)['result']
+    model_type = ModelType().get_model_type(model_id)['result']
 
     # return all feature labels
     if request.method == 'POST':
-        label_list = Cache_Hset().uncache(
+        label_list = Hset().uncache(
             model_type + '_feature_labels',
             model_id
         )
@@ -404,3 +401,200 @@ def retrieve_sv_features():
             return json.dumps(label_list['result'])
         else:
             return json.dumps({'error': label_list['error']})
+
+
+@blueprint.route(
+    '/retrieve-prediction-titles',
+    methods=['POST'],
+    endpoint='retrieve_prediction_titles'
+)
+def retrieve_prediction_titles():
+    '''
+
+    This router function retrieves all prediction titles, stored via the
+    'save_prediction' router function. During its attempt, it returns a json
+    string, with the following value:
+
+        - integer, codified indicator of database query:
+            - 0, successful retrieval of prediction titles
+            - 1, unsuccessful retrieval of prediction titles
+            - 2, improper request submitted
+        - string, array of prediction titles
+
+    '''
+
+    if request.method == 'POST':
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            model_type = results['model_type']
+
+        # web-interface
+        elif request.form:
+            results = request.form
+            args = json.loads(results['args'])
+            model_type = args['model_type']
+
+        # invalid request
+        else:
+            return json.dumps({'status': 2})
+
+        # query database
+        prediction = Prediction()
+        response = prediction.get_all_titles(model_type)
+
+        # return results: datetime is not serializable, without 'default'
+        #                 string serializer, for incompatible objects.
+        #
+        if response['status']:
+            return json.dumps({
+                'status': 0,
+                'titles': response['result']
+            }, default=str)
+
+        else:
+            return json.dumps({
+                'status': 1,
+                'titles': None
+            })
+
+
+@blueprint.route(
+    '/retrieve-prediction',
+    methods=['POST'],
+    endpoint='retrieve_prediction'
+)
+def retrieve_prediction():
+    '''
+
+    This router function retrieves a specified prediction parameter.
+
+        - integer, codified indicator of save attempt:
+            - 0, successful retrieval of specified prediction parameter
+            - 1, unsuccessful retrieval of specified prediction parameter
+            - 2, improper request submitted
+            - 3, invalid 'model_type'
+        - string, prediction parameter
+
+    '''
+
+    if request.method == 'POST':
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            id_result = results['id_result']
+
+        # web-interface
+        elif request.form:
+            results = request.form
+            args = json.loads(results['args'])
+            id_result = args['id_result']
+
+        # invalid request
+        else:
+            return json.dumps({'status': 2})
+
+        # query database and return results
+        prediction = Prediction()
+        result = prediction.get_result(id_result)
+        model_type = prediction.get_model_type(id_result)['result']
+
+        if model_type == 'svm':
+            classes = prediction.get_value(id_result, model_type, 'class')
+            df = prediction.get_value(id_result, model_type, 'decision_function')
+            prob = prediction.get_value(id_result, model_type, 'probability')
+
+            if (
+                result['status'] and
+                classes['status'] and
+                df['status'] and
+                prob['status']
+            ):
+                # return results: queried 'decimal' database values, are not
+                #                 json serializable, without using the 'default'
+                #                 string serializer.
+                #
+                return json.dumps({
+                    'status': 0,
+                    'result': result['result'],
+                    'classes': classes['result'],
+                    'decision_function': df['result'],
+                    'probability': prob['result']
+                }, default=str)
+            else:
+                return json.dumps({'status': 1})
+
+        elif model_type == 'svr':
+            coefficient = prediction.get_value(id_result, model_type, 'r2')
+
+            if coefficient['status']:
+                # return results: queried 'decimal' database values, are not
+                #                 json serializable, without using the 'default'
+                #                 string serializer.
+                #
+                return json.dumps({
+                    'status': 0,
+                    'result': result['result'],
+                    'r2': coefficient['result']
+                }, default=str)
+            else:
+                return json.dumps({'status': 1})
+
+        else:
+            return json.dumps({'status': 3})
+
+
+@blueprint.route(
+    '/save-prediction',
+    methods=['POST'],
+    endpoint='save_prediction'
+)
+def save_prediction():
+    '''
+
+    This router function saves the prediction results generated from a computed
+    svm or svr prediction session.  During its attempt, it returns a json
+    string, with the following value:
+
+        - integer, codified indicator of save attempt:
+            - 0, successfully stored the prediction result
+            - 1, unsuccessfully stored the prediction result
+            - 2, status was not 'valid'
+            - 3, improper request submitted
+
+    '''
+
+    if request.method == 'POST':
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            data = results['data']
+
+        # web-interface: double decoder required, since nested encoding
+        elif request.form:
+            results = request.form
+            data = json.loads(json.loads(results['data']))
+
+        # invalid request
+        else:
+            return json.dumps({'status': 3})
+
+        # local variables
+        status = results['status']
+        type = results['model_type']
+        title = results['title']
+
+        # save prediction
+        if status == 'valid':
+            prediction = Prediction()
+            result = prediction.save(data, type, title)['result']
+
+            # notification: prediction status
+            if result == 0:
+                return json.dumps({'status': 0})
+            else:
+                return json.dumps({'status': 1})
+
+        # notification: status not valid
+        else:
+            return json.dumps({'status': 2})

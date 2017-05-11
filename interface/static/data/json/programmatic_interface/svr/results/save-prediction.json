@@ -1,0 +1,9 @@
+{
+    "status": "valid",
+    "model_type": "svr",
+    "title": "svr-prediction-1",
+    "data": {
+        "result": "166.001388043",
+        "r2": "0.99114929281077535"
+    }
+}

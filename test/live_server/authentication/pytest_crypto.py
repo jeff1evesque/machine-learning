@@ -4,6 +4,7 @@ This file will test the cryptography functionalities with respect to
 authentication.
 
 '''
+
 import imp
 
 
@@ -19,9 +20,9 @@ def test_hashing():
     passwords = ['blue', 'red', 'green', 'yellow']
 
     for p in passwords:
-        h1 = crypto.hashpass(p, app=False)
-        h2 = crypto.hashpass(p, app=False)
+        h1 = crypto.hash_pass(p, app=False)
+        h2 = crypto.hash_pass(p, app=False)
 
         assert h1 != h2
-        assert crypto.verifypass(p, h1, app=False)
-        assert crypto.verifypass(p, h2, app=False)
+        assert crypto.verify_pass(p, h1, app=False)
+        assert crypto.verify_pass(p, h2, app=False)

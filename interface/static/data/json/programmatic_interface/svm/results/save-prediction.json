@@ -1,0 +1,23 @@
+{
+    "status": "valid",
+    "model_type": "svm",
+    "title": "svm-prediction-1",
+    "data": {
+        "result": "dep-variable-2",
+        "classes": [
+            "dep-variable-1",
+            "dep-variable-2",
+            "dep-variable-3"
+        ],
+        "probability": [
+            "0.01194470442600185",
+            "0.04303886020279356",
+            "0.9450164353712046"
+        ],
+        "decision_function": [
+            "-5.916312596654728",
+            "7.243579276069545",
+            "3.4348334629146398"
+        ]
+    }
+}

@@ -11,7 +11,7 @@ import yaml
 import scrypt
 
 
-def getsalt(app=True, root='/var/machine-learning'):
+def get_salt(app=True, root='/var/machine-learning'):
     '''
 
     This method returns the salt.
@@ -68,7 +68,7 @@ def getscryptparams(app=True, root='/var/machine-learning'):
                 return pow(2, 18), 8, 1
 
 
-def hashpass(password, app=True):
+def hash_pass(password, app=True):
     '''
 
     This method returns a hash and salt from a password p
@@ -77,7 +77,7 @@ def hashpass(password, app=True):
 
     '''
 
-    salt = getsalt(app=app)
+    salt = get_salt(app=app)
     N, r, p = getscryptparams(app=app)
     try:
         hashed = scrypt.hash(password, salt, N=N, r=r, p=p, buflen=512)
@@ -87,11 +87,11 @@ def hashpass(password, app=True):
         return False
 
 
-def verifypass(password, h, app=True):
+def verify_pass(password, h, app=True):
     '''
 
     This function verifies that a password p hashes to a hash h as
-    returned by hashpass.
+    returned by hash_pass.
 
     @h - hash extracted from the hash+salt
     @s - salt extracted from the hash+salt

@@ -30,7 +30,7 @@
 /interface/static/css/
 /interface/static/img/
 /puppet/environment/*/modules_contrib/
-/src/jsx/node_modules/
+/src/node_modules/
 
 # Ignore and don't commit the following files
 *.pyc

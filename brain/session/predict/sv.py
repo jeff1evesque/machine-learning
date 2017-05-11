@@ -8,11 +8,11 @@ levels, associated with corresponding predictions.
 '''
 
 from flask import current_app
-from brain.cache.cache_hset import Cache_Hset
-from brain.cache.cache_model import Cache_Model
+from brain.cache.hset import Hset
+from brain.cache.model import Model
 
 
-def sv_prediction(model, model_id, predictors):
+def predict(model, model_id, predictors):
     '''
 
     This method generates an sv (i.e. svm, or svr) prediction using the
@@ -44,11 +44,11 @@ def sv_prediction(model, model_id, predictors):
     list_model_type = current_app.config.get('MODEL_TYPE')
 
     # get necessary model
-    title = Cache_Hset().uncache(
+    title = Hset().uncache(
         model + '_title',
         model_id
     )['result']
-    clf = Cache_Model().uncache(
+    clf = Model().uncache(
         model + '_model',
         model_id + '_' + title
     )
@@ -58,7 +58,7 @@ def sv_prediction(model, model_id, predictors):
 
     # case 1: return svm prediction, and confidence level
     if model == list_model_type[0]:
-        encoded_labels = Cache_Model().uncache(
+        encoded_labels = Model().uncache(
             model + '_labels',
             model_id
         )
@@ -81,7 +81,7 @@ def sv_prediction(model, model_id, predictors):
 
     # case 2: return svr prediction, and confidence level
     elif model == list_model_type[1]:
-        r2 = Cache_Hset().uncache(
+        r2 = Hset().uncache(
             model + '_r2',
             model_id
         )['result']

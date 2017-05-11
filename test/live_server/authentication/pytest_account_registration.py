@@ -9,10 +9,9 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-from brain.validator.validate_password import validate_password
-from brain.database.retrieve_account import Retrieve_Account
-from brain.database.save_account import Save_Account
-from brain.converter.crypto import hashpass
+from brain.validator.password import validate_password
+from brain.database.account import Account
+from brain.converter.crypto import hash_pass
 
 
 def test_registration(client, live_server):
@@ -28,7 +27,7 @@ def test_registration(client, live_server):
     username = 'jeff1evesque'
     email = 'jeff1evesque@yahoo.com'
     password = 'password123'
-    authenticate = Retrieve_Account()
+    authenticate = Account()
 
     # verify requirements: one letter, one number, and ten characters.
     if (validate_password(password)):
@@ -40,8 +39,8 @@ def test_registration(client, live_server):
             if not authenticate.check_email(email)['result']:
 
                 # database query: save username, and password
-                hashed = hashpass(str(password))
-                result = Save_Account().save_account(username, email, hashed)
+                hashed = hash_pass(str(password))
+                result = Account().save_account(username, email, hashed)
 
                 # notification: attempt to store account
                 assert result['status']
