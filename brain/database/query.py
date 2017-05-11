@@ -6,18 +6,93 @@ This file contains various generic SQL-related methods.
 '''
 
 import MySQLdb as DB
+from pymongo import MongoClient
 from brain.database.settings import Database
 
+
+class NoSQL(object):
+    '''
+
+    This class provides an interface to connect, execute commands, and
+    disconnect from a NoSQL database.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    '''
+
+    def __init__(self, host=None, user=None, passwd=None):
+        '''
+
+        This constructor is responsible for defining class variables.
+
+        '''
+
+        self.settings = Database()
+
+        # host address
+        if host:
+            self.host = host
+        else:
+            self.host = self.settings.get_db_host()
+
+        # sql username for above host address
+        if user:
+            self.user = user
+        else:
+            self.user = self.settings.get_db_username()
+
+        # sql password for above username
+        if passwd:
+            self.passwd = passwd
+        else:
+            self.passwd = self.settings.get_db_password()
+
+    def connect(self):
+        '''
+
+        This method is responsible for defining the necessary interface to
+        connect to a SQL database.
+
+        '''
+
+        self.client = MongoClient(self.host + ':' + self.port)
+
+    def execute(self, sql_type, payload=None):
+        '''
+
+        This method is responsible for defining the necessary interface to
+        perform NoSQL commands.
+
+        '''
+
+        db = self.client().ml_database
+
+        if sql_type == 'insert':
+            db.dataset.insert(payload)
+        elif sql_type == 'save':
+            db.dataset.save(payload)
+        elif sql_type == 'update':
+            db.dataset.update(payload)
+        elif sql_type == 'remove':
+            db.dataset.remove(payload)
+        elif sql_type == 'drop':
+            db.dataset.drop()
+
+    def disconnect(self):
+        '''
+
+        This method is responsible for defining the necessary interface to
+        disconnect from a NoSQL database.
+
+        '''
+
+        self.client.disconnect()
 
 class SQL(object):
     '''
 
     This class provides an interface to connect, execute commands, and
-    disconnect from a SQL database.  It explicitly inherits pythons 'new-style'
-    class.
-
-    Note: this class is invoked within 'save_xx.py', and 'retrieve_xx.py'
-          modules.
+    disconnect from a SQL database.
 
     Note: this class explicitly inherits the 'new-style' class.
 
@@ -92,7 +167,7 @@ class SQL(object):
                 'id': None,
             }
 
-    def execute(self, sql_statement, sql_type, sql_args=None):
+    def execute(self, sql_type, sql_statement, sql_args=None):
         '''
 
         This method is responsible for defining the necessary interface to
