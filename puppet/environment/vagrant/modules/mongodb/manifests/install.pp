@@ -2,7 +2,7 @@
 ### Install required components for single mongodb instance.
 ###
 class mongodb::install {
-    package::pymongo
+    include package::pymongo
 
     ## local variables
     $packages            = lookup('development')
