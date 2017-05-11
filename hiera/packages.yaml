@@ -53,3 +53,4 @@ development:
             redis: '2.10.5'
             gunicorn: '19.6.0'
             pyyaml: '3.12'
+            pymongo: '3.4.0'
