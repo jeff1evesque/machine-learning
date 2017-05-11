@@ -2,7 +2,7 @@
 
 '''
 
-This file contains various generic SQL-related methods.
+This file contains various SQL, and NoSql related methods.
 
 '''
 
