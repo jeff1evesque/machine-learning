@@ -74,6 +74,10 @@ class NoSQL(object):
             db.dataset.save(payload)
         elif sql_type == 'update':
             db.dataset.update(payload)
+        elif sql_type == 'find':
+            db.dataset.find(payload)
+        elif sql_type == 'find_one':
+            db.dataset.find_one(payload)
         elif sql_type == 'remove':
             db.dataset.remove(payload)
         elif sql_type == 'drop':
