@@ -89,6 +89,7 @@ class NoSQL(object):
 
         self.client.disconnect()
 
+
 class SQL(object):
     '''
 
