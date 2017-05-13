@@ -83,7 +83,7 @@ def svr_json2dict(raw_data, is_json):
 
     # save observation labels, and return
     return {
-        'dataset': list_dataset,
+        'dataset': dataset,
         'observation_labels': observation_labels,
         'feature_count': feature_count
     }
