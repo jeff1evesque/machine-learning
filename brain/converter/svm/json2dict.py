@@ -8,8 +8,6 @@ python dictionary format.
 '''
 
 import json
-from brain.validator.dataset import Validator
-from log.logger import Logger
 
 
 def svm_json2dict(raw_data, is_json):
@@ -32,7 +30,6 @@ def svm_json2dict(raw_data, is_json):
     feature_count = None
     list_dataset = []
     observation_labels = []
-    logger = Logger(__name__, 'error', 'error')
 
     # web-interface
     if not is_json:
@@ -44,20 +41,6 @@ def svm_json2dict(raw_data, is_json):
 
             # dependent variable with single observation
             if type(observations) == dict:
-                for feature_label, feature_value in observations.items():
-                    # validation
-                    validate_fvalue = Validator(feature_value)
-                    validate_fvalue.validate_value()
-
-                    if validate_fvalue.get_errors():
-                        logger.log(validate_fvalue.get_errors())
-                    else:
-                        # restructured data
-                        list_dataset.append({
-                            'dep_variable_label': str(observation_label),
-                            'indep_variable_label': str(feature_label),
-                            'indep_variable_value': feature_value
-                        })
 
                 # generalized feature count in an observation
                 if not feature_count:
@@ -65,25 +48,10 @@ def svm_json2dict(raw_data, is_json):
 
             # dependent variable with multiple observations
             elif type(observations) == list:
-                for observation in observations:
-                    for feature_label, feature_value in observation.items():
-                        # validation
-                        validate_fvalue = Validator(feature_value)
-                        validate_fvalue.validate_value()
 
-                        if validate_fvalue.get_errors():
-                            logger.log(validate_fvalue.get_errors())
-                        else:
-                            # restructured data
-                            list_dataset.append({
-                                'dep_variable_label': str(observation_label),
-                                'indep_variable_label': str(feature_label),
-                                'indep_variable_value': feature_value
-                            })
-
-                    # generalized feature count in an observation
-                    if not feature_count:
-                        feature_count = len(observation)
+                # generalized feature count using only first observation
+                if not feature_count:
+                    feature_count = len(observations[0])
 
             # list of observation label
             observation_labels.append(observation_label)
@@ -98,20 +66,6 @@ def svm_json2dict(raw_data, is_json):
 
         # dependent variable with single observation
         if type(raw_data[1]) == dict:
-            for label, feature in raw_data[1].items():
-                # validation
-                validate_fvalue = Validator(feature)
-                validate_fvalue.validate_value()
-
-                if validate_fvalue.get_errors():
-                    logger.log(validate_fvalue.get_errors())
-                else:
-                    # restructured data
-                    list_dataset.append({
-                        'dep_variable_label': str(observation_label),
-                        'indep_variable_label': str(label),
-                        'indep_variable_value': feature
-                    })
 
             # generalized feature count in an observation
             if not feature_count:
@@ -119,25 +73,10 @@ def svm_json2dict(raw_data, is_json):
 
         # dependent variable with multiple observations
         if type(raw_data[1]) == list:
-            for feature_set in raw_data[1]:
-                for feature_label, feature_value in feature_set.items():
-                    # validation
-                    validate_fvalue = Validator(feature_value)
-                    validate_fvalue.validate_value()
 
-                    if validate_fvalue.get_errors():
-                        logger.log(validate_fvalue.get_errors())
-                    else:
-                        # restructured data
-                        list_dataset.append({
-                            'dep_variable_label': str(observation_label),
-                            'indep_variable_label': str(feature_label),
-                            'indep_variable_value': feature_value
-                        })
-
-                # generalized feature count in an observation
-                if not feature_count:
-                    feature_count = len(feature_set)
+            # generalized feature count using only first observation
+            if not feature_count:
+                feature_count = len(raw_data[1][0])
 
     # close file
     if not is_json:

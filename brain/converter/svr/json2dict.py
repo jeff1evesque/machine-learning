@@ -8,8 +8,6 @@ python dictionary format.
 '''
 
 import json
-from brain.validator.dataset import Validator
-from log.logger import Logger
 
 
 def svr_json2dict(raw_data, is_json):
@@ -32,11 +30,11 @@ def svr_json2dict(raw_data, is_json):
     feature_count = None
     list_dataset = []
     observation_labels = []
-    logger = Logger(__name__, 'error', 'error')
 
     # web-interface
     if not is_json:
         dataset = json.load(raw_data)
+
         for criterion, predictors in dataset.items():
             observation_label = criterion
 
@@ -45,20 +43,6 @@ def svr_json2dict(raw_data, is_json):
 
             # criterion with single observation
             if type(predictors) == dict:
-                for label, predictor in predictors.items():
-                    # validation (part 1)
-                    validate_predictor = Validator(predictor)
-                    validate_predictor.validate_value()
-
-                    if validate_predictor.get_errors():
-                        logger.log(validate_predictor.get_errors())
-                    else:
-                        # restructured data
-                        list_dataset.append({
-                            'dep_variable_label': str(observation_label),
-                            'indep_variable_label': str(label),
-                            'indep_variable_value': predictor
-                        })
 
                 # generalized feature count in an observation
                 if not feature_count:
@@ -67,24 +51,9 @@ def svr_json2dict(raw_data, is_json):
             # criterion with multiple observation
             if type(predictors) == list:
                 for criterion in predictors:
-                    for label, predictor in criterion.items():
-                        # validation (part 1)
-                        validate_predictor = Validator(predictor)
-                        validate_predictor.validate_value()
-
-                        if validate_predictor.get_errors():
-                            logger.log(validate_predictor.get_errors())
-                        else:
-                            # restructured data
-                            list_dataset.append({
-                                'dep_variable_label': str(observation_label),
-                                'indep_variable_label': str(label),
-                                'indep_variable_value': predictor
-                            })
-
-                        # generalized feature count in an observation
-                        if not feature_count:
-                            feature_count = len(criterion.items())
+                    # generalized feature count in an observation
+                    if not feature_count:
+                        feature_count = len(criterion.items())
 
     # programmatic-interface
     else:
@@ -96,42 +65,15 @@ def svr_json2dict(raw_data, is_json):
 
             # criterion with single observation
             if type(predictors) == dict:
-                for label, predictor in predictors.items():
-                    # validation (part 1)
-                    validate_predictor = Validator(predictor)
-                    validate_predictor.validate_value()
 
-                    if validate_predictor.get_errors():
-                        logger.log(validate_predictor.get_errors())
-                    else:
-                        # restructured data
-                        list_dataset.append({
-                            'dep_variable_label': str(criterion),
-                            'indep_variable_label': str(label),
-                            'indep_variable_value': predictor
-                        })
-
-            # generalized feature count in an observation
-            if not feature_count:
-                feature_count = len(predictors.items())
+                # generalized feature count in an observation
+                if not feature_count:
+                    feature_count = len(predictors.items())
 
             # criterion with multiple observation
             if type(predictors) == list:
-                for single_predictors in predictors:
-                    for label, predictor in single_predictors.items():
-                        # validation (part 1)
-                        validate_predictor = Validator(predictor)
-                        validate_predictor.validate_value()
 
-                        if validate_predictor.get_errors():
-                            logger.log(validate_predictor.get_errors())
-                        else:
-                            # restructured data
-                            list_dataset.append({
-                                'dep_variable_label': str(criterion),
-                                'indep_variable_label': str(label),
-                                'indep_variable_value': predictor
-                            })
+                for single_predictors in predictors:
 
                     # generalized feature count in an observation
                     if not feature_count:
