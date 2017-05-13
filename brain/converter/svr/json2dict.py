@@ -50,10 +50,10 @@ def svr_json2dict(raw_data, is_json):
 
             # criterion with multiple observation
             if type(predictors) == list:
-                for criterion in predictors:
-                    # generalized feature count in an observation
-                    if not feature_count:
-                        feature_count = len(criterion.items())
+
+                # generalized feature count in an observation
+                if not feature_count:
+                    feature_count = len(predictors[0].items())
 
     # programmatic-interface
     else:
@@ -73,11 +73,9 @@ def svr_json2dict(raw_data, is_json):
             # criterion with multiple observation
             if type(predictors) == list:
 
-                for single_predictors in predictors:
-
-                    # generalized feature count in an observation
-                    if not feature_count:
-                        feature_count = len(single_predictors.items())
+                # generalized feature count in an observation
+                if not feature_count:
+                    feature_count = len(predictors[0].items())
 
     # close file
     if not is_json:
