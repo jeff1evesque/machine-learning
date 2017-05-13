@@ -40,9 +40,8 @@ class Validator(object):
         This method validates the premodel settings for the 'data_new',
         'data_append', 'model_generate', or 'model_predict' sessions.
 
-        Note: This method does not validate the associated 'file upload(s)'.
-              The latter is validated via 'validate_file_extension.py', and
-              'validate_dataset.py'.
+        Note: This method does not validate the associated 'file upload(s)',
+              which is the responsibility of the mongodb query process.
 
         '''
 

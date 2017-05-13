@@ -58,7 +58,6 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none():
             session.validate_premodel_settings()
-            session.validate_file_extension()
             session.check()
 
             session_entity = session.save_entity('data_new')
@@ -112,7 +111,6 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none() and not session.get_errors():
             session.validate_premodel_settings()
-            session.validate_file_extension()
             session.check()
 
             session_entity = session.save_entity('data_append', session_id)

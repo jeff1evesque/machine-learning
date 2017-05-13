@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from brain.session.base import Base
 from flask import current_app, session
-from brain.session.data.arbiter import save_info, save_count, save_olabels, reduce
+from brain.session.data.arbiter import save_info, save_count, save_olabels
 from brain.session.data.dataset import save_dataset, dataset2dict
 
 
@@ -70,25 +70,6 @@ class BaseData(Base):
         # return result
         if response['error']:
             self.list_error.append(response['error'])
-
-    def validate_file_extension(self):
-        '''
-
-        This method validates the file extension for each uploaded dataset,
-        and returns the unique (non-duplicate) dataset.
-
-        @self.session_type, defined from 'base.py' superclass.
-
-        '''
-
-        # validate and reduce dataset
-        response = reduce(self.premodel_data, self.session_type)
-
-        # return result
-        if response['error']:
-            self.list_error.append(response['error'])
-        else:
-            self.upload = response['dataset']
 
     def validate_id(self, session_id):
         '''
@@ -173,8 +154,6 @@ class BaseData(Base):
 
         This method converts the supplied csv, or xml file upload(s) to a
             uniform dict object.
-
-        @self.upload, defined from 'validate_file_extension'.
 
         '''
 
