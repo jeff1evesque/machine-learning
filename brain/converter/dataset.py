@@ -129,25 +129,3 @@ class Dataset(object):
 
         # return data
         return data['dataset']
-
-    def get_observation_labels(self):
-        '''
-
-        This method returns a unique list of (independent variable) labels
-        that can be expected on any given observation instance. Since both
-        'csv_to_dict', and 'xml_to_dict' defines the class variable this
-        method returns, either method needs to be called before this one.
-
-        '''
-
-        return self.observation_labels
-
-    def get_feature_count(self):
-        '''
-
-        This method returns the unique count of features that can be expected
-        on any given observation instance.
-
-        '''
-
-        return self.count_features
