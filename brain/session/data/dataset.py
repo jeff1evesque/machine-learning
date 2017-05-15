@@ -27,7 +27,8 @@ def dataset2dict(id_entity, model_type, upload):
     dataset = []
     observation_labels = []
     list_error = []
-    json_upload = upload['dataset'].get('json_string', None)
+    dataset = upload['data']['dataset']
+    json_upload = upload['data']['dataset'].get('json_string', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
     if json_upload:
@@ -67,27 +68,25 @@ def dataset2dict(id_entity, model_type, upload):
                 dataset.append({
                     'id_entity': id_entity,
                     'premodel_dataset': converted,
-                    'count_features': count_features
+                    'settings': upload['settings']
                 })
 
         # programmatic-interface
         elif json_upload:
             # classification
             if upload['settings']['model_type'] == list_model_type[0]:
-                for dataset_json in json_upload.items():
-                    # conversion
-                    converter = Dataset(dataset_json, model_type, True)
-                    converted = converter.json_to_dict()
-                    count_features = converter.get_feature_count()
+                # conversion
+                converter = Dataset(dataset_json, model_type, True)
+                converted = converter.json_to_dict()
 
-                    observation_labels.append(str(dataset_json[0]))
+                observation_labels.append(str(dataset_json[0]))
 
-                    # build new (relevant) dataset
-                    dataset.append({
-                        'id_entity': id_entity,
-                        'premodel_dataset': converted,
-                        'count_features': count_features
-                    })
+                # build new (relevant) dataset
+                dataset.append({
+                    'id_entity': id_entity,
+                    'premodel_dataset': converted,
+                    'settings': upload['settings']
+                })
 
             # regression
             elif upload['settings']['model_type'] == list_model_type[1]:
@@ -114,7 +113,6 @@ def dataset2dict(id_entity, model_type, upload):
     if len(list_error) > 0:
         return {
             'dataset': dataset,
-            'observation_labels': observation_labels,
             'error': list_error
         }
     else:
