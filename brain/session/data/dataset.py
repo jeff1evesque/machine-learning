@@ -24,10 +24,10 @@ def dataset2dict(id_entity, model_type, upload):
     '''
 
     # local variables
-    dataset = []
-    observation_labels = []
     list_error = []
+    payload = []
     dataset = upload['data']['dataset']
+    settings = upload['data']['settings']
     json_upload = upload['data']['dataset'].get('json_string', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
@@ -38,8 +38,10 @@ def dataset2dict(id_entity, model_type, upload):
 
     try:
         # web-interface: define flag to convert to dataset to json
-        if upload['dataset']['file_upload']:
-            for val in upload['dataset']['file_upload']:
+        if dataset['file_upload']:
+            payload = []
+
+            for val in dataset['file_upload']:
                 # reset file-pointer
                 val['file'].seek(0)
 
@@ -58,43 +60,36 @@ def dataset2dict(id_entity, model_type, upload):
                 elif val['type'] == 'xml':
                     converted = converter.xml_to_dict()
 
-                count_features = converter.get_feature_count()
-                labels = converter.get_observation_labels()
-
-                # assign observation labels
-                observation_labels.append(labels)
-
                 # build new (relevant) dataset
-                dataset.append({
+                payload.append({
                     'id_entity': id_entity,
                     'premodel_dataset': converted,
-                    'settings': upload['settings']
+                    'settings': settings
                 })
 
         # programmatic-interface
         elif json_upload:
             # classification
-            if upload['settings']['model_type'] == list_model_type[0]:
+            if settings['model_type'] == list_model_type[0]:
                 # conversion
-                converter = Dataset(upload['dataset'], model_type, True)
+                converter = Dataset(dataset, model_type, True)
                 converted = converter.json_to_dict()
 
                 # build new (relevant) dataset
-                dataset.append({
+                payload.append({
                     'id_entity': id_entity,
                     'premodel_dataset': converted,
-                    'settings': upload['settings']
+                    'settings': settings
                 })
 
             # regression
-            elif upload['settings']['model_type'] == list_model_type[1]:
+            elif settings['model_type'] == list_model_type[1]:
                 # conversion
                 converter = Dataset(json_upload, model_type, True)
                 converted = converter.json_to_dict()
-                count_features = converter.get_feature_count()
 
                 # build new (relevant) dataset
-                dataset.append({
+                payload.append({
                     'id_entity': id_entity,
                     'premodel_dataset': converted,
                     'count_features': count_features
@@ -113,7 +108,6 @@ def dataset2dict(id_entity, model_type, upload):
     else:
         return {
             'dataset': dataset,
-            'observation_labels': observation_labels,
             'error': False
         }
 
