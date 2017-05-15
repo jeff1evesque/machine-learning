@@ -28,7 +28,6 @@ def svr_json2dict(raw_data, is_json):
 
     # local variables
     feature_count = None
-    list_dataset = []
     observation_labels = []
 
     # web-interface
@@ -36,8 +35,6 @@ def svr_json2dict(raw_data, is_json):
         dataset = json.load(raw_data)
 
         for criterion, predictors in dataset.items():
-            observation_label = criterion
-
             # list of observation label
             observation_labels.append(criterion)
 

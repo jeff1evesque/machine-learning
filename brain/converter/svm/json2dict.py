@@ -28,7 +28,6 @@ def svm_json2dict(raw_data, is_json):
 
     # local variables
     feature_count = None
-    list_dataset = []
     observation_labels = []
 
     # web-interface

@@ -76,10 +76,8 @@ def dataset2dict(id_entity, model_type, upload):
             # classification
             if upload['settings']['model_type'] == list_model_type[0]:
                 # conversion
-                converter = Dataset(dataset_json, model_type, True)
+                converter = Dataset(upload['dataset'], model_type, True)
                 converted = converter.json_to_dict()
-
-                observation_labels.append(str(dataset_json[0]))
 
                 # build new (relevant) dataset
                 dataset.append({
@@ -94,9 +92,6 @@ def dataset2dict(id_entity, model_type, upload):
                 converter = Dataset(json_upload, model_type, True)
                 converted = converter.json_to_dict()
                 count_features = converter.get_feature_count()
-
-                for criterion, predictors in json_upload.items():
-                    observation_labels.append(criterion)
 
                 # build new (relevant) dataset
                 dataset.append({

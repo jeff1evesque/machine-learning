@@ -9,8 +9,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from brain.database.entity import Entity
-from brain.database.feature import Feature
-from brain.database.observation import Observation
 
 
 def save_info(dataset, session_type, userid):
