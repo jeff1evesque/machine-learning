@@ -86,24 +86,19 @@ class Dataset(object):
         This method converts the supplied json file-object to a python
         dictionary.
 
-        @self.observation_label, list containing dependent variable labels.
-
         '''
 
-        # convert classification dataset
-        if self.model_type == self.classification:
-            data = svm_json2dict(self.raw_data, self.is_json)
+        # web-interface
+        if not is_json:
+            dataset = json.load(raw_data)
 
-        # convert regression dataset
-        elif self.model_type == self.regression:
-            data = svr_json2dict(self.raw_data, self.is_json)
-
-        # record observataion labels, and feature count
-        self.observation_labels = data['observation_labels']
-        self.count_features = data['feature_count']
+        # programmatic-interface
+        else:
+            dataset = raw_data
+            raw_data.close()
 
         # return data
-        return data['dataset']
+        return dataset
 
     def xml_to_dict(self):
         '''
