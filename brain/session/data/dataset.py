@@ -39,8 +39,6 @@ def dataset2dict(id_entity, model_type, upload):
     try:
         # web-interface: define flag to convert to dataset to json
         if dataset['file_upload']:
-            payload = []
-
             for val in dataset['file_upload']:
                 # reset file-pointer
                 val['file'].seek(0)
