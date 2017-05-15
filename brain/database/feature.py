@@ -39,37 +39,6 @@ class Feature(object):
         self.classification = current_app.config.get('MODEL_TYPE')[0]
         self.regression = current_app.config.get('MODEL_TYPE')[1]
 
-    def save_count(self):
-        '''
-
-        This method stores the number of features that can be expected in a
-        given observation.
-
-        @sql_statement, is a sql format string, and not a python string.
-            Therefore, '%s' is used for argument substitution.
-
-        '''
-
-        # insert / update dataset value(s)
-        self.sql.connect(self.db_ml)
-        sql_statement = 'INSERT INTO tbl_feature_count (id_entity, '\
-            'count_features) VALUES(%s, %s)'
-        args = (
-            self.premodel_data['id_entity'],
-            self.premodel_data['count_features'],
-        )
-        response = self.sql.execute('insert', sql_statement, args)
-
-        # retrieve any error(s), disconnect from database
-        response_error = self.sql.get_errors()
-        self.sql.disconnect()
-
-        # return result
-        if response_error:
-            return {'status': False, 'error': response_error}
-        else:
-            return {'status': True, 'error': None, 'id': response['id']}
-
     def save_feature(self, model_type):
         '''
 
