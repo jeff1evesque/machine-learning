@@ -90,7 +90,7 @@ def dataset2dict(id_entity, model_type, upload):
                 payload.append({
                     'id_entity': id_entity,
                     'premodel_dataset': converted,
-                    'count_features': count_features
+                    'settings': settings
                 })
 
     except Exception as error:
@@ -100,12 +100,12 @@ def dataset2dict(id_entity, model_type, upload):
     # return results
     if len(list_error) > 0:
         return {
-            'dataset': dataset,
+            'dataset': payload,
             'error': list_error
         }
     else:
         return {
-            'dataset': dataset,
+            'dataset': payload,
             'error': False
         }
 
