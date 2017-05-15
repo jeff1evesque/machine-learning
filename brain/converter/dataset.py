@@ -8,10 +8,8 @@ This file restructures only the supplied dataset(s).
 
 from flask import current_app
 from brain.converter.svm.csv2dict import svm_csv2dict
-from brain.converter.svm.json2dict import svm_json2dict
 from brain.converter.svm.xml2dict import svm_xml2dict
 from brain.converter.svr.csv2dict import svr_csv2dict
-from brain.converter.svr.json2dict import svr_json2dict
 from brain.converter.svr.xml2dict import svr_xml2dict
 
 
@@ -49,8 +47,6 @@ class Dataset(object):
 
         self.raw_data = raw_data
         self.is_json = is_json
-        self.observation_labels = None
-        self.count_features = None
         self.model_type = model_type
         self.classification = current_app.config.get('MODEL_TYPE')[0]
         self.regression = current_app.config.get('MODEL_TYPE')[1]
@@ -88,16 +84,12 @@ class Dataset(object):
 
         '''
 
-        # web-interface
-        if not is_json:
-            dataset = json.load(raw_data)
+        if self.is_json:
+            dataset = self.raw_data
 
-        # programmatic-interface
         else:
-            dataset = raw_data
-            raw_data.close()
+            dataset = json.load(self.raw_data)
 
-        # return data
         return dataset
 
     def xml_to_dict(self):
