@@ -8,13 +8,7 @@ This file initializes the following database tables within the
     @tbl_dataset_entity, record the dataset instance, and the corresponding
         userid who created, or modified the information, and the model type.
 
-        @tbl_feature_count, record the number of features expected within an
-            observation, with respect to a given 'id_entity'.
-
         @model_type, reference table containing all possible model types.
-
-        @tbl_observation_label, record every unique observation label, with
-            respect to a given 'id_entity'.
 
     @tbl_prediction_results, record the prediction result, with respect to the
         corresponding 'model_type' column. The following are associated tables:
@@ -95,17 +89,6 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # create 'tbl_feature_count'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_feature_count (
-                        id_size INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_entity INT NOT NULL,
-                        count_features INT NOT NULL,
-                        INDEX (id_size)
-                    );
-                    '''
-    cur.execute(sql_statement)
-
     # create 'tbl_dataset_entity'
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
@@ -117,17 +100,6 @@ with conn:
                         uid_modified INT NULL,
                         datetime_modified DATETIME NULL,
                         INDEX (id_entity)
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    # create 'tbl_observation_label'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_observation_label (
-                        id_label INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_entity INT NOT NULL,
-                        dep_variable_label VARCHAR(75) NOT NULL,
-                        INDEX (id_label)
                     );
                     '''
     cur.execute(sql_statement)
