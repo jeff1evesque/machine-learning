@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from brain.session.base import Base
 from flask import current_app, session
-from brain.session.data.arbiter import save_info, save_count, save_olabels
+from brain.session.data.arbiter import save_info
 from brain.session.data.dataset import save_dataset, dataset2dict
 
 
@@ -44,7 +44,6 @@ class BaseData(Base):
         Base.__init__(self, premodel_data)
 
         # class variable
-        self.observation_labels = []
         self.list_error = []
         self.dataset = []
         self.model_type = premodel_data['data']['settings']['model_type']
@@ -120,7 +119,6 @@ class BaseData(Base):
         if response['error']:
             self.list_error.append(response['error'])
         else:
-            self.observation_labels.append(response['observation_labels'])
             self.dataset = response['dataset']
 
     def get_errors(self):
