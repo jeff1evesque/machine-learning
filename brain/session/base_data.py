@@ -48,28 +48,12 @@ class BaseData(Base):
         self.list_error = []
         self.dataset = []
         self.model_type = premodel_data['data']['settings']['model_type']
+        self.premodel_data = premodel_data
 
         if 'uid' in session:
             self.uid = session['uid']
         else:
             self.uid = current_app.config.get('USER_ID')
-
-    def save_feature_count(self):
-        '''
-
-        This method saves the number of features that can be expected in a
-        given observation with respect to 'id_entity'.
-
-        Note: this method needs to execute after 'dataset'
-
-        '''
-
-        # save feature count
-        response = save_count(self.dataset[0])
-
-        # return result
-        if response['error']:
-            self.list_error.append(response['error'])
 
     def validate_id(self, session_id):
         '''
@@ -121,34 +105,6 @@ class BaseData(Base):
         if response['error']:
             self.list_error.append(response['error'])
 
-    def save_observation_label(self, session_type, session_id):
-        '''
-
-        This method saves the list of unique independent variable labels,
-        which can be expected in any given observation, into the sql
-        database. This list of labels, is predicated on a supplied session
-        id (entity id).
-
-        @self.observation_labels, list of features (independent variables),
-            defined after invoking the 'dataset' method.
-
-        @session_id, the corresponding returned session id from invoking the
-            'save_entity' method.
-
-        '''
-
-        # save observation labels
-        response = save_olabels(
-            session_type,
-            session_id,
-            self.observation_labels[0],
-            self.premodel_data['data']['dataset']['file_upload']
-        )
-
-        # return result
-        if response['error']:
-            self.list_error.append(response['error'])
-
     def convert_dataset(self, id_entity):
         '''
 
@@ -158,7 +114,7 @@ class BaseData(Base):
         '''
 
         # convert to dictionary
-        response = dataset2dict(id_entity, self.model_type, self.upload)
+        response = dataset2dict(id_entity, self.model_type, self.premodel_data)
 
         # return result
         if response['error']:
