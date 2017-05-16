@@ -10,7 +10,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from flask import current_app
 from brain.converter.dataset import Dataset
-from brain.database.feature import Feature
 
 
 def dataset2dict(id_entity, model_type, upload):
@@ -25,6 +24,7 @@ def dataset2dict(id_entity, model_type, upload):
 
     # local variables
     list_error = []
+    converted = []
     dataset = upload['data']['dataset']
     settings = upload['data']['settings']
     json_upload = upload['data']['dataset'].get('json_string', None)
@@ -38,8 +38,6 @@ def dataset2dict(id_entity, model_type, upload):
     try:
         # web-interface: define flag to convert to dataset to json
         if dataset['file_upload']:
-            converted = []
-
             for val in dataset['file_upload']:
                 # reset file-pointer
                 val['file'].seek(0)
@@ -55,7 +53,7 @@ def dataset2dict(id_entity, model_type, upload):
                 if val['type'] == 'csv':
                     converted.append(converter.csv_to_dict())
                 elif val['type'] == 'json':
-                    converted.append(converted = converter.json_to_dict())
+                    converted.append(converter.json_to_dict())
                 elif val['type'] == 'xml':
                     converted.append(converter.xml_to_dict())
 
@@ -72,7 +70,7 @@ def dataset2dict(id_entity, model_type, upload):
             if settings['model_type'] == list_model_type[0]:
                 # conversion
                 converter = Dataset(dataset, model_type, True)
-                converted = converter.json_to_dict()
+                converted.append(converter.json_to_dict())
 
                 # build new (relevant) dataset
                 payload = {
@@ -85,7 +83,7 @@ def dataset2dict(id_entity, model_type, upload):
             elif settings['model_type'] == list_model_type[1]:
                 # conversion
                 converter = Dataset(json_upload, model_type, True)
-                converted = converter.json_to_dict()
+                converted.append(converter.json_to_dict())
 
                 # build new (relevant) dataset
                 payload = {
@@ -109,31 +107,3 @@ def dataset2dict(id_entity, model_type, upload):
             'dataset': payload,
             'error': False
         }
-
-
-def save_dataset(dataset, model_type):
-    '''
-
-    This method saves each dataset element (independent variable value) into
-    the sql database.
-
-    '''
-
-    # variables
-    list_error = []
-
-    # save dataset
-    for data in dataset:
-        for select_data in data['premodel_dataset']:
-            db_save = Feature({
-                'premodel_dataset': select_data,
-                'id_entity': data['id_entity'],
-            })
-
-            # save dataset element, append error(s)
-            db_return = db_save.save_feature(model_type)
-            if db_return['error']:
-                list_error.append(db_return['error'])
-
-    # return
-    return {'error': list_error}

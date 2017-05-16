@@ -14,6 +14,7 @@ from brain.session.base import Base
 from flask import current_app, session
 from brain.session.data.arbiter import save_info
 from brain.session.data.dataset import save_dataset, dataset2dict
+from brain.database.dataset import save_collection
 
 
 class BaseData(Base):
@@ -90,19 +91,21 @@ class BaseData(Base):
     def save_premodel_dataset(self):
         '''
 
-        This method saves each dataset element (independent variable value)
-        into the sql database.
-
-        @self.dataset, defined from the 'dataset' method.
+        This method saves the entire the dataset collection, as a json
+        document, into the nosql implementation.
 
         '''
 
         # save dataset
-        response = save_dataset(self.dataset, self.model_type)
+        response = save_collection(self.dataset)
 
         # return result
         if response['error']:
             self.list_error.append(response['error'])
+            return {'result': None, 'error': response['error']}
+
+        else:
+            return {'result': response['result'], error: None}
 
     def convert_dataset(self, id_entity):
         '''
