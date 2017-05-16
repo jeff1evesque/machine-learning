@@ -58,11 +58,11 @@ def dataset2dict(id_entity, model_type, upload):
                     converted.append(converter.xml_to_dict())
 
             # build new (relevant) dataset
-            payload.append({
+            payload = {
                 'id_entity': id_entity,
                 'premodel_dataset': converted,
                 'settings': settings
-            })
+            }
 
         # programmatic-interface
         elif json_upload:
