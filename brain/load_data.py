@@ -68,11 +68,6 @@ class Load_Data(object):
 
                 session.convert_dataset(session_id)
                 session.check()
-                session.save_feature_count()
-                session.check()
-
-                session.save_observation_label('data_new', session_id)
-                session.check()
 
                 session.save_premodel_dataset()
                 session.check()
