@@ -29,6 +29,7 @@ class NoSQL(object):
         '''
 
         self.settings = Database()
+        self.proceed = True
 
         # host address
         if host:
@@ -56,9 +57,24 @@ class NoSQL(object):
 
         '''
 
-        self.client = MongoClient(self.host + ':' + self.port)
+        try:
+            self.client = MongoClient(self.host + ':' + self.port)
 
-    def execute(self, sql_type, payload=None):
+            return {
+                'status': True,
+                'error': None,
+            }
+
+        except MongoClient.Error, error:
+            self.proceed = False
+            self.list_error.append(error)
+
+            return {
+                'status': False,
+                'error': self.list_error,
+            }
+
+    def execute(self, operation, payload=None):
         '''
 
         This method is responsible for defining the necessary interface to
@@ -74,22 +90,45 @@ class NoSQL(object):
 
         '''
 
-        db = self.client().ml_database
+        if self.proceed:
+            try:
+                db = self.client().ml_database
 
-        if sql_type == 'insert':
-            db.dataset.insert(payload)
-        elif sql_type == 'save':
-            db.dataset.save(payload)
-        elif sql_type == 'update':
-            db.dataset.update(payload)
-        elif sql_type == 'find':
-            db.dataset.find(payload)
-        elif sql_type == 'find_one':
-            db.dataset.find_one(payload)
-        elif sql_type == 'remove':
-            db.dataset.remove(payload)
-        elif sql_type == 'drop':
-            db.dataset.drop()
+                if operation == 'insert_one':
+                    db.dataset.insert_one(payload)
+                if operation == 'insert_many':
+                    db.dataset.insert_many(payload)
+                elif operation == 'update_one':
+                    db.dataset.update_one(payload)
+                elif operation == 'update_many':
+                    db.dataset.update_many(payload)
+                elif operation == 'delete_one':
+                    db.dataset.delete_one(payload)
+                elif operation == 'delete_many':
+                    db.dataset.delete_many(payload)
+                elif operation == 'find':
+                    db.dataset.find(payload)
+                elif operation == 'find_one':
+                    db.dataset.find_one(payload)
+                elif operation == 'delete_one':
+                    db.dataset.delete_one(payload)
+                elif operation == 'delete_many':
+                    db.dataset.delete_many(payload)
+                elif operation == 'drop_collection':
+                    db.dataset.drop_collection(payload)
+
+            except db.Error, error:
+                self.list_error.append(error)
+
+                return {
+                    'status': False,
+                    'error': self.list_error,
+                }
+
+            return {
+                'status': True,
+                'error': None,
+            }
 
     def disconnect(self):
         '''
@@ -99,7 +138,31 @@ class NoSQL(object):
 
         '''
 
-        self.client.disconnect()
+        if self.proceed:
+            try:
+                self.client.disconnect()
+
+                return {
+                    'status': True,
+                    'error': None,
+                }
+
+            except MongoClient.Error, error:
+                self.list_error.append(error)
+
+                return {
+                    'status': False,
+                    'error': self.list_error,
+                }
+
+    def get_errors(self):
+        '''
+
+        This method returns all errors pertaining to the instantiated class.
+
+        '''
+
+        return self.list_error
 
 
 class SQL(object):
@@ -181,26 +244,26 @@ class SQL(object):
                 'id': None,
             }
 
-    def execute(self, sql_type, sql_statement, sql_args=None):
+    def execute(self, operation, statement, sql_args=None):
         '''
 
         This method is responsible for defining the necessary interface to
         perform SQL commands.
 
         @sql_args, is a tuple used for argument substitution with the supplied
-            'sql_statement'.
+            'statement'.
 
         '''
 
         if self.proceed:
             try:
-                self.cursor.execute(sql_statement, sql_args)
+                self.cursor.execute(statement, sql_args)
 
                 # commit change(s), return lastrowid
-                if sql_type in ['insert', 'delete', 'update']:
+                if operation in ['insert', 'delete', 'update']:
                     self.conn.commit()
                 # fetch all the rows, return as list of lists.
-                elif sql_type == 'select':
+                elif operation == 'select':
                     result = self.cursor.fetchall()
 
             except MariaClient.Error, error:
@@ -214,13 +277,13 @@ class SQL(object):
 
         if sql_type in ['insert', 'delete', 'update']:
             return {
-                'status': False,
+                'status': True,
                 'error': self.list_error,
                 'id': self.cursor.lastrowid,
             }
-        elif sql_type == 'select':
+        elif operation == 'select':
             return {
-                'status': False,
+                'status': True,
                 'error': self.list_error,
                 'result': result,
             }
