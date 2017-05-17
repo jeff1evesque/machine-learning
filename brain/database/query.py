@@ -65,7 +65,7 @@ class NoSQL(object):
                 'error': None,
             }
 
-        except MongoClient.Error, error:
+        except MongoClient.errors, error:
             self.proceed = False
             self.list_error.append(error)
 
@@ -151,7 +151,7 @@ class NoSQL(object):
                     'error': None,
                 }
 
-            except MongoClient.Error, error:
+            except MongoClient.errors, error:
                 self.list_error.append(error)
 
                 return {
