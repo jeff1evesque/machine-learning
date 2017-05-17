@@ -91,23 +91,23 @@ class NoSQL(object):
                 db = self.client().ml_database
 
                 if operation == 'insert_one':
-                    db.dataset.insert_one(payload)
+                    result = db.dataset.insert_one(payload)
                 if operation == 'insert_many':
-                    db.dataset.insert_many(payload)
+                    result = db.dataset.insert_many(payload)
                 elif operation == 'update_one':
-                    db.dataset.update_one(payload)
+                    result = db.dataset.update_one(payload)
                 elif operation == 'update_many':
-                    db.dataset.update_many(payload)
+                    result = db.dataset.update_many(payload)
                 elif operation == 'delete_one':
-                    db.dataset.delete_one(payload)
+                    result = db.dataset.delete_one(payload)
                 elif operation == 'delete_many':
-                    db.dataset.delete_many(payload)
+                    result = db.dataset.delete_many(payload)
                 elif operation == 'find':
-                    db.dataset.find(payload)
+                    result = db.dataset.find(payload)
                 elif operation == 'find_one':
-                    db.dataset.find_one(payload)
+                    result = db.dataset.find_one(payload)
                 elif operation == 'map_reduce':
-                    db.dataset.map_reduce(
+                    result = db.dataset.map_reduce(
                         payload['map'],
                         payload['reduce'],
                         payload['out'],
@@ -115,24 +115,22 @@ class NoSQL(object):
                         payload['kwargs']
                     )
                 elif operation == 'delete_one':
-                    db.dataset.delete_one(payload)
+                    result = db.dataset.delete_one(payload)
                 elif operation == 'delete_many':
-                    db.dataset.delete_many(payload)
+                    result = db.dataset.delete_many(payload)
                 elif operation == 'drop_collection':
-                    db.dataset.drop_collection(payload)
+                    result = db.dataset.drop_collection(payload)
 
             except db.Error, error:
                 self.list_error.append(error)
 
                 return {
                     'status': False,
+                    'result': result,
                     'error': self.list_error,
                 }
 
-            return {
-                'status': True,
-                'error': None,
-            }
+            return {'status': True, 'result': result, 'error': None}
 
     def disconnect(self):
         '''

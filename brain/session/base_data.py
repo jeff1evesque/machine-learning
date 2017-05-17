@@ -106,7 +106,7 @@ class BaseData(Base):
             return {'result': None, 'error': response['error']}
 
         else:
-            return {'result': response['result'], error: None}
+            return {'result': response['result'], 'error': None}
 
     def convert_dataset(self, id_entity):
         '''
