@@ -6,6 +6,7 @@ This file restructures only the supplied dataset(s).
 
 '''
 
+import json
 from flask import current_app
 from brain.converter.svm.csv2dict import svm_csv2dict
 from brain.converter.svm.xml2dict import svm_xml2dict

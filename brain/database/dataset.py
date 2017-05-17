@@ -67,7 +67,7 @@ class Collection(object):
         if response_error:
             return {'status': False, 'error': response_error}
         else:
-            return {'status': True, 'error': None, 'id': response['id']}
+            return {'status': True, 'error': None}
 
     def get_count(self, id_entity):
         '''

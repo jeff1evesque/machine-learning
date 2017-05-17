@@ -279,7 +279,7 @@ class SQL(object):
                     'result': None,
                 }
 
-        if sql_type in ['insert', 'delete', 'update']:
+        if operation in ['insert', 'delete', 'update']:
             return {
                 'status': True,
                 'error': self.list_error,

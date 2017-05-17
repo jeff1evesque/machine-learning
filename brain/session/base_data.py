@@ -13,7 +13,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.session.base import Base
 from flask import current_app, session
 from brain.session.data.arbiter import save_info
-from brain.session.data.dataset import save_dataset, dataset2dict
+from brain.session.data.dataset import dataset2dict
 from brain.database.dataset import Collection
 
 
