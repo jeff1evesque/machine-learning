@@ -110,6 +110,14 @@ class NoSQL(object):
                     db.dataset.find(payload)
                 elif operation == 'find_one':
                     db.dataset.find_one(payload)
+                elif operation == 'map_reduce':
+                    db.dataset.map_reduce(
+                        payload['map'],
+                        payload['reduce'],
+                        payload['out'],
+                        payload['full_response'],
+                        payload['kwargs']
+                    )
                 elif operation == 'delete_one':
                     db.dataset.delete_one(payload)
                 elif operation == 'delete_many':
