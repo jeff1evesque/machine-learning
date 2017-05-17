@@ -97,7 +97,8 @@ class BaseData(Base):
         '''
 
         # save dataset
-        response = save_collection(self.dataset)
+        cursor = Collection()
+        response = cursor.save_collection('insert', self.dataset)
 
         # return result
         if response['error']:
