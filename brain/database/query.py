@@ -80,13 +80,9 @@ class NoSQL(object):
         This method is responsible for defining the necessary interface to
         perform NoSQL commands.
 
-        @find, returns a cursor instance, which can be iterated over every
-            matching document.
-        @find_one, returns a single document, matching a query.
-        @remove, removes a document entirely, or conditionally.
-        @drop, removes an entire specified collection.
+        Note: collection level operations can be further reviewed:
 
-        Note: document(s) are inserted into a mongodb collection.
+          - http://api.mongodb.com/python/current/api/pymongo/collection.html
 
         '''
 
