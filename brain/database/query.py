@@ -53,7 +53,7 @@ class NoSQL(object):
         '''
 
         This method is responsible for defining the necessary interface to
-        connect to a SQL database.
+        connect to a NoSQL database.
 
         '''
 
