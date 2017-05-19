@@ -49,11 +49,11 @@ class NoSQL(object):
         else:
             self.passwd = self.settings.get_db_password()
 
-        self.settings = {
+        self.args = {
             'host': self.host,
-            'database': database,
-            'username': self.user,
-            'password': self.passwd,
+            'db': database,
+            'user': self.user,
+            'pass': self.passwd,
             'options': options
         }
 
@@ -66,8 +66,10 @@ class NoSQL(object):
         '''
 
         try:
-            self.client = MongoClient("mongodb://{username}:{password}@{host}/{database}?{options}".format(**self.settings))
-            self.database = self.client[database]
+            self.client = MongoClient(
+                "mongodb://{user}:{pass}@{host}/{db}?{options}".format(**self.args)
+            )
+            self.database = self.client[self.args.database]
             self.collection = self.database[collection]
 
             return {
