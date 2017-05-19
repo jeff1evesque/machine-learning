@@ -21,7 +21,7 @@ class NoSQL(object):
 
     '''
 
-    def __init__(self, host=None, user=None, passwd=None):
+    def __init__(self, database, options, host=None, user=None, passwd=None):
         '''
 
         This constructor is responsible for defining class variables.
@@ -49,7 +49,15 @@ class NoSQL(object):
         else:
             self.passwd = self.settings.get_db_password()
 
-    def connect(self, database, collection):
+        self.settings = {
+            'host': self.host,
+            'database': database,
+            'username': self.user,
+            'password': self.passwd,
+            'options': options
+        }
+
+    def connect(self, collection):
         '''
 
         This method is responsible for defining the necessary interface to
@@ -58,7 +66,7 @@ class NoSQL(object):
         '''
 
         try:
-            self.client = MongoClient(self.host + ',' + self.port)
+            self.client = MongoClient("mongodb://{username}:{password}@{host}/{database}?{options}".format(**self.settings))
             self.database = self.client[database]
             self.collection = self.database[collection]
 

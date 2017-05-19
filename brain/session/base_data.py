@@ -97,9 +97,8 @@ class BaseData(Base):
         '''
 
         # save dataset
-        cursor = Collection()
+        cursor = Collection('dataset')
         response = cursor.query(
-            'dataset',
             'supervised',
             'insert_one',
             self.premodel_data

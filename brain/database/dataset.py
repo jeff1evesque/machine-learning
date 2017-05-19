@@ -24,7 +24,7 @@ class Collection(object):
 
     '''
 
-    def __init__(self):
+    def __init__(self, database):
         '''
 
         This constructor is responsible for defining class variables.
@@ -32,9 +32,9 @@ class Collection(object):
         '''
 
         self.list_error = []
-        self.nosql = NoSQL()
+        self.nosql = NoSQL(database)
 
-    def query(self, database, collection, operation, payload):
+    def query(self, collection, operation, payload):
         '''
 
         This method executes a query, with respect to the desired 'operation'.
@@ -54,7 +54,7 @@ class Collection(object):
         '''
 
         # insert / update dataset value(s)
-        self.nosql.connect(database, collection)
+        self.nosql.connect(collection)
         response = self.nosql.execute(operation, payload)
 
         # retrieve any error(s), disconnect from database
