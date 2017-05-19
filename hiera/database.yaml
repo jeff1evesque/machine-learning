@@ -20,6 +20,10 @@ database:
         log_path: '/log/database'
 
     mongodb:
+        host: 'localhost'
+        name: 'dataset'
+        password: 'password'
+
         storage:
             dbPath:
                 - '/data'
