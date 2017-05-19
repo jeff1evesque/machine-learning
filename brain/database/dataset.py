@@ -36,7 +36,7 @@ class Collection(object):
         self.nosql = NoSQL()
         self.db_ml = current_app.config.get('DB_ML')
 
-    def query(self, operation, payload=None):
+    def query(self, operation):
         '''
 
         This method executes a query, with respect to the desired 'operation'.
@@ -57,7 +57,7 @@ class Collection(object):
 
         # insert / update dataset value(s)
         self.nosql.connect(self.db_ml)
-        response = self.nosql.execute(operation, payload)
+        response = self.nosql.execute(operation, self.premodel_data)
 
         # retrieve any error(s), disconnect from database
         response_error = self.nosql.get_errors()
