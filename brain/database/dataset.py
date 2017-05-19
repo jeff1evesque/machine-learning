@@ -7,7 +7,6 @@ using the mongodb framework.
 
 '''
 
-from flask import current_app
 from brain.database.query import NoSQL
 
 
