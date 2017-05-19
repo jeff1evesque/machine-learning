@@ -24,19 +24,17 @@ class Collection(object):
 
     '''
 
-    def __init__(self, premodel_data):
+    def __init__(self):
         '''
 
         This constructor is responsible for defining class variables.
 
         '''
 
-        self.premodel_data = premodel_data
         self.list_error = []
         self.nosql = NoSQL()
-        self.db_ml = current_app.config.get('DB_ML')
 
-    def query(self, operation):
+    def query(self, database, collection, operation, payload):
         '''
 
         This method executes a query, with respect to the desired 'operation'.
@@ -56,8 +54,8 @@ class Collection(object):
         '''
 
         # insert / update dataset value(s)
-        self.nosql.connect(self.db_ml)
-        response = self.nosql.execute(operation, self.premodel_data)
+        self.nosql.connect(database, collection)
+        response = self.nosql.execute(operation, payload)
 
         # retrieve any error(s), disconnect from database
         response_error = self.nosql.get_errors()

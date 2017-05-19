@@ -76,7 +76,7 @@ class NoSQL(object):
                 'error': self.list_error,
             }
 
-    def execute(self, operation, payload=None):
+    def execute(self, operation, payload):
         '''
 
         This method is responsible for defining the necessary interface to

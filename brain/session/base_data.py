@@ -97,8 +97,13 @@ class BaseData(Base):
         '''
 
         # save dataset
-        cursor = Collection(self.premodel_data)
-        response = cursor.query('insert_one')
+        cursor = Collection()
+        response = cursor.query(
+            'dataset',
+            'supervised',
+            'insert_one',
+            self.premodel_data
+        )
 
         # return result
         if response['error']:
