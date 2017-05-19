@@ -49,7 +49,7 @@ class NoSQL(object):
         else:
             self.passwd = self.settings.get_db_password()
 
-    def connect(self):
+    def connect(self database, collection):
         '''
 
         This method is responsible for defining the necessary interface to
@@ -58,7 +58,9 @@ class NoSQL(object):
         '''
 
         try:
-            self.client = MongoClient(self.host + ':' + self.port)
+            self.client = MongoClient(self.host + ',' + self.port)
+            self.database = self.client[database]
+            self.collection = self.database[collection]
 
             return {
                 'status': True,
@@ -88,26 +90,26 @@ class NoSQL(object):
 
         if self.proceed:
             try:
-                db = self.client().ml_database
+                collection = self.collection
 
                 if operation == 'insert_one':
-                    result = db.dataset.insert_one(payload)
+                    result = collection.dataset.insert_one(payload)
                 if operation == 'insert_many':
-                    result = db.dataset.insert_many(payload)
+                    result = collection.insert_many(payload)
                 elif operation == 'update_one':
-                    result = db.dataset.update_one(payload)
+                    result = collection.update_one(payload)
                 elif operation == 'update_many':
-                    result = db.dataset.update_many(payload)
+                    result = collection.update_many(payload)
                 elif operation == 'delete_one':
-                    result = db.dataset.delete_one(payload)
+                    result = collection.delete_one(payload)
                 elif operation == 'delete_many':
-                    result = db.dataset.delete_many(payload)
+                    result = collection.delete_many(payload)
                 elif operation == 'find':
-                    result = db.dataset.find(payload)
+                    result = collection.find(payload)
                 elif operation == 'find_one':
-                    result = db.dataset.find_one(payload)
+                    result = collection.find_one(payload)
                 elif operation == 'map_reduce':
-                    result = db.dataset.map_reduce(
+                    result = collection.map_reduce(
                         payload['map'],
                         payload['reduce'],
                         payload['out'],
@@ -115,11 +117,11 @@ class NoSQL(object):
                         payload['kwargs']
                     )
                 elif operation == 'delete_one':
-                    result = db.dataset.delete_one(payload)
+                    result = collection.delete_one(payload)
                 elif operation == 'delete_many':
-                    result = db.dataset.delete_many(payload)
+                    result = collection.delete_many(payload)
                 elif operation == 'drop_collection':
-                    result = db.dataset.drop_collection(payload)
+                    result = collection.drop_collection(payload)
 
             except db.Error, error:
                 self.list_error.append(error)
