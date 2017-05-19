@@ -49,7 +49,7 @@ class NoSQL(object):
         else:
             self.passwd = self.settings.get_db_password()
 
-    def connect(self database, collection):
+    def connect(self, database, collection):
         '''
 
         This method is responsible for defining the necessary interface to
