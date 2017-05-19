@@ -30,7 +30,8 @@ def create_app(args={'prefix': '', 'settings': ''}):
     # get values from yaml
     with open(prepath + '/database.yaml', 'r') as stream:
         settings = yaml.load(stream)
-        database = settings['database']['mariadb']
+        sql = settings['database']['mariadb']
+        nosql = settings['database']['mongodb']
 
     with open(prepath + '/common.yaml', 'r') as stream:
         settings = yaml.load(stream)
@@ -82,11 +83,11 @@ def create_app(args={'prefix': '', 'settings': ''}):
         REDIS_HOST=redis['host'],
         REDIS_PORT=redis['port'],
         ROOT=general['root'],
-        DB_HOST=database['host'],
-        DB_LOG_PATH=database['log_path'],
-        DB_ML=database['name'],
-        DB_USERNAME=database['username'],
-        DB_PASSWORD=database['password'],
+        SQL_HOST=sql['host'],
+        SQL_LOG_PATH=sql['log_path'],
+        SQL_ML=sql['name'],
+        SQL_USERNAME=sql['username'],
+        SQL_PASSWORD=sql['password'],
         LOG_LEVEL=HANDLER_LEVEL,
         FLASK_LOG_PATH=webserver['flask']['log_path'],
         ERROR_LOG_PATH=application['error_log_path'],

@@ -46,60 +46,81 @@ class Database(object):
 
         '''
 
-        self.db_host = current_app.config.get('DB_HOST')
-        self.db_username = current_app.config.get('DB_USERNAME')
-        self.db_password = current_app.config.get('DB_PASSWORD')
+        self.sql_host = current_app.config.get('SQL_HOST')
+        self.sql_username = current_app.config.get('SQL_USERNAME')
+        self.sql_password = current_app.config.get('SQL_PASSWORD')
+        self.nosql_host = current_app.config.get('NoSQL_HOST')
+        self.nosql_username = current_app.config.get('NoSQL_USERNAME')
+        self.nosql_password = current_app.config.get('NoSQL_PASSWORD')
 
-    def get_db_host(self):
+    def get_db_host(self, type='sql'):
         '''
 
         This method is responsible for getting the database host.
 
         '''
 
-        return self.db_host
+        if type == 'sql':
+            return self.sql_host
+        elif type == 'nosql':
+            return self.nosql_host
 
-    def get_db_username(self):
+    def get_db_username(self, type='sql'):
         '''
 
         This method is responsible for getting the database username.
 
         '''
 
-        return self.db_username
+        if type == 'sql':
+            return self.sql_username
+        elif type == 'nosql':
+            return self.nosql_username
 
-    def get_db_password(self):
+    def get_db_password(self, type='sql'):
         '''
 
         This method is responsible for getting the database user password.
 
         '''
 
-        return self.db_password
+        if type == 'sql':
+            return self.sql_password
+        elif type == 'nosql':
+            return self.nosql_password
 
-    def set_db_host(self, host):
+    def set_db_host(self, host, type='sql'):
         '''
 
         This method is responsible for setting the database host.
 
         '''
 
-        self.db_host = host
+        if type == 'sql':
+            self.sql_host = host
+        elif type == 'nosql':
+            self.nosql_host = host
 
-    def set_db_username(self, user):
+    def set_db_username(self, user, type='sql'):
         '''
 
         This method is responsible for setting the database username.
 
         '''
 
-        self.db_username = user
+        if type == 'sql':
+            self.sql_username = user
+        elif type == 'nosql':
+            self.nosql_username = user
 
-    def set_db_password(self, pwd):
+    def set_db_password(self, pwd, type='sql'):
         '''
 
         This method is responsible for setting the database user password.
 
         '''
 
-        self.db_password = pwd
+        if type == 'sql':
+            self.sql_password = pwd
+        elif type == 'nosql':
+            self.nosql_password = pwd

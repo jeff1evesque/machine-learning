@@ -35,19 +35,19 @@ class NoSQL(object):
         if host:
             self.host = host
         else:
-            self.host = self.settings.get_db_host()
+            self.host = self.settings.get_db_host('nosql')
 
         # sql username for above host address
         if user:
             self.user = user
         else:
-            self.user = self.settings.get_db_username()
+            self.user = self.settings.get_db_username('nosql')
 
         # sql password for above username
         if passwd:
             self.passwd = passwd
         else:
-            self.passwd = self.settings.get_db_password()
+            self.passwd = self.settings.get_db_password('nosql')
 
         self.args = {
             'host': self.host,
@@ -204,19 +204,19 @@ class SQL(object):
         if host:
             self.host = host
         else:
-            self.host = self.settings.get_db_host()
+            self.host = self.settings.get_db_host('sql')
 
         # sql username for above host address
         if user:
             self.user = user
         else:
-            self.user = self.settings.get_db_username()
+            self.user = self.settings.get_db_username('sql')
 
         # sql password for above username
         if passwd:
             self.passwd = passwd
         else:
-            self.passwd = self.settings.get_db_password()
+            self.passwd = self.settings.get_db_password('sql')
 
     def connect(self, database=None):
         '''

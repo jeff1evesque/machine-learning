@@ -31,7 +31,7 @@ class Session(object):
 
         self.list_error = []
         self.sql = SQL()
-        self.db_ml = current_app.config.get('DB_ML')
+        self.db_ml = current_app.config.get('SQL_ML')
 
     def get_all_sessions(self):
         '''
