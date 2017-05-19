@@ -7,7 +7,7 @@ This file contains various SQL, and NoSql related methods.
 '''
 
 import MySQLdb as MariaClient
-from pymongo import MongoClient
+from pymongo import MongoClient, errors
 from brain.database.settings import Database
 
 
@@ -67,7 +67,7 @@ class NoSQL(object):
                 'error': None,
             }
 
-        except MongoClient.errors, error:
+        except errors, error:
             self.proceed = False
             self.list_error.append(error)
 
@@ -123,7 +123,7 @@ class NoSQL(object):
                 elif operation == 'drop_collection':
                     result = collection.drop_collection(payload)
 
-            except db.Error, error:
+            except errors, error:
                 self.list_error.append(error)
 
                 return {
@@ -151,7 +151,7 @@ class NoSQL(object):
                     'error': None,
                 }
 
-            except MongoClient.errors, error:
+            except errors, error:
                 self.list_error.append(error)
 
                 return {
