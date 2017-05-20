@@ -28,7 +28,7 @@ class Account(object):
 
         self.list_error = []
         self.sql = SQL()
-        self.db_ml = current_app.config.get('SQL_ML')
+        self.db_ml = current_app.config.get('SQL_DB')
 
     def save_account(self, username, email, password):
         '''

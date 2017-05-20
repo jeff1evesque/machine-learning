@@ -41,7 +41,7 @@ class Entity(object):
         self.session_type = session_type
         self.list_error = []
         self.sql = SQL()
-        self.db_ml = current_app.config.get('SQL_ML')
+        self.db_ml = current_app.config.get('SQL_DB')
 
     def save(self):
         '''

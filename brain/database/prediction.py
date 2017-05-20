@@ -29,7 +29,7 @@ class Prediction(object):
 
         self.list_error = []
         self.sql = SQL()
-        self.db_ml = current_app.config.get('SQL_ML')
+        self.db_ml = current_app.config.get('SQL_DB')
         self.model_list = current_app.config.get('MODEL_TYPE')
 
         if session.get('uid'):

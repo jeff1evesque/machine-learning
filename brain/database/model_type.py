@@ -26,7 +26,7 @@ class ModelType(object):
 
         self.list_error = []
         self.sql = SQL()
-        self.db_ml = current_app.config.get('SQL_ML')
+        self.db_ml = current_app.config.get('SQL_DB')
 
     def get_model_type(self, id_entity):
         '''

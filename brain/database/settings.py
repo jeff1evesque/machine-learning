@@ -52,6 +52,7 @@ class Database(object):
         self.nosql_host = current_app.config.get('NoSQL_HOST')
         self.nosql_username = current_app.config.get('NoSQL_USERNAME')
         self.nosql_password = current_app.config.get('NoSQL_PASSWORD')
+        self.nosql_db = current_app.config.get('NoSQL_DB')
 
     def get_db_host(self, type='sql'):
         '''
@@ -64,6 +65,18 @@ class Database(object):
             return self.sql_host
         elif type == 'nosql':
             return self.nosql_host
+
+    def get_db(self, type='sql'):
+        '''
+
+        This method is responsible for getting the database host.
+
+        '''
+
+        if type == 'sql':
+            return self.sql_db
+        elif type == 'nosql':
+            return self.nosql_db
 
     def get_db_username(self, type='sql'):
         '''
