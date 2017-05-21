@@ -22,6 +22,7 @@ database:
     mongodb:
         host: 'localhost'
         name: 'dataset'
+        username: 'authenticated'
         password: 'password'
 
         storage:
