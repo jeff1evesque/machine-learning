@@ -30,8 +30,8 @@ def create_app(args={'prefix': '', 'settings': ''}):
     # get values from yaml
     with open(prepath + '/database.yaml', 'r') as stream:
         settings = yaml.load(stream)
-        nosql = settings['database']['mongodb']
         sql = settings['database']['mariadb']
+        nosql = settings['database']['mongodb']
 
     with open(prepath + '/common.yaml', 'r') as stream:
         settings = yaml.load(stream)
