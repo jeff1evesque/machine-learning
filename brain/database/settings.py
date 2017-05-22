@@ -49,10 +49,10 @@ class Database(object):
         self.sql_host = current_app.config.get('SQL_HOST')
         self.sql_username = current_app.config.get('SQL_USERNAME')
         self.sql_password = current_app.config.get('SQL_PASSWORD')
-        self.nosql_host = current_app.config.get('NoSQL_HOST')
-        self.nosql_username = current_app.config.get('NoSQL_USERNAME')
-        self.nosql_password = current_app.config.get('NoSQL_PASSWORD')
-        self.nosql_db = current_app.config.get('NoSQL_DB')
+        self.nosql_host = current_app.config.get('NOSQL_HOST')
+        self.nosql_username = current_app.config.get('NOSQL_USERNAME')
+        self.nosql_password = current_app.config.get('NOSQL_PASSWORD')
+        self.nosql_db = current_app.config.get('NOSQL_DB')
 
     def get_db_host(self, type='sql'):
         '''
