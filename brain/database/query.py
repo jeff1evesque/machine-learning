@@ -21,7 +21,7 @@ class NoSQL(object):
 
     '''
 
-    def __init__(self, database, options, host=None, user=None, passwd=None):
+    def __init__(self, database, host=None, user=None, passwd=None, options=None):
         '''
 
         This constructor is responsible for defining class variables.
