@@ -72,8 +72,9 @@ class NoSQL(object):
         '''
 
         try:
+            # single mongodb instance
             self.client = MongoClient(
-                "mongodb://{user}:{pass}@{host}/{db}?{options}".format(**self.args)
+                "mongodb://{user}:{pass}@{host}".format(**self.args)
             )
             self.database = self.client[self.args.database]
             self.collection = self.database[collection]
