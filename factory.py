@@ -43,7 +43,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
     with open(prepath + '/cache.yaml', 'r') as stream:
         settings = yaml.load(stream)
-        redis = settings['redis']
+        cache = settings['redis']
 
     with open(prepath + '/application.yaml', 'r') as stream:
         settings = yaml.load(stream)
@@ -80,8 +80,8 @@ def create_app(args={'prefix': '', 'settings': ''}):
     # flask attributes: accessible across application
     app.config.update(
         HOST=general['host'],
-        REDIS_HOST=redis['host'],
-        REDIS_PORT=redis['port'],
+        CACHE_HOST=cache['host'],
+        CACHE_PORT=cache['port'],
         ROOT=general['root'],
         SQL_HOST=sql['host'],
         SQL_LOG_PATH=sql['log_path'],
