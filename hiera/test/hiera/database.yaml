@@ -21,7 +21,7 @@ database:
         log_path: '/log/database'
 
     mongodb:
-        host: 'localhost'
+        hostname: 'localhost'
         name: 'dataset'
         username: 'authenticated'
         password: 'password'
