@@ -46,7 +46,8 @@ fi
 cd "$PROJECT_ROOT" || exit
 sudo docker build -f default.dockerfile -t container-default .
 sudo docker build -f redis.dockerfile -t container-redis .
-sudo docker build -f database.dockerfile -t container-database .
+sudo docker build -f mariadb.dockerfile -t container-mariadb .
+sudo docker build -f mongodb.dockerfile -t container-mongodb .
 sudo docker build -f webserver.dockerfile -t container-webserver .
 cd "$PWD" || exit
 
@@ -60,7 +61,8 @@ sudo docker network create -d bridge app_nw && \
 sudo docker run --name base --net=app_nw -d container-default && \
 sudo docker run --name redis --net=app_nw -d container-redis && \
 sudo docker run --name webserver --net=app_nw -d container-webserver run && \
-sudo docker run --name database --net=app_nw -d container-database && \
+sudo docker run --name mariadb --net=app_nw -d container-mariadb && \
+sudo docker run --name mongodb --net=app_nw -d container-mongodb && \
 sudo docker run --name webserver-pytest --net=app_nw -it container-webserver test | sudo tee pytest.log
 
 ## check unit test results
