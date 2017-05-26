@@ -240,6 +240,7 @@ class SQL(object):
                     self.user,
                     self.passwd,
                 )
+
             else:
                 self.conn = MariaClient.connect(
                     self.host,
@@ -283,31 +284,32 @@ class SQL(object):
                 # commit change(s), return lastrowid
                 if operation in ['insert', 'delete', 'update']:
                     self.conn.commit()
+
+                    return {
+                        'status': True,
+                        'error': self.list_error,
+                        'id': self.cursor.lastrowid,
+                    }
+
                 # fetch all the rows, return as list of lists.
                 elif operation == 'select':
                     result = self.cursor.fetchall()
 
+                    return {
+                        'status': True,
+                        'error': self.list_error,
+                        'result': result,
+                    }
+
             except MariaClient.Error, error:
                 self.conn.rollback()
                 self.list_error.append(error)
+
                 return {
                     'status': False,
                     'error': self.list_error,
                     'result': None,
                 }
-
-        if operation in ['insert', 'delete', 'update']:
-            return {
-                'status': True,
-                'error': self.list_error,
-                'id': self.cursor.lastrowid,
-            }
-        elif operation == 'select':
-            return {
-                'status': True,
-                'error': self.list_error,
-                'result': result,
-            }
 
     def disconnect(self):
         '''
@@ -327,6 +329,7 @@ class SQL(object):
                         'error': None,
                         'id': self.cursor.lastrowid,
                     }
+
             except MariaClient.Error, error:
                 self.list_error.append(error)
 
