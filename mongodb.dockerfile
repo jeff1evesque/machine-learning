@@ -7,3 +7,6 @@ ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 
 ## provision with puppet
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/mongodb/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
+
+## executed everytime container starts
+CMD ["/bin/sh", "-c", "mongod", "--config", "/etc/mongod"]

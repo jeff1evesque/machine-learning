@@ -1,0 +1,19 @@
+#!/bin/bash
+
+TEMP=$(mongo --eval "db.createUser({\
+    user: '<%= @username %>',\
+    pwd: '<%= @password %>',\
+    roles: [\
+        {role: 'clusterAdmin', db: 'admin' },\
+        {role: 'readWriteAnyDatabase', db: 'admin' },\
+        {role: 'userAdminAnyDatabase', db: 'admin' },\
+        { role: 'dbAdminAnyDatabase', db: 'admin' }\
+    ]},\
+    { w: 'majority' , wtimeout: 5000 } )" --quiet\
+)
+
+if [[ "$TEMP" =~ 'Successfully added user' ]]; then
+    exit 0
+else
+    exit 1
+fi
