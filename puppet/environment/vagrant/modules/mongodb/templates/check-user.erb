@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TEMP=$(mongo --eval "db.getUser('admin')" --quiet)
+TEMP=$(mongo --eval "db.getUser('<%= @username %>')" --quiet)
 
 if [ "$TEMP" == 'null' ]; then
     exit 0
