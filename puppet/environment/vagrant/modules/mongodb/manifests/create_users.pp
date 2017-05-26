@@ -7,8 +7,8 @@ class mongodb::create_users {
     $username   = $database['username']
     $password   = $database['password']
 
-    exec { 'create-mongodb-admin':
-        command => dos2unix(template('mongodb/create-user.erb')),
+    exec { 'create-mongodb-users':
+        command => dos2unix(template('mongodb/create-users.erb')),
         onlyif  => dos2unix(template('mongodb/check-user.erb')),
         path    => '/usr/bin',
     }
