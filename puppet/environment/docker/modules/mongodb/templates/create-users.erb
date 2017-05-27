@@ -11,9 +11,3 @@ TEMP=$(mongo --eval "db.createUser({\
     ]},\
     { w: 'majority' , wtimeout: 5000 } )" --quiet\
 )
-
-if [[ "$TEMP" =~ 'Successfully added user' ]]; then
-    exit 0
-else
-    exit 1
-fi
