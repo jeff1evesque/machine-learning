@@ -8,7 +8,7 @@
 database:
     mariadb:
         bind_address: '0.0.0.0'
-        host: 'database'
+        host: 'mariadb'
         allow_host: '%'
         name: 'db_machine_learning'
         provisioner: 'provisioner'
@@ -21,7 +21,7 @@ database:
         log_path: '/log/database'
 
     mongodb:
-        hostname: 'localhost'
+        hostname: 'mongodb'
         name: 'dataset'
         username: 'authenticated'
         password: 'password'
