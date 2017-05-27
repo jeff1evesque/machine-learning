@@ -4,8 +4,6 @@
 ##  - mongodb
 ##  - mariadb
 ##
-## @host, defined from executed 'docker' command.
-##
 database:
     mariadb:
         host: 'localhost'

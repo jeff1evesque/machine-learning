@@ -1,9 +1,10 @@
 ##
 ## This file contains database related configurations:
 ##
+##  - mongodb
 ##  - mariadb
 ##
-## @host, defined from executed 'docker' command.
+## @host, @hostname, defined from executed 'docker' command.
 ##
 database:
     mariadb:
