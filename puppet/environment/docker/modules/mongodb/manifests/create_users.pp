@@ -2,19 +2,31 @@
 ### Creates mongodb users.
 ###
 class mongodb::create_users {
+    include system::build_directory
+
     ## local variables
-    $database    = lookup('database')['mongodb']
-    $username    = $database['username']
-    $password    = $database['password']
+    $database       = lookup('database')['mongodb']
+    $username       = $database['username']
+    $password       = $database['password']
 
     ## create users
     ##
     ## @provider, shell allows shebang, and subshells to be executed
     ##
+    file { '/root/build/create-users':
+        content     => dos2unix(template('mongodb/create-users.erb')),
+        owner       => root,
+        group       => root,
+        mode        => '0700',
+        require     => File['/root/build'],
+        notify      => Exec['create-mongodb-users'],
+    }
+
     exec { 'create-mongodb-users':
-        command  => dos2unix(template('mongodb/create-users.erb')),
-        onlyif   => dos2unix(template('mongodb/check-user.erb')),
-        path     => '/usr/bin',
-        provider => shell,
+        command     => './create-users',
+        cwd         => '/root',
+        path        => '/usr/bin',
+        refreshonly => true,
+        provider    => shell,
     }
 }

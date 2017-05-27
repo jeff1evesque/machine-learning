@@ -2,6 +2,8 @@
 ### ssl.pp, configure ssl certificates required by nginx.
 ###
 class webserver::ssl {
+    include system::build_directory
+
     ## variables
     $hiera_webserver = lookup('webserver')
     $nginx           = $hiera_webserver['nginx']
@@ -20,11 +22,14 @@ class webserver::ssl {
     $cert_days       = $cert['props']['days']
 
     ## create ssl certificate
-    file { '/root/build':
-      ensure => directory,
-      mode   => '0700',
-      owner  => 'root',
-      group  => 'root',
+    file { '/root/build/ssl-nginx':
+      ensure  => present,
+      content => dos2unix(template('webserver/ssl.erb')),
+      owner   => 'root',
+      group   => 'root',
+      mode    => '0700',
+      require => File['/root/build'],
+      notify  => Exec['create-ssl-certificate'],
     }
 
     file { '/root/build/ssl-nginx':
