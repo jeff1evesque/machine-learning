@@ -25,6 +25,7 @@ def dataset2dict(id_entity, model_type, upload):
     # local variables
     list_error = []
     converted = []
+    payload = None
     dataset = upload['data']['dataset']
     settings = upload['data']['settings']
     json_upload = upload['data']['dataset'].get('json_string', None)

@@ -98,19 +98,23 @@ class BaseData(Base):
 
         # save dataset
         cursor = Collection('dataset')
-        response = cursor.query(
-            'supervised',
-            'insert_one',
-            self.premodel_data
-        )
+        if self.dataset:
+            response = cursor.query(
+                'supervised',
+                'insert_one',
+                self.premodel_data
+            )
 
         # return result
-        if response['error']:
+        if response and response['error']:
             self.list_error.append(response['error'])
             return {'result': None, 'error': response['error']}
 
-        else:
+        elif response and response['result']:
             return {'result': response['result'], 'error': None}
+
+        else:
+            return {'result': None, 'error': 'no dataset provided'}
 
     def convert_dataset(self, id_entity):
         '''
