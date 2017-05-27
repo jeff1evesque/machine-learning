@@ -56,7 +56,7 @@ class Account(object):
 
         # return result
         if response_error:
-            return {'status': False, 'error': response_error}
+            return {'status': False, 'error': response_error, 'id': None}
         else:
             return {'status': True, 'error': None, 'id': response['id']}
 
