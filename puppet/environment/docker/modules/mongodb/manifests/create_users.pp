@@ -13,7 +13,7 @@ class mongodb::create_users {
     ##
     ## @provider, shell allows shebang, and subshells to be executed
     ##
-    file { '/root/build/create-users':
+    file { '/root/build/create-mongo-users':
         content     => dos2unix(template('mongodb/create-users.erb')),
         owner       => root,
         group       => root,
@@ -23,8 +23,8 @@ class mongodb::create_users {
     }
 
     exec { 'create-mongodb-users':
-        command     => './create-users',
-        cwd         => '/root',
+        command     => './create-mongo-users',
+        cwd         => '/root/build',
         path        => '/usr/bin',
         refreshonly => true,
         provider    => shell,
