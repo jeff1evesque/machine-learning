@@ -32,15 +32,6 @@ class webserver::ssl {
       notify  => Exec['create-ssl-certificate'],
     }
 
-    file { '/root/build/ssl-nginx':
-      ensure  => present,
-      mode    => '0700',
-      owner   => 'root',
-      group   => 'root',
-      content => dos2unix(template('webserver/ssl.erb')),
-      notify  => Exec['create-ssl-certificate'],
-    }
-
     exec { 'create-ssl-certificate':
       command     => './ssl-nginx',
       cwd         => '/root/build',
