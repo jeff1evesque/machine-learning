@@ -40,7 +40,8 @@ class mongodb::run {
 
     ## start mongod process
     exec { 'start-mongodb':
-        command => 'mongod --config /etc/mongod &',
-        path    => '/usr/bin',
+        command     => 'mongod --config /etc/mongod &',
+        path        => '/usr/bin',
+        refreshonly => true,
     }
 }
