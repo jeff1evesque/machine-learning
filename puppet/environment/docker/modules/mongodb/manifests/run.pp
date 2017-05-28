@@ -25,6 +25,7 @@ class mongodb::run {
         mode   => '0755',
         owner  => mongodb,
         group  => root,
+        before => File['/etc/mongod.conf'],
     }
 
     ## general mongod configuration
@@ -34,5 +35,12 @@ class mongodb::run {
         mode    => '0644',
         owner   => mongodb,
         group   => root,
+        notify  => Exec['start-mongodb'],
+    }
+
+    ## start mongod process
+    exec { 'start-mongodb':
+        command => 'mongod --config /etc/mongod &',
+        path    => '/usr/bin',
     }
 }
