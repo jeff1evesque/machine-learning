@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TEMP=$(mongo --eval "db.createUser({\
+TEMP=$(mongo --port <%= @port %> --eval "db.createUser({\
     user: '<%= @username %>',\
     pwd: '<%= @password %>',\
     roles: [\
