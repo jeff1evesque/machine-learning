@@ -13,7 +13,7 @@ class mongodb::create_users {
     ##
     ## @provider, shell allows shebang, and subshells to be executed
     ##
-    file { '/root/build/create-mongo-users':
+    file { '/root/build/create-mongodb-users':
         content     => dos2unix(template('mongodb/create-users.erb')),
         owner       => root,
         group       => root,
