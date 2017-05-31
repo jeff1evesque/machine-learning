@@ -3,11 +3,13 @@
 ###
 class mongodb::create_users {
     include system::build_directory
+    include mongodb::install_shell
 
     ## local variables
     $database       = lookup('database')['mongodb']
     $username       = $database['username']
     $password       = $database['password']
+    $host           = $database['hostname']
     $port           = $database['net']['port']
 
     ## create users
@@ -19,7 +21,10 @@ class mongodb::create_users {
         owner       => root,
         group       => root,
         mode        => '0700',
-        require     => File['/root/build'],
+        require     => [
+            File['/root/build'],
+            Package['mongodb-org-shell'],
+        ],
         notify      => Exec['create-mongodb-users'],
     }
 

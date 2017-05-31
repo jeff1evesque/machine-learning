@@ -1,7 +1,7 @@
 ###
 ### Install required components for single mongodb instance.
 ###
-class mongodb::install {
+class mongodb::download {
     ## local variables
     $packages            = lookup('development')
     $keyserver           = $packages['keyserver']['apt']
@@ -26,15 +26,6 @@ class mongodb::install {
     exec { 'apt-get-update':
         command     => 'apt-get update',
         path        => '/usr/bin',
-        before      => Package['mongodb-org-server'],
         refreshonly => true,
-    }
-
-    package { 'mongodb-org-server':
-        ensure  => installed,
-    }
-
-    package { 'mongodb-org-shell':
-        ensure => installed,
     }
 }

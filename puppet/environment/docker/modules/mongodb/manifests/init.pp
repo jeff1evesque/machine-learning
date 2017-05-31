@@ -3,8 +3,9 @@
 ###
 
 class mongodb {
-    contain mongodb::install
+    contain mongodb::download
+    contain mongodb::install_server
+    contain mongodb::install_shell
     contain mongodb::run
-    contain mongodb::create_users
 }
 contain mongodb
