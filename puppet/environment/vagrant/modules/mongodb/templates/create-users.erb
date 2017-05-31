@@ -1,6 +1,6 @@
 #!/bin/bash
 
-TEMP=$(mongo --port <%= @port %> --eval "db.createUser({\
+mongo --eval "db.createUser({\
     user: '<%= @username %>',\
     pwd: '<%= @password %>',\
     roles: [\
@@ -8,6 +8,5 @@ TEMP=$(mongo --port <%= @port %> --eval "db.createUser({\
         {role: 'readWriteAnyDatabase', db: 'admin' },\
         {role: 'userAdminAnyDatabase', db: 'admin' },\
         { role: 'dbAdminAnyDatabase', db: 'admin' }\
-    ]},\
-    { w: 'majority' , wtimeout: 5000 } )" --quiet\
-)
+]},\
+{ w: 'majority' , wtimeout: 5000 } )" --quiet
