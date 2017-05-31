@@ -8,7 +8,6 @@ class mongodb::create_users {
     $database       = lookup('database')['mongodb']
     $username       = $database['username']
     $password       = $database['password']
-    $port           = $database['net']['port']
 
     ## create users
     ##
