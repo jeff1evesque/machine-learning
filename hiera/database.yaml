@@ -42,4 +42,4 @@ database:
 
         processManagement:
             fork: true
-            pidfilepath: '/var/run/mongodb/mongod.pid'
+            pidfilepath: '/var/run/mongod.pid'
