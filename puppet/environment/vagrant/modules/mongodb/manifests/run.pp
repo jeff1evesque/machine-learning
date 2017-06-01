@@ -24,7 +24,7 @@ class mongodb::run {
         ensure => directory,
         mode   => '0755',
         owner  => mongodb,
-        group  => root,
+        group  => mongodb,
     }
 
     ## general mongod configuration
@@ -33,7 +33,7 @@ class mongodb::run {
         content => dos2unix(template('mongodb/mongodb.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
-        group   => root,
+        group   => mongodb,
         notify  => Service['upstart-mongod'],
     }
 
@@ -43,7 +43,7 @@ class mongodb::run {
         content => dos2unix(template('mongodb/mongod.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
-        group   => root,
+        group   => mongodb,
         notify  => Service['upstart-mongod'],
     }
 

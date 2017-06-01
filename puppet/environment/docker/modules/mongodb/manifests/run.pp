@@ -24,7 +24,7 @@ class mongodb::run {
         ensure => directory,
         mode   => '0755',
         owner  => mongodb,
-        group  => root,
+        group  => mongodb,
         before => File['/etc/mongod.conf'],
     }
 
@@ -34,6 +34,6 @@ class mongodb::run {
         content => dos2unix(template('mongodb/mongodb.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
-        group   => root,
+        group   => mongodb,
     }
 }
