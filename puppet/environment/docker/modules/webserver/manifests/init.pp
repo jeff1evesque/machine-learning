@@ -8,11 +8,6 @@ class webserver {
     contain mariadb::client
     contain mariadb::bindings
 
-    ## create mongodb users
-    contain mongodb::download
-    contain mongodb::install_shell
-    contain mongodb::create_users
-
     ## install redis client
     contain package::redis_client
 
