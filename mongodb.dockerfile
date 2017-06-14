@@ -12,5 +12,9 @@ RUN echo "deb http://repo.mongodb.org/apt/ubuntu $(cat /etc/lsb-release | grep D
 RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
 
+## configuration file
+RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/mongodb/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
+
 ## executed everytime container starts
 ENTRYPOINT ["/usr/bin/mongod"]
+CMD ["-f", "/etc/mongod.conf"]

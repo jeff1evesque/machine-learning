@@ -60,12 +60,12 @@ cd "$PWD" || exit
 sudo docker network create -d bridge app_nw && \
 sudo docker run --name base --net=app_nw -d container-default && \
 sudo docker run --name redis --net=app_nw -d container-redis && \
-sudo docker run --name mongodb --net=app_nw -d container-mongodb && \
+sudo docker run --name mongodb --net=app_nw -d container-mongodb
 sudo docker run --name webserver --net=app_nw -d container-webserver run && \
 sudo docker run --name mariadb --net=app_nw -d container-mariadb
 
 ## provision containers
-sudo docker exec -it mongodb mongo mongodb://mongodb:27017 --eval "db.createUser({\
+sudo docker exec -it mongodb sudo mongo mongodb://mongodb:27017 --eval "db.createUser({\
     user: 'jeff1evesque',\
     pwd: 'password',\
     roles: [\
