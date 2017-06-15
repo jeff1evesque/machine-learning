@@ -65,7 +65,7 @@ sudo docker run --name webserver --net=app_nw -d container-webserver run && \
 sudo docker run --name mariadb --net=app_nw -d container-mariadb
 
 ## provision containers
-sudo docker exec -it mongodb sudo mongo mongodb://mongodb:27017 --eval "db.createUser({\
+sudo docker exec -it mongodb sudo mongo mongodb://mongodb:27017 --eval "db.getSiblingDB('admin'); db.createUser({\
     user: 'jeff1evesque',\
     pwd: 'password',\
     roles: [\

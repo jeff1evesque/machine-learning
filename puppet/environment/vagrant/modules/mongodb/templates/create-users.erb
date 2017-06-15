@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mongo --eval "db.createUser({\
+mongo --eval "db.getSiblingDB('admin'); db.createUser({\
     user: '<%= @username %>',\
     pwd: '<%= @password %>',\
     roles: [\
