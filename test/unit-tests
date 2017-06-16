@@ -64,7 +64,7 @@ sudo docker run --name mongodb --net=app_nw -d container-mongodb
 sudo docker run --name webserver --net=app_nw -d container-webserver run && \
 sudo docker run --name mariadb --net=app_nw -d container-mariadb
 
-## provision containers
+## provision mongodb authorization
 sudo docker exec -it mongodb sudo mongo mongodb://mongodb:27017 --eval "db.getSiblingDB('admin'); db.createUser({\
     user: 'jeff1evesque',\
     pwd: 'password',\
@@ -75,6 +75,10 @@ sudo docker exec -it mongodb sudo mongo mongodb://mongodb:27017 --eval "db.getSi
         {role: 'dbAdminAnyDatabase', db: 'admin' }\
 ]},\
 { w: 'majority' , wtimeout: 5000 } )" --quiet
+
+sudo docker exec -it mongodb sudo sed -i '/^security:/s/^/#/g' /etc/mongodb.conf
+sudo docker exec -it mongodb sudo sed -i "/^[[:space:]]authorization:[[:space:]]'enabled'/s/^/#/g" /etc/mongodb.conf
+sudo docker restart mongodb
 
 ## run unit tests
 sudo docker run --name webserver-pytest --net=app_nw -it container-webserver test | sudo tee pytest.log
