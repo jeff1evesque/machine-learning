@@ -75,9 +75,8 @@ sudo docker exec -it mongodb sudo mongo mongodb://mongodb:27017 --eval "db.getSi
         {role: 'dbAdminAnyDatabase', db: 'admin' }\
 ]},\
 { w: 'majority' , wtimeout: 5000 } )" --quiet
-
 sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*security:/s/^#//g" /etc/mongod.conf
-sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*authorization:[[:space:]]*'enabled'/s/^#//g" /etc/mongod.conf
+sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*authorization:[[:space:]]*enabled/s/^#//g" /etc/mongod.conf
 sudo docker restart mongodb
 
 ## run unit tests
