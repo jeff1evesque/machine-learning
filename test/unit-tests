@@ -66,7 +66,7 @@ sudo docker run --name mariadb --net=app_nw -d container-mariadb
 
 ## provision mongodb authorization
 sudo docker exec -it mongodb sudo mongo mongodb://mongodb:27017 --eval "db.getSiblingDB('admin'); db.createUser({\
-    user: 'jeff1evesque',\
+    user: 'authenticated',\
     pwd: 'password',\
     roles: [\
         {role: 'clusterAdmin', db: 'admin' },\
