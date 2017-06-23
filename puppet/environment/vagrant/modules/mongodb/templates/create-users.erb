@@ -1,12 +1,15 @@
 #!/bin/bash
 
-mongo --eval "db.getSiblingDB('admin'); db.createUser({\
+mongo admin mongodb://mongodb:27017 --eval "db.createUser({\
     user: '<%= @username %>',\
     pwd: '<%= @password %>',\
     roles: [\
-        {role: 'clusterAdmin', db: 'admin' },\
-        {role: 'readWriteAnyDatabase', db: 'admin' },\
-        {role: 'userAdminAnyDatabase', db: 'admin' },\
-        { role: 'dbAdminAnyDatabase', db: 'admin' }\
-]},\
+        'readWrite',\
+        'userAdmin',\
+        'dbAdmin',\
+        { role: 'readWrite', db: 'dataset' },\
+        { role: 'userAdmin', db: 'dataset' },\
+        { role: 'dbAdmin', db: 'dataset' },\
+    ]\
+},\
 { w: 'majority' , wtimeout: 5000 } )" --quiet

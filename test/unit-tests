@@ -65,15 +65,18 @@ sudo docker run --name webserver --net=app_nw -d container-webserver run && \
 sudo docker run --name mariadb --net=app_nw -d container-mariadb
 
 ## provision mongodb authorization
-sudo docker exec -it mongodb sudo mongo mongodb://mongodb:27017 --eval "db.getSiblingDB('admin'); db.createUser({\
+sudo docker exec -it mongodb sudo mongo admin mongodb://mongodb:27017 --eval "db.createUser({\
     user: 'authenticated',\
     pwd: 'password',\
     roles: [\
-        {role: 'clusterAdmin', db: 'admin' },\
-        {role: 'readWriteAnyDatabase', db: 'admin' },\
-        {role: 'userAdminAnyDatabase', db: 'admin' },\
-        {role: 'dbAdminAnyDatabase', db: 'admin' }\
-]},\
+        'readWrite',\
+        'userAdmin',\
+        'dbAdmin',\
+        { role: 'readWrite', db: 'dataset' },\
+        { role: 'userAdmin', db: 'dataset' },\
+        { role: 'dbAdmin', db: 'dataset' },\
+    ]\
+},\
 { w: 'majority' , wtimeout: 5000 } )" --quiet
 sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*security:/s/^#//g" /etc/mongod.conf
 sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*authorization:[[:space:]]*enabled/s/^#//g" /etc/mongod.conf
