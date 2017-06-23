@@ -16,6 +16,7 @@ class mongodb::config {
     $systemLogPath = $systemLog['systemLogPath']
     $port          = $net['port']
     $bindIp        = $net['bindIp']
+    $pidfilepath   = $process['pidfilepath']
 
     ## ensure base path
     file { $dbPath:
@@ -31,7 +32,7 @@ class mongodb::config {
         ensure  => file,
         content => dos2unix(template('mongodb/mongodb.conf.erb')),
         mode    => '0644',
-        owner   => root,
+        owner   => mongodb,
         group   => root,
     }
 }

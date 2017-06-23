@@ -41,3 +41,6 @@ database:
         net:
             port: 27017
             bindIp: 0.0.0.0
+
+        processManagement:
+            pidfilepath: '/var/run/mongod.pid'
