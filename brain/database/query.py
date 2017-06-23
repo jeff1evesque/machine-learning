@@ -74,7 +74,7 @@ class NoSQL(object):
         try:
             # single mongodb instance
             self.client = MongoClient(
-                "mongodb://{user}:{pass}@{host}/{db}".format(**self.args)
+                "mongodb://{user}:{pass}@{host}/admin?authSource=admin".format(**self.args)
             )
             self.database = self.client[self.args['db']]
             self.collection = self.database[collection]
@@ -102,31 +102,32 @@ class NoSQL(object):
         Note: collection level operations can be further reviewed:
 
           - http://api.mongodb.com/python/current/api/pymongo/collection.html
+          - http://api.mongodb.com/python/current/api/pymongo/posts.html
 
         '''
 
         if self.proceed:
             try:
-                collection = self.collection
+                posts = self.collection.posts
 
                 if operation == 'insert_one':
-                    result = collection.dataset.insert_one(payload)
+                    result = posts.insert_one(payload)
                 if operation == 'insert_many':
-                    result = collection.insert_many(payload)
+                    result = posts.insert_many(payload)
                 elif operation == 'update_one':
-                    result = collection.update_one(payload)
+                    result = posts.update_one(payload)
                 elif operation == 'update_many':
-                    result = collection.update_many(payload)
+                    result = posts.update_many(payload)
                 elif operation == 'delete_one':
-                    result = collection.delete_one(payload)
+                    result = posts.delete_one(payload)
                 elif operation == 'delete_many':
-                    result = collection.delete_many(payload)
+                    result = posts.delete_many(payload)
                 elif operation == 'find':
-                    result = collection.find(payload)
+                    result = posts.find(payload)
                 elif operation == 'find_one':
-                    result = collection.find_one(payload)
+                    result = posts.find_one(payload)
                 elif operation == 'map_reduce':
-                    result = collection.map_reduce(
+                    result = posts.map_reduce(
                         payload['map'],
                         payload['reduce'],
                         payload['out'],
@@ -134,11 +135,11 @@ class NoSQL(object):
                         payload['kwargs']
                     )
                 elif operation == 'delete_one':
-                    result = collection.delete_one(payload)
+                    result = posts.delete_one(payload)
                 elif operation == 'delete_many':
-                    result = collection.delete_many(payload)
+                    result = posts.delete_many(payload)
                 elif operation == 'drop_collection':
-                    result = collection.drop_collection(payload)
+                    result = posts.drop_collection(payload)
 
             except errors, error:
                 self.list_error.append(error)
