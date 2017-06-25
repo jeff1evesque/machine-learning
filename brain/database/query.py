@@ -163,7 +163,7 @@ class NoSQL(object):
 
         if self.proceed:
             try:
-                self.client.disconnect()
+                self.client.close()
 
                 return {
                     'status': True,
