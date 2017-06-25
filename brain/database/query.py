@@ -29,6 +29,7 @@ class NoSQL(object):
         '''
 
         self.settings = Database()
+        self.list_error = []
         self.proceed = True
 
         # host address
