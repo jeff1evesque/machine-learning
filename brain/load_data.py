@@ -115,9 +115,6 @@ class Load_Data(object):
                 session.convert_dataset(session_id)
                 session.check()
 
-                session.save_observation_label('data_append', session_id)
-                session.check()
-
                 session.save_premodel_dataset()
                 session.check()
 
