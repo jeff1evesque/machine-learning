@@ -7,7 +7,7 @@ This file contains various SQL, and NoSql related methods.
 '''
 
 import MySQLdb as MariaClient
-from pymongo import MongoClient, errors
+from pymongo import errors
 from brain.database.settings import Database
 
 
@@ -21,62 +21,27 @@ class NoSQL(object):
 
     '''
 
-    def __init__(self, database, host=None, user=None, passwd=None, options=None):
+    def __init__(self):
         '''
 
         This constructor is responsible for defining class variables.
 
         '''
 
-        self.settings = Database()
         self.list_error = []
         self.proceed = True
-
-        # host address
-        if host:
-            self.host = host
-        else:
-            self.host = self.settings.get_db_host('nosql')
-
-        # username for above host address
-        if user:
-            self.user = user
-        else:
-            self.user = self.settings.get_db_username('nosql')
-
-        # password for above username
-        if passwd:
-            self.passwd = passwd
-        else:
-            self.passwd = self.settings.get_db_password('nosql')
-
-        # conditionally load database
-        if passwd:
-            self.database = database
-        else:
-            self.database = self.settings.get_db('nosql')
-
-        self.args = {
-            'host': self.host,
-            'db': self.database,
-            'user': self.user,
-            'pass': self.passwd,
-            'options': options
-        }
+        self.client = current_app.config.get('NOSQL_CLIENT')
 
     def connect(self, collection):
         '''
 
         This method is responsible for defining the necessary interface to
-        connect to a NoSQL database.
+        connect to a NoSQL database, using an established mongod client.
 
         '''
 
         try:
             # single mongodb instance
-            self.client = MongoClient(
-                "mongodb://{user}:{pass}@{host}/admin?authSource=admin".format(**self.args)
-            )
             self.database = self.client[self.args['db']]
             self.collection = self.database[collection]
 
@@ -155,10 +120,8 @@ class NoSQL(object):
 
     def disconnect(self):
         '''
-
         This method is responsible for defining the necessary interface to
         disconnect from a NoSQL database.
-
         '''
 
         if self.proceed:

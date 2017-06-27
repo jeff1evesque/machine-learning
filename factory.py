@@ -14,6 +14,9 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 import yaml
 import logging
+from flask import current_app
+from pymongo import MongoClient
+from brain.database.settings import Database
 from logging.handlers import RotatingFileHandler
 from flask import Flask
 from interface.views import blueprint
@@ -66,6 +69,19 @@ def create_app(args={'prefix': '', 'settings': ''}):
             static_folder='interface/static',
         )
 
+    # mongodb configurations
+    settings = Database()
+    mongoArgs = {
+        'host': settings.get_db_host('nosql'),
+        'db': settings.get_db('nosql'),
+        'user': settings.get_db_username('nosql'),
+        'pass': settings.get_db_password('nosql')
+    }
+
+    mongoClient = MongoClient(
+        "mongodb://{user}:{pass}@{host}/admin?authSource=admin".format(**mongoArgs)
+    )
+
     # secret key: used for maintaining flask sessions
     app.secret_key = application['security_key']
 
@@ -92,6 +108,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
         NOSQL_DB=nosql['name'],
         NOSQL_USERNAME=nosql['username'],
         NOSQL_PASSWORD=nosql['password'],
+        NOSQL_CLIENT=mongoClient,
         LOG_LEVEL=HANDLER_LEVEL,
         FLASK_LOG_PATH=webserver['flask']['log_path'],
         ERROR_LOG_PATH=application['error_log_path'],
