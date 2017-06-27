@@ -1,29 +1,39 @@
 {
-    "34.543": {
-        "predictor-1":23.45,
-        "predictor-2":98.01,
-        "predictor-3":0.432,
-        "predictor-4":325,
-        "predictor-5":54.64,
-        "predictor-6":0.002,
-        "predictor-7":25
-    },
-    "54.666": {
-        "predictor-1":24.32,
-        "predictor-2":92.22,
-        "predictor-3":0.356,
-        "predictor-4":235,
-        "predictor-5":64.45,
-        "predictor-6":0.001,
-        "predictor-7":31
-    },
-    "22.020": {
-        "predictor-1":22.67,
-        "predictor-2":101.21,
-        "predictor-3":0.832,
-        "predictor-4":427,
-        "predictor-5":75.45,
-        "predictor-6":0.002,
-        "predictor-7":24
-    }
+    "dataset": [{
+            "dependent-variable": "34.543",
+            "independent-variables": [{
+                "predictor-1":23.45,
+                "predictor-2":98.01,
+                "predictor-3":0.432,
+                "predictor-4":325,
+                "predictor-5":54.64,
+                "predictor-6":0.002,
+                "predictor-7":25
+           }]
+        },
+        {
+            "dependent-variable": "54.666",
+            "independent-variables": [{
+                "predictor-1":24.32,
+                "predictor-2":92.22,
+                "predictor-3":0.356,
+                "predictor-4":235,
+                "predictor-5":64.45,
+                "predictor-6":0.001,
+                "predictor-7":31
+            }]
+        },
+        {
+            "dependent-variable": "22.020",
+            "independent-variables": [{
+                "predictor-1":22.67,
+                "predictor-2":101.21,
+                "predictor-3":0.832,
+                "predictor-4":427,
+                "predictor-5":75.45,
+                "predictor-6":0.002,
+                "predictor-7":24
+            }]
+        }
+    ]
 }

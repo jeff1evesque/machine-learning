@@ -1,76 +1,96 @@
 {
-    "24.535": {
-        "predictor-1": 23.45,
-        "predictor-2": 98.01,
-        "predictor-4": 325,
-        "predictor-5": 54.64,
-        "predictor-6": 0.002,
-        "predictor-7": 23,
-        "predictor-3": 0.432
-    },
-    "41.004": [
-        {
-            "predictor-1": 22.1,
-            "predictor-2": 95.96,
-            "predictor-4": 342,
-            "predictor-5": 66.67,
-            "predictor-6": 0.001,
-            "predictor-7": 32,
-            "predictor-3": 0.743
+    "dataset": [{
+            "dependent-variable": "24.535",
+            "independent-variables": [{
+                "predictor-1": 23.45,
+                "predictor-2": 98.01,
+                "predictor-4": 325,
+                "predictor-5": 54.64,
+                "predictor-6": 0.002,
+                "predictor-7": 23,
+                "predictor-3": 0.432
+            }]
         },
         {
-            "predictor-1": 17.342,
-            "predictor-2": 88.882,
-            "predictor-4": 268.348,
-            "predictor-5": 77.777,
-            "predictor-6": 0.011,
-            "predictor-7": 28,
-            "predictor-3": 0.777
+            "dependent-variable": "41.004",
+            "independent-variables": [{
+                "predictor-1": 22.1,
+                "predictor-2": 95.96,
+                "predictor-4": 342,
+                "predictor-5": 66.67,
+                "predictor-6": 0.001,
+                "predictor-7": 32,
+                "predictor-3": 0.743
+            },
+            {
+                "predictor-1": 17.342,
+                "predictor-2": 88.882,
+                "predictor-4": 268.348,
+                "predictor-5": 77.777,
+                "predictor-6": 0.011,
+                "predictor-7": 28,
+                "predictor-3": 0.777
+            }]
+        },
+        {
+            "dependent-variable": "35.555",
+            "independent-variables": [{
+                "predictor-1": 20.71,
+                "predictor-2": 99.33,
+                "predictor-4": 342,
+                "predictor-5": 75.67,
+                "predictor-6": 0.001,
+                "predictor-7": 30,
+                "predictor-3": 0.648
+            }]
+        },
+        {
+            "dependent-variable": "44.200",
+            "independent-variables": [{
+                "predictor-1": 23.27,
+                "predictor-2": 95.03,
+                "predictor-4": 295,
+                "predictor-5": 55.83,
+                "predictor-6": 0.001,
+                "predictor-7": 27,
+                "predictor-3": 0.488
+            }]
+        },
+        {
+            "dependent-variable": "39.652",
+            "independent-variables": [{
+                "predictor-1": 23.27,
+                "predictor-2": 95.03,
+                "predictor-4": 295,
+                "predictor-5": 55.83,
+                "predictor-6": 0.001,
+                "predictor-7": 27,
+                "predictor-3": 0.488
+            }]
+        },
+        {
+            "dependent-variable": "29.404",
+            "independent-variables": [{
+                "predictor-1": 19.99,
+                "predictor-2": 97.78,
+                "predictor-4": 303,
+                "predictor-5": 58.88,
+                "predictor-6": 0.001,
+                "predictor-7": 29,
+                "predictor-3": 0.638
+            }]
+        },
+        {
+            "dependent-variable": "42.222",
+            "independent-variables": [{
+                "predictor-1": 22.67,
+                "predictor-2": 101.21,
+                "predictor-4": 427,
+                "predictor-5": 75.45,
+                "predictor-6": 0.002,
+                "predictor-7": 26,
+                "predictor-3": 0.832
+            }]
         }
-    ],
-    "35.555": {
-        "predictor-1": 20.71,
-        "predictor-2": 99.33,
-        "predictor-4": 342,
-        "predictor-5": 75.67,
-        "predictor-6": 0.001,
-        "predictor-7": 30,
-        "predictor-3": 0.648
-    },
-    "44.200": {
-        "predictor-1": 23.27,
-        "predictor-2": 95.03,
-        "predictor-4": 295,
-        "predictor-5": 55.83,
-        "predictor-6": 0.001,
-        "predictor-7": 27,
-        "predictor-3": 0.488
-    },
-    "39.652": {
-        "predictor-1": 23.27,
-        "predictor-2": 95.03,
-        "predictor-4": 295,
-        "predictor-5": 55.83,
-        "predictor-6": 0.001,
-        "predictor-7": 27,
-        "predictor-3": 0.488
-    },
-    "29.404": {
-        "predictor-1": 19.99,
-        "predictor-2": 97.78,
-        "predictor-4": 303,
-        "predictor-5": 58.88,
-        "predictor-6": 0.001,
-        "predictor-7": 29,
-        "predictor-3": 0.638
-    },
-    "42.222": {
-        "predictor-1": 22.67,
-        "predictor-2": 101.21,
-        "predictor-4": 427,
-        "predictor-5": 75.45,
-        "predictor-6": 0.002,
-        "predictor-7": 26,
-        "predictor-3": 0.832
-    }
+    ]
 }
