@@ -18,7 +18,6 @@ are created by the `travis ci <https://travis-ci.org/jeff1evesque/machine-learni
 This allows unit tests to cover the following sessions:
 
 - ``data_new``
-- ``data_append``
 - ``model_predict``
 - ``model_generate``
 
@@ -98,7 +97,6 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     brain/session/data/__init__.py                                                      0      0   100%
     brain/session/data/arbiter.py                                                      74     41    45%
     brain/session/data/dataset.py                                                      58     14    76%
-    brain/session/data_append.py                                                       15      8    47%
     brain/session/data_new.py                                                          16      8    50%
     brain/session/model/__init__.py                                                     0      0   100%
     brain/session/model/sv.py                                                          64     16    75%

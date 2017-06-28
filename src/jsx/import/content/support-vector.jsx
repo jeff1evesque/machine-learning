@@ -11,7 +11,6 @@ import React from 'react';
 import ModelGenerateState from '../redux/container/model-generate.jsx';
 import ModelPredictState from '../redux/container/model-predict.jsx';
 import DataNewState from '../redux/container/data-new.jsx';
-import DataAppendState from '../redux/container/data-append.jsx';
 import Submit from '../general/submit-button.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
@@ -37,7 +36,6 @@ var SupportVector = React.createClass({
     getSessionType: function(type) {
         return {
             data_new: DataNewState,
-            data_append: DataAppendState,
             model_generate: ModelGenerateState,
             model_predict: ModelPredictState
         }[type] || 'span';
@@ -79,7 +77,6 @@ var SupportVector = React.createClass({
         var sessionType = this.state.session_type_value;
         if (
             sessionType == 'data_new' ||
-            sessionType == 'data_append' ||
             sessionType == 'model_generate' ||
             sessionType == 'model_predict'
         ) {
@@ -261,10 +258,6 @@ var SupportVector = React.createClass({
 
                         <option value='data_new'>
                             New Data
-                        </option>
-
-                        <option value='data_append'>
-                            Append Data
                         </option>
 
                         <option value='model_generate'>

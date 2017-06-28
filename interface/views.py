@@ -63,7 +63,6 @@ def load_data():
     implemented session:
 
         - data_new
-        - data_append
         - model_predict
         - model_generate
 
@@ -91,8 +90,6 @@ def load_data():
 
                 if session_type == 'data_new':
                     response = loader.load_data_new()
-                elif session_type == 'data_append':
-                    response = loader.load_data_append()
                 elif session_type == 'model_generate':
                     response = loader.load_model_generate()
                 elif session_type == 'model_predict':
@@ -125,8 +122,6 @@ def load_data():
 
                 if session_type == 'data_new':
                     response = loader.load_data_new()
-                elif session_type == 'data_append':
-                    response = loader.load_data_append()
                 elif session_type == 'model_generate':
                     response = loader.load_model_generate()
                 elif session_type == 'model_predict':

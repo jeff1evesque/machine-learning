@@ -3,8 +3,6 @@
 This file will test the following svr sessions:
 
   - data_new: stores supplied dataset into a SQL database.
-  - data_append: appends supplied dataset to an already stored dataset in an
-                 SQL database.
   - model_generate: generate an model by selecting a particular range of
                     dataset (session), and store it into a NoSQL cache.
   - model_predict: generate a prediction by selecting a particular cached

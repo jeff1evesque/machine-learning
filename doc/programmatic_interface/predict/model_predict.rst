@@ -27,7 +27,6 @@ The following properties define the above ``data`` attribute:
 - ``session_type``: corresponds to one of the following session types:
 
   - ``data_new``
-  - ``data_append``
   - ``model_generate``
   - ``model_predict``
 
