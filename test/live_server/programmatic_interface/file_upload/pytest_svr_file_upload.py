@@ -78,30 +78,6 @@ def test_data_new(client, live_server):
     assert res.json['status'] == 0
 
 
-def test_data_append(client, live_server):
-    '''
-
-    This method tests the 'data_new' session.
-
-    '''
-
-    @live_server.app.route('/load-data')
-    def get_endpoint():
-        return url_for('name.load_data', _external=True)
-
-    live_server.start()
-
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svr-data-append.json', 'svr')
-    )
-
-    # assertion checks
-    assert res.status_code == 200
-    assert res.json['status'] == 0
-
-
 def test_model_generate(client, live_server):
     '''
 
