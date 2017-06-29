@@ -6,6 +6,7 @@ This file contains various SQL, and NoSql related methods.
 
 '''
 
+from flask import g
 import MySQLdb as MariaClient
 from pymongo import MongoClient, errors
 from brain.database.settings import Database
@@ -26,14 +27,14 @@ def get_mongodb():
 
     if not hasattr(g, 'mongodb'):
         settings = Database()
-        args = {
+        params = {
             'user': settings.get_db_username('nosql'),
             'pass': settings.get_db_password('nosql'),
             'host': settings.get_db_host('nosql'),
         }
 
         client = MongoClient(
-            "mongodb://{user}:{pass}@{host}/admin?authSource=admin".format(**args)
+            "mongodb://{user}:{pass}@{host}/admin?authSource=admin".format(**params)
         )
         g.mongodb = client
 
@@ -71,7 +72,8 @@ class NoSQL(object):
 
         try:
             # single mongodb instance
-            self.database = self.client[self.args['db']]
+            database = Database().get_db('nosql')
+            self.database = self.client[database]
             self.collection = self.database[collection]
 
             return {
