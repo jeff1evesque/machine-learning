@@ -15,7 +15,6 @@ Note: both the handler, and logger has levels. If the level of the logger is
 import yaml
 import logging
 from flask import Flask, g
-from brain.database.settings import Database
 from logging.handlers import RotatingFileHandler
 from interface.views import blueprint
 

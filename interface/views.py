@@ -18,7 +18,7 @@ decorators are defined, which flask triggers for specific URL's.
 '''
 
 import json
-from flask import Blueprint, render_template, request, session, g
+from flask import Blueprint, render_template, request, session
 from brain.load_data import Load_Data
 from brain.converter.settings import Settings
 from brain.database.model_type import ModelType
