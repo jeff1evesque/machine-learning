@@ -6,7 +6,6 @@ This file contains various SQL, and NoSql related methods.
 
 '''
 
-from flask import current_app
 import MySQLdb as MariaClient
 from pymongo import MongoClient, errors
 from brain.database.settings import Database
