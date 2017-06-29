@@ -18,7 +18,7 @@ decorators are defined, which flask triggers for specific URL's.
 '''
 
 import json
-from flask import Blueprint, render_template, request, session
+from flask import Blueprint, render_template, request, session, g
 from brain.load_data import Load_Data
 from brain.converter.settings import Settings
 from brain.database.model_type import ModelType
@@ -48,7 +48,10 @@ def index(path):
     This router function renders the 'index.html' template, for all requests,
     which do not have corresponding route definitions.
 
-    Note: http://flask.pocoo.org/snippets/57/
+    Note: the following resources can be further reviewed:
+
+          http://flask.pocoo.org/snippets/57/
+          https://github.com/pallets/flask/tree/master/examples/flaskr
 
     '''
 

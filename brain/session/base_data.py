@@ -97,7 +97,7 @@ class BaseData(Base):
         '''
 
         # save dataset
-        cursor = Collection('dataset')
+        cursor = Collection()
         if self.dataset:
             response = cursor.query(
                 'supervised',

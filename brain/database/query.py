@@ -8,8 +8,37 @@ This file contains various SQL, and NoSql related methods.
 
 from flask import current_app
 import MySQLdb as MariaClient
-from pymongo import errors
+from pymongo import MongoClient, errors
 from brain.database.settings import Database
+
+
+def get_mongodb():
+    '''
+
+    This function opens a new mongo database connection, if there is none yet
+    for the current application context.
+
+    Note: the following resources can be further reviewed:
+
+          http://flask.pocoo.org/snippets/57/
+          https://github.com/pallets/flask/tree/master/examples/flaskr
+
+    '''
+
+    if not hasattr(g, 'mongodb'):
+        settings = Database()
+        args = {
+            'user': settings.get_db_username('nosql'),
+            'pass': settings.get_db_password('nosql'),
+            'host': settings.get_db_host('nosql'),
+        }
+
+        client = MongoClient(
+            "mongodb://{user}:{pass}@{host}/admin?authSource=admin".format(**args)
+        )
+        g.mongodb = client
+
+    return g.mongodb
 
 
 class NoSQL(object):
@@ -31,7 +60,7 @@ class NoSQL(object):
 
         self.list_error = []
         self.proceed = True
-        self.client = current_app.config.get('NOSQL_CLIENT')
+        self.client = get_mongodb()
 
     def connect(self, collection):
         '''

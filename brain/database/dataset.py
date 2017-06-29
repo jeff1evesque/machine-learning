@@ -23,7 +23,7 @@ class Collection(object):
 
     '''
 
-    def __init__(self, database):
+    def __init__(self):
         '''
 
         This constructor is responsible for defining class variables.
@@ -31,7 +31,7 @@ class Collection(object):
         '''
 
         self.list_error = []
-        self.nosql = NoSQL(database)
+        self.nosql = NoSQL()
 
     def query(self, collection, operation, payload):
         '''
@@ -58,7 +58,6 @@ class Collection(object):
 
         # retrieve any error(s), disconnect from database
         response_error = self.nosql.get_errors()
-        self.nosql.disconnect()
 
         # return result
         if response_error:

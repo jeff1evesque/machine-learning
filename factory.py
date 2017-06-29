@@ -14,10 +14,9 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 import yaml
 import logging
-from pymongo import MongoClient
+from flask import Flask, g
 from brain.database.settings import Database
 from logging.handlers import RotatingFileHandler
-from flask import Flask
 from interface.views import blueprint
 
 
@@ -68,19 +67,6 @@ def create_app(args={'prefix': '', 'settings': ''}):
             static_folder='interface/static',
         )
 
-    # mongodb configurations
-    settings = Database()
-    mongoArgs = {
-        'host': settings.get_db_host('nosql'),
-        'db': settings.get_db('nosql'),
-        'user': settings.get_db_username('nosql'),
-        'pass': settings.get_db_password('nosql')
-    }
-
-    mongoClient = MongoClient(
-        "mongodb://{user}:{pass}@{host}/admin?authSource=admin".format(**mongoArgs)
-    )
-
     # secret key: used for maintaining flask sessions
     app.secret_key = application['security_key']
 
@@ -107,7 +93,6 @@ def create_app(args={'prefix': '', 'settings': ''}):
         NOSQL_DB=nosql['name'],
         NOSQL_USERNAME=nosql['username'],
         NOSQL_PASSWORD=nosql['password'],
-        NOSQL_CLIENT=mongoClient,
         LOG_LEVEL=HANDLER_LEVEL,
         FLASK_LOG_PATH=webserver['flask']['log_path'],
         ERROR_LOG_PATH=application['error_log_path'],
@@ -145,3 +130,20 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
     # return
     return app
+
+
+def register_teardowns(app):
+    @app.teardown_appcontext
+    def close_db(error):
+        '''
+
+        This function closes the database connection, everytime the app context
+        tears down. A teardown can happen because of two reasons: either
+        everything went well (the error parameter will be None) or an exception
+        happened, in which case the error is passed to the teardown function.
+
+        Note: http://flask.pocoo.org/docs/0.12/tutorial/dbcon/
+
+        '''
+        if hasattr(g, 'mongodb'):
+            g.mongodb.close()
