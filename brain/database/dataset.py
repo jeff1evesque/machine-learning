@@ -33,7 +33,7 @@ class Collection(object):
         self.list_error = []
         self.nosql = NoSQL()
 
-    def query(self, database, collection, operation, payload):
+    def query(self, collection, operation, payload):
         '''
 
         This method executes a query, with respect to the desired 'operation'.

@@ -44,7 +44,7 @@ class Load_Data(object):
         ]
         self.list_error = []
 
-    def load_data_new(self, database, collection):
+    def load_data_new(self, collection):
         '''
 
         This method validates the supplied parameters, before being stored as
@@ -69,7 +69,7 @@ class Load_Data(object):
                 session.convert_dataset(session_id)
                 session.check()
 
-                session.save_premodel_dataset(database, collection)
+                session.save_premodel_dataset(collection)
                 session.check()
 
             response = {

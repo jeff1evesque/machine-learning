@@ -62,7 +62,7 @@ class NoSQL(object):
         self.proceed = True
         self.client = get_mongodb()
 
-    def connect(self, database, collection):
+    def connect(self, collection):
         '''
 
         This method is responsible for defining the necessary interface to
@@ -72,6 +72,7 @@ class NoSQL(object):
 
         try:
             # single mongodb instance
+            database = Database().get_db('nosql')
             self.database = self.client[database]
             self.collection = self.database[collection]
 
