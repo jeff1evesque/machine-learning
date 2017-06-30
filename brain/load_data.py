@@ -8,6 +8,7 @@ json.dumps(
 '''
 
 import json
+from brain.session.data_append import DataAppend
 from brain.session.data_new import DataNew
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
@@ -37,12 +38,13 @@ class Load_Data(object):
         self.data = data
         self.session_list = [
             'data_new',
+            'data_append',
             'model_generate',
             'model_predict',
         ]
         self.list_error = []
 
-    def load_data_new(self):
+    def load_data_new(self, database, collection):
         '''
 
         This method validates the supplied parameters, before being stored as
@@ -67,7 +69,7 @@ class Load_Data(object):
                 session.convert_dataset(session_id)
                 session.check()
 
-                session.save_premodel_dataset()
+                session.save_premodel_dataset(database, collection)
                 session.check()
 
             response = {
@@ -82,6 +84,52 @@ class Load_Data(object):
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database',
                 'type': 'data-new'
+            }
+
+        return json.dumps(response)
+
+    def load_data_append(self):
+        '''
+
+        This method validates the supplied parameters, before being appended to
+        existing entries, from corresponding tables in the SQL database.
+
+        '''
+
+        # instantiate class
+        session = DataAppend(self.data)
+
+        # define current session id
+        session_id = self.data['data']['settings']['session_id']
+        session.validate_id(session_id)
+
+        # implement class methods
+        if not session.validate_arg_none() and not session.get_errors():
+            session.validate_premodel_settings()
+            session.check()
+
+            session_entity = session.save_entity('data_append', session_id)
+            if session_entity['status']:
+                session.check()
+
+                session.convert_dataset(session_id)
+                session.check()
+
+                session.save_premodel_dataset()
+                session.check()
+
+            response = {
+                'status': 0,
+                'msg': 'Dataset(s) properly appended into database',
+                'type': 'data-append'
+            }
+
+        else:
+            print session.get_errors()
+            response = {
+                'status': 1,
+                'msg': 'Dataset(s) not uploaded into database',
+                'type': 'data-append'
             }
 
         return json.dumps(response)
@@ -159,6 +207,7 @@ class Load_Data(object):
         supplied parameters:
 
             - data_new
+            - data_append
             - model_generate
             - model_predict
 
@@ -169,7 +218,8 @@ class Load_Data(object):
             return {'session_type': session_type, 'error': None}
         else:
             error = 'Error: the provided \'svm_type\' must be '\
-                '\'data_new\', \'model_generate\', or \'model_predict\'.'
+                '\'data_new\', \'data_append\', \'model_generate\', or'\
+                '\'model_predict\'.'
             self.list_error.append(error)
             return {'session_type': None, 'error': error}
 

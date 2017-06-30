@@ -8,6 +8,7 @@ This file performs validation on session settings.
 
 from jsonschema.validators import Draft4Validator
 from brain.schema.session import schema_data_new
+from brain.schema.session import schema_data_append
 from brain.schema.session import schema_model_generate
 from brain.schema.session import schema_model_predict
 
@@ -36,8 +37,8 @@ class Validator(object):
     def validate(self):
         '''
 
-        This method validates the premodel settings for the 'data_new',
-        'model_generate', or 'model_predict' sessions.
+         This method validates the premodel settings for the 'data_new',
+        'data_append', 'model_generate', or 'model_predict' sessions.
 
         Note: This method does not validate the associated 'file upload(s)',
               which is the responsibility of the mongodb query process.
@@ -51,6 +52,14 @@ class Validator(object):
         if self.session_type == 'data_new':
             try:
                 validate = Draft4Validator(schema_data_new())
+                validate.validate(self.premodel_settings)
+            except Exception, error:
+                list_error.append(str(error))
+
+        # validation on 'data_append' session
+        if self.session_type == 'data_append':
+            try:
+                validate = Draft4Validator(schema_data_append())
                 validate.validate(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))

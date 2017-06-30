@@ -3,6 +3,8 @@
 This file will test the following svr sessions:
 
   - data_new: stores supplied dataset into a SQL database.
+  - data_append: appends supplied dataset to an already stored dataset in an
+                 SQL database.
   - model_generate: generate an model by selecting a particular range of
                     dataset (session), and store it into a NoSQL cache.
   - model_predict: generate a prediction by selecting a particular cached
@@ -69,6 +71,30 @@ def test_data_new(client, live_server):
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
         data=get_sample_json('svr-data-new.json', 'svr')
+    )
+
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+
+
+def test_data_append(client, live_server):
+    '''
+
+    This method tests the 'data_new' session.
+
+    '''
+
+    @live_server.app.route('/load-data')
+    def get_endpoint():
+        return url_for('name.load_data', _external=True)
+
+    live_server.start()
+
+    res = client.post(
+        get_endpoint(),
+        headers={'Content-Type': 'application/json'},
+        data=get_sample_json('svr-data-append.json', 'svr')
     )
 
     # assertion checks

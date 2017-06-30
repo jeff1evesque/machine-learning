@@ -7,6 +7,7 @@
 import React from 'react';
 import { Router, Route, browserHistory } from 'react-router';
 import DataNewState from './import/redux/container/data-new.jsx';
+import DataAppendState from './import/redux/container/data-append.jsx';
 import ModelGenerateState from './import/redux/container/model-generate.jsx';
 import ModelPredictState from './import/redux/container/model-predict.jsx';
 import ResultState from './import/redux/container/results.jsx';
@@ -49,6 +50,13 @@ var AppRouter = React.createClass({
                             }}
                         />
                         <Route
+-                            path='/session/data-append'
+-                            components={{
+-                                content: DataAppendState,
+-                                content_type: 'data_append'
+-                            }}
+-                        />
+-                        <Route
                             path='/session/model-generate'
                             components={{
                                 content: ModelGenerateState,

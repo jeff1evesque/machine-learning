@@ -90,9 +90,10 @@ The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master
 
 - `data_new`: store the provided dataset(s), within the implemented sql
  database.
+- `data_append`: append additional dataset(s), to an existing representation
+ (from an earlier `data_new` session), within the implemented sql database.
 - `model_generate`: using previous stored dataset(s) (from an earlier
- `data_new` session), generate a corresponding model into the
- implemented nosql datastore.
+- `data_new`, or `data_append` session), generate a corresponding model into
 - `model_predict`: using a previous stored model (from an earlier
  `model_predict` session), from the implemented nosql datastore, along with
  user supplied values, generate a corresponding prediction.
@@ -125,9 +126,10 @@ The programmatic-interface, or set of API, allow users to implement the
 
 - `data_new`: store the provided dataset(s), within the implemented sql
  database.
+- `data_append`: append additional dataset(s), to an existing representation
+ (from an earlier `data_new` session), within the implemented sql database.
 - `model_generate`: using previous stored dataset(s) (from an earlier
- `data_new` session), generate a corresponding model into
- the implemented nosql datastore.
+- `data_new`, or `data_append` session), generate a corresponding model into
 - `model_predict`: using a previous stored model (from an earlier
  `model_predict` session), from the implemented nosql datastore, along with
  user supplied values, generate a corresponding prediction.

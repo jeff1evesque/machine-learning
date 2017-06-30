@@ -1,20 +1,20 @@
-========
-Data New
-========
+===========
+Data Append
+===========
 
-The ``data_new`` session, is an implementation that uploads new dataset(s), which can later be used
-to generate successive models. There are two ways, for a ``data_new`` session to upload data, to the
-``/load-data`` endpoint:
+The ``data_append`` session, is an implementation that appends additional dataset(s), to
+a previous implemented ``data_new`` session. Like the ``data_new`` session, there are two
+ways to upload data, to the ``/load-data`` endpoint:
 
 - dataset urls: ``json`` string, containing an array of ``dataset`` urls.
 
-  - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/dataset_url/svm-data-new.json>`_
-  - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/dataset_url/svr-data-new.json>`_
+  - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/dataset_url/svm-data-append.json>`_
+  - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/dataset_url/svr-data-append.json>`_
 
 - file uploads: ``json`` string, containing an inline array of ``dataset`` values.
 
-  - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/file_upload/svm-data-new.json>`_
-  - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-new.json>`_
+  - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/file_upload/svm-data-append.json>`_
+  - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-append.json>`_
 
 **Note:** the content of each of the above examples, can be substituted for
 the ``data`` attribute, in a given ``POST`` request:
@@ -29,8 +29,6 @@ the ``data`` attribute, in a given ``POST`` request:
     requests.post(endpoint_url, headers=headers, data=json_string_here)
 
 The following properties define the above ``data`` attribute:
-
-- ``session_name``: title for the corresponding ``data_new`` session
 
 - ``dataset_type``: corresponds to one of the following types:
 
@@ -50,5 +48,8 @@ The following properties define the above ``data`` attribute:
 
   - ``svm``
   - ``svr``
+
+- ``session_id``: corresponds to the id associated with the original ``data_new``
+  uploaded dataset(s), being appended to.
 
 - ``dataset``: the supplied dataset, contingent upon the ``dataset_type``
