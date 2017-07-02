@@ -53,7 +53,7 @@ class Collection(object):
         '''
 
         # insert / update dataset value(s)
-        self.nosql.connect(database, collection)
+        self.nosql.connect(collection)
         response = self.nosql.execute(operation, payload)
 
         # retrieve any error(s), disconnect from database
