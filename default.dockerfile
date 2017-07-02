@@ -26,7 +26,9 @@ RUN apt-get -y install puppet-agent
 
 ## install r10k
 ##
-## Note: r10k needs 'semantic_puppet' at '0.1.0', though newer versions exists.
+## Note: r10k requires 'semantic_puppet' at '0.1.0':
+##
+##       https://github.com/jeff1evesque/machine-learning/issues/2991
 ##
 RUN apt-get -y install rubygems-integration=1.5
 RUN gem install semantic_puppet -v 0.1.0
