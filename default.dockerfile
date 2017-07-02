@@ -32,6 +32,7 @@ RUN apt-get -y install puppet-agent
 ##
 RUN apt-get -y install rubygems-integration=1.5
 RUN gem install semantic_puppet -v 0.1.0
+RUN gem install puppet_forge -v 2.2.5
 RUN gem install r10k -v 2.5.5
 
 ## install pytest-cov
