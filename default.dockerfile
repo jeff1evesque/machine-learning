@@ -25,8 +25,12 @@ RUN apt-get -y update
 RUN apt-get -y install puppet-agent
 
 ## install r10k
+##
+## Note: r10k needs 'semantic_puppet' at '0.1.0', though newer versions exists.
+##
 RUN apt-get -y install rubygems-integration=1.5
-RUN gem install r10k -v 2.5.2
+RUN gem install semantic_puppet -v 0.1.0
+RUN gem install r10k -v 2.5.5
 
 ## install pytest-cov
 RUN pip install pytest-cov==2.4.0
