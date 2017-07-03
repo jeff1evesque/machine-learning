@@ -97,7 +97,7 @@ class BaseData(Base):
         '''
 
         # save dataset
-        collection = premodel_data['properties']['collection']
+        collection = self.premodel_data['properties']['collection']
         collection_adjusted = collection.lower().replace(' ', '_')
         cursor = Collection()
         if self.dataset:
