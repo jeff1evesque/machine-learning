@@ -10,8 +10,6 @@ PATH="/usr/local/bin:$PATH"
 
 
 cd "$1"/src/jsx && for file in *; do
-  # filename (without 'last' extension)
-  filename="${file%.*}"
   # get last `.` occurence as starting extension
   file_extension="${file##*.}"
 
