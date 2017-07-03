@@ -1,5 +1,6 @@
 {
     "properties": {
+        "collection": "svr-1",
         "dataset_type": "dataset_url",
         "session_type": "data_append",
         "model_type": "svr",

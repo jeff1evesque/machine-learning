@@ -1,5 +1,6 @@
 {
     "properties": {
+        "collection": "svr-1",
         "session_type": "model_predict",
         "model_id": "2",
         "prediction_input[]": [

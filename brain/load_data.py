@@ -69,9 +69,7 @@ class Load_Data(object):
                 session.convert_dataset(session_id)
                 session.check()
 
-                session_name = self.data['properties']['session_name'].lower()
-                collection = session_name.replace(' ', '_')
-                session.save_premodel_dataset(collection)
+                session.save_premodel_dataset()
                 session.check()
 
             response = {

@@ -1,7 +1,7 @@
 {
     "properties": {
+        "collection": "svm-1",
         "session_type": "model_predict",
-        "model_id": "1",
         "prediction_input[]": [
             "22.22",
             "96.24",

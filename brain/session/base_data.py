@@ -88,7 +88,7 @@ class BaseData(Base):
         else:
             return {'status': True, 'id': response['id'], 'error': None}
 
-    def save_premodel_dataset(self, collection):
+    def save_premodel_dataset(self):
         '''
 
         This method saves the entire the dataset collection, as a json
@@ -97,10 +97,12 @@ class BaseData(Base):
         '''
 
         # save dataset
+        collection = premodel_data['data']['settings']['collection']
+        collection_adjusted = collection.lower().replace(' ', '_')
         cursor = Collection()
         if self.dataset:
             response = cursor.query(
-                collection,
+                collection_adjusted,
                 'insert_one',
                 self.premodel_data
             )

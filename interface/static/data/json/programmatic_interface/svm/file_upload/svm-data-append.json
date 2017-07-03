@@ -1,9 +1,9 @@
 {
 	"properties": {
-		"dataset_type": "file_upload",
-		"session_type": "data_append",
-		"model_type": "svm",
-		"session_id": "3"
+        "collection": "svm-2",
+        "dataset_type": "file_upload",
+        "session_type": "data_append",
+        "model_type": "svm"
 	},
 	"dataset": [
         {

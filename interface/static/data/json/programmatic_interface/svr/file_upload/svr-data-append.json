@@ -1,9 +1,10 @@
 {
 	"properties": {
-		"dataset_type": "file_upload",
-		"session_type": "data_append",
-		"model_type": "svr",
-		"session_id": "4"
+        "collection": "svr-2",
+        "dataset_type": "file_upload",
+        "session_type": "data_append",
+        "model_type": "svr",
+        "session_id": "4"
 	},
 	"dataset": [{
 			"dependent-variable": "19.348",

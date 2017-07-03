@@ -1,5 +1,6 @@
 {
     "properties": {
+        "collection": "svr-2",
         "session_type": "model_generate",
         "session_id": "4",
         "model_type": "svr",

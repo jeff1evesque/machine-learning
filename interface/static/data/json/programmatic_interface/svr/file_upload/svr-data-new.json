@@ -1,6 +1,7 @@
 {
     "properties": {
         "session_name": "sample_svr_title",
+        "collection": "svr-2",
         "dataset_type": "file_upload",
         "session_type": "data_new",
         "model_type": "svr"
