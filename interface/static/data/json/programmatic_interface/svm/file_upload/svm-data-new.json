@@ -1,10 +1,10 @@
 {
 	"properties": {
-        "session_name": "sample_svm_title",
-        "collection": "svm-2",
-        "dataset_type": "file_upload",
-        "session_type": "data_new",
-        "model_type": "svm"
+            "session_name": "sample_svm_title",
+            "collection": "svm-2",
+            "dataset_type": "file_upload",
+            "session_type": "data_new",
+            "model_type": "svm"
 	},
 	"dataset": [{
 			"dependent-variable": "dep-variable-1",
