@@ -50,13 +50,13 @@ var AppRouter = React.createClass({
                             }}
                         />
                         <Route
--                            path='/session/data-append'
--                            components={{
--                                content: DataAppendState,
--                                content_type: 'data_append'
--                            }}
--                        />
--                        <Route
+                            path='/session/data-append'
+                            components={{
+                                content: DataAppendState,
+                                content_type: 'data_append'
+                            }}
+                        />
+                        <Route
                             path='/session/model-generate'
                             components={{
                                 content: ModelGenerateState,
