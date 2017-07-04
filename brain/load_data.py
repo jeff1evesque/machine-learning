@@ -213,7 +213,7 @@ class Load_Data(object):
 
         '''
 
-        session_type = self.data['data']['settings']['session_type']
+        session_type = self.data['properties']['session_type']
         if session_type in self.session_list:
             return {'session_type': session_type, 'error': None}
         else:
