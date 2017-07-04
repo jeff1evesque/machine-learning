@@ -126,15 +126,16 @@ def load_data():
             loader = Load_Data(data_formatted)
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
+                collection = settings['collection']
 
                 if session_type == 'data_new':
-                    response = loader.load_data_new()
+                    response = loader.load_data_new(collection)
                 elif session_type == 'data_append':
-                    response = loader.load_data_append()
+                    response = loader.load_data_append(collection)
                 elif session_type == 'model_generate':
-                    response = loader.load_model_generate()
+                    response = loader.load_model_generate(collection)
                 elif session_type == 'model_predict':
-                    response = loader.load_model_predict()
+                    response = loader.load_model_predict(collection)
                 else:
                     response = loader.get_errors()
 
