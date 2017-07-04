@@ -76,31 +76,19 @@ def load_data():
 
         # programmatic-interface
         if request.get_json():
-            # get necessary components from the dataset
-            if 'dataset' in request.get_json():
-                dataset = request.get_json()['dataset']
-            else:
-                dataset = None
-            settings = request.get_json()['properties']
-
-            # restructure the dataset
-            sender = Settings(settings, dataset)
-            data_formatted = sender.restructure()
-
-            # send reformatted data to brain
-            loader = Load_Data(data_formatted)
+            # send data to brain
+            loader = Load_Data(request.get_json())
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
-                collection = settings['collection']
 
                 if session_type == 'data_new':
-                    response = loader.load_data_new(collection)
+                    response = loader.load_data_new()
                 elif session_type == 'data_append':
-                    response = loader.load_data_append(collection)
+                    response = loader.load_data_append()
                 elif session_type == 'model_generate':
-                    response = loader.load_model_generate(collection)
+                    response = loader.load_model_generate()
                 elif session_type == 'model_predict':
-                    response = loader.load_model_predict(collection)
+                    response = loader.load_model_predict()
                 else:
                     response = loader.get_errors()
 
@@ -126,16 +114,15 @@ def load_data():
             loader = Load_Data(data_formatted)
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
-                collection = settings['collection']
 
                 if session_type == 'data_new':
-                    response = loader.load_data_new(collection)
+                    response = loader.load_data_new()
                 elif session_type == 'data_append':
-                    response = loader.load_data_append(collection)
+                    response = loader.load_data_append()
                 elif session_type == 'model_generate':
-                    response = loader.load_model_generate(collection)
+                    response = loader.load_model_generate()
                 elif session_type == 'model_predict':
-                    response = loader.load_model_predict(collection)
+                    response = loader.load_model_predict()
                 else:
                     response = loader.get_errors()
 

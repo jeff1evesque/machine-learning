@@ -47,7 +47,7 @@ class BaseData(Base):
         # class variable
         self.list_error = []
         self.dataset = []
-        self.model_type = premodel_data['data']['settings']['model_type']
+        self.model_type = premodel_data['properties']['model_type']
         self.premodel_data = premodel_data
 
         if 'uid' in session:

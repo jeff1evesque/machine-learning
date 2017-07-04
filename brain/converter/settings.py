@@ -108,7 +108,7 @@ class Settings(object):
             dataset = None
 
         # build input structure
-        data = {'settings': formatted_settings, 'dataset': dataset}
+        data = {formatted_settings, dataset}
 
         # return new structured data
         return {'data': data, 'error': None}
