@@ -40,7 +40,7 @@ class Base(object):
         '''
 
         self.premodel_data = premodel_data
-        self.session_type = self.premodel_data['properties']'session_type']
+        self.session_type = self.premodel_data['properties']['session_type']
         self.list_model_type = current_app.config.get('MODEL_TYPE')
         self.list_error = []
 
