@@ -26,9 +26,9 @@ def dataset2dict(id_entity, model_type, upload):
     list_error = []
     converted = []
     payload = None
-    dataset = upload['data']['dataset']
-    settings = upload['data']['settings']
-    json_upload = upload['data']['dataset'].get('json_string', None)
+    dataset = upload['dataset']
+    settings = upload['properties']
+    json_upload = upload['dataset'].get('json_string', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
     if json_upload:
