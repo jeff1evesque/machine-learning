@@ -31,7 +31,7 @@ class Validator(object):
         '''
 
         self.premodel_data = premodel_data
-        self.premodel_settings = self.premodel_data['data']['settings']
+        self.premodel_settings = self.premodel_data['properties']
         self.session_type = session_type
 
     def validate(self):
