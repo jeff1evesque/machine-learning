@@ -1,6 +1,7 @@
 {
 	"properties": {
             "collection": "svr-2",
+            "format": "json",
             "dataset_type": "file_upload",
             "session_type": "data_append",
             "model_type": "svr"

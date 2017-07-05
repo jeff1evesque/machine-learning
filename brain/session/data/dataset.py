@@ -26,19 +26,13 @@ def dataset2dict(id_entity, model_type, upload):
     list_error = []
     converted = []
     payload = None
-    dataset = upload['dataset']
     settings = upload['properties']
-    json_upload = upload['dataset'].get('json_string', None)
+    dataset_type = settings.get('dataset_type', None)
+    format = settings.get('format', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
-    if json_upload:
-        is_json = True
-    else:
-        is_json = False
-
     try:
-        # web-interface: define flag to convert to dataset to json
-        if dataset['file_upload']:
+        if dataset_type == 'file_upload':
             for val in dataset['file_upload']:
                 # reset file-pointer
                 val['file'].seek(0)
@@ -51,11 +45,11 @@ def dataset2dict(id_entity, model_type, upload):
                 )
 
                 # convert dataset(s)
-                if val['type'] == 'csv':
+                if format == 'csv':
                     converted.append(converter.csv_to_dict())
-                elif val['type'] == 'json':
+                elif format == 'json':
                     converted.append(converter.json_to_dict())
-                elif val['type'] == 'xml':
+                elif format == 'xml':
                     converted.append(converter.xml_to_dict())
 
             # build new (relevant) dataset
@@ -65,8 +59,7 @@ def dataset2dict(id_entity, model_type, upload):
                 'settings': settings
             }
 
-        # programmatic-interface
-        elif json_upload:
+        elif dataset_type == 'dataset_url':
             # classification
             if settings['model_type'] == list_model_type[0]:
                 # conversion
