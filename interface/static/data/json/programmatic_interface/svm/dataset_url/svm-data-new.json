@@ -2,7 +2,6 @@
     "properties": {
         "session_name": "sample_svm_title",
         "collection": "svm-1",
-        "format": "json",
         "dataset_type": "dataset_url",
         "session_type": "data_new",
         "model_type": "svm"

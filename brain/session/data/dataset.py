@@ -8,6 +8,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+import magic
 from flask import current_app
 from brain.converter.dataset import Dataset
 
@@ -28,28 +29,28 @@ def dataset2dict(id_entity, model_type, upload):
     payload = None
     settings = upload['properties']
     dataset_type = settings.get('dataset_type', None)
-    format = settings.get('format', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
+    f = magic.Magic(mime=True, uncompress=True)
 
     try:
         if dataset_type == 'file_upload':
             for val in dataset['file_upload']:
                 # reset file-pointer
-                val['file'].seek(0)
+                val.seek(0)
 
                 # initialize converter
                 converter = Dataset(
-                    val['file'],
+                    val,
                     model_type,
                     is_json
                 )
 
                 # convert dataset(s)
-                if format == 'csv':
+                if f.from_file(val) == 'application/text':
                     converted.append(converter.csv_to_dict())
-                elif format == 'json':
+                elif f.from_file(val) == 'application/json':
                     converted.append(converter.json_to_dict())
-                elif format == 'xml':
+                elif f.from_file(val) == 'application/xml':
                     converted.append(converter.xml_to_dict())
 
             # build new (relevant) dataset

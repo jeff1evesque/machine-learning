@@ -1,7 +1,6 @@
 {
     "properties": {
         "collection": "svm-1",
-        "format": "json",
         "dataset_type": "dataset_url",
         "session_type": "data_append",
         "model_type": "svm"
