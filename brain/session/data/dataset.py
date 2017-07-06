@@ -30,7 +30,7 @@ def dataset2dict(id_entity, model_type, upload):
 
     try:
         # programmatic-interface
-        if settings['stream']:
+        if stream:
             converter = Dataset(datasets, model_type)
             converted.append(converter.json_to_dict())
 
