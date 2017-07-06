@@ -81,7 +81,7 @@ def dataset2dict(id_entity, model_type, upload):
             # regression
             elif settings['model_type'] == list_model_type[1]:
                 # conversion
-                converter = Dataset(json_upload, model_type, True)
+                converter = Dataset(json_upload, model_type)
                 converted.append(converter.json_to_dict())
 
                 # build new (relevant) dataset
