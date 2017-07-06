@@ -33,7 +33,7 @@ class Dataset(object):
 
     '''
 
-    def __init__(self, raw_data, model_type, is_json=False):
+    def __init__(self, raw_data, model_type):
         '''
 
         This constructor is responsible for defining class variables.
@@ -42,12 +42,9 @@ class Dataset(object):
             dataset(s), to be used when computing a corresponding model. If
             this argument is a file, it needs to be closed.
 
-        @is_json, flag indicating 'raw_data' is a json string.
-
         '''
 
         self.raw_data = raw_data
-        self.is_json = is_json
         self.model_type = model_type
         self.classification = current_app.config.get('MODEL_TYPE')[0]
         self.regression = current_app.config.get('MODEL_TYPE')[1]
@@ -81,15 +78,14 @@ class Dataset(object):
         '''
 
         This method converts the supplied json file-object to a python
-        dictionary.
+        dictionary. Otherwise, return the dictionary as is.
 
         '''
 
-        if self.is_json:
-            dataset = self.raw_data
-
-        else:
+        try:
             dataset = json.load(self.raw_data)
+        except:
+            dataset = self.raw_data
 
         return dataset
 

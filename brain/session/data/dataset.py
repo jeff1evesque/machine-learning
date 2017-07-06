@@ -27,6 +27,7 @@ def dataset2dict(id_entity, model_type, upload):
     list_error = []
     converted = []
     payload = None
+    datasets = upload['datasets']
     settings = upload['properties']
     dataset_type = settings.get('dataset_type', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
@@ -34,16 +35,12 @@ def dataset2dict(id_entity, model_type, upload):
 
     try:
         if dataset_type == 'file_upload':
-            for val in dataset['file_upload']:
+            for val in datasets:
                 # reset file-pointer
                 val.seek(0)
 
                 # initialize converter
-                converter = Dataset(
-                    val,
-                    model_type,
-                    is_json
-                )
+                converter = Dataset(val, model_type)
 
                 # convert dataset(s)
                 if f.from_file(val) == 'text/plain':
@@ -56,6 +53,7 @@ def dataset2dict(id_entity, model_type, upload):
                         converted.append(converter.csv_to_dict())
                     except Exception:
                         pass
+
                 elif f.from_file(val) == 'application/xml':
                     converted.append(converter.xml_to_dict())
 
@@ -70,7 +68,7 @@ def dataset2dict(id_entity, model_type, upload):
             # classification
             if settings['model_type'] == list_model_type[0]:
                 # conversion
-                converter = Dataset(dataset, model_type, True)
+                converter = Dataset(dataset, model_type)
                 converted.append(converter.json_to_dict())
 
                 # build new (relevant) dataset
