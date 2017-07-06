@@ -4,7 +4,8 @@
             "dataset_type": "dataset_url",
             "session_type": "data_append",
             "model_type": "svr",
-            "session_id": "2"
+            "session_id": "2",
+            "stream": "true"
     },
     "dataset": [
         "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/svr.json",

@@ -4,7 +4,8 @@
             "collection": "svm-2",
             "dataset_type": "file_upload",
             "session_type": "data_new",
-            "model_type": "svm"
+            "model_type": "svm",
+            "stream": "true"
 	},
 	"dataset": [{
 			"dependent-variable": "dep-variable-1",

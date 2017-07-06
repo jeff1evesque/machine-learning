@@ -4,7 +4,8 @@
         "collection": "svr-2",
         "dataset_type": "file_upload",
         "session_type": "data_new",
-        "model_type": "svr"
+        "model_type": "svr",
+        "stream": "true"
     },
     "dataset": [{
             "dependent-variable": 31.111,

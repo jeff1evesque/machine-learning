@@ -3,7 +3,8 @@
         "collection": "svm-2",
         "dataset_type": "file_upload",
         "session_type": "data_append",
-        "model_type": "svm"
+        "model_type": "svm",
+        "stream": "true"
 	},
 	"dataset": [
         {

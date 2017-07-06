@@ -8,7 +8,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from flask import current_app
 from brain.converter.dataset import Dataset
 
 
@@ -27,6 +26,7 @@ def dataset2dict(id_entity, model_type, upload):
     converted = []
     datasets = upload['datasets']
     settings = upload['properties']
+    stream = settings.get('stream', None)
 
     try:
         # programmatic-interface
