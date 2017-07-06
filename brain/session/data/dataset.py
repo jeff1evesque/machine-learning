@@ -46,10 +46,16 @@ def dataset2dict(id_entity, model_type, upload):
                 )
 
                 # convert dataset(s)
-                if f.from_file(val) == 'application/text':
-                    converted.append(converter.csv_to_dict())
-                elif f.from_file(val) == 'application/json':
-                    converted.append(converter.json_to_dict())
+                if f.from_file(val) == 'text/plain':
+                    try:
+                        converted.append(converter.json_to_dict())
+                    except Exception:
+                        pass
+
+                    try:
+                        converted.append(converter.csv_to_dict())
+                    except Exception:
+                        pass
                 elif f.from_file(val) == 'application/xml':
                     converted.append(converter.xml_to_dict())
 
