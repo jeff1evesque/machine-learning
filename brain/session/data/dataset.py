@@ -24,7 +24,7 @@ def dataset2dict(id_entity, model_type, upload):
     # local variables
     list_error = []
     converted = []
-    datasets = upload['datasets']
+    datasets = upload['dataset']
     settings = upload['properties']
     stream = settings.get('stream', None)
 
