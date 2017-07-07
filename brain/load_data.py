@@ -102,7 +102,7 @@ class Load_Data(object):
 
         # define current session id
         collection = self.data['properties']['collection']
-        session_id = Session().get_session_id(collection)
+        session_id = Session().get_session_id(collection)['result']
         session.validate_id(session_id)
 
         # implement class methods
