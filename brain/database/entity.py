@@ -69,7 +69,7 @@ class Entity(object):
         elif self.session_type == 'data_new':
             sql_statement = 'INSERT INTO tbl_dataset_entity '\
                 '(title, collection, model_type, uid_created, datetime_created) '\
-                'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
+                'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
             args = (
                 self.premodel_data['title'],
                 self.premodel_data['collection'],
