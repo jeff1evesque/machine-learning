@@ -36,7 +36,7 @@ class Session(object):
     def get_session_id(self, collection):
         '''
 
-        This method is responsible for retrieving the session_id, given
+        This method is responsible for retrieving the 'session_id', given
         that the 'collection' is known.
 
         '''
