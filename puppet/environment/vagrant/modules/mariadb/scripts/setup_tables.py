@@ -94,6 +94,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
                         id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         title VARCHAR (50) NOT NULL,
+                        collection VARCHAR (50) NOT NULL UNIQUE,
                         model_type INT NOT NULL,
                         uid_created INT NOT NULL,
                         datetime_created DATETIME NOT NULL,

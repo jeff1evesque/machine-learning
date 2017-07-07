@@ -12,6 +12,7 @@ from brain.session.data_append import DataAppend
 from brain.session.data_new import DataNew
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
+from brain.database.session import Session
 
 
 class Load_Data(object):
@@ -100,7 +101,8 @@ class Load_Data(object):
         session = DataAppend(self.data)
 
         # define current session id
-        session_id = self.data['data']['settings']['session_id']
+        collection = self.data['properties']['collection']
+        session_id = Session().get_session_id(collection)
         session.validate_id(session_id)
 
         # implement class methods

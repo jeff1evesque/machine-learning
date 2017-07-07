@@ -33,6 +33,29 @@ class Session(object):
         self.sql = SQL()
         self.db_ml = current_app.config.get('SQL_DB')
 
+    def get_session_id(self, collection):
+        '''
+
+        This method is responsible for retrieving the session_id, given
+        that the 'collection' is known.
+
+        '''
+
+        self.sql.connect(self.db_ml)
+        sql_statement = 'SELECT id_entity FROM tbl_dataset_entity '\
+            'WHERE collection=%s'
+        args = (collection)
+        response = self.sql.execute('select', sql_statement)
+
+        # disconnect from database
+        self.sql.disconnect()
+
+        # return result
+        if response_error:
+            return {'result': None, 'error': response_error}
+        else:
+            return {'result': response, 'error': None}
+
     def get_all_sessions(self):
         '''
 
