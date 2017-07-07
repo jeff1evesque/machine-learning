@@ -11,7 +11,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 import sys
-from flask import current_app
 from brain.validator.settings import Validator
 
 
