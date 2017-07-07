@@ -45,9 +45,10 @@ class Session(object):
         sql_statement = 'SELECT id_entity FROM tbl_dataset_entity '\
             'WHERE collection=%s'
         args = (collection)
-        response = self.sql.execute('select', sql_statement)
+        response = self.sql.execute('select', sql_statement, args)
 
-        # disconnect from database
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
         self.sql.disconnect()
 
         # return result
