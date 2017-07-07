@@ -64,7 +64,7 @@ class DataNew(BaseData):
         premodel_settings = self.premodel_data['properties']
         premodel_entity = {
             'title': premodel_settings.get('session_name', None),
-            'collection': premodel_settings['collection']
+            'collection': premodel_settings['collection'],
             'model_type': numeric_model_type,
             'uid': self.uid,
         }
