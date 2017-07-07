@@ -30,8 +30,7 @@ class Validator(object):
 
         '''
 
-        self.premodel_data = premodel_data
-        self.premodel_settings = self.premodel_data['properties']
+        self.premodel_settings = premodel_data
         self.session_type = session_type
 
     def validate(self):
