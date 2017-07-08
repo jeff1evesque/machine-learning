@@ -55,7 +55,7 @@ class Session(object):
         if response_error:
             return {'result': None, 'error': response_error}
         else:
-            return {'result': response['result'][0], 'error': None}
+            return {'result': response['result'][0][0], 'error': None}
 
     def get_all_sessions(self):
         '''
