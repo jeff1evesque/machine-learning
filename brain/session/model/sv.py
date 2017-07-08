@@ -11,7 +11,6 @@ from brain.database.dataset import Collection
 from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
-import numpy
 import json
 
 
@@ -49,10 +48,11 @@ def generate(model, kernel_type, collection, payload, list_error):
     for observation in data['dataset']:
         observation_labels.append(observation['dependent-variable'])
         indep_variables = observation['independent-variables']
-        sorted_features = [v for k,v in sorted(indep_variables.items())]
+        sorted_features = [v for k, v in sorted(indep_variables.items())]
         grouped_features.append(sorted_features)
 
-    dataset = numpy.asarray(data['dataset'])
+        if not feature_labels:
+            feature_labels = [k for k, v in sorted(indep_variables.items())]
 
     # generate svm model
     if model == list_model_type[0]:
