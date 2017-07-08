@@ -7,12 +7,10 @@ This file generates an sv model.
 '''
 
 from flask import current_app
-from brain.database.entity import Entity
 from brain.database.dataset import Collection
 from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
-from log.logger import Logger
 import numpy
 import json
 
@@ -33,7 +31,6 @@ def generate(model, kernel_type, collection, payload, list_error):
     '''
 
     # local variables
-    logger = Logger(__name__, 'error', 'error')
     label_encoder = preprocessing.LabelEncoder()
     list_model_type = current_app.config.get('MODEL_TYPE')
     collection_adjusted = collection.lower().replace(' ', '_')
@@ -45,6 +42,16 @@ def generate(model, kernel_type, collection, payload, list_error):
         'find',
         payload
     )
+
+    # restructure dataset into arrays
+    observation_labels = []
+    grouped_features = []
+    for observation in data['dataset']:
+        observation_labels.append(observation['dependent-variable'])
+        indep_variables = observation['independent-variables']
+        sorted_features = [v for k,v in sorted(indep_variables.items())]
+        grouped_features.append(sorted_features)
+
     dataset = numpy.asarray(data['dataset'])
 
     # generate svm model
