@@ -11,7 +11,6 @@ into respective database table(s), which later can be retrieved within
 '''
 
 from brain.session.base import Base
-from brain.database.session import Session
 from brain.session.model.sv import generate
 
 
@@ -42,9 +41,8 @@ class ModelGenerate(Base):
 
         super(ModelGenerate, self).__init__(premodel_data)
         premodel_settings = self.premodel_data['properties']
-        collection = self.premodel_settings['collection']
+        self.collection = self.premodel_settings['collection']
         self.kernel = str(premodel_settings['sv_kernel_type'])
-        self.session_id = Session().get_session_id(collection)['result']
         self.list_error = []
 
     def generate_model(self):
@@ -65,7 +63,8 @@ class ModelGenerate(Base):
             result = generate(
                 model_type,
                 self.kernel,
-                self.session_id,
+                self.collection,
+                None,
                 self.list_error
             )
 
