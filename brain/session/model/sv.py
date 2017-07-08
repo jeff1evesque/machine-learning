@@ -60,7 +60,7 @@ def generate(model, kernel_type, collection, payload, list_error):
     if model == list_model_type[0]:
         # convert observation labels to a unique integer representation
         label_encoder = preprocessing.LabelEncoder()
-        label_encoder.fit(dataset[:, 0])
+        label_encoder.fit(list(set(observation_labels))
         encoded_labels = label_encoder.transform(observation_labels)
 
         # create model
