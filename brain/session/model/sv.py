@@ -45,14 +45,16 @@ def generate(model, kernel_type, collection, payload, list_error):
     # restructure dataset into arrays
     observation_labels = []
     grouped_features = []
-    for observation in data['dataset']:
+    for observations in data['dataset']:
         observation_labels.append(observation['dependent-variable'])
-        indep_variables = observation['independent-variables']
-        sorted_features = [v for k, v in sorted(indep_variables.items())]
-        grouped_features.append(sorted_features)
 
-        if not feature_labels:
-            feature_labels = [k for k, v in sorted(indep_variables.items())]
+        for observation in observations:
+            indep_variables = observation['independent-variables']
+            sorted_features = [v for k, v in sorted(indep_variables.items())]
+            grouped_features.append(sorted_features)
+
+            if not feature_labels:
+                feature_labels = [k for k, v in sorted(indep_variables.items())]
 
     # generate svm model
     if model == list_model_type[0]:
