@@ -30,6 +30,7 @@ def generate(model, kernel_type, collection, payload, list_error):
     '''
 
     # local variables
+    feature_labels = None
     label_encoder = preprocessing.LabelEncoder()
     list_model_type = current_app.config.get('MODEL_TYPE')
     collection_adjusted = collection.lower().replace(' ', '_')
@@ -46,7 +47,7 @@ def generate(model, kernel_type, collection, payload, list_error):
     observation_labels = []
     grouped_features = []
     for observations in data['dataset']:
-        observation_labels.append(observation['dependent-variable'])
+        observation_labels.append(observations['dependent-variable'])
 
         for observation in observations:
             indep_variables = observation['independent-variables']
