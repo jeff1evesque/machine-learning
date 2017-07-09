@@ -41,7 +41,7 @@ class ModelGenerate(Base):
 
         super(ModelGenerate, self).__init__(premodel_data)
         premodel_settings = self.premodel_data['properties']
-        self.collection = self.premodel_settings['collection']
+        self.collection = premodel_settings['collection']
         self.kernel = str(premodel_settings['sv_kernel_type'])
         self.list_error = []
 
