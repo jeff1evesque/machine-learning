@@ -105,26 +105,24 @@ class NoSQL(object):
 
         if self.proceed:
             try:
-                posts = self.collection.posts
-
                 if operation == 'insert_one':
-                    result = posts.insert_one(payload)
+                    result = self.collection.insert_one(payload)
                 if operation == 'insert_many':
-                    result = posts.insert_many(payload)
+                    result = self.collection.insert_many(payload)
                 elif operation == 'update_one':
-                    result = posts.update_one(payload)
+                    result = self.collection.update_one(payload)
                 elif operation == 'update_many':
-                    result = posts.update_many(payload)
+                    result = self.collection.update_many(payload)
                 elif operation == 'delete_one':
-                    result = posts.delete_one(payload)
+                    result = self.collection.delete_one(payload)
                 elif operation == 'delete_many':
-                    result = posts.delete_many(payload)
+                    result = self.collection.delete_many(payload)
                 elif operation == 'find':
-                    result = posts.find(payload)
+                    result = self.collection.find(payload)
                 elif operation == 'find_one':
-                    result = posts.find_one(payload)
+                    result = self.collection.find_one(payload)
                 elif operation == 'map_reduce':
-                    result = posts.map_reduce(
+                    result = self.collection.map_reduce(
                         payload['map'],
                         payload['reduce'],
                         payload['out'],
@@ -132,11 +130,11 @@ class NoSQL(object):
                         payload['kwargs']
                     )
                 elif operation == 'delete_one':
-                    result = posts.delete_one(payload)
+                    result = self.collection.delete_one(payload)
                 elif operation == 'delete_many':
-                    result = posts.delete_many(payload)
+                    result = self.collection.delete_many(payload)
                 elif operation == 'drop_collection':
-                    result = posts.drop_collection(payload)
+                    result = self.collection.drop_collection(payload)
 
             except errors, error:
                 self.list_error.append(error)
