@@ -8,6 +8,7 @@ class mongodb::create_users {
     ## local variables
     $database       = lookup('database')['mongodb']
     $authorization  = $database['security']['authorization']
+    $hostname       = $database['hostname']
     $username       = $database['username']
     $password       = $database['password']
 
@@ -41,7 +42,6 @@ class mongodb::create_users {
         cwd         => '/root/build',
         path        => '/usr/bin',
         provider    => shell,
-        notify      => Service['upstart-mongod'],
         refreshonly => true,
     }
 }

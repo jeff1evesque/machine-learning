@@ -3,11 +3,12 @@
 ###
 class mongodb::run {
     ## local variables
-    $mongodb       = lookup('database')
-    $storage       = $mongodb['mongodb']['storage']
-    $systemLog     = $mongodb['mongodb']['systemLog']
-    $net           = $mongodb['mongodb']['net']
-    $process       = $mongodb['mongodb']['processManagement']
+    $mongodb       = lookup('database')['mongodb']
+    $authorization = $mongodb['security']['authorization']
+    $storage       = $mongodb['storage']
+    $systemLog     = $mongodb['systemLog']
+    $net           = $mongodb['net']
+    $process       = $mongodb['processManagement']
     $dbPath        = $storage['dbPath']
     $journal       = $storage['journal']['enabled']
     $verbosity     = $systemLog['verbosity']
@@ -33,8 +34,14 @@ class mongodb::run {
         content => dos2unix(template('mongodb/mongodb.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
-        group   => mongodb,
-        notify  => Service['upstart-mongod'],
+        group   => root,
+    }
+
+    file { '/var/run/mongod.pid':
+        ensure  => present,
+        mode    => '0644',
+        owner   => mongodb,
+        group   => mongodb
     }
 
     ## mongod init script
@@ -44,13 +51,20 @@ class mongodb::run {
         mode    => '0644',
         owner   => mongodb,
         group   => mongodb,
-        notify  => Service['upstart-mongod'],
     }
 
     ## enforce mongod init script
-    service { 'upstart-mongod':
-        ensure  => running,
+    ##
+    ## @enable, ensure 'mongod' service starts on boot.
+    ##
+    ## Note: mongod will already be running on initial install.
+    ##
+    service { 'mongod':
         enable  => true,
+        flags   => [
+            '--config',
+            '/etc/mongod.conf',
+        ],
         require => [
             File['/etc/mongod.conf'],
             File['/etc/init/upstart-mongod.conf'],

@@ -5,7 +5,7 @@
 
 ## where and how to store data.
 storage:
-  dbPath: <%= @dbPath[1] %>
+  dbPath: <%= @dbPath[0] %>
   journal:
     enabled: <%= @journal %>
 
@@ -23,7 +23,6 @@ net:
 
 ## mongodb process
 processManagement:
-  fork: <%= @fork %>
   pidFilePath: <%= @pidfilepath %>
 
 ## role-based access controls
