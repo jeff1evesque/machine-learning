@@ -25,8 +25,7 @@ database:
 
         storage:
             dbPath:
-                - /data
-                - /data/db
+                - /var/lib/mongodb
             journal:
                 enabled: true
 
@@ -43,3 +42,6 @@ database:
         processManagement:
             fork: true
             pidfilepath: '/var/run/mongod.pid'
+
+        security:
+            authorization: 'enabled'

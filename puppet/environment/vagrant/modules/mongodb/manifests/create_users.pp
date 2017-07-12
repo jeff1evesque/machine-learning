@@ -7,6 +7,7 @@ class mongodb::create_users {
 
     ## local variables
     $database       = lookup('database')['mongodb']
+    $authorization  = $database['security']['authorization']
     $username       = $database['username']
     $password       = $database['password']
 
@@ -18,8 +19,8 @@ class mongodb::create_users {
     }
     file_line { 'mongodb-uncomment-authorization':
         path        => '/etc/mongod.conf',
-        match       => "^#   authorization: 'enabled'",
-        line        => "   authorization: 'enabled'",
+        match       => "^#   authorization: ${authorization}",
+        line        => "   authorization: ${authorization}",
     }
 
     ## create users
@@ -39,8 +40,8 @@ class mongodb::create_users {
         command     => './create-mongodb-users',
         cwd         => '/root/build',
         path        => '/usr/bin',
-        refreshonly => true,
         provider    => shell,
         notify      => Service['upstart-mongod'],
+        refreshonly => true,
     }
 }
