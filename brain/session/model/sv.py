@@ -36,8 +36,8 @@ def generate(model, kernel_type, collection, payload, list_error):
     collection_adjusted = collection.lower().replace(' ', '_')
     cursor = Collection()
 
-    # get dataset
-    data = cursor.query(
+    # get datasets
+    datasets = cursor.query(
         collection_adjusted,
         'find',
         payload
@@ -46,10 +46,10 @@ def generate(model, kernel_type, collection, payload, list_error):
     # restructure dataset into arrays
     observation_labels = []
     grouped_features = []
-    for observations in data['dataset']:
-        observation_labels.append(observations['dependent-variable'])
+    for dataset in datasets:
+        for observation in dataset['dataset']:
+            observation_labels.append(observation['dependent-variable'])
 
-        for observation in observations:
             indep_variables = observation['independent-variables']
             sorted_features = [v for k, v in sorted(indep_variables.items())]
             grouped_features.append(sorted_features)
