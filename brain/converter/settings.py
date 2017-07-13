@@ -90,16 +90,12 @@ class Settings(object):
                     dataset = {
                         'upload_quantity':
                             len(self.dataset.getlist('dataset[]')),
-                        'file_upload': formatted_files, 'json_string': None
+                        'file_upload': formatted_files
                     }
 
                 # programmatic-interface: 'isinstance' did not work
                 elif str(type(self.settings)) == self.type_programmatic:
-                    dataset = {
-                        'upload_quantity': 1,
-                        'file_upload': None,
-                        'json_string': self.dataset
-                    }
+                    dataset = self.dataset
 
             except Exception as error:
                 self.list_error.append(error)
@@ -108,7 +104,7 @@ class Settings(object):
         else:
             dataset = None
 
-        # build input structure
+        # build structured data
         data = {'properties': formatted_settings, 'dataset': dataset}
 
         # return new structured data
