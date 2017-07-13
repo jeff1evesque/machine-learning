@@ -22,6 +22,7 @@ var DataNew = React.createClass({
     getInitialState: function() {
         return {
             value_title: '',
+            value_collection: '',
             value_dataset_type: '--Select--',
             value_model_type: '--Select--'
         };
@@ -52,6 +53,20 @@ var DataNew = React.createClass({
         }
         else {
             this.setState({value_title: null});
+        }
+
+      // update redux store
+        const action = setSvButton({button: {submit_analysis: false}});
+        this.props.dispatchSvButton(action);
+    },
+    changeCollection: function(event){
+        const collection = event.target.value;
+
+        if (collection && checkValidString(collection)) {
+            this.setState({value_collection: collection});
+        }
+        else {
+            this.setState({value_collection: null});
         }
 
       // update redux store
@@ -95,10 +110,12 @@ var DataNew = React.createClass({
     render: function(){
         const datasetType = this.state.value_dataset_type;
         const datasetTitle = this.state.value_title;
+        const collection = this.state.value_collection;
         const modelType = this.state.value_model_type;
         const Dataset = this.getSupplyDataset(
             datasetType,
             datasetTitle,
+            collection,
             modelType
         );
         const datasetInput = !!Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
@@ -115,6 +132,14 @@ var DataNew = React.createClass({
                         placeholder='Session Name'
                         onInput={this.changeTitle}
                         value={this.state.value_title}
+                    />
+
+                    <input
+                        type='text'
+                        name='collection'
+                        placeholder='Collection'
+                        onInput={this.changeCollection}
+                        value={this.state.value_collection}
                     />
 
                     <select
@@ -138,11 +163,17 @@ var DataNew = React.createClass({
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function(datasetType, title, modelType) {
+    getSupplyDataset: function(datasetType, title, collection, modelType) {
         if (
-            title && checkValidString(title) && datasetType && 
-            checkValidString(datasetType) && datasetType != '--Select--' &&
-            modelType && checkValidString(modelType) &&
+            title &&
+            checkValidString(title) &&
+            collection &&
+            checkValidString(collection) &&
+            datasetType &&
+            checkValidString(datasetType) &&
+            datasetType != '--Select--' &&
+            modelType &&
+            checkValidString(modelType) &&
             modelType != '--Select--'
         ) {
             return {
