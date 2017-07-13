@@ -74,7 +74,7 @@ class Settings(object):
 
         except Exception as error:
             self.list_error.append(error)
-            return {'data': None, 'error': self.list_error}
+            return {'properties': None, 'dataset': None, 'error': self.list_error}
 
         # restructure dataset: not all sessions involve files
         if self.dataset:
@@ -99,16 +99,13 @@ class Settings(object):
 
             except Exception as error:
                 self.list_error.append(error)
-                return {'data': None, 'error': self.list_error}
+                return {'properties': None, 'dataset': None, 'error': self.list_error}
 
         else:
             dataset = None
 
-        # build structured data
-        data = {'properties': formatted_settings, 'dataset': dataset}
-
         # return new structured data
-        return {'data': data, 'error': None}
+        return {'properties': formatted_settings, 'dataset': dataset, 'error': None}
 
     def get_errors(self):
         '''
