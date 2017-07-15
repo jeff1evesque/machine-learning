@@ -99,15 +99,16 @@ class NoSQL(object):
         Note: collection level operations can be further reviewed:
 
           - http://api.mongodb.com/python/current/api/pymongo/collection.html
-          - http://api.mongodb.com/python/current/api/pymongo/posts.html
 
         '''
 
         if self.proceed:
             try:
-                if operation == 'insert_one':
+                if operation == 'aggregate':
+                    result = self.collection.insert_one(payload, kwargs)
+                elif operation == 'insert_one':
                     result = self.collection.insert_one(payload)
-                if operation == 'insert_many':
+                elif operation == 'insert_many':
                     result = self.collection.insert_many(payload)
                 elif operation == 'update_one':
                     result = self.collection.update_one(payload)
