@@ -46,8 +46,8 @@ def generate(model, kernel_type, collection, payload, list_error):
     # restructure dataset into arrays
     observation_labels = []
     grouped_features = []
+    raise ValueError('sv.py, datasets: ' + repr(datasets))
     for dataset in datasets:
-        raise ValueError('sv.py, dataset: ' + repr(dataset))
         for observation in dataset['dataset']:
             observation_labels.append(observation['dependent-variable'])
 
