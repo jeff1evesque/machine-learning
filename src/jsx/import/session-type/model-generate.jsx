@@ -62,7 +62,7 @@ var ModelGenerate = React.createClass({
         }
     },
     changeModelType: function(event){
-        const sessionId  = this.state.value_session_id;
+        const collection  = this.state.value_collection;
         const modelType  = event.target.value;
         const kernelType = this.state.value_kernel_type;
 
@@ -94,7 +94,7 @@ var ModelGenerate = React.createClass({
         }
     },
     changeKernelType: function(event) {
-        const sessionId  = this.state.value_session_id;
+        const collection  = this.state.value_collection;
         const modelType  = this.state.value_model_type;
         const kernelType = event.target.value;
 
