@@ -105,10 +105,7 @@ class NoSQL(object):
         if self.proceed:
             try:
                 if operation == 'aggregate':
-                    result = self.collection.aggregate(
-                        payload['pipeline'],
-                        payload['kwargs']
-                    )
+                    result = self.collection.aggregate(payload)
                 elif operation == 'insert_one':
                     result = self.collection.insert_one(payload)
                 elif operation == 'insert_many':
