@@ -12,7 +12,6 @@
 
 import React from 'react';
 import checkValidString from '../validator/valid-string.js';
-import checkValidInt from '../validator/valid-int.js';
 import Spinner from '../general/spinner.jsx';
 import { setSvButton } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -21,7 +20,7 @@ var ModelGenerate = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_session_id: '--Select--',
+            value_collection: '--Select--',
             value_model_type: '--Select--',
             ajax_done_options: null,
             ajax_done_error: null,
@@ -30,16 +29,16 @@ var ModelGenerate = React.createClass({
         };
     },
   // update 'state properties'
-    changeSessionId: function(event){
-        const sessionId  = event.target.value;
+    changeCollection: function(event){
+        const collection  = event.target.value;
         const modelType  = this.state.value_model_type;
         const kernelType = this.state.value_kernel_type;
 
         if (
-            sessionId && sessionId != '--Select--' &&
-            checkValidInt(sessionId)
+            collection && collection != '--Select--' &&
+            checkValidString(collection)
         ) {
-            this.setState({value_session_id: sessionId});
+            this.setState({value_collection: collection});
 
           // update redux store
             if (
@@ -55,7 +54,7 @@ var ModelGenerate = React.createClass({
             }
         }
         else {
-            this.setState({value_session_id: '--Select--'});
+            this.setState({value_collection: '--Select--'});
 
           // update redux store
             const action = setSvButton({button: {submit_analysis: false}});
@@ -75,7 +74,7 @@ var ModelGenerate = React.createClass({
 
           // update redux store
             if (
-                checkValidInt(sessionId) && kernelType != '--Select--' &&
+                checkValidString(collection) && kernelType != '--Select--' &&
                 checkValidString(kernelType)
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
@@ -107,7 +106,7 @@ var ModelGenerate = React.createClass({
 
           // update redux store
             if (
-                checkValidInt(sessionId) && modelType != '--Select--' &&
+                checkValidString(collection) && modelType != '--Select--' &&
                 checkValidString(modelType)
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
@@ -136,12 +135,12 @@ var ModelGenerate = React.createClass({
                 <legend>Generate Model</legend>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
-                    <p>Select past session, model type, and kernel type</p>
+                    <p>Select past collection, model type, and kernel type</p>
                     <select
-                        name='session_id'
+                        name='collection'
                         autoComplete='off'
-                        onChange={this.changeSessionId}
-                        value={this.state.value_session_id}
+                        onChange={this.changeCollection}
+                        value={this.state.value_collection}
                     >
 
                         <option value='' defaultValue>--Select--</option>
@@ -191,7 +190,7 @@ var ModelGenerate = React.createClass({
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function() {
       // ajax arguments
-        const ajaxEndpoint = '/retrieve-session';
+        const ajaxEndpoint = '/retrieve-collections';
         const ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null

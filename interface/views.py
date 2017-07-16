@@ -303,21 +303,21 @@ def register():
             })
 
 
-@blueprint.route('/retrieve-session', methods=['POST'])
+@blueprint.route('/retrieve-collections', methods=['POST'])
 def retrieve_session():
     '''
 
-    This router function retrieves all sessions stored in the database.
+    This router function retrieves all collections stored in the database.
 
     '''
 
     if request.method == 'POST':
         # get all sessions
-        session_list = Session().get_all_sessions()
+        collections = Session().get_all_collections()
 
         # return all sessions
-        if session_list['result']:
-            return json.dumps(session_list['result'])
+        if collections['result']:
+            return json.dumps(collections['result'])
         else:
             return json.dumps({'error': session_list['error']})
 
