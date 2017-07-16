@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.converter.dataset import Dataset
 
 
-def dataset2dict(id_entity, model_type, upload):
+def dataset2dict(model_type, upload):
     '''
 
     This method converts the supplied csv, or xml file upload(s) to a uniform
@@ -51,7 +51,6 @@ def dataset2dict(id_entity, model_type, upload):
 
         # build new (relevant) dataset
         payload = {
-            'id_entity': id_entity,
             'premodel_dataset': converted,
             'settings': settings
         }

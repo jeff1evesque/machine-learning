@@ -118,7 +118,7 @@ class BaseData(Base):
         else:
             return {'result': None, 'error': 'no dataset provided'}
 
-    def convert_dataset(self, id_entity):
+    def convert_dataset(self):
         '''
 
         This method converts the supplied csv, or xml file upload(s) to a
@@ -127,7 +127,7 @@ class BaseData(Base):
         '''
 
         # convert to dictionary
-        response = dataset2dict(id_entity, self.model_type, self.premodel_data)
+        response = dataset2dict(self.model_type, self.premodel_data)
 
         # return result
         if response['error']:

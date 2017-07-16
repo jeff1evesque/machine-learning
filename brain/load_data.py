@@ -63,11 +63,7 @@ class Load_Data(object):
 
             session_entity = session.save_entity('data_new')
             if session_entity['status']:
-                session_id = session_entity['id']
-                session.validate_id(session_id)
-                session.check()
-
-                session.convert_dataset(session_id)
+                session.convert_dataset()
                 session.check()
 
                 session.save_premodel_dataset()
@@ -114,7 +110,7 @@ class Load_Data(object):
             if session_entity['status']:
                 session.check()
 
-                session.convert_dataset(session_id)
+                session.convert_dataset()
                 session.check()
 
                 session.save_premodel_dataset()
