@@ -304,7 +304,7 @@ def register():
 
 
 @blueprint.route('/retrieve-collections', methods=['POST'])
-def retrieve_session():
+def retrieve_collections():
     '''
 
     This router function retrieves all collections stored in the database.
