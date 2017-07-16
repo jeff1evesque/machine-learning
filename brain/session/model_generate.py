@@ -57,6 +57,10 @@ class ModelGenerate(Base):
         # local variables
         result = None
         model_type = self.premodel_data['properties']['model_type']
+        payload = {
+            'pipeline': [{$project : {dataset: 1}}],
+            'kwargs': None
+        }
 
         # case 1: svm model, or svr model
         if (model_type == 'svm') or (model_type == 'svr'):

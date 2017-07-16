@@ -39,7 +39,7 @@ def generate(model, kernel_type, collection, payload, list_error):
     # get datasets
     datasets = cursor.query(
         collection_adjusted,
-        'find',
+        'aggregate',
         payload
     )
 
