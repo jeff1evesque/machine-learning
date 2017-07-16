@@ -58,7 +58,7 @@ class ModelGenerate(Base):
         result = None
         model_type = self.premodel_data['properties']['model_type']
         payload = {
-            'pipeline': [{$project : {dataset: 1}}],
+            'pipeline': [{'$project' : {'dataset': 1}}],
             'kwargs': None
         }
 
