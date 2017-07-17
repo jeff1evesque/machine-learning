@@ -60,18 +60,18 @@ def dataset2dict(model_type, upload):
             'settings': settings
         }
 
+        # return results
+        if len(list_error) > 0:
+            return {
+                'dataset': payload,
+                'error': list_error
+            }
+        else:
+            return {
+                'dataset': payload,
+                'error': False
+            }
+
     except Exception as error:
         list_error.append(error)
         print error
-
-    # return results
-    if len(list_error) > 0:
-        return {
-            'dataset': payload,
-            'error': list_error
-        }
-    else:
-        return {
-            'dataset': payload,
-            'error': False
-        }
