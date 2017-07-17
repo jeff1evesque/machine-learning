@@ -51,7 +51,7 @@ class Settings(object):
             for key, value in self.settings.items():
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
-                    formatted_settings['stream'] = 'false'
+                    formatted_settings['stream'] = False
                     for lvalue in self.settings.getlist(key):
                         # base case
                         if key.lower() not in formatted_settings:
