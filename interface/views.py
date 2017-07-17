@@ -319,7 +319,7 @@ def retrieve_collections():
         if collections['result']:
             return json.dumps(collections['result'])
         else:
-            return json.dumps({'error': session_list['error']})
+            return json.dumps({'error': collections['error']})
 
 
 @blueprint.route(
