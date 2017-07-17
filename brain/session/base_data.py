@@ -46,7 +46,6 @@ class BaseData(Base):
 
         # class variable
         self.list_error = []
-        self.dataset = []
         self.model_type = premodel_data['properties']['model_type']
         self.premodel_data = premodel_data
 
@@ -100,12 +99,12 @@ class BaseData(Base):
         collection = self.premodel_data['properties']['collection']
         collection_adjusted = collection.lower().replace(' ', '_')
         cursor = Collection()
-        if self.dataset:
-            response = cursor.query(
-                collection_adjusted,
-                'insert_one',
-                self.premodel_data
-            )
+
+        response = cursor.query(
+            collection_adjusted,
+            'insert_one',
+            self.dataset
+        )
 
         # return result
         if response and response['error']:

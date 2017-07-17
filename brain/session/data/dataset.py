@@ -51,15 +51,10 @@ def dataset2dict(model_type, upload):
                 elif dataset['filename'].lower().endswith('.xml'):
                     converted = converter.xml_to_dict()
 
-        # build new (relevant) dataset
-        payload = {
-            'premodel_dataset': converted,
-            'settings': settings
-        }
-
         # return results
         return {
-            'dataset': payload,
+            'dataset': converted,
+            'settings': settings
             'error': None
         }
 
