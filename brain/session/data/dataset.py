@@ -42,16 +42,13 @@ def dataset2dict(model_type, upload):
                 adjusted_datasets = datasets['dataset_url']
 
             for dataset in adjusted_datasets:
-                # reset file-pointer
-                dataset['file'].seek(0)
-
                 # convert dataset(s)
                 converter = Dataset(dataset['file'], model_type)
-                if dataset['type'] == 'csv':
+                if dataset['filename'].lower().endswith('.csv'):
                     converted.append(converter.csv_to_dict())
-                elif dataset['type'] == 'json':
+                elif dataset['filename'].lower().endswith('.json'):
                     converted = converter.json_to_dict()
-                elif dataset['type'] == 'xml':
+                elif dataset['filename'].lower().endswith('.xml'):
                     converted = converter.xml_to_dict()
 
         # build new (relevant) dataset
@@ -61,17 +58,15 @@ def dataset2dict(model_type, upload):
         }
 
         # return results
-        if len(list_error) > 0:
-            return {
-                'dataset': payload,
-                'error': list_error
-            }
-        else:
-            return {
-                'dataset': payload,
-                'error': False
-            }
+        return {
+            'dataset': payload,
+            'error': None
+        }
 
     except Exception as error:
         list_error.append(error)
-        print error
+
+        return {
+            'dataset': None,
+            'error': list_error
+        }
