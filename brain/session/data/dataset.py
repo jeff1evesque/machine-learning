@@ -36,22 +36,22 @@ def dataset2dict(model_type, upload):
 
         # web-interface
         else:
-            if datasets['file_upload']:
+            if datasets.get('file_upload', None):
                 adjusted_datasets = datasets['file_upload']
             else:
                 adjusted_datasets = datasets['dataset_url']
 
             for dataset in adjusted_datasets:
                 # reset file-pointer
-                val['file'].seek(0)
+                dataset['file'].seek(0)
 
                 # convert dataset(s)
                 converter = Dataset(dataset['file'], model_type)
-                if val['type'] == 'csv':
+                if dataset['type'] == 'csv':
                     converted.append(converter.csv_to_dict())
-                elif val['type'] == 'json':
+                elif dataset['type'] == 'json':
                     converted = converter.json_to_dict()
-                elif val['type'] == 'xml':
+                elif dataset['type'] == 'xml':
                     converted = converter.xml_to_dict()
 
         # build new (relevant) dataset
