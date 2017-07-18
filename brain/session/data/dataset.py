@@ -54,7 +54,7 @@ def dataset2dict(model_type, upload):
         # return results
         return {
             'dataset': converted,
-            'settings': settings
+            'settings': settings,
             'error': None
         }
 
