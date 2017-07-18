@@ -147,8 +147,8 @@ var ModelGenerate = React.createClass({
 
                         {/* array components require unique 'key' value */}
                         {options && options.map(function(value) {
-                            return <option key={value.id} value={value.id}>
-                                {value.id}: {value.title}
+                            return <option key={value.id} value={value.collection}>
+                                {value.id}: {value.collection}
                             </option>;
                         })}
 

@@ -70,13 +70,13 @@ class Session(object):
 
         # sql query
         self.sql.connect(self.db_ml)
-        sql_statement = 'SELECT collection FROM tbl_dataset_entity'
+        sql_statement = 'SELECT id_entity, collection FROM tbl_dataset_entity'
         response = self.sql.execute('select', sql_statement)
 
         # rebuild session list, get error(s) if any
         if response['result']:
             for item in response['result']:
-                list_session.append({'id': item[0], 'title': item[0]})
+                list_session.append({'id': item[0], 'collection': item[1]})
             response_error = self.sql.get_errors()
         else:
             response_error = 'no previous session found in database'
