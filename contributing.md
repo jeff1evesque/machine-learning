@@ -85,9 +85,9 @@ The message should *always* be prefixed with an issue number that the commit
  any references to a file, or method *should* be wrapped by a single quote.
 
 **Note:** commits should be granular, such that, every commit corresponds to a
- small change within *one* file. In some cases, when a commit spans multiple
- files, when changes are very similar, or when merging one branch, into the
- current branch, the filename can be omitted:
+ small change within *one* file. However, exceptions include grouping very similar
+ changes as one commit, or when merging one branch into another branch. In these
+ cases, the filename can be omitted from the commit message:
 
 ```text
 #2844: conform boolean values to python syntax
