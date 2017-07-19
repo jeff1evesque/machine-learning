@@ -19,7 +19,7 @@ index.php, include 'header.php'
 More specifically, the following rules of a descriptive issue title *must* be
  followed:
 
-- an issue title should *never* be over 55 characters
+- an issue title should *never* be over 50 characters
 - an issue title should *never* contain possessive tones
 - filename reference(s) in the issue title, should *always* be wrapped by
  single quotes
@@ -72,7 +72,7 @@ git checkout -b [bug|feature|remove]-[issue number] master
 
 ## Committing Code
 
-When creating a *commit*, be sure to include an issue number, the filename
+When creating a *commit*, be sure to include an issue number, the filename (preferred)
  modified, and a short message.
 
 The following git commit message, is an acceptable syntax:
@@ -81,11 +81,17 @@ The following git commit message, is an acceptable syntax:
 
 The message should *always* be prefixed with an issue number that the commit
  corresponds to. When all components are factored in, the commit message should
- *never* be more than 65 characters long, *never* be in a possessive tone, and
+ *never* be more than 50 characters long, *never* be in a possessive tone, and
  any references to a file, or method *should* be wrapped by a single quote.
 
 **Note:** commits should be granular, such that, every commit corresponds to a
- small change within *one* file.
+ small change within *one* file. In some cases, when a commit spans multiple
+ files, when changes are very similar, or when merging one branch, into the
+ current branch, the filename can be omitted:
+
+```text
+#2844: conform boolean values to python syntax
+```
 
 ## Creating Pull Request
 
@@ -101,14 +107,19 @@ More specifically, the following rules *must* be followed:
 
 - a pull request title should *always* begin with the issue number, and the
  file modified
-- a pull request title should *never* be over 55 characters (including the
+- a pull request title should *never* be over 50 characters (including the
  *issue number*)
 - a pull request title should *never* contain possessive tones
 - filename reference(s) in the pull request title, should *always* be wrapped
  by single quotes
 
-**Note:** in some cases, the filename is longer than usual, and can be omitted
- from the pull request title.
+**Note:** in some cases, the filename is longer than usual, or the corresponding
+ issue spans multiple files. In these cases, the filename can be omitted from
+ the pull request title:
+
+```text
+Add ability to create randomized sub-datasets
+```
 
 ### Pull Request: Body
 
