@@ -19,7 +19,7 @@ index.php, include 'header.php'
 More specifically, the following rules of a descriptive issue title *must* be
  followed:
 
-- an issue title should *never* be over 50 characters
+- an issue title should *never* be over 55 characters
 - an issue title should *never* contain possessive tones
 - filename reference(s) in the issue title, should *always* be wrapped by
  single quotes
@@ -32,7 +32,7 @@ Implement flask upstart script
 
 A non-descriptive issue title is generally used, when multiple files will be
  modified in a single pull request.  Therefore, remember to capture the
- technology, or item(s) that will be implemented in less than 50 characters
+ technology, or item(s) that will be implemented in less than 55 characters
  (without possessive tone).
 
 ### Issue: Body
@@ -107,7 +107,7 @@ More specifically, the following rules *must* be followed:
 
 - a pull request title should *always* begin with the issue number, and the
  file modified
-- a pull request title should *never* be over 50 characters (including the
+- a pull request title should *never* be over 55 characters (including the
  *issue number*)
 - a pull request title should *never* contain possessive tones
 - filename reference(s) in the pull request title, should *always* be wrapped
