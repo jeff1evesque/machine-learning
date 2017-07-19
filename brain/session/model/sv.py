@@ -12,7 +12,6 @@ from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
 import json
-from log.logger import Logger
 
 
 def generate(model, kernel_type, collection, payload, list_error):
@@ -49,24 +48,16 @@ def generate(model, kernel_type, collection, payload, list_error):
     grouped_features = []
 
     for dataset in datasets['result']:
-        logger = Logger(__name__, 'error', 'error')
-
         for observation in dataset['dataset']:
-            logger.log('sv.py, observation: ' + repr(observation))
             observation_labels.append(observation['dependent-variable'])
-
             indep_variables = observation['independent-variables']
-            logger = Logger(__name__, 'error', 'error')
-            logger.log('sv.py, indep_variables: ' + repr(indep_variables))
 
             for features in indep_variables:
                 sorted_features = [v for k, v in sorted(features.items())]
-                logger.log('sv.py, sorted_features: ' + repr(sorted_features))
                 grouped_features.append(sorted_features)
 
                 if not sorted_labels:
                     sorted_labels = [k for k, v in sorted(features.items())]
-                    logger.log('sv.py, sorted_labels: ' + repr(sorted_labels))
 
     # generate svm model
     if model == list_model_type[0]:
