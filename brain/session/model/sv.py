@@ -12,6 +12,7 @@ from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
 import json
+from log.logger import Logger
 
 
 def generate(model, kernel_type, collection, payload, list_error):
@@ -30,7 +31,7 @@ def generate(model, kernel_type, collection, payload, list_error):
     '''
 
     # local variables
-    feature_labels = None
+    sorted_labels = False
     label_encoder = preprocessing.LabelEncoder()
     list_model_type = current_app.config.get('MODEL_TYPE')
     collection_adjusted = collection.lower().replace(' ', '_')
@@ -48,21 +49,30 @@ def generate(model, kernel_type, collection, payload, list_error):
     grouped_features = []
 
     for dataset in datasets['result']:
+        logger = Logger(__name__, 'error', 'error')
+
         for observation in dataset['dataset']:
+            logger.log('sv.py, observation: ' + repr(observation))
             observation_labels.append(observation['dependent-variable'])
 
             indep_variables = observation['independent-variables']
-            sorted_features = [v for k, v in sorted(indep_variables.items())]
-            grouped_features.append(sorted_features)
+            logger = Logger(__name__, 'error', 'error')
+            logger.log('sv.py, indep_variables: ' + repr(indep_variables))
 
-            if not feature_labels:
-                feature_labels = [k for k, v in sorted(indep_variables.items())]
+            for features in indep_variables:
+                sorted_features = [v for k, v in sorted(features.items())]
+                logger.log('sv.py, sorted_features: ' + repr(sorted_features))
+                grouped_features.append(sorted_features)
+
+                if not sorted_labels:
+                    sorted_labels = [k for k, v in sorted(features.items())]
+                    logger.log('sv.py, sorted_labels: ' + repr(sorted_labels))
 
     # generate svm model
     if model == list_model_type[0]:
         # convert observation labels to a unique integer representation
         label_encoder = preprocessing.LabelEncoder()
-        label_encoder.fit(list(set(observation_labels)))
+        label_encoder.fit(observation_labels)
         encoded_labels = label_encoder.transform(observation_labels)
 
         # create model
@@ -102,7 +112,7 @@ def generate(model, kernel_type, collection, payload, list_error):
     Hset().cache(
         model + '_feature_labels',
         collection,
-        json.dumps(feature_labels)
+        json.dumps(sorted_labels)
     )
 
     # return error(s) if exists
