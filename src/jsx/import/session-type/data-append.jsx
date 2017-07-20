@@ -125,7 +125,7 @@ var DataAppend = React.createClass({
                     <legend>Configurations</legend>
                     <p>Select past collection, and upload type</p>
                     <select
-                        name='session_id'
+                        name='collection'
                         autoComplete='off'
                         onChange={this.changeCollection}
                         value={this.state.value_collection}
