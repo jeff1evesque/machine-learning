@@ -8,7 +8,9 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-from brain.converter.dataset import Dataset
+import json
+from brain.converter.format.csv2dict import csv2dict
+from brain.converter.format.xml2dict import xml2dict
 
 
 def dataset2dict(model_type, upload):
@@ -41,15 +43,17 @@ def dataset2dict(model_type, upload):
             else:
                 adjusted_datasets = datasets['dataset_url']
 
+            # convert dataset(s) into extended list
             for dataset in adjusted_datasets:
-                # convert dataset(s)
-                converter = Dataset(dataset['file'], model_type)
                 if dataset['filename'].lower().endswith('.csv'):
-                    converted.extend(converter.csv_to_dict())
+                    converted.extend(csv2dict(dataset['file']))
                 elif dataset['filename'].lower().endswith('.json'):
-                    converted.extend(converter.json_to_dict())
+                    try:
+                        converted.extend(dataset)
+                    except:
+                        converted.extend(dataset)
                 elif dataset['filename'].lower().endswith('.xml'):
-                    converted.extend(converter.xml_to_dict())
+                    converted.extend(xml2dict(dataset['file']))
 
         # return results
         return {
