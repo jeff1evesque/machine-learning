@@ -10,14 +10,12 @@ python dictionary format.
 import csv
 from itertools import islice
 from brain.validator.dataset import Validator
-from log.logger import Logger
 
 
-def svm_csv2dict(raw_data):
+def csv2dict(raw_data):
     '''
 
-    This method converts the supplied csv file-object, intended for an svm
-    model, to a python dictionary.
+    This method converts the supplied csv file-object to a python dictionary.
 
     @raw_data, generally a file (or json string) containing the raw dataset(s),
         to be used when computing a corresponding model. If this argument is a
@@ -35,7 +33,6 @@ def svm_csv2dict(raw_data):
     '''
 
     dataset = []
-    logger = Logger(__name__, 'error', 'error')
 
     # open temporary 'csvfile' reader object
     dataset_reader = csv.reader(
@@ -61,7 +58,6 @@ def svm_csv2dict(raw_data):
 
         dataset.append(observation)
 
-    logger.log('/brain/converter/svm/csvtodict.py, dataset: ' + repr(dataset))
     # close file, return dataset
     raw_data.close()
     return dataset

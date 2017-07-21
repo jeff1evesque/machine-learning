@@ -8,7 +8,7 @@ This file restructures only the supplied dataset(s).
 
 import json
 from flask import current_app
-from brain.converter.svm.csv2dict import svm_csv2dict
+from brain.converter.csv2dict import csv2dict
 from brain.converter.svm.xml2dict import svm_xml2dict
 from brain.converter.svr.csv2dict import svr_csv2dict
 from brain.converter.svr.xml2dict import svr_xml2dict
@@ -59,17 +59,8 @@ class Dataset(object):
 
         '''
 
-        # convert classification dataset
-        if self.model_type == self.classification:
-            data = svm_csv2dict(self.raw_data)
-
-        # convert regression dataset
-        elif self.model_type == self.regression:
-            data = svr_csv2dict(self.raw_data)
-
-        # record observation labels, and feature count
-        self.observation_labels = data['observation_labels']
-        self.count_features = data['feature_count']
+        # convert dataset to dict
+        data = csv2dict(self.raw_data)
 
         # return data
         return data['dataset']
