@@ -23,8 +23,6 @@ def svm_csv2dict(raw_data):
         to be used when computing a corresponding model. If this argument is a
         file, it needs to be closed.
 
-    @list_observation_label, is a list containing dependent variable labels.
-
     Note: we use the 'Universal Newline Support' with the 'U' parameter when
           opening 'raw_data'. This allows newlines to be understood regardless,
           if the newline character was created in osx, windows, or linux.
@@ -34,7 +32,7 @@ def svm_csv2dict(raw_data):
 
           row = row[0].split(',')
 
-        '''
+    '''
 
     dataset = []
     logger = Logger(__name__, 'error', 'error')
@@ -48,7 +46,7 @@ def svm_csv2dict(raw_data):
 
     # first row of csvfile: get all columns, except first
     for row in islice(dataset_reader, 0, 1):
-        indep_labels_list = row[1:]
+        indep_labels_list = row[0].split(',')[1:]
         logger.log('/brain/converter/svm/csvtodict.py, indep_labels: ' + repr(indep_labels))
 
     # all rows of csvfile: except first row
@@ -56,11 +54,13 @@ def svm_csv2dict(raw_data):
         logger.log('/brain/converter/svm/csvtodict.py, dep_index (nth row): ' + repr(dep_index))
         logger.log('/brain/converter/svm/csvtodict.py, row (nth row): ' + repr(row))
 
-        features_list = row_dep_label[:1]
+        row_arr = row[0].split(',')
+        features_list = row_arr[1:]
+        logger.log('/brain/converter/svm/csvtodict.py, features_list: ' + repr(features_list))
         features_dict = {k: v for k, v in zip(indep_labels_list, features_list)}
 
         observation = {
-            'dependent-variable': row[0],
+            'dependent-variable': row_arr[:1],
             'independent-variables': [features_dict]
         }
 
