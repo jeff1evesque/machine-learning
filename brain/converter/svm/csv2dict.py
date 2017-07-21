@@ -37,6 +37,7 @@ def svm_csv2dict(raw_data):
         '''
 
     dataset = []
+    logger = Logger(__name__, 'error', 'error')
 
     # open temporary 'csvfile' reader object
     dataset_reader = csv.reader(
@@ -47,11 +48,15 @@ def svm_csv2dict(raw_data):
 
     # first row of csvfile: get all columns, except first
     for row in islice(dataset_reader, 0, 1):
-        indep_labels_list = islice(dataset_reader, 0, 1)[1:]
+        indep_labels_list = row[1:]
+        logger.log('/brain/converter/svm/csvtodict.py, indep_labels: ' + repr(indep_labels))
 
     # all rows of csvfile: except first row
     for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
-        eatures_list = row_dep_label[:1]
+        logger.log('/brain/converter/svm/csvtodict.py, dep_index (nth row): ' + repr(dep_index))
+        logger.log('/brain/converter/svm/csvtodict.py, row (nth row): ' + repr(row))
+
+        features_list = row_dep_label[:1]
         features_dict = {k: v for k, v in zip(indep_labels_list, features_list)}
 
         observation = {
@@ -61,6 +66,7 @@ def svm_csv2dict(raw_data):
 
         dataset.append(observation)
 
+    logger.log('/brain/converter/svm/csvtodict.py, dataset: ' + repr(dataset))
     # close file, return dataset
     raw_data.close()
     return dataset
