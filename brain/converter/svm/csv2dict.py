@@ -36,11 +36,7 @@ def svm_csv2dict(raw_data):
 
         '''
 
-    feature_count = None
-    list_dataset = []
-    list_observation_label = []
-    list_feature_label = []
-    logger = Logger(__name__, 'error', 'error')
+    dataset = []
 
     # open temporary 'csvfile' reader object
     dataset_reader = csv.reader(
@@ -49,56 +45,22 @@ def svm_csv2dict(raw_data):
         quotechar='|'
     )
 
-    # iterate first row of csvfile
+    # first row of csvfile: get all columns, except first
     for row in islice(dataset_reader, 0, 1):
+        indep_labels_list = islice(dataset_reader, 0, 1)[1:]
 
-        # iterate each column in a given row
-        row_indep_label = row[0].split(',')
-        for value in islice(row_indep_label, 1, None):
-            list_feature_label.append(str(value))
-
-    # iterate all rows of csvfile
+    # all rows of csvfile: except first row
     for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
+        eatures_list = row_dep_label[:1]
+        features_dict = {k: v for k, v in zip(indep_labels_list, features_list)}
 
-        # iterate first column of each row (except first)
-        row_dep_label = row[0].split(',')
-        for value in row_dep_label[:1]:
-            list_observation_label.append(str(value))
+        observation = {
+            'dependent-variable': row[0],
+            'independent-variables': [features_dict]
+        }
 
-        # generalized feature count in an observation
-        row_indep_variable = row[0].split(',')
-        if not feature_count:
-            feature_count = len(row_indep_variable) - 1
+        dataset.append(observation)
 
-        # iterate each column in a given row
-        for indep_index, value in enumerate(
-            islice(row_indep_variable, 1, None)
-        ):
-
-            try:
-                validate = Validator(value)
-                validate.validate_value()
-
-                list_error = validate.get_errors()
-                if list_error:
-                    logger.log(list_error)
-                    return None
-                else:
-                    value = float(value)
-            except Exception as error:
-                logger.log(error)
-                return False
-
-            list_dataset.append({
-                'dep_variable_label': list_observation_label[dep_index],
-                'indep_variable_label': list_feature_label[indep_index],
-                'indep_variable_value': value
-            })
-
-    # close file, save observation labels, and return
+    # close file, return dataset
     raw_data.close()
-    return {
-        'dataset': list_dataset,
-        'observation_labels': list_observation_label,
-        'feature_count': feature_count
-    }
+    return dataset
