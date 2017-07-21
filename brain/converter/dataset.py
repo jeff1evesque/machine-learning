@@ -55,15 +55,10 @@ class Dataset(object):
         This method converts the supplied csv file-object to a python
         dictionary.
 
-        @self.observation_label, list containing dependent variable labels.
-
         '''
 
-        # convert dataset to dict
-        data = csv2dict(self.raw_data)
-
         # return data
-        return data['dataset']
+        return csv2dict(self.raw_data)
 
     def json_to_dict(self):
         '''
