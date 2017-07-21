@@ -47,20 +47,15 @@ def svm_csv2dict(raw_data):
     # first row of csvfile: get all columns, except first
     for row in islice(dataset_reader, 0, 1):
         indep_labels_list = row[0].split(',')[1:]
-        logger.log('/brain/converter/svm/csvtodict.py, indep_labels: ' + repr(indep_labels))
 
     # all rows of csvfile: except first row
     for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
-        logger.log('/brain/converter/svm/csvtodict.py, dep_index (nth row): ' + repr(dep_index))
-        logger.log('/brain/converter/svm/csvtodict.py, row (nth row): ' + repr(row))
-
         row_arr = row[0].split(',')
         features_list = row_arr[1:]
-        logger.log('/brain/converter/svm/csvtodict.py, features_list: ' + repr(features_list))
         features_dict = {k: v for k, v in zip(indep_labels_list, features_list)}
 
         observation = {
-            'dependent-variable': row_arr[:1],
+            'dependent-variable': row_arr[:1][0],
             'independent-variables': [features_dict]
         }
 
