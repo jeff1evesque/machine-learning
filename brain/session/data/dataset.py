@@ -45,11 +45,11 @@ def dataset2dict(model_type, upload):
                 # convert dataset(s)
                 converter = Dataset(dataset['file'], model_type)
                 if dataset['filename'].lower().endswith('.csv'):
-                    converted.append(converter.csv_to_dict())
+                    converted.extend(converter.csv_to_dict())
                 elif dataset['filename'].lower().endswith('.json'):
-                    converted = converter.json_to_dict()
+                    converted.extend(converter.json_to_dict())
                 elif dataset['filename'].lower().endswith('.xml'):
-                    converted = converter.xml_to_dict()
+                    converted.extend(converter.xml_to_dict())
 
         # return results
         return {
