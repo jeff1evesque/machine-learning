@@ -12,7 +12,7 @@ from brain.validator.dataset import Validator
 from log.logger import Logger
 
 
-def svr_xml2dict(raw_data):
+def xml2dict(raw_data):
     '''
 
     This method converts the supplied xml file-object to a python dictionary.
@@ -36,31 +36,29 @@ def svr_xml2dict(raw_data):
 
     # build 'list_dataset'
     for observation in dataset['dataset']['observation']:
-        for key in observation:
-            if key == 'criterion':
-                observation_label = observation['criterion']
-                list_observation_label.append(observation[key])
-            elif key == 'predictor':
-                for predictor in observation[key]:
-                    predictor_label = predictor['label']
-                    predictor_value = predictor['value']
+        observation_label = observation['dependent-variable']
+        list_observation_label.append(observation_label)
 
-                    validate_value = Validator(predictor_value)
-                    validate_value.validate_value()
-                    list_error_value = validate_value.get_errors()
-                    if list_error_value:
-                        logger.log(list_error_value)
-                        return None
-                    else:
-                        list_dataset.append({
-                            'dep_variable_label': str(observation_label),
-                            'indep_variable_label': str(predictor_label),
-                            'indep_variable_value': predictor_value
-                        })
+        for feature in observation['independent-variable']:
+            feature_label = feature['label']
+            feature_value = feature['value']
+
+            validate_value = Validator(feature_value)
+            validate_value.validate_value()
+            list_error_value = validate_value.get_errors()
+            if list_error_value:
+                logger.log(list_error_value)
+                return None
+            else:
+                list_dataset.append({
+                    'dep_variable_label': str(observation_label),
+                    'indep_variable_label': str(feature_label),
+                    'indep_variable_value': feature_value
+                })
 
         # generalized feature count in an observation
         if not feature_count:
-            feature_count = len(observation['predictor'])
+            feature_count = len(observation['independent-variable'])
 
     # save observation labels, and return
     raw_data.close()
