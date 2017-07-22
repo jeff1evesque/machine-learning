@@ -21,9 +21,6 @@ def xml2dict(raw_data):
         to be used when computing a corresponding model. If this argument is a
         file, it needs to be closed.
 
-    @list_observation_label, is a list containing dependent variable
-        labels.
-
     '''
 
     feature_count = None
@@ -33,37 +30,8 @@ def xml2dict(raw_data):
 
     # convert xml file to python 'dict'
     dataset = xmltodict.parse(raw_data)
-
-    # build 'list_dataset'
-    for observation in dataset['dataset']['observation']:
-        observation_label = observation['dependent-variable']
-        list_observation_label.append(observation_label)
-
-        for feature in observation['independent-variable']:
-            feature_label = feature['label']
-            feature_value = feature['value']
-
-            validate_value = Validator(feature_value)
-            validate_value.validate_value()
-            list_error_value = validate_value.get_errors()
-            if list_error_value:
-                logger.log(list_error_value)
-                return None
-            else:
-                list_dataset.append({
-                    'dep_variable_label': str(observation_label),
-                    'indep_variable_label': str(feature_label),
-                    'indep_variable_value': feature_value
-                })
-
-        # generalized feature count in an observation
-        if not feature_count:
-            feature_count = len(observation['independent-variable'])
+    logger.log('/brain/converter/format/xml2dict.py, dataset: ' repr(dataset))
 
     # save observation labels, and return
     raw_data.close()
-    return {
-        'dataset': list_dataset,
-        'observation_labels': list_observation_label,
-        'feature_count': feature_count
-    }
+    return dataset
