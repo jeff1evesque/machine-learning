@@ -49,9 +49,9 @@ def dataset2dict(model_type, upload):
                     converted.extend(csv2dict(dataset['file']))
                 elif dataset['filename'].lower().endswith('.json'):
                     try:
-                        converted.extend(dataset)
+                        converted.extend(json.load(dataset['file'])['dataset'])
                     except:
-                        converted.extend(dataset)
+                        converted.extend(dataset['file'])
                 elif dataset['filename'].lower().endswith('.xml'):
                     converted.extend(xml2dict(dataset['file']))
 
