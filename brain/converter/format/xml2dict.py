@@ -23,14 +23,10 @@ def xml2dict(raw_data):
 
     '''
 
-    feature_count = None
-    list_dataset = []
-    list_observation_label = []
-    logger = Logger(__name__, 'error', 'error')
-
     # convert xml file to python 'dict'
     dataset = xmltodict.parse(raw_data)
-    logger.log('/brain/converter/format/xml2dict.py, dataset: ' repr(dataset))
+    logger = Logger(__name__, 'error', 'error')
+    logger.log('/brain/converter/format/xml2dict.py, dataset: ' + repr(dataset))
 
     # save observation labels, and return
     raw_data.close()
