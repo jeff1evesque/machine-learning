@@ -24,7 +24,24 @@ def xml2dict(raw_data):
     '''
 
     # convert xml file to python 'dict'
-    dataset = xmltodict.parse(raw_data)
+    dataset = []
+    dataset_reader = xmltodict.parse(raw_data)
+
+    # build 'list_dataset'
+    for observation in dataset_reader['dataset']['observation']:
+        features_dict = {}
+        dependent_variable = observation['dependent-variable']
+
+        for feature in observation['independent-variable']:
+            features_dict[feature['feature_label']] = feature['value']
+
+        observation = {
+            'dependent-variable': dependent_variable,
+            'independent-variables': [features_dict]
+        }
+
+        dataset.append(observation)
+
     logger = Logger(__name__, 'error', 'error')
     logger.log('/brain/converter/format/xml2dict.py, dataset: ' + repr(dataset))
 
