@@ -9,7 +9,6 @@ python dictionary format.
 
 import xmltodict
 from brain.validator.dataset import Validator
-from log.logger import Logger
 
 
 def xml2dict(raw_data):
@@ -23,27 +22,23 @@ def xml2dict(raw_data):
 
     '''
 
-    # convert xml file to python 'dict'
+    # open temporary 'xmltodict' object
     dataset = []
     dataset_reader = xmltodict.parse(raw_data)
 
-    # build 'list_dataset'
+    # build dataset
     for observation in dataset_reader['dataset']['observation']:
         features_dict = {}
         dependent_variable = observation['dependent-variable']
-
         for feature in observation['independent-variable']:
-            features_dict[feature['feature_label']] = feature['value']
+            features_dict[feature['label']] = feature['value']
 
-        observation = {
+        adjusted = {
             'dependent-variable': dependent_variable,
             'independent-variables': [features_dict]
         }
 
-        dataset.append(observation)
-
-    logger = Logger(__name__, 'error', 'error')
-    logger.log('/brain/converter/format/xml2dict.py, dataset: ' + repr(dataset))
+        dataset.append(adjusted)
 
     # save observation labels, and return
     raw_data.close()
