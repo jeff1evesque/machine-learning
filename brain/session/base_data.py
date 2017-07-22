@@ -99,11 +99,12 @@ class BaseData(Base):
         collection = self.premodel_data['properties']['collection']
         collection_adjusted = collection.lower().replace(' ', '_')
         cursor = Collection()
+        document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}
 
         response = cursor.query(
             collection_adjusted,
             'insert_one',
-            self.dataset
+            document
         )
 
         # return result
