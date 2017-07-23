@@ -53,7 +53,7 @@ def csv2dict(raw_data):
         features_list = row_arr[1:]
 
         # merge lists into dict if each independent variable validates
-        if all(validate.validate_value(item) for item in features_lists):
+        if all(validate.validate_value(item) for item in features_list):
             features_dict = {k: v for k, v in zip(indep_labels_list, features_list)}
             error = None
         else:

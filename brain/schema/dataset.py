@@ -28,7 +28,6 @@ def schema_svm():
                 'additionalProperties': {
                     'type': 'string',
                     'minLength': 1
-                    }
                 }
             }
         }
@@ -54,7 +53,6 @@ def schema_svr():
                 'minItems': 1,
                 'additionalProperties': {
                     'type': 'number'
-                    }
                 }
             }
         }
