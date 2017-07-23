@@ -66,7 +66,11 @@ def dataset2dict(model_type, upload):
                             Draft4Validator(svr_dataset()).validate(instance)
                         converted.extend(instance)
                     except Exception, error:
-                        converted.extend({'error': dataset['filename'] + ' syntax invalid'})
+                        msg = "%s contains invalid syntax, with error: %s" % (
+                            dataset['filename'],
+                            error
+                        )
+                        converted.extend({'error': msg})
 
                 elif dataset['filename'].lower().endswith('.xml'):
                     converted.extend(xml2dict(dataset['file']))
