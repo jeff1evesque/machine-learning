@@ -61,7 +61,7 @@ def csv2dict(raw_data):
 
         observation = {
             'dependent-variable': row_arr[:1][0],
-            'independent-variables': [features_dict]
+            'independent-variables': [features_dict],
             'error': error
         }
 

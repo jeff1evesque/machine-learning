@@ -47,7 +47,7 @@ def dataset2dict(model_type, upload):
                         Draft4Validator(svr_dataset()).validate(dataset)
                     converted.extend(dataset)
                 except Exception, error:
-                    msg = "Stream contains invalid syntax, with error: %s" %  error
+                    msg = "Stream contains invalid syntax, with error: %s" % error
                     converted.extend({'error': msg})
 
         # web-interface
