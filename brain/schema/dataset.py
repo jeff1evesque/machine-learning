@@ -34,6 +34,7 @@ def schema_svm():
     }
     return schema
 
+
 def schema_svr():
     '''
 
