@@ -37,8 +37,18 @@ def dataset2dict(model_type, upload):
     try:
         # programmatic-interface
         if stream:
-            converter = Dataset(datasets, model_type)
-            converted.append(converter.json_to_dict())
+            # convert dataset(s) into extended list
+            for dataset in datasets:
+                # validate against schema, and build converted list
+                try:
+                    if model_type == list_model_type[0]:
+                        Draft4Validator(svm_dataset()).validate(dataset)
+                    elif model_type == list_model_type[1]:
+                        Draft4Validator(svr_dataset()).validate(dataset)
+                    converted.extend(dataset)
+                except Exception, error:
+                    msg = "Stream contains invalid syntax, with error: %s" %  error
+                    converted.extend({'error': msg})
 
         # web-interface
         else:
