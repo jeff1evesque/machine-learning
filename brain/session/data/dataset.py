@@ -9,6 +9,9 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 import json
+from flask import current_app
+from jsonschema.validators import Draft4Validator
+from brain.schema.dataset import svm_dataset, svr_dataset
 from brain.converter.format.csv2dict import csv2dict
 from brain.converter.format.xml2dict import xml2dict
 
@@ -29,6 +32,7 @@ def dataset2dict(model_type, upload):
     datasets = upload['dataset']
     settings = upload['properties']
     stream = settings.get('stream', None)
+    list_model_type = current_app.config.get('MODEL_TYPE')
 
     try:
         # programmatic-interface
@@ -48,10 +52,22 @@ def dataset2dict(model_type, upload):
                 if dataset['filename'].lower().endswith('.csv'):
                     converted.extend(csv2dict(dataset['file']))
                 elif dataset['filename'].lower().endswith('.json'):
+                    # load dataset instance
                     try:
-                        converted.extend(json.load(dataset['file'])['dataset'])
+                        instance = json.load(dataset['file'])['dataset']
                     except:
-                        converted.extend(dataset['file'])
+                        instance = converted.extend(dataset['file'])
+
+                    # validate against schema, and build converted list
+                    try:
+                        if model_type == list_model_type[0]:
+                            Draft4Validator(svm_dataset()).validate(instance)
+                        elif model_type == list_model_type[1]:
+                            Draft4Validator(svr_dataset()).validate(instance)
+                        converted.extend(instance)
+                    except Exception, error:
+                        converted.extend({'error': dataset['filename'] + ' syntax invalid'})
+
                 elif dataset['filename'].lower().endswith('.xml'):
                     converted.extend(xml2dict(dataset['file']))
 

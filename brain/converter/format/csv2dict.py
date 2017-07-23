@@ -32,9 +32,11 @@ def csv2dict(raw_data):
 
     '''
 
+    # local variables:
     dataset = []
+    validate = Validator()
 
-    # open temporary 'csvfile' reader object
+    # local variable: open temporary 'csvfile' reader object
     dataset_reader = csv.reader(
         raw_data,
         delimiter=' ',
@@ -49,11 +51,18 @@ def csv2dict(raw_data):
     for dep_index, row in enumerate(islice(dataset_reader, 0, None)):
         row_arr = row[0].split(',')
         features_list = row_arr[1:]
-        features_dict = {k: v for k, v in zip(indep_labels_list, features_list)}
+
+        # merge lists into dict if each independent variable validates
+        if all(validate.validate_value(item) for item in features_lists):
+            features_dict = {k: v for k, v in zip(indep_labels_list, features_list)}
+            error = None
+        else:
+            error = 'csv conversion failed: ' + validate.get_error()
 
         observation = {
             'dependent-variable': row_arr[:1][0],
             'independent-variables': [features_dict]
+            'error': error
         }
 
         dataset.append(observation)
