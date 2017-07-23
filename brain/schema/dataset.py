@@ -27,7 +27,7 @@ def schema_svm():
                 'minItems': 1,
                 'additionalProperties': {
                     'type': 'string',
-                    'minLength' 1
+                    'minLength': 1
                     }
                 }
             }
