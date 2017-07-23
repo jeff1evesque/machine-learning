@@ -10,7 +10,7 @@ This file contains various jsonschema dataset definitions.
 def schema_svm():
     '''
 
-    This method validates svm dataset(s).
+    This function validates svm dataset(s).
 
     '''
 
@@ -37,7 +37,7 @@ def schema_svm():
 def schema_svr():
     '''
 
-    This method validates svf dataset(s).
+    This function validates svr dataset(s).
 
     '''
 
