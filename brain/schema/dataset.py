@@ -23,7 +23,7 @@ def schema_svm():
                 'minLength': 1
             },
             'independent-variables': {
-                'type': 'array'
+                'type': 'array',
                 'minItems': 1,
                 'additionalProperties': {
                     'type': 'string',
@@ -50,7 +50,7 @@ def schema_svr():
                 'type': 'number'
             },
             'independent-variables': {
-                'type': 'array'
+                'type': 'array',
                 'minItems': 1,
                 'additionalProperties': {
                     'type': 'number'
