@@ -35,15 +35,18 @@ var ModelGenerate = React.createClass({
         const kernelType = this.state.value_kernel_type;
 
         if (
-            collection && collection != '--Select--' &&
+            collection &&
+            collection != '--Select--' &&
             checkValidString(collection)
         ) {
             this.setState({value_collection: collection});
 
           // update redux store
             if (
-                modelType != '--Select--' && kernelType != '--Select--' &&
-                checkValidString(modelType) && checkValidString(kernelType)
+                modelType != '--Select--' &&
+                kernelType != '--Select--' &&
+                checkValidString(modelType) &&
+                checkValidString(kernelType)
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
@@ -67,14 +70,16 @@ var ModelGenerate = React.createClass({
         const kernelType = this.state.value_kernel_type;
 
         if (
-            modelType && modelType != '--Select--' &&
+            modelType &&
+            modelType != '--Select--' &&
             checkValidString(modelType)
         ) {
             this.setState({value_model_type: event.target.value});
 
           // update redux store
             if (
-                checkValidString(collection) && kernelType != '--Select--' &&
+                checkValidString(collection) &&
+                kernelType != '--Select--' &&
                 checkValidString(kernelType)
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
@@ -99,14 +104,16 @@ var ModelGenerate = React.createClass({
         const kernelType = event.target.value;
 
         if (
-            kernelType && kernelType != '--Select--' &&
+            kernelType &&
+            kernelType != '--Select--' &&
             checkValidString(kernelType)
         ) {
             this.setState({value_kernel_type: event.target.value});
 
           // update redux store
             if (
-                checkValidString(collection) && modelType != '--Select--' &&
+                checkValidString(collection) &&
+                modelType != '--Select--' &&
                 checkValidString(modelType)
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
@@ -187,7 +194,7 @@ var ModelGenerate = React.createClass({
             </fieldset>
         );
     },
-  // call back: get session id(s) from server side, and append to form
+  // call back: get all collections from server side, and append to form
     componentDidMount: function() {
       // ajax arguments
         const ajaxEndpoint = '/retrieve-collections';
