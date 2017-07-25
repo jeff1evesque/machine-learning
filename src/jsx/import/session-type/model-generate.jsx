@@ -99,7 +99,7 @@ var ModelGenerate = React.createClass({
         }
     },
     changeKernelType: function(event) {
-        const collection  = this.state.value_collection;
+        const collection = this.state.value_collection;
         const modelType  = this.state.value_model_type;
         const kernelType = event.target.value;
 
