@@ -2,7 +2,7 @@
 
 '''
 
-This file retrieves the 'session_name', and 'id_entity' properties.
+This file retrieves session related properties from the sql database.
 
 '''
 
@@ -13,8 +13,8 @@ from brain.database.query import SQL
 class Session(object):
     '''
 
-    This class provides an interface to retrieve the 'session_name', and
-    'id_entity' from the 'tbl_dataset_entity' sql database table.
+    This class provides an interface to retrieve the 'id_entity', and
+    'collection' from the 'tbl_dataset_entity' sql database table.
 
     Note: this class is invoked within 'views.py'
 
@@ -79,7 +79,7 @@ class Session(object):
                 list_session.append({'id': item[0], 'collection': item[1]})
             response_error = self.sql.get_errors()
         else:
-            response_error = 'no previous session found in database'
+            response_error = 'no previous collection found in database'
 
         # disconnect from database
         self.sql.disconnect()
