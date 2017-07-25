@@ -71,8 +71,11 @@ class Model(object):
     def get_all_titles(self, name):
         '''
 
-        This method returns a list of all model titles, and the corresponding
-        numeric id value, with respect to the provided key (i.e svm_model).
+        This method returns a list of all models, with respect to the provided
+        redis key, in the form of the corresponding model_type (i.e svm_model).
+
+        Note: each model will be named, with the supplied 'session_name' value,
+              provided during the corresponding 'data_new' session.
 
         '''
 
