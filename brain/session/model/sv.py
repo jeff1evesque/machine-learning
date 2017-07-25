@@ -91,13 +91,8 @@ def generate(model, kernel_type, collection, payload, list_error):
             r2
         )
 
-    # cache model, title
+    # cache model
     Model(clf).cache(model + '_model', collection_adjusted)
-    Hset().cache(
-        model + '_collection',
-        collection_adjusted,
-        collection
-    )
 
     # cache feature labels, with respect to given collection
     Hset().cache(
