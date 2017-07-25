@@ -8,6 +8,7 @@ This file caches, and uncaches the supplied model into a redis hash cache.
 
 from brain.cache.query import Query
 from brain.converter.model import Model as Converter
+from log.logger import Logger
 
 
 class Model(object):
@@ -84,9 +85,15 @@ class Model(object):
             hkeys = self.myRedis.hkeys(name)
             list_title = []
 
+            logger = Logger(__name__, 'error', 'error')
+            logger.log('/brain/cache/model.py, hkeys: ' + repr(hkeys))
+
             # build result
             id = [x[:x.find('_')] for x in hkeys]
             title = [x[x.find('_')+1:] for x in hkeys]
+
+            logger.log('/brain/cache/model.py, id: ' + repr(id))
+            logger.log('/brain/cache/model.py, title: ' + repr(title))
 
             for i in range(len(hkeys)):
                 list_title.append({'id': id[i], 'title': title[i]})
