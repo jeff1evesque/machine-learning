@@ -182,7 +182,9 @@ class Load_Data(object):
 
         # implement class methods
         if not session.validate_arg_none():
+            logger.log('/brain/load-data.py, validate_arg_none: ' + repr(session.validate_arg_none()))
             session.validate_premodel_settings()
+            logger.log('/brain/load-data.py, session.get_errors(): ' + repr(session.get_errors()))
             session.check()
 
             my_prediction = session.predict()
