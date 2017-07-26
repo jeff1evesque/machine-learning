@@ -380,7 +380,7 @@ def retrieve_sv_features():
 
     # get model type
     selected_collection = request.get_json()['selected-collection']
-    model_type = ModelType().get_model_type(collection)['result']
+    model_type = ModelType().get_model_type(selected_collection)['result']
 
     # return all feature labels
     if request.method == 'POST':
