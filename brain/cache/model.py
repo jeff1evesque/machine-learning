@@ -87,8 +87,6 @@ class Model(object):
 
             logger = Logger(__name__, 'error', 'error')
             logger.log('/brain/cache/model.py, hkeys: ' + repr(hkeys))
-            logger.log('/brain/cache/model.py, id: ' + repr(id))
-            logger.log('/brain/cache/model.py, title: ' + repr(title))
 
             for i in range(len(hkeys)):
                 list_title.append({'collection': hkeys[i]})
