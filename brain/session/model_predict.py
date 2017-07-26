@@ -51,7 +51,7 @@ class ModelPredict(Base):
         super(ModelPredict, self).__init__(prediction_input)
         self.prediction_input = prediction_input
         self.prediction_settings = self.prediction_input['properties']
-        self.model_id = self.prediction_settings['model_id']
+        self.model_id = self.prediction_settings['collection']
         self.predictors = self.prediction_settings['prediction_input[]']
 
     def predict(self):
