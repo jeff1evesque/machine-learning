@@ -115,7 +115,7 @@ var ModelPredict = React.createClass({
     },
   // callback: used for the above 'render' (return 'span' if undefined)
     getSupplyPredictors: function(collection) {
-        if (collection != '--Select--' && Number(collection)) {
+        if (collection != '--Select--' && checkValidString(collection)) {
             return SupplyPredictors;
         }
         else {
