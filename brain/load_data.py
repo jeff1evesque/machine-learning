@@ -13,6 +13,7 @@ from brain.session.data_new import DataNew
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
 from brain.database.session import Session
+from log.logger import Logger
 
 
 class Load_Data(object):
@@ -176,6 +177,8 @@ class Load_Data(object):
 
         # instantiate class
         session = ModelPredict(self.data)
+        logger = Logger(__name__, 'error', 'error')
+        logger.log('/brain/load-data.py, session: ' + repr(session))
 
         # implement class methods
         if not session.validate_arg_none():
@@ -183,6 +186,7 @@ class Load_Data(object):
             session.check()
 
             my_prediction = session.predict()
+            logger.log('/brain/load-data.py, my_prediction: ' + repr(my_prediction))
             if my_prediction['error']:
                 response = {
                     'status': 1,

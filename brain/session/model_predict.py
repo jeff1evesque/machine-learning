@@ -16,6 +16,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 from brain.session.base import Base
 from brain.session.predict.sv import predict
 from brain.database.model_type import ModelType
+from log.logger import Logger
 
 
 class ModelPredict(Base):
@@ -51,7 +52,7 @@ class ModelPredict(Base):
         super(ModelPredict, self).__init__(prediction_input)
         self.prediction_input = prediction_input
         self.prediction_settings = self.prediction_input['properties']
-        self.model_id = self.prediction_settings['collection']
+        self.collection = self.prediction_settings['collection']
         self.predictors = self.prediction_settings['prediction_input[]']
 
     def predict(self):
@@ -64,5 +65,9 @@ class ModelPredict(Base):
         '''
 
         # get model type
-        model_type = ModelType().get_model_type(self.model_id)['result']
-        return predict(model_type, self.model_id, self.predictors)
+        logger = Logger(__name__, 'error', 'error')
+        logger.log('/brain/session/model_predict.py, self.collection: ' + repr(self.collection))
+        logger.log('/brain/session/model_predict.py, self.predictors: ' + repr(self.predictors))
+        model_type = ModelType().get_model_type(self.collection)['result']
+        logger.log('/brain/session/model_predict.py, model_type: ' + repr(model_type))
+        return predict(model_type, self.collection, self.predictors)
