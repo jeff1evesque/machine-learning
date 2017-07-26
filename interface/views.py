@@ -379,14 +379,13 @@ def retrieve_sv_features():
     '''
 
     # get model type
-    model_id = request.get_json()['model_id']
-    model_type = ModelType().get_model_type(model_id)['result']
+    selected_collection = request.get_json()['selected-collection']
 
     # return all feature labels
     if request.method == 'POST':
         label_list = Hset().uncache(
             model_type + '_feature_labels',
-            model_id
+            selected_collection
         )
 
         if label_list['result']:

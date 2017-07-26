@@ -88,7 +88,7 @@ var SupplyPredictors = React.createClass({
 
       // ajax arguments
         var ajaxEndpoint = '/retrieve-sv-features';
-        var ajaxData = {'model_id': this.props.selectedModelId};
+        var ajaxData = {'selected-collection': this.props.selectedCollection};
         var ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': JSON.stringify(ajaxData),
