@@ -101,8 +101,8 @@ var ModelPredict = React.createClass({
 
                         {/* array components require unique 'key' value */}
                         {options && options.map(function(value) {
-                            return <option key={value.id} value={value.collection}>
-                                {value.id}: {value.collection}
+                            return <option key={value.collection} value={value.collection}>
+                                {value.collection}
                             </option>;
                         })}
                     </select>
