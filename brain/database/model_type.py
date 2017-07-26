@@ -2,7 +2,7 @@
 
 '''
 
-This file retrieves model type, when provided the model id.
+This file retrieves model type, when provided the corresponding collection.
 
 '''
 
@@ -28,13 +28,13 @@ class ModelType(object):
         self.sql = SQL()
         self.db_ml = current_app.config.get('SQL_DB')
 
-    def get_model_type(self, id_entity):
+    def get_model_type(self, collection):
         '''
 
         This method is responsible for retrieving the model type, from the
-        SQL database, using a fixed 'model_id'.
+        SQL database, using a fixed 'collection'.
 
-        @id_entity, this supplied argument corresponding to the 'id_entity'
+        @collection, this supplied argument corresponding to the 'collection'
             column from the 'tbl_dataset_entity' database table.
 
         @sql_statement, is a sql format string, and not a python string.
@@ -48,8 +48,8 @@ class ModelType(object):
             ' FROM tbl_dataset_entity mid'\
             ' INNER JOIN tbl_model_type mtype'\
             ' ON mid.model_type = mtype.id_model'\
-            ' WHERE mid.id_entity=%s'
-        args = (id_entity)
+            ' WHERE mid.collection=%s'
+        args = (collection)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
