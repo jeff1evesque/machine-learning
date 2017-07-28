@@ -12,6 +12,7 @@ from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
 import json
+from log.logger import Logger
 
 
 def generate(model, kernel_type, collection, payload, list_error):
@@ -77,14 +78,22 @@ def generate(model, kernel_type, collection, payload, list_error):
 
     # generate svr model
     elif model == list_model_type[1]:
+        logger = Logger(__name__, 'error', 'error')
+        logger.log('/brain/session/model.py, kernel_type: ' + repr(kernel_type))
+        logger.log('/brain/session/model.py, model: ' + repr(model))
+        logger.log('/brain/session/model.py, collection_adjusted: ' + repr(collection_adjusted))
+        logger.log('/brain/session/model.py, list_error: ' + repr(list_error))
+
         # create model
         clf = svm.SVR(kernel=kernel_type)
 
         # fit model
         clf.fit(grouped_features, observation_labels)
+        logger.log('/brain/session/model.py, clf: ' + repr(clf))
 
         # compute, and cache coefficient of determination
         r2 = clf.score(grouped_features, observation_labels)
+        logger.log('/brain/session/model.py, r2: ' + repr(r2))
         Hset().cache(
             model + '_r2',
             collection_adjusted,
