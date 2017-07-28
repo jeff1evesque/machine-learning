@@ -24,7 +24,8 @@ the ``data`` attribute, in a given ``POST`` request:
 
 The following properties define the above ``data`` attribute:
 
-- ``collection``: collection of dataset documents, used to generate a prediction
+- ``collection``: collection of dataset documents, used to generate a model, via the `model_generate` session,
+  which is also used to name the corresponding model
 
 - ``session_type``: corresponds to one of the following session types:
 
