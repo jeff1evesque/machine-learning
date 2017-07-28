@@ -75,8 +75,6 @@ class Validator(object):
         elif self.session_type == 'model_predict':
             try:
                 validate = Draft4Validator(schema_model_predict())
-
-                int(self.premodel_settings['model_id'])
                 for value in self.premodel_settings['prediction_input[]']:
                     float(value)
 

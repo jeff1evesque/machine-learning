@@ -146,6 +146,10 @@ def schema_model_predict():
                 'type': 'string',
                 'enum': ['model_predict']
             },
+            'collection': {
+                'type': 'string',
+                'minLength': 1,
+            },
         },
     }
     return schema
