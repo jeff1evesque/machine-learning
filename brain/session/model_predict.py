@@ -64,4 +64,5 @@ class ModelPredict(Base):
         '''
 
         # get model type
+        model_type = ModelType().get_model_type(self.collection)['result']
         return predict(model_type, self.collection, self.predictors)
