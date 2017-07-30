@@ -49,22 +49,17 @@ def generate(model, kernel_type, collection, payload, list_error):
 
     for dataset in datasets['result']:
         for observation in dataset['dataset']:
-
-            # svm case
-            if model == list_model_type[0]:
-                observation_labels.append(observation['dependent-variable'])
-            # svr case
-            elif model == list_model_type[1]:
-                observation_labels.append(float(observation['dependent-variable']))
-
             indep_variables = observation['independent-variables']
 
             for features in indep_variables:
                 # svm case
                 if model == list_model_type[0]:
+                    observation_labels.append(observation['dependent-variable'])
                     sorted_features = [v for k, v in sorted(features.items())]
+
                 # svr case
                 elif model == list_model_type[1]:
+                    observation_labels.append(float(observation['dependent-variable']))
                     sorted_features = [float(v) for k, v in sorted(features.items())]
 
                 grouped_features.append(sorted_features)
