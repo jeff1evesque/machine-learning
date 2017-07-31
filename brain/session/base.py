@@ -87,11 +87,11 @@ class Base(object):
         '''
 
         This method checks if current class instance contains any errors. If
-        any error(s) exists, it is printed, and the program exits.
+        any error(s) exists, it is printed, and raised as an exception.
 
         '''
 
         if len(self.list_error) > 0:
             for error in self.list_error:
                 print error
-            sys.exit()
+                raise Exception(error)
