@@ -55,6 +55,7 @@ class Load_Data(object):
 
         # instantiate class
         session = DataNew(self.data)
+        raise ValueError('/brain/load_data.py, self.data: ' + repr(self.data))
 
         # implement class methods
         if not session.validate_arg_none():
