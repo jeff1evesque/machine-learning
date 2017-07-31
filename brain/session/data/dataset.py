@@ -48,7 +48,7 @@ def dataset2dict(model_type, upload):
             # convert dataset(s) into extended list
             for dataset in adjusted_datasets:
                 # scrape url content
-                if dataset_type = 'dataset_url':
+                if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
                     dataset = r.json()
 
@@ -75,7 +75,7 @@ def dataset2dict(model_type, upload):
             # convert dataset(s) into extended list
             for dataset in adjusted_datasets:
                 # scrape url content
-                if dataset_type = 'dataset_url':
+                if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
                     dataset = r.json()
 
