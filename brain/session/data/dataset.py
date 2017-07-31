@@ -38,6 +38,7 @@ def dataset2dict(model_type, upload):
         # programmatic-interface
         if stream:
             # convert dataset(s) into extended list
+            raise ValueError('/brain/session/data/dataset.py, dataset: ' + repr(datasets))
             for dataset in datasets:
                 # validate against schema, and build converted list
                 try:
