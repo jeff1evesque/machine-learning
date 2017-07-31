@@ -9,6 +9,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 import json
+import requests
 from flask import current_app
 from jsonschema.validators import Draft4Validator
 from brain.schema.dataset import schema_svm, schema_svr
@@ -37,9 +38,21 @@ def dataset2dict(model_type, upload):
     try:
         # programmatic-interface
         if stream:
+            if datasets.get('file_upload', None):
+                adjusted_datasets = datasets['file_upload']
+                dataset_type = 'file_upload'
+            else:
+                adjusted_datasets = datasets['dataset_url']
+                dataset_type = 'dataset_url'
+
             # convert dataset(s) into extended list
-            raise ValueError('/brain/session/data/dataset.py, dataset: ' + repr(datasets))
-            for dataset in datasets:
+            raise ValueError('/brain/session/data/dataset.py, dataset: ' + repr(adjusted_datasets))
+            for dataset in adjusted_datasets:
+                # scrape url content
+                if dataset_type = 'dataset_url':
+                    r = requests.get(dataset)
+                    dataset = r.json()
+
                 # validate against schema, and build converted list
                 try:
                     if model_type == list_model_type[0]:
@@ -55,13 +68,21 @@ def dataset2dict(model_type, upload):
         else:
             if datasets.get('file_upload', None):
                 adjusted_datasets = datasets['file_upload']
+                dataset_type = 'file_upload'
             else:
                 adjusted_datasets = datasets['dataset_url']
+                dataset_type = 'dataset_url'
 
             # convert dataset(s) into extended list
             for dataset in adjusted_datasets:
+                # scrape url content
+                if dataset_type = 'dataset_url':
+                    r = requests.get(dataset)
+                    dataset = r.json()
+
                 if dataset['filename'].lower().endswith('.csv'):
                     converted.extend(csv2dict(dataset['file']))
+
                 elif dataset['filename'].lower().endswith('.json'):
                     # load dataset instance
                     try:
