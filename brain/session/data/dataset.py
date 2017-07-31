@@ -46,7 +46,6 @@ def dataset2dict(model_type, upload):
                 dataset_type = 'dataset_url'
 
             # convert dataset(s) into extended list
-            raise ValueError('/brain/session/data/dataset.py, dataset: ' + repr(adjusted_datasets))
             for dataset in adjusted_datasets:
                 # scrape url content
                 if dataset_type = 'dataset_url':
