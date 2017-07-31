@@ -15,6 +15,7 @@ from jsonschema.validators import Draft4Validator
 from brain.schema.dataset import schema_svm, schema_svr
 from brain.converter.format.csv2dict import csv2dict
 from brain.converter.format.xml2dict import xml2dict
+from log.logger import Logger
 
 
 def dataset2dict(model_type, upload):
@@ -34,28 +35,27 @@ def dataset2dict(model_type, upload):
     settings = upload['properties']
     stream = settings.get('stream', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
+    logger = Logger(__name__, 'error', 'error')
 
     try:
         # programmatic-interface
-        if stream:
-            if datasets.get('file_upload', None):
-                adjusted_datasets = datasets['file_upload']
-                dataset_type = 'file_upload'
-            else:
-                adjusted_datasets = datasets['dataset_url']
-                dataset_type = 'dataset_url'
+        if stream == 'True':
+            dataset_type = settings['dataset_type']
 
             # convert dataset(s) into extended list
-            for dataset in adjusted_datasets:
+            for dataset in datasets:
                 # scrape url content
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
-                    dataset = r.json()
+                    dataset = [r.json()]
+                logger.log('/brain/session/data/dataset.py, dataset: ' + repr(dataset))
 
                 # validate against schema, and build converted list
                 try:
                     if model_type == list_model_type[0]:
+                        logger.log('/brain/session/data/dataset.py, flag1')
                         Draft4Validator(schema_svm()).validate(dataset)
+                        logger.log('/brain/session/data/dataset.py, flag2')
                     elif model_type == list_model_type[1]:
                         Draft4Validator(schema_svr()).validate(dataset)
                     converted.extend(dataset)
@@ -77,17 +77,10 @@ def dataset2dict(model_type, upload):
                 # scrape url content
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
-                    dataset = r.json()
+                    dataset = [r.json()]
 
-                if dataset['filename'].lower().endswith('.csv'):
-                    converted.extend(csv2dict(dataset['file']))
-
-                elif dataset['filename'].lower().endswith('.json'):
                     # load dataset instance
-                    try:
-                        instance = json.load(dataset['file'])['dataset']
-                    except:
-                        instance = converted.extend(dataset['file'])
+                    instance = converted.extend(dataset)
 
                     # validate against schema, and build converted list
                     try:
@@ -103,8 +96,34 @@ def dataset2dict(model_type, upload):
                         )
                         converted.extend({'error': msg})
 
-                elif dataset['filename'].lower().endswith('.xml'):
-                    converted.extend(xml2dict(dataset['file']))
+                # file content
+                else:
+                    if dataset['filename'].lower().endswith('.csv'):
+                        converted.extend(csv2dict(dataset['file']))
+
+                    elif dataset['filename'].lower().endswith('.json'):
+                        # load dataset instance
+                        try:
+                            instance = json.load(dataset['file'])['dataset']
+                        except:
+                            instance = converted.extend(dataset['file'])
+
+                        # validate against schema, and build converted list
+                        try:
+                            if model_type == list_model_type[0]:
+                                Draft4Validator(schema_svm()).validate(instance)
+                            elif model_type == list_model_type[1]:
+                                Draft4Validator(schema_svr()).validate(instance)
+                            converted.extend(instance)
+                        except Exception, error:
+                            msg = "%s contains invalid syntax, with error: %s" % (
+                                dataset['filename'],
+                                error
+                            )
+                            converted.extend({'error': msg})
+
+                    elif dataset['filename'].lower().endswith('.xml'):
+                        converted.extend(xml2dict(dataset['file']))
 
         # return results
         return {
