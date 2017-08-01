@@ -47,18 +47,16 @@ def dataset2dict(model_type, upload):
                 # scrape url content
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
-                    dataset = r.json()['dataset']
+                    instance = r.json()['dataset']
                 logger.log('/brain/session/data/dataset.py, dataset: ' + repr(dataset))
 
                 # validate against schema, and build converted list
                 try:
                     if model_type == list_model_type[0]:
-                        logger.log('/brain/session/data/dataset.py, flag1')
-                        Draft4Validator(schema_svm()).validate(dataset)
-                        logger.log('/brain/session/data/dataset.py, flag2')
+                        Draft4Validator(schema_svm()).validate(instance)
                     elif model_type == list_model_type[1]:
-                        Draft4Validator(schema_svr()).validate(dataset)
-                    converted.extend(dataset)
+                        Draft4Validator(schema_svr()).validate(instance)
+                    converted.extend(instance)
                 except Exception, error:
                     msg = "Stream contains invalid syntax, with error: %s" % error
                     converted.extend({'error': msg})
@@ -72,20 +70,23 @@ def dataset2dict(model_type, upload):
                 adjusted_datasets = datasets['dataset_url']
                 dataset_type = 'dataset_url'
 
+            logger.log('/brain/session/data/dataset.py, datasets' + repr(datasets))
             # convert dataset(s) into extended list
             for dataset in adjusted_datasets:
+                logger.log('/brain/session/data/dataset.py, dataset' + repr(dataset))
                 # scrape url content
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
-                    dataset = [r.json()]['dataset']
-
-                    # load dataset instance
-                    instance = converted.extend(dataset)
+                    logger.log('/brain/session/data/dataset.py, r' + repr(r))
+                    logger.log('/brain/session/data/dataset.py, dataset2' + repr(dataset))
+                    instance = [r.json()]['dataset']
 
                     # validate against schema, and build converted list
                     try:
                         if model_type == list_model_type[0]:
+                            logger.log('/brain/session/data/dataset.py, flag1')
                             Draft4Validator(schema_svm()).validate(instance)
+                            logger.log('/brain/session/data/dataset.py, flag2')
                         elif model_type == list_model_type[1]:
                             Draft4Validator(schema_svr()).validate(instance)
                         converted.extend(instance)
@@ -114,7 +115,6 @@ def dataset2dict(model_type, upload):
                                 Draft4Validator(schema_svm()).validate(instance)
                             elif model_type == list_model_type[1]:
                                 Draft4Validator(schema_svr()).validate(instance)
-                            converted.extend(instance)
                         except Exception, error:
                             msg = "%s contains invalid syntax, with error: %s" % (
                                 dataset['filename'],
