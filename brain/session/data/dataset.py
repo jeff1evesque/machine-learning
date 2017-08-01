@@ -47,7 +47,7 @@ def dataset2dict(model_type, upload):
                 # scrape url content
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
-                    dataset = [r.json()]
+                    dataset = r.json()['dataset']
                 logger.log('/brain/session/data/dataset.py, dataset: ' + repr(dataset))
 
                 # validate against schema, and build converted list
@@ -77,7 +77,7 @@ def dataset2dict(model_type, upload):
                 # scrape url content
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
-                    dataset = [r.json()]
+                    dataset = [r.json()]['dataset']
 
                     # load dataset instance
                     instance = converted.extend(dataset)
