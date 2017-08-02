@@ -7,7 +7,7 @@ on an existing model. The dataset is left untouched, and formatted within
 'dataset.py'.
 
 '''
-
+from log.logger import Logger
 
 class Settings(object):
     '''
@@ -45,9 +45,11 @@ class Settings(object):
         # local variables
         formatted_settings = {}
         formatted_files = []
+        logger = Logger(__name__, 'error', 'error')
 
         # restructure settings
         try:
+            logger.log('/brain/converter/settings.py, self.settings.items(): ' + repr(self.settings.items()))
             for key, value in self.settings.items():
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
@@ -73,11 +75,33 @@ class Settings(object):
                     formatted_settings = self.settings
 
         except Exception as error:
+            logger.log('/brain/converter/settings.py, error: ' + repr(error))
             self.list_error.append(error)
             return {'properties': None, 'dataset': None, 'error': self.list_error}
 
+        # restructure dataset: web-interface, dataset_url case
+        if (
+                self.settings and
+                self.settings['dataset[]'] and
+                self.settings['dataset_type'] == 'dataset_url'
+           ):
+
+            logger.log("/brain/converter/settings.py, self.dataset.getlist('dataset[]'): " + repr(self.dataset.getlist('dataset[]')))
+            try:
+                dataset = {
+                    'upload_quantity': len(self.dataset.getlist('dataset[]')),
+                    'dataset_url': self.dataset.getlist('dataset[]')
+                }
+
+            except Exception as error:
+                self.list_error.append(error)
+                return {'properties': None, 'dataset': None, 'error': self.list_error}
+
+            logger.log('/brain/converter/settings.py, dataset_url (2): ' + repr(dataset))
+
         # restructure dataset: not all sessions involve files
-        if self.dataset:
+        elif self.dataset:
+            logger.log('/brain/converter/settings.py, self.dataset: ' + repr(self.dataset))
             try:
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
