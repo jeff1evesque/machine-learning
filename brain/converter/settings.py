@@ -7,7 +7,6 @@ on an existing model. The dataset is left untouched, and formatted within
 'dataset.py'.
 
 '''
-from log.logger import Logger
 
 class Settings(object):
     '''
@@ -45,19 +44,31 @@ class Settings(object):
         # local variables
         formatted_settings = {}
         formatted_files = []
+        formatted_urls = []
         logger = Logger(__name__, 'error', 'error')
 
         # restructure settings
         try:
-            logger.log('/brain/converter/settings.py, self.settings.items(): ' + repr(self.settings.items()))
             for key, value in self.settings.items():
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
                     formatted_settings['stream'] = False
                     for lvalue in self.settings.getlist(key):
+                        # special case: this edge case, restructures the dataset, not
+                        #               the settings. This is done to optimize computing,
+                        #               instead of duplicating computing time below.
+                        #
+                        # Note: the dataset is provided with the settings, since 'url'
+                        #       input types are not considered file objects during form
+                        #       submission, from the web-interface.
+                        #
+                        if key.lower() == 'dataset[]':
+                            formatted_urls.append(lvalue)
+
                         # base case
-                        if key.lower() not in formatted_settings:
+                        elif key.lower() not in formatted_settings:
                             formatted_settings[key.lower()] = lvalue.lower()
+
                         else:
                             # step case 1
                             if type(formatted_settings[key.lower()]) == \
@@ -75,33 +86,18 @@ class Settings(object):
                     formatted_settings = self.settings
 
         except Exception as error:
-            logger.log('/brain/converter/settings.py, error: ' + repr(error))
             self.list_error.append(error)
             return {'properties': None, 'dataset': None, 'error': self.list_error}
 
-        # restructure dataset: web-interface, dataset_url case
-        if (
-                self.settings and
-                self.settings['dataset[]'] and
-                self.settings['dataset_type'] == 'dataset_url'
-           ):
+        # restructure dataset: premised on above 'special case'
+        if formatted_urls:
+            dataset = {
+                'upload_quantity': len(formatted_urls),
+                'dataset_url': formatted_urls
+            }
 
-            logger.log("/brain/converter/settings.py, self.dataset.getlist('dataset[]'): " + repr(self.dataset.getlist('dataset[]')))
-            try:
-                dataset = {
-                    'upload_quantity': len(self.dataset.getlist('dataset[]')),
-                    'dataset_url': self.dataset.getlist('dataset[]')
-                }
-
-            except Exception as error:
-                self.list_error.append(error)
-                return {'properties': None, 'dataset': None, 'error': self.list_error}
-
-            logger.log('/brain/converter/settings.py, dataset_url (2): ' + repr(dataset))
-
-        # restructure dataset: not all sessions involve files
+        # restructure dataset: remaining cases
         elif self.dataset:
-            logger.log('/brain/converter/settings.py, self.dataset: ' + repr(self.dataset))
             try:
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
