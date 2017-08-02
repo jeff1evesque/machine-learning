@@ -62,13 +62,12 @@ def dataset2dict(model_type, upload):
 
         # web-interface
         else:
+            dataset_type = settings['dataset_type']
             logger.log('/brain/session/data/dataset.py, upload: ' + repr(upload))
-            if settings.get('file_upload', None):
+            if dataset_type == 'file_upload':
                 adjusted_datasets = upload['dataset']['file_upload']
-                dataset_type = 'file_upload'
             else:
                 adjusted_datasets = upload['dataset']['dataset_url']
-                dataset_type = 'dataset_url'
 
             # convert dataset(s) into extended list
             for dataset in adjusted_datasets:
