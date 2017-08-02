@@ -48,7 +48,6 @@ def dataset2dict(model_type, upload):
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
                     instance = r.json()['dataset']
-                logger.log('/brain/session/data/dataset.py, dataset: ' + repr(dataset))
 
                 # validate against schema, and build converted list
                 try:
@@ -63,22 +62,21 @@ def dataset2dict(model_type, upload):
 
         # web-interface
         else:
-            if datasets.get('file_upload', None):
+            logger.log('/brain/session/data/dataset.py, upload: ' + repr(upload))
+            if settings.get('file_upload', None):
                 adjusted_datasets = datasets['file_upload']
                 dataset_type = 'file_upload'
             else:
                 adjusted_datasets = datasets['dataset_url']
                 dataset_type = 'dataset_url'
 
-            logger.log('/brain/session/data/dataset.py, datasets' + repr(datasets))
             # convert dataset(s) into extended list
             for dataset in adjusted_datasets:
-                logger.log('/brain/session/data/dataset.py, dataset' + repr(dataset))
+                logger.log('/brain/session/data/dataset.py, dataset: ' + repr(dataset))
                 # scrape url content
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
-                    logger.log('/brain/session/data/dataset.py, r' + repr(r))
-                    logger.log('/brain/session/data/dataset.py, dataset2' + repr(dataset))
+                    logger.log('/brain/session/data/dataset.py, r: ' + repr(r))
                     instance = [r.json()]['dataset']
 
                     # validate against schema, and build converted list
