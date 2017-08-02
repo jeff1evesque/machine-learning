@@ -45,7 +45,6 @@ class Settings(object):
         formatted_settings = {}
         formatted_files = []
         formatted_urls = []
-        logger = Logger(__name__, 'error', 'error')
 
         # restructure settings
         try:
