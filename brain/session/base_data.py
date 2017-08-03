@@ -15,7 +15,6 @@ from flask import current_app, session
 from brain.session.data.arbiter import save_info
 from brain.session.data.dataset import dataset2dict
 from brain.database.dataset import Collection
-from log.logger import Logger
 
 
 class BaseData(Base):
@@ -101,9 +100,6 @@ class BaseData(Base):
         collection_adjusted = collection.lower().replace(' ', '_')
         cursor = Collection()
         document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}
-
-        logger = Logger(__name__, 'error', 'error')
-        logger.log('/brain/session/base_data.py, self.dataset: ' + repr(document))
 
         response = cursor.query(
             collection_adjusted,
