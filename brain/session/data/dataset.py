@@ -15,7 +15,6 @@ from jsonschema.validators import Draft4Validator
 from brain.schema.dataset import schema_svm, schema_svr
 from brain.converter.format.csv2dict import csv2dict
 from brain.converter.format.xml2dict import xml2dict
-from log.logger import Logger
 
 
 def dataset2dict(model_type, upload):
@@ -35,7 +34,6 @@ def dataset2dict(model_type, upload):
     settings = upload['properties']
     stream = settings.get('stream', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
-    logger = Logger(__name__, 'error', 'error')
 
     try:
         # programmatic-interface
@@ -63,7 +61,6 @@ def dataset2dict(model_type, upload):
         # web-interface
         else:
             dataset_type = settings['dataset_type']
-            logger.log('/brain/session/data/dataset.py, upload: ' + repr(upload))
             if dataset_type == 'file_upload':
                 adjusted_datasets = upload['dataset']['file_upload']
             else:
@@ -71,7 +68,6 @@ def dataset2dict(model_type, upload):
 
             # convert dataset(s) into extended list
             for dataset in adjusted_datasets:
-                logger.log('/brain/session/data/dataset.py, dataset: ' + repr(dataset))
                 # scrape url content
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
@@ -80,9 +76,7 @@ def dataset2dict(model_type, upload):
                     # validate against schema, and build converted list
                     try:
                         if model_type == list_model_type[0]:
-                            logger.log('/brain/session/data/dataset.py, flag1')
                             Draft4Validator(schema_svm()).validate(instance)
-                            logger.log('/brain/session/data/dataset.py, flag2')
                         elif model_type == list_model_type[1]:
                             Draft4Validator(schema_svr()).validate(instance)
                         converted.extend(instance)
