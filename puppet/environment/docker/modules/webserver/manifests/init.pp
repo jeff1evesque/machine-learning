@@ -4,7 +4,7 @@
 ###
 
 class webserver {
-    ## install mariadb
+    ## install mariadb client
     contain mariadb::client
     contain mariadb::bindings
 

@@ -14,8 +14,8 @@ Note: both the handler, and logger has levels. If the level of the logger is
 
 import yaml
 import logging
+from flask import Flask, g
 from logging.handlers import RotatingFileHandler
-from flask import Flask
 from interface.views import blueprint
 
 
@@ -30,7 +30,8 @@ def create_app(args={'prefix': '', 'settings': ''}):
     # get values from yaml
     with open(prepath + '/database.yaml', 'r') as stream:
         settings = yaml.load(stream)
-        database = settings['database']['mariadb']
+        sql = settings['database']['mariadb']
+        nosql = settings['database']['mongodb']
 
     with open(prepath + '/common.yaml', 'r') as stream:
         settings = yaml.load(stream)
@@ -42,7 +43,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
     with open(prepath + '/cache.yaml', 'r') as stream:
         settings = yaml.load(stream)
-        redis = settings['redis']
+        cache = settings['redis']
 
     with open(prepath + '/application.yaml', 'r') as stream:
         settings = yaml.load(stream)
@@ -79,14 +80,18 @@ def create_app(args={'prefix': '', 'settings': ''}):
     # flask attributes: accessible across application
     app.config.update(
         HOST=general['host'],
-        REDIS_HOST=redis['host'],
-        REDIS_PORT=redis['port'],
+        CACHE_HOST=cache['host'],
+        CACHE_PORT=cache['port'],
         ROOT=general['root'],
-        DB_HOST=database['host'],
-        DB_LOG_PATH=database['log_path'],
-        DB_ML=database['name'],
-        DB_USERNAME=database['username'],
-        DB_PASSWORD=database['password'],
+        SQL_HOST=sql['host'],
+        SQL_LOG_PATH=sql['log_path'],
+        SQL_DB=sql['name'],
+        SQL_USERNAME=sql['username'],
+        SQL_PASSWORD=sql['password'],
+        NOSQL_HOST=nosql['hostname'] + ':' + str(nosql['net']['port']),
+        NOSQL_DB=nosql['name'],
+        NOSQL_USERNAME=nosql['username'],
+        NOSQL_PASSWORD=nosql['password'],
         LOG_LEVEL=HANDLER_LEVEL,
         FLASK_LOG_PATH=webserver['flask']['log_path'],
         ERROR_LOG_PATH=application['error_log_path'],
@@ -124,3 +129,20 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
     # return
     return app
+
+
+def register_teardowns(app):
+    @app.teardown_appcontext
+    def close_db(error):
+        '''
+
+        This function closes the database connection, everytime the app context
+        tears down. A teardown can happen because of two reasons: either
+        everything went well (the error parameter will be None) or an exception
+        happened, in which case the error is passed to the teardown function.
+
+        Note: http://flask.pocoo.org/docs/0.12/tutorial/dbcon/
+
+        '''
+        if hasattr(g, 'mongodb'):
+            g.mongodb.close()

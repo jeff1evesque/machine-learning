@@ -18,7 +18,6 @@ import React from 'react';
 import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
-import checkValidInt from '../validator/valid-int.js';
 import ModelType from '../model/model-type.jsx';
 import Spinner from '../general/spinner.jsx';
 import { setSvButton } from '../redux/action/page.jsx';
@@ -28,7 +27,7 @@ var DataAppend = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_session_id: '--Select--',
+            value_collection: '--Select--',
             value_dataset_type: '--Select--',
             value_model_type: '--Select--',
             ajax_done_options: null,
@@ -38,17 +37,17 @@ var DataAppend = React.createClass({
         };
     },
   // update 'state properties'
-    changeSessionId: function(event){
-        const sessionId = event.target.value;
+    changeCollection: function(event){
+        const collection = event.target.value;
 
         if (
-            sessionId && sessionId != '--Select--' &&
-            checkValidInt(sessionId)
+            collection && collection != '--Select--' &&
+            checkValidString(collection)
         ) {
-            this.setState({value_session_id: event.target.value});
+            this.setState({value_collection: event.target.value});
         }
         else {
-            this.setState({value_session_id: '--Select--'});
+            this.setState({value_collection: '--Select--'});
 
           // update redux store
             const action = setSvButton({button: {submit_analysis: false}});
@@ -108,11 +107,11 @@ var DataAppend = React.createClass({
   // triggered when 'state properties' change
     render: function(sessionId){
         const inputDatasetType = this.state.value_dataset_type;
-        const inputSessionId = this.state.value_session_id;
+        const inputCollection = this.state.value_collection;
         const modelType = this.state.value_model_type;
         const Dataset = this.getSupplyDataset(
             inputDatasetType,
-            inputSessionId,
+            inputCollection,
             modelType
         );
         const datasetInput = !!Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
@@ -124,20 +123,20 @@ var DataAppend = React.createClass({
                 <legend>Data Upload</legend>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
-                    <p>Select past session, and upload type</p>
+                    <p>Select past collection, and upload type</p>
                     <select
-                        name='session_id'
+                        name='collection'
                         autoComplete='off'
-                        onChange={this.changeSessionId}
-                        value={this.state.value_session_id}
+                        onChange={this.changeCollection}
+                        value={this.state.value_collection}
                     >
 
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
                         {options && options.map(function(value) {
-                            return <option key={value.id} value={value.id}>
-                                       {value.id}: {value.title}
+                            return <option key={value.id} value={value.collection}>
+                                       {value.id}: {value.collection}
                                    </option>;
                         })}
 
@@ -165,11 +164,11 @@ var DataAppend = React.createClass({
         );
     },
   // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function(datasetType, sessionId, modelType) {
+    getSupplyDataset: function(datasetType, collection, modelType) {
         if (
             datasetType && checkValidString(datasetType) &&
-            datasetType != '--Select--' && sessionId &&
-            checkValidInt(sessionId) && modelType &&
+            datasetType != '--Select--' && collection &&
+            checkValidString(collection) && modelType &&
             checkValidString(modelType) && modelType != '--Select--'
         ) {
             return {
@@ -184,7 +183,7 @@ var DataAppend = React.createClass({
   // call back: get session id(s) from server side, and append to form
     componentDidMount: function() {
       // ajax arguments
-        const ajaxEndpoint = '/retrieve-session';
+        const ajaxEndpoint = '/retrieve-collections';
         const ajaxArguments = {
             'endpoint': ajaxEndpoint,
             'data': null

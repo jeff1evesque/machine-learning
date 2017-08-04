@@ -10,7 +10,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
-import sys
 from flask import current_app
 from brain.validator.settings import Validator
 
@@ -40,9 +39,8 @@ class Base(object):
         '''
 
         self.premodel_data = premodel_data
-        settings = self.premodel_data['data']['settings']
         self.list_model_type = current_app.config.get('MODEL_TYPE')
-        self.session_type = settings['session_type']
+        self.session_type = self.premodel_data['properties']['session_type']
         self.list_error = []
 
     def validate_arg_none(self):
@@ -66,7 +64,7 @@ class Base(object):
         '''
 
         validate = Validator(
-            self.premodel_data,
+            self.premodel_data['properties'],
             self.session_type
         )
 
@@ -88,11 +86,11 @@ class Base(object):
         '''
 
         This method checks if current class instance contains any errors. If
-        any error(s) exists, it is printed, and the program exits.
+        any error(s) exists, it is printed, and raised as an exception.
 
         '''
 
         if len(self.list_error) > 0:
             for error in self.list_error:
                 print error
-            sys.exit()
+                raise Exception(error)

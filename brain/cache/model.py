@@ -71,8 +71,11 @@ class Model(object):
     def get_all_titles(self, name):
         '''
 
-        This method returns a list of all model titles, and the corresponding
-        numeric id value, with respect to the provided key (i.e svm_model).
+        This method returns a list of all models, with respect to the provided
+        redis key, in the form of the corresponding model_type (i.e svm_model).
+
+        Note: each model will be named, with the supplied 'session_name' value,
+              provided during the corresponding 'data_new' session.
 
         '''
 
@@ -81,12 +84,8 @@ class Model(object):
             hkeys = self.myRedis.hkeys(name)
             list_title = []
 
-            # build result
-            id = [x[:x.find('_')] for x in hkeys]
-            title = [x[x.find('_')+1:] for x in hkeys]
-
             for i in range(len(hkeys)):
-                list_title.append({'id': id[i], 'title': title[i]})
+                list_title.append({'collection': hkeys[i]})
 
             # return result
             if list_title:

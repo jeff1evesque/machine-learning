@@ -32,7 +32,7 @@ Implement flask upstart script
 
 A non-descriptive issue title is generally used, when multiple files will be
  modified in a single pull request.  Therefore, remember to capture the
- technology, or item(s) that will be implemented in less than 50 characters
+ technology, or item(s) that will be implemented in less than 55 characters
  (without possessive tone).
 
 ### Issue: Body
@@ -72,7 +72,7 @@ git checkout -b [bug|feature|remove]-[issue number] master
 
 ## Committing Code
 
-When creating a *commit*, be sure to include an issue number, the filename
+When creating a *commit*, be sure to include an issue number, the filename (preferred)
  modified, and a short message.
 
 The following git commit message, is an acceptable syntax:
@@ -81,11 +81,17 @@ The following git commit message, is an acceptable syntax:
 
 The message should *always* be prefixed with an issue number that the commit
  corresponds to. When all components are factored in, the commit message should
- *never* be more than 65 characters long, *never* be in a possessive tone, and
+ *never* be more than 50 characters long, *never* be in a possessive tone, and
  any references to a file, or method *should* be wrapped by a single quote.
 
 **Note:** commits should be granular, such that, every commit corresponds to a
- small change within *one* file.
+ small change within *one* file. However, exceptions include grouping very similar
+ changes as one commit, or when merging one branch into another branch. In these
+ cases, the filename can be omitted from the commit message:
+
+```text
+#2844: conform boolean values to python syntax
+```
 
 ## Creating Pull Request
 
@@ -107,8 +113,13 @@ More specifically, the following rules *must* be followed:
 - filename reference(s) in the pull request title, should *always* be wrapped
  by single quotes
 
-**Note:** in some cases, the filename is longer than usual, and can be omitted
- from the pull request title.
+**Note:** in some cases, the filename is longer than usual, or the corresponding
+ issue spans multiple files. In these cases, the filename can be omitted from
+ the pull request title:
+
+```text
+#3010: Add ability to create randomized sub-datasets
+```
 
 ### Pull Request: Body
 

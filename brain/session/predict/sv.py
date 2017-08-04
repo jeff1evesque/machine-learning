@@ -12,7 +12,7 @@ from brain.cache.hset import Hset
 from brain.cache.model import Model
 
 
-def predict(model, model_id, predictors):
+def predict(model, collection, predictors):
     '''
 
     This method generates an sv (i.e. svm, or svr) prediction using the
@@ -41,16 +41,13 @@ def predict(model, model_id, predictors):
     # local variables
     probability = None
     decision_function = None
+    collection_adjusted = collection.lower().replace(' ', '_')
     list_model_type = current_app.config.get('MODEL_TYPE')
 
     # get necessary model
-    title = Hset().uncache(
-        model + '_title',
-        model_id
-    )['result']
     clf = Model().uncache(
         model + '_model',
-        model_id + '_' + title
+        collection_adjusted
     )
 
     # perform prediction, and return the result
@@ -60,7 +57,7 @@ def predict(model, model_id, predictors):
     if model == list_model_type[0]:
         encoded_labels = Model().uncache(
             model + '_labels',
-            model_id
+            collection_adjusted
         )
 
         textual_label = encoded_labels.inverse_transform([prediction])
@@ -83,7 +80,7 @@ def predict(model, model_id, predictors):
     elif model == list_model_type[1]:
         r2 = Hset().uncache(
             model + '_r2',
-            model_id
+            collection_adjusted
         )['result']
 
         return {

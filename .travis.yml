@@ -27,7 +27,7 @@ install:
   - sudo apt-get install libxml2-utils=2.9.1+dfsg1-3ubuntu4.9
   - gem install mdl -v 0.3.1
   - sudo apt-get install shellcheck=0.3.3-1~ubuntu14.04.1
-  - npm install -g eslint babel-eslint@7.1.1
+  - npm install -g eslint babel-eslint@7.2.3
   - npm install -g eslint-plugin-react@4.2.3
   - gem install yaml-lint -v 0.0.7
   - npm install -g dockerlint@0.2.0

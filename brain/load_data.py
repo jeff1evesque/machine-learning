@@ -12,6 +12,7 @@ from brain.session.data_append import DataAppend
 from brain.session.data_new import DataNew
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
+from brain.database.session import Session
 
 
 class Load_Data(object):
@@ -58,21 +59,11 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none():
             session.validate_premodel_settings()
-            session.validate_file_extension()
             session.check()
 
             session_entity = session.save_entity('data_new')
             if session_entity['status']:
-                session_id = session_entity['id']
-                session.validate_id(session_id)
-                session.check()
-
-                session.convert_dataset(session_id)
-                session.check()
-                session.save_feature_count()
-                session.check()
-
-                session.save_observation_label('data_new', session_id)
+                session.convert_dataset()
                 session.check()
 
                 session.save_premodel_dataset()
@@ -106,23 +97,20 @@ class Load_Data(object):
         session = DataAppend(self.data)
 
         # define current session id
-        session_id = self.data['data']['settings']['session_id']
+        collection = self.data['properties']['collection']
+        session_id = Session().get_session_id(collection)['result']
         session.validate_id(session_id)
 
         # implement class methods
         if not session.validate_arg_none() and not session.get_errors():
             session.validate_premodel_settings()
-            session.validate_file_extension()
             session.check()
 
             session_entity = session.save_entity('data_append', session_id)
             if session_entity['status']:
                 session.check()
 
-                session.convert_dataset(session_id)
-                session.check()
-
-                session.save_observation_label('data_append', session_id)
+                session.convert_dataset()
                 session.check()
 
                 session.save_premodel_dataset()
@@ -223,7 +211,7 @@ class Load_Data(object):
 
         '''
 
-        session_type = self.data['data']['settings']['session_type']
+        session_type = self.data['properties']['session_type']
         if session_type in self.session_list:
             return {'session_type': session_type, 'error': None}
         else:

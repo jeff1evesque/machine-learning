@@ -26,8 +26,8 @@ class Settings(object):
 
         '''
 
-        self.host = current_app.config.get('REDIS_HOST')
-        self.port = current_app.config.get('REDIS_PORT')
+        self.host = current_app.config.get('CACHE_HOST')
+        self.port = current_app.config.get('CACHE_PORT')
 
     def get_host(self):
         '''

@@ -267,6 +267,7 @@ var SupportVector = React.createClass({
                             Append Data
                         </option>
 
+
                         <option value='model_generate'>
                             Generate Model
                         </option>

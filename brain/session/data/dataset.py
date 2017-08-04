@@ -8,12 +8,16 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+import json
+import requests
 from flask import current_app
-from brain.converter.dataset import Dataset
-from brain.database.feature import Feature
+from jsonschema.validators import Draft4Validator
+from brain.schema.dataset import schema_svm, schema_svr
+from brain.converter.format.csv2dict import csv2dict
+from brain.converter.format.xml2dict import xml2dict
 
 
-def dataset2dict(id_entity, model_type, upload):
+def dataset2dict(model_type, upload):
     '''
 
     This method converts the supplied csv, or xml file upload(s) to a uniform
@@ -24,130 +28,106 @@ def dataset2dict(id_entity, model_type, upload):
     '''
 
     # local variables
-    dataset = []
-    observation_labels = []
     list_error = []
-    json_upload = upload['dataset'].get('json_string', None)
+    converted = []
+    datasets = upload['dataset']
+    settings = upload['properties']
+    stream = settings.get('stream', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
-    if json_upload:
-        is_json = True
-    else:
-        is_json = False
-
     try:
-        # web-interface: define flag to convert to dataset to json
-        if upload['dataset']['file_upload']:
-            for val in upload['dataset']['file_upload']:
-                # reset file-pointer
-                val['file'].seek(0)
-
-                # initialize converter
-                converter = Dataset(
-                    val['file'],
-                    model_type,
-                    is_json
-                )
-
-                # convert dataset(s)
-                if val['type'] == 'csv':
-                    converted = converter.csv_to_dict()
-                elif val['type'] == 'json':
-                    converted = converter.json_to_dict()
-                elif val['type'] == 'xml':
-                    converted = converter.xml_to_dict()
-
-                count_features = converter.get_feature_count()
-                labels = converter.get_observation_labels()
-
-                # assign observation labels
-                observation_labels.append(labels)
-
-                # build new (relevant) dataset
-                dataset.append({
-                    'id_entity': id_entity,
-                    'premodel_dataset': converted,
-                    'count_features': count_features
-                })
-
         # programmatic-interface
-        elif json_upload:
-            # classification
-            if upload['settings']['model_type'] == list_model_type[0]:
-                for dataset_json in json_upload.items():
-                    # conversion
-                    converter = Dataset(dataset_json, model_type, True)
-                    converted = converter.json_to_dict()
-                    count_features = converter.get_feature_count()
+        if stream == 'True':
+            dataset_type = settings['dataset_type']
 
-                    observation_labels.append(str(dataset_json[0]))
+            # convert dataset(s) into extended list
+            for dataset in datasets:
+                # scrape url content
+                if dataset_type == 'dataset_url':
+                    r = requests.get(dataset)
+                    instance = r.json()['dataset']
+                else:
+                    instance = [dataset]
 
-                    # build new (relevant) dataset
-                    dataset.append({
-                        'id_entity': id_entity,
-                        'premodel_dataset': converted,
-                        'count_features': count_features
-                    })
+                # validate against schema, and build converted list
+                try:
+                    if model_type == list_model_type[0]:
+                        Draft4Validator(schema_svm()).validate(instance)
+                    elif model_type == list_model_type[1]:
+                        Draft4Validator(schema_svr()).validate(instance)
+                    converted.extend(instance)
+                except Exception, error:
+                    msg = "Stream contains invalid syntax, with error: %s" % error
+                    converted.extend({'error': msg})
 
-            # regression
-            elif upload['settings']['model_type'] == list_model_type[1]:
-                # conversion
-                converter = Dataset(json_upload, model_type, True)
-                converted = converter.json_to_dict()
-                count_features = converter.get_feature_count()
+        # web-interface
+        else:
+            dataset_type = settings['dataset_type']
+            if dataset_type == 'file_upload':
+                adjusted_datasets = upload['dataset']['file_upload']
+            else:
+                adjusted_datasets = upload['dataset']['dataset_url']
 
-                for criterion, predictors in json_upload.items():
-                    observation_labels.append(criterion)
+            # convert dataset(s) into extended list
+            for dataset in adjusted_datasets:
+                # scrape url content
+                if dataset_type == 'dataset_url':
+                    r = requests.get(dataset)
+                    instance = [r.json()][0]['dataset']
 
-                # build new (relevant) dataset
-                dataset.append({
-                    'id_entity': id_entity,
-                    'premodel_dataset': converted,
-                    'count_features': count_features
-                })
+                    # validate against schema, and build converted list
+                    try:
+                        if model_type == list_model_type[0]:
+                            Draft4Validator(schema_svm()).validate(instance)
+                        elif model_type == list_model_type[1]:
+                            Draft4Validator(schema_svr()).validate(instance)
+                        converted.extend(instance)
+                    except Exception, error:
+                        msg = "%s contains invalid syntax, with error: %s" % (
+                            dataset['filename'],
+                            error
+                        )
+                        converted.extend({'error': msg})
+
+                # file content
+                else:
+                    if dataset['filename'].lower().endswith('.csv'):
+                        converted.extend(csv2dict(dataset['file']))
+
+                    elif dataset['filename'].lower().endswith('.json'):
+                        # load dataset instance
+                        try:
+                            instance = json.load(dataset['file'])['dataset']
+                        except:
+                            instance = converted.extend(dataset['file'])
+
+                        # validate against schema, and build converted list
+                        try:
+                            if model_type == list_model_type[0]:
+                                Draft4Validator(schema_svm()).validate(instance)
+                            elif model_type == list_model_type[1]:
+                                Draft4Validator(schema_svr()).validate(instance)
+                        except Exception, error:
+                            msg = "%s contains invalid syntax, with error: %s" % (
+                                dataset['filename'],
+                                error
+                            )
+                            converted.extend({'error': msg})
+
+                    elif dataset['filename'].lower().endswith('.xml'):
+                        converted.extend(xml2dict(dataset['file']))
+
+        # return results
+        return {
+            'dataset': converted,
+            'settings': settings,
+            'error': None
+        }
 
     except Exception as error:
         list_error.append(error)
-        print error
 
-    # return results
-    if len(list_error) > 0:
         return {
-            'dataset': dataset,
-            'observation_labels': observation_labels,
+            'dataset': None,
             'error': list_error
         }
-    else:
-        return {
-            'dataset': dataset,
-            'observation_labels': observation_labels,
-            'error': False
-        }
-
-
-def save_dataset(dataset, model_type):
-    '''
-
-    This method saves each dataset element (independent variable value) into
-    the sql database.
-
-    '''
-
-    # variables
-    list_error = []
-
-    # save dataset
-    for data in dataset:
-        for select_data in data['premodel_dataset']:
-            db_save = Feature({
-                'premodel_dataset': select_data,
-                'id_entity': data['id_entity'],
-            })
-
-            # save dataset element, append error(s)
-            db_return = db_save.save_feature(model_type)
-            if db_return['error']:
-                list_error.append(db_return['error'])
-
-    # return
-    return {'error': list_error}

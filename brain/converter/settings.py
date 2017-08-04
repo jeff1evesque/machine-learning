@@ -45,16 +45,30 @@ class Settings(object):
         # local variables
         formatted_settings = {}
         formatted_files = []
+        formatted_urls = []
 
         # restructure settings
         try:
             for key, value in self.settings.items():
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
+                    formatted_settings['stream'] = False
                     for lvalue in self.settings.getlist(key):
+                        # special case: this edge case, restructures the dataset, not
+                        #               the settings. This is done to optimize computing,
+                        #               instead of duplicating computing time below.
+                        #
+                        # Note: the dataset is provided with the settings, since 'url'
+                        #       input types are not considered file objects during form
+                        #       submission, from the web-interface.
+                        #
+                        if key.lower() == 'dataset[]':
+                            formatted_urls.append(lvalue)
+
                         # base case
-                        if key.lower() not in formatted_settings:
+                        elif key.lower() not in formatted_settings:
                             formatted_settings[key.lower()] = lvalue.lower()
+
                         else:
                             # step case 1
                             if type(formatted_settings[key.lower()]) == \
@@ -73,10 +87,17 @@ class Settings(object):
 
         except Exception as error:
             self.list_error.append(error)
-            return {'data': None, 'error': self.list_error}
+            return {'properties': None, 'dataset': None, 'error': self.list_error}
 
-        # restructure dataset: not all sessions involve files
-        if self.dataset:
+        # restructure dataset: premised on above 'special case'
+        if formatted_urls:
+            dataset = {
+                'upload_quantity': len(formatted_urls),
+                'dataset_url': formatted_urls
+            }
+
+        # restructure dataset: remaining cases
+        elif self.dataset:
             try:
                 # web-interface: 'isinstance' did not work
                 if str(type(self.settings)) == self.type_web:
@@ -89,29 +110,22 @@ class Settings(object):
                     dataset = {
                         'upload_quantity':
                             len(self.dataset.getlist('dataset[]')),
-                        'file_upload': formatted_files, 'json_string': None
+                        'file_upload': formatted_files
                     }
 
                 # programmatic-interface: 'isinstance' did not work
                 elif str(type(self.settings)) == self.type_programmatic:
-                    dataset = {
-                        'upload_quantity': 1,
-                        'file_upload': None,
-                        'json_string': self.dataset
-                    }
+                    dataset = self.dataset
 
             except Exception as error:
                 self.list_error.append(error)
-                return {'data': None, 'error': self.list_error}
+                return {'properties': None, 'dataset': None, 'error': self.list_error}
 
         else:
             dataset = None
 
-        # build input structure
-        data = {'settings': formatted_settings, 'dataset': dataset}
-
         # return new structured data
-        return {'data': data, 'error': None}
+        return {'properties': formatted_settings, 'dataset': dataset, 'error': None}
 
     def get_errors(self):
         '''

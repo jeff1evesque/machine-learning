@@ -17,18 +17,17 @@ class Validator(object):
 
     '''
 
-    def __init__(self, data, session_type=None):
+    def __init__(self, session_type=None):
         '''
 
         This constructor saves a subset of the passed-in form data.
 
         '''
 
-        self.data = data
         self.session_type = session_type
         self.list_error = []
 
-    def validate_value(self):
+    def validate_value(self, data):
         '''
 
         This method validates the independent variable (feature) value(s).
@@ -36,19 +35,26 @@ class Validator(object):
         '''
 
         try:
-            float(self.data)
+            return float(data)
         except Exception, error:
+            self.error = str(error)
             self.list_error.append(str(error))
+            return False
+
+    def get_error(self):
+        '''
+
+        This method gets the last current error.
+
+        '''
+
+        return self.error
 
     def get_errors(self):
         '''
 
-        This method gets all current errors. associated with this class
-        instance.
+        This method gets all current errors.
 
         '''
 
-        if len(self.list_error) > 0:
-            return self.list_error
-        else:
-            return False
+        return self.list_error

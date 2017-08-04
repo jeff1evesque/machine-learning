@@ -32,6 +32,8 @@ The following properties define the above ``data`` attribute:
 
 - ``session_name``: title for the corresponding ``data_new`` session
 
+- ``collection``: collection of dataset documents, to be referenced during ``data_append``, ``model_generate``, and ``model_predict`` sessions
+
 - ``dataset_type``: corresponds to one of the following types:
 
   - ``dataset_url``: indication that the supplied dataset will be url

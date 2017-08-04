@@ -9,4 +9,11 @@ class system::build_directory {
     file { "${root_dir}/build/":
         ensure => 'directory',
     }
+
+    file { '/root/build':
+      ensure => directory,
+      mode   => '0700',
+      owner  => 'root',
+      group  => 'root',
+    }
 }

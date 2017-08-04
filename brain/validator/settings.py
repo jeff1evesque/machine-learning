@@ -30,19 +30,17 @@ class Validator(object):
 
         '''
 
-        self.premodel_data = premodel_data
-        self.premodel_settings = self.premodel_data['data']['settings']
+        self.premodel_settings = premodel_data
         self.session_type = session_type
 
     def validate(self):
         '''
 
-        This method validates the premodel settings for the 'data_new',
+         This method validates the premodel settings for the 'data_new',
         'data_append', 'model_generate', or 'model_predict' sessions.
 
-        Note: This method does not validate the associated 'file upload(s)'.
-              The latter is validated via 'validate_file_extension.py', and
-              'validate_dataset.py'.
+        Note: This method does not validate the associated 'file upload(s)',
+              which is the responsibility of the mongodb query process.
 
         '''
 
@@ -77,8 +75,6 @@ class Validator(object):
         elif self.session_type == 'model_predict':
             try:
                 validate = Draft4Validator(schema_model_predict())
-
-                int(self.premodel_settings['model_id'])
                 for value in self.premodel_settings['prediction_input[]']:
                     float(value)
 

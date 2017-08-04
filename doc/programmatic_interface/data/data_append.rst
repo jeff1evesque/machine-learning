@@ -30,6 +30,8 @@ the ``data`` attribute, in a given ``POST`` request:
 
 The following properties define the above ``data`` attribute:
 
+- ``collection``: collection of dataset documents, used as a reference to add additional dataset documents into
+
 - ``dataset_type``: corresponds to one of the following types:
 
   - ``dataset_url``: indication that the supplied dataset will be url
