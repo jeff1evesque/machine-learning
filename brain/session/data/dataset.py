@@ -46,6 +46,8 @@ def dataset2dict(model_type, upload):
                 if dataset_type == 'dataset_url':
                     r = requests.get(dataset)
                     instance = r.json()['dataset']
+                else:
+                    instance = [dataset]
 
                 # validate against schema, and build converted list
                 try:
