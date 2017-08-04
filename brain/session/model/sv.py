@@ -12,7 +12,6 @@ from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
 import json
-from log.logger import Logger
 
 
 def generate(model, kernel_type, collection, payload, list_error):
@@ -48,9 +47,7 @@ def generate(model, kernel_type, collection, payload, list_error):
     observation_labels = []
     grouped_features = []
 
-    logger = Logger(__name__, 'error', 'error')
     for dataset in datasets['result']:
-        logger.log('/brain/session/model/sv.py, datasets: ' + repr(dataset))
         for observation in dataset['dataset']:
             indep_variables = observation['independent-variables']
 
