@@ -48,7 +48,10 @@ def index(path):
     This router function renders the 'index.html' template, for all requests,
     which do not have corresponding route definitions.
 
-    Note: http://flask.pocoo.org/snippets/57/
+    Note: the following resources can be further reviewed:
+
+          http://flask.pocoo.org/snippets/57/
+          https://github.com/pallets/flask/tree/master/examples/flaskr
 
     '''
 
@@ -73,19 +76,8 @@ def load_data():
 
         # programmatic-interface
         if request.get_json():
-            # get necessary components from the dataset
-            if 'dataset' in request.get_json():
-                dataset = request.get_json()['dataset']
-            else:
-                dataset = None
-            settings = request.get_json()['properties']
-
-            # restructure the dataset
-            sender = Settings(settings, dataset)
-            data_formatted = sender.restructure()
-
-            # send reformatted data to brain
-            loader = Load_Data(data_formatted)
+            # send data to brain
+            loader = Load_Data(request.get_json())
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
 
@@ -311,23 +303,23 @@ def register():
             })
 
 
-@blueprint.route('/retrieve-session', methods=['POST'])
-def retrieve_session():
+@blueprint.route('/retrieve-collections', methods=['POST'])
+def retrieve_collections():
     '''
 
-    This router function retrieves all sessions stored in the database.
+    This router function retrieves all collections stored in the database.
 
     '''
 
     if request.method == 'POST':
         # get all sessions
-        session_list = Session().get_all_sessions()
+        collections = Session().get_all_collections()
 
         # return all sessions
-        if session_list['result']:
-            return json.dumps(session_list['result'])
+        if collections['result']:
+            return json.dumps(collections['result'])
         else:
-            return json.dumps({'error': session_list['error']})
+            return json.dumps({'error': collections['error']})
 
 
 @blueprint.route(
@@ -387,14 +379,14 @@ def retrieve_sv_features():
     '''
 
     # get model type
-    model_id = request.get_json()['model_id']
-    model_type = ModelType().get_model_type(model_id)['result']
+    selected_collection = request.get_json()['selected-collection']
+    model_type = ModelType().get_model_type(selected_collection)['result']
 
     # return all feature labels
     if request.method == 'POST':
         label_list = Hset().uncache(
             model_type + '_feature_labels',
-            model_id
+            selected_collection
         )
 
         if label_list['result']:

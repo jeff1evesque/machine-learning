@@ -52,7 +52,7 @@ class DataAppend(BaseData):
 
         '''
 
-        premodel_settings = self.premodel_data['data']['settings']
+        premodel_settings = self.premodel_data['properties']
         premodel_entity = {
             'title': premodel_settings.get('session_name', None),
             'uid': self.uid,

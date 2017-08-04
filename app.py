@@ -24,7 +24,7 @@ if len(sys.argv) > 1:
         ])
     elif sys.argv[1] == 'run':
         args = {
-            'prefix': 'test',
+            'prefix': 'test/hiera',
             'settings': ''
         }
         app = create_app(args)

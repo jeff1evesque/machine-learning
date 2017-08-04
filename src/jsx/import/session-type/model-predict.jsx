@@ -12,7 +12,7 @@
 
 import React from 'react';
 import SupplyPredictors from '../input-data/supply-predictors.jsx';
-import checkValidInt from '../validator/valid-int.js';
+import checkValidString from '../validator/valid-string.js';
 import Spinner from '../general/spinner.jsx';
 import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -21,7 +21,7 @@ var ModelPredict = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            value_model_id: '--Select--',
+            value_collection: '--Select--',
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
@@ -29,8 +29,8 @@ var ModelPredict = React.createClass({
         };
     },
   // update 'state properties'
-    changeModelId: function(event){
-        var modelId = event.target.value;
+    changeCollection: function(event){
+        var collection = event.target.value;
 
       // clear predictors, remove submit button
         var predictors = document.getElementsByClassName('predictionInput');
@@ -47,12 +47,12 @@ var ModelPredict = React.createClass({
         this.props.dispatchSvButton(analysisButton);
         this.props.dispatchGotoResultsButton(gotoResultsButton);
 
-      // store modelId into state
-        if (!!modelId && modelId != '--Select--' && checkValidInt(modelId)) {
-            this.setState({value_model_id: event.target.value});
+      // store collection into state
+        if (!!collection && collection != '--Select--' && checkValidString(collection)) {
+            this.setState({value_collection: event.target.value});
         }
         else {
-            this.setState({value_model_id: '--Select--'});
+            this.setState({value_collection: '--Select--'});
         }
     },
   // update redux store
@@ -73,12 +73,12 @@ var ModelPredict = React.createClass({
   // triggered when 'state properties' change
     render: function(){
         var inputPredictors = null;
-        const inputModelId = this.state.value_model_id;
-        var Predictors = this.getSupplyPredictors(inputModelId);
+        const inputCollection = this.state.value_collection;
+        var Predictors = this.getSupplyPredictors(inputCollection);
         if (!!Predictors) {
             var inputPredictors = <Predictors
                 onChange={this.displaySubmit}
-                selectedModelId={this.state.value_model_id}
+                selectedCollection={this.state.value_collection}
             />
         }
         var options = this.state.ajax_done_options;
@@ -91,18 +91,18 @@ var ModelPredict = React.createClass({
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
                     <select
-                        name='model_id'
+                        name='collection'
                         autoComplete='off'
-                        onChange={this.changeModelId}
-                        value={this.state.value_model_id}
+                        onChange={this.changeCollection}
+                        value={this.state.value_collection}
                     >
 
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
                         {options && options.map(function(value) {
-                            return <option key={value.id} value={value.id}>
-                                {value.id}: {value.title}
+                            return <option key={value.collection} value={value.collection}>
+                                {value.collection}
                             </option>;
                         })}
                     </select>
@@ -113,16 +113,16 @@ var ModelPredict = React.createClass({
             </fieldset>
         );
     },
-  // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyPredictors: function(modelId) {
-        if (modelId != '--Select--' && Number(modelId)) {
+  // callback: used for the above 'render' (return 'span' if undefined)
+    getSupplyPredictors: function(collection) {
+        if (collection != '--Select--' && checkValidString(collection)) {
             return SupplyPredictors;
         }
         else {
             return null;
         }
     },
-  // call back: get session id(s) from server side, and append to form
+  // callback: get all collections from server side, and append to form
     componentDidMount: function () {
       // ajax arguments
         const ajaxEndpoint = '/retrieve-sv-model';

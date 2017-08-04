@@ -61,9 +61,10 @@ class DataNew(BaseData):
         numeric_model_type = self.list_model_type.index(self.model_type) + 1
 
         # store entity values in database
-        premodel_settings = self.premodel_data['data']['settings']
+        premodel_settings = self.premodel_data['properties']
         premodel_entity = {
             'title': premodel_settings.get('session_name', None),
+            'collection': premodel_settings['collection'],
             'model_type': numeric_model_type,
             'uid': self.uid,
         }

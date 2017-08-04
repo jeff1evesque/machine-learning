@@ -8,9 +8,6 @@ start on runlevel [2345]
 ## stop upstart job
 stop on runlevel [!2345]
 
-## restart upstart job continuously
-respawn
-
 ## run upstart job as a background process
 expect fork
 

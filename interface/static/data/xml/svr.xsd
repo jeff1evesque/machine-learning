@@ -9,8 +9,8 @@
           <xs:complexType>
 
             <xs:sequence>
-              <xs:element name='criterion' type='xs:string'/>
-              <xs:element name='predictor' maxOccurs='unbounded'>
+              <xs:element name='dependent-variable' type='xs:string'/>
+              <xs:element name='independent-variable' maxOccurs='unbounded'>
 
                 <xs:complexType>
                   <xs:sequence>

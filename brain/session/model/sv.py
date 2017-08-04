@@ -7,16 +7,14 @@ This file generates an sv model.
 '''
 
 from flask import current_app
-from brain.database.entity import Entity
+from brain.database.dataset import Collection
 from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
-from log.logger import Logger
-import numpy
 import json
 
 
-def generate(model, kernel_type, session_id, feature_request, list_error):
+def generate(model, kernel_type, collection, payload, list_error):
     '''
 
     This method generates an sv (i.e. svm, or svr) model using feature data,
@@ -32,109 +30,84 @@ def generate(model, kernel_type, session_id, feature_request, list_error):
     '''
 
     # local variables
-    dataset = feature_request.get_dataset(session_id, model)
-    get_feature_count = feature_request.get_count(session_id)
+    sorted_labels = False
     label_encoder = preprocessing.LabelEncoder()
-    logger = Logger(__name__, 'error', 'error')
     list_model_type = current_app.config.get('MODEL_TYPE')
+    collection_adjusted = collection.lower().replace(' ', '_')
+    cursor = Collection()
 
-    # get dataset
-    if dataset['error']:
-        logger.log(dataset['error'])
-        list_error.append(dataset['error'])
-        dataset = None
-    else:
-        dataset = numpy.asarray(dataset['result'])
+    # get datasets
+    datasets = cursor.query(
+        collection_adjusted,
+        'aggregate',
+        payload
+    )
 
-    # get feature count
-    if get_feature_count['error']:
-        logger.log(get_feature_count['error'])
-        list_error.append(get_feature_count['error'])
-        feature_count = None
-    else:
-        feature_count = get_feature_count['result'][0][0]
+    # restructure dataset into arrays
+    observation_labels = []
+    grouped_features = []
 
-    # check dataset integrity, build model
-    if len(dataset) % feature_count == 0:
-        features_list = dataset[:, [[0], [2], [1]]]
-        current_features = []
-        grouped_features = []
-        observation_labels = []
-        feature_labels = []
+    for dataset in datasets['result']:
+        for observation in dataset['dataset']:
+            indep_variables = observation['independent-variables']
 
-        # group features into observation instances, record labels
-        for index, feature in enumerate(features_list):
-            # svm: observation labels
-            if model == list_model_type[0]:
-                current_features.append(feature[1][0])
+            for features in indep_variables:
+                # svm case
+                if model == list_model_type[0]:
+                    observation_labels.append(observation['dependent-variable'])
+                    sorted_features = [v for k, v in sorted(features.items())]
 
-                if (index+1) % feature_count == 0:
-                    grouped_features.append(current_features)
-                    observation_labels.append(feature[0][0])
-                    current_features = []
+                # svr case
+                elif model == list_model_type[1]:
+                    observation_labels.append(float(observation['dependent-variable']))
+                    sorted_features = [float(v) for k, v in sorted(features.items())]
 
-            # svr: observation labels
-            elif model == list_model_type[1]:
-                current_features.append(float(feature[1][0]))
+                grouped_features.append(sorted_features)
 
-                if (index+1) % feature_count == 0:
-                    grouped_features.append(current_features)
-                    observation_labels.append(float(feature[0][0]))
-                    current_features = []
+                if not sorted_labels:
+                    sorted_labels = [k for k, v in sorted(features.items())]
 
-            # general feature labels in every observation
-            if not len(feature_labels) == feature_count:
-                feature_labels.append(feature[2][0])
+    # generate svm model
+    if model == list_model_type[0]:
+        # convert observation labels to a unique integer representation
+        label_encoder = preprocessing.LabelEncoder()
+        label_encoder.fit(observation_labels)
+        encoded_labels = label_encoder.transform(observation_labels)
 
-        # case 1: svm model
-        if model == list_model_type[0]:
-            # convert observation labels to a unique integer representation
-            label_encoder = preprocessing.LabelEncoder()
-            label_encoder.fit(dataset[:, 0])
-            encoded_labels = label_encoder.transform(observation_labels)
+        # create model
+        clf = svm.SVC(kernel=kernel_type, probability=True)
 
-            # create model
-            clf = svm.SVC(kernel=kernel_type, probability=True)
+        # cache encoded labels
+        Model(label_encoder).cache(model + '_labels', collection_adjusted)
 
-            # cache encoded labels
-            Model(label_encoder).cache(model + '_labels', session_id)
+        # fit model
+        clf.fit(grouped_features, encoded_labels)
 
-            # fit model
-            clf.fit(grouped_features, encoded_labels)
+    # generate svr model
+    elif model == list_model_type[1]:
+        # create model
+        clf = svm.SVR(kernel=kernel_type)
 
-        # case 2: svr model
-        elif model == list_model_type[1]:
-            # create model
-            clf = svm.SVR(kernel=kernel_type)
+        # fit model
+        clf.fit(grouped_features, observation_labels)
 
-            # fit model
-            clf.fit(grouped_features, observation_labels)
-
-            # compute, and cache coefficient of determination
-            r2 = clf.score(grouped_features, observation_labels)
-            Hset().cache(
-                model + '_r2',
-                session_id,
-                r2
-            )
-
-        # get title
-        entity = Entity()
-        title = entity.get_title(session_id)['result'][0][0]
-
-        # cache model, title
-        Model(clf).cache(
-            model + '_model',
-            str(session_id) + '_' + title
-        )
-        Hset().cache(model + '_title', session_id, title)
-
-        # cache feature labels, with respect to given session id
+        # compute, and cache coefficient of determination
+        r2 = clf.score(grouped_features, observation_labels)
         Hset().cache(
-            model + '_feature_labels',
-            str(session_id),
-            json.dumps(feature_labels)
+            model + '_r2',
+            collection_adjusted,
+            r2
         )
 
-        # return error(s) if exists
-        return {'error': list_error}
+    # cache model
+    Model(clf).cache(model + '_model', collection_adjusted)
+
+    # cache feature labels, with respect to given collection
+    Hset().cache(
+        model + '_feature_labels',
+        collection,
+        json.dumps(sorted_labels)
+    )
+
+    # return error(s) if exists
+    return {'error': list_error}

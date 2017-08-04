@@ -28,7 +28,7 @@ class Account(object):
 
         self.list_error = []
         self.sql = SQL()
-        self.db_ml = current_app.config.get('DB_ML')
+        self.db_ml = current_app.config.get('SQL_DB')
 
     def save_account(self, username, email, password):
         '''
@@ -48,7 +48,7 @@ class Account(object):
             '(username, email, password, datetime_joined) '\
             'VALUES(%s, %s, %s, UTC_TIMESTAMP())'
         args = (username, email, password)
-        response = self.sql.execute(sql_statement, 'insert', args)
+        response = self.sql.execute('insert', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -56,7 +56,7 @@ class Account(object):
 
         # return result
         if response_error:
-            return {'status': False, 'error': response_error}
+            return {'status': False, 'error': response_error, 'id': None}
         else:
             return {'status': True, 'error': None, 'id': response['id']}
 
@@ -73,7 +73,7 @@ class Account(object):
             'FROM tbl_user '\
             'WHERE username=%s'
         args = (username)
-        response = self.sql.execute(sql_statement, 'select', args)
+        response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -98,7 +98,7 @@ class Account(object):
             'FROM tbl_user '\
             'WHERE email=%s'
         args = (email)
-        response = self.sql.execute(sql_statement, 'select', args)
+        response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -123,7 +123,7 @@ class Account(object):
             'FROM tbl_user '\
             'WHERE username=%s'
         args = (username)
-        response = self.sql.execute(sql_statement, 'select', args)
+        response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()
@@ -148,7 +148,7 @@ class Account(object):
             'FROM tbl_user '\
             'WHERE username=%s'
         args = (username)
-        response = self.sql.execute(sql_statement, 'select', args)
+        response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s), disconnect from database
         response_error = self.sql.get_errors()

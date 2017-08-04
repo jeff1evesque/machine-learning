@@ -2,22 +2,190 @@
 
 '''
 
-This file contains various generic SQL-related methods.
+This file contains various SQL, and NoSql related methods.
+
 '''
 
-import MySQLdb as DB
+from flask import g
+import MySQLdb as MariaClient
+from pymongo import MongoClient, errors
 from brain.database.settings import Database
+
+
+def get_mongodb():
+    '''
+
+    This function opens a new mongo database connection, if there is none yet
+    for the current application context.
+
+    Note: the following resources can be further reviewed:
+
+          http://flask.pocoo.org/snippets/57/
+          https://github.com/pallets/flask/tree/master/examples/flaskr
+
+    '''
+
+    if not hasattr(g, 'mongodb'):
+        settings = Database()
+        params = {
+            'user': settings.get_db_username('nosql'),
+            'pass': settings.get_db_password('nosql'),
+            'host': settings.get_db_host('nosql'),
+        }
+
+        client = MongoClient(
+            "mongodb://{user}:{pass}@{host}/admin?authSource=admin".format(**params)
+        )
+        g.mongodb = client
+
+    return g.mongodb
+
+
+class NoSQL(object):
+    '''
+
+    This class provides an interface to connect, execute commands, and
+    disconnect from a NoSQL database.
+
+    Note: this class explicitly inherits the 'new-style' class.
+
+    '''
+
+    def __init__(self):
+        '''
+
+        This constructor is responsible for defining class variables.
+
+        '''
+
+        self.list_error = []
+        self.proceed = True
+        self.client = get_mongodb()
+
+    def connect(self, collection):
+        '''
+
+        This method is responsible for defining the necessary interface to
+        connect to a NoSQL database, using an established mongod client.
+
+        '''
+
+        try:
+            # single mongodb instance
+            database = Database().get_db('nosql')
+            self.database = self.client[database]
+            self.collection = self.database[collection]
+
+            return {
+                'status': True,
+                'error': None,
+            }
+
+        except errors, error:
+            self.proceed = False
+            self.list_error.append(error)
+
+            return {
+                'status': False,
+                'error': self.list_error,
+            }
+
+    def execute(self, operation, payload):
+        '''
+
+        This method is responsible for defining the necessary interface to
+        perform NoSQL commands.
+
+        Note: collection level operations can be further reviewed:
+
+          - http://api.mongodb.com/python/current/api/pymongo/collection.html
+
+        '''
+
+        if self.proceed:
+            try:
+                if operation == 'aggregate':
+                    result = self.collection.aggregate(payload)
+                elif operation == 'insert_one':
+                    result = self.collection.insert_one(payload)
+                elif operation == 'insert_many':
+                    result = self.collection.insert_many(payload)
+                elif operation == 'update_one':
+                    result = self.collection.update_one(payload)
+                elif operation == 'update_many':
+                    result = self.collection.update_many(payload)
+                elif operation == 'delete_one':
+                    result = self.collection.delete_one(payload)
+                elif operation == 'delete_many':
+                    result = self.collection.delete_many(payload)
+                elif operation == 'find':
+                    result = self.collection.find(payload)
+                elif operation == 'find_one':
+                    result = self.collection.find_one(payload)
+                elif operation == 'map_reduce':
+                    result = self.collection.map_reduce(
+                        payload['map'],
+                        payload['reduce'],
+                        payload['out'],
+                        payload['full_response'],
+                        payload['kwargs']
+                    )
+                elif operation == 'delete_one':
+                    result = self.collection.delete_one(payload)
+                elif operation == 'delete_many':
+                    result = self.collection.delete_many(payload)
+                elif operation == 'drop_collection':
+                    result = self.collection.drop_collection(payload)
+
+            except errors, error:
+                self.list_error.append(error)
+
+                return {
+                    'status': False,
+                    'result': result,
+                    'error': self.list_error,
+                }
+
+            return {'status': True, 'result': result, 'error': None}
+
+    def disconnect(self):
+        '''
+        This method is responsible for defining the necessary interface to
+        disconnect from a NoSQL database.
+        '''
+
+        if self.proceed:
+            try:
+                self.client.close()
+
+                return {
+                    'status': True,
+                    'error': None,
+                }
+
+            except errors, error:
+                self.list_error.append(error)
+
+                return {
+                    'status': False,
+                    'error': self.list_error,
+                }
+
+    def get_errors(self):
+        '''
+
+        This method returns all errors pertaining to the instantiated class.
+
+        '''
+
+        return self.list_error
 
 
 class SQL(object):
     '''
 
     This class provides an interface to connect, execute commands, and
-    disconnect from a SQL database.  It explicitly inherits pythons 'new-style'
-    class.
-
-    Note: this class is invoked within 'save_xx.py', and 'retrieve_xx.py'
-          modules.
+    disconnect from a SQL database.
 
     Note: this class explicitly inherits the 'new-style' class.
 
@@ -38,19 +206,19 @@ class SQL(object):
         if host:
             self.host = host
         else:
-            self.host = self.settings.get_db_host()
+            self.host = self.settings.get_db_host('sql')
 
-        # sql username for above host address
+        # username for above host address
         if user:
             self.user = user
         else:
-            self.user = self.settings.get_db_username()
+            self.user = self.settings.get_db_username('sql')
 
-        # sql password for above username
+        # password for above username
         if passwd:
             self.passwd = passwd
         else:
-            self.passwd = self.settings.get_db_password()
+            self.passwd = self.settings.get_db_password('sql')
 
     def connect(self, database=None):
         '''
@@ -62,13 +230,14 @@ class SQL(object):
 
         try:
             if database is None:
-                self.conn = DB.connect(
+                self.conn = MariaClient.connect(
                     self.host,
                     self.user,
                     self.passwd,
                 )
+
             else:
-                self.conn = DB.connect(
+                self.conn = MariaClient.connect(
                     self.host,
                     self.user,
                     self.passwd,
@@ -82,7 +251,7 @@ class SQL(object):
                 'id': None,
             }
 
-        except DB.Error, error:
+        except MariaClient.Error, error:
             self.proceed = False
             self.list_error.append(error)
 
@@ -92,49 +261,50 @@ class SQL(object):
                 'id': None,
             }
 
-    def execute(self, sql_statement, sql_type, sql_args=None):
+    def execute(self, operation, statement, sql_args=None):
         '''
 
         This method is responsible for defining the necessary interface to
         perform SQL commands.
 
         @sql_args, is a tuple used for argument substitution with the supplied
-            'sql_statement'.
+            'statement'.
 
         '''
 
         if self.proceed:
             try:
-                self.cursor.execute(sql_statement, sql_args)
+                self.cursor.execute(statement, sql_args)
 
                 # commit change(s), return lastrowid
-                if sql_type in ['insert', 'delete', 'update']:
+                if operation in ['insert', 'delete', 'update']:
                     self.conn.commit()
+
+                    return {
+                        'status': True,
+                        'error': self.list_error,
+                        'id': self.cursor.lastrowid,
+                    }
+
                 # fetch all the rows, return as list of lists.
-                elif sql_type == 'select':
+                elif operation == 'select':
                     result = self.cursor.fetchall()
 
-            except DB.Error, error:
+                    return {
+                        'status': True,
+                        'error': self.list_error,
+                        'result': result,
+                    }
+
+            except MariaClient.Error, error:
                 self.conn.rollback()
                 self.list_error.append(error)
+
                 return {
                     'status': False,
                     'error': self.list_error,
                     'result': None,
                 }
-
-        if sql_type in ['insert', 'delete', 'update']:
-            return {
-                'status': False,
-                'error': self.list_error,
-                'id': self.cursor.lastrowid,
-            }
-        elif sql_type == 'select':
-            return {
-                'status': False,
-                'error': self.list_error,
-                'result': result,
-            }
 
     def disconnect(self):
         '''
@@ -154,7 +324,8 @@ class SQL(object):
                         'error': None,
                         'id': self.cursor.lastrowid,
                     }
-            except DB.Error, error:
+
+            except MariaClient.Error, error:
                 self.list_error.append(error)
 
                 return {

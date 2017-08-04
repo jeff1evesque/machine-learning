@@ -1,8 +1,11 @@
 ## mongodb.conf, this file is enforced by puppet.
+##
+## Note: http://docs.mongodb.org/manual/reference/configuration-options/
+##
 
 ## where and how to store data.
 storage:
-  dbPath: <%= @dbPath[1] %>
+  dbPath: <%= @dbPath[0] %>
   journal:
     enabled: <%= @journal %>
 
@@ -20,5 +23,8 @@ net:
 
 ## mongodb process
 processManagement:
-  fork: <%= @fork %>
   pidFilePath: <%= @pidfilepath %>
+
+## role-based access controls
+#security:
+#   authorization: <%= @authorization %>

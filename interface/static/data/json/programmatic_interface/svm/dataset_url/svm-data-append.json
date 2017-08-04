@@ -1,9 +1,10 @@
 {
     "properties": {
+        "collection": "svm-1",
         "dataset_type": "dataset_url",
         "session_type": "data_append",
         "model_type": "svm",
-        "session_id": "1"
+        "stream": "True"
     },
     "dataset": [
         "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/svm.json",

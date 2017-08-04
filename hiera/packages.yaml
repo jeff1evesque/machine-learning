@@ -48,6 +48,7 @@ development:
             six: '1.5.2'
             xmltodict: '0.10.1'
             scrypt: '0.8.0'
+            pymongo: '3.4.0'
 
         custom:
             redis: '2.10.5'

@@ -3,226 +3,226 @@
 <dataset xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 xsi:noNamespaceSchemaLocation='https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/svr.xsd'>
   <observation>
-    <criterion>33.777</criterion>
-    <predictor>
-      <label>predictor-1</label>
+    <dependent-variable>33.777</dependent-variable>
+    <independent-variable >
+      <label>independent-variable-1</label>
       <value>23.45</value>
-    </predictor>
-    <predictor>
-      <label>predictor-2</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-2</label>
       <value>98.01</value>
-    </predictor>
-    <predictor>
-      <label>predictor-4</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-4</label>
       <value>325</value>
-    </predictor>
-    <predictor>
-      <label>predictor-3</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-3</label>
       <value>56.64</value>
-    </predictor>
-    <predictor>
-      <label>predictor-7</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-7</label>
       <value>0.002</value>
-    </predictor>
-    <predictor>
-      <label>predictor-5</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-5</label>
       <value>23</value>
-    </predictor>
-    <predictor>
-      <label>predictor-6</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-6</label>
       <value>0.432</value>
-    </predictor>
+    </independent-variable>
   </observation>
 
   <observation>
-    <criterion>3.453</criterion>
-    <predictor>
-      <label>predictor-1</label>
+    <dependent-variable>3.453</dependent-variable>
+    <independent-variable>
+      <label>independent-variable-1</label>
       <value>22.1</value>
-    </predictor>
-    <predictor>
-      <label>predictor-3</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-3</label>
       <value>95.96</value>
-    </predictor>
-    <predictor>
-      <label>predictor-2</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-2</label>
       <value>342</value>
-    </predictor>
-    <predictor>
-      <label>predictor-4</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-4</label>
       <value>66.67</value>
-    </predictor>
-    <predictor>
-      <label>predictor-7</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-7</label>
       <value>0.001</value>
-    </predictor>
-    <predictor>
-      <label>predictor-5</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-5</label>
       <value>32</value>
-    </predictor>
-    <predictor>
-      <label>predictor-6</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-6</label>
       <value>0.743</value>
-    </predictor>
+    </independent-variable>
   </observation>
 
   <observation>
-    <criterion>33.033</criterion>
-    <predictor>
-      <label>predictor-1</label>
+    <dependent-variable>33.033</dependent-variable>
+    <independent-variable>
+      <label>independent-variable-1</label>
       <value>23.27</value>
-    </predictor>
-    <predictor>
-      <label>predictor-2</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-2</label>
       <value>95.03</value>
-    </predictor>
-    <predictor>
-      <label>predictor-3</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-3</label>
       <value>295</value>
-    </predictor>
-    <predictor>
-      <label>predictor-4</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-4</label>
       <value>55.83</value>
-    </predictor>
-    <predictor>
-      <label>predictor-5</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-5</label>
       <value>0.001</value>
-    </predictor>
-    <predictor>
-      <label>predictor-6</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-6</label>
       <value>27</value>
-    </predictor>
-    <predictor>
-      <label>predictor-7</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-7</label>
       <value>0.488</value>
-    </predictor>
+    </independent-variable>
   </observation>
 
   <observation>
-    <criterion>29.567</criterion>
-    <predictor>
-      <label>predictor-7</label>
+    <dependent-variable>29.567</dependent-variable>
+    <independent-variable>
+      <label>independent-variable-7</label>
       <value>22.67</value>
-    </predictor>
-    <predictor>
-      <label>predictor-6</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-6</label>
       <value>101.21</value>
-    </predictor>
-    <predictor>
-      <label>predictor-5</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-5</label>
       <value>427</value>
-    </predictor>
-    <predictor>
-      <label>predictor-4</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-4</label>
       <value>75.45</value>
-    </predictor>
-    <predictor>
-      <label>predictor-3</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-3</label>
       <value>0.002</value>
-    </predictor>
-    <predictor>
-      <label>predictor-2</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-2</label>
       <value>26</value>
-    </predictor>
-    <predictor>
-      <label>predictor-1</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-1</label>
       <value>0.832</value>
-    </predictor>
+    </independent-variable>
   </observation>
 
   <observation>
-    <criterion>35.489</criterion>
-    <predictor>
-      <label>predictor-7</label>
+    <dependent-variable>35.489</dependent-variable>
+    <independent-variable>
+      <label>independent-variable-7</label>
       <value>19.99</value>
-    </predictor>
-    <predictor>
-      <label>predictor-1</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-1</label>
       <value>97.78</value>
-    </predictor>
-    <predictor>
-      <label>predictor-6</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-6</label>
       <value>303</value>
-    </predictor>
-    <predictor>
-      <label>predictor-2</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-2</label>
       <value>58.88</value>
-    </predictor>
-    <predictor>
-      <label>predictor-5</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-5</label>
       <value>0.001</value>
-    </predictor>
-    <predictor>
-      <label>predictor-4</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-4</label>
       <value>29</value>
-    </predictor>
-    <predictor>
-      <label>predictor-3</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-3</label>
       <value>0.638</value>
-    </predictor>
+    </independent-variable>
   </observation>
 
   <observation>
-    <criterion>37.451</criterion>
-    <predictor>
-      <label>predictor-1</label>
+    <dependent-variable>37.451</dependent-variable>
+    <independent-variable>
+      <label>independent-variable-1</label>
       <value>23.27</value>
-    </predictor>
-    <predictor>
-      <label>predictor-2</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-2</label>
       <value>95.03</value>
-    </predictor>
-    <predictor>
-      <label>predictor-6</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-6</label>
       <value>295</value>
-    </predictor>
-    <predictor>
-      <label>predictor-7</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-7</label>
       <value>55.83</value>
-    </predictor>
-    <predictor>
-      <label>predictor-3</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-3</label>
       <value>0.001</value>
-    </predictor>
-    <predictor>
-      <label>predictor-5</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-5</label>
       <value>27</value>
-    </predictor>
-    <predictor>
-      <label>predictor-4</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-4</label>
       <value>0.488</value>
-    </predictor>
+    </independent-variable>
   </observation>
 
   <observation>
-    <criterion>30.465</criterion>
-    <predictor>
-      <label>predictor-7</label>
+    <dependent-variable>30.465</dependent-variable>
+    <independent-variable>
+      <label>independent-variable-7</label>
       <value>20.71</value>
-    </predictor>
-    <predictor>
-      <label>predictor-2</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-2</label>
       <value>99.33</value>
-    </predictor>
-    <predictor>
-      <label>predictor-1</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-1</label>
       <value>342</value>
-    </predictor>
-    <predictor>
-      <label>predictor-5</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-5</label>
       <value>75.67</value>
-    </predictor>
-    <predictor>
-      <label>predictor-6</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-6</label>
       <value>0.001</value>
-    </predictor>
-    <predictor>
-      <label>predictor-4</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-4</label>
       <value>30</value>
-    </predictor>
-    <predictor>
-      <label>predictor-3</label>
+    </independent-variable>
+    <independent-variable>
+      <label>independent-variable-3</label>
       <value>0.648</value>
-    </predictor>
+    </independent-variable>
   </observation>
 </dataset>

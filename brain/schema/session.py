@@ -23,13 +23,11 @@ def schema_data_new():
 
     schema = {
         'type': 'object',
-        'properties': {
-            'session_name': {
-                'type': 'string',
-                'minLength': 1
-            },
+        'session_name': {
+            'type': 'string',
+            'minLength': 1
         },
-        'session_id': {
+        'collection': {
             'type': 'string',
             'minLength': 1
         },
@@ -40,6 +38,14 @@ def schema_data_new():
         'session_type': {
             'type': 'string',
             'enum': ['data_new']
+        },
+        'model_type': {
+            'type': 'string',
+            'enum': ['svm', 'svr']
+        },
+        'stream': {
+            'type': 'string',
+            'enum': ['true', 'false']
         },
     }
     return schema
@@ -61,19 +67,25 @@ def schema_data_append():
 
     schema = {
         'type': 'object',
-        'properties': {
-            'session_id': {
-                'type': 'string',
-                'minLength': 1
-            },
-            'dataset_type': {
-                'type': 'string',
-                'enum': ['file_upload', 'dataset_url', 'json_string']
-            },
-            'session_type': {
-                'type': 'string',
-                'enum': ['data_append']
-            },
+        'collection': {
+            'type': 'string',
+            'minLength': 1
+        },
+        'dataset_type': {
+            'type': 'string',
+            'enum': ['file_upload', 'dataset_url', 'json_string']
+        },
+        'session_type': {
+            'type': 'string',
+            'enum': ['data_new']
+        },
+        'model_type': {
+            'type': 'string',
+            'enum': ['svm', 'svr']
+        },
+        'stream': {
+            'type': 'string',
+            'enum': ['true', 'false']
         },
     }
     return schema
@@ -133,6 +145,10 @@ def schema_model_predict():
             'session_type': {
                 'type': 'string',
                 'enum': ['model_predict']
+            },
+            'collection': {
+                'type': 'string',
+                'minLength': 1,
             },
         },
     }

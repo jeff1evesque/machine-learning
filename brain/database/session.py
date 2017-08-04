@@ -2,7 +2,7 @@
 
 '''
 
-This file retrieves the 'session_name', and 'id_entity' properties.
+This file retrieves session related properties from the sql database.
 
 '''
 
@@ -13,8 +13,8 @@ from brain.database.query import SQL
 class Session(object):
     '''
 
-    This class provides an interface to retrieve the 'session_name', and
-    'id_entity' from the 'tbl_dataset_entity' sql database table.
+    This class provides an interface to retrieve the 'id_entity', and
+    'collection' from the 'tbl_dataset_entity' sql database table.
 
     Note: this class is invoked within 'views.py'
 
@@ -31,12 +31,36 @@ class Session(object):
 
         self.list_error = []
         self.sql = SQL()
-        self.db_ml = current_app.config.get('DB_ML')
+        self.db_ml = current_app.config.get('SQL_DB')
 
-    def get_all_sessions(self):
+    def get_session_id(self, collection):
         '''
 
-        This method is responsible for retrieving all sessions from the
+        This method is responsible for retrieving the 'session_id', given
+        that the 'collection' is known.
+
+        '''
+
+        self.sql.connect(self.db_ml)
+        sql_statement = 'SELECT id_entity FROM tbl_dataset_entity '\
+            'WHERE collection=%s'
+        args = (collection)
+        response = self.sql.execute('select', sql_statement, args)
+
+        # retrieve any error(s), disconnect from database
+        response_error = self.sql.get_errors()
+        self.sql.disconnect()
+
+        # return result
+        if response_error:
+            return {'result': None, 'error': response_error}
+        else:
+            return {'result': response['result'][0][0], 'error': None}
+
+    def get_all_collections(self):
+        '''
+
+        This method is responsible for retrieving all collections from the
         'tbl_dataset_entity' sql database table.
 
         '''
@@ -46,16 +70,16 @@ class Session(object):
 
         # sql query
         self.sql.connect(self.db_ml)
-        sql_statement = 'SELECT id_entity, title FROM tbl_dataset_entity'
-        response = self.sql.execute(sql_statement, 'select')
+        sql_statement = 'SELECT id_entity, collection FROM tbl_dataset_entity'
+        response = self.sql.execute('select', sql_statement)
 
         # rebuild session list, get error(s) if any
         if response['result']:
             for item in response['result']:
-                list_session.append({'id': item[0], 'title': item[1]})
+                list_session.append({'id': item[0], 'collection': item[1]})
             response_error = self.sql.get_errors()
         else:
-            response_error = 'no previous session found in database'
+            response_error = 'no previous collection found in database'
 
         # disconnect from database
         self.sql.disconnect()

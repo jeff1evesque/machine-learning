@@ -4,8 +4,6 @@
 ##  - mongodb
 ##  - mariadb
 ##
-## @host, defined from executed 'docker' command.
-##
 database:
     mariadb:
         host: 'localhost'
@@ -20,10 +18,14 @@ database:
         log_path: '/log/database'
 
     mongodb:
+        hostname: 'localhost'
+        name: 'dataset'
+        username: 'authenticated'
+        password: 'password'
+
         storage:
             dbPath:
-                - '/data'
-                - '/data/db'
+                - /var/lib/mongodb
             journal:
                 enabled: true
 
@@ -38,5 +40,7 @@ database:
             bindIp: 127.0.0.1
 
         processManagement:
-            fork: true
-            pidfilepath: '/var/run/mongodb/mongod.pid'
+            pidfilepath: '/var/run/mongod.pid'
+
+        security:
+            authorization: 'enabled'
