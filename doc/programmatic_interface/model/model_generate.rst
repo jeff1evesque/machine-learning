@@ -33,9 +33,6 @@ The following properties define the above ``data`` attribute:
   - ``model_generate``
   - ``model_predict``
 
-- ``session_id``: corresponds to the id associated with the original ``data_new``
-  uploaded dataset(s).
-
 - ``model_type``: the type of model to perform on:
 
   - ``svm``
