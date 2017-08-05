@@ -36,6 +36,7 @@ def get_mariadb(host, user, passwd, database):
 
     return g.mariadb
 
+
 def get_mongodb():
     '''
 
@@ -254,7 +255,6 @@ class SQL(object):
 
         self.conn = get_mariadb(self.host, self.user, self.passwd, database)
         self.cursor = self.conn.cursor()
-
 
     def execute(self, operation, statement, sql_args=None):
         '''
