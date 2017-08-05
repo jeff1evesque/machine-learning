@@ -144,5 +144,9 @@ def register_teardowns(app):
         Note: http://flask.pocoo.org/docs/0.12/tutorial/dbcon/
 
         '''
+
         if hasattr(g, 'mongodb'):
             g.mongodb.close()
+
+        if hasattr(g, 'mariadb'):
+            g.mariadb.close()

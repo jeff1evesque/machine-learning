@@ -78,9 +78,8 @@ class Entity(object):
             )
             response = self.sql.execute('insert', sql_statement, args)
 
-        # retrieve any error(s), disconnect from database
+        # retrieve any error(s)
         response_error = self.sql.get_errors()
-        self.sql.disconnect()
 
         # return result
         if response_error:
@@ -110,9 +109,8 @@ class Entity(object):
         args = (id_entity)
         response = self.sql.execute('select', sql_statement, args)
 
-        # retrieve any error(s), disconnect from database
+        # retrieve any error(s)
         response_error = self.sql.get_errors()
-        self.sql.disconnect()
 
         # return result
         if response_error:

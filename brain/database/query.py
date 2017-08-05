@@ -12,6 +12,31 @@ from pymongo import MongoClient, errors
 from brain.database.settings import Database
 
 
+def get_mariadb(host, user, passwd, database):
+    '''
+
+    This function opens a new mariadb database connection, if there is none yet
+    for the current application context.
+
+    Note: the following resources can be further reviewed:
+
+          http://flask.pocoo.org/docs/0.12/tutorial/dbcon/
+          http://flask.pocoo.org/docs/0.12/appcontext/#context-usage
+
+    '''
+
+    if not hasattr(g, 'mariadb'):
+        if database is None:
+            conn = MariaClient.connect(host, user, passwd)
+
+        else:
+            conn = MariaClient.connect(host, user, passwd, database)
+
+        g.mariadb = conn
+
+    return g.mariadb
+
+
 def get_mongodb():
     '''
 
@@ -20,8 +45,8 @@ def get_mongodb():
 
     Note: the following resources can be further reviewed:
 
-          http://flask.pocoo.org/snippets/57/
-          https://github.com/pallets/flask/tree/master/examples/flaskr
+          http://flask.pocoo.org/docs/0.12/tutorial/dbcon/
+          http://flask.pocoo.org/docs/0.12/appcontext/#context-usage
 
     '''
 
@@ -228,38 +253,8 @@ class SQL(object):
 
         '''
 
-        try:
-            if database is None:
-                self.conn = MariaClient.connect(
-                    self.host,
-                    self.user,
-                    self.passwd,
-                )
-
-            else:
-                self.conn = MariaClient.connect(
-                    self.host,
-                    self.user,
-                    self.passwd,
-                    db=database,
-                )
-            self.cursor = self.conn.cursor()
-
-            return {
-                'status': True,
-                'error': None,
-                'id': None,
-            }
-
-        except MariaClient.Error, error:
-            self.proceed = False
-            self.list_error.append(error)
-
-            return {
-                'status': False,
-                'error': self.list_error,
-                'id': None,
-            }
+        self.conn = get_mariadb(self.host, self.user, self.passwd, database)
+        self.cursor = self.conn.cursor()
 
     def execute(self, operation, statement, sql_args=None):
         '''

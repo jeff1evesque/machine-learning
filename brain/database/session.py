@@ -47,9 +47,8 @@ class Session(object):
         args = (collection)
         response = self.sql.execute('select', sql_statement, args)
 
-        # retrieve any error(s), disconnect from database
+        # retrieve any error(s)
         response_error = self.sql.get_errors()
-        self.sql.disconnect()
 
         # return result
         if response_error:
@@ -80,9 +79,6 @@ class Session(object):
             response_error = self.sql.get_errors()
         else:
             response_error = 'no previous collection found in database'
-
-        # disconnect from database
-        self.sql.disconnect()
 
         # return result
         if response_error:

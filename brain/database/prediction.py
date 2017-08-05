@@ -102,9 +102,8 @@ class Prediction(object):
             args = (svr_results['id'], data['r2'])
             self.sql.execute('insert', sql_statement, args,)
 
-        # retrieve any error(s), disconnect from database
+        # retrieve any error(s)
         response_error = self.sql.get_errors()
-        self.sql.disconnect()
 
         # return result
         if response_error:
@@ -143,9 +142,8 @@ class Prediction(object):
             args = (self.uid)
             response = self.sql.execute('select', sql_statement, args)
 
-        # retrieve any error(s), disconnect from database
+        # retrieve any error(s)
         response_error = self.sql.get_errors()
-        self.sql.disconnect()
 
         # return result
         if response_error:
@@ -180,9 +178,8 @@ class Prediction(object):
         args = (id_result,)
         response = self.sql.execute('select', sql_statement, args)
 
-        # retrieve any error(s), disconnect from database
+        # retrieve any error(s)
         response_error = self.sql.get_errors()
-        self.sql.disconnect()
 
         # return result
         if response_error:
@@ -219,9 +216,8 @@ class Prediction(object):
         args = (id_result,)
         response = self.sql.execute('select', sql_statement, args)
 
-        # retrieve any error(s), disconnect from database
+        # retrieve any error(s)
         response_error = self.sql.get_errors()
-        self.sql.disconnect()
 
         # return result
         if response_error:
@@ -275,9 +271,8 @@ class Prediction(object):
                     'result': response['result'],
                 }
 
-        # retrieve any error(s), disconnect from database
+        # retrieve any error(s)
         response_error = self.sql.get_errors()
-        self.sql.disconnect()
 
         # return result
         if response_error:
