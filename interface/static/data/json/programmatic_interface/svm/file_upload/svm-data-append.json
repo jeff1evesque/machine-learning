@@ -9,7 +9,7 @@
 	"dataset": [
         {
 			"dependent-variable": "dep-variable-1",
-			"indendent-variables": [{
+            "independent-variables": [{
 				"indep-variable-1": 23.45,
 				"indep-variable-2": 98.01,
 				"indep-variable-3": 0.432,
@@ -33,7 +33,7 @@
 		},
 		{
 			"dependent-variable": "dep-variable-3",
-			"indendent-variables": [{
+            "independent-variables": [{
 				"indep-variable-1": 22.67,
 				"indep-variable-2": 101.21,
 				"indep-variable-3": 0.832,
