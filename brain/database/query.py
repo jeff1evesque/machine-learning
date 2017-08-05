@@ -20,8 +20,8 @@ def get_mariadb(host, user, passwd, database):
 
     Note: the following resources can be further reviewed:
 
-          http://flask.pocoo.org/snippets/57/
-          https://github.com/pallets/flask/tree/master/examples/flaskr
+          http://flask.pocoo.org/docs/0.12/tutorial/dbcon/
+          http://flask.pocoo.org/docs/0.12/appcontext/#context-usage
 
     '''
 
@@ -45,8 +45,8 @@ def get_mongodb():
 
     Note: the following resources can be further reviewed:
 
-          http://flask.pocoo.org/snippets/57/
-          https://github.com/pallets/flask/tree/master/examples/flaskr
+          http://flask.pocoo.org/docs/0.12/tutorial/dbcon/
+          http://flask.pocoo.org/docs/0.12/appcontext/#context-usage
 
     '''
 
