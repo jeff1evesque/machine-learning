@@ -12,6 +12,9 @@ import Spinner from '../general/spinner.jsx';
 import { browserHistory } from 'react-router';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
+import checkValidString from '../validator/valid-string.js';
+import checkValidEmail from '../validator/valid-email.js';
+import checkValidPassword from '../validator/valid-password.js';
 
 var RegisterForm = React.createClass({
   // initial 'state properties'
@@ -19,6 +22,9 @@ var RegisterForm = React.createClass({
         return {
             display_spinner: false,
             submit_registration: false,
+            validated_user: true,
+            validated_email: true,
+            validated_password: true,
         };
     },
   // callback: used to return spinner
@@ -92,47 +98,77 @@ var RegisterForm = React.createClass({
             browserHistory.push('/');
         }
     },
+    validateUsername: function(event) {
+        const check = checkValidString(event.target.value) ? true : false;
+        this.setState({'validated_username': check});
+    },
+    validateEmail: function(event) {
+        const check = checkValidEmail(event.target.value) ? true : false;
+        this.setState({'validated_email': check});
+    },
+    validatePassword: function(event) {
+        const check = checkValidPassword(event.target.value) ? true : false;
+        this.setState({'validated_password': check});
+    },
   // triggered when 'state properties' change
     render: function() {
         var AjaxSpinner = this.getSpinner();
+        var usernameClass = this.state.validated_username?  null : 'invalid';
+        var passwordClass = this.state.validated_password ? null : 'invalid';
+        if (this.state.validated_email) {
+            var emailClass = null;
+            var emailNote = null;
+        }
+        else {
+            var emailClass = 'invalid';
+            var emailNote = <span className={emailClass}>
+                Please provide a valid email.
+            </span>;
+        }
 
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>
                 <div className='form-group'>
-                    <label className='form-label'>Username</label>
+                    <label className={'form-label ' + usernameClass}>Username</label>
                     <input
                         type='text'
                         name='user[login]'
-                        className='input-block'
+                        className={'input-block ' + usernameClass}
                         placeholder='Pick a username'
+                        onChange={this.validateUsername}
+                        value={this.state.validated_username}
                     />
-                    <p className='note'>This will be your username</p>
+                    <p className={'note ' + usernameClass}>This will be your username</p>
                 </div>
 
                 <div className='form-group'>
-                    <label className='form-label'>Email Address</label>
+                    <label className={'form-label ' + emailClass}>Email Address</label>
                     <input
                         type='text'
                         name='user[email]'
-                        className='input-block'
+                        className={'input-block ' + emailClass}
                         placeholder='Your email address'
+                        onChange={this.validateEmail}
+                        value={this.state.validated_username}
                     />
                     <p className='note'>
                         You will get updates regarding account changes,
                         or activitites. This email address will not be
-                        shared with anyone.
+                        shared with anyone. {emailNote}
                     </p>
                 </div>
  
                 <div className='form-group'>
-                    <label className='form-label'>Password</label>
+                    <label className={'form-label ' + passwordClass}>Password</label>
                     <input
                         type='password'
                         name='user[password]'
-                        className='input-block'
+                        className={'input-block ' + passwordClass}
                         placeholder='Create a password'
+                        onChange={this.validatePassword}
+                        value={this.state.validated_username}
                     />
-                    <p className='note'>
+                    <p className={'note ' + usernameClass}>
                         Use at least one letter, one numeral,
                         and ten characters.
                     </p>

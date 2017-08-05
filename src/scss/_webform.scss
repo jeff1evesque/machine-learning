@@ -70,6 +70,10 @@ form {
 
   label {
     color: $gray-7;
+
+    .invalid:after {
+      content: '*';
+    }
   }
 
   .input-block {
