@@ -25,11 +25,13 @@
 }
 
 form {
-  p.invalid,
-  div.invalid,
-  span.invalid {
-    color: $red-1;
-    font-weight: 700;
+  p,
+  div,
+  span {
+    .invalid {
+      color: $red-1;
+      font-weight: 700;
+    }
   }
 
   input,
@@ -77,11 +79,11 @@ form {
 
   label {
     color: $gray-7;
+  }
 
-    .invalid:after {
-      color: $red-1;
-      content: '*';
-    }
+  .form-label.invalid:after {
+    color: $red-1;
+    content: '*';
   }
 
   .input-block {
