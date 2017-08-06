@@ -7,7 +7,7 @@
  */
 
 function validator(value) {
-    var urlregex = new RegExp('^[A-Za-z]{1,9}[0-9]{1,9}');
+    var urlregex = new RegExp('(?=.{10,})([A-Za-z]{1,})([0-9]{1,})');
     return urlregex.test(value);
 }
 
