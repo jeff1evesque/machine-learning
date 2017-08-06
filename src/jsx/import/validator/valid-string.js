@@ -3,7 +3,12 @@
  */
 
 function validator(value) {
-    return typeof value === 'string';
+    if (typeof value === 'string' && value.length > 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
 }
 
 export default function checkValidString(value) {
