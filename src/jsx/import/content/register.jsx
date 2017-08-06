@@ -166,7 +166,7 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + passwordClass}
                         placeholder='Create a password'
                         onChange={this.validatePassword}
-                        value={this.state.validated_username}
+                        value={this.state.validated_password}
                     />
                     <p className={'note ' + usernameClass}>
                         Use at least one letter, one numeral,
