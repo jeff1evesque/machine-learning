@@ -22,9 +22,12 @@ var RegisterForm = React.createClass({
         return {
             display_spinner: false,
             submit_registration: false,
-            validated_username: false,
-            validated_email: false,
-            validated_password: false,
+            validated_username: true,
+            validated_email: true,
+            validated_password: true,
+            value_username: false,
+            value_email: false,
+            value_password: false,
         };
     },
   // callback: used to return spinner
@@ -136,6 +139,7 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + usernameClass}
                         placeholder='Pick a username'
                         onChange={this.validateUsername}
+                        value={this.value_username}
                     />
                     <p className={'note ' + usernameClass}>This will be your username</p>
                 </div>
@@ -148,6 +152,7 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + emailClass}
                         placeholder='Your email address'
                         onChange={this.validateEmail}
+                        value={this.value_email}
                     />
                     <p className='note'>
                         You will get updates regarding account changes,
@@ -164,6 +169,7 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + passwordClass}
                         placeholder='Create a password'
                         onChange={this.validatePassword}
+                        value={this.value_password}
                     />
                     <p className={'note ' + usernameClass}>
                         Use at least one letter, one numeral,
