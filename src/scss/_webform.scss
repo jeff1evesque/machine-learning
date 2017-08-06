@@ -72,8 +72,8 @@ form {
     color: $gray-7;
 
     .invalid:after {
-      content: '*';
       color: $red-1;
+      content: '*';
     }
   }
 
