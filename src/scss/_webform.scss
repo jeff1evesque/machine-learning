@@ -25,9 +25,11 @@
 }
 
 form {
-  p.invalid, div.invalid, span.invalid {
-    font-weight: 700;
+  p.invalid,
+  div.invalid,
+  span.invalid {
     color: $red-1;
+    font-weight: 700;
   }
 
   input,
