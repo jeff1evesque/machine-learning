@@ -22,9 +22,9 @@ var RegisterForm = React.createClass({
         return {
             display_spinner: false,
             submit_registration: false,
-            validated_user: true,
-            validated_email: true,
-            validated_password: true,
+            validated_username: false,
+            validated_email: false,
+            validated_password: false,
         };
     },
   // callback: used to return spinner
@@ -113,11 +113,11 @@ var RegisterForm = React.createClass({
   // triggered when 'state properties' change
     render: function() {
         var AjaxSpinner = this.getSpinner();
-        var usernameClass = this.state.validated_username ?  null : 'invalid';
-        var passwordClass = this.state.validated_password ? null : 'invalid';
+        var usernameClass = this.state.validated_username ?  '' : 'invalid';
+        var passwordClass = this.state.validated_password ? '' : 'invalid';
         if (this.state.validated_email) {
-            var emailClass = null;
-            var emailNote = null;
+            var emailClass = '';
+            var emailNote = '';
         }
         else {
             var emailClass = 'invalid';
@@ -136,7 +136,6 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + usernameClass}
                         placeholder='Pick a username'
                         onChange={this.validateUsername}
-                        value={this.state.validated_username}
                     />
                     <p className={'note ' + usernameClass}>This will be your username</p>
                 </div>
@@ -149,7 +148,6 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + emailClass}
                         placeholder='Your email address'
                         onChange={this.validateEmail}
-                        value={this.state.validated_username}
                     />
                     <p className='note'>
                         You will get updates regarding account changes,
@@ -166,7 +164,6 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + passwordClass}
                         placeholder='Create a password'
                         onChange={this.validatePassword}
-                        value={this.state.validated_password}
                     />
                     <p className={'note ' + usernameClass}>
                         Use at least one letter, one numeral,
