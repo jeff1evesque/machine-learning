@@ -73,6 +73,7 @@ form {
 
     .invalid:after {
       content: '*';
+      color: $red-1
     }
   }
 
