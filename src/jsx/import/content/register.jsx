@@ -139,7 +139,7 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + usernameClass}
                         placeholder='Pick a username'
                         onChange={this.validateUsername}
-                        value={this.value_username}
+                        value={this.state.value_username}
                     />
                     <p className={'note ' + usernameClass}>This will be your username</p>
                 </div>
@@ -152,7 +152,7 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + emailClass}
                         placeholder='Your email address'
                         onChange={this.validateEmail}
-                        value={this.value_email}
+                        value={this.state.value_email}
                     />
                     <p className='note'>
                         You will get updates regarding account changes,
@@ -169,7 +169,7 @@ var RegisterForm = React.createClass({
                         className={'input-block ' + passwordClass}
                         placeholder='Create a password'
                         onChange={this.validatePassword}
-                        value={this.value_password}
+                        value={this.state.value_password}
                     />
                     <p className={'note ' + usernameClass}>
                         Use at least one letter, one numeral,
