@@ -25,6 +25,11 @@
 }
 
 form {
+  p.invalid, div.invalid, span.invalid {
+    font-weight: 700;
+    color: $red-1;
+  }
+
   input,
   select,
   textarea {
