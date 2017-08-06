@@ -113,7 +113,7 @@ var RegisterForm = React.createClass({
   // triggered when 'state properties' change
     render: function() {
         var AjaxSpinner = this.getSpinner();
-        var usernameClass = this.state.validated_username?  null : 'invalid';
+        var usernameClass = this.state.validated_username ?  null : 'invalid';
         var passwordClass = this.state.validated_password ? null : 'invalid';
         if (this.state.validated_email) {
             var emailClass = null;
