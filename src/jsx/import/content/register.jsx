@@ -25,9 +25,9 @@ var RegisterForm = React.createClass({
             validated_username: true,
             validated_email: true,
             validated_password: true,
-            value_username: false,
-            value_email: false,
-            value_password: false,
+            value_username: null,
+            value_email: null,
+            value_password: null,
         };
     },
   // callback: used to return spinner
