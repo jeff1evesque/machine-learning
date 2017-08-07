@@ -20,11 +20,15 @@ var RegisterForm = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            ajax_done_result: null,
             display_spinner: false,
             submit_registration: false,
             validated_username: true,
             validated_email: true,
             validated_password: true,
+            validated_username_server: true,
+            validated_email_server: true,
+            validated_password_server: true,
             value_username: '',
             value_email: '',
             value_password: '',
@@ -65,6 +69,10 @@ var RegisterForm = React.createClass({
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
+                    console.log('status: ' + asynchObject.status);
+                    console.log('status type: ' + typeof(asynchObject.status));
+                    console.log('username: ' + asynchObject.username);
+                    console.log('email: ' + asynchObject.email);
                     this.setState({ajax_done_result: asynchObject});
                 }
                 else {
@@ -104,26 +112,52 @@ var RegisterForm = React.createClass({
     validateUsername: function(event) {
         const username = event.target.value;
         const check = checkValidString(username) ? true : false;
+
         this.setState({'validated_username': check});
         this.setState({value_username: username});
     },
     validateEmail: function(event) {
         const email = event.target.value;
         const check = checkValidEmail(email) ? true : false;
+
         this.setState({'validated_email': check});
         this.setState({value_email: email});
     },
     validatePassword: function(event) {
         const password = event.target.value;
         const check = checkValidPassword(password) ? true : false;
+
         this.setState({'validated_password': check});
         this.setState({value_password: password});
     },
+  // define properties after update
+    componentDidUpdate: function() {
+        if (!!this.state.ajax_done_result) {
+            const status = this.state.ajax_done_result.status;
+
+          // server handles one error at a time
+            switch(status) {
+                case status == 1:
+                    this.setState({'validated_password_server': false});
+                case status == 2:
+                    this.setState({'validated_username_server': false});
+                case status == 3:
+                    this.setState({'validated_email_server': false});
+                default:
+                    this.setState({'validated_password_server': true});
+                    this.setState({'validated_username_server': true});
+                    this.setState({'validated_email_server': true});
+            }
+        }
+    },
   // triggered when 'state properties' change
     render: function() {
+      // local variables
         var AjaxSpinner = this.getSpinner();
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
+
+      // frontend validation
         if (this.state.validated_email) {
             var emailClass = '';
             var emailNote = '';
@@ -135,6 +169,25 @@ var RegisterForm = React.createClass({
             </span>;
         }
 
+      // backend validation
+        if (this.state.validated_password_server) {
+            var passwordNote = <span classname='server-response invalid'>
+                (Password requirement not met)
+            </span>;
+        }
+
+        if (this.state.validated_username_server) {
+            var usernameNote = <span classname='server-response invalid'>
+                (Username is taken)
+            </span>;
+        }
+
+        if (this.state.validated_email_server) {
+            var emailNote = <span classname='server-response invalid'>
+                (Email has already registered)
+            </span>;
+        }
+
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>
                 <div className='form-group'>
@@ -142,12 +195,14 @@ var RegisterForm = React.createClass({
                     <input
                         type='text'
                         name='user[login]'
-                        className={'input-block ' + usernameClass}
+                        className='input-block'
                         placeholder='Pick a username'
                         onInput={this.validateUsername}
                         value={this.state.value_username}
                     />
-                    <p className={'note ' + usernameClass}>This will be your username</p>
+                    <p className={'note ' + usernameClass}>
+                        This will be your username. {usernameNote}
+                    </p>
                 </div>
 
                 <div className='form-group'>
@@ -155,7 +210,7 @@ var RegisterForm = React.createClass({
                     <input
                         type='text'
                         name='user[email]'
-                        className={'input-block ' + emailClass}
+                        className='input-block'
                         placeholder='Your email address'
                         onInput={this.validateEmail}
                         value={this.state.value_email}
@@ -172,14 +227,14 @@ var RegisterForm = React.createClass({
                     <input
                         type='password'
                         name='user[password]'
-                        className={'input-block ' + passwordClass}
+                        className='input-block'
                         placeholder='Create a password'
                         onInput={this.validatePassword}
                         value={this.state.value_password}
                     />
                     <p className={'note ' + passwordClass}>
                         Use at least one letter, one numeral,
-                        and ten characters.
+                        and ten characters. {passwordNote}
                     </p>
                 </div>
 
