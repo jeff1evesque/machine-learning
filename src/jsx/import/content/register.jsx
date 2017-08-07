@@ -25,9 +25,9 @@ var RegisterForm = React.createClass({
             validated_username: true,
             validated_email: true,
             validated_password: true,
-            value_username: null,
-            value_email: null,
-            value_password: null,
+            value_username: '',
+            value_email: '',
+            value_password: '',
         };
     },
   // callback: used to return spinner
@@ -102,16 +102,22 @@ var RegisterForm = React.createClass({
         }
     },
     validateUsername: function(event) {
-        const check = checkValidString(event.target.value) ? true : false;
+        const username = event.target.value;
+        const check = checkValidString(username) ? true : false;
         this.setState({'validated_username': check});
+        this.setState({value_username: username});
     },
     validateEmail: function(event) {
-        const check = checkValidEmail(event.target.value) ? true : false;
+        const email = event.target.value;
+        const check = checkValidEmail(email) ? true : false;
         this.setState({'validated_email': check});
+        this.setState({value_email: email});
     },
     validatePassword: function(event) {
-        const check = checkValidPassword(event.target.value) ? true : false;
+        const password = event.target.value;
+        const check = checkValidPassword(password) ? true : false;
         this.setState({'validated_password': check});
+        this.setState({value_password: password});
     },
   // triggered when 'state properties' change
     render: function() {
@@ -138,7 +144,7 @@ var RegisterForm = React.createClass({
                         name='user[login]'
                         className={'input-block ' + usernameClass}
                         placeholder='Pick a username'
-                        onChange={this.validateUsername}
+                        onInput={this.validateUsername}
                         value={this.state.value_username}
                     />
                     <p className={'note ' + usernameClass}>This will be your username</p>
@@ -151,7 +157,7 @@ var RegisterForm = React.createClass({
                         name='user[email]'
                         className={'input-block ' + emailClass}
                         placeholder='Your email address'
-                        onChange={this.validateEmail}
+                        onInput={this.validateEmail}
                         value={this.state.value_email}
                     />
                     <p className='note'>
@@ -168,10 +174,10 @@ var RegisterForm = React.createClass({
                         name='user[password]'
                         className={'input-block ' + passwordClass}
                         placeholder='Create a password'
-                        onChange={this.validatePassword}
+                        onInput={this.validatePassword}
                         value={this.state.value_password}
                     />
-                    <p className={'note ' + usernameClass}>
+                    <p className={'note ' + passwordClass}>
                         Use at least one letter, one numeral,
                         and ten characters.
                     </p>
