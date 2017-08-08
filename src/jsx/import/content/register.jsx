@@ -21,6 +21,7 @@ var RegisterForm = React.createClass({
     getInitialState: function() {
         return {
             ajax_done_result: null,
+            validated_status: null,
             display_spinner: false,
             submit_registration: false,
             validated_username: true,
@@ -132,21 +133,32 @@ var RegisterForm = React.createClass({
     },
   // define properties after update
     componentDidUpdate: function() {
-        if (!!this.state.ajax_done_result) {
-            const status = this.state.ajax_done_result.status;
+        if (
+            !!this.state.ajax_done_result &&
+            this.state.ajax_done_result.status
+        ) {
+            var status = this.state.ajax_done_result.status;
+            console.log('status: ' + status);
+            console.log('validated_status: ' + status);
 
           // server handles one error at a time
-            switch(status) {
-                case status == 1:
-                    this.setState({'validated_password_server': false});
-                case status == 2:
-                    this.setState({'validated_username_server': false});
-                case status == 3:
-                    this.setState({'validated_email_server': false});
-                default:
-                    this.setState({'validated_password_server': true});
-                    this.setState({'validated_username_server': true});
-                    this.setState({'validated_email_server': true});
+            if (this.state.validated_status != status) {
+                switch(status) {
+                    case status == 1:
+                        this.setState({'validated_password_server': false});
+                    case status == 2:
+                        this.setState({'validated_username_server': false});
+                    case status == 3:
+                        this.setState({'validated_email_server': false});
+                    default:
+                        this.setState({'validated_password_server': true});
+                        this.setState({'validated_username_server': true});
+                        this.setState({'validated_email_server': true});
+                }
+
+              // reset to prevent infinite recursion
+                this.setState({'validated_status': status});
+                console.log('validated_status: ' + status);
             }
         }
     },
@@ -156,6 +168,8 @@ var RegisterForm = React.createClass({
         var AjaxSpinner = this.getSpinner();
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
+
+        console.log('validated_username_server: ' + this.state.validated_username_server);
 
       // frontend validation
         if (this.state.validated_email) {
@@ -170,20 +184,20 @@ var RegisterForm = React.createClass({
         }
 
       // backend validation
-        if (this.state.validated_password_server) {
-            var passwordNote = <span classname='server-response invalid'>
+        if (!this.state.validated_password_server) {
+            var passwordNote = <span className='server-response invalid'>
                 (Password requirement not met)
             </span>;
         }
 
-        if (this.state.validated_username_server) {
-            var usernameNote = <span classname='server-response invalid'>
+        if (!this.state.validated_username_server) {
+            var usernameNote = <span className='server-response invalid'>
                 (Username is taken)
             </span>;
         }
 
-        if (this.state.validated_email_server) {
-            var emailNote = <span classname='server-response invalid'>
+        if (!this.state.validated_email_server) {
+            var emailNote = <span className='server-response invalid'>
                 (Email has already registered)
             </span>;
         }
