@@ -169,7 +169,9 @@ var RegisterForm = React.createClass({
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
 
+        console.log('validated_password_server: ' + this.state.validated_password_server);
         console.log('validated_username_server: ' + this.state.validated_username_server);
+        console.log('validated_email_server: ' + this.state.validated_email_server);
 
       // frontend validation
         if (this.state.validated_email) {
