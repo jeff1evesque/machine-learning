@@ -21,7 +21,7 @@ var RegisterForm = React.createClass({
     getInitialState: function() {
         return {
             ajax_done_result: null,
-            validated_status: null,
+            ajax_done_status: null,
             display_spinner: false,
             submit_registration: false,
             validated_username: true,
@@ -54,7 +54,7 @@ var RegisterForm = React.createClass({
         event.preventDefault();
 
       // local variables
-        if (this.submit_registration) {
+        if (this.state.submit_registration) {
             var ajaxEndpoint = '/register';
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
@@ -70,11 +70,41 @@ var RegisterForm = React.createClass({
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
+                    console.log('else if (blob): start');
                     console.log('status: ' + asynchObject.status);
                     console.log('status type: ' + typeof(asynchObject.status));
                     console.log('username: ' + asynchObject.username);
                     console.log('email: ' + asynchObject.email);
                     this.setState({ajax_done_result: asynchObject});
+                    console.log('else if (blob): end');
+
+                  // server handles one error at a time
+                    const status = asynchObject.status;
+
+                    if (status != this.state.ajax_done_status) {
+                        switch(status) {
+                            case 1:
+                                console.log('switch 1: start / end');
+                                this.setState({'validated_password_server': false});
+                            case 2:
+                                console.log('switch 2: start / end');
+                                this.setState({'validated_username_server': false});
+                            case 3:
+                                console.log('switch 3: start / end');
+                                this.setState({'validated_email_server': false});
+                            default:
+                                console.log('switch default: start / end');
+                                this.setState({'validated_password_server': true});
+                                this.setState({'validated_username_server': true});
+                                this.setState({'validated_email_server': true});
+                        }
+
+                        console.log('switch reset: start');
+                        this.setState({'switch ajax_done_status': status});
+                        console.log('switch status: ' + status);
+                        console.log('switch ajax_done_status: ' + this.state.ajax_done_status);
+                        console.log('switch reset: end');
+                    }
                 }
                 else {
                     this.setState({ajax_done_result: null});
@@ -97,6 +127,9 @@ var RegisterForm = React.createClass({
             }.bind(this),
           // pass ajax arguments
             ajaxArguments);
+
+          // reset submission status
+            this.setState({'submit_registration': false});
         }
     },
     componentWillMount: function() {
@@ -114,53 +147,22 @@ var RegisterForm = React.createClass({
         const username = event.target.value;
         const check = checkValidString(username) ? true : false;
 
-        this.setState({'validated_username': check});
+        this.setState({validated_username: check});
         this.setState({value_username: username});
     },
     validateEmail: function(event) {
         const email = event.target.value;
         const check = checkValidEmail(email) ? true : false;
 
-        this.setState({'validated_email': check});
+        this.setState({validated_email: check});
         this.setState({value_email: email});
     },
     validatePassword: function(event) {
         const password = event.target.value;
         const check = checkValidPassword(password) ? true : false;
 
-        this.setState({'validated_password': check});
+        this.setState({validated_password: check});
         this.setState({value_password: password});
-    },
-  // define properties after update
-    componentDidUpdate: function() {
-        if (
-            !!this.state.ajax_done_result &&
-            this.state.ajax_done_result.status
-        ) {
-            var status = this.state.ajax_done_result.status;
-            console.log('status: ' + status);
-            console.log('validated_status: ' + status);
-
-          // server handles one error at a time
-            if (this.state.validated_status != status) {
-                switch(status) {
-                    case status == 1:
-                        this.setState({'validated_password_server': false});
-                    case status == 2:
-                        this.setState({'validated_username_server': false});
-                    case status == 3:
-                        this.setState({'validated_email_server': false});
-                    default:
-                        this.setState({'validated_password_server': true});
-                        this.setState({'validated_username_server': true});
-                        this.setState({'validated_email_server': true});
-                }
-
-              // reset to prevent infinite recursion
-                this.setState({'validated_status': status});
-                console.log('validated_status: ' + status);
-            }
-        }
     },
   // triggered when 'state properties' change
     render: function() {
@@ -169,9 +171,11 @@ var RegisterForm = React.createClass({
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
 
+        console.log('render: start');
         console.log('validated_password_server: ' + this.state.validated_password_server);
         console.log('validated_username_server: ' + this.state.validated_username_server);
         console.log('validated_email_server: ' + this.state.validated_email_server);
+        console.log('render: end');
 
       // frontend validation
         if (this.state.validated_email) {
