@@ -23,7 +23,7 @@ var RegisterForm = React.createClass({
             ajax_done_result: null,
             ajax_done_status: null,
             display_spinner: false,
-            submit_registration: false,
+            submitted_registration: false,
             validated_username: true,
             validated_email: true,
             validated_password: true,
@@ -44,93 +44,87 @@ var RegisterForm = React.createClass({
             return 'span';
         }
     },
-  // callback: update state signifying submitted registration
-    submit_registration: function(event) {
-        this.setState({submitted_registration: true});
-    },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
       // prevent page reload
         event.preventDefault();
 
       // local variables
-        if (this.state.submit_registration) {
-            var ajaxEndpoint = '/register';
-            var ajaxArguments = {
-                'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.registerForm)
-            };
+        var ajaxEndpoint = '/register';
+        var ajaxArguments = {
+            'endpoint': ajaxEndpoint,
+            'data': new FormData(this.refs.registerForm)
+        };
 
-          // boolean to show ajax spinner
-            this.setState({display_spinner: true});
+      // boolean to show ajax spinner
+        this.setState({display_spinner: true});
 
-          // asynchronous callback: ajax 'done' promise
-           ajaxCaller(function (asynchObject) {
-            // Append to DOM
-                if (asynchObject && asynchObject.error) {
-                    this.setState({ajax_done_error: asynchObject.error});
-                } else if (asynchObject) {
-                    console.log('else if (blob): start');
-                    console.log('status: ' + asynchObject.status);
-                    console.log('status type: ' + typeof(asynchObject.status));
-                    console.log('username: ' + asynchObject.username);
-                    console.log('email: ' + asynchObject.email);
-                    this.setState({ajax_done_result: asynchObject});
-                    console.log('else if (blob): end');
+      // asynchronous callback: ajax 'done' promise
+        ajaxCaller(function (asynchObject) {
+      // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            }
+            else if (asynchObject) {
+                console.log('else if (blob): start');
+                console.log('asynchObject.status: ' + asynchObject.status);
+                console.log('asynchObject.status typeof: ' + typeof(asynchObject.status));
+                console.log('this.state.ajax_done_status: ' + this.state.ajax_done_status);
+                console.log('this.state.ajax_done_status typeof: ' + typeof(this.state.ajax_done_status));
+                console.log('username: ' + asynchObject.username);
+                console.log('email: ' + asynchObject.email);
+                this.setState({ajax_done_result: asynchObject});
+                console.log('else if (blob): end');
 
-                  // server handles one error at a time
-                    const status = asynchObject.status;
+              // server handles one error at a time
+                const status = asynchObject.status;
 
-                    if (status != this.state.ajax_done_status) {
-                        switch(status) {
-                            case 1:
-                                console.log('switch 1: start / end');
-                                this.setState({'validated_password_server': false});
-                            case 2:
-                                console.log('switch 2: start / end');
-                                this.setState({'validated_username_server': false});
-                            case 3:
-                                console.log('switch 3: start / end');
-                                this.setState({'validated_email_server': false});
-                            default:
-                                console.log('switch default: start / end');
-                                this.setState({'validated_password_server': true});
-                                this.setState({'validated_username_server': true});
-                                this.setState({'validated_email_server': true});
-                        }
-
-                        console.log('switch reset: start');
-                        this.setState({'switch ajax_done_status': status});
-                        console.log('switch status: ' + status);
-                        console.log('switch ajax_done_status: ' + this.state.ajax_done_status);
-                        console.log('switch reset: end');
+                if (status != parseInt(this.state.ajax_done_status)) {
+                    switch(status) {
+                        case 1:
+                            console.log('switch 1: start / end');
+                            this.setState({'validated_password_server': false});
+                        case 2:
+                            console.log('switch 2: start / end');
+                            this.setState({'validated_username_server': false});
+                        case 3:
+                            console.log('switch 3: start / end');
+                            this.setState({'validated_email_server': false});
+                        default:
+                            console.log('switch default: start / end');
+                            this.setState({'validated_password_server': true});
+                            this.setState({'validated_username_server': true});
+                            this.setState({'validated_email_server': true});
                     }
-                }
-                else {
-                    this.setState({ajax_done_result: null});
-                }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
-            }.bind(this),
-          // asynchronous callback: ajax 'fail' promise
-            function (asynchStatus, asynchError) {
-                if (asynchStatus) {
-                    this.setState({ajax_fail_status: asynchStatus});
-                    console.log('Error Status: ' + asynchStatus);
-                }
-                if (asynchError) {
-                    this.setState({ajax_fail_error: asynchError});
-                    console.log('Error Thrown: ' + asynchError);
-                }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
-            }.bind(this),
-          // pass ajax arguments
-            ajaxArguments);
 
-          // reset submission status
-            this.setState({'submit_registration': false});
-        }
+                    console.log('switch reset: start');
+                    this.setState({'switch ajax_done_status': status});
+                    console.log('switch status: ' + status);
+                    console.log('switch ajax_done_status: ' + this.state.ajax_done_status);
+                    console.log('switch reset: end');
+                }
+            }
+            else {
+                this.setState({ajax_done_result: null});
+            }
+          // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+          // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // pass ajax arguments
+        ajaxArguments);
     },
     componentWillMount: function() {
       // redirect to homepage if logged-in
@@ -195,17 +189,26 @@ var RegisterForm = React.createClass({
                 (Password requirement not met)
             </span>;
         }
+        else {
+            var passwordNote = null;
+        }
 
         if (!this.state.validated_username_server) {
             var usernameNote = <span className='server-response invalid'>
                 (Username is taken)
             </span>;
         }
+        else {
+            var usernameNote = null;
+        }
 
         if (!this.state.validated_email_server) {
             var emailNote = <span className='server-response invalid'>
                 (Email has already registered)
             </span>;
+        }
+        else {
+            var emailNote = null;
         }
 
         return(
@@ -262,7 +265,6 @@ var RegisterForm = React.createClass({
                     type='submit'
                     className='btn btn-primary'
                     value='Create an account'
-                    onClick={this.submit_registration}
                 />
                 <AjaxSpinner />
             </form>
