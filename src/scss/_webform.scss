@@ -83,7 +83,7 @@ form {
 
   .form-label.invalid:after {
     color: $red-1;
-    content: '*';
+    content: ' *';
   }
 
   .input-block {
