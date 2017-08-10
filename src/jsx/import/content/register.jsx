@@ -21,7 +21,6 @@ var RegisterForm = React.createClass({
     getInitialState: function() {
         return {
             ajax_done_result: null,
-            ajax_done_status: null,
             display_spinner: false,
             submitted_registration: false,
             validated_username: true,
@@ -66,43 +65,7 @@ var RegisterForm = React.createClass({
                 this.setState({ajax_done_error: asynchObject.error});
             }
             else if (asynchObject) {
-                console.log('else if (blob): start');
-                console.log('asynchObject.status: ' + asynchObject.status);
-                console.log('asynchObject.status typeof: ' + typeof(asynchObject.status));
-                console.log('this.state.ajax_done_status: ' + this.state.ajax_done_status);
-                console.log('this.state.ajax_done_status typeof: ' + typeof(this.state.ajax_done_status));
-                console.log('username: ' + asynchObject.username);
-                console.log('email: ' + asynchObject.email);
                 this.setState({ajax_done_result: asynchObject});
-                console.log('else if (blob): end');
-
-              // server handles one error at a time
-                const status = asynchObject.status;
-
-                if (status != parseInt(this.state.ajax_done_status)) {
-                    switch(status) {
-                        case 1:
-                            console.log('switch 1: start / end');
-                            this.setState({'validated_password_server': false});
-                        case 2:
-                            console.log('switch 2: start / end');
-                            this.setState({'validated_username_server': false});
-                        case 3:
-                            console.log('switch 3: start / end');
-                            this.setState({'validated_email_server': false});
-                        default:
-                            console.log('switch default: start / end');
-                            this.setState({'validated_password_server': true});
-                            this.setState({'validated_username_server': true});
-                            this.setState({'validated_email_server': true});
-                    }
-
-                    this.setState({'ajax_done_status': status});
-                    console.log('switch reset: start');
-                    console.log('switch status: ' + status);
-                    console.log('switch ajax_done_status: ' + this.state.ajax_done_status);
-                    console.log('switch reset: end');
-                }
             }
             else {
                 this.setState({ajax_done_result: null});
@@ -125,6 +88,29 @@ var RegisterForm = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+
+      // backend validation: server handles one error at a time
+        const result = this.state.ajax_done_result;
+        const status = (!!result && result.status >= 0) ? result.status : null;
+
+        if (!!status || status == 0) {
+            switch(status) {
+                case 1:
+                    this.setState({validated_password_server: false});
+                    break;
+                case 2:
+                    this.setState({validated_username_server: false});
+                    break;
+                case 3:
+                    this.setState({validated_email_server: false});
+                    break;
+                default:
+                    this.setState({validated_password_server: true});
+                    this.setState({validated_username_server: true});
+                    this.setState({validated_email_server: true});
+                    break;
+            }
+        }
     },
     componentWillMount: function() {
       // redirect to homepage if logged-in
@@ -164,12 +150,6 @@ var RegisterForm = React.createClass({
         var AjaxSpinner = this.getSpinner();
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
-
-        console.log('render: start');
-        console.log('validated_password_server: ' + this.state.validated_password_server);
-        console.log('validated_username_server: ' + this.state.validated_username_server);
-        console.log('validated_email_server: ' + this.state.validated_email_server);
-        console.log('render: end');
 
       // frontend validation
         if (this.state.validated_email) {
