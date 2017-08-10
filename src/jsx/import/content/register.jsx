@@ -97,8 +97,8 @@ var RegisterForm = React.createClass({
                             this.setState({'validated_email_server': true});
                     }
 
+                    this.setState({'ajax_done_status': status});
                     console.log('switch reset: start');
-                    this.setState({'switch ajax_done_status': status});
                     console.log('switch status: ' + status);
                     console.log('switch ajax_done_status: ' + this.state.ajax_done_status);
                     console.log('switch reset: end');
