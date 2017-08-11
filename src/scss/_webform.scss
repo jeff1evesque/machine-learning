@@ -25,6 +25,15 @@
 }
 
 form {
+  p,
+  div,
+  span {
+    .invalid {
+      color: $red-1;
+      font-weight: 700;
+    }
+  }
+
   input,
   select,
   textarea {
@@ -70,6 +79,11 @@ form {
 
   label {
     color: $gray-7;
+  }
+
+  .form-label.invalid:after {
+    color: $red-1;
+    content: ' *';
   }
 
   .input-block {
