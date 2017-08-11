@@ -65,7 +65,32 @@ var RegisterForm = React.createClass({
                 this.setState({ajax_done_error: asynchObject.error});
             }
             else if (asynchObject) {
-                this.setState({ajax_done_result: asynchObject});
+              // local variables
+                const result = asynchObject;
+                const status = (!!result && result.status >= 0) ? result.status : null;
+
+              // backend validation: server handles one error at a time
+                if (!!status || status == 0) {
+                    switch(status) {
+                        case 1:
+                            this.setState({validated_password_server: false});
+                            break;
+                        case 2:
+                            this.setState({validated_username_server: false});
+                            break;
+                        case 3:
+                            this.setState({validated_email_server: false});
+                            break;
+                        default:
+                            this.setState({validated_password_server: true});
+                            this.setState({validated_username_server: true});
+                            this.setState({validated_email_server: true});
+                            break;
+                    }
+                }
+
+              // return server response
+                this.setState({ajax_done_result: result});
             }
             else {
                 this.setState({ajax_done_result: null});
@@ -88,29 +113,6 @@ var RegisterForm = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
-
-      // backend validation: server handles one error at a time
-        const result = this.state.ajax_done_result;
-        const status = (!!result && result.status >= 0) ? result.status : null;
-
-        if (!!status || status == 0) {
-            switch(status) {
-                case 1:
-                    this.setState({validated_password_server: false});
-                    break;
-                case 2:
-                    this.setState({validated_username_server: false});
-                    break;
-                case 3:
-                    this.setState({validated_email_server: false});
-                    break;
-                default:
-                    this.setState({validated_password_server: true});
-                    this.setState({validated_username_server: true});
-                    this.setState({validated_email_server: true});
-                    break;
-            }
-        }
     },
     componentWillMount: function() {
       // redirect to homepage if logged-in
