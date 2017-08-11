@@ -127,6 +127,7 @@ var RegisterForm = React.createClass({
         const username = event.target.value;
         const check = checkValidString(username) ? true : false;
 
+        this.setState({validated_username_server: true});
         this.setState({validated_username: check});
         this.setState({value_username: username});
     },
@@ -134,6 +135,7 @@ var RegisterForm = React.createClass({
         const email = event.target.value;
         const check = checkValidEmail(email) ? true : false;
 
+        this.setState({validated_email_server: true});
         this.setState({validated_email: check});
         this.setState({value_email: email});
     },
@@ -141,6 +143,7 @@ var RegisterForm = React.createClass({
         const password = event.target.value;
         const check = checkValidPassword(password) ? true : false;
 
+        this.setState({validated_password_server: true});
         this.setState({validated_password: check});
         this.setState({value_password: password});
     },
