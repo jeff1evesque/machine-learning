@@ -176,7 +176,7 @@ var LoginForm = React.createClass({
       // backend validation
         if (!this.state.validated_password_server) {
             var passwordNote = <span className='server-response invalid'>
-                (Password requirement not met)
+                (Invalid password)
             </span>;
         }
         else {
@@ -185,7 +185,7 @@ var LoginForm = React.createClass({
 
         if (!this.state.validated_username_server) {
             var usernameNote = <span className='server-response invalid'>
-                (Username is taken)
+                (Invalid user identifier)
             </span>;
         }
         else {
@@ -198,7 +198,9 @@ var LoginForm = React.createClass({
                     <h1>Sign in Web-Interface</h1>
                 </div>
                 <div className='form-body'>
-                    <label className={'form-label ' + usernameClass}>Username or email address</label>
+                    <label className={'form-label ' + usernameClass}>
+                        Username or email address
+                    </label>
                     <input
                         type='text'
                         name='user[login]'
