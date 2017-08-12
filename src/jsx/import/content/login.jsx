@@ -16,8 +16,6 @@ import { browserHistory } from 'react-router';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
-import checkValidString from '../validator/valid-string.js';
-import checkValidPassword from '../validator/valid-password.js';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
@@ -156,6 +154,7 @@ var LoginForm = React.createClass({
 
         return(
             <form onSubmit={this.handleSubmit} ref='loginForm'>
+                {loginNote}
                 <div className='form-header'>
                     <h1>Sign in Web-Interface</h1>
                 </div>
@@ -173,8 +172,6 @@ var LoginForm = React.createClass({
                         name='user[password]'
                         className='input-block'
                     />
-
-                    {loginNote}
 
                     <input
                         type='submit'
