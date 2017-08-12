@@ -166,7 +166,7 @@ var LoginForm = React.createClass({
                         className='input-block'
                         autoFocus
                     />
-                    <label>Password {passwordNote}</label>
+                    <label>Password</label>
                     <input
                         type='password'
                         name='user[password]'
