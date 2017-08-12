@@ -25,15 +25,9 @@ var LoginForm = React.createClass({
         return {
             ajax_done_result: null,
             display_spinner: false,
-            validated_username: true,
-            validated_email: true,
-            validated_password: true,
             validated_username_server: true,
             validated_email_server: true,
             validated_password_server: true,
-            value_username: '',
-            value_email: '',
-            value_password: '',
         };
     },
   // call back: used to return spinner
@@ -148,30 +142,10 @@ var LoginForm = React.createClass({
             browserHistory.push('/');
         }
     },
-    validateUsername: function(event) {
-        const username = event.target.value;
-        const check = checkValidString(username) ? true : false;
-
-        this.setState({validated_username_server: true});
-        this.setState({validated_username: check});
-        this.setState({value_username: username});
-    },
-    validatePassword: function(event) {
-        const password = event.target.value;
-        const check = checkValidPassword(password) ? true : false;
-
-        this.setState({validated_password_server: true});
-        this.setState({validated_password: check});
-        this.setState({value_password: password});
-    },
   // triggered when 'state properties' change
     render: function() {
       // local variables
         var AjaxSpinner = this.getSpinner();
-
-      // frontend validation
-        var usernameClass = this.state.validated_username ?  '' : 'invalid';
-        var passwordClass = this.state.validated_password ? '' : 'invalid';
 
       // backend validation
         if (!this.state.validated_password_server) {
@@ -198,24 +172,18 @@ var LoginForm = React.createClass({
                     <h1>Sign in Web-Interface</h1>
                 </div>
                 <div className='form-body'>
-                    <label className={'form-label ' + usernameClass}>
-                        Username or email address
-                    </label>
+                    <label>Username or email address {usernameNote}</label>
                     <input
                         type='text'
                         name='user[login]'
                         className='input-block'
-                        onInput={this.validateUsername}
-                        value={this.state.value_username}
                         autoFocus
                     />
-                    <label className={'form-label ' + passwordClass}>Password</label>
+                    <label>Password {passwordNote}</label>
                     <input
                         type='password'
                         name='user[password]'
                         className='input-block'
-                        onInput={this.validatePassword}
-                        value={this.state.value_password}
                     />
 
                     <input
