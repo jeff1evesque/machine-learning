@@ -78,6 +78,12 @@ var LoginForm = React.createClass({
 
                           // reset form
                             this.setState({validated_login_server: true});
+
+                          // redirect to homepage if logged-in
+                            if (!!result && !!username && username != 'anonymous') {
+                                browserHistory.push('/');
+                            }
+
                             break;
                         case 1:
                             this.setState({validated_login_server: false});
@@ -103,11 +109,6 @@ var LoginForm = React.createClass({
 
           // boolean to hide ajax spinner
             this.setState({display_spinner: false});
-
-          // redirect to homepage if logged-in
-            if (!!result && !!result.username && result.username != 'anonymous') {
-                browserHistory.push('/');
-            }
 
         }.bind(this),
       // asynchronous callback: ajax 'fail' promise
