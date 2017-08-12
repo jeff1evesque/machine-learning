@@ -16,13 +16,24 @@ import { browserHistory } from 'react-router';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
+import checkValidString from '../validator/valid-string.js';
+import checkValidPassword from '../validator/valid-password.js';
 
 var LoginForm = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            ajax_done_result: null,
             display_spinner: false,
-            submit_login: false,
+            validated_username: true,
+            validated_email: true,
+            validated_password: true,
+            validated_username_server: true,
+            validated_email_server: true,
+            validated_password_server: true,
+            value_username: '',
+            value_email: '',
+            value_password: '',
         };
     },
   // call back: used to return spinner
@@ -34,80 +45,97 @@ var LoginForm = React.createClass({
             return 'span';
         }
     },
-  // callback: update state signifying submitted login
-    submit_login: function(event) {
-        this.setState({submitted_login: true});
-    },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
       // prevent page reload
         event.preventDefault();
 
       // local variables
-        if (this.submit_login) {
-            var ajaxEndpoint = '/login';
-            var ajaxArguments = {
-                'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.loginForm)
-            };
+        var ajaxEndpoint = '/login';
+        var ajaxArguments = {
+            'endpoint': ajaxEndpoint,
+            'data': new FormData(this.refs.loginForm)
+        };
 
-          // boolean to show ajax spinner
-            this.setState({display_spinner: true});
+      // boolean to show ajax spinner
+        this.setState({display_spinner: true});
 
-          // asynchronous callback: ajax 'done' promise
-           ajaxCaller(function (asynchObject) {
+      // asynchronous callback: ajax 'done' promise
+        ajaxCaller(function (asynchObject) {
 
-            // Append to DOM
-                if (asynchObject && asynchObject.error) {
-                    this.setState({ajax_done_error: asynchObject.error});
-                } else if (asynchObject) {
-                    this.setState({ajax_done_result: asynchObject});
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            }
+            else if (asynchObject) {
+              // local variables
+                const result = asynchObject;
+                const status = (!!result && result.status >= 0) ? result.status : null;
 
-                  // store into redux store logged-in state
-                    if (
-                        asynchObject.username &&
-                        asynchObject.status === 0
-                    ) {
-                      // local variables
-                        var username = asynchObject.username
+              // backend validation: server handles one error at a time
+                if (result.username && (!!status || status == 0)) {
+                    switch(status) {
+                        case 0:
+                          // update redux store
+                            var action = setLoginState(username);
+                            this.props.dispatchLogin(action);
 
-                      // update redux store
-                        var action = setLoginState(username);
-                        this.props.dispatchLogin(action);
+                          // store username into sessionStorage
+                            sessionStorage.setItem('username', username);
 
-                      // store username into sessionStorage
-                        sessionStorage.setItem('username', username);
+                          // reset form
+                            this.setState({validated_password_server: true});
+                            this.setState({validated_username_server: true});
+                            break;
+                        case 1:
+                            this.setState({validated_username_server: false});
+                            break;
+                        case 2:
+                            this.setState({validated_password_server: false});
+                            break;
+                        case 3:
+                            this.setState({validated_password_server: false});
+                            break;
+                        default:
+                            this.setState({validated_password_server: true});
+                            this.setState({validated_username_server: true});
+                            break;
                     }
                 }
-                else {
-                    this.setState({ajax_done_result: null});
-                }
 
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
+              // return server response
+                this.setState({ajax_done_result: result});
+            }
+            else {
+                this.setState({ajax_done_result: null});
+            }
 
-            // redirect to homepage if logged-in
-                if (!!username && username != 'anonymous') {
-                    browserHistory.push('/');
-                }
+          // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
 
-            }.bind(this),
-          // asynchronous callback: ajax 'fail' promise
-            function (asynchStatus, asynchError) {
-                if (asynchStatus) {
-                    this.setState({ajax_fail_status: asynchStatus});
-                    console.log('Error Status: ' + asynchStatus);
-                }
-                if (asynchError) {
-                    this.setState({ajax_fail_error: asynchError});
-                    console.log('Error Thrown: ' + asynchError);
-                }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
-            }.bind(this),
-          // pass ajax arguments
-            ajaxArguments);
-        }
+          // redirect to homepage if logged-in
+            if (!!username && username != 'anonymous') {
+                browserHistory.push('/');
+            }
+
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+
+          // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // pass ajax arguments
+        ajaxArguments);
     },
     componentWillMount: function() {
       // redirect to homepage if logged-in
@@ -120,9 +148,49 @@ var LoginForm = React.createClass({
             browserHistory.push('/');
         }
     },
+    validateUsername: function(event) {
+        const username = event.target.value;
+        const check = checkValidString(username) ? true : false;
+
+        this.setState({validated_username_server: true});
+        this.setState({validated_username: check});
+        this.setState({value_username: username});
+    },
+    validatePassword: function(event) {
+        const password = event.target.value;
+        const check = checkValidPassword(password) ? true : false;
+
+        this.setState({validated_password_server: true});
+        this.setState({validated_password: check});
+        this.setState({value_password: password});
+    },
   // triggered when 'state properties' change
     render: function() {
+      // local variables
         var AjaxSpinner = this.getSpinner();
+
+      // frontend validation
+        var usernameClass = this.state.validated_username ?  '' : 'invalid';
+        var passwordClass = this.state.validated_password ? '' : 'invalid';
+
+      // backend validation
+        if (!this.state.validated_password_server) {
+            var passwordNote = <span className='server-response invalid'>
+                (Password requirement not met)
+            </span>;
+        }
+        else {
+            var passwordNote = null;
+        }
+
+        if (!this.state.validated_username_server) {
+            var usernameNote = <span className='server-response invalid'>
+                (Username is taken)
+            </span>;
+        }
+        else {
+            var usernameNote = null;
+        }
 
         return(
             <form onSubmit={this.handleSubmit} ref='loginForm'>
@@ -130,24 +198,28 @@ var LoginForm = React.createClass({
                     <h1>Sign in Web-Interface</h1>
                 </div>
                 <div className='form-body'>
-                    <label>Username or email address</label>
+                    <label className={'form-label ' + usernameClass}>Username or email address</label>
                     <input
                         type='text'
                         name='user[login]'
                         className='input-block'
+                        onInput={this.validateUsername}
+                        value={this.state.value_username}
                         autoFocus
                     />
-                    <label>Password</label>
+                    <label className={'form-label ' + passwordClass}>Password</label>
                     <input
                         type='password'
                         name='user[password]'
                         className='input-block'
+                        onInput={this.validatePassword}
+                        value={this.state.value_password}
                     />
 
                     <input
                         type='submit'
                         className='input-submit btn btn-primary'
-                        onClick={this.submit_login}
+                        value='Login'
                     />
                     <AjaxSpinner />
                 </div>
