@@ -25,9 +25,7 @@ var LoginForm = React.createClass({
         return {
             ajax_done_result: null,
             display_spinner: false,
-            validated_username_server: true,
-            validated_email_server: true,
-            validated_password_server: true,
+            validated_login_server: true,
         };
     },
   // call back: used to return spinner
@@ -56,6 +54,8 @@ var LoginForm = React.createClass({
 
       // asynchronous callback: ajax 'done' promise
         ajaxCaller(function (asynchObject) {
+        // local variables
+            const result = asynchObject;
 
         // Append to DOM
             if (asynchObject && asynchObject.error) {
@@ -63,7 +63,6 @@ var LoginForm = React.createClass({
             }
             else if (asynchObject) {
               // local variables
-                const result = asynchObject;
                 const status = (!!result && result.status >= 0) ? result.status : null;
 
               // backend validation: server handles one error at a time
@@ -78,21 +77,19 @@ var LoginForm = React.createClass({
                             sessionStorage.setItem('username', username);
 
                           // reset form
-                            this.setState({validated_password_server: true});
-                            this.setState({validated_username_server: true});
+                            this.setState({validated_login_server: true});
                             break;
                         case 1:
-                            this.setState({validated_username_server: false});
+                            this.setState({validated_login_server: false});
                             break;
                         case 2:
-                            this.setState({validated_password_server: false});
+                            this.setState({validated_login_server: false});
                             break;
                         case 3:
-                            this.setState({validated_password_server: false});
+                            this.setState({validated_login_server: false});
                             break;
                         default:
-                            this.setState({validated_password_server: true});
-                            this.setState({validated_username_server: true});
+                            this.setState({validated_login_server: false});
                             break;
                     }
                 }
@@ -108,7 +105,7 @@ var LoginForm = React.createClass({
             this.setState({display_spinner: false});
 
           // redirect to homepage if logged-in
-            if (!!username && username != 'anonymous') {
+            if (!!result && !! result.username && result.username != 'anonymous') {
                 browserHistory.push('/');
             }
 
@@ -148,22 +145,13 @@ var LoginForm = React.createClass({
         var AjaxSpinner = this.getSpinner();
 
       // backend validation
-        if (!this.state.validated_password_server) {
-            var passwordNote = <span className='server-response invalid'>
-                (Invalid password)
-            </span>;
+        if (!this.state.validated_login_server) {
+            var loginNote = <div className='server-response invalid'>
+                Invalid user, or password!
+            </div>;
         }
         else {
-            var passwordNote = null;
-        }
-
-        if (!this.state.validated_username_server) {
-            var usernameNote = <span className='server-response invalid'>
-                (Invalid user identifier)
-            </span>;
-        }
-        else {
-            var usernameNote = null;
+            var loginNote = null;
         }
 
         return(
@@ -172,7 +160,7 @@ var LoginForm = React.createClass({
                     <h1>Sign in Web-Interface</h1>
                 </div>
                 <div className='form-body'>
-                    <label>Username or email address {usernameNote}</label>
+                    <label>Username or email address</label>
                     <input
                         type='text'
                         name='user[login]'
@@ -185,6 +173,8 @@ var LoginForm = React.createClass({
                         name='user[password]'
                         className='input-block'
                     />
+
+                    {loginNote}
 
                     <input
                         type='submit'
