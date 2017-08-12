@@ -65,10 +65,12 @@ var LoginForm = React.createClass({
 
               // backend validation: server handles one error at a time
                 if (result.username && (!!status || status == 0)) {
+                    const username = result.username;
+
                     switch(status) {
                         case 0:
                           // update redux store
-                            var action = setLoginState(username);
+                            const action = setLoginState(username);
                             this.props.dispatchLogin(action);
 
                           // store username into sessionStorage
@@ -103,7 +105,7 @@ var LoginForm = React.createClass({
             this.setState({display_spinner: false});
 
           // redirect to homepage if logged-in
-            if (!!result && !! result.username && result.username != 'anonymous') {
+            if (!!result && !!result.username && result.username != 'anonymous') {
                 browserHistory.push('/');
             }
 
