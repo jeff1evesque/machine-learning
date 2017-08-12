@@ -14,7 +14,7 @@ COPY . /var/machine-learning
 ##  Note: r10k requires 'git' installed
 ##
 RUN apt-get -y update
-RUN apt-get -y install git=1:1.9.1-1ubuntu0.5
+RUN apt-get -y install git=1:1.9.1-1ubuntu0.6
 RUN apt-get -y install wget=1.15-1ubuntu1.14.04.2
 RUN apt-get -y install python-pip=1.5.4-1ubuntu4
 
