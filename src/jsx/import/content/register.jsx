@@ -22,7 +22,6 @@ var RegisterForm = React.createClass({
         return {
             ajax_done_result: null,
             display_spinner: false,
-            submitted_registration: false,
             validated_username: true,
             validated_email: true,
             validated_password: true,
@@ -153,10 +152,11 @@ var RegisterForm = React.createClass({
     render: function() {
       // local variables
         var AjaxSpinner = this.getSpinner();
+
+      // frontend validation
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
 
-      // frontend validation
         if (this.state.validated_email) {
             var emailClass = '';
             var emailNote = '';
