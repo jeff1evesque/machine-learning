@@ -141,7 +141,7 @@ var LoginForm = React.createClass({
 
       // backend validation
         if (!this.state.validated_login_server) {
-            var loginNote = <div className='server-response invalid'>
+            var loginNote = <div className='invalid'>
                 Invalid user, or password!
             </div>;
         }
