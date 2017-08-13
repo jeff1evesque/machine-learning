@@ -32,6 +32,14 @@ form {
       color: $red-1;
       font-weight: 700;
     }
+
+    .invalid-pop {
+      color: $red2;
+      background-color: $red3;
+      border-style: solid;
+      border-width: 1px;
+      border-radius: 5px;
+    }
   }
 
   input,
