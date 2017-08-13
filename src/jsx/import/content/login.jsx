@@ -85,13 +85,7 @@ var LoginForm = React.createClass({
                             }
 
                             break;
-                        case 1:
-                            this.setState({validated_login_server: false});
-                            break;
-                        case 2:
-                            this.setState({validated_login_server: false});
-                            break;
-                        case 3:
+                        case 4:
                             this.setState({validated_login_server: false});
                             break;
                         default:
