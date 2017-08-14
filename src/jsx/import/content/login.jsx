@@ -142,7 +142,7 @@ var LoginForm = React.createClass({
       // backend validation
         if (!this.state.validated_login_server) {
             var loginNote = <div className='invalid-pop'>
-                Invalid user, or password!
+                Invalid user, or password.
             </div>;
         }
         else {
@@ -151,10 +151,12 @@ var LoginForm = React.createClass({
 
         return(
             <form onSubmit={this.handleSubmit} ref='loginForm'>
-                {loginNote}
                 <div className='form-header'>
                     <h1>Sign in Web-Interface</h1>
                 </div>
+
+                {loginNote}
+
                 <div className='form-body'>
                     <label>Username or email address</label>
                     <input
