@@ -107,9 +107,9 @@ form {
   .invalid-pop {
     background-color: $red-3;
     border: 1px solid rgba(25, 30, 35, .15);
+    border-radius: 5px;
     border-style: solid;
     border-width: 1px;
-    border-radius: 5px;
     color: $red-2;
     margin-bottom: 1rem;
     padding: 1rem 1.25rem;
