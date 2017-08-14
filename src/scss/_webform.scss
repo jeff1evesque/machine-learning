@@ -103,6 +103,17 @@ form {
     font-size: .938rem;
     padding: 0 $gutter-1 / 4;
   }
+
+  .invalid-pop {
+    background-color: $red-3;
+    border: 1px solid rgba(25, 30, 35, .15);
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    color: $red-2;
+    margin-bottom: 1rem;
+    padding: 1rem 1.25rem;
+  }
 }
 
 .form-group {

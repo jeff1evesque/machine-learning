@@ -146,6 +146,8 @@ def login():
             - 1, username does not exist
             - 2, username does not have a password
             - 3, supplied password does not match stored password
+            - 4, generic login failure:
+                - https://www.owasp.org/index.php/Authentication_Cheat_Sheet
 
     '''
 
@@ -180,23 +182,24 @@ def login():
                         'status': 0,
                         'username': username
                     })
+                # notification: incorrect password
                 else:
                     return json.dumps({
-                        'status': 3,
+                        'status': 4,
                         'username': username
                     })
 
             # notification: user does not have a password
             else:
                 return json.dumps({
-                    'status': 2,
+                    'status': 4,
                     'username': username
                 })
 
         # notification: username does not exist
         else:
             return json.dumps({
-                'status': 1,
+                'status': 4,
                 'username': username
             })
 

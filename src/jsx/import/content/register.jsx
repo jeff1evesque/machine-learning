@@ -22,7 +22,6 @@ var RegisterForm = React.createClass({
         return {
             ajax_done_result: null,
             display_spinner: false,
-            submitted_registration: false,
             validated_username: true,
             validated_email: true,
             validated_password: true,
@@ -153,10 +152,11 @@ var RegisterForm = React.createClass({
     render: function() {
       // local variables
         var AjaxSpinner = this.getSpinner();
+
+      // frontend validation
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
 
-      // frontend validation
         if (this.state.validated_email) {
             var emailClass = '';
             var emailNote = '';
@@ -170,7 +170,7 @@ var RegisterForm = React.createClass({
 
       // backend validation
         if (!this.state.validated_password_server) {
-            var passwordNote = <span className='server-response invalid'>
+            var passwordNote = <span className='invalid'>
                 (Password requirement not met)
             </span>;
         }
@@ -179,7 +179,7 @@ var RegisterForm = React.createClass({
         }
 
         if (!this.state.validated_username_server) {
-            var usernameNote = <span className='server-response invalid'>
+            var usernameNote = <span className='invalid'>
                 (Username is taken)
             </span>;
         }
@@ -188,7 +188,7 @@ var RegisterForm = React.createClass({
         }
 
         if (!this.state.validated_email_server) {
-            var emailNote = <span className='server-response invalid'>
+            var emailNote = <span className='invalid'>
                 (Email has already registered)
             </span>;
         }

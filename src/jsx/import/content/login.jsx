@@ -21,8 +21,9 @@ var LoginForm = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            ajax_done_result: null,
             display_spinner: false,
-            submit_login: false,
+            validated_login_server: true,
         };
     },
   // call back: used to return spinner
@@ -34,80 +35,93 @@ var LoginForm = React.createClass({
             return 'span';
         }
     },
-  // callback: update state signifying submitted login
-    submit_login: function(event) {
-        this.setState({submitted_login: true});
-    },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
       // prevent page reload
         event.preventDefault();
 
       // local variables
-        if (this.submit_login) {
-            var ajaxEndpoint = '/login';
-            var ajaxArguments = {
-                'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.loginForm)
-            };
+        var ajaxEndpoint = '/login';
+        var ajaxArguments = {
+            'endpoint': ajaxEndpoint,
+            'data': new FormData(this.refs.loginForm)
+        };
 
-          // boolean to show ajax spinner
-            this.setState({display_spinner: true});
+      // boolean to show ajax spinner
+        this.setState({display_spinner: true});
 
-          // asynchronous callback: ajax 'done' promise
-           ajaxCaller(function (asynchObject) {
+      // asynchronous callback: ajax 'done' promise
+        ajaxCaller(function (asynchObject) {
+        // local variables
+            const result = asynchObject;
 
-            // Append to DOM
-                if (asynchObject && asynchObject.error) {
-                    this.setState({ajax_done_error: asynchObject.error});
-                } else if (asynchObject) {
-                    this.setState({ajax_done_result: asynchObject});
+        // Append to DOM
+            if (asynchObject && asynchObject.error) {
+                this.setState({ajax_done_error: asynchObject.error});
+            }
+            else if (asynchObject) {
+              // local variables
+                const status = (!!result && result.status >= 0) ? result.status : null;
 
-                  // store into redux store logged-in state
-                    if (
-                        asynchObject.username &&
-                        asynchObject.status === 0
-                    ) {
-                      // local variables
-                        var username = asynchObject.username
+              // backend validation: server handles one error at a time
+                if (result.username && (!!status || status == 0)) {
+                    const username = result.username;
 
-                      // update redux store
-                        var action = setLoginState(username);
-                        this.props.dispatchLogin(action);
+                    switch(status) {
+                        case 0:
+                          // update redux store
+                            const action = setLoginState(username);
+                            this.props.dispatchLogin(action);
 
-                      // store username into sessionStorage
-                        sessionStorage.setItem('username', username);
+                          // store username into sessionStorage
+                            sessionStorage.setItem('username', username);
+
+                          // reset form
+                            this.setState({validated_login_server: true});
+
+                          // redirect to homepage if logged-in
+                            if (!!result && !!username && username != 'anonymous') {
+                                browserHistory.push('/');
+                            }
+
+                            break;
+                        case 4:
+                            this.setState({validated_login_server: false});
+                            break;
+                        default:
+                            this.setState({validated_login_server: false});
+                            break;
                     }
                 }
-                else {
-                    this.setState({ajax_done_result: null});
-                }
 
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
+              // return server response
+                this.setState({ajax_done_result: result});
+            }
+            else {
+                this.setState({ajax_done_result: null});
+            }
 
-            // redirect to homepage if logged-in
-                if (!!username && username != 'anonymous') {
-                    browserHistory.push('/');
-                }
+          // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
 
-            }.bind(this),
-          // asynchronous callback: ajax 'fail' promise
-            function (asynchStatus, asynchError) {
-                if (asynchStatus) {
-                    this.setState({ajax_fail_status: asynchStatus});
-                    console.log('Error Status: ' + asynchStatus);
-                }
-                if (asynchError) {
-                    this.setState({ajax_fail_error: asynchError});
-                    console.log('Error Thrown: ' + asynchError);
-                }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
-            }.bind(this),
-          // pass ajax arguments
-            ajaxArguments);
-        }
+        }.bind(this),
+      // asynchronous callback: ajax 'fail' promise
+        function (asynchStatus, asynchError) {
+            if (asynchStatus) {
+                this.setState({ajax_fail_status: asynchStatus});
+                console.log('Error Status: ' + asynchStatus);
+            }
+
+            if (asynchError) {
+                this.setState({ajax_fail_error: asynchError});
+                console.log('Error Thrown: ' + asynchError);
+            }
+
+          // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+      // pass ajax arguments
+        ajaxArguments);
     },
     componentWillMount: function() {
       // redirect to homepage if logged-in
@@ -122,13 +136,27 @@ var LoginForm = React.createClass({
     },
   // triggered when 'state properties' change
     render: function() {
+      // local variables
         var AjaxSpinner = this.getSpinner();
+
+      // backend validation
+        if (!this.state.validated_login_server) {
+            var loginNote = <div className='invalid-pop'>
+                Invalid user, or password.
+            </div>;
+        }
+        else {
+            var loginNote = null;
+        }
 
         return(
             <form onSubmit={this.handleSubmit} ref='loginForm'>
                 <div className='form-header'>
                     <h1>Sign in Web-Interface</h1>
                 </div>
+
+                {loginNote}
+
                 <div className='form-body'>
                     <label>Username or email address</label>
                     <input
@@ -147,7 +175,7 @@ var LoginForm = React.createClass({
                     <input
                         type='submit'
                         className='input-submit btn btn-primary'
-                        onClick={this.submit_login}
+                        value='Login'
                     />
                     <AjaxSpinner />
                 </div>
