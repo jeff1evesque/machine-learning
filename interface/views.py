@@ -178,30 +178,18 @@ def login():
                     session['uid'] = uid
 
                     # return user status
-                    return json.dumps({
-                        'status': 0,
-                        'username': username
-                    })
+                    return json.dumps({'status': 0})
                 # notification: incorrect password
                 else:
-                    return json.dumps({
-                        'status': 4,
-                        'username': username
-                    })
+                    return json.dumps({'status': 4})
 
             # notification: user does not have a password
             else:
-                return json.dumps({
-                    'status': 4,
-                    'username': username
-                })
+                return json.dumps({'status': 4})
 
         # notification: username does not exist
         else:
-            return json.dumps({
-                'status': 4,
-                'username': username
-            })
+            return json.dumps({'status': 4})
 
 
 @blueprint.route('/logout', methods=['GET', 'POST'])
