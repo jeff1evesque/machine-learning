@@ -24,6 +24,7 @@ var LoginForm = React.createClass({
             ajax_done_result: null,
             display_spinner: false,
             validated_login_server: true,
+            value_username: '',
         };
     },
   // call back: used to return spinner
@@ -63,7 +64,7 @@ var LoginForm = React.createClass({
 
               // backend validation: server handles one error at a time
                 if (!!status || status == 0) {
-                    const username = result.username ? result.username : null;
+                    const username = this.state.value_username;
 
                     switch(status) {
                         case 0:
@@ -162,6 +163,7 @@ var LoginForm = React.createClass({
                         name='user[login]'
                         className='input-block'
                         autoFocus
+                        value={this.state.value_username}
                     />
                     <label>Password</label>
                     <input
