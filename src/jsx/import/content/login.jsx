@@ -52,15 +52,13 @@ var LoginForm = React.createClass({
 
       // asynchronous callback: ajax 'done' promise
         ajaxCaller(function (asynchObject) {
-        // local variables
-            const result = asynchObject;
-
         // Append to DOM
             if (asynchObject && asynchObject.error) {
                 this.setState({ajax_done_error: asynchObject.error});
             }
             else if (asynchObject) {
               // local variables
+                const result = asynchObject;
                 const status = (!!result && result.status >= 0) ? result.status : null;
 
               // backend validation: server handles one error at a time
