@@ -133,6 +133,9 @@ var LoginForm = React.createClass({
             browserHistory.push('/');
         }
     },
+    updateUsername: function(event) {
+        this.setState({value_username: event.target.value});
+    },
   // triggered when 'state properties' change
     render: function() {
       // local variables
@@ -163,6 +166,7 @@ var LoginForm = React.createClass({
                         name='user[login]'
                         className='input-block'
                         autoFocus
+                        onInput={this.updateUsername}
                         value={this.state.value_username}
                     />
                     <label>Password</label>
