@@ -64,8 +64,8 @@ var LoginForm = React.createClass({
                 const status = (!!result && result.status >= 0) ? result.status : null;
 
               // backend validation: server handles one error at a time
-                if (result.username && (!!status || status == 0)) {
-                    const username = result.username;
+                if (!!status || status == 0) {
+                    const username = result.username ? result.username : null;
 
                     switch(status) {
                         case 0:
