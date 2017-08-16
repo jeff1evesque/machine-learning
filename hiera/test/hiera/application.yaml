@@ -19,6 +19,13 @@
 ##       the above 'general: root' definition.
 ##
 application:
+    dataset:
+        anonymous:
+            max_instance: 50
+            max_append: 10
+        authenticated:
+            max_instance: 150
+            max_append: 30
     security_key: 'change-this'
     model_type:
         - svm
