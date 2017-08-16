@@ -117,3 +117,31 @@ class Entity(object):
             return {'error': response_error, 'result': None}
         else:
             return {'error': None, 'result': response['result']}
+
+    def get_collection_count(self, collection, uid):
+        '''
+
+        This method is responsible for retrieving the total count of
+        collections, for a specified user.
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        '''
+
+        # select dataset
+        self.sql.connect(self.db_ml)
+        sql_statement = 'SELECT count(collection) '\
+            'FROM tbl_dataset_entity '\
+            'WHERE uid_created=%s'
+        args = (uid)
+        response = self.sql.execute('select', sql_statement, args)
+
+        # retrieve any error(s)
+        response_error = self.sql.get_errors()
+
+        # return result
+        if response_error:
+            return {'error': response_error, 'result': None}
+        else:
+            return {'error': None, 'result': response['result']}
