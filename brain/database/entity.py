@@ -118,7 +118,7 @@ class Entity(object):
         else:
             return {'error': None, 'result': response['result']}
 
-    def get_collection_count(self, collection, uid):
+    def get_collection_count(self, uid):
         '''
 
         This method is responsible for retrieving the total count of
