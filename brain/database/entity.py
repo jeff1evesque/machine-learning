@@ -118,7 +118,7 @@ class Entity(object):
         else:
             return {'error': None, 'result': response['result']}
 
-    def get_entity_count(self, uid):
+    def get_collection_count(self, uid):
         '''
 
         This method is responsible for retrieving the total entity count, for
@@ -131,9 +131,12 @@ class Entity(object):
 
         # select entity
         self.sql.connect(self.db_ml)
-        sql_statement = 'SELECT count(collection) '\
+        sql_statement = 'SELECT COUNT(*) '\
+            'FROM( '\
+            'SELECT collection '\
             'FROM tbl_dataset_entity '\
-            'WHERE uid_created=%s'
+            'WHERE uid_created=%s'\
+            ')'
         args = (uid)
         response = self.sql.execute('select', sql_statement, args)
 
