@@ -118,24 +118,52 @@ class Entity(object):
         else:
             return {'error': None, 'result': response['result']}
 
-    def get_collection_count(self, uid):
+    def get_entity_count(self, uid):
         '''
 
-        This method is responsible for retrieving the total count of
-        collections, for a specified user.
+        This method is responsible for retrieving the total entity count, for
+        specified user.
 
         @sql_statement, is a sql format string, and not a python string.
             Therefore, '%s' is used for argument substitution.
 
         '''
 
-        # select dataset
+        # select entity
         self.sql.connect(self.db_ml)
         sql_statement = 'SELECT count(collection) '\
             'FROM tbl_dataset_entity '\
             'WHERE uid_created=%s'
         args = (uid)
         response = self.sql.execute('select', sql_statement, args)
+
+        # retrieve any error(s)
+        response_error = self.sql.get_errors()
+
+        # return result
+        if response_error:
+            return {'error': response_error, 'result': None}
+        else:
+            return {'error': None, 'result': response['result']}
+
+    def remove_entity(self, uid, collection):
+        '''
+
+        This method is responsible deleting an entity, with respect to a
+        defined uid, and collection.
+
+        @sql_statement, is a sql format string, and not a python string.
+            Therefore, '%s' is used for argument substitution.
+
+        '''
+
+        # delete entity
+        self.sql.connect(self.db_ml)
+        sql_statement = 'Delete'\
+            'FROM tbl_dataset_entity '\
+            'WHERE (uid_created=%s AND collection=%s)'
+        args = (uid, collection)
+        response = self.sql.execute('delete', sql_statement, args)
 
         # retrieve any error(s)
         response_error = self.sql.get_errors()
