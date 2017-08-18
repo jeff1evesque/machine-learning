@@ -47,6 +47,7 @@ class Collection(object):
             - map_reduce
             - delete_one
             - delete_many
+            - count_documents
             - drop_collection
 
         '''
@@ -54,31 +55,6 @@ class Collection(object):
         # insert / update dataset value(s)
         self.nosql.connect(collection)
         response = self.nosql.execute(operation, payload)
-
-        # retrieve any error(s)
-        response_error = self.nosql.get_errors()
-
-        # return result
-        if response_error:
-            return {
-                'status': False,
-                'result': response['result'],
-                'error': response_error
-            }
-        else:
-            return {'status': True, 'result': response['result'], 'error': None}
-
-    def remove_collection(self, collection):
-        '''
-
-        This method is responsible for retrieving the total collection count,
-        for a specified user.
-
-        '''
-
-        # insert / update dataset value(s)
-        self.nosql.connect()
-        response = self.nosql.execute('drop_collection', collection)
 
         # retrieve any error(s)
         response_error = self.nosql.get_errors()
