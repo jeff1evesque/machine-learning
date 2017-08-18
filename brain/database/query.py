@@ -161,6 +161,8 @@ class NoSQL(object):
                     result = self.collection.delete_one(payload)
                 elif operation == 'delete_many':
                     result = self.collection.delete_many(payload)
+                elif operation == 'count_documents':
+                    result = self.collection.find(payload).count()
                 elif operation == 'drop_collection':
                     result = self.database.drop_collection(payload)
 
