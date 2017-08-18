@@ -83,17 +83,17 @@ class BaseData(Base):
 
         '''
 
+        # local variables
+        collection_count = entity.get_collection_count(self.uid)
+
         # enfore entity limit: for anonymous users
         entity = Entity()
-        if (
-            entity.get_collection_count(self.uid)>=self.max_collection and
-            !self.uid
-        ):
+        if (collection_count >= self.max_collection and not self.uid):
             collections = entity.get_collections(self.uid)
             entity.remove_entity(collections[0][0])
 
         # save entity description
-        if entity.get_collection_count(self.uid) < self.max_collection:
+        if collection_count < self.max_collection:
             response = save_info(self.premodel_data, session_type, self.uid)
 
             # return result

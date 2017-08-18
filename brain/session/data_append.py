@@ -62,6 +62,8 @@ class DataAppend(BaseData):
 
         # local variables
         cursor = Collection()
+        collection = self.premodel_data['properties']['collection']
+        collection_adjusted = collection.lower().replace(' ', '_')
         document_count = cursor.query(collection_adjusted, 'count_documents')
 
         premodel_settings = self.premodel_data['properties']
