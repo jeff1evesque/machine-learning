@@ -21,11 +21,11 @@
 application:
     dataset:
         anonymous:
-            max_instance: 50
-            max_append: 10
+            max_collection: 50
+            max_document: 10
         authenticated:
-            max_instance: 150
-            max_append: 30
+            max_collection: 150
+            max_documnet: 30
     security_key: 'change-this'
     model_type:
         - svm
