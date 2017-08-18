@@ -15,6 +15,7 @@ from flask import current_app, session
 from brain.session.data.arbiter import save_info
 from brain.session.data.dataset import dataset2dict
 from brain.database.dataset import Collection
+from brain.database.entity import Entity
 
 
 class BaseData(Base):
@@ -51,8 +52,13 @@ class BaseData(Base):
 
         if 'uid' in session:
             self.uid = session['uid']
+            self.max_collection = current_app.config.get('MAXCOL_AUTH')
+            self.max_document = current_app.config.get('MAXDOC_AUTH')
+
         else:
             self.uid = current_app.config.get('USER_ID')
+            self.max_collection = current_app.config.get('MAXCOL_ANON')
+            self.max_document = current_app.config.get('MAXDOC_ANON')
 
     def validate_id(self, session_id):
         '''
@@ -77,6 +83,12 @@ class BaseData(Base):
 
         '''
 
+        # enfore entity limit
+        entity = Entity()
+        if entity.get_collection_count(self.uid) >= self.max_collection:
+            collections = entity.get_collections(self.uid)
+            entity.remove_entity(collections[0][0])
+
         # save entity description
         response = save_info(self.premodel_data, session_type, self.uid)
 
@@ -95,17 +107,29 @@ class BaseData(Base):
 
         '''
 
-        # save dataset
+        # local variables
+        entity = Entity()
+        cursor = Collection()
         collection = self.premodel_data['properties']['collection']
         collection_adjusted = collection.lower().replace(' ', '_')
-        cursor = Collection()
-        document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}
+        collection_count = entity.get_collection_count(self.uid)
+        document_count = cursor.query(collection_adjusted, 'count_documents')
 
-        response = cursor.query(
-            collection_adjusted,
-            'insert_one',
-            document
-        )
+        # enfore collection limit
+        if collection_count >= self.max_collection:
+            cursor.query(collection_adjusted, 'drop_collection')
+
+        # save dataset
+        if document_count < self.max_document:
+            document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}
+            response = cursor.query(
+                collection_adjusted,
+                'insert_one',
+                document
+            )
+
+        else:
+            response = None
 
         # return result
         if response and response['error']:
