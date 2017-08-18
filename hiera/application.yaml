@@ -25,7 +25,7 @@ application:
             max_document: 10
         authenticated:
             max_collection: 150
-            max_documnet: 30
+            max_document: 30
     security_key: 'change-this'
     model_type:
         - svm
