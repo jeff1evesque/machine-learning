@@ -83,21 +83,29 @@ class BaseData(Base):
 
         '''
 
-        # enfore entity limit
+        # enfore entity limit: for anonymous users
         entity = Entity()
-        if entity.get_collection_count(self.uid) >= self.max_collection:
+        if (
+            entity.get_collection_count(self.uid) >= self.max_collection and
+            !self.uid
+        ):
             collections = entity.get_collections(self.uid)
             entity.remove_entity(collections[0][0])
 
         # save entity description
-        response = save_info(self.premodel_data, session_type, self.uid)
+        if entity.get_collection_count(self.uid) < self.max_collection:
+            response = save_info(self.premodel_data, session_type, self.uid)
 
-        # return result
-        if response['error']:
-            self.list_error.append(response['error'])
-            return {'status': False, 'id': None, 'error': response['error']}
+            # return result
+            if response['error']:
+                self.list_error.append(response['error'])
+                return {'status': False, 'id': None, 'error': response['error']}
+
+            else:
+                return {'status': True, 'id': response['id'], 'error': None}
+
         else:
-            return {'status': True, 'id': response['id'], 'error': None}
+            return {'status': True, 'id': None, 'error': None}
 
     def save_premodel_dataset(self):
         '''
@@ -115,8 +123,8 @@ class BaseData(Base):
         collection_count = entity.get_collection_count(self.uid)
         document_count = cursor.query(collection_adjusted, 'count_documents')
 
-        # enfore collection limit
-        if collection_count >= self.max_collection:
+        # enfore collection limit for anonymous users
+        if (collection_count >= self.max_collection and !self.uid):
             cursor.query(collection_adjusted, 'drop_collection')
 
         # save dataset
