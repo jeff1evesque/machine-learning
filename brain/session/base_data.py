@@ -86,7 +86,7 @@ class BaseData(Base):
         # enfore entity limit: for anonymous users
         entity = Entity()
         if (
-            entity.get_collection_count(self.uid) >= self.max_collection and
+            entity.get_collection_count(self.uid)>=self.max_collection and
             !self.uid
         ):
             collections = entity.get_collections(self.uid)
@@ -100,7 +100,6 @@ class BaseData(Base):
             if response['error']:
                 self.list_error.append(response['error'])
                 return {'status': False, 'id': None, 'error': response['error']}
-
             else:
                 return {'status': True, 'id': response['id'], 'error': None}
 

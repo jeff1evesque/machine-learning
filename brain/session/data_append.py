@@ -12,6 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 '''
 
 from flask import current_app, session
+from brain.database.dataset import Collection
 from brain.session.base_data import BaseData
 from brain.database.entity import Entity
 
