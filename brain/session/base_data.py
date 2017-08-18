@@ -84,11 +84,11 @@ class BaseData(Base):
         '''
 
         # local variables
+        entity = Entity()
         collection_count = entity.get_collection_count(self.uid)
 
         # enfore entity limit: for anonymous users
-        entity = Entity()
-        if (collection_count >= self.max_collection and not self.uid):
+        if (not self.uid and collection_count >= self.max_collection):
             collections = entity.get_collections(self.uid)
             entity.remove_entity(collections[0][0])
 
@@ -123,7 +123,7 @@ class BaseData(Base):
         document_count = cursor.query(collection_adjusted, 'count_documents')
 
         # enfore collection limit for anonymous users
-        if (collection_count >= self.max_collection and !self.uid):
+        if (not self.uid and collection_count >= self.max_collection):
             cursor.query(collection_adjusted, 'drop_collection')
 
         # save dataset
