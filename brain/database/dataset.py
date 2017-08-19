@@ -52,9 +52,13 @@ class Collection(object):
 
         '''
 
-        # insert / update dataset value(s)
-        self.nosql.connect(collection)
-        response = self.nosql.execute(operation, payload)
+        # execute query
+        if operation == 'drop_collection':
+            self.nosql.connect()
+            response = self.nosql.execute(operation, collection)
+        else:
+            self.nosql.connect(collection)
+            response = self.nosql.execute(operation, payload)
 
         # retrieve any error(s)
         response_error = self.nosql.get_errors()
