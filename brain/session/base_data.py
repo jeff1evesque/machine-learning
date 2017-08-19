@@ -123,7 +123,11 @@ class BaseData(Base):
         document_count = cursor.query(collection_adjusted, 'count_documents')
 
         # enfore collection limit for anonymous users
-        if (not self.uid and collection_count >= self.max_collection):
+        if (
+            not self.uid and
+            collection_count >= self.max_collection and
+            collection_adjusted
+        ):
             cursor.query(collection_adjusted, 'drop_collection')
 
         # save dataset
