@@ -89,7 +89,7 @@ def test_max_collections_anon(client, live_server):
         res = client.post(
             get_endpoint(),
             headers={'Content-Type': 'application/json'},
-            data=dataset
+            data=json.dumps(dataset)
         )
 
         # assertion checks
@@ -103,7 +103,7 @@ def test_max_collections_anon(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=dataset
+        data=json.dumps(dataset)
     )
 
     # assertion checks
@@ -152,7 +152,7 @@ def test_max_collections_auth(client, live_server):
         res = client.post(
             get_endpoint(),
             headers={'Content-Type': 'application/json'},
-            data=dataset
+            data=json.dumps(dataset)
         )
 
         # assertion checks
