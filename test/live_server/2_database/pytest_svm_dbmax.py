@@ -111,7 +111,7 @@ def test_max_collections_anon(client, live_server):
     # assertion checks
     assert res.status_code == 200
     assert res.json['status'] == 0
-    assert entity.get_collection_count(0) == max_collection
+    assert entity.get_collection_count(0)['result'] == max_collection
     assert collection.query('collection--pytest-svm--' + str(i + 1), 'find_one')
 
     # drop all collections
@@ -174,7 +174,7 @@ def test_max_collections_auth(client, live_server):
     # assertion checks
     assert res.status_code == 200
     assert res.json['status'] == 0
-    assert entity.get_collection_count(1) == max_collection
+    assert entity.get_collection_count(1)['result'] == max_collection
     assert collection.query('collection--pytest-svm--' + str(i), 'find_one')
     assert not collection.query('collection--pytest-svm--' + str(i + 1), 'find_one')
 
