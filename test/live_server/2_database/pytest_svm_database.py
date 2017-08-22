@@ -27,6 +27,7 @@ import json
 import os.path
 from flask import current_app, url_for
 from brain.database.entity import Entity
+from brain.database.dataset import import Collection
 
 
 def get_sample_json(jsonfile, model_type):
@@ -78,6 +79,8 @@ def test_max_collections_anon(client, live_server):
     live_server.start()
 
     # local variables
+    entity = Entity()
+    collection = Collection()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
     # save max collection
@@ -108,7 +111,13 @@ def test_max_collections_anon(client, live_server):
     # assertion checks
     assert res.status_code == 200
     assert res.json['status'] == 0
-    assert Entity().get_collection_count(0) == max_collection
+    assert entity.get_collection_count(0) == max_collection
+    assert collection.query('collection--pytest-' + str(i +1), 'find_one')
+
+    # drop all collections
+    for i in range(max_collection):
+        assert entity.remove_entity(0, 'collection--pytest-' + str(i + 1))
+        assert collection.query('collection--pytest-' + str(i +1), 'drop_collection')
 
 
     def test_max_collections_auth(client, live_server):
