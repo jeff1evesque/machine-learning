@@ -112,15 +112,18 @@ def test_max_collections_anon(client, live_server):
     assert res.status_code == 200
     assert res.json['status'] == 0
     assert entity.get_collection_count(0) == max_collection
-    assert collection.query('collection--pytest-' + str(i +1), 'find_one')
+    assert collection.query('collection--pytest-' + str(i +1 ), 'find_one')
 
     # drop all collections
     for i in range(max_collection):
         assert entity.remove_entity(0, 'collection--pytest-' + str(i + 1))
-        assert collection.query('collection--pytest-' + str(i +1), 'drop_collection')
+        assert collection.query(
+            'collection--pytest-' + str(i + 1),
+            'drop_collection'
+        )
 
 
-    def test_max_collections_auth(client, live_server):
+def test_max_collections_auth(client, live_server):
     '''
 
     This method will test when an authenticated user, has exceeded the maximum
@@ -133,4 +136,43 @@ def test_max_collections_anon(client, live_server):
     '''
 
     live_server.start()
+
+    # local variables
+    entity = Entity()
+    collection = Collection()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
+
+    # save max collection
+    for i in range(max_collection):
+        dataset = get_sample_json('svm-data-new.json', 'svm')
+        dataset['properties']['collection'] = 'collection--pytest-' + str(i)
+
+        res = client.post(
+            get_endpoint(),
+            headers={'Content-Type': 'application/json'},
+            data=dataset
+        )
+
+        # assertion checks
+        assert res.status_code == 200
+        assert res.json['status'] == 0
+
+    # save max collection + 1
+    dataset = get_sample_json('svm-data-new.json', 'svm')
+    dataset['properties']['collection'] = 'collection--pytest-' + str(i + 1)
+
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+    assert entity.get_collection_count(0) == max_collection
+    assert collection.query('collection--pytest-' + str(i), 'find_one')
+    assert not collection.query('collection--pytest-' + str(i + 1), 'find_one')
+
+    # drop all collections
+    for i in range(max_collection):
+        assert entity.remove_entity(1, 'collection--pytest-' + str(i + 1))
+        assert collection.query(
+            'collection--pytest-' + str(i + 1),
+            'drop_collection'
+        )
 
