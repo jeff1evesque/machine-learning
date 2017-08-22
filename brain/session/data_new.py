@@ -96,6 +96,9 @@ class DataNew(BaseData):
             db_save = Entity(premodel_entity, session_type)
             db_return = db_save.save()
 
+        # DEBUG
+        raise Exception('db_return: ' + str(db_return) + ' collection: ' + str(collection) + ' collection_adjusted: ' + str(collection_adjusted) + ' collection_count: ' + str(collection_count) + ' document_count ' + str(document_count))
+
         # return
         if db_return and db_return['status']:
             return {'status': True, 'error': None, 'id': db_return['id']}
