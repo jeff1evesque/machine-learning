@@ -57,7 +57,9 @@ def get_sample_json(jsonfile, model_type):
         ),
         'r'
     ) as json_file:
-        return json.load(json_file)
+        json_dataset = json.load(json_file)
+
+    return json_dataset
 
 
 def test_max_collections_anon(client, live_server):

@@ -161,7 +161,7 @@ class Entity(object):
         # select entity
         self.sql.connect(self.db_ml)
         sql_statement = 'SELECT COUNT(*) '\
-            'FROM( '\
+            'FROM('\
             'SELECT collection '\
             'FROM tbl_dataset_entity '\
             'WHERE uid_created=%s'\
