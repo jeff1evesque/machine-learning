@@ -27,7 +27,7 @@ import json
 import os.path
 from flask import current_app, url_for
 from brain.database.entity import Entity
-from brain.database.dataset import import Collection
+from brain.database.dataset import Collection
 
 
 def get_sample_json(jsonfile, model_type):
