@@ -176,7 +176,10 @@ def test_max_collections_auth(client, live_server):
     assert res.json['status'] == 0
     assert entity.get_collection_count(1) == max_collection
     assert collection.query('collection--pytest-svr--' + str(i), 'find_one')
-    assert not collection.query('collection--pytest-svr--' + str(i + 1), 'find_one')
+    assert not collection.query(
+        'collection--pytest-svr--' + str(i + 1),
+        'find_one'
+    )
 
     # drop all collections
     for i in range(max_collection):
