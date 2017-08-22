@@ -13,6 +13,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from brain.session.base_data import BaseData
 from brain.database.entity import Entity
+from brain.database.dataset import Collection
 
 
 class DataNew(BaseData):

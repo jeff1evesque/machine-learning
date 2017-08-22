@@ -62,6 +62,7 @@ class DataAppend(BaseData):
 
         # local variables
         db_return = None
+        entity = Entity()
         cursor = Collection()
         premodel_settings = self.premodel_data['properties']
         collection = premodel_settings['collection']

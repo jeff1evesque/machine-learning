@@ -132,9 +132,9 @@ class BaseData(Base):
 
         # save dataset
         if (
-           collection_adjusted and
-           collection_count < self.max_collection and
-           document_count < self.max_document
+            collection_adjusted and
+            collection_count < self.max_collection and
+            document_count < self.max_document
         ):
             document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}
             response = cursor.query(
