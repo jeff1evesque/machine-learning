@@ -163,6 +163,12 @@ def test_max_collections_auth(client, live_server):
     dataset = get_sample_json('svr-data-new.json', 'svr')
     dataset['properties']['collection'] = 'collection--pytest-svr--' + str(i + 1)
 
+    res = client.post(
+        get_endpoint(),
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps(dataset)
+    )
+
     # assertion checks
     assert res.status_code == 200
     assert res.json['status'] == 0
