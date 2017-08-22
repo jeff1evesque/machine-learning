@@ -175,4 +175,3 @@ def test_max_collections_auth(client, live_server):
             'collection--pytest-' + str(i + 1),
             'drop_collection'
         )
-
