@@ -165,7 +165,7 @@ class Entity(object):
             'SELECT collection '\
             'FROM tbl_dataset_entity '\
             'WHERE uid_created=%s'\
-            ')'
+            ') AS c'
         args = (uid)
         response = self.sql.execute('select', sql_statement, args)
 
