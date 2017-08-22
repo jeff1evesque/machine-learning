@@ -86,7 +86,7 @@ def test_max_collections_anon(client, live_server):
     # save max collection
     for i in range(max_collection):
         dataset = get_sample_json('svm-data-new.json', 'svm')
-        dataset['properties']['collection'] = 'collection--pytest-' + str(i)
+        dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i)
 
         res = client.post(
             get_endpoint(),
@@ -112,13 +112,13 @@ def test_max_collections_anon(client, live_server):
     assert res.status_code == 200
     assert res.json['status'] == 0
     assert entity.get_collection_count(0) == max_collection
-    assert collection.query('collection--pytest-' + str(i + 1), 'find_one')
+    assert collection.query('collection--pytest-svm--' + str(i + 1), 'find_one')
 
     # drop all collections
     for i in range(max_collection):
         assert entity.remove_entity(0, 'collection--pytest-svm--' + str(i + 1))
         assert collection.query(
-            'collection--pytest-' + str(i + 1),
+            'collection--pytest-svm--' + str(i + 1),
             'drop_collection'
         )
 
@@ -169,13 +169,13 @@ def test_max_collections_auth(client, live_server):
     assert res.status_code == 200
     assert res.json['status'] == 0
     assert entity.get_collection_count(1) == max_collection
-    assert collection.query('collection--pytest-' + str(i), 'find_one')
+    assert collection.query('collection--pytest-svm--' + str(i), 'find_one')
     assert not collection.query('collection--pytest-svm--' + str(i + 1), 'find_one')
 
     # drop all collections
     for i in range(max_collection):
         assert entity.remove_entity(1, 'collection--pytest-svm--' + str(i + 1))
         assert collection.query(
-            'collection--pytest-' + str(i + 1),
+            'collection--pytest-svm--' + str(i + 1),
             'drop_collection'
         )
