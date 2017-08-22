@@ -26,6 +26,7 @@ Note: the 'pytest' instances can further be reviewed:
 import json
 import os.path
 from flask import current_app, url_for
+from brain.database.entity import Entity
 
 
 def get_sample_json(jsonfile, model_type):
@@ -58,3 +59,69 @@ def get_sample_json(jsonfile, model_type):
         json_dataset = json.load(json_file)
 
     return json.dumps(json_dataset)
+
+
+def test_max_collections_anon(client, live_server):
+    '''
+
+    This method will test when an anonymous user, has exceeded the maximum
+    allowed collection. In such a case, the oldest collection will be removed,
+    to allow the proposed collection to be stored in the corresponding
+    database(s).
+
+    '''
+
+    @live_server.app.route('/load-data')
+    def get_endpoint():
+        return url_for('name.load_data', _external=True)
+
+    live_server.start()
+
+    # local variables
+    max_collection = current_app.config.get('MAXCOL_ANON')
+
+    # save max collection
+    for i in range(max_collection):
+        dataset = get_sample_json('svm-data-new.json', 'svm')
+        dataset['properties']['collection'] = 'collection--pytest-' + str(i)
+
+        res = client.post(
+            get_endpoint(),
+            headers={'Content-Type': 'application/json'},
+            data=dataset
+        )
+
+        # assertion checks
+        assert res.status_code == 200
+        assert res.json['status'] == 0
+
+    # save max collection + 1
+    dataset = get_sample_json('svm-data-new.json', 'svm')
+    dataset['properties']['collection'] = 'collection--pytest-' + str(i + 1)
+
+    res = client.post(
+        get_endpoint(),
+        headers={'Content-Type': 'application/json'},
+        data=dataset
+    )
+
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+    assert Entity().get_collection_count(0) == max_collection
+
+
+    def test_max_collections_auth(client, live_server):
+    '''
+
+    This method will test when an authenticated user, has exceeded the maximum
+    allowed collection. In such a case, the proposed collection will not to be
+    stored in the corresponding database(s). Instead, the authenticated user,
+    will need to manually delete a chosen collection, using constructs of the
+    corresponding web-interface, or exposed programmatic-api, to allow the
+    proposed collection to be stored in the corresponding database(s).
+
+    '''
+
+    live_server.start()
+
