@@ -67,8 +67,11 @@ class DataAppend(BaseData):
         premodel_settings = self.premodel_data['properties']
         collection = premodel_settings['collection']
         collection_adjusted = collection.lower().replace(' ', '_')
-        collection_count = entity.get_collection_count(self.uid)
-        document_count = cursor.query(collection_adjusted, 'count_documents')
+        collection_count = entity.get_collection_count(self.uid)['result']
+        document_count = cursor.query(
+            collection_adjusted,
+            'count_documents'
+        )['result']
 
         # define entity properties
         premodel_entity = {

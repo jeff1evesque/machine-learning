@@ -65,8 +65,11 @@ class DataNew(BaseData):
         premodel_settings = self.premodel_data['properties']
         collection = premodel_settings['collection']
         collection_adjusted = collection.lower().replace(' ', '_')
-        collection_count = entity.get_collection_count(self.uid)
-        document_count = cursor.query(collection_adjusted, 'count_documents')
+        collection_count = entity.get_collection_count(self.uid)['result']
+        document_count = cursor.query(
+            collection_adjusted,
+            'count_documents'
+        )['result']
 
         # assign numerical representation
         numeric_model_type = self.list_model_type.index(self.model_type) + 1
@@ -95,9 +98,6 @@ class DataNew(BaseData):
         ):
             db_save = Entity(premodel_entity, session_type)
             db_return = db_save.save()
-
-        # DEBUG
-        raise Exception('db_return: ' + str(db_return) + ' collection: ' + str(collection) + ' collection_adjusted: ' + str(collection_adjusted) + ' collection_count: ' + str(collection_count) + ' document_count ' + str(document_count))
 
         # return
         if db_return and db_return['status']:
