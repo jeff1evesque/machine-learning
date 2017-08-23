@@ -127,7 +127,7 @@ def test_max_collections_anon(client, live_server):
         'find_one'
     )['result']
 
-    # drop all collections
+    # drop all collections and related entities
     for i in range(max_collection):
         assert entity.remove_entity(0, 'collection--pytest-svr--' + str(i))
         assert collection.query(
@@ -207,7 +207,7 @@ def test_max_collections_auth(client, live_server):
         'find_one'
     )['result']
 
-    # drop all collections
+    # drop all collections and related entities
     for i in range(max_collection):
         assert entity.remove_entity(1, 'collection--pytest-svr--' + str(i))
         assert collection.query(
