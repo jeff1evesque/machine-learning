@@ -82,6 +82,7 @@ def test_max_collections_anon(client, live_server):
     entity = Entity()
     collection = Collection()
     max_collection = current_app.config.get('MAXCOL_ANON')
+    max_document = current_app.config.get('MAXDOC_ANON')
 
     # save max collection
     for i in range(max_collection):
@@ -162,6 +163,7 @@ def test_max_collections_auth(client, live_server):
     entity = Entity()
     collection = Collection()
     max_collection = current_app.config.get('MAXCOL_AUTH')
+    max_document = current_app.config.get('MAXDOC_AUTH')
 
     # save max collection
     for i in range(max_collection):
