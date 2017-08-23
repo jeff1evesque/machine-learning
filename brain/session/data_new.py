@@ -100,9 +100,12 @@ class DataNew(BaseData):
             db_return = db_save.save()
 
         # return
-        if db_return and db_return['status']:
+        if db_return and db_return['error']:
+            self.list_error.append(db_return['error'])
+            return {'status': False, 'error': self.list_error}
+
+        elif db_return and db_return['status']:
             return {'status': True, 'error': None, 'id': db_return['id']}
 
         else:
-            self.list_error.append(db_return['error'])
-            return {'status': False, 'error': self.list_error}
+            return {'status': True, 'error': 'Entity was not saved', 'id': None}
