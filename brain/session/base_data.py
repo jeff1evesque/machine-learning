@@ -90,7 +90,7 @@ class BaseData(Base):
         # enfore entity limit: for anonymous users
         if (not self.uid and collection_count >= self.max_collection):
             collections = entity.get_collections(self.uid)
-            entity.remove_entity(collections[0][0])
+            entity.remove_entity(collections)
 
         # save entity description
         if collection_count < self.max_collection:
