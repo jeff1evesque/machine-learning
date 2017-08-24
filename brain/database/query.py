@@ -129,6 +129,7 @@ class NoSQL(object):
 
         '''
 
+        result = None
         if self.proceed:
             try:
                 if operation == 'aggregate':
@@ -146,9 +147,11 @@ class NoSQL(object):
                 elif operation == 'delete_many':
                     result = self.collection.delete_many(payload)
                 elif operation == 'find':
-                    result = self.collection.find(payload)
-                elif operation == 'find_one':
-                    result = self.collection.find_one(payload)
+                    if payload:
+                        result = self.collection.find(payload)
+                    else:
+                        result = self.collection.find()
+                    raise Exception('result: ' + str(result) + ' result.count(): ' + str(result.count()) + ' payload: ' + str(payload))
                 elif operation == 'map_reduce':
                     result = self.collection.map_reduce(
                         payload['map'],
@@ -162,7 +165,10 @@ class NoSQL(object):
                 elif operation == 'delete_many':
                     result = self.collection.delete_many(payload)
                 elif operation == 'count_documents':
-                    result = self.collection.find(payload).count()
+                    if payload:
+                        result = self.collection.find(payload).count()
+                    else:
+                        result = self.collection.find().count()
                 elif operation == 'drop_collection':
                     result = self.database.drop_collection(payload)
 
@@ -175,7 +181,10 @@ class NoSQL(object):
                     'error': self.list_error,
                 }
 
-            return {'status': True, 'result': result, 'error': None}
+            if result:
+                return {'status': True, 'result': result, 'error': None}
+            else:
+                return {'status': False, 'result': None, 'error': None}
 
     def disconnect(self):
         '''

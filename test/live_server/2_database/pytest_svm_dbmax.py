@@ -3,7 +3,7 @@
 This file will test specific database limitations. More generally, it will test
 conditions when a user chooses to store a new collection of documents, or when
 users elect to append additional documents, into a preexisting collection. The
-following svm cases for both anonymous and, authenticated users will be tested:
+following svm cases for both anonymous, and authenticated users will be tested:
 
   - users have exceeded maximum collections
     - anon: oldest collection will be removed, from corresponding database(s),
@@ -100,8 +100,8 @@ def test_max_collections_anon(client, live_server):
         assert res.json['status'] == 0
         assert collection.query(
             'collection--pytest-svm--' + str(i),
-            'find_one'
-        )['result']
+            'find'
+        )['result'].count() > 0
         assert entity.get_collection_count(0)['result'] == i
 
     # save max collection + 1
@@ -118,15 +118,18 @@ def test_max_collections_anon(client, live_server):
     assert res.status_code == 200
     assert res.json['status'] == 0
     assert entity.get_collection_count(0)['result'] == max_collection
-    assert collection.query('count_documents')['result'] < max_document
     assert collection.query(
         'collection--pytest-svm--' + str(i),
-        'find_one'
-    )['result']
+        'find'
+    )['result'].count() < max_document
+    assert collection.query(
+        'collection--pytest-svm--' + str(i),
+        'find'
+    )['result'].count() > 0
     assert not collection.query(
         'collection--pytest-svm--' + str(i + 1),
-        'find_one'
-    )['result']
+        'find'
+    )['result'].count() == 0
 
     # drop all collections and related entities
     for i in range(max_collection):
@@ -135,10 +138,10 @@ def test_max_collections_anon(client, live_server):
             'collection--pytest-svm--' + str(i),
             'drop_collection'
         )
-        assert not collection.query(
+        assert collection.query(
             'collection--pytest-svm--' + str(i),
-            'find_one'
-        )['result']
+            'find'
+        )['result'].count() == 0
 
 
 def test_max_collections_auth(client, live_server):
@@ -181,8 +184,8 @@ def test_max_collections_auth(client, live_server):
         assert res.json['status'] == 0
         assert collection.query(
             'collection--pytest-svm--' + str(i),
-            'find_one'
-        )['result']
+            'find'
+        )['result'].count() > 0
         assert entity.get_collection_count(0)['result'] == i
 
     # save max collection + 1
@@ -199,15 +202,18 @@ def test_max_collections_auth(client, live_server):
     assert res.status_code == 200
     assert res.json['status'] == 0
     assert entity.get_collection_count(1)['result'] == max_collection
-    assert collection.query('count_documents')['result'] < max_document
     assert collection.query(
         'collection--pytest-svm--' + str(i),
-        'find_one'
-    )['result']
-    assert not collection.query(
+        'find'
+    )['result'].count < max_document
+    assert collection.query(
+        'collection--pytest-svm--' + str(i),
+        'find'
+    )['result'].count() > 0
+    assert collection.query(
         'collection--pytest-svm--' + str(i + 1),
-        'find_one'
-    )['result']
+        'find'
+    )['result'].count() == 0
 
     # drop all collections and related entities
     for i in range(max_collection):
@@ -216,10 +222,10 @@ def test_max_collections_auth(client, live_server):
             'collection--pytest-svm--' + str(i),
             'drop_collection'
         )
-        assert not collection.query(
+        assert collection.query(
             'collection--pytest-svm--' + str(i),
-            'find_one'
-        )['result']
+            'find'
+        )['result'].count() == 0
 
     # assertion checks
     assert entity.get_collection_count(1)['result'] == 0

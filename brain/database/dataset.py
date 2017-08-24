@@ -43,7 +43,6 @@ class Collection(object):
             - update_one
             - update_many
             - find
-            - find_one
             - map_reduce
             - delete_one
             - delete_many
