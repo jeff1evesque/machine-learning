@@ -151,7 +151,6 @@ class NoSQL(object):
                         result = self.collection.find(payload)
                     else:
                         result = self.collection.find()
-                    raise Exception('result: ' + str(result) + ' result.count(): ' + str(result.count()) + ' payload: ' + str(payload))
                 elif operation == 'map_reduce':
                     result = self.collection.map_reduce(
                         payload['map'],

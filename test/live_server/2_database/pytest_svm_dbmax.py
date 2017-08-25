@@ -26,8 +26,6 @@ Note: the 'pytest' instances can further be reviewed:
 import json
 import os.path
 from flask import current_app, url_for
-from brain.database.entity import Entity
-from brain.database.dataset import Collection
 
 
 def get_sample_json(jsonfile, model_type):
@@ -73,12 +71,25 @@ def test_max_collections_anon(client, live_server):
     '''
 
     @live_server.app.route('/load-data')
-    def get_endpoint():
+    def load_data():
         return url_for('name.load_data', _external=True)
+
+    @live_server.app.route('/collection-count')
+    def collection_count():
+        return url_for('name.collection_count', _external=True)
+
+    @live_server.app.route('/document-count')
+    def document_count():
+        return url_for('name.document_count', _external=True)
+
+    @live_server.app.route('/remove-collection')
+    def remove_collection():
+        return url_for('name.remove_collection', _external=True)
 
     live_server.start()
 
     # local variables
+    uid = 0
     entity = Entity()
     collection = Collection()
     max_collection = current_app.config.get('MAXCOL_ANON')
@@ -90,7 +101,7 @@ def test_max_collections_anon(client, live_server):
         dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i)
 
         res = client.post(
-            get_endpoint(),
+            load_data(),
             headers={'Content-Type': 'application/json'},
             data=json.dumps(dataset)
         )
@@ -98,50 +109,128 @@ def test_max_collections_anon(client, live_server):
         # assertion checks
         assert res.status_code == 200
         assert res.json['status'] == 0
-        assert collection.query(
-            'collection--pytest-svm--' + str(i),
-            'find'
-        )['result'].count() > 0
-        assert entity.get_collection_count(0)['result'] == i
+
+        res = client.post(
+            document_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'type': 'collection',
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
+        )
+
+        assert res.status_code == 200
+        assert res.json['count'] == i + 1
+
+        res = client.post(
+            document_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'uid': uid,
+                'type': 'entity',
+            })
+        )
+
+        assert res.status_code == 200
+        assert res['count'] == i + 1
 
     # save max collection + 1
     dataset = get_sample_json('svm-data-new.json', 'svm')
     dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i + 1)
 
     res = client.post(
-        get_endpoint(),
+        load_data(),
         headers={'Content-Type': 'application/json'},
         data=json.dumps(dataset)
     )
 
-    # assertion checks
     assert res.status_code == 200
     assert res.json['status'] == 0
-    assert entity.get_collection_count(0)['result'] == max_collection
-    assert collection.query(
-        'collection--pytest-svm--' + str(i),
-        'find'
-    )['result'].count() < max_document
-    assert collection.query(
-        'collection--pytest-svm--' + str(i),
-        'find'
-    )['result'].count() > 0
-    assert not collection.query(
-        'collection--pytest-svm--' + str(i + 1),
-        'find'
-    )['result'].count() == 0
+
+    res = client.post(
+        document_count(),
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps({
+            'uid': uid,
+            'type': 'entity',
+        })
+    )
+
+    assert res.status_code == 200
+    assert res['count'] == max_collection
+
+    res = client.post(
+        document_count(),
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps({
+            'type': 'collection',
+            'collection': 'collection--pytest-svm--' + str(i),
+        })
+    )
+
+    assert res.status_code == 200
+    assert res['count'] == max_collection
+
+    res = client.post(
+        document_count(),
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps({
+            'type': 'collection',
+            'collection': 'collection--pytest-svm--' + str(i + 1),
+        })
+    )
+
+    assert res.status_code == 200
+    assert res['count'] == 0
 
     # drop all collections and related entities
     for i in range(max_collection):
-        assert entity.remove_entity(0, 'collection--pytest-svm--' + str(i))
-        assert collection.query(
-            'collection--pytest-svm--' + str(i),
-            'drop_collection'
+        res = client.post(
+            remove_document(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'type': 'collection',
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
         )
-        assert collection.query(
-            'collection--pytest-svm--' + str(i),
-            'find'
-        )['result'].count() == 0
+
+        assert res.status_code == 200
+
+        res = client.post(
+            remove_document(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'uid': uid,
+                'type': 'entity',
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
+        )
+
+        assert res.status_code == 200
+
+        res = client.post(
+            document_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'type': 'collection',
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
+        )
+
+        assert res.status_code == 200
+        assert res['count'] == 0
+
+        res = client.post(
+            collection_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'uid': uid,
+                'type': 'entity',
+            })
+        )
+
+        assert res.status_code == 200
+        assert res['count'] == 0
 
 
 def test_max_collections_auth(client, live_server):
@@ -157,12 +246,25 @@ def test_max_collections_auth(client, live_server):
     '''
 
     @live_server.app.route('/load-data')
-    def get_endpoint():
+    def load_data():
         return url_for('name.load_data', _external=True)
+
+    @live_server.app.route('/collection-count')
+    def collection_count():
+        return url_for('name.collection_count', _external=True)
+
+    @live_server.app.route('/document-count')
+    def document_count():
+        return url_for('name.document_count', _external=True)
+
+    @live_server.app.route('/remove-collection')
+    def remove_collection():
+        return url_for('name.remove_collection', _external=True)
 
     live_server.start()
 
     # local variables
+    uid = 1
     entity = Entity()
     collection = Collection()
     max_collection = current_app.config.get('MAXCOL_AUTH')
@@ -174,7 +276,7 @@ def test_max_collections_auth(client, live_server):
         dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i)
 
         res = client.post(
-            get_endpoint(),
+            load_data(),
             headers={'Content-Type': 'application/json'},
             data=json.dumps(dataset)
         )
@@ -182,50 +284,125 @@ def test_max_collections_auth(client, live_server):
         # assertion checks
         assert res.status_code == 200
         assert res.json['status'] == 0
-        assert collection.query(
-            'collection--pytest-svm--' + str(i),
-            'find'
-        )['result'].count() > 0
-        assert entity.get_collection_count(0)['result'] == i
+
+        res = client.post(
+            document_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'type': 'collection',
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
+        )
+
+        assert res.status_code == 200
+        assert res.json['count'] == i + 1
+
+        res = client.post(
+            document_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'uid': uid,
+                'type': 'entity',
+            })
+        )
+
+        assert res.status_code == 200
+        assert res['count'] == i + 1
 
     # save max collection + 1
     dataset = get_sample_json('svm-data-new.json', 'svm')
     dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i + 1)
 
     res = client.post(
-        get_endpoint(),
+        load_data(),
         headers={'Content-Type': 'application/json'},
         data=json.dumps(dataset)
     )
 
-    # assertion checks
     assert res.status_code == 200
     assert res.json['status'] == 0
-    assert entity.get_collection_count(1)['result'] == max_collection
-    assert collection.query(
-        'collection--pytest-svm--' + str(i),
-        'find'
-    )['result'].count < max_document
-    assert collection.query(
-        'collection--pytest-svm--' + str(i),
-        'find'
-    )['result'].count() > 0
-    assert collection.query(
-        'collection--pytest-svm--' + str(i + 1),
-        'find'
-    )['result'].count() == 0
+
+    res = client.post(
+        document_count(),
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps({
+            'uid': uid,
+            'type': 'entity',
+        })
+    )
+
+    assert res.status_code == 200
+    assert res['count'] == max_collection
+
+    res = client.post(
+        document_count(),
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps({
+            'type': 'collection',
+            'collection': 'collection--pytest-svm--' + str(i),
+        })
+    )
+
+    assert res.status_code == 200
+    assert res['count'] == max_collection
+
+    res = client.post(
+        document_count(),
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps({
+            'type': 'collection',
+            'collection': 'collection--pytest-svm--' + str(i + 1),
+        })
+    )
+
+    assert res.status_code == 200
+    assert res['count'] == 0
 
     # drop all collections and related entities
     for i in range(max_collection):
-        assert entity.remove_entity(1, 'collection--pytest-svm--' + str(i))
-        assert collection.query(
-            'collection--pytest-svm--' + str(i),
-            'drop_collection'
+        res = client.post(
+            remove_document(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'type': 'collection',
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
         )
-        assert collection.query(
-            'collection--pytest-svm--' + str(i),
-            'find'
-        )['result'].count() == 0
 
-    # assertion checks
-    assert entity.get_collection_count(1)['result'] == 0
+        assert res.status_code == 200
+
+        res = client.post(
+            remove_document(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'uid': uid,
+                'type': 'entity',
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
+        )
+
+        assert res.status_code == 200
+
+        res = client.post(
+            document_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'type': 'collection',
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
+        )
+
+        assert res.status_code == 200
+        assert res['count'] == 0
+
+        res = client.post(
+            collection_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'uid': uid,
+                'type': 'entity',
+            })
+        )
+
+        assert res.status_code == 200
+        assert res['count'] == 0
