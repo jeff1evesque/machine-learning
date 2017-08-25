@@ -584,6 +584,7 @@ def save_prediction():
         else:
             return json.dumps({'status': 2})
 
+
 @blueprint.route(
     '/collection-count',
     methods=['POST'],
@@ -604,7 +605,6 @@ def collection_count():
         # programmatic-interface
         if request.get_json():
             r = request.get_json()
-            type = r['type']
             uid = r['uid']
 
             count = entity.get_collection_count(uid)['result']
@@ -635,11 +635,10 @@ def document_count():
         # programmatic-interface
         if request.get_json():
             r = request.get_json()
-            type = r['type']
             collection = r['collection']
 
             count = collection.query(
-                'collection--pytest-svm--' + str(i),
+                collection,
                 'count_documents'
             )['result']
 
@@ -677,7 +676,7 @@ def remove_collection():
             if r['collection']:
                 collection = r['collection']
 
-            if r[uid]:
+            if r['uid']:
                 uid = r['uid']
 
             if (collection and type == 'collection'):
