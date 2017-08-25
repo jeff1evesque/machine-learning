@@ -173,7 +173,6 @@ def test_max_collections_anon(client, live_server):
     assert res.status_code == 200
     assert res['count'] == 0
 
-
     # drop all collections and related entities
     for i in range(max_collection):
         res = client.post(
@@ -333,7 +332,6 @@ def test_max_collections_auth(client, live_server):
 
     assert res.status_code == 200
     assert res['count'] == 0
-
 
     # drop all collections and related entities
     for i in range(max_collection):

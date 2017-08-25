@@ -635,7 +635,7 @@ def document_count():
         if request.get_json():
             r = request.get_json()
             cname = r['collection']
-            count = colname.query(cname, 'count_documents')['result']
+            count = collection.query(cname, 'count_documents')['result']
 
             if count:
                 return json.dumps({'count': count})
