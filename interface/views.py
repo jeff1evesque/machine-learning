@@ -606,7 +606,6 @@ def collection_count():
         if request.get_json():
             r = request.get_json()
             uid = r['uid']
-
             count = entity.get_collection_count(uid)['result']
 
             if count:
@@ -635,12 +634,8 @@ def document_count():
         # programmatic-interface
         if request.get_json():
             r = request.get_json()
-            collection = r['collection']
-
-            count = collection.query(
-                collection,
-                'count_documents'
-            )['result']
+            cname = r['collection']
+            count = colname.query(cname, 'count_documents')['result']
 
             if count:
                 return json.dumps({'count': count})
@@ -674,19 +669,16 @@ def remove_collection():
             type = r['type']
 
             if r['collection']:
-                collection = r['collection']
+                cname = r['collection']
 
             if r['uid']:
                 uid = r['uid']
 
-            if (collection and type == 'collection'):
-                response = collection.query(
-                    collection,
-                    'drop_collection'
-                )
+            if (cname and type == 'collection'):
+                response = collection.query(cname, 'drop_collection')
 
             elif (uid and type == 'entity'):
-                response = entity.remove_entity(uid, collection)
+                response = entity.remove_entity(uid, cname)
 
             if response:
                 return json.dumps({'response': response})
