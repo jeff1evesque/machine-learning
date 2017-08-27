@@ -147,10 +147,7 @@ class NoSQL(object):
                 elif operation == 'delete_many':
                     result = self.collection.delete_many(payload)
                 elif operation == 'find':
-                    if payload:
-                        result = self.collection.find(payload)
-                    else:
-                        result = self.collection.find()
+                    result = self.collection.find(payload)
                 elif operation == 'map_reduce':
                     result = self.collection.map_reduce(
                         payload['map'],
@@ -167,7 +164,7 @@ class NoSQL(object):
                     if payload:
                         result = self.collection.find(payload).count()
                     else:
-                        result = self.collection.find().count()
+                        result = self.collection.count()
                 elif operation == 'drop_collection':
                     result = self.database.drop_collection(payload)
 
