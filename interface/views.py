@@ -606,12 +606,12 @@ def collection_count():
         if request.get_json():
             r = request.get_json()
             uid = r['uid']
-            count = entity.get_collection_count(uid)['result']
+            count = entity.get_collection_count(uid)
 
-            if count:
-                return json.dumps({'count': count})
+            if count and count['result']:
+                return json.dumps({'count': int(count['result'])})
 
-        return json.dumps({'count': None})
+        return json.dumps({'count': -1})
 
 
 @blueprint.route(
@@ -635,12 +635,12 @@ def document_count():
         if request.get_json():
             r = request.get_json()
             cname = r['collection']
-            count = collection.query(cname, 'count_documents')['result']
+            count = collection.query(cname, 'count_documents')
 
-            if count:
-                return json.dumps({'count': count})
+            if count and count['status'] and count['result']:
+                return json.dumps({'count': count['result']})
 
-        return json.dumps({'count': None})
+        return json.dumps({'count': -1})
 
 
 @blueprint.route(
