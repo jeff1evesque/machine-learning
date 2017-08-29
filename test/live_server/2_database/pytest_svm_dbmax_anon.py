@@ -260,6 +260,7 @@ def test_entity_drop(client, live_server):
     live_server.start()
 
     # local variables
+    uid = 0
     max_collection = current_app.config.get('MAXCOL_ANON')
 
     # drop all entity related collections
@@ -268,6 +269,7 @@ def test_entity_drop(client, live_server):
             remove_collection(),
             headers={'Content-Type': 'application/json'},
             data=json.dumps({
+                'uid': uid,
                 'collection': 'collection--pytest-svm--' + str(i),
                 'type': 'collection',
             })
