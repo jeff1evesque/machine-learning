@@ -176,7 +176,7 @@ class Entity(object):
         if response_error:
             return {'error': response_error, 'result': None}
         else:
-            return {'error': None, 'result': response['result'][0][0]}
+            return {'error': None, 'result': int(response['result'][0][0])}
 
     def remove_entity(self, uid, collection):
         '''
@@ -191,7 +191,7 @@ class Entity(object):
 
         # delete entity
         self.sql.connect(self.db_ml)
-        sql_statement = 'Delete'\
+        sql_statement = 'Delete '\
             'FROM tbl_dataset_entity '\
             'WHERE (uid_created=%s AND collection=%s)'
         args = (uid, collection)
@@ -204,4 +204,4 @@ class Entity(object):
         if response_error:
             return {'error': response_error, 'result': None}
         else:
-            return {'error': None, 'result': response['result']}
+            return {'error': None, 'result': int(response['id'])}

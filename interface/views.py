@@ -609,7 +609,7 @@ def collection_count():
             count = entity.get_collection_count(uid)
 
             if count and count['result']:
-                return json.dumps({'count': int(count['result'])})
+                return json.dumps({'count': count['result']})
 
         return json.dumps({'count': -1})
 
@@ -637,6 +637,8 @@ def document_count():
             cname = r['collection']
             count = collection.query(cname, 'count_documents')
 
+            print 'cname, views.py: ' + str(cname)
+            print 'document_count, views.py: ' + str(count)
             if count and count['status'] and count['result']:
                 return json.dumps({'count': count['result']})
 
@@ -660,6 +662,7 @@ def remove_collection():
 
     if request.method == 'POST':
         # local variables
+        response = None
         entity = Entity()
         collection = Collection()
 
@@ -677,7 +680,8 @@ def remove_collection():
                     uid = r['uid']
                     response = entity.remove_entity(uid, cname)
 
-            if response:
+            # lastrowid returned must be greater than 0
+            if response and response['result']:
                 return json.dumps({'response': response})
 
         return json.dumps({'response': None})
