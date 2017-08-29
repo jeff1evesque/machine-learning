@@ -87,6 +87,7 @@ def test_save(client, live_server):
         assert res.status_code == 200
         assert res.json['status'] == 0
 
+
 def test_document_count(client, live_server):
     '''
 
@@ -140,10 +141,6 @@ def test_collection_count(client, live_server):
     # local variables
     uid = 0
     max_collection = current_app.config.get('MAXCOL_ANON')
-
-    # save max collection
-    dataset = get_sample_json('svm-data-new.json', 'svm')
-    dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i)
 
     res = client.post(
         collection_count(),
@@ -327,16 +324,20 @@ def test_document_count_removed(client, live_server):
 
     live_server.start()
 
-    res = client.post(
-        document_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({
-            'collection': 'collection--pytest-svm--' + str(i),
-        })
-    )
+    # local variables
+    max_collection = current_app.config.get('MAXCOL_ANON')
 
-    assert res.status_code == 200
-    assert res.json['count'] == 0
+    for i in range(max_collection):
+        res = client.post(
+            document_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'collection': 'collection--pytest-svm--' + str(i),
+            })
+        )
+
+        assert res.status_code == 200
+        assert res.json['count'] == 0
 
 
 def test_collection_count_removed(client, live_server):
@@ -347,9 +348,9 @@ def test_collection_count_removed(client, live_server):
 
     '''
 
-    @live_server.app.route('/document-count')
-    def document_count():
-        return url_for('name.document_count', _external=True)
+    @live_server.app.route('/collection-count')
+    def collection_count():
+        return url_for('name.collection_count', _external=True)
 
     live_server.start()
 
