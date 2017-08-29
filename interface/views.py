@@ -667,18 +667,15 @@ def remove_collection():
         if request.get_json():
             r = request.get_json()
             type = r['type']
-
-            if r['collection']:
-                cname = r['collection']
-
-            if r['uid']:
-                uid = r['uid']
+            cname = r['collection']
 
             if (cname and type == 'collection'):
                 response = collection.query(cname, 'drop_collection')
 
-            elif (uid and type == 'entity'):
-                response = entity.remove_entity(uid, cname)
+            elif (type == 'entity'):
+                if r['uid']:
+                    uid = r['uid']
+                    response = entity.remove_entity(uid, cname)
 
             if response:
                 return json.dumps({'response': response})
