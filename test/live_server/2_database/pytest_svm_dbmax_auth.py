@@ -109,9 +109,6 @@ def test_document_count(client, live_server):
 
     # save max collection
     for i in range(max_collection):
-        dataset = get_sample_json('svm-data-new.json', 'svm')
-        dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i)
-
         res = client.post(
             document_count(),
             headers={'Content-Type': 'application/json'},
@@ -121,7 +118,7 @@ def test_document_count(client, live_server):
         )
 
         assert res.status_code == 200
-        assert res.json['count'] == i + 1
+        assert res.json['count'] == 1
 
 
 def test_collection_count(client, live_server):
@@ -230,20 +227,17 @@ def test_document_count_plus(client, live_server):
 
     # local variables
     max_collection = current_app.config.get('MAXCOL_AUTH')
-    max_document = current_app.config.get('MAXDOC_AUTH')
 
-    for i in range(max_collection):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'collection': 'collection--pytest-svm--' + str(i),
-            })
-        )
+    res = client.post(
+        document_count(),
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps({
+            'collection': 'collection--pytest-svm--' + str(max_collection + 1),
+        })
+    )
 
-        assert res.status_code == 200
-        assert res.json['count'] > 0
-        assert res.json['count'] < max_document
+    assert res.status_code == 200
+    assert res.json['count'] == -1
 
 
 def test_entity_drop(client, live_server):
