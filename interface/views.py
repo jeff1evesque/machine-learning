@@ -600,6 +600,7 @@ def collection_count():
 
     if request.method == 'POST':
         # local variables
+        count = -1
         entity = Entity()
 
         # programmatic-interface
@@ -608,10 +609,10 @@ def collection_count():
             uid = r['uid']
             count = entity.get_collection_count(uid)
 
-            if count and count['result']:
-                return json.dumps({'count': count['result']})
-
-        return json.dumps({'count': -1})
+        if count and count['result']:
+            return json.dumps({'count': count['result']})
+        else:
+            return json.dumps({'count': -1})
 
 
 @blueprint.route(
@@ -629,6 +630,7 @@ def document_count():
 
     if request.method == 'POST':
         # local variables
+        count = -1
         collection = Collection()
 
         # programmatic-interface
@@ -637,12 +639,10 @@ def document_count():
             cname = r['collection']
             count = collection.query(cname, 'count_documents')
 
-            print 'cname, views.py: ' + str(cname)
-            print 'document_count, views.py: ' + str(count)
-            if count and count['status'] and count['result']:
-                return json.dumps({'count': count['result']})
-
-        return json.dumps({'count': -1})
+        if count and count['status'] and count['result']:
+            return json.dumps({'count': count['result']})
+        else:
+            return json.dumps({'count': -1})
 
 
 @blueprint.route(
@@ -680,8 +680,8 @@ def remove_collection():
                     uid = r['uid']
                     response = entity.remove_entity(uid, cname)
 
-            # lastrowid returned must be greater than 0
-            if response and response['result']:
-                return json.dumps({'response': response})
-
-        return json.dumps({'response': None})
+        # lastrowid returned must be greater than 0
+        if response and response['result']:
+            return json.dumps({'response': response['result']})
+        else:
+            return json.dumps({'response': response})
