@@ -228,7 +228,7 @@ def register():
             - 1, password doesn't meet minimum requirements
             - 2, username already exists in the database
             - 3, email already exists in the database
-            - 4, internal database error
+            - 4, internal database errors
         - username, string value of the user
         - email, is returned if the value already exists in the database, or
             the registration process was successful
@@ -600,7 +600,7 @@ def collection_count():
 
     if request.method == 'POST':
         # local variables
-        count = -1
+        count = None
         entity = Entity()
 
         # programmatic-interface
@@ -609,7 +609,7 @@ def collection_count():
             uid = r['uid']
             count = entity.get_collection_count(uid)
 
-        if count and count['result']:
+        if count and isinstance(count['result'], (int, long)):
             return json.dumps({'count': count['result']})
         else:
             return json.dumps({'count': -1})
@@ -630,7 +630,7 @@ def document_count():
 
     if request.method == 'POST':
         # local variables
-        count = -1
+        count = None
         collection = Collection()
 
         # programmatic-interface
@@ -639,7 +639,7 @@ def document_count():
             cname = r['collection']
             count = collection.query(cname, 'count_documents')
 
-        if count and count['status'] and count['result']:
+        if count and count['status'] and isinstance(count['result'], (int, long)):
             return json.dumps({'count': count['result']})
         else:
             return json.dumps({'count': -1})
