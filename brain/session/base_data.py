@@ -98,10 +98,8 @@ class BaseData(Base):
 
         # save entity description
         if (
-            (
-                collection_count and
-                collection_count['result'] < self.max_collection
-            )
+            collection_count and
+            collection_count['result'] < self.max_collection
         ):
             response = save_info(self.premodel_data, session_type, self.uid)
 
@@ -143,14 +141,10 @@ class BaseData(Base):
         # save dataset
         if (
             collection_adjusted and
-            (
-                (
-                    collection_count and
-                    collection_count['result'] < self.max_collection and
-                    document_count and
-                    document_count['result'] < self.max_document
-                )
-            )
+            collection_count and
+            collection_count['result'] < self.max_collection and
+            document_count and
+            document_count['result'] < self.max_document
         ):
             document = {
                 'properties': self.premodel_data['properties'],
