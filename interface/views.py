@@ -642,7 +642,7 @@ def document_count():
         if (
             count and
             count['status'] and
-            isinstance(count['result'], (int, long)
+            isinstance(count['result'], (int, long))
         ):
             return json.dumps({'count': count['result']})
         else:
