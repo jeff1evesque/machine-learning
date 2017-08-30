@@ -92,13 +92,16 @@ class BaseData(Base):
             not self.uid and
             collection_count and
             collection_count['result'] and
-            collection_count >= self.max_collection
+            collection_count['result'] >= self.max_collection
         ):
             collections = entity.get_collections(self.uid)
             entity.remove_entity(collections)
 
         # save entity description
-        if collection_count < self.max_collection:
+        if (
+            collection_count and
+            collection_count['result'] < self.max_collection
+        ):
             response = save_info(self.premodel_data, session_type, self.uid)
 
             # return result
@@ -130,7 +133,8 @@ class BaseData(Base):
         # enfore collection limit for anonymous users
         if (
             not self.uid and
-            collection_count >= self.max_collection and
+            collection_count and
+            collection_count['result'] >= self.max_collection and
             collection_adjusted
         ):
             cursor.query(collection_adjusted, 'drop_collection')
@@ -138,10 +142,11 @@ class BaseData(Base):
         # save dataset
         if (
             collection_adjusted and
-            collection_count < self.max_collection and
+            collection_count
+            collection_count['result'] < self.max_collection and
             document_count and
             document_count['result'] and
-            document_count < self.max_document
+            document_count['result'] < self.max_document
         ):
             document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}
             response = cursor.query(
