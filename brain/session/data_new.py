@@ -92,12 +92,22 @@ class DataNew(BaseData):
         # store entity values in database
         if (
             collection_adjusted and
-            collection_count and
-            collection_count['result'] and
-            collection_count['result'] < self.max_collection and
-            document_count and
-            document_count['result'] and
-            document_count['result'] < self.max_document
+            (
+                (
+                    collection_count and
+                    collection_count['result'] and
+                    collection_count['result'] < self.max_collection and
+                    document_count and
+                    document_count['result'] and
+                    document_count['result'] < self.max_document
+                ) or
+                (
+                    collection_count and
+                    not collection_count['result'] and
+                    document_count and
+                    not document_count['result']
+                )
+            )
         ):
             db_save = Entity(premodel_entity, session_type)
             db_return = db_save.save()

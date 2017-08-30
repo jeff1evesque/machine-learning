@@ -99,8 +99,15 @@ class BaseData(Base):
 
         # save entity description
         if (
-            collection_count and
-            collection_count['result'] < self.max_collection
+            (
+                collection_count and
+                collection_count['result'] and
+                collection_count['result'] < self.max_collection
+            ) or
+            (
+                collection_count and
+                not collection_count['result']
+            )
         ):
             response = save_info(self.premodel_data, session_type, self.uid)
 
@@ -142,13 +149,27 @@ class BaseData(Base):
         # save dataset
         if (
             collection_adjusted and
-            collection_count and
-            collection_count['result'] < self.max_collection and
-            document_count and
-            document_count['result'] and
-            document_count['result'] < self.max_document
+            (
+                (
+                    collection_count and
+                    collection_count['result'] and
+                    collection_count['result'] < self.max_collection and
+                    document_count and
+                    document_count['result'] and
+                    document_count['result'] < self.max_document
+                ) or
+                (
+                    collection_count and
+                    not collection_count['result'] and
+                    document_count and
+                    not document_count['result']
+                )
+            )
         ):
-            document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}
+            document = {
+                'properties': self.premodel_data['properties'],
+                'dataset': self.dataset
+            }
             response = cursor.query(
                 collection_adjusted,
                 'insert_one',
