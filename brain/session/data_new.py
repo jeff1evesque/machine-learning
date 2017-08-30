@@ -84,7 +84,6 @@ class DataNew(BaseData):
             not self.uid and
             collection_adjusted and
             collection_count and
-            collection_count['result'] and
             collection_count['result'] >= self.max_collection
         ):
             entity.remove_entity(self.uid, collection_adjusted)
@@ -95,17 +94,9 @@ class DataNew(BaseData):
             (
                 (
                     collection_count and
-                    collection_count['result'] and
                     collection_count['result'] < self.max_collection and
                     document_count and
-                    document_count['result'] and
                     document_count['result'] < self.max_document
-                ) or
-                (
-                    collection_count and
-                    not collection_count['result'] and
-                    document_count and
-                    not document_count['result']
                 )
             )
         ):

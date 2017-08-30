@@ -91,7 +91,6 @@ class BaseData(Base):
         if (
             not self.uid and
             collection_count and
-            collection_count['result'] and
             collection_count['result'] >= self.max_collection
         ):
             collections = entity.get_collections(self.uid)
@@ -101,12 +100,7 @@ class BaseData(Base):
         if (
             (
                 collection_count and
-                collection_count['result'] and
                 collection_count['result'] < self.max_collection
-            ) or
-            (
-                collection_count and
-                not collection_count['result']
             )
         ):
             response = save_info(self.premodel_data, session_type, self.uid)
@@ -152,17 +146,9 @@ class BaseData(Base):
             (
                 (
                     collection_count and
-                    collection_count['result'] and
                     collection_count['result'] < self.max_collection and
                     document_count and
-                    document_count['result'] and
                     document_count['result'] < self.max_document
-                ) or
-                (
-                    collection_count and
-                    not collection_count['result'] and
-                    document_count and
-                    not document_count['result']
                 )
             )
         ):
