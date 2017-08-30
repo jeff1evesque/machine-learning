@@ -639,7 +639,11 @@ def document_count():
             cname = r['collection']
             count = collection.query(cname, 'count_documents')
 
-        if count and count['status'] and isinstance(count['result'], (int, long)):
+        if (
+            count and
+            count['status'] and
+            isinstance(count['result'], (int, long)
+        ):
             return json.dumps({'count': count['result']})
         else:
             return json.dumps({'count': -1})
@@ -676,7 +680,7 @@ def remove_collection():
                 response = collection.query(cname, 'drop_collection')
 
             elif (type == 'entity'):
-                if r['uid']:
+                if isinstance(r['uid'], int) and r['uid'] >= 0:
                     uid = r['uid']
                     response = entity.remove_entity(uid, cname)
 
