@@ -88,7 +88,12 @@ class BaseData(Base):
         collection_count = entity.get_collection_count(self.uid)
 
         # enfore entity limit: for anonymous users
-        if (not self.uid and collection_count >= self.max_collection):
+        if (
+            not self.uid and
+            collection_count and
+            collection_count['result'] and
+            collection_count >= self.max_collection
+        ):
             collections = entity.get_collections(self.uid)
             entity.remove_entity(collections)
 
@@ -134,6 +139,8 @@ class BaseData(Base):
         if (
             collection_adjusted and
             collection_count < self.max_collection and
+            document_count and
+            document_count['result'] and
             document_count < self.max_document
         ):
             document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}

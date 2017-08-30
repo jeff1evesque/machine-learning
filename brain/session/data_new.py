@@ -65,11 +65,8 @@ class DataNew(BaseData):
         premodel_settings = self.premodel_data['properties']
         collection = premodel_settings['collection']
         collection_adjusted = collection.lower().replace(' ', '_')
-        collection_count = entity.get_collection_count(self.uid)['result']
-        document_count = cursor.query(
-            collection_adjusted,
-            'count_documents'
-        )['result']
+        collection_count = entity.get_collection_count(self.uid)
+        document_count = cursor.query(collection_adjusted, 'count_documents')
 
         # assign numerical representation
         numeric_model_type = self.list_model_type.index(self.model_type) + 1
@@ -86,14 +83,20 @@ class DataNew(BaseData):
         if (
             not self.uid and
             collection_adjusted and
+            collection_count and
+            collection_count['result'] and
             collection_count >= self.max_collection
         ):
-            entity.remove_entity(0, collection_adjusted)
+            entity.remove_entity(self.uid, collection_adjusted)
 
         # store entity values in database
         if (
             collection_adjusted and
+            collection_count and
+            collection_count['result'] and
             collection_count < self.max_collection and
+            document_count and
+            document_count['result'] and
             document_count < self.max_document
         ):
             db_save = Entity(premodel_entity, session_type)
