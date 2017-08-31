@@ -333,7 +333,7 @@ def test_document_count_removed(client, live_server):
         )
 
         assert res.status_code == 200
-        assert res.json['count'] == 0
+        assert res.json['count'] == -1
 
 
 def test_collection_count_removed(client, live_server):
