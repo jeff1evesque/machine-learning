@@ -107,6 +107,7 @@ class BaseData(Base):
             document_count and
             document_count['result'] < self.max_document
         ):
+            self.premodel_data['properties']['uid'] = self.uid
             document = {
                 'properties': self.premodel_data['properties'],
                 'dataset': self.dataset

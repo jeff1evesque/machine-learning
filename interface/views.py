@@ -673,16 +673,16 @@ def remove_collection():
         # programmatic-interface
         if request.get_json():
             r = request.get_json()
+            uid = r['uid']
             type = r['type']
             cname = r['collection']
 
             if (cname and type == 'collection'):
-                response = collection.query(cname, 'drop_collection')
+                payload = {'uid': uid}
+                response = collection.query(cname, 'drop_collection', payload)
 
             elif (type == 'entity'):
-                if isinstance(r['uid'], int) and r['uid'] >= 0:
-                    uid = r['uid']
-                    response = entity.remove_entity(uid, cname)
+                response = entity.remove_entity(uid, cname)
 
         # lastrowid returned must be greater than 0
         if response and response['result']:
