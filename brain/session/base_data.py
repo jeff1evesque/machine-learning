@@ -12,7 +12,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from brain.session.base import Base
 from flask import current_app, session
-from brain.session.data.arbiter import save_info
 from brain.session.data.dataset import dataset2dict
 from brain.database.dataset import Collection
 from brain.database.entity import Entity
@@ -75,44 +74,6 @@ class BaseData(Base):
         except Exception, error:
             self.list_error.append(str(error))
 
-    def save_entity(self, session_type):
-        '''
-
-        This method saves the current entity into the database, then returns
-        the corresponding entity id.
-
-        '''
-
-        # local variables
-        entity = Entity()
-        collection_count = entity.get_collection_count(self.uid)
-
-        # enfore entity limit: for anonymous users
-        if (
-            not self.uid and
-            collection_count and
-            collection_count['result'] >= self.max_collection
-        ):
-            collections = entity.get_collections(self.uid)
-            entity.remove_entity(collections)
-
-        # save entity description
-        if (
-            collection_count and
-            collection_count['result'] < self.max_collection
-        ):
-            response = save_info(self.premodel_data, session_type, self.uid)
-
-            # return result
-            if response['error']:
-                self.list_error.append(response['error'])
-                return {'status': False, 'id': None, 'error': response['error']}
-            else:
-                return {'status': True, 'id': response['id'], 'error': None}
-
-        else:
-            return {'status': True, 'id': None, 'error': None}
-
     def save_premodel_dataset(self):
         '''
 
@@ -150,6 +111,7 @@ class BaseData(Base):
                 'properties': self.premodel_data['properties'],
                 'dataset': self.dataset
             }
+
             response = cursor.query(
                 collection_adjusted,
                 'insert_one',
