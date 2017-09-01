@@ -678,7 +678,7 @@ def remove_collection():
             cname = r['collection']
 
             if (cname and type == 'collection'):
-                payload = {'uid': uid}
+                payload = {'properties.uid': uid}
                 response = collection.query(cname, 'drop_collection', payload)
 
             elif (type == 'entity'):
