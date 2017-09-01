@@ -10,6 +10,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+import datetime
 from brain.session.base import Base
 from flask import current_app, session
 from brain.session.data.dataset import dataset2dict
@@ -107,6 +108,8 @@ class BaseData(Base):
             document_count and
             document_count['result'] < self.max_document
         ):
+            current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
+            self.premodel_data['properties']['datetime_saved'] = current_utc
             self.premodel_data['properties']['uid'] = self.uid
             document = {
                 'properties': self.premodel_data['properties'],
