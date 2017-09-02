@@ -330,7 +330,7 @@ def test_document_count_removed(client, live_server):
             document_count(),
             headers={'Content-Type': 'application/json'},
             data=json.dumps({
-                'collection': 'collection--pytest-svm--' + str(i),
+                'collection': 'collection--pytest-svr--' + str(i),
             })
         )
 
