@@ -91,14 +91,17 @@ class BaseData(Base):
         collection_count = entity.get_collection_count(self.uid)
         document_count = cursor.query(collection_adjusted, 'count_documents')
 
-        # enfore collection limit for anonymous users
+        # enfore collection limit: oldest collection name is obtained from the
+        #     sql database. Then, the corresponding collection (i.e. target) is
+        #     removed from the nosql database.
         if (
             not self.uid and
             collection_count and
             collection_count['result'] >= self.max_collection and
             collection_adjusted
         ):
-            cursor.query(collection_adjusted, 'drop_collection')
+            target = entity.get_collections(self.uid)['result'][0]
+            cursor.query(target, 'drop_collection')
 
         # save dataset
         if (
