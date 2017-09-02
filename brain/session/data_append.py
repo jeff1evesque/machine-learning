@@ -88,6 +88,7 @@ class DataAppend(BaseData):
         ):
             target = entity.get_collections(self.uid)['result'][0]
             entity.remove_entity(self.uid, target)
+            collection_count = entity.get_collection_count(self.uid)
 
         # store entity values in database
         if (

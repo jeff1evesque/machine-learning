@@ -90,6 +90,7 @@ class DataNew(BaseData):
         ):
             target = entity.get_collections(self.uid)['result'][0]
             entity.remove_entity(self.uid, target)
+            collection_count = entity.get_collection_count(self.uid)
 
         # store entity values in database
         if (
@@ -99,8 +100,8 @@ class DataNew(BaseData):
             document_count and
             document_count['result'] < self.max_document
         ):
-            db_save = Entity(premodel_entity, session_type)
-            db_return = db_save.save()
+            entity = Entity(premodel_entity, session_type)
+            db_return = entity.save()
 
         # return
         if db_return and db_return['error']:
