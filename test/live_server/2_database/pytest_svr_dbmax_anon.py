@@ -152,8 +152,10 @@ def test_collection_count(client, live_server):
 def test_save_plus(client, live_server):
     '''
 
-    This method will test will save an additional collection, in addition to
-    the previous 'max_collection' number of collections saved.
+    This method will test saving an additional collection, in addition to
+    the previous 'max_collection' collections already saved. For anonymous
+    users, the oldest (i.e. first) database collection related objects, will be
+    removed, to satisfy the maximum number of collections allowed to be saved.
 
     '''
 
@@ -292,13 +294,19 @@ def test_collection_drop(client, live_server):
 
     # drop all collections
     for i in range(max_collection):
+        # plus case: account for above 'max_collection + 1'
+        if (i == 0):
+            index = max_collection
+        else:
+            index = i
+
         res = client.post(
             remove_collection(),
             headers={'Content-Type': 'application/json'},
             data=json.dumps({
                 'uid': uid,
                 'type': 'entity',
-                'collection': 'collection--pytest-svr--' + str(i),
+                'collection': 'collection--pytest-svr--' + str(index),
             })
         )
 

@@ -153,8 +153,11 @@ def test_collection_count(client, live_server):
 def test_save_plus(client, live_server):
     '''
 
-    This method will test will save an additional collection, in addition to
-    the previous 'max_collection' number of collections saved.
+    This method will test whether saving an additional collection is ignored,
+    when an authenticated user, attempts to save a collection, given that
+    'max_collection' collections already been saved. Functionally, users will
+    need to explicitly choose an exact collection to remove, if they have
+    already reached the corresponding 'max_collection' limit.
 
     '''
 
