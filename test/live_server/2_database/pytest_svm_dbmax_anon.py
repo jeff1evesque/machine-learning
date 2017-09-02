@@ -170,7 +170,7 @@ def test_save_plus(client, live_server):
 
     # save max collection + 1
     dataset = get_sample_json('svm-data-new.json', 'svm')
-    dataset['properties']['collection'] = 'collection--pytest-svm--' + str(max_collection + 1)
+    dataset['properties']['collection'] = 'collection--pytest-svm--' + str(max_collection)
 
     res = client.post(
         load_data(),
@@ -233,7 +233,7 @@ def test_document_count_plus(client, live_server):
         document_count(),
         headers={'Content-Type': 'application/json'},
         data=json.dumps({
-            'collection': 'collection--pytest-svm--' + str(max_collection + 1),
+            'collection': 'collection--pytest-svm--' +  str(max_collection),
         })
     )
 
@@ -261,18 +261,12 @@ def test_entity_drop(client, live_server):
 
     # drop all entity related collections
     for i in range(max_collection - 1):
-        # plus case: account for above 'max_collection + 1'
-        if (i == 0):
-            index = max_collection + 1
-        else:
-            index = i
-
         res = client.post(
             remove_collection(),
             headers={'Content-Type': 'application/json'},
             data=json.dumps({
                 'uid': uid,
-                'collection': 'collection--pytest-svm--' + str(index),
+                'collection': 'collection--pytest-svm--' + str(i + 1),
                 'type': 'collection',
             })
         )
@@ -300,19 +294,13 @@ def test_collection_drop(client, live_server):
 
     # drop all collections
     for i in range(max_collection):
-        # plus case: account for above 'max_collection + 1'
-        if (i == 0):
-            index = max_collection
-        else:
-            index = i
-
         res = client.post(
             remove_collection(),
             headers={'Content-Type': 'application/json'},
             data=json.dumps({
                 'uid': uid,
                 'type': 'entity',
-                'collection': 'collection--pytest-svm--' + str(index),
+                'collection': 'collection--pytest-svm--' + str(i + 1),
             })
         )
 

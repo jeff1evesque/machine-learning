@@ -172,7 +172,7 @@ def test_save_plus(client, live_server):
 
     # save max collection + 1
     dataset = get_sample_json('svr-data-new.json', 'svr')
-    dataset['properties']['collection'] = 'collection--pytest-svr--' + str(max_collection + 1)
+    dataset['properties']['collection'] = 'collection--pytest-svr--' + str(max_collection)
 
     res = client.post(
         load_data(),
@@ -235,7 +235,7 @@ def test_document_count_plus(client, live_server):
         document_count(),
         headers={'Content-Type': 'application/json'},
         data=json.dumps({
-            'collection': 'collection--pytest-svr--' + str(max_collection + 1),
+            'collection': 'collection--pytest-svr--' +  str(max_collection),
         })
     )
 
