@@ -22,7 +22,8 @@ Note: the 'pytest' instances can further be reviewed:
 
 import json
 import os.path
-from flask import current_app, url_for
+from flask import current_app, url_for, session
+from brain.database.account import Account
 
 
 def get_sample_json(jsonfile, model_type):
