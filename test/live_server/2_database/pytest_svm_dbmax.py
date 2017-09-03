@@ -233,7 +233,7 @@ def test_document_count_plus(client, live_server):
         document_count(),
         headers={'Content-Type': 'application/json'},
         data=json.dumps({
-            'collection': 'collection--pytest-svm--' +  str(max_collection),
+            'collection': 'collection--pytest-svm--' + str(max_collection),
         })
     )
 
