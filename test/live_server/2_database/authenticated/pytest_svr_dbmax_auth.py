@@ -71,7 +71,15 @@ def test_save(client, live_server):
     live_server.start()
 
     # local variables
+    username = 'jeff1evesque'
+    password = 'password123'
     max_collection = current_app.config.get('MAXCOL_AUTH')
+
+    # login with valid credentials
+    account = Account()
+    hashed_password = account.get_password(username)['result']
+    uid = account.get_uid(username)['result']
+    session['uid'] = uid
 
     # save max collection
     for i in range(max_collection):
@@ -365,3 +373,6 @@ def test_collection_count_removed(client, live_server):
 
     assert res.status_code == 200
     assert res.json['count'] == 0
+
+    # logout
+    session.pop('uid', None)
