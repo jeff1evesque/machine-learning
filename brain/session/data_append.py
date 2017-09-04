@@ -77,19 +77,6 @@ class DataAppend(BaseData):
             'id_entity': session_id,
         }
 
-        # enfore collection limit: oldest collection name is obtained from the
-        #     sql database. Then, the corresponding collection (i.e. target) is
-        #     removed from the sql database.
-        if (
-            not self.uid and
-            collection_adjusted and
-            collection_count and
-            collection_count['result'] >= self.max_collection
-        ):
-            target = entity.get_collections(self.uid)['result'][0]
-            entity.remove_entity(self.uid, target)
-            collection_count = entity.get_collection_count(self.uid)
-
         # store entity values in database
         if (
             collection_adjusted and
