@@ -10,7 +10,7 @@ import DataNewState from './import/redux/container/data-new.jsx';
 import DataAppendState from './import/redux/container/data-append.jsx';
 import ModelGenerateState from './import/redux/container/model-generate.jsx';
 import ModelPredictState from './import/redux/container/model-predict.jsx';
-import ResultState from './import/redux/container/results.jsx';
+import CurrentResultState from './import/redux/container/current-result.jsx';
 import RegisterState from './import/redux/container/register.jsx';
 import AnalysisLayoutState from './import/redux/container/analysis-layout.jsx';
 import PageLayout from './import/layout/page.jsx';
@@ -71,9 +71,9 @@ var AppRouter = React.createClass({
                             }}
                         />
                         <Route
-                            path='/session/results'
+                            path='/session/current-result'
                             components={{
-                                content: ResultState,
+                                content: CurrentResultState,
                                 content_type: 'result'
                             }}
                         />

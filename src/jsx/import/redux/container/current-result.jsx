@@ -1,5 +1,5 @@
 /**
- * results.jsx: redux store for analysis results.
+ * current-result.jsx: redux store for analysis results.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,8 +10,8 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import ResultDisplay from '../../result/result-display.jsx';
-import setResults from '../action/results.jsx';
+import DisplayCurrentResult from '../../result/current-result.jsx';
+import setCurrentResult from '../action/current-result.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch) => {
 const ResultState = connect(
     mapStateToProps,
     mapDispatchToProps
-)(ResultDisplay)
+)(DisplayCurrentResult)
 
 // indicate which class can be exported, and instantiated via 'require'
 export default ResultState
