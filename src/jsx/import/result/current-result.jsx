@@ -1,7 +1,7 @@
 /**
  * current-display.jsx: display current prediction result.
  *
- * @DisplayCurrentResult, must be capitalized in order for reactjs to render it as a
+ * @CurrentResultDisplay, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
@@ -13,7 +13,7 @@ import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
-var DisplayCurrentResult = React.createClass({
+var CurrentResultDisplay = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -174,4 +174,4 @@ var DisplayCurrentResult = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default DisplayCurrentResult
+export default CurrentResultDisplay

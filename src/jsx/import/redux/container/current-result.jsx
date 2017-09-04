@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import DisplayCurrentResult from '../../result/current-result.jsx';
+import CurrentResultDisplay from '../../result/current-result.jsx';
 import setCurrentResult from '../action/current-result.jsx';
 
 // transforms redux state tree to react properties
@@ -49,7 +49,7 @@ const mapDispatchToProps = (dispatch) => {
 const ResultState = connect(
     mapStateToProps,
     mapDispatchToProps
-)(DisplayCurrentResult)
+)(CurrentResultDisplay)
 
 // indicate which class can be exported, and instantiated via 'require'
 export default ResultState
