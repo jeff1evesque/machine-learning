@@ -229,16 +229,21 @@ def test_document_count_plus(client, live_server):
     # local variables
     max_collection = current_app.config.get('MAXCOL_ANON')
 
-    res = client.post(
-        document_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({
-            'collection': 'collection--pytest-svr--' + str(max_collection),
-        })
-    )
+    for i in range(max_collection + 1):
+        res = client.post(
+            document_count(),
+            headers={'Content-Type': 'application/json'},
+            data=json.dumps({
+                'collection': 'collection--pytest-svr--' + str(i),
+            })
+        )
 
-    assert res.status_code == 200
-    assert res.json['count'] == -1
+        assert res.status_code == 200
+
+        if i == 0:
+            assert res.json['count'] == -1
+        else:
+            assert res.json['count'] == 1
 
 
 def test_entity_drop(client, live_server):

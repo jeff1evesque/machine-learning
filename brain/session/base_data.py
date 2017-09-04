@@ -102,6 +102,9 @@ class BaseData(Base):
         ):
             target = entity.get_collections(self.uid)['result'][0]
             cursor.query(target, 'drop_collection')
+            entity.remove_entity(self.uid, target)
+            collection_count = entity.get_collection_count(self.uid)
+            document_count = cursor.query(collection_adjusted, 'count_documents')
 
         # save dataset
         if (
