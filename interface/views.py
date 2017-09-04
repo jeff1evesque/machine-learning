@@ -29,6 +29,8 @@ from brain.validator.password import validate_password
 from brain.database.account import Account
 from brain.database.prediction import Prediction
 from brain.converter.crypto import hash_pass, verify_pass
+from brain.database.entity import Entity
+from brain.database.dataset import Collection
 
 
 # local variables
@@ -226,7 +228,7 @@ def register():
             - 1, password doesn't meet minimum requirements
             - 2, username already exists in the database
             - 3, email already exists in the database
-            - 4, internal database error
+            - 4, internal database errors
         - username, string value of the user
         - email, is returned if the value already exists in the database, or
             the registration process was successful
@@ -581,3 +583,109 @@ def save_prediction():
         # notification: status not valid
         else:
             return json.dumps({'status': 2})
+
+
+@blueprint.route(
+    '/collection-count',
+    methods=['POST'],
+    endpoint='collection_count'
+)
+def collection_count():
+    '''
+
+    This router function retrieves the number of collections, saved by a
+    specified user.
+
+    '''
+
+    if request.method == 'POST':
+        # local variables
+        count = None
+        entity = Entity()
+
+        # programmatic-interface
+        if request.get_json():
+            r = request.get_json()
+            uid = r['uid']
+            count = entity.get_collection_count(uid)
+
+        if count and isinstance(count['result'], (int, long)):
+            return json.dumps({'count': count['result']})
+        else:
+            return json.dumps({'count': -1})
+
+
+@blueprint.route(
+    '/document-count',
+    methods=['POST'],
+    endpoint='document_count'
+)
+def document_count():
+    '''
+
+    This router function retrieves the number of documents in a specified
+    collection.
+
+    '''
+
+    if request.method == 'POST':
+        # local variables
+        count = None
+        collection = Collection()
+
+        # programmatic-interface
+        if request.get_json():
+            r = request.get_json()
+            cname = r['collection']
+            count = collection.query(cname, 'count_documents')
+
+        if (
+            count and
+            count['status'] and
+            isinstance(count['result'], (int, long))
+        ):
+            return json.dumps({'count': count['result']})
+        else:
+            return json.dumps({'count': -1})
+
+
+@blueprint.route(
+    '/remove-collection',
+    methods=['POST'],
+    endpoint='remove_collection'
+)
+def remove_collection():
+    '''
+
+    This router function removes a collection, with respect to a database type.
+
+    @collection, indicates a nosql implementation
+    @entity, indicates a sql database
+
+    '''
+
+    if request.method == 'POST':
+        # local variables
+        response = None
+        entity = Entity()
+        collection = Collection()
+
+        # programmatic-interface
+        if request.get_json():
+            r = request.get_json()
+            uid = r['uid']
+            type = r['type']
+            cname = r['collection']
+
+            if (cname and type == 'collection'):
+                payload = {'properties.uid': uid}
+                response = collection.query(cname, 'drop_collection', payload)
+
+            elif (type == 'entity'):
+                response = entity.remove_entity(uid, cname)
+
+        # lastrowid returned must be greater than 0
+        if response and response['result']:
+            return json.dumps({'response': response['result']})
+        else:
+            return json.dumps({'response': response})

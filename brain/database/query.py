@@ -87,7 +87,7 @@ class NoSQL(object):
         self.proceed = True
         self.client = get_mongodb()
 
-    def connect(self, collection):
+    def connect(self, collection=None):
         '''
 
         This method is responsible for defining the necessary interface to
@@ -99,7 +99,9 @@ class NoSQL(object):
             # single mongodb instance
             database = Database().get_db('nosql')
             self.database = self.client[database]
-            self.collection = self.database[collection]
+
+            if collection:
+                self.collection = self.database[collection]
 
             return {
                 'status': True,
@@ -127,6 +129,7 @@ class NoSQL(object):
 
         '''
 
+        result = None
         if self.proceed:
             try:
                 if operation == 'aggregate':
@@ -145,8 +148,6 @@ class NoSQL(object):
                     result = self.collection.delete_many(payload)
                 elif operation == 'find':
                     result = self.collection.find(payload)
-                elif operation == 'find_one':
-                    result = self.collection.find_one(payload)
                 elif operation == 'map_reduce':
                     result = self.collection.map_reduce(
                         payload['map'],
@@ -159,8 +160,13 @@ class NoSQL(object):
                     result = self.collection.delete_one(payload)
                 elif operation == 'delete_many':
                     result = self.collection.delete_many(payload)
+                elif operation == 'count_documents':
+                    if payload:
+                        result = self.collection.find(payload).count()
+                    else:
+                        result = self.collection.count()
                 elif operation == 'drop_collection':
-                    result = self.collection.drop_collection(payload)
+                    result = self.database.drop_collection(payload)
 
             except errors, error:
                 self.list_error.append(error)
@@ -171,7 +177,10 @@ class NoSQL(object):
                     'error': self.list_error,
                 }
 
-            return {'status': True, 'result': result, 'error': None}
+            if result:
+                return {'status': True, 'result': result, 'error': None}
+            else:
+                return {'status': False, 'result': None, 'error': None}
 
     def disconnect(self):
         '''

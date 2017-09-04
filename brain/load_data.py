@@ -59,15 +59,10 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none():
             session.validate_premodel_settings()
+            session.convert_dataset()
+            session.save_premodel_dataset()
+            session.save_entity('data_new')
             session.check()
-
-            session_entity = session.save_entity('data_new')
-            if session_entity['status']:
-                session.convert_dataset()
-                session.check()
-
-                session.save_premodel_dataset()
-                session.check()
 
             response = {
                 'status': 0,
@@ -104,17 +99,10 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none() and not session.get_errors():
             session.validate_premodel_settings()
+            session.convert_dataset()
+            session.save_premodel_dataset()
+            session.save_entity('data_append', session_id)
             session.check()
-
-            session_entity = session.save_entity('data_append', session_id)
-            if session_entity['status']:
-                session.check()
-
-                session.convert_dataset()
-                session.check()
-
-                session.save_premodel_dataset()
-                session.check()
 
             response = {
                 'status': 0,

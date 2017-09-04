@@ -13,6 +13,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 from brain.session.base_data import BaseData
 from brain.database.entity import Entity
+from brain.database.dataset import Collection
 
 
 class DataNew(BaseData):
@@ -57,25 +58,45 @@ class DataNew(BaseData):
 
         '''
 
+        # local variables
+        db_return = None
+        entity = Entity()
+        cursor = Collection()
+        premodel_settings = self.premodel_data['properties']
+        collection = premodel_settings['collection']
+        collection_adjusted = collection.lower().replace(' ', '_')
+        collection_count = entity.get_collection_count(self.uid)
+        document_count = cursor.query(collection_adjusted, 'count_documents')
+
         # assign numerical representation
         numeric_model_type = self.list_model_type.index(self.model_type) + 1
 
-        # store entity values in database
-        premodel_settings = self.premodel_data['properties']
+        # define entity properties
         premodel_entity = {
             'title': premodel_settings.get('session_name', None),
-            'collection': premodel_settings['collection'],
+            'collection': collection,
             'model_type': numeric_model_type,
             'uid': self.uid,
         }
-        db_save = Entity(premodel_entity, session_type)
 
-        # save dataset element
-        db_return = db_save.save()
+        # store entity values in database
+        if (
+            collection_adjusted and
+            collection_count and
+            collection_count['result'] < self.max_collection and
+            document_count and
+            document_count['result'] < self.max_document
+        ):
+            entity = Entity(premodel_entity, session_type)
+            db_return = entity.save()
 
         # return
-        if db_return['status']:
-            return {'status': True, 'error': None, 'id': db_return['id']}
-        else:
+        if db_return and db_return['error']:
             self.list_error.append(db_return['error'])
             return {'status': False, 'error': self.list_error}
+
+        elif db_return and db_return['status']:
+            return {'status': True, 'error': None, 'id': db_return['id']}
+
+        else:
+            return {'status': True, 'error': 'Entity was not saved', 'id': None}

@@ -10,11 +10,12 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+import datetime
 from brain.session.base import Base
 from flask import current_app, session
-from brain.session.data.arbiter import save_info
 from brain.session.data.dataset import dataset2dict
 from brain.database.dataset import Collection
+from brain.database.entity import Entity
 
 
 class BaseData(Base):
@@ -51,8 +52,13 @@ class BaseData(Base):
 
         if 'uid' in session:
             self.uid = session['uid']
+            self.max_collection = current_app.config.get('MAXCOL_AUTH')
+            self.max_document = current_app.config.get('MAXDOC_AUTH')
+
         else:
             self.uid = current_app.config.get('USER_ID')
+            self.max_collection = current_app.config.get('MAXCOL_ANON')
+            self.max_document = current_app.config.get('MAXDOC_ANON')
 
     def validate_id(self, session_id):
         '''
@@ -69,24 +75,6 @@ class BaseData(Base):
         except Exception, error:
             self.list_error.append(str(error))
 
-    def save_entity(self, session_type):
-        '''
-
-        This method saves the current entity into the database, then returns
-        the corresponding entity id.
-
-        '''
-
-        # save entity description
-        response = save_info(self.premodel_data, session_type, self.uid)
-
-        # return result
-        if response['error']:
-            self.list_error.append(response['error'])
-            return {'status': False, 'id': None, 'error': response['error']}
-        else:
-            return {'status': True, 'id': response['id'], 'error': None}
-
     def save_premodel_dataset(self):
         '''
 
@@ -95,17 +83,53 @@ class BaseData(Base):
 
         '''
 
-        # save dataset
+        # local variables
+        entity = Entity()
+        cursor = Collection()
         collection = self.premodel_data['properties']['collection']
         collection_adjusted = collection.lower().replace(' ', '_')
-        cursor = Collection()
-        document = {'properties': self.premodel_data['properties'], 'dataset': self.dataset}
+        collection_count = entity.get_collection_count(self.uid)
+        document_count = cursor.query(collection_adjusted, 'count_documents')
 
-        response = cursor.query(
-            collection_adjusted,
-            'insert_one',
-            document
-        )
+        # enfore collection limit: oldest collection name is obtained from the
+        #     sql database. Then, the corresponding collection (i.e. target) is
+        #     removed from the nosql database.
+        if (
+            not self.uid and
+            collection_count and
+            collection_count['result'] >= self.max_collection and
+            collection_adjusted
+        ):
+            target = entity.get_collections(self.uid)['result'][0]
+            cursor.query(target, 'drop_collection')
+            entity.remove_entity(self.uid, target)
+            collection_count = entity.get_collection_count(self.uid)
+            document_count = cursor.query(collection_adjusted, 'count_documents')
+
+        # save dataset
+        if (
+            collection_adjusted and
+            collection_count and
+            collection_count['result'] < self.max_collection and
+            document_count and
+            document_count['result'] < self.max_document
+        ):
+            current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
+            self.premodel_data['properties']['datetime_saved'] = current_utc
+            self.premodel_data['properties']['uid'] = self.uid
+            document = {
+                'properties': self.premodel_data['properties'],
+                'dataset': self.dataset
+            }
+
+            response = cursor.query(
+                collection_adjusted,
+                'insert_one',
+                document
+            )
+
+        else:
+            response = None
 
         # return result
         if response and response['error']:

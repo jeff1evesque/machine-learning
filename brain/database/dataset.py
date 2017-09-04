@@ -13,9 +13,8 @@ from brain.database.query import NoSQL
 class Collection(object):
     '''
 
-    This class provides an interface to retrieve, and store the supplied
-    dataset(s), into a mongodb collection. Additional methods, are also
-    provided, to query varying parameters of the specified collection.
+    This class provides an interface to retrieve, and store various parameters,
+    of the specified collection, from the mongodb.
 
     Note: this class is invoked within 'base_data.py'
 
@@ -33,7 +32,7 @@ class Collection(object):
         self.list_error = []
         self.nosql = NoSQL()
 
-    def query(self, collection, operation, payload):
+    def query(self, collection, operation, payload=None):
         '''
 
         This method executes a query, with respect to the desired 'operation'.
@@ -44,17 +43,21 @@ class Collection(object):
             - update_one
             - update_many
             - find
-            - find_one
             - map_reduce
             - delete_one
             - delete_many
+            - count_documents
             - drop_collection
 
         '''
 
-        # insert / update dataset value(s)
-        self.nosql.connect(collection)
-        response = self.nosql.execute(operation, payload)
+        # execute query
+        if operation == 'drop_collection':
+            self.nosql.connect()
+            response = self.nosql.execute(operation, collection)
+        else:
+            self.nosql.connect(collection)
+            response = self.nosql.execute(operation, payload)
 
         # retrieve any error(s)
         response_error = self.nosql.get_errors()
@@ -68,40 +71,3 @@ class Collection(object):
             }
         else:
             return {'status': True, 'result': response['result'], 'error': None}
-
-    def get_count(self, id_entity):
-        '''
-
-        This method retrieves the number of features that can be expected in
-        any given observation, from a particular dataset instance (id_entity).
-
-        @id_entity, this supplied argument corresponds to the 'id_entity'
-            column from the 'tbl_dataset_value' database table.
-
-        @sql_statement, is a sql format string, and not a python string.
-            Therefore, '%s' is used for argument substitution.
-        '''
-
-        self.sql.connect(self.db_ml)
-        sql_statement = 'SELECT count_features '\
-            'FROM tbl_feature_count '\
-            'WHERE id_entity=%s'
-        args = (id_entity)
-        response = self.sql.execute('select', sql_statement, args)
-
-        # retrieve any error(s)
-        response_error = self.sql.get_errors()
-
-        # return result
-        if response_error:
-            return {
-                'status': False,
-                'error': response_error,
-                'result': None
-            }
-        else:
-            return {
-                'status': True,
-                'error': None,
-                'result': response['result'],
-            }
