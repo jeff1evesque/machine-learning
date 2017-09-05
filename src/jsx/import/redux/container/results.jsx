@@ -23,7 +23,7 @@ const mapStateToProps = (state) => {
         state.data &&
         state.data.results &&
         !!state.data.results.status == 0 &&
-        !!state.data.results.title &&
+        !!state.data.results.title
     ) {
         if (
             !!state.data.results.title[0][1] &&
