@@ -15,7 +15,7 @@ import DataAppendState from '../redux/container/data-append.jsx';
 import Submit from '../general/submit-button.jsx';
 import ResultsLink from '../navigation/menu-items/results.jsx';
 import Spinner from '../general/spinner.jsx';
-import setResults from '../redux/action/results.jsx';
+import setCurrentResult from '../redux/action/current-result.jsx';
 import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
@@ -181,7 +181,7 @@ var SupportVector = React.createClass({
                     decision_function: confidence.decision_function
                 })
             }
-            this.props.dispatchResults(setResults(payload));
+            this.props.dispatchResults(setCurrentResult(payload));
 
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
@@ -203,7 +203,7 @@ var SupportVector = React.createClass({
                     r2: confidence.score
                 })
             }
-            this.props.dispatchResults(setResults(payload));
+            this.props.dispatchResults(setCurrentResult(payload));
 
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});

@@ -13,7 +13,7 @@ import { connect } from 'react-redux';
 import SupportVector from '../../content/support-vector.jsx';
 import setResult from '../action/results.jsx';
 import { setGotoResultsButton, setSvButton } from '../action/page.jsx';
-import setResults from '../action/results.jsx';
+import setCurrentResult from '../action/results.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -45,7 +45,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchSvButton: dispatch.bind(setSvButton),
-        dispatchResults: dispatch.bind(setResults),
+        dispatchResults: dispatch.bind(setCurrentResult),
         dispatchGotoResultsButton: dispatch.bind(setGotoResultsButton)
     }
 }

@@ -41,7 +41,7 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchSvButton: dispatch.bind(setResults)
+        dispatchSvButton: dispatch.bind(setCurrentResult)
     }
 }
 
