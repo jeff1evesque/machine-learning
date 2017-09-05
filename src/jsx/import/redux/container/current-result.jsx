@@ -52,4 +52,4 @@ const ResultState = connect(
 )(CurrentResultDisplay)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ResultState
+export default CurrentResultState
