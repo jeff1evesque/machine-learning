@@ -12,7 +12,7 @@
 
 import 'core-js/modules/es6.object.assign';
 
-const current-result = (state='default', action) => {
+const currentResult = (state='default', action) => {
     var type = 'default';
     var data = null;
 
@@ -38,4 +38,4 @@ const current-result = (state='default', action) => {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default current-result
+export default currentResult

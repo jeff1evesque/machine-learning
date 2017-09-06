@@ -17,7 +17,7 @@
 import { createStore, combineReducers } from 'redux';
 import user from './reducer/login.jsx';
 import page from './reducer/page.jsx';
-import current-result from './reducer/current-result.jsx';
+import currentResult from './reducer/current-result.jsx';
 import results from './reducer/results.jsx';
 
 // username from sessionStorage
@@ -25,7 +25,7 @@ const username = sessionStorage.getItem('username') || 'anonymous'
 
 // create and initialize redux
 const store = createStore(
-    combineReducers({user, page, current-result, results}), {
+    combineReducers({user, page, currentResult, results}), {
         user: {name: username},
         page: {status: 'default'}
     }
