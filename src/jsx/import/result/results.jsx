@@ -119,9 +119,9 @@ var ResultsDisplay = React.createClass({
                 Object.entries(prediction).map(([item_key, value]) =>
                     <Link to={'/session/result/' + nid}>
                         <li key={item_key}>{item_key}: {value}</li>
-                    </a>
+                    </Link>
                 )
-            }</Link>;
+            }</ul>;
         }
         else {
             var resultList = <div className='result-list'>Sorry, no results available!</div>;
