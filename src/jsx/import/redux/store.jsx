@@ -17,16 +17,19 @@
 import { createStore, combineReducers } from 'redux';
 import user from './reducer/login.jsx';
 import page from './reducer/page.jsx';
-import data from './reducer/data.jsx';
+import current-result from './reducer/current-result.jsx';
+import results from './reducer/results.jsx';
 
 // username from sessionStorage
 const username = sessionStorage.getItem('username') || 'anonymous'
 
 // create and initialize redux
-const store = createStore(combineReducers({user, page, data}), {
-    user: {name: username},
-    page: {status: 'default'}
-});
+const store = createStore(
+    combineReducers({user, page, current-result, results}), {
+        user: {name: username},
+        page: {status: 'default'}
+    }
+);
 
 // indicate which class can be exported, and instantiated via 'require'
 export default store

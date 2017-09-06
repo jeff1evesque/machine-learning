@@ -1,5 +1,6 @@
 /**
- * data.jsx: describe data attributes associated with predictions.
+ * current-result.jsx: describe data attributes associated with current, or
+ *                     latest prediction results.
  *
  * Note: the triple dots is the 'object spread' syntax:
  *
@@ -11,7 +12,7 @@
 
 import 'core-js/modules/es6.object.assign';
 
-const data = (state='default', action) => {
+const current-result = (state='default', action) => {
     var type = 'default';
     var data = null;
 
@@ -37,4 +38,4 @@ const data = (state='default', action) => {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default data
+export default current-result
