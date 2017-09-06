@@ -13,7 +13,7 @@ import ModelPredictState from '../redux/container/model-predict.jsx';
 import DataNewState from '../redux/container/data-new.jsx';
 import DataAppendState from '../redux/container/data-append.jsx';
 import Submit from '../general/submit-button.jsx';
-import ResultsLink from '../navigation/menu-items/results.jsx';
+import CurrentResultLink from '../navigation/menu-items/current-result.jsx';
 import Spinner from '../general/spinner.jsx';
 import setCurrentResult from '../redux/action/current-result.jsx';
 import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
@@ -235,7 +235,7 @@ var SupportVector = React.createClass({
                 !!this.state.ajax_done_result.type &&
                 this.state.ajax_done_result.type == 'model-predict'
             ) {
-                var resultBtn = !!button.goto_results ? <ResultsLink /> : null;
+                var resultBtn = !!button.goto_results ? <CurrentResultLink /> : null;
             }
         }
 
