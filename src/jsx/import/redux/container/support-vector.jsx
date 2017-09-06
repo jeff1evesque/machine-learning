@@ -11,7 +11,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import SupportVector from '../../content/support-vector.jsx';
-import setResult from '../action/results.jsx';
 import { setGotoResultsButton, setSvButton } from '../action/page.jsx';
 import setCurrentResult from '../action/current-result.jsx';
 
