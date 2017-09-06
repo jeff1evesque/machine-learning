@@ -10,7 +10,7 @@
 
 import React from 'react';
 import 'core-js/modules/es7.object.entries';
-import setResults from '../../redux/action/setResults.jsx';
+import setResults from '../../redux/action/results.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
