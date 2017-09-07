@@ -13,25 +13,23 @@
 import 'core-js/modules/es6.object.assign';
 
 const currentResult = (state='default', action) => {
-    if (
-        action &&
-        action.results
-    ) {
+    if (action && action.results) {
         var result_type = !!action.results.type ? action.results.type : 'default';
         var result_data = !!action.results.data ? action.results.data : null;
-    }
 
-    switch(action.type) {
-        case 'SET-CURRENT-RESULT':
-            return Object.assign({}, state, {
-                results: {
-                    type: result_type,
-                    data: result_data
-                }
-            });
-        default:
-            return state;
+        switch(action.type) {
+            case 'SET-CURRENT-RESULT':
+                return Object.assign({}, state, {
+                    results: {
+                        type: result_type,
+                        data: result_data
+                    }
+                });
+            default:
+                return state;
+        }
     }
+    return state;
 }
 
 // indicate which class can be exported, and instantiated via 'require'
