@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchSvButton: dispatch.bind(setSvButton),
-        dispatchResults: dispatch.bind(setCurrentResult),
+        dispatchCurrentResult: dispatch.bind(setCurrentResult),
         dispatchGotoResultsButton: dispatch.bind(setGotoResultsButton)
     }
 }

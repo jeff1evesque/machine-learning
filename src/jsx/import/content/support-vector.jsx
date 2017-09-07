@@ -181,7 +181,7 @@ var SupportVector = React.createClass({
                     decision_function: confidence.decision_function
                 })
             }
-            this.props.dispatchResults(setCurrentResult(payload));
+            this.props.dispatchCurrentResult(setCurrentResult(payload));
 
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
@@ -203,7 +203,7 @@ var SupportVector = React.createClass({
                     r2: confidence.score
                 })
             }
-            this.props.dispatchResults(setCurrentResult(payload));
+            this.props.dispatchCurrentResult(setCurrentResult(payload));
 
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
