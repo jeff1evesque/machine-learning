@@ -13,9 +13,6 @@
 import 'core-js/modules/es6.object.assign';
 
 const currentResult = (state='default', action) => {
-    var type = 'default';
-    var data = null;
-
     if (
         action &&
         action.results
