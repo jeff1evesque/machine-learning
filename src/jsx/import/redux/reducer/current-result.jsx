@@ -12,7 +12,7 @@
 
 import 'core-js/modules/es6.object.assign';
 
-const currentResult = (state='default', action) => {
+const result = (state='default', action) => {
     if (action && action.results) {
         var result_type = !!action.results.type ? action.results.type : 'default';
         var result_data = !!action.results.data ? action.results.data : null;
@@ -33,4 +33,4 @@ const currentResult = (state='default', action) => {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default currentResult
+export default result

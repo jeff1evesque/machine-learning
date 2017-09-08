@@ -23,12 +23,10 @@ import currentResult from './reducer/current-result.jsx';
 const username = sessionStorage.getItem('username') || 'anonymous'
 
 // create and initialize redux
-const store = createStore(
-    combineReducers({user, page, currentResult}), {
+const store = createStore(combineReducers({user, page, result}), {
         user: {name: username},
         page: {status: 'default'}
-    }
-);
+});
 
 // indicate which class can be exported, and instantiated via 'require'
 export default store
