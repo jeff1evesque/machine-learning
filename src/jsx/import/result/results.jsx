@@ -18,7 +18,7 @@ var ResultsDisplay = React.createClass({
     getInitialState: function() {
         return {
             nid: null,
-            data: null,
+            titles: null,
         };
     },
   // send form data to serverside on form submission
@@ -67,34 +67,9 @@ var ResultsDisplay = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-  // define properties after update
-    componentDidUpdate: function() {
-        if (
-            this.props &&
-            this.props.results &&
-            !!this.props.results.data &&
-            this.state.data != JSON.stringify(this.props.data)
-        ) {
-            this.setState({
-                nid: this.props.results.nid,
-                data: JSON.stringify(this.props.results.data)
-            });
-        }
-    },
     render: function(){
       // local variables
-        var nid = null;
-        var prediction = null;
-
-        if (
-            this.props &&
-            this.props.results &&
-            !!this.props.results.nid &&
-            !!this.props.results.data
-        ) {
-            var nid = this.props.results.nid;
-            var prediction = JSON.parse(this.props.results.data);
-        }
+        const titles = JSON.parse(this.state.ajax_done_result['titles']);
 
       // polyfill 'entries'
         if (!Object.entries) {
@@ -102,14 +77,7 @@ var ResultsDisplay = React.createClass({
         }
 
       // generate result
-        if (
-            nid &&
-            prediction &&
-            this.props &&
-            this.props.results &&
-            this.props.results.data &&
-            Object.keys(prediction).length > 0
-        ) {
+        if (titles) {
             var resultList = <ul className='result-list'>{
                 Object.entries(prediction).map(([item_key, value]) =>
                     <Link to={'/session/result/' + nid}>
