@@ -80,7 +80,7 @@ var ResultsDisplay = React.createClass({
         if (titles) {
             var resultList = <ul className='result-list'>{
                 Object.entries(prediction).map(([item_key, value]) =>
-                    <Link to={'/session/result/' + nid}>
+                    <Link to={'/session/result?nid=' + nid}>
                         <li key={item_key}>{item_key}: {value}</li>
                     </Link>
                 )
