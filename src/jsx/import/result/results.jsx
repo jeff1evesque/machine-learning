@@ -21,17 +21,13 @@ var ResultsDisplay = React.createClass({
             titles: null,
         };
     },
-  // send form data to serverside on form submission
-    handleSubmit: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
-      // local variables
+  // call back: get all titles, and nid from server side
+    componentDidMount: function() {
+      // ajax arguments
         const ajaxEndpoint = '/retrieve-prediction-titles';
-
-      // ajax process
-        var ajaxArguments = {
+        const ajaxArguments = {
             'endpoint': ajaxEndpoint,
+            'data': null
         };
 
       // boolean to show ajax spinner
@@ -69,7 +65,7 @@ var ResultsDisplay = React.createClass({
     },
     render: function(){
       // local variables
-        const titles = JSON.parse(this.state.ajax_done_result['titles']);
+        const results = this.state.ajax_done_result.titles;
 
       // polyfill 'entries'
         if (!Object.entries) {
@@ -77,10 +73,10 @@ var ResultsDisplay = React.createClass({
         }
 
       // generate result
-        if (titles) {
+        if (results) {
             var resultList = <ul className='result-list'>{
-                Object.entries(prediction).map(([item_key, value]) =>
-                    <Link to={'/session/result?nid=' + nid}>
+                Object.entries(results).map(([item_key, value]) =>
+                    <Link to={'/session/result?nid=' + item_key}>
                         <li key={item_key}>{item_key}: {value}</li>
                     </Link>
                 )
