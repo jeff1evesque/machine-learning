@@ -19,6 +19,7 @@ var ResultsDisplay = React.createClass({
         return {
             nid: null,
             titles: null,
+            status: null
         };
     },
   // call back: get all titles, and nid from server side
@@ -35,11 +36,18 @@ var ResultsDisplay = React.createClass({
 
       // asynchronous callback: ajax 'done' promise
         ajaxCaller(function (asynchObject) {
+
         // Append to DOM
             if (asynchObject && asynchObject.error) {
                 this.setState({ajax_done_error: asynchObject.error});
             } else if (asynchObject) {
-                this.setState({ajax_done_result: asynchObject});
+                const response = asynchObject;
+
+                ## enumerate and store response
+                Object.keys(results).map(key => {
+                    this.setState({status: asynchObject.status});
+                    this.setState({titles: asynchObject.titles});
+                });
             }
             else {
                 this.setState({ajax_done_result: null});
@@ -64,18 +72,15 @@ var ResultsDisplay = React.createClass({
         ajaxArguments);
     },
     render: function(){
-      // local variables
-        const results = this.state.ajax_done_result.titles;
-
       // polyfill 'entries'
         if (!Object.entries) {
             entries.shim();
         }
 
       // generate result
-        if (results) {
+        if (this.state.status == 0) {
             var resultList = <ul className='result-list'>{
-                Object.entries(results).map(([item_key, value]) =>
+                Object.entries(titles).map(([item_key, value]) =>
                     <Link to={'/session/result?nid=' + item_key}>
                         <li key={item_key}>{item_key}: {value}</li>
                     </Link>
