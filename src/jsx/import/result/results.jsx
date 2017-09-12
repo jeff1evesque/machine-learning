@@ -41,13 +41,10 @@ var ResultsDisplay = React.createClass({
             if (asynchObject && asynchObject.error) {
                 this.setState({ajax_done_error: asynchObject.error});
             } else if (asynchObject) {
-                const response = asynchObject;
+                const results = asynchObject;
 
-                ## enumerate and store response
-                Object.keys(results).map(key => {
-                    this.setState({status: asynchObject.status});
-                    this.setState({titles: asynchObject.titles});
-                });
+                // enumerate and store response
+                this.setState(Object.assign({}, results))
             }
             else {
                 this.setState({ajax_done_result: null});
