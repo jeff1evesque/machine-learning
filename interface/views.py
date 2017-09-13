@@ -422,7 +422,7 @@ def retrieve_prediction_titles():
 
         # invalid request
         else:
-            return json.dumps({'status': 2})
+            return json.dumps({'status': 2, 'titles': None})
 
         # query database
         prediction = Prediction()
@@ -438,10 +438,7 @@ def retrieve_prediction_titles():
             }, default=str)
 
         else:
-            return json.dumps({
-                'status': 1,
-                'titles': None
-            })
+            return json.dumps({'status': 1, 'titles': None})
 
 
 @blueprint.route(
