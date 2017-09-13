@@ -81,17 +81,19 @@ var ResultsDisplay = React.createClass({
       // generate result
         if (status == 0 && !!titles) {
             const resultList = <ul className='result-list'>{
-                Object.entries(titles).map(([nid, title, date]) =>
-                    <Link to={'/session/result?nid=' + nid}>
-                        <li key={'title-' + nid}>
-                            {nid}: {title}
+                titles.map((title) => {
+                    return <Link to={'/session/result?nid=' + titles[0]}>
+                        <li key={'title-' + titles[0]}>
+                            {titles[0]}: {titles[1]}
                         </li>
                     </Link>
-                )
-            }</ul>;
+                });
+            }
         }
         else {
-            const resultList = <div className='result-list'>Sorry, no results available!</div>;
+            const resultList = <div className='result-list'>
+                Sorry, no results available!
+            </div>;
         }
 
       // display result
