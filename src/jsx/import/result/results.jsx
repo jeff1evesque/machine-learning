@@ -69,23 +69,27 @@ var ResultsDisplay = React.createClass({
         ajaxArguments);
     },
     render: function(){
+      // local variables
+        const status = this.state.status;
+        const titles = this.state.titles;
+
       // polyfill 'entries'
         if (!Object.entries) {
             entries.shim();
         }
 
       // generate result
-        if (this.state.status == 0) {
-            var resultList = <ul className='result-list'>{
-                Object.entries(titles).map(([item_key, value]) =>
-                    <Link to={'/session/result?nid=' + item_key}>
-                        <li key={item_key}>{item_key}: {value}</li>
+        if (status == 0 && !!titles) {
+            const resultList = <ul className='result-list'>{
+                Object.entries(titles).map(([nid, title, date]) =>
+                    <Link to={'/session/result?nid=' + nid}>
+                        <li key={'title-' + nid}nid: title</li>
                     </Link>
                 )
             }</ul>;
         }
         else {
-            var resultList = <div className='result-list'>Sorry, no results available!</div>;
+            const resultList = <div className='result-list'>Sorry, no results available!</div>;
         }
 
       // display result
