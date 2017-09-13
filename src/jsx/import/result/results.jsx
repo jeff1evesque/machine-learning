@@ -83,7 +83,9 @@ var ResultsDisplay = React.createClass({
             const resultList = <ul className='result-list'>{
                 Object.entries(titles).map(([nid, title, date]) =>
                     <Link to={'/session/result?nid=' + nid}>
-                        <li key={'title-' + nid}nid: title</li>
+                        <li key={'title-' + nid}>
+                            {nid}: {title}
+                        </li>
                     </Link>
                 )
             }</ul>;
