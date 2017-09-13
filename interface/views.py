@@ -420,9 +420,9 @@ def retrieve_prediction_titles():
             args = json.loads(results['args'])
             model_type = args['model_type']
 
-        # invalid request
+        # retrieve all titles
         else:
-            return json.dumps({'status': 2, 'titles': None})
+            model_type = 'all'
 
         # query database
         prediction = Prediction()
