@@ -82,11 +82,13 @@ var ResultsDisplay = React.createClass({
         if (status == 0 && !!titles) {
             const resultList = <ul className='result-list'>{
                 titles.map((title) => {
-                    return <Link to={'/session/result?nid=' + titles[0]}>
-                        <li key={'title-' + titles[0]}>
-                            {titles[0]}: {titles[1]}
-                        </li>
-                    </Link>
+                    if (title.length == 3) {
+                        return <Link to={'/session/result?nid=' + title[0]}>
+                            <li key={'title-' + title[0]}>
+                                {titles[0]}: {title[1]}
+                            </li>
+                        </Link>
+                    }
                 });
             }</ul>;
         }
