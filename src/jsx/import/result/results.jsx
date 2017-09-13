@@ -9,6 +9,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router'
 import 'core-js/modules/es7.object.entries';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -17,7 +18,6 @@ var ResultsDisplay = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            nid: null,
             titles: null,
             status: null
         };
@@ -68,7 +68,7 @@ var ResultsDisplay = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-    render: function(){
+    render: function() {
       // local variables
         const status = this.state.status;
         const titles = this.state.titles;
@@ -80,20 +80,20 @@ var ResultsDisplay = React.createClass({
 
       // generate result
         if (status == 0 && !!titles) {
-            const resultList = <ul className='result-list'>{
+            var resultList = <ul className='result-list'>{
                 titles.map((title) => {
                     if (title.length == 3) {
                         return <Link to={'/session/result?nid=' + title[0]}>
                             <li key={'title-' + title[0]}>
-                                {titles[0]}: {title[1]}
+                                {title[0]}: {title[1]}
                             </li>
                         </Link>
                     }
-                });
+                })
             }</ul>;
         }
         else {
-            const resultList = <div className='result-list'>
+            var resultList = <div className='result-list'>
                 Sorry, no results available!
             </div>;
         }
