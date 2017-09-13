@@ -88,7 +88,7 @@ var ResultsDisplay = React.createClass({
                         </li>
                     </Link>
                 });
-            }
+            }</ul>;
         }
         else {
             const resultList = <div className='result-list'>
