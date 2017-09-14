@@ -129,7 +129,10 @@ var CurrentResultDisplay = React.createClass({
         }
 
       // generate result
-        if (
+        if (this.state.nid) {
+
+        }
+        else if (
             resultData &&
             this.props &&
             this.props.results &&
