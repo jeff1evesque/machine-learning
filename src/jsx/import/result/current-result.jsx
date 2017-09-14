@@ -18,6 +18,7 @@ var CurrentResultDisplay = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            nid: null,
             computed_result: null,
             computed_type: null,
         };
@@ -101,7 +102,7 @@ var CurrentResultDisplay = React.createClass({
         }
     },
     componentDidMount: function() {
-        if (this.props) {
+        if (!!this.props && this.props.location && this.props.location.search) {
             const parsed = queryString.parse(props.location.search);
             this.setState({nid: parsed.nid});
         }
