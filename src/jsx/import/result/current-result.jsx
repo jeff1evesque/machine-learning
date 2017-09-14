@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import queryString from 'query-string';
 import 'core-js/modules/es7.object.entries';
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
@@ -97,6 +98,12 @@ var CurrentResultDisplay = React.createClass({
                 computed_result: JSON.stringify(this.props.results.data),
                 computed_type: this.props.results.type
             });
+        }
+    },
+    componentDidMount: function() {
+        if (this.props) {
+            const parsed = queryString.parse(props.location.search);
+            this.setState({nid: parsed.nid});
         }
     },
     render: function(){
