@@ -10,9 +10,12 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import HomePage from '../content/home-page.jsx';
 import UserMenu from '../navigation/user-menu.jsx';
+import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
+import NavBar from '../navigation/nav-bar.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
@@ -50,6 +53,15 @@ var PageLayout = React.createClass({
 
         return(
             <div className={css}>
+                <Route
+                    path='/session'
+                    components={{
+                        content: AnalysisLayoutState,
+                        sidebar: NavBar,
+                        css: 'container analysis-container',
+                        layout: 'analysis'
+                    }}
+                />
                 <div className='menu-container'>
                     <UserMenu layout={layout} />
                 </div>

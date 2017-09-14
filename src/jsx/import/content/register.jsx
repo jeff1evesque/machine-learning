@@ -8,8 +8,8 @@
  */
 
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
-import { browserHistory } from 'react-router';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 import checkValidString from '../validator/valid-string.js';
@@ -121,7 +121,7 @@ var RegisterForm = React.createClass({
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            browserHistory.push('/');
+            <Redirect from='/login' to='/' />
         }
     },
     validateUsername: function(event) {

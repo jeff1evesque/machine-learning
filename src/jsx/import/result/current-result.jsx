@@ -102,9 +102,15 @@ var CurrentResultDisplay = React.createClass({
         }
     },
     componentDidMount: function() {
-        if (!!this.props && this.props.location && this.props.location.search) {
+        if (
+            !!this.props &&
+            !!this.props.location &&
+            !!this.props.location.search
+        ) {
             const parsed = queryString.parse(props.location.search);
-            this.setState({nid: parsed.nid});
+            if (!!parsed.nid) {
+                this.setState({nid: parsed.nid});
+            }
         }
     },
     render: function(){
@@ -130,7 +136,7 @@ var CurrentResultDisplay = React.createClass({
 
       // generate result
         if (this.state.nid) {
-
+            console.log('yes: ' + this.state.nid);
         }
         else if (
             resultData &&

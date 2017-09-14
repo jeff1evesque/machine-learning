@@ -8,18 +8,18 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
 var CurrentResultLink = React.createClass({
     render: function() {
         return (
-            <Link
+            <NavLink
                 to='/session/current-result'
                 activeClassName='active'
                 className='btn btn-primary'
             >
                 <span>Goto results</span>
-            </Link>
+            </NavLink>
         );
     }
 });

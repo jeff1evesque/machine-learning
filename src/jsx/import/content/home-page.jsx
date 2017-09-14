@@ -12,20 +12,20 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom';
 
 var HomePage = React.createClass({
     render: function() {
         return(
             <div className='main-full-span home'>
                 <h1>Welcome!</h1>
-                <Link
-                    to='/session'
+                <NavLink
+                    to='session'
                     activeClassName='active'
                     className='btn mn-2'
                 >
                 Begin Analysis
-                </Link>
+                </NavLink>
             </div>
         );
     }

@@ -8,20 +8,20 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom';
 import SvgHome from '../../svg/svg-home.jsx';
 
 var HomeLink = React.createClass({
   // triggered when 'state properties' change
     render: function() {
         return(
-            <Link
+            <NavLink
                 to='/'
                 activeClassName='active'
                 className='icon home'
             >
                 <SvgHome />
-            </Link>
+            </NavLink>
         );
     }
 });

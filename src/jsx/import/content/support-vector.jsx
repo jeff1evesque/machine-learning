@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import ModelGenerateState from '../redux/container/model-generate.jsx';
 import ModelPredictState from '../redux/container/model-predict.jsx';
 import DataNewState from '../redux/container/data-new.jsx';
@@ -20,7 +21,6 @@ import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
-import { browserHistory } from 'react-router'
 
 var SupportVector = React.createClass({
   // initial 'state properties'
@@ -58,7 +58,7 @@ var SupportVector = React.createClass({
         ) {
           // current component: accessed via form element update
             const url_suffix = event.target.value.replace(/_/g, '-');
-            browserHistory.replace('/session/' + url_suffix);
+            <Link to={'/session/' + url_suffix} replace />
 
           // update states
             this.setState({

@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom';
 
 var NavBar = React.createClass({
   // display result
@@ -14,43 +14,43 @@ var NavBar = React.createClass({
             <div className='menu-container'>
                 <ul className='side-menu'>
                     <li>
-                        <Link
+                        <NavLink
                            to='/session/data-new'
                            activeClassName='active'
                            className='menu-item'
                         >
                             Add new data
-                        </Link>
+                        </NavLink>
                     </li>
 
                     <li>
-                        <Link
+                        <NavLink
                             to='/session/data-append'
                             activeClassName='active'
                             className='menu-item'
                         >
                             Append data
-                        </Link>
+                        </NavLink>
                     </li>
 
                     <li>
-                        <Link
+                        <NavLink
                             to='/session/model-generate'
                             activeClassName='active'
                             className='menu-item'
                         >
                             Generate model
-                        </Link>
+                        </NavLink>
                     </li>
 
                     <li>
-                        <Link
+                        <NavLink
                             to='/session/model-predict'
                             activeClassName='active'
                             className='menu-item'
                         >
                             Make prediction
-                        </Link>
+                        </NavLink>
                     </li>
                 </ul>
             </div>

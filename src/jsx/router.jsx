@@ -5,20 +5,14 @@
  */
 
 import React from 'react';
-import {HashRouter, Route} from 'react-router-dom';
-import DataNewState from './import/redux/container/data-new.jsx';
-import DataAppendState from './import/redux/container/data-append.jsx';
-import ModelGenerateState from './import/redux/container/model-generate.jsx';
-import ModelPredictState from './import/redux/container/model-predict.jsx';
-import CurrentResultState from './import/redux/container/current-result.jsx';
-import ResultsDisplay from './import/result/results.jsx';
+import { Router, Route, Switch } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
 import RegisterState from './import/redux/container/register.jsx';
-import AnalysisLayoutState from './import/redux/container/analysis-layout.jsx';
 import PageLayout from './import/layout/page.jsx';
 import LoginLayout from './import/layout/login.jsx';
 import RegisterLayout from './import/layout/register.jsx';
-import NavBar from './import/navigation/nav-bar.jsx';
 
+const history = createBrowserHistory();
 var AppRouter = React.createClass({
   // display result
     render: function() {
@@ -32,61 +26,11 @@ var AppRouter = React.createClass({
 
       // render routers
         return(
-            <Router history={browserHistory}>
-                <Route path='/' component={PageLayout}>
+            <Router history={history}>
+                <Switch>
+                    <Route path='/' component={PageLayout} />
                     <Route
-                        path='/session'
-                        components={{
-                            content: AnalysisLayoutState,
-                            sidebar: NavBar,
-                            css: 'container analysis-container',
-                            layout: 'analysis'
-                        }}
-                    >
-                        <Route
-                            path='/session/data-new'
-                            components={{
-                                content: DataNewState,
-                                content_type: 'data_new'
-                            }}
-                        />
-                        <Route
-                            path='/session/data-append'
-                            components={{
-                                content: DataAppendState,
-                                content_type: 'data_append'
-                            }}
-                        />
-                        <Route
-                            path='/session/model-generate'
-                            components={{
-                                content: ModelGenerateState,
-                                content_type: 'model_generate'
-                            }}
-                        />
-                        <Route
-                            path='/session/model-predict'
-                            components={{
-                                content: ModelPredictState,
-                                content_type: 'model_predict'
-                            }}
-                        />
-                        <Route
-                            path='/session/current-result'
-                            components={{
-                                content: CurrentResultState,
-                                content_type: 'result'
-                            }}
-                        />
-                        <Route
-                            path='/session/results'
-                            components={{
-                                content: ResultsDisplay,
-                                content_type: 'result'
-                            }}
-                        />
-                    </Route>
-                    <Route
+                        exact
                         path='/login'
                         components={{
                             content: LoginLayout,
@@ -96,6 +40,7 @@ var AppRouter = React.createClass({
                         }}
                     />
                     <Route
+                        exact
                         path='/logout'
                         components={{
                             content: LoginLayout,
@@ -105,6 +50,7 @@ var AppRouter = React.createClass({
                         }}
                     />
                     <Route
+                        exact
                         path='/register'
                         components={{
                             content: RegisterLayout,
@@ -113,7 +59,7 @@ var AppRouter = React.createClass({
                             layout: 'register'
                         }}
                     />
-                </Route>
+                </Switch>
             </Router>
         );
     }

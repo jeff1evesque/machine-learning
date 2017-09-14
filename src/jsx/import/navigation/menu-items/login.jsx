@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { browserHistory, Link } from 'react-router';
+import { NavLink, Redirect } from 'react-router-dom';
 import setLoginState from '../../redux/action/login.jsx';
 import setLogoutState from '../../redux/action/logout.jsx';
 import ajaxCaller from '../../general/ajax-caller.js';
@@ -26,26 +26,26 @@ var LoginLink = React.createClass({
             this.props.user.name == 'anonymous'
         ) {
             return (
-                <Link
+                <NavLink
                     to='/login'
                     activeClassName='active'
                     className='btn mn-2'
                     onClick={this.menuClicked}
                 >
                     <span>Sign in</span>
-                </Link>
+                </NavLink>
             );
         }
         else {
             return (
-                <Link
+                <NavLink
                     to='/logout'
                     activeClassName='active'
                     className='btn mn-2'
                     onClick={this.menuClicked}
                 >
                     <span>Logout</span>
-                </Link>
+                </NavLink>
             );
         }
     },
@@ -103,7 +103,7 @@ var LoginLink = React.createClass({
             sessionStorage.removeItem('username');
 
           // redirect to homepage if logged-out
-            browserHistory.push('/');
+            <Redirect from='/login' to='/' />
         }
     },
     render: function(){

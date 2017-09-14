@@ -9,7 +9,7 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router'
+import { NavLink } from 'react-router-dom';
 import 'core-js/modules/es7.object.entries';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -83,14 +83,14 @@ var ResultsDisplay = React.createClass({
             var resultList = <ul className='result-list'>{
                 titles.map((title) => {
                     if (title.length == 3) {
-                        return <Link
+                        return <NavLink
                             to={'/session/result?nid=' + title[0]}
                             key={'link-' + title[0]}
                         >
                             <li key={'title-' + title[0]}>
                                 {title[0]}: {title[1]}
                             </li>
-                        </Link>
+                        </NavLink>
                     }
                 })
             }</ul>;

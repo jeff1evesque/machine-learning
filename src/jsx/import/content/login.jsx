@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { browserHistory } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -80,7 +80,7 @@ var LoginForm = React.createClass({
 
                           // redirect to homepage if logged-in
                             if (!!result && !!username && username != 'anonymous') {
-                                browserHistory.push('/');
+                                <Redirect from='/login' to='/' />
                             }
 
                             break;
@@ -130,7 +130,7 @@ var LoginForm = React.createClass({
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            browserHistory.push('/');
+            <Redirect from='/login' to='/' />
         }
     },
     updateUsername: function(event) {
