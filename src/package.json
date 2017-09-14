@@ -11,15 +11,16 @@
   "dependencies": {
     "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.22.0",
+    "core-js": "^2.4.1",
+    "promise-polyfill": "^6.0.2",
+    "query-string": "^5.0.0",
     "react": "^15.4.4",
     "react-dom": "^15.4.4",
+    "react-router-dom": "^4.2.2",
+    "react-redux": "^5.0.2",
     "react-router": "^4.2.0",
     "redux": "^3.6.0",
-    "react-redux": "^5.0.2",
-    "core-js": "^2.4.1",
-    "babel-preset-stage-2": "^6.22.0",
-    "whatwg-fetch": "^2.0.2",
-    "promise-polyfill": "^6.0.2",
-    "query-string": "^5.0.0"
+    "whatwg-fetch": "^2.0.2"
   }
 }

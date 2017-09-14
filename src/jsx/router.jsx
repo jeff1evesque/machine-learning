@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Router, Route, browserHistory } from 'react-router';
+import {HashRouter, Route} from 'react-router-dom';
 import DataNewState from './import/redux/container/data-new.jsx';
 import DataAppendState from './import/redux/container/data-append.jsx';
 import ModelGenerateState from './import/redux/container/model-generate.jsx';
