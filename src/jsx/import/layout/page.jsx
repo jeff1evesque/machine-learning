@@ -25,7 +25,7 @@ var PageLayout = React.createClass({
             const layout = this.props.layout.css;
         }
         else {
-            const layout = 'default';
+            const css = 'container default';
         }
 
       // default value: layout style
@@ -33,7 +33,7 @@ var PageLayout = React.createClass({
             const layout = this.props.layout.type;
         }
         else {
-            const css = 'container default';
+            const layout = 'default';
         }
 
         return(
