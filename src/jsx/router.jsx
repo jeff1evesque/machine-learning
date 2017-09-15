@@ -7,7 +7,7 @@
 import React from 'react';
 import { Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
-import PageLayout from './import/redux/container/page.jsx';
+import PageLayoutState from './import/redux/container/page.jsx';
 import HomePage from './import/content/home-page.jsx';
 
 const history = createBrowserHistory();
