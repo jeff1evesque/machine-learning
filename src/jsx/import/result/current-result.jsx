@@ -10,6 +10,7 @@
 import React from 'react';
 import queryString from 'query-string';
 import 'core-js/modules/es7.object.entries';
+import { setLayout } from '../redux/action/page.jsx';
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -176,6 +177,10 @@ var CurrentResultDisplay = React.createClass({
         else {
             var resultList = <div className='result-list'>Sorry, no results available!</div>;
         }
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'Analysis'});
+        this.props.dispatchLayout(action);
 
       // display result
         return(

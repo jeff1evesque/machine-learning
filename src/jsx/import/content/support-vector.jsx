@@ -17,7 +17,7 @@ import Submit from '../general/submit-button.jsx';
 import CurrentResultLink from '../navigation/menu-items/current-result.jsx';
 import Spinner from '../general/spinner.jsx';
 import setCurrentResult from '../redux/action/current-result.jsx';
-import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
+import { setSvButton, setGotoResultsButton, setLayout } from '../redux/action/page.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -238,6 +238,10 @@ var SupportVector = React.createClass({
                 var resultBtn = !!button.goto_results ? <CurrentResultLink /> : null;
             }
         }
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'Analysis'});
+        this.props.dispatchLayout(action);
 
         {/* return:
             @analysisForm, attribute is used within 'handleSubmit' callback

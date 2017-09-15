@@ -10,6 +10,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
+import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 import checkValidString from '../validator/valid-string.js';
@@ -195,6 +196,10 @@ var RegisterForm = React.createClass({
         else {
             var emailNote = null;
         }
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'Register'});
+        this.props.dispatchLayout(action);
 
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>

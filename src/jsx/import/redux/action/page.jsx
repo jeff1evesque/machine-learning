@@ -23,12 +23,8 @@ function setGotoResultsButton(action) {
 }
 
 function setLayout(action) {
-    const layout = action.layout;
-    const css    = action.css
-
     return {
         type: 'SET-LAYOUT',
-        css: action.css,
         layout: action.layout
     };
 }

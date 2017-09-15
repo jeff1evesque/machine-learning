@@ -20,23 +20,20 @@ import RegisterLayout from './register.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
-      // default value: main content
-        const home = content;
-
       // default value: css classnames
-        if (css && !!css.type) {
-            var css = css.type;
+        if (!!this.props && !!this.props.layout !!this.props.layout.css) {
+            const layout = this.props.layout.css;
         }
         else {
-            var css = 'container default';
+            const layout = 'default';
         }
 
       // default value: layout style
-        if (layout && !!layout.type) {
-            var layout = layout.type;
+        if (!!this.props && !!this.props.layout !!this.props.layout.type) {
+            const layout = this.props.layout.type;
         }
         else {
-            var layout = 'default';
+            const css = 'container default';
         }
 
         return(

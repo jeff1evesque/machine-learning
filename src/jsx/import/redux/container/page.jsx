@@ -17,8 +17,10 @@ import { setLayout } from '../action/page.jsx';
 const mapStateToProps = (state) => {
   // return redux to state
     return {
-        layout: state.layout
-        css: state.css
+        layout: {
+            type: state.layout
+            css: state.css
+        }
     }
 }
 

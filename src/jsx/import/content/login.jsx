@@ -14,6 +14,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
+import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -150,6 +151,10 @@ var LoginForm = React.createClass({
         else {
             var loginNote = null;
         }
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'Login'});
+        this.props.dispatchLayout(action);
 
         return(
             <form onSubmit={this.handleSubmit} ref='loginForm'>

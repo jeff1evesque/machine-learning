@@ -11,6 +11,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import 'core-js/modules/es7.object.entries';
+import { setLayout } from '../redux/action/page.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -100,6 +101,10 @@ var ResultsDisplay = React.createClass({
                 Sorry, no results available!
             </div>;
         }
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'Analysis'});
+        this.props.dispatchLayout(action);
 
       // display result
         return(
