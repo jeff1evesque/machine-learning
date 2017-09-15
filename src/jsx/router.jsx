@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import RegisterState from './import/redux/container/register.jsx';
 import PageLayout from './import/layout/page.jsx';
@@ -27,39 +27,7 @@ var AppRouter = React.createClass({
       // render routers
         return(
             <Router history={history}>
-                <Switch>
-                    <Route path='/' component={PageLayout} />
-                    <Route
-                        exact
-                        path='/login'
-                        components={{
-                            content: LoginLayout,
-                            sidebar: null,
-                            css: 'container login',
-                            layout: 'login'
-                        }}
-                    />
-                    <Route
-                        exact
-                        path='/logout'
-                        components={{
-                            content: LoginLayout,
-                            sidebar: null,
-                            css: 'container login',
-                            layout: 'login'
-                        }}
-                    />
-                    <Route
-                        exact
-                        path='/register'
-                        components={{
-                            content: RegisterLayout,
-                            sidebar: null,
-                            css: 'container register',
-                            layout: 'register'
-                        }}
-                    />
-                </Switch>
+                <Route path='/' component={PageLayout} />
             </Router>
         );
     }

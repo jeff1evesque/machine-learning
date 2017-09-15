@@ -24,7 +24,7 @@ var HomePage = React.createClass({
                     activeClassName='active'
                     className='btn mn-2'
                 >
-                Begin Analysis
+                    Begin Analysis
                 </NavLink>
             </div>
         );

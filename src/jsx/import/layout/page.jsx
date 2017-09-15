@@ -10,7 +10,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import HomePage from '../content/home-page.jsx';
 import UserMenu from '../navigation/user-menu.jsx';
@@ -53,15 +53,47 @@ var PageLayout = React.createClass({
 
         return(
             <div className={css}>
-                <Route
-                    path='/session'
-                    components={{
-                        content: AnalysisLayoutState,
-                        sidebar: NavBar,
-                        css: 'container analysis-container',
-                        layout: 'analysis'
-                    }}
-                />
+                <Switch>
+                    <Route
+                        exact
+                        path='/login'
+                        components={{
+                            content: LoginLayout,
+                            sidebar: null,
+                            css: 'container login',
+                            layout: 'login'
+                        }}
+                    />
+                    <Route
+                        exact
+                        path='/logout'
+                        components={{
+                            content: LoginLayout,
+                            sidebar: null,
+                            css: 'container login',
+                            layout: 'login'
+                        }}
+                    />
+                    <Route
+                        exact
+                        path='/register'
+                        components={{
+                            content: RegisterLayout,
+                            sidebar: null,
+                            css: 'container register',
+                            layout: 'register'
+                        }}
+                    />
+                    <Route
+                        path='/session'
+                        components={{
+                            content: AnalysisLayoutState,
+                            sidebar: NavBar,
+                            css: 'container analysis-container',
+                            layout: 'analysis'
+                        }}
+                    </Route>
+                </Switch>
                 <div className='menu-container'>
                     <UserMenu layout={layout} />
                 </div>
