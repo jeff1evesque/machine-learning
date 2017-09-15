@@ -10,33 +10,18 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import HomePage from '../content/home-page.jsx';
 import UserMenu from '../navigation/user-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 import NavBar from '../navigation/nav-bar.jsx';
-import PageLayout from './import/layout/page.jsx';
-import LoginLayout from './import/layout/login.jsx';
-import RegisterLayout from './import/layout/register.jsx';
+import LoginLayout from './login.jsx';
+import RegisterLayout from './register.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
-      // destructure react-router
-        var {
-            content,
-            sidebar,
-            css,
-            layout
-        } = this.props;
-
       // default value: main content
-        if (this.props.location.pathname == '/') {
-            var content = <HomePage />;
-        }
-        else if (!content) {
-            var content = null;
-        }
+        const home = content;
 
       // default value: css classnames
         if (css && !!css.type) {
@@ -56,53 +41,21 @@ var PageLayout = React.createClass({
 
         return(
             <div className={css}>
-                <Switch>
-                    <Route
-                        exact
-                        path='/login'
-                        components={{
-                            content: LoginLayout,
-                            sidebar: null,
-                            css: 'container login',
-                            layout: 'login'
-                        }}
-                    />
-                    <Route
-                        exact
-                        path='/logout'
-                        components={{
-                            content: LoginLayout,
-                            sidebar: null,
-                            css: 'container login',
-                            layout: 'login'
-                        }}
-                    />
-                    <Route
-                        exact
-                        path='/register'
-                        components={{
-                            content: RegisterLayout,
-                            sidebar: null,
-                            css: 'container register',
-                            layout: 'register'
-                        }}
-                    />
-                    <Route
-                        path='/session'
-                        components={{
-                            content: AnalysisLayoutState,
-                            sidebar: NavBar,
-                            css: 'container analysis-container',
-                            layout: 'analysis'
-                        }}
-                    </Route>
-                </Switch>
                 <div className='menu-container'>
                     <UserMenu layout={layout} />
                 </div>
                 <div className='main'>
-                    {sidebar}
-                    {content}
+                    <Switch>
+                        <Route exact path='/login' component={LoginLayout} />
+                        <Route exact path='/logout' component={LoginLayout} />
+                        <Route exact path='/register' component={RegisterLayout} />
+                        <Route path='/session' render = {(props) => {
+                            return <div>
+                                <NavBar />
+                                <AnalysisLayoutState />
+                            </div>
+                        </Route>
+                    </Switch>
                 </div>
             </div>
         );

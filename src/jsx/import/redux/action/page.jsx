@@ -22,5 +22,16 @@ function setGotoResultsButton(action) {
     };
 }
 
+function setLayout(action) {
+    const layout = action.layout;
+    const css    = action.css
+
+    return {
+        type: 'SET-LAYOUT',
+        css: action.css,
+        layout: action.layout
+    };
+}
+
 // indicate which class can be exported, and instantiated via 'require'
-export { setSvButton, setGotoResultsButton }
+export { setSvButton, setGotoResultsButton, setLayout }

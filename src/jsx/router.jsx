@@ -5,9 +5,10 @@
  */
 
 import React from 'react';
-import { Router, Route } from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
-import RegisterState from './import/redux/container/register.jsx';
+import PageLayout from './import/redux/container/page.jsx';
+import HomePage from './import/content/home-page.jsx';
 
 const history = createBrowserHistory();
 var AppRouter = React.createClass({
@@ -24,7 +25,10 @@ var AppRouter = React.createClass({
       // render routers
         return(
             <Router history={history}>
-                <Route path='/' component={PageLayout} />
+                <Switch>
+                    <Route path='/' component={HomePage} />
+                    <PageLayoutState />
+                </Switch>
             </Router>
         );
     }
