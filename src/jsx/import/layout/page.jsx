@@ -16,6 +16,9 @@ import HomePage from '../content/home-page.jsx';
 import UserMenu from '../navigation/user-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 import NavBar from '../navigation/nav-bar.jsx';
+import PageLayout from './import/layout/page.jsx';
+import LoginLayout from './import/layout/login.jsx';
+import RegisterLayout from './import/layout/register.jsx';
 
 var PageLayout = React.createClass({
     render: function() {

@@ -8,9 +8,6 @@ import React from 'react';
 import { Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import RegisterState from './import/redux/container/register.jsx';
-import PageLayout from './import/layout/page.jsx';
-import LoginLayout from './import/layout/login.jsx';
-import RegisterLayout from './import/layout/register.jsx';
 
 const history = createBrowserHistory();
 var AppRouter = React.createClass({
