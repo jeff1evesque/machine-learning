@@ -11,7 +11,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PageLayout from '../../layout/page.jsx';
-import { setLayout } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -24,17 +23,10 @@ const mapStateToProps = (state) => {
     }
 }
 
-// wraps each function of the object to be dispatch callable
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatchLayout: dispatch.bind(setLayout)
-    }
-}
-
 // pass selected properties from redux state tree to component
 const PageLayoutState = connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(PageLayout)
 
 // indicate which class can be exported, and instantiated via 'require'
