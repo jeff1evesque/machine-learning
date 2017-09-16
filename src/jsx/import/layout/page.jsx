@@ -43,23 +43,27 @@ var PageLayout = React.createClass({
 
         return(
             <Router history={history}>
-                <div className={css}>
-                    <div className='menu-container'>
-                        <UserMenu layout={layout} />
+                <div>
+                    <div className={css}>
+                        <div className='menu-container'>
+                            <UserMenu layout={layout} />
+                        </div>
+                        <div className='main'>
+                            <Route exact path='/login' component={LoginLayout} />
+                            <Route exact path='/logout' component={LoginLayout} />
+                            <Route exact path='/register' component={RegisterLayout} />
+                            <Route path='/session' render = {(props) => {
+                                return(
+                                    <div>
+                                        <NavBar />
+                                        <AnalysisLayoutState />
+                                    </div>
+                                )
+                            }} />
+                        </div>
                     </div>
-                    <div className='main'>
-                        <Route exact path='/login' component={LoginLayout} />
-                        <Route exact path='/logout' component={LoginLayout} />
-                        <Route exact path='/register' component={RegisterLayout} />
-                        <Route path='/session' render = {(props) => {
-                            <div>
-                                <NavBar />
-                                <AnalysisLayoutState />
-                            </div>
-                        }} />
-                    </div>
+                    <Route exact path='/' component={HomePage} />
                 </div>
-                <Route exact path='/' component={HomePage} />
             </Router>
         );
     }
