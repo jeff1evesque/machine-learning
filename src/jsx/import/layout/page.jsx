@@ -22,6 +22,9 @@ import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
+      // local variables
+        const history = createBrowserHistory();
+
       // default value: css classnames
         if (!!this.props && !!this.props.layout && !!this.props.layout.css) {
             var css = this.props.layout.css;
