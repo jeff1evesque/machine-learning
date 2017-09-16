@@ -11,7 +11,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import AppRouter from './router.jsx';
+import PageLayoutState from './import/redux/container/page.jsx';
 import store from './import/redux/store.jsx';
 
 // render application
@@ -23,7 +23,7 @@ import store from './import/redux/store.jsx';
 //
 ReactDOM.render(
     <Provider store={store}>
-        <AppRouter />
+        <PageLayoutState />
     </Provider>,
     document.querySelector('.container')
 );

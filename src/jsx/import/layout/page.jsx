@@ -10,39 +10,41 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
+import { Router, Route } from 'react-router-dom';
+import createBrowserHistory from 'history/createBrowserHistory';
+import HomePage from '../content/home-page.jsx';
 import UserMenu from '../navigation/user-menu.jsx';
-import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 import NavBar from '../navigation/nav-bar.jsx';
 import LoginLayout from './login.jsx';
 import RegisterLayout from './register.jsx';
+import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
       // default value: css classnames
         if (!!this.props && !!this.props.layout && !!this.props.layout.css) {
-            const css = this.props.layout.css;
+            var css = this.props.layout.css;
         }
         else {
-            const css = 'container default';
+            var css = 'container default';
         }
 
       // default value: layout style
         if (!!this.props && !!this.props.layout && !!this.props.layout.type) {
-            const layout = this.props.layout.type;
+            var layout = this.props.layout.type;
         }
         else {
-            const layout = 'default';
+            var layout = 'default';
         }
 
         return(
-            <div className={css}>
-                <div className='menu-container'>
-                    <UserMenu layout={layout} />
-                </div>
-                <div className='main'>
-                    <Switch>
+            <Router history={history}>
+                <div className={css}>
+                    <div className='menu-container'>
+                        <UserMenu layout={layout} />
+                    </div>
+                    <div className='main'>
                         <Route exact path='/login' component={LoginLayout} />
                         <Route exact path='/logout' component={LoginLayout} />
                         <Route exact path='/register' component={RegisterLayout} />
@@ -52,9 +54,10 @@ var PageLayout = React.createClass({
                                 <AnalysisLayoutState />
                             </div>
                         }} />
-                    </Switch>
+                    </div>
                 </div>
-            </div>
+                <Route exact path='/' component={HomePage} />
+            </Router>
         );
     }
 });
