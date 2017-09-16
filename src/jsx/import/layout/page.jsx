@@ -22,7 +22,7 @@ var PageLayout = React.createClass({
     render: function() {
       // default value: css classnames
         if (!!this.props && !!this.props.layout && !!this.props.layout.css) {
-            const layout = this.props.layout.css;
+            const css = this.props.layout.css;
         }
         else {
             const css = 'container default';
