@@ -18,7 +18,7 @@ const mapStateToProps = (state) => {
   // return redux to state
     return {
         layout: {
-            type: state.layout
+            type: state.layout,
             css: state.css
         }
     }

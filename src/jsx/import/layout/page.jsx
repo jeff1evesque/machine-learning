@@ -21,7 +21,7 @@ import RegisterLayout from './register.jsx';
 var PageLayout = React.createClass({
     render: function() {
       // default value: css classnames
-        if (!!this.props && !!this.props.layout !!this.props.layout.css) {
+        if (!!this.props && !!this.props.layout && !!this.props.layout.css) {
             const layout = this.props.layout.css;
         }
         else {
@@ -29,7 +29,7 @@ var PageLayout = React.createClass({
         }
 
       // default value: layout style
-        if (!!this.props && !!this.props.layout !!this.props.layout.type) {
+        if (!!this.props && !!this.props.layout && !!this.props.layout.type) {
             const layout = this.props.layout.type;
         }
         else {
@@ -47,11 +47,11 @@ var PageLayout = React.createClass({
                         <Route exact path='/logout' component={LoginLayout} />
                         <Route exact path='/register' component={RegisterLayout} />
                         <Route path='/session' render = {(props) => {
-                            return <div>
+                            <div>
                                 <NavBar />
                                 <AnalysisLayoutState />
                             </div>
-                        </Route>
+                        }} />
                     </Switch>
                 </div>
             </div>
