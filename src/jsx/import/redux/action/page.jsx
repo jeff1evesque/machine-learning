@@ -29,5 +29,12 @@ function setLayout(action) {
     };
 }
 
+function setContentType(action) {
+    return {
+        type: 'SET-CONTENT-TYPE',
+        content_type: action.content_type
+    };
+}
+
 // indicate which class can be exported, and instantiated via 'require'
-export { setSvButton, setGotoResultsButton, setLayout }
+export { setSvButton, setGotoResultsButton, setLayout, setContentType }
