@@ -13,7 +13,7 @@
 import React from 'react';
 import checkValidString from '../validator/valid-string.js';
 import Spinner from '../general/spinner.jsx';
-import { setSvButton } from '../redux/action/page.jsx';
+import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelGenerate = React.createClass({
@@ -232,11 +232,18 @@ var ModelGenerate = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+
+      // update redux store
+        const action = setContentType({'layout': 'Analysis'});
+        this.props.dispatchContentType(action);
     },
     componentWillUnmount: function() {
       // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
-        this.props.dispatchSvButton(action);
+        const actionLayout = setLayout({'layout': 'Analysis'});
+        this.props.dispatchContentType(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'model_generate'});
+        this.props.dispatchContentType(actionContentType);
     }
 });
 

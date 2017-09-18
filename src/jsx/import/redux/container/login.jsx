@@ -37,7 +37,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchLogin: dispatch.bind(setLoginState),
-        dispatchLayout: dispatch.bind(setLayout)
+        dispatchLayout: dispatch.bind(setLayout),
+        dispatchContentType: dispatch.bind(setContentType)
     }
 }
 

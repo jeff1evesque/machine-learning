@@ -10,11 +10,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import setContentType from '../action/page.jsx';
 import AnalysisLayout from '../../layout/analysis.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
+    var contentType = false;
     var displayGotoResults = false;
 
     if (
@@ -39,24 +39,16 @@ const mapStateToProps = (state) => {
         page: {
             button: {
                 goto_results: displayGotoResults
-            }
-            css: css,
+            },
             content_type: contentType
         }
-    }
-}
-
-// wraps each function of the object to be dispatch callable
-const mapDispatchToProps = (dispatch) => {
-    return {
-        dispatchContentType: dispatch.bind(setContentType)
     }
 }
 
 // pass selected properties from redux state tree to component
 const AnalysisLayoutState = connect(
     mapStateToProps,
-    mapDispatchToProps
+    null
 )(AnalysisLayout)
 
 // indicate which class can be exported, and instantiated via 'require'

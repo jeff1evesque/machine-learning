@@ -20,7 +20,7 @@ import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
 import Spinner from '../general/spinner.jsx';
-import { setSvButton } from '../redux/action/page.jsx';
+import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var DataAppend = React.createClass({
@@ -218,6 +218,13 @@ var DataAppend = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+
+      // update redux store
+        const actionLayout = setLayout({'layout': 'Analysis'});
+        this.props.dispatchContentType(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'data_append'});
+        this.props.dispatchContentType(actionContentType);
     },
     componentWillUnmount: function() {
       // update redux store

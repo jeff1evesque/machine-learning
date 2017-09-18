@@ -149,6 +149,11 @@ var RegisterForm = React.createClass({
         this.setState({validated_password: check});
         this.setState({value_password: password});
     },
+    componentDidMount: function(event) {
+      // update redux store
+        const action = setContentType({'layout': 'Analysis'});
+        this.props.dispatchContentType(action);
+    },
   // triggered when 'state properties' change
     render: function() {
       // local variables
@@ -196,10 +201,6 @@ var RegisterForm = React.createClass({
         else {
             var emailNote = null;
         }
-
-      // update redux store: define overall page layout
-        const action = setLayout({'layout': 'Register'});
-        this.props.dispatchLayout(action);
 
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>

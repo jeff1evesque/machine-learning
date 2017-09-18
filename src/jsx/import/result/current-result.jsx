@@ -10,7 +10,7 @@
 import React from 'react';
 import queryString from 'query-string';
 import 'core-js/modules/es7.object.entries';
-import { setLayout } from '../redux/action/page.jsx';
+import { setLayout, setContentType } from '../redux/action/page.jsx';
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -113,6 +113,9 @@ var CurrentResultDisplay = React.createClass({
                 this.setState({nid: parsed.nid});
             }
         }
+
+        const actionContentType = setContentType({'layout': 'result'});
+        this.props.dispatchContentType(actionContentType);
     },
     render: function(){
       // local variables

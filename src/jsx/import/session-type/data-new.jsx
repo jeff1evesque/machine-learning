@@ -15,7 +15,7 @@ import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
-import { setSvButton } from '../redux/action/page.jsx';
+import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
 
 var DataNew = React.createClass({
   // initial 'state properties'
@@ -105,6 +105,14 @@ var DataNew = React.createClass({
             const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
+    },
+    componentDidMount: function(event) {
+      // update redux store
+        const actionLayout = setLayout({'layout': 'Analysis'});
+        this.props.dispatchContentType(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'data_new'});
+        this.props.dispatchContentType(actionContentType);
     },
   // triggered when 'state properties' change
     render: function(){

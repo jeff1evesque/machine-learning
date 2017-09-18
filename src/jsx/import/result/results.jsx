@@ -11,7 +11,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import 'core-js/modules/es7.object.entries';
-import { setLayout } from '../redux/action/page.jsx';
+import { setLayout, setContentType } from '../redux/action/page.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -68,6 +68,9 @@ var ResultsDisplay = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+
+        const actionContentType = setContentType({'layout': 'result'});
+        this.props.dispatchContentType(actionContentType);
     },
     render: function() {
       // local variables

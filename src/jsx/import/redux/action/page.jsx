@@ -32,7 +32,7 @@ function setLayout(action) {
 function setContentType(action) {
     return {
         type: 'SET-CONTENT-TYPE',
-        content_type: action.content_type
+        content_type: action
     };
 }
 

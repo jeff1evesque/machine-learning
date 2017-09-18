@@ -24,14 +24,14 @@ const layout = (state='analysis', action) => {
             return Object.assign({}, state, {
                 layout: {
                     css : 'container login',
-                    type : action.register,
+                    type : action.layout,
                 }
             });
         case 'ANALYSIS':
             return Object.assign({}, state, {
                 layout: {
                     css : 'container analysis-container',
-                    type : action.register,
+                    type : action.layout,
                 }
             });
         default:

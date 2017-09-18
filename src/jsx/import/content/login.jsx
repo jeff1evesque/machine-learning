@@ -137,6 +137,11 @@ var LoginForm = React.createClass({
     updateUsername: function(event) {
         this.setState({value_username: event.target.value});
     },
+    componentDidMount: function(event) {
+      // update redux store
+        const action = setContentType({'layout': 'Analysis'});
+        this.props.dispatchContentType(action);
+    },
   // triggered when 'state properties' change
     render: function() {
       // local variables
@@ -151,10 +156,6 @@ var LoginForm = React.createClass({
         else {
             var loginNote = null;
         }
-
-      // update redux store: define overall page layout
-        const action = setLayout({'layout': 'Login'});
-        this.props.dispatchLayout(action);
 
         return(
             <form onSubmit={this.handleSubmit} ref='loginForm'>

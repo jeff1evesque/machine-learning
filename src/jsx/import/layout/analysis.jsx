@@ -14,7 +14,8 @@ import ModelGenerateState from '../redux/container/model-generate.jsx';
 import ModelPredictState from '../redux/container/model-predict.jsx';
 import SupportVectorState from '../redux/container/support-vector.jsx';
 import CurrentResultState from '../redux/container/current-result.jsx';
-import ResultsDisplay from '../result/results.jsx';
+import ResultsDisplayState from '../redux/container/results.jsx';
+import { setContentType } from '../redux/action/page.jsx';
 
 var AnalysisLayout = React.createClass({
     getSessionType: function(type) {
@@ -26,27 +27,17 @@ var AnalysisLayout = React.createClass({
         }[type] || 'span';
     },
     render: function() {
-      // destructure react-router
-        var css = this.props.page.css;
-        var contentType = this.props.page.content_type;
-        var content = getSessionType(contentType);
-
-      // default value: session value
-        if (!content_type || !content_type.type) {
-            var contentSelection = '--Select--';
-        }
-        else {
-            var contentSelection = content_type.type;
-        }
-
       // determine content
-        if (contentType == 'result') {
+        var sessionType = this.props.page.content_type;
+        var content = this.getSessionType(sessionType);
+
+        if (sessionType == 'result') {
             var display_content = content;
         }
-        else if (!!contentType) {
+        else if (!!sessionType) {
             var display_content = <SupportVectorState
                 sessionType={content}
-                sessionTypeValue={contentSelection}
+                sessionTypeValue={sessionType}
             />;
         }
         else {
@@ -59,99 +50,33 @@ var AnalysisLayout = React.createClass({
                     <Route
                         exact
                         path='/session/data-new'
-                        render = {(props) =>
-                    {
-                        return(
-                            <div>
-                              // update redux store
-                                const action = setContentType('data_new');
-                                this.props.dispatchContentType(action);
-
-                              // render component
-                                <DataNewState />
-                            </div>
-                        )
-                    }} />
+                        component={DataNewState}
+                    />
                     <Route
                         exact
                         path='/session/data-append'
-                        render = {(props) =>
-                    {
-                        return(
-                            <div>
-                              // update redux store
-                                const action = setContentType('data_append');
-                                this.props.dispatchContentType(action);
-
-                              // render component
-                                <DataAppendState />
-                            </div>
-                        )
-                    }} />
+                        component={DataAppendState}
+                    />
                     <Route
                         exact
                         path='/session/model-generate'
-                        render = {(props) =>
-                    {
-                        return(
-                            <div>
-                              // update redux store
-                                const action = setContentType('model_generate');
-                                this.props.dispatchContentType(action);
-
-                              // render component
-                                <ModelGenerateState />
-                            </div>
-                        )
-                    }} />
+                        component={ModelGenerateState}
+                    />
                     <Route
                         exact
                         path='/session/model-predict'
-                        render = {(props) =>
-                    {
-                        return(
-                            <div>
-                              // update redux store
-                                const action = setContentType('model_predict');
-                                this.props.dispatchContentType(action);
-
-                              // render component
-                                <ModelPredictState />
-                            </div>
-                        )
-                    }} />
+                        component={ModelPredictState}
+                    />
                     <Route
                         exact
                         path='/session/current-result'
-                        render = {(props) =>
-                    {
-                        return(
-                            <div>
-                              // update redux store
-                                const action = setContentType('result');
-                                this.props.dispatchContentType(action);
-
-                              // render component
-                                <CurrentResultState />
-                            </div>
-                        )
-                    }} />
+                        component={CurrentResultState}
+                    />
                     <Route
                         exact
                         path='/session/results'
-                        render = {(props) =>
-                    {
-                        return(
-                            <div>
-                              // update redux store
-                                const action = setContentType('result');
-                                this.props.dispatchLogin(action);
-
-                              // render component
-                                <ResultsDisplay />
-                            </div>
-                        )
-                    }} />
+                        component={ResultsDisplayState}
+                    />
                 <div className='analysis-container'>
                     {display_content}
                 </div>

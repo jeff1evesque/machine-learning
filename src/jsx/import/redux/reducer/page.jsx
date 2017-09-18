@@ -38,7 +38,7 @@ const page = (state='default', action) => {
                 }
             }
         case 'SET-CONTENT-TYPE':
-            var contentType = action.layout.content_type;
+            var contentType = action.content_type;
 
             return {
                 ...state,

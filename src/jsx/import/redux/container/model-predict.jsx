@@ -12,13 +12,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ModelPredict from '../../session-type/model-predict.jsx';
-import { setSvButton, setGotoResultsButton } from '../action/page.jsx';
+import { setSvButton, setGotoResultsButton, setLayout, setContentType } from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchSvButton: dispatch.bind(setSvButton),
-        dispatchGotoResultsButton: dispatch.bind(setGotoResultsButton)
+        dispatchGotoResultsButton: dispatch.bind(setGotoResultsButton),
+        dispatchContentType: dispatch.bind(setContentType),
+        dispatchLayout: dispatch.bind(setLayout)
     }
 }
 

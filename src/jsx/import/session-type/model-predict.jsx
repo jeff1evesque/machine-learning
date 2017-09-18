@@ -14,7 +14,7 @@ import React from 'react';
 import SupplyPredictors from '../input-data/supply-predictors.jsx';
 import checkValidString from '../validator/valid-string.js';
 import Spinner from '../general/spinner.jsx';
-import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
+import { setSvButton, setGotoResultsButton, setLayout, setContentType } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelPredict = React.createClass({
@@ -160,6 +160,13 @@ var ModelPredict = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+
+      // update redux store
+        const actionLayout = setLayout({'layout': 'Analysis'});
+        this.props.dispatchContentType(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'model_predict'});
+        this.props.dispatchContentType(actionContentType);
     },
     componentWillUnmount: function () {
       // update redux store
