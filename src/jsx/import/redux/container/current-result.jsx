@@ -16,7 +16,7 @@ import { setContentType } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-    var resultType = null;
+    var resultType = 'default';
     var resultData = null;
 
     if (
