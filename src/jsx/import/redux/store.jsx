@@ -16,6 +16,7 @@
 
 import { createStore, combineReducers } from 'redux';
 import user from './reducer/login.jsx';
+import layout from './reducer/layout.jsx';
 import page from './reducer/page.jsx';
 import data from './reducer/data.jsx';
 
@@ -23,7 +24,7 @@ import data from './reducer/data.jsx';
 const username = sessionStorage.getItem('username') || 'anonymous'
 
 // create and initialize redux
-const store = createStore(combineReducers({user, page, data}), {
+const store = createStore(combineReducers({user, page, data, layout}), {
         user: {name: username},
         page: {status: 'default'}
 });
