@@ -27,4 +27,4 @@ const ResultsDisplayState = connect(
 )(ResultsDisplay)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default CurrentResultState
+export default ResultsDisplayState
