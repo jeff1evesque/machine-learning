@@ -22,7 +22,7 @@ const mapDispatchToProps = (dispatch) => {
 
 // pass selected properties from redux state tree to component
 const ResultsDisplayState = connect(
-    mapStateToProps,
+    null,
     mapDispatchToProps
 )(ResultsDisplay)
 
