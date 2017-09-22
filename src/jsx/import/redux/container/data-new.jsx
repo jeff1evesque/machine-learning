@@ -12,7 +12,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DataNew from '../../session-type/data-new.jsx';
-import { setSvButtonm, setLayout, setContentType } from '../action/page.jsx';
+import { setSvButton, setLayout, setContentType } from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
