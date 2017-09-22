@@ -77,10 +77,10 @@ var AnalysisLayout = React.createClass({
                         path='/session/results'
                         component={ResultsDisplayState}
                     />
+                </Switch>
                 <div className='analysis-container'>
                     {display_content}
                 </div>
-                </Switch>
             </div>
         );
     }
