@@ -15,7 +15,6 @@ import ModelPredictState from '../redux/container/model-predict.jsx';
 import SupportVectorState from '../redux/container/support-vector.jsx';
 import CurrentResultState from '../redux/container/current-result.jsx';
 import ResultsDisplayState from '../redux/container/results.jsx';
-import { setContentType } from '../redux/action/page.jsx';
 
 var AnalysisLayout = React.createClass({
     getSessionType: function(type) {
