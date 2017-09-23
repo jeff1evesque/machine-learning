@@ -12,7 +12,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CurrentResultDisplay from '../../result/current-result.jsx';
 import setCurrentResult from '../action/current-result.jsx';
-import { setContentType } from '../action/page.jsx';
+import { setLayout, setContentType } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -42,6 +42,7 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
+        dispatchLayout: dispatch.bind(setLayout),
         dispatchSvButton: dispatch.bind(setCurrentResult),
         dispatchContentType: dispatch.bind(setContentType)
     }
