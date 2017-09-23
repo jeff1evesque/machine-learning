@@ -1,5 +1,5 @@
 /**
- * login.jsx: redux store for general page settings.
+ * user-menu.jsx: redux store for general page settings.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,23 +10,23 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import PageLayout from '../../layout/page.jsx';
+import UserMenu from '../../navigation/user-menu.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
   // return redux to state
     return {
         layout: {
-            css: state.css
+            type: state.layout
         }
     }
 }
 
 // pass selected properties from redux state tree to component
-const PageLayoutState = connect(
+const UserMenuState = connect(
     mapStateToProps,
     null
 )(PageLayout)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default PageLayoutState
+export default UserMenuState

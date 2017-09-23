@@ -14,10 +14,10 @@ import { Provider } from 'react-redux';
 import { Router, Route } from 'react-router-dom';
 import createBrowserHistory from 'history/createBrowserHistory';
 import HomePage from '../content/home-page.jsx';
-import UserMenu from '../navigation/user-menu.jsx';
 import NavBar from '../navigation/nav-bar.jsx';
 import LoginLayout from './login.jsx';
 import RegisterLayout from './register.jsx';
+import UserMenuState from '../redux/container/user-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
 var PageLayout = React.createClass({
@@ -33,20 +33,12 @@ var PageLayout = React.createClass({
             var css = 'container default';
         }
 
-      // default value: layout style
-        if (!!this.props && !!this.props.layout && !!this.props.layout.type) {
-            var layout = this.props.layout.type;
-        }
-        else {
-            var layout = 'default';
-        }
-
         return(
             <Router history={history}>
                 <div>
                     <div className={css}>
                         <div className='menu-container'>
-                            <UserMenu layout={layout} />
+                            <UserMenuState />
                         </div>
                         <div className='main'>
                             <Route exact path='/login' component={LoginLayout} />

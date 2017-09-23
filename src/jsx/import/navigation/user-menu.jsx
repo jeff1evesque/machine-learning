@@ -11,7 +11,7 @@ import RegisterLinkState from '../redux/container/register-link.jsx';
 
 var UserMenu = React.createClass({
     renderContent: function() {
-        if (this.props.layout == 'login') {
+        if (this.props.layout.type == 'login') {
             return (
                 <nav
                     className={'main-navigation menu-login'}
@@ -20,7 +20,7 @@ var UserMenu = React.createClass({
                 </nav>
             );
         }
-        else if (this.props.layout == 'register') {
+        else if (this.props.layout.type == 'register') {
             return (
                 <nav
                     className={'main-navigation menu-register'}
