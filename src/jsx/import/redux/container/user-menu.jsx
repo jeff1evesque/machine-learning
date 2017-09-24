@@ -26,7 +26,7 @@ const mapStateToProps = (state) => {
 const UserMenuState = connect(
     mapStateToProps,
     null
-)(PageLayout)
+)(UserMenu)
 
 // indicate which class can be exported, and instantiated via 'require'
 export default UserMenuState
