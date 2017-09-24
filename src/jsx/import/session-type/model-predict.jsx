@@ -163,7 +163,7 @@ var ModelPredict = React.createClass({
 
       // update redux store
         const actionLayout = setLayout({'layout': 'Analysis'});
-        this.props.dispatchContentType(actionLayout);
+        this.props.dispatchLayout(actionLayout);
 
         const actionContentType = setContentType({'layout': 'model_predict'});
         this.props.dispatchContentType(actionContentType);

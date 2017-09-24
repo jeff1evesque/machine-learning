@@ -109,7 +109,7 @@ var DataNew = React.createClass({
     componentDidMount: function(event) {
       // update redux store
         const actionLayout = setLayout({'layout': 'Analysis'});
-        this.props.dispatchContentType(actionLayout);
+        this.props.dispatchLayout(actionLayout);
 
         const actionContentType = setContentType({'layout': 'data_new'});
         this.props.dispatchContentType(actionContentType);

@@ -221,7 +221,7 @@ var DataAppend = React.createClass({
 
       // update redux store
         const actionLayout = setLayout({'layout': 'Analysis'});
-        this.props.dispatchContentType(actionLayout);
+        this.props.dispatchLayout(actionLayout);
 
         const actionContentType = setContentType({'layout': 'data_append'});
         this.props.dispatchContentType(actionContentType);

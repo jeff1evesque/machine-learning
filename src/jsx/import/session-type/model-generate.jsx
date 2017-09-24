@@ -240,7 +240,7 @@ var ModelGenerate = React.createClass({
     componentWillUnmount: function() {
       // update redux store
         const actionLayout = setLayout({'layout': 'Analysis'});
-        this.props.dispatchContentType(actionLayout);
+        this.props.dispatchLayout(actionLayout);
 
         const actionContentType = setContentType({'layout': 'model_generate'});
         this.props.dispatchContentType(actionContentType);
