@@ -8,7 +8,6 @@
  */
 
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
 import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
@@ -122,7 +121,7 @@ var RegisterForm = React.createClass({
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            <Redirect from='/login' to='/' />
+            this.props.history.push('/');
         }
       // update redux store
         else {

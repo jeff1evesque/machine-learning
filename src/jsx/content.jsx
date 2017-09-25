@@ -11,8 +11,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import { Router } from 'react-router-dom';
 import PageLayoutState from './import/redux/container/page.jsx';
+import createHistory from 'history/createBrowserHistory';
 import store from './import/redux/store.jsx';
+
+// local variables
+const history = createHistory();
 
 // render application
 //
@@ -23,7 +28,9 @@ import store from './import/redux/store.jsx';
 //
 ReactDOM.render(
     <Provider store={store}>
-        <PageLayoutState />
+        <Router history={history}>
+            <PageLayoutState />
+        </Router>
     </Provider>,
     document.querySelector('.container')
 );
