@@ -25,7 +25,7 @@ var UserMenu = React.createClass({
                 </nav>
             );
         }
-        if (
+        else if (
             !!this.props &&
             !!this.props.layout &&
             !!this.props.layout.type &&
