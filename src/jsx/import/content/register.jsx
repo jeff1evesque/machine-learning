@@ -124,6 +124,11 @@ var RegisterForm = React.createClass({
         ) {
             <Redirect from='/login' to='/' />
         }
+      // update redux store
+        else {
+            const action = setLayout({'layout': 'register'});
+            this.props.dispatchLayout(action);
+        }
     },
     validateUsername: function(event) {
         const username = event.target.value;
@@ -148,11 +153,6 @@ var RegisterForm = React.createClass({
         this.setState({validated_password_server: true});
         this.setState({validated_password: check});
         this.setState({value_password: password});
-    },
-    componentDidMount: function(event) {
-      // update redux store
-        const action = setLayout({'layout': 'register'});
-        this.props.dispatchLayout(action);
     },
   // triggered when 'state properties' change
     render: function() {

@@ -122,6 +122,9 @@ var LoginForm = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
+    updateUsername: function(event) {
+        this.setState({value_username: event.target.value});
+    },
     componentWillMount: function() {
       // redirect to homepage if logged-in
         if (
@@ -132,14 +135,11 @@ var LoginForm = React.createClass({
         ) {
             this.props.history.push('/');
         }
-    },
-    updateUsername: function(event) {
-        this.setState({value_username: event.target.value});
-    },
-    componentDidMount: function(event) {
       // update redux store
-        const action = setLayout({'layout': 'login'});
-        this.props.dispatchLayout(action);
+        else {
+            const action = setLayout({'layout': 'login'});
+            this.props.dispatchLayout(action);
+        }
     },
   // triggered when 'state properties' change
     render: function() {
