@@ -220,7 +220,7 @@ var DataAppend = React.createClass({
         ajaxArguments);
 
       // update redux store
-        const actionLayout = setLayout({'layout': 'Analysis'});
+        const actionLayout = setLayout({'layout': 'analysis'});
         this.props.dispatchLayout(actionLayout);
 
         const actionContentType = setContentType({'layout': 'data_append'});

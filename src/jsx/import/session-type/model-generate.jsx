@@ -234,16 +234,16 @@ var ModelGenerate = React.createClass({
         ajaxArguments);
 
       // update redux store
-        const action = setContentType({'layout': 'Analysis'});
-        this.props.dispatchContentType(action);
-    },
-    componentWillUnmount: function() {
-      // update redux store
-        const actionLayout = setLayout({'layout': 'Analysis'});
+        const actionLayout = setLayout({'layout': 'analysis'});
         this.props.dispatchLayout(actionLayout);
 
         const actionContentType = setContentType({'layout': 'model_generate'});
         this.props.dispatchContentType(actionContentType);
+    },
+    componentWillUnmount: function() {
+      // update redux store
+        const action = setSvButton({button: {submit_analysis: false}});
+        this.props.dispatchSvButton(action);
     }
 });
 

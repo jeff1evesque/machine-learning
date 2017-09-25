@@ -12,30 +12,34 @@
 import 'core-js/modules/es6.object.assign';
 
 const layout = (state='analysis', action) => {
-    switch(action.type) {
-        case 'LOGIN':
-            return Object.assign({}, state, {
-                layout: {
+    if (
+        !!action &&
+        !!action.layout &&
+        !!action.type &&
+        action.type === 'SET-LAYOUT'
+    ) {
+        switch(action.layout) {
+            case 'login':
+                return Object.assign({}, state, {
                     css : 'container login',
                     type : action.layout,
-                }
-            });
-        case 'REGISTER':
-            return Object.assign({}, state, {
-                layout: {
-                    css : 'container login',
+                });
+            case 'register':
+                return Object.assign({}, state, {
+                    css : 'container register',
                     type : action.layout,
-                }
-            });
-        case 'ANALYSIS':
-            return Object.assign({}, state, {
-                layout: {
+                });
+            case 'analysis':
+                return Object.assign({}, state, {
                     css : 'container analysis-container',
                     type : action.layout,
-                }
-            });
-        default:
-            return state;
+                });
+            default:
+                return state;
+        }
+    }
+    else {
+        return state;
     }
 }
 

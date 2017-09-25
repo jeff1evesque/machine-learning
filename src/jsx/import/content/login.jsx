@@ -12,9 +12,8 @@
  */
 
 import React from 'react';
-import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
-import { setLayout, setContentType } from '../redux/action/page.jsx';
+import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -81,7 +80,7 @@ var LoginForm = React.createClass({
 
                           // redirect to homepage if logged-in
                             if (!!result && !!username && username != 'anonymous') {
-                                <Redirect from='/login' to='/' />
+                                this.props.history.push('/');
                             }
 
                             break;
@@ -131,7 +130,7 @@ var LoginForm = React.createClass({
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            <Redirect from='/login' to='/' />
+            this.props.history.push('/');
         }
     },
     updateUsername: function(event) {
@@ -139,8 +138,8 @@ var LoginForm = React.createClass({
     },
     componentDidMount: function(event) {
       // update redux store
-        const action = setContentType({'layout': 'Analysis'});
-        this.props.dispatchContentType(action);
+        const action = setLayout({'layout': 'login'});
+        this.props.dispatchLayout(action);
     },
   // triggered when 'state properties' change
     render: function() {

@@ -10,7 +10,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
-import { setLayout, setContentType } from '../redux/action/page.jsx';
+import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 import checkValidString from '../validator/valid-string.js';
@@ -151,8 +151,8 @@ var RegisterForm = React.createClass({
     },
     componentDidMount: function(event) {
       // update redux store
-        const action = setContentType({'layout': 'Analysis'});
-        this.props.dispatchContentType(action);
+        const action = setLayout({'layout': 'register'});
+        this.props.dispatchLayout(action);
     },
   // triggered when 'state properties' change
     render: function() {

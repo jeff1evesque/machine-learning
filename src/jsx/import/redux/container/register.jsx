@@ -12,7 +12,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RegisterForm from '../../content/register.jsx';
-import { setLayout, setContentType } from '../action/page.jsx';
+import { setLayout } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -35,8 +35,7 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchLayout: dispatch.bind(setLayout),
-        dispatchContentType: dispatch.bind(setContentType)
+        dispatchLayout: dispatch.bind(setLayout)
     }
 }
 

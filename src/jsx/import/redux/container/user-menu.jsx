@@ -16,9 +16,7 @@ import UserMenu from '../../navigation/user-menu.jsx';
 const mapStateToProps = (state) => {
   // return redux to state
     return {
-        layout: {
-            type: state.layout
-        }
+        layout: state.layout
     }
 }
 
