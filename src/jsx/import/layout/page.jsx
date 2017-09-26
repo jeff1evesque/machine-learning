@@ -38,7 +38,7 @@ var PageLayout = React.createClass({
                     <Route exact path='/login' component={LoginLayout} />
                     <Route exact path='/logout' component={LoginLayout} />
                     <Route exact path='/register' component={RegisterLayout} />
-                    <Route exact path='/session' component={AnalysisLayoutState} />
+                    <Route path='/session' component={AnalysisLayoutState} />
                 </div>
             </div>
             <Route exact path='/' component={HomePageState} />
