@@ -19,7 +19,7 @@ const mapDispatchToProps = (dispatch) => {
     return {
         dispatchSvButton: dispatch.bind(setSvButton),
         dispatchContentType: dispatch.bind(setContentType),
-        dispatchLayout: dispatch.bind(setLayout),
+        dispatchLayout: dispatch.bind(setLayout)
     }
 }
 
