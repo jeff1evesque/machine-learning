@@ -28,4 +28,4 @@ inotifywait "$1"/src/jsx/ -m -r -e close_write -e move |
   (cd /usr/lib/node_modules && browserify "$1"/src/jsx/content.jsx -t [ babelify --presets latest,stage-2,react ] -o "$1"/src/js/content.js)
 
   # append file to '.gitignore'
-  fgrep -q content.js "$1"/src/js/.gitignore || echo content.js >> "$1"/src/js/.gitignore
+  grep -qF content.js "$1"/src/js/.gitignore || echo content.js >> "$1"/src/js/.gitignore
