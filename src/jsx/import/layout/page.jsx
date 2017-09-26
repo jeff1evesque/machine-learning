@@ -12,10 +12,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
-import HomePage from '../content/home-page.jsx';
 import NavBar from '../navigation/nav-bar.jsx';
 import LoginLayout from './login.jsx';
 import RegisterLayout from './register.jsx';
+import HomePageState from '../redux/container/home-page.jsx';
 import UserMenuState from '../redux/container/user-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
@@ -31,25 +31,25 @@ var PageLayout = React.createClass({
 
         return(
             <div>
-                <div className={css}>
-                    <div className='menu-container'>
-                        <UserMenuState />
-                    </div>
-                    <div className='main'>
-                        <Route exact path='/login' component={LoginLayout} />
-                        <Route exact path='/logout' component={LoginLayout} />
-                        <Route exact path='/register' component={RegisterLayout} />
-                        <Route exact path='/session' render = {(props) => {
-                            return(
-                                <div>
-                                    <NavBar />
-                                    <AnalysisLayoutState />
-                                </div>
-                            )
-                        }} />
-                    </div>
+            <div className={css}>
+                <div className='menu-container'>
+                    <UserMenuState />
                 </div>
-                <Route exact path='/' component={HomePage} />
+                <div className='main'>
+                    <Route exact path='/login' component={LoginLayout} />
+                    <Route exact path='/logout' component={LoginLayout} />
+                    <Route exact path='/register' component={RegisterLayout} />
+                    <Route exact path='/session' render = {(props) => {
+                        return(
+                            <div>
+                                <NavBar />
+                                <AnalysisLayoutState />
+                            </div>
+                        )
+                    }} />
+                </div>
+            </div>
+            <Route exact path='/' component={HomePageState} />
             </div>
         );
     }

@@ -11,7 +11,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Router } from 'react-router-dom';
+import { Router, Switch } from 'react-router-dom';
 import PageLayoutState from './import/redux/container/page.jsx';
 import createHistory from 'history/createBrowserHistory';
 import store from './import/redux/store.jsx';
@@ -29,7 +29,9 @@ const history = createHistory();
 ReactDOM.render(
     <Provider store={store}>
         <Router history={history}>
-            <PageLayoutState />
+            <Switch>
+                <PageLayoutState />
+            </Switch>
         </Router>
     </Provider>,
     document.querySelector('.container')
