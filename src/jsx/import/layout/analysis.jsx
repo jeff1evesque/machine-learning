@@ -7,7 +7,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Switch } from 'react-router-dom';
+import { Route } from 'react-router-dom';
+import NavBar from '../navigation/nav-bar.jsx';
 import DataNewState from '../redux/container/data-new.jsx';
 import DataAppendState from '../redux/container/data-append.jsx';
 import ModelGenerateState from '../redux/container/model-generate.jsx';
@@ -45,38 +46,37 @@ var AnalysisLayout = React.createClass({
 
         return(
             <div>
-                <Switch>
-                    <Route
-                        exact
-                        path='/session/data-new'
-                        component={DataNewState}
-                    />
-                    <Route
-                        exact
-                        path='/session/data-append'
-                        component={DataAppendState}
-                    />
-                    <Route
-                        exact
-                        path='/session/model-generate'
-                        component={ModelGenerateState}
-                    />
-                    <Route
-                        exact
-                        path='/session/model-predict'
-                        component={ModelPredictState}
-                    />
-                    <Route
-                        exact
-                        path='/session/current-result'
-                        component={CurrentResultState}
-                    />
-                    <Route
-                        exact
-                        path='/session/results'
-                        component={ResultsDisplayState}
-                    />
-                </Switch>
+                <NavBar />
+                <Route
+                    exact
+                    path='/session/data-new'
+                    component={DataNewState}
+                />
+                <Route
+                    exact
+                    path='/session/data-append'
+                    component={DataAppendState}
+                />
+                <Route
+                    exact
+                    path='/session/model-generate'
+                    component={ModelGenerateState}
+                />
+                <Route
+                    exact
+                    path='/session/model-predict'
+                    component={ModelPredictState}
+                />
+                <Route
+                    exact
+                    path='/session/current-result'
+                    component={CurrentResultState}
+                />
+                <Route
+                    exact
+                    path='/session/results'
+                    component={ResultsDisplayState}
+                />
                 <div className='analysis-container'>
                     {display_content}
                 </div>

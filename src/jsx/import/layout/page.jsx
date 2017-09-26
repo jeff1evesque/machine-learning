@@ -12,7 +12,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
-import NavBar from '../navigation/nav-bar.jsx';
 import LoginLayout from './login.jsx';
 import RegisterLayout from './register.jsx';
 import HomePageState from '../redux/container/home-page.jsx';
@@ -39,14 +38,7 @@ var PageLayout = React.createClass({
                     <Route exact path='/login' component={LoginLayout} />
                     <Route exact path='/logout' component={LoginLayout} />
                     <Route exact path='/register' component={RegisterLayout} />
-                    <Route exact path='/session' render = {(props) => {
-                        return(
-                            <div>
-                                <NavBar />
-                                <AnalysisLayoutState />
-                            </div>
-                        )
-                    }} />
+                    <Route exact path='/session' component={AnalysisLayoutState} />
                 </div>
             </div>
             <Route exact path='/' component={HomePageState} />
