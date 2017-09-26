@@ -47,31 +47,33 @@ var AnalysisLayout = React.createClass({
         return(
             <div>
                 <NavBar />
-                <Route
-                    exact
-                    path='/session/data-new'
-                    component={DataNewState}
-                />
-                <Route
-                    exact
-                    path='/session/data-append'
-                    component={DataAppendState}
-                />
-                <Route
-                    exact
-                    path='/session/model-generate'
-                    component={ModelGenerateState}
-                />
-                <Route
-                    exact
-                    path='/session/model-predict'
-                    component={ModelPredictState}
-                />
-                <Route
-                    exact
-                    path='/session/current-result'
-                    component={CurrentResultState}
-                />
+                <form>
+                    <Route
+                        exact
+                        path='/session/data-new'
+                        component={DataNewState}
+                    />
+                    <Route
+                        exact
+                        path='/session/data-append'
+                        component={DataAppendState}
+                    />
+                    <Route
+                        exact
+                        path='/session/model-generate'
+                        component={ModelGenerateState}
+                    />
+                    <Route
+                        exact
+                        path='/session/model-predict'
+                        component={ModelPredictState}
+                    />
+                    <Route
+                        exact
+                        path='/session/current-result'
+                        component={CurrentResultState}
+                    />
+                </form>
                 <Route
                     exact
                     path='/session/results'
