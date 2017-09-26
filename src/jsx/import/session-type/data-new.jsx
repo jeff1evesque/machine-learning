@@ -115,7 +115,7 @@ var DataNew = React.createClass({
         this.props.dispatchContentType(actionContentType);
     },
   // triggered when 'state properties' change
-    render: function(){
+    render: function() {
         const datasetType = this.state.value_dataset_type;
         const datasetTitle = this.state.value_title;
         const collection = this.state.value_collection;
