@@ -14,7 +14,12 @@ import React from 'react';
 import SupplyPredictors from '../input-data/supply-predictors.jsx';
 import checkValidString from '../validator/valid-string.js';
 import Spinner from '../general/spinner.jsx';
-import { setSvButton, setGotoResultsButton, setLayout, setContentType } from '../redux/action/page.jsx';
+import {
+    setSvButton,
+    setGotoResultsButton,
+    setLayout,
+    setContentType
+} from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelPredict = React.createClass({
