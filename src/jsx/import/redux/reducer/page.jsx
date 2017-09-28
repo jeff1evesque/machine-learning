@@ -42,10 +42,7 @@ const page = (state='default', action) => {
 
             return {
                 ...state,
-                layout: {
-                    ...state.layout,
-                    content_type: contentType
-                }
+                content_type: contentType
             }
         default:
             return state;
