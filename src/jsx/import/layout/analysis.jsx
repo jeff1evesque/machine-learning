@@ -7,18 +7,34 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route } from 'react-router-dom';
+import { Route, Link } from 'react-router-dom';
 import NavBar from '../navigation/nav-bar.jsx';
 import DataNewState from '../redux/container/data-new.jsx';
 import DataAppendState from '../redux/container/data-append.jsx';
 import ModelGenerateState from '../redux/container/model-generate.jsx';
 import ModelPredictState from '../redux/container/model-predict.jsx';
-import SupportVectorState from '../redux/container/support-vector.jsx';
 import CurrentResultState from '../redux/container/current-result.jsx';
 import ResultsDisplayState from '../redux/container/results.jsx';
+import CurrentResultLink from '../navigation/menu-items/current-result.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
+import Submit from '../general/submit-button.jsx';
+import checkValidString from '../validator/valid-string.js';
+import checkValidFloat from '../validator/valid-float.js';
+import Spinner from '../general/spinner.jsx';
+import setCurrentResult from '../redux/action/current-result.jsx';
+import { setSvButton, setGotoResultsButton, setLayout } from '../redux/action/page.jsx';
 
 var AnalysisLayout = React.createClass({
+  // initial 'state properties'
+    getInitialState: function() {
+        return {
+            display_spinner: false,
+            ajax_done_result: null,
+            ajax_done_error: null,
+            ajax_fail_error: null,
+            ajax_fail_status: null
+        };
+    },
     getSessionType: function(type) {
         return {
             data_new: DataNewState,
@@ -26,6 +42,36 @@ var AnalysisLayout = React.createClass({
             model_generate: ModelGenerateState,
             model_predict: ModelPredictState
         }[type] || 'span';
+    },
+  // define properties after update
+    componentDidUpdate: function() {
+      // update state using react-route properties
+        if (
+            !!this.props.sessionType &&
+            this.props.sessionType != this.state.session_type
+        ) {
+            this.setState({session_type: this.props.sessionType});
+        }
+
+        if (
+            !!this.props.sessionTypeValue &&
+            this.props.sessionTypeValue != this.state.session_type_value
+        ) {
+            this.setState({
+               session_type_value: this.props.sessionTypeValue
+            });
+        }
+    },
+  // define properties before mount
+    componentWillMount: function() {
+        this.setState({
+            session_type: this.props.sessionType,
+            session_type_value: this.props.sessionTypeValue
+        });
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(action);
     },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
@@ -81,22 +127,92 @@ var AnalysisLayout = React.createClass({
             ajaxArguments);
         }
     },
-    render: function() {
-      // determine content
-        var sessionType = this.props.page.content_type;
-        var content = this.getSessionType(sessionType);
+  // update redux store
+    storeResults: function() {
+        var serverObj = !!this.state.ajax_done_result ? this.state.ajax_done_result : false;
+        var resultSet = !!serverObj.result ? serverObj.result : false;
+        var confidence = !!resultSet.confidence ? resultSet.confidence : false;
 
-        if (sessionType == 'result') {
-            var display_content = content;
+        if (
+            resultSet &&
+            !!resultSet.result &&
+            resultSet.model == 'svm' &&
+            confidence &&
+            confidence.classes &&
+            confidence.classes.length > 0 &&
+            confidence.classes.every(checkValidString) &&
+            confidence.probability &&
+            confidence.probability.length > 0 &&
+            confidence.probability.every(checkValidFloat) &&
+            confidence.decision_function &&
+            confidence.decision_function.length > 0 &&
+            confidence.decision_function.every(checkValidFloat)
+        ) {
+          // update redux store
+            const payload = {
+                type: resultSet.model,
+                data: JSON.stringify({
+                    result: resultSet.result,
+                    classes: confidence.classes,
+                    probability: confidence.probability,
+                    decision_function: confidence.decision_function
+                })
+            }
+            this.props.dispatchCurrentResult(setCurrentResult(payload));
+
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
-        else if (!!sessionType) {
-            var display_content = <SupportVectorState
-                sessionType={content}
-                sessionTypeValue={sessionType}
-            />;
+        else if (
+            resultSet &&
+            !!resultSet.result &&
+            resultSet.model == 'svr' &&
+            confidence &&
+            confidence.score &&
+            checkValidFloat(confidence.score)
+        ) {
+          // update redux store
+            const payload = {
+                type: resultSet.model,
+                data: JSON.stringify({
+                    result: resultSet.result,
+                    r2: confidence.score
+                })
+            }
+            this.props.dispatchCurrentResult(setCurrentResult(payload));
+
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
         else {
-            var display_content = this.props.children;
+          // update redux store
+            const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
+            this.props.dispatchGotoResultsButton(gotoResultsButton);
+        }
+    },
+    render: function() {
+      // determine content
+        var resultsBtn = false;
+        var spinner = this.state.display_spinner ? <Spinner /> : null;
+
+      // submit button
+        if (
+            this.props &&
+            this.props.page &&
+            this.props.page.button
+        ) {
+            const button = this.props.page.button;
+            var submitBtn = !!button.submit_analysis ? <Submit cssClass='btn mn-2' /> : null;
+
+            if (
+                this.state.ajax_done_result &&
+                !!this.state.ajax_done_result.type &&
+                this.state.ajax_done_result.type == 'model-predict'
+            ) {
+                var resultBtn = !!button.goto_results ? <CurrentResultLink /> : null;
+            }
         }
 
         {/* return:
@@ -133,12 +249,15 @@ var AnalysisLayout = React.createClass({
                         path='/session/current-result'
                         component={CurrentResultState}
                     />
+                    <Route
+                        exact
+                        path='/session/results'
+                        component={ResultsDisplayState}
+                    />
+                    {resultBtn}
+                    {submitBtn}
+                    {spinner}
                 </form>
-                <Route
-                    exact
-                    path='/session/results'
-                    component={ResultsDisplayState}
-                />
                 <div className='analysis-container'>
                     {display_content}
                 </div>
