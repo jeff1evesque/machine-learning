@@ -57,7 +57,7 @@ var SupplyDatasetFile = React.createClass({
         }
     },
   // update 'state properties': allow parent component(s) to access properties
-    validFileEntered: function(){
+    validFileEntered: function() {
         {/* get array of input elements, by classname */}
         var dataset = document.getElementsByClassName('dataset-file');
 
