@@ -17,7 +17,7 @@ import setCurrentResult from '../action/current-result.jsx';
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
     var contentType = false;
-    var gotoResultsbtn = false;
+    var gotoResultsBtn = false;
     var submitBtn = false;
 
     if (
@@ -42,7 +42,7 @@ const mapStateToProps = (state) => {
     return {
         page: {
             button: {
-                goto_results: gotoResultBbtn,
+                goto_results: gotoResultsBtn,
                 submit_analysis: submitBtn
             },
             content_type: contentType
