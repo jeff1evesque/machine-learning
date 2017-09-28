@@ -52,7 +52,7 @@ var DataNew = React.createClass({
             this.setState({value_title: sessionTitle});
         }
         else {
-            this.setState({value_title: null});
+            this.setState({value_title: ''});
         }
 
       // update redux store
@@ -66,7 +66,7 @@ var DataNew = React.createClass({
             this.setState({value_collection: collection});
         }
         else {
-            this.setState({value_collection: null});
+            this.setState({value_collection: ''});
         }
 
       // update redux store
@@ -106,7 +106,7 @@ var DataNew = React.createClass({
             this.props.dispatchSvButton(action);
         }
     },
-    componentDidMount: function(event) {
+    componentWillMount: function(event) {
       // update redux store
         const actionLayout = setLayout({'layout': 'analysis'});
         this.props.dispatchLayout(actionLayout);

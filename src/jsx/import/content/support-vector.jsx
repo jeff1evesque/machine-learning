@@ -38,6 +38,10 @@ var SupportVector = React.createClass({
             session_type: this.props.sessionType,
             session_type_value: this.props.sessionTypeValue
         });
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(action);
     },
   // define properties after update
     componentDidUpdate: function() {
@@ -146,10 +150,6 @@ var SupportVector = React.createClass({
                 var resultBtn = !!button.goto_results ? <CurrentResultLink /> : null;
             }
         }
-
-      // update redux store: define overall page layout
-        const action = setLayout({'layout': 'analysis'});
-        this.props.dispatchLayout(action);
 
         return(
             <div>

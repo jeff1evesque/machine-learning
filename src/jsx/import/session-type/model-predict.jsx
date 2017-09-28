@@ -165,7 +165,8 @@ var ModelPredict = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
-
+    },
+    componentWillMount: function() {
       // update redux store
         const actionLayout = setLayout({'layout': 'analysis'});
         this.props.dispatchLayout(actionLayout);
