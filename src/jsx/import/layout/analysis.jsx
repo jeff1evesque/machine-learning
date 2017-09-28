@@ -258,9 +258,6 @@ var AnalysisLayout = React.createClass({
                     {submitBtn}
                     {spinner}
                 </form>
-                <div className='analysis-container'>
-                    {display_content}
-                </div>
             </div>
         );
     }
