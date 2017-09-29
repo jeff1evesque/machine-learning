@@ -35,14 +35,6 @@ var AnalysisLayout = React.createClass({
             ajax_fail_status: null
         };
     },
-    getSessionType: function(type) {
-        return {
-            data_new: DataNewState,
-            data_append: DataAppendState,
-            model_generate: ModelGenerateState,
-            model_predict: ModelPredictState
-        }[type] || 'span';
-    },
   // define properties after update
     componentDidUpdate: function() {
       // update state using react-route properties
@@ -87,9 +79,12 @@ var AnalysisLayout = React.createClass({
             sessionType == 'model_predict'
         ) {
             const ajaxEndpoint = '/load-data';
+            var formData = new FormData(this.refs.analysisForm);
+            formData.append('session_type', sessionType);
+
             var ajaxArguments = {
                 'endpoint': ajaxEndpoint,
-                'data': new FormData(this.refs.analysisForm)
+                'data': formData
             };
 
           // boolean to show ajax spinner
