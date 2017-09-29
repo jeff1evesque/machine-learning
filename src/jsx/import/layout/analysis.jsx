@@ -239,20 +239,20 @@ var AnalysisLayout = React.createClass({
                         path='/session/model-predict'
                         component={ModelPredictState}
                     />
-                    <Route
-                        exact
-                        path='/session/current-result'
-                        component={CurrentResultState}
-                    />
-                    <Route
-                        exact
-                        path='/session/results'
-                        component={ResultsDisplayState}
-                    />
                     {resultBtn}
                     {submitBtn}
                     {spinner}
                 </form>
+                <Route
+                    exact
+                    path='/session/current-result'
+                    component={CurrentResultState}
+                />
+                <Route
+                    exact
+                    path='/session/results'
+                    component={ResultsDisplayState}
+                />
             </div>
         );
     }
