@@ -106,7 +106,7 @@ var ResultsDisplay = React.createClass({
         }
 
       // update redux store: define overall page layout
-        const action = setLayout({'layout': 'Analysis'});
+        const action = setLayout({'layout': 'analysis'});
         this.props.dispatchLayout(action);
 
       // display result
