@@ -102,7 +102,7 @@ var CurrentResultDisplay = React.createClass({
             });
         }
     },
-    componentDidMount: function() {
+    componentWillMount: function() {
         if (
             !!this.props &&
             !!this.props.location &&
@@ -113,6 +113,10 @@ var CurrentResultDisplay = React.createClass({
                 this.setState({nid: parsed.nid});
             }
         }
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(action);
 
         const actionContentType = setContentType({'layout': 'result'});
         this.props.dispatchContentType(actionContentType);
@@ -180,10 +184,6 @@ var CurrentResultDisplay = React.createClass({
         else {
             var resultList = <div className='result-list'>Sorry, no results available!</div>;
         }
-
-      // update redux store: define overall page layout
-        const action = setLayout({'layout': 'Analysis'});
-        this.props.dispatchLayout(action);
 
       // display result
         return(
