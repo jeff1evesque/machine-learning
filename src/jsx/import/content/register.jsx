@@ -8,6 +8,7 @@
  */
 
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
 import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
@@ -20,6 +21,7 @@ var RegisterForm = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            redirect_path: '/',
             ajax_done_result: null,
             display_spinner: false,
             validated_username: true,
@@ -121,12 +123,13 @@ var RegisterForm = React.createClass({
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            this.props.history.push('/');
+            this.setState({redirect_push: true});
         }
       // update redux store
         else {
             const action = setLayout({'layout': 'register'});
             this.props.dispatchLayout(action);
+            this.setState({redirect_push: false});
         }
     },
     validateUsername: function(event) {
@@ -203,6 +206,11 @@ var RegisterForm = React.createClass({
 
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>
+                <Redirect
+                    to={this.state.redirect_path}
+                    push={this.state.redirect_push}
+                />
+
                 <div className='form-group'>
                     <label className={'form-label ' + usernameClass}>Username</label>
                     <input
