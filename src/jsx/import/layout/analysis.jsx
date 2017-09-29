@@ -218,7 +218,11 @@ var AnalysisLayout = React.createClass({
         return(
             <div>
                 <NavBar />
-                <form onSubmit={this.handleSubmit} ref='analysisForm'>
+                <form
+                    onSubmit={this.handleSubmit}
+                    ref='analysisForm'
+                    className='analysis-container'
+                >
                     <Route
                         exact
                         path='/session/data-new'
