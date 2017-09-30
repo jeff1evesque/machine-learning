@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { Route, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
 import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
