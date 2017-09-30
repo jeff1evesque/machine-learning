@@ -23,7 +23,6 @@ var LoginForm = React.createClass({
     getInitialState: function() {
         return {
             redirect_path: '/',
-            redirect_push: false,
             ajax_done_result: null,
             display_spinner: false,
             validated_login_server: true,
@@ -71,20 +70,15 @@ var LoginForm = React.createClass({
 
                     switch(status) {
                         case 0:
+                          // reset form
+                            this.setState({validated_login_server: true});
+
                           // update redux store
                             const action = setLoginState(username);
                             this.props.dispatchLogin(action);
 
                           // store username into sessionStorage
                             sessionStorage.setItem('username', username);
-
-                          // reset form
-                            this.setState({validated_login_server: true});
-
-                          // redirect to homepage if logged-in
-                            if (!!result && !!username && username != 'anonymous') {
-                                this.setState({'redirect_push': true});
-                            }
 
                             break;
                         case 4:
@@ -129,21 +123,9 @@ var LoginForm = React.createClass({
         this.setState({value_username: event.target.value});
     },
     componentWillMount: function() {
-      // redirect to homepage if logged-in
-        if (
-            this.props &&
-            this.props.user &&
-            !!this.props.user.name &&
-            this.props.user.name != 'anonymous'
-        ) {
-            this.setState({'redirect_push': true});
-        }
       // update redux store
-        else {
-            const action = setLayout({'layout': 'login'});
-            this.props.dispatchLayout(action);
-            this.setState({'redirect_push': false});
-        }
+        const action = setLayout({'layout': 'login'});
+        this.props.dispatchLayout(action);
     },
   // triggered when 'state properties' change
     render: function() {
@@ -162,7 +144,13 @@ var LoginForm = React.createClass({
         }
 
       // conditionally render redirect
-        if (this.state.redirect_push) {
+        if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
+        ) {
+            console.log('hi');
             var redirect = <Redirect to={this.state.redirect_path} />;
         }
 

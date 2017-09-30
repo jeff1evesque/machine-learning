@@ -22,7 +22,6 @@ var RegisterForm = React.createClass({
     getInitialState: function() {
         return {
             redirect_path: '/',
-            redirect_push: false,
             ajax_done_result: null,
             display_spinner: false,
             validated_username: true,
@@ -117,21 +116,9 @@ var RegisterForm = React.createClass({
         ajaxArguments);
     },
     componentWillMount: function() {
-      // redirect to homepage if logged-in
-        if (
-            this.props &&
-            this.props.user &&
-            !!this.props.user.name &&
-            this.props.user.name != 'anonymous'
-        ) {
-            this.setState({'redirect_push': true});
-        }
       // update redux store
-        else {
-            const action = setLayout({'layout': 'register'});
-            this.props.dispatchLayout(action);
-            this.setState({'redirect_push': false});
-        }
+        const action = setLayout({'layout': 'register'});
+        this.props.dispatchLayout(action);
     },
     validateUsername: function(event) {
         const username = event.target.value;
