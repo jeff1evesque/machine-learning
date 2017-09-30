@@ -70,8 +70,14 @@ var LoginForm = React.createClass({
 
                     switch(status) {
                         case 0:
-                          // reset form
+                          // return server response
+                            this.setState({ajax_done_result: result});
+
+                          // update validation: reset form
                             this.setState({validated_login_server: true});
+
+                          // boolean to hide ajax spinner
+                            this.setState({display_spinner: false});
 
                           // update redux store
                             const action = setLoginState(username);
@@ -82,23 +88,30 @@ var LoginForm = React.createClass({
 
                             break;
                         case 4:
+                          // return server response
+                            this.setState({ajax_done_result: result});
+
+                          // update validation
                             this.setState({validated_login_server: false});
+
+                          // boolean to hide ajax spinner
+                            this.setState({display_spinner: false});
+
                             break;
                         default:
+                          // return server response
+                            this.setState({ajax_done_result: result});
+
+                          // update validation
                             this.setState({validated_login_server: false});
+
+                          // boolean to hide ajax spinner
+                            this.setState({display_spinner: false});
+
                             break;
                     }
                 }
-
-              // return server response
-                this.setState({ajax_done_result: result});
             }
-            else {
-                this.setState({ajax_done_result: null});
-            }
-
-          // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
 
         }.bind(this),
       // asynchronous callback: ajax 'fail' promise
@@ -150,7 +163,6 @@ var LoginForm = React.createClass({
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            console.log('hi');
             var redirect = <Redirect to={this.state.redirect_path} />;
         }
 
