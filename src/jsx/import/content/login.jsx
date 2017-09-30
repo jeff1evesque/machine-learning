@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { Redirect } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
 import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
@@ -23,6 +23,7 @@ var LoginForm = React.createClass({
     getInitialState: function() {
         return {
             redirect_path: '/',
+            redirect_push: false,
             ajax_done_result: null,
             display_spinner: false,
             validated_login_server: true,
@@ -82,7 +83,7 @@ var LoginForm = React.createClass({
 
                           // redirect to homepage if logged-in
                             if (!!result && !!username && username != 'anonymous') {
-                                this.setState({redirect_push: true});
+                                this.setState({'redirect_push': true});
                             }
 
                             break;
@@ -135,18 +136,19 @@ var LoginForm = React.createClass({
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            this.setState({redirect_push: true});
+            this.setState({'redirect_push': true});
         }
       // update redux store
         else {
             const action = setLayout({'layout': 'login'});
             this.props.dispatchLayout(action);
-            this.setState({redirect_push: false});
+            this.setState({'redirect_push': false});
         }
     },
   // triggered when 'state properties' change
     render: function() {
       // local variables
+        var redirect = null;
         var AjaxSpinner = this.getSpinner();
 
       // backend validation
@@ -159,12 +161,14 @@ var LoginForm = React.createClass({
             var loginNote = null;
         }
 
+      // conditionally render redirect
+        if (this.state.redirect_push) {
+            var redirect = <Redirect to={this.state.redirect_path} />;
+        }
+
         return(
             <form onSubmit={this.handleSubmit} ref='loginForm'>
-                <Redirect
-                    to={this.state.redirect_path}
-                    push={this.state.redirect_push}
-                />
+                {redirect}
 
                 <div className='form-header'>
                     <h1>Sign in Web-Interface</h1>
