@@ -23,6 +23,14 @@ var ResultsDisplay = React.createClass({
             status: null
         };
     },
+    componentWillMount: function() {
+      // update redux store
+        const actionLayout = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'result'});
+        this.props.dispatchContentType(actionContentType);
+    },
   // call back: get all titles, and nid from server side
     componentDidMount: function() {
       // ajax arguments
@@ -33,7 +41,13 @@ var ResultsDisplay = React.createClass({
         };
 
       // boolean to show ajax spinner
-        this.setState({display_spinner: true});
+        if (
+            this.state &&
+            !this.state.display_spinner &&
+            !this.state.ajax_done_result
+        ) {
+            this.setState({display_spinner: true});
+        }
 
       // asynchronous callback: ajax 'done' promise
         ajaxCaller(function (asynchObject) {
@@ -68,14 +82,12 @@ var ResultsDisplay = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
-
-        const actionContentType = setContentType({'layout': 'result'});
-        this.props.dispatchContentType(actionContentType);
     },
     render: function() {
       // local variables
         const status = this.state.status;
         const titles = this.state.titles;
+        var spinner = this.state.display_spinner ? <Spinner /> : null;
 
       // polyfill 'entries'
         if (!Object.entries) {
@@ -88,7 +100,7 @@ var ResultsDisplay = React.createClass({
                 titles.map((title) => {
                     if (title.length == 3) {
                         return <NavLink
-                            to={'/session/result?nid=' + title[0]}
+                            to={'/session/results?nid=' + title[0]}
                             key={'link-' + title[0]}
                         >
                             <li key={'title-' + title[0]}>
@@ -105,14 +117,11 @@ var ResultsDisplay = React.createClass({
             </div>;
         }
 
-      // update redux store: define overall page layout
-        const action = setLayout({'layout': 'analysis'});
-        this.props.dispatchLayout(action);
-
       // display result
         return(
             <div className='result-container'>
                 <div>{resultList}</div>
+                {spinner}
             </div>
         );
     }
