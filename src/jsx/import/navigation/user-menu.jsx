@@ -24,8 +24,7 @@ var UserMenu = React.createClass({
                     <HomeLink />
                 </nav>
             );
-        }
-        else if (
+        } else if (
             !!this.props &&
             !!this.props.layout &&
             !!this.props.layout.type &&
@@ -40,8 +39,7 @@ var UserMenu = React.createClass({
                     <RegisterLinkState />
                 </nav>
             );
-        }
-        else {
+        } else {
             return (
                 <nav
                     className={'main-navigation menu-home'}

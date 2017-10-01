@@ -55,8 +55,7 @@ var ModelPredict = React.createClass({
       // store collection into state
         if (!!collection && collection != '--Select--' && checkValidString(collection)) {
             this.setState({value_collection: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_collection: '--Select--'});
         }
     },
@@ -67,8 +66,7 @@ var ModelPredict = React.createClass({
                 button: {submit_analysis: event.submitted_proper_predictor}
             });
             this.props.dispatchSvButton(action);
-        }
-        else {
+        } else {
             const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
@@ -122,8 +120,7 @@ var ModelPredict = React.createClass({
     getSupplyPredictors: function(collection) {
         if (collection != '--Select--' && checkValidString(collection)) {
             return SupplyPredictors;
-        }
-        else {
+        } else {
             return null;
         }
     },

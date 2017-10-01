@@ -36,8 +36,7 @@ var DataNew = React.createClass({
             checkValidString(datasetType)
         ) {
             this.setState({value_dataset_type: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_dataset_type: '--Select--'});
         }
 
@@ -50,8 +49,7 @@ var DataNew = React.createClass({
 
         if (sessionTitle && checkValidString(sessionTitle)) {
             this.setState({value_title: sessionTitle});
-        }
-        else {
+        } else {
             this.setState({value_title: ''});
         }
 
@@ -64,8 +62,7 @@ var DataNew = React.createClass({
 
         if (collection && checkValidString(collection)) {
             this.setState({value_collection: collection});
-        }
-        else {
+        } else {
             this.setState({value_collection: ''});
         }
 
@@ -82,8 +79,7 @@ var DataNew = React.createClass({
             checkValidString(modelType)
         ) {
             this.setState({value_model_type: modelType});
-        }
-        else {
+        } else {
             this.setState({value_model_type: '--Select--'});
         }
 
@@ -99,8 +95,7 @@ var DataNew = React.createClass({
                 button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
-        }
-        else {
+        } else {
           // update redux store
             const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
@@ -188,8 +183,7 @@ var DataNew = React.createClass({
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
             }[datasetType] || null;
-        }
-        else {
+        } else {
             return null;
         }
     },

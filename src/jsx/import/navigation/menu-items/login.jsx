@@ -35,8 +35,7 @@ var LoginLink = React.createClass({
                     <span>Sign in</span>
                 </NavLink>
             );
-        }
-        else {
+        } else {
             return (
                 <NavLink
                     to='/logout'
@@ -72,8 +71,7 @@ var LoginLink = React.createClass({
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
                     this.setState({ajax_done_result: asynchObject});
-                }
-                else {
+                } else {
                     this.setState({ajax_done_result: null});
                 }
             // boolean to hide ajax spinner

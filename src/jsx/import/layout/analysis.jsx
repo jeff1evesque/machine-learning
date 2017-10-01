@@ -98,8 +98,7 @@ var AnalysisLayout = React.createClass({
                 } else if (asynchObject) {
                     this.setState({ajax_done_result: asynchObject});
                     this.storeResults();
-                }
-                else {
+                } else {
                     this.setState({ajax_done_result: null});
                 }
             // boolean to hide ajax spinner
@@ -158,8 +157,7 @@ var AnalysisLayout = React.createClass({
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);
-        }
-        else if (
+        } else if (
             resultSet &&
             !!resultSet.result &&
             resultSet.model == 'svr' &&
@@ -180,8 +178,7 @@ var AnalysisLayout = React.createClass({
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: true}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);
-        }
-        else {
+        } else {
           // update redux store
             const gotoResultsButton = setGotoResultsButton({button: {goto_results: false}});
             this.props.dispatchGotoResultsButton(gotoResultsButton);

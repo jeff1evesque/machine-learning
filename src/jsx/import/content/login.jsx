@@ -33,8 +33,7 @@ var LoginForm = React.createClass({
     getSpinner: function() {
         if (this.state.display_spinner) {
             return Spinner;
-        }
-        else {
+        } else {
             return 'span';
         }
     },
@@ -151,8 +150,7 @@ var LoginForm = React.createClass({
             var loginNote = <div className='invalid-pop'>
                 Invalid user, or password.
             </div>;
-        }
-        else {
+        } else {
             var loginNote = null;
         }
 

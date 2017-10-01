@@ -37,8 +37,7 @@ const layout = (state='analysis', action) => {
             default:
                 return state;
         }
-    }
-    else {
+    } else {
         return state;
     }
 }

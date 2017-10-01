@@ -45,8 +45,7 @@ var DataAppend = React.createClass({
             checkValidString(collection)
         ) {
             this.setState({value_collection: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_collection: '--Select--'});
 
           // update redux store
@@ -62,8 +61,7 @@ var DataAppend = React.createClass({
             checkValidString(datasetType)
         ) {
             this.setState({value_dataset_type: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_dataset_type: '--Select--'});
         }
 
@@ -80,8 +78,7 @@ var DataAppend = React.createClass({
             checkValidString(modelType)
         ) {
             this.setState({value_model_type: modelType});
-        }
-        else {
+        } else {
             this.setState({value_model_type: '--Select--'});
         }
 
@@ -97,8 +94,7 @@ var DataAppend = React.createClass({
                 button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
-        }
-        else {
+        } else {
           // update redux store
             const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
@@ -175,8 +171,7 @@ var DataAppend = React.createClass({
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
             }[datasetType] || null;
-        }
-        else {
+        } else {
             return null;
         }
     },

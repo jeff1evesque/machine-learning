@@ -50,13 +50,11 @@ var ModelGenerate = React.createClass({
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
-            }
-            else {
+            } else {
                 const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
-        }
-        else {
+        } else {
             this.setState({value_collection: '--Select--'});
 
           // update redux store
@@ -84,13 +82,11 @@ var ModelGenerate = React.createClass({
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
-            }
-            else {
+            } else {
                 const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
-        }
-        else {
+        } else {
             this.setState({value_model_type: '--Select--'});
 
           // update redux store
@@ -118,13 +114,11 @@ var ModelGenerate = React.createClass({
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
-            }
-            else {
+            } else {
                 const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
-        }
-        else {
+        } else {
             this.setState({value_kernel_type: '--Select--'});
 
           // update redux store

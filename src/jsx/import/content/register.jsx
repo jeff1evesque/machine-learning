@@ -39,8 +39,7 @@ var RegisterForm = React.createClass({
     getSpinner: function() {
         if (this.state.display_spinner) {
             return Spinner;
-        }
-        else {
+        } else {
             return 'span';
         }
     },
@@ -92,8 +91,7 @@ var RegisterForm = React.createClass({
 
               // return server response
                 this.setState({ajax_done_result: result});
-            }
-            else {
+            } else {
                 this.setState({ajax_done_result: null});
             }
           // boolean to hide ajax spinner
@@ -157,8 +155,7 @@ var RegisterForm = React.createClass({
         if (this.state.validated_email) {
             var emailClass = '';
             var emailNote = '';
-        }
-        else {
+        } else {
             var emailClass = 'invalid';
             var emailNote = <span className={emailClass}>
                 Please provide a valid email.
@@ -170,8 +167,7 @@ var RegisterForm = React.createClass({
             var passwordNote = <span className='invalid'>
                 (Password requirement not met)
             </span>;
-        }
-        else {
+        } else {
             var passwordNote = null;
         }
 
@@ -179,8 +175,7 @@ var RegisterForm = React.createClass({
             var usernameNote = <span className='invalid'>
                 (Username is taken)
             </span>;
-        }
-        else {
+        } else {
             var usernameNote = null;
         }
 
@@ -188,8 +183,7 @@ var RegisterForm = React.createClass({
             var emailNote = <span className='invalid'>
                 (Email has already registered)
             </span>;
-        }
-        else {
+        } else {
             var emailNote = null;
         }
 

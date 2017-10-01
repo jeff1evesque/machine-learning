@@ -60,8 +60,7 @@ var ResultsDisplay = React.createClass({
 
                 // enumerate and store response
                 this.setState(Object.assign({}, results))
-            }
-            else {
+            } else {
                 this.setState({ajax_done_result: null});
             }
         // boolean to hide ajax spinner
@@ -110,8 +109,7 @@ var ResultsDisplay = React.createClass({
                     }
                 })
             }</ul>;
-        }
-        else {
+        } else {
             var resultList = <div className='result-list'>
                 Sorry, no results available!
             </div>;

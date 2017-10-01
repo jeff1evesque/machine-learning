@@ -28,8 +28,7 @@ var RegisterLink = React.createClass({
                    <span>Sign up</span>
                 </NavLink>
             );
-        }
-        else {
+        } else {
             return (<span />);
         }
     },

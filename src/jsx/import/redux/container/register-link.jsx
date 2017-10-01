@@ -17,8 +17,7 @@ const mapStateToProps = (state) => {
   // validate username
     if (state && state.user && !!state.user.name) {
         var username = state.user.name
-    }
-    else {
+    } else {
         var username = 'anonymous'
     }
 
