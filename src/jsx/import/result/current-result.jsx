@@ -120,6 +120,59 @@ var CurrentResultDisplay = React.createClass({
         const actionContentType = setContentType({'layout': 'result'});
         this.props.dispatchContentType(actionContentType);
     },
+    componentDidMount: function() {
+      // execute if 'nid' defined 'componentWillMount'
+        if (this.state && !!this.state.nid) {
+          // ajax arguments
+            var data = new FormData();
+            data.append('id_result', JSON.stringify(nid));
+            const ajaxEndpoint = '/retrieve-prediction';
+            const ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': data
+            };
+
+          // boolean to show ajax spinner
+            if (
+                this.state &&
+                !this.state.display_spinner &&
+                !this.state.ajax_done_result
+            ) {
+                this.setState({display_spinner: true});
+            }
+
+            // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ajax_done_error: asynchObject.error});
+                } else if (asynchObject) {
+                    const results = asynchObject;
+
+                    // enumerate and store response
+                    this.setState(Object.assign({}, results))
+                }
+                else {
+                    this.setState({ajax_done_result: null});
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
+                if (asynchStatus) {
+                    this.setState({ajax_fail_status: asynchStatus});
+                    console.log('Error Status: ' + asynchStatus);
+                }
+                if (asynchError) {
+                    this.setState({ajax_fail_error: asynchError});
+                    console.log('Error Thrown: ' + asynchError);
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+        }
+    },
     render: function(){
       // local variables
         var resultType = null;
