@@ -100,7 +100,7 @@ var ResultsDisplay = React.createClass({
                 titles.map((title) => {
                     if (title.length == 3) {
                         return <NavLink
-                            to={'/session/results?nid=' + title[0]}
+                            to={'/session/current-result?nid=' + title[0]}
                             key={'link-' + title[0]}
                         >
                             <li key={'title-' + title[0]}>
