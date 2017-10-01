@@ -7,7 +7,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import NavBar from '../navigation/nav-bar.jsx';
 import DataNewState from '../redux/container/data-new.jsx';
 import DataAppendState from '../redux/container/data-append.jsx';
