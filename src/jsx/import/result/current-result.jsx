@@ -105,11 +105,10 @@ var CurrentResultDisplay = React.createClass({
     componentWillMount: function() {
         if (
             !!this.props &&
-            !!this.props.location &&
-            !!this.props.location.search
+            !!this.props.location
         ) {
-            const parsed = queryString.parse(props.location.search);
-            if (!!parsed.nid) {
+            const parsed = queryString.parse(this.props.location.search);
+            if (!!parsed && !!parsed.nid) {
                 this.setState({nid: parsed.nid});
             }
         }
