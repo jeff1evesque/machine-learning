@@ -10,7 +10,7 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import ResultsDisplay from '../../result/current-result.jsx';
+import ResultsDisplay from '../../result/results.jsx';
 import { setLayout, setContentType } from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
