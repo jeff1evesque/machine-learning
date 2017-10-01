@@ -43,8 +43,7 @@ var ResultsDisplay = React.createClass({
       // boolean to show ajax spinner
         if (
             this.state &&
-            !this.state.display_spinner &&
-            !this.state.ajax_done_result
+            !this.state.display_spinner
         ) {
             this.setState({display_spinner: true});
         }
@@ -60,8 +59,6 @@ var ResultsDisplay = React.createClass({
 
                 // enumerate and store response
                 this.setState(Object.assign({}, results))
-            } else {
-                this.setState({ajax_done_result: null});
             }
         // boolean to hide ajax spinner
             this.setState({display_spinner: false});
