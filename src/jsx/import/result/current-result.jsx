@@ -43,8 +43,7 @@ var CurrentResultDisplay = React.createClass({
                 'endpoint': ajaxEndpoint,
                 'data': formData
             };
-        }
-        else {
+        } else {
             var formData = new FormData(this.refs.savePredictionForm);
             formData.append('status', 'no-data');
 
@@ -64,8 +63,7 @@ var CurrentResultDisplay = React.createClass({
                 this.setState({ajax_done_error: asynchObject.error});
             } else if (asynchObject) {
                 this.setState({ajax_done_result: asynchObject});
-            }
-            else {
+            } else {
                 this.setState({ajax_done_result: null});
             }
         // boolean to hide ajax spinner
@@ -121,7 +119,7 @@ var CurrentResultDisplay = React.createClass({
         this.props.dispatchContentType(actionContentType);
     },
     componentDidMount: function() {
-      // execute if 'nid' defined 'componentWillMount'
+      // execute if 'nid' defined from 'componentWillMount'
         if (this.state && !!this.state.nid) {
           // ajax arguments
             var data = new FormData();
@@ -145,12 +143,9 @@ var CurrentResultDisplay = React.createClass({
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
-                    const results = asynchObject;
-
-                    // enumerate and store response
-                    this.setState(Object.assign({}, results))
-                }
-                else {
+                    this.setState({ajax_done_result: asynchObject});
+                    this.storeResults();
+                } else {
                     this.setState({ajax_done_result: null});
                 }
             // boolean to hide ajax spinner
@@ -197,8 +192,7 @@ var CurrentResultDisplay = React.createClass({
       // generate result
         if (this.state.nid) {
             console.log('yes: ' + this.state.nid);
-        }
-        else if (
+        } else if (
             resultData &&
             this.props &&
             this.props.results &&
@@ -232,8 +226,7 @@ var CurrentResultDisplay = React.createClass({
                 />
                 <Submit cssClass='btn' />
             </form>
-        }
-        else {
+        } else {
             var resultList = <div className='result-list'>
                 Sorry, no results available!
             </div>;
