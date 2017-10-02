@@ -1,0 +1,12 @@
+## disable linters: all configurations extend the default configuration.
+
+VendorPrefix
+    enabled: true
+    exclude:
+      - src/scss/style.scss
+      - src/scss/_webform.scss
+
+QualifyingElement
+    enabled: true
+    exclude:
+      - src/scss/style.scss

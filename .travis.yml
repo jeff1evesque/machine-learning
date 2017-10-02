@@ -17,7 +17,7 @@ before_install:
 install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
   - pip install flake8==2.5.4
-  - gem install scss_lint -v 0.38.0
+  - gem install scss_lint -v 0.54.0
   - npm install -g bootlint@0.14.2
   - gem install puppet-lint -v 1.1.0
   - gem install r10k -v 2.2.0
@@ -45,7 +45,7 @@ install:
 script:
   - PROJECT_DIRECTORY=$(pwd)
   - flake8 . --max-line-length=100
-  - scss-lint src/scss/*.scss --exclude-linter [VendorPrefix, QualifyingElement]
+  - scss-lint src/scss/*.scss --config test/lint/.scss-lint.yml
   - bootlint -d W005 interface/templates/*.html
   - sudo find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
   - sudo find puppet/environment/*/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
