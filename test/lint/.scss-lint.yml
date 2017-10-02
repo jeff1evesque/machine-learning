@@ -3,9 +3,9 @@ linters:
         enabled: true
         exclude:
             - ./../../src/scss/style.scss
-            -  ./../../src/scss/_webform.scss
+            - ./../../src/scss/_webform.scss
 
     QualifyingElement:
         enabled: true
         exclude:
-            -  ./../../src/scss/style.scss
+            - ./../../src/scss/style.scss
