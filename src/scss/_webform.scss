@@ -81,7 +81,7 @@ form {
     color: $gray-7;
   }
 
-  .form-label.invalid:after {
+  .form-label.invalid::after {
     color: $red-1;
     content: ' *';
   }
@@ -89,7 +89,7 @@ form {
   .input-block {
     border: 1px solid $gray-4;
     border-radius: .1875rem;
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, .085);
+    box-shadow: inset 0 1px 2px $gray1;
     box-sizing: border-box;
     color: $gray-7;
     display: block;
@@ -106,7 +106,7 @@ form {
 
   .invalid-pop {
     background-color: $red-3;
-    border: 1px solid rgba(25, 30, 35, .15);
+    border: 1px solid $gray-2;
     border-radius: 5px;
     border-style: solid;
     border-width: 1px;

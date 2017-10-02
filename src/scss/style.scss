@@ -62,7 +62,7 @@ a.btn-primary {
   background-image: linear-gradient($green-1, $green-4);
   border-color: $green-3;
   color: $white-1;
-  text-shadow: 0 -1px 0 rgba(0, 0, 0, .15);
+  text-shadow: 0 -1px 0 $gray-2;
 }
 
 a.btn-primary:hover {
