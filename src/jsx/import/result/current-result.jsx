@@ -155,7 +155,7 @@ var CurrentResultDisplay = React.createClass({
          // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
                 if (asynchStatus) {
-                    this.setState({ajax_retrival_status: asynchStatus});
+                    this.setState({ajax_retrieval_status: asynchStatus});
                     console.log('Error Status: ' + asynchStatus);
                 }
                 if (asynchError) {
