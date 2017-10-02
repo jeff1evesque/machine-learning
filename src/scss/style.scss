@@ -11,19 +11,7 @@
 @import 'spinner';
 @import 'layout';
 
-a,
-a:active,
-a:link,
-a:visited {
-  color: $blue-hyperlink;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-a.btn {
+.btn {
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
@@ -48,14 +36,14 @@ a.btn {
   white-space: nowrap;
 }
 
-a.btn:hover {
+.btn:hover {
   background-color: $gray-1;
   background-image: -webkit-linear-gradient($gray-1, $gray-2);
   background-image: linear-gradient($gray-1, $gray-2);
   border-color: $gray-3;
 }
 
-a.btn-primary {
+.btn-primary {
   background-color: $green-4;
   background-image: -webkit-linear-gradient($green-1, $green-4);
   background-image: linear-gradient($green-1, $green-4);
@@ -64,7 +52,7 @@ a.btn-primary {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, .15);
 }
 
-a.btn-primary:hover {
+.btn-primary:hover {
   background-color: $green-5;
   background-image: -webkit-linear-gradient($green-2, $green-5);
   background-image: linear-gradient($green-2, $green-5);
@@ -72,8 +60,20 @@ a.btn-primary:hover {
   color: $white-1;
 }
 
-a.mn-2 {
+.mn-2 {
   margin-right: .625rem;
+}
+
+a,
+a:active,
+a:link,
+a:visited {
+  color: $blue-hyperlink;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
 }
 
 body {
