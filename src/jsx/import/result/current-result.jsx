@@ -60,11 +60,11 @@ var CurrentResultDisplay = React.createClass({
         ajaxCaller(function (asynchObject) {
         // Append to DOM
             if (asynchObject && asynchObject.error) {
-                this.setState({ajax_done_error: asynchObject.error});
+                this.setState({ajax_store_error: asynchObject.error});
             } else if (asynchObject) {
-                this.setState({ajax_done_result: asynchObject});
+                this.setState({ajax_store_result: asynchObject});
             } else {
-                this.setState({ajax_done_result: null});
+                this.setState({ajax_store_result: null});
             }
         // boolean to hide ajax spinner
             this.setState({display_spinner: false});
@@ -72,11 +72,11 @@ var CurrentResultDisplay = React.createClass({
       // asynchronous callback: ajax 'fail' promise
         function (asynchStatus, asynchError) {
             if (asynchStatus) {
-                this.setState({ajax_fail_status: asynchStatus});
+                this.setState({ajax_store_status: asynchStatus});
                 console.log('Error Status: ' + asynchStatus);
             }
             if (asynchError) {
-                this.setState({ajax_fail_error: asynchError});
+                this.setState({ajax_store_error: asynchError});
                 console.log('Error Thrown: ' + asynchError);
             }
         // boolean to hide ajax spinner
@@ -123,7 +123,7 @@ var CurrentResultDisplay = React.createClass({
         if (this.state && !!this.state.nid) {
           // ajax arguments
             var data = new FormData();
-            data.append('id_result', JSON.stringify(nid));
+            data.append('id_result', this.state.nid);
             const ajaxEndpoint = '/retrieve-prediction';
             const ajaxArguments = {
                 'endpoint': ajaxEndpoint,
@@ -139,26 +139,27 @@ var CurrentResultDisplay = React.createClass({
                 this.setState({display_spinner: true});
             }
 
-            // Append to DOM
+          // asynchronous callback: ajax 'done' promise
+            ajaxCaller(function (asynchObject) {
+              // Append to DOM
                 if (asynchObject && asynchObject.error) {
-                    this.setState({ajax_done_error: asynchObject.error});
+                    this.setState({ajax_retrieval_error: asynchObject.error});
                 } else if (asynchObject) {
-                    this.setState({ajax_done_result: asynchObject});
-                    this.storeResults();
+                    this.setState({ajax_retrieval_result: asynchObject});
                 } else {
-                    this.setState({ajax_done_result: null});
+                    this.setState({ajax_retrieval_result: null});
                 }
             // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
-            }.bind(this),
-          // asynchronous callback: ajax 'fail' promise
+            this.setState({display_spinner: false});
+        }.bind(this),
+         // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
                 if (asynchStatus) {
-                    this.setState({ajax_fail_status: asynchStatus});
+                    this.setState({ajax_retrival_status: asynchStatus});
                     console.log('Error Status: ' + asynchStatus);
                 }
                 if (asynchError) {
-                    this.setState({ajax_fail_error: asynchError});
+                    this.setState({ajax_retrieval_error: asynchError});
                     console.log('Error Thrown: ' + asynchError);
                 }
             // boolean to hide ajax spinner
@@ -168,7 +169,7 @@ var CurrentResultDisplay = React.createClass({
             ajaxArguments);
         }
     },
-    render: function(){
+    render: function() {
       // local variables
         var resultType = null;
         var resultData = null;
@@ -190,8 +191,8 @@ var CurrentResultDisplay = React.createClass({
         }
 
       // generate result
-        if (this.state.nid) {
-            console.log('yes: ' + this.state.nid);
+        if (this.state && !!this.state.ajax_retrieval_result) {
+            console.log('current-result.jsx, this.state.ajax_retrieval_result: ' + JSON.stringify(this.state.ajax_retrieval_result));
         } else if (
             resultData &&
             this.props &&
