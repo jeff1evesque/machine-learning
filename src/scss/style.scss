@@ -54,6 +54,7 @@ a.btn {
   background-image: -webkit-linear-gradient($gray-1, $gray-2);
   background-image: linear-gradient($gray-1, $gray-2);
   border-color: $gray-3;
+  text-decoration: none;
 }
 
 a.btn-primary {
@@ -62,7 +63,6 @@ a.btn-primary {
   background-image: linear-gradient($green-1, $green-4);
   border-color: $green-3;
   color: $white-1;
-  text-shadow: 0 -1px 0 $gray-2;
 }
 
 a.btn-primary:hover {
