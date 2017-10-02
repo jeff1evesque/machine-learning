@@ -45,7 +45,7 @@ install:
 script:
   - PROJECT_DIRECTORY=$(pwd)
   - flake8 . --max-line-length=100
-  - scss-lint src/scss/*.scss --exclude-linter VendorPrefix
+  - scss-lint src/scss/*.scss --exclude-linter VendorPrefix QualifyingElement
   - bootlint -d W005 interface/templates/*.html
   - sudo find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
   - sudo find puppet/environment/*/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
