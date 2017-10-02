@@ -13,7 +13,8 @@
 
 a,
 a:active,
-a:any-link {
+a:link,
+a:visited {
   color: $blue-hyperlink;
   text-decoration: none;
 }
