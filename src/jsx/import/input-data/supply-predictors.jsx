@@ -35,8 +35,7 @@ var SupplyPredictors = React.createClass({
             function(element) {
                 if (element.value && checkValidFloat(element.value)) {
                     return true;
-                }
-                else {
+                } else {
                     return false;
                 }
             }
@@ -49,8 +48,7 @@ var SupplyPredictors = React.createClass({
 
         if (datasetFlag) {
             this.props.onChange({submitted_proper_predictor: true});
-        }
-        else {
+        } else {
             this.props.onChange({submitted_proper_predictor: false});
         }
     },

@@ -420,9 +420,9 @@ def retrieve_prediction_titles():
             args = json.loads(results['args'])
             model_type = args['model_type']
 
-        # invalid request
+        # retrieve all titles
         else:
-            return json.dumps({'status': 2})
+            model_type = 'all'
 
         # query database
         prediction = Prediction()
@@ -438,10 +438,7 @@ def retrieve_prediction_titles():
             }, default=str)
 
         else:
-            return json.dumps({
-                'status': 1,
-                'titles': None
-            })
+            return json.dumps({'status': 1, 'titles': None})
 
 
 @blueprint.route(
@@ -472,8 +469,7 @@ def retrieve_prediction():
         # web-interface
         elif request.form:
             results = request.form
-            args = json.loads(results['args'])
-            id_result = args['id_result']
+            id_result = json.loads(results['id_result'])
 
         # invalid request
         else:

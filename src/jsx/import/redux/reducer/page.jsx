@@ -37,6 +37,13 @@ const page = (state='default', action) => {
                     goto_results: gotoResults
                 }
             }
+        case 'SET-CONTENT-TYPE':
+            var contentType = action.content_type;
+
+            return {
+                ...state,
+                content_type: contentType
+            }
         default:
             return state;
     }

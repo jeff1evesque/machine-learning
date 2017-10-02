@@ -12,8 +12,9 @@
  */
 
 import React from 'react';
-import { browserHistory } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
+import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -21,6 +22,7 @@ var LoginForm = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            redirect_path: '/',
             ajax_done_result: null,
             display_spinner: false,
             validated_login_server: true,
@@ -31,8 +33,7 @@ var LoginForm = React.createClass({
     getSpinner: function() {
         if (this.state.display_spinner) {
             return Spinner;
-        }
-        else {
+        } else {
             return 'span';
         }
     },
@@ -68,6 +69,15 @@ var LoginForm = React.createClass({
 
                     switch(status) {
                         case 0:
+                          // return server response
+                            this.setState({ajax_done_result: result});
+
+                          // update validation: reset form
+                            this.setState({validated_login_server: true});
+
+                          // boolean to hide ajax spinner
+                            this.setState({display_spinner: false});
+
                           // update redux store
                             const action = setLoginState(username);
                             this.props.dispatchLogin(action);
@@ -75,33 +85,32 @@ var LoginForm = React.createClass({
                           // store username into sessionStorage
                             sessionStorage.setItem('username', username);
 
-                          // reset form
-                            this.setState({validated_login_server: true});
-
-                          // redirect to homepage if logged-in
-                            if (!!result && !!username && username != 'anonymous') {
-                                browserHistory.push('/');
-                            }
-
                             break;
                         case 4:
+                          // return server response
+                            this.setState({ajax_done_result: result});
+
+                          // update validation
                             this.setState({validated_login_server: false});
+
+                          // boolean to hide ajax spinner
+                            this.setState({display_spinner: false});
+
                             break;
                         default:
+                          // return server response
+                            this.setState({ajax_done_result: result});
+
+                          // update validation
                             this.setState({validated_login_server: false});
+
+                          // boolean to hide ajax spinner
+                            this.setState({display_spinner: false});
+
                             break;
                     }
                 }
-
-              // return server response
-                this.setState({ajax_done_result: result});
             }
-            else {
-                this.setState({ajax_done_result: null});
-            }
-
-          // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
 
         }.bind(this),
       // asynchronous callback: ajax 'fail' promise
@@ -122,23 +131,18 @@ var LoginForm = React.createClass({
       // pass ajax arguments
         ajaxArguments);
     },
-    componentWillMount: function() {
-      // redirect to homepage if logged-in
-        if (
-            this.props &&
-            this.props.user &&
-            !!this.props.user.name &&
-            this.props.user.name != 'anonymous'
-        ) {
-            browserHistory.push('/');
-        }
-    },
     updateUsername: function(event) {
         this.setState({value_username: event.target.value});
+    },
+    componentWillMount: function() {
+      // update redux store
+        const action = setLayout({'layout': 'login'});
+        this.props.dispatchLayout(action);
     },
   // triggered when 'state properties' change
     render: function() {
       // local variables
+        var redirect = null;
         var AjaxSpinner = this.getSpinner();
 
       // backend validation
@@ -146,13 +150,24 @@ var LoginForm = React.createClass({
             var loginNote = <div className='invalid-pop'>
                 Invalid user, or password.
             </div>;
-        }
-        else {
+        } else {
             var loginNote = null;
+        }
+
+      // conditionally render redirect
+        if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
+        ) {
+            var redirect = <Redirect to={this.state.redirect_path} />;
         }
 
         return(
             <form onSubmit={this.handleSubmit} ref='loginForm'>
+                {redirect}
+
                 <div className='form-header'>
                     <h1>Sign in Web-Interface</h1>
                 </div>

@@ -1,11 +1,11 @@
 /**
- * results.jsx: send current prediction result to the redux store.
+ * current-result.jsx: send current prediction result to the redux store.
  *
  */
 
-function setResults(action) {
+function setCurrentResult(action) {
     return {
-        type: 'SET-RESULTS',
+        type: 'SET-CURRENT-RESULT',
         results: {
             type: action.type,
             data: action.data
@@ -14,4 +14,4 @@ function setResults(action) {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default setResults
+export default setCurrentResult

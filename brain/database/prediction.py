@@ -128,7 +128,7 @@ class Prediction(object):
         self.sql.connect(self.db_ml)
 
         if model_type in self.model_list:
-            sql_statement = 'SELECT title, datetime_created ' \
+            sql_statement = 'SELECT id_result, title, datetime_created ' \
                 'FROM tbl_prediction_results '\
                 'WHERE uid_created=%s '\
                 'AND model_type=%s'
@@ -136,7 +136,7 @@ class Prediction(object):
             response = self.sql.execute('select', sql_statement, args)
 
         elif model_type == 'all':
-            sql_statement = 'SELECT title, datetime_created '\
+            sql_statement = 'SELECT id_result, title, datetime_created '\
                 'FROM tbl_prediction_results '\
                 'WHERE uid_created=%s'
             args = (self.uid)

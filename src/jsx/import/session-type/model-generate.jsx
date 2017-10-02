@@ -13,7 +13,7 @@
 import React from 'react';
 import checkValidString from '../validator/valid-string.js';
 import Spinner from '../general/spinner.jsx';
-import { setSvButton } from '../redux/action/page.jsx';
+import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelGenerate = React.createClass({
@@ -30,7 +30,7 @@ var ModelGenerate = React.createClass({
     },
   // update 'state properties'
     changeCollection: function(event){
-        const collection  = event.target.value;
+        const collection = event.target.value;
         const modelType  = this.state.value_model_type;
         const kernelType = this.state.value_kernel_type;
 
@@ -50,13 +50,11 @@ var ModelGenerate = React.createClass({
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
-            }
-            else {
+            } else {
                 const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
-        }
-        else {
+        } else {
             this.setState({value_collection: '--Select--'});
 
           // update redux store
@@ -84,13 +82,11 @@ var ModelGenerate = React.createClass({
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
-            }
-            else {
+            } else {
                 const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
-        }
-        else {
+        } else {
             this.setState({value_model_type: '--Select--'});
 
           // update redux store
@@ -118,13 +114,11 @@ var ModelGenerate = React.createClass({
             ) {
                 const action = setSvButton({button: {submit_analysis: true}});
                 this.props.dispatchSvButton(action);
-            }
-            else {
+            } else {
                 const action = setSvButton({button: {submit_analysis: false}});
                 this.props.dispatchSvButton(action);
             }
-        }
-        else {
+        } else {
             this.setState({value_kernel_type: '--Select--'});
 
           // update redux store
@@ -232,6 +226,14 @@ var ModelGenerate = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+    },
+    componentWillMount: function() {
+      // update redux store
+        const actionLayout = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'model_generate'});
+        this.props.dispatchContentType(actionContentType);
     },
     componentWillUnmount: function() {
       // update redux store

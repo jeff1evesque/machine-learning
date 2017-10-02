@@ -13,11 +13,12 @@
   .main {
     .menu-container {
       float: left;
-      width: 16rem;
+      width: $lcol-width;
     }
 
-    .analysis-container {
-      margin-left: 16rem;
+    .analysis-container,
+    .result-container {
+      margin-left: $lcol-width;
     }
   }
 }

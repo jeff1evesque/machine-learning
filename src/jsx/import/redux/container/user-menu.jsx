@@ -1,5 +1,5 @@
 /**
- * register-link.jsx: redux store for login, and logout processes.
+ * user-menu.jsx: redux store for general page settings.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,31 +10,21 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import RegisterLink from '../../navigation/menu-items/register.jsx';
+import UserMenu from '../../navigation/user-menu.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate username
-    if (state && state.user && !!state.user.name) {
-        var username = state.user.name
-    } else {
-        var username = 'anonymous'
-    }
-
   // return redux to state
     return {
-        user: {
-            name: username
-        }
+        layout: state.layout
     }
 }
 
 // pass selected properties from redux state tree to component
-const RegisterLinkState = connect(
+const UserMenuState = connect(
     mapStateToProps,
     null
-)(RegisterLink)
+)(UserMenu)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default RegisterLinkState
-
+export default UserMenuState

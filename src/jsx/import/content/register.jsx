@@ -8,8 +8,9 @@
  */
 
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
-import { browserHistory } from 'react-router';
+import { setLayout } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 import checkValidString from '../validator/valid-string.js';
@@ -20,6 +21,7 @@ var RegisterForm = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            redirect_path: '/',
             ajax_done_result: null,
             display_spinner: false,
             validated_username: true,
@@ -37,8 +39,7 @@ var RegisterForm = React.createClass({
     getSpinner: function() {
         if (this.state.display_spinner) {
             return Spinner;
-        }
-        else {
+        } else {
             return 'span';
         }
     },
@@ -90,8 +91,7 @@ var RegisterForm = React.createClass({
 
               // return server response
                 this.setState({ajax_done_result: result});
-            }
-            else {
+            } else {
                 this.setState({ajax_done_result: null});
             }
           // boolean to hide ajax spinner
@@ -114,15 +114,9 @@ var RegisterForm = React.createClass({
         ajaxArguments);
     },
     componentWillMount: function() {
-      // redirect to homepage if logged-in
-        if (
-            this.props &&
-            this.props.user &&
-            !!this.props.user.name &&
-            this.props.user.name != 'anonymous'
-        ) {
-            browserHistory.push('/');
-        }
+      // update redux store
+        const action = setLayout({'layout': 'register'});
+        this.props.dispatchLayout(action);
     },
     validateUsername: function(event) {
         const username = event.target.value;
@@ -151,6 +145,7 @@ var RegisterForm = React.createClass({
   // triggered when 'state properties' change
     render: function() {
       // local variables
+        var redirect = null;
         var AjaxSpinner = this.getSpinner();
 
       // frontend validation
@@ -160,8 +155,7 @@ var RegisterForm = React.createClass({
         if (this.state.validated_email) {
             var emailClass = '';
             var emailNote = '';
-        }
-        else {
+        } else {
             var emailClass = 'invalid';
             var emailNote = <span className={emailClass}>
                 Please provide a valid email.
@@ -173,8 +167,7 @@ var RegisterForm = React.createClass({
             var passwordNote = <span className='invalid'>
                 (Password requirement not met)
             </span>;
-        }
-        else {
+        } else {
             var passwordNote = null;
         }
 
@@ -182,8 +175,7 @@ var RegisterForm = React.createClass({
             var usernameNote = <span className='invalid'>
                 (Username is taken)
             </span>;
-        }
-        else {
+        } else {
             var usernameNote = null;
         }
 
@@ -191,13 +183,19 @@ var RegisterForm = React.createClass({
             var emailNote = <span className='invalid'>
                 (Email has already registered)
             </span>;
-        }
-        else {
+        } else {
             var emailNote = null;
+        }
+
+      // conditionally render redirect
+        if (this.state.redirect_push) {
+            var redirect = <Redirect to={this.state.redirect_path} />;
         }
 
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>
+                {redirect}
+
                 <div className='form-group'>
                     <label className={'form-label ' + usernameClass}>Username</label>
                     <input

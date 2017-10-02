@@ -12,14 +12,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RegisterForm from '../../content/register.jsx';
+import { setLayout } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
   // validate username
     if (state && state.user && !!state.user.name) {
         var username = state.user.name
-    }
-    else {
+    } else {
         var username = 'anonymous'
     }
 
@@ -31,10 +31,17 @@ const mapStateToProps = (state) => {
     }
 }
 
+// wraps each function of the object to be dispatch callable
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchLayout: dispatch.bind(setLayout)
+    }
+}
+
 // pass selected properties from redux state tree to component
 const RegisterState = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(RegisterForm)
 
 // indicate which class can be exported, and instantiated via 'require'

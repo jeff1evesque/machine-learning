@@ -13,14 +13,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../../content/login.jsx';
 import setLoginState from '../action/login.jsx';
+import { setLayout } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
   // validate username
     if (state && state.user && !!state.user.name) {
         var username = state.user.name
-    }
-    else {
+    } else {
         var username = 'anonymous'
     }
 
@@ -35,7 +35,8 @@ const mapStateToProps = (state) => {
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchLogin: dispatch.bind(setLoginState)
+        dispatchLogin: dispatch.bind(setLoginState),
+        dispatchLayout: dispatch.bind(setLayout)
     }
 }
 

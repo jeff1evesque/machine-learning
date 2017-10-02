@@ -1,28 +1,28 @@
 /**
- * results.jsx: results link markup.
+ * current-result.jsx: current result link markup.
  *
- * @ResultsLink, must be capitalized in order for reactjs to render it as a
+ * @CurrentResultLink, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 
-var ResultsLink = React.createClass({
+var CurrentResultLink = React.createClass({
     render: function() {
         return (
-            <Link
-                to='/session/results'
+            <NavLink
+                to='/session/current-result'
                 activeClassName='active'
                 className='btn btn-primary'
             >
                 <span>Goto results</span>
-            </Link>
+            </NavLink>
         );
     }
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ResultsLink
+export default CurrentResultLink

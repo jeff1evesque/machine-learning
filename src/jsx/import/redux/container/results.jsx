@@ -10,46 +10,22 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import ResultDisplay from '../../result/result-display.jsx';
-import setResults from '../action/results.jsx';
-
-// transforms redux state tree to react properties
-const mapStateToProps = (state) => {
-    var resultType = null;
-    var resultData = null;
-
-    if (
-        state &&
-        state.data &&
-        state.data.results &&
-        !!state.data.results.type &&
-        !!state.data.results.data
-    ) {
-        var resultType = state.data.results.type;
-        var resultData = state.data.results.data;
-    }
-
-  // return redux to state
-    return {
-        results: {
-            type: resultType,
-            data: resultData
-        }
-    }
-}
+import ResultsDisplay from '../../result/results.jsx';
+import { setLayout, setContentType } from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchSvButton: dispatch.bind(setResults)
+        dispatchLayout: dispatch.bind(setLayout),
+        dispatchContentType: dispatch.bind(setContentType),
     }
 }
 
 // pass selected properties from redux state tree to component
-const ResultState = connect(
-    mapStateToProps,
+const ResultsDisplayState = connect(
+    null,
     mapDispatchToProps
-)(ResultDisplay)
+)(ResultsDisplay)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ResultState
+export default ResultsDisplayState

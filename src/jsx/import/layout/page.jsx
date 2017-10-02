@@ -11,52 +11,36 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import HomePage from '../content/home-page.jsx';
-import UserMenu from '../navigation/user-menu.jsx';
+import { Route } from 'react-router-dom';
+import LoginLayout from './login.jsx';
+import RegisterLayout from './register.jsx';
+import HomePageState from '../redux/container/home-page.jsx';
+import UserMenuState from '../redux/container/user-menu.jsx';
+import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
-      // destructure react-router
-        var {
-            content,
-            sidebar,
-            css,
-            layout
-        } = this.props;
-
-      // default value: main content
-        if (this.props.location.pathname == '/') {
-            var content = <HomePage />;
-        }
-        else if (!content) {
-            var content = null;
-        }
-
       // default value: css classnames
-        if (css && !!css.type) {
-            var css = css.type;
-        }
-        else {
+        if (!!this.props && !!this.props.layout && !!this.props.layout.css) {
+            var css = this.props.layout.css;
+        } else {
             var css = 'container default';
         }
 
-      // default value: layout style
-        if (layout && !!layout.type) {
-            var layout = layout.type;
-        }
-        else {
-            var layout = 'default';
-        }
-
         return(
+            <div>
             <div className={css}>
                 <div className='menu-container'>
-                    <UserMenu layout={layout} />
+                    <UserMenuState />
                 </div>
                 <div className='main'>
-                    {sidebar}
-                    {content}
+                    <Route exact path='/login' component={LoginLayout} />
+                    <Route exact path='/logout' component={LoginLayout} />
+                    <Route exact path='/register' component={RegisterLayout} />
+                    <Route path='/session' component={AnalysisLayoutState} />
                 </div>
+            </div>
+            <Route exact path='/' component={HomePageState} />
             </div>
         );
     }
