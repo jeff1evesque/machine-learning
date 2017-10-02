@@ -191,8 +191,28 @@ var CurrentResultDisplay = React.createClass({
         }
 
       // generate result
-        if (this.state && !!this.state.ajax_retrieval_result) {
-            console.log('current-result.jsx, this.state.ajax_retrieval_result: ' + JSON.stringify(this.state.ajax_retrieval_result));
+        if (
+            this.state &&
+            !!this.state.ajax_retrieval_result &&
+            Object.keys(this.state.ajax_retrieval_result).length > 0
+        ) {
+            var resultData = this.state.ajax_retrieval_result
+            var resultList = <ul className='result-list'>{
+                Object.entries(resultData).map(([item_key, value]) =>
+                    <li key={item_key}>{item_key}: {
+                        Array.isArray(value) ?
+                            <ul className='sublist' key={'sublist-' + item_key}>
+                                {
+                                    value.map(function(value, index) {
+                                        return <li key={'subitem-' + index}>{value}</li>;
+                                    })
+                                }
+                            </ul>
+                        : value
+                    }
+                    </li>
+                )
+            }</ul>;
         } else if (
             resultData &&
             this.props &&
