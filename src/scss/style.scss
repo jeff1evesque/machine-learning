@@ -23,7 +23,6 @@ a:hover {
   text-decoration: underline;
 }
 
-.btn,
 a.btn {
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -49,7 +48,7 @@ a.btn {
   white-space: nowrap;
 }
 
-.btn:hover {
+a.btn:hover {
   background-color: $gray-1;
   background-image: -webkit-linear-gradient($gray-1, $gray-2);
   background-image: linear-gradient($gray-1, $gray-2);
@@ -77,10 +76,9 @@ a.btn-primary:hover {
   margin-right: .625rem;
 }
 
-.btn,
+a.btn,
 a.btn-primary,
-a.menu-item,
-.mn-2 {
+a.menu-item {
   text-decoration: none;
 }
 
