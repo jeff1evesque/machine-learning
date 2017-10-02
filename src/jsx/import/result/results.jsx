@@ -115,6 +115,7 @@ var ResultsDisplay = React.createClass({
       // display result
         return(
             <div className='result-container'>
+                <h2>Your Resuls</h2>
                 <div>{resultList}</div>
                 {spinner}
             </div>
