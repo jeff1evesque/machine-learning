@@ -240,8 +240,8 @@ var AnalysisLayout = React.createClass({
                         path='/session/model-predict'
                         component={ModelPredictState}
                     />
-                    {resultBtn}
                     {submitBtn}
+                    {resultBtn}
                     {spinner}
                 </form>
                 <Route
