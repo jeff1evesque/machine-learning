@@ -1,4 +1,4 @@
-## disable linters: all configurations extend the default configuration.
+## .scss-lint.yaml: all configurations extend the default configuration.
 
 VendorPrefix
     enabled: true
