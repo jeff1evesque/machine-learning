@@ -52,7 +52,6 @@ a.btn:hover {
   background-image: -webkit-linear-gradient($gray-1, $gray-2);
   background-image: linear-gradient($gray-1, $gray-2);
   border-color: $gray-3;
-  text-decoration: none;
 }
 
 a.btn-primary {
@@ -70,11 +69,17 @@ a.btn-primary:hover {
   background-image: linear-gradient($green-2, $green-5);
   border-color: $green-6;
   color: $white-1;
-  text-decoration: none;
 }
 
 a.mn-2 {
   margin-right: .625rem;
+}
+
+a.btn,
+a.btn-primary,
+a.menu-item,
+a.mn-2 {
+  text-decoration: none;
 }
 
 body {
