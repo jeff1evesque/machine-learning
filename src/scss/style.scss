@@ -11,8 +11,16 @@
 @import 'spinner';
 @import 'layout';
 
-a {
+a,
+a:active,
+a:link,
+a:visited {
+  color: $blue-hyperlink;
   text-decoration: none;
+}
+
+a: {
+  text-decoration: underline;
 }
 
 body {
@@ -101,4 +109,16 @@ h6 {
   color: $gray-6;
   font-size: .75rem;
   margin: .4rem 0 .3rem;
+}
+
+.result-list {
+  list-style-type: none;
+
+  li {
+    padding-left: 1rem;
+  }
+}
+
+.sublist {
+  margin-left: 1.25rem;
 }
