@@ -20,7 +20,7 @@ import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
 import Spinner from '../general/spinner.jsx';
-import { setSvButton } from '../redux/action/page.jsx';
+import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var DataAppend = React.createClass({
@@ -45,8 +45,7 @@ var DataAppend = React.createClass({
             checkValidString(collection)
         ) {
             this.setState({value_collection: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_collection: '--Select--'});
 
           // update redux store
@@ -62,8 +61,7 @@ var DataAppend = React.createClass({
             checkValidString(datasetType)
         ) {
             this.setState({value_dataset_type: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_dataset_type: '--Select--'});
         }
 
@@ -80,8 +78,7 @@ var DataAppend = React.createClass({
             checkValidString(modelType)
         ) {
             this.setState({value_model_type: modelType});
-        }
-        else {
+        } else {
             this.setState({value_model_type: '--Select--'});
         }
 
@@ -97,8 +94,7 @@ var DataAppend = React.createClass({
                 button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
-        }
-        else {
+        } else {
           // update redux store
             const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
@@ -175,8 +171,7 @@ var DataAppend = React.createClass({
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
             }[datasetType] || null;
-        }
-        else {
+        } else {
             return null;
         }
     },
@@ -218,6 +213,14 @@ var DataAppend = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+    },
+    componentWillMount: function() {
+      // update redux store
+        const actionLayout = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'data_append'});
+        this.props.dispatchContentType(actionContentType);
     },
     componentWillUnmount: function() {
       // update redux store

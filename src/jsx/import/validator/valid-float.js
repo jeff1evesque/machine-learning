@@ -8,20 +8,17 @@ function validator(value) {
         value = value.toString();
     }
 
-  // invalid condition: -0, and -0.0
     if (value.match(/^-0*.0*$/)) {
+      // invalid condition: -0, and -0.0
         return false;
-    }
-  // validate integers: cannot start with 0 (except trivial 0)
-    else if (value.match(/^-?(0|[1-9][0-9]*)(e[+|-][1-9]*[0-9]*)$/)) {
+    } else if (value.match(/^-?(0|[1-9][0-9]*)(e[+|-][1-9]*[0-9]*)$/)) {
+      // validate integers: cannot start with 0 (except trivial 0)
         return true;
-    }
-  // validate floats: cannot start with 0 (except trivial 0.x)
-    else if (value.match(/^-?(0|[1-9][0-9]*)?\.?([1-9]*[0-9]+)(e[+|-][1-9]*[0-9]*)?$/)) {
+    } else if (value.match(/^-?(0|[1-9][0-9]*)?\.?([1-9]*[0-9]+)(e[+|-][1-9]*[0-9]*)?$/)) {
+      // validate floats: cannot start with 0 (except trivial 0.x)
         return true;
-    }
-  // invalid condition: general
-    else {
+    } else {
+      // invalid condition: general
         return false;
     }
 }

@@ -15,7 +15,7 @@ import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
-import { setSvButton } from '../redux/action/page.jsx';
+import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
 
 var DataNew = React.createClass({
   // initial 'state properties'
@@ -36,8 +36,7 @@ var DataNew = React.createClass({
             checkValidString(datasetType)
         ) {
             this.setState({value_dataset_type: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_dataset_type: '--Select--'});
         }
 
@@ -50,9 +49,8 @@ var DataNew = React.createClass({
 
         if (sessionTitle && checkValidString(sessionTitle)) {
             this.setState({value_title: sessionTitle});
-        }
-        else {
-            this.setState({value_title: null});
+        } else {
+            this.setState({value_title: ''});
         }
 
       // update redux store
@@ -64,9 +62,8 @@ var DataNew = React.createClass({
 
         if (collection && checkValidString(collection)) {
             this.setState({value_collection: collection});
-        }
-        else {
-            this.setState({value_collection: null});
+        } else {
+            this.setState({value_collection: ''});
         }
 
       // update redux store
@@ -82,8 +79,7 @@ var DataNew = React.createClass({
             checkValidString(modelType)
         ) {
             this.setState({value_model_type: modelType});
-        }
-        else {
+        } else {
             this.setState({value_model_type: '--Select--'});
         }
 
@@ -99,15 +95,22 @@ var DataNew = React.createClass({
                 button: {submit_analysis: event.submitted_proper_dataset}
             });
             this.props.dispatchSvButton(action);
-        }
-        else {
+        } else {
           // update redux store
             const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
     },
+    componentWillMount: function(event) {
+      // update redux store
+        const actionLayout = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'data_new'});
+        this.props.dispatchContentType(actionContentType);
+    },
   // triggered when 'state properties' change
-    render: function(){
+    render: function() {
         const datasetType = this.state.value_dataset_type;
         const datasetTitle = this.state.value_title;
         const collection = this.state.value_collection;
@@ -180,8 +183,7 @@ var DataNew = React.createClass({
                 file_upload: SupplyDatasetFile,
                 dataset_url: SupplyDatasetUrl
             }[datasetType] || null;
-        }
-        else {
+        } else {
             return null;
         }
     },

@@ -1,6 +1,5 @@
 /**
- * model-predict.jsx: redux store for general page settings, associated with
- *                    the data-new session.
+ * current-result.jsx: redux store for analysis results.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -11,24 +10,21 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import ModelPredict from '../../session-type/model-predict.jsx';
-import { setSvButton, setGotoResultsButton, setLayout, setContentType } from '../action/page.jsx';
+import HomePage from '../../content/home-page.jsx';
+import { setLayout } from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
-        dispatchSvButton: dispatch.bind(setSvButton),
-        dispatchGotoResultsButton: dispatch.bind(setGotoResultsButton),
-        dispatchContentType: dispatch.bind(setContentType),
         dispatchLayout: dispatch.bind(setLayout)
     }
 }
 
 // pass selected properties from redux state tree to component
-const ModelPredictState = connect(
+const HomePageState = connect(
     null,
     mapDispatchToProps
-)(ModelPredict)
+)(HomePage)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ModelPredictState
+export default HomePageState

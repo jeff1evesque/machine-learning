@@ -14,8 +14,7 @@ import 'core-js/modules/es6.object.assign';
 const user = (state='anonymous', action) => {
     if (action && action.user && !!action.user.name) {
         var username = action.user.name;
-    }
-    else {
+    } else {
         var username = 'anonymous';
     }
 

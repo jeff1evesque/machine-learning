@@ -1,0 +1,11 @@
+linters:
+    VendorPrefix:
+        enabled: true
+        exclude:
+            - ./../../src/scss/style.scss
+            - ./../../src/scss/_webform.scss
+
+    QualifyingElement:
+        enabled: true
+        exclude:
+            - ./../../src/scss/style.scss

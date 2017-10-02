@@ -1,22 +1,25 @@
 /**
- * result-display.jsx: display prediction result.
+ * current-display.jsx: display current prediction result.
  *
- * @ResultDisplay, must be capitalized in order for reactjs to render it as a
+ * @CurrentResultDisplay, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  */
 
 import React from 'react';
+import queryString from 'query-string';
 import 'core-js/modules/es7.object.entries';
+import { setLayout, setContentType } from '../redux/action/page.jsx';
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
-var ResultDisplay = React.createClass({
+var CurrentResultDisplay = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
+            nid: null,
             computed_result: null,
             computed_type: null,
         };
@@ -40,8 +43,7 @@ var ResultDisplay = React.createClass({
                 'endpoint': ajaxEndpoint,
                 'data': formData
             };
-        }
-        else {
+        } else {
             var formData = new FormData(this.refs.savePredictionForm);
             formData.append('status', 'no-data');
 
@@ -58,12 +60,11 @@ var ResultDisplay = React.createClass({
         ajaxCaller(function (asynchObject) {
         // Append to DOM
             if (asynchObject && asynchObject.error) {
-                this.setState({ajax_done_error: asynchObject.error});
+                this.setState({ajax_store_error: asynchObject.error});
             } else if (asynchObject) {
-                this.setState({ajax_done_result: asynchObject});
-            }
-            else {
-                this.setState({ajax_done_result: null});
+                this.setState({ajax_store_result: asynchObject});
+            } else {
+                this.setState({ajax_store_result: null});
             }
         // boolean to hide ajax spinner
             this.setState({display_spinner: false});
@@ -71,11 +72,11 @@ var ResultDisplay = React.createClass({
       // asynchronous callback: ajax 'fail' promise
         function (asynchStatus, asynchError) {
             if (asynchStatus) {
-                this.setState({ajax_fail_status: asynchStatus});
+                this.setState({ajax_store_status: asynchStatus});
                 console.log('Error Status: ' + asynchStatus);
             }
             if (asynchError) {
-                this.setState({ajax_fail_error: asynchError});
+                this.setState({ajax_store_error: asynchError});
                 console.log('Error Thrown: ' + asynchError);
             }
         // boolean to hide ajax spinner
@@ -99,7 +100,76 @@ var ResultDisplay = React.createClass({
             });
         }
     },
-    render: function(){
+    componentWillMount: function() {
+        if (
+            !!this.props &&
+            !!this.props.location
+        ) {
+            const parsed = queryString.parse(this.props.location.search);
+            if (!!parsed && !!parsed.nid) {
+                this.setState({nid: parsed.nid});
+            }
+        }
+
+      // update redux store: define overall page layout
+        const action = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(action);
+
+        const actionContentType = setContentType({'layout': 'result'});
+        this.props.dispatchContentType(actionContentType);
+    },
+    componentDidMount: function() {
+      // execute if 'nid' defined from 'componentWillMount'
+        if (this.state && !!this.state.nid) {
+          // ajax arguments
+            var data = new FormData();
+            data.append('id_result', this.state.nid);
+            const ajaxEndpoint = '/retrieve-prediction';
+            const ajaxArguments = {
+                'endpoint': ajaxEndpoint,
+                'data': data
+            };
+
+          // boolean to show ajax spinner
+            if (
+                this.state &&
+                !this.state.display_spinner &&
+                !this.state.ajax_done_result
+            ) {
+                this.setState({display_spinner: true});
+            }
+
+          // asynchronous callback: ajax 'done' promise
+            ajaxCaller(function (asynchObject) {
+              // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ajax_retrieval_error: asynchObject.error});
+                } else if (asynchObject) {
+                    this.setState({ajax_retrieval_result: asynchObject});
+                } else {
+                    this.setState({ajax_retrieval_result: null});
+                }
+            // boolean to hide ajax spinner
+            this.setState({display_spinner: false});
+        }.bind(this),
+         // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
+                if (asynchStatus) {
+                    this.setState({ajax_retrieval_status: asynchStatus});
+                    console.log('Error Status: ' + asynchStatus);
+                }
+                if (asynchError) {
+                    this.setState({ajax_retrieval_error: asynchError});
+                    console.log('Error Thrown: ' + asynchError);
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+        }
+    },
+    render: function() {
       // local variables
         var resultType = null;
         var resultData = null;
@@ -122,6 +192,35 @@ var ResultDisplay = React.createClass({
 
       // generate result
         if (
+            this.state &&
+            !!this.state.ajax_retrieval_result &&
+            Object.keys(this.state.ajax_retrieval_result).length > 0
+        ) {
+          // local variables
+            var resultData = this.state.ajax_retrieval_result
+            const status = resultData.status;
+
+          // do not present status
+            delete resultData.status;
+
+          // generate result
+            var resultList = <ul className='result-list'>{
+                Object.entries(resultData).map(([item_key, value]) =>
+                    <li key={item_key}>{item_key}: {
+                        Array.isArray(value) ?
+                            <ul className='sublist' key={'sublist-' + item_key}>
+                                {
+                                    value.map(function(value, index) {
+                                        return <li key={'subitem-' + index}>{value}</li>;
+                                    })
+                                }
+                            </ul>
+                        : value
+                    }
+                    </li>
+                )
+            }</ul>;
+        } else if (
             resultData &&
             this.props &&
             this.props.results &&
@@ -155,9 +254,10 @@ var ResultDisplay = React.createClass({
                 />
                 <Submit cssClass='btn' />
             </form>
-        }
-        else {
-            var resultList = <div className='result-list'>Sorry, no results available!</div>;
+        } else {
+            var resultList = <div className='result-list'>
+                Sorry, no results available!
+            </div>;
         }
 
       // display result
@@ -174,4 +274,4 @@ var ResultDisplay = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ResultDisplay
+export default CurrentResultDisplay

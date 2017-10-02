@@ -12,8 +12,8 @@ import React from 'react';
 var Submit = React.createClass({
   // triggered when 'state properties' change
     render: function(){
-        const buttonValue = !!this.props.btnValue ? this.props.btnValue : null;
-        const clickCallback = !!this.props.onClick ? this.props.onClick : null;
+        const buttonValue = !!this.props.btnValue ? this.props.btnValue : 'Submit';
+        const clickCallback = !!this.props.onClick ? this.props.onClick : '';
         const cssClass = !!this.props.cssClass ? this.props.cssClass : 'form-submit';
 
         return(

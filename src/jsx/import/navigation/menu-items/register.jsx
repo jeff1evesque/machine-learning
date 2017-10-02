@@ -8,7 +8,7 @@
  */
 
 import React from 'react';
-import { Link } from 'react-router';
+import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 var RegisterLink = React.createClass({
@@ -20,16 +20,15 @@ var RegisterLink = React.createClass({
             this.props.user.name == 'anonymous'
         ) {
             return (
-                <Link
+                <NavLink
                     to='/register'
                     activeClassName='active'
                     className='btn btn-primary'
                 >
                    <span>Sign up</span>
-                </Link>
+                </NavLink>
             );
-        }
-        else {
+        } else {
             return (<span />);
         }
     },

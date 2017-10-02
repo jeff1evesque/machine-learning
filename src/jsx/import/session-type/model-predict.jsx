@@ -14,7 +14,12 @@ import React from 'react';
 import SupplyPredictors from '../input-data/supply-predictors.jsx';
 import checkValidString from '../validator/valid-string.js';
 import Spinner from '../general/spinner.jsx';
-import { setSvButton, setGotoResultsButton } from '../redux/action/page.jsx';
+import {
+    setSvButton,
+    setGotoResultsButton,
+    setLayout,
+    setContentType
+} from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 var ModelPredict = React.createClass({
@@ -50,8 +55,7 @@ var ModelPredict = React.createClass({
       // store collection into state
         if (!!collection && collection != '--Select--' && checkValidString(collection)) {
             this.setState({value_collection: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_collection: '--Select--'});
         }
     },
@@ -62,8 +66,7 @@ var ModelPredict = React.createClass({
                 button: {submit_analysis: event.submitted_proper_predictor}
             });
             this.props.dispatchSvButton(action);
-        }
-        else {
+        } else {
             const action = setSvButton({button: {submit_analysis: false}});
             this.props.dispatchSvButton(action);
         }
@@ -117,8 +120,7 @@ var ModelPredict = React.createClass({
     getSupplyPredictors: function(collection) {
         if (collection != '--Select--' && checkValidString(collection)) {
             return SupplyPredictors;
-        }
-        else {
+        } else {
             return null;
         }
     },
@@ -160,6 +162,14 @@ var ModelPredict = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+    },
+    componentWillMount: function() {
+      // update redux store
+        const actionLayout = setLayout({'layout': 'analysis'});
+        this.props.dispatchLayout(actionLayout);
+
+        const actionContentType = setContentType({'layout': 'model_predict'});
+        this.props.dispatchContentType(actionContentType);
     },
     componentWillUnmount: function () {
       // update redux store

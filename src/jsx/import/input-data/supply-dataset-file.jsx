@@ -47,8 +47,7 @@ var SupplyDatasetFile = React.createClass({
             {/* allow parent component to know all files properly defined */}
             if (datasetBoolean) {
                 this.props.onChange({submitted_proper_dataset: true});
-            }
-            else {
+            } else {
                 this.props.onChange({submitted_proper_dataset: false});
             }
 
@@ -57,7 +56,7 @@ var SupplyDatasetFile = React.createClass({
         }
     },
   // update 'state properties': allow parent component(s) to access properties
-    validFileEntered: function(){
+    validFileEntered: function() {
         {/* get array of input elements, by classname */}
         var dataset = document.getElementsByClassName('dataset-file');
 
@@ -68,8 +67,7 @@ var SupplyDatasetFile = React.createClass({
         var boolArray = Array.prototype.map.call(dataset, function(element) {
             if (element.value && checkValidFile(element.value)) {
                 return true;
-            }
-            else {
+            } else {
                 return false;
             }
         });
@@ -81,8 +79,7 @@ var SupplyDatasetFile = React.createClass({
 
         if (datasetFlag) {
             this.props.onChange({submitted_proper_dataset: true});
-        }
-        else {
+        } else {
             this.props.onChange({submitted_proper_dataset: false});
         }
     },

@@ -19,8 +19,7 @@ var ModelType = React.createClass({
         if (checkValidString(event.target.value)) {
             this.setState({value_model_type: event.target.value});
             this.props.onChange({value_model_type: event.target.value});
-        }
-        else {
+        } else {
             this.setState({value_model_type: '--Select--'});
         }
     },
