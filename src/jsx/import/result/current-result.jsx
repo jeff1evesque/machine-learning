@@ -196,7 +196,14 @@ var CurrentResultDisplay = React.createClass({
             !!this.state.ajax_retrieval_result &&
             Object.keys(this.state.ajax_retrieval_result).length > 0
         ) {
+          // local variables
             var resultData = this.state.ajax_retrieval_result
+            const status = resultData.status;
+
+          // do not present status
+            delete resultData.status;
+
+          // generate result
             var resultList = <ul className='result-list'>{
                 Object.entries(resultData).map(([item_key, value]) =>
                     <li key={item_key}>{item_key}: {
