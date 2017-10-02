@@ -469,8 +469,7 @@ def retrieve_prediction():
         # web-interface
         elif request.form:
             results = request.form
-            args = json.loads(results['args'])
-            id_result = args['id_result']
+            id_result = json.loads(results['id_result'])
 
         # invalid request
         else:
