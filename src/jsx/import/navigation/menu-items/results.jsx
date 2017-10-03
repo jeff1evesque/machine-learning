@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import ajaxCaller from '../../general/ajax-caller.js';
 
 var ResultsLink = React.createClass({
