@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import ResultsLink from './menu-items/results.jsx';
 
 var NavBar = React.createClass({
   // display result
@@ -52,6 +53,8 @@ var NavBar = React.createClass({
                             Make prediction
                         </NavLink>
                     </li>
+
+                    <li><ResultsLink /></li>
                 </ul>
             </div>
         );
