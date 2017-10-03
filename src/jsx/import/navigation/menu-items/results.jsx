@@ -29,7 +29,7 @@ var ResultsLink = React.createClass({
     renderContent: function() {
         if (
             this.state.ajax_done_result &&
-            this.state.ajax_done_result.status == '0' &&
+            this.state.ajax_done_result.status == '0'
         ) {
             return (
                 <NavLink
