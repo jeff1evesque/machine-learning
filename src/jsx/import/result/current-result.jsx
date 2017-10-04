@@ -63,6 +63,9 @@ var CurrentResultDisplay = React.createClass({
                 this.setState({ajax_store_error: asynchObject.error});
             } else if (asynchObject) {
                 this.setState({ajax_store_result: asynchObject});
+
+                var action = setResultsButton({'button': {'review_results': true}});
+                this.props.dispatchResultsButton(action);
             } else {
                 this.setState({ajax_store_result: null});
             }
@@ -84,9 +87,6 @@ var CurrentResultDisplay = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
-
-        const action = setResultsButton({button: {submit_analysis: true}});
-        this.props.dispatchResultsButton(action);
     },
   // define properties after update
     componentDidUpdate: function() {
