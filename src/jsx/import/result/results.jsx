@@ -91,7 +91,7 @@ var ResultsDisplay = React.createClass({
         }
 
       // generate result
-        if (status == 0 && !!titles) {
+        if (status == 0 && titles && titles.length > 0) {
             var resultList = <ul className='result-list'>{
                 titles.map((title) => {
                     if (title.length == 3) {

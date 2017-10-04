@@ -9,10 +9,6 @@ import { NavLink } from 'react-router-dom';
 import ReviewResultsLink from '../redux/container/review-results-link.jsx';
 
 var NavBar = React.createClass({
-    reviewResults: function() {
-        const action = setContentType({'review_results': true});
-        this.props.dispatchResultsButton(action);
-    },
   // display result
     render: function() {
         return(
@@ -58,7 +54,7 @@ var NavBar = React.createClass({
                         </NavLink>
                     </li>
 
-                    <li><ReviewResultsLink onClick={this.reviewResults} /></li>
+                    <li><ReviewResultsLink /></li>
                 </ul>
             </div>
         );

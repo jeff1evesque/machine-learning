@@ -10,7 +10,7 @@
 import React from 'react';
 import queryString from 'query-string';
 import 'core-js/modules/es7.object.entries';
-import { setLayout, setContentType } from '../redux/action/page.jsx';
+import { setLayout, setContentType, setResultsButton } from '../redux/action/page.jsx';
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -84,6 +84,9 @@ var CurrentResultDisplay = React.createClass({
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
+
+        const action = setResultsButton({button: {submit_analysis: true}});
+        this.props.dispatchResultsButton(action);
     },
   // define properties after update
     componentDidUpdate: function() {

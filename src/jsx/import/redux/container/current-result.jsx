@@ -12,7 +12,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CurrentResultDisplay from '../../result/current-result.jsx';
 import setCurrentResult from '../action/current-result.jsx';
-import { setLayout, setContentType } from '../action/page.jsx';
+import { setLayout, setContentType, setResultsButton } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -44,7 +44,8 @@ const mapDispatchToProps = (dispatch) => {
     return {
         dispatchLayout: dispatch.bind(setLayout),
         dispatchSvButton: dispatch.bind(setCurrentResult),
-        dispatchContentType: dispatch.bind(setContentType)
+        dispatchContentType: dispatch.bind(setContentType),
+        dispatchResultsButton: dispatch.bind(setResultsButton)
     }
 }
 

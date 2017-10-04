@@ -8,7 +8,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route } from 'react-router-dom';
-import NavBarState from '../redux/container/nav-bar.jsx';
+import NavBar from '../navigation/nav-bar.jsx';
 import DataNewState from '../redux/container/data-new.jsx';
 import DataAppendState from '../redux/container/data-append.jsx';
 import ModelGenerateState from '../redux/container/model-generate.jsx';
@@ -214,7 +214,7 @@ var AnalysisLayout = React.createClass({
         */}
         return(
             <div>
-                <NavBarState />
+                <NavBar />
                 <form
                     onSubmit={this.handleSubmit}
                     ref='analysisForm'
