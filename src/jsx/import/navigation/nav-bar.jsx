@@ -6,9 +6,13 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import ResultsLink from './menu-items/results.jsx';
+import ReviewResultsLink from '../redux/container/review-results-link.jsx';
 
 var NavBar = React.createClass({
+    reviewResults: function() {
+        const action = setContentType({'review_results': true});
+        this.props.dispatchSvButton(action);
+    }
   // display result
     render: function() {
         return(
@@ -54,7 +58,7 @@ var NavBar = React.createClass({
                         </NavLink>
                     </li>
 
-                    <li><ResultsLink /></li>
+                    <li><ReviewResultsLink onClick={this.reviewResults} /></li>
                 </ul>
             </div>
         );

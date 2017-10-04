@@ -22,6 +22,15 @@ function setGotoResultsButton(action) {
     };
 }
 
+function setResultsButton(action) {
+    return {
+        type: 'SET-RESULTS-BUTTON',
+        button: {
+            review_results: action.button.review_results
+        }
+    };
+}
+
 function setLayout(action) {
     return {
         type: 'SET-LAYOUT',

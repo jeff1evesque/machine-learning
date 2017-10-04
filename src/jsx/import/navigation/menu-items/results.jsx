@@ -1,7 +1,7 @@
 /**
  * results.jsx: results link markup.
  *
- * @ResultsLink, must be capitalized in order for reactjs to render it as a
+ * @ReviewResultsLink, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
@@ -15,7 +15,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ajaxCaller from '../../general/ajax-caller.js';
 
-var ResultsLink = React.createClass({
+var ReviewResultsLink = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
@@ -28,8 +28,16 @@ var ResultsLink = React.createClass({
   // call back: return login button
     renderContent: function() {
         if (
-            this.state.ajax_done_result &&
-            this.state.ajax_done_result.status == '0'
+                (
+                    this.state.ajax_done_result &&
+                    this.state.ajax_done_result.titles.length > 0
+                ) ||
+                (
+                    this.props &&
+                    this.props.page &&
+                    this.props.page.button &&
+                    this.props.page.button.review_results
+                )
         ) {
             return (
                 <NavLink
@@ -44,10 +52,7 @@ var ResultsLink = React.createClass({
             return null;
         }
     },
-    componentWillMount: function(event) {
-      // prevent page reload
-        event.preventDefault();
-
+    componentWillMount: function() {
       // local variables
         var ajaxArguments = {
             'endpoint': '/retrieve-prediction-titles'
@@ -89,4 +94,4 @@ var ResultsLink = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ResultsLink
+export default ReviewResultsLink
