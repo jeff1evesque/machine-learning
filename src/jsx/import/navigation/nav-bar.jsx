@@ -12,7 +12,7 @@ var NavBar = React.createClass({
     reviewResults: function() {
         const action = setContentType({'review_results': true});
         this.props.dispatchSvButton(action);
-    }
+    },
   // display result
     render: function() {
         return(

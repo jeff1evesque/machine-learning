@@ -25,7 +25,7 @@ const mapStateToProps = (state) => {
 
   // return redux to state
     return {
-        page {
+        page: {
             button: {
                 review_results: status
             }
