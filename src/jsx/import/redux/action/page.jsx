@@ -46,4 +46,4 @@ function setContentType(action) {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export { setSvButton, setGotoResultsButton, setLayout, setContentType }
+export { setSvButton, setGotoResultsButton, setLayout, setContentType, setResultsButton }
