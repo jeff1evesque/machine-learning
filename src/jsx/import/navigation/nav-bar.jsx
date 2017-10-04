@@ -11,7 +11,7 @@ import ReviewResultsLink from '../redux/container/review-results-link.jsx';
 var NavBar = React.createClass({
     reviewResults: function() {
         const action = setContentType({'review_results': true});
-        this.props.dispatchSvButton(action);
+        this.props.dispatchResultsButton(action);
     },
   // display result
     render: function() {

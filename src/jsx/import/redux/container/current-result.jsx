@@ -44,7 +44,6 @@ const mapDispatchToProps = (dispatch) => {
     return {
         dispatchLayout: dispatch.bind(setLayout),
         dispatchSvButton: dispatch.bind(setCurrentResult),
-        dispatchResultsButton: dispatch.bind(setResultsButton),
         dispatchContentType: dispatch.bind(setContentType)
     }
 }
