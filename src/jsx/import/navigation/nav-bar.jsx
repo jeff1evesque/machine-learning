@@ -6,7 +6,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import ReviewResultsLink from '../redux/container/review-results-link.jsx';
+import ReviewResultsLinkState from '../redux/container/review-results-link.jsx';
 
 var NavBar = React.createClass({
   // display result
@@ -54,7 +54,7 @@ var NavBar = React.createClass({
                         </NavLink>
                     </li>
 
-                    <li><ReviewResultsLink /></li>
+                    <li><ReviewResultsLinkState /></li>
                 </ul>
             </div>
         );
