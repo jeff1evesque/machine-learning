@@ -34,10 +34,10 @@ const mapStateToProps = (state) => {
 }
 
 // pass selected properties from redux state tree to component
-const LoginLinkState = connect(
+const ReviewResultsLinkState = connect(
     mapStateToProps,
     null
 )(ReviewResultsLink)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ReviewResultsLink
+export default ReviewResultsLinkState
