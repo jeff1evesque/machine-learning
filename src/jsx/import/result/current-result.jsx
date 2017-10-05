@@ -64,7 +64,7 @@ var CurrentResultDisplay = React.createClass({
             } else if (asynchObject) {
                 this.setState({ajax_store_result: asynchObject});
 
-                var action = setResultsButton({'button': {'review_results': true}});
+                const action = setResultsButton({button: {review_results: true}});
                 this.props.dispatchResultsButton(action);
             } else {
                 this.setState({ajax_store_result: null});
