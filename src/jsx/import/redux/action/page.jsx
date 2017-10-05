@@ -22,6 +22,15 @@ function setGotoResultsButton(action) {
     };
 }
 
+function setResultsButton(action) {
+    return {
+        type: 'SET-RESULTS-BUTTON',
+        button: {
+            review_results: action.button.review_results
+        }
+    };
+}
+
 function setLayout(action) {
     return {
         type: 'SET-LAYOUT',
@@ -37,4 +46,4 @@ function setContentType(action) {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export { setSvButton, setGotoResultsButton, setLayout, setContentType }
+export { setSvButton, setGotoResultsButton, setLayout, setContentType, setResultsButton }

@@ -10,7 +10,7 @@
 import React from 'react';
 import queryString from 'query-string';
 import 'core-js/modules/es7.object.entries';
-import { setLayout, setContentType } from '../redux/action/page.jsx';
+import { setLayout, setContentType, setResultsButton } from '../redux/action/page.jsx';
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
@@ -63,6 +63,9 @@ var CurrentResultDisplay = React.createClass({
                 this.setState({ajax_store_error: asynchObject.error});
             } else if (asynchObject) {
                 this.setState({ajax_store_result: asynchObject});
+
+                const action = setResultsButton({button: {review_results: true}});
+                this.props.dispatchResultsButton(action);
             } else {
                 this.setState({ajax_store_result: null});
             }

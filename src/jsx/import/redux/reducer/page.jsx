@@ -15,6 +15,16 @@ const page = (state='default', action) => {
 
   // assign elements from action
     switch(action.type) {
+        case 'SET-RESULTS-BUTTON':
+            var reviewResults = action.button.review_results;
+
+            return {
+                ...state,
+                button: {
+                    ...state.button,
+                    review_results: reviewResults
+                }
+            }
         case 'SUBMIT-SV-ANALYSIS':
             var submitButtonAnalysis = action.button.submit_analysis;
 

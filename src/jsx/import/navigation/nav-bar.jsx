@@ -6,6 +6,7 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import ReviewResultsLinkState from '../redux/container/review-results-link.jsx';
 
 var NavBar = React.createClass({
   // display result
@@ -52,6 +53,8 @@ var NavBar = React.createClass({
                             Make prediction
                         </NavLink>
                     </li>
+
+                    <li><ReviewResultsLinkState /></li>
                 </ul>
             </div>
         );
