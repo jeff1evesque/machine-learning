@@ -18,6 +18,9 @@ const mapStateToProps = (state) => {
     return {
         layout: {
             css: state.css
+        },
+        user: {
+            name: username
         }
     }
 }

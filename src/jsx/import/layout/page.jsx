@@ -28,12 +28,22 @@ var PageLayout = React.createClass({
             var css = 'container default';
         }
 
+        if (
+            this.props &&
+            this.props.user &&
+            this.props.user.name != 'anonymous'
+        ) {
+            var mainMenu = <UserMenuState />;
+        }
+        else {
+            var mainMenu = <HeaderMenuState />
+        }
+
         return(
             <div>
             <div className={css}>
                 <div className='menu-container'>
-                    <UserMenuState />
-                    <HeaderMenuState />
+                    {mainMenu}
                 </div>
                 <div className='main'>
                     <Route exact path='/login' component={LoginLayout} />
