@@ -28,10 +28,12 @@ var PageLayout = React.createClass({
             var css = 'container default';
         }
 
+  // validate username
         if (
-            this.props &&
-            this.props.user &&
-            this.props.user.name != 'anonymous'
+            state &&
+            state.user &&
+            !!state.user.name &&
+            state.user.name != 'anonymous'
         ) {
             var mainMenu = <UserMenuState />;
         }
