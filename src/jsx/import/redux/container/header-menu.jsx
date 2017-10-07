@@ -24,7 +24,7 @@ const mapStateToProps = (state) => {
 const HeaderMenuState = connect(
     mapStateToProps,
     null
-)(UserMenu)
+)(HeaderMenu)
 
 // indicate which class can be exported, and instantiated via 'require'
 export default HeaderMenuState
