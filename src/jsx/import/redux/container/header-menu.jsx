@@ -1,5 +1,5 @@
 /**
- * user-menu.jsx: redux store for the main user menu.
+ * header-menu.jsx: redux store for general page settings.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -10,30 +10,21 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import UserMenu from '../../navigation/user-menu.jsx';
+import HeaderMenu from '../../navigation/header-menu.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
-  // validate username
-    if (state && state.user && !!state.user.name) {
-        var username = state.user.name
-    } else {
-        var username = 'anonymous'
-    }
-
   // return redux to state
     return {
-        user: {
-            name: username
-        }
+        layout: state.layout
     }
 }
 
 // pass selected properties from redux state tree to component
-const UserMenuState = connect(
-    null,
-    mapDispatchToProps
+const HeaderMenuState = connect(
+    mapStateToProps,
+    null
 )(UserMenu)
 
 // indicate which class can be exported, and instantiated via 'require'
-export default UserMenuState
+export default HeaderMenuState

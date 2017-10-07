@@ -5,56 +5,42 @@
  */
 
 import React from 'react';
-import HomeLink from './menu-items/home.jsx';
-import LoginLinkState from '../redux/container/login-link.jsx';
-import RegisterLinkState from '../redux/container/register-link.jsx';
+import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import LinkContainer from 'react-router-bootstrap';
 
 var UserMenu = React.createClass({
-    renderContent: function() {
-        if (
-            !!this.props &&
-            !!this.props.layout &&
-            !!this.props.layout.type &&
-            this.props.layout.type == 'login'
-        ) {
-            return (
-                <nav
-                    className={'main-navigation menu-login'}
-                >
-                    <HomeLink />
-                </nav>
-            );
-        } else if (
-            !!this.props &&
-            !!this.props.layout &&
-            !!this.props.layout.type &&
-            this.props.layout.type == 'register'
-        ) {
-            return (
-                <nav
-                    className={'main-navigation menu-register'}
-                >
-                    <HomeLink />
-                    <LoginLinkState />
-                    <RegisterLinkState />
-                </nav>
-            );
-        } else {
-            return (
-                <nav
-                    className={'main-navigation menu-home'}
-                >
-                    <HomeLink />
-                    <LoginLinkState />
-                    <RegisterLinkState />
-                </nav>
-            );
-        }
-    },
-  // display result
     render: function() {
-        var selectedContent = this.renderContent();
-        return(selectedContent);
+        if (
+            this.props &&
+            this.props.user &&
+            this.props.user.name != 'anonymous'
+        ) {
+            var user = this.props.user.name;
+        }
+
+        return (
+            <Navbar inverse collapseOnSelect>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <LinkContainer to='/'>
+                            <MenuItem>MLearning</MenuItem>
+                        </LinkContainer>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav>
+                        <NavDropdown eventKey={1} title='My Account' id='basic-nav-dropdown'>
+                            <div>Signed in as {user}</div>
+                            <MenuItem divider />
+                            <LinkContainer eventKey={1.1} href='/session'>
+                                <MenuItem>Dashboard</MenuItem>
+                            </LinkContainer>
+                        </NavDropdown>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        );
     }
 });
 
