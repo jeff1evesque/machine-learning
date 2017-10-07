@@ -31,8 +31,8 @@ const mapStateToProps = (state) => {
 
 // pass selected properties from redux state tree to component
 const UserMenuState = connect(
-    null,
-    mapDispatchToProps
+    mapStateToProps,
+    null
 )(UserMenu)
 
 // indicate which class can be exported, and instantiated via 'require'
