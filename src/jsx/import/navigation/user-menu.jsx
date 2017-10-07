@@ -5,7 +5,7 @@
  */
 
 import React from 'react';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar, Nav, NavItem, MenuItem } from 'react-bootstrap';
 import LinkContainer from 'react-router-bootstrap';
 
 var UserMenu = React.createClass({
@@ -13,6 +13,7 @@ var UserMenu = React.createClass({
         if (
             this.props &&
             this.props.user &&
+            !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
             var user = this.props.user.name;
