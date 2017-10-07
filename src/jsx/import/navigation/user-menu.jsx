@@ -36,6 +36,10 @@ var UserMenu = React.createClass({
                             <LinkContainer eventKey={1.1} href='/session'>
                                 <MenuItem>Dashboard</MenuItem>
                             </LinkContainer>
+                            <MenuItem divider />
+                            <LinkContainer eventKey={1.2} href='/logout'>
+                                <MenuItem>Sign out</MenuItem>
+                            </LinkContainer>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
