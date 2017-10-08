@@ -4,6 +4,7 @@ linters:
         exclude:
             - ./../../src/scss/style.scss
             - ./../../src/scss/_webform.scss
+            - ./../../src/scss/_bootstrap-3.3.7
 
     QualifyingElement:
         enabled: true
