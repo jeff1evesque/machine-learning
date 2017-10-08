@@ -4,13 +4,13 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import LinkContainer from 'react-router-bootstrap';
+import { NavLink } from 'react-router-dom';
 
-var UserMenu = React.createClass({
-    render: function() {
+class UserMenu extends Component {
+    render() {
         var user = 'anonymous';
         if (
             this.props &&
@@ -25,9 +25,7 @@ var UserMenu = React.createClass({
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <LinkContainer to='/'>
-                            <MenuItem>MLearning</MenuItem>
-                        </LinkContainer>
+                        <NavLink to='/'>MLearning</NavLink>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
@@ -36,20 +34,16 @@ var UserMenu = React.createClass({
                         <NavDropdown eventKey={1} title='My Account' id='basic-nav-dropdown'>
                             <div>Signed in as {user}</div>
                             <MenuItem divider />
-                            <LinkContainer eventKey={1.1} href='/session'>
-                                <MenuItem>Dashboard</MenuItem>
-                            </LinkContainer>
+                            <NavLink to='/session'>Dashboard</NavLink>
                             <MenuItem divider />
-                            <LinkContainer eventKey={1.2} href='/logout'>
-                                <MenuItem>Sign out</MenuItem>
-                            </LinkContainer>
+                            <NavLink to='/logout'>Sign out</NavLink>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>
             </Navbar>
         );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default UserMenu
+export default UserMenu;
