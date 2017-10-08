@@ -10,6 +10,7 @@ import LinkContainer from 'react-router-bootstrap';
 
 var UserMenu = React.createClass({
     render: function() {
+        var user = 'anonymous';
         if (
             this.props &&
             this.props.user &&
@@ -19,7 +20,7 @@ var UserMenu = React.createClass({
             var user = this.props.user.name;
         }
 
-        return (
+        return(
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
