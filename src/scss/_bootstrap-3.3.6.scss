@@ -1,0 +1,193 @@
+// _webform.scss: contains general webform variables.
+//
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
+
+.dataset-url:first-of-type,
+.dataset-file:first-of-type {
+  clear: both;
+  float: left;
+}
+
+.dataset-url,
+.dataset-file {
+  clear: both;
+  display: block;
+}
+
+.input-submit {
+  display: block;
+  text-align: center;
+  width: 100%;
+}
+
+form {
+  p,
+  div,
+  span {
+    .invalid {
+      color: $red-1;
+      font-weight: 700;
+    }
+  }
+
+  input,
+  select,
+  textarea {
+    border: 1px solid #gray-5;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    margin: 0;
+    outline: none;
+    padding: .438rem;
+    -moz-transition: all .30s ease-in-out;
+    -ms-transition: all .30s ease-in-out;
+    -o-transition: all .30s ease-in-out;
+    -webkit-transition: all .30s ease-in-out;
+  }
+
+  input:focus,
+  select:focus,
+  textarea:focus {
+    border: 1px solid $focus;
+    -moz-box-shadow: 0 0 .5rem $focus;
+    -webkit-box-shadow: 0 0 .5rem $focus;
+    box-shadow: 0 0 .5rem $focus;
+  }
+
+  fieldset {
+    padding: .75rem 1.5rem 1rem;
+  }
+
+  > fieldset {
+    border: 1px solid $gray-2;
+    margin-top: $gutter-1 / 2;
+
+    > fieldset {
+      border: 1px solid $gray-1;
+      margin-top: $gutter-1 / 4;
+    }
+  }
+
+  .form-submit {
+    margin-top: $gutter-1 / 2;
+  }
+
+  label {
+    color: $gray-7;
+  }
+
+  .form-label.invalid::after {
+    color: $red-1;
+    content: ' *';
+  }
+
+  .input-block {
+    border: 1px solid $gray-4;
+    border-radius: .1875rem;
+    box-shadow: inset 0 1px 2px $gray-1;
+    box-sizing: border-box;
+    color: $gray-7;
+    display: block;
+    font-size: .875rem;
+    padding: .425rem .55rem;
+    width: 100%;
+  }
+
+  legend {
+    color: $gray-7;
+    font-size: .938rem;
+    padding: 0 $gutter-1 / 4;
+  }
+
+  .invalid-pop {
+    background-color: $red-3;
+    border: 1px solid $gray-2;
+    border-radius: 5px;
+    border-style: solid;
+    border-width: 1px;
+    color: $red-2;
+    margin-bottom: 1rem;
+    padding: 1rem 1.25rem;
+  }
+}
+
+.form-group {
+  margin: 1.15rem 0;
+}
+
+fieldset .error {
+  float: right;
+}
+
+.form-note {
+  clear: both;
+  margin-bottom: .625rem;
+  padding-top: 1.25rem;
+}
+
+.analysis-container {
+  form {
+    margin: .625rem auto;
+    padding: 0 0 .625rem 1.25rem;
+
+  }
+}
+
+.login-form {
+  margin: 0 auto;
+  width: 24rem;
+
+  .form-header {
+    margin-bottom: 1rem;
+    text-align: center;
+
+    h1 {
+      font-size: 1.65rem;
+      font-weight: 400;
+    }
+  }
+
+  .form-body {
+    border: 1px solid $gray-3;
+    border-radius: 5px;
+    padding: 1.25rem;
+
+    label {
+      display: block;
+      font-weight: normal;
+      margin-bottom: .5rem;
+    }
+
+    .input-block {
+      margin-bottom: 1rem;
+      margin-top: .35rem;
+    }
+
+    .input-submit {
+      margin-top: 1.25rem;
+    }
+  }
+}
+
+.register-form {
+  color: $gray-7;
+  margin: 0 auto;
+  width: 28rem;
+
+  h1 {
+    font-size: 2.813rem;
+    font-weight: 400;
+  }
+
+  label {
+    color: $gray-7;
+    display: block;
+    font-weight: 600;
+    margin: 0 0 .4rem;
+  }
+}
