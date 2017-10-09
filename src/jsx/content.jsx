@@ -34,5 +34,5 @@ ReactDOM.render(
             </Switch>
         </Router>
     </Provider>,
-    document.querySelector('.container')
+    document.querySelector('.react-container')
 );
