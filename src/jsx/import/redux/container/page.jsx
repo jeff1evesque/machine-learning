@@ -23,9 +23,6 @@ const mapStateToProps = (state) => {
 
   // return redux to state
     return {
-        layout: {
-            css: state.css
-        },
         user: {
             name: username
         }

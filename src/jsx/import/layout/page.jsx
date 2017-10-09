@@ -21,13 +21,6 @@ import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
-      // default value: css classnames
-        if (!!this.props && !!this.props.layout && !!this.props.layout.css) {
-            var css = this.props.layout.css;
-        } else {
-            var css = 'default';
-        }
-
   // validate username
         if (
             this.props &&
@@ -53,8 +46,8 @@ var PageLayout = React.createClass({
                         <Route exact path='/register' component={RegisterLayout} />
                         <Route path='/session' component={AnalysisLayoutState} />
                     </div>
+                    <Route exact path='/' component={HomePageState} />
                 </div>
-                <Route exact path='/' component={HomePageState} />
             </div>
         );
     }
