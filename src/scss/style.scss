@@ -5,12 +5,16 @@
 //
 //           .[CLASS] ~ .[CLASS] { }
 
-@import 'bootstrap-4.0.0-beta';
+@import 'bootstrap-3.3.6';
 @import 'variables';
 @import 'navigation';
 @import 'webform';
 @import 'spinner';
 @import 'layout';
+
+html {
+  font-size: 14px;
+}
 
 #bootstrap-override {
   a,

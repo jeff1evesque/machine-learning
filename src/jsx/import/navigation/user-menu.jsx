@@ -6,8 +6,8 @@
 
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
-import { NavLink } from 'react-router-dom';
 
 class UserMenu extends Component {
     render() {
@@ -22,25 +22,31 @@ class UserMenu extends Component {
         }
 
         return(
-            <Navbar inverse collapseOnSelect>
-                <Navbar.Header>
-                    <Navbar.Brand>
-                        <NavLink to='/'>MLearning</NavLink>
-                    </Navbar.Brand>
-                    <Navbar.Toggle />
-                </Navbar.Header>
-                <Navbar.Collapse>
-                    <Nav>
-                        <NavDropdown eventKey={1} title='My Account' id='basic-nav-dropdown'>
-                            <div>Signed in as {user}</div>
-                            <MenuItem divider />
-                            <NavLink to='/session'>Dashboard</NavLink>
-                            <MenuItem divider />
-                            <NavLink to='/logout'>Sign out</NavLink>
-                        </NavDropdown>
-                    </Nav>
-                </Navbar.Collapse>
-            </Navbar>
+            <div>
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <LinkContainer to='/'>
+                                <NavItem>MLearning</NavItem>
+                            </LinkContainer>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                            <NavDropdown title='Account' id='basic-nav-dropdown'>
+                                <LinkContainer to='/session'>
+                                    <NavItem>Dashboard</NavItem>
+                                </LinkContainer>
+                                <MenuItem divider />
+                                <LinkContainer to='/logout'>
+                                    <NavItem>Sign out</NavItem>
+                                </LinkContainer>
+                            </NavDropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
         );
     }
 }
