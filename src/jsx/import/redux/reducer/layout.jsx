@@ -21,17 +21,17 @@ const layout = (state='analysis', action) => {
         switch(action.layout) {
             case 'login':
                 return Object.assign({}, state, {
-                    css : 'container login',
+                    css : 'login',
                     type : action.layout,
                 });
             case 'register':
                 return Object.assign({}, state, {
-                    css : 'container register',
+                    css : 'register',
                     type : action.layout,
                 });
             case 'analysis':
                 return Object.assign({}, state, {
-                    css : 'container analysis-container',
+                    css : 'analysis-container',
                     type : action.layout,
                 });
             default:

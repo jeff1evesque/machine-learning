@@ -25,7 +25,7 @@ var PageLayout = React.createClass({
         if (!!this.props && !!this.props.layout && !!this.props.layout.css) {
             var css = this.props.layout.css;
         } else {
-            var css = 'container default';
+            var css = 'default';
         }
 
   // validate username
