@@ -7,50 +7,52 @@
 // Note: '//' comment(s), will not appear in the corresponding compiled css,
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
-.main-navigation {
-  font-weight: 500;
-  padding: .75rem 0;
-  text-align: right;
-}
-
-.menu-home,
-.menu-register {
-  .home {
-    float: left;
-    margin-left: .5rem;
+#bootstrap-override {
+  .main-navigation {
+    font-weight: 500;
+    padding: .75rem 0;
+    text-align: right;
   }
-}
 
-.menu-login {
-  .home {
-    display: block;
-    text-align: center;
-  }
-}
-
-.menu-container {
-  .side-menu {
-    a {
-      color: $gray-7;
-    }
-
-    a:hover {
-      background-color: $gray-1;
-      border-right: .35rem solid $green-4;
-      color: $gray-8;
+  .menu-home,
+  .menu-register {
+    .home {
+      float: left;
+      margin-left: .5rem;
     }
   }
 
-  ul {
-    list-style: none;
-    margin-right: $gutter-1 * 2;
-    padding-left: 0;
+  .menu-login {
+    .home {
+      display: block;
+      text-align: center;
+    }
+  }
 
-    a {
-      border-bottom: 1px solid $gray-2;
-      display: inline-block;
-      padding: 1rem 0 1rem .75rem;
-      width: 100%;
+  .menu-container {
+    .side-menu {
+      a {
+        color: $gray-7;
+      }
+
+      a:hover {
+        background-color: $gray-1;
+        border-right: .35rem solid $green-4;
+        color: $gray-8;
+      }
+    }
+
+    ul {
+      list-style: none;
+      margin-right: $gutter-1 * 2;
+      padding-left: 0;
+
+      a {
+        border-bottom: 1px solid $gray-2;
+        display: inline-block;
+        padding: 1rem 0 1rem .75rem;
+        width: 100%;
+      }
     }
   }
 }
