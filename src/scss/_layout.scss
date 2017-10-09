@@ -7,10 +7,10 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 #bootstrap-override {
-  margin: 0 auto;
-  width: 60rem;
-
   .main {
+      margin: 0 auto;
+      width: 60rem;
+
     .menu-container {
       float: left;
       width: $lcol-width;
