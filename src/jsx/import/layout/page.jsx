@@ -31,7 +31,7 @@ var PageLayout = React.createClass({
             var mainMenu = <UserMenuState />;
         }
         else {
-            var mainMenu = <div class='container'><HeaderMenuState /></div>;
+            var mainMenu = <div className='container'><HeaderMenuState /></div>;
         }
 
         return(
