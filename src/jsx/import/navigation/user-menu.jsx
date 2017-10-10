@@ -26,9 +26,7 @@ class UserMenu extends Component {
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <LinkContainer to='/'>
-                                <MenuItem>MLearning</MenuItem>
-                            </LinkContainer>
+                            <a href='/'>MLearning</a>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
