@@ -19,7 +19,7 @@ linters:
             - ./../../src/scss/_layout.scss
             - ./../../src/scss/_navigation.scss
             - ./../../src/scss/_webform.scss
-            - ./../../src/scss/_style.scss
+            - ./../../src/scss/style.scss
 
     SelectorDepth:
         enabled: true
