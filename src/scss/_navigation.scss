@@ -42,10 +42,11 @@
   .navbar {
     border-radius: 0;
 
-    #basic-nav-dropdown,
-    #basic-nav-dropdown:link,
-    #basic-nav-dropdown:visited,
     .navbar-brand {
+      padding: 5px 0px;
+    }
+
+    #basic-nav-dropdown {
       color: $gray-1;
       text-decoration: none;
     }
