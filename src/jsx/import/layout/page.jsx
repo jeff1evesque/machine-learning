@@ -31,13 +31,13 @@ var PageLayout = React.createClass({
             var mainMenu = <UserMenuState />;
         }
         else {
-            var mainMenu = <HeaderMenuState />
+            var mainMenu = <div class='container'><HeaderMenuState /></div>;
         }
 
         return(
             <div>
                 <div className='menu-container'>
-                    <div class='container'>{mainMenu}</div>
+                    {mainMenu}
                 </div>
                 <div className='main'>
                     <Route exact path='/login' component={LoginLayout} />
