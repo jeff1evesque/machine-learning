@@ -27,14 +27,14 @@ class UserMenu extends Component {
                     <Navbar.Header>
                         <Navbar.Brand>
                             <LinkContainer to='/'>
-                                <NavItem>MLearning</NavItem>
+                                <MenuItem>MLearning</MenuItem>
                             </LinkContainer>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavDropdown title='Account' id='basic-nav-dropdown'>
+                            <NavDropdown title={user} id='basic-nav-dropdown'>
                                 <LinkContainer to='/session'>
                                     <NavItem>Dashboard</NavItem>
                                 </LinkContainer>
