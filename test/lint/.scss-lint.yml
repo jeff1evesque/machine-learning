@@ -1,10 +1,11 @@
+exclude: './../../src/scss/_bootstrap-3.3.6'
+
 linters:
     VendorPrefix:
         enabled: true
         exclude:
             - ./../../src/scss/style.scss
             - ./../../src/scss/_webform.scss
-            - ./../../src/scss/_bootstrap-3.3.7
 
     QualifyingElement:
         enabled: true
