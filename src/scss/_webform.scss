@@ -96,9 +96,11 @@
     }
 
     legend {
+      border-bottom: none;
       color: $gray-7;
       font-size: .938rem;
       padding: 0 $gutter-1 / 4;
+      width: auto;
     }
 
     .invalid-pop {
@@ -184,7 +186,7 @@
     label {
       color: $gray-7;
       display: block;
-      font-weight: 600;
+      font-weight: 500;
       margin: 0 0 .4rem;
     }
   }
