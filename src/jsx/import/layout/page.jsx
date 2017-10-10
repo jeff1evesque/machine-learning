@@ -37,7 +37,7 @@ var PageLayout = React.createClass({
         return(
             <div>
                 <div className='menu-container'>
-                    {mainMenu}
+                    <div class='container'>{mainMenu}</div>
                 </div>
                 <div className='main'>
                     <Route exact path='/login' component={LoginLayout} />
