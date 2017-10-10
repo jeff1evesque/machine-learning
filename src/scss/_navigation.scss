@@ -29,30 +29,25 @@
     }
   }
 
-  .menu-container {
-    .side-menu {
-      a {
-        color: $gray-7;
-      }
+  .side-menu {
+    list-style: none;
+    margin-right: $gutter-1 * 2;
+    padding-left: 0;
 
-      a:hover {
-        background-color: $gray-1;
-        border-right: .35rem solid $green-4;
-        color: $gray-8;
-      }
+    a,
+    a:link,
+    a:visited {
+      border-bottom: 1px solid $gray-2;
+      color: $gray-7;
+      display: inline-block;
+      padding: 1rem 0 1rem .75rem;
+      width: 100%;
     }
 
-    ul {
-      list-style: none;
-      margin-right: $gutter-1 * 2;
-      padding-left: 0;
-
-      a {
-        border-bottom: 1px solid $gray-2;
-        display: inline-block;
-        padding: 1rem 0 1rem .75rem;
-        width: 100%;
-      }
+    a:hover {
+      background-color: $gray-1;
+      border-right: .35rem solid $green-4;
+      color: $gray-8;
     }
   }
 }
