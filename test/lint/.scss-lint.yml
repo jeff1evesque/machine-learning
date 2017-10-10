@@ -1,4 +1,4 @@
-exclude: './../../src/scss/_bootstrap-3.3.6'
+exclude: './../../src/scss/_bootstrap-3.3.6.scss'
 
 linters:
     VendorPrefix:
