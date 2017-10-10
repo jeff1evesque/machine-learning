@@ -29,6 +29,33 @@
     }
   }
 
+  .dropdown-menu {
+    a {
+      background-color: transparent;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  .navbar {
+    border-radius: 0;
+
+    #basic-nav-dropdown,
+    #basic-nav-dropdown:link,
+    #basic-nav-dropdown:visited,
+    .navbar-brand {
+      color: $gray-1;
+      text-decoration: none;
+    }
+
+    #basic-nav-dropdown:hover,
+    .navbar-brand:hover {
+      color: white;
+    }
+  }
+
   .side-menu {
     list-style: none;
     margin-right: $gutter-1 * 2;
