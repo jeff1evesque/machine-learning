@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
+import { Link } from 'react-router-dom'
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
@@ -27,7 +28,7 @@ class UserMenu extends Component {
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <a href='/'><SvgHome /></a>
+                            <Link to='/'><SvgHome /></Link>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
