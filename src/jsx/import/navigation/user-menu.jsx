@@ -8,12 +8,76 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
 import { Link } from 'react-router-dom'
+import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
 class UserMenu extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirect: false
+        };
+    }
+
+    handleClick() {
+        if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
+        ) {
+          // prevent page reload
+            event.preventDefault();
+
+          // local variables
+            var ajaxArguments = {
+                'endpoint': '/logout'
+            };
+
+          // asynchronous callback: ajax 'done' promise
+            ajaxCaller(function (asynchObject) {
+            // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ajax_done_error: asynchObject.error});
+                } else if (asynchObject) {
+                    this.setState({ajax_done_result: asynchObject});
+                } else {
+                    this.setState({ajax_done_result: null});
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
+                if (asynchStatus) {
+                    this.setState({ajax_fail_status: asynchStatus});
+                    console.log('Error Status: ' + asynchStatus);
+                }
+                if (asynchError) {
+                    this.setState({ajax_fail_error: asynchError});
+                    console.log('Error Thrown: ' + asynchError);
+                }
+            // boolean to hide ajax spinner
+                this.setState({display_spinner: false});
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+
+          // update redux store
+            var action = setLogoutState();
+            this.props.dispatchLogout(action);
+
+            this.setState({'redirect': true});
+        }
+        else {
+            this.setState({'redirect': false});
+        }
+    }
+
     render() {
-        var user = 'anonymous';
+        var redirect = null;
+
         if (
             this.props &&
             this.props.user &&
@@ -22,9 +86,17 @@ class UserMenu extends Component {
         ) {
             var user = this.props.user.name;
         }
+        else {
+            var user = 'anonymous';
+        }
+
+        if (this.state && !!this.state.redirect) {
+            var redirect = <Redirect to='/' />;
+        }
 
         return(
             <div>
+                {redirect}
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -39,7 +111,7 @@ class UserMenu extends Component {
                                     <NavItem>Dashboard</NavItem>
                                 </LinkContainer>
                                 <MenuItem divider />
-                                <LinkContainer to='/logout'>
+                                <LinkContainer to='/logout' onClick={this.handleClick}>
                                     <NavItem>Sign out</NavItem>
                                 </LinkContainer>
                             </NavDropdown>
