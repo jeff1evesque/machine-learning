@@ -95,7 +95,7 @@ var LoginLink = React.createClass({
 
           // update redux store
             var action = setLogoutState();
-            this.props.dispatch(action);
+            this.props.dispatchLogout(action);
 
           // remove username from sessionStorage
             sessionStorage.removeItem('username');
