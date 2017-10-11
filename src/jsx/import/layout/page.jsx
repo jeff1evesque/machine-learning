@@ -16,22 +16,28 @@ import LoginLayout from './login.jsx';
 import RegisterLayout from './register.jsx';
 import HomePageState from '../redux/container/home-page.jsx';
 import UserMenuState from '../redux/container/user-menu.jsx';
+import HeaderMenuState from '../redux/container/header-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
 var PageLayout = React.createClass({
     render: function() {
-      // default value: css classnames
-        if (!!this.props && !!this.props.layout && !!this.props.layout.css) {
-            var css = this.props.layout.css;
-        } else {
-            var css = 'container default';
+  // validate username
+        if (
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
+        ) {
+            var mainMenu = <UserMenuState />;
+        }
+        else {
+            var mainMenu = <div className='container'><HeaderMenuState /></div>;
         }
 
         return(
             <div>
-            <div className={css}>
                 <div className='menu-container'>
-                    <UserMenuState />
+                    {mainMenu}
                 </div>
                 <div className='main'>
                     <Route exact path='/login' component={LoginLayout} />
@@ -39,8 +45,7 @@ var PageLayout = React.createClass({
                     <Route exact path='/register' component={RegisterLayout} />
                     <Route path='/session' component={AnalysisLayoutState} />
                 </div>
-            </div>
-            <Route exact path='/' component={HomePageState} />
+                <Route exact path='/' component={HomePageState} />
             </div>
         );
     }

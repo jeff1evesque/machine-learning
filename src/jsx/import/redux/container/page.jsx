@@ -14,10 +14,17 @@ import PageLayout from '../../layout/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
+  // validate username
+    if (state && state.user && !!state.user.name) {
+        var username = state.user.name
+    } else {
+        var username = 'anonymous'
+    }
+
   // return redux to state
     return {
-        layout: {
-            css: state.css
+        user: {
+            name: username
         }
     }
 }

@@ -5,129 +5,136 @@
 //
 //           .[CLASS] ~ .[CLASS] { }
 
+@import 'bootstrap-3.3.6';
 @import 'variables';
 @import 'navigation';
 @import 'webform';
 @import 'spinner';
 @import 'layout';
 
-a,
-a:active,
-a:link,
-a:visited {
-  color: $blue-hyperlink;
-  text-decoration: none;
-}
-
-a:hover {
-  text-decoration: underline;
-}
-
-a.mn-2,
-.btn {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  background-color: $gray-1;
-  background-image: -webkit-linear-gradient($white-2, $gray-1);
-  background-image: linear-gradient($white-2, $gray-1);
-  border: 1px solid $gray-4;
-  border-radius: 3px;
-  color: $gray-7;
-  cursor: pointer;
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 600;
-  line-height: 20px;
-  padding: 6px 12px;
-  position: relative;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  -webkit-user-select: none;
-  user-select: none;
-  vertical-align: middle;
-  white-space: nowrap;
-}
-
-a.btn:hover {
-  background-color: $gray-1;
-  background-image: -webkit-linear-gradient($gray-1, $gray-2);
-  background-image: linear-gradient($gray-1, $gray-2);
-  border-color: $gray-3;
-  text-decoration: none;
-}
-
-a.btn-primary,
-input.btn-primary {
-  background-color: $green-4;
-  background-image: -webkit-linear-gradient($green-1, $green-4);
-  background-image: linear-gradient($green-1, $green-4);
-  border-color: $green-3;
-  color: $white-1;
-}
-
-a.btn-primary:hover,
-input.btn-primary:hover {
-  background-color: $green-5;
-  background-image: -webkit-linear-gradient($green-2, $green-5);
-  background-image: linear-gradient($green-2, $green-5);
-  border-color: $green-6;
-  color: $white-1;
-}
-
-.mn-2 {
-  margin-right: .625rem;
-}
-
-a.btn,
-a.btn-primary,
-a.menu-item {
-  text-decoration: none;
-}
-
-body {
-  font-family: 'Segoe UI', Helvetica, sans-serif, 'Open Sans';
+html {
   font-size: 14px;
-  word-wrap: break-word;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.bold {
-  font-weight: 700;
-}
-
-.italic {
-  font-style: italic;
-}
-
-.error {
-  color: $red-1;
-  font-weight: 700;
-}
-
-.note {
-  color: $gray-6;
-  font-size: .75rem;
-  margin: .4rem 0 .3rem;
-}
-
-.result-list {
-  list-style-type: none;
-
-  li {
-    padding-left: 1rem;
+#bootstrap-override {
+  a,
+  a:active,
+  a:link,
+  a:visited {
+    color: $blue-hyperlink;
+    text-decoration: none;
   }
-}
 
-.sublist {
-  margin-left: 1.25rem;
+  a:hover {
+    text-decoration: underline;
+  }
+
+  a.mn-2,
+  .btn {
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: $gray-1;
+    background-image: -webkit-linear-gradient($white-2, $gray-1);
+    background-image: linear-gradient($white-2, $gray-1);
+    border: 1px solid $gray-4;
+    border-radius: 3px;
+    color: $gray-7;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 20px;
+    padding: 6px 12px;
+    position: relative;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+  }
+
+  a.btn:hover {
+    background-color: $gray-1;
+    background-image: -webkit-linear-gradient($gray-1, $gray-2);
+    background-image: linear-gradient($gray-1, $gray-2);
+    border-color: $gray-3;
+    text-decoration: none;
+  }
+
+  a.btn-primary,
+  input.btn-primary {
+    background-color: $green-4;
+    background-image: -webkit-linear-gradient($green-1, $green-4);
+    background-image: linear-gradient($green-1, $green-4);
+    border-color: $green-3;
+    color: $white-1;
+  }
+
+  a.btn-primary:hover,
+  input.btn-primary:hover {
+    background-color: $green-5;
+    background-image: -webkit-linear-gradient($green-2, $green-5);
+    background-image: linear-gradient($green-2, $green-5);
+    border-color: $green-6;
+    color: $white-1;
+  }
+
+  .mn-2 {
+    margin-right: .625rem;
+  }
+
+  a.btn,
+  a.btn-primary,
+  a.menu-item {
+    text-decoration: none;
+  }
+
+  body {
+    font-family: 'Segoe UI', Helvetica, sans-serif, 'Open Sans';
+    font-size: 14px;
+    word-wrap: break-word;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-bottom: 0;
+    margin-top: 0;
+  }
+
+  .bold {
+    font-weight: 700;
+  }
+
+  .italic {
+    font-style: italic;
+  }
+
+  .error {
+    color: $red-1;
+    font-weight: 700;
+  }
+
+  .note {
+    color: $gray-6;
+    font-size: .75rem;
+    margin: .4rem 0 .3rem;
+  }
+
+  .result-list {
+    list-style-type: none;
+
+    li {
+      padding-left: 1rem;
+    }
+  }
+
+  .sublist {
+    margin-left: 1.25rem;
+  }
 }

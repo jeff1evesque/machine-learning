@@ -1,3 +1,6 @@
+exclude:
+    - ./../../src/scss/_bootstrap-3.3.6.scss
+
 linters:
     VendorPrefix:
         enabled: true
@@ -9,3 +12,21 @@ linters:
         enabled: true
         exclude:
             - ./../../src/scss/style.scss
+
+    IdSelector:
+        enabled: true
+        exclude:
+            - ./../../src/scss/_layout.scss
+            - ./../../src/scss/_navigation.scss
+            - ./../../src/scss/_webform.scss
+            - ./../../src/scss/style.scss
+
+    SelectorDepth:
+        enabled: true
+        exclude:
+            - ./../../src/scss/_webform.scss
+
+    NestingDepth:
+        enabled: true
+        exclude:
+            - ./../../src/scss/_webform.scss

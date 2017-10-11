@@ -4,59 +4,52 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
-import HomeLink from './menu-items/home.jsx';
-import LoginLinkState from '../redux/container/login-link.jsx';
-import RegisterLinkState from '../redux/container/register-link.jsx';
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import SvgHome from '../svg/svg-home.jsx';
+import { Link } from 'react-router-dom'
+import { LinkContainer } from 'react-router-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 
-var UserMenu = React.createClass({
-    renderContent: function() {
+class UserMenu extends Component {
+    render() {
+        var user = 'anonymous';
         if (
-            !!this.props &&
-            !!this.props.layout &&
-            !!this.props.layout.type &&
-            this.props.layout.type == 'login'
+            this.props &&
+            this.props.user &&
+            !!this.props.user.name &&
+            this.props.user.name != 'anonymous'
         ) {
-            return (
-                <nav
-                    className={'main-navigation menu-login'}
-                >
-                    <HomeLink />
-                </nav>
-            );
-        } else if (
-            !!this.props &&
-            !!this.props.layout &&
-            !!this.props.layout.type &&
-            this.props.layout.type == 'register'
-        ) {
-            return (
-                <nav
-                    className={'main-navigation menu-register'}
-                >
-                    <HomeLink />
-                    <LoginLinkState />
-                    <RegisterLinkState />
-                </nav>
-            );
-        } else {
-            return (
-                <nav
-                    className={'main-navigation menu-home'}
-                >
-                    <HomeLink />
-                    <LoginLinkState />
-                    <RegisterLinkState />
-                </nav>
-            );
+            var user = this.props.user.name;
         }
-    },
-  // display result
-    render: function() {
-        var selectedContent = this.renderContent();
-        return(selectedContent);
+
+        return(
+            <div>
+                <Navbar inverse collapseOnSelect>
+                    <Navbar.Header>
+                        <Navbar.Brand>
+                            <Link to='/'><SvgHome /></Link>
+                        </Navbar.Brand>
+                        <Navbar.Toggle />
+                    </Navbar.Header>
+                    <Navbar.Collapse>
+                        <Nav pullRight>
+                            <NavDropdown title={user} id='basic-nav-dropdown'>
+                                <LinkContainer to='/session'>
+                                    <NavItem>Dashboard</NavItem>
+                                </LinkContainer>
+                                <MenuItem divider />
+                                <LinkContainer to='/logout'>
+                                    <NavItem>Sign out</NavItem>
+                                </LinkContainer>
+                            </NavDropdown>
+                        </Nav>
+                    </Navbar.Collapse>
+                </Navbar>
+            </div>
+        );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default UserMenu
+export default UserMenu;
