@@ -7,20 +7,28 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import ajaxCaller from '../general/ajax-caller.js';
 
 class UserMenu extends Component {
     constructor(props) {
+      // super is required when constructor defined
+      // @props argument is fed into super, only if 'this.props' used in constructor
+      // @this.props, works throughout class, regardless of above 'props' argument.
         super(props);
         this.state = {
             redirect: false
         };
+
+      // bind allows 'this' object reference
+        this.handleClick = this.handleClick.bind(this);
+        this.render = this.render.bind(this);
     }
 
-    handleClick() {
+    handleClick(event) {
         if (
             this.props &&
             this.props.user &&
@@ -45,8 +53,6 @@ class UserMenu extends Component {
                 } else {
                     this.setState({ajax_done_result: null});
                 }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
             }.bind(this),
           // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
@@ -58,8 +64,6 @@ class UserMenu extends Component {
                     this.setState({ajax_fail_error: asynchError});
                     console.log('Error Thrown: ' + asynchError);
                 }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
             }.bind(this),
           // pass ajax arguments
             ajaxArguments);
@@ -67,17 +71,10 @@ class UserMenu extends Component {
           // update redux store
             var action = setLogoutState();
             this.props.dispatchLogout(action);
-
-            this.setState({'redirect': true});
-        }
-        else {
-            this.setState({'redirect': false});
         }
     }
 
     render() {
-        var redirect = null;
-
         if (
             this.props &&
             this.props.user &&
@@ -85,13 +82,11 @@ class UserMenu extends Component {
             this.props.user.name != 'anonymous'
         ) {
             var user = this.props.user.name;
+            var redirect = <Redirect to='/' />;
         }
         else {
             var user = 'anonymous';
-        }
-
-        if (this.state && !!this.state.redirect) {
-            var redirect = <Redirect to='/' />;
+            var redirect = null;
         }
 
         return(
