@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { NavLink, Redirect } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import setLoginState from '../../redux/action/login.jsx';
 import setLogoutState from '../../redux/action/logout.jsx';
 import ajaxCaller from '../../general/ajax-caller.js';
@@ -96,12 +96,6 @@ var LoginLink = React.createClass({
           // update redux store
             var action = setLogoutState();
             this.props.dispatchLogout(action);
-
-          // remove username from sessionStorage
-            sessionStorage.removeItem('username');
-
-          // redirect to homepage if logged-out
-            <Redirect from='/login' to='/' />
         }
     },
     render: function(){
