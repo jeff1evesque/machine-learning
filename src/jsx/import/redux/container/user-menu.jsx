@@ -11,6 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import UserMenu from '../../navigation/user-menu.jsx';
+import setLogoutState from '../action/logout.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -29,10 +30,17 @@ const mapStateToProps = (state) => {
     }
 }
 
+// wraps each function of the object to be dispatch callable
+const mapDispatchToProps = (dispatch) => {
+    return {
+        dispatchLogout: dispatch.bind(setLogoutState)
+    }
+}
+
 // pass selected properties from redux state tree to component
 const UserMenuState = connect(
     mapStateToProps,
-    null
+    mapDispatchToProps
 )(UserMenu)
 
 // indicate which class can be exported, and instantiated via 'require'
