@@ -12,7 +12,7 @@
  */
 
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 import setLoginState from '../../redux/action/login.jsx';
 import setLogoutState from '../../redux/action/logout.jsx';
 import ajaxCaller from '../../general/ajax-caller.js';
@@ -71,6 +71,22 @@ var LoginLink = React.createClass({
                     this.setState({ajax_done_error: asynchObject.error});
                 } else if (asynchObject) {
                     this.setState({ajax_done_result: asynchObject});
+
+                    if (asynchObject.status == '0') {
+                        var action = setLogoutState();
+                        this.props.dispatchLogout(action);
+                        sessionStorage.removeItem('username');
+                    }
+
+                    if (
+                        this.props &&
+                        this.props.location &&
+                        this.props.location.pathname &&
+                        this.props.location.pathname != '/' &&
+                        asynchObject.status == '0'
+                    ) {
+                        this.props.history.push('/');
+                    }
                 } else {
                     this.setState({ajax_done_result: null});
                 }
@@ -92,10 +108,6 @@ var LoginLink = React.createClass({
             }.bind(this),
           // pass ajax arguments
             ajaxArguments);
-
-          // update redux store
-            var action = setLogoutState();
-            this.props.dispatchLogout(action);
         }
     },
     render: function(){
@@ -105,4 +117,4 @@ var LoginLink = React.createClass({
 });
 
 // indicate which class can be exported, and instantiated via 'require'
-export default LoginLink
+export default withRouter(LoginLink)
