@@ -32,6 +32,20 @@ application:
         - svr
         - bagc
         - bagr
+        - bagknnc
+        - bagknnr
+        - bagrfc
+        - bagrfr
+        - bagsvc
+        - bagsvr
+        - adaboostc
+        - adaboostr
+        - adaboostknnc
+        - adaboostknnr
+        - adaboostrfc
+        - adaboostrfr
+        - adaboostsvc
+        - adaboostsvr
     log_level: 'DEBUG'
     error_log_path: '/log/application/error'
     warning_log_path: '/log/application/warning'
