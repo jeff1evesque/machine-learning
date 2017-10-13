@@ -21,7 +21,6 @@ var RegisterForm = React.createClass({
   // initial 'state properties'
     getInitialState: function() {
         return {
-            redirect_path: '/',
             ajax_done_result: null,
             display_spinner: false,
             validated_username: true,
@@ -145,17 +144,18 @@ var RegisterForm = React.createClass({
   // triggered when 'state properties' change
     render: function() {
       // local variables
+        var emailClass = '';
         var redirect = null;
+        var passwordNote = null;
+        var usernameNote = null;
+        var emailNote = null;
         var AjaxSpinner = this.getSpinner();
 
       // frontend validation
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
 
-        if (this.state.validated_email) {
-            var emailClass = '';
-            var emailNote = '';
-        } else {
+        if (!this.state.validated_email) {
             var emailClass = 'invalid';
             var emailNote = <span className={emailClass}>
                 Please provide a valid email.
@@ -167,29 +167,30 @@ var RegisterForm = React.createClass({
             var passwordNote = <span className='invalid'>
                 (Password requirement not met)
             </span>;
-        } else {
-            var passwordNote = null;
         }
 
         if (!this.state.validated_username_server) {
             var usernameNote = <span className='invalid'>
                 (Username is taken)
             </span>;
-        } else {
-            var usernameNote = null;
         }
 
         if (!this.state.validated_email_server) {
             var emailNote = <span className='invalid'>
                 (Email has already registered)
             </span>;
-        } else {
-            var emailNote = null;
         }
 
       // conditionally render redirect
-        if (this.state.redirect_push) {
-            var redirect = <Redirect to={this.state.redirect_path} />;
+        if (
+            !passwordNote &&
+            !usernameNote &&
+            !emailNote &&
+            !emailClass &&
+            usernameClass != 'invalid' &&
+            passwordClass != 'invalid'
+        ) {
+            var redirect = <Redirect to='/login' />;
         }
 
         return(
