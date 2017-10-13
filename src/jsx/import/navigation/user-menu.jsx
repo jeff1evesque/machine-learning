@@ -56,6 +56,7 @@ class UserMenu extends Component {
                     if (asynchObject.status == '0') {
                         var action = setLogoutState();
                         this.props.dispatchLogout(action);
+                        sessionStorage.removeItem('username');
                     }
 
                     if (
