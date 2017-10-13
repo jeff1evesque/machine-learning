@@ -7,7 +7,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
-import { Link, Redirect } from 'react-router-dom'
+import { Link, withRouter } from 'react-router-dom'
 import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
@@ -52,6 +52,16 @@ class UserMenu extends Component {
                 if (asynchObject && asynchObject.error) {
                     this.setState({ajax_done_error: asynchObject.error});
                 }
+                else if (asynchObject) {
+                    if (
+                        this.props &&
+                        this.props.location &&
+                        this.props.location.pathname &&
+                        this.props.location.pathname != '/'
+                    ) {
+                        this.props.history.push('/');
+                    }
+                }
             }.bind(this),
           // asynchronous callback: ajax 'fail' promise
             function (asynchStatus, asynchError) {
@@ -81,17 +91,13 @@ class UserMenu extends Component {
             this.props.user.name != 'anonymous'
         ) {
             var user = this.props.user.name;
-// check if route != '/', then redirect
-            var redirect = <Redirect to='/' />;
         }
         else {
             var user = 'anonymous';
-            var redirect = null;
         }
 
         return(
             <div>
-                {redirect}
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
@@ -119,4 +125,4 @@ class UserMenu extends Component {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default UserMenu;
+export default withRouter(UserMenu);
