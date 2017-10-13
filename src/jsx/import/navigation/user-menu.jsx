@@ -15,18 +15,20 @@ import ajaxCaller from '../general/ajax-caller.js';
 
 class UserMenu extends Component {
     constructor(props) {
-      // bind allows 'this' object reference
-        this.handleClick = this.handleClick.bind(this);
-        this.render = this.render.bind(this);
-
-      // super is required when constructor defined
+      // @super is required when constructor defined
       // @props argument is fed into super, only if 'this.props' used in constructor
-      // @this.props, works throughout class, regardless of above 'props' argument,
+      // @this.props, works throughout class, regardless of above 'props' argument
+      //     - requires callback to be binded to 'this'
+      //
         super(props);
         this.state = {
             ajax_done_error: null,
             ajax_fail_error: null
         };
+
+      // bind allows 'this' object reference
+        this.handleClick = this.handleClick.bind(this);
+        this.render = this.render.bind(this);
     }
 
     handleClick(event) {
@@ -80,7 +82,7 @@ class UserMenu extends Component {
         ) {
             var user = this.props.user.name;
 // check if route != '/', then redirect
-//            var redirect = <Redirect to='/' />;
+            var redirect = <Redirect to='/' />;
         }
         else {
             var user = 'anonymous';
