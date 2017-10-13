@@ -8,7 +8,6 @@ def adaboostCgenerate(
                 payload,
                 list_error,
                 learning=1.0,
-                loss='linear',
                 estimators=50):
     return adaboostgen(model,
                   False,
@@ -16,6 +15,5 @@ def adaboostCgenerate(
                   payload,
                   list_error,
                   learning=learning,
-                  loss=loss,
                   be=None,
                   k=estimators)
