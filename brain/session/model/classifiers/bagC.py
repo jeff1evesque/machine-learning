@@ -7,12 +7,14 @@ def bagCgenerate(model,
                 payload,
                 list_error,
                 feat=1.0,
-                samp=1.0):
+                samp=1.0,
+                btrees=10):
     return baggen(model,
                   False,
                   collection,
                   payload,
                   list_error,
-                  feat,
-                  samp,
-                  None)
+                  feat=feat,
+                  samp=samp,
+                  be=None,
+                  k=btrees)

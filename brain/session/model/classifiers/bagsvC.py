@@ -9,12 +9,14 @@ def bagsvCgenerate(model,
                 list_error,
                 feat=1.0,
                 samp=1.0,
+                btrees=10,
                 kernel):
     return baggen(model,
                   False,
                   collection,
                   payload,
                   list_error,
-                  feat,
-                  samp,
-                  SVC(kernel=kernel))
+                  feat=feat,
+                  samp=samp,
+                  k=btrees,
+                  be=SVC(kernel=kernel))

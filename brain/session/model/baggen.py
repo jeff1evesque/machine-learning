@@ -6,6 +6,7 @@ from brain.database.dataset import Collection
 from brain.cache.hset import Hset
 from brain.cache.model import Model
 from sklearn import svm, preprocessing
+import sklearn.ensemble
 import json
 
 def bagging(D, Y, C, k=10, be=None, features=1.0, samples=1.0):
@@ -50,7 +51,6 @@ def baggen(model, regression, collection, payload, list_error, feat=1.0, samp=1.
     # datasets
     Ds = cursor.query(collection_adjusted, 'aggregate', payload)
 
-    
     # the labels
     Y = []
     # the features
