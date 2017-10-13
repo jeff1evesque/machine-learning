@@ -53,16 +53,18 @@ class UserMenu extends Component {
                     this.setState({ajax_done_error: asynchObject.error});
                 }
                 else if (asynchObject) {
-                  // update redux store
-                    var action = setLogoutState();
-                    this.props.dispatchLogout(action);
-
                     if (
                         this.props &&
                         this.props.location &&
                         this.props.location.pathname &&
-                        this.props.location.pathname != '/'
+                        this.props.location.pathname != '/' &&
+                        asynchObject.status == '0'
                     ) {
+                      // update redux store
+                        var action = setLogoutState();
+                        this.props.dispatchLogout(action);
+
+                      // redirect
                         this.props.history.push('/');
                     }
                 }
