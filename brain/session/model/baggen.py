@@ -40,7 +40,7 @@ def bagging(D, Y, C, k=10, be=None, features=1.0, samples=1.0):
 
 # generic generate method for bagging
 # regression is a boolean indicating whether this is a regression generator
-def baggen(model, regression, collection, payload, list_error, feat=1.0, samp=1.0, be=None):
+def baggen(model, regression, collection, payload, list_error, feat=1.0, samp=1.0, be=None, k=10):
     sorted_labels = False
     label_encoder = preprocessing.LabelEncoder()
     collection_adjusted = collection.lower().replace(' ', '_')
@@ -82,13 +82,13 @@ def baggen(model, regression, collection, payload, list_error, feat=1.0, samp=1.
         encoded_labels = label_encoder.transform(Y)
 
         # create and fit
-        clf = bagging(F, Y, True, be=be, features=feat, samples=samp)
+        clf = bagging(F, Y, True, be=be, features=feat, samples=samp, k=k)
 
         Model(label_encoder).cache(model + '_labels', collection_adjusted)
 
     else:
         # create and fit
-        clf = bagging(F, Y, False, be=be, features=feat, samples=samp)
+        clf = bagging(F, Y, False, be=be, features=feat, samples=samp, k=k)
 
         r2 = clf.score(F, Y)
 
