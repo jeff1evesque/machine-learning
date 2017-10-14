@@ -48,49 +48,65 @@ var RegisterForm = React.createClass({
             'data': new FormData(this.refs.registerForm)
         };
 
-      // asynchronous callback: ajax 'done' promise
-        ajaxCaller(function (asynchObject) {
-          // Append to DOM
-            if (asynchObject && asynchObject.error) {
-                this.setState({ajax_done_error: asynchObject.error});
-            }
-            else if (asynchObject) {
-              // local variables
-                const result = asynchObject;
-                const status = (!!result && result.status >= 0) ? result.status : null;
+        if (
+            !!this.state.value_username &&
+            !!this.state.value_email &&
+            !!this.state.value_password
+        ) {
+          // asynchronous callback: ajax 'done' promise
+            ajaxCaller(function (asynchObject) {
+              // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ajax_done_error: asynchObject.error});
+                }
+                else if (asynchObject) {
+                  // local variables
+                    const result = asynchObject;
+                    const status = (!!result && result.status >= 0) ? result.status : null;
 
-              // backend validation: server handles one error at a time
-                if (!!status || status == 0) {
-                    switch(status) {
-                        case 0:
-                            this.setState({ajax_done_result: result});
-                            break;
-                        case 1:
-                            this.setState({validated_password_server: false});
-                            break;
-                        case 2:
-                            this.setState({validated_username_server: false});
-                            break;
-                        case 3:
-                            this.setState({validated_email_server: false});
-                            break;
+                  // backend validation: server handles one error at a time
+                    if (!!status || status == 0) {
+                        switch(status) {
+                            case 0:
+                                this.setState({ajax_done_result: result});
+                                break;
+                            case 1:
+                                this.setState({validated_password_server: false});
+                                break;
+                            case 2:
+                                this.setState({validated_username_server: false});
+                                break;
+                            case 3:
+                                this.setState({validated_email_server: false});
+                                break;
+                        }
                     }
                 }
+            }.bind(this),
+          // asynchronous callback: ajax 'fail' promise
+            function (asynchStatus, asynchError) {
+                if (asynchStatus) {
+                    this.setState({ajax_fail_status: asynchStatus});
+                    console.log('Error Status: ' + asynchStatus);
+                }
+                if (asynchError) {
+                    this.setState({ajax_fail_error: asynchError});
+                    console.log('Error Thrown: ' + asynchError);
+                }
+            }.bind(this),
+          // pass ajax arguments
+            ajaxArguments);
+        } else {
+            if (!this.state.value_username) {
+                this.setState({validated_username: false});
             }
-        }.bind(this),
-      // asynchronous callback: ajax 'fail' promise
-        function (asynchStatus, asynchError) {
-            if (asynchStatus) {
-                this.setState({ajax_fail_status: asynchStatus});
-                console.log('Error Status: ' + asynchStatus);
+            if (!this.state.value_email) {
+                this.setState({validated_email: false});
             }
-            if (asynchError) {
-                this.setState({ajax_fail_error: asynchError});
-                console.log('Error Thrown: ' + asynchError);
+            if (!this.state.value_password) {
+                this.setState({validated_password: false});
             }
-        }.bind(this),
-      // pass ajax arguments
-        ajaxArguments);
+        }
     },
     componentWillMount: function() {
       // update redux store
