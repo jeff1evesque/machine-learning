@@ -1,0 +1,8 @@
+{
+<<<<<<< HEAD
+    "extends": "airbnb",
+    "parser": "babel-eslint"
+=======
+    "extends": "airbnb"
+>>>>>>> dcc920839235b1be40eba009259671beb7b457f2
+}
