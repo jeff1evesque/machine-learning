@@ -21,10 +21,25 @@ const mapStateToProps = (state) => {
         var username = 'anonymous'
     }
 
+  // fetch spinner
+    if (
+        state &&
+        state.page &&
+        state.page.effects &&
+        state.page.effects.spinner
+    ) {
+        var spinnerBool = true;
+    } else {
+        var spinnerBool = false;
+    }
+
   // return redux to state
     return {
         user: {
             name: username
+        },
+        effects: {
+            spinner: spinnerBool
         }
     }
 }
