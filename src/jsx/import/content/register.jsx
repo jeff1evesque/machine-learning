@@ -139,9 +139,6 @@ class RegisterForm extends React.Component {
           // pass ajax arguments
             ajaxArguments);
         } else {
-            const action = setSpinner({'spinner': false})
-            this.props.dispatchSpinner(action);
-
             if (!this.state.value_username) {
                 this.setState({validated_username: false});
             }
@@ -151,6 +148,9 @@ class RegisterForm extends React.Component {
             if (!this.state.value_password) {
                 this.setState({validated_password: false});
             }
+
+            const action = setSpinner({'spinner': false})
+            this.props.dispatchSpinner(action);
         }
     },
     componentWillMount: function() {
