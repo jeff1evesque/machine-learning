@@ -13,7 +13,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import LoginForm from '../../content/login.jsx';
 import setLoginState from '../action/login.jsx';
-import { setLayout } from '../action/page.jsx';
+import { setLayout, setSpinner } from '../action/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
@@ -36,7 +36,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchLogin: dispatch.bind(setLoginState),
-        dispatchLayout: dispatch.bind(setLayout)
+        dispatchLayout: dispatch.bind(setLayout),
+        dispatchSpinner: dispatch.bind(setSpinner)
     }
 }
 

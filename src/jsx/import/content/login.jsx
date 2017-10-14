@@ -14,7 +14,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 import Spinner from '../general/spinner.jsx';
-import { setLayout } from '../redux/action/page.jsx';
+import { setLayout, setSpinner } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -136,8 +136,10 @@ var LoginForm = React.createClass({
     },
     componentWillMount: function() {
       // update redux store
-        const action = setLayout({'layout': 'login'});
-        this.props.dispatchLayout(action);
+        this.props.dispatchLayout(setLayout({'layout': 'login'}));
+    },
+    componentDidMount: function() {
+        this.props.dispatchSpinner(setSpinner({'spinner': false}));
     },
   // triggered when 'state properties' change
     render: function() {

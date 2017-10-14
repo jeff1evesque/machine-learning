@@ -14,14 +14,26 @@ import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
 import LoginLayout from './login.jsx';
 import RegisterLayout from './register.jsx';
+import Spinner from '../general/spinner.jsx';
 import HomePageState from '../redux/container/home-page.jsx';
 import UserMenuState from '../redux/container/user-menu.jsx';
 import HeaderMenuState from '../redux/container/header-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
 var PageLayout = React.createClass({
+  // callback: used to return spinner
+    getSpinner: function() {
+        if (this.props && this.props.effects && this.props.effects.spinner) {
+            return <Spinner />;
+        } else {
+            return null;
+        }
+    },
     render: function() {
-  // validate username
+      // local variables
+        var spinner = this.getSpinner();
+
+      // validate username
         if (
             this.props &&
             this.props.user &&
@@ -46,6 +58,7 @@ var PageLayout = React.createClass({
                     <Route path='/session' component={AnalysisLayoutState} />
                 </div>
                 <Route exact path='/' component={HomePageState} />
+                {spinner}
             </div>
         );
     }
