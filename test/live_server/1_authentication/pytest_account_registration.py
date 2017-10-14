@@ -31,13 +31,13 @@ def test_registration(client, live_server):
     authenticate = Account()
 
     # verify requirements: one letter, one number, and ten characters.
-        if (password and validate_password(password)):
+    if (password and validate_password(password)):
 
         # validate: unique username
-            if (
-                username and
-                not authenticate.check_username(username)['result']
-            ):
+        if (
+            username and
+            not authenticate.check_username(username)['result']
+        ):
 
             # validate: unique email
             if (
