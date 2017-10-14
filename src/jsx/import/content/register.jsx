@@ -139,6 +139,9 @@ class RegisterForm extends React.Component {
           // pass ajax arguments
             ajaxArguments);
         } else {
+            const action = setSpinner({'spinner': false})
+            this.props.dispatchSpinner(action);
+
             if (!this.state.value_username) {
                 this.setState({validated_username: false});
             }
