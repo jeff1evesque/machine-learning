@@ -9,8 +9,7 @@
 
 import React from 'react';
 import { Redirect } from 'react-router-dom';
-import Spinner from '../general/spinner.jsx';
-import { setLayout } from '../redux/action/page.jsx';
+import { setLayout, setSpinner } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 import checkValidString from '../validator/valid-string.js';
@@ -22,7 +21,6 @@ var RegisterForm = React.createClass({
     getInitialState: function() {
         return {
             ajax_done_result: null,
-            display_spinner: false,
             validated_username: true,
             validated_email: true,
             validated_password: true,
@@ -34,18 +32,14 @@ var RegisterForm = React.createClass({
             value_password: '',
         };
     },
-  // callback: used to return spinner
-    getSpinner: function() {
-        if (this.state.display_spinner) {
-            return Spinner;
-        } else {
-            return 'span';
-        }
-    },
   // send form data to serverside on form submission
     handleSubmit: function(event) {
       // prevent page reload
         event.preventDefault();
+
+      // display spinner
+        const action = setSpinner({'spinner': true})
+        this.props.dispatchSpinner(action);
 
       // local variables
         var ajaxEndpoint = '/register';
@@ -54,12 +48,9 @@ var RegisterForm = React.createClass({
             'data': new FormData(this.refs.registerForm)
         };
 
-      // boolean to show ajax spinner
-        this.setState({display_spinner: true});
-
       // asynchronous callback: ajax 'done' promise
         ajaxCaller(function (asynchObject) {
-      // Append to DOM
+          // Append to DOM
             if (asynchObject && asynchObject.error) {
                 this.setState({ajax_done_error: asynchObject.error});
             }
@@ -71,6 +62,9 @@ var RegisterForm = React.createClass({
               // backend validation: server handles one error at a time
                 if (!!status || status == 0) {
                     switch(status) {
+                        case 0:
+                            this.setState({ajax_done_result: result});
+                            break;
                         case 1:
                             this.setState({validated_password_server: false});
                             break;
@@ -80,21 +74,9 @@ var RegisterForm = React.createClass({
                         case 3:
                             this.setState({validated_email_server: false});
                             break;
-                        default:
-                            this.setState({validated_password_server: true});
-                            this.setState({validated_username_server: true});
-                            this.setState({validated_email_server: true});
-                            break;
                     }
                 }
-
-              // return server response
-                this.setState({ajax_done_result: result});
-            } else {
-                this.setState({ajax_done_result: null});
             }
-          // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
         }.bind(this),
       // asynchronous callback: ajax 'fail' promise
         function (asynchStatus, asynchError) {
@@ -106,8 +88,6 @@ var RegisterForm = React.createClass({
                 this.setState({ajax_fail_error: asynchError});
                 console.log('Error Thrown: ' + asynchError);
             }
-          // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
         }.bind(this),
       // pass ajax arguments
         ajaxArguments);
@@ -120,6 +100,10 @@ var RegisterForm = React.createClass({
     validateUsername: function(event) {
         const username = event.target.value;
         const check = checkValidString(username) ? true : false;
+        if (!check) {
+            const action = setSpinner({'spinner': false})
+            this.props.dispatchSpinner(action);
+        }
 
         this.setState({validated_username_server: true});
         this.setState({validated_username: check});
@@ -128,6 +112,10 @@ var RegisterForm = React.createClass({
     validateEmail: function(event) {
         const email = event.target.value;
         const check = checkValidEmail(email) ? true : false;
+        if (!check) {
+            const action = setSpinner({'spinner': false})
+            this.props.dispatchSpinner(action);
+        }
 
         this.setState({validated_email_server: true});
         this.setState({validated_email: check});
@@ -136,6 +124,10 @@ var RegisterForm = React.createClass({
     validatePassword: function(event) {
         const password = event.target.value;
         const check = checkValidPassword(password) ? true : false;
+        if (!check) {
+            const action = setSpinner({'spinner': false})
+            this.props.dispatchSpinner(action);
+        }
 
         this.setState({validated_password_server: true});
         this.setState({validated_password: check});
@@ -143,19 +135,14 @@ var RegisterForm = React.createClass({
     },
   // triggered when 'state properties' change
     render: function() {
-      // local variables
-        var emailClass = '';
-        var redirect = null;
-        var passwordNote = null;
-        var usernameNote = null;
-        var emailNote = null;
-        var AjaxSpinner = this.getSpinner();
-
       // frontend validation
         var usernameClass = this.state.validated_username ?  '' : 'invalid';
         var passwordClass = this.state.validated_password ? '' : 'invalid';
 
-        if (!this.state.validated_email) {
+        if (this.state.validated_email) {
+            var emailClass = '';
+            var emailNote = '';
+        } else {
             var emailClass = 'invalid';
             var emailNote = <span className={emailClass}>
                 Please provide a valid email.
@@ -167,36 +154,39 @@ var RegisterForm = React.createClass({
             var passwordNote = <span className='invalid'>
                 (Password requirement not met)
             </span>;
+        } else {
+            var passwordNote = null;
         }
 
         if (!this.state.validated_username_server) {
             var usernameNote = <span className='invalid'>
                 (Username is taken)
             </span>;
+        } else {
+            var usernameNote = null;
         }
 
         if (!this.state.validated_email_server) {
             var emailNote = <span className='invalid'>
                 (Email has already registered)
             </span>;
+        } else {
+            var emailNote = null;
         }
 
-      // conditionally render redirect
         if (
-            !passwordNote &&
-            !usernameNote &&
-            !emailNote &&
-            !emailClass &&
-            usernameClass != 'invalid' &&
-            passwordClass != 'invalid'
+            this.state.ajax_done_result &&
+            this.state.ajax_done_result.status == '0'
         ) {
             var redirect = <Redirect to='/login' />;
+        }
+        else {
+            var redirect = null;
         }
 
         return(
             <form onSubmit={this.handleSubmit} ref='registerForm'>
                 {redirect}
-
                 <div className='form-group'>
                     <label className={'form-label ' + usernameClass}>Username</label>
                     <input
@@ -250,7 +240,6 @@ var RegisterForm = React.createClass({
                     className='btn btn-primary'
                     value='Create an account'
                 />
-                <AjaxSpinner />
             </form>
         );
     }
