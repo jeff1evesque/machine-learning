@@ -45,7 +45,7 @@ def bagging(
             max_features=features,
             verbose=0
         )
-    else if model == list_model_type[4]:
+    elif model == list_model_type[4]:
         bagger = sklearn.ensemble.BaggingRegressor(
             base_estimator=be,
             n_estimators=k,
