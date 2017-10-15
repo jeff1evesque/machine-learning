@@ -9,7 +9,7 @@
 
 import React from 'react';
 
-const Submit = (prosp) => {
+const Submit = (props) => {
   // triggered when 'state properties' change
 
   const buttonValue = this.props.btnValue ? this.props.btnValue : 'Submit';
