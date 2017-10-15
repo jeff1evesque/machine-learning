@@ -64,13 +64,13 @@ def baggen(
     payload,
     list_error,
     feat=1.0,
-    samp=1.0,
+    samples=1.0,
     be=None,
     k=10
 ):
     '''
 
-    This function generates a prediction using a previously bagger.
+    This function generates the corresponding ensemble bagger.
 
     '''
 
@@ -108,13 +108,29 @@ def baggen(
         encoded_labels = label_encoder.transform(labels)
 
         # create and fit
-        clf = bagging(F, labels, True, be=be, features=feat, samples=samp, k=k)
+        clf = bagging(
+            features,
+            encoded_labels,
+            model,
+            be=be,
+            features=feat,
+            samples=samples,
+            k=k
+        )
 
         Model(label_encoder).cache(model + '_labels', collection_adjusted)
 
     else if model == list_model_type[4]:
         # create and fit
-        clf = bagging(F, labels, False, be=be, features=feat, samples=samp, k=k)
+        clf = bagging(
+            features,
+            labels,
+            model,
+            be=be,
+            features=feat,
+            samples=samples,
+            k=k
+        )
 
         r2 = clf.score(F, labels)
 
