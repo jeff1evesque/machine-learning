@@ -9,35 +9,33 @@
 
 import React from 'react';
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
 
-var RegisterLink = React.createClass({
+class RegisterLink extends React.Component {
   // call back: return register button
-    renderContent: function() {
-        if (
-            this.props &&
+  renderContent() {
+    if (
+      this.props &&
             this.props.user &&
-            this.props.user.name == 'anonymous'
-        ) {
-            return (
-                <NavLink
-                    to='/register'
-                    activeClassName='active'
-                    className='btn btn-primary'
-                >
-                   <span>Sign up</span>
-                </NavLink>
-            );
-        } else {
-            return (<span />);
-        }
-    },
-  // triggered when 'state properties' change
-    render: function(){
-        var selectedContent = this.renderContent();
-        return(selectedContent);
+            this.props.user.name === 'anonymous'
+    ) {
+      return (
+        <NavLink
+          to="/register"
+          activeClassName="active"
+          className="btn btn-primary"
+        >
+          <span>Sign up</span>
+        </NavLink>
+      );
     }
-});
+    return (<span />);
+  }
+  // triggered when 'state properties' change
+  render() {
+    const selectedContent = this.renderContent();
+    return (selectedContent);
+  }
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default RegisterLink
+export default RegisterLink;
