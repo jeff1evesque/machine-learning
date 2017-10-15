@@ -11,7 +11,7 @@ def isValidEmail(email):
     '''
 
     This method checks if the supplied email matches the accepted regex email
-    pattern. If not matches are found, the function will return 'false'.
+    pattern. If no matches are found, the function will return 'false'.
 
     '''
 
