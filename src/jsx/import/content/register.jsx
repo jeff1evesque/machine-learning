@@ -66,18 +66,22 @@ var RegisterForm = React.createClass({
 
                   // backend validation: server handles one error at a time
                     if (!!status || status == 0) {
+                        const action = setSpinner({'spinner': false});
                         switch(status) {
                             case 0:
                                 this.setState({ajax_done_result: result});
                                 break;
                             case 1:
                                 this.setState({validated_password_server: false});
+                                this.props.dispatchSpinner(action);
                                 break;
                             case 2:
                                 this.setState({validated_username_server: false});
+                                this.props.dispatchSpinner(action);
                                 break;
                             case 3:
                                 this.setState({validated_email_server: false});
+                                this.props.dispatchSpinner(action);
                                 break;
                         }
                     }
@@ -107,7 +111,7 @@ var RegisterForm = React.createClass({
                 this.setState({validated_password: false});
             }
 
-            const action = setSpinner({'spinner': false})
+            const action = setSpinner({'spinner': false});
             this.props.dispatchSpinner(action);
         }
     },
@@ -120,7 +124,7 @@ var RegisterForm = React.createClass({
         const username = event.target.value;
         const check = checkValidString(username) ? true : false;
         if (!check) {
-            const action = setSpinner({'spinner': false})
+            const action = setSpinner({'spinner': false});
             this.props.dispatchSpinner(action);
         }
 
@@ -132,7 +136,7 @@ var RegisterForm = React.createClass({
         const email = event.target.value;
         const check = checkValidEmail(email) ? true : false;
         if (!check) {
-            const action = setSpinner({'spinner': false})
+            const action = setSpinner({'spinner': false});
             this.props.dispatchSpinner(action);
         }
 
@@ -144,7 +148,7 @@ var RegisterForm = React.createClass({
         const password = event.target.value;
         const check = checkValidPassword(password) ? true : false;
         if (!check) {
-            const action = setSpinner({'spinner': false})
+            const action = setSpinner({'spinner': false});
             this.props.dispatchSpinner(action);
         }
 
@@ -173,9 +177,6 @@ var RegisterForm = React.createClass({
             var passwordNote = <span className='invalid'>
                 (Password requirement not met)
             </span>;
-
-            const action = setSpinner({'spinner': false})
-            this.props.dispatchSpinner(action);
         } else {
             var passwordNote = null;
         }
@@ -184,9 +185,6 @@ var RegisterForm = React.createClass({
             var usernameNote = <span className='invalid'>
                 (Username is taken)
             </span>;
-
-            const action = setSpinner({'spinner': false})
-            this.props.dispatchSpinner(action);
         } else {
             var usernameNote = null;
         }
@@ -195,9 +193,6 @@ var RegisterForm = React.createClass({
             var emailNote = <span className='invalid'>
                 (Email has already registered)
             </span>;
-
-            const action = setSpinner({'spinner': false})
-            this.props.dispatchSpinner(action);
         } else {
             var emailNote = null;
         }
