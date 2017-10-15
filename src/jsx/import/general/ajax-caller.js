@@ -12,18 +12,18 @@ import Promise from 'promise-polyfill';
 // AJAX Process
 function fetchCaller(callbackDone, callbackFail, args) {
   // add promise to window
-    if (!window.Promise) {
-        window.Promise = Promise;
-    }
+  if (!window.Promise) {
+    window.Promise = Promise;
+  }
 
   // define fetch headers
-  var fetchHeaders = {
-    'Accept': 'text/javascript',
-    'Content-Type': args.contentType
+  let fetchHeaders = {
+    Accept: 'text/javascript',
+    'Content-Type': args.contentType,
   };
   if (args.contentType === null || args.contentType === undefined) {
     fetchHeaders = {
-      'Accept': 'text/javascript'
+      Accept: 'text/javascript',
     };
   }
 
@@ -39,20 +39,20 @@ function fetchCaller(callbackDone, callbackFail, args) {
     method: 'post',
     body: args.data,
     credentials: 'include',
-    headers: fetchHeaders
-  }).then(function(response) {
+    headers: fetchHeaders,
+  }).then((response) => {
     if (response.ok) {
       // asynchronous callback
-      response.json().then(function(data) { callbackDone(data); });
+      response.json().then((data) => { callbackDone(data); });
     } else {
       // throw custom error
-      var error = {
-        'statusText': response.statusText,
-        'status': response.status
+      const error = {
+        statusText: response.statusText,
+        status: response.status,
       };
       throw error;
     }
-  }).catch(function(e) {
+  }).catch((e) => {
     // asynchronous callback
     callbackFail(e.statusText, e.status);
   });
@@ -60,5 +60,5 @@ function fetchCaller(callbackDone, callbackFail, args) {
 
 // indicate which class can be exported, and instantiated via 'require'
 export default function ajaxCaller(callbackDone, callbackFail, args) {
-    return fetchCaller(callbackDone, callbackFail, args);
+  return fetchCaller(callbackDone, callbackFail, args);
 }
