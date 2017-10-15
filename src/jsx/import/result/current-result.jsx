@@ -273,7 +273,7 @@ class CurrentResultDisplay extends React.Component {
       </div>
     );
   }
-};
+}
 
 // indicate which class can be exported, and instantiated via 'require'
 export default CurrentResultDisplay;
