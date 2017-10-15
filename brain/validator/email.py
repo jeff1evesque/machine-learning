@@ -18,6 +18,6 @@ def isValidEmail(email):
     regex = '^[_a-z0-9-]+(\.[_a-z0-9-]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,4})$'
     match = re.match(regex, email)
 
-    if match == None:
+    if match is None:
         return False
     return True
