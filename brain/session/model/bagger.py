@@ -11,7 +11,7 @@ import json
 
 def bagging(
     dataset,
-    classes,
+    labels,
     model,
     k=10,
     be=None,
@@ -35,9 +35,11 @@ def bagging(
 
     # local variables
     list_model_type = current_app.config.get('MODEL_TYPE')
+    classifiers = [list_model_type[3]]
+    regressors = [list_model_type[4]]
 
     # set up the ensembler
-    if model == list_model_type[3]:
+    if model in classifiers:
         bagger = sklearn.ensemble.BaggingClassifier(
             base_estimator=be,
             n_estimators=k,
@@ -45,7 +47,7 @@ def bagging(
             max_features=features,
             verbose=0
         )
-    elif model == list_model_type[4]:
+    elif model in regressors:
         bagger = sklearn.ensemble.BaggingRegressor(
             base_estimator=be,
             n_estimators=k,
@@ -66,7 +68,7 @@ def baggen(
     feat=1.0,
     samples=1.0,
     be=None,
-    k=10
+    bnum=10
 ):
     '''
 
@@ -83,16 +85,18 @@ def baggen(
     list_model_type = current_app.config.get('MODEL_TYPE')
     collection_adjusted = collection.lower().replace(' ', '_')
     datasets = cursor.query(collection_adjusted, 'aggregate', payload)
+    classifiers = [list_model_type[3]]
+    regressors = [list_model_type[4]]
 
     for D in datasets['result']:
         for o in D['dataset']:
             d = o['independent-variables']
 
             for f in d:
-                if regression:
+                if model in regressors:
                     labels.append(float(o['dependent-variable']))
                     sortedf = [float(v) for k, v in sorted(f.items())]
-                else:
+                elif model in classifiers:
                     labels.append(o['dependent-variable'])
                     sortedf = [v for k, v in sorted(f.items())]
 
@@ -102,7 +106,7 @@ def baggen(
                     sorted_labels = [k for k, v in sorted(f.items())]
 
     # generate model
-    if model == list_model_type[3]:
+    if model in classifiers:
         label_encoder = preprocessing.LabelEncoder()
         label_encoder.fit(labels)
         encoded_labels = label_encoder.transform(labels)
@@ -115,12 +119,12 @@ def baggen(
             be=be,
             features=feat,
             samples=samples,
-            k=k
+            k=bnum
         )
 
         Model(label_encoder).cache(model + '_labels', collection_adjusted)
 
-    elif model == list_model_type[4]:
+    elif model in regressors:
         # create and fit
         clf = bagging(
             features,
@@ -129,10 +133,10 @@ def baggen(
             be=be,
             features=feat,
             samples=samples,
-            k=k
+            k=bnum
         )
 
-        r2 = clf.score(F, labels)
+        r2 = clf.score(features, labels)
 
         Hset().cache(
             model + '_r2',
