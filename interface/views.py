@@ -26,6 +26,7 @@ from brain.database.session import Session
 from brain.cache.model import Model
 from brain.cache.hset import Hset
 from brain.validator.password import validate_password
+from brain.validator.email import isValidEmail
 from brain.database.account import Account
 from brain.database.prediction import Prediction
 from brain.converter.crypto import hash_pass, verify_pass
@@ -243,13 +244,20 @@ def register():
         account = Account()
 
         # validate requirements: one letter, one number, and ten characters.
-        if (validate_password(password)):
+        if (password and validate_password(password)):
 
             # validate: unique username
-            if not account.check_username(username)['result']:
+            if (
+                username and
+                not account.check_username(username)['result']
+            ):
 
                 # validate: unique email
-                if not account.check_email(email)['result']:
+                if (
+                    email and
+                    isValidEmail(email) and
+                    not account.check_email(email)['result']
+                ):
 
                     # database query: save username, and password
                     hashed = hash_pass(str(password))
