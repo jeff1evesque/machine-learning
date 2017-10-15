@@ -173,6 +173,9 @@ var RegisterForm = React.createClass({
             var passwordNote = <span className='invalid'>
                 (Password requirement not met)
             </span>;
+
+            const action = setSpinner({'spinner': false})
+            this.props.dispatchSpinner(action);
         } else {
             var passwordNote = null;
         }
@@ -181,6 +184,9 @@ var RegisterForm = React.createClass({
             var usernameNote = <span className='invalid'>
                 (Username is taken)
             </span>;
+
+            const action = setSpinner({'spinner': false})
+            this.props.dispatchSpinner(action);
         } else {
             var usernameNote = null;
         }
@@ -189,6 +195,9 @@ var RegisterForm = React.createClass({
             var emailNote = <span className='invalid'>
                 (Email has already registered)
             </span>;
+
+            const action = setSpinner({'spinner': false})
+            this.props.dispatchSpinner(action);
         } else {
             var emailNote = null;
         }
