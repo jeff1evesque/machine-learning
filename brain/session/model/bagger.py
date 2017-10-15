@@ -38,7 +38,7 @@ def bagging(
 
     # set up the ensembler
     if model == list_model_type[3]:
-        bagc = sklearn.ensemble.BaggingClassifier(
+        bagger = sklearn.ensemble.BaggingClassifier(
             base_estimator=be,
             n_estimators=k,
             max_samples=samples,
@@ -46,7 +46,7 @@ def bagging(
             verbose=0
         )
     else if model == list_model_type[4]:
-        bagc = sklearn.ensemble.BaggingRegressor(
+        bagger = sklearn.ensemble.BaggingRegressor(
             base_estimator=be,
             n_estimators=k,
             max_samples=samples,
@@ -54,8 +54,8 @@ def bagging(
             verbose=0
         )
 
-    # train the classifier
-    return bagc.fit(dataset, labels)
+    # train bagger
+    return bagger.fit(dataset, labels)
 
 
 def baggen(
