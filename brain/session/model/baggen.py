@@ -12,7 +12,7 @@ import json
 def bagging(
     dataset,
     classes,
-    isClassifier,
+    model,
     k=10,
     be=None,
     features=1.0,
@@ -33,8 +33,11 @@ def bagging(
 
     '''
 
+    # local variables
+    list_model_type = current_app.config.get('MODEL_TYPE')
+
     # set up the ensembler
-    if isClassifier:
+    if model == list_model_type[3]:
         bagc = sklearn.ensemble.BaggingClassifier(
             base_estimator=be,
             n_estimators=k,
@@ -42,7 +45,7 @@ def bagging(
             max_features=features,
             verbose=0
         )
-    else:
+    else if model == list_model_type[4]:
         bagc = sklearn.ensemble.BaggingRegressor(
             base_estimator=be,
             n_estimators=k,
@@ -57,7 +60,6 @@ def bagging(
 
 def baggen(
     model,
-    regression,
     collection,
     payload,
     list_error,
@@ -70,33 +72,29 @@ def baggen(
 
     This function generates a prediction using a previously bagger.
 
-    @regression, boolean indicating whether this is a regression generator.
-
     '''
 
-    sorted_labels = False
-    label_encoder = preprocessing.LabelEncoder()
-    collection_adjusted = collection.lower().replace(' ', '_')
-    list_model_type = current_app.config.get('MODEL_TYPE')
-    cursor = Collection()
-
-    # datasets
-    datasets = cursor.query(collection_adjusted, 'aggregate', payload)
+    # local variables
     labels = []
     features = []
+    cursor = Collection()
+    sorted_labels = False
+    label_encoder = preprocessing.LabelEncoder()
+    list_model_type = current_app.config.get('MODEL_TYPE')
+    collection_adjusted = collection.lower().replace(' ', '_')
+    datasets = cursor.query(collection_adjusted, 'aggregate', payload)
 
     for D in datasets['result']:
         for o in D['dataset']:
             d = o['independent-variables']
 
             for f in d:
-                if not regression:
-                    labels.append(o['dependent-variable'])
-                    sortedf = [v for k, v in sorted(f.items())]
-
-                else:
+                if regression:
                     labels.append(float(o['dependent-variable']))
                     sortedf = [float(v) for k, v in sorted(f.items())]
+                else:
+                    labels.append(o['dependent-variable'])
+                    sortedf = [v for k, v in sorted(f.items())]
 
                 features.append(sortedf)
 
@@ -104,7 +102,7 @@ def baggen(
                     sorted_labels = [k for k, v in sorted(f.items())]
 
     # generate model
-    if not regression:
+    if model == list_model_type[3]:
         label_encoder = preprocessing.LabelEncoder()
         label_encoder.fit(labels)
         encoded_labels = label_encoder.transform(labels)
@@ -114,7 +112,7 @@ def baggen(
 
         Model(label_encoder).cache(model + '_labels', collection_adjusted)
 
-    else:
+    else if model == list_model_type[4]:
         # create and fit
         clf = bagging(F, labels, False, be=be, features=feat, samples=samp, k=k)
 
