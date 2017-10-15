@@ -120,7 +120,7 @@ def baggen(
 
         Model(label_encoder).cache(model + '_labels', collection_adjusted)
 
-    else if model == list_model_type[4]:
+    elif model == list_model_type[4]:
         # create and fit
         clf = bagging(
             features,
