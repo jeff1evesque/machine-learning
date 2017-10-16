@@ -86,6 +86,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
         HOST=general['host'],
         CACHE_HOST=cache['host'],
         CACHE_PORT=cache['port'],
+        CACHE_DB=cache['cache_db'],
         ROOT=general['root'],
         SQL_HOST=sql['host'],
         SQL_LOG_PATH=sql['log_path'],
