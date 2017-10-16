@@ -16,6 +16,7 @@ import yaml
 import logging
 from flask import Flask, g
 from logging.handlers import RotatingFileHandler
+from brain.cache.redis_session import RedisSessionInterface
 from interface.views import blueprint
 
 
@@ -65,6 +66,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
             template_folder='interface/templates',
             static_folder='interface/static',
         )
+
+    # replace default cookie session with server-side redis
+    app.session_interface = RedisSessionInterface()
 
     # secret key: used for maintaining flask sessions
     app.secret_key = application['security_key']
