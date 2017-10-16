@@ -15,6 +15,7 @@ from datetime import timedelta
 from uuid import uuid4
 from werkzeug.datastructures import CallbackDict
 from flask.sessions import SessionInterface, SessionMixin
+from flask import current_app
 
 
 class RedisSession(CallbackDict, SessionMixin):
@@ -34,14 +35,14 @@ class RedisSessionInterface(SessionInterface):
 
     def __init__(self, prefix='session:'):
         # local variables
-        host = 'localhost'
-        port = 6379
-        db_num = 0
+        redis_host = current_app.config.get('CACHE_HOST')
+        redis_port = current_app.config.get('CACHE_PORT')
+        redis_db = current_app.config.get('CACHE_DB')
 
         pool = redis.ConnectionPool(
-            host=host,
-            port=port,
-            db=db_num
+            host=redis_host,
+            port=redis_port,
+            db=redis_db
         )
 
         redis_instance = redis.StrictRedis(connection_pool=pool)
