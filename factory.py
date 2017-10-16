@@ -16,7 +16,7 @@ import yaml
 import logging
 from flask import Flask, g
 from logging.handlers import RotatingFileHandler
-from brain.cache.redis_session import RedisSessionInterface
+from brain.cache.session import RedisSessionInterface
 from interface.views import blueprint
 
 
