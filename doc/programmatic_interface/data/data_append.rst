@@ -11,12 +11,14 @@ ways to upload data, to the ``/load-data`` endpoint:
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/dataset_url/svm-data-append.json>`_
   - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/dataset_url/svr-data-append.json>`_
   - `bgc example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bgc/dataset_url/bgc-data-append.json>`_
+  - `bgr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bgr/dataset_url/bgr-data-append.json>`_
 
 - file uploads: ``json`` string, containing an inline array of ``dataset`` values.
 
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/file_upload/svm-data-append.json>`_
   - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-append.json>`_
   - `bgc example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bgc/file_upload/bgc-data-append.json>`_
+  - `bgr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bgr/file_upload/bgr-data-append.json>`_
 
 **Note:** the content of each of the above examples, can be substituted for
 the ``data`` attribute, in a given ``POST`` request:
@@ -53,6 +55,7 @@ The following properties define the above ``data`` attribute:
   - ``svm``
   - ``svr``
   - ``bgc``
+  - ``bgr``
 
 - ``session_id``: corresponds to the id associated with the original ``data_new``
   uploaded dataset(s), being appended to.
