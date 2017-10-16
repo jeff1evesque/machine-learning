@@ -8,58 +8,55 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import ReviewResultsLinkState from '../redux/container/review-results-link.jsx';
 
-var NavBar = React.createClass({
+const NavBar = () =>
   // display result
-    render: function() {
-        return(
-            <div className='menu-container'>
-                <ul className='side-menu'>
-                    <li>
-                        <NavLink
-                           to='/session/data-new'
-                           activeClassName='active'
-                           className='menu-item'
-                        >
+  (
+    <div className="menu-container">
+      <ul className="side-menu">
+        <li>
+          <NavLink
+            to="/session/data-new"
+            activeClassName="active"
+            className="menu-item"
+          >
                             Add new data
-                        </NavLink>
-                    </li>
+          </NavLink>
+        </li>
 
-                    <li>
-                        <NavLink
-                            to='/session/data-append'
-                            activeClassName='active'
-                            className='menu-item'
-                        >
+        <li>
+          <NavLink
+            to="/session/data-append"
+            activeClassName="active"
+            className="menu-item"
+          >
                             Append data
-                        </NavLink>
-                    </li>
+          </NavLink>
+        </li>
 
-                    <li>
-                        <NavLink
-                            to='/session/model-generate'
-                            activeClassName='active'
-                            className='menu-item'
-                        >
+        <li>
+          <NavLink
+            to="/session/model-generate"
+            activeClassName="active"
+            className="menu-item"
+          >
                             Generate model
-                        </NavLink>
-                    </li>
+          </NavLink>
+        </li>
 
-                    <li>
-                        <NavLink
-                            to='/session/model-predict'
-                            activeClassName='active'
-                            className='menu-item'
-                        >
+        <li>
+          <NavLink
+            to="/session/model-predict"
+            activeClassName="active"
+            className="menu-item"
+          >
                             Make prediction
-                        </NavLink>
-                    </li>
+          </NavLink>
+        </li>
 
-                    <li><ReviewResultsLinkState /></li>
-                </ul>
-            </div>
-        );
-    }
-});
+        <li><ReviewResultsLinkState /></li>
+      </ul>
+    </div>
+  );
 
 // indicate which class can be exported, and instantiated via 'require'
-export default NavBar
+export default NavBar;

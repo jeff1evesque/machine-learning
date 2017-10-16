@@ -11,20 +11,17 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import SvgHome from '../../svg/svg-home.jsx';
 
-var HomeLink = React.createClass({
+const HomeLink = () =>
   // triggered when 'state properties' change
-    render: function() {
-        return(
-            <NavLink
-                to='/'
-                activeClassName='active'
-                className='icon home'
-            >
-                <SvgHome />
-            </NavLink>
-        );
-    }
-});
+  (
+    <NavLink
+      to="/"
+      activeClassName="active"
+      className="icon home"
+    >
+      <SvgHome />
+    </NavLink>
+  );
 
 // indicate which class can be exported, and instantiated via 'require'
-export default HomeLink
+export default HomeLink;
