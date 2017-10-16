@@ -9,37 +9,44 @@
 
 import React from 'react';
 
-var SvgHome = React.createClass({
+class SvgHome extends React.Component {
   // initial 'state properties'
-    getInitialState: function() {
-        return {
-            roof_color: '#808080',
-            house_color: '#404040',
-        };
-    },
+  getInitialState() {
+    return {
+      roof_color: '#808080',
+      house_color: '#404040',
+    };
+  }
   // callback for mouseOver home svg
-    mouseOverHome: function(event) {
-        this.setState({roof_color: '#5ca941'});
-    },
+  mouseOverHome(event) {
+    this.setState({ roof_color: '#5ca941' });
+  }
   // callback for mouseOut home svg
-    mouseOutHome: function(event) {
-        this.setState({roof_color: '#808080'});
-    },
+  mouseOutHome(event) {
+    this.setState({ roof_color: '#808080' });
+  }
   // triggered when 'state properties' change
-    render: function(){
-        return(
-            <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='45px'
-                height='45px' viewBox='0 0 626.000000 626.000000'
-                preserveAspectRatio='xMidYMid meet'
-                onMouseOver={this.mouseOverHome}
-                onMouseOut={this.mouseOutHome}
-            >
-                <g transform={`translate(0.000000,626.000000)
-                    scale(0.100000,-0.100000)`}
-                    stroke='none'
-                >
+  render() {
+    return (
+      <svg
+        version="1.0"
+        xmlns="http://www.w3.org/2000/svg"
+        width="45px"
+        height="45px"
+        viewBox="0 0 626.000000 626.000000"
+        preserveAspectRatio="xMidYMid meet"
+        onMouseOver={this.mouseOverHome}
+        onMouseOut={this.mouseOutHome}
+      >
+        <g
+          transform="translate(0.000000,626.000000)
+                    scale(0.100000,-0.100000)"
+          stroke="none"
+        >
 
-                    <path style={{fill:this.state.roof_color}} d={`M3020 5606
+          <path
+                style={{ fill: this.state.roof_color }}
+                d="M3020 5606
                         c-113 -25 -120 -31 -880 -666 -124 -103 -418 -348 -655
                         -545 -236 -196 -452 -376 -480 -399 -27 -23 -174 -145
                         -325 -271 -694 -578 -667 -554 -676 -601 -3 -18 -3 -45
@@ -58,10 +65,12 @@ var SvgHome = React.createClass({
                         -3 812 -3 812 -23 32 c-14 20 -37 36 -60 43 -50 13 -774
                         13 -824 0 -23 -7 -46 -23 -60 -43 -23 -32 -23 -34 -26
                         -425 -2 -223 -7 -392 -12 -390 -5 2 -109 87 -232 190
-                        -568 477 -733 610 -786 637 -97 49 -211 62 -322 37z`}
-                    />
+                        -568 477 -733 610 -786 637 -97 49 -211 62 -322 37z"
+              />
 
-                    <path style={{fill:this.state.house_color}} d={`M3085 4577
+          <path
+                style={{ fill: this.state.house_color }}
+                d="M3085 4577
                         c-23 -18 -104 -84 -180 -147 -76 -63 -220 -182 -320 -265
                         -100 -82 -199 -163 -220 -180 -21 -16 -72 -59 -114 -94
                         -42 -35 -227 -188 -411 -339 -184 -152 -401 -330 -481
@@ -72,14 +81,13 @@ var SvgHome = React.createClass({
                         3 800 11 56 15 135 84 160 141 18 41 19 92 22 983 2 517
                         0 954 -3 971 -6 34 -37 61 -811 694 -131 107 -324 267
                         -429 355 -106 88 -209 174 -231 190 -21 17 -108 89 -194
-                        160 -382 318 -564 466 -572 464 -2 0 -21 -14 -43 -32z`}
-                    />
-
-                </g>
-            </svg>
-        )
-    }
-});
+                        160 -382 318 -564 466 -572 464 -2 0 -21 -14 -43 -32z"
+              />
+        </g>
+      </svg>
+    );
+  }
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default SvgHome
+export default SvgHome;
