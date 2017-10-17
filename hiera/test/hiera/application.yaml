@@ -32,6 +32,12 @@ application:
         - svr
         - bagc
         - bagr
+        - bagknnc
+        - bagknnr
+        - bagrfc
+        - bagrfr
+        - bagsvc
+        - bagsvr
     log_level: 'DEBUG'
     error_log_path: '/log/application/error'
     warning_log_path: '/log/application/warning'
