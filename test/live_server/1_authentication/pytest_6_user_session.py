@@ -34,9 +34,9 @@ def test_session(client, live_server):
     login = client.post('/login', data=payload)
 
     if session.get('uid'):
-        assert rcon.get('session')
+        assert rcon.get('session:*')
         logout = client.post('/logout')
-        assert not rcon.get('session')
+        assert not rcon.get('session:*')
     else:
         assert False
 
