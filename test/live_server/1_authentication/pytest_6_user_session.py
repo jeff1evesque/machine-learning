@@ -24,12 +24,13 @@ def test_session(client, live_server):
     live_server.start()
 
     # local variables
-    rcon = Query().start_redis()
+    rcon = Query()
     username = 'jeff1evesque'
     password = 'password123'
     payload = {'user[login]': username, 'user[password]': password}
 
-    # post requests: login, and logout response
+    # check redis for session
+    rcon.start_redis()
     login = client.post('/login', data=payload)
 
     if session.get('uid'):
