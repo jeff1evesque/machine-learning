@@ -68,7 +68,11 @@ def create_app(args={'prefix': '', 'settings': ''}):
         )
 
     # replace default cookie session with server-side redis
-    app.session_interface = RedisSessionInterface()
+    app.session_interface = RedisSessionInterface(
+        cache['host'],
+        cache['port'],
+        cache['db']
+    )
 
     # secret key: used for maintaining flask sessions
     app.secret_key = application['security_key']
@@ -86,7 +90,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
         HOST=general['host'],
         CACHE_HOST=cache['host'],
         CACHE_PORT=cache['port'],
-        CACHE_DB=cache['cache_db'],
+        CACHE_DB=cache['db'],
         ROOT=general['root'],
         SQL_HOST=sql['host'],
         SQL_LOG_PATH=sql['log_path'],
