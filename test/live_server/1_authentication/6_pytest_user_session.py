@@ -24,7 +24,7 @@ def test_session(client, live_server):
     live_server.start()
 
     # local variables
-    rcon = Query(0, redis, 6379).start_redis()
+    rcon = Query().start_redis()
     username = 'jeff1evesque'
     password = 'password123'
     payload = {'user[login]': username, 'user[password]': password}
