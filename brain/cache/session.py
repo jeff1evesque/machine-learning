@@ -32,17 +32,8 @@ class RedisSessionInterface(SessionInterface):
     serializer = pickle
     session_class = RedisSession
 
-    def __init__(self, prefix='session:'):
-        # local variables
-        host = 'localhost'
-        port = 6379
-        db_num = 0
-
-        pool = redis.ConnectionPool(
-            host=host,
-            port=port,
-            db=db_num
-        )
+    def __init__(self, host, port=6379, db=0, prefix='session:'):
+        pool = redis.ConnectionPool(host=host, port=port, db=db)
 
         redis_instance = redis.StrictRedis(connection_pool=pool)
 
@@ -89,8 +80,8 @@ class RedisSessionInterface(SessionInterface):
         val = self.serializer.dumps(dict(session))
         self.redis.setex(
             self.prefix + session.sid,
-            val,
-            int(redis_exp.total_seconds())
+            int(redis_exp.total_seconds()),
+            val
         )
 
         response.set_cookie(
