@@ -80,8 +80,8 @@ class RedisSessionInterface(SessionInterface):
         val = self.serializer.dumps(dict(session))
         self.redis.setex(
             self.prefix + session.sid,
-            val,
-            int(redis_exp.total_seconds())
+            int(redis_exp.total_seconds()),
+            val
         )
 
         response.set_cookie(
