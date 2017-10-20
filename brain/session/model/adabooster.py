@@ -53,11 +53,11 @@ def adaboosting(
             loss=loss
         )
 
-    # train bagger
+    # train booster
     return booster.fit(dataset, labels)
 
 
-def baggen(
+def adaboostgen(
     model,
     collection,
     payload,
@@ -69,7 +69,7 @@ def baggen(
 ):
     '''
 
-    This function generates the corresponding ensemble bagger.
+    This function generates the corresponding ensemble booster.
 
     '''
 
@@ -122,7 +122,7 @@ def baggen(
 
     elif model in regressors:
         # create and fit
-        clf = bagging(
+        clf = adaboosting(
             features,
             labels,
             model,
