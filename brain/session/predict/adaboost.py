@@ -1,8 +1,9 @@
-from flask import current_app
 from brain.cache.hset import Hset
 from brain.cache.model import Model
 
+
 def predict(model, collection, predictors):
+    collection_adjusted = collection.lower().replace(' ', '_')
     rs = ['adaboostknnr', 'adaboostrfr', 'adaboostsvr', 'adaboostr']
     cs = ['adaboostknnc', 'adaboostrfc', 'adaboostsvc', 'adaboostc']
 

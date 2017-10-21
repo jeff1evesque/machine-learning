@@ -1,7 +1,7 @@
 import sys
-sys.path.insert(0, 'brain/session/model')
-from adabooster import adaboostgen
+from brain.session.model.adabooster import adaboostgen
 from sklearn import KNeighborsClassifier
+
 
 def adaboostknnCgenerate(
     model,
@@ -17,15 +17,17 @@ def adaboostknnCgenerate(
     p=2
 ):
     return adaboostgen(
-              model,
-              collection,
-              payload,
-              list_error,
-              learning=learning,
-              be=KNeighborsClassifier(
-                  n_neighbors=k,
-                  weights=weights,
-                  algorithm=algorithm,
-                  leaf_size=leaf_size,
-                  p=p),
-              bnum=estimators)
+        model,
+        collection,
+        payload,
+        list_error,
+        learning=learning,
+        be=KNeighborsClassifier(
+            n_neighbors=k,
+            weights=weights,
+            algorithm=algorithm,
+            leaf_size=leaf_size,
+            p=p
+        ),
+        bnum=estimators
+    )

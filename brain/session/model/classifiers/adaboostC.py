@@ -1,6 +1,6 @@
 import sys
-sys.path.insert(0, 'brain/session/model')
-from adabooster import adaboostgen
+from brain.session.model.adabooster import adaboostgen
+
 
 def adaboostCgenerate(
     model,
@@ -11,9 +11,10 @@ def adaboostCgenerate(
     estimators=50
 ):
     return adaboostgen(model,
-                  collection,
-                  payload,
-                  list_error,
-                  learning=learning,
-                  be=None,
-                  bnum=estimators)
+        collection,
+        payload,
+        list_error,
+        learning=learning,
+        be=None,
+        bnum=estimators
+    )

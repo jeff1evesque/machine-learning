@@ -1,7 +1,7 @@
 import sys
-sys.path.insert(0, 'brain/session/model')
-from adabooster import adaboostgen
+from brain.session.model.adabooster import adaboostgen
 from sklearn.svm import SVC
+
 
 def adaboostsvCgenerate(
     model,
@@ -19,4 +19,5 @@ def adaboostsvCgenerate(
         list_error,
         learning=learning,
         bnum=estimators,
-        be=SVC(kernel=kernel))
+        be=SVC(kernel=kernel)
+    )

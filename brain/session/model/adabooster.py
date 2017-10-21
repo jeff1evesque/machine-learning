@@ -35,8 +35,8 @@ def adaboosting(
 
     # local variables
     list_model_type = current_app.config.get('MODEL_TYPE')
-    classifiers = [list_model_type[5]]
-    regressors = [list_model_type[6]]
+    classifiers = ['adaboostknnr', 'adaboostrfr', 'adaboostsvr', 'adaboostr']
+    regressors = ['adaboostknnc', 'adaboostrfc', 'adaboostsvc', 'adaboostc']
 
     # set up the ensembler
     if model in classifiers:
