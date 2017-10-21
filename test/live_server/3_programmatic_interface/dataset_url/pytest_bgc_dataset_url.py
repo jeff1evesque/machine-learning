@@ -70,7 +70,7 @@ def test_data_new(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('bgc-data-new.json', 'bgc')
+        data=get_sample_json('bgc-data-new.json', 'bagc')
     )
 
     # assertion checks
@@ -94,7 +94,7 @@ def test_data_append(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('bgc-data-append.json', 'bgc')
+        data=get_sample_json('bgc-data-append.json', 'bagc')
     )
 
     # assertion checks
@@ -118,7 +118,7 @@ def test_model_generate(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('bgc-model-generate.json', 'bgc')
+        data=get_sample_json('bgc-model-generate.json', 'bagc')
     )
 
     # assertion checks
@@ -147,7 +147,7 @@ def test_model_predict(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('bgc-model-predict.json', 'bgc')
+        data=get_sample_json('bgc-model-predict.json', 'bagc')
     )
 
     # assertion checks
