@@ -62,7 +62,7 @@ def adaboostgen(
     collection,
     payload,
     list_error,
-    learning=1.0
+    learning=1.0,
     loss='linear',
     be=None,
     bnum=50

@@ -1,4 +1,3 @@
-import sys
 from brain.session.model.adabooster import adaboostgen
 from sklearn import KNeighborsClassifier
 

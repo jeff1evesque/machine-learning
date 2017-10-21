@@ -1,4 +1,3 @@
-import sys
 from brain.session.model.adabooster import adaboostgen
 
 
@@ -10,7 +9,8 @@ def adaboostCgenerate(
     learning=1.0,
     estimators=50
 ):
-    return adaboostgen(model,
+    return adaboostgen(
+        model,
         collection,
         payload,
         list_error,
