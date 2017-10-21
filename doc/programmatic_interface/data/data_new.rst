@@ -10,11 +10,15 @@ to generate successive models. There are two ways, for a ``data_new`` session to
 
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/dataset_url/svm-data-new.json>`_
   - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/dataset_url/svr-data-new.json>`_
+  - `bgc example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bgc/dataset_url/bgc-data-new.json>`_
+  - `bgr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bgr/dataset_url/bgr-data-new.json>`_
 
 - file uploads: ``json`` string, containing an inline array of ``dataset`` values.
 
   - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/file_upload/svm-data-new.json>`_
   - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/file_upload/svr-data-new.json>`_
+  - `bgc example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bgc/file_upload/bgc-data-new.json>`_
+  - `bgr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bgr/file_upload/bgr-data-new.json>`_
 
 **Note:** the content of each of the above examples, can be substituted for
 the ``data`` attribute, in a given ``POST`` request:
@@ -52,5 +56,7 @@ The following properties define the above ``data`` attribute:
 
   - ``svm``
   - ``svr``
+  - ``bgc``
+  - ``bgr``
 
 - ``dataset``: the supplied dataset, contingent upon the ``dataset_type``
