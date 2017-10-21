@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-from flask import current_app
 from brain.database.dataset import Collection
 from brain.cache.hset import Hset
 from brain.cache.model import Model
@@ -9,14 +8,14 @@ import sklearn.ensemble
 import json
 
 
-def bagging(
+def adaboosting(
     dataset,
     labels,
     model,
-    k=10,
+    k=50,
     be=None,
-    features=1.0,
-    samples=1.0
+    learning=1.0,
+    loss='linear'
 ):
     '''
 
@@ -27,62 +26,48 @@ def bagging(
     @be, the base estimator (which classifier type to ensemble?)
         - default is decision trees
     @k, the number of base estimators to use
-    @features, how many to features to use for each estimator. 1.0 means use
-        them all.
-    @samples, how many samples to draw for bagging purposes
+    @learning, shrinks the contribution of each estimator
+    @loss, only used for regressors, the function to update the weights after
+        each boosting operation
 
     '''
 
     # local variables
-    list_model_type = current_app.config.get('MODEL_TYPE')
-    classifiers = [
-        list_model_type[3],
-        list_model_type[5],
-        list_model_type[6],
-        list_model_type[9]
-    ]
-    regressors = [
-        list_model_type[4],
-        list_model_type[6],
-        list_model_type[7],
-        list_model_type[10]
-    ]
+    classifiers = ['adaboostknnr', 'adaboostrfr', 'adaboostsvr', 'adaboostr']
+    regressors = ['adaboostknnc', 'adaboostrfc', 'adaboostsvc', 'adaboostc']
 
     # set up the ensembler
     if model in classifiers:
-        bagger = sklearn.ensemble.BaggingClassifier(
+        booster = sklearn.ensemble.AdaBoostClassifier(
             base_estimator=be,
             n_estimators=k,
-            max_samples=samples,
-            max_features=features,
-            verbose=0
+            learning_rate=learning
         )
     elif model in regressors:
-        bagger = sklearn.ensemble.BaggingRegressor(
+        booster = sklearn.ensemble.AdaBoostRegressor(
             base_estimator=be,
             n_estimators=k,
-            max_samples=samples,
-            max_features=features,
-            verbose=0
+            learning_rate=learning,
+            loss=loss
         )
 
-    # train bagger
-    return bagger.fit(dataset, labels)
+    # train booster
+    return booster.fit(dataset, labels)
 
 
-def baggen(
+def adaboostgen(
     model,
     collection,
     payload,
     list_error,
-    feat=1.0,
-    samples=1.0,
+    learning=1.0,
+    loss='linear',
     be=None,
-    bnum=10
+    bnum=50
 ):
     '''
 
-    This function generates the corresponding ensemble bagger.
+    This function generates the corresponding ensemble booster.
 
     '''
 
@@ -92,21 +77,10 @@ def baggen(
     cursor = Collection()
     sorted_labels = False
     label_encoder = preprocessing.LabelEncoder()
-    list_model_type = current_app.config.get('MODEL_TYPE')
     collection_adjusted = collection.lower().replace(' ', '_')
     datasets = cursor.query(collection_adjusted, 'aggregate', payload)
-    classifiers = [
-        list_model_type[3],
-        list_model_type[5],
-        list_model_type[6],
-        list_model_type[9]
-    ]
-    regressors = [
-        list_model_type[4],
-        list_model_type[6],
-        list_model_type[7],
-        list_model_type[10]
-    ]
+    classifiers = ['adaboostknnr', 'adaboostrfr', 'adaboostsvr', 'adaboostr']
+    regressors = ['adaboostknnc', 'adaboostrfc', 'adaboostsvc', 'adaboostc']
 
     for D in datasets['result']:
         for o in D['dataset']:
@@ -132,13 +106,12 @@ def baggen(
         encoded_labels = label_encoder.transform(labels)
 
         # create and fit
-        clf = bagging(
+        clf = adaboosting(
             features,
             encoded_labels,
             model,
             be=be,
-            features=feat,
-            samples=samples,
+            learning=learning,
             k=bnum
         )
 
@@ -146,13 +119,13 @@ def baggen(
 
     elif model in regressors:
         # create and fit
-        clf = bagging(
+        clf = adaboosting(
             features,
             labels,
             model,
             be=be,
-            features=feat,
-            samples=samples,
+            learning=learning,
+            loss=loss,
             k=bnum
         )
 
