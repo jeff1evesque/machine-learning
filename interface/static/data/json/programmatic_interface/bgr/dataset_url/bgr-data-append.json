@@ -3,7 +3,7 @@
         "collection": "bgr-1",
         "dataset_type": "dataset_url",
         "session_type": "data_append",
-        "model_type": "bgr",
+        "model_type": "bagr",
         "stream": "True"
     },
     "dataset": [
