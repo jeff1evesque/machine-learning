@@ -7,9 +7,9 @@ def adaboostsvCgenerate(
     collection,
     payload,
     list_error,
+    kernel,
     learning=1.0,
-    estimators=50,
-    kernel
+    estimators=50
 ):
     return adaboostgen(
         model,

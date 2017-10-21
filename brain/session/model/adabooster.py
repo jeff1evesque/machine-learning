@@ -1,6 +1,5 @@
 #!/usr/bin/python
 
-from flask import current_app
 from brain.database.dataset import Collection
 from brain.cache.hset import Hset
 from brain.cache.model import Model
@@ -34,7 +33,6 @@ def adaboosting(
     '''
 
     # local variables
-    list_model_type = current_app.config.get('MODEL_TYPE')
     classifiers = ['adaboostknnr', 'adaboostrfr', 'adaboostsvr', 'adaboostr']
     regressors = ['adaboostknnc', 'adaboostrfc', 'adaboostsvc', 'adaboostc']
 
@@ -79,11 +77,10 @@ def adaboostgen(
     cursor = Collection()
     sorted_labels = False
     label_encoder = preprocessing.LabelEncoder()
-    list_model_type = current_app.config.get('MODEL_TYPE')
     collection_adjusted = collection.lower().replace(' ', '_')
     datasets = cursor.query(collection_adjusted, 'aggregate', payload)
-    classifiers = [list_model_type[5]]
-    regressors = [list_model_type[6]]
+    classifiers = ['adaboostknnr', 'adaboostrfr', 'adaboostsvr', 'adaboostr']
+    regressors = ['adaboostknnc', 'adaboostrfc', 'adaboostsvc', 'adaboostc']
 
     for D in datasets['result']:
         for o in D['dataset']:
