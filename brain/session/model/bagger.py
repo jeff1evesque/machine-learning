@@ -35,8 +35,18 @@ def bagging(
 
     # local variables
     list_model_type = current_app.config.get('MODEL_TYPE')
-    classifiers = [list_model_type[3]]
-    regressors = [list_model_type[4]]
+    classifiers = [
+        list_model_type[3],
+        list_model_type[5],
+        list_model_type[6],
+        list_model_type[9]
+    ]
+    regressors = [
+        list_model_type[4],
+        list_model_type[6],
+        list_model_type[7],
+        list_model_type[10]
+    ]
 
     # set up the ensembler
     if model in classifiers:
@@ -85,8 +95,18 @@ def baggen(
     list_model_type = current_app.config.get('MODEL_TYPE')
     collection_adjusted = collection.lower().replace(' ', '_')
     datasets = cursor.query(collection_adjusted, 'aggregate', payload)
-    classifiers = [list_model_type[3]]
-    regressors = [list_model_type[4]]
+    classifiers = [
+        list_model_type[3],
+        list_model_type[5],
+        list_model_type[6],
+        list_model_type[9]
+    ]
+    regressors = [
+        list_model_type[4],
+        list_model_type[6],
+        list_model_type[7],
+        list_model_type[10]
+    ]
 
     for D in datasets['result']:
         for o in D['dataset']:
