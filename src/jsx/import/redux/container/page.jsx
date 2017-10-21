@@ -14,10 +14,32 @@ import PageLayout from '../../layout/page.jsx';
 
 // transforms redux state tree to react properties
 const mapStateToProps = (state) => {
+  // validate username
+    if (state && state.user && !!state.user.name) {
+        var username = state.user.name
+    } else {
+        var username = 'anonymous'
+    }
+
+  // fetch spinner
+    if (
+        state &&
+        state.page &&
+        state.page.effects &&
+        state.page.effects.spinner
+    ) {
+        var spinnerBool = true;
+    } else {
+        var spinnerBool = false;
+    }
+
   // return redux to state
     return {
-        layout: {
-            css: state.css
+        user: {
+            name: username
+        },
+        effects: {
+            spinner: spinnerBool
         }
     }
 }

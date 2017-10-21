@@ -1,0 +1,30 @@
+<?xml version='1.0'?>
+
+<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'>
+  <xs:element name='dataset'>
+    <xs:complexType>
+
+      <xs:sequence>
+        <xs:element name='observation' maxOccurs='unbounded'>
+          <xs:complexType>
+
+            <xs:sequence>
+              <xs:element name='dependent-variable' type='xs:string'/>
+              <xs:element name='independent-variable' maxOccurs='unbounded'>
+                <xs:complexType>
+
+                  <xs:sequence>
+                    <xs:element name='label' type='xs:string'/>
+                    <xs:element name='value' type='xs:decimal'/>
+                  </xs:sequence>
+
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+
+           </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

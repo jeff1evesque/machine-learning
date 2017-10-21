@@ -45,5 +45,19 @@ function setContentType(action) {
     };
 }
 
+function setSpinner(action) {
+    return {
+        type: 'SET-SPINNER',
+        spinner: action.spinner
+    };
+}
+
 // indicate which class can be exported, and instantiated via 'require'
-export { setSvButton, setGotoResultsButton, setLayout, setContentType, setResultsButton }
+export {
+    setSvButton,
+    setGotoResultsButton,
+    setLayout,
+    setContentType,
+    setResultsButton,
+    setSpinner
+}

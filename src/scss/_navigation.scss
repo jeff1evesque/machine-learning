@@ -7,50 +7,75 @@
 // Note: '//' comment(s), will not appear in the corresponding compiled css,
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
-.main-navigation {
-  font-weight: 500;
-  padding: .75rem 0;
-  text-align: right;
-}
-
-.menu-home,
-.menu-register {
-  .home {
-    float: left;
-    margin-left: .5rem;
+#bootstrap-override {
+  .main-navigation {
+    font-weight: 500;
+    padding: .75rem 0;
+    text-align: right;
   }
-}
 
-.menu-login {
-  .home {
-    display: block;
-    text-align: center;
+  .menu-home,
+  .menu-register {
+    .home {
+      float: left;
+      margin-left: .5rem;
+    }
   }
-}
 
-.menu-container {
-  .side-menu {
+  .menu-login {
+    .home {
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .dropdown-menu {
     a {
+      background-color: transparent;
+    }
+
+    a:hover {
+      text-decoration: none;
+    }
+  }
+
+  .navbar {
+    border-radius: 0;
+
+    .navbar-brand {
+      padding: 5px 0;
+    }
+
+    #basic-nav-dropdown {
+      color: $gray-1;
+      text-decoration: none;
+    }
+
+    #basic-nav-dropdown:hover,
+    .navbar-brand:hover {
+      color: $white-1;
+    }
+  }
+
+  .side-menu {
+    list-style: none;
+    margin-right: $gutter-1 * 2;
+    padding-left: 0;
+
+    a,
+    a:link,
+    a:visited {
+      border-bottom: 1px solid $gray-2;
       color: $gray-7;
+      display: inline-block;
+      padding: 1rem 0 1rem .75rem;
+      width: 100%;
     }
 
     a:hover {
       background-color: $gray-1;
       border-right: .35rem solid $green-4;
       color: $gray-8;
-    }
-  }
-
-  ul {
-    list-style: none;
-    margin-right: $gutter-1 * 2;
-    padding-left: 0;
-
-    a {
-      border-bottom: 1px solid $gray-2;
-      display: inline-block;
-      padding: 1rem 0 1rem .75rem;
-      width: 100%;
     }
   }
 }

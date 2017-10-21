@@ -12,6 +12,7 @@
 const page = (state='default', action) => {
     var submitButtonAnalysis = false;
     var gotoResults = false;
+    var spinner = false;
 
   // assign elements from action
     switch(action.type) {
@@ -53,6 +54,16 @@ const page = (state='default', action) => {
             return {
                 ...state,
                 content_type: contentType
+            }
+        case 'SET-SPINNER':
+            var spinnerBool = action.spinner;
+
+            return {
+                ...state,
+                effects: {
+                    ...state.effects,
+                    spinner: spinnerBool
+                }
             }
         default:
             return state;

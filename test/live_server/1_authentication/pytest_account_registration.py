@@ -10,6 +10,7 @@ Note: the 'pytest' instances can further be reviewed:
 '''
 
 from brain.validator.password import validate_password
+from brain.validator.email import isValidEmail
 from brain.database.account import Account
 from brain.converter.crypto import hash_pass
 
@@ -30,13 +31,20 @@ def test_registration(client, live_server):
     authenticate = Account()
 
     # verify requirements: one letter, one number, and ten characters.
-    if (validate_password(password)):
+    if (password and validate_password(password)):
 
         # validate: unique username
-        if not authenticate.check_username(username)['result']:
+        if (
+            username and
+            not authenticate.check_username(username)['result']
+        ):
 
             # validate: unique email
-            if not authenticate.check_email(email)['result']:
+            if (
+                email and
+                isValidEmail(email) and
+                not authenticate.check_email(email)['result']
+            ):
 
                 # database query: save username, and password
                 hashed = hash_pass(str(password))

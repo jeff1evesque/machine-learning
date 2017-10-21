@@ -8,7 +8,9 @@
 function setLogoutState() {
     return {
         type: 'LOGGED-OUT',
-        name: 'anonymous'
+        user: {
+            name: 'anonymous'
+        }
     };
 }
 
