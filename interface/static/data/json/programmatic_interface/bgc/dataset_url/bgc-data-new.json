@@ -1,0 +1,14 @@
+{
+    "properties": {
+        "session_name": "sample_bgc_title",
+        "collection": "bgc-1",
+        "dataset_type": "dataset_url",
+        "session_type": "data_new",
+        "model_type": "bgc",
+        "stream": "True"
+    },
+    "dataset": [
+        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/bgc.json",
+        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/bgc-1.json"
+    ]
+}
