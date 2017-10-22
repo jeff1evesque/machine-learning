@@ -87,6 +87,8 @@ def baggen(
     '''
 
     # local variables
+    clf = None
+    sortedf = None
     labels = []
     features = []
     cursor = Collection()
@@ -116,12 +118,11 @@ def baggen(
                 if model in regressors:
                     labels.append(float(o['dependent-variable']))
                     sortedf = [float(v) for k, v in sorted(f.items())]
-                    features.append(sortedf)
                 elif model in classifiers:
                     labels.append(o['dependent-variable'])
                     sortedf = [v for k, v in sorted(f.items())]
-                    features.append(sortedf)
 
+                if sortedf: features.append(sortedf)
                 if not sorted_labels:
                     sorted_labels = [k for k, v in sorted(f.items())]
 
@@ -157,19 +158,18 @@ def baggen(
         )
 
         r2 = clf.score(features, labels)
-
         Hset().cache(
             model + '_r2',
             collection_adjusted,
             r2
         )
 
-    Model(clf).cache(model + '_model', collection_adjusted)
-
-    Hset().cache(
-        model + '_feature_labels',
-        collection,
-        json.dumps(sorted_labels)
-    )
+    if clf:
+        Model(clf).cache(model + '_model', collection_adjusted)
+        Hset().cache(
+            model + '_feature_labels',
+            collection,
+            json.dumps(sorted_labels)
+        )
 
     return {'error': list_error}
