@@ -1,13 +1,13 @@
 {
     "properties": {
-        "collection": "bgr-1",
+        "collection": "bagr-1",
         "dataset_type": "dataset_url",
         "session_type": "data_append",
         "model_type": "bagr",
         "stream": "True"
     },
     "dataset": [
-        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/bgr.json",
-        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/bgr-1.json"
+        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/bagr.json",
+        "https://raw.githubusercontent.com/jeff1evesque/machine-learning/master/interface/static/data/json/web_interface/bagr-1.json"
     ]
 }
