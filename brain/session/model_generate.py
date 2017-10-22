@@ -43,7 +43,6 @@ class ModelGenerate(Base):
         super(ModelGenerate, self).__init__(premodel_data)
         premodel_settings = self.premodel_data['properties']
         self.collection = premodel_settings['collection']
-        self.kernel = str(premodel_settings['sv_kernel_type'])
         self.list_error = []
 
     def generate_model(self):
@@ -62,6 +61,7 @@ class ModelGenerate(Base):
 
         # case 1: svm model, or svr model
         if (model_type == 'svm') or (model_type == 'svr'):
+            kernel = str(premodel_settings['sv_kernel_type'])
             result = generate(
                 model_type,
                 self.kernel,
