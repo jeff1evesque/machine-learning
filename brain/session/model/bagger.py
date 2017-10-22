@@ -120,7 +120,7 @@ def baggen(
                     labels.append(o['dependent-variable'])
                     sortedf = [v for k, v in sorted(f.items())]
 
-                features.append(sortedf)
+                if sortedf: features.append(sortedf)
 
                 if not sorted_labels:
                     sorted_labels = [k for k, v in sorted(f.items())]
