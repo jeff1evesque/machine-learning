@@ -64,7 +64,7 @@ class ModelGenerate(Base):
             kernel = str(premodel_settings['sv_kernel_type'])
             result = generate(
                 model_type,
-                self.kernel,
+                kernel,
                 self.collection,
                 payload,
                 self.list_error
