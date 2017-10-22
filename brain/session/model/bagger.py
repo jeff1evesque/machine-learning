@@ -116,11 +116,11 @@ def baggen(
                 if model in regressors:
                     labels.append(float(o['dependent-variable']))
                     sortedf = [float(v) for k, v in sorted(f.items())]
+                    features.append(sortedf)
                 elif model in classifiers:
                     labels.append(o['dependent-variable'])
                     sortedf = [v for k, v in sorted(f.items())]
-
-                if sortedf: features.append(sortedf)
+                    features.append(sortedf)
 
                 if not sorted_labels:
                     sorted_labels = [k for k, v in sorted(f.items())]
