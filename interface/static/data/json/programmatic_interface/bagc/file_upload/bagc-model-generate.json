@@ -1,0 +1,7 @@
+{
+    "properties": {
+        "collection": "bagc-2",
+        "session_type": "model_generate",
+        "model_type": "bagc"
+    }
+}
