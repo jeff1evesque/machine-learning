@@ -12,6 +12,7 @@ into respective database table(s), which later can be retrieved within
 
 from brain.session.base import Base
 from brain.session.model.sv import generate
+from brain.session.model.bagger import baggen
 
 
 class ModelGenerate(Base):
@@ -64,6 +65,15 @@ class ModelGenerate(Base):
             result = generate(
                 model_type,
                 self.kernel,
+                self.collection,
+                payload,
+                self.list_error
+            )
+
+        # case 2: ensemble bagger
+        if model_type == 'bagc':
+            result = baggen(
+                model_type,
                 self.collection,
                 payload,
                 self.list_error
