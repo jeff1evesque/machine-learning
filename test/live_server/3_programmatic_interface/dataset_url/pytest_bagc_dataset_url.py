@@ -1,6 +1,7 @@
 '''
 
-This file will test the following svm sessions:
+This file will test the following svr sessions:
+
   - data_new: stores supplied dataset into a SQL database.
   - data_append: appends supplied dataset to an already stored dataset in an
                  SQL database.
@@ -43,7 +44,7 @@ def get_sample_json(jsonfile, model_type):
             'json',
             'programmatic_interface',
             model_type,
-            'file_upload',
+            'dataset_url',
             jsonfile
         ),
         'r'
@@ -69,7 +70,7 @@ def test_data_new(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('bgc-data-new.json', 'bagc')
+        data=get_sample_json('bagc-data-new.json', 'bagc')
     )
 
     # assertion checks
@@ -93,7 +94,7 @@ def test_data_append(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('bgc-data-append.json', 'bagc')
+        data=get_sample_json('bagc-data-append.json', 'bagc')
     )
 
     # assertion checks
@@ -117,7 +118,7 @@ def test_model_generate(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('bgc-model-generate.json', 'bagc')
+        data=get_sample_json('bagc-model-generate.json', 'bagc')
     )
 
     # assertion checks
@@ -146,7 +147,9 @@ def test_model_predict(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('bgc-model-predict.json', 'bagc')
+        data=get_sample_json('bagc-model-predict.json', 'bagc')
     )
 
-    assert res.json['result']['model'] == 'bagc'
+    # assertion checks
+    assert res.status_code == 200
+    assert res.json['status'] == 0
