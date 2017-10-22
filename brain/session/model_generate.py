@@ -41,8 +41,6 @@ class ModelGenerate(Base):
         '''
 
         super(ModelGenerate, self).__init__(premodel_data)
-        premodel_settings = self.premodel_data['properties']
-        self.collection = premodel_settings['collection']
         self.list_error = []
 
     def generate_model(self):
@@ -56,7 +54,9 @@ class ModelGenerate(Base):
 
         # local variables
         result = None
+        premodel_settings = self.premodel_data['properties']
         model_type = self.premodel_data['properties']['model_type']
+        self.collection = premodel_settings['collection']
         payload = [{'$project': {'dataset': 1}}]
 
         # case 1: svm model, or svr model
