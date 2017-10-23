@@ -34,6 +34,7 @@ def bagging(
     '''
 
     # local variables
+    bagger = None
     list_model_type = current_app.config.get('MODEL_TYPE')
     classifiers = [
         list_model_type[3],
@@ -67,7 +68,8 @@ def bagging(
         )
 
     # train bagger
-    return bagger.fit(dataset, labels)
+    if bagger:
+        return bagger.fit(dataset, labels)
 
 
 def baggen(
