@@ -9,12 +9,10 @@
 
 import React from 'react';
 
-var Spinner = React.createClass({
-  // triggered when 'state properties' change
-    render: function(){
-        return(<div className='sending'></div>);
-    }
-});
+const Spinner = () =>
+    // triggered when 'state properties' change
+    (<div className="sending" />);
+
 
 // indicate which class can be exported, and instantiated via 'require'
-export default Spinner
+export default Spinner;
