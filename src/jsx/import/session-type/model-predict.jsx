@@ -103,7 +103,8 @@ class ModelPredict extends Component {
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
-                        {options && options.map((value) => <option key={value.collection} value={value.collection}>
+                        {options && options.map((value) => 
+                          <option key={value.collection} value={value.collection}>
                                 {value.collection}
                             </option>)}
                     </select>

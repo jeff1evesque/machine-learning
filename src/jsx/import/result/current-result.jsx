@@ -217,7 +217,8 @@ class CurrentResultDisplay extends Component {
                         Array.isArray(value) ?
                             <ul className='sublist' key={`sublist-${item_key}`}>
                                 {
-                                    value.map((value, index) => <li key={`subitem-${  index}`}>{value}</li>)
+                                    value.map((value, index) =>
+                                    <li key={`subitem-${  index}`}>{value}</li>)
                                 }
                             </ul>
                             : value
@@ -238,7 +239,8 @@ class CurrentResultDisplay extends Component {
                         Array.isArray(value) ?
                             <ul className='sublist' key={`sublist-${item_key}`}>
                                 {
-                                    value.map((value, index) => <li key={`subitem-${  index}`}>{value}</li>)
+                                    value.map((value, index) =>
+                                    <li key={`subitem-${  index}`}>{value}</li>)
                                 }
                             </ul>
                             : value

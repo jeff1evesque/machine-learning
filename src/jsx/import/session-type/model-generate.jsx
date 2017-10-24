@@ -147,7 +147,8 @@ class ModelGenerate extends Component {
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
-                        {options && options.map(value => (<option key={value.id} value={value.collection}>
+                        {options && options.map(value =>
+                            (<option key={value.id} value={value.collection}>
                             {value.id}: {value.collection}
                         </option>))}
 
