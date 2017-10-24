@@ -14,7 +14,7 @@
  *       requires the object being imported, to be surrounded by { brackets }.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
@@ -23,9 +23,9 @@ import Spinner from '../general/spinner.jsx';
 import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
-var DataAppend = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
+class DataAppend extends Component {
+    // initial 'state properties'
+    getInitialState() {
         return {
             value_collection: '--Select--',
             value_dataset_type: '--Select--',
@@ -33,88 +33,88 @@ var DataAppend = React.createClass({
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
-            ajax_fail_status: null
+            ajax_fail_status: null,
         };
-    },
-  // update 'state properties'
-    changeCollection: function(event){
+    }
+    // update 'state properties'
+    changeCollection(event) {
         const collection = event.target.value;
 
         if (
             collection && collection != '--Select--' &&
             checkValidString(collection)
         ) {
-            this.setState({value_collection: event.target.value});
+            this.setState({ value_collection: event.target.value });
         } else {
-            this.setState({value_collection: '--Select--'});
+            this.setState({ value_collection: '--Select--' });
 
-          // update redux store
-            const action = setSvButton({button: {submit_analysis: false}});
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
             this.props.dispatchSvButton(action);
         }
-    },
-    changeDatasetType: function(event){
+    }
+    changeDatasetType(event) {
         const datasetType = event.target.value;
 
         if (
             datasetType && datasetType != '--Select--' &&
             checkValidString(datasetType)
         ) {
-            this.setState({value_dataset_type: event.target.value});
+            this.setState({ value_dataset_type: event.target.value });
         } else {
-            this.setState({value_dataset_type: '--Select--'});
+            this.setState({ value_dataset_type: '--Select--' });
         }
 
-      // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
-    },
-  // update 'state properties' from child component (i.e. 'value_model_type')
-    changeModelType: function(event) {
+    }
+    // update 'state properties' from child component (i.e. 'value_model_type')
+    changeModelType(event) {
         const modelType = event.value_model_type;
 
         if (
             modelType && modelType != '--Select--' &&
             checkValidString(modelType)
         ) {
-            this.setState({value_model_type: modelType});
+            this.setState({ value_model_type: modelType });
         } else {
-            this.setState({value_model_type: '--Select--'});
+            this.setState({ value_model_type: '--Select--' });
         }
 
-      // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
-    },
-  // update 'state properties' from child component
-    displaySubmit: function(event) {
+    }
+    // update 'state properties' from child component
+    displaySubmit(event) {
         if (event.submitted_proper_dataset) {
-          // update redux store
+            // update redux store
             const action = setSvButton({
-                button: {submit_analysis: event.submitted_proper_dataset}
+                button: { submit_analysis: event.submitted_proper_dataset },
             });
             this.props.dispatchSvButton(action);
         } else {
-          // update redux store
-            const action = setSvButton({button: {submit_analysis: false}});
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
             this.props.dispatchSvButton(action);
         }
-    },
-  // triggered when 'state properties' change
-    render: function(sessionId){
+    }
+    // triggered when 'state properties' change
+    render(sessionId) {
         const inputDatasetType = this.state.value_dataset_type;
         const inputCollection = this.state.value_collection;
         const modelType = this.state.value_model_type;
         const Dataset = this.getSupplyDataset(
             inputDatasetType,
             inputCollection,
-            modelType
+            modelType,
         );
-        const datasetInput = !!Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
+        const datasetInput = Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
         const options = this.state.ajax_done_options;
-        const spinner = !!this.state.display_spinner ? <Spinner /> : null;
+        const spinner = this.state.display_spinner ? <Spinner /> : null;
 
-        return(
+        return (
             <fieldset className='fieldset-session-data-upload'>
                 <legend>Data Upload</legend>
                 <fieldset className='fieldset-dataset-type'>
@@ -130,11 +130,9 @@ var DataAppend = React.createClass({
                         <option value='' defaultValue>--Select--</option>
 
                         {/* array components require unique 'key' value */}
-                        {options && options.map(function(value) {
-                            return <option key={value.id} value={value.collection}>
-                                       {value.id}: {value.collection}
-                                   </option>;
-                        })}
+                        {options && options.map(value => (<option key={value.id} value={value.collection}>
+                            {value.id}: {value.collection}
+                        </option>))}
 
                     </select>
 
@@ -158,9 +156,9 @@ var DataAppend = React.createClass({
                 {spinner}
             </fieldset>
         );
-    },
-  // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function(datasetType, collection, modelType) {
+    }
+    // call back: used for the above 'render' (return 'span' if undefined)
+    getSupplyDataset(datasetType, collection, modelType) {
         if (
             datasetType && checkValidString(datasetType) &&
             datasetType != '--Select--' && collection &&
@@ -169,65 +167,66 @@ var DataAppend = React.createClass({
         ) {
             return {
                 file_upload: SupplyDatasetFile,
-                dataset_url: SupplyDatasetUrl
+                dataset_url: SupplyDatasetUrl,
             }[datasetType] || null;
-        } else {
-            return null;
         }
-    },
-  // call back: get session id(s) from server side, and append to form
-    componentDidMount: function() {
-      // ajax arguments
+        return null;
+    }
+    // call back: get session id(s) from server side, and append to form
+    componentDidMount() {
+        // ajax arguments
         const ajaxEndpoint = '/retrieve-collections';
         const ajaxArguments = {
-            'endpoint': ajaxEndpoint,
-            'data': null
+            endpoint: ajaxEndpoint,
+            data: null,
         };
 
-      // boolean to show ajax spinner
-        this.setState({display_spinner: true});
+        // boolean to show ajax spinner
+        this.setState({ display_spinner: true });
 
-      // asynchronous callback: ajax 'done' promise
-        ajaxCaller(function (asynchObject) {
-          // Append to DOM
-            if (asynchObject && asynchObject.error) {
-                this.setState({ajax_done_error: asynchObject.error});
-            } else if (asynchObject) {
-                this.setState({ajax_done_options: asynchObject});
-            }
-        // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
-        }.bind(this),
-      // asynchronous callback: ajax 'fail' promise
-        function (asynchStatus, asynchError) {
-            if (asynchStatus) {
-                this.setState({ajax_fail_status: asynchStatus});
-                console.log('Error Status: ' + asynchStatus);
-            }
-            if (asynchError) {
-                this.setState({ajax_fail_error: asynchError});
-                console.log('Error Thrown: ' + asynchError);
-            }
-        // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
-        }.bind(this),
-      // pass ajax arguments
-        ajaxArguments);
-    },
-    componentWillMount: function() {
-      // update redux store
-        const actionLayout = setLayout({'layout': 'analysis'});
+        // asynchronous callback: ajax 'done' promise
+        ajaxCaller(
+            (asynchObject) => {
+                // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ ajax_done_error: asynchObject.error });
+                } else if (asynchObject) {
+                    this.setState({ ajax_done_options: asynchObject });
+                }
+                // boolean to hide ajax spinner
+                this.setState({ display_spinner: false });
+            },
+            // asynchronous callback: ajax 'fail' promise
+            (asynchStatus, asynchError) => {
+                if (asynchStatus) {
+                    this.setState({ ajax_fail_status: asynchStatus });
+                    console.log(`Error Status: ${asynchStatus}`);
+                }
+                if (asynchError) {
+                    this.setState({ ajax_fail_error: asynchError });
+                    console.log(`Error Thrown: ${asynchError}`);
+                }
+                // boolean to hide ajax spinner
+                this.setState({ display_spinner: false });
+            },
+            // pass ajax arguments
+            ajaxArguments,
+        );
+    }
+    componentWillMount() {
+        // update redux store
+        const actionLayout = setLayout({ layout: 'analysis' });
         this.props.dispatchLayout(actionLayout);
 
-        const actionContentType = setContentType({'layout': 'data_append'});
+        const actionContentType = setContentType({ layout: 'data_append' });
         this.props.dispatchContentType(actionContentType);
-    },
-    componentWillUnmount: function() {
-      // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
+    }
+    componentWillUnmount() {
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default DataAppend
+export default DataAppend;
