@@ -4,13 +4,13 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import HomeLink from './menu-items/home.jsx';
 import LoginLinkState from '../redux/container/login-link.jsx';
 import RegisterLinkState from '../redux/container/register-link.jsx';
 
-var HeaderMenu = React.createClass({
-    renderContent: function() {
+class HeaderMenu extends Component {
+    renderContent() {
         if (
             !!this.props &&
             !!this.props.layout &&
@@ -19,7 +19,7 @@ var HeaderMenu = React.createClass({
         ) {
             return (
                 <nav
-                    className={'main-navigation menu-login'}
+                    className='main-navigation menu-login'
                 >
                     <HomeLink />
                 </nav>
@@ -32,17 +32,7 @@ var HeaderMenu = React.createClass({
         ) {
             return (
                 <nav
-                    className={'main-navigation menu-register'}
-                >
-                    <HomeLink />
-                    <LoginLinkState />
-                    <RegisterLinkState />
-                </nav>
-            );
-        } else {
-            return (
-                <nav
-                    className={'main-navigation menu-home'}
+                    className='main-navigation menu-register'
                 >
                     <HomeLink />
                     <LoginLinkState />
@@ -50,13 +40,22 @@ var HeaderMenu = React.createClass({
                 </nav>
             );
         }
-    },
-  // display result
-    render: function() {
-        var selectedContent = this.renderContent();
-        return(selectedContent);
+        return (
+            <nav
+                className='main-navigation menu-home'
+            >
+                <HomeLink />
+                <LoginLinkState />
+                <RegisterLinkState />
+            </nav>
+        );
     }
-});
+    // display result
+    render() {
+        const selectedContent = this.renderContent();
+        return (selectedContent);
+    }
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default HeaderMenu
+export default HeaderMenu;
