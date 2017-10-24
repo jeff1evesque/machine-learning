@@ -81,39 +81,39 @@ class SupplyDatasetUrl extends Component {
         const inputs = this.state.additional_elements;
 
         return (
-            <fieldset className="fieldset-supply-dataset">
+            <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
                 <input
-                    type="url"
-                    name="dataset[]"
-                    placeholder="Dataset URL"
-                    className="dataset-url"
+                    type='url'
+                    name='dataset[]'
+                    placeholder='Dataset URL'
+                    className='dataset-url'
                     onChange={this.validUrlEntered}
-                    defaultValue=""
+                    defaultValue=''
                 />
 
                 <input
-                    type="button"
-                    value="Add more"
+                    type='button'
+                    value='Add more'
                     onClick={this.handleAddMore}
                 />
 
                 <input
-                    type="button"
-                    value="Remove"
+                    type='button'
+                    value='Remove'
                     onClick={this.handleRemove}
                 />
 
                 {/* array components require unique 'key' value */}
                 {inputs && inputs.map((value, index) => (<input
-                        type='url'
-                        name='dataset[]'
-                        placeholder='Dataset URL'
-                        className='dataset-url'
-                        key={index}
-                        onChange={this.validUrlEntered}
-                        defaultValue=''
-                    />))}
+                    type='url'
+                    name='dataset[]'
+                    placeholder='Dataset URL'
+                    className='dataset-url'
+                    key={index}
+                    onChange={this.validUrlEntered}
+                    defaultValue=''
+                />))}
             </fieldset>
         );
     }

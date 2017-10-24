@@ -85,45 +85,45 @@ class SupplyDatasetFile extends Component {
         const inputs = this.state.additional_elements;
 
         return (
-            <fieldset className="fieldset-supply-dataset">
+            <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
                 <input
-                    type="file"
-                    name="dataset[]"
-                    className="dataset-file"
+                    type='file'
+                    name='dataset[]'
+                    className='dataset-file'
                     onChange={this.validFileEntered}
-                    defaultValue=""
+                    defaultValue=''
                 />
 
                 <input
-                    type="button"
-                    value="Add more"
+                    type='button'
+                    value='Add more'
                     onClick={this.handleAddMore}
                 />
 
                 <input
-                    type="button"
-                    value="Remove"
+                    type='button'
+                    value='Remove'
                     onClick={this.handleRemove}
                 />
 
                 {/* array components require unique 'key' value */}
                 {inputs && inputs.map((value, index) => (<input
-                    type="file"
-                    name="dataset[]"
-                    className="dataset-file"
+                    type='file'
+                    name='dataset[]'
+                    className='dataset-file'
                     key={index}
                     onChange={this.validFileEntered}
-                    defaultValue=""
+                    defaultValue=''
                 />))}
 
-                <p className="form-note">
-                    <span className="asterick">*</span>
-                    <span className="bold">Note: </span>
+                <p className='form-note'>
+                    <span className='asterick'>*</span>
+                    <span className='bold'>Note: </span>
                     <span>Uploaded file(s) must be formatted as </span>
-                    <span className="italic">csv</span>,
-                    <span className="italic"> json</span>, or
-                    <span className="italic"> xml</span> format.
+                    <span className='italic'>csv</span>,
+                    <span className='italic'> json</span>, or
+                    <span className='italic'> xml</span> format.
                 </p>
             </fieldset>
         );

@@ -30,17 +30,17 @@ class SupportVectorKernels extends Component {
         // display result
         return (
             <select
-                name="svm_kernel_type"
-                autoComplete="off"
+                name='svm_kernel_type'
+                autoComplete='off'
                 onChange={this.changeKernelType}
                 value={this.state.value_kernel_type}
             >
 
-                <option value="" defaultValue>--Select--</option>
-                <option value="linear">Linear</option>
-                <option value="poly">Polynomial</option>
-                <option value="rbf">RBF</option>
-                <option value="sigmoid">Sigmoid</option>
+                <option value='' defaultValue>--Select--</option>
+                <option value='linear'>Linear</option>
+                <option value='poly'>Polynomial</option>
+                <option value='rbf'>RBF</option>
+                <option value='sigmoid'>Sigmoid</option>
 
             </select>
         );

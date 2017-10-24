@@ -91,11 +91,11 @@ class RegisterForm extends Component {
                 (asynchStatus, asynchError) => {
                     if (asynchStatus) {
                         this.setState({ ajax_fail_status: asynchStatus });
-                        console.log(`Error Status: ${  asynchStatus}`);
+                        console.log(`Error Status: ${asynchStatus}`);
                     }
                     if (asynchError) {
                         this.setState({ ajax_fail_error: asynchError });
-                        console.log(`Error Thrown: ${  asynchError}`);
+                        console.log(`Error Thrown: ${asynchError}`);
                     }
                 },
                 // pass ajax arguments
@@ -175,7 +175,7 @@ class RegisterForm extends Component {
 
         // backend validation
         if (!this.state.validated_password_server) {
-            var passwordNote = (<span className="invalid">
+            var passwordNote = (<span className='invalid'>
                 (Password requirement not met)
                                 </span>);
         } else {
@@ -183,7 +183,7 @@ class RegisterForm extends Component {
         }
 
         if (!this.state.validated_username_server) {
-            var usernameNote = (<span className="invalid">
+            var usernameNote = (<span className='invalid'>
                 (Username is taken)
                                 </span>);
         } else {
@@ -191,7 +191,7 @@ class RegisterForm extends Component {
         }
 
         if (!this.state.validated_email_server) {
-            var emailNote = (<span className="invalid">
+            var emailNote = (<span className='invalid'>
                 (Email has already registered)
                              </span>);
         } else {
@@ -202,21 +202,21 @@ class RegisterForm extends Component {
             this.state.ajax_done_result &&
             this.state.ajax_done_result.status == '0'
         ) {
-            var redirect = <Redirect to="/login" />;
+            var redirect = <Redirect to='/login' />;
         } else {
             var redirect = null;
         }
 
         return (
-            <form onSubmit={this.handleSubmit} ref="registerForm">
+            <form onSubmit={this.handleSubmit} ref='registerForm'>
                 {redirect}
-                <div className="form-group">
+                <div className='form-group'>
                     <label className={`form-label ${usernameClass}`}>Username</label>
                     <input
-                        type="text"
-                        name="user[login]"
-                        className="input-block"
-                        placeholder="Pick a username"
+                        type='text'
+                        name='user[login]'
+                        className='input-block'
+                        placeholder='Pick a username'
                         onInput={this.validateUsername}
                         value={this.state.value_username}
                     />
@@ -225,30 +225,30 @@ class RegisterForm extends Component {
                     </p>
                 </div>
 
-                <div className="form-group">
+                <div className='form-group'>
                     <label className={`form-label ${emailClass}`}>Email Address</label>
                     <input
-                        type="text"
-                        name="user[email]"
-                        className="input-block"
-                        placeholder="Your email address"
+                        type='text'
+                        name='user[email]'
+                        className='input-block'
+                        placeholder='Your email address'
                         onInput={this.validateEmail}
                         value={this.state.value_email}
                     />
-                    <p className="note">
+                    <p className='note'>
                         You will get updates regarding account changes,
                         or activitites. This email address will not be
                         shared with anyone. {emailNote}
                     </p>
                 </div>
 
-                <div className="form-group">
+                <div className='form-group'>
                     <label className={`form-label ${passwordClass}`}>Password</label>
                     <input
-                        type="password"
-                        name="user[password]"
-                        className="input-block"
-                        placeholder="Create a password"
+                        type='password'
+                        name='user[password]'
+                        className='input-block'
+                        placeholder='Create a password'
                         onInput={this.validatePassword}
                         value={this.state.value_password}
                     />
@@ -259,9 +259,9 @@ class RegisterForm extends Component {
                 </div>
 
                 <input
-                    type="submit"
-                    className="btn btn-primary"
-                    value="Create an account"
+                    type='submit'
+                    className='btn btn-primary'
+                    value='Create an account'
                 />
             </form>
         );

@@ -11,7 +11,7 @@ import React from 'react';
 
 const Spinner = () =>
     // triggered when 'state properties' change
-    (<div className="sending" />);
+    (<div className='sending' />);
 
 
 // indicate which class can be exported, and instantiated via 'require'

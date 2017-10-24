@@ -148,8 +148,8 @@ class ModelGenerate extends Component {
 
                         {/* array components require unique 'key' value */}
                         {options && options.map(value => (<option key={value.id} value={value.collection}>
-                                {value.id}: {value.collection}
-                            </option>))}
+                            {value.id}: {value.collection}
+                        </option>))}
 
                     </select>
 

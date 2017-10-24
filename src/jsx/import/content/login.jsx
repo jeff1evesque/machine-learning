@@ -149,7 +149,7 @@ class LoginForm extends Component {
         // backend validation
         if (!this.state.validated_login_server) {
             var loginNote = (
-                <div className="invalid-pop">
+                <div className='invalid-pop'>
                 Invalid user, or password.
                 </div>);
         } else {
@@ -167,33 +167,33 @@ class LoginForm extends Component {
         }
 
         return (
-            <form onSubmit={this.handleSubmit} ref="loginForm">
+            <form onSubmit={this.handleSubmit} ref='loginForm'>
                 {redirect}
-                <div className="form-header">
+                <div className='form-header'>
                     <h1>Sign in Web-Interface</h1>
                 </div>
                 {loginNote}
-                <div className="form-body">
+                <div className='form-body'>
                     <label>Username or email address</label>
                     <input
-                        type="text"
-                        name="user[login]"
-                        className="input-block"
+                        type='text'
+                        name='user[login]'
+                        className='input-block'
                         autoFocus
                         onInput={this.updateUsername}
                         value={this.state.value_username}
                     />
                     <label>Password</label>
                     <input
-                        type="password"
-                        name="user[password]"
-                        className="input-block"
+                        type='password'
+                        name='user[password]'
+                        className='input-block'
                     />
 
                     <input
-                        type="submit"
-                        className="input-submit btn btn-primary"
-                        value="Login"
+                        type='submit'
+                        className='input-submit btn btn-primary'
+                        value='Login'
                     />
                     <AjaxSpinner />
                 </div>

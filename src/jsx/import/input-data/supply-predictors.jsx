@@ -54,7 +54,7 @@ class SupplyPredictors extends Component {
         const options = JSON.parse(this.state.ajax_done_options);
 
         return (
-            <fieldset className="fieldset-prediction-input">
+            <fieldset className='fieldset-prediction-input'>
                 <legend>Prediction Input</legend>
 
                 {/* array components require unique 'key' value */}
@@ -63,13 +63,13 @@ class SupplyPredictors extends Component {
                     const predictor = this.state[`value_predictor_${suffix}`];
 
                     return (<input
-                        type="text"
-                        name="prediction_input[]"
-                        className="predictionInput"
+                        type='text'
+                        name='prediction_input[]'
+                        className='predictionInput'
                         placeholder={value}
                         key={index}
                         onChange={this.validIntegerEntered}
-                        defaultValue=""
+                        defaultValue=''
                     />);
                 })}
 

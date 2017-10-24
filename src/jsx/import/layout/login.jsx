@@ -10,7 +10,7 @@ import LoginState from '../redux/container/login.jsx';
 
 const LoginLayout = () =>
     (
-        <div className="main-full-span login-form">
+        <div className='main-full-span login-form'>
             <LoginState />
         </div>
     );

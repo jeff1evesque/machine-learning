@@ -18,7 +18,7 @@ class Submit extends Component {
 
         return (
             <input
-                type="submit"
+                type='submit'
                 className={cssClass}
                 onClick={clickCallback}
                 value={buttonValue}

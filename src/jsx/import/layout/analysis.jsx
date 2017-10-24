@@ -198,7 +198,7 @@ class AnalysisLayout extends Component {
             this.props.page.button
         ) {
             const button = this.props.page.button;
-            var submitBtn = button.submit_analysis ? <Submit cssClass="btn mn-2" /> : null;
+            var submitBtn = button.submit_analysis ? <Submit cssClass='btn mn-2' /> : null;
 
             if (
                 this.state.ajax_done_result &&
@@ -219,27 +219,27 @@ class AnalysisLayout extends Component {
                 <NavBar />
                 <form
                     onSubmit={this.handleSubmit}
-                    ref="analysisForm"
-                    className="analysis-container"
+                    ref='analysisForm'
+                    className='analysis-container'
                 >
                     <Route
                         exact
-                        path="/session/data-new"
+                        path='/session/data-new'
                         component={DataNewState}
                     />
                     <Route
                         exact
-                        path="/session/data-append"
+                        path='/session/data-append'
                         component={DataAppendState}
                     />
                     <Route
                         exact
-                        path="/session/model-generate"
+                        path='/session/model-generate'
                         component={ModelGenerateState}
                     />
                     <Route
                         exact
-                        path="/session/model-predict"
+                        path='/session/model-predict'
                         component={ModelPredictState}
                     />
                     {submitBtn}
@@ -248,12 +248,12 @@ class AnalysisLayout extends Component {
                 </form>
                 <Route
                     exact
-                    path="/session/current-result"
+                    path='/session/current-result'
                     component={CurrentResultState}
                 />
                 <Route
                     exact
-                    path="/session/results"
+                    path='/session/results'
                     component={ResultsDisplayState}
                 />
             </div>
