@@ -10,107 +10,107 @@
  *       requires the object being imported, to be surrounded by { brackets }.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
 import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
 
-var DataNew = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
+class DataNew extends Component {
+    // initial 'state properties'
+    getInitialState() {
         return {
             value_title: '',
             value_collection: '',
             value_dataset_type: '--Select--',
-            value_model_type: '--Select--'
+            value_model_type: '--Select--',
         };
-    },
-  // update 'state properties'
-    changeDatasetType: function(event){
+    }
+    // update 'state properties'
+    changeDatasetType(event) {
         const datasetType = event.target.value;
 
         if (
             datasetType && datasetType != '--Select--' &&
             checkValidString(datasetType)
         ) {
-            this.setState({value_dataset_type: event.target.value});
+            this.setState({ value_dataset_type: event.target.value });
         } else {
-            this.setState({value_dataset_type: '--Select--'});
+            this.setState({ value_dataset_type: '--Select--' });
         }
 
-      // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
-    },
-    changeTitle: function(event){
+    }
+    changeTitle(event) {
         const sessionTitle = event.target.value;
 
         if (sessionTitle && checkValidString(sessionTitle)) {
-            this.setState({value_title: sessionTitle});
+            this.setState({ value_title: sessionTitle });
         } else {
-            this.setState({value_title: ''});
+            this.setState({ value_title: '' });
         }
 
-      // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
-    },
-    changeCollection: function(event){
+    }
+    changeCollection(event) {
         const collection = event.target.value;
 
         if (collection && checkValidString(collection)) {
-            this.setState({value_collection: collection});
+            this.setState({ value_collection: collection });
         } else {
-            this.setState({value_collection: ''});
+            this.setState({ value_collection: '' });
         }
 
-      // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
-    },
-  // update 'state properties' from child component (i.e. 'value_model_type')
-    changeModelType: function(event) {
+    }
+    // update 'state properties' from child component (i.e. 'value_model_type')
+    changeModelType(event) {
         const modelType = event.value_model_type;
 
         if (
             modelType && modelType != '--Select--' &&
             checkValidString(modelType)
         ) {
-            this.setState({value_model_type: modelType});
+            this.setState({ value_model_type: modelType });
         } else {
-            this.setState({value_model_type: '--Select--'});
+            this.setState({ value_model_type: '--Select--' });
         }
 
-      // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
-    },
-  // update 'state properties' from child component
-    displaySubmit: function(event) {
+    }
+    // update 'state properties' from child component
+    displaySubmit(event) {
         if (event.submitted_proper_dataset) {
-          // update redux store
+            // update redux store
             const action = setSvButton({
-                button: {submit_analysis: event.submitted_proper_dataset}
+                button: { submit_analysis: event.submitted_proper_dataset },
             });
             this.props.dispatchSvButton(action);
         } else {
-          // update redux store
-            const action = setSvButton({button: {submit_analysis: false}});
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
             this.props.dispatchSvButton(action);
         }
-    },
-    componentWillMount: function(event) {
-      // update redux store
-        const actionLayout = setLayout({'layout': 'analysis'});
+    }
+    componentWillMount(event) {
+        // update redux store
+        const actionLayout = setLayout({ layout: 'analysis' });
         this.props.dispatchLayout(actionLayout);
 
-        const actionContentType = setContentType({'layout': 'data_new'});
+        const actionContentType = setContentType({ layout: 'data_new' });
         this.props.dispatchContentType(actionContentType);
-    },
-  // triggered when 'state properties' change
-    render: function() {
+    }
+    // triggered when 'state properties' change
+    render() {
         const datasetType = this.state.value_dataset_type;
         const datasetTitle = this.state.value_title;
         const collection = this.state.value_collection;
@@ -119,11 +119,11 @@ var DataNew = React.createClass({
             datasetType,
             datasetTitle,
             collection,
-            modelType
+            modelType,
         );
-        const datasetInput = !!Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
+        const datasetInput = Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
 
-        return(
+        return (
             <fieldset className='fieldset-session-data-upload'>
                 <legend>Data Upload</legend>
                 <fieldset className='fieldset-dataset-type'>
@@ -164,9 +164,9 @@ var DataNew = React.createClass({
                 {datasetInput}
             </fieldset>
         );
-    },
-  // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset: function(datasetType, title, collection, modelType) {
+    }
+    // call back: used for the above 'render' (return 'span' if undefined)
+    getSupplyDataset(datasetType, title, collection, modelType) {
         if (
             title &&
             checkValidString(title) &&
@@ -181,18 +181,17 @@ var DataNew = React.createClass({
         ) {
             return {
                 file_upload: SupplyDatasetFile,
-                dataset_url: SupplyDatasetUrl
+                dataset_url: SupplyDatasetUrl,
             }[datasetType] || null;
-        } else {
-            return null;
         }
-    },
-    componentWillUnmount: function() {
-      // update redux store
-        const action = setSvButton({button: {submit_analysis: false}});
+        return null;
+    }
+    componentWillUnmount() {
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default DataNew
+export default DataNew;
