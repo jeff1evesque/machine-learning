@@ -7,26 +7,26 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 
-var SvgHome = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
+class SvgHome extends Component {
+    // initial 'state properties'
+    getInitialState() {
         return {
             roof_color: '#808080',
             house_color: '#404040',
         };
-    },
-  // callback for mouseOver home svg
-    mouseOverHome: function(event) {
-        this.setState({roof_color: '#5ca941'});
-    },
-  // callback for mouseOut home svg
-    mouseOutHome: function(event) {
-        this.setState({roof_color: '#808080'});
-    },
-  // triggered when 'state properties' change
-    render: function(){
+    }
+    // callback for mouseOver home svg
+    mouseOverHome(event) {
+        this.setState({ roof_color: '#5ca941' });
+    }
+    // callback for mouseOut home svg
+    mouseOutHome(event) {
+        this.setState({ roof_color: '#808080' });
+    }
+    // triggered when 'state properties' change
+    render() {
         return(
             <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='45px'
                 height='45px' viewBox='0 0 626.000000 626.000000'
@@ -77,9 +77,9 @@ var SvgHome = React.createClass({
 
                 </g>
             </svg>
-        )
+        );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default SvgHome
+export default SvgHome;
