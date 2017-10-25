@@ -11,11 +11,14 @@ import React, { Component } from 'react';
 
 class SvgHome extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             roof_color: '#808080',
             house_color: '#404040',
-        };
+        }
+        this.mouseOverHome = this.mouseOverHome.bind(this);
+        this.mouseOutHome = this.mouseOutHome.bind(this);
     }
     // callback for mouseOver home svg
     mouseOverHome(event) {
