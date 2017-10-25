@@ -141,6 +141,19 @@ def test_serialize():
     unpacked_clf = deserialize(packed_clf)
 
     assert len(clf.predict(numpy.array([[0, 1.2]]))) == 1
+
+    # BOOSTING REGRESSOR WITH SVR
+    clf = ensemble.AdaBoostRegressor(
+            base_estimator=svm.SVR(kernel='linear'),
+            n_estimators=45)
+
+    clf.fit([[0.2, 0.3], [0.1, -1]], [0.2, 0.5])
+    packed_clf = serialize(clf)
+    assert type(packed_clf) == str
+
+    unpacked_clf = deserialize(packed_clf)
+
+    assert len(clf.predict(numpy.array([[0, 1.2]]))) == 1
     print "Tests passed"
 
 test_serialize()

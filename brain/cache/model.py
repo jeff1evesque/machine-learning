@@ -8,7 +8,7 @@ This file caches, and uncaches the supplied model into a redis hash cache.
 
 from brain.cache.query import Query
 from brain.converter.model import Model as Converter
-
+from brain.converter.serialize import serialize, deserialize
 
 class Model(object):
     '''
@@ -51,7 +51,7 @@ class Model(object):
         '''
 
         try:
-            serialized = Converter(self.model).serialize()
+            serialized = serialize(self.model)
             self.myRedis.hset(hash_name, key, serialized)
         except Exception, error:
             self.list_error.append(str(error))
@@ -66,7 +66,7 @@ class Model(object):
         '''
 
         uncached = self.myRedis.hget(hash_name, key)
-        return Converter(uncached).deserialize()
+        return deserialize(self.model)
 
     def get_all_titles(self, name):
         '''
