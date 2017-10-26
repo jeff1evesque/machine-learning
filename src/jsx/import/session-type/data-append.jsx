@@ -25,8 +25,9 @@ import ajaxCaller from '../general/ajax-caller.js';
 
 class DataAppend extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             value_collection: '--Select--',
             value_dataset_type: '--Select--',
             value_model_type: '--Select--',
@@ -35,6 +36,11 @@ class DataAppend extends Component {
             ajax_fail_error: null,
             ajax_fail_status: null,
         };
+        this.changeCollection = this.changeCollection.bind(this);
+        this.changeDatasetType = this.changeDatasetType.bind(this);
+        this.changeModelType = this.changeModelType.bind(this);
+        this.displaySubmit = this.displaySubmit.bind(this);
+        this.getSupplyDataset = this.getSupplyDataset.bind(this);
     }
     // update 'state properties'
     changeCollection(event) {

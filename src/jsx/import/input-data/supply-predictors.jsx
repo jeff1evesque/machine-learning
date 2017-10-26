@@ -13,13 +13,15 @@ import ajaxCaller from '../general/ajax-caller.js';
 
 class SupplyPredictors extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state =  {
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
         };
+        this.validIntegerEntered = this.validIntegerEntered.bind(this);
     }
     // update 'state properties': allow parent component(s) to access properties
     validIntegerEntered(event) {

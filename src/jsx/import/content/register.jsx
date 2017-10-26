@@ -18,8 +18,9 @@ import checkValidPassword from '../validator/valid-password.js';
 
 class RegisterForm extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super()
+        this.state = {
             ajax_done_result: null,
             validated_username: true,
             validated_email: true,
@@ -31,6 +32,10 @@ class RegisterForm extends Component {
             value_email: '',
             value_password: '',
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.validateEmail = this.validateEmail.bind(this);
+        this.validatePassword = this.validatePassword.bind(this);
+        this.validateUsername = this.validateUsername.bind(this);
     }
     // send form data to serverside on form submission
     handleSubmit(event) {

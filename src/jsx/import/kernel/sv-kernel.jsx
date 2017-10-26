@@ -12,10 +12,12 @@ import checkValidString from './../validator/valid-string.js';
 
 class SupportVectorKernels extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             value_kernel_type: '--Select--',
         };
+        this.changeKernelType = this.changeKernelType.bind(this);
     }
     // update 'state properties'
     changeKernelType(event) {

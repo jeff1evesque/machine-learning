@@ -12,10 +12,14 @@ import checkValidUrl from './../validator/valid-url.js';
 
 class SupplyDatasetUrl extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             additional_elements: [],
         };
+        this.handleAddMore = this.handleAddMore.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
+        this.validUrlEntered = this.validUrlEntered.bind(this);
     }
     // update 'state properties': index for additional input elements
     handleAddMore(event) {

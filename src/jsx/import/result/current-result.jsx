@@ -17,12 +17,14 @@ import ajaxCaller from '../general/ajax-caller.js';
 
 class CurrentResultDisplay extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             nid: null,
             computed_result: null,
             computed_type: null,
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
     // send form data to serverside on form submission
     handleSubmit(event) {

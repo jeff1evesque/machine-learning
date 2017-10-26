@@ -14,10 +14,14 @@ import checkValidFile from './../validator/valid-file.js';
 
 class SupplyDatasetFile extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state =  {
             additional_elements: [],
         };
+        this.handleAddMore = this.handleAddMore.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
+        this.validFileEntered = this.validFileEntered.bind(this);
     }
     // update 'state properties': index for additional input elements
     handleAddMore(event) {

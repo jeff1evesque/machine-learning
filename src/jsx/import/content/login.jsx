@@ -20,14 +20,18 @@ import ajaxCaller from '../general/ajax-caller.js';
 
 class LoginForm extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             redirect_path: '/',
             ajax_done_result: null,
             display_spinner: false,
             validated_login_server: true,
             value_username: '',
-        };
+        }
+        this.getSpinner = this.getSpinner.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.updateUsername = this.updateUsername.bind(this);
     }
     // call back: used to return spinner
     getSpinner() {

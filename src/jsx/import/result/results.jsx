@@ -17,8 +17,9 @@ import ajaxCaller from '../general/ajax-caller.js';
 
 class ResultsDisplay extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             titles: null,
             status: null,
         };

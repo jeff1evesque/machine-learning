@@ -9,10 +9,12 @@ import checkValidString from './../validator/valid-string.js';
 
 class ModelType extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             value_model_type: '--Select--',
         };
+        this.changeModelType = this.changeModelType.bind(this);
     }
     // update 'state properties': pass property to parent component
     changeModelType(event) {

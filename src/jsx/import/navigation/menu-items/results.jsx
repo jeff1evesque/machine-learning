@@ -17,13 +17,15 @@ import ajaxCaller from '../../general/ajax-caller.js';
 
 class ReviewResultsLink extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
         };
+        this.renderContent = this.renderContent.bind(this);
     }
     // call back: return login button
     renderContent() {

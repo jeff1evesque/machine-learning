@@ -18,8 +18,9 @@ import ajaxCaller from '../general/ajax-caller.js';
 
 class ModelGenerate extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             value_collection: '--Select--',
             value_model_type: '--Select--',
             ajax_done_options: null,
@@ -27,6 +28,9 @@ class ModelGenerate extends Component {
             ajax_fail_error: null,
             ajax_fail_status: null,
         };
+        this.changeCollection = this.changeCollection.bind(this);
+        this.changeKernelType = this.changeKernelType.bind(this);
+        this.changeModelType = this.changeModelType.bind(this);
     }
     // update 'state properties'
     changeCollection(event) {

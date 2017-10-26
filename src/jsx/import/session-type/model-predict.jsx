@@ -24,14 +24,18 @@ import ajaxCaller from '../general/ajax-caller.js';
 
 class ModelPredict extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             value_collection: '--Select--',
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
         };
+        this.changeCollection = this.changeCollection.bind(this);
+        this.displaySubmit = this.displaySubmit.bind(this);
+        this.getSupplyPredictors = this.getSupplyPredictors.bind(this);
     }
     // update 'state properties'
     changeCollection(event) {

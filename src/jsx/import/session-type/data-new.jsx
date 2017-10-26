@@ -19,13 +19,20 @@ import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx
 
 class DataNew extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state = {
             value_title: '',
             value_collection: '',
             value_dataset_type: '--Select--',
             value_model_type: '--Select--',
         };
+        this.changeCollection = this.changeCollection.bind(this);
+        this.changeDatasetType = this.changeDatasetType.bind(this);
+        this.changeModelType = this.changeModelType.bind(this);
+        this.changeTitle = this.changeTitle.bind(this);
+        this.getSupplyDataset = this.getSupplyDataset.bind(this);
+        this.displaySubmit = this.displaySubmit.bind(this);
     }
     // update 'state properties'
     changeDatasetType(event) {

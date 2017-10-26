@@ -26,14 +26,17 @@ import { setSvButton, setGotoResultsButton, setLayout } from '../redux/action/pa
 
 class AnalysisLayout extends Component {
     // initial 'state properties'
-    getInitialState() {
-        return {
+    constructor() {
+        super();
+        this.state =  {
             display_spinner: false,
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
         };
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.storeResults = this.storeResults.bind(this);
     }
     // define properties after update
     componentDidUpdate() {
