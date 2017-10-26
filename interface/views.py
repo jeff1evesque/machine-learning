@@ -18,6 +18,7 @@ decorators are defined, which flask triggers for specific URL's.
 '''
 
 import json
+import pickle
 from flask import Blueprint, render_template, request, session
 from brain.load_data import Load_Data
 from brain.converter.settings import Settings
@@ -32,6 +33,7 @@ from brain.database.prediction import Prediction
 from brain.converter.crypto import hash_pass, verify_pass
 from brain.database.entity import Entity
 from brain.database.dataset import Collection
+from brain.cache.query import Query
 
 
 # local variables
@@ -155,10 +157,47 @@ def login():
     '''
 
     if request.method == 'POST':
-        # local variables
-        username = request.form.getlist('user[login]')[0]
-        password = request.form.getlist('user[password]')[0]
         account = Account()
+
+        # programmatic-interface
+        if request.get_json():
+            results = request.get_json()
+            if results['session']:
+                # initialize redis connector
+                redis = Query()
+                redis.start_redis()
+
+                # get username
+                session = results['session']
+                pickled = redis.get(session)
+
+                username = pickle.loads(pickled)
+                # validate: check username exists
+                if (
+                    account.check_username(username)['result'] and
+                    account.get_uid(username)['result']
+                ):
+
+                    # database query: get hashed password, and userid
+                    hashed_password = account.get_password(username)['result']
+                    uid = account.get_uid(username)['result']
+
+                    # set session: uid corresponds to primary key, from the
+                    #              user database table, and a unique integer
+                    #              representing the username.
+                    session['uid'] = uid
+
+                    # return status
+                    return json.dumps({'status': 0})
+            else:
+                username = results['user']
+                password = results['password']
+
+        # web-interface
+        elif request.form:
+            # local variables
+            username = request.form.getlist('user[login]')[0]
+            password = request.form.getlist('user[password]')[0]
 
         # validate: check username exists
         if (
@@ -185,7 +224,6 @@ def login():
                 # notification: incorrect password
                 else:
                     return json.dumps({'status': 4})
-
             # notification: user does not have a password
             else:
                 return json.dumps({'status': 4})
