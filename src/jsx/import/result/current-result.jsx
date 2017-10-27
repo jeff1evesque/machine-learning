@@ -24,6 +24,8 @@ class CurrentResultDisplay extends Component {
             computed_result: null,
             computed_type: null,
             display_spinner: false,
+            ajax_done_result: false, 
+            ajax_retrieval_result: {},
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
