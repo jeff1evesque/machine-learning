@@ -32,6 +32,7 @@ class ModelPredict extends Component {
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
+            display_spinner: false,
         };
         this.changeCollection = this.changeCollection.bind(this);
         this.displaySubmit = this.displaySubmit.bind(this);

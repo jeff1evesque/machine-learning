@@ -23,6 +23,7 @@ class CurrentResultDisplay extends Component {
             nid: null,
             computed_result: null,
             computed_type: null,
+            display_spinner: false,
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }

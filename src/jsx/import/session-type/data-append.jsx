@@ -35,6 +35,7 @@ class DataAppend extends Component {
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
+            display_spinner: false,
         };
         this.changeCollection = this.changeCollection.bind(this);
         this.changeDatasetType = this.changeDatasetType.bind(this);

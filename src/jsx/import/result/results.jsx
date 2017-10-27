@@ -22,6 +22,7 @@ class ResultsDisplay extends Component {
         this.state = {
             titles: null,
             status: null,
+            display_spinner: false,
         };
     }
     componentWillMount() {
