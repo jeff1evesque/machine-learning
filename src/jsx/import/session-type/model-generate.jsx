@@ -23,6 +23,7 @@ class ModelGenerate extends Component {
         this.state = {
             value_collection: '--Select--',
             value_model_type: '--Select--',
+            value_kernel_type: '--Select--',
             ajax_done_options: null,
             ajax_done_error: null,
             ajax_fail_error: null,
@@ -145,7 +146,7 @@ class ModelGenerate extends Component {
                     <select
                         name='collection'
                         autoComplete='off'
-                        onChange={this.changeCollection}
+                        onChange={event => this.changeCollection(event)}
                         value={this.state.value_collection}
                     >
 
