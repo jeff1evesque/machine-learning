@@ -9,34 +9,38 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import checkValidFile from './../validator/valid-file.js';
 
-var SupplyDatasetFile = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            additional_elements: []
+class SupplyDatasetFile extends Component {
+    // initial 'state properties'
+    constructor() {
+        super();
+        this.state =  {
+            additional_elements: [],
         };
-    },
-  // update 'state properties': index for additional input elements
-    handleAddMore: function(event){
-        var elements = this.state.additional_elements;
+        this.handleAddMore = this.handleAddMore.bind(this);
+        this.handleRemove = this.handleRemove.bind(this);
+        this.validFileEntered = this.validFileEntered.bind(this);
+    }
+    // update 'state properties': index for additional input elements
+    handleAddMore(event) {
+        const elements = this.state.additional_elements;
         elements.push(true);
-        this.setState({additional_elements: elements});
-        this.props.onChange({submitted_proper_predictor: false});
-    },
-    handleRemove: function(event){
-        var elements = this.state.additional_elements;
-        var datasetBoolean = true;
+        this.setState({ additional_elements: elements });
+        this.props.onChange({ submitted_proper_predictor: false });
+    }
+    handleRemove(event) {
+        const elements = this.state.additional_elements;
+        let datasetBoolean = true;
 
         if (elements.length > 0) {
             elements.pop();
-            this.setState({additional_elements: elements});
+            this.setState({ additional_elements: elements });
 
-            {/* define boolean to indicate all files properly defined */}
-            for (var index = 0; index < elements.length; index++) {
-                var inputVal = this.state['value_dataset_' + index.toString()];
+            { /* define boolean to indicate all files properly defined */ }
+            for (let index = 0; index < elements.length; index++) {
+                const inputVal = this.state[`value_dataset_${index.toString()}`];
 
                 if (inputVal === undefined || !inputVal) {
                     datasetBoolean = false;
@@ -44,50 +48,47 @@ var SupplyDatasetFile = React.createClass({
                 }
 	        }
 
-            {/* allow parent component to know all files properly defined */}
+            { /* allow parent component to know all files properly defined */ }
             if (datasetBoolean) {
-                this.props.onChange({submitted_proper_dataset: true});
+                this.props.onChange({ submitted_proper_dataset: true });
             } else {
-                this.props.onChange({submitted_proper_dataset: false});
+                this.props.onChange({ submitted_proper_dataset: false });
             }
 
-            {/* possibly clear submit button */}
+            { /* possibly clear submit button */ }
             this.validFileEntered();
         }
-    },
-  // update 'state properties': allow parent component(s) to access properties
-    validFileEntered: function() {
-        {/* get array of input elements, by classname */}
-        var dataset = document.getElementsByClassName('dataset-file');
+    }
+    // update 'state properties': allow parent component(s) to access properties
+    validFileEntered() {
+        { /* get array of input elements, by classname */ }
+        const dataset = document.getElementsByClassName('dataset-file');
 
-        {/*
+        { /*
             Iterate the node list containing the supplied dataset(s). If the
             input value is a valid file, store 'true', within the array.
-        */}
-        var boolArray = Array.prototype.map.call(dataset, function(element) {
+        */ }
+        const boolArray = Array.prototype.map.call(dataset, (element) => {
             if (element.value && checkValidFile(element.value)) {
                 return true;
-            } else {
-                return false;
             }
+            return false;
         });
 
-        {/* check if every element is 'true' */}
-        var datasetFlag = boolArray.every(function(element) {
-            return element == true;
-        });
+        { /* check if every element is 'true' */ }
+        const datasetFlag = boolArray.every(element => element == true);
 
         if (datasetFlag) {
-            this.props.onChange({submitted_proper_dataset: true});
+            this.props.onChange({ submitted_proper_dataset: true });
         } else {
-            this.props.onChange({submitted_proper_dataset: false});
+            this.props.onChange({ submitted_proper_dataset: false });
         }
-    },
-  // triggered when 'state properties' change
-    render: function(){
-        var inputs = this.state.additional_elements;
+    }
+    // triggered when 'state properties' change
+    render() {
+        const inputs = this.state.additional_elements;
 
-        return(
+        return (
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
                 <input
@@ -111,16 +112,14 @@ var SupplyDatasetFile = React.createClass({
                 />
 
                 {/* array components require unique 'key' value */}
-                {inputs && inputs.map(function(value, index) {
-                    return <input
-                        type='file'
-                        name='dataset[]'
-                        className='dataset-file'
-                        key={index}
-                        onChange={this.validFileEntered}
-                        defaultValue=''
-                    />;
-                }.bind(this))}
+                {inputs && inputs.map((value, index) => (<input
+                    type='file'
+                    name='dataset[]'
+                    className='dataset-file'
+                    key={index}
+                    onChange={this.validFileEntered}
+                    defaultValue=''
+                />))}
 
                 <p className='form-note'>
                     <span className='asterick'>*</span>
@@ -133,7 +132,7 @@ var SupplyDatasetFile = React.createClass({
             </fieldset>
         );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default SupplyDatasetFile
+export default SupplyDatasetFile;

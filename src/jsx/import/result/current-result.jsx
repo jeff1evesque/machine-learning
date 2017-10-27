@@ -7,7 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import queryString from 'query-string';
 import 'core-js/modules/es7.object.entries';
 import { setLayout, setContentType, setResultsButton } from '../redux/action/page.jsx';
@@ -15,24 +15,29 @@ import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
-var CurrentResultDisplay = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
+class CurrentResultDisplay extends Component {
+    // initial 'state properties'
+    constructor() {
+        super();
+        this.state = {
             nid: null,
             computed_result: null,
             computed_type: null,
+            display_spinner: false,
+            ajax_done_result: false, 
+            ajax_retrieval_result: {},
         };
-    },
-  // send form data to serverside on form submission
-    handleSubmit: function(event) {
-      // prevent page reload
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    // send form data to serverside on form submission
+    handleSubmit(event) {
+        // prevent page reload
         event.preventDefault();
 
-      // local variables
+        // local variables
         const ajaxEndpoint = '/save-prediction';
 
-      // ajax process
+        // ajax process
         if (this.state.computed_result && this.state.computed_type) {
             var formData = new FormData(this.refs.savePredictionForm);
             formData.append('status', 'valid');
@@ -40,56 +45,58 @@ var CurrentResultDisplay = React.createClass({
             formData.append('model_type', this.state.computed_type);
 
             var ajaxArguments = {
-                'endpoint': ajaxEndpoint,
-                'data': formData
+                endpoint: ajaxEndpoint,
+                data: formData,
             };
         } else {
             var formData = new FormData(this.refs.savePredictionForm);
             formData.append('status', 'no-data');
 
             var ajaxArguments = {
-                'endpoint': ajaxEndpoint,
-                'data': formData
+                endpoint: ajaxEndpoint,
+                data: formData,
             };
         }
 
-      // boolean to show ajax spinner
-        this.setState({display_spinner: true});
+        // boolean to show ajax spinner
+        this.setState({ display_spinner: true });
 
-      // asynchronous callback: ajax 'done' promise
-        ajaxCaller(function (asynchObject) {
-        // Append to DOM
-            if (asynchObject && asynchObject.error) {
-                this.setState({ajax_store_error: asynchObject.error});
-            } else if (asynchObject) {
-                this.setState({ajax_store_result: asynchObject});
+        // asynchronous callback: ajax 'done' promise
+        ajaxCaller(
+            (asynchObject) => {
+                // Append to DOM
+                if (asynchObject && asynchObject.error) {
+                    this.setState({ ajax_store_error: asynchObject.error });
+                } else if (asynchObject) {
+                    this.setState({ ajax_store_result: asynchObject });
 
-                const action = setResultsButton({button: {review_results: true}});
-                this.props.dispatchResultsButton(action);
-            } else {
-                this.setState({ajax_store_result: null});
-            }
-        // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
-        }.bind(this),
-      // asynchronous callback: ajax 'fail' promise
-        function (asynchStatus, asynchError) {
-            if (asynchStatus) {
-                this.setState({ajax_store_status: asynchStatus});
-                console.log('Error Status: ' + asynchStatus);
-            }
-            if (asynchError) {
-                this.setState({ajax_store_error: asynchError});
-                console.log('Error Thrown: ' + asynchError);
-            }
-        // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
-        }.bind(this),
-      // pass ajax arguments
-        ajaxArguments);
-    },
-  // define properties after update
-    componentDidUpdate: function() {
+                    const action = setResultsButton({ button: { review_results: true } });
+                    this.props.dispatchResultsButton(action);
+                } else {
+                    this.setState({ ajax_store_result: null });
+                }
+                // boolean to hide ajax spinner
+                this.setState({ display_spinner: false });
+            },
+            // asynchronous callback: ajax 'fail' promise
+            (asynchStatus, asynchError) => {
+                if (asynchStatus) {
+                    this.setState({ ajax_store_status: asynchStatus });
+                    console.log(`Error Status: ${asynchStatus}`);
+                }
+                if (asynchError) {
+                    this.setState({ ajax_store_error: asynchError });
+                    console.log(`Error Thrown: ${asynchError}`);
+                }
+                // boolean to hide ajax spinner
+                this.setState({ display_spinner: false });
+            },
+            // pass ajax arguments
+            ajaxArguments,
+        );
+    }
+    // define properties after update
+    componentDidUpdate() {
         if (
             this.props &&
             this.props.results &&
@@ -99,81 +106,83 @@ var CurrentResultDisplay = React.createClass({
         ) {
             this.setState({
                 computed_result: JSON.stringify(this.props.results.data),
-                computed_type: this.props.results.type
+                computed_type: this.props.results.type,
             });
         }
-    },
-    componentWillMount: function() {
+    }
+    componentWillMount() {
         if (
             !!this.props &&
             !!this.props.location
         ) {
             const parsed = queryString.parse(this.props.location.search);
             if (!!parsed && !!parsed.nid) {
-                this.setState({nid: parsed.nid});
+                this.setState({ nid: parsed.nid });
             }
         }
 
-      // update redux store: define overall page layout
-        const action = setLayout({'layout': 'analysis'});
+        // update redux store: define overall page layout
+        const action = setLayout({ layout: 'analysis' });
         this.props.dispatchLayout(action);
 
-        const actionContentType = setContentType({'layout': 'result'});
+        const actionContentType = setContentType({ layout: 'result' });
         this.props.dispatchContentType(actionContentType);
-    },
-    componentDidMount: function() {
-      // execute if 'nid' defined from 'componentWillMount'
+    }
+    componentDidMount() {
+        // execute if 'nid' defined from 'componentWillMount'
         if (this.state && !!this.state.nid) {
-          // ajax arguments
-            var data = new FormData();
+            // ajax arguments
+            const data = new FormData();
             data.append('id_result', this.state.nid);
             const ajaxEndpoint = '/retrieve-prediction';
             const ajaxArguments = {
-                'endpoint': ajaxEndpoint,
-                'data': data
+                endpoint: ajaxEndpoint,
+                data,
             };
 
-          // boolean to show ajax spinner
+            // boolean to show ajax spinner
             if (
                 this.state &&
                 !this.state.display_spinner &&
                 !this.state.ajax_done_result
             ) {
-                this.setState({display_spinner: true});
+                this.setState({ display_spinner: true });
             }
 
-          // asynchronous callback: ajax 'done' promise
-            ajaxCaller(function (asynchObject) {
-              // Append to DOM
-                if (asynchObject && asynchObject.error) {
-                    this.setState({ajax_retrieval_error: asynchObject.error});
-                } else if (asynchObject) {
-                    this.setState({ajax_retrieval_result: asynchObject});
-                } else {
-                    this.setState({ajax_retrieval_result: null});
-                }
-            // boolean to hide ajax spinner
-            this.setState({display_spinner: false});
-        }.bind(this),
-         // asynchronous callback: ajax 'fail' promise
-            function (asynchStatus, asynchError) {
-                if (asynchStatus) {
-                    this.setState({ajax_retrieval_status: asynchStatus});
-                    console.log('Error Status: ' + asynchStatus);
-                }
-                if (asynchError) {
-                    this.setState({ajax_retrieval_error: asynchError});
-                    console.log('Error Thrown: ' + asynchError);
-                }
-            // boolean to hide ajax spinner
-                this.setState({display_spinner: false});
-            }.bind(this),
-          // pass ajax arguments
-            ajaxArguments);
+            // asynchronous callback: ajax 'done' promise
+            ajaxCaller(
+                (asynchObject) => {
+                    // Append to DOM
+                    if (asynchObject && asynchObject.error) {
+                        this.setState({ ajax_retrieval_error: asynchObject.error });
+                    } else if (asynchObject) {
+                        this.setState({ ajax_retrieval_result: asynchObject });
+                    } else {
+                        this.setState({ ajax_retrieval_result: null });
+                    }
+                    // boolean to hide ajax spinner
+                    this.setState({ display_spinner: false });
+                },
+                // asynchronous callback: ajax 'fail' promise
+                (asynchStatus, asynchError) => {
+                    if (asynchStatus) {
+                        this.setState({ ajax_retrieval_status: asynchStatus });
+                        console.log(`Error Status: ${asynchStatus}`);
+                    }
+                    if (asynchError) {
+                        this.setState({ ajax_retrieval_error: asynchError });
+                        console.log(`Error Thrown: ${asynchError}`);
+                    }
+                    // boolean to hide ajax spinner
+                    this.setState({ display_spinner: false });
+                },
+                // pass ajax arguments
+                ajaxArguments,
+            );
         }
-    },
-    render: function() {
-      // local variables
+    }
+    render() {
+        // local variables
         var resultType = null;
         var resultData = null;
         var saveResults = null;
@@ -188,41 +197,40 @@ var CurrentResultDisplay = React.createClass({
             var resultData = JSON.parse(this.props.results.data);
         }
 
-      // polyfill 'entries'
+        // polyfill 'entries'
         if (!Object.entries) {
             entries.shim();
         }
 
-      // generate result
+        // generate result
         if (
             this.state &&
             !!this.state.ajax_retrieval_result &&
             Object.keys(this.state.ajax_retrieval_result).length > 0
         ) {
-          // local variables
-            var resultData = this.state.ajax_retrieval_result
+            // local variables
+            var resultData = this.state.ajax_retrieval_result;
             const status = resultData.status;
 
-          // do not present status
+            // do not present status
             delete resultData.status;
 
-          // generate result
-            var resultList = <ul className='result-list'>{
+            // generate result
+            var resultList = (<ul className='result-list'>{
                 Object.entries(resultData).map(([item_key, value]) =>
-                    <li key={item_key}>{item_key}: {
+                    (<li key={item_key}>{item_key}: {
                         Array.isArray(value) ?
-                            <ul className='sublist' key={'sublist-' + item_key}>
+                            <ul className='sublist' key={`sublist-${item_key}`}>
                                 {
-                                    value.map(function(value, index) {
-                                        return <li key={'subitem-' + index}>{value}</li>;
-                                    })
+                                    value.map((value, index) =>
+                                    <li key={`subitem-${  index}`}>{value}</li>)
                                 }
                             </ul>
-                        : value
+                            : value
                     }
-                    </li>
-                )
-            }</ul>;
+                     </li>))
+            }
+            </ul>);
         } else if (
             resultData &&
             this.props &&
@@ -230,24 +238,23 @@ var CurrentResultDisplay = React.createClass({
             this.props.results.data &&
             Object.keys(resultData).length > 0
         ) {
-            var resultList = <ul className='result-list'>{
+            var resultList = (<ul className='result-list'>{
                 Object.entries(resultData).map(([item_key, value]) =>
-                    <li key={item_key}>{item_key}: {
+                    (<li key={item_key}>{item_key}: {
                         Array.isArray(value) ?
-                            <ul className='sublist' key={'sublist-' + item_key}>
+                            <ul className='sublist' key={`sublist-${item_key}`}>
                                 {
-                                    value.map(function(value, index) {
-                                        return <li key={'subitem-' + index}>{value}</li>;
-                                    })
+                                    value.map((value, index) =>
+                                    <li key={`subitem-${  index}`}>{value}</li>)
                                 }
                             </ul>
-                        : value
+                            : value
                     }
-                    </li>
-                )
-            }</ul>;
+                     </li>))
+            }
+            </ul>);
 
-            var saveResults = <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+            var saveResults = (<form onSubmit={this.handleSubmit} ref='savePredictionForm'>
                 <input
                     type='text'
                     name='title'
@@ -256,15 +263,15 @@ var CurrentResultDisplay = React.createClass({
                     defaultValue=''
                 />
                 <Submit cssClass='btn' />
-            </form>
+            </form>);
         } else {
-            var resultList = <div className='result-list'>
+            var resultList = (<div className='result-list'>
                 Sorry, no results available!
-            </div>;
+            </div>);
         }
 
-      // display result
-        return(
+        // display result
+        return (
             <div className='result-container'>
                 <h1>{resultType} Result</h1>
                 <div>
@@ -274,7 +281,7 @@ var CurrentResultDisplay = React.createClass({
             </div>
         );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default CurrentResultDisplay
+export default CurrentResultDisplay;
