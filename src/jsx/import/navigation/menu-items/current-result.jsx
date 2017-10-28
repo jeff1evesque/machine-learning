@@ -10,19 +10,16 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
-var CurrentResultLink = React.createClass({
-    render: function() {
-        return (
-            <NavLink
-                to='/session/current-result'
-                activeClassName='active'
-                className='btn btn-primary'
-            >
-                <span>Goto results</span>
-            </NavLink>
-        );
-    }
-});
+const CurrentResultLink = () =>
+    (
+        <NavLink
+            to='/session/current-result'
+            activeClassName='active'
+            className='btn btn-primary'
+        >
+            <span>Goto results</span>
+        </NavLink>
+    );
 
 // indicate which class can be exported, and instantiated via 'require'
-export default CurrentResultLink
+export default CurrentResultLink;
