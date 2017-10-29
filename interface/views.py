@@ -199,38 +199,38 @@ def login():
             username = request.form.getlist('user[login]')[0]
             password = request.form.getlist('user[password]')[0]
 
-        # validate: check username exists
-        if (
-            account.check_username(username)['result'] and
-            account.get_uid(username)['result']
-        ):
+            # validate: check username exists
+            if (
+                account.check_username(username)['result'] and
+                account.get_uid(username)['result']
+            ):
 
-            # database query: get hashed password, and userid
-            hashed_password = account.get_password(username)['result']
-            uid = account.get_uid(username)['result']
+                # database query: get hashed password, and userid
+                hashed_password = account.get_password(username)['result']
+                uid = account.get_uid(username)['result']
 
-            # notification: verify hashed password exists
-            if hashed_password:
+                # notification: verify hashed password exists
+                if hashed_password:
 
-                # notification: verify password
-                if verify_pass(str(password), hashed_password):
-                    # set session: uid corresponds to primary key, from the
-                    #              user database table, and a unique integer
-                    #              representing the username.
-                    session['uid'] = uid
+                    # notification: verify password
+                    if verify_pass(str(password), hashed_password):
+                        # set session: uid corresponds to primary key, from the
+                        #              user database table, and a unique integer
+                        #              representing the username.
+                        session['uid'] = uid
 
-                    # return user status
-                    return json.dumps({'status': 0})
-                # notification: incorrect password
+                        # return user status
+                        return json.dumps({'status': 0})
+                    # notification: incorrect password
+                    else:
+                        return json.dumps({'status': 4})
+                # notification: user does not have a password
                 else:
                     return json.dumps({'status': 4})
-            # notification: user does not have a password
+
+            # notification: username does not exist
             else:
                 return json.dumps({'status': 4})
-
-        # notification: username does not exist
-        else:
-            return json.dumps({'status': 4})
 
 
 @blueprint.route('/logout', methods=['GET', 'POST'])
