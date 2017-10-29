@@ -37,16 +37,16 @@ def bagging(
     bagger = None
     list_model_type = current_app.config.get('MODEL_TYPE')
     classifiers = [
-        list_model_type[3],
-        list_model_type[5],
-        list_model_type[6],
-        list_model_type[9]
-    ]
-    regressors = [
+        list_model_type[2],
         list_model_type[4],
         list_model_type[6],
+        list_model_type[8]
+    ]
+    regressors = [
+        list_model_type[3],
+        list_model_type[5],
         list_model_type[7],
-        list_model_type[10]
+        list_model_type[9]
     ]
 
     # set up the ensembler
