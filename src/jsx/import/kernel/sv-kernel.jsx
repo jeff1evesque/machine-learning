@@ -7,28 +7,30 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import checkValidString from './../validator/valid-string.js';
 
-var SupportVectorKernels = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            value_kernel_type: '--Select--'
+class SupportVectorKernels extends Component {
+    // initial 'state properties'
+    constructor() {
+        super();
+        this.state = {
+            value_kernel_type: '--Select--',
         };
-    },
-  // update 'state properties'
-    changeKernelType: function(event){
+        this.changeKernelType = this.changeKernelType.bind(this);
+    }
+    // update 'state properties'
+    changeKernelType(event) {
         if (checkValidString(event.target.value)) {
-            this.props.onChange({kernelType: this.state.value_kernel_type});
+            this.props.onChange({ kernelType: this.state.value_kernel_type });
         } else {
-            this.props.onChange({kernelType: null});
+            this.props.onChange({ kernelType: null });
         }
-    },
-  // triggered when 'state properties' change
-    render: function(){
-      // display result
-        return(
+    }
+    // triggered when 'state properties' change
+    render() {
+        // display result
+        return (
             <select
                 name='svm_kernel_type'
                 autoComplete='off'
@@ -45,7 +47,7 @@ var SupportVectorKernels = React.createClass({
             </select>
         );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default SupportVectorKernels
+export default SupportVectorKernels;
