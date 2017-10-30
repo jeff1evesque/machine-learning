@@ -168,8 +168,8 @@ def login():
                 redis.start_redis()
 
                 # get username
-                session = results['session']
-                pickled = redis.get(session)
+                supplied = results['session']
+                pickled = redis.get(supplied)
 
                 username = pickle.loads(pickled)
                 # validate: check username exists
