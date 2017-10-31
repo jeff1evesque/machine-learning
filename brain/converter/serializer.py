@@ -1,7 +1,5 @@
 import json
 import numpy
-from sklearn import svm
-from sklearn import ensemble
 from sklearn import base
 from sklearn import tree
 
@@ -67,8 +65,8 @@ def is_estimator(j):
         checks whether an object is valid json
     '''
     try:
-        z = json.loads(j)
-    except ValueError, e:
+        json.loads(j)
+    except ValueError:
         return False
     return True
 
