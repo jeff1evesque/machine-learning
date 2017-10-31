@@ -26,7 +26,7 @@ development:
 
     github:
         custom:
-            sklearn: '0.16.1'
+            sklearn: '0.19.1'
 
     npm:
         general:
