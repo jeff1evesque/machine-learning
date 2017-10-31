@@ -68,7 +68,7 @@ def bagging(
         )
 
     # train bagger
-    if bagger:
+    if bagger is not None:
         return bagger.fit(dataset, labels)
 
 
