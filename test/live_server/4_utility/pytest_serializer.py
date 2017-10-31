@@ -3,6 +3,7 @@ from sklearn import ensemble
 from sklearn import svm
 import numpy
 
+
 def test_serialize_svc():
     X = [[0, 0], [1, 1]]
     Y = [0, 1]
@@ -20,7 +21,7 @@ def test_serialize_svc():
 def test_serialize_bagrf():
     X = [[0, 0], [1, 1]]
     Y = [0, 1]
-    
+
     clf = ensemble.BaggingClassifier(
             base_estimator=ensemble.RandomForestClassifier(n_estimators=8),
             n_estimators=12)
@@ -36,7 +37,7 @@ def test_serialize_bagrf():
 def test_serialize_bagsvc():
     X = [[0, 0], [1, 1]]
     Y = [0, 1]
-    
+
     clf = ensemble.BaggingClassifier(
             base_estimator=svm.SVC(kernel='linear'),
             n_estimators=12)
