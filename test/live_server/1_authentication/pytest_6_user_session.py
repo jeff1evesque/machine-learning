@@ -9,8 +9,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-from flask import session
-from brain.cache.query import Query
+from flask import request, session
 
 
 def test_session(client, live_server):
@@ -32,9 +31,8 @@ def test_session(client, live_server):
     login = client.post('/login', data=payload)
 
     if session.get('uid'):
-        rcon = Query(0, 'redis', 6379)
-        rcon.start_redis()
-        raise Exception('login: ' + repr(login))
+        raise Exception('repr(request.cookies): ' + repr(request.cookies))
+        logout = client.post('/logout')
     else:
         assert False
 
