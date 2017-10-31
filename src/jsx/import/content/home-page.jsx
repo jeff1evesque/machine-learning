@@ -11,17 +11,17 @@
  *
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setLayout } from '../redux/action/page.jsx';
 
-var HomePage = React.createClass({
-    componentWillMount: function() {
-        const action = setLayout({'layout': 'analysis'});
+class HomePage extends Component {
+    componentWillMount() {
+        const action = setLayout({ layout: 'analysis' });
         this.props.dispatchLayout(action);
-    },
-    render: function() {
-        return(
+    }
+    render() {
+        return (
             <div className='main-full-span home'>
                 <h1>Welcome!</h1>
                 <NavLink
@@ -34,7 +34,7 @@ var HomePage = React.createClass({
             </div>
         );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default HomePage
+export default HomePage;
