@@ -10,6 +10,6 @@ class sklearn {
     contain package::sklearn_dependencies
 
     ## install scikit-learn
-    contain sklearn::install_sklearn
+    contain package::sklearn
 }
 contain sklearn
