@@ -54,7 +54,7 @@ def predict(model, collection, predictors):
     # case 1: return svm prediction, and confidence level
     if model == list_model_type[0]:
         # perform prediction, and return the result
-        prediction = np.array(clf.predict([predictors])).tolist()
+        prediction = clf.predict([predictors])
 
         encoded_labels = Model().uncache(
             model + '_labels',
@@ -62,12 +62,12 @@ def predict(model, collection, predictors):
         )
 
         textual_label = encoded_labels.inverse_transform(prediction)
-        probability = clf.predict_proba(predictors)
-        decision_function = clf.decision_function(predictors)
+        probability = clf.predict_proba([predictors])
+        decision_function = clf.decision_function([predictors])
         classes = [encoded_labels.inverse_transform(x) for x in clf.classes_]
 
         return {
-            'result': textual_label[0][0],
+            'result': textual_label[0],
             'model': model,
             'confidence': {
                 'classes': list(classes),
