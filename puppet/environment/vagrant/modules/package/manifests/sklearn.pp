@@ -6,7 +6,7 @@ class package::sklearn {
 
     ## local variables
     $hiera_dev     = lookup('development')
-    $version       = $hiera_dev['pip']['general']['scikit-learn']
+    $version       = $hiera_dev['pip']['custom']['scikit-learn']
 
     ## install scikit-learn
     package { 'scikit-learn':

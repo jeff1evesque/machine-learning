@@ -45,9 +45,9 @@ development:
             xmltodict: '0.10.1'
             scrypt: '0.8.0'
             pymongo: '3.4.0'
-            scikit-learn: '0.19.1'
 
         custom:
             redis: '2.10.5'
             gunicorn: '19.6.0'
             pyyaml: '3.12'
+            scikit-learn: '0.19.1'
