@@ -1,3 +1,4 @@
+
 /**
  * register.jsx: register link markup.
  *
@@ -7,13 +8,13 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-var RegisterLink = React.createClass({
-  // call back: return register button
-    renderContent: function() {
+class RegisterLink extends Component {
+    // call back: return register button
+    renderContent() {
         if (
             this.props &&
             this.props.user &&
@@ -25,19 +26,18 @@ var RegisterLink = React.createClass({
                     activeClassName='active'
                     className='btn btn-primary'
                 >
-                   <span>Sign up</span>
+                    <span>Sign up</span>
                 </NavLink>
             );
-        } else {
-            return (<span />);
         }
-    },
-  // triggered when 'state properties' change
-    render: function(){
-        var selectedContent = this.renderContent();
-        return(selectedContent);
+        return (<span />);
     }
-});
+    // triggered when 'state properties' change
+    render() {
+        const selectedContent = this.renderContent();
+        return (selectedContent);
+    }
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default RegisterLink
+export default RegisterLink;

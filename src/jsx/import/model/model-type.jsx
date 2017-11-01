@@ -4,29 +4,31 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import checkValidString from './../validator/valid-string.js';
 
-var ModelType = React.createClass({
-  // initial 'state properties'
-    getInitialState: function() {
-        return {
-            value_model_type: '--Select--'
+class ModelType extends Component {
+    // initial 'state properties'
+    constructor() {
+        super();
+        this.state = {
+            value_model_type: '--Select--',
         };
-    },
-  // update 'state properties': pass property to parent component
-    changeModelType: function(event){
+        this.changeModelType = this.changeModelType.bind(this);
+    }
+    // update 'state properties': pass property to parent component
+    changeModelType(event) {
         if (checkValidString(event.target.value)) {
-            this.setState({value_model_type: event.target.value});
-            this.props.onChange({value_model_type: event.target.value});
+            this.setState({ value_model_type: event.target.value });
+            this.props.onChange({ value_model_type: event.target.value });
         } else {
-            this.setState({value_model_type: '--Select--'});
+            this.setState({ value_model_type: '--Select--' });
         }
-    },
-  // triggered when 'state properties' change
-    render: function(){
-      // display result
-        return(
+    }
+    // triggered when 'state properties' change
+    render() {
+        // display result
+        return (
             <select
                 name='model_type'
                 autoComplete='off'
@@ -41,7 +43,7 @@ var ModelType = React.createClass({
             </select>
         );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default ModelType
+export default ModelType;

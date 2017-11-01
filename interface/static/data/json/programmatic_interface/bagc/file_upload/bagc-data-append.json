@@ -1,9 +1,9 @@
 {
     "properties": {
-        "collection": "bgc-2",
+        "collection": "bagc-2",
         "dataset_type": "file_upload",
         "session_type": "data_append",
-        "model_type": "bgc",
+        "model_type": "bagc",
         "stream": "True"
     },
     "dataset": [{

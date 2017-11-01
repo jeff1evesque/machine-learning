@@ -8,7 +8,7 @@
  *
  */
 
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Route } from 'react-router-dom';
@@ -20,20 +20,19 @@ import UserMenuState from '../redux/container/user-menu.jsx';
 import HeaderMenuState from '../redux/container/header-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
-var PageLayout = React.createClass({
-  // callback: used to return spinner
-    getSpinner: function() {
+class PageLayout extends Component {
+    // callback: used to return spinner
+    getSpinner() {
         if (this.props && this.props.effects && this.props.effects.spinner) {
             return <Spinner />;
-        } else {
-            return null;
         }
-    },
-    render: function() {
-      // local variables
-        var spinner = this.getSpinner();
+        return null;
+    }
+    render() {
+        // local variables
+        const spinner = this.getSpinner();
 
-      // validate username
+        // validate username
         if (
             this.props &&
             this.props.user &&
@@ -41,12 +40,11 @@ var PageLayout = React.createClass({
             this.props.user.name != 'anonymous'
         ) {
             var mainMenu = <UserMenuState />;
-        }
-        else {
+        } else {
             var mainMenu = <div className='container'><HeaderMenuState /></div>;
         }
 
-        return(
+        return (
             <div>
                 <div className='menu-container'>
                     {mainMenu}
@@ -62,7 +60,7 @@ var PageLayout = React.createClass({
             </div>
         );
     }
-});
+}
 
 // indicate which class can be exported, and instantiated via 'require'
-export default PageLayout
+export default PageLayout;

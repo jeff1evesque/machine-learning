@@ -6,3 +6,4 @@ redis:
     host: 'redis'
     port: 6379
     path: '/etc/redis/redis.conf'
+    db: 0

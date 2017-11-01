@@ -1,7 +1,7 @@
 <?xml version='1.0'?>
 
 <dataset xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
-xsi:noNamespaceSchemaLocation='https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/bgc.xsd'>
+xsi:noNamespaceSchemaLocation='https://github.com/jeff1evesque/machine-learning/tree/master/interface/static/data/xml/bagr.xsd'>
   <observation>
     <dependent-variable>dep-variable-1</dependent-variable>
     <independent-variable>
