@@ -10,7 +10,6 @@ levels, associated with corresponding predictions.
 from flask import current_app
 from brain.cache.hset import Hset
 from brain.cache.model import Model
-import numpy as np
 
 
 def predict(model, collection, predictors):
