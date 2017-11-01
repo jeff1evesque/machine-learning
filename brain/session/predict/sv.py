@@ -10,6 +10,7 @@ levels, associated with corresponding predictions.
 from flask import current_app
 from brain.cache.hset import Hset
 from brain.cache.model import Model
+import numpy as np
 
 
 def predict(model, collection, predictors):
@@ -50,17 +51,16 @@ def predict(model, collection, predictors):
         collection_adjusted
     )
 
-    # perform prediction, and return the result
-    prediction = (clf.predict([predictors]))
-
     # case 1: return svm prediction, and confidence level
     if model == list_model_type[0]:
+        # perform prediction, and return the result
+
         encoded_labels = Model().uncache(
             model + '_labels',
             collection_adjusted
         )
 
-        textual_label = encoded_labels.inverse_transform([prediction])
+        textual_label = encoded_labels.inverse_transform(prediction)
         probability = clf.predict_proba(predictors)
         decision_function = clf.decision_function(predictors)
         classes = [encoded_labels.inverse_transform(x) for x in clf.classes_]
@@ -78,6 +78,9 @@ def predict(model, collection, predictors):
 
     # case 2: return svr prediction, and confidence level
     elif model == list_model_type[1]:
+        # perform prediction, and return the result
+        prediction = (clf.predict([predictors]))
+
         r2 = Hset().uncache(
             model + '_r2',
             collection_adjusted
