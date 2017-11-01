@@ -163,7 +163,7 @@ def test_model_predict(client, live_server):
         i for i in fixed_prob if any(abs(i-j) > margin_prob for j in cp)
     ]
 
-    ## check each decision function is within acceptable margin
+    # check each decision function is within acceptable margin
     fixed_df = [
         1.82537005,
         -0.5,
@@ -189,7 +189,7 @@ def test_model_predict(client, live_server):
         'dep-variable-4',
         'dep-variable-5'
     ]
-    assert df
+    assert check_df
     assert check_prob
     assert res.json['result']['model'] == 'svm'
     assert res.json['result']['result'] == 'dep-variable-4'
