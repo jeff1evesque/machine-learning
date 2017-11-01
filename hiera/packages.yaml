@@ -24,10 +24,6 @@ development:
             ipython: '1.2.1-2'
             nginx: '1.12.1-1~trusty'
 
-    github:
-        custom:
-            sklearn: '0.19.1'
-
     npm:
         general:
             fetch: '1.1.0'
@@ -49,6 +45,7 @@ development:
             xmltodict: '0.10.1'
             scrypt: '0.8.0'
             pymongo: '3.4.0'
+            scikit-learn: '0.19.1'
 
         custom:
             redis: '2.10.5'
