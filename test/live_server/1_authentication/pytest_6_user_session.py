@@ -35,7 +35,6 @@ def test_session(client, live_server):
     )
 
     if session.get('uid'):
-        raise Exception('login.json: ' + repr(login.json))
         logout = client.post('/logout')
     else:
         assert False
