@@ -63,11 +63,12 @@ class ModelPredict(Base):
         corresponding model, within the NoSQL datastore.
 
         '''
+
         list_model_type = current_app.config.get('MODEL_TYPE')
         # get model type
         model_type = ModelType().get_model_type(self.collection)['result']
 
         if model_type in [list_model_type[0], list_model_type[1]]:
             return sv.predict(model_type, self.collection, self.predictors)
-        elif model_type in [list_model_type[2:10]]
+        elif model_type in [list_model_type[2:10]]:
             return bag.predict(model_type, self.collection, self.predictors)
