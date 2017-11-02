@@ -49,7 +49,7 @@ blueprint = Blueprint(
     static_folder='interface/static'
 )
 
-# setup the Flask-JWT-Extended extension
+# setup the flask-jwt-extended extension
 jwt = JWTManager(blueprint)
 
 
@@ -83,6 +83,10 @@ def load_data():
         - data_append
         - model_predict
         - model_generate
+
+    Note: more information on flask-jwt partially protecting routes:
+
+        http://flask-jwt-extended.readthedocs.io/en/latest/optional_endpoints.html
 
     '''
 
@@ -164,6 +168,10 @@ def login():
             - 3, supplied password does not match stored password
             - 4, generic login failure:
                 - https://www.owasp.org/index.php/Authentication_Cheat_Sheet
+
+    Note: more information on basic flask-jwt token authentication:
+
+        http://flask-jwt-extended.readthedocs.io/en/latest/basic_usage.html
 
     '''
 
