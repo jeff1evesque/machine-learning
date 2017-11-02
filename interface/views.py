@@ -34,6 +34,11 @@ from brain.converter.crypto import hash_pass, verify_pass
 from brain.database.entity import Entity
 from brain.database.dataset import Collection
 from brain.cache.query import Query
+from flask_jwt_extended import (
+    JWTManager,
+    create_access_token,
+    get_jwt_identity
+)
 
 
 # local variables
@@ -43,6 +48,9 @@ blueprint = Blueprint(
     template_folder='interface/templates',
     static_folder='interface/static'
 )
+
+# setup the Flask-JWT-Extended extension
+jwt = JWTManager(blueprint)
 
 
 @blueprint.route('/', defaults={'path': ''})
@@ -64,6 +72,7 @@ def index(path):
 
 
 @blueprint.route('/load-data', methods=['POST'], endpoint='load_data')
+@jwt_optional
 def load_data():
     '''
 
@@ -78,9 +87,11 @@ def load_data():
     '''
 
     if request.method == 'POST':
+        # jwt token user
+        current_user = get_jwt_identity()
 
         # programmatic-interface
-        if request.get_json():
+        if current_user and request.get_json():
             # send data to brain
             loader = Load_Data(request.get_json())
             if loader.get_session_type()['session_type']:
@@ -159,8 +170,8 @@ def login():
     if request.method == 'POST':
         account = Account()
 
-        # programmatic-interface
-        if request.get_json():
+        # programmatic-interface: implement flask-jwt token
+        if not current_user and request.get_json():
             results = request.get_json()
             if results['session']:
                 # initialize redis connector
@@ -182,18 +193,13 @@ def login():
                     hashed_password = account.get_password(username)['result']
                     uid = account.get_uid(username)['result']
 
-                    # set session: uid corresponds to primary key, from the
-                    #              user database table, and a unique integer
-                    #              representing the username.
-                    session['uid'] = uid
+                    # create and serialize uid token
+                    access_token = create_access_token(identity=uid)
 
                     # return status
-                    return json.dumps({'status': 0})
-            else:
-                username = results['user']
-                password = results['password']
+                    return json.dumps({'status': 0, 'access_token': access_token})
 
-        # web-interface
+        # web-interface: store user session in redis
         elif request.form:
             # local variables
             username = request.form.getlist('user[login]')[0]

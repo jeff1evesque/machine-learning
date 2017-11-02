@@ -43,6 +43,7 @@ development:
     pip:
         general:
             flask-script: '2.0.5'
+            flask-jwt-extended: '3.3.4'
             jsonschema: '2.5.1'
             pytest-flask: '0.10.0'
             six: '1.5.2'
