@@ -27,19 +27,21 @@ def test_session(client, live_server):
     password = 'password123'
     payload = {'user[login]': username, 'user[password]': password}
 
-    # check redis for session
+    # login and get flask-jwt token
     login = client.post(
         '/login',
         headers={'Content-Type': 'application/json'},
         data=payload
     )
+    token = login.json['access_token']
 
-    if session.get('uid'):
+    # logout
+    if token:
         logout = client.post('/logout')
     else:
         assert False
 
-    # check logout succeeded
+    # assertion checks
+    assert token
     assert login.status_code == 200
     assert logout.status_code == 200
-    assert not session.get('uid')
