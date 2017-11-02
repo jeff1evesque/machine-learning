@@ -45,7 +45,11 @@ def test_login(client, live_server):
             if verify_pass(str(password), hashed_password):
                 # post requests: login response
                 payload = {'user[login]': username, 'user[password]': password}
-                login = client.post(url, data=payload)
+                login = client.post(
+                    url,
+                    headers={'Content-Type': 'application/json'},
+                    data=payload
+                )
 
                 assert login.status_code == 200
                 assert session.get('uid') == 1

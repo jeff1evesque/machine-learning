@@ -28,10 +28,14 @@ def test_session(client, live_server):
     payload = {'user[login]': username, 'user[password]': password}
 
     # check redis for session
-    login = client.post('/login', data=payload)
+    login = client.post(
+        '/login',
+        headers={'Content-Type': 'application/json'},
+        data=payload
+    )
 
     if session.get('uid'):
-        raise Exception('repr(request.cookies): ' + repr(request.cookies))
+        raise Exception('login.json: ' + repr(login.json))
         logout = client.post('/logout')
     else:
         assert False
