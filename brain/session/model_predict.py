@@ -13,6 +13,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+from flask import current_app
 from brain.session.base import Base
 from brain.session.predict import sv
 from brain.session.predict import bag
