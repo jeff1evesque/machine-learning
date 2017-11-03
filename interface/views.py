@@ -169,6 +169,11 @@ def login():
             - 4, generic login failure:
                 - https://www.owasp.org/index.php/Authentication_Cheat_Sheet
 
+    Note: token authentication is stateless, since it doesn't require anything
+        to be queried from the server, to verify the user. The token is setup,
+        in such a way, where it is known, if the token is valid or not, and if
+        the token has been tampered with.
+
     Note: more information on basic flask-jwt token authentication:
 
         http://flask-jwt-extended.readthedocs.io/en/latest/basic_usage.html
