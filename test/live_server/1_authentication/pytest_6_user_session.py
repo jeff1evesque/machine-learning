@@ -26,11 +26,7 @@ def test_session(client, live_server):
     payload = {'user[login]': username, 'user[password]': password}
 
     # login and get flask-jwt token
-    login = client.post(
-        '/login',
-        headers={'Content-Type': 'application/json'},
-        data=payload
-    )
+    login = client.post('/login', data=payload)
     token = login.json['access_token']
 
     # logout
