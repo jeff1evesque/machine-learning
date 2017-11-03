@@ -37,6 +37,7 @@ from brain.cache.query import Query
 from flask_jwt_extended import (
     JWTManager,
     create_access_token,
+    jwt_optional,
     get_jwt_identity
 )
 
@@ -91,7 +92,6 @@ def load_data():
     '''
 
     if request.method == 'POST':
-        # jwt token user
         current_user = get_jwt_identity()
 
         # programmatic-interface
@@ -182,6 +182,7 @@ def login():
 
     if request.method == 'POST':
         account = Account()
+        current_user = get_jwt_identity()
 
         # programmatic-interface: implement flask-jwt token
         if not current_user and request.get_json():

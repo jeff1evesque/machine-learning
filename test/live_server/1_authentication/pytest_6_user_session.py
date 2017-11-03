@@ -9,8 +9,6 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-from flask import request, session
-
 
 def test_session(client, live_server):
     '''
