@@ -9,6 +9,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
+import json
 from flask import session
 
 
@@ -32,7 +33,11 @@ def test_logout(client, live_server):
     payload = {'user[login]': username, 'user[password]': password}
 
     # post requests: login, and logout response
-    login = client.post('/login', data=payload)
+    login = client.post(
+        '/login',
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps(payload)
+    )
 
     if session.get('uid'):
         logout = client.post('/logout')

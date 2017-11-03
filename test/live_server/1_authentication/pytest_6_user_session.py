@@ -9,6 +9,8 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
+import json
+
 
 def test_session(client, live_server):
     '''
@@ -26,7 +28,11 @@ def test_session(client, live_server):
     payload = {'user[login]': username, 'user[password]': password}
 
     # login and get flask-jwt token
-    login = client.post('/login', data=payload)
+    login = client.post(
+        '/login',
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps(payload)
+    )
     token = login.json['access_token']
 
     # logout

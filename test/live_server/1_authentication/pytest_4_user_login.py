@@ -9,6 +9,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
+import json
 from flask import session
 from brain.database.account import Account
 from brain.converter.crypto import verify_pass
@@ -45,7 +46,11 @@ def test_login(client, live_server):
             if verify_pass(str(password), hashed_password):
                 # post requests: login response
                 payload = {'user[login]': username, 'user[password]': password}
-                login = client.post(url, data=payload)
+                login = client.post(
+                    '/login',
+                    headers={'Content-Type': 'application/json'},
+                    data=json.dumps(payload)
+                )
 
                 assert login.status_code == 200
                 assert session.get('uid') == 1
