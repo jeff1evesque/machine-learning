@@ -7,7 +7,7 @@ This file serializes, and deserializes an SVM object
 '''
 
 from six.moves import cPickle as pickle
-from sklearn import svm, preprocessing
+from sklearn import svm, preprocessing, ensemble
 
 
 class Model(object):
@@ -32,6 +32,8 @@ class Model(object):
         self.acceptable = [
             svm.classes.SVC,
             svm.classes.SVR,
+            ensemble.classes.BaggingClassifier,
+            ensemble.classes.BaggingRegressor,
             preprocessing.label.LabelEncoder
         ]
 
