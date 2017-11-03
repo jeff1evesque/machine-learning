@@ -18,6 +18,7 @@ from flask import Flask, g
 from logging.handlers import RotatingFileHandler
 from brain.cache.session import RedisSessionInterface
 from interface.views import blueprint
+from flask_jwt_extended import JWTManager
 
 
 # application factory
@@ -79,6 +80,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
 
     # register blueprint
     app.register_blueprint(blueprint)
+
+    # set the flask-jwt-extended extension
+    JWTManager(app)
 
     # local logger: used for this module
     root = general['root']

@@ -35,12 +35,10 @@ from brain.database.entity import Entity
 from brain.database.dataset import Collection
 from brain.cache.query import Query
 from flask_jwt_extended import (
-    JWTManager,
     create_access_token,
     jwt_optional,
     get_jwt_identity
 )
-
 
 # local variables
 blueprint = Blueprint(
@@ -49,9 +47,6 @@ blueprint = Blueprint(
     template_folder='interface/templates',
     static_folder='interface/static'
 )
-
-# setup the flask-jwt-extended extension
-jwt = JWTManager(blueprint)
 
 
 @blueprint.route('/', defaults={'path': ''})
