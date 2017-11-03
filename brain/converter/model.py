@@ -32,8 +32,8 @@ class Model(object):
         self.acceptable = [
             svm.classes.SVC,
             svm.classes.SVR,
-            ensemble.classes.BaggingClassifier,
-            ensemble.classes.BaggingRegressor,
+            ensemble.bagging.BaggingClassifier,
+            ensemble.bagging.BaggingRegressor,
             preprocessing.label.LabelEncoder
         ]
 
