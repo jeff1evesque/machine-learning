@@ -28,6 +28,24 @@ the ``data`` attribute, in a given ``POST`` request:
 
     requests.post(endpoint_url, headers=headers, data=json_string_here)
 
+To submit a ``/load-data`` request, as a valid authenticated user, a valid token
+must be suppied to the ``headers``:
+
+.. code:: python
+
+    import requests
+
+    endpoint_url = 'https://localhost:8080/load-data'
+    headers={
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+    },
+
+    requests.post(endpoint_url, headers=headers, data=json_string_here)
+
+**Note:** more information, regarding how to obtain a valid ``token``, can be further
+reviewed, in the ``/login`` `documentation <https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst>`_.
+
 The following properties define the above ``data`` attribute:
 
 - ``collection``: collection of dataset documents, used as a reference to add additional dataset documents into
