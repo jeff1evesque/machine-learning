@@ -29,7 +29,7 @@ class DataAppend(BaseData):
 
     '''
 
-    def __init__(self, premodel_data):
+    def __init__(self, premodel_data, uid):
         '''
 
         This constructor inherits additional class properties, from the
