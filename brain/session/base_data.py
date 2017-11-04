@@ -12,7 +12,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 import datetime
 from brain.session.base import Base
-from flask import current_app, session
+from flask import current_app
 from brain.session.data.dataset import dataset2dict
 from brain.database.dataset import Collection
 from brain.database.entity import Entity
@@ -51,7 +51,7 @@ class BaseData(Base):
         self.premodel_data = premodel_data
 
         if uid:
-            self.uid = session['uid']
+            self.uid = uid
             self.max_collection = current_app.config.get('MAXCOL_AUTH')
             self.max_document = current_app.config.get('MAXDOC_AUTH')
 
