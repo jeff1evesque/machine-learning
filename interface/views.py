@@ -88,7 +88,7 @@ def load_data():
         current_user = get_jwt_identity()
 
         # programmatic-interface
-        if current_user and request.get_json():
+        if request.get_json():
             # send data to brain
             loader = Load_Data(request.get_json())
             if loader.get_session_type()['session_type']:
