@@ -42,6 +42,6 @@ def test_session(client, live_server):
         assert False
 
     # assertion checks
-    assert token
     assert login.status_code == 200
+    assert token
     assert logout.status_code == 200
