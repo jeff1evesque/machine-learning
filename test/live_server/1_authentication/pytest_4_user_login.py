@@ -10,7 +10,6 @@ Note: the 'pytest' instances can further be reviewed:
 '''
 
 import json
-from flask import session
 from brain.database.account import Account
 from brain.converter.crypto import verify_pass
 
@@ -52,7 +51,7 @@ def test_login(client, live_server):
                 )
 
                 assert login.status_code == 200
-                assert session.get('uid') == 1
+                assert login.json['uid'] == 1
             else:
                 assert False
 
