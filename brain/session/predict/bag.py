@@ -22,7 +22,7 @@ def predict(model, collection, predictors):
         collection_adjusted
     )
 
-    prediction = (clf.predict([predictors]))
+    prediction = clf.predict([predictors])
 
     if model in cs:
         encoded_labels = Model().uncache(
@@ -32,7 +32,12 @@ def predict(model, collection, predictors):
 
         textual_label = encoded_labels.inverse_transform(prediction)
         probability = clf.predict_proba([predictors])
-        decision_function = clf.decision_function([predictors])
+        try:
+            decision_function = clf.decision_function([predictors])
+            dec_ret = list(decision_function[0])
+        except:
+            decision_function = None
+            dec_ret = None
         classes = [encoded_labels.inverse_transform(x) for x in clf.classes_]
 
         return {
@@ -41,7 +46,7 @@ def predict(model, collection, predictors):
             'confidence': {
                 'classes': list(classes),
                 'probability': list(probability[0]),
-                'decision_function': list(decision_function[0])
+                'decision_function': dec_ret
             },
             'error': None
         }
