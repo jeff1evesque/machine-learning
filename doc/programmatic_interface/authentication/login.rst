@@ -51,7 +51,7 @@ a valid token, to the ``/load-data`` endpoint:
 Should correspond to executing the following session, as an authenticated user:
 
 - `data-new <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`_
-- `data-append <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`
+- `data-append <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`_
 
 The following unit tests, provides examples of the `flask-jwt <http://flask-jwt-extended.readthedocs.io/en/latest/>`_
 implementation:
