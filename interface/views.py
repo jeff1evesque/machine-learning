@@ -175,7 +175,6 @@ def login():
 
     if request.method == 'POST':
         account = Account()
-        current_user = get_jwt_identity()
 
         # programmatic-interface: implement flask-jwt token
         if request.get_json():

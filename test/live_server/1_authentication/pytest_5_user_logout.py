@@ -10,7 +10,6 @@ Note: the 'pytest' instances can further be reviewed:
 '''
 
 import json
-from flask import session
 
 
 def test_logout(client, live_server):
