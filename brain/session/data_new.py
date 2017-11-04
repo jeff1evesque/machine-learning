@@ -36,7 +36,7 @@ class DataNew(BaseData):
         '''
 
         # superclass constructor
-        BaseData.__init__(self, premodel_data)
+        BaseData.__init__(self, premodel_data, uid)
 
     def save_entity(self, session_type, id_entity=None):
         '''
