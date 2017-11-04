@@ -16,7 +16,8 @@ def bagging(
     k=10,
     be=None,
     features=1.0,
-    samples=1.0
+    samples=1.0,
+    random_state=None
 ):
     '''
 
@@ -80,7 +81,8 @@ def baggen(
     feat=1.0,
     samples=1.0,
     be=None,
-    bnum=10
+    bnum=10,
+    random_state=None
 ):
     '''
 
@@ -144,7 +146,8 @@ def baggen(
             be=be,
             features=feat,
             samples=samples,
-            k=bnum
+            k=bnum,
+            random_state=random_state
         )
 
         Model(label_encoder).cache(model + '_labels', collection_adjusted)
@@ -158,7 +161,8 @@ def baggen(
             be=be,
             features=feat,
             samples=samples,
-            k=bnum
+            k=bnum,
+            random_state=random_state
         )
 
         r2 = clf.score(features, labels)
