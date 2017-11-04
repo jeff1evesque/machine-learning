@@ -32,7 +32,7 @@ class BaseData(Base):
 
     '''
 
-    def __init__(self, premodel_data):
+    def __init__(self, premodel_data, uid):
         '''
 
         This constructor inherits additional class properties, from the
@@ -50,7 +50,7 @@ class BaseData(Base):
         self.model_type = premodel_data['properties']['model_type']
         self.premodel_data = premodel_data
 
-        if 'uid' in session:
+        if uid:
             self.uid = session['uid']
             self.max_collection = current_app.config.get('MAXCOL_AUTH')
             self.max_document = current_app.config.get('MAXDOC_AUTH')
@@ -116,7 +116,6 @@ class BaseData(Base):
         ):
             current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
             self.premodel_data['properties']['datetime_saved'] = current_utc
-            self.premodel_data['properties']['uid'] = self.uid
             document = {
                 'properties': self.premodel_data['properties'],
                 'dataset': self.dataset

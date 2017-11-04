@@ -13,6 +13,7 @@ from brain.session.data_new import DataNew
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
 from brain.database.session import Session
+from brain.database.account import Account
 
 
 class Load_Data(object):
@@ -29,7 +30,7 @@ class Load_Data(object):
 
     '''
 
-    def __init__(self, data):
+    def __init__(self, data, username=None):
         '''
 
         This constructor is responsible for defining class variables.
@@ -45,6 +46,22 @@ class Load_Data(object):
         ]
         self.list_error = []
 
+        # flask session user
+        if 'uid' in session and session['uid']:
+            self.uid = session['uid']
+
+        # flask jwt-token user
+        elif username:
+            uid = Account().get_uid(username)
+            if uid['result']:
+                self.uid = uid['result']
+            else:
+                self.uid = current_app.config.get('USER_ID')
+
+        # unauthenticated user
+        else:
+            self.uid = current_app.config.get('USER_ID')
+
     def load_data_new(self):
         '''
 
@@ -54,7 +71,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = DataNew(self.data)
+        session = DataNew(self.data, self.uid)
 
         # implement class methods
         if not session.validate_arg_none():
@@ -89,7 +106,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = DataAppend(self.data)
+        session = DataAppend(self.data, self.uid)
 
         # define current session id
         collection = self.data['properties']['collection']

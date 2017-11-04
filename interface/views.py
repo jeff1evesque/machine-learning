@@ -90,7 +90,7 @@ def load_data():
         # programmatic-interface
         if request.get_json():
             # send data to brain
-            loader = Load_Data(request.get_json())
+            loader = Load_Data(request.get_json(), current_user)
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
 
