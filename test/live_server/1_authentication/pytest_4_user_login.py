@@ -30,7 +30,6 @@ def test_login(client, live_server):
     # local variables
     username = 'jeff1evesque'
     password = 'password123'
-    url = '/login'
     authenticate = Account()
 
     # validate: username exists

@@ -18,7 +18,6 @@ decorators are defined, which flask triggers for specific URL's.
 '''
 
 import json
-import pickle
 from flask import Blueprint, render_template, request, session
 from brain.load_data import Load_Data
 from brain.converter.settings import Settings
@@ -33,7 +32,6 @@ from brain.database.prediction import Prediction
 from brain.converter.crypto import hash_pass, verify_pass
 from brain.database.entity import Entity
 from brain.database.dataset import Collection
-from brain.cache.query import Query
 from flask_jwt_extended import (
     create_access_token,
     jwt_optional,
@@ -177,9 +175,10 @@ def login():
 
     if request.method == 'POST':
         account = Account()
+        current_user = get_jwt_identity()
 
         # programmatic-interface: implement flask-jwt token
-        if not current_user and request.get_json():
+        if request.get_json():
             results = request.get_json()
             username = results['user[login]']
             password = results['user[password]']
