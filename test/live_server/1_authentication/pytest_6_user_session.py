@@ -43,5 +43,7 @@ def test_session(client, live_server):
 
     # assertion checks
     assert login.status_code == 200
+    assert login.json['status'] == 0
     assert token
     assert logout.status_code == 200
+    assert logout.json['status'] == 0

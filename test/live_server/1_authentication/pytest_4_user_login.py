@@ -51,7 +51,7 @@ def test_login(client, live_server):
                 )
 
                 assert login.status_code == 200
-                assert login.json['uid'] == 1
+                assert login.json['status'] == 0
             else:
                 assert False
 

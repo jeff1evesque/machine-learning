@@ -47,5 +47,5 @@ def test_logout(client, live_server):
     # assertion checks
     assert login.status_code == 200
     assert logout.status_code == 200
-    assert login.json['uid'] == 1
-    assert not logout.json['uid']
+    assert login.json['status'] == 0
+    assert logout.json['status'] == 0
