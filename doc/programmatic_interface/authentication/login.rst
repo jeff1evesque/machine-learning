@@ -56,8 +56,8 @@ Should correspond to executing the following session, as an authenticated user:
 The following unit tests, provides examples of the `flask-jwt <http://flask-jwt-extended.readthedocs.io/en/latest/>`_
 implementation:
 
-  - |login|_
+- |pytest_6_user_session.py|_
 
-.. |login| replace:: ``login``
-.. _login: https://github.com/jeff1evesque/machine-learning/tree/master/test/live_server/1_authentication/pytest_4_user_login
+.. |pytest_6_user_session.py| replace:: ``pytest_6_user_session.py``
+.. _pytest_6_user_session.py: https://github.com/jeff1evesque/machine-learning/tree/master/test/live_server/1_authentication/pytest_6_user_login.py
   
