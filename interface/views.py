@@ -177,36 +177,44 @@ def login():
 
     if request.method == 'POST':
         account = Account()
-        current_user = get_jwt_identity()
 
         # programmatic-interface: implement flask-jwt token
         if not current_user and request.get_json():
             results = request.get_json()
-            if results['session']:
-                # initialize redis connector
-                redis = Query()
-                redis.start_redis()
+            username = results['user[login]']
+            password = results['user[password]']
 
-                # get username
-                supplied = results['session']
-                pickled = redis.get(supplied)
+            # validate: check username exists
+            if (
+                account.check_username(username)['result'] and
+                account.get_uid(username)['result']
+            ):
 
-                username = pickle.loads(pickled)
-                # validate: check username exists
-                if (
-                    account.check_username(username)['result'] and
-                    account.get_uid(username)['result']
-                ):
+                # database query: get hashed password, and userid
+                hashed_password = account.get_password(username)['result']
+                uid = account.get_uid(username)['result']
 
-                    # database query: get hashed password, and userid
-                    hashed_password = account.get_password(username)['result']
-                    uid = account.get_uid(username)['result']
+                # notification: verify hashed password exists
+                if hashed_password:
 
-                    # create and serialize uid token
-                    access_token = create_access_token(identity=uid)
+                    # notification: verify password
+                    if verify_pass(str(password), hashed_password):
+                        # create and serialize uid token
+                        access_token = create_access_token(identity=uid)
 
-                    # return status
-                    return json.dumps({'status': 0, 'access_token': access_token})
+                        # return status
+                        return json.dumps({'status': 0, 'access_token': access_token})
+
+                    # notification: incorrect password
+                    else:
+                        return json.dumps({'status': 4})
+                # notification: user does not have a password
+                else:
+                    return json.dumps({'status': 4})
+
+            # notification: username does not exist
+            else:
+                return json.dumps({'status': 4})
 
         # web-interface: store user session in redis
         elif request.form:
