@@ -8,7 +8,7 @@ json.dumps(
 '''
 
 import json
-from flask import session
+from flask import current_app, session
 from brain.session.data_append import DataAppend
 from brain.session.data_new import DataNew
 from brain.session.model_generate import ModelGenerate
