@@ -38,7 +38,7 @@ a valid token, to the ``/load-data`` endpoint:
     )
     token = login.json['access_token']
 
-    # login and get flask-jwt token
+    # provide flask-jwt token
     login = client.post(
         '/load-data',
         headers={
@@ -48,7 +48,8 @@ a valid token, to the ``/load-data`` endpoint:
         data=payload
     )
 
-Should correspond to executing the following session, as an authenticated user:
+The following sessions, can be implemented with the above token, or omitted as
+an anonymous user:
 
 - `data-new <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`_
 - `data-append <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`_
