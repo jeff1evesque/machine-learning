@@ -28,9 +28,8 @@ the ``data`` attribute, in a given ``POST`` request:
 
     requests.post(endpoint_url, headers=headers, data=json_string_here)
 
-It is important to note, that the above `POST` request, will be sent as an
-unauthenticated, anonymous user. To submit a `/load-data` request, a valid
-authenticated user, a valid token must be suppied to the `headers`:
+To submit a ``/load-data`` request, as a valid authenticated user, a valid token
+must be suppied to the ``headers``:
 
 .. code:: python
 
@@ -44,8 +43,8 @@ authenticated user, a valid token must be suppied to the `headers`:
 
     requests.post(endpoint_url, headers=headers, data=json_string_here)
 
-**Note:** more information regarding how to obtain a valid `token`, can be further
-reviewed, in the `/login` `documentation <https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst>`_.
+**Note:** more information, regarding how to obtain a valid ``token``, can be further
+reviewed, in the ``/login`` `documentation <https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst>`_.
 
 The following properties define the above ``data`` attribute:
 
