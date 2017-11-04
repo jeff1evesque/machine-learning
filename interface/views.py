@@ -242,7 +242,10 @@ def login():
                         session['uid'] = uid
 
                         # return user status
-                        return json.dumps({'status': 0})
+                        if session['uid']:
+                            return json.dumps({'status': 0})
+                        else:
+                            return json.dumps({'status': 4})
                     # notification: incorrect password
                     else:
                         return json.dumps({'status': 4})
