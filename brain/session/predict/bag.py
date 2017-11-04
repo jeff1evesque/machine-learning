@@ -30,9 +30,9 @@ def predict(model, collection, predictors):
             collection_adjusted
         )
 
-        textual_label = encoded_labels.inverse_transform([prediction])
-        probability = clf.predict_proba(predictors)
-        decision_function = clf.decision_function(predictors)
+        textual_label = encoded_labels.inverse_transform(prediction)
+        probability = clf.predict_proba([predictors])
+        decision_function = clf.decision_function([predictors])
         classes = [encoded_labels.inverse_transform(x) for x in clf.classes_]
 
         return {
