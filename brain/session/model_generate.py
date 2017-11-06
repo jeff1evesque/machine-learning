@@ -15,6 +15,7 @@ from brain.session.model.sv import generate
 from brain.session.model.bagger import baggen
 from flask import current_app
 
+
 class ModelGenerate(Base):
     '''
 
