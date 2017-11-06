@@ -151,5 +151,20 @@ def test_model_predict(client, live_server):
     )
 
     # assertion checks
-    assert res.status_code == 200
-    assert res.json['status'] == 0
+    assert not res.json['result']['confidence']['decision_function']
+    assert res.json['result']['confidence']['classes'] == [
+        'dep-variable-1',
+        'dep-variable-2',
+        'dep-variable-3',
+        'dep-variable-4',
+        'dep-variable-5'
+    ]
+    assert res.json['result']['confidence']['probability'] == [
+        0.5,
+        0.0,
+        0.1,
+        0.1,
+        0.3
+    ]
+    assert res.json['result']['model'] == 'bagc'
+    assert res.json['result']['result'] == 'dep-variable-1'

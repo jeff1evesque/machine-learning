@@ -149,4 +149,21 @@ def test_model_predict(client, live_server):
         data=get_sample_json('bagc-model-predict.json', 'bagc')
     )
 
+    # assertion checks
+    assert not res.json['result']['confidence']['decision_function']
+    assert res.json['result']['confidence']['classes'] == [
+        'dep-variable-1',
+        'dep-variable-2',
+        'dep-variable-3',
+        'dep-variable-4',
+        'dep-variable-5'
+    ]
+    assert res.json['result']['confidence']['probability'] == [
+        0.3,
+        0.0,
+        0.2,
+        0.1,
+        0.4
+    ]
     assert res.json['result']['model'] == 'bagc'
+    assert res.json['result']['result'] == 'dep-variable-5'
