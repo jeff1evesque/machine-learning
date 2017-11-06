@@ -122,6 +122,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
         SCRYPT_P=crypto['scrypt_p'],
         PASSWORD_MIN_C=validate_password['password_min_c'],
         PASSWORD_MAX_C=validate_password['password_max_c'],
+        RANDOM_STATE=application['dataset']['random_state'],
         USER_ID=0
     )
 
