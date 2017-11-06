@@ -9,7 +9,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
-from flask import session
+import json
 
 
 def test_logout(client, live_server):
@@ -32,14 +32,15 @@ def test_logout(client, live_server):
     payload = {'user[login]': username, 'user[password]': password}
 
     # post requests: login, and logout response
-    login = client.post('/login', data=payload)
+    login = client.post(
+        '/login',
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps(payload)
+    )
+    logout = client.post('/logout')
 
-    if session.get('uid'):
-        logout = client.post('/logout')
-    else:
-        assert False
-
-    # check logout succeeded
+    # assertion checks
     assert login.status_code == 200
     assert logout.status_code == 200
-    assert not session.get('uid')
+    assert login.json['status'] == 0
+    assert logout.json['status'] == 0
