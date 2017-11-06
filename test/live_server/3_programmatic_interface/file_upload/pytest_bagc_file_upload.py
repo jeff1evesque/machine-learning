@@ -159,11 +159,11 @@ def test_model_predict(client, live_server):
         'dep-variable-5'
     ]
     assert res.json['result']['confidence']['probability'] == [
-        0.3,
+        0.5,
         0.0,
-        0.2,
         0.1,
-        0.4
+        0.1,
+        0.3
     ]
     assert res.json['result']['model'] == 'bagc'
     assert res.json['result']['result'] == 'dep-variable-5'
