@@ -38,109 +38,134 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     vagrant@trusty64:/vagrant/test$ ./unit-tests
     ...
     ============================= test session starts ==============================
-    platform linux2 -- Python 2.7.6, pytest-3.0.7, py-1.4.33, pluggy-0.4.0
+    platform linux2 -- Python 2.7.6, pytest-3.2.3, py-1.4.34, pluggy-0.4.0
     rootdir: /var/machine-learning/test/live_server, inifile: pytest.ini
     plugins: flask-0.10.0, cov-2.4.0
-    collected 21 items
-
-    test/live_server/authentication/pytest_account_registration.py .
-    test/live_server/authentication/pytest_crypto.py .
-    test/live_server/authentication/pytest_user_login.py .
-    test/live_server/authentication/pytest_user_logout.py .
-    test/live_server/authentication/pytest_validate_password.py .
-    test/live_server/programmatic_interface/dataset_url/pytest_svm_dataset_url.py ....
-    test/live_server/programmatic_interface/dataset_url/pytest_svr_dataset_url.py ....
-    test/live_server/programmatic_interface/file_upload/pytest_svm_file_upload.py ....
-    test/live_server/programmatic_interface/file_upload/pytest_svr_file_upload.py ....
+    collected 57 items                                                              
+    test/live_server/1_authentication/pytest_1_crypto.py .
+    test/live_server/1_authentication/pytest_2_account_registration.py .
+    test/live_server/1_authentication/pytest_3_validate_password.py .
+    test/live_server/1_authentication/pytest_4_user_login.py .
+    test/live_server/1_authentication/pytest_5_user_logout.py .
+    test/live_server/1_authentication/pytest_6_user_session.py .
+    test/live_server/2_database/pytest_svm_dbmax.py ..........
+    test/live_server/2_database/pytest_svr_dbmax.py ..........
+    test/live_server/3_programmatic_interface/dataset_url/pytest_bagc_dataset_url.py ....
+    test/live_server/3_programmatic_interface/dataset_url/pytest_svm_dataset_url.py ....
+    test/live_server/3_programmatic_interface/dataset_url/pytest_svr_dataset_url.py ....
+    test/live_server/3_programmatic_interface/file_upload/pytest_bagc_file_upload.py ....
+    test/live_server/3_programmatic_interface/file_upload/pytest_svm_file_upload.py ....
+    test/live_server/3_programmatic_interface/file_upload/pytest_svr_file_upload.py ....
+    test/live_server/3_programmatic_interface/results/pytest_1_svm_prediction.py ...
+    test/live_server/3_programmatic_interface/results/pytest_2_svr_prediction.py ...
+    test/live_server/3_programmatic_interface/results/pytest_3_all_prediction_titles.py .
 
     ---------- coverage: platform linux2, python 2.7.6-final-0 -----------
-    Name                                                                            Stmts   Miss  Cover
-    ---------------------------------------------------------------------------------------------------
-    __init__.py                                                                         0      0   100%
-    app.py                                                                             12     12     0%
-    brain/__init__.py                                                                   0      0   100%
-    brain/cache/__init__.py                                                             0      0   100%
-    brain/cache/hset.py                                                                22     14    36%
-    brain/cache/model.py                                                               36     26    28%
-    brain/cache/query.py                                                               87     77    11%
-    brain/cache/session.py                                                             54     54     0%
-    brain/cache/settings.py                                                            14     10    29%
-    brain/converter/__init__.py                                                         0      0   100%
-    brain/converter/crypto.py                                                          45      6    87%
-    brain/converter/dataset.py                                                         45     29    36%
-    brain/converter/md5.py                                                              9      9     0%
-    brain/converter/model.py                                                           12      7    42%
-    brain/converter/operation.py                                                       45     45     0%
-    brain/converter/settings.py                                                        45     25    44%
-    brain/converter/svm/__init__.py                                                     0      0   100%
-    brain/converter/svm/csv2dict.py                                                    38     38     0%
-    brain/converter/svm/json2dict.py                                                   58     10    83%
-    brain/converter/svm/xml2dict.py                                                    27     27     0%
-    brain/converter/svr/__init__.py                                                     0      0   100%
-    brain/converter/svr/csv2dict.py                                                    38     38     0%
-    brain/converter/svr/json2dict.py                                                   58     10    83%
-    brain/converter/svr/xml2dict.py                                                    30     30     0%
-    brain/database/__init__.py                                                          0      0   100%
-    brain/database/account.py                                                          58     15    74%
-    brain/database/entity.py                                                           35      9    74%
-    brain/database/feature.py                                                          59     13    78%
-    brain/database/model_type.py                                                       18      7    61%
-    brain/database/observation.py                                                      25      7    72%
-    brain/database/query.py                                                            55     24    56%
-    brain/database/session.py                                                          22     22     0%
-    brain/database/settings.py                                                         19     13    32%
-    brain/load_data.py                                                                 89     29    67%
-    brain/schema/__init__.py                                                            0      0   100%
-    brain/schema/session.py                                                            13      5    62%
-    brain/session/__init__.py                                                           0      0   100%
-    brain/session/base.py                                                              27     16    41%
-    brain/session/base_data.py                                                         55     30    45%
-    brain/session/data/__init__.py                                                      0      0   100%
-    brain/session/data/arbiter.py                                                      74     41    45%
-    brain/session/data/dataset.py                                                      58     14    76%
-    brain/session/data_append.py                                                       15      8    47%
-    brain/session/data_new.py                                                          16      8    50%
-    brain/session/model/__init__.py                                                     0      0   100%
-    brain/session/model/sv.py                                                          64     16    75%
-    brain/session/model_generate.py                                                    20      9    55%
-    brain/session/model_predict.py                                                     14      7    50%
-    brain/session/predict/__init__.py                                                   0      0   100%
-    brain/session/predict/sv.py                                                        21      5    76%
-    brain/validator/__init__.py                                                         0      0   100%
-    brain/validator/dataset.py                                                         15      8    47%
-    brain/validator/file_extension.py                                                  62     40    35%
-    brain/validator/password.py                                                        43      4    91%
-    brain/validator/settings.py                                                        43     18    58%
-    factory.py                                                                         44      8    82%
-    interface/__init__.py                                                               0      0   100%
-    interface/views.py                                                                131     96    27%
-    log/__init__.py                                                                     0      0   100%
-    log/logger.py                                                                      84     50    40%
-    puppet/__init__.py                                                                  0      0   100%
-    puppet/environment/__init__.py                                                      0      0   100%
-    puppet/environment/docker/__init__.py                                               0      0   100%
-    puppet/environment/docker/modules/__init__.py                                       0      0   100%
-    puppet/environment/docker/modules/mariadb/__init__.py                               0      0   100%
-    puppet/environment/docker/modules/mariadb/scripts/__init__.py                       0      0   100%
-    puppet/environment/docker/modules/mariadb/scripts/setup_tables.py                  50     50     0%
-    puppet/environment/vagrant/__init__.py                                              0      0   100%
-    puppet/environment/vagrant/modules/__init__.py                                      0      0   100%
-    puppet/environment/vagrant/modules/mariadb/__init__.py                              0      0   100%
-    puppet/environment/vagrant/modules/mariadb/scripts/__init__.py                      0      0   100%
-    puppet/environment/vagrant/modules/mariadb/scripts/setup_tables.py                 50     50     0%
-    test/live_server/authentication/pytest_account_registration.py                     20      3    85%
-    test/live_server/authentication/pytest_crypto.py                                   15      2    87%
-    test/live_server/authentication/pytest_user_login.py                               20      3    85%
-    test/live_server/authentication/pytest_user_logout.py                              13      1    92%
-    test/live_server/authentication/pytest_validate_password.py                        16      2    88%
-    test/live_server/conftest.py                                                       12      2    83%
-    test/live_server/programmatic_interface/dataset_url/pytest_svm_dataset_url.py      49      0   100%
-    test/live_server/programmatic_interface/dataset_url/pytest_svr_dataset_url.py      43      0   100%
-    test/live_server/programmatic_interface/file_upload/pytest_svm_file_upload.py      49      0   100%
-    test/live_server/programmatic_interface/file_upload/pytest_svr_file_upload.py      43      0   100%
-    ---------------------------------------------------------------------------------------------------
-    TOTAL                                                                            2234   1102    51%
-    ========================== 21 passed in 52.19 seconds ==========================
+    Name                                                                                  Stmts   Miss  Cover
+    ---------------------------------------------------------------------------------------------------------
+    __init__.py                                                                               0      0   100%
+    app.py                                                                                   12     12     0%
+    brain/__init__.py                                                                         0      0   100%
+    brain/cache/__init__.py                                                                   0      0   100%
+    brain/cache/hset.py                                                                      22     14    36%
+    brain/cache/model.py                                                                     34     24    29%
+    brain/cache/query.py                                                                     87     77    11%
+    brain/cache/session.py                                                                   51     32    37%
+    brain/cache/settings.py                                                                  14     10    29%
+    brain/converter/__init__.py                                                               0      0   100%
+    brain/converter/crypto.py                                                                45      6    87%
+    brain/converter/format/__init__.py                                                        0      0   100%
+    brain/converter/format/csv2dict.py                                                       21     21     0%
+    brain/converter/format/xml2dict.py                                                       19     19     0%
+    brain/converter/md5.py                                                                    9      9     0%
+    brain/converter/model.py                                                                 12      7    42%
+    brain/converter/operation.py                                                             45     45     0%
+    brain/converter/settings.py                                                              50     50     0%
+    brain/database/__init__.py                                                                0      0   100%
+    brain/database/account.py                                                                53     15    72%
+    brain/database/dataset.py                                                                16      6    63%
+    brain/database/entity.py                                                                 60     22    63%
+    brain/database/model_type.py                                                             17      7    59%
+    brain/database/prediction.py                                                             89     19    79%
+    brain/database/query.py                                                                 125     59    53%
+    brain/database/session.py                                                                30     20    33%
+    brain/database/settings.py                                                               46     24    48%
+    brain/load_data.py                                                                       83     37    55%
+    brain/schema/__init__.py                                                                  0      0   100%
+    brain/schema/dataset.py                                                                   7      3    57%
+    brain/schema/session.py                                                                  13      5    62%
+    brain/session/__init__.py                                                                 0      0   100%
+    brain/session/base.py                                                                    25     15    40%
+    brain/session/base_data.py                                                               61     25    59%
+    brain/session/data/__init__.py                                                            0      0   100%
+    brain/session/data/dataset.py                                                            70     49    30%
+    brain/session/data_append.py                                                             29     12    59%
+    brain/session/data_new.py                                                                27     10    63%
+    brain/session/model/__init__.py                                                           0      0   100%
+    brain/session/model/adabooster.py                                                        50     50     0%
+    brain/session/model/bagger.py                                                            59     18    69%
+    brain/session/model/sv.py                                                                44      8    82%
+    brain/session/model_generate.py                                                          26     10    62%
+    brain/session/model_predict.py                                                           20      9    55%
+    brain/session/predict/__init__.py                                                         0      0   100%
+    brain/session/predict/adaboost.py                                                        18     18     0%
+    brain/session/predict/bag.py                                                             27      8    70%
+    brain/session/predict/sv.py                                                              22      5    77%
+    brain/validator/__init__.py                                                               0      0   100%
+    brain/validator/dataset.py                                                               16     16     0%
+    brain/validator/email.py                                                                  7      3    57%
+    brain/validator/password.py                                                              43      4    91%
+    brain/validator/settings.py                                                              41     18    56%
+    factory.py                                                                               55     16    71%
+    interface/__init__.py                                                                     0      0   100%
+    interface/views.py                                                                      248    143    42%
+    log/__init__.py                                                                           0      0   100%
+    log/logger.py                                                                            84     84     0%
+    puppet/__init__.py                                                                        0      0   100%
+    puppet/environment/__init__.py                                                            0      0   100%
+    puppet/environment/docker/__init__.py                                                     0      0   100%
+    puppet/environment/docker/modules/__init__.py                                             0      0   100%
+    puppet/environment/docker/modules/mariadb/__init__.py                                     0      0   100%
+    puppet/environment/docker/modules/mariadb/scripts/__init__.py                             0      0   100%
+    puppet/environment/docker/modules/mariadb/scripts/setup_tables.py                        40     40     0%
+    puppet/environment/vagrant/__init__.py                                                    0      0   100%
+    puppet/environment/vagrant/modules/__init__.py                                            0      0   100%
+    puppet/environment/vagrant/modules/mariadb/__init__.py                                    0      0   100%
+    puppet/environment/vagrant/modules/mariadb/scripts/__init__.py                            0      0   100%
+    puppet/environment/vagrant/modules/mariadb/scripts/setup_tables.py                       40     40     0%
+    test/live_server/1_authentication/pytest_1_crypto.py                                     15      2    87%
+    test/live_server/1_authentication/pytest_2_account_registration.py                       21      3    86%
+    test/live_server/1_authentication/pytest_3_validate_password.py                          16      2    88%
+    test/live_server/1_authentication/pytest_4_user_login.py                                 19      3    84%
+    test/live_server/1_authentication/pytest_5_user_logout.py                                12      0   100%
+    test/live_server/1_authentication/pytest_6_user_session.py                               16      1    94%
+    test/live_server/2_database/pytest_svm_dbmax.py                                         102      0   100%
+    test/live_server/2_database/pytest_svr_dbmax.py                                         103      0   100%
+    test/live_server/3_programmatic_interface/dataset_url/pytest_bagc_dataset_url.py         37      0   100%
+    test/live_server/3_programmatic_interface/dataset_url/pytest_svm_dataset_url.py          52      0   100%
+    test/live_server/3_programmatic_interface/dataset_url/pytest_svr_dataset_url.py          42      0   100%
+    test/live_server/3_programmatic_interface/file_upload/pytest_bagc_file_upload.py         36      0   100%
+    test/live_server/3_programmatic_interface/file_upload/pytest_svm_file_upload.py          52      0   100%
+    test/live_server/3_programmatic_interface/file_upload/pytest_svr_file_upload.py          42      0   100%
+    test/live_server/3_programmatic_interface/results/pytest_1_svm_prediction.py             64     17    73%
+    test/live_server/3_programmatic_interface/results/pytest_2_svr_prediction.py             62     17    73%
+    test/live_server/3_programmatic_interface/results/pytest_3_all_prediction_titles.py      33      7    79%
+    test/live_server/conftest.py                                                             12      2    83%
+    ---------------------------------------------------------------------------------------------------------
+    TOTAL                                                                                  2748   1198    56%
+    =============================== warnings summary ===============================
+    3_programmatic_interface/results/pytest_1_svm_prediction.py::test_save_prediction
+      /var/machine-learning/brain/database/query.py:281: Warning: Data truncated for column 'probability' at row 1
+        self.cursor.execute(statement, sql_args)
+      /var/machine-learning/brain/database/query.py:281: Warning: Data truncated for column 'decision_function' at row 1
+        self.cursor.execute(statement, sql_args)
+
+    3_programmatic_interface/results/pytest_2_svr_prediction.py::test_save_prediction
+      /var/machine-learning/brain/database/query.py:281: Warning: Data truncated for column 'r2' at row 1
+        self.cursor.execute(statement, sql_args)
+
+    -- Docs: http://doc.pytest.org/en/latest/warnings.html
+    =================== 57 passed, 3 warnings in 120.34 seconds ====================
 
 **Note:** future releases (i.e. milestone `1.0 <https://github.com/jeff1evesque/machine-learning/milestones/1.0>`_),
 will include more granular unit tests, or better logical order, such that particular

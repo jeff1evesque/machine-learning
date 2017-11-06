@@ -9,6 +9,7 @@ This project provides a [web-interface](https://github.com/jeff1evesque/machine-
 
 - [Support Vector Machine](https://en.wikipedia.org/wiki/Support_vector_machine) (SVM)
 - [Support Vector Regression](https://en.wikipedia.org/wiki/Support_vector_machine#Regression) (SVR)
+- [Bootstrap Aggregation](https://en.wikipedia.org/wiki/Bootstrap_aggregating) (Classifier)
 
 ## Contributing
 

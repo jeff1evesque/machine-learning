@@ -7,6 +7,7 @@ result, into the applications database, via the ``/save-prediction`` endpoint:
 
 - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/results/save-prediction.json>`_
 - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/results/save-prediction.json>`_
+- `bagc example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bagc/results/save-prediction.json>`_
 
 **Note:** the content of each of the above examples, can be substituted for
 the ``data`` attribute, in a given ``POST`` request:
@@ -31,6 +32,7 @@ The following properties define the above ``data`` attribute:
 
   - ``svm``: pertains only to the support vector machine model type
   - ``svr``: pertains only to the suppport vector regression model type
+  - ``bagc``: pertains only to the bootstrap aggregation classifier model type
 
 - ``title``: desired name to assign the proposed prediction result.
 
