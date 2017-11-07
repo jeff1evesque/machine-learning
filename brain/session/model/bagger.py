@@ -57,7 +57,8 @@ def bagging(
             n_estimators=k,
             max_samples=samples,
             max_features=features,
-            verbose=0
+            verbose=0,
+            random_state=random_state
         )
     elif model in regressors:
         bagger = sklearn.ensemble.BaggingRegressor(
@@ -65,7 +66,8 @@ def bagging(
             n_estimators=k,
             max_samples=samples,
             max_features=features,
-            verbose=0
+            verbose=0,
+            random_state=random_state
         )
 
     # train bagger
