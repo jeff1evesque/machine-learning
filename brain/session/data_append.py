@@ -29,7 +29,7 @@ class DataAppend(BaseData):
 
     '''
 
-    def __init__(self, premodel_data):
+    def __init__(self, premodel_data, uid):
         '''
 
         This constructor inherits additional class properties, from the
@@ -38,7 +38,7 @@ class DataAppend(BaseData):
         '''
 
         # superclass constructor
-        BaseData.__init__(self, premodel_data)
+        BaseData.__init__(self, premodel_data, uid)
 
         # class variable
         if session.get('uid'):
