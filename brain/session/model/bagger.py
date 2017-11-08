@@ -16,7 +16,8 @@ def bagging(
     k=10,
     be=None,
     features=1.0,
-    samples=1.0
+    samples=1.0,
+    random_state=None
 ):
     '''
 
@@ -34,18 +35,19 @@ def bagging(
     '''
 
     # local variables
+    bagger = None
     list_model_type = current_app.config.get('MODEL_TYPE')
     classifiers = [
-        list_model_type[3],
-        list_model_type[5],
-        list_model_type[6],
-        list_model_type[9]
-    ]
-    regressors = [
+        list_model_type[2],
         list_model_type[4],
         list_model_type[6],
+        list_model_type[8]
+    ]
+    regressors = [
+        list_model_type[3],
+        list_model_type[5],
         list_model_type[7],
-        list_model_type[10]
+        list_model_type[9]
     ]
 
     # set up the ensembler
@@ -55,7 +57,8 @@ def bagging(
             n_estimators=k,
             max_samples=samples,
             max_features=features,
-            verbose=0
+            verbose=0,
+            random_state=random_state
         )
     elif model in regressors:
         bagger = sklearn.ensemble.BaggingRegressor(
@@ -63,11 +66,13 @@ def bagging(
             n_estimators=k,
             max_samples=samples,
             max_features=features,
-            verbose=0
+            verbose=0,
+            random_state=random_state
         )
 
     # train bagger
-    return bagger.fit(dataset, labels)
+    if bagger is not None:
+        return bagger.fit(dataset, labels)
 
 
 def baggen(
@@ -78,7 +83,8 @@ def baggen(
     feat=1.0,
     samples=1.0,
     be=None,
-    bnum=10
+    bnum=10,
+    random_state=None
 ):
     '''
 
@@ -87,6 +93,8 @@ def baggen(
     '''
 
     # local variables
+    clf = None
+    sortedf = None
     labels = []
     features = []
     cursor = Collection()
@@ -96,16 +104,16 @@ def baggen(
     collection_adjusted = collection.lower().replace(' ', '_')
     datasets = cursor.query(collection_adjusted, 'aggregate', payload)
     classifiers = [
-        list_model_type[3],
-        list_model_type[5],
-        list_model_type[6],
-        list_model_type[9]
-    ]
-    regressors = [
+        list_model_type[2],
         list_model_type[4],
         list_model_type[6],
+        list_model_type[8]
+    ]
+    regressors = [
+        list_model_type[3],
+        list_model_type[5],
         list_model_type[7],
-        list_model_type[10]
+        list_model_type[9]
     ]
 
     for D in datasets['result']:
@@ -116,11 +124,12 @@ def baggen(
                 if model in regressors:
                     labels.append(float(o['dependent-variable']))
                     sortedf = [float(v) for k, v in sorted(f.items())]
+                    features.append(sortedf)
+
                 elif model in classifiers:
                     labels.append(o['dependent-variable'])
                     sortedf = [v for k, v in sorted(f.items())]
-
-                features.append(sortedf)
+                    features.append(sortedf)
 
                 if not sorted_labels:
                     sorted_labels = [k for k, v in sorted(f.items())]
@@ -139,7 +148,8 @@ def baggen(
             be=be,
             features=feat,
             samples=samples,
-            k=bnum
+            k=bnum,
+            random_state=random_state
         )
 
         Model(label_encoder).cache(model + '_labels', collection_adjusted)
@@ -153,23 +163,23 @@ def baggen(
             be=be,
             features=feat,
             samples=samples,
-            k=bnum
+            k=bnum,
+            random_state=random_state
         )
 
         r2 = clf.score(features, labels)
-
         Hset().cache(
             model + '_r2',
             collection_adjusted,
             r2
         )
 
-    Model(clf).cache(model + '_model', collection_adjusted)
-
-    Hset().cache(
-        model + '_feature_labels',
-        collection,
-        json.dumps(sorted_labels)
-    )
+    if clf:
+        Model(clf).cache(model + '_model', collection_adjusted)
+        Hset().cache(
+            model + '_feature_labels',
+            collection,
+            json.dumps(sorted_labels)
+        )
 
     return {'error': list_error}

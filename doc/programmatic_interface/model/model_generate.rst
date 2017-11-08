@@ -9,6 +9,7 @@ session. The required attributes, for the corresponding session, is sent to the
 
 - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/dataset_url/svm-model-generate.json>`_
 - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/dataset_url/svr-model-generate.json>`_
+- `bagc example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bagc/dataset_url/bagc-model-generate.json>`_
 
 **Note:** the content of each of the above examples, can be substituted for
 the ``data`` attribute, in a given ``POST`` request:
@@ -37,6 +38,7 @@ The following properties define the above ``data`` attribute:
 
   - ``svm``
   - ``svr``
+  - ``bagc``
 
 - ``sv_kernel_type``: the type of kernel to apply to the support vector ``model_type``:
 

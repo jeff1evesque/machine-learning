@@ -10,8 +10,8 @@ development:
     apt:
         general:
             inotify-tools: '3.14-1ubuntu1'
-            libssl-dev: '1.0.1f-1ubuntu2.22'
-            openssl: '1.0.1f-1ubuntu2.22'
+            libssl-dev: '1.0.1f-1ubuntu2.2*'
+            openssl: '1.0.1f-1ubuntu2.2*'
 
         custom:
             redis-server: '2:2.8.4-2'
@@ -39,6 +39,7 @@ development:
     pip:
         general:
             flask-script: '2.0.5'
+            flask-jwt-extended: '3.3.4'
             jsonschema: '2.5.1'
             pytest-flask: '0.10.0'
             six: '1.5.2'

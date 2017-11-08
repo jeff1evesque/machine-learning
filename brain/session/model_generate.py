@@ -12,6 +12,8 @@ into respective database table(s), which later can be retrieved within
 
 from brain.session.base import Base
 from brain.session.model.sv import generate
+from brain.session.model.bagger import baggen
+from flask import current_app
 
 
 class ModelGenerate(Base):
@@ -40,9 +42,6 @@ class ModelGenerate(Base):
         '''
 
         super(ModelGenerate, self).__init__(premodel_data)
-        premodel_settings = self.premodel_data['properties']
-        self.collection = premodel_settings['collection']
-        self.kernel = str(premodel_settings['sv_kernel_type'])
         self.list_error = []
 
     def generate_model(self):
@@ -56,17 +55,32 @@ class ModelGenerate(Base):
 
         # local variables
         result = None
+        premodel_settings = self.premodel_data['properties']
         model_type = self.premodel_data['properties']['model_type']
+        self.collection = premodel_settings['collection']
         payload = [{'$project': {'dataset': 1}}]
 
         # case 1: svm model, or svr model
         if (model_type == 'svm') or (model_type == 'svr'):
+            kernel = str(premodel_settings['sv_kernel_type'])
             result = generate(
                 model_type,
-                self.kernel,
+                kernel,
                 self.collection,
                 payload,
                 self.list_error
+            )
+
+        # case 2: ensemble bagger
+        if model_type == 'bagc':
+            rand = current_app.config.get('RANDOM_STATE')
+            rand = None if rand == 'None' else rand
+            result = baggen(
+                model_type,
+                self.collection,
+                payload,
+                self.list_error,
+                random_state=rand
             )
 
         # store any errors

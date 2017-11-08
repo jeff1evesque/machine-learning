@@ -1,0 +1,15 @@
+{
+    "properties": {
+        "collection": "bagc-1",
+        "session_type": "model_predict",
+        "prediction_input[]": [
+            "22.22",
+            "96.24",
+            "338",
+            "72.55",
+            "0.001",
+            "28",
+            "0.678"
+        ]
+    }
+}

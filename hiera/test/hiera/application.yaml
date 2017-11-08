@@ -26,6 +26,7 @@ application:
         authenticated:
             max_collection: 150
             max_document: 30
+        random_state: 332
     security_key: 'change-this'
     model_type:
         - svm
@@ -51,7 +52,6 @@ application:
     warning_log_path: '/log/application/warning'
     info_log_path: '/log/application/info'
     debug_log_path: '/log/application/debug'
-
 crypto:
     salt_length: 32
     scrypt_n: 18

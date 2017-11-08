@@ -32,7 +32,11 @@ from brain.database.prediction import Prediction
 from brain.converter.crypto import hash_pass, verify_pass
 from brain.database.entity import Entity
 from brain.database.dataset import Collection
-
+from flask_jwt_extended import (
+    create_access_token,
+    jwt_optional,
+    get_jwt_identity
+)
 
 # local variables
 blueprint = Blueprint(
@@ -62,6 +66,7 @@ def index(path):
 
 
 @blueprint.route('/load-data', methods=['POST'], endpoint='load_data')
+@jwt_optional
 def load_data():
     '''
 
@@ -73,14 +78,19 @@ def load_data():
         - model_predict
         - model_generate
 
+    Note: more information on flask-jwt partially protecting routes:
+
+        http://flask-jwt-extended.readthedocs.io/en/latest/optional_endpoints.html
+
     '''
 
     if request.method == 'POST':
+        current_user = get_jwt_identity()
 
         # programmatic-interface
         if request.get_json():
             # send data to brain
-            loader = Load_Data(request.get_json())
+            loader = Load_Data(request.get_json(), current_user)
             if loader.get_session_type()['session_type']:
                 session_type = loader.get_session_type()['session_type']
 
@@ -152,47 +162,99 @@ def login():
             - 4, generic login failure:
                 - https://www.owasp.org/index.php/Authentication_Cheat_Sheet
 
+    Note: token authentication is stateless, since it doesn't require anything
+        to be queried from the server, to verify the user. The token is setup,
+        in such a way, where it is known, if the token is valid or not, and if
+        the token has been tampered with.
+
+    Note: more information on basic flask-jwt token authentication:
+
+        http://flask-jwt-extended.readthedocs.io/en/latest/basic_usage.html
+
     '''
 
     if request.method == 'POST':
-        # local variables
-        username = request.form.getlist('user[login]')[0]
-        password = request.form.getlist('user[password]')[0]
         account = Account()
 
-        # validate: check username exists
-        if (
-            account.check_username(username)['result'] and
-            account.get_uid(username)['result']
-        ):
+        # programmatic-interface: implement flask-jwt token
+        if request.get_json():
+            results = request.get_json()
+            username = results['user[login]']
+            password = results['user[password]']
 
-            # database query: get hashed password, and userid
-            hashed_password = account.get_password(username)['result']
-            uid = account.get_uid(username)['result']
+            # validate: check username exists
+            if (
+                account.check_username(username)['result'] and
+                account.get_uid(username)['result']
+            ):
 
-            # notification: verify hashed password exists
-            if hashed_password:
+                # database query: get hashed password, and userid
+                hashed_password = account.get_password(username)['result']
+                uid = account.get_uid(username)['result']
 
-                # notification: verify password
-                if verify_pass(str(password), hashed_password):
-                    # set session: uid corresponds to primary key, from the
-                    #              user database table, and a unique integer
-                    #              representing the username.
-                    session['uid'] = uid
+                # notification: verify hashed password exists
+                if hashed_password:
 
-                    # return user status
-                    return json.dumps({'status': 0})
-                # notification: incorrect password
+                    # notification: verify password
+                    if verify_pass(str(password), hashed_password):
+                        # create and serialize uid token
+                        access_token = create_access_token(identity=uid)
+
+                        # return status
+                        return json.dumps({'status': 0, 'access_token': access_token})
+
+                    # notification: incorrect password
+                    else:
+                        return json.dumps({'status': 4})
+                # notification: user does not have a password
                 else:
                     return json.dumps({'status': 4})
 
-            # notification: user does not have a password
+            # notification: username does not exist
             else:
                 return json.dumps({'status': 4})
 
-        # notification: username does not exist
-        else:
-            return json.dumps({'status': 4})
+        # web-interface: store user session in redis
+        elif request.form:
+            # local variables
+            username = request.form.getlist('user[login]')[0]
+            password = request.form.getlist('user[password]')[0]
+
+            # validate: check username exists
+            if (
+                account.check_username(username)['result'] and
+                account.get_uid(username)['result']
+            ):
+
+                # database query: get hashed password, and userid
+                hashed_password = account.get_password(username)['result']
+                uid = account.get_uid(username)['result']
+
+                # notification: verify hashed password exists
+                if hashed_password:
+
+                    # notification: verify password
+                    if verify_pass(str(password), hashed_password):
+                        # set session: uid corresponds to primary key, from the
+                        #              user database table, and a unique integer
+                        #              representing the username.
+                        session['uid'] = uid
+
+                        # return user status
+                        if session['uid']:
+                            return json.dumps({'status': 0})
+                        else:
+                            return json.dumps({'status': 4})
+                    # notification: incorrect password
+                    else:
+                        return json.dumps({'status': 4})
+                # notification: user does not have a password
+                else:
+                    return json.dumps({'status': 4})
+
+            # notification: username does not exist
+            else:
+                return json.dumps({'status': 4})
 
 
 @blueprint.route('/logout', methods=['GET', 'POST'])

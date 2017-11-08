@@ -13,8 +13,10 @@ Note: the term 'dataset' used throughout various comments in this file,
 
 '''
 
+from flask import current_app
 from brain.session.base import Base
-from brain.session.predict.sv import predict
+from brain.session.predict import sv
+from brain.session.predict import bag
 from brain.database.model_type import ModelType
 
 
@@ -63,6 +65,11 @@ class ModelPredict(Base):
 
         '''
 
+        list_model_type = current_app.config.get('MODEL_TYPE')
         # get model type
         model_type = ModelType().get_model_type(self.collection)['result']
-        return predict(model_type, self.collection, self.predictors)
+
+        if model_type in [list_model_type[0], list_model_type[1]]:
+            return sv.predict(model_type, self.collection, self.predictors)
+        elif model_type in list_model_type[2:10]:
+            return bag.predict(model_type, self.collection, self.predictors)

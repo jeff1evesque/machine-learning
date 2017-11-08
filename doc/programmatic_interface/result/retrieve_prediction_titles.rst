@@ -8,6 +8,7 @@ titles, based upon the supplied ``model_type``, from the applications database, 
 
 - `svm example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svm/results/retrieve-titles.json>`_
 - `svr example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/svr/results/retrieve-titles.json>`_
+- `bagc example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/bagc/results/retrieve-titles.json>`_
 - `combined example <https://github.com/jeff1evesque/machine-learning/blob/master/interface/static/data/json/programmatic_interface/combined/results/retrieve-titles.json>`_
 
 **Note:** the content of each of the above examples, can be substituted for
@@ -29,3 +30,4 @@ The following properties define the above ``data`` attribute:
   - ``all``: pertains to all stored model types
   - ``svm``: pertains only to the support vector machine model type
   - ``svr``: pertains only to the suppport vector regression model type
+  - ``bagc``: pertains only to the bootstrap aggregation classifier model type
