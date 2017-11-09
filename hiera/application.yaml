@@ -26,6 +26,7 @@ application:
         authenticated:
             max_collection: 150
             max_document: 30
+        random_state: 'None'
     security_key: 'change-this'
     model_type:
         - svm

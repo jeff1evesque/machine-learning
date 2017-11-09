@@ -13,6 +13,7 @@ into respective database table(s), which later can be retrieved within
 from brain.session.base import Base
 from brain.session.model.sv import generate
 from brain.session.model.bagger import baggen
+from flask import current_app
 
 
 class ModelGenerate(Base):
@@ -72,11 +73,14 @@ class ModelGenerate(Base):
 
         # case 2: ensemble bagger
         if model_type == 'bagc':
+            rand = current_app.config.get('RANDOM_STATE')
+            rand = None if rand == 'None' else rand
             result = baggen(
                 model_type,
                 self.collection,
                 payload,
-                self.list_error
+                self.list_error,
+                random_state=rand
             )
 
         # store any errors
