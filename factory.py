@@ -82,7 +82,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
     app.register_blueprint(blueprint)
 
     # set the flask-jwt-extended extension
-    jwt_manager.init__app(app)
+    jwt_manager.init_app(app)
 
     # local logger: used for this module
     root = general['root']
