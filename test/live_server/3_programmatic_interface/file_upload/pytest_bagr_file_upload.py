@@ -69,7 +69,7 @@ def test_data_new(client, live_server):
     res = client.post(
         get_endpoint(),
         headers={'Content-Type': 'application/json'},
-        data=get_sample_json('-data-new.json', 'bagr')
+        data=get_sample_json('bagr-data-new.json', 'bagr')
     )
 
     # assertion checks
