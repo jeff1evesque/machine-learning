@@ -1,7 +1,7 @@
 {
 	"properties": {
             "session_name": "sample_bgr_title",
-            "collection": "bgr-2",
+            "collection": "bagr-2",
             "dataset_type": "file_upload",
             "session_type": "data_new",
             "model_type": "bagr",
