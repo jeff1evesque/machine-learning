@@ -15,10 +15,10 @@ Note: both the handler, and logger has levels. If the level of the logger is
 import yaml
 import logging
 from flask import Flask, g
+from extensions import jwt_manager
 from logging.handlers import RotatingFileHandler
 from brain.cache.session import RedisSessionInterface
 from interface.views import blueprint
-from flask_jwt_extended import JWTManager
 
 
 # application factory
@@ -82,7 +82,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
     app.register_blueprint(blueprint)
 
     # set the flask-jwt-extended extension
-    JWTManager(app)
+    jwt_manager.init__app(app)
 
     # local logger: used for this module
     root = general['root']

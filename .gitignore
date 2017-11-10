@@ -21,6 +21,7 @@
 !*.dockerfile
 !.coveragerc
 !/utility/
+!extensions.py
 
 # Ignore and don't commit the following directories
 *.sass-cache/
