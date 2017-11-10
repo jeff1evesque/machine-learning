@@ -16,8 +16,8 @@ import yaml
 import logging
 from flask import Flask, g
 from extensions import jwt_manager
-from logging.handlers import RotatingFileHandler
 from brain.cache.session import RedisSessionInterface
+from logging.handlers import RotatingFileHandler
 from interface.views import blueprint
 
 
@@ -68,6 +68,9 @@ def create_app(args={'prefix': '', 'settings': ''}):
             static_folder='interface/static',
         )
 
+    # secret key: used for maintaining flask sessions
+    app.secret_key = application['security_key']
+
     # replace default cookie session with server-side redis
     app.session_interface = RedisSessionInterface(
         cache['host'],
@@ -75,18 +78,15 @@ def create_app(args={'prefix': '', 'settings': ''}):
         cache['db']
     )
 
-    # secret key: used for maintaining flask sessions
-    app.secret_key = application['security_key']
+    # set the flask-jwt-extended extension
+    jwt_manager.init_app(app)
 
     # register blueprint
     app.register_blueprint(blueprint)
 
-    # set the flask-jwt-extended extension
-    jwt_manager.init_app(app)
-
     # local logger: used for this module
-    root = general['root']
-    LOG_PATH = root + webserver['flask']['log_path']
+    ROOT = general['root']
+    LOG_PATH = ROOT + webserver['flask']['log_path']
     HANDLER_LEVEL = application['log_level']
 
     # flask attributes: accessible across application
@@ -95,7 +95,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
         CACHE_HOST=cache['host'],
         CACHE_PORT=cache['port'],
         CACHE_DB=cache['db'],
-        ROOT=general['root'],
+        ROOT=ROOT,
         SQL_HOST=sql['host'],
         SQL_LOG_PATH=sql['log_path'],
         SQL_DB=sql['name'],
