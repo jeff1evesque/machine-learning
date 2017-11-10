@@ -1,6 +1,6 @@
 {
     "properties": {
-        "collection": "bagc-2",
+        "collection": "bagr-2",
         "session_type": "model_predict",
         "prediction_input[]": [
             "22.22",
