@@ -83,7 +83,7 @@ sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*authorization:[[:space:]
 sudo docker restart mongodb
 
 ## run unit tests
-sudo docker run --name webserver-pytest --net=app_nw -it container-webserver test | sudo tee pytest.log
+sudo docker run-api --name webserver-pytest --net=app_nw -it container-webserver test | sudo tee pytest.log
 
 ## check unit test results
 ERRORS=$(grep '= FAILURES =\|= ERRORS =\|= no tests ran in 0.00 seconds =' pytest.log)

@@ -22,7 +22,7 @@ if len(sys.argv) > 1:
             '--cov', '.',
             'test/live_server'
         ])
-    elif sys.argv[1] == 'run':
+    elif sys.argv[1] == 'run-api':
         args = {
             'prefix': 'test/hiera',
             'instance': 'programmatic'
