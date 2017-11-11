@@ -60,6 +60,9 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
         static_folder='interface/static',
     )
 
+    ## flask 'session' secret key
+    app.secret_key = application['security_key']
+
     # set the flask-jwt-extended extension
     if args['instance'] == 'api':
         app.config['JWT_SECRET_KEY'] = application['security_key']
@@ -68,7 +71,6 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
 
     # replace default cookie session with server-side redis
     else:
-        app.secret_key = application['security_key']
         app.session_interface = RedisSessionInterface(
             cache['host'],
             cache['port'],
