@@ -21,7 +21,7 @@ def app():
     try:
         args = {
             'prefix': 'test/hiera',
-            'settings': ''
+            'instance': 'api'
         }
         app = create_app(args)
         app.testing = True

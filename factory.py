@@ -61,7 +61,7 @@ def create_app(args={'prefix': '', 'instance': ''}):
     )
 
     # set the flask-jwt-extended extension
-    if args['instance'] == 'programmatic':
+    if args['instance'] == 'api':
         app.config['JWT_SECRET_KEY'] = application['security_key']
         app.config['PROPAGATE_EXCEPTIONS'] = False
         jwt_manager.init_app(app)
