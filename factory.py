@@ -15,14 +15,14 @@ Note: both the handler, and logger has levels. If the level of the logger is
 import yaml
 import logging
 from flask import Flask, g
-from extensions import jwt_manager
 from brain.cache.session import RedisSessionInterface
+from extensions import jwt_manager
 from logging.handlers import RotatingFileHandler
 from interface.views import blueprint
 
 
 # application factory
-def create_app(args={'prefix': '', 'settings': ''}):
+def create_app(args={'prefix': '', 'instance': ''}):
     # path to hiera
     if args['prefix']:
         prepath = 'hiera/' + args['prefix']
@@ -54,32 +54,26 @@ def create_app(args={'prefix': '', 'settings': ''}):
         validate_password = settings['validate_password']
 
     # local variables
-    if args['settings']:
-        app = Flask(
-            __name__,
-            args['settings'],
-            template_folder='interface/templates',
-            static_folder='interface/static',
-        )
-    else:
-        app = Flask(
-            __name__,
-            template_folder='interface/templates',
-            static_folder='interface/static',
-        )
-
-    # secret key: used for maintaining flask sessions
-    app.secret_key = application['security_key']
-
-    # replace default cookie session with server-side redis
-    app.session_interface = RedisSessionInterface(
-        cache['host'],
-        cache['port'],
-        cache['db']
+    app = Flask(
+        __name__,
+        template_folder='interface/templates',
+        static_folder='interface/static',
     )
 
     # set the flask-jwt-extended extension
-    jwt_manager.init_app(app)
+    if args['instance'] == 'programmatic':
+        app.config['JWT_SECRET_KEY'] = application['security_key']
+        app.config['PROPAGATE_EXCEPTIONS'] = False
+        jwt_manager.init_app(app)
+
+    # replace default cookie session with server-side redis
+    else:
+        app.secret_key = application['security_key']
+        app.session_interface = RedisSessionInterface(
+            cache['host'],
+            cache['port'],
+            cache['db']
+        )
 
     # register blueprint
     app.register_blueprint(blueprint)
@@ -125,21 +119,25 @@ def create_app(args={'prefix': '', 'settings': ''}):
         USER_ID=0
     )
 
-    # log handler: requires the below logger
+    # log format
     formatter = logging.Formatter(
         "[%(asctime)s] {%(pathname)s:%(lineno)d} "
         "%(levelname)s - %(message)s"
     )
+
+    # initialize the log handler
     handler = RotatingFileHandler(
         LOG_PATH,
         maxBytes=10000000,
         backupCount=5
     )
+
+    # log handler level
     handler.setLevel(HANDLER_LEVEL)
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
 
-    # logger: complements the log handler
+    # app logger level
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.DEBUG)
     log.addHandler(handler)
