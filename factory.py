@@ -22,7 +22,7 @@ from interface.views import blueprint
 
 
 # application factory
-def create_app(args={'prefix': '', 'instance': ''}):
+def create_app(args={'prefix': '', 'instance': 'web'}):
     # path to hiera
     if args['prefix']:
         prepath = 'hiera/' + args['prefix']
