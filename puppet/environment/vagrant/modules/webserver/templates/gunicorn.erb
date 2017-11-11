@@ -30,7 +30,7 @@ expect fork
 script
     chdir <%= @root_dir %>
     gunicorn -b <%= @gunicorn_bind %>:<%= @gunicorn_programmatic_port %> --workers=<%= @gunicorn_workers %> 'factory:create_app({"prefix": "hiera", "instance": "api"})'
-    gunicorn -b <%= @gunicorn_bind %>:<%= @gunicorn_web_port %> --workers=<%= @gunicorn_workers %> 'factory:create_app({"prefix": "hiera", "instance": "api"})'
+    gunicorn -b <%= @gunicorn_bind %>:<%= @gunicorn_web_port %> --workers=<%= @gunicorn_workers %> 'factory:create_app({"prefix": "hiera", "instance": "web"})'
 end script
 
 ## log start-up date
