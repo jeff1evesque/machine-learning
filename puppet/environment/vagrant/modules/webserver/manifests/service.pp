@@ -6,32 +6,49 @@ class webserver::service {
     include webserver::start
 
     ## variables
-    $hiera_general       = lookup('general')
-    $hiera_development   = lookup('development')
-    $hiera_webserver     = lookup('webserver')
-    $template_path       = 'webserver/gunicorn.erb'
+    $hiera_general           = lookup('general')
+    $hiera_development       = lookup('development')
+    $hiera_webserver         = lookup('webserver')
+    $template_path           = 'webserver/gunicorn.erb'
 
-    $vagrant_mounted     = $hiera_general['vagrant_implement']
-    $root_dir            = $hiera_general['root']
-    $user                = $hiera_general['user']
-    $group               = $hiera_general['group']
+    $vagrant_mounted         = $hiera_general['vagrant_implement']
+    $root_dir                = $hiera_general['root']
+    $user                    = $hiera_general['user']
+    $group                   = $hiera_general['group']
 
-    $gunicorn            = $hiera_webserver['gunicorn']
-    $gunicorn_log_path   = "${root_dir}${gunicorn['log_path']}"
-    $gunicorn_bind       = $gunicorn['bind']
-    $gunicorn_port       = $gunicorn['port']
-    $gunicorn_workers    = $gunicorn['workers']
+    $gunicorn_web            = $hiera_webserver['gunicorn_web']
+    $gunicorn_log_path_web   = "${root_dir}${gunicorn['log_path']}"
+    $gunicorn_bind_web       = $gunicorn['bind']
+    $gunicorn_port_web       = $gunicorn['port']
+    $gunicorn_workers_web    = $gunicorn['workers']
 
-    $nginx               = $hiera_webserver['nginx']
-    $nginx_reverse_proxy = $nginx['reverse_proxy']
-    $nginx_cert          = $nginx['certificate']
-    $nginx_vhost         = $nginx_reverse_proxy['vhost']
-    $nginx_listen_port   = $nginx_reverse_proxy['listen_port']
-    $nginx_host_port     = $nginx_reverse_proxy['host_port']
-    $nginx_cert_path     = $nginx_cert['cert_path']
-    $nginx_pkey_path     = $nginx_cert['pkey_path']
-    $nginx_version       = $hiera_development['apt']['custom']['nginx']
-    $nginx_proxy         = "${nginx_reverse_proxy['proxy']}:${gunicorn_port}"
+    $gunicorn_api            = $hiera_webserver['gunicorn_api']
+    $gunicorn_log_path_api   = "${root_dir}${gunicorn['log_path']}"
+    $gunicorn_bind_api       = $gunicorn['bind']
+    $gunicorn_port_api       = $gunicorn['port']
+    $gunicorn_workers_api    = $gunicorn['workers']
+
+    $nginx_web               = $hiera_webserver['nginx_web']
+    $nginx_reverse_proxy_web = $nginx_web['reverse_proxy']
+    $nginx_cert_web          = $nginx_web['certificate']
+    $nginx_vhost_web         = $nginx_reverse_proxy_web['vhost']
+    $nginx_listen_port_web   = $nginx_reverse_proxy_web['listen_port']
+    $nginx_host_port_web     = $nginx_reverse_proxy_web['host_port']
+    $nginx_cert_path_web     = $nginx_cert_web['cert_path']
+    $nginx_pkey_path_web     = $nginx_cert_web['pkey_path']
+    $nginx_version_web       = $hiera_development['apt']['custom']['nginx']
+    $nginx_proxy_web         = "${nginx_reverse_proxy_web['proxy']}:${gunicorn_port_web}"
+
+    $nginx_api               = $hiera_webserver['nginx_api']
+    $nginx_reverse_proxy_api = $nginx_api['reverse_proxy']
+    $nginx_cert_api          = $nginx_api['certificate']
+    $nginx_vhost_api         = $nginx_reverse_proxy_api['vhost']
+    $nginx_listen_port_api   = $nginx_reverse_proxy_api['listen_port']
+    $nginx_host_port_api     = $nginx_reverse_proxy_api['host_port']
+    $nginx_cert_path_api     = $nginx_cert_api['cert_path']
+    $nginx_pkey_path_api     = $nginx_cert_api['pkey_path']
+    $nginx_version_api       = $hiera_development['apt']['custom']['nginx']
+    $nginx_proxy_api         = "${nginx_reverse_proxy_api['proxy']}:${gunicorn_port_api}"
 
     ## contain webserver dependencies
     contain python
@@ -43,20 +60,36 @@ class webserver::service {
         package_ensure => $nginx_version
     }
 
-    ## nginx: define reverse proxy
+    ## nginx: define reverse proxy, for web-interface
     ##
     ## @497, redirect 'http://' to 'https://'
     ##
-    nginx::resource::vhost { $nginx_reverse_proxy['vhost']:
+    nginx::resource::vhost { $nginx_reverse_proxy_web['vhost']:
         ssl         => true,
-        ssl_cert    => "${nginx_cert_path}/${nginx_vhost}.crt",
-        ssl_key     => "${nginx_pkey_path}/${nginx_vhost}.key",
-        listen_port => $nginx_listen_port,
-        ssl_port    => $nginx_listen_port,
+        ssl_cert    => "${nginx_cert_path_web}/${nginx_vhost_web}.crt",
+        ssl_key     => "${nginx_pkey_path_web}/${nginx_vhost_web}.key",
+        listen_port => $nginx_listen_port_web,
+        ssl_port    => $nginx_listen_port_web,
         error_pages => {
-            '497' => "https://\$host:${nginx_host_port}\$request_uri",
+            '497' => "https://\$host:${nginx_host_port_web}\$request_uri",
         },
-        proxy       => $nginx_proxy,
+        proxy       => $nginx_proxy_web,
+    }
+
+    ## nginx: define reverse proxy, for programmatic-api
+    ##
+    ## @497, redirect 'http://' to 'https://'
+    ##
+    nginx::resource::vhost { $nginx_reverse_proxy_api['vhost']:
+        ssl         => true,
+        ssl_cert    => "${nginx_cert_path_api}/${nginx_vhost_api}.crt",
+        ssl_key     => "${nginx_pkey_path_api}/${nginx_vhost_api}.key",
+        listen_port => $nginx_listen_port_api,
+        ssl_port    => $nginx_listen_port_api,
+        error_pages => {
+            '497' => "https://\$host:${nginx_host_port_api}\$request_uri",
+        },
+        proxy       => $nginx_proxy_api,
     }
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
