@@ -37,7 +37,7 @@ end script
 #  @DATE, preformatted string for datetime.
 pre-start script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE gunicorn server starting" >> <%= @gunicorn_log_path %>
+    echo "$DATE gunicorn server starting" >> <%= @gunicorn_log_path_api %>
 end script
 
 ## log shut-down date, remove process id from log before <%= @root_dir %> is
@@ -46,5 +46,5 @@ end script
 #  @DATE, preformatted string for datetime.
 pre-stop script
     DATE=$(date +'[%Y-%m-%d %H:%M:%S]')
-    echo "$DATE gunicorn server stopping" >> <%= @gunicorn_log_path %>
+    echo "$DATE gunicorn server stopping" >> <%= @gunicorn_log_path_api %>
 end script
