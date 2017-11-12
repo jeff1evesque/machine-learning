@@ -17,16 +17,16 @@ class webserver::service {
     $group                   = $hiera_general['group']
 
     $gunicorn_web            = $hiera_webserver['gunicorn_web']
-    $gunicorn_log_path_web   = "${root_dir}${gunicorn['log_path']}"
-    $gunicorn_bind_web       = $gunicorn['bind']
-    $gunicorn_port_web       = $gunicorn['port']
-    $gunicorn_workers_web    = $gunicorn['workers']
+    $gunicorn_log_path_web   = "${root_dir}${gunicorn_web['log_path']}"
+    $gunicorn_bind_web       = $gunicorn_web['bind']
+    $gunicorn_port_web       = $gunicorn_web['port']
+    $gunicorn_workers_web    = $gunicorn_web['workers']
 
     $gunicorn_api            = $hiera_webserver['gunicorn_api']
-    $gunicorn_log_path_api   = "${root_dir}${gunicorn['log_path']}"
-    $gunicorn_bind_api       = $gunicorn['bind']
-    $gunicorn_port_api       = $gunicorn['port']
-    $gunicorn_workers_api    = $gunicorn['workers']
+    $gunicorn_log_path_api   = "${root_dir}${gunicorn_api['log_path']}"
+    $gunicorn_bind_api       = $gunicorn_api['bind']
+    $gunicorn_port_api       = $gunicorn_api['port']
+    $gunicorn_workers_api    = $gunicorn_api['workers']
 
     $nginx_web               = $hiera_webserver['nginx_web']
     $nginx_reverse_proxy_web = $nginx_web['reverse_proxy']
@@ -60,7 +60,7 @@ class webserver::service {
         package_ensure => $nginx_version
     }
 
-    ## nginx: define reverse proxy, for web-interface
+    ## web-interface: define nginx reverse proxy
     ##
     ## @497, redirect 'http://' to 'https://'
     ##
@@ -76,7 +76,7 @@ class webserver::service {
         proxy       => $nginx_proxy_web,
     }
 
-    ## nginx: define reverse proxy, for programmatic-api
+    ## programmatic-api: define nginx reverse proxy
     ##
     ## @497, redirect 'http://' to 'https://'
     ##
