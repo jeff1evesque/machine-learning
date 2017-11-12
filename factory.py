@@ -53,24 +53,22 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
         crypto = settings['crypto']
         validate_password = settings['validate_password']
 
-    # local variables
-    app = Flask(
-        __name__,
-        template_folder='interface/templates',
-        static_folder='interface/static',
-    )
-
-    # flask 'session' secret key
-    app.secret_key = application['security_key']
-
-    # set the flask-jwt-extended extension
+    # programmatic-api: set the flask-jwt-extended extension
     if args['instance'] == 'api':
+        app = Flask(__name__)
+        app.secret_key = application['security_key']
         app.config['JWT_SECRET_KEY'] = application['security_key']
         app.config['PROPAGATE_EXCEPTIONS'] = False
         JWTManager(app)
 
-    # replace default cookie session with server-side redis
+    # web-interface: replace default cookie session with server-side redis
     else:
+        app = Flask(
+            __name__,
+            template_folder='interface/templates',
+            static_folder='interface/static',
+        )
+        app.secret_key = application['security_key']
         app.session_interface = RedisSessionInterface(
             cache['host'],
             cache['port'],
