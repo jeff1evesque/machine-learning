@@ -24,7 +24,7 @@ from interface.views import blueprint
 # application factory
 def create_app(args={'prefix': '', 'instance': 'web'}):
     # path to hiera
-    if args['prefix']:
+    if 'prefix' in args:
         prepath = 'hiera/' + args['prefix']
     else:
         prepath = 'hiera'
