@@ -1,10 +1,10 @@
 #!/bin/bash
 
 CWD=$(PWD)
-cd <%= @pkey_path %>
-openssl req -x509 -nodes -days <%= @cert_days %> \
-    -newkey rsa:<%= @cert_bit %> \
-    -keyout <%= @pkey_path %>/<%= @vhost %>.key \
-    -out <%= @cert_path %>/<%= @vhost %>.crt \
-    -subj '/C=<%= @cert_country %>/ST=<%= @cert_state %>/L=<%= @cert_locality %>/O=<%= @cert_org %>/OU=<%= @cert_unit %>/CN=<%= @vhost %>'
+cd <%= @pkey_path_web %>
+openssl req -x509 -nodes -days <%= @cert_days_web %> \
+    -newkey rsa:<%= @cert_bit_web %> \
+    -keyout <%= @pkey_path_web %>/<%= @vhost_web %>.key \
+    -out <%= @cert_path_web %>/<%= @vhost_web %>.crt \
+    -subj '/C=<%= @cert_country_web %>/ST=<%= @cert_state_web %>/L=<%= @cert_locality_web %>/O=<%= @cert_org_web %>/OU=<%= @cert_unit_web %>/CN=<%= @vhost_web %>'
 cd "$CWD"
