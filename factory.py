@@ -16,7 +16,7 @@ import yaml
 import logging
 from flask import Flask, g
 from brain.cache.session import RedisSessionInterface
-from extensions import jwt_manager
+from flask_jwt_extended import JWTManager
 from logging.handlers import RotatingFileHandler
 from interface.views import blueprint
 
@@ -67,7 +67,7 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
     if args['instance'] == 'api':
         app.config['JWT_SECRET_KEY'] = application['security_key']
         app.config['PROPAGATE_EXCEPTIONS'] = False
-        jwt_manager.init_app(app)
+        JWTManager(app)
 
     # replace default cookie session with server-side redis
     else:
