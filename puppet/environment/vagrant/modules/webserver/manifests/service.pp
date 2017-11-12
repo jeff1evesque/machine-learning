@@ -95,7 +95,7 @@ class webserver::service {
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     ##           windows.
-    file { '/etc/init/start_gunicorn_api.conf':
+    file { '/etc/init/gunicorn_api.conf':
         ensure  => file,
         content => dos2unix(template($template_path_api)),
         require => Class['compiler::initial_compile'],
@@ -104,7 +104,7 @@ class webserver::service {
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     ##           windows.
-    file { '/etc/init/start_gunicorn_web.conf':
+    file { '/etc/init/gunicorn_web.conf':
         ensure  => file,
         content => dos2unix(template($template_path_web)),
         require => Class['compiler::initial_compile'],
