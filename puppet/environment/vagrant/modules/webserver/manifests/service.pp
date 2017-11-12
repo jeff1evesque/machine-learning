@@ -9,7 +9,8 @@ class webserver::service {
     $hiera_general           = lookup('general')
     $hiera_development       = lookup('development')
     $hiera_webserver         = lookup('webserver')
-    $template_path           = 'webserver/gunicorn.erb'
+    $template_path_api       = 'webserver/gunicorn-api.erb'
+    $template_path_web       = 'webserver/gunicorn-web.erb'
 
     $vagrant_mounted         = $hiera_general['vagrant_implement']
     $root_dir                = $hiera_general['root']
@@ -94,9 +95,18 @@ class webserver::service {
 
     ## dos2unix: convert clrf (windows to linux) in case host machine is
     ##           windows.
-    file { '/etc/init/start_gunicorn.conf':
+    file { '/etc/init/start_gunicorn_api.conf':
         ensure  => file,
-        content => dos2unix(template($template_path)),
+        content => dos2unix(template($template_path_api)),
+        require => Class['compiler::initial_compile'],
+        notify  => Class['webserver::start'],
+    }
+
+    ## dos2unix: convert clrf (windows to linux) in case host machine is
+    ##           windows.
+    file { '/etc/init/start_gunicorn_web.conf':
+        ensure  => file,
+        content => dos2unix(template($template_path_web)),
         require => Class['compiler::initial_compile'],
         notify  => Class['webserver::start'],
     }

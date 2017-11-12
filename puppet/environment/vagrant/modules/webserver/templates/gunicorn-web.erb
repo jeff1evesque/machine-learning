@@ -29,8 +29,7 @@ expect fork
 ## start upstart job
 script
     chdir <%= @root_dir %>
-    gunicorn -b <%= @gunicorn_bind %>:<%= @gunicorn_programmatic_port %> --workers=<%= @gunicorn_workers %> 'factory:create_app({"prefix": "hiera", "instance": "api"})'
-    gunicorn -b <%= @gunicorn_bind %>:<%= @gunicorn_web_port %> --workers=<%= @gunicorn_workers %> 'factory:create_app({"prefix": "hiera", "instance": "web"})'
+    exec gunicorn -b <%= @gunicorn_bind_web %>:<%= @gunicorn_port_web %> --workers=<%= @gunicorn_workers_web %> 'factory:create_app({"prefix": "hiera", "instance": "web"})'
 end script
 
 ## log start-up date
