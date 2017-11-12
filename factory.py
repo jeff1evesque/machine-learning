@@ -60,7 +60,7 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
         static_folder='interface/static',
     )
 
-    ## flask 'session' secret key
+    # flask 'session' secret key
     app.secret_key = application['security_key']
 
     # set the flask-jwt-extended extension
