@@ -58,7 +58,6 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
         app = Flask(__name__)
         app.secret_key = application['security_key']
         app.config['JWT_SECRET_KEY'] = application['security_key']
-        app.config['PROPAGATE_EXCEPTIONS'] = False
         JWTManager(app)
 
     # web-interface: replace default cookie session with server-side redis
@@ -141,6 +140,9 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.DEBUG)
     log.addHandler(handler)
+
+    # allow error logging
+    app.config['PROPAGATE_EXCEPTIONS'] = False
 
     # return
     return app
