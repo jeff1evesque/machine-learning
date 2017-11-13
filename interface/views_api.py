@@ -40,7 +40,7 @@ blueprint_api = Blueprint('name', __name__)
 
 
 @blueprint_apiroute('/load-data', methods=['POST'], endpoint='load_data')
-@jwt_optional
+@jwt_required
 def load_data():
     '''
 
@@ -179,7 +179,7 @@ def logout():
 
 
 @blueprint_apiroute('/retrieve-collections', methods=['POST'])
-@jwt_optional
+@jwt_required
 def retrieve_collections():
     '''
 
@@ -203,7 +203,7 @@ def retrieve_collections():
     methods=['POST'],
     endpoint='retrieve_sv_model'
 )
-@jwt_optional
+@jwt_required
 def retrieve_sv_model():
     '''
 
@@ -244,7 +244,7 @@ def retrieve_sv_model():
     methods=['POST'],
     endpoint='retrieve_sv_features'
 )
-@jwt_optional
+@jwt_required
 def retrieve_sv_features():
     '''
 
@@ -278,7 +278,7 @@ def retrieve_sv_features():
     methods=['POST'],
     endpoint='retrieve_prediction_titles'
 )
-@jwt_optional
+@jwt_required
 def retrieve_prediction_titles():
     '''
 
@@ -332,7 +332,7 @@ def retrieve_prediction_titles():
     methods=['POST'],
     endpoint='retrieve_prediction'
 )
-@jwt_optional
+@jwt_required
 def retrieve_prediction():
     '''
 
@@ -417,7 +417,7 @@ def retrieve_prediction():
     methods=['POST'],
     endpoint='save_prediction'
 )
-@jwt_optional
+@jwt_required
 def save_prediction():
     '''
 
@@ -474,7 +474,7 @@ def save_prediction():
     methods=['POST'],
     endpoint='collection_count'
 )
-@jwt_optional
+@jwt_required
 def collection_count():
     '''
 
@@ -505,7 +505,7 @@ def collection_count():
     methods=['POST'],
     endpoint='document_count'
 )
-@jwt_optional
+@jwt_required
 def document_count():
     '''
 
