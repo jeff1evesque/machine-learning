@@ -36,7 +36,7 @@ from flask_jwt_extended import (
 )
 
 # local variables
-blueprint_api = Blueprint('name', __name__)
+blueprint_api = Blueprint('api', __name__)
 
 
 @blueprint_apiroute('/load-data', methods=['POST'], endpoint='load_data')

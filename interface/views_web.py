@@ -33,7 +33,7 @@ from brain.converter.crypto import hash_pass, verify_pass
 
 # local variables
 blueprint_web = Blueprint(
-    'name',
+    'web',
     __name__,
     template_folder='interface/templates',
     static_folder='interface/static'
