@@ -18,7 +18,8 @@ from flask import Flask, g
 from brain.cache.session import RedisSessionInterface
 from flask_jwt_extended import JWTManager
 from logging.handlers import RotatingFileHandler
-from interface.views import blueprint
+from interface.views_api import blueprint_api
+from interface.views_web import blueprint_web
 
 
 # application factory
@@ -59,6 +60,7 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
         app.secret_key = application['security_key']
         app.config['JWT_SECRET_KEY'] = application['security_key']
         JWTManager(app)
+        app.register_blueprint(blueprint_api)
 
     # web-interface: replace default cookie session with server-side redis
     else:
@@ -73,9 +75,7 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
             cache['port'],
             cache['db']
         )
-
-    # register blueprint
-    app.register_blueprint(blueprint)
+        app.register_blueprint(blueprint_web)
 
     # local logger: used for this module
     ROOT = general['root']

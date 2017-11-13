@@ -3,13 +3,13 @@
 This file contains the corresponding views logic. Specifically, the route
 decorators are defined, which flask triggers for specific URL's.
 
-@blueprint, organizes the entire application as a series of modules.
+@blueprint_web, organizes the entire application as a series of modules.
 
     @endpoint, optional attribute defined within (blueprint) route decorators.
         This allows other functions, within the same flask context, to make
         reference of it, via the 'url_for' method:
 
-            @blueprint.route('/example', methods=['POST'], endpoint='sample')
+            @blueprint_web.route('/example', methods=['POST'], endpoint='sample')
 
         can be accessed within the same flask context:
 
@@ -30,16 +30,9 @@ from brain.validator.email import isValidEmail
 from brain.database.account import Account
 from brain.database.prediction import Prediction
 from brain.converter.crypto import hash_pass, verify_pass
-from brain.database.entity import Entity
-from brain.database.dataset import Collection
-from flask_jwt_extended import (
-    create_access_token,
-    jwt_optional,
-    get_jwt_identity
-)
 
 # local variables
-blueprint = Blueprint(
+blueprint_web = Blueprint(
     'name',
     __name__,
     template_folder='interface/templates',
@@ -47,8 +40,8 @@ blueprint = Blueprint(
 )
 
 
-@blueprint.route('/', defaults={'path': ''})
-@blueprint.route('/<path:path>')
+@blueprint_web.route('/', defaults={'path': ''})
+@blueprint_web.route('/<path:path>')
 def index(path):
     '''
 
@@ -65,8 +58,7 @@ def index(path):
     return render_template('index.html')
 
 
-@blueprint.route('/load-data', methods=['POST'], endpoint='load_data')
-@jwt_optional
+@blueprint_web.route('/load-data', methods=['POST'], endpoint='load_data')
 def load_data():
     '''
 
@@ -78,39 +70,9 @@ def load_data():
         - model_predict
         - model_generate
 
-    Note: more information on flask-jwt partially protecting routes:
-
-        http://flask-jwt-extended.readthedocs.io/en/latest/optional_endpoints.html
-
     '''
 
     if request.method == 'POST':
-        current_user = get_jwt_identity()
-
-        # programmatic-interface
-        if request.get_json():
-            # send data to brain
-            loader = Load_Data(request.get_json(), current_user)
-            if loader.get_session_type()['session_type']:
-                session_type = loader.get_session_type()['session_type']
-
-                if session_type == 'data_new':
-                    response = loader.load_data_new()
-                elif session_type == 'data_append':
-                    response = loader.load_data_append()
-                elif session_type == 'model_generate':
-                    response = loader.load_model_generate()
-                elif session_type == 'model_predict':
-                    response = loader.load_model_predict()
-                else:
-                    response = loader.get_errors()
-
-            else:
-                response = loader.get_errors()
-
-            # return response
-            return response
-
         # get uploaded form files
         if request.files:
             files = request.files
@@ -146,7 +108,7 @@ def load_data():
             return response
 
 
-@blueprint.route('/login', methods=['POST'])
+@blueprint_web.route('/login', methods=['POST'])
 def login():
     '''
 
@@ -162,60 +124,12 @@ def login():
             - 4, generic login failure:
                 - https://www.owasp.org/index.php/Authentication_Cheat_Sheet
 
-    Note: token authentication is stateless, since it doesn't require anything
-        to be queried from the server, to verify the user. The token is setup,
-        in such a way, where it is known, if the token is valid or not, and if
-        the token has been tampered with.
-
-    Note: more information on basic flask-jwt token authentication:
-
-        http://flask-jwt-extended.readthedocs.io/en/latest/basic_usage.html
-
     '''
 
     if request.method == 'POST':
         account = Account()
 
-        # programmatic-interface: implement flask-jwt token
-        if request.get_json():
-            results = request.get_json()
-            username = results['user[login]']
-            password = results['user[password]']
-
-            # validate: check username exists
-            if (
-                account.check_username(username)['result'] and
-                account.get_uid(username)['result']
-            ):
-
-                # database query: get hashed password, and userid
-                hashed_password = account.get_password(username)['result']
-                uid = account.get_uid(username)['result']
-
-                # notification: verify hashed password exists
-                if hashed_password:
-
-                    # notification: verify password
-                    if verify_pass(str(password), hashed_password):
-                        # create and serialize uid token
-                        access_token = create_access_token(identity=uid)
-
-                        # return status
-                        return json.dumps({'status': 0, 'access_token': access_token})
-
-                    # notification: incorrect password
-                    else:
-                        return json.dumps({'status': 4})
-                # notification: user does not have a password
-                else:
-                    return json.dumps({'status': 4})
-
-            # notification: username does not exist
-            else:
-                return json.dumps({'status': 4})
-
-        # web-interface: store user session in redis
-        elif request.form:
+        if request.form:
             # local variables
             username = request.form.getlist('user[login]')[0]
             password = request.form.getlist('user[password]')[0]
@@ -257,7 +171,7 @@ def login():
                 return json.dumps({'status': 4})
 
 
-@blueprint.route('/logout', methods=['GET', 'POST'])
+@blueprint_web.route('/logout', methods=['GET', 'POST'])
 def logout():
     '''
 
@@ -279,7 +193,7 @@ def logout():
             return json.dumps({'status': 0})
 
 
-@blueprint.route('/register', methods=['POST'])
+@blueprint_web.route('/register', methods=['POST'])
 def register():
     '''
 
@@ -366,7 +280,7 @@ def register():
             })
 
 
-@blueprint.route('/retrieve-collections', methods=['POST'])
+@blueprint_web.route('/retrieve-collections', methods=['POST'])
 def retrieve_collections():
     '''
 
@@ -385,7 +299,7 @@ def retrieve_collections():
             return json.dumps({'error': collections['error']})
 
 
-@blueprint.route(
+@blueprint_web.route(
     '/retrieve-sv-model',
     methods=['POST'],
     endpoint='retrieve_sv_model'
@@ -425,7 +339,7 @@ def retrieve_sv_model():
             return json.dumps({'error': error_result})
 
 
-@blueprint.route(
+@blueprint_web.route(
     '/retrieve-sv-features',
     methods=['POST'],
     endpoint='retrieve_sv_features'
@@ -458,7 +372,7 @@ def retrieve_sv_features():
             return json.dumps({'error': label_list['error']})
 
 
-@blueprint.route(
+@blueprint_web.route(
     '/retrieve-prediction-titles',
     methods=['POST'],
     endpoint='retrieve_prediction_titles'
@@ -479,13 +393,8 @@ def retrieve_prediction_titles():
     '''
 
     if request.method == 'POST':
-        # programmatic-interface
-        if request.get_json():
-            results = request.get_json()
-            model_type = results['model_type']
-
         # web-interface
-        elif request.form:
+        if request.form:
             results = request.form
             args = json.loads(results['args'])
             model_type = args['model_type']
@@ -511,7 +420,7 @@ def retrieve_prediction_titles():
             return json.dumps({'status': 1, 'titles': None})
 
 
-@blueprint.route(
+@blueprint_web.route(
     '/retrieve-prediction',
     methods=['POST'],
     endpoint='retrieve_prediction'
@@ -531,13 +440,8 @@ def retrieve_prediction():
     '''
 
     if request.method == 'POST':
-        # programmatic-interface
-        if request.get_json():
-            results = request.get_json()
-            id_result = results['id_result']
-
         # web-interface
-        elif request.form:
+        if request.form:
             results = request.form
             id_result = json.loads(results['id_result'])
 
@@ -595,7 +499,7 @@ def retrieve_prediction():
             return json.dumps({'status': 3})
 
 
-@blueprint.route(
+@blueprint_web.route(
     '/save-prediction',
     methods=['POST'],
     endpoint='save_prediction'
@@ -616,13 +520,8 @@ def save_prediction():
     '''
 
     if request.method == 'POST':
-        # programmatic-interface
-        if request.get_json():
-            results = request.get_json()
-            data = results['data']
-
         # web-interface: double decoder required, since nested encoding
-        elif request.form:
+        if request.form:
             results = request.form
             data = json.loads(json.loads(results['data']))
 
@@ -649,109 +548,3 @@ def save_prediction():
         # notification: status not valid
         else:
             return json.dumps({'status': 2})
-
-
-@blueprint.route(
-    '/collection-count',
-    methods=['POST'],
-    endpoint='collection_count'
-)
-def collection_count():
-    '''
-
-    This router function retrieves the number of collections, saved by a
-    specified user.
-
-    '''
-
-    if request.method == 'POST':
-        # local variables
-        count = None
-        entity = Entity()
-
-        # programmatic-interface
-        if request.get_json():
-            r = request.get_json()
-            uid = r['uid']
-            count = entity.get_collection_count(uid)
-
-        if count and isinstance(count['result'], (int, long)):
-            return json.dumps({'count': count['result']})
-        else:
-            return json.dumps({'count': -1})
-
-
-@blueprint.route(
-    '/document-count',
-    methods=['POST'],
-    endpoint='document_count'
-)
-def document_count():
-    '''
-
-    This router function retrieves the number of documents in a specified
-    collection.
-
-    '''
-
-    if request.method == 'POST':
-        # local variables
-        count = None
-        collection = Collection()
-
-        # programmatic-interface
-        if request.get_json():
-            r = request.get_json()
-            cname = r['collection']
-            count = collection.query(cname, 'count_documents')
-
-        if (
-            count and
-            count['status'] and
-            isinstance(count['result'], (int, long))
-        ):
-            return json.dumps({'count': count['result']})
-        else:
-            return json.dumps({'count': -1})
-
-
-@blueprint.route(
-    '/remove-collection',
-    methods=['POST'],
-    endpoint='remove_collection'
-)
-def remove_collection():
-    '''
-
-    This router function removes a collection, with respect to a database type.
-
-    @collection, indicates a nosql implementation
-    @entity, indicates a sql database
-
-    '''
-
-    if request.method == 'POST':
-        # local variables
-        response = None
-        entity = Entity()
-        collection = Collection()
-
-        # programmatic-interface
-        if request.get_json():
-            r = request.get_json()
-            uid = r['uid']
-            type = r['type']
-            cname = r['collection']
-
-            if (cname and type == 'collection'):
-                payload = {'properties.uid': uid}
-                response = collection.query(cname, 'drop_collection', payload)
-
-            elif (type == 'entity'):
-                response = entity.remove_entity(uid, cname)
-
-        # lastrowid returned must be greater than 0
-        if response and response['result']:
-            return json.dumps({'response': response['result']})
-        else:
-            return json.dumps({'response': response})
