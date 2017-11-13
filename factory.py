@@ -59,8 +59,8 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
         app = Flask(__name__)
         app.secret_key = application['security_key']
         app.config['JWT_SECRET_KEY'] = application['security_key']
-        JWTManager(app)
         app.register_blueprint(blueprint_api)
+        JWTManager(app)
 
     # web-interface: replace default cookie session with server-side redis
     else:
