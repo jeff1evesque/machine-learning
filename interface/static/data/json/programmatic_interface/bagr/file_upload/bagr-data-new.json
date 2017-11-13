@@ -7,82 +7,99 @@
             "model_type": "bagr",
             "stream": "True"
 	},
-	"dataset": [{
-			"dependent-variable": "dep-variable-1",
-			"independent-variables": [{
-				"indep-variable-1": 23.45,
-				"indep-variable-2": 98.01,
-				"indep-variable-4": 325,
-				"indep-variable-5": 54.64,
-				"indep-variable-6": 0.002,
-				"indep-variable-7": 23,
-				"indep-variable-3": 0.432
-			}]
-		},
-		{
-			"dependent-variable": "dep-variable-4",
-			"independent-variables": [{
-					"indep-variable-1": 22.1,
-					"indep-variable-2": 95.96,
-					"indep-variable-4": 342,
-					"indep-variable-5": 66.67,
-					"indep-variable-6": 0.001,
-					"indep-variable-7": 32,
-					"indep-variable-3": 0.743
-				},
-				{
-					"indep-variable-1": 20.71,
-					"indep-variable-2": 99.33,
-					"indep-variable-4": 342,
-					"indep-variable-5": 75.67,
-					"indep-variable-6": 0.001,
-					"indep-variable-7": 30,
-					"indep-variable-3": 0.648
-				}
-			]
-		},
-		{
-			"dependent-variable": "dep-variable-5",
-			"independent-variables": [{
-					"indep-variable-1": 23.27,
-					"indep-variable-2": 95.03,
-					"indep-variable-4": 295,
-					"indep-variable-5": 55.83,
-					"indep-variable-6": 0.001,
-					"indep-variable-7": 27,
-					"indep-variable-3": 0.488
-				},
-				{
-					"indep-variable-1": 23.27,
-					"indep-variable-2": 95.03,
-					"indep-variable-4": 295,
-					"indep-variable-5": 55.83,
-					"indep-variable-6": 0.001,
-					"indep-variable-7": 27,
-					"indep-variable-3": 0.488
-				},
-				{
-					"indep-variable-1": 19.99,
-					"indep-variable-2": 97.78,
-					"indep-variable-4": 303,
-					"indep-variable-5": 58.88,
-					"indep-variable-6": 0.001,
-					"indep-variable-7": 29,
-					"indep-variable-3": 0.638
-				}
-			]
-		},
-		{
-			"dependent-variable": "dep-variable-3",
-			"independent-variables": [{
-				"indep-variable-1": 22.67,
-				"indep-variable-2": 101.21,
-				"indep-variable-4": 427,
-				"indep-variable-5": 75.45,
-				"indep-variable-6": 0.002,
-				"indep-variable-7": 26,
-				"indep-variable-3": 0.832
-			}]
-		}
-	]
+    "dataset": [{
+            "dependent-variable": 31.111,
+            "independent-variables": [{
+                "predictor-1": 23.45,
+                "predictor-2": 98.01,
+                "predictor-4": 325,
+                "predictor-5": 54.64,
+                "predictor-6": 0.002,
+                "predictor-7": 23,
+                "predictor-3": 0.432
+            }]
+        },
+        {
+            "dependent-variable": "24.535",
+            "independent-variables": [{
+                "predictor-1": 22.1,
+                "predictor-2": 95.96,
+                "predictor-4": 342,
+                "predictor-5": 66.67,
+                "predictor-6": 0.001,
+                "predictor-7": 32,
+                "predictor-3": 0.743
+            }]
+        },
+        {
+            "dependent-variable": "33.331",
+            "independent-variables": [{
+                    "predictor-1": 20.71,
+                    "predictor-2": 99.33,
+                    "predictor-4": 342,
+                    "predictor-5": 75.67,
+                    "predictor-6": 0.001,
+                    "predictor-7": 30,
+                    "predictor-3": 0.648
+                },
+                {
+                    "predictor-1": 17.777,
+                    "predictor-2": 87.073,
+                    "predictor-4": 221,
+                    "predictor-5": 67.777,
+                    "predictor-6": 0.001,
+                    "predictor-7": 30.345,
+                    "predictor-3": 0.598
+                }
+            ]
+        },
+        {
+            "dependent-variable": "21.211",
+            "independent-variables": [{
+                "predictor-1": 23.27,
+                "predictor-2": 95.03,
+                "predictor-4": 295,
+                "predictor-5": 55.83,
+                "predictor-6": 0.001,
+                "predictor-7": 27,
+                "predictor-3": 0.488
+            }]
+        },
+        {
+            "dependent-variable": "20.034",
+            "independent-variables": [{
+                "predictor-1": 23.27,
+                "predictor-2": 95.03,
+                "predictor-4": 295,
+                "predictor-5": 55.83,
+                "predictor-6": 0.001,
+                "predictor-7": 27,
+                "predictor-3": 0.488
+            }]
+        },
+        {
+            "dependent-variable": "45.326",
+            "independent-variables": [{
+                "predictor-1": 19.99,
+                "predictor-2": 97.78,
+                "predictor-4": 303,
+                "predictor-5": 58.88,
+                "predictor-6": 0.001,
+                "predictor-7": 29,
+                "predictor-3": 0.638
+            }]
+        },
+        {
+            "dependent-variable": "52.395",
+            "independent-variables": [{
+                "predictor-1": 22.67,
+                "predictor-2": 101.21,
+                "predictor-3": 427,
+                "predictor-4": 75.45,
+                "predictor-5": 0.002,
+                "predictor-6": 26,
+                "predictor-7": 0.555
+            }]
+        }
+    ]
 }
