@@ -8,14 +8,18 @@ def predict(model, collection, predictors):
     decision_function = None
     collection_adjusted = collection.lower().replace(' ', '_')
     list_model_type = current_app.config.get('MODEL_TYPE')
-    rs = [list_model_type[3],
-          list_model_type[5],
-          list_model_type[7],
-          list_model_type[9]]
-    cs = [list_model_type[2],
-          list_model_type[4],
-          list_model_type[6],
-          list_model_type[8]]
+    rs = [
+        list_model_type[3],
+        list_model_type[5],
+        list_model_type[7],
+        list_model_type[9]
+    ]
+    cs = [
+        list_model_type[2],
+        list_model_type[4],
+        list_model_type[6],
+        list_model_type[8]
+    ]
 
     clf = Model().uncache(
         model + '_model',
@@ -50,6 +54,7 @@ def predict(model, collection, predictors):
             },
             'error': None
         }
+
     elif model in rs:
         r2 = Hset().uncache(
             model + '_r2',
