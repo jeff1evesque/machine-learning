@@ -150,7 +150,6 @@ def test_model_predict(client, live_server):
     )
 
     # assertion checks
-    assert not res.json['result']['confidence']['decision_function']
     assert res.json['result']['confidence']['classes'] == [
         'dep-variable-1',
         'dep-variable-2',
