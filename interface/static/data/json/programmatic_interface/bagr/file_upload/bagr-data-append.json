@@ -1,6 +1,6 @@
 {
     "properties": {
-        "collection": "bgr-2",
+        "collection": "bagr-2",
         "dataset_type": "file_upload",
         "session_type": "data_append",
         "model_type": "bagr",

@@ -82,7 +82,16 @@ class ModelGenerate(Base):
                 self.list_error,
                 random_state=rand
             )
-
+        if model_type == 'bagr':
+            rand = current_app.config.get('RANDOM_STATE')
+            rand = None if rand == 'None' else rand
+            result = baggen(
+                model_type,
+                self.collection,
+                payload,
+                self.list_error,
+                random_state=rand
+            )
         # store any errors
         if result and result['error']:
             self.list_error.extend(result['error'])
