@@ -157,4 +157,4 @@ def test_model_predict(client, live_server):
     assert res.json['result']['confidence']
     assert res.json['result']['confidence']['score'] == '0.96282488659958954'
     assert res.json['result']['model'] == 'bagr'
-    assert res.json['result']['result'] == '37.7622192912'
+    assert res.json['result']['result'] == '33.4442'
