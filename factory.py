@@ -15,17 +15,17 @@ Note: both the handler, and logger has levels. If the level of the logger is
 import yaml
 import logging
 from flask import Flask, g
-from brain.cache.session import RedisSessionInterface
-from flask_jwt_extended import JWTManager
 from logging.handlers import RotatingFileHandler
+from brain.cache.session import RedisSessionInterface
 from interface.views_api import blueprint_api
 from interface.views_web import blueprint_web
+from flask_jwt_extended import JWTManager
 
 
 # application factory
-def create_app(args={'prefix': '', 'instance': 'web'}):
+def create_app(args={'instance': 'web'}):
     # path to hiera
-    if 'prefix' in args:
+    if ('prefix' in args and args['prefix']):
         prepath = 'hiera/' + args['prefix']
     else:
         prepath = 'hiera'
@@ -67,14 +67,14 @@ def create_app(args={'prefix': '', 'instance': 'web'}):
         app = Flask(
             __name__,
             template_folder='interface/templates',
-            static_folder='interface/static',
+            static_folder='interface/static'
         )
-        app.secret_key = application['security_key']
         app.session_interface = RedisSessionInterface(
             cache['host'],
             cache['port'],
             cache['db']
         )
+        app.secret_key = application['security_key']
         app.register_blueprint(blueprint_web)
 
     # local logger: used for this module
