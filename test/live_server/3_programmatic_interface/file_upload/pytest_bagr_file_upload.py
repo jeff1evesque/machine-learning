@@ -150,19 +150,10 @@ def test_model_predict(client, live_server):
     )
 
     # assertion checks
-    assert res.json['result']['confidence']['classes'] == [
-        'dep-variable-1',
-        'dep-variable-2',
-        'dep-variable-3',
-        'dep-variable-4',
-        'dep-variable-5'
-    ]
-    assert res.json['result']['confidence']['probability'] == [
-        0.2,
-        0.0,
-        0.1,
-        0.1,
-        0.6
-    ]
+    assert res.status_code == 200
+    assert res.json['status'] == 0
+    assert res.json['result']
+    assert res.json['result']['confidence']
+    assert res.json['result']['confidence']['score'] == '0.29007217517499473'
     assert res.json['result']['model'] == 'bagr'
     assert res.json['result']['result'] == 'dep-variable-5'
