@@ -31,7 +31,7 @@ from brain.database.entity import Entity
 from brain.database.dataset import Collection
 from flask_jwt_extended import (
     create_access_token,
-    jwt_optional,
+    jwt_required,
     get_jwt_identity
 )
 
