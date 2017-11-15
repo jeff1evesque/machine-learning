@@ -65,7 +65,7 @@ class webserver::service {
     ## Note: when the application starts, particular package dependencies are
     ##       required to be installed, so the flask application can run.
     ##
-    file { '/etc/init/gunicorn_api.conf'':
+    file { '/etc/init/gunicorn_api.conf':
         ensure  => file,
         content => dos2unix(template($template_path)),
         require => Class['compiler::initial_compile'],
