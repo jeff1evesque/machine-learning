@@ -12,7 +12,7 @@ class webserver::start {
     ## run gunicorn
     if $vagrant_mounted {
         # ensure service starts at boot
-        service { 'start_gunicorn':
+        service { 'gunicorn_api':
             ensure  => 'running',
             enable  => true,
             require => [
@@ -23,7 +23,7 @@ class webserver::start {
     }
     else {
         ## run and restart when needed
-        service { 'start_gunicorn':
+        service { 'gunicorn_api':
             ensure  => 'running',
             require => [
                 Class['webserver::service'],
