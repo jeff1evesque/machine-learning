@@ -141,9 +141,6 @@ def create_app(args={'instance': 'web'}):
     log.setLevel(logging.DEBUG)
     log.addHandler(handler)
 
-    # allow error logging
-    app.config['PROPAGATE_EXCEPTIONS'] = False
-
     # return
     return app
 
