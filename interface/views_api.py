@@ -9,7 +9,7 @@ decorators are defined, which flask triggers for specific URL's.
         This allows other functions, within the same flask context, to make
         reference of it, via the 'url_for' method:
 
-            @blueprint_apiroute('/example', methods=['POST'], endpoint='sample')
+            @blueprint_api.route('/example', methods=['POST'], endpoint='sample')
 
         can be accessed within the same flask context:
 
@@ -39,7 +39,7 @@ from flask_jwt_extended import (
 blueprint_api = Blueprint('api', __name__)
 
 
-@blueprint_apiroute('/load-data', methods=['POST'], endpoint='load_data')
+@blueprint_api.route('/load-data', methods=['POST'], endpoint='load_data')
 @jwt_required
 def load_data():
     '''
@@ -86,7 +86,7 @@ def load_data():
             return response
 
 
-@blueprint_apiroute('/login', methods=['POST'])
+@blueprint_api.route('/login', methods=['POST'])
 def login():
     '''
 
@@ -155,7 +155,7 @@ def login():
                 return json.dumps({'status': 4})
 
 
-@blueprint_apiroute('/logout', methods=['GET', 'POST'])
+@blueprint_api.route('/logout', methods=['GET', 'POST'])
 @jwt_required
 def logout():
     '''
@@ -178,7 +178,7 @@ def logout():
             return json.dumps({'status': 0})
 
 
-@blueprint_apiroute('/retrieve-collections', methods=['POST'])
+@blueprint_api.route('/retrieve-collections', methods=['POST'])
 @jwt_required
 def retrieve_collections():
     '''
@@ -198,7 +198,7 @@ def retrieve_collections():
             return json.dumps({'error': collections['error']})
 
 
-@blueprint_apiroute(
+@blueprint_api.route(
     '/retrieve-sv-model',
     methods=['POST'],
     endpoint='retrieve_sv_model'
@@ -239,7 +239,7 @@ def retrieve_sv_model():
             return json.dumps({'error': error_result})
 
 
-@blueprint_apiroute(
+@blueprint_api.route(
     '/retrieve-sv-features',
     methods=['POST'],
     endpoint='retrieve_sv_features'
@@ -273,7 +273,7 @@ def retrieve_sv_features():
             return json.dumps({'error': label_list['error']})
 
 
-@blueprint_apiroute(
+@blueprint_api.route(
     '/retrieve-prediction-titles',
     methods=['POST'],
     endpoint='retrieve_prediction_titles'
@@ -327,7 +327,7 @@ def retrieve_prediction_titles():
             return json.dumps({'status': 1, 'titles': None})
 
 
-@blueprint_apiroute(
+@blueprint_api.route(
     '/retrieve-prediction',
     methods=['POST'],
     endpoint='retrieve_prediction'
@@ -412,7 +412,7 @@ def retrieve_prediction():
             return json.dumps({'status': 3})
 
 
-@blueprint_apiroute(
+@blueprint_api.route(
     '/save-prediction',
     methods=['POST'],
     endpoint='save_prediction'
@@ -469,7 +469,7 @@ def save_prediction():
             return json.dumps({'status': 2})
 
 
-@blueprint_apiroute(
+@blueprint_api.route(
     '/collection-count',
     methods=['POST'],
     endpoint='collection_count'
@@ -500,7 +500,7 @@ def collection_count():
             return json.dumps({'count': -1})
 
 
-@blueprint_apiroute(
+@blueprint_api.route(
     '/document-count',
     methods=['POST'],
     endpoint='document_count'
@@ -535,7 +535,7 @@ def document_count():
             return json.dumps({'count': -1})
 
 
-@blueprint_apiroute(
+@blueprint_api.route(
     '/remove-collection',
     methods=['POST'],
     endpoint='remove_collection'
