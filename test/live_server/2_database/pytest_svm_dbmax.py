@@ -56,7 +56,7 @@ def get_sample_json(jsonfile, model_type):
     return json_dataset
 
 
-def login(:
+def login():
     '''
 
     This method twill login, and return the corresponding token.
@@ -74,7 +74,7 @@ def login(:
         headers={'Content-Type': 'application/json'},
         data=json.dumps(payload)
     )
-    return ogin.json['access_token']
+    return login.json['access_token']
 
 def send_post(endpoint, dataset):
     '''
