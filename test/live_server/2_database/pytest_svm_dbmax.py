@@ -168,7 +168,7 @@ def test_collection_count(client, live_server):
     # local variables
     endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
-    res = send_post(client, endpoint, json.dumps({'uid': 0}))
+    res = send_post(client, endpoint, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
@@ -223,7 +223,7 @@ def test_collection_count_plus(client, live_server):
     endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
-    res = send_post(client, endpoint, json.dumps({'uid': 0}))
+    res = send_post(client, endpoint, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
@@ -287,7 +287,7 @@ def test_entity_drop(client, live_server):
             client,
             endpoint,
             json.dumps({
-                'uid': 0,
+                'uid': 1,
                 'collection': 'collection--pytest-svm--' + str(i),
                 'type': 'collection',
             })
@@ -320,7 +320,7 @@ def test_collection_drop(client, live_server):
             client,
             endpoint,
             json.dumps({
-                'uid': 0,
+                'uid': 1,
                 'collection': 'collection--pytest-svm--' + str(i),
                 'type': 'entity',
             })
@@ -377,7 +377,7 @@ def test_collection_count_removed(client, live_server):
 
     # local variables
     endpoint = collection_count()
-    res = send_post(client, endpoint, json.dumps({'uid': 0}))
+    res = send_post(client, endpoint, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == 0
