@@ -109,7 +109,7 @@ def test_save(client, live_server):
 
     # local variables
     endpoint = load_data()
-    max_collection = current_apc.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_ANON')
 
     # save max collection
     for i in range(max_collection):
@@ -220,7 +220,6 @@ def test_collection_count_plus(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
     endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
