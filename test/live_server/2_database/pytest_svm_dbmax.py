@@ -103,7 +103,7 @@ def test_save(client, live_server):
 
     @live_server.app.route('/load-data')
     def load_data():
-        return url_for('name.load_data', _external=True)
+        return url_for('api.load_data', _external=True)
 
     live_server.start()
 
@@ -115,7 +115,7 @@ def test_save(client, live_server):
     for i in range(max_collection):
         dataset = get_sample_json('svm-data-new.json', 'svm')
         dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i)
-        res = send_post(client, endpoint, dataset)
+        res = send_post(client, endpoint, json.dumps(dataset))
 
         # assertion checks
         assert res.status_code == 200
@@ -133,7 +133,7 @@ def test_document_count(client, live_server):
 
     @live_server.app.route('/document-count')
     def document_count():
-        return url_for('name.document_count', _external=True)
+        return url_for('api.document_count', _external=True)
 
     live_server.start()
 
@@ -161,7 +161,7 @@ def test_collection_count(client, live_server):
 
     @live_server.app.route('/collection-count')
     def collection_count():
-        return url_for('name.collection_count', _external=True)
+        return url_for('api.collection_count', _external=True)
 
     live_server.start()
 
@@ -186,7 +186,7 @@ def test_save_plus(client, live_server):
 
     @live_server.app.route('/load-data')
     def load_data():
-        return url_for('name.load_data', _external=True)
+        return url_for('api.load_data', _external=True)
 
     live_server.start()
 
@@ -215,7 +215,7 @@ def test_collection_count_plus(client, live_server):
 
     @live_server.app.route('/collection-count')
     def collection_count():
-        return url_for('name.collection_count', _external=True)
+        return url_for('api.collection_count', _external=True)
 
     live_server.start()
 
@@ -240,7 +240,7 @@ def test_document_count_plus(client, live_server):
 
     @live_server.app.route('/document-count')
     def document_count():
-        return url_for('name.document_count', _external=True)
+        return url_for('api.document_count', _external=True)
 
     live_server.start()
 
@@ -273,7 +273,7 @@ def test_entity_drop(client, live_server):
 
     @live_server.app.route('/remove-collection')
     def remove_collection():
-        return url_for('name.remove_collection', _external=True)
+        return url_for('api.remove_collection', _external=True)
 
     live_server.start()
 
@@ -306,7 +306,7 @@ def test_collection_drop(client, live_server):
 
     @live_server.app.route('/remove-collection')
     def remove_collection():
-        return url_for('name.remove_collection', _external=True)
+        return url_for('api.remove_collection', _external=True)
 
     live_server.start()
 
@@ -340,7 +340,7 @@ def test_document_count_removed(client, live_server):
 
     @live_server.app.route('/document-count')
     def document_count():
-        return url_for('name.document_count', _external=True)
+        return url_for('api.document_count', _external=True)
 
     live_server.start()
 
@@ -371,7 +371,7 @@ def test_collection_count_removed(client, live_server):
 
     @live_server.app.route('/collection-count')
     def collection_count():
-        return url_for('name.collection_count', _external=True)
+        return url_for('api.collection_count', _external=True)
 
     live_server.start()
 
