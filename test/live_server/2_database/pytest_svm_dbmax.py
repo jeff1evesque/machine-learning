@@ -56,7 +56,7 @@ def get_sample_json(jsonfile, model_type):
     return json_dataset
 
 
-def login():
+def login(client):
     '''
 
     This method twill login, and return the corresponding token.
@@ -76,14 +76,14 @@ def login():
     )
     return login.json['access_token']
 
-def send_post(endpoint, dataset):
+def send_post(client, endpoint, dataset):
     '''
 
     This method will login, and return the corresponding token.
 
     '''
 
-    token = login()
+    token = login(client)
     return client.post(
         endpoint,
         headers={
@@ -115,7 +115,7 @@ def test_save(client, live_server):
     for i in range(max_collection):
         dataset = get_sample_json('svm-data-new.json', 'svm')
         dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i)
-        res = send_post(endpoint, dataset)
+        res = send_post(client, endpoint, dataset)
 
         # assertion checks
         assert res.status_code == 200
@@ -144,7 +144,7 @@ def test_document_count(client, live_server):
     # save max collection
     for i in range(max_collection):
         data = json.dumps({'collection': 'collection--pytest-svm--' + str(i)})
-        res = send_post(endpoint, data)
+        res = send_post(client, endpoint, data)
 
         assert res.status_code == 200
         assert res.json['count'] == 1
@@ -168,7 +168,7 @@ def test_collection_count(client, live_server):
     # local variables
     endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_ANON')
-    res = send_post(endpoint, json.dumps({'uid': 0}))
+    res = send_post(client, endpoint, json.dumps({'uid': 0}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
@@ -198,7 +198,7 @@ def test_save_plus(client, live_server):
     dataset = get_sample_json('svm-data-new.json', 'svm')
     dataset['properties']['collection'] = 'collection--pytest-svm--' + str(max_collection)
 
-    res = send_post(endpoint, json.dumps(dataset))
+    res = send_post(client, endpoint, json.dumps(dataset))
 
     assert res.status_code == 200
     assert res.json['status'] == 0
@@ -224,7 +224,7 @@ def test_collection_count_plus(client, live_server):
     endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
-    res = send_post(endpoint, json.dumps({'uid': 0}))
+    res = send_post(client, endpoint, json.dumps({'uid': 0}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
@@ -251,6 +251,7 @@ def test_document_count_plus(client, live_server):
 
     for i in range(max_collection + 1):
         res = send_post(
+            client,
             endpoint,
             json.dumps({
                 'collection': 'collection--pytest-svm--' + str(i)
@@ -284,6 +285,7 @@ def test_entity_drop(client, live_server):
     # drop all entity related collections
     for i in range(max_collection - 1):
         res = send_post(
+            client,
             endpoint,
             json.dumps({
                 'uid': 0,
@@ -316,6 +318,7 @@ def test_collection_drop(client, live_server):
     # drop all collections
     for i in range(max_collection):
         res = send_post(
+            client,
             endpoint,
             json.dumps({
                 'uid': 0,
@@ -348,6 +351,7 @@ def test_document_count_removed(client, live_server):
 
     for i in range(max_collection):
         res = send_post(
+            client,
             endpoint,
             json.dumps({
                 'collection': 'collection--pytest-svm--' + str(i),
@@ -374,7 +378,7 @@ def test_collection_count_removed(client, live_server):
 
     # local variables
     endpoint = collection_count()
-    res = send_post(endpoint, json.dumps({'uid': 0}))
+    res = send_post(client, endpoint, json.dumps({'uid': 0}))
 
     assert res.status_code == 200
     assert res.json['count'] == 0
