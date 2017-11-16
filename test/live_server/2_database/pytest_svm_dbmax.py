@@ -87,7 +87,7 @@ def send_post(endpoint, dataset):
     return client.post(
         endpoint,
         headers={
-            'Authorization': 'Bearer {0}'.format(token)
+            'Authorization': 'Bearer {0}'.format(token),
             'Content-Type': 'application/json'
         },
         data=json.dumps(dataset)
