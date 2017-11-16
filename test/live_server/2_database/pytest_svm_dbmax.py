@@ -56,6 +56,44 @@ def get_sample_json(jsonfile, model_type):
     return json_dataset
 
 
+def login(:
+    '''
+
+    This method twill login, and return the corresponding token.
+
+    '''
+
+    # local variables
+    username = 'jeff1evesque'
+    password = 'password123'
+    payload = {'user[login]': username, 'user[password]': password}
+
+    # login and get flask-jwt token
+    login = client.post(
+        '/login',
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps(payload)
+    )
+    return ogin.json['access_token']
+
+def send_post(endpoint, dataset):
+    '''
+
+    This method will login, and return the corresponding token.
+
+    '''
+
+    token = login()
+    return client.post(
+        endpoint,
+        headers={
+            'Authorization': 'Bearer {0}'.format(token)
+            'Content-Type': 'application/json'
+        },
+        data=json.dumps(dataset)
+    )
+
+
 def test_save(client, live_server):
     '''
 
@@ -70,18 +108,14 @@ def test_save(client, live_server):
     live_server.start()
 
     # local variables
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = load_data()
+    max_collection = current_apc.config.get('MAXCOL_ANON')
 
     # save max collection
     for i in range(max_collection):
         dataset = get_sample_json('svm-data-new.json', 'svm')
         dataset['properties']['collection'] = 'collection--pytest-svm--' + str(i)
-
-        res = client.post(
-            load_data(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps(dataset)
-        )
+        res = send_post(endpoint, dataset)
 
         # assertion checks
         assert res.status_code == 200
@@ -104,17 +138,13 @@ def test_document_count(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = document_count()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
     # save max collection
     for i in range(max_collection):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'collection': 'collection--pytest-svm--' + str(i),
-            })
-        )
+        data = json.dumps({'collection': 'collection--pytest-svm--' + str(i)})
+        res = send_post(endpoint, data)
 
         assert res.status_code == 200
         assert res.json['count'] == 1
@@ -136,14 +166,9 @@ def test_collection_count(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
+    endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_ANON')
-
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    res = send_post(endpoint, json.dumps({'uid': 0}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
@@ -166,17 +191,14 @@ def test_save_plus(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = load_data()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
     # save max collection + 1
     dataset = get_sample_json('svm-data-new.json', 'svm')
     dataset['properties']['collection'] = 'collection--pytest-svm--' + str(max_collection)
 
-    res = client.post(
-        load_data(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps(dataset)
-    )
+    res = send_post(endpoint, json.dumps(dataset))
 
     assert res.status_code == 200
     assert res.json['status'] == 0
@@ -199,13 +221,10 @@ def test_collection_count_plus(client, live_server):
 
     # local variables
     uid = 0
+    endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    res = send_post(endpoint, json.dumps({'uid': 0}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
@@ -227,14 +246,14 @@ def test_document_count_plus(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = document_count()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
     for i in range(max_collection + 1):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'collection': 'collection--pytest-svm--' + str(i),
+        res = send_post(
+            endpoint,
+            json.dumps({
+                'collection': 'collection--pytest-svm--' + str(i)
             })
         )
 
@@ -259,17 +278,16 @@ def test_entity_drop(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
+    endpoint = remove_collection()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
     # drop all entity related collections
     for i in range(max_collection - 1):
-        res = client.post(
-            remove_collection(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'uid': uid,
-                'collection': 'collection--pytest-svm--' + str(i + 1),
+        res = send_post(
+            endpoint,
+            json.dumps({
+                'uid': 0,
+                'collection': 'collection--pytest-svm--' + str(i),
                 'type': 'collection',
             })
         )
@@ -292,18 +310,17 @@ def test_collection_drop(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
+    endpoint = remove_collection()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
     # drop all collections
     for i in range(max_collection):
-        res = client.post(
-            remove_collection(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'uid': uid,
+        res = send_post(
+            endpoint,
+            json.dumps({
+                'uid': 0,
+                'collection': 'collection--pytest-svm--' + str(i),
                 'type': 'entity',
-                'collection': 'collection--pytest-svm--' + str(i + 1),
             })
         )
 
@@ -326,13 +343,13 @@ def test_document_count_removed(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = document_count()
     max_collection = current_app.config.get('MAXCOL_ANON')
 
     for i in range(max_collection):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
+        res = send_post(
+            endpoint,
+            json.dumps({
                 'collection': 'collection--pytest-svm--' + str(i),
             })
         )
@@ -356,13 +373,8 @@ def test_collection_count_removed(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
-
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    endpoint = collection_count()
+    res = send_post(endpoint, json.dumps({'uid': 0}))
 
     assert res.status_code == 200
-    assert res.json['count'] == 0
+    assert res.json['count'] == 0
