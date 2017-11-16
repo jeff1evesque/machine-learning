@@ -109,7 +109,7 @@ def test_save(client, live_server):
 
     # local variables
     endpoint = load_data()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection
     for i in range(max_collection):
@@ -139,7 +139,7 @@ def test_document_count(client, live_server):
 
     # local variables
     endpoint = document_count()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection
     for i in range(max_collection):
@@ -167,7 +167,7 @@ def test_collection_count(client, live_server):
 
     # local variables
     endpoint = collection_count()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
     res = send_post(client, endpoint, json.dumps({'uid': 0}))
 
     assert res.status_code == 200
@@ -192,7 +192,7 @@ def test_save_plus(client, live_server):
 
     # local variables
     endpoint = load_data()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection + 1
     dataset = get_sample_json('svm-data-new.json', 'svm')
@@ -221,7 +221,7 @@ def test_collection_count_plus(client, live_server):
 
     # local variables
     endpoint = collection_count()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     res = send_post(client, endpoint, json.dumps({'uid': 0}))
 
@@ -246,7 +246,7 @@ def test_document_count_plus(client, live_server):
 
     # local variables
     endpoint = document_count()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     for i in range(max_collection + 1):
         res = send_post(
@@ -279,7 +279,7 @@ def test_entity_drop(client, live_server):
 
     # local variables
     endpoint = remove_collection()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # drop all entity related collections
     for i in range(max_collection - 1):
@@ -312,7 +312,7 @@ def test_collection_drop(client, live_server):
 
     # local variables
     endpoint = remove_collection()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # drop all collections
     for i in range(max_collection):
@@ -346,7 +346,7 @@ def test_document_count_removed(client, live_server):
 
     # local variables
     endpoint = document_count()
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     for i in range(max_collection):
         res = send_post(
