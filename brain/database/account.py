@@ -152,7 +152,7 @@ class Account(object):
         # return result
         if response_error:
             return {'error': response_error, 'result': None}
-        elif not result:
+        elif not response['result']:
             return {'error': 'no uid', 'result': None}
         else:
             return {'error': None, 'result': response['result'][0][0]}
