@@ -76,7 +76,7 @@ def login(client):
     )
     return login.json['access_token']
 
-def send_post(client, endpoint, dataset):
+def send_post(client, endpoint, data):
     '''
 
     This method will login, and return the corresponding token.
@@ -90,7 +90,7 @@ def send_post(client, endpoint, dataset):
             'Authorization': 'Bearer {0}'.format(token),
             'Content-Type': 'application/json'
         },
-        data=json.dumps(dataset)
+        data=data
     )
 
 
