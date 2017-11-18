@@ -14,7 +14,6 @@ from brain.session.data_new import DataNew
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
 from brain.database.session import Session
-from brain.database.account import Account
 
 
 class Load_Data(object):
