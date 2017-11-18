@@ -56,7 +56,7 @@ def get_sample_json(jsonfile, model_type):
     return json_dataset
 
 
-def send_post(client, token, endpoint, data):
+def send_post(client, endpoint, token, data):
     '''
 
     This method will login, and return the corresponding token.
@@ -76,7 +76,7 @@ def send_post(client, token, endpoint, data):
     )
 
 
-def test_save(client, live_server):
+def test_save(client, live_server, token):
     '''
 
     This method will test storing the 'max_collection' number of collections.
@@ -97,14 +97,14 @@ def test_save(client, live_server):
     for i in range(max_collection):
         dataset = get_sample_json('svr-data-new.json', 'svr')
         dataset['properties']['collection'] = 'collection--pytest-svr--' + str(i)
-        res = send_post(client, endpoint, json.dumps(dataset))
+        res = send_post(client, endpoint, token, json.dumps(dataset))
 
         # assertion checks
         assert res.status_code == 200
         assert res.json['status'] == 0
 
 
-def test_document_count(client, live_server):
+def test_document_count(client, live_server, token):
     '''
 
     This method will test whether the document count for each collection, does
@@ -126,13 +126,13 @@ def test_document_count(client, live_server):
     # save max collection
     for i in range(max_collection):
         data = json.dumps({'collection': 'collection--pytest-svr--' + str(i)})
-        res = send_post(client, endpoint, data)
+        res = send_post(client, endpoint, token, data)
 
         assert res.status_code == 200
         assert res.json['count'] == 1
 
 
-def test_collection_count(client, live_server):
+def test_collection_count(client, live_server, token):
     '''
 
     This method will test whether the specified user has not exceeded the
@@ -150,13 +150,13 @@ def test_collection_count(client, live_server):
     # local variables
     endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
-    res = send_post(client, endpoint, json.dumps({'uid': 1}))
+    res = send_post(client, endpoint, token, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
 
 
-def test_save_plus(client, live_server):
+def test_save_plus(client, live_server, token):
     '''
 
     This method will test whether any collections attempted to be saved, after
@@ -182,13 +182,13 @@ def test_save_plus(client, live_server):
     dataset = get_sample_json('svr-data-new.json', 'svr')
     dataset['properties']['collection'] = 'collection--pytest-svr--' + str(max_collection)
 
-    res = send_post(client, endpoint, json.dumps(dataset))
+    res = send_post(client, endpoint, token, json.dumps(dataset))
 
     assert res.status_code == 200
     assert res.json['status'] == 0
 
 
-def test_collection_count_plus(client, live_server):
+def test_collection_count_plus(client, live_server, token):
     '''
 
     This method will test whether the specified user has not exceeded the
@@ -211,13 +211,13 @@ def test_collection_count_plus(client, live_server):
     endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
-    res = send_post(client, endpoint, json.dumps({'uid': 1}))
+    res = send_post(client, endpoint, token, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
 
 
-def test_document_count_plus(client, live_server):
+def test_document_count_plus(client, live_server, token):
     '''
 
     This method will test whether each collection, owned by the specified user,
@@ -240,6 +240,7 @@ def test_document_count_plus(client, live_server):
         res = send_post(
             client,
             endpoint,
+            token,
             json.dumps({
                 'collection': 'collection--pytest-svr--' + str(i)
             })
@@ -251,7 +252,7 @@ def test_document_count_plus(client, live_server):
             assert res.json['count'] == 1
 
 
-def test_entity_drop(client, live_server):
+def test_entity_drop(client, live_server, token):
     '''
 
     This method will test the response code, after removing all entities,
@@ -274,6 +275,7 @@ def test_entity_drop(client, live_server):
         res = send_post(
             client,
             endpoint,
+            token,
             json.dumps({
                 'uid': 1,
                 'collection': 'collection--pytest-svr--' + str(i),
@@ -284,7 +286,7 @@ def test_entity_drop(client, live_server):
         assert res.status_code == 200
 
 
-def test_collection_drop(client, live_server):
+def test_collection_drop(client, live_server, token):
     '''
 
     This method will test the response code, after removing all collections,
@@ -307,6 +309,7 @@ def test_collection_drop(client, live_server):
         res = send_post(
             client,
             endpoint,
+            token,
             json.dumps({
                 'uid': 1,
                 'collection': 'collection--pytest-svr--' + str(i),
@@ -317,7 +320,7 @@ def test_collection_drop(client, live_server):
         assert res.status_code == 200
 
 
-def test_document_count_removed(client, live_server):
+def test_document_count_removed(client, live_server, token):
     '''
 
     This method will test whether each collection, owned by the specified user,
@@ -340,6 +343,7 @@ def test_document_count_removed(client, live_server):
         res = send_post(
             client,
             endpoint,
+            token,
             json.dumps({
                 'collection': 'collection--pytest-svr--' + str(i),
             })
@@ -349,7 +353,7 @@ def test_document_count_removed(client, live_server):
         assert res.json['count'] == -1
 
 
-def test_collection_count_removed(client, live_server):
+def test_collection_count_removed(client, live_server, token):
     '''
 
     This method will test whether the specified user has not exceeded the
@@ -365,7 +369,7 @@ def test_collection_count_removed(client, live_server):
 
     # local variables
     endpoint = collection_count()
-    res = send_post(client, endpoint, json.dumps({'uid': 1}))
+    res = send_post(client, endpoint, token, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == 0
