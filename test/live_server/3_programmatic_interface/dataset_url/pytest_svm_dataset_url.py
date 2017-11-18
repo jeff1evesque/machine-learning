@@ -101,7 +101,7 @@ def test_data_new(client, live_server, token):
     assert res.json['status'] == 0
 
 
-def test_data_append(client, live_server):
+def test_data_append(client, live_server, token):
     '''
 
     This method tests the 'data_new' session.
@@ -129,7 +129,7 @@ def test_data_append(client, live_server):
     assert res.json['status'] == 0
 
 
-def test_model_generate(client, live_server):
+def test_model_generate(client, live_server, token):
     '''
 
     This method tests the 'model_generate' session.
@@ -157,7 +157,7 @@ def test_model_generate(client, live_server):
     assert res.json['status'] == 0
 
 
-def test_model_predict(client, live_server):
+def test_model_predict(client, live_server, token):
     '''
 
     This method tests the 'model_predict' session.
