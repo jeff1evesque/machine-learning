@@ -130,29 +130,3 @@ class Account(object):
             return {'error': response_error, 'result': None}
         else:
             return {'error': None, 'result': response['result'][0][0]}
-
-    def get_uid(self, username):
-        '''
-
-        This method returns the userid (i.e uid) for a supplied username.
-
-        '''
-
-        # select dataset
-        self.sql.connect(self.db_ml)
-        sql_statement = 'SELECT id_user '\
-            'FROM tbl_user '\
-            'WHERE username=%s'
-        args = (username)
-        response = self.sql.execute('select', sql_statement, args)
-
-        # retrieve any error(s)
-        response_error = self.sql.get_errors()
-
-        # return result
-        if response_error:
-            return {'error': response_error, 'result': None}
-        elif not response['result']:
-            return {'error': 'no uid', 'result': None}
-        else:
-            return {'error': None, 'result': response['result'][0][0]}

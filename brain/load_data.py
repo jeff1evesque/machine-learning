@@ -31,7 +31,7 @@ class Load_Data(object):
 
     '''
 
-    def __init__(self, data, username=None):
+    def __init__(self, data, uid=None):
         '''
 
         This constructor is responsible for defining class variables.
@@ -47,17 +47,13 @@ class Load_Data(object):
         ]
         self.list_error = []
 
-        # flask session user
-        if 'uid' in session and session['uid']:
+        # web interface: flask session user
+        if (not uid and 'uid' in session and session['uid']):
             self.uid = session['uid']
 
-        # flask jwt-token user
-        elif username:
-            uid = Account().get_uid(username)
-            if uid['result']:
-                self.uid = uid['result']
-            else:
-                self.uid = current_app.config.get('USER_ID')
+        # programmatic api: flask jwt-token user
+        elif uid:
+            self.uid = uid
 
         # unauthenticated user
         else:
@@ -89,7 +85,6 @@ class Load_Data(object):
             }
 
         else:
-            print session.get_errors()
             response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database',
