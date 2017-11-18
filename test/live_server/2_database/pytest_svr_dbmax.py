@@ -56,35 +56,16 @@ def get_sample_json(jsonfile, model_type):
     return json_dataset
 
 
-def login(client):
-    '''
-
-    This method twill login, and return the corresponding token.
-
-    '''
-
-    # local variables
-    username = 'jeff1evesque'
-    password = 'password123'
-    payload = {'user[login]': username, 'user[password]': password}
-
-    # login and get flask-jwt token
-    login = client.post(
-        '/login',
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps(payload)
-    )
-    return login.json['access_token']
-
-
-def send_post(client, endpoint, data):
+def send_post(client, token, endpoint, data):
     '''
 
     This method will login, and return the corresponding token.
 
+    @token, is defined as a fixture, in our 'conftest.py', to help reduce
+        runtime on our tests.
+
     '''
 
-    token = login(client)
     return client.post(
         endpoint,
         headers={
