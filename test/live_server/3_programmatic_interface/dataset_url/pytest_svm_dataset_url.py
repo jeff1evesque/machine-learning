@@ -53,7 +53,27 @@ def get_sample_json(jsonfile, model_type):
     return json.dumps(json_dataset)
 
 
-def test_data_new(client, live_server):
+def send_post(client, endpoint, token, data):
+    '''
+
+    This method will login, and return the corresponding token.
+
+    @token, is defined as a fixture, in our 'conftest.py', to help reduce
+        runtime on our tests.
+
+    '''
+
+    return client.post(
+        endpoint,
+        headers={
+            'Authorization': 'Bearer {0}'.format(token),
+            'Content-Type': 'application/json'
+        },
+        data=data
+    )
+
+
+def test_data_new(client, live_server, token):
     '''
 
     This method tests the 'data_new' session.
@@ -61,15 +81,19 @@ def test_data_new(client, live_server):
     '''
 
     @live_server.app.route('/load-data')
-    def get_endpoint():
+    def load_data():
         return url_for('api.load_data', _external=True)
 
     live_server.start()
 
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-data-new.json', 'svm')
+    # local variables
+    endpoint = load_data()
+
+    res = send_post(
+        client,
+        endpoint,
+        token,
+        get_sample_json('svm-data-new.json', 'svm')
     )
 
     # assertion checks
@@ -85,15 +109,19 @@ def test_data_append(client, live_server):
     '''
 
     @live_server.app.route('/load-data')
-    def get_endpoint():
+    def load_data():
         return url_for('api.load_data', _external=True)
 
     live_server.start()
 
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-data-append.json', 'svm')
+    # local variables
+    endpoint = load_data()
+
+    res = send_post(
+        client,
+        endpoint,
+        token,
+        get_sample_json('svm-data-append.json', 'svm')
     )
 
     # assertion checks
@@ -109,15 +137,19 @@ def test_model_generate(client, live_server):
     '''
 
     @live_server.app.route('/load-data')
-    def get_endpoint():
+    def load_data():
         return url_for('api.load_data', _external=True)
 
     live_server.start()
 
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-model-generate.json', 'svm')
+    # local variables
+    endpoint = load_data()
+
+    res = send_post(
+        client,
+        endpoint,
+        token,
+        get_sample_json('svm-model-generate.json', 'svm')
     )
 
     # assertion checks
@@ -138,15 +170,19 @@ def test_model_predict(client, live_server):
     '''
 
     @live_server.app.route('/load-data')
-    def get_endpoint():
+    def load_data():
         return url_for('api.load_data', _external=True)
 
     live_server.start()
 
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('svm-model-predict.json', 'svm')
+    # local variables
+    endpoint = load_data()
+
+    res = send_post(
+        client,
+        endpoint,
+        token,
+        get_sample_json('svm-model-predict.json', 'svm')
     )
 
     # check each probability is within acceptable margin
