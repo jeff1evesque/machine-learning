@@ -148,8 +148,6 @@ def test_document_count(client, live_server):
         res = send_post(client, endpoint, data)
 
         assert res.status_code == 200
-        print('pytest_svm_dbmax.py, data: ' + repr(data))
-        print('pytest_svm_dbmax.py, res: ' + repr(res))
         assert res.json['count'] == 1
 
 
@@ -291,7 +289,7 @@ def test_entity_drop(client, live_server):
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # drop all entity related collections
-    for i in range(max_collection - 1):
+    for i in range(max_collection):
         res = send_post(
             client,
             endpoint,
