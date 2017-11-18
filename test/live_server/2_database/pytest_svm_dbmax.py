@@ -76,6 +76,7 @@ def login(client):
     )
     return login.json['access_token']
 
+
 def send_post(client, endpoint, data):
     '''
 
@@ -265,7 +266,7 @@ def test_document_count_plus(client, live_server):
             })
         )
 
-        if i == max_collection + 1:
+        if i == max_collection:
             assert res.json['count'] == -1
         else:
             assert res.json['count'] == 1
