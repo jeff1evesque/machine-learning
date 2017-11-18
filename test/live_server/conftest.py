@@ -10,6 +10,7 @@ Note: the 'pytest' instances can further be reviewed:
 
 '''
 
+import json
 import pytest
 import sys
 sys.path.append('..')
