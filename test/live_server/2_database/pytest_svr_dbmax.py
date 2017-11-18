@@ -56,6 +56,45 @@ def get_sample_json(jsonfile, model_type):
     return json_dataset
 
 
+def login(client):
+    '''
+
+    This method twill login, and return the corresponding token.
+
+    '''
+
+    # local variables
+    username = 'jeff1evesque'
+    password = 'password123'
+    payload = {'user[login]': username, 'user[password]': password}
+
+    # login and get flask-jwt token
+    login = client.post(
+        '/login',
+        headers={'Content-Type': 'application/json'},
+        data=json.dumps(payload)
+    )
+    return login.json['access_token']
+
+
+def send_post(client, endpoint, data):
+    '''
+
+    This method will login, and return the corresponding token.
+
+    '''
+
+    token = login(client)
+    return client.post(
+        endpoint,
+        headers={
+            'Authorization': 'Bearer {0}'.format(token),
+            'Content-Type': 'application/json'
+        },
+        data=data
+    )
+
+
 def test_save(client, live_server):
     '''
 
@@ -70,18 +109,14 @@ def test_save(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = load_data()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection
     for i in range(max_collection):
         dataset = get_sample_json('svr-data-new.json', 'svr')
         dataset['properties']['collection'] = 'collection--pytest-svr--' + str(i)
-
-        res = client.post(
-            load_data(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps(dataset)
-        )
+        res = send_post(client, endpoint, json.dumps(dataset))
 
         # assertion checks
         assert res.status_code == 200
@@ -104,17 +139,13 @@ def test_document_count(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = document_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection
     for i in range(max_collection):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'collection': 'collection--pytest-svr--' + str(i),
-            })
-        )
+        data = json.dumps({'collection': 'collection--pytest-svr--' + str(i)})
+        res = send_post(client, endpoint, data)
 
         assert res.status_code == 200
         assert res.json['count'] == 1
@@ -136,14 +167,9 @@ def test_collection_count(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
+    endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
-
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    res = send_post(client, endpoint, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
@@ -152,10 +178,12 @@ def test_collection_count(client, live_server):
 def test_save_plus(client, live_server):
     '''
 
-    This method will test saving an additional collection, in addition to
-    the previous 'max_collection' collections already saved. For anonymous
-    users, the oldest (i.e. first) database collection related objects, will be
-    removed, to satisfy the maximum number of collections allowed to be saved.
+    This method will test whether any collections attempted to be saved, after
+    the maximum allowed, will be ignored.
+
+    Note: for anonymous users (pertains to web-interface), successive
+          collections will be stored, causing the oldest collections to be
+          iteratively removed.
 
     '''
 
@@ -166,17 +194,14 @@ def test_save_plus(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = load_data()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection + 1
     dataset = get_sample_json('svr-data-new.json', 'svr')
     dataset['properties']['collection'] = 'collection--pytest-svr--' + str(max_collection)
 
-    res = client.post(
-        load_data(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps(dataset)
-    )
+    res = send_post(client, endpoint, json.dumps(dataset))
 
     assert res.status_code == 200
     assert res.json['status'] == 0
@@ -187,7 +212,11 @@ def test_collection_count_plus(client, live_server):
 
     This method will test whether the specified user has not exceeded the
     'max_collection' limit. Specifically, if 'max_collection + 1' is saved,
-    then the oldest collection will be removed.
+    then successive collection will be ignored, and not saved.
+
+    Note: for anonymous users (pertains to web-interface), successive
+          collections will be stored, causing the oldest collections to be
+          iteratively removed.
 
     '''
 
@@ -198,14 +227,10 @@ def test_collection_count_plus(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
+    endpoint = collection_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    res = send_post(client, endpoint, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
@@ -227,20 +252,19 @@ def test_document_count_plus(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = document_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
     for i in range(max_collection + 1):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'collection': 'collection--pytest-svr--' + str(i),
+        res = send_post(
+            client,
+            endpoint,
+            json.dumps({
+                'collection': 'collection--pytest-svr--' + str(i)
             })
         )
 
-        assert res.status_code == 200
-
-        if i == 0:
+        if i == max_collection:
             assert res.json['count'] == -1
         else:
             assert res.json['count'] == 1
@@ -261,17 +285,17 @@ def test_entity_drop(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
+    endpoint = remove_collection()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # drop all entity related collections
     for i in range(max_collection):
-        res = client.post(
-            remove_collection(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'uid': uid,
-                'collection': 'collection--pytest-svr--' + str(i + 1),
+        res = send_post(
+            client,
+            endpoint,
+            json.dumps({
+                'uid': 1,
+                'collection': 'collection--pytest-svr--' + str(i),
                 'type': 'collection',
             })
         )
@@ -282,7 +306,7 @@ def test_entity_drop(client, live_server):
 def test_collection_drop(client, live_server):
     '''
 
-    This method will test the respone code, after removing all collections,
+    This method will test the response code, after removing all collections,
     within the 'max_collection' limit.
 
     '''
@@ -294,18 +318,18 @@ def test_collection_drop(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
+    endpoint = remove_collection()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # drop all collections
     for i in range(max_collection):
-        res = client.post(
-            remove_collection(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'uid': uid,
+        res = send_post(
+            client,
+            endpoint,
+            json.dumps({
+                'uid': 1,
+                'collection': 'collection--pytest-svr--' + str(i),
                 'type': 'entity',
-                'collection': 'collection--pytest-svr--' + str(i + 1),
             })
         )
 
@@ -328,13 +352,14 @@ def test_document_count_removed(client, live_server):
     live_server.start()
 
     # local variables
+    endpoint = document_count()
     max_collection = current_app.config.get('MAXCOL_AUTH')
 
     for i in range(max_collection):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
+        res = send_post(
+            client,
+            endpoint,
+            json.dumps({
                 'collection': 'collection--pytest-svr--' + str(i),
             })
         )
@@ -358,13 +383,8 @@ def test_collection_count_removed(client, live_server):
     live_server.start()
 
     # local variables
-    uid = 0
-
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    endpoint = collection_count()
+    res = send_post(client, endpoint, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == 0
