@@ -170,7 +170,7 @@ def test_model_predict(client, live_server, token):
     '''
 
     @live_server.app.route('/load-data')
-    def get_endpoint():
+    def load_data():
         return url_for('api.load_data', _external=True)
 
     live_server.start()

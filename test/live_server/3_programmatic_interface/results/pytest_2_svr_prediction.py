@@ -157,7 +157,7 @@ def test_retrieve_titles(client, live_server, token):
     '''
 
     @live_server.app.route('/retrieve-prediction-titles')
-    def get_endpoint():
+    def retrieve_prediction_titles():
         return url_for('api.retrieve_prediction_titles', _external=True)
 
     live_server.start()
