@@ -74,7 +74,7 @@ def login(client):
         headers={'Content-Type': 'application/json'},
         data=json.dumps(payload)
     )
-    return login.json['access_token']
+    return login.json['access_token']
 
 def send_post(client, endpoint, data):
     '''
@@ -147,6 +147,8 @@ def test_document_count(client, live_server):
         res = send_post(client, endpoint, data)
 
         assert res.status_code == 200
+        print('pytest_svm_dbmax.py, data: ' + repr(data))
+        print('pytest_svm_dbmax.py, res: ' + repr(res))
         assert res.json['count'] == 1
 
 
@@ -177,10 +179,12 @@ def test_collection_count(client, live_server):
 def test_save_plus(client, live_server):
     '''
 
-    This method will test saving an additional collection, in addition to
-    the previous 'max_collection' collections already saved. For anonymous
-    users, the oldest (i.e. first) database collection related objects, will be
-    removed, to satisfy the maximum number of collections allowed to be saved.
+    This method will test whether any collections attempted to be saved, after
+    the maximum allowed, will be ignored.
+
+    Note: for anonymous users (pertains to web-interface), successive
+          collections will be stored, causing the oldest collections to be
+          iteratively removed.
 
     '''
 
@@ -209,7 +213,11 @@ def test_collection_count_plus(client, live_server):
 
     This method will test whether the specified user has not exceeded the
     'max_collection' limit. Specifically, if 'max_collection + 1' is saved,
-    then the oldest collection will be removed.
+    then successive collection will be ignored, and not saved.
+
+    Note: for anonymous users (pertains to web-interface), successive
+          collections will be stored, causing the oldest collections to be
+          iteratively removed.
 
     '''
 
@@ -257,7 +265,7 @@ def test_document_count_plus(client, live_server):
             })
         )
 
-        if i == 0:
+        if i == max_collection + 1:
             assert res.json['count'] == -1
         else:
             assert res.json['count'] == 1
@@ -299,7 +307,7 @@ def test_entity_drop(client, live_server):
 def test_collection_drop(client, live_server):
     '''
 
-    This method will test the respone code, after removing all collections,
+    This method will test the response code, after removing all collections,
     within the 'max_collection' limit.
 
     '''
