@@ -86,8 +86,8 @@ Both the web-interface, and the programmatic-api, have corresponding
 
 ### Web Interface
 
-The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html)
-, or GUI implementation, allow users to implement the following sessions:
+The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html),
+ or GUI implementation, allow users to implement the following sessions:
 
 - `data_new`: store the provided dataset(s), within the implemented sql
  database.
@@ -140,13 +140,13 @@ A post request, can be implemented in python, as follows:
 ```python
 import requests
 
-endpoint_url = 'https://localhost:9090/load-data'
+endpoint = 'https://localhost:9090/load-data'
 headers = {
     'Authorization': 'Bearer ' + token,
     'Content-Type': 'application/json'
 }
 
-requests.post(endpoint_url, headers=headers, data=json_string_here)
+requests.post(endpoint, headers=headers, data=json_string_here)
 ```
 
 **Note:** more information, regarding how to obtain a valid `token`, can be further
