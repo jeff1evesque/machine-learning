@@ -68,9 +68,10 @@ The following lines, indicate the application is accessible via `localhost:8080`
 ```bash
 ...
   ## Create a forwarded port mapping which allows access to a specific port
-  #  within the machine from a port on the host machine. In the example below,
-  #  accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 5000, host: 8080
+  ## within the machine from a port on the host machine. In the example below,
+  ## accessing "localhost:8080" will access port 80 on the guest machine.
+  main.vm.network 'forwarded_port', guest: 5000, host: 8080
+  main.vm.network 'forwarded_port', guest: 6000, host: 9090
 ...
 ```
 
@@ -139,11 +140,17 @@ A post request, can be implemented in python, as follows:
 ```python
 import requests
 
-endpoint_url = 'https://localhost:8080/load-data'
-headers = {'Content-Type': 'application/json'}
+endpoint_url = 'https://localhost:9090/load-data'
+headers = {
+    'Authorization': 'Bearer ' + token,
+    'Content-Type': 'application/json'
+}
 
 requests.post(endpoint_url, headers=headers, data=json_string_here)
 ```
+
+**Note:** more information, regarding how to obtain a valid `token`, can be further
+ reviewed, in the `/login` [documentation](https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst).
 
 **Note:** the above `post` request, can be implemented in a different language,
  respectively.
