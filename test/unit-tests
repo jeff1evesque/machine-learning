@@ -61,7 +61,7 @@ sudo docker network create -d bridge app_nw && \
 sudo docker run --name base --net=app_nw -d container-default && \
 sudo docker run --name redis --net=app_nw -d container-redis && \
 sudo docker run --name mongodb --net=app_nw -d container-mongodb
-sudo docker run --name webserver --net=app_nw -d container-webserver run && \
+sudo docker run --name webserver --net=app_nw -d container-webserver run-api && \
 sudo docker run --name mariadb --net=app_nw -d container-mariadb
 
 ## provision mongodb authorization

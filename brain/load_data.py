@@ -14,7 +14,6 @@ from brain.session.data_new import DataNew
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
 from brain.database.session import Session
-from brain.database.account import Account
 
 
 class Load_Data(object):
@@ -31,7 +30,7 @@ class Load_Data(object):
 
     '''
 
-    def __init__(self, data, username=None):
+    def __init__(self, data, uid=None):
         '''
 
         This constructor is responsible for defining class variables.
@@ -47,17 +46,13 @@ class Load_Data(object):
         ]
         self.list_error = []
 
-        # flask session user
-        if 'uid' in session and session['uid']:
-            self.uid = session['uid']
+        # programmatic api: flask jwt-token user
+        if uid:
+            self.uid = uid
 
-        # flask jwt-token user
-        elif username:
-            uid = Account().get_uid(username)
-            if uid['result']:
-                self.uid = uid['result']
-            else:
-                self.uid = current_app.config.get('USER_ID')
+        # web interface: flask session user
+        elif (not uid and 'uid' in session and session['uid']):
+            self.uid = session['uid']
 
         # unauthenticated user
         else:
@@ -89,7 +84,6 @@ class Load_Data(object):
             }
 
         else:
-            print session.get_errors()
             response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database',

@@ -68,9 +68,10 @@ The following lines, indicate the application is accessible via `localhost:8080`
 ```bash
 ...
   ## Create a forwarded port mapping which allows access to a specific port
-  #  within the machine from a port on the host machine. In the example below,
-  #  accessing "localhost:8080" will access port 80 on the guest machine.
-  config.vm.network "forwarded_port", guest: 5000, host: 8080
+  ## within the machine from a port on the host machine. In the example below,
+  ## accessing "localhost:8080" will access port 80 on the guest machine.
+  main.vm.network 'forwarded_port', guest: 5000, host: 8080
+  main.vm.network 'forwarded_port', guest: 6000, host: 9090
 ...
 ```
 
@@ -85,8 +86,8 @@ Both the web-interface, and the programmatic-api, have corresponding
 
 ### Web Interface
 
-The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html)
-, or GUI implementation, allow users to implement the following sessions:
+The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html),
+ or GUI implementation, allow users to implement the following sessions:
 
 - `data_new`: store the provided dataset(s), within the implemented sql
  database.
@@ -139,13 +140,21 @@ A post request, can be implemented in python, as follows:
 ```python
 import requests
 
-endpoint_url = 'https://localhost:8080/load-data'
-headers = {'Content-Type': 'application/json'}
+endpoint = 'https://localhost:9090/load-data'
+headers = {
+    'Authorization': 'Bearer ' + token,
+    'Content-Type': 'application/json'
+}
 
-requests.post(endpoint_url, headers=headers, data=json_string_here)
+requests.post(endpoint, headers=headers, data=json_string_here)
 ```
 
-**Note:** the above `post` request, can be implemented in a different language,
- respectively.
+**Note:** more information, regarding how to obtain a valid `token`, can be further
+ reviewed, in the `/login` [documentation](https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst).
 
 **Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
+
+It is important to remember that the [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/98c7f57986cbe56ca14f8ee47859b50a08c2ef9b/Vagrantfile#L54-L55),
+ as denoted by the above snippet, has defined two port forwards. Specifically, on
+ the host, `8080` is reserved for the web-interface, while `9090`, is reserved for
+ the programmatic rest-api.

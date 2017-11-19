@@ -17,14 +17,15 @@ import logging
 from flask import Flask, g
 from logging.handlers import RotatingFileHandler
 from brain.cache.session import RedisSessionInterface
-from interface.views import blueprint
+from interface.views_api import blueprint_api
+from interface.views_web import blueprint_web
 from flask_jwt_extended import JWTManager
 
 
 # application factory
-def create_app(args={'prefix': '', 'settings': ''}):
+def create_app(args={'instance': 'web'}):
     # path to hiera
-    if args['prefix']:
+    if ('prefix' in args and args['prefix']):
         prepath = 'hiera/' + args['prefix']
     else:
         prepath = 'hiera'
@@ -53,40 +54,32 @@ def create_app(args={'prefix': '', 'settings': ''}):
         crypto = settings['crypto']
         validate_password = settings['validate_password']
 
-    # local variables
-    if args['settings']:
-        app = Flask(
-            __name__,
-            args['settings'],
-            template_folder='interface/templates',
-            static_folder='interface/static',
-        )
+    # programmatic-api: set the flask-jwt-extended extension
+    if args['instance'] == 'api':
+        app = Flask(__name__)
+        app.secret_key = application['security_key']
+        app.config['JWT_SECRET_KEY'] = application['security_key']
+        app.register_blueprint(blueprint_api)
+        JWTManager(app)
+
+    # web-interface: replace default cookie session with server-side redis
     else:
         app = Flask(
             __name__,
             template_folder='interface/templates',
-            static_folder='interface/static',
+            static_folder='interface/static'
         )
-
-    # replace default cookie session with server-side redis
-    app.session_interface = RedisSessionInterface(
-        cache['host'],
-        cache['port'],
-        cache['db']
-    )
-
-    # secret key: used for maintaining flask sessions
-    app.secret_key = application['security_key']
-
-    # register blueprint
-    app.register_blueprint(blueprint)
-
-    # set the flask-jwt-extended extension
-    JWTManager(app)
+        app.session_interface = RedisSessionInterface(
+            cache['host'],
+            cache['port'],
+            cache['db']
+        )
+        app.secret_key = application['security_key']
+        app.register_blueprint(blueprint_web)
 
     # local logger: used for this module
-    root = general['root']
-    LOG_PATH = root + webserver['flask']['log_path']
+    ROOT = general['root']
+    LOG_PATH = ROOT + webserver['flask']['log_path']
     HANDLER_LEVEL = application['log_level']
 
     # flask attributes: accessible across application
@@ -95,7 +88,7 @@ def create_app(args={'prefix': '', 'settings': ''}):
         CACHE_HOST=cache['host'],
         CACHE_PORT=cache['port'],
         CACHE_DB=cache['db'],
-        ROOT=general['root'],
+        ROOT=ROOT,
         SQL_HOST=sql['host'],
         SQL_LOG_PATH=sql['log_path'],
         SQL_DB=sql['name'],
@@ -125,21 +118,25 @@ def create_app(args={'prefix': '', 'settings': ''}):
         USER_ID=0
     )
 
-    # log handler: requires the below logger
+    # log format
     formatter = logging.Formatter(
         "[%(asctime)s] {%(pathname)s:%(lineno)d} "
         "%(levelname)s - %(message)s"
     )
+
+    # initialize the log handler
     handler = RotatingFileHandler(
         LOG_PATH,
         maxBytes=10000000,
         backupCount=5
     )
+
+    # log handler level
     handler.setLevel(HANDLER_LEVEL)
     handler.setFormatter(formatter)
     app.logger.addHandler(handler)
 
-    # logger: complements the log handler
+    # app logger level
     log = logging.getLogger('werkzeug')
     log.setLevel(logging.DEBUG)
     log.addHandler(handler)

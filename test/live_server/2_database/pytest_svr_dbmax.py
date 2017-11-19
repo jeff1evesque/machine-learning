@@ -56,7 +56,27 @@ def get_sample_json(jsonfile, model_type):
     return json_dataset
 
 
-def test_save(client, live_server):
+def send_post(client, endpoint, token, data):
+    '''
+
+    This method will login, and return the corresponding token.
+
+    @token, is defined as a fixture, in our 'conftest.py', to help reduce
+        runtime on our tests.
+
+    '''
+
+    return client.post(
+        endpoint,
+        headers={
+            'Authorization': 'Bearer {0}'.format(token),
+            'Content-Type': 'application/json'
+        },
+        data=data
+    )
+
+
+def test_save(client, live_server, token):
     '''
 
     This method will test storing the 'max_collection' number of collections.
@@ -65,30 +85,26 @@ def test_save(client, live_server):
 
     @live_server.app.route('/load-data')
     def load_data():
-        return url_for('name.load_data', _external=True)
+        return url_for('api.load_data', _external=True)
 
     live_server.start()
 
     # local variables
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = load_data()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection
     for i in range(max_collection):
         dataset = get_sample_json('svr-data-new.json', 'svr')
         dataset['properties']['collection'] = 'collection--pytest-svr--' + str(i)
-
-        res = client.post(
-            load_data(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps(dataset)
-        )
+        res = send_post(client, endpoint, token, json.dumps(dataset))
 
         # assertion checks
         assert res.status_code == 200
         assert res.json['status'] == 0
 
 
-def test_document_count(client, live_server):
+def test_document_count(client, live_server, token):
     '''
 
     This method will test whether the document count for each collection, does
@@ -99,28 +115,24 @@ def test_document_count(client, live_server):
 
     @live_server.app.route('/document-count')
     def document_count():
-        return url_for('name.document_count', _external=True)
+        return url_for('api.document_count', _external=True)
 
     live_server.start()
 
     # local variables
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = document_count()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection
     for i in range(max_collection):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'collection': 'collection--pytest-svr--' + str(i),
-            })
-        )
+        data = json.dumps({'collection': 'collection--pytest-svr--' + str(i)})
+        res = send_post(client, endpoint, token, data)
 
         assert res.status_code == 200
         assert res.json['count'] == 1
 
 
-def test_collection_count(client, live_server):
+def test_collection_count(client, live_server, token):
     '''
 
     This method will test whether the specified user has not exceeded the
@@ -131,87 +143,81 @@ def test_collection_count(client, live_server):
 
     @live_server.app.route('/collection-count')
     def collection_count():
-        return url_for('name.collection_count', _external=True)
+        return url_for('api.collection_count', _external=True)
 
     live_server.start()
 
     # local variables
-    uid = 0
-    max_collection = current_app.config.get('MAXCOL_ANON')
-
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    endpoint = collection_count()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
+    res = send_post(client, endpoint, token, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
 
 
-def test_save_plus(client, live_server):
+def test_save_plus(client, live_server, token):
     '''
 
-    This method will test saving an additional collection, in addition to
-    the previous 'max_collection' collections already saved. For anonymous
-    users, the oldest (i.e. first) database collection related objects, will be
-    removed, to satisfy the maximum number of collections allowed to be saved.
+    This method will test whether any collections attempted to be saved, after
+    the maximum allowed, will be ignored.
+
+    Note: for anonymous users (pertains to web-interface), successive
+          collections will be stored, causing the oldest collections to be
+          iteratively removed.
 
     '''
 
     @live_server.app.route('/load-data')
     def load_data():
-        return url_for('name.load_data', _external=True)
+        return url_for('api.load_data', _external=True)
 
     live_server.start()
 
     # local variables
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = load_data()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # save max collection + 1
     dataset = get_sample_json('svr-data-new.json', 'svr')
     dataset['properties']['collection'] = 'collection--pytest-svr--' + str(max_collection)
 
-    res = client.post(
-        load_data(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps(dataset)
-    )
+    res = send_post(client, endpoint, token, json.dumps(dataset))
 
     assert res.status_code == 200
     assert res.json['status'] == 0
 
 
-def test_collection_count_plus(client, live_server):
+def test_collection_count_plus(client, live_server, token):
     '''
 
     This method will test whether the specified user has not exceeded the
     'max_collection' limit. Specifically, if 'max_collection + 1' is saved,
-    then the oldest collection will be removed.
+    then successive collection will be ignored, and not saved.
+
+    Note: for anonymous users (pertains to web-interface), successive
+          collections will be stored, causing the oldest collections to be
+          iteratively removed.
 
     '''
 
     @live_server.app.route('/collection-count')
     def collection_count():
-        return url_for('name.collection_count', _external=True)
+        return url_for('api.collection_count', _external=True)
 
     live_server.start()
 
     # local variables
-    uid = 0
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = collection_count()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    res = send_post(client, endpoint, token, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == max_collection
 
 
-def test_document_count_plus(client, live_server):
+def test_document_count_plus(client, live_server, token):
     '''
 
     This method will test whether each collection, owned by the specified user,
@@ -222,31 +228,31 @@ def test_document_count_plus(client, live_server):
 
     @live_server.app.route('/document-count')
     def document_count():
-        return url_for('name.document_count', _external=True)
+        return url_for('api.document_count', _external=True)
 
     live_server.start()
 
     # local variables
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = document_count()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     for i in range(max_collection + 1):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'collection': 'collection--pytest-svr--' + str(i),
+        res = send_post(
+            client,
+            endpoint,
+            token,
+            json.dumps({
+                'collection': 'collection--pytest-svr--' + str(i)
             })
         )
 
-        assert res.status_code == 200
-
-        if i == 0:
+        if i == max_collection:
             assert res.json['count'] == -1
         else:
             assert res.json['count'] == 1
 
 
-def test_entity_drop(client, live_server):
+def test_entity_drop(client, live_server, token):
     '''
 
     This method will test the response code, after removing all entities,
@@ -256,22 +262,23 @@ def test_entity_drop(client, live_server):
 
     @live_server.app.route('/remove-collection')
     def remove_collection():
-        return url_for('name.remove_collection', _external=True)
+        return url_for('api.remove_collection', _external=True)
 
     live_server.start()
 
     # local variables
-    uid = 0
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = remove_collection()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # drop all entity related collections
     for i in range(max_collection):
-        res = client.post(
-            remove_collection(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'uid': uid,
-                'collection': 'collection--pytest-svr--' + str(i + 1),
+        res = send_post(
+            client,
+            endpoint,
+            token,
+            json.dumps({
+                'uid': 1,
+                'collection': 'collection--pytest-svr--' + str(i),
                 'type': 'collection',
             })
         )
@@ -279,40 +286,41 @@ def test_entity_drop(client, live_server):
         assert res.status_code == 200
 
 
-def test_collection_drop(client, live_server):
+def test_collection_drop(client, live_server, token):
     '''
 
-    This method will test the respone code, after removing all collections,
+    This method will test the response code, after removing all collections,
     within the 'max_collection' limit.
 
     '''
 
     @live_server.app.route('/remove-collection')
     def remove_collection():
-        return url_for('name.remove_collection', _external=True)
+        return url_for('api.remove_collection', _external=True)
 
     live_server.start()
 
     # local variables
-    uid = 0
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = remove_collection()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     # drop all collections
     for i in range(max_collection):
-        res = client.post(
-            remove_collection(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
-                'uid': uid,
+        res = send_post(
+            client,
+            endpoint,
+            token,
+            json.dumps({
+                'uid': 1,
+                'collection': 'collection--pytest-svr--' + str(i),
                 'type': 'entity',
-                'collection': 'collection--pytest-svr--' + str(i + 1),
             })
         )
 
         assert res.status_code == 200
 
 
-def test_document_count_removed(client, live_server):
+def test_document_count_removed(client, live_server, token):
     '''
 
     This method will test whether each collection, owned by the specified user,
@@ -323,18 +331,20 @@ def test_document_count_removed(client, live_server):
 
     @live_server.app.route('/document-count')
     def document_count():
-        return url_for('name.document_count', _external=True)
+        return url_for('api.document_count', _external=True)
 
     live_server.start()
 
     # local variables
-    max_collection = current_app.config.get('MAXCOL_ANON')
+    endpoint = document_count()
+    max_collection = current_app.config.get('MAXCOL_AUTH')
 
     for i in range(max_collection):
-        res = client.post(
-            document_count(),
-            headers={'Content-Type': 'application/json'},
-            data=json.dumps({
+        res = send_post(
+            client,
+            endpoint,
+            token,
+            json.dumps({
                 'collection': 'collection--pytest-svr--' + str(i),
             })
         )
@@ -343,7 +353,7 @@ def test_document_count_removed(client, live_server):
         assert res.json['count'] == -1
 
 
-def test_collection_count_removed(client, live_server):
+def test_collection_count_removed(client, live_server, token):
     '''
 
     This method will test whether the specified user has not exceeded the
@@ -353,18 +363,13 @@ def test_collection_count_removed(client, live_server):
 
     @live_server.app.route('/collection-count')
     def collection_count():
-        return url_for('name.collection_count', _external=True)
+        return url_for('api.collection_count', _external=True)
 
     live_server.start()
 
     # local variables
-    uid = 0
-
-    res = client.post(
-        collection_count(),
-        headers={'Content-Type': 'application/json'},
-        data=json.dumps({'uid': uid})
-    )
+    endpoint = collection_count()
+    res = send_post(client, endpoint, token, json.dumps({'uid': 1}))
 
     assert res.status_code == 200
     assert res.json['count'] == 0

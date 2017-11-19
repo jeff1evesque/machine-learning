@@ -50,7 +50,27 @@ def get_sample_json(jsonfile, model_type):
     return json.dumps(json_dataset)
 
 
-def test_save_prediction(client, live_server):
+def send_post(client, endpoint, token, data):
+    '''
+
+    This method will login, and return the corresponding token.
+
+    @token, is defined as a fixture, in our 'conftest.py', to help reduce
+        runtime on our tests.
+
+    '''
+
+    return client.post(
+        endpoint,
+        headers={
+            'Authorization': 'Bearer {0}'.format(token),
+            'Content-Type': 'application/json'
+        },
+        data=data
+    )
+
+
+def test_save_prediction(client, live_server, token):
     '''
 
     This method saves an svm prediction.
@@ -58,15 +78,19 @@ def test_save_prediction(client, live_server):
     '''
 
     @live_server.app.route('/save-prediction')
-    def get_endpoint():
-        return url_for('name.save_prediction', _external=True)
+    def save_prediction():
+        return url_for('api.save_prediction', _external=True)
 
     live_server.start()
 
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('save-prediction.json', 'svr')
+    # local variables
+    endpoint = save_prediction()
+
+    res = send_post(
+        client,
+        endpoint,
+        token,
+        get_sample_json('save-prediction.json', 'svr')
     )
 
     # assertion checks
@@ -85,7 +109,7 @@ def test_save_prediction(client, live_server):
         assert res.json['status'] == 0
 
 
-def test_retrieve_prediction(client, live_server):
+def test_retrieve_prediction(client, live_server, token):
     '''
 
     This method retrieves a stored svm prediction.
@@ -93,15 +117,19 @@ def test_retrieve_prediction(client, live_server):
     '''
 
     @live_server.app.route('/retrieve-prediction')
-    def get_endpoint():
-        return url_for('name.retrieve_prediction', _external=True)
+    def retrieve_prediction():
+        return url_for('api.retrieve_prediction', _external=True)
 
     live_server.start()
 
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('retrieve-prediction.json', 'svr')
+    # local variables
+    endpoint = retrieve_prediction()
+
+    res = send_post(
+        client,
+        endpoint,
+        token,
+        get_sample_json('retrieve-prediction.json', 'svr')
     )
 
     # assertion checks
@@ -120,7 +148,7 @@ def test_retrieve_prediction(client, live_server):
     assert res.json['r2'] == [['0.991149292811']]
 
 
-def test_retrieve_titles(client, live_server):
+def test_retrieve_titles(client, live_server, token):
     '''
 
     This method retrieves all svm prediction titles, with respect to an
@@ -129,15 +157,19 @@ def test_retrieve_titles(client, live_server):
     '''
 
     @live_server.app.route('/retrieve-prediction-titles')
-    def get_endpoint():
-        return url_for('name.retrieve_prediction_titles', _external=True)
+    def retrieve_prediction_titles():
+        return url_for('api.retrieve_prediction_titles', _external=True)
 
     live_server.start()
 
-    res = client.post(
-        get_endpoint(),
-        headers={'Content-Type': 'application/json'},
-        data=get_sample_json('retrieve-titles.json', 'svr')
+    # local variables
+    endpoint = retrieve_prediction_titles()
+
+    res = send_post(
+        client,
+        endpoint,
+        token,
+        get_sample_json('retrieve-titles.json', 'svr')
     )
 
     # assertion checks

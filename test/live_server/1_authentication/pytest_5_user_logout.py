@@ -37,10 +37,19 @@ def test_logout(client, live_server):
         headers={'Content-Type': 'application/json'},
         data=json.dumps(payload)
     )
-    logout = client.post('/logout')
+    token = login.json['access_token']
+
+    if token:
+        logout = client.post(
+            '/logout',
+            headers={'Authorization': 'Bearer {0}'.format(token)}
+        )
+    else:
+        assert False
 
     # assertion checks
     assert login.status_code == 200
-    assert logout.status_code == 200
     assert login.json['status'] == 0
+    assert token
+    assert logout.status_code == 200
     assert logout.json['status'] == 0

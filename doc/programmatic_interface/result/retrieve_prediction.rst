@@ -15,10 +15,16 @@ the ``data`` attribute, in a given ``POST`` request:
 
     import requests
 
-    endpoint_url = 'https://localhost:8080/retrieve-prediction'
-    headers = {'Content-Type': 'application/json'}
+    endpoint = 'https://localhost:9090/retrieve-prediction'
+    headers = {
+        'Authorization': 'Bearer ' + token,
+        'Content-Type': 'application/json'
+    }
 
-    requests.post(endpoint_url, headers=headers, data=json_string_here)
+    requests.post(endpoint, headers=headers, data=json_string_here)
+
+**Note:** more information, regarding how to obtain a valid ``token``, can be further
+reviewed, in the ``/login`` `documentation <https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst>`_.
 
 The following properties define the above ``data`` attribute:
 

@@ -32,15 +32,15 @@ a valid token, to the ``/load-data`` endpoint:
 
     # login and get flask-jwt token
     login = client.post(
-        '/login',
+        'https://localhost:9090/login',
         headers={'Content-Type': 'application/json'},
         data=payload
     )
     token = login.json['access_token']
 
     # provide flask-jwt token
-    login = client.post(
-        '/load-data',
+    res = client.post(
+        'https://localhost:9090/load-data',
         headers={
             'Authorization': 'Bearer ' + token,
             'Content-Type': 'application/json'

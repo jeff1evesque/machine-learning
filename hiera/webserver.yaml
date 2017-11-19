@@ -14,17 +14,42 @@ webserver:
     flask:
         log_path: '/log/webserver/flask.log'
 
-    gunicorn:
+    gunicorn_web:
         bind: 0.0.0.0
         port: 5001
         workers: 6
         log_path: '/log/webserver/gunicorn.log'
 
-    nginx:
+    gunicorn_api:
+        bind: 0.0.0.0
+        port: 6001
+        workers: 6
+        log_path: '/log/webserver/gunicorn.log'
+
+    nginx_web:
         reverse_proxy:
             vhost: 'machine-learning.com'
             host_port: 8080
             listen_port: 5000
+            proxy: 'http://localhost'
+
+        certificate:
+            cert_path: '/etc/puppetlabs/puppet/ssl/certs'
+            pkey_path: '/etc/puppetlabs/puppet/ssl/private_keys'
+            props:
+                days: 365
+                bit: 4096
+                country: 'US'
+                organization: 'MLearning'
+                state: 'CA'
+                locality: 'Palo Alto'
+                unit: 'ML'
+
+    nginx_api:
+        reverse_proxy:
+            vhost: 'machine-learning-api.com'
+            host_port: 9090
+            listen_port: 6000
             proxy: 'http://localhost'
 
         certificate:
