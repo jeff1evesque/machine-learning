@@ -2,7 +2,7 @@
 Login
 =====
 
-Users can submit a ``/login`` request, for the programmatic-api:
+Users can submit a ``/login`` request, for the programmatic rest-api:
 
 .. code:: python
 
@@ -19,9 +19,8 @@ Users can submit a ``/login`` request, for the programmatic-api:
     )
     token = login.json['access_token']
 
-The returned ``token`` value, can be supplied on successive requests, to a rest
-endpoint, expecting the corresponding ``token`` value. For example, supplying
-a valid token, to the ``/load-data`` endpoint:
+The returned ``token``, will be required to be supplied on successive requests.
+For example, supplying a valid token, to the ``/load-data`` endpoint:
 
 .. code:: python
 
@@ -48,17 +47,10 @@ a valid token, to the ``/load-data`` endpoint:
         data=payload
     )
 
-The following sessions, can be implemented with the above token, or omitted as
-an anonymous user:
+**Note:** all programmatic rest endpoints (except ``/login``), requires a valid
+token to be supplied, in order to properly submit a corresponding request.
+
+The following sessions, can be implemented with the above token:
 
 - `data-new <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`_
 - `data-append <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`_
-
-The following unit tests, provides examples of the `flask-jwt <http://flask-jwt-extended.readthedocs.io/en/latest/>`_
-implementation:
-
-- |pytest_6_user_session.py|_
-
-.. |pytest_6_user_session.py| replace:: ``pytest_6_user_session.py``
-.. _pytest_6_user_session.py: https://github.com/jeff1evesque/machine-learning/tree/master/test/live_server/1_authentication/pytest_6_user_login.py
-  
