@@ -46,13 +46,13 @@ class Load_Data(object):
         ]
         self.list_error = []
 
-        # web interface: flask session user
-        if (not uid and 'uid' in session and session['uid']):
-            self.uid = session['uid']
-
         # programmatic api: flask jwt-token user
-        elif uid:
+        if uid:
             self.uid = uid
+
+        # web interface: flask session user
+        elif (not uid and 'uid' in session and session['uid']):
+            self.uid = session['uid']
 
         # unauthenticated user
         else:
