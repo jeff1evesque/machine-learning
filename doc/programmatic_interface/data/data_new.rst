@@ -24,22 +24,10 @@ the ``data`` attribute, in a given ``POST`` request:
     import requests
 
     endpoint_url = 'https://localhost:8080/load-data'
-    headers = {'Content-Type': 'application/json'}
-
-    requests.post(endpoint_url, headers=headers, data=json_string_here)
-
-To submit a ``/load-data`` request, as a valid authenticated user, a valid token
-must be suppied to the ``headers``:
-
-.. code:: python
-
-    import requests
-
-    endpoint_url = 'https://localhost:8080/load-data'
-    headers={
+    headers = {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
-    },
+    }
 
     requests.post(endpoint_url, headers=headers, data=json_string_here)
 
