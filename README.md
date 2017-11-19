@@ -149,10 +149,15 @@ headers = {
 requests.post(endpoint, headers=headers, data=json_string_here)
 ```
 
+**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
+
 **Note:** more information, regarding how to obtain a valid `token`, can be further
  reviewed, in the `/login` [documentation](https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst).
 
+It is important to remember that the [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/98c7f57986cbe56ca14f8ee47859b50a08c2ef9b/Vagrantfile#L54-L55),
+ as denoted by the above snippet, has defined two port forwards. Specifically, on
+ the host, `8080` is reserved for the web-interface, while `9090`, is reserved for
+ the programmatic rest-api.
+
 **Note:** the above `post` request, can be implemented in a different language,
  respectively.
-
-**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
