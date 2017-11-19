@@ -47,7 +47,7 @@ For example, supplying a valid token, to the ``/load-data`` endpoint:
         data=payload
     )
 
-**Note:** all programmatic rest endpoints (except `/login`), requires a valid
+**Note:** all programmatic rest endpoints (except ``/login``), requires a valid
 token to be supplied, in order to properly submit a corresponding request.
 
 The following sessions, can be implemented with the above token:
