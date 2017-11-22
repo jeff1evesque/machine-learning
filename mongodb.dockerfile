@@ -1,4 +1,4 @@
-FROM container-default
+FROM ml-default
 
 ## local variables
 ENV ROOT_PROJECT /var/machine-learning
