@@ -51,8 +51,9 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     ##     -t, allocate pseudo-tty instead of default tty to running container
     ##
     sudo docker network create -d bridge app_nw && \
-    docker run -d --name default --net=app_nw jeff1evesque:ml-default && \
-    docker run -d --name mariadb --net=app_nw jeff1evesque:ml-mariadb
+    sudo docker run -d --name default --net=app_nw jeff1evesque:ml-default && \
+    sudo docker run -d --name mongodb --net=app_nw jeff1evesque:ml-mongodb && \
+    sudo docker run -d --name mariadb --net=app_nw jeff1evesque:ml-mariadb
 
 ## build from local dockerfiles
 else
@@ -74,7 +75,7 @@ else
     sudo docker network create -d bridge app_nw && \
     sudo docker run --name base --net=app_nw -d ml-default && \
     sudo docker run --name redis --net=app_nw -d ml-redis && \
-    sudo docker run --name mongodb --net=app_nw -d ml-mongodb
+    sudo docker run --name mongodb --net=app_nw -d ml-mongodb && \
     sudo docker run --name webserver --net=app_nw -d ml-webserver run-api && \
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
 fi
