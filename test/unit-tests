@@ -44,7 +44,14 @@ fi
 
 ## run directly from dockerhub
 if [ "$PROJECT_ROOT" = '/vagrant' ]; then
-    docker run -d --name default jeff1evesque:ml-default
+    ## run unit test(s)
+    ##
+    ## @docker run:
+    ##     -d, run container in background and print container ID
+    ##     -t, allocate pseudo-tty instead of default tty to running container
+    ##
+    sudo docker network create -d bridge app_nw && \
+    docker run -d --name default jeff1evesque:ml-default && \
     docker run -d --name mariadb jeff1evesque:ml-mongodb
 
 ## build from local dockerfiles
