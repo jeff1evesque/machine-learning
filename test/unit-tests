@@ -42,27 +42,35 @@ if ! sudo apt-cache policy docker-ce | grep -q "$DOCKER_VERSION"; then
     sudo apt-get -y install docker-ce="$DOCKER_VERSION"
 fi
 
-## build docker container(s)
-cd "$PROJECT_ROOT" || exit
-sudo docker build -f default.dockerfile -t container-default .
-sudo docker build -f redis.dockerfile -t container-redis .
-sudo docker build -f mariadb.dockerfile -t container-mariadb .
-sudo docker build -f mongodb.dockerfile -t container-mongodb .
-sudo docker build -f webserver.dockerfile -t container-webserver .
-cd "$PWD" || exit
+## run directly from dockerhub
+if [ "$PROJECT_ROOT" = '/vagrant' ]; then
+    docker run -d --name default jeff1evesque:ml-default
+    docker run -d --name mariadb jeff1evesque:ml-mongodb
 
-## run unit test(s)
-##
-## @docker run:
-##     -d, run container in background and print container ID
-##     -t, allocate pseudo-tty instead of default tty to running container
-##
-sudo docker network create -d bridge app_nw && \
-sudo docker run --name base --net=app_nw -d container-default && \
-sudo docker run --name redis --net=app_nw -d container-redis && \
-sudo docker run --name mongodb --net=app_nw -d container-mongodb
-sudo docker run --name webserver --net=app_nw -d container-webserver run-api && \
-sudo docker run --name mariadb --net=app_nw -d container-mariadb
+## build from local dockerfiles
+else
+    ## build docker container(s)
+    cd "$PROJECT_ROOT" || exit
+    sudo docker build -f default.dockerfile -t jeff1evesque:ml-default .
+    sudo docker build -f redis.dockerfile -t jeff1evesque:ml-redis .
+    sudo docker build -f mariadb.dockerfile -t jeff1evesque:ml-mariadb .
+    sudo docker build -f mongodb.dockerfile -t jeff1evesque:ml-mongodb .
+    sudo docker build -f webserver.dockerfile -t jeff1evesque:ml-webserver .
+    cd "$PWD" || exit
+
+    ## run unit test(s)
+    ##
+    ## @docker run:
+    ##     -d, run container in background and print container ID
+    ##     -t, allocate pseudo-tty instead of default tty to running container
+    ##
+    sudo docker network create -d bridge app_nw && \
+    sudo docker run --name base --net=app_nw -d container-default && \
+    sudo docker run --name redis --net=app_nw -d container-redis && \
+    sudo docker run --name mongodb --net=app_nw -d container-mongodb
+    sudo docker run --name webserver --net=app_nw -d container-webserver run-api && \
+    sudo docker run --name mariadb --net=app_nw -d container-mariadb
+fi
 
 ## provision mongodb authorization
 sudo docker exec -it mongodb sudo mongo admin mongodb://mongodb:27017 --eval "db.createUser({\
