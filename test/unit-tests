@@ -23,7 +23,7 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     sudo usermod -a -G docker vagrant
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
-    sudo docker images -q | xargs -r docker rmi
+    sudo docker images -q | xargs -r docker rmi -f
     sudo docker volume ls -q | xargs -r docker volume rm
     sudo docker network ls -q | xargs -r docker network rm
 fi
@@ -133,7 +133,7 @@ fi
 if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
-    sudo docker images -q | xargs -r docker rmi
+    sudo docker images -q | xargs -r docker rmi -f
     sudo docker volume ls -q | xargs -r docker volume rm
     sudo docker network ls -q | xargs -r docker network rm
 fi
