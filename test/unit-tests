@@ -52,7 +52,7 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     ##
     sudo docker network create -d bridge app_nw && \
     docker run -d --name default --net=app_nw jeff1evesque:ml-default && \
-    docker run -d --name mariadb --net=app_nw jeff1evesque:ml-mongodb
+    docker run -d --name mariadb --net=app_nw jeff1evesque:ml-mariadb
 
 ## build from local dockerfiles
 else
