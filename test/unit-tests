@@ -23,8 +23,8 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     sudo usermod -a -G docker vagrant
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
-    sudo docker images -q | xargs -r docker rmi -f
-    sudo docker volume ls -q | xargs -r docker volume rm
+    sudo docker images -q -f dangling=true | xargs -r docker rmi
+    sudo docker volume ls -qf dangling=true | xargs -r docker volume rm
     sudo docker network ls -q | xargs -r docker network rm
 fi
 
@@ -50,11 +50,11 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     ##     -d, run container in background and print container ID
     ##     -t, allocate pseudo-tty instead of default tty to running container
     ##
-    sudo docker network create -d bridge app_nw && \
-    sudo docker run -d --name default --net=app_nw jeff1evesque/ml-default && \
-    sudo docker run -d --name redis --net=app_nw jeff1evesque/ml-redis && \
-    sudo docker run -d --name mongodb --net=app_nw jeff1evesque/ml-mongodb && \
-    sudo docker run -d --name webserver --net=app_nw jeff1evesque/ml-webserver && \
+    sudo docker network create -d bridge app_nw &&
+    sudo docker run -d --name default --net=app_nw jeff1evesque/ml-default &&
+    sudo docker run -d --name redis --net=app_nw jeff1evesque/ml-redis &&
+    sudo docker run -d --name mongodb --net=app_nw jeff1evesque/ml-mongodb &&
+    sudo docker run -d --name webserver --net=app_nw jeff1evesque/ml-webserver &&
     sudo docker run -d --name mariadb --net=app_nw jeff1evesque/ml-mariadb
 
 ## build from local dockerfiles
@@ -74,11 +74,11 @@ else
     ##     -d, run container in background and print container ID
     ##     -t, allocate pseudo-tty instead of default tty to running container
     ##
-    sudo docker network create -d bridge app_nw && \
-    sudo docker run --name base --net=app_nw -d ml-default && \
-    sudo docker run --name redis --net=app_nw -d ml-redis && \
-    sudo docker run --name mongodb --net=app_nw -d ml-mongodb && \
-    sudo docker run --name webserver --net=app_nw -d ml-webserver run-api && \
+    sudo docker network create -d bridge app_nw &&
+    sudo docker run --name base --net=app_nw -d ml-default &&
+    sudo docker run --name redis --net=app_nw -d ml-redis &&
+    sudo docker run --name mongodb --net=app_nw -d ml-mongodb &&
+    sudo docker run --name webserver --net=app_nw -d ml-webserver run-api &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
 fi
 
@@ -133,7 +133,7 @@ fi
 if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
-    sudo docker images -q | xargs -r docker rmi -f
-    sudo docker volume ls -q | xargs -r docker volume rm
+    sudo docker images -q -f dangling=true | xargs -r docker rmi
+    sudo docker volume ls -qf dangling=true | xargs -r docker volume rm
     sudo docker network ls -q | xargs -r docker network rm
 fi
