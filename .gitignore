@@ -40,3 +40,4 @@
 /log/webcompiler
 /log/webserver
 /log/*.log
+/test/*.log
