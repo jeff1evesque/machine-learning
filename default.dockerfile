@@ -7,7 +7,7 @@ ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 
 ## copy files into container
 RUN mkdir /var/machine-learning
-COPY . /var/machine-learning
+COPY puppet /var/machine-learning
 
 ## install git, wget, pip
 ##
