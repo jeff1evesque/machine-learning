@@ -17,5 +17,4 @@ RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/compiler/manifests
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/webserver/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
 
 ## executed everytime container starts
-WORKDIR /var/machine-learning
-ENTRYPOINT ['gunicorn_api']
+CMD ["/bin/sh", "-c", "gunicorn_api"]
