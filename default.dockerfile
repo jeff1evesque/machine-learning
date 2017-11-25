@@ -6,8 +6,10 @@ ENV ENVIRONMENT docker
 ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 
 ## copy files into container
-RUN mkdir /var/machine-learning
-COPY puppet /var/machine-learning
+RUN mkdir -p /var/machine-learning/puppet
+RUN mkdir -p /var/machine-learning/hiera
+COPY puppet /var/machine-learning/puppet
+COPY hiera /var/machine-learning/hiera
 
 ## install git, wget, pip
 ##
