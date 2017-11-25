@@ -6,6 +6,7 @@ ENV ENVIRONMENT docker
 ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 
 ## copy files into container
+RUN mkdir -p /var/machine-learning/log
 RUN mkdir -p /var/machine-learning/puppet
 RUN mkdir -p /var/machine-learning/hiera
 COPY puppet /var/machine-learning/puppet
@@ -37,15 +38,10 @@ RUN gem install semantic_puppet -v 0.1.0
 RUN gem install puppet_forge -v 2.2.5
 RUN gem install r10k -v 2.5.5
 
-## install pytest-cov
-RUN pip install pytest-cov==2.4.0
-
 ## install puppet modules using puppetfile with r10k
 RUN mkdir -p $ENVIRONMENT_DIR/modules_contrib/
 RUN PUPPETFILE=$ENVIRONMENT_DIR/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/modules_contrib/ r10k puppetfile install
 
 ## provision with puppet
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/package/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/sklearn/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/system/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/compiler/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test --debug
