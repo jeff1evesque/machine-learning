@@ -4,10 +4,10 @@
 ###
 
 class webserver {
-    contain package::pyyaml
     contain python
     contain python::flask
     contain python::requests
+    contain package::pyyaml
 
     ## install mariadb client
     contain mariadb::client
