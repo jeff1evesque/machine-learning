@@ -99,8 +99,7 @@ sudo docker exec -it mongodb sudo mongo admin mongodb://mongodb:27017 --eval "db
 { w: 'majority' , wtimeout: 5000 } )" --quiet
 sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*security:/s/^#//g" /etc/mongod.conf
 sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*authorization:[[:space:]]*enabled/s/^#//g" /etc/mongod.conf
-sudo docker exec -it mongodb sudo cat /etc/mongod.conf
-#sudo docker restart mongodb
+sudo docker restart mongodb
 
 ## run unit tests
 if [ "$PROJECT_ROOT" = '/vagrant' ]; then
