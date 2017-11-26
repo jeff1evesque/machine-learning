@@ -28,7 +28,6 @@ if [ "$CMD" = 'install' ]; then
         ./configure
         make
         sudo make install
-        ruby -v
     fi
 
     ## install puppet
