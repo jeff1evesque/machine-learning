@@ -38,24 +38,26 @@ if [ "$CMD" = 'install' ]; then
 ##     - https://github.com/rodjek/puppet-lint/issues/410
 ##
 else
-    flake8 "$BASEDIR" --max-line-length=100
-    scss-lint "${BASEDIR}/src/scss/*.scss" --config "$BASEDIR/test/lint/.scss-lint.yml"
-    bootlint -d W005 "${BASEDIR}/interface/templates/*.html"
-    sudo find "${BASEDIR}/puppet/environment/*/manifests" -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
-    sudo find "${BASEDIR}/puppet/environment/*/modules" -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
-    puppet-lint --no-variable_scope-check --no-ensure_first_param-check "${BASEDIR}/puppet/environment/*/modules"
-    find "${BASEDIR}/puppet" -name Puppetfile -exec sh -c 'cd "${1%/*}" && r10k puppetfile check Puppetfile' _ {} \;
-    find "${BASEDIR}/interface/static/data/json" -name '*.json' -exec jsonlint -q {} \; -print
-    find "${BASEDIR}/interface/static/data/csv" -name '*.csv' -exec csvlint {} \;
-    xmllint --noout "${BASEDIR}/interface/static/data/xml/svr*.xml" --schema "${BASEDIR}/interface/static/data/xml/svr.xsd"
-    xmllint --noout "${BASEDIR}/interface/static/data/xml/svm*.xml" --schema "${BASEDIR}/interface/static/data/xml/svm.xsd"
-    xmllint --noout "${BASEDIR}/interface/static/data/xml/*.xsd"
-    mdl "$BASEDIR" --style "${BASEDIR}/test/lint/markdown.rb"
-    find "$BASEDIR" -type f ! -name '*.erb' -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
-    find "$BASEDIR" -name '*.sh' -type f -exec shellcheck {} \;
-    eslint "$BASEDIR" --ext=jsx -c "${BASEDIR}/test/lint/eslint.json"
-    yaml-lint "${BASEDIR}/hiera/"
-    yaml-lint "${BASEDIR}/*.yaml"
-    find "$BASEDIR" -name '*.dockerfile' -type f -exec dockerlint {} \;
-    val=$(find "${BASEDIR}/doc" -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
+    CWD=$(pwd)
+    flake8 . --max-line-length=100
+    scss-lint src/scss/*.scss --config "$TRAVIS_BUILD_DIR/test/lint/.scss-lint.yml"
+    bootlint -d W005 interface/templates/*.html
+    sudo find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
+    sudo find puppet/environment/*/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
+    puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/*/modules
+    find puppet -name Puppetfile -exec sh -c 'cd "${1%/*}" && r10k puppetfile check Puppetfile' _ {} \;
+    find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print
+    find interface/static/data/csv -name '*.csv' -exec csvlint {} \;
+    xmllint --noout interface/static/data/xml/svr*.xml --schema interface/static/data/xml/svr.xsd
+    xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd
+    xmllint --noout interface/static/data/xml/*.xsd
+    mdl . --style test/lint/markdown.rb
+    find . -type f ! -name '*.erb' -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
+    find . -name '*.sh' -type f -exec shellcheck {} \;
+    eslint . --ext=jsx -c test/lint/eslint.json
+    yaml-lint hiera/
+    yaml-lint *.yaml
+    find . -name '*.dockerfile' -type f -exec dockerlint {} \;
+    val=$(find doc -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
+    cd "$CWD"
 fi
