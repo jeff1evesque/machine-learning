@@ -8,9 +8,9 @@ entire project:
 - |flake8|_
 - |scss_lint|_
 - |bootlint|_
-- |puppet|_: executed as ``puppet parser validate``
+- |puppet|_: as ``puppet parser validate``
 - |puppet-lint|_
-- |r10k|_: executed as ``r10k puppetfile check Puppetfile``
+- |r10k|_: as ``r10k puppetfile check Puppetfile``
 - |jsonlint|_
 - |csvlint|_
 - |xmllint|_
