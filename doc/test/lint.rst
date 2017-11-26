@@ -20,8 +20,9 @@ entire project:
 - |dockerlint|_
 - |rstlint|_
 
-Specifically, anytime code is introduced to the repository, our |.travis.yml|_
-will start the execution of our |linter|_. However, the ``linter`` can also be
+Specifically, anytime code is introduced to the repository, whether through
+``git commit``, or some variation of ``git merge``, our |.travis.yml|_
+will immediately start the |linter|_. However, the ``linter`` can also be
 run manually, after the above depedencies have been installed
 
 .. code:: bash
@@ -29,7 +30,7 @@ run manually, after the above depedencies have been installed
     cd /vagrant/test
     ./linter install
 
-Once the above packages have been installed, linting can be executed:
+Then, linting can be executed:
 
 .. code:: bash
 
