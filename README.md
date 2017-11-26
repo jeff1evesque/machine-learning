@@ -81,7 +81,7 @@ The following lines, indicate the application is accessible via `localhost:8080`
 ## Execution
 
 Both the web-interface, and the programmatic-api, have corresponding
- [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/doc/unit_test/pytest.rst)
+ [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/doc/test/pytest.rst)
  which can be reviewed, and implemented.
 
 ### Web Interface
