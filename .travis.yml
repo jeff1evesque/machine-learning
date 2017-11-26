@@ -4,8 +4,8 @@ sudo: required
 
 ## install puppet (i.e. puppet parser validate)
 before_install:
-  - chmod u+x linter
-  - chmod u+x unit-tests
+  - chmod u+x test/linter
+  - chmod u+x test/unit-tests
   - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
   - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
   - sudo apt-get update
