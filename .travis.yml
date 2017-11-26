@@ -19,15 +19,12 @@ before_install:
 install:
   - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
   - pip install python-coveralls==2.9.0
-  - ./linter install
+  - ./test/linter install
 
 ## linting and unit test
 script:
-  - PROJECT_DIRECTORY=$(pwd)
-  - cd test
-  - ./linter run "$PROJECT_DIRECTORY"
-  - ./unit-tests "$PROJECT_DIRECTORY"
-  - cd "$PROJECT_DIRECTORY"
+  - ./test/linter run "$PROJECT_DIRECTORY"
+  - ./test/unit-tests "$PROJECT_DIRECTORY"
 
 ## post build: the following commands are run after a successful build.
 ##
