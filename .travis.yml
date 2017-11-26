@@ -9,16 +9,7 @@ before_install:
   - chmod u+x test/unit-tests
 
 ## install packages
-##
-## @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
-##
 install:
-  - wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
-  - sudo dpkg -i puppetlabs-release-pc1-trusty.deb
-  - sudo apt-get update
-  - sudo apt-get install puppet-agent -y
-  - sudo /opt/puppetlabs/bin/puppet -V
-  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
   - pip install python-coveralls==2.9.0
   - ./test/linter install
 

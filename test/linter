@@ -31,6 +31,19 @@ if [ "$CMD" = 'install' ]; then
         ruby -v
     fi
 
+    ## install puppet
+    if ! $(/opt/puppetlabs/bin/puppet -V &> /dev/null); then
+        wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+        sudo dpkg -i puppetlabs-release-pc1-trusty.deb
+        sudo apt-get update
+        sudo apt-get install -y puppet-agent=1.10.9-1trusty
+    fi
+
+    ##
+    ## @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
+    ##
+    sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
+
     ## install linters
     pip install flake8==2.5.4
     gem install scss_lint -v 0.54.0
