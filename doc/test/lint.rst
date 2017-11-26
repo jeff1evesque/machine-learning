@@ -36,8 +36,10 @@ Once the above packages have been installed, linting can be executed:
     cd /vagrant/test
     ./linter run /vagrant
 
-**Note:** the second argument ``/vagrant`` defines an acceptable current
+**Note:** the second argument ``/vagrant``, defines an acceptable current
 working directory.
+
+**Note:** custom `configs <https://github.com/jeff1evesque/machine-learning/tree/master/test/lint>`_, allow more customtomized rules, for various our linters.
 
 .. |flake8| replace:: ``flake8``
 .. _flake8: http://flake8.pycqa.org
