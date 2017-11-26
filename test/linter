@@ -13,7 +13,7 @@ fi
 ## install linters
 if [ "$CMD" = 'install' ]; then
     ## install ruby: needed for scss-lint
-    if ! $(ruby -v &> /dev/null); then
+    if ! ruby -v &> /dev/null; then
         curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
         curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
         echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
@@ -21,15 +21,27 @@ if [ "$CMD" = 'install' ]; then
         sudo apt-get update
         sudo apt-get -y install git-core curl zlib1g-dev build-essential libssl-dev libreadline-dev libyaml-dev libsqlite3-dev sqlite3 libxml2-dev libxslt1-dev libcurl4-openssl-dev python-software-properties libffi-dev nodejs yarn
 
-        cd
+        cd /root
         wget http://ftp.ruby-lang.org/pub/ruby/2.4/ruby-2.4.2.tar.gz
         tar -xzvf ruby-2.4.2.tar.gz
-        cd ruby-2.4.2/
+        cd ruby-2.4.2/ || exit
         ./configure
         make
         sudo make install
-        ruby -v
     fi
+
+    ## install puppet
+    if ! /opt/puppetlabs/bin/puppet -V &> /dev/null; then
+        wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
+        sudo dpkg -i puppetlabs-release-pc1-trusty.deb
+        sudo apt-get update
+        sudo apt-get install -y puppet-agent=1.10.9-1trusty
+    fi
+
+    ##
+    ## @trusty-backports, allows additional packages (i.e. shellcheck) to be installed
+    ##
+    sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu/ trusty-backports restricted main universe"
 
     ## install linters
     pip install flake8==2.5.4
@@ -58,7 +70,7 @@ if [ "$CMD" = 'install' ]; then
 ##     - https://github.com/rodjek/puppet-lint/issues/410
 ##
 else
-    cd "$BASEDIR"
+    cd "$BASEDIR" || exit
     flake8 . --config=test/lint/setup.cfg
     scss-lint src/scss/*.scss --config 'test/lint/.scss-lint.yml'
     bootlint -d W005 interface/templates/*.html
@@ -72,12 +84,13 @@ else
     xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd
     xmllint --noout interface/static/data/xml/*.xsd
     mdl . --style test/lint/markdown.rb
-    find . -type f ! -name '*.erb' -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
+    erbfiles=$(find . -type f ! -name '*.erb' -exec grep -l '^#!/bin/bash' {} +)
+    shellcheck erbfiles
     find . -name '*.sh' -type f -exec shellcheck {} \;
     eslint . --ext=jsx -c test/lint/eslint.json
     yaml-lint hiera/
-    yaml-lint *.yaml
+    yaml-lint ./*.yaml
     find . -name '*.dockerfile' -type f -exec dockerlint {} \;
     find doc -name '*.rst' -type f -exec rst-lint {} \; | (! grep -E 'ERROR');
-    cd "$CWD"
+    cd "$CWD" || exit
 fi
