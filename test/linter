@@ -78,6 +78,6 @@ else
     yaml-lint hiera/
     yaml-lint *.yaml
     find . -name '*.dockerfile' -type f -exec dockerlint {} \;
-    val=$(find doc -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
+    find doc -name '*.rst' -type f -exec rst-lint {} \;); | (! grep -E 'ERROR'); return $?
     cd "$CWD"
 fi
