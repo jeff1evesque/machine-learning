@@ -103,9 +103,9 @@ sudo docker restart mongodb
 
 ## run unit tests
 if [ "$PROJECT_ROOT" = '/vagrant' ]; then
-    sudo docker run --name webserver-pytest --net=app_nw -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" test | sudo tee pytest.log
+    sudo docker run --name webserver-pytest --net=app_nw --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" test | sudo tee pytest.log
 else
-    sudo docker run --name webserver-pytest --net=app_nw --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning -it ml-webserver test | sudo tee pytest.log
+    sudo docker run --name webserver-pytest --net=app_nw -it ml-webserver test | sudo tee pytest.log
 fi
 
 ## check unit test results
