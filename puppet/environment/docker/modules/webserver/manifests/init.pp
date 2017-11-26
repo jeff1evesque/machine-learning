@@ -4,6 +4,11 @@
 ###
 
 class webserver {
+    contain python
+    contain python::flask
+    contain python::requests
+    contain package::pyyaml
+
     ## install mariadb client
     contain mariadb::client
     contain mariadb::bindings
@@ -16,6 +21,5 @@ class webserver {
 
     ## install webserver
     contain package::gunicorn
-    contain webserver::service
 }
 contain webserver
