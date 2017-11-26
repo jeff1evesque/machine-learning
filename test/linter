@@ -11,6 +11,7 @@ fi
 
 ## install linters
 if [ "$CMD" = 'install' ]; then
+    sudo apt-get install ruby=1:1.9.3.4
     pip install flake8==2.5.4
     gem install scss_lint -v 0.54.0
     npm install -g bootlint@0.14.2
