@@ -1,0 +1,60 @@
+#!/bin/bash
+
+## local variables
+CMD="$1"
+
+if [ "$2" ]; then
+    BASEDIR="$2"
+else
+    BASEDIR='.'
+fi
+
+## install linters
+if [ "$CMD" = 'install' ]; then
+    pip install flake8==2.5.4
+    gem install scss_lint -v 0.54.0
+    npm install -g bootlint@0.14.2
+    gem install puppet-lint -v 1.1.0
+    gem install r10k -v 2.2.0
+    npm install -g jsonlint@1.6.2
+    gem install csvlint -v 0.3.0
+    sudo apt-get update
+    sudo apt-get install libxml2-utils=2.9.1+dfsg1-3ubuntu4.10
+    gem install mdl -v 0.3.1
+    sudo apt-get install shellcheck=0.3.3-1~ubuntu14.04.1
+    npm install -g eslint babel-eslint@7.2.3
+    npm install -g eslint-plugin-react@4.2.3
+    gem install yaml-lint -v 0.0.7
+    npm install -g dockerlint@0.2.0
+    pip install restructuredtext_lint==0.17.2
+
+## run linters
+##
+## @puppet-lint, the following issue needs to be checked if it has been
+##     resolved, so the '--no-ensure_first_param-check' abusive flag
+##     implementation (below) can be removed:
+##
+##     - https://github.com/rodjek/puppet-lint/issues/410
+##
+else
+    flake8 "$BASEDIR" --max-line-length=100
+    scss-lint "${BASEDIR}/src/scss/*.scss" --config "$BASEDIR/test/lint/.scss-lint.yml"
+    bootlint -d W005 "${BASEDIR}/interface/templates/*.html"
+    sudo find "${BASEDIR}/puppet/environment/*/manifests" -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
+    sudo find "${BASEDIR}/puppet/environment/*/modules" -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \;
+    puppet-lint --no-variable_scope-check --no-ensure_first_param-check "${BASEDIR}/puppet/environment/*/modules"
+    find "${BASEDIR}/puppet" -name Puppetfile -exec sh -c 'cd "${1%/*}" && r10k puppetfile check Puppetfile' _ {} \;
+    find "${BASEDIR}/interface/static/data/json" -name '*.json' -exec jsonlint -q {} \; -print
+    find "${BASEDIR}/interface/static/data/csv" -name '*.csv' -exec csvlint {} \;
+    xmllint --noout "${BASEDIR}/interface/static/data/xml/svr*.xml" --schema "${BASEDIR}/interface/static/data/xml/svr.xsd"
+    xmllint --noout "${BASEDIR}/interface/static/data/xml/svm*.xml" --schema "${BASEDIR}/interface/static/data/xml/svm.xsd"
+    xmllint --noout "${BASEDIR}/interface/static/data/xml/*.xsd"
+    mdl "$BASEDIR" --style "${BASEDIR}/test/lint/markdown.rb"
+    find "$BASEDIR" -type f ! -name '*.erb' -exec grep -l '^#!/bin/bash' {} + | xargs shellcheck
+    find "$BASEDIR" -name '*.sh' -type f -exec shellcheck {} \;
+    eslint "$BASEDIR" --ext=jsx -c "${BASEDIR}/test/lint/eslint.json"
+    yaml-lint "${BASEDIR}/hiera/"
+    yaml-lint "${BASEDIR}/*.yaml"
+    find "$BASEDIR" -name '*.dockerfile' -type f -exec dockerlint {} \;
+    val=$(find "${BASEDIR}/doc" -name '*.rst' -type f -exec rst-lint {} \;); echo "$val" | (! grep -E 'ERROR'); return $?
+fi
