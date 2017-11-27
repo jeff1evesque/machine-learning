@@ -12,8 +12,12 @@
 
 import React, { Component } from 'react';
 import checkValidString from '../validator/valid-string.js';
-import Spinner from '../general/spinner.jsx';
-import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
+import {
+    setSvButton,
+    setLayout,
+    setContentType,
+    setSpinner
+} from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 class ModelGenerate extends Component {
@@ -28,7 +32,6 @@ class ModelGenerate extends Component {
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
-            display_spinner: false,
         };
         this.changeCollection = this.changeCollection.bind(this);
         this.changeKernelType = this.changeKernelType.bind(this);
@@ -135,7 +138,6 @@ class ModelGenerate extends Component {
     // triggered when 'state properties' change
     render() {
         const options = this.state.ajax_done_options;
-        const spinner = this.state.display_spinner ? <Spinner /> : null;
 
         return (
             <fieldset className='fieldset-session-generate'>
@@ -188,8 +190,6 @@ class ModelGenerate extends Component {
 
                     </select>
                 </fieldset>
-
-                {spinner}
             </fieldset>
         );
     }
@@ -203,7 +203,8 @@ class ModelGenerate extends Component {
         };
 
         // boolean to show ajax spinner
-        this.setState({ display_spinner: true });
+        var action = setSpinner({'spinner': false});
+        this.props.dispatchSpinner(action);
 
         // asynchronous callback: ajax 'done' promise
         ajaxCaller(
@@ -215,7 +216,8 @@ class ModelGenerate extends Component {
                     this.setState({ ajax_done_options: asynchObject });
                 }
                 // boolean to hide ajax spinner
-                this.setState({ display_spinner: false });
+                var action = setSpinner({'spinner': false});
+                this.props.dispatchSpinner(action);
             },
             // asynchronous callback: ajax 'fail' promise
             (asynchStatus, asynchError) => {
@@ -228,7 +230,8 @@ class ModelGenerate extends Component {
                     console.log(`Error Thrown: ${asynchError}`);
                 }
                 // boolean to hide ajax spinner
-                this.setState({ display_spinner: false });
+                var action = setSpinner({'spinner': false});
+                this.props.dispatchSpinner(action);
             },
             // pass ajax arguments
             ajaxArguments,

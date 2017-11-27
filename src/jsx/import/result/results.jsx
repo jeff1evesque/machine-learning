@@ -11,8 +11,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import 'core-js/modules/es7.object.entries';
-import { setLayout, setContentType } from '../redux/action/page.jsx';
-import Spinner from '../general/spinner.jsx';
+import { setLayout, setContentType, setSpinner } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 class ResultsDisplay extends Component {
@@ -22,7 +21,6 @@ class ResultsDisplay extends Component {
         this.state = {
             titles: null,
             status: null,
-            display_spinner: false,
         };
     }
     componentWillMount() {
@@ -43,12 +41,8 @@ class ResultsDisplay extends Component {
         };
 
         // boolean to show ajax spinner
-        if (
-            this.state &&
-            !this.state.display_spinner
-        ) {
-            this.setState({ display_spinner: true });
-        }
+        var action = setSpinner({'spinner': true});
+        this.props.dispatchSpinner(action);
 
         // asynchronous callback: ajax 'done' promise
         ajaxCaller(
@@ -63,7 +57,8 @@ class ResultsDisplay extends Component {
                     this.setState(Object.assign({}, results));
                 }
                 // boolean to hide ajax spinner
-                this.setState({ display_spinner: false });
+                var action = setSpinner({'spinner': false});
+                this.props.dispatchSpinner(action);
             },
             // asynchronous callback: ajax 'fail' promise
             (asynchStatus, asynchError) => {
@@ -76,7 +71,8 @@ class ResultsDisplay extends Component {
                     console.log(`Error Thrown: ${asynchError}`);
                 }
                 // boolean to hide ajax spinner
-                this.setState({ display_spinner: false });
+                var action = setSpinner({'spinner': false});
+                this.props.dispatchSpinner(action);
             },
             // pass ajax arguments
             ajaxArguments,
@@ -86,7 +82,6 @@ class ResultsDisplay extends Component {
         // local variables
         const status = this.state.status;
         const titles = this.state.titles;
-        const spinner = this.state.display_spinner ? <Spinner /> : null;
 
         // polyfill 'entries'
         if (!Object.entries) {
@@ -95,25 +90,29 @@ class ResultsDisplay extends Component {
 
         // generate result
         if (status == 0 && titles && titles.length > 0) {
-            var resultList = (<ul className='result-list'>{
-                titles.map((title) => {
-                    if (title.length == 3) {
-                        return (<NavLink
-                            to={`/session/current-result?nid=${title[0]}`}
-                            key={`link-${title[0]}`}
-                        >
-                            <li key={`title-${title[0]}`}>
-                                {title[0]}: {title[1]}
-                            </li>
-                        </NavLink>);
-                    }
-                })
-            }
-                              </ul>);
+            var resultList = (
+                <ul className='result-list'>{
+                    titles.map((title) => {
+                        if (title.length == 3) {
+                            return (
+                                <NavLink
+                                    to={`/session/current-result?nid=${title[0]}`}
+                                    key={`link-${title[0]}`}
+                                >
+                                    <li key={`title-${title[0]}`}>
+                                    {title[0]}: {title[1]}
+                                    </li>
+                                </NavLink>
+                            );
+                        }
+                    })
+                }
+                </ul>
+            );
         } else {
-            var resultList = (<div className='result-list'>
-                Sorry, no results available!
-                              </div>);
+            var resultList = (
+                <div className='result-list'>Sorry, no results available!</div>
+            );
         }
 
         // display result
@@ -121,7 +120,6 @@ class ResultsDisplay extends Component {
             <div className='result-container'>
                 <h2>Your Results</h2>
                 <div>{resultList}</div>
-                {spinner}
             </div>
         );
     }

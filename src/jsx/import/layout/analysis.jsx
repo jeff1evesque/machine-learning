@@ -20,16 +20,19 @@ import ajaxCaller from '../general/ajax-caller.js';
 import Submit from '../general/submit-button.jsx';
 import checkValidString from '../validator/valid-string.js';
 import checkValidFloat from '../validator/valid-float.js';
-import Spinner from '../general/spinner.jsx';
 import setCurrentResult from '../redux/action/current-result.jsx';
-import { setSvButton, setGotoResultsButton, setLayout } from '../redux/action/page.jsx';
+import {
+    setSvButton,
+    setGotoResultsButton,
+    setLayout,
+    setSpinner
+} from '../redux/action/page.jsx';
 
 class AnalysisLayout extends Component {
     // initial 'state properties'
     constructor() {
         super();
         this.state =  {
-            display_spinner: false,
             ajax_done_result: null,
             ajax_done_error: null,
             ajax_fail_error: null,
@@ -91,7 +94,8 @@ class AnalysisLayout extends Component {
             };
 
             // boolean to show ajax spinner
-            this.setState({ display_spinner: true });
+            var action = setSpinner({'spinner': true});
+            this.props.dispatchSpinner(action);
 
             // asynchronous callback: ajax 'done' promise
             ajaxCaller(
@@ -106,7 +110,8 @@ class AnalysisLayout extends Component {
                         this.setState({ ajax_done_result: null });
                     }
                     // boolean to hide ajax spinner
-                    this.setState({ display_spinner: false });
+                    var action = setSpinner({'spinner': false});
+                    this.props.dispatchSpinner(action);
                 },
                 // asynchronous callback: ajax 'fail' promise
                 (asynchStatus, asynchError) => {
@@ -119,7 +124,8 @@ class AnalysisLayout extends Component {
                         console.log(`Error Thrown: ${asynchError}`);
                     }
                     // boolean to hide ajax spinner
-                    this.setState({ display_spinner: false });
+                    var action = setSpinner({'spinner': false});
+                    this.props.dispatchSpinner(action);
                 },
                 // pass ajax arguments
                 ajaxArguments,
@@ -192,7 +198,6 @@ class AnalysisLayout extends Component {
     render() {
         // determine content
         const resultsBtn = false;
-        const spinner = this.state.display_spinner ? <Spinner /> : null;
 
         // submit button
         if (
@@ -247,7 +252,6 @@ class AnalysisLayout extends Component {
                     />
                     {submitBtn}
                     {resultBtn}
-                    {spinner}
                 </form>
                 <Route
                     exact

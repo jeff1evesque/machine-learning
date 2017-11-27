@@ -19,8 +19,12 @@ import SupplyDatasetFile from '../input-data/supply-dataset-file.jsx';
 import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
-import Spinner from '../general/spinner.jsx';
-import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
+import {
+    setSvButton,
+    setLayout,
+    setContentType,
+    setSpinner
+} from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 class DataAppend extends Component {
@@ -35,7 +39,6 @@ class DataAppend extends Component {
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
-            display_spinner: false,
         };
         this.changeCollection = this.changeCollection.bind(this);
         this.changeDatasetType = this.changeDatasetType.bind(this);
@@ -119,7 +122,6 @@ class DataAppend extends Component {
         );
         const datasetInput = Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
         const options = this.state.ajax_done_options;
-        const spinner = this.state.display_spinner ? <Spinner /> : null;
 
         return (
             <fieldset className='fieldset-session-data-upload'>
@@ -161,7 +163,6 @@ class DataAppend extends Component {
                 </fieldset>
 
                 {datasetInput}
-                {spinner}
             </fieldset>
         );
     }
@@ -190,7 +191,8 @@ class DataAppend extends Component {
         };
 
         // boolean to show ajax spinner
-        this.setState({ display_spinner: true });
+        var action = setSpinner({'spinner': true});
+        this.props.dispatchSpinner(action);
 
         // asynchronous callback: ajax 'done' promise
         ajaxCaller(
@@ -202,7 +204,8 @@ class DataAppend extends Component {
                     this.setState({ ajax_done_options: asynchObject });
                 }
                 // boolean to hide ajax spinner
-                this.setState({ display_spinner: false });
+                var action = setSpinner({'spinner': false});
+                this.props.dispatchSpinner(action);
             },
             // asynchronous callback: ajax 'fail' promise
             (asynchStatus, asynchError) => {
@@ -215,7 +218,8 @@ class DataAppend extends Component {
                     console.log(`Error Thrown: ${asynchError}`);
                 }
                 // boolean to hide ajax spinner
-                this.setState({ display_spinner: false });
+                var action = setSpinner({'spinner': false});
+                this.props.dispatchSpinner(action);
             },
             // pass ajax arguments
             ajaxArguments,
