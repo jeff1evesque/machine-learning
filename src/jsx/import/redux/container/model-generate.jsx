@@ -12,14 +12,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ModelGenerate from '../../session-type/model-generate.jsx';
-import { setSvButton, setLayout, setContentType } from '../action/page.jsx';
+import {
+    setSvButton,
+    setLayout,
+    setContentType,
+    setSpinner
+} from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchSvButton: dispatch.bind(setSvButton),
         dispatchContentType: dispatch.bind(setContentType),
-        dispatchLayout: dispatch.bind(setLayout)
+        dispatchLayout: dispatch.bind(setLayout),
+        dispatchSpinner: dispatch.bind(setSpinner)
     }
 }
 
