@@ -41,7 +41,7 @@ class ResultsDisplay extends Component {
         };
 
         // boolean to show ajax spinner
-        const action = setSpinner({'spinner': true});
+        var action = setSpinner({'spinner': true});
         this.props.dispatchSpinner(action);
 
         // asynchronous callback: ajax 'done' promise
@@ -57,7 +57,7 @@ class ResultsDisplay extends Component {
                     this.setState(Object.assign({}, results));
                 }
                 // boolean to hide ajax spinner
-                const action = setSpinner({'spinner': false});
+                var action = setSpinner({'spinner': false});
                 this.props.dispatchSpinner(action);
             },
             // asynchronous callback: ajax 'fail' promise
@@ -71,7 +71,7 @@ class ResultsDisplay extends Component {
                     console.log(`Error Thrown: ${asynchError}`);
                 }
                 // boolean to hide ajax spinner
-                const action = setSpinner({'spinner': false});
+                var action = setSpinner({'spinner': false});
                 this.props.dispatchSpinner(action);
             },
             // pass ajax arguments
