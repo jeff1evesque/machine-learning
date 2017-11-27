@@ -11,13 +11,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ResultsDisplay from '../../result/results.jsx';
-import { setLayout, setContentType } from '../action/page.jsx';
+import { setLayout, setContentType, setSpinner } from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
         dispatchLayout: dispatch.bind(setLayout),
         dispatchContentType: dispatch.bind(setContentType),
+        dispatchSpinner: dispatch.bind(setSpinner)
     }
 }
 
