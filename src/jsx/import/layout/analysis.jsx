@@ -252,7 +252,6 @@ class AnalysisLayout extends Component {
                     />
                     {submitBtn}
                     {resultBtn}
-                    {spinner}
                 </form>
                 <Route
                     exact
