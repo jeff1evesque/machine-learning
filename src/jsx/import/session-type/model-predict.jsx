@@ -13,12 +13,12 @@
 import React, { Component } from 'react';
 import SupplyPredictors from '../input-data/supply-predictors.jsx';
 import checkValidString from '../validator/valid-string.js';
-import Spinner from '../general/spinner.jsx';
 import {
     setSvButton,
     setGotoResultsButton,
     setLayout,
     setContentType,
+    setSpinner
 } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -32,7 +32,6 @@ class ModelPredict extends Component {
             ajax_done_error: null,
             ajax_fail_error: null,
             ajax_fail_status: null,
-            display_spinner: false,
         };
         this.changeCollection = this.changeCollection.bind(this);
         this.displaySubmit = this.displaySubmit.bind(this);
@@ -84,13 +83,14 @@ class ModelPredict extends Component {
         const inputCollection = this.state.value_collection;
         const Predictors = this.getSupplyPredictors(inputCollection);
         if (Predictors) {
-            var inputPredictors = (<Predictors
-                onChange={this.displaySubmit}
-                selectedCollection={this.state.value_collection}
-            />);
+            var inputPredictors = (
+                <Predictors
+                    onChange={this.displaySubmit}
+                    selectedCollection={this.state.value_collection}
+                />
+            );
         }
         const options = this.state.ajax_done_options;
-        const spinner = this.state.display_spinner ? <Spinner /> : null;
 
         return (
             <fieldset className='fieldset-session-predict'>
@@ -109,14 +109,14 @@ class ModelPredict extends Component {
 
                         {/* array components require unique 'key' value */}
                         {options && options.map((value) => 
-                          <option key={value.collection} value={value.collection}>
+                            <option key={value.collection} value={value.collection}>
                                 {value.collection}
-                            </option>)}
+                            </option>
+                        )}
                     </select>
                 </fieldset>
 
                 {inputPredictors}
-                {spinner}
             </fieldset>
         );
     }
@@ -137,7 +137,8 @@ class ModelPredict extends Component {
         };
 
         // boolean to show ajax spinner
-        this.setState({ display_spinner: true });
+        const action = setSpinner({'spinner': true});
+        this.props.dispatchSpinner(action);
 
         // asynchronous callback: ajax 'done' promise
         ajaxCaller(
@@ -149,7 +150,8 @@ class ModelPredict extends Component {
                     this.setState({ ajax_done_options: asynchObject });
                 }
                 // boolean to hide ajax spinner
-                this.setState({ display_spinner: false });
+                const action = setSpinner({'spinner': false});
+                this.props.dispatchSpinner(action);
             },
             // asynchronous callback: ajax 'fail' promise
             (asynchStatus, asynchError) => {
@@ -162,7 +164,8 @@ class ModelPredict extends Component {
                     console.log(`Error Thrown: ${  asynchError}`);
                 }
                 // boolean to hide ajax spinner
-                this.setState({ display_spinner: false });
+                const action = setSpinner({'spinner': false});
+                this.props.dispatchSpinner(action);
             },
             // pass ajax arguments
             ajaxArguments,
