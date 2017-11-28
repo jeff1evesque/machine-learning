@@ -24,13 +24,10 @@ development:
             ipython: '1.2.1-2'
             nginx: '1.12.1-1~trusty'
 
-    github:
-        custom:
-            sklearn: '0.16.1'
-
     npm:
         general:
             fetch: '1.1.0'
+            scikit-learn: '0.19.1'
 
         custom:
             uglify-js: '2.7.5'
