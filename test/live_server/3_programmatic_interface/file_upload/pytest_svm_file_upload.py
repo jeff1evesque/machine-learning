@@ -199,6 +199,20 @@ def test_model_predict(client, live_server, token):
         i for i in fixed_prob if any(abs(i-j) > margin_prob for j in cp)
     ]
 
+    # check each decision function is within acceptable margin
+    fixed_df = [
+        1.92243592,
+        -0.5,
+        0.92243592,
+        4.32756423,
+        3.32756392
+    ]
+    df = res.json['result']['confidence']['decision_function']
+    margin_df = 0.000005
+    check_df = [
+        i for i in fixed_df if any(abs(i-j) > margin_df for j in df)
+    ]
+
     # assertion checks
     assert res.status_code == 200
     assert res.json['status'] == 0
@@ -211,18 +225,7 @@ def test_model_predict(client, live_server, token):
         'dep-variable-4',
         'dep-variable-5'
     ]
-    assert res.json['result']['confidence']['decision_function'] == [
-        0.2176409363746643,
-        0.0,
-        -0.2201467913263242,
-        -0.22014661657537662,
-        -0.2176409363746643,
-        -0.49999960156529255,
-        -0.4999994180301428,
-        -0.2201467913263242,
-        -0.22014661657537662,
-        1.8353514974478458e-07
-    ]
+    assert check_df
     assert check_prob
     assert res.json['result']['model'] == 'svm'
     assert res.json['result']['result'] == 'dep-variable-4'
