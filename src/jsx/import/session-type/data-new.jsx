@@ -166,6 +166,7 @@ class DataNew extends Component {
                             <div className='form-group'>
                                 <label for='selectDatasetType'>Dataset Type</label>
                                 <select
+                                    className='fullspan'
                                     name='dataset_type'
                                     autoComplete='off'
                                     onChange={this.changeDatasetType}
@@ -182,7 +183,7 @@ class DataNew extends Component {
                         <div className='col-sm-6'>
                             <div className='form-group'>
                                 <label for='inputModelType'>Model Type</label>
-                                   <ModelType onChange={this.changeModelType} />
+                                <ModelType onChange={this.changeModelType} />
                             </div>
                         </div>
                     </div>
