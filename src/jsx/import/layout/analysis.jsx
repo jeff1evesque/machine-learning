@@ -223,12 +223,12 @@ class AnalysisLayout extends Component {
                 'this.props.formResult'
         */ }
         return (
-            <div>
+            <div className='row'>
                 <NavBar />
                 <form
                     onSubmit={this.handleSubmit}
                     ref='analysisForm'
-                    className='analysis-container'
+                    className='analysis-container col-sm-8'
                 >
                     <Route
                         exact

@@ -11,7 +11,7 @@ import ReviewResultsLinkState from '../redux/container/review-results-link.jsx';
 const NavBar = () =>
     // display result
     (
-        <div className='menu-container'>
+        <div className='menu-container col-sm-4'>
             <ul className='side-menu'>
                 <li>
                     <NavLink
