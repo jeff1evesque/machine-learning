@@ -125,41 +125,58 @@ class DataAppend extends Component {
 
         return (
             <fieldset className='fieldset-session-data-upload'>
-                <legend>Data Upload</legend>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select past collection, and upload type</p>
-                    <select
-                        name='collection'
-                        autoComplete='off'
-                        onChange={this.changeCollection}
-                        value={this.state.value_collection}
-                    >
 
-                        <option value='' defaultValue>--Select--</option>
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label className='block' htmlFor='selectCollection'>Collection</label>
+                                <select
+                                    className='fullspan'
+                                    name='collection'
+                                    autoComplete='off'
+                                    onChange={this.changeCollection}
+                                    value={this.state.value_collection}
+                                >
 
-                        {/* array components require unique 'key' value */}
-                        {options && options.map(value =>
-                            (<option key={value.id} value={value.collection}>
-                            {value.id}: {value.collection}
-                        </option>))}
+                                    <option value='' defaultValue>--Select--</option>
 
-                    </select>
+                                    {/* array components require unique 'key' value */}
+                                    {options && options.map(value =>
+                                        (<option key={value.id} value={value.collection}>
+                                        {value.id}: {value.collection}
+                                    </option>))}
 
-                    <select
-                        name='dataset_type'
-                        autoComplete='off'
-                        onChange={this.changeDatasetType}
-                        value={this.state.value_dataset_type}
-                    >
+                                </select>
+                            </div>
+                        </div>
 
-                        <option value='' defaultValue>--Select--</option>
-                        <option value='file_upload'>Upload file</option>
-                        <option value='dataset_url'>Dataset URL</option>
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label className='block' htmlFor='selectDatasetType'>Dataset Type</label>
+                                <select
+                                    className='fullspan'
+                                    name='dataset_type'
+                                    autoComplete='off'
+                                    onChange={this.changeDatasetType}
+                                    value={this.state.value_dataset_type}
+                                >
 
-                    </select>
+                                    <option value='' defaultValue>--Select--</option>
+                                    <option value='file_upload'>Upload file</option>
+                                    <option value='dataset_url'>Dataset URL</option>
 
-                    <ModelType onChange={this.changeModelType} />
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='form-group'>
+                        <label className='block' htmlFor='inputModelType'>Model Type</label>
+                        <ModelType onChange={this.changeModelType} />
+                    </div>
                 </fieldset>
 
                 {datasetInput}

@@ -107,6 +107,19 @@ html {
     margin-top: 0;
   }
 
+  .block {
+    display: block;
+  }
+
+  .fullspan {
+    width: 100%;
+  }
+
+  .fullspan-b75 {
+    margin-bottom: $gutter-1 * .75;
+    width: 100%;
+  }
+
   .bold {
     font-weight: 700;
   }

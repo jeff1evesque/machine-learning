@@ -132,40 +132,60 @@ class DataNew extends Component {
 
         return (
             <fieldset className='fieldset-session-data-upload'>
-                <legend>Data Upload</legend>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Provide the <i>Session Name</i>, and dataset type</p>
-                    <input
-                        type='text'
-                        name='session_name'
-                        placeholder='Session Name'
-                        onInput={this.changeTitle}
-                        value={this.state.value_title}
-                    />
 
-                    <input
-                        type='text'
-                        name='collection'
-                        placeholder='Collection'
-                        onInput={this.changeCollection}
-                        value={this.state.value_collection}
-                    />
+                    <div className='form-group'>
+                        <label className='block' htmlFor='inputSessionName'>Session Name</label>
+                        <input
+                            className='fullspan'
+                            type='text'
+                            name='session_name'
+                            placeholder='Session Name'
+                            onInput={this.changeTitle}
+                            value={this.state.value_title}
+                        />
+                    </div>
 
-                    <select
-                        name='dataset_type'
-                        autoComplete='off'
-                        onChange={this.changeDatasetType}
-                        value={this.state.value_dataset_type}
-                    >
+                    <div className='form-group'>
+                        <label className='block' htmlFor='inputCollection'>Collection</label>
+                        <input
+                            className='fullspan'
+                            type='text'
+                            name='collection'
+                            placeholder='Collection'
+                            onInput={this.changeCollection}
+                            value={this.state.value_collection}
+                        />
+                    </div>
 
-                        <option value='' defaultValue>--Select--</option>
-                        <option value='file_upload'>Upload file</option>
-                        <option value='dataset_url'>Dataset URL</option>
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label htmlFor='selectDatasetType'>Dataset Type</label>
+                                <select
+                                    className='fullspan'
+                                    name='dataset_type'
+                                    autoComplete='off'
+                                    onChange={this.changeDatasetType}
+                                    value={this.state.value_dataset_type}
+                                >
 
-                    </select>
+                                    <option value='' defaultValue>--Select--</option>
+                                    <option value='file_upload'>Upload file</option>
+                                    <option value='dataset_url'>Dataset URL</option>
+                                </select>
+                            </div>
+                        </div>
 
-                    <ModelType onChange={this.changeModelType} />
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label htmlFor='inputModelType'>Model Type</label>
+                                <ModelType onChange={this.changeModelType} />
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
 
                 {datasetInput}

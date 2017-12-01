@@ -7,6 +7,12 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 #bootstrap-override {
+  .col-sm-6 {
+    label {
+      padding-right: 1rem;
+    }
+  }
+
   .dataset-url:first-of-type,
   .dataset-file:first-of-type {
     clear: both;
@@ -61,12 +67,9 @@
     }
 
     > fieldset {
-      border: 1px solid $gray-2;
-      margin-top: $gutter-1 / 2;
-
       > fieldset {
         border: 1px solid $gray-1;
-        margin-top: $gutter-1 / 4;
+        margin-bottom: $gutter-1 * .75;
       }
     }
 
@@ -98,7 +101,7 @@
     legend {
       border-bottom: 0;
       color: $gray-7;
-      font-size: .938rem;
+      font-size: 1.25rem;
       padding: 0 $gutter-1 / 4;
       width: auto;
     }
@@ -130,11 +133,8 @@
   }
 
   .analysis-container {
-    form {
-      margin: .625rem auto;
-      padding: 0 0 .625rem 1.25rem;
-
-    }
+    margin: .625rem auto;
+    padding: 0 0 .625rem 1.25rem;
   }
 
   .login-form {

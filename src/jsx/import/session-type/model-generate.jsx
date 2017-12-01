@@ -141,54 +141,72 @@ class ModelGenerate extends Component {
 
         return (
             <fieldset className='fieldset-session-generate'>
-                <legend>Generate Model</legend>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
                     <p>Select past collection, model type, and kernel type</p>
-                    <select
-                        name='collection'
-                        autoComplete='off'
-                        onChange={event => this.changeCollection(event)}
-                        value={this.state.value_collection}
-                    >
 
-                        <option value='' defaultValue>--Select--</option>
+                    <div className='form-group'>
+                        <label className='block' htmlFor='selectCollection'>Collection</label>
+                        <select
+                            className='fullspan'
+                            name='collection'
+                            autoComplete='off'
+                            onChange={event => this.changeCollection(event)}
+                            value={this.state.value_collection}
+                        >
 
-                        {/* array components require unique 'key' value */}
-                        {options && options.map(value =>
-                            (<option key={value.id} value={value.collection}>
-                            {value.id}: {value.collection}
-                        </option>))}
+                            <option value='' defaultValue>--Select--</option>
 
-                    </select>
+                            {/* array components require unique 'key' value */}
+                            {options && options.map(value =>
+                                (<option key={value.id} value={value.collection}>
+                                {value.id}: {value.collection}
+                            </option>))}
 
-                    <select
-                        name='model_type'
-                        autoComplete='off'
-                        onChange={this.changeModelType}
-                        value={this.state.value_model_type}
-                    >
+                        </select>
+                    </div>
 
-                        <option value='' defaultValue>--Select--</option>
-                        <option value='svm'>SVM</option>
-                        <option value='svr'>SVR</option>
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label className='block' htmlFor='selectModelType'>Model Type</label>
+                                <select
+                                    className='fullspan'
+                                    name='model_type'
+                                    autoComplete='off'
+                                    onChange={this.changeModelType}
+                                    value={this.state.value_model_type}
+                                >
 
-                    </select>
+                                    <option value='' defaultValue>--Select--</option>
+                                    <option value='svm'>SVM</option>
+                                    <option value='svr'>SVR</option>
 
-                    <select
-                        name='sv_kernel_type'
-                        autoComplete='off'
-                        onChange={this.changeKernelType}
-                        value={this.state.value_kernel_type}
-                    >
+                                </select>
+                            </div>
+                        </div>
 
-                        <option value='' defaultValue>--Select--</option>
-                        <option value='linear'>Linear</option>
-                        <option value='poly'>Polynomial</option>
-                        <option value='rbf'>RBF</option>
-                        <option value='sigmoid'>Sigmoid</option>
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label className='block' htmlFor='selectKernel'>Kernel</label>
+                                <select
+                                    className='fullspan'
+                                    name='sv_kernel_type'
+                                    autoComplete='off'
+                                    onChange={this.changeKernelType}
+                                    value={this.state.value_kernel_type}
+                                >
 
-                    </select>
+                                    <option value='' defaultValue>--Select--</option>
+                                    <option value='linear'>Linear</option>
+                                    <option value='poly'>Polynomial</option>
+                                    <option value='rbf'>RBF</option>
+                                    <option value='sigmoid'>Sigmoid</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </fieldset>
             </fieldset>
         );
