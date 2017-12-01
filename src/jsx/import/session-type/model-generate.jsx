@@ -141,7 +141,6 @@ class ModelGenerate extends Component {
 
         return (
             <fieldset className='fieldset-session-generate'>
-                <legend>Generate Model</legend>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
                     <p>Select past collection, model type, and kernel type</p>

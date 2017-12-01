@@ -132,7 +132,6 @@ class DataNew extends Component {
 
         return (
             <fieldset className='fieldset-session-data-upload'>
-                <legend>Data Upload</legend>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Provide the <i>Session Name</i>, and dataset type</p>

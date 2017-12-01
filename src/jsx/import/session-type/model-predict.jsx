@@ -94,7 +94,6 @@ class ModelPredict extends Component {
 
         return (
             <fieldset className='fieldset-session-predict'>
-                <legend>Analysis</legend>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
