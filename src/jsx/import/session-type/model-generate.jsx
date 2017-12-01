@@ -188,7 +188,7 @@ class ModelGenerate extends Component {
 
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label className='block' for='selectModelType'>Model Type</label>
+                                <label className='block' for='selectKernel'>Kernel</label>
                                 <select
                                     className='fullspan'
                                     name='sv_kernel_type'
