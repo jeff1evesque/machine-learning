@@ -146,8 +146,9 @@ class ModelGenerate extends Component {
                     <p>Select past collection, model type, and kernel type</p>
 
                     <div className='form-group'>
+                        <label className='block' for='selectCollection'>Collection</label>
                         <select
-                            class='fullspan'
+                            className='fullspan'
                             name='collection'
                             autoComplete='off'
                             onChange={event => this.changeCollection(event)}
@@ -168,7 +169,9 @@ class ModelGenerate extends Component {
                     <div className='row'>
                         <div className='col-sm-6'>
                             <div className='form-group'>
+                                <label className='block' for='selectModelType'>Model Type</label>
                                 <select
+                                    className='fullspan'
                                     name='model_type'
                                     autoComplete='off'
                                     onChange={this.changeModelType}
@@ -185,7 +188,9 @@ class ModelGenerate extends Component {
 
                         <div className='col-sm-6'>
                             <div className='form-group'>
+                                <label className='block' for='selectModelType'>Model Type</label>
                                 <select
+                                    className='fullspan'
                                     name='sv_kernel_type'
                                     autoComplete='off'
                                     onChange={this.changeKernelType}

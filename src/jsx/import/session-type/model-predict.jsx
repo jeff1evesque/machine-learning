@@ -100,6 +100,7 @@ class ModelPredict extends Component {
 
                     <div className='form-group'>
                         <select
+                            className='fullspan'
                             name='collection'
                             autoComplete='off'
                             onChange={this.changeCollection}
