@@ -67,10 +67,9 @@ class SupplyPredictors extends Component {
 
                         return (
                             <input
-                                className='fullspan-b75'
+                                className='fullspan-b75 predictionInput'
                                 type='text'
                                 name='prediction_input[]'
-                                className='predictionInput'
                                 placeholder={value}
                                 key={index}
                                 onChange={this.validIntegerEntered}
