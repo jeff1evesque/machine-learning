@@ -135,6 +135,7 @@ class DataAppend extends Component {
                             <div className='form-group'>
                                 <label className='block' for='selectCollection'>Collection</label>
                                 <select
+                                    className='fullspan'
                                     name='collection'
                                     autoComplete='off'
                                     onChange={this.changeCollection}
@@ -157,6 +158,7 @@ class DataAppend extends Component {
                             <div className='form-group'>
                                 <label className='block' for='selectDatasetType'>Dataset Type</label>
                                 <select
+                                    className='fullspan'
                                     name='dataset_type'
                                     autoComplete='off'
                                     onChange={this.changeDatasetType}
