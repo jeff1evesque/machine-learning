@@ -67,9 +67,11 @@
     }
 
     > fieldset {
+      margin-bottom: $gutter-1 * .75;
+
       > fieldset {
         border: 1px solid $gray-1;
-        margin-bottom: $gutter-1 * .75;
+        margin-top: $gutter-1 / 4;
       }
     }
 
