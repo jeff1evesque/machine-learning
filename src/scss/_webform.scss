@@ -68,7 +68,7 @@
 
     > fieldset {
       border: 1px solid $gray-2;
-      margin-bottom: $gutter-1;
+      margin-bottom: $gutter-1 * .75;
 
       > fieldset {
         border: 1px solid $gray-1;
