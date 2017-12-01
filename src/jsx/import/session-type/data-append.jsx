@@ -132,7 +132,7 @@ class DataAppend extends Component {
                     <div className='row'>
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label className='block' for='selectCollection'>Collection</label>
+                                <label className='block' htmlFor='selectCollection'>Collection</label>
                                 <select
                                     className='fullspan'
                                     name='collection'
@@ -155,7 +155,7 @@ class DataAppend extends Component {
 
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label className='block' for='selectDatasetType'>Dataset Type</label>
+                                <label className='block' htmlFor='selectDatasetType'>Dataset Type</label>
                                 <select
                                     className='fullspan'
                                     name='dataset_type'
@@ -174,7 +174,7 @@ class DataAppend extends Component {
                     </div>
 
                     <div className='form-group'>
-                        <label className='block' for='inputModelType'>Model Type</label>
+                        <label className='block' htmlFor='inputModelType'>Model Type</label>
                         <ModelType onChange={this.changeModelType} />
                     </div>
                 </fieldset>

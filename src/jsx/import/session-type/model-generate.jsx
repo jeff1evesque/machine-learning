@@ -146,7 +146,7 @@ class ModelGenerate extends Component {
                     <p>Select past collection, model type, and kernel type</p>
 
                     <div className='form-group'>
-                        <label className='block' for='selectCollection'>Collection</label>
+                        <label className='block' htmlFor='selectCollection'>Collection</label>
                         <select
                             className='fullspan'
                             name='collection'
@@ -169,7 +169,7 @@ class ModelGenerate extends Component {
                     <div className='row'>
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label className='block' for='selectModelType'>Model Type</label>
+                                <label className='block' htmlFor='selectModelType'>Model Type</label>
                                 <select
                                     className='fullspan'
                                     name='model_type'
@@ -188,7 +188,7 @@ class ModelGenerate extends Component {
 
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label className='block' for='selectKernel'>Kernel</label>
+                                <label className='block' htmlFor='selectKernel'>Kernel</label>
                                 <select
                                     className='fullspan'
                                     name='sv_kernel_type'

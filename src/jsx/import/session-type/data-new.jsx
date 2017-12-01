@@ -137,7 +137,7 @@ class DataNew extends Component {
                     <p>Provide the <i>Session Name</i>, and dataset type</p>
 
                     <div className='form-group'>
-                        <label className='block' for='inputSessionName'>Session Name</label>
+                        <label className='block' htmlFor='inputSessionName'>Session Name</label>
                         <input
                             className='fullspan'
                             type='text'
@@ -149,7 +149,7 @@ class DataNew extends Component {
                     </div>
 
                     <div className='form-group'>
-                        <label className='block' for='inputCollection'>Collection</label>
+                        <label className='block' htmlFor='inputCollection'>Collection</label>
                         <input
                             className='fullspan'
                             type='text'
@@ -163,7 +163,7 @@ class DataNew extends Component {
                     <div className='row'>
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label for='selectDatasetType'>Dataset Type</label>
+                                <label htmlFor='selectDatasetType'>Dataset Type</label>
                                 <select
                                     className='fullspan'
                                     name='dataset_type'
@@ -181,7 +181,7 @@ class DataNew extends Component {
 
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label for='inputModelType'>Model Type</label>
+                                <label htmlFor='inputModelType'>Model Type</label>
                                 <ModelType onChange={this.changeModelType} />
                             </div>
                         </div>
