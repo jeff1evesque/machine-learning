@@ -67,12 +67,9 @@
     }
 
     > fieldset {
-      border: 1px solid $gray-2;
-      margin-bottom: $gutter-1 * .75;
-
       > fieldset {
         border: 1px solid $gray-1;
-        margin-top: $gutter-1 / 4;
+        margin-bottom: $gutter-1 * .75;
       }
     }
 
@@ -104,7 +101,7 @@
     legend {
       border-bottom: 0;
       color: $gray-7;
-      font-size: .938rem;
+      font-size: 1.25rem;
       padding: 0 $gutter-1 / 4;
       width: auto;
     }
