@@ -59,21 +59,26 @@ class SupplyPredictors extends Component {
             <fieldset className='fieldset-prediction-input'>
                 <legend>Prediction Input</legend>
 
-                {/* array components require unique 'key' value */}
-                {options && options.map((value, index) => {
-                    const suffix = index.toString();
-                    const predictor = this.state[`value_predictor_${suffix}`];
+                <div className='form-group'>
+                    {/* array components require unique 'key' value */}
+                    {options && options.map((value, index) => {
+                        const suffix = index.toString();
+                        const predictor = this.state[`value_predictor_${suffix}`];
 
-                    return (<input
-                        type='text'
-                        name='prediction_input[]'
-                        className='predictionInput'
-                        placeholder={value}
-                        key={index}
-                        onChange={this.validIntegerEntered}
-                        defaultValue=''
-                    />);
-                })}
+                        return (
+                            <input
+                                class='fullspan'
+                                type='text'
+                                name='prediction_input[]'
+                                className='predictionInput'
+                                placeholder={value}
+                                key={index}
+                                onChange={this.validIntegerEntered}
+                                defaultValue=''
+                            />
+                        );
+                    })}
+                </div>
 
             </fieldset>
         );

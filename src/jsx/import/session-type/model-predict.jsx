@@ -98,22 +98,25 @@ class ModelPredict extends Component {
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
                     <p>Select a previous model to analyze</p>
-                    <select
-                        name='collection'
-                        autoComplete='off'
-                        onChange={this.changeCollection}
-                        value={this.state.value_collection}
-                    >
 
-                        <option value='' defaultValue>--Select--</option>
+                    <div className='form-group'>
+                        <select
+                            name='collection'
+                            autoComplete='off'
+                            onChange={this.changeCollection}
+                            value={this.state.value_collection}
+                        >
 
-                        {/* array components require unique 'key' value */}
-                        {options && options.map((value) => 
-                            <option key={value.collection} value={value.collection}>
-                                {value.collection}
-                            </option>
-                        )}
-                    </select>
+                            <option value='' defaultValue>--Select--</option>
+
+                            {/* array components require unique 'key' value */}
+                            {options && options.map((value) => 
+                                <option key={value.collection} value={value.collection}>
+                                    {value.collection}
+                                </option>
+                            )}
+                        </select>
+                    </div>
                 </fieldset>
 
                 {inputPredictors}
