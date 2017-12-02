@@ -102,6 +102,7 @@
       border-bottom: 0;
       color: $gray-7;
       font-size: 1.25rem;
+      margin-bottom: 0;
       padding: 0 $gutter-1 / 4;
       width: auto;
     }
@@ -135,6 +136,10 @@
   .analysis-container {
     margin: .625rem auto;
     padding: 0 0 .625rem 1.25rem;
+
+    label {
+      font-weight: normal;
+    }
   }
 
   .login-form {
