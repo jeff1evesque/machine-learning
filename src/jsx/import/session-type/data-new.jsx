@@ -134,8 +134,6 @@ class DataNew extends Component {
             <fieldset className='fieldset-session-data-upload'>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
-                    <p>Provide the <i>Session Name</i>, and dataset type</p>
-
                     <div className='form-group'>
                         <label className='block' htmlFor='inputSessionName'>Session Name</label>
                         <input

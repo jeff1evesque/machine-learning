@@ -143,8 +143,6 @@ class ModelGenerate extends Component {
             <fieldset className='fieldset-session-generate'>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
-                    <p>Select past collection, model type, and kernel type</p>
-
                     <div className='form-group'>
                         <label className='block' htmlFor='selectCollection'>Collection</label>
                         <select

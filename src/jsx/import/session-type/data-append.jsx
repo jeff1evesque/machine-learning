@@ -127,8 +127,6 @@ class DataAppend extends Component {
             <fieldset className='fieldset-session-data-upload'>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
-                    <p>Select past collection, and upload type</p>
-
                     <div className='row'>
                         <div className='col-sm-6'>
                             <div className='form-group'>
