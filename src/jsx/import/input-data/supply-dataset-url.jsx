@@ -87,37 +87,55 @@ class SupplyDatasetUrl extends Component {
         return (
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input
-                    type='url'
-                    name='dataset[]'
-                    placeholder='Dataset URL'
-                    className='dataset-url'
-                    onChange={this.validUrlEntered}
-                    defaultValue=''
-                />
 
-                <input
-                    type='button'
-                    value='Add more'
-                    onClick={this.handleAddMore}
-                />
+                <div className='row'>
+                    <div className='col-sm-8'>
+                        <div className='form-group'>
 
-                <input
-                    type='button'
-                    value='Remove'
-                    onClick={this.handleRemove}
-                />
+                            <input
+                                className='form-control dataset-url'
+                                type='url'
+                                name='dataset[]'
+                                placeholder='Dataset URL'
+                                onChange={this.validUrlEntered}
+                                defaultValue=''
+                            />
+                        </div>
 
-                {/* array components require unique 'key' value */}
-                {inputs && inputs.map((value, index) => (<input
-                    type='url'
-                    name='dataset[]'
-                    placeholder='Dataset URL'
-                    className='dataset-url'
-                    key={index}
-                    onChange={this.validUrlEntered}
-                    defaultValue=''
-                />))}
+                        {/* array components require unique 'key' value */}
+                        {inputs && inputs.map((value, index) => (
+                            <div className='form-group'>
+                                <input
+                                    className='form-control dataset-url'
+                                    type='url'
+                                    name='dataset[]'
+                                    placeholder='Dataset URL'
+                                    key={index}
+                                    onChange={this.validUrlEntered}
+                                    defaultValue=''
+                                />
+                            </div>
+                        ))}
+                    </div>
+
+                    <div className='col-sm-4'>
+                        <div className='form-group'>
+                            <input
+                                type='button'
+                                value='Add more'
+                                onClick={this.handleAddMore}
+                            />
+                        </div>
+
+                        <div className='form-group'>
+                            <input
+                                type='button'
+                                value='Remove'
+                                onClick={this.handleRemove}
+                            />
+                        </div>
+                    </div>
+                </div>
             </fieldset>
         );
     }

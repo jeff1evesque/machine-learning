@@ -67,7 +67,7 @@ class SupplyPredictors extends Component {
 
                         return (
                             <input
-                                className='fullspan-b75 predictionInput'
+                                className='form-control fullspan-b75 predictionInput'
                                 type='text'
                                 name='prediction_input[]'
                                 placeholder={value}

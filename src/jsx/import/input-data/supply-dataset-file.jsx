@@ -91,35 +91,52 @@ class SupplyDatasetFile extends Component {
         return (
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input
-                    type='file'
-                    name='dataset[]'
-                    className='dataset-file'
-                    onChange={this.validFileEntered}
-                    defaultValue=''
-                />
 
-                <input
-                    type='button'
-                    value='Add more'
-                    onClick={this.handleAddMore}
-                />
+                <div className='row'>
+                    <div className='col-sm-8'>
+                        <div className='form-group'>
+                            <input
+                                type='file'
+                                name='dataset[]'
+                                className='dataset-file'
+                                onChange={this.validFileEntered}
+                                defaultValue=''
+                            />
+                        </div>
 
-                <input
-                    type='button'
-                    value='Remove'
-                    onClick={this.handleRemove}
-                />
+                        {/* array components require unique 'key' value */}
+                        {inputs && inputs.map((value, index) => (
+                            <div className='form-group'>
+                                <input
+                                    type='file'
+                                    name='dataset[]'
+                                    className='dataset-file'
+                                    key={index}
+                                    onChange={this.validFileEntered}
+                                    defaultValue=''
+                                />
+                            </div>
+                        ))}
+                    </div>
 
-                {/* array components require unique 'key' value */}
-                {inputs && inputs.map((value, index) => (<input
-                    type='file'
-                    name='dataset[]'
-                    className='dataset-file'
-                    key={index}
-                    onChange={this.validFileEntered}
-                    defaultValue=''
-                />))}
+                    <div className='col-sm-4'>
+                        <div className='form-group'>
+                            <input
+                                type='button'
+                                value='Add more'
+                                onClick={this.handleAddMore}
+                            />
+                        </div>
+
+                        <div className='form-group'>
+                            <input
+                                type='button'
+                                value='Remove'
+                                onClick={this.handleRemove}
+                            />
+                        </div>
+                    </div>
+                </div>
 
                 <p className='form-note'>
                     <span className='asterick'>*</span>
