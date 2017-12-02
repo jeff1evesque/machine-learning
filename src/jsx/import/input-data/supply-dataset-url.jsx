@@ -91,7 +91,6 @@ class SupplyDatasetUrl extends Component {
                 <div className='row'>
                     <div className='col-sm-6'>
                         <div className='form-group'>
-
                             <input
                                 className='form-control dataset-url'
                                 type='url'
