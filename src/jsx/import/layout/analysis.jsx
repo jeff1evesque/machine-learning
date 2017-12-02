@@ -224,45 +224,49 @@ class AnalysisLayout extends Component {
         */ }
         return (
             <div className='row'>
-                <NavBar />
-                <form
-                    onSubmit={this.handleSubmit}
-                    ref='analysisForm'
-                    className='analysis-container col-sm-8'
-                >
+                <div className='col-sm-4'>
+                    <NavBar />
+                </div>
+                <div className='col-sm-8'>
+                    <form
+                        onSubmit={this.handleSubmit}
+                        ref='analysisForm'
+                        className='analysis-container'
+                    >
+                        <Route
+                            exact
+                            path='/session/data-new'
+                            component={DataNewState}
+                        />
+                        <Route
+                            exact
+                            path='/session/data-append'
+                            component={DataAppendState}
+                        />
+                        <Route
+                            exact
+                            path='/session/model-generate'
+                            component={ModelGenerateState}
+                        />
+                        <Route
+                            exact
+                            path='/session/model-predict'
+                            component={ModelPredictState}
+                        />
+                        {submitBtn}
+                        {resultBtn}
+                    </form>
                     <Route
                         exact
-                        path='/session/data-new'
-                        component={DataNewState}
+                        path='/session/current-result'
+                        component={CurrentResultState}
                     />
                     <Route
                         exact
-                        path='/session/data-append'
-                        component={DataAppendState}
+                        path='/session/results'
+                        component={ResultsDisplayState}
                     />
-                    <Route
-                        exact
-                        path='/session/model-generate'
-                        component={ModelGenerateState}
-                    />
-                    <Route
-                        exact
-                        path='/session/model-predict'
-                        component={ModelPredictState}
-                    />
-                    {submitBtn}
-                    {resultBtn}
-                </form>
-                <Route
-                    exact
-                    path='/session/current-result'
-                    component={CurrentResultState}
-                />
-                <Route
-                    exact
-                    path='/session/results'
-                    component={ResultsDisplayState}
-                />
+                </div>
             </div>
         );
     }
