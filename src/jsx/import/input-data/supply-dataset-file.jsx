@@ -106,12 +106,12 @@ class SupplyDatasetFile extends Component {
 
                         {/* array components require unique 'key' value */}
                         {inputs && inputs.map((value, index) => (
-                            <div className='form-group'>
+                            <div className='form-group' key=`form-group-${index}`>
                                 <input
                                     type='file'
                                     name='dataset[]'
                                     className='dataset-file'
-                                    key={index}
+                                    key=`input-${index}`
                                     onChange={this.validFileEntered}
                                     defaultValue=''
                                 />
