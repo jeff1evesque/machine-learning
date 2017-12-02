@@ -104,13 +104,13 @@ class SupplyDatasetUrl extends Component {
 
                         {/* array components require unique 'key' value */}
                         {inputs && inputs.map((value, index) => (
-                            <div className='form-group' key=`form-group-${index}`>
+                            <div className='form-group' key={`form-group-${index}`}>
                                 <input
                                     className='form-control dataset-url'
                                     type='url'
                                     name='dataset[]'
                                     placeholder='Dataset URL'
-                                    key=`input-${index}`
+                                    key={`input-url-${index}`}
                                     onChange={this.validUrlEntered}
                                     defaultValue=''
                                 />
