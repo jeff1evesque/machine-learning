@@ -93,7 +93,7 @@ class SupplyDatasetFile extends Component {
                 <legend>Supply Dataset</legend>
 
                 <div className='row'>
-                    <div className='col-sm-8'>
+                    <div className='col-sm-6'>
                         <div className='form-group'>
                             <input
                                 type='file'
@@ -119,21 +119,25 @@ class SupplyDatasetFile extends Component {
                         ))}
                     </div>
 
-                    <div className='col-sm-4'>
-                        <div className='form-group'>
-                            <input
-                                type='button'
-                                value='Add more'
-                                onClick={this.handleAddMore}
-                            />
-                        </div>
+                    <div className='col-sm-6'>
+                        <div className='row'>
+                            <div className='col-sm-6 form-group'>
+                                <input
+                                    className='fullspan'
+                                    type='button'
+                                    value='Add more'
+                                    onClick={this.handleAddMore}
+                                />
+                            </div>
 
-                        <div className='form-group'>
-                            <input
-                                type='button'
-                                value='Remove'
-                                onClick={this.handleRemove}
-                            />
+                            <div className='col-sm-6 form-group'>
+                                <input
+                                    className='fullspan'
+                                    type='button'
+                                    value='Remove'
+                                    onClick={this.handleRemove}
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
