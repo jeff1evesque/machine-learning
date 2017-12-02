@@ -30,7 +30,7 @@ class ModelType extends Component {
         // display result
         return (
             <select
-                className='fullspan'
+                className='form-control fullspan'
                 name='model_type'
                 autoComplete='off'
                 onChange={this.changeModelType}
