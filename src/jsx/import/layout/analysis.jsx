@@ -224,10 +224,10 @@ class AnalysisLayout extends Component {
         */ }
         return (
             <div className='row'>
-                <div className='col-sm-4'>
+                <div className='col-sm-3'>
                     <NavBar />
                 </div>
-                <div className='col-sm-8'>
+                <div className='col-sm-9'>
                     <form
                         onSubmit={this.handleSubmit}
                         ref='analysisForm'
