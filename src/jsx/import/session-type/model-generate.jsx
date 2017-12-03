@@ -143,12 +143,10 @@ class ModelGenerate extends Component {
             <fieldset className='fieldset-session-generate'>
                 <fieldset className='fieldset-select-model'>
                     <legend>Configurations</legend>
-                    <p>Select past collection, model type, and kernel type</p>
-
                     <div className='form-group'>
                         <label className='block' htmlFor='selectCollection'>Collection</label>
                         <select
-                            className='fullspan'
+                            className='form-control fullspan'
                             name='collection'
                             autoComplete='off'
                             onChange={event => this.changeCollection(event)}
@@ -171,7 +169,7 @@ class ModelGenerate extends Component {
                             <div className='form-group'>
                                 <label className='block' htmlFor='selectModelType'>Model Type</label>
                                 <select
-                                    className='fullspan'
+                                    className='form-control fullspan'
                                     name='model_type'
                                     autoComplete='off'
                                     onChange={this.changeModelType}
@@ -190,7 +188,7 @@ class ModelGenerate extends Component {
                             <div className='form-group'>
                                 <label className='block' htmlFor='selectKernel'>Kernel</label>
                                 <select
-                                    className='fullspan'
+                                    className='form-control fullspan'
                                     name='sv_kernel_type'
                                     autoComplete='off'
                                     onChange={this.changeKernelType}

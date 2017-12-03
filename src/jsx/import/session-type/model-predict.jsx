@@ -96,11 +96,9 @@ class ModelPredict extends Component {
             <fieldset className='fieldset-session-predict'>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
-                    <p>Select a previous model to analyze</p>
-
                     <div className='form-group'>
                         <select
-                            className='fullspan'
+                            className='form-control fullspan'
                             name='collection'
                             autoComplete='off'
                             onChange={this.changeCollection}

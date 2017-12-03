@@ -37,9 +37,9 @@ class SupplyDatasetUrl extends Component {
             this.setState({ additional_elements: elements });
 
             { /* define boolean to indicate all urls properly defined */ }
-            for (index = 0; index < elements.length; index++) {
-                const value = this.state[`value_dataset_${index.toString()}`];
-                if (inputVal === undefined) {
+            for (let index = 0; index < elements.length; index++) {
+                const inputVal = this.state[`value_dataset_${index.toString()}`];
+                if (inputVal === undefined || !inputVal) {
                     datasetBoolean = false;
                 }
             }
@@ -83,41 +83,60 @@ class SupplyDatasetUrl extends Component {
     // triggered when 'state properties' change
     render() {
         const inputs = this.state.additional_elements;
-
         return (
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input
-                    type='url'
-                    name='dataset[]'
-                    placeholder='Dataset URL'
-                    className='dataset-url'
-                    onChange={this.validUrlEntered}
-                    defaultValue=''
-                />
+                <div className='row'>
+                    <div className='col-sm-6'>
+                        <div className='form-group'>
+                            <input
+                                className='form-control dataset-url'
+                                type='url'
+                                name='dataset[]'
+                                placeholder='Dataset URL'
+                                onChange={this.validUrlEntered}
+                                defaultValue=''
+                            />
+                        </div>
 
-                <input
-                    type='button'
-                    value='Add more'
-                    onClick={this.handleAddMore}
-                />
+                        {/* array components require unique 'key' value */}
+                        {inputs && inputs.map((value, index) => (
+                            <div className='form-group' key={`form-group-${index}`}>
+                                <input
+                                    className='form-control dataset-url'
+                                    type='url'
+                                    name='dataset[]'
+                                    placeholder='Dataset URL'
+                                    key={`input-url-${index}`}
+                                    onChange={this.validUrlEntered}
+                                    defaultValue=''
+                                />
+                            </div>
+                        ))}
+                    </div>
 
-                <input
-                    type='button'
-                    value='Remove'
-                    onClick={this.handleRemove}
-                />
+                    <div className='col-sm-6'>
+                        <div className='row'>
+                            <div className='col-sm-6 form-group'>
+                                <input
+                                    className='fullspan'
+                                    type='button'
+                                    value='Add more'
+                                    onClick={this.handleAddMore}
+                                />
+                            </div>
 
-                {/* array components require unique 'key' value */}
-                {inputs && inputs.map((value, index) => (<input
-                    type='url'
-                    name='dataset[]'
-                    placeholder='Dataset URL'
-                    className='dataset-url'
-                    key={index}
-                    onChange={this.validUrlEntered}
-                    defaultValue=''
-                />))}
+                            <div className='col-sm-6 form-group'>
+                                <input
+                                    className='fullspan'
+                                    type='button'
+                                    value='Remove'
+                                    onClick={this.handleRemove}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </fieldset>
         );
     }

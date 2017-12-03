@@ -127,14 +127,12 @@ class DataAppend extends Component {
             <fieldset className='fieldset-session-data-upload'>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
-                    <p>Select past collection, and upload type</p>
-
                     <div className='row'>
                         <div className='col-sm-6'>
                             <div className='form-group'>
                                 <label className='block' htmlFor='selectCollection'>Collection</label>
                                 <select
-                                    className='fullspan'
+                                    className='form-control fullspan'
                                     name='collection'
                                     autoComplete='off'
                                     onChange={this.changeCollection}
@@ -157,7 +155,7 @@ class DataAppend extends Component {
                             <div className='form-group'>
                                 <label className='block' htmlFor='selectDatasetType'>Dataset Type</label>
                                 <select
-                                    className='fullspan'
+                                    className='form-control fullspan'
                                     name='dataset_type'
                                     autoComplete='off'
                                     onChange={this.changeDatasetType}

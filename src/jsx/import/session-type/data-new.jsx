@@ -134,12 +134,10 @@ class DataNew extends Component {
             <fieldset className='fieldset-session-data-upload'>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>Configurations</legend>
-                    <p>Provide the <i>Session Name</i>, and dataset type</p>
-
                     <div className='form-group'>
                         <label className='block' htmlFor='inputSessionName'>Session Name</label>
                         <input
-                            className='fullspan'
+                            className='form-control fullspan'
                             type='text'
                             name='session_name'
                             placeholder='Session Name'
@@ -151,7 +149,7 @@ class DataNew extends Component {
                     <div className='form-group'>
                         <label className='block' htmlFor='inputCollection'>Collection</label>
                         <input
-                            className='fullspan'
+                            className='form-control fullspan'
                             type='text'
                             name='collection'
                             placeholder='Collection'
@@ -165,7 +163,7 @@ class DataNew extends Component {
                             <div className='form-group'>
                                 <label htmlFor='selectDatasetType'>Dataset Type</label>
                                 <select
-                                    className='fullspan'
+                                    className='form-control fullspan'
                                     name='dataset_type'
                                     autoComplete='off'
                                     onChange={this.changeDatasetType}

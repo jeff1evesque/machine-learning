@@ -41,10 +41,8 @@ class SupplyDatasetFile extends Component {
             { /* define boolean to indicate all files properly defined */ }
             for (let index = 0; index < elements.length; index++) {
                 const inputVal = this.state[`value_dataset_${index.toString()}`];
-
                 if (inputVal === undefined || !inputVal) {
                     datasetBoolean = false;
-                    return datasetBoolean;
                 }
 	        }
 
@@ -87,39 +85,58 @@ class SupplyDatasetFile extends Component {
     // triggered when 'state properties' change
     render() {
         const inputs = this.state.additional_elements;
-
         return (
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-                <input
-                    type='file'
-                    name='dataset[]'
-                    className='dataset-file'
-                    onChange={this.validFileEntered}
-                    defaultValue=''
-                />
+                <div className='row'>
+                    <div className='col-sm-6'>
+                        <div className='form-group'>
+                            <input
+                                type='file'
+                                name='dataset[]'
+                                className='dataset-file'
+                                onChange={this.validFileEntered}
+                                defaultValue=''
+                            />
+                        </div>
 
-                <input
-                    type='button'
-                    value='Add more'
-                    onClick={this.handleAddMore}
-                />
+                        {/* array components require unique 'key' value */}
+                        {inputs && inputs.map((value, index) => (
+                            <div className='form-group' key={`form-group-${index}`}>
+                                <input
+                                    type='file'
+                                    name='dataset[]'
+                                    className='dataset-file'
+                                    key={`input-file-${index}`}
+                                    onChange={this.validFileEntered}
+                                    defaultValue=''
+                                />
+                            </div>
+                        ))}
+                    </div>
 
-                <input
-                    type='button'
-                    value='Remove'
-                    onClick={this.handleRemove}
-                />
+                    <div className='col-sm-6'>
+                        <div className='row'>
+                            <div className='col-sm-6 form-group'>
+                                <input
+                                    className='fullspan'
+                                    type='button'
+                                    value='Add more'
+                                    onClick={this.handleAddMore}
+                                />
+                            </div>
 
-                {/* array components require unique 'key' value */}
-                {inputs && inputs.map((value, index) => (<input
-                    type='file'
-                    name='dataset[]'
-                    className='dataset-file'
-                    key={index}
-                    onChange={this.validFileEntered}
-                    defaultValue=''
-                />))}
+                            <div className='col-sm-6 form-group'>
+                                <input
+                                    className='fullspan'
+                                    type='button'
+                                    value='Remove'
+                                    onClick={this.handleRemove}
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
                 <p className='form-note'>
                     <span className='asterick'>*</span>
