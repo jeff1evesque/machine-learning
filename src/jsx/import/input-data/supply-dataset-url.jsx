@@ -38,7 +38,7 @@ class SupplyDatasetUrl extends Component {
 
             { /* define boolean to indicate all urls properly defined */ }
             for (index = 0; index < elements.length; index++) {
-                const value = this.state[`value_dataset_${index.toString()}`];
+                const inputVal = this.state[`value_dataset_${index.toString()}`];
                 if (inputVal === undefined) {
                     datasetBoolean = false;
                 }
