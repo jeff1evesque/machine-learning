@@ -41,7 +41,6 @@ class SupplyDatasetFile extends Component {
             { /* define boolean to indicate all files properly defined */ }
             for (let index = 0; index < elements.length; index++) {
                 const inputVal = this.state[`value_dataset_${index.toString()}`];
-
                 if (inputVal === undefined || !inputVal) {
                     datasetBoolean = false;
                     return datasetBoolean;
