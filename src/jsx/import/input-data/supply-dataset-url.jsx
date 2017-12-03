@@ -37,7 +37,7 @@ class SupplyDatasetUrl extends Component {
             this.setState({ additional_elements: elements });
 
             { /* define boolean to indicate all urls properly defined */ }
-            for (index = 0; index < elements.length; index++) {
+            for (let index = 0; index < elements.length; index++) {
                 const inputVal = this.state[`value_dataset_${index.toString()}`];
                 if (inputVal === undefined || !inputVal) {
                     datasetBoolean = false;
@@ -83,11 +83,9 @@ class SupplyDatasetUrl extends Component {
     // triggered when 'state properties' change
     render() {
         const inputs = this.state.additional_elements;
-
         return (
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-
                 <div className='row'>
                     <div className='col-sm-6'>
                         <div className='form-group'>
