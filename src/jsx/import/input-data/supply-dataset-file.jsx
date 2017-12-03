@@ -43,7 +43,6 @@ class SupplyDatasetFile extends Component {
                 const inputVal = this.state[`value_dataset_${index.toString()}`];
                 if (inputVal === undefined || !inputVal) {
                     datasetBoolean = false;
-                    return datasetBoolean;
                 }
 	        }
 
@@ -86,11 +85,9 @@ class SupplyDatasetFile extends Component {
     // triggered when 'state properties' change
     render() {
         const inputs = this.state.additional_elements;
-
         return (
             <fieldset className='fieldset-supply-dataset'>
                 <legend>Supply Dataset</legend>
-
                 <div className='row'>
                     <div className='col-sm-6'>
                         <div className='form-group'>
