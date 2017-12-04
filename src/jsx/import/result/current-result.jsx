@@ -233,9 +233,7 @@ class CurrentResultDisplay extends Component {
                                 Array.isArray(value) ?
                                     <td className='sublist' key={`td-${item_key}`}>
                                         {
-                                            value.map((value, index) =>
-                                                <span key={`subitem-${  index}`}>{value}</span>
-                                            )
+                                            value.map((value, index) =>{value})
                                         }
                                     </td>
                                     : <td className='sublist' key={`td-${item_key}`}>value</td>
@@ -268,9 +266,7 @@ class CurrentResultDisplay extends Component {
                                 Array.isArray(value) ?
                                     <td className='sublist' key={`td-${item_key}`}>
                                         {
-                                            value.map((value, index) =>
-                                                <span key={`subitem-${  index}`}>{value}</span>
-                                            )
+                                            value.map((value, index) =>{value})
                                         }
                                     </td>
                                     : <td className='sublist' key={`td-${item_key}`}>value</td>
