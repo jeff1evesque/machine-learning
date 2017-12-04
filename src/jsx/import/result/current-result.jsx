@@ -238,7 +238,7 @@ class CurrentResultDisplay extends Component {
                                             )
                                         }
                                     </td>
-                                    <td className='sublist' key={`td-${item_key}`}>value</td>
+                                    : <td className='sublist' key={`td-${item_key}`}>value</td>
                             }</tr>
                         ))
                     </tbody>
@@ -273,7 +273,7 @@ class CurrentResultDisplay extends Component {
                                             )
                                         }
                                     </td>
-                                    <td className='sublist' key={`td-${item_key}`}>value</td>
+                                    : <td className='sublist' key={`td-${item_key}`}>value</td>
                             }</tr>
                         ))
                     </tbody>
