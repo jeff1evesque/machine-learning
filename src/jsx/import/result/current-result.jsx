@@ -216,21 +216,34 @@ class CurrentResultDisplay extends Component {
             delete resultData.status;
 
             // generate result
-            var resultList = (<ul className='result-list'>{
-                Object.entries(resultData).map(([item_key, value]) =>
-                    (<li key={item_key}>{item_key}: {
-                        Array.isArray(value) ?
-                            <ul className='sublist' key={`sublist-${item_key}`}>
-                                {
-                                    value.map((value, index) =>
-                                    <li key={`subitem-${  index}`}>{value}</li>)
-                                }
-                            </ul>
-                            : value
-                    }
-                     </li>))
-            }
-            </ul>);
+            var resultList = (
+                <table responsive>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            Object.entries(resultData).map(([item_key, value]) => (
+                                <th key={`th-${item_key}`}>{item_key}</th>
+                            ))
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        Object.entries(resultData).map(([item_key, value]) => (
+                            <tr key={`tr-${item_key}`}>{
+                                Array.isArray(value) ?
+                                    <td className='sublist' key={`td-${item_key}`}>
+                                        {
+                                            value.map((value, index) =>
+                                                <span key={`subitem-${  index}`}>{value}</span>
+                                            )
+                                        }
+                                     </td>
+                                    : value
+                            }</tr>
+                        ))
+                    </tbody>
+                </table>
+            );
         } else if (
             resultData &&
             this.props &&
@@ -238,36 +251,64 @@ class CurrentResultDisplay extends Component {
             this.props.results.data &&
             Object.keys(resultData).length > 0
         ) {
-            var resultList = (<ul className='result-list'>{
-                Object.entries(resultData).map(([item_key, value]) =>
-                    (<li key={item_key}>{item_key}: {
-                        Array.isArray(value) ?
-                            <ul className='sublist' key={`sublist-${item_key}`}>
-                                {
-                                    value.map((value, index) =>
-                                    <li key={`subitem-${  index}`}>{value}</li>)
-                                }
-                            </ul>
-                            : value
-                    }
-                     </li>))
-            }
-            </ul>);
+            var resultList = (
+                <table responsive>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            Object.entries(resultData).map(([item_key, value]) => (
+                                <th key={`th-${item_key}`}>{item_key}</th>
+                            ))
+                        </tr>
+                    </thead>
 
-            var saveResults = (<form onSubmit={this.handleSubmit} ref='savePredictionForm'>
-                <input
-                    type='text'
-                    name='title'
-                    placeholder='Name your result'
-                    className='mn-2'
-                    defaultValue=''
-                />
-                <Submit cssClass='btn' />
-            </form>);
+                    <tbody>
+                        Object.entries(resultData).map(([item_key, value]) => (
+                            <tr key={`tr-${item_key}`}>{
+                                Array.isArray(value) ?
+                                    <td className='sublist' key={`td-${item_key}`}>
+                                        {
+                                            value.map((value, index) =>
+                                                <span key={`subitem-${  index}`}>{value}</span>
+                                            )
+                                        }
+                                     </td>
+                                    : value
+                            }</tr>
+                        ))
+                    </tbody>
+                </table>
+            );
+
+            var saveResults = (
+                <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                    <div className='row'>
+                        <div className='col-sm-9'>
+                            <div className='form-group'>
+                                <label className='block' htmlFor='inputSaveResult'>Save Result</label>
+                                <input
+                                    className='form-control fullspan mn-2'
+                                    type='text'
+                                    name='title'
+                                    placeholder='Name your result'
+                                    defaultValue=''
+                                />
+                            </div>
+                        </div>
+                        <div className='col-sm-3'>
+                            <div className='form-group'>
+                                <Submit cssClass='btn' />
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            );
         } else {
-            var resultList = (<div className='result-list'>
-                Sorry, no results available!
-            </div>);
+            var resultList = (
+                <div className='result-list'>
+                    Sorry, no results available!
+                </div>
+            );
         }
 
         // display result
