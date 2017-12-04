@@ -237,8 +237,8 @@ class CurrentResultDisplay extends Component {
                                                 <span key={`subitem-${  index}`}>{value}</span>
                                             )
                                         }
-                                     </td>
-                                    : value
+                                    </td>
+                                    <td className='sublist' key={`td-${item_key}`}>value</td>
                             }</tr>
                         ))
                     </tbody>
@@ -272,8 +272,8 @@ class CurrentResultDisplay extends Component {
                                                 <span key={`subitem-${  index}`}>{value}</span>
                                             )
                                         }
-                                     </td>
-                                    : value
+                                    </td>
+                                    <td className='sublist' key={`td-${item_key}`}>value</td>
                             }</tr>
                         ))
                     </tbody>
