@@ -13,14 +13,12 @@
     }
   }
 
-  .dataset-url:first-of-type,
-  .dataset-file:first-of-type {
+  .dataset-url:first-of-type {
     clear: both;
     float: left;
   }
 
-  .dataset-url,
-  .dataset-file {
+  .dataset-url {
     clear: both;
     display: block;
     margin: 0 0 $gutter-1 / 2;

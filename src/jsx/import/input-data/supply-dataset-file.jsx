@@ -60,7 +60,7 @@ class SupplyDatasetFile extends Component {
     // update 'state properties': allow parent component(s) to access properties
     validFileEntered() {
         { /* get array of input elements, by classname */ }
-        const dataset = document.getElementsByClassName('dataset-file');
+        const dataset = document.getElementsByClassName('form-control-file');
 
         { /*
             Iterate the node list containing the supplied dataset(s). If the
@@ -94,7 +94,7 @@ class SupplyDatasetFile extends Component {
                             <input
                                 type='file'
                                 name='dataset[]'
-                                className='dataset-file'
+                                className='form-control-file'
                                 onChange={this.validFileEntered}
                                 defaultValue=''
                             />
@@ -106,7 +106,7 @@ class SupplyDatasetFile extends Component {
                                 <input
                                     type='file'
                                     name='dataset[]'
-                                    className='dataset-file'
+                                    className='form-control-file'
                                     key={`input-file-${index}`}
                                     onChange={this.validFileEntered}
                                     defaultValue=''
