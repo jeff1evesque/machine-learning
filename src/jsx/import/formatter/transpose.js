@@ -1,6 +1,6 @@
 /**
- * transpose.js: converts an object of arrays, to it's transpose equivalent,
- *                within an array of arrays.
+ * transpose.js: convert an object of arrays, to it's transpose equivalent, as
+ *               an array of arrays.
  *
  *     The following input:
  *
