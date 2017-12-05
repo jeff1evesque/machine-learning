@@ -15,9 +15,15 @@ import { Router, Switch } from 'react-router-dom';
 import PageLayoutState from './import/redux/container/page.jsx';
 import createHistory from 'history/createBrowserHistory';
 import store from './import/redux/store.jsx';
+import 'core-js/modules/es7.object.entries';
 
 // local variables
 const history = createHistory();
+
+// polyfill 'entries'
+if (!Object.entries) {
+    entries.shim();
+}
 
 // render application
 //

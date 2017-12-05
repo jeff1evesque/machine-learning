@@ -10,7 +10,6 @@
 
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import 'core-js/modules/es7.object.entries';
 import { setLayout, setContentType, setSpinner } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -82,11 +81,6 @@ class ResultsDisplay extends Component {
         // local variables
         const status = this.state.status;
         const titles = this.state.titles;
-
-        // polyfill 'entries'
-        if (!Object.entries) {
-            entries.shim();
-        }
 
         // generate result
         if (status == 0 && titles && titles.length > 0) {

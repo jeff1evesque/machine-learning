@@ -9,7 +9,6 @@
 
 import React, { Component } from 'react';
 import queryString from 'query-string';
-import 'core-js/modules/es7.object.entries';
 import { setLayout, setContentType, setResultsButton } from '../redux/action/page.jsx';
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
@@ -197,11 +196,6 @@ class CurrentResultDisplay extends Component {
             var resultData = JSON.parse(this.props.results.data);
         }
 
-        // polyfill 'entries'
-        if (!Object.entries) {
-            entries.shim();
-        }
-
         // generate result
         if (
             this.state &&
@@ -233,10 +227,10 @@ class CurrentResultDisplay extends Component {
                                 Array.isArray(value) ?
                                     <td className='sublist' key={`td-${item_key}`}>
                                         {
-                                            value.map((value, index) =>{value})
+                                            value.map((value, index) => {value})
                                         }
                                     </td>
-                                    : <td className='sublist' key={`td-${item_key}`}>value</td>
+                                    : <td className='sublist' key={`td-${item_key}`}>{value}</td>
                             }</tr>
                         ))
                     </tbody>
@@ -266,10 +260,10 @@ class CurrentResultDisplay extends Component {
                                 Array.isArray(value) ?
                                     <td className='sublist' key={`td-${item_key}`}>
                                         {
-                                            value.map((value, index) =>{value})
+                                            value.map((value, index) => {value})
                                         }
                                     </td>
-                                    : <td className='sublist' key={`td-${item_key}`}>value</td>
+                                    : <td className='sublist' key={`td-${item_key}`}>{value}</td>
                             }</tr>
                         ))
                     </tbody>
