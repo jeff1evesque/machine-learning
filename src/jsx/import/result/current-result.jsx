@@ -215,24 +215,30 @@ class CurrentResultDisplay extends Component {
                     <thead>
                         <tr>
                             <th>#</th>
-                            Object.entries(resultData).map(([item_key, value]) => (
-                                <th key={`th-${item_key}`}>{item_key}</th>
-                            ))
+                            {
+                                Object.entries(resultData).map(([item_key, value]) => (
+                                    <th key={`th-${item_key}`}>{item_key}</th>
+                                ))
+                            }
                         </tr>
                     </thead>
 
                     <tbody>
-                        Object.entries(resultData).map(([item_key, value]) => (
-                            <tr key={`tr-${item_key}`}>{
-                                Array.isArray(value) ?
-                                    <td className='sublist' key={`td-${item_key}`}>
-                                        {
-                                            value.map((value, index) => {value})
-                                        }
-                                    </td>
-                                    : <td className='sublist' key={`td-${item_key}`}>{value}</td>
-                            }</tr>
-                        ))
+                        {
+                            Object.entries(resultData).map(([item_key, value]) => (
+                                <tr key={`tr-${item_key}`}>{
+                                    Array.isArray(value) ?
+                                        <td className='sublist' key={`td-${item_key}`}>
+                                            {
+                                                value.map((value, index) => {value})
+                                            }
+                                        </td>
+                                        : <td className='sublist' key={`td-${item_key}`}>
+                                            {value}
+                                        </td>
+                                }</tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             );
@@ -248,24 +254,30 @@ class CurrentResultDisplay extends Component {
                     <thead>
                         <tr>
                             <th>#</th>
-                            Object.entries(resultData).map(([item_key, value]) => (
-                                <th key={`th-${item_key}`}>{item_key}</th>
-                            ))
+                            {
+                                Object.entries(resultData).map(([item_key, value]) => (
+                                    <th key={`th-${item_key}`}>{item_key}</th>
+                                ))
+                            }
                         </tr>
                     </thead>
 
                     <tbody>
-                        Object.entries(resultData).map(([item_key, value]) => (
-                            <tr key={`tr-${item_key}`}>{
-                                Array.isArray(value) ?
-                                    <td className='sublist' key={`td-${item_key}`}>
-                                        {
-                                            value.map((value, index) => {value})
-                                        }
-                                    </td>
-                                    : <td className='sublist' key={`td-${item_key}`}>{value}</td>
-                            }</tr>
-                        ))
+                        {
+                            Object.entries(resultData).map(([item_key, value]) => (
+                                <tr key={`tr-${item_key}`}>{
+                                    Array.isArray(value) ?
+                                        <td className='sublist' key={`td-${item_key}`}>
+                                            {
+                                                value.map((value, index) => {value})
+                                            }
+                                        </td>
+                                        : <td className='sublist' key={`td-${item_key}`}>
+                                            {value}
+                                        </td>
+                                }</tr>
+                            ))
+                        }
                     </tbody>
                 </table>
             );
