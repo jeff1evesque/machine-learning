@@ -21,7 +21,7 @@
  *             ]
  *         }
  *
- *     Will yield the following, when supplied to the objTransposer:
+ *     Will yield the following, when transposed:
  *
  *         const obj = [
  *             [
