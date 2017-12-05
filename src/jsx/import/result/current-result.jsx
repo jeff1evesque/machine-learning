@@ -280,7 +280,7 @@ class CurrentResultDisplay extends Component {
                             ))
                         }
                     </tbody>
-                </table>
+                </Table>
             );
 
             var saveResults = (
