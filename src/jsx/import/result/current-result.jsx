@@ -8,6 +8,7 @@
  */
 
 import React, { Component } from 'react';
+import { Table } from 'react-bootstrap';
 import queryString from 'query-string';
 import { setLayout, setContentType, setResultsButton } from '../redux/action/page.jsx';
 import Submit from '../general/submit-button.jsx';
@@ -211,7 +212,7 @@ class CurrentResultDisplay extends Component {
 
             // generate result
             var resultList = (
-                <table responsive>
+                <Table responsive>
                     <thead>
                         <tr>
                             <th>#</th>
@@ -240,7 +241,7 @@ class CurrentResultDisplay extends Component {
                             ))
                         }
                     </tbody>
-                </table>
+                </Table>
             );
         } else if (
             resultData &&
@@ -250,7 +251,7 @@ class CurrentResultDisplay extends Component {
             Object.keys(resultData).length > 0
         ) {
             var resultList = (
-                <table responsive>
+                <Table responsive>
                     <thead>
                         <tr>
                             <th>#</th>
