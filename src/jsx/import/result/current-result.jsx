@@ -14,6 +14,7 @@ import { setLayout, setContentType, setResultsButton } from '../redux/action/pag
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
+import transpose from '../formatter/transpose.js'
 
 class CurrentResultDisplay extends Component {
     // initial 'state properties'
@@ -207,6 +208,12 @@ class CurrentResultDisplay extends Component {
             var resultData = this.state.ajax_retrieval_result;
             const status = resultData.status;
 
+            // remove 'result' property
+            const {result, ...selected} = resultData;
+
+            // perform transpose
+            const transposed = transpose(selected);
+
             // do not present status
             delete resultData.status;
 
@@ -217,7 +224,7 @@ class CurrentResultDisplay extends Component {
                         <tr>
                             <th>#</th>
                             {
-                                Object.entries(resultData).map(([item_key, value]) => (
+                                Object.entries(selected).map(([item_key, value]) => (
                                     <th key={`th-${item_key}`}>{item_key}</th>
                                 ))
                             }
@@ -226,19 +233,16 @@ class CurrentResultDisplay extends Component {
 
                     <tbody>
                         {
-                            Object.entries(resultData).map(([item_key, value]) => (
-                                <tr key={`tr-${item_key}`}>{
-                                    Array.isArray(value) ?
-                                        <td className='sublist' key={`td-${item_key}`}>
-                                            {
-                                                value.map((value, index) => {value})
-                                            }
-                                        </td>
-                                        : <td className='sublist' key={`td-${item_key}`}>
-                                            {value}
-                                        </td>
-                                }</tr>
-                            ))
+                            transposed.forEach(function(arr, trIdx) {
+                                <tr key={`tr-${trIdx}`}>
+                                    <td key={`td-int-${trIdx}`}>{trIdx}</td>
+                                    {
+                                        arr.forEach(function(value, tdIdx) {
+                                            <td key={`td-${tdIdx}`}>{value}</td>
+                                        });
+                                    }
+                                </tr>
+                            });
                         }
                     </tbody>
                 </Table>
@@ -250,13 +254,19 @@ class CurrentResultDisplay extends Component {
             this.props.results.data &&
             Object.keys(resultData).length > 0
         ) {
+            // remove 'result' property
+            const {result, ...selected} = resultData;
+
+            // perform transpose
+            const transposed = transpose(selected);
+
             var resultList = (
                 <Table responsive>
                     <thead>
                         <tr>
                             <th>#</th>
                             {
-                                Object.entries(resultData).map(([item_key, value]) => (
+                                Object.entries(selected).map(([item_key, value]) => (
                                     <th key={`th-${item_key}`}>{item_key}</th>
                                 ))
                             }
@@ -265,19 +275,16 @@ class CurrentResultDisplay extends Component {
 
                     <tbody>
                         {
-                            Object.entries(resultData).map(([item_key, value]) => (
-                                <tr key={`tr-${item_key}`}>{
-                                    Array.isArray(value) ?
-                                        <td className='sublist' key={`td-${item_key}`}>
-                                            {
-                                                value.map((value, index) => {value})
-                                            }
-                                        </td>
-                                        : <td className='sublist' key={`td-${item_key}`}>
-                                            {value}
-                                        </td>
-                                }</tr>
-                            ))
+                            transposed.forEach(function(arr, trIdx) {
+                                <tr key={`tr-${trIdx}`}>
+                                    <td key={`td-int-${trIdx}`}>{trIdx}</td>
+                                    {
+                                        arr.forEach(function(value, tdIdx) {
+                                            <td key={`td-${tdIdx}`}>{value}</td>
+                                        });
+                                    }
+                                </tr>
+                            });
                         }
                     </tbody>
                 </Table>
