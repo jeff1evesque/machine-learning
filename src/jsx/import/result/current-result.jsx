@@ -98,14 +98,16 @@ class CurrentResultDisplay extends Component {
     }
     tableHeaders(headers) {
         var row = Object.entries(headers).map(([key, value]) => (
-            <th>{key}</th>
+            <th key={`th-${key}`}>{key}</th>
         ));
         return <tr><th>#</th>{row}</tr>;
     }
     tableRows(body) {
-        return body.map((rows, index) => {
-            var row = rows.map(cell => <td>{cell}</td>);
-            return <tr><td>{index}</td>{row}</tr>;
+        return body.map((rows, trIdx) => {
+            var row = rows.map((cell, tdIdx) =>
+                <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
+            );
+            return <tr key={`tr-${trIdx}`}><td key={`td-index-${trIdx}`}>{trIdx}</td>{row}</tr>;
         });
     }
     // define properties after update
