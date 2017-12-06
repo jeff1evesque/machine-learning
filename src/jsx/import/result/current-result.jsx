@@ -96,6 +96,18 @@ class CurrentResultDisplay extends Component {
             ajaxArguments,
         );
     }
+    tableHeaders(headers) {
+        var row = Object.entries(headers).map(([key, value]) => (
+            <th>{key}</th>
+        ));
+        return <tr><th>#</th>{row}</tr>;
+    }
+    tableRows(body) {
+        return body.map((rows, index) => {
+            var row = rows.map(cell => <td>{cell}</td>);
+            return <tr><td>{index}</td>{row}</tr>;
+        });
+    }
     // define properties after update
     componentDidUpdate() {
         if (
@@ -221,29 +233,11 @@ class CurrentResultDisplay extends Component {
             var resultList = (
                 <Table responsive>
                     <thead>
-                        <tr>
-                            <th>#</th>
-                            {
-                                Object.entries(selected).map(([item_key, value]) => (
-                                    <th key={`th-${item_key}`}>{item_key}</th>
-                                ))
-                            }
-                        </tr>
+                        {this.tableHeaders(selected)}
                     </thead>
 
                     <tbody>
-                        {
-                            transposed.forEach(function(arr, trIdx) {
-                                <tr key={`tr-${trIdx}`}>
-                                    <td key={`td-int-${trIdx}`}>{trIdx}</td>
-                                    {
-                                        arr.forEach(function(value, tdIdx) {
-                                            <td key={`td-${tdIdx}`}>{value}</td>
-                                        });
-                                    }
-                                </tr>
-                            });
-                        }
+                        this.tableRows(transposed)
                     </tbody>
                 </Table>
             );
@@ -263,29 +257,11 @@ class CurrentResultDisplay extends Component {
             var resultList = (
                 <Table responsive>
                     <thead>
-                        <tr>
-                            <th>#</th>
-                            {
-                                Object.entries(selected).map(([item_key, value]) => (
-                                    <th key={`th-${item_key}`}>{item_key}</th>
-                                ))
-                            }
-                        </tr>
+                        {this.tableHeaders(selected)}
                     </thead>
 
                     <tbody>
-                        {
-                            transposed.forEach(function(arr, trIdx) {
-                                <tr key={`tr-${trIdx}`}>
-                                    <td key={`td-int-${trIdx}`}>{trIdx}</td>
-                                    {
-                                        arr.forEach(function(value, tdIdx) {
-                                            <td key={`td-${tdIdx}`}>{value}</td>
-                                        });
-                                    }
-                                </tr>
-                            });
-                        }
+                        {this.tableRows(transposed)}
                     </tbody>
                 </Table>
             );
