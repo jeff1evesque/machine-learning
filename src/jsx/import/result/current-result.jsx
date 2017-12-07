@@ -268,8 +268,8 @@ class CurrentResultDisplay extends Component {
                         </tbody>
                     </Table>
                     <div className='row result-row'>
-                        <div className='col-sm-9'>
-                            <span className='result'>{result}</span>
+                        <div className='col-sm-9 prediction-result'>
+                            <h4><span className='grayed-font'>Predicted:</span> {result}</h4>
                         </div>
                         <div className='col-sm-3'>
                             <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
