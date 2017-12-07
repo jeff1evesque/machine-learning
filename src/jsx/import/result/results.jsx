@@ -88,10 +88,12 @@ class ResultsDisplay extends Component {
             var resultList = (
                 <Table className='result-row' responsive>
                     <thead>
-                        <th>#</th>
-                        <th>session_id</th>
-                        <th>session_title</th>
-                        <th>date_created</th>
+                        <tr>
+                            <th>#</th>
+                            <th>session_id</th>
+                            <th>session_title</th>
+                            <th>date_created</th>
+                        </tr>
                     </thead>
                     <tbody>
                         {
