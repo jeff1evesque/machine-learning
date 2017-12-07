@@ -257,39 +257,49 @@ class CurrentResultDisplay extends Component {
             const transposed = transpose(selected);
 
             var resultList = (
-                <Table responsive>
-                    <thead>
-                        {this.tableHeaders(selected)}
-                    </thead>
+                <div>
+                    <Table responsive>
+                        <thead>
+                            {this.tableHeaders(selected)}
+                        </thead>
 
-                    <tbody>
-                        {this.tableRows(transposed)}
-                    </tbody>
-                </Table>
-            );
-
-            var saveResults = (
-                <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                        <tbody>
+                            {this.tableRows(transposed)}
+                        </tbody>
+                    </Table>
                     <div className='row'>
-                        <div className='col-sm-9'>
-                            <div className='form-group'>
-                                <label className='block' htmlFor='inputSaveResult'>Save Result</label>
-                                <input
-                                    className='form-control fullspan mn-2'
-                                    type='text'
-                                    name='title'
-                                    placeholder='Name your result'
-                                    defaultValue=''
-                                />
-                            </div>
+                        <div className='col-sm-6 prediction-result'>
+                            <span>{result}</span>
                         </div>
-                        <div className='col-sm-3'>
-                            <div className='form-group'>
-                                <Submit cssClass='btn' />
-                            </div>
+                        <div className='col-sm-6'>
+                            <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                                <div className='row'>
+                                    <div className='col-sm-12 bg-primary'>
+                                        <h4>Save Result</h4>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-sm-9'>
+                                        <div className='form-group'>
+                                            <input
+                                                className='form-control fullspan'
+                                                type='text'
+                                                name='title'
+                                                placeholder='Name your result'
+                                                defaultValue=''
+                                            />
+                                        </div>
+                                    </div>
+                                    <div className='col-sm-3'>
+                                        <div className='form-group'>
+                                            <Submit cssClass='btn fullspan' />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
                     </div>
-                </form>
+                </div>
             );
         } else {
             var resultList = (
