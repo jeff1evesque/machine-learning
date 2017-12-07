@@ -194,4 +194,16 @@
       margin: 0 0 .4rem;
     }
   }
+
+  .result-form {
+    .result {
+      background: $gray-1;
+      padding: $gutter-1;
+      text-align: center;
+    }
+  }
+
+  .result-row {
+    margin-top: $gutter-1;
+  }
 }
