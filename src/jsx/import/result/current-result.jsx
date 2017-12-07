@@ -257,8 +257,8 @@ class CurrentResultDisplay extends Component {
             const transposed = transpose(selected);
 
             var resultList = (
-                <div>
-                    <Table responsive>
+                <div className='result-form'>
+                    <Table className='result-row' responsive>
                         <thead>
                             {this.tableHeaders(selected)}
                         </thead>
@@ -267,20 +267,15 @@ class CurrentResultDisplay extends Component {
                             {this.tableRows(transposed)}
                         </tbody>
                     </Table>
-                    <div className='row'>
-                        <div className='col-sm-6 prediction-result'>
-                            <span>{result}</span>
+                    <div className='row result-row'>
+                        <div className='col-sm-9'>
+                            <span className='result'>{result}</span>
                         </div>
-                        <div className='col-sm-6'>
+                        <div className='col-sm-3'>
                             <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
                                 <div className='row'>
-                                    <div className='col-sm-12 bg-primary'>
-                                        <h4>Save Result</h4>
-                                    </div>
-                                </div>
-                                <div className='row'>
-                                    <div className='col-sm-9'>
-                                        <div className='form-group'>
+                                    <div className='col-sm-12'>
+                                        <div className='form-group no-vertical-margin'>
                                             <input
                                                 className='form-control fullspan'
                                                 type='text'
@@ -290,9 +285,11 @@ class CurrentResultDisplay extends Component {
                                             />
                                         </div>
                                     </div>
-                                    <div className='col-sm-3'>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-sm-12'>
                                         <div className='form-group'>
-                                            <Submit cssClass='btn fullspan' />
+                                            <Submit btnValue='Save' cssClass='btn fullspan' />
                                         </div>
                                     </div>
                                 </div>
