@@ -9,6 +9,7 @@
  */
 
 import React, { Component } from 'react';
+import { Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { setLayout, setContentType, setSpinner } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
