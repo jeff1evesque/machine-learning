@@ -233,15 +233,47 @@ class CurrentResultDisplay extends Component {
 
             // generate result
             var resultList = (
-                <Table responsive>
-                    <thead>
-                        {this.tableHeaders(selected)}
-                    </thead>
+                <div className='result-form'>
+                    <Table className='result-row' responsive>
+                        <thead>
+                            {this.tableHeaders(selected)}
+                        </thead>
 
-                    <tbody>
-                        this.tableRows(transposed)
-                    </tbody>
-                </Table>
+                        <tbody>
+                            {this.tableRows(transposed)}
+                        </tbody>
+                    </Table>
+                    <div className='row result-row'>
+                        <div className='col-sm-9 prediction-result'>
+                            <h4><span className='grayed-font'>Predicted:</span> {result}</h4>
+                        </div>
+                        <div className='col-sm-3'>
+                            <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                                <div className='row'>
+                                    <div className='col-sm-12'>
+                                        <div className='form-group no-vertical-margin'>
+                                            <input
+                                                disabled
+                                                className='form-control fullspan'
+                                                type='text'
+                                                name='title'
+                                                placeholder='Name your result'
+                                                defaultValue=''
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-sm-12'>
+                                        <div className='form-group'>
+                                            <Submit btnValue='Save' cssClass='btn fullspan' disabled />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             );
         } else if (
             resultData &&
