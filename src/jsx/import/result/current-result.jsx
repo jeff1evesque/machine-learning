@@ -96,19 +96,27 @@ class CurrentResultDisplay extends Component {
             ajaxArguments,
         );
     }
-    tableHeaders(headers) {
-        var row = Object.entries(headers).map(([key, value]) => (
+    tableHeaders(header) {
+        var row = Object.entries(header).map(([key, value]) => (
             <th key={`th-${key}`}>{key}</th>
         ));
         return <tr><th>#</th>{row}</tr>;
     }
     tableRows(body) {
-        return body.map((rows, trIdx) => {
-            var row = rows.map((cell, tdIdx) =>
-                <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
-            );
-            return <tr key={`tr-${trIdx}`}><td key={`td-index-${trIdx}`}>{trIdx}</td>{row}</tr>;
-        });
+        if (body.map) {
+            return body.map((rows, trIdx) => {
+                var row = rows.map((cell, tdIdx) =>
+                    <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
+                );
+                return <tr key={`tr-${trIdx}`}><td key={`td-index-${trIdx}`}>{trIdx}</td>{row}</tr>;
+            });
+        }
+        else {
+            var row = Object.entries(body).map(([key, value]) => {
+                <td key={`td-row${key}`}>{value}</td>
+            });
+            return <tr>{row}</tr>
+        }
     }
     // define properties after update
     componentDidUpdate() {
@@ -220,16 +228,12 @@ class CurrentResultDisplay extends Component {
         ) {
             // local variables
             var resultData = this.state.ajax_retrieval_result;
-            const status = resultData.status;
 
             // remove 'result' property
             const {result, ...selected} = resultData;
 
             // perform transpose
-            const transposed = transpose(selected);
-
-            // do not present status
-            delete resultData.status;
+            const adjusted = (resultData && resultData.r2) ? selected : transpose(selected);
 
             // generate result
             var resultList = (
@@ -240,7 +244,7 @@ class CurrentResultDisplay extends Component {
                         </thead>
 
                         <tbody>
-                            {this.tableRows(transposed)}
+                            {this.tableRows(adjusted)}
                         </tbody>
                     </Table>
                     <div className='row result-row'>
@@ -286,7 +290,7 @@ class CurrentResultDisplay extends Component {
             const {result, ...selected} = resultData;
 
             // perform transpose
-            const transposed = transpose(selected);
+            const adjusted = (resultData && resultData.r2) ? selected : transpose(selected);
 
             var resultList = (
                 <div className='result-form'>
@@ -296,7 +300,7 @@ class CurrentResultDisplay extends Component {
                         </thead>
 
                         <tbody>
-                            {this.tableRows(transposed)}
+                            {this.tableRows(adjusted)}
                         </tbody>
                     </Table>
                     <div className='row result-row'>
