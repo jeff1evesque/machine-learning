@@ -270,7 +270,7 @@ class CurrentResultDisplay extends Component {
                                 <div className='row'>
                                     <div className='col-sm-12'>
                                         <div className='form-group'>
-                                            <Submit btnValue='Save' cssClass='btn fullspan' disabled />
+                                            <Submit btnValue='Save' cssClass='btn fullspan' btnDisabled={true} />
                                         </div>
                                     </div>
                                 </div>
