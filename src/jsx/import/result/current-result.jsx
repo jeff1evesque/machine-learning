@@ -8,12 +8,13 @@
  */
 
 import React, { Component } from 'react';
+import { Table } from 'react-bootstrap';
 import queryString from 'query-string';
-import 'core-js/modules/es7.object.entries';
 import { setLayout, setContentType, setResultsButton } from '../redux/action/page.jsx';
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
+import transpose from '../formatter/transpose.js'
 
 class CurrentResultDisplay extends Component {
     // initial 'state properties'
@@ -94,6 +95,28 @@ class CurrentResultDisplay extends Component {
             // pass ajax arguments
             ajaxArguments,
         );
+    }
+    tableHeaders(header) {
+        var row = Object.entries(header).map(([key, value]) => (
+            <th key={`th-${key}`}>{key}</th>
+        ));
+        return <tr><th>#</th>{row}</tr>;
+    }
+    tableRows(body) {
+        if (Array.isArray(body)) {
+            return body.map((rows, trIdx) => {
+                var row = rows.map((cell, tdIdx) =>
+                    <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
+                );
+                return <tr key={`tr-${trIdx}`}><td key={`td-index-${trIdx}`}>{trIdx}</td>{row}</tr>;
+            });
+        }
+        else {
+            var row = Object.entries(body).map(([key, value]) => (
+                <td key={`td-singleton-${key}`}>{value}</td>
+            ));
+            return <tr><td>1</td>{row}</tr>;
+        }
     }
     // define properties after update
     componentDidUpdate() {
@@ -197,11 +220,6 @@ class CurrentResultDisplay extends Component {
             var resultData = JSON.parse(this.props.results.data);
         }
 
-        // polyfill 'entries'
-        if (!Object.entries) {
-            entries.shim();
-        }
-
         // generate result
         if (
             this.state &&
@@ -210,27 +228,57 @@ class CurrentResultDisplay extends Component {
         ) {
             // local variables
             var resultData = this.state.ajax_retrieval_result;
-            const status = resultData.status;
 
-            // do not present status
-            delete resultData.status;
+            // destructure object
+            const {result, status, ...selected} = resultData;
+
+            // perform transpose
+            const adjusted = transpose(selected);
 
             // generate result
-            var resultList = (<ul className='result-list'>{
-                Object.entries(resultData).map(([item_key, value]) =>
-                    (<li key={item_key}>{item_key}: {
-                        Array.isArray(value) ?
-                            <ul className='sublist' key={`sublist-${item_key}`}>
-                                {
-                                    value.map((value, index) =>
-                                    <li key={`subitem-${  index}`}>{value}</li>)
-                                }
-                            </ul>
-                            : value
-                    }
-                     </li>))
-            }
-            </ul>);
+            var resultList = (
+                <div className='result-form'>
+                    <Table className='result-row' responsive>
+                        <thead>
+                            {this.tableHeaders(selected)}
+                        </thead>
+
+                        <tbody>
+                            {this.tableRows(adjusted)}
+                        </tbody>
+                    </Table>
+                    <div className='row result-row'>
+                        <div className='col-sm-9 prediction-result'>
+                            <h4><span className='grayed-font'>Predicted:</span> {result}</h4>
+                        </div>
+                        <div className='col-sm-3'>
+                            <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                                <div className='row'>
+                                    <div className='col-sm-12'>
+                                        <div className='form-group no-vertical-margin'>
+                                            <input
+                                                disabled
+                                                className='form-control fullspan'
+                                                type='text'
+                                                name='title'
+                                                placeholder='Name your result'
+                                                defaultValue=''
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-sm-12'>
+                                        <div className='form-group'>
+                                            <Submit btnValue='Save' cssClass='btn fullspan' btnDisabled={true} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            );
         } else if (
             resultData &&
             this.props &&
@@ -238,36 +286,60 @@ class CurrentResultDisplay extends Component {
             this.props.results.data &&
             Object.keys(resultData).length > 0
         ) {
-            var resultList = (<ul className='result-list'>{
-                Object.entries(resultData).map(([item_key, value]) =>
-                    (<li key={item_key}>{item_key}: {
-                        Array.isArray(value) ?
-                            <ul className='sublist' key={`sublist-${item_key}`}>
-                                {
-                                    value.map((value, index) =>
-                                    <li key={`subitem-${  index}`}>{value}</li>)
-                                }
-                            </ul>
-                            : value
-                    }
-                     </li>))
-            }
-            </ul>);
+            // destructure object
+            const {result, ...selected} = resultData;
 
-            var saveResults = (<form onSubmit={this.handleSubmit} ref='savePredictionForm'>
-                <input
-                    type='text'
-                    name='title'
-                    placeholder='Name your result'
-                    className='mn-2'
-                    defaultValue=''
-                />
-                <Submit cssClass='btn' />
-            </form>);
+            // perform transpose
+            const adjusted = (resultData && resultData.r2) ? selected : transpose(selected);
+
+            var resultList = (
+                <div className='result-form'>
+                    <Table className='result-row' responsive>
+                        <thead>
+                            {this.tableHeaders(selected)}
+                        </thead>
+
+                        <tbody>
+                            {this.tableRows(adjusted)}
+                        </tbody>
+                    </Table>
+                    <div className='row result-row'>
+                        <div className='col-sm-9 prediction-result'>
+                            <h4><span className='grayed-font'>Predicted:</span> {result}</h4>
+                        </div>
+                        <div className='col-sm-3'>
+                            <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                                <div className='row'>
+                                    <div className='col-sm-12'>
+                                        <div className='form-group no-vertical-margin'>
+                                            <input
+                                                className='form-control fullspan'
+                                                type='text'
+                                                name='title'
+                                                placeholder='Name your result'
+                                                defaultValue=''
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className='row'>
+                                    <div className='col-sm-12'>
+                                        <div className='form-group'>
+                                            <Submit btnValue='Save' cssClass='btn fullspan' />
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            );
         } else {
-            var resultList = (<div className='result-list'>
-                Sorry, no results available!
-            </div>);
+            var resultList = (
+                <div className='result-list'>
+                    Sorry, no results available!
+                </div>
+            );
         }
 
         // display result

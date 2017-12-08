@@ -9,8 +9,8 @@
  */
 
 import React, { Component } from 'react';
+import { Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
-import 'core-js/modules/es7.object.entries';
 import { setLayout, setContentType, setSpinner } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
@@ -83,31 +83,45 @@ class ResultsDisplay extends Component {
         const status = this.state.status;
         const titles = this.state.titles;
 
-        // polyfill 'entries'
-        if (!Object.entries) {
-            entries.shim();
-        }
-
         // generate result
         if (status == 0 && titles && titles.length > 0) {
             var resultList = (
-                <ul className='result-list'>{
-                    titles.map((title) => {
-                        if (title.length == 3) {
-                            return (
-                                <NavLink
-                                    to={`/session/current-result?nid=${title[0]}`}
-                                    key={`link-${title[0]}`}
-                                >
-                                    <li key={`title-${title[0]}`}>
-                                    {title[0]}: {title[1]}
-                                    </li>
-                                </NavLink>
-                            );
+                <Table className='result-row' responsive>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>session_id</th>
+                            <th>session_title</th>
+                            <th>date_created</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            titles.map((cells, trIdx) => {
+                                if (cells.length == 3) {
+                                    return (
+                                        <tr key={`tr-${trIdx}`}>
+                                            <td key={`td-index-${trIdx}`}>{trIdx}</td>
+                                            <td key={`td-sid-${trIdx}`}>{cells[0]}</td>
+                                            <td key={`td-title-${trIdx}`}>
+                                                <NavLink
+                                                    to={`/session/current-result?nid=${cells[0]}`}
+                                                    key={`link-title-${trIdx}`}
+                                                >
+                                                    {cells[1]}
+                                                </NavLink>
+                                            </td>
+                                            <td key={`td-date-${trIdx}`}>{cells[2]}</td>
+                                        </tr>
+                                    );
+                                }
+                                else {
+                                    return null;
+                                }
+                            })
                         }
-                    })
-                }
-                </ul>
+                    </tbody>
+                </Table>
             );
         } else {
             var resultList = (

@@ -13,14 +13,12 @@
     }
   }
 
-  .dataset-url:first-of-type,
-  .dataset-file:first-of-type {
+  .dataset-url:first-of-type {
     clear: both;
     float: left;
   }
 
-  .dataset-url,
-  .dataset-file {
+  .dataset-url {
     clear: both;
     display: block;
     margin: 0 0 $gutter-1 / 2;
@@ -195,5 +193,23 @@
       font-weight: 500;
       margin: 0 0 .4rem;
     }
+  }
+
+  .result-form {
+    .result {
+      background: $gray-1;
+      padding: $gutter-1;
+      text-align: center;
+    }
+  }
+
+  .result-row {
+    margin-top: $gutter-1;
+  }
+
+  .prediction-result {
+    background: $gray-1;
+    margin-bottom: $gutter-1;
+    padding: $gutter-1;
   }
 }

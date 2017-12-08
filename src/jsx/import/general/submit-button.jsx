@@ -12,12 +12,14 @@ import React, { Component } from 'react';
 class Submit extends Component {
     // triggered when 'state properties' change
     render() {
+        const disabled = this.props.btnDisabled ? true : false;
         const buttonValue = this.props.btnValue ? this.props.btnValue : 'Submit';
         const clickCallback = this.props.onClick ? this.props.onClick : '';
         const cssClass = this.props.cssClass ? this.props.cssClass : 'form-submit';
 
         return (
             <input
+                disabled={disabled}
                 type='submit'
                 className={cssClass}
                 onClick={clickCallback}
