@@ -103,7 +103,7 @@ class CurrentResultDisplay extends Component {
         return <tr><th>#</th>{row}</tr>;
     }
     tableRows(body) {
-        if (body.map) {
+        if (Array.isArray(body)) {
             return body.map((rows, trIdx) => {
                 var row = rows.map((cell, tdIdx) =>
                     <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
@@ -112,10 +112,10 @@ class CurrentResultDisplay extends Component {
             });
         }
         else {
-            var row = Object.entries(body).map(([key, value]) => {
-                <td key={`td-row${key}`}>{value}</td>
-            });
-            return <tr>{row}</tr>
+            var row = Object.entries(body).map(([key, value]) => (
+                <td key={`td-singleton-${key}`}>{value}</td>
+            ));
+            return <tr><td>1</td>{row}</tr>;
         }
     }
     // define properties after update
@@ -229,11 +229,11 @@ class CurrentResultDisplay extends Component {
             // local variables
             var resultData = this.state.ajax_retrieval_result;
 
-            // remove 'result' property
-            const {result, ...selected} = resultData;
+            // destructure object
+            const {result, status, ...selected} = resultData;
 
             // perform transpose
-            const adjusted = (resultData && resultData.r2) ? selected : transpose(selected);
+            const adjusted = transpose(selected);
 
             // generate result
             var resultList = (
@@ -286,7 +286,7 @@ class CurrentResultDisplay extends Component {
             this.props.results.data &&
             Object.keys(resultData).length > 0
         ) {
-            // remove 'result' property
+            // destructure object
             const {result, ...selected} = resultData;
 
             // perform transpose
