@@ -196,9 +196,6 @@ class AnalysisLayout extends Component {
         }
     }
     render() {
-        // determine content
-        const resultsBtn = false;
-
         // submit button
         if (
             this.props &&
