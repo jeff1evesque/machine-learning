@@ -147,7 +147,7 @@ class ModelGenerate extends Component {
     // triggered when 'state properties' change
     render() {
         const options = this.state.ajax_done_options;
-        const penaltySlider = this.state.checked_prediction ?
+        const penaltySlider = this.state.checked_penalty ?
             <fieldset className='fieldset-select-penalty'>
                 <legend>Penalty</legend>
                 <RangeSlider step={0.1}/>
