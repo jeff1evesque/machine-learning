@@ -9,6 +9,7 @@
 
 import React, { Component } from 'react'
 import Slider from 'react-rangeslider'
+import { setRangeSlider } from '../redux/action/page.jsx';
 
 class RangeSlider extends Component {
     constructor (props, context) {
@@ -27,7 +28,7 @@ class RangeSlider extends Component {
             value: value
         });
 
-        const action = setResultsButton({ type: 'penalty', penalty: value });
+        const action = setRangeSlider({ type: 'penalty', penalty: value });
         this.props.dispatchRangeSlider(action);
     }
 
