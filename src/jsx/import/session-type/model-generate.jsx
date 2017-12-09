@@ -39,6 +39,7 @@ class ModelGenerate extends Component {
         this.changeCollection = this.changeCollection.bind(this);
         this.changeKernelType = this.changeKernelType.bind(this);
         this.changeModelType = this.changeModelType.bind(this);
+        this.showPenaltySlider = this.showPenaltySlider.bind(this);
     }
     // update 'state properties'
     changeCollection(event) {
