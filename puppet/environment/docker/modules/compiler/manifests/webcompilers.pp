@@ -20,8 +20,8 @@ class compiler::webcompilers {
     $compilers = [
         'browserify',
         'imagemin',
-        'sass',
-        'uglifyjs'
+        'uglifyjs',
+        'sass'
     ]
 
     ## create js source directory
