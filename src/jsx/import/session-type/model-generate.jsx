@@ -27,6 +27,7 @@ class ModelGenerate extends Component {
     constructor() {
         super();
         this.state = {
+            checked_penalty: false,
             value_collection: '--Select--',
             value_model_type: '--Select--',
             value_kernel_type: '--Select--',
@@ -137,9 +138,20 @@ class ModelGenerate extends Component {
             this.props.dispatchSvButton(action);
         }
     }
+    showPenaltySlider() {
+        this.setState({
+            checked_penalty: !this.state.checked_penalty
+        });
+    }
     // triggered when 'state properties' change
     render() {
         const options = this.state.ajax_done_options;
+        const penaltySlider = this.state.checked_prediction ?
+            <fieldset className='fieldset-select-penalty'>
+                <legend>Penalty</legend>
+                <RangeSlider />
+            </fieldset>
+            : null;
 
         return (
             <fieldset className='fieldset-session-generate'>
@@ -208,14 +220,18 @@ class ModelGenerate extends Component {
                         </div>
                     </div>
 
-                    <FormGroup>
-                        <Checkbox><span>Penalty</span></Checkbox>{' '}
-                    </FormGroup>
+                    <div class='form-group'>
+                        <div class='checkbox'>
+                            <label><span>Penalty</span></label>
+                            <input
+                                type='checkbox'
+                                checked={this.state.checked_penalty}
+                                onChange={this.showPenaltySlider}
+                            />
+                        </div>
+                    </div>
                 </fieldset>
-                <fieldset className='fieldset-select-penalty'>
-                    <legend>Penalty</legend>
-                    <RangeSlider />
-                </fieldset>
+                {penaltySlider}
             </fieldset>
         );
     }
