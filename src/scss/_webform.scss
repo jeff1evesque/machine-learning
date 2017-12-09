@@ -138,6 +138,12 @@
 
     label {
       font-weight: normal;
+      padding-left: 0;
+
+      span {
+        margin-left: 1.5rem;
+        margin-top: -.3rem
+      }
     }
 
     .slider-value {

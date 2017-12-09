@@ -209,7 +209,7 @@ class ModelGenerate extends Component {
                     </div>
 
                     <FormGroup>
-                        <Checkbox inline>Penalty</Checkbox>{' '}
+                        <Checkbox><span>Penalty</span></Checkbox>{' '}
                     </FormGroup>
                 </fieldset>
                 <fieldset className='fieldset-select-penalty'>
