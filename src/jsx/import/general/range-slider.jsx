@@ -25,7 +25,10 @@ class RangeSlider extends Component {
     handleChange = (value) => {
         this.setState({
             value: value
-        })
+        });
+
+        const action = setResultsButton({ type: 'penalty', penalty: value });
+        this.props.dispatchRangeSlider(action);
     }
 
     render() {

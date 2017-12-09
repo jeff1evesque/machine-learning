@@ -19,6 +19,30 @@ import {
     setSpinner
 } from '../action/page.jsx';
 
+// transforms redux state tree to react properties
+const mapStateToProps = (state) => {
+    var penalty = 0;
+
+    if (
+        state &&
+        state.page &&
+        state.page.slider &&
+        state.page.slider.penalty &&
+        !!state.page.slider.penalty
+    ) {
+        var penalty = state.page.slider.penalty;
+    }
+
+  // return redux to state
+    return {
+        page: {
+            slider: {
+                penalty: penalty
+            }
+        }
+    }
+}
+
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
     return {
@@ -31,7 +55,7 @@ const mapDispatchToProps = (dispatch) => {
 
 // pass selected properties from redux state tree to component
 const ModelGenerateState = connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps
 )(ModelGenerate)
 

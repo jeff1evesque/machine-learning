@@ -16,11 +16,12 @@ import {
     setSvButton,
     setLayout,
     setContentType,
+    setRangeSlider,
     setSpinner
 } from '../redux/action/page.jsx';
 import { FormGroup, Checkbox } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
-import RangeSlider from '../general/range-slider.jsx';
+import RangeSliderState from '../redux/container/range-slider.jsx';
 
 class ModelGenerate extends Component {
     // initial 'state properties'
@@ -150,7 +151,7 @@ class ModelGenerate extends Component {
         const penaltySlider = this.state.checked_penalty ?
             <fieldset className='fieldset-select-penalty'>
                 <legend>Penalty</legend>
-                <RangeSlider step={0.1}/>
+                <RangeSliderState step={0.1}/>
             </fieldset>
             : null;
 
