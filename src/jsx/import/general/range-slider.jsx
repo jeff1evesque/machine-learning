@@ -1,5 +1,5 @@
 /**
- * rangeSlider.jsx: create responsive range slider.
+ * range-slider.jsx: create responsive range slider.
  *
  * @RangeSlider, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
