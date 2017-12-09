@@ -81,7 +81,6 @@ Vagrant.configure(2) do |config|
             run 'rm -Rf interface/static/css'
             run 'rm -Rf interface/static/img'
             run 'rm -Rf interface/static/js'
-            run 'rm -Rf interface/static/node_modules'
             run "rm -Rf puppet/environment/#{puppet_environment}/modules_contrib"
             run 'rm -Rf src/node_modules'
             run 'rm -f src/js/.gitignore'
