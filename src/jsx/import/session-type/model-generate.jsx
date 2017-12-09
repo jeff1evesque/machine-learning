@@ -19,7 +19,7 @@ import {
     setSpinner
 } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
-import RangeSlider from '../general/range-slider.js';
+import RangeSlider from '../general/range-slider.jsx';
 
 class ModelGenerate extends Component {
     // initial 'state properties'
