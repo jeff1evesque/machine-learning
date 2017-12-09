@@ -16,6 +16,7 @@ class RangeSlider extends Component {
         this.state = {
             min: -10,
             max: 10,
+            tooltip: false,
             step: 0.5,
             value: 0,
         }
@@ -30,6 +31,7 @@ class RangeSlider extends Component {
     render() {
         const min = this.props.min ? this.props.min : this.state.min;
         const max = this.props.max ? this.props.max : this.state.max;
+        const tooltip = this.props.tooltip ? this.props.tooltip : this.state.tooltip;
         const step = this.props.step ? this.props.step : this.state.step;
         const value = this.props.value ? this.props.value : this.state.value;
 
@@ -38,11 +40,12 @@ class RangeSlider extends Component {
                 <Slider
                     min={min}
                     max={max}
+                    tooltip={tooltip}
                     step={step}
                     value={value}
                     onChange={this.handleChange}
                 />
-                <div className='value'>{value}</div>
+                <div className='slider-value'>{value}</div>
             </div>
         )
     }
