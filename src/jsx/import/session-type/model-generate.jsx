@@ -149,7 +149,7 @@ class ModelGenerate extends Component {
         const penaltySlider = this.state.checked_prediction ?
             <fieldset className='fieldset-select-penalty'>
                 <legend>Penalty</legend>
-                <RangeSlider />
+                <RangeSlider step={0.1}/>
             </fieldset>
             : null;
 
@@ -220,8 +220,8 @@ class ModelGenerate extends Component {
                         </div>
                     </div>
 
-                    <div class='form-group'>
-                        <div class='checkbox'>
+                    <div className='form-group'>
+                        <div className='checkbox'>
                             <label><span>Penalty</span></label>
                             <input
                                 type='checkbox'
