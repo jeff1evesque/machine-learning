@@ -11,7 +11,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import RangeSlider from '../../general/range-slider.jsx';
-import setRangeSlider from '../action/range-slider.jsx';
+import { setRangeSlider } from '../action/page.jsx';
 
 // wraps each function of the object to be dispatch callable
 const mapDispatchToProps = (dispatch) => {
