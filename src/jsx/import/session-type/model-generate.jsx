@@ -18,6 +18,7 @@ import {
     setContentType,
     setSpinner
 } from '../redux/action/page.jsx';
+import { FormGroup, Checkbox } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
 import RangeSlider from '../general/range-slider.jsx';
 
@@ -207,6 +208,12 @@ class ModelGenerate extends Component {
                         </div>
                     </div>
 
+                    <FormGroup>
+                        <Checkbox inline>Penalty</Checkbox>{' '}
+                    </FormGroup>
+                </fieldset>
+                <fieldset className='fieldset-select-penalty'>
+                    <legend>Penalty</legend>
                     <RangeSlider />
                 </fieldset>
             </fieldset>
