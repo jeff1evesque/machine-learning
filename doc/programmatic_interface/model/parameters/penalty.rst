@@ -2,10 +2,10 @@
 Penalty
 =======
 
-The penalty parameter of the error term, must be a float value. The cases provided
-on this page are predicated on the following:
+The penalty parameter of the error term, must be a float value.
 
 .. code:: python
+
     # classifying packages
     import numpy as np
     from sklearn.svm import SVC
@@ -80,8 +80,7 @@ on this page are predicated on the following:
     )
     y_xor = np.where(y_xor, 1, -1)
 
-**Note:** concepts on this page have been integrated into the `mlxtend <http://rasbt.github.io/mlxtend/>`_
-python library.
+**Note:** concepts on this page, have been integrated into the `mlxtend <http://rasbt.github.io/mlxtend/>`_ library.
 
 Penalty (C=1)
 -------------
