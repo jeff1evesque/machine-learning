@@ -29,6 +29,7 @@ class ModelGenerate extends Component {
         super();
         this.state = {
             checked_penalty: false,
+            checked_gamma: false,
             value_collection: '--Select--',
             value_model_type: '--Select--',
             value_kernel_type: '--Select--',
@@ -41,6 +42,7 @@ class ModelGenerate extends Component {
         this.changeKernelType = this.changeKernelType.bind(this);
         this.changeModelType = this.changeModelType.bind(this);
         this.showPenaltySlider = this.showPenaltySlider.bind(this);
+        this.showGammaSlider = this.showGammaSlider.bind(this);
     }
     // update 'state properties'
     changeCollection(event) {
@@ -145,14 +147,27 @@ class ModelGenerate extends Component {
             checked_penalty: !this.state.checked_penalty
         });
     }
+    showGammaSlider() {
+        this.setState({
+            checked_gamma: !this.state.checked_gamma
+        });
+    }
+    createSlider(type, min, max, step) {
+        return (
+            <fieldset className={`fieldset-select-${type.toLowerCase()}`}>
+                <legend>{type}</legend>
+                <RangeSliderState min={min} max={max} step={step} />
+            </fieldset>
+        );
+    }
     // triggered when 'state properties' change
     render() {
         const options = this.state.ajax_done_options;
-        const penaltySlider = this.state.checked_penalty ?
-            <fieldset className='fieldset-select-penalty'>
-                <legend>Penalty</legend>
-                <RangeSliderState min={1} max={1000000} step={1} />
-            </fieldset>
+        const penaltySlider = this.state.checked_penalty
+            ? createSlider('Penalty', 1, 1000000, 1)
+            : null;
+        const gammaSlider  = this.state.checked_gamma
+            ? createSlider('Gamma', 1, 1000, 1)
             : null;
 
         return (
@@ -234,6 +249,7 @@ class ModelGenerate extends Component {
                     </div>
                 </fieldset>
                 {penaltySlider}
+                {gammaSlider}
             </fieldset>
         );
     }

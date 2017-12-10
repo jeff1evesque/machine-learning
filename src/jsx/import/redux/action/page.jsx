@@ -59,6 +59,12 @@ function setRangeSlider(action) {
             penalty: action.penalty
         };
     }
+    else if (action.type.toLowerCase() == 'gamma') {
+        return {
+            type: 'SET-GAMMA-SLIDER',
+            penalty: action.penalty
+        };
+    }
 }
 
 // indicate which class can be exported, and instantiated via 'require'
