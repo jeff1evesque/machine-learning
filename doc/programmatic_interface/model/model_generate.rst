@@ -13,7 +13,7 @@ session. The required attributes, for the corresponding session, is sent to the
 **Note:** the content of each of the above examples, can be substituted for
 the ``data`` attribute, in a given ``POST`` request:
 
-.. code-block:: python
+.. code:: python
 
     import requests
 
@@ -56,7 +56,8 @@ The following properties define the above ``data`` attribute:
 Penalty=1
 ---------
 
-.. code-block:: python
+.. code:: python
+
     # create SVC classifier
     svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=1)
 
@@ -75,7 +76,8 @@ Penalty=1
 Penalty=10
 ----------
 
-.. code-block:: python
+.. code:: python
+
     # create SVC classifier
     svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=10)
 
@@ -94,7 +96,8 @@ Penalty=10
 Penalty=10000
 -------------
 
-.. code-block:: python
+.. code:: python
+
     # create SVC classifier
     svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=10000)
 
