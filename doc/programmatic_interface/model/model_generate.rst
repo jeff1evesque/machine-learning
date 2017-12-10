@@ -50,3 +50,63 @@ The following properties define the above ``data`` attribute:
   -  ``polynomial``
   -  ``rbf``
   -  ``sigmoid``
+
+- ``penalty``: penalty parameter C of the error term, must be a float value. The following,
+are some implications of the ``C`` penalty value changing, with respect an svm implementation:
+
+``C=1``
+-------
+
+.. code:: python
+    # create SVC classifier
+    svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=1)
+
+    # train classifier
+    svm.fit(X_xor, y_xor)
+
+    # visualize the decision boundaries
+    plot_decision_regions(X_xor, y_xor, classifier=svm)
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.show()
+
+.. image:: https://user-images.githubusercontent.com/2907085/33807641-f6ca9800-dda7-11e7-84d9-137c5283f8b4.png
+   :alt: svm penalty c=1
+
+``C=10``
+--------
+
+.. code:: python
+    # create SVC classifier
+    svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=10)
+
+    # train classifier
+    svm.fit(X_xor, y_xor)
+
+    # visualize the decision boundaries
+    plot_decision_regions(X_xor, y_xor, classifier=svm)
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.show()
+
+.. image:: https://user-images.githubusercontent.com/2907085/33807649-0ecc4296-dda8-11e7-96b3-4eb92c8bb4db.png
+   :alt: svm penalty c=10
+
+``C=10000``
+-----------
+
+.. code:: python
+    # create SVC classifier
+    svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=10000)
+
+    # train classifier
+    svm.fit(X_xor, y_xor)
+
+    # visualize the decision boundaries
+    plot_decision_regions(X_xor, y_xor, classifier=svm)
+    plt.legend(loc='upper left')
+    plt.tight_layout()
+    plt.show()
+
+.. image:: https://user-images.githubusercontent.com/2907085/33807657-27872dd2-dda8-11e7-80c0-e73e7a5b144b.png
+   :alt: svm penalty c=10000
