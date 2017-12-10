@@ -24,6 +24,7 @@ const mapStateToProps = (state) => {
     var contentType = false;
     var gotoResultsBtn = false;
     var submitBtn = false;
+    var penalty = 0;
 
     if (
         state &&
@@ -43,6 +44,16 @@ const mapStateToProps = (state) => {
         var contentType = state.page.content_type;
     }
 
+    if (
+        state &&
+        state.page &&
+        state.page.slider &&
+        state.page.slider.penalty &&
+        !!state.page.slider.penalty
+    ) {
+        var penalty = state.page.slider.penalty;
+    }
+
   // return redux to state
     return {
         page: {
@@ -50,7 +61,10 @@ const mapStateToProps = (state) => {
                 goto_results: gotoResultsBtn,
                 submit_analysis: submitBtn
             },
-            content_type: contentType
+            content_type: contentType,
+            slider: {
+                penalty: penalty
+            }
         }
     }
 }
