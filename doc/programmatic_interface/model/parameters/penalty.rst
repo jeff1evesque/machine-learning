@@ -2,7 +2,7 @@
 Penalty
 =======
 
-The penalty parameter of the error term, must be a float value.
+The below penalty cases, are predicated on the following:
 
 .. code:: python
 
