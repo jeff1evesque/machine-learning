@@ -62,7 +62,7 @@ class ModelGenerate(Base):
         # case 1: svm model, or svr model
         if (model_type == 'svm') or (model_type == 'svr'):
             if 'penalty' in self.premodel_data['properties']:
-                penalty = self.premodel_data['properties']['penalty']
+                penalty = float(self.premodel_data['properties']['penalty'])
             else:
                 penalty = 1.0
 
