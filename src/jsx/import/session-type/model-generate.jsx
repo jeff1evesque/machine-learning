@@ -151,7 +151,7 @@ class ModelGenerate extends Component {
         const penaltySlider = this.state.checked_penalty ?
             <fieldset className='fieldset-select-penalty'>
                 <legend>Penalty</legend>
-                <RangeSliderState step={0.1}/>
+                <RangeSliderState min={1} max={1000000} step={1} value={1} />
             </fieldset>
             : null;
 
