@@ -56,7 +56,7 @@ function setRangeSlider(action) {
     if (action.type.toLowerCase() == 'penalty') {
         return {
             type: 'SET-PENALTY-SLIDER',
-            penalty: action.value
+            penalty: action.penalty
         };
     }
 }
