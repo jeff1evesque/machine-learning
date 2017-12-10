@@ -138,6 +138,19 @@
 
     label {
       font-weight: normal;
+      padding-left: 0;
+    }
+
+    .checkbox {
+      input {
+        margin: .3rem 0 0 1rem
+      }
+    }
+
+    .slider-value {
+      font-size: 1.25rem;
+      padding-top: .5rem;
+      text-align: center;
     }
   }
 

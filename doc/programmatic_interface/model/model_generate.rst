@@ -50,3 +50,8 @@ The following properties define the above ``data`` attribute:
   -  ``polynomial``
   -  ``rbf``
   -  ``sigmoid``
+
+- |penalty|_: penalty parameter of the error term, must be a float value
+
+.. |penalty| replace:: ``penalty``
+.. _penalty: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/model/parameters/penalty.rst

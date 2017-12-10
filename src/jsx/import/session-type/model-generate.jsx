@@ -16,15 +16,19 @@ import {
     setSvButton,
     setLayout,
     setContentType,
+    setRangeSlider,
     setSpinner
 } from '../redux/action/page.jsx';
+import { FormGroup, Checkbox } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
+import RangeSliderState from '../redux/container/range-slider.jsx';
 
 class ModelGenerate extends Component {
     // initial 'state properties'
     constructor() {
         super();
         this.state = {
+            checked_penalty: false,
             value_collection: '--Select--',
             value_model_type: '--Select--',
             value_kernel_type: '--Select--',
@@ -36,6 +40,7 @@ class ModelGenerate extends Component {
         this.changeCollection = this.changeCollection.bind(this);
         this.changeKernelType = this.changeKernelType.bind(this);
         this.changeModelType = this.changeModelType.bind(this);
+        this.showPenaltySlider = this.showPenaltySlider.bind(this);
     }
     // update 'state properties'
     changeCollection(event) {
@@ -135,9 +140,20 @@ class ModelGenerate extends Component {
             this.props.dispatchSvButton(action);
         }
     }
+    showPenaltySlider() {
+        this.setState({
+            checked_penalty: !this.state.checked_penalty
+        });
+    }
     // triggered when 'state properties' change
     render() {
         const options = this.state.ajax_done_options;
+        const penaltySlider = this.state.checked_penalty ?
+            <fieldset className='fieldset-select-penalty'>
+                <legend>Penalty</legend>
+                <RangeSliderState min={1} max={1000000} step={1} />
+            </fieldset>
+            : null;
 
         return (
             <fieldset className='fieldset-session-generate'>
@@ -205,7 +221,19 @@ class ModelGenerate extends Component {
                             </div>
                         </div>
                     </div>
+
+                    <div className='form-group'>
+                        <div className='checkbox'>
+                            <label><span>Penalty</span></label>
+                            <input
+                                type='checkbox'
+                                checked={this.state.checked_penalty}
+                                onChange={this.showPenaltySlider}
+                            />
+                        </div>
+                    </div>
                 </fieldset>
+                {penaltySlider}
             </fieldset>
         );
     }

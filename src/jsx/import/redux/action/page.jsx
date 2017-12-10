@@ -52,6 +52,15 @@ function setSpinner(action) {
     };
 }
 
+function setRangeSlider(action) {
+    if (action.type.toLowerCase() == 'penalty') {
+        return {
+            type: 'SET-PENALTY-SLIDER',
+            penalty: action.penalty
+        };
+    }
+}
+
 // indicate which class can be exported, and instantiated via 'require'
 export {
     setSvButton,
@@ -59,5 +68,6 @@ export {
     setLayout,
     setContentType,
     setResultsButton,
-    setSpinner
+    setSpinner,
+    setRangeSlider
 }

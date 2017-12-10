@@ -88,6 +88,16 @@ class AnalysisLayout extends Component {
             const formData = new FormData(this.refs.analysisForm);
             formData.append('session_type', sessionType);
 
+          // model_generate: append penalty
+            if (
+                this.props &&
+                this.props.page &&
+                this.props.page.slider &&
+                !!this.props.page.slider.penalty
+            ) {
+                formData.append('penalty', this.props.page.slider.penalty);
+            }
+
             const ajaxArguments = {
                 endpoint: ajaxEndpoint,
                 data: formData,
@@ -196,9 +206,6 @@ class AnalysisLayout extends Component {
         }
     }
     render() {
-        // determine content
-        const resultsBtn = false;
-
         // submit button
         if (
             this.props &&

@@ -65,6 +65,14 @@ const page = (state='default', action) => {
                     spinner: spinnerBool
                 }
             }
+        case 'SET-PENALTY-SLIDER':
+            return {
+                ...state,
+                slider: {
+                    ...state.slider,
+                    penalty: action.penalty
+                }
+            }
         default:
             return state;
     }

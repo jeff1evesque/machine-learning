@@ -29,8 +29,9 @@
 /interface/static/js/
 /interface/static/css/
 /interface/static/img/
-/puppet/environment/*/modules_contrib/
+/interface/static/node_modules/
 /src/node_modules/
+/puppet/environment/*/modules_contrib/
 
 # Ignore and don't commit the following files
 *.pyc
