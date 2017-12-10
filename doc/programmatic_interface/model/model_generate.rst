@@ -13,7 +13,7 @@ session. The required attributes, for the corresponding session, is sent to the
 **Note:** the content of each of the above examples, can be substituted for
 the ``data`` attribute, in a given ``POST`` request:
 
-.. code:: python
+.. code-block:: python
 
     import requests
 
@@ -51,12 +51,12 @@ The following properties define the above ``data`` attribute:
   -  ``rbf``
   -  ``sigmoid``
 
-- ``penalty``: penalty parameter C of the error term, must be a float value:
+- ``penalty``: penalty parameter of the error term, must be a float value:
 
-``C=1``
--------
+Penalty=1
+---------
 
-.. code:: python
+.. code-block:: python
     # create SVC classifier
     svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=1)
 
@@ -72,10 +72,10 @@ The following properties define the above ``data`` attribute:
 .. image:: https://user-images.githubusercontent.com/2907085/33807641-f6ca9800-dda7-11e7-84d9-137c5283f8b4.png
    :alt: svm penalty c=1
 
-``C=10``
---------
+Penalty=10
+----------
 
-.. code:: python
+.. code-block:: python
     # create SVC classifier
     svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=10)
 
@@ -91,10 +91,10 @@ The following properties define the above ``data`` attribute:
 .. image:: https://user-images.githubusercontent.com/2907085/33807649-0ecc4296-dda8-11e7-96b3-4eb92c8bb4db.png
    :alt: svm penalty c=10
 
-``C=10000``
------------
+Penalty=10000
+-------------
 
-.. code:: python
+.. code-block:: python
     # create SVC classifier
     svm = SVC(kernel='rbf', random_state=0, gamma=.01, C=10000)
 
