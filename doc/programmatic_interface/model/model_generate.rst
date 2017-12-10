@@ -51,8 +51,7 @@ The following properties define the above ``data`` attribute:
   -  ``rbf``
   -  ``sigmoid``
 
-- ``penalty``: penalty parameter C of the error term, must be a float value. The following,
-are some implications of the ``C`` penalty value changing, with respect an svm implementation:
+- ``penalty``: penalty parameter C of the error term, must be a float value:
 
 ``C=1``
 -------
