@@ -2,10 +2,10 @@
 Penalty
 =======
 
-The penalty parameter of the error term, must be a float value. The cases provided
-on this page are predicated on the following:
+The below penalty cases, are predicated on the following:
 
 .. code:: python
+
     # classifying packages
     import numpy as np
     from sklearn.svm import SVC
@@ -80,8 +80,7 @@ on this page are predicated on the following:
     )
     y_xor = np.where(y_xor, 1, -1)
 
-**Note:** concepts on this page have been integrated into the `mlxtend <http://rasbt.github.io/mlxtend/>`_
-python library.
+**Note:** concepts on this page, have been integrated into the `mlxtend <http://rasbt.github.io/mlxtend/>`_ library.
 
 Penalty (C=1)
 -------------
@@ -94,7 +93,7 @@ Penalty (C=1)
     # train classifier
     svm.fit(X_xor, y_xor)
 
-    # visualize the decision boundaries
+    # visualize decision boundaries
     plot_decision_regions(X_xor, y_xor, classifier=svm)
     plt.legend(loc='upper left')
     plt.tight_layout()
@@ -114,7 +113,7 @@ Penalty (C=10)
     # train classifier
     svm.fit(X_xor, y_xor)
 
-    # visualize the decision boundaries
+    # visualize decision boundaries
     plot_decision_regions(X_xor, y_xor, classifier=svm)
     plt.legend(loc='upper left')
     plt.tight_layout()
@@ -134,7 +133,7 @@ Penalty (C=10000)
     # train classifier
     svm.fit(X_xor, y_xor)
 
-    # visualize the decision boundaries
+    # visualize decision boundaries
     plot_decision_regions(X_xor, y_xor, classifier=svm)
     plt.legend(loc='upper left')
     plt.tight_layout()
