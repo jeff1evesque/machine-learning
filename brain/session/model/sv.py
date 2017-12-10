@@ -14,7 +14,7 @@ from sklearn import svm, preprocessing
 import json
 
 
-def generate(model, kernel_type, collection, payload, list_error):
+def generate(model, kernel_type, collection, penalty, payload, list_error):
     '''
 
     This method generates an sv (i.e. svm, or svr) model using feature data,
@@ -75,7 +75,7 @@ def generate(model, kernel_type, collection, payload, list_error):
         encoded_labels = label_encoder.transform(observation_labels)
 
         # create model
-        clf = svm.SVC(kernel=kernel_type, probability=True)
+        clf = svm.SVC(C=penalty, kernel=kernel_type, probability=True)
 
         # cache encoded labels
         Model(label_encoder).cache(model + '_labels', collection_adjusted)
@@ -86,7 +86,7 @@ def generate(model, kernel_type, collection, payload, list_error):
     # generate svr model
     elif model == list_model_type[1]:
         # create model
-        clf = svm.SVR(kernel=kernel_type)
+        clf = svm.SVR(C=penalty, kernel=kernel_type)
 
         # fit model
         clf.fit(grouped_features, observation_labels)
