@@ -58,7 +58,7 @@ const mapStateToProps = (state) => {
             },
             content_type: contentType,
             slider: {
-                penalty: penalty
+                penalty: penalty,
                 gamma: gamma
             }
         }
