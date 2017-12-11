@@ -164,10 +164,10 @@ class ModelGenerate extends Component {
     render() {
         const options = this.state.ajax_done_options;
         const penaltySlider = this.state.checked_penalty
-            ? createSlider('Penalty', 1, 1000000, 1)
+            ? this.createSlider('Penalty', 1, 1000000, 1)
             : null;
         const gammaSlider  = this.state.checked_gamma
-            ? createSlider('Gamma', 1, 1000, 1)
+            ? this.createSlider('Gamma', 1, 1000, 1)
             : null;
 
         return (
@@ -237,14 +237,31 @@ class ModelGenerate extends Component {
                         </div>
                     </div>
 
-                    <div className='form-group'>
-                        <div className='checkbox'>
-                            <label><span>Penalty</span></label>
-                            <input
-                                type='checkbox'
-                                checked={this.state.checked_penalty}
-                                onChange={this.showPenaltySlider}
-                            />
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <div className='checkbox'>
+                                    <label><span>Penalty</span></label>
+                                    <input
+                                        type='checkbox'
+                                        checked={this.state.checked_penalty}
+                                        onChange={this.showPenaltySlider}
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <div className='checkbox'>
+                                    <label><span>Gamma</span></label>
+                                    <input
+                                        type='checkbox'
+                                        checked={this.state.checked_gamma}
+                                        onChange={this.showGammaSlider}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
