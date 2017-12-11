@@ -69,7 +69,7 @@ class ModelGenerate(Base):
             if 'gamma' in self.premodel_data['properties']:
                 gamma = float(self.premodel_data['properties']['gamma'])
             else:
-                gamma = 1.0
+                gamma = 'auto'
 
             result = generate(
                 model_type,
