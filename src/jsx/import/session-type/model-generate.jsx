@@ -238,7 +238,7 @@ class ModelGenerate extends Component {
                     </div>
 
                     <div className='row'>
-                        <div className='col-sm-6'>
+                        <div className='col-sm-2'>
                             <div className='form-group'>
                                 <div className='checkbox'>
                                     <label><span>Penalty</span></label>
@@ -251,7 +251,7 @@ class ModelGenerate extends Component {
                             </div>
                         </div>
 
-                        <div className='col-sm-6'>
+                        <div className='col-sm-2'>
                             <div className='form-group'>
                                 <div className='checkbox'>
                                     <label><span>Gamma</span></label>
