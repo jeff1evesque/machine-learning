@@ -25,33 +25,28 @@ const mapStateToProps = (state) => {
     var gotoResultsBtn = false;
     var submitBtn = false;
     var penalty = 0;
+    var gamma = 0;
 
-    if (
-        state &&
-        state.page &&
-        state.page.button
-    ) {
-        const button = state.page.button;
-        var submitBtn = !!button.submit_analysis ? button.submit_analysis : null;
-        var gotoResultsBtn = !!button.goto_results ? button.goto_results : null;
-    }
+    if (state && state.page) {
+        if (!!state.page.content_type) {
+            var contentType = state.page.content_type;
+        }
 
-    if (
-        state &&
-        state.page &&
-        !!state.page.content_type
-    ) {
-        var contentType = state.page.content_type;
-    }
+        if (!!state.page.button) {
+            const button = state.page.button;
+            var submitBtn = !!button.submit_analysis ? button.submit_analysis : null;
+            var gotoResultsBtn = !!button.goto_results ? button.goto_results : null;
+        }
 
-    if (
-        state &&
-        state.page &&
-        state.page.slider &&
-        state.page.slider.penalty &&
-        !!state.page.slider.penalty
-    ) {
-        var penalty = state.page.slider.penalty;
+        if (state.page.slider) {
+            if (!!state.page.slider.penalty) {
+                var penalty = state.page.slider.penalty;
+            }
+
+            if (!!state.page.slider.gamma) {
+                var penalty = state.page.slider.gamma;
+            }
+        }
     }
 
   // return redux to state
@@ -63,7 +58,8 @@ const mapStateToProps = (state) => {
             },
             content_type: contentType,
             slider: {
-                penalty: penalty
+                penalty: penalty,
+                gamma: gamma
             }
         }
     }

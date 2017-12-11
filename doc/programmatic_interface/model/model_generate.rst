@@ -51,7 +51,13 @@ The following properties define the above ``data`` attribute:
   -  ``rbf``
   -  ``sigmoid``
 
-- |penalty|_: penalty parameter of the error term, must be a float value
+- |penalty|_: optional float, of the error term
+
+- |gamma|_: optional float, kernel coefficient for ``rbf``, ``poly``, and ``sigmoid``
+
+  - if set to ``auto``, then ``1/n_features`` will be used
 
 .. |penalty| replace:: ``penalty``
 .. _penalty: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/model/parameters/penalty.rst
+.. |gamma| replace:: ``gamma``
+.. _gamma: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/model/parameters/gamma.rst

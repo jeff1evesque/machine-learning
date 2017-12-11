@@ -88,14 +88,20 @@ class AnalysisLayout extends Component {
             const formData = new FormData(this.refs.analysisForm);
             formData.append('session_type', sessionType);
 
-          // model_generate: append penalty
+          // model_generate: append penalty, gamma
             if (
                 this.props &&
                 this.props.page &&
-                this.props.page.slider &&
-                !!this.props.page.slider.penalty
+                this.props.page.slider
             ) {
-                formData.append('penalty', this.props.page.slider.penalty);
+
+                if (!!this.props.page.slider.penalty) {
+                    formData.append('penalty', this.props.page.slider.penalty);
+                }
+
+                if (!!this.props.page.slider.gamma) {
+                    formData.append('gamma', this.props.page.slider.gamma);
+                }
             }
 
             const ajaxArguments = {

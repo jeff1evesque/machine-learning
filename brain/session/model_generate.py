@@ -66,11 +66,17 @@ class ModelGenerate(Base):
             else:
                 penalty = 1.0
 
+            if 'gamma' in self.premodel_data['properties']:
+                gamma = float(self.premodel_data['properties']['gamma'])
+            else:
+                gamma = 'auto'
+
             result = generate(
                 model_type,
                 self.kernel,
                 self.collection,
                 penalty,
+                gamma,
                 payload,
                 self.list_error
             )
