@@ -214,6 +214,23 @@ class AnalysisLayout extends Component {
         }
     }
     showAnalysisContent() {
+        if (
+            this.props &&
+            this.props.page &&
+            this.props.page.button
+        ) {
+            const button = this.props.page.button;
+            var submitBtn = button.submit_analysis ? <Submit cssClass='btn mn-2 btn-primary' /> : null;
+
+            if (
+                this.state.ajax_done_result &&
+                !!this.state.ajax_done_result.type &&
+                this.state.ajax_done_result.type == 'model-predict'
+            ) {
+                var resultBtn = button.goto_results ? <CurrentResultLink /> : null;
+            }
+        }
+
         return (
             <div>
                 <form
@@ -258,24 +275,6 @@ class AnalysisLayout extends Component {
         );
     }
     render() {
-        // submit button
-        if (
-            this.props &&
-            this.props.page &&
-            this.props.page.button
-        ) {
-            const button = this.props.page.button;
-            var submitBtn = button.submit_analysis ? <Submit cssClass='btn mn-2 btn-primary' /> : null;
-
-            if (
-                this.state.ajax_done_result &&
-                !!this.state.ajax_done_result.type &&
-                this.state.ajax_done_result.type == 'model-predict'
-            ) {
-                var resultBtn = button.goto_results ? <CurrentResultLink /> : null;
-            }
-        }
-
         { /* return:
             @analysisForm, attribute is used within 'handleSubmit' callback
             @formResult, is accessible within child component as
