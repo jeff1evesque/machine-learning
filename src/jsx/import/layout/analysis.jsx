@@ -232,8 +232,8 @@ class AnalysisLayout extends Component {
         }
 
         return (
-            {/* return:
-                @analysisForm, attribute is used within 'handleSubmit' callback
+            {/*
+                @analysisForm, referenced within 'handleSubmit' callback
             */}
             <div>
                 <form
