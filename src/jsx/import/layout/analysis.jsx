@@ -232,6 +232,9 @@ class AnalysisLayout extends Component {
         }
 
         return (
+            {/* return:
+                @analysisForm, attribute is used within 'handleSubmit' callback
+            */}
             <div>
                 <form
                     onSubmit={this.handleSubmit}
@@ -275,11 +278,6 @@ class AnalysisLayout extends Component {
         );
     }
     render() {
-        { /* return:
-            @analysisForm, attribute is used within 'handleSubmit' callback
-            @formResult, is accessible within child component as
-                'this.props.formResult'
-        */ }
         return (
             <div className='row'>
                 <BreakpointRender breakpoints={breakpoints} type='viewport'>
