@@ -264,16 +264,18 @@ class AnalysisLayout extends Component {
                     {submitBtn}
                     {resultBtn}
                 </form>
-                <Route
-                    exact
-                    path='/session/current-result'
-                    component={CurrentResultState}
-                />
-                <Route
-                    exact
-                    path='/session/results'
-                    component={ResultsDisplayState}
-                />
+                <div>
+                    <Route
+                        exact
+                        path='/session/current-result'
+                        component={CurrentResultState}
+                    />
+                    <Route
+                        exact
+                        path='/session/results'
+                        component={ResultsDisplayState}
+                    />
+                </div>
             </div>
         );
     }
