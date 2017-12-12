@@ -27,6 +27,8 @@ import {
     setLayout,
     setSpinner
 } from '../redux/action/page.jsx';
+import { BreakpointRender } from 'rearm/lib/Breakpoint';
+import breakpoints '../general/breakpoints.js';
 
 class AnalysisLayout extends Component {
     // initial 'state properties'
@@ -211,6 +213,50 @@ class AnalysisLayout extends Component {
             this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
     }
+    showAnalysisContent() {
+        return (
+            <div>
+                <form
+                    onSubmit={this.handleSubmit}
+                    ref='analysisForm'
+                    className='analysis-container'
+                >
+                    <Route
+                        exact
+                        path='/session/data-new'
+                        component={DataNewState}
+                    />
+                    <Route
+                        exact
+                        path='/session/data-append'
+                        component={DataAppendState}
+                    />
+                    <Route
+                        exact
+                        path='/session/model-generate'
+                        component={ModelGenerateState}
+                    />
+                    <Route
+                        exact
+                        path='/session/model-predict'
+                        component={ModelPredictState}
+                    />
+                    {submitBtn}
+                    {resultBtn}
+                </form>
+                <Route
+                    exact
+                    path='/session/current-result'
+                    component={CurrentResultState}
+                />
+                <Route
+                    exact
+                    path='/session/results'
+                    component={ResultsDisplayState}
+                />
+            </div>
+        );
+    }
     render() {
         // submit button
         if (
@@ -237,49 +283,26 @@ class AnalysisLayout extends Component {
         */ }
         return (
             <div className='row'>
-                <div className='col-sm-3'>
-                    <NavBar />
-                </div>
-                <div className='col-sm-9'>
-                    <form
-                        onSubmit={this.handleSubmit}
-                        ref='analysisForm'
-                        className='analysis-container'
-                    >
-                        <Route
-                            exact
-                            path='/session/data-new'
-                            component={DataNewState}
-                        />
-                        <Route
-                            exact
-                            path='/session/data-append'
-                            component={DataAppendState}
-                        />
-                        <Route
-                            exact
-                            path='/session/model-generate'
-                            component={ModelGenerateState}
-                        />
-                        <Route
-                            exact
-                            path='/session/model-predict'
-                            component={ModelPredictState}
-                        />
-                        {submitBtn}
-                        {resultBtn}
-                    </form>
-                    <Route
-                        exact
-                        path='/session/current-result'
-                        component={CurrentResultState}
-                    />
-                    <Route
-                        exact
-                        path='/session/results'
-                        component={ResultsDisplayState}
-                    />
-                </div>
+                <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                    {bp => (
+                        if (isGte('large')) {
+                            <div>
+                                <div className='col-sm-3'>
+                                    <NavBar />
+                                </div>
+                                <div className='col-sm-9'>
+                                    {this.showAnalysisContent()}
+                                </div>
+                            </div>
+                        } else {
+                            <div>
+                                <div className='col-sm-12'>
+                                    {this.showAnalysisContent()}
+                                </div>
+                            </div>
+                        }
+                    }
+                </BreakpointRender>
             </div>
         );
     }
