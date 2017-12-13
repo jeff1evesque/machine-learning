@@ -232,10 +232,10 @@ class AnalysisLayout extends Component {
         }
 
         return (
-            {/*
-                @analysisForm, referenced within 'handleSubmit' callback
-            */}
             <div>
+                {/*
+                    @analysisForm, referenced within 'handleSubmit' callback
+                */}
                 <form
                     onSubmit={this.handleSubmit}
                     ref='analysisForm'
@@ -264,18 +264,16 @@ class AnalysisLayout extends Component {
                     {submitBtn}
                     {resultBtn}
                 </form>
-                <div>
-                    <Route
-                        exact
-                        path='/session/current-result'
-                        component={CurrentResultState}
-                    />
-                    <Route
-                        exact
-                        path='/session/results'
-                        component={ResultsDisplayState}
-                    />
-                </div>
+                <Route
+                    exact
+                    path='/session/current-result'
+                    component={CurrentResultState}
+                />
+                <Route
+                    exact
+                    path='/session/results'
+                    component={ResultsDisplayState}
+                />
             </div>
         );
     }
@@ -283,9 +281,8 @@ class AnalysisLayout extends Component {
         return (
             <div className='row'>
                 <BreakpointRender breakpoints={breakpoints} type='viewport'>
-                    {bp => (
-                        if (isGte('large')) {
-                            <div>
+                    {bp => ( bp.isGt('medium')
+                        ?   <div>
                                 <div className='col-sm-3'>
                                     <NavBar />
                                 </div>
@@ -293,14 +290,12 @@ class AnalysisLayout extends Component {
                                     {this.showAnalysisContent()}
                                 </div>
                             </div>
-                        } else {
-                            <div>
+                        :   <div>
                                 <div className='col-sm-12'>
                                     {this.showAnalysisContent()}
                                 </div>
                             </div>
-                        }
-                    }
+                    )}
                 </BreakpointRender>
             </div>
         );
