@@ -110,13 +110,33 @@ class UserMenu extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavDropdown title={user} id='basic-nav-dropdown'>
+                            <NavDropdown eventKey='1' title='Session' id='basic-nav-dropdown'>
+                                <LinkContainer to='/session/data-new'>
+                                    <NavItem eventKey='1.1'>Add new data</NavItem>
+                                </LinkContainer>
+                                <LinkContainer to='/session/data-append'>
+                                    <NavItem eventKey='1.2'>Append data</NavItem>
+                                </LinkContainer>
+                                <LinkContainer to='/session/model-generate'>
+                                    <NavItem eventKey='1.3'>Add new data</NavItem>
+                                </LinkContainer>
+                                <LinkContainer to='/session/model-predict'>
+                                    <NavItem eventKey='1.4'>Make prediction</NavItem>
+                                </LinkContainer>
+                                <MenuItem divider />
+                                <LinkContainer to='/session/results'>
+                                    <NavItem eventKey='1.5'>Review Results</NavItem>
+                                </LinkContainer>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav pullRight>
+                            <NavDropdown eventKey='2' title={user} id='basic-nav-dropdown'>
                                 <LinkContainer to='/session'>
-                                    <NavItem>Dashboard</NavItem>
+                                    <NavItem eventKey='2.1'>Dashboard</NavItem>
                                 </LinkContainer>
                                 <MenuItem divider />
                                 <LinkContainer to='/logout' onClick={this.handleClick}>
-                                    <NavItem>Sign out</NavItem>
+                                    <NavItem eventKey='2.2'>Sign out</NavItem>
                                 </LinkContainer>
                             </NavDropdown>
                         </Nav>
