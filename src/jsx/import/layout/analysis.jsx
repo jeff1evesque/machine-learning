@@ -281,7 +281,7 @@ class AnalysisLayout extends Component {
         return (
             <div className='row'>
                 <BreakpointRender breakpoints={breakpoints} type='viewport'>
-                    {bp => ( bp.isGt('medium')
+                    {bp => ( bp.isGt('small')
                         ?   <div>
                                 <div className='col-sm-3'>
                                     <NavBar />
