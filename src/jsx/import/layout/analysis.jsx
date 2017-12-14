@@ -277,25 +277,32 @@ class AnalysisLayout extends Component {
             </div>
         );
     }
+    showDesktopContent() {
+        return (
+            <div>
+                <div className='col-sm-3'>
+                    <NavBar />
+                </div>
+                <div className='col-sm-9'>
+                    {this.showAnalysisContent()}
+                </div>
+            </div>
+        )
+    }
+    showMobileContent() {
+        return (
+            <div className='col-sm-12'>
+                {this.showAnalysisContent()}
+            </div>
+        )
+    }
     render() {
+        const desktopView = this.showDesktopContent();
+        const mobileView = this.showMobileContent();
         return (
             <div className='row'>
                 <BreakpointRender breakpoints={breakpoints} type='viewport'>
-                    {bp => ( bp.isGt('small')
-                        ?   <div>
-                                <div className='col-sm-3'>
-                                    <NavBar />
-                                </div>
-                                <div className='col-sm-9'>
-                                    {this.showAnalysisContent()}
-                                </div>
-                            </div>
-                        :   <div>
-                                <div className='col-sm-12'>
-                                    {this.showAnalysisContent()}
-                                </div>
-                            </div>
-                    )}
+                    {bp => ( bp.isGt('small') ? desktopView : mobileView)}
                 </BreakpointRender>
             </div>
         );
