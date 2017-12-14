@@ -302,7 +302,7 @@ class AnalysisLayout extends Component {
         return (
             <div className='row'>
                 <BreakpointRender breakpoints={breakpoints} type='viewport'>
-                    {bp => ( bp.isGt('small') ? desktopView : mobileView)}
+                    {bp => ( bp.isGt('small') ? desktopView : mobileView )}
                 </BreakpointRender>
             </div>
         );
