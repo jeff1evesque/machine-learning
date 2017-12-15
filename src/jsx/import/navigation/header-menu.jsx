@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom'
 import HomeLink from './menu-items/home.jsx';
 import LoginLinkState from '../redux/container/login-link.jsx';
 import RegisterLinkState from '../redux/container/register-link.jsx';
+import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import breakpoints from '../general/breakpoints.js';
