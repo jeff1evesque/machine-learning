@@ -44,7 +44,7 @@ class HeaderMenu extends Component {
                                 <NavItem>Append data</NavItem>
                             </LinkContainer>
                             <LinkContainer to='/session/model-generate'>
-                                <NavItem>Add new data</NavItem>
+                                <NavItem>Generate model</NavItem>
                             </LinkContainer>
                             <LinkContainer to='/session/model-predict'>
                                 <NavItem>Make prediction</NavItem>
