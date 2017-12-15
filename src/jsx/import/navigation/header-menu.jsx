@@ -36,6 +36,14 @@ class HeaderMenu extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
+                        <LinkContainer to='/login'>
+                            <NavItem>Login</NavItem>
+                        </LinkContainer>
+                        <LinkContainer to='/register'>
+                            <NavItem>Register</NavItem>
+                        </LinkContainer>
+                    </Nav>
+                    <Nav pullRight>
                         <NavDropdown title='Session' id='basic-nav-dropdown'>
                             <LinkContainer to='/session/data-new'>
                                 <NavItem>Add new data</NavItem>
@@ -52,13 +60,6 @@ class HeaderMenu extends Component {
                             <MenuItem divider />
                             <LinkContainer to='/session/results'>
                                 <NavItem>Review Results</NavItem>
-                            </LinkContainer>
-                            <MenuItem divider />
-                            <LinkContainer to='/login'>
-                                <NavItem>Login</NavItem>
-                            </LinkContainer>
-                            <LinkContainer to='/register'>
-                                <NavItem>Register</NavItem>
                             </LinkContainer>
                         </NavDropdown>
                     </Nav>
