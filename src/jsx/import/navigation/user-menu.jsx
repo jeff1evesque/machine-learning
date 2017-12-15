@@ -110,6 +110,17 @@ class UserMenu extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
+                            <NavDropdown title={user} id='basic-nav-dropdown'>
+                                <LinkContainer to='/session'>
+                                    <NavItem>Dashboard</NavItem>
+                                </LinkContainer>
+                                <MenuItem divider />
+                                <LinkContainer to='/logout' onClick={this.handleClick}>
+                                    <NavItem>Sign out</NavItem>
+                                </LinkContainer>
+                            </NavDropdown>
+                        </Nav>
+                        <Nav pullRight>
                             <NavDropdown title='Session' id='basic-nav-dropdown'>
                                 <LinkContainer to='/session/data-new'>
                                     <NavItem>Add new data</NavItem>
@@ -126,17 +137,6 @@ class UserMenu extends Component {
                                 <MenuItem divider />
                                 <LinkContainer to='/session/results'>
                                     <NavItem>Review Results</NavItem>
-                                </LinkContainer>
-                            </NavDropdown>
-                        </Nav>
-                        <Nav pullRight>
-                            <NavDropdown title={user} id='basic-nav-dropdown'>
-                                <LinkContainer to='/session'>
-                                    <NavItem>Dashboard</NavItem>
-                                </LinkContainer>
-                                <MenuItem divider />
-                                <LinkContainer to='/logout' onClick={this.handleClick}>
-                                    <NavItem>Sign out</NavItem>
                                 </LinkContainer>
                             </NavDropdown>
                         </Nav>
