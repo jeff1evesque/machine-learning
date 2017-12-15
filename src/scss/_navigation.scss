@@ -8,6 +8,10 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 #bootstrap-override {
+  .menu-container {
+    margin-top: $gutter-1
+  }
+
   .main-navigation {
     font-weight: 500;
     padding: .75rem 0;
