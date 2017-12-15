@@ -5,6 +5,8 @@
  */
 
 import React, { Component } from 'react';
+import SvgHome from '../svg/svg-home.jsx';
+import { Link } from 'react-router-dom'
 import HomeLink from './menu-items/home.jsx';
 import LoginLinkState from '../redux/container/login-link.jsx';
 import RegisterLinkState from '../redux/container/register-link.jsx';
