@@ -32,14 +32,14 @@ class ReviewResultsLink extends Component {
         if (
             (
                 this.state.ajax_done_result &&
-                    this.state.ajax_done_result.titles.length > 0
+                this.state.ajax_done_result.titles.length > 0
             ) ||
-                (
-                    this.props &&
-                    this.props.page &&
-                    this.props.page.button &&
-                    this.props.page.button.review_results
-                )
+            (
+                this.props &&
+                this.props.page &&
+                this.props.page.button &&
+                this.props.page.button.review_results
+            )
         ) {
             return (
                 <NavLink
