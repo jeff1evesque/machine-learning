@@ -15,8 +15,8 @@ class SvgUserIcon extends Component {
     constructor() {
         super();
         this.state = {
-            roof_color: colors['gray-5'],
-            house_color: colors['gray-6'],
+            body_color: colors['gray-5'],
+            head_color: colors['gray-6'],
         }
         this.mouseOverHome = this.mouseOverHome.bind(this);
         this.mouseOutHome = this.mouseOutHome.bind(this);
@@ -32,21 +32,33 @@ class SvgUserIcon extends Component {
     // triggered when 'state properties' change
     render() {
         return(
-            <svg version='1.1' xmlns='http://www.w3.org/2000/svg' width='45px'
-                height='45px' x='0px' y='0px' viewBox='0 0 45 45'
-                enable-background='new 0 0 45 45'
+            <svg
+                version='1.1'
+                xmlns='http://www.w3.org/2000/svg'
+                width='45px'
+                height='45px'
+                x='0px'
+                y='0px'
+                viewBox='0 0 512 512'
+                enableBackground='new 0 0 45 45'
                 preserveAspectRatio='xMidYMid meet'
                 onMouseOver={this.mouseOverHome}
                 onMouseOut={this.mouseOutHome}
             >
                 <g>
-	                <circle cx='256.001' cy='227.844' r='74.844'/>
-	                <path style={{fill:this.state.body_color}} d={`M391.343,
-                        433.041c0 -61.853 -25.654 -116.077 -64.162 -146.426c
-                        -16.932, 20.482 -42.531, 33.537 -71.18, 33.537c -28.649,
-                        0 -54.25 -13.055 -71.181 -33.537c -38.508, 30.349 -64.163,
-                        84.573 -64.163, 146.426c 0, 0, 55.51, 19.959, 134.096,
-                        19.959 S391.343, 433.041, 391.343, 433.041z`}
+	                <circle
+                        style={{fill:this.state.head_color}}
+                        cx='50'
+                        cy='50'
+                        r='50'
+                    />
+	                <path
+                        style={{fill:this.state.body_color}}
+                        d={`M391.343, 433.041c0 -61.853 -25.654 -116.077 -64.162
+                        -146.426c -16.932, 20.482 -42.531, 33.537 -71.18, 33.537c
+                        -28.649, 0 -54.25 -13.055 -71.181 -33.537c -38.508, 30.349
+                        -64.163, 84.573 -64.163, 146.426c 0, 0, 55.51, 19.959,
+                        134.096, 19.959 S391.343, 433.041, 391.343, 433.041z`}
                     />
                 </g>
             </svg>
