@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import colors from '../general/colors.js';
 import React, { Component } from 'react';
 
 class SvgHome extends Component {
@@ -14,19 +15,19 @@ class SvgHome extends Component {
     constructor() {
         super();
         this.state = {
-            roof_color: '#808080',
-            house_color: '#404040',
+            roof_color: colors['gray-5'],
+            house_color: colors['gray-6'],
         }
         this.mouseOverHome = this.mouseOverHome.bind(this);
         this.mouseOutHome = this.mouseOutHome.bind(this);
     }
     // callback for mouseOver svg
     mouseOverHome(event) {
-        this.setState({ roof_color: '#5ca941' });
+        this.setState({ roof_color: colors['green-3'] });
     }
     // callback for mouseOut svg
     mouseOutHome(event) {
-        this.setState({ roof_color: '#808080' });
+        this.setState({ roof_color: colors['gray-5'] });
     }
     // triggered when 'state properties' change
     render() {

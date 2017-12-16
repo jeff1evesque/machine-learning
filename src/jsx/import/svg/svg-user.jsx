@@ -7,6 +7,7 @@
  * Note: this script implements jsx (reactjs) syntax.
  */
 
+import colors from '../general/colors.js';
 import React, { Component } from 'react';
 
 class SvgUserIcon extends Component {
@@ -14,26 +15,27 @@ class SvgUserIcon extends Component {
     constructor() {
         super();
         this.state = {
-            roof_color: '#808080',
-            house_color: '#404040',
+            roof_color: colors['gray-5'],
+            house_color: colors['gray-6'],
         }
         this.mouseOverHome = this.mouseOverHome.bind(this);
         this.mouseOutHome = this.mouseOutHome.bind(this);
     }
     // callback for mouseOver svg
     mouseOverHome(event) {
-        this.setState({ body_color: '#5ca941' });
+        this.setState({ body_color: colors['green-3'] });
     }
     // callback for mouseOut svg
     mouseOutHome(event) {
-        this.setState({ body_color: '#808080' });
+        this.setState({ body_color: colors['gray-5'] });
     }
     // triggered when 'state properties' change
     render() {
         return(
             <svg version='1.1' xmlns='http://www.w3.org/2000/svg' width='45px'
                 height='45px' x='0px' y='0px' viewBox='0 0 45 45'
-                enable-background='new 0 0 45 45' xml:space='preserve'
+                enable-background='new 0 0 45 45'
+                preserveAspectRatio='xMidYMid meet'
                 onMouseOver={this.mouseOverHome}
                 onMouseOut={this.mouseOutHome}
             >
