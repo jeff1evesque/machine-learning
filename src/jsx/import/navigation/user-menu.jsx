@@ -111,7 +111,7 @@ class UserMenu extends Component {
                 className='svg-dropdown'
                 id='basic-nav-dropdown'
             >
-                <Navbar.Text>Welcome {user}!</Navbar.Text>
+                <li className='navbar-text'>Welcome {user}!</li>
                 <MenuItem divider />
                 <LinkContainer to='/session'>
                     <NavItem>Dashboard</NavItem>
