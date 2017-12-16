@@ -13,6 +13,8 @@ import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
+import { BreakpointRender } from 'rearm/lib/Breakpoint';
+import breakpoints from '../general/breakpoints.js';
 
 class UserMenu extends Component {
     constructor(props) {
@@ -86,8 +88,7 @@ class UserMenu extends Component {
             ajaxArguments);
         }
     }
-
-    render() {
+    getCurrentUser() {
         if (
             this.props &&
             this.props.user &&
@@ -100,6 +101,49 @@ class UserMenu extends Component {
             var user = 'anonymous';
         }
 
+        return user;
+    }
+    showDesktopUserDropdown() {
+        const user = getCurrentUser();
+        return (
+            <NavDropdown
+                title={<SvgUserIcon />}
+                className='basic-nav-dropdown svg-dropdown'
+            >
+                <div>Welcome {user}!</div>
+                <MenuItem divider />
+                <LinkContainer to='/session'>
+                    <NavItem>Dashboard</NavItem>
+                </LinkContainer>
+                <MenuItem divider />
+                <LinkContainer to='/logout' onClick={this.handleClick}>
+                    <NavItem>Sign out</NavItem>
+                </LinkContainer>
+            </NavDropdown>
+        )
+    }
+    showMobileUserDropdown() {
+        const user = getCurrentUser();
+        return (
+            <NavDropdown
+                title={user}
+                className='basic-nav-dropdown svg-dropdown'
+            >
+                <MenuItem divider />
+                <LinkContainer to='/session'>
+                    <NavItem>Dashboard</NavItem>
+                </LinkContainer>
+                <MenuItem divider />
+                <LinkContainer to='/logout' onClick={this.handleClick}>
+                    <NavItem>Sign out</NavItem>
+                </LinkContainer>
+            </NavDropdown>
+        )
+    }
+    render() {
+        const userDesktopDropdown = this.showDesktopUserDropdown();
+        const userMobileDropdown = this.showMobileUserDropdown();
+
         return(
             <div>
                 <Navbar inverse collapseOnSelect>
@@ -111,20 +155,13 @@ class UserMenu extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavDropdown
-                                title={<SvgUserIcon />}
-                                className='basic-nav-dropdown svg-dropdown'
-                            >
-                                <div>Welcome {user}!</div>
-                                <MenuItem divider />
-                                <LinkContainer to='/session'>
-                                    <NavItem>Dashboard</NavItem>
-                                </LinkContainer>
-                                <MenuItem divider />
-                                <LinkContainer to='/logout' onClick={this.handleClick}>
-                                    <NavItem>Sign out</NavItem>
-                                </LinkContainer>
-                            </NavDropdown>
+                            <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                                {bp => (
+                                    bp.isGt('small')
+                                        ? userDesktopDropdown
+                                        : userMobileDropdown
+                                )}
+                            </BreakpointRender>
                         </Nav>
                         <Nav pullRight>
                             <NavDropdown title='Session' className='basic-nav-dropdown'>
