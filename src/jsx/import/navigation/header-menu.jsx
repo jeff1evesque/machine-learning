@@ -5,12 +5,72 @@
  */
 
 import React, { Component } from 'react';
+import SvgHome from '../svg/svg-home.jsx';
+import { Link } from 'react-router-dom'
 import HomeLink from './menu-items/home.jsx';
 import LoginLinkState from '../redux/container/login-link.jsx';
 import RegisterLinkState from '../redux/container/register-link.jsx';
+import { LinkContainer } from 'react-router-bootstrap';
+import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
+import { BreakpointRender } from 'rearm/lib/Breakpoint';
+import breakpoints from '../general/breakpoints.js';
 
 class HeaderMenu extends Component {
+    showDesktopHeader() {
+        return (
+            <div>
+                <HomeLink />
+                <LoginLinkState />
+                <RegisterLinkState />
+            </div>
+        )
+    }
+    showMobileHeader() {
+        return (
+            <Navbar inverse collapseOnSelect>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <Link to='/'><SvgHome /></Link>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav pullRight>
+                        <NavDropdown title='Session' id='basic-nav-dropdown'>
+                            <LinkContainer to='/session/data-new'>
+                                <NavItem>Add new data</NavItem>
+                            </LinkContainer>
+                            <LinkContainer to='/session/data-append'>
+                                <NavItem>Append data</NavItem>
+                            </LinkContainer>
+                            <LinkContainer to='/session/model-generate'>
+                                <NavItem>Generate model</NavItem>
+                            </LinkContainer>
+                            <LinkContainer to='/session/model-predict'>
+                                <NavItem>Make prediction</NavItem>
+                            </LinkContainer>
+                            <MenuItem divider />
+                            <LinkContainer to='/session/results'>
+                                <NavItem>Review Results</NavItem>
+                            </LinkContainer>
+                        </NavDropdown>
+                    </Nav>
+                    <Nav pullRight>
+                        <LinkContainer to='/login'>
+                            <NavItem>Login</NavItem>
+                        </LinkContainer>
+                        <LinkContainer to='/register'>
+                            <NavItem>Register</NavItem>
+                        </LinkContainer>
+                    </Nav>
+                </Navbar.Collapse>
+            </Navbar>
+        )
+    }
     renderContent() {
+        const desktopMenu = this.showDesktopHeader();
+        const mobileMenu = this.showMobileHeader();
+
         if (
             !!this.props &&
             !!this.props.layout &&
@@ -44,9 +104,9 @@ class HeaderMenu extends Component {
             <nav
                 className='main-navigation menu-home'
             >
-                <HomeLink />
-                <LoginLinkState />
-                <RegisterLinkState />
+                <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                    {bp => ( bp.isGt('small') ? desktopMenu : mobileMenu )}
+                </BreakpointRender>
             </nav>
         );
     }

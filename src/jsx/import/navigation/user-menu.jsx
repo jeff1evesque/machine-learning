@@ -120,6 +120,26 @@ class UserMenu extends Component {
                                 </LinkContainer>
                             </NavDropdown>
                         </Nav>
+                        <Nav pullRight>
+                            <NavDropdown title='Session' id='basic-nav-dropdown'>
+                                <LinkContainer to='/session/data-new'>
+                                    <NavItem>Add new data</NavItem>
+                                </LinkContainer>
+                                <LinkContainer to='/session/data-append'>
+                                    <NavItem>Append data</NavItem>
+                                </LinkContainer>
+                                <LinkContainer to='/session/model-generate'>
+                                    <NavItem>Add new data</NavItem>
+                                </LinkContainer>
+                                <LinkContainer to='/session/model-predict'>
+                                    <NavItem>Make prediction</NavItem>
+                                </LinkContainer>
+                                <MenuItem divider />
+                                <LinkContainer to='/session/results'>
+                                    <NavItem>Review Results</NavItem>
+                                </LinkContainer>
+                            </NavDropdown>
+                        </Nav>
                     </Navbar.Collapse>
                 </Navbar>
             </div>

@@ -27,6 +27,8 @@ import {
     setLayout,
     setSpinner
 } from '../redux/action/page.jsx';
+import { BreakpointRender } from 'rearm/lib/Breakpoint';
+import breakpoints from '../general/breakpoints.js';
 
 class AnalysisLayout extends Component {
     // initial 'state properties'
@@ -211,8 +213,7 @@ class AnalysisLayout extends Component {
             this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
     }
-    render() {
-        // submit button
+    showAnalysisContent() {
         if (
             this.props &&
             this.props.page &&
@@ -230,56 +231,79 @@ class AnalysisLayout extends Component {
             }
         }
 
-        { /* return:
-            @analysisForm, attribute is used within 'handleSubmit' callback
-            @formResult, is accessible within child component as
-                'this.props.formResult'
-        */ }
         return (
-            <div className='row'>
+            <div>
+                {/*
+                    @analysisForm, referenced within 'handleSubmit' callback
+                */}
+                <form
+                    onSubmit={this.handleSubmit}
+                    ref='analysisForm'
+                    className='analysis-container'
+                >
+                    <Route
+                        exact
+                        path='/session/data-new'
+                        component={DataNewState}
+                    />
+                    <Route
+                        exact
+                        path='/session/data-append'
+                        component={DataAppendState}
+                    />
+                    <Route
+                        exact
+                        path='/session/model-generate'
+                        component={ModelGenerateState}
+                    />
+                    <Route
+                        exact
+                        path='/session/model-predict'
+                        component={ModelPredictState}
+                    />
+                    {submitBtn}
+                    {resultBtn}
+                </form>
+                <Route
+                    exact
+                    path='/session/current-result'
+                    component={CurrentResultState}
+                />
+                <Route
+                    exact
+                    path='/session/results'
+                    component={ResultsDisplayState}
+                />
+            </div>
+        );
+    }
+    showDesktopContent() {
+        return (
+            <div>
                 <div className='col-sm-3'>
                     <NavBar />
                 </div>
                 <div className='col-sm-9'>
-                    <form
-                        onSubmit={this.handleSubmit}
-                        ref='analysisForm'
-                        className='analysis-container'
-                    >
-                        <Route
-                            exact
-                            path='/session/data-new'
-                            component={DataNewState}
-                        />
-                        <Route
-                            exact
-                            path='/session/data-append'
-                            component={DataAppendState}
-                        />
-                        <Route
-                            exact
-                            path='/session/model-generate'
-                            component={ModelGenerateState}
-                        />
-                        <Route
-                            exact
-                            path='/session/model-predict'
-                            component={ModelPredictState}
-                        />
-                        {submitBtn}
-                        {resultBtn}
-                    </form>
-                    <Route
-                        exact
-                        path='/session/current-result'
-                        component={CurrentResultState}
-                    />
-                    <Route
-                        exact
-                        path='/session/results'
-                        component={ResultsDisplayState}
-                    />
+                    {this.showAnalysisContent()}
                 </div>
+            </div>
+        )
+    }
+    showMobileContent() {
+        return (
+            <div className='col-sm-12'>
+                {this.showAnalysisContent()}
+            </div>
+        )
+    }
+    render() {
+        const desktopView = this.showDesktopContent();
+        const mobileView = this.showMobileContent();
+        return (
+            <div className='row'>
+                <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                    {bp => ( bp.isGt('small') ? desktopView : mobileView )}
+                </BreakpointRender>
             </div>
         );
     }
