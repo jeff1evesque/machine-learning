@@ -125,10 +125,10 @@ class UserMenu extends Component {
     }
     showMobileUserDropdown() {
         const user = this.getCurrentUser();
-        const title = <div>
+        const title = <span>
             <span className='user-icon'><SvgUserIcon /></span>
             <span className='user-name'>{user}</span>
-        </div>
+        </span>
         return (
             <NavDropdown
                 title={title}
