@@ -57,7 +57,9 @@
     }
 
     .svg-dropdown {
-      padding: 0;
+      a {
+        padding: 0;
+      }
 
       .caret {
         vertical-align: 50%;
