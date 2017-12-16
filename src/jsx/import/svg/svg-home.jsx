@@ -20,18 +20,18 @@ class SvgHome extends Component {
         this.mouseOverHome = this.mouseOverHome.bind(this);
         this.mouseOutHome = this.mouseOutHome.bind(this);
     }
-    // callback for mouseOver home svg
+    // callback for mouseOver svg
     mouseOverHome(event) {
         this.setState({ roof_color: '#5ca941' });
     }
-    // callback for mouseOut home svg
+    // callback for mouseOut svg
     mouseOutHome(event) {
         this.setState({ roof_color: '#808080' });
     }
     // triggered when 'state properties' change
     render() {
         return(
-            <svg version='1.0' xmlns='http://www.w3.org/2000/svg' width='45px'
+            <svg version='1.1' xmlns='http://www.w3.org/2000/svg' width='45px'
                 height='45px' viewBox='0 0 626.000000 626.000000'
                 preserveAspectRatio='xMidYMid meet'
                 onMouseOver={this.mouseOverHome}
