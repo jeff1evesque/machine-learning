@@ -169,7 +169,7 @@ class UserMenu extends Component {
                             </BreakpointRender>
                         </Nav>
                         <Nav pullRight>
-                            <NavDropdown title='Session' className='basic-nav-dropdown'>
+                            <NavDropdown title='Session' id='basic-nav-dropdown'>
                                 <LinkContainer to='/session/data-new'>
                                     <NavItem>Add new data</NavItem>
                                 </LinkContainer>
