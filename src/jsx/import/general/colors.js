@@ -1,5 +1,5 @@
 /**
- * colors.jsx: define consistent color scheme.
+ * colors.js: define consistent color scheme.
  *
  * Note: this file should coincide with '_variables.scss'.
  */
