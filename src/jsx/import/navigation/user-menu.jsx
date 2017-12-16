@@ -111,8 +111,12 @@ class UserMenu extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavDropdown title={SvgUserIcon} id='basic-nav-dropdown'>
-                                <MenuItem><div>Welcome {user}!</div></MenuItem>
+                            <NavDropdown
+                                title={<SvgUserIcon />}
+                                className='basic-nav-dropdown svg-dropdown'
+                            >
+                                <div>Welcome {user}!</div>
+                                <MenuItem divider />
                                 <LinkContainer to='/session'>
                                     <NavItem>Dashboard</NavItem>
                                 </LinkContainer>
@@ -123,7 +127,7 @@ class UserMenu extends Component {
                             </NavDropdown>
                         </Nav>
                         <Nav pullRight>
-                            <NavDropdown title='Session' id='basic-nav-dropdown'>
+                            <NavDropdown title='Session' className='basic-nav-dropdown'>
                                 <LinkContainer to='/session/data-new'>
                                     <NavItem>Add new data</NavItem>
                                 </LinkContainer>
