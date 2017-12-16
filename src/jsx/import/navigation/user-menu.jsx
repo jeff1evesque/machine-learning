@@ -7,6 +7,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
+import SvgUserIcon from '../svg/svg-user.jsx';
 import { Link, withRouter } from 'react-router-dom'
 import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -110,7 +111,8 @@ class UserMenu extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavDropdown title={user} id='basic-nav-dropdown'>
+                            <NavDropdown title={SvgUserIcon} id='basic-nav-dropdown'>
+                                <MenuItem><div>Welcome {user}!</div></MenuItem>
                                 <LinkContainer to='/session'>
                                     <NavItem>Dashboard</NavItem>
                                 </LinkContainer>
