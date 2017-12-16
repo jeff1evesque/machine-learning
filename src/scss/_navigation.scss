@@ -50,6 +50,11 @@
       color: $gray-7;
     }
 
+    .user-name {
+      position: relative;
+      top: -.55em;
+    }
+
     #basic-nav-dropdown {
       color: $gray-1;
       text-decoration: none;
@@ -61,7 +66,7 @@
     }
 
     .svg-dropdown {
-      a {
+      .dropdown-toggle {
         padding: 0;
       }
 
