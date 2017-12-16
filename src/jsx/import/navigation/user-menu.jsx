@@ -104,13 +104,14 @@ class UserMenu extends Component {
         return user;
     }
     showDesktopUserDropdown() {
-        const user = getCurrentUser();
+        const user = this.getCurrentUser();
         return (
             <NavDropdown
                 title={<SvgUserIcon />}
-                className='basic-nav-dropdown svg-dropdown'
+                className='svg-dropdown'
+                id='basic-nav-dropdown'
             >
-                <div>Welcome {user}!</div>
+                <Navbar.Text>Welcome {user}!</Navbar.Text>
                 <MenuItem divider />
                 <LinkContainer to='/session'>
                     <NavItem>Dashboard</NavItem>
@@ -123,13 +124,17 @@ class UserMenu extends Component {
         )
     }
     showMobileUserDropdown() {
-        const user = getCurrentUser();
+        const user = this.getCurrentUser();
+        const title = <div>
+            <span className='user-icon'><SvgUserIcon /></span>
+            <span className='user-name'>{user}</span>
+        </div>
         return (
             <NavDropdown
-                title={user}
-                className='basic-nav-dropdown svg-dropdown'
+                title={title}
+                className='svg-dropdown'
+                id='basic-nav-dropdown'
             >
-                <MenuItem divider />
                 <LinkContainer to='/session'>
                     <NavItem>Dashboard</NavItem>
                 </LinkContainer>
