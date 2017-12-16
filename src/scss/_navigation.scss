@@ -46,12 +46,12 @@
       padding: 5px 0;
     }
 
-    .basic-nav-dropdown {
+    #basic-nav-dropdown {
       color: $gray-1;
       text-decoration: none;
     }
 
-    .basic-nav-dropdown:hover,
+    #basic-nav-dropdown:hover,
     .navbar-brand:hover {
       color: $white-1;
     }
