@@ -48,9 +48,9 @@ class SvgUserIcon extends Component {
                 <g>
 	                <circle
                         style={{fill:this.state.head_color}}
-                        cx='50'
-                        cy='50'
-                        r='50'
+                        cx='50%'
+                        cy='42%'
+                        r='80'
                     />
 	                <path
                         style={{fill:this.state.body_color}}
