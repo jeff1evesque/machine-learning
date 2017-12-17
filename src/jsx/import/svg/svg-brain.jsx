@@ -1,7 +1,7 @@
 /**
  * svg-brain.jsx: append brain icon.
  *
- * @SvgSessionIcon, must be capitalized in order for reactjs to render it as a
+ * @SvgBrainIcon, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
