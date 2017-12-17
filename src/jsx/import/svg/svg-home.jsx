@@ -31,11 +31,11 @@ class SvgHome extends Component {
     }
     // triggered when 'state properties' change
     render() {
-        let roof_color = this.props.roofColor
+        const roof_color = this.props.roofColor
             ? this.props.roofColor
             : this.state.roof_color;
 
-        let house_color = this.props.houseColor
+        const house_color = this.props.houseColor
             ? this.props.houseColor
             : this.state.house_color;
 
