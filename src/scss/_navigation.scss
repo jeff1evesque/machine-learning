@@ -47,7 +47,9 @@
     }
 
     .navbar-text {
-      color: $gray-7;
+      a {
+        color: $gray-7;
+      }
     }
 
     .user-name {
