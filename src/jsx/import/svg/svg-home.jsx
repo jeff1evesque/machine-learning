@@ -31,6 +31,14 @@ class SvgHome extends Component {
     }
     // triggered when 'state properties' change
     render() {
+        let roof_color = this.props.roofColor
+            ? this.props.roofColor
+            : this.state.roof_color;
+
+        let house_color = this.props.houseColor
+            ? this.props.houseColor
+            : this.state.house_color;
+
         return(
             <svg
                 version='1.1'
@@ -51,7 +59,7 @@ class SvgHome extends Component {
                 >
 
                     <path
-                        style={{fill:this.state.roof_color}}
+                        style={{fill:roof_color}}
                         d={`
                             M3020 5606 c-113 -25 -120 -31 -880 -666 -124 -103 -418
                             -348 -655 -545 -236 -196 -452 -376 -480 -399 -27 -23
@@ -76,7 +84,7 @@ class SvgHome extends Component {
                     />
 
                     <path
-                        style={{fill:this.state.house_color}}
+                        style={{fill:house_color}}
                         d={`
                             M3085 4577c -23 -18 -104 -84 -180 -147 -76 -63 -220 -182
                             -320 -265 -100 -82 -199 -163 -220 -180 -21 -16 -72 -59

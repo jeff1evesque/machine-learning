@@ -15,6 +15,7 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import breakpoints from '../general/breakpoints.js';
+import colors from '../general/colors.js';
 
 class UserMenu extends Component {
     constructor(props) {
@@ -156,7 +157,7 @@ class UserMenu extends Component {
                 <Navbar inverse collapseOnSelect>
                     <Navbar.Header>
                         <Navbar.Brand>
-                            <Link to='/'><SvgHome /></Link>
+                            <Link to='/'><SvgHome houseColor={colors['gray-7']} /></Link>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
