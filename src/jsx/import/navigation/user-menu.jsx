@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
 import SvgUserIcon from '../svg/svg-user.jsx';
-import SvgBrainIcon from '../svg/svg-brain.jsx';
+import SvgBooksIcon from '../svg/svg-books.jsx';
 import { Link, withRouter } from 'react-router-dom'
 import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -107,7 +107,11 @@ class UserMenu extends Component {
     getSessionDropdown(title) {
         return (
             <Nav pullRight>
-                <NavDropdown title={title} id='basic-nav-dropdown'>
+                <NavDropdown
+                    title={title}
+                    className='svg-dropdown'
+                    id='basic-nav-dropdown'
+                >
                     <LinkContainer to='/session/data-new'>
                         <NavItem>Add new data</NavItem>
                     </LinkContainer>
@@ -130,7 +134,7 @@ class UserMenu extends Component {
     }
     showDesktopUserDropdown() {
         const user = this.getCurrentUser();
-        const sessionDropdown = this.getSessionDropdown(<SvgBrainIcon />);
+        const sessionDropdown = this.getSessionDropdown(<SvgBooksIcon />);
         return (
             <Navbar.Collapse>
                 <Nav pullRight>
@@ -163,7 +167,7 @@ class UserMenu extends Component {
             <span className='user-name'>{user}</span>
         </span>
         const session = <span>
-            <span className='user-icon'><SvgBrainIcon /></span>
+            <span className='user-icon'><SvgBooksIcon /></span>
             <span className='user-name'>Session</span>
         </span>
         const sessionDropdown = this.getSessionDropdown(session);
