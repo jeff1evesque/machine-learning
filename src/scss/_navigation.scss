@@ -46,6 +46,17 @@
       padding: 5px 0;
     }
 
+    .navbar-text {
+      a {
+        color: $gray-7;
+      }
+    }
+
+    .user-name {
+      position: relative;
+      top: -.55em;
+    }
+
     #basic-nav-dropdown {
       color: $gray-1;
       text-decoration: none;
@@ -54,6 +65,16 @@
     #basic-nav-dropdown:hover,
     .navbar-brand:hover {
       color: $white-1;
+    }
+
+    .svg-dropdown {
+      .dropdown-toggle {
+        padding: 0;
+      }
+
+      .caret {
+        vertical-align: 50%;
+      }
     }
   }
 

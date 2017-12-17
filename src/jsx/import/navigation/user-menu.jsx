@@ -7,11 +7,14 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
+import SvgUserIcon from '../svg/svg-user.jsx';
 import { Link, withRouter } from 'react-router-dom'
 import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
+import { BreakpointRender } from 'rearm/lib/Breakpoint';
+import breakpoints from '../general/breakpoints.js';
 
 class UserMenu extends Component {
     constructor(props) {
@@ -85,8 +88,7 @@ class UserMenu extends Component {
             ajaxArguments);
         }
     }
-
-    render() {
+    getCurrentUser() {
         if (
             this.props &&
             this.props.user &&
@@ -99,6 +101,56 @@ class UserMenu extends Component {
             var user = 'anonymous';
         }
 
+        return user;
+    }
+    showDesktopUserDropdown() {
+        const user = this.getCurrentUser();
+        return (
+            <NavDropdown
+                title={<SvgUserIcon />}
+                className='svg-dropdown'
+                id='basic-nav-dropdown'
+            >
+                <MenuItem className='navbar-text' disabled>
+                    Welcome {user}!
+                </MenuItem>
+                <MenuItem divider />
+                <LinkContainer to='/session'>
+                    <NavItem>Dashboard</NavItem>
+                </LinkContainer>
+                <MenuItem divider />
+                <LinkContainer to='/logout' onClick={this.handleClick}>
+                    <NavItem>Sign out</NavItem>
+                </LinkContainer>
+            </NavDropdown>
+        )
+    }
+    showMobileUserDropdown() {
+        const user = this.getCurrentUser();
+        const title = <span>
+            <span className='user-icon'><SvgUserIcon /></span>
+            <span className='user-name'>{user}</span>
+        </span>
+        return (
+            <NavDropdown
+                title={title}
+                className='svg-dropdown'
+                id='basic-nav-dropdown'
+            >
+                <LinkContainer to='/session'>
+                    <NavItem>Dashboard</NavItem>
+                </LinkContainer>
+                <MenuItem divider />
+                <LinkContainer to='/logout' onClick={this.handleClick}>
+                    <NavItem>Sign out</NavItem>
+                </LinkContainer>
+            </NavDropdown>
+        )
+    }
+    render() {
+        const userDesktopDropdown = this.showDesktopUserDropdown();
+        const userMobileDropdown = this.showMobileUserDropdown();
+
         return(
             <div>
                 <Navbar inverse collapseOnSelect>
@@ -110,15 +162,13 @@ class UserMenu extends Component {
                     </Navbar.Header>
                     <Navbar.Collapse>
                         <Nav pullRight>
-                            <NavDropdown title={user} id='basic-nav-dropdown'>
-                                <LinkContainer to='/session'>
-                                    <NavItem>Dashboard</NavItem>
-                                </LinkContainer>
-                                <MenuItem divider />
-                                <LinkContainer to='/logout' onClick={this.handleClick}>
-                                    <NavItem>Sign out</NavItem>
-                                </LinkContainer>
-                            </NavDropdown>
+                            <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                                {bp => (
+                                    bp.isGt('small')
+                                        ? userDesktopDropdown
+                                        : userMobileDropdown
+                                )}
+                            </BreakpointRender>
                         </Nav>
                         <Nav pullRight>
                             <NavDropdown title='Session' id='basic-nav-dropdown'>
