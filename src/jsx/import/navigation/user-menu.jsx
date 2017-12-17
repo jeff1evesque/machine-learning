@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
 import SvgUserIcon from '../svg/svg-user.jsx';
+import SvgBrainIcon from '../svg/svg-brain.jsx';
 import { Link, withRouter } from 'react-router-dom'
 import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -103,26 +104,56 @@ class UserMenu extends Component {
 
         return user;
     }
+    getSessionDropdown(title) {
+        return (
+            <Nav pullRight>
+                <NavDropdown title={title} id='basic-nav-dropdown'>
+                    <LinkContainer to='/session/data-new'>
+                        <NavItem>Add new data</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to='/session/data-append'>
+                        <NavItem>Append data</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to='/session/model-generate'>
+                        <NavItem>Generate model</NavItem>
+                    </LinkContainer>
+                    <LinkContainer to='/session/model-predict'>
+                        <NavItem>Make prediction</NavItem>
+                    </LinkContainer>
+                    <MenuItem divider />
+                    <LinkContainer to='/session/results'>
+                        <NavItem>Review Results</NavItem>
+                    </LinkContainer>
+                </NavDropdown>
+            </Nav>
+        )
+    }
     showDesktopUserDropdown() {
         const user = this.getCurrentUser();
+        const sessionDropdown = this.getSessionDropdown(<SvgBrainIcon />);
         return (
-            <NavDropdown
-                title={<SvgUserIcon />}
-                className='svg-dropdown'
-                id='basic-nav-dropdown'
-            >
-                <MenuItem className='navbar-text' disabled>
-                    Welcome {user}!
-                </MenuItem>
-                <MenuItem divider />
-                <LinkContainer to='/session'>
-                    <NavItem>Dashboard</NavItem>
-                </LinkContainer>
-                <MenuItem divider />
-                <LinkContainer to='/logout' onClick={this.handleClick}>
-                    <NavItem>Sign out</NavItem>
-                </LinkContainer>
-            </NavDropdown>
+            <Navbar.Collapse>
+                <Nav pullRight>
+                    <NavDropdown
+                        title={<SvgUserIcon />}
+                        className='svg-dropdown'
+                        id='basic-nav-dropdown'
+                    >
+                        <MenuItem className='navbar-text' disabled>
+                            Welcome {user}!
+                        </MenuItem>
+                        <MenuItem divider />
+                        <LinkContainer to='/session'>
+                            <NavItem>Dashboard</NavItem>
+                        </LinkContainer>
+                        <MenuItem divider />
+                        <LinkContainer to='/logout' onClick={this.handleClick}>
+                            <NavItem>Sign out</NavItem>
+                        </LinkContainer>
+                    </NavDropdown>
+                </Nav>
+                {sessionDropdown}
+            </Navbar.Collapse>
         )
     }
     showMobileUserDropdown() {
@@ -131,20 +162,30 @@ class UserMenu extends Component {
             <span className='user-icon'><SvgUserIcon /></span>
             <span className='user-name'>{user}</span>
         </span>
+        const session = <span>
+            <span className='user-icon'><SvgBrainIcon /></span>
+            <span className='user-name'>Session</span>
+        </span>
+        const sessionDropdown = this.getSessionDropdown(session);
         return (
-            <NavDropdown
-                title={title}
-                className='svg-dropdown'
-                id='basic-nav-dropdown'
-            >
-                <LinkContainer to='/session'>
-                    <NavItem>Dashboard</NavItem>
-                </LinkContainer>
-                <MenuItem divider />
-                <LinkContainer to='/logout' onClick={this.handleClick}>
-                    <NavItem>Sign out</NavItem>
-                </LinkContainer>
-            </NavDropdown>
+            <Navbar.Collapse>
+                <Nav pullRight>
+                    <NavDropdown
+                        title={title}
+                        className='svg-dropdown'
+                        id='basic-nav-dropdown'
+                    >
+                        <LinkContainer to='/session'>
+                            <NavItem>Dashboard</NavItem>
+                        </LinkContainer>
+                        <MenuItem divider />
+                        <LinkContainer to='/logout' onClick={this.handleClick}>
+                            <NavItem>Sign out</NavItem>
+                        </LinkContainer>
+                    </NavDropdown>
+                </Nav>
+                {sessionDropdown}
+            </Navbar.Collapse>
         )
     }
     render() {
@@ -160,37 +201,13 @@ class UserMenu extends Component {
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
-                    <Navbar.Collapse>
-                        <Nav pullRight>
-                            <BreakpointRender breakpoints={breakpoints} type='viewport'>
-                                {bp => (
-                                    bp.isGt('small')
-                                        ? userDesktopDropdown
-                                        : userMobileDropdown
-                                )}
-                            </BreakpointRender>
-                        </Nav>
-                        <Nav pullRight>
-                            <NavDropdown title='Session' id='basic-nav-dropdown'>
-                                <LinkContainer to='/session/data-new'>
-                                    <NavItem>Add new data</NavItem>
-                                </LinkContainer>
-                                <LinkContainer to='/session/data-append'>
-                                    <NavItem>Append data</NavItem>
-                                </LinkContainer>
-                                <LinkContainer to='/session/model-generate'>
-                                    <NavItem>Generate model</NavItem>
-                                </LinkContainer>
-                                <LinkContainer to='/session/model-predict'>
-                                    <NavItem>Make prediction</NavItem>
-                                </LinkContainer>
-                                <MenuItem divider />
-                                <LinkContainer to='/session/results'>
-                                    <NavItem>Review Results</NavItem>
-                                </LinkContainer>
-                            </NavDropdown>
-                        </Nav>
-                    </Navbar.Collapse>
+                    <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                        {bp => (
+                            bp.isGt('small') 
+                                ? userDesktopDropdown
+                                : userMobileDropdown
+                        )}
+                    </BreakpointRender>
                 </Navbar>
             </div>
         );
