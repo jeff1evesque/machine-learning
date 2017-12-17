@@ -14,6 +14,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import breakpoints from '../general/breakpoints.js';
+import colors from '../general/colors.js';
 
 class HeaderMenu extends Component {
     showDesktopHeader() {
@@ -30,7 +31,7 @@ class HeaderMenu extends Component {
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
                     <Navbar.Brand>
-                        <Link to='/'><SvgHome /></Link>
+                        <Link to='/'><SvgHome houseColor={colors['gray-7']} /></Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
                 </Navbar.Header>
