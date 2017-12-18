@@ -8,6 +8,7 @@ import React, { Component } from 'react';
 import SvgHome from '../svg/svg-home.jsx';
 import SvgBooksIcon from '../svg/svg-books.jsx';
 import SvgUserIcon from '../svg/svg-user.jsx';
+import SvgPencilNoteIcon from '../svg/svg-pencil-note.jsx';
 import { Link } from 'react-router-dom'
 import HomeLink from './menu-items/home.jsx';
 import LoginLinkState from '../redux/container/login-link.jsx';
@@ -69,7 +70,10 @@ class HeaderMenu extends Component {
                             </NavItem>
                         </LinkContainer>
                         <LinkContainer to='/register'>
-                            <NavItem>Register</NavItem>
+                            <NavItem className='nav-item'>
+                                <span><SvgPencilNoteIcon /></span>
+                                <span className='menu-label'>Register</span>
+                            </NavItem>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
