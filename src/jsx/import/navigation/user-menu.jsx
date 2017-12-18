@@ -140,7 +140,7 @@ class UserMenu extends Component {
                 <Nav pullRight>
                     <NavDropdown
                         title={<SvgUserIcon />}
-                        className='svg-dropdown'
+                        className='svg-dropdown svg-dropdown-desktop'
                         id='basic-nav-dropdown'
                     >
                         <MenuItem className='navbar-text' disabled>
@@ -163,12 +163,12 @@ class UserMenu extends Component {
     showMobileUserDropdown() {
         const user = this.getCurrentUser();
         const title = <span>
-            <span className='user-icon'><SvgUserIcon /></span>
-            <span className='user-name'>{user}</span>
+            <span><SvgUserIcon /></span>
+            <span className='menu-label'>{user}</span>
         </span>
         const session = <span>
-            <span className='user-icon'><SvgBooksIcon /></span>
-            <span className='user-name'>Session</span>
+            <span><SvgBooksIcon /></span>
+            <span className='menu-label'>Session</span>
         </span>
         const sessionDropdown = this.getSessionDropdown(session);
         return (
