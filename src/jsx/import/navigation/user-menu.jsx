@@ -124,10 +124,6 @@ class UserMenu extends Component {
                     <LinkContainer to='/session/model-predict'>
                         <NavItem>Make prediction</NavItem>
                     </LinkContainer>
-                    <MenuItem divider />
-                    <LinkContainer to='/session/results'>
-                        <NavItem>Review Results</NavItem>
-                    </LinkContainer>
                 </NavDropdown>
             </Nav>
         )
@@ -150,6 +146,9 @@ class UserMenu extends Component {
                         <LinkContainer to='/session'>
                             <NavItem>Dashboard</NavItem>
                         </LinkContainer>
+                    <LinkContainer to='/session/results'>
+                        <NavItem>My results</NavItem>
+                    </LinkContainer>
                         <MenuItem divider />
                         <LinkContainer to='/logout' onClick={this.handleClick}>
                             <NavItem>Sign out</NavItem>
