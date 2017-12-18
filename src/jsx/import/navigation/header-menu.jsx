@@ -6,6 +6,7 @@
 
 import React, { Component } from 'react';
 import SvgHome from '../svg/svg-home.jsx';
+import SvgBooksIcon from '../svg/svg-books.jsx';
 import { Link } from 'react-router-dom'
 import HomeLink from './menu-items/home.jsx';
 import LoginLinkState from '../redux/container/login-link.jsx';
@@ -26,6 +27,10 @@ class HeaderMenu extends Component {
         )
     }
     showMobileHeader() {
+        const session = <span>
+            <span><SvgBooksIcon /></span>
+            <span className='menu-label'>Session</span>
+        </span>
         return (
             <Navbar inverse collapseOnSelect>
                 <Navbar.Header>
@@ -36,7 +41,7 @@ class HeaderMenu extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
-                        <NavDropdown title='Session' id='basic-nav-dropdown'>
+                        <NavDropdown title={session} id='basic-nav-dropdown'>
                             <LinkContainer to='/session/data-new'>
                                 <NavItem>Add new data</NavItem>
                             </LinkContainer>
