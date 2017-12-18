@@ -109,7 +109,6 @@ class UserMenu extends Component {
             <Nav pullRight>
                 <NavDropdown
                     title={title}
-                    className='svg-dropdown'
                     id='basic-nav-dropdown'
                 >
                     <LinkContainer to='/session/data-new'>
@@ -136,7 +135,7 @@ class UserMenu extends Component {
                 <Nav pullRight>
                     <NavDropdown
                         title={<SvgUserIcon />}
-                        className='svg-dropdown svg-dropdown-desktop'
+                        className='svg-dropdown-desktop'
                         id='basic-nav-dropdown'
                     >
                         <MenuItem className='navbar-text' disabled>
@@ -175,7 +174,6 @@ class UserMenu extends Component {
                 <Nav pullRight>
                     <NavDropdown
                         title={title}
-                        className='svg-dropdown'
                         id='basic-nav-dropdown'
                     >
                         <LinkContainer to='/session'>
