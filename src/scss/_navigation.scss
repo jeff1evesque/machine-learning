@@ -67,7 +67,9 @@
       color: $white-1;
     }
 
-    .dropdown-toggle,
+    .dropdown-toggle {
+      padding: 0;
+    }
     .nav-item {
       a {
         padding: 0;
