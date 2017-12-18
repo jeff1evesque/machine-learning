@@ -52,7 +52,7 @@
       }
     }
 
-    .user-name {
+    .menu-label {
       position: relative;
       top: -.55em;
     }
@@ -73,6 +73,18 @@
       }
 
       .caret {
+        vertical-align: 50%;
+      }
+    }
+
+    .svg-dropdown-desktop {
+      .dropdown-toggle {
+        padding-left: $gutter-1 / 2;
+      }
+
+      .caret {
+        left: -8px;
+        position: relative;
         vertical-align: 50%;
       }
     }
