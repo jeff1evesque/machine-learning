@@ -67,12 +67,14 @@
       color: $white-1;
     }
 
-    .dropdown {
-      .dropdown-toggle,
-      .nav-item {
+    .dropdown-toggle,
+    .nav-item {
+      a {
         padding: 0;
       }
+    }
 
+    .dropdown {
       .caret {
         vertical-align: 50%;
       }
