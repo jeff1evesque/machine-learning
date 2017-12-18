@@ -63,7 +63,7 @@ class HeaderMenu extends Component {
                     </Nav>
                     <Nav pullRight>
                         <LinkContainer to='/login'>
-                            <NavItem>
+                            <NavItem className='menu-item'>
                                 <span><SvgUserIcon /></span>
                                 <span className='menu-label'>Login</span>
                             </NavItem>
