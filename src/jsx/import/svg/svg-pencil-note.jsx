@@ -15,19 +15,20 @@ class SvgPencilNoteIcon extends Component {
     constructor() {
         super();
         this.state = {
-            body_color: colors['gray-5'],
-            head_color: colors['gray-6'],
+            pencil_color: colors['gray-5'],
+            inner_color: colors['gray-5'],
+            outer_color: colors['gray-6'],
         }
         this.mouseOverHome = this.mouseOverHome.bind(this);
         this.mouseOutHome = this.mouseOutHome.bind(this);
     }
     // callback for mouseOver svg
     mouseOverHome(event) {
-        this.setState({ body_color: colors['green-3'] });
+        this.setState({ inner_color: colors['green-3'] });
     }
     // callback for mouseOut svg
     mouseOutHome(event) {
-        this.setState({ body_color: colors['gray-5'] });
+        this.setState({ inner_color: colors['gray-5'] });
     }
     // triggered when 'state properties' change
     render() {
@@ -36,7 +37,7 @@ class SvgPencilNoteIcon extends Component {
                 version='1.1'
                 xmlns='http://www.w3.org/2000/svg'
                 width='45px'
-                height='45px'
+                height='28px'
                 x='0px'
                 y='0px'
                 viewBox='0 0 512 512'
@@ -47,6 +48,7 @@ class SvgPencilNoteIcon extends Component {
             >
                 <g>
                     <path
+                        fill={this.state.outer_color}
                         d={`
                             M448, 177.14V 448c 0, 35.344 -28.656, 64 -64, 64H 64c
                             -35.344, 0 -64 -28.656 -64 -64V 128c 0 -35.344, 28.656
@@ -55,24 +57,30 @@ class SvgPencilNoteIcon extends Component {
                         `}
                     />
                     <path
-                        d={`
-                            M398.875, 45.25L 376.25, 67.875 l67.875, 67.891 l22.625
-                            -22.625L 398.875, 45.25z
-                        `}
-                    />
-                    <path
+                        fill={this.state.pencil_color}
                         d={`
                             M444.125, 0 L421.5, 22.625 l67.875, 67.891L 512, 67.875L
                             444.125, 0z
                         `}
                     />
                     <path
+                        fill={this.state.pencil_color}
+                        d={`
+                            M398.875, 45.25L 376.25, 67.875 l67.875, 67.891 l22.625
+                            -22.625L 398.875, 45.25z
+                        `}
+                    />
+                    <path
+                        fill={this.state.inner_color}
                         d={`
                             M150, 294.188 l67.875, 67.875L 421.5, 158.406l -67.875
                             -67.891L 150, 294.188z
                         `}
                     />
-                    <path d='M128,384h64l-64-64V384z' />
+                    <path
+                        fill={this.state.pencil_color}
+                        d='M128, 384h 64l -64 -64V 384z'
+                    />
                 </g>
             </svg>
         );
