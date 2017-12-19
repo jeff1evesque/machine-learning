@@ -15,7 +15,8 @@ install:
 
 ## lint and test
 script:
-  - ./test/linter run "$PROJECT_DIRECTORY"; exit $?
+  - ./test/linter run "$PROJECT_DIRECTORY"; LINT_EXIT = $?
+  - if [ "$LINT_EXIT" -gt 0 ]; then exit 1; fi
   - ./test/unit-tests "$PROJECT_DIRECTORY"
 
 ## results: the following commands are run after linting, and tests have completed.
