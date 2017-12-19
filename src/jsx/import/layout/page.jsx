@@ -49,7 +49,7 @@ class PageLayout extends Component {
         }
 
         return (
-            <div className={bpoint}>
+            <div className={`${bpoint}-viewport`}>
                 <div className={authStatus}>
                     <div className='menu-container'>
                         {mainMenu}
