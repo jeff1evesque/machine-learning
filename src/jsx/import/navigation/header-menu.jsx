@@ -58,7 +58,7 @@ class HeaderMenu extends Component {
                             </LinkContainer>
                             <MenuItem divider />
                             <LinkContainer to='/session/results'>
-                                <NavItem>Review Results</NavItem>
+                                <NavItem>Review results</NavItem>
                             </LinkContainer>
                         </NavDropdown>
                     </Nav>
