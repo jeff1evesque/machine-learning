@@ -1,7 +1,7 @@
 /**
  * svg-pencil-note.jsx: append pencil note icon.
  *
- * @SvgPencilNoteIcon, must be capitalized in order for reactjs to render it as a
+ * @SvgPencilNote, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
@@ -10,7 +10,7 @@
 import colors from '../general/colors.js';
 import React, { Component } from 'react';
 
-class SvgPencilNoteIcon extends Component {
+class SvgPencilNote extends Component {
     // initial 'state properties'
     constructor() {
         super();
@@ -19,15 +19,15 @@ class SvgPencilNoteIcon extends Component {
             inner_color: colors['gray-5'],
             outer_color: colors['gray-6'],
         }
-        this.mouseOverHome = this.mouseOverHome.bind(this);
-        this.mouseOutHome = this.mouseOutHome.bind(this);
+        this.mouseOverIcon = this.mouseOverIcon.bind(this);
+        this.mouseOutIcon = this.mouseOutIcon.bind(this);
     }
     // callback for mouseOver svg
-    mouseOverHome(event) {
+    mouseOverIcon(event) {
         this.setState({ inner_color: colors['green-3'] });
     }
     // callback for mouseOut svg
-    mouseOutHome(event) {
+    mouseOutIcon(event) {
         this.setState({ inner_color: colors['gray-5'] });
     }
     // triggered when 'state properties' change
@@ -43,8 +43,8 @@ class SvgPencilNoteIcon extends Component {
                 viewBox='0 0 512 512'
                 enableBackground='new 0 0 45 45'
                 preserveAspectRatio='xMidYMid meet'
-                onMouseOver={this.mouseOverHome}
-                onMouseOut={this.mouseOutHome}
+                onMouseOver={this.mouseOverIcon}
+                onMouseOut={this.mouseOutIcon}
             >
                 <g>
                     <path
@@ -88,4 +88,4 @@ class SvgPencilNoteIcon extends Component {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default SvgPencilNoteIcon;
+export default SvgPencilNote;
