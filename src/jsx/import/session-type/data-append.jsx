@@ -130,7 +130,9 @@ class DataAppend extends Component {
                     <div className='row'>
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label className='block' htmlFor='selectCollection'>Collection</label>
+                                <label className='block' htmlFor='selectCollection'>
+                                    Collection
+                                </label>
                                 <select
                                     className='form-control fullspan'
                                     name='collection'
@@ -153,7 +155,9 @@ class DataAppend extends Component {
 
                         <div className='col-sm-6'>
                             <div className='form-group'>
-                                <label className='block' htmlFor='selectDatasetType'>Dataset Type</label>
+                                <label className='block' htmlFor='selectDatasetType'>
+                                    Dataset Type
+                                </label>
                                 <select
                                     className='form-control fullspan'
                                     name='dataset_type'
