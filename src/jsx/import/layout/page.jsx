@@ -41,11 +41,11 @@ class PageLayout extends Component {
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            const mainMenu = <UserMenuState />;
-            const authStatus = 'authenticated';
+            var mainMenu = <UserMenuState />;
+            var authStatus = 'authenticated';
         } else {
-            const mainMenu = <div className='container'><HeaderMenuState /></div>;
-            const authStatus = 'anonymous';
+            var mainMenu = <div className='container'><HeaderMenuState /></div>;
+            var authStatus = 'anonymous';
         }
 
         return (
