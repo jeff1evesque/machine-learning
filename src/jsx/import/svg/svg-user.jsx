@@ -18,15 +18,15 @@ class SvgUser extends Component {
             body_color: colors['gray-5'],
             head_color: colors['gray-6'],
         }
-        this.mouseOverIcon = this.mouseOverIcon.bind(this);
-        this.mouseOutIcon = this.mouseOutIcon.bind(this);
+        this.mouseOverImage = this.mouseOverImage.bind(this);
+        this.mouseOutImage = this.mouseOutImage.bind(this);
     }
     // callback for mouseOver svg
-    mouseOverIcon(event) {
+    mouseOverImage(event) {
         this.setState({ body_color: colors['green-3'] });
     }
     // callback for mouseOut svg
-    mouseOutIcon(event) {
+    mouseOutImage(event) {
         this.setState({ body_color: colors['gray-5'] });
     }
     // triggered when 'state properties' change
@@ -42,8 +42,8 @@ class SvgUser extends Component {
                 viewBox='0 0 512 512'
                 enableBackground='new 0 0 45 45'
                 preserveAspectRatio='xMidYMid meet'
-                onMouseOver={this.mouseOverIcon}
-                onMouseOut={this.mouseOutIcon}
+                onMouseOver={this.mouseOverImage}
+                onMouseOut={this.mouseOutImage}
             >
                 <g>
 	                <circle

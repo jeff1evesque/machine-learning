@@ -18,15 +18,15 @@ class SvgBooks extends Component {
             inner_color: colors['gray-5'],
             outer_color: colors['gray-6'],
         }
-        this.mouseOverIcon = this.mouseOverIcon.bind(this);
-        this.mouseOutIcon = this.mouseOutIcon.bind(this);
+        this.mouseOverImage = this.mouseOverImage.bind(this);
+        this.mouseOutImage = this.mouseOutImage.bind(this);
     }
     // callback for mouseOver svg
-    mouseOverIcon(event) {
+    mouseOverImage(event) {
         this.setState({ outer_color: colors['green-3'] });
     }
     // callback for mouseOut svg
-    mouseOutIcon(event) {
+    mouseOutImage(event) {
         this.setState({ outer_color: colors['gray-6'] });
     }
     // triggered when 'state properties' change
@@ -38,8 +38,8 @@ class SvgBooks extends Component {
                 height='45px'
                 viewBox='0 0 225 225'
                 preserveAspectRatio='xMidYMid meet'
-                onMouseOver={this.mouseOverIcon}
-                onMouseOut={this.mouseOutIcon}
+                onMouseOver={this.mouseOverImage}
+                onMouseOut={this.mouseOutImage}
             >
                 <g
                     transform='translate(20, 280) scale(0.1, -0.1)'
