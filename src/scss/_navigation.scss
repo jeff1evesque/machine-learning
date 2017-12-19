@@ -32,8 +32,8 @@
   .dropdown-menu {
     li {
       a {
-        color: $header-font-color;
         background-color: transparent;
+        color: $header-font-color;
       }
     }
 
@@ -79,6 +79,7 @@
     .dropdown-toggle {
       padding: 0;
     }
+
     .nav-item {
       a {
         color: $header-font-color;
@@ -87,6 +88,7 @@
         text-decoration: none;
       }
     }
+
     .nav-item:last-of-type {
       a {
         color: $header-font-color;

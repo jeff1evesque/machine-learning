@@ -220,7 +220,9 @@ class AnalysisLayout extends Component {
             this.props.page.button
         ) {
             const button = this.props.page.button;
-            var submitBtn = button.submit_analysis ? <Submit cssClass='btn mn-2 btn-primary' /> : null;
+            var submitBtn = button.submit_analysis
+                ? <Submit cssClass='btn mn-2 btn-primary' />
+                : null;
 
             if (
                 this.state.ajax_done_result &&
