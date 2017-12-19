@@ -30,9 +30,11 @@
   }
 
   .dropdown-menu {
-    a {
-      color: $header-font-color;
-      background-color: transparent;
+    li {
+      a {
+        color: $header-font-color;
+        background-color: transparent;
+      }
     }
 
     a:hover {
@@ -57,7 +59,6 @@
     .menu-label {
       color: $header-font-color;
       position: relative;
-      text-decoration: none;
       top: -.55em;
     }
 
@@ -79,11 +80,19 @@
       padding: 0;
     }
     .nav-item {
-      padding-top: $gutter-1 / 4;
-
       a {
-        padding-left: 0;
         color: $header-font-color;
+        margin-bottom: 1.25rem;
+        padding: 0;
+        text-decoration: none;
+      }
+    }
+    .nav-item:last-of-type {
+      a {
+        color: $header-font-color;
+        margin-bottom: 0;
+        padding: 0;
+        text-decoration: none;
       }
     }
 
