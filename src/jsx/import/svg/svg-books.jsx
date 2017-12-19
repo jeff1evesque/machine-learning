@@ -1,7 +1,7 @@
 /**
  * svg-books.jsx: append book icon.
  *
- * @SvgBooksIcon, must be capitalized in order for reactjs to render it as a
+ * @SvgBooks, must be capitalized in order for reactjs to render it as a
  *     component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
@@ -10,7 +10,7 @@
 import colors from '../general/colors.js';
 import React, { Component } from 'react';
 
-class SvgBooksIcon extends Component {
+class SvgBooks extends Component {
     // initial 'state properties'
     constructor() {
         super();
@@ -18,15 +18,15 @@ class SvgBooksIcon extends Component {
             inner_color: colors['gray-5'],
             outer_color: colors['gray-6'],
         }
-        this.mouseOverHome = this.mouseOverHome.bind(this);
-        this.mouseOutHome = this.mouseOutHome.bind(this);
+        this.mouseOverImage = this.mouseOverImage.bind(this);
+        this.mouseOutImage = this.mouseOutImage.bind(this);
     }
     // callback for mouseOver svg
-    mouseOverHome(event) {
+    mouseOverImage(event) {
         this.setState({ outer_color: colors['green-3'] });
     }
     // callback for mouseOut svg
-    mouseOutHome(event) {
+    mouseOutImage(event) {
         this.setState({ outer_color: colors['gray-6'] });
     }
     // triggered when 'state properties' change
@@ -38,8 +38,8 @@ class SvgBooksIcon extends Component {
                 height='45px'
                 viewBox='0 0 225 225'
                 preserveAspectRatio='xMidYMid meet'
-                onMouseOver={this.mouseOverHome}
-                onMouseOut={this.mouseOutHome}
+                onMouseOver={this.mouseOverImage}
+                onMouseOut={this.mouseOutImage}
             >
                 <g
                     transform='translate(20, 280) scale(0.1, -0.1)'
@@ -118,4 +118,4 @@ class SvgBooksIcon extends Component {
 }
 
 // indicate which class can be exported, and instantiated via 'require'
-export default SvgBooksIcon;
+export default SvgBooks;

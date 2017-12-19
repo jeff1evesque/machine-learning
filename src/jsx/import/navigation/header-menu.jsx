@@ -6,8 +6,9 @@
 
 import React, { Component } from 'react';
 import SvgHome from '../svg/svg-home.jsx';
-import SvgBooksIcon from '../svg/svg-books.jsx';
-import SvgUserIcon from '../svg/svg-user.jsx';
+import SvgBooks from '../svg/svg-books.jsx';
+import SvgUser from '../svg/svg-user.jsx';
+import SvgPencilNote from '../svg/svg-pencil-note.jsx';
 import { Link } from 'react-router-dom'
 import HomeLink from './menu-items/home.jsx';
 import LoginLinkState from '../redux/container/login-link.jsx';
@@ -29,7 +30,7 @@ class HeaderMenu extends Component {
     }
     showMobileHeader() {
         const session = <span>
-            <span><SvgBooksIcon /></span>
+            <span><SvgBooks /></span>
             <span className='menu-label'>Session</span>
         </span>
         return (
@@ -57,19 +58,22 @@ class HeaderMenu extends Component {
                             </LinkContainer>
                             <MenuItem divider />
                             <LinkContainer to='/session/results'>
-                                <NavItem>Review Results</NavItem>
+                                <NavItem>Review results</NavItem>
                             </LinkContainer>
                         </NavDropdown>
                     </Nav>
                     <Nav pullRight>
                         <LinkContainer to='/login'>
                             <NavItem className='nav-item'>
-                                <span><SvgUserIcon /></span>
+                                <span><SvgUser /></span>
                                 <span className='menu-label'>Login</span>
                             </NavItem>
                         </LinkContainer>
                         <LinkContainer to='/register'>
-                            <NavItem>Register</NavItem>
+                            <NavItem className='nav-item'>
+                                <span><SvgPencilNote /></span>
+                                <span className='menu-label'>Register</span>
+                            </NavItem>
                         </LinkContainer>
                     </Nav>
                 </Navbar.Collapse>

@@ -7,8 +7,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import SvgHome from '../svg/svg-home.jsx';
-import SvgUserIcon from '../svg/svg-user.jsx';
-import SvgBooksIcon from '../svg/svg-books.jsx';
+import SvgUser from '../svg/svg-user.jsx';
+import SvgBooks from '../svg/svg-books.jsx';
 import { Link, withRouter } from 'react-router-dom'
 import setLogoutState from '../redux/action/logout.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
@@ -129,12 +129,12 @@ class UserMenu extends Component {
     }
     showDesktopUserDropdown() {
         const user = this.getCurrentUser();
-        const sessionDropdown = this.getSessionDropdown(<SvgBooksIcon />);
+        const sessionDropdown = this.getSessionDropdown(<SvgBooks />);
         return (
             <Navbar.Collapse>
                 <Nav pullRight>
                     <NavDropdown
-                        title={<SvgUserIcon />}
+                        title={<SvgUser />}
                         className='svg-dropdown-desktop'
                         id='basic-nav-dropdown'
                     >
@@ -161,11 +161,11 @@ class UserMenu extends Component {
     showMobileUserDropdown() {
         const user = this.getCurrentUser();
         const title = <span>
-            <span><SvgUserIcon /></span>
+            <span><SvgUser /></span>
             <span className='menu-label'>{user}</span>
         </span>
         const session = <span>
-            <span><SvgBooksIcon /></span>
+            <span><SvgBooks /></span>
             <span className='menu-label'>Session</span>
         </span>
         const sessionDropdown = this.getSessionDropdown(session);

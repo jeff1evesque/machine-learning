@@ -30,11 +30,15 @@
   }
 
   .dropdown-menu {
-    a {
-      background-color: transparent;
+    li {
+      a {
+        color: $header-font-color;
+        background-color: transparent;
+      }
     }
 
     a:hover {
+      color: $header-font-color-hover;
       text-decoration: none;
     }
   }
@@ -53,8 +57,13 @@
     }
 
     .menu-label {
+      color: $header-font-color;
       position: relative;
       top: -.55em;
+    }
+
+    .menu-label:hover {
+      color: $header-font-color-hover;
     }
 
     #basic-nav-dropdown {
@@ -72,7 +81,18 @@
     }
     .nav-item {
       a {
+        color: $header-font-color;
+        margin-bottom: 1.25rem;
         padding: 0;
+        text-decoration: none;
+      }
+    }
+    .nav-item:last-of-type {
+      a {
+        color: $header-font-color;
+        margin-bottom: 0;
+        padding: 0;
+        text-decoration: none;
       }
     }
 
