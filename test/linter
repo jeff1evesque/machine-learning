@@ -52,7 +52,7 @@ if [ "$CMD" = 'install' ]; then
     npm install -g jsonlint@1.6.2
     gem install csvlint -v 0.3.0
     sudo apt-get update
-    sudo apt-get install libxml2-utils=2.9.1+dfsg1-3ubuntu4.10
+    sudo apt-get install libxml2-utils=2.9.1*
     gem install mdl -v 0.3.1
     sudo apt-get install shellcheck=0.3.3-1~ubuntu14.04.1
     npm install -g eslint babel-eslint@7.2.3
