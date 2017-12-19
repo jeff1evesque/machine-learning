@@ -73,7 +73,7 @@ class PageLayout extends Component {
                     bp.isGt('medium')
                         ? this.renderContent('large')
                         : (
-                            bp.isGt('small') && bp.isLte(medium)
+                            bp.isGt('small') && bp.isLte('medium')
                                 ? this.renderContent('medium')
                                 : this.renderContent('small')
                         )
