@@ -86,7 +86,7 @@ else
     xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd || EXIT_FLAG=true
     xmllint --noout interface/static/data/xml/*.xsd || EXIT_FLAG=true
     mdl . --style test/lint/markdown.rb || EXIT_FLAG=true
-    erbfiles=$(find . -type f ! -name '*.erb' -exec grep -l '^#!/bin/bash' {} +) || EXIT_FLAG=true
+    erbfiles=$(find . -type f ! -name '*.erb' -exec grep -l '^#!/bin/bash' {} +)
     shellcheck erbfiles || EXIT_FLAG=true
     find . -name '*.sh' -type f -exec shellcheck {} \ || EXIT_FLAG=true
     eslint . --ext=jsx -c test/lint/eslint.json || EXIT_FLAG=true
