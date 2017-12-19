@@ -45,7 +45,7 @@ class PageLayout extends Component {
             const authStatus = 'authenticated';
         } else {
             const mainMenu = <div className='container'><HeaderMenuState /></div>;
-            const authStatus = anonymous';
+            const authStatus = 'anonymous';
         }
 
         return (
@@ -69,16 +69,15 @@ class PageLayout extends Component {
     render() {
         return (
             <BreakpointRender breakpoints={breakpoints} type='viewport'>
-                {bp => {
-                    switch(bp) {
-                        bp.isGt('medium'):
-                            this.renderContent('large');
-                        bp.isGt('small') && bp.isLte(medium):
-                            this.renderContent('medium');
-                        default:
-                            this.renderContent('small');
-                    }
-                }
+                {bp => (
+                    bp.isGt('medium')
+                        ? this.renderContent('large')
+                        : (
+                            bp.isGt('small') && bp.isLte(medium)
+                                ? this.renderContent('medium')
+                                : this.renderContent('small')
+                        )
+                )}
             </BreakpointRender>
         );
     }
