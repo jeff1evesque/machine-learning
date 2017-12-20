@@ -23,7 +23,7 @@
     "react-router-bootstrap": "^0.24.4",
     "react-rangeslider": "^2.2.0",
     "redux": "^3.7.2",
-    "rearm": "^0.8.0",
+    "rearm": "^0.8.1",
     "whatwg-fetch": "^2.0.2"
   }
 }
