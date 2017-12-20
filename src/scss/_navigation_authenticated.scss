@@ -13,12 +13,19 @@
     .authenticated {
       .dropdown-menu {
         .disabled {
+          border-bottom: 1px solid $gray-1;
+          margin: 0;
+          padding: 1rem;
+          width: 100%;
+
           a {
+            color: $gray-7;
             cursor: default;
             padding: 0;
           }
 
           a:hover {
+            color: $gray-7;
             background-color: transparent;
           }
         }
