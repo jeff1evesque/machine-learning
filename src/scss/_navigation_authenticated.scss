@@ -13,7 +13,9 @@
     .authenticated {
       .navbar-collapse.in {
         overflow-y: hidden;
+      }
 
+      .navbar-nav {
         .dropdown-menu {
           .disabled {
             border-bottom: 1px solid $gray-1;
