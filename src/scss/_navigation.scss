@@ -30,6 +30,12 @@
   }
 
   .dropdown-menu {
+    padding: 0;
+
+    .divider {
+      margin: 0;
+    }
+
     li {
       a {
         background-color: transparent;
