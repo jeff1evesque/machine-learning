@@ -135,7 +135,7 @@ class UserMenu extends Component {
                 <Nav pullRight>
                     <NavDropdown
                         title={<SvgUser />}
-                        className='svg-dropdown-desktop'
+                        className='svg-dropdown-user'
                         id='basic-nav-dropdown'
                     >
                         <MenuItem className='navbar-text' disabled>
