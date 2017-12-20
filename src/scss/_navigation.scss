@@ -41,9 +41,10 @@
 
       li {
         a {
-          padding: 1rem 1.5rem;
           background-color: transparent;
+          border-bottom: 1px solid $gray-8;
           color: $header-font-color;
+          padding: 1rem 1.5rem;
         }
       }
 
@@ -111,7 +112,8 @@
 
     .dropdown {
       .caret {
-        vertical-align: 50%;
+        position: relative;
+        top: -.8rem;
       }
     }
 
@@ -123,7 +125,7 @@
       .caret {
         left: -8px;
         position: relative;
-        top: -.8rem
+        vertical-align: 50%;
       }
     }
   }
