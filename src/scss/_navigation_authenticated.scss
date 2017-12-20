@@ -12,14 +12,24 @@
   .large-viewport {
     .authenticated {
       .dropdown-menu {
+        .disabled {
+          a {
+            cursor: default;
+            padding: 0;
+          }
+          a:hover {
+            background-color: transparent;
+          }
+        }
+
         li {
           a {
-            color: $gray-5;
+            color: $gray-7;
             padding: 1rem 1.5rem;
           }
           a:hover {
-            background-color: $gray-5;
-            color: $gray-5;
+            background-color: $gray-7;
+            color: $white-2;
           }
         }
       }
