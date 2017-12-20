@@ -11,34 +11,38 @@
   .medium-viewport,
   .large-viewport {
     .authenticated {
-      .dropdown-menu {
-        .disabled {
-          border-bottom: 1px solid $gray-1;
-          margin: 0;
-          padding: 1rem;
-          width: 100%;
+      .navbar-collapse {
+        overflow-y: hidden;
 
-          a {
-            color: $gray-7;
-            cursor: default;
-            padding: 0;
+        .dropdown-menu {
+          .disabled {
+            border-bottom: 1px solid $gray-1;
+            margin: 0;
+            padding: 1rem;
+            width: 100%;
+
+            a {
+              color: $gray-7;
+              cursor: default;
+              padding: 0;
+            }
+
+            a:hover {
+              background-color: transparent;
+              color: $gray-7;
+            }
           }
 
-          a:hover {
-            background-color: transparent;
-            color: $gray-7;
-          }
-        }
+          li {
+            a {
+              color: $gray-7;
+              padding: 1rem 1.5rem;
+            }
 
-        li {
-          a {
-            color: $gray-7;
-            padding: 1rem 1.5rem;
-          }
-
-          a:hover {
-            background-color: $gray-7;
-            color: $white-2;
+            a:hover {
+              background-color: $gray-7;
+              color: $white-2;
+            }
           }
         }
       }
