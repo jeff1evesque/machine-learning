@@ -22,6 +22,7 @@
             width: 100%;
 
             a {
+              border-bottom: none;
               color: $gray-7;
               cursor: default;
               padding: 0;
@@ -35,6 +36,7 @@
 
           li {
             a {
+              border-bottom: 1px solid $gray-2;
               color: $gray-7;
               padding: 1rem 1.5rem;
             }
