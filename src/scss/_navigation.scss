@@ -71,7 +71,7 @@
     .menu-label {
       color: $header-font-color;
       position: relative;
-      top: -.80em;
+      top: -.80rem;
     }
 
     .menu-label:hover {
@@ -113,7 +113,7 @@
     .dropdown {
       .caret {
         position: relative;
-        top: -.8rem;
+        top: -.85rem;
       }
     }
 
@@ -121,6 +121,7 @@
       .dropdown-toggle {
         padding-left: $gutter-1 / 2;
       }
+
     }
   }
 
