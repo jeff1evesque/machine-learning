@@ -135,7 +135,7 @@ class UserMenu extends Component {
                 <Nav pullRight>
                     <NavDropdown
                         title={<SvgUser />}
-                        className='svg-dropdown-desktop'
+                        className='svg-dropdown-user'
                         id='basic-nav-dropdown'
                     >
                         <MenuItem className='navbar-text' disabled>
@@ -182,7 +182,6 @@ class UserMenu extends Component {
                         <LinkContainer to='/session/results'>
                             <NavItem>My results</NavItem>
                         </LinkContainer>
-                        <MenuItem divider />
                         <LinkContainer to='/logout' onClick={this.handleClick}>
                             <NavItem>Sign out</NavItem>
                         </LinkContainer>

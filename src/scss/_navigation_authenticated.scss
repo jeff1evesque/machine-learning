@@ -1,0 +1,53 @@
+// _navigation_authenticated.scss: generates css solution for general
+//     navigation, and menu links, for authenticated users.
+//
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
+
+#bootstrap-override {
+  .medium-viewport,
+  .large-viewport {
+    .authenticated {
+      .navbar-collapse.in {
+        overflow-y: hidden;
+
+        .dropdown-menu {
+          .disabled {
+            border-bottom: 1px solid $gray-1;
+            margin: 0;
+            padding: 1rem;
+            width: 100%;
+
+            a {
+              border-bottom: 0;
+              color: $gray-7;
+              cursor: default;
+              padding: 0;
+            }
+
+            a:hover {
+              background-color: transparent;
+              color: $gray-7;
+            }
+          }
+
+          li {
+            a {
+              border-bottom: 1px solid $gray-2;
+              color: $gray-7;
+              padding: 1rem 1.5rem;
+            }
+
+            a:hover {
+              background-color: $gray-7;
+              color: $white-2;
+            }
+          }
+        }
+      }
+    }
+  }
+}

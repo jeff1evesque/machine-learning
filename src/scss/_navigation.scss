@@ -1,5 +1,5 @@
-// _navigation.scss: generates css solution for general navigation (for all
-//                   users), and menu links (for anonymous users).
+// _navigation.scss: generates css solution for general navigation, and menu
+//     links, for all users.
 //
 // Note: this partial, is ignored by the scss compiler, and can be imported
 //       into another scss file.
@@ -29,17 +29,33 @@
     }
   }
 
-  .dropdown-menu {
-    li {
-      a {
-        background-color: transparent;
-        color: $header-font-color;
-      }
-    }
+  .navbar-nav {
+    margin-top: 0;
 
-    a:hover {
-      color: $header-font-color-hover;
-      text-decoration: none;
+    .dropdown-menu {
+      padding: 0;
+
+      .divider {
+        margin: 0;
+      }
+
+      li {
+        a {
+          background-color: transparent;
+          border-bottom: 1px solid $gray-8;
+          color: $header-font-color;
+          padding: 1rem 1.5rem;
+        }
+
+        a:hover {
+          background-color: $gray-8;
+        }
+      }
+
+      a:hover {
+        color: $header-font-color-hover;
+        text-decoration: none;
+      }
     }
   }
 
@@ -59,7 +75,7 @@
     .menu-label {
       color: $header-font-color;
       position: relative;
-      top: -.55em;
+      top: -.80rem;
     }
 
     .menu-label:hover {
@@ -100,20 +116,16 @@
 
     .dropdown {
       .caret {
-        vertical-align: 50%;
+        position: relative;
+        top: -.85rem;
       }
     }
 
-    .svg-dropdown-desktop {
+    .svg-dropdown-user {
       .dropdown-toggle {
         padding-left: $gutter-1 / 2;
       }
 
-      .caret {
-        left: -8px;
-        position: relative;
-        vertical-align: 50%;
-      }
     }
   }
 
