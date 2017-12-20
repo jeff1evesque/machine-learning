@@ -46,6 +46,10 @@
           color: $header-font-color;
           padding: 1rem 1.5rem;
         }
+
+        a:hover {
+          background-color: $gray-8;
+        }
       }
 
       a:hover {
