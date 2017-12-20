@@ -26,9 +26,11 @@ linters:
         exclude:
             - ./../../src/scss/_webform.scss
             - ./../../src/scss/_navigation.scss
+            - ./../../src/scss/_navigation_authenticated.scss
 
     NestingDepth:
         enabled: true
         exclude:
             - ./../../src/scss/_webform.scss
             - ./../../src/scss/_navigation.scss
+            - ./../../src/scss/_navigation_authenticated.scss
