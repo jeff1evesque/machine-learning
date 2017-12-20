@@ -8,7 +8,7 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 #bootstrap-override {
-  .medium-viewport
+  .medium-viewport,
   .large-viewport {
     .authenticated {
       .dropdown-menu {
