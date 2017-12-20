@@ -29,23 +29,28 @@
     }
   }
 
-  .dropdown-menu {
-    padding: 0;
+  .navbar-nav {
+    margin-top: 0;
 
-    .divider {
-      margin: 0;
-    }
+    .dropdown-menu {
+      padding: 0;
 
-    li {
-      a {
-        background-color: transparent;
-        color: $header-font-color;
+      .divider {
+        margin: 0;
       }
-    }
 
-    a:hover {
-      color: $header-font-color-hover;
-      text-decoration: none;
+      li {
+        a {
+          padding: 1rem 1.5rem;
+          background-color: transparent;
+          color: $header-font-color;
+        }
+      }
+
+      a:hover {
+        color: $header-font-color-hover;
+        text-decoration: none;
+      }
     }
   }
 
@@ -65,7 +70,7 @@
     .menu-label {
       color: $header-font-color;
       position: relative;
-      top: -.55em;
+      top: -.80em;
     }
 
     .menu-label:hover {
@@ -118,7 +123,7 @@
       .caret {
         left: -8px;
         position: relative;
-        vertical-align: 50%;
+        top: -.8rem
       }
     }
   }
