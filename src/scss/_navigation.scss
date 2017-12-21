@@ -61,6 +61,7 @@
 
   .navbar {
     border-radius: 0;
+    margin-bottom: 0;
 
     .navbar-brand {
       padding: 5px 0;
@@ -135,6 +136,14 @@
     }
   }
 
+  .lcolumn-container {
+    padding-left: 0;
+
+    .lcolumn {
+      background-color: $gray-8;
+    }
+  }
+
   .side-menu {
     list-style: none;
     padding-left: 0;
@@ -142,18 +151,24 @@
     a,
     a:link,
     a:visited {
-      border-bottom: 1px solid $gray-2;
-      color: $gray-7;
+      border-bottom: 1px solid $gray-7;
+      border-left: .6rem solid $gray-8;
+      color: $white-2;
       display: inline-block;
       padding: 1rem 0 1rem .75rem;
       width: 100%;
     }
 
-    .active,
+    .menu-item.active {
+      background-color: $green-7;
+      border-left: .6rem solid $green-4;
+      color: $white-1;
+    }
+
     a:hover {
-      background-color: $gray-1;
-      border-right: .35rem solid $green-4;
-      color: $gray-8;
+      background-color: $gray-7;
+      border-left: .6rem solid $green-7;
+      color: $white-1;
     }
   }
 }
