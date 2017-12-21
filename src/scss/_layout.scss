@@ -6,20 +6,42 @@
 // Note: '//' comment(s), will not appear in the corresponding compiled css,
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
-#bootstrap-override {
-  .main {
-    .menu-container {
-      float: left;
-      width: $lcol-width;
-    }
+html {
+  height: 100%;
 
-    .analysis-container,
-    .result-container {
-      margin-left: $lcol-width;
-    }
-  }
+  body {
+    height: 100%;
+    overflow: hidden;
 
-  .lcolumn {
-    margin-top: $gutter-1;
+    .react-container {
+      height: 100%;
+
+      .large-viewport,
+      .medium-viewport {
+        height: 100%;
+
+        .anonymous,
+        .authenticated {
+          height: 100%;
+
+          .container-fluid {
+            height: 100%;
+
+            .row {
+              height: 100%;
+
+              .flex {
+                display: flex;
+                height: 100%;
+
+                .lcolumn {
+                  height: 100%;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }
