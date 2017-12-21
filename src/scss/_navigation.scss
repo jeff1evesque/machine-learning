@@ -136,8 +136,12 @@
     }
   }
 
-  .lcolumn {
-    background-color: $gray-8;
+  .lcolumn-container {
+    padding-left: 0;
+
+    .lcolumn {
+      background-color: $gray-8;
+    }
   }
 
   .side-menu {
@@ -148,7 +152,7 @@
     a:link,
     a:visited {
       border-bottom: 1px solid $gray-7;
-      border-left: .35rem solid $gray-8;
+      border-left: .6rem solid $gray-8;
       color: $white-2;
       display: inline-block;
       padding: 1rem 0 1rem .75rem;
@@ -157,13 +161,13 @@
 
     .menu-item.active {
       background-color: $green-7;
-      border-left: .35rem solid $green-4;
+      border-left: .6rem solid $green-4;
       color: $white-1;
     }
 
     a:hover {
       background-color: $gray-7;
-      border-left: .35rem solid $green-7;
+      border-left: .6rem solid $green-7;
       color: $white-1;
     }
   }
