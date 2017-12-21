@@ -234,7 +234,7 @@ class AnalysisLayout extends Component {
         }
 
         return (
-            <div>
+            <div className='flex'>
                 {/*
                     @analysisForm, referenced within 'handleSubmit' callback
                 */}
@@ -281,7 +281,7 @@ class AnalysisLayout extends Component {
     }
     showDesktopContent() {
         return (
-            <div>
+            <div className='flex'>
                 <div className='col-sm-3'>
                     <NavBar />
                 </div>
