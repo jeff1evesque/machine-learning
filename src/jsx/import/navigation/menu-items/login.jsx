@@ -80,10 +80,10 @@ class LoginLink extends Component {
 
                         if (
                             this.props &&
-                        this.props.location &&
-                        this.props.location.pathname &&
-                        this.props.location.pathname != '/' &&
-                        asynchObject.status == '0'
+                            this.props.location &&
+                            this.props.location.pathname &&
+                            this.props.location.pathname != '/' &&
+                            asynchObject.status == '0'
                         ) {
                             this.props.history.push('/');
                         }
