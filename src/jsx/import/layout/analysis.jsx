@@ -284,10 +284,10 @@ class AnalysisLayout extends Component {
     showDesktopContent() {
         return (
             <div className='flex'>
-                <div className='col-sm-3 lcolumn-container'>
+                <div className='col-sm-2 lcolumn-container'>
                     <NavBar />
                 </div>
-                <div className='col-sm-9'>
+                <div className='col-sm-10'>
                     {this.showAnalysisContent()}
                 </div>
             </div>
