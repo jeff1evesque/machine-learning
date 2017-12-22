@@ -36,6 +36,10 @@ body {
           flex: 1;
           margin: 0;
 
+          .main-full-span {
+            flex: 1;
+          }
+
           .row {
             display: flex;
             flex: 1;
