@@ -55,12 +55,12 @@ class PageLayout extends Component {
                         {mainMenu}
                     </div>
                     <div className='container-fluid'>
+                        <Route exact path='/' component={HomePageState} />
                         <Route exact path='/login' component={LoginLayout} />
                         <Route exact path='/logout' component={LoginLayout} />
                         <Route exact path='/register' component={RegisterLayout} />
                         <Route path='/session' component={AnalysisLayoutState} />
                     </div>
-                    <Route exact path='/' component={HomePageState} />
                     {spinner}
                 </div>
             </div>

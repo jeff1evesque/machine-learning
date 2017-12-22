@@ -234,38 +234,40 @@ class AnalysisLayout extends Component {
         }
 
         return (
-            <div className='flex'>
-                {/*
-                    @analysisForm, referenced within 'handleSubmit' callback
-                */}
-                <form
-                    onSubmit={this.handleSubmit}
-                    ref='analysisForm'
-                    className='analysis-container'
-                >
-                    <Route
-                        exact
-                        path='/session/data-new'
-                        component={DataNewState}
-                    />
-                    <Route
-                        exact
-                        path='/session/data-append'
-                        component={DataAppendState}
-                    />
-                    <Route
-                        exact
-                        path='/session/model-generate'
-                        component={ModelGenerateState}
-                    />
-                    <Route
-                        exact
-                        path='/session/model-predict'
-                        component={ModelPredictState}
-                    />
-                    {submitBtn}
-                    {resultBtn}
-                </form>
+            <div>
+                <div className='flex'>
+                    {/*
+                        @analysisForm, referenced within 'handleSubmit' callback
+                    */}
+                    <form
+                        onSubmit={this.handleSubmit}
+                        ref='analysisForm'
+                        className='analysis-container'
+                    >
+                        <Route
+                            exact
+                            path='/session/data-new'
+                            component={DataNewState}
+                        />
+                        <Route
+                            exact
+                            path='/session/data-append'
+                            component={DataAppendState}
+                        />
+                        <Route
+                            exact
+                            path='/session/model-generate'
+                            component={ModelGenerateState}
+                        />
+                        <Route
+                            exact
+                            path='/session/model-predict'
+                            component={ModelPredictState}
+                        />
+                        {submitBtn}
+                        {resultBtn}
+                    </form>
+                </div>
                 <Route
                     exact
                     path='/session/current-result'

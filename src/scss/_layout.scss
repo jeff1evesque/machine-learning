@@ -6,36 +6,54 @@
 // Note: '//' comment(s), will not appear in the corresponding compiled css,
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
-html {
+html,
+body {
+  display: flex;
+  flex-direction: column;
   height: 100%;
 
-  body {
-    height: 100%;
-    overflow: hidden;
+  .react-container {
+    display: flex;
+    flex: 1;
 
-    .react-container {
-      height: 100%;
+    .small-viewport {
+      flex: 1;
+    }
 
-      .large-viewport,
-      .medium-viewport {
-        height: 100%;
+    .large-viewport,
+    .medium-viewport {
+      display: flex;
+      flex: 1;
 
-        .anonymous,
-        .authenticated {
-          height: 100%;
+      .anonymous,
+      .authenticated {
+        display: flex;
+        flex: 1;
+        flex-direction: column;
 
-          .container-fluid {
-            height: 100%;
+        .container-fluid {
+          display: flex;
+          flex: 1;
+          margin: 0;
 
-            .row {
-              height: 100%;
+          .main-full-span {
+            flex: 1;
+          }
 
-              .flex {
+          .row {
+            display: flex;
+            flex: 1;
+
+            .flex {
+              display: flex;
+              flex: 1;
+
+              .lcolumn-container {
                 display: flex;
-                height: 100%;
+                flex: 1;
 
                 .lcolumn {
-                  height: 100%;
+                  flex: 1;
                 }
               }
             }
