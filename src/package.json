@@ -25,5 +25,6 @@
     "redux": "^3.7.2",
     "rearm": "^0.8.1",
     "whatwg-fetch": "^2.0.2"
+    "react-d3-library": "^1.1.8"
   }
 }
