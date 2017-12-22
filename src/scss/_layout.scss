@@ -6,7 +6,8 @@
 // Note: '//' comment(s), will not appear in the corresponding compiled css,
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
-html, body {
+html,
+body {
   display: flex;
   flex-direction: column;
   height: 100%;
