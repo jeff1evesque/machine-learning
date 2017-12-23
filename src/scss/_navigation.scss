@@ -13,9 +13,7 @@
       .main-navigation {
         padding: 0;
       }
-    }
 
-    .menu-container {
       .navbar-header {
         padding: 0 0 0 $gutter-1 / 2;
       }
@@ -36,8 +34,8 @@
     .anonymous {
       .menu-container {
         .main-navigation {
-          padding: 0 $gutter-1 * 1.25 0 $gutter-1 / 2;
           margin-top: .75rem;
+          padding: 0 $gutter-1 * 1.25 0 $gutter-1 / 2;
         }
       }
     }
@@ -152,9 +150,9 @@
 
     .dropdown {
       .caret {
-        position: relative;
         left: -.5rem;
         top: -.85rem;
+        position: relative;
       }
     }
 
