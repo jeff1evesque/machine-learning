@@ -35,51 +35,47 @@ class HeaderMenu extends Component {
         </span>
         return (
             <Navbar inverse collapseOnSelect>
-                <div className='col-sm-2'>
-                    <Navbar.Header>
-                        <Navbar.Brand>
-                            <Link to='/'><SvgHome /></Link>
-                        </Navbar.Brand>
-                        <Navbar.Toggle />
-                    </Navbar.Header>
-                </div>
-                <div className='col-sm-10'>
-                    <Navbar.Collapse>
-                        <Nav pullRight>
-                            <NavDropdown title={session} id='basic-nav-dropdown'>
-                                <LinkContainer to='/session/data-new'>
-                                    <NavItem>Add new data</NavItem>
-                                </LinkContainer>
-                                <LinkContainer to='/session/data-append'>
-                                    <NavItem>Append data</NavItem>
-                                </LinkContainer>
-                                <LinkContainer to='/session/model-generate'>
-                                    <NavItem>Generate model</NavItem>
-                                </LinkContainer>
-                                <LinkContainer to='/session/model-predict'>
-                                    <NavItem>Make prediction</NavItem>
-                                </LinkContainer>
-                                <LinkContainer to='/session/results'>
-                                    <NavItem>Review results</NavItem>
-                                </LinkContainer>
-                            </NavDropdown>
-                        </Nav>
-                        <Nav pullRight>
-                            <LinkContainer to='/login'>
-                                <NavItem className='nav-item'>
-                                    <span><SvgUser /></span>
-                                    <span className='menu-label'>Login</span>
-                                </NavItem>
+                <Navbar.Header>
+                    <Navbar.Brand>
+                        <Link to='/'><SvgHome /></Link>
+                    </Navbar.Brand>
+                    <Navbar.Toggle />
+                </Navbar.Header>
+                <Navbar.Collapse>
+                    <Nav pullRight>
+                        <NavDropdown title={session} id='basic-nav-dropdown'>
+                            <LinkContainer to='/session/data-new'>
+                                <NavItem>Add new data</NavItem>
                             </LinkContainer>
-                            <LinkContainer to='/register'>
-                                <NavItem className='nav-item'>
-                                    <span><SvgPencilNote /></span>
-                                    <span className='menu-label'>Register</span>
-                                </NavItem>
+                            <LinkContainer to='/session/data-append'>
+                                <NavItem>Append data</NavItem>
                             </LinkContainer>
-                        </Nav>
-                    </Navbar.Collapse>
-                </div>
+                            <LinkContainer to='/session/model-generate'>
+                                <NavItem>Generate model</NavItem>
+                            </LinkContainer>
+                            <LinkContainer to='/session/model-predict'>
+                                <NavItem>Make prediction</NavItem>
+                            </LinkContainer>
+                            <LinkContainer to='/session/results'>
+                                <NavItem>Review results</NavItem>
+                            </LinkContainer>
+                        </NavDropdown>
+                    </Nav>
+                    <Nav pullRight>
+                        <LinkContainer to='/login'>
+                            <NavItem className='nav-item'>
+                                <span><SvgUser /></span>
+                                <span className='menu-label'>Login</span>
+                            </NavItem>
+                        </LinkContainer>
+                        <LinkContainer to='/register'>
+                            <NavItem className='nav-item'>
+                                <span><SvgPencilNote /></span>
+                                <span className='menu-label'>Register</span>
+                            </NavItem>
+                        </LinkContainer>
+                    </Nav>
+                </Navbar.Collapse>
             </Navbar>
         )
     }
