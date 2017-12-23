@@ -11,6 +11,20 @@
   .medium-viewport,
   .large-viewport {
     .authenticated {
+      .menu-container {
+        background-color: $gray-9;
+
+        .navbar {
+          background-color: transparent;
+          border-color: transparent;
+          padding: 0 0 0 $gutter-1 / 2;
+
+          .container {
+            width: 100%;
+          }
+        }
+      }
+
       .navbar-collapse.in {
         overflow-y: hidden;
       }

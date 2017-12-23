@@ -44,17 +44,17 @@ class PageLayout extends Component {
             var mainMenu = <UserMenuState />;
             var authStatus = 'authenticated';
         } else {
-            var mainMenu = <div className='container'><HeaderMenuState /></div>;
+            var mainMenu = <div><HeaderMenuState /></div>;
             var authStatus = 'anonymous';
         }
 
         return (
-            <div className={`${bpoint}-viewport`}>
+            <div className={`${bpoint}-viewport container-fluid`}>
                 <div className={authStatus}>
                     <div className='menu-container'>
                         {mainMenu}
                     </div>
-                    <div className='container-fluid'>
+                    <div className='content'>
                         <Route exact path='/' component={HomePageState} />
                         <Route exact path='/login' component={LoginLayout} />
                         <Route exact path='/logout' component={LoginLayout} />

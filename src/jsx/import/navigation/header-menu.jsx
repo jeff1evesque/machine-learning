@@ -93,7 +93,7 @@ class HeaderMenu extends Component {
                 <nav
                     className='main-navigation menu-login'
                 >
-                    <HomeLink />
+                    <div className='col-sm-12'><HomeLink /></div>
                 </nav>
             );
         } else if (
@@ -106,9 +106,8 @@ class HeaderMenu extends Component {
                 <nav
                     className='main-navigation menu-register'
                 >
-                    <HomeLink />
-                    <LoginLinkState />
-                    <RegisterLinkState />
+                    <div className='col-sm-2'><HomeLink /></div>
+                    <div className='col-sm-10'><LoginLinkState /></div>
                 </nav>
             );
         }

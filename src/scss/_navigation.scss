@@ -8,6 +8,39 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 #bootstrap-override {
+  .small-viewport {
+    .menu-container {
+      .main-navigation {
+        padding: 0;
+      }
+
+      .navbar-header {
+        padding: 0 0 0 $gutter-1 / 2;
+      }
+
+      .navbar-right {
+        .dropdown {
+          .caret {
+            left: 0;
+            top: -.8rem;
+          }
+        }
+      }
+    }
+  }
+
+  .medium-viewport,
+  .large-viewport {
+    .anonymous {
+      .menu-container {
+        .main-navigation {
+          margin-top: .75rem;
+          padding: 0 $gutter-1 * 1.25 0 $gutter-1 / 2;
+        }
+      }
+    }
+  }
+
   .main-navigation {
     font-weight: 500;
     padding: .75rem 0;
@@ -117,6 +150,7 @@
 
     .dropdown {
       .caret {
+        left: -.5rem;
         position: relative;
         top: -.85rem;
       }
@@ -126,7 +160,6 @@
       .dropdown-toggle {
         padding-left: $gutter-1 / 2;
       }
-
     }
   }
 
@@ -137,8 +170,6 @@
   }
 
   .lcolumn-container {
-    padding-left: 0;
-
     .lcolumn {
       background-color: $gray-8;
     }
