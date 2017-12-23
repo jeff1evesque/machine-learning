@@ -12,7 +12,7 @@
     .anonymous {
       .menu-container {
         .main-navigation {
-          padding: 0 $gutter-1 * 1.25 0 0;
+          padding: 0;
         }
       }
     }
@@ -24,18 +24,10 @@
       .menu-container {
         .main-navigation {
           padding: 0 $gutter-1 * 1.25 0 $gutter-1 / 2;
+          margin-top: .75rem;
         }
       }
     }
-
-    .navbar {
-      .dropdown {
-        .caret {
-          top: -.85rem;
-        }
-      }
-    }
-  }
 
   .main-navigation {
     font-weight: 500;
@@ -148,6 +140,7 @@
       .caret {
         position: relative;
         left: -.5rem;
+        top: -.85rem;
       }
     }
 
