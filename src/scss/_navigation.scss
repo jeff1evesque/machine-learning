@@ -9,24 +9,22 @@
 
 #bootstrap-override {
   .small-viewport {
-    .anonymous {
-      .menu-container {
-        .main-navigation {
-          padding: 0 0 0 $gutter-1 / 2;
+    .menu-container {
+      .main-navigation {
+        padding: 0;
+      }
+    }
 
-          .navbar {
-            padding: 0 1rem;
-          }
-        }
+    .menu-container {
+      .navbar-header {
+        padding: 0 0 0 $gutter-1 / 2;
+      }
 
-        .navbar {
-          .navbar-right {
-            .dropdown {
-              .caret {
-                left: 0;
-                top: -.8rem;
-              }
-            }
+      .navbar-right {
+        .dropdown {
+          .caret {
+            left: 0;
+            top: -.8rem;
           }
         }
       }
@@ -43,6 +41,7 @@
         }
       }
     }
+  }
 
   .main-navigation {
     font-weight: 500;
@@ -163,7 +162,6 @@
       .dropdown-toggle {
         padding-left: $gutter-1 / 2;
       }
-
     }
   }
 
