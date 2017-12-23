@@ -72,7 +72,7 @@ function collision() {
             if (quad.point && (quad.point !== node)) {
                 const x = node.x - quad.point.x;
                 const y = node.y - quad.point.y,
-                const l = Math.sqrt(x * x + y * y),
+                let l = Math.sqrt(x * x + y * y),
                 const r = node.radius + quad.point.radius;
 
                 if (l < r) {
