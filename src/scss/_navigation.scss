@@ -8,10 +8,31 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 #bootstrap-override {
-  .anonymous {
-    .menu-container {
-      .navbar {
-        padding: 0 $gutter-1 * 1.25 0 $gutter-1 / 2;
+  .small-viewport {
+    .anonymous {
+      .menu-container {
+        .main-navigation {
+          padding: 0 $gutter-1 * 1.25 0 0;
+        }
+      }
+    }
+  }
+
+  .medium-viewport,
+  .large-viewport {
+    .anonymous {
+      .menu-container {
+        .main-navigation {
+          padding: 0 $gutter-1 * 1.25 0 $gutter-1 / 2;
+        }
+      }
+    }
+
+    .navbar {
+      .dropdown {
+        .caret {
+          top: -.85rem;
+        }
       }
     }
   }
@@ -127,7 +148,6 @@
       .caret {
         position: relative;
         left: -.5rem;
-        top: -.85rem;
       }
     }
 
