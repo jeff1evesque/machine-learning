@@ -44,7 +44,7 @@ class PageLayout extends Component {
             var mainMenu = <UserMenuState />;
             var authStatus = 'authenticated';
         } else {
-            var mainMenu = <div className='row'><HeaderMenuState /></div>;
+            var mainMenu = <div><HeaderMenuState /></div>;
             var authStatus = 'anonymous';
         }
 
