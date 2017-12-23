@@ -12,7 +12,22 @@
     .anonymous {
       .menu-container {
         .main-navigation {
-          padding: 0;
+          padding: 0 0 0 $gutter-1 / 2;
+
+          .navbar {
+            padding: 0 1rem;
+          }
+        }
+
+        .navbar {
+          .navbar-right {
+            .dropdown {
+              .caret {
+                left: 0;
+                top: -.8rem;
+              }
+            }
+          }
         }
       }
     }
