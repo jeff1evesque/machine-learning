@@ -8,6 +8,14 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 #bootstrap-override {
+  .authenticated {
+    .menu-container {
+      .navbar {
+        padding: 0 0 0 $gutter-1 / 2;
+      }
+    }
+  }
+
   .medium-viewport,
   .large-viewport {
     .authenticated {
