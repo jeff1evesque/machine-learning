@@ -54,7 +54,7 @@ class PageLayout extends Component {
                     <div className='menu-container'>
                         {mainMenu}
                     </div>
-                    <div class='content'>
+                    <div className='content'>
                         <Route exact path='/' component={HomePageState} />
                         <Route exact path='/login' component={LoginLayout} />
                         <Route exact path='/logout' component={LoginLayout} />
