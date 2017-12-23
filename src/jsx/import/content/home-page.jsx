@@ -14,6 +14,8 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setLayout } from '../redux/action/page.jsx';
+import Animate from '../animation/animate.jsx';
+import collision from '../animation/node/collision.js';
 
 class HomePage extends Component {
     componentWillMount() {
@@ -24,6 +26,7 @@ class HomePage extends Component {
         return (
             <div className='main-full-span home'>
                 <h1>Welcome!</h1>
+                <Animate {collision} />
                 <NavLink
                     to='session'
                     activeClassName='active'
