@@ -18,4 +18,4 @@ import rd3 from 'react-d3-library';
 const RD3Component = rd3.Component;
 
 // indicate which class can be exported, and instantiated via 'require'
-export const Animate = ({ node }) => <RD3Component data={node} />;
+export const animate = ({ node }) => <RD3Component data={node} />;

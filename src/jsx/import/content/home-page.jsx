@@ -14,7 +14,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setLayout } from '../redux/action/page.jsx';
-import Animate from '../animation/animate.jsx';
+import animate from '../animation/animate.jsx';
 import collision from '../animation/node/collision.js';
 
 class HomePage extends Component {
@@ -23,10 +23,11 @@ class HomePage extends Component {
         this.props.dispatchLayout(action);
     }
     render() {
+        const Collider = animate(collision);
         return (
             <div className='main-full-span home'>
                 <h1>Welcome!</h1>
-                <Animate {collision} />
+                <Collider />
                 <NavLink
                     to='session'
                     activeClassName='active'
