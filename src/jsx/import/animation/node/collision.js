@@ -9,7 +9,7 @@
  */
 
 function collision() {
-    const node = document.createElement('div');
+    var node = document.createElement('div');
     const w = 1280;
     const h = 800;
 
@@ -90,6 +90,8 @@ function collision() {
                 || y2 < ny1;
         };
     }
+
+    return node;
 }
 
 // indicate which class can be exported, and instantiated via 'require'
