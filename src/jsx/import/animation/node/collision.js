@@ -41,8 +41,8 @@ function collision() {
         .style('fill', function(d, i) { return color(i % 3); });
 
     force.on('tick', function(e) {
+        let i = 0;
         const q = d3.geom.quadtree(nodes);
-        const i = 0;
         const n = nodes.length;
 
         while (++i < n) {
