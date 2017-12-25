@@ -26,7 +26,7 @@ class Animate extends Component {
         return {radius: Math.random() * 12 + 4};
     });
 
-    let color = d3.scale.category10();
+    let color = dd3.scaleOrdinal(d3.schemeCategory10);
 
     let force = d3.layout.force()
         .gravity(0.05)
