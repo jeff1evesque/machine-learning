@@ -31,8 +31,8 @@ class Animate extends Component {
 
         let force = d3.forceSimulation()
             .nodes(nodes)
-            .force('x', d3.forceX(.05)).x(w)
-            .force('y', d3.forceY(.05)).y(h)
+            .force('x', d3.forceX().strength(.05).x(w))
+            .force('y', d3.forceY().strength(.05).y(h))
             .force('charge', function(d, i) { return i ? 0 : -2000; });
 
         let root = nodes[0];
