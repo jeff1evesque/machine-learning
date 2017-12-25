@@ -14,6 +14,7 @@
  */
 
 import React, { Component } from 'react';
+import * as d3 from 'd3';
 import ReactFauxDOM from 'react-faux-dom';
 
 class Animate extends Component {
@@ -26,7 +27,7 @@ class Animate extends Component {
             return {radius: Math.random() * 12 + 4};
         });
 
-        let color = dd3.scaleOrdinal(d3.schemeCategory10);
+        let color = d3.scaleOrdinal(d3.schemeCategory10);
 
         let force = d3.forceSimulation()
             .gravity(0.05)
