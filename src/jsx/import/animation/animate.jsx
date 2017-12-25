@@ -53,7 +53,7 @@ class Animate extends Component {
 
     force.on('tick', function(e) {
         let i = 0;
-        const q = d3.geom.quadtree(nodes);
+        const q = d3.quadtree(nodes);
         const n = nodes.length;
 
         while (++i < n) {
