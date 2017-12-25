@@ -28,7 +28,7 @@ class Animate extends Component {
 
     let color = dd3.scaleOrdinal(d3.schemeCategory10);
 
-    let force = d3.layout.force()
+    let force = d3.forceSimulation()
         .gravity(0.05)
         .charge(function(d, i) { return i ? 0 : -2000; })
         .nodes(nodes)
