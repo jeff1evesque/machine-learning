@@ -39,18 +39,20 @@ class Animate extends Component {
 
         root.radius = 0;
         root.fixed = true;
-        force.start();
 
         let svg = d3.select(node).append('svg:svg')
             .attr('width', w)
             .attr('height', h);
 
-        svg.selectAll('circle')
+        svg.append('g')
+            .attr('class', 'nodes')
+            .selectAll('circle')
             .data(nodes.slice(1))
             .enter()
             .append('svg:circle')
             .attr('r', function(d) { return d.radius - 2; })
-            .style('fill', function(d, i) { return color(i % 3); });
+            .style('fill', function(d, i) { return color(i % 3); })
+            .on('mouseover', () => mouseover)
 
         force.on('tick', function(e) {
             let i = 0;
@@ -66,12 +68,11 @@ class Animate extends Component {
                 .attr('cy', function(d) { return d.y; });
         });
 
-        svg.on('mousemove', function() {
-            const p1 = d3.svg.mouse(this);
+        function mouseover() {
+            const p1 = d3.mouse(this);
             root.px = p1[0];
             root.py = p1[1];
-            force.resume();
-        });
+        }
 
         function collide(node) {
             const r = node.radius + 16;
