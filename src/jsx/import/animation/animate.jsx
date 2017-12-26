@@ -54,7 +54,7 @@ class Animate extends Component {
             .style('fill', function(d, i) { return color(i % 3); })
             .on('mouseover', () => mouseover)
 
-        force.on('tick', function(e) {
+        let ticked = function(e) {
             let i = 0;
             const q = d3.quadtree(nodes);
             const n = nodes.length;
@@ -66,7 +66,11 @@ class Animate extends Component {
             svg.selectAll('circle')
                 .attr('cx', function(d) { return d.x; })
                 .attr('cy', function(d) { return d.y; });
-        });
+        }
+
+        force
+            .nodes(nodes)
+            .on('tick', ticked);
 
         function mouseover() {
             const p1 = d3.mouse(this);
