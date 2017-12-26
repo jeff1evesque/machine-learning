@@ -18,95 +18,57 @@ import * as d3 from 'd3';
 import ReactFauxDOM from 'react-faux-dom';
 
 class Animate extends Component {
-    render() {
-        const w = 1280;
-        const h = 800;
-        const node = new ReactFauxDOM.Element('div');
+    const w = window.innerWidth
+    const h = window.innerHeight
+    const node = new ReactFauxDOM.Element('div');
 
-        let nodes = d3.range(200).map(function() {
-            return {radius: Math.random() * 12 + 4};
-        });
+    let nodes = d3.range(200).map(function() {
+        return {r: Math.random() * 12 + 4};
+    });
 
-        let color = d3.scaleOrdinal(d3.schemeCategory10);
+    let root = nodes[0];
+    let color = d3.scaleOrdinal().range(d3.schemeCategory20);
 
-        let force = d3.forceSimulation()
-            .nodes(nodes)
-            .force('x', d3.forceX().strength(.05).x(w))
-            .force('y', d3.forceY().strength(.05).y(h))
-            .force('charge', function(d, i) { return i ? 0 : -2000; });
+    root.radius = 0;
+    root.fixed = true;
 
-        let root = nodes[0];
+    const forceX = d3.forceX(w / 2).strength(0.015)
+    const forceY = d3.forceY(h / 2).strength(0.015)
 
-        root.radius = 0;
-        root.fixed = true;
-
-        let svg = d3.select(node).append('svg:svg')
-            .attr('width', w)
-            .attr('height', h);
-
-        svg.append('g')
-            .attr('class', 'nodes')
-            .selectAll('circle')
-            .data(nodes.slice(1))
-            .enter()
-            .append('svg:circle')
-            .attr('r', function(d) { return d.radius - 2; })
-            .style('fill', function(d, i) { return color(i % 3); })
-            .on('mouseover', () => mouseover)
-
-        let ticked = function(e) {
-            let i = 0;
-            const q = d3.quadtree(nodes);
-            const n = nodes.length;
-
-            while (++i < n) {
-                q.visit(collide(nodes[i]));
+    let force = d3.forceSimulation()
+        .velocityDecay(0.2)
+        .force('x', forceX)
+        .force('y', forceY)
+        .force('collide', d3.forceCollide().radius(function(d){
+            if (d === root) {
+                return Math.random() * 50 + 100;
             }
+            return d.r + 0.5;
+        }).iterations(5))
+        .nodes(nodes).on('tick', ticked);
 
+        let svg = d3.select('body').append('svg')
+            .attr('w', w)
+            .attr('h', h);
+
+        svg.selectAll('circle')
+            .data(nodes.slice(1))
+            .enter().append('circle')
+            .attr('r', function(d) { return d.r; })
+            .style('fill', function(d, i) { return color(i % 3); });
+
+        function ticked(e) {
             svg.selectAll('circle')
                 .attr('cx', function(d) { return d.x; })
                 .attr('cy', function(d) { return d.y; });
-        }
+        };
 
-        force
-            .nodes(nodes)
-            .on('tick', ticked);
-
-        function mouseover() {
+        svg.on('mousemove', function() {
             const p1 = d3.mouse(this);
-            root.px = p1[0];
-            root.py = p1[1];
-        }
-
-        function collide(node) {
-            const r = node.radius + 16;
-            const nx1 = node.x - r;
-            const nx2 = node.x + r;
-            const ny1 = node.y - r;
-            const ny2 = node.y + r;
-
-            return function(quad, x1, y1, x2, y2) {
-                if (quad.point && (quad.point !== node)) {
-                    let x = node.x - quad.point.x;
-                    let y = node.y - quad.point.y;
-                    let l = Math.sqrt(x * x + y * y);
-                    const r = node.radius + quad.point.radius;
-
-                    if (l < r) {
-                        l = (l - r) / l * .5;
-                        node.x -= x *= l;
-                        node.y -= y *= l;
-                        quad.point.x += x;
-                        quad.point.y += y;
-                    }
-                }
-
-                return x1 > nx2
-                    || x2 < nx1
-                    || y1 > ny2
-                    || y2 < ny1;
-            };
-        }
+            root.fx = p1[0];
+            root.fy = p1[1];
+            force.alphaTarget(0.3).restart();//reheat the simulation
+        });
 
         return node.toReact();
     }
