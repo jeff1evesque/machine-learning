@@ -70,9 +70,9 @@ class Animate extends Component {
                 root.fy = p1[1];
                 force.alphaTarget(0.3).restart();//reheat the simulation
             });
-
-            return node.toReact();
         }
+
+        return node.toReact();
     }
 }
 
