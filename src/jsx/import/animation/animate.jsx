@@ -48,29 +48,28 @@ class Animate extends Component {
             }).iterations(5))
             .nodes(nodes).on('tick', ticked);
 
-            let svg = d3.select('body').append('svg')
-                .attr('w', w)
-                .attr('h', h);
+        let svg = d3.select('body').append('svg')
+            .attr('w', w)
+            .attr('h', h);
 
+        svg.selectAll('circle')
+            .data(nodes.slice(1))
+            .enter().append('circle')
+            .attr('r', function(d) { return d.r; })
+            .style('fill', function(d, i) { return color(i % 3); });
+
+        function ticked(e) {
             svg.selectAll('circle')
-                .data(nodes.slice(1))
-                .enter().append('circle')
-                .attr('r', function(d) { return d.r; })
-                .style('fill', function(d, i) { return color(i % 3); });
+                .attr('cx', function(d) { return d.x; })
+                .attr('cy', function(d) { return d.y; });
+        };
 
-            function ticked(e) {
-                svg.selectAll('circle')
-                    .attr('cx', function(d) { return d.x; })
-                    .attr('cy', function(d) { return d.y; });
-            };
-
-            svg.on('mousemove', function() {
-                const p1 = d3.mouse(this);
-                root.fx = p1[0];
-                root.fy = p1[1];
-                force.alphaTarget(0.3).restart();//reheat the simulation
-            });
-        }
+        svg.on('mousemove', function() {
+            const p1 = d3.mouse(this);
+            root.fx = p1[0];
+            root.fy = p1[1];
+            force.alphaTarget(0.3).restart();//reheat the simulation
+        });
 
         return node.toReact();
     }
