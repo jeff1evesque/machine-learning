@@ -18,8 +18,8 @@ import * as d3 from 'd3';
 import ReactFauxDOM from 'react-faux-dom';
 
 class Animate extends Component {
-    const w = window.innerWidth
-    const h = window.innerHeight
+    const w = window.innerWidth;
+    const h = window.innerHeight;
     const node = new ReactFauxDOM.Element('div');
 
     let nodes = d3.range(200).map(function() {
@@ -32,8 +32,8 @@ class Animate extends Component {
     root.radius = 0;
     root.fixed = true;
 
-    const forceX = d3.forceX(w / 2).strength(0.015)
-    const forceY = d3.forceY(h / 2).strength(0.015)
+    const forceX = d3.forceX(w / 2).strength(0.015);
+    const forceY = d3.forceY(h / 2).strength(0.015);
 
     let force = d3.forceSimulation()
         .velocityDecay(0.2)
