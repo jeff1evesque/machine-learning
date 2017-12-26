@@ -44,7 +44,7 @@ class Animate extends Component {
                 if (d === root) {
                     return Math.random() * 50 + 100;
                 }
-                return d.r + 0.5;
+                return d.r + 2;
             }).iterations(5))
             .nodes(nodes).on('tick', ticked);
 
@@ -73,7 +73,7 @@ class Animate extends Component {
 
             return node.toReact();
         }
-    };
+    }
 }
 
 // indicate which class can be exported, and instantiated via 'require'
