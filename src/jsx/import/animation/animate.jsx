@@ -49,8 +49,8 @@ class Animate extends Component {
             .nodes(nodes).on('tick', ticked);
 
         let svg = d3.select(node).append('svg')
-            .attr('w', w)
-            .attr('h', h);
+            .attr('width', w)
+            .attr('height', h);
 
         svg.selectAll('circle')
             .data(nodes.slice(1))
