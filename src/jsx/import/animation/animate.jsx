@@ -13,18 +13,18 @@
  *
  */
 
-import React, { Component } from 'react';
-import * as d3 from 'd3';
-import ReactFauxDOM from 'react-faux-dom';
+import React from 'react'
+import * as d3 from 'd3'
+import {withFauxDOM} from 'react-faux-dom'
 
-class Animate extends Component {
-    render() {
+class MyReactComponent extends React.Component {
+    componentDidMount() {
         const w = window.innerWidth;
         const h = window.innerHeight;
-        const node = new ReactFauxDOM.Element('div');
+        const faux = this.props.connectFauxDOM('svg', 'collision');
 
-        let nodes = d3.range(200).map(function() {
-            return {r: Math.random() * 12 + 4};
+        let nodes = d3.range(200).map(function () {
+          return { r: Math.random() * 12 + 4 };
         });
 
         let root = nodes[0];
@@ -36,11 +36,32 @@ class Animate extends Component {
         const forceX = d3.forceX(w / 2).strength(0.015);
         const forceY = d3.forceY(h / 2).strength(0.015);
 
+        var svg = d3.select(faux)
+          .attr('width', w)
+          .attr('height', h)
+          .append('g');
+
+        svg.selectAll('circle')
+            .data(nodes.slice(1))
+            .enter()
+            .append('circle')
+            .attr('r', function (d) { return d.r; })
+            .style('fill', function (d, i) { return color(i % 3); });
+
+        root.radius = 0;
+        root.fixed = true;
+
+        function ticked(e) {
+            svg.selectAll('circle')
+            .attr('cx', function (d) { return d.x; })
+            .attr('cy', function (d) { return d.y; });
+        };
+
         let force = d3.forceSimulation()
             .velocityDecay(0.2)
             .force('x', forceX)
             .force('y', forceY)
-            .force('collide', d3.forceCollide().radius(function(d){
+            .force('collide', d3.forceCollide().radius(function (d) {
                 if (d === root) {
                     return Math.random() * 50 + 100;
                 }
@@ -48,32 +69,24 @@ class Animate extends Component {
             }).iterations(5))
             .nodes(nodes).on('tick', ticked);
 
-        let svg = d3.select(node).append('svg')
-            .attr('width', w)
-            .attr('height', h);
-
-        svg.selectAll('circle')
-            .data(nodes.slice(1))
-            .enter().append('circle')
-            .attr('r', function(d) { return d.r; })
-            .style('fill', function(d, i) { return color(i % 3); });
-
-        function ticked(e) {
-            svg.selectAll('circle')
-                .attr('cx', function(d) { return d.x; })
-                .attr('cy', function(d) { return d.y; });
-        };
-
-        svg.on('mousemove', function() {
-            const p1 = d3.mouse(this);
-            root.fx = p1[0];
-            root.fy = p1[1];
+        svg.on('mousemove', function () {
+            root.fx = d3.event.pageX;
+            root.fy = d3.event.pageY;
             force.alphaTarget(0.3).restart();//reheat the simulation
+            this.props.animateFauxDOM(3500);
         });
+        this.props.animateFauxDOM(3500);
+    }
 
-        return node.toReact();
+    render() {
+        return (
+            <div>{this.props.collision}</div>
+        )
     }
 }
 
-// indicate which class can be exported, and instantiated via 'require'
-export default Animate;
+MyReactComponent.defaultProps = {
+  collision: 'loading'
+}
+
+export default withFauxDOM(MyReactComponent)
