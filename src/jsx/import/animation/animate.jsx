@@ -3,8 +3,8 @@
  *
  *   - https://github.com/react-d3-library/react-d3-library
  *
- * @Animate, must be capitalized in order for reactjs to render it as a
- *     component. Otherwise, the variable is rendered as a dom node.
+ * @AnimateCollisions, must be capitalized in order for reactjs to render it as
+ *     a component. Otherwise, the variable is rendered as a dom node.
  *
  * Note: this script implements jsx (reactjs) syntax.
  *
@@ -13,80 +13,115 @@
  *
  */
 
-import React from 'react'
-import * as d3 from 'd3'
-import {withFauxDOM} from 'react-faux-dom'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+import * as d3 from 'd3';
 
-class MyReactComponent extends React.Component {
+class AnimateCollisions extends React.Component {
+    constructor() {
+        super();
+        const nodes = this.generateNodes(200);
+        this.state = {
+            colors: d3.scaleOrdinal().range(d3.schemeCategory10),
+            nodes: nodes,
+            root: nodes[0],
+            width: window.innerWidth,
+            height: window.innerHeight,
+            alpha_target: .4,
+            iterations: 4,
+            velocity_decay: .1,
+            forceX: d3.forceX(window.innerWidth / 2).strength(0.015),
+            forceY: d3.forceY(window.innerHeight / 2).strength(0.015),
+        }
+        this.getColor = this.getColor.bind(this);
+        this.generateNodes = this.generateNodes.bind(this);
+        this.storeForce = this.storeForce.bind(this);
+        this.renderD3 = this.renderD3.bind(this);
+    }
+
     componentDidMount() {
-        const w = window.innerWidth;
-        const h = window.innerHeight;
-        const faux = this.props.connectFauxDOM('svg', 'collision');
+        this.renderD3();
+    }
 
-        let nodes = d3.range(200).map(function () {
-          return { r: Math.random() * 12 + 4 };
+    generateNodes(range_limit) {
+        return [...Array(range_limit).keys()].map(function() {
+            return { r: Math.random() * 12 + 4 };
         });
+    }
 
-        let root = nodes[0];
-        let color = d3.scaleOrdinal().range(d3.schemeCategory10);
+    storeForce(force) {
+        this.setState({force: force});
+    }
+
+    getColor(i) {
+        return this.state.colors(i % 3);
+    }
+
+    renderD3() {
+        const nodes = this.state.nodes;
+        const forceX = this.state.forceX;
+        const forceY = this.state.forceY;
+        const root = nodes[0];
+        const svg = d3.select(ReactDOM.findDOMNode(this.refs.animation));
+        const alpha = this.state.alpha_target;
+        const iterations = this.state.iterations;
 
         root.radius = 0;
         root.fixed = true;
-
-        const forceX = d3.forceX(w / 2).strength(0.015);
-        const forceY = d3.forceY(h / 2).strength(0.015);
-
-        var svg = d3.select(faux)
-          .attr('width', w)
-          .attr('height', h)
-          .append('g');
 
         svg.selectAll('circle')
             .data(nodes.slice(1))
-            .enter()
-            .append('circle')
-            .attr('r', function (d) { return d.r; })
-            .style('fill', function (d, i) { return color(i % 3); });
-
-        root.radius = 0;
-        root.fixed = true;
+            .enter();
 
         function ticked(e) {
             svg.selectAll('circle')
-            .attr('cx', function (d) { return d.x; })
-            .attr('cy', function (d) { return d.y; });
+                .attr('cx', function(d) { return d.x; })
+                .attr('cy', function(d) { return d.y; });
         };
 
+        svg.on('mousemove', function() {
+            const p1 = d3.mouse(this);
+            root.fx = p1[0];
+            root.fy = p1[1];
+            force.alphaTarget(alpha).restart();//reheat the simulation
+        });
+
         let force = d3.forceSimulation()
-            .velocityDecay(0.2)
+            .velocityDecay(this.state.velocity_decay)
             .force('x', forceX)
             .force('y', forceY)
-            .force('collide', d3.forceCollide().radius(function (d) {
+            .force('collide', d3.forceCollide().radius(function(d) {
                 if (d === root) {
                     return Math.random() * 50 + 100;
                 }
                 return d.r + 2;
-            }).iterations(5))
+            }).iterations(iterations))
             .nodes(nodes).on('tick', ticked);
 
-        svg.on('mousemove', function () {
-            root.fx = d3.event.pageX;
-            root.fy = d3.event.pageY;
-            force.alphaTarget(0.3).restart();//reheat the simulation
-            this.props.animateFauxDOM(3500);
-        });
-        this.props.animateFauxDOM(3500);
+        this.storeForce(force);
     }
 
     render() {
+        // use React to draw all the nodes, d3 calculates the x and y
+        const nodes = this.state.nodes.slice(1).map((node, index) => {
+            const color = this.getColor(index);
+            return (
+                <circle
+                    fill={color}
+                    cx={node.x}
+                    cy={node.y}
+                    r={node.r}
+                    key={`circle-${index}`}
+                />
+            );
+        });
+
         return (
-            <div>{this.props.collision}</div>
+            <svg width={this.state.width} height={this.state.height}>
+                <g ref='animation'>{nodes}</g>
+            </svg>
         )
     }
 }
 
-MyReactComponent.defaultProps = {
-  collision: 'loading'
-}
-
-export default withFauxDOM(MyReactComponent)
+export default AnimateCollisions;
