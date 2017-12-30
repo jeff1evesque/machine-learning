@@ -21,17 +21,18 @@ class AnimateCollisions extends React.Component {
     constructor() {
         super();
         const nodes = this.generateNodes(200);
+        const force_strength = 0.01;
         this.state = {
-            colors: d3.scaleOrdinal().range(d3.schemeCategory10),
             nodes: nodes,
+            forceX: d3.forceX(window.innerWidth / 2).strength(force_strength),
+            forceY: d3.forceY(window.innerHeight / 2).strength(force_strength),
+            alpha_target: .4,
+            iterations: 4,
+            colors: d3.scaleOrdinal().range(d3.schemeCategory10),
             root: nodes[0],
             width: window.innerWidth,
             height: window.innerHeight,
-            alpha_target: .4,
-            iterations: 4,
             velocity_decay: .1,
-            forceX: d3.forceX(window.innerWidth / 2).strength(0.015),
-            forceY: d3.forceY(window.innerHeight / 2).strength(0.015),
         }
         this.getColor = this.getColor.bind(this);
         this.generateNodes = this.generateNodes.bind(this);
@@ -58,13 +59,15 @@ class AnimateCollisions extends React.Component {
     }
 
     renderD3() {
-        const nodes = this.state.nodes;
-        const forceX = this.state.forceX;
-        const forceY = this.state.forceY;
-        const root = nodes[0];
         const svg = d3.select(ReactDOM.findDOMNode(this.refs.animation));
-        const alpha = this.state.alpha_target;
-        const iterations = this.state.iterations;
+        const nodes = this.props.nodes ? this.props.nodes : this.state.nodes;
+        const forceX = this.props.forceX ? this.props.forceX : this.state.forceX;
+        const forceY = this.props.forceY ? this.props.forceY : this.state.forceY;
+        const alpha = this.props.alpha ? this.props.alpha : this.state.alpha_target;
+        const iterations = this.props.iteration
+            ? this.props.iteration
+            : this.state.iterations;
+        const root = nodes[0];
 
         root.radius = 0;
         root.fixed = true;
