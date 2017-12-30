@@ -19,7 +19,7 @@ import * as d3 from 'd3';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints_exact } from '../general/breakpoints.js';
 
-class AnimateCollisions extends React.Component {
+class AnimateCollisions extends Component
     constructor() {
         super();
         const nodes = this.generateNodes(200);
