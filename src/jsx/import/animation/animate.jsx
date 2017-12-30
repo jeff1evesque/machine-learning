@@ -16,6 +16,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
+import { BreakpointRender } from 'rearm/lib/Breakpoint';
 
 class AnimateCollisions extends React.Component {
     constructor() {
@@ -30,7 +31,6 @@ class AnimateCollisions extends React.Component {
             iterations: 4,
             colors: d3.scaleOrdinal().range(d3.schemeCategory10),
             root: nodes[0],
-            width: window.innerWidth,
             height: window.innerHeight,
             velocity_decay: .1,
         }
@@ -122,9 +122,13 @@ class AnimateCollisions extends React.Component {
         });
 
         return (
-            <svg width={this.state.width} height={this.state.height}>
-                <g ref='animation'>{nodes}</g>
-            </svg>
+            <BreakpointRender type='viewport'>
+                {bp => (
+                    <svg width={bp} height={this.state.height}>
+                        <g ref='animation'>{nodes}</g>
+                    </svg>
+                )}
+            </BreakpointRender>
         )
     }
 }
