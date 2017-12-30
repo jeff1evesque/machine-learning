@@ -15,7 +15,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
-import breakpoints from '../general/breakpoints.js';
+import { breakpoints } from '../general/breakpoints.js';
 
 class UserMenu extends Component {
     constructor(props) {

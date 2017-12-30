@@ -17,6 +17,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
+import { breakpoints_exact } from '../general/breakpoints.js';
 
 class AnimateCollisions extends React.Component {
     constructor() {
@@ -123,9 +124,9 @@ class AnimateCollisions extends React.Component {
         });
 
         return (
-            <BreakpointRender breakpoints={breakpoints} type='viewport'>
+            <BreakpointRender breakpoints={breakpoints_exact} type='viewport'>
                 {bp => (
-                    <svg width={bp} height={this.state.height}>
+                    <svg width={bp.width()} height={this.state.height}>
                         <g>{nodes}</g>
                     </svg>
                 )}

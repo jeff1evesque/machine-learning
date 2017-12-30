@@ -20,7 +20,7 @@ import UserMenuState from '../redux/container/user-menu.jsx';
 import HeaderMenuState from '../redux/container/header-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
-import breakpoints from '../general/breakpoints.js';
+import { breakpoints } from '../general/breakpoints.js';
 
 class PageLayout extends Component {
     // callback: used to return spinner
