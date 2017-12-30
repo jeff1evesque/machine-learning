@@ -37,7 +37,6 @@ class AnimateCollisions extends React.Component {
         }
         this.getColor = this.getColor.bind(this);
         this.generateNodes = this.generateNodes.bind(this);
-        this.storeForce = this.storeForce.bind(this);
         this.renderD3 = this.renderD3.bind(this);
     }
 
@@ -49,10 +48,6 @@ class AnimateCollisions extends React.Component {
         return [...Array(range_limit).keys()].map(function() {
             return { r: Math.random() * 12 + 4 };
         });
-    }
-
-    storeForce(force) {
-        this.setState({force: force});
     }
 
     getColor(i) {
@@ -93,7 +88,7 @@ class AnimateCollisions extends React.Component {
             force.alphaTarget(alpha).restart();
         });
 
-        let force = d3.forceSimulation()
+        const force = d3.forceSimulation()
             .velocityDecay(this.state.velocity_decay)
             .force('x', forceX)
             .force('y', forceY)
@@ -104,8 +99,6 @@ class AnimateCollisions extends React.Component {
                 return d.r + 2;
             }).iterations(iterations))
             .nodes(nodes).on('tick', ticked);
-
-        this.storeForce(force);
     }
 
     render() {
