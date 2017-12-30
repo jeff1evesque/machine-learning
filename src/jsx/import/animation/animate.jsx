@@ -66,8 +66,8 @@ class AnimateCollisions extends React.Component {
         const forceX = this.props.forceX ? this.props.forceX : this.state.forceX;
         const forceY = this.props.forceY ? this.props.forceY : this.state.forceY;
         const alpha = this.props.alpha ? this.props.alpha : this.state.alpha_target;
-        const iterations = this.props.iteration
-            ? this.props.iteration
+        const iterations = this.props.iterations
+            ? this.props.iterations
             : this.state.iterations;
         const root = nodes[0];
 
