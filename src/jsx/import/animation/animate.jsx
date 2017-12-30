@@ -59,7 +59,8 @@ class AnimateCollisions extends React.Component {
     }
 
     renderD3() {
-        const svg = d3.select(ReactDOM.findDOMNode(this.refs.animation));
+        const svg = d3.select('svg');
+        const group = d3.select('g');
         const nodes = this.props.nodes ? this.props.nodes : this.state.nodes;
         const forceX = this.props.forceX ? this.props.forceX : this.state.forceX;
         const forceY = this.props.forceY ? this.props.forceY : this.state.forceY;
@@ -72,12 +73,12 @@ class AnimateCollisions extends React.Component {
         root.radius = 0;
         root.fixed = true;
 
-        svg.selectAll('circle')
+        group.selectAll('circle')
             .data(nodes.slice(1))
             .enter();
 
-        function ticked(e) {
-            svg.selectAll('circle')
+        function ticked() {
+            group.selectAll('circle')
                 .attr('cx', function(d) { return d.x; })
                 .attr('cy', function(d) { return d.y; });
         };
@@ -122,10 +123,10 @@ class AnimateCollisions extends React.Component {
         });
 
         return (
-            <BreakpointRender type='viewport'>
+            <BreakpointRender breakpoints={breakpoints} type='viewport'>
                 {bp => (
                     <svg width={bp} height={this.state.height}>
-                        <g ref='animation'>{nodes}</g>
+                        <g>{nodes}</g>
                     </svg>
                 )}
             </BreakpointRender>
