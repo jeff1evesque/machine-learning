@@ -86,7 +86,9 @@ class AnimateCollisions extends React.Component {
             const p1 = d3.mouse(this);
             root.fx = p1[0];
             root.fy = p1[1];
-            force.alphaTarget(alpha).restart();//reheat the simulation
+
+            //reheat the simulation
+            force.alphaTarget(alpha).restart();
         });
 
         let force = d3.forceSimulation()
