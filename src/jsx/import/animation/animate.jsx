@@ -116,7 +116,12 @@ class AnimateCollisions extends Component {
         });
 
         return (
-            <svg ref='animation' width={this.state.width} height={this.state.height}>
+            <svg
+                className='d3-absolute'
+                ref='animation'
+                width={this.state.width}
+                height={this.state.height}
+            >
                 <g>{nodes}</g>
             </svg>
         )
