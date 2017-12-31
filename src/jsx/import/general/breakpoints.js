@@ -1,11 +1,37 @@
 /**
- * breakpoints.jsx: define consistent custom breakpoints.
+ * breakpoints.js: define consistent custom breakpoints.
  */
 
+// constants
+const small_maxWidth = 766;
+const medium_minWidth = 767;
+const medium_maxWidth = 1170;
+const large_minWidth = 1171;
+
+// constant breakpoints
 const breakpoints = [
-  { name: 'small', maxWidth: 766 },
-  { name: 'medium', minWidth: 767, maxWidth: 1170 },
-  { name: 'large', minWidth: 1171 },
+    { name: 'small', maxWidth: small_maxWidth },
+    { name: 'medium', minWidth: medium_minWidth, maxWidth: medium_maxWidth },
+    { name: 'large', minWidth: large_minWidth },
 ];
 
-export default breakpoints
+// update component on every size change
+const breakpoints_exact = [
+    { name: 'small', maxWidth: small_maxWidth, exact: true },
+    {
+        name: 'medium',
+        minWidth: medium_minWidth,
+        maxWidth: medium_maxWidth,
+        exact: true
+    },
+    { name: 'large', minWidth: large_minWidth, exact: true },
+];
+
+export {
+    small_maxWidth,
+    medium_minWidth,
+    medium_maxWidth,
+    large_minWidth,
+    breakpoints,
+    breakpoints_exact
+}

@@ -1,0 +1,14 @@
+// _animation.scss: generates css solution for d3 animations.
+//
+// Note: this partial, is ignored by the scss compiler, and can be imported
+//       into another scss file.
+//
+// Note: '//' comment(s), will not appear in the corresponding compiled css,
+//       whereas, '/* */' comment(s), will be preserved in the compiled output.
+
+.d3-absolute {
+  display: block;
+  left: 0;
+  position: absolute;
+  top: 0;
+}

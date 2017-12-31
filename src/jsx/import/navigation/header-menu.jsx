@@ -16,7 +16,7 @@ import RegisterLinkState from '../redux/container/register-link.jsx';
 import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
-import breakpoints from '../general/breakpoints.js';
+import { breakpoints } from '../general/breakpoints.js';
 
 class HeaderMenu extends Component {
     showDesktopHeader() {

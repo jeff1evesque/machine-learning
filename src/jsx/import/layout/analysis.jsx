@@ -28,7 +28,7 @@ import {
     setSpinner
 } from '../redux/action/page.jsx';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
-import breakpoints from '../general/breakpoints.js';
+import { breakpoints } from '../general/breakpoints.js';
 
 class AnalysisLayout extends Component {
     // initial 'state properties'

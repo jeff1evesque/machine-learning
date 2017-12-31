@@ -8,6 +8,11 @@
 //       whereas, '/* */' comment(s), will be preserved in the compiled output.
 
 #bootstrap-override {
+  .menu-container {
+    position: relative;
+    z-index: 1;
+  }
+
   .small-viewport {
     .menu-container {
       .main-navigation {
