@@ -2,29 +2,35 @@
 version: 5
 defaults:
   datadir:data
-  data_hash: yaml_data
 
 hierarchy:
   - name: 'Puppetserver configurations'
     path: hiera/puppetserver.yaml
+    data_hash: yaml_data
 
   - name: 'General build packages'
     path: hiera/packages.yaml
+    data_hash: yaml_data
 
   - name: 'Webserver configurations'
     path: hiera/test/hiera/webserver.yaml
+    data_hash: yaml_data
 
   - name: 'Database configurations'
     path: hiera/test/hiera/database.yaml
+    data_hash: yaml_data
 
   - name: 'Caching configurations'
     path: hiera/test/hiera/cache.yaml
+    data_hash: yaml_data
 
   - name: 'General application configurations'
     path: hiera/test/hiera/application.yaml
+    data_hash: yaml_data
 
   - name: 'General configurations'
     path: hiera/test/hiera/common.yaml
+    data_hash: yaml_data
 
   - name: 'NodeJS build'
     path: src/package.json
