@@ -9,7 +9,10 @@ class package {
     include package::python_dev
 
     ## local variables
-    $packages = lookup('development')
+    $packages      = lookup('development')
+    $hiera_general = lookup('general')
+    $root_dir      = $hiera_general['root']
+    $node_packages = lookup('dependencies')
 
     ## iterate 'packages' hash
     $packages.each |String $provider, $providers| {
@@ -26,6 +29,24 @@ class package {
                     ],
                 }
             }
+        }
+    }
+
+    ## create node directory
+    file { "${root_dir}/src/node_modules":
+        ensure => 'directory',
+        owner  => root,
+        group  => root,
+        mode   => '0755',
+    }
+
+    ## iterate 'package.json'
+    $node_packages.each|String $package, String $version| {
+        nodejs::npm { "install-${package}":
+            ensure          => $version,
+            package         => $package,
+            install_options => '--no-bin-links',
+            target          => "${root_dir}/src/node_modules",
         }
     }
 }

@@ -9,7 +9,10 @@ class package {
     include package::python_dev
 
     ## local variables
-    $packages = lookup('development')
+    $packages      = lookup('development')
+    $hiera_general = lookup('general')
+    $root_dir      = $hiera_general['root']
+    $node_packages = lookup('dependencies')
 
     ## iterate 'packages' hash
     $packages.each |String $provider, $providers| {
