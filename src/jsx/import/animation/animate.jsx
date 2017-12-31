@@ -16,14 +16,13 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
-import { BreakpointRender } from 'rearm/lib/Breakpoint';
-import { breakpoints_exact } from '../general/breakpoints.js';
 
 class AnimateCollisions extends Component {
     constructor() {
         super();
         const nodes = this.generateNodes(200);
         const force_strength = 0.01;
+
         this.state = {
             nodes: nodes,
             forceX: d3.forceX(window.innerWidth / 2).strength(force_strength),
@@ -32,6 +31,7 @@ class AnimateCollisions extends Component {
             iterations: 4,
             colors: d3.scaleOrdinal().range(d3.schemeCategory10),
             root: nodes[0],
+            width: window.innerWidth,
             height: window.innerHeight,
             velocity_decay: .1,
         }
@@ -55,8 +55,7 @@ class AnimateCollisions extends Component {
     }
 
     renderD3() {
-        const svg = d3.select('svg');
-        const group = d3.select('g');
+        const svg = d3.select(ReactDOM.findDOMNode(this.refs.animation));
         const nodes = this.props.nodes ? this.props.nodes : this.state.nodes;
         const forceX = this.props.forceX ? this.props.forceX : this.state.forceX;
         const forceY = this.props.forceY ? this.props.forceY : this.state.forceY;
@@ -69,12 +68,12 @@ class AnimateCollisions extends Component {
         root.radius = 0;
         root.fixed = true;
 
-        group.selectAll('circle')
+        svg.selectAll('circle')
             .data(nodes.slice(1))
             .enter();
 
         function ticked() {
-            group.selectAll('circle')
+            svg.selectAll('circle')
                 .attr('cx', function(d) { return d.x; })
                 .attr('cy', function(d) { return d.y; });
         };
@@ -117,13 +116,9 @@ class AnimateCollisions extends Component {
         });
 
         return (
-            <BreakpointRender breakpoints={breakpoints_exact} type='viewport'>
-                {bp => (
-                    <svg width={bp.width()} height={this.state.height}>
-                        <g>{nodes}</g>
-                    </svg>
-                )}
-            </BreakpointRender>
+            <svg ref='animation' width={this.state.width} height={this.state.height}>
+                <g>{nodes}</g>
+            </svg>
         )
     }
 }
