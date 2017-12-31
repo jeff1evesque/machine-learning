@@ -33,6 +33,9 @@
   .large-viewport {
     .anonymous {
       .menu-container {
+        position: relative;
+        z-index: 1;
+
         .main-navigation {
           margin-top: .75rem;
           padding: 0 $gutter-1 * 1.25 0 $gutter-1 / 2;
