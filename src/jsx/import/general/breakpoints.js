@@ -27,4 +27,11 @@ const breakpoints_exact = [
     { name: 'large', minWidth: large_minWidth, exact: true },
 ];
 
-export { breakpoints, breakpoints_exact }
+export {
+    small_maxWidth,
+    medium_minWidth,
+    medium_maxWidth,
+    large_minWidth,
+    breakpoints,
+    breakpoints_exact
+}
