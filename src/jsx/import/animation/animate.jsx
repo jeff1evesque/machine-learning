@@ -23,7 +23,16 @@ class AnimateCollisions extends Component {
         super();
         const width = window.innerWidth;
         const height = window.innerHeight;
-        const nodes = this.generateNodes(width);
+
+        if (width < medium_minWidth) {
+            var node_qty = 150;
+            var radius_delta = 0;
+        } else {
+            var node_qty = 200;
+            var radius_delta = 4;
+        }
+
+        const nodes = this.generateNodes(node_qty, radius_delta);
         const force_strength = 0.01;
 
         this.state = {
@@ -37,6 +46,7 @@ class AnimateCollisions extends Component {
             width: width,
             height: height,
             velocity_decay: .1,
+            radius_delta: radius_delta,
         }
         this.getColor = this.getColor.bind(this);
         this.generateNodes = this.generateNodes.bind(this);
@@ -47,16 +57,9 @@ class AnimateCollisions extends Component {
         this.renderD3();
     }
 
-    generateNodes(width) {
-        if (width < medium_minWidth) {
-            var delta = 0;
-            var range_limit = 150;
-        } else {
-            var delta = 4;
-            var range_limit = 200;
-        }
-        return [...Array(range_limit).keys()].map(function() {
-            return { r: Math.random() * 12 + delta };
+    generateNodes(quantity, delta) {
+        return [...Array(quantity).keys()].map(function() {
+            return { r: Math.random() * (12 + delta) };
         }.bind(null, delta));
     }
 
@@ -74,6 +77,11 @@ class AnimateCollisions extends Component {
             ? this.props.iterations
             : this.state.iterations;
         const root = nodes[0];
+        const radius_delta = this.props.radius_delta
+            ? this.props.radius_delta
+            : (this.state.radius_delta > 0
+                ? this.state.radius_delta
+                : 3);
 
         root.radius = 0;
         root.fixed = true;
@@ -103,7 +111,7 @@ class AnimateCollisions extends Component {
             .force('y', forceY)
             .force('collide', d3.forceCollide().radius(function(d) {
                 if (d === root) {
-                    return Math.random() * 50 + 100;
+                    return (Math.random() * 50) + (radius_delta * 25);
                 }
                 return d.r + 2;
             }).iterations(iterations))
