@@ -1,27 +1,31 @@
 ---
 version: 5
 defaults:
-  datadir: /var/machine-learning/hiera
+  datadir:data
   data_hash: yaml_data
 
 hierarchy:
   - name: 'Puppetserver configurations'
-    path: puppetserver.yaml
+    path: hiera/puppetserver.yaml
 
   - name: 'General build packages'
-    path: packages.yaml
+    path: hiera/packages.yaml
 
   - name: 'Webserver configurations'
-    path: test/hiera/webserver.yaml
+    path: hiera/test/hiera/webserver.yaml
 
   - name: 'Database configurations'
-    path: test/hiera/database.yaml
+    path: hiera/test/hiera/database.yaml
 
   - name: 'Caching configurations'
-    path: test/hiera/cache.yaml
+    path: hiera/test/hiera/cache.yaml
 
   - name: 'General application configurations'
-    path: test/hiera/application.yaml
+    path: hiera/test/hiera/application.yaml
 
   - name: 'General configurations'
-    path: test/hiera/common.yaml
+    path: hiera/test/hiera/common.yaml
+
+  - name: 'NodeJS build'
+    path: src/package.json
+    data_hash: json_data
