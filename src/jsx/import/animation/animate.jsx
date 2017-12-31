@@ -16,23 +16,26 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
+import { medium_minWidth } from '../general/breakpoints'
 
 class AnimateCollisions extends Component {
     constructor() {
         super();
-        const nodes = this.generateNodes(200);
+        const width = window.innerWidth;
+        const height = window.innerHeight;
+        const nodes = this.generateNodes(width);
         const force_strength = 0.01;
 
         this.state = {
             nodes: nodes,
-            forceX: d3.forceX(window.innerWidth / 2).strength(force_strength),
-            forceY: d3.forceY(window.innerHeight / 2).strength(force_strength),
+            forceX: d3.forceX(width / 2).strength(force_strength),
+            forceY: d3.forceY(height / 2).strength(force_strength),
             alpha_target: .4,
             iterations: 4,
             colors: d3.scaleOrdinal().range(d3.schemeCategory10),
             root: nodes[0],
-            width: window.innerWidth,
-            height: window.innerHeight,
+            width: width,
+            height: height,
             velocity_decay: .1,
         }
         this.getColor = this.getColor.bind(this);
@@ -44,10 +47,17 @@ class AnimateCollisions extends Component {
         this.renderD3();
     }
 
-    generateNodes(range_limit) {
+    generateNodes(width) {
+        if (width < medium_minWidth) {
+            var delta = 0;
+            var range_limit = 150;
+        } else {
+            var delta = 4;
+            var range_limit = 200;
+        }
         return [...Array(range_limit).keys()].map(function() {
-            return { r: Math.random() * 12 + 4 };
-        });
+            return { r: Math.random() * 12 + delta };
+        }.bind(null, delta);
     }
 
     getColor(i) {
