@@ -57,7 +57,7 @@ class AnimateCollisions extends Component {
         }
         return [...Array(range_limit).keys()].map(function() {
             return { r: Math.random() * 12 + delta };
-        }.bind(null, delta);
+        }.bind(null, delta));
     }
 
     getColor(i) {
