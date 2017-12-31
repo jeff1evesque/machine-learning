@@ -25,14 +25,10 @@ development:
             nginx: '1.12.1-1~trusty'
 
     npm:
-        general:
-            fetch: '1.1.0'
-
         custom:
             uglify-js: '2.7.5'
             imagemin: '5.2.2'
             node-sass: '4.5.0'
-            babel-core: '6.22.1'
             browserify: '14.0.0'
             babelify: '7.3.0'
 
