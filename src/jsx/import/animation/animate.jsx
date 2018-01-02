@@ -56,6 +56,15 @@ class AnimateCollisions extends Component {
         this.renderD3();
     }
 
+    componentWillUnmount() {
+        this.state.forceSimulation.stop();
+        if (ReactDOM.findDOMNode(this.refs.animation)){
+            const svg = d3.select(ReactDOM.findDOMNode(this.refs.animation));
+            svg.selectAll('circle').exit().remove();
+            svg.exit().remove();
+        }
+    }
+
     generateNodes(quantity, delta) {
         return [...Array(quantity).keys()].map(function() {
             return { r: Math.random() * (12 + delta) };
@@ -67,7 +76,7 @@ class AnimateCollisions extends Component {
             ? this.props.colors
             : ['#1f77b4', '#ff7f0e', '#2ca02c'];
         return colors[Math.floor(Math.random() * colors.length)];
-
+    }
 
     renderD3() {
         const svg = d3.select(ReactDOM.findDOMNode(this.refs.animation));
@@ -89,22 +98,14 @@ class AnimateCollisions extends Component {
         root.fixed = true;
 
         svg.selectAll('circle')
-            .data(nodes.slice(1));
+            .data(nodes.slice(1))
+            .enter();
 
         function ticked() {
             svg.selectAll('circle')
                 .attr('cx', function(d) { return d.x; })
                 .attr('cy', function(d) { return d.y; });
         };
-
-        svg.on('mousemove', function() {
-            const p1 = d3.mouse(this);
-            root.fx = p1[0];
-            root.fy = p1[1];
-
-            //reheat the simulation
-            force.alphaTarget(alpha).restart();
-        });
 
         const force = d3.forceSimulation()
             .velocityDecay(this.state.velocity_decay)
@@ -117,6 +118,17 @@ class AnimateCollisions extends Component {
                 return d.r + 2;
             }).iterations(iterations))
             .nodes(nodes).on('tick', ticked);
+
+        svg.on('mousemove', function() {
+            const p1 = d3.mouse(this);
+            root.fx = p1[0];
+            root.fy = p1[1];
+
+            //reheat the simulation
+            force.alphaTarget(alpha).restart();
+        });
+
+        this.setState({forceSimulation: force});
     }
 
     render() {
