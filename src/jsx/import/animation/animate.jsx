@@ -16,7 +16,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
-import { medium_minWidth } from '../general/breakpoints'
+import { medium_minWidth } from '../general/breakpoints';
 
 class AnimateCollisions extends Component {
     constructor() {
@@ -87,8 +87,7 @@ class AnimateCollisions extends Component {
         root.fixed = true;
 
         svg.selectAll('circle')
-            .data(nodes.slice(1))
-            .enter();
+            .data(nodes.slice(1));
 
         function ticked() {
             svg.selectAll('circle')
