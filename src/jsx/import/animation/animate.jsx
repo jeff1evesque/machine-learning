@@ -41,7 +41,6 @@ class AnimateCollisions extends Component {
             forceY: d3.forceY(height / 2).strength(force_strength),
             alpha_target: .4,
             iterations: 4,
-            colors: d3.scaleOrdinal().range(d3.schemeCategory10),
             root: nodes[0],
             width: width,
             height: height,
@@ -63,9 +62,12 @@ class AnimateCollisions extends Component {
         }.bind(null, delta));
     }
 
-    getColor(i) {
-        return this.state.colors(i % 3);
-    }
+    getColor() {
+        const colors = this.props.colors
+            ? this.props.colors
+            : ['#1f77b4', '#ff7f0e', '#2ca02c'];
+        return colors[Math.floor(Math.random() * colors.length)];
+
 
     renderD3() {
         const svg = d3.select(ReactDOM.findDOMNode(this.refs.animation));
@@ -120,7 +122,7 @@ class AnimateCollisions extends Component {
     render() {
         // use React to draw all the nodes, d3 calculates the x and y
         const nodes = this.state.nodes.slice(1).map((node, index) => {
-            const color = this.getColor(index);
+            const color = this.getColor();
             return (
                 <circle
                     fill={color}
