@@ -13,12 +13,15 @@ const colors = {
     'gray-3': '#ccc',
     'gray-2': '#ddd',
     'gray-1': '#eee',
-    'green-6': '#4a993e',
+    'green-7': '#4a993e',
+    'green-6': '#2ca02c',
     'green-5': '#569e3d',
     'green-4': '#60b044',
     'green-3': '#5ca941',
     'green-2': '#79d858',
     'green-1': '#8add6d',
+    'blue': '#1f77b4',
+    'orange': '#ff7f0e'
 }
 
 export default colors;

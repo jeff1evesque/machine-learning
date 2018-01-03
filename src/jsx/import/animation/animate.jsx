@@ -16,7 +16,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
-import { medium_minWidth } from '../general/breakpoints'
+import { medium_minWidth } from '../general/breakpoints';
+import hex from '../general/colors.js';
 
 class AnimateCollisions extends Component {
     constructor() {
@@ -41,7 +42,6 @@ class AnimateCollisions extends Component {
             forceY: d3.forceY(height / 2).strength(force_strength),
             alpha_target: .4,
             iterations: 4,
-            colors: d3.scaleOrdinal().range(d3.schemeCategory10),
             root: nodes[0],
             width: width,
             height: height,
@@ -57,14 +57,21 @@ class AnimateCollisions extends Component {
         this.renderD3();
     }
 
+    componentWillUnmount() {
+        this.state.forceSimulation.stop();
+    }
+
     generateNodes(quantity, delta) {
         return [...Array(quantity).keys()].map(function() {
             return { r: Math.random() * (12 + delta) };
         }.bind(null, delta));
     }
 
-    getColor(i) {
-        return this.state.colors(i % 3);
+    getColor() {
+        const colors = this.props.colors
+            ? this.props.colors
+            : [hex['blue'], hex['orange'], hex['green-6']];
+        return colors[Math.floor(Math.random() * colors.length)];
     }
 
     renderD3() {
@@ -87,23 +94,13 @@ class AnimateCollisions extends Component {
         root.fixed = true;
 
         svg.selectAll('circle')
-            .data(nodes.slice(1))
-            .enter();
+            .data(nodes.slice(1));
 
         function ticked() {
             svg.selectAll('circle')
                 .attr('cx', function(d) { return d.x; })
                 .attr('cy', function(d) { return d.y; });
         };
-
-        svg.on('mousemove', function() {
-            const p1 = d3.mouse(this);
-            root.fx = p1[0];
-            root.fy = p1[1];
-
-            //reheat the simulation
-            force.alphaTarget(alpha).restart();
-        });
 
         const force = d3.forceSimulation()
             .velocityDecay(this.state.velocity_decay)
@@ -116,12 +113,23 @@ class AnimateCollisions extends Component {
                 return d.r + 2;
             }).iterations(iterations))
             .nodes(nodes).on('tick', ticked);
+
+        svg.on('mousemove', function() {
+            const p1 = d3.mouse(this);
+            root.fx = p1[0];
+            root.fy = p1[1];
+
+            // reheat the simulation
+            force.alphaTarget(alpha).restart();
+        });
+
+        this.setState({forceSimulation: force});
     }
 
     render() {
         // use React to draw all the nodes, d3 calculates the x and y
         const nodes = this.state.nodes.slice(1).map((node, index) => {
-            const color = this.getColor(index);
+            const color = this.getColor();
             return (
                 <circle
                     fill={color}
