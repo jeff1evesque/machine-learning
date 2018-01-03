@@ -17,6 +17,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
 import { medium_minWidth } from '../general/breakpoints';
+import hex from '../general/colors.js';
 
 class AnimateCollisions extends Component {
     constructor() {
@@ -69,7 +70,7 @@ class AnimateCollisions extends Component {
     getColor() {
         const colors = this.props.colors
             ? this.props.colors
-            : ['#1f77b4', '#ff7f0e', '#2ca02c'];
+            : [hex['blue'], hex['orange'], hex['green-6']];
         return colors[Math.floor(Math.random() * colors.length)];
     }
 
