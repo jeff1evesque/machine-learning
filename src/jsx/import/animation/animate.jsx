@@ -119,7 +119,7 @@ class AnimateCollisions extends Component {
             root.fx = p1[0];
             root.fy = p1[1];
 
-            //reheat the simulation
+            // reheat the simulation
             force.alphaTarget(alpha).restart();
         });
 
