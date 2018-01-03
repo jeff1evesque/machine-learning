@@ -9,21 +9,26 @@ class package {
     include package::python_dev
 
     ## local variables
-    $packages = lookup('development')
+    $packages      = lookup('development')
+    $hiera_general = lookup('general')
+    $root_dir      = $hiera_general['root']
+    $node_packages = lookup('dependencies')
 
     ## iterate 'packages' hash
     $packages.each |String $provider, $providers| {
         if ($provider in ['apt', 'npm', 'pip']) {
-            $providers['general'].each|String $package, String $version| {
-                package { $package:
-                    ensure   => $version,
-                    provider => $provider,
-                    require  => [
-                        Class['apt'],
-                        Class['python'],
-                        Class['package::nodejs'],
-                        Class['package::python_dev']
-                    ],
+            if has_key($provider, 'general') {
+                $providers['general'].each|String $package, String $version| {
+                    package { $package:
+                        ensure   => $version,
+                        provider => $provider,
+                        require  => [
+                            Class['apt'],
+                            Class['python'],
+                            Class['package::nodejs'],
+                            Class['package::python_dev']
+                        ],
+                    }
                 }
             }
         }
