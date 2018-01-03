@@ -58,11 +58,6 @@ class AnimateCollisions extends Component {
 
     componentWillUnmount() {
         this.state.forceSimulation.stop();
-        if (ReactDOM.findDOMNode(this.refs.animation)){
-            const svg = d3.select(ReactDOM.findDOMNode(this.refs.animation));
-            svg.selectAll('circle').exit().remove();
-            svg.exit().remove();
-        }
     }
 
     generateNodes(quantity, delta) {
@@ -98,8 +93,7 @@ class AnimateCollisions extends Component {
         root.fixed = true;
 
         svg.selectAll('circle')
-            .data(nodes.slice(1))
-            .enter();
+            .data(nodes.slice(1));
 
         function ticked() {
             svg.selectAll('circle')
