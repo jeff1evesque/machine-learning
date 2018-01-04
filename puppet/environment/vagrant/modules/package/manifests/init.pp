@@ -47,6 +47,7 @@ class package {
             package         => $package,
             install_options => '--no-bin-links',
             target          => "${root_dir}/src/node_modules",
+            require         => File["${root_dir}/src/node_modules"],
         }
     }
 }
