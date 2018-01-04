@@ -6,10 +6,10 @@ defaults:
 
 hierarchy:
   - name: 'Puppetserver configurations'
-    path: hiera/test/puppetserver.yaml
+    path: hiera/puppetserver.yaml
 
   - name: 'General build packages'
-    path: hiera/test/packages.yaml
+    path: hiera/packages.yaml
 
   - name: 'Webserver configurations'
     path: hiera/test/hiera/webserver.yaml
