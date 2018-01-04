@@ -11,8 +11,8 @@ class package {
     ## local variables
     $packages      = lookup('development')
     $hiera_general = lookup('general')
-    $root_dir      = $hiera_general['root']
     $node_packages = lookup('dependencies')
+    $root_dir      = $hiera_general['root']
 
     ## iterate 'packages' hash
     $packages.each |String $provider, $providers| {
