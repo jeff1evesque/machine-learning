@@ -1,30 +1,30 @@
 ---
 version: 5
 defaults:
-  datadir: /vagrant
+  datadir: /var/machine-learning/hiera
   data_hash: yaml_data
 
 hierarchy:
   - name: 'Puppetserver configurations'
-    path: hiera/puppetserver.yaml
+    path: puppetserver.yaml
 
   - name: 'General build packages'
-    path: hiera/packages.yaml
+    path: packages.yaml
 
   - name: 'Webserver configurations'
-    path: hiera/test/hiera/webserver.yaml
+    path: test/hiera/webserver.yaml
 
   - name: 'Database configurations'
-    path: hiera/test/hiera/database.yaml
+    path: test/hiera/database.yaml
 
   - name: 'Caching configurations'
-    path: hiera/test/hiera/cache.yaml
+    path: test/hiera/cache.yaml
 
   - name: 'General application configurations'
-    path: hiera/test/hiera/application.yaml
+    path: test/hiera/application.yaml
 
   - name: 'General configurations'
-    path: hiera/test/hiera/common.yaml
+    path: test/hiera/common.yaml
 
   - name: 'NodeJS build'
     path: src/package.json
