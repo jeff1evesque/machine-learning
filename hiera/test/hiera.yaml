@@ -1,15 +1,15 @@
 ---
 version: 5
 defaults:
-  datadir: data
+  datadir: /vagrant
   data_hash: yaml_data
 
 hierarchy:
   - name: 'Puppetserver configurations'
-    path: hiera/puppetserver.yaml
+    path: hiera/test/puppetserver.yaml
 
   - name: 'General build packages'
-    path: hiera/packages.yaml
+    path: hiera/test/packages.yaml
 
   - name: 'Webserver configurations'
     path: hiera/test/hiera/webserver.yaml
