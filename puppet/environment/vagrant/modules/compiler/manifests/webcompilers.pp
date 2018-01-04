@@ -2,7 +2,7 @@
 ### webcompilers.pp, create webcompiler services.
 ###
 class compiler::webcompilers {
-    include package::react_presets
+    include package::package_json
     include package::webcompilers
 
     ## variables
@@ -40,7 +40,7 @@ class compiler::webcompilers {
             content => dos2unix(template($template_path)),
             require => [
                 Class['package::webcompilers'],
-                Class['package::react_presets'],
+                Class['package::package_json'],
             ],
         }
 
@@ -52,7 +52,7 @@ class compiler::webcompilers {
             mode    => '0755',
             require => [
                 Class['package::webcompilers'],
-                Class['package::react_presets'],
+                Class['package::package_json'],
             ],
         }
     }

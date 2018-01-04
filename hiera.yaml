@@ -1,27 +1,31 @@
 ---
 version: 5
 defaults:
-  datadir: /vagrant/hiera
+  datadir: /vagrant
   data_hash: yaml_data
 
 hierarchy:
   - name: 'Puppetserver configurations'
-    path: puppetserver.yaml
+    path: hiera/puppetserver.yaml
 
   - name: 'General build packages'
-    path: packages.yaml
+    path: hiera/packages.yaml
 
   - name: 'Webserver configurations'
-    path: webserver.yaml
+    path: hiera/webserver.yaml
 
   - name: 'Database configurations'
-    path: database.yaml
+    path: hiera/database.yaml
 
   - name: 'Caching configurations'
-    path: cache.yaml
+    path: hiera/cache.yaml
 
   - name: 'General application configurations'
-    path: application.yaml
+    path: hiera/application.yaml
 
   - name: 'General configurations'
-    path: common.yaml
+    path: hiera/common.yaml
+
+  - name: 'NodeJS build'
+    path: src/package.json
+    data_hash: json_data

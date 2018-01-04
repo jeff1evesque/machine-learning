@@ -2,6 +2,7 @@
 ### initial_compile.pp, manually compile javascript.
 ###
 class compiler::initial_compile {
+    include package::package_json
     include package::webcompilers
 
     ## local variables
@@ -23,6 +24,9 @@ class compiler::initial_compile {
         cwd      => "${dev_env_path}/modules/compiler/scripts",
         path     => '/usr/bin',
         provider => shell,
-        require  => Class['package::webcompilers'],
+        require => [
+            Class['package::webcompilers'],
+            Class['package::package_json'],
+        ],
     }
 }
