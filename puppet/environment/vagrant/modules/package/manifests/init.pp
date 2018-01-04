@@ -9,7 +9,7 @@ class package {
     include package::python_dev
 
     ## local variables
-    $packages      = lookup('development')
+    $packages = lookup('development')
 
     ## iterate 'packages' hash
     $packages.each |String $provider, $providers| {
