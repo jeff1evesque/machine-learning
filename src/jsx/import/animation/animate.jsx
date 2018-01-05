@@ -13,7 +13,7 @@
  *
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
 import { medium_minWidth } from '../general/breakpoints';

@@ -11,7 +11,7 @@
  *
  */
 
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setLayout } from '../redux/action/page.jsx';
 import AnimateCollisions from '../animation/animate.jsx';
