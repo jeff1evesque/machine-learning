@@ -27,20 +27,6 @@ class LoginForm extends Component {
         user: PropTypes.shape({ name: PropTypes.string.isRequired }),
     }
 
-    static propTypes = {
-        alpha: PropTypes.number,
-        colors: PropTypes.arrayOf(PropTypes.string.isRequired),
-        forceX: PropTypes.func,
-        forceY: PropTypes.func,
-        iterations: PropTypes.number,
-        nodes: PropTypes.arrayOf(
-            PropTypes.shape({
-                r: PropTypes.number.isRequired,
-            })
-        ),
-        radius_delta: PropTypes.number,
-    }
-
     // initial 'state properties'
     constructor() {
         super();
