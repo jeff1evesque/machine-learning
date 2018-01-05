@@ -17,7 +17,7 @@ import { setLayout } from '../redux/action/page.jsx';
 import AnimateCollisions from '../animation/animate.jsx';
 
 class HomePage extends Component {
-    propTypes: {
+    static propTypes = {
         dispatchLayout: PropTypes.func,
     }
 

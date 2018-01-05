@@ -53,7 +53,7 @@ class AnimateCollisions extends Component {
         this.renderD3 = this.renderD3.bind(this);
     }
 
-    propTypes: {
+    static propTypes = {
         alpha: PropTypes.number,
         colors: PropTypes.arrayOf(PropTypes.string.isRequired),
         forceX: PropTypes.func,
