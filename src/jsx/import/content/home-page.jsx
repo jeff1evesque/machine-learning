@@ -24,18 +24,22 @@ class HomePage extends Component {
     render() {
         return (
             <div className='main-full-span home'>
-                <h1>Welcome!</h1>
+                <h1>{Welcome!}</h1>
                 <AnimateCollisions />
                 <NavLink
-                    to='session'
                     activeClassName='active'
                     className='btn mn-2'
+                    to='session'
                 >
-                    Begin Analysis
+                    {Begin Analysis}
                 </NavLink>
             </div>
         );
     }
+}
+
+AnimateCollisions.propTypes = {
+    dispatchLayout: PropTypes.func,
 }
 
 // indicate which class can be exported, and instantiated via 'require'
