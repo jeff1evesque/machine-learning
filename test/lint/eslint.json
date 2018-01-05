@@ -21,6 +21,7 @@
     "parser": "babel-eslint",
     "rules": {
         "max-len": [2, {"code": 100, "tabWidth": 4, "ignoreUrls": true}],
+        "jsx-quotes": ["error", "prefer-single"],
         "react/display-name": 2,
         "react/forbid-prop-types": 2,
         "react/jsx-boolean-value": 2,
@@ -35,7 +36,6 @@
         "react/jsx-no-literals": 2,
         "react/jsx-no-undef": 2,
         "react/jsx-pascal-case": 2,
-        "react/jsx-quotes": 2,
         "react/sort-prop-types": 2,
         "react/jsx-sort-props": 2,
         "react/jsx-uses-react": 2,
