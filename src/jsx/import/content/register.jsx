@@ -20,7 +20,6 @@ class RegisterForm extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
         dispatchLayout: PropTypes.func,
-        dispatchLogin: PropTypes.func,
         dispatchSpinner: PropTypes.func,
         user: PropTypes.shape({ name: PropTypes.string.isRequired }),
     }
@@ -41,7 +40,7 @@ class RegisterForm extends Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
         this.validateEmail = this.validateEmail.bind(this);
-        this.validatePassword = this.validatePassword.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
         this.validateUsername = this.validateUsername.bind(this);
     }
 
@@ -136,6 +135,19 @@ class RegisterForm extends Component {
         }
     }
 
+    handlePassword(event) {
+        const password = event.target.value;
+        const check = !!checkValidPassword(password);
+        if (!check) {
+            const action = setSpinner({ spinner: false });
+            this.props.dispatchSpinner(action);
+        }
+
+        this.setState({ validated_password_server: true });
+        this.setState({ validated_password: check });
+        this.setState({ value_password: password });
+    }
+
     validateUsername(event) {
         const username = event.target.value;
         const check = !!checkValidString(username);
@@ -160,19 +172,6 @@ class RegisterForm extends Component {
         this.setState({ validated_email_server: true });
         this.setState({ validated_email: check });
         this.setState({ value_email: email });
-    }
-
-    validatePassword(event) {
-        const password = event.target.value;
-        const check = !!checkValidPassword(password);
-        if (!check) {
-            const action = setSpinner({ spinner: false });
-            this.props.dispatchSpinner(action);
-        }
-
-        this.setState({ validated_password_server: true });
-        this.setState({ validated_password: check });
-        this.setState({ value_password: password });
     }
 
     // triggered when 'state properties' change
@@ -275,7 +274,7 @@ class RegisterForm extends Component {
                     <input
                         className='input-block'
                         name='user[password]'
-                        onInput={this.validatePassword}
+                        onInput={this.handlePassword}
                         placeholder='Create a password'
                         type='password'
                         value={this.state.value_password}
