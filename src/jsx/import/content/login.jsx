@@ -27,7 +27,6 @@ class LoginForm extends Component {
         user: PropTypes.shape({ name: PropTypes.string.isRequired }),
     }
 
-    // initial 'state properties'
     constructor() {
         super();
         this.state = {
