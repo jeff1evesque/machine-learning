@@ -20,6 +20,20 @@ import { medium_minWidth } from '../general/breakpoints';
 import hex from '../general/colors.js';
 
 class AnimateCollisions extends Component {
+    const propTypes = {
+        alpha: PropTypes.number,
+        colors: PropTypes.arrayOf(React.PropTypes.string.isRequired),
+        forceX: PropTypes.func,
+        forceY: PropTypes.func,
+        iterations: PropTypes.number,
+        nodes: PropTypes.arrayOf(
+            PropTypes.shape({
+                r: PropTypes.number.isRequired,
+            })
+        ),
+        radius_delta: PropTypes.number,
+    }
+
     constructor() {
         super();
         const width = window.innerWidth;
@@ -152,20 +166,6 @@ class AnimateCollisions extends Component {
             </svg>
         )
     }
-}
-
-AnimateCollisions.propTypes = {
-    alpha: PropTypes.number,
-    colors: PropTypes.arrayOf(React.PropTypes.string.isRequired),
-    forceX: PropTypes.func,
-    forceY: PropTypes.func,
-    iterations: PropTypes.number,
-    nodes: PropTypes.arrayOf(
-        PropTypes.shape({
-            r: PropTypes.number.isRequired,
-        })
-    ),
-    radius_delta: PropTypes.number,
 }
 
 export default AnimateCollisions;

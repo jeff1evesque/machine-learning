@@ -17,6 +17,10 @@ import { setLayout } from '../redux/action/page.jsx';
 import AnimateCollisions from '../animation/animate.jsx';
 
 class HomePage extends Component {
+    const propTypes = {
+        dispatchLayout: PropTypes.func,
+    }
+
     componentWillMount() {
         const action = setLayout({ layout: 'analysis' });
         this.props.dispatchLayout(action);
@@ -36,10 +40,6 @@ class HomePage extends Component {
             </div>
         );
     }
-}
-
-HomePage.propTypes = {
-    dispatchLayout: PropTypes.func,
 }
 
 // indicate which class can be exported, and instantiated via 'require'
