@@ -39,9 +39,9 @@ class RegisterForm extends Component {
             value_password: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.validateEmail = this.validateEmail.bind(this);
+        this.handleEmail = this.handleEmail.bind(this);
         this.handlePassword = this.handlePassword.bind(this);
-        this.validateUsername = this.validateUsername.bind(this);
+        this.handleUsername = this.handleUsername.bind(this);
     }
 
     componentWillMount() {
@@ -148,7 +148,7 @@ class RegisterForm extends Component {
         this.setState({ value_password: password });
     }
 
-    validateUsername(event) {
+    handleUsername(event) {
         const username = event.target.value;
         const check = !!checkValidString(username);
         if (!check) {
@@ -161,7 +161,7 @@ class RegisterForm extends Component {
         this.setState({ value_username: username });
     }
 
-    validateEmail(event) {
+    handleEmail(event) {
         const email = event.target.value;
         const check = !!checkValidEmail(email);
         if (!check) {
@@ -233,14 +233,19 @@ class RegisterForm extends Component {
         }
 
         return (
-            <form onSubmit={this.handleSubmit} ref='registerForm'>
+            <form
+                onSubmit={this.handleSubmit}
+                ref='registerForm'
+            >
                 {redirect}
                 <div className='form-group'>
-                    <label className={`form-label ${usernameClass}`}>Username</label>
+                    <label className={`form-label ${usernameClass}`}>
+                        {'Username'}
+                    </label>
                     <input
                         className='input-block'
                         name='user[login]'
-                        onInput={this.validateUsername}
+                        onInput={this.handleUsername}
                         placeholder='Pick a username'
                         type='text'
                         value={this.state.value_username}
@@ -251,11 +256,13 @@ class RegisterForm extends Component {
                 </div>
 
                 <div className='form-group'>
-                    <label className={`form-label ${emailClass}`}>Email Address</label>
+                    <label className={`form-label ${emailClass}`}>
+                        {'Email Address'}
+                    </label>
                     <input
                         className='input-block'
                         name='user[email]'
-                        onInput={this.validateEmail}
+                        onInput={this.handleEmail}
                         placeholder='Your email address'
                         type='text'
                         value={this.state.value_email}
@@ -270,7 +277,9 @@ class RegisterForm extends Component {
                 </div>
 
                 <div className='form-group'>
-                    <label className={`form-label ${passwordClass}`}>Password</label>
+                    <label className={`form-label ${passwordClass}`}>
+                        {'Password'}
+                    </label>
                     <input
                         className='input-block'
                         name='user[password]'
