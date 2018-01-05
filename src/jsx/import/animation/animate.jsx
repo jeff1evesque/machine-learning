@@ -132,11 +132,11 @@ class AnimateCollisions extends Component {
             const color = this.getColor();
             return (
                 <circle
-                    fill={color}
                     cx={node.x}
                     cy={node.y}
-                    r={node.r}
+                    fill={color}
                     key={`circle-${index}`}
+                    r={node.r}
                 />
             );
         });
