@@ -154,4 +154,14 @@ class AnimateCollisions extends Component {
     }
 }
 
+AnimateCollisions.propTypes = {
+    colors: PropTypes.array,
+    nodes: PropTypes.array,
+    forceX: PropTypes.func,
+    forceY: PropTypes.func,
+    alpha: PropTypes.number,
+    iterations: PropTypes.number,
+    radius_delta: PropTypes.number,
+}
+
 export default AnimateCollisions;
