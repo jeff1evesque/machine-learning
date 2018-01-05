@@ -12,6 +12,16 @@ import Slider from 'react-rangeslider'
 import { setRangeSlider } from '../redux/action/page.jsx';
 
 class RangeSlider extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchRangeSlider: PropTypes.func,
+        max: PropTypes.number,
+        min: PropTypes.number,
+        step: PropTypes.number,
+        tooltip: PropTypes.bool,
+        value: PropTypes.number,
+    }
+
     constructor (props, context) {
         super(props, context)
         this.state = {
@@ -42,12 +52,12 @@ class RangeSlider extends Component {
         return (
             <div className='slider'>
                 <Slider
-                    min={min}
-                    max={max}
-                    tooltip={tooltip}
-                    step={step}
-                    value={value}
                     onChange={this.handleChange}
+                    max={max}
+                    min={min}
+                    step={step}
+                    tooltip={tooltip}
+                    value={value}
                 />
                 <div className='slider-value'>{value}</div>
             </div>
