@@ -26,6 +26,7 @@ class HomePage extends Component {
         const action = setLayout({ layout: 'analysis' });
         this.props.dispatchLayout(action);
     }
+
     render() {
         return (
             <div className='main-full-span home'>
