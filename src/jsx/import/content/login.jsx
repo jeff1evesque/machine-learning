@@ -31,15 +31,9 @@ class LoginForm extends Component {
         }
         this.getSpinner = this.getSpinner.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.updateUsername = this.updateUsername.bind(this);
+        this.handleUsername = this.handleUsername.bind(this);
     }
-    // call back: used to return spinner
-    getSpinner() {
-        if (this.state.display_spinner) {
-            return Spinner;
-        }
-        return 'span';
-    }
+
     // send form data to serverside on form submission
     handleSubmit(event) {
         // prevent page reload
@@ -134,17 +128,28 @@ class LoginForm extends Component {
             ajaxArguments,
         );
     }
-    updateUsername(event) {
+
+    handleUsername(event) {
         this.setState({ value_username: event.target.value });
     }
+
     componentWillMount() {
         // update redux store
         this.props.dispatchLayout(setLayout({ layout: 'login' }));
     }
+
     componentDidMount() {
         this.props.dispatchSpinner(setSpinner({ spinner: false }));
     }
-    // triggered when 'state properties' change
+
+    // call back: used to return spinner
+    getSpinner() {
+        if (this.state.display_spinner) {
+            return Spinner;
+        }
+        return 'span';
+    }
+
     render() {
         // local variables
         var redirect = null;
@@ -154,7 +159,7 @@ class LoginForm extends Component {
         if (!this.state.validated_login_server) {
             var loginNote = (
                 <div className='invalid-pop'>
-                Invalid user, or password.
+                    {'Invalid user, or password.'}
                 </div>);
         } else {
             var loginNote = null;
@@ -171,32 +176,35 @@ class LoginForm extends Component {
         }
 
         return (
-            <form onSubmit={this.handleSubmit} ref='loginForm'>
+            <form
+                onSubmit={this.handleSubmit}
+                ref='loginForm'
+            >
                 {redirect}
                 <div className='form-header'>
-                    <h1>Sign in Web-Interface</h1>
+                    <h1>{'Sign in Web-Interface'}</h1>
                 </div>
                 {loginNote}
                 <div className='form-body'>
                     <label>Username or email address</label>
                     <input
-                        type='text'
-                        name='user[login]'
-                        className='input-block'
                         autoFocus
-                        onInput={this.updateUsername}
+                        className='input-block'
+                        name='user[login]'
+                        onInput={this.handleUsername}
+                        type='text'
                         value={this.state.value_username}
                     />
                     <label>Password</label>
                     <input
-                        type='password'
-                        name='user[password]'
                         className='input-block'
+                        name='user[password]'
+                        type='password'
                     />
 
                     <input
-                        type='submit'
                         className='input-submit btn btn-primary'
+                        type='submit'
                         value='Login'
                     />
                     <AjaxSpinner />
