@@ -20,6 +20,7 @@ import { medium_minWidth } from '../general/breakpoints';
 import hex from '../general/colors.js';
 
 class AnimateCollisions extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
         alpha: PropTypes.number,
         colors: PropTypes.arrayOf(PropTypes.string.isRequired),

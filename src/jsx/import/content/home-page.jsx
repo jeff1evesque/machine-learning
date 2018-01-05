@@ -17,6 +17,7 @@ import { setLayout } from '../redux/action/page.jsx';
 import AnimateCollisions from '../animation/animate.jsx';
 
 class HomePage extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
         dispatchLayout: PropTypes.func,
     }
