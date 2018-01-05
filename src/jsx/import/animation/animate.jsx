@@ -156,11 +156,11 @@ class AnimateCollisions extends Component {
 
 AnimateCollisions.propTypes = {
     alpha: PropTypes.number,
-    colors: React.PropTypes.arrayOf(React.PropTypes.string.isRequired),
+    colors: PropTypes.arrayOf(React.PropTypes.string.isRequired),
     forceX: PropTypes.func,
     forceY: PropTypes.func,
     iterations: PropTypes.number,
-    nodes: React.PropTypes.arrayOf(
+    nodes: PropTypes.arrayOf(
         PropTypes.shape({
             r: PropTypes.number.isRequired,
         })
