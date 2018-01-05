@@ -144,9 +144,9 @@ class AnimateCollisions extends Component {
         return (
             <svg
                 className='d3-absolute'
+                height={this.state.height}
                 ref='animation'
                 width={this.state.width}
-                height={this.state.height}
             >
                 <g>{nodes}</g>
             </svg>
@@ -160,7 +160,11 @@ AnimateCollisions.propTypes = {
     forceX: PropTypes.func,
     forceY: PropTypes.func,
     iterations: PropTypes.number,
-    nodes: PropTypes.array,
+    nodes: React.PropTypes.arrayOf(
+        PropTypes.shape({
+            r: PropTypes.number.isRequired,
+        })
+    ),
     radius_delta: PropTypes.number,
 }
 
