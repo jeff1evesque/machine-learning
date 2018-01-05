@@ -19,6 +19,28 @@ import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 
 class LoginForm extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchLayout: PropTypes.func,
+        dispatchLogin: PropTypes.func,
+        dispatchSpinner: PropTypes.func,
+        user: PropTypes.shape({ name: PropTypes.string.isRequired }),
+    }
+
+    static propTypes = {
+        alpha: PropTypes.number,
+        colors: PropTypes.arrayOf(PropTypes.string.isRequired),
+        forceX: PropTypes.func,
+        forceY: PropTypes.func,
+        iterations: PropTypes.number,
+        nodes: PropTypes.arrayOf(
+            PropTypes.shape({
+                r: PropTypes.number.isRequired,
+            })
+        ),
+        radius_delta: PropTypes.number,
+    }
+
     // initial 'state properties'
     constructor() {
         super();
@@ -32,6 +54,19 @@ class LoginForm extends Component {
         this.getSpinner = this.getSpinner.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.handleUsername = this.handleUsername.bind(this);
+    }
+
+    handleUsername(event) {
+        this.setState({ value_username: event.target.value });
+    }
+
+    componentWillMount() {
+        // update redux store
+        this.props.dispatchLayout(setLayout({ layout: 'login' }));
+    }
+
+    componentDidMount() {
+        this.props.dispatchSpinner(setSpinner({ spinner: false }));
     }
 
     // send form data to serverside on form submission
@@ -129,19 +164,6 @@ class LoginForm extends Component {
         );
     }
 
-    handleUsername(event) {
-        this.setState({ value_username: event.target.value });
-    }
-
-    componentWillMount() {
-        // update redux store
-        this.props.dispatchLayout(setLayout({ layout: 'login' }));
-    }
-
-    componentDidMount() {
-        this.props.dispatchSpinner(setSpinner({ spinner: false }));
-    }
-
     // call back: used to return spinner
     getSpinner() {
         if (this.state.display_spinner) {
@@ -186,7 +208,7 @@ class LoginForm extends Component {
                 </div>
                 {loginNote}
                 <div className='form-body'>
-                    <label>Username or email address</label>
+                    <label>{'Username or email address'}</label>
                     <input
                         autoFocus
                         className='input-block'
