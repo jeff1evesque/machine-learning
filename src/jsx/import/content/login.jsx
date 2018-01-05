@@ -56,10 +56,6 @@ class LoginForm extends Component {
         this.handleUsername = this.handleUsername.bind(this);
     }
 
-    handleUsername(event) {
-        this.setState({ value_username: event.target.value });
-    }
-
     componentWillMount() {
         // update redux store
         this.props.dispatchLayout(setLayout({ layout: 'login' }));
@@ -67,6 +63,10 @@ class LoginForm extends Component {
 
     componentDidMount() {
         this.props.dispatchSpinner(setSpinner({ spinner: false }));
+    }
+
+    handleUsername(event) {
+        this.setState({ value_username: event.target.value });
     }
 
     // send form data to serverside on form submission
