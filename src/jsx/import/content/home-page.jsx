@@ -38,7 +38,7 @@ class HomePage extends Component {
     }
 }
 
-AnimateCollisions.propTypes = {
+HomePage.propTypes = {
     dispatchLayout: PropTypes.func,
 }
 
