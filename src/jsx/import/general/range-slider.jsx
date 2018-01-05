@@ -52,9 +52,9 @@ class RangeSlider extends Component {
         return (
             <div className='slider'>
                 <Slider
-                    onChange={this.handleChange}
                     max={max}
                     min={min}
+                    onChange={this.handleChange}
                     step={step}
                     tooltip={tooltip}
                     value={value}

@@ -12,10 +12,10 @@ import React, { Component } from 'react';
 class Submit extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
+        btnDisabled: PropTypes.bool,
+        btnValue: PropTypes.string,
         cssClass: PropTypes.string,
         onClick: PropTypes.func,
-        btnValue: PropTypes.string,
-        btnDisabled: PropTypes.bool,
     }
 
     render() {
