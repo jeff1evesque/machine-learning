@@ -203,7 +203,7 @@ class LoginForm extends Component {
                         type='text'
                         value={this.state.value_username}
                     />
-                    <label>Password</label>
+                    <label>{'Password'}</label>
                     <input
                         className='input-block'
                         name='user[password]'
