@@ -19,8 +19,19 @@ import transpose from '../formatter/transpose.js'
 class CurrentResultDisplay extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
+        dispatchContentType: PropTypes.func,
+        dispatchLayout: PropTypes.func,
         dispatchLogout: PropTypes.func,
-        results: PropTypes.shape({
+        dispatchResultsButton: PropTypes.func,
+        location: PropTypes.shape({
+            search: PropTypes.shape({
+                nid: PropTypes.number.isRequired,
+            }),
+        }),
+	    results: PropTypes.shape({
+            data: PropTypes.shape({
+                result: PropTypes.string,
+            }),
             type: PropTypes.string,
         }),
     }
@@ -38,46 +49,42 @@ class CurrentResultDisplay extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
-    tableHeaders(header) {
-        var row = Object.entries(header).map(([key, value]) => (
-            <th key={`th-${key}`}>{key}</th>
-        ));
-        return <tr><th>{'#'}</th>{row}</tr>;
-    }
-
-    tableRows(body) {
-        if (Array.isArray(body)) {
-            return body.map((rows, trIdx) => {
-                var row = rows.map((cell, tdIdx) =>
-                    <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
-                );
-                return <tr key={`tr-${trIdx}`}><td key={`td-index-${trIdx}`}>{trIdx}</td>{row}</tr>;
-            });
-        }
-        else {
-            var row = Object.entries(body).map(([key, value]) => (
-                <td key={`td-singleton-${key}`}>{value}</td>
-            ));
-            return <tr><td>{'1'}</td>{row}</tr>;
-        }
-    }
-
-    componentDidUpdate() {
+    componentWillReceiveProps(nextProps) {
+        // update state using react-route properties
         if (
+            this.props &&
+            this.props.results &&
+            !!this.props.results.data &&
+            nextProps &&
+            nextProps.results &&
+            !!nextProps.results.data
+        ) {
+            const props_data = this.props.results;
+            const next_data = nextProps.results;
+
+            if (props_data != next_data) {
+                this.setState({
+                    computed_result: JSON.stringify(next_data.data),
+                    computed_type: next_data.type,
+                });
+            }
+        });
+    }
+
+    componentWillMount() {
+         if (
             this.props &&
             this.props.results &&
             !!this.props.results.data &&
             !!this.props.results.type &&
             this.state.computed_result != JSON.stringify(this.props.results.data)
-        ) {
+         ) {
             this.setState({
                 computed_result: JSON.stringify(this.props.results.data),
                 computed_type: this.props.results.type,
             });
         }
-    }
 
-    componentWillMount() {
         if (
             !!this.props &&
             !!this.props.location
@@ -217,6 +224,30 @@ class CurrentResultDisplay extends Component {
         );
     }
 
+    tableHeaders(header) {
+        var row = Object.entries(header).map(([key, value]) => (
+            <th key={`th-${key}`}>{key}</th>
+        ));
+        return <tr><th>{'#'}</th>{row}</tr>;
+    }
+
+    tableRows(body) {
+        if (Array.isArray(body)) {
+            return body.map((rows, trIdx) => {
+                var row = rows.map((cell, tdIdx) =>
+                    <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
+                );
+                return <tr key={`tr-${trIdx}`}><td key={`td-index-${trIdx}`}>{trIdx}</td>{row}</tr>;
+            });
+        }
+        else {
+            var row = Object.entries(body).map(([key, value]) => (
+                <td key={`td-singleton-${key}`}>{value}</td>
+            ));
+            return <tr><td>{'1'}</td>{row}</tr>;
+        }
+    }
+
     render() {
         // local variables
         var resultType = null;
@@ -293,7 +324,7 @@ class CurrentResultDisplay extends Component {
                                     <div className='col-sm-12'>
                                         <div className='form-group'>
                                             <Submit
-                                                btnDisabled={true}
+                                                btnDisabled
                                                 btnValue='Save'
                                                 cssClass='btn fullspan'
                                             />
