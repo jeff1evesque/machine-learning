@@ -13,7 +13,13 @@ import { NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 class RegisterLink extends Component {
-    // call back: return register button
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        user: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }),
+    }
+
     renderContent() {
         if (
             this.props &&
@@ -22,17 +28,17 @@ class RegisterLink extends Component {
         ) {
             return (
                 <NavLink
-                    to='/register'
                     activeClassName='active'
                     className='btn btn-primary'
+                    to='/register'
                 >
-                    <span>Sign up</span>
+                    <span>{'Sign up'}</span>
                 </NavLink>
             );
         }
         return (<span />);
     }
-    // triggered when 'state properties' change
+
     render() {
         const selectedContent = this.renderContent();
         return (selectedContent);
