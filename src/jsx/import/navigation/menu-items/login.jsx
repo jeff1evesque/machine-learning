@@ -20,6 +20,7 @@ import ajaxCaller from '../../general/ajax-caller.js';
 class LoginLink extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
+        dispatchLogout: PropTypes.func,
         history: PropTypes.shape({
             push: PropTypes.string.isRequired,
         }),
