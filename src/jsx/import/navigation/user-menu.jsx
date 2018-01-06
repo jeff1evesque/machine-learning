@@ -18,6 +18,20 @@ import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
 
 class UserMenu extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchLogout: PropTypes.func,
+        history: PropTypes.shape({
+            push: PropTypes.string.isRequired,
+        }),
+        location: PropTypes.shape({
+            pathname: PropTypes.string.isRequired,
+        }),
+        user: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }),
+    }
+
     constructor(props) {
       // @super is required when constructor defined
       // @props argument is fed into super, only if 'this.props' used in constructor
@@ -89,6 +103,7 @@ class UserMenu extends Component {
             ajaxArguments);
         }
     }
+
     getCurrentUser() {
         if (
             this.props &&
@@ -104,29 +119,31 @@ class UserMenu extends Component {
 
         return user;
     }
+
     getSessionDropdown(title) {
         return (
             <Nav pullRight>
                 <NavDropdown
-                    title={title}
                     id='basic-nav-dropdown'
+                    title={title}
                 >
                     <LinkContainer to='/session/data-new'>
-                        <NavItem>Add new data</NavItem>
+                        <NavItem>{'Add new data'}</NavItem>
                     </LinkContainer>
                     <LinkContainer to='/session/data-append'>
-                        <NavItem>Append data</NavItem>
+                        <NavItem>{'Append data'}</NavItem>
                     </LinkContainer>
                     <LinkContainer to='/session/model-generate'>
-                        <NavItem>Generate model</NavItem>
+                        <NavItem>{'Generate model'}</NavItem>
                     </LinkContainer>
                     <LinkContainer to='/session/model-predict'>
-                        <NavItem>Make prediction</NavItem>
+                        <NavItem>{'Make prediction'}</NavItem>
                     </LinkContainer>
                 </NavDropdown>
             </Nav>
         )
     }
+
     showDesktopUserDropdown() {
         const user = this.getCurrentUser();
         const sessionDropdown = this.getSessionDropdown(<SvgBooks />);
@@ -134,23 +151,29 @@ class UserMenu extends Component {
             <Navbar.Collapse>
                 <Nav pullRight>
                     <NavDropdown
-                        title={<SvgUser />}
                         className='svg-dropdown-user'
                         id='basic-nav-dropdown'
+                        title={<SvgUser />}
                     >
-                        <MenuItem className='navbar-text' disabled>
-                            Welcome {user}!
+                        <MenuItem
+                            className='navbar-text'
+                            disabled
+                        >
+                            {`Welcome ${user}!`}
                         </MenuItem>
                         <MenuItem divider />
                         <LinkContainer to='/session'>
-                            <NavItem>Dashboard</NavItem>
+                            <NavItem>{'Dashboard'}</NavItem>
                         </LinkContainer>
                         <LinkContainer to='/session/results'>
-                            <NavItem>My results</NavItem>
+                            <NavItem>{'My results'}</NavItem>
                         </LinkContainer>
                         <MenuItem divider />
-                        <LinkContainer to='/logout' onClick={this.handleClick}>
-                            <NavItem>Sign out</NavItem>
+                        <LinkContainer
+                            onClick={this.handleClick}
+                            to='/logout'
+                        >
+                            <NavItem>{'Sign out'}</NavItem>
                         </LinkContainer>
                     </NavDropdown>
                 </Nav>
@@ -158,32 +181,38 @@ class UserMenu extends Component {
             </Navbar.Collapse>
         )
     }
+
     showMobileUserDropdown() {
         const user = this.getCurrentUser();
-        const title = <span>
-            <span><SvgUser /></span>
-            <span className='menu-label'>{user}</span>
-        </span>
+        const title = (
+            <span>
+                <span><SvgUser /></span>
+                <span className='menu-label'>{user}</span>
+            </span>
+        );
         const session = <span>
             <span><SvgBooks /></span>
-            <span className='menu-label'>Session</span>
+            <span className='menu-label'>{'Session'}</span>
         </span>
         const sessionDropdown = this.getSessionDropdown(session);
         return (
             <Navbar.Collapse>
                 <Nav pullRight>
                     <NavDropdown
-                        title={title}
                         id='basic-nav-dropdown'
+                        title={title}
                     >
                         <LinkContainer to='/session'>
                             <NavItem>Dashboard</NavItem>
                         </LinkContainer>
                         <LinkContainer to='/session/results'>
-                            <NavItem>My results</NavItem>
+                            <NavItem>{'My results'}</NavItem>
                         </LinkContainer>
-                        <LinkContainer to='/logout' onClick={this.handleClick}>
-                            <NavItem>Sign out</NavItem>
+                        <LinkContainer
+                            onClick={this.handleClick}
+                            to='/logout'
+                        >
+                            <NavItem>{'Sign out'}</NavItem>
                         </LinkContainer>
                     </NavDropdown>
                 </Nav>
@@ -191,20 +220,27 @@ class UserMenu extends Component {
             </Navbar.Collapse>
         )
     }
+
     render() {
         const userDesktopDropdown = this.showDesktopUserDropdown();
         const userMobileDropdown = this.showMobileUserDropdown();
 
         return(
             <div>
-                <Navbar inverse collapseOnSelect>
+                <Navbar
+                    collapseOnSelect
+                    inverse
+                >
                     <Navbar.Header>
                         <Navbar.Brand>
                             <Link to='/'><SvgHome /></Link>
                         </Navbar.Brand>
                         <Navbar.Toggle />
                     </Navbar.Header>
-                    <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                    <BreakpointRender
+                        breakpoints={breakpoints}
+                        type='viewport'
+                    >
                         {bp => (
                             bp.isGt('small') 
                                 ? userDesktopDropdown
