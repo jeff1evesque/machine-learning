@@ -72,23 +72,12 @@ class AnalysisLayout extends Component {
         this.props.dispatchLayout(action);
     }
 
-    componentDidUpdate() {
+    componentWillReceiveProps(nextProps) {
         // update state using react-route properties
-        if (
-            !!this.props.sessionType &&
-            this.props.sessionType != this.state.session_type
-        ) {
-            this.setState({ session_type: this.props.sessionType });
-        }
-
-        if (
-            !!this.props.sessionTypeValue &&
-            this.props.sessionTypeValue != this.state.session_type_value
-        ) {
-            this.setState({
-                session_type_value: this.props.sessionTypeValue,
-            });
-        }
+        this.setState({
+            session_type: nextProps.sessionType
+            session_type_value: nextProps.sessionTypeValue,
+        });
     }
 
     // send form data to serverside on form submission
