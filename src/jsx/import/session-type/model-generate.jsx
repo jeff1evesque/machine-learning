@@ -279,7 +279,7 @@ class ModelGenerate extends Component {
                                         key={value.id}
                                         value={value.collection}
                                     >
-                                        {${value.id}: ${value.collection}}
+                                        {`${value.id}: ${value.collection}`}
                                     </option>
                                 )
                             )}
