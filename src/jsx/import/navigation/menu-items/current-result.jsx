@@ -17,7 +17,7 @@ const CurrentResultLink = () =>
             className='btn mn-2'
             to='/session/current-result'
         >
-            <span>Goto results</span>
+            <span>{'Goto results'}</span>
         </NavLink>
     );
 
