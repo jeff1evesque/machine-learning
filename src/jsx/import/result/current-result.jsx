@@ -17,7 +17,14 @@ import ajaxCaller from '../general/ajax-caller.js';
 import transpose from '../formatter/transpose.js'
 
 class CurrentResultDisplay extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchLogout: PropTypes.func,
+        results: PropTypes.shape({
+            type: PropTypes.string,
+        }),
+    }
+
     constructor() {
         super();
         this.state = {
@@ -30,6 +37,119 @@ class CurrentResultDisplay extends Component {
         };
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    tableHeaders(header) {
+        var row = Object.entries(header).map(([key, value]) => (
+            <th key={`th-${key}`}>{key}</th>
+        ));
+        return <tr><th>{'#'}</th>{row}</tr>;
+    }
+
+    tableRows(body) {
+        if (Array.isArray(body)) {
+            return body.map((rows, trIdx) => {
+                var row = rows.map((cell, tdIdx) =>
+                    <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
+                );
+                return <tr key={`tr-${trIdx}`}><td key={`td-index-${trIdx}`}>{trIdx}</td>{row}</tr>;
+            });
+        }
+        else {
+            var row = Object.entries(body).map(([key, value]) => (
+                <td key={`td-singleton-${key}`}>{value}</td>
+            ));
+            return <tr><td>{'1'}</td>{row}</tr>;
+        }
+    }
+
+    componentDidUpdate() {
+        if (
+            this.props &&
+            this.props.results &&
+            !!this.props.results.data &&
+            !!this.props.results.type &&
+            this.state.computed_result != JSON.stringify(this.props.results.data)
+        ) {
+            this.setState({
+                computed_result: JSON.stringify(this.props.results.data),
+                computed_type: this.props.results.type,
+            });
+        }
+    }
+
+    componentWillMount() {
+        if (
+            !!this.props &&
+            !!this.props.location
+        ) {
+            const parsed = queryString.parse(this.props.location.search);
+            if (!!parsed && !!parsed.nid) {
+                this.setState({ nid: parsed.nid });
+            }
+        }
+
+        // update redux store: define overall page layout
+        const action = setLayout({ layout: 'analysis' });
+        this.props.dispatchLayout(action);
+
+        const actionContentType = setContentType({ layout: 'result' });
+        this.props.dispatchContentType(actionContentType);
+    }
+
+    componentDidMount() {
+        // execute if 'nid' defined from 'componentWillMount'
+        if (this.state && !!this.state.nid) {
+            // ajax arguments
+            const data = new FormData();
+            data.append('id_result', this.state.nid);
+            const ajaxEndpoint = '/retrieve-prediction';
+            const ajaxArguments = {
+                endpoint: ajaxEndpoint,
+                data,
+            };
+
+            // boolean to show ajax spinner
+            if (
+                this.state &&
+                !this.state.display_spinner &&
+                !this.state.ajax_done_result
+            ) {
+                this.setState({ display_spinner: true });
+            }
+
+            // asynchronous callback: ajax 'done' promise
+            ajaxCaller(
+                (asynchObject) => {
+                    // Append to DOM
+                    if (asynchObject && asynchObject.error) {
+                        this.setState({ ajax_retrieval_error: asynchObject.error });
+                    } else if (asynchObject) {
+                        this.setState({ ajax_retrieval_result: asynchObject });
+                    } else {
+                        this.setState({ ajax_retrieval_result: null });
+                    }
+                    // boolean to hide ajax spinner
+                    this.setState({ display_spinner: false });
+                },
+                // asynchronous callback: ajax 'fail' promise
+                (asynchStatus, asynchError) => {
+                    if (asynchStatus) {
+                        this.setState({ ajax_retrieval_status: asynchStatus });
+                        console.log(`Error Status: ${asynchStatus}`);
+                    }
+                    if (asynchError) {
+                        this.setState({ ajax_retrieval_error: asynchError });
+                        console.log(`Error Thrown: ${asynchError}`);
+                    }
+                    // boolean to hide ajax spinner
+                    this.setState({ display_spinner: false });
+                },
+                // pass ajax arguments
+                ajaxArguments,
+            );
+        }
+    }
+
     // send form data to serverside on form submission
     handleSubmit(event) {
         // prevent page reload
@@ -96,114 +216,7 @@ class CurrentResultDisplay extends Component {
             ajaxArguments,
         );
     }
-    tableHeaders(header) {
-        var row = Object.entries(header).map(([key, value]) => (
-            <th key={`th-${key}`}>{key}</th>
-        ));
-        return <tr><th>#</th>{row}</tr>;
-    }
-    tableRows(body) {
-        if (Array.isArray(body)) {
-            return body.map((rows, trIdx) => {
-                var row = rows.map((cell, tdIdx) =>
-                    <td key={`td-row${trIdx}-cell${tdIdx}`}>{cell}</td>
-                );
-                return <tr key={`tr-${trIdx}`}><td key={`td-index-${trIdx}`}>{trIdx}</td>{row}</tr>;
-            });
-        }
-        else {
-            var row = Object.entries(body).map(([key, value]) => (
-                <td key={`td-singleton-${key}`}>{value}</td>
-            ));
-            return <tr><td>1</td>{row}</tr>;
-        }
-    }
-    // define properties after update
-    componentDidUpdate() {
-        if (
-            this.props &&
-            this.props.results &&
-            !!this.props.results.data &&
-            !!this.props.results.type &&
-            this.state.computed_result != JSON.stringify(this.props.results.data)
-        ) {
-            this.setState({
-                computed_result: JSON.stringify(this.props.results.data),
-                computed_type: this.props.results.type,
-            });
-        }
-    }
-    componentWillMount() {
-        if (
-            !!this.props &&
-            !!this.props.location
-        ) {
-            const parsed = queryString.parse(this.props.location.search);
-            if (!!parsed && !!parsed.nid) {
-                this.setState({ nid: parsed.nid });
-            }
-        }
 
-        // update redux store: define overall page layout
-        const action = setLayout({ layout: 'analysis' });
-        this.props.dispatchLayout(action);
-
-        const actionContentType = setContentType({ layout: 'result' });
-        this.props.dispatchContentType(actionContentType);
-    }
-    componentDidMount() {
-        // execute if 'nid' defined from 'componentWillMount'
-        if (this.state && !!this.state.nid) {
-            // ajax arguments
-            const data = new FormData();
-            data.append('id_result', this.state.nid);
-            const ajaxEndpoint = '/retrieve-prediction';
-            const ajaxArguments = {
-                endpoint: ajaxEndpoint,
-                data,
-            };
-
-            // boolean to show ajax spinner
-            if (
-                this.state &&
-                !this.state.display_spinner &&
-                !this.state.ajax_done_result
-            ) {
-                this.setState({ display_spinner: true });
-            }
-
-            // asynchronous callback: ajax 'done' promise
-            ajaxCaller(
-                (asynchObject) => {
-                    // Append to DOM
-                    if (asynchObject && asynchObject.error) {
-                        this.setState({ ajax_retrieval_error: asynchObject.error });
-                    } else if (asynchObject) {
-                        this.setState({ ajax_retrieval_result: asynchObject });
-                    } else {
-                        this.setState({ ajax_retrieval_result: null });
-                    }
-                    // boolean to hide ajax spinner
-                    this.setState({ display_spinner: false });
-                },
-                // asynchronous callback: ajax 'fail' promise
-                (asynchStatus, asynchError) => {
-                    if (asynchStatus) {
-                        this.setState({ ajax_retrieval_status: asynchStatus });
-                        console.log(`Error Status: ${asynchStatus}`);
-                    }
-                    if (asynchError) {
-                        this.setState({ ajax_retrieval_error: asynchError });
-                        console.log(`Error Thrown: ${asynchError}`);
-                    }
-                    // boolean to hide ajax spinner
-                    this.setState({ display_spinner: false });
-                },
-                // pass ajax arguments
-                ajaxArguments,
-            );
-        }
-    }
     render() {
         // local variables
         var resultType = null;
@@ -238,7 +251,10 @@ class CurrentResultDisplay extends Component {
             // generate result
             var resultList = (
                 <div className='result-form'>
-                    <Table className='result-row' responsive>
+                    <Table
+                        className='result-row'
+                        responsive
+                    >
                         <thead>
                             {this.tableHeaders(selected)}
                         </thead>
@@ -249,20 +265,26 @@ class CurrentResultDisplay extends Component {
                     </Table>
                     <div className='row result-row'>
                         <div className='col-sm-9 prediction-result'>
-                            <h4><span className='grayed-font'>Predicted:</span> {result}</h4>
+                            <h4>
+                                <span className='grayed-font'>{'Predicted: '}</span>
+                                {result}
+                            </h4>
                         </div>
                         <div className='col-sm-3'>
-                            <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                            <form
+                                onSubmit={this.handleSubmit}
+                                ref='savePredictionForm'
+                            >
                                 <div className='row'>
                                     <div className='col-sm-12'>
                                         <div className='form-group no-vertical-margin'>
                                             <input
-                                                disabled
                                                 className='form-control fullspan'
-                                                type='text'
+                                                defaultValue=''
+                                                disabled
                                                 name='title'
                                                 placeholder='Name your result'
-                                                defaultValue=''
+                                                type='text'
                                             />
                                         </div>
                                     </div>
@@ -271,9 +293,9 @@ class CurrentResultDisplay extends Component {
                                     <div className='col-sm-12'>
                                         <div className='form-group'>
                                             <Submit
+                                                btnDisabled={true}
                                                 btnValue='Save'
                                                 cssClass='btn fullspan'
-                                                btnDisabled={true}
                                             />
                                         </div>
                                     </div>
@@ -298,7 +320,10 @@ class CurrentResultDisplay extends Component {
 
             var resultList = (
                 <div className='result-form'>
-                    <Table className='result-row' responsive>
+                    <Table
+                        className='result-row'
+                        responsive
+                    >
                         <thead>
                             {this.tableHeaders(selected)}
                         </thead>
@@ -309,19 +334,25 @@ class CurrentResultDisplay extends Component {
                     </Table>
                     <div className='row result-row'>
                         <div className='col-sm-9 prediction-result'>
-                            <h4><span className='grayed-font'>Predicted:</span> {result}</h4>
+                            <h4>
+                                <span className='grayed-font'>{'Predicted: '}</span>
+                                {result}
+                            </h4>
                         </div>
                         <div className='col-sm-3'>
-                            <form onSubmit={this.handleSubmit} ref='savePredictionForm'>
+                            <form
+                                onSubmit={this.handleSubmit}
+                                ref='savePredictionForm'
+                            >
                                 <div className='row'>
                                     <div className='col-sm-12'>
                                         <div className='form-group no-vertical-margin'>
                                             <input
                                                 className='form-control fullspan'
-                                                type='text'
+                                                defaultValue=''
                                                 name='title'
                                                 placeholder='Name your result'
-                                                defaultValue=''
+                                                type='text'
                                             />
                                         </div>
                                     </div>
@@ -329,7 +360,10 @@ class CurrentResultDisplay extends Component {
                                 <div className='row'>
                                     <div className='col-sm-12'>
                                         <div className='form-group'>
-                                            <Submit btnValue='Save' cssClass='btn fullspan' />
+                                            <Submit
+                                                btnValue='Save'
+                                                cssClass='btn fullspan'
+                                            />
                                         </div>
                                     </div>
                                 </div>
@@ -341,7 +375,7 @@ class CurrentResultDisplay extends Component {
         } else {
             var resultList = (
                 <div className='result-list'>
-                    Sorry, no results available!
+                    {'Sorry, no results available!'}
                 </div>
             );
         }
@@ -349,7 +383,7 @@ class CurrentResultDisplay extends Component {
         // display result
         return (
             <div className='result-container'>
-                <h1>{resultType} Result</h1>
+                <h1>{`${resultType} Result`}</h1>
                 <div>
                     {resultList}
                     {saveResults}
