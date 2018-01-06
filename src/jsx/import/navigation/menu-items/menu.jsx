@@ -11,17 +11,15 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import SvgNavIcon from '../../svg/svg-navicon.jsx';
 
-const MenuLink = () =>
-    // triggered when 'state properties' change
-    (
-        <NavLink
-            to='/'
-            activeClassName='active'
-            className='icon menu'
-        >
-            <SvgNavIcon />
-        </NavLink>
-    );
+const MenuLink = () => (
+    <NavLink
+        activeClassName='active'
+        className='icon menu'
+        to='/'
+    >
+        <SvgNavIcon />
+    </NavLink>
+);
 
 // indicate which class can be exported, and instantiated via 'require'
 export default MenuLink;
