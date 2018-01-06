@@ -74,8 +74,19 @@ class AnalysisLayout extends Component {
 
     componentWillReceiveProps(nextProps) {
         // update state using react-route properties
-        this.setState({
-            session_type: nextProps.sessionType
+        if (
+            nextProps &&
+            nextProps.sessionType &&
+            this.props.sessionType != nextProps.sessionType
+        ) {
+            this.setState({session_type: nextProps.sessionType});
+        });
+
+        if (
+            nextProps &&
+            nextProps.sessionTypeValue &&
+            this.props.sessionTypeValue != nextProps.sessionTypeValue
+        ) {
             session_type_value: nextProps.sessionTypeValue,
         });
     }
