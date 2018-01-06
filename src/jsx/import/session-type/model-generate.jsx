@@ -274,15 +274,15 @@ class ModelGenerate extends Component {
                             </option>
 
                             {
-                                options && options.map(value => (
+                                options && options.map((value) => (
                                     <option
                                         key={value.id}
                                         value={value.collection}
                                     >
                                         {`${value.id}: ${value.collection}`}
                                     </option>
-                                )
-                            )}
+                                ))
+                            }
 
                         </select>
                     </div>
