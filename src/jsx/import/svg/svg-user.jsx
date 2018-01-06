@@ -51,7 +51,7 @@ class SvgUser extends Component {
                         r='80'
                         style={{fill:this.state.head_color}}
                     />
-	                <path
+                    <path
                         d={`
                             M391.343, 433.041c0 -61.853 -25.654 -116.077 -64.162
                             -146.426c -16.932, 20.482 -42.531, 33.537 -71.18,
