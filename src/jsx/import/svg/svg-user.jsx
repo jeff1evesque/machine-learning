@@ -45,7 +45,7 @@ class SvgUser extends Component {
                 y='0px'
             >
                 <g>
-	                <circle
+                    <circle
                         cx='50%'
                         cy='42%'
                         r='80'
