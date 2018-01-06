@@ -190,10 +190,12 @@ class UserMenu extends Component {
                 <span className='menu-label'>{user}</span>
             </span>
         );
-        const session = <span>
-            <span><SvgBooks /></span>
-            <span className='menu-label'>{'Session'}</span>
-        </span>
+        const session = (
+            <span>
+                <span><SvgBooks /></span>
+                <span className='menu-label'>{'Session'}</span>
+            </span>
+        );
         const sessionDropdown = this.getSessionDropdown(session);
         return (
             <Navbar.Collapse>
@@ -203,7 +205,7 @@ class UserMenu extends Component {
                         title={title}
                     >
                         <LinkContainer to='/session'>
-                            <NavItem>Dashboard</NavItem>
+                            <NavItem>{'Dashboard'}</NavItem>
                         </LinkContainer>
                         <LinkContainer to='/session/results'>
                             <NavItem>{'My results'}</NavItem>
