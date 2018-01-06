@@ -21,7 +21,7 @@ class RegisterForm extends Component {
     static propTypes = {
         dispatchLayout: PropTypes.func,
         dispatchSpinner: PropTypes.func,
-        user: PropTypes.shape({ name: PropTypes.string.isRequired }),
+        user: PropTypes.shape({ name: PropTypes.string.isRequired, }),
     }
 
     constructor() {
