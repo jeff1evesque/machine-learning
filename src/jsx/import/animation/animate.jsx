@@ -30,7 +30,7 @@ class AnimateCollisions extends Component {
         nodes: PropTypes.arrayOf(
             PropTypes.shape({
                 r: PropTypes.number.isRequired,
-            })
+            }),
         ),
         radius_delta: PropTypes.number,
     }

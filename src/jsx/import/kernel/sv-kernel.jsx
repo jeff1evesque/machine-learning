@@ -14,7 +14,7 @@ class SupportVectorKernels extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
         onChange: PropTypes.shape({
-            kernelType: PropTypes.string.isRequired
+            kernelType: PropTypes.string.isRequired,
         }),
     }
 

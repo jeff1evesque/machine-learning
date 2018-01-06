@@ -43,7 +43,7 @@ class AnalysisLayout extends Component {
             slider: PropTypes.shape({
                 gamma: PropTypes.number,
                 penalty: PropTypes.number,
-            })
+            }),
         }),
         sessionType: PropTypes.string,
         sessionTypeValue: PropTypes.string,

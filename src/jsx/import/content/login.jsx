@@ -24,7 +24,7 @@ class LoginForm extends Component {
         dispatchLayout: PropTypes.func,
         dispatchLogin: PropTypes.func,
         dispatchSpinner: PropTypes.func,
-        user: PropTypes.shape({ name: PropTypes.string.isRequired }),
+        user: PropTypes.shape({ name: PropTypes.string.isRequired, }),
     }
 
     constructor() {

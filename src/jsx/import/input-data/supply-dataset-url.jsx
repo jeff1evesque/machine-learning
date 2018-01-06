@@ -14,7 +14,7 @@ class SupplyDatasetUrl extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
         onChange: PropTypes.shape({
-            submitted_proper_predictor: PropTypes.bool.isRequired
+            submitted_proper_predictor: PropTypes.bool.isRequired,
         }),
     }
 
