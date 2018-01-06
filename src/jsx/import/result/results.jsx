@@ -15,7 +15,13 @@ import { setLayout, setContentType, setSpinner } from '../redux/action/page.jsx'
 import ajaxCaller from '../general/ajax-caller.js';
 
 class ResultsDisplay extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchContentType: PropTypes.func,
+        dispatchLayout: PropTypes.func,
+        dispatchSpinner: PropTypes.func,
+    }
+
     constructor() {
         super();
         this.state = {
@@ -23,6 +29,7 @@ class ResultsDisplay extends Component {
             status: null,
         };
     }
+
     componentWillMount() {
         // update redux store
         const actionLayout = setLayout({ layout: 'analysis' });
@@ -31,6 +38,7 @@ class ResultsDisplay extends Component {
         const actionContentType = setContentType({ layout: 'result' });
         this.props.dispatchContentType(actionContentType);
     }
+
     // call back: get all titles, and nid from server side
     componentDidMount() {
         // ajax arguments
@@ -78,6 +86,7 @@ class ResultsDisplay extends Component {
             ajaxArguments,
         );
     }
+
     render() {
         // local variables
         const status = this.state.status;
@@ -86,13 +95,16 @@ class ResultsDisplay extends Component {
         // generate result
         if (status == 0 && titles && titles.length > 0) {
             var resultList = (
-                <Table className='result-row' responsive>
+                <Table
+                    className='result-row'
+                    responsive
+                >
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>session_id</th>
-                            <th>session_title</th>
-                            <th>date_created</th>
+                            <th>{'#'}</th>
+                            <th>{'session_id'}</th>
+                            <th>{'session_title'}</th>
+                            <th>{'date_created'}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -105,8 +117,8 @@ class ResultsDisplay extends Component {
                                             <td key={`td-sid-${trIdx}`}>{cells[0]}</td>
                                             <td key={`td-title-${trIdx}`}>
                                                 <NavLink
-                                                    to={`/session/current-result?nid=${cells[0]}`}
                                                     key={`link-title-${trIdx}`}
+                                                    to={`/session/current-result?nid=${cells[0]}`}
                                                 >
                                                     {cells[1]}
                                                 </NavLink>
@@ -125,14 +137,14 @@ class ResultsDisplay extends Component {
             );
         } else {
             var resultList = (
-                <div className='result-list'>Sorry, no results available!</div>
+                <div className='result-list'>{'Sorry, no results available!'}</div>
             );
         }
 
         // display result
         return (
             <div className='result-container'>
-                <h2>Your Results</h2>
+                <h2>{'Your Results'}</h2>
                 <div>{resultList}</div>
             </div>
         );
