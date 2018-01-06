@@ -135,6 +135,27 @@ class CurrentResultDisplay extends Component {
         }
     }
 
+    componentWillReceiveProps(nextProps) {
+        if (
+            this.props &&
+            this.props.results &&
+            !!this.props.results.data &&
+            nextProps &&
+            nextProps.results &&
+            !!nextProps.results.data
+        ) {
+            const props_data = this.props.results;
+            const next_data = nextProps.results;
+
+            if (props_data != next_data) {
+                this.setState({
+                    computed_result: JSON.stringify(next_data.data),
+                    computed_type: next_data.type,
+                });
+            }
+        };
+    }
+
     // send form data to serverside on form submission
     handleSubmit(event) {
         // prevent page reload
@@ -200,27 +221,6 @@ class CurrentResultDisplay extends Component {
             // pass ajax arguments
             ajaxArguments,
         );
-    }
-
-    componentWillReceiveProps(nextProps) {
-        if (
-            this.props &&
-            this.props.results &&
-            !!this.props.results.data &&
-            nextProps &&
-            nextProps.results &&
-            !!nextProps.results.data
-        ) {
-            const props_data = this.props.results;
-            const next_data = nextProps.results;
-
-            if (props_data != next_data) {
-                this.setState({
-                    computed_result: JSON.stringify(next_data.data),
-                    computed_type: next_data.type,
-                });
-            }
-        };
     }
 
     tableHeaders(header) {
