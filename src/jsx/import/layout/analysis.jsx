@@ -87,7 +87,7 @@ class AnalysisLayout extends Component {
             nextProps.sessionTypeValue &&
             this.props.sessionTypeValue != nextProps.sessionTypeValue
         ) {
-            session_type_value: nextProps.sessionTypeValue,
+            this.setState({session_type_value: nextProps.sessionTypeValue}),
         });
     }
 
