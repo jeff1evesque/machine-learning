@@ -33,13 +33,29 @@ class DataNew extends Component {
             value_dataset_type: '--Select--',
             value_model_type: '--Select--',
         };
-        this.changeCollection = this.changeCollection.bind(this);
+        this.handleCollection = this.handleCollection.bind(this);
         this.handleDatasetType = this.handleDatasetType.bind(this);
         this.handleModelType = this.handleModelType.bind(this);
         this.handleTitle = this.handleTitle.bind(this);
         this.getSupplyDataset = this.getSupplyDataset.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    componentWillMount(event) {
+        // update redux store
+        const actionLayout = setLayout({ layout: 'analysis' });
+        this.props.dispatchLayout(actionLayout);
+
+        const actionContentType = setContentType({ layout: 'data_new' });
+        this.props.dispatchContentType(actionContentType);
+    }
+
+    componentWillUnmount() {
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
+        this.props.dispatchSvButton(action);
+    }
+
     // update 'state properties'
     handleDatasetType(event) {
         const datasetType = event.target.value;
@@ -57,6 +73,7 @@ class DataNew extends Component {
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
+
     handleTitle(event) {
         const sessionTitle = event.target.value;
 
@@ -70,7 +87,8 @@ class DataNew extends Component {
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
-    changeCollection(event) {
+
+    handleCollection(event) {
         const collection = event.target.value;
 
         if (collection && checkValidString(collection)) {
@@ -83,6 +101,22 @@ class DataNew extends Component {
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
+
+    // update 'state properties' from child component
+    handleSubmit(event) {
+        if (event.submitted_proper_dataset) {
+            // update redux store
+            const action = setSvButton({
+                button: { submit_analysis: event.submitted_proper_dataset },
+            });
+            this.props.dispatchSvButton(action);
+        } else {
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
+            this.props.dispatchSvButton(action);
+        }
+    }
+
     // update 'state properties' from child component (i.e. 'value_model_type')
     handleModelType(event) {
         const modelType = event.value_model_type;
@@ -100,29 +134,28 @@ class DataNew extends Component {
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
-    // update 'state properties' from child component
-    handleSubmit(event) {
-        if (event.submitted_proper_dataset) {
-            // update redux store
-            const action = setSvButton({
-                button: { submit_analysis: event.submitted_proper_dataset },
-            });
-            this.props.dispatchSvButton(action);
-        } else {
-            // update redux store
-            const action = setSvButton({ button: { submit_analysis: false } });
-            this.props.dispatchSvButton(action);
-        }
-    }
-    componentWillMount(event) {
-        // update redux store
-        const actionLayout = setLayout({ layout: 'analysis' });
-        this.props.dispatchLayout(actionLayout);
 
-        const actionContentType = setContentType({ layout: 'data_new' });
-        this.props.dispatchContentType(actionContentType);
+    getSupplyDataset(datasetType, title, collection, modelType) {
+        if (
+            title &&
+            checkValidString(title) &&
+            collection &&
+            checkValidString(collection) &&
+            datasetType &&
+            checkValidString(datasetType) &&
+            datasetType != '--Select--' &&
+            modelType &&
+            checkValidString(modelType) &&
+            modelType != '--Select--'
+        ) {
+            return {
+                file_upload: SupplyDatasetFile,
+                dataset_url: SupplyDatasetUrl,
+            }[datasetType] || null;
+        }
+        return null;
     }
-    // triggered when 'state properties' change
+
     render() {
         const datasetType = this.state.value_dataset_type;
         const datasetTitle = this.state.value_title;
@@ -167,7 +200,7 @@ class DataNew extends Component {
                         <input
                             className='form-control fullspan'
                             name='collection'
-                            onInput={this.changeCollection}
+                            onInput={this.handleCollection}
                             placeholder='Collection'
                             type='text'
                             value={this.state.value_collection}
@@ -212,32 +245,6 @@ class DataNew extends Component {
                 {datasetInput}
             </fieldset>
         );
-    }
-    // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset(datasetType, title, collection, modelType) {
-        if (
-            title &&
-            checkValidString(title) &&
-            collection &&
-            checkValidString(collection) &&
-            datasetType &&
-            checkValidString(datasetType) &&
-            datasetType != '--Select--' &&
-            modelType &&
-            checkValidString(modelType) &&
-            modelType != '--Select--'
-        ) {
-            return {
-                file_upload: SupplyDatasetFile,
-                dataset_url: SupplyDatasetUrl,
-            }[datasetType] || null;
-        }
-        return null;
-    }
-    componentWillUnmount() {
-        // update redux store
-        const action = setSvButton({ button: { submit_analysis: false } });
-        this.props.dispatchSvButton(action);
     }
 }
 

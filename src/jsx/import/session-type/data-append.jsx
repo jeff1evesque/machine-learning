@@ -54,55 +54,6 @@ class DataAppend extends Component {
         this.getSupplyDataset = this.getSupplyDataset.bind(this);
     }
 
-    // update 'state properties' from child component (i.e. 'value_model_type')
-    handleModelType(event) {
-        const modelType = event.value_model_type;
-
-        if (
-            modelType && modelType != '--Select--' &&
-            checkValidString(modelType)
-        ) {
-            this.setState({ value_model_type: modelType });
-        } else {
-            this.setState({ value_model_type: '--Select--' });
-        }
-
-        // update redux store
-        const action = setSvButton({ button: { submit_analysis: false } });
-        this.props.dispatchSvButton(action);
-    }
-
-    // update 'state properties' from child component
-    handleSubmit(event) {
-        if (event.submitted_proper_dataset) {
-            // update redux store
-            const action = setSvButton({
-                button: { submit_analysis: event.submitted_proper_dataset },
-            });
-            this.props.dispatchSvButton(action);
-        } else {
-            // update redux store
-            const action = setSvButton({ button: { submit_analysis: false } });
-            this.props.dispatchSvButton(action);
-        }
-    }
-
-    // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset(datasetType, collection, modelType) {
-        if (
-            datasetType && checkValidString(datasetType) &&
-            datasetType != '--Select--' && collection &&
-            checkValidString(collection) && modelType &&
-            checkValidString(modelType) && modelType != '--Select--'
-        ) {
-            return {
-                file_upload: SupplyDatasetFile,
-                dataset_url: SupplyDatasetUrl,
-            }[datasetType] || null;
-        }
-        return null;
-    }
-
     componentWillMount() {
         // update redux store
         const actionLayout = setLayout({ layout: 'analysis' });
@@ -161,6 +112,55 @@ class DataAppend extends Component {
         // update redux store
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
+    }
+
+    // update 'state properties' from child component (i.e. 'value_model_type')
+    handleModelType(event) {
+        const modelType = event.value_model_type;
+
+        if (
+            modelType && modelType != '--Select--' &&
+            checkValidString(modelType)
+        ) {
+            this.setState({ value_model_type: modelType });
+        } else {
+            this.setState({ value_model_type: '--Select--' });
+        }
+
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
+        this.props.dispatchSvButton(action);
+    }
+
+    // update 'state properties' from child component
+    handleSubmit(event) {
+        if (event.submitted_proper_dataset) {
+            // update redux store
+            const action = setSvButton({
+                button: { submit_analysis: event.submitted_proper_dataset },
+            });
+            this.props.dispatchSvButton(action);
+        } else {
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
+            this.props.dispatchSvButton(action);
+        }
+    }
+
+    // call back: used for the above 'render' (return 'span' if undefined)
+    getSupplyDataset(datasetType, collection, modelType) {
+        if (
+            datasetType && checkValidString(datasetType) &&
+            datasetType != '--Select--' && collection &&
+            checkValidString(collection) && modelType &&
+            checkValidString(modelType) && modelType != '--Select--'
+        ) {
+            return {
+                file_upload: SupplyDatasetFile,
+                dataset_url: SupplyDatasetUrl,
+            }[datasetType] || null;
+        }
+        return null;
     }
 
     handleDatasetType(event) {
