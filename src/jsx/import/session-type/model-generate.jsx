@@ -24,7 +24,14 @@ import ajaxCaller from '../general/ajax-caller.js';
 import RangeSliderState from '../redux/container/range-slider.jsx';
 
 class ModelGenerate extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchContentType: PropTypes.func,
+        dispatchLayout: PropTypes.func,
+        dispatchSpinner: PropTypes.func,
+        dispatchSvButton: PropTypes.func,
+    }
+
     constructor() {
         super();
         this.state = {
@@ -39,239 +46,21 @@ class ModelGenerate extends Component {
             ajax_fail_status: null,
         };
         this.changeCollection = this.changeCollection.bind(this);
-        this.changeKernelType = this.changeKernelType.bind(this);
-        this.changeModelType = this.changeModelType.bind(this);
-        this.showPenaltySlider = this.showPenaltySlider.bind(this);
-        this.showGammaSlider = this.showGammaSlider.bind(this);
+        this.handleKernelType = this.handleKernelType.bind(this);
+        this.handleModelType = this.handleModelType.bind(this);
+        this.handlePenaltySlider = this.handlePenaltySlider.bind(this);
+        this.handleGammaSlider = this.handleGammaSlider.bind(this);
     }
-    // update 'state properties'
-    changeCollection(event) {
-        const collection = event.target.value;
-        const modelType = this.state.value_model_type;
-        const kernelType = this.state.value_kernel_type;
 
-        if (
-            collection &&
-            collection != '--Select--' &&
-            checkValidString(collection)
-        ) {
-            this.setState({ value_collection: collection });
+    componentWillMount() {
+        // update redux store
+        const actionLayout = setLayout({ layout: 'analysis' });
+        this.props.dispatchLayout(actionLayout);
 
-            // update redux store
-            if (
-                modelType != '--Select--' &&
-                kernelType != '--Select--' &&
-                checkValidString(modelType) &&
-                checkValidString(kernelType)
-            ) {
-                const action = setSvButton({ button: { submit_analysis: true } });
-                this.props.dispatchSvButton(action);
-            } else {
-                const action = setSvButton({ button: { submit_analysis: false } });
-                this.props.dispatchSvButton(action);
-            }
-        } else {
-            this.setState({ value_collection: '--Select--' });
-
-            // update redux store
-            const action = setSvButton({ button: { submit_analysis: false } });
-            this.props.dispatchSvButton(action);
-        }
+        const actionContentType = setContentType({ layout: 'model_generate' });
+        this.props.dispatchContentType(actionContentType);
     }
-    changeModelType(event) {
-        const collection = this.state.value_collection;
-        const modelType = event.target.value;
-        const kernelType = this.state.value_kernel_type;
 
-        if (
-            modelType &&
-            modelType != '--Select--' &&
-            checkValidString(modelType)
-        ) {
-            this.setState({ value_model_type: event.target.value });
-
-            // update redux store
-            if (
-                checkValidString(collection) &&
-                kernelType != '--Select--' &&
-                checkValidString(kernelType)
-            ) {
-                const action = setSvButton({ button: { submit_analysis: true } });
-                this.props.dispatchSvButton(action);
-            } else {
-                const action = setSvButton({ button: { submit_analysis: false } });
-                this.props.dispatchSvButton(action);
-            }
-        } else {
-            this.setState({ value_model_type: '--Select--' });
-
-            // update redux store
-            const action = setSvButton({ button: { submit_analysis: false } });
-            this.props.dispatchSvButton(action);
-        }
-    }
-    changeKernelType(event) {
-        const collection = this.state.value_collection;
-        const modelType = this.state.value_model_type;
-        const kernelType = event.target.value;
-
-        if (
-            kernelType &&
-            kernelType != '--Select--' &&
-            checkValidString(kernelType)
-        ) {
-            this.setState({ value_kernel_type: event.target.value });
-
-            // update redux store
-            if (
-                checkValidString(collection) &&
-                modelType != '--Select--' &&
-                checkValidString(modelType)
-            ) {
-                const action = setSvButton({ button: { submit_analysis: true } });
-                this.props.dispatchSvButton(action);
-            } else {
-                const action = setSvButton({ button: { submit_analysis: false } });
-                this.props.dispatchSvButton(action);
-            }
-        } else {
-            this.setState({ value_kernel_type: '--Select--' });
-
-            // update redux store
-            const action = setSvButton({ button: { submit_analysis: false } });
-            this.props.dispatchSvButton(action);
-        }
-    }
-    showPenaltySlider() {
-        this.setState({
-            checked_penalty: !this.state.checked_penalty
-        });
-    }
-    showGammaSlider() {
-        this.setState({
-            checked_gamma: !this.state.checked_gamma
-        });
-    }
-    createSlider(type, min, max, step) {
-        return (
-            <fieldset className={`fieldset-select-${type.toLowerCase()}`}>
-                <legend>{type}</legend>
-                <RangeSliderState min={min} max={max} step={step} />
-            </fieldset>
-        );
-    }
-    // triggered when 'state properties' change
-    render() {
-        const options = this.state.ajax_done_options;
-        const penaltySlider = this.state.checked_penalty
-            ? this.createSlider('Penalty', 1, 1000000, 1)
-            : null;
-        const gammaSlider  = this.state.checked_gamma
-            ? this.createSlider('Gamma', 1, 1000, 1)
-            : null;
-
-        return (
-            <fieldset className='fieldset-session-generate'>
-                <fieldset className='fieldset-select-model'>
-                    <legend>Configurations</legend>
-                    <div className='form-group'>
-                        <label className='block' htmlFor='selectCollection'>Collection</label>
-                        <select
-                            className='form-control fullspan'
-                            name='collection'
-                            autoComplete='off'
-                            onChange={event => this.changeCollection(event)}
-                            value={this.state.value_collection}
-                        >
-
-                            <option value='' defaultValue>--Select--</option>
-
-                            {/* array components require unique 'key' value */}
-                            {options && options.map(value =>
-                                (<option key={value.id} value={value.collection}>
-                                {value.id}: {value.collection}
-                            </option>))}
-
-                        </select>
-                    </div>
-
-                    <div className='row'>
-                        <div className='col-sm-6'>
-                            <div className='form-group'>
-                                <label className='block' htmlFor='selectModelType'>
-                                    Model Type
-                                </label>
-                                <select
-                                    className='form-control fullspan'
-                                    name='model_type'
-                                    autoComplete='off'
-                                    onChange={this.changeModelType}
-                                    value={this.state.value_model_type}
-                                >
-
-                                    <option value='' defaultValue>--Select--</option>
-                                    <option value='svm'>SVM</option>
-                                    <option value='svr'>SVR</option>
-
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className='col-sm-6'>
-                            <div className='form-group'>
-                                <label className='block' htmlFor='selectKernel'>Kernel</label>
-                                <select
-                                    className='form-control fullspan'
-                                    name='sv_kernel_type'
-                                    autoComplete='off'
-                                    onChange={this.changeKernelType}
-                                    value={this.state.value_kernel_type}
-                                >
-
-                                    <option value='' defaultValue>--Select--</option>
-                                    <option value='linear'>Linear</option>
-                                    <option value='poly'>Polynomial</option>
-                                    <option value='rbf'>RBF</option>
-                                    <option value='sigmoid'>Sigmoid</option>
-
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='row'>
-                        <div className='col-sm-2'>
-                            <div className='form-group'>
-                                <div className='checkbox'>
-                                    <label><span>Penalty</span></label>
-                                    <input
-                                        type='checkbox'
-                                        checked={this.state.checked_penalty}
-                                        onChange={this.showPenaltySlider}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-
-                        <div className='col-sm-2'>
-                            <div className='form-group'>
-                                <div className='checkbox'>
-                                    <label><span>Gamma</span></label>
-                                    <input
-                                        type='checkbox'
-                                        checked={this.state.checked_gamma}
-                                        onChange={this.showGammaSlider}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                {penaltySlider}
-                {gammaSlider}
-            </fieldset>
-        );
-    }
     // call back: get all collections from server side, and append to form
     componentDidMount() {
         // ajax arguments
@@ -316,18 +105,282 @@ class ModelGenerate extends Component {
             ajaxArguments,
         );
     }
-    componentWillMount() {
-        // update redux store
-        const actionLayout = setLayout({ layout: 'analysis' });
-        this.props.dispatchLayout(actionLayout);
 
-        const actionContentType = setContentType({ layout: 'model_generate' });
-        this.props.dispatchContentType(actionContentType);
-    }
     componentWillUnmount() {
         // update redux store
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
+    }
+
+    // update 'state properties'
+    changeCollection(event) {
+        const collection = event.target.value;
+        const modelType = this.state.value_model_type;
+        const kernelType = this.state.value_kernel_type;
+
+        if (
+            collection &&
+            collection != '--Select--' &&
+            checkValidString(collection)
+        ) {
+            this.setState({ value_collection: collection });
+
+            // update redux store
+            if (
+                modelType != '--Select--' &&
+                kernelType != '--Select--' &&
+                checkValidString(modelType) &&
+                checkValidString(kernelType)
+            ) {
+                const action = setSvButton({ button: { submit_analysis: true } });
+                this.props.dispatchSvButton(action);
+            } else {
+                const action = setSvButton({ button: { submit_analysis: false } });
+                this.props.dispatchSvButton(action);
+            }
+        } else {
+            this.setState({ value_collection: '--Select--' });
+
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
+            this.props.dispatchSvButton(action);
+        }
+    }
+
+    handleModelType(event) {
+        const collection = this.state.value_collection;
+        const modelType = event.target.value;
+        const kernelType = this.state.value_kernel_type;
+
+        if (
+            modelType &&
+            modelType != '--Select--' &&
+            checkValidString(modelType)
+        ) {
+            this.setState({ value_model_type: event.target.value });
+
+            // update redux store
+            if (
+                checkValidString(collection) &&
+                kernelType != '--Select--' &&
+                checkValidString(kernelType)
+            ) {
+                const action = setSvButton({ button: { submit_analysis: true } });
+                this.props.dispatchSvButton(action);
+            } else {
+                const action = setSvButton({ button: { submit_analysis: false } });
+                this.props.dispatchSvButton(action);
+            }
+        } else {
+            this.setState({ value_model_type: '--Select--' });
+
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
+            this.props.dispatchSvButton(action);
+        }
+    }
+
+    handleKernelType(event) {
+        const collection = this.state.value_collection;
+        const modelType = this.state.value_model_type;
+        const kernelType = event.target.value;
+
+        if (
+            kernelType &&
+            kernelType != '--Select--' &&
+            checkValidString(kernelType)
+        ) {
+            this.setState({ value_kernel_type: event.target.value });
+
+            // update redux store
+            if (
+                checkValidString(collection) &&
+                modelType != '--Select--' &&
+                checkValidString(modelType)
+            ) {
+                const action = setSvButton({ button: { submit_analysis: true } });
+                this.props.dispatchSvButton(action);
+            } else {
+                const action = setSvButton({ button: { submit_analysis: false } });
+                this.props.dispatchSvButton(action);
+            }
+        } else {
+            this.setState({ value_kernel_type: '--Select--' });
+
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
+            this.props.dispatchSvButton(action);
+        }
+    }
+
+    handlePenaltySlider() {
+        this.setState({
+            checked_penalty: !this.state.checked_penalty
+        });
+    }
+
+    handleGammaSlider() {
+        this.setState({
+            checked_gamma: !this.state.checked_gamma
+        });
+    }
+
+    createSlider(type, min, max, step) {
+        return (
+            <fieldset className={`fieldset-select-${type.toLowerCase()}`}>
+                <legend>{type}</legend>
+                <RangeSliderState
+                    max={max}
+                    min={min}
+                    step={step}
+                />
+            </fieldset>
+        );
+    }
+
+    render() {
+        const options = this.state.ajax_done_options;
+        const penaltySlider = this.state.checked_penalty
+            ? this.createSlider('Penalty', 1, 1000000, 1)
+            : null;
+        const gammaSlider  = this.state.checked_gamma
+            ? this.createSlider('Gamma', 1, 1000, 1)
+            : null;
+
+        return (
+            <fieldset className='fieldset-session-generate'>
+                <fieldset className='fieldset-select-model'>
+                    <legend>{'Configurations'}</legend>
+                    <div className='form-group'>
+                        <label
+                            className='block'
+                            htmlFor='selectCollection'
+                        >
+                            {'Collection'}
+                        </label>
+                        <select
+                            autoComplete='off'
+                            className='form-control fullspan'
+                            name='collection'
+                            onChange={event => this.changeCollection(event)}
+                            value={this.state.value_collection}
+                        >
+
+                            <option
+                                defaultValue
+                                value=''
+                            >
+                                {'--Select--'}
+                            </option>
+
+                            {
+                                options && options.map(value => (
+                                    <option
+                                        key={value.id}
+                                        value={value.collection}
+                                    >
+                                        {${value.id}: ${value.collection}}
+                                    </option>
+                                )
+                            )}
+
+                        </select>
+                    </div>
+
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label
+                                    className='block'
+                                    htmlFor='selectModelType'
+                                >
+                                    {'Model Type'}
+                                </label>
+                                <select
+                                    autoComplete='off'
+                                    className='form-control fullspan'
+                                    name='model_type'
+                                    onChange={this.handleModelType}
+                                    value={this.state.value_model_type}
+                                >
+
+                                    <option
+                                        defaultValue
+                                        value=''
+                                    >
+                                        {'--Select--'}
+                                    </option>
+                                    <option value='svm'>{'SVM'}</option>
+                                    <option value='svr'>{'SVR'}</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label
+                                    className='block'
+                                    htmlFor='selectKernel'
+                                >
+                                    {'Kernel'}
+                                </label>
+                                <select
+                                    autoComplete='off'
+                                    className='form-control fullspan'
+                                    name='sv_kernel_type'
+                                    onChange={this.handleKernelType}
+                                    value={this.state.value_kernel_type}
+                                >
+
+                                    <option
+                                        defaultValue
+                                        value=''
+                                    >
+                                        {'--Select--'}
+                                    </option>
+                                    <option value='linear'>{'Linear'}</option>
+                                    <option value='poly'>{'Polynomial'}</option>
+                                    <option value='rbf'>{'RBF'}</option>
+                                    <option value='sigmoid'>{'Sigmoid'}</option>
+
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className='row'>
+                        <div className='col-sm-2'>
+                            <div className='form-group'>
+                                <div className='checkbox'>
+                                    <label><span>{'Penalty'}</span></label>
+                                    <input
+                                        checked={this.state.checked_penalty}
+                                        onChange={this.handlePenaltySlider}
+                                        type='checkbox'
+                                    />
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className='col-sm-2'>
+                            <div className='form-group'>
+                                <div className='checkbox'>
+                                    <label><span>{'Gamma'}</span></label>
+                                    <input
+                                        checked={this.state.checked_gamma}
+                                        onChange={this.handleGammaSlider}
+                                        type='checkbox'
+                                    />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                {penaltySlider}
+                {gammaSlider}
+            </fieldset>
+        );
     }
 }
 
