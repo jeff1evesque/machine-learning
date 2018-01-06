@@ -32,8 +32,8 @@ class DataAppend extends Component {
     static propTypes = {
         dispatchContentType: PropTypes.func,
         dispatchLayout: PropTypes.func,
-        dispatchSvButton: PropTypes.func,
         dispatchSpinner: PropTypes.func,
+        dispatchSvButton: PropTypes.func,
     }
 
     constructor() {
@@ -52,23 +52,6 @@ class DataAppend extends Component {
         this.handleModelType = this.handleModelType.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.getSupplyDataset = this.getSupplyDataset.bind(this);
-    }
-
-    handleDatasetType(event) {
-        const datasetType = event.target.value;
-
-        if (
-            datasetType && datasetType != '--Select--' &&
-            checkValidString(datasetType)
-        ) {
-            this.setState({ value_dataset_type: event.target.value });
-        } else {
-            this.setState({ value_dataset_type: '--Select--' });
-        }
-
-        // update redux store
-        const action = setSvButton({ button: { submit_analysis: false } });
-        this.props.dispatchSvButton(action);
     }
 
     // update 'state properties' from child component (i.e. 'value_model_type')
@@ -175,6 +158,23 @@ class DataAppend extends Component {
     }
 
     componentWillUnmount() {
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
+        this.props.dispatchSvButton(action);
+    }
+
+    handleDatasetType(event) {
+        const datasetType = event.target.value;
+
+        if (
+            datasetType && datasetType != '--Select--' &&
+            checkValidString(datasetType)
+        ) {
+            this.setState({ value_dataset_type: event.target.value });
+        } else {
+            this.setState({ value_dataset_type: '--Select--' });
+        }
+
         // update redux store
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
