@@ -80,7 +80,7 @@ class AnalysisLayout extends Component {
             this.props.sessionType != nextProps.sessionType
         ) {
             this.setState({session_type: nextProps.sessionType});
-        });
+        }
 
         if (
             nextProps &&
@@ -88,7 +88,7 @@ class AnalysisLayout extends Component {
             this.props.sessionTypeValue != nextProps.sessionTypeValue
         ) {
             this.setState({session_type_value: nextProps.sessionTypeValue});
-        });
+        }
     }
 
     // send form data to serverside on form submission
