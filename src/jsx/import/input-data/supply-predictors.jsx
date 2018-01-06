@@ -12,7 +12,14 @@ import checkValidFloat from './../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
 
 class SupplyPredictors extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        onChange: PropTypes.shape({
+            submitted_proper_predictor: PropTypes.bool.isRequired
+        }),
+        selectedCollection: PropTypes.string,
+    }
+
     constructor() {
         super();
         this.state =  {
@@ -21,67 +28,9 @@ class SupplyPredictors extends Component {
             ajax_fail_error: null,
             ajax_fail_status: null,
         };
-        this.validIntegerEntered = this.validIntegerEntered.bind(this);
+        this.handleIntegerEntered = this.handleIntegerEntered.bind(this);
     }
-    // update 'state properties': allow parent component(s) to access properties
-    validIntegerEntered(event) {
-        { /* get array of input elements, by classname */ }
-        const predictors = document.getElementsByClassName('predictionInput');
 
-        { /*
-            Iterate the node list containing the supplied predictors(s). If
-            input value is a valid float, store 'true', within the array.
-        */ }
-        const boolArray = Array.prototype.map.call(
-            predictors,
-            (element) => {
-                if (element.value && checkValidFloat(element.value)) {
-                    return true;
-                }
-                return false;
-            },
-        );
-
-        { /* check if every element is 'true' */ }
-        const datasetFlag = boolArray.every(element => element == true);
-
-        if (datasetFlag) {
-            this.props.onChange({ submitted_proper_predictor: true });
-        } else {
-            this.props.onChange({ submitted_proper_predictor: false });
-        }
-    }
-    // triggered when 'state properties' change
-    render() {
-        const options = JSON.parse(this.state.ajax_done_options);
-
-        return (
-            <fieldset className='fieldset-prediction-input'>
-                <legend>Prediction Input</legend>
-
-                <div className='form-group'>
-                    {/* array components require unique 'key' value */}
-                    {options && options.map((value, index) => {
-                        const suffix = index.toString();
-                        const predictor = this.state[`value_predictor_${suffix}`];
-
-                        return (
-                            <input
-                                className='form-control fullspan-b75 predictionInput'
-                                type='text'
-                                name='prediction_input[]'
-                                placeholder={value}
-                                key={index}
-                                onChange={this.validIntegerEntered}
-                                defaultValue=''
-                            />
-                        );
-                    })}
-                </div>
-
-            </fieldset>
-        );
-    }
     // call back: get session id(s) from server side, and append to form
     componentDidMount() {
         // variables
@@ -123,8 +72,69 @@ class SupplyPredictors extends Component {
             );
         }
     }
+
     componentWillUnmount() {
         this.mounted = false;
+    }
+
+    // update 'state properties': allow parent component(s) to access properties
+    handleIntegerEntered(event) {
+        { /* get array of input elements, by classname */ }
+        const predictors = document.getElementsByClassName('predictionInput');
+
+        { /*
+            Iterate the node list containing the supplied predictors(s). If
+            input value is a valid float, store 'true', within the array.
+        */ }
+        const boolArray = Array.prototype.map.call(
+            predictors,
+            (element) => {
+                if (element.value && checkValidFloat(element.value)) {
+                    return true;
+                }
+                return false;
+            },
+        );
+
+        { /* check if every element is 'true' */ }
+        const datasetFlag = boolArray.every(element => element == true);
+
+        if (datasetFlag) {
+            this.props.onChange({ submitted_proper_predictor: true });
+        } else {
+            this.props.onChange({ submitted_proper_predictor: false });
+        }
+    }
+
+    render() {
+        const options = JSON.parse(this.state.ajax_done_options);
+
+        return (
+            <fieldset className='fieldset-prediction-input'>
+                <legend>{'Prediction Input'}</legend>
+
+                <div className='form-group'>
+                    {/* array components require unique 'key' value */}
+                    {options && options.map((value, index) => {
+                        const suffix = index.toString();
+                        const predictor = this.state[`value_predictor_${suffix}`];
+
+                        return (
+                            <input
+                                className='form-control fullspan-b75 predictionInput'
+                                defaultValue=''
+                                key={index}
+                                name='prediction_input[]'
+                                placeholder={value}
+                                onChange={this.handleIntegerEntered}
+                                type='text'
+                            />
+                        );
+                    })}
+                </div>
+
+            </fieldset>
+        );
     }
 }
 
