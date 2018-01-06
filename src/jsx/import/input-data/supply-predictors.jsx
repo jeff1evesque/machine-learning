@@ -125,8 +125,8 @@ class SupplyPredictors extends Component {
                                 defaultValue=''
                                 key={index}
                                 name='prediction_input[]'
-                                placeholder={value}
                                 onChange={this.handleIntegerEntered}
+                                placeholder={value}
                                 type='text'
                             />
                         );
