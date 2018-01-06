@@ -68,7 +68,7 @@ class CurrentResultDisplay extends Component {
                     computed_type: next_data.type,
                 });
             }
-        });
+        };
     }
 
     componentWillMount() {
