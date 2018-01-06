@@ -46,53 +46,6 @@ class ModelPredict extends Component {
         this.getSupplyPredictors = this.getSupplyPredictors.bind(this);
     }
 
-    handleCollection(event) {
-        const collection = event.target.value;
-
-        // clear predictors, remove submit button
-        const predictors = document.getElementsByClassName('predictionInput');
-
-        if (predictors) {
-            for (let i = 0; i < predictors.length; i++) {
-                predictors[i].value = '';
-            }
-        }
-
-        // update redux store
-        const analysisButton = setSvButton({ button: { submit_analysis: false } });
-        const gotoResultsButton = setGotoResultsButton({ button: { goto_results: false } });
-        this.props.dispatchSvButton(analysisButton);
-        this.props.dispatchGotoResultsButton(gotoResultsButton);
-
-        // store collection into state
-        if (!!collection && collection != '--Select--' && checkValidString(collection)) {
-            this.setState({ value_collection: event.target.value });
-        } else {
-            this.setState({ value_collection: '--Select--' });
-        }
-    }
-
-    handleSubmit(event) {
-        if (event.submitted_proper_predictor) {
-            const action = setSvButton({
-                button: { submit_analysis: event.submitted_proper_predictor },
-            });
-            this.props.dispatchSvButton(action);
-        } else {
-            const action = setSvButton({ button: { submit_analysis: false } });
-            this.props.dispatchSvButton(action);
-        }
-        const gotoResultsButton = setGotoResultsButton({ button: { goto_results: false } });
-        this.props.dispatchGotoResultsButton(gotoResultsButton);
-    }
-
-    getSupplyPredictors(collection) {
-        if (collection != '--Select--' && checkValidString(collection)) {
-            return SupplyPredictors;
-        }
-        return null;
-    }
-
     componentWillMount() {
         // update redux store
         const actionLayout = setLayout({ layout: 'analysis' });
@@ -153,6 +106,53 @@ class ModelPredict extends Component {
         const gotoResultsButton = setGotoResultsButton({ button: { goto_results: false } });
         this.props.dispatchSvButton(analysisButton);
         this.props.dispatchGotoResultsButton(gotoResultsButton);
+    }
+
+    handleCollection(event) {
+        const collection = event.target.value;
+
+        // clear predictors, remove submit button
+        const predictors = document.getElementsByClassName('predictionInput');
+
+        if (predictors) {
+            for (let i = 0; i < predictors.length; i++) {
+                predictors[i].value = '';
+            }
+        }
+
+        // update redux store
+        const analysisButton = setSvButton({ button: { submit_analysis: false } });
+        const gotoResultsButton = setGotoResultsButton({ button: { goto_results: false } });
+        this.props.dispatchSvButton(analysisButton);
+        this.props.dispatchGotoResultsButton(gotoResultsButton);
+
+        // store collection into state
+        if (!!collection && collection != '--Select--' && checkValidString(collection)) {
+            this.setState({ value_collection: event.target.value });
+        } else {
+            this.setState({ value_collection: '--Select--' });
+        }
+    }
+
+    handleSubmit(event) {
+        if (event.submitted_proper_predictor) {
+            const action = setSvButton({
+                button: { submit_analysis: event.submitted_proper_predictor },
+            });
+            this.props.dispatchSvButton(action);
+        } else {
+            const action = setSvButton({ button: { submit_analysis: false } });
+            this.props.dispatchSvButton(action);
+        }
+        const gotoResultsButton = setGotoResultsButton({ button: { goto_results: false } });
+        this.props.dispatchGotoResultsButton(gotoResultsButton);
+    }
+
+    getSupplyPredictors(collection) {
+        if (collection != '--Select--' && checkValidString(collection)) {
+            return SupplyPredictors;
+        }
+        return null;
     }
 
     render() {

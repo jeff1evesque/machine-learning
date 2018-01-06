@@ -45,7 +45,7 @@ class ModelGenerate extends Component {
             ajax_fail_error: null,
             ajax_fail_status: null,
         };
-        this.changeCollection = this.changeCollection.bind(this);
+        this.handleCollection = this.handleCollection.bind(this);
         this.handleKernelType = this.handleKernelType.bind(this);
         this.handleModelType = this.handleModelType.bind(this);
         this.handlePenaltySlider = this.handlePenaltySlider.bind(this);
@@ -113,7 +113,7 @@ class ModelGenerate extends Component {
     }
 
     // update 'state properties'
-    changeCollection(event) {
+    handleCollection(event) {
         const collection = event.target.value;
         const modelType = this.state.value_model_type;
         const kernelType = this.state.value_kernel_type;
@@ -262,7 +262,7 @@ class ModelGenerate extends Component {
                             autoComplete='off'
                             className='form-control fullspan'
                             name='collection'
-                            onChange={event => this.changeCollection(event)}
+                            onChange={this.handleCollection}
                             value={this.state.value_collection}
                         >
 

@@ -33,8 +33,8 @@ class SvgBooks extends Component {
         return(
             <svg
                 height='45px'
-                onMouseOver={this.handleMouseOver}
                 onMouseOut={this.handleMouseOut}
+                onMouseOver={this.handleMouseOver}
                 preserveAspectRatio='xMidYMid meet'
                 version='1.1'
                 viewBox='0 0 225 225'

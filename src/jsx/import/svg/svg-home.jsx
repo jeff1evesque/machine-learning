@@ -23,15 +23,15 @@ class SvgHome extends Component {
             roof_color: colors['gray-5'],
             house_color: colors['gray-6'],
         }
-        this.mouseOverImage = this.mouseOverImage.bind(this);
-        this.mouseOutImage = this.mouseOutImage.bind(this);
+        this.handleMouseOver = this.handleMouseOver.bind(this);
+        this.handleMouseOut = this.handleMouseOut.bind(this);
     }
 
-    mouseOverImage(event) {
+    handleMouseOver(event) {
         this.setState({ roof_color: colors['green-3'] });
     }
 
-    mouseOutImage(event) {
+    handleMouseOut(event) {
         this.setState({ roof_color: colors['gray-5'] });
     }
 
@@ -47,8 +47,8 @@ class SvgHome extends Component {
         return(
             <svg
                 height='45px'
-                onMouseOut={this.mouseOutImage}
-                onMouseOver={this.mouseOverImage}
+                onMouseOut={this.handleMouseOut}
+                onMouseOver={this.handleMouseOver}
                 preserveAspectRatio='xMidYMid meet'
                 version='1.1'
                 viewBox='0 0 626.000000 626.000000'
