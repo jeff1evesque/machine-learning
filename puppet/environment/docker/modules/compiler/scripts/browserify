@@ -16,7 +16,7 @@ cd "$1"/src/jsx && for file in *; do
   if [ "$file_extension" = 'jsx' ]; then
 
     # convert with 'browserify'
-    (cd /usr/lib/node_modules && browserify "$1"/src/jsx/content.jsx -t [ babelify --presets latest,stage-2,react ] -o "$1"/src/js/content.js)
+    (cd /usr/lib/node_modules && browserify "$1"/src/jsx/content.jsx -t [ babelify --presets env,stage-2,react ] -o "$1"/src/js/content.js)
 
     # append file to '.gitignore'
     grep -qF content.js "$1"/src/js/.gitignore || echo content.js >> "$1"/src/js/.gitignore
