@@ -16,6 +16,7 @@ import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
 import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
+import PropTypes from 'prop-types';
 
 class DataNew extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

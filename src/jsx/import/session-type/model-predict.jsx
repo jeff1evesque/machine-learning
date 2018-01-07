@@ -21,6 +21,7 @@ import {
     setSpinner
 } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
+import PropTypes from 'prop-types';
 
 class ModelPredict extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

@@ -9,6 +9,7 @@
 
 import React, { Component } from 'react';
 import checkValidUrl from './../validator/valid-url.js';
+import PropTypes from 'prop-types';
 
 class SupplyDatasetUrl extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

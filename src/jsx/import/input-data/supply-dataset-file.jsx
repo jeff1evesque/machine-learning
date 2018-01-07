@@ -11,6 +11,7 @@
 
 import React, { Component } from 'react';
 import checkValidFile from './../validator/valid-file.js';
+import PropTypes from 'prop-types';
 
 class SupplyDatasetFile extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

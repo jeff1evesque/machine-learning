@@ -9,6 +9,7 @@
 
 import React, { Component } from 'react';
 import checkValidString from './../validator/valid-string.js';
+import PropTypes from 'prop-types';
 
 class SupportVectorKernels extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

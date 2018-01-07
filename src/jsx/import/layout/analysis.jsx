@@ -29,6 +29,7 @@ import {
 } from '../redux/action/page.jsx';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
+import PropTypes from 'prop-types';
 
 class AnalysisLayout extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

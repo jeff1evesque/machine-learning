@@ -10,6 +10,7 @@
 import React, { Component } from 'react';
 import checkValidFloat from './../validator/valid-float.js';
 import ajaxCaller from '../general/ajax-caller.js';
+import PropTypes from 'prop-types';
 
 class SupplyPredictors extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

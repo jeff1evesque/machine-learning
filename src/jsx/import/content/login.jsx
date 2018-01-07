@@ -17,6 +17,7 @@ import Spinner from '../general/spinner.jsx';
 import { setLayout, setSpinner } from '../redux/action/page.jsx';
 import setLoginState from '../redux/action/login.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
+import PropTypes from 'prop-types';
 
 class LoginForm extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

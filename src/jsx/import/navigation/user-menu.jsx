@@ -16,6 +16,7 @@ import { Navbar, Nav, NavItem, NavDropdown, MenuItem } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
+import PropTypes from 'prop-types';
 
 class UserMenu extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

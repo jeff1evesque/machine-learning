@@ -13,6 +13,7 @@ import { Table } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 import { setLayout, setContentType, setSpinner } from '../redux/action/page.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
+import PropTypes from 'prop-types';
 
 class ResultsDisplay extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

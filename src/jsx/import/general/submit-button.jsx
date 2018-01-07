@@ -8,6 +8,7 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Submit extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

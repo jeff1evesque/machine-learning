@@ -16,6 +16,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 import setLoginState from '../../redux/action/login.jsx';
 import setLogoutState from '../../redux/action/logout.jsx';
 import ajaxCaller from '../../general/ajax-caller.js';
+import PropTypes from 'prop-types';
 
 class LoginLink extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

@@ -18,6 +18,7 @@ import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
 import { medium_minWidth } from '../general/breakpoints';
 import hex from '../general/colors.js';
+import PropTypes from 'prop-types';
 
 class AnimateCollisions extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

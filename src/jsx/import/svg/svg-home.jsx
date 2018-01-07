@@ -9,6 +9,7 @@
 
 import colors from '../general/colors.js';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SvgHome extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

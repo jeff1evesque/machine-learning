@@ -14,7 +14,8 @@ import { setLayout, setContentType, setResultsButton } from '../redux/action/pag
 import Submit from '../general/submit-button.jsx';
 import Spinner from '../general/spinner.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
-import transpose from '../formatter/transpose.js'
+import transpose from '../formatter/transpose.js';
+import PropTypes from 'prop-types';
 
 class CurrentResultDisplay extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

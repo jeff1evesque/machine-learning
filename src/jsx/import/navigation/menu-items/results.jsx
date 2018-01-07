@@ -14,6 +14,7 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import ajaxCaller from '../../general/ajax-caller.js';
+import PropTypes from 'prop-types';
 
 class ReviewResultsLink extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

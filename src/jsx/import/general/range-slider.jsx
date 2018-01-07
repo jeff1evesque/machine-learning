@@ -10,6 +10,7 @@
 import React, { Component } from 'react'
 import Slider from 'react-rangeslider'
 import { setRangeSlider } from '../redux/action/page.jsx';
+import PropTypes from 'prop-types';
 
 class RangeSlider extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

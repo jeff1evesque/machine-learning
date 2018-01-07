@@ -15,6 +15,7 @@ import ajaxCaller from '../general/ajax-caller.js';
 import checkValidString from '../validator/valid-string.js';
 import checkValidEmail from '../validator/valid-email.js';
 import checkValidPassword from '../validator/valid-password.js';
+import PropTypes from 'prop-types';
 
 class RegisterForm extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};

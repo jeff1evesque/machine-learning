@@ -22,6 +22,7 @@ import {
 import { FormGroup, Checkbox } from 'react-bootstrap';
 import ajaxCaller from '../general/ajax-caller.js';
 import RangeSliderState from '../redux/container/range-slider.jsx';
+import PropTypes from 'prop-types';
 
 class ModelGenerate extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
