@@ -15,6 +15,7 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setLayout } from '../redux/action/page.jsx';
 import AnimateCollisions from '../animation/animate.jsx';
+import PropTypes from 'prop-types';
 
 class HomePage extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
