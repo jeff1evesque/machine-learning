@@ -17,6 +17,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
+import PropTypes from 'prop-types';
 
 class HeaderMenu extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
