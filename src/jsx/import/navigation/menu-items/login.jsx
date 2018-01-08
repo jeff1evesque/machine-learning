@@ -23,7 +23,7 @@ class LoginLink extends Component {
     static propTypes = {
         dispatchLogout: PropTypes.func,
         history: PropTypes.shape({
-            push: PropTypes.string.isRequired,
+            push: PropTypes.func.isRequired,
         }),
         location: PropTypes.shape({
             pathname: PropTypes.string.isRequired,
