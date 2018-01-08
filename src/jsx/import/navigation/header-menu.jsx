@@ -22,9 +22,12 @@ import PropTypes from 'prop-types';
 class HeaderMenu extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
-        layout: PropTypes.shape({
-            type: PropTypes.string.isRequired,
-        }),
+        layout: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.shape({
+                type: PropTypes.string,
+            })
+        ])
     }
 
     showDesktopHeader() {
