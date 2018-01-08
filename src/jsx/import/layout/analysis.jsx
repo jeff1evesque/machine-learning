@@ -39,8 +39,13 @@ class AnalysisLayout extends Component {
         dispatchLayout: PropTypes.func,
         dispatchSpinner: PropTypes.func,
         page: PropTypes.shape({
-            button: PropTypes.bool,
-            content_type: PropTypes.string,
+            button: PropTypes.shape({
+                submit_analysis: PropTypes.bool,
+            }),
+            content_type: PropTypes.oneOfType([
+                PropTypes.bool,
+                PropTypes.string,
+            ]),
             slider: PropTypes.shape({
                 gamma: PropTypes.number,
                 penalty: PropTypes.number,
