@@ -11,9 +11,7 @@ import PropTypes from 'prop-types';
 class ModelType extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
-        onChange: PropTypes.shape({
-            value_model_type: PropTypes.string.isRequired,
-        }),
+        onChange: PropTypes.func.isRequired,
     }
 
     constructor() {
