@@ -25,14 +25,10 @@ class CurrentResultDisplay extends Component {
         dispatchLogout: PropTypes.func,
         dispatchResultsButton: PropTypes.func,
         location: PropTypes.shape({
-            search: PropTypes.shape({
-                nid: PropTypes.number.isRequired,
-            }),
+            search: PropTypes.string.isRequired,
         }),
 	    results: PropTypes.shape({
-            data: PropTypes.shape({
-                result: PropTypes.string,
-            }),
+            data: PropTypes.string,
             type: PropTypes.string,
         }),
     }
