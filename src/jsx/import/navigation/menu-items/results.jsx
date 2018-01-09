@@ -21,7 +21,7 @@ class ReviewResultsLink extends Component {
     static propTypes = {
         page: PropTypes.shape({
             button: PropTypes.shape({
-                review_results: PropTypes.bool.isRequired,
+                review_results: PropTypes.bool,
             }),
         }),
     }
