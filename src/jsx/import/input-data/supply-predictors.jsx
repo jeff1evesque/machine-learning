@@ -15,9 +15,7 @@ import PropTypes from 'prop-types';
 class SupplyPredictors extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
     static propTypes = {
-        onChange: PropTypes.shape({
-            submitted_proper_predictor: PropTypes.bool.isRequired,
-        }),
+        onChange: PropTypes.func.isRequired,
         selectedCollection: PropTypes.string,
     }
 
