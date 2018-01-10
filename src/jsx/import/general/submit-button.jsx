@@ -16,7 +16,7 @@ class Submit extends Component {
         btnDisabled: PropTypes.bool,
         btnValue: PropTypes.string,
         cssClass: PropTypes.string,
-        onClick: PropTypes.func,
+        onClick: PropTypes.string,
     }
 
     render() {
