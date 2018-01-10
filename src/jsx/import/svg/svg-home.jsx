@@ -59,8 +59,8 @@ class SvgHome extends Component {
                 <g
                     stroke='none'
                     transform={`
-                        scale(0.100000,-0.100000)
                         translate(0.000000,626.000000)
+                        scale(0.100000,-0.100000)
                     `}
                 >
 
