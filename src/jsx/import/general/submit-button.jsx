@@ -22,7 +22,7 @@ class Submit extends Component {
     render() {
         const disabled = this.props.btnDisabled ? true : false;
         const buttonValue = this.props.btnValue ? this.props.btnValue : 'Submit';
-        const clickCallback = this.props.onClick ? this.props.onClick : '';
+        const clickCallback = this.props.onClick ? this.props.onClick : null;
         const cssClass = this.props.cssClass ? this.props.cssClass : 'form-submit';
 
         return (
