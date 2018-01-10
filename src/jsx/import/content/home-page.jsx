@@ -15,23 +15,30 @@ import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { setLayout } from '../redux/action/page.jsx';
 import AnimateCollisions from '../animation/animate.jsx';
+import PropTypes from 'prop-types';
 
 class HomePage extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchLayout: PropTypes.func,
+    }
+
     componentWillMount() {
         const action = setLayout({ layout: 'analysis' });
         this.props.dispatchLayout(action);
     }
+
     render() {
         return (
             <div className='main-full-span home'>
-                <h1>Welcome!</h1>
+                <h1>{'Welcome!'}</h1>
                 <AnimateCollisions />
                 <NavLink
-                    to='session'
                     activeClassName='active'
                     className='btn mn-2'
+                    to='session'
                 >
-                    Begin Analysis
+                    {'Begin Analysis'}
                 </NavLink>
             </div>
         );

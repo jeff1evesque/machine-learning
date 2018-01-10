@@ -29,9 +29,32 @@ import {
 } from '../redux/action/page.jsx';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
+import PropTypes from 'prop-types';
 
 class AnalysisLayout extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchCurrentResult: PropTypes.func,
+        dispatchGotoResultsButton: PropTypes.func,
+        dispatchLayout: PropTypes.func,
+        dispatchSpinner: PropTypes.func,
+        page: PropTypes.shape({
+            button: PropTypes.shape({
+                submit_analysis: PropTypes.bool,
+            }),
+            content_type: PropTypes.oneOfType([
+                PropTypes.bool,
+                PropTypes.string,
+            ]),
+            slider: PropTypes.shape({
+                gamma: PropTypes.number,
+                penalty: PropTypes.number,
+            }),
+        }),
+        sessionType: PropTypes.string,
+        sessionTypeValue: PropTypes.string,
+    }
+
     constructor() {
         super();
         this.state =  {
@@ -43,26 +66,7 @@ class AnalysisLayout extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
         this.storeResults = this.storeResults.bind(this);
     }
-    // define properties after update
-    componentDidUpdate() {
-        // update state using react-route properties
-        if (
-            !!this.props.sessionType &&
-            this.props.sessionType != this.state.session_type
-        ) {
-            this.setState({ session_type: this.props.sessionType });
-        }
 
-        if (
-            !!this.props.sessionTypeValue &&
-            this.props.sessionTypeValue != this.state.session_type_value
-        ) {
-            this.setState({
-                session_type_value: this.props.sessionTypeValue,
-            });
-        }
-    }
-    // define properties before mount
     componentWillMount() {
         this.setState({
             session_type: this.props.sessionType,
@@ -73,6 +77,26 @@ class AnalysisLayout extends Component {
         const action = setLayout({ layout: 'analysis' });
         this.props.dispatchLayout(action);
     }
+
+    componentWillReceiveProps(nextProps) {
+        // update state using react-route properties
+        if (
+            nextProps &&
+            nextProps.sessionType &&
+            this.props.sessionType != nextProps.sessionType
+        ) {
+            this.setState({session_type: nextProps.sessionType});
+        }
+
+        if (
+            nextProps &&
+            nextProps.sessionTypeValue &&
+            this.props.sessionTypeValue != nextProps.sessionTypeValue
+        ) {
+            this.setState({session_type_value: nextProps.sessionTypeValue});
+        }
+    }
+
     // send form data to serverside on form submission
     handleSubmit(event) {
         // prevent page reload
@@ -213,6 +237,7 @@ class AnalysisLayout extends Component {
             this.props.dispatchGotoResultsButton(gotoResultsButton);
         }
     }
+
     showAnalysisContent() {
         if (
             this.props &&
@@ -240,47 +265,48 @@ class AnalysisLayout extends Component {
                         @analysisForm, referenced within 'handleSubmit' callback
                     */}
                     <form
+                        className='analysis-container'
                         onSubmit={this.handleSubmit}
                         ref='analysisForm'
-                        className='analysis-container'
                     >
                         <Route
+                            component={DataNewState}
                             exact
                             path='/session/data-new'
-                            component={DataNewState}
                         />
                         <Route
+                            component={DataAppendState}
                             exact
                             path='/session/data-append'
-                            component={DataAppendState}
                         />
                         <Route
+                            component={ModelGenerateState}
                             exact
                             path='/session/model-generate'
-                            component={ModelGenerateState}
                         />
                         <Route
+                            component={ModelPredictState}
                             exact
                             path='/session/model-predict'
-                            component={ModelPredictState}
                         />
                         {submitBtn}
                         {resultBtn}
                     </form>
                 </div>
                 <Route
+                    component={CurrentResultState}
                     exact
                     path='/session/current-result'
-                    component={CurrentResultState}
                 />
                 <Route
+                    component={ResultsDisplayState}
                     exact
                     path='/session/results'
-                    component={ResultsDisplayState}
                 />
             </div>
         );
     }
+
     showDesktopContent() {
         return (
             <div className='flex'>
@@ -293,6 +319,7 @@ class AnalysisLayout extends Component {
             </div>
         )
     }
+
     showMobileContent() {
         return (
             <div className='col-sm-12'>
@@ -300,12 +327,16 @@ class AnalysisLayout extends Component {
             </div>
         )
     }
+
     render() {
         const desktopView = this.showDesktopContent();
         const mobileView = this.showMobileContent();
         return (
             <div className='row'>
-                <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                <BreakpointRender
+                    breakpoints={breakpoints}
+                    type='viewport'
+                >
                     {bp => ( bp.isGt('small') ? desktopView : mobileView )}
                 </BreakpointRender>
             </div>

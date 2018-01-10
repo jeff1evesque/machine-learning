@@ -9,27 +9,33 @@
 
 import colors from '../general/colors.js';
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class SvgHome extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        houseColor: PropTypes.string,
+        roofColor: PropTypes.string,
+    }
+
     constructor() {
         super();
         this.state = {
             roof_color: colors['gray-5'],
             house_color: colors['gray-6'],
         }
-        this.mouseOverImage = this.mouseOverImage.bind(this);
-        this.mouseOutImage = this.mouseOutImage.bind(this);
+        this.handleMouseOver = this.handleMouseOver.bind(this);
+        this.handleMouseOut = this.handleMouseOut.bind(this);
     }
-    // callback for mouseOver svg
-    mouseOverImage(event) {
+
+    handleMouseOver(event) {
         this.setState({ roof_color: colors['green-3'] });
     }
-    // callback for mouseOut svg
-    mouseOutImage(event) {
+
+    handleMouseOut(event) {
         this.setState({ roof_color: colors['gray-5'] });
     }
-    // triggered when 'state properties' change
+
     render() {
         const roof_color = this.props.roofColor
             ? this.props.roofColor
@@ -41,25 +47,24 @@ class SvgHome extends Component {
 
         return(
             <svg
-                version='1.1'
-                xmlns='http://www.w3.org/2000/svg'
-                width='45px'
                 height='45px'
-                viewBox='0 0 626.000000 626.000000'
+                onMouseOut={this.handleMouseOut}
+                onMouseOver={this.handleMouseOver}
                 preserveAspectRatio='xMidYMid meet'
-                onMouseOver={this.mouseOverImage}
-                onMouseOut={this.mouseOutImage}
+                version='1.1'
+                viewBox='0 0 626.000000 626.000000'
+                width='45px'
+                xmlns='http://www.w3.org/2000/svg'
             >
                 <g
+                    stroke='none'
                     transform={`
                         translate(0.000000,626.000000)
                         scale(0.100000,-0.100000)
                     `}
-                    stroke='none'
                 >
 
                     <path
-                        style={{fill:roof_color}}
                         d={`
                             M3020 5606 c-113 -25 -120 -31 -880 -666 -124 -103 -418
                             -348 -655 -545 -236 -196 -452 -376 -480 -399 -27 -23
@@ -81,10 +86,10 @@ class SvgHome extends Component {
                             -26 -425 -2 -223 -7 -392 -12 -390 -5 2 -109 87 -232 190
                             -568 477 -733 610 -786 637 -97 49 -211 62 -322 37z
                         `}
+                        style={{fill:roof_color}}
                     />
 
                     <path
-                        style={{fill:house_color}}
                         d={`
                             M3085 4577c -23 -18 -104 -84 -180 -147 -76 -63 -220 -182
                             -320 -265 -100 -82 -199 -163 -220 -180 -21 -16 -72 -59
@@ -98,6 +103,7 @@ class SvgHome extends Component {
                             88 -209 174 -231 190 -21 17 -108 89 -194 160 -382 318
                             -564 466 -572 464 -2 0 -21 -14 -43 -32z
                         `}
+                        style={{fill:house_color}}
                     />
 
                 </g>

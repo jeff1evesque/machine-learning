@@ -21,15 +21,26 @@ import HeaderMenuState from '../redux/container/header-menu.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
+import PropTypes from 'prop-types';
 
 class PageLayout extends Component {
-    // callback: used to return spinner
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        effects: PropTypes.shape({
+            spinner: PropTypes.bool.isRequired,
+        }),
+        user: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }),
+    }
+
     getSpinner() {
         if (this.props && this.props.effects && this.props.effects.spinner) {
             return <Spinner />;
         }
         return null;
     }
+
     renderContent(bpoint) {
         // local variables
         const spinner = this.getSpinner();
@@ -55,11 +66,30 @@ class PageLayout extends Component {
                         {mainMenu}
                     </div>
                     <div className='content'>
-                        <Route exact path='/' component={HomePageState} />
-                        <Route exact path='/login' component={LoginLayout} />
-                        <Route exact path='/logout' component={LoginLayout} />
-                        <Route exact path='/register' component={RegisterLayout} />
-                        <Route path='/session' component={AnalysisLayoutState} />
+                        <Route
+                            component={HomePageState}
+                            exact
+                            path='/'
+                        />
+                        <Route
+                            component={LoginLayout}
+                            exact
+                            path='/login'
+                        />
+                        <Route
+                            component={LoginLayout}
+                            exact
+                            path='/logout'
+                        />
+                        <Route
+                            component={RegisterLayout}
+                            exact
+                            path='/register'
+                        />
+                        <Route
+                            component={AnalysisLayoutState}
+                            path='/session'
+                        />
                     </div>
                     {spinner}
                 </div>
@@ -68,7 +98,10 @@ class PageLayout extends Component {
     }
     render() {
         return (
-            <BreakpointRender breakpoints={breakpoints} type='viewport'>
+            <BreakpointRender
+                breakpoints={breakpoints}
+                type='viewport'
+            >
                 {bp => (
                     bp.isGt('medium')
                         ? this.renderContent('large')

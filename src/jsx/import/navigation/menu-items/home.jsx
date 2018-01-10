@@ -13,13 +13,11 @@ import SvgHome from '../../svg/svg-home.jsx';
 import colors from '../../general/colors.js';
 
 const HomeLink = () =>
-    // triggered when 'state properties' change
-
     (
         <NavLink
-            to='/'
             activeClassName='active'
             className='icon home'
+            to='/'
         >
             <SvgHome houseColor={colors['gray-7']} />
         </NavLink>

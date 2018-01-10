@@ -15,9 +15,16 @@ import ajaxCaller from '../general/ajax-caller.js';
 import checkValidString from '../validator/valid-string.js';
 import checkValidEmail from '../validator/valid-email.js';
 import checkValidPassword from '../validator/valid-password.js';
+import PropTypes from 'prop-types';
 
 class RegisterForm extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchLayout: PropTypes.func,
+        dispatchSpinner: PropTypes.func,
+        user: PropTypes.shape({ name: PropTypes.string.isRequired, }),
+    }
+
     constructor() {
         super()
         this.state = {
@@ -33,10 +40,17 @@ class RegisterForm extends Component {
             value_password: '',
         };
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.validateEmail = this.validateEmail.bind(this);
-        this.validatePassword = this.validatePassword.bind(this);
-        this.validateUsername = this.validateUsername.bind(this);
+        this.handleEmail = this.handleEmail.bind(this);
+        this.handlePassword = this.handlePassword.bind(this);
+        this.handleUsername = this.handleUsername.bind(this);
     }
+
+    componentWillMount() {
+        // update redux store
+        const action = setLayout({ layout: 'register' });
+        this.props.dispatchLayout(action);
+    }
+
     // send form data to serverside on form submission
     handleSubmit(event) {
         // prevent page reload
@@ -49,8 +63,8 @@ class RegisterForm extends Component {
         // local variables
         const ajaxEndpoint = '/register';
         const ajaxArguments = {
-            endpoint: ajaxEndpoint,
             data: new FormData(this.refs.registerForm),
+            endpoint: ajaxEndpoint,
         };
 
         if (
@@ -121,36 +135,8 @@ class RegisterForm extends Component {
             this.props.dispatchSpinner(action);
         }
     }
-    componentWillMount() {
-        // update redux store
-        const action = setLayout({ layout: 'register' });
-        this.props.dispatchLayout(action);
-    }
-    validateUsername(event) {
-        const username = event.target.value;
-        const check = !!checkValidString(username);
-        if (!check) {
-            const action = setSpinner({ spinner: false });
-            this.props.dispatchSpinner(action);
-        }
 
-        this.setState({ validated_username_server: true });
-        this.setState({ validated_username: check });
-        this.setState({ value_username: username });
-    }
-    validateEmail(event) {
-        const email = event.target.value;
-        const check = !!checkValidEmail(email);
-        if (!check) {
-            const action = setSpinner({ spinner: false });
-            this.props.dispatchSpinner(action);
-        }
-
-        this.setState({ validated_email_server: true });
-        this.setState({ validated_email: check });
-        this.setState({ value_email: email });
-    }
-    validatePassword(event) {
+    handlePassword(event) {
         const password = event.target.value;
         const check = !!checkValidPassword(password);
         if (!check) {
@@ -162,6 +148,33 @@ class RegisterForm extends Component {
         this.setState({ validated_password: check });
         this.setState({ value_password: password });
     }
+
+    handleUsername(event) {
+        const username = event.target.value;
+        const check = !!checkValidString(username);
+        if (!check) {
+            const action = setSpinner({ spinner: false });
+            this.props.dispatchSpinner(action);
+        }
+
+        this.setState({ validated_username_server: true });
+        this.setState({ validated_username: check });
+        this.setState({ value_username: username });
+    }
+
+    handleEmail(event) {
+        const email = event.target.value;
+        const check = !!checkValidEmail(email);
+        if (!check) {
+            const action = setSpinner({ spinner: false });
+            this.props.dispatchSpinner(action);
+        }
+
+        this.setState({ validated_email_server: true });
+        this.setState({ validated_email: check });
+        this.setState({ value_email: email });
+    }
+
     // triggered when 'state properties' change
     render() {
         // frontend validation
@@ -173,32 +186,40 @@ class RegisterForm extends Component {
             var emailNote = '';
         } else {
             var emailClass = 'invalid';
-            var emailNote = (<span className={emailClass}>
-                Please provide a valid email.
-                             </span>);
+            var emailNote = (
+                <span className={emailClass}>
+                    {'Please provide a valid email.'}
+                </span>
+            );
         }
 
         // backend validation
         if (!this.state.validated_password_server) {
-            var passwordNote = (<span className='invalid'>
-                (Password requirement not met)
-                                </span>);
+            var passwordNote = (
+                <span className='invalid'>
+                    {'(Password requirement not met)'}
+                </span>
+            );
         } else {
             var passwordNote = null;
         }
 
         if (!this.state.validated_username_server) {
-            var usernameNote = (<span className='invalid'>
-                (Username is taken)
-                                </span>);
+            var usernameNote = (
+                <span className='invalid'>
+                    {'(Username is taken)'}
+                </span>
+            );
         } else {
             var usernameNote = null;
         }
 
         if (!this.state.validated_email_server) {
-            var emailNote = (<span className='invalid'>
-                (Email has already registered)
-                             </span>);
+            var emailNote = (
+                <span className='invalid'>
+                    {'(Email has already registered)'}
+                </span>
+            );
         } else {
             var emailNote = null;
         }
@@ -213,59 +234,72 @@ class RegisterForm extends Component {
         }
 
         return (
-            <form onSubmit={this.handleSubmit} ref='registerForm'>
+            <form
+                onSubmit={this.handleSubmit}
+                ref='registerForm'
+            >
                 {redirect}
                 <div className='form-group'>
-                    <label className={`form-label ${usernameClass}`}>Username</label>
+                    <label className={`form-label ${usernameClass}`}>
+                        {'Username'}
+                    </label>
                     <input
-                        type='text'
-                        name='user[login]'
                         className='input-block'
+                        name='user[login]'
+                        onInput={this.handleUsername}
                         placeholder='Pick a username'
-                        onInput={this.validateUsername}
+                        type='text'
                         value={this.state.value_username}
                     />
                     <p className={`note ${usernameClass}`}>
-                        This will be your username. {usernameNote}
+                        {'This will be your username. {usernameNote}'}
                     </p>
                 </div>
 
                 <div className='form-group'>
-                    <label className={`form-label ${emailClass}`}>Email Address</label>
+                    <label className={`form-label ${emailClass}`}>
+                        {'Email Address'}
+                    </label>
                     <input
-                        type='text'
-                        name='user[email]'
                         className='input-block'
+                        name='user[email]'
+                        onInput={this.handleEmail}
                         placeholder='Your email address'
-                        onInput={this.validateEmail}
+                        type='text'
                         value={this.state.value_email}
                     />
                     <p className='note'>
-                        You will get updates regarding account changes,
-                        or activitites. This email address will not be
-                        shared with anyone. {emailNote}
+                        {`
+                            You will get updates regarding account changes,
+                            or activitites. This email address will not be
+                            shared with anyone. ${emailNote}
+                        `}
                     </p>
                 </div>
 
                 <div className='form-group'>
-                    <label className={`form-label ${passwordClass}`}>Password</label>
+                    <label className={`form-label ${passwordClass}`}>
+                        {'Password'}
+                    </label>
                     <input
-                        type='password'
-                        name='user[password]'
                         className='input-block'
+                        name='user[password]'
+                        onInput={this.handlePassword}
                         placeholder='Create a password'
-                        onInput={this.validatePassword}
+                        type='password'
                         value={this.state.value_password}
                     />
                     <p className={`note ${passwordClass}`}>
-                        Use at least one letter, one numeral,
-                        and ten characters. {passwordNote}
+                        {`
+                            Use at least one letter, one numeral,
+                            and ten characters. ${passwordNote}
+                        `}
                     </p>
                 </div>
 
                 <input
-                    type='submit'
                     className='btn btn-primary'
+                    type='submit'
                     value='Create an account'
                 />
             </form>

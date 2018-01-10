@@ -8,9 +8,17 @@
  */
 
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 class Submit extends Component {
-    // triggered when 'state properties' change
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        btnDisabled: PropTypes.bool,
+        btnValue: PropTypes.string,
+        cssClass: PropTypes.string,
+        onClick: PropTypes.func,
+    }
+
     render() {
         const disabled = this.props.btnDisabled ? true : false;
         const buttonValue = this.props.btnValue ? this.props.btnValue : 'Submit';
@@ -19,10 +27,10 @@ class Submit extends Component {
 
         return (
             <input
-                disabled={disabled}
-                type='submit'
                 className={cssClass}
+                disabled={disabled}
                 onClick={clickCallback}
+                type='submit'
                 value={buttonValue}
             />
         );

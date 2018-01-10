@@ -11,9 +11,14 @@
 
 import React, { Component } from 'react';
 import checkValidFile from './../validator/valid-file.js';
+import PropTypes from 'prop-types';
 
 class SupplyDatasetFile extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        onChange: PropTypes.func.isRequired,
+    }
+
     constructor() {
         super();
         this.state =  {
@@ -21,8 +26,9 @@ class SupplyDatasetFile extends Component {
         };
         this.handleAddMore = this.handleAddMore.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
-        this.validFileEntered = this.validFileEntered.bind(this);
+        this.handleFileEntered = this.handleFileEntered.bind(this);
     }
+
     // update 'state properties': index for additional input elements
     handleAddMore(event) {
         const elements = this.state.additional_elements;
@@ -30,6 +36,7 @@ class SupplyDatasetFile extends Component {
         this.setState({ additional_elements: elements });
         this.props.onChange({ submitted_proper_predictor: false });
     }
+
     handleRemove(event) {
         const elements = this.state.additional_elements;
         let datasetBoolean = true;
@@ -54,11 +61,12 @@ class SupplyDatasetFile extends Component {
             }
 
             { /* possibly clear submit button */ }
-            this.validFileEntered();
+            this.handleFileEntered();
         }
     }
+
     // update 'state properties': allow parent component(s) to access properties
-    validFileEntered() {
+    handleFileEntered() {
         { /* get array of input elements, by classname */ }
         const dataset = document.getElementsByClassName('form-control-file');
 
@@ -82,34 +90,37 @@ class SupplyDatasetFile extends Component {
             this.props.onChange({ submitted_proper_dataset: false });
         }
     }
-    // triggered when 'state properties' change
+
     render() {
         const inputs = this.state.additional_elements;
         return (
             <fieldset className='fieldset-supply-dataset'>
-                <legend>Supply Dataset</legend>
+                <legend>{'Supply Dataset'}</legend>
                 <div className='row'>
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <input
-                                type='file'
-                                name='dataset[]'
                                 className='form-control-file'
-                                onChange={this.validFileEntered}
                                 defaultValue=''
+                                name='dataset[]'
+                                onChange={this.handleFileEntered}
+                                type='file'
                             />
                         </div>
 
                         {/* array components require unique 'key' value */}
                         {inputs && inputs.map((value, index) => (
-                            <div className='form-group' key={`form-group-${index}`}>
+                            <div
+                                className='form-group'
+                                key={`form-group-${index}`}
+                            >
                                 <input
-                                    type='file'
-                                    name='dataset[]'
                                     className='form-control-file'
-                                    key={`input-file-${index}`}
-                                    onChange={this.validFileEntered}
                                     defaultValue=''
+                                    key={`input-file-${index}`}
+                                    name='dataset[]'
+                                    onChange={this.handleFileEntered}
+                                    type='file'
                                 />
                             </div>
                         ))}
@@ -120,18 +131,18 @@ class SupplyDatasetFile extends Component {
                             <div className='col-sm-6 form-group'>
                                 <input
                                     className='fullspan'
+                                    onClick={this.handleAddMore}
                                     type='button'
                                     value='Add more'
-                                    onClick={this.handleAddMore}
                                 />
                             </div>
 
                             <div className='col-sm-6 form-group'>
                                 <input
                                     className='fullspan'
+                                    onClick={this.handleRemove}
                                     type='button'
                                     value='Remove'
-                                    onClick={this.handleRemove}
                                 />
                             </div>
                         </div>
@@ -139,12 +150,12 @@ class SupplyDatasetFile extends Component {
                 </div>
 
                 <p className='form-note'>
-                    <span className='asterick'>*</span>
-                    <span className='bold'>Note: </span>
-                    <span>Uploaded file(s) must be formatted as </span>
-                    <span className='italic'>csv</span>,
-                    <span className='italic'> json</span>, or
-                    <span className='italic'> xml</span> format.
+                    <span className='asterick'>{'*'}</span>
+                    <span className='bold'>{'Note: '}</span>
+                    <span>{'Uploaded file(s) must be formatted as '}</span>
+                    <span className='italic'>{'csv'}</span>{','}
+                    <span className='italic'>{' json'}</span>{', or'}
+                    <span className='italic'>{' xml'}</span>{' format.'}
                 </p>
             </fieldset>
         );

@@ -16,9 +16,16 @@ import SupplyDatasetUrl from '../input-data/supply-dataset-url.jsx';
 import checkValidString from '../validator/valid-string.js';
 import ModelType from '../model/model-type.jsx';
 import { setSvButton, setLayout, setContentType } from '../redux/action/page.jsx';
+import PropTypes from 'prop-types';
 
 class DataNew extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchContentType: PropTypes.func,
+        dispatchLayout: PropTypes.func,
+        dispatchSvButton: PropTypes.func,
+    }
+
     constructor() {
         super();
         this.state = {
@@ -27,15 +34,31 @@ class DataNew extends Component {
             value_dataset_type: '--Select--',
             value_model_type: '--Select--',
         };
-        this.changeCollection = this.changeCollection.bind(this);
-        this.changeDatasetType = this.changeDatasetType.bind(this);
-        this.changeModelType = this.changeModelType.bind(this);
-        this.changeTitle = this.changeTitle.bind(this);
+        this.handleCollection = this.handleCollection.bind(this);
+        this.handleDatasetType = this.handleDatasetType.bind(this);
+        this.handleModelType = this.handleModelType.bind(this);
+        this.handleTitle = this.handleTitle.bind(this);
         this.getSupplyDataset = this.getSupplyDataset.bind(this);
-        this.displaySubmit = this.displaySubmit.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
     }
+
+    componentWillMount(event) {
+        // update redux store
+        const actionLayout = setLayout({ layout: 'analysis' });
+        this.props.dispatchLayout(actionLayout);
+
+        const actionContentType = setContentType({ layout: 'data_new' });
+        this.props.dispatchContentType(actionContentType);
+    }
+
+    componentWillUnmount() {
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
+        this.props.dispatchSvButton(action);
+    }
+
     // update 'state properties'
-    changeDatasetType(event) {
+    handleDatasetType(event) {
         const datasetType = event.target.value;
 
         if (
@@ -51,7 +74,8 @@ class DataNew extends Component {
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
-    changeTitle(event) {
+
+    handleTitle(event) {
         const sessionTitle = event.target.value;
 
         if (sessionTitle && checkValidString(sessionTitle)) {
@@ -64,7 +88,8 @@ class DataNew extends Component {
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
-    changeCollection(event) {
+
+    handleCollection(event) {
         const collection = event.target.value;
 
         if (collection && checkValidString(collection)) {
@@ -77,8 +102,24 @@ class DataNew extends Component {
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
+
+    // update 'state properties' from child component
+    handleSubmit(event) {
+        if (event.submitted_proper_dataset) {
+            // update redux store
+            const action = setSvButton({
+                button: { submit_analysis: event.submitted_proper_dataset },
+            });
+            this.props.dispatchSvButton(action);
+        } else {
+            // update redux store
+            const action = setSvButton({ button: { submit_analysis: false } });
+            this.props.dispatchSvButton(action);
+        }
+    }
+
     // update 'state properties' from child component (i.e. 'value_model_type')
-    changeModelType(event) {
+    handleModelType(event) {
         const modelType = event.value_model_type;
 
         if (
@@ -94,103 +135,7 @@ class DataNew extends Component {
         const action = setSvButton({ button: { submit_analysis: false } });
         this.props.dispatchSvButton(action);
     }
-    // update 'state properties' from child component
-    displaySubmit(event) {
-        if (event.submitted_proper_dataset) {
-            // update redux store
-            const action = setSvButton({
-                button: { submit_analysis: event.submitted_proper_dataset },
-            });
-            this.props.dispatchSvButton(action);
-        } else {
-            // update redux store
-            const action = setSvButton({ button: { submit_analysis: false } });
-            this.props.dispatchSvButton(action);
-        }
-    }
-    componentWillMount(event) {
-        // update redux store
-        const actionLayout = setLayout({ layout: 'analysis' });
-        this.props.dispatchLayout(actionLayout);
 
-        const actionContentType = setContentType({ layout: 'data_new' });
-        this.props.dispatchContentType(actionContentType);
-    }
-    // triggered when 'state properties' change
-    render() {
-        const datasetType = this.state.value_dataset_type;
-        const datasetTitle = this.state.value_title;
-        const collection = this.state.value_collection;
-        const modelType = this.state.value_model_type;
-        const Dataset = this.getSupplyDataset(
-            datasetType,
-            datasetTitle,
-            collection,
-            modelType,
-        );
-        const datasetInput = Dataset ? <Dataset onChange={this.displaySubmit} /> : null;
-
-        return (
-            <fieldset className='fieldset-session-data-upload'>
-                <fieldset className='fieldset-dataset-type'>
-                    <legend>Configurations</legend>
-                    <div className='form-group'>
-                        <label className='block' htmlFor='inputSessionName'>Session Name</label>
-                        <input
-                            className='form-control fullspan'
-                            type='text'
-                            name='session_name'
-                            placeholder='Session Name'
-                            onInput={this.changeTitle}
-                            value={this.state.value_title}
-                        />
-                    </div>
-
-                    <div className='form-group'>
-                        <label className='block' htmlFor='inputCollection'>Collection</label>
-                        <input
-                            className='form-control fullspan'
-                            type='text'
-                            name='collection'
-                            placeholder='Collection'
-                            onInput={this.changeCollection}
-                            value={this.state.value_collection}
-                        />
-                    </div>
-
-                    <div className='row'>
-                        <div className='col-sm-6'>
-                            <div className='form-group'>
-                                <label htmlFor='selectDatasetType'>Dataset Type</label>
-                                <select
-                                    className='form-control fullspan'
-                                    name='dataset_type'
-                                    autoComplete='off'
-                                    onChange={this.changeDatasetType}
-                                    value={this.state.value_dataset_type}
-                                >
-
-                                    <option value='' defaultValue>--Select--</option>
-                                    <option value='file_upload'>Upload file</option>
-                                    <option value='dataset_url'>Dataset URL</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <div className='col-sm-6'>
-                            <div className='form-group'>
-                                <label htmlFor='inputModelType'>Model Type</label>
-                                <ModelType onChange={this.changeModelType} />
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-
-                {datasetInput}
-            </fieldset>
-        );
-    }
-    // call back: used for the above 'render' (return 'span' if undefined)
     getSupplyDataset(datasetType, title, collection, modelType) {
         if (
             title &&
@@ -211,10 +156,96 @@ class DataNew extends Component {
         }
         return null;
     }
-    componentWillUnmount() {
-        // update redux store
-        const action = setSvButton({ button: { submit_analysis: false } });
-        this.props.dispatchSvButton(action);
+
+    render() {
+        const datasetType = this.state.value_dataset_type;
+        const datasetTitle = this.state.value_title;
+        const collection = this.state.value_collection;
+        const modelType = this.state.value_model_type;
+        const Dataset = this.getSupplyDataset(
+            datasetType,
+            datasetTitle,
+            collection,
+            modelType,
+        );
+        const datasetInput = Dataset ? <Dataset onChange={this.handleSubmit} /> : null;
+
+        return (
+            <fieldset className='fieldset-session-data-upload'>
+                <fieldset className='fieldset-dataset-type'>
+                    <legend>{'Configurations'}</legend>
+                    <div className='form-group'>
+                        <label
+                            className='block'
+                            htmlFor='inputSessionName'
+                        >
+                            {'Session Name'}
+                        </label>
+                        <input
+                            className='form-control fullspan'
+                            name='session_name'
+                            onInput={this.handleTitle}
+                            placeholder='Session Name'
+                            type='text'
+                            value={this.state.value_title}
+                        />
+                    </div>
+
+                    <div className='form-group'>
+                        <label
+                            className='block'
+                            htmlFor='inputCollection'
+                        >
+                            {'Collection'}
+                        </label>
+                        <input
+                            className='form-control fullspan'
+                            name='collection'
+                            onInput={this.handleCollection}
+                            placeholder='Collection'
+                            type='text'
+                            value={this.state.value_collection}
+                        />
+                    </div>
+
+                    <div className='row'>
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label htmlFor='selectDatasetType'>
+                                    {'Dataset Type'}
+                                </label>
+                                <select
+                                    autoComplete='off'
+                                    className='form-control fullspan'
+                                    name='dataset_type'
+                                    onChange={this.handleDatasetType}
+                                    value={this.state.value_dataset_type}
+                                >
+
+                                    <option
+                                        defaultValue
+                                        value=''
+                                    >
+                                        {'--Select--'}
+                                    </option>
+                                    <option value='file_upload'>{'Upload file'}</option>
+                                    <option value='dataset_url'>{'Dataset URL'}</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label htmlFor='inputModelType'>{'Model Type'}</label>
+                                <ModelType onChange={this.handleModelType} />
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+
+                {datasetInput}
+            </fieldset>
+        );
     }
 }
 

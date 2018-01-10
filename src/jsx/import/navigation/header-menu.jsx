@@ -17,8 +17,19 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { Navbar, Nav, NavItem, NavDropdown } from 'react-bootstrap';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
+import PropTypes from 'prop-types';
 
 class HeaderMenu extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        layout: PropTypes.oneOfType([
+            PropTypes.string,
+            PropTypes.shape({
+                type: PropTypes.string,
+            })
+        ])
+    }
+
     showDesktopHeader() {
         return (
             <div>
@@ -28,13 +39,20 @@ class HeaderMenu extends Component {
             </div>
         )
     }
+
     showMobileHeader() {
-        const session = <span>
-            <span><SvgBooks /></span>
-            <span className='menu-label'>Session</span>
-        </span>
+        const session = (
+            <span>
+                <span><SvgBooks /></span>
+                <span className='menu-label'>{'Session'}</span>
+            </span>
+        );
+
         return (
-            <Navbar inverse collapseOnSelect>
+            <Navbar
+                collapseOnSelect
+                inverse
+            >
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link to='/'><SvgHome /></Link>
@@ -43,21 +61,24 @@ class HeaderMenu extends Component {
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
-                        <NavDropdown title={session} id='basic-nav-dropdown'>
+                        <NavDropdown
+                            id='basic-nav-dropdown'
+                            title={session}
+                        >
                             <LinkContainer to='/session/data-new'>
-                                <NavItem>Add new data</NavItem>
+                                <NavItem>{'Add new data'}</NavItem>
                             </LinkContainer>
                             <LinkContainer to='/session/data-append'>
-                                <NavItem>Append data</NavItem>
+                                <NavItem>{'Append data'}</NavItem>
                             </LinkContainer>
                             <LinkContainer to='/session/model-generate'>
-                                <NavItem>Generate model</NavItem>
+                                <NavItem>{'Generate model'}</NavItem>
                             </LinkContainer>
                             <LinkContainer to='/session/model-predict'>
-                                <NavItem>Make prediction</NavItem>
+                                <NavItem>{'Make prediction'}</NavItem>
                             </LinkContainer>
                             <LinkContainer to='/session/results'>
-                                <NavItem>Review results</NavItem>
+                                <NavItem>{'Review results'}</NavItem>
                             </LinkContainer>
                         </NavDropdown>
                     </Nav>
@@ -65,13 +86,13 @@ class HeaderMenu extends Component {
                         <LinkContainer to='/login'>
                             <NavItem className='nav-item'>
                                 <span><SvgUser /></span>
-                                <span className='menu-label'>Login</span>
+                                <span className='menu-label'>{'Login'}</span>
                             </NavItem>
                         </LinkContainer>
                         <LinkContainer to='/register'>
                             <NavItem className='nav-item'>
                                 <span><SvgPencilNote /></span>
-                                <span className='menu-label'>Register</span>
+                                <span className='menu-label'>{'Register'}</span>
                             </NavItem>
                         </LinkContainer>
                     </Nav>
@@ -115,7 +136,10 @@ class HeaderMenu extends Component {
             <nav
                 className='main-navigation menu-home'
             >
-                <BreakpointRender breakpoints={breakpoints} type='viewport'>
+                <BreakpointRender
+                    breakpoints={breakpoints}
+                    type='viewport'
+                >
                     {bp => ( bp.isGt('small') ? desktopMenu : mobileMenu )}
                 </BreakpointRender>
             </nav>

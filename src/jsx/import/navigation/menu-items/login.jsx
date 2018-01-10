@@ -16,8 +16,23 @@ import { NavLink, withRouter } from 'react-router-dom';
 import setLoginState from '../../redux/action/login.jsx';
 import setLogoutState from '../../redux/action/logout.jsx';
 import ajaxCaller from '../../general/ajax-caller.js';
+import PropTypes from 'prop-types';
 
 class LoginLink extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        dispatchLogout: PropTypes.func,
+        history: PropTypes.shape({
+            push: PropTypes.func.isRequired,
+        }),
+        location: PropTypes.shape({
+            pathname: PropTypes.string.isRequired,
+        }),
+        user: PropTypes.shape({
+            name: PropTypes.string.isRequired,
+        }),
+    }
+
     // call back: return login button
     renderContent() {
         if (
@@ -27,28 +42,29 @@ class LoginLink extends Component {
         ) {
             return (
                 <NavLink
-                    to='/login'
                     activeClassName='active'
                     className='btn mn-2'
-                    onClick={this.menuClicked}
+                    onClick={this.handleClicked}
+                    to='/login'
                 >
-                    <span>Sign in</span>
+                    <span>{'Sign in'}</span>
                 </NavLink>
             );
         }
         return (
             <NavLink
-                to='/logout'
                 activeClassName='active'
                 className='btn mn-2'
-                onClick={this.menuClicked}
+                onClick={this.handleClicked}
+                to='/logout'
             >
-                <span>Logout</span>
+                <span>{'Logout'}</span>
             </NavLink>
         );
     }
+
     // logout: remove username from sessionStorage
-    menuClicked(event) {
+    handleClicked(event) {
         if (
             this.props &&
             this.props.user &&
@@ -111,6 +127,7 @@ class LoginLink extends Component {
             );
         }
     }
+
     render() {
         const selectedContent = this.renderContent();
         return (selectedContent);

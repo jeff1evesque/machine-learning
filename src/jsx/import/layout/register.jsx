@@ -11,7 +11,7 @@ import RegisterState from '../redux/container/register.jsx';
 const RegisterLayout = () =>
     (
         <div className='register-form'>
-            <h1>Create your account</h1>
+            <h1>{'Create your account'}</h1>
             <RegisterState />
         </div>
     );

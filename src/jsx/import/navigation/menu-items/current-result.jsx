@@ -13,11 +13,11 @@ import { NavLink } from 'react-router-dom';
 const CurrentResultLink = () =>
     (
         <NavLink
-            to='/session/current-result'
             activeClassName='active'
             className='btn mn-2'
+            to='/session/current-result'
         >
-            <span>Goto results</span>
+            <span>{'Goto results'}</span>
         </NavLink>
     );
 

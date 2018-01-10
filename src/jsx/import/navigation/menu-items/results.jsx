@@ -14,9 +14,18 @@
 import React, { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import ajaxCaller from '../../general/ajax-caller.js';
+import PropTypes from 'prop-types';
 
 class ReviewResultsLink extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        page: PropTypes.shape({
+            button: PropTypes.shape({
+                review_results: PropTypes.bool,
+            }),
+        }),
+    }
+
     constructor() {
         super();
         this.state = {
@@ -27,32 +36,7 @@ class ReviewResultsLink extends Component {
         };
         this.renderContent = this.renderContent.bind(this);
     }
-    // call back: return login button
-    renderContent() {
-        if (
-            (
-                this.state.ajax_done_result &&
-                this.state.ajax_done_result.titles.length > 0
-            ) ||
-            (
-                this.props &&
-                this.props.page &&
-                this.props.page.button &&
-                this.props.page.button.review_results
-            )
-        ) {
-            return (
-                <NavLink
-                    to='/session/results'
-                    activeClassName='active'
-                    className='menu-item'
-                >
-                    Review Results
-                </NavLink>
-            );
-        }
-        return null;
-    }
+
     componentWillMount() {
         // local variables
         const ajaxArguments = {
@@ -90,6 +74,34 @@ class ReviewResultsLink extends Component {
             ajaxArguments,
         );
     }
+
+    // call back: return login button
+    renderContent() {
+        if (
+            (
+                this.state.ajax_done_result &&
+                this.state.ajax_done_result.titles.length > 0
+            ) ||
+            (
+                this.props &&
+                this.props.page &&
+                this.props.page.button &&
+                this.props.page.button.review_results
+            )
+        ) {
+            return (
+                <NavLink
+                    activeClassName='active'
+                    className='menu-item'
+                    to='/session/results'
+                >
+                    {'Review Results'}
+                </NavLink>
+            );
+        }
+        return null;
+    }
+
     render() {
         const selectedContent = this.renderContent();
         return (selectedContent);

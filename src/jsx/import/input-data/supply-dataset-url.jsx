@@ -9,9 +9,14 @@
 
 import React, { Component } from 'react';
 import checkValidUrl from './../validator/valid-url.js';
+import PropTypes from 'prop-types';
 
 class SupplyDatasetUrl extends Component {
-    // initial 'state properties'
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        onChange: PropTypes.func.isRequired,
+    }
+
     constructor() {
         super();
         this.state = {
@@ -19,8 +24,9 @@ class SupplyDatasetUrl extends Component {
         };
         this.handleAddMore = this.handleAddMore.bind(this);
         this.handleRemove = this.handleRemove.bind(this);
-        this.validUrlEntered = this.validUrlEntered.bind(this);
+        this.handleUrlEntered = this.handleUrlEntered.bind(this);
     }
+
     // update 'state properties': index for additional input elements
     handleAddMore(event) {
         const elements = this.state.additional_elements;
@@ -28,6 +34,7 @@ class SupplyDatasetUrl extends Component {
         this.setState({ additional_elements: elements });
         this.props.onChange({ submitted_proper_predictor: false });
     }
+
     handleRemove(event) {
         const elements = this.state.additional_elements;
         let datasetBoolean = true;
@@ -52,11 +59,12 @@ class SupplyDatasetUrl extends Component {
             }
 
             { /* possibly clear submit button */ }
-            this.validUrlEntered();
+            this.handleUrlEntered();
         }
     }
+
     // update 'state properties': allow parent component(s) to access properties
-    validUrlEntered() {
+    handleUrlEntered() {
         { /* get array of input elements, by classname */ }
         const dataset = document.getElementsByClassName('dataset-url');
 
@@ -80,36 +88,39 @@ class SupplyDatasetUrl extends Component {
             this.props.onChange({ submitted_proper_dataset: false });
         }
     }
-    // triggered when 'state properties' change
+
     render() {
         const inputs = this.state.additional_elements;
         return (
             <fieldset className='fieldset-supply-dataset'>
-                <legend>Supply Dataset</legend>
+                <legend>{'Supply Dataset'}</legend>
                 <div className='row'>
                     <div className='col-sm-6'>
                         <div className='form-group'>
                             <input
                                 className='form-control dataset-url'
-                                type='url'
-                                name='dataset[]'
-                                placeholder='Dataset URL'
-                                onChange={this.validUrlEntered}
                                 defaultValue=''
+                                name='dataset[]'
+                                onChange={this.handleUrlEntered}
+                                placeholder='Dataset URL'
+                                type='url'
                             />
                         </div>
 
                         {/* array components require unique 'key' value */}
                         {inputs && inputs.map((value, index) => (
-                            <div className='form-group' key={`form-group-${index}`}>
+                            <div
+                                className='form-group'
+                                key={`form-group-${index}`}
+                            >
                                 <input
                                     className='form-control dataset-url'
-                                    type='url'
-                                    name='dataset[]'
-                                    placeholder='Dataset URL'
-                                    key={`input-url-${index}`}
-                                    onChange={this.validUrlEntered}
                                     defaultValue=''
+                                    key={`input-url-${index}`}
+                                    name='dataset[]'
+                                    onChange={this.handleUrlEntered}
+                                    placeholder='Dataset URL'
+                                    type='url'
                                 />
                             </div>
                         ))}
@@ -120,18 +131,18 @@ class SupplyDatasetUrl extends Component {
                             <div className='col-sm-6 form-group'>
                                 <input
                                     className='fullspan'
+                                    onClick={this.handleAddMore}
                                     type='button'
                                     value='Add more'
-                                    onClick={this.handleAddMore}
                                 />
                             </div>
 
                             <div className='col-sm-6 form-group'>
                                 <input
                                     className='fullspan'
+                                    onClick={this.handleRemove}
                                     type='button'
                                     value='Remove'
-                                    onClick={this.handleRemove}
                                 />
                             </div>
                         </div>

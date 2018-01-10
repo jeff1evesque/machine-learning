@@ -18,8 +18,24 @@ import ReactDOM from 'react-dom';
 import * as d3 from 'd3';
 import { medium_minWidth } from '../general/breakpoints';
 import hex from '../general/colors.js';
+import PropTypes from 'prop-types';
 
 class AnimateCollisions extends Component {
+    // prob validation: static method, similar to class A {}; A.b = {};
+    static propTypes = {
+        alpha: PropTypes.number,
+        colors: PropTypes.arrayOf(PropTypes.string.isRequired),
+        forceX: PropTypes.func,
+        forceY: PropTypes.func,
+        iterations: PropTypes.number,
+        nodes: PropTypes.arrayOf(
+            PropTypes.shape({
+                r: PropTypes.number.isRequired,
+            }),
+        ),
+        radius_delta: PropTypes.number,
+    }
+
     constructor() {
         super();
         const width = window.innerWidth;
@@ -132,11 +148,11 @@ class AnimateCollisions extends Component {
             const color = this.getColor();
             return (
                 <circle
-                    fill={color}
                     cx={node.x}
                     cy={node.y}
-                    r={node.r}
+                    fill={color}
                     key={`circle-${index}`}
+                    r={node.r}
                 />
             );
         });
@@ -144,9 +160,9 @@ class AnimateCollisions extends Component {
         return (
             <svg
                 className='d3-absolute'
+                height={this.state.height}
                 ref='animation'
                 width={this.state.width}
-                height={this.state.height}
             >
                 <g>{nodes}</g>
             </svg>
