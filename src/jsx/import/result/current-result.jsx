@@ -27,7 +27,7 @@ class CurrentResultDisplay extends Component {
         location: PropTypes.shape({
             search: PropTypes.string.isRequired,
         }),
-	    results: PropTypes.shape({
+        results: PropTypes.shape({
             data: PropTypes.string,
             type: PropTypes.string,
         }),
