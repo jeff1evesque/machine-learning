@@ -50,35 +50,38 @@ class Validator(object):
         # validation on 'data_new' session
         if self.session_type == 'data_new':
             try:
-                validate = Draft4Validator(schema_data_new())
-                validate.validate(self.premodel_settings)
+                Draft4Validator(
+                    schema_data_new()
+                ).validate(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'data_append' session
         if self.session_type == 'data_append':
             try:
-                validate = Draft4Validator(schema_data_append())
-                validate.validate(self.premodel_settings)
+                Draft4Validator(
+                    schema_data_append()
+                ).validate(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_generate' session
         if self.session_type == 'model_generate':
             try:
-                validate = Draft4Validator(schema_model_generate())
-                validate.validate(self.premodel_settings)
+                Draft4Validator(
+                    schema_model_generate()
+                ).validate(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_predict' session
         elif self.session_type == 'model_predict':
             try:
-                validate = Draft4Validator(schema_model_predict())
+                Draft4Validator(
+                    schema_model_predict()
+                ).validate(self.premodel_settings)
                 for value in self.premodel_settings['prediction_input[]']:
                     float(value)
-
-                validate.validate(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
