@@ -36,7 +36,7 @@ development:
         general:
             flask-script: '2.0.5'
             flask-jwt-extended: '3.3.4'
-            jsonschema: '2.5.1'
+            voluptuous: '0.10.5'
             pytest-flask: '0.10.0'
             six: '1.5.2'
             xmltodict: '0.10.1'

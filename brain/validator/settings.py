@@ -6,7 +6,6 @@ This file performs validation on session settings.
 
 '''
 
-from jsonschema.validators import Draft4Validator
 from brain.schema.session import schema_data_new
 from brain.schema.session import schema_data_append
 from brain.schema.session import schema_model_generate
@@ -50,36 +49,28 @@ class Validator(object):
         # validation on 'data_new' session
         if self.session_type == 'data_new':
             try:
-                Draft4Validator(
-                    schema_data_new()
-                ).validate(self.premodel_settings)
+                schema_data_new(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'data_append' session
         if self.session_type == 'data_append':
             try:
-                Draft4Validator(
-                    schema_data_append()
-                ).validate(self.premodel_settings)
+                schema_data_append(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_generate' session
         if self.session_type == 'model_generate':
             try:
-                Draft4Validator(
-                    schema_model_generate()
-                ).validate(self.premodel_settings)
+                schema_model_generate(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_predict' session
         elif self.session_type == 'model_predict':
             try:
-                Draft4Validator(
-                    schema_model_predict()
-                ).validate(self.premodel_settings)
+                schema_model_predict(self.premodel_settings)
                 for value in self.premodel_settings['prediction_input[]']:
                     float(value)
             except Exception, error:

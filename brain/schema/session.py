@@ -6,6 +6,8 @@ This file contains various jsonschema definitions.
 
 '''
 
+from voluptuous import Schema, Required, Optional, All, Length
+
 
 def schema_data_new():
     '''
@@ -21,34 +23,14 @@ def schema_data_new():
 
     '''
 
-    schema = {
-        'type': 'object',
-        'session_name': {
-            'type': 'string',
-            'minLength': 1
-        },
-        'collection': {
-            'type': 'string',
-            'minLength': 1
-        },
-        'dataset_type': {
-            'type': 'string',
-            'enum': ['file_upload', 'dataset_url', 'json_string']
-        },
-        'session_type': {
-            'type': 'string',
-            'enum': ['data_new']
-        },
-        'model_type': {
-            'type': 'string',
-            'enum': ['svm', 'svr']
-        },
-        'stream': {
-            'type': 'string',
-            'enum': ['true', 'false']
-        },
-    }
-    return schema
+    return Schema({
+        Required('session_name'): All(str, Length(min=1)),
+        Required('collection'): All(str, Length(min=1)),
+        Required('dataset_type'): ['file_upload', 'dataset_url', 'json_string'],
+        Required('session_type'): ['data_new'],
+        Required('model_type'): ['svm', 'svr'],
+        Optional('stream'): ['true', 'false'],
+    })
 
 
 def schema_data_append():
@@ -65,30 +47,13 @@ def schema_data_append():
 
     '''
 
-    schema = {
-        'type': 'object',
-        'collection': {
-            'type': 'string',
-            'minLength': 1
-        },
-        'dataset_type': {
-            'type': 'string',
-            'enum': ['file_upload', 'dataset_url', 'json_string']
-        },
-        'session_type': {
-            'type': 'string',
-            'enum': ['data_new']
-        },
-        'model_type': {
-            'type': 'string',
-            'enum': ['svm', 'svr']
-        },
-        'stream': {
-            'type': 'string',
-            'enum': ['true', 'false']
-        },
-    }
-    return schema
+    return Schema({
+        Required('collection'): All(str, Length(min=1)),
+        Required('dataset_type'): ['file_upload', 'dataset_url', 'json_string'],
+        Required('session_type'): ['data_append'],
+        Required('model_type'): ['svm', 'svr'],
+        Optional('stream'): ['true', 'false'],
+    })
 
 
 def schema_model_generate():
@@ -105,24 +70,13 @@ def schema_model_generate():
 
     '''
 
-    schema = {
-        'type': 'object',
-        'properties': {
-            'session_id': {
-                'type': 'string',
-                'minLength': 1
-            },
-            'sv_model_type': {
-                'type': 'string',
-                'enum': ['svm', 'svr']
-            },
-            'session_type': {
-                'type': 'string',
-                'enum': ['model_generate']
-            },
-        },
-    }
-    return schema
+    return Schema({
+        Required('properties'): {
+            Required('session_id'): All(str, Length(min=1)),
+            Required('sv_model_type'): ['svm', 'svr'],
+            Required('session_type'): ['model_generate'],
+        }
+    })
 
 
 def schema_model_predict():
@@ -139,17 +93,9 @@ def schema_model_predict():
 
     '''
 
-    schema = {
-        'type': 'object',
-        'properties': {
-            'session_type': {
-                'type': 'string',
-                'enum': ['model_predict']
-            },
-            'collection': {
-                'type': 'string',
-                'minLength': 1,
-            },
-        },
-    }
-    return schema
+    return Schema({
+        Required('properties'): {
+            Required('session_type'): ['model_generate'],
+            Required('collection'): All(str, Length(min=1)),
+        }
+    })
