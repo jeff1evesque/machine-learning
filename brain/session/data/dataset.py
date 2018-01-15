@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 import json
 import requests
 from flask import current_app
-from brain.schema.dataset import schema_svm, schema_svr
+from brain.schema.dataset import validate_svm, validate_svr
 from brain.converter.format.csv2dict import csv2dict
 from brain.converter.format.xml2dict import xml2dict
 
@@ -51,9 +51,9 @@ def dataset2dict(model_type, upload):
                 # validate against schema, and build converted list
                 try:
                     if model_type == list_model_type[0]:
-                        schema_svm(instance)
+                        validate_svm(instance)
                     elif model_type == list_model_type[1]:
-                        schema_svr(instance)
+                        validate_svr(instance)
                     converted.extend(instance)
                 except Exception, error:
                     msg = "Stream contains invalid syntax, with error: %s" % error
@@ -77,9 +77,9 @@ def dataset2dict(model_type, upload):
                     # validate against schema, and build converted list
                     try:
                         if model_type == list_model_type[0]:
-                            schema_svm(instance)
+                            validate_svm(instance)
                         elif model_type == list_model_type[1]:
-                            schema_svm(svr)
+                            validate_svm(svr)
                         converted.extend(instance)
                     except Exception, error:
                         msg = "%s contains invalid syntax, with error: %s" % (
@@ -103,9 +103,9 @@ def dataset2dict(model_type, upload):
                         # validate against schema, and build converted list
                         try:
                             if model_type == list_model_type[0]:
-                                Draft4Validator(schema_svm()).validate(instance)
+                                Draft4Validator(validate_svm()).validate(instance)
                             elif model_type == list_model_type[1]:
-                                Draft4Validator(schema_svr()).validate(instance)
+                                Draft4Validator(validate_svr()).validate(instance)
                             converted.extend(instance)
                         except Exception, error:
                             msg = "%s contains invalid syntax, with error: %s" % (

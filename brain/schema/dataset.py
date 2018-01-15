@@ -9,7 +9,7 @@ This file contains various jsonschema dataset definitions.
 from voluptuous import Schema, Required, Optional, All, Length
 
 
-def schema_svm(data):
+def validate_svm(data):
     '''
 
     This function validates svm dataset(s).
@@ -29,7 +29,7 @@ def schema_svm(data):
 
     schema(data)
 
-def schema_svr(data):
+def validate_svr(data):
     '''
 
     This function validates svr dataset(s).

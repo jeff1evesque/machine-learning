@@ -6,10 +6,10 @@ This file performs validation on session settings.
 
 '''
 
-from brain.schema.session import schema_data_new
-from brain.schema.session import schema_data_append
-from brain.schema.session import schema_model_generate
-from brain.schema.session import schema_model_predict
+from brain.schema.session import validate_data_new
+from brain.schema.session import validate_data_append
+from brain.schema.session import validate_model_generate
+from brain.schema.session import validate_model_predict
 
 
 class Validator(object):
@@ -49,28 +49,28 @@ class Validator(object):
         # validation on 'data_new' session
         if self.session_type == 'data_new':
             try:
-                schema_data_new(self.premodel_settings)
+                validate_data_new(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'data_append' session
         if self.session_type == 'data_append':
             try:
-                schema_data_append(self.premodel_settings)
+                validate_data_append(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_generate' session
         if self.session_type == 'model_generate':
             try:
-                schema_model_generate(self.premodel_settings)
+                validate_model_generate(self.premodel_settings)
             except Exception, error:
                 list_error.append(str(error))
 
         # validation on 'model_predict' session
         elif self.session_type == 'model_predict':
             try:
-                schema_model_predict(self.premodel_settings)
+                validate_model_predict(self.premodel_settings)
                 for value in self.premodel_settings['prediction_input[]']:
                     float(value)
             except Exception, error:
