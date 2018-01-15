@@ -6,7 +6,7 @@ This file validates each session properties.
 
 '''
 
-from voluptuous import Schema, Required, Optional, All, Length
+from voluptuous import Schema, Required, Optional, All, Any, Length
 
 
 def validate_data_new(data):
@@ -29,9 +29,8 @@ def validate_data_new(data):
         Required('dataset_type'): ['file_upload', 'dataset_url', 'json_string'],
         Required('session_type'): ['data_new'],
         Required('model_type'): ['svm', 'svr'],
-        Optional('stream'): ['true', 'false'],
+        Optional('stream'): Any('true', 'false'),
     })
-
     schema(data)
 
 
@@ -54,9 +53,8 @@ def validate_data_append(data):
         Required('dataset_type'): ['file_upload', 'dataset_url', 'json_string'],
         Required('session_type'): ['data_append'],
         Required('model_type'): ['svm', 'svr'],
-        Optional('stream'): ['true', 'false'],
+        Optional('stream'): Any('true', 'false'),
     })
-
     schema(data)
 
 
@@ -81,7 +79,6 @@ def validate_model_generate(data):
             Required('session_type'): ['model_generate'],
         }
     })
-
     schema(data)
 
 
@@ -105,5 +102,4 @@ def validate_model_predict(data):
             Required('collection'): All(str, Length(min=1)),
         }
     })
-
     schema(data)
