@@ -11,7 +11,6 @@ Note: the term 'dataset' used throughout various comments in this file,
 import json
 import requests
 from flask import current_app
-from jsonschema.validators import Draft4Validator
 from brain.schema.dataset import schema_svm, schema_svr
 from brain.converter.format.csv2dict import csv2dict
 from brain.converter.format.xml2dict import xml2dict
@@ -52,9 +51,9 @@ def dataset2dict(model_type, upload):
                 # validate against schema, and build converted list
                 try:
                     if model_type == list_model_type[0]:
-                        Draft4Validator(schema_svm()).validate(instance)
+                        schema_svm(instance)
                     elif model_type == list_model_type[1]:
-                        Draft4Validator(schema_svr()).validate(instance)
+                        schema_svr(instance)
                     converted.extend(instance)
                 except Exception, error:
                     msg = "Stream contains invalid syntax, with error: %s" % error
@@ -78,9 +77,9 @@ def dataset2dict(model_type, upload):
                     # validate against schema, and build converted list
                     try:
                         if model_type == list_model_type[0]:
-                            Draft4Validator(schema_svm()).validate(instance)
+                            schema_svm(instance)
                         elif model_type == list_model_type[1]:
-                            Draft4Validator(schema_svr()).validate(instance)
+                            schema_svm(svr)
                         converted.extend(instance)
                     except Exception, error:
                         msg = "%s contains invalid syntax, with error: %s" % (

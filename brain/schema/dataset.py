@@ -6,56 +6,45 @@ This file contains various jsonschema dataset definitions.
 
 '''
 
+from voluptuous import Schema, Required, Optional, All, Length
 
-def schema_svm():
+
+def schema_svm(data):
     '''
 
     This function validates svm dataset(s).
 
     '''
 
-    schema = {
-        'type': 'array',
-        'minItems': 1,
-        'additionalProperties': {
-            'dependent-variable': {
-                'type': 'string',
-                'minLength': 1
-            },
-            'independent-variables': {
-                'type': 'array',
-                'minItems': 1,
-                'additionalProperties': {
-                    'type': 'string',
-                    'minLength': 1
-                }
-            }
-        }
-    }
-    return schema
+    schema = Schema([
+        {
+            Required('dataset'): [{
+                Required('dependent-variable'): All(str, Length(min=1)),
+                Required('independent-variable'): [{
+                    Required(All(str, Length(min=1))): All(float, Length(min=1)),
+                }],
+            }],
+        },
+    ])
 
+    schema(data)
 
-def schema_svr():
+def schema_svr(data):
     '''
 
     This function validates svr dataset(s).
 
     '''
 
-    schema = {
-        'type': 'array',
-        'minItems': 1,
-        'additionalProperties': {
-            'dependent-variable': {
-                'type': 'number'
-            },
-            'independent-variables': {
-                'type': 'array',
-                'minItems': 1,
-                'additionalProperties': {
-                    'type': 'number'
-                }
-            }
-        }
-    }
-    return schema
+    schema = Schema([
+        {
+            Required('dataset'): [{
+                Required('dependent-variable'): All(float, Length(min=1)),
+                Required('independent-variable'): [{
+                    Required(All(str, Length(min=1))): All(float, Length(min=1)),
+                }],
+            }],
+        },
+    ])
+
+    schema(data)
