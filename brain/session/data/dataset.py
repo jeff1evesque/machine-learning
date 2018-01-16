@@ -103,9 +103,9 @@ def dataset2dict(model_type, upload):
                         # validate against schema, and build converted list
                         try:
                             if model_type == list_model_type[0]:
-                                Draft4Validator(validate_svm()).validate(instance)
+                                validate_svm(instance)
                             elif model_type == list_model_type[1]:
-                                Draft4Validator(validate_svr()).validate(instance)
+                                validate_svr(instance)
                             converted.extend(instance)
                         except Exception, error:
                             msg = "%s contains invalid syntax, with error: %s" % (
