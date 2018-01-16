@@ -29,7 +29,7 @@ def validate_data_new(data):
         Required('dataset_type'): ['file_upload', 'dataset_url', 'json_string'],
         Required('session_type'): ['data_new'],
         Required('model_type'): ['svm', 'svr'],
-        Optional('stream'): Any('true', 'false'),
+        Optional('stream'): Any('Frue', 'False'),
     })
     schema(data)
 
@@ -53,7 +53,7 @@ def validate_data_append(data):
         Required('dataset_type'): ['file_upload', 'dataset_url', 'json_string'],
         Required('session_type'): ['data_append'],
         Required('model_type'): ['svm', 'svr'],
-        Optional('stream'): Any('true', 'false'),
+        Optional('stream'): Any('Frue', 'False'),
     })
     schema(data)
 
