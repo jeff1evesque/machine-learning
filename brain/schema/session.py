@@ -24,11 +24,11 @@ def validate_data_new(data):
     '''
 
     schema = Schema({
-        Required('session_name'): All(str, Length(min=1)),
-        Required('collection'): All(str, Length(min=1)),
-        Required('dataset_type'): ['file_upload', 'dataset_url', 'json_string'],
-        Required('session_type'): ['data_new'],
-        Required('model_type'): ['svm', 'svr'],
+        Required('session_name'): All(unicode, Length(min=1)),
+        Required('collection'): All(unicode, Length(min=1)),
+        Required('dataset_type'): Any('file_upload', 'dataset_url', 'json_string'),
+        Required('session_type'): 'data_new',
+        Required('model_type'): Any('svm', 'svr'),
         Optional('stream'): Any(True, False),
     })
     schema(data)
@@ -49,10 +49,10 @@ def validate_data_append(data):
     '''
 
     schema = Schema({
-        Required('collection'): All(str, Length(min=1)),
-        Required('dataset_type'): ['file_upload', 'dataset_url', 'json_string'],
-        Required('session_type'): ['data_append'],
-        Required('model_type'): ['svm', 'svr'],
+        Required('collection'): All(unicode, Length(min=1)),
+        Required('dataset_type'): Any('file_upload', 'dataset_url', 'json_string'),
+        Required('session_type'): 'data_append',
+        Required('model_type'): Any('svm', 'svr'),
         Optional('stream'): Any(True, False),
     })
     schema(data)
@@ -74,9 +74,9 @@ def validate_model_generate(data):
 
     schema = Schema({
         Required('properties'): {
-            Required('session_id'): All(str, Length(min=1)),
-            Required('sv_model_type'): ['svm', 'svr'],
-            Required('session_type'): ['model_generate'],
+            Required('session_id'): All(unicode, Length(min=1)),
+            Required('sv_model_type'): Any('svm', 'svr'),
+            Required('session_type'): 'model_generate',
         }
     })
     schema(data)
@@ -98,8 +98,8 @@ def validate_model_predict(data):
 
     schema = Schema({
         Required('properties'): {
-            Required('session_type'): ['model_generate'],
-            Required('collection'): All(str, Length(min=1)),
+            Required('session_type'): 'model_generate',
+            Required('collection'): All(unicode, Length(min=1)),
         }
     })
     schema(data)
