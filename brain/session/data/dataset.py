@@ -79,7 +79,7 @@ def dataset2dict(model_type, upload):
                         if model_type == list_model_type[0]:
                             validate_svm(instance)
                         elif model_type == list_model_type[1]:
-                            validate_svm(svr)
+                            validate_svm(instance)
                         converted.extend(instance)
                     except Exception, error:
                         msg = "%s contains invalid syntax, with error: %s" % (
