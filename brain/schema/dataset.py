@@ -2,7 +2,7 @@
 
 '''
 
-This file contains various jsonschema dataset definitions.
+This file validates the supplied dataset.
 
 '''
 
