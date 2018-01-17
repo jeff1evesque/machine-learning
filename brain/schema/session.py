@@ -98,6 +98,10 @@ def validate_model_predict(data):
 
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
+        Optional('stream'): Any(True, False),
+        Required('prediction_input[]'): [
+            All(unicode, Length(min=1)),
+        ],
         Required('session_type'): 'model_predict',
     })
     schema(data)
