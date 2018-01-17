@@ -6,7 +6,7 @@ This file validates the supplied dataset.
 
 '''
 
-from voluptuous import Schema, Required, Optional, All, Length
+from voluptuous import Schema, Required, Optional, All, Any, Length
 
 
 def validate_svm(data):
@@ -18,11 +18,9 @@ def validate_svm(data):
 
     schema = Schema([
         {
-            Required('dataset'): [{
-                Required('dependent-variable'): All(str, Length(min=1)),
-                Required('independent-variable'): [{
-                    Required(All(str, Length(min=1))): All(float, Length(min=1)),
-                }],
+            Required('dependent-variable'): All(unicode, Length(min=1)),
+            Required('independent-variables'): [{
+                Required(All(unicode, Length(min=1))): Any(int, float),
             }],
         },
     ])
@@ -38,11 +36,9 @@ def validate_svr(data):
 
     schema = Schema([
         {
-            Required('dataset'): [{
-                Required('dependent-variable'): All(float, Length(min=1)),
-                Required('independent-variable'): [{
-                    Required(All(str, Length(min=1))): All(float, Length(min=1)),
-                }],
+            Required('dependent-variable'): Any(int, float),
+            Required('independent-variables'): [{
+                Required(All(unicode, Length(min=1))): Any(int, float),
             }],
         },
     ])
