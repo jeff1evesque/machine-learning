@@ -24,8 +24,8 @@ def validate_data_new(data):
 
     '''
 
-    model_type = current_app.config.get('MODEL_TYPE')
-    dataset_type = current_app.config.get('DATASET_TYPE')
+    model_type = ','.join(current_app.config.get('MODEL_TYPE'))
+    dataset_type = ','.join(current_app.config.get('DATASET_TYPE'))
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
         Required('dataset_type'): Any(dataset_type),
@@ -51,8 +51,8 @@ def validate_data_append(data):
 
     '''
 
-    model_type = current_app.config.get('MODEL_TYPE')
-    dataset_type = current_app.config.get('DATASET_TYPE')
+    model_type = ','.join(current_app.config.get('MODEL_TYPE'))
+    dataset_type = ','.join(current_app.config.get('DATASET_TYPE'))
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
         Required('dataset_type'): Any(dataset_type),
@@ -77,8 +77,8 @@ def validate_model_generate(data):
 
     '''
 
-    model_type = current_app.config.get('MODEL_TYPE')
-    sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
+    model_type = ','.join(current_app.config.get('MODEL_TYPE'))
+    sv_kernel_type = ','.join(current_app.config.get('SV_KERNEL_TYPE'))
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
         Required('model_type'): Any(model_type),
