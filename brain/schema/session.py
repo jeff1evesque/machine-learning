@@ -6,6 +6,7 @@ This file validates each session properties.
 
 '''
 
+from flask import current_app
 from voluptuous import Schema, Required, Optional, All, Any, Length
 
 
@@ -23,10 +24,12 @@ def validate_data_new(data):
 
     '''
 
+    model_type = current_app.config.get('MODEL_TYPE')
+    dataset_type = current_app.config.get('DATASET_TYPE')
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
-        Required('dataset_type'): Any('file_upload', 'dataset_url', 'json_string'),
-        Required('model_type'): Any('svm', 'svr'),
+        Required('dataset_type'): Any(dataset_type),
+        Required('model_type'): Any(model_type),
         Required('session_type'): 'data_new',
         Required('session_name'): All(unicode, Length(min=1)),
         Optional('stream'): Any(True, False),
@@ -48,10 +51,12 @@ def validate_data_append(data):
 
     '''
 
+    model_type = current_app.config.get('MODEL_TYPE')
+    dataset_type = current_app.config.get('DATASET_TYPE')
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
-        Required('dataset_type'): Any('file_upload', 'dataset_url', 'json_string'),
-        Required('model_type'): Any('svm', 'svr'),
+        Required('dataset_type'): Any(dataset_type),
+        Required('model_type'): Any(model_type),
         Required('session_type'): 'data_append',
         Optional('stream'): Any(True, False),
     })
@@ -72,12 +77,14 @@ def validate_model_generate(data):
 
     '''
 
+    model_type = current_app.config.get('MODEL_TYPE')
+    sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
-        Required('model_type'): Any('svm', 'svr'),
+        Required('model_type'): Any(model_type),
         Required('session_type'): 'model_generate',
         Optional('stream'): Any(True, False),
-        Required('sv_kernel_type'): Any('linear', 'poly', 'rfb', 'sigmoid'),
+        Required('sv_kernel_type'): Any(sv_kernel_type),
     })
     schema(data)
 

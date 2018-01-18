@@ -27,9 +27,18 @@ application:
             max_collection: 150
             max_document: 30
     security_key: 'change-this'
+    dataset_type:
+        - file_upload
+        - dataset_url
+        - json_string
     model_type:
         - svm
         - svr
+    sv_kernel_type:
+        - linear
+        - poly
+        - rfb
+        - sigmoid
     log_level: 'DEBUG'
     error_log_path: '/log/application/error'
     warning_log_path: '/log/application/warning'
