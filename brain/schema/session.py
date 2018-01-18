@@ -16,12 +16,6 @@ def validate_data_new(data):
     This method validates the 'data_new' session, by validating the session
     properties, not the dataset itself.
 
-    @file_upload, @dataset_url, are web-interface related values.
-
-    @json_string, is a programmatic-interface related value.
-
-    Note: This validation schema is used in corresponding validator_xxx.py.
-
     '''
 
     model_type = current_app.config.get('MODEL_TYPE')
@@ -43,12 +37,6 @@ def validate_data_append(data):
     This method validates the 'data_append' session, by validating the session
     properties, not the dataset itself.
 
-    @file_upload, @dataset_url, are web-interface related values.
-
-    @json_string, is a programmatic-interface related value.
-
-    Note: This validation schema is used in corresponding validator_xxx.py.
-
     '''
 
     model_type = current_app.config.get('MODEL_TYPE')
@@ -69,12 +57,6 @@ def validate_model_generate(data):
     This method validates the 'model_generate' session, by validating the
     session properties, not the dataset itself.
 
-    @file_upload, @dataset_url, are web-interface related values.
-
-    @json_string, is a programmatic-interface related value.
-
-    Note: This validation schema is used in corresponding validator_xxx.py.
-
     '''
 
     model_type = current_app.config.get('MODEL_TYPE')
@@ -94,12 +76,6 @@ def validate_model_predict(data):
 
     This method validates the 'model_predict' session, by validating the
     session properties, not the dataset itself.
-
-    @file_upload, @dataset_url, are web-interface related values.
-
-    @json_string, is a programmatic-interface related value.
-
-    Note: This validation schema is used in corresponding validator_xxx.py.
 
     '''
 
