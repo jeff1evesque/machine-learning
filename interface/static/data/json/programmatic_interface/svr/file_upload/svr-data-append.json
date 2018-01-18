@@ -7,7 +7,7 @@
             "stream": "True"
 	},
 	"dataset": [{
-			"dependent-variable": "19.348",
+			"dependent-variable": 19.348,
 			"independent-variables": [{
 				"predictor-1": 23.45,
 				"predictor-2": 98.01,
@@ -19,7 +19,7 @@
 			}]
 		},
 		{
-			"dependent-variable": "48.357",
+			"dependent-variable": 48.357,
 			"independent-variables": [{
 				"predictor-1": 24.32,
 				"predictor-2": 92.22,
@@ -31,7 +31,7 @@
 			}]
 		},
 		{
-			"dependent-variable": "35.548",
+			"dependent-variable": 35.548,
 			"independent-variables": [{
 				"predictor-1": 22.67,
 				"predictor-2": 101.21,

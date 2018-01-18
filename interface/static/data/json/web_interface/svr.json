@@ -1,6 +1,6 @@
 {
     "dataset": [{
-            "dependent-variable": "34.543",
+            "dependent-variable": 34.543,
             "independent-variables": [{
                 "predictor-1":23.45,
                 "predictor-2":98.01,
@@ -12,7 +12,7 @@
            }]
         },
         {
-            "dependent-variable": "54.666",
+            "dependent-variable": 54.666,
             "independent-variables": [{
                 "predictor-1":24.32,
                 "predictor-2":92.22,
@@ -24,7 +24,7 @@
             }]
         },
         {
-            "dependent-variable": "22.020",
+            "dependent-variable": 22.020,
             "independent-variables": [{
                 "predictor-1":22.67,
                 "predictor-2":101.21,

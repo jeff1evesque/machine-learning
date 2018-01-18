@@ -1,6 +1,6 @@
 {
     "dataset": [{
-            "dependent-variable": "24.535",
+            "dependent-variable": 24.535,
             "independent-variables": [{
                 "predictor-1": 23.45,
                 "predictor-2": 98.01,
@@ -12,7 +12,7 @@
             }]
         },
         {
-            "dependent-variable": "41.004",
+            "dependent-variable": 41.004,
             "independent-variables": [{
                 "predictor-1": 22.1,
                 "predictor-2": 95.96,
@@ -33,7 +33,7 @@
             }]
         },
         {
-            "dependent-variable": "35.555",
+            "dependent-variable": 35.555,
             "independent-variables": [{
                 "predictor-1": 20.71,
                 "predictor-2": 99.33,
@@ -45,7 +45,7 @@
             }]
         },
         {
-            "dependent-variable": "44.200",
+            "dependent-variable": 44.200,
             "independent-variables": [{
                 "predictor-1": 23.27,
                 "predictor-2": 95.03,
@@ -57,7 +57,7 @@
             }]
         },
         {
-            "dependent-variable": "39.652",
+            "dependent-variable": 39.652,
             "independent-variables": [{
                 "predictor-1": 23.27,
                 "predictor-2": 95.03,
@@ -69,7 +69,7 @@
             }]
         },
         {
-            "dependent-variable": "29.404",
+            "dependent-variable": 29.404,
             "independent-variables": [{
                 "predictor-1": 19.99,
                 "predictor-2": 97.78,
@@ -81,7 +81,7 @@
             }]
         },
         {
-            "dependent-variable": "42.222",
+            "dependent-variable": 42.222,
             "independent-variables": [{
                 "predictor-1": 22.67,
                 "predictor-2": 101.21,
