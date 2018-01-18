@@ -26,11 +26,11 @@ application:
         authenticated:
             max_collection: 150
             max_document: 30
+        types:
+            - file_upload
+            - dataset_url
+            - json_string
     security_key: 'change-this'
-    dataset_type:
-        - file_upload
-        - dataset_url
-        - json_string
     model_type:
         - svm
         - svr
