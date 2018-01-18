@@ -32,7 +32,7 @@ def validate_data_new(data):
         Required('model_type'): Any(model_type),
         Required('session_type'): 'data_new',
         Required('session_name'): All(unicode, Length(min=1)),
-        Optional('stream'): Any(True, False),
+        Optional('stream'): Any('True', 'False'),
     })
     schema(data)
 
@@ -58,7 +58,7 @@ def validate_data_append(data):
         Required('dataset_type'): Any(dataset_type),
         Required('model_type'): Any(model_type),
         Required('session_type'): 'data_append',
-        Optional('stream'): Any(True, False),
+        Optional('stream'): Any('True', 'False'),
     })
     schema(data)
 
@@ -83,7 +83,7 @@ def validate_model_generate(data):
         Required('collection'): All(unicode, Length(min=1)),
         Required('model_type'): Any(model_type),
         Required('session_type'): 'model_generate',
-        Optional('stream'): Any(True, False),
+        Optional('stream'): Any('True', 'False'),
         Required('sv_kernel_type'): Any(sv_kernel_type),
     })
     schema(data)
@@ -105,7 +105,7 @@ def validate_model_predict(data):
 
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
-        Optional('stream'): Any(True, False),
+        Optional('stream'): Any('True', 'False'),
         Required('prediction_input[]'): [
             All(unicode, Length(min=1)),
         ],
