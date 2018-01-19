@@ -4,6 +4,7 @@ sudo: required
 
 ## configurations
 before_install:
+  - bundle update
   - PROJECT_DIRECTORY=$(pwd)
   - chmod u+x test/linter
   - chmod u+x test/unit-tests
