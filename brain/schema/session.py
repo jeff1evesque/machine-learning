@@ -61,7 +61,6 @@ def validate_model_generate(data):
 
     model_type = current_app.config.get('MODEL_TYPE')
     sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
-    raise Exception('brain/schema/session.py, sv_kernel_type: ' + repr(sv_kernel_type) + ' , data: ' + repr(data))
     schema = Schema({
         Required('collection'): All(unicode, Length(min=1)),
         Required('model_type'): In(model_type),
