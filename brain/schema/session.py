@@ -83,7 +83,7 @@ def validate_model_predict(data):
         Required('collection'): All(unicode, Length(min=1)),
         Optional('stream'): Any('True', 'False'),
         Required('prediction_input[]'): [
-            Coerce(Any(int, float)),
+            Any(Coerce(int), Coerce(float)),
         ],
         Required('session_type'): 'model_predict',
     })
