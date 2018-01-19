@@ -37,7 +37,7 @@ application:
     sv_kernel_type:
         - linear
         - poly
-        - rfb
+        - rbf
         - sigmoid
     log_level: 'DEBUG'
     error_log_path: '/log/application/error'

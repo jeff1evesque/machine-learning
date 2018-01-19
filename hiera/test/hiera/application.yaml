@@ -37,7 +37,7 @@ application:
     sv_kernel_type:
         - linear
         - poly
-        - rfb
+        - rbf
         - sigmoid
     model_type:
         - svm
