@@ -26,7 +26,19 @@ application:
         authenticated:
             max_collection: 150
             max_document: 30
+        types:
+            - file_upload
+            - dataset_url
+            - json_string
     security_key: 'change-this'
+    model_type:
+        - svm
+        - svr
+    sv_kernel_type:
+        - linear
+        - poly
+        - rbf
+        - sigmoid
     model_type:
         - svm
         - svr

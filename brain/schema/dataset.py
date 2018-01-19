@@ -2,60 +2,45 @@
 
 '''
 
-This file contains various jsonschema dataset definitions.
+This file validates the supplied dataset.
 
 '''
 
+from voluptuous import Schema, Required, Optional, All, Any, Length
 
-def schema_svm():
+
+def validate_svm(data):
     '''
 
     This function validates svm dataset(s).
 
     '''
 
-    schema = {
-        'type': 'array',
-        'minItems': 1,
-        'additionalProperties': {
-            'dependent-variable': {
-                'type': 'string',
-                'minLength': 1
-            },
-            'independent-variables': {
-                'type': 'array',
-                'minItems': 1,
-                'additionalProperties': {
-                    'type': 'string',
-                    'minLength': 1
-                }
-            }
-        }
-    }
-    return schema
+    schema = Schema([
+        {
+            Required('dependent-variable'): All(unicode, Length(min=1)),
+            Required('independent-variables'): [{
+                Required(All(unicode, Length(min=1))): Any(int, float),
+            }],
+        },
+    ])
 
+    schema(data)
 
-def schema_svr():
+def validate_svr(data):
     '''
 
     This function validates svr dataset(s).
 
     '''
 
-    schema = {
-        'type': 'array',
-        'minItems': 1,
-        'additionalProperties': {
-            'dependent-variable': {
-                'type': 'number'
-            },
-            'independent-variables': {
-                'type': 'array',
-                'minItems': 1,
-                'additionalProperties': {
-                    'type': 'number'
-                }
-            }
-        }
-    }
-    return schema
+    schema = Schema([
+        {
+            Required('dependent-variable'): Any(int, float),
+            Required('independent-variables'): [{
+                Required(All(unicode, Length(min=1))): Any(int, float),
+            }],
+        },
+    ])
+
+    schema(data)
