@@ -10,7 +10,7 @@ mod 'stdlib',
 ## Install Module: apt (from master)
 mod 'apt',
   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
-  :ref => '2.3.0'
+  :ref => '4.4.1'
 
 ## Install Module: nodejs
 mod 'nodejs',
