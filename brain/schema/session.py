@@ -7,7 +7,7 @@ This file validates each session properties.
 '''
 
 from flask import current_app
-from voluptuous import Schema, Required, Optional, All, Any, In, Length
+from voluptuous import Schema, Required, Optional, All, Any, Coerce, In, Length
 
 
 def validate_data_new(data):
@@ -83,7 +83,7 @@ def validate_model_predict(data):
         Required('collection'): All(unicode, Length(min=1)),
         Optional('stream'): Any('True', 'False'),
         Required('prediction_input[]'): [
-            All(unicode, Length(min=1)),
+            Coerce(Any(int, float)),
         ],
         Required('session_type'): 'model_predict',
     })
