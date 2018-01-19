@@ -3,14 +3,7 @@ dist: trusty
 sudo: required
 
 ## configurations
-##
-## Note: riak needs to be removed:
-##
-##     - https://github.com/travis-ci/travis-ci/issues/8607
-##
 before_install:
-  - sudo rm -vf /etc/apt/sources.list.d/*riak*
-  - sudo apt-get update
   - PROJECT_DIRECTORY=$(pwd)
   - chmod u+x test/linter
   - chmod u+x test/unit-tests
