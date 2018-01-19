@@ -6,7 +6,7 @@ This file validates the supplied dataset.
 
 '''
 
-from voluptuous import Schema, Required, Optional, All, Any, Length
+from voluptuous import Schema, Required, All, Any, Length
 
 
 def validate_svm(data):
@@ -26,6 +26,7 @@ def validate_svm(data):
     ])
 
     schema(data)
+
 
 def validate_svr(data):
     '''
