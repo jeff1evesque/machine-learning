@@ -8,6 +8,7 @@
   },
   "author": "Jeffrey Levesque",
   "license": "BSD",
+  "repository": "github:jeff1evesque/machine-learning"
   "dependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
