@@ -71,8 +71,6 @@ class Validator(object):
         elif self.session_type == 'model_predict':
             try:
                 validate_model_predict(self.premodel_settings)
-                for value in self.premodel_settings['prediction_input[]']:
-                    float(value)
             except Exception, error:
                 list_error.append(str(error))
 
