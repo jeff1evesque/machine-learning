@@ -29,7 +29,7 @@ class Validator(object):
         self.session_type = session_type
         self.list_error = []
 
-    def validate_svm(data):
+    def validate_classification(data):
         '''
 
         This method validates svm dataset(s).
@@ -46,7 +46,7 @@ class Validator(object):
         ])
         schema(data)
 
-    def validate_svr(data):
+    def validate_regression(data):
         '''
 
         This method validates svr dataset(s).
