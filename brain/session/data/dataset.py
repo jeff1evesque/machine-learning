@@ -11,7 +11,7 @@ Note: the term 'dataset' used throughout various comments in this file,
 import json
 import requests
 from flask import current_app
-from brain.schema.dataset import validate_svm, validate_svr
+from brain.validator.dataset import validate_svm, validate_svr
 from brain.converter.format.csv2dict import csv2dict
 from brain.converter.format.xml2dict import xml2dict
 

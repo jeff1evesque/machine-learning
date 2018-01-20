@@ -6,6 +6,8 @@ This script performs validation on correpsonding dataset(s).
 
 '''
 
+from voluptuous import Schema, Required, All, Any, Length
+
 
 class Validator(object):
     '''
@@ -26,6 +28,40 @@ class Validator(object):
 
         self.session_type = session_type
         self.list_error = []
+
+    def validate_svm(data):
+        '''
+
+        This method validates svm dataset(s).
+
+        '''
+
+        schema = Schema([
+            {
+                Required('dependent-variable'): All(unicode, Length(min=1)),
+                Required('independent-variables'): [{
+                    Required(All(unicode, Length(min=1))): Any(int, float),
+                }],
+            },
+        ])
+        schema(data)
+
+    def validate_svr(data):
+        '''
+
+        This method validates svr dataset(s).
+
+        '''
+
+        schema = Schema([
+            {
+                Required('dependent-variable'): Any(int, float),
+                Required('independent-variables'): [{
+                    Required(All(unicode, Length(min=1))): Any(int, float),
+                }],
+            },
+        ])
+        schema(data)
 
     def validate_value(self, data):
         '''
