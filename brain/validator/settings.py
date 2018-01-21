@@ -43,6 +43,7 @@ class Validator(object):
 
         # local variables
         list_error = []
+        collection = self.premodel_settings['collection']
         model_type = current_app.config.get('MODEL_TYPE')
         dataset_type = current_app.config.get('DATASET_TYPE')
         sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
@@ -92,10 +93,20 @@ class Validator(object):
         try:
             schema(self.premodel_settings)
         except Exception, error:
-            list_error.append(str(error))
+            list_error.append({
+                'type': self.session_type,
+                'message': str(error)
+            })
 
-        # return error
-        if len(list_error) > 0:
-            return {'status': False, 'error': list_error}
+        # return result
+        if list_error:
+            return {
+                'status': None,
+                'error': {
+                    'validation': {
+                        'properties': list_error
+                    }
+                }
+            }
         else:
             return {'status': True, 'error': None}

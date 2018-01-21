@@ -34,100 +34,98 @@ def dataset2dict(model_type, upload):
     stream = settings.get('stream', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
-    try:
-        # programmatic-interface
-        if stream == 'True':
-            dataset_type = settings['dataset_type']
+    # programmatic-interface
+    if stream == 'True':
+        dataset_type = settings['dataset_type']
 
-            # convert dataset(s) into extended list
-            for dataset in datasets:
-                # scrape url content
-                if dataset_type == 'dataset_url':
-                    r = requests.get(dataset)
-                    instance = r.json()['dataset']
-                else:
-                    instance = [dataset]
+        # convert dataset(s) into extended list
+        for dataset in datasets:
+            # scrape url content
+            if dataset_type == 'dataset_url':
+                r = requests.get(dataset)
+                instance = r.json()['dataset']
+            else:
+                instance = [dataset]
 
-                # validate against schema, and build converted list
+            if instance:
                 try:
                     if model_type == list_model_type[0]:
                         Validator().validate_classification(instance)
+
                     elif model_type == list_model_type[1]:
                         Validator().validate_regression(instance)
-                    converted.extend(instance)
+
                 except Exception, error:
-                    msg = "Stream contains invalid syntax, with error: %s" % error
-                    converted.extend({'error': msg})
+                    list_error.append({
+                        'location': dataset,
+                        'message': str(error)
+                    })
 
-        # web-interface
+            if not validation_error and instance:
+                converted.extend(instance)
+
+    # web-interface
+    else:
+        dataset_type = settings['dataset_type']
+        if dataset_type == 'file_upload':
+            adjusted_datasets = upload['dataset']['file_upload']
         else:
-            dataset_type = settings['dataset_type']
-            if dataset_type == 'file_upload':
-                adjusted_datasets = upload['dataset']['file_upload']
+            adjusted_datasets = upload['dataset']['dataset_url']
+
+        # convert dataset(s) into extended list
+        for dataset in adjusted_datasets:
+            # scrape url content
+            if dataset_type == 'dataset_url':
+                r = requests.get(dataset)
+                instance = [r.json()][0]['dataset']
+
+            # file content
             else:
-                adjusted_datasets = upload['dataset']['dataset_url']
+                if dataset['filename'].lower().endswith('.csv'):
+                    instance = csv2dict(dataset['file'])
 
-            # convert dataset(s) into extended list
-            for dataset in adjusted_datasets:
-                # scrape url content
-                if dataset_type == 'dataset_url':
-                    r = requests.get(dataset)
-                    instance = [r.json()][0]['dataset']
-
-                    # validate against schema, and build converted list
+                elif dataset['filename'].lower().endswith('.json'):
+                    # load dataset instance
                     try:
-                        if model_type == list_model_type[0]:
-                            Validator().validate_classification(instance)
-                        elif model_type == list_model_type[1]:
-                            Validator().validate_regression(instance)
-                        converted.extend(instance)
-                    except Exception, error:
-                        msg = "%s contains invalid syntax, with error: %s" % (
-                            dataset['filename'],
-                            error
-                        )
-                        converted.extend({'error': msg})
+                        instance = json.load(dataset['file'])['dataset']
+                    except:
+                        instance = converted.extend(dataset['file'])
 
-                # file content
-                else:
-                    if dataset['filename'].lower().endswith('.csv'):
-                        converted.extend(csv2dict(dataset['file']))
+                elif dataset['filename'].lower().endswith('.xml'):
+                    instance = xml2dict(dataset['file'])
 
-                    elif dataset['filename'].lower().endswith('.json'):
-                        # load dataset instance
-                        try:
-                            instance = json.load(dataset['file'])['dataset']
-                        except:
-                            instance = converted.extend(dataset['file'])
+            if instance:
+                try:
+                    if model_type == list_model_type[0]:
+                        Validator().validate_classification(instance)
 
-                        # validate against schema, and build converted list
-                        try:
-                            if model_type == list_model_type[0]:
-                                Validator().validate_classification(instance)
-                            elif model_type == list_model_type[1]:
-                                Validator().validate_regression(instance)
-                            converted.extend(instance)
-                        except Exception, error:
-                            msg = "%s contains invalid syntax, with error: %s" % (
-                                dataset['filename'],
-                                error
-                            )
-                            converted.extend({'error': msg})
+                    elif model_type == list_model_type[1]:
+                        Validator().validate_regression(instance)
 
-                    elif dataset['filename'].lower().endswith('.xml'):
-                        converted.extend(xml2dict(dataset['file']))
+                except Exception, error:
+                    list_error.append({
+                        'location': dataset,
+                        'message': str(error)
+                    })
 
-        # return results
+            if not validation_error and instance:
+                converted.extend(instance)
+
+    # return results
+    if validation_error:
+        return {
+            'dataset': None,
+            'settings': None,
+            'error': {
+                'validation': {
+                    'dataset': list_error
+                }
+            }
+        }
+
+    else:
         return {
             'dataset': converted,
             'settings': settings,
             'error': None
-        }
-
-    except Exception as error:
-        list_error.append(error)
-
-        return {
-            'dataset': None,
-            'error': list_error
         }
