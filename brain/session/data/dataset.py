@@ -31,6 +31,7 @@ def dataset2dict(model_type, upload):
     converted = []
     datasets = upload['dataset']
     settings = upload['properties']
+    session_name = settings['session_name']
     stream = settings.get('stream', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
@@ -57,7 +58,7 @@ def dataset2dict(model_type, upload):
 
                 except Exception, error:
                     list_error.append({
-                        'location': dataset,
+                        'location': session_name,
                         'message': str(error)
                     })
 
@@ -69,6 +70,7 @@ def dataset2dict(model_type, upload):
         dataset_type = settings['dataset_type']
         if dataset_type == 'file_upload':
             adjusted_datasets = upload['dataset']['file_upload']
+            location = settings['collection']
         else:
             adjusted_datasets = upload['dataset']['dataset_url']
 
@@ -104,7 +106,7 @@ def dataset2dict(model_type, upload):
 
                 except Exception, error:
                     list_error.append({
-                        'location': dataset,
+                        'location': session_name,
                         'message': str(error)
                     })
 

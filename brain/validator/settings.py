@@ -43,7 +43,7 @@ class Validator(object):
 
         # local variables
         list_error = []
-        collection = self.premodel_settings['collection']
+        session_name = self.premodel_settings['session_name']
         model_type = current_app.config.get('MODEL_TYPE')
         dataset_type = current_app.config.get('DATASET_TYPE')
         sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
@@ -94,7 +94,7 @@ class Validator(object):
             schema(self.premodel_settings)
         except Exception, error:
             list_error.append({
-                'type': self.session_type,
+                'location': session_name,
                 'message': str(error)
             })
 
