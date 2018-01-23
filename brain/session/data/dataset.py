@@ -62,7 +62,7 @@ def dataset2dict(model_type, upload):
                         'message': str(error)
                     })
 
-            if not validation_error and instance:
+            if not list_error and instance:
                 converted.extend(instance)
 
     # web-interface
@@ -114,13 +114,25 @@ def dataset2dict(model_type, upload):
                 converted.extend(instance)
 
     # return results
-    if validation_error:
+    if list_error:
         return {
             'dataset': None,
             'settings': None,
             'error': {
                 'validation': {
                     'dataset': list_error
+                }
+            }
+        }
+
+    elif not converted:
+        return {
+            dataset: None,
+            settings: settings,
+            'error': {
+                'general': {
+                    'location': session_name,
+                    'dataset': 'no dataset was converted',
                 }
             }
         }
