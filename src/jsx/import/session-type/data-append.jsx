@@ -214,14 +214,68 @@ class DataAppend extends Component {
             <fieldset className='fieldset-session-data-upload'>
                 <fieldset className='fieldset-dataset-type'>
                     <legend>{'Configurations'}</legend>
+                    <div className='form-group'>
+                        <label
+                            className='block'
+                            htmlFor='inputSessionName'
+                        >
+                            {'Session Name'}
+                        </label>
+                        <input
+                            className='form-control fullspan'
+                            name='session_name'
+                            onInput={this.handleTitle}
+                            placeholder='Session Name'
+                            type='text'
+                            value={this.state.value_title}
+                        />
+                    </div>
+
+                    <div className='form-group'>
+                        <label
+                            className='block'
+                            htmlFor='selectCollection'
+                        >
+                            {'Collection'}
+                        </label>
+                        <ModelType onChange={this.handleModelType} />
+                    </div>
+
                     <div className='row'>
                         <div className='col-sm-6'>
                             <div className='form-group'>
                                 <label
                                     className='block'
-                                    htmlFor='selectCollection'
+                                    htmlFor='selectDatasetType'
                                 >
-                                    {'Collection'}
+                                    {'Dataset Type'}
+                                </label>
+                                <select
+                                    autoComplete='off'
+                                    className='form-control fullspan'
+                                    name='dataset_type'
+                                    onChange={this.handleDatasetType}
+                                    value={this.state.value_dataset_type}
+                                >
+
+                                    <option
+                                        defaultValue
+                                        value=''
+                                    >{'--Select--'}</option>
+                                    <option value='file_upload'>{'Upload file'}</option>
+                                    <option value='dataset_url'>{'Dataset URL'}</option>
+
+                                </select>
+                            </div>
+                        </div>
+
+                        <div className='col-sm-6'>
+                            <div className='form-group'>
+                                <label
+                                    className='block'
+                                    htmlFor='inputModelType'
+                                >
+                                    {'Model Type'}
                                 </label>
                                 <select
                                     autoComplete='off'
@@ -251,43 +305,6 @@ class DataAppend extends Component {
                                 </select>
                             </div>
                         </div>
-
-                        <div className='col-sm-6'>
-                            <div className='form-group'>
-                                <label
-                                    className='block'
-                                    htmlFor='selectDatasetType'
-                                >
-                                    {'Dataset Type'}
-                                </label>
-                                <select
-                                    autoComplete='off'
-                                    className='form-control fullspan'
-                                    name='dataset_type'
-                                    onChange={this.handleDatasetType}
-                                    value={this.state.value_dataset_type}
-                                >
-
-                                    <option
-                                        defaultValue
-                                        value=''
-                                    >{'--Select--'}</option>
-                                    <option value='file_upload'>{'Upload file'}</option>
-                                    <option value='dataset_url'>{'Dataset URL'}</option>
-
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div className='form-group'>
-                        <label
-                            className='block'
-                            htmlFor='inputModelType'
-                        >
-                            {'Model Type'}
-                        </label>
-                        <ModelType onChange={this.handleModelType} />
                     </div>
                 </fieldset>
 
