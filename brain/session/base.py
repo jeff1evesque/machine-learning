@@ -63,15 +63,16 @@ class Base(object):
 
         '''
 
-        validate = Validator(
+        error = Validator.validate_settings(
             self.premodel_data['properties'],
             self.session_type
         )
 
-        validated = validate.validate()
-
-        if validated['error'] is not None:
-            self.list_error.append(validated['error'])
+        if error:
+            self.list_error.append({
+                'location': self.premodel_data['properties']['session_name'],
+                'message': str(error)
+            })
 
     def get_errors(self):
         '''
@@ -80,7 +81,11 @@ class Base(object):
 
         '''
 
-        return self.list_error
+        return {
+            'error': {
+                'validation': self.list_error
+            }
+        }
 
     def check(self):
         '''

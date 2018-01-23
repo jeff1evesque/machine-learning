@@ -20,17 +20,16 @@ class Validator(object):
 
     '''
 
-    def __init__(self, premodel_data, session_type=None):
+    def __init__(self):
         '''
 
         This constructor saves a subset of the passed-in form data.
 
         '''
 
-        self.premodel_settings = premodel_data
-        self.session_type = session_type
+        self.list_error = []
 
-    def validate(self):
+    def validate_settings(self, premodel_data, session_type):
         '''
 
         This method validates the premodel settings for the 'data_new',
@@ -42,8 +41,6 @@ class Validator(object):
         '''
 
         # local variables
-        list_error = []
-        session_name = self.premodel_settings['session_name']
         model_type = current_app.config.get('MODEL_TYPE')
         dataset_type = current_app.config.get('DATASET_TYPE')
         sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
@@ -91,22 +88,19 @@ class Validator(object):
             })
 
         try:
-            schema(self.premodel_settings)
-        except Exception, error:
-            list_error.append({
-                'location': session_name,
-                'message': str(error)
-            })
+            schema(premodel_settings)
 
-        # return result
-        if list_error:
-            return {
-                'status': None,
-                'error': {
-                    'validation': {
-                        'properties': list_error
-                    }
-                }
-            }
-        else:
-            return {'status': True, 'error': None}
+        except Exception, error:
+            self.list_error.append(error)
+            return error
+
+        return False
+
+    def get_errors(self):
+        '''
+
+        This method gets all current errors.
+
+        '''
+
+        return self.list_error
