@@ -34,6 +34,7 @@ def dataset2dict(model_type, upload):
     session_name = settings['session_name']
     stream = settings.get('stream', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
+    Validate = Validator()
 
     # programmatic-interface
     if stream == 'True':
@@ -45,18 +46,18 @@ def dataset2dict(model_type, upload):
             if dataset_type == 'dataset_url':
                 r = requests.get(dataset)
                 instance = r.json()['dataset']
+
             else:
                 instance = [dataset]
 
             if instance:
-                try:
-                    if model_type == list_model_type[0]:
-                        Validator().validate_classification(instance)
+                if model_type == list_model_type[0]:
+                    error = Validate.validate_classification(instance)
 
-                    elif model_type == list_model_type[1]:
-                        Validator().validate_regression(instance)
+                elif model_type == list_model_type[1]:
+                    error = Validate.validate_regression(instance)
 
-                except Exception, error:
+                if error:
                     list_error.append({
                         'location': session_name,
                         'message': str(error)
@@ -70,6 +71,7 @@ def dataset2dict(model_type, upload):
         if dataset_type == 'file_upload':
             adjusted_datasets = upload['dataset']['file_upload']
             location = settings['collection']
+
         else:
             adjusted_datasets = upload['dataset']['dataset_url']
 
@@ -96,14 +98,13 @@ def dataset2dict(model_type, upload):
                     instance = xml2dict(dataset['file'])
 
             if instance:
-                try:
-                    if model_type == list_model_type[0]:
-                        Validator().validate_classification(instance)
+                if model_type == list_model_type[0]:
+                    error = Validate.validate_classification(instance)
 
-                    elif model_type == list_model_type[1]:
-                        Validator().validate_regression(instance)
+                elif model_type == list_model_type[1]:
+                    error = Validate.validate_regression(instance)
 
-                except Exception, error:
+                if error:
                     list_error.append({
                         'location': session_name,
                         'message': str(error)

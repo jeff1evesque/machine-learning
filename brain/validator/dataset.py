@@ -2,7 +2,7 @@
 
 '''
 
-This script performs validation on correpsonding dataset(s).
+This script performs validation on corresponding dataset(s).
 
 '''
 
@@ -19,14 +19,13 @@ class Validator(object):
 
     '''
 
-    def __init__(self, session_type=None):
+    def __init__(self):
         '''
 
         This constructor saves a subset of the passed-in form data.
 
         '''
 
-        self.session_type = session_type
         self.list_error = []
 
     def validate_classification(self, data):
@@ -36,15 +35,22 @@ class Validator(object):
 
         '''
 
-        schema = Schema([
-            {
-                Required('dependent-variable'): All(unicode, Length(min=1)),
-                Required('independent-variables'): [{
-                    Required(All(unicode, Length(min=1))): Any(int, float),
-                }],
-            },
-        ])
-        schema(data)
+        try:
+            schema = Schema([
+                {
+                    Required('dependent-variable'): All(unicode, Length(min=1)),
+                    Required('independent-variables'): [{
+                        Required(All(unicode, Length(min=1))): Any(int, float),
+                    }],
+                },
+            ])
+            schema(data)
+
+        except Exception, error:
+            self.list_error.append(error)
+            return error
+
+        return False
 
     def validate_regression(self, data):
         '''
@@ -53,15 +59,22 @@ class Validator(object):
 
         '''
 
-        schema = Schema([
-            {
-                Required('dependent-variable'): Any(int, float),
-                Required('independent-variables'): [{
-                    Required(All(unicode, Length(min=1))): Any(int, float),
-                }],
-            },
-        ])
-        schema(data)
+        try:
+            schema = Schema([
+                {
+                    Required('dependent-variable'): Any(int, float),
+                    Required('independent-variables'): [{
+                        Required(All(unicode, Length(min=1))): Any(int, float),
+                    }],
+                },
+            ])
+            schema(data)
+
+        except Exception, error:
+            self.list_error.append(error)
+            return error
+
+        return False
 
     def validate_value(self, data):
         '''
@@ -72,10 +85,10 @@ class Validator(object):
 
         try:
             return float(data)
+
         except Exception, error:
-            self.error = str(error)
-            self.list_error.append(str(error))
-            return False
+            self.list_error.append(error)
+            return error
 
     def get_error(self):
         '''
