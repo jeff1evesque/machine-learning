@@ -29,12 +29,12 @@ def dataset2dict(model_type, upload):
     # local variables
     list_error = []
     converted = []
+    Validate = Validator()
     datasets = upload['dataset']
     settings = upload['properties']
     session_name = settings['session_name']
     stream = settings.get('stream', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
-    Validate = Validator()
 
     # programmatic-interface
     if stream == 'True':
