@@ -90,15 +90,6 @@ class Validator(object):
             self.list_error.append(error)
             return error
 
-    def get_error(self):
-        '''
-
-        This method gets the last current error.
-
-        '''
-
-        return self.error
-
     def get_errors(self):
         '''
 
