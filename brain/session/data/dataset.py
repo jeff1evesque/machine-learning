@@ -124,7 +124,7 @@ def dataset2dict(model_type, upload):
             }
         }
 
-    else:
+    elif list_error:
         return {
             'dataset': converted,
             'settings': settings,
@@ -134,4 +134,11 @@ def dataset2dict(model_type, upload):
                     'dataset': list_error
                 }
             }
+        }
+
+    else:
+        return {
+            'dataset': converted,
+            'settings': settings,
+            'error': None,
         }
