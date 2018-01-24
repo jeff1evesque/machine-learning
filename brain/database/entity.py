@@ -59,14 +59,7 @@ class Entity(object):
         # insert / update dataset entity value
         self.sql.connect(self.db_ml)
 
-        if self.session_type == 'data_append':
-            sql_statement = 'UPDATE tbl_dataset_entity '\
-                'SET uid_modified=%s, datetime_modified=UTC_TIMESTAMP() '\
-                'WHERE id_entity=%s'
-            args = (self.premodel_data['uid'], self.premodel_data['id_entity'])
-            response = self.sql.execute('update', sql_statement, args)
-
-        elif self.session_type == 'data_new':
+        if self.session_type in ['data_new', 'data_append']:
             sql_statement = 'INSERT INTO tbl_dataset_entity '\
                 '(title, collection, model_type, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
