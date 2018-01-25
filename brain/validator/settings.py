@@ -29,7 +29,7 @@ class Validator(object):
 
         self.list_error = []
 
-    def validate_settings(self, premodel_data, session_type):
+    def validate_settings(self, premodel_settings, session_type):
         '''
 
         This method validates the premodel settings for the 'data_new',
