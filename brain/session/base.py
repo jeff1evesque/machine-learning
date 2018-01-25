@@ -63,7 +63,7 @@ class Base(object):
 
         '''
 
-        error = Validator.validate_settings(
+        error = Validator().validate_settings(
             self.premodel_data['properties'],
             self.session_type
         )
