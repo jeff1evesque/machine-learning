@@ -46,7 +46,7 @@ class Validator(object):
         sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
 
         # validation on 'data_new' session
-        if self.session_type == 'data_new':
+        if session_type == 'data_new':
             schema = Schema({
                 Required('collection'): All(unicode, Length(min=1)),
                 Required('dataset_type'): In(dataset_type),
@@ -57,7 +57,7 @@ class Validator(object):
             })
 
         # validation on 'data_append' session
-        if self.session_type == 'data_append':
+        if session_type == 'data_append':
             schema = Schema({
                 Required('collection'): All(unicode, Length(min=1)),
                 Required('dataset_type'): In(dataset_type),
@@ -67,7 +67,7 @@ class Validator(object):
             })
 
         # validation on 'model_generate' session
-        if self.session_type == 'model_generate':
+        if session_type == 'model_generate':
             schema = Schema({
                 Required('collection'): All(unicode, Length(min=1)),
                 Required('model_type'): In(model_type),
@@ -77,7 +77,7 @@ class Validator(object):
             })
 
         # validation on 'model_predict' session
-        elif self.session_type == 'model_predict':
+        elif session_type == 'model_predict':
             schema = Schema({
                 Required('collection'): All(unicode, Length(min=1)),
                 Optional('stream'): Any('True', 'False'),
