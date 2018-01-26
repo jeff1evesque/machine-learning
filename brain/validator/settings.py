@@ -46,7 +46,7 @@ class Validator(object):
         sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
 
         # validation on 'data_new', 'data_append' session
-        if session_type == 'data_add':
+        if session_type in ['data_new', 'data_append']:
             schema = Schema({
                 Required('collection'): All(unicode, Length(min=1)),
                 Required('dataset_type'): In(dataset_type),
