@@ -17,7 +17,7 @@ class Entity(object):
     from the 'tbl_dataset_entity' sql database table.
 
     Note: this class is invoked within 'model_generate.py', 'base_data.py',
-          and 'data_append.py'
+          and 'data_add.py'
 
     Note: this class explicitly inherits the 'new-style' class.
 
@@ -59,7 +59,7 @@ class Entity(object):
         # insert / update dataset entity value
         self.sql.connect(self.db_ml)
 
-        if self.session_type in ['data_new', 'data_append']:
+        if self.session_type == 'data_add':
             sql_statement = 'INSERT INTO tbl_dataset_entity '\
                 '(title, collection, model_type, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
