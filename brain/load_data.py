@@ -9,8 +9,7 @@ json.dumps(
 
 import json
 from flask import current_app, session
-from brain.session.data_append import DataAppend
-from brain.session.data_new import DataNew
+from brain.session.data_add import DataAdd
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
 from brain.database.session import Session
@@ -67,14 +66,14 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = DataNew(self.data, self.uid)
+        session = DataAdd(self.data, self.uid)
 
         # implement class methods
         if not session.validate_arg_none():
             session.validate_premodel_settings()
             session.convert_dataset()
             session.save_premodel_dataset()
-            session.save_entity('data_new')
+            session.save_entity('data_add')
             session.check()
 
             response = {
@@ -101,7 +100,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = DataAppend(self.data, self.uid)
+        session = DataAdd(self.data, self.uid)
 
         # define current session id
         collection = self.data['properties']['collection']
@@ -113,7 +112,7 @@ class Load_Data(object):
             session.validate_premodel_settings()
             session.convert_dataset()
             session.save_premodel_dataset()
-            session.save_entity('data_append', session_id)
+            session.save_entity('data_add', session_id)
             session.check()
 
             response = {
