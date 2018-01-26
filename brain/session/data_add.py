@@ -16,7 +16,7 @@ from brain.database.entity import Entity
 from brain.database.dataset import Collection
 
 
-class DataNew(BaseData):
+class DataAdd(BaseData):
     '''
 
     This class provides a generic constructor interface.
@@ -37,6 +37,12 @@ class DataNew(BaseData):
 
         # superclass constructor
         BaseData.__init__(self, premodel_data, uid)
+
+        # class variable
+        if session.get('uid'):
+            self.max_document = current_app.config.get('MAXDOC_AUTH')
+        else:
+            self.max_document = current_app.config.get('MAXDOC_ANON')
 
     def save_entity(self, session_type, id_entity=None):
         '''
