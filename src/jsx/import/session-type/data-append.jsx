@@ -40,6 +40,7 @@ class DataAppend extends Component {
     constructor() {
         super();
         this.state = {
+            value_title: '',
             value_collection: '--Select--',
             value_dataset_type: '--Select--',
             value_model_type: '--Select--',
@@ -174,6 +175,20 @@ class DataAppend extends Component {
             this.setState({ value_dataset_type: event.target.value });
         } else {
             this.setState({ value_dataset_type: '--Select--' });
+        }
+
+        // update redux store
+        const action = setSvButton({ button: { submit_analysis: false } });
+        this.props.dispatchSvButton(action);
+    }
+
+    handleTitle(event) {
+        const sessionTitle = event.target.value;
+
+        if (sessionTitle && checkValidString(sessionTitle)) {
+            this.setState({ value_title: sessionTitle });
+        } else {
+            this.setState({ value_title: '' });
         }
 
         // update redux store
