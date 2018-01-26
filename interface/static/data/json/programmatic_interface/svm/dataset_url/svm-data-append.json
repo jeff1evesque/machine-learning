@@ -1,5 +1,6 @@
 {
     "properties": {
+        "session_name": "sample_svm_title_append",
         "collection": "svm-1",
         "dataset_type": "dataset_url",
         "session_type": "data_append",

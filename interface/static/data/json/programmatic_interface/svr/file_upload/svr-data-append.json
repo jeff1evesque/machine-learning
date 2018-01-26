@@ -1,5 +1,6 @@
 {
 	"properties": {
+            "session_name": "sample_svr_title_append",
             "collection": "svr-2",
             "dataset_type": "file_upload",
             "session_type": "data_append",

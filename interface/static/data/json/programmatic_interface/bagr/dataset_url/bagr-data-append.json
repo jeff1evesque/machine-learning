@@ -1,5 +1,6 @@
 {
     "properties": {
+        "session_name": "sample_bgr_title_append",
         "collection": "bagr-1",
         "dataset_type": "dataset_url",
         "session_type": "data_append",

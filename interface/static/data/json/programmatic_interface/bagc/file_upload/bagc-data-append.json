@@ -1,5 +1,6 @@
 {
     "properties": {
+        "session_name": "sample_bgc_title_append",
         "collection": "bagc-2",
         "dataset_type": "file_upload",
         "session_type": "data_append",
