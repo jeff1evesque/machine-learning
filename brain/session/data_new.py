@@ -16,7 +16,7 @@ from brain.database.entity import Entity
 from brain.database.dataset import Collection
 
 
-class DataAdd(BaseData):
+class DataNew(BaseData):
     '''
 
     This class provides a generic constructor interface.

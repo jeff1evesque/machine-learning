@@ -9,7 +9,8 @@ json.dumps(
 
 import json
 from flask import current_app, session
-from brain.session.data_add import DataAdd
+from brain.session.data_new import DataNew
+from brain.session.data_append import DataAppend
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
 from brain.database.session import Session
@@ -66,14 +67,14 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = DataAdd(self.data, self.uid)
+        session = DataNew(self.data, self.uid)
 
         # implement class methods
         if not session.validate_arg_none():
             session.validate_premodel_settings()
             session.convert_dataset()
             session.save_premodel_dataset()
-            session.save_entity('data_add')
+            session.save_entity('data_new')
             session.check()
 
             response = {
@@ -100,7 +101,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
-        session = DataAdd(self.data, self.uid)
+        session = DataAppend(self.data, self.uid)
 
         # define current session id
         collection = self.data['properties']['collection']
@@ -112,7 +113,7 @@ class Load_Data(object):
             session.validate_premodel_settings()
             session.convert_dataset()
             session.save_premodel_dataset()
-            session.save_entity('data_add', session_id)
+            session.save_entity('data_append', session_id)
             session.check()
 
             response = {
@@ -179,7 +180,8 @@ class Load_Data(object):
         # implement class methods
         if not session.validate_arg_none():
             session.validate_premodel_settings()
-            session.check()
+            if session.get_errors():
+                errors = session.get_errors()
 
             my_prediction = session.predict()
             if my_prediction['error']:
@@ -219,12 +221,6 @@ class Load_Data(object):
                 '\'model_predict\'.'
             self.list_error.append(error)
             return {'session_type': None, 'error': error}
-
-        # return
-        if self.return_error:
-            return False
-        else:
-            return 'Model properly generated'
 
     def get_errors(self):
         '''
