@@ -53,6 +53,7 @@ class DataAppend extends Component {
         this.handleDatasetType = this.handleDatasetType.bind(this);
         this.handleModelType = this.handleModelType.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.handleTitle = this.handleTitle.bind(this);
         this.getSupplyDataset = this.getSupplyDataset.bind(this);
     }
 
