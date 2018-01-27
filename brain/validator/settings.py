@@ -51,7 +51,7 @@ class Validator(object):
                 Required('collection'): All(unicode, Length(min=1)),
                 Required('dataset_type'): In(dataset_type),
                 Required('model_type'): In(model_type),
-                Required('session_type'): 'data_new',
+                Required('session_type'): Any('data_new', 'data_append'),
                 Required('session_name'): All(unicode, Length(min=1)),
                 Optional('stream'): Any('True', 'False'),
             })
