@@ -68,9 +68,15 @@ class Base(object):
             self.session_type
         )
 
+        session_type = self.premodel_data['properties'].get('session_type', None)
+        if session_type in ['data_add', 'data_append']:
+            location = self.premodel_data['properties']['session_name']
+        else:
+            location = session_type
+
         if error:
             self.list_error.append({
-                'location': self.premodel_data['properties']['session_name'],
+                'location': location,
                 'message': str(error)
             })
 
