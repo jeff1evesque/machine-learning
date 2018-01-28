@@ -70,7 +70,6 @@ def dataset2dict(model_type, upload):
         dataset_type = settings['dataset_type']
         if dataset_type == 'file_upload':
             adjusted_datasets = upload['dataset']['file_upload']
-            location = settings['collection']
 
         else:
             adjusted_datasets = upload['dataset']['dataset_url']

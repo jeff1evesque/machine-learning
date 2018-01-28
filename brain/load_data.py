@@ -184,7 +184,7 @@ class Load_Data(object):
                 errors = session.get_errors()
 
             my_prediction = session.predict()
-            if my_prediction['error']:
+            if errors or my_prediction['error']:
                 response = {
                     'status': 1,
                     'result': my_prediction['error'],
