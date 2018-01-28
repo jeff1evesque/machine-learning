@@ -84,6 +84,7 @@ class BaseData(Base):
         '''
 
         # local variables
+        response = None
         entity = Entity()
         cursor = Collection()
         collection = self.premodel_data['properties']['collection']
@@ -116,16 +117,18 @@ class BaseData(Base):
         ):
             current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
             self.premodel_data['properties']['datetime_saved'] = current_utc
-            document = {
-                'properties': self.premodel_data['properties'],
-                'dataset': self.dataset
-            }
 
-            response = cursor.query(
-                collection_adjusted,
-                'insert_one',
-                document
-            )
+            if self.dataset:
+                document = {
+                    'properties': self.premodel_data['properties'],
+                    'dataset': self.dataset
+                }
+
+                response = cursor.query(
+                    collection_adjusted,
+                    'insert_one',
+                    document
+                )
 
         else:
             response = None
@@ -154,6 +157,7 @@ class BaseData(Base):
 
         # return result
         if response['error']:
+            self.dataset = None
             self.list_error.append(response['error'])
         else:
             self.dataset = response['dataset']
