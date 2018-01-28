@@ -63,14 +63,16 @@ class Base(object):
 
         '''
 
+        settings = self.premodel_data['properties']
         error = Validator().validate_settings(
             self.premodel_data['properties'],
             self.session_type
         )
 
-        session_type = self.premodel_data['properties'].get('session_type', None)
-        if session_type in ['data_add', 'data_append']:
-            location = self.premodel_data['properties']['session_name']
+        session_type = settings.get('session_type', None)
+        stream = settings.get('stream', None)
+        if stream == 'True' and session_type in ['data_add', 'data_append']:
+            location = settings['session_name']
         else:
             location = session_type
 
