@@ -112,19 +112,7 @@ def dataset2dict(model_type, upload):
                 converted.extend(instance)
 
     # return results
-    if not converted:
-        return {
-            'dataset': None,
-            'settings': settings,
-            'error': {
-                'general': {
-                    'location': session_name,
-                    'dataset': 'no dataset was converted',
-                }
-            }
-        }
-
-    elif list_error:
+    if list_error:
         return {
             'dataset': converted,
             'settings': settings,
