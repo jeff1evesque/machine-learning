@@ -87,21 +87,4 @@ class Base(object):
 
         '''
 
-        return {
-            'error': {
-                'validation': self.list_error
-            }
-        }
-
-    def check(self):
-        '''
-
-        This method checks if current class instance contains any errors. If
-        any error(s) exists, it is printed, and raised as an exception.
-
-        '''
-
-        if len(self.list_error) > 0:
-            for error in self.list_error:
-                print error
-                raise Exception(error)
+        return self.list_error

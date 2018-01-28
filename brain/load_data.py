@@ -75,7 +75,6 @@ class Load_Data(object):
             session.convert_dataset()
             session.save_premodel_dataset()
             session.save_entity('data_new')
-            session.check()
 
             response = {
                 'status': 0,
@@ -87,7 +86,8 @@ class Load_Data(object):
             response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database',
-                'type': 'data-new'
+                'type': 'data-new',
+                'error': session.get_errors()
             }
 
         return json.dumps(response)
@@ -114,7 +114,6 @@ class Load_Data(object):
             session.convert_dataset()
             session.save_premodel_dataset()
             session.save_entity('data_append', session_id)
-            session.check()
 
             response = {
                 'status': 0,
@@ -127,7 +126,8 @@ class Load_Data(object):
             response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database',
-                'type': 'data-append'
+                'type': 'data-append',
+                'error': session.get_errors()
             }
 
         return json.dumps(response)
@@ -147,7 +147,6 @@ class Load_Data(object):
         # generate model
         if not session.validate_arg_none():
             session.validate_premodel_settings()
-            session.check()
             session.generate_model()
 
         # return
@@ -155,7 +154,8 @@ class Load_Data(object):
             response = {
                 'status': 1,
                 'msg': 'Model not generated',
-                'type': 'model-generate'
+                'type': 'model-generate',
+                'error': session.get_errors()
             }
         else:
             response = {
@@ -188,7 +188,8 @@ class Load_Data(object):
                 response = {
                     'status': 1,
                     'result': my_prediction['error'],
-                    'type': 'model-predict'
+                    'type': 'model-predict',
+                    'error': session.get_errors()
                 }
             else:
                 response = {
