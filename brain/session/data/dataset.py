@@ -76,6 +76,8 @@ def dataset2dict(model_type, upload):
 
         # convert dataset(s) into extended list
         for dataset in adjusted_datasets:
+            location = dataset['filename']
+
             # scrape url content
             if dataset_type == 'dataset_url':
                 r = requests.get(dataset)
@@ -92,7 +94,6 @@ def dataset2dict(model_type, upload):
                         instance = json.load(dataset['file'])['dataset']
                     except:
                         instance = converted.extend(dataset['file'])
-
                 elif dataset['filename'].lower().endswith('.xml'):
                     instance = xml2dict(dataset['file'])
 
@@ -105,7 +106,7 @@ def dataset2dict(model_type, upload):
 
                 if error:
                     list_error.append({
-                        'location': session_name,
+                        'location': location,
                         'message': str(error)
                     })
 
@@ -117,10 +118,7 @@ def dataset2dict(model_type, upload):
             'dataset': converted,
             'settings': settings,
             'error': {
-                'validation': {
-                    'location': session_name,
-                    'dataset': list_error
-                }
+                'validation': list_error
             }
         }
 

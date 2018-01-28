@@ -46,7 +46,6 @@ class BaseData(Base):
         Base.__init__(self, premodel_data)
 
         # class variable
-        self.list_error = []
         self.model_type = premodel_data['properties']['model_type']
         self.premodel_data = premodel_data
 
@@ -148,7 +147,7 @@ class BaseData(Base):
         '''
 
         This method converts the supplied csv, or xml file upload(s) to a
-            uniform dict object.
+        uniform dict object.
 
         '''
 
@@ -161,16 +160,3 @@ class BaseData(Base):
             self.list_error.append(response['error'])
         else:
             self.dataset = response['dataset']
-
-    def get_errors(self):
-        '''
-
-        This method gets all current errors. associated with this class
-        instance.
-
-        '''
-
-        if len(self.list_error) > 0:
-            return self.list_error
-        else:
-            return None

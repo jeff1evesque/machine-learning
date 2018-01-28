@@ -38,10 +38,10 @@ class Base(object):
 
         '''
 
+        self.list_error = []
         self.premodel_data = premodel_data
         self.list_model_type = current_app.config.get('MODEL_TYPE')
         self.session_type = self.premodel_data['properties']['session_type']
-        self.list_error = []
 
     def validate_arg_none(self):
         '''
