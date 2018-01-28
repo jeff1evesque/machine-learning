@@ -151,12 +151,18 @@ class DataAppend extends Component {
     }
 
     // call back: used for the above 'render' (return 'span' if undefined)
-    getSupplyDataset(datasetType, collection, modelType) {
+    getSupplyDataset(datasetType, title, collection, modelType) {
         if (
-            datasetType && checkValidString(datasetType) &&
-            datasetType != '--Select--' && collection &&
-            checkValidString(collection) && modelType &&
-            checkValidString(modelType) && modelType != '--Select--'
+            title &&
+            checkValidString(title) &&
+            collection &&
+            checkValidString(collection) &&
+            datasetType &&
+            checkValidString(datasetType) &&
+            datasetType != '--Select--' &&
+            modelType &&
+            checkValidString(modelType) &&
+            modelType != '--Select--'
         ) {
             return {
                 file_upload: SupplyDatasetFile,
@@ -170,7 +176,8 @@ class DataAppend extends Component {
         const datasetType = event.target.value;
 
         if (
-            datasetType && datasetType != '--Select--' &&
+            datasetType &&
+            datasetType != '--Select--' &&
             checkValidString(datasetType)
         ) {
             this.setState({ value_dataset_type: event.target.value });
@@ -201,7 +208,8 @@ class DataAppend extends Component {
         const collection = event.target.value;
 
         if (
-            collection && collection != '--Select--' &&
+            collection &&
+            collection != '--Select--' &&
             checkValidString(collection)
         ) {
             this.setState({ value_collection: event.target.value });
@@ -215,12 +223,14 @@ class DataAppend extends Component {
     }
 
     render(sessionId) {
-        const inputDatasetType = this.state.value_dataset_type;
-        const inputCollection = this.state.value_collection;
+        const datasetType = this.state.value_dataset_type;
+        const datasetTitle = this.state.value_title;
+        const collection = this.state.value_collection;
         const modelType = this.state.value_model_type;
         const Dataset = this.getSupplyDataset(
-            inputDatasetType,
-            inputCollection,
+            datasetType,
+            datasetTitle,
+            collection,
             modelType,
         );
         const datasetInput = Dataset ? <Dataset onChange={this.handleSubmit} /> : null;
