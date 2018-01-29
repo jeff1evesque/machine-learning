@@ -76,18 +76,19 @@ class Load_Data(object):
             session.save_premodel_dataset()
             session.save_entity('data_new')
 
-            response = {
-                'status': 0,
-                'msg': 'Dataset(s) properly uploaded into database',
-                'type': 'data-new'
-            }
-
-        else:
+        if session.get_errors():
             response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database',
                 'type': 'data-new',
                 'error': session.get_errors()
+            }
+
+        else:
+            response = {
+                'status': 0,
+                'msg': 'Dataset(s) properly uploaded into database',
+                'type': 'data-new'
             }
 
         return json.dumps(response)
@@ -109,25 +110,25 @@ class Load_Data(object):
         session.validate_id(session_id)
 
         # implement class methods
-        if not session.validate_arg_none() and not session.get_errors():
+        if not session.validate_arg_none():
             session.validate_premodel_settings()
             session.convert_dataset()
             session.save_premodel_dataset()
             session.save_entity('data_append', session_id)
 
-            response = {
-                'status': 0,
-                'msg': 'Dataset(s) properly appended into database',
-                'type': 'data-append'
-            }
-
-        else:
-            print session.get_errors()
+        if session.get_errors():
             response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database',
                 'type': 'data-append',
                 'error': session.get_errors()
+            }
+
+        else:
+            response = {
+                'status': 0,
+                'msg': 'Dataset(s) properly appended into database',
+                'type': 'data-append'
             }
 
         return json.dumps(response)
@@ -150,7 +151,7 @@ class Load_Data(object):
             session.generate_model()
 
         # return
-        if session.return_error():
+        if session.get_errors():
             response = {
                 'status': 1,
                 'msg': 'Model not generated',
