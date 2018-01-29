@@ -32,12 +32,12 @@ def dataset2dict(model_type, upload):
     Validate = Validator()
     datasets = upload['dataset']
     settings = upload['properties']
-    session_name = settings['session_name']
     stream = settings.get('stream', None)
     list_model_type = current_app.config.get('MODEL_TYPE')
 
     # programmatic-interface
     if stream == 'True':
+        session_name = settings['session_name']
         dataset_type = settings['dataset_type']
 
         # convert dataset(s) into extended list
@@ -109,8 +109,14 @@ def dataset2dict(model_type, upload):
                         'location': location,
                         'message': str(error)
                     })
+                else:
+                    converted.extend(instance)
 
-                converted.extend(instance)
+            else:
+                list_error.append({
+                    'location': location,
+                    'message': 'empty dataset, or invalid syntax (try lint)'
+                })
 
     # return results
     if list_error:
