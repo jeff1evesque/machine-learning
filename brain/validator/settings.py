@@ -57,7 +57,7 @@ class Validator(object):
                     Optional('stream'): Any('True', 'False'),
                 })
 
-            elif session_type == 'data_append':
+            else:
                 schema = Schema({
                     Required('collection'): All(unicode, Length(min=1)),
                     Required('dataset_type'): In(dataset_type),
