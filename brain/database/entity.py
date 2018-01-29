@@ -17,7 +17,7 @@ class Entity(object):
     from the 'tbl_dataset_entity' sql database table.
 
     Note: this class is invoked within 'model_generate.py', 'base_data.py',
-          and 'data_add.py'
+          and 'data_append.py'
 
     Note: this class explicitly inherits the 'new-style' class.
 
