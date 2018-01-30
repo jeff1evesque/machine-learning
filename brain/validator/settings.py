@@ -47,7 +47,7 @@ class Validator(object):
 
         # validation on 'data_new', 'data_append' session
         if session_type in ['data_new', 'data_append']:
-            if premodel_settings['stream']  == 'True' or session_type == 'data_new':
+            if premodel_settings['stream'] == 'True' or session_type == 'data_new':
                 schema = Schema({
                     Required('collection'): All(unicode, Length(min=1)),
                     Required('dataset_type'): In(dataset_type),
