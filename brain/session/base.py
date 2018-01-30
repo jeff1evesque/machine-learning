@@ -76,11 +76,35 @@ class Base(object):
         else:
             location = session_type
 
-        if error:
+        if not self.list_error and error:
             self.list_error.append({
-                'location': location,
-                'message': str(error)
+                'error': {
+                    'validation': [
+                        'location': location,
+                        'message': str(error)
+                    ]
+                }
             })
+
+        elif self.list_error and error:
+            if (
+                (not self.list_error['error']) or
+                (self.list_error['error'] and not self.list_error['error']['validation'])
+            ):
+                self.list_error.append({
+                    'error': {
+                        'validation': [
+                            'location': location,
+                            'message': str(error)
+                        ]
+                    }
+                })
+
+            else:
+                self.list_error['error']['validation'].append({
+                    'location': location,
+                    'message': str(error)
+                })
 
     def get_errors(self):
         '''
