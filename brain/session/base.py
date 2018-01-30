@@ -89,4 +89,7 @@ class Base(object):
 
         '''
 
-        return {'validation': self.list_error}
+        if self.list_error:
+            return {'validation': self.list_error}
+        else:
+            return None
