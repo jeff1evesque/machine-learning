@@ -176,6 +176,7 @@ class Load_Data(object):
         '''
 
         # instantiate class
+        errors = None
         session = ModelPredict(self.data)
 
         # implement class methods
