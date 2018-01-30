@@ -87,10 +87,7 @@ class Base(object):
             })
 
         elif self.list_error and error:
-            if (
-                (not self.list_error['error']) or
-                (self.list_error['error'] and not self.list_error['error']['validation'])
-            ):
+            if not self.list_error['error']:
                 self.list_error.append({
                     'error': {
                         'validation': [
@@ -99,6 +96,12 @@ class Base(object):
                         ]
                     }
                 })
+
+            elif not self.list_error['error']['validation']:
+                self.list_error['error']['validation'] = [
+                    'location': location,
+                    'message': str(error)
+                ]
 
             else:
                 self.list_error['error']['validation'].append({
