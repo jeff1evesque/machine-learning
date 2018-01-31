@@ -20,8 +20,8 @@ class RangeSlider extends Component {
         min: PropTypes.number,
         step: PropTypes.number,
         tooltip: PropTypes.bool,
-        value: PropTypes.number,
         type: PropTypes.string,
+        value: PropTypes.number,
     }
 
     constructor (props, context) {
