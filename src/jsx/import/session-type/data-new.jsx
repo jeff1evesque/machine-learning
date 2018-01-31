@@ -62,7 +62,8 @@ class DataNew extends Component {
         const datasetType = event.target.value;
 
         if (
-            datasetType && datasetType != '--Select--' &&
+            datasetType &&
+            datasetType != '--Select--' &&
             checkValidString(datasetType)
         ) {
             this.setState({ value_dataset_type: event.target.value });

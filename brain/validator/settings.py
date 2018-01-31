@@ -20,17 +20,16 @@ class Validator(object):
 
     '''
 
-    def __init__(self, premodel_data, session_type=None):
+    def __init__(self):
         '''
 
         This constructor saves a subset of the passed-in form data.
 
         '''
 
-        self.premodel_settings = premodel_data
-        self.session_type = session_type
+        self.list_error = []
 
-    def validate(self):
+    def validate_settings(self, premodel_settings, session_type):
         '''
 
         This method validates the premodel settings for the 'data_new',
@@ -42,34 +41,33 @@ class Validator(object):
         '''
 
         # local variables
-        list_error = []
         model_type = current_app.config.get('MODEL_TYPE')
         dataset_type = current_app.config.get('DATASET_TYPE')
         sv_kernel_type = current_app.config.get('SV_KERNEL_TYPE')
 
-        # validation on 'data_new' session
-        if self.session_type == 'data_new':
-            schema = Schema({
-                Required('collection'): All(unicode, Length(min=1)),
-                Required('dataset_type'): In(dataset_type),
-                Required('model_type'): In(model_type),
-                Required('session_type'): 'data_new',
-                Required('session_name'): All(unicode, Length(min=1)),
-                Optional('stream'): Any('True', 'False'),
-            })
+        # validation on 'data_new', 'data_append' session
+        if session_type in ['data_new', 'data_append']:
+            if premodel_settings['stream'] == 'True' or session_type == 'data_new':
+                schema = Schema({
+                    Required('collection'): All(unicode, Length(min=1)),
+                    Required('dataset_type'): In(dataset_type),
+                    Required('model_type'): In(model_type),
+                    Required('session_type'): Any('data_new', 'data_append'),
+                    Required('session_name'): All(unicode, Length(min=1)),
+                    Optional('stream'): Any('True', 'False'),
+                })
 
-        # validation on 'data_append' session
-        if self.session_type == 'data_append':
-            schema = Schema({
-                Required('collection'): All(unicode, Length(min=1)),
-                Required('dataset_type'): In(dataset_type),
-                Required('model_type'): In(model_type),
-                Required('session_type'): 'data_append',
-                Optional('stream'): Any('True', 'False'),
-            })
+            else:
+                schema = Schema({
+                    Required('collection'): All(unicode, Length(min=1)),
+                    Required('dataset_type'): In(dataset_type),
+                    Required('model_type'): In(model_type),
+                    Required('session_type'): Any('data_new', 'data_append'),
+                    Optional('stream'): Any('True', 'False'),
+                })
 
         # validation on 'model_generate' session
-        if self.session_type == 'model_generate':
+        if session_type == 'model_generate':
             schema = Schema({
                 Required('collection'): All(unicode, Length(min=1)),
                 Required('model_type'): In(model_type),
@@ -79,7 +77,7 @@ class Validator(object):
             })
 
         # validation on 'model_predict' session
-        elif self.session_type == 'model_predict':
+        elif session_type == 'model_predict':
             schema = Schema({
                 Required('collection'): All(unicode, Length(min=1)),
                 Optional('stream'): Any('True', 'False'),
@@ -90,12 +88,19 @@ class Validator(object):
             })
 
         try:
-            schema(self.premodel_settings)
-        except Exception, error:
-            list_error.append(str(error))
+            schema(premodel_settings)
 
-        # return error
-        if len(list_error) > 0:
-            return {'status': False, 'error': list_error}
-        else:
-            return {'status': True, 'error': None}
+        except Exception, error:
+            self.list_error.append(error)
+            return error
+
+        return False
+
+    def get_errors(self):
+        '''
+
+        This method gets all current errors.
+
+        '''
+
+        return self.list_error

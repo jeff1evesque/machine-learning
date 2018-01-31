@@ -9,8 +9,8 @@ json.dumps(
 
 import json
 from flask import current_app, session
-from brain.session.data_append import DataAppend
 from brain.session.data_new import DataNew
+from brain.session.data_append import DataAppend
 from brain.session.model_generate import ModelGenerate
 from brain.session.model_predict import ModelPredict
 from brain.database.session import Session
@@ -75,18 +75,19 @@ class Load_Data(object):
             session.convert_dataset()
             session.save_premodel_dataset()
             session.save_entity('data_new')
-            session.check()
 
+        if session.get_errors():
             response = {
-                'status': 0,
-                'msg': 'Dataset(s) properly uploaded into database',
-                'type': 'data-new'
+                'status': 1,
+                'msg': 'Dataset(s) not uploaded into database',
+                'type': 'data-new',
+                'error': session.get_errors()
             }
 
         else:
             response = {
-                'status': 1,
-                'msg': 'Dataset(s) not uploaded into database',
+                'status': 0,
+                'msg': 'Dataset(s) properly uploaded into database',
                 'type': 'data-new'
             }
 
@@ -109,24 +110,24 @@ class Load_Data(object):
         session.validate_id(session_id)
 
         # implement class methods
-        if not session.validate_arg_none() and not session.get_errors():
+        if not session.validate_arg_none():
             session.validate_premodel_settings()
             session.convert_dataset()
             session.save_premodel_dataset()
             session.save_entity('data_append', session_id)
-            session.check()
 
-            response = {
-                'status': 0,
-                'msg': 'Dataset(s) properly appended into database',
-                'type': 'data-append'
-            }
-
-        else:
-            print session.get_errors()
+        if session.get_errors():
             response = {
                 'status': 1,
                 'msg': 'Dataset(s) not uploaded into database',
+                'type': 'data-append',
+                'error': session.get_errors()
+            }
+
+        else:
+            response = {
+                'status': 0,
+                'msg': 'Dataset(s) properly appended into database',
                 'type': 'data-append'
             }
 
@@ -147,15 +148,15 @@ class Load_Data(object):
         # generate model
         if not session.validate_arg_none():
             session.validate_premodel_settings()
-            session.check()
             session.generate_model()
 
         # return
-        if session.return_error():
+        if session.get_errors():
             response = {
                 'status': 1,
                 'msg': 'Model not generated',
-                'type': 'model-generate'
+                'type': 'model-generate',
+                'error': session.get_errors()
             }
         else:
             response = {
@@ -175,19 +176,22 @@ class Load_Data(object):
         '''
 
         # instantiate class
+        errors = None
         session = ModelPredict(self.data)
 
         # implement class methods
         if not session.validate_arg_none():
             session.validate_premodel_settings()
-            session.check()
+            if session.get_errors():
+                errors = session.get_errors()
 
             my_prediction = session.predict()
-            if my_prediction['error']:
+            if errors or my_prediction['error']:
                 response = {
                     'status': 1,
                     'result': my_prediction['error'],
-                    'type': 'model-predict'
+                    'type': 'model-predict',
+                    'error': session.get_errors()
                 }
             else:
                 response = {
@@ -220,12 +224,6 @@ class Load_Data(object):
                 '\'model_predict\'.'
             self.list_error.append(error)
             return {'session_type': None, 'error': error}
-
-        # return
-        if self.return_error:
-            return False
-        else:
-            return 'Model properly generated'
 
     def get_errors(self):
         '''

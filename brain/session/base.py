@@ -38,10 +38,10 @@ class Base(object):
 
         '''
 
+        self.list_error = []
         self.premodel_data = premodel_data
         self.list_model_type = current_app.config.get('MODEL_TYPE')
         self.session_type = self.premodel_data['properties']['session_type']
-        self.list_error = []
 
     def validate_arg_none(self):
         '''
@@ -63,15 +63,51 @@ class Base(object):
 
         '''
 
-        validate = Validator(
+        settings = self.premodel_data['properties']
+        error = Validator().validate_settings(
             self.premodel_data['properties'],
             self.session_type
         )
 
-        validated = validate.validate()
+        session_type = settings.get('session_type', None)
+        stream = settings.get('stream', None)
+        if stream == 'True' and session_type in ['data_add', 'data_append']:
+            location = settings['session_name']
+        else:
+            location = session_type
 
-        if validated['error'] is not None:
-            self.list_error.append(validated['error'])
+        if not self.list_error and error:
+            self.list_error.append({
+                'error': {
+                    'validation': [{
+                        'location': location,
+                        'message': str(error)
+                    }]
+                }
+            })
+
+        elif self.list_error and error:
+            if not self.list_error['error']:
+                self.list_error.append({
+                    'error': {
+                        'validation': [{
+                            'location': location,
+                            'message': str(error)
+                        }]
+                    }
+                })
+
+            elif not self.list_error['error']['validation']:
+                self.list_error['error']['validation'] = [{
+                    'location': location,
+                    'message': str(error)
+                }]
+
+            else:
+                self.list_error['error']['validation'].append({
+                    'location': location,
+                    'message': str(error)
+                })
 
     def get_errors(self):
         '''
@@ -80,17 +116,7 @@ class Base(object):
 
         '''
 
-        return self.list_error
-
-    def check(self):
-        '''
-
-        This method checks if current class instance contains any errors. If
-        any error(s) exists, it is printed, and raised as an exception.
-
-        '''
-
-        if len(self.list_error) > 0:
-            for error in self.list_error:
-                print error
-                raise Exception(error)
+        if self.list_error:
+            return self.list_error
+        else:
+            return None
