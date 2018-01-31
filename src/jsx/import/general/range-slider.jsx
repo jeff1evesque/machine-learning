@@ -41,7 +41,7 @@ class RangeSlider extends Component {
             value: value
         });
 
-        const action = setRangeSlider({ type: type, penalty: value });
+        const action = setRangeSlider({ type: type, value: value });
         this.props.dispatchRangeSlider(action);
     }
 
