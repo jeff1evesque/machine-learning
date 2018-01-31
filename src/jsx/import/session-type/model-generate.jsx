@@ -234,7 +234,7 @@ class ModelGenerate extends Component {
                     max={max}
                     min={min}
                     step={step}
-                    type={type}
+                    type={type.toLowerCase()}
                 />
             </fieldset>
         );
