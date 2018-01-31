@@ -21,6 +21,7 @@ class RangeSlider extends Component {
         step: PropTypes.number,
         tooltip: PropTypes.bool,
         value: PropTypes.number,
+        type: PropTypes.string,
     }
 
     constructor (props, context) {
@@ -35,11 +36,12 @@ class RangeSlider extends Component {
     }
 
     handleChange = (value) => {
+        const type = this.props.type;
         this.setState({
             value: value
         });
 
-        const action = setRangeSlider({ type: 'penalty', penalty: value });
+        const action = setRangeSlider({ type: type, penalty: value });
         this.props.dispatchRangeSlider(action);
     }
 
