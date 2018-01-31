@@ -62,7 +62,7 @@ function setRangeSlider(action) {
     else if (action.type.toLowerCase() == 'gamma') {
         return {
             type: 'SET-GAMMA-SLIDER',
-            penalty: action.penalty
+            gamma: action.gamma
         };
     }
 }
