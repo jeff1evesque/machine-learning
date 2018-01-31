@@ -74,6 +74,7 @@ class Validator(object):
                 Required('session_type'): 'model_generate',
                 Optional('stream'): Any('True', 'False'),
                 Required('sv_kernel_type'): In(sv_kernel_type),
+                Optional('penalty'): Any(Coerce(int), Coerce(float)),
             })
 
         # validation on 'model_predict' session
