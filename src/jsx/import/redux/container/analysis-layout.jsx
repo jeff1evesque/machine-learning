@@ -44,7 +44,7 @@ const mapStateToProps = (state) => {
             }
 
             if (!!state.page.slider.gamma) {
-                var penalty = state.page.slider.gamma;
+                var gamma = state.page.slider.gamma;
             }
         }
     }
