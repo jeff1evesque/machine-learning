@@ -56,13 +56,13 @@ function setRangeSlider(action) {
     if (action.type.toLowerCase() == 'penalty') {
         return {
             type: 'SET-PENALTY-SLIDER',
-            slider: { penalty: action.value }
+            slider: { penalty: action.slider.penalty }
         };
     }
     else if (action.type.toLowerCase() == 'gamma') {
         return {
             type: 'SET-GAMMA-SLIDER',
-            slider: { gamma: action.value }
+            slider: { gamma: action.slider.gamma }
         };
     }
 }
