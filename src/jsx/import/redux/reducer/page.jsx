@@ -70,7 +70,7 @@ const page = (state='default', action) => {
                 ...state,
                 slider: {
                     ...state.slider,
-                    penalty: action.penalty
+                    penalty: action.slider.penalty
                 }
             }
         case 'SET-GAMMA-SLIDER':
@@ -78,7 +78,7 @@ const page = (state='default', action) => {
                 ...state,
                 slider: {
                     ...state.slider,
-                    gamma: action.gamma
+                    gamma: action.slider.gamma
                 }
             }
         default:
