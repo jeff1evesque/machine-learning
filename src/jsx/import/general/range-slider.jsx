@@ -35,6 +35,15 @@ class RangeSlider extends Component {
         }
     }
 
+    componentWillUnmount() {
+        const type = this.props.type;
+        const action = setRangeSlider({
+            type: type,
+            slider: {[type]: undefined},
+        });
+        this.props.dispatchRangeSlider(action);
+    }
+
     handleChange = (value) => {
         const type = this.props.type;
         this.setState({
