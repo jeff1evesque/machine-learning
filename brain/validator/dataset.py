@@ -7,6 +7,7 @@ This script performs validation on corresponding dataset(s).
 '''
 
 from voluptuous import Schema, Required, All, Any, Length
+from voluptuous.humanize import humanize_error
 
 
 class Validator(object):
@@ -47,7 +48,7 @@ class Validator(object):
             schema(data)
 
         except Exception, error:
-            self.list_error.append(error)
+            self.list_error.append(humanize_error(premodel_settings, error))
             return error
 
         return False
@@ -71,7 +72,7 @@ class Validator(object):
             schema(data)
 
         except Exception, error:
-            self.list_error.append(error)
+            self.list_error.append(humanize_error(premodel_settings, error))
             return error
 
         return False
@@ -87,7 +88,7 @@ class Validator(object):
             return float(data)
 
         except Exception, error:
-            self.list_error.append(error)
+            self.list_error.append(humanize_error(premodel_settings, error))
             return error
 
     def get_errors(self):

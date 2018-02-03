@@ -8,6 +8,7 @@ This file performs validation on session settings.
 
 from flask import current_app
 from voluptuous import Schema, Required, Optional, All, Any, Coerce, In, Length
+from voluptuous.humanize import humanize_error
 
 
 class Validator(object):
@@ -93,7 +94,7 @@ class Validator(object):
             schema(premodel_settings)
 
         except Exception, error:
-            self.list_error.append(error)
+            self.list_error.append(humanize_error(premodel_settings, error))
             return error
 
         return False
