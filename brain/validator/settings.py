@@ -94,7 +94,7 @@ class Validator(object):
             validate_with_humanized_errors(premodel_settings, schema)
 
         except Exception, error:
-            self.list_error.append(error)
+            self.list_error.append(error.splitlines())
             return error
 
         return False

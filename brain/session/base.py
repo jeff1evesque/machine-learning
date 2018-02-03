@@ -81,7 +81,7 @@ class Base(object):
                 'error': {
                     'validation': [{
                         'location': location,
-                        'message': str(error)
+                        'message': error
                     }]
                 }
             })
@@ -92,7 +92,7 @@ class Base(object):
                     'error': {
                         'validation': [{
                             'location': location,
-                            'message': str(error)
+                            'message': error
                         }]
                     }
                 })
@@ -100,13 +100,13 @@ class Base(object):
             elif not self.list_error['error']['validation']:
                 self.list_error['error']['validation'] = [{
                     'location': location,
-                    'message': str(error)
+                    'message': error
                 }]
 
             else:
                 self.list_error['error']['validation'].append({
                     'location': location,
-                    'message': str(error)
+                    'message': error
                 })
 
     def get_errors(self):
