@@ -28,6 +28,7 @@
     "redux": "^3.7.2",
     "rearm": "^0.8.2",
     "d3": "^4.12.2",
-    "prop-types": "15.6.0"
+    "prop-types": "15.6.0",
+    "react-json-view": "1.16.0"
   }
 }
