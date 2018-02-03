@@ -48,7 +48,7 @@ class Validator(object):
             schema(data)
 
         except Exception, error:
-            self.list_error.append(humanize_error(premodel_settings, error))
+            self.list_error.append(humanize_error(data, error))
             return error
 
         return False
@@ -72,7 +72,7 @@ class Validator(object):
             schema(data)
 
         except Exception, error:
-            self.list_error.append(humanize_error(premodel_settings, error))
+            self.list_error.append(humanize_error(data, error))
             return error
 
         return False
@@ -88,7 +88,7 @@ class Validator(object):
             return float(data)
 
         except Exception, error:
-            self.list_error.append(humanize_error(premodel_settings, error))
+            self.list_error.append(error)
             return error
 
     def get_errors(self):
