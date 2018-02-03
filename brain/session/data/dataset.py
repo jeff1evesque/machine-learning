@@ -60,6 +60,7 @@ def dataset2dict(model_type, upload):
                 if error:
                     list_error.append({
                         'location': session_name,
+                        'dependent-variable': instance['dependent-variable'],
                         'message': str(error)
                     })
 
@@ -107,6 +108,7 @@ def dataset2dict(model_type, upload):
                 if error:
                     list_error.append({
                         'location': location,
+                        'dependent-variable': instance['dependent-variable'],
                         'message': str(error)
                     })
                 else:

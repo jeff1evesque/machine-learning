@@ -7,13 +7,13 @@ This script performs validation on corresponding dataset(s).
 '''
 
 from voluptuous import Schema, Required, All, Any, Length
-from voluptuous.humanize import humanize_error
+from voluptuous.humanize import validate_with_humanized_errors
 
 
 class Validator(object):
     '''
 
-    This class provies an interface to validate provided dataset(s) during
+    This class provides an interface to validate provided dataset(s) during
     'data_new', and 'data_append' sessions.
 
     Note: this class explicitly inherits the 'new-style' class.
@@ -45,11 +45,11 @@ class Validator(object):
                     }],
                 },
             ])
-            schema(data)
+            validate_with_humanized_errors(data, schema)
 
-        except Exception as error:
-            self.list_error.append(humanize_error(data, error))
-            return humanize_error(data, error)
+        except Exception, error:
+            self.list_error.append(error)
+            return error
 
         return False
 
@@ -69,12 +69,11 @@ class Validator(object):
                     }],
                 },
             ])
-            schema(data)
+            validate_with_humanized_errors(data, schema)
 
         except Exception, error:
-            verbose_error = humanize_error(data, error)
-            self.list_error.append(verbose_error)
-            return verbose_error
+            self.list_error.append(error)
+            return error
 
         return False
 
