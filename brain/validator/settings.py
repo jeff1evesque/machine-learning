@@ -94,8 +94,9 @@ class Validator(object):
             schema(premodel_settings)
 
         except Exception, error:
-            self.list_error.append(humanize_error(premodel_settings, error))
-            return error
+            verbose_error = humanize_error(premodel_settings, error)
+            self.list_error.append(verbose_error)
+            return verbose_error
 
         return False
 

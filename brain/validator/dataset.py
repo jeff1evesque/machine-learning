@@ -47,9 +47,9 @@ class Validator(object):
             ])
             schema(data)
 
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(humanize_error(data, error))
-            return error
+            return humanize_error(data, error)
 
         return False
 
@@ -72,8 +72,9 @@ class Validator(object):
             schema(data)
 
         except Exception, error:
-            self.list_error.append(humanize_error(data, error))
-            return error
+            verbose_error = humanize_error(data, error)
+            self.list_error.append(verbose_error)
+            return verbose_error
 
         return False
 
