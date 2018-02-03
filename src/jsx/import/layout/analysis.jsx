@@ -309,7 +309,7 @@ class AnalysisLayout extends Component {
     }
 
     showErrors() {
-        if (this.state.ajax_done.error) {
+        if (this.state.ajax_done && this.state.ajax_done.error) {
             return (
                 <ReactJson
                     onAdd='false'
