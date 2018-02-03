@@ -318,7 +318,7 @@ class AnalysisLayout extends Component {
                     src={this.state.ajax_done.error}
                 />
             )
-        )
+        }
 
         else return null;
     }
