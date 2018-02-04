@@ -93,7 +93,7 @@ def dataset2dict(model_type, upload):
                     try:
                         instance = json.load(dataset['file'])['dataset']
                     except:
-                        instance = converted.extend(dataset['file'])
+                        instance = dataset['file']
                 elif dataset['filename'].lower().endswith('.xml'):
                     instance = xml2dict(dataset['file'])
 
