@@ -60,7 +60,7 @@ def dataset2dict(model_type, upload):
                 if error:
                     list_error.append({
                         'location': session_name,
-                        'message': str(error)
+                        'message': error
                     })
 
                 converted.extend(instance)
@@ -107,7 +107,7 @@ def dataset2dict(model_type, upload):
                 if error:
                     list_error.append({
                         'location': location,
-                        'message': str(error)
+                        'message': error
                     })
                 else:
                     converted.extend(instance)
