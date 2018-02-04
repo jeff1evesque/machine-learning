@@ -312,10 +312,11 @@ class AnalysisLayout extends Component {
         if (this.state.ajax_done_error) {
             return (
                 <ReactJson
-                    onAdd='false'
-                    onDelete='false'
-                    onEdit='false'
+                    onAdd={false}
+                    onDelete={false}
+                    onEdit={false}
                     src={this.state.ajax_done_error}
+                    theme='brewer'
                 />
             )
         }
