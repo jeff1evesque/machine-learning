@@ -45,7 +45,7 @@ class Validator(object):
 
         for instance in data:
             try:
-                validate_with_humanized_errors(data, schema)
+                validate_with_humanized_errors(instance, schema)
 
             except Exception, error:
                 self.list_error.append(str(error).splitlines())
@@ -71,7 +71,7 @@ class Validator(object):
 
         for instance in data:
             try:
-                validate_with_humanized_errors(data, schema)
+                validate_with_humanized_errors(instance, schema)
 
             except Exception, error:
                 self.list_error.append(str(error).splitlines())
