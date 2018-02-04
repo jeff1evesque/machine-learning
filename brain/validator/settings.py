@@ -94,7 +94,7 @@ class Validator(object):
             validate_with_humanized_errors(premodel_settings, schema)
 
         except Exception, error:
-            slit_error = str(error).splitlines()
+            split_error = str(error).splitlines()
             self.list_error.append(split_error)
             return split_error
 
