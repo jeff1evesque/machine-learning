@@ -36,6 +36,7 @@ class Validator(object):
 
         '''
 
+        current_errors = []
         schema = Schema({
             Required('dependent-variable'): All(unicode, Length(min=1)),
             Required('independent-variables'): [{
@@ -48,10 +49,12 @@ class Validator(object):
                 validate_with_humanized_errors(instance, schema)
 
             except Exception, error:
-                self.list_error.append(str(error).splitlines())
+                split_error = str(error).splitlines()
+                current_errors.extend(split_error)
+                self.list_error.extend(split_error)
 
-        if self.list_error:
-            return self.list_error
+        if current_errors:
+            return current_errors
         else:
             return False
 
@@ -62,6 +65,7 @@ class Validator(object):
 
         '''
 
+        current_errors = []
         schema = Schema({
             Required('dependent-variable'): Any(int, float),
             Required('independent-variables'): [{
@@ -74,10 +78,12 @@ class Validator(object):
                 validate_with_humanized_errors(instance, schema)
 
             except Exception, error:
-                self.list_error.append(str(error).splitlines())
+                split_error = str(error).splitlines()
+                current_errors.extend(split_error)
+                self.list_error.extend(split_error)
 
-        if self.list_error:
-            return self.list_error
+        if current_errors:
+            return current_errors
         else:
             return False
 
