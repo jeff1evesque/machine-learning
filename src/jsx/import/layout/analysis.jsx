@@ -309,13 +309,13 @@ class AnalysisLayout extends Component {
     }
 
     showErrors() {
-        if (this.state.ajax_done && this.state.ajax_done.error) {
+        if (this.state.ajax_done && this.state.ajax_done_error) {
             return (
                 <ReactJson
                     onAdd='false'
                     onDelete='false'
                     onEdit='false'
-                    src={this.state.ajax_done.error}
+                    src={this.state.ajax_done_error}
                 />
             )
         }
