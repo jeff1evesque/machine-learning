@@ -36,23 +36,24 @@ class Validator(object):
 
         '''
 
-        try:
-            schema = Schema([
-                {
-                    Required('dependent-variable'): All(unicode, Length(min=1)),
-                    Required('independent-variables'): [{
-                        Required(All(unicode, Length(min=1))): Any(int, float),
-                    }],
-                },
-            ])
-            validate_with_humanized_errors(data, schema)
+        schema = Schema({
+            Required('dependent-variable'): All(unicode, Length(min=1)),
+            Required('independent-variables'): [{
+                Required(All(unicode, Length(min=1))): Any(int, float),
+            }],
+        })
 
-        except Exception, error:
-            split_error = str(error).splitlines()
-            self.list_error.append(split_error)
-            return split_error
+        for instance in data:
+            try:
+                validate_with_humanized_errors(data, schema)
 
-        return False
+            except Exception, error:
+                self.list_error.append(str(error).splitlines())
+
+        if self.list_error:
+            return self.list_error
+        else:
+            return False
 
     def validate_regression(self, data):
         '''
@@ -61,23 +62,24 @@ class Validator(object):
 
         '''
 
-        try:
-            schema = Schema([
-                {
-                    Required('dependent-variable'): Any(int, float),
-                    Required('independent-variables'): [{
-                        Required(All(unicode, Length(min=1))): Any(int, float),
-                    }],
-                },
-            ])
-            validate_with_humanized_errors(data, schema)
+        schema = Schema({
+            Required('dependent-variable'): Any(int, float),
+            Required('independent-variables'): [{
+                Required(All(unicode, Length(min=1))): Any(int, float),
+            }],
+        })
 
-        except Exception, error:
-            split_error = str(error).splitlines()
-            self.list_error.append(split_error)
-            return split_error
+        for instance in data:
+            try:
+                validate_with_humanized_errors(data, schema)
 
-        return False
+            except Exception, error:
+                self.list_error.append(str(error).splitlines())
+
+        if self.list_error:
+            return self.list_error
+        else:
+            return False
 
     def validate_value(self, data):
         '''
