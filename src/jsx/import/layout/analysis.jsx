@@ -30,6 +30,7 @@ import {
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
 import PropTypes from 'prop-types';
+import ReactJson from 'react-json-view';
 
 class AnalysisLayout extends Component {
     // prob validation: static method, similar to class A {}; A.b = {};
@@ -307,6 +308,22 @@ class AnalysisLayout extends Component {
         );
     }
 
+    showErrors() {
+        if (this.state.ajax_done_error) {
+            return (
+                <ReactJson
+                    onAdd={false}
+                    onDelete={false}
+                    onEdit={false}
+                    src={this.state.ajax_done_error}
+                    theme='brewer'
+                />
+            )
+        }
+
+        else return null;
+    }
+
     showDesktopContent() {
         return (
             <div className='flex'>
@@ -314,6 +331,7 @@ class AnalysisLayout extends Component {
                     <NavBar />
                 </div>
                 <div className='col-sm-10'>
+                    {this.showErrors()}
                     {this.showAnalysisContent()}
                 </div>
             </div>
@@ -323,6 +341,7 @@ class AnalysisLayout extends Component {
     showMobileContent() {
         return (
             <div className='col-sm-12'>
+                {this.showErrors()}
                 {this.showAnalysisContent()}
             </div>
         )
