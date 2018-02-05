@@ -3,7 +3,7 @@
 This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#web-interface),
  as well as a [programmatic-api](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#programmatic-interface)
  for various machine learning algorithms. Some of it's general applications, have
- been outlined within [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/doc/index.rst).
+ been outlined within [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/docs/index.rst).
 
 **Supported algorithms**:
 
@@ -19,22 +19,22 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
  as `invalid`, and closed (without merging to master). These best practices
  will ensure integrity, when revisions of code, or issues need to be reviewed.
 
-**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/doc/contribution/support.rst),
+**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/docs/contribution/support.rst),
  to further assist with development.
 
 ## Configuration
 
-Fork this project, and remember to [generate](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/ssh_keys.rst)
+Fork this project, and remember to [generate](https://github.com/jeff1evesque/machine-learning/blob/master/docs/configuration/ssh_keys.rst)
  ssh keys, before cloning the repository:
 
-- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#simple-clone):
+- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/docs/configuration/setup_clone.rst#simple-clone):
  clone the remote master branch.
-- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#commit-hash):
+- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/docs/configuration/setup_clone.rst#commit-hash):
  clone the remote master branch, then checkout a specific commit hash.
-- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#release-tag):
+- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/docs/configuration/setup_clone.rst#release-tag):
  clone the remote branch, associated with the desired release tag.
 
-**Note:** the [`puppetfile.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/doc/background/puppetfile.rst)
+**Note:** the [`puppetfile.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/docs/background/puppetfile.rst)
  can be reviewed, to better understand why ssh keys are required.
 
 ## Installation
@@ -81,7 +81,7 @@ The following lines, indicate the application is accessible via `localhost:8080`
 ## Execution
 
 Both the web-interface, and the programmatic-api, have corresponding
- [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/doc/test/pytest.rst)
+ [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/docs/test/pytest.rst)
  which can be reviewed, and implemented.
 
 ### Web Interface
@@ -150,9 +150,9 @@ requests.post(endpoint, headers=headers, data=json_string_here)
 ```
 
 **Note:** more information, regarding how to obtain a valid `token`, can be further
- reviewed, in the `/login` [documentation](https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst).
+ reviewed, in the `/login` [documentation](https://github.com/jeff1evesque/machine-learning/tree/master/docs/programmatic_interface/authentication/login.rst).
 
-**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
+**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/blob/master/docs/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
 
 It is important to remember that the [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/98c7f57986cbe56ca14f8ee47859b50a08c2ef9b/Vagrantfile#L54-L55),
  as denoted by the above snippet, has defined two port forwards. Specifically, on
