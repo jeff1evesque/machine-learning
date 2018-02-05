@@ -32,7 +32,7 @@ the ``data`` attribute, in a given ``POST`` request:
     requests.post(endpoint, headers=headers, data=json_string_here)
 
 **Note:** more information, regarding how to obtain a valid ``token``, can be further
-reviewed, in the ``/login`` `documentation <https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst>`_.
+reviewed, in the ``/login`` `documentation <https://github.com/jeff1evesque/machine-learning/tree/master/docs/programmatic_interface/authentication/login.rst>`_.
 
 The following properties define the above ``data`` attribute:
 
