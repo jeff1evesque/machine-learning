@@ -52,5 +52,5 @@ token to be supplied, in order to properly submit a corresponding request.
 
 The following sessions, can be implemented with the above token:
 
-- `data-new <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`_
-- `data-append <https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst>`_
+- :doc:`/latest/html/programmatic-interface/data/data-new`
+- :doc:`/latest/html/programmatic-interface/data/data-append`
