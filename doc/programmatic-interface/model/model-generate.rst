@@ -26,7 +26,7 @@ the ``data`` attribute, in a given ``POST`` request:
     requests.post(endpoint, headers=headers, data=json_string_here)
 
 **Note:** more information, regarding how to obtain a valid ``token``, can be further
-reviewed, in the :doc:`documentation </latest/html/programmatic-interface/authentication/login>`.
+reviewed, in the `documentation </latest/html/programmatic-interface/authentication/login>`_.
 
 The following properties define the above ``data`` attribute:
 
