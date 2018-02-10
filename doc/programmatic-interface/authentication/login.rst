@@ -52,5 +52,10 @@ token to be supplied, in order to properly submit a corresponding request.
 
 The following sessions, can be implemented with the above token:
 
-- `data_new </latest/html/programmatic-interface/data/data-new>`_
-- `data_append </latest/html/programmatic-interface/data/data-append>`_
+- |data_new|_
+- |data_append|_
+
+.. |data_new| replace:: ``data_new``
+.. _data_new: /latest/html/programmatic-interface/data/data-new
+.. |data_append| replace:: ``data_append``
+.. _data_append: /latest/html/programmatic-interface/data/data-append
