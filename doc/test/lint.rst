@@ -59,7 +59,7 @@ allow more customtomized rules, for the above implemented linters.
 .. _puppet-lint: http://puppet-lint.com/
 
 .. |r10k| replace:: ``r10k``
-.. _r10k: /latest/html/test/pytest
+.. _r10k: pytest
 
 .. |jsonlint| replace:: ``jsonlint``
 .. _jsonlint: https://github.com/zaach/jsonlint/blob/master/README.md

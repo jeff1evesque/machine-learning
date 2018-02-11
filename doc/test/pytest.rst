@@ -201,7 +201,7 @@ to build this application:
 
 Then, the unit tests should be re-runnable, meaning multiple successive executions
 of the |unit-tests|_ bash script, should run without a problem. More information
-regarding `hardware architecture </latest/html/programmatic-interface/hardware/architecture>`_,
+regarding `hardware architecture <../programmatic-interface/hardware/architecture>`_,
 and resources can be reviewed to determine the best combination for a given situation.
 
 **Note:** every script within this repository, with the

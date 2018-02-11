@@ -26,7 +26,7 @@ the ``data`` attribute, in a given ``POST`` request:
     requests.post(endpoint, headers=headers, data=json_string_here)
 
 **Note:** more information, regarding how to obtain a valid ``token``, can be further
-reviewed, in the `documentation </latest/html/programmatic-interface/authentication/login>`_.
+reviewed, in the `documentation <../authentication/login>`_.
 
 The following properties define the above ``data`` attribute:
 
@@ -58,6 +58,6 @@ The following properties define the above ``data`` attribute:
   - if set to ``auto``, then ``1/n_features`` will be used
 
 .. |penalty| replace:: ``penalty``
-.. _penalty: /latest/html/programmatic-interface/model/parameters/penalty
+.. _penalty: ../model/parameters/penalty
 .. |gamma| replace:: ``gamma``
-.. _gamma: /latest/html/programmatic-interface/model/parameters/gamma
+.. _gamma: ..model/parameters/gamma
