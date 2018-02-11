@@ -1,3 +1,4 @@
 {
+  "collectCoverage": true,
   "verbose": true
 }
