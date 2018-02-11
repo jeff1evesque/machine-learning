@@ -36,16 +36,16 @@ Result Arbiter
   ``model_type``, otherwise return all saved titles, for all ``model_type``.
 
 .. |data_new| replace:: ``data_new``
-.. _data_new: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_new.rst
+.. _data_new: /latest/html/programmatic-interface/data/data-new
 .. |data_append| replace:: ``data_append``
-.. _data_append: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data/data_append.rst
+.. _data_append: /latest/html/programmatic-interface/data/data-append
 .. |model_generate| replace:: ``model_generate``
-.. _model_generate: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/model/model_generate.rst
+.. _model_generate: /latest/html/programmatic-interface/model/model-generate
 .. |model_predict| replace:: ``model_predict``
-.. _model_predict: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/predict/model_predict.rst
+.. _model_predict: /latest/html/programmatic-interface/predict/model-predict.rst
 .. |/save-prediction| replace:: ``/save-prediction``
-.. _/save-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/result/save_prediction.rst
+.. _/save-prediction: /latest/html/programmatic-interface/result/save-prediction
 .. |/retrieve-prediction| replace:: ``/retrieve-prediction``
-.. _/retrieve-prediction: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/result/retrieve_prediction.rst
+.. _/retrieve-prediction: /latest/html/programmatic-interface/result/retrieve-prediction
 .. |/retrieve-prediction-titles| replace:: ``/retrieve-prediction-titles``
-.. _/retrieve-prediction-titles: https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/result/retrieve_prediction_titles.rst
+.. _/retrieve-prediction-titles: /latest/html/programmatic-interface/result/retrieve-prediction-titles
