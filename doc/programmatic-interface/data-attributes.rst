@@ -36,16 +36,16 @@ Result Arbiter
   ``model_type``, otherwise return all saved titles, for all ``model_type``.
 
 .. |data_new| replace:: ``data_new``
-.. _data_new: /latest/html/programmatic-interface/data/data-new
+.. _data_new: data/data-new
 .. |data_append| replace:: ``data_append``
-.. _data_append: /latest/html/programmatic-interface/data/data-append
+.. _data_append: data/data-append
 .. |model_generate| replace:: ``model_generate``
-.. _model_generate: /latest/html/programmatic-interface/model/model-generate
+.. _model_generate: model/model-generate
 .. |model_predict| replace:: ``model_predict``
-.. _model_predict: /latest/html/programmatic-interface/predict/model-predict.rst
+.. _model_predict: predict/model-predict.rst
 .. |/save-prediction| replace:: ``/save-prediction``
-.. _/save-prediction: /latest/html/programmatic-interface/result/save-prediction
+.. _/save-prediction: result/save-prediction
 .. |/retrieve-prediction| replace:: ``/retrieve-prediction``
-.. _/retrieve-prediction: /latest/html/programmatic-interface/result/retrieve-prediction
+.. _/retrieve-prediction: result/retrieve-prediction
 .. |/retrieve-prediction-titles| replace:: ``/retrieve-prediction-titles``
-.. _/retrieve-prediction-titles: /latest/html/programmatic-interface/result/retrieve-prediction-titles
+.. _/retrieve-prediction-titles: result/retrieve-prediction-titles
