@@ -51,11 +51,14 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     ##     -d, run container in background and print container ID
     ##     -t, allocate pseudo-tty instead of default tty to running container
     ##
+    ## Note: mount is used, since docker containers may not contain latest sources
+    ##
     sudo docker network create -d bridge app_nw &&
     sudo docker run -d --name default --net=app_nw "jeff1evesque/ml-default:${CONTAINER_VERSION}" &&
     sudo docker run -d --name redis --net=app_nw "jeff1evesque/ml-redis:${CONTAINER_VERSION}" &&
     sudo docker run -d --name mongodb --net=app_nw "jeff1evesque/ml-mongodb:${CONTAINER_VERSION}" &&
-    sudo docker run -d --name webserver --net=app_nw --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" &&
+    sudo docker run -d --name webserver --net=app_nw --mount type=bind--mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" &&
+    sudo docker run -d --name frontend --net=app_nw --mount type=bind--mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning "jeff1evesque/ml-frontend:${CONTAINER_VERSION}"
     sudo docker run -d --name mariadb --net=app_nw "jeff1evesque/ml-mariadb:${CONTAINER_VERSION}"
 
 ## build from local dockerfiles
@@ -66,6 +69,7 @@ else
     sudo docker build -f redis.dockerfile -t ml-redis .
     sudo docker build -f mongodb.dockerfile -t ml-mongodb .
     sudo docker build -f webserver.dockerfile -t ml-webserver .
+    sudo docker build -f frontend.dockerfile -t ml-frontend .
     sudo docker build -f mariadb.dockerfile -t ml-mariadb .
     cd "$PWD" || exit
 
@@ -80,6 +84,7 @@ else
     sudo docker run --name redis --net=app_nw -d ml-redis &&
     sudo docker run --name mongodb --net=app_nw -d ml-mongodb &&
     sudo docker run --name webserver --net=app_nw -d ml-webserver run-api &&
+    sudo docker run --name frontend --net=app_nw -d ml-frontend run-api &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
 fi
 
