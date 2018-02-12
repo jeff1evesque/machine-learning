@@ -8,6 +8,7 @@ ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 ## copy files into container
 COPY src /var/machine-learning
 COPY test /var/machine-learning
+COPY hiera /var/machine-learning
 
 ## provision with puppet
 RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/compiler/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
