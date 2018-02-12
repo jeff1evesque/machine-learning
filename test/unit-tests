@@ -59,7 +59,7 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     sudo docker run -d --name redis --net=app_nw "jeff1evesque/ml-redis:${CONTAINER_VERSION}" &&
     sudo docker run -d --name mongodb --net=app_nw "jeff1evesque/ml-mongodb:${CONTAINER_VERSION}" &&
     sudo docker run -d --name webserver --net=app_nw --mount type=bind--mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" &&
-    sudo docker run -d --name frontend --net=app_nw --mount type=bind--mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning "jeff1evesque/ml-frontend:${CONTAINER_VERSION}"
+    sudo docker run -d --name frontend --net=app_nw --mount type=bind--mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning "jeff1evesque/ml-frontend:${CONTAINER_VERSION}" &&
     sudo docker run -d --name mariadb --net=app_nw "jeff1evesque/ml-mariadb:${CONTAINER_VERSION}"
 
 ## build from local dockerfiles
