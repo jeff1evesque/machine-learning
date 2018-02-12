@@ -85,7 +85,7 @@ else
     sudo docker run --name redis --net=app_nw -d ml-redis &&
     sudo docker run --name mongodb --net=app_nw -d ml-mongodb &&
     sudo docker run --name webserver --net=app_nw -d ml-webserver run-api &&
-    sudo docker run --name frontend --net=app_nw -d ml-frontend run-api &&
+    sudo docker run --name frontend --net=app_nw -d ml-frontend &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
 fi
 
@@ -108,6 +108,10 @@ sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*authorization:[[:space:]
 sudo docker restart mongodb
 
 ## run unit tests
+##
+## Note: files that already exist in the mount point are hidden, similar to
+##       mounting filesystems. They will continue to exist, yet inaccessible.
+##
 if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     sudo docker run --name webserver-pytest --net=app_nw --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" test | sudo tee pytest.log
 else
