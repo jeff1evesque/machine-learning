@@ -31,6 +31,7 @@ development:
             node-sass: '4.5.0'
             browserify: '14.0.0'
             babelify: '7.3.0'
+            jest-cli: '22.2.2'
 
     pip:
         general:
