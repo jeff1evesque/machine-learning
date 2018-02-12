@@ -50,9 +50,8 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     ## @docker run:
     ##     -d, run container in background and print container ID
     ##     -t, allocate pseudo-tty instead of default tty to running container
-    ##     --mount, docker containers may not contain latest sources
     ##
-    ## Note: files that already exist in the mountpoint are hidden, similar to
+    ## Note: files that already exist in the mount point are hidden, similar to
     ##       mounting filesystems. They will continue to exist, yet inaccessible.
     ##
     sudo docker network create -d bridge app_nw &&
