@@ -12,15 +12,15 @@ describe('Login Component', () => {
         expect(shallow(<LoginForm />).exists(<form ref='loginForm'></form>)).toBe(true)
     });
 
-    it('renders email input', () => {
+    it('should render an email input', () => {
         expect(shallow(<LoginForm />).find('[name="user[login]"]').length).toEqual(1)
     });
 
-    it('renders password input', () => {
+    it('should render a password input', () => {
         expect(shallow(<LoginForm />).find('[name="user[password]"]').length).toEqual(1)
     });
 
-    it('renders submit input', () => {
+    it('should render a submit input', () => {
         expect(shallow(<LoginForm />).find('[type="submit"]').length).toEqual(1)
     });
 });
