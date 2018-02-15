@@ -15,7 +15,7 @@ import RegisterLayout from '../../../src/jsx/import/layou/register.jsx';
 
 describe('PageLayout Component', () => {
     it('should render correct routes', () => {
-        const wrapper = shallow(<AnalysisLayout />);
+        const wrapper = shallow(<PageLayout />);
         const pathMap = wrapper.find(Route).reduce((pathMap, route) => {
             const routeProps = route.props();
             pathMap[routeProps.path] = routeProps.component;
