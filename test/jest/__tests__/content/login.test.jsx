@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import LoginForm from '../../../src/jsx/import/content/login.jsx'
+import LoginForm from '../../../../src/jsx/import/content/login.jsx'
 
 describe('Login Component', () => {
     it('should render without throwing an error', () => {

@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { shallow } from 'enzyme';
-import RegisterForm from '../../../src/jsx/import/content/register.jsx'
+import RegisterForm from '../../../../src/jsx/import/content/register.jsx'
 
 describe('Register Component', () => {
     it('should render without throwing an error', () => {
