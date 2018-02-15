@@ -1,4 +1,5 @@
 {
-  "collectCoverage": true,
-  "verbose": true
+  'collectCoverage': true,
+  'coverageDirectory': './',
+  'verbose': true
 }
