@@ -11,7 +11,9 @@ are created by the `travis ci <https://travis-ci.org/jeff1evesque/machine-learni
 
 - |unit-tests#L47-L50|_
 - |default.dockerfile|_
-- |database.dockerfile|_
+- |frontend.dockerfile|_
+- |mariadb.dockerfile|_
+- |mongodb.dockerfile|_
 - |redis.dockerfile|_
 - |webserver.dockerfile|_
 
@@ -216,11 +218,15 @@ via |.travis.yml|_
 .. _unit-tests#L47-L50: https://github.com/jeff1evesque/machine-learning/blob/d3ecbd53299d082ceffe77d28875743a923fec1b/test/unit-tests#L47-L50
 .. |default.dockerfile| replace:: ``default.dockerfile``
 .. _default.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile
-.. |database.dockerfile| replace:: ``database.dockerfile``
-.. _database.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/database.dockerfile
+.. |mariadb.dockerfile| replace:: ``mariadb.dockerfile``
+.. _mariadb.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/mariadb.dockerfile
+.. |mongodb.dockerfile| replace:: ``mongodb.dockerfile``
+.. _mongodb.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/mongodb.dockerfile
 .. |redis.dockerfile| replace:: ``redis.dockerfile``
 .. _redis.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/redis.dockerfile
 .. |webserver.dockerfile| replace:: ``webserver.dockerfile``
 .. _webserver.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile
+.. |frontend.dockerfile| replace:: ``frontend.dockerfile``
+.. _frontend.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/frontend.dockerfile
 .. |unit-tests| replace:: ``unit-tests``
 .. _unit-tests: https://github.com/jeff1evesque/machine-learning/blob/master/test/unit-tests
