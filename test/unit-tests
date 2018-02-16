@@ -132,8 +132,11 @@ fi
 ##
 ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
 ##
+sudo docker cp frontend:/var/machine-learning/test/jest/.coverage "$PROJECT_ROOT"/.coverage.jest
 sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT"/.coverage.docker
-if [ ! -f "$PROJECT_ROOT"/.coverage.docker ]; then
+if [ ! -f "$PROJECT_ROOT"/.coverage.docker ] && \
+   [  ! -f "$PROJECT_ROOT"/.coverage.jest ]
+then
     exit 1
 fi
 
