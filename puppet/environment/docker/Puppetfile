@@ -15,7 +15,7 @@ mod 'apt',
 ## Install Module: nodejs
 mod 'nodejs',
   :git => 'https://github.com/voxpupuli/puppet-nodejs.git',
-  :ref => 'v4.0.1'
+  :ref => 'v5.0.0'
 
 ## Install Module: git
 mod 'git',
