@@ -27,7 +27,6 @@ development:
     npm:
         general:
             jest-cli: '22.2.2'
-            enzyme: '3.3.0'
 
         custom:
             uglify-js: '2.7.5'
