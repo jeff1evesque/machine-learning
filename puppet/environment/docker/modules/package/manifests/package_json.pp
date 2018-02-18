@@ -22,6 +22,7 @@ class package::package_json {
         nodejs::npm { "install-${package}":
             ensure          => $version,
             package         => $package,
+            install_options => ['--no-bin-links'],
             target          => "${root_dir}/src/node_modules",
             require         => [
                 Class['package::nodejs'],
