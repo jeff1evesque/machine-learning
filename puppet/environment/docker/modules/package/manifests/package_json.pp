@@ -5,7 +5,10 @@ class package::package_json {
     include package::nodejs
 
     ## local variables
-    $node_packages = lookup('dependencies')
+    $node_packages = unique(flatten(
+        lookup('dependencies'),
+        lookup('devDependencies')
+    ))
     $hiera_general = lookup('general')
     $root_dir      = $hiera_general['root']
 
