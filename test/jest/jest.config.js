@@ -1,6 +1,6 @@
 module.exports = {
   'collectCoverage': true,
   'coverageDirectory': './',
-  'moduleDirectories': ['../../src/node_modules'],
+  'moduleDirectories': ['/usr/lib/node_modules/jest-cli/node_modules'],
   'verbose': true
 }
