@@ -32,6 +32,8 @@
 /interface/static/node_modules/
 /src/node_modules/
 /puppet/environment/*/modules_contrib/
+/test/jest/lcov-report/
+/test/jest/node_modules/
 
 # Ignore and don't commit the following files
 *.pyc
@@ -42,3 +44,6 @@
 /log/webserver
 /log/*.log
 /test/*.log
+/test/jest/clover.xml
+/test/jest/coverage-final.json
+/test/jest/lcov.info
