@@ -1,0 +1,16 @@
+version: '3'
+services:
+  default:
+    scale: 1
+
+  redis:
+    scale: 2
+
+  mongodb:
+    scale: 3
+
+  mariadb:
+    scale: 4
+
+  webserver:
+    scale: 5
