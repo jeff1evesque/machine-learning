@@ -1,6 +1,5 @@
 #!/bin/bash
 
-CWD=$(PWD)
 RANCHER_VERSION='v0.12.5'
 RANCHER_REPO='https://github.com/rancher/rancher-compose'
 CURRENT_DISTRO=$(uname -s)
@@ -33,7 +32,7 @@ if [ "$DISTRO_TYPE" = 'unix' ]; then
 
 elif [ "$DISTRO_TYPE" = 'linux' ]; then
     if [ ! $(which wget) ]; then
-        sudo apt-get -y install wget || sudo yum y install wget || echo 'wget cannot install' && exit 1
+        sudo apt-get -y install wget || sudo yum -y install wget || echo 'wget cannot install' && exit 1
     fi
 
     wget "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.tar.gz
