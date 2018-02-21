@@ -24,7 +24,7 @@ esac
 
 ## download rancher-compose
 if [ "$DISTRO_TYPE" = 'unix' ]; then
-    curl -O "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
     tar zxf "$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
     rm "$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
     sudo mv rancher-compose-v"$RANCHER_VERSION"/rancher-compose /usr/local/bin/rancher-compose
@@ -42,8 +42,9 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
     sudo chmod +x /usr/local/bin/rancher-compose
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
-    curl -O "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.zip"
-    unzip -j "$RANCHER_DISTRO-$RANCHER_VERSION.zip"
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.zip"
+    unzip -j "$RANCHER_DISTRO-$RANCHER_VERSION"
+    mv -f rancher-compose.exe /c/Users/$(whoami)/bin
     rm "$RANCHER_DISTRO-$RANCHER_VERSION.zip"
 
 else
