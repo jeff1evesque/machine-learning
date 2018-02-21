@@ -42,7 +42,7 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
     sudo chmod +x /usr/local/bin/rancher-compose
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
-    wget "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.zip
+    curl -O "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.zip
     unzip -j "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.zip
     rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.zip
 
