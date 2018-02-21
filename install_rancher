@@ -50,4 +50,5 @@ if docker -v >/dev/null 2>&1; then
     rancher-compose up -f docker-compose.development -r rancher-compose.development
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
+    exit
 fi
