@@ -24,10 +24,10 @@ esac
 
 ## download rancher-compose
 if [ "$DISTRO_TYPE" = 'unix' ]; then
-    curl -O "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.tar.gz
-    tar zxf "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
-    rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
-    sudo mv rancher-compose-v${VERSION_NUM}/rancher-compose /usr/local/bin/rancher-compose
+    curl -O "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION-rc1.tar.gz"
+    tar zxf "$RANCHER_DISTRO-$RANCHER_VERSION-rc1.tar.gz"
+    rm "$RANCHER_DISTRO-$RANCHER_VERSION-rc1.tar.gz"
+    sudo mv rancher-compose-v"$RANCHER_VERSION"/rancher-compose /usr/local/bin/rancher-compose
     sudo chmod +x /usr/local/bin/rancher-compose
 
 elif [ "$DISTRO_TYPE" = 'linux' ]; then
@@ -35,16 +35,16 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
         sudo apt-get -y install wget || sudo yum -y install wget || echo 'wget cannot install' && exit 1
     fi
 
-    wget "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.tar.gz
-    tar zxf "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
-    rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
-    sudo mv rancher-compose-v${VERSION_NUM}/rancher-compose /usr/local/bin/rancher-compose
+    wget "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION-rc1.tar.gz"
+    tar zxf "$RANCHER_DISTRO-$RANCHER_VERSION-rc1.tar.gz"
+    rm "$RANCHER_DISTRO-$RANCHER_VERSION-rc1.tar.gz"
+    sudo mv rancher-compose-v"$RANCHER_VERSION"/rancher-compose /usr/local/bin/rancher-compose
     sudo chmod +x /usr/local/bin/rancher-compose
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
-    curl -O "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.zip
-    unzip -j "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.zip
-    rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.zip
+    curl -O "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION-rc1.zip"
+    unzip -j "$RANCHER_DISTRO-$RANCHER_VERSION-rc1.zip"
+    rm "$RANCHER_DISTRO-$RANCHER_VERSION-rc1.zip"
 
 else
     echo 'Error: distro is not known, contact repository owner.'
