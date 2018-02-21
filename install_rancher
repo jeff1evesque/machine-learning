@@ -24,16 +24,31 @@ case "${CURRENT_DISTRO}" in
 esac
 
 ## download rancher-compose
-if [ "$DISTRO_TYPE" = 'unix' ] || [ "$DISTRO_TYPE" = 'linux' ]; then
+if [ "$DISTRO_TYPE" = 'unix' ]; then
+    ## install wget
+    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+    brew install wget
+
+    ## install rancher-compose
+    tar zxf "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
+    rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
+    sudo mv rancher-compose-v${VERSION_NUM}/rancher-compose /usr/local/bin/rancher-compose
+    sudo chmod +x /usr/local/bin/rancher-compose
+
+elif [ "$DISTRO_TYPE" = 'linux' ]; then
+    DISTRO=$(cat /etc/*-release)
+
     wget "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.tar.gz
     tar zxf "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
     rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
     sudo mv rancher-compose-v${VERSION_NUM}/rancher-compose /usr/local/bin/rancher-compose
     sudo chmod +x /usr/local/bin/rancher-compose
+
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
     wget "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.zip
     unzip -j "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.zip
     rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.zip
+
 else
     echo 'Error: distro is not known, contact repository owner.'
     exit
