@@ -15,6 +15,7 @@
 !license.md
 !contributing.md
 !*-compose.development.yml
+!/start_rancher
 !/puppet/
 !/test
 !/log/

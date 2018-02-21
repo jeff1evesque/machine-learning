@@ -1,0 +1,50 @@
+#!/bin/bash
+
+CWD=$(PWD)
+RANCHER_VERSION='v0.12.5'
+RANCHER_REPO='https://github.com/rancher/rancher-compose'
+CURRENT_DISTRO=$(uname -s)
+
+case "${CURRENT_DISTRO}" in
+    Linux*)
+        DISTRO_TYPE='linux'
+        RANCHER_DISTRO='rancher-compose-linux-amd64';;
+    Darwin*)
+        DISTRO_TYPE='unix'
+        RANCHER_DISTRO='rancher-compose-darwin-amd64';;
+    CYGWIN*)
+        DISTRO_TYPE='windows'
+        RANCHER_DISTRO='rancher-compose-windows-amd64';;
+    MINGW*)
+        DISTRO_TYPE='windows'
+        RANCHER_DISTRO='rancher-compose-windows-amd64';;
+    *)
+        echo 'Error: distro is not known, contact repository owner.'
+        exit
+esac
+
+## download rancher-compose
+if [ "$DISTRO_TYPE" = 'unix' ] || [ "$DISTRO_TYPE" = 'linux' ]; then
+    wget "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.tar.gz
+    tar zxf "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
+    rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
+    sudo mv rancher-compose-v${VERSION_NUM}/rancher-compose /usr/local/bin/rancher-compose
+    sudo chmod +x /usr/local/bin/rancher-compose
+elif [ "$DISTRO_TYPE" = 'windows' ]; then
+    wget "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.zip
+    unzip -j "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.zip
+    rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.zip
+fi
+
+## install rancher ecosystem
+if docker -v >/dev/null 2>&1; then
+    docker run -d --restart=unless-stopped -p 8080:8080 rancher/server
+
+    mkdir -p ./docker_storage_redis
+    mkdir -p ./docker_storage_mongodb
+    mkdir -p ./docker_storage_mariadb
+
+    rancher-compose up -f docker-compose.development -r rancher-compose.development
+else
+    echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
+fi
