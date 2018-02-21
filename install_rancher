@@ -20,7 +20,7 @@ case "${CURRENT_DISTRO}" in
         RANCHER_DISTRO='rancher-compose-windows-amd64';;
     *)
         echo 'Error: distro is not known, contact repository owner.'
-        exit
+        exit 1
 esac
 
 ## download rancher-compose
@@ -63,5 +63,5 @@ if docker -v >/dev/null 2>&1; then
     rancher-compose up -f docker-compose.development -r rancher-compose.development
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
-    exit
+    exit 1
 fi
