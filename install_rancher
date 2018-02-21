@@ -48,7 +48,7 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
 
 else
     echo 'Error: distro is not known, contact repository owner.'
-    exit
+    exit 1
 fi
 
 ## install rancher ecosystem
