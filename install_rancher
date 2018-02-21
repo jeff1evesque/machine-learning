@@ -25,7 +25,7 @@ esac
 
 ## download rancher-compose
 if [ "$DISTRO_TYPE" = 'unix' ]; then
-    ## install rancher-compose
+    curl -O "$RANCHER_REPO"/releases/download/v${RANCHER_VERSION}/"$RANCHER_DISTRO"-v${RANCHER_VERSION}-rc1.tar.gz
     tar zxf "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
     rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
     sudo mv rancher-compose-v${VERSION_NUM}/rancher-compose /usr/local/bin/rancher-compose
