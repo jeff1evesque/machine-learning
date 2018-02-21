@@ -60,7 +60,7 @@ if docker -v >/dev/null 2>&1; then
     mkdir -p ./docker_storage_mongodb
     mkdir -p ./docker_storage_mariadb
 
-    rancher-compose up -f docker-compose.development -r rancher-compose.development
+    rancher-compose -f docker-compose.development -r rancher-compose.development up
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
     exit 1
