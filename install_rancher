@@ -25,10 +25,6 @@ esac
 
 ## download rancher-compose
 if [ "$DISTRO_TYPE" = 'unix' ]; then
-    ## install wget
-    /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-    brew install wget
-
     ## install rancher-compose
     tar zxf "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
     rm "$RANCHER_DISTRO"-v${VERSION_NUM}-rc1.tar.gz
