@@ -79,8 +79,8 @@ if docker -v >/dev/null 2>&1; then
     )
 
     if [ "$DISTRO_TYPE" = 'unix' ] || [ "$DISTRO_TYPE" == 'linux' ]; then
-        export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;json.load(sys.stdin);print obj["name"]')
-        export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"]')
+        export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;json.load(sys.stdin);print(obj.name)')
+        export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.secretValue')
     else
         export RANCHER_ACCESS_KEY=$(
             powershell -Command "\$API=(invoke-webrequest http://$SERVER_IP:8080 | ConvertFrom-JSON); return \$API.name"
