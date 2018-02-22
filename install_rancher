@@ -84,9 +84,8 @@ if docker -v >/dev/null 2>&1; then
         curl -v -X POST -H 'Accept: application/json' \
         -H 'Content-Type: application/json' \
         -d '{"type":"apikey","accountId":"1a5","name":"admin","description":null,"created":null,"kind":null,"removed":null,"uuid":null}' \
-		http://"$SERVER_IP":8080/v1/projects/1a5/apikey
+        http://"$SERVER_IP":8080/v1/projects/1a5/apikey
     )
-    echo $ACCESS
 
     export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;json.load(sys.stdin);print(obj.name)')
     export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.secretValue')
