@@ -78,11 +78,12 @@ if docker -v >/dev/null 2>&1; then
         export RANCHER_ACCESS_KEY=$(cat "$ACCESS" | python -c 'import json,sys;json.load(sys.stdin);print obj["name"]')
         export RANCHER_SECRET_KEY=$(cat "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"]')
     else
-        powershell -Command "
-            $API=invoke-webrequest http://$($SERVER_IP):8080 | ConvertFrom-JSON)[0]
-            $RANCHER_ACCESS_KEY=$api.secretValue;
-            $RANCHER_SECRET_KEY=$api.publicValue
-        "
+        export RANCHER_ACCESS_KEY=$(
+            powershell -Command "$API=invoke-webrequest http://$($SERVER_IP):8080 | ConvertFrom-JSON)[0]; return $api.name"
+        )
+        export RANCHER_SECRET_KEY=$(
+            powershell -Command "$API=invoke-webrequest http://$($SERVER_IP):8080 | ConvertFrom-JSON)[0]; return $api.secretValue"
+        )
     fi
     export RANCHER_URL=http://"$SERVER_IP":8080/
 
