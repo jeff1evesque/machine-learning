@@ -51,9 +51,6 @@ that do not meet [Docker for Windows](https://docs.docker.com/docker-for-windows
 - [centos](https://docs.docker.com/install/linux/docker-ce/centos/)
 - [mac](https://docs.docker.com/docker-for-mac/install/)
 
-**Note:** if the host machine is windows, then [cygwin](https://www.cygwin.com/) will need to
-be installed, in order for the `make build` command to succeed installing `rancher-compose`.
-
 Once the necessary dependencies have been installed, execute the following
 within the docker quickstart terminal, to install [rancher](https://rancher.com/):
 
@@ -107,6 +104,8 @@ Digest: sha256:42441f0128fae4d72d51f92de2049392427d462356282a46f28434332967c7e4
 Status: Downloaded newer image for rancher/server:latest
 57e7f8577c7a80d8ea10d1b0855de619c4ec9ad0318172b1f52e70006b99afa6
 ```
+
+**Note:** when starting the docker terminal, make sure to `Run as administrator`.
 
 The following lines, from our `docker-compose.development.yml` indicate corresponding port forwards:
 
