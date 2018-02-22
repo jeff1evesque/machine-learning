@@ -47,6 +47,14 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
     mv -f rancher-compose.exe /c/Users/$(whoami)/bin
     rm "$RANCHER_DISTRO-$RANCHER_VERSION.zip"
 
+    ## install python
+    POWERSHELL_FLAGS='-NoProfile -InputFormat None -ExecutionPolicy Bypass'
+    powershell.exe "POWERSHELL_FLAGS" -Command "iex (
+        (New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1')
+    )"
+    powershell.exe "POWERSHELL_FLAGS" -Command SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
+    choco install python3
+
 else
     echo 'Error: distro is not known, contact repository owner.'
     exit 1
@@ -78,17 +86,8 @@ if docker -v >/dev/null 2>&1; then
 		http://"$SERVER_IP":8080/v1/projects/1a5/apikey
     )
 
-    if [ "$DISTRO_TYPE" = 'unix' ] || [ "$DISTRO_TYPE" == 'linux' ]; then
-        export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;json.load(sys.stdin);print(obj.name)')
-        export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.secretValue')
-    else
-        export RANCHER_ACCESS_KEY=$(
-            echo "$ACCESS" | powershell.exe -Command 'ConvertFrom-Json | select -ExpandProperty Name'
-        )
-        export RANCHER_SECRET_KEY=$(
-            echo "$ACCESS" | powershell.exe -Command 'ConvertFrom-Json | select -ExpandProperty secretValue'
-        )
-    fi
+    export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;json.load(sys.stdin);print(obj.name)')
+    export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.secretValue')
     export RANCHER_URL=http://"$SERVER_IP":8080/
 
     ## notify access + secret key
