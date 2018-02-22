@@ -49,11 +49,27 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
 
     ## install python
     if [[ $CURRENT_DISTRO == MINGW* ]]; then
-        powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "
-            iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-            SET 'PATH=%PATH%;%ALLUSERSPROFILE%\programdata\chocolatey\bin'
-        "
-        powershell.exe -NoProfile -ExecutionPolicy Bypass -Command 'choco install -f python'
+        while [[ "$INSTALL_PYTHON" != 'y' ]] && [[ "$INSTALL_PYTHON" != 'n' ]]
+        do
+            echo "Windows requires 'choco', and 'python' to install 'rancher-compose'"
+            echo ''
+            echo '[y]: yes, install'
+            echo '[n]: no, do not install'
+            echo ''
+            read -p 'Selection: ' INSTALL_PYTHON
+        done
+
+        if [ "${INSTALL_PYTHON,,}" = 'y' ]; then
+            powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "
+                iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+                SET 'PATH=%PATH%;%ALLUSERSPROFILE%\programdata\chocolatey\bin'
+            "
+            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command 'choco install -f python'
+
+        else
+            echo 'terminating rancher installation...'
+            exit 0
+        fi
     fi
 
 else
