@@ -73,14 +73,19 @@ if docker -v >/dev/null 2>&1; then
         -d '{"type":"apikey","accountId":"1a5","name":"admin","description":null,"created":null,"kind":null,"removed":null,"uuid":null}' \
 		http://"$SERVER_IP":8080/v1/projects/1a5/apikey
     )
-    export RANCHER_ACCESS_KEY=$($ACCESS | jq -r .name)
-    export RANCHER_SECRET_KEY=$($ACCESS | jq -r .secretValue)
+
+    if [ "$DISTRO_TYPE" = 'unix' ] || [ "$DISTRO_TYPE" == 'linux' ]; then
+        export RANCHER_ACCESS_KEY=$(cat "$ACCESS" | python -c 'import json,sys;print(json.load(sys.stdin))';)
+        export RANCHER_SECRET_KEY=$(cat "$ACCESS" | python -c 'import json,sys;print(json.load(sys.stdin))';)
+    else
+
+    fi
     export RANCHER_URL=http://"$SERVER_IP":8080/
 
     ## notify access + secret key
-    echo "RANCHER_ACCESS_KEY: $RANCHER_ACCESS_KEY" > ./rancher_auth.txt
-    echo "RANCHER_SECRET_KEY: $RANCHER_SECRET_KEY" >> ./rancher_auth.txt
-    echo 'Access and secret key generated in ./rancher.txt'
+    echo "RANCHER_ACCESS_KEY: $RANCHER_ACCESS_KEY" > ./rancher-auth.txt
+    echo "RANCHER_SECRET_KEY: $RANCHER_SECRET_KEY" >> ./rancher-auth.txt
+    echo 'Access and secret generated in ./rancher-auth.txt'
 
     rancher --url "http://$SERVER_IP:8080 --access-key $RANCHER_ACCESS_KEY --secret-key $RANCHER_SECRET_KEY"
     rancher-compose -f docker-compose.development -r rancher-compose.development up
