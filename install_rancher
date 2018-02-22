@@ -87,8 +87,8 @@ if docker -v >/dev/null 2>&1; then
         http://"$SERVER_IP":8080/v1/projects/1a5/apikey
     )
 
-    export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;json.load(sys.stdin);print(obj.name)')
-    export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.secretValue')
+    export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.name)')
+    export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.secretValue)')
     export RANCHER_URL=http://"$SERVER_IP":8080/
 
     ## notify access + secret key
