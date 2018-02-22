@@ -32,10 +32,10 @@ if [ "$DISTRO_TYPE" = 'unix' ]; then
 
 elif [ "$DISTRO_TYPE" = 'linux' ]; then
     if [ ! $(which wget) ]; then
-        sudo apt-get -y install wget || sudo yum -y install wget || echo 'wget cannot install' && exit 1
+        sudo apt-get -y install curl || sudo yum -y install curl || echo 'curl cannot install' && exit 1
     fi
 
-    wget "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
     tar zxf "$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
     rm "$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
     sudo mv rancher-compose-v"$RANCHER_VERSION"/rancher-compose /usr/local/bin/rancher-compose
@@ -60,6 +60,24 @@ if docker -v >/dev/null 2>&1; then
     mkdir -p ./docker_storage_mongodb
     mkdir -p ./docker_storage_mariadb
 
+    IP=$(docker-machine ip default)
+
+    ## generate access + secret key
+    ACCESS=$(
+        curl -v -X POST -H 'Accept: application/json' \
+        -H 'Content-Type: application/json' \
+        -d '{"type":"apikey","accountId":"1a5","name":"admin","description":null,"created":null,"kind":null,"removed":null,"uuid":null}' \
+		http://"$IP":8080/v1/projects/1a5/apikey
+    )
+    ACCESS_KEY=$($ACCESS | jq -r .name)
+    SECRET_KEY=$($ACCESS | jq -r .secretValue)
+
+    ## notify access + secret key
+    echo "ACCESS_KEY: $ACCESS_KEY" > ./rancher_auth.txt
+    echo "SECRET_KEY: $SECRET_KEY" >> ./rancher_auth.txt
+    echo 'Access and secret key generated in ./rancher.txt'
+
+    rancher --url "http://$IP:8080 --access-key $ACCESS_KEY --secret-key $SECRET_KEY"
     rancher-compose -f docker-compose.development -r rancher-compose.development up
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
