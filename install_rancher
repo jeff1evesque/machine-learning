@@ -49,13 +49,11 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
 
     ## install python
     if [[ $CURRENT_DISTRO == MINGW* ]]; then
-        powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command '
-            iex ((New-Object System.Net.WebClient).DownloadString("https://chocolatey.org/install.ps1"))
-        '
-        powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command '
-            SET "PATH=%PATH%;%ALLUSERSPROFILE%\chocolatey\bin"
-        '
-        choco install python3
+        powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "
+            iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+            SET 'PATH=%PATH%;%ALLUSERSPROFILE%\programdata\chocolatey\bin'
+        "
+        powershell.exe -NoProfile -ExecutionPolicy Bypass -Command 'choco install -f python'
     fi
 
 else
@@ -88,6 +86,7 @@ if docker -v >/dev/null 2>&1; then
         -d '{"type":"apikey","accountId":"1a5","name":"admin","description":null,"created":null,"kind":null,"removed":null,"uuid":null}' \
 		http://"$SERVER_IP":8080/v1/projects/1a5/apikey
     )
+    echo $ACCESS
 
     export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;json.load(sys.stdin);print(obj.name)')
     export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj.secretValue')
