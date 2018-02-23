@@ -68,10 +68,8 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
                 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
                 SET 'PATH=%PATH%;%ALLUSERSPROFILE%\programdata\chocolatey\bin'
             "
+            PATH="$PATH:/c/python$PYTHON_VERSION"
             choco install -f python --version "$PYTHON_VERSION_FULL"
-            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "
-                SET 'PATH=%PATH%;%ALLUSERSPROFILE%\C:\Python$PYTHON_VERSION'
-            "
 
         else
             echo 'terminating rancher installation...'
