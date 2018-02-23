@@ -68,7 +68,7 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
                 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
                 SET 'PATH=%PATH%;%ALLUSERSPROFILE%\programdata\chocolatey\bin'
             "
-            powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "choco install -f python --version $PYTHON_VERSION_FULL"
+            choco install -f python --version "$PYTHON_VERSION_FULL"
             powershell.exe -NoProfile -ExecutionPolicy Bypass -Command "
                 SET 'PATH=%PATH%;%ALLUSERSPROFILE%\C:\Python$PYTHON_VERSION'
             "
