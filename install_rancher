@@ -4,7 +4,7 @@ RANCHER_VERSION='v0.6.7'
 RANCHER_REPO='https://github.com/rancher/cli'
 CURRENT_DISTRO=$(uname -s)
 RANCHER_CONTAINER='rancher'
-RANCHER_PORT='8080'
+RANCHER_PORT='9595'
 INSTALL_PYTHON=false
 
 case "${CURRENT_DISTRO}" in
@@ -97,22 +97,22 @@ fi
 ## install rancher ecosystem
 if docker -v >/dev/null 2>&1; then
     if [ "$(docker ps -a | grep $RANCHER_CONTAINER)" ]; then
+        docker kill "$RANCHER_CONTAINER"
+        docker rm "$RANCHER_CONTAINER"
+
         ## legacy windows uses docker toolbox, which requires 'default' container
         if [ "$DISTRO_TYPE" != 'windows' ]; then
-            docker kill "$RANCHER_CONTAINER"
-            docker rm "$RANCHER_CONTAINER"
             SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
 
         else
             echo ''
             echo 'Windows docker implementation, requires DockerToolbox, which'
             echo "creates a 'default' container to manage docker. To proceed,"
-            echo "configurations will reflect the IP address for the 'default'"
-            echo "container, and the port reference will be '8080'."
+            echo "rancher configurations will reflect port '8080'."
             echo ''
-            RANCHER_CONTAINER='default'
+
             RANCHER_PORT='8080'
-            SERVER_IP=$(docker-machine ip "$RANCHER_CONTAINER")
+            SERVER_IP=$(docker-machine ip 'default')
         fi
     fi
 
