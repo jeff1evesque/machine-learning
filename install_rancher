@@ -59,8 +59,8 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
 
         while [[ "$INSTALL_PYTHON" != 'y' ]] && [[ "$INSTALL_PYTHON" != 'n' ]]
         do
-            echo "Windows (MINGW*) installation for rancher-cli, depends on"
-            echo "'choco', and 'python'."
+            echo "Windows (MINGW*) installation for rancher-cli,"
+            echo "depends on 'choco', and 'python'."
             echo ''
             echo '[Y]: install'
             echo '[N]: do not install'
