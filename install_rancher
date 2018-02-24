@@ -114,8 +114,6 @@ if docker -v >/dev/null 2>&1; then
     RANCHER_URL=http://"$SERVER_IP":8080/
     echo '{"accessKey":"${RANCHER_ACCESS_KEY}","secretKey":"${RANCHER_SECRET_KEY}","url":"${RANCHER_URL}","environment":"1a5"}' > ~/.rancher/cli.json
 
-
-    PATH="$PATH:/c/python$PYTHON_VERSION"
     rancher stack create -f docker-compose.development -r rancher-compose.development --start
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
