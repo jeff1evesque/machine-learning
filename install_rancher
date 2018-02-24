@@ -67,9 +67,15 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
         if [ "${INSTALL_PYTHON,,}" = 'y' ]; then
             powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "
                 iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
-                setx PATH ' $env:path;C:/programdata/chocolatey/bin;C:/programdata/rancher/bin'
             "
-            PATH="$PATH:/c/python$PYTHON_VERSION"
+
+            ## successive processes
+            setx PATH "$env:path;C:/programdata/chocolatey/bin;C:/programdata/rancher/bin;C:/python$PYTHON_VERSION"
+
+            ## current process
+            PATH="$PATH:/c/programdata/chocolatey/bin:/c/programdata/rancher/bin:/c/python$PYTHON_VERSION"
+
+            ## install python
             choco install -f python --version "$PYTHON_VERSION_FULL"
 
         else
