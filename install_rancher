@@ -107,7 +107,7 @@ if docker -v >/dev/null 2>&1; then
     mkdir -p ./docker_storage_mongodb
     mkdir -p ./docker_storage_mariadb
 
-    SERVER_IP=$(docker-machine ip default)
+    SERVER_IP=$(docker-machine ip "$RANCHER_CONTAINER")
 
     ## generate access + secret key:
     ##
