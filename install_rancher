@@ -87,6 +87,7 @@ fi
 if docker -v >/dev/null 2>&1; then
     docker run -d --restart=unless-stopped -p 8080:8080 rancher/server
 
+    mkdir -p ~/.rancher
     mkdir -p ./docker_storage_redis
     mkdir -p ./docker_storage_mongodb
     mkdir -p ./docker_storage_mariadb
