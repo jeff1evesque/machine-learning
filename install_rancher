@@ -98,7 +98,7 @@ fi
 if docker -v >/dev/null 2>&1; then
     if [ "$(docker ps -a | grep $RANCHER_CONTAINER)" ]; then
         ## legacy windows uses docker toolbox, which requires 'default' container
-        if [ "$DISTRO_TYPE" != 'windows' ] || [ "$RANCHER_CONTAINER" != 'default' ]; then
+        if [ "$DISTRO_TYPE" != 'windows' ]; then
             docker kill "$RANCHER_CONTAINER"
             docker rm "$RANCHER_CONTAINER"
 
