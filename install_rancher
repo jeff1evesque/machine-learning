@@ -53,7 +53,7 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
 
     ## install python
     command -v python >/dev/null 2>&1 || INSTALL_PYTHON=true
-    if [[ $CURRENT_DISTRO == MINGW* ]] && [ "$INSTALL_PYTHON" ]; then
+    if [[ $CURRENT_DISTRO == MINGW* ]] && [[ $INSTALL_PYTHON ]]; then
         PYTHON_VERSION_FULL='3.6.4'
         PYTHON_VERSION=$(echo ${PYTHON_VERSION_FULL%.*} | tr --delete .)
 
