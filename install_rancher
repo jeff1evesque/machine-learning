@@ -3,6 +3,7 @@
 RANCHER_VERSION='v0.6.7'
 RANCHER_REPO='https://github.com/rancher/cli'
 CURRENT_DISTRO=$(uname -s)
+RANCHER_CONTAINER='rancher'
 
 case "${CURRENT_DISTRO}" in
     Linux*)
@@ -91,7 +92,12 @@ fi
 
 ## install rancher ecosystem
 if docker -v >/dev/null 2>&1; then
-    docker run -d --restart=unless-stopped -p 8080:8080 rancher/server
+    if [ "$(docker ps -a | grep $RANCHER_CONTAINER)" ]; then
+        docker kill "$RANCHER_CONTAINER"
+        docker rm "$RANCHER_CONTAINER"
+    fi
+
+    docker run -d --name "$RANCHER_CONTAINER" --restart=unless-stopped -p 8080:9595 rancher/server
 
     mkdir -p ~/.rancher
     mkdir -p ./docker_storage_redis
