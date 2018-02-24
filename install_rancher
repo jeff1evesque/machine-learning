@@ -4,7 +4,7 @@ RANCHER_VERSION='v0.6.7'
 RANCHER_REPO='https://github.com/rancher/cli'
 CURRENT_DISTRO=$(uname -s)
 RANCHER_CONTAINER='rancher'
-RANCHER_PORT='9595'
+RANCHER_PORT='8080'
 INSTALL_PYTHON=false
 
 case "${CURRENT_DISTRO}" in
@@ -99,6 +99,7 @@ if docker -v >/dev/null 2>&1; then
     if [ "$(docker ps -a | grep $RANCHER_CONTAINER)" ]; then
         docker kill "$RANCHER_CONTAINER"
         docker rm "$RANCHER_CONTAINER"
+        rm -f ~/.rancher/cli.json
 
         ## legacy windows uses docker toolbox, which requires 'default' container
         if [ "$DISTRO_TYPE" != 'windows' ]; then
@@ -136,6 +137,7 @@ if docker -v >/dev/null 2>&1; then
     ##
     ##     https://github.com/rancher/rancher/issues/4961#issuecomment-222598633
     ##
+    RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT/"
     ACCESS=$(
         curl -v -X POST -H 'Accept: application/json' \
         -H 'Content-Type: application/json' \
@@ -149,18 +151,18 @@ if docker -v >/dev/null 2>&1; then
             "removed":null,
             "uuid":null
         }' \
-        http://"$SERVER_IP:$RANCHER_PORT"/v2-beta/apikeys
+        "$RANCHER_URL"/v2-beta/apikeys
     )
 
-    RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT/"
     RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
     RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
 
-    echo '{
-        "accessKey":"${RANCHER_ACCESS_KEY}",
-        "secretKey":"${RANCHER_SECRET_KEY}",
-        "url":"${RANCHER_URL}","environment":"1a5"
-    }' > ~/.rancher/cli.json
+    echo "{
+        \"accessKey\":\"$RANCHER_ACCESS_KEY\",
+        \"secretKey\":\"$RANCHER_SECRET_KEY\",
+        \"url\":\"$RANCHER_URL\",
+        \"environment\":\"1a5\"
+    }" > ~/.rancher/cli.json
 
     rancher stack create -f docker-compose.development -r rancher-compose.development --start
 else
