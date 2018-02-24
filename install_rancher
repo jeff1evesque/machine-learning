@@ -46,7 +46,7 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
     curl -OL "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.zip"
-    unzip -j "$RANCHER_DISTRO-$RANCHER_VERSION"
+    unzip -j "$RANCHER_DISTRO-$RANCHER_VERSION.zip"
     mkdir -p /c/programdata/rancher/bin
     mv -f rancher.exe /c/programdata/rancher/bin
     rm "$RANCHER_DISTRO-$RANCHER_VERSION.zip"
