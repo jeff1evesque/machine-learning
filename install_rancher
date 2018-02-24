@@ -101,6 +101,7 @@ if docker -v >/dev/null 2>&1; then
         if [ "$DISTRO_TYPE" != 'windows' ]; then
             docker kill "$RANCHER_CONTAINER"
             docker rm "$RANCHER_CONTAINER"
+            SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
 
         else
             echo ''
@@ -111,6 +112,7 @@ if docker -v >/dev/null 2>&1; then
             echo ''
             RANCHER_CONTAINER='default'
             RANCHER_PORT='8080'
+            SERVER_IP=$(docker-machine ip "$RANCHER_CONTAINER")
         fi
     fi
 
@@ -124,8 +126,6 @@ if docker -v >/dev/null 2>&1; then
     mkdir -p ./docker_storage_redis
     mkdir -p ./docker_storage_mongodb
     mkdir -p ./docker_storage_mariadb
-
-    SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
 
     ## generate access + secret key:
     ##
