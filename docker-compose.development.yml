@@ -1,8 +1,8 @@
 version: '3'
 services:
-  default:
-    container_name: 'default'
-    dockerfile: default.dockerfile
+  base:
+    container_name: 'base'
+    dockerfile: base.dockerfile
     network_mode: bridge
 
   redis:
