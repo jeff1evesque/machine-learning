@@ -137,7 +137,7 @@ if docker -v >/dev/null 2>&1; then
     ##
     ##     https://github.com/rancher/rancher/issues/4961#issuecomment-222598633
     ##
-    RANCHER_URL="$SERVER_IP:$RANCHER_PORT/"
+    export RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT/"
 
     ACCESS=$(
         curl -v -XPOST -H 'Accept: application/json' \
@@ -152,16 +152,16 @@ if docker -v >/dev/null 2>&1; then
             "removed":null,
             "uuid":null
         }' \
-        "http://$RANCHER_URL"/v2-beta/apikeys
+        "$RANCHER_URL"/v2-beta/apikeys
     )
 
-    RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
-    RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
+    export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
+    export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
 
     echo "{
         \"accessKey\":\"$RANCHER_ACCESS_KEY\",
         \"secretKey\":\"$RANCHER_SECRET_KEY\",
-        \"url\":\"http://$RANCHER_URL\",
+        \"url\":\"$RANCHER_URL\",
         \"environment\":\"1a1\"
     }" > ~/.rancher/cli.json
 
