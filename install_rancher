@@ -158,11 +158,16 @@ if docker -v >/dev/null 2>&1; then
     export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
     export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
 
+    ## @environment: must contain user account references:
+    ##
+    ##     - 1a1, administrator
+    ##     - 1a5, default environment
+    ##
     echo "{
         \"accessKey\":\"$RANCHER_ACCESS_KEY\",
         \"secretKey\":\"$RANCHER_SECRET_KEY\",
         \"url\":\"$RANCHER_URL\",
-        \"environment\":\"1a1\"
+        \"environment\":\"1a5\"
     }" > ~/.rancher/cli.json
 
     rancher stack create -f docker-compose.development.yml -r rancher-compose.development.yml --start
