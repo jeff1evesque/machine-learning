@@ -21,7 +21,11 @@ case "${CURRENT_DISTRO}" in
         DISTRO_TYPE='windows'
         RANCHER_DISTRO='rancher-windows-amd64';;
     *)
-        echo 'Error: distro is not known, contact repository owner.'
+        echo ''
+        echo 'Error: operating system not known, please open an issue:'
+        echo ''
+        echo 'https://github.com/jeff1evesque/machine-learning/issues/new'
+        echo ''
         exit 1
 esac
 
@@ -90,7 +94,11 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
     fi
 
 else
-    echo 'Error: distro is not known, contact repository owner.'
+    echo ''
+    echo 'Error: distro not known, please open an issue:'
+    echo ''
+    echo 'https://github.com/jeff1evesque/machine-learning/issues/new'
+    echo ''
     exit 1
 fi
 
@@ -99,22 +107,22 @@ if docker -v >/dev/null 2>&1; then
     if [ "$(docker ps -a | grep $RANCHER_CONTAINER)" ]; then
         docker kill "$RANCHER_CONTAINER"
         docker rm "$RANCHER_CONTAINER"
+    fi
 
-        ## legacy windows uses docker toolbox, which requires 'default' container
-        if [ "$DISTRO_TYPE" != 'windows' ]; then
-            SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
+    ## legacy windows uses docker toolbox, which requires 'default' container
+    if [ "$DISTRO_TYPE" != 'windows' ]; then
+        SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
 
-        else
-            echo ''
-            echo 'Windows docker implementation, requires DockerToolbox, which'
-            echo "creates a 'default' container to manage docker. To proceed,"
-            echo "rancher configurations will reflect port '8080'."
-            echo ''
+    else
+        echo ''
+        echo 'Windows docker implementation, requires DockerToolbox, which'
+        echo "creates a 'default' container to manage docker. To proceed,"
+        echo "rancher configurations will reflect port '8080'."
+        echo ''
 
-            RANCHER_CONTAINER='default'
-            RANCHER_PORT='8080'
-            SERVER_IP=$(docker-machine ip 'default')
-        fi
+        RANCHER_CONTAINER='default'
+        RANCHER_PORT='8080'
+        SERVER_IP=$(docker-machine ip 'default')
     fi
 
     docker run -d \
