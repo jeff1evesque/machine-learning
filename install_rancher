@@ -2,12 +2,12 @@
 
 RANCHER_VERSION='v0.6.7'
 RANCHER_REPO='https://github.com/rancher/cli'
-CURRENT_DISTRO=$(uname -s)
+OPERATING_SYSTEM=$(uname -s)
 RANCHER_CONTAINER='rancher'
 RANCHER_PORT='8080'
 INSTALL_PYTHON=false
 
-case "${CURRENT_DISTRO}" in
+case "${OPERATING_SYSTEM}" in
     Linux*)
         DISTRO_TYPE='linux'
         RANCHER_DISTRO='rancher-linux-amd64';;
@@ -57,7 +57,7 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
 
     ## install python
     command -v python >/dev/null 2>&1 || INSTALL_PYTHON=true
-    if [[ $CURRENT_DISTRO == MINGW* ]] && [[ $INSTALL_PYTHON == true ]]; then
+    if [[ $OPERATING_SYSTEM == MINGW* ]] && [[ $INSTALL_PYTHON == true ]]; then
         PYTHON_VERSION_FULL='3.6.4'
         PYTHON_VERSION=$(echo ${PYTHON_VERSION_FULL%.*} | tr --delete .)
 
