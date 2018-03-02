@@ -156,21 +156,54 @@ if docker -v >/dev/null 2>&1; then
     ##
     export RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT/"
 
-    ACCESS=$(
-        curl -v -XPOST -H 'Accept: application/json' \
-        -H 'Content-Type: application/json' \
-        -d '{
-            "type":"apikey",
-            "accountId":"1a1",
-            "name":"admin",
-            "description":null,
-            "created":null,
-            "kind":null,
-            "removed":null,
-            "uuid":null
-        }' \
-        "$RANCHER_URL"/v2-beta/apikeys
-    )
+    SLEEPER=0
+    while true
+    do
+        ACCESS=$(
+            curl -v -XPOST -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -d '{
+                "type":"apikey",
+                "accountId":"1a1",
+                "name":"admin",
+                "description":null,
+                "created":null,
+                "kind":null,
+                "removed":null,
+                "uuid":null
+            }' \
+            "$RANCHER_URL"/v2-beta/apikeys
+        )
+
+        if [ "$?" = 0 ]; then
+            break
+
+        elif [ "$SLEEPER" = 300 ]; then
+            echo ''
+            echo 'Attempted to request access + secret key,'
+            echo 'from rancher for over 5 minutes.'
+            echo ''
+            echo '[Y]: yes, keep trying'
+            echo '[N]: no, exit installation'
+            echo ''
+            read -p 'Choice: ' API_KEYS
+
+            if [ "${API_KEYS,,}" = 'n' ]; then
+                exit 1
+            else
+                SLEEPER=$(($SLEEPER+30))
+                echo 'sleeping 30s'
+                sleep 30
+            fi
+        else
+            echo ''
+            echo 'Rancher server has not started. Attempting to obtain'
+            echo 'access + secret key, from rancher in 30s'.
+            echo ''
+            SLEEPER=$(($SLEEPER+30))
+            sleep 30
+        fi
+    done
 
     export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
     export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
