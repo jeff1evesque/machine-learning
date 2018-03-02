@@ -195,6 +195,7 @@ if docker -v >/dev/null 2>&1; then
                 echo 'sleeping 30s'
                 sleep 30
             fi
+
         else
             echo ''
             echo 'Rancher server has not started. Attempting to obtain'
