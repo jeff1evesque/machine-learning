@@ -1,35 +1,35 @@
-version: '3'
+version: '2'
 services:
   base:
-    container_name: 'base'
+    container_name: base
     dockerfile: base.dockerfile
     network_mode: bridge
 
   redis:
-    container_name: 'redis'
+    container_name: redis
     dockerfile: redis.dockerfile
     network_mode: bridge
     volumes:
       - ./docker_storage_redis: /var/lib/redis
 
   mongodb:
-    container_name: 'mongodb'
+    container_name: mongodb
     dockerfile: mongodb.dockerfile
     network_mode: bridge
     volumes:
       - ./docker_storage_mongodb: /var/lib/mongodb
 
   mariadb:
-    container_name: 'mariadb'
+    container_name: mariadb
     dockerfile: mariadb.dockerfile
     network_mode: bridge
     volumes:
       - ./docker_storage_mariadb: /var/lib/mariadb
 
   webserver:
-    container_name: 'webserver'
+    container_name: webserver
     dockerfile: webserver.dockerfile
     network_mode: bridge
     ports:
-      - '5000:8080'
-      - '6000:9090'
+      - 5000:8080
+      - 6000:9090
