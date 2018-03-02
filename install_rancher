@@ -138,7 +138,7 @@ if docker -v >/dev/null 2>&1; then
         --name "$RANCHER_CONTAINER" \
         --restart=unless-stopped \
         -p "$RANCHER_PORT":8080 \
-        rancher/server
+        rancher/server:stable
 
     mkdir -p ~/.rancher
     mkdir -p ./docker_storage_redis
