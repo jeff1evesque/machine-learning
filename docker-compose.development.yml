@@ -1,7 +1,7 @@
 version: '2'
 services:
   base:
-    image: jeff1evesque/ml-default
+    image: jeff1evesque/ml-base
     container_name: base
     network_mode: bridge
 
