@@ -1,6 +1,6 @@
 version: '2'
 services:
-  default:
+  base:
     scale: 1
 
   redis:
