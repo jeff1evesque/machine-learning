@@ -221,7 +221,7 @@ if docker -v >/dev/null 2>&1; then
         \"environment\":\"1a5\"
     }" > ~/.rancher/cli.json
 
-    rancher stack create -f docker-compose.development.yml -r rancher-compose.development.yml --start
+    rancher stacks create MLStack -f docker-compose.development.yml -r rancher-compose.development.yml --start
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
     exit 1
