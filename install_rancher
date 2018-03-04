@@ -38,7 +38,7 @@ if [ "$DISTRO_TYPE" = 'unix' ]; then
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'linux' ]; then
-    if [ ! which curl ]; then
+    if ! type curl &>/dev/null; then
         sudo apt-get -y install curl || sudo yum -y install curl || (echo 'curl cannot install' && exit 1)
     fi
 
