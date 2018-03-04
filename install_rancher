@@ -173,12 +173,9 @@ if docker -v >/dev/null 2>&1; then
                 "uuid":null
             }' \
             "$RANCHER_URL"/v2-beta/apikeys
-        )
+        ) && break
 
-        if [ "$?" = 0 ]; then
-            break
-
-        elif [ "$SLEEPER" = 300 ]; then
+        if [ "$SLEEPER" = 300 ]; then
             echo ''
             echo 'Attempted to request access + secret key,'
             echo 'from rancher for over 5 minutes.'
