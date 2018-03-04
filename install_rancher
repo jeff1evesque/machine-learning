@@ -107,12 +107,12 @@ if docker -v >/dev/null 2>&1; then
     ## docker toolbox provides 'default' container
     if [ "$DISTRO_TYPE" = 'windows' ] && \
        [ "$RANCHER_CONTAINER" != 'default' ] && \
-       [ "$(docker ps -a | grep $RANCHER_CONTAINER)" ];
+       docker ps -a | grep $RANCHER_CONTAINER;
     then
         docker kill "$RANCHER_CONTAINER"
         docker rm "$RANCHER_CONTAINER"
     elif [ "$DISTRO_TYPE" != 'windows' ] && \
-         [ "$(docker ps -a | grep $RANCHER_CONTAINER)" ];
+         docker ps -a | grep $RANCHER_CONTAINER;
     then
         docker kill "$RANCHER_CONTAINER"
         docker rm "$RANCHER_CONTAINER"
