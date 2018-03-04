@@ -42,10 +42,12 @@ Fork this project, and remember to [generate](https://github.com/jeff1evesque/ma
 In order to proceed with the installation for this project, docker must be installed:
 
 ### Legacy: Windows
+
 - [docker toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/): allows Docker use on systems
 that do not meet [Docker for Windows](https://docs.docker.com/docker-for-windows/) minimal system requirements.
 
 ### Community Edition
+
 - [windows](https://docs.docker.com/docker-for-windows/install/#download-docker-for-windows)
 - [ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 - [centos](https://docs.docker.com/install/linux/docker-ce/centos/)
