@@ -70,7 +70,7 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
             echo '[Y]: install'
             echo '[N]: do not install'
             echo ''
-            read -p 'Proceed with installation: ' INSTALL_PYTHON
+            read -rp 'Proceed with installation: ' INSTALL_PYTHON
         done
 
         if [ "${INSTALL_PYTHON,,}" = 'y' ]; then
@@ -186,12 +186,12 @@ if docker -v >/dev/null 2>&1; then
             echo '[Y]: yes, keep trying'
             echo '[N]: no, exit installation'
             echo ''
-            read -p 'Choice: ' API_KEYS
+            read -rp 'Choice: ' API_KEYS
 
             if [ "${API_KEYS,,}" = 'n' ]; then
                 exit 1
             else
-                SLEEPER=$(($SLEEPER+30))
+                SLEEPER=$((SLEEPER+30))
                 echo 'sleeping 30s'
                 sleep 30
             fi
@@ -201,7 +201,7 @@ if docker -v >/dev/null 2>&1; then
             echo 'Rancher server has not started. Attempting to obtain'
             echo 'access + secret key, from rancher in 30s'.
             echo ''
-            SLEEPER=$(($SLEEPER+30))
+            SLEEPER=$((SLEEPER+30))
             sleep 30
         fi
     done
