@@ -203,8 +203,10 @@ if docker -v >/dev/null 2>&1; then
         fi
     done
 
-    export RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
-    export RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
+    RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
+    RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
+    export RANCHER_ACCESS_KEY
+    export RANCHER_SECRET_KEY
 
     ## @environment: must contain user account id:
     ##
