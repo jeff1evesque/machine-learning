@@ -82,7 +82,7 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
             PATH="$PATH:/c/programdata/chocolatey/bin:/c/programdata/rancher/bin:/c/python$PYTHON_VERSION"
 
             ## successive processes
-            setx PATH "$env:path;C:/programdata/chocolatey/bin;C:/programdata/rancher/bin;C:/python$PYTHON_VERSION"
+            setx PATH "%PATH%;C:\programdata\chocolatey\bin;C:\programdata\rancher\bin;C:\python$PYTHON_VERSION"
 
             ## install python
             choco install -f python --version "$PYTHON_VERSION_FULL"
