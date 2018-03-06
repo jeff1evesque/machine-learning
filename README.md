@@ -49,7 +49,7 @@ cd /path/to/machine-learning
 ./install-rancher
 ```
 
-**Note:** the installation, and the configuration of the rancher ecosystem, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/installation/rancher)
+**Note:** the installation, and the configuration of rancher, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/installation/rancher)
 if more explicit instructions are needed.
 
 ## Execution
