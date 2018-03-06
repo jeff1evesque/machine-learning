@@ -78,5 +78,5 @@ The following |docker-compose.development.yml|_ lines indicate corresponding por
 .. |installation| replace:: installation
 .. _installation: docker
 
-.. docker-compose.development.yml| replace:: ``docker-compose.development.yml``
+.. |docker-compose.development.yml| replace:: ``docker-compose.development.yml``
 .. _docker-compose.development.yml: https://github.com/jeff1evesque/machine-learning/blob/master/docker-compose.development.yml
