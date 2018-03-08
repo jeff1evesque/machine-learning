@@ -222,8 +222,6 @@ if docker -v >/dev/null 2>&1; then
 
             STATE=$(echo "$TOKEN" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["state"])')
 
-            if [ "$SLEEPER" = 4 ]; then exit; fi
-
             if [ "${STATE,,}" = 'active' ]; then
                 TOKEN=$(echo "$REGISTER" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"][0]["token"])')
                 break
