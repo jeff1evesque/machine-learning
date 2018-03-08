@@ -281,7 +281,7 @@ if docker -v >/dev/null 2>&1; then
 
     else
         echo 'rancher registration token not generated'
-        exit
+        exit 1
     fi
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
