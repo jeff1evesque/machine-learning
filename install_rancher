@@ -203,6 +203,56 @@ if docker -v >/dev/null 2>&1; then
         fi
     done
 
+    if [ "$ACCESS" ]; then
+        SLEEPER=0
+        STATE='registering'
+        while true
+        do
+            TOKEN=$(
+                curl -v -XPOST -H 'Accept: application/json' \
+                -H 'Content-Type: application/json' \
+                "$RANCHER_URL"/v2-beta/projects/1a5/registrationTokens
+            )
+
+            STATE=$(echo "$TOKEN" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["state"])')
+            echo "STATE: $STATE"
+
+            if [ ${STATE,,} = 'active' ]; then
+                break
+
+            elif [ "$SLEEPER" = 60 ]; then
+                echo ''
+                echo 'Waited over 60s for active state.'
+                echo ''
+                echo '[Y]: yes, keep waiting'
+                echo '[N]: no, exit installation'
+                echo ''
+                read -rp 'Choice: ' TOKEN_STATUS
+
+                if [ "${TOKEN_STATUS,,}" = 'n' ]; then
+                    exit 1
+                else
+                    SLEEPER=$((SLEEPER+2))
+                    sleep 2
+                fi
+
+            else
+                SLEEPER=$((SLEEPER+2))
+                sleep 2
+            fi
+
+            ## register host with rancher
+            docker run \
+                --rm \
+                --privileged \
+                -v /var/run/docker.sock:/var/run/docker.sock \
+                -v /var/lib/rancher:/var/lib/rancher \
+                rancher/agent:v1.2.9 \
+                "$RANCHER_URL"/v1/scripts/FB73A79302787722BB05:1514678400000:k2Q7OwTYjnlI5ViPOrNuRw88VFg
+
+        done
+    fi
+
     RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
     RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
     export RANCHER_ACCESS_KEY
