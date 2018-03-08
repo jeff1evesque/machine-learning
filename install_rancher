@@ -206,18 +206,26 @@ if docker -v >/dev/null 2>&1; then
     if [ "$ACCESS" ]; then
         SLEEPER=0
         STATE='registering'
+
+        ## post method creates new resource
+        curl -v -XPOST -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            "$RANCHER_URL"/v2-beta/projects/1a5/registrationTokens
+
         while true
         do
-            TOKEN=$(
-                curl -v -XPOST -H 'Accept: application/json' \
+            REGISTER=$(
+                curl -v -H 'Accept: application/json' \
                 -H 'Content-Type: application/json' \
                 "$RANCHER_URL"/v2-beta/projects/1a5/registrationTokens
             )
 
             STATE=$(echo "$TOKEN" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["state"])')
-            echo "STATE: $STATE"
 
-            if [ ${STATE,,} = 'active' ]; then
+            if [ "$SLEEPER" = 4 ]; then exit; fi
+
+            if [ "${STATE,,}" = 'active' ]; then
+                TOKEN=$(echo "$REGISTER" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"][0]["token"])')
                 break
 
             elif [ "$SLEEPER" = 60 ]; then
@@ -240,16 +248,6 @@ if docker -v >/dev/null 2>&1; then
                 SLEEPER=$((SLEEPER+2))
                 sleep 2
             fi
-
-            ## register host with rancher
-            docker run \
-                --rm \
-                --privileged \
-                -v /var/run/docker.sock:/var/run/docker.sock \
-                -v /var/lib/rancher:/var/lib/rancher \
-                rancher/agent:v1.2.9 \
-                "$RANCHER_URL"/v1/scripts/FB73A79302787722BB05:1514678400000:k2Q7OwTYjnlI5ViPOrNuRw88VFg
-
         done
     fi
 
@@ -270,6 +268,16 @@ if docker -v >/dev/null 2>&1; then
         \"environment\":\"1a5\"
     }" > ~/.rancher/cli.json
 
+    ## register host with rancher
+    docker run \
+        --rm \
+        --privileged \
+        -v /var/run/docker.sock:/var/run/docker.sock \
+        -v /var/lib/rancher:/var/lib/rancher \
+        rancher/agent:v1.2.9 \
+        "$TOKEN"
+
+    ## create rancher stack
     rancher stacks create MLStack -f docker-compose.development.yml -r rancher-compose.development.yml --start
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
