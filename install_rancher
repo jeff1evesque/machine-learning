@@ -266,7 +266,7 @@ if docker -v >/dev/null 2>&1; then
         \"environment\":\"1a5\"
     }" > ~/.rancher/cli.json
 
-    if [ "$TOKEN" ]; fi
+    if [ "$TOKEN" ]; then
         ## register host with rancher
         docker run \
             --rm \
