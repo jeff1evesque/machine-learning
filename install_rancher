@@ -220,7 +220,7 @@ if docker -v >/dev/null 2>&1; then
                 "$RANCHER_URL"/v2-beta/projects/1a5/registrationTokens
             )
 
-            STATE=$(echo "$TOKEN" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["state"])')
+            STATE=$(echo "$REGISTER" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"][0]["state"])')
 
             if [ "${STATE,,}" = 'active' ]; then
                 TOKEN=$(echo "$REGISTER" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"][0]["token"])')
