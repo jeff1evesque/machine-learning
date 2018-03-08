@@ -268,17 +268,23 @@ if docker -v >/dev/null 2>&1; then
         \"environment\":\"1a5\"
     }" > ~/.rancher/cli.json
 
-    ## register host with rancher
-    docker run \
-        --rm \
-        --privileged \
-        -v /var/run/docker.sock:/var/run/docker.sock \
-        -v /var/lib/rancher:/var/lib/rancher \
-        rancher/agent:v1.2.9 \
-        "$TOKEN"
+    if [ "$TOKEN" ]; fi
+        ## register host with rancher
+        docker run \
+            --rm \
+            --privileged \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v /var/lib/rancher:/var/lib/rancher \
+            rancher/agent:v1.2.9 \
+            "$TOKEN"
 
-    ## create rancher stack
-    rancher stacks create MLStack -f docker-compose.development.yml -r rancher-compose.development.yml --start
+        ## create rancher stack
+        rancher stacks create MLStack -f docker-compose.development.yml -r rancher-compose.development.yml --start
+
+    else
+        echo 'rancher registration token not generated'
+        exit
+    fi
 else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
     exit 1
