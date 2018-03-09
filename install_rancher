@@ -259,6 +259,10 @@ if docker -v >/dev/null 2>&1; then
     ##     - 1a1, administrator
     ##     - 1a5, default environment
     ##
+    ## Note: rancher host registration can "also" be validated against:
+    ##
+    ##     - $RANCHER_URL/env/1a5/infra/hosts/add?driver=custom
+    ##
     echo "{
         \"accessKey\":\"$RANCHER_ACCESS_KEY\",
         \"secretKey\":\"$RANCHER_SECRET_KEY\",
@@ -274,7 +278,7 @@ if docker -v >/dev/null 2>&1; then
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v /var/lib/rancher:/var/lib/rancher \
             rancher/agent:v1.2.9 \
-            "$TOKEN"
+            "$RANCHER_URL/v1/scripts/$TOKEN"
 
         ## create rancher stack
         rancher stacks create MLStack -f docker-compose.development.yml -r rancher-compose.development.yml --start
