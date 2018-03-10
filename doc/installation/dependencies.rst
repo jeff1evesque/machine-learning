@@ -7,6 +7,9 @@ To begin, docker can be installed on the host machine using the following approa
 
 **Legacy: Windows**
 
+The [virtualbox](https://www.virtualbox.org/) hypervisor needs to be installed, to facilitate
+the installation, and configuration of docker:
+
 - [docker toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/): allows Docker use on systems
 that do not meet [Docker for Windows](https://docs.docker.com/docker-for-windows/) minimal system requirements.
 
