@@ -154,7 +154,7 @@ if docker -v >/dev/null 2>&1; then
     ##
     ##     https://github.com/rancher/rancher/issues/4961#issuecomment-222598633
     ##
-    export RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT/"
+    export RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT"
 
     SLEEPER=0
     while true
