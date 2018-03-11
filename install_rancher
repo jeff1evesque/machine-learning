@@ -280,8 +280,6 @@ if docker -v >/dev/null 2>&1; then
     if [ "$TOKEN" ]; then
         ## rancher agent: legacy docker toolbox requires older 'boot2docker'.
         ##
-        ## Note: background information:
-        ##
         ##     - https://github.com/rancher/rancher/issues/10970#issuecomment-372061736
         ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372060078
         ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372061391
