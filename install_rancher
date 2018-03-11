@@ -2,6 +2,7 @@
 
 RANCHER_VERSION='v0.6.7'
 RANCHER_REPO='https://github.com/rancher/cli'
+BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
 OPERATING_SYSTEM=$(uname -s)
 RANCHER_CONTAINER='rancher'
 RANCHER_PORT='8080'
@@ -288,7 +289,7 @@ if docker -v >/dev/null 2>&1; then
             docker-machine \
                 create \
                 -d virtualbox \
-                --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v17.09.1-ce/boot2docker.iso \
+                --virtualbox-boot2docker-url="BOOT2DOCKER_REPO"/releases/download/v17.09.1-ce/boot2docker.iso \
                 rancher
 
             docker-machine.exe env rancher
