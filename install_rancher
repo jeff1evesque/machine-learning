@@ -2,6 +2,7 @@
 
 RANCHER_VERSION='v0.6.7'
 RANCHER_REPO='https://github.com/rancher/cli'
+RANCHER_STACK='MLStack'
 BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
 OPERATING_SYSTEM=$(uname -s)
 RANCHER_CONTAINER='rancher'
@@ -306,7 +307,11 @@ if docker -v >/dev/null 2>&1; then
             "$RANCHER_URL/v1/scripts/$TOKEN"
 
         ## create rancher stack
-        rancher stacks create MLStack -f docker-compose.development.yml -r rancher-compose.development.yml --start
+        rancher stacks \
+            create "$RANCHER_STACK" \
+            -f docker-compose.development.yml \
+            -r rancher-compose.development.yml \
+            --start
 
     else
         echo 'rancher registration token not generated'
