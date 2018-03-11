@@ -49,6 +49,13 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
+    WINDOWS_VERSION=$(
+        powershell.exe \
+            -NoProfile -InputFormat None -ExecutionPolicy Bypass \
+            -Command "((
+                Get-ItemProperty -path 'HKLM:\software\microsoft\Windows NT\CurrentVersion'
+            ).ProductName).split(' ')[1]"
+    )
     curl -OL "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.zip"
     unzip -j "$RANCHER_DISTRO-$RANCHER_VERSION.zip"
     mkdir -p /c/programdata/rancher/bin
@@ -271,6 +278,25 @@ if docker -v >/dev/null 2>&1; then
     }" > ~/.rancher/cli.json
 
     if [ "$TOKEN" ]; then
+        ## rancher agent: legacy docker toolbox requires older 'boot2docker'.
+        ##
+        ## Note: background information:
+        ##
+        ##     - https://github.com/rancher/rancher/issues/10970#issuecomment-372061736
+        ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372060078
+        ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372061391
+        ##
+        if [ "$DISTRO_TYPE" = 'windows' ] && [ "WINDOWS_VERSION" -lt 10 ]; then
+            docker-machine \
+                create \
+                -d virtualbox \
+                --virtualbox-boot2docker-url=https://github.com/boot2docker/boot2docker/releases/download/v17.09.1-ce/boot2docker.iso \
+                rancher
+
+            docker-machine.exe env rancher
+            eval $("C:\Program Files\Docker Toolbox\docker-machine.exe" env rancher)
+        fi
+
         ## register host with rancher
         docker run \
             --rm \
