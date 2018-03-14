@@ -1,35 +1,26 @@
 version: '2'
 services:
-  base:
-    image: jeff1evesque/ml-base:0.7
-    container_name: base
-    network_mode: bridge
-
-  redis:
-    image: jeff1evesque/ml-redis:0.7
-    container_name: redis
-    network_mode: bridge
-    volumes:
-      - ./docker_storage_redis:/var/lib/redis
-
-  mongodb:
-    image: jeff1evesque/ml-mongodb:0.7
-    container_name: mongodb
-    network_mode: bridge
-    volumes:
-      - ./docker_storage_mongodb:/var/lib/mongodb
-
   mariadb:
     image: jeff1evesque/ml-mariadb:0.7
-    container_name: mariadb
     network_mode: bridge
     volumes:
-      - ./docker_storage_mariadb:/var/lib/mariadb
-
+    - docker_storage_mariadb:/var/lib/mariadb
   webserver:
     image: jeff1evesque/ml-webserver:0.7
-    container_name: webserver
     network_mode: bridge
     ports:
-      - 5000:8080
-      - 6000:9090
+    - 5000:8080/tcp
+    - 6000:9090/tcp
+  mongodb:
+    image: jeff1evesque/ml-mongodb:0.7
+    network_mode: bridge
+    volumes:
+    - docker_storage_mongodb:/var/lib/mongodb
+  redis:
+    image: jeff1evesque/ml-redis:0.7
+    network_mode: bridge
+    volumes:
+    - docker_storage_redis:/var/lib/redis
+  base:
+    image: jeff1evesque/ml-base:0.7
+    network_mode: bridge
