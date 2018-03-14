@@ -4,7 +4,7 @@ services:
     image: jeff1evesque/ml-mariadb:0.7
     network_mode: bridge
     volumes:
-    - docker_storage_mariadb:/var/lib/mariadb
+    - "${CWD}/docker_storage_mariadb:/var/lib/mariadb"
   webserver:
     image: jeff1evesque/ml-webserver:0.7
     network_mode: bridge
@@ -15,12 +15,12 @@ services:
     image: jeff1evesque/ml-mongodb:0.7
     network_mode: bridge
     volumes:
-    - docker_storage_mongodb:/var/lib/mongodb
+    - "${CWD}/docker_storage_mongodb:/var/lib/mongodb"
   redis:
     image: jeff1evesque/ml-redis:0.7
     network_mode: bridge
     volumes:
-    - docker_storage_redis:/var/lib/redis
+    - "${CWD}/docker_storage_redis:/var/lib/redis"
   base:
     image: jeff1evesque/ml-base:0.7
     network_mode: bridge
