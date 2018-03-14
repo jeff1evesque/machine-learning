@@ -1,12 +1,7 @@
 #!/bin/bash
 
 ## system configurations
-##
-## @CWD, environment variable, needed to build absolute path for docker-compose:
-##
-##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-373184049
-##
-export CWD=$(pwd)
+CWD=$(pwd)
 RANCHER_VERSION='v0.6.7'
 RANCHER_REPO='https://github.com/rancher/cli'
 BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
@@ -21,6 +16,14 @@ PYTHON_VERSION_FULL='3.6.4'
 RANCHER_STACK='MLStack'
 DOCKER_COMPOSE='docker-compose.development.yml'
 RANCHER_COMPOSE='rancher-compose.development.yml'
+
+## environment variables used by docker
+##
+## @CWD, environment variable, needed to build absolute path for docker-compose:
+##
+##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-373184049
+##
+export CWD
 
 case "${OPERATING_SYSTEM}" in
     Linux*)
@@ -169,7 +172,7 @@ if docker -v >/dev/null 2>&1; then
     ## generate access + secret key:
     ##
     ## Note: exporting environment eliminates the need to explicitly provide
-    ##       environment variable explicitly to 'rancher' command.
+    ##       environment variable to the 'rancher' command.
     ##
     ## Note: 'curl' response for ACCESS is json:
     ##
@@ -272,8 +275,6 @@ if docker -v >/dev/null 2>&1; then
 
     RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
     RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
-    export RANCHER_ACCESS_KEY
-    export RANCHER_SECRET_KEY
 
     ## @environment: must contain user account id:
     ##
