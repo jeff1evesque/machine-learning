@@ -23,7 +23,7 @@ RANCHER_COMPOSE='rancher-compose.development.yml'
 ##
 ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-373184049
 ##
-export CWD
+export "$CWD"
 
 case "${OPERATING_SYSTEM}" in
     Linux*)
