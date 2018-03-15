@@ -26,6 +26,7 @@
 # Ignore and don't commit the following directories
 *.sass-cache/
 *__pycache__/
+*.pytest_cache/
 *.cache/
 /interface/static/js/
 /interface/static/css/
