@@ -1,16 +1,17 @@
 version: '2'
 services:
+  mariadb:
+    scale: 1
+    start_on_create: true
+  webserver:
+    scale: 1
+    start_on_create: true
+  mongodb:
+    scale: 1
+    start_on_create: true
+  redis:
+    scale: 1
+    start_on_create: true
   base:
     scale: 1
-
-  redis:
-    scale: 2
-
-  mongodb:
-    scale: 3
-
-  mariadb:
-    scale: 4
-
-  webserver:
-    scale: 5
+    start_on_create: true
