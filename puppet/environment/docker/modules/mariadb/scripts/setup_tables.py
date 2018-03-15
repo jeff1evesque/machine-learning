@@ -81,7 +81,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS Permission (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         foreign key (PermissionEntityID) references PermissionEntity(PermissionEntityID),
-                        foreign key (PermissionValueID) references PermissionValue(PermissionValueID),
+                        foreign key (PermissionValueID) references PermissionValue(PermissionEntityID),
                     );
                     '''
     cur.execute(sql_statement)
