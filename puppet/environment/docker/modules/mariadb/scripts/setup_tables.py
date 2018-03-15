@@ -76,101 +76,53 @@ with conn:
     # create cursor object
     cur = conn.cursor()
 
-    # create 'tbl_user'
+    # general permission
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_user (
-                        id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        username VARCHAR (50) NOT NULL,
-                        email VARCHAR (255) NOT NULL,
-                        password VARCHAR (1069) NOT NULL,
-                        datetime_joined DATETIME NOT NULL,
-                        INDEX (username)
+                    CREATE TABLE IF NOT EXISTS Permission (
+                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        foreign key (PermissionEntityID) references PermissionEntity(PermissionEntityID),
+                        foreign key (PermissionValueID) references PermissionValue(PermissionValueID),
                     );
                     '''
     cur.execute(sql_statement)
 
-    # create 'tbl_dataset_entity'
+    # superclass for PermissionEntityXXX subclasses
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
-                        id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        title VARCHAR (50) NOT NULL,
-                        collection VARCHAR (50) NOT NULL UNIQUE,
-                        model_type INT NOT NULL,
-                        uid_created INT NOT NULL,
-                        datetime_created DATETIME NOT NULL,
-                        uid_modified INT NULL,
-                        datetime_modified DATETIME NULL,
-                        INDEX (id_entity)
+                    CREATE TABLE IF NOT EXISTS PermissionEntity (
+                        PermissionEntityID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     );
                     '''
     cur.execute(sql_statement)
 
-    # create 'tbl_model_type'
+    # PermissionEntity subclass
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_model_type (
-                        id_model INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        model VARCHAR (50) NOT NULL,
-                        INDEX (id_model)
+                    CREATE TABLE IF NOT EXISTS PermissionEntityCollection (
+                        PermissionEntityID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     );
                     '''
     cur.execute(sql_statement)
 
-    # populate 'tbl_model_type'
+    # PermissionEntity subclass
     sql_statement = '''\
-                    INSERT INTO tbl_model_type (model) VALUES (%s);
-                    '''
-    cur.executemany(sql_statement, models)
-
-    # create 'tbl_prediction_results'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_prediction_results (
-                        id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        model_type INT NOT NULL,
-                        title VARCHAR (50) NOT NULL,
-                        result VARCHAR (30) NOT NULL,
-                        uid_created INT NOT NULL,
-                        datetime_created DATETIME NOT NULL,
-                        INDEX (title)
+                    CREATE TABLE IF NOT EXISTS PermissionEntityModel (
+                        PermissionEntityID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     );
                     '''
     cur.execute(sql_statement)
 
-    # create 'tbl_svm_results_class'
+    # PermissionEntity subclass
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_svm_results_class (
-                        id_class INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_result INT NOT NULL,
-                        class VARCHAR (50) NOT NULL
+                    CREATE TABLE IF NOT EXISTS PermissionEntityResult (
+                        PermissionEntityId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                     );
                     '''
     cur.execute(sql_statement)
 
-    # create 'tbl_svm_results_probability'
+    # numeric codified permission value
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_svm_results_probability (
-                        id_probability INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_result INT NOT NULL,
-                        probability DECIMAL (65,12) NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    # create 'tbl_svm_results_decision_function'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_svm_results_decision_function (
-                        id_decision_function INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_result INT NOT NULL,
-                        decision_function DECIMAL (65,12) NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    # create 'tbl_svr_results_r2'
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS tbl_svr_results_r2 (
-                        id_r2 INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        id_result INT NOT NULL,
-                        r2 DECIMAL (65,12) NOT NULL
+                    CREATE TABLE IF NOT EXISTS PermissionValue (
+                        PermissionValueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        PermissionValueCode INT NOT NULL,
                     );
                     '''
     cur.execute(sql_statement)
