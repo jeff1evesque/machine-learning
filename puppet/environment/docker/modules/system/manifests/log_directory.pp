@@ -7,6 +7,7 @@ class system::log_directory {
     $root_dir      = $hiera_general['root']
 
     $directories = [
+        "${root_dir}/log",
         "${root_dir}/log/database",
         "${root_dir}/log/webcompiler",
         "${root_dir}/log/webserver",
