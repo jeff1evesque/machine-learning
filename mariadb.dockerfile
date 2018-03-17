@@ -6,7 +6,7 @@ ENV ENVIRONMENT docker
 ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 
 ## provision with puppet
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/mariadb/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT/hiera/test
+RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/mariadb/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
 
 ## executed everytime container starts
 CMD ["/bin/sh", "-c", "mysqld"]
