@@ -4,9 +4,13 @@
 ##  - mongodb
 ##  - mariadb
 ##
+## @host, @hostname, defined from executed 'docker' command.
+##
 database:
     mariadb:
-        host: 'localhost'
+        bind_address: '0.0.0.0'
+        host: 'mariadb'
+        allow_host: '%'
         name: 'db_machine_learning'
         provisioner: 'provisioner'
         provisioner_password: 'password'
@@ -18,7 +22,7 @@ database:
         log_path: '/log/database'
 
     mongodb:
-        hostname: 'localhost'
+        hostname: 'mongodb'
         name: 'dataset'
         username: 'authenticated'
         password: 'password'
@@ -30,17 +34,13 @@ database:
                 enabled: true
 
         systemLog:
-            verbosity: 1
             destination: file
             logAppend: true
             systemLogPath: '/var/log/mongodb/mongod.log'
 
         net:
             port: 27017
-            bindIp: 127.0.0.1
+            bindIp: 0.0.0.0
 
         processManagement:
             pidfilepath: '/var/run/mongod.pid'
-
-        security:
-            authorization: 'enabled'
