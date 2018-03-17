@@ -7,7 +7,6 @@ class mariadb::database {
     ## variables
     $hiera_general   = lookup('general')
     $root_dir        = $hiera_general['root']
-    $vagrant_mounted = $hiera_general['vagrant_implement']
     $environment     = $hiera_general['environment']
     $module          = 'mariadb'
     $environment_dir = "${root_dir}/puppet/environment/${environment}"
@@ -18,7 +17,7 @@ class mariadb::database {
     ## @require, syntax involves 'Class Containment'. For more information,
     ##     https://puppetlabs.com/blog/class-containment-puppet
     exec { 'create-database-tables':
-        command => "python setup_tables.py ${root_dir} ${vagrant_mounted}",
+        command => "python setup_tables.py ${root_dir}",
         cwd     => $script_dir,
         path    => '/usr/bin',
         require => Class['package::pyyaml'],
