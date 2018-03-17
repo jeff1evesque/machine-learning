@@ -25,10 +25,7 @@ from flask_jwt_extended import JWTManager
 # application factory
 def create_app(args={'instance': 'web'}):
     # path to hiera
-    if ('prefix' in args and args['prefix']):
-        prepath = 'hiera/' + args['prefix']
-    else:
-        prepath = 'hiera'
+    prepath = 'hiera'
 
     # get values from yaml
     with open(prepath + '/database.yaml', 'r') as stream:

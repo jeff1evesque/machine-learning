@@ -23,10 +23,7 @@ if len(sys.argv) > 1:
             'test/live_server'
         ])
     elif sys.argv[1] == 'run-api':
-        args = {
-            'prefix': 'test/hiera',
-            'instance': 'programmatic'
-        }
+        args = {'instance': 'programmatic'}
         app = create_app(args)
         app.run(host='0.0.0.0')
 
