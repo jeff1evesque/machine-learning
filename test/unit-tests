@@ -61,13 +61,13 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
 ## build from local dockerfiles
 else
     ## build docker container(s)
-    cd "$PROJECT_ROOT" || exit
+    cd "$PROJECT_ROOT" || exit 1
     sudo docker build -f base.dockerfile -t ml-base .
     sudo docker build -f redis.dockerfile -t ml-redis .
     sudo docker build -f mongodb.dockerfile -t ml-mongodb .
     sudo docker build -f webserver.dockerfile -t ml-webserver .
     sudo docker build -f mariadb.dockerfile -t ml-mariadb .
-    cd "$PWD" || exit
+    cd "$PWD" || exit 1
 
     ## run unit test(s)
     ##
