@@ -11,6 +11,7 @@ RUN mkdir -p /var/machine-learning/puppet
 RUN mkdir -p /var/machine-learning/hiera
 COPY puppet /var/machine-learning/puppet
 COPY hiera /var/machine-learning/hiera
+COPY hiera.yaml /var/machine-learning
 
 ## install git, wget, pip
 ##
