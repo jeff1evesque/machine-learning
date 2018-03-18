@@ -13,7 +13,7 @@ class nginx::ssl {
         $reverse_proxy = $hiera['reverse_proxy_web']
     }
 
-    ## programmatic-interface
+    ## rest-api
     else {
         $reverse_proxy = $hiera['reverse_proxy_api']
     }
