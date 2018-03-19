@@ -4,25 +4,11 @@
 class nginx::service {
     ## local variables
     $hiera              = lookup('reverse_proxy')
-    $type               = $hiera('reverse_proxy_type')
-
-    ## web-interface
-    if ($type == 'web') {
-        $reverse_proxy  = $hiera['reverse_proxy_web']
-        $gunicorn       = $hiera_webserver['gunicorn_web']
-    }
-
-    ## rest-api
-    else {
-        $reverse_proxy  = $nginx['reverse_proxy_api']
-        $gunicorn       = $hiera_webserver['gunicorn_web']
-    }
-
-    ## local variables
+    $type               = $hiera('type')
     $cert               = $nginx['certificate']
-    $vhost              = $reverse_proxy['vhost']
-    $listen_port        = $reverse_proxy['listen_port']
-    $host_port          = $reverse_proxy['host_port']
+    $vhost              = $hiera['vhost']
+    $listen_port        = $hiera['listen_port']
+    $host_port          = $hiera['host_port']
     $cert_path          = $cert['cert_path']
     $pkey_path          = $cert['pkey_path']
     $version            = $hiera_development['apt']['custom']['nginx']
@@ -38,7 +24,7 @@ class nginx::service {
     ##
     ## @497, redirect 'http://' to 'https://'
     ##
-    nginx::resource::vhost { $reverse_proxy['vhost']:
+    nginx::resource::vhost { $hiera['vhost']:
         ssl             => true,
         ssl_cert        => "${cert_path}/${vhost}.crt",
         ssl_key         => "${pkey_path}/${vhost}.key",
