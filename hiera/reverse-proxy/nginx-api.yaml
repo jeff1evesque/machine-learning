@@ -1,0 +1,24 @@
+##
+## This file contains reverse proxy configurations.
+##
+## Note: the docker-compose.yml, and the 'unit-tests' defines the hostname
+##       for the corresponding implementation.
+##
+reverse_proxy:
+    type: 'api'
+    vhost: 'machine-learning-api.com'
+    host_port: 9090
+    listen_port: 6000
+    proxy: 'http://localhost'
+
+    certificate:
+        cert_path: '/etc/puppetlabs/puppet/ssl/certs'
+        pkey_path: '/etc/puppetlabs/puppet/ssl/private_keys'
+        props:
+            days: 365
+            bit: 4096
+            country: 'US'
+            organization: 'MLearning'
+            state: 'CA'
+            locality: 'Palo Alto'
+            unit: 'ML'
