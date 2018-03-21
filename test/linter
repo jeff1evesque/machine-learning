@@ -70,7 +70,7 @@ if [ "$CMD" = 'install' ]; then
 ##     - https://github.com/rodjek/puppet-lint/issues/410
 ##
 else
-    EXIT_FLAG=false
+    EXIT_FLAG=0
 
     cd "$BASEDIR" || exit 1
     flake8 . --config=test/lint/setup.cfg || EXIT_FLAG=2
