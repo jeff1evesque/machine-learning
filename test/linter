@@ -76,8 +76,7 @@ else
     flake8 . --config=test/lint/setup.cfg || EXIT_FLAG=true
     scss-lint src/scss/*.scss --config 'test/lint/.scss-lint.yml' || EXIT_FLAG=true
     bootlint -d W005 interface/templates/*.html || EXIT_FLAG=true
-    find . -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \; || EXIT_FLAG=true
-    find . -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \; || EXIT_FLAG=true
+    find puppet/environment -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \; || EXIT_FLAG=true
     puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/*/modules || EXIT_FLAG=true
     find puppet -name Puppetfile -exec sh -c 'cd "${1%/*}" && r10k puppetfile check Puppetfile' _ {} \; || EXIT_FLAG=true
     find . -maxdepth 0 -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=true
