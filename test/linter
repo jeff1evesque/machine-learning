@@ -80,7 +80,10 @@ else
     find . -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \; || EXIT_FLAG=true
     puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/*/modules || EXIT_FLAG=true
     find puppet -name Puppetfile -exec sh -c 'cd "${1%/*}" && r10k puppetfile check Puppetfile' _ {} \; || EXIT_FLAG=true
-    find . -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=true
+    find . -maxdepth 0 -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=true
+    find src -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=true
+    find test -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=true
+    find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=true
     find . -name '*.csv' -exec csvlint {} \; || EXIT_FLAG=true
     xmllint --noout interface/static/data/xml/svr*.xml --schema interface/static/data/xml/svr.xsd || EXIT_FLAG=true
     xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd || EXIT_FLAG=true
