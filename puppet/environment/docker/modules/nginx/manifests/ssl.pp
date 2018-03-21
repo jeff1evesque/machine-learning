@@ -23,7 +23,7 @@ class nginx::ssl {
     ## create ssl certificate
     file { "/root/build/ssl-nginx-${nginx_type}":
         ensure         => present,
-        content        => dos2unix(template('webserver/ssl-${nginx_type}.erb')),
+        content        => dos2unix(template("webserver/ssl-${nginx_type}.erb")),
         owner          => 'root',
         group          => 'root',
         mode           => '0700',
