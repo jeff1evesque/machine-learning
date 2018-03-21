@@ -27,6 +27,6 @@ script:
 after_success:
   - coverage combine
   - coveralls
-  - if [ "$LINT_EXIT" -gt 0 ] && [ "$TEST_EXIT" -gt 0 ]; then echo "Lint ($LINT_EXIT) and Unit tests Failed" && exit 1; fi
+  - if [ "$LINT_EXIT" -gt 0 ] && [ "$TEST_EXIT" -gt 0 ]; then echo "Lint ($LINT_EXIT) and Unit Tests failed" && exit 1; fi
   - if [ "$LINT_EXIT" -gt 0 ]; then echo "Lint Failed ($LINT_EXIT)" && exit 1; fi
-  - if [ "$TEST_EXIT" -gt 0 ]; then echo 'Unit tests Failed' && exit 1; fi
+  - if [ "$TEST_EXIT" -gt 0 ]; then echo 'Unit Tests failed' && exit 1; fi
