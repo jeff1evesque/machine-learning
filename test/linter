@@ -94,7 +94,7 @@ else
     yaml-lint hiera/ || EXIT_FLAG=20
     yaml-lint ./*.yaml || EXIT_FLAG=21
     find . -name '*.dockerfile' -type f -exec dockerlint {} \; || EXIT_FLAG=22
-    find . -name '*.rst' -type f -exec rst-lint {} \; | (! grep -E 'ERROR') || EXIT_FLAG=24
+    find . -name '*.rst' -type f -exec rst-lint {} \; | (! grep -E 'ERROR') || EXIT_FLAG=23
     cd "$CWD" || exit 1
 
     if [ "$EXIT_FLAG" -gt 1 ]; then
