@@ -76,6 +76,115 @@ with conn:
     # create cursor object
     cur = conn.cursor()
 
+    # ################################################################################# #
+    # LEGACY TABLES: these tables will be iteratively phased out, as corresponding      #
+    #                backend and frontend are developed.                                #
+    # ################################################################################# #
+
+    # create 'tbl_user'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_user (
+                        id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        username VARCHAR (50) NOT NULL,
+                        email VARCHAR (255) NOT NULL,
+                        password VARCHAR (1069) NOT NULL,
+                        datetime_joined DATETIME NOT NULL,
+                        INDEX (username)
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # create 'tbl_dataset_entity'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_dataset_entity (
+                        id_entity INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        title VARCHAR (50) NOT NULL,
+                        collection VARCHAR (50) NOT NULL UNIQUE,
+                        model_type INT NOT NULL,
+                        uid_created INT NOT NULL,
+                        datetime_created DATETIME NOT NULL,
+                        uid_modified INT NULL,
+                        datetime_modified DATETIME NULL,
+                        INDEX (id_entity)
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # create 'tbl_model_type'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_model_type (
+                        id_model INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        model VARCHAR (50) NOT NULL,
+                        INDEX (id_model)
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # populate 'tbl_model_type'
+    sql_statement = '''\
+                    INSERT INTO tbl_model_type (model) VALUES (%s);
+                    '''
+    cur.executemany(sql_statement, models)
+
+    # create 'tbl_prediction_results'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_prediction_results (
+                        id_result INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        model_type INT NOT NULL,
+                        title VARCHAR (50) NOT NULL,
+                        result VARCHAR (30) NOT NULL,
+                        uid_created INT NOT NULL,
+                        datetime_created DATETIME NOT NULL,
+                        INDEX (title)
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # create 'tbl_svm_results_class'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svm_results_class (
+                        id_class INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_result INT NOT NULL,
+                        class VARCHAR (50) NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # create 'tbl_svm_results_probability'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svm_results_probability (
+                        id_probability INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_result INT NOT NULL,
+                        probability DECIMAL (65,12) NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # create 'tbl_svm_results_decision_function'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svm_results_decision_function (
+                        id_decision_function INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_result INT NOT NULL,
+                        decision_function DECIMAL (65,12) NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # create 'tbl_svr_results_r2'
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS tbl_svr_results_r2 (
+                        id_r2 INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        id_result INT NOT NULL,
+                        r2 DECIMAL (65,12) NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # ################################################################################# #
+    # NEW STRUCTURE: when the above legacy tables have been completely phased out, the  #
+    #                below tables will completely define our sql implementation.        #
+    # ################################################################################# #
+
     # general permission
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Permission (
