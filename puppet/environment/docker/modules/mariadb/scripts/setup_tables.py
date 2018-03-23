@@ -235,7 +235,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS Role (
                         RoleID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         Role VARCHAR (50) NOT NULL,
-                        foreign key (RoleID) references Role(RoleID)
+                        foreign key (UserID) references User(UserID)
                     );
                     '''
     cur.execute(sql_statement)
