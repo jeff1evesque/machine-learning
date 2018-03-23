@@ -218,6 +218,23 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
+    # user
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS User (
+                        UserID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        UserName VARCHAR (50) NOT NULL,
+                        Password VARCHAR (1069) NOT NULL,
+                        Joined DATETIME NOT NULL,
+                    );
+
+                    CREATE TABLE IF NOT EXISTS Role (
+                        RoleID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        Role VARCHAR (50) NOT NULL,
+                        foreign key (RoleID) references Role(RoleID),
+                    );
+                    '''
+    cur.execute(sql_statement)
+
     # general permission
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionUUID (
