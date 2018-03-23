@@ -219,7 +219,7 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # user
+    # user and roles
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS User (
                         UserID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -272,7 +272,7 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # own
+    # permission based
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS OwnUUID (
                         OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
