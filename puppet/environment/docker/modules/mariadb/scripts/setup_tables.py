@@ -222,7 +222,7 @@ with conn:
 
     # user and roles
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS User (
+                    CREATE TABLE IF NOT EXISTS Account (
                         UserID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         Username VARCHAR (50) NOT NULL,
                         Password VARCHAR (1069) NOT NULL,
@@ -236,7 +236,7 @@ with conn:
                         RoleID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         Role VARCHAR (50) NOT NULL,
                         UserID INT NOT NULL,
-                        FOREIGN KEY (UserID) REFERENCES User(UserID)
+                        FOREIGN KEY (UserID) REFERENCES Account(UserID)
                     );
                     '''
     cur.execute(sql_statement)
@@ -263,7 +263,7 @@ with conn:
                         OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         UserID INT NOT NULL,
                         OwnType INT NOT NULL,
-                        FOREIGN KEY (UserID) REFERENCES User(UserID),
+                        FOREIGN KEY (UserID) REFERENCES Account(UserID),
                         FOREIGN KEY (OwnType) REFERENCES OwnUUID(OwnType)
                     );
                     '''
@@ -285,7 +285,7 @@ with conn:
                         UserID INT NOT NULL,
                         PermissionType INT NOT NULL,
                         FOREIGN KEY (PermissionValueID) REFERENCES PermissionValue(PermissionValueID),
-                        FOREIGN KEY (UserID) REFERENCES User(UserID),
+                        FOREIGN KEY (UserID) REFERENCES Account(UserID),
                         FOREIGN KEY (PermissionType) REFERENCES PermissionUUID(PermissionType)
                     );
                     '''
