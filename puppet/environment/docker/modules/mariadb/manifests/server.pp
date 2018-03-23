@@ -41,7 +41,6 @@ class mariadb::server {
                 max_updates_per_hour     => '0',
                 max_user_connections     => '1',
                 password_hash            => mysql_password($provisioner_pass),
-                grant                    => ['CREATE ROUTINE'],
             },
             "${tester}@${db_host}" => {
                 ensure                   => 'present',
@@ -53,6 +52,12 @@ class mariadb::server {
             },
         },
         grants        => {
+            "${db_user}@${db_host}/${db}"     => {
+                privileges => ['CREATE ROUTINE'],
+                ensure     => 'present',
+                options    => ['GRANT'],
+                user       => "${provisioner}@${db_host}",
+            },
             "${db_user}@${db_host}/${db}.*"     => {
                 ensure     => 'present',
                 options    => ['GRANT'],
