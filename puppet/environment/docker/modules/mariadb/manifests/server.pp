@@ -66,12 +66,6 @@ class mariadb::server {
                 table      => "${db}.*",
                 user       => "${provisioner}@${db_host}",
             },
-            "${provisioner}@${db_host}/${db}.*" => {
-                ensure     => 'present',
-                options    => ['GRANT'],
-                privileges => ['CREATE ROUTINE'],
-                user       => "${provisioner}@${db_host}",
-            },
             "${tester}@${db_host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
@@ -84,6 +78,9 @@ class mariadb::server {
             $db => {
                 ensure  => 'present',
                 charset => 'utf8',
+                user    => $provisioner,
+                host    => $db_host,
+                grant   => ['CREATE ROUTINE'],
             },
         },
         override_options => {
