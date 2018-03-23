@@ -66,6 +66,12 @@ class mariadb::server {
                 table      => "${db}.*",
                 user       => "${provisioner}@${db_host}",
             },
+            "${provisioner}@${db_host}/${db}.*" => {
+                ensure     => 'present',
+                options    => ['GRANT'],
+                privileges => ['CREATE ROUTINE'],
+                user       => "${provisioner}@${db_host}",
+            },
             "${tester}@${db_host}/${db}.*" => {
                 ensure     => 'present',
                 options    => ['GRANT'],
