@@ -220,10 +220,36 @@ with conn:
 
     # general permission
     sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS PermissionUUID (
+                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        PermissionType INT NOT NULL,
+                    );
+
                     CREATE TABLE IF NOT EXISTS Permission (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        foreign key (PermissionEntityID) references PermissionEntity(PermissionEntityID),
-                        foreign key (PermissionValueID) references PermissionValue(PermissionEntityID),
+                        foreign key (PermissionValueID) references PermissionValue(PermissionValueID),
+                        foreign key (UserID) references User(UserID),
+                        foreign key (PermissionType) references PermissionUUID(PermissionType),
+                    );
+
+                    CREATE TABLE IF NOT EXISTS PermissionCollection (
+                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        foreign key (OwnID) references Own(OwnID),
+                    );
+
+                    CREATE TABLE IF NOT EXISTS PermissionModel (
+                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        foreign key (OwnID) references Own(OwnID),
+                    );
+
+                    CREATE TABLE IF NOT EXISTS PermissionResult (
+                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        foreign key (OwnID) references Own(OwnID),
+                    );
+
+                    CREATE TABLE IF NOT EXISTS PermissionValue (
+                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        foreign key (OwnID) references Own(OwnID),
                     );
                     '''
     cur.execute(sql_statement)
