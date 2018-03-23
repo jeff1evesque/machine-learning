@@ -215,7 +215,8 @@ with conn:
                             HEX(SUBSTR(_bin,  1, 2)),
                             HEX(SUBSTR(_bin,  9, 2)),
                             HEX(SUBSTR(_bin, 11))
-                    ));
+                        )
+                    );
                     '''
     cur.execute(sql_statement)
 
@@ -223,7 +224,7 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS User (
                         UserID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        UserName VARCHAR (50) NOT NULL,
+                        Username VARCHAR (50) NOT NULL,
                         Password VARCHAR (1069) NOT NULL,
                         Joined DATETIME NOT NULL,
                     );
