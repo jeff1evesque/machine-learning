@@ -250,6 +250,16 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
+
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS PermissionValue (
+                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnID INT NOT NULL,
+                        FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
+                    );
+                    '''
+    cur.execute(sql_statement)
+
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Permission (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -263,6 +273,26 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS OwnUUID (
+                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnType INT NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS Own (
+                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        UserID INT NOT NULL,
+                        OwnType INT NOT NULL,
+                        FOREIGN KEY (UserID) REFERENCES User(UserID),
+                        FOREIGN KEY (OwnType) REFERENCES OwnUUID(OwnType)
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # entities with applied permission
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionCollection (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -291,35 +321,6 @@ with conn:
     cur.execute(sql_statement)
 
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS PermissionValue (
-                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        OwnID INT NOT NULL,
-                        FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    # permission based
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS OwnUUID (
-                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        OwnType INT NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS Own (
-                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        UserID INT NOT NULL,
-                        OwnType INT NOT NULL,
-                        FOREIGN KEY (UserID) REFERENCES User(UserID),
-                        FOREIGN KEY (OwnType) REFERENCES OwnUUID(OwnType)
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Collection (
                         OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         CollectionTitle VARCHAR (50) NOT NULL,
@@ -330,8 +331,30 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Model (
-                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         Model BLOB NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # model lookup
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS ModelType (
+                        ModelTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        ModelType VARCHAR (50) NOT NULL
+                    );
+                    '''
+    cur.execute(sql_statement)
+
+    # results
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS ResultValue (
+                        ResultValueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        ResultValueActual DECIMAL (65,12) NOT NULL,
+                        ResultValueParameterID INT NOT NULL,
+                        ResultID INT NOT NULL,
+                        FOREIGN KEY (ResultValueParameterID) REFERENCES ResultValueParameter(ResultValueParameterID),
+                        FOREIGN KEY (ResultID) REFERENCES Result(ResultID)
                     );
                     '''
     cur.execute(sql_statement)
@@ -343,26 +366,6 @@ with conn:
                         ModelTypeID INT NOT NULL,
                         FOREIGN KEY (ResultValueID) REFERENCES ResultValue(ResultValueID),
                         FOREIGN KEY (ModelTypeID) REFERENCES ModelType(ModelTypeID)
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS ModelType (
-                        ModelTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        ModelType VARCHAR (50) NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS ResultValue (
-                        ResultValueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        ResultValueActual DECIMAL (65,12) NOT NULL,
-                        ResultValueParameterID INT NOT NULL,
-                        ResultID INT NOT NULL,
-                        FOREIGN KEY (ResultValueParameterID) REFERENCES ResultValueParameter(ResultValueParameterID),
-                        FOREIGN KEY (ResultID) REFERENCES Result(ResultID)
                     );
                     '''
     cur.execute(sql_statement)
