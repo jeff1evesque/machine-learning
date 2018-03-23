@@ -250,6 +250,16 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
+    sql_statement = '''\
+                    CREATE TABLE IF NOT EXISTS Own (
+                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        UserID INT NOT NULL,
+                        OwnType INT NOT NULL,
+                        FOREIGN KEY (UserID) REFERENCES User(UserID),
+                        FOREIGN KEY (OwnType) REFERENCES OwnUUID(OwnType)
+                    );
+                    '''
+    cur.execute(sql_statement)
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionValue (
@@ -277,17 +287,6 @@ with conn:
                     CREATE TABLE IF NOT EXISTS OwnUUID (
                         OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         OwnType INT NOT NULL
-                    );
-                    '''
-    cur.execute(sql_statement)
-
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS Own (
-                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        UserID INT NOT NULL,
-                        OwnType INT NOT NULL,
-                        FOREIGN KEY (UserID) REFERENCES User(UserID),
-                        FOREIGN KEY (OwnType) REFERENCES OwnUUID(OwnType)
                     );
                     '''
     cur.execute(sql_statement)
