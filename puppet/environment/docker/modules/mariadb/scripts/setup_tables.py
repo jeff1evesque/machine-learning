@@ -272,43 +272,46 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # superclass for PermissionEntityXXX subclasses
+    # own
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS PermissionEntity (
-                        PermissionEntityID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                    CREATE TABLE IF NOT EXISTS OwnUUID (
+                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnType INT NOT NULL,
                     );
-                    '''
-    cur.execute(sql_statement)
 
-    # PermissionEntity subclass
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS PermissionEntityCollection (
-                        PermissionEntityID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                    CREATE TABLE IF NOT EXISTS Own (
+                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        foreign key (UserID) references User(UserID),
+                        foreign key (OwnType) references OwnUUID(OwnType),
                     );
-                    '''
-    cur.execute(sql_statement)
 
-    # PermissionEntity subclass
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS PermissionEntityModel (
-                        PermissionEntityID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                    CREATE TABLE IF NOT EXISTS Collection (
+                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        CollectionTitle VARCHAR (50) NOT NULL,
+                        CollectionVersion VARCHAR (50) NOT NULL,
                     );
-                    '''
-    cur.execute(sql_statement)
 
-    # PermissionEntity subclass
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS PermissionEntityResult (
-                        PermissionEntityId INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                    CREATE TABLE IF NOT EXISTS Model (
+                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        Model BLOB NOT NULL,
                     );
-                    '''
-    cur.execute(sql_statement)
 
-    # numeric codified permission value
-    sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS PermissionValue (
-                        PermissionValueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        PermissionValueCode INT NOT NULL,
+                    CREATE TABLE IF NOT EXISTS Result (
+                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        foreign key (ResultValueID) references ResultValue(ResultValueID),
+                        foreign key (ModelTypeID) references ModelType(ModelTypeID),
+                    );
+
+                    CREATE TABLE IF NOT EXISTS ModelType (
+                        ModelTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        ModelType VARCHAR (50) NOT NULL,
+                    );
+
+                    CREATE TABLE IF NOT EXISTS ResultValue (
+                        ResultValueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        ResultValueActual DECIMAL (65,12) NOT NULL,
+                        foreign key (ResultValueParameterID) references ResultValueParameter(ResultValueParameterID),
+                        foreign key (ResultID) references Result(ResultID),
                     );
                     '''
     cur.execute(sql_statement)
