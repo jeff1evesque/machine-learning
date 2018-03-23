@@ -199,7 +199,8 @@ with conn:
                             SUBSTR(_uuid, 10, 4),
                             SUBSTR(_uuid,  1, 8),
                             SUBSTR(_uuid, 20, 4),
-                            SUBSTR(_uuid, 25) ));
+                            SUBSTR(_uuid, 25))
+                        );
                     '''
     cur.execute(sql_statement)
 
