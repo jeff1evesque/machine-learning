@@ -396,3 +396,19 @@ with conn:
                     INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Result');
                     '''
     cur.executemany(sql_statement)
+
+    # populate PermissionUUID
+    sql_statement = '''\
+                    INSERT INTO PermissionUUID (PermissionUUID, OwnType) VALUES (UuidToBin(UUID()), 'Collection');
+                    '''
+    cur.executemany(sql_statement)
+
+    sql_statement = '''\
+                    INSERT INTO PermissionUUID (PermissionUUID, OwnType) VALUES (UuidToBin(UUID()), 'Model');
+                    '''
+    cur.executemany(sql_statement)
+
+    sql_statement = '''\
+                    INSERT INTO PermissionUUID (PermissionUUID, OwnType) VALUES (UuidToBin(UUID()), 'Result');
+                    '''
+    cur.executemany(sql_statement)
