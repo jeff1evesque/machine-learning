@@ -245,7 +245,7 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionUUID (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        PermissionType INT NOT NULL
+                        PermissionType INT NOT NULL PRIMARY KEY
                     );
                     '''
     cur.execute(sql_statement)
@@ -262,9 +262,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS Own (
                         OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         UserID INT NOT NULL,
-                        OwnType INT NOT NULL,
-                        FOREIGN KEY (UserID) REFERENCES Account(UserID),
-                        FOREIGN KEY (OwnType) REFERENCES OwnUUID(OwnType)
+                        FOREIGN KEY (UserID) REFERENCES Account(UserID)
                     );
                     '''
     cur.execute(sql_statement)
@@ -272,6 +270,7 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionValue (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        Code INT NOT NULL,
                         OwnID INT NOT NULL,
                         FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
@@ -281,10 +280,8 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Permission (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        PermissionValueID INT NOT NULL,
                         UserID INT NOT NULL,
                         PermissionType INT NOT NULL,
-                        FOREIGN KEY (PermissionValueID) REFERENCES PermissionValue(PermissionValueID),
                         FOREIGN KEY (UserID) REFERENCES Account(UserID),
                         FOREIGN KEY (PermissionType) REFERENCES PermissionUUID(PermissionType)
                     );
