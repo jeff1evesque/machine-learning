@@ -245,7 +245,7 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionUUID (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        PermissionType INT NOT NULL PRIMARY KEY
+                        PermissionType INT NOT NULL
                     );
                     '''
     cur.execute(sql_statement)
@@ -282,8 +282,7 @@ with conn:
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         UserID INT NOT NULL,
                         PermissionType INT NOT NULL,
-                        FOREIGN KEY (UserID) REFERENCES Account(UserID),
-                        FOREIGN KEY (PermissionType) REFERENCES PermissionUUID(PermissionType)
+                        FOREIGN KEY (UserID) REFERENCES Account(UserID)
                     );
                     '''
     cur.execute(sql_statement)
