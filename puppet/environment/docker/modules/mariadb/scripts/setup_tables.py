@@ -303,7 +303,7 @@ with conn:
 
     # ################################################################################# #
     #                                                                                   #
-    # entities with applied permission                                                  #
+    # applied permission                                                                #
     #                                                                                   #
     # ################################################################################# #
     sql_statement = '''\
@@ -358,7 +358,7 @@ with conn:
 
     # ################################################################################# #
     #                                                                                   #
-    # model lookup                                                                      #
+    # model                                                                             #
     #                                                                                   #
     # ################################################################################# #
     sql_statement = '''\
@@ -369,7 +369,11 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # results
+    # ################################################################################# #
+    #                                                                                   #
+    # results                                                                           #
+    #                                                                                   #
+    # ################################################################################# #
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS ResultLabel (
                         ResultLabelID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -445,3 +449,13 @@ with conn:
                     VALUES (UuidToBin(UUID()), 'Result');
                     '''
     cur.executemany(sql_statement)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # populate ModelType                                                                #
+    #                                                                                   #
+    # ################################################################################# #
+    sql_statement = '''\
+                    INSERT INTO ModelType (model) VALUES (%s);
+                    '''
+    cur.executemany(sql_statement, models)
