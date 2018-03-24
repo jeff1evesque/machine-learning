@@ -244,7 +244,7 @@ with conn:
     # general permission
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionUUID (
-                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        PermissionUUID BINARY(16) NOT NULL PRIMARY KEY,
                         PermissionType INT NOT NULL
                     );
                     '''
@@ -260,9 +260,9 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Own (
-                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         OwnUUID BINARY(16) NOT NULL,
                         UserID INT NOT NULL,
+                        PRIMARY KEY (OwnUUID, UserID),
                         FOREIGN KEY (UserID) REFERENCES Account(UserID)
                     );
                     '''
@@ -270,9 +270,10 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionValue (
-                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        PermissionUUID BINARY(16) NOT NULL,
                         Code INT NOT NULL,
                         OwnID INT NOT NULL,
+                        PRIMARY KEY (PermissionUUID, Code, OwnID),
                         FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
                     '''
@@ -280,9 +281,10 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Permission (
-                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        PermissionUUID BINARY(16) NOT NULL,
                         UserID INT NOT NULL,
                         PermissionType INT NOT NULL,
+                        PRIMARY KEY (PermissionUUID, UserID, PermissionType),
                         FOREIGN KEY (UserID) REFERENCES Account(UserID)
                     );
                     '''
@@ -291,8 +293,9 @@ with conn:
     # entities with applied permission
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionCollection (
-                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        PermissionUUID BINARY(16) NOT NULL,
                         OwnUUID BINARY(16) NOT NULL,
+                        PRIMARY KEY (PermissionUUID, OwnUUID),
                         FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
                     '''
@@ -300,8 +303,9 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionModel (
-                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        PermissionUUID BINARY(16) NOT NULL,
                         OwnUUID BINARY(16) NOT NULL,
+                        PRIMARY KEY (PermissionUUID, OwnUUID),
                         FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
                     '''
@@ -309,8 +313,9 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionResult (
-                        PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        PermissionUUID BINARY(16) NOT NULL,
                         OwnUUID BINARY(16) NOT NULL,
+                        PRIMARY KEY (PermissionUUID, OwnUUID),
                         FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
                     '''
@@ -318,17 +323,20 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Collection (
-                        OwnUUID BINARY(16) NOT NULL PRIMARY KEY,
-                        CollectionTitle VARCHAR (50) NOT NULL,
-                        CollectionVersion INT NOT NULL
+                        OwnUUID BINARY(16) NOT NULL,
+                        CollectionName VARCHAR (50) NOT NULL,
+                        CollectionVersion INT NOT NULL,
+                        PRIMARY KEY (OwnUUID, CollectionName)
                     );
                     '''
     cur.execute(sql_statement)
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Model (
-                        OwnUUID BINARY(16) NOT NULL PRIMARY KEY,
-                        Model BLOB NOT NULL
+                        OwnUUID BINARY(16) NOT NULL,
+                        ModelName VARCHAR (50) NOT NULL,
+                        Model BLOB NOT NULL,
+                        PRIMARY KEY (OwnUUID, ModelName)
                     );
                     '''
     cur.execute(sql_statement)
@@ -353,9 +361,9 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS ResultValue (
-                        ResultValueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         ResultValueActual DECIMAL (65,12) NOT NULL,
                         ResultLabelID INT NOT NULL,
+                        PRIMARY KEY (ResultValueActual, ResultLabelID)
                         FOREIGN KEY (ResultLabelID) REFERENCES ResultLabel(ResultLabelID)
                     );
                     '''
@@ -363,18 +371,19 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Result (
-                        OwnUUID BINARY(16) NOT NULL PRIMARY KEY,
+                        OwnUUID BINARY(16) NOT NULL,
                         ResultValueID INT NOT NULL,
                         ModelTypeID INT NOT NULL,
+                        PRIMARY KEY (OwnUUID, ResultValueID, ModelTypeID),
                         FOREIGN KEY (ResultValueID) REFERENCES ResultValue(ResultValueID),
                         FOREIGN KEY (ModelTypeID) REFERENCES ModelType(ModelTypeID)
                     );
                     '''
     cur.execute(sql_statement)
 
-    # populate uuid
+    # populate OwnUUID
     sql_statement = '''\
-                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Result');
+                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Collection');
                     '''
     cur.executemany(sql_statement)
 
@@ -384,6 +393,6 @@ with conn:
     cur.executemany(sql_statement)
 
     sql_statement = '''\
-                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Collection');
+                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Result');
                     '''
     cur.executemany(sql_statement)
