@@ -343,9 +343,9 @@ with conn:
 
     # results
     sql_statement = '''\
-                    CREATE TABLE IF NOT EXISTS ResultValueParameter (
-                        ResultValueParameterID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        ResultValueParameter VARCHAR (50) NOT NULL
+                    CREATE TABLE IF NOT EXISTS ResultLabel (
+                        ResultLabelID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        ResultLabel VARCHAR (50) NOT NULL
                     );
                     '''
     cur.execute(sql_statement)
@@ -354,8 +354,8 @@ with conn:
                     CREATE TABLE IF NOT EXISTS ResultValue (
                         ResultValueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         ResultValueActual DECIMAL (65,12) NOT NULL,
-                        ResultValueParameterID INT NOT NULL,
-                        FOREIGN KEY (ResultValueParameterID) REFERENCES ResultValueParameter(ResultValueParameterID)
+                        ResultLabelID INT NOT NULL,
+                        FOREIGN KEY (ResultLabelID) REFERENCES ResultLabel(ResultLabelID)
                     );
                     '''
     cur.execute(sql_statement)
