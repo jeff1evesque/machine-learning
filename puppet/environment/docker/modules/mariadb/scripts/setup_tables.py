@@ -355,9 +355,7 @@ with conn:
                         ResultValueID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         ResultValueActual DECIMAL (65,12) NOT NULL,
                         ResultValueParameterID INT NOT NULL,
-                        ResultID INT NOT NULL,
-                        FOREIGN KEY (ResultValueParameterID) REFERENCES ResultValueParameter(ResultValueParameterID),
-                        FOREIGN KEY (ResultID) REFERENCES Result(ResultID)
+                        FOREIGN KEY (ResultValueParameterID) REFERENCES ResultValueParameter(ResultValueParameterID)
                     );
                     '''
     cur.execute(sql_statement)
