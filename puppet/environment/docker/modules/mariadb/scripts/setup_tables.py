@@ -185,10 +185,13 @@ with conn:
     #                below tables will completely define our sql implementation.        #
     # ################################################################################# #
 
-    # stored functions: time based uuid
-    #
-    # Note: https://mariadb.com/kb/en/library/guiduuid-performance/#code-to-do-it
-    #
+    # ################################################################################# #
+    #                                                                                   #
+    # stored functions: time based uuid                                                 #
+    #                                                                                   #
+    # Note: https://mariadb.com/kb/en/library/guiduuid-performance/#code-to-do-it       #
+    #                                                                                   #
+    # ################################################################################# #
     sql_statement = '''\
                     CREATE FUNCTION UuidToBin(_uuid BINARY(36))
                         RETURNS BINARY(16)
@@ -220,7 +223,11 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # user and roles
+    # ################################################################################# #
+    #                                                                                   #
+    # user and roles                                                                    #
+    #                                                                                   #
+    # ################################################################################# #
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Account (
                         UserID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -241,7 +248,11 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # general permission
+    # ################################################################################# #
+    #                                                                                   #
+    # general permission                                                                #
+    #                                                                                   #
+    # ################################################################################# #
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionUUID (
                         PermissionUUID BINARY(16) NOT NULL PRIMARY KEY,
@@ -290,7 +301,11 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # entities with applied permission
+    # ################################################################################# #
+    #                                                                                   #
+    # entities with applied permission                                                  #
+    #                                                                                   #
+    # ################################################################################# #
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionCollection (
                         PermissionUUID BINARY(16) NOT NULL,
@@ -341,7 +356,11 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # model lookup
+    # ################################################################################# #
+    #                                                                                   #
+    # model lookup                                                                      #
+    #                                                                                   #
+    # ################################################################################# #
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS ModelType (
                         ModelTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -381,34 +400,48 @@ with conn:
                     '''
     cur.execute(sql_statement)
 
-    # populate OwnUUID
+    # ################################################################################# #
+    #                                                                                   #
+    # populate OwnUUID                                                                  #
+    #                                                                                   #
+    # ################################################################################# #
     sql_statement = '''\
-                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Collection');
+                    INSERT INTO OwnUUID (OwnUUID, OwnType)
+                    VALUES (UuidToBin(UUID()), 'Collection');
                     '''
     cur.executemany(sql_statement)
 
     sql_statement = '''\
-                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Model');
+                    INSERT INTO OwnUUID (OwnUUID, OwnType)
+                    VALUES (UuidToBin(UUID()), 'Model');
                     '''
     cur.executemany(sql_statement)
 
     sql_statement = '''\
-                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Result');
+                    INSERT INTO OwnUUID (OwnUUID, OwnType)
+                    VALUES (UuidToBin(UUID()), 'Result');
                     '''
     cur.executemany(sql_statement)
 
-    # populate PermissionUUID
+    # ################################################################################# #
+    #                                                                                   #
+    # populate PermissionUUID                                                           #
+    #                                                                                   #
+    # ################################################################################# #
     sql_statement = '''\
-                    INSERT INTO PermissionUUID (PermissionUUID, OwnType) VALUES (UuidToBin(UUID()), 'Collection');
+                    INSERT INTO PermissionUUID (PermissionUUID, OwnType)
+                    VALUES (UuidToBin(UUID()), 'Collection');
                     '''
     cur.executemany(sql_statement)
 
     sql_statement = '''\
-                    INSERT INTO PermissionUUID (PermissionUUID, OwnType) VALUES (UuidToBin(UUID()), 'Model');
+                    INSERT INTO PermissionUUID (PermissionUUID, OwnType)
+                    VALUES (UuidToBin(UUID()), 'Model');
                     '''
     cur.executemany(sql_statement)
 
     sql_statement = '''\
-                    INSERT INTO PermissionUUID (PermissionUUID, OwnType) VALUES (UuidToBin(UUID()), 'Result');
+                    INSERT INTO PermissionUUID (PermissionUUID, OwnType)
+                    VALUES (UuidToBin(UUID()), 'Result');
                     '''
     cur.executemany(sql_statement)
