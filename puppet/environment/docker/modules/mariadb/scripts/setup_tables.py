@@ -252,7 +252,7 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS OwnUUID (
-                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnUUID BINARY(16) NOT NULL PRIMARY KEY,
                         OwnType INT NOT NULL
                     );
                     '''
@@ -261,6 +261,7 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Own (
                         OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnUUID BINARY(16) NOT NULL,
                         UserID INT NOT NULL,
                         FOREIGN KEY (UserID) REFERENCES Account(UserID)
                     );
@@ -291,7 +292,7 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionCollection (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        OwnID INT NOT NULL,
+                        OwnUUID BINARY(16) NOT NULL,
                         FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
                     '''
@@ -300,7 +301,7 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionModel (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        OwnID INT NOT NULL,
+                        OwnUUID BINARY(16) NOT NULL,
                         FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
                     '''
@@ -309,7 +310,7 @@ with conn:
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS PermissionResult (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                        OwnID INT NOT NULL,
+                        OwnUUID BINARY(16) NOT NULL,
                         FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
                     '''
@@ -317,16 +318,16 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Collection (
-                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnUUID BINARY(16) NOT NULL PRIMARY KEY,
                         CollectionTitle VARCHAR (50) NOT NULL,
-                        CollectionVersion INT (50) NOT NULL
+                        CollectionVersion INT NOT NULL
                     );
                     '''
     cur.execute(sql_statement)
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Model (
-                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnUUID BINARY(16) NOT NULL PRIMARY KEY,
                         Model BLOB NOT NULL
                     );
                     '''
@@ -362,7 +363,7 @@ with conn:
 
     sql_statement = '''\
                     CREATE TABLE IF NOT EXISTS Result (
-                        OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                        OwnUUID BINARY(16) NOT NULL PRIMARY KEY,
                         ResultValueID INT NOT NULL,
                         ModelTypeID INT NOT NULL,
                         FOREIGN KEY (ResultValueID) REFERENCES ResultValue(ResultValueID),
@@ -370,3 +371,19 @@ with conn:
                     );
                     '''
     cur.execute(sql_statement)
+
+    # populate uuid
+    sql_statement = '''\
+                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Result');
+                    '''
+    cur.executemany(sql_statement)
+
+    sql_statement = '''\
+                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Model');
+                    '''
+    cur.executemany(sql_statement)
+
+    sql_statement = '''\
+                    INSERT INTO OwnUUID (OwnUUID, OwnType) VALUES (UuidToBin(UUID()), 'Collection');
+                    '''
+    cur.executemany(sql_statement)
