@@ -319,7 +319,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS Collection (
                         OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         CollectionTitle VARCHAR (50) NOT NULL,
-                        CollectionVersion VARCHAR (50) NOT NULL
+                        CollectionVersion INT (50) NOT NULL
                     );
                     '''
     cur.execute(sql_statement)
