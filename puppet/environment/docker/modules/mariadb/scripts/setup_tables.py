@@ -292,7 +292,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS PermissionCollection (
                         PermissionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                         OwnID INT NOT NULL,
-                        FOREIGN KEY (OwnID) REFERENCES Own(OwnID),
+                        FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
                     );
                     '''
     cur.execute(sql_statement)
