@@ -301,7 +301,7 @@ with conn:
                 ModelID INT NOT NULL,
                 UserID INT NOT NULL,
                 RoleID INT DEFAULT 0,
-                UNIQUE (CollectionID, USERID, ROLEID),
+                UNIQUE (ModelID, USERID, ROLEID),
                 FOREIGN KEY (ModelID) REFERENCES Model(ModelID),
                 FOREIGN KEY (UserID) REFERENCES Account(UserID),
                 FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
@@ -316,7 +316,7 @@ with conn:
                 ResultID INT NOT NULL,
                 UserID INT NOT NULL,
                 RoleID INT DEFAULT 0,
-                UNIQUE (CollectionID, USERID, ROLEID),
+                UNIQUE (ResultID, USERID, ROLEID),
                 FOREIGN KEY (ResultID) REFERENCES Result(ResultID),
                 FOREIGN KEY (UserID) REFERENCES Account(UserID),
                 FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
