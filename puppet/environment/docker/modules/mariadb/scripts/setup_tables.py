@@ -279,7 +279,7 @@ with conn:
                 FOREIGN KEY (OwnUUID) REFERENCES PermissionUUID(OwnUUID),
                 FOREIGN KEY (UserID) REFERENCES Account(UserID),
             );
-                    '''
+            '''
     cur.execute(query)
 
     query = '''\
