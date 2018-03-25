@@ -125,7 +125,7 @@ with conn:
     sql_statement = '''\
                     INSERT INTO tbl_model_type (model) VALUES (%s);
                     '''
-    cur.executemany(sql_statement, models)
+    cur.executemany(sql_statement, model_types)
 
     # create 'tbl_prediction_results'
     sql_statement = '''\
