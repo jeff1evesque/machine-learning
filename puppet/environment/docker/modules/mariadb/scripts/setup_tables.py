@@ -286,7 +286,7 @@ with conn:
                 CollectionID INT NOT NULL,
                 UserID INT NOT NULL,
                 RoleID INT DEFAULT 0,
-                UNIQUE (CollectionID, USERID, ROLEID),
+                UNIQUE (ResultID, UserID, RoleID),
                 FOREIGN KEY (CollectionID) REFERENCES Collection(CollectionID),
                 FOREIGN KEY (UserID) REFERENCES Account(UserID),
                 FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
@@ -301,7 +301,7 @@ with conn:
                 ModelID INT NOT NULL,
                 UserID INT NOT NULL,
                 RoleID INT DEFAULT 0,
-                UNIQUE (ModelID, USERID, ROLEID),
+                UNIQUE (ResultID, UserID, RoleID),
                 FOREIGN KEY (ModelID) REFERENCES Model(ModelID),
                 FOREIGN KEY (UserID) REFERENCES Account(UserID),
                 FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
@@ -316,7 +316,7 @@ with conn:
                 ResultID INT NOT NULL,
                 UserID INT NOT NULL,
                 RoleID INT DEFAULT 0,
-                UNIQUE (ResultID, USERID, ROLEID),
+                UNIQUE (ResultID, UserID, RoleID),
                 FOREIGN KEY (ResultID) REFERENCES Result(ResultID),
                 FOREIGN KEY (UserID) REFERENCES Account(UserID),
                 FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
@@ -326,13 +326,18 @@ with conn:
 
     # ################################################################################# #
     #                                                                                   #
-    # populate Role                                                                     #
+    # populate User, and Role                                                                     #
     #                                                                                   #
     # ################################################################################# #
     query = '''\
-            INSERT INTO Role (Role) VALUES ('no-group');
+            INSERT INTO Account (User, Password, Joined) VALUES (%s, %s, %s);
             '''
-    cur.executemany(query)
+    cur.executemany(query, 'anonymous', '0', '2018-01-25 12:00:00')
+
+    query = '''\
+            INSERT INTO Role (Role) VALUES (%s);
+            '''
+    cur.executemany(query, 'nullgroup')
 
     # ################################################################################# #
     #                                                                                   #
