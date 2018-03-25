@@ -202,10 +202,19 @@ with conn:
     cur.execute(query)
 
     query = '''\
+            CREATE TABLE IF NOT EXISTS RoleType (
+                RoleTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                RoleType VARCHAR (1069) NOT NULL
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
             CREATE TABLE IF NOT EXISTS Role (
                 RoleID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                Role VARCHAR (50) NOT NULL,
+                RoleTypeID INT NOT NULL,
                 UserID INT NOT NULL,
+                FOREIGN KEY (RoleTypeID) REFERENCES RoleType(RoleTypeID),
                 FOREIGN KEY (UserID) REFERENCES Account(UserID)
             );
             '''
@@ -332,12 +341,17 @@ with conn:
     query = '''\
             INSERT INTO Account (User, Password, Joined) VALUES (%s, %s, %s);
             '''
-    cur.execute(query, 'anonymous', '0', '2018-01-25 12:00:00')
+    cur.execute(query, ('anonymous', '0', '2018-01-25 12:00:00'))
 
     query = '''\
-            INSERT INTO Role (Role) VALUES (%s);
+            INSERT INTO RoleType (RoleType) VALUES (%s);
             '''
     cur.execute(query, 'norole')
+
+    query = '''\
+            INSERT INTO Role (RoleType) VALUES (%s, %s);
+            '''
+    cur.execute(query, (0, 0))
 
     # ################################################################################# #
     #                                                                                   #
