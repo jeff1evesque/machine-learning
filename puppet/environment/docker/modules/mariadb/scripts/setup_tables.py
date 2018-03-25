@@ -188,44 +188,6 @@ with conn:
 
     # ################################################################################# #
     #                                                                                   #
-    # stored functions: time based uuid                                                 #
-    #                                                                                   #
-    # Note: https://mariadb.com/kb/en/library/guiduuid-performance/#code-to-do-it       #
-    #                                                                                   #
-    # ################################################################################# #
-    query = '''\
-            CREATE FUNCTION UuidToBin(_uuid BINARY(36))
-                RETURNS BINARY(16)
-                LANGUAGE SQL  DETERMINISTIC  CONTAINS SQL  SQL SECURITY INVOKER
-            RETURN
-                UNHEX(CONCAT(
-                    SUBSTR(_uuid, 15, 4),
-                    SUBSTR(_uuid, 10, 4),
-                    SUBSTR(_uuid,  1, 8),
-                    SUBSTR(_uuid, 20, 4),
-                    SUBSTR(_uuid, 25)
-                ));
-            '''
-    cur.execute(query)
-
-    query = '''\
-            CREATE FUNCTION UuidFromBin(_bin BINARY(16))
-                RETURNS BINARY(36)
-                LANGUAGE SQL  DETERMINISTIC  CONTAINS SQL  SQL SECURITY INVOKER
-            RETURN
-                LCASE(CONCAT_WS('-',
-                    HEX(SUBSTR(_bin,  5, 4)),
-                    HEX(SUBSTR(_bin,  3, 2)),
-                    HEX(SUBSTR(_bin,  1, 2)),
-                    HEX(SUBSTR(_bin,  9, 2)),
-                    HEX(SUBSTR(_bin, 11))
-                )
-            );
-            '''
-    cur.execute(query)
-
-    # ################################################################################# #
-    #                                                                                   #
     # user and roles                                                                    #
     #                                                                                   #
     # ################################################################################# #
@@ -251,115 +213,14 @@ with conn:
 
     # ################################################################################# #
     #                                                                                   #
-    # general permission                                                                #
+    # collection                                                                        #
     #                                                                                   #
     # ################################################################################# #
-    query = '''\
-            CREATE TABLE IF NOT EXISTS PermissionUUID (
-                PermissionUUID BINARY(16) NOT NULL PRIMARY KEY,
-                PermissionType INT NOT NULL
-            );
-            '''
-    cur.execute(query)
-
-    query = '''\
-            CREATE TABLE IF NOT EXISTS OwnUUID (
-                OwnUUID BINARY(16) NOT NULL PRIMARY KEY,
-                OwnType INT NOT NULL
-            );
-            '''
-    cur.execute(query)
-
-    query = '''\
-            CREATE TABLE IF NOT EXISTS Own (
-                OwnID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                OwnUUID BINARY(16) NOT NULL,
-                UserID INT NOT NULL,
-                PRIMARY KEY (OwnUUID, UserID),
-                FOREIGN KEY (OwnUUID) REFERENCES PermissionUUID(OwnUUID),
-                FOREIGN KEY (UserID) REFERENCES Account(UserID)
-            );
-            '''
-    cur.execute(query)
-
-    query = '''\
-            CREATE TABLE IF NOT EXISTS PermissionValue (
-                PermissionUUID BINARY(16) NOT NULL,
-                Code INT NOT NULL,
-                PRIMARY KEY (PermissionUUID, Code),
-                FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID)
-            );
-            '''
-    cur.execute(query)
-
-    query = '''\
-            CREATE TABLE IF NOT EXISTS Permission (
-                PermissionUUID BINARY(16) NOT NULL,
-                UserID INT NOT NULL,
-                PermissionType INT NOT NULL,
-                PRIMARY KEY (PermissionUUID, UserID, PermissionType),
-                FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID),
-                FOREIGN KEY (UserID) REFERENCES Account(UserID)
-            );
-            '''
-    cur.execute(query)
-
-    # ################################################################################# #
-    #                                                                                   #
-    # applied permission                                                                #
-    #                                                                                   #
-    # ################################################################################# #
-    query = '''\
-            CREATE TABLE IF NOT EXISTS PermissionCollection (
-                PermissionUUID BINARY(16) NOT NULL,
-                OwnID INT NOT NULL,
-                PRIMARY KEY (PermissionUUID, OwnUUID),
-                FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID),
-                FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
-            );
-            '''
-    cur.execute(query)
-
-    query = '''\
-            CREATE TABLE IF NOT EXISTS PermissionModel (
-                PermissionUUID BINARY(16) NOT NULL,
-                OwnID INT NOT NULL,
-                PRIMARY KEY (PermissionUUID, OwnUUID),
-                FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID),
-                FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
-            );
-            '''
-    cur.execute(query)
-
-    query = '''\
-            CREATE TABLE IF NOT EXISTS PermissionResult (
-                PermissionUUID BINARY(16) NOT NULL,
-                OwnID INT NOT NULL,
-                PRIMARY KEY (PermissionUUID, OwnUUID),
-                FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID),
-                FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
-            );
-            '''
-    cur.execute(query)
-
     query = '''\
             CREATE TABLE IF NOT EXISTS Collection (
-                OwnUUID BINARY(16) NOT NULL,
+                CollectionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 CollectionName VARCHAR (50) NOT NULL,
-                CollectionVersion INT NOT NULL,
-                FOREIGN KEY (OwnUUID) REFERENCES OwnUUID(OwnUUID),
-                PRIMARY KEY (OwnUUID, CollectionName)
-            );
-            '''
-    cur.execute(query)
-
-    query = '''\
-            CREATE TABLE IF NOT EXISTS Model (
-                OwnUUID BINARY(16) NOT NULL,
-                ModelName VARCHAR (50) NOT NULL,
-                Model BLOB NOT NULL,
-                FOREIGN KEY (OwnUUID) REFERENCES OwnUUID(OwnUUID),
-                PRIMARY KEY (OwnUUID, ModelName)
+                CollectionVersion INT NOT NULL
             );
             '''
     cur.execute(query)
@@ -373,6 +234,17 @@ with conn:
             CREATE TABLE IF NOT EXISTS ModelType (
                 ModelTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 ModelType VARCHAR (50) NOT NULL
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS Model (
+                ModelID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                ModelName VARCHAR (50) NOT NULL,
+                Model BLOB NOT NULL,
+                ModelTypeID INT NOT NULL,
+                FOREIGN KEY (ModelTypeID) REFERENCES ModelType(ModelTypeID)
             );
             '''
     cur.execute(query)
@@ -391,72 +263,74 @@ with conn:
     cur.execute(query)
 
     query = '''\
-            CREATE TABLE IF NOT EXISTS ResultValue (
-                ResultValueID INT NOT NULL PRIMARY KEY,
-                ResultValueActual DECIMAL (65,12) NOT NULL,
+            CREATE TABLE IF NOT EXISTS Result (
+                ResultID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                ResultValue DECIMAL (65,12) NOT NULL,
+                ModelTypeID INT (50) NOT NULL,
                 ResultTypeID INT NOT NULL,
-                PRIMARY KEY (ResultValueActual, ResultTypeID),
+                FOREIGN KEY (ModelTypeID) REFERENCES ModelType(ModelTypeID),
                 FOREIGN KEY (ResultTypeID) REFERENCES ResultType(ResultTypeID)
             );
             '''
     cur.execute(query)
 
+    # ################################################################################# #
+    #                                                                                   #
+    # applied permission                                                                #
+    #                                                                                   #
+    # ################################################################################# #
     query = '''\
-            CREATE TABLE IF NOT EXISTS Result (
-                OwnUUID BINARY(16) NOT NULL,
-                ResultValueID INT NOT NULL,
-                ModelTypeID INT NOT NULL,
-                PRIMARY KEY (OwnUUID, ResultValueID, ModelTypeID),
-                FOREIGN KEY (OwnUUID) REFERENCES OwnUUID(OwnUUID),
-                FOREIGN KEY (ResultValueID) REFERENCES ResultValue(ResultValueID),
-                FOREIGN KEY (ModelTypeID) REFERENCES ModelType(ModelTypeID)
+            CREATE TABLE IF NOT EXISTS PermissionCollection (
+                PermissionCollectionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                PermissionValueCode INT NOT NULL,
+                CollectionID INT NOT NULL,
+                UserID INT NOT NULL,
+                RoleID INT DEFAULT 0,
+                UNIQUE (CollectionID, USERID, ROLEID),
+                FOREIGN KEY (CollectionID) REFERENCES Collection(CollectionID),
+                FOREIGN KEY (UserID) REFERENCES Account(UserID),
+                FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS PermissionModel (
+                PermissionModelID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                PermissionValueCode INT NOT NULL,
+                ModelID INT NOT NULL,
+                UserID INT NOT NULL,
+                RoleID INT DEFAULT 0,
+                UNIQUE (CollectionID, USERID, ROLEID),
+                FOREIGN KEY (ModelID) REFERENCES Model(ModelID),
+                FOREIGN KEY (UserID) REFERENCES Account(UserID),
+                FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS PermissionResult (
+                PermissionResultID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                PermissionValueCode INT NOT NULL,
+                ResultID INT NOT NULL,
+                UserID INT NOT NULL,
+                RoleID INT DEFAULT 0,
+                UNIQUE (CollectionID, USERID, ROLEID),
+                FOREIGN KEY (ResultID) REFERENCES Result(ResultID),
+                FOREIGN KEY (UserID) REFERENCES Account(UserID),
+                FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
             );
             '''
     cur.execute(query)
 
     # ################################################################################# #
     #                                                                                   #
-    # populate OwnUUID                                                                  #
+    # populate Role                                                                     #
     #                                                                                   #
     # ################################################################################# #
     query = '''\
-            INSERT INTO OwnUUID (OwnUUID, OwnType)
-            VALUES (UuidToBin(UUID()), 'Collection');
-            '''
-    cur.executemany(query)
-
-    query = '''\
-            INSERT INTO OwnUUID (OwnUUID, OwnType)
-            VALUES (UuidToBin(UUID()), 'Model');
-            '''
-    cur.executemany(query)
-
-    query = '''\
-            INSERT INTO OwnUUID (OwnUUID, OwnType)
-            VALUES (UuidToBin(UUID()), 'Result');
-            '''
-    cur.executemany(query)
-
-    # ################################################################################# #
-    #                                                                                   #
-    # populate PermissionUUID                                                           #
-    #                                                                                   #
-    # ################################################################################# #
-    query = '''\
-            INSERT INTO PermissionUUID (PermissionUUID, OwnType)
-            VALUES (UuidToBin(UUID()), 'Collection');
-            '''
-    cur.executemany(query)
-
-    query = '''\
-            INSERT INTO PermissionUUID (PermissionUUID, OwnType)
-            VALUES (UuidToBin(UUID()), 'Model');
-            '''
-    cur.executemany(query)
-
-    query = '''\
-            INSERT INTO PermissionUUID (PermissionUUID, OwnType)
-            VALUES (UuidToBin(UUID()), 'Result');
+            INSERT INTO Role (Role) VALUES ('no-group');
             '''
     cur.executemany(query)
 
