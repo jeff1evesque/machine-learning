@@ -277,7 +277,7 @@ with conn:
                 UserID INT NOT NULL,
                 PRIMARY KEY (OwnUUID, UserID),
                 FOREIGN KEY (OwnUUID) REFERENCES PermissionUUID(OwnUUID),
-                FOREIGN KEY (UserID) REFERENCES Account(UserID),
+                FOREIGN KEY (UserID) REFERENCES Account(UserID)
             );
             '''
     cur.execute(query)
@@ -326,7 +326,7 @@ with conn:
                 OwnID INT NOT NULL,
                 PRIMARY KEY (PermissionUUID, OwnUUID),
                 FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID),
-                FOREIGN KEY (OwnID) REFERENCES Own(OwnID),
+                FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
             );
             '''
     cur.execute(query)
@@ -337,7 +337,7 @@ with conn:
                 OwnID INT NOT NULL,
                 PRIMARY KEY (PermissionUUID, OwnUUID),
                 FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID),
-                FOREIGN KEY (OwnID) REFERENCES Own(OwnID),
+                FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
             );
             '''
     cur.execute(query)
