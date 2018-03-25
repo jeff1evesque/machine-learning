@@ -383,9 +383,9 @@ with conn:
     #                                                                                   #
     # ################################################################################# #
     query = '''\
-            CREATE TABLE IF NOT EXISTS ResultLabel (
-                ResultLabelID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                ResultLabel VARCHAR (50) NOT NULL
+            CREATE TABLE IF NOT EXISTS ResultType (
+                ResultTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                ResultType VARCHAR (50) NOT NULL
             );
             '''
     cur.execute(query)
@@ -394,9 +394,9 @@ with conn:
             CREATE TABLE IF NOT EXISTS ResultValue (
                 ResultValueID INT NOT NULL PRIMARY KEY,
                 ResultValueActual DECIMAL (65,12) NOT NULL,
-                ResultLabelID INT NOT NULL,
-                PRIMARY KEY (ResultValueActual, ResultLabelID),
-                FOREIGN KEY (ResultLabelID) REFERENCES ResultLabel(ResultLabelID)
+                ResultTypeID INT NOT NULL,
+                PRIMARY KEY (ResultValueActual, ResultTypeID),
+                FOREIGN KEY (ResultTypeID) REFERENCES ResultType(ResultTypeID)
             );
             '''
     cur.execute(query)
@@ -472,10 +472,10 @@ with conn:
 
     # ################################################################################# #
     #                                                                                   #
-    # populate ResultLabel                                                              #
+    # populate ResultType                                                               #
     #                                                                                   #
     # ################################################################################# #
     query = '''\
-            INSERT INTO ResultLabel (ResultLabel) VALUES (%s);
+            INSERT INTO ResultType (ResultType) VALUES (%s);
             '''
     cur.executemany(query, result_types)
