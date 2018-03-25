@@ -332,12 +332,12 @@ with conn:
     query = '''\
             INSERT INTO Account (User, Password, Joined) VALUES (%s, %s, %s);
             '''
-    cur.executemany(query, 'anonymous', '0', '2018-01-25 12:00:00')
+    cur.execute(query, 'anonymous', '0', '2018-01-25 12:00:00')
 
     query = '''\
             INSERT INTO Role (Role) VALUES (%s);
             '''
-    cur.executemany(query, 'nullgroup')
+    cur.execute(query, 'norole')
 
     # ################################################################################# #
     #                                                                                   #
@@ -347,7 +347,7 @@ with conn:
     query = '''\
             INSERT INTO ModelType (ModelType) VALUES (%s);
             '''
-    cur.executemany(query, model_types)
+    cur.execute(query, model_types)
 
     # ################################################################################# #
     #                                                                                   #
@@ -357,4 +357,4 @@ with conn:
     query = '''\
             INSERT INTO ResultType (ResultType) VALUES (%s);
             '''
-    cur.executemany(query, result_types)
+    cur.execute(query, result_types)
