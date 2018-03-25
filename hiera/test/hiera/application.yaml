@@ -39,9 +39,10 @@ application:
         - poly
         - rbf
         - sigmoid
-    model_type:
-        - svm
-        - svr
+    result_type:
+        - r2
+        - decision_function
+        - probability
     log_level: 'DEBUG'
     error_log_path: '/log/application/error'
     warning_log_path: '/log/application/warning'
