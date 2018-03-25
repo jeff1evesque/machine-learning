@@ -190,6 +190,8 @@ with conn:
     #                                                                                   #
     # user and roles                                                                    #
     #                                                                                   #
+    # @RoleOwner, whether role is owned, or given.                                      #
+    #                                                                                   #
     # ################################################################################# #
     query = '''\
             CREATE TABLE IF NOT EXISTS Account (
@@ -212,8 +214,10 @@ with conn:
     query = '''\
             CREATE TABLE IF NOT EXISTS Role (
                 RoleID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                RoleOwner INT NOT NULL,
                 RoleTypeID INT NOT NULL,
                 UserID INT NOT NULL,
+                UNIQUE (RoleTypeID, UserID),
                 FOREIGN KEY (RoleTypeID) REFERENCES RoleType(RoleTypeID),
                 FOREIGN KEY (UserID) REFERENCES Account(UserID)
             );
@@ -339,7 +343,7 @@ with conn:
     #                                                                                   #
     # ################################################################################# #
     query = '''\
-            INSERT INTO Account (User, Password, Joined) VALUES (%s, %s, %s);
+            INSERT INTO Account (Username, Password, Joined) VALUES (%s, %s, %s);
             '''
     cur.execute(query, ('anonymous', '0', '2018-01-25 12:00:00'))
 
