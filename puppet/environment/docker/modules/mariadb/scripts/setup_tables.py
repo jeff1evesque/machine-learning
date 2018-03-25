@@ -57,7 +57,8 @@ with open(prepath + '/database.yaml', 'r') as stream:
 # yaml configuration: application attributes
 with open(prepath + '/application.yaml', 'r') as stream:
     settings = yaml.load(stream)
-    models = settings['application']['model_type']
+    model_types = settings['application']['model_type']
+    result_types = settings['application']['result_type']
 
 # yaml configuration: general attributes
 with open(prepath + '/common.yaml', 'r') as stream:
@@ -465,6 +466,16 @@ with conn:
     #                                                                                   #
     # ################################################################################# #
     query = '''\
-            INSERT INTO ModelType (model) VALUES (%s);
+            INSERT INTO ModelType (ModelType) VALUES (%s);
             '''
-    cur.executemany(query, models)
+    cur.executemany(query, model_types)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # populate ResultLabel                                                              #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            INSERT INTO ResultLabel (ResultLabel) VALUES (%s);
+            '''
+    cur.executemany(query, result_types)
