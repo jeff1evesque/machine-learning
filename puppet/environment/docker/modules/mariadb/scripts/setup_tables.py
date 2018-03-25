@@ -283,9 +283,8 @@ with conn:
                     CREATE TABLE IF NOT EXISTS PermissionValue (
                         PermissionUUID BINARY(16) NOT NULL,
                         Code INT NOT NULL,
-                        OwnID INT NOT NULL,
-                        PRIMARY KEY (PermissionUUID, Code, OwnID),
-                        FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
+                        PRIMARY KEY (PermissionUUID, Code),
+                        FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID)
                     );
                     '''
     cur.execute(sql_statement)
@@ -296,7 +295,8 @@ with conn:
                         UserID INT NOT NULL,
                         PermissionType INT NOT NULL,
                         PRIMARY KEY (PermissionUUID, UserID, PermissionType),
-                        FOREIGN KEY (UserID) REFERENCES Account(UserID)
+                        FOREIGN KEY (UserID) REFERENCES Account(UserID),
+                        FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID)
                     );
                     '''
     cur.execute(sql_statement)
@@ -311,7 +311,8 @@ with conn:
                         PermissionUUID BINARY(16) NOT NULL,
                         OwnUUID BINARY(16) NOT NULL,
                         PRIMARY KEY (PermissionUUID, OwnUUID),
-                        FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
+                        FOREIGN KEY (OwnUUID) REFERENCES OwnUUID(OwnUUID),
+                        FOREIGN KEY (PermissionUUID) REFERENCES PermissionUUID(PermissionUUID)
                     );
                     '''
     cur.execute(sql_statement)
@@ -321,7 +322,7 @@ with conn:
                         PermissionUUID BINARY(16) NOT NULL,
                         OwnUUID BINARY(16) NOT NULL,
                         PRIMARY KEY (PermissionUUID, OwnUUID),
-                        FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
+                        FOREIGN KEY (OwnUUID) REFERENCES OwnUUID(OwnUUID)
                     );
                     '''
     cur.execute(sql_statement)
@@ -331,7 +332,7 @@ with conn:
                         PermissionUUID BINARY(16) NOT NULL,
                         OwnUUID BINARY(16) NOT NULL,
                         PRIMARY KEY (PermissionUUID, OwnUUID),
-                        FOREIGN KEY (OwnID) REFERENCES Own(OwnID)
+                        FOREIGN KEY (OwnUUID) REFERENCES OwnUUID(OwnUUID)
                     );
                     '''
     cur.execute(sql_statement)
@@ -386,7 +387,7 @@ with conn:
                     CREATE TABLE IF NOT EXISTS ResultValue (
                         ResultValueActual DECIMAL (65,12) NOT NULL,
                         ResultLabelID INT NOT NULL,
-                        PRIMARY KEY (ResultValueActual, ResultLabelID)
+                        PRIMARY KEY (ResultValueActual, ResultLabelID),
                         FOREIGN KEY (ResultLabelID) REFERENCES ResultLabel(ResultLabelID)
                     );
                     '''
