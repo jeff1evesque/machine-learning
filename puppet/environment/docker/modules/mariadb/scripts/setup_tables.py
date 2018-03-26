@@ -350,12 +350,12 @@ with conn:
     query = '''\
             INSERT INTO RoleType (RoleType) VALUES (%s);
             '''
-    cur.execute(query, 'norole')
+    cur.execute(query, 'default')
 
     query = '''\
             INSERT INTO Role (RoleType) VALUES (%s, %s);
             '''
-    cur.execute(query, (0, 0))
+    cur.execute(query, 0)
 
     # ################################################################################# #
     #                                                                                   #
