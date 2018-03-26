@@ -355,13 +355,13 @@ with conn:
     query = '''\
             INSERT INTO RoleType (RoleType) VALUES (%s);
             '''
-    args = 'default'
+    args = ('default')
     cur.execute(query, args)
 
     query = '''\
             INSERT INTO Role (RoleOwner, RoleTypeID, UserID) VALUES (%s, %s, %s);
             '''
-    args = (0, 0, 0)
+    args = ('0', '1', '1')
     cur.execute(query, args)
 
     # ################################################################################# #
@@ -372,7 +372,7 @@ with conn:
     query = '''\
             INSERT INTO ModelType (ModelType) VALUES (%s);
             '''
-    cur.execute(query, model_types)
+    cur.executemany(query, model_types)
 
     # ################################################################################# #
     #                                                                                   #
@@ -382,4 +382,4 @@ with conn:
     query = '''\
             INSERT INTO ResultType (ResultType) VALUES (%s);
             '''
-    cur.execute(query, result_types)
+    cur.executemany(query, result_types)
