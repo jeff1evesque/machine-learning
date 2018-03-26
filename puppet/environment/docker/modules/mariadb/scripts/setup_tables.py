@@ -198,7 +198,8 @@ with conn:
                 UserID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
                 Username VARCHAR (50) NOT NULL,
                 Password VARCHAR (1069) NOT NULL,
-                Joined DATETIME NOT NULL
+                Joined DATETIME NOT NULL,
+                UNIQUE (UserName)
             );
             '''
     cur.execute(query)
@@ -206,7 +207,8 @@ with conn:
     query = '''\
             CREATE TABLE IF NOT EXISTS RoleType (
                 RoleTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                RoleType VARCHAR (1069) NOT NULL
+                RoleType VARCHAR (1069) NOT NULL,
+                UNIQUE (RoleType)
             );
             '''
     cur.execute(query)
@@ -246,7 +248,8 @@ with conn:
     query = '''\
             CREATE TABLE IF NOT EXISTS ModelType (
                 ModelTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                ModelType VARCHAR (50) NOT NULL
+                ModelType VARCHAR (50) NOT NULL,
+                UNIQUE (ModelType)
             );
             '''
     cur.execute(query)
@@ -270,7 +273,8 @@ with conn:
     query = '''\
             CREATE TABLE IF NOT EXISTS ResultType (
                 ResultTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                ResultType VARCHAR (50) NOT NULL
+                ResultType VARCHAR (50) NOT NULL,
+                UNIQUE (ResultType)
             );
             '''
     cur.execute(query)
