@@ -359,7 +359,7 @@ with conn:
     query = '''\
             INSERT INTO Role (RoleType) VALUES (%s, %s);
             '''
-    cur.execute(query, 0)
+    cur.execute(query, (0, 0, 0))
 
     # ################################################################################# #
     #                                                                                   #
