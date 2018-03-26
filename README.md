@@ -24,8 +24,7 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
 
 ## Configuration
 
-Fork this project, and remember to [generate](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/ssh_keys.rst)
- ssh keys, before cloning the repository:
+Fork this project, using of the following methods:
 
 - [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#simple-clone):
  clone the remote master branch.
@@ -33,9 +32,6 @@ Fork this project, and remember to [generate](https://github.com/jeff1evesque/ma
  clone the remote master branch, then checkout a specific commit hash.
 - [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#release-tag):
  clone the remote branch, associated with the desired release tag.
-
-**Note:** the [`puppetfile.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/doc/background/puppetfile.rst)
- can be reviewed, to better understand why ssh keys are required.
 
 ## Installation
 
