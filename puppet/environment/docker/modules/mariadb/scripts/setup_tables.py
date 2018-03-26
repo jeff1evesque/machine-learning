@@ -349,17 +349,20 @@ with conn:
     query = '''\
             INSERT INTO Account (Username, Password, Joined) VALUES (%s, %s, %s);
             '''
-    cur.execute(query, ('anonymous', '0', '2018-01-25 12:00:00'))
+    args = ('anonymous', '0', '2018-01-25 12:00:00')
+    cur.execute(query, args)
 
     query = '''\
             INSERT INTO RoleType (RoleType) VALUES (%s);
             '''
-    cur.execute(query, 'default')
+    args = 'default'
+    cur.execute(query, args)
 
     query = '''\
-            INSERT INTO Role (RoleType) VALUES (%s, %s);
+            INSERT INTO Role (RoleOwner, RoleType, UserID) VALUES (%s, %s, %s);
             '''
-    cur.execute(query, (0, 0, 0))
+    args = (0, 0, 0)
+    cur.execute(query, args)
 
     # ################################################################################# #
     #                                                                                   #
