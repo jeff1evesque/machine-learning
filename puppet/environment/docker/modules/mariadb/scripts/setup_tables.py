@@ -359,7 +359,7 @@ with conn:
     cur.execute(query, args)
 
     query = '''\
-            INSERT INTO Role (RoleOwner, RoleType, UserID) VALUES (%s, %s, %s);
+            INSERT INTO Role (RoleOwner, RoleTypeID, UserID) VALUES (%s, %s, %s);
             '''
     args = (0, 0, 0)
     cur.execute(query, args)
