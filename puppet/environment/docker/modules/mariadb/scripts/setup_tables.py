@@ -207,7 +207,7 @@ with conn:
     query = '''\
             CREATE TABLE IF NOT EXISTS RoleType (
                 RoleTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
-                RoleType VARCHAR (1069) NOT NULL,
+                RoleType VARCHAR (50) NOT NULL,
                 UNIQUE (RoleType)
             );
             '''
