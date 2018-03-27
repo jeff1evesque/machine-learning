@@ -22,7 +22,7 @@
 !.coveragerc
 !/utility/
 
-# Ignore and don't commit the following directories
+# Ignore directories
 *.sass-cache/
 *__pycache__/
 *.cache/
@@ -35,7 +35,7 @@
 /test/jest/lcov-report/
 /test/jest/node_modules/
 
-# Ignore and don't commit the following files
+# Ignore files
 *.pyc
 /src/js/.gitignore
 /log/database
