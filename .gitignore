@@ -1,4 +1,4 @@
-# Ignore project root (except exclamated files, and directories)
+# Ignore project root: except exclamated files, and directories
 /*
 !/interface/
 !/brain/
