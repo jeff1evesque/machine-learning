@@ -27,7 +27,3 @@ services:
     hostname: redis
     image: jeff1evesque/ml-redis:0.7
     network_mode: bridge
-  base:
-    hostname: base
-    image: jeff1evesque/ml-base:0.7
-    network_mode: bridge

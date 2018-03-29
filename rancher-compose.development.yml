@@ -12,6 +12,3 @@ services:
   redis:
     scale: 1
     start_on_create: true
-  base:
-    scale: 1
-    start_on_create: true
