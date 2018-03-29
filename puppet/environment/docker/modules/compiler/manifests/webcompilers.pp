@@ -64,6 +64,6 @@ class compiler::webcompilers {
     exec { 'npm rebuild node-sass':
         command     => 'npm rebuild node-sass',
         path        => '/usr/bin',
-        unless      => "type node-sass",
+        unless      => 'which node-sass',
     }
 }
