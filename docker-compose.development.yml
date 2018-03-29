@@ -13,11 +13,11 @@ services:
     - 6000:9090/tcp
   nginx-api:
     hostname: nginx-api
-    image: jeff1evesque/ml-nginx-api:0.7
+    image: jeff1evesque/ml-nginx:0.7
     network_mode: bridge
   nginx-web:
     hostname: nginx-web
-    image: jeff1evesque/ml-nginx-web:0.7
+    image: jeff1evesque/ml-nginx:0.7
     network_mode: bridge
   mongodb:
     hostname: mongodb
