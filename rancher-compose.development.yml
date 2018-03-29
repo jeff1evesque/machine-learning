@@ -6,6 +6,12 @@ services:
   webserver:
     scale: 1
     start_on_create: true
+  nginx-api:
+    scale: 1
+    start_on_create: true
+  nginx-web:
+    scale: 1
+    start_on_create: true
   mongodb:
     scale: 1
     start_on_create: true
