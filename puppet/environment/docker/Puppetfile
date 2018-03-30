@@ -42,7 +42,3 @@ mod 'timezone',
 mod 'concat',
   :git => 'https://github.com/puppetlabs/puppetlabs-concat.git',
   :ref => '2.2.0'
-
-mod 'nginx',
-  :git => 'https://github.com/voxpupuli/puppet-nginx.git',
-  :ref => 'v0.5.0'
