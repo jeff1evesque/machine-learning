@@ -6,7 +6,7 @@ class nginx::ssl {
 
     ## local variables
     $hiera             = lookup('reverse_proxy')
-    $nginx_type        = $hiera('type')
+    $nginx_type        = $hiera['type']
     $vhost             = $hiera['vhost']
     $cert              = $hiera['certificate']
     $cert_path         = $cert['cert_path']
