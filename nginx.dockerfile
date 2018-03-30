@@ -24,10 +24,9 @@ ARG NGINX_NAME
 ##
 ## Note: inline edits to '/etc/hosts', via 'docker build' is not persistent.
 ##
-RUN echo $(grep $(hostname) /etc/hosts | cut -f1) ${NGINX_NAME} >> /etc/hosts && cat /etc/hosts
-
-## provision with puppet
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/nginx/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
+RUN echo $(grep $(hostname) /etc/hosts | cut -f1) ${NGINX_NAME} >> /etc/hosts && \
+    echo ${NGINX_NAME} > /etc/hostname \
+    /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/nginx/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
 
 ## start nginx
 ENTRYPOINT ["nginx"]
