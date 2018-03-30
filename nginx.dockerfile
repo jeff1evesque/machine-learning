@@ -19,7 +19,7 @@ ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 ##     docker run --hostname nginx-api --name nginx-api -d ml-nginx-api
 ##     docker run --hostname nginx-web --name nginx-web -d ml-nginx-web
 ##
-## @NGINX_NAME, build time argument, used to temporarily set the hostname, to
+## @HOSTNAME, build time argument, used to temporarily set the hostname, to
 ##     allow nginx to be installed, with respective host parameters.
 ##
 RUN echo $(head -1 /etc/hosts | cut -f1) $HOSTNAME >> /etc/hosts
