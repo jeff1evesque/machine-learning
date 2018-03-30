@@ -11,8 +11,8 @@ ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 ##
 ##     valid cases:
 ##
-##     docker --build-arg NGINX_NAME=nginx-api
-##     docker --build-arg NGINX_NAME=nginx-web
+##     docker build --build-arg NGINX_NAME=nginx-api
+##     docker build --build-arg NGINX_NAME=nginx-web
 ##
 ## @NGINX_NAME, build time argument, used to temporarily set the hostname, to
 ##     allow nginx to be installed, with respective host parameters.
