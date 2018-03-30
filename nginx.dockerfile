@@ -29,4 +29,4 @@ RUN echo $(grep $(hostname) /etc/hosts | cut -f1) ${NGINX_NAME} >> /etc/hosts &&
     /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/nginx/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
 
 ## start nginx
-ENTRYPOINT ["nginx"]
+CMD ["/bin/sh", "-c", "nginx"]
