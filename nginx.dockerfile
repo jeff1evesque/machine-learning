@@ -2,8 +2,10 @@ FROM ml-base
 
 ## local variables
 ENV ROOT_PROJECT /var/machine-learning
-ENV ENVIRONMENT docker
-ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
+ENV PUPPET /opt/puppetlabs/bin/puppet
+ENV ROOT_PUPPET /etc/puppetlabs
+ENV MODULES $ROOT_PUPPET/code/modules
+ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ARG NGINX_NAME
 
 ##
@@ -26,7 +28,8 @@ ARG NGINX_NAME
 ##
 RUN echo $(grep $(hostname) /etc/hosts | cut -f1) ${NGINX_NAME} >> /etc/hosts && \
     echo ${NGINX_NAME} > /etc/hostname && \
-    /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/nginx/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
+    $PUPPET apply $MODULES/modules/nginx/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+
 
 ## start nginx
 CMD ["/bin/sh", "-c", "nginx"]
