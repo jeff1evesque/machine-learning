@@ -9,6 +9,7 @@ services:
     image: jeff1evesque/ml-webserver:0.7
     network_mode: bridge
     volumes:
+        - ${PWD}/log:/var/machine-learning/log
         - ${PWD}/src:/var/machine-learning/src
         - ${PWD}/interface:/var/machine-learning/interface
         - ${PWD}/hiera:/var/machine-learning/hiera
