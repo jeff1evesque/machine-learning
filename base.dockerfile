@@ -1,6 +1,7 @@
 FROM ubuntu:14.04
 
 ## environment variables
+ENV PUPPET /opt/puppetlabs/bin/puppet
 ENV ROOT_PROJECT /var/machine-learning
 ENV ROOT_PUPPET /etc/puppetlabs
 ENV ENVIRONMENT docker
@@ -17,7 +18,7 @@ ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
 
 ## copy puppet
-COPY puppet/environment/$ENVIRONMENT/Puppetfile $ROOT_PUPPET/code/environment/$ENVIRONMENT
+COPY puppet/environment/$ENVIRONMENT/Puppetfile $ENVPATH
 COPY puppet/environment/$ENVIRONMENT/modules $ROOT_PROJECT/code/modules
 COPY hiera $ROOT_PUPPET/puppet/hiera
 COPY hiera.yaml $ROOT_PUPPET/puppet
@@ -52,5 +53,5 @@ RUN gem install r10k -v 2.5.5
 RUN PUPPETFILE=$ENVPATH/Puppetfile PUPPETFILE_DIR=$CONTRIB_MODULES r10k puppetfile install
 
 ## provision with puppet
-RUN /opt/puppetlabs/bin/puppet apply $MODULES/package/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
-RUN /opt/puppetlabs/bin/puppet apply $MODULES/system/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply $MODULES/package/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply $MODULES/system/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
