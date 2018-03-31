@@ -1,20 +1,30 @@
 FROM ml-base
 
 ## local variables
+ENV PUPPET /opt/puppetlabs/bin/puppet
 ENV ROOT_PROJECT /var/machine-learning
-ENV ENVIRONMENT docker
-ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
+ENV ROOT_PUPPET /etc/puppetlabs
+ENV MODULES $ROOT_PUPPET/code/modules
+ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## copy files into container
-COPY . /var/machine-learning
+COPY log /var/machine-learning/log
+COPY src /var/machine-learning/src
+COPY interface /var/machine-learning/interface
+COPY hiera /var/machine-learning/hiera
+COPY brain /var/machine-learning/brain
+COPY test /var/machine-learning/test
+COPY app.py /var/machine-learning/app.py
+COPY factory.py /var/machine-learning/factory.py
+COPY __init__.py /var/machine-learning/__init__.py
 
 ## install pytest-cov
 RUN pip install pytest-cov==2.4.0
 
 ## provision with puppet
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/sklearn/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/compiler/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/webserver/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
+RUN $PUPPET apply $MODULES/sklearn/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply $MODULES/compiler/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply $MODULES/webserver/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
 WORKDIR /var/machine-learning
