@@ -1,17 +1,26 @@
 FROM ubuntu:14.04
 
-## local variables
+## environment variables
 ENV ROOT_PROJECT /var/machine-learning
+ENV ROOT_PUPPET /etc/puppetlabs
 ENV ENVIRONMENT docker
-ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
 
-## copy files into container
+## ensure directory
 RUN mkdir -p /var/machine-learning/log
-RUN mkdir -p /var/machine-learning/puppet
-RUN mkdir -p /var/machine-learning/hiera
-COPY puppet /var/machine-learning/puppet
-COPY hiera /var/machine-learning/hiera
-COPY hiera.yaml /var/machine-learning
+RUN mkdir -p $ROOT_PUPPET/code/environment/$ENVIRONMENT
+RUN mkdir -p $ROOT_PUPPET/puppet/hiera
+RUN mkdir -p $ROOT_PUPPET/code/modules_contrib
+
+## environment variables
+ENV MODULES $ROOT_PUPPET/code/modules
+ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
+ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
+
+## copy puppet
+COPY puppet/environment/$ENVIRONMENT/Puppetfile ROOT_PUPPET/code/environment/$ENVIRONMENT
+COPY puppet/environment/$ENVIRONMENT/modules $ROOT_PROJECT/code/modules
+COPY hiera ROOT_PUPPET/puppet/hiera
+COPY hiera.yaml ROOT_PUPPET/puppet
 
 ## install git, wget, pip
 ##
@@ -40,9 +49,8 @@ RUN gem install puppet_forge -v 2.2.5
 RUN gem install r10k -v 2.5.5
 
 ## install puppet modules using puppetfile with r10k
-RUN mkdir -p $ENVIRONMENT_DIR/modules_contrib/
-RUN PUPPETFILE=$ENVIRONMENT_DIR/Puppetfile PUPPETFILE_DIR=$ENVIRONMENT_DIR/modules_contrib/ r10k puppetfile install
+RUN PUPPETFILE=$ENVPATH/Puppetfile PUPPETFILE_DIR=$CONTRIB_MODULES r10k puppetfile install
 
 ## provision with puppet
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/package/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/system/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
+RUN /opt/puppetlabs/bin/puppet apply $MODULES/package/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN /opt/puppetlabs/bin/puppet apply $MODULES/system/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
