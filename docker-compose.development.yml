@@ -8,6 +8,15 @@ services:
     hostname: webserver
     image: jeff1evesque/ml-webserver:0.7
     network_mode: bridge
+    volumes:
+        - ${PWD}/src:/var/machine-learning/src
+        - ${PWD}/interface:/var/machine-learning/interface
+        - ${PWD}/hiera:/var/machine-learning/hiera
+        - ${PWD}/brain:/var/machine-learning/brain
+        - ${PWD}/test:/var/machine-learning/test
+        - ${PWD}/app.py:/var/machine-learning/app.py
+        - ${PWD}/factory.py:/var/machine-learning/factory.py
+        - ${PWD}/__init__.py:/var/machine-learning/__init__.py
     ports:
     - 5000:8080/tcp
     - 6000:9090/tcp
