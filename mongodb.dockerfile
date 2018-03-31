@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
 
 ## configuration file
-RUN $PUPPET apply $MODULES/mongodb/manifests/init.pp $CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply $MODULES/mongodb/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
 ENTRYPOINT ["/usr/bin/mongod"]
