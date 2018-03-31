@@ -1,9 +1,11 @@
 FROM ml-base
 
 ## local variables
+ENV PUPPET /opt/puppetlabs/bin/puppet
 ENV ROOT_PROJECT /var/machine-learning
-ENV ENVIRONMENT docker
-ENV ENVIRONMENT_DIR $ROOT_PROJECT/puppet/environment/$ENVIRONMENT
+ENV ROOT_PUPPET /etc/puppetlabs
+ENV MODULES $ROOT_PUPPET/code/modules
+ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## provision container
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
@@ -13,7 +15,7 @@ RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
 
 ## configuration file
-RUN /opt/puppetlabs/bin/puppet apply $ENVIRONMENT_DIR/modules/mongodb/manifests/init.pp --modulepath=$ENVIRONMENT_DIR/modules_contrib:$ENVIRONMENT_DIR/modules --confdir=$ROOT_PROJECT
+RUN $PUPPET apply $MODULES/mongodb/manifests/init.pp $CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
 ENTRYPOINT ["/usr/bin/mongod"]
