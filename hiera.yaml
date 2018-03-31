@@ -1,7 +1,7 @@
 ---
 version: 5
 defaults:
-  datadir: /var/machine-learning
+  datadir: /etc/puppetlabs/puppet
   data_hash: yaml_data
 
 hierarchy:
@@ -30,5 +30,5 @@ hierarchy:
     path: hiera/common.yaml
 
   - name: 'NodeJS build'
-    path: src/package.json
+    path: hiera/package.json
     data_hash: json_data
