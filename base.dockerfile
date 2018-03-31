@@ -17,12 +17,6 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
 
-## copy puppet
-COPY puppet/environment/$ENVIRONMENT/Puppetfile $ENVPATH
-COPY puppet/environment/$ENVIRONMENT/modules $ROOT_PROJECT/code/modules
-COPY hiera $ROOT_PUPPET/puppet/hiera
-COPY hiera.yaml $ROOT_PUPPET/puppet
-
 ## install git, wget, pip
 ##
 ##  Note: r10k requires 'git' installed
@@ -37,6 +31,12 @@ RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
 RUN dpkg -i puppetlabs-release-pc1-trusty.deb
 RUN apt-get -y update
 RUN apt-get -y install puppet-agent
+
+## copy puppet
+COPY puppet/environment/$ENVIRONMENT/Puppetfile $ENVPATH
+COPY puppet/environment/$ENVIRONMENT/modules $ROOT_PUPPET/code/modules
+COPY hiera $ROOT_PUPPET/puppet/hiera
+COPY hiera.yaml $ROOT_PUPPET/puppet
 
 ## install r10k
 ##
