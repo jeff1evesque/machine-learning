@@ -6,7 +6,7 @@
 
 
 # Pre-Pathing: allow 'sass' command
-PATH="/usr/local/bin:$PATH"
+PATH="/usr/bin:$PATH"
 
 
 cd "$1"/src/scss && for file in *; do

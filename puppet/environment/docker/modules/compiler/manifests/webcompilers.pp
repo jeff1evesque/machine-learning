@@ -13,8 +13,7 @@ class compiler::webcompilers {
     $environment     = $hiera_general['environment']
     $log_path        = "${root_dir}/log/webcompiler"
     $module          = 'compiler'
-    $environment_dir = "${root_dir}/puppet/environment/${environment}"
-    $compiler_dir    = "${environment_dir}/modules/${module}/scripts"
+    $compiler_dir    = "/etc/puppetlabs/code/modules/${module}/scripts"
     $template_path   = 'compiler/webcompilers.erb'
 
     $compilers = [

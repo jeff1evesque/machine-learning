@@ -5,15 +5,14 @@ class compiler::start_uglifyjs {
     include compiler::webcompilers
 
     ## variables
-    $hiera_general   = lookup('general')
-    $root_dir        = $hiera_general['root']
-    $environment     = $hiera_general['environment']
-    $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
+    $hiera       = lookup('general')
+    $root_dir    = $hiera['root']
+    $root_puppet = $hiera['root_puppet']
 
     ## manually compile
     exec { 'uglifyjs':
         command  => "./uglifyjs ${root_dir}",
-        cwd      => "${dev_env_path}/modules/compiler/scripts",
+        cwd      => "${root_puppet}/code/modules/compiler/scripts",
         provider => shell,
         require  => Class['compiler::webcompilers'],
     }

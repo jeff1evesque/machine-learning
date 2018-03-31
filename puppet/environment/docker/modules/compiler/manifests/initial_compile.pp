@@ -6,10 +6,9 @@ class compiler::initial_compile {
     include package::webcompilers
 
     ## local variables
-    $hiera_general   = lookup('general')
-    $root_dir        = $hiera_general['root']
-    $environment     = $hiera_general['environment']
-    $dev_env_path    = "${root_dir}/puppet/environment/${environment}"
+    $hiera       = lookup('general')
+    $root_dir    = $hiera['root']
+    $root_puppet = $hiera['root_puppet']
 
     $sources  = [
         'jsx',
@@ -21,7 +20,7 @@ class compiler::initial_compile {
     ## 'start_uglifyjs.pp' does not have adequate scope resolution.
     exec { 'rerun-uglifyjs':
         command  => "./uglifyjs ${root_dir}",
-        cwd      => "${dev_env_path}/modules/compiler/scripts",
+        cwd      => "${root_puppet}/code/modules/compiler/scripts",
         path     => '/usr/bin',
         provider => shell,
         require => [
