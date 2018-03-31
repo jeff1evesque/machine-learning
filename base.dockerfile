@@ -17,10 +17,10 @@ ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
 
 ## copy puppet
-COPY puppet/environment/$ENVIRONMENT/Puppetfile ROOT_PUPPET/code/environment/$ENVIRONMENT
+COPY puppet/environment/$ENVIRONMENT/Puppetfile $ROOT_PUPPET/code/environment/$ENVIRONMENT
 COPY puppet/environment/$ENVIRONMENT/modules $ROOT_PROJECT/code/modules
-COPY hiera ROOT_PUPPET/puppet/hiera
-COPY hiera.yaml ROOT_PUPPET/puppet
+COPY hiera $ROOT_PUPPET/puppet/hiera
+COPY hiera.yaml $ROOT_PUPPET/puppet
 
 ## install git, wget, pip
 ##
