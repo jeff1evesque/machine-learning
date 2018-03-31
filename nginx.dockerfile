@@ -8,6 +8,9 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ARG NGINX_NAME
 
+## copy files into container
+COPY puppet/environment/$ENVIRONMENT/modules/nginx $ROOT_PUPPET/code/modules/nginx
+
 ##
 ## environment variables
 ##
@@ -29,7 +32,6 @@ ARG NGINX_NAME
 RUN echo $(grep $(hostname) /etc/hosts | cut -f1) ${NGINX_NAME} >> /etc/hosts && \
     echo ${NGINX_NAME} > /etc/hostname && \
     $PUPPET apply $MODULES/modules/nginx/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
-
 
 ## start nginx
 CMD ["/bin/sh", "-c", "nginx"]

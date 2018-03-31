@@ -13,6 +13,9 @@ RUN echo "deb http://repo.mongodb.org/apt/ubuntu $(cat /etc/lsb-release | grep D
 RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
 
+## copy files into container
+COPY puppet/environment/$ENVIRONMENT/modules/mongodb $ROOT_PUPPET/code/modules/mongodb
+
 ## configuration file
 RUN $PUPPET apply $MODULES/mongodb/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 

@@ -17,6 +17,9 @@ COPY test /var/machine-learning/test
 COPY app.py /var/machine-learning/app.py
 COPY factory.py /var/machine-learning/factory.py
 COPY __init__.py /var/machine-learning/__init__.py
+COPY puppet/environment/$ENVIRONMENT/modules/sklearn $ROOT_PUPPET/code/modules/sklearn
+COPY puppet/environment/$ENVIRONMENT/modules/compiler $ROOT_PUPPET/code/modules/compiler
+COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
 
 ## install pytest-cov
 RUN pip install pytest-cov==2.4.0
