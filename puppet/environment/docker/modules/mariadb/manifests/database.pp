@@ -5,12 +5,9 @@ class mariadb::database {
     include package::pyyaml
 
     ## variables
-    $hiera_general   = lookup('general')
-    $root_dir        = $hiera_general['root']
-    $environment     = $hiera_general['environment']
-    $module          = 'mariadb'
-    $environment_dir = "${root_dir}/puppet/environment/${environment}"
-    $script_dir      = "${environment_dir}/modules/${module}/scripts"
+    $hiera       = lookup('general')
+    $root_dir    = $hiera['root']
+    $root_puppet = $hiera['root_puppet']
 
     ## define database tables
     ##
@@ -18,7 +15,7 @@ class mariadb::database {
     ##     https://puppetlabs.com/blog/class-containment-puppet
     exec { 'create-database-tables':
         command => "python setup_tables.py ${root_dir}",
-        cwd     => $script_dir,
+        cwd     => "${root_puppet}/code/modules/mariadb/scripts",
         path    => '/usr/bin',
         require => Class['package::pyyaml'],
     }
