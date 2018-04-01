@@ -10,7 +10,6 @@ ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## copy files into container
 COPY log /var/machine-learning/log
-COPY src /var/machine-learning/src
 COPY interface /var/machine-learning/interface
 COPY hiera /var/machine-learning/hiera
 COPY brain /var/machine-learning/brain
@@ -19,7 +18,6 @@ COPY app.py /var/machine-learning/app.py
 COPY factory.py /var/machine-learning/factory.py
 COPY __init__.py /var/machine-learning/__init__.py
 COPY puppet/environment/$ENVIRONMENT/modules/sklearn $ROOT_PUPPET/code/modules/sklearn
-COPY puppet/environment/$ENVIRONMENT/modules/compiler $ROOT_PUPPET/code/modules/compiler
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
 
 ## install pytest-cov
@@ -27,7 +25,6 @@ RUN pip install pytest-cov==2.4.0
 
 ## provision with puppet
 RUN $PUPPET apply $MODULES/sklearn/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
-RUN $PUPPET apply $MODULES/compiler/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 RUN $PUPPET apply $MODULES/webserver/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
