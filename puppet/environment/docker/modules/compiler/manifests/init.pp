@@ -14,7 +14,6 @@ class compiler {
     contain compiler::start_sass
     contain compiler::start_uglifyjs
     contain compiler::start_browserify
-    contain compiler::start_imagemin
 
     ## initial compile
     contain compiler::initial_compile

@@ -18,7 +18,6 @@ class compiler::webcompilers {
 
     $compilers = [
         'browserify',
-        'imagemin',
         'uglifyjs',
         'sass'
     ]
