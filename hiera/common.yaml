@@ -4,7 +4,7 @@
 general:
     environment: 'docker'
     root: '/var/machine-learning'
-    root_puppet: '/etc/puppetlabs/'
+    root_puppet: '/etc/puppetlabs'
     host: 'localhost'
     user: 'root'
     group: 'root'
