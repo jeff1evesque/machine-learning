@@ -12,7 +12,7 @@ mod 'apt',
 
 mod 'nodejs',
   :git => 'https://github.com/voxpupuli/puppet-nodejs.git',
-  :ref => 'v4.0.1'
+  :ref => 'v5.0.0'
 
 mod 'git',
   :git => 'https://github.com/puppetlabs/puppetlabs-git.git',
