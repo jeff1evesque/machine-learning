@@ -1,10 +1,10 @@
 FROM ubuntu:14.04
 
 ## environment variables
+ENV ENVIRONMENT docker
 ENV PUPPET /opt/puppetlabs/bin/puppet
 ENV ROOT_PROJECT /var/machine-learning
 ENV ROOT_PUPPET /etc/puppetlabs
-ENV ENVIRONMENT docker
 
 ## ensure directory
 RUN mkdir -p /var/machine-learning/log
