@@ -7,7 +7,8 @@ ENV ROOT_PUPPET /etc/puppetlabs
 ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
-## ensure asset directory
+## source and asset directory
+RUN mkdir -p /var/machine-learning/interface/static
 RUN mkdir -p /var/machine-learning/src/js
 
 ## copy files into container
