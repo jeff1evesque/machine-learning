@@ -7,7 +7,6 @@ class package::webcompilers {
     ## hiera attributes
     $hiera_dev          = lookup('development')
     $version_uglify_js  = $hiera_dev['npm']['custom']['uglify-js']
-    $version_imagemin   = $hiera_dev['npm']['custom']['imagemin']
     $version_node_sass  = $hiera_dev['npm']['custom']['node-sass']
     $version_babel_core = $hiera_dev['npm']['custom']['babel-core']
     $version_browserify = $hiera_dev['npm']['custom']['browserify']
@@ -16,7 +15,6 @@ class package::webcompilers {
     ## variables
     $webcompilers = [
         "uglify-js@${version_uglify_js}",
-        "imagemin@${$version_imagemin}",
         "node-sass@${$version_node_sass}",
         "babel-core@${$version_babel_core}",
         "browserify@${$version_browserify}",
