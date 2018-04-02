@@ -8,7 +8,7 @@ mod 'stdlib',
 
 mod 'apt',
   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
-  :ref => '4.4.1'
+  :ref => '4.5.1'
 
 mod 'nodejs',
   :git => 'https://github.com/voxpupuli/puppet-nodejs.git',
