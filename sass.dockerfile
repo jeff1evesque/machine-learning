@@ -28,4 +28,4 @@ RUN npm install -g --unsafe-perm node-sass@4.8.3
 RUN $PUPPET apply $MODULES/compiler/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
-##CMD ["/bin/sh", "-c", "sass"]
+CMD ["/bin/sh", "-c", "sass"]
