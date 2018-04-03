@@ -15,7 +15,6 @@ class package::webcompilers {
     ## variables
     $webcompilers = [
         "uglify-js@${version_uglify_js}",
-        "node-sass@${version_node_sass}",
         "babel-core@${version_babel_core}",
         "browserify@${version_browserify}",
         "babelify@${version_babelify}",
@@ -26,5 +25,13 @@ class package::webcompilers {
         ensure   => 'present',
         provider => 'npm',
         require  => Class['package::nodejs'],
+    }
+
+    ## 'docker build' workaround (i.e. sass.dockerfile)
+    exec { "node-sass@${version_node_sass}":
+        command  => "npm install -g node-sass@${version_node_sass}",
+        unless   => 'which node-sass',
+        path     => '/usr/bin',
+        require  => Class['nodejs'],
     }
 }
