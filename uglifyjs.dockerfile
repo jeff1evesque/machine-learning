@@ -12,9 +12,16 @@ RUN mkdir -p /var/machine-learning/interface/static
 RUN mkdir -p /var/machine-learning/src/js
 
 ## copy files into container
-COPY src/js /var/machine-learning/src/js
 COPY hiera /var/machine-learning/hiera
+COPY puppet/environment/$ENVIRONMENT/modules/package $ROOT_PUPPET/code/modules/package
 COPY puppet/environment/$ENVIRONMENT/modules/compiler $ROOT_PUPPET/code/modules/compiler
+
+##
+## manual build workaround
+##
+## https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-378086431
+##
+RUN npm install -g --unsafe-perm node-sass@4.8.3
 
 ## provision with puppet
 RUN $PUPPET apply $MODULES/compiler/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
