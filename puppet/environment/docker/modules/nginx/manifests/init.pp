@@ -19,14 +19,9 @@ class nginx (
     $cert_bit       = $::nginx::params::bit,
     $cert_days      = $::nginx::params::days,
 ) inherits ::nginx::params {
-    ## ensure log directory
-    require system::log_directory
-
-    ## configure nginx
     class { 'nginx::install': } ->
     class { 'nginx::config': } ->
     class { 'nginx::ssl': } ~>
     class { 'nginx::service': } ->
     Class['nginx']
 }
-contain nginx
