@@ -32,7 +32,7 @@ COPY puppet/environment/$ENVIRONMENT/modules/nginx $ROOT_PUPPET/code/modules/ngi
 ##
 RUN echo $(grep $(hostname) /etc/hosts | cut -f1) ${NGINX_NAME} >> /etc/hosts && \
     echo ${NGINX_NAME} > /etc/hostname && \
-    $PUPPET apply $MODULES/modules/nginx/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+    $PUPPET apply $MODULES/nginx/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## start nginx
 CMD ["/bin/sh", "-c", "nginx"]
