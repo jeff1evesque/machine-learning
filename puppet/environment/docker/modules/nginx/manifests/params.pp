@@ -13,6 +13,7 @@ class nginx::params {
         $listen_port    = $hiera['listen_port']
         $webserver_port = $hiera['webserver_port']
         $proxy          = $hiera['proxy']
+        $self_signed    = true
         $cert_path      = $hiera['certificate']['cert_path']
         $pkey_path      = $hiera['certificate']['pkey_path']
         $cert_country   = $hiera['certificate']['props']['country']
@@ -31,6 +32,7 @@ class nginx::params {
         $listen_port    = ''
         $webserver_port = ''
         $proxy          = ''
+        $self_signed    = true
         $cert_path      = '/etc/puppetlabs/puppet/ssl/certs'
         $pkey_path      = '/etc/puppetlabs/puppet/ssl/private_keys'
         $cert_country   = ''

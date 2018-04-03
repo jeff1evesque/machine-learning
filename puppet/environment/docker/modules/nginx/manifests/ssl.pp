@@ -3,6 +3,7 @@
 ###
 class nginx::ssl {
     ## local variables
+    $self_signed       = $nginx::self_signed
     $vhost             = $nginx::vhost
     $cert_path         = $nginx::cert_path
     $pkey_path         = $nginx::pkey_path
@@ -15,21 +16,23 @@ class nginx::ssl {
     $cert_days         = $nginx::cert_days
 
     ## create ssl certificate
-    file { "/root/build/ssl-nginx-${::nginx::type}":
-        ensure         => present,
-        content        => dos2unix(template("webserver/ssl-${::nginx::type}.erb")),
-        owner          => 'root',
-        group          => 'root',
-        mode           => '0700',
-        require        => File['/root/build'],
-        notify         => Exec["create-certificate-${::nginx::type}"],
-    }
+    if $self_signed {
+        file { "/root/build/ssl-nginx-${::nginx::type}":
+            ensure         => present,
+            content        => dos2unix(template("webserver/ssl-${::nginx::type}.erb")),
+            owner          => 'root',
+            group          => 'root',
+            mode           => '0700',
+            require        => File['/root/build'],
+            notify         => Exec["create-certificate-${::nginx::type}"],
+        }
 
-    exec { "create-certificate-${::nginx::type}":
-        command        => "./ssl-nginx-${::nginx::type}",
-        cwd            => '/root/build',
-        path           => '/usr/bin',
-        provider       => shell,
-        refreshonly    => true,
+        exec { "create-certificate-${::nginx::type}":
+            command        => "./ssl-nginx-${::nginx::type}",
+            cwd            => '/root/build',
+            path           => '/usr/bin',
+            provider       => shell,
+            refreshonly    => true,
+        }
     }
 }
