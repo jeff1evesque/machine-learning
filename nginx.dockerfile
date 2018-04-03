@@ -16,7 +16,7 @@ ARG WEBSERVER_PORT
 
 ## copy files into container
 COPY hiera $ROOT_PROJECT/hiera
-COPY puppet/environment/$ENVIRONMENT/modules/nginx $ROOT_PUPPET/code/modules/nginx
+COPY puppet/environment/$ENVIRONMENT/modules/reverse_proxy $ROOT_PUPPET/code/modules/reverse_proxy
 
 ## provision with puppet: either build a web, or api nginx image.
 ##
@@ -26,7 +26,7 @@ COPY puppet/environment/$ENVIRONMENT/modules/nginx $ROOT_PUPPET/code/modules/ngi
 ##     docker run --hostname nginx-api --name nginx-api -d ml-nginx-api
 ##     docker run --hostname nginx-web --name nginx-web -d ml-nginx-web
 ##
-RUN $PUPPET apply -e "class { nginx: \
+RUN $PUPPET apply -e "class { reverse_proxy: \
     run            => $RUN, \
     type           => $TYPE, \
     vhost          => $VHOST, \

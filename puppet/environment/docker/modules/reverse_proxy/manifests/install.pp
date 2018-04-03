@@ -1,7 +1,7 @@
 ###
 ### install.pp, install nginx.
 ###
-class nginx::service {
+class reverse_proxy::service {
     class { 'nginx':
         package_ensure  => $nginx::version
     }

@@ -3,11 +3,16 @@
 ###
 ### @webserver_port, corresponds to an existing webserver.
 ###
-class nginx::params {
+class reverse_proxy::params {
     $hiera          = lookup('reverse_proxy', undef)
+
+    if ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '14.04') {
+        $nginx_version = '1.12.1-1~trusty'
+    }
 
     if $hiera {
         $run            = true
+        $version        = $nginx_version
         $type           = $hiera['type']
         $vhost          = $hiera['vhost']
         $host_port      = $hiera['host_port']
@@ -28,6 +33,7 @@ class nginx::params {
 
     else {
         $run            = true
+        $version        = $nginx_version
         $type           = ''
         $vhost          = ''
         $host_port      = ''
