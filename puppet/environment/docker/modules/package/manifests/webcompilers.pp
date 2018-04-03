@@ -32,6 +32,6 @@ class package::webcompilers {
         command  => "npm install -g node-sass@${version_node_sass}",
         unless   => 'which node-sass',
         path     => '/usr/bin',
-        require  => Class['nodejs'],
+        require  => Class['package::nodejs'],
     }
 }
