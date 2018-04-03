@@ -13,27 +13,15 @@ ARG NGINX_NAME
 COPY hiera $ROOT_PROJECT/hiera
 COPY puppet/environment/$ENVIRONMENT/modules/nginx $ROOT_PUPPET/code/modules/nginx
 
-##
-## environment variables
-##
-##     build cases: non-persistent hostname
-##
-##     docker build --build-arg NGINX_NAME=nginx-api -f nginx.dockerfile -t ml-nginx-api .
-##     docker build --build-arg NGINX_NAME=nginx-web -f nginx.dockerfile -t ml-nginx-web .
-##
-##     run cases: persistent hostname
-##
-##     docker run --hostname nginx-api --name nginx-api -d ml-nginx-api
-##     docker run --hostname nginx-web --name nginx-web -d ml-nginx-web
-##
-## @HOSTNAME, build time argument, used to temporarily set the hostname, to
-##     allow nginx to be installed, with respective host parameters.
-##
-## Note: inline edits to '/etc/hosts', via 'docker build' is not persistent.
-##
-RUN echo $(grep $(hostname) /etc/hosts | cut -f1) ${NGINX_NAME} >> /etc/hosts && \
-    echo ${NGINX_NAME} > /etc/hostname && \
-    $PUPPET apply $MODULES/nginx/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+## provision with puppet
+RUN $PUPPET apply -e "class { nginx: \
+    type           => 'web', \
+    vhost          => 'machine-learning.com', \
+    host_port      => '8080', \
+    listen_port    => '5000', \
+    webserver_port => '5001', \
+    proxy => 'http://localhost' \
+} " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## start nginx
 CMD ["/bin/sh", "-c", "nginx"]
