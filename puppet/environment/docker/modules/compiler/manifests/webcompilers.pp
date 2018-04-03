@@ -53,15 +53,4 @@ class compiler::webcompilers {
             ],
         }
     }
-
-    ##
-    ## node-sass workaround: required for 'no such file or directory' bug:
-    ##
-    ##     https://github.com/sass/node-sass/issues/1579#issuecomment-227662011
-    ##
-    exec { 'npm rebuild node-sass':
-        command     => 'npm rebuild node-sass',
-        path        => '/usr/bin',
-        unless      => 'which node-sass',
-    }
 }
