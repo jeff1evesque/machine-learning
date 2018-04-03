@@ -26,11 +26,11 @@ COPY puppet/environment/$ENVIRONMENT/modules/nginx $ROOT_PUPPET/code/modules/ngi
 ##     docker run --hostname nginx-web --name nginx-web -d ml-nginx-web
 ##
 RUN $PUPPET apply -e "class { nginx: \
-    type           => 'web', \
-    vhost          => 'machine-learning.com', \
-    host_port      => '8080', \
-    listen_port    => '5000', \
-    webserver_port => '5001', \
+    type           => $TYPE, \
+    vhost          => $VHOST, \
+    host_port      => $HOST_PORT, \
+    listen_port    => $LISTEN_PORT, \
+    webserver_port => $WEBSERVER_PORT, \
     proxy          => 'http://localhost' \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
