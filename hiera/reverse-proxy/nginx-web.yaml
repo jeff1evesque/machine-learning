@@ -1,6 +1,8 @@
 ##
 ## This file contains reverse proxy configurations.
 ##
+## @webserver_port, must match corresponding (web) gunicorn webserver.
+##
 ## Note: the docker-compose.yml, and the 'unit-tests' defines the hostname
 ##       for the corresponding implementation.
 ##
@@ -9,6 +11,7 @@ reverse_proxy:
     vhost: 'machine-learning.com'
     host_port: 8080
     listen_port: 5000
+    webserver_port: 5001
     proxy: 'http://localhost'
 
     certificate:
