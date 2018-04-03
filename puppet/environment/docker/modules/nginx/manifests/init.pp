@@ -2,6 +2,7 @@
 ### init.pp: configure, and start nginx.
 ###
 class nginx (
+    $run            = $::nginx::params::run,
     $type           = $::nginx::params::type,
     $vhost          = $::nginx::params::vhost,
     $host_port      = $::nginx::params::host_port,

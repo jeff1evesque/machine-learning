@@ -7,6 +7,7 @@ class nginx::params {
     $hiera          = lookup('reverse_proxy', undef)
 
     if $hiera {
+        $run            = true
         $type           = $hiera['type']
         $vhost          = $hiera['vhost']
         $host_port      = $hiera['host_port']
@@ -26,6 +27,7 @@ class nginx::params {
     }
 
     else {
+        $run            = true
         $type           = ''
         $vhost          = ''
         $host_port      = ''
