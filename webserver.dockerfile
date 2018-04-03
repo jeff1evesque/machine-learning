@@ -9,14 +9,14 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## copy files into container
-COPY log /var/machine-learning/log
-COPY interface /var/machine-learning/interface
-COPY hiera /var/machine-learning/hiera
-COPY brain /var/machine-learning/brain
-COPY test /var/machine-learning/test
-COPY app.py /var/machine-learning/app.py
-COPY factory.py /var/machine-learning/factory.py
-COPY __init__.py /var/machine-learning/__init__.py
+COPY log $ROOT_PROJECT/log
+COPY interface $ROOT_PROJECT/interface
+COPY hiera $ROOT_PROJECT/hiera
+COPY brain $ROOT_PROJECT/brain
+COPY test $ROOT_PROJECT/test
+COPY app.py $ROOT_PROJECT/app.py
+COPY factory.py $ROOT_PROJECT/factory.py
+COPY __init__.py $ROOT_PROJECT/__init__.py
 COPY puppet/environment/$ENVIRONMENT/modules/sklearn $ROOT_PUPPET/code/modules/sklearn
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
 
@@ -28,5 +28,5 @@ RUN $PUPPET apply $MODULES/sklearn/manifests/init.pp --modulepath=$CONTRIB_MODUL
 RUN $PUPPET apply $MODULES/webserver/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
-WORKDIR /var/machine-learning
+WORKDIR $ROOT_PROJECT
 ENTRYPOINT ["python", "app.py"]

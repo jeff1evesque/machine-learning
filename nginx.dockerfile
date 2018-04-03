@@ -10,6 +10,7 @@ ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ARG NGINX_NAME
 
 ## copy files into container
+COPY hiera $ROOT_PROJECT/hiera
 COPY puppet/environment/$ENVIRONMENT/modules/nginx $ROOT_PUPPET/code/modules/nginx
 
 ##

@@ -3,13 +3,14 @@ FROM ml-base
 ## local variables
 ENV ENVIRONMENT docker
 ENV PUPPET /opt/puppetlabs/bin/puppet
+ENV ROOT_PROJECT /var/machine-learning
 ENV ROOT_PUPPET /etc/puppetlabs
 ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## source and asset directory
-RUN mkdir -p /var/machine-learning/interface/static
-RUN mkdir -p /var/machine-learning/src/js
+RUN mkdir -p $ROOT_PROJECT/interface/static
+RUN mkdir -p $ROOT_PROJECT/src/js
 
 ## copy files into container
 COPY hiera /var/machine-learning/hiera

@@ -7,7 +7,7 @@ ENV ROOT_PROJECT /var/machine-learning
 ENV ROOT_PUPPET /etc/puppetlabs
 
 ## ensure directory
-RUN mkdir -p /var/machine-learning/log
+RUN mkdir -p $ROOT_PROJECT/log
 RUN mkdir -p $ROOT_PUPPET/code/environment/$ENVIRONMENT
 RUN mkdir -p $ROOT_PUPPET/puppet/hiera
 RUN mkdir -p $ROOT_PUPPET/code/modules_contrib
