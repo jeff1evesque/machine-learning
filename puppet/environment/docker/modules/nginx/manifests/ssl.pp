@@ -35,4 +35,8 @@ class nginx::ssl {
             refreshonly    => true,
         }
     }
+
+    else {
+        notify {'Please remember to provide your own certificate!':}
+    }
 }
