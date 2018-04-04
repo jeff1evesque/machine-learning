@@ -3,6 +3,6 @@
 ###
 class reverse_proxy::install {
     class { 'nginx':
-        package_ensure  => $nginx::version
+        package_ensure => $reverse_proxy::version,
     }
 }
