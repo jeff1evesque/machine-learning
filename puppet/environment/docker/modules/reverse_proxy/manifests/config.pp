@@ -6,7 +6,7 @@ class reverse_proxy::config {
     ##
     ## @497, redirect 'http://' to 'https://'
     ##
-    reverse_proxy::resource::vhost { $reverse_proxy::vhost]:
+    reverse_proxy::resource::vhost { $reverse_proxy::vhost:
         ssl             => true,
         ssl_cert        => "${::reverse_proxy::cert_path}/${::reverse_proxy::vhost}_${::reverse_proxy::type}.crt",
         ssl_key         => "${::reverse_proxy::pkey_path}/${::reverse_proxy::vhost}_${::reverse_proxy::type}.key",
