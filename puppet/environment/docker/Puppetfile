@@ -4,7 +4,7 @@
 
 mod 'stdlib',
   :git => 'https://github.com/puppetlabs/puppetlabs-stdlib.git',
-  :ref => '4.15.0'
+  :ref => '4.25.1'
 
 mod 'apt',
   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
@@ -41,7 +41,7 @@ mod 'timezone',
 
 mod 'concat',
   :git => 'https://github.com/puppetlabs/puppetlabs-concat.git',
-  :ref => '2.2.0'
+  :ref => '4.2.1'
 
 mod 'nginx',
   :git => 'https://github.com/voxpupuli/puppet-nginx.git',
