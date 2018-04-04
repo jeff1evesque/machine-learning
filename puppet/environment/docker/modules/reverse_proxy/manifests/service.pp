@@ -3,7 +3,7 @@
 ###
 class reverse_proxy::service {
     ## local variables
-    $reverse_proxy_start   = $::reverse_proxy::run
+    $reverse_proxy_start = $::reverse_proxy::run
 
     ## ensure service
     service { 'nginx':
