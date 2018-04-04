@@ -1,5 +1,5 @@
 ###
-### init.pp: configure, and start nginx.
+### params.pp: default class parameters.
 ###
 ### @webserver_port, corresponds to an existing webserver.
 ###
