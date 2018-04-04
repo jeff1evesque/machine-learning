@@ -4,7 +4,7 @@
 ### @webserver_port, corresponds to an existing webserver.
 ###
 class reverse_proxy::params {
-    $hiera          = lookup('reverse_proxy', undef)
+    $hiera = lookup('reverse_proxy', undef)
 
     if ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '14.04') {
         $nginx_version = '1.12.1-1~trusty'
