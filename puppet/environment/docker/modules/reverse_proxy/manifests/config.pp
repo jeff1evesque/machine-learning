@@ -7,6 +7,7 @@ class reverse_proxy::config {
     $self_signed       = $::reverse_proxy::self_signed
     $vhost             = $::reverse_proxy::vhost
     $host_port         = $::reverse_proxy::host_port
+    $listen_port       = $::reverse_proxy::listen_port
     $webserver_port    = $::reverse_proxy::webserver_port
     $proxy             = $::reverse_proxy::proxy
     $cert_path         = $::reverse_proxy::cert_path
@@ -23,12 +24,12 @@ class reverse_proxy::config {
     ##
     ## @497, redirect 'http://' to 'https://'
     ##
-    reverse_proxy::resource::vhost { $reverse_proxy::vhost:
+    nginx::resource::vhost { $vhost:
         ssl             => true,
         ssl_cert        => "${cert_path}/${vhost}_${type}.crt",
         ssl_key         => "${pkey_path}/${vhost}_${type}.key",
-        listen_port     => $reverse_proxy::listen_port,
-        ssl_port        => $reverse_proxy::listen_port,
+        listen_port     => $listen_port,
+        ssl_port        => $listen_port,
         error_pages     => {
             '497' => "https://\$host:${host_port}\$request_uri",
         },
