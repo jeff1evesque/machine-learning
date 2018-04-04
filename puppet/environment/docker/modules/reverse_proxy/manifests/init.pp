@@ -20,9 +20,12 @@ class reverse_proxy (
     $cert_bit       = $::reverse_proxy::params::bit,
     $cert_days      = $::reverse_proxy::params::days,
 ) inherits ::reverse_proxy::params {
+    contain '::reverse_proxy::install'
+    contain '::reverse_proxy::config'
+    contain '::reverse_proxy::service'
+
     class { 'reverse_proxy::install': } ->
-    class { 'reverse_proxy::config': } ->
-    class { 'reverse_proxy::ssl': } ~>
+    class { 'reverse_proxy::config': } ~>
     class { 'reverse_proxy::service': } ->
     Class['reverse_proxy']
 }
