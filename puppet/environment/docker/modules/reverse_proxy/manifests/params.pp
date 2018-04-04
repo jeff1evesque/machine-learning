@@ -6,13 +6,9 @@
 class reverse_proxy::params {
     $hiera = lookup( { 'name' => 'reverse_proxy', 'default_value' => false } )
 
-    if ($::operatingsystem == 'Ubuntu' and $::lsbdistrelease == '14.04') {
-        $nginx_version = '1.12.1-1~trusty'
-    }
-
     if $hiera {
         $run            = true
-        $version        = $nginx_version
+        $version        = 'latest'
         $type           = $hiera['type']
         $vhost          = $hiera['vhost']
         $host_port      = $hiera['host_port']
