@@ -24,6 +24,6 @@ class webserver (
     class { 'webserver::dependency': } ->
     class { 'webserver::install': } ->
     class { 'webserver::config': } ~>
-    class { 'webserver::run': } ~>
+    class { 'webserver::run': } ->
     Class['webserver']
 }
