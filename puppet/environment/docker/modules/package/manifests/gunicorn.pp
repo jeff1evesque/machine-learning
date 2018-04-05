@@ -5,8 +5,8 @@ class package::gunicorn {
     require python
 
     ## local variables
-    $hiera_dev = lookup('development')
-    $version   = $hiera_dev['pip']['custom']['gunicorn']
+    $hiera_dev   = lookup('development')
+    $version     = $hiera_dev['pip']['custom']['gunicorn']
 
     package { 'gunicorn':
         ensure   => $version,
