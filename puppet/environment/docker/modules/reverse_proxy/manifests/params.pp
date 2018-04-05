@@ -31,7 +31,7 @@ class reverse_proxy::params {
 
     else {
         $run            = true
-        $version        = $nginx_version
+        $version        = 'latest'
         $type           = ''
         $vhost          = ''
         $host_port      = ''

@@ -1,6 +1,10 @@
 ###
 ### init.pp: install, configure, and start nginx reverse_proxy.
 ###
+### Note: this module has one dependency:
+###
+###     - https://github.com/voxpupuli/puppet-nginx
+###
 class reverse_proxy (
     $run            = $::reverse_proxy::params::run,
     $type           = $::reverse_proxy::params::type,
