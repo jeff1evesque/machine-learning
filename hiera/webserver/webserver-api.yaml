@@ -1,0 +1,29 @@
+##
+## This file contains webserver related configurations:
+##
+##  - flask: application framework
+##  - gunicorn: webserver(s)
+##  - nginx: forward proxy
+##
+## @gunicorn:workers, the number of work processes should be between 2-4
+##     workers per core in the server.
+##
+##     http://docs.gunicorn.org/en/latest/run.html#commonly-used-arguments
+##
+webserver:
+    root_dir: '/var/machine-learning'
+    pyyaml: '3.12'
+
+    flask:
+        log_path: '/log/webserver/flask.log'
+
+    gunicorn:
+        version: 19.6.0'
+        conf: '/etc/init/gunicorn.conf'
+        user: 'root'
+        group: 'root'
+        version: ''
+        bind: 0.0.0.0
+        port: 6001
+        workers: 6
+        log_path: '/log/webserver/gunicorn.log'
