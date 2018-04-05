@@ -17,7 +17,9 @@ webserver:
         log_path: '/log/webserver/flask.log'
 
     gunicorn:
-        run: true
+        conf_file: '/etc/init/gunicorn.conf'
+        user: 'root'
+        group: 'root'
         bind: 0.0.0.0
         port: 5001
         workers: 6

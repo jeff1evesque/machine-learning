@@ -12,17 +12,14 @@
 ##
 webserver:
     root_dir: '/var/machine-learning'
-    pyyaml: '3.12'
 
     flask:
         log_path: '/log/webserver/flask.log'
 
     gunicorn:
-        version: 19.6.0'
-        conf: '/etc/init/gunicorn.conf'
+        conf_file: '/etc/init/gunicorn.conf'
         user: 'root'
         group: 'root'
-        version: ''
         bind: 0.0.0.0
         port: 6001
         workers: 6
