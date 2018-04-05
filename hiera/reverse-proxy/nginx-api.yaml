@@ -11,8 +11,9 @@ reverse_proxy:
     vhost: 'machine-learning-api.com'
     host_port: 9090
     listen_port: 6000
-    webserver_port: 6001
     proxy: 'http://localhost'
+    members:
+        - 'localhost:6001'
 
     certificate:
         cert_path: '/etc/puppetlabs/puppet/ssl/certs'

@@ -1,7 +1,7 @@
 ###
 ### params.pp: default class parameters.
 ###
-### @webserver_port, corresponds to an existing webserver.
+### @members, corresponds to an existing webserver.
 ###
 class reverse_proxy::params {
     $hiera = lookup( { 'name' => 'reverse_proxy', 'default_value' => false } )
@@ -13,7 +13,7 @@ class reverse_proxy::params {
         $vhost          = $hiera['vhost']
         $host_port      = $hiera['host_port']
         $listen_port    = $hiera['listen_port']
-        $webserver_port = $hiera['webserver_port']
+        $members        = $hiera['members']
         $proxy          = $hiera['proxy']
         $self_signed    = true
         $cert_path      = $hiera['certificate']['cert_path']
@@ -25,6 +25,8 @@ class reverse_proxy::params {
         $cert_unit      = $hiera['certificate']['props']['unit']
         $cert_bit       = $hiera['certificate']['props']['bit']
         $cert_days      = $hiera['certificate']['props']['days']
+        $access_log     = $hiera['access_log']
+        $error_log      = $hiera['error_log']
     }
 
     else {
@@ -34,7 +36,7 @@ class reverse_proxy::params {
         $vhost          = ''
         $host_port      = ''
         $listen_port    = ''
-        $webserver_port = ''
+        $members        = ['']
         $proxy          = ''
         $self_signed    = true
         $cert_path      = '/etc/puppetlabs/puppet/ssl/certs'
@@ -46,5 +48,7 @@ class reverse_proxy::params {
         $cert_unit      = ''
         $cert_bit       = 4096
         $cert_days      = 365
+        $access_log     = '/var/log/nginx/puppet_access.log'
+        $error_log      = '/var/log/nginx/puppet_error.log'
     }
 }
