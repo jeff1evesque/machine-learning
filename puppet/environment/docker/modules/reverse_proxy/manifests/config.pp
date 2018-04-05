@@ -41,6 +41,13 @@ class reverse_proxy::config {
 
     ## create ssl certificate
     if $self_signed {
+        file { '/root/build':
+            ensure      => 'directory',
+            owner       => 'root',
+            group       => 'root',
+            mode        => '0700',
+        }
+
         file { "/root/build/ssl-nginx-${type}":
             ensure      => present,
             content     => dos2unix(template('reverse_proxy/ssl.erb')),
