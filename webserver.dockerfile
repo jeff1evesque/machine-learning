@@ -19,7 +19,7 @@ COPY factory.py $ROOT_PROJECT/factory.py
 COPY __init__.py $ROOT_PROJECT/__init__.py
 COPY puppet/environment/$ENVIRONMENT/modules/sklearn $ROOT_PUPPET/code/modules/sklearn
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
-ARG RUN
+ARG PORT
 
 ## provision with puppet
 RUN $PUPPET apply $MODULES/sklearn/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
