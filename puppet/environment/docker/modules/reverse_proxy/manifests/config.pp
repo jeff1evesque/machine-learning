@@ -43,7 +43,7 @@ class reverse_proxy::config {
     if $self_signed {
         file { "/root/build/ssl-nginx-${type}":
             ensure      => present,
-            content     => dos2unix(template("webserver/ssl-${type}.erb")),
+            content     => dos2unix(template('reverse_proxy/ssl')),
             owner       => 'root',
             group       => 'root',
             mode        => '0700',
