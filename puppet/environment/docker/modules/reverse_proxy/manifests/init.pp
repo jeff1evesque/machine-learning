@@ -23,7 +23,6 @@ class reverse_proxy (
     $error_log      = $::reverse_proxy::params::error_log,
 ) inherits ::reverse_proxy::params {
     class { 'reverse_proxy::install': } ->
-    class { 'reverse_proxy::config': } ~>
-    class { 'reverse_proxy::service': } ->
+    class { 'reverse_proxy::config': } ->
     Class['reverse_proxy']
 }
