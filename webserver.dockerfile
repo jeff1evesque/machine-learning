@@ -19,13 +19,23 @@ COPY factory.py $ROOT_PROJECT/factory.py
 COPY __init__.py $ROOT_PROJECT/__init__.py
 COPY puppet/environment/$ENVIRONMENT/modules/sklearn $ROOT_PUPPET/code/modules/sklearn
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
-
-## install pytest-cov
-RUN pip install pytest-cov==2.4.0
+ARG RUN
 
 ## provision with puppet
 RUN $PUPPET apply $MODULES/sklearn/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
-RUN $PUPPET apply $MODULES/webserver/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+
+##
+## provision with puppet: either build a web, or api webserver image.
+##
+##     docker build --build-arg PORT=6001 -f webserver.dockerfile -t ml-webserver-api .
+##     docker build --build-arg PORT=5001 -f webserver.dockerfile -t ml-webserver-web .
+##
+##     docker run --hostname webserver-api --name webserver-api -d ml-webserver-api
+##     docker run --hostname webserver-web --name webserver-web -d ml-webserver-web
+##
+RUN $PUPPET apply -e "class { reverse_proxy: \
+    port => '$PORT', \
+} " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
 WORKDIR $ROOT_PROJECT
