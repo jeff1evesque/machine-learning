@@ -16,6 +16,7 @@ reverse_proxy:
         - 'localhost:5001'
 
     certificate:
+        self_signed: true
         cert_path: '/etc/puppetlabs/puppet/ssl/certs'
         pkey_path: '/etc/puppetlabs/puppet/ssl/private_keys'
         props:

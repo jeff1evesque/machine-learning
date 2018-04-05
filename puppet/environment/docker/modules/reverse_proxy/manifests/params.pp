@@ -15,7 +15,7 @@ class reverse_proxy::params {
         $listen_port    = $hiera['listen_port']
         $members        = $hiera['members']
         $proxy          = $hiera['proxy']
-        $self_signed    = true
+        $self_signed    = $hiera['certificate']['self_signed']
         $cert_path      = $hiera['certificate']['cert_path']
         $pkey_path      = $hiera['certificate']['pkey_path']
         $cert_country   = $hiera['certificate']['props']['country']
