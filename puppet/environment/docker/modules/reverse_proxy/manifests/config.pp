@@ -29,7 +29,7 @@ class reverse_proxy::config {
 
     ## https only server: since 'listen_port' = 'ssl_port'
     nginx::resource::server { $vhost:
-        proxy           => "http://${proxy}:{host_port}",
+        proxy           => "https://${proxy}:{host_port}",
         ssl             => true,
         ssl_cert        => "${cert_path}/${vhost}_${type}.crt",
         ssl_key         => "${pkey_path}/${vhost}_${type}.key",
