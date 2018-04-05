@@ -1,5 +1,5 @@
 ###
-### init.pp: configure, and start nginx reverse_proxy.
+### init.pp: install, configure, and start nginx reverse_proxy.
 ###
 class reverse_proxy (
     $run            = $::reverse_proxy::params::run,
