@@ -8,7 +8,7 @@
 ###
 class webserver (
     $run                = $::webserver::params::run
-    $conf_file          = $::webserver::params::conf
+    $conf_file          = $::webserver::params::conf_file
     $user               = $::webserver::params::user
     $group              = $::webserver::params::group
     $root_dir           = $::webserver::params::root_dir

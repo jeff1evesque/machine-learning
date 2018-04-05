@@ -6,7 +6,7 @@ class webserver::params {
 
     if $hiera {
         $run                = true
-        $conf_file          = $hiera['gunicorn']['conf']
+        $conf_file          = $hiera['gunicorn']['conf_file']
         $user               = $hiera['gunicorn']['user']
         $group              = $hiera['gunicorn']['group']
         $root_dir           = $hiera['root_dir']
