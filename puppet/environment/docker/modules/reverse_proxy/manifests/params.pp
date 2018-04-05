@@ -37,7 +37,7 @@ class reverse_proxy::params {
         $host_port      = ''
         $listen_port    = ''
         $members        = ['']
-        $proxy          = ''
+        $proxy          = 'http://localhost'
         $self_signed    = true
         $cert_path      = '/etc/puppetlabs/puppet/ssl/certs'
         $pkey_path      = '/etc/puppetlabs/puppet/ssl/private_keys'
