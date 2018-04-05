@@ -32,7 +32,7 @@ RUN $PUPPET apply -e "class { reverse_proxy: \
     type           => '$TYPE', \
     vhost          => '$VHOST', \
     host_port      => '$HOST_PORT', \
-    listen_port    => '$LISTEN_PORT', \
+    listen_port    => $LISTEN_PORT, \
     webserver_port => '$WEBSERVER_PORT', \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
