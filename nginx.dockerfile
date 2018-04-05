@@ -28,13 +28,12 @@ COPY puppet/environment/$ENVIRONMENT/modules/reverse_proxy $ROOT_PUPPET/code/mod
 ##     docker run --hostname nginx-web --name nginx-web -d ml-nginx-web
 ##
 RUN $PUPPET apply -e "class { reverse_proxy: \
-    run            => $RUN, \
-    type           => $TYPE, \
-    vhost          => $VHOST, \
-    host_port      => $HOST_PORT, \
-    listen_port    => $LISTEN_PORT, \
-    webserver_port => $WEBSERVER_PORT, \
-    proxy          => 'http://localhost' \
+    run            => '$RUN', \
+    type           => '$TYPE', \
+    vhost          => '$VHOST', \
+    host_port      => '$HOST_PORT', \
+    listen_port    => '$LISTEN_PORT', \
+    webserver_port => '$WEBSERVER_PORT', \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## start nginx
