@@ -11,7 +11,7 @@ class reverse_proxy (
     $vhost          = $::reverse_proxy::params::vhost,
     $host_port      = $::reverse_proxy::params::host_port,
     $listen_port    = $::reverse_proxy::params::listen_port,
-    $webserver_port = $::reverse_proxy::params::webserver_port,
+    $members        = $::reverse_proxy::params::members,
     $proxy          = $::reverse_proxy::params::proxy,
     $self_signed    = $::reverse_proxy::params::self_signed,
     $cert_path      = $::reverse_proxy::params::cert_path,
