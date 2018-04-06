@@ -4,7 +4,7 @@
 ###
 ### Note: this module has one dependency:
 ###
-###     - https://github.com/voxpupuli/puppet-nginx
+###     - https://github.com/counsyl/puppet-python.git
 ###
 class webserver (
     $run                = $::webserver::params::run
