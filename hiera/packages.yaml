@@ -2,11 +2,6 @@
 ## This file contains versions of installed packages.
 ##
 development:
-    keyserver:
-        apt: hkp://keyserver.ubuntu.com:80
-        mongodb_key: 0C49F3730359A14518585931BC711F9BA15703C6
-        mongodb_source_list: 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse'
-
     apt:
         general:
             inotify-tools: '3.14-1ubuntu1'

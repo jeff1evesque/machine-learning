@@ -1,22 +1,18 @@
 ###
-### Run mongod instance.
+### config.pp, configure mongodb.
 ###
 class mongodb::config {
     ## local variables
-    $mongodb       = lookup('database')
-    $storage       = $mongodb['mongodb']['storage']
-    $systemLog     = $mongodb['mongodb']['systemLog']
-    $net           = $mongodb['mongodb']['net']
-    $process       = $mongodb['mongodb']['processManagement']
-    $dbPath        = $storage['dbPath']
-    $journal       = $storage['journal']['enabled']
-    $verbosity     = $systemLog['verbosity']
-    $destination   = $systemLog['destination']
-    $logAppend     = $systemLog['logAppend']
-    $systemLogPath = $systemLog['systemLogPath']
-    $port          = $net['port']
-    $bindIp        = $net['bindIp']
-    $pidfilepath   = $process['pidfilepath']
+    $dbPath        = $::mongodb::dbPath
+    $journal       = $::mongodb::enabled
+    $verbosity     = $::mongodb::verbosity
+    $destination   = $::mongodb::destination
+    $logAppend     = $::mongodb::logAppend
+    $systemLogPath = $::mongodb::systemLogPath
+    $port          = $::mongodb::port
+    $bindIp        = $::mongodb::bindIp
+    $pidfilepath   = $::mongodb::pidfilepath
+    $authorization = $::mongodb::authorization
 
     ## ensure base path
     file { $dbPath:
@@ -34,5 +30,21 @@ class mongodb::config {
         mode    => '0644',
         owner   => mongodb,
         group   => root,
+    }
+
+    file { '/var/run/mongod.pid':
+        ensure  => present,
+        mode    => '0644',
+        owner   => mongodb,
+        group   => mongodb
+    }
+
+    ## mongod init script
+    file { '/etc/init/upstart-mongod.conf':
+        ensure  => file,
+        content => dos2unix(template('mongodb/mongod.conf.erb')),
+        mode    => '0644',
+        owner   => mongodb,
+        group   => mongodb,
     }
 }
