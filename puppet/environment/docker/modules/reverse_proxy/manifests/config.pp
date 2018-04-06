@@ -6,7 +6,6 @@ class reverse_proxy::config {
     $type               = $::reverse_proxy::type
     $self_signed        = $::reverse_proxy::self_signed
     $vhost              = $::reverse_proxy::vhost
-    $host_port          = $::reverse_proxy::host_port
     $listen_port        = $::reverse_proxy::listen_port
     $members            = $::reverse_proxy::members
     $proxy              = $::reverse_proxy::proxy
@@ -23,13 +22,13 @@ class reverse_proxy::config {
     $error_log          = $::reverse_proxy::error_log
 
     ## reverse proxy members
-    nginx::resource::upstream { $proxy:
+    nginx::resource::upstream { "${proxy}-${type}":
         members         => split($members, ','),
     }
 
     ## https only server: since 'listen_port' = 'ssl_port'
     nginx::resource::server { $vhost:
-        proxy           => "https://${proxy}:${host_port}",
+        proxy           => "http://${proxy}-${type}",
         ssl             => true,
         ssl_cert        => "${cert_path}/${vhost}_${type}.crt",
         ssl_key         => "${pkey_path}/${vhost}_${type}.key",
