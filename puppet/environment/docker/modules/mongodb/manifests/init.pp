@@ -20,6 +20,7 @@ class mongodb (
     $username            = $::mongodb::username
     $password            = $::mongodb::password
 ) inherits ::mongodb::params {
+    class { 'mongodb::dependency': } ->
     class { 'mongodb::install' } ->
     class { 'mongodb::config' } ~>
     class { 'mongodb::create_users' } ~>

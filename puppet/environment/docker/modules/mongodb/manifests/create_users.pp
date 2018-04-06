@@ -2,8 +2,6 @@
 ### create_users.pp, create mongodb users.
 ###
 class mongodb::create_users {
-    include system::build_directory
-
     ## local variables
     $authorization  = $::mongodb::authorization
     $hostname       = $::mongodb::hostname
