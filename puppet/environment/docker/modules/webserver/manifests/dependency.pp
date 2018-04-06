@@ -2,7 +2,7 @@
 ### dependency.pp, installs various clients, and modules to interface with
 ###     the webserver.
 ###
-class webserver::config {
+class webserver::dependency {
     ## python dependencies
     contain python
     contain python::flask
