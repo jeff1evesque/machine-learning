@@ -7,7 +7,6 @@ ENV PUPPET /opt/puppetlabs/bin/puppet
 ENV ROOT_PUPPET /etc/puppetlabs
 ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
-ENV RUN false
 ARG TYPE
 ARG VHOST
 ARG HOST_PORT
@@ -28,7 +27,7 @@ COPY puppet/environment/$ENVIRONMENT/modules/reverse_proxy $ROOT_PUPPET/code/mod
 ##     docker run --hostname nginx-web --name nginx-web -d ml-nginx-web
 ##
 RUN $PUPPET apply -e "class { reverse_proxy: \
-    run            => '$RUN', \
+    run            => 'false', \
     type           => '$TYPE', \
     vhost          => '$VHOST', \
     host_port      => '$HOST_PORT', \
