@@ -6,7 +6,6 @@ ENV PUPPET /opt/puppetlabs/bin/puppet
 ENV ROOT_PUPPET /etc/puppetlabs
 ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
-ENV RUN false
 
 ## provision container
 RUN apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv EA312927
@@ -19,7 +18,7 @@ RUN mkdir -p /data/db
 COPY puppet/environment/$ENVIRONMENT/modules/mongodb $ROOT_PUPPET/code/modules/mongodb
 
 ## configuration file
-RUN $PUPPET apply -e 'class { mongodb: --build-arg RUN=false}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply -e 'class { mongodb: run => false}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
 ENTRYPOINT ["/usr/bin/mongod"]
