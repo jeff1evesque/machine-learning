@@ -1,6 +1,6 @@
 #!/bin/bash
 
-CWD=$(PWD)
+CWD=$($PWD)
 cd <%= @pkey_path %>
 openssl req -x509 -nodes -days <%= @cert_days %> \
     -newkey rsa:<%= @cert_bit %> \
