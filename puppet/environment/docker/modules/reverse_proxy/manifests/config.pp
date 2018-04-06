@@ -24,7 +24,7 @@ class reverse_proxy::config {
 
     ## reverse proxy members
     nginx::resource::upstream { $proxy:
-        members         => $members,
+        members         => split($members, ','),
     }
 
     ## https only server: since 'listen_port' = 'ssl_port'
