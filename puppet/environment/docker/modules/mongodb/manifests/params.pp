@@ -21,6 +21,9 @@ class reverse_proxy::params {
         $mongodb_key         = $hiera['mongodb']['mongodb_key']
         $mongodb_source_list = $hiera['mongodb']['source_list']
         $authorization       = $hiera['mongodb']['security']['authorization']
+        $hostname            = $hiera['mongodb']['hostname']
+        $username            = $hiera['mongodb']['username']
+        $password            = $hiera['mongodb']['password']
     }
 
     else {
@@ -38,5 +41,8 @@ class reverse_proxy::params {
         $mongodb_key         = '0C49F3730359A14518585931BC711F9BA15703C6'
         $mongodb_source_list = 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse'
         $authorization       = 'enabled'
+        $hostname            = 'mongodb'
+        $username            = 'authenticated'
+        $password            = 'password'
     }
 }

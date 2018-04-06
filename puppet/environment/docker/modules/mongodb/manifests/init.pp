@@ -16,9 +16,13 @@ class mongodb (
     $mongodb_key         = $::mongodb::params::mongodb_key
     $mongodb_source_list = $::mongodb::params::mongodb_source_list
     $authorization       = $::mongodb::params::authorization
+    $hostname            = $::mongodb::hostname
+    $username            = $::mongodb::username
+    $password            = $::mongodb::password
 ) inherits ::mongodb::params {
     class { 'mongodb::install' } ->
     class { 'mongodb::config' } ~>
+    class { 'mongodb::create_users' } ~>
     class { 'mongodb::run' } ->
     Class['mongodb']
 }
