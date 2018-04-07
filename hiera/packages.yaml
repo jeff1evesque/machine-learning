@@ -20,7 +20,6 @@ development:
     npm:
         custom:
             uglify-js: '3.3.16'
-            node-sass: '4.8.3'
             browserify: '16.1.1'
             babelify: '8.0.0'
 

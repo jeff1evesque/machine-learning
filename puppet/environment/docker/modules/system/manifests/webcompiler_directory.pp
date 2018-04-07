@@ -19,12 +19,6 @@ class system::webcompiler_directory {
             asset_dir => true,
             src_dir   => true,
         },
-        sass       => {
-            src       => 'scss',
-            asset     => 'css',
-            asset_dir => true,
-            src_dir   => true,
-        },
         uglifyjs   => {
             src       => 'js',
             asset     => 'js',

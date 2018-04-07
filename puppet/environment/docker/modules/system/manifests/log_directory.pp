@@ -9,7 +9,6 @@ class system::log_directory {
     $directories = [
         "${root_dir}/log",
         "${root_dir}/log/database",
-        "${root_dir}/log/webcompiler",
         "${root_dir}/log/webserver",
         "${root_dir}/log/application",
         "${root_dir}/log/application/error",
