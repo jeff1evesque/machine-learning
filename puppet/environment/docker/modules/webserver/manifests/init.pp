@@ -18,8 +18,9 @@ class webserver (
     $port               = $::webserver::params::port
     $workers            = $::webserver::params::workers
     $gunicorn_log       = $::webserver::params::log_path
-    $pyyaml_version     = $::webserver::params::pyyaml
-    $pytest_cov_version = $::webserver::params::pytest_cov
+    $pyyaml_version     = $::webserver::params::pyyaml_version
+    $redis_version      = $::webserver::params::redis_version
+    $pytest_cov_version = $::webserver::params::pytest_cov_version
 ) inherits ::webserver::params {
     class { 'webserver::dependency': } ->
     class { 'webserver::install': } ->

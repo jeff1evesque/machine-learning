@@ -6,6 +6,7 @@ class webserver::params {
     $run                = true
     $version            = 'latest'
     $pyyaml_version     = 'latest'
+    $redis_version      = 'latest'
     $pytest_cov_version = 'latest'
 
     if $hiera {

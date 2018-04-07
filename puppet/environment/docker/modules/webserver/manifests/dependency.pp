@@ -10,6 +10,7 @@ class webserver::dependency {
 
     ## local variables
     $pyyaml_version     = $::webserver::pyyaml_version
+    $redis_version      = $::webserver::redis_version
     $pytest_cov_version = $::webserver::pytest_cover_version
 
     package { 'pytest-cov':
@@ -24,10 +25,14 @@ class webserver::dependency {
         require         => Class['python'],
     }
 
+    ## redis client
+    package { 'redis'
+        ensure          => $redis_version,
+        provider        => 'pip',
+        require         => Class['python'],
+    }
+
     ## mariadb client
     contain mariadb::client
     contain mariadb::bindings
-
-    ## redis client
-    contain package::redis_client
 }

@@ -36,5 +36,4 @@ development:
             pymongo: '3.4.0'
 
         custom:
-            redis: '2.10.5'
             scikit-learn: '0.19.1'
