@@ -1,15 +1,13 @@
 ###
 ### init.pp: install client, and initialize database tables.
 ###
+class mariadb (
 
-## install mariadb
-contain mariadb::server
-
-## install mariadb client
-contain mariadb::client
-
-## install mariad bindings
-contain mariadb::bindings
-
-## create database tables
-contain mariadb::database
+) inherits ::mariadb::params {
+    class { 'mariadb::server' } ->
+    class { 'mariadb::client' } ->
+    class { 'mariadb::bindings' } ->
+    class { 'mariadb::database' } ->
+    class { 'mariadb::run' } ->
+    Class['mariadb']
+}
