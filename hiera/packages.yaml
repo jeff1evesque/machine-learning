@@ -9,7 +9,6 @@ development:
             openssl: '1.0.1f-1ubuntu2.2*'
 
         custom:
-            redis-server: '2:2.8.4-2'
             python-dev: '2.7.5-5ubuntu3'
             python-numpy: '1:1.8.2-0ubuntu0.1'
             python-scipy: '0.13.3-1build1'
