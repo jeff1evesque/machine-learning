@@ -2,6 +2,7 @@
 ### init.pp: install client, and initialize database tables.
 ###
 class mariadb (
+    $run              = $::mariadb::params::run,
     $root_puppet      = $::mariadb::params::root_puppet,
     $pyyaml_version   = $::mariadb::params::pyyaml_version,
     $db_host          = $::mariadb::params::db_host,
@@ -9,10 +10,10 @@ class mariadb (
     $db_user          = $::mariadb::params::db_user,
     $db_pass          = $::mariadb::params::db_pass,
     $provisioner      = $::mariadb::params::provisioner,
-    $provisioner_pass = $::mariadb::params::provisioner_password
-    $tester           = $::mariadb::params::tester
-    $tester_pass      = $::mariadb::params::tester_password
-    $root_pass        = $::mariadb::params::root_password
+    $provisioner_pass = $::mariadb::params::provisioner_password,
+    $tester           = $::mariadb::params::tester,
+    $tester_pass      = $::mariadb::params::tester_password,
+    $root_pass        = $::mariadb::params::root_password,
     $bind_address     = $::mariadb::params::bind_address
 ) inherits ::mariadb::params {
     class { 'mariadb::server' } ->
