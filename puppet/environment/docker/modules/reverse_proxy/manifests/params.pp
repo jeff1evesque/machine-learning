@@ -4,11 +4,11 @@
 ### @members, corresponds to an existing webserver.
 ###
 class reverse_proxy::params {
-    $hiera = lookup( { 'name' => 'reverse_proxy', 'default_value' => false } )
+    $hiera              = lookup( { 'name' => 'reverse_proxy', 'default_value' => false } )
+    $run                = true
+    $version            = 'latest'
 
     if $hiera {
-        $run            = true
-        $version        = 'latest'
         $type           = $hiera['type']
         $vhost          = $hiera['vhost']
         $host_port      = $hiera['host_port']
@@ -30,8 +30,6 @@ class reverse_proxy::params {
     }
 
     else {
-        $run            = true
-        $version        = 'latest'
         $type           = ''
         $vhost          = ''
         $host_port      = ''
