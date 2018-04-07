@@ -26,7 +26,7 @@ COPY puppet/environment/$ENVIRONMENT/modules/compiler $ROOT_PUPPET/code/modules/
 RUN npm install -g --unsafe-perm node-sass@4.8.3
 
 ## provision with puppet
-RUN $PUPPET 'class { sass: run => false }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply -e 'class { sass: run => false }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
 CMD ["/bin/sh", "-c", "sass"]
