@@ -1,9 +1,9 @@
 ###
 ### dependency.pp, ensure directories.
 ###
-class webserver::dependency {
+class sass::dependency {
     ## local variables
-    $root_dir    = $::mongodb::root_dir
+    $root_dir    = $::sass::root_dir
     $directories = [
         "${root_dir}/log",
         "${root_dir}/log/webcompiler",

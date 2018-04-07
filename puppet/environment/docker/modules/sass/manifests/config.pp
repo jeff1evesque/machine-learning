@@ -22,9 +22,17 @@ class sass::dependency {
     ## dos2unix line endings
     file { "${compiler_dir}/sass.conf":
         ensure  => file,
-        content => dos2unix(template('/etc/puppetlabs/code/modules/sass/scripts/sass')),
+        content => dos2unix(template("${root_puppet}/code/modules/sass/scripts/sass")),
         mode    => '0644',
         owner   => 'root',
         group   => 'root',
+    }
+
+    ## create node directory
+    file { "${root_dir}/src/node_modules":
+        ensure => 'directory',
+        owner  => root,
+        group  => root,
+        mode   => '0755',
     }
 }

@@ -1,7 +1,7 @@
 ###
 ### install.pp, install sass
 ###
-class sass::dependency {
+class sass::install {
     ## local variables
     $node_version       = $::sass::node_version
     $node_sass_version  = $::sass::node_sass_version
@@ -18,6 +18,8 @@ class sass::dependency {
 
     ## install node-sass
     package { 'node-sass': 
-        ensure          => $node_sass_version
+        ensure          => $node_sass_version,
+        provider        => 'npm',
+        require         => Class['nodejs'],
     }
 }
