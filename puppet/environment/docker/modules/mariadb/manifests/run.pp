@@ -6,7 +6,7 @@ class webserver::run {
     $start_mariadb = $::mariadb::run
 
     ## mariadb service
-    service { 'gunicorn':
+    service { 'mysqld':
         ensure     => $start_mariadb,
         enable     => $start_mariadb,
     }
