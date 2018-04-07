@@ -20,8 +20,6 @@ development:
     npm:
         custom:
             uglify-js: '3.3.16'
-            browserify: '16.1.1'
-            babelify: '8.0.0'
 
     pip:
         general:
