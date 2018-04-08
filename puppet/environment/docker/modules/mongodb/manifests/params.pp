@@ -3,7 +3,7 @@
 ###
 ### @members, corresponds to an existing webserver.
 ###
-class reverse_proxy::params {
+class mongodb::params {
     $hiera                   = lookup( { 'name' => 'database', 'default_value' => false } )
     $run                     = true
 
