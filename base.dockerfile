@@ -54,5 +54,4 @@ RUN gem install r10k -v 2.5.5
 RUN PUPPETFILE=$ENVPATH/Puppetfile PUPPETFILE_DIR=$CONTRIB_MODULES r10k puppetfile install
 
 ## provision with puppet
-RUN $PUPPET apply $MODULES/package/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
-RUN $PUPPET apply $MODULES/system/manifests/init.pp --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply apply -e 'class { system: }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
