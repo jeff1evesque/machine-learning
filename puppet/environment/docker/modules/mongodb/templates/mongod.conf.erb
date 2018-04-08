@@ -1,15 +1,29 @@
-#!upstart
-description 'this file is enforced by puppet, and starts the mongod process.'
+## mongodb.conf, this file is enforced by puppet.
+##
+## Note: http://docs.mongodb.org/manual/reference/configuration-options/
+##
 
-## start job defined in this file after system services, and processes have
-##     already loaded (to prevent conflict).
-start on runlevel [2345]
+## where and how to store data.
+storage:
+  dbPath: <%= @dbPath[0] %>
+  journal:
+    enabled: <%= @journal %>
 
-## stop upstart job
-stop on runlevel [!2345]
+## where to write logging data.
+systemLog:
+  destination: <%= @destination %>
+  logAppend: <%= @logAppend %>
+  path: <%= @systemLogPath %>
 
-## run upstart job as a background process
-expect fork
+## network interfaces
+net:
+  port: <%= @port %>
+  bindIp: <%= @bindIp %>
 
-## start upstart job
-exec mongod --config /etc/mongod.conf
+## mongodb process
+processManagement:
+  pidFilePath: <%= @pidfilepath %>
+
+## role-based access controls
+#security:
+#   authorization: enabled

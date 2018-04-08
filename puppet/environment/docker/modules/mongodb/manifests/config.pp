@@ -26,7 +26,7 @@ class mongodb::config {
     ## general mongod configuration
     file { '/etc/mongod.conf':
         ensure  => file,
-        content => dos2unix(template('mongodb/mongodb.conf.erb')),
+        content => dos2unix(template('mongodb/mongod.conf.erb')),
         mode    => '0644',
         owner   => mongodb,
         group   => root,
@@ -37,14 +37,5 @@ class mongodb::config {
         mode    => '0644',
         owner   => mongodb,
         group   => mongodb
-    }
-
-    ## mongod init script
-    file { '/etc/init/upstart-mongod.conf':
-        ensure  => file,
-        content => dos2unix(template('mongodb/mongod.conf.erb')),
-        mode    => '0644',
-        owner   => mongodb,
-        group   => mongodb,
     }
 }
