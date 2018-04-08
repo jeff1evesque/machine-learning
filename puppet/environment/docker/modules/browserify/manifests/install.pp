@@ -12,6 +12,7 @@ class browserify::install {
         "${root_dir}/log",
         "${root_dir}/log/webcompiler",
     ]
+    $node_packages      = $::browserify::node_packages
 
     ## install nodejs, with npm
     class { 'nodejs':
@@ -35,5 +36,21 @@ class browserify::install {
         ensure          => $node_browserify_version,
         provider        => 'npm',
         require         => Class['nodejs'],
+    }
+
+    ## install 'package.json'
+    if $node_packages {
+        $node_packages.each|String $package, String $version| {
+            nodejs::npm { "install-${package}":
+                ensure          => $version,
+                package         => $package,
+                install_options => ['--no-bin-links'],
+                target          => "${root_dir}/src/node_modules",
+                require         => [
+                    Class['package::nodejs'],
+                    File["${root_dir}/src/node_modules"],
+                ]
+            }
+        }
     }
 }

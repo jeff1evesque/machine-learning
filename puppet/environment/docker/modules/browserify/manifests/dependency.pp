@@ -18,13 +18,13 @@ class browserify::dependency {
     }
 
     ## source + asset directories
-    file { "${root_dir}/src/scss":
+    file { "${root_dir}/src/jsx":
         ensure => 'directory',
         mode     => '0755',
         owner    => 'root',
         group    => 'root',
     }
-    file { "${root_dir}/interface/static/css":
+    file { "${root_dir}/src/js":
         ensure => 'directory',
         mode     => '0755',
         owner    => 'root',

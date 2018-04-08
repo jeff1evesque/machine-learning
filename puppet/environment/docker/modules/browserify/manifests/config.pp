@@ -1,5 +1,5 @@
 ###
-### config.pp, configure sass.
+### config.pp, configure browserify.
 ###
 class browserify::dependency {
     ## local variables
