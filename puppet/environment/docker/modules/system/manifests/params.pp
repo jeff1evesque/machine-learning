@@ -2,15 +2,18 @@
 ### params.pp: default class parameters.
 ###
 class mariadb::params {
-    $hiera        = lookup( { 'name' => 'system', 'default_value' => false } )
+    $hiera          = lookup( { 'name' => 'system', 'default_value' => false } )
+    $nodejs_version = 'latest'
 
     if $hiera {
-        $regions  = $hiera['timezone']['region']
-        $locality = $hiera['timezone']['locality']
+        $region     = $hiera['timezone']['region']
+        $locality   = $hiera['timezone']['locality']
+        $packages   = $hiera['packages']
     }
 
     else {
-        $regions  = 'America'
-        $locality = 'New_York
+        $region     = 'America'
+        $locality   = 'New_York'
+        $packages   = ''
     }
 }
