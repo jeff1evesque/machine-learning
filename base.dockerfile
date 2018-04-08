@@ -17,14 +17,13 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
 
-## install git, wget, pip
+## install git, wget
 ##
 ##  Note: r10k requires 'git' installed
 ##
 RUN apt-get -y update
 RUN apt-get -y install git=1:1.9.1-1ubuntu0.7
 RUN apt-get -y install wget=1.15-1ubuntu1.14.04*
-RUN apt-get -y install python-pip=1.5.4-1ubuntu4
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
