@@ -33,7 +33,7 @@ class browserify::install {
     }
 
     package { 'browserify': 
-        ensure          => $node_browserify_version,
+        ensure          => $browserify_version,
         provider        => 'npm',
         require         => Class['nodejs'],
     }
