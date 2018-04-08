@@ -1,8 +1,6 @@
 ###
 ### params.pp: default class parameters.
 ###
-### @members, corresponds to an existing webserver.
-###
 class uglifyjs::params {
     $hiera            = lookup( { 'name' => 'webcompiler', 'default_value' => false } )
     $run              = true

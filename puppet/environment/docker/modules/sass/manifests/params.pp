@@ -1,8 +1,6 @@
 ###
 ### params.pp: default class parameters.
 ###
-### @members, corresponds to an existing webserver.
-###
 class reverse_proxy::params {
     $hiera                   = lookup( { 'name' => 'webcompiler', 'default_value' => false } )
     $hiera_packages          = lookup( { 'name' => 'dependencies', 'default_value' => false } )
