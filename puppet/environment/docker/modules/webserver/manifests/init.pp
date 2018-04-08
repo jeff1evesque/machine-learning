@@ -7,20 +7,20 @@
 ###     - https://github.com/counsyl/puppet-python.git
 ###
 class webserver (
-    $run                = $::webserver::params::run
-    $conf_file          = $::webserver::params::conf_file
-    $user               = $::webserver::params::user
-    $group              = $::webserver::params::group
-    $root_dir           = $::webserver::params::root_dir
-    $version            = $::webserver::params::version
-    $flask_log          = $::webserver::params::log_path
-    $bind               = $::webserver::params::bind
-    $port               = $::webserver::params::port
-    $workers            = $::webserver::params::workers
-    $gunicorn_log       = $::webserver::params::log_path
-    $pyyaml_version     = $::webserver::params::pyyaml_version
-    $redis_version      = $::webserver::params::redis_version
-    $pytest_cov_version = $::webserver::params::pytest_cov_version
+    $run                = $::webserver::params::run,
+    $conf_file          = $::webserver::params::conf_file,
+    $user               = $::webserver::params::user,
+    $group              = $::webserver::params::group,
+    $root_dir           = $::webserver::params::root_dir,
+    $version            = $::webserver::params::version,
+    $flask_log          = $::webserver::params::log_path,
+    $bind               = $::webserver::params::bind,
+    $port               = $::webserver::params::port,
+    $workers            = $::webserver::params::workers,
+    $gunicorn_log       = $::webserver::params::log_path,
+    $pyyaml_version     = $::webserver::params::pyyaml_version,
+    $redis_version      = $::webserver::params::redis_version,
+    $pytest_cov_version = $::webserver::params::pytest_cov_version,
 ) inherits ::webserver::params {
     class { 'webserver::dependency': } ->
     class { 'webserver::install': } ->

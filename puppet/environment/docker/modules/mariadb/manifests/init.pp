@@ -19,7 +19,7 @@ class mariadb (
     $tester           = $::mariadb::params::tester,
     $tester_pass      = $::mariadb::params::tester_password,
     $root_pass        = $::mariadb::params::root_password,
-    $bind_address     = $::mariadb::params::bind_address
+    $bind_address     = $::mariadb::params::bind_address,
 ) inherits ::mariadb::params {
     class { 'mariadb::server' } ->
     class { 'mariadb::client' } ->

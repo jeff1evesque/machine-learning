@@ -6,13 +6,13 @@
 ###    - https://github.com/voxpupuli/puppet-nodejs
 ###
 class uglifyjs (
-    $run                = $::uglifyjs::params::run
-    $node_version       = $::uglifyjs::params::node_version
-    $uglifyjs_version   = $::uglifyjs::params::node_version
-    $root_dir           = $::uglifyjs::params::root_dir
-    $root_puppet        = $::uglifyjs::params::root_puppet
-    $user               = $::uglifyjs::params::user
-    $group              = $::uglifyjs::params::group
+    $run                = $::uglifyjs::params::run,
+    $node_version       = $::uglifyjs::params::node_version,
+    $uglifyjs_version   = $::uglifyjs::params::node_version,
+    $root_dir           = $::uglifyjs::params::root_dir,
+    $root_puppet        = $::uglifyjs::params::root_puppet,
+    $user               = $::uglifyjs::params::user,
+    $group              = $::uglifyjs::params::group,
 ) inherits ::uglifyjs::params {
     class { 'uglifyjs::dependency': } ->
     class { 'uglifyjs::install': } ->
