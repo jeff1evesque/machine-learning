@@ -30,7 +30,6 @@ class mongodb::create_users {
         owner       => root,
         group       => root,
         mode        => '0700',
-        require     => File['/root/build'],
         notify      => Exec['create-mongodb-users'],
     }
 

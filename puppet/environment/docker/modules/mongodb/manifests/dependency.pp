@@ -7,6 +7,7 @@ class mongodb::dependency {
     $root_dir    = $::browserify::root_dir
 
     $directories = [
+        '/root/build',
         "${root_dir}/log",
         "${root_dir}/log/database",
     ]
