@@ -1,6 +1,10 @@
 ###
 ### init.pp: install client, and initialize database tables.
 ###
+### Note: this module has the following dependency:
+###
+###     - https://github.com/puppetlabs/puppetlabs-mysql.git
+###
 class mariadb (
     $run              = $::mariadb::params::run,
     $root_puppet      = $::mariadb::params::root_puppet,
