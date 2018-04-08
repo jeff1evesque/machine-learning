@@ -1,0 +1,23 @@
+#!/bin/bash
+
+# @uglifyjs: minify javascript file(s).
+#
+# @$1, first passed-in argument from command ($0 is the filename)
+
+# Pre-Pathing: allow 'uglifyjs' command
+PATH="/usr/local/bin:$PATH"
+
+
+cd "$1"/src/js && for file in *; do
+  # get last `.` occurence as starting extension
+  extension=${file##*.}
+  # filename (without 'last' extension)
+  filename="${file%.*}"
+
+  if [ "$extension" = 'js' ]; then
+
+    # minifiy with 'uglifyjs'
+    uglifyjs -c --output "$1/interface/static/js/$filename".min.js "$1/src/js/$file"
+
+  fi
+done
