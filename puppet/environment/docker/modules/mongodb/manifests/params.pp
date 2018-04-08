@@ -36,7 +36,7 @@ class mongodb::params {
         $logAppend           = true
         $systemLogPath       = '/var/log/mongodb/mongod.log'
         $port                = 27017
-        $bindIp              = 127.0.0.1
+        $bindIp              = '127.0.0.1'
         $pidfilepath         = '/var/run/mongod.pid'
         $keyserver           = 'hkp://keyserver.ubuntu.com:80'
         $mongodb_key         = '0C49F3730359A14518585931BC711F9BA15703C6'
