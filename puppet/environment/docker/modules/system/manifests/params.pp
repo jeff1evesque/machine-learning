@@ -1,7 +1,7 @@
 ###
 ### params.pp: default class parameters.
 ###
-class mariadb::params {
+class system::params {
     $hiera          = lookup( { 'name' => 'system', 'default_value' => false } )
     $nodejs_version = 'latest'
 

@@ -8,7 +8,7 @@
 ###     - https://github.com/counsyl/puppet-python.git
 ###     - https://github.com/BashtonLtd/puppet-timezone.git
 ###
-class system  (
+class system (
     $region         = $::system::params::region,
     $locality       = $::system::params::locality,
     $packages       = $::system::params::packages,
