@@ -14,14 +14,6 @@ mod 'nodejs',
   :git => 'https://github.com/voxpupuli/puppet-nodejs.git',
   :ref => 'v5.0.0'
 
-mod 'git',
-  :git => 'https://github.com/puppetlabs/puppetlabs-git.git',
-  :ref => '0.4.0'
-
-mod 'vcsrepo',
-  :git => 'https://github.com/puppetlabs/puppetlabs-vcsrepo.git',
-  :ref => '1.3.0'
-
 mod 'mysql',
   :git => 'https://github.com/puppetlabs/puppetlabs-mysql.git',
   :ref => '3.4.0'
