@@ -4,7 +4,7 @@
 system:
     timezone:
         region: 'America'
-        locality: 'New_York
+        locality: 'New_York'
 
     packages:
         apt:
