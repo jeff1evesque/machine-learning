@@ -21,10 +21,10 @@ class mariadb (
     $root_pass        = $::mariadb::params::root_password,
     $bind_address     = $::mariadb::params::bind_address,
 ) inherits ::mariadb::params {
-    class { 'mariadb::server' } ->
-    class { 'mariadb::client' } ->
-    class { 'mariadb::bindings' } ->
-    class { 'mariadb::database' } ->
-    class { 'mariadb::run' } ->
+    class { 'mariadb::server': } ->
+    class { 'mariadb::client': } ->
+    class { 'mariadb::bindings': } ->
+    class { 'mariadb::database': } ->
+    class { 'mariadb::run': } ->
     Class['mariadb']
 }

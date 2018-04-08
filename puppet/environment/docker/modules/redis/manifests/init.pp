@@ -8,8 +8,8 @@ class redis (
     $bind_address = $::redis::params::bind_address,
     $config_file  = $::redis::params::config_file,
 ) inherits ::redis::params {
-    class { 'redis::install' } ->
-    class { 'redis::config' } ~>
-    class { 'redis::run' } ->
+    class { 'redis::install': } ->
+    class { 'redis::config': } ~>
+    class { 'redis::run': } ->
     Class['redis']
 }
