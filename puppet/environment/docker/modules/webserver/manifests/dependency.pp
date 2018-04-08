@@ -33,6 +33,12 @@ class webserver::dependency {
     }
 
     ## mariadb client
-    contain mariadb::client
-    contain mariadb::bindings
+    class { '::mysql::client':
+        package_name => 'mariadb-client',
+    }
+
+    ## mariadb bindings
+    class { '::mysql::bindings':
+        python_enable => true,
+    }
 }
