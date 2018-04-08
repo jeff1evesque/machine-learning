@@ -18,7 +18,7 @@ class uglifyjs::install {
 
     ## install uglifyjs related compilers
     package { 'uglify-js':
-        ensure          => $node_uglifyjs_version,
+        ensure          => $uglifyjs_version,
         provider        => 'npm',
         require         => Class['nodejs'],
     }
