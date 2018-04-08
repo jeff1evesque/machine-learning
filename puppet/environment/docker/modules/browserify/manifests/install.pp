@@ -46,10 +46,6 @@ class browserify::install {
                 package         => $package,
                 install_options => ['--no-bin-links'],
                 target          => "${root_dir}/src/node_modules",
-                require         => [
-                    Class['package::nodejs'],
-                    File["${root_dir}/src/node_modules"],
-                ]
             }
         }
     }
