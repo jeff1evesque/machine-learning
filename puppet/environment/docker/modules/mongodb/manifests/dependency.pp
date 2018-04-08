@@ -2,7 +2,7 @@
 ### dependency.pp, installs various clients, and modules to interface with
 ###     the webserver.
 ###
-class webserver::dependency {
+class mongodb::dependency {
     ## local variables
     $root_dir    = $::browserify::root_dir
 
