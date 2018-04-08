@@ -7,6 +7,7 @@
 ###
 class mariadb (
     $run              = $::mariadb::params::run,
+    $root_dir         = $::mariadb::params::root_dir,
     $root_puppet      = $::mariadb::params::root_puppet,
     $pyyaml_version   = $::mariadb::params::pyyaml_version,
     $db_host          = $::mariadb::params::db_host,

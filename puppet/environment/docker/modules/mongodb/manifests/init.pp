@@ -2,6 +2,7 @@
 ### Configures mongodb instance.
 ###
 class mongodb (
+    $root_dir            = $::mongodb::params::root_dir,
     $process             = $::mongodb::params::processManagement
     $dbPath              = $::mongodb::params::dbPath
     $journal             = $::mongodb::params::journal_enabled

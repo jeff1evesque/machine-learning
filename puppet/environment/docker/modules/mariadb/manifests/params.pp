@@ -8,6 +8,7 @@ class mariadb::params {
     $pyyaml_version       = 'latest'
 
     if $hiera {
+        $root_dir         = $hiera['root_dir']
         $db_host          = $hiera['mariadb']['host']
         $db               = $hiera['mariadb']['name']
         $db_user          = $hiera['mariadb']['username']
@@ -21,6 +22,7 @@ class mariadb::params {
     }
 
     else {
+        $root_dir         = '/var/machine-learning'
         $db_host          = 'mariadb'
         $db               = 'default'
         $db_user          = 'authenticated'

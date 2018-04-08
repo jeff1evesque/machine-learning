@@ -8,6 +8,7 @@ class reverse_proxy::params {
     $run                     = true
 
     if $hiera {
+        $root_dir            = $hiera['root_dir']
         $dbPath              = $hiera['mongodb']['storage']['dbPath']
         $journal             = $hiera['mongodb']['storage']['journal']['enabled']
         $verbosity           = $hiera['mongodb']['systemLog']['verbosity']
@@ -27,6 +28,7 @@ class reverse_proxy::params {
     }
 
     else {
+        $root_dir            = '/var/machine-learning'
         $dbPath              = '/var/lib/mongodb'
         $journal             = true
         $verbosity           = 1
