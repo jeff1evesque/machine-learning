@@ -6,7 +6,7 @@ class mongodb (
     $root_dir            = $::mongodb::params::root_dir,
     $process             = $::mongodb::params::processManagement,
     $dbPath              = $::mongodb::params::dbPath,
-    $journal             = $::mongodb::params::journal_enabled,
+    $journal             = $::mongodb::params::journal,
     $verbosity           = $::mongodb::params::verbosity,
     $destination         = $::mongodb::params::destination,
     $logAppend           = $::mongodb::params::logAppend,

@@ -4,7 +4,7 @@
 class mongodb::config {
     ## local variables
     $dbPath        = $::mongodb::dbPath
-    $journal       = $::mongodb::enabled
+    $journal       = $::mongodb::journal
     $verbosity     = $::mongodb::verbosity
     $destination   = $::mongodb::destination
     $logAppend     = $::mongodb::logAppend
