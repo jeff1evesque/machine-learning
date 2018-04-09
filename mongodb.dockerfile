@@ -23,15 +23,6 @@ RUN $PUPPET apply -e 'class { mongodb: \
     security_authorization => false \
 }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
-##
-## create users (non-idempotent)
-##
-## Note: 'create-mongodb-users' is created by puppet.
-##
-RUN /usr/bin/mongod --fork --config /etc/mongod.conf && \
-    cd /root/build && \
-    ./create-mongodb-users
-
 ## executed everytime container starts
 ENTRYPOINT ["/usr/bin/mongod"]
 CMD ["-f", "/etc/mongod.conf"]

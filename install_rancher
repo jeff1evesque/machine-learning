@@ -335,3 +335,19 @@ else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
     exit 1
 fi
+
+## provision containers
+##
+##     - mariadb database
+##     - mongodb users
+##
+## Note: 'create-mongodb-users' is created by puppet.
+##
+if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
+
+else
+    ## create mongodb users
+    docker exec mongodb -it /usr/bin/mongod --fork --config /etc/mongod.conf && \
+        cd /root/build && \
+        ./create-mongodb-users
+fi
