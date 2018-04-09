@@ -8,7 +8,7 @@ class mongodb::run {
     ## enforce mongod
     if $start_mongodb {
         exec { 'start-mongod':
-            command => 'mongod --config /etc/mongod.conf',
+            command => 'mongod --fork --config /etc/mongod.conf',
             path    => '/usr/bin',
             unless  => 'pgrep mongod',
         }
