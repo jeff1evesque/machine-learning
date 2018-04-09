@@ -1,6 +1,6 @@
 #!/bin/bash
 
-mongo admin mongodb://<%= @hostname %>:27017 --eval "db.createUser({\
+mongo admin --eval "db.createUser({\
     user: '<%= @username %>',\
     pwd: '<%= @password %>',\
     roles: [\

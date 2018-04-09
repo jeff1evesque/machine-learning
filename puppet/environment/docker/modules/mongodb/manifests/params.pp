@@ -6,6 +6,7 @@
 class mongodb::params {
     $hiera                   = lookup( { 'name' => 'database', 'default_value' => false } )
     $run                     = true
+    $security_authorization  = true
 
     if $hiera {
         $root_dir            = $hiera['root_dir']

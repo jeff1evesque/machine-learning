@@ -18,7 +18,10 @@ RUN mkdir -p /data/db
 COPY puppet/environment/$ENVIRONMENT/modules/mongodb $ROOT_PUPPET/code/modules/mongodb
 
 ## configuration file
-RUN $PUPPET apply -e 'class { mongodb: run => true}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply -e 'class { mongodb: \
+    run => true; \
+    security_authorization => false \
+}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ##
 ## create users (non-idempotent)
