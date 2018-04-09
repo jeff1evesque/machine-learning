@@ -30,14 +30,5 @@ class mongodb::create_users {
         owner       => root,
         group       => root,
         mode        => '0700',
-        notify      => Exec['create-mongodb-users'],
-    }
-
-    exec { 'create-mongodb-users':
-        command     => './create-mongodb-users',
-        cwd         => '/root/build',
-        path        => '/usr/bin',
-        provider    => shell,
-        refreshonly => true,
     }
 }

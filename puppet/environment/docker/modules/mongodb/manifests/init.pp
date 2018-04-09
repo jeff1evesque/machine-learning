@@ -25,7 +25,6 @@ class mongodb (
     class { 'mongodb::dependency': } ->
     class { 'mongodb::install': } ->
     class { 'mongodb::config': } ~>
-    class { 'mongodb::create_users': } ~>
     class { 'mongodb::run': } ->
     Class['mongodb']
 }
