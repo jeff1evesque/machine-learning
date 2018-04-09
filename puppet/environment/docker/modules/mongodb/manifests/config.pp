@@ -13,7 +13,6 @@ class mongodb::config {
     $bindIp         = $::mongodb::bindIp
     $pidfilepath    = $::mongodb::pidfilepath
     $authorization  = $::mongodb::authorization
-    $authorization  = $::mongodb::authorization
     $hostname       = $::mongodb::hostname
     $username       = $::mongodb::username
     $password       = $::mongodb::password
