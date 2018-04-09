@@ -20,8 +20,14 @@ COPY puppet/environment/$ENVIRONMENT/modules/mongodb $ROOT_PUPPET/code/modules/m
 ## configuration file
 RUN $PUPPET apply -e 'class { mongodb: run => true}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
+##
 ## create users (non-idempotent)
-RUN cd /root/build && ./create-mongodb-users
+##
+## Note: 'create-mongodb-users' is created by puppet.
+##
+RUN /usr/bin/mongod --fork --config /etc/mongod.conf && \
+    cd /root/build && \
+    ./create-mongodb-users
 
 ## executed everytime container starts
 ENTRYPOINT ["/usr/bin/mongod"]
