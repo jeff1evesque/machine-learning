@@ -5,16 +5,12 @@ class mongodb::run {
     ## local variables
     $start_mongodb = $::mongodb::run
 
-    ## enforce mongod init script
-    ##
-    ## @enable, ensure 'mongod' service starts on boot.
-    ##
-    service { 'mongod':
-        ensure  => $start_mongodb,
-        enable  => $start_mongodb,
-        flags   => [
-            '--config',
-            '/etc/mongod.conf',
-        ],
+    ## enforce mongod
+    if $start_mongodb {
+        exec { 'start-mongod':
+            command => 'mongod --config /etc/mongod.conf',
+            path    => '/usr/bin',
+            unless  => 'pgrep mongod',
+        }
     }
 }
