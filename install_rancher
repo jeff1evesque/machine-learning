@@ -143,10 +143,7 @@ if docker -v >/dev/null 2>&1; then
     fi
 
     ## legacy windows uses docker toolbox, which requires 'default' container
-    if [ "$DISTRO_TYPE" != 'windows' ]; then
-        SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
-
-    else
+    if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
         echo ''
         echo 'Windows docker implementation, requires DockerToolbox, which'
         echo "creates a 'default' container to manage docker. To proceed,"
@@ -156,6 +153,9 @@ if docker -v >/dev/null 2>&1; then
         RANCHER_CONTAINER='default'
         RANCHER_PORT='8080'
         SERVER_IP=$(docker-machine ip 'default')
+
+    else
+        SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
     fi
 
     docker run -d \
