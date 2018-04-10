@@ -21,9 +21,9 @@ class webserver::params {
     else {
         $root_dir          = '/var/machine-learning'
         $flask_log_path    = '/var/log/webserver/flask.log'
-        $bind              = '0.0.0.0'
-        $port              = ''
-        $workers           = 6
+        $gunicorn_bind     = '0.0.0.0'
+        $gunicorn_port     = ''
+        $gunicorn_workers  = 6
         $gunicorn_type     = 'web'
     }
 }

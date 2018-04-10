@@ -1,20 +1,22 @@
 ###
-### config.pp, configure nginx.
+### config.pp, ensure directories exists.
 ###
 class webserver::config {
     ## local variables
-    $conf_file          = $::webserver::conf_file
-    $user               = $::webserver::user
-    $group              = $::webserver::group
     $root_dir           = $::webserver::root_dir
-    $gunicorn_bind      = $::webserver::bind
-    $gunicorn_port      = $::webserver::port
-    $gunicorn_workers   = $::webserver::workers
-    $gunicorn_log_path  = $::webserver::gunicorn_log_path
 
-    ## gunicorn service
-    file { $conf_file:
-        ensure  => file,
-        content => dos2unix(template('webserver/gunicorn.erb')),
+    $directories = [
+        "${root_dir}/log",
+        "${root_dir}/log/webserver",
+        "${root_dir}/log/application",
+        "${root_dir}/log/application/error",
+        "${root_dir}/log/application/warning",
+        "${root_dir}/log/application/info",
+        "${root_dir}/log/application/debug",
+    ]
+
+    ## create log directories
+    file { $directories:
+        ensure => 'directory',
     }
 }

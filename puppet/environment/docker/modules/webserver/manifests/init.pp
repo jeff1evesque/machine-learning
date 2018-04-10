@@ -22,7 +22,6 @@ class webserver (
     $redis_version      = $::webserver::params::redis_version,
     $pytest_cov_version = $::webserver::params::pytest_cov_version,
 ) inherits ::webserver::params {
-    class { 'webserver::dependency': } ->
     class { 'webserver::install': } ->
     class { 'webserver::config': } ~>
     class { 'webserver::run': } ->
