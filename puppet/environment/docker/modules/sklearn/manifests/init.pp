@@ -6,7 +6,7 @@
 ###     - https://github.com/counsyl/puppet-python.git
 ###
 class sklearn (
-    $scikit_learn      = $::sklearn::scikit_learn
+    $scikit_learn      = $::sklearn::scikit_learn,
     $python_numpy      = $::sklearn::params::python_numpy,
     $python_scipy      = $::sklearn::params::python_scipy,
     $libatlas_dev      = $::sklearn::params::libatlas_dev,
