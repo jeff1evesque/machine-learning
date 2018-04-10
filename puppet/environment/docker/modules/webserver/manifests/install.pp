@@ -1,7 +1,7 @@
 ###
 ### install.pp, install gunicorn webserver
 ###
-class webserver::config {
+class webserver::install {
     ## python dependency
     contain python
 
