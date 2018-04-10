@@ -14,8 +14,7 @@ RUN mkdir -p $ROOT_PROJECT/src/js
 
 ## copy files into container
 COPY hiera /var/machine-learning/hiera
-COPY puppet/environment/$ENVIRONMENT/modules/package $ROOT_PUPPET/code/modules/package
-COPY puppet/environment/$ENVIRONMENT/modules/compiler $ROOT_PUPPET/code/modules/compiler
+COPY puppet/environment/$ENVIRONMENT/modules/uglifyjs $ROOT_PUPPET/code/modules/uglifyjs
 
 ##
 ## manual build workaround

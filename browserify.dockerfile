@@ -15,8 +15,7 @@ RUN mkdir -p $ROOT_PROJECT/src/jsx
 ## copy files into container
 COPY src/jsx $ROOT_PROJECT/jsx
 COPY hiera $ROOT_PROJECT/hiera
-COPY puppet/environment/$ENVIRONMENT/modules/package $ROOT_PUPPET/code/modules/package
-COPY puppet/environment/$ENVIRONMENT/modules/compiler $ROOT_PUPPET/code/modules/compiler
+COPY puppet/environment/$ENVIRONMENT/modules/browserify $ROOT_PUPPET/code/modules/browserify
 
 ##
 ## manual build workaround
