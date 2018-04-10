@@ -1,7 +1,7 @@
 ###
-### dependency.pp, install sklearn dependencies.
+### config.pp, pre-installation configuration.
 ###
-class sklearn::dependency {
+class sklearn::config {
     ## local variables
     $root_dir  = $::sklearn::root_dir
 
