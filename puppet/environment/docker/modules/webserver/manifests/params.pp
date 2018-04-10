@@ -10,26 +10,20 @@ class webserver::params {
     $pytest_cov_version    = '*'
 
     if $hiera {
-        $conf_file         = $hiera['gunicorn']['conf_file']
-        $user              = $hiera['gunicorn']['user']
-        $group             = $hiera['gunicorn']['group']
         $root_dir          = $hiera['root_dir']
         $flask_log_path    = $hiera['flask']['log_path']
-        $bind              = $hiera['gunicorn']['bind']
-        $port              = $hiera['gunicorn']['port']
-        $workers           = $hiera['gunicorn']['workers']
-        $gunicorn_log_path = $hiera['gunicorn']['log_path']
+        $gunicorn_bind     = $hiera['gunicorn']['bind']
+        $gunicorn_port     = $hiera['gunicorn']['port']
+        $gunicorn_workers  = $hiera['gunicorn']['workers']
+        $gunicorn_type     = $hiera['gunicorn']['type']
     }
 
     else {
-        $conf_file         = '/etc/init/gunicorn.conf'
-        $user              = 'root'
-        $group             = 'root'
         $root_dir          = '/var/machine-learning'
         $flask_log_path    = '/var/log/webserver/flask.log'
         $bind              = '0.0.0.0'
         $port              = ''
         $workers           = 6
-        $gunicorn_log_path = '/var/log/webserver/gunicorn.log'
+        $gunicorn_type     = 'web'
     }
 }
