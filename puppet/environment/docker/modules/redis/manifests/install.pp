@@ -1,7 +1,7 @@
 ###
 ### install.pp, install redis-server.
 ###
-class redis::configuration {
+class redis::install {
     ## local variables
     $version   = $::redis::version
 
