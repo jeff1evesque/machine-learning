@@ -20,6 +20,7 @@ COPY __init__.py $ROOT_PROJECT/__init__.py
 COPY puppet/environment/$ENVIRONMENT/modules/sklearn $ROOT_PUPPET/code/modules/sklearn
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
 ARG PORT
+ARG TYPE
 
 ## provision with puppet
 RUN $PUPPET apply -e 'class { sklearn: }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
@@ -27,13 +28,14 @@ RUN $PUPPET apply -e 'class { sklearn: }' --modulepath=$CONTRIB_MODULES:$MODULES
 ##
 ## provision with puppet: either build a web, or api webserver image.
 ##
-##     docker build --build-arg PORT=6001 -f webserver.dockerfile -t ml-webserver-api .
-##     docker build --build-arg PORT=5001 -f webserver.dockerfile -t ml-webserver-web .
+##     docker build --build-arg PORT=6001 --build-arg TYPE=api -f webserver.dockerfile -t ml-webserver-api .
+##     docker build --build-arg PORT=5001 --build-arg TYPE=web -f webserver.dockerfile -t ml-webserver-web .
 ##
 ##     docker run --hostname webserver-api --name webserver-api -d ml-webserver-api
 ##     docker run --hostname webserver-web --name webserver-web -d ml-webserver-web
 ##
 RUN $PUPPET apply -e "class { webserver: \
+    type => '$TYPE', \
     port => '$PORT', \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
