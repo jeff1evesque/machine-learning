@@ -29,32 +29,61 @@ class webserver::dependency {
         ensure => 'directory',
     }
 
-    package { 'pytest-cov':
-        ensure          => $pytest_cov_version,
-        provider        => 'pip',
-        require         => Class['python'],
+    ## pytest_cov
+    if ($pytest_cov_version and $pytest_cov_version != '*') {
+        package { 'pytest-cov':
+            ensure          => $pytest_cov_version,
+            provider        => 'pip',
+            require         => Class['python'],
+        }
+    }
+    else {
+        package { 'pytest-cov':
+            ensure          => 'installed',
+            provider        => 'pip',
+            require         => Class['python'],
+        }
     }
 
-    package { 'pyyaml':
-        ensure          => $pyyaml_version,
-        provider        => 'pip',
-        require         => Class['python'],
+    ## pyyaml
+    if ($pyyaml_version and $pyyaml_version != '*') {
+        package { 'pyyaml':
+            ensure          => $pyyaml_version,
+            provider        => 'pip',
+            require         => Class['python'],
+        }
+    }
+    else {
+        package { 'pyyaml':
+            ensure          => 'installed',
+            provider        => 'pip',
+            require         => Class['python'],
+        }
     }
 
     ## redis client
-    package { 'redis'
-        ensure          => $redis_version,
-        provider        => 'pip',
-        require         => Class['python'],
+    if ($redis_version and $redis_version != '*') {
+        package { 'redis':
+            ensure          => $redis_version,
+            provider        => 'pip',
+            require         => Class['python'],
+        }
+    }
+    else {
+        package { 'redis':
+            ensure          => 'installed',
+            provider        => 'pip',
+            require         => Class['python'],
+        }
     }
 
     ## mariadb client
     class { '::mysql::client':
-        package_name => 'mariadb-client',
+        package_name    => 'mariadb-client',
     }
 
     ## mariadb bindings
     class { '::mysql::bindings':
-        python_enable => true,
+        python_enable   => true,
     }
 }

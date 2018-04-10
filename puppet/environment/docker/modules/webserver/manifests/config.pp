@@ -1,7 +1,7 @@
 ###
 ### config.pp, configure nginx.
 ###
-class reverse_proxy::config {
+class webserver::config {
     ## local variables
     $conf_file          = $::webserver::conf_file
     $user               = $::webserver::user
@@ -11,7 +11,7 @@ class reverse_proxy::config {
     $gunicorn_bind      = $::webserver::bind
     $gunicorn_port      = $::webserver::port
     $gunicorn_workers   = $::webserver::workers
-    $gunicorn_log_path  = $::webserver::gunicorn_log
+    $gunicorn_log_path  = $::webserver::gunicorn_log_path
 
     ## gunicorn service
     file { $conf_file:
