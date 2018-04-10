@@ -2,9 +2,6 @@
 ### install.pp, install gunicorn webserver
 ###
 class webserver::install {
-    ## python dependency
-    contain python
-
     ## local variables
     $gunicorn_version  = $::webserver::version
 

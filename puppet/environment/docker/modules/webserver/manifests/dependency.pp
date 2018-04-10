@@ -4,9 +4,9 @@
 ###
 class webserver::dependency {
     ## python dependencies
-    contain python
-    contain python::flask
-    contain python::requests
+    include python
+    include python::flask
+    include python::requests
 
     ## local variables
     $root_dir           = $::webserver::root_dir
