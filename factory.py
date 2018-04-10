@@ -37,7 +37,7 @@ def create_app(args={'instance': 'web'}):
         settings = yaml.load(stream)
         general = settings['general']
 
-    with open(prepath + '/webserver/webserver-' + instance + '.yaml , 'r') as stream:
+    with open(prepath + '/webserver/webserver-' + instance + '.yaml' , 'r') as stream:
         settings = yaml.load(stream)
         webserver = settings['webserver']
 
