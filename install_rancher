@@ -355,8 +355,8 @@ else
         python setup_tables.py $ROOT_PUPPET/puppet"
 
     ## mongodb users
-    docker exec mongodb -d sh -c "\
+    docker exec mongodb -d sh -c '\
         /usr/bin/mongod --fork --config /etc/mongod.conf && \
         cd /root/build && \
-        ./create-mongodb-users"
+        ./create-mongodb-users'
 fi
