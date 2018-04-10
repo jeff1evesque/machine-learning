@@ -4,7 +4,7 @@
 class mariadb::params {
     $hiera                    = lookup( { 'name' => 'database', 'default_value' => false } )
     $root_puppet              = '/etc/puppetlabs'
-    $pyyaml_version           = 'latest'
+    $pyyaml_version           = '*'
 
     if $hiera {
         $root_dir             = $hiera['root_dir']

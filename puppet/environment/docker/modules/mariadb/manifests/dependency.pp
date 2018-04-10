@@ -10,10 +10,19 @@ class mariadb::dependency {
     $pyyaml_version = $::mariadb::pyyaml_version
 
     ## install dependency
-    package { 'pyyaml':
-        ensure      => $pyyaml_version,
-        provider    => 'pip',
-        require     => Class['python'],
+    if ($redis_version and $redis_version != '*') {
+        package { 'pyyaml':
+            ensure      => $pyyaml_version,
+            provider    => 'pip',
+            require     => Class['python'],
+        }
+    }
+    else {
+        package { 'pyyaml':
+            ensure      => 'installed',
+            provider    => 'pip',
+            require     => Class['python'],
+        }
     }
 
     $directories = [
