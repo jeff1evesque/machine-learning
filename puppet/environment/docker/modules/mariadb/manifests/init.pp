@@ -25,6 +25,5 @@ class mariadb (
     class { 'mariadb::server': } ->
     class { 'mariadb::client': } ->
     class { 'mariadb::bindings': } ->
-    class { 'mariadb::run': } ->
     Class['mariadb']
 }
