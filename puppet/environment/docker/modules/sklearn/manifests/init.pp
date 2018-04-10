@@ -14,7 +14,7 @@ class sklearn (
     $python_dev        = $::sklearn::params::python_dev,
     $python_matplotlib = $::sklearn::params::python_matplotlib,
     $root_dir          = $::sklearn::params::root_dir,
-) inherits ::sklearn::param {
+) inherits ::sklearn::params {
     class { 'sklearn::dependency': } ->
     class { 'sklearn::install': } ->
     Class['sklearn']
