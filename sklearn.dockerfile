@@ -1,6 +1,7 @@
 FROM jeff1evesque/ml-base:0.7
 
 ## local variables
+ENV ENVIRONMENT docker
 ENV PUPPET /opt/puppetlabs/bin/puppet
 ENV ROOT_PROJECT /var/machine-learning
 ENV ROOT_PUPPET /etc/puppetlabs
