@@ -3,7 +3,6 @@
 ###
 class mariadb::params {
     $hiera                    = lookup( { 'name' => 'database', 'default_value' => false } )
-    $run                      = true
     $root_puppet              = '/etc/puppetlabs'
     $pyyaml_version           = 'latest'
 
@@ -19,6 +18,7 @@ class mariadb::params {
         $tester_password      = $hiera['mariadb']['tester_password']
         $root_password        = $hiera['mariadb']['root_password']
         $bind_address         = $hiera['mariadb']['bind_address']
+        $allow_host           = $hiera['mariadb']['allow_host']
     }
 
     else {
@@ -33,5 +33,6 @@ class mariadb::params {
         $tester_password      = 'password'
         $root_password        = 'password'
         $bind_address         = '0.0.0.0'
+        $allow_host           = '%'
     }
 }

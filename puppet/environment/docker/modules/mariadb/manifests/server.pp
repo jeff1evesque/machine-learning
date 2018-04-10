@@ -3,11 +3,10 @@
 ###
 class mariadb::server {
     ## local variables
-    $run                  = $::mariadb::run
     $db_host              = $::mariadb::allow_host
     $db                   = $::mariadb::name
-    $db_user              = $::mariadb::username
-    $db_password          = $::mariadb::password
+    $db_user              = $::mariadb::db_user
+    $db_password          = $::mariadb::db_password
     $provisioner          = $::mariadb::provisioner
     $provisioner_password = $::mariadb::provisioner_password
     $tester               = $::mariadb::tester
@@ -22,7 +21,6 @@ class mariadb::server {
     ## @max_user_connections, a zero value indicates no limit
     ##
     class { '::mysql::server':
-        service_enabled => $run,
         package_name    => 'mariadb-server',
         root_password   => $root_password,
         users         => {

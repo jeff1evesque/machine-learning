@@ -6,7 +6,6 @@
 ###     - https://github.com/puppetlabs/puppetlabs-mysql.git
 ###
 class mariadb (
-    $run                  = $::mariadb::params::run,
     $root_dir             = $::mariadb::params::root_dir,
     $root_puppet          = $::mariadb::params::root_puppet,
     $pyyaml_version       = $::mariadb::params::pyyaml_version,
