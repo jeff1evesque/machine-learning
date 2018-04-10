@@ -11,7 +11,7 @@ ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 COPY puppet/environment/$ENVIRONMENT/modules/mariadb $ROOT_PUPPET/code/modules/mariadb
 
 ## provision with puppet
-RUN $PUPPET apply -e 'class { mariadb: run => false }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply -e 'class { mariadb: }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
 CMD ["/bin/sh", "-c", "mysqld"]
