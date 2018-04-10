@@ -15,7 +15,7 @@ hierarchy:
     path: "hiera/reverse-proxy/%{::hostname}.yaml"
 
   - name: 'Webserver configurations'
-    path: hiera/webserver.yaml
+    path: hiera/webserver/%{::hostname}.yaml
 
   - name: 'Database configurations'
     path: hiera/database.yaml
