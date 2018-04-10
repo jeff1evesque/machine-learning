@@ -1,4 +1,5 @@
 FROM jeff1evesque/ml-base:0.7
+FROM jeff1evesque/ml-sklearn:0.7
 
 ## local variables
 ENV ENVIRONMENT docker
@@ -17,13 +18,9 @@ COPY test $ROOT_PROJECT/test
 COPY app.py $ROOT_PROJECT/app.py
 COPY factory.py $ROOT_PROJECT/factory.py
 COPY __init__.py $ROOT_PROJECT/__init__.py
-COPY puppet/environment/$ENVIRONMENT/modules/sklearn $ROOT_PUPPET/code/modules/sklearn
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
 ARG PORT
 ARG TYPE
-
-## provision with puppet
-RUN $PUPPET apply -e 'class { sklearn: }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ##
 ## provision with puppet: either build a web, or api webserver image.
