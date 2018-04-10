@@ -12,7 +12,7 @@ class webserver::dependency {
     $root_dir           = $::webserver::root_dir
     $pyyaml_version     = $::webserver::pyyaml_version
     $redis_version      = $::webserver::redis_version
-    $pytest_cov_version = $::webserver::pytest_cover_version
+    $pytest_cov_version = $::webserver::pytest_cov_version
 
     $directories = [
         "${root_dir}/log",
