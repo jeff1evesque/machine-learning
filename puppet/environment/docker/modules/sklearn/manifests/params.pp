@@ -3,14 +3,14 @@
 ###
 class sklearn::params {
     $hiera             = lookup( { 'name' => 'sklearn', 'default_value' => false } )
-    $scikit_learn      = 'latest'
-    $python_numpy      = 'latest'
-    $python_scipy      = 'latest'
-    $libatlas_dev      = 'latest'
-    $gplus             = 'latest'
-    $ipython           = 'latest'
-    $python_dev        = 'latest'
-    $python_matplotlib = 'latest'
+    $scikit_learn      = '*'
+    $python_numpy      = '*'
+    $python_scipy      = '*'
+    $libatlas_dev      = '*'
+    $gplus             = '*'
+    $ipython           = '*'
+    $python_dev        = '*'
+    $python_matplotlib = '*'
 
     if $hiera {
         $root_dir      = $hiera['root_dir']

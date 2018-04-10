@@ -5,6 +5,7 @@ class sklearn::install {
     contain python
 
     ## local variables
+    $root_dir          = $::sklearn::root_dir
     $scikit_learn      = $::sklearn::scikit_learn
     $python_numpy      = $::sklearn::python_numpy
     $python_scipy      = $::sklearn::python_scipy
@@ -12,25 +13,35 @@ class sklearn::install {
     $gplus             = $::sklearn::gplus
     $python_matplotlib = $::sklearn::python_matplotlib
     $ipython           = $::sklearn::ipython
-    $root_dir          = $::sklearn::root_dir
     $python_dev        = $::sklearn::python_dev
-    $dependencies      = [
+    $apt_packages      = [
+        "g++=${gplus}",
+        "python-dev=${python_dev}",
         "python-numpy=${python_numpy}",
         "python-scipy=${python_scipy}",
         "libatlas-dev=${libatlas_dev}",
-        "g++=${gplus}",
-        "python-matplotlib=${python_lib}",
         "ipython=${ipython}",
-        "python-dev=${python_dev}"
+        "python-matplotlib=${python_matplotlib}",
     ]
 
-    ## install dependencies
-    ensure_packages( $dependencies )
+    ## install scikit-learn dependencies
+	package { $apt_packages:
+        ensure   => 'installed',
+    }
 
     ## install scikit-learn
-    package { 'scikit-learn':
-        ensure   => $scikit_learn,
-        provider => 'pip',
-        require  => Class['python'],
+    if ($scikit_learn and $scikit_learn != '*') {
+        package { "scikit_learn==${scikit_learn}":
+            ensure   => 'installed',
+            provider => 'pip',
+            require  => Class['python'],
+        }
+    }
+    else {
+        package { 'scikit_learn':
+            ensure   => 'installed',
+            provider => 'pip',
+            require  => Class['python'],
+        }
     }
 }
