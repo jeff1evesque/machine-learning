@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y mongodb-org
 RUN mkdir -p /data/db
 
 ## copy files into container
+COPY hiera $ROOT_PUPPET/puppet/hiera
 COPY puppet/environment/$ENVIRONMENT/modules/mongodb $ROOT_PUPPET/code/modules/mongodb
 
 ## configuration file

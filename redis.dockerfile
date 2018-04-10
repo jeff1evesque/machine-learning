@@ -8,10 +8,11 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## copy files into container
+COPY hiera $ROOT_PUPPET/puppet/hiera
 COPY puppet/environment/$ENVIRONMENT/modules/redis $ROOT_PUPPET/code/modules/redis
 
 ## provision with puppet
-RUN $PUPPET apply -e 'class { redis: run => false}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply -e 'class { redis: run => false }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
 CMD ["/bin/sh", "-c", "redis-server"]

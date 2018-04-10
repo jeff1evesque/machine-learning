@@ -8,6 +8,7 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## copy files into container
+COPY hiera $ROOT_PUPPET/puppet/hiera
 COPY puppet/environment/$ENVIRONMENT/modules/mariadb $ROOT_PUPPET/code/modules/mariadb
 
 ## provision with puppet
