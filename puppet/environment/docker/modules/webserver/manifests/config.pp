@@ -7,7 +7,6 @@ class webserver::config {
     $user               = $::webserver::user
     $group              = $::webserver::group
     $root_dir           = $::webserver::root_dir
-    $gunicorn_conf      = $::webserver::conf
     $gunicorn_bind      = $::webserver::bind
     $gunicorn_port      = $::webserver::port
     $gunicorn_workers   = $::webserver::workers
