@@ -3,6 +3,7 @@
 ###
 class sklearn::params {
     $hiera             = lookup( { 'name' => 'sklearn', 'default_value' => false } )
+    $scikit_learn      = 'latest'
     $python_numpy      = 'latest'
     $python_scipy      = 'latest'
     $libatlas_dev      = 'latest'
