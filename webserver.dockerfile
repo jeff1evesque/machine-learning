@@ -35,8 +35,8 @@ RUN $PUPPET apply -e 'class { sklearn: }' --modulepath=$CONTRIB_MODULES:$MODULES
 ##     docker run --hostname webserver-web --name webserver-web -d ml-webserver-web
 ##
 RUN $PUPPET apply -e "class { webserver: \
-    type => '$TYPE', \
-    port => '$PORT', \
+    gunicorn_type => '$TYPE', \
+    gunicorn_port => '$PORT', \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
