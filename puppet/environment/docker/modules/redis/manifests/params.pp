@@ -4,7 +4,7 @@
 class redis::params {
     $hiera            = lookup( { 'name' => 'redis', 'default_value' => false } )
     $run              = true
-    $version          = 'latest'
+    $version          = '*'
 
     if $hiera {
         $bind_address = $hiera['bind_address']

@@ -6,7 +6,7 @@ class redis::install {
     $version   = $::redis::version
 
     ## install redis
-    package { 'redis-server':
-        ensure => $version,
+    package { "redis-server=${version}":
+        ensure => 'installed',
     }
 }
