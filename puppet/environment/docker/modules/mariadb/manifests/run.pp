@@ -1,7 +1,7 @@
 ###
 ### run.pp, start mariadb.
 ###
-class webserver::run {
+class mariadb::run {
     ## local variables
     $start_mariadb = $::mariadb::run
 
