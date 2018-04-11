@@ -11,7 +11,7 @@ class webserver::run {
     $type            = $::webserver::gunicorn_type
 
     ## enforce webserver
-    if $start_mongodb {
+    if $start_webserver {
         exec { 'start-gunicorn':
             command => "gunicorn -b ${bind}:${port} --workers=${workers} 'factory:create_app(args={\"instance\": ${type}})'",
             cwd     => $root_dir,
