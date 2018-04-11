@@ -9,8 +9,7 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## source and asset directory
-RUN mkdir -p $ROOT_PROJECT/interface/static
-RUN mkdir -p $ROOT_PROJECT/src/scss
+RUN mkdir -p $ROOT_PROJECT/interface/static $ROOT_PROJECT/src/scss
 
 ## copy files into container
 COPY src/scss $ROOT_PROJECT/src/scss

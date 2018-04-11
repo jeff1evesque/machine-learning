@@ -11,19 +11,10 @@ ARG PORT
 ARG TYPE
 
 ## ensure directory
-RUN mkdir -p $ROOT_PROJECT/interface
-RUN mkdir -p $ROOT_PUPPET/brain
-RUN mkdir -p $ROOT_PUPPET/test
+RUN mkdir -p $ROOT_PROJECT/interface $ROOT_PUPPET/brain $ROOT_PUPPET/test
 
 ## copy files into container
-COPY log $ROOT_PROJECT/log
-COPY interface $ROOT_PROJECT/interface
-COPY hiera $ROOT_PROJECT/hiera
-COPY brain $ROOT_PROJECT/brain
-COPY test $ROOT_PROJECT/test
-COPY app.py $ROOT_PROJECT/app.py
-COPY factory.py $ROOT_PROJECT/factory.py
-COPY __init__.py $ROOT_PROJECT/__init__.py
+COPY log interface hiera brain test app.py factory.py __init__.py $ROOT_PROJECT/
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
 
 ##

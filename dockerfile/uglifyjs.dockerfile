@@ -9,8 +9,7 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## source and asset directory
-RUN mkdir -p $ROOT_PROJECT/interface/static
-RUN mkdir -p $ROOT_PROJECT/src/js
+RUN mkdir -p $ROOT_PROJECT/interface/static $ROOT_PROJECT/src/js
 
 ## copy files into container
 COPY hiera /var/machine-learning/hiera

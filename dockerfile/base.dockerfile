@@ -7,10 +7,7 @@ ENV ROOT_PROJECT /var/machine-learning
 ENV ROOT_PUPPET /etc/puppetlabs
 
 ## ensure directory
-RUN mkdir -p $ROOT_PROJECT/log
-RUN mkdir -p $ROOT_PUPPET/code/environment/$ENVIRONMENT
-RUN mkdir -p $ROOT_PUPPET/puppet/hiera
-RUN mkdir -p $ROOT_PUPPET/code/modules_contrib
+RUN mkdir -p $ROOT_PROJECT/log $ROOT_PUPPET/code/environment/$ENVIRONMENT $ROOT_PUPPET/puppet/hiera $ROOT_PUPPET/code/modules_contrib
 
 ## environment variables
 ENV MODULES $ROOT_PUPPET/code/modules
@@ -22,8 +19,7 @@ ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
 ##  Note: r10k requires 'git' installed
 ##
 RUN apt-get -y update
-RUN apt-get -y install git=1:1.9.1-1ubuntu0.7
-RUN apt-get -y install wget=1.15-1ubuntu1.14.04*
+RUN apt-get -y install git=1:1.9.1-1ubuntu0.7 wget=1.15-1ubuntu1.14.04*
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb

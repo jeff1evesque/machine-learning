@@ -9,8 +9,7 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## source and asset directory
-RUN mkdir -p $ROOT_PROJECT/interface/static
-RUN mkdir -p $ROOT_PROJECT/src/jsx
+RUN mkdir -p $ROOT_PROJECT/interface/static $ROOT_PROJECT/src/jsx
 
 ## copy files into container
 COPY src/jsx $ROOT_PROJECT/jsx
