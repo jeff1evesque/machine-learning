@@ -29,4 +29,4 @@ RUN $PUPPET apply -e "class { webserver: \
 
 ## executed everytime container starts
 WORKDIR $ROOT_PROJECT
-ENTRYPOINT ['/bin/sh', '-c', './entrypoint']
+ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]
