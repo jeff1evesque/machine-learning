@@ -6,7 +6,7 @@ class sklearn::config {
     $root_dir  = $::sklearn::root_dir
 
     ## build directory
-    file { "${root_dir}/build/":
+    file { "${root_dir}/build":
         ensure => 'directory',
     }
 }

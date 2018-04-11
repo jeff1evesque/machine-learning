@@ -2,7 +2,7 @@
 ### install.pp, install sklearn.
 ###
 class sklearn::install {
-    contain python
+    include python
 
     ## local variables
     $root_dir          = $::sklearn::root_dir
