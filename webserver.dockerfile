@@ -1,4 +1,3 @@
-FROM jeff1evesque/ml-base:0.7
 FROM jeff1evesque/ml-sklearn:0.7
 
 ## local variables
@@ -8,6 +7,13 @@ ENV ROOT_PROJECT /var/machine-learning
 ENV ROOT_PUPPET /etc/puppetlabs
 ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
+ARG PORT
+ARG TYPE
+
+## ensure directory
+RUN mkdir -p $ROOT_PROJECT/interface
+RUN mkdir -p $ROOT_PUPPET/brain
+RUN mkdir -p $ROOT_PUPPET/test
 
 ## copy files into container
 COPY log $ROOT_PROJECT/log
@@ -19,8 +25,6 @@ COPY app.py $ROOT_PROJECT/app.py
 COPY factory.py $ROOT_PROJECT/factory.py
 COPY __init__.py $ROOT_PROJECT/__init__.py
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
-ARG PORT
-ARG TYPE
 
 ##
 ## provision with puppet: either build a web, or api webserver image.
