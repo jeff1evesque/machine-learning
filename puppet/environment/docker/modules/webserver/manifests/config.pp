@@ -19,4 +19,13 @@ class webserver::config {
     file { $directories:
         ensure => 'directory',
     }
+
+    ## configure docker entrypoint
+    file { "${root_dir}/entrypoint":
+        ensure  => file,
+        owner   => 'root',
+        group   => 'root',
+        content => dos2unix(template('webserver/entrypoint.erb')),
+        mode    => '700',
+    }
 }
