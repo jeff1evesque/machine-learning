@@ -20,8 +20,8 @@ COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules
 ##
 ##     docker build -f webserver.dockerfile -t jeff1evesque/ml-webserver:0.7 .
 ##
-##     docker run --hostname webserver-api --name webserver -d ml-webserver-api '0.0.0.0' 6001 6 api
-##     docker run --hostname webserver-web --name webserver -d ml-webserver-web '0.0.0.0' 5001 6 web
+##     docker run --hostname webserver-api --name webserver -d jeff1evesque/ml-webserver:0.7 '0.0.0.0' 6001 6 api
+##     docker run --hostname webserver-api --name webserver -d jeff1evesque/ml-webserver:0.7 '0.0.0.0' 5001 6 web
 ##
 RUN $PUPPET apply -e "class { webserver: \
     run => false, \
