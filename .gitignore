@@ -19,7 +19,7 @@
 !/puppet/
 !/test
 !/log/
-!*.dockerfile
+!/dockerfile
 !.coveragerc
 !/utility/
 
