@@ -16,13 +16,6 @@ COPY src/scss $ROOT_PROJECT/src/scss
 COPY hiera /var/machine-learning/hiera
 COPY puppet/environment/$ENVIRONMENT/modules/sass $ROOT_PUPPET/code/modules/sass
 
-##
-## manual build workaround
-##
-## https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-378086431
-##
-RUN npm install -g --unsafe-perm node-sass@4.8.3
-
 ## provision with puppet
 RUN $PUPPET apply -e 'class { sass: run => false }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
