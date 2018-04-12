@@ -36,4 +36,4 @@ RUN $PUPPET apply -e "class { reverse_proxy: \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## start nginx
-CMD ["/bin/sh", "-c", "nginx"]
+CMD ["nginx", "-g", "daemon off;"]
