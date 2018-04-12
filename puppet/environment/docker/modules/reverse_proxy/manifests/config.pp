@@ -30,8 +30,8 @@ class reverse_proxy::config {
     nginx::resource::server { $vhost:
         proxy           => "http://${proxy}-${type}",
         ssl             => true,
-        ssl_cert        => "${cert_path}/${vhost}_${type}.crt",
-        ssl_key         => "${pkey_path}/${vhost}_${type}.key",
+        ssl_cert        => "${cert_path}/${vhost}.crt",
+        ssl_key         => "${pkey_path}/${vhost}.key",
         listen_port     => $listen_port,
         ssl_port        => $listen_port,
         access_log      => $access_log,
