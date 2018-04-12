@@ -1,7 +1,7 @@
 ###
 ### config.pp, configure node-sass
 ###
-class sass::dependency {
+class sass::config {
     ## local variables
     $root_dir              = $::sass::root_dir
     $root_puppet           = $::sass::root_puppet
