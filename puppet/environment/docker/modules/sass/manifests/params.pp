@@ -1,7 +1,7 @@
 ###
 ### params.pp: default class parameters.
 ###
-class reverse_proxy::params {
+class sass::params {
     $hiera                   = lookup( { 'name' => 'webcompiler', 'default_value' => false } )
     $hiera_packages          = lookup( { 'name' => 'dependencies', 'default_value' => false } )
     $run                     = true
