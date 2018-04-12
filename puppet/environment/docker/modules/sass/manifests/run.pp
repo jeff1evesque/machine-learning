@@ -3,11 +3,18 @@
 ###
 class sass::run {
     ## local variables
-    $start_sass = $::sass::run
+    $root_dir     = $::sass::root_dir
+    $start_sass   = $::sass::run
+    $root_puppet  = $::sass::root_puppet
+    $compiler_dir = "${root_puppet}/code/modules/sass/scripts"
 
     ## run sass
-    service { 'sass':
-        ensure  => $start_sass,
-        enable  => $start_sass,
+    if $start_sass {
+        exec { 'start-sass':
+            command => "./sass ${root_dir}",
+            path    => '/usr/bin',
+            cwd     => $compiler_dir
+            unless  => 'pgrep node-sass',
+        }
     }
 }

@@ -11,10 +11,7 @@ class sass (
     $node_sass_version = $::sass::params::sass_version,
     $root_dir          = $::sass::params::root_dir,
     $root_puppet       = $::sass::params::root_puppet,
-    $user              = $::sass::params::user,
-    $group             = $::sass::params::group,
 ) inherits ::sass::params {
-    class { 'sass::dependency': } ->
     class { 'sass::install': } ->
     class { 'sass::config': } ~>
     class { 'sass::run': } ->

@@ -5,11 +5,6 @@ class sass::install {
     ## local variables
     $node_version       = $::sass::node_version
     $node_sass_version  = $::sass::node_sass_version
-    $root_dir           = $::sass::root_dir
-    $directories        = [
-        "${root_dir}/log",
-        "${root_dir}/log/webcompiler",
-    ]
 
     ## install nodejs, with npm
     class { 'nodejs':
