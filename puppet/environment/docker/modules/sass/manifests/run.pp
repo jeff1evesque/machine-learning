@@ -13,7 +13,7 @@ class sass::run {
         exec { 'start-sass':
             command => "./sass ${root_dir}",
             path    => '/usr/bin',
-            cwd     => $compiler_dir
+            cwd     => $compiler_dir,
             unless  => 'pgrep node-sass',
         }
     }
