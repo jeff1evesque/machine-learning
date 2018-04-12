@@ -17,7 +17,9 @@ COPY hiera /var/machine-learning/hiera
 COPY puppet/environment/$ENVIRONMENT/modules/sass $ROOT_PUPPET/code/modules/sass
 
 ## provision with puppet
-RUN $PUPPET apply -e 'class { sass: run => false }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+RUN $PUPPET apply -e 'class { sass: \
+    run => false \
+}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
-CMD ["/bin/sh", "-c", "sass"]
+CMD ["/bin/sh", "-c", "node-sass", "$ROOT_PROJECT/src/scss"]
