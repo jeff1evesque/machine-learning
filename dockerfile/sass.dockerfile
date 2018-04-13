@@ -16,5 +16,5 @@ CMD [\
     "-w",\
     "$ROOT_PROJECT/src/scss",\
     "-o",\
-    "$ROOT_PROJECT/interface/static/css",\
+    "$ROOT_PROJECT/interface/static/css"\
 ]
