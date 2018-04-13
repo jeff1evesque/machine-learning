@@ -4,7 +4,7 @@ USER node
 ## local variables
 ENV ROOT_PROJECT /var/machine-learning
 
-## create directories
+## copy files into container
 COPY src/scss $ROOT_PROJECT/src/scss
 COPY interface/static/css $ROOT_PROJECT/interface/static/css
 
