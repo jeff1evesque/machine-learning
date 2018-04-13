@@ -4,12 +4,15 @@
   "description": "packages needed for source files.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:js": "browserify src/jsx/content.jsx -t [ babelify --presets env,stage-2,react ] -o src/js/content.js",
+    "watch:jsx": "watch 'npm run build:js' src/jsx'",
   },
   "author": "Jeffrey Levesque",
   "license": "BSD",
   "repository": "github:jeff1evesque/machine-learning",
   "dependencies": {
+    "browserify": "^16.2.0",
+    "watch": "^1.0.2",
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
