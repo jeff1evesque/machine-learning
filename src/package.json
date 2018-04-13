@@ -4,7 +4,7 @@
   "description": "packages needed for source files.",
   "main": "index.js",
   "scripts": {
-    "build:js": "browserify src/jsx/content.jsx -t [ babelify --presets env,stage-2,react ] -o src/js/content.js",
+    "build:js": "browserify src/jsx/content.jsx -t [ babelify --presets env,stage-2,react ] -o interface/static/js/content.js",
     "watch:jsx": "watch 'npm run build:js' src/jsx'",
   },
   "author": "Jeffrey Levesque",
