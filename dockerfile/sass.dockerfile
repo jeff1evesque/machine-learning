@@ -5,8 +5,8 @@ USER node
 ENV ROOT_PROJECT /var/machine-learning
 
 ## source + asset directory
+RUN mkdir -p $ROOT_PROJECT/src/scss $ROOT_PROJECT/interface/static/css
 COPY src/scss $ROOT_PROJECT/src/scss
-RUN mkdir -p $ROOT_PROJECT/interface/static/css
 
 ##
 ## change npm-global directory
