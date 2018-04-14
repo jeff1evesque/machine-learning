@@ -4,9 +4,9 @@ USER node
 ## local variables
 ENV ROOT_PROJECT /var/machine-learning
 
-## copy files into container
+## source + asset directory
 COPY src/scss $ROOT_PROJECT/src/scss
-COPY interface/static/css $ROOT_PROJECT/interface/static/css
+RUN mkdir -p $ROOT_PROJECT/interface/static/css
 
 ##
 ## change npm-global directory

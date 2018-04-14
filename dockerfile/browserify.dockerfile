@@ -3,9 +3,9 @@ FROM node:9
 ## local variables
 ENV ROOT_PROJECT /var/machine-learning
 
-## copy files into container
+## source + asset directory
 COPY src/jsx $ROOT_PROJECT/jsx
-COPY interface/static/js $ROOT_PROJECT/interface/static/js
+RUN mkdir -p $ROOT_PROJECT/interface/static/js
 
 ## provision with puppet
 WORKDIR src
