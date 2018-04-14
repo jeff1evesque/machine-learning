@@ -20,7 +20,7 @@ services:
         - ${PWD}/__init__.py:/var/machine-learning/__init__.py
     ports:
     - 6000:9090/tcp
-  webserver:
+  webserver-web:
     hostname: webserver-web
     image: jeff1evesque/ml-webserver:0.7
     network_mode: bridge
