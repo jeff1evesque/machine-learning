@@ -29,6 +29,8 @@ services:
         - ${PWD}/interface:/var/machine-learning/interface/__init__
         - ${PWD}/interface:/var/machine-learning/interface/views_web.py
         - ${PWD}/interface:/var/machine-learning/interface/templates
+        - ${PWD}/interface/static/js:/var/machine-learning/interface/static/js
+        - ${PWD}/interface/static/js:/var/machine-learning/interface/static/css
         - ${PWD}/hiera:/var/machine-learning/hiera
         - ${PWD}/brain:/var/machine-learning/brain
         - ${PWD}/test:/var/machine-learning/test
