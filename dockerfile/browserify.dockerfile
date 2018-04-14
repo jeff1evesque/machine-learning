@@ -7,7 +7,7 @@ ENV ROOT_PROJECT /var/machine-learning
 COPY src/jsx $ROOT_PROJECT/jsx
 RUN mkdir -p $ROOT_PROJECT/interface/static/js
 
-## provision with puppet
+## provision with package.json
 WORKDIR src
 RUN npm install
 
