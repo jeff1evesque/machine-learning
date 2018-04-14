@@ -11,7 +11,7 @@ services:
     volumes:
         - ${PWD}/log:/var/machine-learning/log
         - ${PWD}/interface:/var/machine-learning/interface/__init__
-        - ${PWD}/interface:/var/machine-learning/interface/views_api
+        - ${PWD}/interface:/var/machine-learning/interface/views_api.py
         - ${PWD}/hiera:/var/machine-learning/hiera
         - ${PWD}/brain:/var/machine-learning/brain
         - ${PWD}/test:/var/machine-learning/test
@@ -27,9 +27,8 @@ services:
     volumes:
         - ${PWD}/log:/var/machine-learning/log
         - ${PWD}/interface:/var/machine-learning/interface/__init__
-        - ${PWD}/interface:/var/machine-learning/interface/views_web
+        - ${PWD}/interface:/var/machine-learning/interface/views_web.py
         - ${PWD}/interface:/var/machine-learning/interface/templates
-        - ${PWD}/interface:/var/machine-learning/interface
         - ${PWD}/hiera:/var/machine-learning/hiera
         - ${PWD}/brain:/var/machine-learning/brain
         - ${PWD}/test:/var/machine-learning/test
