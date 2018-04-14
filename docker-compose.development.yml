@@ -18,7 +18,6 @@ services:
     network_mode: bridge
     volumes:
         - ${PWD}/src/jsx:/var/machine-learning/src/jsx
-        - ${PWD}/src/js:/var/machine-learning/src/js
         - ${PWD}/interface/static/js:/var/machine-learning/interface/static/js
   sass:
     hostname: sass
