@@ -4,13 +4,14 @@
   "description": "packages needed for source files.",
   "main": "index.js",
   "scripts": {
-    "build:js": "browserify src/jsx/content.jsx -t [ babelify --presets env,stage-2,react ] -o interface/static/js/content.js",
-    "watch:jsx": "onchange 'src/**/*.jsx' 'src/**/*.js' -- npm run build:js"
+    "build:js": "browserify jsx/content.jsx -t [ babelify --presets env,stage-2,react ] -o ../interface/static/js/content.js",
+    "watch:jsx": "onchange 'jsx/*.jsx' 'jsx/*.js' -- npm run build:js"
   },
   "author": "Jeffrey Levesque",
   "license": "BSD",
   "repository": "github:jeff1evesque/machine-learning",
   "dependencies": {
+    "babelify": "^8.0.0",
     "browserify": "^16.2.0",
     "onchange": "^3.3.0",
     "babel-core": "^6.26.0",
