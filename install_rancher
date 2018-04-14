@@ -20,6 +20,10 @@ RANCHER_COMPOSE='rancher-compose.development.yml'
 ## general variables
 ROOT_PUPPET='/etc/puppetlabs'
 
+## cleanup asset volume
+rm -rf interface/static/js
+rm -rf interface/static/css
+
 ## environment variables used by docker
 ##
 ## @CWD, environment variable, needed to build absolute path for docker-compose:
@@ -339,6 +343,10 @@ else
     exit 1
 fi
 
+## create asset volume
+mkdir -p interface/static/js
+mkdir -p interface/static/css
+
 ## provision containers
 ##
 ##     - mariadb database
@@ -347,6 +355,8 @@ fi
 ## Note: 'create-mongodb-users' is created by puppet.
 ##
 if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
+
+    ##  `docker-machine start` `docker-machine env`
 
 else
     ## mariadb database
