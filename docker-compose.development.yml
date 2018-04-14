@@ -6,7 +6,7 @@ services:
     network_mode: bridge
   webserver-api:
     hostname: webserver-api
-    image: jeff1evesque/ml-webserver-api:0.7
+    image: jeff1evesque/ml-webserver0.7
     network_mode: bridge
     volumes:
         - ${PWD}/log:/var/machine-learning/log
@@ -22,7 +22,7 @@ services:
     - 6000:9090/tcp
   webserver:
     hostname: webserver-web
-    image: jeff1evesque/ml-webserver-web:0.7
+    image: jeff1evesque/ml-webserver:0.7
     network_mode: bridge
     volumes:
         - ${PWD}/log:/var/machine-learning/log
@@ -51,4 +51,12 @@ services:
   redis:
     hostname: redis
     image: jeff1evesque/ml-redis:0.7
+    network_mode: bridge
+  browserify:
+    hostname: browserify
+    image: jeff1evesque/ml-browserify:0.7
+    network_mode: bridge
+  sass:
+    hostname: sass
+    image: jeff1evesque/ml-sass:0.7
     network_mode: bridge
