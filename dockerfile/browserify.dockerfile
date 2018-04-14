@@ -12,4 +12,4 @@ WORKDIR $ROOT_PROJECT/src
 RUN npm install
 
 ## executed everytime container starts
-CMD ["npm", "run-script", "watch:jsx"]
+CMD ["npm", "run", "watch:jsx"]
