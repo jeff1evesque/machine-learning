@@ -37,6 +37,7 @@
 
 # Ignore and don't commit the following files
 *.pyc
+*npm-debug.log
 /src/js/.gitignore
 /log/database
 /log/application
