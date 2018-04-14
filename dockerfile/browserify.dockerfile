@@ -5,7 +5,7 @@ ENV ROOT_PROJECT /var/machine-learning
 
 ## source + asset directory
 RUN mkdir -p $ROOT_PROJECT/src/jsx $ROOT_PROJECT/interface/static/js
-COPY src/package.json $ROOT_PROJECT/src
+COPY src/jsx/package.json $ROOT_PROJECT/src
 COPY src/jsx $ROOT_PROJECT/src/jsx
 
 ## provision with package.json
