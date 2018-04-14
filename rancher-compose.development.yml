@@ -3,18 +3,6 @@ services:
   mariadb:
     scale: 1
     start_on_create: true
-  webserver-api:
-    scale: 1
-    start_on_create: true
-  webserver-web:
-    scale: 1
-    start_on_create: true
-  nginx-api:
-    scale: 1
-    start_on_create: true
-  nginx-web:
-    scale: 1
-    start_on_create: true
   mongodb:
     scale: 1
     start_on_create: true
@@ -25,5 +13,17 @@ services:
     scale: 1
     start_on_create: true
   browserify:
+    scale: 1
+    start_on_create: true
+  webserver-api:
+    scale: 1
+    start_on_create: true
+  webserver-web:
+    scale: 1
+    start_on_create: true
+  nginx-api:
+    scale: 1
+    start_on_create: true
+  nginx-web:
     scale: 1
     start_on_create: true
