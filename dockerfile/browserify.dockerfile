@@ -4,8 +4,8 @@ FROM node:9
 ENV ROOT_PROJECT /var/machine-learning
 
 ## source + asset directory
-COPY src/package.json src/jsx $ROOT_PROJECT/
-RUN mkdir -p $ROOT_PROJECT/interface/static/js
+RUN mkdir -p $ROOT_PROJECT/src/jsx $ROOT_PROJECT/interface/static/js
+COPY src/package.json src/jsx $ROOT_PROJECT/src
 
 ## provision with package.json
 WORKDIR $ROOT_PROJECT/src
