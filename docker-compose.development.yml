@@ -29,7 +29,7 @@ services:
   webserver-api:
     hostname: webserver-api
     image: jeff1evesque/ml-webserver:0.7
-    command: [0.0.0.0, 6001, 6, api]
+    command: ['0.0.0.0', '6001', '6', 'api']
     network_mode: bridge
     volumes:
         - ${PWD}/log:/var/machine-learning/log
@@ -46,7 +46,7 @@ services:
   webserver-web:
     hostname: webserver-web
     image: jeff1evesque/ml-webserver:0.7
-    command: [0.0.0.0, 5001, 6, web]
+    command: ['0.0.0.0', '5001', '6', 'web']
     network_mode: bridge
     volumes:
         - ${PWD}/log:/var/machine-learning/log
