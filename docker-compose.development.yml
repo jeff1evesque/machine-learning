@@ -33,8 +33,8 @@ services:
     network_mode: bridge
     volumes:
         - ${PWD}/log:/var/machine-learning/log
-        - ${PWD}/interface:/var/machine-learning/interface/__init__
-        - ${PWD}/interface:/var/machine-learning/interface/views_api.py
+        - ${PWD}/interface/__init__.py:/var/machine-learning/interface/__init__.py
+        - ${PWD}/interface/views_api.py:/var/machine-learning/interface/views_api.py
         - ${PWD}/hiera:/var/machine-learning/hiera
         - ${PWD}/brain:/var/machine-learning/brain
         - ${PWD}/test:/var/machine-learning/test
@@ -50,9 +50,9 @@ services:
     network_mode: bridge
     volumes:
         - ${PWD}/log:/var/machine-learning/log
-        - ${PWD}/interface:/var/machine-learning/interface/__init__
-        - ${PWD}/interface:/var/machine-learning/interface/views_web.py
-        - ${PWD}/interface:/var/machine-learning/interface/templates
+        - ${PWD}/interface/__init__.py:/var/machine-learning/interface/__init__.py
+        - ${PWD}/interface/views_web.py:/var/machine-learning/interface/views_web.py
+        - ${PWD}/interface/templates:/var/machine-learning/interface/templates
         - ${PWD}/interface/static/js:/var/machine-learning/interface/static/js
         - ${PWD}/interface/static/css:/var/machine-learning/interface/static/css
         - ${PWD}/hiera:/var/machine-learning/hiera
