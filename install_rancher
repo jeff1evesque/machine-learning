@@ -350,8 +350,10 @@ mkdir -p interface/static/css
 
 ## provision containers
 ##
-##     - mariadb database
-##     - mongodb users
+##     - mariadb, create database, tables, and users
+##     - mongodb, create database users
+##     - browserify, initial javascript compile
+##     - scss, initial css compile
 ##
 ## Note: 'create-mongodb-users' is created by puppet.
 ##
@@ -364,8 +366,8 @@ docker exec mongodb -d sh -c '\
     cd /root/build && \
     ./create-mongodb-users'
 
-docker exec sass -d sh -c "\
-    touch $ROOT_PROJECT/src/scss/style.scss"
-
 docker exec browserify -d sh -c "\
     touch $ROOT_PROJECT/src/jsx/content.jsx"
+
+docker exec sass -d sh -c "\
+    touch $ROOT_PROJECT/src/scss/style.scss"
