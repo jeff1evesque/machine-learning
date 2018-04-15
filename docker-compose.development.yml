@@ -28,7 +28,7 @@ services:
         - ${PWD}/interface/static/css:/var/machine-learning/interface/static/css
   webserver-api:
     hostname: webserver-api
-    image: jeff1evesque/ml-webserver0.7
+    image: jeff1evesque/ml-webserver:0.7
     network_mode: bridge
     volumes:
         - ${PWD}/log:/var/machine-learning/log
