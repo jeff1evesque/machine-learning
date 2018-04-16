@@ -15,4 +15,4 @@ COPY puppet/environment/$ENVIRONMENT/modules/redis $ROOT_PUPPET/code/modules/red
 RUN $PUPPET apply -e 'class { redis: run => false }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
-CMD ["/bin/sh", "-c", "redis-server"]
+ENTRYPOINT ["/bin/bash", "-c", "redis-server"]

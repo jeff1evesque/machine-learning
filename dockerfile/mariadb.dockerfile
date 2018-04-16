@@ -15,4 +15,4 @@ COPY puppet/environment/$ENVIRONMENT/modules/mariadb $ROOT_PUPPET/code/modules/m
 RUN $PUPPET apply -e 'class { mariadb: }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
-CMD ["/bin/sh", "-c", "mysqld"]
+ENTRYPOINT ["/bin/bash", "-c", "mysqld"]

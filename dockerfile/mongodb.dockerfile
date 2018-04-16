@@ -25,5 +25,4 @@ RUN $PUPPET apply -e 'class { mongodb: \
 }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
-ENTRYPOINT ["/usr/bin/mongod"]
-CMD ["-f", "/etc/mongod.conf"]
+ENTRYPOINT ["/usr/bin/mongod", "-f", "/etc/mongod.conf"]
