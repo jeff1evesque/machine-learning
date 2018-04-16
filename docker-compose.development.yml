@@ -4,14 +4,20 @@ services:
     hostname: mariadb
     image: jeff1evesque/ml-mariadb:0.7
     network_mode: bridge
+    volumes:
+        - ${PWD}/data/mariadb:/var/lib/mysql
   mongodb:
     hostname: mongodb
     image: jeff1evesque/ml-mongodb:0.7
     network_mode: bridge
+    volumes:
+        - ${PWD}/data/mongodb:/data/db
   redis:
     hostname: redis
     image: jeff1evesque/ml-redis:0.7
     network_mode: bridge
+    volumes:
+        - ${PWD}/data/redis:/data
   browserify:
     hostname: browserify
     image: jeff1evesque/ml-browserify:0.7

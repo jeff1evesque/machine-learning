@@ -21,9 +21,9 @@ RANCHER_COMPOSE='rancher-compose.development.yml'
 ROOT_PROJECT='/var/machine-learning'
 ROOT_PUPPET='/etc/puppetlabs'
 
-## cleanup asset volume
-rm -rf interface/static/js
-rm -rf interface/static/css
+## cleanup docker volumes
+rm -rf data
+rm -rf interface/static/{js,css}
 
 ## environment variables used by docker
 ##
@@ -344,9 +344,9 @@ else
     exit 1
 fi
 
-## create asset volume
-mkdir -p interface/static/js
-mkdir -p interface/static/css
+## create docker volume
+mkdir -p data/{mariadb,mongodb,redis}
+mkdir -p interface/static/{js,css}
 
 ## provision containers
 ##
