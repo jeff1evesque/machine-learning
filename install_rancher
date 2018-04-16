@@ -171,7 +171,6 @@ if docker -v >/dev/null 2>&1; then
         --restart=unless-stopped \
         -p "$RANCHER_PORT":8080 \
         rancher/server:stable
-
     mkdir -p ~/.rancher
 
     ## generate access + secret key:
@@ -342,29 +341,5 @@ else
 fi
 
 ## create docker volume
-mkdir -p data/{mariadb,mongodb,redis}
-mkdir -p interface/static/{js,css}
-
-## provision containers
-##
-##     - mariadb, create database, tables, and users
-##     - mongodb, create database users
-##     - browserify, initial javascript compile
-##     - scss, initial css compile
-##
-## Note: 'create-mongodb-users' is created by puppet.
-##
-rancher exec -it "$RANCHER_STACK"/mariadb sh -c "\
-    cd $ROOT_PUPPET/code/modules/mariadb/scripts && \
-    python setup_tables.py $ROOT_PUPPET/puppet"
-
-rancher exec -it "$RANCHER_STACK"/mongodb sh -c '\
-    /usr/bin/mongod --fork --config /etc/mongod.conf && \
-    cd /root/build && \
-    ./create-mongodb-users'
-
-rancher exec -it "$RANCHER_STACK"/browserify sh -c "\
-    touch $ROOT_PROJECT/src/jsx/content.jsx"
-
-rancher exec -it "$RANCHER_STACK"/sass sh -c "\
-    touch $ROOT_PROJECT/src/scss/style.scss"
+mkdir -p ./data/{mariadb,mongodb,redis}
+mkdir -p ./interface/static/{js,css}
