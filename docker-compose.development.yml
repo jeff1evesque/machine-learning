@@ -31,6 +31,7 @@ services:
   browserify:
     hostname: browserify
     image: jeff1evesque/ml-browserify:0.7
+    command: /bin/bash -c 'touch /var/machine-learning/src/jsx/content.jsx'
     network_mode: bridge
     volumes:
         - ${PWD}/src/jsx:/var/machine-learning/src/jsx
