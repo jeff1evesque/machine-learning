@@ -173,9 +173,6 @@ if docker -v >/dev/null 2>&1; then
         rancher/server:stable
 
     mkdir -p ~/.rancher
-    mkdir -p ./docker_storage_redis
-    mkdir -p ./docker_storage_mongodb
-    mkdir -p ./docker_storage_mariadb
 
     ## generate access + secret key:
     ##
