@@ -3,18 +3,32 @@ services:
   mariadb:
     hostname: mariadb
     image: jeff1evesque/ml-mariadb:0.7
+    command:
+        - /bin/bash
+        - -c
+        - |
+            cd $ROOT_PUPPET/code/modules/mariadb/scripts
+            python setup_tables.py $ROOT_PUPPET/puppet"
     network_mode: bridge
     volumes:
         - ${PWD}/data/mariadb:/var/lib/mysql
   mongodb:
     hostname: mongodb
     image: jeff1evesque/ml-mongodb:0.7
+    command:
+        - /bin/bash
+        - -c
+        - |
+            /usr/bin/mongod --fork --config /etc/mongod.conf
+            cd /root/build
+            ./create-mongodb-users'
     network_mode: bridge
     volumes:
         - ${PWD}/data/mongodb:/data/db
   redis:
     hostname: redis
     image: jeff1evesque/ml-redis:0.7
+    command: /bin/bash -c 'touch /var/machine-learning/src/jsx/content.jsx'
     network_mode: bridge
     volumes:
         - ${PWD}/data/redis:/data
@@ -28,6 +42,7 @@ services:
   sass:
     hostname: sass
     image: jeff1evesque/ml-sass:0.7
+    command: /bin/bash -c 'touch /var/machine-learning/src/scss/style.scss'
     network_mode: bridge
     volumes:
         - ${PWD}/src/scss:/var/machine-learning/src/scss
