@@ -5,8 +5,8 @@ services:
     image: jeff1evesque/ml-mariadb:0.7
     command: >
         /bin/bash -c
-        "cd /etc/puppetlabs/code/modules/mariadb/scripts
-        && python setup_tables.py /etc/puppetlabs/puppet"
+        'cd /etc/puppetlabs/code/modules/mariadb/scripts
+        && python setup_tables.py /etc/puppetlabs/puppet'
     network_mode: bridge
     volumes:
         - ${PWD}/data/mariadb:/var/lib/mysql
@@ -15,9 +15,9 @@ services:
     image: jeff1evesque/ml-mongodb:0.7
     command: >
         /bin/bash -c
-        "/usr/bin/mongod --fork --config /etc/mongod.conf
+        '/usr/bin/mongod --fork --config /etc/mongod.conf
         && cd /root/build
-        && ./create-mongodb-users"
+        && ./create-mongodb-users'
     network_mode: bridge
     volumes:
         - ${PWD}/data/mongodb:/data/db
