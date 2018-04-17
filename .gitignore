@@ -14,7 +14,7 @@
 !factory.py
 !license.md
 !contributing.md
-!*.development.yml
+!{docker-compose,rancher-template}.development.yml
 !/install_rancher
 !/puppet/
 !/test
@@ -28,10 +28,7 @@
 *__pycache__/
 *.pytest_cache/
 *.cache/
-/interface/static/js/
-/interface/static/css/
-/interface/static/img/
-/interface/static/node_modules/
+/interface/static/{js,css,node_modules}
 /src/node_modules/
 /puppet/environment/*/modules_contrib/
 
@@ -39,9 +36,5 @@
 *.pyc
 *npm-debug.log
 /src/js/.gitignore
-/log/database
-/log/application
-/log/webcompiler
-/log/webserver
-/log/*.log
+/log/{application,database,webcompiler,webserver,*.log}
 /test/*.log
