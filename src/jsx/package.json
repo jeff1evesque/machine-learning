@@ -4,7 +4,9 @@
   "description": "packages needed for source files.",
   "main": "index.js",
   "scripts": {
-    "build:js": "browserify jsx/content.jsx -t [ babelify --presets env,stage-2,react ] -o ../interface/static/js/content.js",
+    "run:browserify": "browserify jsx/content.jsx -t [ babelify --presets env,stage-2,react ] -o ../interface/static/js/content.js",
+    "prebuild:dos2unix": "find . -type f -print0 | xargs -0 dos2unix",
+    "build:js": "npm run prebuild:dos2unix && npm run run:browserify",
     "watch:jsx": "onchange 'jsx/*.jsx' 'jsx/*.js' -- npm run build:js"
   },
   "author": "Jeffrey Levesque",
