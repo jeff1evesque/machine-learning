@@ -16,6 +16,7 @@ PYTHON_VERSION_FULL='3.6.4'
 RANCHER_STACK='MLStack'
 DOCKER_COMPOSE='docker-compose.development.yml'
 RANCHER_COMPOSE='rancher-compose.development.yml'
+RANCHER_COMPOSE_TEMPLATE='rancher-template.development.yml'
 
 ## general variables
 ROOT_PROJECT='/var/machine-learning'
@@ -322,6 +323,9 @@ if docker -v >/dev/null 2>&1; then
             -v /var/lib/rancher:/var/lib/rancher \
             rancher/agent:v1.2.9 \
             "$RANCHER_URL/v1/scripts/$TOKEN"
+
+        ## create rancher-compose
+        sed "s|PREPATH|$PWD|g" "$RANCHER_COMPOSE_TEMPLATE" > "$RANCHER_COMPOSE"
 
         ## create rancher stack
         rancher stacks \
