@@ -22,7 +22,6 @@ services:
   redis:
     hostname: redis
     image: jeff1evesque/ml-redis:0.7
-    command: /bin/bash -c 'touch /var/machine-learning/src/jsx/content.jsx'
     network_mode: bridge
 
   browserify:
