@@ -3,12 +3,6 @@
   "version": "1.0.0",
   "description": "packages needed for source files.",
   "main": "index.js",
-  "scripts": {
-    "run:browserify": "browserify -t [ babelify --presets env,stage-2,react ] /var/machine-learning/src/jsx/content.jsx -o /var/machine-learning/interface/static/js/content.js",
-    "prebuild:dos2unix": "find . -type f -print0 | xargs -0 dos2unix",
-    "build:js": "npm run prebuild:dos2unix && npm run run:browserify",
-    "watch:jsx": "onchange 'jsx/*.jsx' 'jsx/*.js' -- npm run build:js",
-  },
   "author": "Jeffrey Levesque",
   "license": "BSD",
   "repository": "github:jeff1evesque/machine-learning",

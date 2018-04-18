@@ -10,7 +10,13 @@ COPY src/jsx $ROOT_PROJECT/src/jsx
 
 ## provision with package.json
 WORKDIR $ROOT_PROJECT/src
+RUN apt-get update && apt-get install -y inotify-tools dos2unix
+RUN npm install -g browserify
 RUN npm install
 
-## executed everytime container starts
-ENTRYPOINT ["npm", "run", "watch:jsx"]
+## dos2unix + browserify
+CMD inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move | \
+    find . -type f -print0 | xargs -0 dos2unix \
+    browserify $ROOT_PROJECT/src/jsx/content.jsx \
+    -t [ babelify --presets env,stage-2,react ] \
+    -o $ROOT_PROJECT/src/js/content.js
