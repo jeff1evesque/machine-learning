@@ -16,7 +16,7 @@ RUN npm install
 
 ## dos2unix + browserify
 CMD inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move | \
-    find . -type f -print0 | xargs -0 dos2unix \
+    find $ROOT_PROJECT/src/jsx -type f -print0 | xargs -0 dos2unix && \
     browserify $ROOT_PROJECT/src/jsx/content.jsx \
     -t [ babelify --presets env,stage-2,react ] \
     -o $ROOT_PROJECT/src/js/content.js
