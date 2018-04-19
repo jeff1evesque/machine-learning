@@ -27,7 +27,9 @@ services:
   browserify:
     hostname: browserify
     image: jeff1evesque/ml-browserify:0.7
-    command: /bin/bash -c 'touch /var/machine-learning/src/jsx/content.jsx'
+    command:
+        - tail -f /dev/null
+        - /bin/bash -c 'touch /var/machine-learning/src/jsx/content.jsx'
     network_mode: bridge
 
   sass:

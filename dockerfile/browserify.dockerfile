@@ -14,9 +14,15 @@ RUN apt-get update && apt-get install -y inotify-tools dos2unix
 RUN npm install -g browserify
 RUN npm install
 
+##
 ## dos2unix + browserify
-CMD inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move | \
-    find $ROOT_PROJECT/src/jsx -type f -print0 | xargs -0 dos2unix && \
+##
+## Note: to persist the container:
+##
+##     docker run --hostname browserify --name browserify -d jeff1evesque/ml-browserify:0.7 tail -f /dev/null
+##
+ENTRYPOINT inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move | \
     browserify $ROOT_PROJECT/src/jsx/content.jsx \
     -t [ babelify --presets env,stage-2,react ] \
     -o $ROOT_PROJECT/src/js/content.js
+CMD tail -f /dev/null
