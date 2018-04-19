@@ -16,10 +16,11 @@ RUN npm install
 
 ## define entrypoint script
 RUN printf "#!/bin/bash\n\n\
-inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move |\\n\
-    browserify $ROOT_PROJECT/src/jsx/content.jsx\\n\
-    -t [ babelify --presets env,stage-2,react ]\\n\
-    -o $ROOT_PROJECT/src/js/content.js\\n\n\
+inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move |\\\\\n\
+    cd node_modules &&\\\\\n\
+    browserify $ROOT_PROJECT/src/jsx/content.jsx\\\\\n\
+    -t [ babelify --presets env,stage-2,react ]\\\\\n\
+    -o $ROOT_PROJECT/src/js/content.js\n\n\
 " > $ROOT_PROJECT/entrypoint
 RUN chmod 710 $ROOT_PROJECT/entrypoint
 
