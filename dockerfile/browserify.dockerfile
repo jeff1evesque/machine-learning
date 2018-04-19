@@ -15,14 +15,14 @@ RUN npm install -g browserify
 RUN npm install
 
 ## define entrypoint script
-RUN echo -e "\
+RUN echo $'\
 #!/bin/bash\n\n\
 inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move |\n\
     browserify $ROOT_PROJECT/src/jsx/content.jsx\n\
     -t [ babelify --presets env,stage-2,react ]\n\
     -o $ROOT_PROJECT/src/js/content.js\n\n\
 touch /var/machine-learning/src/jsx/content.jsx\
-" > $ROOT_PROJECT/entrypoint
+' > $ROOT_PROJECT/entrypoint
 RUN chmod 710 $ROOT_PROJECT/entrypoint
 
 ##
