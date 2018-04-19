@@ -14,15 +14,22 @@ RUN apt-get update && apt-get install -y inotify-tools dos2unix
 RUN npm install -g browserify
 RUN npm install
 
+RUN echo -e "\
+#!/bin/bash \n \
+inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move | \n \
+    browserify $ROOT_PROJECT/src/jsx/content.jsx \n \
+    -t [ babelify --presets env,stage-2,react ] \n \
+    -o $ROOT_PROJECT/src/js/content.js \n\n \
+touch /var/machine-learning/src/jsx/content.jsx \
+" > $ROOT_PROJECT/entrypoint
+
 ##
 ## dos2unix + browserify
 ##
 ## Note: to persist the container:
 ##
-##     docker run --hostname browserify --name browserify -d jeff1evesque/ml-browserify:0.7 tail -f /dev/null
+##     docker run --hostname browserify --name browserify -d jeff1evesque/ml-browserify:0.7
 ##
-ENTRYPOINT inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move | \
-    browserify $ROOT_PROJECT/src/jsx/content.jsx \
-    -t [ babelify --presets env,stage-2,react ] \
-    -o $ROOT_PROJECT/src/js/content.js
+WORKDIR $ROOT_PROJECT
+ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]
 CMD tail -f /dev/null
