@@ -15,8 +15,7 @@ RUN npm install -g browserify
 RUN npm install
 
 ## define entrypoint script
-RUN echo $'\
-#!/bin/bash\n\n\
+RUN echo $'#!/bin/bash\n\n\
 inotifywait $ROOT_PROJECT/src/jsx/ -m -r -e close_write -e move |\n\
     browserify $ROOT_PROJECT/src/jsx/content.jsx\n\
     -t [ babelify --presets env,stage-2,react ]\n\
