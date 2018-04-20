@@ -14,3 +14,4 @@ RUN npm install
 
 ## executed everytime container starts
 ENTRYPOINT ["npm", "run", "watch:jsx"]
+CMD ["npm", "run", "postbuild:touch"]
