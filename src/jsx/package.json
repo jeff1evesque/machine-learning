@@ -4,10 +4,10 @@
   "description": "packages needed for source files.",
   "main": "index.js",
   "scripts": {
-    "run:browserify": "browserify -t [ babelify --presets env,stage-2,react ] /var/machine-learning/src/jsx/content.jsx -o /var/machine-learning/interface/static/js/content.js",
+    "build:browserify": "browserify -t [ babelify --presets env,stage-2,react ] /var/machine-learning/src/jsx/content.jsx -o /var/machine-learning/interface/static/js/content.js",
     "prebuild:dos2unix": "find /var/machine-learning/src/jsx -type f -print0 | xargs -0 dos2unix",
-    "build:js": "npm run prebuild:dos2unix && npm run run:browserify",
-    "watch:jsx": "onchange 'jsx/*.jsx' 'jsx/*.js' -- npm run build:js"
+    "postbuild:touch": "touch /var/machine-learning/src/jsx/content.jsx",
+    "watch:jsx": "npm run prebuild:dos2unix & onchange '/var/machine-learning/src/jsx/*.jsx' '/var/machine-learning/src/jsx/**/*.js' -- npm run build:browserify"
   },
   "author": "Jeffrey Levesque",
   "license": "BSD",
