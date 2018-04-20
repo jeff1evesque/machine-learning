@@ -12,6 +12,11 @@ COPY src/jsx $ROOT_PROJECT/src/jsx
 WORKDIR $ROOT_PROJECT/src
 RUN npm install
 
+## define entrypoint script
+RUN printf "#!/bin/bash\n\n\
+npm run watch:jsx && npm run postbuild:touch\n\
+" > $ROOT_PROJECT/src/entrypoint
+RUN chmod 710 $ROOT_PROJECT/src/entrypoint
+
 ## executed everytime container starts
-ENTRYPOINT ["npm", "run", "watch:jsx"]
-CMD ["npm", "run", "postbuild:touch"]
+ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]
