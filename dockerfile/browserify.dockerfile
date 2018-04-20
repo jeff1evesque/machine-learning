@@ -14,7 +14,8 @@ RUN npm install
 
 ## define entrypoint script
 RUN printf "#!/bin/bash\n\n\
-npm run watch:jsx && npm run postbuild:touch\n\
+npm run prebuild:dos2unix\n\
+npm run watch:jsx\n\
 " > $ROOT_PROJECT/src/entrypoint
 RUN chmod 710 $ROOT_PROJECT/src/entrypoint
 

@@ -347,3 +347,6 @@ fi
 ## create docker volume
 mkdir -p ./data/{mariadb,mongodb,redis}
 mkdir -p ./interface/static/{js,css}
+
+## trigger asset build
+touch src/jsx/content.jsx
