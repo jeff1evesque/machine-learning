@@ -12,5 +12,12 @@ COPY src/scss $ROOT_PROJECT/src/scss
 WORKDIR $ROOT_PROJECT/src
 RUN npm install
 
+## define entrypoint script
+RUN printf "#!/bin/bash\n\n\
+npm run build:scss\n\
+npm run watch:scss\n\
+" > $ROOT_PROJECT/src/entrypoint
+RUN chmod 710 $ROOT_PROJECT/src/entrypoint
+
 ## executed everytime container starts
-ENTRYPOINT ["npm", "run", "watch:scss"]
+ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]
