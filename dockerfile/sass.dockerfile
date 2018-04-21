@@ -14,7 +14,7 @@ RUN npm install
 
 ## define entrypoint script
 RUN printf "#!/bin/bash\n\n\
-npm run build:scss\n\
+npm run build:css\n\
 npm run watch:scss\n\
 " > $ROOT_PROJECT/src/entrypoint
 RUN chmod 710 $ROOT_PROJECT/src/entrypoint
