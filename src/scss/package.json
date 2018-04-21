@@ -4,8 +4,8 @@
   "description": "packages needed for source files.",
   "main": "index.js",
   "scripts": {
-    "build:css": "node-sass scss/style.scss ../interface/static/css/style.css",
-    "watch:scss": "onchange 'scss/*.scss' -- npm run build:css"
+    "build:css": "node-sass /var/machine-learning/src/scss/style.scss /var/machine-learning/interface/static/css/style.css",
+    "watch:scss": "onchange 'scss/**/*.scss' -- npm run build:css"
   },
   "author": "Jeffrey Levesque",
   "license": "BSD",
