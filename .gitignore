@@ -28,7 +28,9 @@
 *__pycache__/
 *.pytest_cache/
 *.cache/
-/interface/static/{js,css,node_modules}
+/interface/static/js
+/interface/static/css
+/interface/static/node_modules
 /src/node_modules/
 /puppet/environment/*/modules_contrib/
 
