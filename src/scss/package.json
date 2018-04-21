@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build:css": "node-sass /var/machine-learning/src/scss/style.scss /var/machine-learning/interface/static/css/style.css",
-    "watch:scss": "onchange 'scss/**/*.scss' -- npm run build:css"
+    "watch:scss": "onchange '/var/machine-learning/src/scss/**/*.scss' -- npm run build:css"
   },
   "author": "Jeffrey Levesque",
   "license": "BSD",
