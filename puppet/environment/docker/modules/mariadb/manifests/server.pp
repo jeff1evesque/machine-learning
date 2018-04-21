@@ -4,7 +4,7 @@
 class mariadb::server {
     ## local variables
     $db_host              = $::mariadb::allow_host
-    $db                   = $::mariadb::name
+    $db                   = $::mariadb::db
     $db_user              = $::mariadb::db_user
     $db_password          = $::mariadb::db_password
     $provisioner          = $::mariadb::provisioner
