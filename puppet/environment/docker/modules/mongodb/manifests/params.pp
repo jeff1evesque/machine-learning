@@ -1,7 +1,7 @@
 ###
 ### params.pp: default class parameters.
 ###
-### @members, corresponds to an existing webserver.
+### @dbPath, must successively build up to fullpath.
 ###
 class mongodb::params {
     $hiera                   = lookup( { 'name' => 'database', 'default_value' => false } )
@@ -30,7 +30,7 @@ class mongodb::params {
 
     else {
         $root_dir            = '/var/machine-learning'
-        $dbPath              = '/var/lib/mongodb'
+        $dbPath              = ['/data', '/data/db']
         $journal             = true
         $verbosity           = 1
         $destination         = 'file'

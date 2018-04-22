@@ -5,6 +5,7 @@
 ##  - mariadb
 ##
 ## @host, @hostname, defined from executed 'docker' command.
+## @dbPath, must successively build up to fullpath.
 ##
 database:
     mariadb:
@@ -31,7 +32,9 @@ database:
         source_list: 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse'
 
         storage:
-            dbPath: /var/lib/mongodb
+            dbPath:
+                - '/data'
+                - '/data/db'
             journal:
                 enabled: true
 
