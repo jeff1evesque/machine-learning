@@ -22,7 +22,16 @@ COPY puppet/environment/$ENVIRONMENT/modules/mongodb $ROOT_PUPPET/code/modules/m
 RUN $PUPPET apply -e 'class { mongodb: \
     run => true, \
     security_authorization => false \
-}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+}' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/
+
+## define entrypoint script
+RUN printf "#!/bin/bash\n\n\
+/usr/bin/mongod --fork --config /etc/mongod.conf\n\
+cd /root/build && ./create-mongodb-users\n\
+/usr/bin/mongod --shutdown\n\
+/usr/bin/mongod --config /etc/mongod.conf\n\
+" > entrypoint
+RUN chmod 710 entrypoint
 
 ## executed everytime container starts
-ENTRYPOINT ["/usr/bin/mongod", "-f", "/etc/mongod.conf"]
+ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]

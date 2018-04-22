@@ -8,11 +8,6 @@ services:
   mongodb:
     hostname: mongodb
     image: jeff1evesque/ml-mongodb:0.7
-    command: >
-        /bin/bash -c
-        '/usr/bin/mongod --fork --config /etc/mongod.conf
-        && cd /root/build
-        && ./create-mongodb-users'
     network_mode: bridge
 
   redis:
