@@ -3,10 +3,6 @@ services:
   mariadb:
     hostname: mariadb
     image: jeff1evesque/ml-mariadb:0.7
-    command: >
-        /bin/bash -c
-        'cd /etc/puppetlabs/code/modules/mariadb/scripts
-        && python setup_tables.py /etc/puppetlabs/puppet'
     network_mode: bridge
 
   mongodb:
