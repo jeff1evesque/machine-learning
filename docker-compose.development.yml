@@ -23,7 +23,6 @@ services:
   sass:
     hostname: sass
     image: jeff1evesque/ml-sass:0.7
-    command: /bin/bash -c 'touch /var/machine-learning/src/scss/style.scss'
     network_mode: bridge
 
   webserver-api:
