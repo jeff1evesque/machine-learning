@@ -28,6 +28,8 @@ RUN $PUPPET apply -e 'class { mongodb: \
 RUN printf "#!/bin/bash\n\n\
 /usr/bin/mongod --fork --config /etc/mongod.conf\n\
 cd /root/build && ./create-mongodb-users\n\
+sed -i "/#[[:space:]]*security:/s/^#//g" /etc/mongod.conf\n\
+sed -i "/#[[:space:]]*authorization:[[:space:]]*enabled/s/^#//g" /etc/mongod.conf\n\
 /usr/bin/mongod --shutdown\n\
 /usr/bin/mongod --config /etc/mongod.conf\n\
 " > entrypoint
