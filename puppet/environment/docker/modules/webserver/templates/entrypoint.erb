@@ -9,4 +9,4 @@ GUNICORN_TYPE="$4"
 gunicorn \
     -b "$GUNICORN_BIND:$GUNICORN_PORT" \
     --workers=$GUNICORN_WORKERS \
-    "factory:create_app(args={"instance": \"$GUNICORN_TYPE\"})"
+    "factory:create_app(args={'instance': '$GUNICORN_TYPE'})"
