@@ -9,10 +9,15 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## ensure directory
-RUN mkdir -p $ROOT_PROJECT/interface $ROOT_PUPPET/brain $ROOT_PUPPET/test
+RUN mkdir -p $ROOT_PROJECT/interface $ROOT_PROJECT/hiera $ROOT_PUPPET/brain $ROOT_PUPPET/test
 
 ## copy files into container
-COPY log interface hiera brain test app.py factory.py __init__.py $ROOT_PROJECT/
+COPY app.py factory.py __init__.py $ROOT_PROJECT/
+COPY log $ROOT_PROJECT/log
+COPY interface $ROOT_PROJECT/interface
+COPY hiera $ROOT_PROJECT/hiera
+COPY brain $ROOT_PROJECT/brain
+COPY test $ROOT_PROJECT/test
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
 
 ##
