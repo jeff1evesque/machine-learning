@@ -66,7 +66,7 @@ if [ "$TYPE" = 'local' ]; then
     sudo docker run -d\
         --name webserver-api\
         --net=app_nw\
-        --mount type=bind,source='.',target="$PROJECT_ROOT"\
+        --mount type=bind,source="$PWD",target="$PROJECT_ROOT"\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         0.0.0.0 6001 6 api &&
     sudo docker run -d\
@@ -94,7 +94,7 @@ else
     sudo docker run -d\
         --name webserver-api \
         --net=app_nw\
-        --mount type=bind,source='.',target="$PROJECT_ROOT"\
+        --mount type=bind,source="$PWD",target="$PROJECT_ROOT"\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         0.0.0.0 6001 6 api &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
@@ -105,7 +105,7 @@ if [ "$TYPE" = 'local' ]; then
     sudo docker run it\
         --name webserver-pytest\
         --net=app_nw\
-        --mount type=bind,source='.',target="$PROJECT_ROOT"\
+        --mount type=bind,source="$PWD",target="$PROJECT_ROOT"\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         test | sudo tee pytest.log
 else
