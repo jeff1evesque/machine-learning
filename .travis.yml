@@ -4,6 +4,7 @@ sudo: required
 
 ## configurations
 before_install:
+  - apt-get update -y
   - chmod u+x test/linter
   - chmod u+x test/unit-tests
 
