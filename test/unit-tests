@@ -22,7 +22,7 @@ fi
 ##   - remove all docker volumes
 ##   - delete all docker networks
 ##
-if [ "$PROJECT_ROOT" = 'local' ] && which docker >/dev/null 2>&1; then
+if [ "$TYPE" = 'local' ] && which docker >/dev/null 2>&1; then
     sudo usermod -a -G docker vagrant
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
@@ -47,7 +47,7 @@ if ! sudo apt-cache policy docker-ce | grep -q "$DOCKER_VERSION"; then
 fi
 
 ## run directly from dockerhub
-if [ "$PROJECT_ROOT" = 'local' ]; then
+if [ "$TYPE" = 'local' ]; then
     ## run unit test(s)
     ##
     ## @docker run:
@@ -66,7 +66,7 @@ if [ "$PROJECT_ROOT" = 'local' ]; then
     sudo docker run -d\
         --name webserver-api\
         --net=app_nw\
-        --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning\
+        --mount type=bind,source='.',target="$PROJECT_ROOT"\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         0.0.0.0 6001 6 api &&
     sudo docker run -d\
@@ -77,12 +77,10 @@ if [ "$PROJECT_ROOT" = 'local' ]; then
 ## build from local dockerfiles
 else
     ## build docker container(s)
-    cd "$PROJECT_ROOT" || exit 1
     sudo docker build -f dockerfile/redis.dockerfile -t ml-redis .
     sudo docker build -f dockerfile/mongodb.dockerfile -t ml-mongodb .
     sudo docker build -f dockerfile/webserver.dockerfile -t ml-webserver .
     sudo docker build -f dockerfile/mariadb.dockerfile -t ml-mariadb .
-    cd "$PWD" || exit 1
 
     ## run unit test(s)
     ##
@@ -96,18 +94,18 @@ else
     sudo docker run -d\
         --name webserver-api \
         --net=app_nw\
-        --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning\
+        --mount type=bind,source='.',target="$PROJECT_ROOT"\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         0.0.0.0 6001 6 api &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
 fi
 
 ## run unit tests
-if [ "$PROJECT_ROOT" = 'local' ]; then
+if [ "$TYPE" = 'local' ]; then
     sudo docker run it\
         --name webserver-pytest\
         --net=app_nw\
-        --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning\
+        --mount type=bind,source='.',target="$PROJECT_ROOT"\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         test | sudo tee pytest.log
 else
@@ -132,7 +130,7 @@ fi
 ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
 ##
 sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT"/.coverage.docker
-if [ ! -f "$PROJECT_ROOT"/.coverage.docker ]; then
+if [ ! -f .coverage.docker ]; then
     exit 1
 fi
 
@@ -144,7 +142,7 @@ fi
 ##   - remove all docker volumes
 ##   - delete all docker networks
 ##
-if [ "$PROJECT_ROOT" = 'local' ]; then
+if [ "$TYPE" = 'local' ]; then
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
     sudo docker images -q -f dangling=true | xargs -r docker rmi
