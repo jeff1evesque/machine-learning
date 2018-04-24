@@ -2,7 +2,7 @@
 
 ## local variables
 DOCKER_VERSION='18.03.0~ce-0~ubuntu'
-CONTAINER_VERSION='1.0'
+CONTAINER_VERSION='0.7'
 PROJECT_ROOT='/var/machine-learning'
 PWD=$(pwd)
 
