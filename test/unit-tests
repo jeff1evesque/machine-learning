@@ -95,11 +95,11 @@ else
     sudo docker network create -d bridge app_nw &&
     sudo docker run --name redis --net=app_nw -d ml-redis &&
     sudo docker run --name mongodb --net=app_nw -d ml-mongodb &&
-    sudo docker run -d\
+    sudo docker run\
         --name webserver-api \
         --net=app_nw\
         --mount type=bind,source="$PROJECT_ROOT",target='/var/machine-learning'\
-        "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
+        -d ml-webserver\
         0.0.0.0 6001 6 api &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
 fi
