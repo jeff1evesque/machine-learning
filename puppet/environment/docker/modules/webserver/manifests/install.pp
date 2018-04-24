@@ -13,12 +13,6 @@ class webserver::install {
     $pytest_cov_version = $::webserver::pytest_cov_version
     $gunicorn_version   = $::webserver::version
 
-    ## update package manager
-    exec { 'apt-get-update':
-        command         => '/usr/bin/apt-get update',
-        refreshonly     => true,
-    }
-
     ## pytest_cov
     if ($pytest_cov_version and $pytest_cov_version != '*') {
         package { 'pytest-cov':
@@ -70,13 +64,11 @@ class webserver::install {
     ## mariadb client
     class { '::mysql::client':
         package_name    => 'mariadb-client',
-        require         => Exec['apt-get-update'],
     }
 
     ## mariadb bindings
     class { '::mysql::bindings':
         python_enable   => true,
-        require         => Exec['apt-get-update'],
     }
 
     ## install gunicorn
