@@ -5,15 +5,15 @@ DOCKER_VERSION='18.03.0~ce-0~ubuntu'
 CONTAINER_VERSION='0.7'
 
 if [ "$1" ]; then
-    PROJECT_ROOT="$1"
+    TYPE="$1"
 else
-    PROJECT_ROOT='/var/machine-learning'
+    TYPE='local'
 fi
 
 if [ "$2" ]; then
-    TYPE="$2"
+    PROJECT_ROOT="$2"
 else
-    TYPE='local'
+    PROJECT_ROOT='/var/machine-learning'
 fi
 
 ## re-runnable: the following allows this script to be re-runnable within the
