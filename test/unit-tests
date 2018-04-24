@@ -109,13 +109,14 @@ if [ "$BUILD_SPEED" = 'verbose' ]; then
         --name webserver-pytest\
         --net=app_nw\
         --mount type=bind,source="$PROJECT_ROOT",target='/var/machine-learning'\
-        -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
+        -it ml-webserver\
         test | sudo tee pytest.log
 else
     sudo docker run\
         --name webserver-pytest\
-        --net=app_nw ml-webserver\
-        -it ml-webserver\
+        --net=app_nw\
+        --mount type=bind,source="$PROJECT_ROOT",target='/var/machine-learning'\
+        -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         test | sudo tee pytest.log
 fi
 
