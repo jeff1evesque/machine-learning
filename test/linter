@@ -98,6 +98,6 @@ else
     cd "$CWD" || exit 1
 
     if [ "$EXIT_FLAG" -gt 1 ]; then
-        exit "EXIT_FLAG"
+        exit "$EXIT_FLAG"
     fi
 fi
