@@ -4,12 +4,6 @@
 CMD="$1"
 CWD=$(pwd)
 
-if [ "$2" ]; then
-    BASEDIR="$2"
-else
-    BASEDIR='.'
-fi
-
 ## install linters
 if [ "$CMD" = 'install' ]; then
     ## install ruby: needed for scss-lint
@@ -72,7 +66,7 @@ if [ "$CMD" = 'install' ]; then
 else
     EXIT_FLAG=0
 
-    cd "$BASEDIR" || exit 1
+    cd "$CWD" || exit 1
     flake8 . --config=test/lint/setup.cfg || EXIT_FLAG=2
     scss-lint src/scss/*.scss --config 'test/lint/.scss-lint.yml' || EXIT_FLAG=3
     bootlint -d W005 interface/templates/*.html || EXIT_FLAG=4

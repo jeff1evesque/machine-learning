@@ -4,7 +4,6 @@ sudo: required
 
 ## configurations
 before_install:
-  - PROJECT_DIRECTORY=$(pwd)
   - chmod u+x test/linter
   - chmod u+x test/unit-tests
 
@@ -15,7 +14,7 @@ install:
 
 ## lint and test
 script:
-  - ./test/linter run "$PROJECT_DIRECTORY"; LINT_EXIT=$?
+  - ./test/linter run; LINT_EXIT=$?
   - ./test/unit-tests 'travis-ci'; TEST_EXIT=$?
 
 ## results: the following commands are run after linting, and tests have completed.
