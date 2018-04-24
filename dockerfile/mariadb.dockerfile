@@ -17,13 +17,13 @@ RUN $PUPPET apply -e 'class { mariadb: }'\
     --confdir=$ROOT_PUPPET/puppet
 
 ## define entrypoint script
-RUN printf "#!/bin/bash\n\n\
+RUN printf '#!/bin/bash\n\n\
 cd $MODULES/mariadb/scripts\n\
 service mysql start\n\
 python setup_tables.py $ROOT_PUPPET/puppet\n\
 service mysql stop\n\
 mysqld\n\
-" > entrypoint
+' > entrypoint
 RUN chmod 710 entrypoint
 
 ## executed everytime container starts

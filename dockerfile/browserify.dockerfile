@@ -9,15 +9,15 @@ COPY src/jsx/package.json $ROOT_PROJECT/src
 COPY src/jsx $ROOT_PROJECT/src/jsx
 
 ## provision with package.json
-WORKDIR $ROOT_PROJECT/src
+WORKDIR $ROOT_PROJECT/src/
 RUN npm install
 
 ## define entrypoint script
-RUN printf "#!/bin/bash\n\n\
+RUN printf '#!/bin/bash\n\n\
 npm run prebuild:dos2unix\n\
 npm run build:browserify\n\
 npm run watch:jsx\n\
-" > $ROOT_PROJECT/src/entrypoint
+' > $ROOT_PROJECT/src/entrypoint
 RUN chmod 710 $ROOT_PROJECT/src/entrypoint
 
 ## executed everytime container starts

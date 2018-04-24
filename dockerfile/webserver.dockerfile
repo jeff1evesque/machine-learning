@@ -33,5 +33,5 @@ RUN $PUPPET apply -e "class { webserver: \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
-WORKDIR $ROOT_PROJECT
+WORKDIR $ROOT_PROJECT/
 ENTRYPOINT ["./entrypoint"]
