@@ -14,6 +14,12 @@ class mariadb::server {
     $root_password        = $::mariadb::root_password
     $bind_address         = $::mariadb::bind_address
 
+    ## update package manager
+    exec { 'apt-get-update':
+        command           => '/usr/bin/apt-get update',
+        refreshonly       => true,
+    }
+
     ## mysql::server: install, and configure mariadb-server
     ##
     ## @password_hash, default password (can be adjusted via cli)
@@ -83,5 +89,5 @@ class mariadb::server {
                 'bind-address' => $bind_address,
             }
         },
-    }
+    } ~> Exec['apt-get-update']
 }
