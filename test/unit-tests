@@ -3,11 +3,13 @@
 ## local variables
 DOCKER_VERSION='18.03.0~ce-0~ubuntu'
 CONTAINER_VERSION='1.0'
-PROJECT_ROOT="$1"
+PROJECT_ROOT='/var/machine-learning'
 PWD=$(pwd)
 
-if [[ ! $1 ]]; then
-    PROJECT_ROOT='/vagrant'
+if [[ $1 ]]; then
+    TYPE="$1"
+else
+    TYPE='local'
 fi
 
 ## re-runnable: the following allows this script to be re-runnable within the
@@ -20,7 +22,7 @@ fi
 ##   - remove all docker volumes
 ##   - delete all docker networks
 ##
-if [ "$PROJECT_ROOT" = '/vagrant' ] && which docker >/dev/null 2>&1; then
+if [ "$PROJECT_ROOT" = 'local' ] && which docker >/dev/null 2>&1; then
     sudo usermod -a -G docker vagrant
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
@@ -38,13 +40,14 @@ fi
 if ! sudo apt-cache policy docker-ce | grep -q "$DOCKER_VERSION"; then
     sudo apt-get -y install apt-transport-https ca-certificates curl software-properties-common
     curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
-    sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+    sudo add-apt-repository\
+        "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
     sudo apt-get -y update
     sudo apt-get -y install docker-ce="$DOCKER_VERSION"
 fi
 
 ## run directly from dockerhub
-if [ "$PROJECT_ROOT" = '/vagrant' ]; then
+if [ "$PROJECT_ROOT" = 'local' ]; then
     ## run unit test(s)
     ##
     ## @docker run:
@@ -52,21 +55,33 @@ if [ "$PROJECT_ROOT" = '/vagrant' ]; then
     ##     -t, allocate pseudo-tty instead of default tty to running container
     ##
     sudo docker network create -d bridge app_nw &&
-    sudo docker run -d --name base --net=app_nw "jeff1evesque/ml-base:${CONTAINER_VERSION}" &&
-    sudo docker run -d --name redis --net=app_nw "jeff1evesque/ml-redis:${CONTAINER_VERSION}" &&
-    sudo docker run -d --name mongodb --net=app_nw "jeff1evesque/ml-mongodb:${CONTAINER_VERSION}" &&
-    sudo docker run -d --name webserver --net=app_nw --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" &&
-    sudo docker run -d --name mariadb --net=app_nw "jeff1evesque/ml-mariadb:${CONTAINER_VERSION}"
+    sudo docker run -d\
+        --name redis\
+        --net=app_nw\
+        "jeff1evesque/ml-redis:${CONTAINER_VERSION}" &&
+    sudo docker run -d\
+        --name mongodb\
+        --net=app_nw\
+        "jeff1evesque/ml-mongodb:${CONTAINER_VERSION}" &&
+    sudo docker run -d\
+        --name webserver-api\
+        --net=app_nw\
+        --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning\
+        "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
+        0.0.0.0 6001 6 api &&
+    sudo docker run -d\
+        --name mariadb\
+        --net=app_nw\
+        "jeff1evesque/ml-mariadb:${CONTAINER_VERSION}"
 
 ## build from local dockerfiles
 else
     ## build docker container(s)
     cd "$PROJECT_ROOT" || exit 1
-    sudo docker build -f base.dockerfile -t ml-base .
-    sudo docker build -f redis.dockerfile -t ml-redis .
-    sudo docker build -f mongodb.dockerfile -t ml-mongodb .
-    sudo docker build -f webserver.dockerfile -t ml-webserver .
-    sudo docker build -f mariadb.dockerfile -t ml-mariadb .
+    sudo docker build -f dockerfile/redis.dockerfile -t ml-redis .
+    sudo docker build -f dockerfile/mongodb.dockerfile -t ml-mongodb .
+    sudo docker build -f dockerfile/webserver.dockerfile -t ml-webserver .
+    sudo docker build -f dockerfile/mariadb.dockerfile -t ml-mariadb .
     cd "$PWD" || exit 1
 
     ## run unit test(s)
@@ -76,36 +91,30 @@ else
     ##     -t, allocate pseudo-tty instead of default tty to running container
     ##
     sudo docker network create -d bridge app_nw &&
-    sudo docker run --name base --net=app_nw -d ml-base &&
     sudo docker run --name redis --net=app_nw -d ml-redis &&
     sudo docker run --name mongodb --net=app_nw -d ml-mongodb &&
-    sudo docker run --name webserver --net=app_nw -d ml-webserver run-api &&
+    sudo docker run -d\
+        --name webserver-api \
+        --net=app_nw\
+        --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning\
+        "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
+        0.0.0.0 6001 6 api &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
 fi
 
-## provision mongodb authorization
-sudo docker exec -it mongodb sudo mongo admin mongodb://mongodb:27017 --eval "db.createUser({\
-    user: 'authenticated',\
-    pwd: 'password',\
-    roles: [\
-        'readWrite',\
-        'userAdmin',\
-        'dbAdmin',\
-        { role: 'readWrite', db: 'dataset' },\
-        { role: 'userAdmin', db: 'dataset' },\
-        { role: 'dbAdmin', db: 'dataset' },\
-    ]\
-},\
-{ w: 'majority' , wtimeout: 5000 } )" --quiet
-sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*security:/s/^#//g" /etc/mongod.conf
-sudo docker exec -it mongodb sudo sed -i "/#[[:space:]]*authorization:[[:space:]]*enabled/s/^#//g" /etc/mongod.conf
-sudo docker restart mongodb
-
 ## run unit tests
-if [ "$PROJECT_ROOT" = '/vagrant' ]; then
-    sudo docker run --name webserver-pytest --net=app_nw --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" test | sudo tee pytest.log
+if [ "$PROJECT_ROOT" = 'local' ]; then
+    sudo docker run it\
+        --name webserver-pytest\
+        --net=app_nw\
+        --mount type=bind,source="$PROJECT_ROOT",target=/var/machine-learning\
+        "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
+        test | sudo tee pytest.log
 else
-    sudo docker run --name webserver-pytest --net=app_nw -it ml-webserver test | sudo tee pytest.log
+    sudo docker run -it\
+        --name webserver-pytest\
+        --net=app_nw ml-webserver\
+        test | sudo tee pytest.log
 fi
 
 ## check unit test results
@@ -135,7 +144,7 @@ fi
 ##   - remove all docker volumes
 ##   - delete all docker networks
 ##
-if [ "$PROJECT_ROOT" = '/vagrant' ]; then
+if [ "$PROJECT_ROOT" = 'local' ]; then
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
     sudo docker images -q -f dangling=true | xargs -r docker rmi

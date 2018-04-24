@@ -16,7 +16,7 @@ install:
 ## lint and test
 script:
   - ./test/linter run "$PROJECT_DIRECTORY"; LINT_EXIT=$?
-  - ./test/unit-tests "$PROJECT_DIRECTORY"; TEST_EXIT=$?
+  - ./test/unit-tests 'travis-ci'; TEST_EXIT=$?
 
 ## results: the following commands are run after linting, and tests have completed.
 ##
