@@ -5,10 +5,10 @@ DOCKER_VERSION='18.03.0~ce-0~ubuntu'
 CONTAINER_VERSION='0.7'
 PROJECT_ROOT=$(PWD)
 
-if [ "$1" ]; then
-    TYPE="$1"
+if [ "$1" = 'verborse' ] || [ "$1" = 'v' ] || [ "$1" = 'V' ]; then
+    TYPE='verbose'
 else
-    TYPE='local'
+    TYPE='fast'
 fi
 
 ## re-runnable: the following allows this script to be re-runnable within the
@@ -20,7 +20,7 @@ fi
 ##   - remove all docker volumes
 ##   - delete all docker networks
 ##
-if [ "$TYPE" = 'local' ] && which docker >/dev/null 2>&1; then
+if [ "$TYPE" = 'verbose' ] && which docker >/dev/null 2>&1; then
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
     sudo docker images -q -f dangling=true | xargs -r docker rmi
@@ -44,7 +44,7 @@ if ! sudo apt-cache policy docker-ce | grep -q "$DOCKER_VERSION"; then
 fi
 
 ## run directly from dockerhub
-if [ "$TYPE" = 'local' ]; then
+if [ "$TYPE" = 'fast' ]; then
     ## run unit test(s)
     ##
     ## @docker run:
@@ -98,7 +98,7 @@ else
 fi
 
 ## run unit tests
-if [ "$TYPE" = 'local' ]; then
+if [ "$TYPE" = 'verbose' ]; then
     sudo docker run\
         --name webserver-pytest\
         --net=app_nw\
@@ -140,7 +140,7 @@ fi
 ##   - remove all docker volumes
 ##   - delete all docker networks
 ##
-if [ "$TYPE" = 'local' ]; then
+if [ "$TYPE" = 'verbose' ]; then
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
     sudo docker images -q -f dangling=true | xargs -r docker rmi
