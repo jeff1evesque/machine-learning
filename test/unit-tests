@@ -4,13 +4,13 @@
 DOCKER_VERSION='18.03.0~ce-0~ubuntu'
 CONTAINER_VERSION='0.7'
 
-if [[ $1 ]]; then
+if [ "$1" ]; then
     PROJECT_ROOT="$1"
 else
     PROJECT_ROOT='/var/machine-learning'
 fi
 
-if [[ $2 ]]; then
+if [ "$2" ]; then
     TYPE="$2"
 else
     TYPE='local'
@@ -19,7 +19,6 @@ fi
 ## re-runnable: the following allows this script to be re-runnable within the
 ##              vagrant environment:
 ##
-##   - add 'vagrant' user to the docker group
 ##   - stop all docker containers
 ##   - remove all docker containers
 ##   - remove all docker images
@@ -27,7 +26,6 @@ fi
 ##   - delete all docker networks
 ##
 if [ "$TYPE" = 'local' ] && which docker >/dev/null 2>&1; then
-    sudo usermod -a -G docker vagrant
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
     sudo docker images -q -f dangling=true | xargs -r docker rmi
@@ -106,16 +104,17 @@ fi
 
 ## run unit tests
 if [ "$TYPE" = 'local' ]; then
-    sudo docker run it\
+    sudo docker run\
         --name webserver-pytest\
         --net=app_nw\
         --mount type=bind,source="$PROJECT_ROOT",target='/var/machine-learning'\
-        "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
+        -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         test | sudo tee pytest.log
 else
-    sudo docker run -it\
+    sudo docker run\
         --name webserver-pytest\
         --net=app_nw ml-webserver\
+        -it ml-webserver\
         test | sudo tee pytest.log
 fi
 
@@ -134,7 +133,7 @@ fi
 ##       https://github.com/pytest-dev/pytest-cov/issues/146#issuecomment-272971136
 ##
 sudo docker cp webserver-pytest:/var/machine-learning/.coverage "$PROJECT_ROOT"/.coverage.docker
-if [ ! -f .coverage.docker ]; then
+if [ ! -f "$PROJECT_ROOT"/.coverage.docker ]; then
     exit 1
 fi
 
