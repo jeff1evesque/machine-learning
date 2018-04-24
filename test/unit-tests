@@ -52,24 +52,24 @@ if [ "$TYPE" = 'local' ]; then
     ##     -t, allocate pseudo-tty instead of default tty to running container
     ##
     sudo docker network create -d bridge app_nw &&
-    sudo docker run -d\
+    sudo docker run\
         --name redis\
         --net=app_nw\
-        "jeff1evesque/ml-redis:${CONTAINER_VERSION}" &&
-    sudo docker run -d\
+        -d "jeff1evesque/ml-redis:${CONTAINER_VERSION}" &&
+    sudo docker run\
         --name mongodb\
         --net=app_nw\
-        "jeff1evesque/ml-mongodb:${CONTAINER_VERSION}" &&
-    sudo docker run -d\
+        -d "jeff1evesque/ml-mongodb:${CONTAINER_VERSION}" &&
+    sudo docker run\
         --name webserver-api\
         --net=app_nw\
         --mount type=bind,source="$PROJECT_ROOT",target='/var/machine-learning'\
-        "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
+        -d "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         0.0.0.0 6001 6 api &&
-    sudo docker run -d\
+    sudo docker run\
         --name mariadb\
         --net=app_nw\
-        "jeff1evesque/ml-mariadb:${CONTAINER_VERSION}"
+        -d "jeff1evesque/ml-mariadb:${CONTAINER_VERSION}"
 
 ## build from local dockerfiles
 else
