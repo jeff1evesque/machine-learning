@@ -3,11 +3,15 @@
 ## local variables
 DOCKER_VERSION='18.03.0~ce-0~ubuntu'
 CONTAINER_VERSION='0.7'
-PROJECT_ROOT='/var/machine-learning'
-PWD=$(pwd)
 
 if [[ $1 ]]; then
-    TYPE="$1"
+    PROJECT_ROOT="$1"
+else
+    PROJECT_ROOT='/var/machine-learning'
+fi
+
+if [[ $2 ]]; then
+    TYPE="$2"
 else
     TYPE='local'
 fi
@@ -66,7 +70,7 @@ if [ "$TYPE" = 'local' ]; then
     sudo docker run -d\
         --name webserver-api\
         --net=app_nw\
-        --mount type=bind,source="$PWD",target="$PROJECT_ROOT"\
+        --mount type=bind,source="$PROJECT_ROOT",target='/var/machine-learning'\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         0.0.0.0 6001 6 api &&
     sudo docker run -d\
@@ -94,7 +98,7 @@ else
     sudo docker run -d\
         --name webserver-api \
         --net=app_nw\
-        --mount type=bind,source="$PWD",target="$PROJECT_ROOT"\
+        --mount type=bind,source="$PROJECT_ROOT",target='/var/machine-learning'\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         0.0.0.0 6001 6 api &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
@@ -105,7 +109,7 @@ if [ "$TYPE" = 'local' ]; then
     sudo docker run it\
         --name webserver-pytest\
         --net=app_nw\
-        --mount type=bind,source="$PWD",target="$PROJECT_ROOT"\
+        --mount type=bind,source="$PROJECT_ROOT",target='/var/machine-learning'\
         "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         test | sudo tee pytest.log
 else
