@@ -13,7 +13,7 @@ else
 fi
 
 ## local variables: perform verbose 'docker build', or just 'docker run'
-if [ "$2" = '--verborse' ] || [ "$2" = '-v' ] || [ "$2" = '-V' ]; then
+if [ "$2" = '--verbose' ] || [ "$2" = '-v' ] || [ "$2" = '-V' ]; then
     BUILD_SPEED='verbose'
 else
     BUILD_SPEED='fast'
