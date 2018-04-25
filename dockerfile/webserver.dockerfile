@@ -47,4 +47,4 @@ RUN apt-get update && $PUPPET apply -e "class { webserver: \
 
 ## executed everytime container starts
 WORKDIR $ROOT_PROJECT
-ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]
+ENTRYPOINT ["/bin/bash", "./entrypoint"]
