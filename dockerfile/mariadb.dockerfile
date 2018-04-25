@@ -12,7 +12,7 @@ COPY puppet/environment/$ENVIRONMENT/modules/mariadb $MODULES/mariadb
 COPY hiera $ROOT_PUPPET/puppet/hiera
 
 ## provision with puppt
-RUN $PUPPET apply -e 'class { mariadb: }'\
+RUN apt-get update && $PUPPET apply -e 'class { mariadb: }'\
     --modulepath=$CONTRIB_MODULES:$MODULES\
     --confdir=$ROOT_PUPPET/puppet
 
