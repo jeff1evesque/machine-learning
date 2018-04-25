@@ -69,7 +69,7 @@ if [ "$BUILD_SPEED" = 'fast' ]; then
     sudo docker run\
         --name webserver-api\
         --net=app_nw\
-        -v "${PROJECT_ROOT}":'/var/machine-learning'\
+        -v "${PROJECT_ROOT}:/var/machine-learning"\
         -d "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         0.0.0.0 6001 6 api &&
     sudo docker run\
@@ -97,7 +97,7 @@ else
     sudo docker run\
         --name webserver-api \
         --net=app_nw\
-        -v "${PROJECT_ROOT}":'/var/machine-learning'\
+        -v "${PROJECT_ROOT}:/var/machine-learning"\
         -d ml-webserver\
         0.0.0.0 6001 6 api &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb
@@ -108,14 +108,14 @@ if [ "$BUILD_SPEED" = 'verbose' ]; then
     sudo docker run\
         --name webserver-pytest\
         --net=app_nw\
-        -v "${PROJECT_ROOT}":'/var/machine-learning'\
+        -v "${PROJECT_ROOT}:/var/machine-learning"\
         -it ml-webserver\
         test | sudo tee pytest.log
 else
     sudo docker run\
         --name webserver-pytest\
         --net=app_nw\
-        -v "${PROJECT_ROOT}":'/var/machine-learning'\
+        -v "${PROJECT_ROOT}:/var/machine-learning"\
         -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
         test | sudo tee pytest.log
 fi

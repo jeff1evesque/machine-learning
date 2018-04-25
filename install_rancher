@@ -18,10 +18,6 @@ DOCKER_COMPOSE='docker-compose.development.yml'
 RANCHER_COMPOSE='rancher-compose.development.yml'
 RANCHER_COMPOSE_TEMPLATE='rancher-template.development.yml'
 
-## general variables
-ROOT_PROJECT='/var/machine-learning'
-ROOT_PUPPET='/etc/puppetlabs'
-
 ## cleanup docker volumes
 rm -rf data
 rm -rf interface/static/{js,css}
