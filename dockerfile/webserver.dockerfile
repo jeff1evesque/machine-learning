@@ -27,12 +27,17 @@ COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules
 ##
 ##     docker run --hostname webserver-api --name webserver-api -d jeff1evesque/ml-webserver:0.7 api 0.0.0.0 6001 6
 ##     docker run --hostname webserver-web --name webserver-web -d jeff1evesque/ml-webserver:0.7 web 0.0.0.0 5001 6
-##     docker run --hostname webserver-web --name webserver-web -d jeff1evesque/ml-webserver:0.7 test
+##     docker run\
+##         --name webserver\
+##         --net=app_nw\
+##         -v "${PROJECT_ROOT}:/var/machine-learning"\
+##         -d jeff1evesque/ml-webserver:0.7\
+##         test | sudo tee pytest.log
 ##
 RUN $PUPPET apply -e "class { webserver: \
     run => false, \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
 ## executed everytime container starts
-WORKDIR $ROOT_PROJECT/
+WORKDIR $ROOT_PROJECT
 ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]
