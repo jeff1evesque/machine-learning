@@ -83,8 +83,7 @@ if [ "$BUILD_SPEED" = 'fast' ]; then
         -v "${PROJECT_ROOT}/hiera:/var/machine-learning/hiera"\
         -v "${PROJECT_ROOT}/brain:/var/machine-learning/brain"\
         -v "${PROJECT_ROOT}/test:/var/machine-learning/test"\
-        -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}"\
-        test | sudo tee pytest.log
+        -it "jeff1evesque/ml-webserver:${CONTAINER_VERSION}" test | sudo tee pytest.log
 
 ## build from local dockerfiles
 else
@@ -115,8 +114,7 @@ else
         -v "${PROJECT_ROOT}/hiera:/var/machine-learning/hiera"\
         -v "${PROJECT_ROOT}/brain:/var/machine-learning/brain"\
         -v "${PROJECT_ROOT}/test:/var/machine-learning/test"\
-        -d ml-webserver\
-        test | sudo tee pytest.log
+        -it ml-webserver test | sudo tee pytest.log
 fi
 
 ## check unit test results
