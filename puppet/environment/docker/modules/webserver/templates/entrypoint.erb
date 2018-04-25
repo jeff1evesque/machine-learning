@@ -1,12 +1,16 @@
 #!/bin/bash
 
 ## local variables
-GUNICORN_BIND="$1"
-GUNICORN_PORT="$2"
-GUNICORN_WORKERS="$3"
-GUNICORN_TYPE="$4"
+GUNICORN_TYPE="$1"
+GUNICORN_BIND="$2"
+GUNICORN_PORT="$3"
+GUNICORN_WORKERS="$4"
 
+if [ "$GUNICORN_TYPE" = 'test' ]; then
+python app.py test
+else
 gunicorn \
     -b "$GUNICORN_BIND:$GUNICORN_PORT" \
     --workers=$GUNICORN_WORKERS \
     "factory:create_app(args={'instance': '$GUNICORN_TYPE'})"
+fi
