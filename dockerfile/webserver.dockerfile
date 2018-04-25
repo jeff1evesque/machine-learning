@@ -30,7 +30,14 @@ COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules
 ##     docker run\
 ##         --name webserver\
 ##         --net=app_nw\
-##         -v "${PROJECT_ROOT}:/var/machine-learning"\
+##         -v "${PROJECT_ROOT}/app.py:/var/machine-learning/app.py"\
+##         -v "${PROJECT_ROOT}/factory.py:/var/machine-learning/factory.py"\
+##         -v "${PROJECT_ROOT}/__init__.py:/var/machine-learning/__init__.py"\
+##         -v "${PROJECT_ROOT}/log:/var/machine-learning/log"\
+##         -v "${PROJECT_ROOT}/interface:/var/machine-learning/interface"\
+##         -v "${PROJECT_ROOT}/hiera:/var/machine-learning/hiera"\
+##         -v "${PROJECT_ROOT}/brain:/var/machine-learning/brain"\
+##         -v "${PROJECT_ROOT}/test:/var/machine-learning/test"\
 ##         -d jeff1evesque/ml-webserver:0.7\
 ##         test | sudo tee pytest.log
 ##
