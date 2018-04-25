@@ -14,7 +14,7 @@ install:
 
 ## lint and test
 script:
-  - ./test/linter run; LINT_EXIT=$?
+  - ./test/linter run --norecycle --verbose; LINT_EXIT=$?
   - ./test/unit-tests; TEST_EXIT=$?
 
 ## results: the following commands are run after linting, and tests have completed.
