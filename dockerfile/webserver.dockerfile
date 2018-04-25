@@ -41,7 +41,7 @@ COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules
 ##         -d jeff1evesque/ml-webserver:0.7\
 ##         test | sudo tee pytest.log
 ##
-RUN $PUPPET apply -e "class { webserver: \
+RUN apt-get update && $PUPPET apply -e "class { webserver: \
     run => false, \
 } " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
 
