@@ -5,12 +5,14 @@ DOCKER_VERSION='18.03.0~ce-0~ubuntu'
 CONTAINER_VERSION='0.7'
 PROJECT_ROOT=$(pwd)
 
+## local variables: reusable unit tests
 if [ "$1" = '--recycle' ]; then
     RECYCLE='true'
 else
     RECYCLE='false'
 fi
 
+## local variables: perform verbose 'docker build', or just 'docker run'
 if [ "$2" = 'verborse' ] || [ "$2" = 'v' ] || [ "$2" = 'V' ]; then
     BUILD_SPEED='verbose'
 else
