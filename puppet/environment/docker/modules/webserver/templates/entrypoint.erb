@@ -11,6 +11,6 @@ python app.py test
 else
 gunicorn \
     -b "$GUNICORN_BIND:$GUNICORN_PORT" \
-    --workers=$GUNICORN_WORKERS \
+    --workers="$GUNICORN_WORKERS" \
     "factory:create_app(args={'instance': '$GUNICORN_TYPE'})"
 fi
