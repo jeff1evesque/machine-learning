@@ -3,7 +3,7 @@
 ## local variables
 DOCKER_VERSION='18.03.0~ce-0~ubuntu'
 CONTAINER_VERSION='0.7'
-PROJECT_ROOT=$(PWD)
+PROJECT_ROOT=$(pwd)
 
 if [ "$1" = '--recycle' ]; then
     RECYCLE='true'
