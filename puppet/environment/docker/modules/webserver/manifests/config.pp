@@ -4,6 +4,7 @@
 class webserver::config {
     ## local variables
     $root_dir           = $::webserver::root_dir
+    $flask_log_path     = $::webserver::flask_log_path
 
     $directories = [
         "${root_dir}/log",
@@ -13,6 +14,7 @@ class webserver::config {
         "${root_dir}/log/application/warning",
         "${root_dir}/log/application/info",
         "${root_dir}/log/application/debug",
+        $flask_log_path
     ]
 
     ## create log directories
