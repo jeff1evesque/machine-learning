@@ -13,13 +13,23 @@ class webserver::config {
         "${root_dir}/log/application/error",
         "${root_dir}/log/application/warning",
         "${root_dir}/log/application/info",
-        "${root_dir}/log/application/debug",
-        $flask_log_path
+        "${root_dir}/log/application/debug"
     ]
 
     ## create log directories
     file { $directories:
         ensure => 'directory',
+        owner   => 'root',
+        group   => 'root',
+        mode    => '755',
+    }
+
+    ## ensure flask logfile
+    file { $flask_log_path:
+        ensure  => present,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '644',
     }
 
     ## configure docker entrypoint
