@@ -26,7 +26,7 @@ class webserver::config {
 
     ## ensure flask logfile
     file { $flask_log_path:
-        ensure  => present,
+        ensure  => 'present',
         owner   => 'root',
         group   => 'root',
         mode    => '644',
