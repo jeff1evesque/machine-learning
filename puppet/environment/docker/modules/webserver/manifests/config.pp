@@ -8,12 +8,12 @@ class webserver::config {
 
     $directories = [
         "${root_dir}/log",
-        "${root_dir}/log/webserver",
+        '/var/log/webserver',
         "${root_dir}/log/application",
         "${root_dir}/log/application/error",
         "${root_dir}/log/application/warning",
         "${root_dir}/log/application/info",
-        "${root_dir}/log/application/debug"
+        "${root_dir}/log/application/debug",
     ]
 
     ## create log directories
