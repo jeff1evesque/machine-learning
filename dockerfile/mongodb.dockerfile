@@ -20,7 +20,8 @@ COPY puppet/environment/$ENVIRONMENT/modules/mongodb $ROOT_PUPPET/code/modules/m
 
 ## configuration file
 RUN $PUPPET apply -e 'class { mongodb: \
-    run => true, \
+    run                    => true, \
+    bindIp                 => "0.0.0.0", \
     security_authorization => false \
 }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/
 
