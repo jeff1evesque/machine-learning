@@ -14,7 +14,7 @@ webserver:
     root_dir: '/var/machine-learning'
 
     flask:
-        log_path: '/log/webserver/flask.log'
+        log_path: '/var/log/webserver/flask.log'
 
     gunicorn:
         user: 'root'
