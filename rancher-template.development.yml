@@ -32,7 +32,7 @@ services:
         - PREPATH/src/jsx:/var/machine-learning/src/jsx
         - PREPATH/interface/static/js:/var/machine-learning/interface/static/js
 
-  webserver-api:
+  webserver_api:
     scale: 1
     start_on_create: true
     volumes:
@@ -62,7 +62,7 @@ services:
         - PREPATH/app.py:/var/machine-learning/app.py
         - PREPATH/factory.py:/var/machine-learning/factory.py
 
-  nginx-api:
+  nginx_api:
     scale: 1
     start_on_create: true
 
