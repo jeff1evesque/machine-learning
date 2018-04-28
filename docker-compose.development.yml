@@ -31,7 +31,7 @@ services:
     command: ['api', '0.0.0.0', '6001', '6']
     network_mode: bridge
     ports:
-    - 6000:9090/tcp
+    - 6000:6001/tcp
 
   webserver-web:
     hostname: webserver-web
@@ -39,14 +39,18 @@ services:
     command: ['web', '0.0.0.0', '5001', '6']
     network_mode: bridge
     ports:
-    - 5000:8080/tcp
+    - 5000:5001/tcp
 
   nginx-api:
     hostname: nginx-api
     image: jeff1evesque/ml-nginx-api:0.7
     network_mode: bridge
+    ports:
+    - 9090:6000/tcp
 
   nginx-web:
     hostname: nginx-web
     image: jeff1evesque/ml-nginx-web:0.7
     network_mode: bridge
+    ports:
+    - 8080:5000/tcp
