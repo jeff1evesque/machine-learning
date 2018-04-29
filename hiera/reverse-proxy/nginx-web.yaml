@@ -7,14 +7,13 @@
 ##       for the corresponding implementation.
 ##
 reverse_proxy:
-    run: true
     type: 'web'
     vhost: 'machine-learning.com'
     host_port: 8080
     listen_port: 5000
     proxy: 'http://localhost'
     members:
-        - 'localhost:5001'
+        - 'webserver-web:5001'
 
     certificate:
         self_signed: true
