@@ -6,6 +6,7 @@
 ###     - https://github.com/voxpupuli/puppet-nginx
 ###
 class reverse_proxy (
+    $yaml           = $::reverse_proxy::params::yaml,
     $run            = $::reverse_proxy::params::run,
     $type           = $::reverse_proxy::params::type,
     $vhost          = $::reverse_proxy::params::vhost,

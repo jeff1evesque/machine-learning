@@ -3,6 +3,7 @@
 ###
 class reverse_proxy::config {
     ## local variables
+    $yaml               = $::reverse_proxy::yaml
     $type               = $::reverse_proxy::type
     $self_signed        = $::reverse_proxy::self_signed
     $vhost              = $::reverse_proxy::vhost
@@ -21,9 +22,22 @@ class reverse_proxy::config {
     $access_log         = $::reverse_proxy::access_log
     $error_log          = $::reverse_proxy::error_log
 
+    ## hiera already array
+    if $yaml and $members {
+        $split_members  = $members
+    }
+
+    ## convert module argument to array
+    elsif $members {
+        $split_members  = split($members, ',')
+    }
+
     ## reverse proxy members
-    nginx::resource::upstream { "${proxy}-${type}":
-        members         => split($members, ','),
+    if $split_members {
+        nginx::resource::upstream { "${proxy}-${type}":
+            ensure      => present,
+            members     => $split_members,
+        }
     }
 
     ## https only server: since 'listen_port' = 'ssl_port'

@@ -9,6 +9,7 @@ class reverse_proxy::params {
     $version            = 'latest'
 
     if $hiera {
+        $yaml           = true
         $type           = $hiera['type']
         $vhost          = $hiera['vhost']
         $host_port      = $hiera['host_port']
@@ -30,6 +31,7 @@ class reverse_proxy::params {
     }
 
     else {
+        $yaml           = false
         $type           = ''
         $vhost          = ''
         $host_port      = ''
