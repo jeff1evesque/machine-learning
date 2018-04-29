@@ -25,27 +25,27 @@ services:
     image: jeff1evesque/ml-sass:0.7
     network_mode: bridge
 
-  webserver_api:
-    hostname: webserver_api
+  webserver-api:
+    hostname: webserver-api
     image: jeff1evesque/ml-webserver:0.7
+    network_mode: bridge
     command: ['api', '0.0.0.0', '6001', '6']
-    network_mode: bridge
 
-  webserver_web:
-    hostname: webserver_web
+  webserver-web:
+    hostname: webserver-web
     image: jeff1evesque/ml-webserver:0.7
-    command: ['web', '0.0.0.0', '5001', '6']
     network_mode: bridge
+    command: ['web', '0.0.0.0', '5001', '6']
 
-  nginx_api:
-    hostname: nginx_api
+  nginx-api:
+    hostname: nginx-api
     image: jeff1evesque/ml-nginx-api:0.7
     network_mode: bridge
     ports:
     - 9090:6000/tcp
 
-  nginx_web:
-    hostname: nginx_web
+  nginx-web:
+    hostname: nginx-web
     image: jeff1evesque/ml-nginx-web:0.7
     network_mode: bridge
     ports:
