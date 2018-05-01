@@ -3,6 +3,7 @@
 ## system configurations
 CWD=$(pwd)
 RANCHER_VERSION='v2.0.0'
+RANCHER_AGENT_VERSION='v2.0.3'
 RANCHER_REPO='https://github.com/rancher/cli'
 BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
 OPERATING_SYSTEM=$(uname -s)
@@ -136,12 +137,12 @@ if docker -v >/dev/null 2>&1; then
     ## docker toolbox provides 'default' container
     if [ "$DISTRO_TYPE" = 'windows' ] && \
        [ "$RANCHER_CONTAINER" != 'default' ] && \
-       docker ps -a | grep $RANCHER_CONTAINER;
+       docker ps -a | grep "$RANCHER_CONTAINER";
     then
         docker kill "$RANCHER_CONTAINER"
         docker rm "$RANCHER_CONTAINER"
     elif [ "$DISTRO_TYPE" != 'windows' ] && \
-         docker ps -a | grep $RANCHER_CONTAINER;
+         docker ps -a | grep "$RANCHER_CONTAINER";
     then
         docker kill "$RANCHER_CONTAINER"
         docker rm "$RANCHER_CONTAINER"
@@ -321,7 +322,7 @@ if docker -v >/dev/null 2>&1; then
             --privileged \
             -v /var/run/docker.sock:/var/run/docker.sock \
             -v /var/lib/rancher:/var/lib/rancher \
-            rancher/agent:v1.2.9 \
+            rancher/agent:"$RANCHER_AGENT_VERSION" \
             "$RANCHER_URL/v1/scripts/$TOKEN"
 
         ## create rancher-compose
