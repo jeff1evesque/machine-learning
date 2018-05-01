@@ -311,6 +311,10 @@ if docker -v >/dev/null 2>&1; then
             eval "$('C:\Program Files\Docker Toolbox\docker-machine.exe' env rancher)"
         fi
 
+        ## create docker volumes
+        mkdir -p ./data/{mariadb,mongodb,redis}
+        mkdir -p ./interface/static/{js,css}
+
         ## register host with rancher
         docker run \
             --rm \
@@ -339,10 +343,3 @@ else
     echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
     exit 1
 fi
-
-## create docker volume
-mkdir -p ./data/{mariadb,mongodb,redis}
-mkdir -p ./interface/static/{js,css}
-
-## trigger asset build
-touch src/jsx/content.jsx
