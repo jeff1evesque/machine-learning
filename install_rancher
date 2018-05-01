@@ -2,7 +2,7 @@
 
 ## system configurations
 CWD=$(pwd)
-RANCHER_VERSION='v0.6.9'
+RANCHER_VERSION='v2.0.0'
 RANCHER_REPO='https://github.com/rancher/cli'
 BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
 OPERATING_SYSTEM=$(uname -s)
