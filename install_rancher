@@ -2,7 +2,7 @@
 
 ## system configurations
 CWD=$(pwd)
-RANCHER_CLI_VERSION='v2.0.0'
+RANCHER_CLI_VERSION='v0.6.9'
 RANCHER_AGENT_VERSION='stable'
 RANCHER_SERVER_VERSION='stable'
 RANCHER_REPO='https://github.com/rancher/cli'
