@@ -2,8 +2,9 @@
 
 ## system configurations
 CWD=$(pwd)
-RANCHER_VERSION='v2.0.0'
-RANCHER_AGENT_VERSION='v2.0.3'
+RANCHER_CLI_VERSION='v2.0.0'
+RANCHER_AGENT_VERSION='stable'
+RANCHER_SERVER_VERSION='stable'
 RANCHER_REPO='https://github.com/rancher/cli'
 BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
 OPERATING_SYSTEM=$(uname -s)
@@ -55,10 +56,10 @@ esac
 
 ## download rancher-cli
 if [ "$DISTRO_TYPE" = 'unix' ]; then
-    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
-    tar zxf "$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
-    rm "$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
-    sudo mv rancher-v"$RANCHER_VERSION"/rancher /usr/local/bin/rancher
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    tar zxf "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    sudo mv rancher-v"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'linux' ]; then
@@ -66,10 +67,10 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
         sudo apt-get -y install curl || sudo yum -y install curl || (echo 'curl cannot install' && exit 1)
     fi
 
-    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
-    tar zxf "$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
-    rm "$RANCHER_DISTRO-$RANCHER_VERSION.tar.gz"
-    sudo mv rancher-v"$RANCHER_VERSION"/rancher /usr/local/bin/rancher
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    tar zxf "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    sudo mv rancher-v"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
@@ -80,11 +81,11 @@ elif [ "$DISTRO_TYPE" = 'windows' ]; then
                 Get-ItemProperty -path 'HKLM:\software\microsoft\Windows NT\CurrentVersion'
             ).ProductName).split(' ')[1]"
     )
-    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_VERSION/$RANCHER_DISTRO-$RANCHER_VERSION.zip"
-    unzip -j "$RANCHER_DISTRO-$RANCHER_VERSION.zip"
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.zip"
+    unzip -j "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.zip"
     mkdir -p /c/programdata/rancher/bin
     mv -f rancher.exe /c/programdata/rancher/bin
-    rm "$RANCHER_DISTRO-$RANCHER_VERSION.zip"
+    rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.zip"
 
     ## install python
     command -v python >/dev/null 2>&1 || INSTALL_PYTHON=true
@@ -168,7 +169,7 @@ if docker -v >/dev/null 2>&1; then
         --name "$RANCHER_CONTAINER" \
         --restart=unless-stopped \
         -p "$RANCHER_PORT":8080 \
-        rancher/server:stable
+        rancher/server:"$RANCHER_SERVER_VERSION"
     mkdir -p ~/.rancher
 
     ## generate access + secret key:
