@@ -11,8 +11,11 @@ hierarchy:
   - name: 'General build packages'
     path: hiera/packages.yaml
 
-  - name: 'Reverse proxy configurations'
-    path: "hiera/reverse-proxy/%{hostname}.yaml"
+  - name: 'Dynamic reverse proxy configurations'
+    path: "hiera/reverse-proxy/%{::hostname}.yaml"
+
+  - name: 'General proxy configurations'
+    path: "hiera/reverse-proxy/nginx.yaml"
 
   - name: 'Webserver configurations'
     path: "hiera/webserver/%{::hostname}.yaml"
