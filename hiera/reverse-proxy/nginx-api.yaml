@@ -11,7 +11,7 @@ reverse_proxy:
     vhost: 'machine-learning-api.com'
     host_port: 9090
     listen_port: 6000
-    proxy: 'http://localhost'
+    proxy: 'api-reverse-proxy'
     members:
         - 'webserver-api:6001'
 
