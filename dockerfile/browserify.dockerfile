@@ -9,7 +9,7 @@ COPY src/jsx/package.json $ROOT_PROJECT/src
 COPY src/jsx $ROOT_PROJECT/src/jsx
 
 ## provision with package.json
-WORKDIR $ROOT_PROJECT/src/
+WORKDIR $ROOT_PROJECT/src
 RUN npm install
 
 ## define entrypoint script
