@@ -4,7 +4,6 @@ sudo: required
 
 ## configurations
 before_install:
-  - PROJECT_DIRECTORY=$(pwd)
   - chmod u+x test/linter
   - chmod u+x test/unit-tests
 
@@ -15,8 +14,8 @@ install:
 
 ## lint and test
 script:
-  - ./test/linter run "$PROJECT_DIRECTORY"; LINT_EXIT=$?
-  - ./test/unit-tests "$PROJECT_DIRECTORY"
+  - ./test/linter run; LINT_EXIT=$?
+  - ./test/unit-tests --norecycle --verbose; TEST_EXIT=$?
 
 ## results: the following commands are run after linting, and tests have completed.
 ##
@@ -27,4 +26,6 @@ script:
 after_success:
   - coverage combine
   - coveralls
-  - if [ "$LINT_EXIT" -gt 0 ]; then exit 1; fi
+  - if [ "$LINT_EXIT" -gt 0 ] && [ "$TEST_EXIT" -gt 0 ]; then echo "Lint ($LINT_EXIT) and Unit Tests failed" && exit 1; fi
+  - if [ "$LINT_EXIT" -gt 0 ]; then echo "Lint Failed ($LINT_EXIT)" && exit 1; fi
+  - if [ "$TEST_EXIT" -gt 0 ]; then echo 'Unit Tests failed' && exit 1; fi

@@ -24,8 +24,7 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
 
 ## Configuration
 
-Fork this project, and remember to [generate](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/ssh_keys.rst)
- ssh keys, before cloning the repository:
+Fork this project, using of the following methods:
 
 - [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#simple-clone):
  clone the remote master branch.
@@ -34,49 +33,20 @@ Fork this project, and remember to [generate](https://github.com/jeff1evesque/ma
 - [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#release-tag):
  clone the remote branch, associated with the desired release tag.
 
-**Note:** the [`puppetfile.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/doc/background/puppetfile.rst)
- can be reviewed, to better understand why ssh keys are required.
-
 ## Installation
 
-In order to proceed with the installation for this project, two dependencies
- need to be installed:
-
-- [Vagrant](https://www.vagrantup.com/)
-- [Virtualbox](https://www.virtualbox.org/) (with extension pack)
-
-Once the necessary dependencies have been installed, execute the following
- command to build the virtual environment:
+To proceed with the installation for this project, both docker and rancher must be
+installed. Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/installation/dependencies).
+Once completed, rancher can be installed, and automatically configured, by simply
+executing a provided bash script, from the docker quickstart terminal:
 
 ```bash
-cd /path/to/machine-learning/
-vagrant up
+cd /path/to/machine-learning
+./install-rancher
 ```
 
-Depending on the network speed, the build can take between 10-15 minutes. So,
- grab a cup of coffee, and perhaps enjoy a danish while the virtual machine
- builds. Remember, the application is intended to run on localhost, where the
- [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/master/Vagrantfile)
- defines the exact port-forward on the host machine.
-
-**Note:** a more complete refresher on virtualization, can be found within the
- vagrant [wiki page](https://github.com/jeff1evesque/machine-learning/wiki/Vagrant).
-
-The following lines, indicate the application is accessible via `localhost:8080`,
- on the host machine:
-
-```bash
-...
-  ## Create a forwarded port mapping which allows access to a specific port
-  ## within the machine from a port on the host machine. In the example below,
-  ## accessing "localhost:8080" will access port 80 on the guest machine.
-  main.vm.network 'forwarded_port', guest: 5000, host: 8080
-  main.vm.network 'forwarded_port', guest: 6000, host: 9090
-...
-```
-
-**Note:** ssl is configured on the [reverse proxy](https://www.nginx.com/resources/admin-guide/reverse-proxy/),
- such that accessing `http://localhost:8080`, on the host machine, will redirect to `https://localhost:8080`.
+**Note:** the installation, and the configuration of rancher, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/installation/rancher)
+if more explicit instructions are needed.
 
 ## Execution
 

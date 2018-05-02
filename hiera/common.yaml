@@ -2,9 +2,9 @@
 ## This file contains general configurations.
 ##
 general:
-    environment: 'vagrant'
-    vagrant_implement: true
-    root: '/vagrant'
+    environment: 'docker'
+    root: '/var/machine-learning'
+    root_puppet: '/etc/puppetlabs'
     host: 'localhost'
-    user: 'vagrant'
-    group: 'vagrant'
+    user: 'root'
+    group: 'root'

@@ -1,0 +1,29 @@
+##
+## This file contains reverse proxy configurations.
+##
+## @webserver_port, must match corresponding (web) gunicorn webserver.
+##
+## Note: the docker-compose.yml, and the 'unit-tests' defines the hostname
+##       for the corresponding implementation.
+##
+reverse_proxy:
+    type: 'web'
+    vhost: 'machine-learning.com'
+    host_port: 8080
+    listen_port: 5000
+    proxy: 'web-reverse-proxy'
+    members:
+        - 'webserver-web:5001'
+
+    certificate:
+        self_signed: true
+        cert_path: '/etc/puppetlabs/puppet/ssl/certs'
+        pkey_path: '/etc/puppetlabs/puppet/ssl/private_keys'
+        props:
+            days: 365
+            bit: 4096
+            country: 'US'
+            organization: 'MLearning'
+            state: 'CA'
+            locality: 'Palo Alto'
+            unit: 'ML'

@@ -4,9 +4,14 @@
 ##  - mongodb
 ##  - mariadb
 ##
+## @host, @hostname, defined from executed 'docker' command.
+## @dbPath, must successively build up to fullpath.
+##
 database:
     mariadb:
-        host: 'localhost'
+        bind_address: '0.0.0.0'
+        host: 'mariadb'
+        allow_host: '%'
         name: 'db_machine_learning'
         provisioner: 'provisioner'
         provisioner_password: 'password'
@@ -18,14 +23,18 @@ database:
         log_path: '/log/database'
 
     mongodb:
-        hostname: 'localhost'
+        hostname: 'mongodb'
         name: 'dataset'
         username: 'authenticated'
         password: 'password'
+        keyserver: 'hkp://keyserver.ubuntu.com:80'
+        mongodb_key: '0C49F3730359A14518585931BC711F9BA15703C6'
+        source_list: 'deb [ arch=amd64 ] http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.4 multiverse'
 
         storage:
             dbPath:
-                - /var/lib/mongodb
+                - '/data'
+                - '/data/db'
             journal:
                 enabled: true
 
@@ -37,10 +46,11 @@ database:
 
         net:
             port: 27017
-            bindIp: 127.0.0.1
+            bindIp: 0.0.0.0
 
         processManagement:
             pidfilepath: '/var/run/mongod.pid'
+
 
         security:
             authorization: 'enabled'

@@ -1,0 +1,40 @@
+{
+  "name": "reactjs",
+  "version": "1.0.0",
+  "description": "packages needed for source files.",
+  "main": "index.js",
+  "scripts": {
+    "build:browserify": "browserify -t [ babelify --presets env,stage-2,react ] /var/machine-learning/src/jsx/content.jsx > /var/machine-learning/interface/static/js/content.js",
+    "prebuild:dos2unix": "find /var/machine-learning/src/jsx -type f -print0 | xargs -0 dos2unix",
+    "watch:jsx": "onchange '/var/machine-learning/src/jsx/**/*.jsx' '/var/machine-learning/src/jsx/**/*.js' -- npm run build:browserify"
+  },
+  "author": "Jeffrey Levesque",
+  "license": "BSD",
+  "repository": "github:jeff1evesque/machine-learning",
+  "dependencies": {
+    "dos2unix-cli": "^1.0.1",
+    "babelify": "^8.0.0",
+    "browserify": "^16.2.0",
+    "onchange": "^3.3.0",
+    "babel-core": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
+    "core-js": "^2.5.4",
+    "whatwg-fetch": "^2.0.2",
+    "promise-polyfill": "^7.0.0",
+    "query-string": "^5.0.1",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-redux": "^5.0.6",
+    "react-bootstrap": "^0.32.0",
+    "react-router-bootstrap": "^0.24.4",
+    "react-rangeslider": "^2.2.0",
+    "redux": "^3.7.2",
+    "rearm": "^0.8.2",
+    "d3": "^4.12.2",
+    "prop-types": "15.6.0",
+    "react-json-view": "1.16.0"
+  }
+}
