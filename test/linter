@@ -52,7 +52,7 @@ if [ "$CMD" = 'install' ]; then
     npm install -g eslint babel-eslint@7.2.3
     npm install -g eslint-plugin-react@4.2.3
     gem install yaml-lint -v 0.0.7
-    npm install -g dockerlint@0.2.0
+    npm install -g dockerlint@0.3.9
     pip install restructuredtext_lint==1.1.2
 
 ## run linters
