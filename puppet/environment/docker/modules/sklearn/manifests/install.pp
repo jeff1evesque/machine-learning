@@ -25,7 +25,7 @@ class sklearn::install {
     ]
 
     ## install scikit-learn dependencies
-	package { $apt_packages:
+    package { $apt_packages:
         ensure   => 'installed',
     }
 
