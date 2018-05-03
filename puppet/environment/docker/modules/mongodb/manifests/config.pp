@@ -67,7 +67,7 @@ class mongodb::config {
         file_line { 'mongodb-uncomment-authorization':
             path            => '/etc/mongod.conf',
             match           => "^#   authorization: ${authorization}",
-           line             => "   authorization: ${authorization}",
+            line             => "   authorization: ${authorization}",
         }
     }
 
