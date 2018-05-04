@@ -9,7 +9,7 @@ proceeding, it is important to follow the docker |installation|_ guide, for the 
 host machine.
 
 Once the docker has been installed, execute the following from the docker quickstart terminal,
-to install `rancher <https://rancher.com/>`_:
+to install |rancher|_:
 
 .. code:: bash
 
