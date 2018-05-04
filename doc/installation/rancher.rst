@@ -253,11 +253,11 @@ Once the rancher build succeeds, a single `MLStack` will be created:
 
 .. image:: https://user-images.githubusercontent.com/2907085/39613056-9cf9289e-4f32-11e8-97ac-608c4bd21672.JPG
 
-This stack will have numerous services contained within numerous containers:
+This stack will contain numerous services, each assigned to it's respective container:
 
 .. image:: https://user-images.githubusercontent.com/2907085/39613057-9d06f0aa-4f32-11e8-8fe4-5a9d58d387dd.JPG
 
-Each can be inspected individually. However, the actual application can be accessed:
+Each can be individually inspected. However, the actual application can be accessed:
 
 .. image:: https://user-images.githubusercontent.com/2907085/39499223-97b96fce-4d7a-11e8-96e2-c4e31f6b8e09.JPG
 
