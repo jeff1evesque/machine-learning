@@ -5,12 +5,12 @@ Dependencies
 Docker containerization is used to segregate various services required by this application.
 To begin, docker can be installed on the host machine using the following approaches:
 
-**Legacy: Windows**
+**Legacy Windows:**
 The `virtualbox <https://www.virtualbox.org/>`_ hypervisor needs to be installed, to facilitate
-the installation, and configuration of docker:
+the installation, and configuration of docker, for systems that do not meet `Windows <https://docs.docker.com/docker-for-windows/>`_
+minimal system requirements:
 
-- `docker toolbox <https://docs.docker.com/toolbox/toolbox_install_windows/>`_: allows Docker use on systems
-that do not meet `Docker for Windows <https://docs.docker.com/docker-for-windows/>`_ minimal system requirements.
+- `docker toolbox <https://docs.docker.com/toolbox/toolbox_install_windows/>`_
 
 **Community Edition**
 
