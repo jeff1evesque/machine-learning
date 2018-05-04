@@ -2,8 +2,7 @@
 
 This project provides a [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#web-interface),
  as well as a [programmatic-api](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#programmatic-interface)
- for various machine learning algorithms. Some of it's general applications, have
- been outlined within [`index.rst`](https://github.com/jeff1evesque/machine-learning/blob/master/doc/index.rst).
+ for various machine learning algorithms.
 
 **Supported algorithms**:
 
@@ -57,7 +56,7 @@ Both the web-interface, and the programmatic-api, have corresponding
 ### Web Interface
 
 The [web-interface](https://github.com/jeff1evesque/machine-learning/blob/master/interface/templates/index.html),
- or GUI implementation, can be accessed within the browser on `https://192.168.99.101:8080`:
+ can be accessed within the browser on `https://192.168.99.101:8080`:
 
 ![web-interface](https://user-images.githubusercontent.com/2907085/39499223-97b96fce-4d7a-11e8-96e2-c4e31f6b8e09.JPG 'web-interface')
 
