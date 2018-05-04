@@ -120,9 +120,9 @@ requests.post(endpoint, headers=headers, data=json_string_here)
 ```
 
 **Note:** more information, regarding how to obtain a valid `token`, can be further
- reviewed, in the `/login` [documentation](https://github.com/jeff1evesque/machine-learning/tree/master/doc/programmatic_interface/authentication/login.rst).
+ reviewed, in the `/login` [documentation](https://jeff1evesque.github.io/machine-learning.docs/latest/html/programmatic-interface/authentication/login.html).
 
-**Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
+**Note:** various `data` [attributes](https://jeff1evesque.github.io/machine-learning.docs/latest/html/programmatic-interface/data-attributes.html) can be nested in above `POST` request.
 
 It is important to remember that the [`docker-compose.development.yml`](https://github.com/jeff1evesque/machine-learning/blob/3889788a8343a4b7cef2cf84166f9bd35d83021c/docker-compose.development.yml#L33-L43),
  has defined two port forwards, each assigned to its corresponding reverse
