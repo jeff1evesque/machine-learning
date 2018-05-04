@@ -36,7 +36,7 @@ Fork this project, using of the following methods:
 ## Installation
 
 To proceed with the installation for this project, both docker and rancher must be
-installed. Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/dependencies).
+installed. Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/dependencies.html).
 Once completed, rancher can be installed, and automatically configured, by simply
 executing a provided bash script, from the docker quickstart terminal:
 
@@ -45,7 +45,7 @@ cd /path/to/machine-learning
 ./install-rancher
 ```
 
-**Note:** the installation, and the configuration of rancher, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/rancher)
+**Note:** the installation, and the configuration of rancher, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/rancher.html)
 if more explicit instructions are needed.
 
 ## Execution
