@@ -127,5 +127,5 @@ requests.post(endpoint, headers=headers, data=json_string_here)
 It is important to remember that the [`docker-compose.development.yml`](https://github.com/jeff1evesque/machine-learning/blob/3889788a8343a4b7cef2cf84166f9bd35d83021c/docker-compose.development.yml#L33-L43),
  has defined two port forwards, each assigned to its corresponding reverse
  proxy. This allows port `8080` on the host, to map into the `webserver-web`
- container, which load balances the correesponding web servers. A similar case
- for the programmatic-api, underlies port `9090` on the host.
+ container. A similar case for the programmatic-api, underlies port `9090`
+ on the host.
