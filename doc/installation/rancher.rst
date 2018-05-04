@@ -249,19 +249,20 @@ to install |rancher|_:
 
 **Note:** when starting the docker terminal, make sure to `Run as administrator`.
 
-The following |docker-compose.development.yml|_ lines indicate corresponding port forward:
+Once the rancher build succeeds, a single `MLStack` will be created:
 
-.. code:: bash
+.. image:: https://user-images.githubusercontent.com/2907085/39613056-9cf9289e-4f32-11e8-97ac-608c4bd21672.JPG
 
-    ports:
-      - "5000:8080"
-      - "6000:9090"
+This stack will contain numerous services, each assigned to it's respective container:
+
+.. image:: https://user-images.githubusercontent.com/2907085/39613057-9d06f0aa-4f32-11e8-8fe4-5a9d58d387dd.JPG
+
+Each can be individually inspected. However, the actual application can be accessed:
+
+.. image:: https://user-images.githubusercontent.com/2907085/39499223-97b96fce-4d7a-11e8-96e2-c4e31f6b8e09.JPG
 
 .. |rancher| replace:: rancher
 .. _rancher: http://rancher.com
 
 .. |installation| replace:: installation
 .. _installation: docker
-
-.. |docker-compose.development.yml| replace:: ``docker-compose.development.yml``
-.. _docker-compose.development.yml: https://github.com/jeff1evesque/machine-learning/blob/master/docker-compose.development.yml
