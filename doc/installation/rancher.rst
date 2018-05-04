@@ -265,4 +265,4 @@ Each can be individually inspected. However, the actual application can be acces
 .. _rancher: http://rancher.com
 
 .. |installation| replace:: installation
-.. _installation: docker
+.. _installation: https://docs.docker.com/install/
