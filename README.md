@@ -86,7 +86,7 @@ The following are acceptable syntax:
  (square brackets), since each dependent variable may have multiple
  observations.
 
-The web application can be accessed within the browser on 192.168.99.101:8080:
+The web application can be accessed within the browser on `https://192.168.99.101:8080`:
 
 ![web-interface](https://user-images.githubusercontent.com/2907085/39499223-97b96fce-4d7a-11e8-96e2-c4e31f6b8e09.JPG 'web-interface')
 
