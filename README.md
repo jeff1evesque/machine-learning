@@ -86,9 +86,9 @@ The following are acceptable syntax:
  (square brackets), since each dependent variable may have multiple
  observations.
 
-As mentioned earlier, the web application can be accessed after subsequent
- `vagrant up` command, followed by using a browser referencing localhost:8080,
- on the host machine.
+The web application can be accessed within the browser on 192.168.99.101:8080:
+
+![web-interface](https://user-images.githubusercontent.com/2907085/39499223-97b96fce-4d7a-11e8-96e2-c4e31f6b8e09.JPG 'web-interface')
 
 ### Programmatic Interface
 
@@ -110,7 +110,7 @@ A post request, can be implemented in python, as follows:
 ```python
 import requests
 
-endpoint = 'https://localhost:9090/load-data'
+endpoint = 'https://192.168.99.101:9090/load-data'
 headers = {
     'Authorization': 'Bearer ' + token,
     'Content-Type': 'application/json'
@@ -124,7 +124,8 @@ requests.post(endpoint, headers=headers, data=json_string_here)
 
 **Note:** various `data` [attributes](https://github.com/jeff1evesque/machine-learning/blob/master/doc/programmatic_interface/data_attributes.rst) can be nested in above `POST` request.
 
-It is important to remember that the [`Vagrantfile`](https://github.com/jeff1evesque/machine-learning/blob/98c7f57986cbe56ca14f8ee47859b50a08c2ef9b/Vagrantfile#L54-L55),
- as denoted by the above snippet, has defined two port forwards. Specifically, on
- the host, `8080` is reserved for the web-interface, while `9090`, is reserved for
- the programmatic rest-api.
+It is important to remember that the [`docker-compose.development.yml`](https://github.com/jeff1evesque/machine-learning/blob/3889788a8343a4b7cef2cf84166f9bd35d83021c/docker-compose.development.yml#L33-L43),
+ has defined two port forwards, each assigned to its corresponding reverse
+ proxy. This allows port `8080` on the host, to map into the `webserver-web`
+ container. A similar case for the programmatic-api, underlies port `9090`
+ on the host.

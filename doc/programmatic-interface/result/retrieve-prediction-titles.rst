@@ -17,7 +17,7 @@ the ``data`` attribute, in a given ``POST`` request:
 
     import requests
 
-    endpoint = 'https://localhost:9090/retrieve-prediction-titles'
+    endpoint = 'https://192.168.99.101:9090/retrieve-prediction-titles'
     headers = {
         'Authorization': 'Bearer ' + token,
         'Content-Type': 'application/json'
