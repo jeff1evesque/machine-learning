@@ -16,7 +16,7 @@ class webserver::install {
     $platform           = $::webserver::platform
 
     ## development packages
-    if ($platform = 'development') {
+    if ($platform == 'development') {
         package { 'pytest-cov':
             ensure      => $pytest_cov_version,
             provider    => 'pip',
