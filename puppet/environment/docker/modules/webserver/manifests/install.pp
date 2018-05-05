@@ -25,6 +25,10 @@ class webserver::install {
             require     => Class['python'],
         }
 
+        class { 'nodejs':
+            repo_url_suffix => $nodejs_version,
+        }
+
         package { 'jest-cli':
             ensure      => $jest_cli_version,
             provider    => 'npm',
