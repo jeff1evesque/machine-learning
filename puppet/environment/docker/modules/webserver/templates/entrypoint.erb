@@ -8,8 +8,8 @@ GUNICORN_WORKERS="$4"
 PLATFORM="$5"
 
 PUPPET='/opt/puppetlabs/bin/puppet'
-MODULES=<%= @root_puppet %>/code/modules_contrib
-CONTRIB_MODULES=<%= @root_puppet %>/code/modules
+MODULES=<%= @root_puppet %>/code/modules
+CONTRIB_MODULES=<%= @root_puppet %>/code/modules_contrib
 CONFDIR=<%= @root_puppet %>/puppet
 
 ## run application
@@ -21,11 +21,4 @@ else
         -b "$GUNICORN_BIND:$GUNICORN_PORT" \
         --workers="$GUNICORN_WORKERS" \
         "factory:create_app(args={'instance': '$GUNICORN_TYPE'})"
-fi
-
-## install platform specific packages
-if [ "$PLATFORM" = '--development' ] || [ "$PLATFORM" = '--dev' ]; then
-    "$PUPPET" apply -e 'class { jest: }' \
-        --modulepath="${MODULES}:${CONTRIB_MODULES}" \
-        --confdir="$CONFDIR"
 fi
