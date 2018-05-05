@@ -3,7 +3,6 @@
 ###
 class system::params {
     $hiera          = lookup( { 'name' => 'system', 'default_value' => false } )
-    $nodejs_version = 'latest'
 
     if $hiera {
         $region     = $hiera['timezone']['region']

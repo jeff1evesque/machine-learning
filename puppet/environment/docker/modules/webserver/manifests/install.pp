@@ -6,6 +6,7 @@ class webserver::install {
     include python
     include python::flask
     include python::requests
+    include system::nodejs
 
     ## local variables
     $pyyaml_version     = $::webserver::pyyaml_version
@@ -13,6 +14,7 @@ class webserver::install {
     $pytest_cov_version = $::webserver::pytest_cov_version
     $jest_cli_version   = $::webserver::jest_cli_version
     $gunicorn_version   = $::webserver::version
+    $nodejs_version     = $::webserver::nodejs_version
     $platform           = $::webserver::platform
 
     ## development packages
