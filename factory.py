@@ -25,10 +25,7 @@ from flask_jwt_extended import JWTManager
 # application factory
 def create_app(args={'instance': 'web'}):
     # path to hiera
-    if ('prefix' in args and args['prefix']):
-        prepath = 'hiera/' + args['prefix']
-    else:
-        prepath = 'hiera'
+    prepath = 'hiera'
 
     # get values from yaml
     with open(prepath + '/database.yaml', 'r') as stream:
@@ -40,7 +37,7 @@ def create_app(args={'instance': 'web'}):
         settings = yaml.load(stream)
         general = settings['general']
 
-    with open(prepath + '/webserver.yaml', 'r') as stream:
+    with open(prepath + '/webserver/webserver-' + args['instance'] + '.yaml', 'r') as stream:
         settings = yaml.load(stream)
         webserver = settings['webserver']
 
@@ -79,7 +76,7 @@ def create_app(args={'instance': 'web'}):
 
     # local logger: used for this module
     ROOT = general['root']
-    LOG_PATH = ROOT + webserver['flask']['log_path']
+    LOG_PATH = webserver['flask']['log_path']
     HANDLER_LEVEL = application['log_level']
 
     # flask attributes: accessible across application

@@ -1,0 +1,15 @@
+#!/bin/bash
+
+mongo admin --eval "db.createUser({\
+    user: '<%= @username %>',\
+    pwd: '<%= @password %>',\
+    roles: [\
+        'readWrite',\
+        'userAdmin',\
+        'dbAdmin',\
+        { role: 'readWrite', db: 'dataset' },\
+        { role: 'userAdmin', db: 'dataset' },\
+        { role: 'dbAdmin', db: 'dataset' },\
+    ]\
+},\
+{ w: 'majority' , wtimeout: 5000 } )" --quiet

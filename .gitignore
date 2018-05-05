@@ -14,36 +14,29 @@
 !factory.py
 !license.md
 !contributing.md
-!Vagrantfile
+!{docker-compose,rancher-template}.development.yml
+!/install_rancher
 !/puppet/
 !/test
 !/log/
-!*.dockerfile
+!/dockerfile
 !.coveragerc
 !/utility/
 
 # Ignore directories
 *.sass-cache/
 *__pycache__/
+*.pytest_cache/
 *.cache/
-/interface/static/js/
-/interface/static/css/
-/interface/static/img/
-/interface/static/node_modules/
+/interface/static/js
+/interface/static/css
+/interface/static/node_modules
 /src/node_modules/
 /puppet/environment/*/modules_contrib/
-/test/jest/lcov-report/
-/test/jest/node_modules/
 
 # Ignore files
 *.pyc
+*npm-debug.log
 /src/js/.gitignore
-/log/database
-/log/application
-/log/webcompiler
-/log/webserver
-/log/*.log
+/log/{application,database,webcompiler,webserver,*.log}
 /test/*.log
-/test/jest/clover.xml
-/test/jest/coverage-final.json
-/test/jest/lcov.info

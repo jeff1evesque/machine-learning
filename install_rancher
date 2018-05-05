@@ -1,0 +1,347 @@
+#!/bin/bash
+
+## system configurations
+CWD=$(pwd)
+RANCHER_CLI_VERSION='v0.6.9'
+RANCHER_AGENT_VERSION='stable'
+RANCHER_SERVER_VERSION='stable'
+RANCHER_REPO='https://github.com/rancher/cli'
+BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
+OPERATING_SYSTEM=$(uname -s)
+RANCHER_CONTAINER='rancher'
+RANCHER_PORT='8080'
+
+## system configuration: initialize for windows case
+PYTHON_VERSION_FULL='3.6.4'
+
+## stack configurations
+RANCHER_STACK='MLStack'
+DOCKER_COMPOSE='docker-compose.development.yml'
+RANCHER_COMPOSE='rancher-compose.development.yml'
+RANCHER_COMPOSE_TEMPLATE='rancher-template.development.yml'
+
+## cleanup docker volumes
+rm -rf data
+rm -rf interface/static/{js,css}
+
+## environment variables used by docker
+##
+## @CWD, environment variable, needed to build absolute path for docker-compose:
+##
+##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-373184049
+##
+export CWD
+
+case "${OPERATING_SYSTEM}" in
+    Linux*)
+        DISTRO_TYPE='linux'
+        RANCHER_DISTRO='rancher-linux-amd64';;
+    Darwin*)
+        DISTRO_TYPE='unix'
+        RANCHER_DISTRO='rancher-darwin-amd64';;
+    CYGWIN*)
+        DISTRO_TYPE='windows'
+        RANCHER_DISTRO='rancher-windows-amd64';;
+    MINGW*)
+        DISTRO_TYPE='windows'
+        RANCHER_DISTRO='rancher-windows-amd64';;
+    *)
+        echo ''
+        echo 'Error: operating system not known, please open an issue:'
+        echo ''
+        echo 'https://github.com/jeff1evesque/machine-learning/issues/new'
+        echo ''
+        exit 1
+esac
+
+## download rancher-cli
+if [ "$DISTRO_TYPE" = 'unix' ]; then
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    tar zxf "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    sudo mv rancher-v"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
+    sudo chmod +x /usr/local/bin/rancher
+
+elif [ "$DISTRO_TYPE" = 'linux' ]; then
+    if ! type curl &>/dev/null; then
+        sudo apt-get -y install curl || sudo yum -y install curl || (echo 'curl cannot install' && exit 1)
+    fi
+
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    tar zxf "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
+    sudo mv rancher-v"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
+    sudo chmod +x /usr/local/bin/rancher
+
+elif [ "$DISTRO_TYPE" = 'windows' ]; then
+    WINDOWS_VERSION=$(
+        powershell.exe \
+            -NoProfile -InputFormat None -ExecutionPolicy Bypass \
+            -Command "((
+                Get-ItemProperty -path 'HKLM:\software\microsoft\Windows NT\CurrentVersion'
+            ).ProductName).split(' ')[1]"
+    )
+    curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.zip"
+    unzip -j "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.zip"
+    mkdir -p /c/programdata/rancher/bin
+    mv -f rancher.exe /c/programdata/rancher/bin
+    rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.zip"
+
+    ## install python
+    command -v python >/dev/null 2>&1 || INSTALL_PYTHON=true
+    if [[ $OPERATING_SYSTEM == MINGW* ]] && [[ $INSTALL_PYTHON == true ]]; then
+        PYTHON_VERSION=$(echo ${PYTHON_VERSION_FULL%.*} | tr --delete .)
+
+        while [[ "$INSTALL_PYTHON" != 'y' ]] && [[ "$INSTALL_PYTHON" != 'n' ]]
+        do
+            echo ''
+            echo "Windows (MINGW*) installation for rancher-cli,"
+            echo "depends on 'choco', and 'python'."
+            echo ''
+            echo '[Y]: install'
+            echo '[N]: do not install'
+            echo ''
+            read -rp 'Proceed with installation: ' INSTALL_PYTHON
+        done
+
+        if [ "${INSTALL_PYTHON,,}" = 'y' ]; then
+            powershell.exe -NoProfile -InputFormat None -ExecutionPolicy Bypass -Command "
+                iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+            "
+
+            ## current process
+            PATH="$PATH:/c/programdata/chocolatey/bin:/c/programdata/rancher/bin:/c/python$PYTHON_VERSION"
+
+            ## successive processes
+            setx PATH "%PATH%;C:\programdata\chocolatey\bin;C:\programdata\rancher\bin;C:\python$PYTHON_VERSION"
+
+            ## install python
+            choco install -f python --version "$PYTHON_VERSION_FULL"
+
+        else
+            echo 'terminating rancher installation...'
+            exit 0
+        fi
+    fi
+
+else
+    echo ''
+    echo 'Error: distro not known, please open an issue:'
+    echo ''
+    echo 'https://github.com/jeff1evesque/machine-learning/issues/new'
+    echo ''
+    exit 1
+fi
+
+## install rancher ecosystem
+if docker -v >/dev/null 2>&1; then
+    ## docker toolbox provides 'default' container
+    if [ "$DISTRO_TYPE" = 'windows' ] && \
+       [ "$RANCHER_CONTAINER" != 'default' ] && \
+       docker ps -a | grep "$RANCHER_CONTAINER";
+    then
+        docker kill "$RANCHER_CONTAINER"
+        docker rm "$RANCHER_CONTAINER"
+    elif [ "$DISTRO_TYPE" != 'windows' ] && \
+         docker ps -a | grep "$RANCHER_CONTAINER";
+    then
+        docker kill "$RANCHER_CONTAINER"
+        docker rm "$RANCHER_CONTAINER"
+    fi
+
+    ## legacy windows uses docker toolbox, which requires 'default' container
+    if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
+        echo ''
+        echo 'Windows docker implementation, requires DockerToolbox, which'
+        echo "creates a 'default' container to manage docker. To proceed,"
+        echo "rancher configurations will reflect port '8080'."
+        echo ''
+
+        RANCHER_CONTAINER='default'
+        RANCHER_PORT='8080'
+        SERVER_IP=$(docker-machine ip 'default')
+
+    else
+        SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
+    fi
+
+    docker run -d \
+        --name "$RANCHER_CONTAINER" \
+        --restart=unless-stopped \
+        -p "$RANCHER_PORT":8080 \
+        rancher/server:"$RANCHER_SERVER_VERSION"
+    mkdir -p ~/.rancher
+
+    ## generate access + secret key:
+    ##
+    ## Note: exporting environment eliminates the need to explicitly provide
+    ##       environment variable to the 'rancher' command.
+    ##
+    ## Note: 'curl' response for ACCESS is json:
+    ##
+    ##     https://github.com/rancher/rancher/issues/4961#issuecomment-222598633
+    ##
+    export RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT"
+
+    SLEEPER=0
+    while true
+    do
+        ACCESS=$(
+            curl -v -XPOST -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            -d '{
+                "type":"apikey",
+                "accountId":"1a1",
+                "name":"admin",
+                "description":null,
+                "created":null,
+                "kind":null,
+                "removed":null,
+                "uuid":null
+            }' \
+            "$RANCHER_URL"/v2-beta/apikeys
+        ) && break
+
+        if [ "$SLEEPER" = 300 ]; then
+            echo ''
+            echo 'Attempted to request access + secret key,'
+            echo 'from rancher for over 5 minutes.'
+            echo ''
+            echo '[Y]: yes, keep trying'
+            echo '[N]: no, exit installation'
+            echo ''
+            read -rp 'Choice: ' API_KEYS
+
+            if [ "${API_KEYS,,}" = 'n' ]; then
+                exit 1
+            else
+                SLEEPER=$((SLEEPER+30))
+                echo 'sleeping 30s'
+                sleep 30
+            fi
+
+        else
+            echo ''
+            echo 'Rancher server has not started. Attempting to obtain'
+            echo 'access + secret key, from rancher in 30s'.
+            echo ''
+            SLEEPER=$((SLEEPER+30))
+            sleep 30
+        fi
+    done
+
+    if [ "$ACCESS" ]; then
+        SLEEPER=0
+        STATE='registering'
+
+        ## post method creates new resource
+        curl -v -XPOST -H 'Accept: application/json' \
+            -H 'Content-Type: application/json' \
+            "$RANCHER_URL"/v2-beta/projects/1a5/registrationTokens
+
+        while true
+        do
+            REGISTER=$(
+                curl -v -H 'Accept: application/json' \
+                -H 'Content-Type: application/json' \
+                "$RANCHER_URL"/v2-beta/projects/1a5/registrationTokens
+            )
+
+            STATE=$(echo "$REGISTER" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"][0]["state"])')
+
+            if [ "${STATE,,}" = 'active' ]; then
+                TOKEN=$(echo "$REGISTER" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["data"][0]["token"])')
+                break
+
+            elif [ "$SLEEPER" = 60 ]; then
+                echo ''
+                echo 'Waited over 60s for active state.'
+                echo ''
+                echo '[Y]: yes, keep waiting'
+                echo '[N]: no, exit installation'
+                echo ''
+                read -rp 'Choice: ' TOKEN_STATUS
+
+                if [ "${TOKEN_STATUS,,}" = 'n' ]; then
+                    exit 1
+                else
+                    SLEEPER=$((SLEEPER+2))
+                    sleep 2
+                fi
+
+            else
+                SLEEPER=$((SLEEPER+2))
+                sleep 2
+            fi
+        done
+    fi
+
+    RANCHER_ACCESS_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["name"])')
+    RANCHER_SECRET_KEY=$(echo "$ACCESS" | python -c 'import json,sys;obj=json.load(sys.stdin);print(obj["secretValue"])')
+
+    ## @environment: must contain user account id:
+    ##
+    ##     - 1a1, administrator
+    ##     - 1a5, default environment
+    ##
+    ## Note: rancher host registration can "also" be validated against:
+    ##
+    ##     - $RANCHER_URL/env/1a5/infra/hosts/add?driver=custom
+    ##
+    echo "{
+        \"accessKey\":\"$RANCHER_ACCESS_KEY\",
+        \"secretKey\":\"$RANCHER_SECRET_KEY\",
+        \"url\":\"$RANCHER_URL\",
+        \"environment\":\"1a5\"
+    }" > ~/.rancher/cli.json
+
+    if [ "$TOKEN" ]; then
+        ## rancher agent: legacy docker toolbox requires older 'boot2docker'.
+        ##
+        ##     - https://github.com/rancher/rancher/issues/10970#issuecomment-372061736
+        ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372060078
+        ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372061391
+        ##
+        if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
+            docker-machine \
+                create \
+                -d virtualbox \
+                --virtualbox-boot2docker-url="$BOOT2DOCKER_REPO"/releases/download/v17.09.1-ce/boot2docker.iso \
+                rancher
+
+            docker-machine.exe env rancher
+            eval "$('C:\Program Files\Docker Toolbox\docker-machine.exe' env rancher)"
+        fi
+
+        ## create docker volumes
+        mkdir -p ./data/{mariadb,mongodb,redis}
+        mkdir -p ./interface/static/{js,css}
+
+        ## register host with rancher
+        docker run \
+            --rm \
+            --privileged \
+            -v /var/run/docker.sock:/var/run/docker.sock \
+            -v /var/lib/rancher:/var/lib/rancher \
+            rancher/agent:"$RANCHER_AGENT_VERSION" \
+            "$RANCHER_URL/v1/scripts/$TOKEN"
+
+        ## create rancher-compose
+        sed "s|PREPATH|$PWD|g" "$RANCHER_COMPOSE_TEMPLATE" > "$RANCHER_COMPOSE"
+
+        ## create rancher stack
+        rancher stacks \
+            create "$RANCHER_STACK" \
+            -f "$DOCKER_COMPOSE" \
+            -r "$RANCHER_COMPOSE" \
+            --start
+
+    else
+        echo 'rancher registration token not generated'
+        exit 1
+    fi
+
+else
+    echo 'please install docker per https://github.com/jeff1evesque/machine-learning#installation'
+    exit 1
+fi

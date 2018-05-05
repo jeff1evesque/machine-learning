@@ -4,12 +4,6 @@
 CMD="$1"
 CWD=$(pwd)
 
-if [ "$2" ]; then
-    BASEDIR="$2"
-else
-    BASEDIR='.'
-fi
-
 ## install linters
 if [ "$CMD" = 'install' ]; then
     ## install ruby: needed for scss-lint
@@ -58,7 +52,7 @@ if [ "$CMD" = 'install' ]; then
     npm install -g eslint babel-eslint@7.2.3
     npm install -g eslint-plugin-react@4.2.3
     gem install yaml-lint -v 0.0.7
-    npm install -g dockerlint@0.2.0
+    npm install -g dockerlint@0.3.1
     pip install restructuredtext_lint==1.1.2
 
 ## run linters
@@ -70,32 +64,34 @@ if [ "$CMD" = 'install' ]; then
 ##     - https://github.com/rodjek/puppet-lint/issues/410
 ##
 else
-    EXIT_FLAG=false
+    EXIT_FLAG=0
 
-    cd "$BASEDIR" || exit 1
-    flake8 . --config=test/lint/setup.cfg || EXIT_FLAG=true
-    scss-lint src/scss/*.scss --config 'test/lint/.scss-lint.yml' || EXIT_FLAG=true
-    bootlint -d W005 interface/templates/*.html || EXIT_FLAG=true
-    find puppet/environment/*/manifests -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \; || EXIT_FLAG=true
-    find puppet/environment/*/modules -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \; || EXIT_FLAG=true
-    puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/*/modules || EXIT_FLAG=true
-    find puppet -name Puppetfile -exec sh -c 'cd "${1%/*}" && r10k puppetfile check Puppetfile' _ {} \; || EXIT_FLAG=true
-    find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=true
-    find interface/static/data/csv -name '*.csv' -exec csvlint {} \; || EXIT_FLAG=true
-    xmllint --noout interface/static/data/xml/svr*.xml --schema interface/static/data/xml/svr.xsd || EXIT_FLAG=true
-    xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd || EXIT_FLAG=true
-    xmllint --noout interface/static/data/xml/*.xsd || EXIT_FLAG=true
-    mdl . --style test/lint/markdown.rb || EXIT_FLAG=true
-    find . -type f ! -name '*.erb' -exec grep -q '^#!/bin/bash' {} \; -exec shellcheck {} + || EXIT_FLAG=true
-    find . -name '*.sh' -type f -exec shellcheck {} \; || EXIT_FLAG=true
-    eslint . --ext=jsx -c test/lint/eslint.json || EXIT_FLAG=true
-    yaml-lint hiera/ || EXIT_FLAG=true
-    yaml-lint ./*.yaml || EXIT_FLAG=true
-    find . -name '*.dockerfile' -type f -exec dockerlint {} \; || EXIT_FLAG=true
-    find doc -name '*.rst' -type f -exec rst-lint {} \; | (! grep -E 'ERROR') || EXIT_FLAG=true
+    cd "$CWD" || exit 1
+    flake8 . --config=test/lint/setup.cfg || EXIT_FLAG=2
+    scss-lint src/scss/*.scss --config 'test/lint/.scss-lint.yml' || EXIT_FLAG=3
+    bootlint -d W005 interface/templates/*.html || EXIT_FLAG=4
+    find puppet/environment -name '*.pp' -type f -exec /opt/puppetlabs/bin/puppet parser validate {} \; || EXIT_FLAG=5
+    puppet-lint --no-variable_scope-check --no-ensure_first_param-check puppet/environment/*/modules || EXIT_FLAG=6
+    find puppet -name Puppetfile -exec sh -c 'cd "${1%/*}" && r10k puppetfile check Puppetfile' _ {} \; || EXIT_FLAG=7
+    find . -maxdepth 0 -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=8
+    find src -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=9
+    find test -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=10
+    find interface/static/data/json -name '*.json' -exec jsonlint -q {} \; -print || EXIT_FLAG=11
+    find . -name '*.csv' -exec csvlint {} \; || EXIT_FLAG=12
+    xmllint --noout interface/static/data/xml/svr*.xml --schema interface/static/data/xml/svr.xsd || EXIT_FLAG=13
+    xmllint --noout interface/static/data/xml/svm*.xml --schema interface/static/data/xml/svm.xsd || EXIT_FLAG=14
+    xmllint --noout interface/static/data/xml/*.xsd || EXIT_FLAG=15
+    mdl . --style test/lint/markdown.rb || EXIT_FLAG=16
+    find . -type f ! -name '*.erb' -exec grep -q '^#!/bin/bash' {} \; -exec shellcheck {} + || EXIT_FLAG=17
+    find . -name '*.sh' -type f -exec shellcheck {} \; || EXIT_FLAG=18
+    eslint . --ext=jsx -c test/lint/eslint.json || EXIT_FLAG=19
+    yaml-lint hiera/ || EXIT_FLAG=20
+    yaml-lint ./*.yaml || EXIT_FLAG=21
+    find . -name '*.dockerfile' -type f -exec dockerlint {} \; || EXIT_FLAG=22
+    find . -name '*.rst' -type f -exec rst-lint {} \; | (! grep -E 'ERROR') || EXIT_FLAG=23
     cd "$CWD" || exit 1
 
-    if [ "$EXIT_FLAG" = true ]; then
-        exit 1
+    if [ "$EXIT_FLAG" -gt 1 ]; then
+        exit "$EXIT_FLAG"
     fi
 fi

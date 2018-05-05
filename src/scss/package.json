@@ -1,0 +1,18 @@
+{
+  "name": "sass",
+  "version": "1.0.0",
+  "description": "packages needed for source files.",
+  "main": "index.js",
+  "scripts": {
+    "build:css": "node-sass /var/machine-learning/src/scss/style.scss /var/machine-learning/interface/static/css/style.css",
+    "watch:scss": "onchange '/var/machine-learning/src/scss/**/*.scss' -- npm run build:css"
+  },
+  "author": "Jeffrey Levesque",
+  "license": "BSD",
+  "repository": "github:jeff1evesque/machine-learning",
+  "dependencies": {
+    "node-sass": "^4.8.3",
+    "react-rangeslider": "^2.2.0",
+    "onchange": "^3.3.0"
+  }
+}

@@ -1,7 +1,7 @@
 ---
 version: 5
 defaults:
-  datadir: /vagrant
+  datadir: /etc/puppetlabs/puppet
   data_hash: yaml_data
 
 hierarchy:
@@ -11,8 +11,14 @@ hierarchy:
   - name: 'General build packages'
     path: hiera/packages.yaml
 
+  - name: 'Dynamic reverse proxy configurations'
+    path: "hiera/reverse-proxy/%{::hostname}.yaml"
+
+  - name: 'General proxy configurations'
+    path: "hiera/reverse-proxy/nginx.yaml"
+
   - name: 'Webserver configurations'
-    path: hiera/webserver.yaml
+    path: "hiera/webserver/%{::hostname}.yaml"
 
   - name: 'Database configurations'
     path: hiera/database.yaml
@@ -27,5 +33,5 @@ hierarchy:
     path: hiera/common.yaml
 
   - name: 'NodeJS build'
-    path: src/package.json
+    path: hiera/package.json
     data_hash: json_data

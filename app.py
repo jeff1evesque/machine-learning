@@ -16,19 +16,11 @@ import pytest
 from factory import create_app
 
 # run unit test
-if len(sys.argv) > 1:
-    if sys.argv[1] == 'test':
-        pytest.main([
-            '--cov', '.',
-            'test/live_server'
-        ])
-    elif sys.argv[1] == 'run-api':
-        args = {
-            'prefix': 'test/hiera',
-            'instance': 'programmatic'
-        }
-        app = create_app(args)
-        app.run(host='0.0.0.0')
+if sys.argv[1] == 'test':
+    pytest.main([
+        '--cov', '.',
+        'test/live_server'
+    ])
 
 # run application
 else:

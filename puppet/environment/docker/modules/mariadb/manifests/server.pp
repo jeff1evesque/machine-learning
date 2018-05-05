@@ -3,18 +3,16 @@
 ###
 class mariadb::server {
     ## local variables
-    $hiera_database   = lookup('database')
-    $database         = $hiera_database['mariadb']
-    $db_host          = $database['allow_host']
-    $db               = $database['name']
-    $db_user          = $database['username']
-    $db_pass          = $database['password']
-    $provisioner      = $database['provisioner']
-    $provisioner_pass = $database['provisioner_password']
-    $tester           = $database['tester']
-    $tester_pass      = $database['tester_password']
-    $root_pass        = $database['root_password']
-    $bind_address     = $database['bind_address']
+    $db_host              = $::mariadb::allow_host
+    $db                   = $::mariadb::db
+    $db_user              = $::mariadb::db_user
+    $db_password          = $::mariadb::db_password
+    $provisioner          = $::mariadb::provisioner
+    $provisioner_password = $::mariadb::provisioner_password
+    $tester               = $::mariadb::tester
+    $tester_password      = $::mariadb::tester_password
+    $root_password        = $::mariadb::root_password
+    $bind_address         = $::mariadb::bind_address
 
     ## mysql::server: install, and configure mariadb-server
     ##
@@ -23,8 +21,8 @@ class mariadb::server {
     ## @max_user_connections, a zero value indicates no limit
     ##
     class { '::mysql::server':
-        package_name  => 'mariadb-server',
-        root_password => $root_pass,
+        package_name    => 'mariadb-server',
+        root_password   => $root_password,
         users         => {
             "${db_user}@${db_host}"     => {
                 ensure                   => 'present',
@@ -32,7 +30,7 @@ class mariadb::server {
                 max_queries_per_hour     => '0',
                 max_updates_per_hour     => '0',
                 max_user_connections     => '0',
-                password_hash            => mysql_password($db_pass),
+                password_hash            => mysql_password($db_password),
             },
             "${provisioner}@${db_host}" => {
                 ensure                   => 'present',
@@ -40,7 +38,7 @@ class mariadb::server {
                 max_queries_per_hour     => '0',
                 max_updates_per_hour     => '0',
                 max_user_connections     => '1',
-                password_hash            => mysql_password($provisioner_pass),
+                password_hash            => mysql_password($provisioner_password),
             },
             "${tester}@${db_host}" => {
                 ensure                   => 'present',
@@ -48,7 +46,7 @@ class mariadb::server {
                 max_queries_per_hour     => '0',
                 max_updates_per_hour     => '0',
                 max_user_connections     => '1',
-                password_hash            => mysql_password($tester_pass),
+                password_hash            => mysql_password($tester_password),
             },
         },
         grants        => {
@@ -86,5 +84,4 @@ class mariadb::server {
             }
         },
     }
-    contain mysql::server
 }

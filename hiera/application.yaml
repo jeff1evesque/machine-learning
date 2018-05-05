@@ -39,6 +39,9 @@ application:
         - poly
         - rbf
         - sigmoid
+    model_type:
+        - svm
+        - svr
     log_level: 'DEBUG'
     error_log_path: '/log/application/error'
     warning_log_path: '/log/application/warning'
