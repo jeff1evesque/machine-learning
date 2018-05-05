@@ -22,7 +22,6 @@ class webserver (
     $pytest_cov_version = $::webserver::params::pytest_cov_version,
     $root_puppet        = $::webserver::params::root_puppet,
     $platform           = $::webserver::params::platform,
-    $nodejs_version     = $::system::params::nodejs_version,
 ) inherits ::webserver::params {
     class { 'webserver::install': } ->
     class { 'webserver::config': } ~>

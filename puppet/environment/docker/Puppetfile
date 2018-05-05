@@ -10,10 +10,6 @@ mod 'apt',
   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
   :ref => '4.5.1'
 
-mod 'nodejs',
-  :git => 'https://github.com/voxpupuli/puppet-nodejs.git',
-  :ref => 'v5.0.0'
-
 mod 'mysql',
   :git => 'https://github.com/puppetlabs/puppetlabs-mysql.git',
   :ref => '3.4.0'

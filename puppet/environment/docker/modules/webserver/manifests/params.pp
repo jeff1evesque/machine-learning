@@ -9,7 +9,6 @@ class webserver::params {
     $pytest_cov_version    = 'installed'
     $jest_cli_version      = 'installed'
     $gunicorn_version      = 'installed'
-    $nodejs_version        = 'latest'
     $root_puppet           = '/etc/puppetlabs'
     $platform              = 'production'
 
