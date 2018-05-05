@@ -8,8 +8,7 @@ where users can properly manage respective services of this application. However
 proceeding, it is important to follow the docker |installation|_ guide, for the corresponding
 host machine.
 
-Once the docker has been installed, execute the following from the docker quickstart terminal,
-to install |rancher|_:
+Once docker has installed, install |rancher|_ from the docker quickstart terminal:
 
 .. code:: bash
 
