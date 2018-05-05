@@ -35,7 +35,6 @@ RUN apt-get update && $PUPPET apply -e "class { webserver: \
 ##
 ##     docker run --hostname webserver-api --name webserver-api -d jeff1evesque/ml-webserver:0.7 api 0.0.0.0 6001 6
 ##     docker run --hostname webserver-web --name webserver-web -d jeff1evesque/ml-webserver:0.7 web 0.0.0.0 5001 6
-##     docker run --hostname webserver-web --name webserver-web -d jeff1evesque/ml-webserver:0.7 web 0.0.0.0 5001 6 --development
 ##     docker run\
 ##         --name webserver\
 ##         --net=app_nw\
