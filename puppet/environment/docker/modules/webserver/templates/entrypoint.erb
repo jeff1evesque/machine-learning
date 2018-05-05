@@ -5,12 +5,27 @@ GUNICORN_TYPE="$1"
 GUNICORN_BIND="$2"
 GUNICORN_PORT="$3"
 GUNICORN_WORKERS="$4"
+PLATFORM="$5"
 
+PUPPET='/opt/puppetlabs/bin/puppet'
+MODULES=<%= @root_puppet %>/code/modules_contrib
+CONTRIB_MODULES=<%= @root_puppet %>/code/modules
+CONFDIR=<%= @root_puppet %>/puppet
+
+## run application
 if [ "$GUNICORN_TYPE" = 'test' ]; then
-python app.py test
+    python app.py test
+
 else
-gunicorn \
-    -b "$GUNICORN_BIND:$GUNICORN_PORT" \
-    --workers="$GUNICORN_WORKERS" \
-    "factory:create_app(args={'instance': '$GUNICORN_TYPE'})"
+    gunicorn \
+        -b "$GUNICORN_BIND:$GUNICORN_PORT" \
+        --workers="$GUNICORN_WORKERS" \
+        "factory:create_app(args={'instance': '$GUNICORN_TYPE'})"
+fi
+
+## install platform specific packages
+if [ "$PLATFORM" = '--development' ] || [ "$PLATFORM" = '--dev' ]; then
+    "$PUPPET" apply -e 'class { jest: }' \
+        --modulepath="${MODULES}:${CONTRIB_MODULES}" \
+        --confdir="$CONFDIR"
 fi

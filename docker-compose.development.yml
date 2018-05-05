@@ -28,7 +28,7 @@ services:
   webserver-web:
     hostname: webserver-web
     image: jeff1evesque/ml-webserver:0.7
-    command: ['web', '0.0.0.0', '5001', '6']
+    command: ['web', '0.0.0.0', '5001', '6', '--development']
 
   nginx-api:
     hostname: nginx-api

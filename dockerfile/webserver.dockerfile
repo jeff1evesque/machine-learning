@@ -25,8 +25,16 @@ COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules
 ##
 ##     docker build -f webserver.dockerfile -t jeff1evesque/ml-webserver:0.7 .
 ##
+RUN apt-get update && $PUPPET apply -e "class { webserver: \
+    run => false, \
+} " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
+
+##
+## executed everytime container starts
+##
 ##     docker run --hostname webserver-api --name webserver-api -d jeff1evesque/ml-webserver:0.7 api 0.0.0.0 6001 6
 ##     docker run --hostname webserver-web --name webserver-web -d jeff1evesque/ml-webserver:0.7 web 0.0.0.0 5001 6
+##     docker run --hostname webserver-web --name webserver-web -d jeff1evesque/ml-webserver:0.7 xxx 0.0.0.0 yyyy 6 --development
 ##     docker run\
 ##         --name webserver\
 ##         --net=app_nw\
@@ -41,10 +49,9 @@ COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules
 ##         -d jeff1evesque/ml-webserver:0.7\
 ##         test | sudo tee pytest.log
 ##
-RUN apt-get update && $PUPPET apply -e "class { webserver: \
-    run => false, \
-} " --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet
-
-## executed everytime container starts
+## Note: the '--development' flag, installs testing related packages:
+##
+##     - jest-cli
+##
 WORKDIR $ROOT_PROJECT
 ENTRYPOINT ["/bin/bash", "./entrypoint"]

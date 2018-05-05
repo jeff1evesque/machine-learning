@@ -8,6 +8,7 @@ class webserver::params {
     $pyyaml_version        = '*'
     $redis_version         = '*'
     $pytest_cov_version    = '*'
+    $root_puppet           = '/etc/puppetlabs'
 
     if $hiera {
         $root_dir          = $hiera['root_dir']

@@ -18,6 +18,7 @@ class webserver (
     $pyyaml_version     = $::webserver::params::pyyaml_version,
     $redis_version      = $::webserver::params::redis_version,
     $pytest_cov_version = $::webserver::params::pytest_cov_version,
+    $root_puppet        = $::webserver::params::root_puppet,
 ) inherits ::webserver::params {
     class { 'webserver::install': } ->
     class { 'webserver::config': } ~>
