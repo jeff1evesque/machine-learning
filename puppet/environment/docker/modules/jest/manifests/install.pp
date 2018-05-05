@@ -3,7 +3,7 @@
 ###
 class jest::install {
     ## local variables
-    $version   = $::jest::version
+    $version     = $::jest::version
 
     ## install jess
     package { 'jest-cli':
