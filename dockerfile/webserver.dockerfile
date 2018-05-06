@@ -17,7 +17,8 @@ COPY log $ROOT_PROJECT/log
 COPY interface $ROOT_PROJECT/interface
 COPY hiera $ROOT_PROJECT/hiera
 COPY brain $ROOT_PROJECT/brain
-COPY test $ROOT_PROJECT/test
+COPY test/unit-tests $ROOT_PROJECT/test/unit-tests
+COPY test/live_server $ROOT_PROJECT/test/live_server
 COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules/webserver
 
 ##

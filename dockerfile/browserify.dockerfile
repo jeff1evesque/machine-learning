@@ -7,6 +7,7 @@ ENV ROOT_PROJECT /var/machine-learning
 RUN mkdir -p $ROOT_PROJECT/src/jsx $ROOT_PROJECT/interface/static/js
 COPY src/jsx/package.json $ROOT_PROJECT/src
 COPY src/jsx $ROOT_PROJECT/src/jsx
+COPY test/jest $ROOT_PROJECT/test/jest
 
 ## provision with package.json
 WORKDIR $ROOT_PROJECT/src
