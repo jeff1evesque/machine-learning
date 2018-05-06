@@ -1,6 +1,6 @@
 module.exports = {
   'collectCoverage': true,
-  'coverageDirectory': './',
-  'moduleDirectories': ['/usr/lib/node_modules/jest-cli/node_modules'],
+  'coverageDirectory': '/var/machine-learning',
+  'moduleDirectories': ['/var/machine-learning/src/node_modules'],
   'verbose': true
 }
