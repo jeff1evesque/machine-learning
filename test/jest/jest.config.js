@@ -1,6 +1,8 @@
 module.exports = {
+  'verbose': true,
   'collectCoverage': true,
   'coverageDirectory': '/var/machine-learning',
-  'moduleDirectories': ['/var/machine-learning/src/node_modules'],
-  'verbose': true
+  'moduleDirectories': [
+      '/var/machine-learning/src/jsx/node_modules'
+  ]
 }
