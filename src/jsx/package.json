@@ -38,6 +38,7 @@
     "d3": "^4.12.2",
     "prop-types": "15.6.0",
     "react-json-view": "1.16.0",
-    "jest-cli": "^22.4.3"
+    "jest-cli": "^22.4.3",
+    "enzyme": "^3.3.0"
   }
 }
