@@ -12,22 +12,57 @@ Enzyme.configure({ adapter: new Adapter() });
 
 describe('Register Component', () => {
     it('should render without throwing an error', () => {
-        expect(shallow(<RegisterForm />).exists(<form ref='registerForm'></form>)).toBe(true)
+        const mockDispatchLayout = jest.fn();
+        expect(
+            shallow(
+                <RegisterForm
+                    dispatchLayout={mockDispatchLayout}
+                />
+            ).exists(<form ref='registerForm' />)
+        ).toBe(true);
     });
 
-    it('should render a username input', () => {
-        expect(shallow(<RegisterForm />).find('[name="user[login]"]').length).toEqual(1)
+    it('should render without throwing an error', () => {
+        const mockDispatchLayout = jest.fn();
+        expect(
+            shallow(
+                <RegisterForm
+                    dispatchLayout={mockDispatchLayout}
+                />
+            ).find('[name="user[login]"]').length
+        ).toEqual(1);
     });
 
-    it('should render an email input', () => {
-        expect(shallow(<RegisterForm />).find('[name="user[email]"]').length).toEqual(1)
+    it('should render without throwing an error', () => {
+        const mockDispatchLayout = jest.fn();
+        expect(
+            shallow(
+                <RegisterForm
+                    dispatchLayout={mockDispatchLayout}
+                />
+            ).find('[name="user[email]"]').length
+        ).toEqual(1);
     });
 
-    it('should render a password input', () => {
-        expect(shallow(<RegisterForm />).find('[name="user[password]"]').length).toEqual(1)
+    it('should render without throwing an error', () => {
+        const mockDispatchLayout = jest.fn();
+        expect(
+            shallow(
+                <RegisterForm
+                    dispatchLayout={mockDispatchLayout}
+                />
+            ).find('[name="user[password]"]').length
+        ).toEqual(1);
     });
 
-    it('should render a submit input', () => {
-        expect(shallow(<RegisterForm />).find('[type="submit"]').length).toEqual(1)
+    it('should render without throwing an error', () => {
+        const mockDispatchLayout = jest.fn();
+        expect(
+            shallow(
+                <RegisterForm
+                    dispatchLayout={mockDispatchLayout}
+                />
+            ).find('[type="submit"]').length
+        ).toEqual(1);
     });
 });

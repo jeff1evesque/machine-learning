@@ -18,14 +18,13 @@ import CurrentResultLink from '../../../../src/jsx/import/navigation/menu-items/
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('AnalysisLayout Component', () => {
-    it("should render without throwing an error", () => {
+    it('should render without throwing an error', () => {
         const mockDispatchLayout = jest.fn();
         expect(
             shallow(
-            <AnalysisLayout
-                dispatchLayout={mockDispatchLayout}
-                dispatchSpinner={mockDispatchSpinner}
-            />
+                <AnalysisLayout
+                    dispatchLayout={mockDispatchLayout}
+                />
             ).exists(<form ref='analysisForm'>)
         ).toBe(true);
     });
