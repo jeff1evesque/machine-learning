@@ -4,6 +4,7 @@
  */
 
 import React from 'react';
+import { Route } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import AnalysisLayout from '../../../../src/jsx/import/layout/analysis.jsx';
