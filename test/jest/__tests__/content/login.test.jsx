@@ -11,19 +11,55 @@ import LoginForm from '../../../../src/jsx/import/content/login.jsx';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Login Component', () => {
-    it('should render without throwing an error', () => {
-        expect(shallow(<LoginForm />).exists(<form ref='loginForm'></form>)).toBe(true)
+    it("should render without throwing an error", () => {
+        const mockDispatchLayout = jest.fn();
+        const mockDispatchSpinner = jest.fn();
+        expect(
+            shallow(
+            <LoginForm
+                dispatchLayout={mockDispatchLayout}
+                dispatchSpinner={mockDispatchSpinner}
+            />
+            ).exists(<form ref="loginForm" />)
+        ).toBe(true);
     });
 
-    it('should render an email input', () => {
-        expect(shallow(<LoginForm />).find('[name="user[login]"]').length).toEqual(1)
+    it("should render without throwing an error", () => {
+        const mockDispatchLayout = jest.fn();
+        const mockDispatchSpinner = jest.fn();
+        expect(
+            shallow(
+            <LoginForm
+                dispatchLayout={mockDispatchLayout}
+                dispatchSpinner={mockDispatchSpinner}
+            />
+            ).find('[name="user[login]"]').length
+        ).toEqual(1);
     });
 
-    it('should render a password input', () => {
-        expect(shallow(<LoginForm />).find('[name="user[password]"]').length).toEqual(1)
+    it("should render without throwing an error", () => {
+        const mockDispatchLayout = jest.fn();
+        const mockDispatchSpinner = jest.fn();
+        expect(
+            shallow(
+            <LoginForm
+                dispatchLayout={mockDispatchLayout}
+                dispatchSpinner={mockDispatchSpinner}
+            />
+            ).find('[name="user[password]"]').length
+        ).toEqual(1);
     });
 
-    it('should render a submit input', () => {
-        expect(shallow(<LoginForm />).find('[type="submit"]').length).toEqual(1)
+    it("should render without throwing an error", () => {
+        const mockDispatchLayout = jest.fn();
+        const mockDispatchSpinner = jest.fn();
+        expect(
+            shallow(
+            <LoginForm
+                dispatchLayout={mockDispatchLayout}
+                dispatchSpinner={mockDispatchSpinner}
+            />
+            ).find('[type="submit"]').length
+        ).toEqual(1);
     });
 });
