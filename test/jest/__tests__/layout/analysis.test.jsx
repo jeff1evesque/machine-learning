@@ -4,7 +4,8 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
 import AnalysisLayout from '../../../../src/jsx/import/layout/analysis.jsx';
 import DataNewState from '../../../../src/jsx/import/redux/container/data-new.jsx';
 import DataAppendState from '../../../../src/jsx/import/redux/container/data-append.jsx';
@@ -13,6 +14,8 @@ import ModelPredictState from '../../../../src/jsx/import/redux/container/model-
 import CurrentResultState from '../../../../src/jsx/import/redux/container/current-result.jsx';
 import ResultsDisplayState from '../../../../src/jsx/import/redux/container/results.jsx';
 import CurrentResultLink from '../../../../src/jsx/import/navigation/menu-items/current-result.jsx';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('AnalysisLayout Component', () => {
     it('should render without throwing an error', () => {

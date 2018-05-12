@@ -4,8 +4,11 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
-import RegisterForm from '../../../../src/jsx/import/content/register.jsx'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import RegisterForm from '../../../../src/jsx/import/content/register.jsx';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('Register Component', () => {
     it('should render without throwing an error', () => {

@@ -4,8 +4,11 @@
  */
 
 import React from 'react';
-import { shallow } from 'enzyme';
-import LoginForm from '../../../../src/jsx/import/content/login.jsx'
+import Enzyme, { shallow } from 'enzyme';
+import Adapter from 'enzyme-adapter-react-16';
+import LoginForm from '../../../../src/jsx/import/content/login.jsx';
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('Login Component', () => {
     it('should render without throwing an error', () => {
