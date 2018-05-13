@@ -7,7 +7,7 @@ import React from 'react';
 import { MemoryRouter } from 'react-router';
 import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-import PageLayout from '../../../../src/jsx/import/layout/page.jsx';
+import MainRoute from '../../../../src/jsx/import/route/main-route.jsx';
 import HomePageState from '../../../../src/jsx/import/redux/container/home-page.jsx';
 import UserMenuState from '../../../../src/jsx/import/redux/container/user-menu.jsx';
 import HeaderMenuState from '../../../../src/jsx/import/redux/container/header-menu.jsx';
@@ -21,7 +21,7 @@ describe('PageLayout Component', () => {
     it('should render home route', () => {
         const wrapper = mount(
             <MemoryRouter initialEntries={[ '/' ]}>
-                <PageLayout/>
+                <MainRoute/>
             </MemoryRouter>
         );
         expect(wrapper.find(HomePageState)).toHaveLength(1);
@@ -30,7 +30,7 @@ describe('PageLayout Component', () => {
     it('should render login route', () => {
         const wrapper = mount(
             <MemoryRouter initialEntries={[ '/login' ]}>
-                <PageLayout/>
+                <MainRoute/>
             </MemoryRouter>
         );
         expect(wrapper.find(LoginLayout)).toHaveLength(1);
@@ -39,7 +39,7 @@ describe('PageLayout Component', () => {
     it('should render logout route', () => {
         const wrapper = mount(
             <MemoryRouter initialEntries={[ '/logout' ]}>
-                <PageLayout/>
+                <MainRoute/>
             </MemoryRouter>
         );
         expect(wrapper.find(LoginLayout)).toHaveLength(1);
@@ -48,7 +48,7 @@ describe('PageLayout Component', () => {
     it('should render register route', () => {
         const wrapper = mount(
             <MemoryRouter initialEntries={[ '/register' ]}>
-                <PageLayout/>
+                <MainRoute/>
             </MemoryRouter>
         );
         expect(wrapper.find(RegisterLayout)).toHaveLength(1);
@@ -57,7 +57,7 @@ describe('PageLayout Component', () => {
     it('should render analysis route', () => {
         const wrapper = mount(
             <MemoryRouter initialEntries={[ '/register' ]}>
-                <PageLayout/>
+                <MainRoute/>
             </MemoryRouter>
         );
         expect(wrapper.find(AnalysisLayoutState)).toHaveLength(1);
