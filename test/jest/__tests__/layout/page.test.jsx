@@ -4,8 +4,8 @@
  */
 
 import React from 'react';
-import { Route } from 'react-router-dom';
-import Enzyme, { shallow } from 'enzyme';
+import { MemoryRouter } from 'react-router';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import PageLayout from '../../../../src/jsx/import/layout/page.jsx';
 import HomePageState from '../../../../src/jsx/import/redux/container/home-page.jsx';
@@ -18,18 +18,48 @@ import RegisterLayout from '../../../../src/jsx/import/layout/register.jsx';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('PageLayout Component', () => {
-    it('should render correct routes', () => {
-        const wrapper = shallow(<PageLayout />);
-        const pathMap = wrapper.find(Route).reduce((pathMap, route) => {
-            const routeProps = route.props();
-            pathMap[routeProps.path] = routeProps.component;
-            return pathMap;
-        }, {});
+    it('should render home route', () => {
+        const wrapper = mount(
+            <MemoryRouter initialEntries={[ '/' ]}>
+                <PageLayout/>
+            </MemoryRouter>
+        );
+        expect(wrapper.find(HomePageState)).toHaveLength(1);
+    });
 
-        expect(pathMap['/']).toBe(HomePageState);
-        expect(pathMap['/login']).toBe(LoginLayout);
-        expect(pathMap['/logout']).toBe(LoginLayout);
-        expect(pathMap['/register']).toBe(RegisterLayout);
-        expect(pathMap['/session']).toBe(AnalysisLayoutState);
+    it('should render login route', () => {
+        const wrapper = mount(
+            <MemoryRouter initialEntries={[ '/login' ]}>
+                <PageLayout/>
+            </MemoryRouter>
+        );
+        expect(wrapper.find(LoginLayout)).toHaveLength(1);
+    });
+
+    it('should render logout route', () => {
+        const wrapper = mount(
+            <MemoryRouter initialEntries={[ '/logout' ]}>
+                <PageLayout/>
+            </MemoryRouter>
+        );
+        expect(wrapper.find(LoginLayout)).toHaveLength(1);
+    });
+
+    it('should render register route', () => {
+        const wrapper = mount(
+            <MemoryRouter initialEntries={[ '/register' ]}>
+                <PageLayout/>
+            </MemoryRouter>
+        );
+        expect(wrapper.find(RegisterLayout)).toHaveLength(1);
+    });
+
+    it('should render analysis route', () => {
+        const wrapper = mount(
+            <MemoryRouter initialEntries={[ '/register' ]}>
+                <PageLayout/>
+            </MemoryRouter>
+        );
+        expect(wrapper.find(AnalysisLayoutState)).toHaveLength(1);
     });
 });
