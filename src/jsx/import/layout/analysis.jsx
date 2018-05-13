@@ -9,12 +9,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Route } from 'react-router-dom';
 import NavBar from '../navigation/nav-bar.jsx';
-import DataNewState from '../redux/container/data-new.jsx';
-import DataAppendState from '../redux/container/data-append.jsx';
-import ModelGenerateState from '../redux/container/model-generate.jsx';
-import ModelPredictState from '../redux/container/model-predict.jsx';
-import CurrentResultState from '../redux/container/current-result.jsx';
-import ResultsDisplayState from '../redux/container/results.jsx';
+import SessionRoute from '../route/session-route.jsx';
+import ResultRoute from '../route/result-route.jsx';
 import CurrentResultLink from '../navigation/menu-items/current-result.jsx';
 import ajaxCaller from '../general/ajax-caller.js';
 import Submit from '../general/submit-button.jsx';
@@ -270,40 +266,12 @@ class AnalysisLayout extends Component {
                         onSubmit={this.handleSubmit}
                         ref='analysisForm'
                     >
-                        <Route
-                            component={DataNewState}
-                            exact
-                            path='/session/data-new'
-                        />
-                        <Route
-                            component={DataAppendState}
-                            exact
-                            path='/session/data-append'
-                        />
-                        <Route
-                            component={ModelGenerateState}
-                            exact
-                            path='/session/model-generate'
-                        />
-                        <Route
-                            component={ModelPredictState}
-                            exact
-                            path='/session/model-predict'
-                        />
+                        <SesssionRoute/>
                         {submitBtn}
                         {resultBtn}
                     </form>
                 </div>
-                <Route
-                    component={CurrentResultState}
-                    exact
-                    path='/session/current-result'
-                />
-                <Route
-                    component={ResultsDisplayState}
-                    exact
-                    path='/session/results'
-                />
+                <ResultRoute/>
             </div>
         );
     }
