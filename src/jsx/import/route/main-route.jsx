@@ -11,8 +11,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Route } from 'react-router-dom';
-import LoginLayout from './login.jsx';
-import RegisterLayout from './register.jsx';
+import LoginLayout from '../layout/login.jsx';
+import RegisterLayout from '../layout/register.jsx';
 import HomePageState from '../redux/container/home-page.jsx';
 import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 
