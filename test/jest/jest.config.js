@@ -6,4 +6,5 @@ module.exports = {
         '/var/machine-learning/src/jsx/node_modules'
     ],
     'setupTestFrameworkScriptFile': '/var/machine-learning/src/jsx/setup.js',
+    'setupTestFrameworkScriptFile': 'mock-local-storage',
 }
