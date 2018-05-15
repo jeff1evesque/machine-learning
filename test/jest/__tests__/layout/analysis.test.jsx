@@ -19,8 +19,9 @@ import CurrentResultLink from '../../../../src/jsx/import/navigation/menu-items/
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('AnalysisLayout Component', () => {
+    const mockDispatchLayout = jest.fn();
+
     it('should render without throwing an error', () => {
-        const mockDispatchLayout = jest.fn();
         expect(
             shallow(
                 <AnalysisLayout

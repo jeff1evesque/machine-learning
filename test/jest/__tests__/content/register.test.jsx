@@ -11,8 +11,9 @@ import RegisterForm from '../../../../src/jsx/import/content/register.jsx';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('Register Component', () => {
+    const mockDispatchLayout = jest.fn();
+
     it('should render without throwing an error', () => {
-        const mockDispatchLayout = jest.fn();
         expect(
             shallow(
                 <RegisterForm
@@ -23,7 +24,6 @@ describe('Register Component', () => {
     });
 
     it('should render without throwing an error', () => {
-        const mockDispatchLayout = jest.fn();
         expect(
             shallow(
                 <RegisterForm
@@ -34,7 +34,6 @@ describe('Register Component', () => {
     });
 
     it('should render without throwing an error', () => {
-        const mockDispatchLayout = jest.fn();
         expect(
             shallow(
                 <RegisterForm
@@ -45,7 +44,6 @@ describe('Register Component', () => {
     });
 
     it('should render without throwing an error', () => {
-        const mockDispatchLayout = jest.fn();
         expect(
             shallow(
                 <RegisterForm
@@ -56,7 +54,6 @@ describe('Register Component', () => {
     });
 
     it('should render without throwing an error', () => {
-        const mockDispatchLayout = jest.fn();
         expect(
             shallow(
                 <RegisterForm
