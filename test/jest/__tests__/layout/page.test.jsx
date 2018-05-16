@@ -19,9 +19,11 @@ import RegisterLayout from '../../../../src/jsx/import/layout/register.jsx';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('PageLayout Component', () => {
+    const getStateFn = jest.fn();
+
     it('should render home route', () => {
         const wrapper = mount(
-            <Provider store={{}}>
+            <Provider store={{getState: getStateFn}}>
                 <MemoryRouter initialEntries={[ '/' ]}>
                     <MainRoute/>
                 </MemoryRouter>
@@ -32,7 +34,7 @@ describe('PageLayout Component', () => {
 
     it('should render login route', () => {
         const wrapper = mount(
-            <Provider store={{}}>
+            <Provider store={{getState: getStateFn}}>
                 <MemoryRouter initialEntries={[ '/login' ]}>
                     <MainRoute/>
                 </MemoryRouter>
@@ -43,7 +45,7 @@ describe('PageLayout Component', () => {
 
     it('should render logout route', () => {
         const wrapper = mount(
-            <Provider store={{}}>
+            <Provider store={{getState: getStateFn}}>
                 <MemoryRouter initialEntries={[ '/logout' ]}>
                     <MainRoute/>
                 </MemoryRouter>
@@ -54,7 +56,7 @@ describe('PageLayout Component', () => {
 
     it('should render register route', () => {
         const wrapper = mount(
-            <Provider store={{}}>
+            <Provider store={{getState: getStateFn}}>
                 <MemoryRouter initialEntries={[ '/register' ]}>
                     <MainRoute/>
                 </MemoryRouter>
@@ -65,7 +67,7 @@ describe('PageLayout Component', () => {
 
     it('should render analysis route', () => {
         const wrapper = mount(
-            <Provider store={{}}>
+            <Provider store={{getState: getStateFn}}>
                 <MemoryRouter initialEntries={[ '/register' ]}>
                     <MainRoute/>
                 </MemoryRouter>
