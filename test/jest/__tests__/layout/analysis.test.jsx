@@ -27,6 +27,7 @@ import store from '../../../../src/jsx/import/redux/store.jsx';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('AnalysisLayout Component', () => {
+    const mockDispatchLayout = jest.fn();
     const store = createStore(
         combineReducers({user, page, data, layout}),
     );
