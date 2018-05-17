@@ -8,6 +8,11 @@ import { MemoryRouter } from 'react-router';
 import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
+import user from '../../../../src/jsx/import/redux/reducer/login.jsx';
+import layout from '../../../../src/jsx/import/redux/reducer/layout.jsx';
+import page from '../../../../src/jsx/import/redux/reducer/page.jsx';
+import data from '../../../../src/jsx/import/redux/reducer/data.jsx';
 import MainRoute from '../../../../src/jsx/import/route/main-route.jsx';
 import HomePageState from '../../../../src/jsx/import/redux/container/home-page.jsx';
 import UserMenuState from '../../../../src/jsx/import/redux/container/user-menu.jsx';
@@ -20,14 +25,15 @@ import store from '../../../../src/jsx/import/redux/store.jsx';
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('PageLayout Component', () => {
-    const mockGetState = jest.fn();
-    const mockDispatchLayout = jest.fn();
+    const store = createStore(
+        combineReducers({user, page, data, layout}),
+    );
 
     it('should render home route', () => {
         const wrapper = mount(
-            <Provider store={{getState: mockGetState}}>
+            <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/' ]}>
-                    <MainRoute dispatchLayout={mockDispatchLayout} />
+                    <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
@@ -36,9 +42,9 @@ describe('PageLayout Component', () => {
 
     it('should render login route', () => {
         const wrapper = mount(
-            <Provider store={{getState: mockGetState}}>
+            <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/login' ]}>
-                    <MainRoute dispatchLayout={mockDispatchLayout} />
+                    <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
@@ -47,9 +53,9 @@ describe('PageLayout Component', () => {
 
     it('should render logout route', () => {
         const wrapper = mount(
-            <Provider store={{getState: mockGetState}}>
+            <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/logout' ]}>
-                    <MainRoute dispatchLayout={mockDispatchLayout} />
+                    <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
@@ -58,9 +64,9 @@ describe('PageLayout Component', () => {
 
     it('should render register route', () => {
         const wrapper = mount(
-            <Provider store={{getState: mockGetState}}>
+            <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/register' ]}>
-                    <MainRoute dispatchLayout={mockDispatchLayout} />
+                    <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
@@ -69,9 +75,9 @@ describe('PageLayout Component', () => {
 
     it('should render analysis route', () => {
         const wrapper = mount(
-            <Provider store={{getState: mockGetState}}>
-                <MemoryRouter initialEntries={[ '/register' ]}>
-                    <MainRoute dispatchLayout={mockDispatchLayout} />
+            <Provider store={store}>
+                <MemoryRouter initialEntries={[ '/session' ]}>
+                    <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
