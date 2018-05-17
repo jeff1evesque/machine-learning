@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { Route } from 'react-router-dom';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
@@ -13,6 +13,7 @@ import user from '../../../../src/jsx/import/redux/reducer/login.jsx';
 import layout from '../../../../src/jsx/import/redux/reducer/layout.jsx';
 import page from '../../../../src/jsx/import/redux/reducer/page.jsx';
 import data from '../../../../src/jsx/import/redux/reducer/data.jsx';
+import SessionRoute from '../../../../src/jsx/import/route/session-route.jsx';
 import AnalysisLayout from '../../../../src/jsx/import/layout/analysis.jsx';
 import DataNewState from '../../../../src/jsx/import/redux/container/data-new.jsx';
 import DataAppendState from '../../../../src/jsx/import/redux/container/data-append.jsx';
@@ -21,7 +22,6 @@ import ModelPredictState from '../../../../src/jsx/import/redux/container/model-
 import CurrentResultState from '../../../../src/jsx/import/redux/container/current-result.jsx';
 import ResultsDisplayState from '../../../../src/jsx/import/redux/container/results.jsx';
 import CurrentResultLink from '../../../../src/jsx/import/navigation/menu-items/current-result.jsx';
-import SessionRoute from '../../../../src/jsx/import/route/session-route.jsx';
 import store from '../../../../src/jsx/import/redux/store.jsx';
 
 Enzyme.configure({ adapter: new Adapter() });
