@@ -15,17 +15,19 @@ import HeaderMenuState from '../../../../src/jsx/import/redux/container/header-m
 import AnalysisLayoutState from '../../../../src/jsx/import/redux/container/analysis-layout.jsx';
 import LoginLayout from '../../../../src/jsx/import/layout/login.jsx';
 import RegisterLayout from '../../../../src/jsx/import/layout/register.jsx';
+import store from '../../../../src/jsx/import/redux/store.jsx';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('PageLayout Component', () => {
-    const getStateFn = jest.fn();
+    const mockGetState = jest.fn();
+    const mockDispatchLayout = jest.fn();
 
     it('should render home route', () => {
         const wrapper = mount(
-            <Provider store={{getState: getStateFn}}>
+            <Provider store={{getState: mockGetState}}>
                 <MemoryRouter initialEntries={[ '/' ]}>
-                    <MainRoute/>
+                    <MainRoute dispatchLayout={mockDispatchLayout} />
                 </MemoryRouter>
             </Provider>
         );
@@ -34,9 +36,9 @@ describe('PageLayout Component', () => {
 
     it('should render login route', () => {
         const wrapper = mount(
-            <Provider store={{getState: getStateFn}}>
+            <Provider store={{getState: mockGetState}}>
                 <MemoryRouter initialEntries={[ '/login' ]}>
-                    <MainRoute/>
+                    <MainRoute dispatchLayout={mockDispatchLayout} />
                 </MemoryRouter>
             </Provider>
         );
@@ -45,9 +47,9 @@ describe('PageLayout Component', () => {
 
     it('should render logout route', () => {
         const wrapper = mount(
-            <Provider store={{getState: getStateFn}}>
+            <Provider store={{getState: mockGetState}}>
                 <MemoryRouter initialEntries={[ '/logout' ]}>
-                    <MainRoute/>
+                    <MainRoute dispatchLayout={mockDispatchLayout} />
                 </MemoryRouter>
             </Provider>
         );
@@ -56,9 +58,9 @@ describe('PageLayout Component', () => {
 
     it('should render register route', () => {
         const wrapper = mount(
-            <Provider store={{getState: getStateFn}}>
+            <Provider store={{getState: mockGetState}}>
                 <MemoryRouter initialEntries={[ '/register' ]}>
-                    <MainRoute/>
+                    <MainRoute dispatchLayout={mockDispatchLayout} />
                 </MemoryRouter>
             </Provider>
         );
@@ -67,9 +69,9 @@ describe('PageLayout Component', () => {
 
     it('should render analysis route', () => {
         const wrapper = mount(
-            <Provider store={{getState: getStateFn}}>
+            <Provider store={{getState: mockGetState}}>
                 <MemoryRouter initialEntries={[ '/register' ]}>
-                    <MainRoute/>
+                    <MainRoute dispatchLayout={mockDispatchLayout} />
                 </MemoryRouter>
             </Provider>
         );
