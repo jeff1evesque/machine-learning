@@ -7,6 +7,8 @@ import React from 'react';
 import { Route } from 'react-router-dom';
 import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { Provider } from 'react-redux';
+import { createStore, combineReducers } from 'redux';
 import AnalysisLayout from '../../../../src/jsx/import/layout/analysis.jsx';
 import DataNewState from '../../../../src/jsx/import/redux/container/data-new.jsx';
 import DataAppendState from '../../../../src/jsx/import/redux/container/data-append.jsx';
@@ -15,11 +17,15 @@ import ModelPredictState from '../../../../src/jsx/import/redux/container/model-
 import CurrentResultState from '../../../../src/jsx/import/redux/container/current-result.jsx';
 import ResultsDisplayState from '../../../../src/jsx/import/redux/container/results.jsx';
 import CurrentResultLink from '../../../../src/jsx/import/navigation/menu-items/current-result.jsx';
+import SessionRoute from '../../../../src/jsx/import/route/session-route.jsx';
+import store from '../../../../src/jsx/import/redux/store.jsx';
 
 Enzyme.configure({ adapter: new Adapter() });
 
 describe('AnalysisLayout Component', () => {
-    const mockDispatchLayout = jest.fn();
+    const store = createStore(
+        combineReducers({user, page, data, layout}),
+    );
 
     it('should render without throwing an error', () => {
         expect(
@@ -31,19 +37,69 @@ describe('AnalysisLayout Component', () => {
         ).toBe(true);
     });
 
-    it('should render correct routes', () => {
-        const wrapper = shallow(<AnalysisLayout />);
-        const pathMap = wrapper.find(Route).reduce((pathMap, route) => {
-            const routeProps = route.props();
-            pathMap[routeProps.path] = routeProps.component;
-            return pathMap;
-        }, {});
+    it('should render data-new route', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={[ '/session/data-new' ]}>
+                    <SessionRoute/>
+                </MemoryRouter>
+            </Provider>
+        );
+        expect(wrapper.find(DataNewState)).toHaveLength(1);
+    });
 
-        expect(pathMap['/session/data-new']).toBe(DataNewState);
-        expect(pathMap['/session/data-append']).toBe(DataAppendState);
-        expect(pathMap['/session/model-generate']).toBe(ModelGenerateState);
-        expect(pathMap['/session/model-predict']).toBe(ModelPredictState);
-        expect(pathMap['/session/current-result']).toBe(CurrentResultState);
-        expect(pathMap['/session/results']).toBe(ResultsDisplayState);
+    it('should render data-append route', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={[ '/session/data-append' ]}>
+                    <SessionRoute/>
+                </MemoryRouter>
+            </Provider>
+        );
+        expect(wrapper.find(DataAppendState)).toHaveLength(1);
+    });
+
+    it('should render model-generate route', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={[ '/session/model-generate' ]}>
+                    <SessionRoute/>
+                </MemoryRouter>
+            </Provider>
+        );
+        expect(wrapper.find(ModelGenerateState)).toHaveLength(1);
+    });
+
+    it('should render model-predict route', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={[ '/session/model-predict' ]}>
+                    <SessionRoute/>
+                </MemoryRouter>
+            </Provider>
+        );
+        expect(wrapper.find(ModelPredictState)).toHaveLength(1);
+    });
+
+    it('should render current-result route', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={[ '/session/current-result' ]}>
+                    <SessionRoute/>
+                </MemoryRouter>
+            </Provider>
+        );
+        expect(wrapper.find(CurrentResultState)).toHaveLength(1);
+    });
+
+    it('should render results route', () => {
+        const wrapper = mount(
+            <Provider store={store}>
+                <MemoryRouter initialEntries={[ '/session/results' ]}>
+                    <SessionRoute/>
+                </MemoryRouter>
+            </Provider>
+        );
+        expect(wrapper.find(ResultsDisplayState)).toHaveLength(1);
     });
 });
