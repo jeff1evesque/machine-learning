@@ -14,6 +14,7 @@ import layout from '../../../../src/jsx/import/redux/reducer/layout.jsx';
 import page from '../../../../src/jsx/import/redux/reducer/page.jsx';
 import data from '../../../../src/jsx/import/redux/reducer/data.jsx';
 import SessionRoute from '../../../../src/jsx/import/route/session-route.jsx';
+import ResultRoute from '../../../../src/jsx/import/route/result-route.jsx';
 import AnalysisLayout from '../../../../src/jsx/import/layout/analysis.jsx';
 import DataNewState from '../../../../src/jsx/import/redux/container/data-new.jsx';
 import DataAppendState from '../../../../src/jsx/import/redux/container/data-append.jsx';
@@ -21,7 +22,6 @@ import ModelGenerateState from '../../../../src/jsx/import/redux/container/model
 import ModelPredictState from '../../../../src/jsx/import/redux/container/model-predict.jsx';
 import CurrentResultState from '../../../../src/jsx/import/redux/container/current-result.jsx';
 import ResultsDisplayState from '../../../../src/jsx/import/redux/container/results.jsx';
-import CurrentResultLink from '../../../../src/jsx/import/navigation/menu-items/current-result.jsx';
 import store from '../../../../src/jsx/import/redux/store.jsx';
 
 Enzyme.configure({ adapter: new Adapter() });
@@ -90,7 +90,7 @@ describe('AnalysisLayout Component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/current-result' ]}>
-                    <SessionRoute/>
+                    <ResultRoute/>
                 </MemoryRouter>
             </Provider>
         );
@@ -101,7 +101,7 @@ describe('AnalysisLayout Component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/results' ]}>
-                    <SessionRoute/>
+                    <ResultRoute/>
                 </MemoryRouter>
             </Provider>
         );
