@@ -266,7 +266,7 @@ class AnalysisLayout extends Component {
                         onSubmit={this.handleSubmit}
                         ref='analysisForm'
                     >
-                        <SesssionRoute/>
+                        <SessionRoute/>
                         {submitBtn}
                         {resultBtn}
                     </form>
