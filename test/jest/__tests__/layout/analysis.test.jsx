@@ -33,13 +33,12 @@ describe('AnalysisLayout Component', () => {
     );
 
     it('should render without throwing an error', () => {
-        expect(
-            shallow(
-                <AnalysisLayout
-                    dispatchLayout={mockDispatchLayout}
-                />
-            ).exists(<form ref='analysisForm'>)
-        ).toBe(true);
+        const wrapper = shallow(
+            <AnalysisLayout
+                dispatchLayout={mockDispatchLayout}
+            />
+        );
+        expect(wrapper.exists(<form ref='analysisForm' />)).toBe(true);
     });
 
     it('should render data-new route', () => {
