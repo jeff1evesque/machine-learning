@@ -14,7 +14,7 @@ describe('Login Component', () => {
     const mockDispatchLayout = jest.fn();
     const mockDispatchSpinner = jest.fn();
 
-    it('should render without throwing an error', () => {
+    it('loginForm should exist', () => {
         const wrapper = shallow(
             <LoginForm
                 dispatchLayout={mockDispatchLayout}
@@ -24,7 +24,7 @@ describe('Login Component', () => {
         expect(wrapper.exists(<form ref='loginForm' />)).toBe(true);
     });
 
-    it('should render without throwing an error', () => {
+    it('user[login] field should exist', () => {
         const wrapper = shallow(
             <LoginForm
                 dispatchLayout={mockDispatchLayout}
@@ -34,7 +34,7 @@ describe('Login Component', () => {
         expect(wrapper.find('[name="user[login]"]').length).toEqual(1);
     });
 
-    it('should render without throwing an error', () => {
+    it('user[password] field should exist', () => {
         const wrapper = shallow(
             <LoginForm
                 dispatchLayout={mockDispatchLayout}
@@ -44,7 +44,7 @@ describe('Login Component', () => {
         expect(wrapper.find('[name="user[password]"]').length).toEqual(1);
     });
 
-    it('should render without throwing an error', () => {
+    it('form submit button should exist', () => {
         const wrapper = shallow(
             <LoginForm
                 dispatchLayout={mockDispatchLayout}

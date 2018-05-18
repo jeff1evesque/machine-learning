@@ -13,7 +13,7 @@ Enzyme.configure({ adapter: new Adapter() });
 describe('Register Component', () => {
     const mockDispatchLayout = jest.fn();
 
-    it('should render without throwing an error', () => {
+    it('registerForm should exist', () => {
         const wrapper = shallow(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
@@ -22,7 +22,7 @@ describe('Register Component', () => {
         expect(wrapper.exists(<form ref='registerForm' />)).toBe(true);
     });
 
-    it('should render without throwing an error', () => {
+    it('user[login] field should exist', () => {
         const wrapper = shallow(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
@@ -31,7 +31,7 @@ describe('Register Component', () => {
         expect(wrapper.find('[name="user[login]"]').length).toEqual(1);
     });
 
-    it('should render without throwing an error', () => {
+    it('[name="user[email]"] field should exist', () => {
         const wrapper = shallow(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
@@ -40,7 +40,7 @@ describe('Register Component', () => {
         expect(wrapper.find('[name="user[email]"]').length).toEqual(1);
     });
 
-    it('should render without throwing an error', () => {
+    it('[name="user[password]"] field should exist', () => {
         const wrapper = shallow(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
@@ -49,7 +49,7 @@ describe('Register Component', () => {
         expect(wrapper.find('[name="user[password]"]').length).toEqual(1);
     });
 
-    it('should render without throwing an error', () => {
+    it('submit buttom should exist', () => {
         const wrapper = shallow(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}

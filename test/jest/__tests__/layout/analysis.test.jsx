@@ -32,7 +32,7 @@ describe('AnalysisLayout Component', () => {
         combineReducers({user, page, data, layout}),
     );
 
-    it('should render without throwing an error', () => {
+    it('analysisForm should exist', () => {
         const wrapper = shallow(
             <AnalysisLayout
                 dispatchLayout={mockDispatchLayout}
@@ -41,7 +41,7 @@ describe('AnalysisLayout Component', () => {
         expect(wrapper.exists(<form ref='analysisForm' />)).toBe(true);
     });
 
-    it('should render data-new route', () => {
+    it('url should render DataNewState component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/data-new' ]}>
@@ -52,7 +52,7 @@ describe('AnalysisLayout Component', () => {
         expect(wrapper.find(DataNewState)).toHaveLength(1);
     });
 
-    it('should render data-append route', () => {
+    it('url should render DataAppendState component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/data-append' ]}>
@@ -63,7 +63,7 @@ describe('AnalysisLayout Component', () => {
         expect(wrapper.find(DataAppendState)).toHaveLength(1);
     });
 
-    it('should render model-generate route', () => {
+    it('url should render ModelGenerateState component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/model-generate' ]}>
@@ -74,7 +74,7 @@ describe('AnalysisLayout Component', () => {
         expect(wrapper.find(ModelGenerateState)).toHaveLength(1);
     });
 
-    it('should render model-predict route', () => {
+    it('url should render ModelPredictState component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/model-predict' ]}>
@@ -85,7 +85,7 @@ describe('AnalysisLayout Component', () => {
         expect(wrapper.find(ModelPredictState)).toHaveLength(1);
     });
 
-    it('should render current-result route', () => {
+    it('url should render CurrentResultState component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/current-result' ]}>
@@ -96,7 +96,7 @@ describe('AnalysisLayout Component', () => {
         expect(wrapper.find(CurrentResultState)).toHaveLength(1);
     });
 
-    it('should render results route', () => {
+    it('url should render ResultsDisplayState component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/results' ]}>
