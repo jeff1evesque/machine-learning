@@ -14,52 +14,47 @@ describe('Register Component', () => {
     const mockDispatchLayout = jest.fn();
 
     it('should render without throwing an error', () => {
-        expect(
-            shallow(
-                <RegisterForm
-                    dispatchLayout={mockDispatchLayout}
-                />
-            ).exists(<form ref='registerForm' />)
-        ).toBe(true);
+        const wrapper = shallow(
+            <RegisterForm
+                dispatchLayout={mockDispatchLayout}
+            />
+        );
+        expect(wrapper.exists(<form ref='registerForm' />)).toBe(true);
     });
 
     it('should render without throwing an error', () => {
-        expect(
-            shallow(
-                <RegisterForm
-                    dispatchLayout={mockDispatchLayout}
-                />
-            ).find('[name="user[login]"]').length
-        ).toEqual(1);
+        const wrapper = shallow(
+            <RegisterForm
+                dispatchLayout={mockDispatchLayout}
+            />
+        );
+        expect(wrapper.find('[name="user[login]"]').length).toEqual(1);
     });
 
     it('should render without throwing an error', () => {
-        expect(
-            shallow(
-                <RegisterForm
-                    dispatchLayout={mockDispatchLayout}
-                />
-            ).find('[name="user[email]"]').length
-        ).toEqual(1);
+        const wrapper = shallow(
+            <RegisterForm
+                dispatchLayout={mockDispatchLayout}
+            />
+        );
+        expect(wrapper.find('[name="user[email]"]').length).toEqual(1);
     });
 
     it('should render without throwing an error', () => {
-        expect(
-            shallow(
-                <RegisterForm
-                    dispatchLayout={mockDispatchLayout}
-                />
-            ).find('[name="user[password]"]').length
-        ).toEqual(1);
+        const wrapper = shallow(
+            <RegisterForm
+                dispatchLayout={mockDispatchLayout}
+            />
+        );
+        expect(wrapper.find('[name="user[password]"]').length).toEqual(1);
     });
 
     it('should render without throwing an error', () => {
-        expect(
-            shallow(
-                <RegisterForm
-                    dispatchLayout={mockDispatchLayout}
-                />
-            ).find('[type="submit"]').length
-        ).toEqual(1);
+        const wrapper = shallow(
+            <RegisterForm
+                dispatchLayout={mockDispatchLayout}
+            />
+        );
+        expect(wrapper.find('[type="submit"]').length).toEqual(1);
     });
 });
