@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import { Route } from 'react-router-dom';
+import { MemoryRouter } from 'react-router';
 import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
