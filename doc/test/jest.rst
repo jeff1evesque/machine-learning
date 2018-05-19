@@ -3,10 +3,15 @@ Unit Test: Jest
 ===============
 
 Jest is used to perform unit testing against our reactjs frontend code. Specifically,
-our `package.json`, defines a corresponding `script`, to execute the set of unit tests:
+our `package.json`, defines a corresponding `script`, which can execute a set of unit
+tests. This can easiliest be done from the `browserify` container, provided by the
+rancher |development build|_:
 
 .. code:: bash
 
+    root@trusty64:/vagrant# docker build -f dockerfile/browserify.dockerfile -t jeff1evesque/ml-browserify:0.7 .
+    root@trusty64:/vagrant# docker run --hostname browserify --name browserify -d jeff1evesque/ml-browserify:0.7
+    root@trusty64:/vagrant# docker exec -it browserify /bin/bash
     root@browserify:/var/machine-learning/src/jsx# npm run test
 
     > reactjs@1.0.0 test /var/machine-learning/src/jsx
@@ -150,3 +155,5 @@ containing the `package.json`, within the `browserify` docker container.
 This frontend testing can be executed manually, as indicated above. However, it is also
 implemented within our travis ci. Therefore, each pull request, will verify the integrity
 of the reactjs frontend code.
+
+.. _development build: ../installation/rancher
