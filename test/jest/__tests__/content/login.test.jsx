@@ -18,7 +18,7 @@ describe('Login Component', () => {
         const wrapper = shallow(
             <LoginForm
                 dispatchLayout={mockDispatchLayout}
-                 dispatchSpinner={mockDispatchSpinner}
+                dispatchSpinner={mockDispatchSpinner}
             />
         );
         expect(wrapper.exists(<form ref='loginForm' />)).toBe(true);
