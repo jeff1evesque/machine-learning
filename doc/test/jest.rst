@@ -14,13 +14,13 @@ our `package.json`, defines a corresponding `script`, to execute the set of unit
 
      PASS  __tests__/layout/analysis.test.jsx (11.716s)
       AnalysisLayout Component
-        ✓ should render without throwing an error (19ms)
-        ✓ should render data-new route (113ms)
-        ✓ should render data-append route (72ms)
-        ✓ should render model-generate route (25ms)
-        ✓ should render model-predict route (7ms)
-        ✓ should render current-result route (16ms)
-        ✓ should render results route (11ms)
+        ✓ analysisForm should exist (19ms)
+        ✓ url should render DataNewState component (113ms)
+        ✓ url should render DataAppendState component (72ms)
+        ✓ url should render ModelGenerateState component (25ms)
+        ✓ url should render ModelPredictState component (7ms)
+        ✓ url should render CurrentResultState component (16ms)
+        ✓ url should render ResultsDisplayState component (11ms)
 
      PASS  __tests__/layout/page.test.jsx
       PageLayout Component
@@ -32,18 +32,18 @@ our `package.json`, defines a corresponding `script`, to execute the set of unit
 
      PASS  __tests__/content/register.test.jsx
       Register Component
-        ✓ should render without throwing an error (4ms)
-        ✓ should render without throwing an error (8ms)
-        ✓ should render without throwing an error (2ms)
-        ✓ should render without throwing an error (2ms)
-        ✓ should render without throwing an error (2ms)
+        ✓ registerForm should exist (4ms)
+        ✓ user[login] field should exist (8ms)
+        ✓ [name="user[email]"] field should exist (2ms)
+        ✓ [name="user[password]"] field should exist (2ms)
+        ✓ submit buttom should exist (2ms)
 
      PASS  __tests__/content/login.test.jsx
       Login Component
-        ✓ should render without throwing an error (3ms)
-        ✓ should render without throwing an error (3ms)
-        ✓ should render without throwing an error (2ms)
-        ✓ should render without throwing an error (3ms)
+        ✓ loginForm should exist (3ms)
+        ✓ user[login] field should exist (3ms)
+        ✓ user[password] field should exist (2ms)
+        ✓ form submit button should exist (3ms)
 
     --------------------------|----------|----------|----------|----------|-------------------|
     File                      |  % Stmts | % Branch |  % Funcs |  % Lines | Uncovered Line #s |
