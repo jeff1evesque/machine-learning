@@ -150,7 +150,7 @@ if docker -v >/dev/null 2>&1; then
     fi
 
     ## legacy windows uses docker toolbox, which requires 'default' container
-    if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
+    if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -le 10 ]; then
         echo ''
         echo 'Windows docker implementation, requires DockerToolbox, which'
         echo "creates a 'default' container to manage docker. To proceed,"
@@ -302,7 +302,7 @@ if docker -v >/dev/null 2>&1; then
         ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372060078
         ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372061391
         ##
-        if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
+        if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -le 10 ]; then
             docker-machine \
                 create \
                 -d virtualbox \
