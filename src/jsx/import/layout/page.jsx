@@ -11,6 +11,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
+import MainRoute from '../route/main-route.jsx';
 import Spinner from '../general/spinner.jsx';
 import MainMenu from '../route/main-route.jsx';
 import UserMenuState from '../redux/container/user-menu.jsx';
