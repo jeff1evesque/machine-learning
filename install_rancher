@@ -13,6 +13,7 @@ RANCHER_PORT='8080'
 
 ## system configuration: initialize for windows case
 PYTHON_VERSION_FULL='3.6.4'
+WINDOWS_VERSION='10'
 
 ## stack configurations
 RANCHER_STACK='MLStack'
@@ -74,7 +75,7 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
-    WINDOWS_VERSION=$(
+    WINDOWS_CURRENT_VERSION=$(
         powershell.exe \
             -NoProfile -InputFormat None -ExecutionPolicy Bypass \
             -Command "((
@@ -150,7 +151,7 @@ if docker -v >/dev/null 2>&1; then
     fi
 
     ## legacy windows uses docker toolbox, which requires 'default' container
-    if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
+    if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_CURRENT_VERSION" -le "$WINDOWS_VERSION" ]; then
         echo ''
         echo 'Windows docker implementation, requires DockerToolbox, which'
         echo "creates a 'default' container to manage docker. To proceed,"
@@ -302,7 +303,7 @@ if docker -v >/dev/null 2>&1; then
         ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372060078
         ##     - https://github.com/jeff1evesque/machine-learning/issues/2935#issuecomment-372061391
         ##
-        if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_VERSION" -lt 10 ]; then
+        if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_CURRENT_VERSION" -le "$WINDOWS_VERSION" ]; then
             docker-machine \
                 create \
                 -d virtualbox \
