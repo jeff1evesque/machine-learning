@@ -5,7 +5,7 @@ Unit Test: Jest
 Jest is used to perform unit testing against our reactjs frontend code. Specifically,
 our `package.json`, defines a corresponding `script`, which can execute a set of unit
 tests. This can easiliest be done from the `browserify` container, provided by the
-rancher |development build|_:
+rancher `development build`_:
 
 .. code:: bash
 
