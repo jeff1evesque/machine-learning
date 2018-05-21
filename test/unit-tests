@@ -73,6 +73,10 @@ if [ "$BUILD_SPEED" = 'fast' ]; then
         --net=app_nw\
         -d "jeff1evesque/ml-mariadb:${CONTAINER_VERSION}" &&
     sudo docker run\
+        --name browserify\
+        --net=app_nw\
+        -it "jeff1evesque/ml-browserify:${CONTAINER_VERSION}" npm run test | sudo tee jest.log &&
+    sudo docker run\
         --name webserver\
         --net=app_nw\
         -v "${PROJECT_ROOT}/app.py:/var/machine-learning/app.py"\
@@ -90,8 +94,9 @@ else
     ## build docker container(s)
     sudo docker build -f dockerfile/redis.dockerfile -t ml-redis .
     sudo docker build -f dockerfile/mongodb.dockerfile -t ml-mongodb .
-    sudo docker build -f dockerfile/webserver.dockerfile -t ml-webserver .
     sudo docker build -f dockerfile/mariadb.dockerfile -t ml-mariadb .
+    sudo docker build -f dockerfile/browserify.dockerfile -t ml-browserify .
+    sudo docker build -f dockerfile/webserver.dockerfile -t ml-webserver .
 
     ## run unit test(s)
     ##
@@ -103,6 +108,10 @@ else
     sudo docker run --name redis --net=app_nw -d ml-redis &&
     sudo docker run --name mongodb --net=app_nw -d ml-mongodb &&
     sudo docker run --name mariadb --net=app_nw -d ml-mariadb &&
+    sudo docker run\
+        --name browserify\
+        --net=app_nw\
+        -it ml-browserify npm run test | sudo tee jest.log &&
     sudo docker run\
         --name webserver\
         --net=app_nw\
@@ -118,9 +127,16 @@ else
 fi
 
 ## check unit test results
-ERRORS=$(grep '= FAILURES =\|= ERRORS =\|= no tests ran in 0.00 seconds =' pytest.log)
-if [ -n "$ERRORS" ]; then
-    echo 'Error: unit test exited.'
+PYTEST_ERRORS=$(grep '= FAILURES =\|= ERRORS =\|= no tests ran in 0.00 seconds =' pytest.log)
+JEST_ERRORS=$(grep 'TypeError' JEST.log)
+
+if [ -n "$PYTEST_ERRORS" ]; then
+    echo 'Error: pytest failed.'
+    exit 1
+fi
+
+if [ -n "$JEST_ERRORS" ]; then
+    echo 'Error: jest failed.'
     exit 1
 fi
 
