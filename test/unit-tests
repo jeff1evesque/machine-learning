@@ -75,7 +75,7 @@ if [ "$BUILD_SPEED" = 'fast' ]; then
     sudo docker run\
         --name browserify\
         --net=app_nw\
-        -it "jeff1evesque/ml-browserify:${CONTAINER_VERSION}" npm run test | sudo tee jest.log &&
+        -it "jeff1evesque/ml-browserify:${CONTAINER_VERSION}" npm run test:coveralls &&
     sudo docker run\
         --name webserver\
         --net=app_nw\
@@ -111,7 +111,7 @@ else
     sudo docker run\
         --name browserify\
         --net=app_nw\
-        -it ml-browserify npm run test | sudo tee jest.log &&
+        -it ml-browserify npm run test:coveralls &&
     sudo docker run\
         --name webserver\
         --net=app_nw\

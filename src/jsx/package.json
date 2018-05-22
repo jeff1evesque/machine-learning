@@ -7,7 +7,8 @@
     "build:browserify": "browserify -t [ babelify --presets env,stage-2,react ] content.jsx > ../../interface/static/js/content.js",
     "prebuild:dos2unix": "find ../../src/jsx -type f -print0 | xargs -0 dos2unix",
     "watch:jsx": "onchange '../../src/jsx/**/*.jsx' '../../src/jsx/**/*.js' -- npm run build:browserify",
-    "test": "NODE_ENV=test jest --config jest.config.js"
+    "test": "NODE_ENV=test jest --config jest.config.js",
+    "test:coveralls": "NODE_ENV=test jest --config jest.config.js --coverage --coverageReporters=text-lcov | coveralls"
   },
   "author": "Jeffrey Levesque",
   "license": "BSD",
@@ -41,6 +42,7 @@
     "jest-cli": "^22.4.3",
     "enzyme": "^3.3.0",
     "enzyme-adapter-react-16": "1.1.1",
-    "mock-local-storage": "^1.0.5"
+    "mock-local-storage": "^1.0.5",
+    "coveralls": "^3.0.1"
   }
 }
