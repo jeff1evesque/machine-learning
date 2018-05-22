@@ -2,6 +2,19 @@ language: python
 dist: trusty
 sudo: required
 
+## environment variables
+env:
+  - COVERALLS_PARALLEL=true
+
+##
+## implement coveralls.io webhook
+##
+##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-390699100
+##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-391030777
+##
+notifications:
+  webhooks: https://coveralls.io/webhook?repo_token=COVERALLS_REPO_TOKEN
+
 ## configurations
 before_install:
   - chmod u+x test/linter
@@ -17,6 +30,7 @@ script:
   - ./test/linter run; LINT_EXIT=$?
   - ./test/unit-tests --norecycle --verbose; TEST_EXIT=$?
 
+##
 ## results: the following commands are run after linting, and tests have completed.
 ##
 ## Note: more information regarding the coverage-coverall implementation:
