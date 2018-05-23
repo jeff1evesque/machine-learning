@@ -13,7 +13,7 @@ env:
 ##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-391030777
 ##
 notifications:
-  webhooks: https://coveralls.io/webhook?repo_token=COVERALLS_REPO_TOKEN
+  webhooks: https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
 
 ## configurations
 before_install:
@@ -42,4 +42,4 @@ after_success:
   - coveralls
   - if [ "$LINT_EXIT" -gt 0 ] && [ "$TEST_EXIT" -gt 0 ]; then echo "Lint ($LINT_EXIT) and Unit Tests failed" && exit 1; fi
   - if [ "$LINT_EXIT" -gt 0 ]; then echo "Lint Failed ($LINT_EXIT)" && exit 1; fi
-  - if [ "$TEST_EXIT" -gt 0 ]; then echo 'Unit Tests failed' && exit 1; fi
+  - if [ "$TEST_EXIT" -gt 0 ]; then echo 'Unit Tests Failed' && exit 1; fi
