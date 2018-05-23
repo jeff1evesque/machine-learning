@@ -2,7 +2,11 @@ language: python
 dist: trusty
 sudo: required
 
+##
 ## environment variables
+##
+## @COVERALLS_PARALLEL, update coveralls only when branch merged
+##
 env:
   - COVERALLS_PARALLEL=true
 
