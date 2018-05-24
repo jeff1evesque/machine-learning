@@ -40,13 +40,13 @@ install:
 ## lint and test
 script:
   - if [ "$PARALLEL" = 'lint' ]; then
-        ./test/linter run; LINT_EXIT=$?;
+      ./test/linter run; LINT_EXIT=$?;
     fi
   - if [ "$PARALLEL" = 'frontend' ]; then
-        ./test/frontend; LINT_EXIT=$?;
+      ./test/frontend; LINT_EXIT=$?;
     fi
   - if [ "$PARALLEL" = 'backend' ]; then
-        ./test/backend --norecycle --verbose; TEST_EXIT=$?;
+      ./test/backend --norecycle --verbose; TEST_EXIT=$?;
     fi
 
 ##
@@ -57,11 +57,12 @@ script:
 ##       https://github.com/pytest-dev/pytest-cov/issues/146
 ##
 after_success:
-  - coverage combine
-  - coveralls
   - if [ "$LINT_EXIT" -gt 0 ]; then
        echo "Lint Failed ($LINT_EXIT)" && exit 1;
     fi
   - if [ "$TEST_EXIT" -gt 0 ]; then
        echo 'Unit Tests Failed' && exit 1;
+    fi
+  - if [ "$PARALLEL" = 'backend' ]; then
+      coverage combine && coveralls
     fi
