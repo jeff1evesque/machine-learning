@@ -49,11 +49,9 @@ script:
 after_success:
   - coverage combine
   - coveralls
-  - if [ -z ${var+LINT_EXIT} ] ||
-       [ "$LINT_EXIT" -gt 0 ]; then
-           echo "Lint Failed ($LINT_EXIT)" && exit 1;
+  - if [ -z ${var+LINT_EXIT} ] || [ "$LINT_EXIT" -gt 0 ]; then
+       echo "Lint Failed ($LINT_EXIT)" && exit 1;
     fi
-  - if [ -z ${var+TEST_EXIT} ] ||
-       [ "$TEST_EXIT" -gt 0 ]; then
-           echo 'Unit Tests Failed' && exit 1;
+  - if [ -z ${var+TEST_EXIT} ] || [ "$TEST_EXIT" -gt 0 ]; then
+       echo 'Unit Tests Failed' && exit 1;
     fi
