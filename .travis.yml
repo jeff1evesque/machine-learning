@@ -36,7 +36,7 @@ install:
 ## lint and test
 script:
   - if [ "$PARALLEL" = 'lint' ]; then ./test/linter run; LINT_EXIT=$?; fi
-  - if [ "$PARALLEL" = 'frontend' ]; then ./test/frontend run; LINT_EXIT=$?; fi
+  - if [ "$PARALLEL" = 'frontend' ]; then ./test/frontend; LINT_EXIT=$?; fi
   - if [ "$PARALLEL" = 'backend' ]; then ./test/backend --norecycle --verbose; TEST_EXIT=$?; fi
 
 ##
