@@ -3,7 +3,6 @@
 ## local variables
 DOCKER_VERSION='18.03.0~ce-0~ubuntu'
 CONTAINER_VERSION='0.7'
-PROJECT_ROOT=$(pwd)
 
 ## local variables: reusable unit tests
 if [ "$1" = '--recycle' ]; then
