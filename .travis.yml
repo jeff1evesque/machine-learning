@@ -9,10 +9,14 @@ language: python
 ## @COVERALLS_PARALLEL, update coveralls only when branch merged
 ##
 env:
-  - PARALLEL=lint
-  - PARALLEL=frontend
-  - PARALLEL=backend
-  - COVERALLS_PARALLEL=true
+  global:
+    - COVERALLS_PARALLEL=true
+    - LINT_EXIT=0
+    - TEST_EXIT=0
+  matrix:
+    - PARALLEL=lint
+    - PARALLEL=frontend
+    - PARALLEL=backend
 
 ##
 ## implement coveralls.io webhook
@@ -35,9 +39,15 @@ install:
 
 ## lint and test
 script:
-  - if [ "$PARALLEL" = 'lint' ]; then ./test/linter run; LINT_EXIT=$?; fi
-  - if [ "$PARALLEL" = 'frontend' ]; then ./test/frontend; LINT_EXIT=$?; fi
-  - if [ "$PARALLEL" = 'backend' ]; then ./test/backend --norecycle --verbose; TEST_EXIT=$?; fi
+  - if [ "$PARALLEL" = 'lint' ]; then
+        ./test/linter run; LINT_EXIT=$?;
+    fi
+  - if [ "$PARALLEL" = 'frontend' ]; then
+        ./test/frontend; LINT_EXIT=$?;
+    fi
+  - if [ "$PARALLEL" = 'backend' ]; then
+        ./test/backend --norecycle --verbose; TEST_EXIT=$?;
+    fi
 
 ##
 ## results: the following commands are run after linting, and tests have completed.
@@ -49,9 +59,9 @@ script:
 after_success:
   - coverage combine
   - coveralls
-  - if [ -z ${var+LINT_EXIT} ] || [ "$LINT_EXIT" -gt 0 ]; then
+  - if [ "$LINT_EXIT" -gt 0 ]; then
        echo "Lint Failed ($LINT_EXIT)" && exit 1;
     fi
-  - if [ -z ${var+TEST_EXIT} ] || [ "$TEST_EXIT" -gt 0 ]; then
+  - if [ "$TEST_EXIT" -gt 0 ]; then
        echo 'Unit Tests Failed' && exit 1;
     fi
