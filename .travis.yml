@@ -30,6 +30,7 @@ notifications:
 ## configurations
 before_install:
   - chmod u+x test/linter
+  - chmod u+x test/frontend
   - chmod u+x test/backend
 
 ## install packages
