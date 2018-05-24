@@ -119,18 +119,11 @@ fi
 
 ## check unit test results
 PYTEST_ERRORS=$(grep '= FAILURES =\|= ERRORS =\|= no tests ran in 0.00 seconds =' pytest.log)
-JEST_ERRORS=$(grep 'TypeError' JEST.log)
 
 if [ -n "$PYTEST_ERRORS" ]; then
     echo 'Error: pytest failed.'
     exit 1
 fi
-
-if [ -n "$JEST_ERRORS" ]; then
-    echo 'Error: jest failed.'
-    exit 1
-fi
-
 
 ## acquire coverage results
 ##

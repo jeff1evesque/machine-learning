@@ -3,7 +3,7 @@
 ##
 ## @webserver_port, must match corresponding (web) gunicorn webserver.
 ##
-## Note: the docker-compose.yml, and the 'unit-tests' defines the hostname
+## Note: the docker-compose.yml, and the 'backend' defines the hostname
 ##       for the corresponding implementation.
 ##
 reverse_proxy:

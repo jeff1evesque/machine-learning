@@ -43,7 +43,7 @@ services:
         - PREPATH/hiera:/var/machine-learning/hiera
         - PREPATH/brain:/var/machine-learning/brain
         - PREPATH/test:/var/machine-learning/test
-        - PREPATH/test/unit-tests:/var/machine-learning/test/unit-tests
+        - PREPATH/test/backend:/var/machine-learning/test/backend
         - PREPATH/test/live_server:/var/machine-learning/test/live_server
         - PREPATH/app.py:/var/machine-learning/app.py
         - PREPATH/factory.py:/var/machine-learning/factory.py

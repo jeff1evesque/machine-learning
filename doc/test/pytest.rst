@@ -9,7 +9,7 @@ is submitted through a `pull request <https://github.com/jeff1evesque/machine-le
 Essentially, a series of docker containers, connected under a common `docker network <https://docs.docker.com/engine/userguide/networking/>`_,
 are created by the `travis ci <https://travis-ci.org/jeff1evesque/machine-learning>`_:
 
-- |unit-tests#L47-L50|_
+- |backend#L47-L50|_
 - |default.dockerfile|_
 - |frontend.dockerfile|_
 - |mariadb.dockerfile|_
@@ -32,12 +32,12 @@ As well as the following authentication cases:
 - user logout
 - password validation
 
-However, both the automated, and manual unit tests, implement the same |unit-tests|_
+However, both the automated, and manual unit tests, implement the same |backend|_
 bash script. Therefore, the manual unit tests can be implemented as follows:
 
 .. code:: bash
 
-    vagrant@trusty64:/vagrant/test$ ./unit-tests
+    vagrant@trusty64:/vagrant/test$ ./backend
     ...
     ============================= test session starts ==============================
     platform linux2 -- Python 2.7.6, pytest-3.0.7, py-1.4.33, pluggy-0.4.0
@@ -150,11 +150,11 @@ sets of unit tests will conditionally run, upon successful execution of dependen
 
 It is important to understand that building the corresponding docker containers
 needed for the unit tests, is resource intensive, also with respect to the harddisk.
-Therefore, the |unit-tests|_ will `clean-up <https://github.com/jeff1evesque/machine-learning/blob/d3ecbd53299d082ceffe77d28875743a923fec1b/test/unit-tests#L75-L89>`_
+Therefore, the |backend|_ will `clean-up <https://github.com/jeff1evesque/machine-learning/blob/d3ecbd53299d082ceffe77d28875743a923fec1b/test/backend#L75-L89>`_
 after it's execution. Additionally, given that the vagrant development environment,
 has not exceeded harddisk limitations, all executions should have necessary space by
 default, from an initial ``vagrant up xxx``. For example, during the execution of the
-`unit-tests` (before clean-up), the harddisk partitions should be as follows:
+`backend` (before clean-up), the harddisk partitions should be as follows:
 
 .. code:: bash
 
@@ -173,7 +173,7 @@ default, from an initial ``vagrant up xxx``. For example, during the execution o
     tmp_vagrant-puppet_modules-044f8ea6fe024da4abbd7bbb8407a17e    466G  145G  322G  31% /tmp/vagrant-puppet/modules-044f8ea6fe024da4abbd7bbb8407a17e
     tmp_vagrant-puppet_manifests-3def0df79d1c452de6a52de4d163c7cc  466G  145G  322G  31% /tmp/vagrant-puppet/manifests-3def0df79d1c452de6a52de4d163c7cc
 
-After the |unit-tests|_ successfully executes, the harddisk should be reduced,
+After the |backend|_ successfully executes, the harddisk should be reduced,
 as a part of it's intrinsic clean-up:
 
 .. code:: bash
@@ -202,7 +202,7 @@ to build this application:
 - network speed
 
 Then, the unit tests should be re-runnable, meaning multiple successive executions
-of the |unit-tests|_ bash script, should run without a problem. More information
+of the |backend|_ bash script, should run without a problem. More information
 regarding `hardware architecture <../programmatic-interface/hardware/architecture>`_,
 and resources can be reviewed to determine the best combination for a given situation.
 
@@ -214,8 +214,8 @@ via |.travis.yml|_
 
 .. |.travis.yml| replace:: ``.travis.yml``
 .. _.travis.yml: https://github.com/jeff1evesque/machine-learning/blob/master/.travis.yml
-.. |unit-tests#L47-L50| replace:: ``unit-tests#L47-L50``
-.. _unit-tests#L47-L50: https://github.com/jeff1evesque/machine-learning/blob/d3ecbd53299d082ceffe77d28875743a923fec1b/test/unit-tests#L47-L50
+.. |backend#L47-L50| replace:: ``backend#L47-L50``
+.. _backend#L47-L50: https://github.com/jeff1evesque/machine-learning/blob/d3ecbd53299d082ceffe77d28875743a923fec1b/test/backend#L47-L50
 .. |default.dockerfile| replace:: ``default.dockerfile``
 .. _default.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/default.dockerfile
 .. |mariadb.dockerfile| replace:: ``mariadb.dockerfile``
@@ -228,5 +228,5 @@ via |.travis.yml|_
 .. _webserver.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/webserver.dockerfile
 .. |frontend.dockerfile| replace:: ``frontend.dockerfile``
 .. _frontend.dockerfile: https://github.com/jeff1evesque/machine-learning/blob/master/frontend.dockerfile
-.. |unit-tests| replace:: ``unit-tests``
-.. _unit-tests: https://github.com/jeff1evesque/machine-learning/blob/master/test/unit-tests
+.. |backend| replace:: ``backend``
+.. _backend: https://github.com/jeff1evesque/machine-learning/blob/master/test/backend

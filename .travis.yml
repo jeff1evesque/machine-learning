@@ -1,5 +1,6 @@
 dist: trusty
 sudo: required
+language: python
 
 ##
 ## implement coveralls.io webhook
@@ -10,48 +11,44 @@ sudo: required
 notifications:
   webhooks: https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
 
-matrix:
-  include:
-    - node_js: 8
-      language: node_js
-      script: jest --coverage && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage
+##
+## environment variables
+##
+## @PARALLEL, allow various tests to be run in parallel
+## @COVERALLS_PARALLEL, update coveralls only when branch merged
+##
+env:
+  - PARALLEL=lint
+  - PARALLEL=frontend
+  - PARALLEL=backend
+  - COVERALLS_PARALLEL=true
 
-    - python: 3.4
-      language: python
+## configurations
+before_install:
+  - chmod u+x test/linter
+  - chmod u+x test/backend
 
-      ##
-      ## environment variables
-      ##
-      ## @COVERALLS_PARALLEL, update coveralls only when branch merged
-      ##
-      env:
-        - COVERALLS_PARALLEL=true
+## install packages
+install:
+  - pip install python-coveralls==2.9.0
+  - ./test/linter install
 
-      ## configurations
-      before_install:
-      - chmod u+x test/linter
-      - chmod u+x test/unit-tests
+## lint and test
+script:
+  - if [ "$PARALLEL" = 'lint' ]; then ./test/linter run; LINT_EXIT=$?; fi
+  - if [ "$PARALLEL" = 'frontend' ]; then ./test/frontend run; LINT_EXIT=$?; fi
+  - if [ "$PARALLEL" = 'backend' ]; then ./test/backend --norecycle --verbose; TEST_EXIT=$?; fi
 
-      ## install packages
-      install:
-      - pip install python-coveralls==2.9.0
-      - ./test/linter install
-
-      ## lint and test
-      script:
-      - ./test/linter run; LINT_EXIT=$?
-      - ./test/unit-tests --norecycle --verbose; TEST_EXIT=$?
-
-      ##
-      ## results: the following commands are run after linting, and tests have completed.
-      ##
-      ## Note: more information regarding the coverage-coverall implementation:
-      ##
-      ##       https://github.com/pytest-dev/pytest-cov/issues/146
-      ##
-      after_success:
-        - coverage combine
-        - coveralls
-        - if [ "$LINT_EXIT" -gt 0 ] && [ "$TEST_EXIT" -gt 0 ]; then echo "Lint ($LINT_EXIT) and Unit Tests failed" && exit 1; fi
-        - if [ "$LINT_EXIT" -gt 0 ]; then echo "Lint Failed ($LINT_EXIT)" && exit 1; fi
-        - if [ "$TEST_EXIT" -gt 0 ]; then echo 'Unit Tests Failed' && exit 1; fi
+##
+## results: the following commands are run after linting, and tests have completed.
+##
+## Note: more information regarding the coverage-coverall implementation:
+##
+##       https://github.com/pytest-dev/pytest-cov/issues/146
+##
+after_success:
+  - coverage combine
+  - coveralls
+  - if [ "$LINT_EXIT" -gt 0 ] && [ "$TEST_EXIT" -gt 0 ]; then echo "Lint ($LINT_EXIT) and Unit Tests failed" && exit 1; fi
+  - if [ "$LINT_EXIT" -gt 0 ]; then echo "Lint Failed ($LINT_EXIT)" && exit 1; fi
+  - if [ "$TEST_EXIT" -gt 0 ]; then echo 'Unit Tests Failed' && exit 1; fi
