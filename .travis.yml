@@ -13,6 +13,8 @@ env:
   - PARALLEL=frontend
   - PARALLEL=backend
   - COVERALLS_PARALLEL=true
+  - LINT_EXIT=0
+  - TEST_EXIT=0
 
 ##
 ## implement coveralls.io webhook
