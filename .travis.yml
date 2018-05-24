@@ -3,15 +3,6 @@ sudo: required
 language: python
 
 ##
-## implement coveralls.io webhook
-##
-##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-390699100
-##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-391030777
-##
-notifications:
-  webhooks: https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
-
-##
 ## environment variables
 ##
 ## @PARALLEL, allow various tests to be run in parallel
@@ -22,6 +13,15 @@ env:
   - PARALLEL=frontend
   - PARALLEL=backend
   - COVERALLS_PARALLEL=true
+
+##
+## implement coveralls.io webhook
+##
+##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-390699100
+##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-391030777
+##
+notifications:
+  webhooks: https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
 
 ## configurations
 before_install:
