@@ -14,9 +14,10 @@ RUN npm install
 
 ## define entrypoint script
 RUN printf '#!/bin/bash\n\n\
+args="$1"\n\n\
 npm run prebuild:dos2unix\n\
 npm run build:browserify\n\
-npm run watch:jsx\n\
+if [ -z ${args+x} ]; then npm run watch:jsx; fi\n\
 ' > $ROOT_PROJECT/src/jsx/entrypoint
 RUN chmod 710 $ROOT_PROJECT/src/jsx/entrypoint
 
