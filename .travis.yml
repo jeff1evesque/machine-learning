@@ -45,7 +45,6 @@ script:
     fi
   - if [ "$PARALLEL" = 'frontend' ]; then
       ./test/frontend; FRONTEND_EXIT=$?;
-      ./
     fi
   - if [ "$PARALLEL" = 'backend' ]; then
       ./test/backend --norecycle --verbose; BACKEND_EXIT=$?;
