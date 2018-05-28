@@ -44,10 +44,11 @@ script:
       ./test/linter run; LINT_EXIT=$?;
     fi
   - if [ "$PARALLEL" = 'frontend' ]; then
-      ./test/frontend; LINT_EXIT=$?;
+      ./test/frontend; FRONTEND_EXIT=$?;
+      ./
     fi
   - if [ "$PARALLEL" = 'backend' ]; then
-      ./test/backend --norecycle --verbose; TEST_EXIT=$?;
+      ./test/backend --norecycle --verbose; BACKEND_EXIT=$?;
     fi
 
 ##
@@ -59,10 +60,13 @@ script:
 ##
 after_success:
   - if [ "$LINT_EXIT" -gt 0 ]; then
-       echo "Lint Failed ($LINT_EXIT)" && exit 1;
+       echo "Lint failed ($LINT_EXIT)" && exit 1;
     fi
-  - if [ "$TEST_EXIT" -gt 0 ]; then
-       echo 'Unit Tests Failed' && exit 1;
+  - if [ "$FRONTEND_EXIT" -gt 0 ]; then
+       echo 'Frontent tests failed' && exit 1;
+    fi
+  - if [ "$BACKEND_EXIT" -gt 0 ]; then
+       echo 'Backend tests failed' && exit 1;
     fi
   - if [ "$PARALLEL" = 'backend' ]; then
       coverage combine && coveralls
