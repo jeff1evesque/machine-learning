@@ -14,12 +14,15 @@ RUN npm install
 
 ## define entrypoint script
 RUN printf '#!/bin/bash\n\n\
-args="$1"\n\n\
 npm run prebuild:dos2unix\n\
-npm run build:browserify\n\
-if [ -z "$args" ]; then npm run watch:jsx; fi\n\
+if [ "$1" == 'test' ]; then\n\
+  npm run test:coveralls\n\
+else\n\
+  npm run build:browserify\n\
+  npm run watch:jsx\n\
+fi\n\
 ' > $ROOT_PROJECT/src/jsx/entrypoint
 RUN chmod 710 $ROOT_PROJECT/src/jsx/entrypoint
 
 ## executed everytime container starts
-ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]
+ENTRYPOINT ["./entrypoint"]
