@@ -60,7 +60,7 @@ if [ "$BUILD_SPEED" = 'fast' ]; then
     ##
     sudo docker run\
         --name browserify\
-        -dt "jeff1evesque/ml-browserify:${CONTAINER_VERSION}" npm run test:coveralls
+        -it "jeff1evesque/ml-browserify:${CONTAINER_VERSION}" npm run test:coveralls
 
 ## build from local dockerfiles
 else
@@ -75,7 +75,7 @@ else
     ##
     sudo docker run\
         --name browserify\
-        -dt ml-browserify npm run test:coveralls
+        -it ml-browserify npm run test:coveralls
 fi
 
 ## clean up vagrant environment: harddisk space is limited
