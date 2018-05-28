@@ -75,7 +75,7 @@ else
     ##
     sudo docker run\
         --name browserify\
-        -it ml-browserify npm run test:coveralls test
+        -it ml-browserify test
 fi
 
 ## clean up vagrant environment: harddisk space is limited
