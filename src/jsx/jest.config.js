@@ -5,5 +5,5 @@ module.exports = {
     'moduleDirectories': [
         "<rootDir>/node_modules",
     ],
-    'setupTestFrameworkScriptFile': "<rootDir>/test/jest/setup.js",
+    'setupTestFrameworkScriptFile': "<rootDir>/setup.js",
 }
