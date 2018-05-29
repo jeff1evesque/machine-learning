@@ -1,7 +1,7 @@
 //
 // allow the use of 'sessionStorage' within jest + enzyme:
 //
-//     https://stackoverflow.com/a/47926947
+//     https://stackoverflow.com/a/42705765
 //     https://github.com/jeff1evesque/machine-learning/
 //         issues/3087#issuecomment-388694964
 //
