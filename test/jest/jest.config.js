@@ -3,7 +3,7 @@ module.exports = {
     'collectCoverage': true,
     'coverageDirectory': '.',
     'moduleDirectories': [
-        '../../src/jsx/node_modules'
+        'node_modules'
     ],
     'setupTestFrameworkScriptFile': '../../test/jest/setup.js',
 }
