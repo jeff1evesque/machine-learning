@@ -1,22 +1,14 @@
 dist: trusty
 sudo: required
-language: python
 
 ##
 ## environment variables
 ##
-## @PARALLEL, allow various tests to be run in parallel
 ## @COVERALLS_PARALLEL, update coveralls only when branch merged
 ##
 env:
   global:
     - COVERALLS_PARALLEL=true
-    - LINT_EXIT=0
-    - TEST_EXIT=0
-  matrix:
-    - PARALLEL=lint
-    - PARALLEL=frontend
-    - PARALLEL=backend
 
 ##
 ## implement coveralls.io webhook
@@ -27,46 +19,47 @@ env:
 notifications:
   webhooks: https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
 
-## configurations
-before_install:
-  - chmod u+x test/linter
-  - chmod u+x test/frontend
-  - chmod u+x test/backend
+matrix:
+  include:
+    ## lint sourcecode
+    - language: python
+      before_install:
+        - chmod u+x test/linter
+      install:
+        - ./test/linter install
+      script:
+        - ./test/linter run; LINT_EXIT=$?
+        - if [ "$LINT_EXIT" -gt 0 ]; then
+            echo "Lint failed ($LINT_EXIT)" && exit 1;
+          fi
 
-## install packages
-install:
-  - pip install python-coveralls==2.9.0
-  - ./test/linter install
+    ## frontend tests: implement jest + enzyme
+    - language: node_js
+      node_js: 8
+      install:
+        - npm install
+      script:
+        - npm run test:coveralls
+        - if [ "$FRONTEND_EXIT" -gt 0 ]; then
+            echo 'Frontent tests failed' && exit 1;
+          fi
 
-## lint and test
-script:
-  - if [ "$PARALLEL" = 'lint' ]; then
-      ./test/linter run; LINT_EXIT=$?;
-    fi
-  - if [ "$PARALLEL" = 'frontend' ]; then
-      ./test/frontend --norecycle --verbose; FRONTEND_EXIT=$?;
-    fi
-  - if [ "$PARALLEL" = 'backend' ]; then
-      ./test/backend --norecycle --verbose; BACKEND_EXIT=$?;
-    fi
-
-##
-## results: the following commands are run after linting, and tests have completed.
-##
-## Note: more information regarding the coverage-coverall implementation:
-##
-##       https://github.com/pytest-dev/pytest-cov/issues/146
-##
-after_success:
-  - if [ "$LINT_EXIT" -gt 0 ]; then
-       echo "Lint failed ($LINT_EXIT)" && exit 1;
-    fi
-  - if [ "$FRONTEND_EXIT" -gt 0 ]; then
-       echo 'Frontent tests failed' && exit 1;
-    fi
-  - if [ "$BACKEND_EXIT" -gt 0 ]; then
-       echo 'Backend tests failed' && exit 1;
-    fi
-  - if [ "$PARALLEL" = 'backend' ]; then
-      coverage combine && coveralls
-    fi
+    ##
+    ## backend tests: implement pytest
+    ##
+    ## Note: more information regarding the coverage-coverall implementation:
+    ##
+    ##       https://github.com/pytest-dev/pytest-cov/issues/146
+    ##
+    - language: python
+      before_install:
+        - chmod u+x test/backend
+      install:
+        - pip install python-coveralls==2.9.0
+      script:
+        - ./test/backend --norecycle --verbose; BACKEND_EXIT=$?
+      after_success:
+        - if [ "$BACKEND_EXIT" -gt 0 ]; then
+            echo 'Backend tests failed' && exit 1;
+          fi
+        - coverage combine && coveralls
