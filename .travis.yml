@@ -40,9 +40,6 @@ matrix:
         - cd "$TRAVIS_BUILD_DIR"/src/jsx && npm install
       script:
         - npm run test:coveralls
-        - if [ "$FRONTEND_EXIT" -gt 0 ]; then
-            echo 'Frontent tests failed' && exit 1;
-          fi
         - cd "$TRAVIS_BUILD_DIR"
 
     ##
