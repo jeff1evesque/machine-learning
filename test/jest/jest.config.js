@@ -5,5 +5,5 @@ module.exports = {
     'moduleDirectories': [
         '../../src/jsx/node_modules'
     ],
-    'setupTestFrameworkScriptFile': 'setup.js',
+    'setupTestFrameworkScriptFile': '../../test/jest/setup.js',
 }
