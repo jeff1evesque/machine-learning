@@ -5,5 +5,5 @@ module.exports = {
     'moduleDirectories': [
         'node_modules'
     ],
-    'setupTestFrameworkScriptFile': '../../test/jest/setup.js',
+    'setupTestFrameworkScriptFile': 'mock-local-storage',
 }
