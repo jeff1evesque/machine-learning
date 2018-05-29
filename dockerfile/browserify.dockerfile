@@ -4,9 +4,10 @@ FROM node:9
 ENV ROOT_PROJECT /var/machine-learning
 
 ## source + asset directory
-RUN mkdir -p $ROOT_PROJECT/src/jsx $ROOT_PROJECT/interface/static/js
+RUN mkdir -p $ROOT_PROJECT/src/jsx $ROOT_PROJECT/interface/static/js $ROOT_PROJECT/src/jsx/dockerfile
 COPY src/jsx test/jest/setup.js test/jest/jest.config.js $ROOT_PROJECT/src/jsx/
 COPY test/jest/__tests__ $ROOT_PROJECT/src/jsx/__tests__
+COPY dockerfile/browserify.dockerfile src/jsx/dockerfile/browserify.dockerfile
 
 ## provision with package.json
 WORKDIR $ROOT_PROJECT/src/jsx
