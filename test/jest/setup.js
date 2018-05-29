@@ -82,8 +82,8 @@
         return s;
     }
 
-    const global = require("global")
-    const window = require("global/window")
+    const global = require('global')
+    const window = require('global/window')
 
     global.localStorage = createStorage();
     global.sessionStorage = createStorage();
