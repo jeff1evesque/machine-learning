@@ -1,7 +1,7 @@
 module.exports = {
     'verbose': true,
     'collectCoverage': true,
-    'coverageDirectory': "<rootDir>/coverage",
+    'coverageDirectory': "<rootDir>",
     'moduleDirectories': [
         "<rootDir>/node_modules",
     ],
