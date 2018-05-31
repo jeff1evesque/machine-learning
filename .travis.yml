@@ -39,7 +39,7 @@ matrix:
       install:
         - cd "$TRAVIS_BUILD_DIR"/src/jsx && npm install
       script:
-        - npm run test:coveralls
+        - npm run test && npm run report:coveralls
         - cd "$TRAVIS_BUILD_DIR"
 
     ##
