@@ -4,10 +4,13 @@
 class webserver::params {
     $hiera                 = lookup( { 'name' => 'webserver', 'default_value' => false } )
     $run                   = true
-    $version               = '*'
-    $pyyaml_version        = '*'
-    $redis_version         = '*'
-    $pytest_cov_version    = '*'
+    $pyyaml_version        = 'installed'
+    $redis_version         = 'installed'
+    $pytest_cov_version    = 'installed'
+    $jest_cli_version      = 'installed'
+    $gunicorn_version      = 'installed'
+    $root_puppet           = '/etc/puppetlabs'
+    $platform              = 'production'
 
     if $hiera {
         $root_dir          = $hiera['root_dir']

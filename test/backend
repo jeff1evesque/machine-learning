@@ -90,8 +90,8 @@ else
     ## build docker container(s)
     sudo docker build -f dockerfile/redis.dockerfile -t ml-redis .
     sudo docker build -f dockerfile/mongodb.dockerfile -t ml-mongodb .
-    sudo docker build -f dockerfile/webserver.dockerfile -t ml-webserver .
     sudo docker build -f dockerfile/mariadb.dockerfile -t ml-mariadb .
+    sudo docker build -f dockerfile/webserver.dockerfile -t ml-webserver .
 
     ## run unit test(s)
     ##
@@ -118,12 +118,12 @@ else
 fi
 
 ## check unit test results
-ERRORS=$(grep '= FAILURES =\|= ERRORS =\|= no tests ran in 0.00 seconds =' pytest.log)
-if [ -n "$ERRORS" ]; then
-    echo 'Error: unit test exited.'
+PYTEST_ERRORS=$(grep '= FAILURES =\|= ERRORS =\|= no tests ran in 0.00 seconds =' pytest.log)
+
+if [ -n "$PYTEST_ERRORS" ]; then
+    echo 'Error: pytest failed.'
     exit 1
 fi
-
 
 ## acquire coverage results
 ##

@@ -11,14 +11,11 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { Route } from 'react-router-dom';
-import LoginLayout from './login.jsx';
-import RegisterLayout from './register.jsx';
+import MainRoute from '../route/main-route.jsx';
 import Spinner from '../general/spinner.jsx';
-import HomePageState from '../redux/container/home-page.jsx';
+import MainMenu from '../route/main-route.jsx';
 import UserMenuState from '../redux/container/user-menu.jsx';
 import HeaderMenuState from '../redux/container/header-menu.jsx';
-import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 import { BreakpointRender } from 'rearm/lib/Breakpoint';
 import { breakpoints } from '../general/breakpoints.js';
 import PropTypes from 'prop-types';
@@ -52,10 +49,10 @@ class PageLayout extends Component {
             !!this.props.user.name &&
             this.props.user.name != 'anonymous'
         ) {
-            var mainMenu = <UserMenuState />;
+            var sideBar = <UserMenuState />;
             var authStatus = 'authenticated';
         } else {
-            var mainMenu = <div><HeaderMenuState /></div>;
+            var sideBar = <div><HeaderMenuState /></div>;
             var authStatus = 'anonymous';
         }
 
@@ -63,33 +60,10 @@ class PageLayout extends Component {
             <div className={`${bpoint}-viewport container-fluid`}>
                 <div className={authStatus}>
                     <div className='menu-container'>
-                        {mainMenu}
+                        {sideBar}
                     </div>
                     <div className='content'>
-                        <Route
-                            component={HomePageState}
-                            exact
-                            path='/'
-                        />
-                        <Route
-                            component={LoginLayout}
-                            exact
-                            path='/login'
-                        />
-                        <Route
-                            component={LoginLayout}
-                            exact
-                            path='/logout'
-                        />
-                        <Route
-                            component={RegisterLayout}
-                            exact
-                            path='/register'
-                        />
-                        <Route
-                            component={AnalysisLayoutState}
-                            path='/session'
-                        />
+                        <MainRoute/>
                     </div>
                     {spinner}
                 </div>

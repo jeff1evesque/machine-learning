@@ -1,31 +1,63 @@
-language: python
 dist: trusty
 sudo: required
 
-## configurations
-before_install:
-  - chmod u+x test/linter
-  - chmod u+x test/unit-tests
-
-## install packages
-install:
-  - pip install python-coveralls==2.9.0
-  - ./test/linter install
-
-## lint and test
-script:
-  - ./test/linter run; LINT_EXIT=$?
-  - ./test/unit-tests --norecycle --verbose; TEST_EXIT=$?
-
-## results: the following commands are run after linting, and tests have completed.
 ##
-## Note: more information regarding the coverage-coverall implementation:
+## environment variables
 ##
-##       https://github.com/pytest-dev/pytest-cov/issues/146
+## @COVERALLS_PARALLEL, update coveralls only when branch merged
 ##
-after_success:
-  - coverage combine
-  - coveralls
-  - if [ "$LINT_EXIT" -gt 0 ] && [ "$TEST_EXIT" -gt 0 ]; then echo "Lint ($LINT_EXIT) and Unit Tests failed" && exit 1; fi
-  - if [ "$LINT_EXIT" -gt 0 ]; then echo "Lint Failed ($LINT_EXIT)" && exit 1; fi
-  - if [ "$TEST_EXIT" -gt 0 ]; then echo 'Unit Tests failed' && exit 1; fi
+env:
+  global:
+    - COVERALLS_PARALLEL=true
+
+##
+## implement coveralls.io webhook
+##
+##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-390699100
+##     https://github.com/lemurheavy/coveralls-public/issues/1123#issuecomment-391030777
+##
+notifications:
+  webhooks: https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN
+
+matrix:
+  include:
+    ## lint sourcecode
+    - language: python
+      before_install:
+        - chmod u+x test/linter
+      install:
+        - ./test/linter install
+      script:
+        - ./test/linter run; LINT_EXIT=$?
+        - if [ "$LINT_EXIT" -gt 0 ]; then
+            echo "Lint failed ($LINT_EXIT)" && exit 1;
+          fi
+
+    ## frontend tests: implement jest + enzyme
+    - language: node_js
+      node_js: 8
+      install:
+        - cd "$TRAVIS_BUILD_DIR"/src/jsx && npm install
+      script:
+        - npm run test && npm run report:coveralls
+        - cd "$TRAVIS_BUILD_DIR"
+
+    ##
+    ## backend tests: implement pytest
+    ##
+    ## Note: more information regarding the coverage-coverall implementation:
+    ##
+    ##       https://github.com/pytest-dev/pytest-cov/issues/146
+    ##
+    - language: python
+      before_install:
+        - chmod u+x test/backend
+      install:
+        - pip install python-coveralls==2.9.0
+      script:
+        - ./test/backend --norecycle --verbose; BACKEND_EXIT=$?
+      after_success:
+        - if [ "$BACKEND_EXIT" -gt 0 ]; then
+            echo 'Backend tests failed' && exit 1;
+          fi
+        - coverage combine && coveralls

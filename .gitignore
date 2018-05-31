@@ -1,4 +1,4 @@
-# Ignore project root (except exclamated files, and directories)
+# Ignore project root: except exclamated files, and directories
 /*
 !/interface/
 !/brain/
@@ -23,7 +23,7 @@
 !.coveragerc
 !/utility/
 
-# Ignore and don't commit the following directories
+# Ignore directories
 *.sass-cache/
 *__pycache__/
 *.pytest_cache/
@@ -34,7 +34,7 @@
 /src/node_modules/
 /puppet/environment/*/modules_contrib/
 
-# Ignore and don't commit the following files
+# Ignore files
 *.pyc
 *npm-debug.log
 /src/js/.gitignore

@@ -11,54 +11,31 @@ class webserver::install {
     $pyyaml_version     = $::webserver::pyyaml_version
     $redis_version      = $::webserver::redis_version
     $pytest_cov_version = $::webserver::pytest_cov_version
+    $jest_cli_version   = $::webserver::jest_cli_version
     $gunicorn_version   = $::webserver::version
+    $platform           = $::webserver::platform
 
-    ## pytest_cov
-    if ($pytest_cov_version and $pytest_cov_version != '*') {
+    ## development packages
+    if ($platform == 'development') {
         package { 'pytest-cov':
             ensure      => $pytest_cov_version,
             provider    => 'pip',
             require     => Class['python'],
         }
     }
-    else {
-        package { 'pytest-cov':
-            ensure      => 'installed',
-            provider    => 'pip',
-            require     => Class['python'],
-        }
-    }
 
     ## pyyaml
-    if ($pyyaml_version and $pyyaml_version != '*') {
-        package { 'pyyaml':
-            ensure      => $pyyaml_version,
-            provider    => 'pip',
-            require     => Class['python'],
-        }
-    }
-    else {
-        package { 'pyyaml':
-            ensure      => 'installed',
-            provider    => 'pip',
-            require     => Class['python'],
-        }
+    package { 'pyyaml':
+        ensure          => $pyyaml_version,
+        provider        => 'pip',
+        require         => Class['python'],
     }
 
     ## redis client
-    if ($redis_version and $redis_version != '*') {
-        package { 'redis':
-            ensure      => $redis_version,
-            provider    => 'pip',
-            require     => Class['python'],
-        }
-    }
-    else {
-        package { 'redis':
-            ensure      => 'installed',
-            provider    => 'pip',
-            require     => Class['python'],
-        }
+    package { 'redis':
+        ensure          => $redis_version,
+        provider        => 'pip',
+        require         => Class['python'],
     }
 
     ## mariadb client
@@ -72,16 +49,8 @@ class webserver::install {
     }
 
     ## install gunicorn
-    if ($gunicorn_version and $gunicorn_version != '*') {
-        package { 'gunicorn':
-            ensure      => $gunicorn_version,
-            provider    => 'pip',
-        }
-    }
-    else {
-        package { 'gunicorn':
-            ensure      => 'installed',
-            provider    => 'pip',
-        }
+    package { 'gunicorn':
+        ensure      => $gunicorn_version,
+        provider    => 'pip',
     }
 }

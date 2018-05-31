@@ -5,6 +5,7 @@ class webserver::config {
     ## local variables
     $root_dir           = $::webserver::root_dir
     $flask_log_path     = $::webserver::flask_log_path
+    $root_puppet        = $::webserver::root_puppet
 
     $directories = [
         "${root_dir}/log",

@@ -1,9 +1,9 @@
 ###
 ### nodejs.pp: install nodejs, and npm.
 ###
-class system::nodejs {
+class webserver::nodejs {
     ## local variables
-    $nodejs_version = $::system::nodejs_version
+    $nodejs_version = $::webserver::nodejs_version
 
     if $nodejs {
         class { 'nodejs':
