@@ -193,6 +193,12 @@ as a part of it's intrinsic clean-up:
     tmp_vagrant-puppet_modules-044f8ea6fe024da4abbd7bbb8407a17e    466G  145G  322G  31% /tmp/vagrant-puppet/modules-044f8ea6fe024da4abbd7bbb8407a17e
     tmp_vagrant-puppet_manifests-3def0df79d1c452de6a52de4d163c7cc  466G  145G  322G  31% /tmp/vagrant-puppet/manifests-3def0df79d1c452de6a52de4d163c7cc
 
+**Note:** flags can be supplied to the ``backend`` script, and must be in order:
+
+- ``--recycle``, remove containers after test completion
+- ``--norecycle``, can be used in lieu of ``--recycle` to allow successive flags to be implemented
+- ``--verbose``, build test containers directly from local dockerfile(s), else pull from dockerhub
+
 Therefore, it is fair to assume that if the main host has adequate resources
 to build this application:
 
