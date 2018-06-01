@@ -147,7 +147,7 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
 **Note:** flags can be supplied to the ``backend`` script, and must be in order:
 
 - ``--recycle``, remove containers after test completion
-- ``--norecycle``, can be used in lieu of ``--recycle` to allow successive flags to be implemented
+- ``--norecycle``, can be used in lieu of ``--recycle`` to allow successive flags to be implemented
 - ``--verbose``, build test containers directly from local dockerfile(s), else pull from dockerhub
 
 It is important to understand that building the corresponding docker containers
