@@ -29,7 +29,7 @@ describe('PageLayout Component', () => {
         combineReducers({user, page, data, layout}),
     );
 
-    it('should render home route', () => {
+    it('url should render HomePageState component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/' ]}>
@@ -40,7 +40,7 @@ describe('PageLayout Component', () => {
         expect(wrapper.find(HomePageState)).toHaveLength(1);
     });
 
-    it('should render login route', () => {
+    it('url should render LoginLayout component (login case)', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/login' ]}>
@@ -51,7 +51,7 @@ describe('PageLayout Component', () => {
         expect(wrapper.find(LoginLayout)).toHaveLength(1);
     });
 
-    it('should render logout route', () => {
+    it('url should render LoginLayout component (logout case)', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/logout' ]}>
@@ -62,7 +62,7 @@ describe('PageLayout Component', () => {
         expect(wrapper.find(LoginLayout)).toHaveLength(1);
     });
 
-    it('should render register route', () => {
+    it('url should render RegisterLayout component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/register' ]}>
@@ -73,7 +73,7 @@ describe('PageLayout Component', () => {
         expect(wrapper.find(RegisterLayout)).toHaveLength(1);
     });
 
-    it('should render analysis route', () => {
+    it('url should render AnalysisLayoutState component', () => {
         const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session' ]}>
