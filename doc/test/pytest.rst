@@ -144,9 +144,11 @@ bash script. Therefore, the manual unit tests can be implemented as follows:
     TOTAL                                                                            2234   1102    51%
     ========================== 21 passed in 52.19 seconds ==========================
 
-**Note:** future releases (i.e. milestone `1.0 <https://github.com/jeff1evesque/machine-learning/milestones/1.0>`_),
-will include more granular unit tests, or better logical order, such that particular
-sets of unit tests will conditionally run, upon successful execution of dependencies.
+**Note:** flags can be supplied to the ``backend`` script, and must be in order:
+
+- ``--recycle``, remove containers after test completion
+- ``--norecycle``, can be used in lieu of ``--recycle`` to allow successive flags to be implemented
+- ``--verbose``, build test containers directly from local dockerfile(s), else pull from dockerhub
 
 It is important to understand that building the corresponding docker containers
 needed for the unit tests, is resource intensive, also with respect to the harddisk.
