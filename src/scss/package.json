@@ -13,6 +13,8 @@
   "dependencies": {
     "node-sass": "^4.8.3",
     "react-rangeslider": "^2.2.0",
-    "onchange": "^3.3.0"
+    "onchange": "^3.3.0",
+    "jest-cli": "^22.4.3",
+    "sass-true": "4.0.0"
   }
 }
