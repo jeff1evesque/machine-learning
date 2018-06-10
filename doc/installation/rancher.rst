@@ -2,7 +2,7 @@
 Rancher
 =======
 
-The development ecosystem for this application, implements the |rancher|_ orchestration.
+The development ecosystem for this application, can be run via the |rancher|_ orchestration.
 This allows various respective docker containers, to be managed in a consistent platform,
 where users can properly manage respective services of this application. However, before
 proceeding, it is important to follow the docker |installation|_ guide, for the corresponding
