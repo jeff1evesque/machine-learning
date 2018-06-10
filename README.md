@@ -57,8 +57,8 @@ cd /path/to/machine-learning
 if more explicit instructions are needed.
 
 If users choose to forgo rancher, and use the `docker-compose`, then simply
-install `docker`, as well as `docker-compose`. This will allow users deploy
-the application from any terminal console:
+install `docker`, as well as `docker-compose`. This will allow the application
+to be deployed from any terminal console:
 
 ```bash
 cd /path/to/machine-learning
