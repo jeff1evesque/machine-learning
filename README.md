@@ -35,10 +35,12 @@ Fork this project, using of the following methods:
 ## Installation
 
 To proceed with the installation for this project, users will need to decide
-whether to use the rancher ecosystem, or `docker-compose`. The former will
+whether to use the rancher ecosystem, or use `docker-compose`. The former will
 likely be less reliable, since the corresponding install script, may not work
-nicely across different operating systems. In many cases this project may
-assume rancher as the primary method to deploy, run the application.
+nicely across different operating systems. Additionally, this project will
+assume rancher as the primary method to deploy, and run the application. So,
+when using the `docker-compose` alternate, keep track what the corresponding
+endpoints should be, as [discussed below](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#execution).
 
 If users choose rancher, both docker and rancher must be installed.
 Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/dependencies.html).
