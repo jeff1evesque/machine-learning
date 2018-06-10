@@ -14,8 +14,7 @@
 !factory.py
 !license.md
 !contributing.md
-!*-compose.yml
-!docker-compose.rancher.yml
+!docker-compose{.rancher}.yml
 !rancher-template.yml
 !/install_rancher
 !/puppet/
