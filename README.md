@@ -75,7 +75,7 @@ Both the web-interface, and the programmatic-api, have corresponding
  the installation of this application will dictate the endpoint. More
  specifically, if the application was installed via rancher, then the
  endpoint will take the form of `https://192.168.99.101:XXXX`. However,
- if `docker-compose up` alternate was used, then the endpoint will
+ if the `docker-compose up` alternate was used, then the endpoint will
  likely change to `https://localhost:XXXX`, or `https://127.0.0.1:XXXX`.
 
 ### Web Interface
