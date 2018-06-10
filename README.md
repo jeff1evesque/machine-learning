@@ -34,8 +34,14 @@ Fork this project, using of the following methods:
 
 ## Installation
 
-To proceed with the installation for this project, both docker and rancher must be
-installed. Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/dependencies.html).
+To proceed with the installation for this project, users will need to decide
+whether to use the rancher ecosystem, or `docker-compose`. The former will
+likely be less reliable, since the corresponding install script, may not work
+nicely across different operating systems. In many cases this project may
+assume rancher as the primary method to deploy, run the application.
+
+If users choose rancher, both docker and rancher must be installed.
+Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/dependencies.html).
 Once completed, rancher can be installed, and automatically configured, by simply
 executing a provided bash script, from the docker quickstart terminal:
 
@@ -47,11 +53,28 @@ cd /path/to/machine-learning
 **Note:** the installation, and the configuration of rancher, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/rancher.html)
 if more explicit instructions are needed.
 
+If users choose to forgo rancher, and use the `docker-compose`, then simply
+install `docker`, as well as `docker-compose`. This will allow users deploy
+the application from any terminal console:
+
+```bash
+cd /path/to/machine-learning
+docker-compose up
+```
+
+**Note:** the installation, and the configuration of `docker-compose`, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/docker-compose.html)
+if more explicit instructions are needed.
+
 ## Execution
 
 Both the web-interface, and the programmatic-api, have corresponding
  [unit tests](https://github.com/jeff1evesque/machine-learning/blob/master/doc/test/pytest.rst)
- which can be reviewed, and implemented.
+ which can be reviewed, and implemented. It is important to remember,
+ the installation of this application will dictate the endpoint. More
+ specifically, if the application was installed via rancher, then the
+ endpoint will take the form of `https://192.168.99.101:XXXX`. However,
+ if `docker-compose up` alternate was used, then the endpoint will
+ likely change to `https://localhost:XXXX`, or `https://127.0.0.1:XXXX`.
 
 ### Web Interface
 
