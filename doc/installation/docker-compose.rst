@@ -8,8 +8,8 @@ However, before proceeding, it is important to follow the |docker|_ , and
 |docker-compose|_ installation guide.
 
 Once docker-compose has installed, simply run ``docker-compose up``. This will
-allow the application to be accessible via https://localhost:8080 on the host
-machine.
+allow the web-application to be accessible on the host machine, via https://localhost:8080.
+Similarly, the programmatic-api will be accessible at https://localhost:9090.
 
 .. |docker-compose| replace:: docker-compose
 .. _docker-compose: https://docs.docker.com/compose/install/#install-compose
