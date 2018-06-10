@@ -40,7 +40,8 @@ likely be less reliable, since the corresponding install script, may not work
 nicely across different operating systems. Additionally, this project will
 assume rancher as the primary method to deploy, and run the application. So,
 when using the `docker-compose` alternate, keep track what the corresponding
-endpoints should be, as [discussed below](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#execution).
+[endpoints](https://github.com/jeff1evesque/machine-learning/blob/master/README.md#execution)
+should be.
 
 If users choose rancher, both docker and rancher must be installed.
 Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/dependencies.html).
