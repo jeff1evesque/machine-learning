@@ -52,7 +52,8 @@ with open(prepath + '/database.yaml', 'r') as stream:
 # yaml configuration: application attributes
 with open(prepath + '/application.yaml', 'r') as stream:
     settings = yaml.load(stream)
-    models = settings['application']['model_type']
+    model_types = settings['application']['model_type']
+    result_types = settings['application']['result_type']
 
 # yaml configuration: general attributes
 with open(prepath + '/common.yaml', 'r') as stream:
@@ -70,6 +71,11 @@ conn = DB.connect(
 with conn:
     # create cursor object
     cur = conn.cursor()
+
+    # ################################################################################# #
+    # LEGACY TABLES: these tables will be iteratively phased out, as corresponding      #
+    #                backend and frontend are developed.                                #
+    # ################################################################################# #
 
     # create 'tbl_user'
     sql_statement = '''\
@@ -114,7 +120,7 @@ with conn:
     sql_statement = '''\
                     INSERT INTO tbl_model_type (model) VALUES (%s);
                     '''
-    cur.executemany(sql_statement, models)
+    cur.executemany(sql_statement, model_types)
 
     # create 'tbl_prediction_results'
     sql_statement = '''\
@@ -169,3 +175,206 @@ with conn:
                     );
                     '''
     cur.execute(sql_statement)
+
+    # ################################################################################# #
+    # NEW STRUCTURE: when the above legacy tables have been completely phased out, the  #
+    #                below tables will completely define our sql implementation.        #
+    # ################################################################################# #
+
+    # ################################################################################# #
+    #                                                                                   #
+    # user and roles                                                                    #
+    #                                                                                   #
+    # @RoleOwner, whether role is owned, or given.                                      #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            CREATE TABLE IF NOT EXISTS Account (
+                UserID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                Username VARCHAR (50) NOT NULL,
+                Password VARCHAR (1069) NOT NULL,
+                Joined DATETIME NOT NULL,
+                UNIQUE (Username)
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS RoleType (
+                RoleTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                RoleType VARCHAR (50) NOT NULL,
+                UNIQUE (RoleType)
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS Role (
+                RoleID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                RoleOwner INT NOT NULL,
+                RoleTypeID INT NOT NULL,
+                UserID INT NOT NULL,
+                UNIQUE (RoleTypeID, UserID),
+                FOREIGN KEY (RoleTypeID) REFERENCES RoleType(RoleTypeID),
+                FOREIGN KEY (UserID) REFERENCES Account(UserID)
+            );
+            '''
+    cur.execute(query)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # collection                                                                        #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            CREATE TABLE IF NOT EXISTS Collection (
+                CollectionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                CollectionName VARCHAR (50) NOT NULL,
+                CollectionVersion INT NOT NULL
+            );
+            '''
+    cur.execute(query)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # model                                                                             #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            CREATE TABLE IF NOT EXISTS ModelType (
+                ModelTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                ModelType VARCHAR (50) NOT NULL,
+                UNIQUE (ModelType)
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS Model (
+                ModelID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                ModelName VARCHAR (50) NOT NULL,
+                Model BLOB NOT NULL,
+                ModelTypeID INT NOT NULL,
+                FOREIGN KEY (ModelTypeID) REFERENCES ModelType(ModelTypeID)
+            );
+            '''
+    cur.execute(query)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # results                                                                           #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            CREATE TABLE IF NOT EXISTS ResultType (
+                ResultTypeID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                ResultType VARCHAR (50) NOT NULL,
+                UNIQUE (ResultType)
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS Result (
+                ResultID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                ResultValue DECIMAL (65,12) NOT NULL,
+                ModelTypeID INT (50) NOT NULL,
+                ResultTypeID INT NOT NULL,
+                FOREIGN KEY (ModelTypeID) REFERENCES ModelType(ModelTypeID),
+                FOREIGN KEY (ResultTypeID) REFERENCES ResultType(ResultTypeID)
+            );
+            '''
+    cur.execute(query)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # applied permission                                                                #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            CREATE TABLE IF NOT EXISTS PermissionCollection (
+                PermissionCollectionID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                PermissionValueCode INT NOT NULL,
+                CollectionID INT NOT NULL,
+                UserID INT NOT NULL,
+                RoleID INT DEFAULT 0,
+                UNIQUE (CollectionID, UserID, RoleID),
+                FOREIGN KEY (CollectionID) REFERENCES Collection(CollectionID),
+                FOREIGN KEY (UserID) REFERENCES Account(UserID),
+                FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS PermissionModel (
+                PermissionModelID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                PermissionValueCode INT NOT NULL,
+                ModelID INT NOT NULL,
+                UserID INT NOT NULL,
+                RoleID INT DEFAULT 0,
+                UNIQUE (ModelID, UserID, RoleID),
+                FOREIGN KEY (ModelID) REFERENCES Model(ModelID),
+                FOREIGN KEY (UserID) REFERENCES Account(UserID),
+                FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
+            );
+            '''
+    cur.execute(query)
+
+    query = '''\
+            CREATE TABLE IF NOT EXISTS PermissionResult (
+                PermissionResultID INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+                PermissionValueCode INT NOT NULL,
+                ResultID INT NOT NULL,
+                UserID INT NOT NULL,
+                RoleID INT DEFAULT 0,
+                UNIQUE (ResultID, UserID, RoleID),
+                FOREIGN KEY (ResultID) REFERENCES Result(ResultID),
+                FOREIGN KEY (UserID) REFERENCES Account(UserID),
+                FOREIGN KEY (RoleID) REFERENCES Role(RoleID)
+            );
+            '''
+    cur.execute(query)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # populate User, and Role                                                           #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            INSERT INTO Account (Username, Password, Joined) VALUES (%s, %s, %s);
+            '''
+    args = ('anonymous', '0', '2018-01-25 12:00:00')
+    cur.execute(query, args)
+
+    query = '''\
+            INSERT INTO RoleType (RoleType) VALUES (%s);
+            '''
+    args = ('default')
+    cur.execute(query, args)
+
+    query = '''\
+            INSERT INTO Role (RoleOwner, RoleTypeID, UserID) VALUES (%s, %s, %s);
+            '''
+    args = ('0', '1', '1')
+    cur.execute(query, args)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # populate ModelType                                                                #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            INSERT INTO ModelType (ModelType) VALUES (%s);
+            '''
+    cur.executemany(query, model_types)
+
+    # ################################################################################# #
+    #                                                                                   #
+    # populate ResultType                                                               #
+    #                                                                                   #
+    # ################################################################################# #
+    query = '''\
+            INSERT INTO ResultType (ResultType) VALUES (%s);
+            '''
+    cur.executemany(query, result_types)
