@@ -60,7 +60,7 @@ if [ "$DISTRO_TYPE" = 'unix' ]; then
     curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
     tar zxf "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
     rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
-    sudo mv rancher-v"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
+    sudo mv rancher-"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'linux' ]; then
@@ -71,7 +71,7 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
     curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
     tar zxf "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
     rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
-    sudo mv rancher-v"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
+    sudo mv rancher-"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
