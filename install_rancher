@@ -60,7 +60,7 @@ if [ "$DISTRO_TYPE" = 'unix' ]; then
     curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
     tar zxf "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
     rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
-    sudo mv rancher-v"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
+    sudo mv rancher-"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'linux' ]; then
@@ -71,7 +71,7 @@ elif [ "$DISTRO_TYPE" = 'linux' ]; then
     curl -OL "$RANCHER_REPO/releases/download/$RANCHER_CLI_VERSION/$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
     tar zxf "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
     rm "$RANCHER_DISTRO-$RANCHER_CLI_VERSION.tar.gz"
-    sudo mv rancher-v"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
+    sudo mv rancher-"$RANCHER_CLI_VERSION"/rancher /usr/local/bin/rancher
     sudo chmod +x /usr/local/bin/rancher
 
 elif [ "$DISTRO_TYPE" = 'windows' ]; then
@@ -150,22 +150,7 @@ if docker -v >/dev/null 2>&1; then
         docker rm "$RANCHER_CONTAINER"
     fi
 
-    ## legacy windows uses docker toolbox, which requires 'default' container
-    if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_CURRENT_VERSION" -le "$WINDOWS_VERSION" ]; then
-        echo ''
-        echo 'Windows docker implementation, requires DockerToolbox, which'
-        echo "creates a 'default' container to manage docker. To proceed,"
-        echo "rancher configurations will reflect port '8080'."
-        echo ''
-
-        RANCHER_CONTAINER='default'
-        RANCHER_PORT='8080'
-        SERVER_IP=$(docker-machine ip 'default')
-
-    else
-        SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
-    fi
-
+    ## start rancher server
     docker run -d \
         --name "$RANCHER_CONTAINER" \
         --restart=unless-stopped \
@@ -173,20 +158,36 @@ if docker -v >/dev/null 2>&1; then
         rancher/server:"$RANCHER_SERVER_VERSION"
     mkdir -p ~/.rancher
 
-    ## generate access + secret key:
-    ##
-    ## Note: exporting environment eliminates the need to explicitly provide
-    ##       environment variable to the 'rancher' command.
-    ##
-    ## Note: 'curl' response for ACCESS is json:
-    ##
-    ##     https://github.com/rancher/rancher/issues/4961#issuecomment-222598633
-    ##
-    export RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT"
-
     SLEEPER=0
     while true
     do
+        ## legacy windows uses docker toolbox, which requires 'default' container
+        if [ "$DISTRO_TYPE" = 'windows' ] && [ "$WINDOWS_CURRENT_VERSION" -le "$WINDOWS_VERSION" ]; then
+            echo ''
+            echo 'Windows docker implementation, requires DockerToolbox, which'
+            echo "creates a 'default' container to manage docker. To proceed,"
+            echo "rancher configurations will reflect port '8080'."
+            echo ''
+
+            RANCHER_CONTAINER='default'
+            SERVER_IP=$(docker-machine ip 'default')
+
+        else
+            SERVER_IP=$(docker inspect -f "{{ .NetworkSettings.IPAddress }}" "$RANCHER_CONTAINER")
+        fi
+
+        ## generate access + secret key:
+        ##
+        ## Note: exporting environment eliminates the need to explicitly provide
+        ##       environment variable to the 'rancher' command.
+        ##
+        ## Note: 'curl' response for ACCESS is json:
+        ##
+        ##     https://github.com/rancher/rancher/issues/4961#issuecomment-222598633
+        ##
+        export RANCHER_URL="http://$SERVER_IP:$RANCHER_PORT"
+
+        ## access rancher server
         ACCESS=$(
             curl -v -XPOST -H 'Accept: application/json' \
             -H 'Content-Type: application/json' \
