@@ -159,7 +159,6 @@ if docker -v >/dev/null 2>&1; then
         echo ''
 
         RANCHER_CONTAINER='default'
-        RANCHER_PORT='8080'
         SERVER_IP=$(docker-machine ip 'default')
 
     else
