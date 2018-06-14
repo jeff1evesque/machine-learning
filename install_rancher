@@ -159,7 +159,9 @@ if docker -v >/dev/null 2>&1; then
     mkdir -p ~/.rancher
 
     ##
-    ## capture error and exit: useful for below 'ACCESS=$(...) && break'
+    ## error detection: capture error then exit
+    ##
+    ## Note: this was intended to target the below 'ACCESS=$(...) && break'.
     ##
     set -e
 
