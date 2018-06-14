@@ -18,18 +18,18 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
  as `invalid`, and closed (without merging to master). These best practices
  will ensure integrity, when revisions of code, or issues need to be reviewed.
 
-**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/doc/contribution/support.rst),
+**Note:** support, and philantropy can be [inquired](https://jeff1evesque.github.io/machine-learning.docs/latest/html/contribution/support),
  to further assist with development.
 
 ## Configuration
 
 Fork this project, using of the following methods:
 
-- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#simple-clone):
+- [simple clone](https://jeff1evesque.github.io/machine-learning.docs/latest/html/configuration/setup-clone#simple-clone):
  clone the remote master branch.
-- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#commit-hash):
+- [commit hash](https://jeff1evesque.github.io/machine-learning.docs/latest/html/configuration/setup-clone#commit-hash):
  clone the remote master branch, then checkout a specific commit hash.
-- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#release-tag):
+- [release tag](https://jeff1evesque.github.io/machine-learning.docs/latest/html/configuration/setup-clone#release-tag):
  clone the remote branch, associated with the desired release tag.
 
 ## Installation
@@ -44,7 +44,7 @@ when using the `docker-compose` alternate, keep track what the corresponding
 should be.
 
 If users choose rancher, both docker and rancher must be installed.
-Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/dependencies.html).
+Installing docker must be done manually, to fulfill a set of [dependencies](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/dependencies).
 Once completed, rancher can be installed, and automatically configured, by simply
 executing a provided bash script, from the docker quickstart terminal:
 
@@ -53,7 +53,7 @@ cd /path/to/machine-learning
 ./install-rancher
 ```
 
-**Note:** the installation, and the configuration of rancher, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/rancher.html)
+**Note:** the installation, and the configuration of rancher, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/rancher)
 if more explicit instructions are needed.
 
 If users choose to forgo rancher, and use the `docker-compose`, then simply
@@ -65,7 +65,7 @@ cd /path/to/machine-learning
 docker-compose up
 ```
 
-**Note:** the installation, and the configuration of `docker-compose`, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/docker-compose.html)
+**Note:** the installation, and the configuration of `docker-compose`, has been [outlined](https://jeff1evesque.github.io/machine-learning.docs/latest/html/installation/docker-compose)
 if more explicit instructions are needed.
 
 ## Execution
@@ -145,9 +145,9 @@ requests.post(endpoint, headers=headers, data=json_string_here)
 ```
 
 **Note:** more information, regarding how to obtain a valid `token`, can be further
- reviewed, in the `/login` [documentation](https://jeff1evesque.github.io/machine-learning.docs/latest/html/programmatic-interface/authentication/login.html).
+ reviewed, in the `/login` [documentation](https://jeff1evesque.github.io/machine-learning.docs/latest/html/programmatic-interface/authentication/login).
 
-**Note:** various `data` [attributes](https://jeff1evesque.github.io/machine-learning.docs/latest/html/programmatic-interface/data-attributes.html) can be nested in above `POST` request.
+**Note:** various `data` [attributes](https://jeff1evesque.github.io/machine-learning.docs/latest/html/programmatic-interface/data-attributes) can be nested in above `POST` request.
 
 It is important to remember that the [`docker-compose.development.yml`](https://github.com/jeff1evesque/machine-learning/blob/3889788a8343a4b7cef2cf84166f9bd35d83021c/docker-compose.development.yml#L33-L43),
  has defined two port forwards, each assigned to its corresponding reverse
