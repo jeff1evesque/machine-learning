@@ -158,6 +158,13 @@ if docker -v >/dev/null 2>&1; then
         rancher/server:"$RANCHER_SERVER_VERSION"
     mkdir -p ~/.rancher
 
+    ##
+    ## error detection: capture error then exit
+    ##
+    ## Note: this was intended to target the below 'ACCESS=$(...) && break'.
+    ##
+    set -e
+
     SLEEPER=0
     while true
     do
@@ -231,6 +238,11 @@ if docker -v >/dev/null 2>&1; then
             sleep 30
         fi
     done
+
+    ##
+    ## discontinue error detection
+    ##
+    set +e
 
     if [ "$ACCESS" ]; then
         SLEEPER=0
