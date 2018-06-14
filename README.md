@@ -18,18 +18,18 @@ Please adhere to [`contributing.md`](https://github.com/jeff1evesque/machine-lea
  as `invalid`, and closed (without merging to master). These best practices
  will ensure integrity, when revisions of code, or issues need to be reviewed.
 
-**Note:** support, and philantropy can be [inquired](https://github.com/jeff1evesque/machine-learning/blob/master/doc/contribution/support.rst),
+**Note:** support, and philantropy can be [inquired](https://jeff1evesque.github.io/machine-learning.docs/latest/html/contribution/support),
  to further assist with development.
 
 ## Configuration
 
 Fork this project, using of the following methods:
 
-- [simple clone](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#simple-clone):
+- [simple clone](https://jeff1evesque.github.io/machine-learning.docs/latest/html/configuration/setup-clone.html#simple-clone):
  clone the remote master branch.
-- [commit hash](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#commit-hash):
+- [commit hash](https://jeff1evesque.github.io/machine-learning.docs/latest/html/configuration/setup-clone.html#commit-hash):
  clone the remote master branch, then checkout a specific commit hash.
-- [release tag](https://github.com/jeff1evesque/machine-learning/blob/master/doc/configuration/setup_clone.rst#release-tag):
+- [release tag](https://jeff1evesque.github.io/machine-learning.docs/latest/html/configuration/setup-clone.html#release-tag):
  clone the remote branch, associated with the desired release tag.
 
 ## Installation
