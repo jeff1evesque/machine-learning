@@ -73,13 +73,13 @@ services:
     hostname: nginx-api
     image: jeff1evesque/ml-nginx-api:0.7
     ports:
-    - 9090:6000/tcp
+    - 9595:6000/tcp
 
   nginx-web:
     hostname: nginx-web
     image: jeff1evesque/ml-nginx-web:0.7
     ports:
-    - 8080:5000/tcp
+    - 8585:5000/tcp
 
 volumes:
     mariadb:
