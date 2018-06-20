@@ -2,7 +2,7 @@
 
 ## local variables
 DOCKER_VERSION='18.03.0~ce-0~ubuntu'
-CONTAINER_VERSION='0.7'
+CONTAINER_VERSION='0.8'
 PROJECT_ROOT=$(pwd)
 
 ## local variables: reusable unit tests
