@@ -15,8 +15,8 @@ Once docker-compose has installed, simply run ``docker-compose up``:
     docker-compose up
 
 This will allow the web-application to
-be accessible on the host machine, via https://localhost:8080. Similarly, the
-programmatic-api will be accessible at https://localhost:9090. However, since
+be accessible on the host machine, via https://localhost:8585. Similarly, the
+programmatic-api will be accessible at https://localhost:9595. However, since
 this project assumes rancher as the primary method to deploy, and run the
 application, it will be important to remember when reading through this
 documentation, to substitute the localhost, or the `https://127.0.0.1:XXXX`

@@ -31,7 +31,6 @@ RUN apt-get -y install puppet-agent
 COPY puppet/environment/$ENVIRONMENT/Puppetfile $ENVPATH
 COPY puppet/environment/$ENVIRONMENT/modules $ROOT_PUPPET/code/modules
 COPY hiera $ROOT_PUPPET/puppet/hiera
-COPY src/package.json $ROOT_PUPPET/puppet/hiera
 COPY hiera.yaml $ROOT_PUPPET/puppet
 
 ## install r10k

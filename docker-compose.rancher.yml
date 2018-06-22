@@ -2,42 +2,42 @@ version: '2'
 services:
   mariadb:
     hostname: mariadb
-    image: jeff1evesque/ml-mariadb:0.7
+    image: jeff1evesque/ml-mariadb:0.8
 
   mongodb:
     hostname: mongodb
-    image: jeff1evesque/ml-mongodb:0.7
+    image: jeff1evesque/ml-mongodb:0.8
 
   redis:
     hostname: redis
-    image: jeff1evesque/ml-redis:0.7
+    image: jeff1evesque/ml-redis:0.8
 
   browserify:
     hostname: browserify
-    image: jeff1evesque/ml-browserify:0.7
+    image: jeff1evesque/ml-browserify:0.8
 
   sass:
     hostname: sass
-    image: jeff1evesque/ml-sass:0.7
+    image: jeff1evesque/ml-sass:0.8
 
   webserver-api:
     hostname: webserver-api
-    image: jeff1evesque/ml-webserver:0.7
+    image: jeff1evesque/ml-webserver:0.8
     command: ['api', '0.0.0.0', '6001', '6']
 
   webserver-web:
     hostname: webserver-web
-    image: jeff1evesque/ml-webserver:0.7
+    image: jeff1evesque/ml-webserver:0.8
     command: ['web', '0.0.0.0', '5001', '6']
 
   nginx-api:
     hostname: nginx-api
-    image: jeff1evesque/ml-nginx-api:0.7
+    image: jeff1evesque/ml-nginx-api:0.8
     ports:
-    - 9090:6000/tcp
+    - 9595:6000/tcp
 
   nginx-web:
     hostname: nginx-web
-    image: jeff1evesque/ml-nginx-web:0.7
+    image: jeff1evesque/ml-nginx-web:0.8
     ports:
-    - 8080:5000/tcp
+    - 8585:5000/tcp

@@ -258,7 +258,7 @@ This stack will contain numerous services, each assigned to it's respective cont
 
 Each can be individually inspected. However, the actual application can be accessed:
 
-.. image:: https://user-images.githubusercontent.com/2907085/39499223-97b96fce-4d7a-11e8-96e2-c4e31f6b8e09.JPG
+.. image:: https://user-images.githubusercontent.com/2907085/41756403-686818e4-75aa-11e8-94fc-944ba5b8b9df.JPG
 
 .. |rancher| replace:: rancher
 .. _rancher: http://rancher.com
