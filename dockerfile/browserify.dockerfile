@@ -4,12 +4,11 @@ FROM node:9
 ENV ROOT_PROJECT /var/machine-learning
 
 ## source + asset directory
-RUN mkdir -p $ROOT_PROJECT/src/jsx $ROOT_PROJECT/interface/static/js $ROOT_PROJECT/src/jsx/dockerfile
+RUN mkdir -p $ROOT_PROJECT/src/jsx $ROOT_PROJECT/interface/static/js
 COPY src/jsx $ROOT_PROJECT/src/jsx/
-COPY dockerfile/browserify.dockerfile src/jsx/dockerfile/browserify.dockerfile
 
 ## provision with package.json
-WORKDIR $ROOT_PROJECT/src/jsx
+WORKDIR $ROOT_PROJECT/src/jsx/
 RUN npm install
 
 ## define entrypoint script
