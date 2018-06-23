@@ -21,4 +21,4 @@ npm run watch:jsx\n\
 RUN chmod 710 $ROOT_PROJECT/src/jsx/entrypoint
 
 ## executed everytime container starts
-ENTRYPOINT ["./entrypoint"]
+ENTRYPOINT ["/bin/bash", "-c", "./entrypoint"]
