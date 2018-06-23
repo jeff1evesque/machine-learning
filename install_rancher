@@ -3,7 +3,8 @@
 ##
 ## system configurations
 ##
-## Note: the `rancher/agent` must be coupled with the `rancher/server` version:
+## Note: the `rancher/agent` must be coupled with the `rancher/server`, which
+##       similarly constrains the possible docker-engine version:
 ##
 ##     - https://github.com/rancher/rancher/issues/14182#issuecomment-399698574
 ##     - https://github.com/rancher/rancher/releases/tag/v1.6.18
