@@ -1,10 +1,17 @@
 #!/bin/bash
 
+##
 ## system configurations
+##
+## Note: the `rancher/agent` must be coupled with the `rancher/server` version:
+##
+##     - https://github.com/rancher/rancher/issues/14182#issuecomment-399698574
+##     - https://github.com/rancher/rancher/releases/tag/v1.6.18
+##
 CWD=$(pwd)
 RANCHER_CLI_VERSION='v0.6.9'
-RANCHER_AGENT_VERSION='stable'
-RANCHER_SERVER_VERSION='stable'
+RANCHER_AGENT_VERSION='v1.2.10'
+RANCHER_SERVER_VERSION='v1.6.18'
 RANCHER_REPO='https://github.com/rancher/cli'
 BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
 OPERATING_SYSTEM=$(uname -s)
