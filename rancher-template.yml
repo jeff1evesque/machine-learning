@@ -31,7 +31,6 @@ services:
     volumes:
         - PREPATH/src/jsx:/var/machine-learning/src/jsx
         - PREPATH/interface/static/js:/var/machine-learning/interface/static/js
-        - PREPATH/test/jest:/var/machine-learning/test/jest
 
   webserver-api:
     scale: 1
