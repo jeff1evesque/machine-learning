@@ -24,7 +24,6 @@ services:
     volumes:
         - ./src/jsx:/var/machine-learning/src/jsx
         - ./interface/static/js:/var/machine-learning/interface/static/js
-        - ./test/jest:/var/machine-learning/test/jest
 
   sass:
     hostname: sass
