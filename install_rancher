@@ -30,7 +30,6 @@ RANCHER_COMPOSE='rancher-compose.yml'
 RANCHER_COMPOSE_TEMPLATE='rancher-template.yml'
 
 ## cleanup docker volumes
-rm -rf data
 rm -rf interface/static/{js,css}
 
 ## environment variables used by docker
@@ -336,7 +335,6 @@ if docker -v >/dev/null 2>&1; then
         fi
 
         ## create docker volumes
-        mkdir -p ./data/{mariadb,mongodb,redis}
         mkdir -p ./interface/static/{js,css}
 
         ## register host with rancher
