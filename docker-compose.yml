@@ -22,7 +22,14 @@ services:
     hostname: browserify
     image: jeff1evesque/ml-browserify:0.8
     volumes:
-        - ./src/jsx:/var/machine-learning/src/jsx
+        - ./src/jsx/__tests__:/var/machine-learning/src/jsx/__tests__
+        - ./src/jsx/import:/var/machine-learning/src/jsx/import
+        - ./src/jsx/.babelrc:/var/machine-learning/src/jsx/.babelrc
+        - ./src/jsx/content.jsx:/var/machine-learning/src/jsx/content.jsx
+        - ./src/jsx/jest.config.js:/var/machine-learning/src/jsx/jest.config.js
+        - ./src/jsx/package.json:/var/machine-learning/src/jsx/package.json
+        - ./src/jsx/README.md:/var/machine-learning/src/jsx/README.md
+        - ./src/jsx/setup.js:/var/machine-learning/src/jsx/setup.js
         - ./interface/static/js:/var/machine-learning/interface/static/js
 
   sass:
