@@ -38,7 +38,6 @@ services:
         - PREPATH/src/jsx/README.md:/var/machine-learning/src/jsx/README.md
         - PREPATH/src/jsx/setup.js:/var/machine-learning/src/jsx/setup.js
         - PREPATH/interface/static/js:/var/machine-learning/interface/static/js
-        - PREPATH/interface/static/js:/var/machine-learning/interface/static/js
 
   webserver-api:
     scale: 1
