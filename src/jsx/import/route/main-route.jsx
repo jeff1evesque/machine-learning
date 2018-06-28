@@ -19,7 +19,7 @@ import AnalysisLayoutState from '../redux/container/analysis-layout.jsx';
 class MainRoute extends Component {
     render() {
         return (
-            <div>
+            <div class='row'>
                 <Route
                     component={HomePageState}
                     exact
