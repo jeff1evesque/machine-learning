@@ -1,4 +1,4 @@
-FROM jeff1evesque/ml-sklearn:0.7
+FROM jeff1evesque/ml-sklearn:0.8
 
 ## local variables
 ENV ENVIRONMENT docker
@@ -24,7 +24,7 @@ COPY puppet/environment/$ENVIRONMENT/modules/webserver $ROOT_PUPPET/code/modules
 ##
 ## provision with puppet: either build a web, or api webserver image.
 ##
-##     docker build -f webserver.dockerfile -t jeff1evesque/ml-webserver:0.7 .
+##     docker build -f webserver.dockerfile -t jeff1evesque/ml-webserver:0.8 .
 ##
 RUN apt-get update && $PUPPET apply -e "class { webserver: \
     run      => false, \
