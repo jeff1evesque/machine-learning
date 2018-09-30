@@ -21,7 +21,9 @@ describe('Login Component', () => {
                 dispatchSpinner={mockDispatchSpinner}
             />
         );
-        expect(wrapper.contains(<form ref='loginForm' />)).toEqual(true);
+        expect(wrapper.find('form').props()).toEqual(
+            ref: 'loginForm'
+        );
     });
 
     it('user[login] field should exist', () => {

@@ -27,10 +27,6 @@ import jsdom from 'jsdom';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// workaround for react bootstrap
-global.window = new jsdom.JSDOM().window;
-global.document = window.document;
-
 describe('AnalysisLayout Component', () => {
     const mockDispatchLayout = jest.fn();
     const store = createStore(

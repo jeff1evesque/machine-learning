@@ -25,10 +25,6 @@ import jsdom from 'jsdom';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// workaround for react bootstrap
-global.window = new jsdom.JSDOM().window;
-global.document = window.document;
-
 describe('PageLayout Component', () => {
     const store = createStore(
         combineReducers({user, page, data, layout}),
