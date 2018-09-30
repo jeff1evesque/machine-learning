@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import Enzyme, { mount, shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
@@ -37,7 +37,7 @@ describe('PageLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(HomePageState)).toHaveLength(1);
+        expect(wrapper.find(HomePageState)).toBeTruthy();
     });
 
     it('url should render LoginLayout component (login case)', () => {
@@ -48,7 +48,7 @@ describe('PageLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(LoginLayout)).toHaveLength(1);
+        expect(wrapper.find(LoginLayout)).toBeTruthy();
     });
 
     it('url should render LoginLayout component (logout case)', () => {
@@ -59,7 +59,7 @@ describe('PageLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(LoginLayout)).toHaveLength(1);
+        expect(wrapper.find(LoginLayout)).toBeTruthy();
     });
 
     it('url should render RegisterLayout component', () => {
@@ -70,7 +70,7 @@ describe('PageLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(RegisterLayout)).toHaveLength(1);
+        expect(wrapper.find(RegisterLayout)).toBeTruthy();
     });
 
     it('url should render AnalysisLayoutState component', () => {
@@ -81,6 +81,6 @@ describe('PageLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(AnalysisLayoutState)).toHaveLength(1);
+        expect(wrapper.find(AnalysisLayoutState)).toBeTruthy();
     });
 });

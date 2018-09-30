@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 ## environment variables
 ENV ENVIRONMENT docker
@@ -19,7 +19,7 @@ ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
 ##  Note: r10k requires 'git' installed
 ##
 RUN apt-get -y update
-RUN apt-get -y install git=1:1.9.1* wget=1.15-1ubuntu1.14.04*
+RUN apt-get -y install git=1:1.9.1* wget=1.16*
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb

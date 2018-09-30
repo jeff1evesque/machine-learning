@@ -22,7 +22,7 @@
     "babel-preset-env": "^1.6.1",
     "babel-preset-react": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
-    "babel-jest": "^22.4.3",
+    "babel-jest": "^23.6.0",
     "core-js": "^2.5.4",
     "whatwg-fetch": "^2.0.2",
     "promise-polyfill": "^7.0.0",
@@ -39,10 +39,10 @@
     "d3": "^4.12.2",
     "prop-types": "15.6.0",
     "react-json-view": "1.16.0",
-    "jest-cli": "^22.4.3",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "1.1.1",
+    "jest-cli": "^23.6.0",
+    "enzyme": "^3.6.0",
+    "enzyme-adapter-react-16": "1.5.0",
     "global": "^4.3.2",
-    "coveralls": "^3.0.1"
+    "coveralls": "^3.0.2"
   }
 }
