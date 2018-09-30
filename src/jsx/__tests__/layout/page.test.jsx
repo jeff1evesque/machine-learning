@@ -24,11 +24,8 @@ import store from '../../../../src/jsx/import/redux/store.jsx';
 
 Enzyme.configure({ adapter: new Adapter() });
 
-// workaround https://github.com/expo/jest-expo/blob/master/src/setup.js#L17
-if (typeof window !== 'object') {
-    global.window = global;
-    global.window.navigator = {};
-}
+global.window = new jsdom.JSDOM().window;
+global.document = window.document;
 
 describe('PageLayout Component', () => {
     const store = createStore(
