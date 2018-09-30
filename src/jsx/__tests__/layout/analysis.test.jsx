@@ -50,7 +50,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(DataNewState)).toHaveLength(1);
+        expect(wrapper.find(DataNewState)).to.have.lengthOf(1);
     });
 
     it('url should render DataAppendState component', () => {
@@ -61,7 +61,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(DataAppendState)).toHaveLength(1);
+        expect(wrapper.find(DataAppendState)).to.have.lengthOf(1);
     });
 
     it('url should render ModelGenerateState component', () => {
@@ -72,7 +72,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(ModelGenerateState)).toHaveLength(1);
+        expect(wrapper.find(ModelGenerateState)).to.have.lengthOf(1);
     });
 
     it('url should render ModelPredictState component', () => {
@@ -83,7 +83,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(ModelPredictState)).toHaveLength(1);
+        expect(wrapper.find(ModelPredictState)).to.have.lengthOf(1);
     });
 
     it('url should render CurrentResultState component', () => {
@@ -94,7 +94,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(CurrentResultState)).toHaveLength(1);
+        expect(wrapper.find(CurrentResultState)).to.have.lengthOf(1);
     });
 
     it('url should render ResultsDisplayState component', () => {
@@ -105,6 +105,6 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(ResultsDisplayState)).toHaveLength(1);
+        expect(wrapper.find(ResultsDisplayState)).to.have.lengthOf(1);
     });
 });
