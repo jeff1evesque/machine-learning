@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import Enzyme, { mount, shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import RegisterForm from '../../../../src/jsx/import/content/register.jsx';
 
@@ -23,21 +23,21 @@ describe('Register Component', () => {
     });
 
     it('user[login] field should exist', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
             />
         );
-        expect(wrapper.find('[name="user[login]"]').length).toEqual(1);
+        expect(wrapper.find('[name="user[login]"]')).toBeTruthy();
     });
 
     it('[name="user[email]"] field should exist', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
             />
         );
-        expect(wrapper.find('[name="user[email]"]').length).toEqual(1);
+        expect(wrapper.find('[name="user[email]"]')).toBeTruthy();
     });
 
     it('[name="user[password]"] field should exist', () => {
@@ -45,15 +45,15 @@ describe('Register Component', () => {
                 dispatchLayout={mockDispatchLayout}
             />
         );
-        expect(wrapper.find('[name="user[password]"]').length).toEqual(1);
+        expect(wrapper.find('[name="user[password]"]')).toBeTruthy();
     });
 
     it('submit buttom should exist', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
             />
         );
-        expect(wrapper.find('[type="submit"]').length).toEqual(1);
+        expect(wrapper.find('[type="submit"]')).toBeTruthy();
     });
 });
