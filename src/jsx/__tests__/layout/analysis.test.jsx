@@ -26,6 +26,12 @@ import store from '../../../../src/jsx/import/redux/store.jsx';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+// workaround https://github.com/expo/jest-expo/blob/master/src/setup.js#L17
+if (typeof window !== 'object') {
+    global.window = global;
+    global.window.navigator = {};
+}
+
 describe('AnalysisLayout Component', () => {
     const mockDispatchLayout = jest.fn();
     const store = createStore(
