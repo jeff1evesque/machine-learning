@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import Enzyme, { mount, shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import LoginForm from '../../../../src/jsx/import/content/login.jsx';
 
@@ -15,7 +15,7 @@ describe('Login Component', () => {
     const mockDispatchSpinner = jest.fn();
 
     it('loginForm should exist', () => {
-        const wrapper = mount(
+        const wrapper = shallow(
             <LoginForm
                 dispatchLayout={mockDispatchLayout}
                 dispatchSpinner={mockDispatchSpinner}

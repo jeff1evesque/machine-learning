@@ -41,7 +41,7 @@ describe('PageLayout Component', () => {
     });
 
     it('url should render LoginLayout component (login case)', () => {
-        const wrapper = mount(
+        const wrapper = shallow(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/login' ]}>
                     <MainRoute/>
@@ -52,7 +52,7 @@ describe('PageLayout Component', () => {
     });
 
     it('url should render LoginLayout component (logout case)', () => {
-        const wrapper = mount(
+        const wrapper = shallow(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/logout' ]}>
                     <MainRoute/>
@@ -63,7 +63,7 @@ describe('PageLayout Component', () => {
     });
 
     it('url should render RegisterLayout component', () => {
-        const wrapper = mount(
+        const wrapper = shallow(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/register' ]}>
                     <MainRoute/>
@@ -74,7 +74,7 @@ describe('PageLayout Component', () => {
     });
 
     it('url should render AnalysisLayoutState component', () => {
-        const wrapper = mount(
+        const wrapper = shallow(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session' ]}>
                     <MainRoute/>
