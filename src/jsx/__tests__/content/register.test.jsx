@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import Enzyme, { mount, shallow } from 'enzyme';
+import Enzyme, { shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import RegisterForm from '../../../../src/jsx/import/content/register.jsx';
 
@@ -14,12 +14,12 @@ describe('Register Component', () => {
     const mockDispatchLayout = jest.fn();
 
     it('registerForm should exist', () => {
-        const wrapper = mount(
+        const wrapper = shallow(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
             />
         );
-        expect(wrapper.ref('registerForm').toEqual(1);
+        expect(wrapper.contains(<form ref='registerForm'>)).toBeTruthy();
     });
 
     it('user[login] field should exist', () => {
@@ -41,7 +41,6 @@ describe('Register Component', () => {
     });
 
     it('[name="user[password]"] field should exist', () => {
-        const wrapper = shallow(
             <RegisterForm
                 dispatchLayout={mockDispatchLayout}
             />

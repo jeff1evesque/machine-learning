@@ -39,7 +39,7 @@ describe('AnalysisLayout Component', () => {
                 dispatchLayout={mockDispatchLayout}
             />
         );
-        expect(wrapper.exists(<form ref='analysisForm' />)).toBe(true);
+        expect(wrapper.contains(<form ref='analysisForm'>)).toBeTruthy();
     });
 
     it('url should render DataNewState component', () => {
