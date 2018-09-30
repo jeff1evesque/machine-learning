@@ -21,9 +21,11 @@ import AnalysisLayoutState from '../../../../src/jsx/import/redux/container/anal
 import LoginLayout from '../../../../src/jsx/import/layout/login.jsx';
 import RegisterLayout from '../../../../src/jsx/import/layout/register.jsx';
 import store from '../../../../src/jsx/import/redux/store.jsx';
+import jsdom from 'jsdom';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+// workaround for react bootstrap
 global.window = new jsdom.JSDOM().window;
 global.document = window.document;
 

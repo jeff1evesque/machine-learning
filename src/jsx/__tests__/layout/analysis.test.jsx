@@ -23,9 +23,11 @@ import ModelPredictState from '../../../../src/jsx/import/redux/container/model-
 import CurrentResultState from '../../../../src/jsx/import/redux/container/current-result.jsx';
 import ResultsDisplayState from '../../../../src/jsx/import/redux/container/results.jsx';
 import store from '../../../../src/jsx/import/redux/store.jsx';
+import jsdom from 'jsdom';
 
 Enzyme.configure({ adapter: new Adapter() });
 
+// workaround for react bootstrap
 global.window = new jsdom.JSDOM().window;
 global.document = window.document;
 
