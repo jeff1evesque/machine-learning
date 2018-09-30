@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
@@ -30,7 +30,7 @@ describe('PageLayout Component', () => {
     );
 
     it('url should render HomePageState component', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/' ]}>
                     <MainRoute/>
@@ -41,46 +41,46 @@ describe('PageLayout Component', () => {
     });
 
     it('url should render LoginLayout component (login case)', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/login' ]}>
                     <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(LoginLayout)).toHaveLength(1);
+        expect(wrapper.find(LoginLayout)).toBeTruthy();
     });
 
     it('url should render LoginLayout component (logout case)', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/logout' ]}>
                     <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(LoginLayout)).toHaveLength(1);
+        expect(wrapper.find(LoginLayout)).toBeTruthy();
     });
 
     it('url should render RegisterLayout component', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/register' ]}>
                     <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(RegisterLayout)).toHaveLength(1);
+        expect(wrapper.find(RegisterLayout)).toBeTruthy();
     });
 
     it('url should render AnalysisLayoutState component', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session' ]}>
                     <MainRoute/>
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(AnalysisLayoutState)).toHaveLength(1);
+        expect(wrapper.find(AnalysisLayoutState)).toBeTruthy();
     });
 });

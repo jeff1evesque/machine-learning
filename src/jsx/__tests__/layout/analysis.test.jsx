@@ -5,7 +5,7 @@
 
 import React from 'react';
 import { MemoryRouter } from 'react-router';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { mount } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import { Provider } from 'react-redux';
 import { createStore, combineReducers } from 'redux';
@@ -34,7 +34,7 @@ describe('AnalysisLayout Component', () => {
     );
 
     it('analysisForm should exist', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <AnalysisLayout
                 dispatchLayout={mockDispatchLayout}
             />
@@ -43,7 +43,7 @@ describe('AnalysisLayout Component', () => {
     });
 
     it('url should render DataNewState component', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <Provider store={store}>
                 <MemoryRouter initialEntries={[ '/session/data-new' ]}>
                     <SessionRoute/>
@@ -61,7 +61,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(DataAppendState)).toHaveLength(1);
+        expect(wrapper.find(DataAppendState)).toBeTruthy();
     });
 
     it('url should render ModelGenerateState component', () => {
@@ -72,7 +72,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(ModelGenerateState)).toHaveLength(1);
+        expect(wrapper.find(ModelGenerateState)).toBeTruthy();
     });
 
     it('url should render ModelPredictState component', () => {
@@ -83,7 +83,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(ModelPredictState)).toHaveLength(1);
+        expect(wrapper.find(ModelPredictState)).toBeTruthy();
     });
 
     it('url should render CurrentResultState component', () => {
@@ -94,7 +94,7 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(CurrentResultState)).toHaveLength(1);
+        expect(wrapper.find(CurrentResultState)).toBeTruthy();
     });
 
     it('url should render ResultsDisplayState component', () => {
@@ -105,6 +105,6 @@ describe('AnalysisLayout Component', () => {
                 </MemoryRouter>
             </Provider>
         );
-        expect(wrapper.find(ResultsDisplayState)).toHaveLength(1);
+        expect(wrapper.find(ResultsDisplayState)).toBeTruthy();
     });
 });

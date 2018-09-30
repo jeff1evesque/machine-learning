@@ -4,7 +4,7 @@
  */
 
 import React from 'react';
-import Enzyme, { shallow } from 'enzyme';
+import Enzyme, { mount, shallow } from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
 import LoginForm from '../../../../src/jsx/import/content/login.jsx';
 
@@ -15,7 +15,7 @@ describe('Login Component', () => {
     const mockDispatchSpinner = jest.fn();
 
     it('loginForm should exist', () => {
-        const wrapper = shallow(
+        const wrapper = mount(
             <LoginForm
                 dispatchLayout={mockDispatchLayout}
                 dispatchSpinner={mockDispatchSpinner}
@@ -31,7 +31,7 @@ describe('Login Component', () => {
                 dispatchSpinner={mockDispatchSpinner}
             />
         );
-        expect(wrapper.find('[name="user[login]"]').length).toEqual(1);
+        expect(wrapper.find('[name="user[login]"]').length).toHaveLength(1);
     });
 
     it('user[password] field should exist', () => {
@@ -41,7 +41,7 @@ describe('Login Component', () => {
                 dispatchSpinner={mockDispatchSpinner}
             />
         );
-        expect(wrapper.find('[name="user[password]"]').length).toEqual(1);
+        expect(wrapper.find('[name="user[password]"]').length).toHaveLength(1);
     });
 
     it('form submit button should exist', () => {
@@ -51,6 +51,6 @@ describe('Login Component', () => {
                 dispatchSpinner={mockDispatchSpinner}
             />
         );
-        expect(wrapper.find('[type="submit"]').length).toEqual(1);
+        expect(wrapper.find('[type="submit"]').length).toHaveLength(1);
     });
 });
