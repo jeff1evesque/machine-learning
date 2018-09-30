@@ -19,9 +19,7 @@ describe('Register Component', () => {
                 dispatchLayout={mockDispatchLayout}
             />
         );
-        expect(wrapper.find('form').props()).toEqual(
-            ref: 'registerForm'
-        );
+        expect(wrapper.find('form').prop('ref')).toEqual('registerForm');
     });
 
     it('user[login] field should exist', () => {
