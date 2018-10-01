@@ -19,7 +19,7 @@ ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
 ##  Note: r10k requires 'git' installed
 ##
 RUN apt-get -y update
-RUN apt-get -y install git=1:1.9.1* wget=1.16*
+RUN apt-get -y install git=1:2.7.4-0ubuntu* wget=1.17.1-1ubuntu*
 
 ## install puppet
 RUN wget https://apt.puppetlabs.com/puppet5-release-xenial.deb
