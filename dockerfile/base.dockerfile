@@ -14,18 +14,15 @@ ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
 
-## install git, wget
+##
+## install git, wget, puppet
 ##
 ##  Note: r10k requires 'git' installed
 ##
-RUN apt-get -y update
-RUN apt-get -y install git=1:2.7.4-0ubuntu* wget=1.17.1-1ubuntu*
-
-## install puppet
 RUN wget https://apt.puppetlabs.com/puppet5-release-xenial.deb
 RUN dpkg -i puppet5-release-xenial.deb
 RUN apt-get -y update
-RUN apt-get -y install puppet-agent
+RUN apt-get -y install git=1:2.7.4-0ubuntu* wget=1.17.1-1ubuntu* puppet-agent=5.5*
 
 ## copy configs
 COPY puppet/environment/$ENVIRONMENT/Puppetfile $ENVPATH
@@ -34,12 +31,12 @@ COPY hiera $ROOT_PUPPET/puppet/hiera
 COPY hiera.yaml $ROOT_PUPPET/puppet
 
 ## install ruby
-gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
-cd /tmp && \curl -sSL https://get.rvm.io -o rvm.sh
-cat /tmp/rvm.sh | bash -s stable
-source /usr/local/rvm/scripts/rvm
-rvm list known
-rvm install 2.5.1
+RUN gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3
+RUN cd /tmp && \curl -sSL https://get.rvm.io -o rvm.sh
+RUN cat /tmp/rvm.sh | bash -s stable
+RUN source /usr/local/rvm/scripts/rvm
+RUN rvm list known
+RUN rvm install 2.5.1
 
 ## install r10k
 ##
@@ -48,9 +45,7 @@ rvm install 2.5.1
 ##       https://github.com/jeff1evesque/machine-learning/issues/2991
 ##
 RUN apt-get -y install rubygems-integration=1.10
-RUN gem install semantic_puppet -v 0.1.0
-RUN gem install puppet_forge -v 2.2.9
-RUN gem install r10k -v 3.0.2
+RUN gem install semantic_puppet:0.1.0 puppet_forge:2.2.9 r10k:3.0.2
 
 ## install puppet modules using puppetfile with r10k
 RUN PUPPETFILE=$ENVPATH/Puppetfile PUPPETFILE_DIR=$CONTRIB_MODULES r10k puppetfile install
