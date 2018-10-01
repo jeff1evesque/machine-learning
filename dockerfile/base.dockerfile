@@ -22,8 +22,8 @@ RUN apt-get -y update
 RUN apt-get -y install git=1:1.9.1* wget=1.16*
 
 ## install puppet
-RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
-RUN dpkg -i puppetlabs-release-pc1-trusty.deb
+RUN wget https://apt.puppetlabs.com/puppet5-release-xenial.deb
+RUN dpkg -i puppet5-release-xenial.deb
 RUN apt-get -y update
 RUN apt-get -y install puppet-agent
 
