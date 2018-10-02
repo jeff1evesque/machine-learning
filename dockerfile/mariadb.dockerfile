@@ -20,7 +20,7 @@ RUN apt-get update && $PUPPET apply -e 'class { mariadb: }'\
 RUN printf '#!/bin/bash\n\n\
 cd $MODULES/mariadb/scripts\n\
 service mysql start\n\
-python setup_tables.py $ROOT_PUPPET/puppet\n\
+python3 setup_tables.py $ROOT_PUPPET/puppet\n\
 service mysql stop\n\
 mysqld\n\
 ' > entrypoint
