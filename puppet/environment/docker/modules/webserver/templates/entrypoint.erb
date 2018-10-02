@@ -14,7 +14,7 @@ CONFDIR=<%= @root_puppet %>/puppet
 
 ## run application
 if [ "$GUNICORN_TYPE" = 'test' ]; then
-    python app.py test
+    python3 app.py test
 
 else
     gunicorn \
