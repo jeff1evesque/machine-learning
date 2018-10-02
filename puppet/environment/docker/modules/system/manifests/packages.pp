@@ -10,7 +10,7 @@ class system::packages {
     ## iterate 'packages' hash
     if $packages {
         $packages.each |String $provider, $providers| {
-            if ($provider in ['apt', 'pip']) {
+            if ($provider in ['apt', 'pip3']) {
                 if has_key($providers, 'general') {
                     $providers['general'].each|String $package, String $version| {
                         package { $package:
