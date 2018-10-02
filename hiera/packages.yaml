@@ -12,6 +12,7 @@ system:
                 inotify-tools: '3.14-1ubuntu*'
                 libssl-dev: '1.0.2g-1ubuntu*'
                 openssl: '1.0.2g-1ubuntu*'
+                python3: '3.5*'
                 python-dev: '2.7*'
                 python3-pip: '8.1.1-2ubuntu*'
 
