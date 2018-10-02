@@ -9,19 +9,20 @@ system:
     packages:
         apt:
             general:
-                inotify-tools: '3.14-1ubuntu1'
-                libssl-dev: '1.0.1f-1ubuntu2.2*'
-                openssl: '1.0.1f-1ubuntu2.2*'
-                python-dev: '2.7.5-5ubuntu3'
+                inotify-tools: '3.14-1ubuntu*'
+                libssl-dev: '1.0.2g-1ubuntu*'
+                openssl: '1.0.2g-1ubuntu*'
+                python-dev: '2.7*'
+                python3-pip: '8.1.1-2ubuntu*'
 
-        pip:
+        pip3:
             general:
-                flask-script: '2.0.5'
-                flask-jwt-extended: '3.3.4'
-                voluptuous: '0.10.5'
+                flask-script: '2.0.6'
+                flask-jwt-extended: '3.13.1'
+                voluptuous: '0.11.5'
                 pytest-flask: '0.10.0'
-                six: '1.5.2'
-                xmltodict: '0.10.1'
-                scrypt: '0.8.0'
-                pymongo: '3.4.0'
+                six: '1.10.0'
+                xmltodict: '0.11.0'
+                scrypt: '0.8.6'
+                pymongo: '3.7.1'
                 mlxtend: '0.13.0'
