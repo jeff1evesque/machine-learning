@@ -3,7 +3,6 @@
 ###
 class system::packages {
     contain apt
-    contain python
 
     ## local variables
     $packages = $::system::packages
@@ -19,7 +18,6 @@ class system::packages {
                             provider => $provider,
                             require  => [
                                 Class['apt'],
-                                Class['python'],
                             ],
                         }
                     }
