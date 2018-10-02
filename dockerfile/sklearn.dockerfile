@@ -1,4 +1,4 @@
-FROM jeff1evesque/ml-base:0.7
+FROM jeff1evesque/ml-base:0.8
 
 ## local variables
 ENV ENVIRONMENT docker
