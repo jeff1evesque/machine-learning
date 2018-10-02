@@ -5,23 +5,23 @@ ENV ENVIRONMENT docker
 ENV PUPPET /opt/puppetlabs/bin/puppet
 ENV ROOT_PROJECT /var/machine-learning
 ENV ROOT_PUPPET /etc/puppetlabs
-
-## ensure directory
-RUN mkdir -p $ROOT_PROJECT/log $ROOT_PUPPET/code/environment/$ENVIRONMENT $ROOT_PUPPET/puppet/hiera $ROOT_PUPPET/code/modules_contrib
-
-## environment variables
 ENV MODULES $ROOT_PUPPET/code/modules
 ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
+ENV PUPPET_VERSION puppet5-release-xenial.deb
+
+## ensure directory
+RUN mkdir -p $ROOT_PROJECT/log $ROOT_PUPPET/code/environment/$ENVIRONMENT $ROOT_PUPPET/puppet/hiera $ROOT_PUPPET/code/modules_contrib
 
 ##
 ## install git, wget, puppet
 ##
 ##  Note: r10k requires 'git' installed
 ##
+RUN apt-get -y update
 RUN apt-get -y install wget=1.17.1-1ubuntu*
-RUN wget https://apt.puppetlabs.com/puppet5-release-xenial.deb
-RUN dpkg -i puppet5-release-xenial.deb
+RUN wget https://apt.puppetlabs.com/$PUPPET_VERSION
+RUN dpkg -i $PUPPET_VERSION
 RUN apt-get -y update
 RUN apt-get -y install git=1:2.7.4-0ubuntu* puppet-agent=5.5*
 
