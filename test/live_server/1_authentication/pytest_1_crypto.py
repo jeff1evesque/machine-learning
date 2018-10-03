@@ -15,7 +15,7 @@ def test_hashing():
         cryptopath = root + '/brain/converter/crypto.py'
         crypto = imp.load_source('crypto', cryptopath)
     except Exception as error:
-        print error
+        print(error)
 
     passwords = ['blue', 'red', 'green', 'yellow']
 

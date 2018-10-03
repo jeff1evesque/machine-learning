@@ -97,13 +97,13 @@ def test_save_prediction(client, live_server, token):
     assert res.status_code == 200
 
     if res.json['status'] == 1:
-        print 'Unsuccessful storing the prediction result.'
+        print('Unsuccessful storing the prediction result.')
         assert False
     elif res.json['status'] == 2:
-        print 'Status was not valid.'
+        print('Status was not valid.')
         assert False
     elif res.json['status'] == 3:
-        print 'Improper request submitted.'
+        print('Improper request submitted.')
         assert False
     else:
         assert res.json['status'] == 0
@@ -134,10 +134,10 @@ def test_retrieve_prediction(client, live_server, token):
     assert res.status_code == 200
 
     if res.json['status'] == 1:
-        print 'Unsuccessful retrieval of specified prediction parameter.'
+        print('Unsuccessful retrieval of specified prediction parameter.')
         assert False
     elif res.json['status'] == 2:
-        print 'Improper request submitted.'
+        print('Improper request submitted.')
         assert False
     else:
         assert res.json['status'] == 0
@@ -188,10 +188,10 @@ def test_retrieve_titles(client, live_server, token):
     assert res.status_code == 200
 
     if res.json['status'] == 1:
-        print 'Unsuccessful retrieval of prediction titles.'
+        print('Unsuccessful retrieval of prediction titles.')
         assert False
     elif res.json['status'] == 2:
-        print 'Improper request submitted.'
+        print('Improper request submitted.')
         assert False
     else:
         assert res.json['status'] == 0
