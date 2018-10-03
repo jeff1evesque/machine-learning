@@ -48,7 +48,8 @@ class webserver::install {
 
     ## install gunicorn
     package { 'gunicorn':
-        ensure      => $gunicorn_version,
-        provider    => 'pip3',
+        ensure          => $gunicorn_version,
+        provider        => 'pip3',
+        require         => Class['system::packages'],
     }
 }
