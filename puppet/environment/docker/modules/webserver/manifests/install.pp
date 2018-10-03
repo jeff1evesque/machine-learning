@@ -3,9 +3,7 @@
 ###
 class webserver::install {
     ## python dependencies
-    include python
-    include python::flask
-    include python::requests
+    include system::packages
 
     ## local variables
     $pyyaml_version     = $::webserver::pyyaml_version
@@ -19,23 +17,23 @@ class webserver::install {
     if ($platform == 'development') {
         package { 'pytest-cov':
             ensure      => $pytest_cov_version,
-            provider    => 'pip',
-            require     => Class['python'],
+            provider    => 'pip3',
+            require     => Class['system::packages'],
         }
     }
 
     ## pyyaml
     package { 'pyyaml':
         ensure          => $pyyaml_version,
-        provider        => 'pip',
-        require         => Class['python'],
+        provider        => 'pip3',
+        require         => Class['system::packages'],
     }
 
     ## redis client
     package { 'redis':
         ensure          => $redis_version,
-        provider        => 'pip',
-        require         => Class['python'],
+        provider        => 'pip3',
+        require         => Class['system::packages'],
     }
 
     ## mariadb client
@@ -51,6 +49,6 @@ class webserver::install {
     ## install gunicorn
     package { 'gunicorn':
         ensure      => $gunicorn_version,
-        provider    => 'pip',
+        provider    => 'pip3',
     }
 }
