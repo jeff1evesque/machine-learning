@@ -7,7 +7,7 @@ class mongodb::install {
     $mongodb_key         = $::mongodb::mongodb_key
     $mongodb_source_list = $::mongodb::mongodb_source_list
 
-    ## https://docs.mongodb.com/v3.4/tutorial/install-mongodb-on-ubuntu/
+    ## https://docs.mongodb.com/v4.0/tutorial/install-mongodb-on-ubuntu/
     exec { 'apt-key-puppetlabs':
         command => "apt-key adv --keyserver ${keyserver} --recv ${mongodb_key}",
         unless  => "apt-key list | grep ${mongodb_key}",
@@ -16,7 +16,7 @@ class mongodb::install {
     }
 
     file { 'mongodb-list-file':
-        path    => '/etc/apt/sources.list.d/mongodb-org-3.4.list',
+        path    => '/etc/apt/sources.list.d/mongodb-org-4.0.list',
         content => $mongodb_source_list,
         require => Exec['apt-key-puppetlabs'],
         notify  => Exec['apt-get-update'],
