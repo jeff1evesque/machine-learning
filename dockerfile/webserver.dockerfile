@@ -1,12 +1,12 @@
 FROM jeff1evesque/ml-sklearn:0.8
 
 ## local variables
-ENV ENVIRONMENT docker
-ENV PUPPET /opt/puppetlabs/bin/puppet
-ENV ROOT_PROJECT /var/machine-learning
-ENV ROOT_PUPPET /etc/puppetlabs
-ENV MODULES $ROOT_PUPPET/code/modules
-ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
+ENV ENVIRONMENT docker\
+    PUPPET /opt/puppetlabs/bin/puppet\
+    ROOT_PROJECT /var/machine-learning\
+    ROOT_PUPPET /etc/puppetlabs\
+    MODULES $ROOT_PUPPET/code/modules\
+    CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## ensure directory
 RUN mkdir -p $ROOT_PROJECT/interface $ROOT_PROJECT/hiera $ROOT_PUPPET/brain $ROOT_PUPPET/test

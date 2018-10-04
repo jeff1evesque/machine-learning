@@ -1,11 +1,11 @@
 FROM jeff1evesque/ml-base:0.8
 
 ## local variables
-ENV ENVIRONMENT docker
-ENV PUPPET /opt/puppetlabs/bin/puppet
-ENV ROOT_PUPPET /etc/puppetlabs
-ENV MODULES $ROOT_PUPPET/code/modules
-ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
+ENV ENVIRONMENT docker\
+    PUPPET /opt/puppetlabs/bin/puppet\
+    ROOT_PUPPET /etc/puppetlabs\
+    MODULES $ROOT_PUPPET/code/modules\
+    CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
 
 ## copy files into container
 COPY hiera $ROOT_PUPPET/puppet/hiera

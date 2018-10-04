@@ -1,14 +1,14 @@
 FROM ubuntu:16.04
 
 ## environment variables
-ENV ENVIRONMENT docker
-ENV PUPPET /opt/puppetlabs/bin/puppet
-ENV ROOT_PROJECT /var/machine-learning
-ENV ROOT_PUPPET /etc/puppetlabs
-ENV MODULES $ROOT_PUPPET/code/modules
-ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
-ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
-ENV PUPPET_VERSION puppet5-release-xenial.deb
+ENV ENVIRONMENT docker\
+    PUPPET /opt/puppetlabs/bin/puppet\
+    ROOT_PROJECT /var/machine-learning\
+    ROOT_PUPPET /etc/puppetlabs\
+    MODULES $ROOT_PUPPET/code/modules\
+    CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib\
+    ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT\
+    PUPPET_VERSION puppet5-release-xenial.deb
 
 ## ensure directory
 RUN mkdir -p $ROOT_PROJECT/log $ROOT_PUPPET/code/environment/$ENVIRONMENT $ROOT_PUPPET/puppet/hiera $ROOT_PUPPET/code/modules_contrib
