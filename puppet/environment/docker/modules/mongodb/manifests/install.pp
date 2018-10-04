@@ -24,7 +24,7 @@ class mongodb::install {
 
     exec { 'apt-get-update':
         command     => 'apt-get update',
-        path        => '/usr/bin',
+        path        => ['/usr/bin', '/bin'],
         before      => Package['mongodb-org-server'],
         refreshonly => true,
     }
