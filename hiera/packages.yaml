@@ -28,4 +28,4 @@ system:
                 pymongo: '3.7.1'
                 mlxtend: '0.13.0'
                 requests: '2.9.1'
-                flask: '10.0.2'
+                flask: '1.0.2'
