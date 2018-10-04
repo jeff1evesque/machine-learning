@@ -9,6 +9,7 @@ system:
     packages:
         apt:
             general:
+                apt-utils: '1.2.*'
                 inotify-tools: '3.14-1ubuntu*'
                 libssl-dev: '1.0.2g-1ubuntu*'
                 openssl: '1.0.2g-1ubuntu*'
