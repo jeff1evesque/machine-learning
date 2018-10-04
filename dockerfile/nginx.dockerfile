@@ -4,8 +4,8 @@ FROM jeff1evesque/ml-base:0.8
 ENV ENVIRONMENT=docker\
     ROOT_PROJECT=/var/machine-learning\
     PUPPET=/opt/puppetlabs/bin/puppet\
-    ROOT_PUPPET=/etc/puppetlabs\
-    MODULES=$ROOT_PUPPET/code/modules\
+    ROOT_PUPPET=/etc/puppetlabs
+ENV MODULES=$ROOT_PUPPET/code/modules\
     CONTRIB_MODULES=$ROOT_PUPPET/code/modules_contrib
 
 ARG TYPE
