@@ -39,7 +39,7 @@ class Model(object):
         # start redis client
         try:
             self.myRedis.start_redis()
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
 
     def cache(self, hash_name, key):
@@ -53,7 +53,7 @@ class Model(object):
         try:
             serialized = Converter(self.model).serialize()
             self.myRedis.hset(hash_name, key, serialized)
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
             print self.list_error
 
@@ -96,6 +96,6 @@ class Model(object):
                     'error': 'no previous model found in cache'
                 }
 
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
             return {'result': None, 'error': self.list_error}

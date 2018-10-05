@@ -48,7 +48,7 @@ class Validator(object):
             try:
                 validate_with_humanized_errors(instance, schema)
 
-            except Exception, error:
+            except Exception as error:
                 split_error = str(error).splitlines()
                 current_errors.extend(split_error)
                 self.list_error.extend(split_error)
@@ -77,7 +77,7 @@ class Validator(object):
             try:
                 validate_with_humanized_errors(instance, schema)
 
-            except Exception, error:
+            except Exception as error:
                 split_error = str(error).splitlines()
                 current_errors.extend(split_error)
                 self.list_error.extend(split_error)
@@ -97,7 +97,7 @@ class Validator(object):
         try:
             return float(data)
 
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(error)
             return error
 

@@ -36,7 +36,7 @@ class Hset(object):
         # start redis client
         try:
             self.myRedis.start_redis()
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
 
     def cache(self, hash_name, key, value):
@@ -48,7 +48,7 @@ class Hset(object):
 
         try:
             self.myRedis.hset(hash_name, key, value)
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
             print self.list_error
 
@@ -61,6 +61,6 @@ class Hset(object):
 
         try:
             return {'result': self.myRedis.hget(hash_name, key), 'error': None}
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
             return {'result': None, 'error': self.list_error}

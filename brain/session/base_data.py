@@ -71,7 +71,7 @@ class BaseData(Base):
         try:
             if not int(session_id) > 0:
                 self.list_error.append(error)
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
 
     def save_premodel_dataset(self):
