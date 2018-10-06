@@ -108,7 +108,7 @@ class NoSQL(object):
                 'error': None,
             }
 
-        except errors, error:
+        except Exception as error:
             self.proceed = False
             self.list_error.append(error)
 
@@ -168,7 +168,7 @@ class NoSQL(object):
                 elif operation == 'drop_collection':
                     result = self.database.drop_collection(payload)
 
-            except errors, error:
+            except Exception as error:
                 self.list_error.append(error)
 
                 return {
@@ -197,7 +197,7 @@ class NoSQL(object):
                     'error': None,
                 }
 
-            except errors, error:
+            except Exception as error:
                 self.list_error.append(error)
 
                 return {
