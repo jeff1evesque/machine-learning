@@ -329,7 +329,7 @@ class SQL(object):
                         'id': self.cursor.lastrowid,
                     }
 
-            except MariaClient.Error, error:
+            except MariaClient.Error as error:
                 self.list_error.append(error)
 
                 return {
