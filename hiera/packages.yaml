@@ -30,4 +30,3 @@ system:
                 mlxtend: '0.13.0'
                 requests: '2.9.1'
                 flask: '1.0.2'
-                mysqlclient: '1.3.13'
