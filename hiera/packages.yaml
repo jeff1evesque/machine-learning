@@ -16,7 +16,6 @@ system:
                 python3: '3.5*'
                 python-dev: '2.7*'
                 python3-pip: '8.1.1-2ubuntu*'
-                libmysqlclient-dev: '5.7*'
 
         pip3:
             general:
