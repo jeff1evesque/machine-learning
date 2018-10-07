@@ -300,7 +300,7 @@ class SQL(object):
                         'result': result,
                     }
 
-            except MariaClient.Error, error:
+            except MariaClient.Error as error:
                 self.conn.rollback()
                 self.list_error.append(error)
 
