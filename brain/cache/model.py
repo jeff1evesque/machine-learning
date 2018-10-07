@@ -55,7 +55,7 @@ class Model(object):
             self.myRedis.hset(hash_name, key, serialized)
         except Exception as error:
             self.list_error.append(str(error))
-            print self.list_error
+            print(self.list_error)
 
     def uncache(self, hash_name, key):
         '''
