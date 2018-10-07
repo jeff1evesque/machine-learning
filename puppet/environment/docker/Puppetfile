@@ -4,28 +4,28 @@
 
 mod 'stdlib',
   :git => 'https://github.com/puppetlabs/puppetlabs-stdlib.git',
-  :ref => '4.25.1'
+  :ref => '5.1.0'
 
 mod 'apt',
   :git => 'https://github.com/puppetlabs/puppetlabs-apt.git',
-  :ref => '4.5.1'
+  :ref => '6.1.1'
 
 mod 'mysql',
   :git => 'https://github.com/puppetlabs/puppetlabs-mysql.git',
-  :ref => '3.4.0'
+  :ref => '6.2.0'
 
 mod 'sys',
   :git => 'https://github.com/counsyl/puppet-sys.git',
-  :ref => '0.9.18'
+  :ref => '0.9.23'
 
 mod 'timezone',
   :git => 'https://github.com/BashtonLtd/puppet-timezone.git',
-  :ref => '2.0.0'
+  :ref => '2.0.1'
 
 mod 'concat',
   :git => 'https://github.com/puppetlabs/puppetlabs-concat.git',
-  :ref => '4.2.1'
+  :ref => '5.1.0'
 
 mod 'nginx',
   :git => 'https://github.com/voxpupuli/puppet-nginx.git',
-  :ref => 'v0.11.0'
+  :ref => 'v0.14.0'
