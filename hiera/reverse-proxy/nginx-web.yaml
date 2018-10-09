@@ -9,7 +9,6 @@
 reverse_proxy:
     type: 'web'
     vhost: 'machine-learning.com'
-    host_port: 8080
     listen_port: 5000
     proxy: 'web-reverse-proxy'
     members:
