@@ -22,8 +22,8 @@ COPY puppet/environment/$ENVIRONMENT/modules/reverse_proxy $ROOT_PUPPET/code/mod
 ##
 ## provision with puppet: either build a web, or api nginx image.
 ##
-##     docker build --build-arg TYPE=api --build-arg RUN=false --build-arg VHOST=machine-learning-api.com --build-arg HOST_PORT=9090 --build-arg LISTEN_PORT=6000 -f nginx.dockerfile -t jeff1evesque/ml-nginx-api:0.8 .
-##     docker build --build-arg TYPE=web --build-arg RUN=false --build-arg VHOST=machine-learning-web.com --build-arg HOST_PORT=9090 --build-arg LISTEN_PORT=6000 -f nginx.dockerfile -t jeff1evesque/ml-nginx-web:0.8 .
+##     docker build --build-arg TYPE=api --build-arg RUN=false --build-arg VHOST=machine-learning-api.com --build-arg LISTEN_PORT=6000 -f nginx.dockerfile -t jeff1evesque/ml-nginx-api:0.8 .
+##     docker build --build-arg TYPE=web --build-arg RUN=false --build-arg VHOST=machine-learning-web.com --build-arg LISTEN_PORT=5000 -f nginx.dockerfile -t jeff1evesque/ml-nginx-web:0.8 .
 ##
 ##     docker build --build-arg TYPE=api --build-arg RUN=false -f nginx.dockerfile -t jeff1evesque/ml-nginx-api:0.8 .
 ##     docker build --build-arg TYPE=web --build-arg RUN=false -f nginx.dockerfile -t jeff1evesque/ml-nginx-web:0.8 .
