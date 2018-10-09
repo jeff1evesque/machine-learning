@@ -10,7 +10,6 @@ class reverse_proxy (
     $run            = $::reverse_proxy::params::run,
     $type           = $::reverse_proxy::params::type,
     $vhost          = $::reverse_proxy::params::vhost,
-    $host_port      = $::reverse_proxy::params::host_port,
     $listen_port    = $::reverse_proxy::params::listen_port,
     $members        = $::reverse_proxy::params::members,
     $proxy          = $::reverse_proxy::params::proxy,
