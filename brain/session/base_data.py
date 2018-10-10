@@ -97,6 +97,7 @@ class BaseData(Base):
         if (
             not self.uid and
             collection_count and
+            collection_count['result'] and
             collection_count['result'] >= self.max_collection and
             collection_adjusted
         ):
@@ -106,13 +107,37 @@ class BaseData(Base):
             collection_count = entity.get_collection_count(self.uid)
             document_count = cursor.query(collection_adjusted, 'count_documents')
 
-        # save dataset
+        #
+        # save dataset: 'elif' case introduced since python3 does not support
+        #     comparison against 'None'.
+        #
         if (
             collection_adjusted and
             collection_count and
             collection_count['result'] < self.max_collection and
             document_count and
             document_count['result'] < self.max_document
+        ):
+            current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
+            self.premodel_data['properties']['datetime_saved'] = current_utc
+
+            if self.dataset:
+                document = {
+                    'properties': self.premodel_data['properties'],
+                    'dataset': self.dataset
+                }
+
+                response = cursor.query(
+                    collection_adjusted,
+                    'insert_one',
+                    document
+                )
+
+        elif (
+            collection_adjusted and
+            collection_count and
+            document_count and
+            (not collection_count['result'] or not document_count['result'])
         ):
             current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
             self.premodel_data['properties']['datetime_saved'] = current_utc
