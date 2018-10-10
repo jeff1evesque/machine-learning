@@ -117,6 +117,7 @@ class BaseData(Base):
             collection_count['result'] and
             collection_count['result'] < self.max_collection and
             document_count and
+            document_count['result'] and
             document_count['result'] < self.max_document
         ):
             current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")

@@ -77,12 +77,17 @@ class DataAppend(BaseData):
             'id_entity': session_id,
         }
 
-        # store entity values in database
+        #
+        # store entity values: 'elif' case introduced since python3 does not
+        #     support comparison against 'None'.
+        #
         if (
             collection_adjusted and
             collection_count and
+            collection_count['result'] and
             collection_count['result'] < self.max_collection and
             document_count and
+            document_count['result'] and
             document_count['result'] < self.max_document
         ):
             db_save = Entity(premodel_entity, session_type)
@@ -94,6 +99,23 @@ class DataAppend(BaseData):
             else:
                 self.list_error.append(db_return['error'])
                 return {'status': False, 'error': self.list_error}
+
+        elif (
+            collection_adjusted and
+            collection_count and
+            document_count and
+            (not collection_count['result'] or not document_count['result'])
+        ):
+            db_save = Entity(premodel_entity, session_type)
+            db_return = db_save.save()
+
+            if db_return and db_return['status']:
+                return {'status': True, 'error': None}
+
+            else:
+                self.list_error.append(db_return['error'])
+                return {'status': False, 'error': self.list_error}
+
 
         else:
             return {'status': True, 'error': None}

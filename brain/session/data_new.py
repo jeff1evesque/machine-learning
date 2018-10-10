@@ -79,13 +79,27 @@ class DataNew(BaseData):
             'uid': self.uid,
         }
 
-        # store entity values in database
+        #
+        # store entity values: 'elif' case introduced since python3 does not
+        #     support comparison against 'None'.
+        #
         if (
             collection_adjusted and
             collection_count and
+            collection_count['result'] and
             collection_count['result'] < self.max_collection and
             document_count and
+            document_count['result'] and
             document_count['result'] < self.max_document
+        ):
+            entity = Entity(premodel_entity, session_type)
+            db_return = entity.save()
+
+        elif (
+            collection_adjusted and
+            collection_count and
+            document_count and
+            (not collection_count['result'] or not document_count['result'])
         ):
             entity = Entity(premodel_entity, session_type)
             db_return = entity.save()
