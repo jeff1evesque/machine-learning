@@ -176,7 +176,7 @@ class Entity(object):
         if response_error:
             return {'error': response_error, 'result': None}
         else:
-            return {'error': None, 'result': int(response['result'][0][0])}
+            return {'error': None, 'result': int(response['result'][0][0] or 0)}
 
     def remove_entity(self, uid, collection):
         '''

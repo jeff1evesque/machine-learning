@@ -107,10 +107,7 @@ class BaseData(Base):
             collection_count = entity.get_collection_count(self.uid)
             document_count = cursor.query(collection_adjusted, 'count_documents')
 
-        #
-        # save dataset: 'elif' case introduced since python3 does not support
-        #     comparison against 'None'.
-        #
+        # save dataset
         if (
             collection_adjusted and
             collection_count and
@@ -135,12 +132,6 @@ class BaseData(Base):
                     document
                 )
 
-        elif (
-            collection_adjusted and
-            collection_count and
-            document_count and
-            (not collection_count['result'] or not document_count['result'])
-        ):
             current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
             self.premodel_data['properties']['datetime_saved'] = current_utc
 
