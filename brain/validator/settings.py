@@ -51,17 +51,17 @@ class Validator(object):
         if session_type in ['data_new', 'data_append']:
             if premodel_settings['stream'] == 'True' or session_type == 'data_new':
                 schema = Schema({
-                    Required('collection'): All(string_types, Length(min=1)),
+                    Required('collection'): All(string_types[0], Length(min=1)),
                     Required('dataset_type'): In(dataset_type),
                     Required('model_type'): In(model_type),
                     Required('session_type'): Any('data_new', 'data_append'),
-                    Required('session_name'): All(string_types, Length(min=1)),
+                    Required('session_name'): All(string_types[0], Length(min=1)),
                     Optional('stream'): Any('True', 'False'),
                 })
 
             else:
                 schema = Schema({
-                    Required('collection'): All(string_types, Length(min=1)),
+                    Required('collection'): All(string_types[0], Length(min=1)),
                     Required('dataset_type'): In(dataset_type),
                     Required('model_type'): In(model_type),
                     Required('session_type'): Any('data_new', 'data_append'),
@@ -71,7 +71,7 @@ class Validator(object):
         # validation on 'model_generate' session
         if session_type == 'model_generate':
             schema = Schema({
-                Required('collection'): All(string_types, Length(min=1)),
+                Required('collection'): All(string_types[0], Length(min=1)),
                 Required('model_type'): In(model_type),
                 Required('session_type'): 'model_generate',
                 Optional('stream'): Any('True', 'False'),
@@ -83,7 +83,7 @@ class Validator(object):
         # validation on 'model_predict' session
         elif session_type == 'model_predict':
             schema = Schema({
-                Required('collection'): All(string_types, Length(min=1)),
+                Required('collection'): All(string_types[0], Length(min=1)),
                 Optional('stream'): Any('True', 'False'),
                 Required('prediction_input[]'): [
                     Any(Coerce(int), Coerce(float)),

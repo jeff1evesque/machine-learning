@@ -39,9 +39,9 @@ class Validator(object):
 
         current_errors = []
         schema = Schema({
-            Required('dependent-variable'): All(string_types, Length(min=1)),
+            Required('dependent-variable'): All(string_types[0], Length(min=1)),
             Required('independent-variables'): [{
-                Required(All(string_types, Length(min=1))): Any(int, float),
+                Required(All(string_types[0], Length(min=1))): Any(int, float),
             }],
         })
 
@@ -70,7 +70,7 @@ class Validator(object):
         schema = Schema({
             Required('dependent-variable'): Any(int, float),
             Required('independent-variables'): [{
-                Required(All(string_types, Length(min=1))): Any(int, float),
+                Required(All(string_types[0], Length(min=1))): Any(int, float),
             }],
         })
 
