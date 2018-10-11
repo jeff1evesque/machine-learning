@@ -44,7 +44,7 @@ class Session(object):
         self.sql.connect(self.db_ml)
         sql_statement = 'SELECT id_entity FROM tbl_dataset_entity '\
             'WHERE collection=%s'
-        args = (collection)
+        args = (collection,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)

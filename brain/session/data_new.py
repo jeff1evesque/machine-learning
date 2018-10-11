@@ -79,12 +79,14 @@ class DataNew(BaseData):
             'uid': self.uid,
         }
 
-        # store entity values in database
+        # store entity values
         if (
             collection_adjusted and
             collection_count and
+            collection_count['result'] and
             collection_count['result'] < self.max_collection and
             document_count and
+            document_count['result'] and
             document_count['result'] < self.max_document
         ):
             entity = Entity(premodel_entity, session_type)

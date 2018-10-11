@@ -97,6 +97,7 @@ class BaseData(Base):
         if (
             not self.uid and
             collection_count and
+            collection_count['result'] and
             collection_count['result'] >= self.max_collection and
             collection_adjusted
         ):
@@ -110,10 +111,27 @@ class BaseData(Base):
         if (
             collection_adjusted and
             collection_count and
+            collection_count['result'] and
             collection_count['result'] < self.max_collection and
             document_count and
+            document_count['result'] and
             document_count['result'] < self.max_document
         ):
+            current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
+            self.premodel_data['properties']['datetime_saved'] = current_utc
+
+            if self.dataset:
+                document = {
+                    'properties': self.premodel_data['properties'],
+                    'dataset': self.dataset
+                }
+
+                response = cursor.query(
+                    collection_adjusted,
+                    'insert_one',
+                    document
+                )
+
             current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
             self.premodel_data['properties']['datetime_saved'] = current_utc
 

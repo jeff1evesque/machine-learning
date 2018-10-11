@@ -106,7 +106,7 @@ class Entity(object):
         sql_statement = 'SELECT title '\
             'FROM tbl_dataset_entity '\
             'WHERE id_entity=%s'
-        args = (id_entity)
+        args = (id_entity,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)
@@ -135,7 +135,7 @@ class Entity(object):
             'FROM tbl_dataset_entity '\
             'WHERE uid_created=%s '\
             'ORDER BY datetime_created'
-        args = (uid)
+        args = (uid,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)
@@ -166,7 +166,7 @@ class Entity(object):
             'FROM tbl_dataset_entity '\
             'WHERE uid_created=%s'\
             ') AS c'
-        args = (uid)
+        args = (uid,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)
@@ -176,7 +176,7 @@ class Entity(object):
         if response_error:
             return {'error': response_error, 'result': None}
         else:
-            return {'error': None, 'result': int(response['result'][0][0])}
+            return {'error': None, 'result': int(response['result'][0][0] or 0)}
 
     def remove_entity(self, uid, collection):
         '''

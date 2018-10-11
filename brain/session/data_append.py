@@ -77,12 +77,14 @@ class DataAppend(BaseData):
             'id_entity': session_id,
         }
 
-        # store entity values in database
+        # store entity values
         if (
             collection_adjusted and
             collection_count and
+            collection_count['result'] and
             collection_count['result'] < self.max_collection and
             document_count and
+            document_count['result'] and
             document_count['result'] < self.max_document
         ):
             db_save = Entity(premodel_entity, session_type)

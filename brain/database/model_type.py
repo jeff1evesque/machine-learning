@@ -49,7 +49,7 @@ class ModelType(object):
             ' INNER JOIN tbl_model_type mtype'\
             ' ON mid.model_type = mtype.id_model'\
             ' WHERE mid.collection=%s'
-        args = (collection)
+        args = (collection,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)

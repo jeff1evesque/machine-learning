@@ -79,14 +79,14 @@ class Prediction(object):
                 sql_statement = 'INSERT INTO tbl_svm_results_probability '\
                     '(id_result, probability) VALUES(%s, %s)'
                 args = (svm_results['id'], x)
-                self.sql.execute('insert', sql_statement, args,)
+                self.sql.execute('insert', sql_statement, args)
 
             # svm decision function
             for x in decision_function:
                 sql_statement = 'INSERT INTO tbl_svm_results_decision_function '\
                     '(id_result, decision_function) VALUES(%s, %s)'
-                args = (svm_results['id'], x,)
-                self.sql.execute('insert', sql_statement, args,)
+                args = (svm_results['id'], x)
+                self.sql.execute('insert', sql_statement, args)
 
         elif model_type == 'svr':
             # svr results
@@ -94,13 +94,13 @@ class Prediction(object):
                 '(model_type, title, result, uid_created, datetime_created) '\
                 'VALUES(%s, %s, %s, %s, UTC_TIMESTAMP())'
             args = (self.model_list.index(model_type) + 1, title, result, self.uid)
-            svr_results = self.sql.execute('insert', sql_statement, args,)
+            svr_results = self.sql.execute('insert', sql_statement, args)
 
             # svr r2
             sql_statement = 'INSERT INTO tbl_svr_results_r2 '\
                 '(id_result, r2) VALUES(%s, %s)'
             args = (svr_results['id'], data['r2'])
-            self.sql.execute('insert', sql_statement, args,)
+            self.sql.execute('insert', sql_statement, args)
 
         # retrieve any error(s)
         response_error = self.sql.get_errors()
@@ -139,7 +139,7 @@ class Prediction(object):
             sql_statement = 'SELECT id_result, title, datetime_created '\
                 'FROM tbl_prediction_results '\
                 'WHERE uid_created=%s'
-            args = (self.uid)
+            args = (self.uid,)
             response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)
