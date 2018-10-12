@@ -6,7 +6,7 @@ This script performs validation on corresponding dataset(s).
 
 '''
 
-from voluptuous import Schema, Required, All, Any, Length
+from voluptuous import Schema, Required, All, Any, Length, Coerce
 from voluptuous.humanize import validate_with_humanized_errors
 from six import string_types
 
@@ -41,7 +41,7 @@ class Validator(object):
         schema = Schema({
             Required('dependent-variable'): All(string_types[0], Length(min=1)),
             Required('independent-variables'): [{
-                Required(All(string_types[0], Length(min=1))): Any(int, float),
+                Required(All(string_types[0], Length(min=1))): Coerce(float),
             }],
         })
 
@@ -68,9 +68,9 @@ class Validator(object):
 
         current_errors = []
         schema = Schema({
-            Required('dependent-variable'): Any(int, float),
+            Required('dependent-variable'): Coerce(float),
             Required('independent-variables'): [{
-                Required(All(string_types[0], Length(min=1))): Any(int, float),
+                Required(All(string_types[0], Length(min=1))): Coerce(float),
             }],
         })
 
