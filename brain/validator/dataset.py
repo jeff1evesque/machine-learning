@@ -43,6 +43,7 @@ class Validator(object):
             Required('independent-variables'): [{
                 Required(All(string_types[0], Length(min=1))): Coerce(float),
             }],
+            Required('error'): Any(None, string_types[0]),
         })
 
         for instance in data:
@@ -72,6 +73,7 @@ class Validator(object):
             Required('independent-variables'): [{
                 Required(All(string_types[0], Length(min=1))): Coerce(float),
             }],
+            Required('error'): Any(None, string_types[0]),
         })
 
         for instance in data:
