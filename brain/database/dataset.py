@@ -55,6 +55,11 @@ class Collection(object):
         if operation == 'drop_collection':
             self.nosql.connect()
             response = self.nosql.execute(operation, collection)
+
+        elif operation == 'count_documents':
+            self.nosql.connect(collection)
+            response = int(self.nosql.execute(operation, payload) or 0)
+
         else:
             self.nosql.connect(collection)
             response = self.nosql.execute(operation, payload)
