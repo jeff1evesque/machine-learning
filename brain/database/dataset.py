@@ -58,7 +58,8 @@ class Collection(object):
 
         elif operation == 'count_documents':
             self.nosql.connect(collection)
-            response = int(self.nosql.execute(operation, payload) or 0)
+            response = self.nosql.execute(operation, payload)
+            response['result'] = int(response['result'] or 0)
 
         else:
             self.nosql.connect(collection)
