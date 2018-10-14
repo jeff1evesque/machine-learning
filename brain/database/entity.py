@@ -10,7 +10,7 @@ from flask import current_app
 from brain.database.query import SQL
 
 
-class Entity(object):
+class Entity:
     '''
 
     This class provides an interface to save, retrieve an SVM entity title,
@@ -18,8 +18,6 @@ class Entity(object):
 
     Note: this class is invoked within 'model_generate.py', 'base_data.py',
           and 'data_append.py'
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

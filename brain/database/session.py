@@ -10,15 +10,13 @@ from flask import current_app
 from brain.database.query import SQL
 
 
-class Session(object):
+class Session:
     '''
 
     This class provides an interface to retrieve the 'id_entity', and
     'collection' from the 'tbl_dataset_entity' sql database table.
 
     Note: this class is invoked within 'views.py'
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

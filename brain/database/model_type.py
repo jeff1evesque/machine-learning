@@ -10,7 +10,7 @@ from flask import current_app
 from brain.database.query import SQL
 
 
-class ModelType(object):
+class ModelType:
     '''
 
     Note: this class explicitly inherits the 'new-style' class.
@@ -20,7 +20,7 @@ class ModelType(object):
     def __init__(self):
         '''
 
-        This constructor is responsible for defining class variables.
+        This class provides and interface between the model_type.
 
         '''
 

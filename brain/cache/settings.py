@@ -9,13 +9,11 @@ This file can set, or get the required redis host, or port.
 from flask import current_app
 
 
-class Settings(object):
+class Settings:
     '''
 
     This class provides an interface to get, or set the redis host, or redis
     port.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

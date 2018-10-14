@@ -12,13 +12,11 @@ from voluptuous.humanize import validate_with_humanized_errors
 from six import string_types
 
 
-class Validator(object):
+class Validator:
     '''
 
     This class provides an interface to validate the settings for each
     session.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

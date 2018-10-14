@@ -10,12 +10,10 @@ from flask import current_app
 from brain.database.query import SQL
 
 
-class Account(object):
+class Account:
     '''
 
     This class provides an interface to the users account.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

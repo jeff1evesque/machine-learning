@@ -10,13 +10,11 @@ from flask import current_app, session
 from brain.database.query import SQL
 
 
-class Prediction(object):
+class Prediction:
     '''
 
     This class provides an interface to save, or retrieve, a previously
     generated svm or, svr prediction result.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

@@ -9,7 +9,7 @@ This file defines SQL database configurations.
 from flask import current_app
 
 
-class Database(object):
+class Database:
     '''
 
     This class provides an interface to get, or set the following database
@@ -33,9 +33,7 @@ class Database(object):
             -> DATABASES ON *.* TO 'authenticated'@'localhost';
         MariaDB> FLUSH PRIVILEGES;
 
-    Note: this class is invoked within 'query.py'
-
-    Note: this class explicitly inherits the 'new-style' class.
+    Note: this class is invoked within 'query.py'.
 
     '''
 

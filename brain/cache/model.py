@@ -10,15 +10,13 @@ from brain.cache.query import Query
 from brain.converter.model import Model as Converter
 
 
-class Model(object):
+class Model:
     '''
 
     This class provides an interface to cache, and uncache the redis hash
     data structure.  Specifically, necessary data components is passed into the
     corresponding class method, which allow computed model(s) to be stored into
     a NoSQL datastore.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

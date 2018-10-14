@@ -66,13 +66,11 @@ def get_mongodb():
     return g.mongodb
 
 
-class NoSQL(object):
+class NoSQL:
     '''
 
     This class provides an interface to connect, execute commands, and
     disconnect from a NoSQL database.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 
@@ -215,13 +213,11 @@ class NoSQL(object):
         return self.list_error
 
 
-class SQL(object):
+class SQL:
     '''
 
     This class provides an interface to connect, execute commands, and
     disconnect from a SQL database.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

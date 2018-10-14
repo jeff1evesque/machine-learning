@@ -9,14 +9,12 @@ This file caches, and uncaches supplied data using the redis hash cache.
 from brain.cache.query import Query
 
 
-class Hset(object):
+class Hset:
     '''
 
     This class provides an interface to cache, and uncache the redis hash
     data structure.  Specifically, necessary data components is passed into the
     corresponding class method.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

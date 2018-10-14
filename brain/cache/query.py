@@ -10,7 +10,7 @@ import redis
 from brain.cache.settings import Settings
 
 
-class Query(object):
+class Query:
     '''
 
     This class provides an interface to various Redis data structures.
@@ -31,8 +31,6 @@ class Query(object):
     Note: 'sorted sets' methods were not included, since it is similar in
           concept to 'lists'. Also, the above included redis data structures,
           provides enough flexibility to accomplish most requirements.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

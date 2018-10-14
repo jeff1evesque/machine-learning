@@ -11,13 +11,11 @@ from voluptuous.humanize import validate_with_humanized_errors
 from six import string_types
 
 
-class Validator(object):
+class Validator:
     '''
 
     This class provides an interface to validate provided dataset(s) during
     'data_new', and 'data_append' sessions.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

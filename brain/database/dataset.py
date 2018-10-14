@@ -10,15 +10,13 @@ using the mongodb framework.
 from brain.database.query import NoSQL
 
 
-class Collection(object):
+class Collection:
     '''
 
     This class provides an interface to retrieve, and store various parameters,
     of the specified collection, from the mongodb.
 
     Note: this class is invoked within 'base_data.py'
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 
