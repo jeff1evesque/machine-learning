@@ -2,7 +2,7 @@
 ### install.pp, install sklearn.
 ###
 class sklearn::install {
-    include python
+    include system::packages
 
     ## local variables
     $root_dir          = $::sklearn::root_dir
@@ -33,15 +33,15 @@ class sklearn::install {
     if ($scikit_learn and $scikit_learn != '*') {
         package { "scikit_learn==${scikit_learn}":
             ensure   => 'installed',
-            provider => 'pip',
-            require  => Class['python'],
+            provider => 'pip3',
+            require  => Class['system::packages'],
         }
     }
     else {
         package { 'scikit_learn':
             ensure   => 'installed',
-            provider => 'pip',
-            require  => Class['python'],
+            provider => 'pip3',
+            require  => Class['system::packages'],
         }
     }
 }

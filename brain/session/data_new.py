@@ -79,7 +79,7 @@ class DataNew(BaseData):
             'uid': self.uid,
         }
 
-        # store entity values in database
+        # store entity values
         if (
             collection_adjusted and
             collection_count and

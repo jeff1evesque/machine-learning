@@ -14,7 +14,7 @@ from flask import current_app
 from brain.validator.settings import Validator
 
 
-class Base(object):
+class Base:
     '''
 
     This class provides a general base class, used for the following sessions,
@@ -25,9 +25,7 @@ class Base(object):
         - model_generate
         - model_predict
 
-    Note: this class is invoked within 'data_xx.py', 'model_xx.py'
-
-    Note: this class explicitly inherits the 'new-style' class.
+    Note: this class is invoked within 'data_xx.py', 'model_xx.py'.
 
     '''
 

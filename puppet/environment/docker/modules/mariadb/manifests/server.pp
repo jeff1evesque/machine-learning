@@ -22,6 +22,7 @@ class mariadb::server {
     ##
     class { '::mysql::server':
         package_name    => 'mariadb-server',
+        service_name    => 'mysql',
         root_password   => $root_password,
         users         => {
             "${db_user}@${db_host}"     => {

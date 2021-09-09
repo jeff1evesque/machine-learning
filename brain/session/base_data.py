@@ -71,7 +71,7 @@ class BaseData(Base):
         try:
             if not int(session_id) > 0:
                 self.list_error.append(error)
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
 
     def save_premodel_dataset(self):
@@ -97,6 +97,7 @@ class BaseData(Base):
         if (
             not self.uid and
             collection_count and
+            collection_count['result'] and
             collection_count['result'] >= self.max_collection and
             collection_adjusted
         ):
@@ -114,6 +115,21 @@ class BaseData(Base):
             document_count and
             document_count['result'] < self.max_document
         ):
+            current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
+            self.premodel_data['properties']['datetime_saved'] = current_utc
+
+            if self.dataset:
+                document = {
+                    'properties': self.premodel_data['properties'],
+                    'dataset': self.dataset
+                }
+
+                response = cursor.query(
+                    collection_adjusted,
+                    'insert_one',
+                    document
+                )
+
             current_utc = datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%S")
             self.premodel_data['properties']['datetime_saved'] = current_utc
 

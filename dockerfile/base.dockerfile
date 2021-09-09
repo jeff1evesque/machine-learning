@@ -1,31 +1,29 @@
 FROM ubuntu:16.04
 
 ## environment variables
-ENV ENVIRONMENT docker
-ENV PUPPET /opt/puppetlabs/bin/puppet
-ENV ROOT_PROJECT /var/machine-learning
-ENV ROOT_PUPPET /etc/puppetlabs
+ENV ENVIRONMENT=docker\
+    PUPPET=/opt/puppetlabs/bin/puppet\
+    ROOT_PROJECT=/var/machine-learning\
+    ROOT_PUPPET=/etc/puppetlabs\
+    PUPPET_VERSION=puppet5-release-xenial.deb
+ENV MODULES=$ROOT_PUPPET/code/modules\
+    CONTRIB_MODULES=$ROOT_PUPPET/code/modules_contrib\
+    ENVPATH=$ROOT_PUPPET/code/environment/$ENVIRONMENT
 
 ## ensure directory
 RUN mkdir -p $ROOT_PROJECT/log $ROOT_PUPPET/code/environment/$ENVIRONMENT $ROOT_PUPPET/puppet/hiera $ROOT_PUPPET/code/modules_contrib
 
-## environment variables
-ENV MODULES $ROOT_PUPPET/code/modules
-ENV CONTRIB_MODULES $ROOT_PUPPET/code/modules_contrib
-ENV ENVPATH $ROOT_PUPPET/code/environment/$ENVIRONMENT
-
-## install git, wget
+##
+## install git, wget, puppet
 ##
 ##  Note: r10k requires 'git' installed
 ##
 RUN apt-get -y update
-RUN apt-get -y install git=1:1.9.1* wget=1.16*
-
-## install puppet
-RUN wget https://apt.puppetlabs.com/puppetlabs-release-pc1-trusty.deb
-RUN dpkg -i puppetlabs-release-pc1-trusty.deb
+RUN apt-get -y install wget=1.17* curl=7.47*
+RUN wget https://apt.puppetlabs.com/$PUPPET_VERSION
+RUN dpkg -i $PUPPET_VERSION
 RUN apt-get -y update
-RUN apt-get -y install puppet-agent
+RUN apt-get -y install git=1:2.7.4-0ubuntu* puppet-agent=5.5*
 
 ## copy configs
 COPY puppet/environment/$ENVIRONMENT/Puppetfile $ENVPATH
@@ -39,13 +37,11 @@ COPY hiera.yaml $ROOT_PUPPET/puppet
 ##
 ##       https://github.com/jeff1evesque/machine-learning/issues/2991
 ##
-RUN apt-get -y install rubygems-integration=1.5
-RUN gem install semantic_puppet -v 0.1.0
-RUN gem install puppet_forge -v 2.2.5
-RUN gem install r10k -v 2.5.5
+RUN apt-get -y install ruby=1:2.3* rubygems-integration=1.10
+RUN gem install semantic_puppet:0.1.0 puppet_forge:2.2.9 r10k:3.0.2
 
 ## install puppet modules using puppetfile with r10k
-RUN PUPPETFILE=$ENVPATH/Puppetfile PUPPETFILE_DIR=$CONTRIB_MODULES r10k puppetfile install
+RUN r10k puppetfile install --puppetfile $ENVPATH/Puppetfile --moduledir $CONTRIB_MODULES
 
 ## provision with puppet
 RUN $PUPPET apply apply -e 'class { system: }' --modulepath=$CONTRIB_MODULES:$MODULES --confdir=$ROOT_PUPPET/puppet

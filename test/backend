@@ -25,12 +25,14 @@ fi
 ##   - stop all docker containers
 ##   - remove all docker containers
 ##   - remove all docker images
+##   - remove all docker dangling images
 ##   - remove all docker volumes
 ##   - delete all docker networks
 ##
 if [ "$RECYCLE" = 'true' ] && which docker >/dev/null 2>&1; then
     sudo docker ps -q | xargs -r docker kill
     sudo docker ps -a -q | xargs -r docker rm
+    sudo docker rmi $(docker images -q)
     sudo docker images -q -f dangling=true | xargs -r docker rmi
     sudo docker volume ls -qf dangling=true | xargs -r docker volume rm
     sudo docker network ls -q | xargs -r docker network rm

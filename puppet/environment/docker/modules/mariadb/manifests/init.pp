@@ -22,7 +22,6 @@ class mariadb (
 ) inherits ::mariadb::params {
     class { 'mariadb::dependency': } ->
     class { 'mariadb::server': } ->
-    class { 'mariadb::client': } ->
     class { 'mariadb::bindings': } ->
     Class['mariadb']
 }

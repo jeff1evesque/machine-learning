@@ -10,15 +10,13 @@ from brain.cache.query import Query
 from brain.converter.model import Model as Converter
 
 
-class Model(object):
+class Model:
     '''
 
     This class provides an interface to cache, and uncache the redis hash
     data structure.  Specifically, necessary data components is passed into the
     corresponding class method, which allow computed model(s) to be stored into
     a NoSQL datastore.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 
@@ -39,7 +37,7 @@ class Model(object):
         # start redis client
         try:
             self.myRedis.start_redis()
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
 
     def cache(self, hash_name, key):
@@ -53,9 +51,9 @@ class Model(object):
         try:
             serialized = Converter(self.model).serialize()
             self.myRedis.hset(hash_name, key, serialized)
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
-            print self.list_error
+            print(self.list_error)
 
     def uncache(self, hash_name, key):
         '''
@@ -96,6 +94,6 @@ class Model(object):
                     'error': 'no previous model found in cache'
                 }
 
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
             return {'result': None, 'error': self.list_error}

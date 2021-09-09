@@ -12,7 +12,6 @@ class reverse_proxy::params {
         $yaml           = true
         $type           = $hiera['type']
         $vhost          = $hiera['vhost']
-        $host_port      = $hiera['host_port']
         $listen_port    = $hiera['listen_port']
         $members        = $hiera['members']
         $proxy          = $hiera['proxy']

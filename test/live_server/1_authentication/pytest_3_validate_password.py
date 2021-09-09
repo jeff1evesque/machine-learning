@@ -17,7 +17,7 @@ def test_validate_password():
             validate_password = root + '/brain/validator/password.py'
             vp = imp.load_source('validate_password', validate_password)
         except yaml.YAMLError as error:
-            print error
+            print(error)
 
     passwords = [
         'abcdefghij123',  # just right

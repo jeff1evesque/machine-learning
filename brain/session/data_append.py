@@ -77,7 +77,7 @@ class DataAppend(BaseData):
             'id_entity': session_id,
         }
 
-        # store entity values in database
+        # store entity values
         if (
             collection_adjusted and
             collection_count and

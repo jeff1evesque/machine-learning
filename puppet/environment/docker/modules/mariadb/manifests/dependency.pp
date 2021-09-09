@@ -2,8 +2,7 @@
 ### dependency.pp, ensure directories.
 ###
 class mariadb::dependency {
-    ## python dependencies
-    contain python
+    contain system::packages
 
     ## local variables
     $root_dir       = $::mariadb::root_dir
@@ -13,15 +12,15 @@ class mariadb::dependency {
     if ($redis_version and $redis_version != '*') {
         package { 'pyyaml':
             ensure      => $pyyaml_version,
-            provider    => 'pip',
-            require     => Class['python'],
+            provider    => 'pip3',
+            require     => Class['system::packages'],
         }
     }
     else {
         package { 'pyyaml':
             ensure      => 'installed',
-            provider    => 'pip',
-            require     => Class['python'],
+            provider    => 'pip3',
+            require     => Class['system::packages'],
         }
     }
 

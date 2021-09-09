@@ -66,13 +66,11 @@ def get_mongodb():
     return g.mongodb
 
 
-class NoSQL(object):
+class NoSQL:
     '''
 
     This class provides an interface to connect, execute commands, and
     disconnect from a NoSQL database.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 
@@ -108,7 +106,7 @@ class NoSQL(object):
                 'error': None,
             }
 
-        except errors, error:
+        except Exception as error:
             self.proceed = False
             self.list_error.append(error)
 
@@ -168,7 +166,7 @@ class NoSQL(object):
                 elif operation == 'drop_collection':
                     result = self.database.drop_collection(payload)
 
-            except errors, error:
+            except Exception as error:
                 self.list_error.append(error)
 
                 return {
@@ -197,7 +195,7 @@ class NoSQL(object):
                     'error': None,
                 }
 
-            except errors, error:
+            except Exception as error:
                 self.list_error.append(error)
 
                 return {
@@ -215,13 +213,11 @@ class NoSQL(object):
         return self.list_error
 
 
-class SQL(object):
+class SQL:
     '''
 
     This class provides an interface to connect, execute commands, and
     disconnect from a SQL database.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 
@@ -300,7 +296,7 @@ class SQL(object):
                         'result': result,
                     }
 
-            except MariaClient.Error, error:
+            except MariaClient.Error as error:
                 self.conn.rollback()
                 self.list_error.append(error)
 
@@ -329,7 +325,7 @@ class SQL(object):
                         'id': self.cursor.lastrowid,
                     }
 
-            except MariaClient.Error, error:
+            except MariaClient.Error as error:
                 self.list_error.append(error)
 
                 return {

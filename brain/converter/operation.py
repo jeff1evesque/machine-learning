@@ -9,14 +9,12 @@ on an existing model. The dataset is left untouched, and formatted within
 '''
 
 
-class Operation(object):
+class Operation:
     '''
 
     This class provides an interface to restructure the supplied data into a
     consistent structure, which allows successive parsers to implement
     corresponding logic.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

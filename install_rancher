@@ -10,9 +10,9 @@
 ##     - https://github.com/rancher/rancher/releases/tag/v1.6.18
 ##
 CWD=$(pwd)
-RANCHER_CLI_VERSION='v0.6.9'
-RANCHER_AGENT_VERSION='v1.2.10'
-RANCHER_SERVER_VERSION='v1.6.18'
+RANCHER_CLI_VERSION='v0.6.11'
+RANCHER_AGENT_VERSION='v1.2.11'
+RANCHER_SERVER_VERSION='v1.6.22'
 RANCHER_REPO='https://github.com/rancher/cli'
 BOOT2DOCKER_REPO='https://github.com/boot2docker/boot2docker'
 OPERATING_SYSTEM=$(uname -s)

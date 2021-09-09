@@ -16,7 +16,7 @@ from brain.session.model_predict import ModelPredict
 from brain.database.session import Session
 
 
-class Load_Data(object):
+class Load_Data:
     '''
 
     This class provides an interface to load the necessary parameters:
@@ -25,8 +25,6 @@ class Load_Data(object):
         - generate a model into a NoSQL cache, using a previous stored dataset
               from the SQL database.
         - generate a prediction using a previous cached model.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 

@@ -10,12 +10,10 @@ from flask import current_app
 from brain.database.query import SQL
 
 
-class Account(object):
+class Account:
     '''
 
     This class provides an interface to the users account.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 
@@ -71,7 +69,7 @@ class Account(object):
         sql_statement = 'SELECT * '\
             'FROM tbl_user '\
             'WHERE username=%s'
-        args = (username)
+        args = (username,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)
@@ -95,7 +93,7 @@ class Account(object):
         sql_statement = 'SELECT * '\
             'FROM tbl_user '\
             'WHERE email=%s'
-        args = (email)
+        args = (email,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)
@@ -119,7 +117,7 @@ class Account(object):
         sql_statement = 'SELECT password '\
             'FROM tbl_user '\
             'WHERE username=%s'
-        args = (username)
+        args = (username,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)
@@ -143,7 +141,7 @@ class Account(object):
         sql_statement = 'SELECT id_user '\
             'FROM tbl_user '\
             'WHERE username=%s'
-        args = (username)
+        args = (username,)
         response = self.sql.execute('select', sql_statement, args)
 
         # retrieve any error(s)

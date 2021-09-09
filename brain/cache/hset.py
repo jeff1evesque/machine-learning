@@ -9,14 +9,12 @@ This file caches, and uncaches supplied data using the redis hash cache.
 from brain.cache.query import Query
 
 
-class Hset(object):
+class Hset:
     '''
 
     This class provides an interface to cache, and uncache the redis hash
     data structure.  Specifically, necessary data components is passed into the
     corresponding class method.
-
-    Note: this class explicitly inherits the 'new-style' class.
 
     '''
 
@@ -36,7 +34,7 @@ class Hset(object):
         # start redis client
         try:
             self.myRedis.start_redis()
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
 
     def cache(self, hash_name, key, value):
@@ -48,9 +46,9 @@ class Hset(object):
 
         try:
             self.myRedis.hset(hash_name, key, value)
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
-            print self.list_error
+            print(self.list_error)
 
     def uncache(self, hash_name, key):
         '''
@@ -61,6 +59,6 @@ class Hset(object):
 
         try:
             return {'result': self.myRedis.hget(hash_name, key), 'error': None}
-        except Exception, error:
+        except Exception as error:
             self.list_error.append(str(error))
             return {'result': None, 'error': self.list_error}
